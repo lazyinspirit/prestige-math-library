@@ -1,0 +1,23 @@
+# Stratification escalation reconciliation
+
+Evidence-only reconciliation: seven exact census obligations, four historically true physical defects. All seven missing connectedness/refinement uses are locally resolved by the completed repair at the current bound bytes. This packet performs no native closure, source edit, new source acquisition, extra mathematical repair round or independent audit.
+
+| Native obligation | Historical physical defect | Current completed resolution |
+| --- | --- | --- |
+| `reader:32:1` | `f44-six-step-3a-batch32-connected-strata` | Smooth partition F6/6.1 applies the proved connectedness and closure comparison. |
+| `refuter:32:1` | Same physical defect | Same producer completion; retain original reader/refuter observations and source bindings. |
+| `touched:33:thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications` | `f44-six-3a-b33-analytic-connectedness` | Whitney F7/5.1 supplies connected analytic strata and actual analytic frontier. |
+| `reader:33:3` | Same physical defect | Historically true fatal finding, now locally repaired; no false-positive relabelling. |
+| `refuter:33:1` | Same physical defect | Same genuine finding and repair; one closed-row proposal retains all three references. |
+| `touched:33:thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology` | `f44-six-3a-b33-triangulation-refinement` | Actual connected Whitney identity-map refinement on the projective closure supplies the conditional conical/triangulation hypotheses. |
+| `touched:33:lem-complex-algebraic-stratifications-have-finite-conical-cochain-models` | `f44-six-3a-b33-cochain-refinement` | Local finite geometry is supplied; identity-map smooth frontier refinement globalizes finite affine-chart constructibility witnesses on general separated finite-type varieties. |
+
+The complete five current proof carriers still equal the final source/check receipt bytes. Original four Statements remain byte-identical. The original complete proof and actual prerequisite/source reading are described in `repair-report.md` and `source-ledger.json`; reconciliation reexamines their applicability to each exact census finding. Formatting passes alone are not used as proof resolution.
+
+The new helper's actual finite normalization/faithful module, primitive-element polynomial, simple-root sheets, intrinsic symmetric factors, locally bounded extension, all-radius power-series estimates and curve-arc density provide the missing prerequisite. The source's faulty factor inference and origin growth bound were corrected locally. Source limitations remain: no claimed full-book, Shafarevich VII.2 or full1978 image-scan reading. Every historically true native observation remains preserved.
+
+`escalation-resolution-packet.json` contains seven exact native-format replacement candidates, one necessary supplementary replacement for the genuine existing batch33 smooth-producer touched obligation, four closed physical-defect row candidates with explicit supersedes, exact raw/canonical hashes, original decision copies and ordered ROOT tasks. All immutable producer/observed-source fields are retained. The batch32 producer bridge is mathematically the same defect; root must integrate current manifests/contracts and verify its actual guarded inputs before native application. The new helper is not assigned an invented native added-helper obligation and receives no automatic independent execution coverage.
+
+ROOT must still obtain/validate the actual required helper native coverage and serialize source metadata/closed-ledger/decision integration. The stale consumer helper binding discovered during reconciliation is now resolved: the same equivariant owner retained the old `52c756...` binding as superseded history, actually reread final deps/F1/1.1 and the complete faithful-module integrality supplier, and refreshed the actual final raw `45820ec3c3b53c07dd607c0a06a08966b3a6310e0373e3b6904406c4ec4e3d64`. All eight consumer and five supplier raw bindings were checked against disk and match. The current consumer receipt SHA256 is `1216e8ec9efcd8a9a1be64fb492cc6ac16e10e20135a7acd2c624a7f9b2c8335`. This preserves genuine observation history and creates no independent execution coverage.
+
+No smallest mathematical prerequisite remains open in these seven local subjects. Immediately native-closed count remains zero because this is a proposal packet. Page and cross-batch obligations stay with their separately assigned owners; no extra page verdict is guessed. ROOT owns every aggregate/native write and remaining workflow transition.

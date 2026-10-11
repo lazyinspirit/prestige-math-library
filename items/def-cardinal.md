@@ -7,23 +7,14 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice, lem-omega-least-limit-ordinal, lem-nat-order-is-membership, lem-pigeonhole]
+deps: [def-ordinal, lem-ordinal-basics, lem-ordinal-trichotomy, thm-mostowski-collapse, thm-well-ordering-theorem, thm-hartogs, def-axiom-of-choice, lem-omega-least-limit-ordinal, lem-nat-order-is-membership, lem-pigeonhole, thm-burali-forti]
 justified_by: []
 aliases: [def-initial-ordinal, def-cardinality]
 landmark: false
 short: "ordinal not equinumerous with any smaller ordinal"
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
+  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-4/receipts/def-cardinal.json
 sources:
   scraped: []
   references:
@@ -136,9 +127,15 @@ runs of the recipe, from any two well-orders of $X$, return the same $\kappa$.
   $\aleph(A)$ for the Hartogs number of $A$ ([[thm-hartogs]]) comes from the
   same source and is deliberately close: under the Axiom of Choice
   $\aleph(A)$ is the successor cardinal of $|A|$.
-- **Why initial ordinals rather than equivalence classes.** The natural
-  definition of "cardinal" as the class of all sets equinumerous with a given
-  one never yields a set, for the same reason as in [[thm-burali-forti]].
-  Choosing the least ordinal in the class is von Neumann's fix, and it works
-  exactly when the class contains an ordinal, which is exactly when the set can
-  be well ordered.
+- **Why initial ordinals rather than equivalence classes.** For a nonempty
+  set $X$, the class of all sets equinumerous with $X$ is a proper class.
+  Indeed, fix $a \in X$. For each set $y \notin X$, the set
+  $(X \setminus \{a\}) \cup \{y\}$ is equinumerous with $X$, by replacing
+  $a$ with $y$ and fixing the other elements. If the equinumerosity class were
+  a set $E$, its union would therefore contain every set outside $X$ and also
+  every member of $X$, since $X \in E$. Thus $\bigcup E$ would contain every
+  ordinal, contrary to [[thm-burali-forti]]. The empty set is the exception:
+  its equinumerosity class is the set $\{\varnothing\}$. Choosing the least
+  ordinal in an equinumerosity class is von Neumann's fix, and it works exactly
+  when the class contains an ordinal, which is exactly when the set can be
+  well ordered.

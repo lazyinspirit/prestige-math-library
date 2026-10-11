@@ -51,7 +51,7 @@ $$b^n - a^n = (b - a)\sum_{k=0}^{n-1} a^k b^{\,n-1-k}.$$
 
 $$0 \le b^n - a^n \le n M^{\,n-1} (b - a),$$
 
-where $n$ denotes the canonical natural $\iota(n) \in \mathbb{R}$
+where $n$ denotes the canonical field image $n\cdot1_{\mathbb{R}}$ of the natural n
 ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). This estimate is the form in
 which the factorisation is used, later on this page, to prove that $n$-th roots
 exist.

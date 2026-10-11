@@ -20,8 +20,8 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §§2.1, 3.4, PDF pp.13–15, 24–27"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
-  audited: 2026-09-27
   precheck: pass
+  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/soergel/receipts/lem-type-a-character-recursion-under-simple-soergel-tensoring.json
 ---
 
 ## Statement
@@ -60,24 +60,15 @@ only after the categorification theorem.
 
 [F3] $T_wT_i=T_{ws_i}$ if $\ell(ws_i)=\ell(w)+1$ and $T_wT_i=(q-1)T_w+qT_{ws_i}$ if $\ell(ws_i)=\ell(w)-1$, with $q=v^{-2}$; $\{T_w\}$ is an $A$-basis; and $H_i=v(T_i+1)$ satisfies $H_i^2=(v+v^{-1})H_i$ ([[lem-type-a-hecke-standard-basis-for-soergel-comparison]], [[def-type-a-hecke-algebra-in-soergel-normalization]]).
 
-[F4] Imported from Soergel's Propositions 5.7 and 5.9 together with their
-proofs, for $B\in F_\Delta\cap F_\nabla$, a simple $s$ and $x$ with
-$\ell(x)>\ell(sx)$: $(B_s\otimes_RB:\Delta_x(d))=(B:\Delta_x(d+1))+(B:\Delta_{sx}(d))$,
-$(B_s\otimes_RB:\Delta_{sx}(d))=(B:\Delta_x(d))+(B:\Delta_{sx}(d-1))$, and the
-dual pair of recursions for the $\nabla$-multiplicities; the same source matches
-these recursions with the two Hecke formulas
-$((\widetilde T_s+v)H:v^d\widetilde T_x)=(H:v^{d+1}\widetilde T_x)+(H:v^d\widetilde T_{sx})$
-and
-$((\widetilde T_s+v)H:v^d\widetilde T_{sx})=(H:v^d\widetilde T_x)+(H:v^{d-1}\widetilde T_{sx})$
-([[def-type-a-standard-graph-bimodules-support-filtrations-and-character]]).
+[F4] The flag-preservation proof and its half-length-block calculation give, separately for $F_\Delta$ and $F_\nabla$, the two recursions for $x>sx$: $(B_sB:\Delta_x(d))=(B:\Delta_x(d+1))+(B:\Delta_{sx}(d))$ and $(B_sB:\Delta_{sx}(d))=(B:\Delta_x(d))+(B:\Delta_{sx}(d-1))$, with signs reversed in the $\nabla$ chart ([[lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]]). These are locally proved support-layer calculations, not an assumed character identity.
 
 [F5] $B_i$ is finite free of rank two on both sides, so $B_i\otimes_R-$ and $-\otimes_RB_i$ are exact while flag preservation follows from [F4] and the opposite argument; $B_i\cong B_i^{\mathrm{op}}$ ([[lem-type-a-soergel-generators-are-finite-free-on-both-sides]], [[def-type-a-soergel-bimodule-for-a-simple-reflection]]).
 
 ## Proof
 
-1.1 Flag membership (1): by [F4] the functor $B_s\otimes_R-$ carries $F_\Delta$ into $F_\Delta$ and $F_\nabla$ into $F_\nabla$ (the closure clause of each of the two imported propositions recorded there), and by [F5] it is exact and preserves finite freeness, so $B_s\otimes_RM\in F_\Delta\cap F_\nabla$ with finitely many flag quotients. For the right tensor, the opposite identification $(M\otimes_RB_s)^{\mathrm{op}}\cong B_s^{\mathrm{op}}\otimes_RM^{\mathrm{op}}$ together with $B_s^{\mathrm{op}}\cong B_s$ expresses $M\otimes_RB_s$ as the opposite of $B_s\otimes_RM^{\mathrm{op}}$; the opposite functor preserves each of the two flag categories, as recorded in [[def-type-a-standard-graph-bimodules-support-filtrations-and-character]], and $M^{\mathrm{op}}$ again lies in both with the same shift data, so the left-closure clause applied to $M^{\mathrm{op}}$ gives $M\otimes_RB_s\in F_\Delta\cap F_\nabla$. Exactness and preservation of finite freeness for $-\otimes_RB_s$ hold by [F5] because $B_s$ is free of rank two as a left $R$-module. [F4, F5]
+1.1 Flag membership (1): by [F4] the functor $B_s\otimes_R-$ carries $F_\Delta$ into $F_\Delta$ and $F_\nabla$ into $F_\nabla$ (the two locally proved closure clauses), and by [F5] it is exact and preserves finite freeness, so $B_s\otimes_RM\in F_\Delta\cap F_\nabla$ with finitely many flag quotients. For the right tensor, the opposite identification $(M\otimes_RB_s)^{\mathrm{op}}\cong B_s^{\mathrm{op}}\otimes_RM^{\mathrm{op}}$ together with $B_s^{\mathrm{op}}\cong B_s$ expresses $M\otimes_RB_s$ as the opposite of $B_s\otimes_RM^{\mathrm{op}}$; the opposite functor preserves each of the two flag categories, as recorded in [[def-type-a-standard-graph-bimodules-support-filtrations-and-character]], and $M^{\mathrm{op}}$ again lies in both with the same shift data, so the left-closure clause applied to $M^{\mathrm{op}}$ gives $M\otimes_RB_s\in F_\Delta\cap F_\nabla$. Exactness and preservation of finite freeness for $-\otimes_RB_s$ hold by [F5] because $B_s$ is free of rank two as a left $R$-module. [F4, F5]
 
-1.2 Multiplicities in the two charts: for $\ell(x)>\ell(sx)$ the imported recursions of [F4] express the $\Delta$-multiplicities of $B_s\otimes_RB$ in terms of those of $B$, and the matching Hecke formulas of [F4] are the expansion of $\widetilde T_s\widetilde T_x$ and $\widetilde T_s\widetilde T_{sx}$ in the standard basis of [F3]: since $\widetilde T_x=v^{\ell(x)}T_x$, the left-multiplication rule is $T_sT_x=T_{sx}$ when $\ell(sx)=\ell(x)+1$ and $T_sT_x=(q-1)T_x+qT_{sx}$ when $\ell(sx)=\ell(x)-1$, so $\widetilde T_s\widetilde T_x=\widetilde T_{sx}$ in the ascent case and $\widetilde T_s\widetilde T_x=\widetilde T_{sx}+(v^{-1}-v)\widetilde T_x$ in the descent case, with coefficient one on $\widetilde T_{sx}$; this coefficient one is exactly what the recursions of [F4] assert, and the diagonal term $(v^{-1}-v)\widetilde T_x$ is the shift by one of the diagonal that the recursion moves. [F3, F4]
+1.2 Multiplicities in the two charts: for $\ell(x)>\ell(sx)$ the locally proved recursions of [F4] express the $\Delta$-multiplicities of $B_s\otimes_RB$ in terms of those of $B$, and the matching Hecke formulas are the expansion of $\widetilde T_s\widetilde T_x$ and $\widetilde T_s\widetilde T_{sx}$ in the standard basis of [F3]: since $\widetilde T_x=v^{\ell(x)}T_x$, the left-multiplication rule is $T_sT_x=T_{sx}$ when $\ell(sx)=\ell(x)+1$ and $T_sT_x=(q-1)T_x+qT_{sx}$ when $\ell(sx)=\ell(x)-1$, so $\widetilde T_s\widetilde T_x=\widetilde T_{sx}$ in the ascent case and $\widetilde T_s\widetilde T_x=\widetilde T_{sx}+(v^{-1}-v)\widetilde T_x$ in the descent case, with coefficient one on $\widetilde T_{sx}$; this coefficient one is exactly what the recursions of [F4] assert, and the diagonal term $(v^{-1}-v)\widetilde T_x$ is the shift by one of the diagonal that the recursion moves. [F3, F4]
 
 1.3 Base case: for $M=R$ the two flags of [F2] give $h_\Delta(B_s)=v^{1}\widetilde T_e+v^{0}\widetilde T_s=v+vT_s$ and $h_\nabla(B_s)=v^{1}\widetilde T_e+v^{0}\widetilde T_s=v+vT_s$, both equal to $H_s\cdot1=H_s$; and $h_\Delta(R)=h_\nabla(R)=\widetilde T_e=1$. [F1, F2, F3]
 
@@ -87,4 +78,4 @@ $((\widetilde T_s+v)H:v^d\widetilde T_{sx})=(H:v^d\widetilde T_x)+(H:v^{d-1}\wid
 
 2.2 The dual chart is the same computation with the weights $v^{-d}$: the $\nabla$-recursions of [F4] give $h_\nabla(B_s\otimes_RB)=H_sh_\nabla(B)$, since the two charts are exchanged by $d\mapsto-d$ in the displayed Hecke formulas of [F4]. [F1, F3, step 1.2]
 
-3.1 Intrinsicness and conclusion: by [[lem-type-a-support-filtration-multiplicities-are-intrinsic]] the multiplicities used in steps 2.1 to 3.1 depend only on the bimodules involved, so the displayed identities are identities between the characters of $M$, $B_i\otimes_RM$ and $M\{k\}$; claims (1) to (4) follow, the case $M=R$ of claim (4) being step 1.3. ∎ [step 1.1, step 2.1, step 2.2, step 1.3, step 1.4]
+3.1 Intrinsicness and conclusion: by [[lem-type-a-support-filtration-multiplicities-are-intrinsic]] the multiplicities used in steps 2.1 to 3.1 depend only on the bimodules involved, so the displayed identities are identities between the characters of $M$, $B_i\otimes_RM$ and $M\{k\}$; claims (1) to (4) follow, the case $M=R$ of claim (4) being step 1.3. [step 1.1, step 2.1, step 2.2, step 1.3, step 1.4] ∎

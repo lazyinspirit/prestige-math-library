@@ -79,7 +79,7 @@ not needed; see the remarks below.
 
 1.1 Suppose, for contradiction, that $X = \mathbb{R} \setminus \mathbb{Q}_{\mathbb{R}}$ is at most countable. [assume-contra]
 
-1.2 $\mathbb{Q}_{\mathbb{R}} \approx \mathbb{Q} \approx \mathbb{N}$ by [L1] and [L2], so $\mathbb{Q}_{\mathbb{R}}$ is at most countable, and it is nonempty since $\iota(0) \in \mathbb{Q}_{\mathbb{R}}$. [L1, L2]
+1.2 $\mathbb{Q}_{\mathbb{R}} \approx \mathbb{Q} \approx \mathbb{N}$ by [L1] and [L2], so $\mathbb{Q}_{\mathbb{R}}$ is at most countable, and it is nonempty since $0 \in \mathbb{Q}_{\mathbb{R}}$. [L1, L2]
 
 1.3 Fix the bijection $\beta : \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ of [L4]. [L4]
 

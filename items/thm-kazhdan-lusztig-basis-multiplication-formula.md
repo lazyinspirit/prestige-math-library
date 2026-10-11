@@ -5,7 +5,7 @@ title: Multiplication by a generator in the Kazhdan–Lusztig basis
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations, lem-reversal-anti-involution-commutes-with-hecke-bar]
+deps: [def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-normalized-type-a-hecke-algebra-and-its-bar-involution, lem-bruhat-order-basic-properties-for-permutations, lem-reversal-anti-involution-commutes-with-hecke-bar]
 dependency_level: 6
 justified_by: []
 aliases: []
@@ -22,8 +22,8 @@ sources:
       url: "https://arxiv.org/pdf/1212.0791"
       locator: "§3.2, printed pp. 15–16; complete section read."
 verification:
-  audited: "2026-10-08"
-  precheck: pass
+  precheck: "pass"
+  repair: "research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/gate1-kl-receipts/receipts/thm-kazhdan-lusztig-basis-multiplication-formula.json"
 ---
 
 ## Facts & Assumptions
@@ -32,7 +32,7 @@ verification:
 
 [F1] The elements $H_x$ form a standard basis and satisfy $H_s^2=1+(v^{-1}-v)H_s$ ([[def-normalized-type-a-hecke-algebra-and-its-bar-involution]]).
 
-[F2] The basis elements $\underline H_w=\sum_{x\le w}p_{x,w}H_x$ are bar-invariant, have $p_{w,w}=1$, $p_{x,w}=0$ unless $x\le w$, $p_{x,w}\in v\mathbb Z[v]$ for $x<w$, and $p_{x^{-1},w^{-1}}=p_{x,w}$ ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]).
+[F2] The basis elements $\underline H_w=\sum_{x\le w}p_{x,w}H_x$ are bar-invariant, have $p_{w,w}=1$, $p_{x,w}=0$ unless $x\le w$, $p_{x,w}\in v\mathbb Z[v]$ for $x<w$, and $p_{x^{-1},w^{-1}}=p_{x,w}$ ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]).
 
 [F3] Under the classical polynomial normalization, $p_{x,w}=v^{\ell(w)-\ell(x)}P_{x,w}(v^{-2})$ for $x\le w$, and $\mu(x,w)$ is the coefficient of $v$ in $p_{x,w}$, set to $0$ when the length difference is even. For a Bruhat cover $x<w$, this gives $p_{x,w}=v$ ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]).
 
@@ -42,7 +42,7 @@ verification:
 
 ## Statement
 
-Let $s=s_i$ be a simple reflection and $w\in S_n$. In the Kazhdan–Lusztig basis $\{\underline H_w\}$ of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]: $$\underline H_s\,\underline H_w=\begin{cases}(v+v^{-1})\,\underline H_w,&sw<w,\\[2pt] \underline H_{sw}+\displaystyle\sum_{\substack{z\in S_n\\ sz<z<w}}\mu(z,w)\,\underline H_z,&sw>w,\end{cases}$$ and symmetrically $\underline H_w\underline H_s=(v+v^{-1})\underline H_w$ if $ws<w$, $\underline H_w\underline H_s=\underline H_{ws}+\sum_{zs<z<w}\mu(z,w)\underline H_z$ if $ws>w$. Here $\mu(z,w)$ is the coefficient of $v$ in $p_{z,w}$ ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]), which can be nonzero only when $\ell(w)-\ell(z)$ is odd; the sums are finite since $S_n$ is finite. In particular $\underline H_s\underline H_s=(v+v^{-1})\underline H_s$, and $\underline H_s\underline H_w=\underline H_{sw}$ when $sw>w$ and $\ell(w)\le1$. The span conclusion is for the ascent case $sw>w$: there, $\underline H_s\underline H_w$ lies in the span of $\underline H_{sw}$ and of the $\underline H_z$ with $z<w$ and $sz<z$.
+Let $s=s_i$ be a simple reflection and $w\in S_n$. In the Kazhdan–Lusztig basis $\{\underline H_w\}$ of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]: $$\underline H_s\,\underline H_w=\begin{cases}(v+v^{-1})\,\underline H_w,&sw<w,\\[2pt] \underline H_{sw}+\displaystyle\sum_{\substack{z\in S_n\\ sz<z<w}}\mu(z,w)\,\underline H_z,&sw>w,\end{cases}$$ and symmetrically $\underline H_w\underline H_s=(v+v^{-1})\underline H_w$ if $ws<w$, $\underline H_w\underline H_s=\underline H_{ws}+\sum_{zs<z<w}\mu(z,w)\underline H_z$ if $ws>w$. Here $\mu(z,w)$ is the coefficient of $v$ in $p_{z,w}$ ([[def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization]]), which can be nonzero only when $\ell(w)-\ell(z)$ is odd; the sums are finite since $S_n$ is finite. In particular $\underline H_s\underline H_s=(v+v^{-1})\underline H_s$, and $\underline H_s\underline H_w=\underline H_{sw}$ when $sw>w$ and $\ell(w)\le1$. The span conclusion is for the ascent case $sw>w$: there, $\underline H_s\underline H_w$ lies in the span of $\underline H_{sw}$ and of the $\underline H_z$ with $z<w$ and $sz<z$.
 
 ## Proof
 
@@ -62,4 +62,4 @@ Let $s=s_i$ be a simple reflection and $w\in S_n$. In the Kazhdan–Lusztig basi
 
 ## Remarks
 
-The argument uses the locally proved triangular basis and degree clauses of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]], and the coefficient-of-$v$ definition of $\mu$. Coefficientwise positivity is not required.
+The argument uses the locally proved triangular basis and degree clauses of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]], and the coefficient-of-$v$ definition of $\mu$. Coefficientwise positivity is not required.

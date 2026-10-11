@@ -1,0 +1,1069 @@
+[
+  {
+    "order": 1584,
+    "id": "character-polynomials-fi-modules-and-representation-stability",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Character Polynomials, FI-Modules, and Representation Stability",
+    "companion": "character-polynomials-fi-modules-and-representation-stability-examples",
+    "requires": [
+      "frobenius-characteristic-and-the-symmetric-group-character-dictionary",
+      "outer-products-skew-specht-modules-and-littlewood-richardson",
+      "kronecker-coefficients-and-internal-products",
+      "categories-functors-and-natural-transformations",
+      "group-cohomology-as-a-derived-functor",
+      "noetherian-rings-and-hilbert-basis"
+    ],
+    "items": [
+      {
+        "id": "def-fi-category-and-fi-module",
+        "kind": "definition",
+        "title": "The category FI and FI-modules over a commutative ring",
+        "deps": [
+          "def-category",
+          "def-functor-and-contravariant-functor",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-left-and-right-modules",
+          "def-commutative-ring",
+          "def-group-ring",
+          "def-submodule",
+          "def-quotient-module",
+          "def-abelian-category",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-group-actions-and-group-ring-modules-correspond"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $FI$ be the category whose objects are the finite sets and whose morphisms are the injections ([[def-category]]); it is equivalent to the full subcategory on the objects $[n]=\\{1,\\dots,n\\}$, $n\\ge0$, so that $\\operatorname{End}_{FI}([n])\\cong S_n$ ([[def-finite-symmetric-group-and-permutation-notation]]). An **FI-module over a commutative ring $k$** ([[def-commutative-ring]]) is a covariant functor $V\\colon FI\\to k\\text{-Mod}$ ([[def-functor-and-contravariant-functor]], [[def-left-and-right-modules]]); write $V_S=V(S)$, $V_n=V([n])$ and $f_*=V(f)$ for a morphism $f$. Since $\\operatorname{End}_{FI}([n])=S_n$, the maps $V_n\\to V_n$ induced by permutations make $V_n$ a left $kS_n$-module ([[def-group-ring]]), and each $f_*\\colon V_m\\to V_n$ is equivariant for the conjugation homomorphism $S_m\\to S_n$ determined by $f$. A **sub-FI-module** of $V$ is a subfunctor of $V$ ([[def-submodule]]), a **map of FI-modules** is a natural transformation, and kernels, images and cokernels are computed pointwise, so the FI-modules over $k$ inherit an abelian-category structure from $k\\text{-Mod}$ ([[def-quotient-module]]). An **FB-module** over $k$ is a functor from the groupoid $FB$ of finite sets and bijections to $k\\text{-Mod}$; an FB-module is determined up to isomorphism by the $kS_n$-modules $W_n$ and carries no transition maps.",
+        "strategy": "Read complete Definition and all eleven suppliers. Full skeletal inclusion and existence of individual finite-set bijections require no simultaneous class choice; the equivariance homomorphism extends permutations by the identity off the image. Kernels/cokernels and coimage-image isomorphisms are objectwise. S_0 and the zero ring cause no failure. Accept the clarified skeletal formulation; subsequent FI consumers use only these explicit constructions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definition 1.1, printed p. 2; Definitions 2.1.1, 2.1.2 (abelian structure) and 2.1.4, printed pp. 11–12; Definition 2.2.1 and the following paragraph on FB-modules (“no additional data such as maps between them”), printed p. 12"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "§2.1, printed pp. 9–10: FI-Mod = [FI, R-Mod] is abelian with kernels and cokernels computed pointwise, and sub-FI-modules are the pointwise submodules preserved by all transition maps"
+            }
+          ]
+        },
+        "axiom_use": "None: category-theoretic definitions and the identification $\\operatorname{End}_{FI}([n])\\cong S_n$ use no choice principle."
+      },
+      {
+        "id": "def-finite-generation-and-generation-degree-of-an-fi-module",
+        "kind": "definition",
+        "title": "Span, finite generation and generation degree of an FI-module",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-submodule",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "lem-submodule-criterion-sums-and-intersections"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $V$ be an FI-module over $k$ and let $\\Sigma\\subseteq\\bigsqcup_S V_S$ be a set of elements. The **sub-FI-module generated by $\\Sigma$**, written $\\operatorname{span}_V(\\Sigma)$, is the intersection of all sub-FI-modules of $V$ containing $\\Sigma$; it is the smallest such sub-FI-module and consists of all finite $k$-linear combinations of elements $f_*(v)$ with $v\\in\\Sigma$ and $f$ a morphism of $FI$. Call $V$ **finitely generated** when $\\operatorname{span}_V(\\Sigma)=V$ for some finite $\\Sigma$, and **generated in degree $\\le d$** when $\\operatorname{span}_V(V_{\\le d})=V$, where $V_{\\le d}=\\bigsqcup_{|S|\\le d}V_S$; the **generation degree** is the least such $d$, and $\\infty$ when no such $d$ exists ([[def-generated-cyclic-finitely-generated-and-free-modules]]). Finite generation of $V$ and pointwise finite generation of the $k$-modules $V_S$ are different conditions: the latter is implied by the former ([[lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules]]) but does not imply it, and no pointwise finite-dimensionality is built into either notion ([[def-submodule]] for the span).",
+        "strategy": "Read Definition and all four suppliers. Intersections exist objectwise and equal the explicit finite-linear-combination span of all generator images. Skeletal V_<=d is set-sized; individual finite transports suffice. The empty generating set generates zero with degree zero, and finite generators imply a bounded maximum of support sizes. Bounded degree permits infinite low-rank modules and does not assert finite generation. Accept corrected set-sized family and finite maximum.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definitions 2.3.1, 2.3.3 and 2.3.4 with Lemma 2.3.2, printed pp. 14–15: span as the minimal sub-FI-module containing a set of elements, its description as the span of the images $f(v)$, and the notions “generated in degree $m$” and “finitely generated”"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Definition 2.1 and Proposition 2.3, printed pp. 10–11: generation by a set contained in no proper sub-FI-module, and the equivalent surjection from free FI-modules"
+            }
+          ]
+        },
+        "axiom_use": "None: the construction is an intersection of subfunctors and a finite-linear-combination closure."
+      },
+      {
+        "id": "def-fi-coinvariant-functors-and-transition-maps",
+        "kind": "definition",
+        "title": "The coinvariant functors $\\Phi_a$ and the transition maps $T$",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-coinvariants-functor-of-a-group-module",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-submodule",
+          "def-quotient-module",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "prop-the-coinvariants-functor-is-right-exact",
+          "def-group-ring",
+          "thm-group-ring-is-a-unital-algebra-with-basis-g"
+        ],
+        "dependency_level": 1,
+        "statement": "A **graded $k[T]$-module** consists of $k$-modules $U_n$, $n\\ge0$, together with $k$-linear maps $T\\colon U_n\\to U_{n+1}$ for all $n$. Fix $a\\ge0$, a set $\\mathbf a$ of cardinality $a$ and a functorial disjoint union. For an FI-module $V$ over $k$ and $n\\ge0$ put $$\\Phi_a(V)_n:=(V_{\\mathbf a\\sqcup n})_{S_n},$$ the coinvariants of the $kS_n$-module $V_{\\mathbf a\\sqcup n}$ ([[def-coinvariants-functor-of-a-group-module]], [[def-quotient-module]]). Any injection $f\\colon n\\to n+1$ gives an injection $\\mathrm{id}_{\\mathbf a}\\sqcup f\\colon\\mathbf a\\sqcup n\\to\\mathbf a\\sqcup n+1$ and an induced map $\\Phi_a(V)_n\\to\\Phi_a(V)_{n+1}$; postcomposition by $S_{n+1}$ shows that this map depends only on $f$ and $\\mathrm{id}_{\\mathbf a}$, because any two injections $n\\to n+1$ differ by an element of $S_{n+1}$. Writing $T$ for it, $(\\Phi_a(V),T)$ is a graded $k[T]$-module, and $\\Phi_a$ is a functor from FI-modules to graded $k[T]$-modules. Each $\\Phi_a$ is right exact in every degree, and is exact when $k$ contains $\\mathbb Q$, since averaging over the finite groups $S_n$ splits the coinvariant quotient; in that case $\\Phi_a(W)\\subseteq\\Phi_a(V)$ for every sub-FI-module $W\\subseteq V$.",
+        "strategy": "Choice-independence of $T$: the two injections differ by a permutation of $n+1$, and coinvariants identify the images. Functoriality and right exactness are pointwise from the right-exact coinvariant functor; left exactness over a $\\mathbb Q$-algebra follows because $(V_{\\mathbf a\\sqcup n})_{S_n}\\to V_{\\mathbf a\\sqcup n}$ is split by the averaging map $v\\mapsto\\frac1{n!}\\sum_{\\sigma\\in S_n}\\sigma v$, which is defined when $k$ contains $\\mathbb Q$ and is natural ([[def-coinvariants-functor-of-a-group-module]], [[def-module-homomorphism-kernel-image-and-cokernel]]).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definitions 3.1.1 and 3.1.2 with the well-definedness paragraph for $T$, printed pp. 16–17: the coinvariant quotient $(V_{a\\sqcup n})_{S_n}$, the choice-independence of $T$ under post-composition by $S_{n+1}$, and “$\\Phi_a$ is always right exact; when $k$ contains $\\mathbb Q$ it is exact”"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Definition 2.4 and Lemma 2.5, printed p. 10: the same coinvariant quotient in the $H_0$ notation, with $H_0(V)=0$ implying $V=0$"
+            }
+          ]
+        },
+        "axiom_use": "None: finite averaging uses only the finite groups $S_n$."
+      },
+      {
+        "id": "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+        "kind": "definition",
+        "title": "Injectivity, surjectivity and stability degree",
+        "deps": [
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $V$ be an FI-module over $k$. The **injectivity degree** $\\operatorname{inj-deg}(V)$ (respectively the **surjectivity degree** $\\operatorname{surj-deg}(V)$) is the least $s\\ge0$ such that for every $a\\ge0$ the transition map $T\\colon\\Phi_a(V)_n\\to\\Phi_a(V)_{n+1}$ is injective (respectively surjective) for all $n\\ge s$; the **stability degree** is $$\\operatorname{stab-deg}(V):=\\max\\bigl(\\operatorname{inj-deg}(V),\\operatorname{surj-deg}(V)\\bigr).$$ Each of the three is $+\\infty$ when no such $s$ exists. Equivalently, $T\\colon\\Phi_a(V)_n\\to\\Phi_a(V)_{n+1}$ is an isomorphism for all $a\\ge0$ and all $n\\ge\\operatorname{stab-deg}(V)$. The three bounds are kept distinct: stability degree is the max, and injectivity and surjectivity degree need not agree in examples.",
+        "strategy": "Unwrap the definitions ($\\max$ of two extended nonnegative integers), and record the equivalent indexing statement as a reformulation: $T$ is an isomorphism iff it is both injective and surjective, and each of the two stated bounds is the least threshold controlling the corresponding property. No claim of finiteness is made; $\\infty$ is allowed throughout.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definition 3.1.3 (stability degree), Definition 3.1.5 (injectivity and surjectivity degree with $\\operatorname{stab-deg}=\\max$), and Remark 3.1.4, printed pp. 16–17"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "§2.1, printed pp. 9–13: the shift-form equivalent running through $H_0$ (corroborating context; not used in the definition)"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+        "kind": "lemma",
+        "title": "Specht modules classify the irreducibles over every field of characteristic zero",
+        "deps": [
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "lem-integral-specht-garnir-straightening-and-field-basis",
+          "thm-complex-specht-modules-are-irreducible",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-restriction-and-extension-of-scalars",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars",
+          "thm-group-actions-and-group-ring-modules-correspond",
+          "thm-group-ring-is-a-unital-algebra-with-basis-g",
+          "def-group-ring",
+          "thm-tensor-product-basis-from-bases",
+          "def-module-homomorphism-kernel-image-and-cokernel"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $F$ be a field of characteristic $0$ and $n\\ge0$. The field-valued Specht modules $S^\\lambda_F$, $\\lambda\\vdash n$, of [[def-polytabloid-specht-module-over-an-arbitrary-field]] are nonzero, irreducible and pairwise non-isomorphic, and every irreducible $F S_n$-module is isomorphic to exactly one of them; consequently, by Maschke, every finite-dimensional $F S_n$-module is a direct sum of copies of the $S^\\lambda_F$, so the irreducible $F S_n$-modules are indexed by the partitions of $n$ and the $S^\\lambda_F$ form a complete irredundant list. This is the constituent convention used throughout the pair: over $F=\\mathbb C$ it specialises to the published complex classification, and over a general characteristic-zero field F it is proved using rational Specht models and extension Q -> F, not a scalar extension from C to F.",
+        "strategy": "Use the rational Specht models, then extend from the prime field, never from an arbitrary field to C. The integral standard basis gives explicit matrices with rational entries on S^lambda_Q and an isomorphism F tensor_Q S^lambda_Q = S^lambda_F for every characteristic-zero field F. Over Q, a proper nonzero invariant subspace would remain proper and nonzero under the explicit finite-dimensional extension Q -> C, contradicting complex irreducibility. For finite-dimensional rational representations, equivariant Hom spaces are kernels of finite rational matrices; matrix ranks are unchanged on extension to C. Thus End_QSn(S^lambda_Q)=Q and Hom_QSn(S^lambda_Q,S^mu_Q)=0 for lambda!=mu. Any simple QSn-module W is finite-dimensional (a nonzero w generates it as a quotient of QSn); its complex extension has a Specht constituent, and the same Hom-rank comparison descends a nonzero map S^lambda_Q -> W, proving completeness over Q. Maschke therefore decomposes the finite regular module QSn as a finite sum of rational Specht modules. Extend this finite decomposition along Q -> F. The same rational Hom-matrix ranks give End_FSn(S^lambda_F)=F and zero Hom between distinct shapes; Maschke implies each S^lambda_F is irreducible, since a proper summand would give a non-scalar projection. Every simple FSn-module is a quotient of the regular module, so the extended decomposition proves completeness over F. All scalar extensions and rank comparisons concern explicit finite-dimensional matrices, not an embedding F -> C. No arbitrary-index choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The paragraph “Irreducible representations of $S_n$ in characteristic 0”, printed p. 13: over a field of characteristic $0$, every irreducible representation of $S_n$ is defined over $\\mathbb Q$ and the decomposition does not depend on the field"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, printed pp. 114–115: the character table of $S_n$ and the Specht/Young classification conventions"
+            }
+          ]
+        },
+        "axiom_use": "None: use the explicit rational Specht matrices, finite rational Hom kernels, characteristic-zero Maschke and extension of the finite regular-module decomposition along Q -> F. No embedding F -> C or infinite-dimensional basis is chosen."
+      },
+      {
+        "id": "def-weight-of-a-characteristic-zero-fi-module",
+        "kind": "definition",
+        "title": "Weight of an FI-module over a field of characteristic zero",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-first-row-padding-of-a-partition",
+          "thm-complex-specht-modules-are-irreducible",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "def-quotient-module",
+          "def-submodule"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $V$ be an FI-module over $k$ ([[def-fi-category-and-fi-module]]). For a partition $\\lambda$ and $n\\ge|\\lambda|+\\lambda_1$ put $\\lambda[n]:=(n-|\\lambda|,\\lambda_1,\\lambda_2,\\dots)$, the first-row padding ([[def-first-row-padding-of-a-partition]]), and let $V(\\lambda)_n$ denote the irreducible $kS_n$-module indexed by the partition $\\lambda[n]$, i.e. $k\\otimes_{\\mathbb Q}S^{\\lambda[n]}_{\\mathbb Q}$, the scalar extension of its rational Specht model ([[thm-complex-specht-modules-are-irreducible]], [[lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields]]). The **weight** of $V$ is $$\\operatorname{weight}(V):=\\sup\\{|\\lambda|:V(\\lambda)_n\\text{ occurs as a constituent of }V_n\\text{ for some }n\\ge|\\lambda|+\\lambda_1\\},$$ the supremum over all pairs $(\\lambda,n)$ as displayed; it is $0$ for $V=0$ and $+\\infty$ when the set is unbounded. If $W$ is a subquotient of $V$ then $\\operatorname{weight}(W)\\le\\operatorname{weight}(V)$.",
+        "strategy": "Well-definedness: every partition of $n$ is uniquely $\\lambda[n]$ for a partition $\\lambda$ (the boxes below the first row form a partition), so the constituent labels are well defined and the supremum is over a set of nonnegative integers. The subquotient inequality is immediate since constituents of a subquotient are constituents of $V$. The item records the convention that $k$ may be any characteristic-zero field via the absolute irreducibility supplied by the classification lemma; no finiteness of $\\operatorname{weight}(V)$ is asserted. Constituent tests require no basis or global decomposition for infinite-dimensional values: every vector has a finite-dimensional orbit span under the finite group, and finite-dimensional Maschke applies there. A finite-dimensional submodule of a quotient can be lifted into a finite-dimensional orbit-stable subspace using finitely many vector lifts; this gives the stated subquotient monotonicity without infinite choices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definition 2.2.5 (the padded irreducible $V(\\lambda)_n$ and the uniqueness of the labelling), printed pp. 13–14; Definition 3.2.1 (weight, the $V=0$ convention, the value $\\infty$, and subquotient monotonicity), printed p. 18"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "§1, printed p. 2: the same characteristic-zero convention in the companion paper"
+            }
+          ]
+        },
+        "axiom_use": "None: partitions and constituent multiplicities are set-theoretic data."
+      },
+      {
+        "id": "def-free-fi-module-generated-by-an-sm-module",
+        "kind": "definition",
+        "title": "The free FI-module $M(W)$ generated by an $S_m$-module",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-induced-r-linear-g-module-by-h-covariant-functions",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-group-ring",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-subset-and-proper-subset",
+          "def-injection-surjection-bijection"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $W$ be an FB-module over $k$, i.e. a family of $kS_m$-modules $W_m$ ([[def-fi-category-and-fi-module]]). The **free FI-module** $M(W)$ is the FI-module with $$M(W)_S:=\\bigoplus_{T\\subseteq S}W_T,$$ where $W_T$ denotes $W_{|T|}$ transported along a bijection $T\\to[|T|]$ (well defined up to canonical isomorphism), and on an injection $f\\colon S\\to S'$ the map $M(W)_S\\to M(W)_{S'}$ is the sum of the maps $W_T\\to W_{f(T)}$ induced by $f|_T$ ([[def-direct-sum-of-a-family-of-modules]]). $M(-)$ is the left adjoint of the forgetful functor from FI-modules to FB-modules, so $$\\operatorname{Hom}_{FI\\text{-}Mod}(M(W),V)\\cong\\operatorname{Hom}_{FB\\text{-}Mod}(W,\\pi V)$$ naturally in $V$; the unit sends $W_S$ to the summand $W_S$ of $M(W)_S$. As an $S_n$-module, $$M(W)_n\\cong\\bigoplus_{a=0}^{n}\\operatorname{Ind}_{S_a\\times S_{n-a}}^{S_n}\\bigl(W_a\\boxtimes k\\bigr),$$ with $\\boxtimes$ the external tensor product of modules for the direct factors and $\\operatorname{Ind}$ the induced module built from $H$-covariant functions ([[def-induced-r-linear-g-module-by-h-covariant-functions]], [[def-outer-induction-product-for-symmetric-group-characters]], [[lem-character-ring-of-a-direct-product-is-the-tensor-product]], [[def-tensor-product-of-modules-by-generators-and-relations]]). For $m\\ge0$, $M(m):=M(k[S_m])$ has as a $k$-basis the injections $m\\to S$; for a partition $\\lambda$ and a field $k$ of characteristic $0$, $M(\\lambda):=M(S^\\lambda_k)$.",
+        "strategy": "Read Definition, ten suppliers and finite-index induction comparison. Subset summands and restriction-of-injection maps compose; degree grouping has stabilizer S_a x S_(n-a), acting through W_a and a trivial complementary factor. Finite-index covariant functions and the tensor induction model agree here. Adjunction extensions on subset inclusions are inverse; M(m) is injection representable, including M(0)=constant k. No classwide transports are chosen. The raw carrier changed, but both pre/post contract and substantive construction are unchanged; review records metadata normalization.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definitions 2.2.1, 2.2.2 (formula (3) and the unit of the adjunction), Definition 2.2.3 with the basis by injections, formula (4) for $M(W)_n$ as an $S_n$-representation, and Definition 2.2.6, printed pp. 12–13"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Definition 2.2 and the Yoneda identification $\\operatorname{Hom}_{FI\\text{-}Mod}(M(d),V)=V_d$, printed p. 10"
+            }
+          ]
+        },
+        "axiom_use": "None: the finitely many transports of finite sets are canonical up to unique isomorphism; only finite choice (available without any choice axiom) is involved."
+      },
+      {
+        "id": "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+        "kind": "lemma",
+        "title": "Generation in bounded degree presents an FI-module as a quotient of free FI-modules",
+        "deps": [
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-module-homomorphism-kernel-image-and-cokernel",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-generated-cyclic-finitely-generated-and-free-modules",
+          "def-fi-category-and-fi-module"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $V$ be an FI-module over $k$\n([[def-fi-category-and-fi-module]]), with free FI-modules $M(m)$ as in\n[[def-free-fi-module-generated-by-an-sm-module]] and span as in\n[[def-finite-generation-and-generation-degree-of-an-fi-module]].\n\n(a) For $v\\in V_m$ the map of FI-modules $M(m)\\to V$ sending the canonical\ngenerator $\\mathrm{id}_m\\in M(m)_m$ to $v$ has image $\\operatorname{span}_V(v)$;\nmore generally, for any set $\\Sigma$ of elements, each lying in some $V_S$, the\ncanonical map $\\bigoplus_{s\\in\\Sigma}M(S_s)\\to V$ sending $\\mathrm{id}_{S_s}$\nto $s$ has image $\\operatorname{span}_V(\\Sigma)$. Here $S_s$ is the specified\nsupporting set of $s$, and $M(S)_T$ is the free $k$-module on injections\n$S\\to T$, with postcomposition as transition maps. Each $M(S)$ is\nisomorphic to $M(|S|)$ after choosing a single bijection $[|S|]\\to S$.\n\n(b) $V$ is finitely generated if and only if there is a finite family\n$m_1,\\dots,m_r\\ge0$ with a surjection\n\n$$M(m_1)\\oplus\\cdots\\oplus M(m_r)\\twoheadrightarrow V;$$\n\n$V$ is generated in degree $\\le d$ if and only if there is a surjection\n$\\bigoplus_{i\\in I}M(m_i)\\twoheadrightarrow V$ with $m_i\\le d$ for all $i$. In\nparticular, if $V$ is generated in degree $\\le d$, then the evaluation map\n$\\bigoplus_{m\\le d}M(V_m)\\to V$, whose value on a summand $V_T$ supported on an $m$-element subset\n$T\\subseteq S$ is the transition map $V_T\\to V_S$, is surjective.\n\n(c) If $V$ is finitely generated, then $V_S$ is a finitely generated $k$-module\nfor every finite set $S$\n([[def-generated-cyclic-finitely-generated-and-free-modules]]).\n\nNo choice principle is used: all maps come from a finite or explicitly indexed\nset of generators, and the image computations are linear algebra on the values\nat a fixed finite set.",
+        "strategy": "Read all six steps and six suppliers. Representable M(S) maps basis injections to transition images, avoiding simultaneous transports for arbitrary generator sets. Skeletal bounded generation yields a possibly infinite sum of M(m), while finite generation uses finitely many transports and finitely many M(m). Evaluation M(V_m) is separately the adjunction map and is surjective. Fixed finite sets have finite injection bases, proving pointwise finite generation. Empty generator sum gives zero; d=0 gives constant representables. Accepted mathematical repairs and amended the family length from k to r throughout Statement and Proof, resolving refuter:18:3 without changing the coefficient ring.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Lemma 2.3.2 with the surjection following it, and Proposition 2.3.5, printed pp. 14–15: the image of the map $M(m)\\to V$ determined by $v\\in V_m$ is $\\operatorname{span}_V(v)$, and finite generation is equivalent to a surjection from a finite sum of $M(m)$'s"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Definition 2.2 (free FI-modules, Yoneda identification) and Proposition 2.3 with proof, printed pp. 10–11"
+            }
+          ]
+        },
+        "axiom_use": "None: the maps are given by a finite set of generators, and the image computation is finite linear algebra."
+      },
+      {
+        "id": "lem-branching-rule-for-specht-induction-and-coinvariants",
+        "kind": "lemma",
+        "title": "Branching rule for Specht modules: adding or removing boxes in distinct columns",
+        "deps": [
+          "cor-outer-pieri-rules-for-trivial-and-sign-factors",
+          "cor-frobenius-reciprocity-for-complex-characters",
+          "def-coinvariants-functor-of-a-group-module",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "lem-integral-specht-garnir-straightening-and-field-basis",
+          "rem-induced-representation-agrees-with-the-tensor-product-model",
+          "thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction",
+          "cor-schurs-lemma-for-irreducible-representations",
+          "cor-change-of-rings-for-extension-of-scalars",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "def-restriction-and-extension-of-scalars",
+          "def-tensor-product-of-modules-by-generators-and-relations"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $F$ be a field of characteristic $0$, let $\\lambda\\vdash n$ and let $S^\\lambda_F$ be the corresponding Specht module. (i) For every $k\\ge0$ there is an isomorphism of $F S_{n+k}$-modules $$\\operatorname{Ind}_{S_n\\times S_k}^{S_{n+k}}\\bigl(S^\\lambda_F\\boxtimes F\\bigr)\\cong\\bigoplus_{\\mu}S^\\mu_F,$$ summed over the partitions $\\mu\\vdash n+k$ obtained from $\\lambda$ by adding one box to each of $k$ different columns. (ii) For every $k\\le n$ there is an isomorphism of $F S_{n-k}$-modules $$\\bigl(\\operatorname{Res}^{S_n}_{S_{n-k}\\times S_k}S^\\lambda_F\\bigr)_{S_k}\\cong\\bigoplus_{\\nu}S^\\nu_F,$$ summed over the partitions $\\nu\\vdash n-k$ obtained from $\\lambda$ by removing one box from each of $k$ different columns. All multiplicities are $0$ or $1$.",
+        "strategy": "Part (i) is the outer Pieri rule with trivial factors ([[cor-outer-pieri-rules-for-trivial-and-sign-factors]]) read off in the Specht basis supplied by [[lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields]]. For (ii), Frobenius reciprocity for complex characters ([[cor-frobenius-reciprocity-for-complex-characters]]) identifies the multiplicity of $S^\\nu_F$ in the $S_k$-coinvariants of the restriction with the multiplicity of $S^\\lambda_F$ in $\\operatorname{Ind}_{S_{n-k}\\times S_k}^{S_n}(S^\\nu_F\\boxtimes F)$, which is $1$ exactly when $\\lambda/\\nu$ is a horizontal $k$-strip by (i); the coinvariant quotient is semisimple over $F$ of characteristic $0$ by Maschke, so multiplicities determine the module. No other summands occur because (i) lists exactly the horizontal-strip shapes. The character calculation is made first over C and descends to Q by the finite rational Hom-matrix rank comparison in the classification lemma. Averaging over the finite subgroup identifies invariants and coinvariants by an explicit rational idempotent, whose finite-matrix rank is likewise unchanged under Q -> F. Extending the finite rational decomposition therefore proves the displayed formulas over every characteristic-zero field F.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Lemma 3.2.3 (branching rule for $S_n$-representations) with its proof comment, printed pp. 18–19: induction from $S_n\\times S_k$ adds one box in $k$ different columns, and the $S_k$-coinvariants of the restriction remove one box from $k$ different columns"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, equations (5.16)–(5.17), printed pp. 73–74: the Pieri rules for multiplication by a complete or elementary symmetric function"
+            }
+          ]
+        },
+        "axiom_use": "None: Pieri/Frobenius reciprocity and characteristic-zero Maschke are choice-free in the cited suppliers."
+      },
+      {
+        "id": "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+        "kind": "lemma",
+        "title": "Free FI-modules have computable stability degree and weight",
+        "deps": [
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "lem-branching-rule-for-specht-induction-and-coinvariants",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-first-row-padding-of-a-partition"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $W$ be an FB-module over $k$ and let $M(W)$ be the free FI-module of\n[[def-free-fi-module-generated-by-an-sm-module]]. Then\n$\\operatorname{inj-deg}(M(W))=0$, and if $W_i=0$ for all $i>m$ then\n$\\operatorname{surj-deg}(M(W))\\le m$; in particular\n$M(m)=M(k[S_m])$ over a nonzero ring $k$ satisfies $\\operatorname{inj-deg}(M(m))=0$ and\n$\\operatorname{stab-deg}(M(m))=m$\n([[def-injectivity-surjectivity-and-stability-degree-of-an-fi-module]]).\nIf moreover $k$ is a field of characteristic $0$ and $\\lambda$ is a partition,\nthen $\\operatorname{weight}(M(\\lambda))=|\\lambda|$\n([[def-weight-of-a-characteristic-zero-fi-module]]) and\n$\\operatorname{stab-deg}(M(\\lambda))=\\lambda_1$. No choice principle is used.",
+        "strategy": "The displayed computation of $\\Phi_aM(W)$ as $\\bigoplus_{U\\subseteq\\mathbf a,0\\le j\\le n}\\Phi_{|U|}(W)_j$ shows that $T$ preserves the summands and acts as the identity on each, giving injectivity degree $0$; when $W$ vanishes above $m$ the $j$-range is exhausted for $n\\ge m$, giving surjectivity degree $\\le m$, and $\\Phi_0(k[S_m])_m\\cong k$ gives the exact value $m$ for $M(m)$. For M(lambda), branching for Ind_{S_m x S_{n-m}}^{S_n}(S^lambda x k) gives full shapes nu obtained by adding n-m boxes in distinct columns. Hence nu_1>=n-m, so the padding-tail size n-nu_1 is at most m; equality is attained for the padded shape lambda[n] when n>=m+lambda_1. For exact stability, Phi_a M(S^lambda)_n decomposes into factors (S^lambda)_{S_j}, indexed by subsets U of [a] with |U|+j=m and j<=n. Transition T is the identity on existing factors. By branching, (S^lambda)_{S_j}=0 for j>lambda_1, so no new nonzero factor appears after n=lambda_1; the factor j=lambda_1 is nonzero, and with a=m-lambda_1 and U=[a] it first appears there. Thus T fails surjectivity at n=lambda_1-1 if lambda_1>0, proving stability degree exactly lambda_1; for the empty partition it is zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Proposition 3.1.7 with its proof (the orbit decomposition of $\\Phi_aM(W)_n$ and the injectivity and surjectivity bounds), printed pp. 17–18; Propositions 3.2.4 and 3.2.6 (weight and stability degree of $M(\\lambda)$), printed pp. 19–20"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, (5.16)–(5.17), printed pp. 73–74: the Pieri rules underlying the horizontal-strip conditions"
+            }
+          ]
+        },
+        "axiom_use": "None: the coinvariant computation is a finite orbit decomposition of subsets, and the weight/stability computation uses the choice-free branching lemma."
+      },
+      {
+        "id": "lem-generation-degree-bounds-surjectivity-degree-and-weight",
+        "kind": "lemma",
+        "title": "Bounded generation degree bounds surjectivity degree and weight",
+        "deps": [
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-free-fi-module-generated-by-an-sm-module"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $V$ be an FI-module over $k$. (a) Every quotient $V\\twoheadrightarrow W$ satisfies $\\operatorname{surj-deg}(W)\\le\\operatorname{surj-deg}(V)$. (b) If $V$ is generated in degree $\\le d$, then $\\operatorname{surj-deg}(V)\\le d$. (c) If moreover $k$ is a field of characteristic $0$ and $V$ is generated in degree $\\le d$, then $\\operatorname{weight}(V)\\le d$.",
+        "strategy": "(a) $\\Phi_a$ is right exact, so $\\Phi_a(V)_n\\to\\Phi_a(W)_n$ is surjective in every degree and a surjective $T$ remains surjective on the quotient. (b) By the presentation lemma $V$ is a quotient of $\\bigoplus_{m\\le d}M(V_m)$, and each summand is an $M(W)$ with $W$ supported in degrees $\\le d$, so it has surjectivity degree $\\le d$; a finite direct sum has surjectivity degree the maximum, and (a) passes the bound to the quotient $V$. (c) The same presentation exhibits $V$ as a quotient of $\\bigoplus_{m\\le d}M(V_m)$, each $M(V_m)$ has weight $\\le m\\le d$ by the free-module bound, and weight is monotone under subquotients, so $\\operatorname{weight}(V)\\le d$. For (c), no finite-dimensionality of V_m is assumed: every finite collection of vectors in V_m lies in a finite-dimensional S_m-stable orbit span. In M(V_m)_n each vector involves only finitely many such coefficients and injections, so it lies in the induction of one finite-dimensional coefficient subrepresentation. Finite-dimensional Maschke and the branching lemma bound every simple constituent by m; finite sums and quotients preserve this bound. A finite-dimensional simple submodule of a quotient is lifted using finitely many basis vectors and their finite S_n-orbits, so no infinite-dimensional decomposition or choice of an infinite basis is needed.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Lemma 3.1.6 (quotients have surjectivity degree at most that of the source), Proposition 3.1.8 (generated in degree $d$ implies surjectivity degree $\\le d$) and Proposition 3.2.5 (generated in degree $d$ implies weight $\\le d$), printed pp. 17–19"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Proposition 2.3 with proof (generation via surjections from free FI-modules), printed pp. 10–11"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "prop-tensor-products-of-finitely-generated-fi-modules-are-finitely-generated",
+        "kind": "proposition",
+        "title": "Tensor products of finitely generated FI-modules are finitely generated",
+        "deps": [
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-right-exactness-of-tensor-products",
+          "thm-tensor-product-basis-from-bases",
+          "thm-tensor-products-commute-with-arbitrary-direct-sums"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $V$ and $W$ be finitely generated FI-modules over $k$, with pointwise tensor product $(V\\otimes W)_S=V_S\\otimes_k W_S$. Then $V\\otimes W$ is finitely generated. More precisely, if $V$ is generated in degree $\\le m_1$ and $W$ in degree $\\le m_2$, then $V\\otimes W$ is generated in degree $\\le m_1+m_2$.",
+        "strategy": "Read six proof steps and seven suppliers. Basis pairs factor through the union of their images, of size <=m_1+m_2; tensor right exactness and direct-sum distribution pass the bounded degree result to arbitrary-index presentations. Finite generation separately uses finite presentations and the finite union of low-rank injection pairs, so it never follows merely from bounded generation. Empty sums, zero modules/ring, m_i=0 and equal/overlapping image pairs are valid; finite transports only. Accept the repaired finite-generator argument.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Proposition 2.3.6 with its proof, printed p. 14: $V\\otimes W$ is finitely generated, and generated in degree $m_1+m_2$ when $V$ and $W$ are generated in degrees $m_1$ and $m_2$"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Proposition 2.3 and §2.1, printed pp. 9–10: finite generation via surjections from free FI-modules"
+            }
+          ]
+        },
+        "axiom_use": "None: finite direct sums and distinguished basis pairs."
+      },
+      {
+        "id": "lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight",
+        "kind": "lemma",
+        "title": "Coinvariants detect vanishing of subquotients of bounded weight, and padded irreducibles stabilise",
+        "deps": [
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-branching-rule-for-specht-induction-and-coinvariants",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-first-row-padding-of-a-partition",
+          "def-submodule"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $k$ be a field of characteristic $0$, let $\\mu\\vdash n$, and write\n$\\mu=\\lambda[n]$ as in [[def-first-row-padding-of-a-partition]]; set\n$V(\\lambda)_n:=V_\\mu$, the irreducible $kS_n$-module with label $\\mu$\n([[lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields]]).\nRead $\\mu_1=0$ when $\\mu=\\varnothing$. For $0\\le a\\le n$, put\n$k_0=n-a$; for a vector space carrying an action of $S_a\\times S_{k_0}$, write $(\\,\\cdot\\,)_{S_{k_0}}$ for $S_{k_0}$-coinvariants of the\nrestriction to that product ([[def-fi-coinvariant-functors-and-transition-maps]]).\n\n(i) For $a\\le n$, with $k_0=n-a$, the $S_a$-representation\n$(V_\\mu)_{S_{k_0}}$ is zero if and only if $n-a>\\mu_1$, equivalently\n$(V(\\lambda)_n)_{S_{n-a}}=0$ if and only if $a<|\\lambda|$.\n\n(ii) If $n-a=\\mu_1$ (that is, $a=|\\lambda|$), then\n$(V(\\lambda)_n)_{S_{n-a}}\\cong V_\\lambda$ as $S_{|\\lambda|}$-modules.\n\n(iii) For fixed $\\lambda$ and $a\\ge|\\lambda|$, the $S_a$-module\n$(V(\\lambda)_n)_{S_{n-a}}$ is independent of $n$ once $n\\ge a+\\lambda_1$; in\nfact $(V(\\lambda)_n)_{S_{n-a}}\\cong\\operatorname{Ind}_{S_{|\\lambda|}\\times\nS_{a-|\\lambda|}}^{S_a}(V_\\lambda\\boxtimes k)$ throughout that range.\n\n(iv) If $V$ is an FI-module over $k$ with $\\operatorname{weight}(V)\\le a$\n([[def-weight-of-a-characteristic-zero-fi-module]]), then, for every $n\\ge a$, every subquotient\n$W_n$ ([[def-submodule]]) of the $S_n$-module $V_n$ satisfies\n$W_n=0\\iff(W_n)_{S_{n-a}}=0$.\n\nNo choice principle is used.",
+        "strategy": "Apply the branching lemma part (ii) with $S^\\lambda_F = V_\\mu$: $(V_\\mu)_{S_{n-a}}$ is the sum of the irreducibles $V_\\nu$ over partitions $\\nu\\vdash a$ obtained from $\\mu$ by removing one box from each of $n-a$ different columns; such a removal is possible iff $n-a\\le\\mu_1$, and when $n-a=\\mu_1$ it is possible only by removing every column's bottom box, leaving $\\lambda$; this gives (i) and (ii). For (iii), write m=|lambda| and mu=lambda[n]=(n-m,lambda_1,...). A partition nu of a occurs on the left precisely when mu_i>=nu_i>=mu_{i+1} for every i, by horizontal-strip removal. On the right, Pieri gives exactly nu_i>=lambda_i>=nu_{i+1}. These are the same inequalities except for nu_1<=n-m; the latter is automatic because |nu|-|lambda|=a-m gives nu_1<=lambda_1+a-m<=n-m in the stated range n>=a+lambda_1. Thus both sides have exactly the same constituents, each with multiplicity one, proving the displayed isomorphism independent of n. For (iv), if $W_n$ is nonzero, fix a nonzero vector and its finite-dimensional $S_n$-orbit span. Finite-dimensional Maschke supplies a simple submodule $V(\\lambda)_n$ with $|\\lambda|\\le a$. By (i) its $S_{n-a}$-coinvariants are nonzero. Coinvariants over a characteristic-zero field are exact: the finite averaging operator identifies the quotient with invariants and preserves injections. Hence $(W_n)_{S_{n-a}}$ is nonzero. The reverse direction is immediate. This proves the claim even when $W_n$ is infinite-dimensional, without choosing an infinite basis or decomposition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Lemma 3.2.7 (i)–(iv) with its proof, printed pp. 18–20: the vanishing criterion $(V(\\lambda)_n)_{S_{n-a}}=0$ iff $a<|\\lambda|$, the identification $(V(\\lambda)_n)_{S_{n-|\\lambda|}}\\cong V_\\lambda$, the $n$-independence with $\\operatorname{Ind}_{S_{|\\lambda|}\\times S_{a-|\\lambda|}}^{S_a}(V_\\lambda\\boxtimes k)$, and the conclusion that coinvariants detect vanishing for subquotients of weight $\\le a$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, (5.16)–(5.17), printed pp. 73–74: the Pieri rules underlying the horizontal-strip removal conditions"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "prop-specht-constituents-of-an-fi-module-have-bounded-first-row",
+        "kind": "proposition",
+        "title": "A stability degree bounds the first row of every padding tail",
+        "deps": [
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "lem-generation-degree-bounds-surjectivity-degree-and-weight",
+          "lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "lem-branching-rule-for-specht-induction-and-coinvariants",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "def-first-row-padding-of-a-partition",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-fi-category-and-fi-module",
+          "def-quotient-module"
+        ],
+        "dependency_level": 5,
+        "statement": "Read missing partition parts as $0$ when comparing row lengths.\n\nLet $k$ be a field of characteristic $0$, let $V$ be an FI-module over $k$\n([[def-fi-category-and-fi-module]]), and put\n$s:=\\operatorname{stab-deg}(V)<\\infty$\n([[def-injectivity-surjectivity-and-stability-degree-of-an-fi-module]]). Then\nfor every $n\\ge0$, every irreducible constituent $V(\\lambda)_n$ of the\n$kS_n$-module $V_n$ satisfies\n\n$$\\lambda_1\\le s.$$\n\nEquivalently, since the padded partition is\n$\\lambda[n]=(n-|\\lambda|,\\lambda_1,\\lambda_2,\\dots)$, the second row of the\nSpecht diagram $\\lambda[n]$ has length at most $s$; the first row of the\npadding tail is the second row of the full diagram\n([[def-first-row-padding-of-a-partition]],\n[[def-weight-of-a-characteristic-zero-fi-module]]). No choice principle is\nused.",
+        "strategy": "Filter $V$ by $F^mV:=\\operatorname{span}(V_{\\le m})$, so that $V=\\bigcup_mF^mV$ and each $F^mV$ is generated in degree $\\le m$. It suffices to prove the bound for every constituent of every quotient $F^mV/F^{m-1}V$. Fix $m$ and let $\\overline V:=V/F^{m-1}V$; then $\\overline V_n=0$ for $n<m$ and $\\overline V_m\\cong H_m:=\\operatorname{span}(V_{\\le m})/\\operatorname{span}(V_{<m})$ is its degree-$m$ part. If $m\\le s$ then any $\\mu\\vdash m$ has $\\mu_1\\le m\\le s$; for $m\\ge s+1$ the index $a_0:=m-s-1$ is nonnegative: since $\\overline V$ is a quotient of $V$, part (a) of the generation lemma gives $\\operatorname{surj-deg}(\\overline V)\\le s$, so $T\\colon\\Phi_{m-s-1}(\\overline V)_s\\to\\Phi_{m-s-1}(\\overline V)_{s+1}$ is surjective; its domain is a quotient of $\\overline V_{m-1}=0$, hence $0$; but $\\Phi_{m-s-1}(\\overline V)_{s+1}=(\\overline V_m)_{S_{s+1}}$, so $(H_m)_{S_{s+1}}=0$, and the coinvariant lemma (i) with subgroup size $s+1$ (retained rank $m-s-1$) gives $\\mu_1\\le s$ for every constituent $V_\\mu$ of $H_m$. Next, $F^mV/F^{m-1}V$ is generated in degree $\\le m$ with vanishing values below $m$, so the presentation lemma gives a surjection $M(H_m)\\twoheadrightarrow F^mV/F^{m-1}V$; by the free-module description every constituent of $M(H_m)_n$ is obtained from a constituent $H_\\mu$ of $H_m$ by adding boxes in different columns, giving a full diagram $\\nu$ with $\\nu_2\\le\\mu_1\\le s$ by horizontal-strip interlacing; if $\\nu=\\lambda[n]$, then $\\lambda_1=\\nu_2$; a quotient of $M(H_m)_n$ has no other constituents. Passing along the filtration gives the claim for $V_n$. All constituent arguments can be made in finite-dimensional orbit spans; any constituent vector in the exhaustive filtration already occurs at a finite stage. The bound concerns the tail, not the growing first row of lambda[n].",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Proposition 3.2.8 with its complete proof, printed p. 20: every constituent $V(\\lambda)_n$ of $V_n$ satisfies $\\lambda_1\\le\\operatorname{stab-deg}(V)$, proved via the filtration $F^mV=\\operatorname{span}(V_{\\le m})$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, (5.16)–(5.17), printed pp. 73–74: Pieri's rule, the horizontal-strip input used through the branching rule"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "thm-fi-modules-over-a-noetherian-q-algebra-form-a-noetherian-category",
+        "kind": "theorem",
+        "title": "FI-modules over a Noetherian $\\mathbb Q$-algebra form a Noetherian category",
+        "deps": [
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+          "lem-generation-degree-bounds-surjectivity-degree-and-weight",
+          "lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-hilbert-basis-theorem",
+          "thm-finitely-generated-modules-over-noetherian-rings-are-noetherian",
+          "def-noetherian-ring",
+          "def-noetherian-module",
+          "def-restriction-and-extension-of-scalars",
+          "def-polynomial-ring-over-a-commutative-ring",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-fi-category-and-fi-module"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $k$ be a commutative Noetherian ring containing $\\mathbb Q$\n([[def-noetherian-ring]], [[def-restriction-and-extension-of-scalars]]), and\nlet $V$ be a finitely generated FI-module over $k$\n([[def-finite-generation-and-generation-degree-of-an-fi-module]],\n[[def-fi-category-and-fi-module]]). Then every sub-FI-module\n$W\\subseteq V$ is again finitely generated: the category of FI-modules over\n$k$ is Noetherian, in the sense that every subobject of a finitely generated\nobject is finitely generated. The hypothesis that $k$ contains $\\mathbb Q$ is\nused only through the exactness of the functors $\\Phi_a$ and through\nrestriction of scalars to $\\mathbb Q$\n([[def-fi-coinvariant-functors-and-transition-maps]]). No choice principle is\nused.",
+        "strategy": "Let $V$ be generated in degree $\\le a$ and let $W\\subseteq V$. First, $V_n$ is a finitely generated $k$-module for every $n$ (presentation lemma (c)), and the graded $k[T]$-module $\\Phi_a(V)$ is finitely generated: $T$ is surjective in degrees $\\ge a$ by the generation-degree bound (b), so $\\Phi_a(V)$ is generated over $k[T]$ by the finitely many components $\\Phi_a(V)_0,\\dots,\\Phi_a(V)_a$, each a finitely generated $k$-module as a quotient of $V_{a+i}$. Since $k[T]$ is Noetherian ([[thm-hilbert-basis-theorem]], [[def-polynomial-ring-over-a-commutative-ring]]) and a finitely generated module over a Noetherian ring is Noetherian ([[thm-finitely-generated-modules-over-noetherian-rings-are-noetherian]], [[def-noetherian-module]]), the submodule $\\Phi_a(W)\\subseteq\\Phi_a(V)$ is a finitely generated graded $k[T]$-module; take a finite generating set and replace each generator by its finitely many homogeneous components (the submodule is graded), obtaining homogeneous generators $x_1,\\dots,x_r$, lift each $x_i\\in\\Phi_a(W)_{n_i}$ to $w_i\\in W_{a+n_i}$, and let $\\widetilde W\\subseteq W$ be generated by the $w_i$ together with finite generating sets of $W_0,\\dots,W_{a-1}$. Then $\\Phi_a(\\widetilde W)=\\Phi_a(W)$, and exactness of $\\Phi_a$ over $\\mathbb Q$-algebras gives $\\Phi_a(W/\\widetilde W)=0$. It remains to show $U:=W/\\widetilde W=0$. Restrict scalars from k to Q, as in the complete proof of CEF Theorem 1.3; no map k -> C is used. The evaluation surjection direct_sum_{m<=a} M_k(V_m) -> V stays surjective on restriction, and M_k(V_m)_Q = M_Q((V_m)_Q): free k-modules on finite injection sets become the same finite direct sums of rational coefficient spaces, and the S_m-balanced relations agree because the actions are k-linear. Thus V_Q is generated in degree <=a over Q, although its values can be infinite-dimensional. The generation-degree/weight supplier now proves this case through finite orbit-stable subspaces of the coefficient modules, so weight(V_Q)<=a. U_Q is a subquotient and has the same bound. Restriction commutes with coinvariants: the k-submodule generated by hv-v is exactly its Q-linear span, since c(hv-v)=h(cv)-cv for c in k. Therefore Phi_a(U_Q)=0. For every n>=a, apply the vanishing-detection supplier to U_Q,n, with averaging over the finite group S_{n-a}. Its proof uses only a finite-dimensional cyclic submodule if U_Q,n is nonzero, not a decomposition of the whole rational space. It follows that U_Q,n=0, hence U_n=0. For n<a, the chosen finite generators of W_n already give tilde W_n=W_n. Consequently W=tilde W is finitely generated. All Noetherian-module uses and all generator/lift selections are finite; the Hilbert citation uses only its explicitly choice-free ideal implication.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Theorem 1.3 and its complete proof, printed pp. 3 and 20–21: a finitely generated FI-module over a Noetherian ring containing $\\mathbb Q$ has every sub-FI-module finitely generated; the proof goes through $\\Phi_a$, the graded $k[T]$-module, lifts of homogeneous generators, and restriction of scalars to $\\mathbb Q$"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Theorem A with the alternative proof via shift functors, printed pp. 1–2 and 12–16 (recorded as the stronger result, not used in the proof below)"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used: finitely many generators and lifts, finite-group averaging, and finite-dimensional orbit spans suffice. The Hilbert-basis supplier now explicitly uses only the choice-free finite-generation-to-Noetherian implication. Scalar restriction Q -> k is used; k need not be a field or embed into C, and no basis of an infinite-dimensional rational space is chosen."
+      },
+      {
+        "id": "def-uniform-representation-stability-for-consistent-sn-sequences",
+        "kind": "definition",
+        "title": "Uniform representation stability for consistent sequences of $S_n$-modules",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-first-row-padding-of-a-partition",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-complex-specht-modules-are-irreducible",
+          "def-polytabloid-specht-module-over-an-arbitrary-field"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $k$ be a field of characteristic $0$. A **consistent sequence** is a\nsequence $(V_n,\\varphi_n)_{n\\ge0}$ in which each $V_n$ is a finite-dimensional\nleft $kS_n$-module and each $\\varphi_n\\colon V_n\\to V_{n+1}$ is\n$S_n$-equivariant, the target being regarded as an $S_n$-module by restriction\nalong the standard inclusion $S_n\\hookrightarrow S_{n+1}$ that fixes $n$. An\nFI-module $V$ over $k$ with finite-dimensional values\n([[def-fi-category-and-fi-module]]) determines such a sequence by\n$V_n:=V([n])$ and $\\varphi_n:=f_*$ for the standard inclusions\n$f\\colon[n]\\to[n+1]$; these maps are $S_n$-equivariant by functoriality and the\nconjugation action, since $f\\circ\\sigma=\\Phi_f(\\sigma)\\circ f$ with\n$\\Phi_f(\\sigma)$ the extension of $\\sigma$ by the fixed point $n$.\n\nThe sequence is **uniformly representation stable with stable range $n\\ge N$**\nwhen all three of the following hold.\n\n1. **(I) Injectivity.** The map $\\varphi_n\\colon V_n\\to V_{n+1}$ is injective for\n   every $n\\ge N$.\n2. **(II) Surjectivity.** The $S_{n+1}$-span of the image $\\varphi_n(V_n)$ is\n   all of $V_{n+1}$ for every $n\\ge N$.\n3. **(III) Multiplicities.** For each partition $\\lambda$ and each $n$ with\n   $n\\ge|\\lambda|+\\lambda_1$, let $V(\\lambda)_n$ be the irreducible $kS_n$-module\n   indexed by the first-row padding $\\lambda[n]=(n-|\\lambda|,\\lambda_1,\\lambda_2,\\dots)$\n   ([[def-first-row-padding-of-a-partition]]), namely the scalar extension\n   $k\\otimes_{\\mathbb Q}S^{\\lambda[n]}_{\\mathbb Q}$ of the rational Specht model,\n   which is the unique irreducible $kS_n$-module with that label\n   ([[lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields]];\n   over $\\mathbb C$ this is the published complex Specht classification\n   [[thm-complex-specht-modules-are-irreducible]]). Decompose\n   $V_n\\cong\\bigoplus_{\\lambda}c_{\\lambda,n}V(\\lambda)_n$ with multiplicities\n   $c_{\\lambda,n}\\ge0$, the sum over those $\\lambda$ with\n   $n\\ge|\\lambda|+\\lambda_1$. Then for every fixed $\\lambda$ the multiplicity\n   $c_{\\lambda,n}$ is independent of $n$ for all $n\\ge N$, with\n   $c_{\\lambda,n}:=0$ when $n<|\\lambda|+\\lambda_1$ so that undefined\n   padded modules do not leave undefined multiplicities.\n\nThe sequence is **uniformly representation stable** when it is so for some\n$N\\ge0$. All three conditions are part of the definition, and (II) is not a\nconsequence of (I) and (III): take $V_n=k^{[n]}$ with its permutation action and, for $n\\ge1$, define\n$\\varphi_n(e_i)=e_i-e_n$; let $\\varphi_0$ be the zero map from $V_0=0$.\nThese maps are $S_n$-equivariant and injective, since the first $n$\ncoordinates of $\\sum_i a_i(e_i-e_n)$ are the $a_i$. For $n\\ge2$, $V_n$\nis the direct sum of the trivial line and the irreducible sum-zero space\n$S^{(n-1,1)}_k$, so its padded multiplicities are constant. To see the latter\nidentification directly, the $(n-1,1)$-tabloid module is the permutation\nmodule on the singleton second row, and its polytabloids are the differences\n$e_i-e_j$, which span the sum-zero space. Every image of $\\varphi_n$ lies\nin the sum-zero submodule of $V_{n+1}$, so its $S_{n+1}$-span misses the\ntrivial quotient. Thus (I) and (III) hold for $n\\ge2$, while (II) fails. No choice principle is used.",
+        "strategy": "Read entire Definition and five suppliers. Rational Specht classification validates padded decomposition, with unavailable labels assigned multiplicity zero. In the witness e_i maps to e_i-e_n, the first n coordinates prove injectivity and S_n fixes the new coordinate. For n>=2 the permutation module is trivial plus the polytabloid span of differences; all images have zero coordinate sum, so their S_(n+1)-span misses the trivial quotient. Thus I and III do not imply II. n=0 and n=1 maps remain defined. Accept the repaired witness and zero multiplicity convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Remark 3.3.1 and Definition 3.3.2, printed pp. 21–22: consistent sequences, the three conditions (injectivity, surjectivity of the $S_{n+1}$-span, multiplicity stability), and the warning that not every consistent sequence comes from an FI-module"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "§1, printed p. 1: representation stability as the characteristic-zero motivating notion"
+            }
+          ]
+        },
+        "axiom_use": "None: finite-dimensional representation theory and the padding convention."
+      },
+      {
+        "id": "prop-weight-and-stability-degree-give-uniform-representation-stability-range",
+        "kind": "proposition",
+        "title": "Weight and stability degree give a uniform representation-stability range",
+        "deps": [
+          "def-uniform-representation-stability-for-consistent-sn-sequences",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight",
+          "prop-specht-constituents-of-an-fi-module-have-bounded-first-row",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-coinvariants-functor-of-a-group-module"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $V$ be an FI-module over $k$\nwith finite-dimensional values, weight $d:=\\operatorname{weight}(V)<\\infty$ and\nstability degree $s:=\\operatorname{stab-deg}(V)<\\infty$\n([[def-weight-of-a-characteristic-zero-fi-module]],\n[[def-injectivity-surjectivity-and-stability-degree-of-an-fi-module]]). Let\n$(V_n,\\varphi_n)$ be the consistent sequence determined by $V$\n([[def-uniform-representation-stability-for-consistent-sn-sequences]]). Then\n$(V_n,\\varphi_n)$ is uniformly representation stable with stable range\n$n\\ge d+s$: the maps $\\varphi_n$ are injective for all $n\\ge d+s$, the\n$S_{n+1}$-span of $\\varphi_n(V_n)$ is all of $V_{n+1}$ for all $n\\ge d+s$, and\nfor every partition $\\lambda$ the multiplicity $c_{\\lambda,n}$ of $V(\\lambda)_n$\nin $V_n$ is independent of $n$ for all $n\\ge d+s$. No choice principle is\nused.",
+        "strategy": "Set $K_n=\\ker\\varphi_n\\subseteq V_n$ and let $C_{n+1}$ be the cokernel of the $S_{n+1}$-map $\\operatorname{Ind}^{S_{n+1}}_{S_n}\\varphi_n\\colon\\operatorname{Ind}^{S_{n+1}}_{S_n}V_n\\to V_{n+1}$; conditions (I) and (II) are exactly $K_n=0$ and $C_{n+1}=0$. Since $K_n$ is a subrepresentation of $V_n$ and $C_{n+1}$ a quotient of $V_{n+1}$, the coinvariant lemma (iv) reduces both to the vanishing of $(K_n)_{S_{n-d}}$ and $(C_{n+1})_{S_{n+1-d}}$ for $n\\ge d$. Exactness of $S_a$-coinvariants in characteristic $0$ identifies $(K_n)_{S_{n-d}}$ with the kernel of $(\\varphi_n)_{S_{n-d}}$ and $(C_{n+1})_{S_{n+1-d}}$ with the cokernel of $(\\operatorname{Ind}\\varphi_n)_{S_{n+1-d}}$, and the transition map $T\\colon\\Phi_d(V)_{n-d}\\to\\Phi_d(V)_{n+1-d}$ factors through both, so it is the composite in the two ways displayed in the source. For $n-d\\ge s$, $T$ is an isomorphism, so $(\\varphi_n)_{S_{n-d}}$ is injective and $(\\operatorname{Ind}\\varphi_n)_{S_{n+1-d}}$ is surjective; hence $K_n=0$ and $C_{n+1}=0$ for $n\\ge s+d$. For (III), fix $m\\le d$ and induct on $m=|\\lambda|$: in the range $n\\ge s+d$, decompose $(V_n)_{S_{n-m}}$ into constituents and use the coinvariant lemma (i) to see that only $|\\lambda|\\le m$ contribute, (iii) to see that the contributions of $|\\lambda|<m$ are independent of $n$, and the induction hypothesis to see that their multiplicities are constant; the remaining summand is a direct sum of $\\lambda$'s of size $m$ with multiplicity $c_{\\lambda,n}$ by (ii), so constancy of the total forces constancy of each $c_{\\lambda,n}$. Here the range hypothesis enters twice: $\\lambda_1\\le s$ for every occurring constituent by the first-row bound, so $n\\ge s+d\\ge\\lambda_1+m$ puts all constituents in the range where the coinvariant lemma applies, and the isomorphism statement of the stability degree applies at $n-m\\ge s$.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Proposition 3.3.3 with its complete proof, printed pp. 21–22: the consistent sequence of an FI-module of weight $d$ and stability degree $s$ is uniformly representation stable with stable range $n\\ge d+s$, proved through the kernel and cokernel of $\\varphi_n$ and the two factorizations of $T$"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "§1, printed pp. 1–2: the same stability-range statement in the Noetherian-rings context"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "thm-finite-generation-is-equivalent-to-uniform-representation-stability",
+        "kind": "theorem",
+        "title": "Finite generation is equivalent to uniform representation stability",
+        "deps": [
+          "thm-fi-modules-over-a-noetherian-q-algebra-form-a-noetherian-category",
+          "def-uniform-representation-stability-for-consistent-sn-sequences",
+          "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+          "lem-generation-degree-bounds-surjectivity-degree-and-weight",
+          "prop-weight-and-stability-degree-give-uniform-representation-stability-range",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-fi-category-and-fi-module"
+        ],
+        "dependency_level": 7,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $V$ be an FI-module over $k$ with finite-dimensional values. Then $V$ is finitely generated if and only if the consistent sequence $(V_n,\\varphi_n)$ is uniformly representation stable.",
+        "strategy": "($\\Rightarrow$) If $V$ is generated in degree $\\le g$, then $\\operatorname{surj-deg}(V)\\le g$ by the generation-degree lemma (b), and the presentation lemma gives a surjection $M:=\\bigoplus_{i=0}^{g}M(i)^{\\oplus b_i}\\twoheadrightarrow V$ with kernel $K$; by the Noetherian theorem $K$ is finitely generated, say in degree $\\le r$. Exactness of $\\Phi_a$ over $\\mathbb Q$ writes $\\Phi_a(V)\\cong\\Phi_a(M)/\\Phi_a(K)$; the free summands have injectivity degree $0$ and $\\operatorname{surj-deg}(K)\\le r$, so $T$ is injective on $\\Phi_a(V)_n\\to\\Phi_a(V)_{n+1}$ for $n\\ge r$; hence $\\operatorname{inj-deg}(V)\\le r$, $\\operatorname{stab-deg}(V)\\le\\max(g,r)$ and the weight is finite. The preceding proposition then gives uniform representation stability in degrees $\\ge\\operatorname{stab-deg}(V)+\\operatorname{weight}(V)$. ($\\Leftarrow$) If the sequence is uniformly representation stable for $n\\ge N$, then for $n\\ge N$ the $S_{n+1}$-span of $\\varphi_n(V_n)$ is all of $V_{n+1}$, so the images of the finitely many $F I$-maps $V_n\\to V_{n+1}$ span $V_{n+1}$; by induction $V=\\operatorname{span}(V_{\\le N})$, and since each $V_{\\le N}$ is finite-dimensional by hypothesis, $V$ is finitely generated.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Theorem 1.13 and its complete proof, printed pp. 21–23: finite generation is equivalent to uniform representation stability together with finite-dimensional values"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Remark 1.2, printed p. 3: the same equivalence in the Noetherian-rings context"
+            }
+          ]
+        },
+        "axiom_use": "None: the Noetherian input is the local characteristic-zero theorem, whose imported Hilbert-basis route is discussed in its own contract."
+      },
+      {
+        "id": "def-character-polynomial-in-cycle-counts",
+        "kind": "definition",
+        "title": "Character polynomials in the cycle counts $X_i$",
+        "deps": [
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "def-class-function-and-the-space-of-complex-class-functions",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "def-finite-symmetric-group-and-permutation-notation",
+          "def-monomials-on-an-index-set",
+          "thm-universal-property-of-a-polynomial-ring-on-a-family",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "def-polynomial-evaluation-and-root",
+          "def-natural-numbers"
+        ],
+        "dependency_level": 0,
+        "statement": "For $i\\ge1$ and $n\\ge0$ let $X_i\\colon S_n\\to\\mathbb N$ be the class function sending a permutation to the number of its $i$-cycles ([[def-permutation-support-disjoint-cycles-and-cycle-type]]); thus $X_1(\\sigma)$ is the number of fixed points. A **character polynomial** is a polynomial $P\\in\\mathbb Q[X_1,X_2,\\dots]$ in finitely many of the variables $X_i$, its **weighted degree** being defined by $\\deg X_i:=i$ ([[def-polynomial-ring-over-a-commutative-ring]]). Since the class functions on $S_n$ form a $\\mathbb Q$-algebra under pointwise multiplication ([[def-class-function-and-the-space-of-complex-class-functions]]), every character polynomial $P$ defines a class function $P\\colon S_n\\to\\mathbb Q$ for every $n\\ge0$. The expression is not unique on a single $S_n$, since $X_i$ vanishes identically for $i>n$; it is unique in the limit: if $P$ and $Q$ agree as functions on $S_n$ for infinitely many $n$, then $P=Q$. A sequence $(\\chi_n)$ of class functions with $\\chi_n$ a class function on $S_n$ is **eventually polynomial** when there are $N$ and a character polynomial $P$ with $\\chi_n(\\sigma)=P(\\sigma)$ for all $n\\ge N$ and all $\\sigma\\in S_n$.",
+        "strategy": "Define the $X_i$ as class functions (they are constant on conjugacy classes because cycle type is a conjugacy invariant), define evaluation and weighted degree, and prove uniqueness by evaluating at permutations that fix all but a fixed finite set: for a monomial of top weighted degree $\\le M$, the substitutions $X_1\\mapsto n-c$, $X_r\\mapsto X_r(\\rho)$ for $r\\ge2$ produce a polynomial in $n$; vanishing for infinitely many $n$ forces the coefficient of the top $X_1$-power to vanish on all fixed-point-free cycle types, and descending on the $X_1$-degree gives $P=0$. No representation theory is used in this definition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The paragraph “Character polynomials” and Definition 1.4 (Eventually polynomial characters), printed pp. 2–3: $X_i(\\sigma)$ is the number of $i$-cycles, character polynomials are the polynomials in the $X_i$, the expression on one $S_n$ is not unique but agreement on infinitely many $n$ forces equality, and $\\deg X_i:=i$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example I.7.14, printed pp. 122–124: the classical character-polynomial description of padded Specht characters, with the same cycle-count and uniqueness conventions (the study of character polynomials goes back to Frobenius)"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "lem-padded-irreducible-characters-have-character-polynomials",
+        "kind": "lemma",
+        "title": "Padded irreducible characters are eventually given by character polynomials",
+        "deps": [
+          "def-character-polynomial-in-cycle-counts",
+          "cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients",
+          "def-hall-inner-product-on-symmetric-functions",
+          "def-stable-schur-function-by-bialternants",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-first-row-padding-of-a-partition",
+          "thm-complex-specht-modules-are-irreducible",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "lem-branching-rule-for-specht-induction-and-coinvariants",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_level": 2,
+        "statement": "For every partition $\\lambda$ with $|\\lambda|=m$ there is a character polynomial\n$P_\\lambda\\in\\mathbb Q[X_1,X_2,\\dots]$ of weighted degree at most $m$\n([[def-character-polynomial-in-cycle-counts]]) such that for every\n$n\\ge m+\\lambda_1$ and every $\\sigma\\in S_n$\n\n$$\\chi^{\\lambda[n]}(\\sigma)=P_\\lambda\\bigl(X_1(\\sigma),X_2(\\sigma),\\dots\\bigr),$$\n\nwhere $\\lambda[n]=(n-m,\\lambda_1,\\lambda_2,\\dots)$ is the first-row padding\n([[def-first-row-padding-of-a-partition]]) and $\\chi^{\\lambda[n]}$ is the\ncharacter of the irreducible Specht module $S^{\\lambda[n]}$\n([[thm-complex-specht-modules-are-irreducible]]). No choice principle is used.",
+        "strategy": "Read five proof steps, eleven cited suppliers and complete local derivation. B_lambda counts fixed m-subsets by selected cycles and their Specht traces, with rational binomial coefficients and weighted degree <=m. Horizontal strips interlace, giving a fixed finite tail set E_lambda for n>=m+lambda_1. Its only size-m tail is lambda; every other tail has smaller size and its padding threshold is already met. Induction subtracts their polynomials; m=0 gives 1 and uniqueness follows on infinitely many ranks. Accept the complete independent replacement of the unsupported identity; no integral ordinary-coefficient claim or AC remains.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text, 486 pp.)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, formula (7.8) (Frobenius formula) and Example 14, printed pp. 122–124: $\\chi^{(N,\\lambda)}(w)$ is the coefficient of $x_0^N$ in $\\Delta(x_0,\\dots,x_n)\\prod_rp_r(x_0,\\dots,x_n)^{a_r(w)}$; the $x_0=1$ homogeneity reduction gives $\\chi^{(N,\\lambda)}=\\langle E\\cdot P,s_\\lambda\\rangle$ with $E=\\prod_i(1-x_i)$ and $P=\\prod_r(1+p_r)^{a_r(w)}$, valid as functions on $S_{N+n}$ for all $N\\ge\\lambda_1$"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The reference to [Mac, Example I.7.14] as the classical input of Theorem 3.3.4, printed p. 23"
+            }
+          ]
+        },
+        "axiom_use": "None: finite coefficient extraction in the graded symmetric-function ring."
+      },
+      {
+        "id": "thm-finitely-generated-fi-modules-have-eventual-character-polynomials",
+        "kind": "theorem",
+        "title": "Finitely generated FI-modules have eventual character polynomials",
+        "deps": [
+          "thm-finite-generation-is-equivalent-to-uniform-representation-stability",
+          "def-character-polynomial-in-cycle-counts",
+          "lem-padded-irreducible-characters-have-character-polynomials",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "prop-specht-constituents-of-an-fi-module-have-bounded-first-row",
+          "def-first-row-padding-of-a-partition",
+          "prop-weight-and-stability-degree-give-uniform-representation-stability-range",
+          "lem-generation-degree-bounds-surjectivity-degree-and-weight",
+          "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+          "thm-fi-modules-over-a-noetherian-q-algebra-form-a-noetherian-category",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "def-trace-of-a-square-matrix",
+          "def-polytabloid-specht-module-over-an-arbitrary-field",
+          "def-fi-category-and-fi-module",
+          "def-finite-generation-and-generation-degree-of-an-fi-module"
+        ],
+        "dependency_level": 8,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $V$ be a finitely generated\nFI-module over $k$ with finite-dimensional values\n([[def-fi-category-and-fi-module]]). Put\n$d:=\\operatorname{weight}(V)$ and $s:=\\operatorname{stab-deg}(V)$; both are\nfinite because $V$ is finitely generated\n([[def-weight-of-a-characteristic-zero-fi-module]],\n[[def-injectivity-surjectivity-and-stability-degree-of-an-fi-module]]). Then\nthere is a unique character polynomial $P_V\\in\\mathbb Q[X_1,X_2,\\dots]$ of\nweighted degree at most $d$ such that\n\n$$\\chi_{V_n}(\\sigma)=P_V\\bigl(X_1(\\sigma),X_2(\\sigma),\\dots\\bigr)$$\n\nfor every $n\\ge s+d$ and every $\\sigma\\in S_n$, where\n$\\chi_{V_n}(\\sigma):=\\operatorname{tr}(\\sigma;V_n)$ is the character of the\n$kS_n$-module $V_n$ ([[def-character-polynomial-in-cycle-counts]],\n[[def-trace-of-a-square-matrix]]). No choice principle is used.",
+        "strategy": "By the stability-range proposition applied to $V$, there are constants $c_\\lambda\\ge0$ with $V_n\\cong\\bigoplus_\\lambda c_\\lambda V(\\lambda)_n$ for all $n\\ge s+d$, the sum over the finitely many $\\lambda$ with $|\\lambda|\\le d$. For each such $\\lambda$, $\\lambda_1\\le s$ by the first-row bound, so $n\\ge s+d\\ge|\\lambda|+\\lambda_1$ and the padded character polynomial lemma gives $\\chi_{V(\\lambda)_n}=P_\\lambda$ of degree $\\le|\\lambda|$ on that range; additivity of characters gives $\\chi_{V_n}=\\sum_\\lambda c_\\lambda P_\\lambda$, a character polynomial of weighted degree at most $d$ and with rational coefficients, as a function on all $S_n$ with $n\\ge s+d$. Uniqueness: if two polynomials of weighted degree $\\le d$ agree on $S_n$ for all $n\\ge s+d$, then by the uniqueness statement of the character-polynomial definition they are equal.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Theorem 3.3.4 with its complete proof, printed pp. 23–24: for $V$ finitely generated over a field of characteristic $0$ there is a unique character polynomial of weighted degree $\\le\\operatorname{weight}(V)$ representing the characters for all $n\\ge\\operatorname{stab-deg}(V)+\\operatorname{weight}(V)$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example I.7.14, printed pp. 122–124 (existence and degree bound for each padded irreducible family)"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "prop-fi-module-realizing-one-padded-irreducible-family",
+        "kind": "proposition",
+        "title": "Each padded irreducible family is realised by a finitely generated FI-module",
+        "deps": [
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-first-row-padding-of-a-partition",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "lem-free-fi-modules-have-explicit-weight-and-stability-bounds",
+          "lem-branching-rule-for-specht-induction-and-coinvariants",
+          "lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight",
+          "thm-outer-littlewood-richardson-rule",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "cor-outer-pieri-rules-for-trivial-and-sign-factors",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "def-fi-coinvariant-functors-and-transition-maps",
+          "lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $\\lambda$ be a partition with $|\\lambda|=m$. There is an FI-module $V(\\lambda)$ over $k$ with $$V(\\lambda)_n\\cong\\begin{cases}V_{\\lambda[n]},&n\\ge m+\\lambda_1,\\ \\varnothing,&n<m+\\lambda_1.\\end{cases}$$ It is finitely generated in degree $m+\\lambda_1$, has $\\operatorname{weight}(V(\\lambda))=m$ and $\\operatorname{stab-deg}(V(\\lambda))=\\lambda_1$.",
+        "strategy": "Put m=|lambda| and d=m+lambda_1. For n>=d, horizontal Pieri in M(lambda)_n gives the multiplicity-one constituent S^{lambda[n]}; take its canonical isotypic subspace and put V(lambda)_n=0 below d. For an injection f:[p]->[n] with p>=d, f_* is S_p-equivariant and its image is fixed by permutations of the complementary n-p points, since these permutations compose with f to f itself. Hence the image is a quotient of Ind_{S_p x S_{n-p}}^{S_n}(S^{lambda[p]} x 1). Any target shape nu in both this induced representation and M(lambda)_n satisfies nu_i>=lambda[p]_i for i>=2 and nu_{i+1}<=lambda_i by the two horizontal-strip interlacing conditions. Since lambda[p]_i=lambda_{i-1} for i>=2, these force nu_{i+1}=lambda_i for all i, i.e. nu=lambda[n]. Thus f_* preserves the selected subspaces; no map from the zero rank m space is used. Free-FI injection maps are injective on the direct sums indexed by image subsets, so a nonzero V(lambda)_d maps nontrivially at every n>=d; the S_n-span is the irreducible V(lambda)_n. Hence the family is generated in degree d and has weight m. Its injectivity degree is zero by containment in M(lambda). The evaluation map M(S^{lambda[d]}) -> V(lambda) is onto, and the exact free-module bound gives surjectivity degree at most lambda_1, because the first part of lambda[d] is lambda_1. At a=m, Phi_m(V(lambda))_{lambda_1} is nonzero while the previous graded piece is zero (when lambda_1>0), so the bound is sharp. For the empty partition, d=0 and the constant family has stability degree zero. All representations and interlacing arguments are finite-dimensional over the rational model, then extended to k; no field embeds into C.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Proposition 3.4.1 with its complete proof, printed pp. 24–25: the sub-FI-module $V(\\lambda)\\subseteq M(\\lambda)$ with values $V_{\\lambda[n]}$ for $n\\ge|\\lambda|+\\lambda_1$, generated in that degree, with $\\operatorname{stab-deg}=\\lambda_1$ and $\\operatorname{weight}=|\\lambda|$; Lemma 3.1.6 (quotients and submodules do not raise the degrees)"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §5, (5.16)–(5.17), printed pp. 73–74: Pieri's rule, the horizontal-strip input used through the branching rule"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "cor-dimensions-of-finitely-generated-fi-modules-are-eventually-polynomial",
+        "kind": "corollary",
+        "title": "Dimensions of finitely generated FI-modules are eventually polynomial",
+        "deps": [
+          "thm-finitely-generated-fi-modules-have-eventual-character-polynomials",
+          "def-character-polynomial-in-cycle-counts",
+          "def-trace-of-a-square-matrix",
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module"
+        ],
+        "dependency_level": 9,
+        "statement": "Let $k$ be a field of characteristic $0$ and let $V$ be a finitely generated FI-module over $k$ with finite-dimensional values, weight $d$ and stability degree $s$, with character polynomial $P_V$ as above. Then $$\\dim_kV_n=P_V(n,0,0,\\dots)$$ for every $n\\ge s+d$; in particular $\\dim_kV_n$ is given by a polynomial in $n$ of degree at most $d$ for all sufficiently large $n$.",
+        "strategy": "Evaluate the character polynomial identity at the identity permutation: $\\chi_{V_n}(\\mathrm{id})=P_V(X_1(\\mathrm{id}),X_2(\\mathrm{id}),\\dots)=P_V(n,0,0,\\dots)$, because the identity has $n$ fixed points and no cycles of length $\\ge2$, and $\\dim_kV_n=\\chi_{V_n}(\\mathrm{id})$ for a finite-dimensional module.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Theorem 1.5 with its proof from Theorem 3.3.4, printed pp. 3–4 and 23–24: the dimensions of a finitely generated FI-module over a field of characteristic $0$ are eventually polynomial of degree at most $\\operatorname{weight}(V)$"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Theorem B, printed p. 1 (the dimension relationship in the Noetherian-rings context)"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      }
+    ]
+  },
+  {
+    "order": 1585,
+    "id": "character-polynomials-fi-modules-and-representation-stability-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Character Polynomials, FI-Modules, and Representation Stability — Examples",
+    "companion": "character-polynomials-fi-modules-and-representation-stability",
+    "requires": [
+      "character-polynomials-fi-modules-and-representation-stability"
+    ],
+    "items": [
+      {
+        "id": "ex-fi-permutation-module-has-character-x-one",
+        "kind": "example",
+        "title": "The permutation FI-module has character polynomial $X_1$",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-character-polynomial-in-cycle-counts",
+          "def-free-fi-module-generated-by-an-sm-module",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-trace-of-a-square-matrix",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ],
+        "dependency_level": 2,
+        "statement": "For every finite set $S$ let $V_S$ be the free $k$-module on $S$, and on an injection $f\\colon S\\to S'$ let $V(f)$ be the linear extension of $f$. This is the FI-module $M(1)$ ([[def-free-fi-module-generated-by-an-sm-module]]) with $V_n\\cong k^n$ the permutation representation of $S_n$; it is generated by $V_{\\{1\\}}$. Its character is the character polynomial $X_1$ of weighted degree $1$ ([[def-character-polynomial-in-cycle-counts]]): for every $n$ and every $\\sigma\\in S_n$, $\\chi_{V_n}(\\sigma)=X_1(\\sigma)$, the number of fixed points.",
+        "strategy": "Read every Verification step and six suppliers. A singleton injection labels each basis vector naturally, identifying M(1); e_0 generates all ranks, with zero at the empty set. Matrix diagonal counts fixed points and gives zero at rank zero. Integer evaluation followed by Z-to-k gives the trace in every characteristic. Accept explicit value conversion; no rational coefficient reduction or AC is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The introductory character-polynomial example, printed pp. 3–4: for the standard permutation representation of $S_n$ the character is $X_1$; Definition 2.2.3 and Example 2.2.4 for the free module $M(1)$ on a singleton"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example I.7.14, printed pp. 122–124: character polynomials are evaluated on cycle counts, so $X_1$ is the fixed-point count"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "ex-exterior-square-of-the-fi-permutation-module",
+        "kind": "example",
+        "title": "The exterior square of the permutation FI-module has character polynomial $\\binom{X_1}{2}-X_2$",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-character-polynomial-in-cycle-counts",
+          "ex-fi-permutation-module-has-character-x-one",
+          "def-kth-exterior-power-of-a-linear-map",
+          "def-kth-exterior-power-by-quotient",
+          "def-exterior-algebra-of-a-finite-free-module",
+          "lem-exterior-algebra-basis-monomials",
+          "def-permutation-support-disjoint-cycles-and-cycle-type",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $V=M(1)$ be the permutation FI-module of the previous example and define $W_S:=\\Lambda^2V_S$ with $W(f)=\\Lambda^2V(f)$; this is an FI-module, and $W_n\\cong\\Lambda^2(k^n)$ as an $S_n$-module. Its character is the character polynomial $\\binom{X_1}{2}-X_2$ of weighted degree $2$: for every $n$ and every $\\sigma\\in S_n$, $\\chi_{W_n}(\\sigma)=\\binom{X_1(\\sigma)}{2}-X_2(\\sigma)$, where $X_1(\\sigma)$ is the number of fixed points and $X_2(\\sigma)$ the number of $2$-cycles.",
+        "strategy": "Read every Verification step and nine suppliers. Exterior maps compose on pure wedges; quotient repeated-vector relations are valid in every characteristic. Ordered rank-n wedge basis diagonal coefficients are +1 at pairs of fixed points, -1 at transposed pairs and zero otherwise. Trace is binom(X_1,2)-X_2, evaluated as an integer before Z-to-k; characteristic two needs no division by 2. Empty and rank-one exterior squares and polynomials evaluate to zero. Accept the precise evaluation convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The introductory exterior-square computation, printed p. 4: for $W=\\Lambda^2V$ with $V$ the permutation representation one has $\\chi_W=\\binom{X_1}{2}-X_2$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example I.7.14, printed pp. 122–124: evaluation of character polynomials on cycle counts"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "ex-the-padded-family-for-lambda-two-one-begins-at-rank-five",
+        "kind": "example",
+        "title": "The padded family $V((2,1))$ begins at rank five, with weight three and stability degree two",
+        "deps": [
+          "prop-fi-module-realizing-one-padded-irreducible-family",
+          "def-first-row-padding-of-a-partition",
+          "def-weight-of-a-characteristic-zero-fi-module",
+          "def-injectivity-surjectivity-and-stability-degree-of-an-fi-module",
+          "lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $\\lambda=(2,1)$, so $m:=|\\lambda|=3$ and $\\lambda_1=2$, and let\n$\\lambda[n]$ be the first-row padding\n([[def-first-row-padding-of-a-partition]]). Then\n$\\lambda[n]=(n-3,2,1)$, and this is a partition exactly for\n\n$$n\\ge5=|\\lambda|+\\lambda_1:$$\n\nfor $n=3$ the sequence $(0,2,1)$ is not weakly decreasing, for $n=4$ the\nsequence $(1,2,1)$ still is not, and for $n\\ge5$ the first entry $n-3$ is at\nleast $\\lambda_1=2$, so the sequence is a partition of $n$. The padded family\ntherefore begins at rank five, two ranks later than $|\\lambda|=3$.\n\nAccordingly, for a field $k$ of characteristic $0$, the FI-module\n$V((2,1))$ of\n[[prop-fi-module-realizing-one-padded-irreducible-family]] has values\n\n$$V((2,1))_n\\cong V_{(n-3,2,1)}\\ (n\\ge5),\\qquad V((2,1))_n=0\\ (n<5),$$\n\nis generated in degree exactly $5$, and has\n$\\operatorname{weight}(V((2,1)))=3$ and\n$\\operatorname{inj-deg}(V((2,1)))=0$,\n$\\operatorname{surj-deg}(V((2,1)))=\\operatorname{stab-deg}(V((2,1)))=2$\n([[def-weight-of-a-characteristic-zero-fi-module]],\n[[def-injectivity-surjectivity-and-stability-degree-of-an-fi-module]]). For\ninstance $V((2,1))_5\\cong V_{(2,2,1)}$, $V((2,1))_6\\cong V_{(3,2,1)}$ and so\non: the first row grows while the second row stays at $2$. No choice principle\nis used.",
+        "strategy": "Check the padding threshold from the definition: $\\lambda[n]$ is a partition iff $n-|\\lambda|\\ge\\lambda_1$, i.e. $n\\ge|\\lambda|+\\lambda_1=5$; for $n=3,4$ the first part is smaller than the second, and for $n\\ge5$ the sequence is weakly decreasing. Then apply the realization proposition, which gives generation in degree $5$, weight $|\\lambda|=3$ and stability degree $\\lambda_1=2$; the two divergences from the padding threshold $n=|\\lambda|=3$ are exactly the point of the example.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "Definition 2.2.5 and Proposition 3.4.1, printed pp. 13 and 24–25: the padded family $V(\\lambda)_n=V_{\\lambda[n]}$ and the remark that for $\\lambda=(2,1)$ it begins at $n=5$"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford Mathematical Monographs, 1995 (author-hosted full text)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf",
+              "locator": "Chapter I §7, Example I.7.14, printed pp. 122–124 (the padding convention $(N,\\lambda_1,\\lambda_2,\\dots)$ with $N\\ge\\lambda_1$)"
+            }
+          ]
+        },
+        "axiom_use": "None."
+      },
+      {
+        "id": "cex-pointwise-finite-dimensionality-does-not-imply-fi-finite-generation",
+        "kind": "counterexample",
+        "title": "A pointwise one-dimensional FI-module that is not finitely generated",
+        "deps": [
+          "def-fi-category-and-fi-module",
+          "def-finite-generation-and-generation-degree-of-an-fi-module",
+          "def-injection-surjection-bijection",
+          "def-finite-symmetric-group-and-permutation-notation"
+        ],
+        "dependency_level": 2,
+        "statement": "**Refuted claim:** an FI-module over a field whose values $V_S$ are\nfinite-dimensional for every finite set $S$ is finitely generated.\n\nThe witness is built below: over a field $k$, take $V_S=k\\,e_S$\none-dimensional for every finite set $S$, with bijections acting as the\nidentity identification of the lines and non-bijections acting as $0$. Then\n$\\dim_kV_S=1$ for all $S$, but no finite set of elements generates $V$\n([[def-finite-generation-and-generation-degree-of-an-fi-module]]).",
+        "strategy": "Functoriality: composites of bijections are bijections and give the identity on $k e_S$, and if $f\\circ g$ is a bijection then both $f$ and $g$ are bijections; so if either of $f,g$ fails to be a bijection, the composite $V(f)V(g)$ and $V(f\\circ g)$ are both $0$. Non-finite-generation: given finitely many generating elements, choose $M$ at least as large as the sizes of the finite sets on which they live; every generator lies in some $V_S$ with $|S|\\le M$, and every injection from such an $S$ into a set $T$ with $|T|>M$ is a non-bijection, so its image is $0$; hence the generated sub-FI-module is contained in $\\bigoplus_{|T|\\le M}V_T$ and misses $e_T$ for $|T|=M+1$. The pointwise spaces are one-dimensional, so pointwise finite generation (even finite-dimensionality) does not imply finite generation.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, “FI-modules and stability for representations of symmetric groups”, arXiv:1204.4533v4 (2014); published in Duke Math. J. 164 (2015) 1833–1910",
+              "url": "https://arxiv.org/pdf/1204.4533",
+              "locator": "The introductory remark that finite generation is a global condition and the failure examples of §2.3, printed pp. 3 and 14–15: pointwise data does not control generation"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg, Benson Farb and Rohit Nagpal, “FI-modules over Noetherian rings”, Geom. Topol. 18 (2014) 2951–2984; author-hosted full text",
+              "url": "https://www.math.uchicago.edu/~farb/papers/FImodNoetherian.pdf",
+              "locator": "Definition 2.1 and §2.1, printed pp. 1–2 and 9: the same global notion of generation, by a set contained in no proper sub-FI-module"
+            }
+          ],
+          "scraped": []
+        },
+        "axiom_use": "None: the functor check and the finite set of generators are explicit.",
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

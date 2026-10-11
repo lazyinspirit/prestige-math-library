@@ -1,0 +1,83 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {itemHashGuard,itemHashJudge} from '../../../../tools/item-hash.mjs';
+import {activeOwnershipRows} from '../../../../tools/defect-ledger-ownership.mjs';
+
+const run='frontier-44-special-representation-examples-28-six-step';
+const dir='research/'+run+'-owner-escalation-repairs/resume-20261011/quasi-r-finalize';
+const rootDir='research/'+run+'-owner-escalation-repairs/resume-20261011/root-application';
+const json=p=>JSON.parse(readFileSync(p,'utf8'));
+const sha=s=>createHash('sha256').update(s).digest('hex');
+const canonical=x=>Array.isArray(x)?x.map(canonical):x&&typeof x==='object'?Object.fromEntries(Object.keys(x).sort().map(k=>[k,canonical(x[k])])):x;
+const hash=x=>sha(JSON.stringify(canonical(x))??'undefined');
+const save=(name,data)=>writeFileSync(dir+'/'+name,JSON.stringify(data,null,2)+'\n');
+const originalIds=['lem-quasi-r-divided-power-integrality-on-based-lattices','thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules'];
+const newIds=['lem-periodic-cyclotomic-based-sl-two-tensor-corrections-escape-every-finite-cut','cex-integrable-based-sl-two-tensor-triples-need-not-be-balanced'];
+const metadataReceiptPath=rootDir+'/final-quasi-metadata-receipt.json';
+const metadataReceipt=json(metadataReceiptPath);
+if(metadataReceipt.run!==run||metadataReceipt.item_count!==901||metadataReceipt.native_coverage_added!==false)throw Error('Final metadata receipt guard');
+for(const [path,row] of Object.entries(metadataReceipt.changes))if(sha(readFileSync(path))!==row.after)throw Error('Integrated metadata changed: '+path);
+const manifestPath='research/'+run+'-batch-8.pages.json';
+const contractPath='research/'+run+'-batch-8.proof-contracts.json';
+const pages=json(manifestPath),contracts=json(contractPath).contracts;
+const inventory=new Map();
+for(const page of pages)for(const entry of page.items??[])if(typeof entry==='object')inventory.set(entry.id,{id:entry.id,page:page.id,batch:'8',manifest_entry:canonical({...entry,__step4_page_id:String(page.id)})});
+const carriers=id=>{
+ const row=inventory.get(id),text=readFileSync('items/'+id+'.md','utf8');
+ if(!row||!contracts[id])throw Error('Missing integrated item/contract: '+id);
+ const carrier={item_sha256:sha(text),contract_sha256:hash(contracts[id]),manifest_sha256:hash(row.manifest_entry)};
+ return {guard_sha256:itemHashGuard(text),judge_sha256:itemHashJudge(text),item_file_sha256:carrier.item_sha256,manifest_sha256:carrier.manifest_sha256,contract_sha256:carrier.contract_sha256,step3_subject_sha256:hash(carrier)};
+};
+const baselinePath='research/'+run+'-step3-auditor-baseline.json';
+const baseline=json(baselinePath);
+if(baseline.version!==1||baseline.run!==run||baseline.step!==3||baseline.policy!=='auditor-created-stage-bypass-v1')throw Error('Baseline policy');
+const origins=[];
+for(let i=0;i<newIds.length;i++){
+ const id=newIds[i],row=inventory.get(id);
+ if(baseline.items.some(r=>r.id===id)||baseline.existing_item_files.includes(id))throw Error('New origin exclusion failed: '+id);
+ const sources=['assignment','escalation','authorship'].map(role=>{const path=dir+'/creation-'+role+'.json';return {role,path,sha256:sha(readFileSync(path))};});
+ const receipt={version:1,policy:'owner-spawned-step3-creation-v1',evidence_class:'owner-spawned-creation',run,step:3,id,owner:true,owner_identity:'/root',author:{identity:'/root/resume_quasi_r',timeline:{mode:'unknown',after_baseline:true,reason:'Original construction and stream-disconnected resumptions were after the immutable Step3 baseline; trustworthy exact original author start/end timestamps are unavailable, and no chronology is inferred from filesystem mtimes'}},attested_at:new Date().toISOString(),reason:'Genuine original author /root/resume_quasi_r created this new carrier; /root/quasi_r_finalize completed and independently recalculated its retained algebra and finalized its proof under explicit owner assignment, as documented in hash-bound authorship chronology',owner_held_escalation:'touched:8:'+originalIds[i],baseline_sha256:sha(JSON.stringify(baseline)),page:row.page,batch:row.batch,carriers:carriers(id),sources};
+ for(const field of Object.values(receipt.carriers))if(!/^[a-f0-9]{64}$/.test(field))throw Error('Origin carrier shape');
+ const evidence=sources.map(r=>readFileSync(r.path,'utf8')).join('\n');
+ for(const text of [run,id,receipt.author.identity,receipt.owner_held_escalation])if(!evidence.includes(text))throw Error('Incomplete authentic creation source '+text);
+ const filename=id+'.owner-create.proposed.json';save(filename,receipt);
+ origins.push({id,evidence:dir+'/'+filename,command:'node tools/auditor-created-items.mjs owner-create --run '+run+' --step 3 --id '+id+' --evidence '+dir+'/'+filename,carriers:receipt.carriers});
+}
+save('new-origin-registration.proposed.json',{version:1,run,applied:false,schema_tool:'tools/auditor-created-items.mjs',baseline_exclusion_verified:true,authorship:'Original /root/resume_quasi_r; finalizing coauthor /root/quasi_r_finalize; exact chronology in creation-authorship.json',origins,after_recording:'Root may invoke normal certify --run '+run+' --step 3 after both immutable owner-create origins are registered; no legacy owner-create tool or fictional native author result is used'});
+
+const decisionPath='research/'+run+'-alpha-batch-8-3a-decisions.json';
+const decisions=json(decisionPath).decisions;
+const scopePath='research/'+run+'-step3-scope-8.json',scope=json(scopePath);
+const ledgerPath='research/defect-ledger.jsonl';
+const ledgerLines=readFileSync(ledgerPath,'utf8').split('\n').filter(Boolean),ledger=ledgerLines.map(JSON.parse);
+const originalDefects=[run+'-3a-batch-8-open-tensor-action',run+'-3a-batch-8-open-tensor-bar'];
+const oldRows=originalDefects.map(id=>{const list=ledger.filter(r=>r.defect_id===id);if(list.length!==1||list[0].disposition!=='open')throw Error('Immutable original ledger guard: '+id);const index=ledger.findIndex(r=>r.defect_id===id);return {path:ledgerPath,line:index+1,row:structuredClone(list[0]),raw_line:ledgerLines[index],raw_line_sha256:sha(ledgerLines[index]),canonical_row_sha256:hash(list[0])};});
+const groundingPath=dir+'/native-closure-grounding.md';
+const reason='The original arbitrary-multiplicity action-finiteness premise is physically repaired by the actual finite-type local half-quotient/orbit argument, and arbitrary finite-type integral action is retained. The distinct universally quantified supported-globalization inference is false: the actual periodic four-axiom rank-one tensor bar has normalized cut coefficients (-1)^k(2k+1)!(q^3-q) modulo q^4+1 at every odd constituent, and raw-coordinate projections commute with the full/cut bars including the deleted last shear. Hence its seed has no finite algebraic normalized fixed lift and the natural unrestricted integral balanced map is not surjective. Root accepted this concrete refutation and applied the least-destructive formal correction, retaining every supported highest/lowest/bounded and full finite-dimensional tensor claim and all49 actual consumers. No false branch was proved and no exhausted round was refunded.';
+writeFileSync(groundingPath,'# Exact final quasi-R native closure\n\n'+reason+'\n\nOnly the two original batch8 touched obligations are proposed for closure. Original observed ledger rows, reports, severity, catcher, native scopes, source acquisition history and round1/round2 receipts remain unchanged. The appended successor disposition is narrowed because the false universal globalization/balancedness assertion is corrected; all true unrestricted finite-type integral-action and supported full-tensor claims remain. The replacement native verdict is amended_repair, referring to this actual current correction, not reviewed_no_defect or a proved false claim. Marker1 records complete physical repair, not epistemic certainty, new worker review or a gate waiver.\n\nCurrent independent root mathematical acceptance and serial application are in quasi-supplier-receipt.json and final-quasi-metadata-receipt.json. All49 changed-interface consumer uses are retained as recorded in consumer-use-classification.json. The final packet binds the exact stable item, contract and manifest carriers.\n');
+const evidencePaths=[groundingPath,dir+'/consumer-use-classification.json',dir+'/definition-axiom-binding.json',dir+'/local-checks.json',dir+'/factorized-cycle.json',dir+'/creation-authorship.json',rootDir+'/quasi-supplier-receipt.json',metadataReceiptPath];
+const proofRefs=evidencePaths.map(path=>({path,sha256:sha(readFileSync(path))}));
+const newRows=oldRows.map((binding,i)=>{
+ const old=binding.row,id=old.defect_id+'-owner-narrowed-20261011';
+ if(ledger.some(r=>r.defect_id===id))throw Error('Successor already exists: '+id);
+ return {...structuredClone(old),defect_id:id,at:new Date().toISOString(),disposition:'narrowed',supersedes:[old.defect_id],correction:reason,description:'Append-only successor to the exact original native observation; false unrestricted globalization was refuted and corrected, while arbitrary finite-type finite/integral action and every supported full-tensor claim remain retained',item_sha256:carriers(originalIds[i]).guard_sha256,adjudication_ref:[{path:decisionPath,obligation:'touched:8:'+originalIds[i]}],observation_source:{defect_id:old.defect_id,ledger_path:ledgerPath,original_row_raw_sha256:binding.raw_line_sha256,original_row_canonical_sha256:binding.canonical_row_sha256,caught_at_stage:old.caught_at_stage,caught_by_role:old.caught_by_role},evidence:[...structuredClone(old.evidence??[]),...proofRefs.map(r=>({path:r.path,note:'Completed actual refutation, preserved action/construction claims, focused49 consumer uses and exact current integration'}))]};
+});
+const deltas=originalIds.map((id,i)=>{
+ const obligation='touched:8:'+id,before=decisions.find(r=>r.obligation===obligation);
+ if(!before||before.verdict!=='escalated'||before.defect_ids.length!==1||before.defect_ids[0]!==originalDefects[i])throw Error('Touched decision before guard: '+id);
+ const target={obligation,id,batch:'8',route:'touched',added:(scope.added??[]).includes(id)};
+ const h=carriers(id),carrier={item_sha256:h.item_file_sha256,contract_sha256:h.contract_sha256,manifest_sha256:h.manifest_sha256};
+ const replacement={...structuredClone(before),verdict:'amended_repair',defect_ids:[newRows[i].defect_id],repair_confidence:1,evidence:before.evidence+' Current root-accepted formal correction: '+reason,owner_resolution:'Root independently accepts the concrete rank-one refutation and the exact current least-destructive correction; false universal globalization is removed, genuine unrestricted finite-type integral action and all supported constructions retained. Original native observation/rounds/catcher are preserved; marker1 is physical completion only, not new worker coverage.',subject_sha256:hash(carrier)};
+ return {obligation,decision_file:decisionPath,before_file_sha256:sha(readFileSync(decisionPath)),before_decision_sha256:hash(before),before:structuredClone(before),replacement,current_native_carrier:carrier,frozen_target:target,frozen_target_sha256:hash(target),historical_frozen_fields_preserved:true,status:'ready-root-serial-application-after-final-metadata-drain'};
+});
+const ownerShared={version:1,run,shared_defects:newRows.map((r,i)=>({id:originalIds[i],defect_id:r.defect_id,ledger_row_sha256:hash(r),reason,current_path:'items/'+originalIds[i]+'.md',current_raw_sha256:sha(readFileSync('items/'+originalIds[i]+'.md')),evidence:proofRefs,obligations:[{obligation:deltas[i].obligation,target_sha256:deltas[i].frozen_target_sha256}]})),prior_applied_repairs:[],instruction:'Merge only these two new shared entries, preserving every unrelated existing entry'};
+const errors=[];const active=activeOwnershipRows([...ledger.filter(r=>r.run===run),...newRows],errors);
+if(errors.length||newRows.some(r=>!active.some(a=>a.defect_id===r.defect_id))||oldRows.some(r=>active.some(a=>a.defect_id===r.row.defect_id)))throw Error('Append-only ownership projection failed: '+errors.join('; '));
+const consumerReport=json(dir+'/consumer-use-classification.json');
+if(consumerReport.consumer_count!==49||consumerReport.consumer_checks.some(r=>sha(readFileSync(r.path))!==r.raw_sha256))throw Error('Focused current49 consumer guards changed');
+const guardPaths=[...evidencePaths,decisionPath,scopePath,ledgerPath,'research/'+run+'-step3-owner-repair-evidence.json',baselinePath,manifestPath,contractPath,'research/'+run+'-batch-23.proof-contracts.json',...originalIds.map(id=>'items/'+id+'.md'),...newIds.map(id=>'items/'+id+'.md'),...consumerReport.consumer_checks.map(r=>r.path)];
+const guards=Object.fromEntries([...new Set(guardPaths)].map(path=>[path,sha(readFileSync(path))]));
+const packet={version:1,run,group:'exact-two-quasi-touched-owner-refutation-correction',status:'guarded-proposal-not-applied',recorded_at:new Date().toISOString(),reviewer:'/root/quasi_r_finalize',root_mathematical_acceptance_receipt:rootDir+'/quasi-supplier-receipt.json',closure_scope:deltas.map(r=>r.obligation),input_guards:guards,immutable_original_ledger:oldRows,new_ledger_rows:newRows,guarded_decision_deltas:deltas,ownerSharedDefects:ownerShared,new_origin_registration:dir+'/new-origin-registration.proposed.json',exact_preconditions:['Root registers both genuine new-item owner-create origins from the current auditor-created-items.mjs schema before normal stage certification','Original two open observation rows remain unique and byte-identical and successor IDs absent','Append exactly these two narrowed rows, preserving original firstcatch/severity and explicit backward supersedes links','Change only these two touched decision rows; all reader/refuter/page decisions remain unchanged','Merge only these two owner shared-evidence entries and preserve unrelated native evidence','All current carrier and focused consumer input guards match; source/manifest/contract writers are drained'],physical_completion_marker_semantics:'Marker1 is complete physical correction/refutation status, not a proof of the false branch or new independent worker acceptance',validation:{ownership_errors:errors,exact_two_obligations:deltas.length===2,new_successors_active:true,originals_superseded_but_retained:true,all49_actual_consumer_hashes_current:true,new_items_absent_at_immutable_baseline:true,unrelated_native_decisions_changed:false},native_gate_attempted:false,historical_round_reset:false};
+save('native-append-only-closure-candidates.json',packet);
+save('native-append-array.json',newRows);
+console.log(JSON.stringify({native_packet:dir+'/native-append-only-closure-candidates.json',origin_registration:dir+'/new-origin-registration.proposed.json',new_rows:newRows.length,obligations:deltas.length,disposition:'narrowed',verdict:'amended_repair',baseline_exclusion_verified:true,applied:false},null,2));

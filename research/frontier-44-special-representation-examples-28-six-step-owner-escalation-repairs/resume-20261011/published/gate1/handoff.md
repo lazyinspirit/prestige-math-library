@@ -1,0 +1,9 @@
+# Gate-1 published supplier citation repairs
+
+All 30 reported stale quotes against the two repaired published suppliers are resolved in the proposed batch-1 contract. They affect 25 consumers. Batch-2 was inspected and contains no stale quotes against these sources.
+
+Each failed quote was a complete source section copied before the owner prose correction. Its normalized text matches the exact archived original Definition or Statement. The replacement is the exact complete current section; no source assertion needed by any consumer was removed. Integer recursion/inverse domains and all power values are unchanged; the weighted theorem assertion and proof remain unchanged. Consumer facts and actually cited numbered steps are captured with current source hashes in focused-consumer-use-evidence.json. Supplier-repair consumer propagation evidence remains in the parent published evidence directory.
+
+The only proposed mutations are 30 citation.quote leaves. Original source identities, section labels, use lists, supporting arguments, derivations, boundaries and every other contract field remain unchanged. A structural comparison restored the proposed quote leaves to their originals and verified exact JSON equality with each full original contract. No live source or shared contract was edited.
+
+Root should apply guarded-quote-deltas.json leaf deltas after verifying the whole-file, citation-row and supplier raw guards. The complete batch-1.proof-contracts.proposed.json is available for review but need not replace concurrent unrelated edits. Explicit validation on exactly the affected 25 items passes: zero errors, two existing shotgun-bracket warnings. The actual command/output/date are retained in validation.json. No gate was attempted by this worker and no mathematical carrier edit is proposed.

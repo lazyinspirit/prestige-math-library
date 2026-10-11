@@ -1,0 +1,586 @@
+[
+  {
+    "order": 1571,
+    "id": "cores-quotients-and-blocks-of-symmetric-groups",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Cores, Quotients, and Blocks of Symmetric Groups",
+    "companion": "cores-quotients-and-blocks-of-symmetric-groups-examples",
+    "requires": [
+      "integral-specht-modules-and-modular-simple-modules",
+      "type-a-hecke-specht-modules-and-cellular-bases",
+      "grothendieck-groups-and-graded-cartan-pairings",
+      "artinian-rings-and-length",
+      "blocks-defect-groups-and-the-brauer-homomorphism"
+    ],
+    "items": [
+      {
+        "id": "def-beta-set-and-e-runner-abacus-of-a-partition",
+        "kind": "definition",
+        "title": "Beta-sets, the shift, and the e-runner abacus of a partition",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-hook-arm-leg-and-hook-length"
+        ],
+        "statement": "Let $\\lambda\\vdash n$ be a partition with English Young diagram $[\\lambda]$, parts\n$\\lambda_1\\ge\\cdots\\ge\\lambda_m>0$ and conjugate $\\lambda'$\n([[def-partition-young-diagram-and-conjugate-partition]]). For $1\\le i\\le m$ put\n$$b_i(\\lambda):=\\lambda_i+m-i=h_{i,1}(\\lambda),$$\nthe hook length of the first node of row $i$\n([[def-hook-arm-leg-and-hook-length]]); since\n$h_{i,1}(\\lambda)=\\lambda_i+\\lambda'_1-i$ and $m=\\lambda'_1$, the two expressions\nagree. Then\n$$X_\\lambda:=\\{b_1(\\lambda)>b_2(\\lambda)>\\cdots>b_m(\\lambda)\\}$$\nis the set of **first-column hook lengths** of $\\lambda$, a finite strictly\ndecreasing set of positive integers.\n\nA **$\\beta$-set** is a finite set $X=\\{h_1>\\cdots>h_m\\}\\subseteq\\mathbb N_0$ of\nnonnegative integers, written in strictly decreasing order. For $l\\in\\mathbb N_0$\nthe **$l$-shift** of $X$ is\n$$X+l:=\\{h+l:h\\in X\\}\\cup\\{l-1,l-2,\\dots,1,0\\}$$\n(for $l=0$ this is $X$ itself, the second set being empty), and the **partition\nof $X$** is\n$$P(X):=(h_1-(m-1),\\,h_2-(m-2),\\,\\dots,\\,h_m-0),$$\nwith trailing zeros deleted; this is a weakly decreasing sequence of\nnonnegative integers ending in $h_m$, hence a partition of\n$\\sum_i h_i-m(m-1)/2$ after deleting its zeros. A $\\beta$-set **for** $\\lambda$\nis a $\\beta$-set $X$ with $P(X)=\\lambda$.\n\nLet $e\\ge2$. **James's $e$-abacus** has $e$ runners $0,1,\\dots,e-1$ drawn left to\nright, with rows labelled $a=0,1,2,\\dots$ downward; the position in row $a$ of\nrunner $i$ carries the label $ae+i$. An **$e$-abacus configuration** $A$ is a\nfinite set of **beads** placed in distinct positions of this abacus; a position\nwithout a bead is a **gap**. The configuration $A_X$ of a $\\beta$-set $X$ carries\na bead in the positions of $X$, and conversely $X_A$ is the set of position\nlabels of the beads of $A$; the two constructions are mutually inverse, so they\nbiject finite $\\beta$-sets with finite bead configurations. Finally\n$P(A):=P(X_A)$, and $A_\\lambda:=A_{X_\\lambda}$.",
+        "strategy": "The beta inverse is h_i=lambda_i+m-i with padded zeros. Strictly decreasing nonnegative labels give weakly decreasing nonnegative parts. Every representation has m>=ell(lambda) and the unique shift m-ell(lambda), and Euclidean division gives the bead inverse. Empty beta sets, zero labels, empty partition, l=0 and empty runners are valid. No AC. Read the partition/hook definitions and current beta definition; no finding and no decision owed.",
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "(5.20) and (5.21) with the following paragraph, printed pp. 52-53: the beta numbers $\\beta_i=n-i+\\nu'_i$ of a partition $\\nu$, the recovery formula $\\nu'_i=b_i-n+i$, and the permutation sign attached to a rearranged sequence"
+            },
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 54-55: the definition of a beta-set, the shift $X+l$, the partition $P(X)$, Lemma 4.2, and the definition of James's e-abacus with the bijection between beta-sets and bead configurations"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hooks-are-bead-gap-pairs-on-an-abacus",
+        "kind": "lemma",
+        "title": "Hooks are bead-gap pairs on the abacus",
+        "deps": [
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "def-hook-arm-leg-and-hook-length",
+          "def-removable-border-strip-and-height",
+          "lem-hooks-correspond-to-removable-border-strips"
+        ],
+        "statement": "Let $e\\ge2$, let $\\lambda\\vdash n$ and let $X=\\{h_1>h_2>\\cdots>h_m\\}$ be a\n$\\beta$-set for $\\lambda$, so that $P(X)=\\lambda$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]). Write $H_i(\\lambda)$ for\nthe set of hook lengths in row $i$ of $[\\lambda]$: thus $h\\in H_i(\\lambda)$\nmeans $h=h_{i,j}(\\lambda)$ for some node $(i,j)\\in[\\lambda]$, and\n$H_i(\\lambda)=\\emptyset$ for $i>\\ell(\\lambda)$\n([[def-hook-arm-leg-and-hook-length]]).\n\n(i) For every $h\\ge0$ and every $i\\in[m]$, $h\\in H_i(\\lambda)$ if and only if\n$h\\le h_i$ and $h_i-h\\notin X$. Equivalently, the hooks of $\\lambda$\ncorrespond bijectively to the **bead-gap pairs** $(b,g)$ with $b\\in X$,\n$g\\notin X$ and $0\\le g<b$; the hook $H_{i,j}(\\lambda)$ corresponds to\n$$(b,g)=\\bigl(h_i,\\;h_i-h_{i,j}(\\lambda)\\bigr),$$\nand then $|H_{i,j}(\\lambda)|=b-g$.\n\n(ii) Fix a node $(i,j)\\in[\\lambda]$ and let $(b,g)$ be its bead-gap pair as in\n(i). Then\n$$X':=(X\\setminus\\{b\\})\\cup\\{g\\}$$\nis again a $\\beta$-set, now for the partition $\\lambda\\setminus R_{i,j}$\nobtained from $\\lambda$ by removing the removable border strip $R_{i,j}$ that\ncorresponds to the hook of $(i,j)$, of size $h_{i,j}(\\lambda)$ and height\n$\\ell(i,j)=\\lambda'_j-i$\n([[def-removable-border-strip-and-height]],\n[[lem-hooks-correspond-to-removable-border-strips]]); in terms of parts, with\n$b_0:=\\ell(i,j)=\\lambda'_j-i$,\n$$\\lambda\\setminus R_{i,j}=\\bigl(\\lambda_1,\\dots,\\lambda_{i-1},\\,\\lambda_{i+1}-1,\\dots,\\lambda_{i+b_0}-1,\\,j-1,\\,\\lambda_{i+b_0+1},\\dots\\bigr),$$\nso that $|\\lambda\\setminus R_{i,j}|=n-h_{i,j}(\\lambda)$. Finally $X'$ is\nobtained from the configuration $A_X$ by moving the bead from position $b$ to\nthe gap $g$.\n\n(iii) In particular $e\\mid h_{i,j}(\\lambda)$ if and only if $b\\equiv g\\pmod e$,\nthat is, if and only if the bead $b$ and the gap $g$ lie on the same runner of\nthe $e$-abacus; then $g=b-e\\cdot(h_{i,j}(\\lambda)/e)$ and the move in (ii) is\nthe slide of the bead $b$ up $h_{i,j}(\\lambda)/e$ rows on its own runner. A\nhook of length $e$ in row $i$ of $\\lambda$ exists if and only if $h_i\\ge e$\nand $h_i-e\\notin X$; Thus $\\lambda$ has a hook of length $e$ if and only if some bead of $X$ has a gap\nin the position $e$ labels above it on its own runner.\n\nNo choice principle is used.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** An integer $e\\ge2$, a partition $\\lambda\\vdash n$ with $t:=\\ell(\\lambda)$ parts, and a $\\beta$-set $X=\\{h_1>\\cdots>h_m\\}$ for $\\lambda$, so that $P(X)=\\lambda$ ([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F1] Hook lengths: $h_{i,j}(\\lambda)=\\lambda_i-j+\\lambda'_j-i+1$ for $(i,j)\\in[\\lambda]$, and for fixed $i$ the map $j\\mapsto h_{i,j}(\\lambda)$ is strictly decreasing on $1\\le j\\le\\lambda_i$, because $h_{i,j}(\\lambda)-h_{i,j+1}(\\lambda)=1+\\lambda'_j-\\lambda'_{j+1}\\ge1$; hence the hook lengths in a fixed row are pairwise distinct and $h_{i,j}(\\lambda)\\ge1$ ([[def-hook-arm-leg-and-hook-length]]).\n\n[F2] For a $\\beta$-set $Y=\\{y_1>\\cdots>y_r\\}$ one has $P(Y)_j=y_j-(r-j)$ for $1\\le j\\le r$, after which trailing zeros are deleted: indeed there are $y_j$ positions $0,1,\\dots,y_j-1$ below the bead $y_j$, of which exactly $r-j$ are occupied by the beads $y_{j+1},\\dots,y_r$, so $y_j-(r-j)$ of them are gaps, and the definition of $P$ takes exactly this difference ([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F3] The $\\beta$-sets of $\\lambda$ are exactly the sets $X_\\lambda+l$, $l\\in\\mathbb N_0$, where $X_\\lambda=\\{b_1(\\lambda)>\\cdots>b_t(\\lambda)\\}$ with $b_i(\\lambda)=h_{i,1}(\\lambda)=\\lambda_i+t-i$, and $|X_\\lambda+l|=t+l$ ([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F4] A removable border strip of $\\lambda$ is a nonempty edge-connected set of nodes containing no $2\\times2$ block whose complement in $[\\lambda]$ is again a Young diagram; its height is its number of occupied rows minus one, and for a strip that is the hook of a node it equals the leg length of that node ([[def-removable-border-strip-and-height]], [[lem-hooks-correspond-to-removable-border-strips]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Pad $\\lambda$ with zeros to length $m$. By [F3], $h_i=\\lambda_i+m-i$. Below $h_i$ there are exactly $m-i$ beads, hence $h_i-(m-i)=\\lambda_i$ gaps. For a node $(i,j)$ put $g_j=h_i-h_{i,j}(\\lambda)=m+j-1-\\lambda'_j$. These values are distinct by [F1], satisfy $0\\le g_j<h_i$, and are gaps: equality $g_j=h_x=\\lambda_x+m-x$ would give $\\lambda_x-j+\\lambda'_j-x+1=0$. If $x\\le\\lambda'_j$, both differences are nonnegative; otherwise both are at most $-1$, since $\\lambda_x<j$. Neither case gives zero. Thus the $\\lambda_i$ numbers $g_j$ exhaust the gaps below $h_i$, including the empty set when $\\lambda_i=0$. [F1, F2, F3, algebra]\n\n1.2 Fix $(i,j)$ and put $r=\\lambda'_j$ and $g=m+j-1-r$. The rim strip of [F4] has complement with rows $\\mu_p=\\lambda_p$ outside $i\\le p\\le r$, $\\mu_p=\\lambda_{p+1}-1$ for $i\\le p<r$, and $\\mu_r=j-1$: in row $p$ the strip occupies the rim nodes with column at least $j$, whose complement ends at $\\max(j-1,\\lambda_{p+1}-1)$. For $p<r$ one has $\\lambda_{p+1}\\ge j$, while $\\lambda_{r+1}<j$. These formulas give the displayed partition in (ii), with trailing zeros deleted, and its size is $n-h_{i,j}(\\lambda)$. [F1, F4, construct, algebra]\n\n2.1 Consequently, for $h\\ge0$, $h\\in H_i(\\lambda)$ exactly when $h\\le h_i$ and $h_i-h\\notin X$: at $h=0$ the latter fails because $h_i\\in X$, and for $h>h_i$ its first inequality fails. For $1\\le h\\le h_i$ this is the gap correspondence in step 1.1. The bead $h_i$ determines $i$, and the distinct row hook lengths determine $j$, so $(i,j)\\mapsto(h_i,g_j)$ is the asserted bijection with length $h_i-g_j$. [F1, step 1.1, algebra]\n\n2.2 The new value $g$ is below $h_r$ because $h_r-g=\\lambda_r-j+1\\ge1$, and, if $r<m$, above $h_{r+1}$ because $g-h_{r+1}=j-\\lambda_{r+1}\\ge1$. Hence the decreasing list of $X'=(X\\setminus\\{h_i\\})\\cup\\{g\\}$ is $h_1,\\ldots,h_{i-1},h_{i+1},\\ldots,h_r,g,h_{r+1},\\ldots,h_m$. Applying [F2] gives precisely the parts $\\mu_p$ in step 1.2. Thus $P(X')=\\lambda\\setminus R_{i,j}$, and the abacus change is the relocation of the bead $h_i$ to $g$. [F2, step 1.1, step 1.2, algebra]\n\n3.1 The length is $b-g$, so $e\\mid h_{i,j}(\\lambda)$ exactly when $b\\equiv g\\pmod e$. In that case the bead remains on its runner, moves up $h_{i,j}(\\lambda)/e$ rows, and all runner bead counts are unchanged. Without this divisibility assumption the relocation may change runners. In row $i$ a hook of length $e$ exists exactly when $h_i\\ge e$ and $h_i-e\\notin X$, by step 2.1; existential quantification over $i$ gives the final bead criterion in (iii). [step 2.1, step 2.2, algebra] ∎",
+        "dependency_level": 2
+      },
+      {
+        "id": "def-e-core-e-quotient-and-e-weight",
+        "kind": "definition",
+        "title": "The e-core, the e-quotient, and the e-weight",
+        "deps": [
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "lem-hooks-are-bead-gap-pairs-on-an-abacus",
+          "def-e-regular-and-e-restricted-partitions"
+        ],
+        "statement": "Let $e\\ge2$, let $\\lambda\\vdash n$ and let\n$X=\\{h_1>h_2>\\cdots>h_m\\}$ be a $\\beta$-set for $\\lambda$, with first-column\nhook lengths $b_i(\\lambda)$ and $e$-abacus configuration $A_X$ as in\n[[def-beta-set-and-e-runner-abacus-of-a-partition]]; hooks and their lengths\nare those of [[def-hook-arm-leg-and-hook-length]], and the hook/bead-gap\ndictionary is [[lem-hooks-are-bead-gap-pairs-on-an-abacus]].\n\n**$e$-core partition.** The partition $\\lambda$ is an **$e$-core** when\n$e\\notin H(\\lambda)$, that is, when no hook of $\\lambda$ has length $e$; by\n[[lem-hooks-are-bead-gap-pairs-on-an-abacus]](iii) this is the case exactly\nwhen no bead of $A_X$ has a gap in the position $e$ labels above it on its own\nrunner. The empty partition is an $e$-core, and so is every $\\lambda$ with\n$|\\lambda|<e$.\n\n**Runner label sets.** For $i\\in\\{0,1,\\dots,e-1\\}$ let\n$$X^{(e)}_i:=\\{a\\in\\mathbb N_0:ae+i\\in X\\}$$\nbe the set of row labels of the beads of $A_X$ on runner $i$. The $X^{(e)}_i$\nare finite subsets of $\\mathbb N_0$ and may overlap. The disjoint union\n$\\bigsqcup_i\\{i\\}\\times X^{(e)}_i$ records each bead with its runner and row;\nthe map $(i,a)\\mapsto ae+i$ bijects it with $X$.\n\n**$e$-core.** The **top-packed $\\beta$-set** of $X$ is\n$$X^{(e)}:=\\bigcup_{i=0}^{e-1}\\{ae+i:0\\le a\\le|X^{(e)}_i|-1\\},$$\nthe configuration obtained from $A_X$ by sliding every bead up as far as it\ngoes on its own runner, i.e. into the topmost $|X^{(e)}_i|$ positions of\nrunner $i$. The **$e$-core** of $\\lambda$ is\n$$C_e(\\lambda):=P(X^{(e)}).$$\n\n**$e$-quotient and $e$-weight.** Choose the $\\beta$-set $X$ of $\\lambda$ to be\n*normalised*, meaning $|X|\\equiv0\\pmod e$. Then define the **$e$-quotient** of\n$\\lambda$ to be the $e$-tuple of partitions\n$$Q_e(\\lambda):=(\\lambda^{(0)},\\lambda^{(1)},\\dots,\\lambda^{(e-1)}),\\qquad \\lambda^{(i)}:=P(X^{(e)}_i),$$\neach runner read as a $1$-abacus, and the **$e$-weight** of $\\lambda$ to be\n$$w_e(\\lambda):=|Q_e(\\lambda)|:=\\textstyle\\sum_{i=0}^{e-1}|\\lambda^{(i)}|.$$\nA normalised $\\beta$-set exists: by\n[[def-beta-set-and-e-runner-abacus-of-a-partition]] the $\\beta$-sets of\n$\\lambda$ are the sets $X_\\lambda+l$, $l\\in\\mathbb N_0$, and\n$|X_\\lambda+l|=|X_\\lambda|+l$, so among the $e$ consecutive shifts\n$l,\\dots,l+e-1$ exactly one has size divisible by $e$.\n\nNo choice principle is used.",
+        "strategy": "Runner row sets can overlap; their tagged disjoint union, not an untagged union, bijects X. The one-shift counts are (c_(e-1)+1,c_0,...), and the e-shift adds a zero bead on each runner and shifts existing rows by 1, preserving component partitions. Normalized lengths differ by multiples of e. The regularity proof correctly uses the bottom e rows of the same length a; transposition exchanges arm and leg. Empty runners and the empty partition are covered, no AC. The definition defers core/ordered-quotient invariance to its proved_here justified_by theorem, checked next in dependency order. Compared the exact pre-reader bytes; current corrections are sound.",
+        "dependency_level": 3,
+        "justified_by": [
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 59-62: the definitions of an e-core partition, of $X^{(e)}_i$, of the e-quotient and of $X^{(e)}$ and $C_e(\\lambda)$, Lemma 4.9, and the normalising remark before the worked example"
+            },
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Lemma 5.34 with its abacus proof, printed p. 61, together with the definition of e-weight preceding Proposition 5.38, printed p. 62"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-virtual-weyl-combinations-detect-q-schur-block-separation",
+        "kind": "lemma",
+        "title": "Virtual Weyl combinations detect q-Schur block separation",
+        "deps": [
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "lem-semistandard-weight-dimensions-detect-virtual-weyl-classes",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular"
+        ],
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, $d,n\\ge1$, and let $S=S(d,n)$ be the\n$q$-Schur algebra over $F$ with Weyl modules $W^{\\lambda}$ for\n$\\lambda\\in\\Lambda^{+}(d,n)$\n([[def-type-a-q-schur-algebra-and-weyl-modules]]). Let $M$ be a finite\ndimensional right $S$-module all of whose composition factors lie in a single\nblock $B$ of $S$\n([[def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents]]),\nand let integers $a_{\\lambda}$, $\\lambda\\in\\Lambda^{+}(d,n)$, satisfy\n$$[M]=\\sum_{\\lambda\\in\\Lambda^{+}(d,n)}a_{\\lambda}[W^{\\lambda}]$$\nin the Grothendieck group $G_0(S\\text{-mod})$\n([[def-grothendieck-group-of-an-essentially-small-abelian-category]]). Then\n$W^{\\lambda}$ lies in $B$ whenever $a_{\\lambda}\\ne0$. In particular no nonzero\nvirtual combination of Weyl classes all of whose terms lie outside $B$ can\nequal the class of a module in $B$.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Multiplication by the central idempotent $\\epsilon_B$ is the projection of every right $S$-module onto its $B$-summand: $N=\\bigoplus_iN\\epsilon_i$ by [F1], so $N\\epsilon_B$ is that direct summand and is a submodule, and $N\\epsilon_B=N$ exactly when all composition factors of $N$ lie in $B$. The assignment $N\\mapsto N\\epsilon_B$ is exact, because it is the projection onto a direct summand of the identity functor: for $f:N\\to N'$ one has $f(N\\epsilon_B)=f(N)\\epsilon_B$, $\\ker(f|_{N\\epsilon_B})=(\\ker f)\\epsilon_B$ and $\\operatorname{im}(f|_{N\\epsilon_B})=(\\operatorname{im}f)\\epsilon_B$, so it preserves kernels and images. [F1, F4]\n\n1.2 A nonzero finite-dimensional module has a simple quotient: choose a proper submodule of maximal vector-space dimension. If a Weyl module had two nonzero summands, each would have a nonzero head, so its head would not be simple, contrary to [F2]. Thus it is indecomposable. Its block decomposition [F1] has precisely one nonzero summand, the block containing its head $L^\\lambda$; hence $W^\\lambda\\epsilon_B$ is either $W^\\lambda$ or $0$. [F1, F2, algebra]\n\n2.1 Apply the exact projection of step 1.1 to the class identity of the hypothesis. Since $M\\epsilon_B=M$ by the hypothesis that all composition factors of $M$ lie in $B$, and since $W^{\\lambda}\\epsilon_B$ is $W^{\\lambda}$ or $0$ by step 1.2, the induced identity in $G_0$ reads $$[M]=\\sum_{\\lambda:\\,W^{\\lambda}\\in B}a_{\\lambda}[W^{\\lambda}].$$ Subtracting it from the given identity $[M]=\\sum_{\\lambda}a_{\\lambda}[W^{\\lambda}]$ yields $$\\sum_{\\lambda:\\,W^{\\lambda}\\notin B}a_{\\lambda}[W^{\\lambda}]=0$$ in $G_0(S\\text{-mod})$. [F4, step 1.1, step 1.2, algebra]\n\n3.1 By the linear independence of the Weyl classes [F3], all coefficients in the vanishing combination of step 2.1 are zero: $a_{\\lambda}=0$ for every $\\lambda$ with $W^{\\lambda}\\notin B$, which is the contrapositive of the assertion that $a_{\\lambda}\\ne0$ implies $W^{\\lambda}\\in B$. [F3, step 2.1] ∎",
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Lemma 5.30 with its proof and Lemma 5.35 with its proof, printed pp. 58-61"
+            },
+            {
+              "title": "Sinead Lyle and Andrew Mathas, Blocks of affine and cyclotomic Hecke algebras, author-hosted complete 19-page preprint (published in Math. Z.)",
+              "url": "https://www.maths.usyd.edu.au/u/pubs/publist/preprints/2006/lyle-24.pdf",
+              "locator": "Lemma 2.4 and its use in the first half of Proposition 2.9, printed pp. 5-7: linear independence of the Weyl classes and the block-projection argument"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+        "kind": "theorem",
+        "title": "The e-core is independent of the rim hook removal order",
+        "deps": [
+          "def-e-core-e-quotient-and-e-weight",
+          "lem-hooks-are-bead-gap-pairs-on-an-abacus",
+          "def-removable-border-strip-and-height",
+          "lem-hooks-correspond-to-removable-border-strips",
+          "def-beta-set-and-e-runner-abacus-of-a-partition"
+        ],
+        "statement": "Let $e\\ge2$ and let $\\lambda\\vdash n$ with $e$-abacus configurations as in\n[[def-beta-set-and-e-runner-abacus-of-a-partition]] and the top-packed set\n$X^{(e)}$ of [[def-e-core-e-quotient-and-e-weight]]. For every $\\beta$-set $X$\nof $\\lambda$ the partition $P(X^{(e)})$ is the same, so the $e$-core\n$C_e(\\lambda)=P(X^{(e)})$ is a well-defined $e$-core partition, and it is\nexactly the terminal partition reached by successively removing removable\nborder strips of size $e$ from $[\\lambda]$ until none is left\n([[def-removable-border-strip-and-height]],\n[[lem-hooks-correspond-to-removable-border-strips]]). In particular every\nmaximal sequence of such removals gives the same terminal partition\n$C_e(\\lambda)$, each removed strip has size exactly $e$, and the terminal\npartition contains no hook of length $e$. Moreover any two normalised beta-sets\n($e\\mid|X|$) give the same ordered quotient $Q_e(\\lambda)$ and weight.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Fix a $\\beta$-set $X$ of a partition $\\mu$ and write its elements as $h_1>\\cdots>h_m$. By [F1] the hooks of length $e$ of $\\mu$ correspond bijectively to the beads $b=h_i$ with $h_i\\ge e$ and $h_i-e\\notin X$, the correspondence sending such a bead to the rim strip $R_{i,j}(\\mu)$ attached to the node with $h_{i,j}(\\mu)=e$, and removal of that strip replaces $X$ by $X'=(X\\setminus\\{h_i\\})\\cup\\{h_i-e\\}$, a $\\beta$-set for $\\mu\\setminus R_{i,j}(\\mu)$ of the same size $m$. In particular $\\mu$ has no hook of length $e$ exactly when no bead of $X$ has a gap in the position $e$ labels above it on its own runner. [F1, F2]\n\n1.2 Compute the shift directly. For $Y=X+1$, its runner sets are $Y^{(e)}_0=(X^{(e)}_{e-1})+1$ and $Y^{(e)}_i=X^{(e)}_{i-1}$ for $1\\le i<e$: the last runner wraps to runner $0$ one row lower, and the shift adds the bead at $0$. Its counts are $(c_{e-1}+1,c_0,\\ldots,c_{e-2})$. Packing with these counts gives $Y^{(e)}=(X^{(e)})+1$, so $P(Y^{(e)})=P(X^{(e)})$ by [F3]. Iteration proves core independence for all beta-sets of $\\lambda$. After $e$ shifts, every runner row-label set has undergone one beta-set shift by $1$, so its partition is unchanged. Normalised beta-sets differ by a multiple of $e$, proving independence of the ordered quotient and its total size. [F2, F3, algebra]\n\n2.1 Call a bead of $X$ *movable* when the position $e$ labels above it on its runner is a gap, so that by step 1.1 the movable beads are exactly the hooks of length $e$ of $\\mu$; moving a bead up one row replaces $X$ by a $\\beta$-set of $\\mu$ minus that hook, and the counts $|X^{(e)}_i|$ of beads on each runner are unchanged. A configuration is top-packed precisely when it has no movable bead: a top-packed runner carries beads in the rows $0,1,\\dots,c_i-1$, so the row above a bead is a bead again (and row $0$ has no row above it), while if some runner is not top-packed there are a gap in row $g$ and a bead in a row $a>g$ on that runner; choosing $a$ minimal among the bead rows larger than $g$, the row $a-1$ is a gap, so the bead in row $a$ is movable. [F2, step 1.1]\n\n3.1 Every sequence of moves of steps 1.1 and 2.1 is finite: the quantity $\\Phi:=\\sum_{i}\\sum_{a\\in X^{(e)}_i}a$ is the total of the row labels of all beads, and each move replaces a bead's row label $a$ by $a-1$, so $\\Phi$ decreases by exactly $1$ and is a nonnegative integer. A sequence is maximal exactly when it stops at a configuration with no movable bead, that is, by step 2.1, exactly when it stops at the top-packed configuration of the counts $(c_i)$; and that configuration is unique, since a runner with $c_i$ beads has exactly one top-packed state, the rows $0,\\dots,c_i-1$. Hence every maximal sequence of moves starting from $X$ ends at the same configuration, namely $X^{(e)}$, and therefore at the same terminal partition $P(X^{(e)})$. [F2, step 1.1, step 2.1, algebra]\n\n4.1 By step 1.2 the partition $P(X^{(e)})$ does not depend on the chosen $\\beta$-set $X$, so $C_e(\\lambda):=P(X^{(e)})$ is well-defined; by step 3.1 it is the common terminal partition of all maximal sequences of e-hook removals, and by step 2.1 a terminal configuration is top-packed, hence carries no movable bead, hence its partition has no hook of length $e$ by step 1.1; thus $C_e(\\lambda)$ is an $e$-core. Every strip removed along such a sequence corresponds to a node hook of length exactly $e$ and so has size $e$ by [F4]. This proves all the asserted properties. [F2, F4, step 1.1, step 2.1, step 3.1, step 1.2] ∎",
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 59-61: Lemma 4.9 (the shift action on runners), Theorem 4.10 with its proof, and Corollary 4.8 (e-hook removal as a one-row bead slide)"
+            },
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Lemma 5.34 with its printed abacus proof, printed p. 61"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-e-quotient-controls-hooks-divisible-by-e",
+        "kind": "theorem",
+        "title": "The e-quotient controls the hooks of e-divisible length",
+        "deps": [
+          "def-e-core-e-quotient-and-e-weight",
+          "lem-hooks-are-bead-gap-pairs-on-an-abacus",
+          "def-beta-set-and-e-runner-abacus-of-a-partition"
+        ],
+        "statement": "Let $e\\ge2$ and let $\\lambda\\vdash n$ with $e$-quotient\n$Q_e(\\lambda)=(\\lambda^{(0)},\\dots,\\lambda^{(e-1)})$ and $e$-core\n$C_e(\\lambda)$ ([[def-e-core-e-quotient-and-e-weight]]). Then there is a\nbijection $f$ from the set of hooks of $\\lambda$ of $e$-divisible length onto\nthe set of hooks of the multipartition $Q_e(\\lambda)$, that is, onto\n$\\bigsqcup_{i=0}^{e-1}\\{\\text{hooks of }\\lambda^{(i)}\\}$, such that\n$$|H|=e\\,|f(H)|\\qquad\\text{and}\\qquad Q_e\\bigl(\\lambda\\setminus H\\bigr)=Q_e(\\lambda)\\setminus f(H),$$\nwhere the right-hand side means that the hook $f(H)$ is removed from the single\ncomponent of $Q_e(\\lambda)$ that contains it. On the $e$-abacus, $f$ is the\nrescaling $b=b'e+i$, $g=g'e+i$ of a bead-gap pair $(b,g)$ lying on a common\nrunner $i$, followed by the bead-gap dictionary of the runner\n([[lem-hooks-are-bead-gap-pairs-on-an-abacus]]).\n\nHere and in the quotient components, removing a hook means deleting its\ncorresponding rim border strip as in\n[[lem-hooks-are-bead-gap-pairs-on-an-abacus]](ii), rather than its arm-and-leg\nnode set.\n\nNo choice principle is used.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** An integer $e\\ge2$, a partition $\\lambda\\vdash n$, a normalised $\\beta$-set $X=\\{h_1>\\cdots>h_m\\}$ of $\\lambda$, so that $e\\mid m=|X|$, with runner label sets $X^{(e)}_i$, top-packed set $X^{(e)}$ and quotient components $\\lambda^{(i)}=P(X^{(e)}_i)$ as in [[def-e-core-e-quotient-and-e-weight]].\n\n[F1] For a $\\beta$-set $Y$ of a partition $\\mu$ the hooks of $\\mu$ correspond bijectively to the bead-gap pairs $(b,g)$ of $Y$, with $b\\in Y$, $g\\notin Y$ and $0\\le g<b$, the hook of $(b,g)$ having length $b-g$; the hook has $e$-divisible length if and only if $b\\equiv g\\pmod e$; and removing the hook of $(b,g)$ replaces $Y$ by $(Y\\setminus\\{b\\})\\cup\\{g\\}$, a $\\beta$-set for the partition $\\mu$ with that hook removed ([[lem-hooks-are-bead-gap-pairs-on-an-abacus]]).\n\n[F2] For $i\\in\\{0,\\dots,e-1\\}$ the runner label set $X^{(e)}_i$ is a $\\beta$-set for the partition $\\lambda^{(i)}=P(X^{(e)}_i)$, and position $ae+i$ of the abacus lies on runner $i$ at row $a$, so that the beads of $X^{(e)}_i$ are exactly the beads of $X$ on runner $i$ ([[def-e-core-e-quotient-and-e-weight]], [[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F3] The chosen $\\beta$-set is normalised, $e\\mid m$; the removal of a hook does not change the number of beads, so the new $\\beta$-set remains normalised ([[def-e-core-e-quotient-and-e-weight]]).\n\n## Proof\n\n**Proof technique:** direct.\n\n1.1 Write a hook $H=H_{i,j}(\\lambda)$ of $e$-divisible length in its bead-gap form $(b,g)$ with $b\\in X$, $g\\notin X$, $0\\le g<b$ and $h:=|H|=b-g$. By $e\\mid h$ we have $b\\equiv g\\pmod e$; write the common residue as $s\\in\\{0,\\dots,e-1\\}$ and $$b=b'e+s,\\qquad g=g'e+s,\\qquad b'=\\frac{b-s}{e}>g'=\\frac{g-s}{e}\\ge0.$$ The bead $b$ is a bead of $X$ on runner $s$ and the gap $g$ is a gap of $X$ on runner $s$. [F1, F2]\n\n2.1 Applying step 1.1 conversely, a bead $b'\\in X^{(e)}_s$ and a gap $g'\\notin X^{(e)}_s$ with $0\\le g'<b'$ give the bead-gap pair $(b,g)=(b'e+s,g'e+s)$ of $X$ with $e\\mid(b-g)$ and $b-g=e(b'-g')$. Hence $f(H):=$ the hook of $\\lambda^{(s)}$ attached to the bead-gap pair $(b',g')$ of the $\\beta$-set $X^{(e)}_s$ is well defined, and $f$ is bijective onto the hooks of $\\bigsqcup_i\\lambda^{(i)}$ because both sides are in bijection with the bead-gap pairs of $X$ whose two positions share a runner, respectively with the union over $s$ of the bead-gap pairs of $X^{(e)}_s$; the length identity is $|H|=b-g=e(b'-g')=e|f(H)|$. [F1, F2, step 1.1]\n\n3.1 For the removal identity, let $X'=(X\\setminus\\{b\\})\\cup\\{g\\}$ be the $\\beta$-set of $\\lambda\\setminus H$ from [F1], again of size $m$ and hence normalised by [F3]. Because $b$ and $g$ lie on runner $s$, the beads of $X'$ on a runner $t\\ne s$ are exactly the beads of $X$ on runner $t$, and the beads on runner $s$ have row labels $(X^{(e)}_s\\setminus\\{b'\\})\\cup\\{g'\\}$. Consequently, computing the quotient from the normalised sets by [F2], $$\\lambda'^{(t)}=P\\bigl((X')^{(e)}_t\\bigr)=\\lambda^{(t)}\\ (t\\ne s),\\qquad \\lambda'^{(s)}=P\\bigl((X^{(e)}_s\\setminus\\{b'\\})\\cup\\{g'\\}\\bigr),$$ and the last partition is $\\lambda^{(s)}$ with its hook $f(H)$ removed, by [F1] applied to the $\\beta$-set $X^{(e)}_s$ of $\\lambda^{(s)}$. This is exactly the assertion $Q_e(\\lambda\\setminus H)=Q_e(\\lambda)\\setminus f(H)$. [F1, F2, F3, step 1.1, step 2.1]\n\n4.1 Steps 2.1 and 3.1 together exhibit the required bijection $f$ with the length and removal identities, and the description of $f$ on the abacus is the rescaling of step 1.1 followed by the bead-gap dictionary of the runner in step 2.1. [step 1.1, step 2.1, step 3.1] ∎",
+        "dependency_level": 4
+      },
+      {
+        "id": "prop-core-quotient-size-and-weight-formula",
+        "kind": "proposition",
+        "title": "The core-quotient size formula defines the weight",
+        "deps": [
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "thm-e-quotient-controls-hooks-divisible-by-e",
+          "def-e-core-e-quotient-and-e-weight",
+          "def-hook-arm-leg-and-hook-length",
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "statement": "Let $e\\ge2$ and let $\\lambda\\vdash n$ with $e$-core $C_e(\\lambda)$ and\n$e$-weight $w_e(\\lambda)=|Q_e(\\lambda)|$\n([[def-e-core-e-quotient-and-e-weight]]). Then\n$$n=|\\lambda|=|C_e(\\lambda)|+e\\,w_e(\\lambda),$$\nso $w_e(\\lambda)=(n-|C_e(\\lambda)|)/e\\in\\mathbb N_0$. Equivalently every\nsequence of removals of removable border strips of size $e$ from $\\lambda$ down\nto its $e$-core\n([[thm-e-core-is-independent-of-the-rim-hook-removal-order]]) has exactly\n$w_e(\\lambda)$ steps, and $w_e(\\lambda)=|Q_e(\\lambda)|$ equals both the number\nof hooks of the multipartition $Q_e(\\lambda)$ and, by the bijection of\n[[thm-e-quotient-controls-hooks-divisible-by-e]], the number of hooks of\n$\\lambda$ of length divisible by $e$.\n\nThroughout the proof, $\\lambda\\setminus H$ means deletion of the rim strip\ncorresponding to the node hook $H$, as in\n[[thm-e-quotient-controls-hooks-divisible-by-e]].\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** induction on $w_e(\\lambda)$.\n\n1.1 We first record the counting consequences of the quotient theorem. A hook of $\\lambda$ has $e$-divisible length exactly when it is the preimage under the bijection $f$ of [F2] of a hook of $Q_e(\\lambda)$, and the number of hooks of a partition equals its size by [F3]; hence the number of $e$-divisible hooks of $\\lambda$ equals the total size $w_e(\\lambda)=\\sum_i|\\lambda^{(i)}|$ of $Q_e(\\lambda)$. In particular $Q_e(\\lambda)$ has a hook if and only if $w_e(\\lambda)>0$, and then some hook has size $1$ by [F3], so $\\lambda$ has a hook of length $e$. [F2, F3]\n\n2.1 Base case: if $w_e(\\lambda)=0$ then $Q_e(\\lambda)$ has no hook by step 1.1, so $\\lambda$ has no hook of $e$-divisible length, hence no hook of length $e$; by [F1] the terminal partition of the empty removal sequence is $\\lambda$ itself, that is, $C_e(\\lambda)=\\lambda$, and the removal sequence has $0=w_e(\\lambda)$ steps. [F1, base, step 1.1]\n\n2.2 Induction step: let $w_e(\\lambda)>0$. By step 1.1 there is a hook $H$ of $\\lambda$ of length exactly $e$, a removable border strip of size $e$ by [F1]. By the removal identity of [F2], $$Q_e(\\lambda\\setminus H)=Q_e(\\lambda)\\setminus f(H),$$ and since $f(H)$ is a hook of a component of $Q_e(\\lambda)$ of size $|H|/e=1$, the right-hand side is the multipartition obtained by deleting one box, so by [F3] its size is $w_e(\\lambda)-1$. Moreover $C_e(\\lambda\\setminus H)=C_e(\\lambda)$: a maximal sequence from $\\lambda\\setminus H$ is the tail of a maximal sequence from $\\lambda$ beginning with $H$, and all maximal sequences from $\\lambda$ end at $C_e(\\lambda)$ by [F1]. [F1, F2, F3, step 1.1]\n\n3.1 By step 2.2 we may apply the induction hypothesis to $\\lambda\\setminus H$, whose weight is $w_e(\\lambda)-1<w_e(\\lambda)$: every maximal sequence of $e$-strip removals from $\\lambda\\setminus H$ has $w_e(\\lambda)-1$ steps and $$|\\lambda|-e=|\\lambda\\setminus H|=|C_e(\\lambda\\setminus H)|+e\\,(w_e(\\lambda)-1)=|C_e(\\lambda)|+e\\,w_e(\\lambda)-e,$$ so $|\\lambda|=|C_e(\\lambda)|+e\\,w_e(\\lambda)$; and appending the single step $H$ shows that every maximal sequence from $\\lambda$ has exactly $w_e(\\lambda)$ steps, because $H$ was an arbitrary possible first $e$-hook removal and step 2.2 applies to every such first step. [F1, IH, step 2.1, step 2.2, algebra]\n\n4.1 The base case of step 2.1 and the induction step of steps 2.2 and 3.1 establish the size formula and the step count for every partition of finite weight, and the counting statement is step 1.1. This is all that was asserted. [step 1.1, step 2.1, step 3.1, discharge-induction: step 2.2] ∎",
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 62-63: Proposition 4.12 (i)-(iii) with its proof"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-q-schur-weyl-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core",
+        "kind": "theorem",
+        "title": "q-Schur Weyl modules are in the same block iff their labels have the same e-core",
+        "deps": [
+          "lem-virtual-weyl-combinations-detect-q-schur-block-separation",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "def-e-core-e-quotient-and-e-weight",
+          "thm-q-schaper-virtual-radical-layer-formula",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "def-dominance-order-on-partitions",
+          "lem-semistandard-weight-dimensions-detect-virtual-weyl-classes",
+          "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+          "lem-cell-form-is-associative-and-its-radical-is-a-submodule",
+          "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra",
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "def-cellular-algebra-basis-and-cell-module",
+          "thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple",
+          "thm-wedderburn-artin-theorem"
+        ],
+        "statement": "Let $F$ be a field and $q\\in F^{\\times}$ with quantum characteristic $e$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]], [[def-q-integer-q-factorial-and-q-multinomial]]), let $n\\ge0$ and $d\\ge n$, and let $W^{\\lambda}_F$ be the Weyl modules of $S_F(d,n)$ ([[def-type-a-q-schur-algebra-and-weyl-modules]]). Then for partitions $\\lambda,\\mu\\vdash n$ with at most $d$ parts, $W^{\\lambda}_F$ and $W^{\\mu}_F$ lie in the same block of $S_F(d,n)$ if and only if $\\lambda$ and $\\mu$ have the same $e$-core ([[def-e-core-e-quotient-and-e-weight]]). Consequently, for finite $e$, the blocks of $S_F(d,n)$ are indexed by the $e$-cores $\\gamma$ with $|\\gamma|\\le n$ and $|\\gamma|\\equiv n\\pmod e$, and the block of $W^{\\lambda}_F$ is determined by $C_e(\\lambda)$. For $e=\\infty$ we set $C_\\infty(\\lambda):=\\lambda$; the algebra is semisimple and its blocks are indexed by the partitions of $n$.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Lift and valuation. Use $R=F[X]_{(X-q)}$ with $\\hat q=X$ and uniformizer $X-q$. The element $X$ is a unit since $q\\ne0$, and every polynomial $[m]_X=1+X+\\cdots+X^{m-1}$ is nonzero, so the generic factorial is nonzero. For $n=0$, $S_F(d,0)=F$, with its one empty-label module, so all assertions hold directly; hence assume $n>0$. Its valuation $v(m)$ is positive exactly when $[m]_q=0$, equivalently $e\\mid m$ for finite $e$; for $e=\\infty$ all valuations vanish. In characteristic $p$ the positive valuation may exceed1, which causes no difficulty below. [given, F2, algebra]\n\n1.2 Block support and Jantzen edges. A finite-dimensional module with simple head is indecomposable: every nonzero summand has nonzero head, so two summands would make the head nonsimple. Thus $W^{\\lambda}$ has just one nonzero block summand, and every Jantzen submodule is supported in that block. By [F4], any nonzero accumulated coefficient $J_{\\lambda\\mu}$ of $[W^{\\mu}]$ in [F2] puts $W^{\\lambda},W^{\\mu}$ in the same block. This uses the sum of submodule classes, without identifying it with the radical class. [F1, F2, F4]\n\n2.1 Balanced terms preserve the core and descend in dominance. Put $s=h_{ab}$ and $t=h_{ac}$, so $s-t=\\beta_b-\\beta_c$. If a hook coefficient is nonzero, at least one of $s,t$ is divisible by $e$. If $e\\mid t$, the shifted bead residues are unchanged. Otherwise $e\\mid s$, so $t\\equiv\\beta_c-\\beta_b\\pmod e$ and the two shifted residues exchange. Thus every surviving symbol has the same runner counts and core as $\\lambda$. Moreover replacing the two conjugate beta entries $u>v$ by $u+t,v-t$ strictly increases conjugate majorization; the sorted target therefore strictly decreases original dominance. Accumulating equal target labels preserves both conclusions. [F2, F3, step 1.1, algebra]\n\n2.2 No outgoing edge implies a binary row condition. Suppose every accumulated outgoing coefficient from $\\mu$ is zero. For row $i$, put $g_i=N+i-1-\\mu_i$, a gap in its conjugate beta set; its row hooks are exactly $\\beta_j-g_i>0$. If that row contained a divisible hook $s$ and a nondivisible hook $t$, repeatedly replace $t$ by $s+t$ while their sum is another row hook. This finite climb ends with $s+t$ absent from the hook set. The balanced term for the nodes of hook lengths $s,t$ then has lower shifted bead $g_i$, which is a gap, and upper shifted bead $g_i+s+t$, which is absent from the beta set. Its symbol survives and its coefficient is $\\pm v(s)\\ne0$. There is no cancellation: any surviving balanced term replaces two lost values by a new value larger than both and a new value smaller than both, so those four values determine the pair and its row gap uniquely; the gaps $g_i$ strictly increase with $i$. This contradicts the zero accumulated coefficient. Therefore each row has either all hook lengths divisible by $e$ or none; call this the binary row condition. [F2, step 1.1, algebra]\n\n3.1 Composition-factor cores. An off-head simple occurs in $W^{\\lambda}$ exactly when it occurs in its radical, equivalently in the positive Jantzen sum: the first submodule is the radical and every later one is contained in it. Its nonzero multiplicity in that sum implies it occurs in some $W^{\\mu}$ with $J_{\\lambda\\mu}\\ne0$, since otherwise its coefficient in the sum would be zero. Step 2.1 gives the same core and strict dominance descent. Induction on the finite dominance poset proves that every factor $L^{\\nu}$ of $W^{\\lambda}$ has $C_e(\\nu)=C_e(\\lambda)$. No identity equating the radical class with the positive sum is asserted. [F1, F2, step 2.1, algebra]\n\n3.2 Vertical core removal under the binary row condition. A removable $e$-hook has hook length $e$ at its defining node. Every hook in that row is then divisible, so its last-column hook, a positive multiple of $e$ no larger than $e$, equals $e$. Hook lengths strictly decrease across the row, forcing the defining node to be at the row end: the strip is vertical on $e$ equal-length rows $i,\\ldots,i+e-1$ in column $j$. Removing it decreases that column height by $e$. In unaffected rows hook divisibility is unchanged. For an affected row $i+t$, hooks in the retained columns were all congruent to $-t$ modulo $e$, because row $i$ had all hooks divisible and those rows had equal length. Their new hook lengths are all congruent to $-t-1$, so the binary row condition persists. Induction shows every core-removal strip is vertical. [F3, step 2.2, algebra]\n\n4.1 The Cartan graph locally. Choose a complete orthogonal primitive idempotent system of $S$, with one representative $f_\\mu$ for each simple label and repeated representatives as necessary. By [F5] and the absolute simplicity in [F1], the semisimple quotient is a product of full matrix rings over $F$. Lift its matrix diagonal idempotents: the radical is nilpotent and the iteration $u\\mapsto u+(1-2u)(u^2-u)$ changes an error $a=u^2-u$ to $-3a^2+4a^3$, so finite iteration lifts an idempotent; successively working in complementary corners lifts an orthogonal system. Absolute simplicity gives $\\dim L^{\\lambda}f_\\mu=\\delta_{\\lambda\\mu}$, hence exact multiplication by $f_\\mu$ gives $\\dim W^{\\lambda}f_\\mu=d_{\\lambda\\mu}$. The successive cellular ideal bimodules are the contragredient cell module tensor the right cell module. Apply the exact projection $f_\\mu(-)f_\\nu$ and add their dimensions; [F1]'s duality fixes the simple labels, giving $\\dim f_\\mu Sf_\\nu=\\sum_\\lambda d_{\\lambda\\mu}d_{\\lambda\\nu}$. This is the Cartan entry of the primitive projective $f_\\mu S$. A disconnected graph on the full primitive idempotent system, with edges whenever either mixed corner is nonzero, yields central idempotents by summing each component: all mixed corners vanish in both directions. Conversely a central block idempotent forbids mixed corners. Thus simple labels in one block are joined by pairs sharing a Weyl factor, and step 3.1 proves that labels in the same block have the same core. [F1, F4, F5, step 3.1, algebra]\n\n4.2 The minimum label and the bridge shapes. Assume $e<\\infty$. Fix core $\\gamma$ and weight $w$, with $l=\\ell(\\gamma)$, and set $\\rho=(\\gamma_1,\\ldots,\\gamma_l,1^{ew})$. It has core $\\gamma$ by removing its bottom vertical $e$-strips, and is dominance-minimal in the class: every same-core partition contains $\\gamma$ as a diagram, and appending all additional boxes as rows of size1 minimizes each dominance partial sum. Let $\\mu\\ne\\rho$ satisfy the binary row condition. Choose the first row $i$ with divisible hooks and put $j=\\mu_i$, $h=h^{\\mu}_{ij}=\\mu'_j-i+1$, a positive multiple of $e$. If $j=1$, every divisible hook is in column1, so step 3.2 would give $\\mu=\\rho$; thus $j>1$. Remove the vertical $h$-strip, obtaining $\\sigma$, then add $h$ boxes horizontally to its first row to get $\\nu$, and vertically to its first column to get $\\eta$. All have the same core, since $h$ is a multiple of $e$; $\\nu$ dominates $\\mu,\\eta$, and $\\eta$ is strictly below $\\mu$ because the removed nodes are moved into new bottom rows. [F3, step 3.2, construct, algebra]\n\n5.1 The bridge coefficients are nonzero. Write $l=\\ell(\\mu)=\\ell(\\sigma)$. If $i>1$, then $\\sigma_1=\\mu_1$ and the row1 hook pair in $\\nu$ at columns $j,\\mu_1+1$ has lengths $A=h^{\\mu}_{1j}$ and $h$: the first is nondivisible because row1 precedes the first divisible row, and the second is divisible. Its balanced symbol sorts to $\\mu$, so its coefficient is nonzero. If $i=1$, then $\\sigma_1=j-1$, and the row1 pair at columns $j,j+1$ has lengths $h,h-1$; its balanced transfer $h-1$ sorts to $\\mu$, again giving a nonzero coefficient. For $\\eta$, the pair at columns $1,\\sigma_1+1$ has lengths $A'=\\sigma_1+h+l-1$ and $h$. When $i>1$, $A'-h^{\\mu}_{i1}=A$, so $A'$ is nondivisible; when $i=1$, $A'=h^{\\mu}_{11}+h-1$, also nondivisible. Its balanced symbol sorts to $\\eta$. Each claimed target has precisely two lost and two gained beta values, so the uniqueness argument in step 2.2 rules out cancellation. Thus both $J_{\\nu\\mu}$ and $J_{\\nu\\eta}$ are nonzero. [F2, step 1.1, step 2.2, step 4.2, algebra]\n\n6.1 Connectivity and sufficiency. Induct upwards from $\\rho$ in the finite dominance poset. For $\\mu\\ne\\rho$, if an outgoing coefficient $J_{\\mu\\tau}$ is nonzero, then $\\tau$ is strictly below $\\mu$ in the same core class by step 2.1, so induction connects $\\tau$, and hence $\\mu$, to $\\rho$. If no outgoing coefficient exists, steps 2.2, 3.2, 4.2 and 5.1 connect $\\mu$ to $\\nu$ and then $\\eta$, with $\\eta$ strictly below $\\mu$, and induction again connects it to $\\rho$. Every such edge is a same-block implication by step 1.2. Thus every pair of labels of the same core lies in the same block. Together with step 4.1 this proves the equivalence. [step 1.2, step 2.1, step 4.1, step 2.2, step 5.1, algebra]\n\n7.1 Parameterization and infinite characteristic. Every simple is the head of a Weyl module, so every block has a partition label. The core sizes are $n-ew$, and each admissible core occurs via the partition $\\rho$ of step 4.2; step 6.1 therefore gives the stated indexing. If $e=\\infty$, all coefficients vanish by step 1.1, so positivity forces every first Jantzen submodule, hence every radical, to vanish. All Weyl modules are simple; their decomposition matrix is the identity. Step 4.1 then gives identity Cartan matrix, so every primitive projective is simple and $S$ is semisimple, with each partition its own block and core. This proves all assertions. [F1, F2, F3, step 1.1, step 4.1, step 4.2, step 6.1] ∎",
+        "dependency_level": 17,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Lemma 5.34, Lemma 5.35 and Theorem 5.36 with their printed proofs, printed pp. 60-62: the abacus proof of the core, the block-separation lemma, and the two-direction block classification via the Jantzen-Schaper sum formula, Lemma 5.26's index description; the original first-row-only sufficiency proof is corrected below using Lyle–Mathas"
+            },
+            {
+              "title": "Sinead Lyle and Andrew Mathas, Blocks of affine and cyclotomic Hecke algebras, author-hosted complete 19-page preprint (published in Math. Z.)",
+              "url": "https://www.maths.usyd.edu.au/u/pubs/publist/preprints/2006/lyle-24.pdf",
+              "locator": "Lemma 2.2 (Graham-Lehrer: the composition factors of a cell module lie in one block), Lemma 2.4 (linear independence of Weyl classes), Theorem 2.6 (Jantzen sum formula) and Propositions 2.3 and 2.9 with their proofs, printed pp. 4-7"
+            },
+            {
+              "title": "Sinead Lyle and Andrew Mathas, Blocks of cyclotomic Hecke algebras, complete arXiv preprint math/0607451",
+              "url": "https://arxiv.org/abs/math/0607451",
+              "locator": "Proposition 3.6(b) and Proposition 3.7 with full proofs, printed pp. 12–14; Proposition 4.2, Corollary 4.3 and correcting Remark, printed pp. 17–18"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-weight-one-block-decomposition-pattern",
+        "kind": "theorem",
+        "title": "The weight-one block decomposition pattern",
+        "deps": [
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "def-e-core-e-quotient-and-e-weight",
+          "thm-q-schaper-virtual-radical-layer-formula",
+          "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules",
+          "thm-dj-bridge-ordinary-specht-is-the-signed-conjugate-murphy-cell",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "lem-virtual-weyl-combinations-detect-q-schur-block-separation",
+          "def-e-regular-and-e-restricted-partitions",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "statement": "Let $F$ be a field and $q\\in F^{\\times}$ with finite quantum characteristic $2\\le e<\\infty$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]), let $\\gamma$ be an $e$-core of $m$, put $n=m+e$, and fix $d\\ge n$ ([[def-e-core-e-quotient-and-e-weight]]). There are exactly $e$ partitions $\\lambda_1,\\dots,\\lambda_e$ of $n$ with $e$-core $\\gamma$; list them in dominance order, $\\lambda_1\\rhd\\lambda_2\\rhd\\cdots\\rhd\\lambda_e$. In the source's (Murphy) normalisation the Weyl modules and simple modules of this weight-one class satisfy $W^{\\lambda_e}=L^{\\lambda_e}$ and $$[W^{\\lambda_k}]=[L^{\\lambda_k}]+[L^{\\lambda_{k+1}}]\\qquad(1\\le k<e),$$ so the decomposition matrix of the class is the $e\\times e$ bidiagonal matrix with rows and columns $\\lambda_1,\\dots,\\lambda_e$. Moreover exactly $\\lambda_1$ is not $e$-restricted, while $\\lambda_2,\\dots,\\lambda_e$ are. Under the Schur functor ([[thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules]]) the corresponding Murphy Specht classes are $$[S^{\\lambda_1}_{\\mathrm M}]=[D^{\\lambda_2}_{\\mathrm M}],\\qquad [S^{\\lambda_k}_{\\mathrm M}]=[D^{\\lambda_k}_{\\mathrm M}]+[D^{\\lambda_{k+1}}_{\\mathrm M}]\\ (2\\le k<e),\\qquad [S^{\\lambda_e}_{\\mathrm M}]=[D^{\\lambda_e}_{\\mathrm M}],$$ with $D^{\\lambda_1}_{\\mathrm M}=0$; conjugating partitions and applying the same $\\theta$ pullback to both modules ([[def-type-a-hecke-specht-module-and-cell-form]], [[thm-dj-bridge-ordinary-specht-is-the-signed-conjugate-murphy-cell]]) gives the corresponding decomposition matrix for the page's Dipper-James Specht modules in $e$-regular labels.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Enumeration and ordering. Choose a conjugate core beta set long enough that every runner contains a bead, and list its bottom beads $x_1<\\cdots<x_e$. Take this beta length divisible by $e$. Every partition with this core has, at the same beta length, the same packed set: its packed set represents $\\gamma$ and the length uniquely determines a beta-set for $\\gamma$. Weight one means its total runner displacement from packing is one, so exactly one bottom bead moves down one row. Conversely each such move adds exactly $e$ boxes and preserves the core. Thus replacing $x_k$ by $x_k+e$ gives precisely the $e$ weight-one partitions, denoted $\\lambda_k$. For $j>k$, moving $x_j$ instead of $x_k$ gives the more dominant conjugate partition: the two bead lists differ by replacing $x_k+e,x_j$ with $x_k,x_j+e$. The new maximum is larger than both old values and the new minimum smaller than both, with the same sum. For each number of selected entries, the largest possible sum therefore does not decrease, and at least one sorted prefix increases. The sorted conjugate parts differ from these prefixes by the same beta offsets. Conjugation reverses dominance, hence $\\lambda_1\\rhd\\cdots\\rhd\\lambda_e$. For the empty core put $\\gamma_i=0$. The largest original partition is $(\\gamma_1+e,\\gamma_2,\\ldots)$, since its added horizontal first-row strip dominates every other placement. [F3, construct, algebra]\n\n1.2 Choose a lift with valuation one. If $q\\ne1$, its finite quantum characteristic $e$ is its multiplicative order, and is prime to the field characteristic; use $R=F[X]_{(X-q)}$ and $\\hat q=X$. The derivative of $X^e-1$ at $q$ is $eq^{e-1}\\ne0$, so $\\nu([e]_X)=1$; also $\\nu([h]_X)=0$ when $e\\nmid h$. If $q=1$, then $\\operatorname{char}F=p=e$. First work over $\\mathbb F_p$ with $R=\\mathbb Z_{(p)}$, $\\hat q=1$, giving $\\nu([e]_1)=\\nu(p)=1$ and $\\nu([h]_1)=0$ for $p\\nmid h$, and then extend scalars to $F$. This extension preserves the decomposition multiplicities because the q-Schur simple modules are absolutely irreducible and its integral Weyl modules commute with scalar extension. In both cases the generic factorial is nonzero and [F2] applies. [F1, F2, given, algebra]\n\n2.1 Restriction. If $\\lambda$ is not restricted, some $\\lambda_i-\\lambda_{i+1}\\ge e$, so removing the last $e$ boxes of row $i$ leaves a partition. Its size is $|\\gamma|$ and its core is $\\gamma$, so it equals $\\gamma$. Thus $\\lambda$ is obtained by adding $e$ boxes to row $i$ of $\\gamma$. An $e$-core has $\\gamma_r-\\gamma_{r+1}<e$ for every $r$, since otherwise it has a removable horizontal $e$-strip. Consequently $i>1$ is impossible: the partition inequality $\\gamma_{i-1}\\ge\\gamma_i+e$ would contradict this core property. Therefore the only nonrestricted member is $\\lambda_1=(\\gamma_1+e,\\gamma_2,\\ldots)$; it is indeed nonrestricted because its first-row difference is at least $e$. [F3, step 1.1, algebra]\n\n2.2 Evaluate the balanced formula. A nonzero coefficient involves a hook of length divisible by $e$. A weight-one abacus has exactly one bead-gap pair of equal residue with the gap below the bead: $x_k+e$ and $x_k$; thus its only $e$-divisible hook has length $e$. Any surviving term in [F2] replaces two bead values, and its new runner counts equal the old ones: either $e$ divides the transfer $h_{ac}$, leaving residues fixed, or $e$ divides $h_{ab}=h_{ac}+\\beta_b-\\beta_c$, exchanging their residues. Hence its sorted symbol is one of the $\\lambda_j$. For $j>k$, the distinct bead sets of $\\lambda_k$ and $\\lambda_j$ differ exactly by replacing $x_k+e,x_j$ with $x_k,x_j+e$. There is exactly one balanced transfer yielding this change: if $x_j<x_k+e$, its two hook lengths are $h_{ab}=e$, $h_{ac}=x_j-x_k$; if $x_j>x_k+e$, they are $h_{ab}=x_j-x_k$, $h_{ac}=e$. The difference $x_j-x_k$ is not divisible by $e$ since bottom beads are on distinct runners. Thus the respective unsigned coefficients are $+1$ and $-1$ by step 1.2. Sorting gives in either case the signed coefficient $(-1)^{j-k+1}$: in the packed core set, exactly one bead from each runner with bottom bead $>x_r$ lies between $x_r$ and $x_r+e$, so moving $x_r$ crosses $e-r$ beads; the relative sorting parity for the two moves, together with their opposite orientation, is $(-1)^{(e-j)-(e-k)+1}$. There are no other terms and no repeated contributions: the two lost and two gained bead values determine the pair and transfer uniquely. Therefore $\\sum_{i>0}[W^{\\lambda_k}(i)]=\\sum_{j>k}(-1)^{j-k+1}[W^{\\lambda_j}]$. [F2, F3, step 1.1, step 1.2, algebra]\n\n3.1 Descending induction and the matrix. For $k=e$, step 2.2 gives zero on the left; all summands are actual submodule classes with nonnegative simple multiplicities, so $W^{\\lambda_e}(1)=0$ and $W^{\\lambda_e}=L^{\\lambda_e}$. Suppose the stated rows are known for $j>k$. Substitution into step 2.2 telescopes to $\\sum_{i>0}[W^{\\lambda_k}(i)]=[L^{\\lambda_{k+1}}]$. Since $W(1)=\\operatorname{rad}W$ and each later term is a submodule of $W(1)$, positivity shows $W(1)\\cong L^{\\lambda_{k+1}}$ and $W(i)=0$ for $i\\ge2$. The head quotient is $L^{\\lambda_k}$, giving $[W^{\\lambda_k}]=[L^{\\lambda_k}]+[L^{\\lambda_{k+1}}]$. Notice that the identity $[W]=[L]+\\sum_{i>0}[W(i)]$ is used only after proving all later filtration submodules vanish; it is false for a general Jantzen filtration. Reading simple multiplicities yields the complete $e\\times e$ bidiagonal matrix. [F1, F2, step 2.2, algebra]\n\n4.1 Specht rows. Apply the exact functor of [F4] to step 3.1 and use step 2.1: $D^{\\lambda_1}_{\\mathrm M}=0$, while the other $D^{\\lambda_k}_{\\mathrm M}$ are the nonzero simples. This gives exactly the three displayed Murphy Specht class identities, hence the full $e\\times(e-1)$ Murphy matrix. Conjugation sends the core to $\\gamma'$ and the restricted simple labels to regular ones, and the same $\\theta$ pullback applied to every module preserves all composition multiplicities. Thus the ordinary Specht matrix has the same entries under the accepted conjugate/sign label dictionary. [F4, step 2.1, step 3.1] ∎",
+        "dependency_level": 17,
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Proposition 5.38 (due to James) with its printed proof, printed pp. 62-63: the e partitions of e-weight 1 with a fixed e-core, the Jantzen evaluation $\\sum_{i>0}[W^{\\lambda_k}(i)]=\\sum_{j>k}(-1)^{j-k+1}[W^{\\lambda_j}]$, and the induction giving $W^{\\lambda_e}=L^{\\lambda_e}$ and $W^{\\lambda_k}=L^{\\lambda_k}+L^{\\lambda_{k+1}}$; Proposition 4.19 for the Schur functor dictionary"
+            },
+            {
+              "title": "Sinead Lyle and Andrew Mathas, Blocks of affine and cyclotomic Hecke algebras, author-hosted complete 19-page preprint (published in Math. Z.)",
+              "url": "https://www.maths.usyd.edu.au/u/pubs/publist/preprints/2006/lyle-24.pdf",
+              "locator": "Remark on the failure of the Jantzen argument for Specht modules and Proposition 2.3, printed pp. 4-7: the Schur functor comparison $[S(\\lambda):D(\\nu)]=[\\Delta(\\lambda):L(\\nu)]$ when $D(\\nu)\\ne0$"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": []
+      },
+      {
+        "id": "cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core",
+        "kind": "corollary",
+        "title": "Type-A Hecke Specht modules are in the same block iff their labels have the same e-core",
+        "deps": [
+          "thm-q-schur-weyl-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core",
+          "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+          "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules",
+          "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents",
+          "lem-central-idempotent-decompositions-of-one-are-unique",
+          "def-e-core-e-quotient-and-e-weight",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "thm-wedderburn-artin-theorem"
+        ],
+        "statement": "Let $F$ be a field and $q\\in F^{\\times}$ with quantum characteristic $e$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]), and let $S^{\\lambda}$ be the type-A Hecke Specht module of this page in the Dipper-James convention ([[def-type-a-hecke-specht-module-and-cell-form]]) for $\\lambda\\vdash n$. Then for all partitions $\\lambda,\\mu\\vdash n$ the modules $S^{\\lambda}$ and $S^{\\mu}$ lie in the same block of $H_{F,q}(S_n)$ if and only if $\\lambda$ and $\\mu$ have the same $e$-core ([[def-e-core-e-quotient-and-e-weight]]). Equivalently, for finite $e$, the blocks of $H_{F,q}(S_n)$ are indexed by the $e$-cores $\\gamma$ of size at most $n$ with $|\\gamma|\\equiv n\\pmod e$, and the block of $S^{\\lambda}$ is determined by $C_e(\\lambda)$. For $e=\\infty$ use $C_\\infty(\\lambda):=\\lambda$; the Hecke algebra is semisimple and its blocks are indexed by partitions of $n$.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Central idempotents of $H$ from blocks of $S$. For a block $C$ of $S$ with primitive central idempotent $\\epsilon_C$ put $\\tilde\\epsilon_C:=\\epsilon_Ce=e\\epsilon_Ce\\in H$. This element is a central idempotent of $H$: it is idempotent because $\\epsilon_C$ is, and for $x=ese\\in H$ centrality of $\\epsilon_C$ gives $x\\tilde\\epsilon_C=es\\epsilon_Ce=e\\epsilon_Cse=\\tilde\\epsilon_Cx$; it is nonzero because it acts as the identity on the nonzero module $W^{\\lambda}_Fe=S^{\\lambda}_{\\mathrm M}$ for any $\\lambda$ with $W^{\\lambda}_F\\in C$, namely $S^{\\lambda}_{\\mathrm M}\\tilde\\epsilon_C=W^{\\lambda}_Fe\\epsilon_Ce=W^{\\lambda}_F\\epsilon_Ce=S^{\\lambda}_{\\mathrm M}$. Moreover $\\tilde\\epsilon_C\\tilde\\epsilon_{C'}=e\\epsilon_C\\epsilon_{C'}e=0$ for $C\\ne C'$ and $\\sum_C\\tilde\\epsilon_C=e\\sum_C\\epsilon_Ce=e^2=1_H$. [F1, F2, F3]\n\n1.2 Number of q-Schur blocks is at least the number of Hecke blocks. Let $H=\\bigoplus_iB_i$ be the block decomposition of $H$ with block identities $b_i$. Since $M=\\bigoplus_{\\nu}M^{\\nu}$ and $H=M^{(1^n)}$ is a direct summand, $M=\\bigoplus_iMb_i$ with each $Mb_i\\ne0$ (it contains $Hb_i=B_i$), and $\\mathrm{Hom}_H(Mb_i,Mb_j)=0$ for $i\\ne j$, because a map $f$ satisfies $f(x)=f(xb_i)=f(x)b_i\\in Mb_jb_i=0$. Hence $$S=\\mathrm{End}_H(M)=\\bigoplus_{i,j}\\mathrm{Hom}_H(Mb_i,Mb_j)=\\prod_i\\mathrm{End}_H(Mb_i)$$ is a product of the nonzero algebras $\\mathrm{End}_H(Mb_i)$, and a product of nonzero algebras has at least one block per factor; so $\\#\\{\\text{blocks of }S\\}\\ge\\#\\{\\text{blocks of }H\\}$. [F2, F3, algebra]\n\n2.1 Number of Hecke blocks is at least the number of q-Schur blocks. Decompose each nonzero central idempotent $\\tilde\\epsilon_C$ of step 1.1 into primitive central idempotents of $H$ using the unique decomposition of $1_H$: every primitive central idempotent $\\delta_D$ of $H$ with $\\delta_D\\tilde\\epsilon_C=\\delta_D$ belongs to exactly one $\\tilde\\epsilon_C$, because $\\delta_D=\\delta_D\\cdot1_H=\\sum_C\\delta_D\\tilde\\epsilon_C$ and pairwise orthogonality of the $\\delta_D$ forces $\\delta_D\\tilde\\epsilon_C\\in\\{0,\\delta_D\\}$. Since each $\\tilde\\epsilon_C\\ne0$ has at least one such $\\delta_D$, the blocks $D$ of $H$ are partitioned into nonempty supports over the blocks $C$ of $S$, and therefore $\\#\\{\\text{blocks of }H\\}\\ge\\#\\{\\text{blocks of }S\\}$. [F2, step 1.1]\n\n3.1 A bijection of block sets, and the core criterion. By steps 2.1 and 1.2 the two block counts are equal, so each $\\tilde\\epsilon_C$ of step 1.1 has exactly one primitive summand and the map $C\\mapsto\\tilde\\epsilon_C$ is a bijection from the blocks of $S$ onto the blocks of $H$. Since $S^{\\lambda}_{\\mathrm M}=W^{\\lambda}_Fe$ and $S^{\\mu}_{\\mathrm M}=W^{\\mu}_Fe$, the modules $S^{\\lambda}_{\\mathrm M}$ and $S^{\\mu}_{\\mathrm M}$ lie in the same Hecke block if and only if $W^{\\lambda}_F$ and $W^{\\mu}_F$ lie in the same q-Schur block: indeed the block of $S^{\\lambda}_{\\mathrm M}$ is the image under the bijection of the block of $W^{\\lambda}_F$. By the block theorem [F4] the latter holds if and only if $C_e(\\lambda)=C_e(\\mu)$, which proves the q-Schur-normalised statement. [F1, F4, step 2.1, step 1.2]\n\n4.1 Ordinary normalisation and semisimplicity. By [F5], $S^{\\lambda}$ and $S^{\\mu}$ lie in the same block exactly when $S^{\\lambda'}_{\\mathrm M}$ and $S^{\\mu'}_{\\mathrm M}$ do. Step 3.1 makes this equivalent to $C_e(\\lambda')=C_e(\\mu')$, and the identity $C_e(\\nu')=C_e(\\nu)'$ makes it equivalent to $C_e(\\lambda)=C_e(\\mu)$. This identity follows by conjugating every removable border strip in a core-removal sequence; the terminal core also conjugates, by independence of removal order. For $e=\\infty$, $S$ is semisimple by [F4]. Its corner $eSe$ is semisimple: by [[thm-wedderburn-artin-theorem]], in the Wedderburn decomposition of $S$, each idempotent selects a subspace in each matrix factor, and its corner is a product of matrix algebras over the same division rings. Thus $H\\cong eSe$ is semisimple; the block bijection separates the partition labels. This proves all assertions. [F1, F4, F5, step 3.1, algebra] ∎",
+        "dependency_level": 18,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Proposition 4.19 (the exact Schur functor, $eSe\\cong H$ and the correspondence of cell and simple modules), printed pp. 43-44, and Corollary 5.37 (Dippe-James, James-Mathas) with its printed proof, printed pp. 61-63"
+            },
+            {
+              "title": "Sinead Lyle and Andrew Mathas, Blocks of affine and cyclotomic Hecke algebras, author-hosted complete 19-page preprint (published in Math. Z.)",
+              "url": "https://www.maths.usyd.edu.au/u/pubs/publist/preprints/2006/lyle-24.pdf",
+              "locator": "Proposition 2.3 with its printed proof, printed pp. 4-5: the idempotents $\\epsilon_C e$ and the two-sided block count between $S_{r,n}$ and $H_{r,n}$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nakayama-block-classification-for-symmetric-groups",
+        "kind": "theorem",
+        "title": "Nakayama block classification for symmetric groups",
+        "deps": [
+          "def-e-core-e-quotient-and-e-weight",
+          "def-p-blocks-by-primitive-central-idempotents",
+          "prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one",
+          "cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core",
+          "prop-core-quotient-size-and-weight-formula",
+          "def-splitting-p-modular-system-for-a-finite-group",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+          "lem-central-idempotent-decompositions-of-one-are-unique",
+          "thm-q-schur-weyl-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order"
+        ],
+        "statement": "Let $k$ be a splitting field of characteristic $p>0$ (equivalently the residue field of the fixed splitting $p$-modular system, [[def-splitting-p-modular-system-for-a-finite-group]], [[def-p-blocks-by-primitive-central-idempotents]]) and let $n\\ge0$. Two Specht modules $S^{\\lambda}_k,S^{\\mu}_k$ of $k[S_n]$ lie in the same block of $k[S_n]$ if and only if $\\lambda,\\mu\\vdash n$ have the same $p$-core ([[def-e-core-e-quotient-and-e-weight]]). Consequently the blocks of $k[S_n]$ are indexed by the pairs $(\\gamma,w)$ with $\\gamma$ a $p$-core, $w\\in\\mathbb N_0$ and $n=|\\gamma|+pw$, and the block of $S^{\\lambda}_k$ is the pair $(C_p(\\lambda),w_p(\\lambda))$ with $w_p(\\lambda)=(n-|C_p(\\lambda)|)/p$ ([[prop-core-quotient-size-and-weight-formula]]).\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Specialisation. Take $q=1\\in k^{\\times}$ and $e$ the quantum characteristic of $(k,q)$; since $q=1$ and $\\operatorname{char}k=p>0$, [F1] gives $e=p$. By [F1] there is an algebra isomorphism $H_{k,1}(S_n)\\cong k[S_n]$ carrying the Hecke Specht modules of $H_{k,1}(S_n)$ to the group Specht modules $S^{\\lambda}_k$, so by [F5] this isomorphism induces a bijection between the blocks of the two algebras that matches $S^{\\lambda}$ with $S^{\\lambda}_k$; in particular $S^{\\lambda}_k$ and $S^{\\mu}_k$ lie in the same block of $k[S_n]$ if and only if the corresponding Hecke Specht modules lie in the same block of $H_{k,1}(S_n)$. [F1, F5, algebra]\n\n2.1 The core criterion. Applying the Hecke block criterion [F2] with $q=1$ and $e=p$, the Hecke Specht modules of $H_{k,1}(S_n)$ lie in the same block if and only if the labels $\\lambda,\\mu$ have the same $p$-core. Together with step 1.1 this gives: $S^{\\lambda}_k$ and $S^{\\mu}_k$ lie in the same block of $k[S_n]$ if and only if $C_p(\\lambda)=C_p(\\mu)$. [F2, step 1.1]\n\n3.1 The parametrisation by cores and weights. By [F2] the blocks of $H_{k,1}(S_n)$, hence by step 1.1 the blocks of $k[S_n]$, are indexed by the $p$-cores $\\gamma$ with $|\\gamma|\\le n$ and $|\\gamma|\\equiv n\\pmod p$; the block of $S^{\\lambda}_k$ corresponds to $C_p(\\lambda)$. For $n\\ge0$ and such a $\\gamma$ put $w:=(n-|\\gamma|)/p\\in\\mathbb N_0$; by [F4] this is exactly the $p$-weight $w_p(\\lambda)$ of any Specht label with core $\\gamma$, and $n=|\\gamma|+pw$. Since $w$ is determined by $n$ and $\\gamma$, the map $\\gamma\\mapsto(\\gamma,w)$ is a bijection onto the displayed set of pairs, and the block of $S^{\\lambda}_k$ is the pair $(C_p(\\lambda),w_p(\\lambda))$. [F4, step 2.1, algebra]\n\n4.1 Steps 2.1 and 3.1 establish both assertions: the same-block criterion by the $p$-core, and the indexing of the blocks by the pairs $(\\gamma,w)$ with $n=|\\gamma|+pw$ together with the identification of the block of $S^{\\lambda}_k$ as $(C_p(\\lambda),w_p(\\lambda))$. [step 2.1, step 3.1] ∎\n\nThe classification is stated independently, by a Young-module and Brauer-quotient route, as Theorem 1 of O'Donovan's preprint recorded in the sources; that reference is an independent confirmation of the statement and is not used in the proof above. No choice principle is used anywhere in this item.",
+        "dependency_level": 19,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Corollary 5.37 (Dipper-James, James-Mathas) with its printed proof, printed pp. 61-63, specialised at $q=1$ using the $q=1$ identifications of Chapters 1, 3 and 4 (the group algebra $FS_n$ and the classical Specht modules)"
+            },
+            {
+              "title": "Joseph O'Donovan, On the blocks of the symmetric group, arXiv:1708.04365 (complete preprint)",
+              "url": "https://arxiv.org/abs/1708.04365",
+              "locator": "Theorem 1, printed p. 1: the classification of the blocks of $kS_n$ by $p$-cores; recorded in this page's coverage as an independent confirmation of the statement (independent Young-module and Brauer-quotient route), not as the proof route of this page"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-weight-zero-symmetric-group-blocks-are-defect-zero",
+        "kind": "proposition",
+        "title": "Weight-zero symmetric-group blocks are defect zero",
+        "deps": [
+          "thm-nakayama-block-classification-for-symmetric-groups",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "prop-core-quotient-size-and-weight-formula",
+          "thm-symmetric-group-decomposition-matrix-is-dominance-unitriangular",
+          "thm-cartan-matrix-is-d-transpose-d",
+          "thm-defect-zero-blocks-are-simple-algebras",
+          "def-defect-group-and-numerical-defect-of-a-block",
+          "def-p-blocks-by-primitive-central-idempotents",
+          "def-e-core-e-quotient-and-e-weight",
+          "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+          "def-projective-indecomposable-characters-and-cartan-invariants"
+        ],
+        "statement": "Let $k$ be a splitting field of characteristic $p>0$ and let $\\lambda\\vdash n$\nbe a partition of $p$-weight $w_p(\\lambda)=0$, that is, a $p$-core\n([[def-e-core-e-quotient-and-e-weight]]). Then the block $B$ of $k[S_n]$\ncontaining $S^{\\lambda}_k$\n([[thm-nakayama-block-classification-for-symmetric-groups]]) contains exactly\none Specht label, namely $\\lambda$; its decomposition matrix is the $1\\times1$\nmatrix $(1)$, so $D^{\\lambda}$ is both the unique simple and the unique\nprojective indecomposable module of $B$; its Cartan matrix is $(1)$; the\nblock algebra is a full matrix algebra over $k$; and $B$ has trivial defect\ngroup, that is, defect zero in the fixed splitting modular system\n([[def-defect-group-and-numerical-defect-of-a-block]]).\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Bookkeeping for the labels of $B$. Let $\\nu\\vdash n$ be a $p$-regular partition with block $B(\\nu)=B$; by [F1] and [F2] this is equivalent to $C_p(\\nu)=C_p(\\lambda)=\\lambda$, and since $|\\nu|=n=|\\lambda|$ this forces $\\nu=\\lambda$. Hence the only $p$-regular label in $B$ is $\\lambda$, and by [F2] the only simple module in $B$ is $D^{\\lambda}$. For any Specht label $\\mu$ in $B$, [F2] gives $C_p(\\mu)=\\lambda$ and $|\\mu|=|\\lambda|$, so $\\mu=\\lambda$ as well: the block has exactly one Specht row. Since $S^{\\lambda}_k$ is indecomposable with head $D^{\\lambda}$ by [F1] and lies in $B$ by hypothesis, the decomposition matrix of $B$ is the $1\\times1$ matrix with entry $d_{\\lambda\\lambda}=[S^{\\lambda}_k:D^{\\lambda}]=1$, by the exact diagonal multiplicity in [F4]. A simple head alone would not establish multiplicity one. [F1, F2, F3, F4]\n\n2.1 The Cartan matrix and the projective cover. By [F5] applied to the block $B$ the Cartan matrix of $B$ is $C_B=D_B^{\\mathsf T}D_B=(1)$, so the projective cover $P^{\\lambda}$ of $D^{\\lambda}$ has $D^{\\lambda}$ as its only composition factor, with multiplicity one. A nonzero module of length one is simple, so $P^{\\lambda}\\cong D^{\\lambda}$: the block $B$ has a projective simple module. [F1, F5, step 1.1, algebra]\n\n3.1 Defect zero and the matrix algebra. By step 2.1 the projective indecomposable $P^{\\lambda}$ equals the simple $D^{\\lambda}$, and it is the unique projective indecomposable of $B$ because the simple modules of $B$ are in bijection with its projective indecomposables; so $D^{\\lambda}$ is both the unique simple and the unique projective indecomposable of $B$. The defect-zero criterion [F6] now gives that $B$ is a full matrix algebra over $k$ and that the defect group of $B$ is trivial, that is, $B$ has defect zero in the fixed splitting modular system. [F5, F6, step 1.1, step 2.1]\n\n4.1 Steps 1.1, 2.1 and 3.1 give all the assertions: the single Specht label $\\lambda$, the decomposition matrix $(1)$, the unique simple and projective indecomposable $D^{\\lambda}$, the Cartan matrix $(1)$, the full matrix algebra structure and defect zero. [step 1.1, step 2.1, step 3.1] ∎",
+        "dependency_level": 20,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "J. L. Alperin, Local Representation Theory, Cambridge Studies in Advanced Mathematics 11, Chapters 1 and 4 (blocks, defect groups and the Cartan matrix)",
+              "url": "https://www.cambridge.org/core/books/local-representation-theory/44B0F0A0A9F0CFA2E1B5B30A8D0C5D3B",
+              "locator": "the block-theoretic statements quoted through the published library items (Weil's defect-zero criterion and the decomposition/Cartan identities); the combinatorial input is the p-core classification of this page"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete author-hosted scan, 161 pp.)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "Theorem 12.1 and Corollaries 12.2-12.3, printed pp. 42-43: dominance unitriangularity of the modular decomposition matrix of $S_n$"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-block-weight-is-not-the-same-as-numerical-defect",
+        "kind": "remark",
+        "title": "Block weight is not the same as numerical defect",
+        "deps": [
+          "prop-core-quotient-size-and-weight-formula",
+          "def-defect-group-and-numerical-defect-of-a-block",
+          "prop-weight-zero-symmetric-group-blocks-are-defect-zero",
+          "cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core"
+        ],
+        "statement": "**Weight is combinatorial.** The $e$-weight $w_e(\\lambda)$ of a label is the\nnumber of $e$-hooks that have to be removed from $\\lambda$ to reach its\n$e$-core, it equals the size $|Q_e(\\lambda)|$ of the $e$-quotient, and it\nsatisfies $n=|\\lambda|=|C_e(\\lambda)|+e\\,w_e(\\lambda)$\n([[prop-core-quotient-size-and-weight-formula]]). In particular\n$w_e(\\lambda)$ is determined by the $e$-core, so by [[cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core]]\nit is an invariant of the block of $S^{\\lambda}$; for $e=p$ it is the\ncombinatorial $p$-weight of the block.\n\n**Numerical defect is block-theoretic.** The numerical defect of a block is\ndefined from its defect group: for the block bimodule $kGb$ a defect group is\na $p$-subgroup $D\\le G$ for which the diagonal $\\Delta D$ is a vertex, its\norder $p^d$ defines the numerical defect $d$, and defect zero means $D=1$\n([[def-defect-group-and-numerical-defect-of-a-block]]). It is a $p$-adic order\ninvariant of the block algebra in the fixed splitting modular system and is\ndefined by a vertex computation, not by hook combinatorics.\n\n**The two invariants must not be identified without a theorem and an explicit\nrange.** The weight records how many hooks of length divisible by $e$ the\nlabel carries, while the numerical defect records the order of a vertex of the\nblock bimodule; nothing on this page proves that the two numbers agree, and\nthey are defined from entirely different data. The only case settled here is\nweight zero: if $w_p(\\lambda)=0$ then $\\lambda$ is a $p$-core, and the\nclassification forces the block to have a single Specht label, Cartan matrix\n$(1)$, a projective simple module, a full matrix algebra structure and trivial\ndefect group, so the numerical defect is also zero\n([[prop-weight-zero-symmetric-group-blocks-are-defect-zero]]). For $w>0$ no\nassertion about the defect group of a weight-$w$ symmetric-group block, and no\nidentification of $w$ with the numerical defect, is made on this page. The\nprinted defect-group computation for weight-$w$ blocks (defect $\\nu_p((pw)!)$,\nwith defect group a Sylow $p$-subgroup of $S_{pw}$) is deliberately not\nasserted here, because no counted proof source for it is registered with this\nbatch; supplying it is outside this page's proof route and remains an open\nobligation for a later page of the track.\n\nNo choice principle is used in the statements recorded above.",
+        "strategy": "The core/quotient size and hook count definitions are distinguished correctly from the vertex order defining numerical defect. At fixed rank and finite e, block-weight invariance uses precisely the Hecke core classification; weight-zero defect uses the exact preceding proposition. No positive-weight defect-group formula is asserted as a theorem, and no equality of the invariants is inferred. Read all four actual suppliers; reader added the missing Hecke-block dependency. That cited classification and weight-zero consequence are still held on the batch-13 Schur foundation, so this complete current remark cannot be accepted unconditionally. Owner must resolve the two missing constructions; risk remains open.",
+        "dependency_level": 21,
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 62-63: the e-weight as the number of e-hooks removed to reach the e-core, and Proposition 4.12"
+            },
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "the e-weight before Proposition 5.38 and Corollary 5.37, printed pp. 61-63; the p-core classification of the modular block theory is used only through the published library items"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1572,
+    "id": "cores-quotients-and-blocks-of-symmetric-groups-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Cores, Quotients, and Blocks of Symmetric Groups — Examples",
+    "companion": "cores-quotients-and-blocks-of-symmetric-groups",
+    "requires": [
+      "cores-quotients-and-blocks-of-symmetric-groups"
+    ],
+    "items": [
+      {
+        "id": "ex-three-core-and-three-quotient-by-abacus",
+        "kind": "example",
+        "title": "The three-core and three-quotient of (6,5,2,1^3) by abacus",
+        "deps": [
+          "def-e-core-e-quotient-and-e-weight",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "thm-e-quotient-controls-hooks-divisible-by-e",
+          "prop-core-quotient-size-and-weight-formula",
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "lem-hooks-are-bead-gap-pairs-on-an-abacus"
+        ],
+        "statement": "Work with $e=3$ and $\\lambda=(6,5,2,1^3)\\vdash16$, whose $\\beta$-set is\n$X_\\lambda=\\{11,9,5,3,2,1\\}$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]). On the $3$-abacus the\nbeads sit on runners $0,1,2$ at positions $9,3$ on runner $0$, $1$ on runner\n$1$ and $11,5,2$ on runner $2$. Top-packing every runner gives the core beads\n$3,0$ on runner $0$, $1$ on runner $1$ and $8,5,2$ on runner $2$, so\n$C_3(\\lambda)=(3,1)$ ([[def-e-core-e-quotient-and-e-weight]]); with the\nnormalising condition $3\\mid|X|=6$ the runner row-label sets are\n$X^{(3)}_0=\\{3,1\\}$, $X^{(3)}_1=\\{0\\}$ and $X^{(3)}_2=\\{3,1,0\\}$, giving the\nquotient $Q_3(\\lambda)=((2,1),\\varnothing,(1))$. Four bead moves are required,\nand the size formula\n$$16=|(3,1)|+3\\,(|(2,1)|+|\\varnothing|+|(1)|)=4+3\\cdot4$$\nholds ([[prop-core-quotient-size-and-weight-formula]]); the same-runner\nbead-gap pairs realise the corresponding rim $3$-hook removals\n([[lem-hooks-are-bead-gap-pairs-on-an-abacus]],\n[[thm-e-quotient-controls-hooks-divisible-by-e]],\n[[thm-e-core-is-independent-of-the-rim-hook-removal-order]]).\n\nNo choice principle is used.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $e=3$, the partition $\\lambda=(6,5,2,1^3)$ of $16$ with\n$\\beta$-set $X=X_\\lambda=\\{11,9,5,3,2,1\\}$, and the $3$-abacus positions\n$3a+i$ of runner $i$ and row $a$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F1] A $\\beta$-set and its partition are related by\n$P(\\{h_1>\\cdots>h_m\\})=(h_1-(m-1),\\dots,h_m-0)$ with trailing zeros deleted;\nthe elements of $X_\\lambda$ are the first-column hook lengths\n$b_i(\\lambda)=\\lambda_i+\\ell(\\lambda)-i$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F2] The hooks of a partition with $\\beta$-set $Y$ correspond bijectively to\nthe bead-gap pairs $(b,g)$ of $Y$, i.e. $b\\in Y$, $g\\notin Y$, $0\\le g<b$, the\ncorresponding hook having length $b-g$; the hook has length divisible by $3$\nexactly when $b\\equiv g\\pmod3$; and removing it replaces $Y$ by\n$(Y\\setminus\\{b\\})\\cup\\{g\\}$\n([[lem-hooks-are-bead-gap-pairs-on-an-abacus]]).\n\n[F3] On the $3$-abacus the row-label set of runner $i$ is\n$Y^{(3)}_i=\\{a:3a+i\\in Y\\}$, the top-packed set is\n$Y^{(3)}=\\bigcup_{i=0}^{2}\\{3a+i:0\\le a\\le|Y^{(3)}_i|-1\\}$, the $3$-core is\n$C_3(\\cdot)=P(Y^{(3)})$, and for a normalised $\\beta$-set with $3\\mid|Y|$ the\n$3$-quotient components are $\\lambda^{(i)}=P(Y^{(3)}_i)$ with weight\n$w_3=|Q_3|=\\sum_i|\\lambda^{(i)}|$\n([[def-e-core-e-quotient-and-e-weight]]).\n\n[F4] $C_3(\\lambda)$ is the terminal partition of every maximal sequence of\nremovals of removable border strips of size $3$, and $|\\lambda\\setminus R|=\n|\\lambda|-3$ for each such strip $R$\n([[thm-e-core-is-independent-of-the-rim-hook-removal-order]]).\n\n[F5] There is a bijection $f$ from the hooks of $\\lambda$ of $3$-divisible\nlength onto the hooks of $Q_3(\\lambda)$ with $|H|=3\\,|f(H)|$ and\n$Q_3(\\lambda\\setminus H)=Q_3(\\lambda)\\setminus f(H)$\n([[thm-e-quotient-controls-hooks-divisible-by-e]]); and\n$16=|\\lambda|=|C_3(\\lambda)|+3\\,w_3(\\lambda)$ with $w_3(\\lambda)$ the number\nof such hooks ([[prop-core-quotient-size-and-weight-formula]]).\n\n## Verification\n\n**Proof technique:** direct.\n\n1.1 Beads on the runners: reading positions $3a+i$ of $X=\\{11,9,5,3,2,1\\}$ gives runner $0$ the positions $9=3\\cdot3$, $3=3\\cdot1$, runner $1$ the position $1=3\\cdot0+1$, and runner $2$ the positions $11=3\\cdot3+2$, $5=3\\cdot1+2$, $2=3\\cdot0+2$. Hence the row-label sets are $X^{(3)}_0=\\{3,1\\}$, $X^{(3)}_1=\\{0\\}$, $X^{(3)}_2=\\{3,1,0\\}$, of counts $2,1,3$. [given, F1, F3]\n\n1.2 Top-packing moves the two beads of runner $0$ to rows $0,1$, the bead of runner $1$ to row $0$, and the three beads of runner $2$ to rows $0,1,2$, so $$X^{(3)}=\\{0,3\\}\\cup\\{1\\}\\cup\\{2,5,8\\}=\\{8,5,3,2,1,0\\}$$ and, by [F1] with the six beads listed in decreasing order, $$C_3(\\lambda)=P(X^{(3)})=(8-5,\\,5-4,\\,3-3,\\,2-2,\\,1-1,\\,0-0)=(3,1).$$ [given, F1, F3]\n\n2.1 The normalisation $3\\mid|X|=6$ holds, so the row-label sets of step 1.1 may be read as $1$-abaci: $\\lambda^{(0)}=P(\\{3,1\\})=(2,1)$, $\\lambda^{(1)}=P(\\{0\\})=\\varnothing$ and $\\lambda^{(2)}=P(\\{3,1,0\\})=(1)$, so $Q_3(\\lambda)=((2,1),\\varnothing,(1))$ and $w_3(\\lambda)=2+1+0+1=4$. [given, F1, F3, step 1.1]\n\n2.2 Four upward bead moves lead from $X$ to $X^{(3)}$: $11\\mapsto8$ on runner $2$ (the target $8\\notin X$), then $9\\mapsto6$ on runner $0$ ($6\\notin X$), then $3\\mapsto0$ on runner $0$ ($0\\notin X$), then $6\\mapsto3$ on runner $0$ (now $3\\notin X$); every move replaces a bead by a gap one row above it on its own runner, so by [F2] each is the removal of a rim hook of length $3$. In terms of [F1] the intermediate partitions are $$(6,5,2,1^3)\\to(4,4,2,1^3)\\to(3,2,2,1^3)\\to(3,2,2)\\to(3,1),$$ each step of size $3$ by [F4], and the terminal partition is $C_3(\\lambda)=(3,1)$ as computed in step 1.2. [given, F1, F2, F4, step 1.1, step 1.2, construct]\n\n3.1 The size formula of [F5] reads $16=|C_3(\\lambda)|+3\\,w_3(\\lambda)=4+3\\cdot4$, using steps 1.2 and 2.1; the fourth move of step 2.2 is the last of the $w_3(\\lambda)=4$ removals of size $3$ exhibited there. The four hooks of $\\lambda$ of $3$-divisible length, read from the hook-length diagram (rows $11,7,5,4,3,1$; $9,5,3,2,1$; $5,1$; $3$; $2$; $1$), are $H_{1,5}$ of length $3$, $H_{2,1}$ of length $9$, $H_{2,3}$ of length $3$ and $H_{4,1}$ of length $3$, and the bijection $f$ of [F5] sends them to the hooks $H_{1,1}(\\lambda^{(2)})$, $H_{1,1}(\\lambda^{(0)})$, $H_{1,2}(\\lambda^{(0)})$, $H_{2,1}(\\lambda^{(0)})$ of sizes $1,3,1,1$ of $(1)$, $(2,1)$, matching $|H|=3|f(H)|$ in each case; all assertions of the Example are thereby checked. [F2, F3, F5, step 1.1, step 1.2, step 2.1, step 2.2, algebra] ∎",
+        "dependency_level": 6
+      },
+      {
+        "id": "ex-three-core-of-four-three-two-one",
+        "kind": "example",
+        "title": "The three-core of (4,3,2,1) by two removal orders",
+        "deps": [
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "lem-hooks-are-bead-gap-pairs-on-an-abacus",
+          "def-e-core-e-quotient-and-e-weight",
+          "def-removable-border-strip-and-height",
+          "lem-hooks-correspond-to-removable-border-strips",
+          "prop-core-quotient-size-and-weight-formula",
+          "def-beta-set-and-e-runner-abacus-of-a-partition",
+          "thm-e-quotient-controls-hooks-divisible-by-e"
+        ],
+        "statement": "Let $e=3$ and $\\lambda=(4,3,2,1)\\vdash10$, with $\\beta$-set\n$X=\\{7,5,3,1\\}$ ([[def-beta-set-and-e-runner-abacus-of-a-partition]]). Two\ndifferent orders of removing rim $3$-hooks both terminate at the $3$-core\n$(1)$, in agreement with the order-independence theorem\n([[thm-e-core-is-independent-of-the-rim-hook-removal-order]]): on the\n$3$-abacus the beads $7,5,3,1$ lie on runners $1,2,0,1$, and sliding beads up\nin any admissible order reaches the top-packed configuration $\\{4,2,1,0\\}$\nwith $P=(1)$; two explicit manual removal orders of the corresponding rim\n$3$-hooks, namely $$(4,3,2,1)\\to(2,2,2,1)\\to(1,1,1,1)\\to(1)$$ and\n$$(4,3,2,1)\\to(4,3)\\to(2,2)\\to(1),$$ reach the same partition, and no $3$-hook\nremains at the end\n([[lem-hooks-are-bead-gap-pairs-on-an-abacus]],\n[[thm-e-quotient-controls-hooks-divisible-by-e]]). The size count\n$10-1=9=3\\cdot3$ exhibits the weight $w_3((4,3,2,1))=3$\n([[prop-core-quotient-size-and-weight-formula]]).\n\nNo choice principle is used.",
+        "strategy": "## Facts & Assumptions\n\n**Given:** $e=3$, the partition $\\lambda=(4,3,2,1)$ of $10$ with the\n$\\beta$-set $X=X_\\lambda=\\{7,5,3,1\\}$, and $3$-abacus positions $3a+i$ on\nrunner $i$ at row $a$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F1] For a $\\beta$-set $\\{h_1>\\cdots>h_m\\}$ the partition is\n$P(\\{h_1>\\cdots>h_m\\})=(h_1-(m-1),\\dots,h_m-0)$ with trailing zeros deleted,\nand the elements of $X_\\lambda$ are the first-column hook lengths of $\\lambda$\n([[def-beta-set-and-e-runner-abacus-of-a-partition]]).\n\n[F2] The hooks of a partition with $\\beta$-set $Y$ correspond bijectively to\nthe bead-gap pairs $(b,g)$ of $Y$, i.e. $b\\in Y$, $g\\notin Y$, $0\\le g<b$, the\nhook having length $b-g$; it has length divisible by $3$ exactly when\n$b\\equiv g\\pmod3$, and removing it replaces $Y$ by\n$(Y\\setminus\\{b\\})\\cup\\{g\\}$, which is again a $\\beta$-set, of the partition\nobtained by deleting the corresponding rim hook of size $b-g$\n([[lem-hooks-are-bead-gap-pairs-on-an-abacus]]).\n\n[F3] A removable border strip of size $3$ is a removable $3$-strip as in\n[[def-removable-border-strip-and-height]], and the rim hook attached to the\nhook of a node has size the hook length by\n[[lem-hooks-correspond-to-removable-border-strips]]; the $3$-core\n$C_3(\\lambda)=P(X^{(3)})$ is the top-packed set of the $3$-abacus of a\n$\\beta$-set of $\\lambda$\n([[def-e-core-e-quotient-and-e-weight]]).\n\n[F4] $C_3(\\lambda)$ is the terminal partition of every maximal sequence of\nremovals of removable border strips of size $3$, and $10=|\\lambda|=\n|C_3(\\lambda)|+3\\,w_3(\\lambda)$ with $w_3(\\lambda)$ the number of such\nremovals in any maximal sequence\n([[thm-e-core-is-independent-of-the-rim-hook-removal-order]],\n[[prop-core-quotient-size-and-weight-formula]]).\n\n## Verification\n\n**Proof technique:** direct.\n\n1.1 Beads on the runners: $7=3\\cdot2+1$, $5=3\\cdot1+2$, $3=3\\cdot1+0$, $1=3\\cdot0+1$, so the row-label sets are $X^{(3)}_0=\\{1\\}$ (bead $3$), $X^{(3)}_1=\\{2,0\\}$ (beads $7,1$) and $X^{(3)}_2=\\{1\\}$ (bead $5$). Top-packing puts the single beads of runners $0$ and $2$ in row $0$ and the two beads of runner $1$ in rows $0,1$, so $X^{(3)}=\\{0\\}\\cup\\{1,4\\}\\cup\\{2\\}=\\{4,2,1,0\\}$ and, listing the four beads in decreasing order, $$C_3(\\lambda)=P(X^{(3)})=(4-3,\\,2-2,\\,1-1,\\,0-0)=(1).$$ [given, F1, F3]\n\n2.1 The moves of a single bead one row up are exactly $7\\mapsto4$ on runner $1$, $5\\mapsto2$ on runner $2$ and $3\\mapsto0$ on runner $0$, since $4,2,0\\notin X$; each target is a gap on the same runner as its bead, so by [F2] each move removes a rim hook of length $3$. In particular $X^{(3)}$ is reached after exactly these three moves, in any order. [given, F1, F2, F3, step 1.1]\n\n3.1 First removal order: move $7\\mapsto4$, then $5\\mapsto2$, then $3\\mapsto0$, giving the $\\beta$-sets $\\{7,5,3,1\\}\\to\\{5,4,3,1\\}\\to\\{4,3,2,1\\}\\to\\{4,2,1,0\\}$ and, by [F1], the partitions $$(4,3,2,1)\\to(2,2,2,1)\\to(1,1,1,1)\\to(1),$$ each step of size $3$ by [F2] and [F3] and terminating at $C_3(\\lambda)=(1)$ by step 1.1. [F1, F2, F3, step 1.1, step 2.1, construct]\n\n3.2 Second removal order: move $3\\mapsto0$, then $7\\mapsto4$, then $5\\mapsto2$, giving $\\{7,5,3,1\\}\\to\\{7,5,1,0\\}\\to\\{5,4,1,0\\}\\to\\{4,2,1,0\\}$ and the partitions $$(4,3,2,1)\\to(4,3)\\to(2,2)\\to(1),$$ again three steps of size $3$ ending at $(1)$; both orders are maximal, since the terminal configuration $\\{4,2,1,0\\}$ has no bead with a gap one row above it on its runner, so no rim $3$-hook remains. [F1, F2, F3, step 1.1, step 2.1, construct]\n\n4.1 The size formula of [F4] reads $10=|C_3(\\lambda)|+3\\,w_3(\\lambda)=1+3\\cdot3$, using step 1.1 and the three steps of either order; the partition $(1)$ has the single hook length $1$, so indeed no hook of length $3$ survives, and the two orders agree on the terminal partition as asserted. [F2, F3, F4, step 1.1, step 3.1, step 3.2, algebra] ∎",
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-the-same-number-of-removable-p-hooks-does-not-replace-the-core-test",
+        "kind": "counterexample",
+        "title": "Equal removable-hook counts do not replace the core test",
+        "deps": [
+          "def-removable-border-strip-and-height",
+          "lem-hooks-correspond-to-removable-border-strips",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "def-e-core-e-quotient-and-e-weight",
+          "thm-nakayama-block-classification-for-symmetric-groups",
+          "def-hook-arm-leg-and-hook-length",
+          "def-beta-set-and-e-runner-abacus-of-a-partition"
+        ],
+        "statement": "The number of removable $p$-hooks of a partition determines its $p$-core; in\nparticular two partitions of $n$ with the same number of removable $p$-hooks\nlie in the same $p$-block of the symmetric group.",
+        "strategy": "direct",
+        "dependency_level": 20,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stacey Law (lecturer), notes by Leonard Tomczak, Representation Theory of Symmetric Groups, Cambridge Part III Michaelmas 2022 lecture notes, complete 76-page PDF",
+              "url": "https://math.berkeley.edu/~ltomczak/notes/Mich2022/RepSn_Notes.pdf",
+              "locator": "Section 4.1, printed pp. 59-63: the abacus computation of e-cores (Theorem 4.10), the worked examples, and Proposition 4.12 (the weight as the number of e-hooks removed and as the number of hooks of length divisible by e)"
+            },
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Lemma 5.34 with its abacus proof and Corollary 5.37, printed pp. 61-63: the e-core of a partition and the block classification by e-cores"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-a-weight-one-block-decomposition-matrix",
+        "kind": "example",
+        "title": "The complete weight-one decomposition matrix for S3 at p=3",
+        "deps": [
+          "thm-q-schaper-virtual-radical-layer-formula",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules",
+          "lem-dj-bridge-murphy-cellular-basis-and-cell-form",
+          "lem-dj-bridge-row-permutation-module-standard-action",
+          "thm-dj-bridge-ordinary-specht-is-the-signed-conjugate-murphy-cell",
+          "thm-nakayama-block-classification-for-symmetric-groups",
+          "def-e-core-e-quotient-and-e-weight",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "thm-e-core-is-independent-of-the-rim-hook-removal-order",
+          "def-integral-specht-lattice-and-base-change",
+          "def-modular-specht-form-and-radical-quotient"
+        ],
+        "statement": "Take $e=p=3$ and the weight-one configuration $n=3$, $\\gamma=\\varnothing$ of [[def-e-core-e-quotient-and-e-weight]]; the three partitions of $3$ with $3$-core $\\varnothing$ are $\\lambda_1=(3)\\rhd\\lambda_2=(2,1)\\rhd\\lambda_3=(1,1,1)$ ([[def-e-core-e-quotient-and-e-weight]]). The associated q-Schur weight-one class over a field $F$ of characteristic $3$ with $q=1$ and $d\\ge3$ has the complete Weyl/simple decomposition matrix, with rows and columns in the order $\\lambda_1,\\lambda_2,\\lambda_3$, equal to $$\\begin{pmatrix}1&1&0\\\\0&1&1\\\\0&0&1\\end{pmatrix}.$$ Applying the Schur functor and the conjugation/duality dictionary gives the Murphy Specht rows $[S^{\\lambda_1}_{\\mathrm M}]=[D^{\\lambda_2}_{\\mathrm M}]$, $[S^{\\lambda_2}_{\\mathrm M}]=[D^{\\lambda_2}_{\\mathrm M}]+[D^{\\lambda_3}_{\\mathrm M}]$, $[S^{\\lambda_3}_{\\mathrm M}]=[D^{\\lambda_3}_{\\mathrm M}]$, which in the page's $3$-regular labels $(3),(2,1)$ is the matrix $$\\begin{pmatrix}1&0\\\\1&1\\\\0&1\\end{pmatrix}$$ with rows $(3),(2,1),(1,1,1)$ ([[thm-nakayama-block-classification-for-symmetric-groups]], [[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]]); the group-side entries are verified directly from the two-dimensional model $S^{(2,1)}$ of characteristic $3$, whose all-ones vector spans a trivial submodule with sign quotient, together with $S^{(3)}=\\operatorname{triv}$ and $S^{(1,1,1)}=\\operatorname{sgn}$.\n\nNo choice principle is used.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 The labels and their cores. The hook-length diagrams of the three partitions of $3$ are $3,2,1$ for $(3)$; $3,1$ in the first row and $1$ in the second for $(2,1)$; and $3,2,1$ vertically for $(1,1,1)$. In each case there is exactly one hook of length $3$ and removing its rim hook leaves the empty partition, so all three partitions have $3$-core $\\varnothing$; conversely any partition of $3$ with core $\\varnothing$ is one of these, since a partition whose core has size $3$ is its own core, and $\\varnothing$ has size $0=3-3$. Dominance orders them as $(3)\\rhd(2,1)\\rhd(1,1,1)$. [given, F1]\n\n2.1 Compute the Weyl matrix directly. First work over $\\mathbb F_3$ with lift $R=\\mathbb Z_{(3)}$, $\\hat q=1$, so the only nonzero hook valuation at rank three is $v([3]_1)=1$. The conjugate beta sequence of $(3)$ is $(3,2,1)$. Its hook pairs $(3,2)$ and $(3,1)$ give the balanced sequences $(5,0,1)$ and $(4,2,0)$, of sorted shapes $(1,1,1)$ with sign $-1$ and $(2,1)$ with sign $+1$, respectively. The other pair has coefficient zero. Thus its positive sum is $[W^{(2,1)}]-[W^{(1,1,1)}]$. For $(2,1)$, beta $(4,2,0)$ and its only nonzero pair $(3,1)$ give $(5,1,0)$, shape $(1,1,1)$ with sign $+1$, so its positive sum is $[W^{(1,1,1)}]$. The column shape has no row pair and zero positive sum, hence $W^{(1,1,1)}=L^{(1,1,1)}$. Positivity and $W(1)=\\operatorname{rad}W$ then show that $W^{(2,1)}(1)=L^{(1,1,1)}$ and every higher submodule is zero, giving $[W^{(2,1)}]=[L^{(2,1)}]+[L^{(1,1,1)}]$. Substitute into the first sum to get $[L^{(2,1)}]$; the same argument gives $[W^{(3)}]=[L^{(3)}]+[L^{(2,1)}]$. This proves exactly the displayed complete Weyl matrix. Scalar extension to any original field $F$ of characteristic three preserves the Weyl modules/forms and the composition series, since all Schur simple heads are absolutely simple by [F2]. [F2, step 1.1, algebra]\n\n3.1 Determine the specific corner images directly. The group row symmetrizer $x_{(3)}=\\sum_{w\\in S_3}w$ satisfies $x_{(3)}^2=6x_{(3)}$, so its rank-one Murphy form is zero in characteristic three. In the rank-one column cell the generator is $1$ and its square coefficient is $1$; the higher ideal contains $1+T_1$ and $1+T_2$ (the latter is a conjugate of the former), so this cell and its nonzero form quotient are the sign module. For the middle cell put $x=1+T_1$, $c_0=x$ and $c_1=xT_2$ modulo the higher row ideal. Its row symmetrizer satisfies $x_{(3)}=x+xT_2+xT_2T_1$, so $c_1T_1=-c_0-c_1$ while $c_0T_1=c_0$; and $T_2^2=1$ gives $c_0T_2=c_1$, $c_1T_2=c_0$. Thus its generator matrices are $M_1=\\left(\\begin{smallmatrix}1&0\\\\-1&-1\\end{smallmatrix}\\right)$ and $M_2=\\left(\\begin{smallmatrix}0&1\\\\1&0\\end{smallmatrix}\\right)$. The independent cell products $x^2=2x$, $xT_2x=x_{(3)}-x\\equiv-x$ and $xT_2^2x=2x$ give $G=\\left(\\begin{smallmatrix}2&-1\\\\-1&2\\end{smallmatrix}\\right)=\\left(\\begin{smallmatrix}2&2\\\\2&2\\end{smallmatrix}\\right)$ over $F$. Its radical is the line $(1,-1)$; modulo it both generators act by $1$, so $D_{\\mathrm M}^{(2,1)}$ is the nonzero trivial module. These two simple images are distinct since $1\\ne-1$. The exact corner/form identity [F3] therefore kills precisely $L^{(3)}$ among the three labels. Projecting the Weyl matrix just proved gives all displayed Murphy Specht rows over the original $F$, without any general finite-$e$ nonzero-label criterion. [F3, step 2.1, algebra]\n\n4.1 Dipper-James rows and the direct group computation. Conjugating the partitions $(3)\\leftrightarrow(1,1,1)$, $(2,1)\\leftrightarrow(2,1)$ and applying the signed $\\theta$-pullback to every Hecke module, the rows of step 3.1 become $[S^{(1,1,1)}]=[D^{(2,1)}]$, $[S^{(2,1)}]=[D^{(2,1)}]+[D^{(3)}]$ and $[S^{(3)}]=[D^{(3)}]$ in the $3$-regular labels, that is, the matrix $\\left(\\begin{smallmatrix}1&0\\\\1&1\\\\0&1\\end{smallmatrix}\\right)$ with rows $(3),(2,1),(1,1,1)$ and columns $(3),(2,1)$. For the independent direct check, construct the tabloid module over $k$ using [F5]. Every middle-shape polytabloid is a difference $v_i-v_j$, and these span the two independent vectors $e_t,e_u$ displayed in [F5], so they are a basis of $S^{(2,1)}_k$. A one-row polytabloid is its unique tabloid, giving the trivial module; a one-column polytabloid is the nonzero alternating sum of all six distinct tabloids, giving the sign module. Put $w:=e_t+e_u=v_3-v_1+v_2-v_1=v_1+v_2+v_3$ in characteristic $3$: then $w\\ne0$ spans a one-dimensional submodule, since $\\sigma\\cdot v_i=v_{\\sigma(i)}$ gives $\\sigma\\cdot w=w$ for every $\\sigma\\in S_3$, so it realises the trivial module; and in the quotient, $(12)\\cdot e_t+e_t=(v_3-v_2)+(v_3-v_1)=2v_3-v_1-v_2=3v_3-w\\equiv0$ shows that $(12)$ acts by $-1$. All transpositions are conjugate and act on a one-dimensional quotient, so they all act by $-1$ and the quotient is sign. The orthonormal tabloid form has middle Gram matrix $\\left(\\begin{smallmatrix}2&1\\\\1&2\\end{smallmatrix}\\right)$ in $(e_t,e_u)$; its characteristic-three kernel is $k(e_t+e_u)=kw$. Thus the James quotient $D^{(2,1)}$ is precisely this sign quotient, while the row form has norm $1$ and $D^{(3)}$ is trivial. With $S^{(3)}=\\operatorname{triv}$, $S^{(1,1,1)}=\\operatorname{sgn}$ by [F5], and the just-computed $D^{(3)}=\\operatorname{triv}$, $D^{(2,1)}=\\operatorname{sgn}$ (the complete list is [F4]), the direct rows of $S^{(3)},S^{(2,1)},S^{(1,1,1)}$ are $(1,0),(1,1),(0,1)$, matching the matrix obtained from the Schur functor entry by entry. [F4, F5, step 3.1, algebra] ∎",
+        "dependency_level": 20,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete 79-page prepublication manuscript (1998; expanded AMS University Lecture Series 15 edition, 1999)",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf",
+              "locator": "Proposition 5.38 and the accompanying discussion of $q=1$, printed pp. 61-63: the weight-one bidiagonal matrix and its specialisation to the group Specht theory"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Lecture Notes in Mathematics 682, Springer 1978 (complete author-hosted scan, 161 pp.)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf",
+              "locator": "the modular Specht theory of $S_3$ in characteristic $3$ (Theorem 12.1 and Example 12.4, printed pp. 42-43) as an independent confirmation of the group-side matrix"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+// Root-only application of reviewed, authentic filename compatibility addition.
+import fs from'node:fs';import crypto from'node:crypto';import{resolve}from'node:path';import{pathToFileURL}from'node:url';import{spawnSync}from'node:child_process';
+const d='research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/gate1-retirement',plan=JSON.parse(fs.readFileSync(`${d}/diagnosis.json`)),sha=x=>crypto.createHash('sha256').update(x).digest('hex');
+for(const[p,h]of Object.entries(plan.input_guards))if(sha(fs.readFileSync(p))!==h)throw Error('changed input '+p);
+if(fs.existsSync(plan.proposed_canonical_path))throw Error('destination appeared; inspect it before applying');
+const original=spawnSync('git',['show',`${plan.legacy_commit}:${plan.legacy_claims_path}`]);if(original.status!==0||sha(original.stdout)!==plan.legacy_file_sha256)throw Error('historical committed carrier mismatch');
+const proposal=fs.readFileSync(`${d}/canonical-claims.verbatim.proposed.jsonl`);if(!proposal.equals(original.stdout)||sha(proposal)!==plan.proposed_file_sha256)throw Error('proposal is not authentic verbatim bytes');
+fs.writeFileSync(plan.proposed_canonical_path,proposal,{flag:'wx'});
+const{recordedPublishedRepair}=await import(pathToFileURL(resolve('tools/published-repair-policy.mjs')));const results=plan.scope.map(id=>({id,result:recordedPublishedRepair('.',id,fs.readFileSync(`items/${id}.md`,'utf8'),`research/recorded-retirement-2026-10-06/receipts/${id}.json`)}));
+fs.writeFileSync(`${d}/root-application-receipt.json`,JSON.stringify({at:new Date().toISOString(),canonical_path:plan.proposed_canonical_path,sha256:sha(proposal),authentic_legacy_source:plan.legacy_claims_path,commit:plan.legacy_commit,results,no_carrier_edits:true,no_fabricated_audits_or_claim_dates:true},null,2)+'\n');if(results.some(x=>!x.result.ok))throw Error(JSON.stringify(results));console.log('Both original historical repair receipts now validate; no mathematical carriers changed.');

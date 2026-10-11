@@ -20,8 +20,8 @@ sources:
     - title: "Elias–Williamson, Soergel Calculus, §3.5"
       url: "https://arxiv.org/pdf/1309.0865"
 verification:
-  audited: 2026-09-27
   precheck: pass
+  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/soergel/receipts/thm-the-type-a-soergel-hom-formula.json
 ---
 
 ## Statement
@@ -41,11 +41,12 @@ $\operatorname{Hom}(M,M)$ is free of the same rank, and
 $\operatorname{End}_{R\text{-}R}(R)=R$ is generated in degree $0$.
 
 ## Facts & Assumptions
+
 **Given:** Objects $M,N$ of $\mathrm{SBim}_n$, graded direct summands of Bott–Samelson bimodules, and the characters $h_\Delta,h_\nabla$ of [[def-type-a-standard-graph-bimodules-support-filtrations-and-character]].
 
 [F1] Special Hom formula: for $M'\in F_\Delta$ and $B$ a Bott–Samelson bimodule, $\operatorname{Hom}_{R\text{-}R}(M',B)$ is graded free of rank $\sum(M':\Delta_x(d))(B:\nabla_x(e))v^{d-e}$, and dually for a Bott–Samelson source and a $\nabla$-flagged target ([[lem-type-a-soergel-special-hom-formula]]).
 
-[F2] Imported from Soergel's Lemma 6.13 with Satz 6.14, in the normalization recorded in the definition: for $M'\in F_\Delta$ and $N'\in\operatorname{add}\mathcal B$ the graded module $\operatorname{Hom}_{R\text{-}R}(M',N')$ is free of rank $\sum_{x,d,e}(M':\Delta_x(d))(N':\nabla_x(e))v^{d-e}$, and the same expression is obtained for $M'\in\operatorname{add}\mathcal B$ and $N'\in F_\nabla$; moreover $\operatorname{add}\mathcal B=\mathcal B$, where $\mathcal B$ consists of the bimodules $B$ for which $B\oplus C\cong D$ with $C,D$ finite sums of shifted Bott–Samelson products; it is this category of special bimodules that is closed under direct summands ([[def-type-a-standard-graph-bimodules-support-filtrations-and-character]]).
+[F2] For every Soergel summand $N$, evaluation at the graph generator and the two image equalities identify the Hom from a standard graph with its single-graph support module, and give the corresponding multiplicity rank. The four support layers are free on either side, the image equalities commute with summand idempotents, and canonical flag layers of a summand are summands of the word's layers ([[lem-type-a-top-support-layers-are-controlled-by-reflection-localization]]).
 
 [F3] $\mathrm{SBim}_n$ is the idempotent completion of the category of Bott–Samelson bimodules; every object is a direct summand of a finite direct sum of shifts of Bott–Samelson bimodules and hence lies in $\operatorname{add}\mathcal B$, with finite support, in $F_\Delta\cap F_\nabla$, and with intrinsic multiplicities, and finite freeness on both sides is inherited by summands ([[def-the-type-a-soergel-category]], [[lem-type-a-support-filtration-multiplicities-are-intrinsic]], [[lem-bott-samelson-bimodules-have-delta-and-nabla-support-filtrations]], [[lem-type-a-top-support-layers-are-controlled-by-reflection-localization]]).
 
@@ -53,15 +54,16 @@ $\operatorname{End}_{R\text{-}R}(R)=R$ is generated in degree $0$.
 
 
 
+
+
 ## Proof
 
-1.1 Reduction to the imported instance: by [F3] every object of $\mathrm{SBim}_n$ is a direct summand of a finite direct sum of shifts of Bott–Samelson bimodules, so it lies in the additive closure $\operatorname{add}\mathcal B$ and, by [F3] again, in $F_\Delta\cap F_\nabla$ with intrinsic multiplicities; both sides of the displayed formula are additive in each variable, because the multiplicities are additive over the layers of a support flag and the graded rank is additive over direct sums. It therefore suffices to invoke the imported identity [F2] for the pair $(M,N)$, which is the instance $M\in F_\Delta$, $N\in\operatorname{add}\mathcal B$ (the dual instance $M\in\operatorname{add}\mathcal B$, $N\in F_\nabla$ gives the same displayed expression and the same conclusion). [F2, F3]
+1.1 We first prove the stronger flagged-source form with $M\in F_\Delta$ and $N$ a Soergel summand. For $M=\Delta_y(d)$, evaluation at its generator identifies $\operatorname{Hom}(M,N)$ with a shift of $\Gamma_yN$. By [F2] this is free, and the lower-layer image theorem gives rank $\sum_e(N:\nabla_y(e))v^{d-e}$. Thus the claimed formula holds for a single standard source, including arbitrary shifts and finite sums. [F2, F4]
 
-1.2 Freeness and rank: [F2] gives that $\operatorname{Hom}_{R\text{-}R}(M,N)$ is a graded free $R$-module of rank $\sum_{x,d,e}(M:\Delta_x(d))(N:\nabla_x(e))v^{d-e}$, the multiplicities being the intrinsic ones of [F3]; in particular $\operatorname{Hom}(M,M)$ is free of the same rank with $M=N$. [F2, F3]
+1.2 Let $0\to M_1\to M\to M_2\to0$ be a short exact sequence from the canonical flag, with all three sources $\Delta$-flagged and with their multiplicities additive. For a word sum $B$, the sequence $0\to\operatorname{Hom}(M_2,B)\to\operatorname{Hom}(M,B)\to\operatorname{Hom}(M_1,B)$ is always left exact. The special Hom formula [F1] computes all three modules as free, with graded rank polynomials satisfying the same additive identity. Hence their Hilbert series also satisfy that identity, and left exactness forces surjectivity in each degree: the kernel has the known dimension and the source then has precisely enough remaining dimension to fill the last term. Thus the sequence is short exact. If $N$ is a summand of $B$ with projection idempotent $e$, this sequence splits into its $e$ and $1-e$ parts by postcomposition. Exactness therefore holds with $N$ in place of $B$, including its final surjectivity; no Hom-exactness for arbitrary flagged targets has been assumed. [F1, F3, algebra]
 
-1.3 Consistency with the locally proved special case: for $M$ a Bott–Samelson bimodule the same formula is [F1], and the two agree because [F3] identifies the multiplicities used in [F2] with the multiplicities of the support flags of $M$ and $N$; [F3]'s localization input, the rank identities of [[lem-type-a-top-support-layers-are-controlled-by-reflection-localization]], exhibits the top layer of each flag as the corresponding hom space. [F1, F3]
+2.1 Induct on the finite length of the $\Delta$ flag of $M$. Peel off the maximal-support first layer $M_1$, a finite sum of shifted standards; the quotient $M_2$ has a shorter flag. Step 1.1 proves the formula for $M_1$, and induction proves it for $M_2$. The short exact Hom sequence of step 1.2 splits as graded right modules, because its last term is free: lift homogeneous basis elements to obtain a homogeneous right-linear section. Thus $\operatorname{Hom}(M,N)$ is free and its rank is the sum of the two multiplicity formulas, giving exactly the displayed expression. This proves the flagged-source form for every summand target. [step 1.1, step 1.2, algebra]
 
-2.1 Hecke normalization: expanding the two characters by [F4] and using the bilinearity of the standard pairing with $\langle\widetilde T_x,\widetilde T_y\rangle=\delta_{xy}$ gives $\langle h_\Delta(M),h_\nabla(N)\rangle=\sum_{x,d,e}(M:\Delta_x(d))(N:\nabla_x(e))v^{d-e}$, which is the displayed rank, so the graded rank is the standard pairing of the two characters. [F4, step 1.2]
+3.1 The dual flagged-target form is proved with the same argument: for a single $\nabla$ target use the second image equality of [F2] and the free quotient $\Gamma^yM$; for a flag extension use the dual special Hom formula [F1] to prove surjectivity for word sources degree by degree, then pass to a source summand by precomposition with its idempotent. Induction on the target flag and a homogeneous splitting of the resulting free Hom sequence give freeness and the same rank sum. In particular [F3] makes step 2.1 applicable to every pair of Soergel objects in the Statement. [F1, F2, F3, step 1.2, step 2.1]
 
-3.1 Unit: for $M=N=R$ the two flags have the single quotient $\Delta_e(0)=\nabla_e(0)=R$, so the formula gives rank $v^0=1$ and $h_\Delta(R)=h_\nabla(R)=\widetilde T_e=1$, and $\operatorname{End}_{R\text{-}R}(R)=R$ is generated in degree $0$; the general case is [F2] together with the identification of step 2.1. ∎ [F2, step 1.2, step 2.1]
-
+4.1 Expanding the characters of [F4] in their orthonormal standard basis gives $\langle h_\Delta(M),h_\nabla(N)\rangle=\sum_{x,d,e}(M:\Delta_x(d))(N:\nabla_x(e))v^{d-e}$ by bilinearity, which is the established graded rank. For the unit the single graph layer has $d=e=0$; a bimodule endomorphism of $R$ is multiplication by its image of $1$, so $\operatorname{End}_{R\text{-}R}^{\bullet}(R)=R$, freely generated by the identity in degree zero. This proves all assertions. [F4, step 2.1, step 3.1] ∎

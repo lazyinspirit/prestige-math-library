@@ -5,7 +5,7 @@ title: Inverse Kazhdan–Lusztig polynomials
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-bruhat-order-basic-properties-for-permutations]
+deps: [lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization, lem-bruhat-order-basic-properties-for-permutations]
 dependency_level: 6
 justified_by: []
 aliases: []
@@ -21,13 +21,13 @@ sources:
       url: "https://arxiv.org/pdf/math/9910117"
       locator: "§2.2, Definition 2.3 and the μ-coefficient paragraph, printed pp. 4–5; the complete relevant passage was read."
 verification:
-  audited: "2026-10-08"
-  precheck: n/a
+  precheck: "n/a"
+  repair: "research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/gate1-kl-receipts/receipts/def-inverse-kazhdan-lusztig-polynomials.json"
 ---
 
 ## Definition
 
-For $x,w\in S_n$ set $$q'_{x,w}:=\sum_{m\ge0}(-1)^m\sum_{x=z_0<z_1<\cdots<z_m=w}p_{z_0,z_1}p_{z_1,z_2}\cdots p_{z_{m-1},z_m}\in A,$$ where the inner sum is over strictly increasing Bruhat chains from $x$ to $w$, the $m=0$ chain occurs only when $x=w$, and $p_{u,v}$ are the coefficients of the Kazhdan–Lusztig basis ([[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]). Every chain lies in a finite Bruhat interval by [[lem-bruhat-order-basic-properties-for-permutations]], so the sum is finite. If $x\not\le w$ there are no chains; if $x=w$, the empty chain gives $q'_{w,w}=1$. If $x<w$, each chain has at least one factor $p_{u,v}\in v\mathbb Z[v]$ with $u<v$, so $q'_{x,w}\in v\mathbb Z[v]$.
+For $x,w\in S_n$ set $$q'_{x,w}:=\sum_{m\ge0}(-1)^m\sum_{x=z_0<z_1<\cdots<z_m=w}p_{z_0,z_1}p_{z_1,z_2}\cdots p_{z_{m-1},z_m}\in A,$$ where the inner sum is over strictly increasing Bruhat chains from $x$ to $w$, the $m=0$ chain occurs only when $x=w$, and $p_{u,v}$ are the coefficients of the Kazhdan–Lusztig basis ([[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]). Every chain lies in a finite Bruhat interval by [[lem-bruhat-order-basic-properties-for-permutations]], so the sum is finite. If $x\not\le w$ there are no chains; if $x=w$, the empty chain gives $q'_{w,w}=1$. If $x<w$, each chain has at least one factor $p_{u,v}\in v\mathbb Z[v]$ with $u<v$, so $q'_{x,w}\in v\mathbb Z[v]$.
 
 Let $P=(p_{x,w})$ and $Q'=(q'_{x,w})$. The matrix $N:=P-I$ is strictly triangular on the finite Bruhat poset, hence nilpotent; the $(x,w)$ entry of $N^m$ is the sum of products over chains of $m$ strict steps. Therefore $$Q'=I-N+N^2-\cdots+(-1)^M N^M=(I+N)^{-1}=P^{-1},$$ where $M$ can be any integer at least the maximum strict-chain length. In particular, $Q'P=PQ'=I$ and $$\sum_zq'_{x,z}p_{z,w}=\delta_{x,w}=\sum_zp_{x,z}q'_{z,w}.$$
 
@@ -35,4 +35,4 @@ The **inverse Kazhdan–Lusztig polynomials** in the classical sign convention a
 
 ## Remarks
 
-The finite chain inverse and dual-basis description use the locally proved unitriangular basis and coefficient clauses of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]. Coefficientwise positivity is not required.
+The finite chain inverse and dual-basis description use the locally proved unitriangular basis and coefficient clauses of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]. Coefficientwise positivity is not required.

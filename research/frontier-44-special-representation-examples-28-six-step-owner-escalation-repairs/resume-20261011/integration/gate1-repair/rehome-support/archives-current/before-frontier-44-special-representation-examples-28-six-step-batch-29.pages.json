@@ -1,0 +1,307 @@
+[
+  {
+    "order": 1799,
+    "id": "lefschetz-splitting-in-bounded-triangulated-categories",
+    "kind": "A",
+    "category": "homological-algebra",
+    "title": "Lefschetz Splitting In Bounded Triangulated Categories",
+    "companion": "lefschetz-splitting-in-bounded-triangulated-categories-examples",
+    "requires": [
+      "abelian-categories",
+      "derived-categories",
+      "triangularisation-and-jordan-canonical-form",
+      "triangulated-categories"
+    ],
+    "items": [
+      {
+        "id": "def-truncation-functors-and-cohomology-of-a-t-structure",
+        "kind": "definition",
+        "title": "Truncation functors, t-cohomology, amplitude and bounded t-structures",
+        "deps": [
+          "def-canonical-t-structure-on-a-derived-category",
+          "def-triangulated-category"
+        ],
+        "justified_by": [
+          "lem-truncation-triangles-are-essentially-unique-and-functorial",
+          "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$ with translation $[1]$ ([[def-canonical-t-structure-on-a-derived-category]], [[def-triangulated-category]]), and set $\\mathcal T^{\\le n}:=\\mathcal T^{\\le0}[-n]$ and $\\mathcal T^{\\ge n}:=\\mathcal T^{\\ge0}[-n]$ for $n\\in\\mathbb Z$; thus $X\\in\\mathcal T^{\\le n}$ exactly when $X[n]\\in\\mathcal T^{\\le0}$, and $X\\in\\mathcal T^{\\ge n}$ exactly when $X[n]\\in\\mathcal T^{\\ge0}$.\n\nFor $X\\in\\mathcal T$ and $n\\in\\mathbb Z$, the t-structure axiom applied to the translate $X[n]$ and then shifted by $[-n]$ produces a distinguished triangle\n$$\\tau_{\\le n}X\\longrightarrow X\\longrightarrow\\tau_{\\ge n+1}X\\longrightarrow\\tau_{\\le n}X[1]$$\nwith $\\tau_{\\le n}X\\in\\mathcal T^{\\le n}$ and $\\tau_{\\ge n+1}X\\in\\mathcal T^{\\ge n+1}$; such a triangle is a **truncation triangle** of $X$ at $n$. Truncation triangles of the same $X$ at the same $n$ are canonically isomorphic over $X$, so the objects and maps occurring in them are determined up to unique compatible isomorphism ([[lem-truncation-triangles-are-essentially-unique-and-functorial]]); one writes $\\tau_{\\le n}$ and $\\tau_{\\ge n}$ for the resulting **truncation functors**.\n\nThe **t-cohomology** of $X$ is\n$$H^n_t(X):=(\\tau_{\\le n}\\tau_{\\ge n}X)[n],$$\nan object of the heart $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ ([[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]). The **amplitude** of $X$ is the set of $n$ with $H^n_t(X)\\not\\cong0$; it is *contained in* an interval $[a,b]$ when $H^n_t(X)=0$ for every $n\\notin[a,b]$. The t-structure is **bounded** when every object of $\\mathcal T$ lies in $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$ for some integer $n$ depending on the object.\n\nThis item fixes notation and conventions only; existence, essential uniqueness and all algebraic properties of $\\tau_{\\le n}$, $\\tau_{\\ge n}$ and $H^n_t$ are proved in the two immediately following lemmas.",
+        "strategy": "Definition pack. Apply the t-structure axiom (condition (iii) of [[def-canonical-t-structure-on-a-derived-category]]) to $X[n]$: it gives a distinguished triangle $A\\to X[n]\\to B\\to A[1]$ with $A\\in\\mathcal T^{\\le0}$ and $B\\in\\mathcal T^{\\ge1}$; translating by $[-n]$ and using $\\mathcal T^{\\le0}[-n]=\\mathcal T^{\\le n}$ together with $\\mathcal T^{\\ge1}[-n]=\\mathcal T^{\\ge0}[-(n+1)]=\\mathcal T^{\\ge n+1}$ gives the displayed truncation triangle. The membership and uniqueness assertions are exactly the content of the following lemma, which also shows that a different choice of the axiom triangle changes $\\tau_{\\le n}X$, $\\tau_{\\ge n+1}X$ and the connecting map only by the unique compatible isomorphism; nothing else is proved here.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/AST_1982__100__1_0.pdf",
+              "locator": "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "axiom_use": "None: for a single object the t-structure axiom supplies its decomposition triangle directly, and all truncation data are unique up to unique compatible isomorphism, so no selection over a family enters any assertion."
+      },
+      {
+        "id": "lem-truncation-triangles-are-essentially-unique-and-functorial",
+        "kind": "lemma",
+        "title": "Truncation triangles are essentially unique and give adjoint truncation functors",
+        "deps": [
+          "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "def-canonical-t-structure-on-a-derived-category",
+          "def-triangulated-category",
+          "def-triangulated-category-axiom-tr-three",
+          "def-morphism-and-isomorphism-of-triangles",
+          "prop-zero-and-split-triangles-are-distinguished",
+          "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+          "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+          "cor-triangulated-five-lemma",
+          "def-additive-category",
+          "def-biproduct"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations as in [[def-truncation-functors-and-cohomology-of-a-t-structure]].\n\n(i) *Essential uniqueness.* For every $X$ and $n$, every distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in\\mathcal T^{\\le n}$ and $B\\in\\mathcal T^{\\ge n+1}$ is isomorphic to the truncation triangle $\\tau_{\\le n}X\\to X\\to\\tau_{\\ge n+1}X\\to\\tau_{\\le n}X[1]$ by an isomorphism of triangles whose middle component is the identity of $X$; this isomorphism is unique.\n\n(ii) *Adjunction and orthogonality.* The assignment $X\\mapsto\\tau_{\\le n}X$ is a functor and for $T\\in\\mathcal T^{\\le n}$ the map $\\operatorname{Hom}(T,\\tau_{\\le n}X)\\to\\operatorname{Hom}(T,X)$, $f\\mapsto(\\tau_{\\le n}X\\to X)\\circ f$, is a bijection natural in $X$; dually $\\operatorname{Hom}(\\tau_{\\ge n}X,T)\\to\\operatorname{Hom}(X,T)$ is a bijection for $T\\in\\mathcal T^{\\ge n}$. Moreover $\\operatorname{Hom}(\\mathcal T^{\\le n},\\mathcal T^{\\ge n+1})=0$ for every $n$.\n\n(iii) *Aisle criteria.* $X\\in\\mathcal T^{\\le n}$ if and only if $\\tau_{\\le n}X\\to X$ is an isomorphism, if and only if $\\tau_{\\ge n+1}X=0$, if and only if $\\operatorname{Hom}(X,\\mathcal T^{\\ge n+1})=0$; dually $X\\in\\mathcal T^{\\ge n}$ if and only if $X\\to\\tau_{\\ge n}X$ is an isomorphism, if and only if $\\tau_{\\le n-1}X=0$, if and only if $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$.\n\n(iv) *Extensions, direct sums and iteration.* In a distinguished triangle $X\\to Y\\to Z\\to X[1]$, if $X,Z\\in\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$), then $Y$ lies in the same aisle. If $X,Y\\in\\mathcal T^{\\le n}$ then $Z\\in\\mathcal T^{\\le n}$, while if $Y,Z\\in\\mathcal T^{\\le n}$ then $X\\in\\mathcal T^{\\le n+1}$; dually, if $Y,Z\\in\\mathcal T^{\\ge n}$ then $X\\in\\mathcal T^{\\ge n}$, while if $X,Y\\in\\mathcal T^{\\ge n}$ then $Z\\in\\mathcal T^{\\ge n-1}$. Also, a finite direct sum lies in $\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$) if and only if each summand does. For $m\\le n$ there are canonical isomorphisms $\\tau_{\\le m}\\tau_{\\le n}\\cong\\tau_{\\le m}$, $\\tau_{\\le n}\\tau_{\\le m}\\cong\\tau_{\\le m}$, $\\tau_{\\ge n}\\tau_{\\ge m}\\cong\\tau_{\\ge n}$ and $\\tau_{\\ge m}\\tau_{\\ge n}\\cong\\tau_{\\ge n}$ compatible with the truncation maps, and $\\tau_{\\le m}\\tau_{\\ge n}=0$ when $m<n$.",
+        "strategy": "The exact Hom windows have vanishing outer terms Hom(T,B[-1]) and Hom(A[1],T), giving both adjunctions. Unique factorization and TR3 give the unique isomorphism of triangles over X, and uniqueness makes the truncations functorial. The four equivalent aisle criteria follow by testing the truncation maps and identities of their source/target objects. Hom exactness proves extension closure; rotations give the four valid n+1/n-1 bounds, rather than unrestricted two-out-of-three. Finite biproduct Hom identities give both directions of the direct-sum criterion. For m≤n, the composites alpha:tau_le_m tau_le_n X→X and beta:tau_le_m X→X represent the same Hom functor and yield inverse natural comparisons; the dual units point from X toward lower truncations. Orthogonality gives tau_le_m tau_ge_n=0 for m<n.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/AST_1982__100__1_0.pdf",
+              "locator": "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None: all arguments use only the t-structure axioms, shifts, cones and long exact Hom sequences; no choice principle is invoked."
+      },
+      {
+        "id": "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+        "kind": "lemma",
+        "title": "t-cohomology is functorial, additive, shift-compatible and detects amplitude",
+        "deps": [
+          "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "lem-truncation-triangles-are-essentially-unique-and-functorial",
+          "def-canonical-t-structure-on-a-derived-category",
+          "def-triangulated-category",
+          "def-category-with-translation",
+          "def-additive-category",
+          "def-biproduct",
+          "def-additive-functor",
+          "cor-any-adjoint-between-additive-categories-is-additive",
+          "prop-an-additive-functor-preserves-split-biproduct-diagrams"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-truncation-triangles-are-essentially-unique-and-functorial]], and let $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ be the heart.\n\n(i) Each $H^n_t$ is a functor from $\\mathcal T$ to $\\mathcal C$: for every morphism $f:X\\to Y$ the induced map $H^n_t(f)$ is the unique map compatible with $f$ under the truncations, and values lie in the heart.\n\n(ii) *Shifts.* $H^n_t(X[m])\\cong H^{n+m}_t(X)$ for all $m,n\\in\\mathbb Z$, naturally in $X$.\n\n(iii) *Additivity.* For a finite biproduct $X\\oplus Y$ with injections $i_X,i_Y$ and projections $p_X,p_Y$, the maps $(H^n_t(i_X),H^n_t(i_Y)):H^n_t(X)\\oplus H^n_t(Y)\\to H^n_t(X\\oplus Y)$ and $(H^n_t(p_X),H^n_t(p_Y)):H^n_t(X\\oplus Y)\\to H^n_t(X)\\oplus H^n_t(Y)$ are mutually inverse isomorphisms; in particular $H^n_t(X\\oplus Y)\\cong H^n_t(X)\\oplus H^n_t(Y)$ naturally.\n\n(iv) *Amplitude detection.* If $X\\in\\mathcal T^{\\le m}$ then $H^n_t(X)=0$ for every $n>m$, and if $X\\in\\mathcal T^{\\ge m}$ then $H^n_t(X)=0$ for every $n<m$. If the t-structure is bounded ([[def-truncation-functors-and-cohomology-of-a-t-structure]]), the converses hold: $H^n_t(X)=0$ for all $n>m$ implies $X\\in\\mathcal T^{\\le m}$, and $H^n_t(X)=0$ for all $n<m$ implies $X\\in\\mathcal T^{\\ge m}$.\n\n(v) *Concentration and its consequences.* If $X\\in\\mathcal T^{\\le m}$ then $\\tau_{\\ge m}X\\cong H^m_t(X)[-m]$, and if $X\\in\\mathcal T^{\\ge m}$ then $\\tau_{\\le m}X\\cong H^m_t(X)[-m]$; if $X$ lies in both aisles then the canonical map gives $X\\cong H^m_t(X)[-m]$. If $X$ and $Y$ both lie in $\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$, then the canonical identifications $X\\cong H^m_t(X)[-m]$ and $Y\\cong H^m_t(Y)[-m]$ identify $\\operatorname{Hom}(X,Y)$ with $\\operatorname{Hom}(H^m_t(X),H^m_t(Y))$ via $f\\mapsto H^m_t(f)$; in particular this applies when the t-structure is bounded and $X,Y$ have $H^n_t=0$ for every $n\\ne m$.",
+        "strategy": "Put Y=tau_ge_n X and Z=tau_le_n Y. For T≤n-1, upper-truncation adjunction gives Hom(T,Z)=Hom(T,Y)=0; the lower-aisle criterion puts Z in degree n, so Z[n] lies in the heart. Adjunction and shifts yield tau_le_a(X[b])=(tau_le_(a+b)X)[b] and the dual identity, hence H^n_t(X[m])=H^(n+m)_t(X). Both truncations are adjoints between additive full aisles, so t-cohomology is additive and preserves split biproduct maps. Aisle membership kills cohomology outside its half-line. Concentration follows by adjunction and the aisle criteria. Under boundedness, repeatedly vanishing top cohomology lowers the upper bound by one; vanishing bottom cohomology gives X=tau_ge_(k+1) X and raises the lower bound by one. Concentrated objects and their morphisms identify naturally with their shifted heart objects.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/AST_1982__100__1_0.pdf",
+              "locator": "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None: the argument uses finite induction on the amplitude bound, shifts and finite biproducts only; no choice principle is invoked."
+      },
+      {
+        "id": "lem-hard-lefschetz-splits-a-bounded-t-structure-complex",
+        "kind": "lemma",
+        "title": "Hard Lefschetz splits a bounded t-structure complex",
+        "deps": [
+          "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "lem-truncation-triangles-are-essentially-unique-and-functorial",
+          "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+          "def-triangulated-category",
+          "def-triangulated-category-axiom-tr-one",
+          "def-triangulated-category-axiom-tr-three",
+          "def-morphism-and-isomorphism-of-triangles",
+          "def-rotation-of-a-triangle",
+          "prop-zero-and-split-triangles-are-distinguished",
+          "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+          "prop-a-distinguished-triangle-with-zero-first-map-is-split",
+          "def-additive-category",
+          "def-biproduct"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $\\mathcal T$ be a triangulated category with a bounded t-structure, with truncation functors and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]. Let $K\\in\\mathcal T$ and let $L:K\\to K[2]$ be a morphism such that for every integer $j\\ge0$ the map\n$$H^{-j}_t(L^j):H^{-j}_t(K)\\longrightarrow H^{-j}_t(K[2j])\\cong H^j_t(K)$$\nis an isomorphism, where $L^j:=L[2j-2]\\circ\\cdots\\circ L[2]\\circ L$ is the $j$-fold iterate (so $L^0=1_K$) and the identification is the shift isomorphism $H^j_t(K)\\cong H^{-j}_t(K[2j])$ of that lemma. Then there is an isomorphism\n$$K\\cong\\bigoplus_j H^j_t(K)[-j]$$\nin $\\mathcal T$; the sum is finite because the t-structure is bounded. The isomorphism is not asserted to be canonical, and no compatibility with primitive lifts is claimed: this is the abstract splitting criterion, not the stronger primitive-compatible decomposition used in the Hodge theory of projective maps. The degenerate case in which $H^{-n}_t(K)$ and $H^n_t(K)$ are both zero (they vanish together because $H^{-n}_t(L^n)$ is an isomorphism) is covered by the same formulas, all of which are then the zero maps between zero objects.",
+        "strategy": "Induct on n with K in amplitude [-n,n]. For n=0 use concentration. For n≥1 set A=H^-n_t(K), B=H^n_t(K), h=H^-n_t(L^n), and use the extreme truncation maps a:A[n]→K and b:K→B[-n]. The shifted L^n composites c:B[-n]→K and r:K→A[n] satisfy bc=1, ra=1 by concentrated morphism detection; ba=0 by orthogonality. Orthogonalize r to r′=r-(rc)b, so (r′,b) retracts u=(a,c). TR3 kills the connecting map of the triangle completing u. The zero-first-map split criterion supplies R:K→A[n]⊕B[-n], i:K0→K and p:K→K0 with Ru=1, pi=1, Ri=pu=0 and uR+ip=1; no identification with r′ is asserted. Additivity kills extreme cohomology of K0, and concentration puts it in [-n+1,n-1]. Interior cohomology identifies H^m(K0) with H^m(K), using H^m(B[-n])=H^(m-n)(B). The compressed map L0=p[2]Li inherits Lefschetz powers because the inserted ip maps act identically on every interior degree. For j≥n the maps are zero-to-zero isomorphisms, and j=0 is the identity. Apply induction and reassemble the finite noncanonical splitting, without asserting primitive-compatible lifts.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "P. Deligne, «Théorème de Lefschetz et critères de dégénérescence de suites spectrales», Publ. Math. IHÉS 35 (1968) 107–126 (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/PMIHES_1968__35__107_0.pdf",
+              "locator": "§1, results (1.1)–(1.13) with proofs, printed pp. 107–110"
+            },
+            {
+              "title": "M. A. A. de Cataldo and L. Migliorini, «The Hodge theory of algebraic maps», arXiv:math/0306030v2 (complete arXiv PDF)",
+              "url": "https://arxiv.org/pdf/math/0306030",
+              "locator": "§2.2.3(c) printed p. 12; Theorem 4.4.4 printed p. 36; §4.5 formulas (22)–(27) printed pp. 37–38"
+            },
+            {
+              "title": "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/AST_1982__100__1_0.pdf",
+              "locator": "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None: the proof is a finite induction on an amplitude bound using shifts, biproducts and the (published, choice-free) splitting criterion for distinguished triangles."
+      },
+      {
+        "id": "lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition",
+        "kind": "lemma",
+        "title": "Graded hard Lefschetz has a canonical primitive decomposition",
+        "deps": [
+          "def-abelian-category",
+          "def-biproduct",
+          "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
+          "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
+          "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "thm-splitting-lemma-in-an-abelian-category",
+          "def-split-short-exact-sequence-in-an-abelian-category"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $H^j$, $j\\in\\mathbb Z$, be objects of an abelian category, zero for all but finitely many $j$, and let $L_j:H^j\\to H^{j+2}$ be morphisms whose iterates give isomorphisms $L^r:H^{-r}\\to H^r$ for every $r\\ge0$, with $L^0=1_{H^0}$. Put $P^{-r}:=\\ker\\bigl(L^{r+1}:H^{-r}\\to H^{r+2}\\bigr)$ for $r\\ge0$, and $P^{-r}=0$ for $r<0$. Then for every $r\\ge0$ the powers of $L$ induce finite direct sum decompositions\n$$H^{-r}=\\bigoplus_{j\\ge0}L^jP^{-r-2j},\\qquad H^{r}=\\bigoplus_{j\\ge0}L^{r+j}P^{-r-2j},$$\nwhere $L^jP^{-r-2j}$ denotes the image of the restriction of $L^j$ to the subobject $P^{-r-2j}\\subseteq H^{-r-2j}$, and likewise for $L^{r+j}P^{-r-2j}$. Each displayed power $L^j$ or $L^{r+j}$ restricts to a monomorphism on its primitive source, and both decompositions are natural for morphisms commuting with $L$. This is a decomposition statement for graded objects in an abelian category; it does not identify primitive objects with classes annihilated by an untruncated map on a derived splitting of a complex.",
+        "strategy": "For r≥0 put p=L^(r+1), t=L:H^(-r-2)→H^-r and g=L^(r+2):H^(-r-2)→H^(r+2). Since g=pt is invertible, t is monic and s=tg^-1 is a section of p. The splitting lemma gives i:P^-r→H^-r and pi with pi i=1, pi t=0 and i pi+t g^-1 p=1. Thus (i,t) and (pi,g^-1 p) are inverse maps; identify t with its image to obtain H^-r=P^-r⊕LH^(-r-2). Iterate through finitely many negative degrees, transporting biproducts along monomorphisms, and stop at finite support. Restricted zero-th powers are kernel inclusions, while higher powers are composites of monomorphisms. Apply L^r to get the positive-degree decomposition. Morphisms commuting with L commute with g^-1, the kernels and the displayed projections, establishing naturality. Primitive comparison maps land in P′^-r.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "M. A. A. de Cataldo and L. Migliorini, «The Hodge theory of algebraic maps», arXiv:math/0306030v2 (complete arXiv PDF)",
+              "url": "https://arxiv.org/pdf/math/0306030",
+              "locator": "§2.2.3(c) printed p. 12; Theorem 4.4.4 printed p. 36; §4.5 formulas (22)–(27) printed pp. 37–38"
+            },
+            {
+              "title": "P. Deligne, «Théorème de Lefschetz et critères de dégénérescence de suites spectrales», Publ. Math. IHÉS 35 (1968) 107–126 (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/PMIHES_1968__35__107_0.pdf",
+              "locator": "§1, results (1.1)–(1.13) with proofs, printed pp. 107–110"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None: the argument uses kernels, images, short exact sequences and finite direct sums in an abelian category, all of which are choice-free."
+      },
+      {
+        "id": "lem-nilpotent-lefschetz-filtration-is-canonical-and-self-dual",
+        "kind": "lemma",
+        "title": "The nilpotent Lefschetz filtration is canonical and self-dual",
+        "deps": [
+          "def-vector-space",
+          "def-linear-subspace",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-nilpotent-endomorphism",
+          "thm-nilpotent-jordan-string-basis",
+          "def-dimension",
+          "thm-rank-nullity",
+          "thm-dimension-of-a-linear-subspace",
+          "thm-dual-family-is-a-basis-in-finite-dimension",
+          "def-annihilators-under-the-evaluation-pairing",
+          "thm-bilinear-forms-correspond-to-linear-maps-into-the-dual",
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $N$ be a nilpotent endomorphism of a finite-dimensional vector space $H$ over a field $F$ ([[def-nilpotent-endomorphism]]). An **admissible filtration** is an increasing finite filtration $W$ of $H$ by linear subspaces ([[def-linear-subspace]]): $W_i\\subseteq W_{i+1}$ for all $i$, $W_i=0$ for all sufficiently negative $i$, $W_i=H$ for all sufficiently positive $i$, such that\n\n$$N(W_i)\\subseteq W_{i-2}\\quad\\text{for all }i,\\qquad N^r:\\operatorname{Gr}^W_r\\longrightarrow\\operatorname{Gr}^W_{-r}\\text{ is an isomorphism for every }r\\ge0,$$\n\nwhere $\\operatorname{Gr}^W_i:=W_i/W_{i-1}$ and the second map is the one induced by $N^r$, which is well defined because $N^r(W_r)\\subseteq W_{-r}$ and $N^r(W_{r-1})\\subseteq W_{-r-1}$. There is a unique admissible filtration $W$, and it is given intrinsically by\n\n$$W_i=\\sum_{a,b\\ge0,\\ a-b=i}\\ker N^{a+1}\\cap\\operatorname{im}N^b .$$\n\nIf in addition $S$ is a nondegenerate bilinear form on $H$ with $S(Nv,w)+S(v,Nw)=0$ for all $v,w$ ([[def-bilinear-symmetric-skew-and-alternating-forms]], [[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]]), and $U^\\perp:=\\{x\\in H:S(u,x)=0\\text{ for every }u\\in U\\}$ for a subspace $U$, then $(W_i)^\\perp=W_{-i-1}$ for every $i$, and consequently $S$ induces a perfect pairing between $\\operatorname{Gr}^W_i$ and $\\operatorname{Gr}^W_{-i}$; moreover for $i\\ge0$ the form $S_i([v],[w]):=S(v,N^iw)$ on $\\operatorname{Gr}^W_i$ is well defined and nondegenerate.",
+        "strategy": "Give a Jordan string v1,…,vl weights 2t-l-1. For each t the convolution summand exists precisely when max(0,-i,t-i-1)≤b≤l-t, equivalent to its weight being at most i; this handles every integer index, including whole-string endpoints. The resulting finite filtration lowers by two and has Lefschetz isomorphisms. Reverse graded degrees and apply the primitive decomposition. Graded surjectivity upgrades by finite ascending induction to N^(m+1)(W_(m-1))=W_(-m-3). Correct finitely many primitive lifts to kill N^(m+1), producing an adapted Jordan-string basis; ascending induction identifies W with the intrinsic formula and proves uniqueness. For a general nondegenerate bilinear S, S^sharp(x)=S(-,x) describes right orthogonals, and separate left orthogonals give left-perp(right-perp(U))=U by dimension. W′_i=(W_(-i-1))^perp lowers by two using S(w,Nx)=-S(Nw,x); opposite W/W′ graded pairings are perfect. Skew-adjointness identifies the transpose of each W′ Lefschetz map with a W Lefschetz isomorphism, so W′ is admissible and equals W. The induced S_i pairing descends because first-variable errors lie in W_(i-1), orthogonal to W_-i, and N^i of second-variable errors lies in W_(-i-1)=(W_i)^perp. Compose the perfect opposite-grade pairing with N^i to obtain nondegeneracy. All basis/lift choices are finite; no symmetry or AC is added.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "M. A. A. de Cataldo and L. Migliorini, «The Hodge theory of algebraic maps», arXiv:math/0306030v2 (complete arXiv PDF)",
+              "url": "https://arxiv.org/pdf/math/0306030",
+              "locator": "§2.2.3(c) printed p. 12; Theorem 4.4.4 printed p. 36; §4.5 formulas (22)–(27) printed pp. 37–38"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "axiom_use": "None: Jordan-chain bases, kernels, images and orthogonal complements in finite dimension are chosen by elementary finite arguments, with no choice principle."
+      }
+    ]
+  },
+  {
+    "order": 1806,
+    "id": "lefschetz-splitting-in-bounded-triangulated-categories-examples",
+    "kind": "B",
+    "category": "homological-algebra",
+    "title": "Lefschetz Splitting In Bounded Triangulated Categories Examples",
+    "companion": "lefschetz-splitting-in-bounded-triangulated-categories",
+    "requires": [
+      "lefschetz-splitting-in-bounded-triangulated-categories"
+    ],
+    "items": [
+      {
+        "id": "ex-hard-lefschetz-splitting-for-a-three-degree-complex",
+        "kind": "example",
+        "title": "Hard Lefschetz splitting for a three-degree complex",
+        "deps": [
+          "lem-hard-lefschetz-splits-a-bounded-t-structure-complex",
+          "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+          "def-canonical-t-structure-on-a-derived-category",
+          "thm-the-canonical-pair-is-a-t-structure",
+          "def-derived-category-of-an-abelian-category",
+          "thm-the-derived-category-inherits-a-triangulated-structure",
+          "prop-cohomology-factors-through-the-derived-category",
+          "thm-modules-over-a-ring-form-an-abelian-category",
+          "thm-rank-nullity",
+          "thm-first-isomorphism-theorem-in-an-abelian-category",
+          "cor-dimension-of-a-direct-sum",
+          "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "def-biproduct"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $k$ be a field and let $\\mathcal T=D^b(\\mathbf{vect}^{fd}_k)$ be the bounded derived category of finite-dimensional $k$-vector spaces with its canonical t-structure. Take\n$$K=k[2]\\oplus k\\oplus k[-2]\\in\\mathcal T,$$\nand let $L:K\\to K[2]$ identify the first summand $k[2]$ with the shifted second summand $k[2]$ of $K[2]$, the second summand $k$ with the shifted third summand $k$ of $K[2]$, and the third summand $k[-2]$ with $0$. Its nonzero t-cohomology objects are\n$$H^{-2}_t(K)=k,\\qquad H^0_t(K)=k,\\qquad H^2_t(K)=k,$$\nand for every $j\\ge0$ the map $H^{-j}_t(L^j)$ is an isomorphism: $j=0$ and $j=2$ are the two Lefschetz steps, while for $j=1$ and for $j\\ge3$ both sides are zero. Consequently the splitting of [[lem-hard-lefschetz-splits-a-bounded-t-structure-complex]] returns exactly\n$$K\\cong H^{-2}_t(K)[2]\\oplus H^0_t(K)\\oplus H^2_t(K)[-2]=k[2]\\oplus k\\oplus k[-2].$$\nThis example tests the abstract splitting on the simplest complex with two hard Lefschetz steps; it does not test primitive-lift compatibility.",
+        "strategy": "The finite-dimensional $k$-vector spaces form a full abelian subcategory of the category of $k$-modules, closed under kernels, cokernels and finite direct sums ([[thm-modules-over-a-ring-form-an-abelian-category]], [[thm-rank-nullity]], [[thm-first-isomorphism-theorem-in-an-abelian-category]], [[cor-dimension-of-a-direct-sum]]); it is essentially small, so the derived-category construction of [[def-derived-category-of-an-abelian-category]] applies and $\\mathcal T$ is triangulated ([[thm-the-derived-category-inherits-a-triangulated-structure]]) with the canonical bounded t-structure ([[def-canonical-t-structure-on-a-derived-category]], [[thm-the-canonical-pair-is-a-t-structure]]). In this t-structure the truncation triangles are supplied by the canonical truncations of complexes ([[lem-canonical-truncation-is-a-complex-and-has-the-claimed-cohomology]], [[thm-canonical-truncations-fit-a-distinguished-triangle]]), so by the essential uniqueness and amplitude detection of [[lem-truncation-triangles-are-essentially-unique-and-functorial]] and [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]] the abstract $H^j_t$ of a bounded complex is its usual $j$-th cohomology object. The displayed $K$ is a finite direct sum of shifts of $k$, so $H^{-2}_t(K)=H^0_t(K)=H^2_t(K)=k$ by the shift rule of the t-cohomology lemma, and all other $H^j_t(K)$ vanish. On the first summand $L$ is the canonical isomorphism $k[2]\\cong k[2]$, on the second the canonical isomorphism $k\\cong k$; hence $H^{-2}_t(L)$ is the identity of $k$, $H^0_t(L)$ the identity of $k$, and $H^{-2}_t(L^2)$ and the higher iterates pair the first with the third summand and vanish afterwards, again isomorphisms; the remaining maps $H^{-j}_t(L^j)$ involve a zero source or target. The hard Lefschetz hypothesis of the splitting lemma is therefore satisfied, with amplitude in $[-2,2]$, and the lemma's conclusion is the displayed finite direct sum; both extreme terms are $k[2]$ and $k[-2]$ and the middle term is $k$.",
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "A. A. Beilinson, J. Bernstein and P. Deligne, «Faisceaux pervers», Astérisque 100 (1982), Société Mathématique de France (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/AST_1982__100__1_0.pdf",
+              "locator": "§1.3.1–1.3.9, printed pp. 28–33; §5.4.10–5.4.13, printed pp. 143–147"
+            },
+            {
+              "title": "P. Deligne, «Théorème de Lefschetz et critères de dégénérescence de suites spectrales», Publ. Math. IHÉS 35 (1968) 107–126 (complete numdam PDF)",
+              "url": "https://www.numdam.org/item/PMIHES_1968__35__107_0.pdf",
+              "locator": "§1, results (1.1)–(1.13) with proofs, printed pp. 107–110"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "axiom_use": "None: the field of coefficients is fixed, the vector spaces are finite-dimensional and everything is a finite direct sum of shifts of $k$; the size hypothesis of the derived-category construction is met by the essentially small category of finite-dimensional $k$-vector spaces."
+      }
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+import json,re,pathlib
+r='frontier-44-special-representation-examples-28-six-step';ids=['lem-integral-jucys-murphy-symmetric-polynomials-span-the-center','def-generalized-jm-primary-idempotents-and-residue-summand-functors','rem-the-crystal-identification-does-not-elementarily-identify-cellular-simple-labels','ex-normal-and-good-nodes-for-a-large-partition'];p=pathlib.Path(f'research/{r}-batch-15.pages.json');d=json.loads(p.read_text())
+for id in ids:
+ s=pathlib.Path(f'items/{id}.md').read_text();fm,body=s.split('\n---\n',1);deps=[v.strip() for v in re.search(r'^deps:\s*\[([\s\S]*?)\]',fm,re.M).group(1).split(',')];sec=re.search(r'^## (Definition|Statement|Example)\n([\s\S]*?)(?=^## |\Z)',body,re.M).group(2).strip();strategy=body[body.index('## Facts & Assumptions'):].strip() if '## Facts & Assumptions' in body else body[body.index('## Remarks'):].strip();row=next(x for pg in d for x in pg.get('items',[])+pg.get('examples',[]) if isinstance(x,dict) and x['id']==id);row.update(deps=deps,statement=sec,strategy=strategy)
+p.write_text(json.dumps(d,indent=2)+'\n')

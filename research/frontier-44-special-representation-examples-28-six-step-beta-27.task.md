@@ -1,0 +1,20 @@
+# Batch 27 of run `frontier-44-special-representation-examples-28-six-step` — Compact Laplace Type Operators And Hodge Representatives
+
+1 A/B pair in differential-geometry. Own only these pairs.
+
+Read `research/frontier-44-special-representation-examples-28-six-step-owner-authoring-direction.md` before constructing any item. It is binding and overrides stale task or design text.
+
+## `compact-laplace-type-operators-and-hodge-representatives`
+
+| | |
+|---|---|
+| A page | `compact-laplace-type-operators-and-hodge-representatives` · order **1797** · `differential-geometry` |
+| B page | `compact-laplace-type-operators-and-hodge-representatives-examples` |
+| title | Compact Laplace Type Operators And Hodge Representatives |
+| requires | `countability-and-uncountability`, `hilbert-space-geometry-and-riesz-representation`, `interior-and-boundary-sobolev-elliptic-regularity`, `lax-milgram-and-weak-elliptic-solutions`, `orthonormal-bases-parseval-and-fourier-series`, `product-measures-and-the-fubini-tonelli-theorems`, `relations-functions-and-quotients`, `rellich-kondrachov-and-sobolev-compactness`, `smooth-approximation-and-sobolev-extension`, `smooth-partitions-of-unity-and-exhaustions`, `sobolev-poincare-and-morrey-inequalities`, `the-dbar-complex-and-integral-solutions`, `the-de-rham-complex-homotopy-and-mayer-vietoris`, `the-exterior-derivative-and-cartan-calculus`, `the-logarithm-and-general-powers`, `the-lp-spaces-holder-minkowski-and-riesz-fischer`, `the-total-derivative`, `riemannian-metrics-length-distance-and-volume`, `chern-weil-theory-and-characteristic-forms`, `riemann-surfaces-branched-maps-and-differentials` |
+| design | `research/plan-klr-foundation-prerequisites.md` L257 |
+
+Step 1 must fully author every item, A/B page and proof contract; preserve escalation mechanisms and escalate significant unmet prerequisites to the owner.
+Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.
+
+Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.

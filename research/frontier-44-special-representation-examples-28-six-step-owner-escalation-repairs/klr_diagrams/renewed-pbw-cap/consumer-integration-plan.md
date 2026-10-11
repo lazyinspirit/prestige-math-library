@@ -1,0 +1,9 @@
+# Exact supplier-before-consumer integration
+
+The new normalform/cap helper retains the approved full claim, including arbitrary characteristic, admissible Q, general monic deformation, exact J-intersection, and arbitrary oriented boundaries. The original PBW and cap-off Statements are retained.
+
+Once the independently owned actual model is repaired to consume the new flag inverse and the fixed partial-i pair, replace the original PBW argument with explicit consumption of new-helper Proof1.1–5.1: finite disk routing with crossing-first correction induction; actual free-root maximal matching coefficients and unused complementary framing coefficients; joint faithfulness; output confluence from independence. Remove its invalid claim that every interior upward endpoint may simply be bent separately.
+
+Replace the original cap-off argument with new-helper Proof6.1–10.1: forced S, exact first-adjunction mate of R_Lambda, complete two-double-coset closure for arbitrary killed factors, actual dual-row recurrence at the dominant vacuum, and finite marked-whisker normalization with negative-weight retracts. Include Proof11.1 for word-projective generation and adjunction transport if needed by existing consumers. Do not use the Frobenius/symmetry consumer to prove its own quotient identification.
+
+The old definition/current dependency union is preserved separately. The current union adds two helper consumers to the historical 33. The changed mixed clause has no sound effect on the downstream K0/G0, duality, normalized basis, crystal or decomposition interfaces: it corrects an impossible interpretation of two different unit scalars for a fixed pair. Current old coherent-biadjunction Proof3.1 and symmetry Proof3.1 still require the separately assigned coherent assembly/trace helper. Those source writers retain ownership. Their full mate-ratio Statements are not erased or inferred from the corrected partial category.

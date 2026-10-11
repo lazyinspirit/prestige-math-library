@@ -1,0 +1,1590 @@
+{
+  "version": 1,
+  "level": "frontier-44-special-representation-examples-28-six-step",
+  "scope": [
+    "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+    "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+    "ex-incidence-model-of-a-closed-interval"
+  ],
+  "contracts": {
+    "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "Let $(V,K)$ be an abstract simplicial complex. Its **geometric realization**\n$|K|$ is the set of functions $\\alpha:V \\to [0,1]$ such that:\n\n1. $\\alpha(v)=0$ for all but finitely many $v \\in V$;\n2. $\\sum_{v \\in V}\\alpha(v)=1$;\n3. the support $\\operatorname{supp}(\\alpha):=\\{v \\in V:\\alpha(v)\\neq 0\\}$ is a simplex of $K$.\n\nFor each simplex $\\sigma=\\{v_0,\\dots,v_n\\}$ of $K$, write\n$$|\\sigma|:=\\{\\alpha \\in |K| : \\operatorname{supp}(\\alpha)\\subseteq \\sigma\\}.$$\nSending $\\alpha$ to the barycentric tuple\n$(\\alpha(v_0),\\dots,\\alpha(v_n))$ identifies $|\\sigma|$ with the geometric\nsimplex spanned by the standard basis vectors indexed by $v_0,\\dots,v_n$, so\n$|\\sigma|$ carries its Euclidean simplex topology.\n\nWe give $|K|$ the **weak topology** with respect to these simplex inclusions:\na subset $U\\subseteq |K|$ is declared open exactly when $U\\cap|\\sigma|$ is open\nin $|\\sigma|$ for every simplex $\\sigma$ of $K$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-simplicial-subcomplex-star-closure-and-link",
+          "source_section": "Definition",
+          "quote": "Let $(V,K)$ be an abstract simplicial complex.\n\nA **subcomplex** of $K$ is a subfamily $L \\subseteq K$ that is itself closed\nunder taking subsets.\n\nIf $\\sigma \\in K$, its **closure** is the subcomplex\n$$\\overline{\\sigma}:=\\{\\tau \\in K : \\tau \\subseteq \\sigma\\}.$$\nMore generally, if $A \\subseteq K$, its closure is\n$$\\overline{A}:=\\{\\tau \\in K : \\tau \\subseteq \\sigma \\text{ for some } \\sigma \\in A\\}.$$\n\nFor a simplex $\\sigma \\in K$, the **closed star** of $\\sigma$ in $K$ is\n$$\\operatorname{St}_K(\\sigma):=\\{\\tau \\in K : \\sigma \\cup \\tau \\in K\\},$$\nand the **open star** is the union, after realization, of the relative\ninteriors of simplices $\\rho\\in K$ with $\\sigma\\subseteq\\rho$.\n\nThe **link** of $\\sigma$ in $K$ is\n$$\\operatorname{Lk}_K(\\sigma):=\\{\\tau \\in K : \\tau \\cap \\sigma=\\varnothing \\text{ and } \\sigma \\cup \\tau \\in K\\}.$$",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "source_section": "Statement",
+          "quote": "If $K$ is a finite abstract simplicial complex, then its geometric realization\n$|K|$ is compact and Hausdorff.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-presheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A **presheaf of sets on $X$** is a\ncontravariant functor\n$$\\mathcal F:\\operatorname{Open}(X)\\longrightarrow \\mathbf{Set}$$\n([[def-functor-and-contravariant-functor]],\n[[prop-sets-and-functions-form-category-set]]).\n\nEquivalently, a presheaf of sets on $X$ consists of:\n\n- a set $\\mathcal F(U)$ for every open set $U \\subseteq X$;\n- for every inclusion $V \\subseteq U$, a restriction map\n  $$\\rho^U_V:\\mathcal F(U)\\longrightarrow \\mathcal F(V),$$\n\nsuch that\n$$\\rho^U_U=\\operatorname{id}_{\\mathcal F(U)}$$\nand, whenever $W \\subseteq V \\subseteq U$,\n$$\\rho^U_W=\\rho^V_W\\circ \\rho^U_V.$$\n\nBecause the arrows of $\\operatorname{Open}(X)$ are the inclusions\n$V \\to U$ with $V \\subseteq U$, contravariance is exactly the rule that sections\nover a larger open set restrict to sections over a smaller one.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-presheaf-of-groups-rings-modules",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space.\nFix a ring $R$ when modules are under discussion.\n\nA **presheaf of groups** on $X$ is a presheaf $\\mathcal F$ such that every\n$\\mathcal F(U)$ is a group and every restriction map\n$\\rho^U_V:\\mathcal F(U)\\to\\mathcal F(V)$ is a group homomorphism\n([[prop-groups-and-homomorphisms-form-category-grp]]).\n\nA **presheaf of rings** on $X$ is defined the same way with rings and ring\nhomomorphisms ([[prop-rings-and-homomorphisms-form-category-ring]]).\n\nA **presheaf of left $R$-modules** on $X$ is defined the same way with left\n$R$-modules and $R$-linear maps\n([[prop-modules-and-homomorphisms-form-category-rmod]]).\n\nA **sheaf of groups**, **sheaf of rings**, or **sheaf of left $R$-modules** is\nsuch a presheaf whose underlying set-valued presheaf is a sheaf.\n\nIn particular, each sheaf of groups has a distinguished identity section on\nevery open set; in additive notation this section is written $0$, and all\nrestrictions preserve the algebraic operations.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-module-on-ringed-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space.\n\nAn **$\\mathcal O_X$-module** is a sheaf $\\mathcal F$ of abelian groups on $X$\nsuch that for every open set $U \\subseteq X$ the section group $\\mathcal F(U)$\nis an $\\mathcal O_X(U)$-module, and for every inclusion $V \\subseteq U$ the\nrestriction map\n$$\n\\mathcal F(U)\\longrightarrow\\mathcal F(V)\n$$\nis $\\mathcal O_X(U)$-linear after restricting scalars along\n$\\mathcal O_X(U)\\to\\mathcal O_X(V)$.\n\nA **morphism of $\\mathcal O_X$-modules** is a morphism of the underlying sheaves\nof abelian groups whose components are $\\mathcal O_X(U)$-linear on every open\nset $U$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-abelian-sheaves-form-abelian-category",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space.\n\n1. The category of sheaves of abelian groups on $X$ is an abelian category.\n2. If $(X,\\mathcal O_X)$ is a ringed space, then the category of\n   $\\mathcal O_X$-modules is also an abelian category.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$, and let $x\\in X$.\n\nThe **neighbourhood category of $x$** is the full subcategory\n$$\\mathcal N_x\\subseteq \\operatorname{Open}(X)$$\nwhose objects are the open neighbourhoods of $x$. Its opposite category is\nfiltered in the sense of\n[[def-filtered-category-and-filtered-colimit]]: it is nonempty because $X$\nitself is a neighbourhood of $x$, and for neighbourhoods $U,V$ the\nintersection $U\\cap V$ is again a neighbourhood of $x$ with arrows\n$$U\\longrightarrow U\\cap V,\\qquad V\\longrightarrow U\\cap V$$\nin the opposite category.\n\nBecause $\\mathcal F$ is contravariant, its restriction to the neighbourhood\ncategory determines a covariant diagram on that opposite category. The\n**stalk** of $\\mathcal F$ at $x$ is the filtered colimit\n$$\\mathcal F_x:=\\varinjlim_{\\mathcal N_x^{\\operatorname{op}}}\\mathcal F(U).$$\n\nConcretely, $\\mathcal F_x$ may be described as equivalence classes of pairs\n$(U,s)$ with $U$ an open neighbourhood of $x$ and\n$s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some\nsmaller open neighbourhood of $x$. The next lemma verifies that this is an\nequivalence relation.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a\ntopological space $X$. Then $\\varphi$ is an isomorphism if and only if, for\nevery $x\\in X$, the induced map on stalks\n$$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$\nis a bijection.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "4.2",
+            "6.3",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal G$ be a presheaf on $Y$.\nThe **inverse-image presheaf**\n$$\nf_{\\mathrm p}\\mathcal G\n$$\non $X$ is defined by\n$$\n(f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V),\n$$\nwhere $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by\nreverse inclusion. If $U' \\subseteq U$, then every neighbourhood of $f(U)$ is a\nneighbourhood of $f(U')$, so there is a natural restriction map\n$(f_{\\mathrm p}\\mathcal G)(U)\\to(f_{\\mathrm p}\\mathcal G)(U')$.\n\nThe **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification\nof this presheaf:\n$$\nf^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).\n$$\n\nWhen $U$ is open in $X$ and $V$ is an open set of $Y$ with $f(U)\\subseteq V$,\nthere is a canonical map\n$$\n\\mathcal G(V)\\longrightarrow(f_{\\mathrm p}\\mathcal G)(U)\n$$\ninto the colimit class represented by $V$.",
+          "uses": [
+            "1.2",
+            "1.5",
+            "2.4",
+            "3.2",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-inverse-direct-image-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let\n$\\mathcal F$ be a sheaf on $X$. Then there is a natural bijection\n$$\\operatorname{Hom}_X(f^{-1}\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_Y(\\mathcal G,f_*\\mathcal F).$$",
+          "uses": [
+            "1.2",
+            "1.5",
+            "2.4",
+            "3.2",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-stalk-inverse-image-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let\n$x\\in X$. Then there is a canonical isomorphism\n$$\n(f^{-1}\\mathcal G)_x\\cong \\mathcal G_{f(x)}.\n$$",
+          "uses": [
+            "1.2",
+            "1.5",
+            "2.4",
+            "3.2",
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-direct-image-is-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map.\n\n1. If $\\mathcal F$ is a sheaf on $X$, then $f_*\\mathcal F$ is a sheaf on $Y$.\n2. If $\\mathcal F$ is a sheaf of groups, rings, or modules on $X$, then\n   $f_*\\mathcal F$ is a sheaf of the same kind on $Y$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-restriction-sheaf-open-subspace",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf on $X$. The **restriction of $\\mathcal F$ to $U$** is\nthe inverse image sheaf\n$$\n\\mathcal F|_U:=j^{-1}\\mathcal F.\n$$\n\nFor an open set $W \\subseteq U$, one may identify $(\\mathcal F|_U)(W)$ with\n$\\mathcal F(W)$: because $U$ is open in $X$, the set $W$ is also open in $X$,\nand in the neighbourhood-colimit defining $j^{-1}\\mathcal F$ the open set $W$\nitself is a neighbourhood of $j(W)=W$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf of abelian groups on $U$.\n\nFor an open set $V \\subseteq X$, define\n$$(j_!\\mathcal F)(V) := \\left\\{ s\\in \\mathcal F(V\\cap U): \\operatorname{Supp}(s)\\text{ is closed in }V \\right\\}.$$\nEquivalently, $s$ lies in $(j_!\\mathcal F)(V)$ exactly when for every\n$x\\in V\\setminus U$ there exists an open neighbourhood $W_x \\subseteq V$ with\n$$\ns|_{W_x\\cap U}=0.\n$$\n\nRestriction maps are inherited from $\\mathcal F$, so $j_!\\mathcal F$ is a\nsubsheaf of $j_*\\mathcal F$. When $V \\subseteq U$, the support condition is\nvacuous and\n$$\n(j_!\\mathcal F)(V)=\\mathcal F(V).\n$$\n\nThis is the **extension by zero** of $\\mathcal F$ along $j$. It is distinct in\ngeneral from the ordinary direct image $j_*\\mathcal F$.",
+          "uses": [
+            "1.5",
+            "1.6",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace.\n\n1. For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of\n   abelian groups $\\mathcal G$ on $X$, there is a natural bijection\n   $$\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G) \\cong \\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G).$$\n2. The functor $j_!$ is exact on sheaves of abelian groups.",
+          "uses": [
+            "1.5",
+            "1.6",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-locally-constant-sheaf-of-finite-rank",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a topological space ([[def-topological-space]]), let $k$ be a field\nand let $\\mathcal F$ be a sheaf of $k$-vector spaces on $S$\n([[def-sheaf-on-topological-space]],\n[[def-presheaf-of-groups-rings-modules]]). Then $\\mathcal F$ is **locally\nconstant of finite rank** if every point $x\\in S$ has an open neighbourhood\n$U\\subseteq S$ for which there are an integer $n\\ge0$ and an isomorphism of\nsheaves on $U$\n$$\\mathcal F|_U\\;\\cong\\;k_U^{\\,n},$$\nwhere $k_U$ is the constant sheaf on $U$ with value $k$ and $\\mathcal F|_U$ is\nthe restriction of $\\mathcal F$ to the open subspace $U$\n([[def-restriction-sheaf-open-subspace]], [[def-morphism-of-presheaves]],\n[[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]). A sheaf with\nthis property is also called a **finite-rank local system of $k$-vector spaces**\non $S$. This is a property of the sheaf on the space; no identification of such\nsheaves with functors on the fundamental groupoid is part of the definition.\n\nThe sheaf $k_U^{\\,n}$ is the $n$-fold direct sum of $k_U$ in the category of\nsheaves of $k$-vector spaces, with $k_U^{\\,0}$ the zero sheaf; its sections over\nan open $W\\subseteq U$ are the locally constant functions $W\\to k^n$. The\ninteger $n$ is quantified locally, so no global rank is asserted and the rank\nmay differ from point to point; the definition asserts no existence of a global\ntrivialization. The final sentence records only that a functorial groupoid\npresentation of local systems is a different, uncompared object here.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a metric space\n([[def-metric-space]]) having a neighbourhood basis of contractible open sets at\nevery point, and let $k$ be a field. Write $k_X$ for its constant sheaf. There\nare natural isomorphisms\n$$H^q(X,k_X)\\cong H^q_{\\operatorname{sing}}(X;k)$$\nin every degree, where the left side is derived cohomology in the category of\nsheaves of $k$-vector spaces (computed with the functorial $k$-linear injective\nresolutions supplied by\n[[lem-ringed-space-module-sheaves-enough-injectives]]; compare\n[[def-sheaf-cohomology-derived-global-sections]]). The same assertion holds on\nevery open subset of $X$. In particular a nonempty contractible space with this\nlocal property has constant-sheaf cohomology $k$ in degree zero and zero\notherwise. This applies to every finite-polyhedral open star and to its\nnonempty intersection with a closed simplex.",
+          "uses": [
+            "2.4",
+            "4.1",
+            "6.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward",
+          "source_section": "Statement",
+          "quote": "Let $i:Z\\hookrightarrow X$ be the inclusion of a closed subset\n$Z\\subseteq X$ carrying the subspace topology ([[def-subspace-topology-top]]), and\nlet $\\mathcal G$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]])\nwhose stalks vanish off $Z$, that is $\\mathcal G_x=0$ for every $x\\in X\\setminus Z$\n([[def-stalk-of-presheaf]]). Then the unit\n$$\\eta:\\mathcal G\\longrightarrow i_*i^{-1}\\mathcal G$$\nof the adjunction ([[thm-inverse-direct-image-adjunction]]) between inverse image\nand direct image ([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]) is an\nisomorphism of sheaves of abelian groups; equivalently\n$\\mathcal G\\cong i_*(\\mathcal G|_Z)$ under the identification\n$\\mathcal G|_Z=i^{-1}\\mathcal G$ ([[def-restriction-sheaf-open-subspace]]).",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-closed-immersion-preserves-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $Z\\subseteq X$\nbe a closed subset of a topological space ([[def-topological-space]]), equipped\nwith the subspace topology ([[def-subspace-topology-top]]), let\n$i:Z\\hookrightarrow X$ be the inclusion, and let $\\mathcal F$ be a sheaf of\nabelian groups on $Z$ ([[def-sheaf-on-topological-space]]). Then for every\n$q\\ge0$ there is an isomorphism\n$$H^q(Z,\\mathcal F)\\cong H^q(X,i_*\\mathcal F),$$\nwhere $i_*\\mathcal F$ is the direct image sheaf\n([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]) and cohomology is\nthat of [[def-sheaf-cohomology-derived-global-sections]].",
+          "uses": [
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied\nfunctorial injective resolution datum on $\\mathrm{Ab}(X)$ of\n[[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian\nsheaf $\\mathcal F$ one specific injective resolution\n$0\\to\\mathcal F\\to I^\\bullet(\\mathcal F)$\n([[def-right-derived-object-relative-to-injective-resolution-data]]).\n\nFor every $q\\ge0$ and every abelian sheaf $\\mathcal F$ on $X$ define the\n**$q$-th sheaf cohomology group of $\\mathcal F$** to be the right derived\nobject of $\\Gamma(X,-)$ relative to $I$:\n$$H^q(X,\\mathcal F):=R_I^q\\Gamma(X,\\mathcal F)=H^q\\bigl(\\Gamma(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr),$$\nthe cohomology object of the complex\n$\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))\\to\\cdots$ of abelian\ngroups obtained from the deleted resolution\n([[def-deleted-resolution]], [[def-cohomology-object-of-a-cochain-complex]]).\nWe also set $H^q(X,\\mathcal F):=0$ for $q<0$.\n\nBecause $I$ is a fixed supplied datum, the group $H^q(X,\\mathcal F)$ is a\nspecific group for each pair $(X,\\mathcal F)$, and for a morphism\n$\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves we write\n$H^q(X,\\varphi):=R_I^q\\Gamma(X,\\varphi)$ for the induced map; it is the map on\ncohomology induced by $\\Gamma(X,-)$ applied to the cochain maps supplied with\nthe datum, and it is additive in $\\varphi$.\n\nIf $J$ is another supplied injective resolution datum on $\\mathrm{Ab}(X)$ then\n$R_I^q\\Gamma(X,-)$ and $R_J^q\\Gamma(X,-)$ are naturally isomorphic, so the\n$H^q(X,\\mathcal F)$ computed from $J$ agree with the ones above up to a\ncanonical natural isomorphism; the Axiom of Dependent Choice needed for that\ncomparison follows from AC\n([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]],\n[[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n$H^q(X,\\mathcal F)$ therefore does not depend on the datum used, up to this\ncanonical isomorphism, and we call $q$ the **cohomological degree**.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-sheaf-cohomology-classes-as-derived-morphisms",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a\ntopological space, let $H^q(X,-)$ be sheaf cohomology computed from the supplied\nfunctorial injective resolution datum $I$ of\n[[thm-abelian-sheaves-have-enough-injectives]]\n([[def-sheaf-cohomology-derived-global-sections]]), and let\n$\\mathbb Z_X$ be the constant sheaf with value $\\mathbb Z$\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]). Under the\nstanding smallness or supplied cofinal-denominator hypothesis of\n[[def-derived-category-of-an-abelian-category]], for every abelian sheaf\n$\\mathcal F$ on $X$ and every $p\\ge0$ there is a canonical isomorphism\n$$\\operatorname{Hom}_{D(\\mathrm{Ab}(X))}(\\mathbb Z_X[-p],\\mathcal F)\\xrightarrow{\\ \\sim\\ }H^p(X,\\mathcal F),$$\nexhibited by the chain\n$$\\operatorname{Hom}_D(\\mathbb Z_X[-p],\\mathcal F) \\longrightarrow\\operatorname{Hom}_D(\\mathbb Z_X[-p],I^\\bullet(\\mathcal F)) \\xleftarrow{\\ Q\\ }\\operatorname{Hom}_K(\\mathbb Z_X[-p],I^\\bullet(\\mathcal F)) \\xrightarrow{\\ \\sim\\ }H^0\\bigl(\\underline{\\operatorname{Hom}}^\\bullet(\\mathbb Z_X[-p],I^\\bullet(\\mathcal F))\\bigr) \\xrightarrow{\\ \\sim\\ }H^p(X,\\mathcal F),$$\nwhere the first arrow is composition with $Q(\\eta_{\\mathcal F})$ for the\ncoaugmentation $\\eta_{\\mathcal F}:\\mathcal F\\to I^\\bullet(\\mathcal F)$ of the\ndatum, the second is the localization map $Q$ of\n[[def-derived-category-of-an-abelian-category]], and the last two identify the\nfull Hom complex with the shift $\\Gamma(X,I^\\bullet(\\mathcal F))[p]$, including the negative degrees that supply boundaries in degree zero. Moreover:\n\n1. **(Naturality and additivity.)** The isomorphism is additive and natural in\n   $\\mathcal F$: for every morphism $\\psi:\\mathcal F\\to\\mathcal G$ of abelian\n   sheaves the square\n   $$\\begin{matrix} \\operatorname{Hom}_D(\\mathbb Z_X[-p],\\mathcal F)&\\longrightarrow&H^p(X,\\mathcal F)\\\\ \\downarrow\\scriptstyle{\\circ Q(\\psi)}&&\\downarrow\\scriptstyle{H^p(X,\\psi)}\\\\ \\operatorname{Hom}_D(\\mathbb Z_X[-p],\\mathcal G)&\\longrightarrow&H^p(X,\\mathcal G) \\end{matrix}$$\n   commutes, $H^p(X,\\psi)$ being the map induced by $\\Gamma(X,\\psi)$ on the\n   cochain maps supplied with the datum\n   ([[def-sheaf-cohomology-derived-global-sections]]).\n\n2. **(Degree zero.)** For $p=0$ the composite of the isomorphism with the\n   canonical isomorphism $H^0(X,\\mathcal F)\\xrightarrow{\\sim}\\Gamma(X,\\mathcal F)$\n   of [[thm-zero-sheaf-cohomology-global-sections]] is the bijection\n   $\\varphi\\mapsto\\varphi_X(1_X)$ of\n   [[lem-morphisms-from-the-constant-sheaf-are-global-sections]]; in particular\n   the identity of $\\mathbb Z_X$ corresponds to $1_X\\in\\Gamma(X,\\mathbb Z_X)$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-finite-poset-diagrams-have-bounded-finite-bar-models",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a finite nonempty poset, regarded as a category with one arrow $p\\to q$ exactly when $p\\le q$, and let $h$ be the largest number of strict inequalities in a chain of $P$. Let $\\operatorname{Diag}_k(P)$ be the abelian category of covariant diagrams of $k$-vector spaces on $P$, i.e. the functor category of $k$-vector spaces indexed by $P$, with its cochain complexes as in [[def-cochain-complex-in-an-abelian-category]]. If $M$ is a bounded complex of diagrams in $\\operatorname{Diag}_k(P)$ whose vector spaces are finite-dimensional and vanish outside internal degrees $[a,b]$, then the derived inverse limit $\\mathbf R\\lim M:=\\mathbf R\\operatorname{Hom}(\\underline k,M)$ ([[def-derived-hom-in-the-bounded-setting]]) has a finite-dimensional cochain model concentrated in $[a,b+h]$. If $A,B$ are such complexes, concentrated in $[a,b]$ and $[c,d]$ respectively, then their derived Hom has a finite-dimensional cochain model concentrated in $[c-b,d-a+h]$. These models commute with every field extension. For the empty poset, the diagram sections and the derived Hom model are zero by convention.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "3.2",
+            "4.1",
+            "4.3",
+            "5.1",
+            "5.2",
+            "6.2",
+            "6.4",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "lem-field-module-sheaves-have-injective-derived-models",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a topological\nspace and let $k$ be a field. The category $\\operatorname{Sh}_k(X)$ of sheaves\nof $k$-vector spaces is the category of modules over the ringed space\n$(X,k_X)$ with constant structure sheaf $k_X$\n([[def-locally-ringed-space]], [[def-module-on-ringed-space]]); it is a locally\nsmall Grothendieck category and carries a functorial injective embedding, and\niterating that embedding on cokernels yields for every $k$-sheaf one specific\ninjective resolution\n([[lem-ringed-space-module-sheaves-enough-injectives]]). These resolutions are\nbounded-below injective replacements, so with the dependent choice supplied by\nAC ([[thm-choice-implies-dependent-implies-countable-choice]]) the bounded-below\ninjective complexes model the bounded derived category:\n$K^+(\\operatorname{Inj}\\operatorname{Sh}_k(X))\\to\nD^+(\\operatorname{Sh}_k(X))$ is an equivalence, and morphisms of the bounded\nderived category are computed by these replacements\n([[thm-injective-complexes-model-the-bounded-below-derived-category]]).\n\nNow let $X$ be a separated finite-type complex algebraic variety and let\n$\\mathfrak S$ be a finite smooth algebraic stratification with the frontier\ncondition of $X$\n([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]). Let\n$D^b_{\\mathfrak S}(X;k)$ be the full subcategory of\n$D^b(\\operatorname{Sh}_k(X))$ of complexes whose cohomology sheaves are bounded\nand constructible with respect to $\\mathfrak S$\n([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]). Then\n$D^b_{\\mathfrak S}(X;k)$ is a triangulated subcategory: it is closed under\nshifts, isomorphisms and mapping cones. More generally, if two bounded\nalgebraically constructible complexes are constructible with respect to one\ncommon finite smooth algebraic frontier stratification, then their cone is\nbounded and constructible with respect to that stratification.",
+          "uses": [
+            "1.6",
+            "3.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-injective-complexes-model-the-bounded-below-derived-category",
+          "source_section": "Statement",
+          "quote": "With supplied bounded-below injective replacements $j_X:X\\to I_X$ (and DC or supplied homotopy extensions), $K^+(\\operatorname{Inj}\\mathcal A)\\to D^+(\\mathcal A)$ is an equivalence of triangulated categories. For a bounded-below complex $I$, K-injectivity can be tested using only bounded-below acyclic inputs.",
+          "uses": [
+            "1.6",
+            "3.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+          "source_section": "Statement",
+          "quote": "A bounded-below cochain complex $I$ of injective objects is K-injective. Assume dependent choice for the countable successive homotopy extensions, or supply those extensions as data.",
+          "uses": [
+            "1.6",
+            "3.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-homotopically-injective-bounded-below-complex",
+          "source_section": "Definition",
+          "quote": "A cochain complex $I$ is **homotopically injective**, or **K-injective**, if $\\operatorname{Hom}_K(A,I[r])=0$ for every acyclic cochain complex $A$ and every integer $r$. Equivalently, $\\underline{\\operatorname{Hom}}(A,I)$ is acyclic. This uses the Hom complex and shifted Hom identification fixed in [[def-homotopically-projective-bounded-above-complex]]. A **bounded-below K-injective complex** additionally has $I^n=0$ for all sufficiently negative $n$. The K-injective property itself neither assumes boundedness nor means termwise injectivity.",
+          "uses": [
+            "1.6",
+            "3.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof",
+          "source_section": "Statement",
+          "quote": "For a K-injective complex $I$ and any complex $X$, $Q:\\operatorname{Hom}_K(X,I)\\to\\operatorname{Hom}_D(X,I)$ is bijective. Moreover, if $s:I\\to J$ is a quasi-isomorphism, its cone triangle is split in $K$: $J\\cong I\\oplus\\operatorname{Cone}(s)$ with $s$ corresponding to the inclusion.",
+          "uses": [
+            "1.6",
+            "3.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "def-homotopically-projective-bounded-above-complex",
+          "source_section": "Definition",
+          "quote": "For cochain complexes put $\\underline{\\operatorname{Hom}}^r(P,A)=\\prod_n\\operatorname{Hom}_{\\mathcal A}(P^n,A^{n+r})$, with $(du)^n=d_Au^n-(-1)^ru^{n+1}d_P$. This is the reindexing of [[def-hom-complex-of-chain-complexes]]. A complex $P$ is **homotopically projective**, or **K-projective**, if $\\operatorname{Hom}_K(P,A[r])=0$ for every acyclic complex $A$ and every integer $r$. Equivalently $\\underline{\\operatorname{Hom}}(P,A)$ is acyclic: the degree-zero Hom/homotopy identification of [[thm-hom-in-the-homotopy-category-is-zero-degree-homology-of-the-hom-complex]], applied after shifting $A$, identifies these groups with its cohomology (a boundary differs only by the invertible sign $(-1)^r$).\n\nThe bounded-above case additionally requires $P^n=0$ for all sufficiently large $n$, as in [[def-bounded-bounded-below-and-bounded-above-complex]]. Boundedness is not part of the general K-projective predicate. Nor is termwise projectivity: a contractible complex has zero Hom from it in $K$ and is K-projective irrespective of its terms.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-a-bounded-above-complex-of-projectives-is-homotopically-projective",
+          "source_section": "Statement",
+          "quote": "A bounded-above cochain complex $P$ of projective objects is K-projective. Assume dependent choice for the countable successive homotopy choices, or supply those lifts as data.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof",
+          "source_section": "Statement",
+          "quote": "For a K-projective complex $P$ and any complex $X$, $Q:\\operatorname{Hom}_K(P,X)\\to\\operatorname{Hom}_D(P,X)$ is bijective, under the standing localization size convention.",
+          "uses": [
+            "5.2"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice.\n\nLet $I$ be a supplied injective resolution datum on a class $\\mathcal D$, let\n$F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor, and let\n$$0\\to A\\to J^0\\to J^1\\to J^2\\to\\cdots$$\nbe an $F$-acyclic resolution of $A$ relative to $I$. Assume moreover that\n$A\\in\\mathcal D$ and that, for $Z^0:=A$ and\n$$0\\to Z^q\\to J^q\\to Z^{q+1}\\to0\\qquad(q\\ge0),$$\neach $Z^q$ lies in $\\mathcal D$. Then for every $n\\ge 0$ there is a canonical\nisomorphism\n$$R_I^nF(A)\\xrightarrow{\\ \\sim\\ }H^n(F(J^\\bullet_{\\mathrm{del}})).$$",
+          "uses": [
+            "3.2",
+            "4.1",
+            "4.3",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "3.2",
+            "4.1",
+            "4.3",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-canonical-truncation-of-a-complex",
+          "source_section": "Definition",
+          "quote": "For a cochain complex $X$, define the **canonical truncations** by\n\n$$ (\\tau^{\\leq n}X)^i=\\begin{cases}X^i&i<n,\\\\\\ker d_X^n&i=n,\\\\0&i>n,\\end{cases}\\qquad (\\tau^{\\geq n}X)^i=\\begin{cases}0&i<n,\\\\\\operatorname{coker}d_X^{n-1}&i=n,\\\\X^i&i>n.\\end{cases} $$\n\nThe differential into $\\ker d_X^n$ is the factorization of $d_X^{n-1}$; the differential out of $\\operatorname{coker}d_X^{n-1}$ is induced by $d_X^n$. All other retained differentials are those of $X$. There are natural maps $\\tau^{\\leq n}X\\to X\\to\\tau^{\\geq n}X$. Unlike [[def-brutal-truncation-of-a-complex]], these constructions correct the boundary using the cycle and boundary objects of [[def-cohomology-object-of-a-cochain-complex]].",
+          "uses": [
+            "4.2",
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-canonical-truncations-fit-a-distinguished-triangle",
+          "source_section": "Statement",
+          "quote": "Every short exact sequence $0\\to A\\xrightarrow iB\\xrightarrow qC\\to0$ of cochain complexes gives a natural distinguished triangle $A\\to B\\to C\\to A[1]$ in $D(\\mathcal A)$. In particular, for every integer $n$ there are canonical distinguished triangles\n\n$$\\tau^{\\leq n}X\\to X\\to\\tau^{\\geq n+1}X\\to(\\tau^{\\leq n}X)[1],$$\n\n$$\\tau^{\\leq n}X\\to\\tau^{\\leq n+1}X\\to H^{n+1}(X)[-n-1]\\to(\\tau^{\\leq n}X)[1],$$\n\n$$H^n(X)[-n]\\to\\tau^{\\geq n}X\\to\\tau^{\\geq n+1}X\\to H^n(X)[-n+1].$$",
+          "uses": [
+            "4.2",
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+          "source_section": "Statement",
+          "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated. The localization functor $Q$ is exact. Every such triangle gives a long exact cohomology sequence $\\cdots\\to H^n(X)\\to H^n(Y)\\to H^n(Z)\\to H^{n+1}(X)\\to\\cdots$.",
+          "uses": [
+            "4.2",
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "prop-bounded-derived-localizations-embed-fully-faithfully",
+          "source_section": "Statement",
+          "quote": "The canonical functors $D^-(\\mathcal A),D^+(\\mathcal A),D^b(\\mathcal A)\\to D(\\mathcal A)$ are fully faithful and exact. Their essential images consist exactly of complexes with cohomology respectively bounded above, bounded below, or bounded on both sides.",
+          "uses": [
+            "4.2",
+            "5.2",
+            "6.3"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally\ncompact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of\nabelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]],\n[[def-section-restriction-and-global-section]]). For a sheaf $\\mathcal F$ on\n$X$ define the **compactly supported global sections** of $\\mathcal F$ to be the\nsubgroup\n$$\\Gamma_c(X,\\mathcal F):=\\{\\,s\\in\\Gamma(X,\\mathcal F):\\operatorname{Supp}(s)\\ \\text{is a compact subset of }X\\,\\}\\subseteq\\Gamma(X,\\mathcal F),$$\nwhere the support of a section is the set of points at which its germ is\nnonzero ([[def-support-of-a-sheaf-section]], [[def-germ-of-section]],\n[[def-compact-space]]). This is a subgroup: the zero section has empty support, negation preserves\nsupport, and the support of a sum is closed in $X$ and contained in the finite\nunion of the two compact supports, hence compact\n([[def-support-of-a-sheaf-section]],\n[[thm-closed-subspace-of-a-compact-space-is-compact]]).\nA morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian\nsheaves induces a map $\\Gamma_c(X,\\varphi)$ by restriction of\n$\\Gamma(X,\\varphi)$, and this makes $\\Gamma_c(X,-)$ an additive functor\n$\\mathrm{Ab}(X)\\to\\mathbf{Ab}$ ([[def-additive-functor]],\n[[def-morphism-of-presheaves]]). Six consistency facts hold; all are immediate\nfrom the definitions, and they record the interface used by the compact-support\ncalculus.\n\n1. **Well-definedness of $\\Gamma_c(X,\\varphi)$.** If $x\\notin\n   \\operatorname{Supp}(s)$ then $s_x=0$ in the stalk $\\mathcal F_x$\n   ([[def-stalk-of-presheaf]]), and since the stalk maps of a morphism commute\n   with the germ maps, $\\varphi(s)_x=\\varphi_x(s_x)=0$, so\n   $\\operatorname{Supp}(\\varphi(s))\\subseteq\\operatorname{Supp}(s)$. A support\n   $\\operatorname{Supp}(t)$ is closed in $X$: if $x\\notin\n   \\operatorname{Supp}(t)$ then $t$ agrees with the zero section on some open\n   neighbourhood of $x$, by the description of equality of germs\n   ([[def-support-of-a-sheaf-section]]). Hence\n   $\\operatorname{Supp}(\\varphi(s))$ is a closed subset of $X$ contained in the\n   compact set $\\operatorname{Supp}(s)$; being closed in $X$ it is closed in the\n   subspace $\\operatorname{Supp}(s)$, so it is a compact subset of that compact\n   space ([[thm-closed-subspace-of-a-compact-space-is-compact]]) and therefore\n   a compact subset of $X$ ([[lem-compactness-of-a-subspace-is-ambient]]), and\n   $\\Gamma_c(X,\\varphi)$ maps $\\Gamma_c(X,\\mathcal F)$ into\n   $\\Gamma_c(X,\\mathcal G)$. Composites and identities are computed\n   componentwise, so $\\Gamma_c(X,-)$ is a functor; it is additive because\n   $\\Gamma(X,-)$ is.\n2. **Sheaves of $k$-vector spaces.** If $\\mathcal F$ is a sheaf of\n   $k$-vector spaces, then $\\Gamma_c(X,\\mathcal F)$ is a $k$-vector subspace of\n   $\\Gamma(X,\\mathcal F)$: the support of $c\\cdot s$ is\n   $\\operatorname{Supp}(s)$ for $c\\ne0$ and $\\varnothing$ for $c=0$, and the\n   zero section has empty support. For a morphism $\\varphi$ of sheaves of\n   $k$-vector spaces the map $\\Gamma_c(X,\\varphi)$ is $k$-linear, since\n   $\\Gamma(X,\\varphi)$ is. The higher derived functors below are computed from\n   an injective resolution datum on abelian sheaves, so they are abelian\n   groups; the degree-zero part is the $k$-vector space\n   $\\Gamma_c(X,\\mathcal F)$.\n3. **Left exactness.** For every short exact sequence\n   $0\\to\\mathcal F'\\xrightarrow{\\varphi'}\\mathcal F\\xrightarrow{\\varphi}\\mathcal F''\\to0$\n   of abelian sheaves the sequence\n   $$0\\to\\Gamma_c(X,\\mathcal F')\\xrightarrow{\\Gamma_c(\\varphi')}\\Gamma_c(X,\\mathcal F)\\xrightarrow{\\Gamma_c(\\varphi)}\\Gamma_c(X,\\mathcal F'')$$\n   is exact. Injectivity: a monomorphism of sheaves has injective stalk maps\n   ([[thm-exactness-of-sheaves-stalkwise]]), so\n   $\\operatorname{Supp}(\\varphi'(s'))=\\operatorname{Supp}(s')$ and a section\n   killed by $\\varphi'$ has all germs zero, hence is zero. Exactness at the\n   middle: the kernel of $\\Gamma(X,\\varphi)$ is the image of\n   $\\Gamma(X,\\varphi')$ by left exactness of global sections\n   ([[lem-global-sections-left-exact]]); if $s=\\varphi'(s')$ has compact\n   support, then $s'$ has the same support,\n   $\\operatorname{Supp}(s')=\\operatorname{Supp}(\\varphi'(s'))=\n   \\operatorname{Supp}(s)$, because $\\varphi'$ is stalk-injective, so $s'$ lies\n   in $\\Gamma_c(X,\\mathcal F')$, and the reverse inclusion is immediate from\n   $\\varphi\\circ\\varphi'=0$. Thus $\\Gamma_c(X,-)$ is an additive left exact\n   functor on $\\mathrm{Ab}(X)$ ([[def-left-exact-and-right-exact-functor]]).\n4. **The derived functors.** Abelian sheaves on $X$ have enough injectives, and\n   the embeddings of [[thm-abelian-sheaves-have-enough-injectives]] supply one\n   functorial injective resolution datum $\\mathcal F\\mapsto I^\\bullet(\\mathcal F)$\n   on the whole category $\\mathrm{Ab}(X)$, under the Axiom of Choice\n   ([[def-right-derived-object-relative-to-injective-resolution-data]]). The\n   **compactly supported cohomology** of $\\mathcal F$ is\n   $$H^q_c(X,\\mathcal F):=R^q\\Gamma_c(X,\\mathcal F):=H^q\\bigl(\\Gamma_c(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr)\\qquad(q\\ge0),\\qquad H^q_c(X,\\mathcal F):=0\\quad(q<0),$$\n   the cohomology of the deleted resolution, as in the pattern of\n   [[def-sheaf-cohomology-derived-global-sections]]; for a morphism $\\varphi$ we\n   write $H^q_c(X,\\varphi):=R^q\\Gamma_c(X,\\varphi)$ for the induced map.\n5. **Independence of the datum.** If $J$ is another supplied injective\n   resolution datum on $\\mathrm{Ab}(X)$, then $R^q\\Gamma_c(X,-)$ computed from\n   $J$ is naturally isomorphic to $R^q\\Gamma_c(X,-)$ computed from $I$\n   ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]);\n   the Axiom of Dependent Choice needed for that comparison follows from AC\n   ([[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n   $H^q_c(X,\\mathcal F)$ therefore does not depend on the datum up to this\n   canonical natural isomorphism.\n6. **Delta functor and the compact case.** Since $\\Gamma_c(X,-)$ is additive\n   and left exact and the datum is defined on all of $\\mathrm{Ab}(X)$, the\n   functors $R^q\\Gamma_c(X,-)$, $q\\ge0$, carry connecting maps that make them a\n   cohomological delta functor with $R^0\\Gamma_c(X,-)\\cong\\Gamma_c(X,-)$, and\n   every short exact sequence of abelian sheaves has a long exact\n   compact-support cohomology sequence, natural in the sequence\n   ([[thm-right-derived-functors-form-a-cohomological-delta-functor]]). If $X$\n   is compact, then for every global section $s$ its support is closed in $X$ by\n   fact 1, hence a closed subset of the compact space $X$ and therefore\n   compact, so every global section is compactly supported; hence\n   $\\Gamma_c(X,-)=\\Gamma(X,-)$ and\n   $H^q_c(X,\\mathcal F)=H^q(X,\\mathcal F)$ for every $q$, where $H^q(X,-)$ is\n   the sheaf cohomology of [[def-sheaf-cohomology-derived-global-sections]]\n   computed from the same datum.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and\nlet $\\mathcal F$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces, and the tensor clause of (4) is stated only\nthere. Then:\n\n1. if $\\mathcal F$ is c-soft ([[def-c-soft-sheaf]]), every section of\n   $\\mathcal F$ over a compact subset $K\\subseteq X$ extends to a compactly\n   supported global section whose support is contained in any prescribed open\n   neighbourhood of $K$;\n2. every injective abelian sheaf on $X$ is c-soft;\n3. if $\\mathcal F$ is c-soft, then $H^q_c(X,\\mathcal F)=0$ for every $q>0$\n   ([[def-compactly-supported-global-sections]]); when $X$ is compact this is\n   the vanishing of the sheaf cohomology $H^q(X,\\mathcal F)$\n   ([[def-sheaf-cohomology-derived-global-sections]]);\n4. c-softness is preserved by restriction to open subsets, by restriction to\n   closed subsets, by extension by zero along an open inclusion, and by finite\n   direct sums of sheaves of abelian groups; for sheaves of $k$-vector spaces\n   it is also preserved by tensor product with a constant $k$-vector space;\n5. if $0\\to\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''\\to0$\n   is a short exact sequence of sheaves of abelian groups and $\\mathcal F'$ is\n   c-soft, then every section of $\\mathcal F''$ over a compact subset lifts to\n   a section of $\\mathcal F$ over an open neighbourhood of it, and the induced\n   sequence\n   $0\\to\\Gamma_c(X,\\mathcal F')\\to\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,\\mathcal F'')\\to0$\n   is exact; if $\\mathcal F'$ and $\\mathcal F$ are c-soft then\n   $\\mathcal F''$ is c-soft.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space, let\n$j:U\\hookrightarrow X$ be the inclusion of an open subspace with closed\ncomplement $Z=X\\setminus U$\n([[def-subspace-topology-top]], [[def-locally-compact-space]],\n[[def-hausdorff-space]]), and let $i:Z\\hookrightarrow X$ be the inclusion of\n$Z$. All sheaves below are sheaves of abelian groups\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces.\n\n1. For every sheaf $\\mathcal A$ on $U$ the canonical map\n   $\\Gamma_c(X,j_!\\mathcal A)\\to\\Gamma_c(U,\\mathcal A)$ --- the restriction of\n   the identification of $(j_!\\mathcal A)(X)$ with a subgroup of\n   $\\mathcal A(U)$ ([[def-extension-by-zero-abelian-sheaf]],\n   [[def-compactly-supported-global-sections]]) --- is an isomorphism, natural\n   in $\\mathcal A$; the functor $j_!$ carries c-soft sheaves on $U$ to c-soft\n   sheaves on $X$ ([[def-c-soft-sheaf]]); and the induced canonical\n   isomorphisms $R^q\\Gamma_c(X,j_!\\mathcal A)\\cong R^q\\Gamma_c(U,\\mathcal A)$\n   hold for all $q\\ge0$ and are natural in $\\mathcal A$.\n2. For every sheaf $\\mathcal B$ on $Z$ the canonical map\n   $\\Gamma_c(X,i_*\\mathcal B)\\to\\Gamma_c(Z,\\mathcal B)$ --- the restriction of\n   the identification of $(i_*\\mathcal B)(X)$ with $\\mathcal B(Z)$\n   ([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]) --- is an\n   isomorphism, natural in $\\mathcal B$; the functor $i_*$ carries c-soft\n   sheaves on $Z$ to c-soft sheaves on $X$; and the induced canonical\n   isomorphisms $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong R^q\\Gamma_c(Z,\\mathcal B)$\n   hold for all $q\\ge0$ and are natural in $\\mathcal B$.\n3. If $Z$ is compact ([[def-compact-space]]), then\n   $\\Gamma_c(X,i_*\\mathcal B)\\cong\\Gamma(Z,\\mathcal B)$ and\n   $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong H^q(Z,\\mathcal B)$ for all $q\\ge0$\n   ([[def-sheaf-cohomology-derived-global-sections]]).\n\nAll isomorphisms are the canonical ones induced by the extension-by-zero\nadjunction [[thm-extension-by-zero-adjunction-exactness]] and by the\nacyclic-resolution comparison\n[[thm-acyclic-resolution-theorem-for-right-derived-functors]]; no choice is\nused beyond the injective resolution data and their comparison theorems.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, and let $\\mathcal F,\\mathcal G$ be\n$\\mathcal O_X$-modules. The **internal Hom sheaf**\n$$\n\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)\n$$\nis the sheaf on $X$ defined by\n$$U\\longmapsto \\operatorname{Hom}_{\\mathcal O_X|_U}(\\mathcal F|_U,\\mathcal G|_U)$$\nfor each open set $U \\subseteq X$.\n\nRestriction to a smaller open set $V \\subseteq U$ sends a morphism\n$\\mathcal F|_U\\to\\mathcal G|_U$ to its restriction\n$\\mathcal F|_V\\to\\mathcal G|_V$. Multiplication by a local section\n$a\\in \\mathcal O_X(U)$ acts on a morphism $\\varphi$ by either pre- or\npost-composition with multiplication by $a$, giving\n$\\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G)$ the structure of an\n$\\mathcal O_X$-module.",
+          "uses": [
+            "1.6",
+            "4.1",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $f:X\\to Y$ be a continuous map of topological spaces and let $k$ be a field. Inverse image of sheaves of $k$-vector spaces ([[def-sheaf-on-topological-space]], [[def-inverse-image-presheaf-and-sheaf]]) is exact and $f^*\\dashv Rf_*$, where $Rf_*$ is computed on bounded-below $k$-linear injective replacements ([[lem-bounded-below-complexes-admit-injective-replacements]], [[thm-injective-complexes-model-the-bounded-below-derived-category]]). For bounded complexes $A,B$ ([[def-bounded-bounded-below-and-bounded-above-complex]]) the derived tensor over $k$ is their signed total tensor ([[def-sheaf-tensor-product]]), and for bounded $A$ and bounded-below $B$ the derived internal Hom $R\\mathcal Hom(A,B)$ is computed by $\\mathcal Hom^\\bullet(A,I_B)$ in a $k$-linear bounded-below injective model $B\\to I_B$ ([[def-sheaf-hom]], [[def-derived-hom-in-the-bounded-setting]]). Flasque $k$-sheaves ([[def-flasque-sheaf]]) are acyclic for sections on every open set ([[def-sheaf-cohomology-derived-global-sections]]). The tensor-Hom adjunction and the dg associativity, evaluation and symmetry identities are natural. No bounded-constructibility claim for the internal Hom is made here; that requires the local geometric supplier of the later constructible items.",
+          "uses": [
+            "1.6",
+            "4.1",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "lem-filtered-colimits-of-abelian-groups-are-exact",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal J$ be a small filtered category\n([[def-filtered-category-and-filtered-colimit]]). The filtered colimit functor\n$$\\operatorname*{colim}_{\\mathcal J}:\\mathbf{Ab}^{\\mathcal J}\\to\\mathbf{Ab}$$\non abelian groups is exact ([[def-exact-functor-between-abelian-categories]]).\nEquivalently:\n\n1. for a $\\mathcal J$-indexed diagram of short exact sequences\n   $0\\to A_j\\to B_j\\to C_j\\to 0$ of abelian groups, the colimit sequence\n   $$0\\to\\operatorname*{colim}_jA_j\\to\\operatorname*{colim}_jB_j\\to\\operatorname*{colim}_jC_j\\to 0$$\n   is short exact;\n2. for a $\\mathcal J$-indexed diagram of cochain complexes of abelian groups\n   $K_j^\\bullet$, the canonical map\n   $\\operatorname*{colim}_jH^p(K_j^\\bullet)\\to H^p(\\operatorname*{colim}_jK_j^\\bullet)$\n   is an isomorphism for every $p\\in\\mathbb Z$; in particular the colimit of a\n   diagram of exact complexes is exact in every degree.",
+          "uses": [
+            "1.6",
+            "4.1",
+            "5.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "cor-kunneth-over-a-field",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. For complexes of vector spaces over a field $k$ with finite diagonals, cross product is a natural isomorphism $\\bigoplus_{p+q=n}H_pC\\otimes_kH_qD\\cong H_n(C\\otimes_kD)$.",
+          "uses": [
+            "4.1",
+            "6.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.\n\nDiameters of nonempty subsets of $X$ are defined because a compact space is\nbounded ([[thm-compact-subset-is-closed-and-bounded]]) and a subset of a bounded\nset is bounded. No choice principle is used.",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "**The carrier map.** The principal upsets $P_{\\ge\\sigma}=\\{\\tau\\in P:\\tau\\supseteq\\sigma\\}$ form a basis of the Alexandrov topology: a subset is open exactly when it is upward closed, and an upward-closed set is the union of the principal upsets of its elements. Since $D$ is a subcomplex, every face of a simplex in $D$ lies in $D$, so contraposition makes the set $P$ of nonempty simplices outside $D$ upward closed under taking cofaces; hence $q^{-1}(P_{\\ge\\sigma})=\\{x\\in X:\\sigma\\subseteq q(x)\\}=\\operatorname{St}(\\sigma)$, because a point of $|K|$ whose carrier contains $\\sigma$ cannot lie in $|D|$ and every coface of a simplex of $P$ again lies in $P$. The star $\\operatorname{St}(\\sigma)=\\bigcup_{\\tau\\supseteq\\sigma}\\tau^\\circ$ is open in $|K|$, since its trace on each closed simplex $|\\eta|$ is $\\{x\\in|\\eta|:\\sigma\\subseteq\\operatorname{supp}(x)\\}$, which is relatively open when $\\sigma\\subseteq\\eta$ and empty otherwise; being contained in $X$ it is also open in $X$. As the principal upsets form a basis, $q$ is continuous. Each $\\sigma^\\circ$ is convex in the affine simplex spanned by $\\sigma$, hence connected, locally path-connected and simply connected, and each $\\operatorname{St}(\\sigma)$ is open and nonempty.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "**Exact realization.** A diagram $V:P\\to k\\text{-}\\mathbf{Vect}$ defines a sheaf $U\\mapsto\\lim_{\\sigma\\in U}V_\\sigma$: compatible families glue uniquely componentwise. The least neighbourhood $P_{\\ge\\sigma}$ has initial object $\\sigma$, so its sections and its stalk are $V_\\sigma$. Conversely, a sheaf on $P$ has these values on the principal opens; restrictions give the diagram, and the sheaf axiom recovers its sections on every open. Thus sheaves on $P$ and diagrams are equivalent. Define $\\widehat V=q^{-1}V$. Its stalk at $x$ is $V_{q(x)}$, so realization is exact. On $\\sigma^\\circ$, the carrier factors through the point $\\sigma$ of $P$; composition of inverse images identifies its restriction with the constant sheaf of value $V_\\sigma$. This constructs the constant-sheaf identification, rather than inferring it from an abstract equality of stalk values.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "**Triviality and generization.** First, a finite-rank local system on a convex simplex interior is constant. By [F18], subdivide a path into finitely many intervals lying in trivializing opens and compose their stalk identifications. Refining the subdivision does not change the composite. On overlaps, transition matrices are locally constant, so a further subdivision proves independence of the trivializing opens. A homotopy between paths has compact square domain; subdivide that square finely enough that each small square maps into one trivializing open. Transport around each small square is the identity, and cancellation of its shared edges shows that transport along the two boundary paths agrees. Convexity provides such a homotopy between any two paths with fixed endpoints. Transport from a fixed point therefore defines a sheaf map from its constant stalk sheaf to the local system: near each point it is the identification from one trivialization. It is an isomorphism by the stalk criterion. Put $V_\\sigma=F_{b_\\sigma}$. For $\\sigma\\le\\tau$, represent a germ at $b_\\sigma$ on a sufficiently small ambient Euclidean ball; its intersection with $\\tau^\\circ$ is nonempty and convex. Extend its restriction uniquely along the constant sheaf on $\\tau^\\circ$ and evaluate at $b_\\tau$. Equal germ representatives agree on a smaller such ball, so this map is well defined and linear. The same construction based at any point of $\\sigma^\\circ$ is locally constant after the canonical transport identifications: lift finitely many basis germs to ambient sections and shrink so that their values on each of the finitely many cofaces are fixed. Connectedness of $\\sigma^\\circ$ makes each incidence matrix constant throughout it. For $\\sigma\\le\\eta\\le\\tau$, choose a point of $\\eta^\\circ$ in the ball representing the original germ and restrict the same section near that point into $\\tau^\\circ$; uniqueness of extension and the just-proved independence of the point on $\\eta^\\circ$ give the transitivity equation. Identities are immediate. This reconstructs a diagram functorially from $F$.",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F6",
+            "F18",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "**The standard injectives.** For $\\tau\\in P$ and a finite-dimensional $k$-vector space $W$ let $I_\\tau(W)$ be the diagram with value $W$ at every $\\sigma\\subseteq\\tau$ and $0$ elsewhere, the structure maps being identities where both values are $W$. A diagram map $V\\to I_\\tau(W)$ is exactly a $k$-linear map $V_\\tau\\to W$, since its $\\tau$-component determines all components and conversely any such linear map extends by the zero maps; therefore $I_\\tau(W)$ is injective because $\\operatorname{Hom}(-,W)$ is exact. Every diagram $V$ embeds into the finite direct sum $\\bigoplus_{\\tau\\in P}I_\\tau(V_\\tau)$ by the identity component at $\\tau$, a nonzero vector of $V_\\tau$ being detected by that component. Hence the finite diagram category has enough injectives and explicit finite injective embeddings, and by [F10] every bounded complex of finite-dimensional diagrams has a bounded injective model whose terms are finite sums of these standard injectives with the stated finite-dimensional ranges.",
+          "step": "1.4",
+          "inputs": [
+            "given",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "**Representables.** The diagram $P_\\sigma$ has value $k$ on cofaces of $\\sigma$ and zero elsewhere, and $\\operatorname{Hom}(P_\\sigma,V)=V_\\sigma$; hence it is projective and these diagrams generate. On $\\operatorname{St}(\\sigma)$ its realization is canonically constant, since all its diagram maps there are identities. The extension-by-zero adjunction gives $j_{\\sigma!}k_{\\operatorname{St}(\\sigma)}\\to q^{-1}P_\\sigma$, identity on that star; both sides have zero stalks elsewhere, so this actual morphism is an isomorphism. The finite projective bar construction of [F10] resolves every bounded finite-dimensional diagram complex by a bounded complex of finite sums of these representables.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F5",
+            "F10"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "**Internal derived Hom.** For bounded representatives $A,B$, choose a bounded-below injective replacement $B\\to J$. By [F16], $\\mathcal Hom^\\bullet(A,J)$ represents $R\\mathcal Hom(A,B)$ and its derived sections on $U$ represent $R\\operatorname{Hom}(A|_U,B|_U)$. The reason ordinary sections suffice in this model is that $\\mathcal Hom(A^i,J^j)$ is injective: tensor with a $k$-sheaf is exact stalkwise and its right adjoint is sheaf Hom. There are finitely many $A$-degrees in each Hom degree. Restriction preserves injectives by its exact left adjoint $j_!$. Taking the exact filtered colimit of the section complexes therefore gives $\\mathcal H^r(R\\mathcal Hom(A,B))_x=\\varinjlim_{U\\ni x}\\operatorname{Hom}_{D(U)}(A|_U,B|_U[r])$. Boundedness will follow from the local finite models.",
+          "step": "1.6",
+          "inputs": [
+            "given",
+            "F5",
+            "F11",
+            "F16"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "**Sections on a star.** The generization maps of step 1.3 are locally constant along each face: trivialize the finite-rank restriction near a point of that face, lift its finitely many basis germs to ambient sections, and shrink one neighbourhood where their restrictions to each of the finitely many incident cofaces are constant. Their coface matrices are then constant on that face neighbourhood. Since each face interior is connected, these local matrices define the same transported map throughout it; restrictions through nested faces compose as in step 1.3. For $\\sigma\\in P$, a section on $\\operatorname{St}(\\sigma)$ with zero germ at $b_\\sigma$ vanishes on a nonempty subset of every incident open simplex, hence on that whole simplex by [F6], so it is zero. Conversely, start with a germ $a\\in F_{b_\\sigma}$ and define its value along every $\\tau^\\circ$ with $\\tau\\supseteq\\sigma$ by the generization map followed by the unique constant transport on $\\tau^\\circ$. At a point of $\\eta^\\circ$, lift that assigned germ to an ambient local section. Its values on every incident $\\tau^\\circ$ are the prescribed ones, by the local constant matrices and their composition rule; shrinking finitely many times ensures agreement for all cofaces. Thus the assigned family of germs is locally represented by ambient sections. These sections agree stalkwise on their overlaps and glue by the sheaf axiom to a section on the whole star. This proves $F(\\operatorname{St}(\\sigma))\\cong F_{b_\\sigma}$. The simplex interiors were not treated as open subsets of the star.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F6",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "**Compact-support reduction.** Extend $V$ by zero to the full face poset $P_K$, obtaining $\\widetilde V$; no arrow goes from a retained face to a deleted coface because $D$ is a subcomplex. The restriction of $q_K^{-1}\\widetilde V$ to $X$ is canonically $q^{-1}V$. The open extension-by-zero adjunction gives $j_!q^{-1}V\\to q_K^{-1}\\widetilde V$; it is the identity on $X$, and both sides have zero stalks on $|D|$, so it is an isomorphism. The space $X$ is locally compact Hausdorff: its finite Euclidean realization is compact Hausdorff and $X$ is open. Thus [F15] and compactness give $R\\Gamma_c(X,q^{-1}V)\\simeq R\\Gamma(|K|,q_K^{-1}\\widetilde V)$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F5",
+            "F15",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "**The product pair.** Let $V=|K_V|\\setminus|D_V|$ and $F=|K_F|\\setminus|D_F|$ be realizations of finite pairs with face posets $P_V,P_F$ as in the statement, let $\\operatorname{pr}:V\\times F\\to V$ be the projection, and let $B$ be a bounded complex of finite-dimensional diagrams on $P_V$, realized as $A:=q_V^{-1}B$, with the product realized along $q_{V\\times F}:V\\times F\\to P_V\\times P_F$. The product $|K_V|\\times|K_F|$ has the finite regular product-cell decomposition whose closed cells are the convex polytopes $|\\sigma|\\times|\\eta|$; the star, diagram and acyclicity arguments apply verbatim to these regular cells, using their convex faces, so no product of simplices is asserted to be a simplex, and $V\\times F$ is the complement of the subcomplex $D$ consisting of the cells lying in $|D_V|\\times|K_F|$ or in $|K_V|\\times|D_F|$; a product cell $\\sigma\\times\\eta$ lies outside $D$ exactly when $\\sigma\\notin D_V$ and $\\eta\\notin D_F$, so its poset is exactly $P_V\\times P_F$, and $\\operatorname{pr}^*A=q_{V\\times F}^{-1}(B\\boxtimes k)$, where $B\\boxtimes k$ denotes the product diagram with value $B_\\sigma$ at $(\\sigma,\\eta)$ and the identity in the $\\eta$-variable.",
+          "step": "2.3",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "**Realized injectives are acyclic on stars.** Put $Z_\\tau=|\\tau|\\cap X$, closed in $X$. The restriction of $q^{-1}I_\\tau(W)$ to $Z_\\tau$ is canonically constant: the restricted diagram has value $W$ and identity maps everywhere. Its stalks vanish off $Z_\\tau$, so the actual closed-inclusion unit of [F8] identifies it with $i_{\\tau*}W_{Z_\\tau}$. Consequently its cohomology on an open $U$ is the constant-sheaf cohomology of $U\\cap Z_\\tau$. For $U=\\operatorname{St}(\\sigma)$ this intersection is empty unless $\\sigma\\le\\tau$; otherwise it is the convex set in $|\\tau|$ where all coordinates indexed by $\\sigma$ are positive, and cannot meet $D$. It has cohomology $W$ in degree zero and zero above by [F7]. Globally $Z_\\tau$ contracts to $b_\\tau$: at positive time the segment from a retained point to $b_\\tau$ lies in $\\tau^\\circ$. It has a contractible-open neighbourhood basis, being open in the convex simplex $|\\tau|$. Hence its constant-sheaf cohomology is also $W$ in degree zero and zero above. This proves ordinary global and star acyclicity of realized standard injectives and their finite sums. It does not claim that they are injective or c-soft among all sheaves.",
+          "step": "2.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F7",
+            "F8",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "**The ordinary equivalence.** The constructions of steps 1.2 and 1.3 are inverse equivalences between finite-dimensional covariant $k$-diagrams on $P$ and sheaves on $X$ whose restriction to every open simplex is locally constant of finite rank. On the diagram side, the reconstruction of $\\widehat V$ has $V_\\sigma(\\widehat V)=(\\widehat V)_{b_\\sigma}\\cong V_\\sigma$ by step 1.2, and the generization maps of step 1.3 reproduce the maps of $V$, since the canonical sections over the stars have the prescribed values. On the sheaf side, the canonical morphism $\\widehat{V(F)}\\to F$ is adjunct to the family $V_\\sigma\\cong F(\\operatorname{St}(\\sigma))$ of inverse isomorphisms from step 2.1 and is an isomorphism on stalks by steps 1.2, 1.3 and 2.1, hence an isomorphism by [F2]. Both functors are exact: realization is exact by step 1.2, and reconstruction is exact because a sequence of such sheaves is exact exactly when it is exact at the stalks, which by step 1.3 are the values of the reconstructed diagrams and the generization maps are functorial, so a diagram sequence is exact exactly when the corresponding sheaf sequence is.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.2",
+            "step 1.3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "**Ordinary cohomology models.** Dualizing the finite projective bar resolution of [F10] on the opposite poset gives a bounded injective model $V\\to I$ with terms finite sums of standard injectives. Realization is exact, and step 2.4 makes these terms acyclic for global sections and for every retained star. The acyclic-resolution comparison [F13] consequently gives $R\\Gamma(\\operatorname{St}(\\sigma),q^{-1}V)\\simeq I_\\sigma\\simeq V_\\sigma$ and $R\\Gamma(X,q^{-1}V)\\simeq\\lim_{\\sigma\\in P}I_\\sigma$. Here its bounded-complex version follows by resolving the finitely many source degrees and filtering the total complex; the sheaf-level comparisons of [F13] identify each graded piece, hence the total. All syzygies lie in the whole field-sheaf category covered by [F11], and AC supplies DC. This last complex is a bounded finite-dimensional cochain model. Equivalently the bar model of [F10] has incidence terms $\\prod_{\\sigma_0<\\cdots<\\sigma_p}V_{\\sigma_p}$ and its coefficient and face differential. Its finite matrix construction commutes with every field extension. If $P$ is empty then $X$ is empty, both categories and all these models are zero; no nonempty-poset supplier is applied in that case.",
+          "step": "3.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F9",
+            "F10",
+            "F11",
+            "F13",
+            "step 2.4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "**An acyclic product resolution.** In the setting of step 2.3, choose bounded diagram-injective models $B\\to I$ and $k\\to J$ on $P_V$ and $P_F$. The signed total $I\\boxtimes J$ realizes a resolution of $\\operatorname{pr}^*A$: over a field tensor is exact, and the finite double-complex filtration proves the augmentation is a quasi-isomorphism. Each elementary term is the closed pushforward of the constant coefficient $W\\otimes U$ on $Z_\\tau\\times Z_\\nu$. At a point of $V$, take small ambient Euclidean balls meeting only cofaces of its carrier. Their intersections with $Z_\\tau$ are empty or convex; $Z_\\nu$ is contractible by step 2.4. The constant-polyhedral comparison gives no higher cohomology on the corresponding support intersection in the inverse image of the ball. Taking stalk colimits in an injective direct-image model shows that these terms are $\\operatorname{pr}_*$-acyclic. Their ordinary direct images are $i_{\\tau*}(W\\otimes U)_{Z_\\tau}$: on any open base set a locally constant function on its product with the nonempty connected $Z_\\nu$ is constant in the fibre, and evaluation at one fibre point identifies it with a locally constant function on the base support. Thus termwise pushforward of this resolution is canonically $q_V^{-1}I\\otimes_k C^\\bullet(F;k)$, where $C^\\bullet(F;k)=\\lim_{\\nu\\in P_F}J_\\nu$ is the finite model for $R\\Gamma(F,k)$ from step 3.2. This keeps every internal degree of the bounded complex $B$; no degree-zero assumption on $B$ is made. For empty $F$, both the pushforward and $C^\\bullet(F;k)$ are zero.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F7",
+            "F10",
+            "F13",
+            "F16",
+            "F17",
+            "step 2.3",
+            "step 2.4",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "**The derived carrier unit.** By step 2.1, the actual unit $V\\to q_*q^{-1}V$ is an isomorphism on every principal open: its map to the germ at $b_\\sigma$ is the identity of $V_\\sigma$. Evaluation on a principal open is exact in the sheaf category on $P$, by its diagram description in step 1.2. Consequently, for an injective replacement $q^{-1}V\\to J$, the $\\sigma$-component of $R^jq_*q^{-1}V$ is $H^j(\\operatorname{St}(\\sigma),q^{-1}V)$, zero for $j>0$ by step 3.2. Thus the derived unit is an isomorphism for a diagram sheaf. Finite truncation triangles extend the same conclusion to every bounded diagram complex. This argument concerns principal opens in $P$; it makes no assertion that open stars form a neighbourhood basis in $X$.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "F14",
+            "step 1.2",
+            "step 2.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "**The compact-support cochain model.** Apply the argument of steps 2.4 and 3.2 to the pair $(K,\\varnothing)$, whose face poset is $P_K$ and whose realization is the compact space $|K|$: for a bounded complex $\\widetilde V$ of finite-dimensional diagrams on $P_K$, choose a bounded injective resolution $\\widetilde V\\to J^\\bullet$ with terms finite sums of standard injectives [F10], realize it, use the acyclicity of realized standard injectives for $\\Gamma(|K|,-)$ from step 2.4, and apply the acyclic-resolution theorem [F13]; the outcome is that $R\\Gamma\\bigl(|K|,q_K^{-1}\\widetilde V\\bigr)$ is computed by the finite-dimensional bounded complex $\\varprojlim_{\\eta\\in P_K}J^\\bullet_\\eta$, with the range bound of [F10] for the poset $P_K$ and its coefficient range. By step 2.2 this complex is a bounded finite cochain model for the compact-support cohomology $R\\Gamma_c(X,q^{-1}V)$, and as in step 3.2 every map in the construction is $k$-linear between finite-dimensional spaces, so the model and hence the cohomology commute with every coefficient field extension by [F10].",
+          "step": "4.3",
+          "inputs": [
+            "given",
+            "F10",
+            "F13",
+            "step 2.4",
+            "step 2.2",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "**Product comparison and unit.** The acyclic resolution of step 4.1 identifies $R\\operatorname{pr}_*\\operatorname{pr}^*A$ with $q_V^{-1}I\\otimes_kC^\\bullet(F;k)$. The augmentation $B\\to I$ and exact tensor over $k$ identify the latter with $A\\otimes_kC^\\bullet(F;k)$, giving the claimed natural isomorphism. Naturality and restriction compatibility follow from the diagram maps, the termwise direct-image identification and the canonical acyclic-resolution comparisons; they do not rely on testing all-sheaf stalks on whole stars. The adjunction unit is represented by $B\\to I$ tensored with the fibre augmentation $k\\to C^\\bullet(F;k)$. It is therefore $A\\otimes(k\\to C^\\bullet(F;k))$ under the comparison. After full faithfulness and the essential-image argument below, this applies to every $A$ in the stated constructible subcategory; in the Statement this realized base object is denoted $B$.",
+          "step": "5.1",
+          "inputs": [
+            "F10",
+            "F13",
+            "F16",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "**Derived full faithfulness.** For bounded diagram complexes $U,W$, take a finite projective bar model $P\\to U$ and an injective replacement $q^{-1}W\\to J$. By [F11], [F12] and the inverse/direct-image adjunction, the Hom complex from $q^{-1}P$ to $J$ equals the Hom complex from $P$ to $q_*J$. The derived carrier unit of step 4.2 identifies $q_*J$ with $W$. Since the bounded projective model $P$ is K-projective, taking degree-zero cohomology identifies $\\operatorname{Hom}_{D(X)}(q^{-1}U,q^{-1}W)$ with $\\operatorname{Hom}_{D(P)}(U,W)$, naturally and compatibly with realization. Shifts give the same comparison in every degree, and [F14] identifies the bounded localizations with their full subcategories. Thus realization is fully faithful.",
+          "step": "5.2",
+          "inputs": [
+            "given",
+            "F3",
+            "F10",
+            "F11",
+            "F12",
+            "F14",
+            "step 1.5",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "**The qualified cone estimate.** Suppose in addition that the fibre augmentation $k\\to H^0(F;k)$ is an isomorphism (for these finite models, $F$ nonempty and connected), and that $H^r(F;k)=0$ for $1\\le r\\le R$. Then $\\widetilde C=\\operatorname{Cone}(k\\to C^\\bullet(F;k))$ has no cohomology in degrees $\\le R$, including degree $-1$. For $A\\in D^{\\ge b}$, the Künneth formula gives $H^n(A\\otimes\\widetilde C)=\\bigoplus_{p+r=n}H^p(A)\\otimes H^r(\\widetilde C)$ stalkwise; a nonzero term requires $p\\ge b$ and $r\\ge R+1$. The cone of the unit therefore lies in $D^{\\ge b+R+1}$. Without the degree-zero condition the estimate is false, for example for a two-point fibre and $A=k$: the unit has cokernel $k$ in degree zero. The product comparison itself needs no connectedness condition and remains local to the supplied models.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F17",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "claim": "**Finite Hom and scalar extension.** Full faithfulness identifies actual derived Hom with the finite diagram Hom model of [F10]. Its terms are finite products of $\\operatorname{Hom}_k(V_\\sigma,W_\\tau)$ from finite-dimensional coefficient spaces. Tensor with a field extension commutes with these Hom spaces, finite sums, and the matrices and cohomology of the bounded model. This proves the Hom and scalar-extension clauses. The analytic injective replacement $J$ in step 5.2 need not have finite-dimensional terms; it is the equivalent diagram model that is finite.",
+          "step": "6.2",
+          "inputs": [
+            "given",
+            "F10",
+            "step 5.2"
+          ]
+        },
+        {
+          "id": "step-6-3",
+          "claim": "**The essential image.** First, if $V$ is a bounded complex of diagrams, then each cohomology sheaf of $q^{-1}V$ is $q^{-1}(H^jV)$ by exactness of $q^{-1}$, and its restriction to an open simplex in $P$ is constant of finite rank, so such complexes lie in the stated image and have bounded finite-rank locally constant cohomology on each open simplex. Conversely, let $A$ be a bounded complex on $X$ whose cohomology sheaves are finite-rank locally constant on every open simplex. By step 3.1 each $H^j(A)$ is isomorphic to $q^{-1}V_j$ for a finite-dimensional diagram $V_j$, and $V_j=0$ outside a finite range of degrees. We build $A$ inductively from its cohomology. If $A$ has at most one nonzero cohomology sheaf, then $A\\cong H^n(A)[-n]\\cong q^{-1}\\bigl(V_n[-n]\\bigr)$, using that $q^{-1}$ commutes with shifts up to canonical isomorphism because it is exact. Otherwise let $m$ be the least degree with $H^m(A)\\neq0$; the canonical truncation triangle of [F14] reads $H^m(A)[-m]\\to A\\to\\tau^{\\ge m+1}A\\to H^m(A)[-m+1]$. By induction on the number of nonzero cohomology degrees, $\\tau^{\\ge m+1}A\\cong q^{-1}W$ for a bounded diagram complex $W$, and $H^m(A)[-m]\\cong q^{-1}\\bigl(V_m[-m]\\bigr)$; by step 5.2 the connecting morphism $\\delta:q^{-1}W\\to q^{-1}(V_m[-m+1])$ is $q^{-1}(\\delta_0)$ for a unique morphism $\\delta_0$ of the diagram derived category. Completing $\\delta_0$ to a distinguished triangle $V_m[-m]\\to Y\\to W\\to V_m[-m+1]$ of [F14] and applying the exact functor $q^{-1}$ yields a triangle $q^{-1}(V_m[-m])\\to q^{-1}Y\\to q^{-1}W\\to q^{-1}(V_m[-m+1])$ whose connecting morphism is $\\delta$; two distinguished triangles with isomorphic first two objects and the same connecting morphism are isomorphic, so $A\\cong q^{-1}Y$ and $A$ is realized. Hence the essential image is exactly the full subcategory of complexes with bounded finite-rank locally constant cohomology on each open simplex.",
+          "step": "6.3",
+          "inputs": [
+            "given",
+            "F2",
+            "F14",
+            "step 3.1",
+            "step 5.2"
+          ]
+        },
+        {
+          "id": "step-6-4",
+          "claim": "**Local internal-Hom models.** For $x\\in\\sigma^\\circ$, sufficiently small ambient Euclidean balls $U$ in $X$ lie in $\\operatorname{St}(\\sigma)$ and meet exactly the cofaces $Q_\\sigma=\\{\\tau:\\tau\\ge\\sigma\\}$. For realized diagram complexes $A=q^{-1}V$, $B=q^{-1}W$, their restrictions are realized by the same restricted diagrams on $Q_\\sigma$. The derived carrier-unit argument applies on $U$: for $\\eta\\le\\tau$ in $Q_\\sigma$, $U\\cap\\operatorname{St}(\\eta)\\cap|\\tau|$ is empty or convex, so the restricted standard-injective resolution is acyclic on every restricted principal star. Consequently step 5.2 identifies $\\operatorname{Hom}_{D(U)}(A|_U,B|_U[r])$ with the finite diagram Hom cohomology on $Q_\\sigma$. Restriction to smaller such balls is the identity on these finite models. No convexity of an entire open star is required. By step 1.6 the stalk of internal Hom is therefore this same finite model. These identifications also prove local constancy along $\\sigma^\\circ$, rather than only equality of stalk dimensions: a class on one such ball maps canonically into the cohomology sheaf, and its restrictions to smaller balls about nearby points of $\\sigma^\\circ$ are the identical diagram class. This defines a map from the constant finite-model cohomology sheaf on $U\\cap\\sigma^\\circ$ to the restricted internal-Hom cohomology sheaf, isomorphic on every stalk, hence an isomorphism.",
+          "step": "6.4",
+          "inputs": [
+            "given",
+            "F2",
+            "F7",
+            "F10",
+            "step 1.6",
+            "step 2.4",
+            "step 5.2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "**Boundedness and field extension of internal Hom.** The models $\\operatorname{Ext}^q_{\\operatorname{Diag}(Q_\\sigma)}(V|_{Q_\\sigma},W|_{Q_\\sigma})$ are finite-dimensional and vanish outside a range depending only on the internal amplitude of $V,W$ and the chain length of $Q_\\sigma$, whose strict-chain length is at most that of $P$; since $P$ is finite and $Q_\\sigma$ depends only on the simplex $\\sigma$, the ranges are uniformly bounded over $\\sigma$ and over points of $\\sigma^\\circ$, so $R\\mathcal{H}om(A,B)$ is bounded with finite-rank locally constant cohomology. By [F10] the diagram Hom models commute with every field extension, and the identifications of step 6.4 use only the finite models, so extending scalars carries the internal-Hom models to the models of the extended objects. This proves the internal-Hom clause.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "F10",
+            "step 6.4"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The ordinary equivalence is step 3.1; ordinary cohomology is step 3.2; compact supports are steps 2.2 and 4.3; full faithfulness, finite Hom and the essential image are steps 5.2, 6.2 and 6.3; internal derived Hom is steps 6.4 and 7.1; and the product comparison and qualified cone estimate are steps 5.1 and 6.1. AC is used through injective and comparison suppliers, whereas the finite bar construction itself is choice-free. Neither arbitrary analytic injectives nor arbitrary sheaf sections are asserted finite-dimensional.",
+          "step": "8.1",
+          "inputs": [
+            "given",
+            "F10",
+            "F11",
+            "F13",
+            "F16",
+            "F17",
+            "step 3.1",
+            "step 3.2",
+            "step 2.2",
+            "step 4.3",
+            "step 5.2",
+            "step 6.2",
+            "step 6.3",
+            "step 6.4",
+            "step 7.1",
+            "step 5.1",
+            "step 6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The retained poset contains only nonempty simplices. Step 3.2 handles P empty and X empty; step 4.1 handles an empty fibre without using the connected-fibre cone bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero diagram and zero coefficient spaces have zero realized cochain models by steps 1.2 and 3.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-cell retained poset has zero strict-chain length in the finite bar model of step 3.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 proves independence of subdivisions and incidence representatives; step 3.2 uses strict chains."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 extends by zero over deleted faces, and step 2.4 computes empty or retained star-support intersections."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 8.1 records AC for infinite injective comparisons, while the finite bar models are choice-free; step 1.3 uses the explicit compact-subdivision input F18."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.3 shows realized complexes have the specified locally constant finite-rank cohomology."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.3 realizes all such bounded complexes using the full faithfulness of step 5.2. The cone qualification and two-point counterexample are step 6.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Independently read all 23 current steps and every actual declared supplier interface; reviewed the finite-bar proof and relevant injective tensor/Hom proof, Goresky 2.1-2.3/2.5/32.2 and Bernstein-Lunts acyclic-space convention. Compared hash-matching continuation-input preimage to post-reader carrier. Nonempty faces exclude the empty-simplex counterexample; empty P/X models are zero. Convex-simplex local systems use finite path/homotopy subdivisions; actual inverse-image, extension and closed-inclusion maps support the stalk tests. Closed support cells contract and have a contractible-open basis, giving acyclic realized injectives, not ambient injectivity. Finite bar models and finite complex filtrations yield the derived carrier unit, full faithfulness and truncation essential image. Compact support is extension to compact K. Product pushforward uses small balls intersected with closed cells, keeps all base-complex degrees, and includes empty and disconnected fibres. The cone estimate requires augmentation k=H0 plus positive-degree vanishing; a two-point fibre refutes the former unqualified version. Internal Hom uses injective sheaf Hom and exact stalk colimits, restricted principal stars and actual restriction maps for local constancy; amplitudes are uniform over the finite poset and field extension preserves the finite matrices. AC is inherited for analytic injective/comparison/Kunneth inputs; finite bar operations and finite subdivisions need no additional choice. No unresolved prerequisite specific to this item found."
+      }
+    },
+    "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$. We say that\n$\\mathcal F$ is a **sheaf** if for every open set $U \\subseteq X$ and every\nopen cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of\n$\\varnothing$, the following two conditions hold.\n\n**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy\n$$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$\nthen $s=t$.\n\n**Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy\n$$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$\nthen there exists $s\\in\\mathcal F(U)$ such that\n$$s|_{U_i}=s_i\\qquad\\text{for all }i\\in I.$$\n\nBy locality, such a section $s$ is automatically unique. Thus a sheaf is\nexactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-presheaf-of-groups-rings-modules",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space.\nFix a ring $R$ when modules are under discussion.\n\nA **presheaf of groups** on $X$ is a presheaf $\\mathcal F$ such that every\n$\\mathcal F(U)$ is a group and every restriction map\n$\\rho^U_V:\\mathcal F(U)\\to\\mathcal F(V)$ is a group homomorphism\n([[prop-groups-and-homomorphisms-form-category-grp]]).\n\nA **presheaf of rings** on $X$ is defined the same way with rings and ring\nhomomorphisms ([[prop-rings-and-homomorphisms-form-category-ring]]).\n\nA **presheaf of left $R$-modules** on $X$ is defined the same way with left\n$R$-modules and $R$-linear maps\n([[prop-modules-and-homomorphisms-form-category-rmod]]).\n\nA **sheaf of groups**, **sheaf of rings**, or **sheaf of left $R$-modules** is\nsuch a presheaf whose underlying set-valued presheaf is a sheaf.\n\nIn particular, each sheaf of groups has a distinguished identity section on\nevery open set; in additive notation this section is written $0$, and all\nrestrictions preserve the algebraic operations.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-module-on-ringed-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space.\n\nAn **$\\mathcal O_X$-module** is a sheaf $\\mathcal F$ of abelian groups on $X$\nsuch that for every open set $U \\subseteq X$ the section group $\\mathcal F(U)$\nis an $\\mathcal O_X(U)$-module, and for every inclusion $V \\subseteq U$ the\nrestriction map\n$$\n\\mathcal F(U)\\longrightarrow\\mathcal F(V)\n$$\nis $\\mathcal O_X(U)$-linear after restricting scalars along\n$\\mathcal O_X(U)\\to\\mathcal O_X(V)$.\n\nA **morphism of $\\mathcal O_X$-modules** is a morphism of the underlying sheaves\nof abelian groups whose components are $\\mathcal O_X(U)$-linear on every open\nset $U$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-abelian-sheaves-form-abelian-category",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space.\n\n1. The category of sheaves of abelian groups on $X$ is an abelian category.\n2. If $(X,\\mathcal O_X)$ is a ringed space, then the category of\n   $\\mathcal O_X$-modules is also an abelian category.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal G$ be a presheaf on $Y$.\nThe **inverse-image presheaf**\n$$\nf_{\\mathrm p}\\mathcal G\n$$\non $X$ is defined by\n$$\n(f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V),\n$$\nwhere $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by\nreverse inclusion. If $U' \\subseteq U$, then every neighbourhood of $f(U)$ is a\nneighbourhood of $f(U')$, so there is a natural restriction map\n$(f_{\\mathrm p}\\mathcal G)(U)\\to(f_{\\mathrm p}\\mathcal G)(U')$.\n\nThe **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification\nof this presheaf:\n$$\nf^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).\n$$\n\nWhen $U$ is open in $X$ and $V$ is an open set of $Y$ with $f(U)\\subseteq V$,\nthere is a canonical map\n$$\n\\mathcal G(V)\\longrightarrow(f_{\\mathrm p}\\mathcal G)(U)\n$$\ninto the colimit class represented by $V$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "5.1",
+            "5.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$.\nThe **direct image presheaf**\n$$f_*\\mathcal F$$\non $Y$ is defined on an open set $V \\subseteq Y$ by\n$$\n(f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).\n$$\nIf $V' \\subseteq V$, the restriction map\n$$\n(f_*\\mathcal F)(V)\\longrightarrow(f_*\\mathcal F)(V')\n$$\nis the restriction map of $\\mathcal F$ for the inclusion\n$f^{-1}(V') \\subseteq f^{-1}(V)$.\n\nThus direct image is just precomposition of the presheaf with the inverse-image\nmap on open sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "5.1",
+            "5.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-direct-image-is-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map.\n\n1. If $\\mathcal F$ is a sheaf on $X$, then $f_*\\mathcal F$ is a sheaf on $Y$.\n2. If $\\mathcal F$ is a sheaf of groups, rings, or modules on $X$, then\n   $f_*\\mathcal F$ is a sheaf of the same kind on $Y$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "5.1",
+            "5.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-inverse-direct-image-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let\n$\\mathcal F$ be a sheaf on $X$. Then there is a natural bijection\n$$\\operatorname{Hom}_X(f^{-1}\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_Y(\\mathcal G,f_*\\mathcal F).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "5.1",
+            "5.2",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-field-module-sheaves-have-injective-derived-models",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a topological\nspace and let $k$ be a field. The category $\\operatorname{Sh}_k(X)$ of sheaves\nof $k$-vector spaces is the category of modules over the ringed space\n$(X,k_X)$ with constant structure sheaf $k_X$\n([[def-locally-ringed-space]], [[def-module-on-ringed-space]]); it is a locally\nsmall Grothendieck category and carries a functorial injective embedding, and\niterating that embedding on cokernels yields for every $k$-sheaf one specific\ninjective resolution\n([[lem-ringed-space-module-sheaves-enough-injectives]]). These resolutions are\nbounded-below injective replacements, so with the dependent choice supplied by\nAC ([[thm-choice-implies-dependent-implies-countable-choice]]) the bounded-below\ninjective complexes model the bounded derived category:\n$K^+(\\operatorname{Inj}\\operatorname{Sh}_k(X))\\to\nD^+(\\operatorname{Sh}_k(X))$ is an equivalence, and morphisms of the bounded\nderived category are computed by these replacements\n([[thm-injective-complexes-model-the-bounded-below-derived-category]]).\n\nNow let $X$ be a separated finite-type complex algebraic variety and let\n$\\mathfrak S$ be a finite smooth algebraic stratification with the frontier\ncondition of $X$\n([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]). Let\n$D^b_{\\mathfrak S}(X;k)$ be the full subcategory of\n$D^b(\\operatorname{Sh}_k(X))$ of complexes whose cohomology sheaves are bounded\nand constructible with respect to $\\mathfrak S$\n([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]). Then\n$D^b_{\\mathfrak S}(X;k)$ is a triangulated subcategory: it is closed under\nshifts, isomorphisms and mapping cones. More generally, if two bounded\nalgebraically constructible complexes are constructible with respect to one\ncommon finite smooth algebraic frontier stratification, then their cone is\nbounded and constructible with respect to that stratification.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-injective-complexes-model-the-bounded-below-derived-category",
+          "source_section": "Statement",
+          "quote": "With supplied bounded-below injective replacements $j_X:X\\to I_X$ (and DC or supplied homotopy extensions), $K^+(\\operatorname{Inj}\\mathcal A)\\to D^+(\\mathcal A)$ is an equivalence of triangulated categories. For a bounded-below complex $I$, K-injectivity can be tested using only bounded-below acyclic inputs.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+          "source_section": "Statement",
+          "quote": "A bounded-below cochain complex $I$ of injective objects is K-injective. Assume dependent choice for the countable successive homotopy extensions, or supply those extensions as data.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-homotopically-injective-bounded-below-complex",
+          "source_section": "Definition",
+          "quote": "A cochain complex $I$ is **homotopically injective**, or **K-injective**, if $\\operatorname{Hom}_K(A,I[r])=0$ for every acyclic cochain complex $A$ and every integer $r$. Equivalently, $\\underline{\\operatorname{Hom}}(A,I)$ is acyclic. This uses the Hom complex and shifted Hom identification fixed in [[def-homotopically-projective-bounded-above-complex]]. A **bounded-below K-injective complex** additionally has $I^n=0$ for all sufficiently negative $n$. The K-injective property itself neither assumes boundedness nor means termwise injectivity.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof",
+          "source_section": "Statement",
+          "quote": "For a K-injective complex $I$ and any complex $X$, $Q:\\operatorname{Hom}_K(X,I)\\to\\operatorname{Hom}_D(X,I)$ is bijective. Moreover, if $s:I\\to J$ is a quasi-isomorphism, its cone triangle is split in $K$: $J\\cong I\\oplus\\operatorname{Cone}(s)$ with $s$ corresponding to the inclusion.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-below-complexes-admit-injective-replacements",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal A$ has enough injectives and $X^n=0$ for $n<a$, there is a termwise monic quasi-isomorphism $j:X\\to I$ with each $I^n$ injective and $I^n=0$ for $n<a$. Assume DC for the successive objectwise choices, or supply the successive injective monomorphisms. If only $H^n(X)=0$ for $n<a$, a quasi-isomorphism to such an $I$ still exists, without the termwise-monic assertion.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective",
+          "source_section": "Statement",
+          "quote": "Assume an abelian category satisfies AB3 and AB3*.\n\n1. Every finite coproduct of projective objects is projective, and every finite\n   product of injective objects is injective.\n2. For an arbitrary small family, the same conclusion holds provided one may\n   choose one lift or one extension for each index in each lifting problem; in\n   particular it holds under the Axiom of Choice.",
+          "uses": [
+            "1.2",
+            "5.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cochain-complex-in-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an abelian category. A **cochain complex in $\\mathcal A$**\nis a family of objects $(C^n)_{n\\in\\mathbb Z}$ together with morphisms\n$$d^n:C^n\\to C^{n+1}$$\nsuch that\n$$d^{n+1}\\circ d^n=0$$\nfor every $n\\in\\mathbb Z$.\n\nThis page uses the reindexing convention that a cochain complex $C^\\bullet$ may\nalso be read as the chain complex with $(C^\\sharp)_n:=C^{-n}$ and\n$d^\\sharp_n:=d^{-n}$, so that lower and upper indices differ only by the sign\nof the grading.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-direct-sum-total-complex-of-a-double-complex",
+          "source_section": "Definition",
+          "quote": "Let $C$ be a [[def-homological-double-complex|homological double complex]] in\nan abelian category. Suppose that for every integer $n$ the diagonal\n[[def-products-and-coproducts|coproduct]] below exists, and write its injections\nas $\\iota^n_{p,q}$:\n$$T_n=\\operatorname{Tot}^{\\oplus}_n(C)=\\coprod_{p+q=n}C_{p,q}.$$\nDefine $d_n:T_n\\to T_{n-1}$ to be the unique arrow with\n$$d_n\\iota^n_{p,q}=\\iota^{n-1}_{p-1,q}h_{p,q}+\\iota^{n-1}_{p,q-1}v_{p,q}\\quad(p+q=n).$$\nEach right-hand side is the sum of two morphisms with the same source and\ntarget. The coproduct universal property supplies a unique $d_n$ from this\nfamily; no infinite sum in a morphism group is required.\n\nThe resulting **direct-sum total complex** has differential of degree $-1$.\nIts chain condition is established in\n[[lem-the-total-differential-squares-to-zero]]. A diagonal with only zero\nobjects has zero coproduct: every family of maps from its objects is the\nunique zero family. A diagonal with exactly one nonzero object has that\nobject as coproduct. For general infinite diagonals existence is a hypothesis,\nnot an implication of being an abelian category. No choices of elements or\nrepresentatives enter this construction.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-the-total-differential-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For the direct-sum totalisation of an anticommuting homological double\ncomplex, $d_{n-1}d_n=0$ for every integer $n$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-cohomological-filtered-complex-construction",
+          "source_section": "Statement",
+          "quote": "Let K be a cochain complex with decreasing filtration by subcomplexes. Set $C_n=K^{-n}$, $F_pC_n=F^{-p}K^{-n}$ and $d_n=d_K^{-n}$. Then\n$$E_r^{p,q}(K)=E^r_{-p,-q}(C),\\qquad d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}.$$\nThe construction gives $E_0^{p,q}=\\operatorname{gr}^p K^{p+q}$ and $E_1^{p,q}\\cong H^{p+q}(\\operatorname{gr}^p K)$. With degreewise finite filtration it naturally abuts to the decreasing image filtration on $H^{p+q}(K)$, with $E_\\infty^{p,q}\\cong\\operatorname{gr}^pH^{p+q}(K)$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-canonical-truncation-of-a-complex",
+          "source_section": "Definition",
+          "quote": "For a cochain complex $X$, define the **canonical truncations** by\n\n$$ (\\tau^{\\leq n}X)^i=\\begin{cases}X^i&i<n,\\\\\\ker d_X^n&i=n,\\\\0&i>n,\\end{cases}\\qquad (\\tau^{\\geq n}X)^i=\\begin{cases}0&i<n,\\\\\\operatorname{coker}d_X^{n-1}&i=n,\\\\X^i&i>n.\\end{cases} $$\n\nThe differential into $\\ker d_X^n$ is the factorization of $d_X^{n-1}$; the differential out of $\\operatorname{coker}d_X^{n-1}$ is induced by $d_X^n$. All other retained differentials are those of $X$. There are natural maps $\\tau^{\\leq n}X\\to X\\to\\tau^{\\geq n}X$. Unlike [[def-brutal-truncation-of-a-complex]], these constructions correct the boundary using the cycle and boundary objects of [[def-cohomology-object-of-a-cochain-complex]].",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-canonical-truncations-fit-a-distinguished-triangle",
+          "source_section": "Statement",
+          "quote": "Every short exact sequence $0\\to A\\xrightarrow iB\\xrightarrow qC\\to0$ of cochain complexes gives a natural distinguished triangle $A\\to B\\to C\\to A[1]$ in $D(\\mathcal A)$. In particular, for every integer $n$ there are canonical distinguished triangles\n\n$$\\tau^{\\leq n}X\\to X\\to\\tau^{\\geq n+1}X\\to(\\tau^{\\leq n}X)[1],$$\n\n$$\\tau^{\\leq n}X\\to\\tau^{\\leq n+1}X\\to H^{n+1}(X)[-n-1]\\to(\\tau^{\\leq n}X)[1],$$\n\n$$H^n(X)[-n]\\to\\tau^{\\geq n}X\\to\\tau^{\\geq n+1}X\\to H^n(X)[-n+1].$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+          "source_section": "Statement",
+          "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated. The localization functor $Q$ is exact. Every such triangle gives a long exact cohomology sequence $\\cdots\\to H^n(X)\\to H^n(Y)\\to H^n(Z)\\to H^{n+1}(X)\\to\\cdots$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-bounded-derived-localizations-embed-fully-faithfully",
+          "source_section": "Statement",
+          "quote": "The canonical functors $D^-(\\mathcal A),D^+(\\mathcal A),D^b(\\mathcal A)\\to D(\\mathcal A)$ are fully faithful and exact. Their essential images consist exactly of complexes with cohomology respectively bounded above, bounded below, or bounded on both sides.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "1.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a separated finite-type complex algebraic variety, i.e. a classical\nalgebraic variety over $\\mathbb C$\n([[def-classical-algebraic-prevariety-regular-maps-and-varieties]]), regarded as\na topological space with its analytic topology\n([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]), and\nlet $k$ be a field. Write $\\operatorname{Sh}_k(X)$ for the category of sheaves\nof $k$-vector spaces and $k$-linear morphisms\n([[def-sheaf-on-topological-space]],\n[[def-presheaf-of-groups-rings-modules]], [[def-module-on-ringed-space]]); it is\nan abelian category ([[thm-abelian-sheaves-form-abelian-category]]), so its\nbounded derived category $D^b(\\operatorname{Sh}_k(X))$ is defined with the\nconventions of [[def-derived-category-of-an-abelian-category]], under the\nstanding smallness hypothesis recorded there.\n\nThe category $D_c^b(X;k)$ is the full subcategory of\n$D^b(\\operatorname{Sh}_k(X))$ consisting of the complexes $A$ satisfying:\n\n1. $A$ is **cohomologically bounded**: $H^j(A)=0$ for $|j|$ sufficiently large;\n   and\n2. $A$ is **algebraically constructible**: there exists a finite smooth\n   algebraic stratification with the frontier condition $\\mathfrak S$ of $X$\n   ([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]) such\n   that for every stratum $S\\in\\mathfrak S$ and every integer $j$ the\n   restriction $H^j(A)|_S$ is locally constant of finite rank\n   ([[def-locally-constant-sheaf-of-finite-rank]]).\n\nThese are topological constructible sheaves, not coherent or quasi-coherent\nsheaves. We use the shift convention of\n[[def-derived-category-of-an-abelian-category]]: $H^j(A[m])=H^{j+m}(A)$. A\ngroupoid local system is identified with a locally constant sheaf only through\nan explicit local comparison, which is not made here.\n\nConstructibility is a condition on the cohomology sheaves of a complex, and it\nis quantified existentially over finite smooth algebraic frontier\nstratifications: no stratification is fixed, and no existence or\ncommon-refinement theorem for stratifications is asserted by this definition.\nShifting replaces $H^j$ by $H^{j+m}$, which preserves cohomological boundedness\nand shifts a witnessing stratification nowhere, so the class is closed under\nshifts and under isomorphisms in $D^b(\\operatorname{Sh}_k(X))$. No choice\nprinciple is used.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $f:X\\to Y$ be one morphism of reduced separated complex\nalgebraic varieties of finite type\n([[def-classical-algebraic-prevariety-regular-maps-and-varieties]]), and\nprescribe finitely many closed algebraic subsets of each. There are finite\npartitions of $X$ and $Y$ into irreducible smooth locally closed algebraic\nstrata such that every prescribed subset is a union of strata, every stratum\nclosure is a union of strata of no larger dimension with its boundary of\nstrictly smaller dimension, and each source stratum maps surjectively and\nsmoothly onto one target stratum. On analytic spaces each such restriction is a\nsubmersion. The source may be empty. This assertion imposes no Whitney\ncondition, conical control or topological triviality.",
+          "uses": [
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace.\n\n1. For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of\n   abelian groups $\\mathcal G$ on $X$, there is a natural bijection\n   $$\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G) \\cong \\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G).$$\n2. The functor $j_!$ is exact on sheaves of abelian groups.",
+          "uses": [
+            "5.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "**The category and the augmentation.** A simplicial sheaf consists of the $F_p$ and maps $Z_\\alpha^{-1}F_p\\to F_m$ specified in the Given, with identity and composition identities. Since inverse image is exact, kernels, cokernels and exactness are levelwise; products and coproducts are levelwise with the induced structure maps, so this is an abelian, locally small category with AB3 and AB3*. Define $q^*B$ levelwise by $q_p^{-1}B$, and define $q_*F$ as the equalizer of the two face maps $q_{0*}F_0\\rightrightarrows q_{1*}F_1$. A map into this equalizer gives compatible maps at every level by the vertex projections: the equalizer condition makes all vertex choices agree, and the simplicial identities give compatibility with every operator. The inverse/direct-image adjunction therefore gives $q^*\\dashv q_*$; $q^*$ is exact.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "**Coinduction and levelwise injectivity.** Set $(N_pI)_m=\\prod_{\\alpha:[m]\\to[p]}(Z_\\alpha)_*I$, with structure maps induced by composition. The identity component gives $\\operatorname{Hom}(F,N_pI)=\\operatorname{Hom}(F_p,I)$; hence $N_pI$ is injective for injective $I$. Functorial embeddings $F_p\\hookrightarrow I_p$ give $F\\hookrightarrow\\prod_pN_pI_p$, detected by the identity component at each level. AC and [F4] make this product injective. Each level of $N_pI$ is a finite product of direct images of injectives, hence injective by [F2], [F4]; the same holds for each level of $\\prod_pN_pI_p$. Any injective simplicial sheaf is a retract of its such embedding and is consequently injective at each level. Iteration on cokernels resolves sheaves; the bounded-below replacement construction of [F3], using these explicit embeddings at its successive stages, resolves complexes without changing a supplied lower bound.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "**The augmented cochain complex of an injective.** For $N_pI$ put $A=q_{p*}I$. Its degree-$m$ augmentation cochains are $A^{\\operatorname{Hom}_\\Delta([m],[p])}$, with the alternating face differential. The augmentation $A\\to A^{p+1}$ sends $a$ to the constant tuple. On cochains define $(hc)(i_0,\\ldots,i_{m-1})=c(0,i_0,\\ldots,i_{m-1})$ and in degree zero evaluate at vertex $0$. Deleting the inserted vertex gives the identity and all other deletions cancel in pairs, so $dh+hd=\\mathrm{id}$ on the augmented complex. Products of these contractions and their restrictions to retracts give an exact augmented complex $0\\to q_*J\\to q_{0*}J_0\\to q_{1*}J_1\\to\\cdots$ for every injective simplicial sheaf $J$. This is horizontal exactness, not a claim that the derived functors vanish on an arbitrary pulled-back complex.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "**Ordinary Cartesian descent.** Cartesian means that every structure map is an isomorphism. For a Cartesian sheaf $F$ and a local section $s_i:V_i\\to P$, put $B_i=s_i^{-1}F_0$. The two face maps to $F_1$ identify the pullbacks of $F_0$ along the two projections. Pulling this identification back by $z\\mapsto(s_i(q(z)),z)$ gives $q^{-1}B_i\\simeq F_0$ over $q^{-1}V_i$; vertex projections then give $q_p^{-1}B_i\\simeq F_p$. On overlaps, pull the same identification back by $(s_i,s_j):V_i\\cap V_j\\to P\\times_S P$. The degree-two identities give the cocycle equation on triple overlaps, and the diagonal degeneracy gives the identity equation. The sheaf axiom glues the $B_i$ to $B$ on $S$ and their identifications to $q^*B\\simeq F$. The same construction glues morphisms, so it is an equivalence of ordinary sheaf categories onto Cartesian sheaves.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "**Normalization.** For a cosimplicial abelian object $C$ set $N^nC=\\bigcap_{i=0}^{n-1}\\ker s^i$ and $T_rC^n=\\bigcap_{i=0}^{\\min(r,n)-1}\\ker s^i$, so $T_0C=C$. The alternating differential preserves $T_r$: applying $s^i$ to it cancels the $i$th and $(i+1)$st faces, and all remaining terms contain $s^{i-1}$ or $s^i$. In degree $n>r$, the map $s^r$ carries $T_rC^n$ into $T_rC^{n-1}$ and vanishes on $T_{r+1}$. For $c\\in T_rC^n$ the cosimplicial identities give $(ds^r+s^rd)c=\\sum_{j=0}^{r}(-1)^j d^j s^r c$. Multiplying by $(-1)^r$ gives $c$ modulo $T_{r+1}$: all earlier codegeneracies vanish on the difference, and applying $s^r$ kills the terms $j<r$ and identifies the last term with $s^rc$. Thus $(-1)^rs^r$ contracts the quotient $T_r/T_{r+1}$, with zero maps where $n\\le r$ and the quotient is zero. Each inclusion $T_{r+1}\\hookrightarrow T_r$ is a quasi-isomorphism. For a fixed cohomological degree $n$, these complexes stabilize in degrees $n-1,n,n+1$ once $r\\ge n+1$, giving $NC\\hookrightarrow C$ a quasi-isomorphism. Finally, successively applying $1-d^{i+1}s^i$ for $i=0,\\ldots,n-1$ gives a natural projection onto $N^nC$: it kills the $i$th codegeneracy and preserves those already killed. A surjection of cosimplicial objects lifts a normalized element by first lifting it and then applying this projection; kernels are immediate. Hence $N^n$ is exact, and the normalized first page is $N^p(R^jq_{\\bullet*}F_\\bullet)$, rather than the unnormalized term $R^jq_{p*}F_p$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "**The derived total model.** Choose $F\\to J$ as in step 1.2, with $J^j=0$ for $j<a$. Put $D^{p,j}=q_{p*}J_p^j$ and total differential $d_h+(-1)^p d_v$, where $d_h$ is the alternating face differential. The differentials commute before this sign, so the total differential squares to zero. Step 2.1 identifies the horizontal cohomology with $q_*J^j$ in horizontal degree zero; filtering the bounded-below double complex therefore identifies its total with $q_*J$, which represents $Rq_*F$. Levelwise injectivity from step 1.2 identifies vertical cohomology with $R^jq_{p*}F_p$. Filtration by the simplicial degree $p$ gives the unnormalized first page $E_1^{p,j}=R^jq_{p*}F_p$ and its alternating face differential. Only $0\\le p\\le n-a$ occurs in total degree $n$, so [F5] gives convergence without completion. Step 3.1 normalizes the horizontal direction without changing the total object. This model also works with any bounded-below levelwise injective replacement: resolve its terms further in the simplicial category and use the vertical acyclic-resolution comparison; finite diagonal filtrations identify both totals.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "**Bisimplicial diagrams and composition.** Coinduce in both simplicial directions, using products indexed by pairs of operators. The two contractions of step 2.1 identify the doubly augmented total with the derived augmentation. With indices $p,r\\ge0$ and $j\\ge a$, only finitely many triples satisfy $p+r+j=n$; hence iterated and simultaneous totals agree, with differential signs $d_p+(-1)^pd_r+(-1)^{p+r}d_j$. For a composition of right adjoints $f_*,g_*$ whose inverse-image left adjoints are exact, both right adjoints preserve injectives. A single injective replacement $J$ therefore computes $R(gf)_*F=g_*f_*J$ and $Rg_*Rf_*F$ alike. The comparison respects units and counits because the underived adjunctions compose; its total models are the finite-diagonal models just constructed.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "**A local section contracts the derived model.** For the Čech nerve over a section domain $V$, set $Z_{-1}=V$ and $e_{-1}=s$. Inserting $s$ as first coordinate gives $e_p:Z_p|_V\\to Z_{p+1}|_V$ with $d_0e_p=\\mathrm{id}$ and $d_{i+1}e_p=e_{p-1}d_i$ (including the augmentation). The augmented diagram $q_p^{-1}B$, with value $B|_V$ at level $-1$, has canonical structure maps also for these insertions. Resolve it in the enlarged small diagram category generated by the ordinary operators and the $e_p$, with their actual relations. The construction of step 1.2 applies there: coinduction uses products over arrows, and every evaluation of an injective is injective, since each coinduced evaluation is a product of direct images of injectives. Thus we obtain a bounded-below resolution $J$ which retains all $e_p$ and is injective at every level, including $-1$. The insertion maps induce $h:q_{p+1*}J_{p+1}\\to q_{p*}J_p$, with $q_{0*}J_0\\to J_{-1}$ induced by $s$. The displayed face identities give $d_hh+hd_h=\\mathrm{id}$ on each augmented row, and $h$ commutes with $d_v$. They therefore contract the augmented total, which by step 4.1 computes the derived augmentation. Its level-$-1$ complex resolves $B|_V$, so the actual unit $B|_V\\to Rq_*q^*B|_V$ is an isomorphism. Restriction to $V$ preserves injectives in the simplicial category: levelwise extension by zero is an exact left adjoint, with structure maps obtained from pullback of extension by zero along the operators. The local calculations consequently compute the restriction of the global unit. They glue to $B\\simeq Rq_*q^*B$; for a sheaf $B$ this implies $R^jq_*q^*B=0$ for $j>0$.",
+          "step": "5.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F9",
+            "step 1.2",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "**Derived full faithfulness and the image.** Derived adjunction and step 5.2 give $\\operatorname{Hom}_D(q^*A,q^*B)=\\operatorname{Hom}_D(A,Rq_*q^*B)=\\operatorname{Hom}_D(A,B)$. By [F6] this also holds in bounded derived categories. Exactness of $q^*$ shows that its image has Cartesian cohomology. Conversely, step 2.2 descends each cohomology sheaf of a bounded object with Cartesian cohomology. Induct on the finitely many nonzero cohomology degrees, using the canonical truncation triangles of [F6]. At each stage full faithfulness lifts the connecting morphism between the already descended objects; its cone realizes the next truncation. Cone triangles with the same connecting morphism are isomorphic by the triangulated axioms, so this induction realizes the original object.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 5.2",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "**Algebraic constructibility.** An algebraic principal $\\mathrm{GL}$ bundle here is Zariski locally trivial; finite type allows a finite algebraic trivializing cover $V_i$ with algebraic sections $s_i$. Inverse image of a locally constant finite-rank sheaf is locally constant of the same finite rank: pull back a trivialization and use the stalk formula. More generally, inverse image along an algebraic map preserves algebraic constructibility. Indeed, the inverse images of a witnessing stratification form a finite partition by locally closed algebraic sets; apply the finite smooth frontier refinement of [F8] to their closures and boundaries. On each resulting stratum the sheaf is the inverse image of one of the original local systems. This argument applies to $q_p$ and to $s_i$. Thus if $F_0$ is algebraically constructible, the descended $B$ is so on each $V_i$. For a single global witnessing stratification, regard all the local strata as locally closed subsets of $S$, prescribe their closures and boundaries and the complements of the $V_i$, and refine by [F8]; every global stratum lies inside one $V_i$ and one local stratum. There are only finitely many cohomology degrees, so one such refinement handles them all. Conversely, if $B$ is constructible, every $q_p^*B$ is constructible by the same argument. This proves the restriction of step 6.1 to objects constructible at each simplicial level; no common finite stratification across infinitely many levels is assumed.",
+          "step": "7.1",
+          "inputs": [
+            "F2",
+            "F8",
+            "step 2.2",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Steps 1.2 and 4.1 give the coinduced resolutions and derived augmentation model, step 5.1 gives the bisimplicial and composition clauses, and steps 5.2, 6.1 and 7.1 give locally split Cartesian descent and its algebraic restriction. AC is used for injective data, products of injectives, DC for complex replacements, and the algebraic refinement supplier. No proper-descent conclusion is inferred from local-section descent.",
+          "step": "8.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F7",
+            "F8",
+            "step 1.2",
+            "step 4.1",
+            "step 5.1",
+            "step 5.2",
+            "step 6.1",
+            "step 7.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement includes empty spaces; step 1.1 gives the zero category at empty levels, and step 2.2 descends on an empty base."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero complex has the zero model in step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For p=0 in step 2.1 the normalized coinduced model consists of its augmentation in degree zero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves normalization and identifies the normalized first page."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.2 requires local sections; maps lacking them are excluded from the Statement descent clause."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Boundary reviewed; outcome remains blocked, not passed. Steps 1.2, 5.2 and 7.1 record products, replacements and algebraic refinement under AC. Algebraic refinement remains blocked by the batch-33 analytic connectedness prerequisite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Boundary reviewed; outcome remains blocked, not passed. Step 6.1 shows that pullback has Cartesian cohomology, and step 7.1 shows constructibility at every level. Algebraic refinement remains blocked by the batch-33 analytic connectedness prerequisite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Boundary reviewed; outcome remains blocked, not passed. Steps 2.2 and 6.1 descend cohomology sheaves and bounded complexes; step 7.1 constructs a global finite algebraic refinement. Algebraic refinement remains blocked by the batch-33 analytic connectedness prerequisite."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-focused-equivariant-descent",
+        "notes": "Current owner focused check, with original alpha risk record retained as old_value in this proposal: Topological coinduction, normalization, finite diagonal total, local-section contraction and derived Cartesian essential image are retained. Algebraic inverse-image and finite-cover descent still need connected analytic frontier refinements. These previously conditional uses now have the locally proved connectedness/closure and finite refinement suppliers at the exact hashes recorded in focused-consumer-checks.json. Read the complete new connectedness helper and its actual load-bearing interfaces; finite sheet symmetric-factor contradiction and normalized-arc density supply connectedness and analytic/Zariski closure. Smooth refinement6.1 and Whitney5.1 now apply this proved comparison, triangulation1.1 names actual connected Whitney identity refinement, and conical6.1 gives a finite separated-variety globalization witness. Reopened this consumer use in dependency order; no claim weakening or consumer source repair needed. Local check only; no independent mathematical acceptance or historical round refund."
+      }
+    },
+    "ex-incidence-model-of-a-closed-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $K$ be a finite simplicial complex, $D$ a subcomplex and $X=|K|\\setminus|D|$. Let $P$ be the face poset of the open simplices of $K$ not in $D$, ordered by inclusion of faces. The exact realization of finite-dimensional covariant $k$-diagrams on $P$ induces a fully faithful functor into $D^b(\\operatorname{Sh}_k(X))$, with essential image the complexes having bounded finite-rank locally constant cohomology on each open simplex. Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension. For a local product projection $\\operatorname{pr}:V\\times F\\to V$ with supplied finite deleted-boundary models and $B$ in the stated constructible subcategory on the base, there is a natural local comparison $R\\operatorname{pr}_*\\operatorname{pr}^*B\\simeq B\\otimes_k C^*(F;k)$, taking the unit to $B\\otimes(k\\to C^*(F;k))$. This does not assert that an arbitrary algebraic map is simplicial.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space ([[def-topological-space]]) and let $A$ be a\nset. A function $f:U\\to A$ on an open subset $U\\subseteq X$ is **locally\nconstant** when every $x\\in U$ has an open neighbourhood $V\\subseteq U$ with\n$x\\in V$ on which $f$ is constant. Let $A_{\\mathrm{pt}}$ be the **constant\npresheaf** with value $A$, $A_{\\mathrm{pt}}(U)=A$ for every open $U$ with all\nrestriction maps the identity ([[def-presheaf-on-topological-space]]), and let\n$$A_X:=aA_{\\mathrm{pt}}$$\nbe its sheafification ([[def-sheafification]]), the **constant sheaf** with\nvalue $A$ on $X$. Then:\n\n1. the assignment $\\underline A_{\\mathrm{loc}}(U):=\\{f:U\\to A\\text{ locally\n   constant}\\}$, with the usual restriction maps, is a sheaf of sets on $X$, and\n   for every $x\\in X$ evaluation at $x$ is a canonical bijection\n   $\\underline A_{\\mathrm{loc},x}\\cong A$\n   ([[lem-locally-constant-functions-form-a-sheaf]]);\n2. there is a canonical isomorphism of sheaves of sets\n   $$\\theta:A_X\\longrightarrow\\underline A_{\\mathrm{loc}}$$\n   such that for every open $U\\subseteq X$ and every $a\\in A$ the section\n   $\\theta_U(\\eta_{U}(a))$ is the constant function with value $a$, where\n   $\\eta:A_{\\mathrm{pt}}\\to A_X$ is the sheafification map;\n3. if $A$ is an abelian group, then $A_{\\mathrm{pt}}$ with its group operation is\n   a presheaf of abelian groups ([[def-presheaf-of-groups-rings-modules]]) and\n   $\\underline A_{\\mathrm{loc}}$ with pointwise addition is a sheaf of abelian\n   groups ([[thm-abelian-sheaves-form-abelian-category]]); the maps\n   $a\\mapsto\\text{the constant function with value }a$ are group homomorphisms,\n   and the group structures transported along the bijections $\\theta_U$ make\n   $A_X$ a sheaf of abelian groups for which every $\\eta_U$ and every $\\theta_U$\n   is a group homomorphism.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf of abelian groups on $U$.\n\nFor an open set $V \\subseteq X$, define\n$$(j_!\\mathcal F)(V) := \\left\\{ s\\in \\mathcal F(V\\cap U): \\operatorname{Supp}(s)\\text{ is closed in }V \\right\\}.$$\nEquivalently, $s$ lies in $(j_!\\mathcal F)(V)$ exactly when for every\n$x\\in V\\setminus U$ there exists an open neighbourhood $W_x \\subseteq V$ with\n$$\ns|_{W_x\\cap U}=0.\n$$\n\nRestriction maps are inherited from $\\mathcal F$, so $j_!\\mathcal F$ is a\nsubsheaf of $j_*\\mathcal F$. When $V \\subseteq U$, the support condition is\nvacuous and\n$$\n(j_!\\mathcal F)(V)=\\mathcal F(V).\n$$\n\nThis is the **extension by zero** of $\\mathcal F$ along $j$. It is distinct in\ngeneral from the ordinary direct image $j_*\\mathcal F$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The face poset is $P=\\{v_0,v_1,e\\}$ with $v_0\\le e$ and $v_1\\le e$, and every strict chain has length at most one. The incidence cochain model for the derived inverse limit of the diagram $(V_0,V_1,V_e,u_0,u_1)$ is the two-term complex with $C^0=V_0\\oplus V_1\\oplus V_e$, $C^1=V_e\\oplus V_e$ and differential $d(v_0,v_1,w)=(w-u_0v_0,\\,w-u_1v_1)$; by [F1] the cohomology of this complex is the actual derived global sections of $F$, so $R^i\\Gamma(X,F)$ vanishes outside degrees $0$ and $1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Change coordinates invertibly in the source by $t:=w-u_1v_1$ and in the target by $(u,v):=(\\text{first output}-\\text{second output},\\ \\text{second output})$. In the new coordinates the differential is $d(t,v_0,v_1)=(u_1v_1-u_0v_0,\\,t)$, which is the direct sum of the identity map $V_e\\xrightarrow{\\mathrm{id}}V_e$ and the two-term complex $[V_0\\oplus V_1\\xrightarrow{u_0-u_1}V_e]$ after multiplying the first target coordinate by $-1$. The identity summand is contractible, so $R^i\\Gamma(X,F)\\cong H^i[V_0\\oplus V_1\\xrightarrow{u_0-u_1}V_e]$ in degrees $0$ and $1$ and is zero in all other degrees.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the constant sheaf $F=k_X$ we have $V_0=V_1=V_e=k$ with both generization maps the identity by [F2], so the difference map $k\\oplus k\\to k$ is surjective with kernel the diagonal copy of $k$; hence $H^0=k$ and $H^1=0$, and all higher cohomology vanishes by step 2.1. For $F=j_!k_{(0,1)}$ the diagram is $V_0=V_1=0$, $V_e=k$ with zero maps by [F3], so the two-term complex reduces to a single copy of $k$ in degree $1$; hence $H^1=k$, $H^0=0$ and all other cohomology vanishes. This proves both stated computations, and no step selects from a family, so no choice beyond the inherited AC is used by the computation.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Example fixes the full closed interval and its nonempty faces; the three poset values are enumerated in step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the zero endpoint values of extension by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the rank-one constant sheaf."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 lists all strict chains, including degree-zero singleton chains."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks both boundary stalks and the open-edge computation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Example inherits AC, and step 3.1 uses only finite linear algebra thereafter."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 supplies the invertible coordinate change and the two-term model."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 gives both vanishing conclusions from the two-term model of step 2.1."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-32",
+        "notes": "Read all three current Verification steps, all six actual supplier interfaces and the hash-matching pre-reader carrier. Full simplex includes its empty face, retained poset only v0/v1/e; edge stalk is at the barycentre. The bar differential is (w-u0v0,w-u1v1); invertible source substitution t=w-u1v1 and target (first-second,second), followed by negating first target coordinate, give difference differential plus identity on Ve. This works in characteristic two and with zero coefficient spaces. Identity summand contracts; constant diagram has diagonal kernel k and surjective difference map, while extension by zero has zero endpoint stalks and k only in degree one. Incidence supplier is sound independently of the unresolved Cech algebraic restriction. AC is inherited from the analytic cohomology supplier; this computation uses finite linear algebra only. Exact historical repairs are accepted with confidence 1."
+      }
+    }
+  }
+}

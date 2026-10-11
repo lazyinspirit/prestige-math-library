@@ -1,0 +1,269 @@
+--- a/tools/step3-scope.mjs
++++ b/tools/step3-scope.mjs
+@@ -25,6 +25,7 @@
+ import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
+ import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
+ import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
++import { isCertifiedOwnerCounterexampleAddition } from './step3-owner-counterexample-addition.mjs';
+ import { draftOwnerMatcher } from './run-draft-ownership.mjs';
+ import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
+ import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
+@@ -262,6 +263,13 @@
+   // The shared reader already checked the exact current carriers, excluding
+   // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
+   return row ?? null;
++}
++
++function ownerCounterexampleAddition(id, batch) {
++  if (!/^cex-/.test(id)) return false;
++  const manifestRows = Object.keys(manifestItems()).flatMap(ownerBatch =>
++    [...manifestMetadata(ownerBatch).itemRows.values()].map(row => ({ ...row, batch: ownerBatch })));
++  return isCertifiedOwnerCounterexampleAddition({ root: ROOT, run, id, batch, manifestRows });
+ }
+ 
+ function ownerContextAddition(id, batch) {
+@@ -1008,7 +1016,7 @@
+       if (phase !== 'final') {
+         for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 3b`);
+         if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
+-        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions, algorithms and lemmas may be added at 3a`);
++        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch) && !ownerCounterexampleAddition(id, batch)) error('scope-addition', `[${id}] only local definitions, algorithms and lemmas may be added at 3a`);
+       }
+       continue;
+     }
+@@ -1023,7 +1031,7 @@
+       error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
+     }
+     for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
+-      && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
++      && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch) && !ownerCounterexampleAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
+     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
+     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
+     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);
+--- /dev/null
++++ b/tools/step3-owner-counterexample-addition.mjs
+@@ -0,0 +1,33 @@
++import { readFileSync } from 'node:fs';
++import { join } from 'node:path';
++import { split, yaml } from './pathway-lib.mjs';
++import { auditorCreatedCertificationsPath, loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
++
++// Routing ownership only: independent review and mathematical gates remain due.
++// Validate certificates here so callers cannot substitute fabricated certificate rows.
++export function isCertifiedOwnerCounterexampleAddition({ root, run, id, batch, manifestRows }) {
++  if (!/^cex-/.test(id) || !Array.isArray(manifestRows) || !manifestRows.length) return false;
++  const text = readFileSync(join(root, 'items', `${id}.md`), 'utf8');
++  const item = yaml().parse(split(text).fm);
++  if (item?.id !== id || item.kind !== 'counterexample' || item.status !== 'draft'
++    || item.pipeline_run !== run || item.provenance?.statement !== 'ai-generated'
++    || item.generation?.role !== 'counterexample'
++    || ['not-supplied', 'not-applicable'].includes(item.provenance?.proof)
++    || !/^## Statement refuted\s*$/m.test(text) || !/^## Counterexample\s*$/m.test(text)) return false;
++  const refutation = text.split(/^## Counterexample\s*$/m)[1]?.split(/^## /m)[0] ?? '';
++  if ((refutation.match(/^\d+\.\d+\s/gm) ?? []).length < 2 || !refutation.includes('∎')) return false;
++  const owned = manifestRows.filter(row => row.id === id);
++  if (owned.length !== 1 || String(owned[0].batch) !== String(batch)
++    || owned[0].generation?.role !== 'counterexample'
++    || owned[0].provenance?.statement !== 'ai-generated' || owned[0].kind !== 'counterexample') return false;
++  for (const row of manifestRows) {
++    if ((row.deps ?? []).includes(id)) return false;
++    const source = yaml().parse(split(readFileSync(join(root, 'items', `${row.id}.md`), 'utf8')).fm);
++    if ((source?.deps ?? []).includes(id)) return false;
++  }
++  const certificates = loadAuditorCreatedCertifications(auditorCreatedCertificationsPath(root, run, 3), { root, run, steps: [3] });
++  return certificates.some(row => row.id === id && String(row.batch) === String(batch)
++    && row.evidence_class === 'owner-spawned-creation'
++    && row.owner_creation?.path === `research/${run}-step3-owner-creation-${id}.json`
++    && /^[a-f0-9]{64}$/.test(row.owner_creation?.sha256 ?? ''));
++}
+--- /dev/null
++++ b/tools/step3-owner-counterexample-addition.test.mjs
+@@ -0,0 +1,167 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { createHash } from 'node:crypto';
++import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { join } from 'node:path';
++import {
++  writeAuditorCreatedBaseline, recordOwnerCreation, certifyAuditorCreatedItems,
++} from './auditor-created-items.mjs';
++import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
++import { isCertifiedOwnerCounterexampleAddition as allowed } from './step3-owner-counterexample-addition.mjs';
++import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
++
++const sha = value => createHash('sha256').update(value).digest('hex');
++const canonical = value => Array.isArray(value) ? value.map(canonical)
++  : value && typeof value === 'object'
++    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])]))
++    : value;
++const hashValue = value => sha(JSON.stringify(canonical(value)));
++
++function fixture(t) {
++  const root = mkdtempSync(join(tmpdir(), 'owner-cex-'));
++  t.after(() => rmSync(root, { recursive: true, force: true }));
++  for (const directory of ['items', 'research']) mkdirSync(join(root, directory));
++  const write = (path, value) => writeFileSync(join(root, path),
++    typeof value === 'string' ? value : JSON.stringify(value));
++  const id = 'cex-genuine';
++  const entry = {
++    id, kind: 'counterexample', deps: [],
++    provenance: { statement: 'ai-generated', proof: 'ai-generated' },
++    generation: { role: 'counterexample' },
++  };
++  const text = `---
++id: ${id}
++kind: counterexample
++status: draft
++pipeline_run: r
++deps: []
++provenance: {statement: ai-generated, proof: ai-generated}
++generation: {role: counterexample}
++---
++## Statement refuted
++
++Every integer is zero.
++
++## Counterexample
++
++**Given:** The integer 1.
++
++1.1 The integer 1 is nonzero. [given]
++
++2.1 Therefore the universal assertion fails. [step 1.1] ∎
++`;
++  write('research/r-batch-1.pages.json', [{ id: 'p', items: [] }]);
++  writeAuditorCreatedBaseline(root, 'r', 3);
++  const baseline = JSON.parse(readFileSync(join(root, 'research/r-step3-auditor-baseline.json')));
++  write(`items/${id}.md`, text);
++  write('research/r-batch-1.pages.json', [{ id: 'p', items: [entry] }]);
++  const contract = { claim: 'Every integer is zero', derivation: [{ claim: '1 is nonzero' }] };
++  write('research/r-batch-1.proof-contracts.json', { contracts: { [id]: contract } });
++  const carriers = {
++    guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text),
++    item_file_sha256: sha(text), manifest_sha256: hashValue({ ...entry, __step4_page_id: 'p' }),
++    contract_sha256: hashValue(contract),
++  };
++  carriers.step3_subject_sha256 = hashValue({
++    item_sha256: sha(text), manifest_sha256: carriers.manifest_sha256,
++    contract_sha256: carriers.contract_sha256,
++  });
++  const sources = ['assignment', 'authorship', 'escalation'].map(role => {
++    const path = `research/${role}.txt`, bytes = `r ${id} /root/author held-gap ${role}`;
++    write(path, bytes);
++    return { role, path, sha256: sha(bytes) };
++  });
++  write('research/evidence.json', {
++    version: 1, policy: 'owner-spawned-step3-creation-v1',
++    evidence_class: 'owner-spawned-creation', run: 'r', step: 3, id,
++    owner: true, owner_identity: '/root',
++    author: { identity: '/root/author', timeline: {
++      mode: 'unknown', after_baseline: true, reason: 'Unknown exact original timeline',
++    } },
++    attested_at: new Date().toISOString(), reason: 'Actual local owner creation',
++    owner_held_escalation: 'held-gap', baseline_sha256: sha(JSON.stringify(baseline)),
++    page: 'p', batch: '1', carriers, sources,
++  });
++  recordOwnerCreation(root, 'r', 3, id, 'research/evidence.json');
++  certifyAuditorCreatedItems(root, 'r', 3);
++  const args = { root, run: 'r', id, batch: '1', manifestRows: [{ ...entry, batch: '1' }] };
++  return { root, write, id, text, entry, args };
++}
++
++test('accepts genuinely registered owner counterexample with exact native current certificates', t => {
++  const f = fixture(t);
++  assert.equal(allowed(f.args), true);
++});
++
++test('cannot use wrong run, batch, role, kind, or provenance as an exception', t => {
++  const f = fixture(t);
++  assert.equal(allowed({ ...f.args, run: 'other' }), false);
++  assert.equal(allowed({ ...f.args, batch: '2' }), false);
++  for (const delta of [
++    { generation: {} }, { kind: 'theorem' }, { provenance: { statement: 'literature-derived' } },
++  ]) {
++    assert.equal(allowed({ ...f.args,
++      manifestRows: [{ ...f.entry, batch: '1', ...delta }],
++    }), false);
++  }
++});
++
++test('rejects manifest or source-only logical consumers', t => {
++  const f = fixture(t);
++  f.write('items/lem-consumer.md', '---\nid: lem-consumer\nkind: lemma\ndeps: []\n---\n');
++  assert.equal(allowed({ ...f.args, manifestRows: [
++    ...f.args.manifestRows, { id: 'lem-consumer', deps: [f.id], batch: '1' },
++  ] }), false);
++  f.write('items/lem-consumer.md', `---\nid: lem-consumer\nkind: lemma\ndeps: [${f.id}]\n---\n`);
++  assert.equal(allowed({ ...f.args, manifestRows: [
++    ...f.args.manifestRows, { id: 'lem-consumer', deps: [], batch: '1' },
++  ] }), false);
++});
++
++test('stale carrier or origin evidence fails native validation', t => {
++  const f = fixture(t);
++  f.write(`items/${f.id}.md`, `${f.text}\nChanged.\n`);
++  assert.throws(() => allowed(f.args), /stale/);
++  f.write(`items/${f.id}.md`, f.text);
++  f.write('research/authorship.txt', 'changed origin');
++  assert.throws(() => allowed(f.args), /stale owner creation source/);
++});
++
++test('missing or fabricated native certificate cannot confer acceptance', t => {
++  const f = fixture(t);
++  rmSync(join(f.root, 'research/r-step3-auditor-certifications.json'));
++  assert.equal(allowed(f.args), false);
++  f.write('research/r-step3-auditor-certifications.json', {
++    version: 1, run: 'r', step: 3, policy: 'auditor-created-stage-bypass-v2',
++    baseline_sha256: '0'.repeat(64), items: [{ id: f.id, evidence_class: 'owner-spawned-creation' }],
++  });
++  assert.throws(() => allowed(f.args), /identity/);
++});
++
++test('an empty or unproved refutation and published carrier cannot qualify', t => {
++  const f = fixture(t);
++  for (const text of [
++    f.text.replace('## Counterexample', '## Remarks'), f.text.replace('∎', ''),
++    f.text.replace('status: draft', 'status: published'),
++    f.text.replace('proof: ai-generated', 'proof: not-supplied'),
++  ]) {
++    f.write(`items/${f.id}.md`, text);
++    assert.equal(allowed(f.args), false);
++  }
++});
++
++test('existing owner Remark exception retains its separate restrictions', () => {
++  const id = 'rem-context';
++  const input = {
++    id, batch: '2', run: 'r',
++    item: { id, kind: 'remark', status: 'draft', pipeline_run: 'r', proved_here: false,
++      provenance: { proof: 'not-supplied' } },
++    certificates: [{ id, batch: '2', evidence_class: 'owner-spawned-creation',
++      owner_creation: { path: `research/r-step3-owner-creation-${id}.json`, sha256: 'a'.repeat(64) } }],
++  };
++  assert.equal(isCertifiedOwnerContextAddition(input), true);
++  assert.equal(isCertifiedOwnerContextAddition({ ...input, certificates: [] }), false);
++  assert.equal(isCertifiedOwnerContextAddition({ ...input, item: { ...input.item, kind: 'counterexample' } }), false);
++  assert.equal(isCertifiedOwnerContextAddition({ ...input, item: { ...input.item, pipeline_run: 'other' } }), false);
++});
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -161,6 +161,18 @@
+ migration and ready-pair initial-authoring variants are not current entry routes.
+ Preserve historical run evidence rather than relabeling it. The retained authoring claim-resolution API is documented in [tools/step3-owner-creation.md](tools/step3-owner-creation.md); it supplies historical origin continuity only.
+ 
++Current Step-3 owner repair helpers use `tools/auditor-created-items.mjs
++owner-create --run RUN --step 3 --id ITEM --evidence research/JSON` after
++stable source, manifest and proof-contract integration. Immutable origins bind
++baseline exclusion, the actual distinct author, assignment/authorship/escalation
++evidence and all six current carrier hashes; creation records no independent
++review or native execution coverage. Routing also permits an ownership-certified
++draft generated counterexample with `generation.role: counterexample`, an actual
++refutation and no logical consumers in current frontier manifests or authored
++sources. This narrow exception retains ordinary independent review and every
++gate; historical scopes, baselines and worker receipts remain unchanged.
++
++
+ An explicitly owner-authorized restored frontier may retain its original
+ `pipeline_run` markers. Step-3 dependency routing recognizes those draft IDs
+ only through `research/RUN-continuation.json`: exact source run, nonempty

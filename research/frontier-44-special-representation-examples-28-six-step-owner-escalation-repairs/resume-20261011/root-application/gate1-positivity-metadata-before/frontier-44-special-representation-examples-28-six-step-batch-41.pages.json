@@ -1,0 +1,214 @@
+[
+  {
+    "order": 1824,
+    "id": "proper-cohomological-descent-and-constructible-hypercovers",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Proper Cohomological Descent And Constructible Hypercovers",
+    "companion": "proper-cohomological-descent-and-constructible-hypercovers-examples",
+    "requires": [
+      "algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations",
+      "analytic-derived-six-operations-and-duality",
+      "constructible-incidence-and-cochain-models",
+      "double-complexes-exact-couples-and-convergence",
+      "equivariant-constructible-perverse-foundations",
+      "relations-functions-and-quotients",
+      "spectral-sequences"
+    ],
+    "items": [
+      {
+        "id": "lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization",
+        "kind": "lemma",
+        "title": "Bicosimplicial total complexes agree with diagonal totalization",
+        "deps": [
+          "lem-simplicial-normalization-prism-and-trivial-fibration-criterion",
+          "prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes",
+          "def-direct-sum-total-complex-of-a-double-complex",
+          "def-chain-complex-in-an-abelian-category"
+        ],
+        "statement": "For a bicosimplicial complex $K^{p,r,q}$ of modules over a commutative ring, with $p,r\\geq0$ and one fixed lower bound $q\\geq a$, the alternating-face total complex and the diagonal alternating-face total complex are naturally chain-homotopy equivalent:\n$$\\operatorname{Tot}_{p,r,q}K^{p,r,q}\\simeq\\operatorname{Tot}_{n,q}K^{n,n,q}.$$\nOn the left total degree is $p+r+q$ and differential is $\\delta_h+(-1)^p\\delta_v+(-1)^{p+r}d$; on the right total degree is $n+q$ and differential is $\\delta_{\\mathrm{diag}}+(-1)^nd$. These comparisons preserve augmentation and apply to coherent derived diagrams after a supplied functorial strict resolution. They require no dimensional finiteness of the coefficient modules and no choice principle. Normalization can be applied on either side without changing the conclusion.",
+        "strategy": "Current authored proof, independently reviewed in alpha-batch-41 Step 3a:\n**Proof technique:** direct.\n\n1.1 Universal models and contractions. For a bisimplicial $R$-module $M$, let $Q_{p,r}$ have value $R[\\Delta([u],[p])\\times\\Delta([v],[r])]$ at $(u,v)$. An element $x\\in M_{p,r}$ determines the unique map $Q_{p,r}\\to M$ sending the universal generator to $x$. The diagonal chain complex of $Q_{p,r}$ consists of pairs of monotone vertex strings; define $h$ on each basis string by prepending $(0,0)$. Deleting the first vertex gives the original string, and every other deletion commutes with prepending with its index reduced by one. Thus $\\partial h+h\\partial=1-e$, where $e$ sends every degree-zero vertex to $(0,0)$ and is zero in positive degrees. On the double total, identified with $C_*(\\Delta[p];R)\\otimes_R C_*(\\Delta[r];R)$, use the separate prepend-zero contractions $h_p,h_r$ and projectors $e_p,e_r$. For homogeneous $x$, set $H(x\\otimes y)=h_p(x)\\otimes y+(-1)^{|x|}e_p(x)\\otimes h_r(y)$. The Koszul differential gives $\\partial H+H\\partial=(1-e_p)\\otimes1+e_p\\otimes(1-e_r)=1-e_p\\otimes e_r$. These contractions fill every positive-degree cycle and every augmentation-zero degree-zero cycle by specified finite chains. Unlike a constant simplicial map on unnormalized chains, $e$ is supported only in degree zero. [F3, F4, construct, algebra]\n\n2.1 Diagonal-to-total comparison. Put $\\operatorname{Diag}_m(M)=M_{m,m}$ and $\\operatorname{Tot}_m(M)=\\bigoplus_{p+r=m}M_{p,r}$ with the Koszul boundary. Set $\\varphi_0=1$. Inductively evaluate $\\varphi_{m-1}\\partial z$ on the universal generator $z$ of $Q_{m,m}$, and fill it using the total contraction of step 1.1. It is a cycle because $\\partial\\varphi_{m-1}=\\varphi_{m-2}\\partial$; when $m=1$, it is the difference of the two endpoint vertices and has augmentation zero. Evaluate that specified filling under the representing map for each $x\\in M_{m,m}$ to define $\\varphi_m(x)$. This is linear and natural, and its boundary is $\\varphi_{m-1}\\partial x$. Thus $\\varphi$ is a natural chain map, given degreewise by finite linear combinations of structure operators. [step 1.1, construct]\n\n3.1 Total-to-diagonal comparison. Set $\\psi_0=1$. For each summand $M_{p,r}$ in total degree $m=p+r>0$, evaluate $\\psi_{m-1}\\partial z$ on the universal generator of $Q_{p,r}$ and fill it with the diagonal contraction of step 1.1. The induction hypothesis makes it a cycle; in degree $m=1$ its two endpoint coefficients cancel. Evaluate the filling under the representing map of each element of $M_{p,r}$ and sum over $p+r=m$. This defines a linear natural chain map $\\psi$, again by specified finite operator formulas. [step 1.1, step 2.1, construct]\n\n4.1 Homotopy inverses. Let $C,C'$ each be the diagonal or total chain functor, and let $f,g:C\\to C'$ be natural chain maps with $f_0=g_0$. Set $h_0=0$. For $m\\geq1$, on a universal generator $z$ of a representing summand of $C_m$, put $\\beta_m=(f_m-g_m)(z)-h_{m-1}(\\partial z)$. The previously established equation $\\partial h_{m-1}+h_{m-2}\\partial=f_{m-1}-g_{m-1}$ makes $\\partial\\beta_m=0$. This cycle has positive degree, so its specified model contraction gives $h_m(z)$ with $\\partial h_m(z)=\\beta_m$. Extend by representing maps. Then $\\partial h+h\\partial=f-g$. Apply this to $\\psi\\varphi$ and $1$ on the diagonal, and to $\\varphi\\psi$ and $1$ on the total; both composites are the identity in degree zero. The resulting natural homotopies have finite operator formulas. [step 1.1, step 2.1, step 3.1, construct]\n\n5.1 Cosimplicial variance and the internal differential. The maps and homotopies of steps 2.1–4.1 are finite linear combinations of morphisms in the simplex categories. Their identities can be tested on the free representables of step 1.1, so they are universal additive operator identities. Reverse every operator and every composition to obtain cochain maps in the opposite directions and cochain homotopies lowering simplicial total degree by one. This reverses the two homotopy-inverse identities, without taking algebraic duals. Apply these formulas in each internal degree $q$. Naturality makes them commute with $d$. A comparison preserves simplicial total degree $t=p+r=n$, so it commutes with the signed internal differential $(-1)^td$. For a homotopy $H$ lowering $t$ by one, the internal terms in $DH+HD$ are $(-1)^{t-1}dH+(-1)^tHd=0$. Hence the comparisons and homotopies apply to precisely the two cochain differentials in the Statement. [step 2.1, step 3.1, step 4.1, algebra]\n\n6.1 Finiteness, normalization, augmentation and derived presentations. In total degree $m$ the indices satisfy $p+r\\leq m-a$ on the full total and $n\\leq m-a$ on the diagonal. Thus only finitely many coefficient terms occur, and [F2] permits sum or product notation without dimensional hypotheses. All fillings above are specified finite formulas, so no choice principle is used. The degree-zero comparisons are identities and the homotopies have zero augmentation component, so they preserve augmentation. The natural normalization equivalence and homotopy of [F1] are also finite operator identities; reversing them gives the cosimplicial normalization equivalence. Applying these equivalences in either direction or on the diagonal permits normalization on either side. Finally, a supplied functorial strict resolution presents the coherent derived diagram. Naturality makes the comparisons compatible with quasi-isomorphisms between such presentations, hence gives the same derived comparison under the canonical presentation identifications. [F1, F2, step 2.1, step 3.1, step 4.1, step 5.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages.",
+              "url": "https://arxiv.org/pdf/math/0205027"
+            },
+            {
+              "title": "The Stacks Project, Simplicial Methods (Chapter 0G6Z), complete PDF; normalization, simplex and prism identities are read at the cited sections.",
+              "url": "https://stacks.math.columbia.edu/download/simplicial.pdf"
+            }
+          ]
+        },
+        "axiom_use": "No choice principle is used: the comparison and its homotopies are explicit finite linear combinations of face and degeneracy operators, and the statement records their choice-freeness.",
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves",
+        "kind": "lemma",
+        "title": "Proper surjections have cohomological descent for constructible field sheaves",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+          "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+          "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "def-analytic-topology-and-finite-smooth-algebraic-stratifications"
+        ],
+        "statement": "Assume the Axiom of Choice inherited from the supplied injective-resolution six-functor construction. Let $f:Y\\to X$ be a proper surjective morphism of finite-type complex algebraic varieties, and let $F\\in D^b_c(X;k)$ for a field $k$. Write $Y_p=Y\\times_X\\cdots\\times_XY$ with $p+1$ factors, $f_p:Y_p\\to X$, and $F_p=f_p^*F$. In the analytic topology of [[def-analytic-topology-and-finite-smooth-algebraic-stratifications]] the natural augmented derived Cech map is a quasi-isomorphism:\n$$F\\xrightarrow{\\sim}\\operatorname{Tot}_{p\\geq0}Rf_{p*}F_p.$$\nHere totalization is the normalized or unnormalized alternating-face total supplied by the simplicial-derived construction. There is one fixed lower cochain bound; consequently its diagonals are finite in every degree. The claim commutes with arbitrary algebraic base change and coefficient morphisms. In particular $R\\Gamma(X,F)\\simeq\\operatorname{Tot}_pR\\Gamma(Y_p,F_p)$. Individual fibers of $f$ need not be cohomologically acyclic, connected, or smooth.",
+        "strategy": "Current authored proof, independently reviewed in alpha-batch-41 Step 3a:\n**Proof technique:** direct.\n\n1.1 Bounded strict model and finite diagonals. Choose a cochain lower bound $a$ with $F$ represented by a strict complex vanishing in degrees $q<a$, possible because $F$ is cohomologically bounded; by [F1] exact inverse image preserves vanishing there, so the same $a$ bounds every $F_p$, and right-derived pushforward produces a functorial double model in degrees $p\\geq0$, $q\\geq a$. In total degree $m$ only $0\\leq p\\leq m-a$ occurs, so every diagonal is finite and [F2]'s strict total model may be used with either totalization. Take the cone of the augmented map $F\\to\\operatorname{Tot}_pRf_{p*}F_p$, place the augmentation in column $p=-1$, and filter by $p$; each total degree of the cone involves only finitely many columns. At a point $x\\in X$ the stalk of the cone is the cone of the stalk map, and because the stalk functor is exact and commutes with the finite column sums, this stalk carries the induced finite filtration, whose first page in internal degree $q$ is the augmented horizontal row of $H^q$ of the stalk complexes. [F1, F2, given]\n\n1.2 The stalk row and one chosen point. Fix $x\\in X$ and put $K=F_x$, a complex of $k$-vector spaces with $H^q(K)=H^q(F)_x$; surjectivity of $f$ makes the fiber $S=Y_x$ nonempty. By the proper base change and fiber-pullback clauses of [F1], the stalk at $x$ of $Rf_{p*}F_p$ is $R\\Gamma(S^{p+1},K)$ with $K$ the constant derived pullback, and these identifications are natural for all face and degeneracy maps, so the first page of the stalk row in internal degree $q$ is\n$$H^q(K)\\xrightarrow{\\delta_{-1}}H^q(S,K)\\xrightarrow{\\delta_0}H^q(S^2,K)\\xrightarrow{\\delta_1}\\cdots,$$\nwhere $\\delta_p$ is the alternating sum of the pullbacks along the $(p+2)$ coordinate-deletion maps $d_i:S^{p+2}\\to S^{p+1}$. Choose one point $y\\in S$; no assertion that any positive cohomology group of $S$ vanishes, or that $S$ is connected or smooth, is made or used. [F1, A1, step 1.1]\n\n2.1 Explicit contraction of every augmented row. For $r\\geq0$ let $\\mathrm{ins}_r:S^r\\to S^{r+1}$ insert $y$ as first coordinate, with $S^0=\\mathrm{pt}$; so $\\mathrm{ins}_0$ is the point $y$ itself. The deletion and insertion maps satisfy $d_0\\,\\mathrm{ins}_{r+1}=\\mathrm{id}$ and $d_i\\,\\mathrm{ins}_{r+1}=\\mathrm{ins}_r\\,d_{i-1}$ for $i>0$. Put $h_{p+1}:=\\mathrm{ins}_{p+1}^*:H^q(S^{p+2},K)\\to H^q(S^{p+1},K)$ and $h_0:=\\mathrm{ins}_0^*:H^q(S,K)\\to H^q(K)$, with $\\delta_{-1}$ the constant pullback of the projection $S\\to\\mathrm{pt}$. Applying the two identities termwise gives $h_{p+1}\\delta_p+\\delta_{p-1}h_p=\\mathrm{id}$ for every $p\\geq0$: the $i=0$ term of $h_{p+1}\\delta_p$ is the identity, and the terms $i>0$ are the negatives of $\\delta_{p-1}h_p$; moreover $h_0\\delta_{-1}=\\mathrm{id}$, because the projection followed by the chosen point is the identity of $\\mathrm{pt}$. Hence every augmented horizontal row is contractible, in particular exact, in every internal degree $q$, using only functorial pullback on cohomology. [step 1.2, algebra]\n\n3.1 Conclusion and naturality. By step 2.1 the next page of the spectral sequence of the stalk cone vanishes at every stalk, and by step 1.1 its filtration is finite in each total degree, so [F3] identifies the associated graded of the stalk cohomology with zero in every degree; the stalk of the cone at $x$ is therefore acyclic, for every $x\\in X$. A complex of sheaves whose stalks are all acyclic has zero cohomology sheaves, hence is acyclic; this proves the asserted quasi-isomorphism $F\\xrightarrow{\\sim}\\operatorname{Tot}_{p\\geq0}Rf_{p*}F_p$. All algebraic base changes of $f$ remain proper surjective, and the identifications of steps 1.2-3.1 are pullbacks of one another by the Cartesian-pasting naturality of [F1], so the pulled-back assertion follows without choosing compatible points; coefficient morphisms act componentwise by the same naturality. For the global statement use [F2]’s simplicial injective model: its levelwise injectives push forward to injectives, since inverse image is exact and left adjoint to direct image. The total is a bounded-below complex of injectives, because each total degree is a finite sum. Thus global sections compute its derived global sections termwise; derived composition in [F1] identifies the columns with $R\\Gamma(Y_p,F_p)$, giving $R\\Gamma(X,F)\\simeq\\operatorname{Tot}_pR\\Gamma(Y_p,F_p)$. The Axiom of Choice is inherited exactly through [A1]. [F1, F3, A1, step 1.1, step 2.1] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages.",
+              "url": "https://arxiv.org/pdf/math/0205027"
+            },
+            {
+              "title": "The Stacks Project, Hypercoverings (Chapter 0DEG), complete PDF; the homological-descent lemmas are read at the cited tags and pages.",
+              "url": "https://stacks.math.columbia.edu/download/hypercovering.pdf"
+            }
+          ]
+        },
+        "axiom_use": "AC is assumed and consumed exactly through the supplied injective-resolution six-functor construction ([[thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace]], [[lem-analytic-constructible-sheaves-admit-coherent-six-operations]], [[lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent]]); choosing one point in a nonempty fiber is a single nonempty-set selection, not a simultaneously chosen family of sections.",
+        "dependency_level": 19
+      },
+      {
+        "id": "thm-proper-hypercovers-compute-constructible-derived-cohomology",
+        "kind": "theorem",
+        "title": "Proper hypercovers compute constructible derived cohomology",
+        "deps": [
+          "def-axiom-of-choice",
+          "lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves",
+          "lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization",
+          "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+          "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+          "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "def-analytic-topology-and-finite-smooth-algebraic-stratifications",
+          "def-simplicial-object-and-simplicial-commutative-ring"
+        ],
+        "statement": "Assume the Axiom of Choice as inherited from the supplied six-functor resolutions. Let $X_\\bullet\\to X$ be an augmented simplicial finite-type complex algebraic variety ([[def-simplicial-object-and-simplicial-commutative-ring]], [[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]). Assume $X_0\\to X$ is proper surjective and, for each $p>0$, $X_p\\to(\\operatorname{cosk}_{p-1}\\operatorname{sk}_{p-1}X_\\bullet)_p$ is proper surjective over $X$, where $\\operatorname{sk}_{p-1}$ restricts to levels through $p-1$, $\\operatorname{cosk}_{p-1}$ is its right Kan extension formed by finite matching limits, and the target is the matching object. Such an object is a proper hypercover; no smoothness or fiber acyclicity is assumed. For $F\\in D^b_c(X;k)$ over a field, and $a_p:X_p\\to X$, the augmentation gives\n$$F\\xrightarrow{\\sim}\\operatorname{Tot}_{p\\geq0}Ra_{p*}a_p^*F,\\qquad R\\Gamma(X,F)\\xrightarrow{\\sim}\\operatorname{Tot}_{p\\geq0}R\\Gamma(X_p,a_p^*F).$$\nThere is a natural strongly convergent spectral sequence $E_1^{p,q}=H^q(X_p,a_p^*F)\\Rightarrow H^{p+q}(X,F)$. If $F$ has cochain lower bound $a$, every diagonal $p+q=m$ is finite; degree $m$ and its differential are determined by levels through $p=m-a+1$. All proper-hypercover refinements induce the same comparison via the base object; any two such hypercovers have a proper common refinement. For $F=k_X$, $a=0$, this is the first-quadrant spectral sequence required for smooth-projective hyperresolutions.",
+        "strategy": "Current authored proof, independently reviewed in alpha-batch-41 Step 3a:\n**Proof technique:** direct.\n\n1.1 Height zero and the induction setup. Let $U\\to X$ be a bounded proper hypercover of height zero, that is $U=\\operatorname{cosk}_0U_0$. By the convention of the Given, $U$ is the Cech nerve of the proper surjection $U_0\\to X$, so [F1] proves both the sheaf and the global augmentation statements for $U$. Suppose inductively that they are proved for all bounded proper hypercovers of height at most $n$, and let $U=\\operatorname{cosk}_{n+1}U$ have height $n+1$. Put $V:=\\operatorname{cosk}_nU$. Its matching maps through degree $n$ are those of $U$, and in degrees $j>n$ its matching map is an isomorphism because $V=\\operatorname{cosk}_nV$; hence $V$ is a proper hypercover of height at most $n$ and the induction hypothesis applies to $V$. [F1, given, construct]\n\n1.2 Levelwise proper surjectivity of $U\\to V$. For every $j$ the map $U_j\\to V_j$ is proper surjective. For $j\\leq n$ it is the identity. For $j>n$ it reads $\\operatorname{Hom}(\\operatorname{sk}_{n+1}\\Delta[j],U)\\to\\operatorname{Hom}(\\operatorname{sk}_n\\Delta[j],U)$: the domain is obtained from the codomain by adjoining the finitely many nondegenerate $(n+1)$-faces of $\\Delta[j]$, whose boundaries already lie in the $n$-skeleton, so this map is a Cartesian pullback of the finite product of the matching map $U_{n+1}\\to(\\operatorname{cosk}_nU)_{n+1}=V_{n+1}$; a finite product over $X$ of proper surjections, and any base change of it, is proper surjective. No local sections are required, and all limits are the finite matching limits of the Given. [given, construct, algebra]\n\n2.1 The bisimplicial Cech model and the double total. Form the bisimplicial object $W_{r,j}=U_j\\times_{V_j}\\cdots\\times_{V_j}U_j$ with $r+1$ factors, horizontally the Cech nerve of $U_j\\to V_j$, and pull coefficients from $X$ throughout. By [F1] and step 1.2, for each fixed $j$ the horizontally augmented derived row computes the coefficient complex on $V_j$, before and after pushing forward to $X$: with $B_j:=(V_j\\to X)^*F$ and $a_{r,j}:W_{r,j}\\to X$ one has $Rb_{j*}B_j\\simeq\\operatorname{Tot}_rRa_{r,j*}a_{r,j}^*F$, where $b_j:V_j\\to X$, the identifications being compatible with composition and finite sums by [F3] and [F4]. The induction hypothesis for $V$ gives $F\\simeq\\operatorname{Tot}_jRb_{j*}B_j$; substituting the row identifications and using that every total diagonal is finite (the internal degrees are bounded below by the same $a$, by [F3]) identifies the iterated total with the full total, so $F\\simeq\\operatorname{Tot}_{r,j}Ra_{r,j*}a_{r,j}^*F$ and the analogous global statement hold. By [F2] this double total is naturally chain-homotopy equivalent to the total on the diagonal $D_j:=W_{j,j}$. [F1, F2, F3, F4, step 1.1, step 1.2]\n\n3.1 The retract over $X$. The bounded hypercover $U$ is a retract over $X$ of $D$. The map $i:U\\to D$ repeats the same $U_j$-point in all $j+1$ horizontal factors, the horizontal degeneracy; through degree $n$ the map $U_j\\to V_j$ is the identity, so $D_j=U_j$ there, and in degree $n+1$ let $r_{n+1}:D_{n+1}\\to U_{n+1}$ be the projection to the first horizontal factor. Its faces and degeneracies agree with the degree-$\\leq n$ identity identifications, because every horizontal factor of $W$ has the same image in $V$ and the lower-degree maps are identities; this defines a map of $(n+1)$-truncated simplicial objects over $X$, and the universal property $U=\\operatorname{cosk}_{n+1}U$ extends it uniquely to $r:D\\to U$. The composite $ri$ is the identity through degree $n+1$: in lower degrees because $i$ is the diagonal and $r$ the factor projection on $D_j=U_j$, and in degree $n+1$ because repeating a point and projecting a factor returns it; hence $ri=\\mathrm{id}$ in every degree by the same universal property. Coefficient pullback reverses these maps, and since $r\\circ i=\\mathrm{id}$ the augmented total of $U$ is a retract of the augmented total of $D$; by step 2.1 the cone of the augmentation of $D$ is acyclic, and a retract of an acyclic cone is acyclic, so the augmentation of $U$ is a quasi-isomorphism. This completes the bounded-height induction. [F2, F4, step 1.1, step 2.1, construct]\n\n4.1 Arbitrary height by truncation. For an arbitrary proper hypercover $U$, put $U^{(N)}:=\\operatorname{cosk}_N\\operatorname{sk}_NU$; it is a bounded proper hypercover, so step 3.1 applies to it, and the canonical map $U\\to U^{(N)}$ is the identity through simplicial degree $N$. In the strict derived total model every internal degree is at least $a$; hence total degrees $m-1$, $m$ and $m+1$ involve only simplicial levels $p\\leq m-a+1$, because a term of total degree $m+1$ has $p+q=m+1$ with $q\\geq a$. Choose $N\\geq\\max(0,m-a+1)$; then the totals for $U$ and $U^{(N)}$ have the same objects and the same differentials in these three degrees, so the same degree-$m$ cohomology and the same augmentation maps. Since $m$ was arbitrary, the augmentation for $U$ is a quasi-isomorphism, and degree $m$ with its differential is determined by levels through $p=m-a+1$. This is a finite-degree truncation argument, not an interchange of stalks or cohomology with an unjustified infinite product. [F4, step 3.1, construct]\n\n5.1 The spectral sequence and convergence. Filter the global total of step 4.1 by simplicial degree. Its first page is $E_1^{p,q}=H^q(X_p,a_p^*F)$, with first differential the alternating sum of face pullbacks by the naturality of [F3]; in degree $m$ the filtration has only the finitely many pieces $0\\leq p\\leq m-a$. By [F5] the stationary page is identified, naturally, with the finite associated graded of $H^m(X,F)$; this proves strong convergence and requires no finite-dimensionality of the individual groups $H^q(X_p,a_p^*F)$. [F3, F5, step 4.1]\n\n6.1 Refinements and constant coefficients. For two proper hypercovers $U,V$ of $X$, the levelwise product $R_j:=U_j\\times_XV_j$ is a proper hypercover: finite matching limits commute with products, so each matching map of $R$ is the product over $X$ of the matching maps of $U$ and $V$, hence proper surjective, and the levelwise projections give maps of simplicial objects $R\\to U$ and $R\\to V$ over $X$. By step 4.1 the augmentations of $U$, $V$ and $R$ all identify their totals with the same coefficient complex on $X$, and the refinement maps are compatible with those identifications by naturality of the augmentation, so all proper-hypercover refinements induce the same comparison via the base object. A smooth-projective refinement requires a separate supplied construction: a fiber product of smooth varieties over $X$ need not be a smooth variety, so no smoothness is asserted here. For $F=k_X$ the lower bound is $a=0$ and the page of step 5.1 is exactly the stated first-quadrant spectral sequence. The Axiom of Choice is inherited precisely through [A1]. [F3, A1, step 4.1, step 5.1, construct] ∎",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages.",
+              "url": "https://arxiv.org/pdf/math/0205027"
+            },
+            {
+              "title": "The Stacks Project, Hypercoverings (Chapter 0DEG), complete PDF; the homological-descent lemmas are read at the cited tags and pages.",
+              "url": "https://stacks.math.columbia.edu/download/hypercovering.pdf"
+            }
+          ]
+        },
+        "axiom_use": "AC is assumed and inherited from the resolution/six-functor suppliers and from [[lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves]]; the finite coskeleton, matching-product and retract constructions add no new arbitrary choices.",
+        "dependency_level": 20
+      }
+    ]
+  },
+  {
+    "order": 1827,
+    "id": "proper-cohomological-descent-and-constructible-hypercovers-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Proper Cohomological Descent And Constructible Hypercovers Examples",
+    "companion": "proper-cohomological-descent-and-constructible-hypercovers",
+    "requires": [
+      "proper-cohomological-descent-and-constructible-hypercovers",
+      "relative-homology-excision-and-mayer-vietoris",
+      "singular-cohomology-and-coefficient-theorems"
+    ],
+    "items": [
+      {
+        "id": "ex-proper-cech-descent-does-not-require-acyclic-fibers",
+        "kind": "example",
+        "title": "Proper Cech descent does not require acyclic fibers",
+        "deps": [
+          "lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves",
+          "cor-homology-of-spheres",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "def-axiom-of-choice",
+          "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+          "def-analytic-topology-and-finite-smooth-algebraic-stratifications",
+          "def-one-point-compactification",
+          "thm-one-point-compactification-properties",
+          "thm-stereographic-projection-riemann-sphere-homeomorphism",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "def-projective-morphism-classical",
+          "thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications",
+          "lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology"
+        ],
+        "statement": "Assume the Axiom of Choice; it is inherited from the descent lemma and from the field-dual corollary. Let $k$ be a field and let $S=\\mathbb P^1(\\mathbb C)$ be the complex projective line, realized as the classical complex algebraic variety obtained by gluing two affine lines along their punctured overlaps by $z=1/w$, with its analytic topology (equivalently, the Riemann sphere $\\widehat{\\mathbb C}=\\mathbb C\\cup\\{\\infty\\}$). Then the unique morphism $f:S\\to\\mathrm{pt}$ is proper surjective, the single fiber $S$ satisfies $H^2(S;k)\\cong k\\neq0$ and is therefore not cohomologically acyclic, and yet the augmented Cech complex computes the constant sheaf: the unaugmented product total $\\operatorname{Tot}_{p\\geq0}R\\Gamma(S^{p+1},k)$ has cohomology $k$ in degree $0$ and zero in all other degrees. In every internal degree $q$ the augmented row $H^q(k)\\to H^q(S,k)\\to H^q(S^2,k)\\to\\cdots$ is contracted by inserting one chosen point as first coordinate, even though the $q=2$ row contains the nonzero group $H^2(S;k)$ at $p=0$.",
+        "strategy": "Current authored proof, independently reviewed in alpha-batch-41 Step 3a:\n**Proof technique:** direct.\n\n1.1 The space and its two charts. Glue the affine $z$-line and affine $w$-line along $zw=1$. Their regular transition gives a prevariety with a finite affine cover ([F2], [F3]). Its diagonal is closed: on the two same-chart products equality is $z=z'$ or $w=w'$, and on either cross-chart product it is $zw'=1$ or $wz'=1$. Equalizers of regular maps are inverse images of this diagonal, so $S$ is separated. The formulas of [F5] define a homeomorphism from this glued space to $S^2$: in the $w$-chart they become $(2\\operatorname{Re}w,-2\\operatorname{Im}w,1-|w|^2)/(1+|w|^2)$, including the north pole at $w=0$; the inverse coordinate there is $w=(x-iy)/(1+t)$, continuous near the north pole. In the other chart the formulas and inverse are those of [F5]. Composing with [F5]'s inverse identifies the analytic topology with the one-point compactification of [F4]. In particular $S$ is compact. [F2, F3, F4, F5, construct, algebra]\n\n1.2 The map is proper surjective. The unique morphism $f:S\\to\\mathrm{pt}$ is surjective because $S$ is nonempty. It is projective in the sense of [F9]: the identity is a closed immersion $S\\hookrightarrow\\mathrm{pt}\\times\\mathbb P^1(\\mathbb C)$ onto a reduced closed subvariety, and the projection to the point is the structure map. By the properness clause of [F10], a projective algebraic morphism is proper in the analytic topology; hence $f$ is a proper surjective morphism of finite-type complex algebraic varieties, and [F1] applies to it. [F9, F10, F1, given]\n\n1.3 The single fiber is not acyclic. Stereographic projection is a homeomorphism $\\widehat{\\mathbb C}\\to S^2$ ([F5]); a homeomorphism is a homotopy equivalence, so it induces isomorphisms on singular homology ([F6]) and $H_2(S;k)\\cong H_2(S^2;k)\\cong k$ by [F7]. The field-dual corollary [F8] then gives $H^2(S;k)\\cong\\operatorname{Hom}_k(H_2(S;k),k)\\cong k\\neq0$, since $k$ is a field. The sphere is metric with a contractible-open neighbourhood basis, and these properties transfer through the homeomorphism, so [F11] identifies this singular cohomology group with the actual derived constant-sheaf group $H^2(S,k_S)$. Thus the fiber $S$ of $f$ is not cohomologically acyclic. [F5, F6, F7, F8, F11, algebra]\n\n2.1 The rows are still contracted. The fiber of $f$ over the unique point is $S$ and the fiber powers are $S^{p+1}$. Choose one point $y\\in S$, for instance the point with $z=0$, and for $r\\geq0$ let $\\mathrm{ins}_r:S^r\\to S^{r+1}$ insert $y$ as first coordinate, with $S^0=\\mathrm{pt}$. For the compositions below the deletion maps are $d_i:S^{r+2}\\to S^{r+1}$, and they satisfy $d_0\\,\\mathrm{ins}_{r+1}=\\mathrm{id}$ and $d_i\\,\\mathrm{ins}_{r+1}=\\mathrm{ins}_r\\,d_{i-1}$ for $i>0$, so with $h_{p+1}:=\\mathrm{ins}_{p+1}^*$ and $\\delta_p$ the alternating sum of deletion pullbacks one gets $h_{p+1}\\delta_p+\\delta_{p-1}h_p=\\mathrm{id}$ in every internal degree $q$, and $h_0\\delta_{-1}=\\mathrm{id}$; hence each augmented row is contractible. In the row $q=2$ the term at $p=0$ is $H^2(S;k)\\cong k\\neq0$, carried injectively into $H^2(S^2;k)$; the nonzero group is retained and does not obstruct exactness. [F1, step 1.3, algebra]\n\n3.1 Conclusion. Applying [F1] to $f$ and the constant sheaf $k$, and using that the fiber powers of $f$ are $S^{p+1}$ and that $R\\Gamma(\\mathrm{pt},k)=k$ is concentrated in degree $0$, the augmented Cech map $k\\xrightarrow{\\sim}\\operatorname{Tot}_{p\\geq0}R\\Gamma(S^{p+1},k)$ is a quasi-isomorphism; therefore the unaugmented product total has cohomology $k$ in degree $0$ and zero in every other degree. The example shows that proper Cech descent does not require acyclic fibers: the nonvanishing $H^2$ of the fiber is retained throughout the contracted rows. The Axiom of Choice is inherited through the descent lemma and the field-dual corollary, and the construction of $S$, the homeomorphism with $S^2$, the choice of one point and the insertion argument use no further choice. [F1, F8, step 1.1, step 1.3, step 2.1] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages.",
+              "url": "https://arxiv.org/pdf/math/0205027"
+            },
+            {
+              "title": "The Stacks Project, Hypercoverings (Chapter 0DEG), complete PDF; the homological-descent lemmas are read at the cited tags and pages.",
+              "url": "https://stacks.math.columbia.edu/download/hypercovering.pdf"
+            }
+          ]
+        },
+        "axiom_use": "AC is assumed; it is inherited through the descent lemma and through [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]]. The construction of $\\mathbb P^1(\\mathbb C)$, the homeomorphism with $S^2$, the choice of one point and the insertion argument are choice-free.",
+        "dependency_level": 20
+      },
+      {
+        "id": "ex-hypercover-total-degree-uses-only-a-finite-matching-truncation",
+        "kind": "example",
+        "title": "Hypercover total degree uses only a finite matching truncation",
+        "deps": [
+          "def-axiom-of-choice",
+          "thm-proper-hypercovers-compute-constructible-derived-cohomology",
+          "def-simplicial-object-and-simplicial-commutative-ring"
+        ],
+        "statement": "Assume the Axiom of Choice as inherited from the proper-hypercover theorem. Let $X_\\bullet\\to X$ be a proper hypercover and let $F$ be a coefficient complex in $D^b_c(X;k)$ with cochain lower bound $a$ ([[def-simplicial-object-and-simplicial-commutative-ring]]). Then the cohomology of the total complex in degree $m$, and its differential, are determined by the simplicial levels $p\\leq m-a+1$ only; every hypercover truncation $\\operatorname{cosk}_N\\operatorname{sk}_NX_\\bullet$ with $N\\geq m-a+1$ computes the same $H^m(X,F)$. In particular for the constant sheaf $F=k_X$, where $a=0$, degree $n$ uses only levels through $n+1$. Keeping only the cochain terms through level $n$ and omitting the outgoing differential does not suffice in general: the differential out of the term $(p,q)=(n,0)$ of the Cech complex lands in the level $n+1$ term $(n+1,0)$.",
+        "strategy": "Current authored proof, independently reviewed in alpha-batch-41 Step 3a:\n**Proof technique:** direct.\n\n1.1 Degree bookkeeping. In the total complex of the hypercover, the term in bidegree $(p,q)$ has $p\\geq0$ and $q\\geq a$ and contributes to total degree $p+q$. For a fixed total degree $m$ this gives $0\\leq p\\leq m-a$. The differentials entering and leaving total degree $m$ involve terms of total degree $m-1$, $m$ and $m+1$, so the largest simplicial level appearing in the data of $H^m$ and of its differential is $p=(m+1)-a=m-a+1$. [F1, given]\n\n2.1 The truncation computes the same cohomology. By [F1], the comparison of $X_\\bullet$ with its $N$-coskeleton truncation $\\operatorname{cosk}_N\\operatorname{sk}_NX_\\bullet$ is the identity through simplicial degree $N$, and the total complex in a fixed total degree uses only finitely many levels. Choosing $N\\geq m-a+1$ makes the two total complexes agree in degrees $m-1$, $m$ and $m+1$; hence they have the same $H^m$ and the same augmentation maps there. Since $m$ was arbitrary, every truncation with $N$ at least the stated bound computes the same cohomology $H^m(X,F)$. [F1, step 1.1, construct]\n\n3.1 Constant coefficients and sharpness for hard truncation. For $F=k_X$ the lower bound is $a=0$, so the actual total-degree computation uses the outgoing map from level $n$ to level $n+1$. To see that omitting that map can change the answer in every degree, take the proper surjection from two reduced points $S=\\{0,1\\}$ to a point and its Cech nerve. The map is proper since preimages of compact sets are finite, and its fiber powers are finite discrete spaces. A sheaf on a finite discrete space is a family of vector spaces, so global sections are a finite product and exact. Hence the derived section model has internal degree zero only. The normalized degree-$p$ cochains are $k^2$, indexed by the two alternating nondegenerate strings of length $p+1$. Interior deletions give degenerate strings and vanish in the normalized differential; the two endpoint deletions give $\\delta_p(v_0,v_1)=(v_1+(-1)^{p+1}v_0,v_0+(-1)^{p+1}v_1)$, which has rank one over every field. The full augmented complex is contracted by inserting one point, as in [F1], so its positive cohomology is zero and $H^0=k$. If one retains only cochain levels $0,\\ldots,n$ and discards $\\delta_n$, its top cohomology is $k$ for $n>0$ and $k^2$ for $n=0$, giving the wrong answer. Thus level $n+1$ is necessary in general for this hard truncation of the cochain data. A coskeleton truncation is different: it reconstructs higher levels from matching limits, so no claim that $\\operatorname{cosk}_n\\operatorname{sk}_nX_\\bullet$ itself fails descent is made. [F1, F2, step 1.1, step 2.1, algebra] ∎",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages.",
+              "url": "https://arxiv.org/pdf/math/0205027"
+            },
+            {
+              "title": "The Stacks Project, Hypercoverings (Chapter 0DEG), complete PDF; the homological-descent lemmas are read at the cited tags and pages.",
+              "url": "https://stacks.math.columbia.edu/download/hypercovering.pdf"
+            }
+          ]
+        },
+        "axiom_use": "AC is present only as inherited from the proper-hypercover theorem; the degree bookkeeping itself is choice-free.",
+        "dependency_level": 21
+      }
+    ]
+  }
+]

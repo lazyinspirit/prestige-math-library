@@ -1,0 +1,42 @@
+# Current integration inventory
+
+This is evidence-only reconstruction from current carriers, current run manifests/contracts, library frontmatter, native decisions and applied root receipts. No review round, source repair, native write or gate was performed. Hashes and all exact subject identities are in `current-inventory.json`.
+
+## Concrete mechanical edits
+
+The previous renewed-helper metadata join already added twelve helpers to native manifests and contract scope. Ten of those are still absent from every actual library page. Their current manifest Statements match the carrier bytes. Add each to its manifest-declared page (the structural counterexample is on its B/examples companion) in logical dependency order; preserve the original fifty batch/page frontier:
+
+- `cex-finite-type-based-modules-need-not-have-finite-basis-compatible-envelopes` → `balanced-triples-and-global-crystal-bases-examples`.
+- `lem-cyclotomic-klr-induction-restriction-bimodules-have-compatible-frobenius-dual-bases` → `cyclotomic-klr-algebras-and-highest-weight-categorification`.
+- `lem-cyclotomic-polynomial-flag-comparison-has-the-prescribed-second-mate-inverse` → `cyclotomic-klr-algebras-and-highest-weight-categorification`.
+- `lem-distinct-cyclotomic-shears-give-integrable-based-sl-two-chains` → `balanced-triples-and-global-crystal-bases`.
+- `lem-general-hecke-cellular-simple-labels-match-the-basic-crystal` → `level-one-fock-space-and-residue-crystals`.
+- `lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells` → `modular-branching-and-the-good-node-crystal`.
+- `lem-integral-divided-power-tensor-action-surjects-onto-type-a-q-schur-algebra` → `type-a-hecke-specht-modules-and-cellular-bases`.
+- `lem-integral-quantum-highest-weight-modules-identify-with-normalized-q-schur-weyl-cells` → `type-a-hecke-specht-modules-and-cellular-bases`.
+- `lem-oriented-minimal-parabolic-klr-normal-forms-and-cyclotomic-cap-ideal-intersection` → `cyclotomic-klr-algebras-and-highest-weight-categorification`.
+- `lem-polynomial-quantum-schur-first-level-weyl-filtration-and-hecke-corner` → `type-a-hecke-specht-modules-and-cellular-bases`.
+
+The periodic shear helper and terminal-dot residue helper currently lack current-run manifest, contract and actual page placement. Bind their current source bytes to their proposed metadata, then add the periodic helper to batch8 and the terminal-dot helper to batch47 after compatible dual bases. Do not register the broader prospective terminal-contractions helper from this snapshot: the parent reports a new carrier birth while this reconstruction ran; its stable author handoff and final checks must be bound first.
+
+`lem-cyclotomic-klr-word-traces-assemble-a-perfect-symmetric-form` also lacks those three entries, but this is a mathematical hold rather than safe completion bookkeeping: its common zero/one-return contraction maps are unproved in the latest bound progress receipt. Do not stamp this source or its coherent-biadjunction/symmetry consumers accepted.
+
+All eighteen HH items are draft and already placed on the two expressly authorized external HH context pages. Sixteen have no current-run manifest/contracts because those pages are outside the frozen fifty batches. That is not a request to add sixteen subjects or two pairs to the frontier. The two shared HH quantum tensor/descent helpers already appear in batch13 manifests/contracts and are also homed on their original HH context page. Context-contract evidence exists in `author_generic_schur_weyl/proof-contracts.proposed.json`; the Ariki–Koike owner supplied only `item-contracts-and-metadata-proposal.md`, so any machine-readable context contract transcribing those exact authored contracts must be recorded as mechanical transcription, not audited acceptance.
+
+After actual placement: finish native creation/origin registration using `integration/renewed-helper-metadata/origin-evidence-templates.json`; bind real page placement and attestation time, preserve worker coverage, recompute dependency levels and readiness. Do not invent absent HH2 proof/render/layout receipts.
+
+## Current holds and stale native escalation wording
+
+| Current subject group | Existing completed evidence | Smallest missing prerequisite / remaining integration | Cap |
+| --- | --- | --- | --- |
+| `lem-quasi-r-divided-power-integrality-on-based-lattices`; `thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules` | Integral action and bounded ordered corrections; shear-chain/structural counterexample authored | Arbitrary four-axiom finite-type algebraic tensor positive-q correction with finite inverse remains unproved; finite basis-compatible envelopes are disproved. Integrate completed chains/CEX as draft without accepting globalization. | Historical two rounds exhausted; explicit renewed authoring authorization preserves counters. |
+| Batch15 JM definition, simple-socle/cogood results, comparison remark, large example, modular A-page; batch16 restricted component and foreign JM observation | `modular-branching/renewed-authoring`: first-level, endpoint, label helpers authored; original old formal sections retained | Current native escalation text is not current mathematical evidence. Place three helpers; register origins; reconcile original historical findings to actual suppliers using current hashes and focused consumer evidence. No claim of independent acceptance. | Historical two rounds exhausted; renewed constructive authorization only. |
+| Batch47 diagram definition, flag model, PBW normal forms, cap-off intersection | Current source Statements match manifest mirrors; flag inverse and oriented-PBW/cap helper integrated in manifest/contracts; retained owner consumer-union evidence | Actual page placement of both helpers; origin registration; bind final model/diagram consumer checks and native closure rows without relying on older unresolved handoffs. | Historical cap preserved; no additional review conducted. |
+| `lem-cyclotomic-klr-coherent-graded-biadjunction-and-crossing-mates`; `thm-cyclotomic-klr-algebras-are-finite-dimensional-graded-symmetric`; batch47 page; `touched:50:def-graded-module-and-projective-grothendieck-groups-for-klr-towers` | Compatible Frobenius dual bases and actual terminal-dot/two-return residue calculation | Zero-return and one-return common external residual-map identification across separately distinguished partial categories; then ordered mixed mates / symmetric word-trace assembly. The prospective complete helper was not authored in the bound progress evidence. | Historical cap preserved; renewed construction is not new audit coverage. |
+| Batch47 jump, canonical extraction, simple/projective crystal, based quotient, lower/upper global-label subjects | `klr_jump`, `quantum_unsigned_extraction`, `klr_categorification/escalation-resolution-packet.json` | Current native escalation includes locally repaired results. Five label/crystal decision candidates remain blocked by authored confidence .98 and four absent closed physical rows; retain .98 honestly and do not manufacture confidence1. Register/validate exact owner route; supplier metadata then native historical-preserving reconciliation. | No confidence upgrade or extra review round authorized here. |
+
+Native48 projectivity/commutator observations are already integrated by `integration/native48-shared-defect/integration-receipt.json`; do not repeat the stale touched-anchor obligation from the older categorification summary. Eleven owner-stage bridges for batches32/37 are already integrated by the later bridge root application receipt; do not reappend those rows. Final-native receipt applied138 decisions/84 rows; bridge receipt applied11 decisions/9 rows. Their historical report status fields describe pre-application work.
+
+Six `repair_pending` native obligations in batch1 concern only three published subjects (`def-integer-power`, `thm-weighted-am-gm-rational`, and `roots-and-rational-powers`); a separate published-owner evidence audit must distinguish current carrier/receipt completion from those untouched native flags. This inventory retains the exact flags without falsely reopening mathematics.
+
+All 38 open markers (32 escalated plus6 repair_pending) observed at this snapshot are retained verbatim with decision-file hashes in the JSON. These are native routing markers, not thirty-eight independently current mathematical gaps.

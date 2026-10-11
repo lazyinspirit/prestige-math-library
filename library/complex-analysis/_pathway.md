@@ -55,6 +55,8 @@ parts:
       - periods-jacobians-and-abel-jacobi-theory
       - divisors-riemann-roch-and-duality
       - beltrami-equation-and-measurable-riemann-mapping
+      - projective-hodge-polarization-foundations
+      - compact-kahler-hodge-foundations
 ---
 
 ## holomorphic-functions
@@ -67,17 +69,18 @@ term, and its derivatives recover its coefficients.
 
 ## contours-and-cauchy
 
-Contour integration, Goursat and Cauchy turn local holomorphy into analyticity,
-residues and zero-pole counting; Poisson, Dirichlet, subharmonic, Green and
-capacity add boundary values and conformal covariance; Fatou, Blaschke and
-inner-outer factorisation give Hardy spaces their canonical form, while Bergman
-and Szegő kernels add reproducing kernels and invariant metrics. Hartogs,
-pseudoconvexity and Hörmander solve $\bar\partial$; on compact surfaces Hodge
-decomposition, divisors, Riemann–Roch and Abel–Jacobi turn periods and Jacobians
-into invariants. Runge-Mittag-Leffler, Weierstrass, Gamma and hypersurfaces
-serve approximation; Poisson-Jensen yields Nevanlinna theory; Montel,
-Schwarz-Pick, Bloch-Schottky-Picard, Riemann mapping, extremal length,
-quasiconformality, Beltrami solutions, measurable Riemann mapping, welding and
-removability close the conformal side; monodromy and uniformization globalise;
-elliptic functions and modular forms classify tori; the zeta page applies Euler
-products, continuation, functional equation.
+Contour integration, Goursat and Cauchy turn local holomorphy into
+analyticity, residues and zero-pole counting; Poisson, Dirichlet,
+subharmonic, Green and capacity add boundary values and conformal covariance;
+Fatou, Blaschke and inner-outer factorisation canonicalise Hardy spaces;
+Bergman–Szegő kernels add reproducing kernels and invariant metrics. Hartogs,
+pseudoconvexity and Hörmander solve $\bar\partial$; Hodge decomposition on
+compact Kähler manifolds gives harmonic representatives, Lefschetz
+decomposition, hard Lefschetz and projective Hodge–Riemann polarizations;
+divisors, Riemann–Roch and Abel–Jacobi follow. Runge-Mittag-Leffler,
+Weierstrass, Gamma and hypersurfaces approximate; Poisson-Jensen yields
+Nevanlinna theory; Montel, Schwarz-Pick, Bloch-Schottky-Picard, Riemann
+mapping, extremal length, quasiconformality, Beltrami solutions, measurable
+Riemann mapping, welding and removability close the conformal side; monodromy
+and uniformization globalise; elliptic functions and modular forms classify
+tori; the zeta page applies Euler products, continuation, functional equation.

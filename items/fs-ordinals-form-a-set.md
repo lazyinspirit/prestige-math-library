@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [thm-burali-forti, def-ordinal, lem-ordinal-basics]
+deps: [thm-burali-forti, def-ordinal, lem-ordinal-basics, thm-hartogs, def-cardinal]
 justified_by: []
 aliases: []
 landmark: false
@@ -15,16 +15,7 @@ short: "refuted by Burali-Forti"
 proof_strategy: contradiction
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: openai/gpt-5.4
-    verdict: pass
-    date: 2026-07-25
+  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-4/receipts/fs-ordinals-form-a-set.json
 sources:
   scraped: []
   references:
@@ -57,7 +48,7 @@ set already in hand, and here there is no such ambient set to start from.
 
 [L1] No set has every ordinal as a member ([[thm-burali-forti]]).
 
-[L2] Every element of an ordinal is an ordinal, and no ordinal is a member of itself ([[lem-ordinal-basics]]).
+[L2] Every element of an ordinal is an ordinal, no ordinal is a member of itself, and $\gamma^{+} = \gamma \cup \{\gamma\}$ is an ordinal whose members are exactly the ordinals at most $\gamma$ ([[lem-ordinal-basics]]).
 
 [L3] An ordinal is a transitive set on which $\in$ is a strict well-order, and $\alpha < \beta$ means $\alpha \in \beta$ ([[def-ordinal]]).
 
@@ -67,7 +58,7 @@ set already in hand, and here there is no such ambient set to start from.
 
 1.1 Suppose the claim: there is a set $\Omega$ whose members are exactly the ordinals. [assume-contra]
 
-1.2 The source of the intuition is genuine but limited: by [L3] and [L2] each ordinal $\alpha$ equals $\{\beta : \beta < \alpha\}$, so every collection of ordinals bounded above by some ordinal is a set, being a subset of that bound; by [A1] this says nothing about the unbounded collection of all ordinals. [A1, L2, L3]
+1.2 The source of the intuition is genuine but limited: by [L3] and [L2] each ordinal $\alpha$ equals $\{\beta : \beta < \alpha\}$, so every definable collection of ordinals bounded above by an ordinal $\gamma$ is a set, by Separation inside its successor $\gamma^{+}$, which includes the possible endpoint $\gamma$; by [A1] this says nothing about the unbounded collection of all ordinals. [A1, L2, L3]
 
 2.1 Under the supposition, $\Omega$ is a set having every ordinal as a member. [step 1.1]
 
@@ -79,6 +70,6 @@ set already in hand, and here there is no such ambient set to start from.
 
 **Bounded is not unbounded.** The honest version of the intuition is: for every ordinal $\alpha$, the ordinals below $\alpha$ form a set, namely $\alpha$ itself. Nothing in ZF upgrades a family of sets indexed by a proper class into one set, and the attempt to do so here is exactly what [[thm-burali-forti]] refutes.
 
-**The same trap, one level up.** "The sets form a set" fails for a closely related reason, and "the cardinals form a set" fails because the cardinals ([[def-cardinal]]) are unbounded among the ordinals. In each case the correct statement replaces "set" by "proper class", which in ZF means a formula rather than an object.
+**The same trap, one level up.** "The sets form a set" fails because such a set would contain every ordinal, contrary to [[thm-burali-forti]]. Cardinals ([[def-cardinal]]) are also unbounded among the ordinals, without choice: given an ordinal $\alpha$, let $H = \aleph(\alpha)$ from [[thm-hartogs]]. If $H \le \alpha$, inclusion would inject $H$ into $\alpha$, so $\alpha < H$ by ordinal comparability ([[lem-ordinal-basics]]). Every $\beta < H$ injects into $\alpha$ by the leastness of $H$; a bijection $H \to \beta$ would compose with that injection to inject $H$ into $\alpha$, a contradiction. Thus $H$ is a cardinal strictly above $\alpha$. If the cardinals formed a set $K$, its union would be an ordinal bounding all its members ([[lem-ordinal-basics]], claims (e) and (f)), contradicting this unboundedness. In each case the correct statement replaces "set" by "proper class", which in ZF means a formula rather than an object.
 
 **What is still available.** Nothing about the theory of ordinals needs them to form a set. Every construction on this page indexes by a *set* of ordinals, or by a single ordinal, or runs along an arbitrary well-order; [[thm-transfinite-recursion]] and [[thm-hartogs]] are both stated so that only sets are ever formed.

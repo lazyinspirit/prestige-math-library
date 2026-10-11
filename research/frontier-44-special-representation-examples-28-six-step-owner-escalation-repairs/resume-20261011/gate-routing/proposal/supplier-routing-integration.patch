@@ -1,0 +1,13 @@
+*** Begin Patch
+*** Update File: tools/step3-scope.mjs
+@@
+ import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
++import { ownerSupplierRepairContinuity } from './step3-owner-supplier-repair-continuity.mjs';
+@@
+             if (target?.observed_sha256 && decisionRows.some((row) => repaired.has(row.disposition))
+               && currentSha === target.observed_sha256
+-              && !priorAppliedRepair(decision, target, decisionRows)) {
++              && !priorAppliedRepair(decision, target, decisionRows)
++              && !(ownerEvidence?.supplier_repair_continuities ?? []).some(entry =>
++                ownerSupplierRepairContinuity(ROOT, run, decision, target, currentValue, decisionRows, entry))) {
+*** End Patch

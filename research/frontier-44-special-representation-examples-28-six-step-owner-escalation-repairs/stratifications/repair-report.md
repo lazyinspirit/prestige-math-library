@@ -1,0 +1,44 @@
+# Stratification supplier repair
+
+Run: `frontier-44-special-representation-examples-28-six-step`. Exact original allocation: four draft carriers; root subsequently allocated the exact new draft helper `lem-irreducible-complex-varieties-are-analytically-connected`. Source writes are finished. The four original Statements are byte-identical to saved preimages. Nothing was published, stamped, accepted, gated or changed in native decisions.
+
+## Defect and local construction
+
+The native batch32 and batch33 reports correctly identified that algebraic irreducibility and local holomorphic charts do not establish analytic connectedness. The connected-stratum convention and analytic frontier therefore lacked a proved supplier. Native33 triangulation/common-refinement and conical-cochain existence holds were actual downstream uses of this same missing comparison, not objections to the conditional triangulation theorem by itself. Their historical findings remain genuine.
+
+The new helper locally proves the comparison. A finite Noether normalization puts the affine coordinate domain over a polynomial ring. A faithful finite-module argument explicitly proves integrality. Localizing at the base fraction field gives a finite field extension, and a primitive element has a monic minimal polynomial with polynomial coefficients. Finite denominator clearing identifies the coordinate algebra with its monogenic hypersurface off a principal divisor. A cleared Bezout identity makes every remaining root simple. All roots have actual disjoint holomorphic implicit-function charts, which exhaust each nearby degree-m fibre, giving the required finite covering directly.
+
+A proposed analytic clopen partition selects an intrinsic subset of sheets of fixed cardinality over the connected base. Its root symmetric functions are holomorphic and locally bounded at the deleted hypersurface. The existing proved Riemann extension theorem extends them. The bound uses `1+norm` at the origin. All-radius polydisc coefficient estimates then show the extensions are polynomial. The resulting polynomial factorization of the minimal polynomial contradicts irreducibility. This corrects the source's faulty inference about unevaluated polynomial factors on separate components. Finally, the fully read locally proved normalized-curve-arc supplier gives analytic density of every nonempty Zariski open, and hence analytic connectedness of the whole irreducible variety and equality of the two closures of locally closed algebraic subsets. Zero-dimensional and empty-set cases are explicit.
+
+No new normalization, extension, or covering result is treated as unproved background. The needed existing published algebraic and holomorphic prerequisites remain unchanged.
+
+## Exact supplier repairs
+
+- `lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications`: add the connectedness/closure helper to deps and F6; new step6.1 turns its existing irreducible pieces into connected analytic strata and converts its algebraic frontier bookkeeping into the analytic frontier. Original Statement is preserved. Dependency level becomes2, since the new helper is level1.
+- `thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications`: add helper deps/F7 and actual connectedness/closure use in step5.1. The existing finite Whitney dimension induction, one-map compatibility and whole-preimage properness clauses remain. Original Statement is preserved.
+- `thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology`: declare the actual Whitney existence theorem directly in deps/F1; step1.1 applies it to the projective closure's identity map, then uses the conditional control/conical theorem. The compact triangulation premise is now actually supplied. Original Statement is preserved.
+- `lem-complex-algebraic-stratifications-have-finite-conical-cochain-models`: declare the smooth-partition supplier directly and explain its identity-map use in F1/6.1. Finite affine-chart strata are locally closed algebraic in the whole separated variety. Prescribing their closures and closed boundaries gives a finite global connected smooth algebraic constructibility witness. This avoids silently asserting a quasi-projective compactification or global Whitney theorem for a general separated variety. Original Statement is preserved.
+
+The first three changed proofs now record `ai-altered` proof provenance, with existing source URLs. All carriers remain draft.
+
+## Focused applicability review
+
+The four complete original/current assigned proofs were opened; their actual existence uses were checked in supplier order. The conditional compact controlled Whitney triangulation argument and conditional conical argument were read in full. Their input becomes available from the repaired Whitney theorem. The complete current incidence and finite-poset bar proofs were read, including realized closed-cell acyclicity, actual small-ball product comparison, compact supports, bounded finite diagrams, internal Hom and scalar extension. The local product coefficient argument in the triangulation theorem uses contractible tangential balls, finite link-simplex filtrations and fully faithful pullback; it does not assert invariance under arbitrary stratum-preserving homeomorphisms.
+
+The conical-cochain lemma's finite affine-open descent uses the ordinary topological Cech clause, not the formerly held algebraic-principal-GL restriction. Its explicit global smooth refinement preserves the finite-rank local systems on chart strata. Ordinary and support bounds remain finite because the cover/intersection set and all local coefficient models are finite.
+
+The separate owner `repair_equivariant_descent` was notified before completion, independently read the complete new helper and the actual normalization/minimal-coefficient/Riemann/power-series/curve-arc prerequisites, reopened all four supplier delta uses, and reported no necessary consumer source edit. That owner holds the shared outside consumer bindings and final consumer report. This is focused supplier/consumer maintenance, not an independent whole-corpus audit or native acceptance.
+
+No original Statement/Definition was altered, so no new formal-interface consumer transfer is required. The helper is new, and all its direct consumers are explicitly assigned here. No published prerequisite or consumer was edited.
+
+## Evidence and root integration
+
+`preimages/` and `preimages.json` bind original bytes. `statement-preservation.json` confirms exact original Statement preservation. `history-bindings.json` preserves native immutable pre/post hashes and genuine reader/refuter/alpha records. This is initial current owner round1 under the parallel brief; no review/source counter was reset and no native failed findings were relabelled.
+
+`source-ledger.json` and `sources/` record actual cached full relevant proof reading: Gallier-Shatz Theorem1.45/Lemma1.46 pp66-69, Goresky sections8.1-8.11 and32.1-32.2 through the derived equivalence, and the listed complete local supplier proofs. No new network acquisitions were attempted. The whole books, Shafarevich VII.2 and the full1978 image scan were not read and are not claimed as read.
+
+`integration-proposal.json` provides exact per-ID deps, Statement, proof provenance, levels and contracts for serialized ROOT integration. `proof-contracts.proposed.json` is a scoped five-item proposal, with all derivation steps, citation quotations and helper boundary cases. Its risk fields remain open for independent root review; successful local checks do not self-award acceptance. ROOT should add the new helper to the actual batch33 manifest and canonical plan, place it on the existing A page after the curve-arc helper, update the four corresponding records, and carry refreshed supplier bindings to their held consumers. Pages, aggregate manifests/contracts, plan, ledgers, decisions and engine state remain ROOT-only and untouched here.
+
+Final ordinary precheck:5 items,0 failures; renderer:5 files,exit0; proof-layout:5 items,32 steps,0 defects; proposed strict contracts:5/5,0 errors/warnings. `final-checks.json` records actual commands, outputs, exits, UTC dates and matching current raw hashes. `final-hashes.json` binds the finished five source files. Initial proposed-contract validation found one omitted explicit step1.1 input in smooth-partition4.1; the proposal was corrected and final strict validation passed. No validator or formatter edited the source after final layout.
+
+No unresolved smallest mathematical prerequisite remains in this local connectedness/refinement repair. Independent root review, root-only metadata integration, consumer hash refresh and native disposition remain required; no claimed gate closure or acceptance is made.

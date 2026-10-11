@@ -14,16 +14,7 @@ aliases: [def-power]
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-25
+  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/receipts/def-integer-power.json
 sources:
   scraped: []
   references:
@@ -71,18 +62,19 @@ well-determined element, because multiplicative inverses in a field are unique
 ([[lem-of-inverse-unique]]).
 
 **Integer exponents.** Every integer $m$ ([[def-integers]]) is either
-$\iota(n)$ or $-\iota(n)$ for a unique natural $n$, where $\iota$ is the
-embedding $\mathbb{N} \to \mathbb{Z}$ ([[lem-nat-embeds-int]],
+$n$ or $-n$ for a unique natural $n$, where $n$ in these integer expressions denotes its image under the
+embedding $\iota : \mathbb{N} \to \mathbb{Z}$ ([[lem-nat-embeds-int]],
 [[def-int-operations]]). This too is a citation and not a slogan: the order on
 $\mathbb{Z}$ is total ([[thm-int-ordered-ring]]), so $m \ge 0$ or $m < 0$; the
 image of $\iota$ is exactly the set of nonnegative integers, and each of them is
-$\iota(n)$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then
+$n$ for a unique natural $n$ ([[lem-nat-embeds-int]]); and if $m < 0$ then
 $-m > 0$, by compatibility of the order with addition ([[thm-int-ordered-ring]]),
-so $-m = \iota(n)$ and $m = -\iota(n)$, with $n$ unique because $\iota$ is
+so $-m = n$ and $m = -n$, with $n$ unique because $\iota$ is
 injective. The two clauses above therefore define $a^m$ for every
 $m \in \mathbb{Z}$ whenever $a \ne 0$, and for every $m \in \mathbb{N}$ for
-arbitrary $a$. The clauses are consistent where they overlap: the only overlap is
-$m = 0$, where $-\iota(0) = \iota(0)$ and $(a^0)^{-1} = 1^{-1} = 1 = a^0$.
+arbitrary $a$. The two exponent domains are disjoint: the natural clause
+handles $m \ge 0$, including $m = 0$, while the negative clause requires
+$n \ge 1$ and therefore handles only $m < 0$.
 
 ## Remarks
 

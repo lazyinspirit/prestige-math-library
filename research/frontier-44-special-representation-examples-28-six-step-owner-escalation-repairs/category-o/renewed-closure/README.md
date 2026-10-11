@@ -1,0 +1,3 @@
+Metadata-only correction: **8 historical-vs-current hashes plus 1 raw-vs-canonical domain hash**, exactly 9 fixed candidate rows. All 76 recorded current raw/canonical source guards still match, retaining the actual SAME-owner 73 focused consumer checks. No proof/source/retest/round changes.
+
+Use corrected-ledger-proposals.json as the full 14-row Category O candidate input (five rows unchanged), corrected-owner-shared-defect-proposals.json for corresponding row hashes, and affected-decision-id-map.json for unchanged decision-ID references. Original proposals and preimages remain preserved. Historical hashes are retained in historical_item_sha256 and rebind-report.json. Root alone applies the final append/native integration.

@@ -1,0 +1,88 @@
+{
+  "run": "frontier-44-special-representation-examples-28-six-step",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "9",
+  "input_sha256": "611b5e80297790067c6be056d7608c885bf0204ba72d0ec1318ac250ee968130",
+  "decisions": [
+    {
+      "id": "def-cyclic-affine-type-a-cartan-datum",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "750b9ecae8517d0592eb3639f4a4f9fb93a7a01bf60e8ad4a0370785650d7696",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F3 omits the complex Cartan space and minimal dimension condition. The explicit lattice construction remains valid: the constant-vector kernel has dimension one, so rank(A)=e-1 and dim(P^vee tensor C)=e+1=2e-rank(A). Corrected F3 and made this verification explicit in 3.2, without changing the Definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "18fb52dc8a4dc5ee91e8d0362239e328bbd04d4eaffb27a79934e628c5c1a7cc",
+      "outcome": "false_positive",
+      "reason": "The cited proposition Statement mentions the Laurent lattice, but its current proof 4.1 establishes the transported canonical lower lattice equals M intersect F0, and 5.1 identifies its residue crystal with the empty component. The height induction uses stable normalized operators and the no-common-kernel residue criterion; therefore current F2 is supported by its actual local dependency argument and needs no edit.",
+      "uncertain": false,
+      "source_urls": [
+        "https://webpages.math.luc.edu/~ptingley/oldseminars/QuantumGroupsSpring2011/Kashiwara91.pdf",
+        "https://leclercb.users.lmno.cnrs.fr/lectnotes_final.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-cyclic-affine-type-a-cartan-datum",
+      "disposition": "repaired",
+      "post_sha256": "89ad8e27b6e78a9e47e1ff2f68a137a139537d29fa3e3267173076da6d703715",
+      "review_context_sha256": "2c51b3b6171a1b47d6bbc178280edc1dc3df82a769567151278bc58e6270cb2a",
+      "reason": "Verified perfect lattice pairing, independent roots including e=2, one-dimensional Cartan kernel, complex minimal realization, level-zero roots, and normalized reflection-invariant weight form. F3 and proof 3.2 are repaired; the Definition is unchanged. Owning contract synchronized under the shared-write lock; strict contract, precheck and rendercheck pass. Local repair review, not an independent review of the repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero",
+      "disposition": "unaffected",
+      "post_sha256": "b265ad85cf374381104bc01070a664d3d27d65aac42f45f1a74e6e582bd93731",
+      "review_context_sha256": "36e44dc13d7df42288eab9173663df7e40ca56ccc37749f3d76cfaee3820021c",
+      "reason": "Verified the supplier lower-lattice descent and saturated residue inclusion in proof 4.1-5.1, regular empty-component identification, and the block-signature argument classifying highest labels by multiplicities divisible by e. Independent roots give finite label spaces and support in Lambda0-Q+, so F3 applies under declared AC; repeating each row e times gives weight Lambda0-k delta and p(k) multiplicity. Current F3 distinguishes canonical crystal components from a noncanonical field splitting. Item unchanged; scoped checks pass.",
+      "uncertain": false,
+      "source_urls": [
+        "https://webpages.math.luc.edu/~ptingley/oldseminars/QuantumGroupsSpring2011/Kashiwara91.pdf",
+        "https://leclercb.users.lmno.cnrs.fr/lectnotes_final.pdf"
+      ],
+      "familiar": false
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "repair_notes": [
+    "Cartan datum: F3 now includes the complex minimal-space dimension; Verification 3.2 checks it using the constant-vector kernel, including e=2. The original Definition is unchanged. No AC or new prerequisite is needed. The owning batch-9 contract was reread, regenerated only for this ID, checked and released under tools/step5-shared-write-lock.mjs.",
+    "Empty-component theorem: no item or contract edit. The current cited vacuum proposition supplies the asserted lower lattice in its complete proof 4.1 and the residue component in 5.1, even though its Statement does not spell out the lower lattice. The descent is sound: the top lattices agree, raising images lie in the canonical lattice by height induction, and a minimal positive q-denominator would give a nonzero homogeneous residue killed by all raising operators.",
+    "Sources actually consulted: Kashiwara 1991, section 2.6, printed pp. 477-479, Theorem 3 and complete Lemmas 2.6.1-2.6.3 proofs; Leclerc sections 3.11 and 3.14, printed pp. 24-26, for the Fock decomposition and regular crystal labels. The local argument, rather than a source citation alone, supplies the prerequisite.",
+    "Reviewed page interfaces on quantum-affine-type-a-and-level-one-fock-space and its examples companion. Neither assigned Statement/Definition changes, so no downstream event or outside-maintenance repair is generated. No published defect or unresolved mathematics was found.",
+    "Actual checks: node tools/tsx-run.mjs tools/precheck.mts items/def-cyclic-affine-type-a-cartan-datum.md items/thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero.md --json: exit 0, 2 checked, 0 failures. node tools/rendercheck.mjs with the same two explicit paths and --json: exit 0, 2 checked, 0 errors or warnings. node tools/proof-contract.mjs research/frontier-44-special-representation-examples-28-six-step-batch-9.proof-contracts.json --strict --items def-cyclic-affine-type-a-cartan-datum,thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero: exit 0, 2/2 checked, 0 errors or warnings. Final batched layout check: node tools/proof-layout.mjs items/def-cyclic-affine-type-a-cartan-datum.md: exit 0, 1 item, 11 steps, 0 defects. Current item guards and both original Statement/Definition hashes match recorded values."
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "def-cyclic-affine-type-a-cartan-datum",
+      "outcome": "confirmed_nonfatal",
+      "status": "repaired",
+      "reason": "F3 omits the complex Cartan space and minimal dimension condition. The explicit lattice construction remains valid: the constant-vector kernel has dimension one, so rank(A)=e-1 and dim(P^vee tensor C)=e+1=2e-rank(A). Corrected F3 and made this verification explicit in 3.2, without changing the Definition."
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero",
+      "outcome": "false_positive",
+      "status": "closed",
+      "reason": "The cited proposition Statement mentions the Laurent lattice, but its current proof 4.1 establishes the transported canonical lower lattice equals M intersect F0, and 5.1 identifies its residue crystal with the empty component. The height induction uses stable normalized operators and the no-common-kernel residue criterion; therefore current F2 is supported by its actual local dependency argument and needs no edit."
+    },
+    {
+      "ledger": "published-consumer-ledger",
+      "updates": [],
+      "reason": "No Statement/Definition changes and no potentially defective published consumers were discovered in this assigned review."
+    }
+  ],
+  "gate_resolutions": []
+}

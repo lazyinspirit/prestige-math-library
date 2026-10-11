@@ -1,0 +1,61 @@
+---
+id: thm-proper-hypercovers-compute-constructible-derived-cohomology
+kind: theorem
+title: "Proper hypercovers compute constructible derived cohomology"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 20
+deps: [def-axiom-of-choice, lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves, lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization, thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace, lem-analytic-constructible-sheaves-admit-coherent-six-operations, lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent, thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology, def-algebraically-constructible-complex-of-analytic-field-sheaves, def-analytic-topology-and-finite-smooth-algebraic-stratifications, def-simplicial-object-and-simplicial-commutative-ring]
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "D. Dugger, S. Hollander, D. C. Isaksen, Hypercovers and simplicial presheaves, Mathematical Proceedings of the Cambridge Philosophical Society 136 (2004), complete arXiv full text; Appendix A read at the cited pages."
+      url: "https://arxiv.org/pdf/math/0205027"
+    - title: "The Stacks Project, Hypercoverings (Chapter 0DEG), complete PDF; the homological-descent lemmas are read at the cited tags and pages."
+      url: "https://stacks.math.columbia.edu/download/hypercovering.pdf"
+---
+
+
+## Statement
+
+Assume the Axiom of Choice as inherited from the supplied six-functor resolutions. Let $X_\bullet\to X$ be an augmented simplicial finite-type complex algebraic variety ([[def-simplicial-object-and-simplicial-commutative-ring]], [[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]). Assume $X_0\to X$ is proper surjective and, for each $p>0$, $X_p\to(\operatorname{cosk}_{p-1}\operatorname{sk}_{p-1}X_\bullet)_p$ is proper surjective over $X$, where $\operatorname{sk}_{p-1}$ restricts to levels through $p-1$, $\operatorname{cosk}_{p-1}$ is its right Kan extension formed by finite matching limits, and the target is the matching object. Such an object is a proper hypercover; no smoothness or fiber acyclicity is assumed. For $F\in D^b_c(X;k)$ over a field, and $a_p:X_p\to X$, the augmentation gives
+$$F\xrightarrow{\sim}\operatorname{Tot}_{p\geq0}Ra_{p*}a_p^*F,\qquad R\Gamma(X,F)\xrightarrow{\sim}\operatorname{Tot}_{p\geq0}R\Gamma(X_p,a_p^*F).$$
+There is a natural strongly convergent spectral sequence $E_1^{p,q}=H^q(X_p,a_p^*F)\Rightarrow H^{p+q}(X,F)$. If $F$ has cochain lower bound $a$, every diagonal $p+q=m$ is finite; degree $m$ and its differential are determined by levels through $p=m-a+1$. All proper-hypercover refinements induce the same comparison via the base object; any two such hypercovers have a proper common refinement. For $F=k_X$, $a=0$, this is the first-quadrant spectral sequence required for smooth-projective hyperresolutions.
+
+## Facts & Assumptions
+
+**Given:** the augmented simplicial finite-type complex algebraic variety $X_\bullet\to X$ satisfying the proper-hypercover conditions of the Statement, the field $k$, and $F\in D^b_c(X;k)$ in the sense of [[def-algebraically-constructible-complex-of-analytic-field-sheaves]]. Skeleton and coskeleton are taken in augmented simplicial objects over $X$, with augmentation object $X$ in degree $-1$, so that $(\operatorname{cosk}_p\operatorname{sk}_pX_\bullet)_m=\lim_{[k]\to[m],\,k\leq p}X_k$ and the target $(\operatorname{cosk}_{p-1}\operatorname{sk}_{p-1}X_\bullet)_p$ is the $p$-th matching object; a bounded proper hypercover of height $n$ is one satisfying $U=\operatorname{cosk}_nU$. The Axiom of Choice [[def-axiom-of-choice]] is assumed as inherited from the supplied six-functor resolutions.
+
+[F1] [[lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves]] proves actual proper Cech descent for a proper surjection: the augmented derived Cech map is a quasi-isomorphism, with arbitrary base change, finite diagonals and no fiber acyclicity.
+
+[F2] [[lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization]] supplies the natural alternating-face chain-homotopy equivalence between a bicosimplicial total and its diagonal total, with the stated sign conventions and the internal lower bound.
+
+[F3] [[thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace]] and [[lem-analytic-constructible-sheaves-admit-coherent-six-operations]] supply the coherent ordinary operations, composition of derived right adjoints and restriction to bounded algebraically constructible complexes over an arbitrary field, each pulled coefficient again bounded below.
+
+[F4] [[lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent]] supplies functorial simplicial-derived diagrams, their strict resolutions, right-derived composition and uniformly bounded-below total models with finite-degree truncations; its local-section descent conclusion is not substituted for proper descent.
+
+[F5] [[thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology]] gives convergence for a filtration that is finite in each degree.
+
+[A1] [[def-axiom-of-choice]] is inherited only through the resolution inputs and [F1]; the finite coskeleton, product and retract constructions below make no new arbitrary selections.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Height zero and the induction setup. Let $U\to X$ be a bounded proper hypercover of height zero, that is $U=\operatorname{cosk}_0U_0$. By the convention of the Given, $U$ is the Cech nerve of the proper surjection $U_0\to X$, so [F1] proves both the sheaf and the global augmentation statements for $U$. Suppose inductively that they are proved for all bounded proper hypercovers of height at most $n$, and let $U=\operatorname{cosk}_{n+1}U$ have height $n+1$. Put $V:=\operatorname{cosk}_nU$. Its matching maps through degree $n$ are those of $U$, and in degrees $j>n$ its matching map is an isomorphism because $V=\operatorname{cosk}_nV$; hence $V$ is a proper hypercover of height at most $n$ and the induction hypothesis applies to $V$. [F1, given, construct]
+
+1.2 Levelwise proper surjectivity of $U\to V$. For every $j$ the map $U_j\to V_j$ is proper surjective. For $j\leq n$ it is the identity. For $j>n$ it reads $\operatorname{Hom}(\operatorname{sk}_{n+1}\Delta[j],U)\to\operatorname{Hom}(\operatorname{sk}_n\Delta[j],U)$: the domain is obtained from the codomain by adjoining the finitely many nondegenerate $(n+1)$-faces of $\Delta[j]$, whose boundaries already lie in the $n$-skeleton, so this map is a Cartesian pullback of the finite product of the matching map $U_{n+1}\to(\operatorname{cosk}_nU)_{n+1}=V_{n+1}$; a finite product over $X$ of proper surjections, and any base change of it, is proper surjective. No local sections are required, and all limits are the finite matching limits of the Given. [given, construct, algebra]
+
+2.1 The bisimplicial Cech model and the double total. Form the bisimplicial object $W_{r,j}=U_j\times_{V_j}\cdots\times_{V_j}U_j$ with $r+1$ factors, horizontally the Cech nerve of $U_j\to V_j$, and pull coefficients from $X$ throughout. By [F1] and step 1.2, for each fixed $j$ the horizontally augmented derived row computes the coefficient complex on $V_j$, before and after pushing forward to $X$: with $B_j:=(V_j\to X)^*F$ and $a_{r,j}:W_{r,j}\to X$ one has $Rb_{j*}B_j\simeq\operatorname{Tot}_rRa_{r,j*}a_{r,j}^*F$, where $b_j:V_j\to X$, the identifications being compatible with composition and finite sums by [F3] and [F4]. The induction hypothesis for $V$ gives $F\simeq\operatorname{Tot}_jRb_{j*}B_j$; substituting the row identifications and using that every total diagonal is finite (the internal degrees are bounded below by the same $a$, by [F3]) identifies the iterated total with the full total, so $F\simeq\operatorname{Tot}_{r,j}Ra_{r,j*}a_{r,j}^*F$ and the analogous global statement hold. By [F2] this double total is naturally chain-homotopy equivalent to the total on the diagonal $D_j:=W_{j,j}$. [F1, F2, F3, F4, step 1.1, step 1.2]
+
+3.1 The retract over $X$. The bounded hypercover $U$ is a retract over $X$ of $D$. The map $i:U\to D$ repeats the same $U_j$-point in all $j+1$ horizontal factors, the horizontal degeneracy; through degree $n$ the map $U_j\to V_j$ is the identity, so $D_j=U_j$ there, and in degree $n+1$ let $r_{n+1}:D_{n+1}\to U_{n+1}$ be the projection to the first horizontal factor. Its faces and degeneracies agree with the degree-$\leq n$ identity identifications, because every horizontal factor of $W$ has the same image in $V$ and the lower-degree maps are identities; this defines a map of $(n+1)$-truncated simplicial objects over $X$, and the universal property $U=\operatorname{cosk}_{n+1}U$ extends it uniquely to $r:D\to U$. The composite $ri$ is the identity through degree $n+1$: in lower degrees because $i$ is the diagonal and $r$ the factor projection on $D_j=U_j$, and in degree $n+1$ because repeating a point and projecting a factor returns it; hence $ri=\mathrm{id}$ in every degree by the same universal property. Coefficient pullback reverses these maps, and since $r\circ i=\mathrm{id}$ the augmented total of $U$ is a retract of the augmented total of $D$; by step 2.1 the cone of the augmentation of $D$ is acyclic, and a retract of an acyclic cone is acyclic, so the augmentation of $U$ is a quasi-isomorphism. This completes the bounded-height induction. [F2, F4, step 1.1, step 2.1, construct]
+
+4.1 Arbitrary height by truncation. For an arbitrary proper hypercover $U$, put $U^{(N)}:=\operatorname{cosk}_N\operatorname{sk}_NU$; it is a bounded proper hypercover, so step 3.1 applies to it, and the canonical map $U\to U^{(N)}$ is the identity through simplicial degree $N$. In the strict derived total model every internal degree is at least $a$; hence total degrees $m-1$, $m$ and $m+1$ involve only simplicial levels $p\leq m-a+1$, because a term of total degree $m+1$ has $p+q=m+1$ with $q\geq a$. Choose $N\geq\max(0,m-a+1)$; then the totals for $U$ and $U^{(N)}$ have the same objects and the same differentials in these three degrees, so the same degree-$m$ cohomology and the same augmentation maps. Since $m$ was arbitrary, the augmentation for $U$ is a quasi-isomorphism, and degree $m$ with its differential is determined by levels through $p=m-a+1$. This is a finite-degree truncation argument, not an interchange of stalks or cohomology with an unjustified infinite product. [F4, step 3.1, construct]
+
+5.1 The spectral sequence and convergence. Filter the global total of step 4.1 by simplicial degree. Its first page is $E_1^{p,q}=H^q(X_p,a_p^*F)$, with first differential the alternating sum of face pullbacks by the naturality of [F3]; in degree $m$ the filtration has only the finitely many pieces $0\leq p\leq m-a$. By [F5] the stationary page is identified, naturally, with the finite associated graded of $H^m(X,F)$; this proves strong convergence and requires no finite-dimensionality of the individual groups $H^q(X_p,a_p^*F)$. [F3, F5, step 4.1]
+
+6.1 Refinements and constant coefficients. For two proper hypercovers $U,V$ of $X$, the levelwise product $R_j:=U_j\times_XV_j$ is a proper hypercover: finite matching limits commute with products, so each matching map of $R$ is the product over $X$ of the matching maps of $U$ and $V$, hence proper surjective, and the levelwise projections give maps of simplicial objects $R\to U$ and $R\to V$ over $X$. By step 4.1 the augmentations of $U$, $V$ and $R$ all identify their totals with the same coefficient complex on $X$, and the refinement maps are compatible with those identifications by naturality of the augmentation, so all proper-hypercover refinements induce the same comparison via the base object. A smooth-projective refinement requires a separate supplied construction: a fiber product of smooth varieties over $X$ need not be a smooth variety, so no smoothness is asserted here. For $F=k_X$ the lower bound is $a=0$ and the page of step 5.1 is exactly the stated first-quadrant spectral sequence. The Axiom of Choice is inherited precisely through [A1]. [F3, A1, step 4.1, step 5.1, construct] ∎

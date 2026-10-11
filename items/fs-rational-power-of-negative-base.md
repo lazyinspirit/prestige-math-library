@@ -14,16 +14,7 @@ landmark: false
 proof_strategy: contradiction
 verification:
   precheck: pass
-  verified:
-    model: claude-opus-5
-    verdict: certify
-    date: 2026-07-26
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-26
+  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/receipts/fs-rational-power-of-negative-base.json
 sources:
   scraped: []
   references:
@@ -54,7 +45,7 @@ and this item is the reason for that restriction.
 
 **Given:** The base $a = -8$ and the rational $r = 1/3$; the formula under test is $a^{m/n} = \big(a^{1/n}\big)^{m}$, in which $a^{1/n}$ has to denote a real number whose $n$-th power is $a$ ([[def-rational-power]], [[thm-nth-roots-exist]]).
 
-[A1] Numerals denote canonical naturals. For a natural $k$ the symbol $k$ inside $\mathbb{R}$ means $\iota(k) = k \cdot 1_{\mathbb{R}}$, where $\iota$ is the canonical order-preserving field embedding; $\iota(k) > 0$ for $k \ge 1$, and $\iota$ preserves products ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). So $8 > 0$, and therefore $-8 < 0$, since $x > 0$ means $x \in P$ and $0 - (-x) = x \in P$ says $-x < 0$ ([[def-ordered-field]]; none of the items just named states this passage from a positive element to its negative). Also $2^{3} = \iota(2)\iota(2)\iota(2) = \iota(8) = 8$ ([[def-integer-power]]). This is where the numerals of this item enter $\mathbb{R}$; the order on $\mathbb{Q}$ ([[def-rat-order]]) is not what is being used when we write $-8 < 0$ in $\mathbb{R}$.
+[A1] Numerals denote canonical naturals. For a natural $k$ the symbol $k$ inside $\mathbb{R}$ denotes the image $k\cdot1_{\mathbb{R}}$, where $\iota : \mathbb{Q}\to\mathbb{R}$ is the canonical order-preserving field embedding; these field images are positive for natural $k\ge1$, and $\iota$ preserves products ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]). So $8 > 0$, and therefore $-8 < 0$, since $x > 0$ means $x \in P$ and $0 - (-x) = x \in P$ says $-x < 0$ ([[def-ordered-field]]; none of the items just named states this passage from a positive element to its negative). Also $2^{3}=2\cdot2\cdot2=8$ ([[def-integer-power]]). This is where the numerals of this item enter $\mathbb{R}$; the order on $\mathbb{Q}$ ([[def-rat-order]]) is not what is being used when we write $-8 < 0$ in $\mathbb{R}$.
 
 [A2] The same rational has many representatives: $1/3 = 2/6$ in $\mathbb{Q}$, since $1 \cdot 6 = 3 \cdot 2$ ([[def-rationals]]). For a formula in $m$ and $n$ to define a function of $r$, all representatives must give the same value, which for positive bases is [[lem-rational-power-well-defined]].
 
@@ -80,4 +71,4 @@ and this item is the reason for that restriction.
 
 - **Precisely what fails.** For a negative base the formula does not produce two different numbers; it produces a number from some representatives and nothing at all from others. That is still a failure of well-definedness: a definition of $a^{r}$ must depend only on the rational $r$, and this one depends on how $r$ is written.
 - **The odd-denominator repair, and why it is not adopted.** If one restricts to rationals admitting a representative $m/n$ with $n$ odd, and always uses such a representative, the formula is consistent, because odd roots of negatives exist and are unique ([[fs-negative-has-square-root]] records this). What one gets is a partial operation, defined on the proper subset of $\mathbb{Q}$ of rationals with odd denominator in lowest terms, not on $\mathbb{Q}$. The library does not adopt it: it is not the operation of [[def-rational-power]], its exponents form only a proper subring of $\mathbb{Q}$ (every rational whose lowest-terms denominator is even is missing, $1/2$ among them, so the square root that [[thm-of-square-roots]] supplies for nonnegative bases has no counterpart here), and every later use on this page, from [[thm-weighted-am-gm-rational]] to [[thm-minkowski-finite]], needs arbitrary rational exponents on a base that is nonnegative anyway.
-- The restriction to $a > 0$ is therefore not squeamishness about signs. It is the exact condition under which $a^{1/n}$ exists for every $n \ge 1$, which is what makes the value independent of the representative.
+- Nonnegativity $a \ge 0$ is the exact condition under which real $n$-th roots exist for every $n \ge 1$: zero has root zero at every order ([[thm-nth-roots-exist]]), while a negative base has no square root. Strict positivity $a > 0$ is needed to allow every rational exponent, including negative ones, because the root must then have an inverse. The supplementary zero-base clause of [[def-rational-power]] instead covers positive rational exponents.

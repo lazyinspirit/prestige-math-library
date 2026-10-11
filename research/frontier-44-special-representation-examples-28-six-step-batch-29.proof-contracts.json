@@ -1,0 +1,1695 @@
+{
+  "version": 1,
+  "level": "frontier-44-special-representation-examples-28-six-step",
+  "scope": [
+    "def-truncation-functors-and-cohomology-of-a-t-structure",
+    "lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition",
+    "lem-nilpotent-lefschetz-filtration-is-canonical-and-self-dual",
+    "lem-truncation-triangles-are-essentially-unique-and-functorial",
+    "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+    "lem-hard-lefschetz-splits-a-bounded-t-structure-complex",
+    "ex-hard-lefschetz-splitting-for-a-three-degree-complex"
+  ],
+  "contracts": {
+    "def-truncation-functors-and-cohomology-of-a-t-structure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition quantifies over every $X\\in\\mathcal T$, so the zero object is included; its amplitude is the empty set of integers and each of its truncation triangles is the zero triangle."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition places the zero object in both aisles and defines amplitude as a set of degrees, so the zero object has vanishing amplitude and trivial truncations."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The heart is the intersection of the two degree-zero aisles. Its objects have t-cohomology only in degree zero; the converse from cohomological concentration uses boundedness in the following amplitude-detection lemma, not the Definition alone."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundedness clause of the Definition covers vanishing objects explicitly: every object must lie in some $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$, and the zero object lies in each such intersection."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes both ends of a truncation triangle: its terms lie in $\\mathcal T^{\\le n}$ and $\\mathcal T^{\\ge n+1}$, and the connecting map lands in $\\tau_{\\le n}X[1]$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition makes no selection: the decomposition triangle comes from the t-structure axiom, and truncation data are unique up to a unique compatible isomorphism."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The 'exactly when' clauses of the Definition are its shift conventions: membership of $X$ in $\\mathcal T^{\\le n}$ is equivalent to membership of $X[n]$ in $\\mathcal T^{\\le0}$, and likewise on the other side."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Read in the other direction, the same Definition rows are still definitional: membership of $X[n]$ in the degree-zero aisle characterises membership of $X$ in $\\mathcal T^{\\le n}$, and similarly for $\\mathcal T^{\\ge n}$."
+        }
+      ]
+    },
+    "lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kernels-and-cokernels-as-equalizers-and-coequalizers",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ be a category with specified zero morphisms\n([[def-category-with-zero-morphisms]]), and let $f:A\\to B$.\n\nThe **kernel** of $f$ is an equalizer\n\n$$\\ker(f)\\xrightarrow{k}A\\mathrel{\\substack{\\xrightarrow{f}\\\\[-0.6ex] \\xrightarrow[0_{A,B}]{} }}B.$$\n\nThe **cokernel** of $f$ is a coequalizer\n\n$$A\\mathrel{\\substack{\\xrightarrow{f}\\\\[-0.6ex] \\xrightarrow[0_{A,B}]{} }}B\\xrightarrow{q}\\operatorname{coker}(f).$$\n\nin the sense of [[def-equalizers-and-coequalizers]]. Thus $fk=0$ and every\n$h$ with $fh=0$ factors uniquely through $k$; dually, $qf=0$ and every $h$\nwith $hf=0$ factors uniquely through $q$.",
+          "uses": [
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-image-and-coimage-in-a-category-with-kernels-and-cokernels",
+          "source_section": "Definition",
+          "quote": "Let $f:A\\to B$ be a morphism in a category with kernels and cokernels\n([[def-kernels-and-cokernels-as-equalizers-and-coequalizers]]).\n\nThe **image** of $f$ is the kernel of a cokernel of $f$:\n\n$$\\operatorname{im}(f):=\\ker(\\operatorname{coker}(f)).$$\n\nThe **coimage** of $f$ is the cokernel of a kernel of $f$:\n\n$$\\operatorname{coim}(f):=\\operatorname{coker}(\\ker(f)).$$\n\nThis page uses the object notation $\\operatorname{im}(f)$ and\n$\\operatorname{coim}(f)$. Their defining arrows are the corresponding kernel and\ncokernel maps.",
+          "uses": [
+            "2.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-short-exact-sequence-is-a-kernel-cokernel-pair",
+          "source_section": "Statement",
+          "quote": "For morphisms\n$$0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$$\nin an abelian category, the following are equivalent:\n\n1. the sequence is short exact;\n2. $i$ is a kernel of $p$ and $p$ is a cokernel of $i$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-exact-sequence-and-short-exact-sequence-in-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "A sequence of morphisms in an abelian category is **exact** when it is exact at\nevery interior object in the sense of [[def-exactness-at-a-node]].\n\nIn particular, a composable triple\n$$0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$$\nis a **short exact sequence** when it is exact at $A$, at $B$, and at $C$.\n\nThis page uses the sequence language literally: the definition names exactness\nof displayed chains of morphisms, not chain complexes as objects.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "source_section": "Statement",
+          "quote": "In an abelian category, every monomorphism is the kernel of its cokernel, and\ndually every epimorphism is the cokernel of its kernel.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-splitting-lemma-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "Let\n$$0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$$\nbe a short exact sequence in an abelian category.\n\n1. If $s:C\\to B$ satisfies $p s = 1_C$, then there is a unique morphism\n   $\\pi:B\\to A$ such that\n   $$\\pi i = 1_A,\\qquad i \\pi + s p = 1_B.$$\n2. If $\\pi:B\\to A$ satisfies $\\pi i = 1_A$, then there is a unique morphism\n   $s:C\\to B$ such that\n   $$p s = 1_C,\\qquad i \\pi + s p = 1_B.$$\n\nIn either case the sequence is split.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-split-short-exact-sequence-in-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "A short exact sequence\n$$0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$$\nin an abelian category is **split** when there exist morphisms\n$$s:C\\to B,\\qquad \\pi:B\\to A$$\nsuch that\n$$p s = 1_C,\\qquad \\pi i = 1_A,\\qquad i \\pi + s p = 1_B.$$\n\nEquivalently, the five-tuple $(B,i,s,\\pi,p)$ is the biproduct diagram of $A$\nand $C$ in the sense of [[def-biproduct]]. The point of the definition is the\ndisplayed compatible structure, not merely an abstract isomorphism\n$B \\cong A \\oplus C$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-biproduct",
+          "source_section": "Definition",
+          "quote": "A finite family $(A_i)_{i\\in I}$ in a category with zero morphisms has a\n**biproduct** when both its coproduct and its product exist and the canonical morphism from the\ncoproduct to the product is an isomorphism\n([[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).\n\nWhen this happens, either object may be written\n\n$$\\bigoplus_{i\\in I}A_i,$$\n\nsince the canonical comparison identifies them uniquely. For two objects one\nwrites $A\\oplus B$, and for the empty family one speaks of the **empty\nbiproduct**.\n\nTransporting the product structure across the canonical comparison to the\ncoproduct object makes that comparison the identity. The resulting common\nobject, injections, and projections form the associated **biproduct diagram**;\nthis is the convention used whenever both kinds of structure maps are written\non one displayed object.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-every-monomorphism-is-the-kernel-of-its-cokernel",
+          "source_section": "Statement",
+          "quote": "In an abelian category, every monomorphism is the kernel of its cokernel, and\ndually every epimorphism is the cokernel of its kernel.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $m\\ge2$ the map $L:H^{-m}\\to H^{-m+2}$ is a monomorphism, because $L^m=L^{m-1}L$ is an isomorphism: if $Lu=0$ then $L^mu=L^{m-1}Lu=0$, hence $u=0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For every $r\\ge0$ the map $p:=L^{r+1}:H^{-r}\\to H^{r+2}$ is an epimorphism and $s:=L(L^{r+2})^{-1}:H^{r+2}\\to H^{-r}$ satisfies $ps=1_{H^{r+2}}$, because $pL=L^{r+2}$ is an isomorphism: if $vp=0$ then $vL^{r+2}=vpL=0$, hence $v=0$, and $ps=L^{r+1}L(L^{r+2})^{-1}=L^{r+2}(L^{r+2})^{-1}=1$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fix $r\\ge0$ and let $i:P^{-r}\\to H^{-r}$ be the kernel of $p=L^{r+1}$. Since $p$ is epic by step 1.2, [F2] makes $0\\to P^{-r}\\xrightarrow{i}H^{-r}\\xrightarrow{p}H^{r+2}\\to0$ short exact. Its section $s=L(L^{r+2})^{-1}$ gives, by [F3], a projection $\\pi:H^{-r}\\to P^{-r}$ with $\\pi i=1$, $i\\pi+sp=1$ and $\\pi s=0$. Put $t=L:H^{-r-2}\\to H^{-r}$ and $g=L^{r+2}:H^{-r-2}\\to H^{r+2}$. Then $g$ is an isomorphism, $s=tg^{-1}$, $pt=g$ and $\\pi t=\\pi sg=0$. Consequently $(i,t):P^{-r}\\oplus H^{-r-2}\\to H^{-r}$ has inverse $(\\pi,g^{-1}p)$: the diagonal composites are identities, the off-diagonal composites vanish, and $i\\pi+tg^{-1}p=i\\pi+sp=1$. Since $t$ is monic by step 1.1, [F4] identifies its source with its image. Hence this is the canonical decomposition $H^{-r}=P^{-r}\\oplus LH^{-r-2}$. The endomorphism $sp$ projects onto the second summand, whereas its projection to the source $H^{-r-2}$ is $g^{-1}p$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Base of the induction: for $j=0$ the object $H^{-r}$ is the biproduct of $P^{-r}=L^0P^{-r}$ and $L^1H^{-r-2}=LH^{-r-2}$. This is exactly the decomposition of step 2.1, so the assertion holds for $j=0$.",
+          "step": "3.1",
+          "inputs": [
+            "base",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Induction hypothesis: fix $j\\ge0$ and assume the assertion for this $j$, that is, $H^{-r}$ is the biproduct of $P^{-r},LP^{-r-2},\\dots,L^jP^{-r-2j}$ and $L^{j+1}H^{-r-2j-2}$; we must derive it for $j+1$.",
+          "step": "3.2",
+          "inputs": [
+            "ih",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Applying step 2.1 with $r$ replaced by $r+2j+2$ gives the biproduct decomposition $H^{-r-2j-2}=P^{-r-2j-2}\\oplus LH^{-r-2j-4}$. The map $L^{j+1}:H^{-r-2j-2}\\to H^{-r}$ is a monomorphism, being a composite of the monomorphisms of step 1.1; by [F4] it carries this biproduct diagram to the biproduct diagram of its image, $\\operatorname{im}(L^{j+1})=L^{j+1}P^{-r-2j-2}\\oplus L^{j+1}(LH^{-r-2j-4})=L^{j+1}P^{-r-2j-2}\\oplus L^{j+2}H^{-r-2j-4}$. Substituting this into the biproduct of the induction hypothesis (step 3.2) gives that $H^{-r}$ is the biproduct of $P^{-r},LP^{-r-2},\\dots,L^{j+1}P^{-r-2j-2}$ and $L^{j+2}H^{-r-2j-4}$, which is the assertion for $j+1$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By induction (steps 3.1, 3.2 and 4.1) the biproduct decomposition of step 3.2 holds for every $j\\ge0$. Since $H^n=0$ for all sufficiently negative $n$, choose $J$ with $H^{-r-2J-2}=0$; then the tail $L^{J+1}H^{-r-2J-2}$ vanishes, and $H^{-r}$ is the biproduct of $P^{-r},LP^{-r-2},\\dots,L^JP^{-r-2J}$, i.e. the finite direct sum decomposition $H^{-r}=\\bigoplus_{j\\ge0}L^jP^{-r-2j}$ of the Statement. Each restricted power $L^j|_{P^{-r-2j}}$ is a monomorphism, being for $j\\ge1$ a composite of the monomorphisms of step 1.1 and for $j=0$ the primitive kernel inclusion.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "given",
+            "algebra",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Applying the isomorphism $L^r:H^{-r}\\to H^r$ to the decomposition of step 5.1 carries the biproduct decomposition of $H^{-r}$ to a biproduct decomposition of $H^r$ with summands $L^r(L^jP^{-r-2j})=L^{r+j}P^{-r-2j}$, giving $H^r=\\bigoplus_{j\\ge0}L^{r+j}P^{-r-2j}$. Each restricted power $L^{r+j}|_{P^{-r-2j}}=L^r\\circ\\bigl(L^j|_{P^{-r-2j}}\\bigr)$ is a monomorphism, being the composite of an isomorphism with the monomorphism of step 5.1.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Naturality. Let $\\varphi_j:H^j\\to H'^{\\,j}$ be a morphism of graded objects into another such family $(H'^{\\,j},L'^{\\,j})$ with $L'\\varphi_j=\\varphi_{j+2}L$ for all $j$. Then $\\varphi$ commutes with every iterate: $L'^{\\,r}\\varphi_{-r}=\\varphi_rL^r$, hence $(L'^{\\,r+2})^{-1}\\varphi_{r+2}=\\varphi_{-r-2}(L^{r+2})^{-1}$; consequently $\\varphi_{-r}$ carries $P^{-r}=\\ker L^{r+1}$ into $P'^{\\,-r}=\\ker L'^{\\,r+1}$, because $L'^{\\,r+1}\\varphi_{-r}i=\\varphi_{r+2}L^{r+1}i=0$ and the kernel inclusion of $L'^{\\,r+1}$ has the universal property of [F1]. The comparison $\\pi'\\varphi_{-r}=\\varphi^P\\pi$ of the projections holds because both sides become equal after composition with the monomorphism $i'$, where $\\varphi^P:P^{-r}\\to P'^{\\,-r}$ is the factorization of $\\varphi_{-r}i$ through $i'$; and $\\varphi_{-r}s=s'\\varphi_{r+2}$ holds by the displayed commutation with the inverses of $L^{r+2},L'^{\\,r+2}$. So $\\varphi$ preserves the decomposition of step 2.1, and by the same chain of identities at the parameter $r+2j+2$ it maps each summand $L^jP^{-r-2j}$ into $L'^{\\,j}P'^{\\,-r-2j}$ and intertwines the two finite decompositions of step 5.1; the second decompositions, obtained in step 6.1 from the first by the isomorphisms $L^r,L'^{\\,r}$, are intertwined as well.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 5.1",
+            "step 6.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The base case of step 3.1 and the induction step of step 4.1 establish the hypothesis of step 3.2 for every $j\\ge0$, so step 5.1 gives the first displayed decomposition for every $r\\ge0$, and steps 6.1 and 7.1 give the second decomposition, the monomorphism clause and naturality; the degenerate cases are included, since a zero object has all its summands zero and every argument above is an identity between finitely many morphisms.",
+          "step": "8.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 6.1",
+            "step 7.1",
+            "discharge-induction",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 5.1 terminates the peeling once $H^{-r-2J-2}=0$, leaving finitely many primitive summands and a vanishing tail; step 8.1 records that a zero object has all its summands zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 8.1: the degenerate cases are included because a zero object has all summands zero and every argument in the proof is an identity between finitely many morphisms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 peels the first summand: $H^{-r}$ is the biproduct of the single primitive piece $P^{-r}$ and the tail $LH^{-r-2}$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1 handles the case of a vanishing tail by choosing $J$ with $H^{-r-2J-2}=0$, so the decomposition stops after finitely many displayed summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 opens the induction at $j=0$ and step 5.1 closes it at the finite $J$; step 4.1 re-peels the tail at the parameter $r+2j+2$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All structure used is supplied by kernels, their universal property and the biproduct components of the splitting lemma, so nothing is selected from a family of sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim consists of direct sum decompositions, monomorphism clauses and naturality, not of a biconditional, so no forward implication of an equivalence is at issue."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the decompositions are constructed from the hypothesis $L^r:H^{-r}\\to H^r$ an isomorphism, rather than characterised by it."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all ten steps and all nine actual supplier interfaces. The split section s=tg^{-1}, inverse (pi,g^{-1}p), pi t=0 and identity i pi+t g^{-1}p=1 are well typed; mono-image identification holds in an arbitrary abelian category. Iteration uses only L on degrees at most -2, terminates by finite support, and L^r transfers the negative-degree decomposition. Naturality follows from inverse commutation and kernel uniqueness. Checked r=0, zero family, finite tail, and primitive kernel inclusions for zero-th powers; no AC. Reader report accepted after independent review; no refuter finding on this carrier. Source: de Cataldo–Migliorini v2 Theorem 4.4.4(b), printed p.36, and Remark 4.4.5 distinguish graded decomposition from derived primitive lifts."
+      }
+    },
+    "lem-nilpotent-lefschetz-filtration-is-canonical-and-self-dual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nilpotent-jordan-string-basis",
+          "source_section": "Statement",
+          "quote": "Every nilpotent endomorphism $N$ of a finite-dimensional vector space $V$ has an ordered basis that is the concatenation of Jordan strings for $N$ at $0$. For $V=0$, this is the empty basis and the empty family of strings.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "9.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $H^j$, $j\\in\\mathbb Z$, be objects of an abelian category, zero for all but finitely many $j$, and let $L_j:H^j\\to H^{j+2}$ be morphisms whose iterates give isomorphisms $L^r:H^{-r}\\to H^r$ for every $r\\ge0$, with $L^0=1_{H^0}$. Put $P^{-r}:=\\ker\\bigl(L^{r+1}:H^{-r}\\to H^{r+2}\\bigr)$ for $r\\ge0$, and $P^{-r}=0$ for $r<0$. Then for every $r\\ge0$ the powers of $L$ induce finite direct sum decompositions\n$$H^{-r}=\\bigoplus_{j\\ge0}L^jP^{-r-2j},\\qquad H^{r}=\\bigoplus_{j\\ge0}L^{r+j}P^{-r-2j},$$\nwhere $L^jP^{-r-2j}$ denotes the image of the restriction of $L^j$ to the subobject $P^{-r-2j}\\subseteq H^{-r-2j}$, and likewise for $L^{r+j}P^{-r-2j}$. Each displayed power $L^j$ or $L^{r+j}$ restricts to a monomorphism on its primitive source, and both decompositions are natural for morphisms commuting with $L$. This is a decomposition statement for graded objects in an abelian category; it does not identify primitive objects with classes annihilated by an untruncated map on a derived splitting of a complex.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-modules-over-a-ring-form-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "For every ring $R$, the category $R\\text{-}\\mathbf{Mod}$ of left $R$-modules is\nan abelian category.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dual-family-is-a-basis-in-finite-dimension",
+          "source_section": "Statement",
+          "quote": "If $B=(b_1,\\ldots,b_n)$ is a basis of a finite-dimensional $F$-vector space $V$, then its dual family $B^*=(b_1^*,\\ldots,b_n^*)$ is a basis of $V^*$. Consequently $\\dim V^*=\\dim V=n$.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-annihilators-under-the-evaluation-pairing",
+          "source_section": "Definition",
+          "quote": "Let $U\\leq V$ be a linear subspace. Its **annihilator** in the algebraic dual is\n\n$$U^\\circ:=\\{f\\in V^*:f(u)=0\\text{ for every }u\\in U\\}\\leq V^*.$$\n\nFor a linear subspace $S\\leq V^*$, its **preannihilator** in $V$ is\n\n$$ {}^\\circ S:=\\{v\\in V:f(v)=0\\text{ for every }f\\in S\\}\\leq V.$$\n\nBoth are linear subspaces because all their defining equations are homogeneous and linear. The superscript position records which side of the evaluation pairing $V^*\\times V\\to F$ is being annihilated.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bilinear-forms-correspond-to-linear-maps-into-the-dual",
+          "source_section": "Statement",
+          "quote": "The assignment\n\n$$B\\longmapsto B^\\flat,\\qquad B^\\flat(v)(w)=B(v,w),$$\n\nis a linear bijection from the vector space of bilinear forms on $V$ to $\\mathcal L(V,V^*)$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form",
+          "source_section": "Definition",
+          "quote": "Let $B$ be a bilinear form on an $n$-dimensional vector space $V$, and let $\\mathcal B=(v_0,\\ldots,v_{n-1})$ be an ordered basis. The **matrix of $B$ in $\\mathcal B$** is\n\n$$[B]_{\\mathcal B}:=(B(v_i,v_j))_{i,j<n}.$$\n\nFor coordinate columns $x=[u]_{\\mathcal B}$ and $y=[v]_{\\mathcal B}$, one has $B(u,v)=x^{\\mathsf T}[B]_{\\mathcal B}y$.\n\nThe **left radical** and **right radical** are\n\n$$\\operatorname{rad}_L(B):=\\{u:B(u,v)=0\\text{ for every }v\\},\\qquad \\operatorname{rad}_R(B):=\\{v:B(u,v)=0\\text{ for every }u\\}.$$\n\nThe **rank of $B$** is the rank of the associated map $B^\\flat:V\\to V^*$, $B^\\flat(u)(v)=B(u,v)$. The form is **nondegenerate** when both radicals are zero. In finite dimension this is equivalent to $B^\\flat$ being an isomorphism, and also to $[B]_{\\mathcal B}$ being invertible.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix a Jordan string basis of $H$ as in [F1], with strings $v_{c,1},\\dots,v_{c,l_c}$ indexed by $c$. Give $v_{c,t}$ the **weight** $2t-l_c-1$, so that the weights on a string of length $l_c$ are $-l_c+1,-l_c+3,\\dots,l_c-1$, and let $W_i$ be the span of all $v_{c,t}$ with weight at most $i$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On a Jordan string $v_1,\\dots,v_l$, one has $\\ker N^{a+1}=\\langle v_t:1\\le t\\le\\min(a+1,l)\\rangle$ and $\\operatorname{im}N^b=\\langle v_t:1\\le t\\le l-b\\rangle$, since $N^jv_t=v_{t-j}$ for $t>j$ and is zero otherwise. For $1\\le t\\le l$, the vector $v_t$ belongs to a summand $\\ker N^{a+1}\\cap\\operatorname{im}N^b$ with $a-b=i$ exactly when some integer $b$ satisfies $\\max(0,-i,t-i-1)\\le b\\le l-t$. Such a $b$ exists exactly when $2t-l-1\\le i$: necessity follows from $t-i-1\\le l-t$, and sufficiency follows because $l-t\\ge0$ and $2t-l-1\\le i$ also gives $-i\\le l-t$. Thus the sum of these nested spans consists precisely of the string vectors of weight at most $i$, including the zero and whole-string cases.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Consequences of [F2] for an admissible filtration $W$. The graded pieces $\\operatorname{Gr}_s=W_s/W_{s-1}$ are $F$-vector spaces, zero for all but finitely many $s$, and $N$ induces $\\bar N:\\operatorname{Gr}_s\\to\\operatorname{Gr}_{s-2}$. Putting $G^j:=\\operatorname{Gr}_{-j}$ and $\\lambda^j:=\\bar N:G^j\\to G^{j+2}$, the hypothesis says that $\\lambda^r:G^{-r}\\to G^r$, which is $\\bar N^r:\\operatorname{Gr}_r\\to\\operatorname{Gr}_{-r}$, is an isomorphism for every $r\\ge0$. [F2] therefore gives, with $P_m:=\\ker(\\bar N^{m+1}:\\operatorname{Gr}_m\\to\\operatorname{Gr}_{-m-2})$ for $m\\ge0$, the decompositions $\\operatorname{Gr}_s=\\bigoplus_{m\\ge|s|,\\ m\\equiv s\\,(2)}\\bar N^{(m-s)/2}P_m$ for every $s$ (the first display of [F2] for $s\\ge0$, the second for $s<0$), each restricted power being a monomorphism. Moreover for $t\\le -q$ the map $\\bar N^q:\\operatorname{Gr}_{t+2q}\\to\\operatorname{Gr}_t$ is surjective: with $m':=-t\\ge q$ each summand $\\bar N^{m'+j}P_{m'+2j}$ of the displayed decomposition of $\\operatorname{Gr}_t$ equals $\\bar N^q(\\bar N^{m'+j-q}P_{m'+2j})$, and $\\bar N^{m'+j-q}P_{m'+2j}\\subseteq\\operatorname{Gr}_{m'+2j-2(m'+j-q)}=\\operatorname{Gr}_{t+2q}$.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "For a subspace $U\\subseteq H$, [F4] gives $U^\\perp=(S^\\sharp)^{-1}(U^\\circ)$, hence $\\dim U^\\perp=\\dim H-\\dim U$ by [F3]. Define the left-orthogonal complement ${}^{\\perp}U:=\\{v:S(v,u)=0\\text{ for all }u\\in U\\}$. Using $S^\\flat$ instead gives $\\dim{}^{\\perp}U=\\dim H-\\dim U$. The inclusion $U\\subseteq{}^{\\perp}(U^\\perp)$ follows directly from $S(U,U^\\perp)=0$; both sides have the same dimension, so ${}^{\\perp}(U^\\perp)=U$ by [F3]. Also $H^\\perp=0$ by nondegeneracy and $\\{0\\}^\\perp=H$. No symmetry of $S$ is used.",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "Skew-adjointness iterated: $S(N^rv,w)=(-1)^rS(v,N^rw)$ for all $r\\ge0$, by induction on $r$ from $S(Nv,w)=-S(v,Nw)$.",
+          "step": "1.5",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The filtration of step 1.1 is admissible: it is increasing and finite by construction, and $N(W_i)\\subseteq W_{i-2}$ because $Nv_{c,t}=v_{c,t-1}$ has weight $2(t-1)-l_c-1=(2t-l_c-1)-2$ while $Nv_{c,1}=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The filtration of step 1.1 satisfies the intrinsic formula of the Statement: both $W_i$ and the sum $\\sum_{a-b=i}\\ker N^{a+1}\\cap\\operatorname{im}N^b$ are direct sums over the strings of their chainwise parts, because $N$ preserves each string span and the spans of the strings form a direct sum decomposition of $H$; by the chainwise computation of step 1.2 these parts are the same span of weights at most $i$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "The filtration of step 1.1 has $N^r:\\operatorname{Gr}_r\\to\\operatorname{Gr}_{-r}$ an isomorphism for every $r\\ge0$: chainwise, $\\operatorname{Gr}_r$ is spanned by the classes of the $v_{c,t}$ of weight exactly $r$, and $N^r$ sends such a class to the class of $v_{c,t-r}$ of weight $-r$, which is an isomorphism on each string and hence on the direct sum of the stringwise graded pieces.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "For any admissible $W$ the graded surjectivity of step 1.3 upgrades to $N^{m+1}(W_{m-1})=W_{-m-3}$ for every $m\\ge0$. Indeed $N^{m+1}(W_{m-1})\\subseteq W_{-m-3}$, and for surjectivity one shows $W_s\\subseteq N^{m+1}(W_{m-1})$ by ascending induction on $s$: for $x\\in W_s$ apply step 1.3 with $q=m+1$ and $t=s\\le -m-3$ to get $y\\in W_{s+2m+2}$ with $[N^{m+1}y]=[x]$ in $\\operatorname{Gr}_s$; then $N^{m+1}y-x\\in W_{s-1}$, which lies in the image by the induction hypothesis, so $x$ does too; the induction starts with $W_s=0$ for $s$ very negative and runs up to $s=-m-3$. Note $s+2m+2\\le m-1$, so $y$ may be taken in $W_{m-1}$.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-5",
+          "claim": "Define $W'_i:=(W_{-i-1})^\\perp$ for every $i$. Then $W'$ is an increasing finite filtration: $i\\le j$ gives $W_{-i-1}\\supseteq W_{-j-1}$ and hence $W'_i\\subseteq W'_j$; for $i$ very negative, $W_{-i-1}=H$ and $W'_i=H^\\perp=0$; for $i$ very positive, $W_{-i-1}=0$ and $W'_i=\\{0\\}^\\perp=H$. Moreover $N(W'_i)\\subseteq W'_{i-2}$: for $x\\in(W_{-i-1})^\\perp$ and $w\\in W_{-i+1}$ one has $S(w,Nx)=-S(Nw,x)=0$ because $Nw\\in W_{-i-1}$, so $Nx\\in(W_{-i+1})^\\perp=W'_{i-2}$.",
+          "step": "2.5",
+          "inputs": [
+            "step 1.4",
+            "step 1.5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix an admissible $W$. Only finitely many $P_m$ in step 1.3 are nonzero, and each is finite-dimensional by [F3]; choose a finite basis of each using the extension theorem in [F3]. For each of these finitely many basis classes choose a representative $v\\in W_m$. Primitivity gives $N^{m+1}v\\in W_{-m-3}$, since its class in $\\operatorname{Gr}_{-m-2}$ vanishes. By step 2.4 choose $u\\in W_{m-1}$ with $N^{m+1}u=N^{m+1}v$ and replace $v$ by $v-u$. The representative now satisfies $N^{m+1}v=0$. Its string $v,Nv,\\dots,N^mv$ lies in $W_m,W_{m-2},\\dots,W_{-m}$ and has graded classes $\\bar N^i[v]$ of weight $m-2i$. All selections are finite.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.3",
+            "step 2.4",
+            "choose",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The pairing $\\operatorname{Gr}^W_{-i}\\times\\operatorname{Gr}^{W'}_i\\to F$, $([v],[x])\\mapsto S(v,x)$, is well defined: $x\\in W'_i=(W_{-i-1})^\\perp$ kills errors in $W_{-i-1}$ in the first variable, and errors in $W'_{i-1}=(W_{-i})^\\perp$ kill $v\\in W_{-i}$ in the second. If $S(v,W'_i)=0$, then $v\\in{}^{\\perp}((W_{-i-1})^\\perp)=W_{-i-1}$ by step 1.4, so the left kernel vanishes. If $S(W_{-i},x)=0$, then $x\\in W'_{i-1}$, so the right kernel vanishes. The pairing induces injections from each graded space to the dual of the other; [F3] then forces their dimensions to agree, and rank-nullity makes both injections isomorphisms. Thus the pairing is perfect.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.4",
+            "step 2.5",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The graded classes of the string vectors of step 3.1 are linearly independent and span every $\\operatorname{Gr}_s$: in the decomposition of step 1.3, $\\operatorname{Gr}_s$ is the direct sum over $m\\ge|s|$, $m\\equiv s\\ (2)$ of the images of the monomorphisms $\\bar N^{(m-s)/2}:P_m\\to\\operatorname{Gr}_s$, so the images of the chosen bases form a basis of $\\operatorname{Gr}_s$. Hence the string vectors are linearly independent, since a nontrivial finite combination would have a nonzero class in the largest weight occurring. They span $H$ by ascending induction on $s$: if every element of $W_{s-1}$ is a combination of string vectors of weight at most $s-1$ and $x\\in W_s$, then either $[x]=0$ in $\\operatorname{Gr}_s$ and $x\\in W_{s-1}$, or $[x]$ is a combination of string classes of weight exactly $s$, and subtracting the corresponding string vectors leaves an element of $W_{s-1}$; the induction starts where $W_s=0$. This proves $W_s\\subseteq\\langle\\text{string vectors of weight}\\le s\\rangle$ for every $s$, and the reverse inclusion is clear; consequently the string vectors form a basis of $H$ and $W_i$ is exactly the span of those of weight at most $i$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For any admissible $W$ the $W'$-graded maps $\\bar N^r:\\operatorname{Gr}^{W'}_r\\to\\operatorname{Gr}^{W'}_{-r}$ are isomorphisms. Let $\\psi:\\operatorname{Gr}^W_{-r}\\to(\\operatorname{Gr}^{W'}_r)^*$ and $\\phi:\\operatorname{Gr}^W_r\\to(\\operatorname{Gr}^{W'}_{-r})^*$ be the isomorphisms induced by the perfect pairings of step 3.2, and let $T:=\\bar N^r:\\operatorname{Gr}^{W'}_r\\to\\operatorname{Gr}^{W'}_{-r}$. For $y\\in W_r$ and $x\\in W'_r$ steps 1.5 and the definitions give $\\psi(\\bar N^r[y])([x])=S(N^ry,x)=(-1)^rS(y,N^rx)=(-1)^r(T^*\\phi[y])([x])$, so $T^*=(-1)^r\\psi\\bar N^r\\phi^{-1}$ is an isomorphism because $\\bar N^r:\\operatorname{Gr}^W_r\\to\\operatorname{Gr}^W_{-r}$ is an isomorphism by the admissibility of $W$; a linear map between finite-dimensional spaces whose transpose is an isomorphism is itself an isomorphism: surjectivity of $T^*$ forces $\\ker T=0$ because every functional on the source then factors through $T$, and bijectivity of $T^*$ and [F3] give equality of the source and target dimensions, so rank-nullity makes $T$ surjective as well.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "step 1.5",
+            "step 3.2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Every admissible $W$ equals the intrinsic formula and hence the filtration of step 1.1; in particular the admissible filtration is unique. The strings of step 3.1 form a basis of $H$ and satisfy $N^{m+1}v=0$, so each is a Jordan string for $N$ in the sense of [F1]; the chainwise computation of step 1.2 applied to this basis says that $\\sum_{a-b=i}\\ker N^{a+1}\\cap\\operatorname{im}N^b$ is exactly the span of the string vectors of weight at most $i$, which is $W_i$ by step 4.1. This formula depends only on $N$, and the filtration of step 1.1 satisfies it too by step 2.2; hence every admissible $W$ equals it.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.2",
+            "step 4.1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The filtration $W'$ of step 2.5 is admissible: it is an increasing finite filtration with $N(W'_i)\\subseteq W'_{i-2}$ by step 2.5, and its graded maps are isomorphisms by step 4.2. By the uniqueness of step 5.1, $W'=W$.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.5",
+            "step 4.2",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Consequently $(W_i)^\\perp=W_{-i-1}$ for every $i$: $W'=W$ reads $(W_{-i-1})^\\perp=W_i$, and reindexing $j:=-i-1$ gives the claim. Moreover the pairing $\\operatorname{Gr}^W_i\\times\\operatorname{Gr}^W_{-i}\\to F$, $([v],[w])\\mapsto S(v,w)$, is perfect: it is the pairing of step 3.2 read with $W'=W$.",
+          "step": "7.1",
+          "inputs": [
+            "step 3.2",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "The forms $S_i$ are well defined and nondegenerate. For the restriction of $S$ to a pairing on $\\operatorname{Gr}^W_i$: an error $v'\\in W_{i-1}$ in the first argument contributes $S(v',N^iw)=0$ because $N^iw\\in W_{-i}$ and $(W_{i-1})^\\perp=W_{-i}$ by step 7.1, and an error $w'\\in W_{i-1}$ in the second contributes $S(v,N^iw')=0$ because $N^iw'\\in W_{-i-1}=(W_i)^\\perp$ by admissibility and step 7.1. Thus $S_i$ is well defined on $\\operatorname{Gr}^W_i\\times\\operatorname{Gr}^W_i$, and it is the composite of the perfect pairing $\\langle[v],[x]\\rangle:=S(v,x)$ of step 7.1 with the second variable $[w]\\mapsto N^i[w]$, which is an isomorphism $\\operatorname{Gr}^W_i\\to\\operatorname{Gr}^W_{-i}$ by the admissibility of $W$; hence the induced map $\\operatorname{Gr}^W_i\\to(\\operatorname{Gr}^W_i)^*$, $[v]\\mapsto S_i([v],-)$ is an isomorphism: $S_i$ is nondegenerate.",
+          "step": "8.1",
+          "inputs": [
+            "given",
+            "step 7.1"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "Steps 2.1, 2.2 and 2.3 exhibit the admissible filtration and identify it with the intrinsic formula; step 5.1 proves that any admissible filtration equals that formula, which is uniqueness; steps 6.1, 7.1 and 8.1 prove the self-duality, the perfect pairing and the descended forms $S_i$. The zero space is included: its empty string basis of [F1] gives the zero filtration $W_i=0=H$, which is admissible and agrees with the intrinsic formula, which is zero for every $i$.",
+          "step": "9.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 5.1",
+            "step 6.1",
+            "step 7.1",
+            "step 8.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 9.1 runs the whole statement on the zero space, whose empty Jordan string basis of [F1] produces the zero filtration and agrees with the intrinsic formula; step 1.2 records the empty spans that occur when no weight reaches the bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.5: the dual filtration takes the values $W'_i=0$ for very negative $i$ and $W'_i=H$ for very positive $i$, so the zero and full pieces at the extremes are covered; step 9.1 treats the zero space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: a single Jordan string of length one carries the single weight $0$, so $W_i=0$ below degree zero and $W_i=H$ from degree zero on, which the formula verified in step 5.1 reproduces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Proof 1.2 uses an integer feasibility interval, covering indices below the least string weight and above its greatest weight; Proof 9.1 covers the zero space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Proofs 2.4 and 4.1 use finite ascending induction from vanishing lower filtration terms. Proof 1.2 covers every integer index without a crossing approximation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Every selection in step 3.1 is finite: bases of the finitely many nonzero graded pieces of a finite filtration, and representatives of their nonempty cosets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No biconditional is asserted. The form clause assumes nondegeneracy and skew-adjointness, without a symmetry hypothesis; Proofs 1.4 and 3.2 distinguish left and right annihilators."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication to discharge: uniqueness is established by identifying every admissible filtration with the intrinsic formula in step 5.1, not by proving a converse of it."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Independently read all 19 steps, each of the 15 supplier statements/definitions, Jordan-string proof, and de Cataldo–Migliorini v2 §4.5 (22)–(26), printed p.37. The source assumes symmetry or skew symmetry; the local proof works for arbitrary nondegenerate bilinear S by distinguishing right and left orthogonals. Checked the integer interval in 1.2 for all weights, degree reversal and graded surjectivity, finite ascending lifting induction, adapted Jordan basis, mixed left(right(U))=U by dimension, and transpose typing in 4.2. Both radicals descend correctly; characteristic two signs remain units. Refuter:29:1 is confirmed fatal: a length-three Jordan block over Q gives e1 in W0 with Ne1=e0 in W-2 but outside W-3. Corrected only 8.1 to N^i(W_(i-1)) subset W_(-i-1)=(W_i)^perp. The other-variable error uses (W_(i-1))^perp=W_-i. Perfect graded pairing composed with the admissible N^i isomorphism establishes nondegeneracy. Zero space, N=0, i=0, and large positive/negative filtration endpoints checked. All basis/lift selections finite; no AC. Reader nonsymmetric repairs accepted, additional bound repaired completely; Statement and deps unchanged."
+      }
+    },
+    "lem-truncation-triangles-are-essentially-unique-and-functorial": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-long-exact-hom-sequences-of-a-distinguished-triangle",
+          "source_section": "Statement",
+          "quote": "For every $W$ and distinguished triangle $X\\to Y\\to Z\\to X[1]$, both\n$$\\cdots\\to\\mathcal T(W,X)\\to\\mathcal T(W,Y)\\to\\mathcal T(W,Z)\\to\\mathcal T(W,X[1])\\to\\cdots$$\nand the oppositely oriented sequence with $\\mathcal T(-,W)$ are exact.",
+          "uses": [
+            "1.1",
+            "2.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-canonical-t-structure-on-a-derived-category",
+          "source_section": "Definition",
+          "quote": "For a triangulated category $T$ with shift $[1]$, a **t-structure** is a pair of strictly full subcategories $(T^{\\leq0},T^{\\geq0})$ such that $T^{\\leq0}[1]\\subseteq T^{\\leq0}$, $T^{\\geq0}[-1]\\subseteq T^{\\geq0}$, $\\operatorname{Hom}_T(T^{\\leq0},T^{\\geq1})=0$, and every $X$ has a distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in T^{\\leq0}$ and $B\\in T^{\\geq1}$. Here $T^{\\geq1}=T^{\\geq0}[-1]$ and $T^{\\leq n}=T^{\\leq0}[-n]$, $T^{\\geq n}=T^{\\geq0}[-n]$. Its **heart** is $T^{\\leq0}\\cap T^{\\geq0}$.\n\nFor the triangulation of [[thm-the-derived-category-inherits-a-triangulated-structure]], the canonical candidate is $D^{\\leq0}=\\{X:H^i(X)=0\\text{ for }i>0\\}$ and $D^{\\geq0}=\\{X:H^i(X)=0\\text{ for }i<0\\}$, using [[prop-cohomology-factors-through-the-derived-category]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-triangulated-category-axiom-tr-three",
+          "source_section": "Definition",
+          "quote": "**TR3** says that if two distinguished triangles have first arrows $f,f'$ and\n$bf=f'a$, then some $c$ makes $(a,b,c)$ a morphism of triangles. It is an\nexistence assertion: neither $c$ nor the completion is asserted unique.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-morphism-and-isomorphism-of-triangles",
+          "source_section": "Definition",
+          "quote": "A morphism from $(X,Y,Z,f,g,h)$ to $(X',Y',Z',f',g',h')$ is a triple\n$(a,b,c)$ with $bf=f'a$, $cg=g'b$, and $a[1]h=h'c$. It is an\n**isomorphism of triangles** when $a,b,c$ are isomorphisms.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-triangulated-five-lemma",
+          "source_section": "Statement",
+          "quote": "If a morphism of distinguished triangles has two adjacent object components\nisomorphisms, then its remaining component is an isomorphism.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-zero-and-split-triangles-are-distinguished",
+          "source_section": "Statement",
+          "quote": "In a triangulated category, $X\\to0\\to X[1]\\xrightarrow{1}X[1]$ and the\ncanonical biproduct triangle\n$$X\\xrightarrow{\\binom{1}{0}}X\\oplus Y\\xrightarrow{(0\\;1)}Y\\to X[1]$$\nare distinguished.",
+          "uses": [
+            "1.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+          "source_section": "Statement",
+          "quote": "Every integral translate, every left rotation, and every inverse rotation of a\ndistinguished triangle is distinguished, with the signs determined by\n[[def-rotation-of-a-triangle]].",
+          "uses": [
+            "1.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-additive-category",
+          "source_section": "Definition",
+          "quote": "An **additive category** is a preadditive category\n([[def-preadditive-category]]) with all finite biproducts.\n\nEquivalently, a preadditive category is additive when it has a zero object and\nbinary biproducts: a zero object is both initial and terminal\n([[def-initial-terminal-and-zero-object]]) and therefore supplies both the empty\ncoproduct and the empty product\n([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]); their\ncanonical comparison is the unique endomorphism of the zero object and hence\nthe identity, so this is an empty biproduct. Meanwhile,\nbinary biproducts iterate\nusing the canonical associativity and unitality isomorphisms\n([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]])\nto give every finite biproduct.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-biproduct",
+          "source_section": "Definition",
+          "quote": "A finite family $(A_i)_{i\\in I}$ in a category with zero morphisms has a\n**biproduct** when both its coproduct and its product exist and the canonical morphism from the\ncoproduct to the product is an isomorphism\n([[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).\n\nWhen this happens, either object may be written\n\n$$\\bigoplus_{i\\in I}A_i,$$\n\nsince the canonical comparison identifies them uniquely. For two objects one\nwrites $A\\oplus B$, and for the empty family one speaks of the **empty\nbiproduct**.\n\nTransporting the product structure across the canonical comparison to the\ncoproduct object makes that comparison the identity. The resulting common\nobject, injections, and projections form the associated **biproduct diagram**;\nthis is the convention used whenever both kinds of structure maps are written\non one displayed object.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Let $A\\xrightarrow{a}X\\xrightarrow{b}B\\to A[1]$ be distinguished with $A\\in\\mathcal T^{\\le n}$ and $B\\in\\mathcal T^{\\ge n+1}$. For $T\\in\\mathcal T^{\\le n}$, the exact segment $\\operatorname{Hom}(T,B[-1])\\to\\operatorname{Hom}(T,A)\\xrightarrow{a_*}\\operatorname{Hom}(T,X)\\to\\operatorname{Hom}(T,B)$ has zero outer terms by [F2], since $B[-1]\\in\\mathcal T^{\\ge n+2}$. Thus $a_*$ is bijective. Dually, for $T\\in\\mathcal T^{\\ge n+1}$ the segment $\\operatorname{Hom}(A[1],T)\\to\\operatorname{Hom}(B,T)\\xrightarrow{b^*}\\operatorname{Hom}(X,T)\\to\\operatorname{Hom}(A,T)$ has zero outer terms, since $A[1]\\in\\mathcal T^{\\le n-1}$, so $b^*$ is bijective.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $A\\xrightarrow{f}B\\to0\\to A[1]$ is a distinguished triangle, then $f$ is an isomorphism. Indeed, the triangle $B\\xrightarrow{1}B\\to0\\to B[1]$ is distinguished by [F4], and $(f,1_B,0)$ is a morphism of triangles from the first to the second, commuting with all three arrows; the components $1_B$ and $0\\to0$ are adjacent isomorphisms, so $f$ is an isomorphism by [F3].",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Claim (i). Let $A\\xrightarrow{a}X\\xrightarrow{b}B\\to A[1]$ be distinguished with $A\\in\\mathcal T^{\\le n}$, $B\\in\\mathcal T^{\\ge n+1}$, and let $P\\xrightarrow{p}X\\xrightarrow{q}Q\\to P[1]$ be the truncation triangle. By step 1.1 applied to the truncation triangle with $T=A$ there is a unique $f:A\\to P$ with $pf=a$, and applied to the given triangle with $T=P$ there is a unique $f':P\\to A$ with $af'=p$. Then $p(ff')=af'=p=p\\,1_P$, and $ff'=1_P$ because $\\operatorname{Hom}(P,P)\\to\\operatorname{Hom}(P,X)$ is injective by step 1.1 applied to the truncation triangle with $T=P$; symmetrically $f'f=1_A$ using the given triangle with $T=A$. So $f$ is an isomorphism. By TR3 [F3] the commutative square $(f,1_X)$ extends to a morphism of triangles $(f,1_X,g)$, which is an isomorphism of triangles because $f$ and $1_X$ are adjacent isomorphism components, and its middle component is the identity of $X$. For uniqueness, let $(f'',1_X,g'')$ be another such isomorphism; then $pf''=a$, so $f''=f$ by the uniqueness in step 1.1 applied to the truncation triangle with $T=A$. Hence the composite of $(f'' ,1_X,g'')$ with the inverse of $(f,1_X,g)$ is an automorphism $(1_A,1_X,d)$ of the given triangle; it satisfies $db=b$, and $\\operatorname{Hom}(B,B)\\to\\operatorname{Hom}(X,B)$, $v\\mapsto vb$, is injective by step 1.1 applied to the given triangle with $T=B\\in\\mathcal T^{\\ge n+1}$, so $d=1_B$ and the isomorphism over $X$ is unique.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Claim (ii), the $\\le$ side. Fix the truncation triangle $P_X\\xrightarrow{p_X}X\\xrightarrow{q_X}Q_X\\to P_X[1]$ for every $X$. For $f:X\\to Y$, the composite $f p_X$ lies in $\\operatorname{Hom}(P_X,Y)$, and step 1.1 applied to the truncation triangle of $Y$ with $T=P_X\\in\\mathcal T^{\\le n}$ gives a unique map $\\tau_{\\le n}f:P_X\\to P_Y$ with $p_Y(\\tau_{\\le n}f)=fp_X$. This makes $\\tau_{\\le n}$ a functor: $\\tau_{\\le n}(1_X)=1_{P_X}$ by uniqueness, and for $X\\xrightarrow{f}Y\\xrightarrow{h}Z$ both $\\tau_{\\le n}(hf)$ and $\\tau_{\\le n}h\\circ\\tau_{\\le n}f$ have the same composite with $p_Z$, so they are equal by the uniqueness. The map $\\operatorname{Hom}(T,P_X)\\to\\operatorname{Hom}(T,X)$, $u\\mapsto p_Xu$, is a bijection for $T\\in\\mathcal T^{\\le n}$ by step 1.1 applied to the truncation triangle of $X$, and it is natural in $X$ because both $p_Y(\\tau_{\\le n}f\\,u)$ and $f(p_Xu)$ equal $(fp_X)u$. Applying the same argument with arrows reversed to the truncation triangle at $n-1$, whose third vertex is $\\tau_{\\ge n}X$, makes $X\\mapsto\\tau_{\\ge n}X$ a functor and gives a bijection $\\operatorname{Hom}(\\tau_{\\ge n}X,T)\\to\\operatorname{Hom}(X,T)$ for $T\\in\\mathcal T^{\\ge n}$. The final vanishing $\\operatorname{Hom}(\\mathcal T^{\\le n},\\mathcal T^{\\ge n+1})=0$ is [F2].",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Claim (iii), the $\\le$ side. Let $P\\xrightarrow{p}X\\xrightarrow{q}Q\\to P[1]$ be the truncation triangle. The following are equivalent: (a) $X\\in\\mathcal T^{\\le n}$; (b) $p$ is an isomorphism; (c) $Q=0$; (d) $\\operatorname{Hom}(X,\\mathcal T^{\\ge n+1})=0$. (a)$\\Rightarrow$(d) is [F2]. (a)$\\Rightarrow$(c): if $X\\in\\mathcal T^{\\le n}$ then $q\\in\\operatorname{Hom}(X,Q)=0$ by [F2], so $q^*(1_Q)=q=0=q^*(0)$, and $q^*:\\operatorname{Hom}(Q,Q)\\to\\operatorname{Hom}(X,Q)$ is injective by step 1.1 applied to the truncation triangle with $T=Q\\in\\mathcal T^{\\ge n+1}$, hence $1_Q=0$ and $Q$ is a zero object. (c)$\\Rightarrow$(b): if $Q=0$, step 1.2 applied to the triangle $P\\to X\\to0\\to P[1]$ makes $p$ an isomorphism. (b)$\\Rightarrow$(c): if $p$ is an isomorphism, then in the exact sequence $\\operatorname{Hom}(Q,Q)\\xrightarrow{q^*}\\operatorname{Hom}(X,Q)\\xrightarrow{p^*}\\operatorname{Hom}(P,Q)$ of [F1] the map $p^*$ is injective (a map $\\varphi$ with $\\varphi p=0$ vanishes because $p$ is an isomorphism), so $\\operatorname{im}(q^*)=0$; since $q^*$ is a bijection by step 1.1, $1_Q=0$ and $Q=0$. (d)$\\Rightarrow$(c): if $\\operatorname{Hom}(X,\\mathcal T^{\\ge n+1})=0$ then $q=0$, so $q^*(1_Q)=0=q^*(0)$ and injectivity of $q^*$ gives $1_Q=0$, i.e. $Q=0$. Finally (b)$\\Rightarrow$(a): if $p$ is an isomorphism then $X\\cong P$ and $P\\in\\mathcal T^{\\le n}$, so $X\\in\\mathcal T^{\\le n}$.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "Claim (iii), the $\\ge$ side, by the same arguments with the roles of the two maps interchanged. Let $P\\xrightarrow{p}X\\xrightarrow{q}Q\\to P[1]$ be the truncation triangle at $n-1$, so that $P=\\tau_{\\le n-1}X$ and $Q=\\tau_{\\ge n}X$. Then: (a$'$) $X\\in\\mathcal T^{\\ge n}$ implies $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$ by [F2], hence $p=0$ and $p_*(1_P)=p=0=p_*(0)$ with $p_*$ injective by step 1.1, so $P=0$; (b$'$) $P=0$ makes the triangle $X\\to Q\\to0\\to X[1]$ distinguished by [F4], so $X\\to Q$ is an isomorphism by step 1.2 and $X\\cong Q\\in\\mathcal T^{\\ge n}$; (c$'$) if $X\\to Q$ is an isomorphism then $qp=0$ forces $p=0$ and hence $1_P=0$ as above, so $P=0$; (d$'$) if $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$ then $p=0$ and $1_P=0$ as in (a$'$), so $P=0$ and $X\\in\\mathcal T^{\\ge n}$ by (b$'$); and $X\\in\\mathcal T^{\\ge n}$ implies $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$ by [F2]. This proves $X\\in\\mathcal T^{\\ge n}$ if and only if $X\\to\\tau_{\\ge n}X$ is an isomorphism, if and only if $\\tau_{\\le n-1}X=0$, if and only if $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$.",
+          "step": "2.4",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Claim (iv), extensions: let $X\\to Y\\to Z\\to X[1]$ be distinguished. If $X,Z\\in\\mathcal T^{\\ge n}$, then for $W\\in\\mathcal T^{\\le n-1}$ exactness of $\\operatorname{Hom}(W,X)\\to\\operatorname{Hom}(W,Y)\\to\\operatorname{Hom}(W,Z)$ and orthogonality force $\\operatorname{Hom}(W,Y)=0$, hence $Y\\in\\mathcal T^{\\ge n}$ by step 2.4. Dually, $X,Z\\in\\mathcal T^{\\le n}$ force $Y\\in\\mathcal T^{\\le n}$ using $\\operatorname{Hom}(Z,W)\\to\\operatorname{Hom}(Y,W)\\to\\operatorname{Hom}(X,W)$ and step 2.3. Applying these extension statements to the rotations $Y\\to Z\\to X[1]\\to$ and $Z[-1]\\to X\\to Y\\to$, and using $X[1]\\in\\mathcal T^{\\le n-1}$ when $X\\in\\mathcal T^{\\le n}$ and $Z[-1]\\in\\mathcal T^{\\ge n+1}$ when $Z\\in\\mathcal T^{\\ge n}$, gives the four other bounds in (iv).",
+          "step": "3.1",
+          "inputs": [
+            "step 2.3",
+            "step 2.4",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Claim (iv), direct sums: for objects $X,Y$ one has $\\operatorname{Hom}(X\\oplus Y,W)\\cong\\operatorname{Hom}(X,W)\\oplus\\operatorname{Hom}(Y,W)$ and $\\operatorname{Hom}(W,X\\oplus Y)\\cong\\operatorname{Hom}(W,X)\\oplus\\operatorname{Hom}(W,Y)$ by [F5]. Hence $X\\oplus Y\\in\\mathcal T^{\\le n}$ implies $\\operatorname{Hom}(X,W)=0$ for every $W\\in\\mathcal T^{\\ge n+1}$, as a direct summand of the vanishing group $\\operatorname{Hom}(X\\oplus Y,W)$, so $X\\in\\mathcal T^{\\le n}$ and likewise $Y\\in\\mathcal T^{\\le n}$ by step 2.3; conversely if $X,Y\\in\\mathcal T^{\\le n}$ then every such $\\operatorname{Hom}(X\\oplus Y,W)$ vanishes and $X\\oplus Y\\in\\mathcal T^{\\le n}$ by step 2.3. The same argument with the second displayed bijection and step 2.4 gives the statement for $\\mathcal T^{\\ge n}$; the empty direct sum is the zero object and the claims are vacuous for it.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.3",
+            "step 2.4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "Claim (iv), iteration: let $m\\le n$. Since $\\tau_{\\le m}X\\in\\mathcal T^{\\le n}$, its truncation map $\\tau_{\\le n}\\tau_{\\le m}X\\to\\tau_{\\le m}X$ is an isomorphism by step 2.3. Put $P=\\tau_{\\le m}\\tau_{\\le n}X$ and $Q=\\tau_{\\le m}X$, and let $\\alpha:P\\to X$ and $\\beta:Q\\to X$ be the composites of their truncation maps. For every $T\\in\\mathcal T^{\\le m}$, composition with either $\\alpha$ or $\\beta$ is a bijection onto $\\operatorname{Hom}(T,X)$ by step 2.2 and $\\mathcal T^{\\le m}\\subseteq\\mathcal T^{\\le n}$. Thus there are unique $d:P\\to Q$ and $v:Q\\to P$ with $\\beta d=\\alpha$ and $\\alpha v=\\beta$, and injectivity gives $dv=1_Q$ and $vd=1_P$. These isomorphisms commute with the maps to $X$ and are natural by uniqueness. Dually, since $\\tau_{\\ge n}X\\in\\mathcal T^{\\ge m}$, the map $\\tau_{\\ge n}X\\to\\tau_{\\ge m}\\tau_{\\ge n}X$ is an isomorphism by step 2.4; the dual factorization argument identifies $\\tau_{\\ge n}\\tau_{\\ge m}X$ with $\\tau_{\\ge n}X$, compatibly with the maps from $X$. Finally, if $m<n$, then $\\tau_{\\ge n}X\\in\\mathcal T^{\\ge m+1}$, so $\\tau_{\\le m}\\tau_{\\ge n}X=0$ by step 2.4.",
+          "step": "3.3",
+          "inputs": [
+            "step 2.2",
+            "step 2.3",
+            "step 2.4",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1, 2.2, 2.3, 2.4, 3.1, 3.2 and 3.3 prove claims (i), (ii), (iii) and (iv) respectively, including the uniqueness of the isomorphism in (i), the naturality and the dual statements in (ii), all four equivalent formulations in (iii), and the closure, direct-sum and iteration statements in (iv).",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 2.4",
+            "step 3.1",
+            "step 3.2",
+            "step 3.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.2: the empty direct sum is the zero object and the direct-sum clauses of claim (iv) are vacuous for it, while [F4] supplies the zero triangle used throughout."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 shows a distinguished triangle ending at a zero object has its first map an isomorphism; steps 2.3 and 2.4 detect zero objects by $1_Q=0$ and $1_P=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 proves essential uniqueness for one fixed object and one fixed shift, and step 2.2 then makes the truncation assignment a functor on a single morphism at a time."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.3 records the degenerate iteration $\\tau_{\\le m}\\tau_{\\ge n}=0$ for $m<n$, and step 2.4 handles the overlapping shift $m=n-1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.3 anchors claim (iii) at the two ends of the truncation triangle through $\\tau_{\\ge n+1}X=0$ and the dual criterion $\\tau_{\\le n-1}X=0$; step 3.3 pins the iterated isomorphisms at $m=n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The truncation triangle for each object is fixed once and for all, and essential uniqueness identifies any other choice up to a unique compatible isomorphism, so no selection enters."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.3 verifies the forward implications of the four equivalent formulations in claim (iii), including (a) implies (d), and step 2.4 verifies their duals."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.3 closes the converse implications (b) implies (a), (c) implies (b) and (d) implies (c), and step 2.4 proves the corresponding converses for the lower aisle."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all ten proof steps and each of eleven actual supplier interfaces, BBD §1.3.1–1.3.7 including proofs, printed pp.29–33 (local complete PDF). The two adjunction windows have outer zeros Hom(T,B[-1]) and Hom(A[1],T); shifts are +2 on the lower bound and -1 on the upper bound. TR3 supplies comparison after the unique first component; adjunction injectivity proves uniqueness of the third. All four equivalent aisle criteria checked both directions; zero triangles and finite biproducts cover empty/zero cases. Reader removes false unrestricted two-out-of-three: canonical triangle k[-1]→0→k fails the upper-aisle version and its dual fails the lower-aisle version. Current extension and rotated n+1/n-1 bounds correct. Iteration uses two correctly typed representing composites alpha,beta, and the dual unit points from tau_ge_n X to tau_ge_m tau_ge_n X. Checked m=n and m<n mixed zero truncation, naturality by unique factorization. No new choice assumption; truncations are understood up to unique compatible isomorphism as in the Definition. Accept reader repairs; no refuter obligation on this carrier."
+      }
+    },
+    "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-truncation-triangles-are-essentially-unique-and-functorial",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations as in [[def-truncation-functors-and-cohomology-of-a-t-structure]].\n\n(i) *Essential uniqueness.* For every $X$ and $n$, every distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in\\mathcal T^{\\le n}$ and $B\\in\\mathcal T^{\\ge n+1}$ is isomorphic to the truncation triangle $\\tau_{\\le n}X\\to X\\to\\tau_{\\ge n+1}X\\to\\tau_{\\le n}X[1]$ by an isomorphism of triangles whose middle component is the identity of $X$; this isomorphism is unique.\n\n(ii) *Adjunction and orthogonality.* The assignment $X\\mapsto\\tau_{\\le n}X$ is a functor and for $T\\in\\mathcal T^{\\le n}$ the map $\\operatorname{Hom}(T,\\tau_{\\le n}X)\\to\\operatorname{Hom}(T,X)$, $f\\mapsto(\\tau_{\\le n}X\\to X)\\circ f$, is a bijection natural in $X$; dually $\\operatorname{Hom}(\\tau_{\\ge n}X,T)\\to\\operatorname{Hom}(X,T)$ is a bijection for $T\\in\\mathcal T^{\\ge n}$. Moreover $\\operatorname{Hom}(\\mathcal T^{\\le n},\\mathcal T^{\\ge n+1})=0$ for every $n$.\n\n(iii) *Aisle criteria.* $X\\in\\mathcal T^{\\le n}$ if and only if $\\tau_{\\le n}X\\to X$ is an isomorphism, if and only if $\\tau_{\\ge n+1}X=0$, if and only if $\\operatorname{Hom}(X,\\mathcal T^{\\ge n+1})=0$; dually $X\\in\\mathcal T^{\\ge n}$ if and only if $X\\to\\tau_{\\ge n}X$ is an isomorphism, if and only if $\\tau_{\\le n-1}X=0$, if and only if $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$.\n\n(iv) *Extensions, direct sums and iteration.* In a distinguished triangle $X\\to Y\\to Z\\to X[1]$, if $X,Z\\in\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$), then $Y$ lies in the same aisle. If $X,Y\\in\\mathcal T^{\\le n}$ then $Z\\in\\mathcal T^{\\le n}$, while if $Y,Z\\in\\mathcal T^{\\le n}$ then $X\\in\\mathcal T^{\\le n+1}$; dually, if $Y,Z\\in\\mathcal T^{\\ge n}$ then $X\\in\\mathcal T^{\\ge n}$, while if $X,Y\\in\\mathcal T^{\\ge n}$ then $Z\\in\\mathcal T^{\\ge n-1}$. Also, a finite direct sum lies in $\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$) if and only if each summand does. For $m\\le n$ there are canonical isomorphisms $\\tau_{\\le m}\\tau_{\\le n}\\cong\\tau_{\\le m}$, $\\tau_{\\le n}\\tau_{\\le m}\\cong\\tau_{\\le m}$, $\\tau_{\\ge n}\\tau_{\\ge m}\\cong\\tau_{\\ge n}$ and $\\tau_{\\ge m}\\tau_{\\ge n}\\cong\\tau_{\\ge n}$ compatible with the truncation maps, and $\\tau_{\\le m}\\tau_{\\ge n}=0$ when $m<n$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-triangulated-category",
+          "source_section": "Definition",
+          "quote": "A **triangulated category** is a category with translation $(\\mathcal T,[1])$\nand a class $\\Delta$ of distinguished triangles satisfying TR1, TR2, TR3, and\nTR4. Both the translation and the class $\\Delta$ are specified structure, not\nproperties inferred from the underlying additive category.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-category-with-translation",
+          "source_section": "Definition",
+          "quote": "A **category with translation** is an additive category $\\mathcal T$ together\nwith a specified additive autoequivalence $[1]:\\mathcal T\\to\\mathcal T$ and a\nspecified quasi-inverse $[-1]$. Write $X[n]$ for the iterated translates,\nusing the chosen coherence isomorphisms $[n][m]\\cong[n+m]$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$ with translation $[1]$ ([[def-canonical-t-structure-on-a-derived-category]], [[def-triangulated-category]]), and set $\\mathcal T^{\\le n}:=\\mathcal T^{\\le0}[-n]$ and $\\mathcal T^{\\ge n}:=\\mathcal T^{\\ge0}[-n]$ for $n\\in\\mathbb Z$; thus $X\\in\\mathcal T^{\\le n}$ exactly when $X[n]\\in\\mathcal T^{\\le0}$, and $X\\in\\mathcal T^{\\ge n}$ exactly when $X[n]\\in\\mathcal T^{\\ge0}$.\n\nFor $X\\in\\mathcal T$ and $n\\in\\mathbb Z$, the t-structure axiom applied to the translate $X[n]$ and then shifted by $[-n]$ produces a distinguished triangle\n$$\\tau_{\\le n}X\\longrightarrow X\\longrightarrow\\tau_{\\ge n+1}X\\longrightarrow\\tau_{\\le n}X[1]$$\nwith $\\tau_{\\le n}X\\in\\mathcal T^{\\le n}$ and $\\tau_{\\ge n+1}X\\in\\mathcal T^{\\ge n+1}$; such a triangle is a **truncation triangle** of $X$ at $n$. Truncation triangles of the same $X$ at the same $n$ are canonically isomorphic over $X$, so the objects and maps occurring in them are determined up to a unique compatible isomorphism ([[lem-truncation-triangles-are-essentially-unique-and-functorial]]); one writes $\\tau_{\\le n}$ and $\\tau_{\\ge n}$ for the resulting **truncation functors**.\n\nThe **t-cohomology** of $X$ is\n$$H^n_t(X):=(\\tau_{\\le n}\\tau_{\\ge n}X)[n],$$\nan object of the heart $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ ([[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]). The **amplitude** of $X$ is the set of $n$ with $H^n_t(X)\\not\\cong0$; it is *contained in* an interval $[a,b]$ when $H^n_t(X)=0$ for every $n\\notin[a,b]$. The t-structure is **bounded** when every object of $\\mathcal T$ lies in $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$ for some integer $n$ depending on the object.\n\nThis item fixes notation and conventions only. Existence of the truncation triangle is the t-structure axiom itself, applied to $X[n]$ and shifted; the essential uniqueness of that triangle, the functoriality of the truncations and all algebraic properties of $\\tau_{\\le n}$, $\\tau_{\\ge n}$ and $H^n_t$ are proved in the two immediately following lemmas.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-any-adjoint-between-additive-categories-is-additive",
+          "source_section": "Statement",
+          "quote": "Every left adjoint or right adjoint between additive categories is additive.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-additive-functor",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal C$ and $\\mathcal D$ be preadditive categories\n([[def-preadditive-category]]). A functor $F:\\mathcal C\\to\\mathcal D$\n([[def-functor-and-contravariant-functor]]) is **additive** when for every pair\nof objects $A,B$ the induced map\n\n$$F_{A,B}:\\mathcal C(A,B)\\to\\mathcal D(FA,FB),\\qquad f\\mapsto Ff,$$\n\nis a homomorphism of abelian groups. Equivalently,\n\n$$F(f+g)=Ff+Fg$$\n\nfor all parallel morphisms $f,g$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-an-additive-functor-preserves-split-biproduct-diagrams",
+          "source_section": "Statement",
+          "quote": "If $F:\\mathcal C\\to\\mathcal D$ is additive and\n\n$$A\\xrightarrow{i}A\\oplus C\\xrightarrow{p}C$$\n\nis part of a biproduct diagram with complementary maps $r:A\\oplus C\\to A$ and\n$j:C\\to A\\oplus C$, then\n\n$$FA\\xrightarrow{F(i)}F(A\\oplus C)\\xrightarrow{F(p)}FC$$\n\nis again part of a biproduct diagram with complementary maps $F(r)$ and $F(j)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-biproduct",
+          "source_section": "Definition",
+          "quote": "A finite family $(A_i)_{i\\in I}$ in a category with zero morphisms has a\n**biproduct** when both its coproduct and its product exist and the canonical morphism from the\ncoproduct to the product is an isomorphism\n([[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).\n\nWhen this happens, either object may be written\n\n$$\\bigoplus_{i\\in I}A_i,$$\n\nsince the canonical comparison identifies them uniquely. For two objects one\nwrites $A\\oplus B$, and for the empty family one speaks of the **empty\nbiproduct**.\n\nTransporting the product structure across the canonical comparison to the\ncoproduct object makes that comparison the identity. The resulting common\nobject, injections, and projections form the associated **biproduct diagram**;\nthis is the convention used whenever both kinds of structure maps are written\non one displayed object.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-additive-category",
+          "source_section": "Definition",
+          "quote": "An **additive category** is a preadditive category\n([[def-preadditive-category]]) with all finite biproducts.\n\nEquivalently, a preadditive category is additive when it has a zero object and\nbinary biproducts: a zero object is both initial and terminal\n([[def-initial-terminal-and-zero-object]]) and therefore supplies both the empty\ncoproduct and the empty product\n([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]); their\ncanonical comparison is the unique endomorphism of the zero object and hence\nthe identity, so this is an empty biproduct. Meanwhile,\nbinary biproducts iterate\nusing the canonical associativity and unitality isomorphisms\n([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]])\nto give every finite biproduct.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Claim (i). The formula $H^n_t(X)=(\\tau_{\\le n}\\tau_{\\ge n}X)[n]$ is a composite of functors by [F1] and [F2], and the induced maps are uniquely compatible with the truncation maps by [F1]. Put $Y=\\tau_{\\ge n}X$ and $Z=\\tau_{\\le n}Y$. For $T\\in\\mathcal T^{\\le n-1}$, adjunction gives $\\operatorname{Hom}(T,Z)\\cong\\operatorname{Hom}(T,Y)=0$, since $Y\\in\\mathcal T^{\\ge n}$. The aisle criterion therefore puts $Z$ in $\\mathcal T^{\\ge n}$; it is in $\\mathcal T^{\\le n}$ by construction. Consequently $Z[n]=H^n_t(X)$ lies in the heart by the shift conventions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Claim (ii). For all $a,b$ there is a canonical isomorphism $\\tau_{\\le a}(X[b])\\cong(\\tau_{\\le a+b}X)[b]$ over $X[b]$, and dually for $\\tau_{\\ge a}$: for $T\\in\\mathcal T^{\\le a}$ both objects represent the same functor, $\\operatorname{Hom}(T,\\tau_{\\le a}(X[b]))\\cong\\operatorname{Hom}(T,X[b])$ by the adjunction [F1], and $\\operatorname{Hom}(T,(\\tau_{\\le a+b}X)[b])\\cong\\operatorname{Hom}(T[-b],\\tau_{\\le a+b}X)\\cong\\operatorname{Hom}(T[-b],X)\\cong\\operatorname{Hom}(T,X[b])$ because $T[-b]\\in\\mathcal T^{\\le a+b}$, so the essential uniqueness in [F1] identifies them. Hence $H^n_t(X[m])=(\\tau_{\\le n}\\tau_{\\ge n}(X[m]))[n]\\cong(\\tau_{\\le n}((\\tau_{\\ge n+m}X)[m]))[n]\\cong((\\tau_{\\le n+m}\\tau_{\\ge n+m}X)[m])[n]\\cong H^{n+m}_t(X)$, using the coherence isomorphisms of [F2], and the isomorphisms are natural in $X$ by functoriality of the truncations.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Claim (iv), the forward implications. If $X\\in\\mathcal T^{\\le m}$ and $n>m$, then $X\\in\\mathcal T^{\\le n-1}$ by [F1], so $\\tau_{\\ge n}X=0$ by the aisle criterion [F1] and $H^n_t(X)=0$. If $X\\in\\mathcal T^{\\ge m}$ and $n<m$, then $X\\in\\mathcal T^{\\ge n+1}$ by [F1], so $\\tau_{\\ge n}X\\cong X$ and $\\tau_{\\le n}\\tau_{\\ge n}X=\\tau_{\\le n}X=0$ by the dual aisle criterion, whence $H^n_t(X)=0$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Claim (v), concentration. The identity $H^m_t(X)[-m]=\\tau_{\\le m}\\tau_{\\ge m}X$ is the definition. If $X\\in\\mathcal T^{\\ge m}$ then $\\tau_{\\ge m}X\\cong X$ by [F1], giving the second identity. If $X\\in\\mathcal T^{\\le m}$, then $\\tau_{\\ge m}X\\in\\mathcal T^{\\le m}$: for $W\\in\\mathcal T^{\\ge m+1}$ one has $\\operatorname{Hom}(\\tau_{\\ge m}X,W)\\cong\\operatorname{Hom}(X,W)=0$ by the adjunction and orthogonality of [F1], so the aisle criterion gives $\\tau_{\\ge m}X\\in\\mathcal T^{\\le m}$; hence $\\tau_{\\le m}\\tau_{\\ge m}X\\cong\\tau_{\\ge m}X$, giving the first identity. If $X$ lies in both aisles, then $\\tau_{\\le m}X\\cong X$ and $\\tau_{\\ge m}X\\cong X$, and the composite canonical map $X\\cong H^m_t(X)[-m]$ is the truncation map.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Claim (iii). The inclusion $\\mathcal T^{\\le n}\\hookrightarrow\\mathcal T$ has the right adjoint $\\tau_{\\le n}$ by [F1], and the inclusion $\\mathcal T^{\\ge n}\\hookrightarrow\\mathcal T$ has the left adjoint $\\tau_{\\ge n}$; these inclusions and $\\mathcal T$ are additive by [F3], so $\\tau_{\\le n}$ and $\\tau_{\\ge n}$ are additive functors by [F3], and so is the autoequivalence $[n]$ by [F2]. Hence $H^n_t$ is additive, and by [F3] it preserves the split biproduct diagram of $X\\oplus Y$: the images of the injections and projections under $H^n_t$ are the two mutually inverse structure maps of a biproduct diagram of $H^n_t(X)$ and $H^n_t(Y)$, which is precisely the assertion, and the resulting isomorphism $H^n_t(X\\oplus Y)\\cong H^n_t(X)\\oplus H^n_t(Y)$ is natural by functoriality.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Claim (iv), the converses for a bounded t-structure. Suppose $H^n_t(X)=0$ for all $n>m$. By boundedness choose $N\\ge m$ with $X\\in\\mathcal T^{\\le N}\\cap\\mathcal T^{\\ge-N}$; then $X\\in\\mathcal T^{\\le N}$, and if $X\\in\\mathcal T^{\\le k}$ for some $k\\ge m+1$, the concentration identity of step 1.4 gives $\\tau_{\\ge k}X\\cong H^k_t(X)[-k]=0$, so $X\\cong\\tau_{\\le k-1}X\\in\\mathcal T^{\\le k-1}$ by the aisle criterion. Descending finitely from $N$ to $m+1$ gives $X\\in\\mathcal T^{\\le m}$. The lower bound is dual: if $H^n_t(X)=0$ for all $n<m$, choose $N\\ge -m$ with $X\\in\\mathcal T^{\\le N}\\cap\\mathcal T^{\\ge-N}$ and ascend from $-N$ to $m-1$, using $\\tau_{\\le k}X\\cong H^k_t(X)[-k]=0$ to conclude $X\\to\\tau_{\\ge k+1}X$ is an isomorphism and $X\\in\\mathcal T^{\\ge k+1}$; the two arguments are independent.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Claim (v), map detection. Let $X,Y\\in\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$. By step 1.4 the canonical maps give isomorphisms $X\\cong H^m_t(X)[-m]$ and $Y\\cong H^m_t(Y)[-m]$; under these, a morphism $f:X\\to Y$ corresponds to $H^m_t(f)$: both the source and target identifications are the truncation maps, and $H^m_t$ is a functor commuting with the truncations by step 1.1, so the induced bijection is $f\\mapsto H^m_t(f)$, and it is a bijection because the identifications are isomorphisms.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Claim (v), the bounded single-degree case: if the t-structure is bounded and $X,Y$ have $H^n_t=0$ for every $n\\ne m$, then step 2.2 (applied to the positive and negative ranges) gives $X,Y\\in\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$, so step 2.3 applies and $\\operatorname{Hom}(X,Y)\\to\\operatorname{Hom}(H^m_t(X),H^m_t(Y))$, $f\\mapsto H^m_t(f)$, is a bijection under the canonical identifications.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "step 2.3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 1.1 to 1.4 and 2.2 to 3.1 prove all the clauses: (i) in step 1.1, (ii) in step 1.2, (iii) in step 2.1, both directions of (iv) in steps 1.3 and 2.2, and the concentration identities and map detection of (v) in steps 1.4, 2.3 and 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 1.3",
+            "step 1.4",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.2 climbs down and up from a finite amplitude bound, and the concentration identity then gives $X\\cong H^m_t(X)[-m]$; an object with no nonzero $H^n_t$ is therefore a zero object in every bounded case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.4: the concentration identities hold for the zero object because $\\tau_{\\le m}0$ and $\\tau_{\\ge m}0$ vanish, and step 2.2 uses exactly that vanishing to reach the aisle conclusions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 treats the single-degree case, where $H^n_t(X)=0$ for every $n\\ne m$; the bounded case then reduces all Hom information to one heart object."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 keeps the heart case general, and step 1.2 verifies the coherence isomorphisms of the shift, including the degenerate shift $m=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 proves the shift rule for every integer, positive, zero and negative, and step 2.2 ascends from the finite bound $-N$ to $m-1$ and descends from $N$ to $m+1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof works with adjoint truncation functors and unique factorisations of maps, so it never chooses an element or object from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.3 proves the forward implications of amplitude detection: membership in $\\mathcal T^{\\le m}$ or $\\mathcal T^{\\ge m}$ kills $H^n_t$ outside the corresponding half-line."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.2 proves both converses under the boundedness hypothesis, one by descending and one by ascending induction on the amplitude bound."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all nine current steps and ten actual supplier interfaces; BBD §1.3.3–1.3.7 with proofs, printed pp.29–33 supplies source context. At 1.1 the upper-truncation adjunction sends Hom(T,Z) to Hom(T,tau_ge_n X)=0 for T≤n-1, proving the missing lower bound of Z. Shifted representing objects give tau_le_a(X[b])=(tau_le_(a+b)X)[b] and the lower analog, hence H^n(X[m])=H^(n+m)(X). Both adjoints act between additive full aisles, so their composite preserves the exact biproduct structure. Forward vanishing does not require boundedness; converses start at a finite bound and lower/raise it by one. Reader correction uses tau_ge_(k+1), so the lower induction progresses. Concentration and map detection preserve source/target shifts and are natural. Checked m arbitrary, zero and empty sums, no-cohomology object under boundedness, both directions and the absence of an unbounded converse. No AC. Accept reader repair; no flagged finding."
+      }
+    },
+    "lem-hard-lefschetz-splits-a-bounded-t-structure-complex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$ with translation $[1]$ ([[def-canonical-t-structure-on-a-derived-category]], [[def-triangulated-category]]), and set $\\mathcal T^{\\le n}:=\\mathcal T^{\\le0}[-n]$ and $\\mathcal T^{\\ge n}:=\\mathcal T^{\\ge0}[-n]$ for $n\\in\\mathbb Z$; thus $X\\in\\mathcal T^{\\le n}$ exactly when $X[n]\\in\\mathcal T^{\\le0}$, and $X\\in\\mathcal T^{\\ge n}$ exactly when $X[n]\\in\\mathcal T^{\\ge0}$.\n\nFor $X\\in\\mathcal T$ and $n\\in\\mathbb Z$, the t-structure axiom applied to the translate $X[n]$ and then shifted by $[-n]$ produces a distinguished triangle\n$$\\tau_{\\le n}X\\longrightarrow X\\longrightarrow\\tau_{\\ge n+1}X\\longrightarrow\\tau_{\\le n}X[1]$$\nwith $\\tau_{\\le n}X\\in\\mathcal T^{\\le n}$ and $\\tau_{\\ge n+1}X\\in\\mathcal T^{\\ge n+1}$; such a triangle is a **truncation triangle** of $X$ at $n$. Truncation triangles of the same $X$ at the same $n$ are canonically isomorphic over $X$, so the objects and maps occurring in them are determined up to a unique compatible isomorphism ([[lem-truncation-triangles-are-essentially-unique-and-functorial]]); one writes $\\tau_{\\le n}$ and $\\tau_{\\ge n}$ for the resulting **truncation functors**.\n\nThe **t-cohomology** of $X$ is\n$$H^n_t(X):=(\\tau_{\\le n}\\tau_{\\ge n}X)[n],$$\nan object of the heart $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ ([[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]). The **amplitude** of $X$ is the set of $n$ with $H^n_t(X)\\not\\cong0$; it is *contained in* an interval $[a,b]$ when $H^n_t(X)=0$ for every $n\\notin[a,b]$. The t-structure is **bounded** when every object of $\\mathcal T$ lies in $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$ for some integer $n$ depending on the object.\n\nThis item fixes notation and conventions only. Existence of the truncation triangle is the t-structure axiom itself, applied to $X[n]$ and shifted; the essential uniqueness of that triangle, the functoriality of the truncations and all algebraic properties of $\\tau_{\\le n}$, $\\tau_{\\ge n}$ and $H^n_t$ are proved in the two immediately following lemmas.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-truncation-triangles-are-essentially-unique-and-functorial]], and let $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ be the heart.\n\n(i) Each $H^n_t$ is a functor from $\\mathcal T$ to $\\mathcal C$: for every morphism $f:X\\to Y$ the induced map $H^n_t(f)$ is the unique map compatible with $f$ under the truncations, and values lie in the heart.\n\n(ii) *Shifts.* $H^n_t(X[m])\\cong H^{n+m}_t(X)$ for all $m,n\\in\\mathbb Z$, naturally in $X$.\n\n(iii) *Additivity.* For a finite biproduct $X\\oplus Y$ with injections $i_X,i_Y$ and projections $p_X,p_Y$, the maps $(H^n_t(i_X),H^n_t(i_Y)):H^n_t(X)\\oplus H^n_t(Y)\\to H^n_t(X\\oplus Y)$ and $(H^n_t(p_X),H^n_t(p_Y)):H^n_t(X\\oplus Y)\\to H^n_t(X)\\oplus H^n_t(Y)$ are mutually inverse isomorphisms; in particular $H^n_t(X\\oplus Y)\\cong H^n_t(X)\\oplus H^n_t(Y)$ naturally.\n\n(iv) *Amplitude detection.* If $X\\in\\mathcal T^{\\le m}$ then $H^n_t(X)=0$ for every $n>m$, and if $X\\in\\mathcal T^{\\ge m}$ then $H^n_t(X)=0$ for every $n<m$. If the t-structure is bounded ([[def-truncation-functors-and-cohomology-of-a-t-structure]]), the converses hold: $H^n_t(X)=0$ for all $n>m$ implies $X\\in\\mathcal T^{\\le m}$, and $H^n_t(X)=0$ for all $n<m$ implies $X\\in\\mathcal T^{\\ge m}$.\n\n(v) *Concentration and its consequences.* If $X\\in\\mathcal T^{\\le m}$ then $\\tau_{\\ge m}X\\cong H^m_t(X)[-m]$, and if $X\\in\\mathcal T^{\\ge m}$ then $\\tau_{\\le m}X\\cong H^m_t(X)[-m]$; if $X$ lies in both aisles then the canonical map gives $X\\cong H^m_t(X)[-m]$. If $X$ and $Y$ both lie in $\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$, then the canonical identifications $X\\cong H^m_t(X)[-m]$ and $Y\\cong H^m_t(Y)[-m]$ identify $\\operatorname{Hom}(X,Y)$ with $\\operatorname{Hom}(H^m_t(X),H^m_t(Y))$ via $f\\mapsto H^m_t(f)$; in particular this applies when the t-structure is bounded and $X,Y$ have $H^n_t=0$ for every $n\\ne m$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-truncation-triangles-are-essentially-unique-and-functorial",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations as in [[def-truncation-functors-and-cohomology-of-a-t-structure]].\n\n(i) *Essential uniqueness.* For every $X$ and $n$, every distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in\\mathcal T^{\\le n}$ and $B\\in\\mathcal T^{\\ge n+1}$ is isomorphic to the truncation triangle $\\tau_{\\le n}X\\to X\\to\\tau_{\\ge n+1}X\\to\\tau_{\\le n}X[1]$ by an isomorphism of triangles whose middle component is the identity of $X$; this isomorphism is unique.\n\n(ii) *Adjunction and orthogonality.* The assignment $X\\mapsto\\tau_{\\le n}X$ is a functor and for $T\\in\\mathcal T^{\\le n}$ the map $\\operatorname{Hom}(T,\\tau_{\\le n}X)\\to\\operatorname{Hom}(T,X)$, $f\\mapsto(\\tau_{\\le n}X\\to X)\\circ f$, is a bijection natural in $X$; dually $\\operatorname{Hom}(\\tau_{\\ge n}X,T)\\to\\operatorname{Hom}(X,T)$ is a bijection for $T\\in\\mathcal T^{\\ge n}$. Moreover $\\operatorname{Hom}(\\mathcal T^{\\le n},\\mathcal T^{\\ge n+1})=0$ for every $n$.\n\n(iii) *Aisle criteria.* $X\\in\\mathcal T^{\\le n}$ if and only if $\\tau_{\\le n}X\\to X$ is an isomorphism, if and only if $\\tau_{\\ge n+1}X=0$, if and only if $\\operatorname{Hom}(X,\\mathcal T^{\\ge n+1})=0$; dually $X\\in\\mathcal T^{\\ge n}$ if and only if $X\\to\\tau_{\\ge n}X$ is an isomorphism, if and only if $\\tau_{\\le n-1}X=0$, if and only if $\\operatorname{Hom}(\\mathcal T^{\\le n-1},X)=0$.\n\n(iv) *Extensions, direct sums and iteration.* In a distinguished triangle $X\\to Y\\to Z\\to X[1]$, if $X,Z\\in\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$), then $Y$ lies in the same aisle. If $X,Y\\in\\mathcal T^{\\le n}$ then $Z\\in\\mathcal T^{\\le n}$, while if $Y,Z\\in\\mathcal T^{\\le n}$ then $X\\in\\mathcal T^{\\le n+1}$; dually, if $Y,Z\\in\\mathcal T^{\\ge n}$ then $X\\in\\mathcal T^{\\ge n}$, while if $X,Y\\in\\mathcal T^{\\ge n}$ then $Z\\in\\mathcal T^{\\ge n-1}$. Also, a finite direct sum lies in $\\mathcal T^{\\le n}$ (respectively $\\mathcal T^{\\ge n}$) if and only if each summand does. For $m\\le n$ there are canonical isomorphisms $\\tau_{\\le m}\\tau_{\\le n}\\cong\\tau_{\\le m}$, $\\tau_{\\le n}\\tau_{\\le m}\\cong\\tau_{\\le m}$, $\\tau_{\\ge n}\\tau_{\\ge m}\\cong\\tau_{\\ge n}$ and $\\tau_{\\ge m}\\tau_{\\ge n}\\cong\\tau_{\\ge n}$ compatible with the truncation maps, and $\\tau_{\\le m}\\tau_{\\ge n}=0$ when $m<n$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "6.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-truncation-triangles-are-essentially-unique-and-functorial]], and let $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ be the heart.\n\n(i) Each $H^n_t$ is a functor from $\\mathcal T$ to $\\mathcal C$: for every morphism $f:X\\to Y$ the induced map $H^n_t(f)$ is the unique map compatible with $f$ under the truncations, and values lie in the heart.\n\n(ii) *Shifts.* $H^n_t(X[m])\\cong H^{n+m}_t(X)$ for all $m,n\\in\\mathbb Z$, naturally in $X$.\n\n(iii) *Additivity.* For a finite biproduct $X\\oplus Y$ with injections $i_X,i_Y$ and projections $p_X,p_Y$, the maps $(H^n_t(i_X),H^n_t(i_Y)):H^n_t(X)\\oplus H^n_t(Y)\\to H^n_t(X\\oplus Y)$ and $(H^n_t(p_X),H^n_t(p_Y)):H^n_t(X\\oplus Y)\\to H^n_t(X)\\oplus H^n_t(Y)$ are mutually inverse isomorphisms; in particular $H^n_t(X\\oplus Y)\\cong H^n_t(X)\\oplus H^n_t(Y)$ naturally.\n\n(iv) *Amplitude detection.* If $X\\in\\mathcal T^{\\le m}$ then $H^n_t(X)=0$ for every $n>m$, and if $X\\in\\mathcal T^{\\ge m}$ then $H^n_t(X)=0$ for every $n<m$. If the t-structure is bounded ([[def-truncation-functors-and-cohomology-of-a-t-structure]]), the converses hold: $H^n_t(X)=0$ for all $n>m$ implies $X\\in\\mathcal T^{\\le m}$, and $H^n_t(X)=0$ for all $n<m$ implies $X\\in\\mathcal T^{\\ge m}$.\n\n(v) *Concentration and its consequences.* If $X\\in\\mathcal T^{\\le m}$ then $\\tau_{\\ge m}X\\cong H^m_t(X)[-m]$, and if $X\\in\\mathcal T^{\\ge m}$ then $\\tau_{\\le m}X\\cong H^m_t(X)[-m]$; if $X$ lies in both aisles then the canonical map gives $X\\cong H^m_t(X)[-m]$. If $X$ and $Y$ both lie in $\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$, then the canonical identifications $X\\cong H^m_t(X)[-m]$ and $Y\\cong H^m_t(Y)[-m]$ identify $\\operatorname{Hom}(X,Y)$ with $\\operatorname{Hom}(H^m_t(X),H^m_t(Y))$ via $f\\mapsto H^m_t(f)$; in particular this applies when the t-structure is bounded and $X,Y$ have $H^n_t=0$ for every $n\\ne m$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "6.1",
+            "7.1",
+            "8.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-triangulated-category-axiom-tr-one",
+          "source_section": "Definition",
+          "quote": "**TR1** requires: (i) every triangle isomorphic to a distinguished one is\ndistinguished; (ii) for every $f:X\\to Y$ there are $Z,g,h$ for which\n$X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hX[1]$ is distinguished; and\n(iii) $X\\xrightarrow{1_X}X\\to0\\to X[1]$ is distinguished for every $X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-triangulated-category-axiom-tr-three",
+          "source_section": "Definition",
+          "quote": "**TR3** says that if two distinguished triangles have first arrows $f,f'$ and\n$bf=f'a$, then some $c$ makes $(a,b,c)$ a morphism of triangles. It is an\nexistence assertion: neither $c$ nor the completion is asserted unique.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-morphism-and-isomorphism-of-triangles",
+          "source_section": "Definition",
+          "quote": "A morphism from $(X,Y,Z,f,g,h)$ to $(X',Y',Z',f',g',h')$ is a triple\n$(a,b,c)$ with $bf=f'a$, $cg=g'b$, and $a[1]h=h'c$. It is an\n**isomorphism of triangles** when $a,b,c$ are isomorphisms.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-rotation-of-a-triangle",
+          "source_section": "Definition",
+          "quote": "The **left rotation** of $X\\xrightarrow fY\\xrightarrow gZ\\xrightarrow hX[1]$\nis\n$$Y\\xrightarrow gZ\\xrightarrow hX[1]\\xrightarrow{-f[1]}Y[1].$$\nIts **inverse (right) rotation** is\n$$Z[-1]\\xrightarrow{-h[-1]}X\\xrightarrow fY\\xrightarrow gZ,$$\nwhere the displayed source and target use the specified coherence\nisomorphisms for $[-1]$ and $[1]$.  This fixes the sign convention used below.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-distinguished-triangles-are-closed-under-shifts-and-both-rotations",
+          "source_section": "Statement",
+          "quote": "Every integral translate, every left rotation, and every inverse rotation of a\ndistinguished triangle is distinguished, with the signs determined by\n[[def-rotation-of-a-triangle]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-zero-and-split-triangles-are-distinguished",
+          "source_section": "Statement",
+          "quote": "In a triangulated category, $X\\to0\\to X[1]\\xrightarrow{1}X[1]$ and the\ncanonical biproduct triangle\n$$X\\xrightarrow{\\binom{1}{0}}X\\oplus Y\\xrightarrow{(0\\;1)}Y\\to X[1]$$\nare distinguished.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-a-distinguished-triangle-with-zero-first-map-is-split",
+          "source_section": "Statement",
+          "quote": "If $X\\xrightarrow0Y\\xrightarrow gZ\\xrightarrow hX[1]$ is distinguished,\nthen it is isomorphic to the right rotation of a canonical split triangle,\nnamely\n$$X\\xrightarrow0Y\\xrightarrow{\\binom{1}{0}}Y\\oplus X[1]\\xrightarrow{(0\\;1)}X[1].$$",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-triangulated-category",
+          "source_section": "Definition",
+          "quote": "A **triangulated category** is a category with translation $(\\mathcal T,[1])$\nand a class $\\Delta$ of distinguished triangles satisfying TR1, TR2, TR3, and\nTR4. Both the translation and the class $\\Delta$ are specified structure, not\nproperties inferred from the underlying additive category.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-additive-category",
+          "source_section": "Definition",
+          "quote": "An **additive category** is a preadditive category\n([[def-preadditive-category]]) with all finite biproducts.\n\nEquivalently, a preadditive category is additive when it has a zero object and\nbinary biproducts: a zero object is both initial and terminal\n([[def-initial-terminal-and-zero-object]]) and therefore supplies both the empty\ncoproduct and the empty product\n([[prop-empty-limits-and-colimits-are-terminal-and-initial-objects]]); their\ncanonical comparison is the unique endomorphism of the zero object and hence\nthe identity, so this is an empty biproduct. Meanwhile,\nbinary biproducts iterate\nusing the canonical associativity and unitality isomorphisms\n([[prop-biproducts-are-associative-commutative-and-unital-up-to-canonical-isomorphism]])\nto give every finite biproduct.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-biproduct",
+          "source_section": "Definition",
+          "quote": "A finite family $(A_i)_{i\\in I}$ in a category with zero morphisms has a\n**biproduct** when both its coproduct and its product exist and the canonical morphism from the\ncoproduct to the product is an isomorphism\n([[def-canonical-morphism-from-a-finite-coproduct-to-a-finite-product]]).\n\nWhen this happens, either object may be written\n\n$$\\bigoplus_{i\\in I}A_i,$$\n\nsince the canonical comparison identifies them uniquely. For two objects one\nwrites $A\\oplus B$, and for the empty family one speaks of the **empty\nbiproduct**.\n\nTransporting the product structure across the canonical comparison to the\ncoproduct object makes that comparison the identity. The resulting common\nobject, injections, and projections form the associated **biproduct diagram**;\nthis is the convention used whenever both kinds of structure maps are written\non one displayed object.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Base case. Let $n=0$ and let $K\\in\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ admit such an $L$. Then $K$ lies in both aisles, so the concentration identity of (F2) applied with $m=0$ gives a canonical isomorphism $K\\cong H^0_t(K)[0]=H^0_t(K)$, while amplitude detection gives $H^j_t(K)=0$ for every $j\\ne0$; hence the asserted direct sum is the single term $H^0_t(K)$ and the conclusion holds.",
+          "step": "1.1",
+          "inputs": [
+            "base",
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Induction step. Fix $n\\ge1$ and assume as induction hypothesis that the assertion holds for every object of $\\mathcal T^{\\le n-1}\\cap\\mathcal T^{\\ge -(n-1)}$ admitting a morphism $L'$ with $H^{-j}_t(L'^{\\,j})$ an isomorphism for every $j\\ge0$. Let $K\\in\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$ and let $L:K\\to K[2]$ satisfy the hard Lefschetz hypothesis, and put $A:=H^{-n}_t(K)$, $B:=H^n_t(K)$ and $h:=H^{-n}_t(L^n):A\\to B$; the map $h$ is an isomorphism by hypothesis and $A,B$ lie in the heart. Since $K\\in\\mathcal T^{\\ge -n}$ and $K\\in\\mathcal T^{\\le n}$, concentration (F2) identifies the truncation maps of $K$ at $-n$ and $n$ with morphisms $a:A[n]\\to K$ and $b:K\\to B[-n]$ for which $H^{-n}_t(a):A\\to H^{-n}_t(K)=A$ and $H^n_t(b):B\\to H^n_t(B[-n])=B$ are the canonical identifications. Since $A[n]\\in\\mathcal T^{\\le -n}$, $B[-n]\\in\\mathcal T^{\\ge n}$ and $\\mathcal T^{\\ge n}\\subseteq\\mathcal T^{\\ge -n+1}$ as $n\\ge1$, the orthogonality in (F2) gives $ba=0$.",
+          "step": "1.2",
+          "inputs": [
+            "ih",
+            "given",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Define $c:=L^n[-2n]\\circ a[-2n]\\circ h^{-1}[-n]:B[-n]\\to K$ and $r:=h^{-1}[n]\\circ b[2n]\\circ L^n:K\\to A[n]$, so that $bc=1_{B[-n]}$ and $ra=1_{A[n]}$. Indeed, on $H^n_t$ the composite $bc$ induces $h\\circ1_A\\circ h^{-1}=1_B$: the shift isomorphisms of (F2) convert the induced maps of $h^{-1}[-n]$, $a[-2n]$ and $L^n[-2n]$ into $h^{-1}$, the canonical identification of $A\\cong H^{-n}_t(K)$ and $h$ respectively, and $b$ induces the canonical identification of $B$; since $B[-n]$ lies in $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge n}$ and therefore has $H^m_t=0$ for $m\\ne n$, map detection (F2) upgrades the identity on $H^n_t$ to the identity of morphisms $bc=1_{B[-n]}$. Symmetrically $ra=1_{A[n]}$: the shift isomorphisms convert the induced maps of $L^n$, $b[2n]$ and $h^{-1}[n]$ into $h$, the canonical identification of $B$ and $h^{-1}$, so $ra$ induces $h^{-1}\\circ1_B\\circ h=1_A$ on $H^{-n}_t$, and $A[n]$ lies in $\\mathcal T^{\\le -n}\\cap\\mathcal T^{\\ge -n}$ with t-cohomology concentrated in degree $-n$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Put $r':=r-(rc)b$, where $rc:=r\\circ c:B[-n]\\to A[n]$ and $(rc)b:=(rc)\\circ b:K\\to A[n]$. Then $r'a=ra-(rc)(ba)=1-0=1$ and $r'c=rc-(rc)(bc)=rc-rc=0$, while $ba=0$ and $bc=1$ by steps 1.2 and 2.1; hence with respect to the biproduct structure of $A[n]\\oplus B[-n]$ the composite $(r',b)\\circ(a,c)$ has matrix $\\begin{pmatrix}r'a&r'c\\\\ba&bc\\end{pmatrix}=\\begin{pmatrix}1&0\\\\0&1\\end{pmatrix}$ and equals the identity, so $(a,c)$ has the left inverse $(r',b)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By TR1 complete the map $u:=(a,c):A[n]\\oplus B[-n]\\to K$ to a distinguished triangle $A[n]\\oplus B[-n]\\xrightarrow{u}K\\xrightarrow{v}K_0\\xrightarrow{w}(A[n]\\oplus B[-n])[1]$. The square formed by $u$ and by $(r',b):K\\to A[n]\\oplus B[-n]$ commutes, since $(r',b)u=1$ by step 3.1; TR3 applied to this square and to the distinguished triangle $A[n]\\oplus B[-n]\\xrightarrow{1}A[n]\\oplus B[-n]\\to0\\to\\cdots$ of (F4) yields a morphism of triangles whose first two components are the identity and $(r',b)$ and whose third component $h'$ satisfies $w=\\delta h'$, where $\\delta:0\\to(A[n]\\oplus B[-n])[1]$ is the zero morphism; hence $w=0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The inverse rotation is $K_0[-1]\\xrightarrow0 X\\xrightarrow{u}K\\xrightarrow{v}K_0$, where $X=A[n]\\oplus B[-n]$, by step 4.1 and (F4). Applying the zero-first-map split criterion (F4) supplies an isomorphism $g:K\\to X\\oplus K_0$ with $gu=\\binom10$ and $(0\\;1)g=v$. Here the criterion can be taken to fix its first two vertices: its proof constructs the third-vertex isomorphism from a section of the final map. Put $R:=(1\\;0)g$, $i:=g^{-1}\\binom01$ and $p:=(0\\;1)g=v$. Then $pi=1_{K_0}$, $Ru=1_X$, $pu=0$, $Ri=0$ and $uR+ip=1_K$. Thus $(u,i,R,p)$ is a biproduct diagram and $K\\cong A[n]\\oplus K_0\\oplus B[-n]$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Additivity (F2) applied to this biproduct gives, for every $m$, an isomorphism $(H^m_t(u),H^m_t(i)):H^m_t(X)\\oplus H^m_t(K_0)\\to H^m_t(K)$ with inverse $(H^m_t(R),H^m_t(p))$, where $X:=A[n]\\oplus B[-n]$. On the extreme degrees the first component is an isomorphism: with respect to the biproduct $X=A[n]\\oplus B[-n]$ the map $H^{-n}_t(u)$ has components $(H^{-n}_t(a),H^{-n}_t(c))=(1_A,0)$, since $H^{-n}_t(a)=1_A$ by step 1.2 and $H^{-n}_t(B[-n])=H^{-2n}_t(B)=0$; and $H^n_t(u)$ has components $(H^n_t(a),H^n_t(c))=(0,H^n_t(c))$, since $H^n_t(A[n])=H^{2n}_t(A)=0$ while $H^n_t(c)$ is an isomorphism because $H^n_t(b)H^n_t(c)=H^n_t(bc)=1_B$ and $H^n_t(b)$ is the canonical identification. An isomorphism $(f,g):C\\oplus D\\to E$ with $f$ an isomorphism has $D=0$: if $(\\psi_1,\\psi_2)$ is its inverse, then $\\psi_2f=0$ forces $\\psi_2=\\psi_2ff^{-1}=0$, and then $1_D=\\psi_2g=0$. Applying this to the isomorphisms $(H^{-n}_t(u),H^{-n}_t(i))$ and $(H^n_t(u),H^n_t(i))$, whose first components are isomorphisms, yields $H^{-n}_t(K_0)=0$ and $H^n_t(K_0)=0$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.2",
+            "step 5.1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Since $K\\cong X\\oplus K_0$ and $K\\in\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$, the direct-sum clause of (F2) gives $K_0\\in\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$. From $K_0\\in\\mathcal T^{\\ge -n}$ and $H^{-n}_t(K_0)=0$, concentration gives $\\tau_{\\le -n}K_0\\cong H^{-n}_t(K_0)[n]=0$, so $K_0\\in\\mathcal T^{\\ge -n+1}$ by the aisle criterion of (F2); dually $K_0\\in\\mathcal T^{\\le n}$ and $H^n_t(K_0)=0$ give $\\tau_{\\ge n}K_0\\cong H^n_t(K_0)[-n]=0$, so $K_0\\in\\mathcal T^{\\le n-1}$. Moreover additivity gives morphisms $(H^m_t(u),H^m_t(i)):H^m_t(X)\\oplus H^m_t(K_0)\\to H^m_t(K)$ with inverse $(H^m_t(R),H^m_t(p))$; for $-n<m<n$ both components $H^m_t(a)$ and $H^m_t(c)$ of $H^m_t(u)$ vanish, because their sources $H^m_t(A[n])=H^{m+n}_t(A)$ and $H^m_t(B[-n])=H^{m-n}_t(B)$ are zero when $m\\ne -n$ respectively $m\\ne n$, so $H^m_t(u)=0$ and $H^m_t(i):H^m_t(K_0)\\to H^m_t(K)$ is an isomorphism with inverse $H^m_t(p)$, since $H^m_t(p)H^m_t(i)=H^m_t(pi)=1$. In particular $H^m_t(K_0)\\cong H^m_t(K)$ for every $|m|<n$.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Define $L_0:=p[2]\\circ L\\circ i:K_0\\to K_0[2]$, so that $L_0^0=1_{K_0}$. For $1\\le j<n$ the map $H^{-j}_t(L_0^j)$ is an isomorphism. Indeed, expanding the iterate $L_0^j=L_0[2j-2]\\circ\\cdots\\circ L_0[2]\\circ L_0$ and applying $H^{-j}_t$ factor by factor, the factor $H^{-j}_t(L_0[2k])$ corresponds under the shift isomorphisms of (F2) to $H^{m_k}_t(p[2]\\circ L\\circ i)=H^{m_k+2}_t(p)\\circ H^{m_k}_t(L)\\circ H^{m_k}_t(i)$, where $m_k:=-j+2k$; for the intermediate degrees $m_k$ with $1\\le k\\le j-1$ one has $|m_k|<n$, so by step 7.1 together with $H^{m_k}_t(p)H^{m_k}_t(i)=H^{m_k}_t(pi)=1$ the maps $H^{m_k}_t(i)$ and $H^{m_k}_t(p)$ are mutually inverse isomorphisms and the inserted pair $H^{m_k}_t(i)\\circ H^{m_k}_t(p)=H^{m_k}_t(ip)$ is the identity. The composite therefore corresponds to $H^{j}_t(p)\\circ H^{-j}_t(L^j)\\circ H^{-j}_t(i)$, in which $H^{-j}_t(L^j)$ is an isomorphism by hypothesis and the outer maps are isomorphisms because $-j$ and $j$ are interior degrees. For $j\\ge n$, both $H^{-j}_t(K_0)$ and $H^{j}_t(K_0)$ vanish by step 7.1 and amplitude detection, so $H^{-j}_t(L_0^j)$ is a morphism between zero objects, hence an isomorphism. Thus $L_0$ satisfies the hard Lefschetz hypothesis on the object $K_0\\in\\mathcal T^{\\le n-1}\\cap\\mathcal T^{\\ge -(n-1)}$.",
+          "step": "8.1",
+          "inputs": [
+            "step 7.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-9-1",
+          "claim": "By the induction hypothesis of step 1.2, applied to the object $K_0\\in\\mathcal T^{\\le n-1}\\cap\\mathcal T^{\\ge -(n-1)}$ and the morphism $L_0$ of step 8.1, there is an isomorphism $K_0\\cong\\bigoplus_jH^j_t(K_0)[-j]$, a finite sum because $H^j_t(K_0)=0$ for $|j|>n-1$.",
+          "step": "9.1",
+          "inputs": [
+            "step 1.2",
+            "step 8.1"
+          ]
+        },
+        {
+          "id": "step-10-1",
+          "claim": "Combining the results: step 5.1 gives an isomorphism $K\\cong A[n]\\oplus K_0\\oplus B[-n]$; step 7.1 identifies $H^m_t(K_0)\\cong H^m_t(K)$ for $|m|<n$; step 9.1 decomposes $K_0$. Substituting $A=H^{-n}_t(K)$, $B=H^n_t(K)$ and inserting the vanishing extreme cohomology of $K_0$ gives the asserted isomorphism $K\\cong H^{-n}_t(K)[n]\\oplus\\bigoplus_{|j|<n}H^j_t(K)[-j]\\oplus H^n_t(K)[-n]=\\bigoplus_jH^j_t(K)[-j]$, a finite sum because $H^j_t(K)=0$ for $|j|>n$ by amplitude detection. Boundedness supplies such an $n$ for every object $K$, the base case of step 1.1 and the induction step of steps 1.2 to 9.1 cover every $n\\ge0$, and therefore the splitting holds for arbitrary $K$.",
+          "step": "10.1",
+          "inputs": [
+            "step 1.1",
+            "step 5.1",
+            "step 7.1",
+            "step 9.1",
+            "discharge-induction",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 10.1 assembles the sum over the finite window $|j|\\le n$, so nothing outside it contributes; if every term vanishes, steps 6.1 and 7.1 still place $K_0$ in amplitude at most $n-1$ and the induction continues."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 6.1 derives $H^{-n}_t(K_0)=0=H^n_t(K_0)$ from the biproduct and the (f,g)-lemma, and step 10.1 drops the vanishing extreme terms from the final splitting."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 is the base case: an object of the heart splits as the single summand $H^0_t(K)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "the Statement's convention on vanishing extremes is executed in steps 2.1, 6.1 and 10.1: zero extreme cohomology makes the constructed maps zero maps between zero objects and the induction descends to amplitude $n-1$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 3.1, 5.1 and 6.1 treat the extreme degrees: the components $(1_A,0)$ and $(0,H^n_t(c))$ are computed and $H^{\\pm n}_t(K_0)=0$ is forced."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof fixes one truncation triangle and one biproduct structure per object and never selects from a family of nonempty sets; the resulting isomorphism is deliberately not claimed to be canonical."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts existence of an isomorphism under the hard Lefschetz hypothesis, not one direction of an equivalence, so no forward implication beyond that hypothesis is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: the lemma does not assert that a direct sum decomposition of $K$ produces a map with isomorphic Lefschetz iterates."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read every one of eleven steps and all thirteen actual dependency interfaces, including the zero-first-map supplier proof that fixes its first two vertices. Read Deligne §1 Proposition 1.2/Theorem 1.5 with complete proofs and Remark 1.8, printed pp.107–109, plus de Cataldo–Migliorini Theorem 4.4.4/Remark 4.4.5 printed p.36 and BBD truncation passages. The actual proof is a local abstract t-category argument. Typed c:B[-n]→K and r:K→A[n] via shifted L^n; map detection supplies bc=1 and ra=1, with ba=0 by n≥1. Orthogonalized r′ and b retract u; TR3 kills connecting w. The split-triangle retraction is R:K→A[n]⊕B[-n], kept distinct from r′:K→A[n]. Additivity kills both extreme cohomologies of K0; concentration lowers amplitude. At interior weights m_k=-j+2k, H^m(i)H^m(p)=1, so compressed L0 powers inherit hard Lefschetz on cohomology without claiming derived L compatibility. Shift formula for B[-n] is H^(m-n)(B). Checked n=0, n=1, zero extremes, j=0, j≥n zero-to-zero maps, finite termination and arbitrary bounded K. No AC beyond finite existence selections. Accept reader removal of ill-typed circular equality and correction of the shift; no additional defect found."
+      }
+    },
+    "ex-hard-lefschetz-splitting-for-a-three-degree-complex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-modules-over-a-ring-form-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "For every ring $R$, the category $R\\text{-}\\mathbf{Mod}$ of left $R$-modules is\nan abelian category.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-rank-nullity",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to W$ be a linear map of vector spaces over $F$, with $V$\nfinite-dimensional. Then\n\n$$\\dim_F V=\\operatorname{nullity}T+\\operatorname{rank}T.$$\n\nEquivalently,\n\n$$\\dim_F V=\\dim_F(\\ker T)+\\dim_F(\\operatorname{im}T).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-first-isomorphism-theorem-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "For every morphism $f:A\\to B$ in an abelian category, there is a canonical\nisomorphism\n\n$$A/\\ker(f)\\;\\cong\\;\\operatorname{im}(f).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-dimension-of-a-direct-sum",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]), let $n \\in \\mathbb{N}$, let $V$ be a vector\nspace over $F$ ([[def-vector-space]]) and let $U$ be a family of linear subspaces\n$U_i$ of $V$ indexed by $i < n$ ([[def-linear-subspace]],\n[[def-sum-of-linear-subspaces]]) with\n\n$$V \\;=\\; \\bigoplus_{i<n} U_i$$\n\n([[def-internal-direct-sum]]) and every $U_i$ finite-dimensional over $F$\n([[def-dimension]]). Then $V$ is finite-dimensional over $F$ and\n\n$$\\dim_F V \\;=\\; \\sum_{i<n} \\dim_F U_i ,$$\n\nthe right-hand side being the finite sum of [[def-monoid-finite-product]] read\nadditively in the commutative monoid $(\\mathbb{N}, +, 0)$\n([[def-nat-addition]], [[lem-nat-add-identity]],\n[[lem-nat-add-associative]], [[lem-nat-add-commutative]]).\n\n**The base case is a genuine case.** At $n = 0$ the direct sum of the empty\nfamily is $\\{0_V\\}$ and the empty sum of natural numbers is $0$, so the formula\nreads $\\dim_F\\{0_V\\} = 0$. **At $n = 2$** it reads\n$\\dim_F(U \\oplus W) = \\dim_F U + \\dim_F W$.\n\n**No choice principle is used.** The only inputs are\n[[thm-dimension-formula]] and [[thm-dimension-of-a-linear-subspace]], both of\nwhich are proved in finite dimension without one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-finite-dimensional-vector-spaces-are-isomorphic-iff-equal-dimension",
+          "source_section": "Statement",
+          "quote": "Two finite-dimensional vector spaces over the same field $F$ are linearly\nisomorphic if and only if they have the same dimension.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an abelian category. We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$. Thus $H^n(X[k])=H^{n+k}(X)$. The cochain category $K(\\mathcal A)$ is the reindexed published homotopy category. Put\n\n$$D(\\mathcal A)=K(\\mathcal A)[\\mathrm{qis}^{-1}],\\qquad Q:K(\\mathcal A)\\longrightarrow D(\\mathcal A).$$\n\nLikewise $D^-,D^+,D^b$ initially mean the localizations of the termwise bounded variants of [[def-bounded-bounded-below-and-bounded-above-complex]]. Roof morphisms exist by [[lem-quasi-isomorphisms-admit-the-roof-calculus-in-the-homotopy-category]] and [[thm-the-calculus-of-fractions-constructs-the-localization]] under its standing size hypothesis: a small category of complexes, or supplied small cofinal denominator families. Every assertion of Hom sets is under that hypothesis. In the bounded module models, supplied replacements will separately exhibit those Hom sets. No general local-smallness theorem for unbounded $D(\\mathcal A)$ is asserted.\n\nThe cone convention is $\\operatorname{Cone}(f)^n=Y^n\\oplus X^{n+1}$, $d(y,x)=(d_Yy+fx,-d_Xx)$, and its triangle ends in $X[1]$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+          "source_section": "Statement",
+          "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated. The localization functor $Q$ is exact. Every such triangle gives a long exact cohomology sequence $\\cdots\\to H^n(X)\\to H^n(Y)\\to H^n(Z)\\to H^{n+1}(X)\\to\\cdots$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-canonical-t-structure-on-a-derived-category",
+          "source_section": "Definition",
+          "quote": "For a triangulated category $T$ with shift $[1]$, a **t-structure** is a pair of strictly full subcategories $(T^{\\leq0},T^{\\geq0})$ such that $T^{\\leq0}[1]\\subseteq T^{\\leq0}$, $T^{\\geq0}[-1]\\subseteq T^{\\geq0}$, $\\operatorname{Hom}_T(T^{\\leq0},T^{\\geq1})=0$, and every $X$ has a distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in T^{\\leq0}$ and $B\\in T^{\\geq1}$. Here $T^{\\geq1}=T^{\\geq0}[-1]$ and $T^{\\leq n}=T^{\\leq0}[-n]$, $T^{\\geq n}=T^{\\geq0}[-n]$. Its **heart** is $T^{\\leq0}\\cap T^{\\geq0}$.\n\nFor the triangulation of [[thm-the-derived-category-inherits-a-triangulated-structure]], the canonical candidate is $D^{\\leq0}=\\{X:H^i(X)=0\\text{ for }i>0\\}$ and $D^{\\geq0}=\\{X:H^i(X)=0\\text{ for }i<0\\}$, using [[prop-cohomology-factors-through-the-derived-category]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-the-canonical-pair-is-a-t-structure",
+          "source_section": "Statement",
+          "quote": "The canonical pair is a t-structure on $D(\\mathcal A)$ and on each of $D^-,D^+,D^b$ by intersection. More generally if $H^i(X)=0$ for $i>a$ and $H^j(Y)=0$ for $j<b$, then $\\operatorname{Hom}_D(X,Y[n])=0$ for $n<b-a$, and naturally $\\operatorname{Hom}_D(X,Y[b-a])\\cong\\operatorname{Hom}_{\\mathcal A}(H^aX,H^bY)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-cohomology-factors-through-the-derived-category",
+          "source_section": "Statement",
+          "quote": "For every integer $n$, $H^n:K(\\mathcal A)\\to\\mathcal A$ factors uniquely through $Q:D(\\mathcal A)$. More precisely, there is a unique $\\overline H^n:D(\\mathcal A)\\to\\mathcal A$ with $H^n=\\overline H^nQ$, and $\\overline H^n(s,f)=H^n(f)H^n(s)^{-1}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-truncation-functors-and-cohomology-of-a-t-structure",
+          "source_section": "Definition",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$ with translation $[1]$ ([[def-canonical-t-structure-on-a-derived-category]], [[def-triangulated-category]]), and set $\\mathcal T^{\\le n}:=\\mathcal T^{\\le0}[-n]$ and $\\mathcal T^{\\ge n}:=\\mathcal T^{\\ge0}[-n]$ for $n\\in\\mathbb Z$; thus $X\\in\\mathcal T^{\\le n}$ exactly when $X[n]\\in\\mathcal T^{\\le0}$, and $X\\in\\mathcal T^{\\ge n}$ exactly when $X[n]\\in\\mathcal T^{\\ge0}$.\n\nFor $X\\in\\mathcal T$ and $n\\in\\mathbb Z$, the t-structure axiom applied to the translate $X[n]$ and then shifted by $[-n]$ produces a distinguished triangle\n$$\\tau_{\\le n}X\\longrightarrow X\\longrightarrow\\tau_{\\ge n+1}X\\longrightarrow\\tau_{\\le n}X[1]$$\nwith $\\tau_{\\le n}X\\in\\mathcal T^{\\le n}$ and $\\tau_{\\ge n+1}X\\in\\mathcal T^{\\ge n+1}$; such a triangle is a **truncation triangle** of $X$ at $n$. Truncation triangles of the same $X$ at the same $n$ are canonically isomorphic over $X$, so the objects and maps occurring in them are determined up to a unique compatible isomorphism ([[lem-truncation-triangles-are-essentially-unique-and-functorial]]); one writes $\\tau_{\\le n}$ and $\\tau_{\\ge n}$ for the resulting **truncation functors**.\n\nThe **t-cohomology** of $X$ is\n$$H^n_t(X):=(\\tau_{\\le n}\\tau_{\\ge n}X)[n],$$\nan object of the heart $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ ([[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]). The **amplitude** of $X$ is the set of $n$ with $H^n_t(X)\\not\\cong0$; it is *contained in* an interval $[a,b]$ when $H^n_t(X)=0$ for every $n\\notin[a,b]$. The t-structure is **bounded** when every object of $\\mathcal T$ lies in $\\mathcal T^{\\le n}\\cap\\mathcal T^{\\ge -n}$ for some integer $n$ depending on the object.\n\nThis item fixes notation and conventions only. Existence of the truncation triangle is the t-structure axiom itself, applied to $X[n]$ and shifted; the essential uniqueness of that triangle, the functoriality of the truncations and all algebraic properties of $\\tau_{\\le n}$, $\\tau_{\\ge n}$ and $H^n_t$ are proved in the two immediately following lemmas.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude",
+          "source_section": "Statement",
+          "quote": "Let $(\\mathcal T^{\\le0},\\mathcal T^{\\ge0})$ be a t-structure on a triangulated category $\\mathcal T$, with truncations and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-truncation-triangles-are-essentially-unique-and-functorial]], and let $\\mathcal C=\\mathcal T^{\\le0}\\cap\\mathcal T^{\\ge0}$ be the heart.\n\n(i) Each $H^n_t$ is a functor from $\\mathcal T$ to $\\mathcal C$: for every morphism $f:X\\to Y$ the induced map $H^n_t(f)$ is the unique map compatible with $f$ under the truncations, and values lie in the heart.\n\n(ii) *Shifts.* $H^n_t(X[m])\\cong H^{n+m}_t(X)$ for all $m,n\\in\\mathbb Z$, naturally in $X$.\n\n(iii) *Additivity.* For a finite biproduct $X\\oplus Y$ with injections $i_X,i_Y$ and projections $p_X,p_Y$, the maps $(H^n_t(i_X),H^n_t(i_Y)):H^n_t(X)\\oplus H^n_t(Y)\\to H^n_t(X\\oplus Y)$ and $(H^n_t(p_X),H^n_t(p_Y)):H^n_t(X\\oplus Y)\\to H^n_t(X)\\oplus H^n_t(Y)$ are mutually inverse isomorphisms; in particular $H^n_t(X\\oplus Y)\\cong H^n_t(X)\\oplus H^n_t(Y)$ naturally.\n\n(iv) *Amplitude detection.* If $X\\in\\mathcal T^{\\le m}$ then $H^n_t(X)=0$ for every $n>m$, and if $X\\in\\mathcal T^{\\ge m}$ then $H^n_t(X)=0$ for every $n<m$. If the t-structure is bounded ([[def-truncation-functors-and-cohomology-of-a-t-structure]]), the converses hold: $H^n_t(X)=0$ for all $n>m$ implies $X\\in\\mathcal T^{\\le m}$, and $H^n_t(X)=0$ for all $n<m$ implies $X\\in\\mathcal T^{\\ge m}$.\n\n(v) *Concentration and its consequences.* If $X\\in\\mathcal T^{\\le m}$ then $\\tau_{\\ge m}X\\cong H^m_t(X)[-m]$, and if $X\\in\\mathcal T^{\\ge m}$ then $\\tau_{\\le m}X\\cong H^m_t(X)[-m]$; if $X$ lies in both aisles then the canonical map gives $X\\cong H^m_t(X)[-m]$. If $X$ and $Y$ both lie in $\\mathcal T^{\\le m}\\cap\\mathcal T^{\\ge m}$, then the canonical identifications $X\\cong H^m_t(X)[-m]$ and $Y\\cong H^m_t(Y)[-m]$ identify $\\operatorname{Hom}(X,Y)$ with $\\operatorname{Hom}(H^m_t(X),H^m_t(Y))$ via $f\\mapsto H^m_t(f)$; in particular this applies when the t-structure is bounded and $X,Y$ have $H^n_t=0$ for every $n\\ne m$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-hard-lefschetz-splits-a-bounded-t-structure-complex",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal T$ be a triangulated category with a bounded t-structure, with truncation functors and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]. Let $K\\in\\mathcal T$ and let $L:K\\to K[2]$ be a morphism such that for every integer $j\\ge0$ the map\n$$H^{-j}_t(L^j):H^{-j}_t(K)\\longrightarrow H^{-j}_t(K[2j])\\cong H^j_t(K)$$\nis an isomorphism, where $L^j:=L[2j-2]\\circ\\cdots\\circ L[2]\\circ L$ is the $j$-fold iterate (so $L^0=1_K$) and the identification is the shift isomorphism $H^j_t(K)\\cong H^{-j}_t(K[2j])$ of that lemma. Then there is an isomorphism\n$$K\\cong\\bigoplus_j H^j_t(K)[-j]$$\nin $\\mathcal T$; the sum is finite because the t-structure is bounded. The isomorphism is not asserted to be canonical, and no compatibility with primitive lifts is claimed: this is the abstract splitting criterion, not the stronger primitive-compatible decomposition used in the Hodge theory of projective maps. The degenerate case in which $H^{-n}_t(K)$ and $H^n_t(K)$ are both zero (they vanish together because $H^{-n}_t(L^n)$ is an isomorphism) is covered by the same formulas, all of which are then the zero maps between zero objects.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By (F1) the category $\\mathcal T=D^b(\\mathbf{vect}^{fd}_k)$ is triangulated and carries the canonical t-structure, which is bounded by (F2). The complex $k$ concentrated in degree zero lies in the heart, since $H^i(k)=0$ for $i\\ne0$; hence $H^0_t(k)\\cong k$ and $H^j_t(k)=0$ for $j\\ne0$ by (F3).",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Since $k[m]$ satisfies $H^j_t(k[m])\\cong H^{j+m}_t(k)$ by the shift rule (F3), it has $H^j_t(k[m])\\cong k$ for $j=-m$ and vanishing $H^j_t$ otherwise. The object $K=k[2]\\oplus k\\oplus k[-2]$ is a finite biproduct in the additive category $\\mathcal T$ ([[def-biproduct]]), so additivity of $H^j_t$ gives $H^{-2}_t(K)\\cong k$, $H^0_t(K)\\cong k$, $H^2_t(K)\\cong k$, and $H^j_t(K)=0$ for all other $j$; in particular $H^{-1}_t(K)=0$ and $H^j_t(K)=0$ for $j\\ge3$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The description of $L$ is a well-defined morphism: $K[2]=k[4]\\oplus k[2]\\oplus k$, and $L$ has the canonical isomorphisms $k[2]\\xrightarrow{\\cong}k[2]$ and $k\\xrightarrow{\\cong}k$ as its components onto the second and third summands of $K[2]$, all other components being zero, so the third summand $k[-2]$ is carried to $0$. Its iterate $L^2=L[2]\\circ L$ maps $K$ to $K[4]=k[6]\\oplus k[4]\\oplus k[2]$, carrying the first summand $k[2]$ isomorphically onto the third summand $k[2]$ of $K[4]$ (first through the second summand of $K[2]$, then through the third summand of $K[4]$) and killing the other two summands; and $L^0=1_K$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Hence $H^{-j}_t(L^j)$ is an isomorphism for every $j\\ge0$. For $j=0$ it is the identity of $H^0_t(K)=k$; for $j=1$ its source $H^{-1}_t(K)$ is zero and its target $H^{-1}_t(K[2])\\cong H^1_t(K)$ is zero; for $j=2$ it is the isomorphism induced on $H^{-2}_t$ by the nonzero component $k[2]\\xrightarrow{\\cong}k[2]$ of $L^2$, between $H^{-2}_t(K)\\cong k$ and $H^{-2}_t(K[4])\\cong H^2_t(K)\\cong k$; and for $j\\ge3$ the source $H^{-j}_t(K)$ and the target $H^{-j}_t(K[2j])\\cong H^j_t(K)$ both vanish. A map between zero objects is an isomorphism, so the hard Lefschetz hypothesis holds in every case.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The hypotheses of (F4) are therefore satisfied: $\\mathcal T$ is triangulated with a bounded t-structure and $L$ satisfies the hard Lefschetz condition. The lemma yields $K\\cong\\bigoplus_jH^j_t(K)[-j]=H^{-2}_t(K)[2]\\oplus H^0_t(K)\\oplus H^2_t(K)[-2]=k[2]\\oplus k\\oplus k[-2]$, which is the displayed $K$, so the abstract splitting returns exactly the direct sum of the shifted t-cohomology objects and the example checks no more than that.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.1",
+            "step 4.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: for $j\\ge3$ both the source and the target of $H^{-j}_t(L^j)$ vanish, and step 2.1 shows the remaining t-cohomology degrees are exactly three."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 2.1 and 4.1: the induced maps in degrees $j=1$ and $j\\ge3$ are maps between zero objects, and such a map is an isomorphism."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: $L$ has one nonzero component on each of the first two summands, while $L^2$ has the single nonzero component carrying the first summand $k[2]$ to the third summand of $K[4]$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 separates the Lefschetz steps $j=0$ and $j=2$ from the degenerate degrees $j=1$ and $j\\ge3$, where both sides vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 pins the extreme degrees $-2$ and $2$ as the end t-cohomology groups of $K$, and step 4.1 pairs them through $H^{-2}_t(K[4])\\cong H^2_t(K)$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example fixes one field and works with finite direct sums of shifts of $k$, so no selection from a family of nonempty sets is needed at any point of the computation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Example instantiates the splitting lemma once; it asserts no biconditional and therefore carries no forward direction to verify."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse appears in the Example: it checks the hypothesis and the displayed conclusion for a single object and a single map."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-29",
+        "notes": "Read all five verification steps and fourteen current supplier interfaces in dependency order. The finite-dimensional coefficient category is closed under kernels, cokernels and finite sums in k-Mod and has skeleton k^n, satisfying the derived-category size condition. Canonical cochain shifts place k[2],k,k[-2] in cohomology degrees -2,0,2. Typed K[2]=k[4]⊕k[2]⊕k and K[4]=k[6]⊕k[4]⊕k[2]; L^2 identifies first and shifted third summands, while L^3=0. At j=0 identity, j=2 nonzero identity, j=1 and j≥3 zero-to-zero isomorphisms exhaust the quantified hypothesis. Bounded t-category splitting gives the finite stated direct sum with no primitive-lift compatibility claim. Verified interface propagation from repaired local suppliers. Empty/zero graded pieces, j endpoints and exact shift convention checked. No AC. Sources are the already read BBD t-structure passages and Deligne §1 bounded-derived criterion; no refuter/reader finding or touched obligation is owed for this unchanged example."
+      }
+    }
+  }
+}

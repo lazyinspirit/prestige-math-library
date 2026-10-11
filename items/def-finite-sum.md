@@ -121,13 +121,7 @@ $a_k = 1$) for $k \ge n$ and apply the definition above.
   order-preserving field homomorphism ([[lem-of-q-embeds]]), restricting on
   positive naturals to $n \mapsto n \cdot 1_{\mathbb{R}} = 1_\mathbb{R} + \cdots + 1_\mathbb{R}$
   ([[lem-of-naturals-positive]]). Following ordinary practice, and only where no
-  confusion is possible, we write $n$ for $\iota(n)$ and $r$ for $\iota(r)$; so,
-  for instance, $\frac{1}{n}\sum_{k<n} a_k$ means
-  $\iota(n)^{-1} \cdot \sum_{k<n} a_k$, which makes sense because
-  $\iota(n) > 0$ for $n \ge 1$. Exponents are the one place where the
-  identification is deliberately NOT made: in $a^n$ and $a^r$ the exponent stays
-  a natural, an integer or a rational ([[def-integer-power]],
-  [[def-rational-power]]), never a real.
+  confusion is possible, we write the same symbols $n$ and $r$ for their canonical images in $\mathbb{R}$. Thus $\frac{1}{n}\sum_{k<n}a_k$ means the inverse of the field element $n\cdot1_{\mathbb{R}}$, multiplied by that real sum; this is defined for $n\ge1$ because $n\cdot1_{\mathbb{R}}>0$. Index bounds remain natural numbers. Likewise the exponent in $a^n$ or $a^r$ remains a natural, integer or rational ([[def-integer-power]], [[def-rational-power]]); it is not replaced by a real exponent.
 - The two indexings are related by $\sum_{k=0}^{n} a_k = \sum_{k < n+1} a_k$, so
   a statement proved for one is available for the other. Sums over $k < n$ are
   the primitive form here because $\Sigma_0$, the empty sum, is then the base

@@ -1,0 +1,818 @@
+{
+  "version": 1,
+  "level": "frontier-44-special-representation-examples-28-six-step",
+  "scope": [
+    "def-rational-mixed-hodge-structure",
+    "lem-deligne-splitting-of-a-mixed-hodge-structure",
+    "def-cohomological-mixed-hodge-complex",
+    "lem-morphisms-of-mixed-hodge-structures-are-strict",
+    "lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights",
+    "ex-a-mixed-hodge-extension-need-not-split-rationally"
+  ],
+  "contracts": {
+    "def-rational-mixed-hodge-structure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The vanishing clauses $W_a=0$ (a small enough) and $F^a=H_{\\mathbb C}$ (a small enough) are part of the Definition, so empty filtration levels are named rather than omitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition includes the zero structure $H=0$: all graded pieces and both filtrations are zero and the opposition condition is vacuous."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The pure case $W_{n-1}=0$, $W_n=H$ is an explicit clause of the Definition, covering one-step weight filtrations and the Tate structures $\\mathbb Q(r)$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits degenerate finiteness data (repeated filtration levels, vanishing graded pieces); the axiom is vacuous on a zero graded piece."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two endpoints of the finiteness convention, $W_a=0$ and $W_a=H$ for all large $a$, are explicit clauses of the Definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition quantifies over a fixed finite-dimensional space and its two filtrations; no family of nonempty sets is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition states the decomposition form and its equivalent joint conditions: vanishing intersections AND spanning sums; neither condition alone is labelled equivalent."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition labels the conjunction of the displayed vanishing and spanning conditions as equivalent to the pure decomposition condition."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Reviewed entire definition, tensor balancing supplier, finite basis, internal direct sum, filtration/graded and module-category suppliers. Deligne II (1.2.3)-(1.2.5), (2.1.9)-(2.1.17), (2.3.1)-(2.3.6), printed pp. 9-10,25-27,30 checked from primary PDF. Finite descending opposition proof yields partial sums and vanishing in both directions; zero space and empty graded pieces obey the conventions. Rational W versus complex F sums and complex scalar/conjugation action are correctly typed; Tate weight -2r, dual annihilator indices and polarization parity are consistent. No arbitrary basis or infinite choice is required; no remaining defect."
+      }
+    },
+    "lem-deligne-splitting-of-a-mixed-hodge-structure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-associated-graded-object-of-a-filtered-object",
+          "source_section": "Definition",
+          "quote": "For an increasing filtration, the **associated graded object** is the indexed family\n$$\\operatorname{gr}^F_pA=\\operatorname{coker}(F_{p-1}A\\hookrightarrow F_pA)=F_pA/F_{p-1}A\\quad(p\\in\\mathbb Z).$$\nFor a decreasing filtration it is $\\operatorname{gr}^p_FA=F^pA/F^{p+1}A$. Here the inclusions come from [[def-increasing-and-decreasing-filtration-of-an-object]], and quotient means [[def-the-quotient-of-an-object-by-a-subobject]]. This definition uses a family; it assumes no infinite direct sum. With $F^p=F_{-p}$, the decreasing piece at $p$ is the increasing piece at $-p$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1",
+            "5.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "2.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-internal-direct-sum",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$, and let $U$ be a finite family of linear subspaces $U_i$ of\n$V$ indexed by $i < n$ ([[def-linear-subspace]],\n[[def-sum-of-linear-subspaces]]); as everywhere on this page the index runs over\nthe von Neumann natural $n = \\{0, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]).\n\n**The sum of the other summands.** The set $\\{0_V\\}$ is a linear subspace of $V$:\nit contains $0_V$, it is closed under addition since $0_V + 0_V = 0_V$, and it is\nclosed under scalar multiplication since $\\lambda 0_V = 0_V$\n([[lem-vector-space-elementary-consequences]]). So for each $j < n$ the family\n$U^{(j)}$ defined by\n\n$$U^{(j)}_i := U_i \\quad (i \\ne j), \\qquad U^{(j)}_j := \\{0_V\\}$$\n\nis again a finite family of linear subspaces of $V$ indexed by $i < n$, and we\nwrite\n\n$$\\sum_{i \\ne j} U_i \\;:=\\; \\sum_{i<n} U^{(j)}_i ,$$\n\na linear subspace of $V$ by [[def-sum-of-linear-subspaces]]. Replacing the\n$j$-th summand by $\\{0_V\\}$, rather than re-indexing over a smaller set, keeps\nevery family on this page indexed by a natural number.\n\n**The definition.** $V$ is the **internal direct sum** of the family $U$, written\n\n$$V \\;=\\; \\bigoplus_{i<n} U_i ,$$\n\nwhen both of the following hold:\n\n- **(D1)** $\\displaystyle\\sum_{i<n} U_i = V$;\n- **(D2)** for every $j < n$,\n  $\\displaystyle U_j \\cap \\sum_{i \\ne j} U_i = \\{0_V\\}$.\n\nIn (D2) the inclusion $\\supseteq$ is automatic, since $U_j$ and\n$\\sum_{i \\ne j} U_i$ are linear subspaces and each therefore contains $0_V$; the\ncontent of (D2) is the inclusion $\\subseteq$, that no nonzero vector of $U_j$ is\na sum of vectors drawn from the other summands.\n\n### Two summands\n\nTake $n = 2$ and write $U := U_0$, $W := U_1$. For $j = 0$ the family $U^{(0)}$ is\n$\\{0_V\\}, W$, so $\\sum_{i \\ne 0} U_i = \\{\\, 0_V + w : w \\in W \\,\\} = W$; for\n$j = 1$ it is $U$ in the same way. So (D2) reduces to the single condition\n$U \\cap W = \\{0_V\\}$, and\n\n$$V = U \\oplus W \\quad\\text{means}\\quad U + W = V \\ \\text{ and } \\ U \\cap W = \\{0_V\\}.$$\n\nFor two summands, therefore, (D2) and the pairwise condition coincide; this is\nthe familiar form of the definition.\n\n### Three or more summands: (D2) is not the pairwise condition\n\nFor $n \\ge 3$ the condition (D2) is **strictly stronger** than requiring\n$U_i \\cap U_j = \\{0_V\\}$ for all $i \\ne j$.\n\nThat (D2) implies the pairwise condition is immediate: for $i \\ne j$ with\n$i, j < n$ we have $U_i = U^{(j)}_i \\subseteq \\sum_{i \\ne j} U_i$, since a sum of\na family contains each of its summands ([[lem-sum-is-span-of-union]]), so\n$U_j \\cap U_i \\subseteq U_j \\cap \\sum_{i \\ne j} U_i = \\{0_V\\}$, and the reverse\ninclusion holds because both are linear subspaces.\n\nThe converse fails, and it fails already for three summands: a family can satisfy\n(D1) and have all its pairwise intersections trivial while (D2) is false, so that\ndecompositions are not unique. The companion examples page records a witness. A\ndefinition stated with the pairwise condition in place of (D2) would therefore be\na different, and weaker, notion, and the characterisation by unique decomposition\n([[lem-direct-sum-criterion]]) would be false for it.\n\n### The empty family\n\n$\\mathbb{N}$ contains $0$, so $n = 0$ is a genuine case. Then\n$\\sum_{i<0} U_i = \\{0_V\\}$ ([[def-sum-of-linear-subspaces]]) and (D2) is vacuous,\nthere being no $j < 0$. So $V = \\bigoplus_{i<0} U_i$ holds exactly when\n$V = \\{0_V\\}$: the zero space is the direct sum of the empty family, and no other\nspace is.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(Two-filtration lemma, spanning and partial sums.) Let $V$ be a finite-dimensional $\\mathbb C$-vector space with finite decreasing filtrations $F$ and $\\bar F$ such that $V=\\bigoplus_{p+q=n}(F^pV\\cap\\bar F^qV)$ for an integer $n$. Then (i) $F^aV+\\bar F^{n+1-a}V=V$ for every $a$, and (ii) $F^aV=\\bigoplus_{p\\ge a}(F^pV\\cap\\bar F^{n-p}V)$, with the conjugate formula $\\bar F^bV=\\bigoplus_{q\\ge b}(F^{n-q}V\\cap\\bar F^qV)$. For (i), write $v=\\sum_{p+q=n}v_{p,q}$; the terms with $p\\ge a$ sum into $F^aV$, and each remaining term has $p<a$, hence $q=n-p>n-a$, that is $q\\ge n+1-a$, so their sum lies in $\\bar F^{n+1-a}V$. For (ii), prove $F^aV\\subseteq\\sum_{p\\ge a}(F^pV\\cap\\bar F^{n-p}V)$ by descending induction on $a$: the claim is trivial when $F^aV=0$, and otherwise (i) with $a+1$ gives $V=F^{a+1}V+\\bar F^{n-a}V$, so the modular law applied to $F^{a+1}V\\subseteq F^aV\\subseteq V$ yields $F^aV=F^{a+1}V+(F^aV\\cap\\bar F^{n-a}V)$, in which the induction hypothesis places $F^{a+1}V$ inside $\\sum_{p\\ge a+1}(F^pV\\cap\\bar F^{n-p}V)$ while $F^aV\\cap\\bar F^{n-a}V$ is the term with $p=a$; the reverse inclusion is clear, and the sum is direct because the pieces $F^pV\\cap\\bar F^{n-p}V$ are independent by the decomposition hypothesis, which is symmetric in the two filtrations, so the same argument with $F$ and $\\bar F$ interchanged gives the formula for $\\bar F^bV$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "(Two-filtration lemma, vanishing.) Under the hypothesis of step 1.1, $F^aV\\cap\\bar F^bV=0$ whenever $a+b>n$. Indeed, let $x\\in F^aV\\cap\\bar F^bV$ and let $x=\\sum_{p+q=n}x_{p,q}$ be its unique decomposition with $x_{p,q}\\in F^pV\\cap\\bar F^qV$. Since $x\\in F^aV$, its decomposition lies in $\\bigoplus_{p\\ge a}(F^pV\\cap\\bar F^{n-p}V)$ by step 1.1 (ii), so $x_{p,n-p}=0$ for every $p<a$; since $x\\in\\bar F^bV$, the conjugate half of step 1.1 (ii) gives $x_{n-q,q}=0$ for every $q<b$. If $x\\ne0$, some $x_{p,n-p}$ is nonzero, and it satisfies $p\\ge a$ and $n-p\\ge b$, whence $n=p+(n-p)\\ge a+b>n$, a contradiction; so $x=0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "(Lifting.) Let $m=p+q$. Every $d\\in W_{m-1}$ can be written as $d=z+g$ with $z\\in F^p\\cap W_{m-1}$ and $g\\in(\\bar F^q\\cap W_{m-1})+\\sum_{j\\ge1}(\\bar F^{q-j}\\cap W_{m-j-1})$. To see this, construct elements $d_1,d_2,\\dots$ and vectors $f_j,g_j$ as follows. Put $d_1=d$, and suppose $d_j\\in W_{m-j}$ has been constructed for some $j\\ge1$. By [F1] the induced filtrations on $\\operatorname{Gr}^W_{m-j}$ are $(m-j)$-opposed, and step 1.1 (i) applied there with the pair $(p,q-j+1)$, whose indices sum to $m-j+1$, shows that the images of $F^p\\cap W_{m-j}$ and $\\bar F^{q-j+1}\\cap W_{m-j}$ generate $\\operatorname{Gr}^W_{m-j}$; choose $f_j\\in F^p\\cap W_{m-j}$ and $g_j\\in\\bar F^{q-j+1}\\cap W_{m-j}$ whose classes sum to the class of $d_j$, and put $d_{j+1}:=d_j-f_j-g_j\\in W_{m-j-1}$. By [F2] there is $J$ with $W_{m-J}=0$; the recursion stops there, and summing the identities $d_{j+1}=d_j-f_j-g_j$ gives $d=\\sum_{j=1}^{J-1}(f_j+g_j)$. Each $f_j$ lies in $F^p\\cap W_{m-j}\\subseteq F^p\\cap W_{m-1}$; $g_1$ lies in $\\bar F^q\\cap W_{m-1}$ and, for $j\\ge2$, $g_j$ lies in $\\bar F^{q-(j-1)}\\cap W_{m-(j-1)-1}$. Hence $z:=\\sum_jf_j$ and $g:=\\sum_jg_j$ have the required properties.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "(Surjectivity onto the graded summand.) Let $\\xi\\in H^{p,q}_m$. Since $H^{p,q}_m\\subseteq F^p\\operatorname{Gr}^W_m$ is the image of $F^p\\cap W_m$, choose $x_0\\in F^p\\cap W_m$ representing $\\xi$; since $H^{p,q}_m\\subseteq\\bar F^q\\operatorname{Gr}^W_m$ is the image of $\\bar F^q\\cap W_m$, choose $y_0\\in\\bar F^q\\cap W_m$ also representing $\\xi$. Then $d:=x_0-y_0$ lies in $W_{m-1}$, so step 2.2 gives $d=z+g$ with $z\\in F^p\\cap W_{m-1}$ and $g$ in the displayed sum. Put $x:=x_0-z=y_0+g$. Then $x\\in F^p\\cap W_m$, and $x\\in(\\bar F^q\\cap W_m)+\\sum_{j\\ge1}(\\bar F^{q-j}\\cap W_{m-j-1})$ because $y_0$ lies in the first summand and $g$ in the sum; so $x\\in I^{p,q}$. Finally $x-x_0=-z\\in W_{m-1}$, so $x$ and $x_0$ have the same class $\\xi$ in $\\operatorname{Gr}^W_m$. Hence the projection maps $I^{p,q}$ onto $H^{p,q}_m$, and $I^{p,q}\\subseteq W_m\\cap F^p$ holds by definition.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "(Injectivity modulo the lower weight.) Suppose $0\\ne x\\in I^{p,q}\\cap W_{m-1}$, and choose its least weight index $r$, so $x\\in W_r\\setminus W_{r-1}$ and $r<m$. Write $x=y+\\sum_{j\\ge1}g_j$ as in the defining formula, with $y\\in\\bar F^q\\cap W_m$ and $g_j\\in\\bar F^{q-j}\\cap W_{m-j-1}$; only finitely many terms are needed because $W$ is finite. Put $J=m-r-1\\ge0$. The sum $\\sum_{j>J}g_j$ lies in $W_{r-1}$, while $h:=y+\\sum_{1\\le j\\le J}g_j$ lies in $\\bar F^{q-J}$ and also in $W_r$, because $h=x-\\sum_{j>J}g_j$. Thus the nonzero class of $x$ in $\\operatorname{Gr}^W_r$ belongs to $F^p\\operatorname{Gr}^W_r\\cap\\bar F^{q-J}\\operatorname{Gr}^W_r$. But $p+q-J=r+1>r$, so step 2.1 makes that intersection zero, a contradiction. Together with step 3.1 this proves the projection isomorphism in (a).",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "(The weight decomposition and the direct-sum identity.) For every $m$ the projection restricts to an isomorphism $\\bigoplus_{p+q=m}I^{p,q}\\to\\operatorname{Gr}^W_mH_{\\mathbb C}$: by steps 3.1 and 4.1 each $I^{p,q}$ maps isomorphically onto $H^{p,q}_m$, and by [F1] the summands $H^{p,q}_m$ are independent with sum $\\operatorname{Gr}^W_m$. In particular $\\dim I^{p,q}=\\dim H^{p,q}_m$, so $\\sum_{p+q=m}\\dim I^{p,q}=\\dim\\operatorname{Gr}^W_m$ for every $m$. The sum map $\\psi_m\\colon\\bigoplus_{p+q\\le m}I^{p,q}\\to W_m$ is injective: if a finite sum $\\sum_{m'\\le m}\\sum_{p+q=m'}x_{p,q}$ vanishes, its class in $\\operatorname{Gr}^W_m$ is the sum of the classes of the top pieces $x_{p,m-p}$, which vanishes only if each of those pieces is zero because the restricted projection is an isomorphism; subtracting them leaves a vanishing sum over $m'\\le m-1$, and induction on $m$ (with $W_m=0$ for all sufficiently negative $m$) finishes the argument. Its image therefore has dimension $\\sum_{m'\\le m}\\dim\\operatorname{Gr}^W_{m'}=\\dim W_m$, the finite telescoping identity for the finite filtration $W$; an injective map between spaces of equal dimension is an isomorphism, so $W_mH_{\\mathbb C}=\\bigoplus_{p+q\\le m}I^{p,q}$. Taking $m$ large gives $H_{\\mathbb C}=\\bigoplus_{p,q}I^{p,q}$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1",
+            "step 4.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "(Conjugation modulo lower weights.) Work in $U=W_m/W_{m-2}$ with the images of $F^p\\cap W_m$ and $\\bar F^q\\cap W_m$. Their intersection $T$ maps injectively to $\\operatorname{Gr}^W_m$: its intersection with $W_{m-1}/W_{m-2}$ is $F^p\\operatorname{Gr}^W_{m-1}\\cap\\bar F^q\\operatorname{Gr}^W_{m-1}=0$ by step 2.1, since $p+q=m>m-1$. The formula for $I^{p,q}$ shows its image in $U$ lies in $T$, since every tail term has weight at most $m-2$. Step 3.1 shows this image maps onto $H^{p,q}_m$; the image of $T$ also lies in $H^{p,q}_m$, so injectivity makes the image of $I^{p,q}$ exactly $T$. Conjugating the same argument for $I^{q,p}$ shows that $\\sigma(I^{q,p})$ has this same image $T$ in $U$. Therefore $I^{p,q}+W_{m-2}=\\sigma(I^{q,p})+W_{m-2}$.",
+          "step": "5.2",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "(The Hodge decomposition.) For all $a,m$ one has $F^a\\cap W_m=\\bigoplus_{p\\ge a,\\ p+q\\le m}I^{p,q}$. Indeed, decompose $x\\in F^a\\cap W_m$ by step 5.1. Its class in $\\operatorname{Gr}^W_m$ lies in $\\bigoplus_{p\\ge a}H^{p,m-p}_m$ by step 1.1, so its top components with $p<a$ vanish by the projection isomorphism. Subtracting the remaining top components leaves an element of $F^a\\cap W_{m-1}$, and induction through the finite $W$ proves the assertion. Taking $m$ large proves $F^a=\\bigoplus_{p\\ge a}I^{p,q}$. Conjugating this identity gives $\\bar F^b=\\bigoplus_{q\\ge b}\\sigma(I^{q,p})$; it does not assert a decomposition of $\\bar F$ by the original $I^{p,q}$.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "(Functoriality.) Let $f\\colon H\\to K$ be a morphism of rational mixed Hodge structures. Since $f$ is defined over $\\mathbb Q$, $f_{\\mathbb C}$ commutes with the conjugations, so $f_{\\mathbb C}(\\bar F^qH_{\\mathbb C})=\\overline{f_{\\mathbb C}(F^qH_{\\mathbb C})}\\subseteq\\bar F^qK_{\\mathbb C}$; it also satisfies $f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ and $f_{\\mathbb C}(W_aH_{\\mathbb C})\\subseteq W_aK_{\\mathbb C}$ by definition. Applying $f_{\\mathbb C}$ to the two intersections and the sum defining $I^{p,q}(H)$ therefore produces an element of the corresponding intersection of $F^pK_{\\mathbb C}$ with the sum of the $\\bar F$-terms for $K$, and $W$-membership is preserved term by term; hence $f_{\\mathbb C}(I^{p,q}(H))\\subseteq I^{p,q}(K)$.",
+          "step": "7.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 starts the finite weight induction at W_m=0; the lower tail is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the zero intersection I^{p,q}∩W_{m-1}=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 identify each I^{p,q} with its individual graded Hodge summand; the Statement includes the pure single-weight specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 ends the descending correction when the finite weight filtration vanishes below its bottom."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 6.1 include the endpoints p+q<=m and p>=a in the exact weight and Hodge sums."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are representatives and corrections inside fixed finite-dimensional vector spaces; no choice from a family of nonempty sets is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 record spanning, partial-sum and vanishing consequences of the pure decomposition; the Statement is a splitting and functoriality assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current Statement/Example asserts the displayed construction or identification, not a biconditional or its converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_boundary_other",
+            "reason": "Statement fixes the explicit formula for I^(p,q), then claims its projection, weight/Hodge decompositions and functoriality. It warns that the conjugate splitting need not coincide; it does not claim that an arbitrary splitting determines this formula.",
+            "item_sha256": "cc541c90d91ae7c206636ee50867c4d1842929479da872b28447c22d7a684d8c",
+            "row_sha256": "8f584f1d2d1606bb5078ff407b51a9aafc3efb90e3e96a949c680031c47006e9"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all nine current steps and exact local F1-F3 suppliers; checked Deligne II (1.2.5),(1.2.8)-(1.2.12), printed pp.10-13 and Weber (2.2.4)-(2.2.5), printed p.6 from full PDF passages. Lifting correction indices p+(q-j+1)=m-j+1 span Gr_{m-j}; finite W stops the recursion (finite choices only). Injectivity uses J=m-r-1 and opposition at sum r+1. Joint independence, finite telescoping and F partial sums are valid including zero space. In W_m/W_{m-2}, representatives of a lower-weight intersection lie in W_{m-1}, justifying step5.2. Congruence rather than exact conjugate symmetry is claimed. Morphism functoriality follows termwise from W,F,barF preservation; no prerequisite or remaining defect."
+      }
+    },
+    "def-cohomological-mixed-hodge-complex": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition is a datum-plus-axiom statement; the bounded-below and finiteness clauses give the empty filtration levels $W_a=0$ and $F^p=0$ at the extremes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero complex on both rational and complex sides, with zero filtrations and zero comparison, satisfies every axiom in the Definition: its graded complexes have zero cohomology and zero strict differentials. Acyclicity of an arbitrary filtered complex alone does not imply these axioms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition covers the case of a single weight-graded piece, the weight-zero Hodge complex, as an instance of the axiom with $r+w=r$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition permits degenerate finiteness data (a filtration with repeated levels, an empty range of weights), and the axiom is vacuous on vanishing graded pieces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition states the shift $W_mH^n=\\operatorname{im}(H^n(W_{m-n}K))$ for all integers $m$, including the two endpoints where the image is $0$ or all of $H^n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The Definition quantifies over the given complexes and their filtrations; no family of nonempty sets is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition imposes conditions on given data; it asserts no biconditional, so no implication direction is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The standard equivalence with $E_1$-degeneration of the graded complexes is deliberately not asserted here, so no reverse direction is claimed."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-morphisms-of-mixed-hodge-structures-are-strict": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-deligne-splitting-of-a-mixed-hodge-structure",
+          "source_section": "Statement",
+          "quote": "Let $(H,W,F)$ be a rational mixed Hodge structure\n([[def-rational-mixed-hodge-structure]]) with complex conjugation $\\sigma$ on\n$H_{\\mathbb C}=H\\otimes_{\\mathbb Q}\\mathbb C$, and write\n$\\bar F^a=\\sigma(F^a)$ for the conjugate Hodge filtration; all weight spaces\nbelow are the complexifications $W_aH_{\\mathbb C}$. For integers $p,q$ put\n$m=p+q$ and\n$$I^{p,q}=\\bigl(F^p\\cap W_m\\bigr)\\cap\\Bigl(\\bigl(\\bar F^q\\cap W_m\\bigr)+\\sum_{j\\ge1}\\bigl(\\bar F^{q-j}\\cap W_{m-j-1}\\bigr)\\Bigr),$$\nthe intersections and the sum taken in $H_{\\mathbb C}$. Then:\n\n(a) $I^{p,q}\\subseteq W_m\\cap F^p$, the intersection $I^{p,q}\\cap W_{m-1}$ is\nzero, and the projection $W_m\\to\\operatorname{Gr}^W_mH_{\\mathbb C}$ maps\n$I^{p,q}$ isomorphically onto the summand $H^{p,q}_m$ of the mixed Hodge\ndefinition;\n\n(b) $W_mH_{\\mathbb C}=\\bigoplus_{p+q\\le m}I^{p,q}$,\n$F^aH_{\\mathbb C}=\\bigoplus_{p\\ge a}I^{p,q}$ for all integers $a,m$; in\nparticular $H_{\\mathbb C}=\\bigoplus_{p,q}I^{p,q}$;\n\n(c) every morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nsatisfies $f_{\\mathbb C}(I^{p,q}(H))\\subseteq I^{p,q}(K)$.\n\nThe construction satisfies\n$I^{p,q}+W_{m-2}=\\sigma(I^{q,p})+W_{m-2}$ inside $W_m$.\nIt need not satisfy $\\sigma(I^{p,q})=I^{q,p}$, and the same splitting need\nnot split $\\bar F$: its conjugate gives\n$\\bar F^bH_{\\mathbb C}=\\bigoplus_{q\\ge b}\\sigma(I^{q,p})$. The splitting is\nthe one pinned down in the sources by the displayed formula, not an arbitrary\ndirect-sum decomposition.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(Weight strictness.) Let $y=f(x)\\in f(H)\\cap W_nK$ and decompose $x=\\sum_{p,q}x^{p,q}$ along the splitting of $H_{\\mathbb C}$; then $y=\\sum_{p,q}f_{\\mathbb C}(x^{p,q})$ with $f_{\\mathbb C}(x^{p,q})\\in I^{p,q}(K)$ by [F1]. Since $y\\in W_nK=\\bigoplus_{p+q\\le n}I^{p,q}(K)$ and the sum is direct, all components with $p+q>n$ vanish: $f_{\\mathbb C}(x^{p,q})=0$ whenever $p+q>n$. Hence $x':=\\sum_{p+q\\le n}x^{p,q}$ lies in $W_nH_{\\mathbb C}$ and satisfies $f_{\\mathbb C}(x')=y$, so $y\\in f_{\\mathbb C}(W_nH_{\\mathbb C})$. The reverse inclusion $f(W_nH)\\subseteq f(H)\\cap W_nK$ is the preservation of $W$ by $f$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(Hodge strictness.) The same computation with the condition $p<a$ instead of $p+q>n$: if $y=f_{\\mathbb C}(x)\\in f(H_{\\mathbb C})\\cap F^aK_{\\mathbb C}$, decompose $x$ and use $F^aK_{\\mathbb C}=\\bigoplus_{p\\ge a}I^{p,q}(K)$ to conclude that $f_{\\mathbb C}(x^{p,q})=0$ for $p<a$, so $x'=\\sum_{p\\ge a}x^{p,q}$ lies in $F^aH_{\\mathbb C}$ and maps to $y$.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "(Rational descent.) Step 1.1 gives equality of the complexifications of the rational subspaces $A=f(W_nH)$ and $B=f(H)\\cap W_nK$. Images and intersections commute with extension from $\\mathbb Q$ to $\\mathbb C$: in finite rational coordinates they are kernels or images of matrices, whose rank is unchanged on extension since the same nonzero rational minors remain nonzero. To descend $A_{\\mathbb C}=B_{\\mathbb C}$, map $A$ into the rational quotient $K/B$. Its complexification is zero, hence the rational map is zero (a nonzero rational coordinate remains nonzero over $\\mathbb C$), so $A\\subseteq B$; interchanging them gives equality. Together with step 1.2 this proves the stated rational $W$ strictness and complex $F$ strictness. Complex conjugation fixes the real scalar extension of a rational space and is not used to recover rational vectors.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "(Exactness of $\\operatorname{Gr}^W_n$.) Let $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$ be a short exact sequence of mixed Hodge structures. By [F1] the splitting identifies $\\operatorname{Gr}^W_nA$, $\\operatorname{Gr}^W_nB$, $\\operatorname{Gr}^W_nC$ with $\\bigoplus_{p+q=n}I^{p,q}(A)$ and its analogues, and the maps $\\operatorname{Gr}^W_n i$, $\\operatorname{Gr}^W_n p$ with the direct sums of the maps induced by $i$ and $p$ between the pieces $I^{p,q}$. Each piecewise sequence $0\\to I^{p,q}(A)\\to I^{p,q}(B)\\to I^{p,q}(C)\\to 0$ is exact: injectivity follows by restriction of $i$; to lift $c\\in I^{p,q}(C)$, choose a preimage in $B_{\\mathbb C}$ and decompose it, whose $(p,q)$ component maps to $c$ by functoriality and uniqueness of the target decomposition. An element $b\\in I^{p,q}(B)$ lies in $\\ker p$ precisely when $b=i(a)$ for some $a\\in A$, and decomposing $a$ into its $I$-pieces shows that all other pieces map to zero; since $i$ is injective, they vanish and $a\\in I^{p,q}(A)$. A direct sum of short exact sequences is short exact, so $0\\to\\operatorname{Gr}^W_nA\\to\\operatorname{Gr}^W_nB\\to\\operatorname{Gr}^W_nC\\to0$ is exact after complexification. The rational graded sequence is exact as well, since kernels and images commute with scalar extension and rational ranks descend as in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "(Kernel, image and cokernel.) The functorial splitting [F1] makes $f_{\\mathbb C}$ a direct sum of maps $I^{p,q}(H)\\to I^{p,q}(K)$. Thus its kernel, image and cokernel decompose into the respective kernels, images and cokernels of these maps, and their induced or quotient $W$ and $F$ are the partial sums by $p+q\\le n$ and $p\\ge a$. The projection isomorphisms in [F1] identify their weight-$n$ pieces, with these induced $F$ filtrations, with the kernel, image and cokernel of $\\operatorname{Gr}^W_n f$, computed componentwise in the pure decompositions $H^{p,q}_n,K^{p,q}_n$. These identifications are the canonical rational graded maps: for a kernel this follows from $W$ strictness, since if $f(x)\\in W_{n-1}K$ with $x\\in W_nH$, choose $y\\in W_{n-1}H$ with $f(y)=f(x)$ and replace $x$ by $x-y$; the image and cokernel follow by the same induced/quotient description. The graded rational map commutes with conjugation and preserves $F$, hence also $\\bar F$; between equal-weight pure structures it preserves each type $F^p\\cap\\bar F^q$ with $p+q=n$. Consequently its pure kernels, images and cokernels have conjugation exchanging their $(p,q)$ and $(q,p)$ pieces. Their $F$ partial sums and their conjugates are therefore $n$-opposed. Every weight-graded piece of the three rational filtered spaces satisfies the mixed Hodge axiom, proving the claim. This argument requires no exact conjugate decomposition on the mixed vector space.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "(Pure image.) Now suppose $W_{n-1}H=0$ and $W_nK=K$. By step 3.2 the image is a mixed Hodge structure with the induced filtration, and step 1.1 gives $W_{n-1}(\\operatorname{im}f)=f(W_{n-1}H)=0$ and $W_n(\\operatorname{im}f)=f(H)\\cap W_nK=f(H)=\\operatorname{im}f$; hence the image is pure of weight $n$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero map has $\\ker f=H$, $\\operatorname{im}f=0$ and $\\operatorname{coker}f=K$, for which the equalities of steps 1.1 and 2.1 read $0=0$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector lies on both sides of each displayed equality, and step 2.1 shows the equalities of subspaces descend from the complexification."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 apply to a single-weight structure as well as mixed structures."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 handles the pure-image weight bounds W_{n-1}H=0 and W_nK=K, including zero image."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The equalities are proved for all integers $n,p$ in steps 1.1, 1.2 and 2.1, including endpoint levels where one side is zero or all of the space."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof uses only the canonical decompositions of the splitting lemma; no choice from a family of nonempty sets occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts strictness equalities and their structural consequences for every morphism, not a biconditional; no implication direction is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse assertion (not every strict filtered map is such a morphism), so no reverse direction is claimed."
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Reviewed all six steps, both exact suppliers and Deligne II (1.2.10)-(1.2.12),(2.3.4)-(2.3.6), pp.12-13,30; Weber (2.2.3),(2.2.6)-(2.2.7), pp.6-7. Functorial I pieces give W and F strictness by discarding zero components. Rational images/intersections and equality descend by unchanged finite matrix ranks. Componentwise preimage gives surjectivity in graded short exact sequences, with kernel exactness and rational descent explicit. Induced/quotient graded filtrations identify pure kernel/image/cokernel; conjugation is used only on rational pure graded maps, avoiding false exact symmetry of mixed I pieces. Endpoint weights >=n and <=n give W_{n-1}image=0,W_nimage=image, including zero image. Finite dimensional operations require no AC. No remaining defect."
+      }
+    },
+    "lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-the-cohomological-filtered-complex-construction",
+          "source_section": "Statement",
+          "quote": "Let K be a cochain complex with decreasing filtration by subcomplexes. Set $C_n=K^{-n}$, $F_pC_n=F^{-p}K^{-n}$ and $d_n=d_K^{-n}$. Then\n$$E_r^{p,q}(K)=E^r_{-p,-q}(C),\\qquad d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}.$$\nThe construction gives $E_0^{p,q}=\\operatorname{gr}^p K^{p+q}$ and $E_1^{p,q}\\cong H^{p+q}(\\operatorname{gr}^p K)$. With degreewise finite filtration it naturally abuts to the decreasing image filtration on $H^{p+q}(K)$, with $E_\\infty^{p,q}\\cong\\operatorname{gr}^pH^{p+q}(K)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-morphisms-of-mixed-hodge-structures-are-strict",
+          "source_section": "Statement",
+          "quote": "Every morphism $f\\colon H\\to K$ of rational mixed Hodge structures is strict for\n$W$ and for $F$:\n$$f(W_nH)=f(H)\\cap W_nK,\\qquad f(F^pH_{\\mathbb C})=f(H_{\\mathbb C})\\cap F^pK_{\\mathbb C}$$\nfor all $n,p$. Its kernel, image and cokernel, with the induced or quotient\nfiltrations, are mixed Hodge structures; the functor $\\operatorname{Gr}^W_n$ is\nexact; and a morphism from a structure of weights at least $n$ (that is\n$W_{n-1}H=0$) to a structure of weights at most $n$ (that is $W_nK=K$) has\npure image of weight $n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cochain-complex-in-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an abelian category. A **cochain complex in $\\mathcal A$**\nis a family of objects $(C^n)_{n\\in\\mathbb Z}$ together with morphisms\n$$d^n:C^n\\to C^{n+1}$$\nsuch that\n$$d^{n+1}\\circ d^n=0$$\nfor every $n\\in\\mathbb Z$.\n\nThis page uses the reindexing convention that a cochain complex $C^\\bullet$ may\nalso be read as the chain complex with $(C^\\sharp)_n:=C^{-n}$ and\n$d^\\sharp_n:=d^{-n}$, so that lower and upper indices differ only by the sign\nof the grading.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cohomological-mixed-hodge-complex",
+          "source_section": "Definition",
+          "quote": "A **rational cohomological mixed Hodge complex** consists of\n\n(a) a bounded-below cochain complex $K_{\\mathbb Q}$ of $\\mathbb Q$-vector\nspaces with an increasing filtration $W$ by subcomplexes, finite on each\ncochain group;\n\n(b) a cochain complex $K_{\\mathbb C}$ of $\\mathbb C$-vector spaces with an\nincreasing filtration $W$ by subcomplexes and a decreasing filtration $F$ by\nsubcomplexes, again finite on each cochain group;\n\n(c) a morphism of complexes\n$\\alpha\\colon K_{\\mathbb Q}\\otimes_{\\mathbb Q}\\mathbb C\\to K_{\\mathbb C}$\ncompatible with the weight filtrations, such that for every $w$ the induced map\n$\\operatorname{Gr}^W_w\\alpha$ is a quasi-isomorphism,\n\nsubject to the following axiom: for every integer $w$ the weight-graded\ncomplex $\\operatorname{Gr}^W_wK$ has finite-dimensional cohomology, its\ndifferential (induced by $d_K$) is strict for the induced filtration $F$, and\nfor every $r$ the induced filtration $F$ on\n$H^r(\\operatorname{Gr}^W_wK_{\\mathbb C})$, together with the induced rational\ncomparison\n$H^r(\\operatorname{Gr}^W_wK_{\\mathbb Q})\\otimes_{\\mathbb Q}\\mathbb C\\to\nH^r(\\operatorname{Gr}^W_wK_{\\mathbb C})$, is a pure Hodge structure of weight\n$r+w$ ([[def-rational-mixed-hodge-structure]]).\n\nHere a cochain complex is a complex in the sense of\n[[def-cochain-complex-in-an-abelian-category]], a filtration by subcomplexes is\na filtered complex in the sense of [[def-filtered-chain-complex]], a morphism\ncompatible with the weight filtrations is a filtered chain map in the sense of\n[[def-filtered-chain-map]], quasi-isomorphism means\n[[def-quasi-isomorphism]], and finiteness on a cochain group $K^n$ means\n$W_aK^n=0$ for all sufficiently negative $a$ and $W_aK^n=K^n$ for all\nsufficiently positive $a$, with bounds depending on $n$; dually $F^pK^n=K^n$\nfor $p\\ll0$ and $F^pK^n=0$ for $p\\gg0$.\n\n**The weight filtration on cohomology** is the shifted image filtration\n$$W_mH^n(K):=\\operatorname{im}\\bigl(H^n(W_{m-n}K)\\to H^n(K)\\bigr).$$\nThe shift is essential: it is what makes the axiom's weight $r+w$ on the graded\ncomplexes compatible with the weight of $H^n$, and pole-count weight on a\nlogarithmic complex is not the weight on its cohomology. The differential\nstrictness in the axiom is Deligne's condition (GH1); the equivalent\nformulation that the $F$-spectral sequence of the graded complex degenerates at\nits first page is recorded in the sources but is neither asserted nor used\nhere, so no degeneration theorem enters this definition.\n\n**Morphisms and the sheaf case.** A morphism of cohomological mixed Hodge\ncomplexes is a pair of chain maps $K_{\\mathbb Q}\\to L_{\\mathbb Q}$ and\n$K_{\\mathbb C}\\to L_{\\mathbb C}$ compatible with both filtrations and with the\ncomparisons; compatible filtered homotopies are permitted. The same\ndefinitions apply to bounded-below complexes of sheaves on a topological space\nwhen the complexes are replaced by their derived global sections and the\nresolutions used preserve the graded pieces; the existence of such resolutions\nfor the concrete complexes used later is proved where those complexes are\nconstructed, not here.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "(First page and pure strictness.) Put $G^p=W_{-p}$ and apply [F1] over $\\mathbb Q$ and $\\mathbb C$. Then $E_0^{p,q}=\\operatorname{Gr}^p_GK^{p+q}$, $E_1^{p,q}=H^{p+q}(\\operatorname{Gr}^W_{-p}K)$ and $E_\\infty^{p,q}=\\operatorname{Gr}^p_GH^{p+q}(K)$ for the image filtration. The axiom gives $E_1^{p,q}$ a pure rational Hodge structure of weight $q$. We will use the following explicit pure case of [F2]: a rational map preserving $F$ also preserves $\\bar F$; between pure structures of the same weight it therefore preserves each type $F^a\\cap\\bar F^b$, so it is strict for $F$, and its kernels, images and cokernels have the induced pure structures. If the source has weight $q$ and the target has weight $q'<q$, it is zero: a source vector of type $(a,b)$ with $a+b=q$ maps into $F^a\\cap\\bar F^b$ of the target, which is zero because no target type of total $q'$ has both indices at least $a,b$. Thus no mixed Hodge structure on the abutment is being assumed.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "(Strict representative correction.) For a complex $C$ with decreasing filtration $T$ by subcomplexes and $T$-strict differential, the sequence $0\\to H^n(T^aC)\\to H^n(C)\\to H^n(C/T^aC)\\to0$ is exact for every $a,n$. For injectivity, a cycle $x\\in T^aC$ that is a boundary $dy$ in $C$ equals $dy'$ for some $y'\\in T^aC$ by strictness. For surjectivity, a quotient cycle lifts to $x\\in C$ with $dx\\in T^aC$; strictness gives $y\\in T^aC$ with $dy=dx$, so $x-y$ is a cycle with the same quotient class. If a cycle maps to a quotient boundary, subtract a lift of that boundary to obtain a cycle in $T^aC$, proving exactness at the middle. In particular $H(T^aC)$ identifies with the filtration induced on $H(C)$ by $T^a$. These corrections use only strictness of the differential on $C$.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "(Scalar extension.) Tensoring rational vector spaces with $\\mathbb C$ preserves exact sequences, hence kernels, images, quotients and cohomology. Here is a finite argument that needs no basis of an arbitrary vector space. The field $\\mathbb C$ is the directed union of its finite-dimensional rational subspaces $U$; tensor elements and the relations equating them involve finitely many coefficients, so $V\\otimes\\mathbb C$ is the directed union, in the tensor presentation, of the systems $V\\otimes U$. On a fixed $U$, a finite rational basis identifies tensoring with a finite direct sum of copies of the given sequence, which is exact. A tensor in a kernel is represented at some $U$, and its vanishing in the target is witnessed at a larger finite-dimensional $U'$; exactness there supplies a preimage. Surjectivity follows by lifting the finitely many vector coefficients of a tensor. Thus the original tensor sequence is exact; applying this to cycles and boundaries gives the cohomology assertion. The same subquotient argument identifies the rational spectral-sequence pages after scalar extension with the pages of $K_{\\mathbb Q}\\otimes\\mathbb C$, compatibly with their differentials.",
+          "step": "1.3",
+          "inputs": [
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "(Exact filtered pages through $E_2$.) Fix a Hodge index $a$, and apply [F1] with the intersection and quotient $G$ filtrations to $A=F^aK_{\\mathbb C}$, $B=K_{\\mathbb C}$ and $C=B/A$. Their $E_0$ complexes form a short exact sequence $0\\to E_0(A)\\to E_0(B)\\to E_0(C)\\to0$: the first image in $G^pB/G^{p+1}B$ is $(F^aB\\cap G^pB+G^{p+1}B)/G^{p+1}B$, exactly $F^aE_0(B)$, and the last term is its quotient. The mixed Hodge complex axiom says $d_0$ on $E_0(B)=\\operatorname{Gr}^GK_{\\mathbb C}$ is $F$-strict. Step 1.2 therefore gives a short exact sequence on $E_1$, with first image exactly $F^aE_1(B)$. Naturality of the page maps shows $d_1$ preserves this image for every $a$; its rational form then makes $d_1:E_1^{p,q}\\to E_1^{p+1,q}$ a map of pure Hodge structures of weight $q$, strict by step 1.1. Apply step 1.2 again to the $E_1$ complexes to obtain exactness on $E_2$, with $E_2(A)$ identifying with the filtration induced on $E_2(B)=H(E_1(B),d_1)$. Denote this recursively induced filtration by $F_{\\mathrm{rec}}$. The pure type decomposition of $E_1$ descends through its type-preserving $d_1$, so $E_2^{p,q}(B)$ with $F_{\\mathrm{rec}}$ is pure of weight $q$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "(Higher differentials and exact stable pages.) Suppose the three page complexes are exact at page $r\\ge2$, with $E_r(A)$ identifying with $F^a_{\\mathrm{rec}}E_r(B)$ for every $a$, and $E_r^{p,q}(B)$ pure of weight $q$. Naturality shows $d_r$ preserves these images, hence $F_{\\mathrm{rec}}$; it also preserves the rational structures. Its target $E_r^{p+r,q-r+1}$ has lower weight, so step 1.1 forces $d_r=0$. This zero map is strict, and step 1.2 applied to the exact triple of $E_r$ complexes gives exactness at $E_{r+1}$ and the recursive filtration identification. Since $d_r(B)=0$, injectivity of $E_r(A)\\to E_r(B)$ and surjectivity onto $E_r(C)$ also give $d_r(A)=d_r(C)=0$. Starting from step 2.1 proves this induction for all $r\\ge2$. Thus the weight sequence degenerates at $E_2$, and the three sequences for $A,B,C$ stabilize there; $E_\\infty^{p,q}(B)=E_2^{p,q}(B)$ is pure of weight $q$ for the recurrent filtration.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "(Recurrent filtration equals the abutment filtration.) By convergence and naturality [F1], the injective stable-page map $E_\\infty(A)\\to E_\\infty(B)$ is $\\operatorname{Gr}_G H(A)\\to\\operatorname{Gr}_G H(B)$ for the image $G$ filtrations on cohomology. A filtered linear map between finite filtered spaces whose graded map is injective is injective and strict: for any nonzero $x$, choose its largest decreasing-filtration index $p$; its nonzero graded class has nonzero image, so the image has this same index. This proves injectivity and, if the image of $x$ belongs to $G^p$, forces $x\\in G^p$, which is strictness. The cohomology $G$ filtrations here are finite in each degree because $G$ is finite on the degree-$n$ cochain group, so the argument applies to $H^n(F^aK)\\to H^n(K)$. Consequently its graded image is the induced filtration of the subspace $F^aH^n(K)=\\operatorname{im}(H^n(F^aK)\\to H^n(K))$ on $\\operatorname{Gr}_GH^n(K)$: in filtration degree $p$ the numerator is $(F^aH^n(K)\\cap G^pH^n(K))+G^{p+1}H^n(K)$. By steps 2.1 and 3.1 that same image on $E_\\infty$ is $F^a_{\\mathrm{rec}}$. This proves exactly the recurrent-to-abutment comparison needed here, with the strict representative correction supplied in step 1.2.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 1.2",
+            "step 2.1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "(Mixed Hodge structure and shifted weights.) Write $W_mH^n(K)=\\operatorname{im}(H^n(W_{m-n}K)\\to H^n(K))$. Substitution $p=n-m$, $q=m$ in [F1] and step 3.1 gives $\\operatorname{Gr}^W_mH^n(K)=\\operatorname{Gr}^{n-m}_GH^n(K)\\cong E_2^{n-m,m}$. Step 4.1 makes this identification compatible with the Hodge filtration induced by $F$ on cohomology; the right side is pure of weight $m$ by step 2.1. By step 1.3, the rational comparison identifies scalar-extended rational pages with complex pages: it is an isomorphism on $E_1$ by the graded quasi-isomorphism axiom and hence on the stable pages. Its cohomology map is injective by the leading-term argument of step 4.1 and surjective by lifting a target graded class and correcting the remaining error through the finite filtration; thus it is an isomorphism. The finitely many nonzero stable terms in degree $n$ are finite-dimensional, so $H^n(K_{\\mathbb Q})$ is finite-dimensional. The induced $W$ and $F$ are finite, and every $\\operatorname{Gr}^W_m$ with its induced $F$ is pure of weight $m$, precisely the mixed Hodge axiom.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 1.1",
+            "step 1.3",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "(Functoriality.) A morphism of cohomological mixed Hodge complexes induces rational and complex cohomology maps compatible with the comparisons. It maps $W_{m-n}K$ to $W_{m-n}L$ and $F^aK_{\\mathbb C}$ to $F^aL_{\\mathbb C}$, hence preserves the cohomology image filtrations $W_m$ and $F^a$. These maps are therefore morphisms of the mixed Hodge structures of step 5.1. Naturality of [F1] and of the exact-page construction makes the graded-piece identifications compatible with these maps and their Hodge filtrations.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "given",
+            "step 4.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "(The cosimplicial case.) Form $sK^n=\\bigoplus_{p+q=n}K^{p,q}$ on both rational and complex sides, with $F^a(sK^n)_{\\mathbb C}=\\bigoplus_{p+q=n}F^aK_{\\mathbb C}^{p,q}$. On $K^{p,q}$ put $D=\\delta+(-1)^p d$, where $\\delta=\\sum_{i=0}^{p+1}(-1)^i\\partial^i$ is the alternating coface map and $d$ is the internal differential. The cosimplicial identities pair the terms of $\\delta^2$ with opposite signs, so $\\delta^2=0$; the cofaces are chain maps, so $\\delta d=d\\delta$, and the cross terms in $D^2$ cancel because $\\delta$ raises $p$. Thus $D^2=0$, and $D$ preserves $F$ because both its summands do. The filtration $L_\\ell sK^n=\\bigoplus_{i\\ge-\\ell}K^{i,n-i}$ is increasing, by subcomplexes, and finite on each degree because $0\\le i\\le n$. Its graded piece is $\\operatorname{Gr}^L_\\ell sK\\cong K^{-\\ell}[\\ell]$, so $H^r(\\operatorname{Gr}^L_\\ell sK)=H^{r+\\ell}(K^{-\\ell})$ is pure of weight $r+\\ell$, and its internal differential is strict for $F$ by the Hodge complex hypothesis. Levelwise rational comparisons and filtration-preserving coface maps assemble to the total comparison, which is a graded quasi-isomorphism; the total complex is bounded below and its $F$ filtration is degreewise finite because each diagonal is finite. Thus $sK$ is a rational cohomological mixed Hodge complex for $L$. Applying steps 1.1-6.1 gives $E_1^{p,q}=H^{p+q}(\\operatorname{Gr}^L_{-p}sK)=H^q(K^p)$, degeneration at $E_2$ and $\\operatorname{Gr}^W_qH^n(sK)=\\operatorname{Gr}^L_{q-n}H^n(sK)\\cong E_2^{n-q,q}$, with its induced Hodge filtration and functorial mixed structure. Here $W_qH^n=L_{q-n}H^n$ is the shifted cohomology filtration, not the unshifted $L$.",
+          "step": "7.1",
+          "inputs": [
+            "F1",
+            "given",
+            "construct",
+            "step 1.1",
+            "step 3.1",
+            "step 5.1",
+            "step 6.1"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "(Weights at most the degree.) Since the cosimplicial degree is nonnegative, $E_1^{p,q}=0$ for $p<0$, hence $E_2^{n-q,q}=0$ when $q>n$. Step 7.1 gives $\\operatorname{Gr}^W_qH^n(sK)=0$ for all $q>n$; finiteness of the weight filtration then gives $W_nH^n(sK)=H^n(sK)$, proving the stated bound.",
+          "step": "8.1",
+          "inputs": [
+            "step 5.1",
+            "step 7.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 8.1 uses vanishing cosimplicial entries with p<0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats zero graded cohomology through the stated purity axiom, and steps 2.1 and 3.1 carry the exact page comparisons."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 identifies every individual Gr^W_m H^n with E_2^{n-m,m}, including a single nonzero weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 proves d_r=0 for every r>=2, including pages with vanishing terms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 7.1 and 8.1 use the exact total-degree and weight indices, including q=n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All constructions are subquotients of the given complexes and finite-dimensional linear algebra; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current Statement/Example asserts the displayed construction or identification, not a biconditional or its converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_boundary_other",
+            "reason": "Statement sends a cohomological mixed Hodge complex to shifted cohomology filtrations and E_2 degeneration, then handles a first-quadrant cosimplicial Hodge system. The resulting weight bound does not assert the converse construction of a complex from a mixed Hodge structure.",
+            "item_sha256": "55a37c0d0c86f5f977470eea5dde6bc8cd160b975df4ddab797b6ce9097a2400",
+            "row_sha256": "21861373f0ac12023c629beae268b5f59a6ee1d8f223a7239fb5580ec698f2a4"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current Statement/Example asserts the displayed construction or identification, not a biconditional or its converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_boundary_other",
+            "reason": "Statement sends a cohomological mixed Hodge complex to shifted cohomology filtrations and E_2 degeneration, then handles a first-quadrant cosimplicial Hodge system. The resulting weight bound does not assert the converse construction of a complex from a mixed Hodge structure.",
+            "item_sha256": "55a37c0d0c86f5f977470eea5dde6bc8cd160b975df4ddab797b6ce9097a2400",
+            "row_sha256": "8f584f1d2d1606bb5078ff407b51a9aafc3efb90e3e96a949c680031c47006e9"
+          }
+        }
+      ],
+      "finite_smoke": [],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-batch-30",
+        "notes": "Read all ten steps, exact mixed-complex/strictness/cochain suppliers, and cohomological spectral construction plus its six actual suppliers. Read Deligne II (1.3.8)-(1.3.17), pp.16-19; Deligne III (8.1.1)-(8.1.17), pp.28-34; Weber (2.3.1),(2.4.1), pp.7-8. Degreewise finite filtrations suffice for convergence and finite abutment, without uniform bounds. Strict representative corrections prove exact H(F^aC),H(C),H(C/F^aC) sequences; exact E0/E1/E2 sequences make d1 a rational F-preserving pure map. Its cohomology is pure; dr for r>=2 targets weight q-r+1<q and vanishes without circularly assuming the abutment MHS. Exact stable-page injection yields injective strict cohomology inclusion and recurrent=induced F. Scalar extension is exact by finite coefficient subspaces, no arbitrary basis/AC; E1 comparison descends to finite filtered cohomology isomorphism. Indices p=n-m,q=m give shifted weight. Finite nonnegative total diagonals and filtered comparison-compatible cofaces give D=delta+(-1)^p d, D^2=0, F preservation, L graded shift and purity weight r+ell. p<0 vanishing gives weights <=n, including n<0 zero cohomology. Zero pages and zero graded structures cause no exceptions. No unmet prerequisite or remaining mathematical defect."
+      }
+    },
+    "ex-a-mixed-hodge-extension-need-not-split-rationally": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-rational-mixed-hodge-structure",
+          "source_section": "Definition",
+          "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$\nwith a finite basis ([[def-linear-basis]]) together with\n\n- a finite increasing filtration $W$ of $H$, the **weight filtration**, and\n- a finite decreasing filtration $F$ of\n  $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$, the **Hodge filtration**\n  ([[def-tensor-product-of-modules-by-generators-and-relations]]),\n\nsuch that the following opposition condition holds on every weight-graded\npiece. Here a filtration is **finite** when $W_aH=0$ for all sufficiently\nnegative $a$ and $W_aH=H$ for all sufficiently positive $a$, and dually\n$F^aH_{\\mathbb C}=H_{\\mathbb C}$ for $a\\ll0$ and $F^aH_{\\mathbb C}=0$ for\n$a\\gg0$ ([[def-increasing-and-decreasing-filtration-of-an-object]]).\n\n**Complexification and conjugation.** Complex scalars act by\n$c(h\\otimes z)=h\\otimes cz$; this respects the rational balancing relations.\nA finite rational basis of $H$ identifies $H_{\\mathbb C}$ with the corresponding\nfinite-dimensional coordinate space over $\\mathbb C$. The\n$\\mathbb{Q}$-linear involution $\\sigma$ of\n$H_{\\mathbb C}$, defined on generators by\n$\\sigma(h\\otimes z)=h\\otimes\\bar z$ and extended $\\mathbb{Q}$-linearly,\nsatisfies $\\sigma^2=\\mathrm{id}$ and $\\sigma(cz)=\\bar c\\,\\sigma(z)$ for\n$c\\in\\mathbb C$ ([[def-complex-numbers-and-arithmetic]]). It preserves the\nsubspace $W_aH_{\\mathbb C}:=(W_aH)\\otimes_{\\mathbb Q}\\mathbb C$ for every $a$,\nso it descends to each graded piece\n$\\operatorname{Gr}^W_aH_{\\mathbb C}:=W_aH_{\\mathbb C}/W_{a-1}H_{\\mathbb C}$\n([[def-associated-graded-object-of-a-filtered-object]]). The **conjugate\nHodge filtration** is $\\bar F^q:=\\sigma(F^q)$, a finite decreasing filtration\nof $H_{\\mathbb C}$.\n\n**Opposition.** Let $V$ be a finite-dimensional $\\mathbb C$-vector space with\nfinite decreasing filtrations $F$ and $\\bar F$, and let $n$ be an integer. The\ntwo filtrations are **$n$-opposed** when the natural map\n$$\\bigoplus_{p+q=n}\\bigl(F^pV\\cap\\bar F^qV\\bigr)\\longrightarrow V,\\qquad (v_{p,q})_{p+q=n}\\longmapsto\\sum_{p+q=n}v_{p,q},$$\nis an isomorphism. Applied to $V=\\operatorname{Gr}^W_nH_{\\mathbb C}$ this\ncondition is required for every $n$, with the *induced* filtrations: $F^p$\nacts on $\\operatorname{Gr}^W_nH_{\\mathbb C}$ through the image of\n$F^p\\cap W_nH_{\\mathbb C}$, and $\\bar F^q$ through the image of\n$\\bar F^q\\cap W_nH_{\\mathbb C}$. Writing\n$$H^{p,q}_n:=F^p\\operatorname{Gr}^W_nH_{\\mathbb C}\\cap \\bar F^q\\operatorname{Gr}^W_nH_{\\mathbb C},$$\nthe requirement is therefore the direct sum decomposition\n$$\\operatorname{Gr}^W_nH_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}_n \\qquad\\text{for every }n\\in\\mathbb Z .$$\nSince $\\sigma$ interchanges the induced filtrations $F^p$ and $\\bar F^p$ and\npreserves $W$, it maps $H^{p,q}_n$ onto $H^{q,p}_n$, so\n$\\overline{H^{p,q}_n}=H^{q,p}_n$. Equivalently, the opposition condition requires both\n$F^pV\\cap\\bar F^qV=0$ whenever $p+q>n$ and\n$F^pV+\\bar F^{n+1-p}V=V$ for every $p$, on\n$V=\\operatorname{Gr}^W_nH_{\\mathbb C}$. The conjunction, rather than either\ncondition alone, is equivalent to the displayed decomposition: the spanning\ncondition and the modular law give\n$F^pV=F^{p+1}V+(F^pV\\cap\\bar F^{n-p}V)$, and the vanishing condition makes\nthis sum direct; descending induction through the finite filtration gives\n$F^pV=\\bigoplus_{a\\ge p}(F^aV\\cap\\bar F^{n-a}V)$ and then the decomposition\nof $V$. Conversely, the decomposition gives these two conditions by grouping\nits summands by the first and second indices.\n\n**Morphisms.** A morphism $f\\colon H\\to K$ of rational mixed Hodge structures\nis a $\\mathbb{Q}$-linear map with $f(W_aH)\\subseteq W_aK$ for all $a$ and\n$f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ for all $p$, where\n$f_{\\mathbb C}=f\\otimes\\mathrm{id}$. Such an $f$ commutes with the\nconjugations $\\sigma$, hence also satisfies\n$f_{\\mathbb C}(\\bar F^pH_{\\mathbb C})\\subseteq\\bar F^pK_{\\mathbb C}$.\n\n**Substructures, pure structures, Tate.** A subspace $H'\\subseteq H$ with the\ninduced filtrations $W_aH'=H'\\cap W_aH$ and\n$F^pH'_{\\mathbb C}=H'_{\\mathbb C}\\cap F^pH_{\\mathbb C}$ is a **substructure**\nwhen the induced filtrations again satisfy the opposition condition on every\ngraded piece, and a quotient $H\\to Q$ with the quotient filtrations is a\n**quotient structure** under the same requirement; that the kernel, image and\ncokernel of a morphism do carry such structures is not part of the definition\nand is proved in the strictness lemma below. A structure is **pure of weight\n$n$** when $W_{n-1}H=0$ and $W_nH=H$; the opposition condition then says that\n$H_{\\mathbb C}=\\bigoplus_{p+q=n}H^{p,q}$ with\n$H^{p,q}=F^p\\cap\\bar F^q$, and $\\overline{H^{p,q}}=H^{q,p}$. The **Tate\nstructure** $\\mathbb Q(r)$, for $r\\in\\mathbb Z$, is the pure structure of\nweight $-2r$ with $\\mathbb Q(r)_{\\mathbb C}=\\mathbb C$ concentrated in type\n$(-r,-r)$, that is $H^{-r,-r}=\\mathbb C$ and $H^{p,q}=0$ for\n$(p,q)\\ne(-r,-r)$.\n\n**Tensor and dual conventions.** The tensor product $H\\otimes K$ carries\n$$W_a(H\\otimes K)=\\sum_{b+c=a}W_bH\\otimes W_cK,\\qquad F^p(H\\otimes K)_{\\mathbb C}=\\sum_{b+c=p}F^bH_{\\mathbb C}\\otimes F^cK_{\\mathbb C},$$\nwhere the weight sum is taken over $\\mathbb Q$ and the Hodge sum over\n$\\mathbb C$, using $(H\\otimes_{\\mathbb Q}K)_{\\mathbb C}\\cong\nH_{\\mathbb C}\\otimes_{\\mathbb C}K_{\\mathbb C}$; the dual\n$H^*=\\operatorname{Hom}_{\\mathbb Q}(H,\\mathbb Q)$ carries\n$$W_aH^*=\\{u:u(W_{-a-1}H)=0\\},\\qquad F^pH^*_{\\mathbb C}=\\{u:u(F^{1-p}H_{\\mathbb C})=0\\}.$$\n\n**Polarizability.** A pure rational Hodge structure $H$ of weight $n$ is\n**polarizable** when it carries a rational bilinear form $Q$ of parity\n$(-1)^n$ that pairs only complementary Hodge types, i.e.\n$Q(H^{p,q},H^{p',q'})=0$ unless $p'=n-p$ and $q'=n-q$, and whose\nWeil-operator Hermitian form $h(u,v):=Q(Cu,\\bar v)$, where the Weil operator\n$C$ acts as $i^{p-q}$ on $H^{p,q}$, is positive definite.\n\nNo mixed structure in this definition is assumed to split over $\\mathbb R$ or\nover $\\mathbb Q$; the Deligne splitting constructed below is a decomposition\nover $\\mathbb C$ only.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The weight filtration is finite with $\\operatorname{Gr}^W_{-2}=\\mathbb Q e_1$, $\\operatorname{Gr}^W_{-1}=0$ and $\\operatorname{Gr}^W_0=H/\\mathbb Q e_1\\cong\\mathbb Q e_0$. On $\\operatorname{Gr}^W_{-2}$ the induced $F$ has $F^0=0$ and $F^{-1}=\\operatorname{Gr}^W_{-2}$, since $F^0\\cap W_{-2}=\\mathbb C(e_0+ie_1)\\cap\\mathbb C e_1=0$; the conjugate filtration satisfies $\\bar F^{-1}=\\operatorname{Gr}^W_{-2}$ and $\\bar F^0=0$ for the same reason, so the pieces are $H^{-1,-1}=\\operatorname{Gr}^W_{-2}$ and nothing else, and $H^{-1,-1}$ is spanned by the image of $e_1$, which is rational. On $\\operatorname{Gr}^W_0$ the image of $F^0\\cap W_0=\\mathbb C(e_0+ie_1)$ is all of $\\operatorname{Gr}^W_0$ because $e_0+ie_1\\mapsto e_0\\ne0$, and $F^1=0$; the conjugate $\\bar F^0=\\sigma(F^0)=\\mathbb C(e_0-ie_1)$ likewise has image all of $\\operatorname{Gr}^W_0$, so the pieces are $H^{0,0}=\\operatorname{Gr}^W_0$ and nothing else. Both graded pieces are therefore $n$-opposed, with the rational structure of $e_1$ and $e_0$ respectively, so $(H,W,F)$ is a rational mixed Hodge structure; its graded pieces are $\\mathbb Q(1)$ and $\\mathbb Q(0)$ in the convention [F2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $\\iota\\colon\\mathbb Q(1)\\to H$ be the rational inclusion $1\\mapsto e_1$, whose complexification is $\\mathbb C\\to H_{\\mathbb C}$ and let $\\pi\\colon H\\to\\mathbb Q(0)$ be the $\\mathbb Q$-linear map $e_0\\mapsto1$, $e_1\\mapsto0$. Both preserve the filtrations: $\\iota$ sends the weight-$(-2)$ structure into $W_{-2}H=\\mathbb Q e_1$ and $F^{-1}\\mathbb Q(1)_{\\mathbb C}=\\mathbb C$ into $F^{-1}H_{\\mathbb C}=H_{\\mathbb C}$, while $F^0\\mathbb Q(1)_{\\mathbb C}=0$; and $\\pi$ satisfies $\\pi(W_{-1}H)=0=W_{-1}\\mathbb Q(0)$ and $\\pi(W_0H)=\\mathbb Q(0)=W_0\\mathbb Q(0)$, $\\pi(F^0H_{\\mathbb C})\\subseteq\\mathbb C=F^0\\mathbb Q(0)_{\\mathbb C}$ and $\\pi(F^1H_{\\mathbb C})=0$. Hence $0\\to\\mathbb Q(1)\\xrightarrow{\\iota}H\\xrightarrow{\\pi}\\mathbb Q(0)\\to0$ is a short exact sequence of rational mixed Hodge structures, with $\\ker\\pi=\\mathbb Q e_1$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every $\\mathbb Q$-linear section $s$ of $\\pi$ satisfies $s(1)=e_0+q e_1$ with $q\\in\\mathbb Q$, because $\\pi(e_0+q e_1)=1$ and $\\pi(e_1)=0$. If $s$ were a morphism of mixed Hodge structures, it would satisfy $s_{\\mathbb C}(F^0\\mathbb Q(0)_{\\mathbb C})\\subseteq F^0H_{\\mathbb C}=\\mathbb C(e_0+ie_1)$; since $F^0\\mathbb Q(0)_{\\mathbb C}=\\mathbb C$ and $s_{\\mathbb C}(1)=e_0+qe_1$, there would be $\\lambda\\in\\mathbb C$ with $e_0+qe_1=\\lambda(e_0+ie_1)$. Comparing the coefficients of $e_0$ and $e_1$ in the basis $(e_0,e_1)$ gives $\\lambda=1$ and $q=i$, which is impossible for $q\\in\\mathbb Q$. Hence the extension does not split in the category of rational mixed Hodge structures. The obstruction is visible directly in the $(0,0)$-direction: $F^0H_{\\mathbb C}\\cap\\bar F^0H_{\\mathbb C}=\\mathbb C(e_0+ie_1)\\cap\\mathbb C(e_0-ie_1)=0$, while a rational section must send $1$ into a rational vector of $F^0$, which is then also fixed by conjugation and hence would have to lie in this zero intersection.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty index cases are the trivial filtrations $W_{-3}=0$ and $F^1=0$ used in the verification step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 records Gr^W_{-1}=0 and step 3.1 the zero intersection F^0∩bar F^0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Both graded pieces are one-dimensional and their $(p,q)$ types are computed in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate step $W_{-2}=W_{-1}$ produces the zero graded piece $\\operatorname{Gr}^W_{-1}=0$, recorded in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two endpoints of the extension $0\\to\\mathbb Q(1)\\to H\\to\\mathbb Q(0)\\to0$ are checked in steps 2.1 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only quantifiers are over the two displayed basis vectors and rational scalars; no choice from a family of nonempty sets occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The current Statement/Example asserts the displayed construction or identification, not a biconditional or its converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_boundary_other",
+            "reason": "Example fixes the rank-two filtration with F^0=C(e_0+i e_1). Verification 3.1 excludes a rational section because its coefficient q would have to equal i; it provides one nonsplit extension and does not characterize all such extensions.",
+            "item_sha256": "38909f34c63d68a9f9a1e8cba46a5a28b2fdc5cade91647adb6829680c9cefe2",
+            "row_sha256": "21861373f0ac12023c629beae268b5f59a6ee1d8f223a7239fb5580ec698f2a4"
+          }
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The current Statement/Example asserts the displayed construction or identification, not a biconditional or its converse.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/gate_boundary_other",
+            "reason": "Example fixes the rank-two filtration with F^0=C(e_0+i e_1). Verification 3.1 excludes a rational section because its coefficient q would have to equal i; it provides one nonsplit extension and does not characterize all such extensions.",
+            "item_sha256": "38909f34c63d68a9f9a1e8cba46a5a28b2fdc5cade91647adb6829680c9cefe2",
+            "row_sha256": "8f584f1d2d1606bb5078ff407b51a9aafc3efb90e3e96a949c680031c47006e9"
+          }
+        }
+      ],
+      "finite_smoke": []
+    }
+  }
+}

@@ -1,0 +1,682 @@
+[
+  {
+    "order": 1798,
+    "id": "compact-support-sheaf-calculus",
+    "kind": "A",
+    "category": "scheme-theory",
+    "title": "Compact Support Sheaf Calculus",
+    "companion": "compact-support-sheaf-calculus-examples",
+    "requires": [
+      "cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes",
+      "compactness",
+      "hausdorff-via-the-diagonal",
+      "presheaves-sheaves-stalks-and-sheafification",
+      "relations-functions-and-quotients",
+      "sheaf-cohomology-cech-cohomology-and-comparison",
+      "sheaf-operations-exactness-ringed-spaces-and-module-pullback",
+      "uniform-spaces",
+      "simplicial-complexes-and-simplicial-homology",
+      "simplicial-subdivision-and-simplicial-approximation"
+    ],
+    "items": [
+      {
+        "id": "def-support-of-a-sheaf-section",
+        "kind": "definition",
+        "title": "Support of a section of a sheaf",
+        "deps": [
+          "def-presheaf-on-topological-space",
+          "def-stalk-of-presheaf",
+          "def-germ-of-section",
+          "lem-section-zero-if-all-germs-zero",
+          "def-compact-space",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "cor-heine-borel-in-the-product-topology",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $X$ be a topological space, let $\\mathcal F$ be a presheaf of $k$-vector\nspaces (or of abelian groups) on $X$\n([[def-presheaf-on-topological-space]]), let $U\\subseteq X$ be open and let\n$s\\in\\mathcal F(U)$. The **support of $s$** is\n$$\\operatorname{Supp}(s):=\\{\\,x\\in U: s_x\\neq 0\\,\\}\\subseteq U,$$\nwhere $s_x\\in\\mathcal F_x$ denotes the germ of $s$ at $x$ in the stalk\n$\\mathcal F_x$ ([[def-stalk-of-presheaf]], [[def-germ-of-section]]). A section\n$s\\in\\mathcal F(X)$ is **compactly supported** when its support is a compact\nsubspace of $X$ ([[def-compact-space]]). For a subspace $Z\\subseteq X$ and a\npresheaf $\\mathcal G$ on $Z$, the support of $t\\in\\mathcal G(Z)$ is defined by\nthe same condition using the stalks of $\\mathcal G$. The support is not assumed\nclosed in $X$ nor compact.\n\nWhen $\\mathcal F$ is a **sheaf** of abelian groups (in particular of $k$-vector spaces) the following three\nconsistency facts hold; they are immediate consequences of the definitions\nabove and are recorded here because every later compact-support statement uses\nthem.\n\n1. $\\operatorname{Supp}(s)$ is closed in $U$. Indeed, if $x\\notin\n   \\operatorname{Supp}(s)$ then $s_x=0$ in the stalk; equality of germs means\n   that $s$ and the zero section agree on some open neighbourhood $W\\subseteq U$\n   of $x$ ([[def-germ-of-section]]), so $s$ vanishes on the open neighbourhood\n   $W$ of $x$, and $U\\setminus\\operatorname{Supp}(s)$ is therefore open in $U$.\n2. $\\operatorname{Supp}(s)=\\varnothing$ if and only if $s=0$. If every germ of\n   $s$ is zero then $s=0$ by the locality axiom of a sheaf applied to the cover\n   of $U$ by its open subsets ([[lem-section-zero-if-all-germs-zero]]); the\n   converse is immediate, since the zero section has zero germ at every point.\n3. $\\operatorname{Supp}(s|_V)=\\operatorname{Supp}(s)\\cap V$ for every open\n   $V\\subseteq U$. Restriction is compatible with the germ maps, so\n   $(s|_V)_x=s_x$ for every $x\\in V$ ([[def-germ-of-section]]).\n\nFor a sheaf, a section whose support is contained in a compact subset\n$C\\subseteq U$ is compactly supported: its support is closed in $C$ by fact 1,\nhence compact ([[thm-closed-subspace-of-a-compact-space-is-compact]]).\nFor a global section ($U=X$), this applies to any compact subset of $X$.\nFor a local section, containment in a compact subset of $X$ alone does not\nsuffice: the constant nonzero section of the constant sheaf\n([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]])\non $U=(0,1)\\subseteq X=[0,1]$ has\nsupport $U$, which is not compact although it is contained in the compact $X$\n([[cor-heine-borel-in-the-product-topology]], $n=1$).\nThe open cover $\\{(1/n,1):n\\ge2\\}$ of $U$ has no finite subcover.\nNo choice principle is used: germs, stalks, supports and restrictions are elementary.",
+        "strategy": "Equality of zero germs makes the complement of support open in the section domain. Locality proves empty support iff zero; restriction preserves germs. For compact containment, require the compact set to be inside the domain, so support is closed in it. The nonzero constant section on (0,1) inside [0,1] exhibits why ambient containment alone fails. These arguments apply to abelian groups and use no choice.",
+        "axiom_use": "None: germs, stalks, supports and restrictions are elementary and choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Sheaves of Modules (chapter 17); §5 Supports of modules and sections, Definition 5.1 (tag 01AT) and Lemma 5.2 (tag 01AU)",
+              "url": "https://stacks.math.columbia.edu/download/modules.pdf",
+              "locator": "§5, Definition 5.1 (tag 01AT): the support of a section s of a sheaf of modules is the set of points x with nonzero image s_x in the stalk; Lemma 5.2 (tag 01AU): the support of a local section is closed in its domain"
+            },
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§10.2, equation (10.2.4), printed pp. 178–179: for locally closed Z, Gamma_Z(X;F) = {s in Gamma(U;F) : supp(s) contained in Z}, with supp(s) defined through the stalk images; §11.2, printed pp. 207–210, uses the same support in the c-soft calculus"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compatible-refinement-for-tuple-indexed-coverings",
+        "kind": "lemma",
+        "title": "A refinement compatible with tuple-indexed coverings",
+        "deps": [
+          "def-compact-space",
+          "def-hausdorff-space",
+          "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "def-normal-and-t4-spaces",
+          "def-topological-space",
+          "thm-closure-characterisation-top",
+          "thm-closed-subspace-of-a-compact-space-is-compact"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $X$ be a compact Hausdorff space ([[def-compact-space]],\n[[def-hausdorff-space]]), let $I$ be a **finite** set, and let\n$(U_i)_{i\\in I}$ be an open cover of $X$. Fix an integer $p\\ge0$, write\n$$U_{i_0\\dots i_p}:=U_{i_0}\\cap\\dots\\cap U_{i_p}\\qquad(i_0,\\dots,i_p\\in I),$$\nand suppose that for every $(p+1)$-tuple $\\underline i=(i_0,\\dots,i_p)$ of\nelements of $I$ a family $(W_{\\underline i,k})_{k\\in K_{\\underline i}}$ of open\nsubsets of $U_{\\underline i}$ is given which covers $U_{\\underline i}$.\n\nThen there are a finite set $J$, a map $\\alpha:J\\to I$, and an open cover\n$(V_j)_{j\\in J}$ of $X$ such that\n$$V_j\\subseteq U_{\\alpha(j)}\\qquad\\text{for every }j\\in J,$$\nand such that for every $(p+1)$-tuple $(j_0,\\dots,j_p)$ of elements of $J$\nwhose intersection $V_{j_0}\\cap\\dots\\cap V_{j_p}$ is nonempty there is $k\\in K_{\\alpha(j_0)\\dots\\alpha(j_p)}$ with\n$$V_{j_0}\\cap\\dots\\cap V_{j_p}\\subseteq W_{\\alpha(j_0)\\dots\\alpha(j_p),k}.$$\n\nEmpty intersections impose no condition; this is necessary when a cover of an empty $U_{\\underline i}$ has empty index set. No choice principle is used: every selection in the proof is made from\nfinitely many nonempty sets, and the empty-space case is covered by the empty refinement.",
+        "strategy": "Induct on p. Normal finite shrinking controls closures and meet covers settle tuples with repeated parent values. For a chosen distinct value tuple split a selected first cover member using the intersection, over the other parent values, of their finite unions of closures. Its compact intersection with the first closure is covered by finitely many prescribed opens. This strictly decreases the chosen bad-index count N. Other positive counts may increase but zero counts persist, so inner N descent and outer failing-value count M descent terminate. Empty intersections require no witness. All selections are finite.",
+        "axiom_use": "None: compactness provides finite subcovers, the shrinking uses normality, and only finitely many choices are made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Topology (chapter 5); §13, Lemma 13.5 (tag 09UW), compatible refinement for tuple-indexed coverings of a Hausdorff quasi-compact space",
+              "url": "https://stacks.math.columbia.edu/download/topology.pdf",
+              "locator": "§13, Lemma 13.5 (tag 09UW): for a Hausdorff quasi-compact space, an open cover (U_i), an integer p >= 0 and covers U_{i_0} cap ... cap U_{i_p} = union_k W_{i_0...i_p,k}, there is an open cover (V_j) with a map alpha such that V_j is contained in U_{alpha(j)} and each V_{j_0} cap ... cap V_{j_p} is contained in some W_{alpha(j_0)...alpha(j_p),k}"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sections-near-a-compact-set-are-sections-on-that-set",
+        "kind": "lemma",
+        "title": "Sections on a compact set extend to a neighbourhood",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-inverse-image-presheaf-and-sheaf",
+          "def-sheafification",
+          "def-presheaf-plus-construction",
+          "lem-second-plus-construction-is-sheaf",
+          "def-germ-of-section",
+          "def-stalk-of-presheaf",
+          "thm-sheafification-preserves-stalks",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-set-has-all-small-colimits",
+          "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "def-filtered-category-and-filtered-colimit",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-subspace-topology-top",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "lem-normality-via-shrinking",
+          "thm-closure-characterisation-top",
+          "def-interior-closure-boundary-top",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "lem-finite-choice"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $K\\subseteq X$ be a compact subset ([[def-compact-space]]) of a locally\ncompact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]),\nlet $\\mathcal F$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]) and let $i:K\\hookrightarrow X$ be the\ninclusion. Then the canonical map\n$$\\varinjlim_{U\\supseteq K,\\ U\\ \\text{open}}\\mathcal F(U)\\longrightarrow\\Gamma(K,i^{-1}\\mathcal F)=(i^{-1}\\mathcal F)(K)$$\nis an isomorphism of abelian groups (of $k$-vector spaces when $\\mathcal F$ is a sheaf of $k$-vector spaces). Moreover, for pairwise disjoint compact\nsubsets $K_1,\\dots,K_m\\subseteq X$ and sections $s_j\\in\\mathcal F(U_j)$ over open\nneighbourhoods $U_j$ of the respective $K_j$, there are an open neighbourhood $U$\nof $K_1\\cup\\dots\\cup K_m$ and a section $s\\in\\mathcal F(U)$, together with, for\nevery $j$, an open neighbourhood $W_j\\subseteq U_j$ of $K_j$ with\n$s|_{W_j}=s_j|_{W_j}$; in particular the zero section can be prescribed on any\ncompact set disjoint from the given one. The isomorphism is $k$-linear in the vector-space case, and no\nchoice principle is used: every selection in the proof is made from finitely\nmany nonempty sets.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 **Reduction to the presheaf value at $K$.** The source of the canonical map of the statement is $P(K)$ and the map is the component $\\eta_{P,K}$, by [F1]; the structure maps of the colimits and the sheafification map are additive (and $k$-linear in the vector-space case), so $\\eta_{P,K}$ is additive. If $K=\\varnothing$, the empty open set is a terminal stage of the neighbourhood diagram, and both $P(K)$ and $(i^{-1}\\mathcal F)(K)$ are zero by the empty-cover sheaf axiom; hence the assertion holds. For surjectivity below assume $K\\ne\\varnothing$. It therefore suffices to prove that $\\eta_{P,K}$ is injective and surjective. [F1, given]\n\n1.2 **Classes and germs.** For later use, record the descriptions of [F2]: elements of $P(K)$ are classes $[V,a]$ with $V\\supseteq K$ open and $a\\in\\mathcal F(V)$, equality being agreement after restriction to an open $W$ with $K\\subseteq W\\subseteq V\\cap V'$; the stalk $P_x$ at $x\\in K$ is the filtered colimit of the $P(U)$ and is identified with $\\mathcal F_x$, and equality of germs in $P_x$ is agreement on a smaller open neighbourhood. [F2]\n\n1.3 **$\\eta_{P,K}$ is injective.** Let $p,q\\in P(K)$ with $\\eta_{P,K}(p)=\\eta_{P,K}(q)$; write $p=[V,a]$ and $q=[V',a']$ with $K\\subseteq V,V'$ open and $a\\in\\mathcal F(V)$, $a'\\in\\mathcal F(V')$ by [F2](i). Fix $z\\in K$: the germ of $\\eta_{P,K}(p)$ at $z$ is $\\eta_{P,z}(p_z)$ and that of $\\eta_{P,K}(q)$ is $\\eta_{P,z}(q_z)$ by [F3], and these are equal, so $p_z=q_z$ in $P_z$ because $\\eta_{P,z}$ is injective; by [F2](ii) this means that $a$ and $a'$ agree on an open neighbourhood of $z$. Let $\\mathcal O$ be the family of all open subsets $O\\subseteq V\\cap V'$ with $a|_O=a'|_O$: it is cut out by a formula, and the previous sentence shows that it covers $K$, so by compactness of $K$ ([F5]) there are finitely many $O_1,\\dots,O_m\\in\\mathcal O$ with $K\\subseteq O_1\\cup\\dots\\cup O_m$. Put $W:=O_1\\cup\\dots\\cup O_m$, an open set with $K\\subseteq W\\subseteq V\\cap V'$; the restrictions $a|_W$ and $a'|_W$ agree by locality of the sheaf $\\mathcal F$ ([F4]), since they agree on each $O_t$. Hence $p=[V,a]=[W,a|_W]=[W,a'|_W]=[V',a']=q$ by [F2](i), and $\\eta_{P,K}$ is injective. [F2, F3, F4, F5]\n\n1.4 **Local representatives of a section.** Let $\\sigma\\in(i^{-1}\\mathcal F)(K)$. For $x\\in K$ the map $\\eta_{P,x}:P_x\\to(i^{-1}\\mathcal F)_x$ is onto by [F3], so there is $\\xi\\in P_x$ with $\\eta_{P,x}(\\xi)=\\sigma_x$; by the description of the stalk $P_x$ as a filtered colimit, [F2](ii), the element $\\xi$ is the germ at $x$ of an element $b\\in P(U)$ for some open $U\\subseteq K$ containing $x$, and by [F2](i) we can write $b=[V,a]$ with $V\\supseteq U$ open in $X$ and $a\\in\\mathcal F(V)$. Then the section $\\zeta_V(a)|_U=\\eta_{P,U}(b)$ of $i^{-1}\\mathcal F$ over $U$ has at $x$ the same germ as $\\sigma$ by [F3], and two sections of the sheaf $i^{-1}\\mathcal F$ with the same germ at $x$ agree on some open neighbourhood $U'\\subseteq U$ of $x$ by the description of equality in the stalk ([F2](ii) applied to $i^{-1}\\mathcal F$, [F4]). Form the family $\\mathcal V$ of all open subsets $U\\subseteq K$ for which there are an open $V\\subseteq X$ with $U\\subseteq V$ and a section $a\\in\\mathcal F(V)$ satisfying $\\zeta_V(a)|_U=\\sigma|_U$: the family is cut out by a formula, and the argument above shows that every point of $K$ lies in a member of $\\mathcal V$. [F2, F3, F4]\n\n1.5 **Finitely many pieces with compact cores.** By compactness of $K$ ([F5]) there are finitely many members $U_0,\\dots,U_m\\in\\mathcal V$ with $K=U_0\\cup\\dots\\cup U_m$, and for each $i$ we select witnesses: an open $V_i\\subseteq X$ with $U_i\\subseteq V_i$ and a section $a_i\\in\\mathcal F(V_i)$ with $\\zeta_{V_i}(a_i)|_{U_i}=\\sigma|_{U_i}$; these are finitely many selections ([F5], [F3]). The compact Hausdorff space $K$ is normal ([F5]), so its finite open cover $(U_0,\\dots,U_m)$ can be shrunk: recursively for $i=0,\\dots,m$, maintaining $K=(\\bigcup_{j<i}B_j)\\cup(\\bigcup_{j\\ge i}U_j)$, the set $F_i:=K\\setminus\\bigl(\\bigcup_{j<i}B_j\\cup\\bigcup_{j>i}U_j\\bigr)$ is closed in $K$ and contained in $U_i$, and normality supplies an open $B_i\\subseteq K$ with $F_i\\subseteq B_i\\subseteq\\overline{B_i}\\subseteq U_i$, the closure taken in $K$ ([[thm-closure-characterisation-top]]); the invariant is maintained and at the end $K=B_0\\cup\\dots\\cup B_m$. Put $C_i:=\\overline{B_i}$, a compact subset of $K$ with $C_i\\subseteq U_i$ ([F5]); then $C_0,\\dots,C_m$ are compact subsets of $K$ with $K=C_0\\cup\\dots\\cup C_m$ and $C_i\\subseteq U_i\\subseteq V_i$ for every $i$. [F3, F5, construct]\n\n1.6 **Neighbourhoods of the pairwise intersections.** For all indices $i,j$ let $\\mathcal O_{ij}$ be the family of all open subsets $O\\subseteq V_i\\cap V_j$ with $a_i|_O=a_j|_O$. It covers $C_i\\cap C_j$: for $z\\in C_i\\cap C_j\\subseteq U_i\\cap U_j$ the sections $\\zeta_{V_i}(a_i)=\\sigma|_{U_i}$ and $\\zeta_{V_j}(a_j)=\\sigma|_{U_j}$ have the same germ $\\sigma_z$ at $z$, so $a_i$ and $a_j$ have the same germ at $z$ by [F3], and by [F2](ii) they agree on an open neighbourhood of $z$. Since $C_i\\cap C_j$ is a closed subset of the compact set $C_i$, hence compact ([F5]), finitely many members of $\\mathcal O_{ij}$ cover it; their union is an open set $W_{ij}$ with $C_i\\cap C_j\\subseteq W_{ij}\\subseteq V_i\\cap V_j$ and, by locality of $\\mathcal F$ ([F4]), $a_i|_{W_{ij}}=a_j|_{W_{ij}}$. [F2, F3, F4, F5]\n\n1.7 **Fusion of two pieces.** Let $C_1,C_2\\subseteq X$ be compact, let $V_1,V_2\\subseteq X$ be open with $C_k\\subseteq V_k$ and let $s_k\\in\\mathcal F(V_k)$ for $k=1,2$; suppose that $W\\subseteq V_1\\cap V_2$ is open with $C_1\\cap C_2\\subseteq W$ and $s_1|_W=s_2|_W$. Then there are an open $V'\\subseteq X$ with $C_1\\cup C_2\\subseteq V'$ and a section $s'\\in\\mathcal F(V')$, together with open $V_k'\\subseteq V_k$ with $C_k\\subseteq V_k'$ and $V'=V_1'\\cup V_2'$, such that $s'|_{V_k'}=s_k|_{V_k'}$ for $k=1,2$. Indeed, $A:=C_1\\setminus W$ and $B:=C_2\\setminus W$ are closed subsets of the compact sets $C_1$ and $C_2$, hence compact, and they are disjoint because $C_1\\cap C_2\\subseteq W$; as $X$ is Hausdorff there are disjoint open sets $G_1\\supseteq A$ and $G_2\\supseteq B$ ([F5]). Set $V_1':=V_1\\cap(G_1\\cup W)$ and $V_2':=V_2\\cap(G_2\\cup W)$: these are open, $C_1=(C_1\\cap W)\\cup A\\subseteq V_1'$ and $C_2=(C_2\\cap W)\\cup B\\subseteq V_2'$, and $V_1'\\cap V_2'\\subseteq(G_1\\cup W)\\cap(G_2\\cup W)=W\\cup(G_1\\cap W)\\cup(G_2\\cap W)\\cup(G_1\\cap G_2)\\subseteq W$, since $G_1\\cap G_2=\\varnothing$. Hence $s_1|_{V_1'}$ and $s_2|_{V_2'}$ agree on $V_1'\\cap V_2'$ and glue, by the sheaf axiom for $\\mathcal F$ ([F4]), to a section $s'$ of $\\mathcal F$ over $V'=V_1'\\cup V_2'\\supseteq C_1\\cup C_2$ with $s'|_{V_k'}=s_k|_{V_k'}$ for $k=1,2$. [F4, F5, construct]\n\n2.1 **Iterated fusion.** Fuse the pieces of step 1.5 one after another: for each $k\\in\\{0,\\dots,m\\}$ there are an open $V^{(k)}\\supseteq C_0\\cup\\dots\\cup C_k$ and a section $a^{(k)}\\in\\mathcal F(V^{(k)})$ such that $\\zeta_{V^{(k)}}(a^{(k)})$ and $\\sigma$ agree on an open neighbourhood of $D_k:=C_0\\cup\\dots\\cup C_k$ in $K$. For $k=0$ this is step 1.5. For the inductive step, $D_k$ is compact ([F5]) and on the compact set $D_k\\cap C_{k+1}$ the sections $\\zeta_{V^{(k)}}(a^{(k)})$ and $\\zeta_{V_{k+1}}(a_{k+1})$ both agree with $\\sigma$ on open neighbourhoods, so their germs agree everywhere on $D_k\\cap C_{k+1}$ and [F3] gives that $a^{(k)}$ and $a_{k+1}$ have equal germs at every point of it; the compactness-and-locality argument of step 1.6 applied to these two sections produces an open $W\\subseteq V^{(k)}\\cap V_{k+1}$ with $D_k\\cap C_{k+1}\\subseteq W$ and $a^{(k)}|_W=a_{k+1}|_W$. Apply the fusion of step 1.7 with $(C_1,V_1,s_1):=(D_k,V^{(k)},a^{(k)})$ and $(C_2,V_2,s_2):=(C_{k+1},V_{k+1},a_{k+1})$: it gives open $V''=V_1'\\cup V_2'$ and $a''\\in\\mathcal F(V'')$ with $a''|_{V_1'}=a^{(k)}|_{V_1'}$, $a''|_{V_2'}=a_{k+1}|_{V_2'}$, where $D_k\\subseteq V_1'$ and $C_{k+1}\\subseteq V_2'$. Let $E_k\\subseteq V^{(k)}\\cap K$ be an open neighbourhood of $D_k$ on which $\\zeta_{V^{(k)}}(a^{(k)})=\\sigma$. By restriction compatibility [F3], $\\zeta_{V''}(a'')$ agrees with $\\sigma$ on $(V_1'\\cap E_k)\\cup(V_2'\\cap U_{k+1})$, an open neighbourhood of $D_{k+1}$ in $K$; locality [F4] gives agreement on this union. This proves the claim for $k+1$. [step 1.5, step 1.6, step 1.7, F3, F4, F5]\n\n3.1 **$\\eta_{P,K}$ is surjective.** In the notation of step 2.1 with $k=m$ we have an open $V:=V^{(m)}\\supseteq C_0\\cup\\dots\\cup C_m=K$ and a section $a\\in\\mathcal F(V)$ such that $\\zeta_V(a)$ and $\\sigma$ agree on an open neighbourhood of $K$; in particular they have equal germs at every point of $K$. Two sections of the sheaf $i^{-1}\\mathcal F$ over $K$ with equal germs at every point agree by locality ([F4]), so $\\zeta_V(a)=\\sigma$, and since $V\\supseteq K$ this says $\\sigma=\\eta_{P,K}([V,a])$ by [F3]. Hence $\\eta_{P,K}$ is surjective. [step 2.1, F3, F4]\n\n4.1 **The isomorphism and the disjoint-family gluing.** By steps 1.1, 1.3 and 3.1 the map $\\eta_{P,K}$ is bijective and additive, so the canonical map of the statement is an isomorphism of abelian groups (of $k$-vector spaces when $\\mathcal F$ is a sheaf of $k$-vector spaces). For the moreover clause let $K_1,\\dots,K_m$ be pairwise disjoint compact subsets and $s_j\\in\\mathcal F(U_j)$ with $U_j\\supseteq K_j$ open. For $m=0$ take the zero section on the empty open set; for $m=1$ take $s_1$ on $U_1$. For $m\\ge2$, fuse $(K_1,s_1)$ with $(K_2,s_2)$ by step 1.7 taking $W:=\\varnothing$ in the hypothesis, which is an open subset of $V_1\\cap V_2$ with $K_1\\cap K_2=\\varnothing\\subseteq W$ and the vacuous agreement $s_1|_\\varnothing=s_2|_\\varnothing$, obtaining open $V_1',V_2'$ with $K_j\\subseteq V_j'\\subseteq U_j$ and a section $s'\\in\\mathcal F(V_1'\\cup V_2')$ equal to $s_j$ on $V_j'$ for $j=1,2$. Now fuse $s'$ with $s_3$ in the same way, with $W:=\\varnothing$ again, and continue; maintaining that the current section equals $s_j$ on an open subset of $U_j$ containing $K_j$ for each $j$ already treated, the fusion step preserves the previous agreements because its new first domain $V_1'$ contains the union of the treated compact sets and the current section equals the previous one on $V_1'$. After $m-1$ fusions this yields an open neighbourhood of $K_1\\cup\\dots\\cup K_m$ and a section restricting to $s_j$ on an open neighbourhood $W_j\\subseteq U_j$ of $K_j$ for every $j$; applying this with the zero section $s_2=0$ over $X$ on a compact set $K_2$ disjoint from $K=K_1$ is the final assertion. The canonical map is additive and is $k$-linear in the vector-space case; the only selections used were finitely many, as recorded in [F5]. [step 1.3, step 1.7, step 3.1, F5] ∎",
+        "axiom_use": "None: compactness, normality and the sheaf axioms; only finite choices are made.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§10.1, printed pp. 175-176: for a subset Z with inclusion i_Z one sets F|Z = i_Z^{-1}F and Gamma(Z;F) = Gamma(Z; i_Z^{-1}F), and the natural morphism colim_{U contains Z} Gamma(U;F) -> Gamma(Z;F) of (10.1.2) is injective in general; Proposition 10.1.2(ii): it is an isomorphism whenever Z is a relatively Hausdorff compact subset of X, proved by induction on a finite cover of Z with the two-set gluing step"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §16 Cohomology on Hausdorff quasi-compact spaces (Lemma 16.2, tag 09V2), whose refinements and local lifts are the same patching mechanism used here",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "§16, printed pp. 26-28, complete proof of Lemma 16.2 (tag 09V2): reduction to a single refined cover on which a coherent system of local lifts, obtained by patching finitely many local data through compactness and separation, exists"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-c-soft-sheaf",
+        "kind": "definition",
+        "title": "c-soft sheaves",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-inverse-image-presheaf-and-sheaf",
+          "def-compact-space",
+          "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "def-flasque-sheaf",
+          "def-section-restriction-and-global-section",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-global-sections-functor-sheaves"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]],\n[[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on\n$X$ ([[def-sheaf-on-topological-space]]); this covers in particular every sheaf\nof $k$-vector spaces over a field $k$, which is the case used by the\ncompact-support calculus, and for such a sheaf the groups below are $k$-vector\nspaces and the maps $k$-linear. Global sections are written\n$\\Gamma(X,-)$ ([[def-global-sections-functor-sheaves]]). For a compact subset\n$K\\subseteq X$ ([[def-compact-space]]) let $i:K\\hookrightarrow X$ be the\ninclusion and consider the canonical restriction map\n$$\\Gamma(X,\\mathcal F)\\longrightarrow\\Gamma(K,i^{-1}\\mathcal F)=(i^{-1}\\mathcal F)(K),\\qquad s\\longmapsto s|_K,$$\nwhich sends a global section ([[def-section-restriction-and-global-section]]) to\nthe section of the inverse image sheaf ([[def-inverse-image-presheaf-and-sheaf]])\nthat it induces on $K$. Then $\\mathcal F$ is **c-soft**, also **soft for\ncompact supports**, when this map is surjective for every compact subset\n$K\\subseteq X$, that is: every section of $\\mathcal F$ over a compact subset of\n$X$ extends to a global section of $\\mathcal F$. For sheaves of abelian groups\n$\\Gamma_c$ and $H^q_c$ of\n[[def-compactly-supported-global-sections]] are the compactly supported\nanalogues of $\\Gamma$ and $H^q$.\n\nTwo consistency facts hold; both are immediate from the definitions and from\nthe extension lemma for sections on a compact set, and they are recorded here\nbecause the compact-support calculus uses the first constantly and the second\nfor injective sheaves.\n\n1. **Neighbourhood formulation.** By\n   [[lem-sections-near-a-compact-set-are-sections-on-that-set]], the target of\n   the restriction map is the defining colimit of the\n   inverse-image presheaf,\n   $(i^{-1}\\mathcal F)(K)=\\varinjlim_{U\\supseteq K}\\mathcal F(U)$, so that\n   $\\mathcal F$ is c-soft if and only if for every compact $K$ and every open\n   neighbourhood $U$ of $K$, every section $s\\in\\mathcal F(U)$ agrees with a\n   global section of $\\mathcal F$ on some open neighbourhood of $K$. It\n   therefore suffices, for c-softness, to test the extended sections only\n   locally near $K$.\n2. **Flasque implies c-soft.** If $\\mathcal F$ is flasque\n   ([[def-flasque-sheaf]]) then $\\mathcal F$ is c-soft: a class in\n   $(i^{-1}\\mathcal F)(K)$ is represented by a section $s$ over an open\n   neighbourhood $U$ of $K$, and flasqueness extends $s$ to a global section\n   $t\\in\\mathcal F(X)$ with $t|_U=s$, so $t$ is a preimage of that class.\n\nC-softness is a property of the pair $(X,\\mathcal F)$ and not of the sheaf\nalone: the compact subsets of the base space are part of the test. Nothing is\nassumed about the support of the extended global sections, and c-softness is\nnot the same condition as flasqueness, only implied by it.",
+        "strategy": "Define c-softness by surjectivity of global-to-compact restriction for each compact subset. The target is identified with the compact-neighbourhood colimit by the preceding representation lemma; equality in the colimit gives both directions of the neighbourhood formulation. Flasque sheaves extend each representative over its entire open domain, hence are c-soft. No choice is used in this Definition.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, Definition 11.2.1, printed p. 207: for X locally compact, a sheaf F is c-soft if for any compact subset K of X the map Gamma(X;F) -> Gamma(K;F) is surjective; Proposition 11.2.2 then records the equivalent formulations used later"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.4, the terminology of sheaves mous (c-mou) for compact supports and the role of c-softness in the finite-dimensionality of f_!"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-compactly-supported-global-sections",
+        "kind": "definition",
+        "title": "Compactly supported global sections and their right derived functors",
+        "deps": [
+          "def-sheaf-on-topological-space",
+          "def-support-of-a-sheaf-section",
+          "def-germ-of-section",
+          "def-stalk-of-presheaf",
+          "def-morphism-of-presheaves",
+          "def-global-sections-functor-sheaves",
+          "def-section-restriction-and-global-section",
+          "def-additive-functor",
+          "def-left-exact-and-right-exact-functor",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-right-derived-object-relative-to-injective-resolution-data",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic",
+          "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "lem-global-sections-left-exact",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-compact-space",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally\ncompact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of\nabelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]],\n[[def-section-restriction-and-global-section]]). For a sheaf $\\mathcal F$ on\n$X$ define the **compactly supported global sections** of $\\mathcal F$ to be the\nsubgroup\n$$\\Gamma_c(X,\\mathcal F):=\\{\\,s\\in\\Gamma(X,\\mathcal F):\\operatorname{Supp}(s)\\ \\text{is a compact subset of }X\\,\\}\\subseteq\\Gamma(X,\\mathcal F),$$\nwhere the support of a section is the set of points at which its germ is\nnonzero ([[def-support-of-a-sheaf-section]], [[def-germ-of-section]],\n[[def-compact-space]]). This is a subgroup: the zero section has empty support, negation preserves\nsupport, and the support of a sum is closed in $X$ and contained in the finite\nunion of the two compact supports, hence compact\n([[def-support-of-a-sheaf-section]],\n[[thm-closed-subspace-of-a-compact-space-is-compact]]).\nA morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian\nsheaves induces a map $\\Gamma_c(X,\\varphi)$ by restriction of\n$\\Gamma(X,\\varphi)$, and this makes $\\Gamma_c(X,-)$ an additive functor\n$\\mathrm{Ab}(X)\\to\\mathbf{Ab}$ ([[def-additive-functor]],\n[[def-morphism-of-presheaves]]). Six consistency facts hold; all are immediate\nfrom the definitions, and they record the interface used by the compact-support\ncalculus.\n\n1. **Well-definedness of $\\Gamma_c(X,\\varphi)$.** If $x\\notin\n   \\operatorname{Supp}(s)$ then $s_x=0$ in the stalk $\\mathcal F_x$\n   ([[def-stalk-of-presheaf]]), and since the stalk maps of a morphism commute\n   with the germ maps, $\\varphi(s)_x=\\varphi_x(s_x)=0$, so\n   $\\operatorname{Supp}(\\varphi(s))\\subseteq\\operatorname{Supp}(s)$. A support\n   $\\operatorname{Supp}(t)$ is closed in $X$: if $x\\notin\n   \\operatorname{Supp}(t)$ then $t$ agrees with the zero section on some open\n   neighbourhood of $x$, by the description of equality of germs\n   ([[def-support-of-a-sheaf-section]]). Hence\n   $\\operatorname{Supp}(\\varphi(s))$ is a closed subset of $X$ contained in the\n   compact set $\\operatorname{Supp}(s)$; being closed in $X$ it is closed in the\n   subspace $\\operatorname{Supp}(s)$, so it is a compact subset of that compact\n   space ([[thm-closed-subspace-of-a-compact-space-is-compact]]) and therefore\n   a compact subset of $X$ ([[lem-compactness-of-a-subspace-is-ambient]]), and\n   $\\Gamma_c(X,\\varphi)$ maps $\\Gamma_c(X,\\mathcal F)$ into\n   $\\Gamma_c(X,\\mathcal G)$. Composites and identities are computed\n   componentwise, so $\\Gamma_c(X,-)$ is a functor; it is additive because\n   $\\Gamma(X,-)$ is.\n2. **Sheaves of $k$-vector spaces.** If $\\mathcal F$ is a sheaf of\n   $k$-vector spaces, then $\\Gamma_c(X,\\mathcal F)$ is a $k$-vector subspace of\n   $\\Gamma(X,\\mathcal F)$: the support of $c\\cdot s$ is\n   $\\operatorname{Supp}(s)$ for $c\\ne0$ and $\\varnothing$ for $c=0$, and the\n   zero section has empty support. For a morphism $\\varphi$ of sheaves of\n   $k$-vector spaces the map $\\Gamma_c(X,\\varphi)$ is $k$-linear, since\n   $\\Gamma(X,\\varphi)$ is. The higher derived functors below are computed from\n   an injective resolution datum on abelian sheaves, so they are abelian\n   groups; the degree-zero part is the $k$-vector space\n   $\\Gamma_c(X,\\mathcal F)$.\n3. **Left exactness.** For every short exact sequence\n   $0\\to\\mathcal F'\\xrightarrow{\\varphi'}\\mathcal F\\xrightarrow{\\varphi}\\mathcal F''\\to0$\n   of abelian sheaves the sequence\n   $$0\\to\\Gamma_c(X,\\mathcal F')\\xrightarrow{\\Gamma_c(\\varphi')}\\Gamma_c(X,\\mathcal F)\\xrightarrow{\\Gamma_c(\\varphi)}\\Gamma_c(X,\\mathcal F'')$$\n   is exact. Injectivity: a monomorphism of sheaves has injective stalk maps\n   ([[thm-exactness-of-sheaves-stalkwise]]), so\n   $\\operatorname{Supp}(\\varphi'(s'))=\\operatorname{Supp}(s')$ and a section\n   killed by $\\varphi'$ has all germs zero, hence is zero. Exactness at the\n   middle: the kernel of $\\Gamma(X,\\varphi)$ is the image of\n   $\\Gamma(X,\\varphi')$ by left exactness of global sections\n   ([[lem-global-sections-left-exact]]); if $s=\\varphi'(s')$ has compact\n   support, then $s'$ has the same support,\n   $\\operatorname{Supp}(s')=\\operatorname{Supp}(\\varphi'(s'))=\n   \\operatorname{Supp}(s)$, because $\\varphi'$ is stalk-injective, so $s'$ lies\n   in $\\Gamma_c(X,\\mathcal F')$, and the reverse inclusion is immediate from\n   $\\varphi\\circ\\varphi'=0$. Thus $\\Gamma_c(X,-)$ is an additive left exact\n   functor on $\\mathrm{Ab}(X)$ ([[def-left-exact-and-right-exact-functor]]).\n4. **The derived functors.** Abelian sheaves on $X$ have enough injectives, and\n   the embeddings of [[thm-abelian-sheaves-have-enough-injectives]] supply one\n   functorial injective resolution datum $\\mathcal F\\mapsto I^\\bullet(\\mathcal F)$\n   on the whole category $\\mathrm{Ab}(X)$, under the Axiom of Choice\n   ([[def-right-derived-object-relative-to-injective-resolution-data]]). The\n   **compactly supported cohomology** of $\\mathcal F$ is\n   $$H^q_c(X,\\mathcal F):=R^q\\Gamma_c(X,\\mathcal F):=H^q\\bigl(\\Gamma_c(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr)\\qquad(q\\ge0),\\qquad H^q_c(X,\\mathcal F):=0\\quad(q<0),$$\n   the cohomology of the deleted resolution, as in the pattern of\n   [[def-sheaf-cohomology-derived-global-sections]]; for a morphism $\\varphi$ we\n   write $H^q_c(X,\\varphi):=R^q\\Gamma_c(X,\\varphi)$ for the induced map.\n5. **Independence of the datum.** If $J$ is another supplied injective\n   resolution datum on $\\mathrm{Ab}(X)$, then $R^q\\Gamma_c(X,-)$ computed from\n   $J$ is naturally isomorphic to $R^q\\Gamma_c(X,-)$ computed from $I$\n   ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]);\n   the Axiom of Dependent Choice needed for that comparison follows from AC\n   ([[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n   $H^q_c(X,\\mathcal F)$ therefore does not depend on the datum up to this\n   canonical natural isomorphism.\n6. **Delta functor and the compact case.** Since $\\Gamma_c(X,-)$ is additive\n   and left exact and the datum is defined on all of $\\mathrm{Ab}(X)$, the\n   functors $R^q\\Gamma_c(X,-)$, $q\\ge0$, carry connecting maps that make them a\n   cohomological delta functor with $R^0\\Gamma_c(X,-)\\cong\\Gamma_c(X,-)$, and\n   every short exact sequence of abelian sheaves has a long exact\n   compact-support cohomology sequence, natural in the sequence\n   ([[thm-right-derived-functors-form-a-cohomological-delta-functor]]). If $X$\n   is compact, then for every global section $s$ its support is closed in $X$ by\n   fact 1, hence a closed subset of the compact space $X$ and therefore\n   compact, so every global section is compactly supported; hence\n   $\\Gamma_c(X,-)=\\Gamma(X,-)$ and\n   $H^q_c(X,\\mathcal F)=H^q(X,\\mathcal F)$ for every $q$, where $H^q(X,-)$ is\n   the sheaf cohomology of [[def-sheaf-cohomology-derived-global-sections]]\n   computed from the same datum.",
+        "strategy": "Compact sections form a subgroup because negation preserves support and a sum has closed support in the finite compact union. Sheaf morphisms shrink support, while monomorphisms preserve it exactly; global left exactness therefore restricts to compact sections. Use the supplied abelian-sheaf injective resolution datum to define Hc. Datum independence and the delta-functor structure follow from the exact comparison suppliers under DC inherited from AC. On compact X every support is compact, so Gamma_c=Gamma.",
+        "axiom_use": "AC: the functorial injective resolution datum on sheaves of $k$-vector spaces, obtained from the Grothendieck injective embedding theorem; the comparison and delta-functor statements use DC, which follows from AC. No other choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.1: for the terminal map a_X : X -> pt the functor f_! is the compactly supported global-sections functor, left exact with values in the coefficient category; §1.4 uses its right derived functors to state the finite-dimensionality criterion"
+            },
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.1-§11.2, printed pp. 201-210: the functor Gamma_c of compactly supported sections and its role in the c-soft calculus; §10.2 equation (10.2.4) for supports of sections"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §21 Cohomology with support in a closed subset (tag 0A39)",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "§21, tag 0A39: sections with support in a closed subset as a left exact functor and the pattern of its right derived functors"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology",
+        "kind": "lemma",
+        "title": "Refinement-limit Cech cohomology computes sheaf cohomology on compact Hausdorff spaces",
+        "deps": [
+          "def-global-cech-cohomology-directed-limit",
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "def-refinement-open-cover",
+          "lem-increasing-cech-complex-extends-to-alternating-tuples",
+          "lem-cech-h0-global-sections",
+          "thm-refinement-map-independent-on-cohomology",
+          "thm-cech-to-sheaf-cohomology-comparison",
+          "lem-acyclic-rows-and-columns-of-cech-double-complex",
+          "def-acyclic-cover-for-sheaf",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-zero-sheaf-cohomology-global-sections",
+          "thm-long-exact-sequence-sheaf-cohomology",
+          "thm-flasque-sheaves-acyclic",
+          "def-flasque-sheaf",
+          "lem-injective-sheaves-flasque",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-cohomological-delta-functor",
+          "def-universal-delta-functor",
+          "thm-effaceable-cohomological-delta-functors-are-universal",
+          "cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic",
+          "cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero",
+          "def-godement-resolution",
+          "thm-godement-resolution-flasque",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-snake-lemma-in-an-abelian-category",
+          "cor-the-long-exact-homology-sequence-is-natural",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-sheaf-on-topological-space",
+          "lem-compatible-refinement-for-tuple-indexed-coverings",
+          "def-compact-space",
+          "def-hausdorff-space",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 8,
+        "statement": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact\n([[def-compact-space]]) Hausdorff ([[def-hausdorff-space]]) space. For every\nsheaf of abelian groups $\\mathcal F$ on $X$ ([[def-sheaf-on-topological-space]])\nand every $p\\ge0$, the canonical comparison map\n$$\\varphi^p_X:\\check H^p(X,\\mathcal F)\\longrightarrow H^p(X,\\mathcal F)$$\nfrom the refinement-limit Čech cohomology of $X$\n([[def-global-cech-cohomology-directed-limit]]) — taken over all open covers\nof $X$, equivalently over finite open covers because $X$ is compact — to sheaf\ncohomology ([[def-sheaf-cohomology-derived-global-sections]]) is an\nisomorphism, natural in $\\mathcal F$. These isomorphisms form an isomorphism of\ncohomological delta functors ([[def-cohomological-delta-functor]]) extending\nthe identity in degree $0$, and hence commute with the connecting\nhomomorphisms of short exact sequences.\n\nConsequently, if a family of open covers is **cofinal** (every open cover of\n$X$ has a refinement in the family) and $\\check H^p(\\mathcal U,\\mathcal F)=0$\nfor every cover $\\mathcal U$ in that family and every $p>d$, then\n$H^p(X,\\mathcal F)=0$ for every $p>d$.",
+        "strategy": "Descend the fixed-cover comparison through the refinement colimit. Compatible finite refinements allow local cochain lifts, alternating tuple evaluation and zero lifts over empty intersections. Common refinements, lifted coboundaries and refinement homotopies make connecting maps well defined and prove all positions of the long exact sequence. Godement C0 is exact by AC products of stalk sequences; the snake lemma inductively makes its cokernels exact. Short exact Godement/global/total rows and individual lifted Cech cocycles prove boundary compatibility. Both delta functors are effaceable by injectives, hence universal; uniqueness in degree zero identifies the comparison. Cofinality gives the dimension consequence.",
+        "axiom_use": "AC: enough injectives for abelian sheaves, the chosen refinement data in def-global-cech-cohomology-directed-limit, and dependent choice (from AC) for the derived-functor comparison theorems.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §16 Cohomology on Hausdorff quasi-compact spaces, Lemmas 16.1-16.2 (tags 09V1-09V2) with the boundary-map construction in the proof of 09V2",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "§16, pp. 26-28, complete proof of Lemmas 16.1 (tag 09V1) and 16.2 (tag 09V2): the refinement-limit Cech functors form a universal delta functor compatible with the boundary maps of sheaf cohomology, so the canonical comparison is an isomorphism in every degree"
+            },
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-210, for the c-soft and compact-support calculus used on the companion page"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+        "kind": "lemma",
+        "title": "Compact-support acyclicity of c-soft sheaves",
+        "deps": [
+          "def-c-soft-sheaf",
+          "def-compactly-supported-global-sections",
+          "def-sheaf-cohomology-derived-global-sections",
+          "def-support-of-a-sheaf-section",
+          "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "def-sheaf-on-topological-space",
+          "def-compact-space",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "thm-locally-compact-hausdorff-basics",
+          "def-subspace-topology-top",
+          "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-flasque-sheaf",
+          "def-extension-by-zero-abelian-sheaf",
+          "thm-extension-by-zero-adjunction-exactness",
+          "lem-extension-by-zero-short-exact-sequence",
+          "lem-morphisms-from-the-constant-sheaf-are-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-injective-object",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "lem-global-sections-left-exact",
+          "thm-exactness-of-sheaves-stalkwise",
+          "lem-stalk-inverse-image-sheaf",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-sheaf-tensor-product",
+          "lem-stalk-tensor-product",
+          "thm-every-independent-set-extends-to-a-basis",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "lem-finite-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 9,
+        "statement": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and\nlet $\\mathcal F$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces, and the tensor clause of (4) is stated only\nthere. Then:\n\n1. if $\\mathcal F$ is c-soft ([[def-c-soft-sheaf]]), every section of\n   $\\mathcal F$ over a compact subset $K\\subseteq X$ extends to a compactly\n   supported global section whose support is contained in any prescribed open\n   neighbourhood of $K$;\n2. every injective abelian sheaf on $X$ is c-soft;\n3. if $\\mathcal F$ is c-soft, then $H^q_c(X,\\mathcal F)=0$ for every $q>0$\n   ([[def-compactly-supported-global-sections]]); when $X$ is compact this is\n   the vanishing of the sheaf cohomology $H^q(X,\\mathcal F)$\n   ([[def-sheaf-cohomology-derived-global-sections]]);\n4. c-softness is preserved by restriction to open subsets, by restriction to\n   closed subsets, by extension by zero along an open inclusion, and by finite\n   direct sums of sheaves of abelian groups; for sheaves of $k$-vector spaces\n   it is also preserved by tensor product with a constant $k$-vector space;\n5. if $0\\to\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''\\to0$\n   is a short exact sequence of sheaves of abelian groups and $\\mathcal F'$ is\n   c-soft, then every section of $\\mathcal F''$ over a compact subset lifts to\n   a section of $\\mathcal F$ over an open neighbourhood of it, and the induced\n   sequence\n   $0\\to\\Gamma_c(X,\\mathcal F')\\to\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,\\mathcal F'')\\to0$\n   is exact; if $\\mathcal F'$ and $\\mathcal F$ are c-soft then\n   $\\mathcal F''$ is c-soft.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 Let $C_1,C_2\\subseteq X$ be compact, let $V_1,V_2$ be open with $C_k\\subseteq V_k$, let $s_k\\in\\mathcal F(V_k)$, and suppose that $W\\subseteq V_1\\cap V_2$ is open with $C_1\\cap C_2\\subseteq W$ and $s_1|_W=s_2|_W$. Then there are an open $V\\supseteq C_1\\cup C_2$ and $s\\in\\mathcal F(V)$ with $s=s_k$ on an open neighbourhood of $C_k$ for $k=1,2$: the sets $A:=C_1\\setminus W$ and $B:=C_2\\setminus W$ are compact and disjoint ([F3]), hence separated by disjoint open $G_1\\supseteq A$, $G_2\\supseteq B$ ([F3]); with $V_k':=V_k\\cap(G_k\\cup W)$ one has $C_k\\subseteq V_k'$, $V_1'\\cap V_2'\\subseteq W$, so $s_1|_{V_1'}$ and $s_2|_{V_2'}$ glue to the required $s$ over $V_1'\\cup V_2'\\supseteq C_1\\cup C_2$ ([F4]). [F3, F4, construct]\n\n1.2 Let $C\\subseteq X$ be compact, $B\\subseteq X$ closed, $V\\subseteq X$ open with $C\\cup B\\subseteq V$, $s_C\\in\\mathcal F(V)$ and $s_B\\in\\mathcal F(V)$ with $s_C|_W=s_B|_W$ for an open $W\\subseteq V$ containing $C\\cap B$. Then there are an open $V_0\\subseteq V$ with $C\\cup B\\subseteq V_0$ and $s_0\\in\\mathcal F(V_0)$ with $s_0=s_C$ on an open neighbourhood of $C$ and $s_0=s_B$ on an open neighbourhood of $B$. Indeed $A:=C\\setminus W$ is compact, $B_0:=B\\setminus W$ is closed, and $A\\cap B_0=\\varnothing$; covering $A$ by finitely many open $V_x$ with $x\\in V_x\\subseteq\\overline{V_x}\\subseteq X\\setminus B_0$ and $\\overline{V_x}$ compact ([F3]) and setting $G_1:=\\bigcup V_x\\supseteq A$, $G_2:=X\\setminus\\bigcup\\overline{V_x}\\supseteq B\\setminus W$ one has $G_1\\cap G_2=\\varnothing$; now $V_0':=V\\cap(G_1\\cup W)$ contains $C$, $V_0'':=V\\cap(G_2\\cup W)$ contains $B$, and $V_0'\\cap V_0''\\subseteq W$, so the restrictions of $s_C$ and $s_B$ glue ([F3, F4]). [F3, F4, construct]\n\n1.3 **Clause (1).** Let $\\mathcal F$ be c-soft, let $K\\subseteq X$ be compact and let $W\\subseteq X$ be an open neighbourhood of $K$; let $\\sigma\\in\\Gamma(K,i^{-1}\\mathcal F)$ be represented by $s\\in\\mathcal F(U)$ for an open $U\\supseteq K$ ([F2]), and replace $U$ by $U\\cap W$. Choose open $W_0,W_1$ with $K\\subseteq W_0\\subseteq\\overline{W_0}\\subseteq W_1\\subseteq\\overline{W_1}\\subseteq W$ and $\\overline{W_1}$ compact (finitely many applications of the shrinking of [F3]); put $C:=\\overline{W_1}\\setminus W_0$, a compact set disjoint from $K$. Since $\\mathcal F$ is c-soft, $[s]\\in\\Gamma(K,i^{-1}\\mathcal F)$ has a preimage $t_1\\in\\Gamma(X,\\mathcal F)$ ([F1]); by [F2] $t_1=s$ on an open neighbourhood of $K$. Apply the gluing of [F2] to the disjoint compact sets $K$ and $C$ with the sections $t_1$ (over $X$) and $0$ (over $X$): there are an open $V\\supseteq K\\cup C$ and $u\\in\\mathcal F(V)$ with $u=t_1$ on an open neighbourhood of $K$ and $u=0$ on an open neighbourhood of $C$. Choose a compact $K'$ with $K\\cup C\\subseteq K'\\subseteq V$ ([F3]) and extend the class of $u|_{K'}$ to a global section $t_2\\in\\Gamma(X,\\mathcal F)$ by c-softness ([F1]); then $t_2=u$ on an open neighbourhood of $K'$ by [F2]. Finally $t_2=0$ on the open set $W_1\\setminus\\overline{W_0}$: it is contained in $C\\subseteq K'$ and $u=0$ near $C$; hence $t_2|_{W_1}$ and $0$ agree on $W_1\\setminus\\overline{W_0}$ and glue across the open cover $\\{W_1,X\\setminus\\overline{W_0}\\}$ of $X$ to a section $t\\in\\Gamma(X,\\mathcal F)$ with $t=t_2$ on $W_1$ and $t=0$ on $X\\setminus\\overline{W_0}$ ([F4]). Then $\\operatorname{Supp}(t)\\subseteq\\overline{W_0}\\subseteq W$, so $t$ is compactly supported with support inside the prescribed $W$, and $t=t_2=t_1=s$ near $K$, so $t$ represents $\\sigma$ over $K$. [F1, F2, F3, F4, construct]\n\n1.4 **Clause (2).** Let $\\mathcal I$ be an injective abelian sheaf and let $U\\subseteq X$ be open. By [F5] the canonical map $j_!\\mathbb Z_U\\to\\mathbb Z_X$ is a monomorphism, so injectivity of $\\mathcal I$ makes $\\operatorname{Hom}(\\mathbb Z_X,\\mathcal I)\\to\\operatorname{Hom}(j_!\\mathbb Z_U,\\mathcal I)$ surjective; under the adjunction and the identifications of [F5], $\\operatorname{Hom}(\\mathbb Z_X,\\mathcal I)\\cong\\Gamma(X,\\mathcal I)$ and $\\operatorname{Hom}(j_!\\mathbb Z_U,\\mathcal I)\\cong\\operatorname{Hom}_U(\\mathbb Z_U,\\mathcal I|_U)\\cong\\Gamma(U,\\mathcal I)$, and the composite is the restriction map. Hence every section of $\\mathcal I$ over an open set extends to $X$, that is, $\\mathcal I$ is flasque, and a flasque sheaf is c-soft by [F1]. [F1, F5]\n\n2.1 **Lifting over a compact space.** Let $Y$ be a compact Hausdorff space, let $0\\to\\mathcal A\\to\\mathcal B\\xrightarrow{\\gamma}\\mathcal C\\to0$ be a short exact sequence of abelian sheaves on $Y$ with $\\mathcal A$ c-soft on $Y$, and let $c\\in\\Gamma(Y,\\mathcal C)$. Then $c$ has a preimage in $\\Gamma(Y,\\mathcal B)$. Indeed, the family of all pairs $(U,b)$ with $U\\subseteq Y$ open, $b\\in\\mathcal B(U)$ and $\\gamma_U(b)=c|_U$ is cut out by a formula and covers $Y$ (the stalk maps of $\\gamma$ are onto, [F4]); by compactness and normality of $Y$ ([F3]) there are finitely many compact $K_1,\\dots,K_m$ covering $Y$ with lifts $b_i\\in\\mathcal B(V_i)$ over open $V_i\\supseteq K_i$. We show by induction on $m$ that the pieces can be corrected, without changing their images under $\\gamma$, so that they agree near all pairwise intersections and glue ([F2]); for $m=1$ there is nothing to do. For $m\\ge2$, the induction hypothesis gives a section $b'$ over an open neighbourhood of $D:=K_1\\cup\\dots\\cup K_{m-1}$ with $\\gamma(b')=c$ there; over an open neighbourhood of the compact set $D\\cap K_m$ the difference $b'-b_m$ has vanishing $\\gamma$, so it lies in the image of $\\mathcal A$ ([F4]); the corresponding section of $\\mathcal A$ over that neighbourhood extends to $Y$ by c-softness of $\\mathcal A$, and adding its image to $b_m$ keeps $\\gamma(b_m)=c$ while making $b'-b_m$ vanish near $D\\cap K_m$; the gluing of step 1.1 applied to the compact pieces $D$ and $K_m$ then produces a section over an open neighbourhood of $D\\cup K_m$ mapping to $c$, completing the induction. Since $K_1\\cup\\dots\\cup K_m=Y$ and a neighbourhood of $Y$ in $Y$ is $Y$, this is a preimage of $c$ in $\\Gamma(Y,\\mathcal B)$. [step 1.1, F1, F2, F3, F4, construct]\n\n2.2 **Clause (4), the topological preservations.** Let $\\mathcal F$ be c-soft. (i) For an open subspace $U\\subseteq X$: a compact subset of $U$ is compact in $X$ ([F3]) and a section of $\\mathcal F|_U$ over it is represented by an ambient section over a neighbourhood, which clause (1) extends with support control into any prescribed neighbourhood; restricting the result to $U$ extends the given section, so $\\mathcal F|_U$ is c-soft. (ii) For a closed subspace $Z\\subseteq X$: compact subsets of $Z$ are compact in $X$ ([F3]) and a section of $\\mathcal F|_Z$ over one is a class of ambient sections over neighbourhoods of it in $X$ ([F2]); clause (1) extends such a class, and restricting to $Z$ gives the required extension, so $\\mathcal F|_Z$ is c-soft. (iii) Let $\\mathcal A$ be any c-soft sheaf on the open subspace $U$, which is locally compact Hausdorff by [F3], and put $\\mathcal G:=j_!\\mathcal A$. Its stalks are $\\mathcal A_x$ on $U$ and zero outside $U$, by the local support condition of [F5]. Let $K\\subseteq X$ be compact and represent a section over it by $s\\in\\mathcal G(V)$, $V\\supseteq K$ open [F2]. The set $L:=K\\cap\\operatorname{Supp}(s)$ is closed in $K$, hence compact, and lies in $V\\cap U$. If $L=\\varnothing$, the zero global section has the required germs on $K$. Otherwise choose opens $W_0,W_1$ with $L\\subseteq W_0\\subseteq\\overline{W_0}\\subseteq W_1\\subseteq\\overline{W_1}\\subseteq V\\cap U$ and compact closures [F3]. In $U$ the sets $T:=K\\cap\\overline{W_1}$ and $C:=\\overline{W_1}\\setminus W_0$ are compact. The class of $s$ on $T$ and the zero class on $C$ agree on $T\\cap C$, since every such point belongs to $K\\setminus L$ and has zero germ of $s$. By the fusion of step 1.1 and the neighbourhood representation of [F2], they give a section near $T\\cup C$ in $U$. C-softness of $\\mathcal A$ extends this class to $g\\in\\Gamma(U,\\mathcal A)$, agreeing with $s$ near $T$ and with zero near $C$. Glue $g|_{W_1}$ with zero on $U\\setminus\\overline{W_0}$; the overlap lies in $C$. The result $e\\in\\Gamma(U,\\mathcal A)$ has support closed and contained in the compact $\\overline{W_0}\\subseteq U$, hence lies in $\\Gamma_c(X,j_!\\mathcal A)$. On $K\\cap W_1$ it has the germs of $s$, and on $K\\setminus\\overline{W_0}$ both germs vanish because $L\\subseteq W_0$. Thus $e$ represents the original section over $K$, proving c-softness of $j_!\\mathcal A$. [step 1.1, step 1.3, F1, F2, F3, F4, F5]\n\n\n2.3 **Clause (4), finite sums and constant-vector tensors.** For a finite family of c-soft abelian sheaves, sections of the direct sum are finite tuples of sections: componentwise locality and gluing show that the finite product presheaf is a sheaf, and the finite product is also the direct sum. A class over a compact $K$ is represented by a tuple on a neighbourhood of $K$ [F2]; extend each component by step 1.3 and form the tuple of global sections. This proves c-softness of finite direct sums. Now assume $\\mathcal F$ is a sheaf of $k$-vector spaces, let $M$ be any $k$-vector space and $\\mathcal H:=\\mathcal F\\otimes_{k_X}M_X$. Choose a basis $B$ of $M$ under AC [F6, F7]. Each coordinate functional $\\lambda_b:M\\to k$ induces a sheaf morphism $\\mathcal H\\to\\mathcal F$ via $\\mathrm{id}\\otimes(\\lambda_b)_X$ and the canonical $\\mathcal F\\otimes_{k_X}k_X\\cong\\mathcal F$; the latter map is multiplication and is an isomorphism on stalks [F6]. A germ of $\\mathcal H$ is a finite sum of $\\mathcal F$-germs times basis vectors, by [F6]. Represent its coefficients by local sections; equality of germs gives the same finite-sum expression on a smaller neighbourhood. Thus a section $s$ representing a class over compact $K$ has finite coordinate expressions locally near $K$. Compactness gives finitely many such neighbourhoods, whose union $O$ contains $K$ and whose expressions use one finite subset $B_0\\subseteq B$. Put $s_b:=(\\mathrm{id}\\otimes\\lambda_b)(s|_O)$ for $b\\in B_0$; uniqueness of basis coordinates and locality give $s|_O=\\sum_{b\\in B_0}s_b\\otimes b$. Extend the finitely many $s_b$ to global sections $t_b$ agreeing near $K$ by step 1.3. Then $\\sum_{b\\in B_0}t_b\\otimes b$ is a global section of $\\mathcal H$ agreeing with $s$ near $K$. The zero-coefficient case $M=0$ is immediate. This proves the tensor clause for arbitrary constant $M$. [step 1.3, F2, F3, F4, F6, F7]\n\n\n3.1 **Clause (5), local lifting.** Let $\\mathcal F'$ be c-soft, let $K\\subseteq X$ be compact and let $\\sigma''\\in\\Gamma(K,i^{-1}\\mathcal F'')$ be represented by a section $s''\\in\\mathcal F''(U)$ over an open $U\\supseteq K$ ([F2]). Choose open $U_0$ with $K\\subseteq U_0\\subseteq\\overline{U_0}\\subseteq U$ and $\\overline{U_0}$ compact ([F3]). The restricted sheaves on the compact space $\\overline{U_0}$ form a short exact sequence whose kernel is c-soft on $\\overline{U_0}$: a compact subset of $\\overline{U_0}$ is compact in $X$ ([F3]) and a section of the restricted kernel over it is represented by an ambient section of $\\mathcal F'$ over an open neighbourhood ([F2]), which c-softness of $\\mathcal F'$ extends to $X$. Hence the lifting lemma of step 2.1 applies to the compact space $\\overline{U_0}$ and the class of $s''$ over it: there is $t\\in\\Gamma(\\overline{U_0},i^{-1}\\mathcal F)$ with $\\beta(t)$ equal to that class. Represent $t$ by a section of $\\mathcal F$ over an open $V\\supseteq\\overline{U_0}$ ([F2]); shrinking $V$ we may assume that the image of that section under $\\beta$ equals $s''$ on $V$ (they agree as classes over $\\overline{U_0}$, hence near it, [F2]). This section of $\\mathcal F$ over the open neighbourhood $V$ of $K$ lifts the given class $\\sigma''$; since $K$ and $\\sigma''$ were arbitrary, clause (5) holds locally. [step 2.1, F1, F2, F3, F4]\n\n3.2 **Clause (5), compact-support exactness.** Let $\\mathcal F'$ be c-soft; we show that $\\Gamma_c(\\beta):\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,\\mathcal F'')$ is surjective. Let $s''\\in\\Gamma_c(X,\\mathcal F'')$ and put $S:=\\operatorname{Supp}(s'')$, compact. Choose open $W_0,W_1$ with $S\\subseteq W_0\\subseteq\\overline{W_0}\\subseteq W_1\\subseteq\\overline{W_1}$ and $\\overline{W_1}$ compact (finitely many shrinkings, [F3]); put $C:=\\overline{W_1}\\setminus W_0$, a compact set disjoint from $S$. Apply the lifting lemma of step 2.1 to the compact space $\\overline{W_1}$ and the class of $s''$ over it: there is $t\\in\\Gamma(\\overline{W_1},i^{-1}\\mathcal F)$ with $\\beta(t)=s''|_{\\overline{W_1}}$; represent $t$ by $a\\in\\mathcal F(V_0)$ over an open $V_0\\supseteq\\overline{W_1}$ with $\\beta(a)=s''|_{V_0}$ ([F2]). On the open set $O:=V_0\\setminus S$ the section $a$ has $\\beta(a)=s''=0$, hence $a|_O=\\alpha(e)$ for a uniquely determined $e\\in\\mathcal F'(O)$: the family of all open $O_x\\subseteq V_0$ over which $a$ lies in the image of $\\alpha$ covers $V_0\\setminus S$ ([F4], the kernel of $\\beta$ is the image of $\\alpha$ as subsheaves) and the local sections glue because $\\alpha$ is injective on sections ([F4]). The compact set $C=\\overline{W_1}\\setminus W_0$ is contained in $O$, so $e$ is a section of the c-soft $\\mathcal F'$ over an open neighbourhood of the compact set $C$; by clause (1) applied to $\\mathcal F'$ there is $e_X\\in\\Gamma_c(X,\\mathcal F')$ with $e_X=e$ near $C$ ([F2]). Set $a_1:=a-\\alpha(e_X)|_{V_0}\\in\\mathcal F(V_0)$: then $\\beta(a_1)=s''|_{V_0}$, and $a_1$ vanishes on the open set $O_C:=\\{\\,x\\in V_0: a_x=\\alpha(e_X)_x\\,\\}$, which contains $C$. The overlap $W_1\\setminus\\overline{W_0}$ of the open cover $\\{W_1,X\\setminus\\overline{W_0}\\}$ of $X$ is contained in $C\\subseteq O_C$, where $a_1$ vanishes, so $a_1|_{W_1}$ and the zero section on $X\\setminus\\overline{W_0}$ agree there and glue to a section $t'\\in\\Gamma(X,\\mathcal F)$ with $t'=a_1$ on $W_1$ and $t'=0$ on $X\\setminus\\overline{W_0}$ ([F4]). Then $\\operatorname{Supp}(t')\\subseteq\\overline{W_0}$ is compact, and $\\beta(t')=s''$: on $W_1$ one has $\\beta(a_1)=s''$, while on $X\\setminus\\overline{W_0}$ both sides vanish since $S\\subseteq W_0\\subseteq\\overline{W_0}$, and $W_1\\cup(X\\setminus\\overline{W_0})=X$. Therefore $t'\\in\\Gamma_c(X,\\mathcal F)$ with $\\Gamma_c(\\beta)(t')=s''$. [step 2.1, step 1.3, F1, F2, F3, F4, construct]\n\n4.1 **Clause (5), quotient.** Let $\\mathcal F'$ and $\\mathcal F$ be c-soft. Let $K\\subseteq X$ be compact and let $\\sigma''\\in\\Gamma(K,i^{-1}\\mathcal F'')$: by step 3.1 it is lifted by a section $u$ of $\\mathcal F$ over an open neighbourhood of $K$, and clause (1) applied to the c-soft $\\mathcal F$ with the compact set $K$ and the prescribed neighbourhood of $u$ produces $t\\in\\Gamma_c(X,\\mathcal F)$ with $t=u$ near $K$; then $\\beta(t)\\in\\Gamma(X,\\mathcal F'')$ restricts to $\\sigma''$ over $K$, so every class over a compact set extends to a global section and $\\mathcal F''$ is c-soft. [step 1.3, step 3.1, F1]\n\n5.1 **Clause (3).** Let $\\mathcal F$ be c-soft and resolve it by injectives, $0\\to\\mathcal F\\to I^0\\to I^1\\to\\cdots$, using the functorial datum of [F1]; each $I^j$ is c-soft by clause (2) ([[thm-abelian-sheaves-have-enough-injectives]] supplies the resolution terms as injective objects). The syzygies $Z^0:=\\mathcal F$, $Z^{j+1}:=\\operatorname{im}(I^j\\to I^{j+1})$ are c-soft: $Z^1=\\operatorname{coker}(\\mathcal F\\to I^0)$ is a quotient of c-soft sheaves in $0\\to\\mathcal F\\to I^0\\to Z^1\\to0$, and inductively $Z^{j+1}$ is a quotient of c-soft sheaves in $0\\to Z^j\\to I^j\\to Z^{j+1}\\to0$ (clause (5)); hence each short exact sequence $0\\to Z^j\\to I^j\\to Z^{j+1}\\to0$ consists of c-soft sheaves, so by clause (5) the sequence $0\\to\\Gamma_c(X,Z^j)\\to\\Gamma_c(X,I^j)\\to\\Gamma_c(X,Z^{j+1})\\to0$ is exact. Therefore the augmented complex $0\\to\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,I^0)\\to\\Gamma_c(X,I^1)\\to\\cdots$ is exact, and $H^q_c(X,\\mathcal F)=H^q(\\Gamma_c(X,I^\\bullet_{\\mathrm{del}}))=0$ for $q>0$ ([F1]). For $X$ compact the identification $H^q_c(X,\\mathcal F)=H^q(X,\\mathcal F)$ of [F1] gives the vanishing of sheaf cohomology. [step 1.4, step 4.1, F1]\n\n6.1 **Conclusion.** Clause (1) is step 1.3, clause (2) is step 1.4, clause (3) is step 5.1, clause (4) is steps 2.2 and 2.3, and clause (5) is steps 3.1, 3.2 and 4.1. The Axiom of Choice supplies the coefficient basis of step 2.3 and the injective resolution datum and derived-functor statements of [F1]; all topological selections are finite. [step 1.3, step 1.4, step 3.1, step 3.2, step 4.1, step 5.1, step 2.2, step 2.3, F7] ∎",
+        "axiom_use": "AC supplies the coefficient basis in step 2.3 and the abelian injective resolution datum; DC inherited from AC supplies the derived comparisons. All topological selections are finite.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-209: Proposition 11.2.2 (compact-support extension), Proposition 11.2.5 (restriction and extension by zero), Proposition 11.2.6 (exact compact-support sections), Proposition 11.2.7 (c-soft quotient), Proposition 11.2.8 (acyclicity framework), Corollary 11.2.3 (constant flat coefficients), and Example 11.2.14(iii) (flabby implies c-soft); the complete arguments for the clauses used here are supplied locally"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §12 Flasque sheaves (Lemma 12.2, tag 09SX, injective sheaves are flasque)",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "Lemma 20.12.2 (tag 09SX): injective sheaves of modules are flasque; its proof refers to Lemma 20.8.1 (tag 01EA), which proves surjectivity of restriction via extension-by-zero representing modules. Abelian sheaves are the constant-Z-ring case"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.4: resolutions by Y-soft sheaves and the finite-dimensionality criterion for f_!, the pattern used for the acyclicity and preservation clauses"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+        "kind": "lemma",
+        "title": "Compact-support calculus along open and closed embeddings",
+        "deps": [
+          "def-c-soft-sheaf",
+          "def-compactly-supported-global-sections",
+          "def-support-of-a-sheaf-section",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-inverse-image-presheaf-and-sheaf",
+          "def-restriction-sheaf-open-subspace",
+          "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "thm-extension-by-zero-adjunction-exactness",
+          "lem-extension-by-zero-short-exact-sequence",
+          "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "def-f-acyclic-resolution",
+          "def-acyclic-object-for-a-left-exact-functor",
+          "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions",
+          "thm-exactness-of-sheaves-stalkwise",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-sheaf-on-topological-space",
+          "def-compact-space",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "thm-locally-compact-hausdorff-basics",
+          "def-subspace-topology-top",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "def-stalk-of-presheaf",
+          "def-germ-of-section",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 10,
+        "statement": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space, let\n$j:U\\hookrightarrow X$ be the inclusion of an open subspace with closed\ncomplement $Z=X\\setminus U$\n([[def-subspace-topology-top]], [[def-locally-compact-space]],\n[[def-hausdorff-space]]), and let $i:Z\\hookrightarrow X$ be the inclusion of\n$Z$. All sheaves below are sheaves of abelian groups\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces.\n\n1. For every sheaf $\\mathcal A$ on $U$ the canonical map\n   $\\Gamma_c(X,j_!\\mathcal A)\\to\\Gamma_c(U,\\mathcal A)$ --- the restriction of\n   the identification of $(j_!\\mathcal A)(X)$ with a subgroup of\n   $\\mathcal A(U)$ ([[def-extension-by-zero-abelian-sheaf]],\n   [[def-compactly-supported-global-sections]]) --- is an isomorphism, natural\n   in $\\mathcal A$; the functor $j_!$ carries c-soft sheaves on $U$ to c-soft\n   sheaves on $X$ ([[def-c-soft-sheaf]]); and the induced canonical\n   isomorphisms $R^q\\Gamma_c(X,j_!\\mathcal A)\\cong R^q\\Gamma_c(U,\\mathcal A)$\n   hold for all $q\\ge0$ and are natural in $\\mathcal A$.\n2. For every sheaf $\\mathcal B$ on $Z$ the canonical map\n   $\\Gamma_c(X,i_*\\mathcal B)\\to\\Gamma_c(Z,\\mathcal B)$ --- the restriction of\n   the identification of $(i_*\\mathcal B)(X)$ with $\\mathcal B(Z)$\n   ([[def-direct-image-sheaf]], [[lem-direct-image-is-sheaf]]) --- is an\n   isomorphism, natural in $\\mathcal B$; the functor $i_*$ carries c-soft\n   sheaves on $Z$ to c-soft sheaves on $X$; and the induced canonical\n   isomorphisms $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong R^q\\Gamma_c(Z,\\mathcal B)$\n   hold for all $q\\ge0$ and are natural in $\\mathcal B$.\n3. If $Z$ is compact ([[def-compact-space]]), then\n   $\\Gamma_c(X,i_*\\mathcal B)\\cong\\Gamma(Z,\\mathcal B)$ and\n   $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong H^q(Z,\\mathcal B)$ for all $q\\ge0$\n   ([[def-sheaf-cohomology-derived-global-sections]]).\n\nAll isomorphisms are the canonical ones induced by the extension-by-zero\nadjunction [[thm-extension-by-zero-adjunction-exactness]] and by the\nacyclic-resolution comparison\n[[thm-acyclic-resolution-theorem-for-right-derived-functors]]; no choice is\nused beyond the injective resolution data and their comparison theorems.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 **Clause (1), degree zero.** By [F1], $(j_!\\mathcal A)(X)=\\{\\,s\\in\\mathcal A(U):\\operatorname{Supp}(s)\\ \\text{closed in }X\\,\\}$. For such $s$ the support of $s$ read as a global section of $j_!\\mathcal A$ is the same set $\\operatorname{Supp}(s)\\subseteq U$: at $x\\in U$ the stalks of $j_!\\mathcal A$ and $\\mathcal A$ agree with compatible germ identifications, while for $x\\notin U$ the germ of $s$ vanishes, because the defining local condition supplies an open neighbourhood $W_x$ with $s|_{W_x\\cap U}=0$, so the restriction of $s$ to $W_x$ is already the zero element of $(j_!\\mathcal A)(W_x)$. Hence, using that compactness of a subset of $U$ may be read in $U$ or in $X$ and that compact subsets of $X$ are closed [F6], the subgroups $\\Gamma_c(X,j_!\\mathcal A)=\\{\\,s\\in(j_!\\mathcal A)(X):\\operatorname{Supp}(s)\\ \\text{compact in }X\\,\\}$ and $\\{\\,s\\in\\mathcal A(U):\\operatorname{Supp}(s)\\ \\text{compact in }U\\,\\}=\\Gamma_c(U,\\mathcal A)$ are equal inside $\\mathcal A(U)$; the canonical map is the inclusion of these equal subgroups, hence a bijection, and it is natural in $\\mathcal A$ because $j_!\\varphi$ acts as $\\varphi$ on sections of $\\mathcal A(U)$. [F1, F5, F6]\n\n1.2 **Clause (2), degree zero and stalks of $i_*$.** By [F2], $(i_*\\mathcal B)(X)=\\mathcal B(X\\cap Z)=\\mathcal B(Z)$. The stalks are computed as follows: for $z\\in Z$ the sets $V\\cap Z$ with $V$ an open neighbourhood of $z$ in $X$ are exactly the open neighbourhoods of $z$ in $Z$ and are cofinal in the colimit defining the stalk, and $(i_*\\mathcal B)(V)=\\mathcal B(V\\cap Z)$ for each of them, so the two colimit diagrams agree and $(i_*\\mathcal B)_z\\cong\\mathcal B_z$; for $x\\notin Z$ the open set $X\\setminus Z=U$ is a neighbourhood of $x$ with $(i_*\\mathcal B)(W)=\\mathcal B(W\\cap Z)=\\mathcal B(\\varnothing)=0$ for every open $W\\subseteq U$, so $(i_*\\mathcal B)_x=0$. Consequently for $t\\in\\mathcal B(Z)$ the support of $t$ read as a global section of $i_*\\mathcal B$ is the set $\\operatorname{Supp}(t)\\subseteq Z$, and compactness of a subset of $Z$ may be read in $Z$ or in $X$ [F6]; hence $\\Gamma_c(X,i_*\\mathcal B)=\\{\\,t\\in\\mathcal B(Z):\\operatorname{Supp}(t)\\ \\text{compact in }Z\\,\\}=\\Gamma_c(Z,\\mathcal B)$, the canonical map is the identity, and it is natural in $\\mathcal B$ because $i_*\\varphi$ acts as $\\varphi$ on sections over $Z$. [F2, F5, F6, F7]\n\n2.1 **Clause (1), c-softness.** Let $\\mathcal A$ be c-soft on $U$, let $K\\subseteq X$ be compact and represent a section over $K$ by $s\\in(j_!\\mathcal A)(V)$ for $V\\supseteq K$ open [F10]. Its support is closed in $V$, so $L:=K\\cap\\operatorname{Supp}(s)$ is compact and contained in $V\\cap U$ [F1, F5, F6]. If $L=\\varnothing$, the zero global section has the same germs on $K$. Otherwise choose opens $W_0,W_1$ with $L\\subseteq W_0\\subseteq\\overline{W_0}\\subseteq W_1\\subseteq\\overline{W_1}\\subseteq V\\cap U$ and compact closures [F6]. The sets $T:=K\\cap\\overline{W_1}$ and $C:=\\overline{W_1}\\setminus W_0$ are compact in $U$. The class of $s$ on $T$ and the zero class on $C$ agree on $T\\cap C$, since its points lie in $K\\setminus L$ and have zero germ of $s$. Fuse these classes near their union in $U$ [F10], and use c-softness of $\\mathcal A$ to extend the resulting class to $g\\in\\Gamma(U,\\mathcal A)$, with $g=s$ near $T$ and $g=0$ near $C$ [F4, F10]. Glue $g|_{W_1}$ with zero on $U\\setminus\\overline{W_0}$, since the overlap lies in $C$. The result $e$ has support closed in $U$ and contained in compact $\\overline{W_0}\\subseteq U$, hence $e\\in\\Gamma_c(U,\\mathcal A)=\\Gamma_c(X,j_!\\mathcal A)$ by step 1.1. On $K\\cap W_1$ its germs are those of $s$; on $K\\setminus\\overline{W_0}$ both vanish, because $L\\subseteq W_0$. These sets cover $K$, so $e$ restricts to the original section over $K$. Hence $j_!\\mathcal A$ is c-soft. [step 1.1, F1, F4, F5, F6, F10]\n\n\n2.2 **$i_*$ is exact.** Let $0\\to\\mathcal B'\\to\\mathcal B\\to\\mathcal B''\\to0$ be an exact sequence of sheaves on $Z$ and apply $i_*$ degreewise; by [F7] it suffices to test exactness of the resulting sequence at every stalk of $X$. At a point $z\\in Z$ the stalk sequence of the $i_*$-images is the given exact stalk sequence under the identifications $(i_*\\mathcal B)_z\\cong\\mathcal B_z$ of [step 1.2], and at a point $x\\notin Z$ all three stalks vanish by [step 1.2], so the sequence $0\\to0\\to0\\to0$ is exact there. Hence $i_*$ sends exact sequences to exact sequences. [step 1.2, F7]\n\n2.3 **Clause (2), c-softness.** Let $\\mathcal B$ be c-soft on $Z$, let $K\\subseteq X$ be compact and let $\\sigma$ be a section of $i_*\\mathcal B$ over $K$, represented by a section $s\\in(i_*\\mathcal B)(V)=\\mathcal B(V\\cap Z)$ over an open $V\\supseteq K$ [F4]. Then $L:=K\\cap Z$ is compact in $Z$ [F6] and $V\\cap Z$ is an open neighbourhood of $L$ in $Z$, so c-softness of $\\mathcal B$ provides $t\\in\\Gamma(Z,\\mathcal B)$ agreeing with $s$ on an open neighbourhood $N\\subseteq V\\cap Z$ of $L$ [F4]. Choose open $W\\subseteq X$ with $W\\cap Z=N$ [F6]; the global section $t\\in\\mathcal B(Z)=(i_*\\mathcal B)(X)$ agrees with the class $\\sigma$ over $K$: at $z\\in L$ the open set $W\\cap V$ contains $z$ and $t|_{W\\cap V}=s|_{W\\cap V}$ as elements of $\\mathcal B((W\\cap V)\\cap Z)$ because $(W\\cap V)\\cap Z\\subseteq N$, so the germs agree, and at $x\\in K\\setminus Z$ the stalk $(i_*\\mathcal B)_x$ vanishes by [step 1.2], so all germs there are equal. Hence $i_*\\mathcal B$ is c-soft. [step 1.2, F2, F4, F6]\n\n3.1 **Clause (1), computing both derived functors by the same complex.** Let $0\\to\\mathcal A\\to J^0\\to J^1\\to\\cdots$ be the injective resolution of $\\mathcal A$ supplied by the fixed functorial injective resolution datum on $\\mathrm{Ab}(U)$ [F7, F8]; each $J^q$ is injective, hence c-soft on the locally compact Hausdorff space $U$ [F4], hence $j_!J^q$ is c-soft on $X$ by [step 2.1], and c-soft sheaves on $X$ are acyclic for $\\Gamma_c(X,-)$ [F4]. Since $j_!$ is exact [F1], the complex $0\\to j_!\\mathcal A\\to j_!J^0\\to j_!J^1\\to\\cdots$ is a $\\Gamma_c(X,-)$-acyclic resolution of the sheaf $j_!\\mathcal A$ on $X$, and the acyclic-resolution theorem gives canonical isomorphisms $R^q\\Gamma_c(X,j_!\\mathcal A)\\cong H^q(\\Gamma_c(X,j_!J^\\bullet_{\\mathrm{del}}))$ for all $q\\ge0$. For the functor $L:=\\Gamma_c(X,j_!(-))$ on $\\mathrm{Ab}(U)$, whose derived functors are formed with the same datum on $\\mathrm{Ab}(U)$, the resolution $J^\\bullet$ is likewise $L$-acyclic, and the derived functors $R^qL(\\mathcal A)$ are computed by the very same complex $L(J^\\bullet)=\\Gamma_c(X,j_!J^\\bullet)$; since both isomorphisms are the canonical isomorphisms of the acyclic-resolution theorem for the same resolution complex, they are compatible with comparison extensions of morphisms $\\mathcal A\\to\\mathcal A'$ [F7, F8]. [F1, F4, F7, F8]\n\n3.2 **Clause (2), the derived isomorphisms.** Let $0\\to\\mathcal B\\to J^0\\to J^1\\to\\cdots$ be the injective resolution of $\\mathcal B$ supplied by the fixed datum on $\\mathrm{Ab}(Z)$ [F7, F8]; each $J^q$ is injective, hence c-soft on $Z$, hence $i_*J^q$ is c-soft on $X$ by [step 2.3] and acyclic for $\\Gamma_c(X,-)$ [F4]; since $i_*$ is exact by [step 2.2], the complex $0\\to i_*\\mathcal B\\to i_*J^0\\to i_*J^1\\to\\cdots$ is a $\\Gamma_c(X,-)$-acyclic resolution of $i_*\\mathcal B$, and the acyclic-resolution theorem combined with the degreewise identification $\\Gamma_c(X,i_*J^q)\\cong\\Gamma_c(Z,J^q)$ of [step 1.2] gives canonical isomorphisms $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong H^q(\\Gamma_c(X,i_*J^\\bullet_{\\mathrm{del}}))\\cong H^q(\\Gamma_c(Z,J^\\bullet_{\\mathrm{del}}))\\cong R^q\\Gamma_c(Z,\\mathcal B)$ for all $q\\ge0$, where the last isomorphism is the acyclic-resolution comparison on $Z$ applied to the same resolution, whose terms are acyclic for $\\Gamma_c(Z,-)$ because they are c-soft on $Z$ [F4]; naturality in $\\mathcal B$ holds because the outer isomorphisms are the canonical ones for the fixed resolution data and the middle one is a degreewise natural identification. [step 1.2, step 2.2, step 2.3, F4, F7, F8]\n\n4.1 **Clause (1), the natural isomorphisms.** Put $G:=\\Gamma_c(U,-)$ on $\\mathrm{Ab}(U)$. Step 1.1 gives a natural isomorphism $\\zeta:L\\Rightarrow G$ of additive left exact functors. Applied degreewise to the supplied resolution $J^\\bullet(\\mathcal A)$, it gives an isomorphism of complexes $\\Gamma_c(X,j_!J^\\bullet)\\cong\\Gamma_c(U,J^\\bullet)$. Taking cohomology gives natural isomorphisms $R^qL(\\mathcal A)\\cong R^qG(\\mathcal A)$ by [F8]. Composing with the canonical comparison of step 3.1 yields $R^q\\Gamma_c(X,j_!\\mathcal A)\\cong R^q\\Gamma_c(U,\\mathcal A)$ in every degree, naturally in $\\mathcal A$. [step 1.1, step 3.1, F3, F8]\n\n4.2 **Clause (3).** Let $Z$ be compact. For every sheaf $\\mathcal B$ on $Z$ the support of a global section is closed in $Z$ [F5], hence a closed subset of the compact space $Z$, hence compact, so every global section is compactly supported: $\\Gamma_c(Z,\\mathcal B)=\\Gamma(Z,\\mathcal B)$ and $H^q_c(Z,\\mathcal B)=H^q(Z,\\mathcal B)$ for all $q$ [F3]. Substituting into the isomorphisms of [step 1.2] for $q=0$ and of [step 3.2] for $q\\ge1$ gives $\\Gamma_c(X,i_*\\mathcal B)\\cong\\Gamma(Z,\\mathcal B)$ and $R^q\\Gamma_c(X,i_*\\mathcal B)\\cong H^q(Z,\\mathcal B)$ for all $q\\ge0$. [step 1.2, step 3.2, F3, F5]\n\n5.1 **Conclusion.** Clause (1) is [step 1.1], [step 2.1] and [step 4.1]; clause (2) is [step 1.2], [step 2.3] and [step 3.2]; clause (3) is [step 4.2]. The Axiom of Choice is used only through the injective resolution data of [F7] and the comparison theorems of [F8], where dependent choice is required and follows from AC [F9]. [step 1.1, step 2.1, step 4.1, step 1.2, step 2.3, step 3.2, step 4.2, F9] ∎",
+        "axiom_use": "AC: injective resolutions on $U$ and $Z$ and the acyclic-resolution theorem (via DC, implied by AC). No further choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-210: Proposition 11.2.5 (c-softness is preserved by restriction to locally closed subsets, by extension by zero along the inclusion of an open subset, and by the extension F_Z of a sheaf on a closed subset), equation (10.2.4) for Gamma_Z, and the proofs read in full"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.1: the functor f_! of direct images with proper supports, its behaviour for open and closed immersions, and its coincidence with the compactly supported section functor for Y a point; §1.4 p. 340 for the acyclicity pattern"
+            },
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §21 Cohomology with support in a closed subset (tag 0A39)",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "§21, pp. 36-37: sections with support in a closed subset, used as the closed-embedding model for compactly supported global sections"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-polyhedral-covering-dimension-bounds-all-sheaf-cohomology",
+        "kind": "lemma",
+        "title": "A polyhedral dimension bound for every sheaf",
+        "deps": [
+          "lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology",
+          "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "def-compactly-supported-global-sections",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-global-cech-cohomology-directed-limit",
+          "def-refinement-open-cover",
+          "def-cech-cohomology-open-cover",
+          "def-cech-cochain-complex-open-cover",
+          "def-sheaf-cohomology-derived-global-sections",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "lem-sheaf-section-over-empty-set-terminal",
+          "def-axiom-of-choice",
+          "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "def-geometric-realization-of-an-abstract-simplicial-complex",
+          "def-locally-finite-and-finite-dimensional-simplicial-complex",
+          "def-barycentric-subdivision-of-an-abstract-simplicial-complex",
+          "def-canonical-barycentric-realization-map",
+          "thm-barycentric-subdivision-realizes-homeomorphically",
+          "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero",
+          "def-open-and-closed-stars-in-a-subdivision",
+          "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology",
+          "thm-lebesgue-number-lemma",
+          "def-metric-bounded-diameter",
+          "def-subspace-topology-top",
+          "def-compact-space",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "def-sheaf-on-topological-space",
+          "thm-choice-implies-dependent-implies-countable-choice"
+        ],
+        "dependency_level": 11,
+        "statement": "Assume the Axiom of Choice. Let $P=|K|$ be the realization of a finite abstract\nsimplicial complex $K$ of dimension $d$ (a finite compact polyhedron of\ndimension $d$), and let $\\mathcal F$ be a sheaf of abelian groups on $P$\n([[def-geometric-realization-of-an-abstract-simplicial-complex]],\n[[def-locally-finite-and-finite-dimensional-simplicial-complex]],\n[[def-sheaf-on-topological-space]]); every clause applies to sheaves of\n$k$-vector spaces. Then:\n\n1. $H^q(P,\\mathcal F)=0$ for every $q>d$\n   ([[def-sheaf-cohomology-derived-global-sections]]);\n2. for every open subspace $U\\subseteq P$ and every sheaf $\\mathcal E$ of\n   abelian groups on $U$, one has $H^q_c(U,\\mathcal E)=0$ for every $q>d$\n   ([[def-compactly-supported-global-sections]]);\n3. more generally, the same conclusions hold for every compact Hausdorff space\n   in which every open cover admits a finite open refinement of order at most\n   $d+1$ --- that is, a finite refinement such that every point lies in at most\n   $d+1$ of its members --- and for every open subspace of such a space.\n\nThese bounds concern arbitrary sheaves, not merely cellular, constructible or\ncoherent ones. If $L\\subseteq K$ is a subcomplex, then $|L|$ is closed in $P$,\nthe complement $P\\setminus|L|$ is open, and every open subspace of\n$P\\setminus|L|$ is an open subspace of $P$; this is the fibre model on which\nthe bound is applied.",
+        "strategy": "**Proof technique:** direct.\n\n1.1 **The polyhedron.** By [F1] the realization $P=|K|$ is a compact Hausdorff space whose weak topology is the Euclidean subspace topology of a finite-dimensional Euclidean space; in particular $P$ is a compact metric space, with the subspace metric and diameter as in [F2], and it is locally compact [F1]. Every simplex of $\\operatorname{sd}^rK$ is a strict chain of nonempty faces of $\\operatorname{sd}^{r-1}K$, hence has at most $\\dim(\\operatorname{sd}^{r-1}K)+1$ vertices, because a strictly increasing chain of faces of a complex of dimension $e$ adds at least one vertex at each step and every face has at most $e+1$ vertices; inductively $\\dim\\operatorname{sd}^rK\\le\\dim K=d$, so every simplex of $\\operatorname{sd}^rK$ has at most $d+1$ vertices. [F1]\n\n1.2 **The subcomplex clause.** Let $L\\subseteq K$ be a subcomplex; $L$ is finite because $K$ is. By [F7] the inclusion $|L|\\hookrightarrow P$ is a closed embedding, so $|L|$ is closed in $P$ and $P\\setminus|L|$ is open; every open subspace of the subspace $P\\setminus|L|$ is a trace of an open subspace of $P$, hence is itself open in $P$ [F7]. [F7]\n\n1.3 **Čech cohomology vanishes above $d$ on a cover of order at most $d+1$.** Let $\\mathcal V$ be a finite open cover of a space $X$ every point of which lies in at most $d+1$ members, and fix a linear order on its index set so that the ordered Čech complex of [F4] is defined. If $p>d$ then $p+1\\ge d+2$ and any $p+1$ distinct members of $\\mathcal V$ have empty intersection, because a common point would lie in $p+1\\ge d+2$ members; each tuple intersection is therefore empty and each factor of $C^p(\\mathcal V,\\mathcal F)$ is the zero group, so $C^p(\\mathcal V,\\mathcal F)=0$ and hence $\\check H^p(\\mathcal V,\\mathcal F)=0$ for every sheaf $\\mathcal F$ on $X$. [F4]\n\n2.1 **Star covers refine every cover with multiplicity at most $d+1$.** Assume first that $P$ is nonempty, let $\\mathcal U$ be an open cover of $P$, and choose a Lebesgue number $\\delta>0$ for $\\mathcal U$ [F3]. By [F2] the mesh $m(\\operatorname{sd}^rK)$ tends to $0$ as $r\\to\\infty$ (it is even $0$ when $d=0$), so choose $r$ with $2m(\\operatorname{sd}^rK)<\\delta$; then every nonempty open star of $T:=\\operatorname{sd}^rK$ has diameter at most $2m(T)<\\delta$ [F2], so by the Lebesgue property it lies in some member of $\\mathcal U$. The open stars of the vertices of $T$ are open, nonempty and cover $|T|=P$ [F2], and there are finitely many of them because $T$ is finite; choosing for each vertex one member of $\\mathcal U$ containing its star is a finite selection among nonempty sets, and defines a refinement function [F4], so the family of open stars is a finite open cover of $P$ refining $\\mathcal U$ [F4]. Finally, if a point $x\\in P$ lies in the stars of vertices $v_0,\\dots,v_m$ of $T$, then all of $v_0,\\dots,v_m$ belong to the support simplex of $x$, which by [F2] is a simplex of $T$ with at most $d+1$ vertices by [step 1.1]; hence $m+1\\le d+1$, that is, every point lies in at most $d+1$ members of the cover. If $P$ is empty the empty cover refines $\\mathcal U$ and has order $0$. [step 1.1, F2, F3, F4]\n\n2.2 **Clause (3), the cohomological statement.** Let $X$ be a compact Hausdorff space in which every open cover admits a finite open refinement of order at most $d+1$. The family of all finite open covers of $X$ of order at most $d+1$ is cofinal among all open covers by hypothesis, and by [step 1.3] every member of the family has vanishing Čech cohomology above $d$ with values in every sheaf; the comparison theorem [F5] applies because $X$ is compact Hausdorff, so $H^q(X,\\mathcal F)=0$ for every $q>d$ and every sheaf of abelian groups $\\mathcal F$ on $X$. [step 1.3, F5]\n\n3.1 **Clause (1).** The star covers produced in [step 2.1] form a family of open covers of $P$: for every open cover $\\mathcal U$ the construction produces a finite cover by open stars of some $\\operatorname{sd}^rK$ refining $\\mathcal U$, so the family is cofinal in the directed preorder of covers, and by [step 1.3] each of its members has vanishing Čech cohomology above $d$ with values in every sheaf. Since $P$ is compact Hausdorff by [step 1.1], the cofinal-family corollary of the comparison theorem [F5] gives $H^q(P,\\mathcal F)=0$ for every $q>d$ and every sheaf $\\mathcal F$ of abelian groups on $P$. [step 1.1, step 2.1, step 1.3, F5]\n\n3.2 **Clause (3), the compact-support statement.** Let $X$ be as in [step 2.2], let $U\\subseteq X$ be open and let $\\mathcal E$ be a sheaf on $U$. The compact space $X$ is locally compact because $X$ itself is a compact neighbourhood of every point ([[def-locally-compact-space]]), so the transport isomorphisms of [F6] apply with base space $X$: $R^q\\Gamma_c(X,j_!\\mathcal E)\\cong R^q\\Gamma_c(U,\\mathcal E)$ with $j:U\\hookrightarrow X$ the inclusion, and $H^q_c(X,j_!\\mathcal E)=H^q(X,j_!\\mathcal E)$; by [step 2.2] the latter vanishes for $q>d$, so $H^q_c(U,\\mathcal E)=0$ for $q>d$. [step 2.2, F6]\n\n4.1 **Clause (2).** Let $U\\subseteq P$ be open and let $\\mathcal E$ be a sheaf on $U$; write $j:U\\hookrightarrow P$ for the open inclusion. By [F6] there are natural isomorphisms $R^q\\Gamma_c(P,j_!\\mathcal E)\\cong R^q\\Gamma_c(U,\\mathcal E)$ for all $q\\ge0$, and since $P$ is compact [step 1.1] the identification $H^q_c(P,j_!\\mathcal E)=H^q(P,j_!\\mathcal E)$ holds. By [step 3.1] the group on the right vanishes for $q>d$, hence $H^q_c(U,\\mathcal E)=0$ for every $q>d$. [step 1.1, step 3.1, F6]\n\n5.1 **Conclusion.** Clause (1) is [step 3.1], clause (2) is [step 4.1], and clause (3) is [step 2.2] together with [step 3.2]; the subcomplex statement is [step 1.2]. The isomorphism of [F5] and the derived transport of [F6] use dependent choice, a consequence of AC [F8]; the cover-theoretic construction of [step 2.1] selects only finitely many members of a cover by finite choice, and no other selection is made. [step 1.2, step 3.1, step 2.2, step 4.1, step 3.2, F5, F6, F8] ∎",
+        "axiom_use": "AC: enough injectives for abelian sheaves and the Cech refinement data; dependent choice (from AC) for the comparison and for choosing Lebesgue numbers and subdivisions in compact metric spaces.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "The Stacks Project, Cohomology of Sheaves (chapter 20); §16 Cohomology on Hausdorff quasi-compact spaces (Lemmas 16.1-16.2, tags 09V1-09V2)",
+              "url": "https://stacks.math.columbia.edu/download/cohomology.pdf",
+              "locator": "§16, pp. 26-28: the comparison between refinement-limit Čech cohomology and sheaf cohomology on a compact Hausdorff space, with the cofinal-family corollary used here"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§4, p. 347: any locally compact space locally isomorphic to an open subset of a finite polyhedron is cohomologically A-constructible, the pattern instantiated by clauses (1)-(2)"
+            },
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.7 p. 221: Proposition 11.7.2 for a finite-dimensional manifold; the compact-support transport along the open inclusion used in clauses (2)-(3)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft",
+        "kind": "lemma",
+        "title": "Vanishing compactly supported first cohomology on opens characterises c-softness",
+        "deps": [
+          "def-c-soft-sheaf",
+          "def-compactly-supported-global-sections",
+          "def-support-of-a-sheaf-section",
+          "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "def-extension-by-zero-abelian-sheaf",
+          "lem-extension-by-zero-short-exact-sequence",
+          "def-direct-image-sheaf",
+          "lem-direct-image-is-sheaf",
+          "def-restriction-sheaf-open-subspace",
+          "def-inverse-image-presheaf-and-sheaf",
+          "def-exact-sequence-sheaves",
+          "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "def-sheaf-on-topological-space",
+          "def-compact-space",
+          "def-subspace-topology-top",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 11,
+        "statement": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space\n([[def-locally-compact-space]], [[def-hausdorff-space]]) and let\n$\\mathcal E$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces. Suppose that\n$$H^1_c(V,\\mathcal E|_V)=0\\qquad\\text{for every open subspace }V\\subseteq X,$$\nwhere $\\mathcal E|_V$ is the restriction\n([[def-restriction-sheaf-open-subspace]]) and $H^1_c$ is the first\ncompactly supported cohomology ([[def-compactly-supported-global-sections]]).\nThen $\\mathcal E$ is c-soft ([[def-c-soft-sheaf]]); more precisely, every\nsection of $\\mathcal E$ over a compact subset $K\\subseteq X$ extends to a\ncompactly supported global section of $\\mathcal E$. Conversely, if\n$\\mathcal E$ is c-soft, then\n$H^q_c(V,\\mathcal E|_V)=0$ for every $q>0$ and every open subspace\n$V\\subseteq X$. Hence c-softness of $\\mathcal E$ is equivalent to\n$R\\Gamma_c(V,\\mathcal E|_V)$ being concentrated in degree $0$ for every open\nsubspace $V\\subseteq X$.",
+        "strategy": "Fix a compact $K\\subseteq X$. By lem-extension-by-zero-short-exact-sequence applied to $\\mathcal F=\\mathcal E$ and the open complement $X\\setminus K$ of the closed (compact) set $K$, there is a short exact sequence of sheaves on $X$ $$0\\to j_!(\\mathcal E|_{X\\setminus K})\\to\\mathcal E\\to i_*(\\mathcal E|_K)\\to0.$$ Apply the long exact sequence of the right derived functors of $\\Gamma_c(X,-)$ (thm-right-derived-functors-form-a-cohomological-delta-functor). By the calculus of extension by zero and closed pushforward, $H^0_c(X,j_!(\\mathcal E|_{X\\setminus K}))=\\Gamma_c(X\\setminus K,\\mathcal E)$ and $H^1_c(X,j_!(\\mathcal E|_{X\\setminus K}))=H^1_c(X\\setminus K,\\mathcal E)=0$ by hypothesis, while $H^0_c(X,i_*(\\mathcal E|_K))=\\Gamma_c(K,\\mathcal E|_K)=\\Gamma(K,\\mathcal E|_K)$ because $K$ is compact. Exactness gives that $\\Gamma_c(X,\\mathcal E)\\to\\Gamma(K,\\mathcal E|_K)$ is surjective, that is, every section over $K$ extends to a compactly supported global section; this is the c-softness requirement of def-c-soft-sheaf. For the converse, restriction of a c-soft sheaf to an open subspace is c-soft and c-soft sheaves are $\\Gamma_c$-acyclic (both from the acyclicity lemma), so all positive compactly supported cohomology on opens vanishes, giving the stated equivalence.",
+        "axiom_use": "AC: the injective-resolution long exact sequences of compactly supported cohomology and the derived identities along open and closed embeddings; no further choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-210: Proposition 11.2.9 with its proof (for a locally compact space, F is c-soft if and only if R Gamma_c(U;F) is concentrated in degree 0 for every open U), read in full; Proposition 11.2.7 and Corollary 11.2.10 supply the surrounding equivalences"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.4, p. 340: the criterion that Y-softness is equivalent to the f_!-acyclicity of the open extensions, the pattern specialized here with Y a point"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions",
+        "kind": "lemma",
+        "title": "Bounded fibrewise-soft resolutions from a uniform all-sheaf dimension bound",
+        "deps": [
+          "def-c-soft-sheaf",
+          "def-compactly-supported-global-sections",
+          "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft",
+          "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "def-extension-by-zero-abelian-sheaf",
+          "def-direct-image-sheaf",
+          "def-restriction-sheaf-open-subspace",
+          "def-inverse-image-presheaf-and-sheaf",
+          "lem-stalk-inverse-image-sheaf",
+          "thm-continuity-characterisations-top",
+          "def-support-of-a-sheaf-section",
+          "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "thm-abelian-sheaves-have-enough-injectives",
+          "lem-ringed-space-module-sheaves-enough-injectives",
+          "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "def-exact-sequence-sheaves",
+          "thm-exactness-of-sheaves-stalkwise",
+          "def-sheaf-on-topological-space",
+          "def-compact-space",
+          "def-locally-compact-space",
+          "def-hausdorff-space",
+          "def-subspace-topology-top",
+          "thm-locally-compact-hausdorff-basics",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "lem-t0-t1-and-hausdorff-are-hereditary",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-choice-implies-dependent-implies-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_level": 12,
+        "statement": "Assume the Axiom of Choice. Let $f:X\\to Y$ be a continuous map between locally\ncompact Hausdorff spaces ([[def-locally-compact-space]],\n[[def-hausdorff-space]]) and let $d\\ge0$ be an integer such that\n$$H^q_c(V,\\mathcal F)=0\\qquad(q>d)$$\nfor every open subspace $V$ of every fibre $f^{-1}(y)$, $y\\in Y$, and every\nsheaf $\\mathcal F$ of $k$-vector spaces on $V$\n([[def-sheaf-on-topological-space]],\n[[def-compactly-supported-global-sections]]; the sheaves may equally be\nsheaves of abelian groups). Then every sheaf $\\mathcal A$ of $k$-vector spaces\non $X$ has a bounded resolution by fibrewise c-soft sheaves: there is an exact\nsequence\n$$0\\longrightarrow\\mathcal A\\longrightarrow\\mathcal K^0\\longrightarrow\\mathcal K^1\\longrightarrow\\cdots\\longrightarrow\\mathcal K^d\\longrightarrow0$$\nin which each $\\mathcal K^j$ restricts to a c-soft sheaf on every fibre\n$f^{-1}(y)$ ([[def-c-soft-sheaf]]). For $d=0$ this says that every sheaf on\n$X$ is already c-soft on every fibre. In particular the constant sheaf $k_X$\nhas such a resolution.",
+        "strategy": "Use the supplied field-linear (or separately abelian) injective datum. Module-linear section adjunction proves field injectives flasque. Fibres are closed and locally compact Hausdorff; open fibre subspaces inherit this. Inverse-image stalk identity preserves exactness of the syzygy sequences along these inclusions, even though they need not be open in X. The restricted injectives are c-soft and compact-support acyclic. Positive-degree dimension shifting yields Hc1(V,Z^d)=Hc(d+1)(V,A)=0. The all-open Hc1 criterion makes Z^d fibrewise c-soft. Concatenation gives a length-d resolution; d=0 is the identity resolution. The existing bounded-complex deferral is retained.",
+        "axiom_use": "AC: injective resolutions on $X$ and dependent choice for the long exact sequences and derived-functor comparisons; no other choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.4, p. 340: the cohomological dimension of f_! is finite if and only if the compact-support dimension of the fibres is uniformly bounded, and then every sheaf admits a finite resolution by Y-soft sheaves; read in full"
+            },
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-210: Proposition 11.2.9 (the vanishing criterion on open subspaces) and §11.7 p. 221 Proposition 11.7.2 (resolutions by acyclic sheaves and dimension bounds), the pattern transplanted here fibre by fibre"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1804,
+    "id": "compact-support-sheaf-calculus-examples",
+    "kind": "B",
+    "category": "scheme-theory",
+    "title": "Compact Support Sheaf Calculus Examples",
+    "companion": "compact-support-sheaf-calculus",
+    "requires": [
+      "compact-support-sheaf-calculus"
+    ],
+    "items": [
+      {
+        "id": "ex-compact-support-and-softness-on-a-finite-discrete-space",
+        "kind": "example",
+        "title": "Compact support and softness on a finite discrete space",
+        "deps": [
+          "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "def-c-soft-sheaf",
+          "def-compactly-supported-global-sections",
+          "def-support-of-a-sheaf-section",
+          "def-sheaf-on-topological-space",
+          "def-morphism-of-presheaves",
+          "def-stalk-of-presheaf",
+          "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-standard-topologies",
+          "def-compact-space",
+          "lem-compactness-of-a-subspace-is-ambient",
+          "thm-sheaf-morphism-isomorphism-stalkwise",
+          "lem-finite-choice",
+          "def-axiom-of-choice",
+          "thm-exactness-of-sheaves-stalkwise",
+          "prop-an-exact-functor-has-vanishing-positive-derived-functors"
+        ],
+        "dependency_level": 10,
+        "statement": "Assume the Axiom of Choice. Let $X$ be a finite set with the discrete\ntopology ([[def-standard-topologies]]) and let $k$ be a field. A sheaf\n$\\mathcal V$ of $k$-vector spaces on $X$ is the same thing as a family\n$(V_x)_{x\\in X}$ of $k$-vector spaces --- its stalks --- with\n$\\mathcal V(U)=\\prod_{x\\in U}V_x$ for every open $U\\subseteq X$\n([[def-sheaf-on-topological-space]]). Then:\n\n1. every sheaf of $k$-vector spaces on $X$ is c-soft\n   ([[def-c-soft-sheaf]]);\n2. $\\Gamma_c(X,\\mathcal V)=\\bigoplus_{x\\in X}V_x$ and\n   $H^q_c(X,\\mathcal V)=0$ for every $q>0$\n   ([[def-compactly-supported-global-sections]]), so the derived object\n   $R\\Gamma_c(X,\\mathcal V)$ is concentrated in degree zero with value\n   $\\bigoplus_{x\\in X}V_x$;\n3. for a $k$-vector space $W$ with constant sheaf $W_X$\n   ([[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]) there\n   are natural bijections\n   $$\\operatorname{Hom}_{\\operatorname{Sh}_k(X)}(\\mathcal V,W_X)\\cong\\operatorname{Hom}_k\\Bigl(\\bigoplus_{x\\in X}V_x,\\,W\\Bigr)=\\operatorname{Hom}_k\\bigl(\\Gamma_c(X,\\mathcal V),W\\bigr).$$\n\nThis is the discrete case of the exceptional inverse image along the terminal\nmap $X\\to\\mathrm{pt}$: the functor $W\\mapsto W_X$ is right adjoint to\n$\\Gamma_c(X,-)$.",
+        "strategy": "Singleton gluing identifies a sheaf with the product of its stalks. Distinct singleton neighbourhoods make the base Hausdorff and locally compact; formulaic extension by zero makes every sheaf c-soft. Extract a finite subcover from any cover to prove compactness of the finite base. Thus compact sections equal the stalk product, which is the finite direct sum, and c-soft acyclicity gives positive vanishing under AC. The sum of component maps and restriction to coordinate inclusions are inverse and natural, proving the constant-sheaf right adjunction. The direct exactness argument adds no choice beyond supplied resolution data.",
+        "axiom_use": "AC is inherited from the cited compact-support acyclicity lemma (injective resolutions); the finite discrete case has a direct choice-free proof because finite products and direct sums are exact and $X$ is compact.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Pierre Schapira, An Introduction to Categories and Sheaves, lecture notes, 2023",
+              "url": "https://webusers.imj-prg.fr/~pierre.schapira/LectNotes/CatShv.pdf",
+              "locator": "§11.2, printed pp. 207-210: Definition 11.2.1 and Propositions 11.2.2 and 11.2.6, the c-softness and compactly supported section statements specialized here to a finite discrete space"
+            },
+            {
+              "title": "Jean-Louis Verdier, Dualite dans la cohomologie des espaces localement compacts, Seminaire N. Bourbaki 1964-1966, expose 300, pp. 337-349 (Novembre 1965)",
+              "url": "https://www.numdam.org/item/SB_1964-1966__9__337_0.pdf",
+              "locator": "§1.1: for $Y$ a point the functor $f_!$ is the compactly supported global-sections functor, whose discrete case is computed here"
+            },
+            {
+              "title": "The Stacks Project, Sheaves of Modules (chapter 17); §5 Supports of modules and sections, Definition 5.1 (tag 01AT) and Lemma 5.2 (tag 01AU)",
+              "url": "https://stacks.math.columbia.edu/download/modules.pdf",
+              "locator": "§5, pp. 5-6: the support of a section and its closedness in the domain, used in the support computations"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

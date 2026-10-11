@@ -1,0 +1,732 @@
+{
+  "group": "a",
+  "batches": [
+    "32"
+  ],
+  "pages_read": [
+    "constructible-incidence-and-cochain-models",
+    "constructible-incidence-and-cochain-models-examples"
+  ],
+  "items_read": [
+    "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+    "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+    "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+    "lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications",
+    "lem-irreducible-complex-varieties-are-analytically-connected",
+    "lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs",
+    "ex-incidence-model-of-a-closed-interval"
+  ],
+  "conventions": [
+    {
+      "convention": "AC is assumed. Sheaves are sheaves of vector spaces over an arbitrary field k, and injective replacements are taken in the k-linear sheaf category; a k-injective is not presumed injective among abelian sheaves.",
+      "fixed_by": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+      "matters_for": [
+        "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+        "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+        "ex-incidence-model-of-a-closed-interval"
+      ]
+    },
+    {
+      "convention": "For X = |K| minus |D|, P consists of the nonempty simplices outside the subcomplex D, ordered by face inclusion. Its Alexandrov opens are upward closed, diagrams are covariant, and realization is inverse image along the carrier map. The empty-poset case has zero models.",
+      "fixed_by": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+      "matters_for": [
+        "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+        "ex-incidence-model-of-a-closed-interval"
+      ]
+    },
+    {
+      "convention": "The product comparison requires supplied finite deleted-boundary models and bounded constructible base objects. Its fibre-cone estimate additionally requires the augmentation k → H⁰(F;k) to be an isomorphism; positive-degree vanishing alone is insufficient.",
+      "fixed_by": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+      "matters_for": [
+        "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences",
+        "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+        "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace"
+      ]
+    },
+    {
+      "convention": "Simplicial structure maps have direction Zα⁻¹F_p → F_m for α:[p]→[m]. Totalization uses d_h + (−1)^p d_v and a common internal lower bound. The unnormalized E₁ page is Rʲq_{p*}F_p; normalization instead gives Nᵖ(Rʲq_{•*}F_•).",
+      "fixed_by": "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+      "matters_for": [
+        "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+        "lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves",
+        "thm-proper-hypercovers-compute-constructible-derived-cohomology"
+      ]
+    },
+    {
+      "convention": "Cartesian descent requires a Čech nerve whose map admits local sections. The algebraic constructibility restriction is stated for Zariski locally trivial principal GL bundles, with constructibility at every simplicial level.",
+      "fixed_by": "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+      "matters_for": [
+        "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+        "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom",
+        "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom"
+      ]
+    },
+    {
+      "convention": "The smooth-stratification result concerns one morphism of reduced separated finite-type complex varieties and finitely many prescribed closed subsets. It asserts smooth frontier strata and surjective smooth restrictions, without Whitney regularity, conical control, or topological triviality.",
+      "fixed_by": "lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications",
+      "matters_for": [
+        "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+        "thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications",
+        "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models"
+      ]
+    },
+    {
+      "convention": "The normalized-curve arc requires a positive-dimensional irreducible complex variety and a nonempty Zariski open O. The disk is centred at zero, γ(0)=z, and every nonzero parameter maps into O.",
+      "fixed_by": "lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs",
+      "matters_for": [
+        "lem-irreducible-complex-varieties-are-analytically-connected",
+        "lem-generic-complex-algebraic-whitney-regularity"
+      ]
+    },
+    {
+      "convention": "For the interval, generization maps go from endpoint stalks to the edge stalk. The reduced cochain complex has differential u₀−u₁ and occupies cohomological degrees zero and one.",
+      "fixed_by": "ex-incidence-model-of-a-closed-interval",
+      "matters_for": [
+        "ex-incidence-model-of-a-closed-interval"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+      "statement": "Assume AC. For a finite simplicial complex K, a subcomplex D and X=|K| minus |D|, exact realization of finite-dimensional covariant k-diagrams on the retained face poset induces a fully faithful functor into Dᵇ(Sh_k(X)), with essential image the complexes having bounded finite-rank locally constant cohomology on each open simplex. Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models commuting with every coefficient field extension. For a local product projection with supplied finite deleted-boundary models and a bounded constructible base object B, Rpr_*pr*B ≃ B⊗kC*(F;k), carrying the unit to B⊗(k→C*(F;k)). No arbitrary algebraic map is asserted simplicial.",
+      "used_by": [
+        "ex-incidence-model-of-a-closed-interval",
+        "thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology",
+        "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+        "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+        "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+        "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences",
+        "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+        "thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars"
+      ]
+    },
+    {
+      "id": "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+      "statement": "Assume AC. A strict augmented simplicial space has explicit coinduced injective resolutions and a normalized double-complex derived augmentation model. Before normalization, E₁ is Rʲq_{p*}F_p with alternating face differential; a common internal lower bound makes total-degree diagonals finite. The construction extends to strict bisimplicial diagrams and composition of derived right adjoints to exact inverse image. For a Čech nerve of a map admitting local sections, inverse image identifies Dᵇ(Sh_k(S)) with the full derived subcategory having Cartesian cohomology. For Zariski locally trivial algebraic principal GL bundles this restricts to algebraically constructible objects, with constructibility required at every level.",
+      "used_by": [
+        "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+        "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+        "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+        "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom",
+        "lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves",
+        "thm-proper-hypercovers-compute-constructible-derived-cohomology"
+      ]
+    },
+    {
+      "id": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+      "statement": "Assume AC. For a continuous map f and field k, inverse image of k-sheaves is exact and f* is left adjoint to Rf_*, computed with bounded-below k-linear injective replacements. Derived tensor of bounded complexes is signed total tensor. For bounded A and bounded-below B, R𝓗om(A,B) is computed by 𝓗om•(A,I_B). Flasque k-sheaves are acyclic for sections on every open set. Tensor–Hom adjunction and dg associativity, evaluation and symmetry identities are natural. No bounded-constructibility assertion for internal Hom is made.",
+      "used_by": [
+        "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+        "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+        "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+        "lem-analytic-six-operation-support-and-trace-calculus",
+        "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+        "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+        "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences"
+      ]
+    },
+    {
+      "id": "lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications",
+      "statement": "Assume AC. One morphism of reduced separated finite-type complex varieties, with finitely many prescribed closed subsets on each side, admits finite partitions into irreducible smooth locally closed algebraic strata respecting those subsets. Stratum closures are unions of strata of no larger dimension, with strictly lower-dimensional boundaries; every source stratum maps surjectively and smoothly onto one target stratum, analytically as a submersion. The source may be empty. No Whitney condition, conical control or topological triviality is asserted.",
+      "used_by": [
+        "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+        "thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications",
+        "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models"
+      ]
+    },
+    {
+      "id": "lem-irreducible-complex-varieties-are-analytically-connected",
+      "statement": "Assume AC. Every nonempty irreducible separated finite-type complex variety is analytically connected. For every locally closed algebraic subset A of a separated finite-type complex variety, analytic closure equals Zariski closure as sets of classical complex points. Smooth irreducible algebraic strata are therefore connected complex manifolds once holomorphic charts are supplied.",
+      "used_by": [
+        "lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications",
+        "thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications"
+      ]
+    },
+    {
+      "id": "lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs",
+      "statement": "Assume AC. In a positive-dimensional irreducible complex variety V, for every nonempty Zariski open O and every z∈V there is an irreducible algebraic curve through z not contained in V minus O, and a holomorphic disk arc γ with γ(0)=z and γ(s)∈O for every s≠0. The arc can be obtained by parametrizing a point over z in the finite normalization of that curve.",
+      "used_by": [
+        "lem-irreducible-complex-varieties-are-analytically-connected",
+        "lem-generic-complex-algebraic-whitney-regularity"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "Standing choice hypothesis throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "def-sheaf-on-topological-space",
+      "used_for": "Sheaf locality and gluing.",
+      "opened": true
+    },
+    {
+      "id": "def-inverse-image-presheaf-and-sheaf",
+      "used_for": "Inverse-image construction and realization.",
+      "opened": true
+    },
+    {
+      "id": "lem-bounded-below-complexes-admit-injective-replacements",
+      "used_for": "Injective replacements preserving a lower bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-injective-complexes-model-the-bounded-below-derived-category",
+      "used_for": "Derived computations using injective models.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-bounded-below-and-bounded-above-complex",
+      "used_for": "Termwise boundedness conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-sheaf-tensor-product",
+      "used_for": "Sheaf tensor construction.",
+      "opened": true
+    },
+    {
+      "id": "def-sheaf-hom",
+      "used_for": "Internal Hom as morphisms on restricted opens.",
+      "opened": true
+    },
+    {
+      "id": "def-derived-hom-in-the-bounded-setting",
+      "used_for": "Hom-complex grading, signs and resolution conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-flasque-sheaf",
+      "used_for": "Surjective restriction-map criterion.",
+      "opened": true
+    },
+    {
+      "id": "def-sheaf-cohomology-derived-global-sections",
+      "used_for": "Derived global-section convention.",
+      "opened": true
+    },
+    {
+      "id": "def-derived-category-of-an-abelian-category",
+      "used_for": "Localization, shifts, cones and size hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-choice-implies-dependent-implies-countable-choice",
+      "used_for": "AC supplies DC for replacements and comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-ringed-space-module-sheaves-enough-injectives",
+      "used_for": "Functorial k-linear injective embedding data.",
+      "opened": true
+    },
+    {
+      "id": "lem-stalk-inverse-image-sheaf",
+      "used_for": "Inverse-image stalk formula.",
+      "opened": true
+    },
+    {
+      "id": "thm-exactness-of-sheaves-stalkwise",
+      "used_for": "Exactness tests and exact inverse image.",
+      "opened": true
+    },
+    {
+      "id": "thm-inverse-direct-image-adjunction",
+      "used_for": "Carrier, pushforward and descent adjunctions.",
+      "opened": true
+    },
+    {
+      "id": "def-direct-image-sheaf",
+      "used_for": "Direct image on open sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-sheafification-preserves-stalks",
+      "used_for": "Tensor and sheafification stalk calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-extension-by-zero-adjunction-exactness",
+      "used_for": "Exact open extension by zero and restriction adjunction.",
+      "opened": true
+    },
+    {
+      "id": "def-extension-by-zero-abelian-sheaf",
+      "used_for": "Extension-by-zero supports and endpoint stalks.",
+      "opened": true
+    },
+    {
+      "id": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+      "used_for": "Long exact sequences and dimension shifting.",
+      "opened": true
+    },
+    {
+      "id": "prop-positive-right-derived-functors-vanish-on-injective-objects",
+      "used_for": "Injective acyclicity.",
+      "opened": true
+    },
+    {
+      "id": "lem-flasque-kernel-lifts-quotient-sections",
+      "used_for": "Flasque quotients and section lifting.",
+      "opened": true
+    },
+    {
+      "id": "cor-the-cone-criterion-from-the-general-long-exact-sequence",
+      "used_for": "Quasi-isomorphism tests by acyclic cones.",
+      "opened": true
+    },
+    {
+      "id": "thm-long-exact-sequence-in-cohomology",
+      "used_for": "Finite filtration and cone comparisons.",
+      "opened": true
+    },
+    {
+      "id": "lem-acyclic-assembly-by-exact-columns",
+      "used_for": "Acyclic total-complex comparison.",
+      "opened": true
+    },
+    {
+      "id": "def-presheaf-of-groups-rings-modules",
+      "used_for": "k-linear sheaf conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-geometric-realization-of-an-abstract-simplicial-complex",
+      "used_for": "Barycentric realization and simplex topology.",
+      "opened": true
+    },
+    {
+      "id": "def-simplicial-subcomplex-star-closure-and-link",
+      "used_for": "Deleted subcomplexes and open stars.",
+      "opened": true
+    },
+    {
+      "id": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+      "used_for": "Compactification and local compactness of finite pairs.",
+      "opened": true
+    },
+    {
+      "id": "def-presheaf-on-topological-space",
+      "used_for": "Restriction and diagram-to-sheaf conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-module-on-ringed-space",
+      "used_for": "Identification of k-sheaves with k_X-modules.",
+      "opened": true
+    },
+    {
+      "id": "thm-abelian-sheaves-form-abelian-category",
+      "used_for": "Abelian sheaf and module categories.",
+      "opened": true
+    },
+    {
+      "id": "def-stalk-of-presheaf",
+      "used_for": "Germs and filtered neighborhood colimits.",
+      "opened": true
+    },
+    {
+      "id": "thm-sheaf-morphism-isomorphism-stalkwise",
+      "used_for": "Realization and reconstruction isomorphisms.",
+      "opened": true
+    },
+    {
+      "id": "lem-direct-image-is-sheaf",
+      "used_for": "Sheaf-valued direct images.",
+      "opened": true
+    },
+    {
+      "id": "def-restriction-sheaf-open-subspace",
+      "used_for": "Restriction to open stars and charts.",
+      "opened": true
+    },
+    {
+      "id": "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward",
+      "used_for": "Realized standard injectives as closed pushforwards.",
+      "opened": true
+    },
+    {
+      "id": "lem-closed-immersion-preserves-sheaf-cohomology",
+      "used_for": "Cohomology on relatively closed simplex supports.",
+      "opened": true
+    },
+    {
+      "id": "lem-sheaf-cohomology-classes-as-derived-morphisms",
+      "used_for": "Published cohomology/derived-morphism convention.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-bounded-below-complex-of-injectives-is-homotopically-injective",
+      "used_for": "K-injectivity under the declared choice hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-homotopically-injective-bounded-below-complex",
+      "used_for": "K-injective predicate.",
+      "opened": true
+    },
+    {
+      "id": "prop-morphisms-into-a-homotopically-injective-complex-need-no-roof",
+      "used_for": "Computing derived morphisms into injective models.",
+      "opened": true
+    },
+    {
+      "id": "def-homotopically-projective-bounded-above-complex",
+      "used_for": "K-projective predicate and Hom signs.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-bounded-above-complex-of-projectives-is-homotopically-projective",
+      "used_for": "Projective bar-model derived comparisons.",
+      "opened": true
+    },
+    {
+      "id": "prop-morphisms-from-a-homotopically-projective-complex-need-no-roof",
+      "used_for": "Derived morphisms from finite projective models.",
+      "opened": true
+    },
+    {
+      "id": "thm-acyclic-resolution-theorem-for-right-derived-functors",
+      "used_for": "Realized diagram resolutions compute actual cohomology.",
+      "opened": true
+    },
+    {
+      "id": "def-canonical-truncation-of-a-complex",
+      "used_for": "Finite cohomology-layer induction.",
+      "opened": true
+    },
+    {
+      "id": "thm-canonical-truncations-fit-a-distinguished-triangle",
+      "used_for": "Essential-image and Cartesian-descent induction.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-derived-category-inherits-a-triangulated-structure",
+      "used_for": "Cone triangles and connecting morphisms.",
+      "opened": true
+    },
+    {
+      "id": "prop-bounded-derived-localizations-embed-fully-faithfully",
+      "used_for": "Passage between bounded and ambient derived categories.",
+      "opened": true
+    },
+    {
+      "id": "lem-filtered-colimits-of-abelian-groups-are-exact",
+      "used_for": "Internal-Hom stalk cohomology and local model comparisons.",
+      "opened": true
+    },
+    {
+      "id": "cor-kunneth-over-a-field",
+      "used_for": "Tensor cohomology and the qualified fibre-cone estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compact path and homotopy parameter boxes.",
+      "opened": true
+    },
+    {
+      "id": "thm-lebesgue-number-lemma",
+      "used_for": "Finite subdivisions in local-system transport.",
+      "opened": true
+    },
+    {
+      "id": "def-classical-algebraic-prevariety-regular-maps-and-varieties",
+      "used_for": "Separated finite-type classical varieties and affine charts.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-morphism-integral-closed",
+      "used_for": "Closed images under finite normalization and Noether normalization.",
+      "opened": true
+    },
+    {
+      "id": "thm-lying-over",
+      "used_for": "Points over base points in finite integral maps.",
+      "opened": true
+    },
+    {
+      "id": "cor-noether-normalisation-module-finiteness",
+      "used_for": "Finite maps to affine space and finite-sheet presentations.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-equals-transcendence-degree",
+      "used_for": "Classical variety dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-affine-domain-dimension-transcendence-degree",
+      "used_for": "Affine component and finite-image dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-formula-for-affine-domains",
+      "used_for": "Dimension bounds for the inverse image of a line.",
+      "opened": true
+    },
+    {
+      "id": "thm-krull-height-theorem",
+      "used_for": "Lower dimension bound for curve components through z.",
+      "opened": true
+    },
+    {
+      "id": "lem-dimension-nonempty-open-subset",
+      "used_for": "Dense opens and strictly decreasing residual dimensions.",
+      "opened": true
+    },
+    {
+      "id": "thm-normalization-reduced-curve-exists-finite",
+      "used_for": "Finite regular normalization of the selected curve.",
+      "opened": true
+    },
+    {
+      "id": "thm-regular-equals-smooth-over-perfect-field",
+      "used_for": "Smoothness of normalized complex curves and regular strata.",
+      "opened": true
+    },
+    {
+      "id": "lem-nonsingular-complex-algebraic-curve-holomorphic-charts",
+      "used_for": "Holomorphic parametrization after verifying Jacobian hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "thm-holomorphic-implicit-function-theorem",
+      "used_for": "Curve charts, simple-root sheets and smooth-stratum charts.",
+      "opened": true
+    },
+    {
+      "id": "thm-zariski-tangent-space-jacobian-kernel",
+      "used_for": "Selecting a full-rank subset of curve equations.",
+      "opened": true
+    },
+    {
+      "id": "def-regular-local-ring-geometric-point",
+      "used_for": "Regularity and tangent-space dimension criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-dimension-at-most-embedding-dimension",
+      "used_for": "Dimension of the local complete-intersection chart.",
+      "opened": true
+    },
+    {
+      "id": "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+      "used_for": "The one-dimensional regular local source is a domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-basis-theorem",
+      "used_for": "Finite equation lists in the curve-chart argument.",
+      "opened": true
+    },
+    {
+      "id": "lem-classical-variety-noetherian-components",
+      "used_for": "Finite components, finite affine covers and zero-dimensional exceptional sets.",
+      "opened": true
+    },
+    {
+      "id": "def-irreducible-topological-space-and-subset",
+      "used_for": "Nonemptiness and intersection of nonempty Zariski opens.",
+      "opened": true
+    },
+    {
+      "id": "thm-integrality-and-finite-module-equivalences",
+      "used_for": "Integrality of the primitive generator.",
+      "opened": true
+    },
+    {
+      "id": "lem-polynomial-algebras-over-fields-are-integrally-closed",
+      "used_for": "Polynomial coefficients of the minimal polynomial.",
+      "opened": true
+    },
+    {
+      "id": "lem-integrally-closed-minimal-polynomial-coefficients",
+      "used_for": "Monic primitive-element polynomial over the polynomial base.",
+      "opened": true
+    },
+    {
+      "id": "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+      "used_for": "Separability over the characteristic-zero function field.",
+      "opened": true
+    },
+    {
+      "id": "thm-primitive-element-theorem-for-finite-separable-extensions",
+      "used_for": "Finite-sheet hypersurface presentation.",
+      "opened": true
+    },
+    {
+      "id": "thm-bezout-identity-for-polynomials",
+      "used_for": "An open set with no repeated polynomial roots.",
+      "opened": true
+    },
+    {
+      "id": "thm-fundamental-theorem-of-algebra-liouville-proof",
+      "used_for": "Complex roots and the zero-dimensional affine case.",
+      "opened": true
+    },
+    {
+      "id": "thm-riemann-extension-across-hypersurface-zero-sets",
+      "used_for": "Extending bounded symmetric root coefficients.",
+      "opened": true
+    },
+    {
+      "id": "prop-holomorphic-functions-are-continuous-and-separately-holomorphic",
+      "used_for": "Power-series and growth-bound arguments.",
+      "opened": true
+    },
+    {
+      "id": "thm-power-series-expansion-in-several-complex-variables",
+      "used_for": "Polynomiality of entire functions with polynomial growth.",
+      "opened": true
+    },
+    {
+      "id": "cor-uniqueness-of-multivariable-power-series-coefficients",
+      "used_for": "Radius-independent coefficients in the growth argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+      "used_for": "Dense smooth pieces in dimension-decreasing partitions.",
+      "opened": true
+    },
+    {
+      "id": "def-smooth-morphism-classical",
+      "used_for": "Locally standard smooth morphism convention.",
+      "opened": true
+    },
+    {
+      "id": "def-ag-standard-smooth-algebra",
+      "used_for": "Jacobian presentations for analytic charts.",
+      "opened": true
+    },
+    {
+      "id": "thm-generic-smoothness-characteristic-zero",
+      "used_for": "Target opens where dominant smooth source pieces map smoothly and onto.",
+      "opened": true
+    },
+    {
+      "id": "lem-smooth-map-tangent-surjectivity-criterion",
+      "used_for": "Smooth algebraic restrictions have surjective differentials.",
+      "opened": true
+    },
+    {
+      "id": "thm-holomorphic-constant-rank-theorem",
+      "used_for": "Analytic submersion charts.",
+      "opened": true
+    },
+    {
+      "id": "def-direct-sum-total-complex-of-a-double-complex",
+      "used_for": "Finite-diagonal totalization conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective",
+      "used_for": "Coinduced injective products under AC.",
+      "opened": true
+    },
+    {
+      "id": "def-cochain-complex-in-an-abelian-category",
+      "used_for": "Cohomological grading and reindexing.",
+      "opened": true
+    },
+    {
+      "id": "lem-the-total-differential-squares-to-zero",
+      "used_for": "Signed double-complex differential.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-cohomological-filtered-complex-construction",
+      "used_for": "Convergence with degreewise finite filtrations.",
+      "opened": true
+    },
+    {
+      "id": "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+      "used_for": "Constant coefficients and interval generization maps.",
+      "opened": true
+    },
+    {
+      "id": "def-locally-constant-sheaf-of-finite-rank",
+      "used_for": "Outside-batch draft prerequisite: finite-rank local-system condition; simplex triviality is separately proved.",
+      "opened": true
+    },
+    {
+      "id": "lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology",
+      "used_for": "Outside-batch draft prerequisite: constant-sheaf cohomology on contractible stars and support intersections; proof inspected.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-poset-diagrams-have-bounded-finite-bar-models",
+      "used_for": "Outside-batch draft prerequisite: finite projective bar models, amplitude bounds and field extension; proof inspected.",
+      "opened": true
+    },
+    {
+      "id": "lem-field-module-sheaves-have-injective-derived-models",
+      "used_for": "Outside-batch draft prerequisite: k-linear injective models and fixed-stratification cone closure; proof inspected.",
+      "opened": true
+    },
+    {
+      "id": "def-compactly-supported-global-sections",
+      "used_for": "Outside-batch draft prerequisite: compact supports and derived compact-support cohomology.",
+      "opened": true
+    },
+    {
+      "id": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+      "used_for": "Outside-batch draft prerequisite: c-soft compact-support acyclicity and preservation clauses.",
+      "opened": true
+    },
+    {
+      "id": "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+      "used_for": "Outside-batch draft prerequisite: actual compact-support bridge to the compactified finite pair; proof inspected.",
+      "opened": true
+    },
+    {
+      "id": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+      "used_for": "Outside-batch draft prerequisite: existential finite smooth frontier stratification and cohomological constructibility.",
+      "opened": true
+    }
+  ],
+  "concerns": [],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "constructible-incidence-and-cochain-models",
+      "to": "analytic-constructible-sheaf-foundations",
+      "faithful": true,
+      "note": "Checked finite-rank local constancy, field injective models, finite-poset bar bounds and constant-sheaf comparison against the supplier statements and relevant proofs. Simplex triviality and analytic derived full faithfulness are proved in the incidence item rather than attributed to the foundational definitions."
+    },
+    {
+      "from": "constructible-incidence-and-cochain-models",
+      "to": "compact-support-sheaf-calculus",
+      "faithful": true,
+      "note": "The incidence compact-support argument verifies local compactness and Hausdorffness, identifies extension by zero to |K| by stalks, and applies the actual derived extension-by-zero identity. It does not presume realized diagram injectives are injective or c-soft among all sheaves."
+    },
+    {
+      "from": "complex-algebraic-stratified-topology",
+      "to": "constructible-incidence-and-cochain-models",
+      "faithful": true,
+      "note": "Checked the curve-arc use in generic Whitney regularity, smooth-partition and analytic-connectedness uses in the stratification theorem, and incidence uses in triangulation/conical cochain models. Whitney control is supplied separately; incidence comparisons retain finite deleted-boundary hypotheses."
+    },
+    {
+      "from": "analytic-derived-six-operations-and-duality",
+      "to": "constructible-incidence-and-cochain-models",
+      "faithful": true,
+      "note": "Checked the field-operations citations, finite incidence cogenerators in local biduality, and product-resolution uses. Bounded constructibility is attributed to the geometric suppliers rather than the elementary field-sheaf lemma; general separated fibres are handled through finite affine-open descent."
+    },
+    {
+      "from": "equivariant-constructible-perverse-foundations",
+      "to": "constructible-incidence-and-cochain-models",
+      "faithful": true,
+      "note": "Checked action-nerve conventions, coinduced resolutions, principal-bundle Čech descent, local product units and Stiefel Hom comparisons. The action nerve is explicitly not augmented to X in general, and the acyclic-fibre argument includes H⁰(F;k)=k and the finite-model hypotheses."
+    },
+    {
+      "from": "proper-cohomological-descent-and-constructible-hypercovers",
+      "to": "constructible-incidence-and-cochain-models",
+      "faithful": true,
+      "note": "Checked the simplicial model uses in proper Čech descent and proper hypercovers. They use uniform lower bounds, finite diagonals, bisimplicial totals and derived composition; proper descent is established separately by proper base change and fibre contraction, without invoking the local-section descent conclusion."
+    }
+  ]
+}

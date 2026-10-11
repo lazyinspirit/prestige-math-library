@@ -14,12 +14,7 @@ aliases: []
 landmark: false
 verification:
   precheck: n/a
-  verified:
-    model: gpt-5.6-sol-codex-subscription
-    verdict: certify
-    date: 2026-08-04
-    scope: published-audit
-    delegated_by: owner
+  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/receipts/rem-real-exponents-deferred.json
 sources:
   scraped: []
   references:
@@ -68,20 +63,14 @@ $a^{x}$, and a set with a greatest element has that element as its supremum
 $E_a(x) := 1/E_{1/a}(x)$, and $E_1(x) := 1$. So the object exists, it is the
 right object, and it is monotone.
 
-**Where it stops.** Proving the law $E_a(x+y) = E_a(x)E_a(y)$ from this
-definition is not an algebraic manipulation. One has to compare a supremum over
-rationals $r \le x + y$ with the products $a^{s}a^{t}$ for $s \le x$, $t \le y$,
-and the two families are not the same: every $s + t$ is one of the $r$, but a
-given $r \le x+y$ need only be *approximated* by such sums. Closing that gap is
-an approximation argument, and an approximation argument needs a notion of limit
-and an estimate that controls $a^{r} - a^{s}$ in terms of $r - s$. The library
-does have a notion of convergent sequence of reals, introduced in the
-construction of $\mathbb{R}$ via Cauchy sequences ([[def-real-limit]]), but no
-continuity, no uniform continuity, no series and no derivative is available at
-this point in its reading order, and each of those is exactly what the standard
-proofs of the power laws for real exponents use. Writing such
-a proof here would either import machinery that does not exist yet or quietly
-assume it, and the second is the failure mode this library is built to avoid.
+**What remains to prove, and why it is deferred.** The existence argument
+above does not by itself prove $E_a(x+y) = E_a(x)E_a(y)$. That law requires a
+comparison between the supremum over rational $r \le x+y$ and products
+$a^{s}a^{t}$ with rational $s \le x$ and $t \le y$. An elementary proof using
+suprema and order estimates is possible; neither sequence limits nor continuity
+is logically necessary. This page stops at rational powers as a choice of
+reading order, leaving the real-exponent laws to the library's later analytic
+development.
 
 **The route the library will actually take.** General powers will be defined not
 by the supremum above but through the exponential function and the logarithm,

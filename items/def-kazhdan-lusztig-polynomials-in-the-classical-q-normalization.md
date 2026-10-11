@@ -5,7 +5,7 @@ title: Kazhdan–Lusztig polynomials in the classical $q$-normalization
 status: published
 origin: pipeline
 pipeline_run: frontier-43-complex-representation-15
-deps: [thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
+deps: [lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties, def-normalized-type-a-hecke-algebra-and-its-bar-involution]
 dependency_level: 5
 justified_by: []
 aliases: []
@@ -24,18 +24,14 @@ sources:
       url: "https://arxiv.org/pdf/math/0208154"
       locator: "§§5.1–5.4, printed pp. 27–30; Theorem 5.2 and its proof, and Proposition 5.4 and its proof, were read in full and translated by v_L=v^{-1}."
 verification:
-  audited: "2026-10-08"
-  precheck: n/a
-  judge:
-    model: "gpt-6.1-sol"
-    verdict: pass
-    date: 2026-10-08
+  precheck: "n/a"
+  repair: "research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/gate1-kl-receipts/receipts/def-kazhdan-lusztig-polynomials-in-the-classical-q-normalization.json"
 ---
 
 ## Definition
 
-Identify $\mathbb Z[q]$ with $\mathbb Z[v^{-2}]$ by $q\mapsto v^{-2}$. For $y\le w$ in $S_n$, put $d=\ell(w)-\ell(y)$ and define the **Kazhdan–Lusztig polynomial** $P_{y,w}(q)\in\mathbb Z[q]$ by $$P_{y,w}(v^{-2})=v^{-d}p_{y,w},$$ where $\underline H_w=\sum_{y\le w}p_{y,w}H_y$ is the Kazhdan–Lusztig basis of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]. The parity clause of that theorem makes the right side a polynomial in $v^{-2}$. The conventions are: $P_{y,w}=0$ unless $y\le w$, $P_{w,w}=1$, $P_{y,w}$ has constant term 1, and for $y<w$ its degree is at most $(\ell(w)-\ell(y)-1)/2$. The **$\mu$-coefficient** is $$\mu(y,w):=\text{coefficient of }q^{(\ell(w)-\ell(y)-1)/2}\text{ in }P_{y,w},$$ defined to be 0 when $\ell(w)-\ell(y)$ is even; equivalently $\mu(y,w)$ is the coefficient of $v$ in $p_{y,w}$. One writes $\mu(y|w)\ne0$ when $y\ne w$ and ($y<w$ and $\mu(y,w)\ne0$) or ($w<y$ and $\mu(w,y)\ne0$). The dictionary with the literature is recorded for use: with the classical parameter $T_s^2=(q-1)T_s+q$ one has $H_w=v^{\ell(w)}T_w$, the element $\underline H_w$ is the basis element $C'_w$ of [EW], and $h_{y,w}=p_{y,w}$ with $v^{\ell(w)-\ell(y)}P_{y,w}(v^{-2})=h_{y,w}$ [EW, Remark 3.2].
+Identify $\mathbb Z[q]$ with $\mathbb Z[v^{-2}]$ by $q\mapsto v^{-2}$. For $y\le w$ in $S_n$, put $d=\ell(w)-\ell(y)$ and define the **Kazhdan–Lusztig polynomial** $P_{y,w}(q)\in\mathbb Z[q]$ by $$P_{y,w}(v^{-2})=v^{-d}p_{y,w},$$ where $\underline H_w=\sum_{y\le w}p_{y,w}H_y$ is the Kazhdan–Lusztig basis of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]. The parity clause of that theorem makes the right side a polynomial in $v^{-2}$. The conventions are: $P_{y,w}=0$ unless $y\le w$, $P_{w,w}=1$, $P_{y,w}$ has constant term 1, and for $y<w$ its degree is at most $(\ell(w)-\ell(y)-1)/2$. The **$\mu$-coefficient** is $$\mu(y,w):=\text{coefficient of }q^{(\ell(w)-\ell(y)-1)/2}\text{ in }P_{y,w},$$ defined to be 0 when $\ell(w)-\ell(y)$ is even; equivalently $\mu(y,w)$ is the coefficient of $v$ in $p_{y,w}$. One writes $\mu(y|w)\ne0$ when $y\ne w$ and ($y<w$ and $\mu(y,w)\ne0$) or ($w<y$ and $\mu(w,y)\ne0$). The dictionary with the literature is recorded for use: with the classical parameter $T_s^2=(q-1)T_s+q$ one has $H_w=v^{\ell(w)}T_w$, the element $\underline H_w$ is the basis element $C'_w$ of [EW], and $h_{y,w}=p_{y,w}$ with $v^{\ell(w)-\ell(y)}P_{y,w}(v^{-2})=h_{y,w}$ [EW, Remark 3.2].
 
 ## Remarks
 
-The coefficient rescaling, support, constant term and degree bound use the locally proved coefficient, parity and degree clauses of [[thm-existence-and-uniqueness-of-the-kazhdan-lusztig-basis]]. Coefficientwise positivity is not required.
+The coefficient rescaling, support, constant term and degree bound use the locally proved coefficient, parity and degree clauses of [[lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties]]. Coefficientwise positivity is not required.

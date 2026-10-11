@@ -1,0 +1,17 @@
+# Renewed original-owner KLR handoff
+
+The actual dual-bases and word-trace helpers are complete locally. Independent flag inverse, normal-form/cap-ideal and full two-color terminal suppliers are consumed without a Frobenius/cyclicity premise. The two original coherent-biadjunction and graded-symmetric carriers are surgically integrated. No mathematical task remains in this retained package; ROOT owns independent/native acceptance and shared integration.
+
+For p=τe(ij)∈e(ji)Be(ij), the exact source corner ratio is τ(pa)=(t_ij/t_ji)τ(ap). The coherent Statement changes only its two reciprocal ratios. The graded-symmetric Statement is byte-for-byte preserved. The normalized inversion weights are correspondingly inverted. See typed-ratio-rank-two-check.md and statement-scope-guard.json. No broad hypothesis or geometric qualification was narrowed or extended.
+
+Final four-source bindings are in final-four-source-bindings.json. New helpers each have eight rows; original coherent/symmetric have three/four rows. Exact final precheck, rendercheck, proof-layout and strict contract checks pass. Original checks are retained in final-check-receipts.json and dual-bases-final-checks.json. The explicit mate dualbasis contraction and all-input tensor extension were added externally at 11:27:16 UTC; exact previous bytes were reconstructed/hash-matched, current text independently inspected by this logical owner, and only the two changed paths rechecked. Current receipts: explicit-mate-final-check-receipts.json. This is local review, not an independent/native acceptance claim.
+
+The actual transitive affected source closure has 30 items including the two changed carriers. focused-consumer-closure.json records focused interface anchors and current raw/canonical/surface guards. No other consumer needed a source correction. Native50 Definition/F5 uses exactly standard level-one homogeneous symmetry and is unchanged; its historically missing supplier is now constructed. Generic basis consumers retain symmetric d_i=1, characteristic-zero and loopless-multiedge geometric parameter hypotheses; current generic realization/semisimplicity and actual canonical extraction/jump interfaces are bound. No blanket geometry or unrestricted two-sided tensor-module hold was imported. final-guard-check.json binds 30 consumer and 11 supplier rows with no stale hashes.
+
+ROOT integration inputs:
+
+- final-four-proof-contracts-proposal.json and final-four-manifest-proposal.json: exact current metadata, with ROOT level recomputation and native risk validation.
+- page-placement-and-prose-proposal.json: put actual dualbasis/residue/fullterminal/wordtrace before coherent carrier; ROOT owns the page.
+- renewed-native-ledger-deltas.json: five native decision proposals (two flagged carriers, page+flagged page, native50 audit-enrichment consumer), reusing three original physical defect rows. Frozen historical observations and true findings remain. Page decisions require actual ROOT helper placement; no duplicate physical defect is proposed.
+
+No page, manifest, contract aggregate, native state, global ledger or Git was written by this owner. Earlier budgets, histories and owner-shared-defect packets remain frozen. This extension uses the explicit renewed new-item authorization without history reset. ROOT must integrate truthful origin records, metadata and native resolutions, then use the engine for acceptance/gates only after all global escalations are actually resolved.

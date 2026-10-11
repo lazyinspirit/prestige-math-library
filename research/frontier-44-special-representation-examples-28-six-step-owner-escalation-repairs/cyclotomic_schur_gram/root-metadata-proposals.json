@@ -1,0 +1,575 @@
+{
+  "contract_path": "research/frontier-44-special-representation-examples-28-six-step-batch-48.proof-contracts.json",
+  "contract_changes": {
+    "lem-cyclotomic-schur-weight-gram-valuations-equal-signed-rim-hook-kostka-sums": {
+      "item_raw_sha256": "31c383c6bedc79984fb56565dd04d4db50ac5e608753dfe976040a059d17c482",
+      "replacement_fields": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "lem-cyclotomic-schur-weight-gram-determinants-are-products-of-monic-semistandard-norms",
+            "source_section": "Statement",
+            "quote": "Work with the arbitrary-level Murphy/Schur datum of [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] over either (i) the fraction field $K$ of the universal Laurent parameter ring, including the generic field of the Lyle\u2013Mathas deformation, or (ii) any field $F$ with nonzero $q_H,Q_1,\\dots,Q_\\ell$ under the deformation $z=q_Ht$, $U_a=Q_at^{na}$ in $F(t)$.",
+            "uses": [
+              "6.1",
+              "7.1",
+              "12.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-laurent-binomial-valuation-at-one-over-any-field",
+            "source_section": "Statement",
+            "quote": "Let $F$ be a field, let $F[t,t^{-1}]$ be its Laurent polynomial ring ([[def-the-laurent-polynomial-ring]]), and let $v_1$ be the $(t-1)$-adic valuation on the nonzero elements of $F[t,t^{-1}]$: for $0\\ne f$, $$v_1(f):=\\max\\{n\\ge0:(t-1)^n\\mid f\\ \\text{in}\\ F[t,t^{-1}]\\},$$ so that $v_1(f)=0$ exactly when $f(1)\\ne0$ ([[def-discrete-valuation-ring]]).",
+            "uses": [
+              "3.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules",
+            "source_section": "Definition",
+            "quote": "Let $R$ be a commutative ring, let $n\\ge0$ and $\\ell\\ge1$, and let $z,U_1,\\dots,U_\\ell$ be units of $R$ ([[def-algebra-over-a-commutative-ring]]).",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "def-young-tableau-standard-tableau-and-shape",
+            "source_section": "Definition",
+            "quote": "Let $\\lambda\\vdash n$ and let $[\\lambda]$ be its Young diagram ([[def-partition-young-diagram-and-conjugate-partition]]). A **tableau of shape $\\lambda$**, or $\\lambda$-tableau, is a bijection $$t:[\\lambda]\\longrightarrow\\{1,2,\\dots,n\\}.$$ We write $t(i,j)$ for the entry of $t$ in the node $(i,j)$, and we display $t$ as the diagram $[\\lambda]$ with each node carrying its entry.",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "def-semistandard-tableau-and-kostka-number",
+            "source_section": "Definition",
+            "quote": "Let $\\lambda\\vdash n$ and $\\mu\\vdash n$ be partitions of the same integer $n$, with diagrams $[\\lambda]$ and $[\\mu]$ ([[def-partition-young-diagram-and-conjugate-partition]]). For content counts only, set $\\mu_i:=0$ for $i$ beyond the number of parts of $\\mu$; these zeros are not additional parts of the partition.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "def-determinant-of-a-square-matrix",
+            "source_section": "Definition",
+            "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is $$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$ The sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.",
+            "uses": [
+              "6.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "step": "1.1",
+            "claim": "Characters as finite symmetric polynomials. Fix $d\\ge n$ row labels per type component with ordered variables $x_{(a,r)}$, put $Y_a=\\{x_{(b,r)}:b\\ge a\\}$ with the inherited order, and for a shape $\\lambda$ let $\\operatorname{ch}_\\lambda(x)=\\sum_{T\\in\\operatorname{SStd}(\\lambda)}x^{\\operatorname{wt}(T)}$. The flag condition says that the physical component $a$ of a semistandard tableau is an ordinary semistandard tableau over the alphabet $Y_a$, and the components are chosen independently, so $\\operatorname{ch}_\\lambda(x)=\\prod_a s_{\\lambda^{(a)}}(Y_a)$ with $s_\\rho(Y)=\\det(h_{\\rho_i-i+j}(Y))$. The determinant equals the ordinary semistandard generating polynomial: expand it as signed families of east/north lattice paths from $(-j,1)$ to $(\\rho_i-i,m)$ with east steps at height $r$ weighted $y_r$, choose the first intersection in a fixed order and exchange the two tails, an involution that preserves the monomial weight and reverses the permutation sign, so all intersecting families cancel; a nonintersecting family forces the identity matching, and the surviving families are exactly the semistandard tableaux, sign $+1$. Hence the coefficient of $x^\\nu$ in $\\operatorname{ch}_\\lambda$ is the Kostka number $K_{\\lambda\\nu}$; empty and short-row cases are included. [F3, F4, F5, algebra]",
+            "inputs": [
+              "F3",
+              "F4",
+              "F5"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "step": "2.1",
+            "claim": "Beta determinants and rim-hook signs. Choose $N\\ge n$, put $\\beta_{a,i}=\\lambda^{(a)}_i+N-i$ with zero parts appended, and for a nonnegative integer array $v$ define $\\chi(v;x)=\\prod_a\\det\\bigl(h_{v_{a,i}-N+j}(Y_a)\\bigr)_{i,j}$. If two entries of one component of $v$ agree the determinant has equal rows and is zero; otherwise sorting that component into strictly decreasing order and writing $\\rho_i=v'_i-N+i$ gives $\\chi(v;x)=\\varepsilon(v)\\prod_a s_{\\rho^{(a)}}(Y_a)$ with $\\varepsilon$ the product of the row-sorting signs, so every coefficient is a signed Kostka multiplicity. A beta move lowering a bead from $v+L$ to an unoccupied $v$ is exactly the removal of a rim hook of length $L$: tracing the southeast boundary shows the strip between the two boundary steps has $L$ boxes, its leg is the number of occupied positions strictly between $v$ and $v+L$, its foot content is $v-N+1$, and the associated sorting sign is $(-1)^{\\operatorname{leg}}$; the correspondence is a bijection by the reverse move. [F4, step 1.1, algebra]",
+            "inputs": [
+              "F4",
+              "step 1.1",
+              "1.1"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "step": "3.1",
+            "claim": "The hook side as a complete finite alternating polynomial. Define $B_\\lambda(x)$ as the finite alternating sum of step 2.1: for crosscomponent terms, over $a<b$, over beads $i,j$ and lengths $h\\le\\beta_{a,i}$, of $\\chi(\\beta-h e_{a,i}+h e_{b,j};x)V(U_az^{\\beta_{a,i}-h}-U_bz^{\\beta_{b,j}})$; and for same-component terms, over $a$, $i<j$ and $1\\le h\\le\\beta_{a,i}-\\beta_{a,j}-1$, of $\\chi(\\beta-he_{a,i}+he_{a,j};x)V(U_az^{\\beta_{a,i}-h}-U_az^{\\beta_{a,j}})$; terms whose $\\chi$ is the zero polynomial are omitted before any valuation is evaluated. Then $B_\\lambda(x)=\\sum_{\\mu:\\lambda\\triangleright\\mu}J_{\\lambda\\mu}\\operatorname{ch}_\\mu(x)$: a crosscomponent move removing from the earlier component $a$ and adding to a later component $b>a$ produces a strictly dominated $\\mu$ and occurs exactly once by the bead description; occupied targets give repeated rows and zero; sorting contributes $(-1)^{\\text{removed leg}+\\text{added leg}}$; and the prefactor $z^{-N+1}$ converts the beta difference to the difference of the deformed foot residues. In one component the two moved beads $i<j$ give a strict dominance decrease precisely for $1\\le h<\\beta_i-\\beta_j$, the exchange case $h=\\beta_i-\\beta_j$ giving $\\mu=\\lambda$ and the outward case giving the reverse dominance; occupied intermediate positions again give zero rows, and the range exceeding a component's size gives a repeated or negative bead, hence a zero determinant. Thus no hook pair is lost or added, and the surviving summands are exactly the $J_{\\lambda\\mu}$ terms. [step 1.1, step 2.1, algebra]",
+            "inputs": [
+              "step 1.1",
+              "1.1",
+              "step 2.1",
+              "2.1"
+            ]
+          },
+          {
+            "id": "step-3-2",
+            "step": "3.2",
+            "claim": "Nonvanishing of every retained foot difference. For a removable rim hook of length $L$ from a partition of size $M+L$ with foot $(h,j)$, one has $-(M+L-1)\\le j-h\\le M$: every box left of the foot in its row survives, so $j-1\\le M$, and $h\\le M+L$ gives the lower bound. If $\\lambda$ and $\\mu$ remove equal-length hooks in distinct components $a\\ne b$ to the same remainder with remainder sizes $M_a,M_b$, their foot contents satisfy $|\\gamma_x-\\gamma_y|\\le M_a+M_b+L-1\\le n-1$, so the exponent $n(a-b)+\\gamma_x-\\gamma_y$ is a nonzero integer; in the same component equal foot content and equal length reconstruct the same inverse hook addition, hence would force $\\lambda=\\mu$, which the strict-dominance terms exclude. Therefore every retained Laurent difference $U_az^u-U_bz^v$ is nonzero in $F(t)$: it is a unit times a nonzero Laurent monomial times $(z^{N}-1)$-type factors and, by [F2], its valuation is finite, being $0$ when the constant residues differ, $1$ in characteristic zero when they agree, and $p^{v_p(N)}$ in characteristic $p$ when they agree. [F2, step 2.1, algebra]",
+            "inputs": [
+              "F2",
+              "step 2.1",
+              "2.1"
+            ]
+          },
+          {
+            "id": "step-3-3",
+            "step": "3.3",
+            "claim": "The same-component operator. In the same-component beta sum put $D=\\beta_i-\\beta_j$ and $k=D-h$, so the valuation is $f(k)=V(z^k-1)$ up to unit factors; swapping the two changed determinant rows shows $\\chi(\\beta-(D-k)e_i+(D-k)e_j;x)=-\\chi(\\beta-ke_i+ke_j;x)$. Hence the complete coefficient of $f(k)$ is $-\\sum_{i<j:\\beta_i-\\beta_j>k}\\chi(\\beta-ke_i+ke_j;x)$, which is the strictly dominance-lowering part of $-p_kp_k^\\perp$ on the abstract shape basis, where $p_k^\\perp$ lowers an occupied bead by $k$ into an unoccupied nonnegative position with sign $(-1)^{\\#\\text{crossed beads}}$ and $p_k$ raises a bead by $k$ with the same sign rule; the bead-raising formula follows from the alternant identity $\\det(y_r^{\\beta_i})\\sum_ry_r^k=\\sum_i\\det(y_r^{\\beta_i+k\\delta_{ij}})$ divided by the Vandermonde, and the removal map is its transpose. After one removal and one addition a non-diagonal lower-dominance result comes only from distinct beads $i<j$ with $0<k<\\beta_i-\\beta_j$, occupied intermediate positions giving zero repeated rows and the diagonal being removed by the strict projection; this proves the operator identification integrally, in every characteristic. [step 2.1, algebra]",
+            "inputs": [
+              "step 2.1",
+              "2.1"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "step": "4.1",
+            "claim": "The crosscomponent operator as exterior currents. On the $N$-fold exterior power of a space with basis $e_0,e_1,\\dots$, represent a partition by the ordered wedge of its beta beads and let $E(p,q)$ insert $e_p$ after removing $e_q$, with exterior signs; it vanishes if $q$ is absent or $p$ is occupied, and its sign is the bead-sorting sign. Expanding $E=\\text{creation}\\cdot\\text{contraction}$ gives $[E(p,q),E(r,s)]=\\delta_{q,r}E(p,s)-\\delta_{p,s}E(r,q)$. The crosscomponent matrix acting on column shape vectors is $J^{\\mathrm{cross}}=\\sum_{a<b}\\sum_{h>0}\\sum_{q\\ge h,w\\ge0}V(U_az^{q-h}-U_bz^w)E_a(q,q-h)E_b(w,w+h)$, a finite operator on each size-$n$ sector; the reverse hook pair has forward current $E_a(q-h,q)E_b(w+h,w)$, and transposing gives exactly this operator with the same signs and valuation. [step 3.1, step 3.2, step 3.3, algebra]",
+            "inputs": [
+              "step 3.1",
+              "3.1",
+              "step 3.2",
+              "3.2",
+              "step 3.3",
+              "3.3"
+            ]
+          },
+          {
+            "id": "step-5-1",
+            "step": "5.1",
+            "claim": "Horizontal strips and their conjugation. With $S e_q=e_{q+1}$ and $H(x)=(I-xS)^{-1}=\\sum_{r\\ge0}x^rS^r$, whose entry $H_{p,q}$ is $x^{p-q}$ for $p\\ge q$ and $0$ otherwise, the matrix of $\\wedge^NH(x)$ between $\\beta_\\mu$ and $\\beta_\\rho$ is $x^{|\\mu|-|\\rho|}\\det(1_{\\beta_{\\mu,i}\\ge\\beta_{\\rho,j}})$. Subtracting consecutive columns of the $0/1$ matrix makes its determinant $1$ exactly when $\\beta_{\\mu,i}\\ge\\beta_{\\rho,i}>\\beta_{\\mu,i+1}$ for all $i$, i.e. $\\mu_i\\ge\\rho_i\\ge\\mu_{i+1}$, the horizontal-strip criterion, and $0$ otherwise; so $\\Gamma(x)=\\wedge^NH(x)$ adds every horizontal strip once with weight $x^{\\text{strip size}}$. For a type component $a$, $\\Gamma_a(x)=\\prod_{b\\le a}\\Gamma_b(x)$ adds a horizontal strip in every permitted physical component $b\\le a$ and leaves the rest unchanged, so the successive $\\Gamma_a$ from the empty shape enumerate exactly the flagged semistandard tableaux and give the branching matrix. Conjugation is explicit: since $H^{-1}=I-xS$ has column vector $e_p-xe_{p+1}$ and row covector $\\sum_{r\\le q}x^{q-r}e_r^*$, $\\Gamma(x)^{-1}E(p,q)\\Gamma(x)=\\sum_{r=0}^qx^{q-r}\\bigl(E(p,r)-xE(p+1,r)\\bigr),$ and the two-current conjugation is the ordered product of two such sums. [step 4.1, algebra]",
+            "inputs": [
+              "step 4.1",
+              "4.1"
+            ]
+          },
+          {
+            "id": "step-6-1",
+            "step": "6.1",
+            "claim": "Strip factors and exact minor expressions. For a permitted strip transition $\\rho\\to\\lambda$ for the next type component $c$, let $\\eta=[\\lambda]\\setminus[\\rho]$, $r_x=U_{\\operatorname{comp}(x)}z^{\\operatorname{content}(x)}$, and put $F^{(c)}_{\\lambda\\rho}=\\prod_{x\\in\\eta}\\prod_{\\operatorname{comp}(x)<b\\le c}(r_x-U_b)\\prod_{x\\in[\\rho],\\,y\\in\\eta\\text{ in one physical row}}C_+(r_x,r_y)\\prod_{x<y,\\,x,y\\in\\eta\\text{ in different physical rows}}C_+(r_x,r_y)\\prod_{x\\in\\eta,\\,y\\in[\\rho],\\,x<y}R(r_x,r_y)$. Splitting the pair lists of [F1] into old/old, old/new and new/new gives this factor, and their product along a semistandard chain is $\\gamma_{t_T}/(C_{t_T}u_T)$. Choose $N>n$, write $q_i=\\beta_{\\lambda,i}$, $p_i=\\beta_{\\rho,i}$ in each component, and $H(q,p)_{ij}=1_{q_i\\ge p_j}$, so $q_N=p_N=0$. Write $\\phi(k)=V(z^k-1)$ for $k>0$ and $\\psi_{ab}(d)=V(U_az^d-U_b)$. First regard these as independent formal symbols; canceled symbols are never evaluated. By steps 3.1 and 5.1, the same-component row contribution to $J\\Gamma$ is $\\sum_{i<j}\\sum_{0<h<q_i-q_j}\\phi(q_i-q_j-h)\\det H(q-he_i+he_j,p)$; the column contribution to $\\Gamma J$ is $\\sum_{i<j}\\sum_{h>0}(\\phi(p_i-p_j+h)-\\phi(h))\\det H(q,p+he_i-he_j)$. Negative or repeated shifted beads give zero determinants. For the second formula, the outward source has beads $p_i+h,p_j-h$; its two hook pairs returning to $p$ have lengths $h$ and $p_i-p_j+h$, foot gaps $p_i-p_j+h$ and $h$, and opposite signs because the second pair exchanges the two target beads. This proves the difference of potentials, including crossed inverse sources. A crosscomponent row term replaces $q_{a,i},q_{b,j}$ by $q_{a,i}-h,q_{b,j}+h$ with potential $\\psi_{ab}(q_{a,i}-h-q_{b,j})$; its column term replaces $p_{a,i},p_{b,j}$ by $p_{a,i}+h,p_{b,j}-h$ with potential $\\psi_{ab}(p_{a,i}-p_{b,j}+h)$. The determinants in the original indexed positions retain all sorting signs. [F1, F6, step 3.1, step 5.1, algebra]",
+            "inputs": [
+              "F1",
+              "F6",
+              "step 3.1",
+              "3.1",
+              "step 5.1",
+              "5.1"
+            ]
+          },
+          {
+            "id": "step-7-1",
+            "step": "7.1",
+            "claim": "Norm endpoints. On support $q_i\\ge p_i>q_{i+1}$. Put $M_i=q_i-p_i$, $K_j=p_j-q_{j+1}-1$ for $j<N$, $K_N=0$, and $S(m)=\\sum_{k=1}^m\\phi(k)$. The same-component norm valuation is $\\sum_i(S(q_i)-S(p_i)-S(M_i))+\\sum_{i<j}\\sum_{u=p_i}^{q_i-1}(\\phi(u-q_j)-\\phi(u-p_j+1))$. To verify this directly, put $b_i=N-i$: same-row old/new pairs sum to $S(q_i-b_i)-S(M_i)-S(p_i-b_i)$. For $i<j$, new/new and new-upper/old-lower pairs sum to $\\sum_{u=p_i}^{q_i-1}(\\phi(u-q_j)-\\phi(u-p_j+1)+\\phi(u-b_j+1)-\\phi(u-b_j))$. The last two terms telescope in $u$ to $\\phi(q_i-b_j)-\\phi(p_i-b_j)$; summing over $j>i$ cancels the baseline $b_i$ terms and gives the formula. Every displayed $\\phi$ argument is positive. For $a<b\\le c$, the crosscomponent endpoint expression is $\\sum_i\\sum_{u=p_{a,i}}^{q_{a,i}-1}(\\psi_{ab}(u+1)+\\sum_{j=1}^N(\\psi_{ab}(u-q_{b,j})-\\psi_{ab}(u-p_{b,j}+1)))$. Indeed the new/new $C_+$ factors telescope in the lower-component node index $v$ to $\\psi(u-q_{b,j})-\\psi(u-p_{b,j})$, and the new/old $R$ factors add $\\psi(u-p_{b,j})-\\psi(u-b_j)$ and the rectangle difference $\\sum_{v=b_j}^{p_{b,j}-1}(\\psi(u+1-v)-\\psi(u-v))$. Telescoping this rectangle in the other direction and adding the boundary factor $\\psi(u-N+1)$ gives the displayed formula; the vacuum differences telescope and cancel that boundary. This padded formula is an equality of formal symbols: its $j=N$ term cancels $\\psi(u+1)$ before evaluation. [F1, step 6.1, algebra]",
+            "inputs": [
+              "F1",
+              "step 6.1",
+              "6.1"
+            ]
+          },
+          {
+            "id": "step-8-1",
+            "step": "8.1",
+            "claim": "All on-support minors. Here $H$ is the unit upper triangular step matrix. Expanding a replacement row or column in its basis gives $d_i^{\\mathrm{row}}(v)=1_{p_i\\le v<p_{i-1}}$ and $d_i^{\\mathrm{col}}(v)=1_{q_{i+1}<v\\le q_i}$, with $p_0=\\infty$ and no positive lowering from $p_N=0$. A two-row minor is its direct product minus its crossed product. For the same-component row expression, the direct term has $1\\le h\\le\\min(M_i,K_{j-1})$ and the crossed term, with $k=q_i-q_j-h$, has $1\\le k\\le\\min(M_i,K_{j-1})$. The outward two-column minor has no crossed term and its direct bound is $1\\le h\\le\\min(M_i,K_j)$. Pair direct row index $j+1$ with first-potential column index $j$. For arbitrary symbols $\\psi$ the interval identity $\\sum_{s=0}^{M-1}(\\psi(A+s+K+1)-\\psi(A+s+1))=\\sum_{h=1}^{\\min(M,K)}(\\psi(A+M+K+1-h)-\\psi(A+h))$ follows by canceling the overlap of the two integer intervals (when $M\\le K$ they are disjoint, and when $M>K$ only $K$ endpoints remain). Applying it with $A=p_i-p_j$, the paired contribution is $\\sum_{j=i+1}^{N-1}\\sum_{u=p_i}^{q_i-1}(\\phi(u-q_{j+1})-\\phi(u-p_j+1))$. Crossed rows cancel the second column potentials except $-S(\\min(M_i,K_i))$; the unpaired direct row $j=i+1$, combined with that residual by the same identity at $A=0$, gives $\\sum_{u=p_i}^{q_i-1}\\phi(u-q_{i+1})-S(M_i)$. Summing yields exactly the same-component endpoints of step 7.1. For a crosscomponent pair, row $j+1$ and column $j$ share the bound $\\min(M_i,K_{b,j})$ and $A=p_{a,i}-p_{b,j}$. The unpaired first row contributes $\\sum_{u=p_{a,i}}^{q_{a,i}-1}\\psi(u-q_{b,1})$; the final column vanishes. The same interval identity converts the paired terms to the remaining endpoints of step 7.1. Thus $(J\\Gamma-\\Gamma J)_{\\lambda\\rho}=x^{|\\lambda|-|\\rho|}V(F^{(c)}_{\\lambda\\rho})$ on support. [step 6.1, step 7.1, algebra]",
+            "inputs": [
+              "step 6.1",
+              "6.1",
+              "step 7.1",
+              "7.1"
+            ]
+          },
+          {
+            "id": "step-9-1",
+            "step": "9.1",
+            "claim": "Crosscomponent off support. The row of $H$ at bead $v$ is the tail vector starting at threshold $\\kappa(v)$, whose interval is $[p_r,p_{r-1})$. Different nonzero tail vectors are independent; hence rank equals the number of distinct thresholds. At rank $N-1$ there is one missing threshold $r$ and two adjacent duplicated rows $i,i+1$. Put $Q=q_i>Q'=q_{i+1}$, $[P,P')=[p_r,p_{r-1})$, $u=e_i-e_{i+1}$ and $v=e_r-e_{r-1}$, omitting $e_0$. The adjugate is $\\varepsilon vu^{\\mathsf T}$: its nullspaces have those generators, and removing a duplicate row and the appropriate column gives a minor $\\pm1$. Thus replacement determinants are $\\varepsilon u_l1_{P\\le x<P'}$ and $\\varepsilon v_l1_{Q'<x\\le Q}$ with the same sign. Rank $\\le N-2$ kills every one-row/column replacement. A defective earlier component can be repaired only when $Q'\\ge P'$ (missing below), and a defective later component only when $Q<P$ (missing above); opposite directions give zero. If only the earlier component is defective, pair normal later row $j+1$ and column $j$ and write $L=q_{b,j+1}$, $M=p_{b,j}$. Their coefficients both give $-\\varepsilon\\sum_{d\\in[P-L,P'-L)\\cap(Q'-M,Q-M]}\\psi(d)$; the first unpaired row vanishes because its two source signs sum to zero. If only the later component is defective, write its endpoints $R>R'$, $[S,S')$ and let $M=q_{a,i}-p_{a,i}$. The row coefficient at restored position $w$ is $\\varepsilon1_{R'+M<w\\le R+M}$ on $[S,S')$, and the column coefficient at $t$ is $\\varepsilon1_{S\\le t+M<S'}$ on $(R',R]$. The translation $w=t+M$ matches their potentials because $q_{a,i}=p_{a,i}+M$. With both components defective, the row coefficient of $\\psi(d)$, divided by $\\varepsilon_a\\varepsilon_b$, is $(1_{S\\le Q-d<S'}-1_{S\\le Q'-d<S'})(1_{P\\le R+d<P'}-1_{P\\le R'+d<P'})$; the column coefficient is $(1_{R'<P-d\\le R}-1_{R'<P'-d\\le R})(1_{Q'<S+d\\le Q}-1_{Q'<S'+d\\le Q})$. They agree by the endpoint identity $1_{B_0\\le A_1-d<B_1}-1_{B_0\\le A_0-d<B_1}=1_{A_0<B_0+d\\le A_1}-1_{A_0<B_1+d\\le A_1}$, obtained by regrouping four half-line indicators. Infinite top endpoints simply omit the virtual source. An untouched defective component kills the product. Components beyond $c$ are empty in the reachable prefix: the forward transfer would create a nonempty forbidden intermediate component, and the inverse transfer would remove a hook from an empty component, so both vanish. This exhausts crosscomponent off-support cases. [step 6.1, step 8.1, algebra]",
+            "inputs": [
+              "step 6.1",
+              "6.1",
+              "step 8.1",
+              "8.1"
+            ]
+          },
+          {
+            "id": "step-10-1",
+            "step": "10.1",
+            "claim": "Same-component deficiency one, missing below. Keep the rank-one data of step 9.1, with duplicated rows $s,s+1$ and missing threshold $r>s$, so $Q'\\ge P'$. A nonzero inward two-row replacement must use one duplicate source and a unique normal row $j\\ge r+1$: one new row fills the missing interval and the other restores the unique source threshold. The direct and exchanged assignments have signs $\\varepsilon u_l$ and $-\\varepsilon u_l$; any other assignment leaves an unchanged duplicate or missing threshold, or violates the strict inward range. Nonzero outward two-column repairs use one endpoint $P,P'$ and a unique column $j\\ge r+1$, or the endpoint pair itself. Put $K_j=p_j-q_{j+1}-1$ for $j\\ge r$, $K_N=0$. The direct row contribution is $R_j=-\\varepsilon\\sum_{d\\in[P-q_j,P'-q_j)\\cap(Q'-p_{j-1},Q-p_{j-1}]}\\phi(d)$. Split each unique column contribution into its first and second potentials $C_j^{\\mathrm{first}}-C_j^{\\mathrm{second}}$ from step 6.1. Then $R_{j+1}=C_j^{\\mathrm{first}}$, by the same interval intersection, while $C_j^{\\mathrm{second}}=\\varepsilon\\sum_{h=1}^{K_j}\\phi(h)(1_{Q'<P+h\\le Q}-1_{Q'<P'+h\\le Q})$. The exchanged row is $X_j=-\\varepsilon\\sum_{k=1}^{K_{j-1}}\\phi(k)(1_{P\\le Q-k<P'}-1_{P\\le Q'-k<P'})=-C_{j-1}^{\\mathrm{second}}$ by endpoint reciprocity. All terms cancel except $R_{r+1}-C_r^{\\mathrm{second}}-C^{\\mathrm{end}}$. Put $A=Q'-P'\\ge0$, $B=P'-P>0$, $L=Q-Q'>0$, $I_0=(A,A+L]$, $I_1=I_0+B$, $K=K_r$. These three terms are respectively $-\\varepsilon\\sum_{d\\in I_1\\cap(K,K+B]}\\phi(d)$, $\\varepsilon\\sum_{h=1}^{K}\\phi(h)(1_{I_1}(h)-1_{I_0}(h))$, and $-\\varepsilon\\sum_{h\\in I_0,\\,1\\le h\\le K}(\\phi(B+h)-\\phi(h))$; the endpoint-pair sign is negative because the raised endpoint is $P'$. Their residual is $-\\varepsilon\\sum_{d\\in I_1\\cap[1,K+B]}\\phi(d)+\\varepsilon\\sum_{h\\in I_0,\\,1\\le h\\le K}\\phi(B+h)=0$ by $d=h+B$. This proves every coefficient cancels, including $K=0$. [step 6.1, step 9.1, algebra]",
+            "inputs": [
+              "step 6.1",
+              "6.1",
+              "step 9.1",
+              "9.1"
+            ]
+          },
+          {
+            "id": "step-10-2",
+            "step": "10.2",
+            "claim": "Same-component deficiency one, missing above. Here $r\\le s$, $P>Q$, and $\\varepsilon=(-1)^{s-r}$, obtained by moving the inserted missing threshold from row $s$ to position $r$; the column cofactor has the same sign. If $r=1$, all inward row positions are at most $q_1<p_1$ and cannot fill the missing top threshold; the first column is zero and any outward repair raises it further, so both sums vanish. For $r\\ge2$ the only unique row sources are $i\\le r-1$, with $M_i=q_i-p_i\\ge0$. The direct rows have $R_i=\\varepsilon\\sum_{d\\in(q_i-P',q_i-P]\\cap[p_i-Q,p_i-Q')}\\phi(d)$. The first column potentials equal $R_i$ for $i\\le r-2$, while $C_i^{\\mathrm{second}}=\\varepsilon\\sum_{h=1}^{M_i}\\phi(h)(1_{Q'<P-h\\le Q}-1_{Q'<P'-h\\le Q})$. Exchanged rows are $X_i=-\\varepsilon\\sum_{k=1}^{M_i}\\phi(k)(1_{P\\le Q+k<P'}-1_{P\\le Q'+k<P'})=-C_i^{\\mathrm{second}}$, again by endpoint reciprocity. This exhausts repairs: the duplicate source must be paired with a head row above the missing interval, and outward column repairs must lower an endpoint paired with a unique head column, or use the endpoint pair. The sole residual is at $i=r-1$. Put $M=q_{r-1}-P'\\ge0$, $B=P'-P>0$, $A=P-Q>0$, $L=Q-Q'>0$, $I_0=[A,A+L)$, $I_1=I_0+B$. Then $R_{r-1}=\\varepsilon\\sum_{d\\in I_1\\cap(M,M+B]}\\phi(d)$ and $C_{r-1}^{\\mathrm{second}}=\\varepsilon\\sum_{h=1}^M\\phi(h)(1_{I_0}(h)-1_{I_1}(h))$; the endpoint-pair column term is $C^{\\mathrm{end}}=\\varepsilon\\sum_{h\\in I_0,\\,1\\le h\\le M}(\\phi(B+h)-\\phi(h))$, with positive cofactor because the lowered endpoint is $P$. Thus $R_{r-1}-C_{r-1}^{\\mathrm{second}}-C^{\\mathrm{end}}=\\varepsilon\\sum_{d\\in I_1\\cap[1,M+B]}\\phi(d)-\\varepsilon\\sum_{h\\in I_0,\\,1\\le h\\le M}\\phi(B+h)=0$. The translation $d=h+B$ is valid since $A>0$. [step 6.1, step 9.1, algebra]",
+            "inputs": [
+              "step 6.1",
+              "6.1",
+              "step 9.1",
+              "9.1"
+            ]
+          },
+          {
+            "id": "step-11-1",
+            "step": "11.1",
+            "claim": "Same-component deficiency two and higher. At rank $N-2$, the excess threshold copies are one triple or two pairs. Inward row repairs of a triple cannot reach missing thresholds between its source beads. For two pairs with thresholds $r<s$, both missing thresholds must lie strictly between them, say $r<m_1<m_2<s$; otherwise both row and column sums are zero. For columns this follows from $\\ell(p_j)=\\#\\{i:\\kappa(q_i)\\le j\\}$: duplicated row thresholds are jumps, missing thresholds are flats, and outward column repairs require two separate size-two jumps with both flats between. A zero first column also cannot be repaired by raising it. In the active pattern put $Q=q_r>Q'=q_{r+1}$, $R=q_{s-1}>R'=q_s$, $I_1=[P,P')=[p_{m_1},p_{m_1-1})$, $I_2=[S,S')=[p_{m_2},p_{m_2-1})$, $J_Q=(Q',Q]$, $J_R=(R',R]$. The common row/column sign is $\\varepsilon=(-1)^{m_1-r+s-1-m_2}$, counted by moving the inserted thresholds to their sorted positions. Switching a source copy or switching the two target thresholds reverses it. Define $A_I(k)=1_{R+k\\in I}-1_{R'+k\\in I}$ and $B_I(k)=1_{Q-k\\in I}-1_{Q'-k\\in I}$; define $D_P^\\pm(J;k)=1_{P\\pm k\\in J}-1_{P'\\pm k\\in J}$ and $D_S^\\pm(J;k)=1_{S\\pm k\\in J}-1_{S'\\pm k\\in J}$. The complete row coefficient of $\\phi(k)$ is $\\varepsilon(A_{I_1}(k)B_{I_2}(k)-A_{I_2}(k)B_{I_1}(k))$; the column coefficient is $\\varepsilon(D_S^+(J_Q;k)D_P^-(J_R;k)-D_P^+(J_Q;k)D_S^-(J_R;k))$. Indeed putting $k=q_i-q_j-h$ gives row targets $q_j+k,q_i-k$, while the positive and negative column potentials give targets $p_j+k,p_i-k$ and $p_i+k,p_j-k$ respectively. Interval membership implies all required positive-length bounds. Endpoint reciprocity gives $A_{I_1}=D_P^-(J_R)$, $A_{I_2}=D_S^-(J_R)$, $B_{I_1}=D_P^+(J_Q)$, $B_{I_2}=D_S^+(J_Q)$, proving equality. If $m_2=m_1+1$, the repeated column groups share an endpoint; its formal double-source term is zero because its potential is $\\phi(h)-\\phi(h)$, so the formula still includes adjacent missing thresholds. At rank $\\le N-3$, two replacements cannot restore full rank. Together with steps 9.1\u201310.2 this proves off-support vanishing for every rank and orientation. All identities are formal coefficient equalities; retained terms are actual valid hook currents, so step 3.2 permits their finite arbitrary-characteristic valuation specialization. [step 6.1, step 9.1, step 10.1, step 10.2, algebra]",
+            "inputs": [
+              "step 6.1",
+              "6.1",
+              "step 9.1",
+              "9.1",
+              "step 10.1",
+              "10.1",
+              "step 10.2",
+              "10.2"
+            ]
+          },
+          {
+            "id": "step-12-1",
+            "step": "12.1",
+            "claim": "Telescoping and the valuation formula. Multiply the $\\Gamma$ matrices in increasing type-row-label order and telescope $J\\Gamma-\\Gamma J$ from $J_0=0$; by steps 8.1\u201311.1 each commutator inserts exactly $V(F)$ at its strip position, so the $\\lambda$-coordinate of the resulting identity is $\\sum_T V(\\gamma_{t_T}/(C_{t_T}u_T))x^{\\operatorname{wt}(T)}=L_\\lambda(x)$ on one side and $B_\\lambda(x)$ on the other. All padded artificial symbols cancel before the surviving coefficients are evaluated, and every surviving coefficient corresponds to a valid current, hence by step 3.2 to a nonzero foot difference with finite valuation. Comparing with the exact monic product [F1] and the hook side of step 3.1, and taking the coefficient of $x^\\nu$ at an actual multipartition weight $\\nu$ (auxiliary compositions only index the same polynomials and never enter the Schur conclusion), gives $V(\\det G_{\\lambda\\nu})=\\sum_\\mu J_{\\lambda\\mu}K_{\\mu\\nu};$ the empty case $n=0$ gives $0$, all ranks keep the fixed parameters $z=q_Ht$, $U_a=Q_at^{na}$, and arbitrary-composition coefficients are combinatorial only. [F1, step 3.1, step 3.2, step 8.1, step 11.1, algebra] \u220e",
+            "inputs": [
+              "F1",
+              "step 3.1",
+              "3.1",
+              "step 3.2",
+              "3.2",
+              "step 8.1",
+              "8.1",
+              "step 11.1",
+              "11.1"
+            ]
+          }
+        ]
+      },
+      "statement_changed": false,
+      "risk_review_action": "Preserve native risk-review history; root reconciles actual remaining supplier holds. No independent acceptance proposed.",
+      "boundary_action": "Retain historical template evidence; old item hashes remain historical. Refresh current bindings via authorized root workflow; valuation terminal step is now 12.1."
+    },
+    "thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular": {
+      "item_raw_sha256": "0cc2183f8a6e1136c13406e8e58e27594747e159acb12f756f374d3eb6948635",
+      "replacement_fields": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "thm-murphy-tableau-elements-form-a-cellular-basis",
+            "source_section": "Statement",
+            "quote": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, and $H=H_{R,q}(S_n)$ ([[def-generic-type-a-hecke-algebra]]). Let $\\Lambda$ be the set of partitions of $n$ ordered by dominance $\\unrhd$ ([[def-dominance-order-on-partitions]]), and for $\\lambda\\in\\Lambda$ let $T(\\lambda)=\\mathrm{Std}(\\lambda)$ be the set of standard $\\lambda$-tableaux ([[def-young-tableau-standard-tableau-and-shape]]).",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "thm-standard-basis-of-the-generic-type-a-hecke-algebra",
+            "source_section": "Statement",
+            "quote": "In the generic type-A Hecke algebra $H_v(n)$ over $A=\\mathbb Z[v^{\\pm1}]$ with generators $T_1,\\dots,T_{n-1}$, the quadratic relations $(T_i-v)(T_i+1)=0$, the braid relations and the distant commutations, and with $T_w$ the product of the $T_i$ along a reduced word for $w\\in S_n$ ([[def-generic-type-a-hecke-algebra]]): 1.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F1",
+            "source": "thm-the-symmetric-group-has-the-coxeter-presentation",
+            "source_section": "Statement",
+            "quote": "For $n\\ge2$, the symmetric group $S_n$ has the presentation $$S_n=\\langle s_1,\\dots,s_{n-1}\\mid s_i^2=1,\\ s_is_{i+1}s_i=s_{i+1}s_is_{i+1},\\ s_is_j=s_js_i\\ (|i-j|>1)\\rangle,$$ where, after relabelling the underlying set $n=\\{0,\\ldots,n-1\\}$ as $\\{1,\\ldots,n\\}$, $s_i$ corresponds to the adjacent transposition $(i\\ i+1)$.",
+            "uses": [
+              "1.1",
+              "1.2",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations",
+            "source_section": "Statement",
+            "quote": "For every commutative ring $R$ with invertible parameter $z$, the ordinary finite type-A Hecke algebra $H_n$ and a composition $\\rho$ of $n$, the permutation module $x_\\rho H_n$ has $R$-basis $$m_{(S,t)}=\\sum_{s:\\,\\rho(s)=S}m_{st},$$ where $S$ ranges over the semistandard tableaux of partition shape and type $\\rho$ and $t$ over the standard tableaux of the same shape.",
+            "uses": [
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "cor-sum-of-squares-of-standard-tableau-numbers",
+            "source_section": "Statement",
+            "quote": "For every $n\\ge0$, $$\\sum_{\\lambda\\vdash n}(f^\\lambda)^2=n!,$$ where $f^\\lambda$ is the number of standard $\\lambda$-tableaux and $f^\\varnothing=1$, $0!=1$.",
+            "uses": [
+              "3.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "step": "1.1",
+            "claim": "Finite-generator straightening. Every component-preserving row-standard multitableau factors its distinguished permutation into a permutation inside the contiguous component intervals followed by the unique shuffle of the intervals preserving internal order; the two inversion sets are disjoint, so the factorization is length-additive. Multiplying by $u_\\lambda$ (which commutes with the Hecke generators internal to the intervals), ordinary Murphy straightening applies in each component; higher ordinary component shapes preserve component sizes and strictly increase multipartition dominance, and the final component shuffle relabels each component by an increasing list whose selected entries at any cutoff are an initial segment, so tableau-prefix inequalities are exactly the ordinary ones at the corresponding initial-segment length. For a fixed initial left row and right multiplication by $T_i$: if $ts_i$ is standard the length formula gives the usual standard term (or $q_H$ times it plus $(q_H-1)m_{t^\\lambda t}$); if $i,i+1$ share a row the result is $q_Hm$; and if they share a component but the interchange fails standardness, factoring out the increasing component shuffle and applying the ordinary cell law gives same-shape terms with the same initial left row and strictly higher multipartition terms, the required transfer identity $T_cT_i=T_jT_c$ following from $cs_i=s_jc$ and the length/quadratic formula. A cross-component column failure is impossible because column standardness is imposed componentwise. Descending induction over a linear extension of multipartition dominance therefore makes each $N^{\\ge\\lambda}$ and $N^{>\\lambda}$ stable under all finite generators; multiplying on the left by $T_{d(s)}^*$ and applying $*$ makes the higher spans two-sided ideals. This induction concerns spanning sets only and assumes no independence. [F1, algebra]",
+            "inputs": [
+              "F1"
+            ]
+          },
+          {
+            "id": "step-1-2",
+            "step": "1.2",
+            "claim": "The cyclotomic component shift. Let $a=(a_k)$ with $a_k=\\sum_{b<k}|\\lambda^{(b)}|$ and $u_a=u_\\lambda$, and let $b=a+e_k$. Put $u_b=u_a(X_{a_k+1}-Q_k)$; the factors commute, and for $a=a_k$ the defining recurrence gives the exact identity $u_aT_a\\cdots T_1X_1T_1\\cdots T_a=q_H^a\\bigl(Q_ku_a+u_b\\bigr),$ by substituting $T_a\\cdots T_1X_1T_1\\cdots T_a=q_H^aX_{a+1}$ and adding/subtracting $Q_ku_a$; the case $a=0$ is included. For $k>1$ form the multicomposition $\\nu$ obtained by appending a singleton row to component $k-1$ and deleting the first node of the first row of component $k$. Its cumulative sizes are $b$, so $u_\\nu=u_b$, and its Young subgroup is contained in $S_\\lambda$; the left length-additive coset expansion gives $x_\\lambda u_b=\\sum_vT_v^*m_\\nu$. Sorting the rows of $\\nu$ in each component conjugates its Young subgroup and gives $m_\\nu=T_dm_{\\operatorname{sort}\\nu}T_d^{-1}$ with $u_\\nu$ commuting with the component-preserving permutation, so the ordinary row-sorting argument expresses each term in standard pairs of shapes at least $\\operatorname{sort}\\nu$, which strictly dominates $\\lambda$: the cumulative total through component $k-1$ strictly increases and no later cumulative sum decreases. Hence $x_\\lambda u_b\\in N^{>\\lambda}$. For $k=1$, nonemptiness of component $1$ forces $a_s\\ge1$ for all $s\\ge2$, so $u_b$ contains every factor $(X_1-Q_s)$ and vanishes by the cyclotomic relation; again $x_\\lambda u_b\\in N^{>\\lambda}$. [F1, algebra]",
+            "inputs": [
+              "F1"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "step": "2.1",
+            "claim": "Right multiplication by $X_1$. Let $t$ be standard with entry $1$ in component $k$, an initial node, and initial label $a+1$ with $a=a_k$. Then $d(t)=(s_a\\cdots s_1)w$ with $w$ fixing $1$ and $\\ell(d(t))=a+\\ell(w)$: pulling label $a+1$ to value $1$ crosses exactly the $a$ smaller initial labels, whose final values exceed $1$. A permutation fixing $1$ has a reduced word in $s_2,\\dots,s_{n-1}$, so $T_w$ commutes with $X_1$. Multiplying the identity of step 1.2 on the right by $(T_1\\cdots T_a)^{-1}$ and then by $T_w$ gives $m_\\lambda T_{d(t)}X_1=q_H^aQ_km_\\lambda(T_1\\cdots T_a)^{-1}T_w +q_H^ax_\\lambda u_b(T_1\\cdots T_a)^{-1}T_w,$ whose second term lies in $N^{>\\lambda}$ by step 1.2 and finite-generator stability, and whose first term lies modulo $N^{>\\lambda}$ in the fixed-initial-row span. Hence that span is stable under $X_1$; multiplying on the left by $T_{d(s)}^*$ and using the left stability of the higher shapes gives the coefficient-independence law $m_{st}h\\equiv\\sum_vr_{(t,v)}(h)m_{sv}\\pmod{N^{>\\lambda}}$ first for each generator and then for every word, with coefficients independent of $s$, and $*$ makes the higher spans two-sided. Since $X_r=q_H^{1-r}T_{r-1}\\cdots T_1X_1T_1\\cdots T_{r-1}$ and the cyclotomic constant term is a unit when the $Q_a$ are invertible, these generators generate the Laurent affine quotient. [F1, step 1.1, step 1.2, algebra]",
+            "inputs": [
+              "F1",
+              "step 1.1",
+              "1.1",
+              "step 1.2",
+              "1.2"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "step": "3.1",
+            "claim": "Spanning and cellularity. The smallest multipartition $\\omega=(\\varnothing,\\dots,\\varnothing,(1^n))$ satisfies $u_\\omega=x_\\omega=m_\\omega=1$, so the generator-stable span of the standard $m_{st}$ contains $1$ and is all of $H_n$: the Murphy family spans. By [[lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis]], $H_n$ is independently free of rank $\\ell^nn!$. Counting standard pairs with the ordinary identity $\\sum_{\\rho\\vdash m}f_\\rho^2=m!$ at the component sizes $n_a$ contributes $(n!)^2/\\prod_an_a!$, and summing over the multipartition compositions gives $\\ell^nn!$ by the multinomial theorem. The spanning family therefore has exactly the independent rank; its coefficient matrix in the ordered PBW basis is square and surjective between free modules, hence invertible, so the family is an $R$-basis and the proved involution and coefficient-independence laws are actual cellularity. Tensoring the proved basis and presentation supplies every commutative specialization with unit parameters, including repeated charges and the LM deformation DVR; no generic-flatness inference is made. Rank zero is the singleton empty basis. [F2, step 2.1, algebra]",
+            "inputs": [
+              "F2",
+              "step 2.1",
+              "2.1"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "step": "4.1",
+            "claim": "Conclusion. Steps 1.1 and 1.2 establish the generator-stable higher ideals for the finite-generator subalgebra; step 2.1 extends stability to $X_1$ and hence to all polynomial generators and gives the coefficient-independence law with two-sided higher spans; and step 3.1 proves that the standard Murphy family is an $R$-basis of exactly the independent rank, so that the involution and coefficient laws are cellularity in the sense of the Definition. Every commutative specialization with unit parameters inherits the basis and the cell law. No primitive-block classification is used. [step 2.1, step 3.1] \u220e",
+            "inputs": [
+              "step 2.1",
+              "2.1",
+              "step 3.1",
+              "3.1"
+            ]
+          }
+        ]
+      },
+      "statement_changed": false,
+      "risk_review_action": "Preserve native risk-review history; root reconciles actual remaining supplier holds. No independent acceptance proposed.",
+      "boundary_action": "Retain historical template evidence; old item hashes remain historical. Refresh current bindings via authorized root workflow; valuation terminal step is now 12.1."
+    },
+    "lem-cyclotomic-schur-weight-gram-determinants-are-products-of-monic-semistandard-norms": {
+      "item_raw_sha256": "ae4e8c225046727b1b862520cfd686c067f60e4855c50405623d26ad324c7a1e",
+      "replacement_fields": {
+        "citations": [
+          {
+            "fact": "F1",
+            "source": "def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules",
+            "source_section": "Definition",
+            "quote": "Let $R$ be a commutative ring, let $n\\ge0$ and $\\ell\\ge1$, and let $z,U_1,\\dots,U_\\ell$ be units of $R$ ([[def-algebra-over-a-commutative-ring]]).",
+            "uses": [
+              "1.1",
+              "2.2",
+              "5.1"
+            ]
+          },
+          {
+            "fact": "F2",
+            "source": "lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis",
+            "source_section": "Statement",
+            "quote": "Let $R:=\\mathbb Z[z^{\\pm1},U_1^{\\pm1},\\dots,U_\\ell^{\\pm1}]$ be the universal Laurent parameter ring of [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], and let $H_n^{\\mathrm{aff}}$ be the $R$-algebra presented there by the commuting units $X_1,\\dots,X_n$, the generators $T_1,\\dots,T_{n-1}$ and the quadratic, braid, distant, Bernstein and mixed-commutation relations \u2014 **witho",
+            "uses": [
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F3",
+            "source": "thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular",
+            "source_section": "Statement",
+            "quote": "For $H_n$ in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] over the universal Laurent parameter ring, the elements $m_{st}$ indexed by all $\\ell$-multipartitions of $n$ and standard tableaux $s,t$ of that shape are a basis and a dominance-cellular datum: $$m_{st}^*=m_{ts},\\qquad m_{st}h\\equiv\\sum_vr_{(t,v)}(h)\\,m_{sv}\\pmod{H^{>\\lambda}},$$ with coefficients $r_{(t,v)}(h)$ ",
+            "uses": [
+              "2.2",
+              "3.2",
+              "3.3",
+              "4.2"
+            ]
+          },
+          {
+            "fact": "F4",
+            "source": "lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular",
+            "source_section": "Statement",
+            "quote": "On the Specht module $S_\\lambda$ of [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], $X_r$ acts dominance-triangularly with diagonal $U_az^{j-i}$ at the node $(i,j,a)$ carrying $r$.",
+            "uses": [
+              "1.1",
+              "2.2",
+              "3.3"
+            ]
+          },
+          {
+            "fact": "F5",
+            "source": "lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases",
+            "source_section": "Statement",
+            "quote": "Let $H_n=H_n(R;z;U_1,\\dots,U_\\ell)$ be the arbitrary-level cyclotomic Hecke algebra of [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] over a commutative ring $R$ in which $z,U_1,\\dots,U_\\ell$ are units, and let $\\mu$ be an $\\ell$-multipartition of $n$.",
+            "uses": [
+              "1.1",
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F6",
+            "source": "lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis",
+            "source_section": "Statement",
+            "quote": "For $H_n$, the summands $M_\\lambda=m_\\lambda H_n$, the direct sum $M=\\bigoplus_\\lambda M_\\lambda$ and the multipartition-summand algebra $C_n=\\operatorname{End}_{H_n}(M)$ of [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], evaluation $f\\mapsto f(m_\\nu)$ identifies $$\\operatorname{Hom}_{H_n}(M_\\nu,M_\\mu)\\cong M_\\mu\\cap H_nm_\\nu,$$ with $R$-basis the rectangular sums $m_{(S,T)",
+            "uses": [
+              "2.1"
+            ]
+          },
+          {
+            "fact": "F7",
+            "source": "lem-cyclotomic-schur-generic-deformation-standards-have-nondegenerate-forms",
+            "source_section": "Statement",
+            "quote": "Over the fraction field of the universal Laurent parameter ring, all cyclotomic Specht modules are simple and $H_n$ is split semisimple; all Schur standards $\\Delta_\\lambda$ equal $L_\\lambda$ and have nondegenerate cellular forms. Moreover, fix $N\\ge1$, a field $F$ with nonzero $q_H,Q_1,\\dots,Q_\\ell$, and $0\\le d\\le N$, and take $\\mathcal O=F[t,t^{-1}]_{(t-1)}$ with $z=q_Ht$, $U_a=Q_at^{Na}$.",
+            "uses": [
+              "1.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "def-determinant-of-a-square-matrix",
+            "source_section": "Definition",
+            "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is $$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$ The sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.",
+            "uses": [
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-determinant-multiplicative",
+            "source_section": "Statement",
+            "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring, $$\\det(AB)=\\det(A)\\det(B).$$",
+            "uses": [
+              "3.1"
+            ]
+          },
+          {
+            "fact": "F8",
+            "source": "thm-determinant-of-transpose",
+            "source_section": "Statement",
+            "quote": "For every $n\\ge1$, every commutative ring $R$, and every $A\\in M_n(R)$, $$\\det(A^{\\mathsf T})=\\det(A).$$",
+            "uses": [
+              "3.1"
+            ]
+          }
+        ],
+        "derivations": [
+          {
+            "id": "step-1-1",
+            "step": "1.1",
+            "claim": "Generic diagonalizability of $A_\\nu$. The finite row-coset identity gives $x_\\nu^2=P_\\nu(z)x_\\nu$, and every factor of $P_\\nu(q_Ht)=\\prod_{R}\\prod_{j=1}^{|R|}\\bigl(1+q_Ht+\\cdots+(q_Ht)^{j-1}\\bigr)$ is a nonzero polynomial over any $F$, so $P_\\nu\\ne0$ in $K$ and $x_\\nu/P_\\nu$ is a selfadjoint idempotent. The polynomial $u_\\nu$ is symmetric separately on each initial component interval, hence commutes with every row generator and with $x_\\nu$, and both are selfadjoint. Distinct generic JM words provide a basis of simultaneous eigenvectors ([F4]); on the eigenline of $s$, the element $u_\\nu$ has eigenvalue $d_s=\\prod_{k=2}^{\\ell}\\prod_{r=1}^{B_{k-1}}\\bigl(\\mathrm{res}(s^{-1}(r))-U_k\\bigr)$, so $u_\\nu$ is diagonalizable, and since $x_\\nu$ commutes with $u_\\nu$, each $u_\\nu$-eigenspace splits into the image and kernel of the idempotent $x_\\nu/P_\\nu$. Hence $A_\\nu=x_\\nu u_\\nu$ is diagonalizable with nonzero eigenvalues $\\alpha=P_\\nu d_s\\ne0$. Put $E=\\mathrm{im}\\,A_\\nu$; then $V_\\lambda=E\\oplus\\ker A_\\nu$ is an orthogonal decomposition by selfadjointness, $A_\\nu|_E$ is invertible and selfadjoint, and the supplied semistandard basis [F5] identifies the $\\lambda$-cell layer of $m_\\nu H_n$ with the span of the tensors $w_T\\otimes v_s$, $w_T=\\sum_{s:\\nu(s)=T}v_s$, so on the generic simple block [F7] the $(w_T)_T$ are a basis of $E$ and $\\dim E=K_{(\\lambda,\\nu)}$. [F1, F4, F5, F7, algebra]",
+            "inputs": [
+              "F1",
+              "F4",
+              "F5",
+              "F7"
+            ]
+          },
+          {
+            "id": "step-2-1",
+            "step": "2.1",
+            "claim": "The inverse-operator Gram formula. The cell quotient of the membership identity of [F5], followed by orthogonal projection to $E$ and pairing with $w_T\\in E$ (which annihilates $\\ker A_\\nu$), gives $m_{(t^\\lambda,T)}\\rho(h_U)=v_0\\,b_\\lambda\\bigl(w_T,(A_\\nu|_E)^{-1}w_U\\bigr)b_\\lambda(v_0,-)$. On the Schur side the composite $M^\\lambda\\to M^\\nu\\to M^\\lambda$ sending $m_\\lambda$ to $m_{(t^\\lambda,T)}h_U$ is $G_{\\lambda\\nu}(T,U)m_\\lambda$ modulo higher shapes by the cellular law [F6], and higher Schur maps evaluate to higher Murphy shapes and therefore vanish on this block. Comparing the resulting rank-one operators, and observing that changing $h_U$ changes it only by a map into $\\ker A_\\nu$, proves $G_{\\lambda\\nu}(T,U)=b_\\lambda\\bigl(w_T,(A_\\nu|_E)^{-1}w_U\\bigr)$ as an identity over the ground field. This formula uses the inverse operator rather than identifying the Schur form with a restriction of the Specht form. [F5, F6, step 1.1, algebra]",
+            "inputs": [
+              "F5",
+              "F6",
+              "step 1.1",
+              "1.1"
+            ]
+          },
+          {
+            "id": "step-2-2",
+            "step": "2.2",
+            "claim": "The chain basis and the unitriangular transition. Let $R_1<\\cdots<R_m=n$ be the ends of the consecutive nonempty rows of the type tableau of $\\nu$. A semistandard $T$ determines the chain $\\boldsymbol\\lambda(T)=(\\lambda_T[1],\\ldots,\\lambda_T[m])$ of prefix shapes filled by its first $j$ type rows; every standard refinement in the fibre of $T$ has prefix shape $\\lambda_T[j]$ on its first $R_j$ entries, and conversely the chain determines $T$, so chains and semistandard tableaux of type $\\nu$ correspond bijectively. The elementary symmetric polynomials in $X_1,\\ldots,X_{R_j}$, for every row end $R_j$, commute with every row generator (a type row lies wholly inside or wholly outside the prefix and Bernstein commutation fixes symmetric polynomials), hence with $m_\\nu$, and thus preserve $E$; they act on the chain-$T$ layer by the elementary symmetric functions of its prefix residue multiset. Distinct multipartitions have distinct residue multisets over $K$ (distinct $U_a$ separate components, and within a component the content-diagonal multiplicities recover the partition), so these operators separate the chains. Ordering $T$ by a linear extension of dominance of the chains, the action on $E$ is triangular in the chain order with diagonal the chain scalar; commuting diagonalizable operators are jointly diagonalized, and the projector $E_T$ onto the chain-$T$ eigenspace is $1$ on the fibre of $T$ and $0$ on all other fibres. Hence $g_T=w_TE_T=w_T+\\sum_{U:\\,\\boldsymbol\\lambda(U)>\\boldsymbol\\lambda(T)}a_{TU}w_U,$ the $g_T$ form a basis of $E$, the transition matrix from $(w_T)$ to $(g_T)$ is upper unitriangular with determinant exactly $1$, and $b_\\lambda(g_T,g_U)=0$ for $T\\ne U$ because differing chains are separated by a selfadjoint row-prefix operator. [F1, F3, F4, step 1.1, algebra]",
+            "inputs": [
+              "F1",
+              "F3",
+              "F4",
+              "step 1.1",
+              "1.1"
+            ]
+          },
+          {
+            "id": "step-3-1",
+            "step": "3.1",
+            "claim": "Spectral-block determinant. Decompose $E=\\bigoplus_{\\alpha\\ne0}E_\\alpha$ into $A_\\nu$-eigenspaces; they are mutually orthogonal with nondegenerate restricted forms. Choose bases $\\mathcal B_\\alpha$ of the $E_\\alpha$, let $H_\\alpha$ be the $b_\\lambda$-Gram matrix of $\\mathcal B_\\alpha$, and let $X$ be the coordinate matrix whose columns are the $w_T$ in the concatenated basis. Step 2.1 gives $G_{\\lambda\\nu}=X^{\\mathsf T}\\mathrm{diag}_\\alpha(\\alpha^{-1}H_\\alpha)X$, hence by [F8] $\\det G_{\\lambda\\nu}=(\\det X)^2\\prod_{\\alpha\\ne0}\\alpha^{-\\dim E_\\alpha}\\det H_\\alpha.$ A change of the bases $\\mathcal B_\\alpha$ multiplies each $\\det H_\\alpha$ by $(\\det R_\\alpha)^2$ and divides $\\det X$ by $\\prod_\\alpha\\det R_\\alpha$, so the expression is independent of the arbitrary choices; individual terms may have negative valuation while the total is integral because the Schur Gram matrix is integral. No diagonalization of a symmetric form is used, so characteristic $2$ causes no extra issue. [F8, step 2.1, algebra]",
+            "inputs": [
+              "F8",
+              "step 2.1",
+              "2.1"
+            ]
+          },
+          {
+            "id": "step-3-2",
+            "step": "3.2",
+            "claim": "Normalization by the minimal refinement. Let $t_T$ be the dominance-minimal standard refinement of $T$: in each type-row class place the next increasing interval into its nodes in reverse physical-component order, then reverse physical-row order, then left to right. The eigenvalue of $u_\\nu$ on $f_{t_T}$ is $u_T=\\prod_x\\prod_{b>a_T(x)}(r_x-U_b)$, which is nonzero in the stated generic fields because the flag condition [F3] places the node $x$ in a physical component strictly earlier than $b$, so $r_x$ and $U_b$ are distinct monomials. Since $u_\\nu$ commutes with $x_\\nu$, we have $f_{t_T}x_\\nu=u_T^{-1}f_{t_T}m_\\nu\\in E$, and this vector lies in the chain-$T$ eigenspace, hence is a scalar multiple of $g_T$; the scalar is $c_T=[f_{t_T}](f_{t_T}x_\\nu)$, and comparing the coefficient of $v_{t_T}$ \u2014 which equals $1$ in $g_T$, while no strictly smaller refinement lies in that chain \u2014 gives $g_T=c_T^{-1}f_{t_T}x_\\nu$ with the nonzero value of $c_T$ computed below. [F3, step 2.2, algebra]",
+            "inputs": [
+              "F3",
+              "step 2.2",
+              "2.2"
+            ]
+          },
+          {
+            "id": "step-3-3",
+            "step": "3.3",
+            "claim": "Initial norm and adjacent-swap recurrence. For the initial tableau $f_{t^\\lambda}=v_{t^\\lambda}$, and the cellular Gram entry is the coefficient of $m_\\lambda$ in $m_\\lambda^2$ modulo higher shapes, so with $P_\\lambda(z)=\\prod_{\\text{rows }r}[|r|]_z!$ and the row generators acting on $v_{t^\\lambda}$ by $z$ and $u_\\lambda$ by its residue product, $\\gamma_{t^\\lambda}=P_\\lambda(z)\\prod_{a=1}^{\\ell}\\prod_{x\\in[\\lambda^{(a)}]}\\prod_{b>a}(U_az^{\\operatorname{content}(x)}-U_b).$ If $t$ strictly dominates $s=t(i,i+1)$ with $s$ standard and $A=r_t(i)$, $B=r_t(i+1)$, then $f_tT_i$ is supported on $f_t,f_s$, with diagonal coefficients $a_t=(z-1)B/(B-A)$, $a_s=(z-1)A/(A-B)$ satisfying $a_t+a_s=z-1$, off-diagonal coefficient $1$ in the monic normalization, and reverse coefficient $b_s=z+(z-1)a_t-a_t^2=(z-a_t)(1+a_t)$; selfadjointness and orthogonality give the recurrence $\\gamma_s=\\gamma_t\\,\\frac{(zB-A)(B-zA)}{(B-A)^2}=\\gamma_tR(A,B),$ whose denominator is nonzero because a permitted standard swap concerns incomparable nodes. [F3, F4, step 2.2, algebra]",
+            "inputs": [
+              "F3",
+              "F4",
+              "step 2.2",
+              "2.2"
+            ]
+          },
+          {
+            "id": "step-4-1",
+            "step": "4.1",
+            "claim": "The monic Schur norm and the determinant product. Selfadjointness and $x_\\nu^2=P_\\nu x_\\nu$ give $b_\\lambda(f_{t_T}x_\\nu,f_{t_T}x_\\nu)=P_\\nu b_\\lambda(f_{t_T},f_{t_T}x_\\nu)=P_\\nu c_T\\gamma_{t_T}$, and $A_\\nu g_T=P_\\nu u_Tg_T$ because $A_\\nu$ acts as $P_\\nu u_T$ on the chain-$T$ eigenspace. Using step 2.1 in the $g$-basis (the transition from $(w_T)$ has determinant $1$) together with the orthogonality of step 2.2, $b_\\lambda\\bigl(g_T,(A_\\nu|_E)^{-1}g_T\\bigr)=\\frac{b_\\lambda(g_T,g_T)}{P_\\nu u_T}=\\frac{\\gamma_{t_T}}{c_Tu_T},$ and the off-diagonal entries vanish, so $\\det G_{\\lambda\\nu}=\\prod_{T\\in\\operatorname{SStd}_\\nu(\\lambda)}\\frac{\\gamma_{t_T}}{c_Tu_T}.$ [step 2.1, step 2.2, step 3.1, step 3.2, algebra]",
+            "inputs": [
+              "step 2.1",
+              "2.1",
+              "step 2.2",
+              "2.2",
+              "step 3.1",
+              "3.1",
+              "step 3.2",
+              "3.2"
+            ]
+          },
+          {
+            "id": "step-4-2",
+            "step": "4.2",
+            "claim": "The explicit symmetrizer value of $c_T$. We use [F2] only for the row parabolic, localized at differences of variables in the same type-row interval. This restriction is essential: differences between arbitrary JM entries need not be invertible on a Specht module. The chain-$T$ subspace of step 2.2 is stable under the row parabolic; its JM eigenwords are precisely the standard refinements of $T$, so the entries in each type row occupy a horizontal strip in each physical component. Two nodes of a horizontal strip in one component have distinct contents: for upper row $i$ and lower row $j$, every strip node of row $i$ lies strictly right of every strip node of row $j$, making the contents strictly ordered. For different components the content difference is at most $n-2$ (each node has absolute content bounded by its component size minus one), so it cannot cancel the nonzero multiple $n(a-b)$ in the deformation; in the universal field the independent $U_a$ separate them. Thus every same-row variable difference acts invertibly on this entire chain subspace. The finite row Bernstein relations therefore extend its action to this row-local algebra. The crossed-product coefficient calculation below is an identity in that row-local algebra and can be evaluated here, without extending the action to the localization at all variable differences. For a row interval $I$, put $x_I=\\sum_{w\\in S_I}T_w$, write $x_I=\\sum_wa_ww$; the row-coset identity $T_ix_I=zx_I$ gives $a_{s_iw}=s_i(a_w)$ by coefficient comparison with $T_i=c_{i,i+1}+d_{i,i+1}s_i$, and the coefficient of the longest permutation comes from the product of the $d_{ij}=(X_j-zX_i)/(X_j-X_i)$ over the positive roots of $I$, each once. Hence $a_1=w_0\\bigl(\\prod_{i<j\\in I}\\frac{X_j-zX_i}{X_j-X_i}\\bigr)=\\prod_{i<j\\in I}\\frac{zX_j-X_i}{X_j-X_i}=C_I(X)$. Disjoint row intervals commute, so $x_\\nu=\\prod_Ix_I$ has identity coefficient $\\prod_IC_I(X)$; expanding $x_I=C_I(X)+\\sum_{w\\ne1}b_w(X)\\Phi_w$ and using that every $\\Phi_w$ with $w\\ne1$ changes the distinct row entries and hence the JM word, the diagonal coefficient of $f_{t_T}x_\\nu$ is exactly $C_{t_T}$ evaluated at the residues of $t_T$. Therefore $c_T=C_{t_T}=\\prod_{i<j\\ \\text{same type row}}\\frac{zr_{t_T}(j)-r_{t_T}(i)}{r_{t_T}(j)-r_{t_T}(i)}$. Every factor is nonzero in the stated generic fields: in one physical component two nodes of a horizontal strip have distinct contents, and in the deformation two nodes of different components have content difference at most $n-2$, which cannot cancel the exponent $n(a-b)$. [F2, F3, step 3.2, algebra]",
+            "inputs": [
+              "F2",
+              "F3",
+              "step 3.2",
+              "3.2"
+            ]
+          },
+          {
+            "id": "step-5-1",
+            "step": "5.1",
+            "claim": "The inversion-set formula and the explicit product. Every standard tableau is a linear extension of the node order; bubble-sorting it toward the initial extension swaps adjacent inverted (hence incomparable) nodes exactly once and never swaps comparable ones, so reversing those swaps and multiplying the recurrence of step 3.3 gives $\\gamma_{t_T}=\\gamma_{t^\\lambda}\\prod_{\\substack{x<y\\\\t_T(x)>t_T(y)}}R(r_x,r_y),$ and $R$ is symmetric in its arguments. Dividing by $C_{t_T}$ and $u_T$ and using $\\gamma_{t^\\lambda}/u_T=P_\\lambda(z)B_T$ with $B_T=\\prod_x\\prod_{a(x)<b\\le a_T(x)}(r_x-U_b)$ (a literal nested-product cancellation by the flag condition), together with the telescoping row identity $\\prod_{i<j}C(A_i,A_j)=[r]_z!$ for residues $A_j=A_1z^{j-1}$ in a row of length $r$, the four pair classes \u2014 same physical row with same or different labels, different physical rows with same or different labels \u2014 give exactly $\\frac{\\gamma_{t_T}}{C_{t_T}u_T}=B_T\\prod_{(x,y)\\in\\mathcal C(T)}C(r_x,r_y)\\prod_{(x,y)\\in\\mathcal I(T)}R(r_x,r_y),$ where $\\mathcal C(T)$ collects pairs $x<y$ that are in one physical row with different labels or in different physical rows with the same label, and $\\mathcal I(T)$ collects pairs $x<y$ in different physical rows with $L_T(x)>L_T(y)$. Multiplying over $T$ and collecting like node pairs yields $\\det G_{\\lambda\\nu}=\\prod_TB_T\\prod_{x<y}C(r_x,r_y)^{c_{xy}}R(r_x,r_y)^{i_{xy}},\\qquad c_{xy}=\\#\\{T:(x,y)\\in\\mathcal C(T)\\},\\qquad i_{xy}=\\#\\{T:(x,y)\\in\\mathcal I(T)\\}.$ All factors are nonzero in the two generic regimes by step 4.2, the empty weight contributes determinant $1$, and no factor $P_\\nu$ or $c_T$ is inverted in the $\\mathcal O$-lattice; this proves both displayed determinant formulas. [F1, step 4.1, step 3.3, step 4.2, algebra] \u220e",
+            "inputs": [
+              "F1",
+              "step 4.1",
+              "4.1",
+              "step 3.3",
+              "3.3",
+              "step 4.2",
+              "4.2"
+            ]
+          }
+        ]
+      },
+      "statement_changed": false,
+      "risk_review_action": "Preserve native risk-review history; root reconciles actual remaining supplier holds. No independent acceptance proposed.",
+      "boundary_action": "Retain historical template evidence; old item hashes remain historical. Refresh current bindings via authorized root workflow; valuation terminal step is now 12.1."
+    }
+  },
+  "manifest_changes": [],
+  "page_changes": [],
+  "dependency_changes": [],
+  "verification_changes": []
+}

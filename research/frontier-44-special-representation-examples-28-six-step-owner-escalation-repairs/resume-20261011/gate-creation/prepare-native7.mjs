@@ -1,0 +1,29 @@
+import {createHash} from 'node:crypto';
+import {readFileSync,readdirSync,existsSync,writeFileSync,mkdirSync} from 'node:fs';
+import {itemHashGuard,itemHashJudge} from '../../../../tools/item-hash.mjs';
+const run='frontier-44-special-representation-examples-28-six-step',base=`research/${run}-owner-escalation-repairs`,dir=`${base}/resume-20261011/gate-creation/native7`;
+const read=p=>JSON.parse(readFileSync(p,'utf8')),sha=v=>createHash('sha256').update(v).digest('hex'),canon=v=>Array.isArray(v)?v.map(canon):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canon(v[k])])):v,h=v=>sha(JSON.stringify(canon(v))),mark=p=>({path:p,sha256:sha(readFileSync(p))}),save=(p,v)=>writeFileSync(p,JSON.stringify(v,null,2)+'\n');
+const spec=[
+['lem-indecomposable-type-a-soergel-bimodules-are-classified-by-top-support','repair_soergel_continuation','soergel/continuation-final-report.json'],
+['lem-normalized-type-a-soergel-bimodules-are-self-dual-and-have-length-degree-bounds','repair_soergel_continuation','soergel/continuation-final-report.json'],
+['lem-finite-type-a-tensor-hecke-bars-and-complementary-coefficient-charts','repair_affine_bridge','affine_bridge/repair-report.md'],
+['lem-finite-type-a-full-tensor-source-upper-charts-and-string-leading-terms','repair_affine_bridge','affine_bridge/repair-report.md'],
+['lem-integral-jucys-murphy-symmetric-polynomials-span-the-center','repair_modular_branching_escalations','modular-branching/repair-report.md'],
+['lem-q-schur-central-hecke-jm-scalars-give-residue-separation','repair_modular_branching_escalations','modular-branching/repair-report.md'],
+['lem-irreducible-complex-varieties-are-analytically-connected','repair_stratifications','stratifications/repair-report.md']];
+const baseline=read(`research/${run}-step3-auditor-baseline.json`),rows=[];mkdirSync(dir,{recursive:true});
+for(const[id,agent,report]of spec){
+ if(baseline.items.some(x=>x.id===id)||baseline.existing_item_files.includes(id))throw Error(`${id}: fails baseline exclusion`);
+ if(existsSync(`research/${run}-step3-owner-creation-${id}.json`))throw Error(`${id}: origin already exists; inspect before reuse`);
+ let row;for(const f of readdirSync('research')){const m=f.match(new RegExp(`^${run}-batch-(\\d+)\\.pages\\.json$`));if(!m)continue;for(const p of read(`research/${f}`))for(const it of p.items??[])if((typeof it==='string'?it:it.id)===id){if(row)throw Error('duplicate');row={page:p.id,batch:m[1],entry:{...(typeof it==='string'?{id:it}:it),__step4_page_id:p.id}};}}
+ if(!row)throw Error('missing manifest '+id);const text=readFileSync(`items/${id}.md`,'utf8'),contract=read(`research/${run}-batch-${row.batch}.proof-contracts.json`).contracts[id];if(!contract)throw Error('missing contract '+id);
+ const carriers={guard_sha256:itemHashGuard(text),judge_sha256:itemHashJudge(text),item_file_sha256:sha(text),manifest_sha256:h(row.entry),contract_sha256:h(contract)};carriers.step3_subject_sha256=h({item_sha256:carriers.item_file_sha256,manifest_sha256:carriers.manifest_sha256,contract_sha256:carriers.contract_sha256});
+ const held=`original owner-held prerequisite gap in batch ${row.batch}`;
+ const assignment=`${dir}/${id}-assignment.json`,authorship=`${dir}/${id}-authorship.json`,escalation=`${dir}/${id}-escalation.json`;
+ save(assignment,{run,id,primary_author:`/root/${agent}`,basis:mark(`${base}/parallel-allocation.json`),allocation_inherited_from_crashed_session:true,no_native_dispatch_claim:true});
+ save(authorship,{run,id,primary_author:`/root/${agent}`,original_author_report:mark(`${base}/${report}`),integration:mark(`${base}/integration/integration-report.json`),current_carriers:carriers,chronology:'Original post-baseline owner repair helper; root later integrated current manifests/contracts. Exact original worker start/end unavailable. Current bytes are not attributed exclusively to original author.',subsequent_contributors:id.includes('jucys')?['/root/resume_modular','/root']:id.includes('q-schur')?['/root/resume_qschur','/root']:['/root'],native_execution_coverage_adopted:false,independent_audit_claimed:false});
+ save(escalation,{run,id,owner_held_escalation:held,original_census:mark(`${base}/open-escalation-census.json`),authorization:mark(`${base}/parallel-allocation.json`),new_review_rounds_awarded:false});
+ const evidence={version:1,policy:'owner-spawned-step3-creation-v1',evidence_class:'owner-spawned-creation',run,step:3,id,owner:true,owner_identity:'/root',author:{identity:`/root/${agent}`,timeline:{mode:'unknown',after_baseline:true,reason:'Post-baseline original owner repair-team creation is preserved in allocation and actual helper report; precise author start/end timestamps are unavailable and not reconstructed from mutable mtimes.'}},attested_at:new Date().toISOString(),reason:'First owner origin for genuine original recovery-team helper; preserve actual primary author, later repair/root integration, immutable baseline and genuine native dispatch history. This records ownership only and supplies no independent audit coverage.',owner_held_escalation:held,baseline_sha256:sha(JSON.stringify(baseline)),page:row.page,batch:row.batch,carriers,sources:[{role:'assignment',...mark(assignment)},{role:'authorship',...mark(authorship)},{role:'escalation',...mark(escalation)}]};
+ const path=`${dir}/${id}-evidence.json`;save(path,evidence);rows.push({id,path,author:evidence.author.identity,carriers,page:row.page,batch:row.batch,command:['node','tools/auditor-created-items.mjs','owner-create','--run',run,'--step','3','--id',id,'--evidence',path]});
+}
+save(`${dir}/index.json`,{run,at:new Date().toISOString(),count:rows.length,baseline_unchanged:true,no_native_writes:true,rows});console.log('Prepared truthful seven original repair-team owner origins. Re-run after final metadata changes before root records origins.');

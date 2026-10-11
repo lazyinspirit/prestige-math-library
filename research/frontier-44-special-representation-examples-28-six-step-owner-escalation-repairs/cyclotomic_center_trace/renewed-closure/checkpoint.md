@@ -1,0 +1,11 @@
+# Minimal native protocol delta
+
+`protocol-valid-delta.json` covers all eight prior candidates, preserving exact current native routes and records. Four refuter obligations actually have route `flagged`; the earlier builder mistakenly tested for route `refuter` and selected touched verdicts. Those four proposals now use `confirmed_fatal`, preserving the historically true findings. The four touched proposals retain their valid repaired verdicts. Stale `repair_scope` text is removed from proposed replacements, not from historical native records.
+
+No confidence was raised relative to the previous authored candidates. No source edit, new helper, source acquisition, gate, recertification or repeated check occurred. Current hashes and decision-file preimages are bound. Original native24 round-two exhaustion remains historical; renewed authoring authorization is recorded without resetting it.
+
+The delta includes the two genuine completed center/trace physical-proof row proposals and four focused consumer-use closure rows linking the norm's two supplier premises and primitive theorem's two branches to the actual producer defects. These records must not count a shared producer defect twice. A single causal alias cannot replace the norm's two independent premises or the primitive theorem's two independent branches. Immutable target/producer observations and original fixed rows remain preserved.
+
+The actual producer47 closures are now recorded by root in the native48 shared-defect integration receipt. Current first-adjunction norm uses no second adjunction or diagram opposite-crossing/fake-bubble relation. Completed sector-isomorphism constructions preserve their interfaces. Existing universal PBW has its actual finite-field-density route and does not gain coverage from new HH authoring.
+
+Gram/cellularity supplying-owner evidence gives completed Murphy cell-law and row-local Gram corrections, full marked-strip construction and exact Jantzen/Schur consumer-interface checks. Primitive/residue/grading closure remains conditional on root validating and integrating that supplier packet at its current guards. This is not an identified new local gap requiring a helper, nor an independent full supplier audit claim. The delta does not turn an authoring report into native coverage.

@@ -60,7 +60,7 @@ topology are available, is a starker one.
 
 [L1] $X_0 := \mathbb{R} \setminus \mathbb{Q}_{\mathbb{R}}$ is uncountable ([[cor-irrationals-uncountable]]).
 
-[L2] $\mathbb{R}$ is Archimedean ([[thm-of-archimedean]]), and $\mathbb{Q}_{\mathbb{R}}$ is dense in every Archimedean ordered field: for $a < b$ there is $q \in \mathbb{Q}$ with $a < \iota(q) < b$ ([[lem-of-q-dense]]). For the Cauchy-sequence model of $\mathbb{R}$ the same density is [[lem-rat-embeds-dense]].
+[L2] $\mathbb{R}$ is Archimedean ([[thm-of-archimedean]]), and $\mathbb{Q}_{\mathbb{R}}$ is dense in every Archimedean ordered field: for $a < b$ there is a rational $q$ with $a < q < b$ ([[lem-of-q-dense]]). For the Cauchy-sequence model of $\mathbb{R}$ the same density is [[lem-rat-embeds-dense]].
 
 [L3] Uncountable means not at most countable ([[def-countable]]).
 
@@ -72,7 +72,7 @@ topology are available, is a starker one.
 
 1.2 $X_0$ is uncountable by [L1], so it satisfies the hypothesis of the claim. [L1, L3]
 
-2.1 Let $a < b$ in $\mathbb{R}$ be arbitrary. By [L2] there is $q \in \mathbb{Q}$ with $a < \iota(q) < b$, so $\iota(q) \in (a,b)$; but $\iota(q) \in \mathbb{Q}_{\mathbb{R}}$, hence $\iota(q) \notin X_0$. Therefore $(a,b) \not\subseteq X_0$, and a fortiori $[a,b] \not\subseteq X_0$. [step 1.1, L2]
+2.1 Let $a < b$ in $\mathbb{R}$ be arbitrary. By [L2] there is a rational $q$ with $a < q < b$, so $q \in (a,b)$; but $q \in \mathbb{Q}_{\mathbb{R}}$, hence $q \notin X_0$. Therefore $(a,b) \not\subseteq X_0$, and a fortiori $[a,b] \not\subseteq X_0$. [step 1.1, L2]
 
 3.1 So $X_0$ is an uncountable subset of $\mathbb{R}$ containing no nondegenerate interval, which refutes the claim. [step 1.2, step 2.1, discharge-construct] ∎
 

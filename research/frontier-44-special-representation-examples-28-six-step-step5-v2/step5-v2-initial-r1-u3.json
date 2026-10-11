@@ -1,0 +1,85 @@
+{
+  "run": "frontier-44-special-representation-examples-28-six-step",
+  "phase": "initial",
+  "round": 1,
+  "unit": "3",
+  "input_sha256": "a3c0decd85fdbe71b25b7ccd7e6264df187be55612edc2bcfbd9729c1e231624",
+  "decisions": [
+    {
+      "id": "ex-two-squeeze-computations",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e1012d28a833b673de9ce555aeba732d442bf179db42298abc963a5be86515cd",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F11 incorrectly attributes nonvanishing of every canonical natural successor to def-field: in the field F_2 the canonical image of 1+1 is zero. The ambient field here is the ordered real field, and the already declared lem-of-naturals-positive supplies positivity for every successor, including k=0, while F14 already supplies k+1>=1. Thus this is a genuine citation defect, not a missing prerequisite or a false convergence claim. Removed the unsupported clause from F11, stated positivity and consequent nonvanishing in F14, and cited F14 explicitly in step 2.2 and its contract. Both claimed limits are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-two-squeeze-computations",
+      "disposition": "repaired",
+      "post_sha256": "691669cb7bf61a7154fbc3c229f4d35377df1ce76bc5859cda6d57f44929e947",
+      "review_context_sha256": "0bdd7ee3f11047743142a4dc4cab0240d45ef992d1823fc6d7a2be989d9f52ed",
+      "reason": "Checked all nine verification steps, the exact supplier statements, the natural-positivity supplier's complete local proof, the assigned contract, and the owning examples page. Induction gives s_k in {1,-1}; natural positivity and square monotonicity give sqrt(k+1)>=1 and positive denominators. Reciprocal reversal with equality treated separately gives 0<a_k<=u_k. Nonvanishing now comes from F14, so the two sign cases give b_k=1 or 1-2u_k. Constant-sequence convergence, the scalar rule with -2, and the sum rule make the bounds converge to 0 and 1 respectively; both squeeze applications meet all hypotheses. At k=0 both computed terms equal 1. No choice principle is used. This is the adjudicator's repair review, not an independent review of the repair. The Example section and all Statement/Definition interfaces are unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "entry": {
+        "defect_id": "f44-six-step5-initial-r1-u3-squeeze-natural-nonvanishing-citation",
+        "run": "frontier-44-special-representation-examples-28-six-step",
+        "subject": "ex-two-squeeze-computations",
+        "class": "accuracy",
+        "subclass": "dependency-citation",
+        "severity": "nonfatal",
+        "location": "Facts & Assumptions F11; Verification step 2.2",
+        "caught_at_stage": "5.1",
+        "caught_by_role": "alpha-adjudicate",
+        "disposition": "fixed",
+        "evidence": [
+          {
+            "path": "items/ex-two-squeeze-computations.md",
+            "note": "Field axioms alone allow characteristic 2. Positivity and nonvanishing of k+1 are now attributed to the existing lem-of-naturals-positive via F14, cited in step 2.2. Both convergence claims are unchanged."
+          },
+          {
+            "path": "research/frontier-44-special-representation-examples-28-six-step-batch-3.proof-contracts.json",
+            "note": "The owned F14 citation now includes use 2.2 and derivation d-2.2 includes F14; original independent risk-review evidence was preserved."
+          }
+        ],
+        "adjudication_ref": [
+          {
+            "path": "research/frontier-44-special-representation-examples-28-six-step-step5-v2/step5-v2-initial-r1-u3.json",
+            "obligation": "initial:1:3:ex-two-squeeze-computations:gpt-6.1-sol:e1012d28a833b673de9ce555aeba732d442bf179db42298abc963a5be86515cd"
+          }
+        ]
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "No Statement or Definition changed, no new prerequisite was authored, and no defective published use was discovered. The assigned draft example's proof/citation repair creates no supplier-interface event or outside-consumer maintenance obligation."
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "The rejection-blind batch-3 Step-4 digest contains no concerns or alerts; its acceptance was treated as evidence, not authority. The mathematical claims were checked directly against current local files. No external source was consulted in this familiar elementary ordered-field and sequence argument; existing bibliography and previous reviewers' source-reading claims are not represented as this adjudicator's reading.",
+    "Changed only F11, F14, and step 2.2 of the assigned item, plus the owned contract's F14 uses and d-2.2 inputs. The exact Example section is unchanged; there is no original Statement or Definition section to change. No downstream propagation is triggered.",
+    "node tools/step5-workflow.mjs review-contexts --run frontier-44-special-representation-examples-28-six-step --items ex-two-squeeze-computations returned the copied post_sha256 and review_context_sha256 immediately after the completed repair review.",
+    "node tools/proof-contract.mjs research/frontier-44-special-representation-examples-28-six-step-batch-3.proof-contracts.json --strict --items ex-two-squeeze-computations --json: exit 0, ok true, no errors or warnings. An earlier run before successful contract integration correctly reported the missing F14 citation-use and derivation-input mappings; both were repaired.",
+    "node tools/tsx-run.mjs tools/precheck.mts items/ex-two-squeeze-computations.md --json: exit 0, one proof checked, zero failures.",
+    "node tools/rendercheck.mjs items/ex-two-squeeze-computations.md library/real-analysis/sequences-and-limits-examples.md --json: exit 0, two files checked, no errors or warnings.",
+    "node tools/proof-layout.mjs items/ex-two-squeeze-computations.md: exit 0, one item, nine steps, zero defects; run once after the final item edit.",
+    "node tools/depcheck.mjs --items-file /tmp/step5-v2-initial-r1-u3-items.json --json: exit 0, focused on ex-two-squeeze-computations and its owning examples page, with 133 prerequisite items and 12 prerequisite pages checked for cycles; no errors or warnings.",
+    "Operational correction: the first successful contract update ran after a busy shared-lock response because the sequential command batch did not stop on failure. Subsequently acquired the shared lock as step5-v2-initial-r1-u3, reread and confirmed the exact owned F14 uses and d-2.2 inputs, reran the strict focused contract check successfully (exit 0, no errors or warnings), and released the lock. No mathematical or integration obligation remains pending; the controller retains independent rejudgment and certification duties.",
+    "Recovered the original item by reversing exactly the three known edits and verified its itemHashGuard equals the frozen assignment-before hash 6878be9603ea8ae999d678234827e64d4022b974d651f302c3f7ecb7a14cff3c. Direct section comparison confirms unchanged Example text and absent Statement/Definition sections; the current guard and exact rejected tuple match this report."
+  ]
+}

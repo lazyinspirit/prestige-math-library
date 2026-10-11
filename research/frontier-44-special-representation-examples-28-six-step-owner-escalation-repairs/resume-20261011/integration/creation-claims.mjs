@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {loadStep3} from '../../../../tools/step3-decisions.mjs';
+import {step3OwnerCreationClaim} from '../../../../tools/step3-owner-creation.mjs';
+const run='frontier-44-special-representation-examples-28-six-step';
+const base=`research/${run}-owner-escalation-repairs`;
+const ids=JSON.parse(readFileSync(`${base}/integration/renewed-helper-metadata/origin-evidence-templates.json`)).map(x=>x.id);
+ids.push('lem-two-cyclotomic-shears-give-a-periodic-integrable-based-sl-two-chain','lem-cyclotomic-klr-terminal-dot-caps-have-the-prefix-residue-formula');
+const s=loadStep3(process.cwd(),run);
+const claims=ids.map(id=>({id,...step3OwnerCreationClaim(s,id)}));
+writeFileSync(`${base}/resume-20261011/integration/current-native-creation-claims.json`,JSON.stringify(claims,null,2)+'\n');
+console.log(`Bound ${claims.length} claims by exported native function`);

@@ -73,7 +73,7 @@ world on this page.
 
 [L3] Rational arithmetic ([[def-rationals]], [[def-rat-operations]], [[def-rat-order]]): $q = p/(p-1)$ is a quotient of rationals with nonzero denominator, hence rational, and $p \cdot (1/p) = 1$. Moreover $\mathbb{Q}$ is itself a totally ordered field ([[thm-rat-ordered-field]]), which is what licenses the order arithmetic used on $p$ and $q$; being an ordered field it has $1 > 0$ ([[cor-of-one-positive]], which is where that fact is proved: [[thm-rat-ordered-field]] states totality, compatibility with addition and closure of the positives under multiplication, and not this), so $p > 1 > 0$ gives $p > 0$ by transitivity and hence $1/p > 0$, and likewise $1/q > 0$ ([[lem-of-inverse-positive]], claim 1, applied in $\mathbb{Q}$).
 
-[L4] The embedding $\iota : \mathbb{Q} \to \mathbb{R}$ is an order-preserving field homomorphism, so $\iota(1/p) = \iota(p)^{-1} > 0$ ([[lem-of-q-embeds]], [[lem-of-inverse-positive]], [[lem-of-sign-rules]]).
+[L4] The embedding $\iota : \mathbb{Q} \to \mathbb{R}$ is an order-preserving field homomorphism, so the field image of the rational $1/p$ is $p^{-1}>0$, with p in that inverse denoting its field image ([[lem-of-q-embeds]], [[lem-of-inverse-positive]], [[lem-of-sign-rules]]).
 
 ## Proof
 

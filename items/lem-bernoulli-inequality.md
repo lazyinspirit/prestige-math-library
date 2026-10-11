@@ -44,8 +44,8 @@ pipeline_run: null
 
 Let $\mathbb{R}$ be an ordered field ([[def-ordered-field]]), let
 $x \in \mathbb{R}$ with $x \ge -1$, and let $n \in \mathbb{N}$, with powers as in
-[[def-integer-power]] and with $n$ also denoting the canonical natural
-$\iota(n) \in \mathbb{R}$ ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
+[[def-integer-power]] and with $n$ also denoting the canonical field image
+$n\cdot1_{\mathbb{R}}$ of the natural number n ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
 Then
 
 $$(1+x)^n \ge 1 + nx,$$
@@ -54,7 +54,7 @@ and equality holds if and only if $n \le 1$ or $x = 0$.
 
 ## Facts & Assumptions
 
-**Given:** An ordered field $\mathbb{R}$, an element $x \ge -1$ of it, and a natural number $n$, with $\iota(n) \in \mathbb{R}$ written $n$.
+**Given:** An ordered field $\mathbb{R}$, an element $x \ge -1$ of it, and a natural number $n$, with $n$ in field coefficients denoting the canonical image $n\cdot1_{\mathbb{R}}$; the exponent remains natural.
 
 [L1] Definition of powers ([[def-integer-power]]): $a^0 = 1$ and $a^{n+1} = a^n a$.
 
@@ -64,7 +64,7 @@ and equality holds if and only if $n \le 1$ or $x = 0$.
 
 [L4] Squares are nonnegative: $x^2 > 0$ for $x \ne 0$ ([[lem-of-square-positive]]), and $0^2 = 0 \cdot 0 = 0$ because a product with a zero factor vanishes ([[lem-of-zero-mult]]), which is also what makes $0 \cdot x = 0$ below; so $x^2 \ge 0$ for every $x$.
 
-[L5] Canonical naturals: $\iota(0) = 0$, $\iota(n+1) = \iota(n) + 1$, and $\iota(n) > 0$ for $n \ge 1$, so $\iota(n) \ge 0$ for every $n$ ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
+[L5] Canonical naturals in the field: $0\cdot1_{\mathbb{R}}=0_{\mathbb{R}}$, $(n+1)\cdot1_{\mathbb{R}}=n\cdot1_{\mathbb{R}}+1_{\mathbb{R}}$, and $n\cdot1_{\mathbb{R}}>0$ for natural $n\ge1$, so these field images are nonnegative for every natural n ([[lem-of-naturals-positive]], [[lem-of-q-embeds]]).
 
 ## Proof
 
@@ -76,7 +76,7 @@ and equality holds if and only if $n \le 1$ or $x = 0$.
 
 1.3 Since $x \ge -1$ we have $1 + x \ge 0$, and this is exactly what licenses multiplying the inductive inequality by $1 + x$ without reversing it. [given, L3]
 
-1.4 The discarded term is nonnegative: $n x^2 \ge 0$, since $x^2 \ge 0$ and $\iota(n) \ge 0$, so scaling the inequality $x^2 \ge 0$ by the nonnegative factor $\iota(n)$ gives $\iota(n) x^2 \ge \iota(n) \cdot 0 = 0$; the scaling rule, and not the nonnegativity of the two factors on its own, is what licenses this. [L3, L4, L5]
+1.4 The discarded term is nonnegative: $n x^2 \ge 0$, since $x^2 \ge 0$ and $n \ge 0$, so scaling the inequality $x^2 \ge 0$ by the nonnegative factor $n$ gives $n x^2 \ge n \cdot 0 = 0$; the scaling rule, and not the nonnegativity of the two factors on its own, is what licenses this. [L3, L4, L5]
 
 1.5 Equality analysis, the strict direction: if $n \ge 2$ and $x \ne 0$ with $x \ge -1$, then $(1+x)^n > 1 + nx$, by a second induction, on $j$, over the statement $(1+x)^{j+2} > 1 + (j+2)x$; for $j = 0$ we have $(1+x)^2 = 1 + 2x + x^2 > 1 + 2x$ because $x^2 > 0$; and assuming $(1+x)^{m} > 1 + mx$ for some $m \ge 2$, there are two possibilities: if $x = -1$ then $(1+x)^{m+1} = 0$ while $1 + (m+1)x = 1 - (m+1) = -m < 0$, and if $x > -1$ then $1 + x > 0$ and $(1+x)^{m+1} = (1+x)^{m}(1+x) > (1 + mx)(1 + x) = 1 + (m+1)x + mx^2 \ge 1 + (m+1)x$, so the strict inequality passes to $m+1$ in either case. [L1, L2, L3, L4, L5]
 

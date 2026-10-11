@@ -1,0 +1,91 @@
+---
+id: lem-type-a-tableau-central-summands-are-single-linkage-blocks
+kind: lemma
+title: "Type-A tableau central summands are single linkage blocks"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 21
+deps: [lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map,
+       def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category,
+       def-dual-canonical-canonical-and-quasi-canonical-fock-bases,
+       def-higher-level-wedge-tensor-fock-module,
+       def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules,
+       thm-parabolic-category-o-is-a-highest-weight-category,
+       thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials,
+       thm-weyl-character-formula,
+       def-axiom-of-choice]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Shun-Jen Cheng, Weiqiang Wang and R.B. Zhang, A super duality and Kazhdan-Lusztig polynomials (complete45-page arXiv0409016)"
+      url: "https://arxiv.org/pdf/math/0409016"
+      locator: "Actual full-text pp. 5–8, 20–26 read in this repair: coproduct and wedge conventions, ordinary bar charts, Procedure 4.11, Lemma 4.14 and Theorem 4.16 with its three-case proof. Transport q to s^-1 and K_a to D_a^-1 explicitly; local counterpart supplied below; no super-duality result imported."
+    - title: "Jonathan Brundan, Dual canonical bases and Kazhdan-Lusztig polynomials (complete29-page arXiv0509700v2)"
+      url: "https://arxiv.org/pdf/math/0509700"
+      locator: "Section4 pp10–13: actual tensor Hecke action/bar identification, Theorem4 and Corollary5 complementary-chart inversion; Section5 pp16–18: ordinary-bar wedge embedding and signed coefficients."
+---
+
+## Statement
+
+Assume the Axiom of Choice ([[def-axiom-of-choice]]). For the Fock shape
+$n_1\ge\cdots\ge n_l$ (the original nonincreasing-charge hypothesis) and any
+admitted integral entry multiset, the genuine $\mathfrak{gl}_n$ parabolic
+central summand labelled by its strict-column tableaux is a **single linkage
+block**. The same holds for its reverse-column/reversed-Levi counterpart.
+This includes repeated-entry singular ambient characters. The proof uses
+actual indecomposable generalized standards and locally constructed tiltings:
+adjacent-column positive exclusive-pair canonical coefficients specialize
+to $1$, so those labels lie in a common actual linkage block, and these edges
+connect the whole fixed-margin binary tableau fiber. No future
+higher-Schur/cyclotomic-centre theorem is imported.
+
+## Facts & Assumptions
+
+**Given:** A finite genuine $\mathfrak{gl}_n$ parabolic central summand as in [[def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category]], with its actual generalized standards $\Delta_B$, simples $L_A$ and projective covers; the reversed-block construction and its contravariant/covariant equivalences $\Psi,F$ of [[lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map]]; the Fock tableaux and their monomials of [[def-higher-level-wedge-tensor-fock-module]]; and the four Fock bases and forms of [[def-dual-canonical-canonical-and-quasi-canonical-fock-bases]].
+
+[F1] Highest-weight structure and filtered categories ([[thm-parabolic-category-o-is-a-highest-weight-category]], [[def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category]]): finite $\Delta$-flags, the homological criterion $\mathcal F(\Delta)=\{N:\operatorname{Ext}^1(N,\nabla_A)=0\ \forall A\}$, uniqueness of indecomposable tilting objects with a given bottom label, BGG reciprocity $[P_A:\Delta_B]=[\Delta_B:L_A]$, and restricted duality.
+
+[F2] Semi-regular duality ([[lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map]]): $\Psi(\bar\Delta(A))\cong\Delta(A)$, $F=D\Psi$ sends opposite standards to target costandards, and both preserve the central blocks and reverse the label order.
+
+[F3] Singular/parabolic coefficients ([[thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials]], [[thm-weyl-character-formula]]): the ordinary spherical values $P_{yw_0,ww_0}(1)$ compute the singular multiplicities, and the finite Weyl character formula gives the signed Levi expansion of characters.
+
+[F4] Fock bases and forms ([[def-dual-canonical-canonical-and-quasi-canonical-fock-bases]]): the monomial basis $M_A$, the source dual-canonical and canonical families $L,T$, the complementary triangular charts $d,p$, the source bilinear form $C$ with $C(\widetilde T_A,L_B)=\delta_{AB}$ and $C(\widetilde L_A,T_B)=\delta_{AB}$, and the bar triangularity $T_A=M_A+\sum_{B<A}s^{-1}\mathbb Z[s^{-1}]M_B$.
+
+[F5] Axiom of Choice ([[def-axiom-of-choice]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 **The actual normalized projective image.** Fix one finite highest-weight central summand and a label $B$, and put $X(B)=\Psi(P^{\bar p}(B))$. The source projective has its highest-weight exact sequence $0\to\bar K(B)\to P^{\bar p}(B)\to\bar\Delta(B)\to0$, with a finite standard flag on $\bar K(B)$ using strictly higher source labels. Exact contravariance of $\Psi$ gives $0\to\Delta(B)\to X(B)\to\Psi\bar K(B)\to0$. Order reversal makes the quotient standard-filtered by labels strictly below $B$. Thus this is an actual normalized bottom inclusion, and $\Delta(B)$ occurs once. The endomorphism ring of $X(B)$ is opposite to the local ring of its source projective cover, so $X(B)$ is indecomposable. [F1, F2, F5]
+
+1.2 **The CWZ parameter, coproduct and ordered labels.** In the two-wedge convention of Cheng–Wang–Zhang, write $q$ for their parameter and $K_a$ for their toral generator. The exact transport to [F4] is $q\mapsto s^{-1}$, $K_a\mapsto D_a^{-1}$, $E_a\mapsto E_a$, $F_a\mapsto F_a$, and $K_f\mapsto M_f$ for the same two decreasing columns in the same left/right order. Their natural eigenvalue $q^{\delta_{ab}}$ becomes $s^{-\delta_{ab}}$, the eigenvalue of $D_a^{-1}$. The toral relations and the $E/F$ commutator agree because both numerator and denominator of the toral fraction reverse sign. Their coproducts are $\Delta E_a=1\otimes E_a+E_a\otimes K_{a+1}K_a^{-1}$ and $\Delta F_a=F_a\otimes1+K_aK_{a+1}^{-1}\otimes F_a$; these become exactly $1\otimes E_a+E_a\otimes D_aD_{a+1}^{-1}$ and $F_a\otimes1+D_a^{-1}D_{a+1}\otimes F_a$ of [F4]. Thus reciprocal parameter substitution alone is accompanied by toral inversion, and no reversal of tensor factors or tableau entries is used. The quantum Serre coefficients are unchanged under reciprocation, and the two bars agree on coefficients and generators: both fix $E_a,F_a$ and invert the torus. The displayed source coproduct and ordered factor actions are those of [[def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules]]. The ordered wedge basis has coefficient-one adjacent-entry replacement actions, so it identifies the elementary wedge factors; their relation on unordered wedges becomes $-s$, consistently with this transport. A swap of exclusive left $b>$ right $a$ gives a strictly smaller label in both orders, since the left prefix changes by the positive root $\delta_a-\delta_b$. Consequently the CWZ positive-$q$ triangular chart maps to the negative-$s^{-1}$ chart of $T$, not to the positive-$s$ chart of $L$. [F4, algebra]
+
+2.1 **Tilting and an actual normalized dual flag.** For an extension $0\to X(B)\to Z\to\Delta(A)\to0$, the middle object is standard-filtered by extension closure. Inverting $\Psi$ turns it into an extension with the opposite projective as quotient, which splits. Hence $\operatorname{Ext}^1(\Delta(A),X(B))=0$ for every $A$, and the criterion of [F1] makes $X(B)$ costandard-filtered and therefore tilting. The object $DX(B)$ is also tilting and indecomposable; duality fixes simple classes, so all its composition labels are $\le B$ and $[DX(B):L(B)]=1$. In the lower highest-weight ideal of labels $\le B$, $\Delta(B)$ is the maximal-labelled projective. The maximal standard trace proved in [[def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category]] injects $\Delta(B)$ into the standard-filtered $DX(B)$ with quotient standard-filtered by strictly smaller labels: its multiplicity space has dimension $[DX(B):L(B)]=1$. Thus the dual has an actual normalized bottom-standard sequence. Uniqueness of such indecomposable tiltings in [F1] gives $X(B)\cong DX(B)$. This normalization uses the proved maximal trace and does not follow from exchanging the kinds of flags alone. [F1, F2, step 1.1]
+
+2.2 **Local three-case calculation in the corrected chart.** For a column $S$ write $n_S(a)=\mathbf1_{a\in S}$ and omit a replacement term if it would collide. The transported coproduct gives $E_aM_{L,R}=M_{L,R(a+1\mapsto a)}+s^{n_R(a)-n_R(a+1)}M_{L(a+1\mapsto a),R}$ and $F_aM_{L,R}=M_{L(a\mapsto a+1),R}+s^{-n_L(a)+n_L(a+1)}M_{L,R(a\mapsto a+1)}$. Match exclusive pairs by increasing positive distance, deleting matched endpoints, and call the resulting set $\Sigma_f^+$. Distinct pairs at the same distance cannot share an endpoint, so this prescription is unambiguous. Choose the smallest left value $b=a+1$ that is a matched endpoint. If $a$ is absent on the left, let $h$ lower this $b$ to $a$ and apply $F_a$. If $a$ is present on the left, it must also occur on the right: otherwise its distance to the right partner of $b$ would be smaller, forcing it to be a matched left endpoint contrary to the choice of $b$. In this case let $h$ raise that right $a$ to $b$ and apply $E_a$. The matching rules then give three cases: when the lower left neighbor $a$ is shared, its pair endpoint in $h$ moves from $b$ to $a$ and all other pairs persist; when $a$ is absent on both sides the pair set persists with that endpoint lowered; when $a$ occurs only on the right, $h$ loses precisely the distance-one pair $(b,a)$. For every subset of the remaining pairs, the two displayed action formulas have coefficient one in the first two cases: if a selected pair moves the active letter to the other column, the two relevant occupation numbers agree. In the last case both columns of $h$ contain $a$ and neither contains $b$, so $F_aM_{h_\Sigma}=M_{f_\Sigma}+s^{-1}M_{f_{\Sigma\cup\{(b,a)\}}}$. No wedge sorting sign enters, since an adjacent integer replacement either preserves its sorted position or is zero on collision. [F4, step 1.2, algebra]
+
+3.1 **The opposite BGG coefficient identity.** From the tilting nature and maximal support of $X(B)$, every multiplicity can be computed as $(X(B):\Delta(A))=\dim\operatorname{Hom}(X(B),\nabla(A))$. Applying the exact contravariant $\Psi$ to the finite standard flag of $\bar P(B)$ reverses its order but preserves the multiplicities of its corresponding standard sections. Opposite BGG reciprocity therefore gives $(X(B):M(A))=(\bar P(B):\bar M(A))=[\bar M(A):\bar L(B)]$, the opposite parabolic composition coefficient. [F1, F2, step 2.1]
+
+3.2 **Bar-fixed pair formula and coefficient.** The predecessor procedure in step 2.2 terminates: $\sum L-\sum R$ decreases by one at each predecessor, all entries remain in the finite interval between the original smallest and largest entries, and both column sizes are fixed. At its terminal tuple there is no positive exclusive pair; in the fixed union/intersection fiber this is the unique minimal label, so its monomial is fixed by the triangular bar of [F4]. Apply the recorded $E_a,F_a$ in reverse predecessor order; they are bar-fixed. The subset calculation of step 2.2 proves inductively that the resulting bar-fixed vector is $U_f=\sum_{\Sigma\subseteq\Sigma_f^+}s^{-|\Sigma|}M_{f_\Sigma}$. The empty subset gives $M_f$, every nonempty subset gives a lower label, and disjoint exclusive endpoints make distinct subsets give distinct tableaux. Thus $U_f$ has precisely the negative-chart triangular condition of $T_f$, and uniqueness in [F4] gives $U_f=T_f$. In particular every single greedy-pair coefficient is $s^{-1}$ and specializes to $1$. This supplies the local proof in the correct chart; it does not identify a positive-$s$ fixed vector with the negative-chart canonical family. [F4, step 1.2, step 2.2, algebra]
+
+4.1 **The tensor/wedge bridge to the source $T$ at $1$.** Writing each sorted entry tuple as a right coset representative $w_A$ (shortest right in the entry stabilizer) with $d(A)=w_A^{-1}$ shortest left, the pure tensor Hecke generator action and the reverse-position complementary-chart pairing identify the tensor coefficient matrix with the spherical values $P_{d(C)w_0,d(A)w_0}(1)$, i.e. with the ordinary singular multiplicities of [F3]; finite Levi Weyl cancellation turns the signed column-permutation expansion into the actual parabolic composition matrix, and the source-positive wedge embedding identifies the source $L$-vectors with the tensor $L$-vectors by ordinary-bar and triangular uniqueness. Applying the same argument in reverse columns and using the typed pairing $C(\widetilde L_A,T_B)=\delta_{AB}$ of [F4] identifies the coefficient of $M(A)$ in the source canonical vector $T_B$ at $1$ with the opposite BGG coefficient of step 3.1. [F2, F3, F4, step 3.1]
+
+
+4.2 **Isolation of adjacent columns in a larger tensor.** If two tableaux have the same entries outside two adjacent columns, every tableau in the Bruhat interval between them has the same outer prefix weights, since dominance is antisymmetric on fixed total weight; parenthesizing the pair as one tensor factor, a positive transfer across an outer boundary strictly changes a prefix weight in the positive cone and cannot be cancelled by further positive transfers. Hence the bar submatrix and, by triangular correction, the canonical coefficient between the two labelled monomials equal the two-column values of step 3.2. [F1, F4, step 3.2]
+
+5.1 **Genuine edges at $1$.** Specializing step 4.2 at $s=1$, a greedy-pair swap gives $(X(B):M(A))=1$ for the two labels connected by the swap: the corresponding standard factor occurs with multiplicity $1$ in the indecomposable tilting object $X(B)$. Since an indecomposable finite-length object cannot have composition factors in two different linkage blocks, and $M(A)$ has simple head $L(A)$ while the actual $\Delta(B)$ section of $X(B)$ supplies $L(B)$ as a composition factor, the labels $A$ and $B$ lie in the same actual linkage block. Opposite BGG gives $[\bar M(A):\bar L(B)]=1$, and $\bar M(A)$ has head $\bar L(A)$, so the same edge connects the opposite labels. [F1, F2, step 3.1, step 4.2]
+
+6.1 **Connectivity of the binary tableau fiber.** Identify a tableau with the $0/1$ incidence matrix recording which entry values occur in each column; its row margins are entry multiplicities and its column margins are the heights $n_j$. The symmetric difference of two matrices with the same margins is a union of alternating cycles in the bipartite graph, and a cycle of length $2k$ is flipped by a chord: if the chord entry is $0$ flip the smaller four-cycle first and then the remaining shorter cycle, if it is $1$ flip the complementary shorter cycle first and then the four-cycle; the chord is restored and exactly the original cycle is flipped. Induction on the cycle length gives a sequence of valid $2\times2$ switches connecting any two matrices with the same margins. [step 5.1, algebra]
+
+7.1 **Reduction of distant switches.** Reduce a switch of entries $a,b$ between nonadjacent columns $S,U$ through the next intermediate column $T$. If $T$ contains only $a$ or only $b$, two switches with shorter column distance restore $T$ and effect the $S/U$ switch. If $T$ contains both, then $T\setminus S$ contains $b$ and, since $|S|\ge|T|$, some $c\in S\setminus T$ with $c\ne a$; use $c\leftrightarrow b$ on $S,T$, then $a\leftrightarrow b$ on $T,U$, then $a\leftrightarrow c$ on $S,T$. If $T$ contains neither, then $U\setminus T$ contains $b$ and, since $|T|\ge|U|$, some $c\in T\setminus U$; use $c\leftrightarrow b$ on $T,U$, then $a\leftrightarrow b$ on $S,T$, then $a\leftrightarrow c$ on $T,U$. Every step is a valid binary switch preserving the margins, and induction on the column distance reduces to adjacent columns. These cardinal comparisons use exactly the original sorted heights $n_1\ge\cdots\ge n_l$. [step 6.1, algebra]
+
+8.1 **Adjacent fibers connect through coefficient-$1$ edges.** Every adjacent two-column switch has both endpoints in one union/intersection fiber of the pair of columns. Repeatedly swapping any greedy positive pair strictly lowers the inversion order of the tuple, and the process terminates at the unique configuration in which all left-exclusive values precede all right-exclusive values. Hence the endpoints are connected through the canonical coefficient-$1$ edges of step 3.2 and step 5.1. [step 3.2, step 5.1, step 7.1]
+
+9.1 **Conclusion.** Combining binary-fiber connectivity, distant-switch reduction and adjacent coefficient edges, the whole fixed-margin binary tableau fiber is connected through actual linkage edges, in the original central summand and, by step 5.1, in the opposite one. Hence both genuine type-$A$ tableau central summands are single linkage blocks, including repeated-entry singular ambient characters; no future higher-Schur/cyclotomic-centre theorem and no bare Bruhat-cover connectivity assertion is used. [step 5.1, step 6.1, step 7.1, step 8.1] ∎

@@ -88,12 +88,13 @@ the many that exist. In particular [[lem-subset-of-countable]] and
 nonempty set of naturals has a *least* element, [[thm-rationals-countable]] is
 choice free because every rational has a representative with positive
 denominator, and [[cor-irrationals-uncountable]] uses only a two-set union, which
-needs nothing at all. The three false statements at the end guard exactly these
-distinctions: two of them record, conditionally on the consistency of ZF and with
-external references rather than proofs, that the countable union theorem and the
-existence of countably infinite subsets of infinite sets are genuinely not
-theorems of ZF; the third refutes the belief that an uncountable set of reals
-must contain an interval.
+needs nothing at all. The false statement at the end refutes the belief that an
+uncountable set of reals must contain an interval. The conditional independence
+comparisons for countable unions and for countably infinite subsets of infinite
+sets belong to the later foundations pages, respectively
+`symmetric-collapse-and-ultrafilter-free-models-examples` and
+`symmetric-extensions-and-basic-choice-failure-models`, under their stated
+consistency hypotheses.
 
 One older debt is settled here. [[lem-finite-set-has-max]] proved that every set
 $\{a_0, \dots, a_n\}$ of reals has a maximum and a minimum, and then stipulated,

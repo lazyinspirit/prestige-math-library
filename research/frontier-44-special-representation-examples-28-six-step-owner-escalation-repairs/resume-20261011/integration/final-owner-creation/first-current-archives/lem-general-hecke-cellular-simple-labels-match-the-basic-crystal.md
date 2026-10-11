@@ -1,0 +1,49 @@
+---
+id: lem-general-hecke-cellular-simple-labels-match-the-basic-crystal
+kind: lemma
+title: "General Hecke cellular simple labels match the basic crystal"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28-six-step
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [def-axiom-of-choice, lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells, thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero, prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators]
+justified_by: []
+proof_strategy: direct
+dependency_level: 20
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Jonathan Brundan, Modular branching rules and the Mullineux map for Hecke algebras of type A, §§2.1–2.11 and 5.3–5.7"
+      url: "https://pages.uoregon.edu/brundan/papers/quantum.pdf"
+    - title: "Alexander Kleshchev, Representation theory of symmetric groups and related Hecke algebras, §11.2"
+      url: "https://arxiv.org/pdf/0909.4844"
+---
+
+## Statement
+
+Assume the Axiom of Choice only for the canonical basic-component identification through [[thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero]]. The finite recursive cellular comparison adds no use of Choice.
+
+Let $F$ be any field, $q\in F^\times$ of finite quantum characteristic $e\ge2$, and use the Murphy restricted labels $D(\lambda)$ and residue functors $E_i,F_i$ of [[lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells]], with residue $c-r\bmod e$. Recursively set $\dot D(\varnothing)=F$ and $\dot D(\lambda)=\operatorname{hd}F_i\dot D(\widetilde e_i\lambda)$ for any defined good deletion. This is defined at every restricted partition, independent of the selected deletion, and $\dot D(\lambda)\cong D(\lambda)$. This finite recursive comparison holds without Choice; only the canonical basic-component identification below assumes Choice. The finite recursive comparison adds no Choice use and does not use Fock-space classification to identify a module head. These restricted labels, with the displayed good/cogood operators, are the transported basic crystal $B(\Lambda_0)$, with weight $\Lambda_0-\sum_i m_i(\lambda)\alpha_i$. The basic-component assertion carries the declared Choice in the integrable crystal decomposition of [[thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero]]. The assertion is for level-one type-A Hecke algebras; it supplies no arbitrary-level cyclotomic label theorem.
+
+## Facts & Assumptions
+
+**Given:** The field, parameter, finite quantum characteristic, exact cellular labels and residue functors of the Statement.
+
+[F1] The proved general-Hecke endpoint supplies complete distinct absolutely simple restricted labels and $\operatorname{hd}F_iD(\mu)=D(\widetilde f_i\mu)$ when its cogood addition exists ([[lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells]]).
+
+[F2] The actual full Fock crystal has canonical empty component $B(\Lambda_0)$, with the stated integrable-decomposition Choice ([[thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero]]). Conjugation and color reflection carry its operators onto the restricted good-node graph and transport its weight as $\Lambda_0-\sum_i m_i(\lambda)\alpha_i$ ([[prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators]]).
+
+## Proof
+
+1.1 For a partition $\lambda$, list addable pluses and removable minuses of residue $i$ from top to bottom and cancel $-+$ pairs by a last-in-first-out minus stack. Deleting the first surviving minus and adding the last surviving plus are inverse selected moves. Indeed changing the selected corner changes its sign; every other altered boundary corner has residue $i+1$ or $i-1$, different from $i$ even at $e=2$. Immediately before a first surviving minus the minus stack is empty, and every suffix prefix has at least as many remaining minus pushes as plus pops. After flipping that minus to plus, these conditions say precisely that this plus survives and no later plus does. Reversing the flip proves the converse. This retains the positions of the selected signs, not just their counts. [given, algebra]
+
+2.1 Good deletion preserves restrictedness. For a removable row $r$, only its gap and the gap immediately above can change: the former decreases by one and the latter increases by one. The only possible violation is $r>1$ and $\lambda_{r-1}-\lambda_r=e-1$. Then the removable corners in rows $r-1,r$ have equal residues, and their minus signs are adjacent in that residue word: the addable corners between them have residues differing by one. If the lower minus survives, the upper one also survives, since stack pops remove the lower minus first. The lower one therefore cannot be the first surviving minus. Cogood addition preserves restrictedness by the dual adjacent-plus argument: if its row gap were $e-1$, the later same-residue addable corner would survive whenever the earlier one did, contradicting selection of the last surviving plus. Hence step 1.1 gives inverse partial operations on the restricted vertex set. [step 1.1, algebra]
+
+3.1 Every nonempty restricted partition has a good deletion. Let $h$ be its height. Its bottom removable node has residue $\lambda_h-h$, while the only boundary node below it is the addable $(h+1,1)$ of residue $-h$. The difference $\lambda_h$ lies strictly between zero and $e$, so these residues differ. There is consequently no later same-residue plus to cancel that bottom minus. At least one minus survives in that residue, and its first surviving minus is a good node. By step 2.1 its deletion stays restricted. Repeating decreases the number of boxes and ends at the empty diagram; reversing gives cogood additions by step 1.1. All selections may be made by the least residue and then the prescribed extremal sign, using finite sets. [step 1.1, step 2.1, algebra]
+
+4.1 Induct on rank to establish both definition and comparison simultaneously. At rank zero the two modules are $F$. Suppose comparison has been established for every smaller rank and let $\lambda$ be nonempty and restricted. Step 3.1 gives a defined predecessor, so the recursion has at least one option. For any allowed residue $i$, put $\mu=\widetilde e_i\lambda$. The induction hypothesis identifies the actual lower-rank module $\dot D(\mu)$ with $D(\mu)$; by steps 1.1 and 2.1 its cogood addition is $\widetilde f_i\mu=\lambda$. Thus [F1] identifies the recursively chosen head with the same simple module $D(\lambda)$ for every allowed $i$. This proves choice independence, existence and the displayed isomorphism at this rank and therefore at every rank. No comparison is used to prove the supplier's cellular endpoint, and no combinatorial connectedness alone identifies a module head. [F1, step 1.1, step 2.1, step 3.1, algebra]
+
+5.1 By [F2] the restricted graph on these same shapes, with color $i$ and its prescribed good/cogood operations, is the transported canonical $B(\Lambda_0)$ and has the displayed weight. Step 4.1 identifies its recursively attached module at every vertex with the actual Murphy cellular simple. Thus the cellular and basic-crystal labels agree, while the endpoint producer itself used no crystal label comparison. The graph and finite recursive arguments add no Choice; the only inherited use is [F2]'s integrable crystal decomposition, as stated. [F1, F2, step 4.1, algebra] ∎

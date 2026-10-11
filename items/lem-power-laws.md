@@ -61,7 +61,7 @@ Let $a, b$ be elements of a field ([[def-field]]) and let integer powers be as i
 
 [L4] A field has no zero divisors: $xy = 0$ implies $x = 0$ or $y = 0$ ([[lem-of-no-zero-divisors]]).
 
-[L5] $\mathbb{Z}$ is a commutative ring in which every element is $\iota(k)$ or $-\iota(k)$ for a unique natural $k$ ([[thm-int-comm-ring]], [[lem-nat-embeds-int]], [[def-int-operations]]); we write $k$ for $\iota(k)$.
+[L5] $\mathbb{Z}$ is a commutative ring in which every element is $k$ or $-k$ for a unique natural $k$ ([[thm-int-comm-ring]], [[lem-nat-embeds-int]], [[def-int-operations]]); here $k$ in an integer expression denotes the image of the natural $k$ under the embedding $\iota : \mathbb{N} \to \mathbb{Z}$.
 
 ## Proof
 

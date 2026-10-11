@@ -4,11 +4,8 @@ kind: theorem
 title: Etemadi strong law for pairwise independent iid variables
 deps: ["def-pairwise-independence", "lem-iid-linear-truncation-occurs-only-finitely-often", "lem-summability-of-truncated-normalized-variances", "lem-cesaro-limit-of-truncated-means", "cor-chebyshev-inequality-for-random-variables", "cor-covariance-vanishes-under-independence", "lem-variance-and-covariance-identities-for-random-variables", "lem-measurable-functions-preserve-independence", "cor-first-borel-cantelli-lemma-for-events", "thm-monotone-convergence", "lem-integer-part", "def-integer-power", "thm-geometric-series"]
 verification:
-  audited: 2026-09-10
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-10
+  precheck: pass
+  repair: research/frontier-44-special-representation-examples-28-six-step-owner-escalation-repairs/resume-20261011/published/receipts/thm-etemadi-strong-law-for-pairwise-independent-iid-variables.json
 sources:
   references:
     - title: Durrett, Theorem 2.4.1, Lemmas 2.4.2–2.4.4 and complete proof, pp. 76–78
@@ -59,7 +56,7 @@ $$a^{-n} := (a^n)^{-1}.$$
 
 **Why that is legitimate.** The right-hand side presupposes that $a^n$ is invertible, that is, that $a^n \ne 0$. This is a proof obligation and not an observation, and it is discharged by claim 2 of lem-power-laws: for $a \ne 0$ in a field, $a^n \ne 0$ for every $n \in \mathbb{N}$, proved there by induction on $n$ from the fact that a field has no zero divisors (lem-of-no-zero-divisors). That lemma is a statement *about* the operation introduced here, so it depends on this definition and is recorded in this item's `justified_by` rather than in its `deps` (SCHEMA §3). Given $a^n \ne 0$, the value $(a^n)^{-1}$ is a single well-determined element, because multiplicative inverses in a field are unique (lem-of-inverse-unique).
 
-**Integer exponents.** Every integer $m$ (def-integers) is either $\iota(n)$ or $-\iota(n)$ for a unique natural $n$, where $\iota$ is the embedding $\mathbb{N} \to \mathbb{Z}$ (lem-nat-embeds-int, def-int-operations). This too is a citation and not a slogan: the order on $\mathbb{Z}$ is total (thm-int-ordered-ring), so $m \ge 0$ or $m < 0$; the image of $\iota$ is exactly the set of nonnegative integers, and each of them is $\iota(n)$ for a unique natural $n$ (lem-nat-embeds-int); and if $m < 0$ then $-m > 0$, by compatibility of the order with addition (thm-int-ordered-ring), so $-m = \iota(n)$ and $m = -\iota(n)$, with $n$ unique because $\iota$ is injective. The two clauses above therefore define $a^m$ for every $m \in \mathbb{Z}$ whenever $a \ne 0$, and for every $m \in \mathbb{N}$ for arbitrary $a$. The clauses are consistent where they overlap: the only overlap is $m = 0$, where $-\iota(0) = \iota(0)$ and $(a^0)^{-1} = 1^{-1} = 1 = a^0$.
+**Integer exponents.** Every integer $m$ (def-integers) is either $\iota(n)$ or $-\iota(n)$ for a unique natural $n$, where $\iota$ is the embedding $\mathbb{N} \to \mathbb{Z}$ (lem-nat-embeds-int, def-int-operations). This too is a citation and not a slogan: the order on $\mathbb{Z}$ is total (thm-int-ordered-ring), so $m \ge 0$ or $m < 0$; the image of $\iota$ is exactly the set of nonnegative integers, and each of them is $\iota(n)$ for a unique natural $n$ (lem-nat-embeds-int); and if $m < 0$ then $-m > 0$, by compatibility of the order with addition (thm-int-ordered-ring), so $-m = \iota(n)$ and $m = -\iota(n)$, with $n$ unique because $\iota$ is injective. The two clauses above therefore define $a^m$ for every $m \in \mathbb{Z}$ whenever $a \ne 0$, and for every $m \in \mathbb{N}$ for arbitrary $a$. The exponent domains are disjoint: the natural clause handles $m \ge 0$, including $m=0$, while the negative clause requires $n \ge 1$ and handles only $m<0$.
 
 [F6] [[thm-geometric-series]]: Let $r \in \mathbb{R}$ and let $r^k$ be the integer power (def-integer-power), so that $r^0 = 1$ for every $r$, including $r = 0$.
 

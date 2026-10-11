@@ -1,0 +1,26 @@
+# Published batch-1 surgical repairs
+
+Run: `frontier-44-special-representation-examples-28-six-step`. One repair round; no judge, independent acceptance, audit, publication, or push is claimed.
+
+The three reported item defects were confirmed independently. The remark's strict-exponent case admits an exact rational decomposition by density. At the only possible rational endpoint, Bernoulli gives a^(1/n) <= 1+(a-1)/n; the Archimedean property rules out a positive gap from the supremum-product bound. The reader's argument is sound and uses no convergence. I read the actual local Bernoulli, rational monotonicity, density, Archimedean, rational-power definition and root theorem carriers as focused context; no external source acquisition was needed or claimed.
+
+- `rem-real-exponents-deferred`: replaced only the false “Where it stops” argument with a description of the remaining supremum comparison and the chosen reading order. Retained the valid supremum construction for a>1, reciprocal construction below one, rational consistency, monotonicity, later exp/log route and rational-exponent inequality scope. The complete elementary real-power proof is not added as a new page theorem; its sound existence refutes the old impossibility claim.
+- `fs-rational-power-of-negative-base`: final Remarks now distinguishes nonnegativity for roots of every natural order from positivity for all rational exponents, explicitly preserving the supplementary zero-base clause. The original false Statement and entire refutation are unchanged.
+- `lem-power-monotone`: proof step 3.1 now cites the induction hypothesis 1.2 for b^n>0 instead of the successor-exponent step 2.1. All four theorem claims and remaining proof steps are unchanged.
+
+All three retain published status. Removed their stale verified markers and the two existing judge markers; root owns installation of truthful local repair receipts. No prior repair reference existed. Dependencies and aliases are unchanged. No original Statement or Definition was changed, so the required changed-statement consumer propagation condition is not triggered.
+
+Complete actual incoming pre-edit bytes, raw SHA-256 and canonical verification-excluded hashes are in `archives.json` and the durable files below.
+
+| Item | Actual pre-edit archive | Raw SHA-256 |
+|---|---|---|
+| `rem-real-exponents-deferred` | `research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/before/rem-real-exponents-deferred.pre-edit.md` | `d8948c2292bff1d59b22ac1f136a42084c792bb27c9adffe7bffece34c5ce4d0` |
+| `fs-rational-power-of-negative-base` | `research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/before/fs-rational-power-of-negative-base.pre-edit.md` | `23ad38723a0de5a348381a2ef12d59d15c238b25410f79e728101ea2a21a8f95` |
+| `lem-power-monotone` | `research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-1/before/lem-power-monotone.pre-edit.md` | `6ff131c4dc75dfd79e6b462c484d52b4fee9c57b7e87844580bf6a4d4ac0db80` |
+ Every later formatter invocation will also have a complete pre-reflow archive. The incoming false-statement A1 numeral wording differed from git HEAD before this work; that wording was preserved and reported to root because publication ancestry must bind actual bytes.
+
+Focused citation-use inspection opened `def-rational-power`, `def-integer-power`, the relevant definition paragraphs of `def-p-norms-on-rn`, section 2 of `rem-rn-conventions-and-scope`, the exponent caveat in `ex-integral-test-applied-to-the-p-series`, and the closing convention paragraph of `library/real-analysis/rn-as-a-normed-space.md`. Those citations describe reading-order availability and remain compatible with the repaired remark. I opened all of `library/real-analysis/roots-and-rational-powers.md`; its closing paragraph repeats the reported invalid necessity assertion and missing increasing-base hypothesis. Root owns that already identified outside repair; no outside source was edited. Native draft carriers remained untouched.
+
+Root verified the actual original archives against frozen post-reader raw hashes, temporarily restored them to record native ownership claims, then reapplied the proposals before validation. The root-owned recovery history preserves this ordering correction.
+
+Validation completed at 2026-10-11 06:30:59–06:31:01 UTC. All three reflow calls reported unchanged (exit 0). One-file `precheck --json` recorded zero checked proofs / zero failures / not-applicable for the remark, and one proof / zero failures / pass for each proved item. Ordinary prechecks for the two proved items reported PASS and `1 checked, 0 failing`. Each ordinary renderer reported `OK — 1 file(s)`; renderer JSON had no errors or warnings. Final explicit three-path proof-layout reported `3 items, 14 steps, 0 defects` (exit 0). Actual commands, complete outputs, codes, dates, canonical current source hashes, and complete pre-reflow archive paths/raw hashes are in `local-checks.json`. The mechanical checks do not constitute an independent mathematical audit. No additional mathematical gap was identified in the bounded repairs. Root still owns global ledger integration, native ownership claims, policy receipts and the separately reported page/contract repairs.

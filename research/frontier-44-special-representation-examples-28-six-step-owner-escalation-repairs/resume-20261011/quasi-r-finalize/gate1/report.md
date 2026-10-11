@@ -1,0 +1,13 @@
+# Gate1 focused quasi-R/batch8 metadata proposal
+
+The guarded-contract-deltas.json proposal contains24 entry deltas over an exact26-subject snapshot: all19 assigned batch8 boundary failures, both new quasi-R carriers and the5 direct finite-tensor consumers. Only risk_review and boundaries change; all item Statements, Facts and proofs remain untouched. Two snapshot subjects have no required entry change.
+
+The original two risk reviews still said open and claimed the original Statements were unchanged. Their complete proposed dispositions retain those exact historical records and point to the root-accepted concrete refutation and current narrowed formal correction, rather than claiming that false unrestricted globalization was proved. Original review/source histories and both exhausted rounds remain intact.
+
+This is actual boundary evaluation, not templated paraphrasing. Corrected substantive errors include: the general four-axiom Definition admits the zero based module; an empty homogeneous coevaluation is zero while degree zero has a singleton unit coevaluation; base change handles an empty weight family by tensoring the zero free component; the integral projector is identity only on the skew-derivation kernel, not on every string-position-zero expression; root-of-unity singularity is excluded or treated under the actual stated field hypotheses; and unrelated structural constructions cannot be called biconditional directions. Inherited AC is carried in the three direct Fock consumer rows. Empty fixed-example data are distinguished from zero anti-invariant differences in the counterexample.
+
+Every revised row names its actual Definition or current numbered argument and computes or excludes its specific case. Exact per-row/source guards and focused review records are attached. The full prior entries are retained in the proposal, so earlier template reviews and original risk notes remain recoverable.
+
+Scoped local validation passes: strict proof contracts26/26 with0errors/0warnings; required risk dispositions26/26 with0errors; boundary audit208rows with0template clusters and0contradicted candidates. Reports and hashes are in local-checks.json. No live shared files, native decisions, certifications or native gates were written/run.
+
+Root should apply by exact entry guard, preserving unrelated concurrent batch entries, then use normal tools to refresh current derived carrier/certification bindings. In particular the changed CEX contract belongs to an already registered immutable creation origin: preserve that origin and recertify the current metadata; do not recreate authorship.

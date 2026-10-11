@@ -57,8 +57,8 @@ doubling sequence is defined by recursion inside $\mathbb{N}$ rather than writte
 $2^{j}$, because a list length must be a natural number and $2^{j}$ would name a
 real ([[def-integer-power]] gives powers of a real base only). Its weighted form
 ([[thm-weighted-am-gm-rational]]) is stated for **rational** weights, and that
-restriction is not laziness: a real weight $w$ would require the symbol $x^{w}$,
-which does not exist in this library. Young's inequality
+restriction matches the powers available at this point in the reading order;
+real powers for positive bases are defined later in [[def-real-power]]. Young's inequality
 ([[thm-young-inequality]]) is the two-weight case, Hölder
 ([[thm-holder-finite]]) is Young summed after normalisation, and Minkowski
 ([[thm-minkowski-finite]]) is Hölder applied twice with the conjugate exponent
@@ -78,8 +78,12 @@ field and with no appeal to completeness, though odd roots of negatives do exist
 and the map $x \mapsto x^{n}$ is a bijection of $\mathbb{R}$ for odd $n$. And
 the rational-power formula does not survive the passage to negative bases
 ([[fs-rational-power-of-negative-base]]). The closing remark
-([[rem-real-exponents-deferred]]) is honest about the ceiling: $a^{x}$ for real
-$x$ can be defined here as $\sup\{a^{r} : r \in \mathbb{Q},\ r \le x\}$, and that
-supremum does exist, but the power laws for it cannot be proved without limits.
-General powers require further analytic development, through the exponential
-and logarithm, and are deliberately outside this page's dependency closure.
+([[rem-real-exponents-deferred]]) explains the chosen reading order. For $a > 1$
+and real $x$, the supremum $\sup\{a^{r} : r \in \mathbb{Q},\ r \le x\}$ exists
+and defines $a^x$; the case $a=1$ is constant, and $0<a<1$ is handled by
+$a^x=(a^{-1})^{-x}$ using the increasing-base construction. The power laws can
+be established by elementary supremum comparisons and rational approximation,
+without sequence limits or continuity. The library instead develops arbitrary
+real powers later through the exponential and logarithm
+([[def-real-power]]); that development is deliberately outside this page's
+dependency closure.
