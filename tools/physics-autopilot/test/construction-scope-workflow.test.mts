@@ -144,6 +144,25 @@ test('significant unmet prerequisites escalate immediately and prevent repair di
   assert.equal(loopState(f.repo,'demo','1').repairs.length,0);assert.throws(()=>batchPlan(f.ctx,'1'),/held for owner/);
 });
 
+test('initial escalating review retains additional actual consumer observations as a hold',t=>{
+  const f=fixture(t);
+  const checks=[{id:'lem-b',decision:'repair',reason:'Outside consumer needs a typed supplier interface.'},
+    {id:'ex-b',decision:'escalate',reason:'Indirect consumer requires owner repair.'}];
+  const result=complete(f,'1','escalate',{consumer_checks:checks});
+  assert.equal(result.state.phase,'held');assert.equal(result.state.reviews.length,1);
+  assert.equal(result.state.repairs.length,0);assert.equal(accepted(f.repo,'demo','1'),false);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo,result.p.resultArtifact),'utf8')).consumer_checks,checks);
+  assert.throws(()=>batchPlan(f.ctx,'1'),/held for owner/);
+});
+
+test('extra reviewer observations cannot invent consumers, duplicate checks or grant acceptance',t=>{
+  const f=fixture(t);
+  assert.throws(()=>complete(f,'1','escalate',{consumer_checks:[{id:'lem-missing',decision:'repair',reason:'Unknown.'}]}),/invalid extra observations/);
+  assert.throws(()=>complete(f,'1','escalate',{consumer_checks:[{id:'lem-b',decision:'repair',reason:'One.'},{id:'lem-b',decision:'repair',reason:'Duplicate.'}]}),/invalid extra observations/);
+  assert.throws(()=>complete(f,'1','accept',{consumer_checks:[{id:'lem-b',decision:'accept',reason:'Additional observation.'}]}),/invalid extra observations/);
+  assert.equal(loopState(f.repo,'demo','1').reviews.length,0);
+});
+
 test('partial batch inventories and significant findings disguised as routine repair are rejected',t=>{
   const f=fixture(t);
   assert.throws(()=>complete(f,'1','repair',{reviewed_items:['lem-a']}),/Incomplete batch/);

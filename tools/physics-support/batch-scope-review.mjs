@@ -211,7 +211,13 @@ export function collectBatch(ctx,batch) {
   } else {
     const prior=state.repairs.at(-1);
     const affected=prior?.consumers??[];
-    assert(same(row.consumer_checks.map(x=>x.id),affected.map(x=>x.id)),'Reviewer omitted direct or indirect consumer checks');
+    const observed=row.consumer_checks.map(x=>x.id), required=affected.map(x=>x.id);
+    const known=new Set(p.before_items.map(item=>item.id));
+    // Escalating whole-batch readers can identify additional actual consumers.
+    // Preserve those observations without turning them into acceptance coverage.
+    assert(new Set(observed).size===observed.length && required.every(id=>observed.includes(id))
+      && (same(observed,required) || (row.decision==='escalate' && observed.every(id=>known.has(id)))),
+      'Reviewer omitted direct or indirect consumer checks or supplied invalid extra observations');
     assert(row.consumer_checks.every(x=>x.decision==='accept')||row.decision!=='accept','Acceptance has unresolved consumer impacts');
     state.reviews.push({round:p.round,report_sha256:digest(row),decision:row.decision});
     state.phase=row.decision==='accept'?'accepted':row.decision==='escalate'||state.reviews.length===3?'held':'repair';
