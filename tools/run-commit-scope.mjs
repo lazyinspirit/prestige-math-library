@@ -72,7 +72,9 @@ const operationalLog = (run, path) => path.startsWith('research/' + run + '-disp
   && /\.log(?:\.gz)?$/.test(path);
 const runResearch = (run, path) => path.startsWith('research/' + run + '-')
   && !operationalLog(run, path);
-const runtimeExcluded = (run, path) => path.split('/').some(part =>
+const runtimeExcluded = (run, path) => path.startsWith('physics/.physics-autopilot/')
+  || path === 'physics/.physics-autopilot'
+  || path.split('/').some(part =>
   part === '.git' || part === 'node_modules' || part.startsWith('.autopilot'))
   || operationalLog(run, path);
 
@@ -465,6 +467,14 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
       claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths })) };
 }
 
+// Read-only binding helper for an owner administrative reseal. It does not
+// capture outside rows, write receipts or grant workflow/commit authority.
+export function inspectCloseoutScope(root, run) {
+  const receipt = 'research/' + run + '-dispatch/tool-close-step6-v2.result.json';
+  const previous = existsSync(join(root, receipt)) ? JSON.parse(readFileSync(join(root, receipt), 'utf8')) : null;
+  return loadScope(root, run, receipt, previous?.closeout_scope?.owned_paths ?? [], true);
+}
+
 function refuseCrossScopeRenames(root, scope) {
   // Only read the working diff after active filters have been refused.
   // Inspect staged and working renames independently as well as their net
@@ -537,6 +547,87 @@ function committedAndCurrent(root, scope) {
   }
 }
 
+// Authenticate the preserved original baseline rather than replacing it.
+// Frozen runtime metadata reconstructs its exact original full working digest;
+// only the independently live physics runtime is projected away thereafter.
+function verifyRuntimePreservationRecovery(root, run, scope, previousBytes, outside, expectedEvidence = null) {
+  const path = 'research/' + run + '-closeout-runtime-recovery.json';
+  regularPath(root, path);
+  const bytes = readFileSync(join(root, path)), recovery = JSON.parse(bytes);
+  if (recovery.version !== 1 || recovery.kind !== 'authenticated-runtime-preservation-recovery'
+    || recovery.run !== run || recovery.authorized_by !== 'owner'
+    || typeof recovery.authorization !== 'string' || recovery.authorization.trim().length < 20
+    || recovery.runtime_namespace !== 'physics/.physics-autopilot/'
+    || recovery.current_policy_sha256 !== scope.policySha256
+    || recovery.current_context_sha256 !== scope.contextSha256
+    || !Array.isArray(recovery.original_runtime_rows))
+    throw Error('closeout: invalid current runtime preservation recovery authority');
+  const archive = evidence => {
+    if (!runResearch(run, evidence?.path)) throw Error('closeout: recovery archive is outside this run');
+    regularPath(root, evidence.path);
+    const value = readFileSync(join(root, evidence.path));
+    if (sha256(value) !== evidence.sha256) throw Error('closeout: recovery archive changed');
+    return value;
+  };
+  const originalBytes = archive(recovery.original_receipt), original = JSON.parse(originalBytes);
+  const failure = JSON.parse(archive(recovery.original_failure));
+  if ((expectedEvidence ? expectedEvidence.path !== path || expectedEvidence.sha256 !== sha256(bytes)
+      || expectedEvidence.original_commit !== recovery.original_commit : !previousBytes.equals(originalBytes))
+    || original.run !== run || original.ok !== true
+    || original.written_by !== 'run-commit' || original.label !== 'close-step6-v2'
+    || original.closeout_scope?.version !== 1 || failure.run !== run || failure.label !== 'final outside'
+    || !/^(?:[a-f0-9]{40}|[a-f0-9]{64})$/.test(recovery.original_commit ?? ''))
+    throw Error('closeout: recovery does not bind the original committed closeout');
+  const committed = git(root, ['--no-replace-objects', 'show', recovery.original_commit
+    + ':research/' + run + '-dispatch/tool-close-step6-v2.result.json']);
+  if (!committed.equals(originalBytes)) throw Error('closeout: original receipt is not the committed exact blob');
+  git(root, ['--no-replace-objects', 'merge-base', '--is-ancestor', recovery.original_commit, 'HEAD']);
+  if (!Array.isArray(original.closeout_scope.owned_paths)
+    || original.closeout_scope.owned_paths.some(path => !scope.owns(path)))
+    throw Error('closeout: recovery dropped original owned paths');
+  const baseline = original.closeout_scope.preservation_before;
+  assertSame(failure.before, baseline, 'recovery original failure baseline');
+  for (const key of ['outside_index', 'outside_head']) {
+    assertSame(failure.after[key], baseline[key], 'recovery original ' + key);
+    assertSame(digest(outside[key]), baseline[key], 'recovery current ' + key);
+  }
+  const seen = new Set();
+  for (const row of recovery.original_runtime_rows) {
+    safePath(row.path);
+    if (!row.path.startsWith(recovery.runtime_namespace) || seen.has(row.path)
+      || !['file', 'symlink'].includes(row.kind) || !Number.isSafeInteger(row.mode)
+      || row.mode < 0 || row.mode > 0o777 || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+      || Object.keys(row).join(',') !== 'path,kind,mode,sha256')
+      throw Error('closeout: invalid frozen original runtime row');
+    seen.add(row.path);
+  }
+  const diagnostic = JSON.parse(failure.diagnostic.slice(failure.diagnostic.indexOf('{')));
+  if (Object.keys(diagnostic.changes ?? {}).some(key => key !== 'outside_working')
+    || !Array.isArray(diagnostic.changes?.outside_working)
+    || diagnostic.changes.outside_working.some(change => !seen.has(change.path)
+      || JSON.stringify(recovery.original_runtime_rows.find(row => row.path === change.path))
+        !== JSON.stringify(change.before)))
+    throw Error('closeout: original failure is not confined to authenticated runtime rows');
+  const reconstructed = [...outside.outside_working, ...recovery.original_runtime_rows]
+    .sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
+  assertSame(digest(reconstructed), baseline.outside_working, 'reconstructed original full working');
+  // Existing mathematical carriers and canonical ledgers may not change as an
+  // administrative recovery. Native workflow checks remain mandatory too.
+  const canonical = original.closeout_scope.owned_paths.filter(path =>
+    path.startsWith('items/') || path.startsWith('library/')
+      || ['research/plan-spec.json', 'research/defect-ledger.jsonl',
+        'research/published-consumer-supplier-ledger.md'].includes(path)
+      || /\.(?:pages|proof-contracts)\.json$/.test(path));
+  const originalTree = new Map(treeEntries(root, recovery.original_commit).map(row => [row.path, row]));
+  const hashes = canonical.length ? textGit(root, ['hash-object', '--stdin-paths'],
+    { input: Buffer.from(canonical.join('\n') + '\n') }).split('\n') : [];
+  if (hashes.length !== canonical.length || canonical.some((path, index) =>
+    hashes[index] !== originalTree.get(path)?.oid
+      || ((lstatSync(join(root, path)).mode & 0o111) ? '100755' : '100644') !== originalTree.get(path)?.mode))
+    throw Error('closeout: recovery changed an original canonical mathematical carrier');
+  return { path, sha256: sha256(bytes), original_commit: recovery.original_commit };
+}
+
 export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayoutAlreadyChecked = false }) {
   const onMain = () => {
     if (textGit(root, ['symbolic-ref', '--short', 'HEAD']) !== 'main') throw Error('closeout: scoped mode requires main');
@@ -562,10 +653,20 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
   workflowChecks(root, run, proofLayoutAlreadyChecked);
   const outsideBefore = captureOutsidePreservation(root, run, scope);
   const before = preservationDigests(outsideBefore);
+  let recoveryEvidence = null;
   if (previous) {
-    if (previous.closeout_scope.policy_sha256 !== scope.policySha256
-      || previous.closeout_scope.context_sha256 !== scope.contextSha256) throw Error('closeout: recorded policy/scope context changed');
-    assertSame(before, previous.closeout_scope.preservation_before, 'recorded outside');
+    const sameContext = previous.closeout_scope.policy_sha256 === scope.policySha256
+      && previous.closeout_scope.context_sha256 === scope.contextSha256;
+    const sameOutside = JSON.stringify(before) === JSON.stringify(previous.closeout_scope.preservation_before);
+    if (!sameContext || !sameOutside) {
+      recoveryEvidence = verifyRuntimePreservationRecovery(root, run, scope, oldReceiptBytes, outsideBefore);
+    } else {
+      assertSame(before, previous.closeout_scope.preservation_before, 'recorded outside');
+      if (previous.closeout_scope.recovery_evidence) {
+        recoveryEvidence = verifyRuntimePreservationRecovery(root, run, scope, oldReceiptBytes,
+          outsideBefore, previous.closeout_scope.recovery_evidence);
+      }
+    }
   }
   if (checkOnly) {
     if (!previous || previous.ok !== true || previous.run !== run
@@ -601,9 +702,10 @@ export function scopedCloseout({ root, run, checkOnly, finalReceipt, proofLayout
         version: 1, policy: scope.policyPath, policy_sha256: scope.policySha256,
         context_sha256: scope.contextSha256, owned_paths: scope.paths, before_head: beforeHead,
         preservation_before: before,
+        ...(recoveryEvidence ? { recovery_evidence: recoveryEvidence } : {}),
         ...(scope.reviewedHook ? { reviewed_hook: scope.reviewedHook } : {}),
         evidence: 'Baseline recorded before commit; successful tool return and --check verify equality afterward.',
-        exclusions: ['Git metadata', 'node_modules', '.autopilot runtime', 'this run ignored dispatch .log/.log.gz files'],
+        exclusions: ['Git metadata', 'node_modules', '.autopilot runtime', 'physics/.physics-autopilot runtime working bytes (index/HEAD remain protected)', 'this run ignored dispatch .log/.log.gz files'],
       },
     }, null, 2) + '\n');
     writeFileSync(join(root, receipt), writtenReceipt);

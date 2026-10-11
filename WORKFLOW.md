@@ -212,6 +212,19 @@ closeout paths cannot be excluded. These contexts remain on disk, retain full
 report protection, and become outside-preservation subjects; the ordinary
 canonical-path symlink refusal remains unchanged.
 
+Mathematics closeout projects the independent `physics/.physics-autopilot/`
+runtime out of working-byte preservation only; outside Git index and HEAD remain
+strictly protected. An already-committed closeout whose original baseline included
+that live runtime may recover through owner-authorized
+`RUN-closeout-runtime-recovery.json`. Exact archives of its committed final receipt
+and failure diagnostic remain immutable. Frozen original runtime metadata must
+reconstruct the original full working digest when combined with current canonical
+outside rows; original outside index/HEAD digests must still match. Recovery binds
+the current policy/context, retains every original owned path, and requires unchanged
+original items/pages, manifests/contracts and canonical ledgers. All native gates
+still run. Only after those checks may native closeout write a fresh final receipt
+and commit the administrative recovery; later `--check` uses its ordinary new baseline.
+
 The mathematics Step-6 report-integrity snapshot excludes the root-relative
 `physics/` namespace owned by the independent physics workflow. Mathematics
 sources, shared tools and run evidence retain their existing protection; the
