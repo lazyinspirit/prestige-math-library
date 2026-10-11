@@ -276,6 +276,68 @@ function validateRow(row, ids, opts = {}) {
   return errs;
 }
 
+// These original frozen Step-3 labels differ from the closed taxonomy.
+// Preserve their exact bytes and interpret only this authenticated
+// historical projection. This is not an append permission or a schema waiver.
+const FRONTIER44_FROZEN_RUN = 'frontier-44-special-representation-examples-28-six-step';
+const FRONTIER44_FROZEN_SHA256 = '4880633ac7ff4617391b1f99649327760d35403b04474655482395232503a2fd';
+const FRONTIER44_FROZEN_ALIASES = {
+  subclass: {
+    'proof-gap': 'unsupported-inference',
+    'missing-local-derivation': 'unsupported-inference',
+    'unsupported-field-claim': 'unsupported-inference',
+    'invalid-inference-and-target-type': 'invalid-inference',
+  },
+  location: {
+    proof: 'proof-step',
+    fact: 'facts-block',
+    hypothesis: 'statement',
+    source: 'frontmatter', // The original Vust sources.references DOI.
+    Objective: 'page-summary', // The B-page's dependency-leaf assertion.
+    'page-inventory': 'frontmatter', // Missing helper IDs in the page's items.
+  },
+  caught_by_role: { alpha: 'group-alpha' },
+  disposition: { repaired: 'fixed' },
+};
+
+function frozenFrontier44Rows(rows, runFilter, errs) {
+  if (runFilter && runFilter !== FRONTIER44_FROZEN_RUN) return new Set();
+  const candidates = rows.filter(row => row.run === FRONTIER44_FROZEN_RUN
+    && ['3a-adjudicate', '3b-cross'].includes(row.caught_at_stage)
+    && !isPublishedItem(process.cwd(), row.subject))
+    .sort((left, right) => String(left.defect_id).localeCompare(String(right.defect_id)));
+  if (!candidates.length) return new Set();
+  const receiptPath = join('research', `${FRONTIER44_FROZEN_RUN}-step3-closure.json`);
+  if (!existsSync(receiptPath)) return new Set();
+  try {
+    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    const fingerprint = createHash('sha256').update(JSON.stringify(candidates)).digest('hex');
+    if (receipt.version !== 3 || receipt.basis !== 'dependency-ordered-step3a'
+      || receipt.run !== FRONTIER44_FROZEN_RUN || receipt.status !== 'closed'
+      || receipt.step3_ledger_rows_count !== 1284 || candidates.length !== 1284
+      || receipt.step3_ledger_rows_sha256 !== FRONTIER44_FROZEN_SHA256
+      || fingerprint !== FRONTIER44_FROZEN_SHA256) {
+      throw Error('the original exact 1,284-row projection is not intact');
+    }
+    const verified = spawnSync(process.execPath,
+      [STEP3_CLOSE_TOOL, 'verify', '--root', process.cwd(), '--run', FRONTIER44_FROZEN_RUN],
+      { encoding: 'utf8', timeout: 120_000 });
+    if (verified.status !== 0) throw Error(verified.stderr || verified.stdout || 'native closure verification failed');
+    return new Set(candidates);
+  } catch (cause) {
+    errs.push(`frozen Step-3 taxonomy compatibility rejected: ${cause.message}`);
+    return new Set();
+  }
+}
+
+function frozenTaxonomyRow(row) {
+  const projected = { ...row };
+  for (const [field, aliases] of Object.entries(FRONTIER44_FROZEN_ALIASES)) {
+    if (Object.hasOwn(aliases, row[field])) projected[field] = aliases[row[field]];
+  }
+  return projected;
+}
+
 function validate(rows, runFilter) {
   const ids = new Set();
   const errs = [];
@@ -283,9 +345,11 @@ function validate(rows, runFilter) {
   // Invalid supersedes remains a validation failure, never an exemption.
   const selectedRows = runFilter ? rows.filter(row => row.run === runFilter) : rows;
   const active = new Set(activeOwnershipRows(selectedRows, errs));
+  const frozenRows = frozenFrontier44Rows(rows, runFilter, errs);
   for (const row of rows) {
     if (runFilter && row.run !== runFilter) { if (row.defect_id) ids.add(row.defect_id); continue; }
-    errs.push(...validateRow(row, ids, { historicalTaxonomy: !active.has(row) }));
+    errs.push(...validateRow(frozenRows.has(row) ? frozenTaxonomyRow(row) : row, ids,
+      { historicalTaxonomy: !active.has(row) }));
   }
   return errs;
 }

@@ -201,6 +201,19 @@ archived successor deltas within completed native repair assignments. This
 preserves historical evidence only; current review contexts and every gate still
 apply to the actual current carriers.
 
+The frontier-44 six-step defect ledger retains its original frozen Step-3
+taxonomy bytes. `defect-ledger validate` and `check` interpret the historical
+aliases only after matching the original 1,284-row projection's pinned hash
+and successfully verifying the native Step-3 closure. Validation maps proof
+and fact loci to `proof-step` and `facts-block`, omitted example hypotheses to
+`statement`, the source DOI and page inventory loci to `frontmatter`, and the
+page Objective to `page-summary`. Original proof-gap/derivation/field labels
+map to `unsupported-inference`, the compound inference/type label to
+`invalid-inference`, `alpha` to `group-alpha`, and `repaired` to `fixed`.
+All original labels and evidence remain in the ledger; no receipt is resealed.
+Every structural, severity, ownership and closure check still applies, and new
+appends and later Step-5 rows retain the strict schema.
+
 ## Run controls and cutover
 
 Use `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts` with the ordinary
