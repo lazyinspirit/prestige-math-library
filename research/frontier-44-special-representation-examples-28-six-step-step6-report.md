@@ -19,7 +19,7 @@ No documented deferrals.
 - Current judge verdicts complete: 818/818.
 - Terminal resolutions after the 1-rejudge cap: 0.
 - Judge closure: closed; workflow-owned blockers: 0.
-- Evidence fingerprint: `36d1e6d9983d5bade2ef9cb123606d21f5cce1529d896067b7f7266871900b69`.
+- Evidence fingerprint: `6240f11f37ba85b5a9d736a1695075c983a93bfd5fc4989b6a6514e09c00c32f`.
 
 ## Fatal mathematical defects — exhaustive ledger table
 
