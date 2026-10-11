@@ -197,8 +197,9 @@ function frozenSupportingEvidence(root,run,supporting) {
   const evidence={};
   for(const [path,hash]of Object.entries(supporting)){
     // Keep ordinary immutable evidence at its original path. Only batch
-    // metadata needs a separate durable historical carrier.
-    if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))){
+    // metadata and shared ledgers need durable historical carriers.
+    if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))
+      && !['research/defect-ledger.jsonl','research/DEFECT-LEDGER.md','research/published-consumer-supplier-ledger.md'].includes(path)){
       evidence[path]=hash;continue;
     }
     const history=digest(readFileSync(path,'utf8'))===hash?null:supportingMetadataHistory({root,run},path,hash);
