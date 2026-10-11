@@ -487,7 +487,13 @@ function refuseCrossScopeRenames(root, scope) {
     // working diffs also omit untracked destinations. Fail closed on an
     // ambiguous cross-boundary deletion/addition pair, rather than treating
     // the absence of an R record as proof that no rename occurred.
-    if (prefix[0] === 'HEAD') added.push(...nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z'])));
+    if (prefix[0] === 'HEAD') {
+      // Corpus-sized inventories exceed V8's variadic argument limit. Append
+      // each exact Git path without changing rename-check order or coverage.
+      for (const path of nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z']))) {
+        added.push(path);
+      }
+    }
     for (const from of deleted) {
       const to = added.find(path => scope.owns(from) !== scope.owns(path));
       if (to) throw Error('closeout: ambiguous cross-scope deletion/addition ' + from + ' -> ' + to + '; reconcile ownership before closeout');
