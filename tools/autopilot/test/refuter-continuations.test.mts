@@ -47,6 +47,24 @@ test('opt-in exact native coverage preserves siblings and original observations'
   assert.ok(readFileSync(join(f.repo, 'research/r-old-report.json'), 'utf8').includes('def-context'));
 });
 
+test('a genuine incomplete report requires fresh native reading, never manufactured coverage', t => {
+  const f = fixture(t);
+  const report = { batch: '7', opened: ['def-a'], not_opened: [], flagged: [], coverage_note: 'One assigned subject omitted.' };
+  f.write('research/r-refute-7.json', report); f.write('research/r-old-report.json', report);
+  f.write('research/r-step3-scope-7.json', { refuter_scope: ['def-a', 'def-b'] });
+  f.write('items/def-b.md', 'missing carrier');
+  const digest = (path: string) => createHash('sha256').update(readFileSync(join(f.repo, path))).digest('hex');
+  f.write('research/r-dispatch/refuter-refute-7.result.json', { run: 'r', role: 'refuter', label: 'refute-7', covers: ['7'], ok: true, exit_code: 0, ended_at: '2026-10-08T04:19:33Z', tail: JSON.stringify(report) });
+  f.entry.previous_result.sha256 = digest(f.entry.previous_result.path);
+  f.entry.report_sha256 = digest(f.entry.report_path);
+  f.entry.original_report.sha256 = f.entry.report_sha256;
+  f.entry.scope_sha256 = digest('research/r-step3-scope-7.json');
+  f.entry.subjects.push({ id: 'def-b', path: 'items/def-b.md', sha256: digest('items/def-b.md') });
+  f.save(); refuterContinuations(f.ctx, f.stage, true);
+  assert.deepEqual([...covered(join(f.repo, 'research/r-dispatch'), refuterContinuationPattern(f.ctx, f.stage))], ['8']);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo, f.entry.report_path), 'utf8')).opened, ['def-a']);
+});
+
 test('authorization, unit, report, subject and label guards reject drift', t => {
   for (const mutate of [
     (f: any) => { f.auth.authorized_by = 'helper'; },

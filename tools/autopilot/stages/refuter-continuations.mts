@@ -51,9 +51,13 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
       if (digest(scopeBytes) !== entry.scope_sha256) reject();
       const scope = JSON.parse(scopeBytes.toString()), ids = entry.subjects.map((s: any) => s.id);
       if (!Array.isArray(scope.refuter_scope) || old.not_opened.length
-        || new Set(old.opened).size !== old.opened.length
-        || scope.refuter_scope.some((id: string) => !old.opened.includes(id))
-        || old.opened.length <= scope.refuter_scope.length) reject();
+        || !old.opened.length || new Set(old.opened).size !== old.opened.length) reject();
+      const missing = scope.refuter_scope.filter((id: string) => !old.opened.includes(id));
+      const extra = old.opened.filter((id: string) => !scope.refuter_scope.includes(id));
+      // A strict subset needs genuine additional reading; a strict superset
+      // needs corrected coverage attribution. Neither is completed coverage.
+      // Keep one bounded fresh native read for either exact output defect.
+      if ((!missing.length && !extra.length) || (missing.length && extra.length)) reject();
       if (new Set(ids).size !== ids.length || ids.length !== scope.refuter_scope.length
         || scope.refuter_scope.some((id: string) => !ids.includes(id))) reject();
       const manifest = JSON.parse(readFileSync(join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.pages.json`), 'utf8'));

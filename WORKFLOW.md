@@ -130,6 +130,12 @@ reader receipt and unchanged finding/report. The original reported digest stays
 visible, but the observation is explicitly unbound: historical uncertainty,
 independent current-source review, ledger closure and all gates remain required.
 
+The existing one-shot native refuter coverage continuation also handles a
+completed report that omits an assigned subject. Archive the exact original
+report/result, drain writers and bind the complete current refuter inventory
+before dispatch. Only a fresh successful native correction result supplies
+coverage; never add an unread subject to the old report or waive collection.
+
 Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.
