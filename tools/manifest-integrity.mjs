@@ -6,7 +6,7 @@
 // verified sources, complete proof contracts), reviewed by a group Alpha, and
 // then **disappeared**. Not deferred, not declined, not reported — removed from
 // the batch manifest, the coverage harvest and the contract file, between the
-// step-3 review and the step-4 splice.
+// step-3 review and the step-3 splice.
 //
 // Every gate passed. That is the point: `coverage-checklist`, `content-policy`,
 // `validate-plan`, `precheck` and the whole repo-wide sweep all validate what is
@@ -109,7 +109,7 @@ if (asJson) {
     console.log(`\nSCOPE LOSS — ${missing.length} page(s) left the run without a disposition:`);
     for (const m of missing) console.log(`  ${m.id}  (${m.kind}, batched at ${m.batch})`);
     console.log('\nA page may move between batches or be split into new pages. It may not vanish.');
-    console.log('If it was genuinely dropped, that is an owner decision and belongs in the step-8 report,');
+    console.log('If it was genuinely dropped, that is an owner decision and belongs in the step-6 report,');
     console.log('not in a silent manifest edit.');
   }
   if (added.length) {

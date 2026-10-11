@@ -85,7 +85,7 @@ export async function collect(root,outDir,excludeSnapshot=null) {
     const contentKey=`${kind}:${entry.run}:${entry.sha256}`;
     if(seenContent.has(contentKey)){entry.alias_of=seenContent.get(contentKey);entry.accounting='byte-identical-copy';continue;}
     seenContent.set(contentKey,p);entry.accounting='represented';
-    if(/\/fixture\//.test(p)||/step7scopetest\d+|judge-context-injection-test/.test(p)){entry.accounting='test-fixture-excluded';continue;}
+    if(/\/fixture\//.test(p)||/step5scopetest\d+|judge-context-injection-test/.test(p)){entry.accounting='test-fixture-excluded';continue;}
     try{
       if(kind==='dispatch'||kind==='state'){
         const raw=JSON.parse(fs.readFileSync(full,'utf8')),run=raw.run??entry.run;entry.run=run;const st=stats(run);

@@ -91,9 +91,9 @@ if (mode === 'export') {
       : file.endsWith('.jsonl') ? text.split(/\r?\n/).filter(Boolean).map(l => JSON.stringify(migrateJson(JSON.parse(l), source, run, defectMap))).join('\n') + '\n' : text;
     outputs.set(`research/${run}-${migrateSuffix(suffix)}`, migrated);
   }
-  for (const [file, text] of outputs) if (/-step5-scope-\d+\.json$/.test(file)) {
+  for (const [file, text] of outputs) if (/-step3-scope-\d+\.json$/.test(file)) {
     const scope = JSON.parse(text), batch = scope.batch;
-    if (scope.version === 3) scope.baseline_sha256 = sha(outputs.get(`research/${run}-step5-hash-${batch}-pre-5a.json`));
+    if (scope.version === 3) scope.baseline_sha256 = sha(outputs.get(`research/${run}-step3-hash-${batch}-pre-3a.json`));
     else if (scope.version === 2) {
       scope.reader_report_sha256 = sha(outputs.get(`research/${run}-reader-findings-${batch}.json`));
       scope.refuter_report_sha256 = sha(outputs.get(`research/${run}-refute-${batch}.json`));
@@ -118,7 +118,7 @@ if (mode === 'export') {
     checked(['tools/defect-ledger.mjs', 'append', '--file', defectFile]);
   }
   // Current tooling verifies every imported decision before writing fresh state.
-  checked(['tools/step5-scope.mjs', 'check', '--run', run, '--phase', 'adjudicate']);
+  checked(['tools/step3-scope.mjs', 'check', '--run', run, '--phase', 'adjudicate']);
   const hashes = Object.fromEntries([...outputs].map(([file]) => [file, sha(fs.readFileSync(R(file)))]));
   put(`research/${run}-checkpoint-import.json`, { version: 1, run, source, workflow_revision: revision,
     authorized_entry: 'post-review', at: new Date().toISOString(), export_path: exportPath,
@@ -137,6 +137,6 @@ if (mode === 'export') {
   if (sha(fs.readFileSync(R(record.export_path))) !== record.export_sha256) throw Error('Source export changed');
   const exported = json(record.export_path);
   verifyFiles(exported.files); verifyFiles(record.imported_artifact_hashes);
-  checked(['tools/step5-scope.mjs', 'check', '--run', run, '--phase', 'adjudicate']);
+  checked(['tools/step3-scope.mjs', 'check', '--run', run, '--phase', 'adjudicate']);
   console.log(`checkpoint-import: ${record.item_ids.length} items verified`);
 }

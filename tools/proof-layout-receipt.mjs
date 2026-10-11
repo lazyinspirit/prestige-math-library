@@ -2,7 +2,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO, WEB_DIR, precheckSource } from './paths.mjs';
-import { runScope, sha256, splitFrontmatter } from './step8-lib.mjs';
+import { runScope, sha256, splitFrontmatter } from './step6-lib.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { LAYOUT_GATES } from './proof-layout-core.mjs';
 
@@ -17,7 +17,7 @@ export function proofLayoutScope(run, root = REPO) {
     || touches.snapshots.some(s => !s.hashes || typeof s.hashes !== 'object')) throw Error('proof-layout: missing or malformed touch snapshots');
   // The current batch manifests own validator subjects. Touch snapshots are
   // historical corpus inventories, including retired IDs and unrelated repairs;
-  // they must not create Step-8 subjects (CLAUDE.md §25).
+  // they must not create Step-6 subjects (CLAUDE.md §25).
   const manifestFiles = [...new Set(scope.pages.map(page => {
     if (!/^\d+$/.test(page.batch)) throw Error(`proof-layout: page ${page.id} has no valid manifest batch`);
     return `research/${run}-batch-${page.batch}.pages.json`;
@@ -82,7 +82,7 @@ export function proofLayoutDependencies() {
     ...sourceFiles(join(WEB_DIR, 'components/library')),
     ...sourceFiles(join(WEB_DIR, 'lib')),
     join(WEB_DIR, 'package.json'), join(WEB_DIR, 'tsconfig.json'), precheckSource(),
-    ...['proof-layout-core.mjs', 'proof-layout-render.mts', 'proof-layout.mjs', 'proof-layout-receipt.mjs', 'paths.mjs', 'step8-lib.mjs', 'frontmatter-list.mjs', 'item-hash.mjs'].map(f => join(REPO, 'tools', f)),
+    ...['proof-layout-core.mjs', 'proof-layout-render.mts', 'proof-layout.mjs', 'proof-layout-receipt.mjs', 'paths.mjs', 'step6-lib.mjs', 'frontmatter-list.mjs', 'item-hash.mjs'].map(f => join(REPO, 'tools', f)),
   ];
   for (const lock of ['package-lock.json', 'pnpm-lock.yaml', 'yarn.lock']) if (existsSync(join(WEB_DIR, lock))) files.push(join(WEB_DIR, lock));
   for (const pkg of ['react', 'react-dom', 'react-markdown', 'remark-math', 'rehype-katex', 'katex']) files.push(join(WEB_DIR, 'node_modules', pkg, 'package.json'));

@@ -5,7 +5,7 @@ import { chmodSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readlinkSyn
   rmSync, symlinkSync, unlinkSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { sha256 } from './step8-lib.mjs';
+import { sha256 } from './step6-lib.mjs';
 import { assertOwnedWorkingPreserved, assertOutsidePreservationSame, assertCurrentOutsidePreserved,
   captureOutsidePreservation } from './run-commit-scope.mjs';
 

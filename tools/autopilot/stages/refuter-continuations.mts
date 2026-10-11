@@ -6,10 +6,10 @@ import { createHash } from 'node:crypto';
  * The immutable archive binds old observations; current guards run only before
  * dispatch, because the new native report legitimately replaces the old one. */
 export function refuterContinuations(ctx: any, original: any, beforeDispatch = false): any[] {
-  const path = join(ctx.repo, 'research', `${ctx.run}-step5-refuter-continuations.json`);
+  const path = join(ctx.repo, 'research', `${ctx.run}-step3-refuter-continuations.json`);
   if (!existsSync(path)) return [];
   const row = JSON.parse(readFileSync(path, 'utf8'));
-  const reject = () => { throw Error('Invalid owner Step-5 refuter coverage continuation'); };
+  const reject = () => { throw Error('Invalid owner Step-3 refuter coverage continuation'); };
   const digest = (value: any) => createHash('sha256').update(value).digest('hex');
   const bound = (ref: any) => {
     if (!ref || typeof ref.path !== 'string' || !ref.path.startsWith(`research/${ctx.run}-`)
@@ -45,9 +45,9 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
     if (beforeDispatch) {
       // Any completed fresh attempt, including failure, holds rather than loops.
       if (existsSync(join(ctx.repo, 'research', `${ctx.run}-dispatch`, `refuter-${label}.result.json`)))
-        throw Error('Step-5 refuter correction already attempted; owner review required');
+        throw Error('Step-3 refuter correction already attempted; owner review required');
       if (digest(readFileSync(join(ctx.repo, entry.report_path))) !== entry.report_sha256) reject();
-      const scopeBytes = readFileSync(join(ctx.repo, 'research', `${ctx.run}-step5-scope-${unit}.json`));
+      const scopeBytes = readFileSync(join(ctx.repo, 'research', `${ctx.run}-step3-scope-${unit}.json`));
       if (digest(scopeBytes) !== entry.scope_sha256) reject();
       const scope = JSON.parse(scopeBytes.toString()), ids = entry.subjects.map((s: any) => s.id);
       if (!Array.isArray(scope.refuter_scope) || old.not_opened.length
@@ -79,9 +79,9 @@ export function refuterContinuationPattern(ctx: any, original: any): RegExp {
   return new RegExp(`^(?!refuter-refute-${unit}\\.result\\.json$)(?:${pattern.source}|refuter-${entries[0].label}\\.result\\.json)$`, pattern.flags);
 }
 
-/** Applied once by the ordinary Step-5 table; alternate wrappers inherit it. */
+/** Applied once by the ordinary Step-3 table; alternate wrappers inherit it. */
 export function withRefuterContinuation(original: any): any {
-  if (original.id !== '5a-refute') return original;
+  if (original.id !== '3a-refute') return original;
   return { ...original,
     pattern: (ctx: any) => refuterContinuationPattern(ctx, original),
     plan: (ctx: any, pending: string[]) => {

@@ -4,13 +4,13 @@ import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {freezeFrontier} from './step7-rounds.mjs';
-import {statementHash} from './step7-statement.mjs';
+import {freezeFrontier} from './step5-rounds.mjs';
+import {statementHash} from './step5-statement.mjs';
 import {syncMaintenance,prepareMaintenance,collectMaintenance,maintenanceStatus,maintenanceUnits} from './consumer-maintenance.mjs';
 
 const run='fixture';
 const carrier=(id,deps=[],status='draft',statement='Old statement.')=>`---\nid: ${id}\nstatus: ${status}\ndeps: [${deps.join(', ')}]\n---\n\n## Statement\n${statement}\n\n## Proof\nOriginal proof.\n`;
-function setup(t){const root=mkdtempSync(join(tmpdir(),'consumer-maintenance-'));t.after(()=>rmSync(root,{recursive:true,force:true}));mkdirSync(join(root,'items'));mkdirSync(join(root,'research',`${run}-step7-v2`),{recursive:true});writeFileSync(join(root,'research',`${run}-step7-v2`,'frontier.json'),JSON.stringify(freezeFrontier({run,batches:[{id:'batch',items:['supplier','frontier','published-frontier']}]})));for(const [id,deps,status] of [['supplier',[]],['outside',['supplier'],'published'],['next',['outside']],['frontier',['outside']],['published-frontier',['supplier'],'published'],['unrelated',[]]])writeFileSync(join(root,'items',`${id}.md`),carrier(id,deps,status));return root;}
+function setup(t){const root=mkdtempSync(join(tmpdir(),'consumer-maintenance-'));t.after(()=>rmSync(root,{recursive:true,force:true}));mkdirSync(join(root,'items'));mkdirSync(join(root,'research',`${run}-step5-v2`),{recursive:true});writeFileSync(join(root,'research',`${run}-step5-v2`,'frontier.json'),JSON.stringify(freezeFrontier({run,batches:[{id:'batch',items:['supplier','frontier','published-frontier']}]})));for(const [id,deps,status] of [['supplier',[]],['outside',['supplier'],'published'],['next',['outside']],['frontier',['outside']],['published-frontier',['supplier'],'published'],['unrelated',[]]])writeFileSync(join(root,'items',`${id}.md`),carrier(id,deps,status));return root;}
 function change(root,id,before,after){const path=join(root,'items',`${id}.md`),text=readFileSync(path,'utf8'),changed=text.replace(before,after);writeFileSync(path,changed);return {id,before_statement_sha256:statementHash(text),after_statement_sha256:statementHash(changed)};}
 function reports(root,pack,decisions={}){for(const lane of pack.lanes){const rows=lane.ids.map(id=>({id,disposition:'sound',reason:'The supplier conclusion used by this proof remains valid under its local hypotheses.',understanding:{basis:'familiarity',uncertainty:false,evidence:'Checked the specific conclusion against the locally assumed hypotheses.'},event_uses:Object.values(pack.obligations).filter(o=>o.id===id).map(o=>({event_key:o.event_key,affected_use:'Application of the supplier conclusion in the original proof.',reason:'Local hypotheses imply the new supplier hypotheses.'})),edits:[],...decisions[id]}));writeFileSync(join(root,lane.report),JSON.stringify({run,pack:pack.id,lane:lane.lane,input_sha256:createHash('sha256').update(readFileSync(join(root,lane.assignment),'utf8')).digest('hex'),decisions:rows}));}}
 const repair=(before,after)=>({disposition:'repaired',affected_use:'The original proof applies the supplier without the new hypothesis.',invalidated_claim:'The unconditional conclusion no longer follows.',minimality:'Add exactly the missing hypothesis to the contract.',edits:[{before,after,necessity:'The new supplier hypothesis must be assumed.'}]});
@@ -59,7 +59,7 @@ test('explicit discoveries require exact use and do not requeue completed histor
 
 test('frozen task, assignment and frontier tampering blocks continuation',t=>{
   const root=setup(t);syncMaintenance(root,run,[change(root,'supplier','Old statement.','New statement.')]);const {pack}=prepareMaintenance(root,run),path=join(root,pack.lanes[0].task),original=readFileSync(path,'utf8');writeFileSync(path,original+'Tampering.');assert.throws(()=>prepareMaintenance(root,run),/frozen input changed/);writeFileSync(path,original);
-  const frontierPath=join(root,'research',`${run}-step7-v2`,'frontier.json'),frozen=JSON.parse(readFileSync(frontierPath,'utf8'));frozen.ids.push('outside');writeFileSync(frontierPath,JSON.stringify(frozen));assert.throws(()=>syncMaintenance(root,run,[]),/original frontier changed/);
+  const frontierPath=join(root,'research',`${run}-step5-v2`,'frontier.json'),frozen=JSON.parse(readFileSync(frontierPath,'utf8'));frozen.ids.push('outside');writeFileSync(frontierPath,JSON.stringify(frozen));assert.throws(()=>syncMaintenance(root,run,[]),/original frontier changed/);
 });
 
 test('collection commit restart is idempotent and preserves one immutable evidence receipt',t=>{

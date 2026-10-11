@@ -1,6 +1,6 @@
 export const TAU = Math.PI * 2;
 export const COLORS = ['#5abdff', '#aa7951', '#ff490d', '#b7a7cd'];
-export const colorIndex = kind => kind === 'definition' ? 0
+export const colorIndex = kind => ['definition', 'algorithm'].includes(kind) ? 0
   : ['theorem', 'lemma', 'proposition', 'corollary'].includes(kind) ? 1
   : ['example', 'counterexample', 'false-statement'].includes(kind) ? 2 : 3;
 export const clamp = (n, min, max) => Math.max(min, Math.min(max, n));

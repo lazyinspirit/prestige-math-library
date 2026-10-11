@@ -20,7 +20,7 @@ import { createSlotPool } from './slots.mjs';
 import { workflowAgentBudget } from './workflow-agent-budget.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage, readDispatchTerminal } from './dispatch-usage.mjs';
-import { checkPairAuthorArtifacts } from './dispatch-author-artifacts.mjs';
+import { captureRepairControl, verifyRepairControl } from './batch-scope-review.mjs';
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 import { resolveDispatchProfile } from './model-profile-overrides.mjs';
@@ -41,6 +41,8 @@ const AUTO_COMPACT_TOKEN_LIMIT = 500_000;
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
+  'scope-reviewer': { ...lane('agentic'), sandbox:'read-only', effort:'max', cap:MAX_RUN_BATCHES, web:true, requiresTask:true, why:'whole-batch scope/prerequisite review' },
+  'scope-repairer': { ...lane('agentic'), sandbox:'workspace-write', effort:'max', cap:MAX_RUN_BATCHES, web:true, requiresTask:true, why:'batch-owned scope/prerequisite repair' },
   // `web: true` on the two source-reading build lanes (owner, 2026-08-11). Every
   // source-review roles already had it; the build roles that LEVELS.md §Step 1 orders to
   // "search reputable mathematical sources on the web" did not. A probe on
@@ -52,12 +54,12 @@ const ROLES = Object.freeze({
   // One Beta or reader owns one batch. The pair ceiling permits one batch per
   // pair, so neither lane should add an artificial second wave.
   beta:         { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'batch scaffolding and scoped later repairs; full run width' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-5 audit of a foreign batch; full run width' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-3 audit of a foreign batch; full run width' },
   // `web: true` is a required capability. A Codex lane
   // without `tools.web_search` does not fail, it asserts from memory (the failure
   // this file records for the build lanes before 2026-08-11). The flag records
   // which lanes must not lose it — Alpha's step-3 criterion 2
-  // is source faithfulness, and step 5 has it probe an AI-generated claim for
+  // is source faithfulness, and step 3 has it probe an AI-generated claim for
   // counterexamples, both source work rather than recall — and because the Codex
   // return path reads it as a real switch.
   //
@@ -72,12 +74,12 @@ const ROLES = Object.freeze({
   // same-batch exclusion determine which authors may safely overlap.
   'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'pair authoring and pathway prose; full run width with stage ownership guards' },
   // Final reporting is read-only; source uncertainty still requires research.
-  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 1, web: true, requiresTask: true, why: 'Step-8 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
-  // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The Step-7 stage
+  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 1, web: true, requiresTask: true, why: 'Step-6 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
+  // `alpha-adjudicate` — step 5 ONLY (owner, 2026-08-24). The Step-5 stage
   // selects the Sol 6.1 high profile, matching the current role default.
   // Historical model identities remain in the registry for existing receipts.
   //
-  // Step 7 is partitioned by the same group assignment, so this cap tracks the
+  // Step 5 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint
   // adjudication groups behind an otherwise legal partition.
   //
@@ -88,25 +90,25 @@ const ROLES = Object.freeze({
   // rows for different items do not race; two Alphas rewriting the same file
   // would, which is why the task file says append and never rewrite.
   //
-  // Step 7 is the sharpest role in the build: a `false_positive` adjudication
+  // Step 5 is the sharpest role in the build: a `false_positive` adjudication
   // silently discards a real defect and no later gate re-examines it. It keeps
   // the highest effort supported by the active adjudication lane.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Step-7 logical adjudication and repair; stage profile selects Sol 6.1 high' },
-  'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 3, web: true, requiresTask: true, why: 'Three Step-7 owner agents repair all assigned downstream consumers, including published items, before centralized recertification; stage profile selects Sol 6.1 high' },
-  // `final-adjudicator` — the independent Step-7 close after the owning group
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Step-5 logical adjudication and repair; stage profile selects Sol 6.1 high' },
+  'alpha-repair': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 3, web: true, requiresTask: true, why: 'Three Step-5 owner agents repair all assigned downstream consumers, including published items, before centralized recertification; stage profile selects Sol 6.1 high' },
+  // `final-adjudicator` — the independent Step-5 close after the owning group
   // Alpha's initial repair receives a rejecting Sol rejudge. It is
   // intentionally a fresh Astra conversation rather than a
   // resume of the Alpha: independence is the point of the escalation. Medium
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
-  // `alpha-batch-read` — the step-6 pass that reads a batch's A/B pairs while the
-  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the Sol 6.1
+  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, requiresTask: true, why: 'Step-5 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
+  // `alpha-batch-read` — the step-4 pass that reads a batch's A/B pairs while the
+  // judges are still sweeping (owner, 2026-08-25). Step 4 applies the Sol 6.1
   // high profile; the durable digest hands its findings to a fresh Sol 6.1 high
-  // adjudicator at Step 7.
+  // adjudicator at Step 5.
   //
-  // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 6 judges a frozen text; an
+  // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 4 judges a frozen text; an
   // edit landing mid-sweep voids verdicts already cast against the old bytes and
   // leaves a level judged in two states with nothing on disk saying so. `--sandbox
   // read-only` on codex is a kernel guarantee, not an instruction the model could
@@ -116,11 +118,11 @@ const ROLES = Object.freeze({
   // gate can read.
   //
   // `alpha-batch-read` — a rejection-blind whole-batch read while the judges
-  // sweep frozen text. Its schema-constrained digest is the Step-7 handoff; the
+  // sweep frozen text. Its schema-constrained digest is the Step-5 handoff; the
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // Read-only readers also consult authoritative web sources when unsure.
-  'alpha-batch-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'Sol 6.1 high step-6 whole-batch read; one read-only lane per batch, handed to step 7 by compact digest' },
+  'alpha-batch-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'Sol 6.1 high step-4 whole-batch read; one read-only lane per batch, handed to step 5 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -216,7 +218,7 @@ const outputSchemaPath = option('--output-schema');
 const resultArtifactPath = option('--result-artifact');
 const requestedProfileName = option('--profile');
 // Optional persistent homes and explicit session resume for callers that need
-// them. Step-6 batch reviewers use fresh sessions and hand off durable digests.
+// them. Step-4 batch reviewers use fresh sessions and hand off durable digests.
 const sessionHomeArg = option('--session-home');
 // Never use an implicit most-recent session: concurrent dispatches are unrelated.
 const resumeSession = option('--resume-session');
@@ -327,17 +329,7 @@ and consult authoritative sources, reading the complete relevant argument.
 Report unresolved uncertainty and potentially defective published items to the
 owner with exact evidence. Never invent confidence, source reading or proof
 completion. This rule applies to every workflow role, including reviewers.\n`;
-if (resolvedBrief === join(REPO, 'briefs/group-author.md')) {
-  prompt += `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
-evidence. Read current owned files and relevant sibling pair or library files;
-avoid historical runs and dispatch logs.
-After each item, checkpoint in the assigned notes: IDs, exact claim/conventions,
-source locators, dependencies, decisions, checks, open gaps, and next action.
-Context may compact mid-proof. Resume by rereading those notes, the current item,
-dependency statements, and source passages. Never infer a missing hypothesis from
-a summary. Preserve independent reviews; report unrecoverable evidence as a blocker.
-Use only task-authorized notes; do not create transcripts.\n`;
-} else if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
+if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
 prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
 exclude dispatch logs from routine content searches. Fetch complete relevant source
 sections and dependency statements, using bounded output chunks. A truncated result
@@ -516,9 +508,9 @@ const sourceNetworkArgs = spec.sandbox === 'workspace-write' && spec.web === tru
 
 // RESUMING A SESSION INTO A DIFFERENT SANDBOX (owner, 2026-08-25).
 //
-// A group Alpha reads its pairs at step 6 and adjudicates them at step 7, and it
+// A group Alpha reads its pairs at step 4 and adjudicates them at step 5, and it
 // must be the SAME agent — the point of reading early is to hold the mathematics
-// in context before the objections arrive. But step 6 judges a frozen text, so
+// in context before the objections arrive. But step 4 judges a frozen text, so
 // the reading half must be read-only, and the adjudicating half must be able to
 // repair. One `codex exec` cannot be both: `--sandbox` is fixed for the life of
 // the process.
@@ -683,6 +675,7 @@ const codexSessionId = (result) => {
   return found[0].id;
 };
 
+const repairControl = role === 'scope-repairer' ? captureRepairControl(REPO,run,covers[0]) : null;
 const result = await new Promise((resolve) => {
   let bin, args, extraEnv;
   // Give each agent an isolated home containing only its auth record so
@@ -810,8 +803,12 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 // model—materialises the schema-constrained final response. This keeps such a
 // role unable to edit the evidence it is judging while still giving the next
 // gate a durable JSON receipt. A missing or malformed final message turns the
-// dispatch red. Step-6 batch reviewers use this path for their Step-7 digests.
+// dispatch red. Step-4 batch reviewers use this path for their Step-5 digests.
 // Validate locally as well: not every provider enforces --output-schema.
+if (repairControl) {
+  try { verifyRepairControl(repairControl); } catch(error) { result.code=1; result.stderr+=`\n${error.message}`; }
+}
+
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   try {
     const parsed = parseCodexOutput(readFileSync(lastMessagePath, 'utf8'));
@@ -829,18 +826,7 @@ if (resultArtifactPath && result.code === 0 && !result.timedOut) {
 }
 
 let authorArtifacts = null;
-if (resolvedBrief === join(REPO, 'briefs/group-author.md') && /^step3b-pair-/.test(label)) {
-  try {
-    authorArtifacts = checkPairAuthorArtifacts(REPO, run, covers);
-  } catch (error) {
-    authorArtifacts = { required: true, ok: false, error: error.message };
-  }
-  if (!authorArtifacts.ok && result.code === 0 && !result.timedOut) {
-    result.code = 1;
-    result.stderr += `\nPair author left required artifacts incomplete: ${authorArtifacts.error
-      ?? authorArtifacts.missing.join(', ')}`;
-  }
-}
+
 
 const ended = new Date();
 const record = {

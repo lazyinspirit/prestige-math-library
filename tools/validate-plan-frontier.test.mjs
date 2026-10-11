@@ -133,7 +133,7 @@ test('supplier page cycles are checked through current external page inventories
 
 test('current manifest inventory replaces stale canonical items before splice', t => {
   const f = fixture(t); f.save();
-  // Canonical absence is normal until Step 4; stale canonical subject items
+  // Canonical absence is normal until Step 3; stale canonical subject items
   // must not remain validator subjects after the current inventory is overlaid.
   f.pages[1].items = [{ id: 'wrong-stale', kind: 'theorem', deps: ['lem-missing'] }];
   f.save();

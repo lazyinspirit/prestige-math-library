@@ -14,6 +14,8 @@
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { assignmentCLI } from './alpha-group-assignment.mjs';
+import { MAX_RUN_BATCHES, MAX_GROUPS, MAX_BATCHES_PER_GROUP } from './autopilot/src/capacity.mjs';
 
 export function loadPlan(repo) {
   return JSON.parse(readFileSync(join(repo, 'research', 'plan-spec.json'), 'utf8'));
@@ -168,6 +170,7 @@ export function syncManifestsPreservingItems(repo, run) {
     writeFileSync(path, JSON.stringify(entries, null, 2) + '\n');
     written.push({ batch, path, pages: entries.map((entry) => entry.id) });
   }
+  if (assignmentCLI({repo, argv:['--run',run,'--generate'], maxRunBatches:MAX_RUN_BATCHES, maxGroups:MAX_GROUPS, maxBatches:MAX_BATCHES_PER_GROUP})) throw Error('Planning group metadata failed');
   return written;
 }
 
@@ -221,5 +224,6 @@ export function writeManifests(repo, run, batchGroups, { force = false, startAt 
     writeFileSync(path, JSON.stringify(entries, null, 2) + '\n', { flag: force ? 'w' : 'wx' });
     written.push({ batch, path, pages: entries.map((e) => e.id) });
   });
+  if (assignmentCLI({repo, argv:['--run',run,'--generate'], maxRunBatches:MAX_RUN_BATCHES, maxGroups:MAX_GROUPS, maxBatches:MAX_BATCHES_PER_GROUP})) throw Error('Planning group metadata failed');
   return written;
 }

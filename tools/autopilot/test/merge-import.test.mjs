@@ -17,8 +17,8 @@ test('remaps only structural identities, never mathematics or source evidence', 
   assert.deepEqual(remapJson(input, m, 'new', { x: 'new-x' }), {
     ...input, run: 'new', batch: '17', group: 'h', covers: ['17'], obligation: 'reader:17:2', defect_ids: ['new-x'] });
   assert.deepEqual(remapJson({ batch: 1, ordinal: 1 }, m, 'new'), { batch: 17, ordinal: 1 });
-  assert.deepEqual(remapJson({ obligation: 'gate:x', step6_obligation: 'authored:1:thm-x' }, m, 'new', { x: 'new-x' }),
-    { obligation: 'gate:new-x', step6_obligation: 'authored:17:thm-x' });
+  assert.deepEqual(remapJson({ obligation: 'gate:x', step4_obligation: 'authored:1:thm-x' }, m, 'new', { x: 'new-x' }),
+    { obligation: 'gate:new-x', step4_obligation: 'authored:17:thm-x' });
   for (const role of ['touched', 'page']) assert.equal(
     remapJson({ obligation: `${role}:1:id` }, m, 'new').obligation, `${role}:17:id`);
 });

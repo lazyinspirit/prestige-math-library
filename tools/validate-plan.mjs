@@ -135,7 +135,7 @@ function argVal(flag) {
 function die(msg) { console.error(msg); process.exit(2); }
 
 const PREFIX_OF_KIND = {
-  definition: 'def', theorem: 'thm', lemma: 'lem', proposition: 'prop',
+  definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
   'false-statement': 'fs', remark: 'rem',
 };
@@ -181,7 +181,7 @@ const warn = (code, msg) => warns.push(`[${code}] ${msg}`);
 // ---------------------------------------------------------------- index
 
 // Validate canonical page identities before replacing only selected pages.
-// Current item inventories are authoritative before the Step 4 splice; an item
+// Current item inventories are authoritative before the Step 3 splice; an item
 // absent from the canonical plan is allowed, but conflicting ownership is not.
 if (currentPages) for (const page of currentPages) {
   if (spec.pages.filter(p => p.id === page.id).length !== 1)

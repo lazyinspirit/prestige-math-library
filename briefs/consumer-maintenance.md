@@ -17,9 +17,9 @@ assigned existing items, output path and report schema. You are one of three
 disjoint maintenance lanes. Empty lanes return honest empty decisions.
 
 Edit only assigned items outside the immutable frontier. Published frontier
-items belong to ordinary Step 7 and are not your maintenance targets. No new
+items belong to ordinary Step 5 and are not your maintenance targets. No new
 items, unrelated edits, cosmetic improvements or weaker replacement claims.
-This assignment is separate from Step-7 repair, judgment, adjudication and gates.
+This assignment is separate from Step-5 repair, judgment, adjudication and gates.
 Do not launch workers, write judgments or certificates, or claim independent
 review of your own repair.
 
@@ -33,7 +33,7 @@ hypotheses. Record actual understanding, sources read and uncertainty honestly.
 Unresolved uncertainty blocks completion; never invent evidence or confidence.
 
 Keep item ownership disjoint. For necessary shared metadata work, acquire
-`node tools/step7-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`,
+`node tools/step5-shared-write-lock.mjs acquire --owner YOUR_DISPATCH_LABEL`,
 reread the current file, make and check the minimum change, then promptly use
 `release`. Exit 2 means busy: continue independent work and retry before edits.
 Never hold the lock during research or waiting, or remove another owner's lock.
@@ -74,3 +74,5 @@ a transitive closure or edit unassigned discoveries. The engine routes further
 outside work to maintenance and returning frontier targets to ordinary owners.
 Report unfinished work clearly. Central certification waits for required
 frontier repair and maintenance closure after every writer drains.
+
+**Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks.

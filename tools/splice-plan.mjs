@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 // splice-plan — copy a batch's scaffolded item ids into plan-spec.json.
 //
-// WHY THIS IS CODE. Step 4 was dispatched to a lead Alpha. Its receipt records
+// WHY THIS IS CODE. Step 3 was dispatched to a lead Alpha. Its receipt records
 // `item_ids_spliced`, `id_clash_check`, `size_check` and `validate_plan`, and
 // the resulting plan item lists are BYTE-IDENTICAL to the batch manifests. That
 // is transcription plus three mechanical gates — no judgment anywhere in it.
 //
 // Giving a model transcription work is the failure the owner's rule names: it
 // does not error, it returns a plausible answer, and it is wrong at a rate
-// nobody measures. It also cost a whole A/B pair on frontier-14, when a step-4
+// nobody measures. It also cost a whole A/B pair on frontier-14, when a step-3
 // Alpha met a page marked `not ready` and resolved the deadlock by dropping it.
 //
-// The one genuinely cognitive thing step 4 encountered was a `requires`
+// The one genuinely cognitive thing step 3 encountered was a `requires`
 // disagreement between a batch manifest and the plan. That is not spliceable
-// until an Alpha adjudicates it. Ordinary mode records a refusal; Step 5 may
+// until an Alpha adjudicates it. Ordinary mode records a refusal; Step 3 may
 // pass --accept-requires only after its exact adjudication gate has closed.
 //
 //   node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run]
@@ -24,44 +24,26 @@
 // Idempotent: a page whose items are already spliced and identical is left
 // alone. A page whose items are already spliced and DIFFERENT is a hard error,
 // never a silent overwrite — unless `--update` says the difference is a
-// licensed in-flight change (a 5a/5b Alpha added or deleted an item in the
+// licensed in-flight change (a 3a/3b Alpha added or deleted an item in the
 // batch manifest) and the plan should follow it, loudly. `--accept-requires`
-// also reconciles the manifest's exact page prerequisite set after Step 5 has
+// also reconciles the manifest's exact page prerequisite set after Step 3 has
 // adjudicated that metadata carrier.
 //
 // `--verify` exists because the judge sweep expands its `--pages` into item
-// lists via plan-spec.json, which is spliced once at step 4: an item an Alpha
+// lists via plan-spec.json, which is spliced once at step 3: an item an Alpha
 // legitimately added to a manifest afterwards would either escape judging or
 // hard-stop closure. Verify diffs every batch manifest against the plan and
 // fails on any divergence, so the drift is loud before the sweep spends.
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
 import { split, yaml } from './pathway-lib.mjs';
-import { loadStep3, checkStep3 } from './step3-decisions.mjs';
+import { accepted } from './batch-scope-review.mjs';
 
-// Step 3 group authors may insert local A-page definitions/lemmas. Existing
-// inventory must survive in order; current complete author decisions license
-// only these additions, never deletion, rehoming or a new pair.
-function authoredLocalAdditions(page, manifest, have, want) {
-  if (page.kind !== 'A') return false;
-  const old = new Set(have.map(idOf));
-  const retained = want.filter(i => old.has(idOf(i))).map(idOf);
-  if (JSON.stringify(retained) !== JSON.stringify(have.map(idOf))) return false;
-  const added = want.filter(i => !old.has(idOf(i)));
-  if (!added.length || added.some(i => !['definition', 'lemma'].includes(i.kind))) return false;
-  // A Step-3 author may add a local prerequisite to an existing A/B pair.
-  // Its real consumer can be on the A page or the A page's declared B
-  // companion; no other page in the batch licenses this scope change.
-  const companion = manifest.find(candidate => candidate.id === page.companion && candidate.kind === 'B');
-  if (!companion) return false;
-  if (added.some(i => {
-    const id = idOf(i);
-    return ![...want, ...(companion.items ?? [])].some(c => c.id !== id && (c.deps ?? []).includes(id));
-  })) return false;
-  try { return checkStep3(loadStep3(process.cwd(), run), 'final').closed; }
-  catch { return false; }
-}
-
+const acceptedBatch = manifest => {
+  const first=manifest[0]?.id;
+  const file=readdirSync('research').find(name=>name.startsWith(`${run}-batch-`)&&name.endsWith('.pages.json')&&JSON.parse(readFileSync(`research/${name}`,'utf8')).some(page=>page.id===first));
+  return file && accepted(process.cwd(),run,file.match(/-batch-(\d+)\./)[1]);
+};
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
@@ -129,7 +111,7 @@ if (verify) {
   // missing: frontier-15's `cor-cauchy-inequalities` depended on
   // `pi-the-equivalent-characterizations`, whose page was in nobody's
   // `requires`, and the old id-list comparison had no concept of it — the
-  // undeclared prerequisite reached step 4 unflagged.
+  // undeclared prerequisite reached step 3 unflagged.
   const ownerOf = new Map();
   const onDiskPages = new Set();
   for (const f of manifests) {
@@ -170,7 +152,7 @@ if (verify) {
       if (want.length === have.length && want.every((w, k) => w === have[k])) {
         // Same ids is no longer the same PLAN: a deps- or strategy-only edit
         // to a manifest item used to read "already correct" here and never
-        // propagate — step 4 mirrored two repaired item objects into the plan
+        // propagate — step 3 mirrored two repaired item objects into the plan
         // by hand to work around exactly this.
         const changed = (page.items ?? []).filter((i, k) => stable(i) !== stable((target.items ?? [])[k]));
         if (changed.length) {
@@ -284,12 +266,12 @@ for (const b of batchList) {
         // Same ids, changed bodies: a deps/strategy edit on existing items.
         // No scope moved, so this is a REFRESH, not an unlicensed overwrite —
         // the manifest is the batch-level truth and the plan follows it. The
-        // old id-only test read this as "already correct" and step 4 mirrored
+        // old id-only test read this as "already correct" and step 3 mirrored
         // repaired objects into the plan by hand.
         const changed = want.filter((w, k) => stable(w) !== stable(have[k])).map(idOf);
         console.log(`splice-plan: REFRESHING ${page.id} — same ids, ${changed.length} item object(s) changed: ${changed.join(', ')}`);
         itemsChanged = true;
-      } else if (!sameItems && (update || authoredLocalAdditions(page, manifest, have, want))) {
+      } else if (!sameItems && (update || acceptedBatch(manifest))) {
         // A licensed in-flight change: the manifest is the batch-level truth and
         // the plan follows it — loudly, with the delta on the record.
         const wantIds = want.map(idOf);
@@ -319,11 +301,11 @@ for (const b of batchList) {
     const planReq = new Set(target.requires ?? []);
     const onlyManifest = [...manifestReq].filter((r) => !planReq.has(r));
     const onlyPlan = [...planReq].filter((r) => !manifestReq.has(r));
-    if (onlyManifest.length && !acceptRequires) {
+    if (onlyManifest.length && !acceptRequires && !acceptedBatch(manifest)) {
       refusals.push({ batch: String(b), page: page.id, requires: onlyManifest });
       continue;
     }
-    const requiresChanged = acceptRequires && (onlyManifest.length > 0 || onlyPlan.length > 0);
+    const requiresChanged = (acceptRequires || acceptedBatch(manifest)) && (onlyManifest.length > 0 || onlyPlan.length > 0);
     if (requiresChanged) {
       console.log(`splice-plan: RECONCILING ${page.id} requires — plan [${[...planReq].join(', ')}] -> manifest [${[...manifestReq].join(', ')}]`);
     }

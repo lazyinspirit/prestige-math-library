@@ -3,7 +3,7 @@
 // explicit and gate its audit receipt.
 //
 //   node tools/impact-audit.mjs --touches research/level<n>-touches.json \
-//     --from after-authoring [--to step-7] [--receipt research/level<n>-impact.json]
+//     --from after-authoring [--to step-5] [--receipt research/level<n>-impact.json]
 //   node tools/impact-audit.mjs ... --template research/level<n>-impact.json
 //
 // `touchlog` stores both a full mathematical hash and a public-interface hash.
@@ -81,7 +81,7 @@ let ledger;
 try { ledger = JSON.parse(readFileSync(resolvePath(touchesPath), 'utf8')); }
 catch (cause) { die(`cannot read touch ledger ${touchesPath}: ${cause.message}`); }
 const snapshots = Array.isArray(ledger?.snapshots) ? ledger.snapshots : [];
-// A label resolves to its MOST RECENT snapshot (the same rule step7-guard
+// A label resolves to its MOST RECENT snapshot (the same rule step5-guard
 // uses): a re-entered stage re-takes its snapshot under the same label, and
 // first-match resolution would hide every edit made after the first attempt.
 const byLabel = (label) => [...snapshots].reverse().find((snapshot) => snapshot?.label === label);
@@ -126,8 +126,8 @@ function boundResearch(link) {
 }
 function originalClaim(text, kind) {
   const claims = [...split(text).body.matchAll(/^## (Statement|Definition)[ \t]*\r?\n[\s\S]*?(?=^## |$(?![\s\S]))/gm)];
-  const heading = kind === 'definition' ? 'Definition' : 'Statement';
-  if (!['definition', 'lemma', 'theorem', 'proposition', 'corollary'].includes(kind)
+  const heading = ['definition', 'algorithm'].includes(kind) ? 'Definition' : 'Statement';
+  if (!['definition', 'algorithm', 'lemma', 'theorem', 'proposition', 'corollary'].includes(kind)
     || claims.length !== 1 || claims[0][1] !== heading
     || !claims[0][0].replace(/^##[^\n]*\n/, '').trim())
     throw Error('claim preservation needs exactly one nonempty original Statement/Definition');
@@ -259,8 +259,8 @@ if (templatePath) {
 
 // --refresh-receipt: bring a STALE receipt up to the current computation
 // without losing a single written disposition. frontier-15 ended with its
-// receipt one stage stale — 347 dispositions from 5b against 350 affected
-// today — because nothing owned regenerating it after step-8 edits. This
+// receipt one stage stale — 347 dispositions from 3b against 350 affected
+// today — because nothing owned regenerating it after step-6 edits. This
 // syncs the computed scopes and ADDS `pending` rows for newly-affected ids;
 // `pending` is not a valid status, so the receipt check stays red exactly
 // until an Alpha writes the real dispositions. Existing dispositions are

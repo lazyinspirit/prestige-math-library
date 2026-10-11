@@ -1,267 +1,137 @@
-// Step 5: independent readers, read-only refuters, routed batch adjudication,
-// cross-group audit and closure.
-
-import { withStep5bReviewContinuation } from './step5b-review-continuation.mts';
-import { withRefuterContinuation } from './refuter-continuations.mts';
+// Explicit Step 5 repair rounds. Every mathematical writer drains before the
+// one controller certification; only the engine routes or launches judgments.
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
-import { holdStep5 } from './step5-hold.mts';
-import { prepareStep5AdjudicationOrder } from '../../step5-adjudication-order.mjs';
-import { batchAdjudicator, step5Adjudicators } from '../../step5-adjudicators.mjs';
 
-// Step-5 readers, refuters, adjudicators and cross-group agents use Sol 6.1/high.
-// The live engine can reload this module while retaining an older models.mjs import.
-const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+// The battery adapter is also composed into live stage closures. Version its
+// import so a stage reload cannot retain descriptors from before an adapter edit.
+const FRONTIER_GATE_URL=new URL('../../step5-frontier-gate.mjs',import.meta.url),FRONTIER_GATE_STAT=statSync(FRONTIER_GATE_URL);
+const { frontierGateBattery } = await import(
+  `${FRONTIER_GATE_URL.href}?v=${FRONTIER_GATE_STAT.mtimeMs}:${FRONTIER_GATE_STAT.size}`
+);
 
-/** Build Step 5 with the canonical gate helpers from mathlib.mts. */
-export function step5Stages(d: any) {
-  const {
-    gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
-    impactGate, batches, alphaGroups, resultPattern, touchesPath,
-  } = d;
+// The live controller has already cached the workflow's original ESM exports.
+// Version this composed dependency as the root stage loader does for Step 5.
+// Collection runs the workflow CLI in a fresh subprocess and sees the same code.
+const WORKFLOW_URL=new URL('../../step5-workflow.mjs',import.meta.url),WORKFLOW_STAT=statSync(WORKFLOW_URL);
+const { prepareAdjudication, prepareImpact, advanceImpact, impactWork, maintenanceLabel, maintenancePack, workerLabel, workerReport, workflowDir, digest, emptyAdjudicationAssignment, emptyAdjudicationLabel, hasAdjudicatorArtifacts } = await import(
+  `${WORKFLOW_URL.href}?v=${WORKFLOW_STAT.mtimeMs}:${WORKFLOW_STAT.size}`
+);
 
-  /** One batch per lane: readers, refuters and adjudicators never share a lane. */
-  const solo = (_ctx: any, unit: string) => [String(unit)];
-
-  const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
-    gate(`step5-routing-${phase}`,
-      ['node', 'tools/step5-scope.mjs', 'check', '--run', ctx.run, '--phase', phase], {
-        liveness: { pattern: /(\d+) item\(s\) routed/.source, min: 1, unit: 'items routed' },
-      });
-  const decisionStampGate = (ctx: any) => gate('step5-decision-stamp',
-    ['node', 'tools/step5-scope.mjs', 'stamp', '--run', ctx.run]);
-  const auditorCreatedGate = (ctx: any) => gate('step5-auditor-created-certifications',
-    ['node', 'tools/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', '5']);
-
-  return [
-    {
-      id: '5a-prepare',
-      label: 'freeze authored content and the auditor baseline (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'prepare-5a'),
-      artifacts: (ctx: any) => batches(ctx).map((batch: string) =>
-        `research/${ctx.run}-step5-hash-${batch}-pre.json`),
-      concurrency: 1,
-      maxAttempts: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'prepare-5a', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step5-prepare.mjs', '--run', ctx.run], timeout: 3600,
-      }],
-      gatesWaived: 'The tool fails fast: a missing batch manifest, a failing per-batch author check, '
-        + 'or an auditor baseline that would move exits nonzero before any reader starts.',
-    },
-    {
-      id: '5a-read',
-      label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? SOL61_HIGH : undefined,
-      pipeline: 'read',
-      role: 'reader',
-      units: batches,
-      pattern: resultPattern('reader', 'reader-\\d+'),
-      labelFor: (unit: string) => `reader-${unit}`,
-      artifacts: (ctx: any, unit: string) => [
-        `research/${ctx.run}-reader-${unit}.md`,
-        `research/${ctx.run}-reader-findings-${unit}.json`,
-      ],
-      concurrency: MAX_RUN_BATCHES,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
-        role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
-        brief: 'briefs/reader.md',
-        task: 'briefs/tasks/alpha-5a-reader.md',
-        outputSchema: 'briefs/schemas/reader-findings.json',
-        resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
-        timeout: 14400,
-      })),
-      gatesWaived: 'Readers may repair in-flight assigned items; the split, refuter coverage and the full '
-        + '5a-adjudicate battery are what check their work before Step 5b opens.',
-    },
-    {
-      id: '5a-split',
-      label: 'compute reader changes and routing obligations (mechanical)',
-      pipeline: 'read',
-      role: 'tool',
-      units: batches,
-      pattern: resultPattern('tool', 'split-\\d+'),
-      labelFor: (unit: string) => `split-${unit}`,
-      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
-      concurrency: MAX_RUN_BATCHES,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
-        role: 'tool', label: `split-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['node', 'tools/step5-scope.mjs', 'post-reader', '--run', ctx.run,
-          '--batch', String(unit)],
-        timeout: 600,
-      })),
-      gatesWaived: 'Split refuses a post-reader hash that does not match the current manifest, '
-        + 'a removed item or page, and malformed reader findings; its successful result is the scope refuters read.',
-    },
-    {
-      id: '5a-refute',
-      label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL61_HIGH : undefined,
-      pipeline: 'read',
-      role: 'refuter',
-      units: batches,
-      pattern: resultPattern('refuter', 'refute-\\d+'),
-      labelFor: (unit: string) => `refute-${unit}`,
-      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-refute-${unit}.json`,
-      concurrency: MAX_RUN_BATCHES,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
-        role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
-        brief: 'briefs/refuter.md',
-        task: 'briefs/tasks/alpha-5a-refuter.md',
-        outputSchema: 'briefs/schemas/refute-report.json',
-        resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
-        timeout: 10800,
-      })),
-      gatesWaived: 'The read-only report is schema-constrained at dispatch; the following mechanical collect '
-        + 'verifies that opened and not_opened exactly partition the computed refuter scope.',
-    },
-    {
-      id: '5a-collect',
-      label: 'validate refuter coverage and route obligations (mechanical)',
-      pipeline: 'read',
-      role: 'tool',
-      units: batches,
-      pattern: resultPattern('tool', 'collect-\\d+'),
-      labelFor: (unit: string) => `collect-${unit}`,
-      artifacts: (ctx: any, unit: string) => `research/${ctx.run}-step5-scope-${unit}.json`,
-      concurrency: MAX_RUN_BATCHES,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
-        role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['node', 'tools/step5-scope.mjs', 'collect', '--run', ctx.run, '--batch', String(unit)],
-        timeout: 600,
-      })),
-      gatesWaived: 'Collect exits nonzero unless not_opened is empty and opened exactly equals the computed '
-        + 'refuter scope; its successful result routes every obligation this batch owes.',
-    },
-    {
-      id: '5a-adjudicate',
-      label: 'batch Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
-      pipeline: 'read',
-      role: 'alpha',
-      units: batches,
-      pattern: resultPattern('alpha', '5a-(?:[a-z]+|batch-[1-9]\\d*)'),
-      labelFor: (unit: string) => `5a-batch-${unit}`,
-      artifacts: (ctx: any, unit: string) => {
-        const group = step5Adjudicators(ctx.repo, ctx.run, alphaGroups(ctx), ctx.dispatchDir)
-          .find((entry: any) => entry.covers.map(String).includes(String(unit)));
-        if (!group) return null;
-        const report = `research/${ctx.run}-alpha-${group.label}-5a.md`;
-        return [report, `research/${ctx.run}-alpha-${group.label}-5a-decisions.json`];
+export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closureGate, auditorCreatedGate, step5GuardGate }: any): any[] {
+  const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+  const round=(ctx:any,id:string)=>ctx.stageRounds?.[id]??1;
+  const tool=(ctx:any,command:string,phase:string,n:number)=>['node','tools/step5-workflow.mjs',command,'--run',ctx.run,'--phase',phase,'--round',String(n)];
+  const pattern=(phase:string,id:string)=>(ctx:any)=>new RegExp(`^(?:alpha-adjudicate|alpha-repair|tool)-step5-v2-${phase}(?:-pass-[0-9]+)?-r${round(ctx,id)}-(?:u[^.]+|all)\\.result\\.json$`);
+  const report=(ctx:any,phase:string,n:number,unit:string)=>workerReport(ctx.repo,ctx.run,phase,n,unit);
+  const decode=(phase:string,u:string)=>u.includes(':')?u.split(':'):[phase,u];
+  const ownerUnits=(ctx:any,phase:string,id:string)=>impactWork(ctx.repo,ctx.run,phase,round(ctx,id))
+    .flatMap((work:any)=>['1','2','3'].map(u=>work.kind==='maintenance'?`maintenance:${work.id}:${u}`:work.phase===phase?u:`${work.phase}:${u}`));
+  const outsideLane=(ctx:any,u:string)=>{const [,pack,lane]=u.split(':');return maintenancePack(ctx.repo,ctx.run,pack).lanes.find((row:any)=>String(row.lane)===lane);};
+  const workerStage=(id:string,phase:string,adjudication:boolean):any=>({
+    id,label:`${id.split('-')[0]} ${adjudication?'batch adjudication and repair':'three owner agents repair downstream consumers'}`,
+    modelProfile:SOL61_HIGH,
+    units:(ctx:any)=>adjudication ? (existsSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'))
+      ? JSON.parse(readFileSync(join(workflowDir(ctx.repo,ctx.run),'frontier.json'),'utf8')).batches.map((b:any)=>String(b.id)) : ['1']) : ownerUnits(ctx,phase,id),
+    pattern:(ctx:any)=>adjudication?new RegExp(`(?:${pattern(phase,id)(ctx).source})|^tool-step5-v2-empty-${phase}-r${round(ctx,id)}-u[^.]+\\.result\\.json$`):new RegExp(`(?:${pattern(phase,id)(ctx).source})|^alpha-repair-${maintenanceLabel(phase,round(ctx,id),'pack-[0-9]+','[123]')}\\.result\\.json$`),concurrency:adjudication?24:3,
+    // Sibling owners run concurrently. Shared metadata edits use a short
+    // critical section; a new pass waits for the entire preceding pass.
+    ...(!adjudication?{
+      unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
+      onProgress:({ctx,executor,stage}:any)=>{
+        if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
+        const complete=executor.unitsComplete(stage,ctx);
+        if(ownerUnits(ctx,phase,id).every((u:string)=>complete.has(u)))advanceImpact(ctx.repo,ctx.run,phase,round(ctx,id));
       },
-      concurrency: MAX_RUN_BATCHES,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => {
-        const assignment = alphaGroups(ctx).find((group: any) => group.covers.map(String).includes(String(unit)));
-        if (!assignment) throw Error(`Step 5a batch ${unit} has no Alpha assignment`);
-        const group = batchAdjudicator(assignment, unit);
-        return {
-          role: 'alpha', label: `5a-${group.label}`, job: 'adjudication', covers: group.covers,
-          brief: 'briefs/alpha-step5.md',
-          task: ctx.doctor ? 'briefs/tasks/alpha-5a-adjudicate.md' : [
-            'briefs/tasks/alpha-5a-adjudicate.md',
-            prepareStep5AdjudicationOrder(ctx.repo, ctx.run, group),
-          ],
-          timeout: 14400,
-        };
-      }),
-      gates: (ctx: any) => [
-        gate('step5-owner-escalations', ['node', 'tools/step5-scope.mjs', 'check-escalations', '--run', ctx.run]),
-        auditorCreatedGate(ctx),
-        ...repoWide(ctx).filter((candidate: any) => candidate.id !== 'splice-verify'),
-        ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
-      ],
-      onHold: holdStep5,
+    }:{}),
+    artifacts:(ctx:any,u:string)=>{if(u.startsWith('maintenance:'))return outsideLane(ctx,u).report;const [pass,unit]=decode(phase,u);return relative(ctx.repo,report(ctx,pass,round(ctx,id),unit));},
+    plan:(ctx:any,pending:string[])=>{
+      const n=round(ctx,id);
+      let adjudicationPack:any;
+      if(adjudication&&!ctx.doctor)adjudicationPack=prepareAdjudication(ctx.repo,ctx.run,phase,n);
+      else {
+        const failures=phase==='gate'?(ctx.stageFailures?.['5.10-gate']??ctx.stageFailures?.['5.8-gate']):null;
+        if(phase==='gate'&&!failures&&!ctx.doctor)throw Error('5.9 requires actual failed gate diagnostics');
+        if(!ctx.doctor)prepareImpact(ctx.repo,ctx.run,phase,n,{failures});
+      }
+      return pending.map(u=>{
+        if(u.startsWith('maintenance:')){
+          const [,pack,lane]=u.split(':'),input=outsideLane(ctx,u);
+          return {role:'alpha-repair',label:maintenanceLabel(phase,n,pack,lane),job:'authoring',covers:[u],profile:SOL61_HIGH,
+            brief:'briefs/consumer-maintenance.md',task:input.task,timeout:21600};
+        }
+        const [pass,unit]=decode(phase,u);
+        if(adjudicationPack&&emptyAdjudicationAssignment(adjudicationPack,unit)
+          &&(!existsSync(report(ctx,pass,n,unit))||JSON.parse(readFileSync(report(ctx,pass,n,unit),'utf8')).completion==='mechanical-zero-work')
+          &&!hasAdjudicatorArtifacts(ctx.repo,ctx.run,pass,n,unit)){
+          return {role:'tool',label:emptyAdjudicationLabel(pass,n,unit),covers:[u],job:'bookkeeping-mechanical',
+            argv:[...tool(ctx,'close-empty-adjudication',pass,n),'--unit',unit,'--input-sha256',digest(adjudicationPack)],timeout:60};
+        }
+        return {role:adjudication?'alpha-adjudicate':'alpha-repair',label:workerLabel(pass,n,unit),
+        job:adjudication?'adjudication':'authoring',covers:[u],profile:SOL61_HIGH,
+        brief:`briefs/step5-${adjudication?'adjudicator':'owner-repair'}.md`,
+        task:relative(ctx.repo,report(ctx,pass,n,unit).replace(/\.json$/,'.task.md')),timeout:21600};});
     },
-    {
-      id: '5a-baseline',
-      label: 'post-5a exact carrier and touch snapshots (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'snap-post-5a'),
-      artifacts: (ctx: any) => [touchesPath(ctx), ...batches(ctx).map((batch: string) =>
-          `research/${ctx.run}-step5-hash-${batch}-post-5a.json`)],
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'snap-post-5a', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step5-scope.mjs', 'post-5a', '--run', ctx.run],
-      }],
-      gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the post-5a impact endpoint. Missing output prevents successful coverage.',
-    },
-    {
-      id: '5b-edges',
-      label: 'compute cross-batch edges and post-5a changes (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'cross-group-edges'),
-      artifacts: (ctx: any) => `research/${ctx.run}-cross-group-edges.json`,
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'cross-group-edges', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/cross-group-edges.mjs', 'list', '--run', ctx.run],
-      }],
-      gatesWaived: 'The computed lists may be empty; this stage creates the verdict artifact, and 5b-cross re-derives every cross-batch edge, forward reference, and post-5a structural change.',
-    },
-    {
-      id: '5b-cross',
-      label: 'lead Alpha cross-batch audit and final Step 5 closure',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
-      units: () => ['all'],
-      pattern: resultPattern('alpha', '5b-[a-z-]+'),
-      artifacts: (ctx: any) => [`research/${ctx.run}-alpha-5b.md`, `research/${ctx.run}-5b-verdicts.jsonl`],
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'alpha', label: '5b-lead', job: 'audit', covers: ['all'], brief: 'briefs/alpha-step5.md',
-        task: 'briefs/tasks/alpha-5b-edges.md',
-        timeout: 14400,
-      }],
-      gates: (ctx: any) => [
-        auditorCreatedGate(ctx),
-        gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
-        routingGate(ctx, 'final'),
-        gate('step5-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
-        planGate(ctx),
-        // A 5a material repair of a published dependency loses its obsolete
-        // audit record, but may need to remain published for unchanged
-        // published consumers. `routingGate(final)` above validates that exact
-        // hash-bound Step-7 handoff before this bounded pending-audit window.
-        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx),
-        urlGate(ctx), backingGate(ctx), policyItemGate(ctx),
-        ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
-        gate('impact-audit-5b', ['node', 'tools/frontier-item-gate.mjs',
-          '--run', ctx.run, '--tool', 'impact-audit', '--',
-          '--touches', touchesPath(ctx), '--from', 'post-5a', '--current',
-          '--direct-boundary',
-          '--receipt', `research/${ctx.run}-impact-5b.json`]),
-        gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
-          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
-          '--output', `research/${ctx.run}-audit-manifest.json`], {
-          liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
-        }),
-      ],
-      onHold: holdStep5,
-    },
-    {
-      id: '5b-close',
-      label: 'freeze exact Step 5 closure (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'step5-close'),
-      artifacts: (ctx: any) => `research/${ctx.run}-step5-closure.json`,
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'step5-close', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step5-close.mjs', 'close', '--run', ctx.run],
-        // The close tool re-runs the exact Step-5 routing check, which costs
-        // about ten minutes on this corpus; the older 900 s budget equalled
-        // the tool's internal cap and left no headroom for the other checks.
-        timeout: 1800,
-      }],
-      gatesWaived: 'The close tool reruns exact Step-5 routing, cross-edge, plan, and ledger checks before writing the immutable closure receipt; any nonzero check produces no successful result.',
-    },
-  ].map(stage => withStep5bReviewContinuation(withRefuterContinuation(stage), { physics: false }));
+    gates:(ctx:any)=>[gate('step5-wave-evidence',tool(ctx,'collect',phase,round(ctx,id)))],
+  });
+  const certifyStage=(id:string,phase:string):any=>({
+    id,label:`${id.split('-')[0]} orchestrator certifies complete stable repair wave`,units:()=>['all'],
+    pattern:pattern(`certify-${phase}`,id),concurrency:1,
+    artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`certification-${phase}-${round(ctx,id)}.json`)),
+    plan:(ctx:any)=>[{role:'tool',label:`step5-v2-certify-${phase}-r${round(ctx,id)}-all`,covers:['all'],job:'bookkeeping-mechanical',
+      argv:tool(ctx,'certify',phase,round(ctx,id))}],
+    gates:(ctx:any)=>[gate('step5-wave-certification',tool(ctx,'verify-wave',phase,round(ctx,id)))],
+  });
+  const recert=certifyStage('5.7-certify','impact-repeat');
+  recert.routeTargets=['5.4-rejudge'];
+  recert.route=({ctx,outcome}:any)=>{
+    if(outcome!=='passed')return null;
+    const p=join(workflowDir(ctx.repo,ctx.run),`threshold-${round(ctx,'5.7-certify')}.json`);
+    const threshold=JSON.parse(readFileSync(p,'utf8'));
+    if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean')throw Error('invalid fatal threshold evidence');
+    return threshold.belowThreshold?null:{next:'5.4-rejudge'};
+  };
+  const battery=(ctx:any)=>{
+    const gates=[
+    gate('step5-round-certification',tool(ctx,'check','final',1)),
+    ...(step5GuardGate?[step5GuardGate(ctx)]:[]),
+    ...repoWide(ctx),...contractGates(ctx,{reviewed:true}),
+    gate('proof-contract-coverage', ['node', 'tools/proof-contract-coverage.mjs',
+      '--run', ctx.run, '--contracts', `research/${ctx.run}-proof-contracts.json`]),
+    // Published maintenance and auditor additions are outside the immutable
+    // original frontier; their maintenance evidence remains separately owned and validated.
+    closureGate(ctx,{judgeLineup:'sol61'}),ledgerGate(ctx),
+    ];
+    // Doctor inspects future command descriptors before 7-scope creates the
+    // frontier. Actual execution always scopes the complete battery.
+    return ctx.doctor ? gates : frontierGateBattery(ctx,gates);
+  };
+  const gateStage=(id:string):any=>({id,label:`${id.split('-')[0]} complete Step 5 gate battery`,units:()=>['all'],
+    concurrency:1,
+    plan:(ctx:any)=>[{role:'tool',label:`step5-v2-gate-check-r${round(ctx,id)}-${id}-all`,covers:['all'],job:'bookkeeping-mechanical',argv:['node','-e','console.log("Step 5 gate battery ready")']}],
+    // Include stage ID to distinguish 7.8's first gate from 7.10's first retry.
+    pattern:(ctx:any)=>new RegExp(`^tool-step5-v2-gate-check-r${round(ctx,id)}-${id.replace('.','\\.')}-all\\.result\\.json$`),
+    gates:battery,routeTargets:id==='5.8-gate'?['5.9-repair','5-freeze']:['5.9-repair'],
+    route:({outcome}:any)=>outcome==='failed'?{next:'5.9-repair'}:id==='5.8-gate'?{next:'5-freeze'}:null,
+  });
+  const repair=workerStage('5.9-repair','gate',false);
+  // This stage's join performs precisely one recertification after all three
+  // repair workers complete; 7.10 then reruns the entire battery.
+  repair.gates=(ctx:any)=>[gate('step5-gate-recertify',tool(ctx,'certify','gate',round(ctx,'5.9-repair')))];
+  return [
+    {id:'5-scope',label:'freeze original Step 5 frontier',units:()=>['all'],
+      pattern:/^tool-step5-v2-init\.result\.json$/,concurrency:1,
+      artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),'frontier.json')),
+      plan:(ctx:any)=>[{role:'tool',label:'step5-v2-init',covers:['all'],job:'bookkeeping-mechanical',argv:tool(ctx,'init','initial',1)}],
+      gatesWaived:'Initialization freezes the original frontier and Step 4 evidence; every later round validates these immutable inputs.'},
+    workerStage('5.1-adjudicate','initial',true),workerStage('5.2-impact','impact-initial',false),certifyStage('5.3-certify','impact-initial'),
+    {id:'5.4-rejudge',label:'5.4 Sol 6.1 high judges repaired items',units:()=>['all'],pattern:pattern('judge','5.4-rejudge'),concurrency:1,maxAttempts:1,
+      artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`judge-${round(ctx,'5.4-rejudge')}.json`)),
+      plan:(ctx:any)=>[{role:'tool',label:`step5-v2-judge-r${round(ctx,'5.4-rejudge')}-all`,covers:['all'],job:'judgement',timeout:43200,
+        argv:tool(ctx,'judge','repeat',round(ctx,'5.4-rejudge'))}],
+      gatesWaived:'The judge command requires a complete current Sol verdict for each frozen repaired target before writing its round receipt.'},
+    workerStage('5.5-adjudicate','repeat',true),workerStage('5.6-impact','impact-repeat',false),recert,
+    gateStage('5.8-gate'),repair,gateStage('5.10-gate'),
+  ];
 }
-
-export default { step5Stages };

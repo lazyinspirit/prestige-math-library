@@ -19,7 +19,7 @@
 // It does not reorder parts, does not create parts, does not touch a single
 // word of brief prose, and does not invent a pathway for a category that has
 // none. Placement is mechanical; what a part MEANS is the owner's, and the
-// step-8 report is where it gets asked for.
+// step-6 report is where it gets asked for.
 //
 // The receipt is `research/<run>-pathway.json` plus a printed summary: the
 // pages placed, the part each landed in, the parts whose briefs now cover
@@ -44,7 +44,7 @@ const stuck = [];    // pages the sync could not place, with why
 
 for (const cat of categories()) {
   // DRAFTS COUNT HERE. A level publishes after the owner audit, which is after
-  // step 8, so a run that only placed published pages would place nothing and
+  // step 6, so a run that only placed published pages would place nothing and
   // leave the gate to fail later, with nobody in the room. The gate is strict
   // about what is live; the sync is early about what is coming.
   const aPages = [...new Set(pages.filter((p) => p.cat[0] === cat).map((p) => mainOf(p.page)))]
@@ -159,7 +159,7 @@ const receipt = {
   placed: carryForwardPlaced(placed),
   // A rerun after placement sees no `missing` pages. Before this carry-forward
   // rule that meant it overwrote the original obligations with `[]`, erasing
-  // the exact pathway briefs step 8 still owed. Keep same-run obligations
+  // the exact pathway briefs step 6 still owed. Keep same-run obligations
   // until the pathway-closure receipt says Lead Alpha rewrote them.
   briefsToRevisit: carryForwardBriefs(touched),
   categoriesWithoutPathway: owed,

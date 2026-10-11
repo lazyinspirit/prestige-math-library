@@ -95,7 +95,7 @@ test('real errors still exit 1 and write nothing', () => {
 });
 
 test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; adjudicated edges need no Alpha', async () => {
-  const s4: any = stages.find((s: any) => s.id === '4-splice');
+  const s4: any = stages.find((s: any) => s.id === '3-splice');
   const dir = fixture();
   const ctx = { run: 'demo', repo: dir };
   assert.ok(s4.gates(ctx).some((g: any) => g.id === 'splice-refusals'));
@@ -106,7 +106,7 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   await s4.onGateFailure({ ctx, executor, stage: s4, round: 1, failure: { id: 'splice-refusals', why: '' } });
   assert.equal(started.length, 1);
   assert.equal(started[0].job, 'adjudication');
-  assert.equal(started[0].label, 'step4-adjudicate-1');
+  assert.equal(started[0].label, 'step3-adjudicate-1');
   // the stalemate synthetic takes the same path
   await s4.onGateFailure({
     ctx, executor, stage: s4, round: 2,
@@ -127,7 +127,7 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   assert.equal(started.length, 2);
   // ...and validate-plan itself still is, EXCEPT for the one class that is an
   // edge decision. That gate is repo-wide: a cycle, a forward reference, a
-  // page over the 100-item ceiling are not step 4's business, and an Alpha
+  // page over the 100-item ceiling are not step 3's business, and an Alpha
   // handed a `size` violation under an edge-adjudication task would reach for
   // the tool it was given and add an edge.
   //
@@ -163,6 +163,6 @@ test('stage 4: re-splice first; residual edges dispatch the adjudication Alpha; 
   });
   assert.equal(started.length, 3, 'undeclared-prereq must reach the adjudicating Alpha');
   assert.equal(started[2].job, 'adjudication');
-  assert.match(started[2].task[0], /alpha-step4\.task\.md$/);
+  assert.match(started[2].task[0], /alpha-step3\.task\.md$/);
   rmSync(dir, { recursive: true, force: true });
 });

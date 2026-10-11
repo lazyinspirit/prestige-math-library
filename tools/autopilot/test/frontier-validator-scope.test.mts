@@ -70,7 +70,7 @@ function assertSelection(ctx: any, tool: string, args: string[]) {
 
 test('actual stage validators receive only current manifest subjects', t => {
   const ctx = fixture(t);
-  for (const id of ['3b-author', '5b-cross', '8-readiness-v2']) {
+  for (const id of ['3b-author', '3b-cross', '6-readiness-v2']) {
     const stage: any = stages.find(s => s.id === id);
     const gates = stage.gates(ctx);
     for (const tool of ['precheck', 'rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource', 'pathcheck']) {
@@ -80,10 +80,10 @@ test('actual stage validators receive only current manifest subjects', t => {
   }
 });
 
-test('standalone external and Step 8 page gates also carry manifest selectors', t => {
+test('standalone external and Step 6 page gates also carry manifest selectors', t => {
   const ctx = fixture(t);
   let checked = 0;
-  for (const id of ['1-scaffold', '3a-scope', '8-pathway-sync-v2', '8-pathway-author-v2']) {
+  for (const id of ['1-scaffold', '3a-scope', '6-pathway-sync-v2', '6-pathway-author-v2']) {
     const stage: any = stages.find(s => s.id === id);
     assert.ok(stage, id);
     for (const gate of stage.gates(ctx).filter((g: any) => ['extcheck', 'pathcheck', 'prosecheck'].includes(g.id))) {
@@ -97,7 +97,7 @@ test('standalone external and Step 8 page gates also carry manifest selectors', 
 test('future descriptors can be inspected before manifests exist; execution fails closed', t => {
   const ctx = fixture(t);
   rmSync(join(ctx.repo, 'research/run-test-batch-1.pages.json'));
-  const stage: any = stages.find(s => s.id === '8-readiness-v2');
+  const stage: any = stages.find(s => s.id === '6-readiness-v2');
   const gate = stage.gates(ctx).find((g: any) => g.id === 'depcheck');
   const descriptor = stage.gates({ ...ctx, doctor: true }).find((g: any) => g.id === 'depcheck');
   assert.deepEqual(argv(descriptor), argv(gate));
@@ -115,7 +115,7 @@ test('future descriptors can be inspected before manifests exist; execution fail
 
 test('an assembled stage gate refreshes its selection from current manifests at execution', t => {
   const ctx = fixture(t);
-  const stage: any = stages.find(s => s.id === '8-readiness-v2');
+  const stage: any = stages.find(s => s.id === '6-readiness-v2');
   const gate = stage.gates(ctx).find((g: any) => g.id === 'depcheck');
   assertSelection(ctx, 'depcheck', validatorArgs(ctx, gate));
   writeFileSync(join(ctx.repo, 'items/thm-updated.md'), '---\nid: thm-updated\n---\n');
@@ -132,7 +132,7 @@ test('an assembled stage gate refreshes its selection from current manifests at 
 test('all actual stage plan gates carry the run selector', t => {
   const ctx = fixture(t);
   let count = 0;
-  for (const stage of stages.filter(s => ['1-drift', '1-drift-apply', '1-scaffold', '4-splice', '5b-cross', '8-readiness-v2'].includes(s.id))) {
+  for (const stage of stages.filter(s => ['1-drift', '1-drift-apply', '1-scaffold', '3-splice', '3b-cross', '6-readiness-v2'].includes(s.id))) {
     for (const gate of stage.gates?.(ctx) ?? []) {
       if (gate.id !== 'validate-plan') continue;
       count++;

@@ -20,7 +20,7 @@
 //
 // THE DRIFT CHECK. A track design names the prerequisites a page needs; the
 // spec declares them. When they disagree, the Beta scaffolds against the design
-// and step 4 fails with an undeclared-prerequisite error — after the citation
+// and step 3 fails with an undeclared-prerequisite error — after the citation
 // has been written. Diffing them at step 0 turns a rewrite into a one-line spec
 // edit. On the last run this found exactly one drift, and it was real.
 

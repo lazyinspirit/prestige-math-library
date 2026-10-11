@@ -5,18 +5,18 @@ import { loadStep3 } from '../../step3-decisions.mjs';
 
 // The executor reloads this table when its sibling stage modules change.
 // Version the canonical import by every composed stage module so Node's ESM
-// cache cannot keep the former Step-7 closures behind the freshly loaded table.
+// cache cannot keep the former Step-5 closures behind the freshly loaded table.
 const canonicalUrl = new URL('./mathlib.mts', import.meta.url);
-const revision = ['./mathlib.mts', './mathlib.step5.mts', './mathlib.step7.mts'].map(path => {
+const revision = ['./mathlib.mts', './mathlib.step3.mts', './mathlib.step5.mts'].map(path => {
   const stat = statSync(new URL(path, import.meta.url));
   return `${stat.mtimeMs}:${stat.size}`;
 }).join(':');
 const { stages: original } = await import(`${canonicalUrl.href}?v=${revision}`);
 const RUN = 'frontier-40-geometry-braids-rep-27';
 export const stages = original.map(stage => ({ ...stage,
-  // Keep the Step-6 reader recovery cap; the owner restored the native
+  // Keep the Step-4 reader recovery cap; the owner restored the native
   // judge pool to 27 calls without changing model, effort or evidence.
-  ...(stage.id === '6-judge' ? {
+  ...(stage.id === '4-judge' ? {
     concurrency: 3,
     plan: (ctx: any, pending: any[]) => {
       const plans = stage.plan!(ctx, pending);

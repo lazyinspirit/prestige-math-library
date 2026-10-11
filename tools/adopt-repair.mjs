@@ -103,7 +103,7 @@ for (const file of files) {
   // Stale prose references, on non-step lines only; single pass so a renumbering
   // chain (2.1 -> 3.1 -> 4.1) cannot be applied twice to the same reference.
   //
-  // A line carrying a wikilink is LEFT ALONE and reported instead. "Step 4.1 of
+  // A line carrying a wikilink is LEFT ALONE and reported instead. "Step 3.1 of
   // [[thm-zorn]]" refers to a step in a DIFFERENT item, and this item's map says
   // nothing about that item's numbering; rewriting it silently produces a
   // confident, wrong cross-reference that no mechanical check will ever catch.

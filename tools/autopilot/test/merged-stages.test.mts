@@ -6,9 +6,9 @@ import { mkdtempSync, mkdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 test('migrated checkpoint retains every canonical post-review stage in order', () => {
-  const index = canonical.stages.findIndex(s => s.id === '5a-baseline');
-  assert.equal(merged.stages[0].id, '5a-import');
-  assert.equal(merged.stages[1].id, '5a-import-join');
+  const index = canonical.stages.findIndex(s => s.id === '3a-baseline');
+  assert.equal(merged.stages[0].id, '3a-import');
+  assert.equal(merged.stages[1].id, '3a-import-join');
   assert.equal(merged.workflowRevision, canonical.workflowRevision);
   assert.deepEqual(merged.stages.slice(2).map(s => s.id), canonical.stages.slice(index).map(s => s.id));
   assert.ok(merged.stages[0].gates);
@@ -22,7 +22,7 @@ test('import retains every full-frontier author and adjudicator gate without rel
     const actual = merged.stages[1].gates!(ctx);
     for (const [id, expected] of [
       ['author', authoredContentGates(ctx)],
-      ['review', canonical.stages.find(stage => stage.id === '5a-adjudicate')!.gates!(ctx)],
+      ['review', canonical.stages.find(stage => stage.id === '3a-adjudicate')!.gates!(ctx)],
     ] as const) {
       for (const gate of expected) assert.deepEqual(
         actual.find(candidate => candidate.id === `import-${id}-${gate.id}`),

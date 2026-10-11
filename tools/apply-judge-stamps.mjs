@@ -59,9 +59,9 @@ import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
-import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
+import { parseTerminalResolutions, terminalResolutionStatus } from './step5-terminal-resolution.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
-import { loadStep7ClosureCertification, currentStep7Certification, stripStep7JudgeStamp } from './step7-certification-consumer.mjs';
+import { loadStep5ClosureCertification, currentStep5Certification, stripStep5JudgeStamp } from './step5-certification-consumer.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 
 const argv = process.argv.slice(2);
@@ -79,7 +79,7 @@ const excludePublished = argv.includes('--exclude-published');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--auditor-certifications <step7.json>] [--verify] [--apply] [--report <out.json>]');
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step5.jsonl>] [--auditor-certifications <step5.json>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -135,14 +135,14 @@ const scopedIds = manifestsArg
 const ids = excludePublished ? scopedIds.filter((id) => !isPublishedItem(process.cwd(), id)) : scopedIds;
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
-let step7Certificate;
-try { step7Certificate = loadStep7ClosureCertification(process.cwd(), value('--run'), ledgerPath); }
+let step5Certificate;
+try { step5Certificate = loadStep5ClosureCertification(process.cwd(), value('--run'), ledgerPath); }
 catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
 const auditorRows = new Map();
 {
   let loaded;
   try { loaded = loadAuditorCreatedCertifications(auditorCertificationsArg.split(',')
-    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [7] }); }
+    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [5] }); }
   catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
   for (const row of loaded) {
     const prior = auditorRows.get(row.id);
@@ -263,16 +263,16 @@ for (const id of ids) {
     continue;
   }
   const text = readFileSync(file, 'utf8');
-  if (step7Certificate?.items.some(row => row.id === id)) {
+  if (step5Certificate?.items.some(row => row.id === id)) {
     let certified;
-    try { certified = currentStep7Certification(step7Certificate, id, text, contextHash(id)); }
-    catch (cause) { problems.push(`${id}: cannot verify Step-7 certification — ${cause.message}`); continue; }
+    try { certified = currentStep5Certification(step5Certificate, id, text, contextHash(id)); }
+    catch (cause) { problems.push(`${id}: cannot verify Step-5 certification — ${cause.message}`); continue; }
     if (certified) {
-      const cleaned = stripStep7JudgeStamp(text);
+      const cleaned = stripStep5JudgeStamp(text);
       const stale = cleaned !== text;
       if (stale && apply) writeFileSync(file, cleaned);
-      if (stale && verify) problems.push(`${id}: a judge pass block sits on a centrally certified Step-7 item`);
-      result.skipped.push({ id, reason: 'step7-centrally-certified', round: step7Certificate.round,
+      if (stale && verify) problems.push(`${id}: a judge pass block sits on a centrally certified Step-5 item`);
+      result.skipped.push({ id, reason: 'step5-centrally-certified', round: step5Certificate.round,
         ...(stale ? { stripped_stale_pass: apply } : {}) });
       continue;
     }

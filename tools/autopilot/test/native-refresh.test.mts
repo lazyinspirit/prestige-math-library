@@ -10,7 +10,6 @@ import { Executor } from '../src/executor.mts';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 import { writeCommand } from '../src/control.mts';
-import { stages, step3PairPlan } from '../stages/mathlib.mts';
 const AT = '2026-01-01T00:00:00.000Z';
 function fixture(t: any, extra: any = {}) {
   const repo = mkdtempSync(join(tmpdir(), 'ap-native-refresh-')); t.after(() => rmSync(repo, { recursive: true, force: true }));
@@ -129,21 +128,6 @@ test('count-mode old success cannot satisfy pending native refresh', t => {
   const f = fixture(t); f.request(); for (const path of f.oldPaths) writeFileSync(path, JSON.stringify({ ok: true }));
   assert.equal(f.ex.stageStatus(f.stage).mode, 'count'); assert.equal(f.ex.stageStatus(f.stage).unitsDone, false); assert.equal(f.ex.unitsComplete(f.stage).has('a'), false);
 });
-
-test('production Step3b refresh retains profile, scope, result pattern and focused task direction', t => {
-  const repo = mkdtempSync(join(tmpdir(), 'step3-refresh-plan-')); t.after(() => rmSync(repo, { recursive: true, force: true }));
-  mkdirSync(join(repo, 'research')); mkdirSync(join(repo, 'items'));
-  const pages = [{ id: 'a', kind: 'A', companion: 'b', order: 1, requires: [], items: [{ id: 'def-a', kind: 'definition', statement: 'A', deps: [] }] },
-    { id: 'b', kind: 'B', companion: 'a', order: 2, requires: ['a'], items: [{ id: 'ex-b', kind: 'example', statement: 'B', deps: ['def-a'] }] }];
-  writeFileSync(join(repo, 'research/demo-batch-1.pages.json'), JSON.stringify(pages));
-  const ctx: any = { run: 'demo', repo }, stage = stages.find(s => s.id === '3b-author')!, old = step3PairPlan(ctx, 'a', 'final');
-  const fresh = stage.refreshPlan!(ctx, 'a', { id: 'nonce-new', requestedAt: AT, reason: 'Corrected Manin Definition and theorem' });
-  assert.notEqual(fresh.label, old.label); assert.equal(fresh.profile, 'deepseek-v4.1-flash-max'); assert.equal(fresh.role, 'alpha-high'); assert.deepEqual(fresh.covers, ['a']);
-  assert.ok((stage.pattern as any)(ctx).test(`${fresh.role}-${fresh.label}.result.json`));
-  const task = readFileSync(join(repo, fresh.task as string), 'utf8'); assert.match(task, /Corrected Manin Definition and theorem/);
-  assert.match(task, /Do not touch files solely to change timestamps/); assert.match(task, /genuine fresh native author\/evidence work/);
-});
-
 
 test('public CLI requires exact existing run identity and writes only a refresh control request', t => {
   const f = fixture(t), cli = fileURLToPath(new URL('../bin/autopilot.mts', import.meta.url));

@@ -538,7 +538,7 @@ test('1-drift routes to an Alpha verification dispatch; 1-scaffold to Betas', ()
   assert.deepEqual(d.covers, ['drift']);
 
   const scaffold: any = stages.find((s: any) => s.id === '1-scaffold');
-  const [b] = scaffold.plan(ctx, ['1']);
+  const [b] = scaffold.plan({...ctx, doctor: true}, ['1']);
   assert.equal(b.label, 'batch-1');
   assert.equal(b.role, 'beta');
   assert.equal(b.job, 'scaffolding');

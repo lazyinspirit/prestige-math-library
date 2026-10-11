@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+const LEGACY_AUTHOR_STEP = -1; // Historical authoring receipts are not current authority.
 // Certify items genuinely created and authored by an auditor/adjudicator.
 //
 // This is deliberately a distinct evidence class. It never writes a review,
@@ -13,10 +13,10 @@ import { pathToFileURL } from 'node:url';
 import { itemHashGuard, itemHashJudge } from './item-hash.mjs';
 import { split, yaml } from './pathway-lib.mjs';
 import { isMinimalItemReceipt } from './step3-decisions.mjs';
-import { currentHashesMany } from './step7-terminal-resolution.mjs';
+import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { historicalStep3OwnerReceipt } from './step3-owner-history.mjs';
-import { archivedProofContext, recordOwnerContextArchive } from './step5-owner-context-history.mjs';
-export { recordOwnerContextArchive } from './step5-owner-context-history.mjs';
+import { archivedProofContext, recordOwnerContextArchive } from './step3-owner-context-history.mjs';
+export { recordOwnerContextArchive } from './step3-owner-context-history.mjs';
 
 const safe = (value, what = 'value') => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error(`Invalid ${what}`);
@@ -50,7 +50,7 @@ const BASELINE_POLICY = 'auditor-created-stage-bypass-v1';
 const CERTIFICATION_POLICY = 'auditor-created-stage-bypass-v2';
 const OWNER_RECERTIFICATION_POLICY = 'auditor-created-owner-recertification-v1';
 const CARRIER_KEYS = ['guard_sha256', 'judge_sha256', 'item_file_sha256',
-  'manifest_sha256', 'contract_sha256', 'step5_subject_sha256'];
+  'manifest_sha256', 'contract_sha256', 'step3_subject_sha256'];
 
 export const auditorCreatedBaselinePath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-baseline.json`);
@@ -68,9 +68,9 @@ const ownerRecertificationPath = (root, run, step, id, hashes) => {
 };
 
 // Owner-spawned creation is a separate attestation class, never a native result.
-const OWNER_CREATION_POLICY = 'owner-spawned-step5-creation-v1';
+const OWNER_CREATION_POLICY = 'owner-spawned-step3-creation-v1';
 const ownerCreationPath = (root, run, id) => join(root, 'research',
-  `${safe(run, 'run')}-step5-owner-creation-${safe(id, 'item ID')}.json`);
+  `${safe(run, 'run')}-step3-owner-creation-${safe(id, 'item ID')}.json`);
 const researchFile = (root, path) => {
   const file = resolve(root, String(path ?? ''));
   const boundary = realpathSync(join(root, 'research'));
@@ -81,7 +81,7 @@ const researchFile = (root, path) => {
 
 const OWNER_SOURCE_ARCHIVE_POLICY = 'owner-creation-source-archive-v1';
 const ownerSourceArchivePaths = (root, run, id, originSha, source) => {
-  const stem = `${safe(run, 'run')}-step5-owner-source-archive-${safe(id, 'item ID')}-${hashValue({ origin_sha256: originSha, source: { path: source.path, sha256: source.sha256 } })}`;
+  const stem = `${safe(run, 'run')}-step3-owner-source-archive-${safe(id, 'item ID')}-${hashValue({ origin_sha256: originSha, source: { path: source.path, sha256: source.sha256 } })}`;
   return { receipt: join(root, 'research', `${stem}.json`), archive: join(root, 'research', `${stem}.source`) };
 };
 function archivedOwnerSource(root, run, id, originSha, source) {
@@ -92,7 +92,7 @@ function archivedOwnerSource(root, run, id, originSha, source) {
   const archivePath = `research/${paths.archive.split('/').at(-1)}`;
   if (Object.keys(receipt).some(key => !['version', 'policy', 'run', 'step', 'id', 'owner', 'owner_identity', 'at', 'reason', 'origin', 'source', 'archive'].includes(key))
     || receipt.version !== 1 || receipt.policy !== OWNER_SOURCE_ARCHIVE_POLICY
-    || receipt.run !== run || receipt.step !== 5 || receipt.id !== id || receipt.owner !== true
+    || receipt.run !== run || receipt.step !== 3 || receipt.id !== id || receipt.owner !== true
     || typeof receipt.owner_identity !== 'string' || !receipt.owner_identity.trim()
     || !Number.isFinite(Date.parse(receipt.at)) || !String(receipt.reason ?? '').trim()
     || receipt.origin?.path !== originPath || receipt.origin?.sha256 !== originSha
@@ -107,7 +107,7 @@ function archivedOwnerSource(root, run, id, originSha, source) {
 // Preserve exact historical bytes before changing a genuine mutable source.
 // This records no native dispatch, mathematical judgment, or new creation.
 export function recordOwnerSourceArchive(root, run, step, id, sourcePath, ownerIdentity, reason) {
-  if (Number(step) !== 5) throw Error('Owner source archive supports Step 5 only');
+  if (Number(step) !== 3) throw Error('Owner source archive supports Step 3 only');
   safe(run, 'run'); safe(id, 'item ID');
   if (!String(ownerIdentity ?? '').trim() || !String(reason ?? '').trim()) throw Error('Owner identity and reason are required');
   const creation = ownerCreation(root, run, id);
@@ -121,7 +121,7 @@ export function recordOwnerSourceArchive(root, run, step, id, sourcePath, ownerI
   const paths = ownerSourceArchivePaths(root, run, id, originSha, source);
   const prior = archivedOwnerSource(root, run, id, originSha, source);
   if (prior) return { path: paths.receipt, archive: paths.archive, reused: true };
-  const receipt = { version: 1, policy: OWNER_SOURCE_ARCHIVE_POLICY, run, step: 5, id,
+  const receipt = { version: 1, policy: OWNER_SOURCE_ARCHIVE_POLICY, run, step: 3, id,
     owner: true, owner_identity: ownerIdentity, at: new Date().toISOString(), reason,
     origin: creation.marker, source: { path: source.path, sha256: source.sha256 },
     archive: { path: `research/${paths.archive.split('/').at(-1)}`, sha256: source.sha256 } };
@@ -137,7 +137,7 @@ export function recordOwnerSourceArchive(root, run, step, id, sourcePath, ownerI
 }
 
 function validateOwnerCreation(root, run, id, receipt, originSha = null) {
-  const baseline = stageBaseline(root, run, 5);
+  const baseline = stageBaseline(root, run, 3);
   const timeline = receipt?.author?.timeline;
   const at = Date.parse(receipt?.attested_at), baselineAt = Date.parse(baseline.at);
   const known = timeline?.mode === 'known' && Number.isFinite(Date.parse(timeline.started_at))
@@ -151,7 +151,7 @@ function validateOwnerCreation(root, run, id, receipt, originSha = null) {
       'run', 'step', 'id', 'owner', 'owner_identity', 'author', 'attested_at', 'reason',
       'owner_held_escalation', 'baseline_sha256', 'page', 'batch', 'carriers', 'sources'].includes(key))
     || receipt.version !== 1 || receipt.policy !== OWNER_CREATION_POLICY
-    || receipt.run !== run || receipt.step !== 5 || receipt.id !== id
+    || receipt.run !== run || receipt.step !== 3 || receipt.id !== id
     || receipt.owner !== true || receipt.evidence_class !== 'owner-spawned-creation'
     || receipt.author_result !== undefined || receipt.owner_recertification !== undefined
     || typeof receipt.owner_identity !== 'string' || !receipt.owner_identity.trim()
@@ -193,12 +193,12 @@ function ownerCreation(root, run, id, marker = null) {
 
 // Share the validating origin reader; callers cannot substitute a raw receipt
 // or skip baseline exclusion, source hashes or authorized archive provenance.
-export function loadStep5OwnerCreation(root, run, id, marker = null) {
+export function loadStep3OwnerCreation(root, run, id, marker = null) {
   return ownerCreation(root, run, id, marker);
 }
 
 export function recordOwnerCreation(root, run, step, id, evidence) {
-  if (Number(step) !== 5) throw Error('Owner creation supports Step 5 only');
+  if (Number(step) !== 3) throw Error('Owner creation supports Step 3 only');
   safe(run, 'run'); safe(id, 'item ID');
   const receipt = read(researchFile(root, evidence));
   validateOwnerCreation(root, run, id, receipt);
@@ -229,23 +229,23 @@ function ownerEvidenceTextForCurrentCarriers(root, run, step, id, hashes) {
   } catch { return ''; }
 }
 
-// The exact graph review is an origin attestation after Step 5 closes. A
-// subsequent, certified native Step-7 proof/dependency repair must not make us
+// The exact graph review is an origin attestation after Step 3 closes. A
+// subsequent, certified native Step-5 proof/dependency repair must not make us
 // rerun that historical bootstrap against the new manifest. The frozen closure
 // and next-stage boundary authenticate the old carriers; the native certificate
 // separately authenticates the current item. This is not a new bootstrap.
-function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText) {
+function closedStep3GraphBootstrap(root, run, id, hashes, receipt, evidenceText) {
   if (id !== 'lem-smooth-euclidean-hypersurface-graph-and-localization'
-    || receipt.basis !== 'initial-step5-current-graph-lemma-manifest-review'
+    || receipt.basis !== 'initial-step3-current-graph-lemma-manifest-review'
     || receipt.historical_delta_unknown !== true) return null;
   try {
-    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closure = read(join(root, 'research', `${run}-step3-closure.json`));
     const closedAt = Date.parse(closure.closed_at), attestedAt = Date.parse(receipt.at);
-    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step3-close.result.json'));
     if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
       || !Number.isFinite(closedAt) || !Number.isFinite(attestedAt) || attestedAt > closedAt
       || closure.final_item_hashes?.[id] !== hashes.guard_sha256
-      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step3-close'
       || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
       || !Array.isArray(closeResult.covers) || !closeResult.covers.includes('all')
       || !Number.isFinite(Date.parse(closeResult.ended_at))
@@ -254,26 +254,26 @@ function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
     if (!artifacts.length || artifacts.some(([path, expected]) =>
       !/^[a-f0-9]{64}$/.test(expected ?? '')
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
-    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    const boundary = stageBaseline(root, run, 5), before = boundary.item_carriers?.[id];
     if (!before || !Number.isFinite(Date.parse(boundary.at)) || Date.parse(boundary.at) < closedAt
       || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
-    const frozenPath = `research/${run}-step5-hash-${safe(String(before.batch))}-post-5a.json`;
+    const frozenPath = `research/${run}-step3-hash-${safe(String(before.batch))}-post-3a.json`;
     if (!closure.artifacts[frozenPath]) return null;
     const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
     if (frozen.run !== run || String(frozen.batch) !== String(before.batch)
-      || frozen.label !== 'post-5a' || !carrier
+      || frozen.label !== 'post-3a' || !carrier
       || carrier.item_sha256 !== hashes.item_file_sha256
       || carrier.manifest_sha256 !== hashes.manifest_sha256
       || carrier.contract_sha256 !== hashes.contract_sha256) return null;
-    const decisionsPath = `research/${run}-alpha-batch-${safe(String(before.batch))}-5a-decisions.json`;
+    const decisionsPath = `research/${run}-alpha-batch-${safe(String(before.batch))}-3a-decisions.json`;
     if (!closure.artifacts[decisionsPath]) return null;
     const decisionsDocument = read(researchFile(root, decisionsPath));
     const decisions = Array.isArray(decisionsDocument) ? decisionsDocument : decisionsDocument.decisions;
     if (!Array.isArray(decisions) || !decisions.some(row => row.id === id
-      && row.subject_sha256 === hashes.step5_subject_sha256
+      && row.subject_sha256 === hashes.step3_subject_sha256
       && row.historical_delta_unknown === true && row.change_kind === 'current_content_review'
       && row.verdict === 'reviewed_no_defect')) return null;
-    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const certificate = read(join(root, 'research', `${run}-step5-v2`, 'certification.json'));
     const { sha256, ...payload } = certificate;
     const item = certificate.items?.find(row => row.id === id);
     const text = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
@@ -286,12 +286,12 @@ function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
       !/^[a-f0-9]{64}$/.test(expected ?? '')
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
     const nativeRepair = nativeEvidence.some(([path]) => {
-      if (!new RegExp(`/${run}-step7-v2/step7-v2-(initial|repeat)-r[1-9]\\d*-u[a-zA-Z0-9_-]+\\.json$`)
+      if (!new RegExp(`/${run}-step5-v2/step5-v2-(initial|repeat)-r[1-9]\\d*-u[a-zA-Z0-9_-]+\\.json$`)
         .test(resolve(root, path))) return false;
       const report = read(researchFile(root, path));
-      const packPath = join(root, 'research', `${run}-step7-v2`, `${report.phase}-${report.round}.json`);
+      const packPath = join(root, 'research', `${run}-step5-v2`, `${report.phase}-${report.round}.json`);
       const dispatchPath = join(root, 'research', `${run}-dispatch`,
-        `alpha-adjudicate-step7-v2-${report.phase}-r${report.round}-u${report.unit}.result.json`);
+        `alpha-adjudicate-step5-v2-${report.phase}-r${report.round}-u${report.unit}.result.json`);
       const bound = file => nativeEvidence.some(([path, expected]) =>
         resolve(root, path) === resolve(file) && expected === sha(readFileSync(file)));
       if (report.run !== run || !['initial', 'repeat'].includes(report.phase)
@@ -300,7 +300,7 @@ function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
       const pack = read(packPath), dispatch = read(dispatchPath);
       return pack.run === run && pack.phase === report.phase && pack.round === report.round
         && pack.before?.[id] === hashes.guard_sha256
-        && dispatch.run === run && authorResultAllowed(7, dispatch)
+        && dispatch.run === run && authorResultAllowed(5, dispatch)
         && report.decisions?.some(decision => decision.id === id
           && ['confirmed_fatal', 'confirmed_nonfatal'].includes(decision.outcome)
           && decision.uncertain === false && pack.assignments?.[String(report.unit)]?.some(tuple =>
@@ -310,7 +310,7 @@ function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
           && review.post_sha256 === item.guard_sha256 && review.uncertain === false);
     });
     if (!nativeRepair) return null;
-    const evidence = step5ManifestRepairEvidence(evidenceText);
+    const evidence = step3ManifestRepairEvidence(evidenceText);
     if (!evidence?.current_manifest_entry
       || hashValue(evidence.current_manifest_entry) !== hashes.manifest_sha256) return null;
     const live = inventory(root, run).find(row => row.id === id);
@@ -320,41 +320,41 @@ function closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
     // The old projection comes from hash-bound review evidence, never from a
     // reconstructed item. Source/approval/check/direct-consumer guards remain
     // unchanged; only its obsolete dependency list is read as historical.
-    return bootstrapStep5Author(root, run, id,
+    return bootstrapStep3Author(root, run, id,
       { ...live, manifest_entry: evidence.current_manifest_entry }, hashes, evidenceText,
       { closedGraphOrigin: true });
   } catch { return null; }
 }
 
-// Load only this sealed owner origin after its authenticated native Step-7
+// Load only this sealed owner origin after its authenticated native Step-5
 // supplier-quotation update. The old receipt remains immutable; inverse replay
 // must recover its exact contract, and current native certification is separate.
-function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText) {
+function closedStep3LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText) {
   if (run !== 'frontier-39-analysis-30'
     || id !== 'ex-lacunary-exponential-sums-belong-to-bmo'
-    || receipt.basis !== 'initial-step5-authenticated-native-input-manifest-mirror') return null;
+    || receipt.basis !== 'initial-step3-authenticated-native-input-manifest-mirror') return null;
   try {
-    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closure = read(join(root, 'research', `${run}-step3-closure.json`));
     const closedAt = Date.parse(closure.closed_at);
-    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step3-close.result.json'));
     if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
       || !Number.isFinite(closedAt) || !(Date.parse(receipt.at) <= closedAt)
       || closure.final_item_hashes?.[id] !== hashes.guard_sha256
-      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step3-close'
       || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
       || !closeResult.covers?.includes('all') || !(Date.parse(closeResult.ended_at) >= closedAt)) return null;
     const artifacts = Object.entries(closure.artifacts ?? {});
     if (!artifacts.length || artifacts.some(([path, expected]) =>
       !/^[a-f0-9]{64}$/.test(expected ?? '')
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
-    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    const boundary = stageBaseline(root, run, 5), before = boundary.item_carriers?.[id];
     if (!before || before.batch !== '6' || before.page !== 'bmo-john-nirenberg-and-h1-duality-examples'
       || !(Date.parse(boundary.at) >= closedAt)
       || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
-    const frozenPath = `research/${run}-step5-hash-6-post-5a.json`;
+    const frozenPath = `research/${run}-step3-hash-6-post-3a.json`;
     if (!closure.artifacts[frozenPath]) return null;
     const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
-    if (frozen.run !== run || String(frozen.batch) !== '6' || frozen.label !== 'post-5a'
+    if (frozen.run !== run || String(frozen.batch) !== '6' || frozen.label !== 'post-3a'
       || carrier?.item_sha256 !== hashes.item_file_sha256
       || carrier.manifest_sha256 !== hashes.manifest_sha256
       || carrier.contract_sha256 !== hashes.contract_sha256) return null;
@@ -365,10 +365,10 @@ function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceTe
     const current = carrierHashes(root, run, live);
     if (['guard_sha256', 'judge_sha256', 'item_file_sha256', 'manifest_sha256']
       .some(key => current[key] !== hashes[key]) || current.contract_sha256 === hashes.contract_sha256) return null;
-    const after = stageBaseline(root, run, 8).item_carriers?.[id];
+    const after = stageBaseline(root, run, 6).item_carriers?.[id];
     if (!after || after.page !== live.page || after.batch !== live.batch
       || CARRIER_KEYS.some(key => after[key] !== current[key])) return null;
-    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const certificate = read(join(root, 'research', `${run}-step5-v2`, 'certification.json'));
     const { sha256, ...payload } = certificate;
     const item = certificate.items?.find(row => row.id === id);
     if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
@@ -381,10 +381,10 @@ function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceTe
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
     const bound = path => nativeEvidence.some(([candidate, expected]) =>
       resolve(root, candidate) === resolve(root, path) && expected === sha(readFileSync(researchFile(root, path))));
-    const reportPath = `research/${run}-step7-v2/step7-v2-impact-initial-r1-u3.json`;
-    const packPath = `research/${run}-step7-v2/impact-initial-1.json`;
-    const resultPath = `research/${run}-dispatch/alpha-repair-step7-v2-impact-initial-r1-u3.result.json`;
-    const closedPath = `research/${run}-step7-v2/impact-initial-1-closed.json`;
+    const reportPath = `research/${run}-step5-v2/step5-v2-impact-initial-r1-u3.json`;
+    const packPath = `research/${run}-step5-v2/impact-initial-1.json`;
+    const resultPath = `research/${run}-dispatch/alpha-repair-step5-v2-impact-initial-r1-u3.result.json`;
+    const closedPath = `research/${run}-step5-v2/impact-initial-1-closed.json`;
     if (![reportPath, packPath, resultPath, closedPath].every(bound)) return null;
     const report = read(researchFile(root, reportPath)), pack = read(researchFile(root, packPath));
     const result = read(researchFile(root, resultPath)), closed = read(researchFile(root, closedPath));
@@ -395,13 +395,13 @@ function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceTe
       || pack.before?.[id] !== hashes.guard_sha256 || !pack.assignments?.['3']?.includes(id)
       || !pack.impacts?.some(row => row.id === id
         && sameCanonical(row.suppliers, ['def-bmo-seminorm-and-quotient-by-constants']))
-      || result.run !== run || result.role !== 'alpha-repair' || !authorResultAllowed(7, result)
-      || result.label !== 'step7-v2-impact-initial-r1-u3' || !result.covers.includes('3')
+      || result.run !== run || result.role !== 'alpha-repair' || !authorResultAllowed(5, result)
+      || result.label !== 'step5-v2-impact-initial-r1-u3' || !result.covers.includes('3')
       || reviews?.length !== 1 || review.disposition !== 'unaffected' || review.metadata_repair_only !== true
       || review.uncertain !== false || review.post_sha256 !== current.guard_sha256
       || review.reason !== item.reason || closed.run !== run || closed.errors?.length !== 0
       || !closed.reviews?.some(row => sameCanonical(row, review))) return null;
-    const evidence = step5ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
+    const evidence = step3ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
     const logBytes = readFileSync(researchFile(root, native?.log?.path), 'utf8');
     if (sha(logBytes) !== native.log.sha256) return null;
     const contract = contractEntry(join(root, 'research', `${run}-batch-6.proof-contracts.json`), id);
@@ -422,39 +422,39 @@ function closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceTe
     }
     if (recovered.size !== 1) return null;
     const historicalContract = [...recovered.values()][0];
-    return bootstrapStep5Author(root, run, id, live, hashes, evidenceText, { historicalContract });
+    return bootstrapStep3Author(root, run, id, live, hashes, evidenceText, { historicalContract });
   } catch { return null; }
 }
 
-// Load only this sealed owner origin after its authenticated native Step-7
+// Load only this sealed owner origin after its authenticated native Step-5
 // supplier-quotation update. The old receipt remains immutable; inverse replay
 // must recover its exact contract, and current native certification is separate.
-function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText) {
+function closedStep3GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText) {
   if (run !== 'frontier-39-analysis-30'
     || id !== 'lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function'
-    || receipt.basis !== 'initial-step5-authenticated-native-input-manifest-mirror') return null;
+    || receipt.basis !== 'initial-step3-authenticated-native-input-manifest-mirror') return null;
   try {
-    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closure = read(join(root, 'research', `${run}-step3-closure.json`));
     const closedAt = Date.parse(closure.closed_at);
-    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step3-close.result.json'));
     if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
       || !Number.isFinite(closedAt) || !(Date.parse(receipt.at) <= closedAt)
       || closure.final_item_hashes?.[id] !== hashes.guard_sha256
-      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step3-close'
       || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
       || !closeResult.covers?.includes('all') || !(Date.parse(closeResult.ended_at) >= closedAt)) return null;
     const artifacts = Object.entries(closure.artifacts ?? {});
     if (!artifacts.length || artifacts.some(([path, expected]) =>
       !/^[a-f0-9]{64}$/.test(expected ?? '')
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
-    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    const boundary = stageBaseline(root, run, 5), before = boundary.item_carriers?.[id];
     if (!before || before.batch !== '5' || before.page !== 'real-hardy-spaces-maximal-functions-and-atoms'
       || !(Date.parse(boundary.at) >= closedAt)
       || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
-    const frozenPath = `research/${run}-step5-hash-5-post-5a.json`;
+    const frozenPath = `research/${run}-step3-hash-5-post-3a.json`;
     if (!closure.artifacts[frozenPath]) return null;
     const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
-    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-5a'
+    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-3a'
       || carrier?.item_sha256 !== hashes.item_file_sha256
       || carrier.manifest_sha256 !== hashes.manifest_sha256
       || carrier.contract_sha256 !== hashes.contract_sha256) return null;
@@ -465,10 +465,10 @@ function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, eviden
     const current = carrierHashes(root, run, live);
     if (['guard_sha256', 'judge_sha256', 'item_file_sha256', 'manifest_sha256']
       .some(key => current[key] !== hashes[key]) || current.contract_sha256 === hashes.contract_sha256) return null;
-    const after = stageBaseline(root, run, 8).item_carriers?.[id];
+    const after = stageBaseline(root, run, 6).item_carriers?.[id];
     if (!after || after.page !== live.page || after.batch !== live.batch
       || CARRIER_KEYS.some(key => after[key] !== current[key])) return null;
-    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const certificate = read(join(root, 'research', `${run}-step5-v2`, 'certification.json'));
     const { sha256, ...payload } = certificate;
     const item = certificate.items?.find(row => row.id === id);
     if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
@@ -481,10 +481,10 @@ function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, eviden
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
     const bound = path => nativeEvidence.some(([candidate, expected]) =>
       resolve(root, candidate) === resolve(root, path) && expected === sha(readFileSync(researchFile(root, path))));
-    const reportPath = `research/${run}-step7-v2/step7-v2-impact-initial-r1-u1.json`;
-    const packPath = `research/${run}-step7-v2/impact-initial-1.json`;
-    const resultPath = `research/${run}-dispatch/alpha-repair-step7-v2-impact-initial-r1-u1.result.json`;
-    const closedPath = `research/${run}-step7-v2/impact-initial-1-closed.json`;
+    const reportPath = `research/${run}-step5-v2/step5-v2-impact-initial-r1-u1.json`;
+    const packPath = `research/${run}-step5-v2/impact-initial-1.json`;
+    const resultPath = `research/${run}-dispatch/alpha-repair-step5-v2-impact-initial-r1-u1.result.json`;
+    const closedPath = `research/${run}-step5-v2/impact-initial-1-closed.json`;
     if (![reportPath, packPath, resultPath, closedPath].every(bound)) return null;
     const report = read(researchFile(root, reportPath)), pack = read(researchFile(root, packPath));
     const result = read(researchFile(root, resultPath)), closed = read(researchFile(root, closedPath));
@@ -495,13 +495,13 @@ function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, eviden
       || pack.before?.[id] !== hashes.guard_sha256 || !pack.assignments?.['1']?.includes(id)
       || !pack.impacts?.some(row => row.id === id
         && sameCanonical(row.suppliers, ['def-grand-maximal-test-class-of-order-n']))
-      || result.run !== run || result.role !== 'alpha-repair' || !authorResultAllowed(7, result)
-      || result.label !== 'step7-v2-impact-initial-r1-u1' || !result.covers.includes('1')
+      || result.run !== run || result.role !== 'alpha-repair' || !authorResultAllowed(5, result)
+      || result.label !== 'step5-v2-impact-initial-r1-u1' || !result.covers.includes('1')
       || reviews?.length !== 1 || review.disposition !== 'unaffected' || review.metadata_repair_only !== true
       || review.uncertain !== false || review.post_sha256 !== current.guard_sha256
       || review.reason !== item.reason || closed.run !== run || closed.errors?.length !== 0
       || !closed.reviews?.some(row => sameCanonical(row, review))) return null;
-    const evidence = step5ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
+    const evidence = step3ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
     const logBytes = readFileSync(researchFile(root, native?.log?.path), 'utf8');
     if (sha(logBytes) !== native.log.sha256) return null;
     const contract = contractEntry(join(root, 'research', `${run}-batch-5.proof-contracts.json`), id);
@@ -514,7 +514,7 @@ function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, eviden
       || citation.source !== 'def-grand-maximal-test-class-of-order-n'
       || citation.source_section !== 'Definition' || citation.quote !== supplierClaim
       || !sameCanonical(citation.uses, ['1.1', '2.1'])) return null;
-    // The successful native Step-5 log printed the raw supplier Definition.
+    // The successful native Step-3 log printed the raw supplier Definition.
     // Its exact bytes, bounded by the next section/frontmatter/native event,
     // must invert only this F3 quote to the sealed historical full contract.
     const recovered = new Map();
@@ -529,40 +529,40 @@ function closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, eviden
     }
     if (recovered.size !== 1) return null;
     const historicalContract = [...recovered.values()][0];
-    return bootstrapStep5Author(root, run, id, live, hashes, evidenceText, { historicalContract });
+    return bootstrapStep3Author(root, run, id, live, hashes, evidenceText, { historicalContract });
   } catch { return null; }
 }
 
 
-// The native Step-7 cone repair changed this carried item's mathematical
-// interface. Load its sealed Step-5 owner receipt only as historical origin,
+// The native Step-5 cone repair changed this carried item's mathematical
+// interface. Load its sealed Step-3 owner receipt only as historical origin,
 // using exact old carriers and a separate current native proof/context seal.
-function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) {
+function closedStep3TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) {
   if (run !== 'frontier-39-analysis-30'
     || id !== 'lem-truncated-maximal-function-estimates'
-    || receipt.basis !== 'initial-step5-authenticated-native-input-manifest-mirror') return null;
+    || receipt.basis !== 'initial-step3-authenticated-native-input-manifest-mirror') return null;
   try {
-    const closure = read(join(root, 'research', `${run}-step5-closure.json`));
+    const closure = read(join(root, 'research', `${run}-step3-closure.json`));
     const closedAt = Date.parse(closure.closed_at);
-    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step5-close.result.json'));
+    const closeResult = read(join(root, 'research', `${run}-dispatch`, 'tool-step3-close.result.json'));
     if (closure.version !== 2 || closure.run !== run || closure.status !== 'closed'
       || !Number.isFinite(closedAt) || !(Date.parse(receipt.at) <= closedAt)
       || closure.final_item_hashes?.[id] !== hashes.guard_sha256
-      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step5-close'
+      || closeResult.run !== run || closeResult.role !== 'tool' || closeResult.label !== 'step3-close'
       || closeResult.ok !== true || closeResult.written_by !== 'autopilot'
       || !closeResult.covers?.includes('all') || !(Date.parse(closeResult.ended_at) >= closedAt)) return null;
     const artifacts = Object.entries(closure.artifacts ?? {});
     if (!artifacts.length || artifacts.some(([path, expected]) =>
       !/^[a-f0-9]{64}$/.test(expected ?? '')
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
-    const boundary = stageBaseline(root, run, 7), before = boundary.item_carriers?.[id];
+    const boundary = stageBaseline(root, run, 5), before = boundary.item_carriers?.[id];
     if (!before || before.batch !== '5' || before.page !== 'real-hardy-spaces-maximal-functions-and-atoms'
       || !(Date.parse(boundary.at) >= closedAt)
       || CARRIER_KEYS.some(key => before[key] !== hashes[key])) return null;
-    const frozenPath = `research/${run}-step5-hash-5-post-5a.json`;
+    const frozenPath = `research/${run}-step3-hash-5-post-3a.json`;
     if (!closure.artifacts[frozenPath]) return null;
     const frozen = read(researchFile(root, frozenPath)), carrier = frozen.hashes?.[id];
-    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-5a'
+    if (frozen.run !== run || String(frozen.batch) !== '5' || frozen.label !== 'post-3a'
       || carrier?.item_sha256 !== hashes.item_file_sha256
       || carrier.manifest_sha256 !== hashes.manifest_sha256
       || carrier.contract_sha256 !== hashes.contract_sha256) return null;
@@ -578,10 +578,10 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
     if (current.guard_sha256 === hashes.guard_sha256
       || current.manifest_sha256 === hashes.manifest_sha256
       || current.contract_sha256 === hashes.contract_sha256) return null;
-    const after = stageBaseline(root, run, 8).item_carriers?.[id];
+    const after = stageBaseline(root, run, 6).item_carriers?.[id];
     if (!after || after.page !== live.page || after.batch !== live.batch
       || CARRIER_KEYS.some(key => after[key] !== current[key])) return null;
-    const certificate = read(join(root, 'research', `${run}-step7-v2`, 'certification.json'));
+    const certificate = read(join(root, 'research', `${run}-step5-v2`, 'certification.json'));
     const { sha256, ...payload } = certificate;
     const item = certificate.items?.find(row => row.id === id);
     if (certificate.version !== 2 || certificate.run !== run || sha256 !== sha(JSON.stringify(payload))
@@ -594,10 +594,10 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
       || sha(readFileSync(researchFile(root, path))) !== expected)) return null;
     const bound = path => nativeEvidence.some(([candidate, expected]) =>
       resolve(root, candidate) === resolve(root, path) && expected === sha(readFileSync(researchFile(root, path))));
-    const reportPath = `research/${run}-step7-v2/step7-v2-initial-r1-u5.json`;
-    const packPath = `research/${run}-step7-v2/initial-1.json`;
-    const resultPath = `research/${run}-dispatch/alpha-adjudicate-step7-v2-initial-r1-u5.result.json`;
-    const collectedPath = `research/${run}-step7-v2/initial-1-collected.json`;
+    const reportPath = `research/${run}-step5-v2/step5-v2-initial-r1-u5.json`;
+    const packPath = `research/${run}-step5-v2/initial-1.json`;
+    const resultPath = `research/${run}-dispatch/alpha-adjudicate-step5-v2-initial-r1-u5.result.json`;
+    const collectedPath = `research/${run}-step5-v2/initial-1-collected.json`;
     if (![reportPath, packPath, resultPath, collectedPath].every(bound)) return null;
     const report = read(researchFile(root, reportPath)), pack = read(researchFile(root, packPath));
     const result = read(researchFile(root, resultPath)), collected = read(researchFile(root, collectedPath));
@@ -612,8 +612,8 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
       || decisions?.length !== 1 || decision.outcome !== 'confirmed_fatal' || decision.defect_type !== 'logic'
       || decision.uncertain !== false || decision.model !== tuple.model
       || decision.context_sha256 !== tuple.context_sha256
-      || result.run !== run || result.role !== 'alpha-adjudicate' || !authorResultAllowed(7, result)
-      || result.label !== 'step7-v2-initial-r1-u5' || !result.covers.includes('5')
+      || result.run !== run || result.role !== 'alpha-adjudicate' || !authorResultAllowed(5, result)
+      || result.label !== 'step5-v2-initial-r1-u5' || !result.covers.includes('5')
       || reviews?.length !== 1 || review.disposition !== 'repaired' || review.uncertain !== false
       || review.post_sha256 !== current.guard_sha256
       || collected.run !== run || collected.phase !== 'initial' || collected.round !== 1
@@ -624,10 +624,10 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
         && row.disposition === 'unchanged_sound')) return null;
     // The later owner lane reviewed the actual repaired carrier after its
     // Definition supplier changed; its current native seal remains required.
-    const impactReportPath = `research/${run}-step7-v2/step7-v2-impact-initial-r1-u1.json`;
-    const impactPackPath = `research/${run}-step7-v2/impact-initial-1.json`;
-    const impactResultPath = `research/${run}-dispatch/alpha-repair-step7-v2-impact-initial-r1-u1.result.json`;
-    const impactClosedPath = `research/${run}-step7-v2/impact-initial-1-closed.json`;
+    const impactReportPath = `research/${run}-step5-v2/step5-v2-impact-initial-r1-u1.json`;
+    const impactPackPath = `research/${run}-step5-v2/impact-initial-1.json`;
+    const impactResultPath = `research/${run}-dispatch/alpha-repair-step5-v2-impact-initial-r1-u1.result.json`;
+    const impactClosedPath = `research/${run}-step5-v2/impact-initial-1-closed.json`;
     if (![impactReportPath, impactPackPath, impactResultPath, impactClosedPath].every(bound)) return null;
     const impactReport = read(researchFile(root, impactReportPath)), impactPack = read(researchFile(root, impactPackPath));
     const impactResult = read(researchFile(root, impactResultPath)), impactClosed = read(researchFile(root, impactClosedPath));
@@ -638,22 +638,22 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
       || impactPack.before?.[id] !== current.guard_sha256 || !impactPack.assignments?.['1']?.includes(id)
       || !impactPack.impacts?.some(row => row.id === id
         && row.suppliers?.includes('def-grand-maximal-test-class-of-order-n'))
-      || impactResult.run !== run || impactResult.role !== 'alpha-repair' || !authorResultAllowed(7, impactResult)
-      || impactResult.label !== 'step7-v2-impact-initial-r1-u1' || !impactResult.covers.includes('1')
+      || impactResult.run !== run || impactResult.role !== 'alpha-repair' || !authorResultAllowed(5, impactResult)
+      || impactResult.label !== 'step5-v2-impact-initial-r1-u1' || !impactResult.covers.includes('1')
       || impactReviews?.length !== 1 || impactReview.disposition !== 'unaffected'
       || impactReview.metadata_repair_only !== true || impactReview.uncertain !== false
       || impactReview.post_sha256 !== current.guard_sha256 || impactReview.reason !== item.reason
       || impactClosed.run !== run || impactClosed.errors?.length !== 0
       || !impactClosed.reviews?.some(row => sameCanonical(row, impactReview))) return null;
-    const evidence = step5ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
+    const evidence = step3ManifestRepairEvidence(evidenceText), native = evidence?.native_review;
     if (!evidence?.current_manifest_entry || hashValue(evidence.current_manifest_entry) !== hashes.manifest_sha256) return null;
-    const step5Log = readFileSync(researchFile(root, native?.log?.path), 'utf8');
-    if (sha(step5Log) !== native.log.sha256) return null;
+    const step3Log = readFileSync(researchFile(root, native?.log?.path), 'utf8');
+    if (sha(step3Log) !== native.log.sha256) return null;
     // These are observed bytes with sealed preimage hashes, never inverse
     // edits that would invent the historical radial proof or its contract.
     const oldItems = new Map();
-    for (const marker of step5Log.matchAll(new RegExp(`^---\\r?\\nid: ${id}\\r?\\n`, 'gm'))) {
-      const tail = step5Log.slice(marker.index);
+    for (const marker of step3Log.matchAll(new RegExp(`^---\\r?\\nid: ${id}\\r?\\n`, 'gm'))) {
+      const tail = step3Log.slice(marker.index);
       const end = tail.search(/^exec$/m);
       if (end < 0) continue;
       const text = tail.slice(0, end).trimEnd() + '\n';
@@ -662,16 +662,16 @@ function closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceT
     }
     if (oldItems.size !== 1) return null;
     const historicalItemText = [...oldItems.values()][0];
-    const step7LogPath = resolve(root, result.log);
-    const step7Log = readFileSync(researchFile(root, step7LogPath), 'utf8');
+    const step5LogPath = resolve(root, result.log);
+    const step5Log = readFileSync(researchFile(root, step5LogPath), 'utf8');
     const oldContracts = new Map();
-    for (const match of step7Log.matchAll(new RegExp(`^${id}\\r?\\n(\\{[\\s\\S]*?^\\})`, 'gm'))) {
+    for (const match of step5Log.matchAll(new RegExp(`^${id}\\r?\\n(\\{[\\s\\S]*?^\\})`, 'gm'))) {
       const candidate = JSON.parse(match[1]);
       if (hashValue(candidate) === hashes.contract_sha256) oldContracts.set(hashValue(candidate), candidate);
     }
     if (oldContracts.size !== 1) return null;
     const historicalContract = [...oldContracts.values()][0];
-    return bootstrapStep5Author(root, run, id,
+    return bootstrapStep3Author(root, run, id,
       { ...live, manifest_entry: evidence.current_manifest_entry }, hashes, evidenceText,
       { historicalItemText, historicalContract });
   } catch { return null; }
@@ -686,8 +686,8 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   if (receipt.supersedes) {
     const priorPath = researchFile(root, receipt.supersedes.path);
     const priorBytes = readFileSync(priorPath, 'utf8'), prior = JSON.parse(priorBytes);
-    if (step !== 5 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
-      || receipt.basis !== 'initial-step5-authenticated-statement-source-mirror'
+    if (step !== 3 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
+      || receipt.basis !== 'initial-step3-authenticated-statement-source-mirror'
       || sha(priorBytes) !== receipt.supersedes.sha256
       || prior.owner !== true || prior.run !== run || prior.step !== step || prior.id !== id
       || prior.author_result !== receipt.author_result || prior.basis !== receipt.basis
@@ -702,15 +702,15 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
   const researchRoot = resolve(root, 'research');
   const evidenceText = evidencePath.startsWith(`${researchRoot}/`) && existsSync(evidencePath)
     ? readFileSync(evidencePath, 'utf8') : '';
-  const liveRow = step === 5 ? inventory(root, run).find(row => row.id === id) : null;
-  const step5Bootstrap = step === 5 && receipt.basis !== undefined && liveRow
-    ? bootstrapStep5Author(root, run, id, liveRow, hashes, evidenceText, historical
+  const liveRow = step === 3 ? inventory(root, run).find(row => row.id === id) : null;
+  const step3Bootstrap = step === 3 && receipt.basis !== undefined && liveRow
+    ? bootstrapStep3Author(root, run, id, liveRow, hashes, evidenceText, historical
       ? { historicalContext: { marker: { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) },
         evidence_sha256: receipt.evidence_sha256 } } : {})
-      ?? (historical ? closedStep5GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
-        ?? closedStep5LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText)
-        ?? closedStep5GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText)
-        ?? closedStep5TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
+      ?? (historical ? closedStep3GraphBootstrap(root, run, id, hashes, receipt, evidenceText)
+        ?? closedStep3LacunaryBootstrap(root, run, id, hashes, receipt, evidenceText)
+        ?? closedStep3GrandMaximalBootstrap(root, run, id, hashes, receipt, evidenceText)
+        ?? closedStep3TruncatedBootstrap(root, run, id, hashes, receipt, evidenceText) : null)
     : null;
   if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
     || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
@@ -718,49 +718,49 @@ function ownerRecertification(root, run, step, id, hashes, authorResult, basis =
       : receipt.author_result !== undefined || !receipt.owner_creation
         || !ownerCreation(root, run, id, receipt.owner_creation))
     || (basis && receipt.basis !== basis)
-    || (receipt.basis !== undefined && !(step === 5
-      ? ['initial-step5-contract-only', 'initial-step5-item-repair',
-        'initial-step5-source-metadata-repair', 'initial-step5-dependency-repair',
-        'initial-step5-authenticated-statement-source-mirror',
-        'initial-step5-owner-resolvent-projection-review',
-        'initial-step5-authenticated-native-input-manifest-mirror',
-        'initial-step5-current-definition-manifest-review',
-        'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review',
-        'initial-step5-current-proof-manifest-review'].includes(receipt.basis)
-      : step === 7 && ['initial-step7-item-repair',
-        'initial-step7-contract-only'].includes(receipt.basis)))
-    || (step === 5 && receipt.basis !== undefined
-      && (!step5Bootstrap || step5Bootstrap.basis !== receipt.basis
-        || step5Bootstrap.result_file !== receipt.author_result))
-    || (['initial-step5-current-definition-manifest-review',
-      'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review',
-        'initial-step5-current-proof-manifest-review'].includes(receipt.basis)
+    || (receipt.basis !== undefined && !(step === 3
+      ? ['initial-step3-contract-only', 'initial-step3-item-repair',
+        'initial-step3-source-metadata-repair', 'initial-step3-dependency-repair',
+        'initial-step3-authenticated-statement-source-mirror',
+        'initial-step3-owner-resolvent-projection-review',
+        'initial-step3-authenticated-native-input-manifest-mirror',
+        'initial-step3-current-definition-manifest-review',
+        'initial-step3-current-ball-lemma-manifest-review',
+        'initial-step3-current-graph-lemma-manifest-review',
+        'initial-step3-current-proof-manifest-review'].includes(receipt.basis)
+      : step === 5 && ['initial-step5-item-repair',
+        'initial-step5-contract-only'].includes(receipt.basis)))
+    || (step === 3 && receipt.basis !== undefined
+      && (!step3Bootstrap || step3Bootstrap.basis !== receipt.basis
+        || step3Bootstrap.result_file !== receipt.author_result))
+    || (['initial-step3-current-definition-manifest-review',
+      'initial-step3-current-ball-lemma-manifest-review',
+        'initial-step3-current-graph-lemma-manifest-review',
+        'initial-step3-current-proof-manifest-review'].includes(receipt.basis)
       && receipt.historical_delta_unknown !== true)
-    || (receipt.basis === 'initial-step5-current-proof-manifest-review'
-      && receipt.current_item_unchanged !== (step5Bootstrap?.current_item_unchanged ? true : undefined))
+    || (receipt.basis === 'initial-step3-current-proof-manifest-review'
+      && receipt.current_item_unchanged !== (step3Bootstrap?.current_item_unchanged ? true : undefined))
     || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
     || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
     || sha(evidenceText) !== receipt.evidence_sha256
-    || (step === 5 && !step5EvidenceBindsCurrentCarriers(
+    || (step === 3 && !step3EvidenceBindsCurrentCarriers(
       evidenceText, run, id, hashes))
     || CARRIER_KEYS.some(key => receipt.carriers?.[key] !== hashes[key]))
     throw Error(`${id}: invalid owner recertification receipt`);
   return { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes), basis: receipt.basis };
 }
 
-// A carried Step-5 item can be repaired by a Step-7 adjudicator before the
-// Step-7 certification gate first runs. If a shared batch contract is then
-// repaired outside that dispatch, there is no Step-7 receipt to recertify.
-// Admit an initial owner attestation when the item itself has a genuine Step-7
+// A carried Step-3 item can be repaired by a Step-5 adjudicator before the
+// Step-5 certification gate first runs. If a shared batch contract is then
+// repaired outside that dispatch, there is no Step-5 receipt to recertify.
+// Admit an initial owner attestation when the item itself has a genuine Step-5
 // content delta in a successful author window. A separate contract-only branch
 // covers a carried item whose item and manifest are byte-identical to the
-// Step-7 baseline, but whose exact contract entry changed after adjudication.
+// Step-5 baseline, but whose exact contract entry changed after adjudication.
 // Its owner receipt, rather than a fictional item write, binds that repair.
-function bootstrapStep7Author(root, run, id, row, hashes) {
-  if (!provenanceRows(root, run, 5).some(prior => prior.id === id)) return null;
-  const baseline = stageBaseline(root, run, 7);
+function bootstrapStep5Author(root, run, id, row, hashes) {
+  if (!provenanceRows(root, run, 3).some(prior => prior.id === id)) return null;
+  const baseline = stageBaseline(root, run, 5);
   const listed = baseline.items.some(value => value.id === id
     && value.page === row.page && String(value.batch) === row.batch);
   const before = baseline.item_carriers?.[id];
@@ -775,7 +775,7 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
   const changedAt = itemChanged
     ? statSync(join(root, 'items', `${safe(id, 'item ID')}.md`)).mtimeMs : null;
   const baselineAt = Date.parse(baseline.at);
-  return successfulAuthorResults(root, run, 7).filter(author => {
+  return successfulAuthorResults(root, run, 5).filter(author => {
     const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
     const covers = author.covers.map(String);
     return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
@@ -784,26 +784,26 @@ function bootstrapStep7Author(root, run, id, row, hashes) {
       && (!covers.length || covers.includes('all') || covers.includes(row.batch));
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at))
     .map(author => ({ ...author, basis: itemChanged
-      ? 'initial-step7-item-repair' : 'initial-step7-contract-only' })).at(-1) ?? null;
+      ? 'initial-step5-item-repair' : 'initial-step5-contract-only' })).at(-1) ?? null;
 }
 
-// A Step-5 gate can first encounter a Step-3-created item whose current
+// A Step-3 gate can first encounter a Step-3-created item whose current
 // contract entry changed during a failed adjudicator attempt, or whose item
 // proof was repaired by the owner after adjudication. Keep the original Step-3
-// provenance. A successful Step-5 result supplies stage/batch context; the
+// provenance. A successful Step-3 result supplies stage/batch context; the
 // hash-bound owner receipt, not that result, attests either late repair.
-const step5BootstrapContext = new Map();
-function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
+const step3BootstrapContext = new Map();
+function bootstrapStep3Author(root, run, id, row, hashes, evidenceText = '',
   { closedGraphOrigin = false, historicalContract = null, historicalItemText = null, historicalContext = null } = {}) {
   const key = `${root}\0${run}`;
-  if (!step5BootstrapContext.has(key)) {
-    step5BootstrapContext.set(key, {
-      origins: new Set(provenanceRows(root, run, 3).map(prior => prior.id)),
-      baseline: stageBaseline(root, run, 5),
-      authors: successfulAuthorResults(root, run, 5),
+  if (!step3BootstrapContext.has(key)) {
+    step3BootstrapContext.set(key, {
+      origins: new Set(provenanceRows(root, run, LEGACY_AUTHOR_STEP).map(prior => prior.id)),
+      baseline: stageBaseline(root, run, 3),
+      authors: successfulAuthorResults(root, run, 3),
     });
   }
-  const context = step5BootstrapContext.get(key);
+  const context = step3BootstrapContext.get(key);
   if (!context.origins.has(id)) return null;
   const baseline = context.baseline;
   const listed = baseline.items.some(value => value.id === id
@@ -818,10 +818,10 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
   const itemRepair = before.judge_sha256 !== hashes.judge_sha256
     && before.manifest_sha256 === hashes.manifest_sha256;
   const unchangedProofReview = before.item_file_sha256 === hashes.item_file_sha256
-    && step5ManifestRepairEvidence(evidenceText)?.repair_kind === 'current-proof-manifest-review';
+    && step3ManifestRepairEvidence(evidenceText)?.repair_kind === 'current-proof-manifest-review';
   const manifestRepair = before.manifest_sha256 !== hashes.manifest_sha256
     && (before.judge_sha256 !== hashes.judge_sha256 || unchangedProofReview)
-    ? step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
+    ? step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
       { closedGraphOrigin, historicalContract, historicalItemText, historicalContext }) : null;
   if (!contractOnly && !itemRepair && !manifestRepair) return null;
   const baselineAt = Date.parse(baseline.at);
@@ -832,29 +832,29 @@ function bootstrapStep5Author(root, run, id, row, hashes, evidenceText = '',
       && Number.isFinite(baselineAt) && started >= baselineAt
       && (!covers.length || covers.includes('all') || covers.includes(row.batch));
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at));
-  // A later successful Step-5 dispatch may cover the same batch without
+  // A later successful Step-3 dispatch may cover the same batch without
   // authoring this already reviewed carrier. Keep a current, hash-bound owner
   // receipt attached to its original eligible dispatch instead of silently
   // rebinding its authorship to that later dispatch.
-  const receiptPath = ownerRecertificationPath(root, run, 5, id, hashes);
+  const receiptPath = ownerRecertificationPath(root, run, 3, id, hashes);
   let preferred = null;
   if (existsSync(receiptPath)) {
     try { preferred = read(receiptPath).author_result; } catch { /* invalid receipt is checked below */ }
   }
-  const reviewedResult = ['initial-step5-authenticated-statement-source-mirror',
-    'initial-step5-owner-resolvent-projection-review',
-    'initial-step5-authenticated-native-input-manifest-mirror'].includes(manifestRepair)
-    ? step5ManifestRepairEvidence(evidenceText)?.native_review?.result_file : null;
+  const reviewedResult = ['initial-step3-authenticated-statement-source-mirror',
+    'initial-step3-owner-resolvent-projection-review',
+    'initial-step3-authenticated-native-input-manifest-mirror'].includes(manifestRepair)
+    ? step3ManifestRepairEvidence(evidenceText)?.native_review?.result_file : null;
   const author = eligible.find(candidate => candidate.result_file === (reviewedResult ?? preferred))
     ?? eligible.at(-1);
   if (reviewedResult && author?.result_file !== reviewedResult) return null;
   return author ? { ...author, basis: manifestRepair ?? (itemRepair
-    ? 'initial-step5-item-repair' : 'initial-step5-contract-only'),
-    ...(unchangedProofReview && manifestRepair === 'initial-step5-current-proof-manifest-review'
+    ? 'initial-step3-item-repair' : 'initial-step3-contract-only'),
+    ...(unchangedProofReview && manifestRepair === 'initial-step3-current-proof-manifest-review'
       ? { current_item_unchanged: true } : {}) } : null;
 }
 
-function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
+function step3EvidenceBindsCurrentCarriers(text, run, id, hashes) {
   // Independent reviews report the three source carriers (raw item bytes,
   // canonical manifest entry and canonical contract entry); the normalized
   // guard/judge/subject hashes are derived deterministically from these inputs.
@@ -863,8 +863,8 @@ function step5EvidenceBindsCurrentCarriers(text, run, id, hashes) {
       .every(key => text.includes(hashes[key]));
 }
 
-function step5ManifestRepairEvidence(text) {
-  const match = text.match(/```step5-manifest-repair\s*\r?\n([\s\S]*?)\r?\n```/);
+function step3ManifestRepairEvidence(text) {
+  const match = text.match(/```step3-manifest-repair\s*\r?\n([\s\S]*?)\r?\n```/);
   if (!match) {
     try { const value = JSON.parse(text); return value.manifest_repair ?? null; } catch { return null; }
   }
@@ -924,11 +924,11 @@ function dependencyMetadataMirrorsItem(root, id, currentEntry) {
 // explicitly owner-authorized current-content review is a separate branch:
 // it preserves the unknown historical delta and binds the current projection,
 // actual source evidence and direct consumers without inventing a preimage.
-function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
+function step3ManifestRepairBasis(root, run, id, row, hashes, before, evidenceText,
   { closedGraphOrigin = false, historicalContract = null, historicalItemText = null, historicalContext = null } = {}) {
-  const evidence = step5ManifestRepairEvidence(evidenceText);
-  if (!evidence || evidence.version !== 1 || evidence.policy !== 'step5-manifest-repair-evidence-v1'
-    || evidence.run !== run || evidence.step !== 5 || evidence.id !== id
+  const evidence = step3ManifestRepairEvidence(evidenceText);
+  if (!evidence || evidence.version !== 1 || evidence.policy !== 'step3-manifest-repair-evidence-v1'
+    || evidence.run !== run || evidence.step !== 3 || evidence.id !== id
     || evidence.page !== row.page || String(evidence.batch) !== row.batch
     || evidence.baseline_manifest_sha256 !== before.manifest_sha256
     || evidence.current_manifest_sha256 !== hashes.manifest_sha256
@@ -947,7 +947,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
     && id === 'lem-smooth-euclidean-hypersurface-graph-and-localization';
   if (graphLemmaReview) {
     const link = evidence.owner_authorization?.approval;
-    const expectedPath = `research/${run}-step5-historical-owner-checkpoint.json`;
+    const expectedPath = `research/${run}-step3-historical-owner-checkpoint.json`;
     try {
       if (link?.path !== expectedPath || !/^[a-f0-9]{64}$/.test(link?.sha256 ?? '')) return null;
       const bytes = readFileSync(researchFile(root, link.path), 'utf8');
@@ -985,7 +985,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       || (proofReview ? !['lemma', 'theorem', 'proposition', 'corollary'].includes(fm.kind)
         || fm.proved_here === false || fm.provenance?.proof === 'not-supplied'
         || !/^## Proof\s*\n\s*\S/m.test(split(itemText).body)
-        : fm.kind !== (definitionReview ? 'definition' : 'lemma'))
+        : (definitionReview ? !['definition', 'algorithm'].includes(fm.kind) : fm.kind !== 'lemma'))
       || currentEntry?.kind !== fm.kind
       || evidence.owner_authorization?.owner !== true
       || !String(evidence.owner_authorization?.reason ?? '').trim()
@@ -1034,7 +1034,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
           const bytes = readFileSync(researchFile(root, link?.path), 'utf8');
           const check = JSON.parse(bytes);
           if (sha(bytes) !== link?.sha256 || check.version !== 1 || check.run !== run
-            || check.step !== 5 || check.id !== id || check.kind !== kind
+            || check.step !== 3 || check.id !== id || check.kind !== kind
             || check.exit_code !== 0 || !Number.isFinite(Date.parse(check.observed_at))
             || !Array.isArray(check.argv)
             || (proofReview ? CARRIER_KEYS : ['item_file_sha256', 'manifest_sha256', 'contract_sha256'])
@@ -1050,14 +1050,14 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         } catch { return null; }
       }
     }
-    return proofReview ? 'initial-step5-current-proof-manifest-review'
-      : definitionReview ? 'initial-step5-current-definition-manifest-review'
-      : graphLemmaReview ? 'initial-step5-current-graph-lemma-manifest-review'
-        : 'initial-step5-current-ball-lemma-manifest-review';
+    return proofReview ? 'initial-step3-current-proof-manifest-review'
+      : definitionReview ? 'initial-step3-current-definition-manifest-review'
+      : graphLemmaReview ? 'initial-step3-current-graph-lemma-manifest-review'
+        : 'initial-step3-current-ball-lemma-manifest-review';
   }
   const oldEntry = evidence.baseline_manifest_entry, currentEntry = evidence.current_manifest_entry;
   if (!oldEntry || !currentEntry || oldEntry.id !== id || currentEntry.id !== id
-    || oldEntry.__step6_page_id !== row.page || currentEntry.__step6_page_id !== row.page
+    || oldEntry.__step4_page_id !== row.page || currentEntry.__step4_page_id !== row.page
     || hashValue(oldEntry) !== before.manifest_sha256
     || hashValue(currentEntry) !== hashes.manifest_sha256
     || !sameCanonical(currentEntry, row.manifest_entry)) return null;
@@ -1083,7 +1083,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       const { fm, body } = split(text), meta = yaml().parse(fm) ?? {};
       const statement = body.match(/^## Statement refuted\s*\r?\n([\s\S]*?)(?=^## |$(?![\s\S]))/m)?.[1]?.trim();
       const withoutProjection = ({ statement: _statement, deps: _deps, strategy: _strategy, ...entry }) => entry;
-      const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
+      const decisionPath = `research/${run}-alpha-batch-${row.batch}-3a-decisions.json`;
       const decisions = read(researchFile(root, decisionPath));
       const decision = decisions.decisions?.find(value => value.id === id && value.route === 'touched');
       const subject = Object.fromEntries(['id', 'obligation', 'route', 'verdict', 'evidence',
@@ -1092,7 +1092,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || approval.current_complete_proof_and_contract_adjudicated !== true
         || approval.native_authorship_of_owner_reconciliation !== false
         || native.result.path !== `research/${run}-dispatch/${native.result_file}`
-        || result.run !== run || !authorResultAllowed(5, result)
+        || result.run !== run || !authorResultAllowed(3, result)
         || resolve(root, native.log.path) !== resolve(result.log)
         || !result.covers.map(String).includes(row.batch)
         || snapshot.run !== run || String(snapshot.batch) !== row.batch || snapshot.label !== 'post'
@@ -1106,7 +1106,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || decisions.run !== run || decision?.obligation !== `touched:${row.batch}:${id}`
         || decision?.verdict !== 'amended_repair'
         || hashValue(subject) !== native.decision_subject_sha256) return null;
-      return 'initial-step5-owner-resolvent-projection-review';
+      return 'initial-step3-owner-resolvent-projection-review';
     } catch { return null; }
   }
   if (['authenticated-statement-source-mirror', 'authenticated-native-input-manifest-mirror'].includes(kind)) {
@@ -1171,9 +1171,9 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       const resultBytes = linked(native?.result), result = JSON.parse(resultBytes);
       const resultPath = `research/${run}-dispatch/${native.result_file}`;
       const started = Date.parse(result.started_at), ended = Date.parse(result.ended_at);
-      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(5, result)
+      if (native.result.path !== resultPath || result.run !== run || !authorResultAllowed(3, result)
         || !Number.isFinite(started) || !Number.isFinite(ended) || started > ended
-        || started < Date.parse(stageBaseline(root, run, 5).at)
+        || started < Date.parse(stageBaseline(root, run, 3).at)
         || !result.covers.map(String).some(value => value === row.batch || value === 'all')) return null;
       const log = linked(native.log);
       if (resolve(root, native.log.path) !== resolve(result.log)) return null;
@@ -1190,7 +1190,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
           || log.includes("t=t.replace('\\\\x0barphi','\\\\\\\\varphi')"))) {
         const nativeText = literalRepair.before_item_text.replaceAll('\x0barphi', '\\varphi');
         grandMaximalTextMatches = nativeText === currentText;
-        if (evidence.owner_refinement?.path === `research/${run}-step5-owner-grand-maximal-adjudication.json`) {
+        if (evidence.owner_refinement?.path === `research/${run}-step3-owner-grand-maximal-adjudication.json`) {
           const owner = JSON.parse(linked(evidence.owner_refinement));
           grandMaximalTextMatches = owner.run === run && owner.item === id
             && owner.statement_changed === false && String(owner.owner_local_note ?? '').trim().length > 0
@@ -1225,7 +1225,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         // Preserve the old receipt as historical evidence after the live quote
         // changes. Its exact unchanged evidence must be the linked predecessor
         // of the new, current-carrier-bound owner replay.
-        const refresh = read(join(root, 'research', `${run}-step5b-owner-tangential-citation-provenance.json`));
+        const refresh = read(join(root, 'research', `${run}-step3b-owner-tangential-citation-provenance.json`));
         const liveHashes = carrierHashes(root, run, row);
         const priorEvidence = JSON.parse(linked(refresh.manifest_repair?.prior_owner_evidence));
         if (CARRIER_KEYS.some(key => refresh.current_carriers?.[key] !== liveHashes[key])
@@ -1236,7 +1236,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         // One owner-authored literal mirror update, never a native reread of
         // the current quote. Inverse replay must recover the sealed contract.
         if (!nativeMirror || id !== 'lem-tangential-maximal-function-norm-bound'
-          || replayEvidence.owner_citation_replay.path !== `research/${run}-step5b-owner-maximal-mass-adjudication.json`)
+          || replayEvidence.owner_citation_replay.path !== `research/${run}-step3b-owner-maximal-mass-adjudication.json`)
           return null;
         const owner = JSON.parse(linked(replayEvidence.owner_citation_replay));
         const source = 'def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution';
@@ -1264,9 +1264,9 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
           || !currentFm.deps?.includes('def-countable-choice')
           || !currentStatement?.[1]?.trim().startsWith('Assume Countable Choice.')
           || !/^\*\*Given:\*\* Countable Choice,/m.test(currentText)
-          || prior.policy !== OWNER_RECERTIFICATION_POLICY || prior.run !== run || prior.step !== 5
+          || prior.policy !== OWNER_RECERTIFICATION_POLICY || prior.run !== run || prior.step !== 3
           || prior.id !== id || prior.owner !== true
-          || prior.basis !== 'initial-step5-authenticated-native-input-manifest-mirror'
+          || prior.basis !== 'initial-step3-authenticated-native-input-manifest-mirror'
           || prior.evidence !== replayEvidence.prior_owner_evidence.path
           || prior.evidence_sha256 !== replayEvidence.prior_owner_evidence.sha256
           || !sameCanonical(priorEvidence.manifest_repair?.native_review, native)
@@ -1279,7 +1279,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       }
       if (ownerReviewSuffix && !review?.notes?.endsWith(ownerReviewSuffix)) return null;
       const nativeReviewNotes = ownerReviewSuffix ? review.notes.slice(0, -ownerReviewSuffix.length) : review?.notes;
-      const decisionPath = `research/${run}-alpha-batch-${row.batch}-5a-decisions.json`;
+      const decisionPath = `research/${run}-alpha-batch-${row.batch}-3a-decisions.json`;
       if (native.decisions?.path !== decisionPath) return null;
       const decisions = read(researchFile(root, decisionPath));
       const ownDecisions = decisions.decisions?.filter(value => value.id === id && value.route === 'touched');
@@ -1323,8 +1323,8 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
         || (!batch6Review && !['', 'accepted_repair', 'amended_repair', 'reviewed_no_defect'].some(verdict =>
           unquote(log).includes(unquote(`{"id":"${id}",${verdict ? `"verdict":"${verdict}",` : ''}"note":"${nativeReviewNotes}"`))))
         || evidence.review.native_reviewed_subject_unchanged !== true) return null;
-      return nativeMirror ? 'initial-step5-authenticated-native-input-manifest-mirror'
-        : 'initial-step5-authenticated-statement-source-mirror';
+      return nativeMirror ? 'initial-step3-authenticated-native-input-manifest-mirror'
+        : 'initial-step3-authenticated-statement-source-mirror';
     } catch { return null; }
   }
   if (kind === 'source-reference-fields') {
@@ -1340,7 +1340,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       && sameExceptSourceReferenceFields(oldEntry, currentEntry)
       && sourceMetadataMirrorsItem(root, id, currentEntry)
       && evidence.review.changed_fields === 'sources.references[*].url,locator'
-      ? 'initial-step5-source-metadata-repair' : null;
+      ? 'initial-step3-source-metadata-repair' : null;
   }
   if (kind === 'dependency-addition') {
     const oldDeps = oldEntry.deps, newDeps = currentEntry.deps;
@@ -1356,7 +1356,7 @@ function step5ManifestRepairBasis(root, run, id, row, hashes, before, evidenceTe
       || !sameCanonical(evidence.review.reviewed_new_dependencies, added)) return null;
     if (!added.every(dep => existsSync(join(root, 'items', `${safe(dep, 'dependency ID')}.md`)))) return null;
     if (evidence.review.changed_fields !== 'deps') return null;
-    return 'initial-step5-dependency-repair';
+    return 'initial-step3-dependency-repair';
   }
   return null;
 }
@@ -1379,7 +1379,7 @@ function sameExceptDependencyList(before, after, path = []) {
 export function recordOwnerRecertification(root, run, step, id, evidence, reason,
   { refreshEvidence = false } = {}) {
   step = Number(step);
-  if (![5, 7].includes(step)) throw Error('Owner recertification supports steps 5 and 7');
+  if (![3, 5].includes(step)) throw Error('Owner recertification supports steps 3 and 5');
   safe(run, 'run'); safe(id, 'item ID');
   if (!String(reason ?? '').trim()) throw Error(`${id}: owner recertification needs a reason`);
   const row = inventory(root, run).find(row => row.id === id);
@@ -1395,28 +1395,28 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
   // A valid immutable owner origin exists independently of the first whole-stage
   // certificate. Explicit current-carrier recertification can precede that gate.
   const creation = prior?.owner_creation ? ownerCreation(root, run, id, prior.owner_creation)
-    : step === 5 && !prior ? ownerCreation(root, run, id) : null;
+    : step === 3 && !prior ? ownerCreation(root, run, id) : null;
   if (creation && (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch)))
     throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
-  const citationRefresh = step === 5 && id === 'lem-tangential-maximal-function-norm-bound'
-    && step5ManifestRepairEvidence(evidenceText)?.owner_citation_replay;
+  const citationRefresh = step === 3 && id === 'lem-tangential-maximal-function-norm-bound'
+    && step3ManifestRepairEvidence(evidenceText)?.owner_citation_replay;
   const bootstrap = (!prior && !creation) || citationRefresh
-    ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, evidenceText)
-      : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
+    ? step === 3 ? bootstrapStep3Author(root, run, id, row, hashes, evidenceText)
+      : step === 5 ? bootstrapStep5Author(root, run, id, row, hashes) : null
     : null;
-  if (citationRefresh && bootstrap?.basis !== 'initial-step5-authenticated-native-input-manifest-mirror')
+  if (citationRefresh && bootstrap?.basis !== 'initial-step3-authenticated-native-input-manifest-mirror')
     throw Error(`${id}: unauthenticated owner citation replay`);
   const authorResult = prior?.author_result ?? bootstrap?.result_file;
   if (!authorResult && !creation) throw Error(`${id}: no prior auditor-created certification to recertify or eligible Step ${step} owner bootstrap`);
   if (!evidenceText.includes(id))
     throw Error(`${id}: owner evidence must be a research file naming the item`);
-  if (step === 5 && !step5EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
-    throw Error(`${id}: Step-5 owner evidence must name the active run and every exact current carrier hash`);
+  if (step === 3 && !step3EvidenceBindsCurrentCarriers(evidenceText, run, id, hashes))
+    throw Error(`${id}: Step-3 owner evidence must name the active run and every exact current carrier hash`);
   let path = ownerRecertificationPath(root, run, step, id, hashes);
   let supersedes;
   if (refreshEvidence) {
-    if (step !== 5 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
-      || bootstrap?.basis !== 'initial-step5-authenticated-statement-source-mirror'
+    if (step !== 3 || id !== 'lem-schwartz-dilations-preserve-schwartz-space'
+      || bootstrap?.basis !== 'initial-step3-authenticated-statement-source-mirror'
       || !existsSync(path)) throw Error(`${id}: no eligible identical-carrier decision-binding refresh`);
     const priorBytes = readFileSync(path, 'utf8'), priorReceipt = JSON.parse(priorBytes);
     if (path.includes('-refresh-') && priorReceipt.evidence_sha256 === sha(evidenceText)) {
@@ -1446,10 +1446,10 @@ export function recordOwnerRecertification(root, run, step, id, evidence, reason
     ...(creation ? { owner_creation: creation.marker } : { author_result: authorResult }),
     ...(bootstrap ? { basis: bootstrap.basis,
       ...(bootstrap.current_item_unchanged ? { current_item_unchanged: true } : {}),
-      ...(['initial-step5-current-definition-manifest-review',
-        'initial-step5-current-ball-lemma-manifest-review',
-        'initial-step5-current-graph-lemma-manifest-review',
-        'initial-step5-current-proof-manifest-review'].includes(bootstrap.basis)
+      ...(['initial-step3-current-definition-manifest-review',
+        'initial-step3-current-ball-lemma-manifest-review',
+        'initial-step3-current-graph-lemma-manifest-review',
+        'initial-step3-current-proof-manifest-review'].includes(bootstrap.basis)
         ? { historical_delta_unknown: true } : {}) } : {}),
     carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
   writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
@@ -1467,7 +1467,7 @@ function inventory(root, run) {
       const item = typeof rawItem === 'string' ? { id: rawItem } : rawItem;
       if (!item?.id) continue;
       items.push({ id: String(item.id), page: String(page.id), batch: String(match[1]),
-        manifest_entry: canonical({ ...item, __step6_page_id: String(page.id) }) });
+        manifest_entry: canonical({ ...item, __step4_page_id: String(page.id) }) });
     }
   }
   const ids = items.map(row => row.id);
@@ -1477,7 +1477,7 @@ function inventory(root, run) {
 
 export function writeAuditorCreatedBaseline(root, run, step) {
   safe(run, 'run');
-  if (![5, 7].includes(Number(step))) throw Error('Auditor baseline supports steps 5 and 7');
+  if (![3, 5].includes(Number(step))) throw Error('Auditor baseline supports steps 3 and 5');
   const path = auditorCreatedBaselinePath(root, run, step);
   const live = inventory(root, run);
   const current = {
@@ -1508,16 +1508,16 @@ export function writeAuditorCreatedBaseline(root, run, step) {
 export function authorResultAllowed(step, row) {
   if (row?.ok !== true || !row.ended_at || !row.started_at || !Array.isArray(row.covers)) return false;
   const label = String(row.label ?? '');
-  if (Number(step) === 3) return row.role === 'alpha-high'
+  if (Number(step) === LEGACY_AUTHOR_STEP) return row.role === 'alpha-high'
     && /^(?:step3b-[a-z]+|step3b-pair-[a-z0-9-]+)-[a-f0-9]{16}$/.test(label);
-  if (Number(step) === 5) return row.role === 'alpha'
-    && /^(?:5a-[a-z]+|5a-batch-[1-9]\d*|5b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|5a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|5[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
-  if (Number(step) === 7) return (row.role === 'final-adjudicator'
-    && /^step7-fa-[a-z]+-round-[1-9]\d*$/.test(label))
+  if (Number(step) === 3) return row.role === 'alpha'
+    && /^(?:3a-[a-z]+|3a-batch-[1-9]\d*|3b-lead|gate-batch-[1-9]\d*-(?:[a-z]+|all)|3a-gate-risk-report-[1-9]\d*-(?:[a-z]+|unowned)|3[ab]-(?:gate|edge)-[a-z0-9]+(?:-[a-z0-9]+)*-[1-9]\d*)$/.test(label);
+  if (Number(step) === 5) return (row.role === 'final-adjudicator'
+    && /^step5-fa-[a-z]+-round-[1-9]\d*$/.test(label))
     || (row.role === 'alpha-adjudicate'
-      && /^(?:step7-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step7-[a-z]+|step7-guard-(?:[a-z]+|review)-round-[1-9]\d*|step7-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-8-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
+      && /^(?:step5-v2-(?:initial|repeat)-r[1-9]\d*-u[a-zA-Z0-9_-]+|step5-[a-z]+|step5-guard-(?:[a-z]+|review)-round-[1-9]\d*|step5-preflight-(?:[a-z]+|review)-[1-9]\d*|repair-6-(?:[a-z]+-)?round-[1-9]\d*|cross-group-[a-z]+-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]+-)?[1-9]\d*)$/.test(label))
     || (row.role === 'alpha-repair'
-      && /^step7-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
+      && /^step5-v2-(?:impact-initial|impact-repeat|gate)(?:-pass-[1-9]\d*)?-r[1-9]\d*-u[123]$/.test(label));
   return false;
 }
 
@@ -1554,7 +1554,7 @@ function contractEntry(path, id) {
 
 function certificationRows(receipt, path, { steps = null } = {}) {
   if (receipt?.version !== 1 || receipt?.policy !== CERTIFICATION_POLICY
-    || ![5, 7, 8].includes(receipt?.step) || !Array.isArray(receipt?.items))
+    || ![3, 5, 6].includes(receipt?.step) || !Array.isArray(receipt?.items))
     throw Error(`Invalid auditor-created certification receipt: ${path}`);
   if (steps && !steps.includes(receipt.step)) return [];
   return receipt.items.map(row => ({ ...row, step: receipt.step, run: receipt.run }));
@@ -1563,10 +1563,10 @@ function certificationRows(receipt, path, { steps = null } = {}) {
 function stageBaseline(root, run, step) {
   const baseline = read(auditorCreatedBaselinePath(root, run, step));
   if (baseline?.version !== 1 || baseline.run !== run
-    || (step !== 3 && baseline.step !== step)
-    || baseline.policy !== (step === 3 ? 'auditor-authored-step3-bypass-v1' : BASELINE_POLICY)
+    || (step !== LEGACY_AUTHOR_STEP && baseline.step !== step)
+    || baseline.policy !== (step === LEGACY_AUTHOR_STEP ? 'auditor-authored-step3-bypass-v1' : BASELINE_POLICY)
     || !Array.isArray(baseline.items) || !Array.isArray(baseline.existing_item_files)
-    || (step === 3 && !Array.isArray(baseline.scopes)))
+    || (step === LEGACY_AUTHOR_STEP && !Array.isArray(baseline.scopes)))
     throw Error(`Invalid Step ${step} auditor baseline`);
   return baseline;
 }
@@ -1581,7 +1581,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const receipt = read(path), baseline = stageBaseline(root, run, step);
   if (receipt.run !== run || receipt.baseline_sha256 !== sha(JSON.stringify(baseline)))
     throw Error(`Invalid auditor-created certification identity: ${path}`);
-  const rows = step === 3
+  const rows = step === LEGACY_AUTHOR_STEP
     ? (receipt.version === 1 && receipt.policy === 'auditor-authored-step3-bypass-v2'
       && Array.isArray(receipt.items) ? receipt.items.map(row => ({ ...row, run, step })) : null)
     : certificationRows(receipt, path);
@@ -1592,7 +1592,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
   const authors = successfulAuthorResults(root, run, step);
   for (const row of rows) {
     const creation = row.owner_creation ? ownerCreation(root, run, row.id, row.owner_creation) : null;
-    if (creation && (step !== 5 || row.author_result !== undefined || row.origin_step !== undefined
+    if (creation && (step !== 3 || row.author_result !== undefined || row.origin_step !== undefined
       || row.evidence_class !== 'owner-spawned-creation'
       || row.page !== creation.receipt.page || String(row.batch) !== String(creation.receipt.batch)
       || (!row.owner_recertification && CARRIER_KEYS.some(key => row[key] !== creation.receipt.carriers[key]))))
@@ -1602,17 +1602,17 @@ function provenanceRows(root, run, step, cache = new Map()) {
     if (row.evidence_class === 'owner-spawned-creation' && !creation)
       throw Error(`${row.id}: missing owner creation provenance`);
     if (ids.has(row.id) || (!row.author_result && !creation) || !row.page || !row.batch
-      || (step === 3 && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
+      || (step === LEGACY_AUTHOR_STEP && (!/^[a-f0-9]{64}$/.test(row.sha256 ?? '') || !Array.isArray(row.dependencies))))
       throw Error(`Invalid auditor-created item provenance: ${row.id}`);
     ids.add(row.id);
     // Receipts are engine-owned records of the historical write-window check;
     // their author link must still resolve to genuine dispatch evidence. Do not
     // compare current mtimes here: an unchanged V2 receipt survives file touches.
-    const v2Author = step === 7 ? step7V2Creation(root, run, row.id, row) : null;
+    const v2Author = step === 5 ? step5V2Creation(root, run, row.id, row) : null;
     if (!creation && !authors.some(author => {
       const started = Date.parse(author.started_at), ended = Date.parse(author.ended_at);
       const covers = author.covers.map(String);
-      const page = step === 3 ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
+      const page = step === LEGACY_AUTHOR_STEP ? read(join(root, 'research', `${run}-batch-${safe(String(row.batch))}.pages.json`))
         .find(value => value.id === row.page) : null;
       const pair = page?.kind === 'A' ? page.id : page?.companion;
       const step3Covered = author.label.startsWith('step3b-pair-')
@@ -1620,11 +1620,11 @@ function provenanceRows(root, run, step, cache = new Map()) {
         : covers.includes(String(row.batch));
       return Number.isFinite(started) && Number.isFinite(ended) && started <= ended
         && (v2Author?.result_file === author.result_file
-        || (step === 3 ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
+        || (step === LEGACY_AUTHOR_STEP ? author.label === row.author_result && author.result_file.startsWith('alpha-high-')
           && step3Covered : author.result_file === row.author_result
           && (!covers.length || covers.includes('all') || covers.includes(String(row.batch)))));
     })) throw Error(`${row.id}: missing successful Step ${step} author-result provenance`);
-    if (step === 3 && row.owner_recertification !== undefined) {
+    if (step === LEGACY_AUTHOR_STEP && row.owner_recertification !== undefined) {
       const marker = row.owner_recertification;
       const owner = historicalStep3OwnerReceipt(root, run, row.id, marker);
       if (!owner) throw Error(`${row.id}: missing owner recertification provenance`);
@@ -1636,7 +1636,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
         || !String(owner.reason ?? '').trim())
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }
-    if (step !== 3 && row.owner_recertification !== undefined) {
+    if (step !== LEGACY_AUTHOR_STEP && row.owner_recertification !== undefined) {
       const marker = ownerRecertification(root, run, step, row.id, row, row.author_result,
         null, { historical: true });
       if (!marker || marker.path !== row.owner_recertification.path
@@ -1646,7 +1646,7 @@ function provenanceRows(root, run, step, cache = new Map()) {
         throw Error(`${row.id}: invalid owner recertification basis`);
     }
     const originStep = row.origin_step ?? step;
-    if (![3, 5, 7, 8].includes(originStep) || originStep > step)
+    if (![3, 5, 6].includes(originStep) || originStep > step)
       throw Error(`${row.id}: invalid auditor-created origin step`);
     if (!origins.has(originStep)) origins.set(originStep, stageBaseline(root, run, originStep));
     const origin = origins.get(originStep);
@@ -1674,14 +1674,14 @@ function carrierHashes(root, run, row) {
     contract_sha256: hashValue(contract), manifest_sha256: hashValue(row.manifest_entry) };
   return { guard_sha256: itemHashGuard(text), judge_sha256: itemHashJudge(text),
     item_file_sha256: itemFileSha, manifest_sha256: carrier.manifest_sha256,
-    contract_sha256: carrier.contract_sha256, step5_subject_sha256: hashValue(carrier) };
+    contract_sha256: carrier.contract_sha256, step3_subject_sha256: hashValue(carrier) };
 }
 
-// Rebuilt Step 7 binds new-item authorship directly into its centralized
+// Rebuilt Step 5 binds new-item authorship directly into its centralized
 // certificate. This survives later serialized edits to a shared manifest or
 // contract and avoids inferring per-item provenance from shared-file mtimes.
-function step7V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
-  const path = join(root, 'research', `${run}-step7-v2`, 'certification.json');
+function step5V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
+  const path = join(root, 'research', `${run}-step5-v2`, 'certification.json');
   if (!existsSync(path)) return null;
   const certificate = read(path), { sha256, ...payload } = certificate;
   if (certificate.version !== 2 || certificate.run !== run
@@ -1701,29 +1701,29 @@ function step7V2Creation(root, run, id, row, { requireCurrent = false } = {}) {
   const result = { ...read(resultPath), result_file: creation.author_result };
   const evidenceHash = certificate.evidence?.[resultPath]
     ?? certificate.evidence?.[`research/${run}-dispatch/${creation.author_result}`];
-  if (result.run !== run || !authorResultAllowed(7, result)
+  if (result.run !== run || !authorResultAllowed(5, result)
     || evidenceHash !== sha(readFileSync(resultPath, 'utf8'))) return null;
   return result;
 }
 
 // Step 3 checks currency with its transitive item/scope hash implementation;
 // share the same immutable-origin and surviving dispatch-link validation.
-export const loadStep3AuditorProvenance = (root, run) => provenanceRows(root, run, 3);
+export const loadStep3AuditorProvenance = (root, run) => provenanceRows(root, run, LEGACY_AUTHOR_STEP);
 
 const matchesCarriers = (certificate, row, hashes) => certificate?.page === row.page
   && String(certificate.batch) === row.batch
-  // Raw bytes and the old Step-5 composite remain historical audit evidence.
+  // Raw bytes and the old Step-3 composite remain historical audit evidence.
   // Judge add/remove is the sole normalization; other verification fields,
   // mathematical bytes, manifest entries and contracts must still match.
   && ['judge_sha256', 'manifest_sha256', 'contract_sha256']
     .every(key => certificate[key] === hashes[key])
   && typeof certificate.guard_sha256 === 'string' && /^[a-f0-9]{64}$/.test(certificate.guard_sha256)
   && /^[a-f0-9]{64}$/.test(certificate.item_file_sha256 ?? '')
-  && certificate.step5_subject_sha256 === hashValue({ item_sha256: certificate.item_file_sha256,
+  && certificate.step3_subject_sha256 === hashValue({ item_sha256: certificate.item_file_sha256,
     manifest_sha256: certificate.manifest_sha256, contract_sha256: certificate.contract_sha256 });
 
 // Every consumer uses this reader. Resolve later superseding evidence before
-// checking currency, so a valid Step-8 refresh can carry a now-stale Step-7 row.
+// checking currency, so a valid Step-5 refresh can carry a now-stale Step-5 row.
 // A stale latest row is an error, never a reason to silently schedule self-review.
 export function loadAuditorCreatedCertifications(paths, options = {}) {
   const selected = new Map();
@@ -1768,7 +1768,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
   const results = successfulAuthorResults(root, run, step);
   const earlier = new Map();
   const provenance = new Map();
-  for (const priorStep of [3, 5, 7].filter(value => value < step)) {
+  for (const priorStep of [3, 5].filter(value => value < step)) {
     for (const row of provenanceRows(root, run, priorStep, provenance)) earlier.set(row.id, row);
   }
   const additions = inventory(root, run).filter(row => !original.has(row.id) || earlier.has(row.id));
@@ -1793,7 +1793,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
     const contractPath = join(root, 'research', `${run}-batch-${batch}.proof-contracts.json`);
     if (!existsSync(itemPath)) throw Error(`${id}: auditor-created manifest item has no authored item file`);
     const hashes = carrierHashes(root, run, row);
-    const bootstrapEvidence = step === 5
+    const bootstrapEvidence = step === 3
       ? ownerEvidenceTextForCurrentCarriers(root, run, step, id, hashes) : '';
     const prior = priorById.get(id);
     const priorCurrent = prior && matchesCarriers(prior, row, hashes);
@@ -1805,7 +1805,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
       const before = baseline.item_carriers?.[id];
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
-    const creation = step === 5 && !carried ? ownerCreation(root, run, id) : null;
+    const creation = step === 3 && !carried ? ownerCreation(root, run, id) : null;
     if (creation) {
       if (row.page !== creation.receipt.page || row.batch !== String(creation.receipt.batch))
         throw Error(`${id}: owner creation home and batch cannot be changed by recertification`);
@@ -1823,11 +1823,11 @@ export function certifyAuditorCreatedItems(root, run, step) {
           ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}) });
       continue;
     }
-    const v2Author = step === 7 ? step7V2Creation(root, run, id, row, { requireCurrent: true }) : null;
+    const v2Author = step === 5 ? step5V2Creation(root, run, id, row, { requireCurrent: true }) : null;
     const covering = priorCurrent || v2Author ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
     const bootstrap = !priorCurrent && !covering && !prior && carried
-      ? step === 5 ? bootstrapStep5Author(root, run, id, row, hashes, bootstrapEvidence)
-        : step === 7 ? bootstrapStep7Author(root, run, id, row, hashes) : null
+      ? step === 3 ? bootstrapStep3Author(root, run, id, row, hashes, bootstrapEvidence)
+        : step === 5 ? bootstrapStep5Author(root, run, id, row, hashes) : null
       : null;
     const authorResult = prior?.author_result ?? bootstrap?.result_file;
     const owner = !priorCurrent && !covering && authorResult
@@ -1861,8 +1861,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7; owner-create --run RUN --step 5 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 5 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 5 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 5|7 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
-    if (!run || ![5, 7].includes(step)) throw Error(usage);
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 3|5; owner-create --run RUN --step 3 --id ITEM --evidence research/JSON; owner-context-archive --run RUN --step 3 --id ITEM --certification research/JSON --context-id CONTEXT --source research/FILE --owner-identity /root --reason TEXT; owner-source-archive --run RUN --step 3 --id ITEM --source research/FILE --owner-identity OWNER --reason TEXT; owner-recertify --run RUN --step 3|5 --id ITEM --evidence research/FILE --reason TEXT [--refresh-evidence (identical-carrier dilation decision binding only)]';
+    if (!run || ![3, 5].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
       : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)
@@ -1877,8 +1877,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
             { refreshEvidence: process.argv.includes('--refresh-evidence') })
           : null;
     if (!result) throw Error(usage);
-    if (command === 'owner-context-archive') console.log(`step5-owner-context-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
-    else if (command === 'owner-source-archive') console.log(`step5-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    if (command === 'owner-context-archive') console.log(`step3-owner-context-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    else if (command === 'owner-source-archive') console.log(`step3-owner-source-archive: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else if (['owner-recertify', 'owner-create'].includes(command)) console.log(`step${step}-${command === 'owner-create' ? 'owner-creation' : 'owner-recertification'}: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
     else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {

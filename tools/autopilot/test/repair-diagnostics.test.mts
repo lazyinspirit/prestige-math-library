@@ -39,7 +39,7 @@ test('historical boundary text drops its upheld inventory', () => {
 });
 
 test('preflight requests compact forward checks and complete structured boundary evidence', () => {
-  const stage: any = stages.find(s => s.id === '7-preflight');
+  const stage: any = stages.find(s => s.id === '5-preflight');
   const gates = stage.gates({run: 'diagnostic-fixture', repo: new URL('../../..', import.meta.url).pathname});
   assert.ok(gates.find((g: any) => g.id === 'fwdcheck').argv.includes('--quiet'));
   assert.ok(gates.find((g: any) => g.id === 'boundary-audit').argv.includes('--json'));

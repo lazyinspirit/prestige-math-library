@@ -1,11 +1,11 @@
-# One native Step-5 coverage correction
+# One native Step-3 coverage correction
 
-The ordinary `mathlib.step5.mts` stage table supports one opt-in, owner-reviewed fresh
+The ordinary `mathlib.step3.mts` stage table supports one opt-in, owner-reviewed fresh
 native refuter dispatch through `refuter-continuations.mts` for an exact successful report whose coverage array
 contains extra prerequisite context. This does not accept mathematics or waive
-collection. Ordinary Step-5 collect and final checks still require exact scope.
+collection. Ordinary Step-3 collect and final checks still require exact scope.
 
-The run-local `research/RUN-step5-refuter-continuations.json` is version 1,
+The run-local `research/RUN-step3-refuter-continuations.json` is version 1,
 identifies the run, `authorized_by: owner`, nonempty authorization, and exactly
 one continuation. The entry identifies the existing unit, concrete reason,
 completed writer-drain time, exact successful `previous_result` path/hash,
@@ -15,7 +15,7 @@ hash, and a correction `task` path/hash. Paths for archived/report/task evidence
 must remain under the run's research prefix. The unique permitted label is
 `refute-UNIT-coverage-correction-1`.
 
-Only `5a-refute` changes. The ordinary table decorates that stage once; the
+Only `3a-refute` changes. The ordinary table decorates that stage once; the
 ready-pairs wrapper inherits the same route without a second decorator. The
 active ordinary controller therefore sees the opt-in route directly. Its matcher excludes the exact old stable result and
 admits the exact new stable native result filename; other units and stages keep

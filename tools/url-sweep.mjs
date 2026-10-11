@@ -156,7 +156,7 @@ for (const coverage of coverages) {
         // The mirror case: a source reverted to its recovered ORIGIN keeps the
         // archive snapshot as fallback provenance. Neither is the reader-facing
         // citation twice over — probing the parked snapshot re-fails the gate
-        // on archive.org weather (a 503 held stage 5b for half an hour while
+        // on archive.org weather (a 503 held stage 3b for half an hour while
         // the citation itself was live).
         if (source?.archived_fallback?.snapshot && source.archived_fallback.snapshot !== source.url) {
           try { superseded.add(new URL(source.archived_fallback.snapshot).href); } catch { /* not a URL */ }
