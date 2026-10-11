@@ -163,6 +163,15 @@ test('extra reviewer observations cannot invent consumers, duplicate checks or g
   assert.equal(loopState(f.repo,'demo','1').reviews.length,0);
 });
 
+test('local repair requests preserve additional actual consumer observations without acceptance',t=>{
+  const f=fixture(t);
+  const checks=[{id:'lem-b',decision:'accept',reason:'Earlier supplier transfer is unchanged.'}];
+  const result=complete(f,'1','repair',{consumer_checks:checks});
+  assert.equal(result.state.phase,'repair');assert.equal(result.state.reviews.length,1);
+  assert.equal(result.state.repairs.length,0);assert.equal(accepted(f.repo,'demo','1'),false);
+  assert.deepEqual(JSON.parse(readFileSync(join(f.repo,result.p.resultArtifact),'utf8')).consumer_checks,checks);
+});
+
 test('partial batch inventories and significant findings disguised as routine repair are rejected',t=>{
   const f=fixture(t);
   assert.throws(()=>complete(f,'1','repair',{reviewed_items:['lem-a']}),/Incomplete batch/);
