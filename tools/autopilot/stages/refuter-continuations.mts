@@ -103,7 +103,9 @@ export function withRefuterContinuation(original: any): any {
       const entries = refuterContinuations(ctx, original);
       if (!pending.some(unit => entries.some(e => String(e.unit) === String(unit))))
         return original.plan(ctx, pending);
-      refuterContinuations(ctx, original, true);
+      // Doctor inspects command descriptors; only a real launch checks the
+      // one-attempt budget and the pre-repair current-source guards.
+      if (!ctx.doctor) refuterContinuations(ctx, original, true);
       return original.plan(ctx, pending).map((plan: any) => {
         const entry = entries.find(e => plan.covers.length === 1 && String(e.unit) === String(plan.covers[0]));
         return entry ? { ...plan, label: entry.label, task: entry.task.path } : plan;
