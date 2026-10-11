@@ -968,6 +968,29 @@ function producerRoutingFixture(marker?: string, duplicateOwner = false, contrac
   return { ...fx, producer, published, report };
 }
 
+test('authorized restored producer routes without relabeling original provenance', () => {
+  const fx = producerRoutingFixture('old');
+  try {
+    const directory = 'research/r-continuation-inputs/manifests';
+    mkdirSync(join(fx.root, directory), { recursive: true });
+    const bytes = readFileSync(join(fx.root, 'research/r-batch-2.pages.json'));
+    const archive = `${directory}/old-batch-2.pages.json`;
+    writeFileSync(join(fx.root, archive), bytes);
+    writeFileSync(join(fx.root, 'research/r-continuation.json'), JSON.stringify({
+      version: 1, run: 'r', source_run: 'old', authorized_by: 'owner',
+      authorization: 'Continue the exact approved authored producer with a fresh engine run',
+      historical_execution_coverage_adopted: false, scope: { items: 1, pages: 1 },
+      manifest_inputs: [{ path: 'research/old-batch-2.pages.json', archive,
+        sha256: createHash('sha256').update(bytes).digest('hex') }],
+    }));
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step3-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].producer_batch, '2');
+    assert.match(readFileSync(join(fx.root, 'items', `${fx.producer}.md`), 'utf8'), /pipeline_run: old/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
 for (const marker of [undefined, 'r']) test(`foreign producer routing accepts genuine manifest ownership with marker ${marker ?? 'absent'}`, () => {
   const fx = producerRoutingFixture(marker);
   try {

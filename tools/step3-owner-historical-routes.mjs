@@ -6,6 +6,7 @@ import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
+import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const safe = value => { if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid historical route identifier'); return value; };
 const sorted = value => Array.isArray(value) ? value.map(sorted) : value && typeof value === 'object'
@@ -76,7 +77,7 @@ export function validateOwnerHistoricalRoutes(root, run, doc) {
       throw Error('Historical route producer/consumer home changed or ambiguous');
     const producerText = readFileSync(join(root, 'items', `${finding.id}.md`), 'utf8');
     const producerItem = yaml().parse(split(producerText).fm) ?? {};
-    if (producerItem.status !== 'draft' || producerItem.pipeline_run !== undefined && producerItem.pipeline_run !== run)
+    if (!draftOwnerMatcher(root, run)(producerItem))
       throw Error('Historical producer is not an exact current-run draft');
     const current = readFileSync(join(root, 'items', `${finding.consumer_id}.md`), 'utf8');
     if (row.current_proof_review?.owner !== true || row.current_proof_review.removed_edges_reviewed !== true

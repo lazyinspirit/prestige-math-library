@@ -25,6 +25,7 @@ import { loadOwnerIdMigrations } from './step3-owner-id-migrations.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
+import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
 
 const argv = process.argv.slice(2);
@@ -38,6 +39,7 @@ const R = (...parts) => join(ROOT, ...parts);
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const run = option('run');
 if (!run) fail('usage: step3-scope.mjs hash|post-reader|split|collect|post-3a|stamp|check --run <run> [--batch N] [--label pre|post|pre-3a|post-3a] [--phase adjudicate|final]');
+const ownsDraft = draftOwnerMatcher(ROOT, run);
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const hashPath = (batch, label) => R('research', `${run}-step3-hash-${batch}-${label}.json`);
@@ -375,10 +377,10 @@ function manifestProducers(manifests = manifestItems()) {
 
 // Current manifests establish ownership. Older locally authored draft carriers
 // need not contain pipeline_run, but a contradictory explicit marker must fail
-// closed rather than importing another run's draft into this run's closure.
+// closed. Only hash-bound owner-authorized restored inventory may retain its
+// exact original run marker; that grants ownership, never review acceptance.
 function currentRunDraft(item, owners) {
-  return owners.length === 1 && item?.status === 'draft'
-    && (item.pipeline_run === undefined || item.pipeline_run === run);
+  return owners.length === 1 && ownsDraft(item);
 }
 
 /** Exact published dependency closure reachable from each assigned consumer. */
@@ -417,6 +419,9 @@ function publishedDependencies(batchIds, allRunIds) {
         // Current-manifest prerequisites are traversal context, never
         // published subjects; their real edges may reach published suppliers.
         if (allRunIds.has(target)) {
+          const runOwners = producers.get(target) ?? [];
+          if (runOwners.length !== 1 || (targetItem.status !== 'published'
+            && !currentRunDraft(targetItem, runOwners))) continue;
           queue.push(target);
           continue;
         }

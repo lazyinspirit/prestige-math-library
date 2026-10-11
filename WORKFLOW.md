@@ -134,6 +134,15 @@ receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
 Preserve historical run evidence rather than relabeling it. The retained authoring claim-resolution API is documented in [tools/step3-owner-creation.md](tools/step3-owner-creation.md); it supplies historical origin continuity only.
 
+An explicitly owner-authorized restored frontier may retain its original
+`pipeline_run` markers. Step-3 dependency routing recognizes those draft IDs
+only through `research/RUN-continuation.json`: exact source run, nonempty
+hash-bound original manifest archives, matching inventory counts, and
+`historical_execution_coverage_adopted: false` are required. Current manifests
+must still give a unique owner. This grants content ownership only; old worker,
+review and gate receipts never satisfy the new run. Other run markers and
+unlisted IDs remain rejected.
+
 Item/page validators select current run manifests. Outside suppliers stay
 prerequisite context; do not validate or repair unrelated content. Closeout checks
 the engine's content commit. All owner-gate authorization remains one-attempt,
