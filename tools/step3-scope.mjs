@@ -26,6 +26,7 @@ import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
 import { draftOwnerMatcher } from './run-draft-ownership.mjs';
+import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
 
 const argv = process.argv.slice(2);
@@ -591,7 +592,8 @@ function reportOnlyFinding(finding, refuter = false) {
   const { observed_sha256: _observed, pre_sha256: _pre,
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
-    observation_basis: _basis, owner_page_repair: _ownerPageRepair, ...row } = finding;
+    observation_basis: _basis, owner_page_repair: _ownerPageRepair,
+    owner_partial_reader_repair: _ownerPartialReaderRepair, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }
@@ -776,6 +778,7 @@ if (command === 'split') {
     batch, readerAllowed, readerError, 'reader');
   const live = liveFingerprints(batch);
   const ownerPages = loadOwnerPageRepairs(ROOT, run, batch);
+  const partialFindings = partialReaderFindings(ROOT, run, batch);
   for (const finding of readerFindings) {
     const expectedType = derived.manifestPost.includes(finding.id) ? 'in-flight-item'
       : derived.pageManifestPost.includes(finding.id) ? 'page'
@@ -786,9 +789,11 @@ if (command === 'split') {
       readerError(`${finding.obligation} must name an assigned consumer that reaches published dependency ${finding.id}`);
     }
     const ownerPage = expectedType === 'page' ? ownerPageFindingRepair(ownerPages, batch, finding) : null;
-    if ((derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) && !ownerPage) {
+    const partial = expectedType === 'in-flight-item' ? partialFindings.get(finding.obligation) : null;
+    if ((derived.touched.includes(finding.id) || derived.pagesTouched.includes(finding.id)) && !ownerPage && !partial) {
       readerError(`${finding.obligation} names changed carrier ${finding.id}; repaired work belongs in the touched route, not the open-findings artifact`);
     }
+    if (partial) finding.owner_partial_reader_repair = partial;
     if (expectedType === 'in-run-dependency') {
       bindInRunFinding(finding, batch, inRun, readerError);
       continue;
@@ -1066,7 +1071,11 @@ if (command === 'check') {
             new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the routed obligations');
+          const partialFindings = partialReaderFindings(ROOT, run, batch);
           for (const finding of scope.reader_findings ?? []) {
+            if (finding.owner_partial_reader_repair
+              && hashValue(finding.owner_partial_reader_repair) !== hashValue(partialFindings.get(finding.obligation)))
+              reportError(`${finding.obligation} lost its exact partial-reader routing authority`);
             if (finding.subject_type === 'in-run-dependency') {
               validateInRunFinding(finding, batch, inRun, reportError);
               continue;

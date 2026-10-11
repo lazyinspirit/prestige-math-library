@@ -14,6 +14,7 @@ import { Executor } from '../src/executor.mts';
 import { itemHashGuard } from '../../item-hash.mjs';
 import { createHash } from 'node:crypto';
 import { historicalFindingHash, recordOwnerHistoricalRoutes } from '../../step3-owner-historical-routes.mjs';
+import { partialReaderHash } from '../../step3-owner-partial-reader-repairs.mjs';
 
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const gate = (id: string, argv: any, extra: any = {}) => ({ id, argv, ...extra });
@@ -184,6 +185,47 @@ function prepareSplit(fx: ReturnType<typeof fixture>) {
   // typed subcommands must retain the old hash-then-split, fail-fast order.
   fx.run('post-reader', '--run', 'r', '--batch', '1');
 }
+
+test('exact owner partial-repair authority retains both touched and unresolved reader obligations', () => {
+  const fx = fixture();
+  try {
+    const id = fx.ids[0], source = join(fx.root, 'items', `${id}.md`);
+    writeFileSync(source, readFileSync(source, 'utf8').replace('title:', `id: ${id}\nstatus: draft\ntitle:`));
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'pre');
+    writeFileSync(source, readFileSync(source, 'utf8') + '\nPartial repair; another gap remains.\n');
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post');
+    const report = { batch: '1', coverage_note: 'Some defects repaired; unresolved defect retained.',
+      findings: [{ id, subject_type: 'in-flight-item', consumer_id: null, observed_source: null,
+        location: 'Proof', defect: 'unlicensed-inference', evidence: 'Missing independent prerequisite.', severity: 'fatal' }] };
+    const reportPath = join(fx.root, 'research/r-reader-findings-1.json');
+    writeFileSync(reportPath, JSON.stringify(report));
+    assert.match(fx.attempt('split', '--run', 'r', '--batch', '1').stderr, /names changed carrier/);
+    const resultPath = join(fx.root, 'research/r-dispatch/reader-reader-1.result.json');
+    mkdirSync(join(fx.root, 'research/r-dispatch'));
+    writeFileSync(resultPath, JSON.stringify({ run: 'r', role: 'reader', covers: ['1'], ok: true }));
+    const postPath = join(fx.root, 'research/r-step3-hash-1-post.json');
+    const post = JSON.parse(readFileSync(postPath, 'utf8'));
+    const digest = (path: string) => createHash('sha256').update(readFileSync(path)).digest('hex');
+    const entry = { batch: '1', reader_report_sha256: digest(reportPath), post_snapshot_sha256: digest(postPath),
+      reader_result_sha256: digest(resultPath), targets: [{ index: 1, id,
+        finding_sha256: partialReaderHash(report.findings[0]), carrier_sha256: partialReaderHash(post.hashes[id]) }] };
+    const authority = { version: 1, run: 'r', registered_by: 'root',
+      policy: 'retain-unresolved-partial-reader-repair-v1', mathematical_acceptance: false,
+      authorization: 'Preserve the genuine unresolved finding after its reader partially repaired a separate defect; ordinary independent adjudication and all closure gates still apply.',
+      batches: [entry] };
+    const authorityPath = join(fx.root, 'research/r-step3-owner-partial-reader-repairs.json');
+    writeFileSync(authorityPath, JSON.stringify(authority));
+    const routed = fx.attempt('split', '--run', 'r', '--batch', '1');
+    assert.equal(routed.status, 0, routed.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step3-scope-1.json'), 'utf8'));
+    assert.ok(scope.touched.includes(id));
+    assert.equal(scope.reader_findings[0].obligation, 'reader:1:1');
+    assert.equal(scope.reader_findings[0].owner_partial_reader_repair.carrier_sha256, entry.targets[0].carrier_sha256);
+    entry.targets[0].carrier_sha256 = '0'.repeat(64);
+    writeFileSync(authorityPath, JSON.stringify(authority));
+    assert.notEqual(fx.attempt('split', '--run', 'r', '--batch', '1').status, 0);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
 
 test('prior applied repairs reconstruct literal Markdown and retain provenance guards', () => {
   const sha = (text: string) => createHash('sha256').update(text).digest('hex');

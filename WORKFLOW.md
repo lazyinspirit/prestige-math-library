@@ -111,7 +111,17 @@ acceptance receives native completion coverage at the next controller tick.
 Step 3 keeps the existing independent batch review, routed adjudication and
 unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
-Source and empirical qualifications survive regeneration. Step 4's read-only
+Source and empirical qualifications survive regeneration.
+
+When a reader repairs some defects but cannot resolve another in the same
+draft, the owner may retain its original open finding through
+`RUN-step3-owner-partial-reader-repairs.json`. This routing-only record binds
+the genuine successful reader result, unchanged report, frozen post-reader
+snapshot and exact remaining findings/carriers. Both touched and reader
+obligations remain; normal independent adjudication, ledger closure and all
+gates are still required. Missing or changed authority fails closed.
+
+Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.
 
