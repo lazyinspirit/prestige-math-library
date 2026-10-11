@@ -180,6 +180,9 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
     }
     if (snapshot.aliases && cached.aliasStamp === null) cached.aliasStamp = scaffoldAliasStamp(ctx);
   } catch {
+    // An alias-build error can leave a partial index. Never reuse inputs from
+    // a failed artifact pass on the next scheduling or status call.
+    scaffoldSnapshots.delete(`${resolve(ctx.repo)}\0${ctx.run}`);
     complete = false;
   }
   // Planning creates empty page shells. A successful Beta receipt and coverage

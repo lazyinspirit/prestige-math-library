@@ -99,6 +99,7 @@ test('scaffold readiness invalidates ambiguous aliases introduced by an unrelate
   const f=fixture(t);f.writeItem('lem-external',[],'External supplier',['external-alias']);
   f.writeItem('lem-a',['external-alias']);readyScaffold(f,'1');assert.equal(scaffoldComplete(f,'1'),true);
   f.writeItem('lem-other',[],'Other supplier',['external-alias']);assert.equal(scaffoldComplete(f,'1'),false);
+  assert.equal(scaffoldComplete(f,'1'),false, 'a failed alias build must not leave a usable partial index');
 });
 
 test('scaffold readiness invalidates manifest and planned supplier changes',t=>{

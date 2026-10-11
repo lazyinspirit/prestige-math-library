@@ -88,7 +88,8 @@ manifest, coverage, plan, consumed supplier and missing-dependency file stamps;
 receipt stamps also invalidate cached decisions. Changed inputs clear dependency
 bytes and decisions together. If alias lookup was needed, the entire item inventory
 is stamp-bound and its change also rebuilds alias resolution. This cache accelerates
-scheduling without keeping acceptance current after an input change.
+scheduling without keeping acceptance current after an input change. A failed
+artifact pass discards its cache, including any partially built alias index.
 Recompute and reconcile dependencies after edits. Blocked suppliers hold their
 consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
 it and require owner resolution before another handoff.
