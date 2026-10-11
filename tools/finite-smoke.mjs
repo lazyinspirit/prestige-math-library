@@ -741,6 +741,41 @@ function makeChecks() { return {
     }
     return { ok: true, summary: `checked ${equivalentPairs} equivalent state-pairs across all ${automata} DFAs through ${maxStates} states over ${alphabetSize} letters` };
   },
+  // The collapsing recursion of thm-mostowski-collapse on a finite chain: the
+  // von Neumann numeral for x is {0,1,...,x-1}, so the defining equation
+  // F(x) = {F(y) : y < x} must reproduce F(x) = x on a chain of length n and
+  // carry the chain onto the ordinal n. This is the finite model of the cited
+  // example's displayed computation, not a proof of the general theorem.
+  'mostowski-finite-chain-collapse': ({ max_length = 6 } = {}) => {
+    const max = boundedInteger(max_length, 6, 1, 12);
+    const numeral = (n) => Array.from({ length: n }, (_, i) => numeral(i));
+    const setRepr = (setOfSets) => '{' + setOfSets.map((member) => setRepr(member)).sort().join(',') + '}';
+    for (let n = 1; n <= max; n += 1) {
+      const F = [];
+      for (let x = 0; x < n; x += 1) {
+        const members = [];
+        for (let y = 0; y < x; y += 1) if (!members.some((m) => setRepr(m) === setRepr(F[y]))) members.push(F[y]);
+        F.push(members);
+      }
+      for (let x = 0; x < n; x += 1) {
+        if (setRepr(F[x]) !== setRepr(numeral(x))) {
+          return { ok: false, summary: `chain of length ${n}: F(${x}) is ${setRepr(F[x])}, not the numeral ${x} = ${setRepr(numeral(x))}` };
+        }
+      }
+      for (let i = 0; i < n; i += 1) {
+        for (let j = i + 1; j < n; j += 1) {
+          const before = F[j].some((member) => setRepr(member) === setRepr(F[i]));
+          if (!before) return { ok: false, summary: `chain of length ${n}: F(${i}) is not a member of F(${j}) although ${i} < ${j}` };
+        }
+      }
+      const image = F.filter((value, index) => F.findIndex((other) => setRepr(other) === setRepr(value)) === index);
+      if (setRepr(image) !== setRepr(numeral(n))) {
+        return { ok: false, summary: `chain of length ${n}: the image ${setRepr(image)} is not the ordinal ${n} = ${setRepr(numeral(n))}` };
+      }
+    }
+    return { ok: true, summary: `checked the collapsing recursion on chains of length 1..${max}: F(x) equals the von Neumann numeral x, order is reflected as membership, and the image is the ordinal n` };
+  },
+
 }; }
 
 // A finite poset from its cover relations: reflexive-transitive closure, then
