@@ -65,6 +65,60 @@ test('a genuine incomplete report requires fresh native reading, never manufactu
   assert.deepEqual(JSON.parse(readFileSync(join(f.repo, f.entry.report_path), 'utf8')).opened, ['def-a']);
 });
 
+
+function clippedFixture(t: any) {
+  const f = fixture(t);
+  const report = { batch: '7', opened: ['def-a', 'def-context', ...Array.from({ length: 40 }, (_, i) => `def-context-${i}`)],
+    not_opened: [], flagged: [], coverage_note: 'Genuine native report observations. '.repeat(12) };
+  const raw = JSON.stringify(report, null, 2) + '\n';
+  const tail = raw.trim().split('\n').slice(-40).join('\n');
+  assert.throws(() => JSON.parse(tail));
+  f.write(f.entry.report_path, raw); f.write(f.entry.original_report.path, raw);
+  const receipt = JSON.parse(readFileSync(join(f.repo, f.entry.previous_result.path), 'utf8'));
+  receipt.tail = tail;
+  const digest = (path: string) => createHash('sha256').update(readFileSync(join(f.repo, path))).digest('hex');
+  const saveReceipt = () => {
+    f.write(f.entry.previous_result.path, receipt);
+    f.entry.previous_result.sha256 = digest(f.entry.previous_result.path);
+  };
+  saveReceipt();
+  f.entry.report_sha256 = digest(f.entry.report_path);
+  f.entry.original_report.sha256 = f.entry.report_sha256;
+  return { ...f, raw, tail, receipt, saveReceipt };
+}
+
+test('native last-40-line clipped JSON tail authenticates the unchanged raw archive', t => {
+  const f = clippedFixture(t); f.save();
+  refuterContinuations(f.ctx, f.stage, true);
+  assert.deepEqual([...covered(join(f.repo, 'research/r-dispatch'), refuterContinuationPattern(f.ctx, f.stage))], ['8']);
+  assert.equal(readFileSync(join(f.repo, f.entry.report_path), 'utf8'), f.raw);
+  assert.equal(readFileSync(join(f.repo, f.entry.original_report.path), 'utf8'), f.raw);
+  assert.equal(JSON.parse(readFileSync(join(f.repo, f.entry.previous_result.path), 'utf8')).tail, f.tail);
+  f.write('research/r-dispatch/refuter-refute-7-coverage-correction-1.result.json', { run: 'r', covers: ['7'], ok: false });
+  assert.throws(() => refuterContinuations(f.ctx, f.stage, true), /already attempted/);
+});
+
+test('clipped tails reject short, altered, unrelated and parseable different diagnostics', t => {
+  for (const tail of [
+    (f: any) => f.tail.slice(-40),
+    (f: any) => f.tail.replace('Genuine', 'Altered'),
+    (_f: any) => 'unrelated prefix'.repeat(30) + '\n"not_opened": [], "flagged": []}',
+    (_f: any) => JSON.stringify({ batch: '7', opened: ['def-a'], not_opened: [], flagged: [] }),
+    (f: any) => f.tail.slice(f.tail.indexOf('"coverage_note"')),
+  ]) {
+    const f = clippedFixture(t); f.receipt.tail = tail(f); f.saveReceipt(); f.save();
+    assert.throws(() => refuterContinuations(f.ctx, f.stage, true), /Invalid owner/);
+  }
+});
+
+test('clipped diagnostics cannot bypass changed bound report or receipt bytes', t => {
+  for (const path of ['report_path', 'original_report', 'previous_result']) {
+    const f = clippedFixture(t); f.save();
+    f.write(path === 'report_path' ? f.entry.report_path : (f.entry as any)[path].path, '{}');
+    assert.throws(() => refuterContinuations(f.ctx, f.stage, true), /Invalid owner/);
+  }
+});
+
 test('authorization, unit, report, subject and label guards reject drift', t => {
   for (const mutate of [
     (f: any) => { f.auth.authorized_by = 'helper'; },

@@ -40,7 +40,18 @@ export function refuterContinuations(ctx: any, original: any, beforeDispatch = f
     if (digest(archive) !== entry.report_sha256) reject();
     const old = JSON.parse(archive.toString());
     if (String(old.batch) !== unit || !Array.isArray(old.opened) || !Array.isArray(old.not_opened)
-      || !Array.isArray(old.flagged) || JSON.stringify(JSON.parse(previous.tail)) !== JSON.stringify(old)) reject();
+      || !Array.isArray(old.flagged) || typeof previous.tail !== 'string') reject();
+    let parsedTail: any, tailParsed = false;
+    try { parsedTail = JSON.parse(previous.tail); tailParsed = true; } catch {}
+    if (tailParsed) {
+      if (JSON.stringify(parsedTail) !== JSON.stringify(old)) reject();
+    } else {
+      // Native receipts retain only the last 40 stdout lines. Authenticate a
+      // clipped diagnostic against the immutable raw report, never its claims.
+      const tail = previous.tail.trimEnd();
+      if (tail.length < 256 || !/"not_opened"\s*:/.test(tail) || !/"flagged"\s*:/.test(tail)
+        || !archive.toString().trimEnd().endsWith(tail)) reject();
+    }
     bound(entry.task);
     if (beforeDispatch) {
       // Any completed fresh attempt, including failure, holds rather than loops.
