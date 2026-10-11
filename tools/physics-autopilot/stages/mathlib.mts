@@ -1028,21 +1028,6 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=
   liveness: { pattern: /level-coverage: (\d+) item/.source, min: 1, unit: 'items' },
 });
 
-/** Blast radius, `pre-author -> post-3a`. Both endpoints are load-bearing:
- *  a baseline taken after authoring makes the diff empty by construction
- *  (hence `3-baseline` before step 3), and without an explicit `--to` the
- *  tool diffs against the ledger's LAST snapshot — which at 3b time was
- *  `pre-author` itself, so the gate diffed the baseline against itself and
- *  confirmed "0 changed" over the whole level (hence `3a-baseline` before
- *  3b). A second live `post-3a -> current` gate closes the lead Alpha's later
- *  edits before Step 3 ends. */
-const impactGate = (ctx) => frontierItemGate(ctx, 'impact-audit', 'impact-audit', [
-  '--touches', touchesPath(ctx), '--from', 'pre-author', '--to', 'post-3a',
-  '--direct-boundary',
-  '--receipt', `research/${ctx.run}-impact.json`,
-]);
-
-
 /**
  * Build the result-file matcher from the dispatcher's own naming rule.
  *
@@ -1202,7 +1187,7 @@ export const stages = [
   // Independent review follows construction and whole-batch scope acceptance.
   ...step3Stages({
     gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
-    impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
+    batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
   }),
 
   // Render each batch review scope and the Step-5 group context before the
@@ -1707,7 +1692,7 @@ for (const stage of stages) {
   // Refresh the one frontier index at mutable joins, not frozen judge/stamp
   // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
   if (['2-scope-review',
-    '3a-adjudicate', '3b-cross', '5.2-impact', '5.6-impact', '5.9-repair'].includes(stage.id)) {
+    '3a-adjudicate', '3a-validate', '5.2-impact', '5.6-impact', '5.9-repair'].includes(stage.id)) {
     const previousGates = stage.gates;
     stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
       ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run,

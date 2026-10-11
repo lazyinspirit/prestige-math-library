@@ -38,13 +38,11 @@ const stages = step3Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step3-ctx-')), dispatchDir: '/tmp/none' };
 
-test('3a adjudication and the 3b lead run Sol 6.1 high, with tool lanes model-free', async () => {
+test('3a adjudication runs Sol 6.1 high, with tool lanes model-free', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('3a-adjudicate');
   assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.sol61High);
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
-  assert.equal(byId('3b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.sol61High);
-  assert.equal(byId('3b-cross').modelProfile({ role: 'tool' }), undefined);
 });
 
 test('an escalated or sub-100% Step 3a verdict fails its gate and the stage only holds', async () => {
@@ -72,13 +70,14 @@ test('an escalated or sub-100% Step 3a verdict fails its gate and the stage only
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('Step 3a is prepare, the reader pipeline and adjudication; 3b closure is unchanged', async () => {
+test('Step 3a review drains into mechanical closure before Step 4', async () => {
   const active = await import('../stages/mathlib.mts');
   const ids = active.stages.map((stage: any) => stage.id);
-  assert.deepEqual(ids.slice(ids.indexOf('3a-prepare'), ids.indexOf('3b-close') + 1),
+  assert.deepEqual(ids.slice(ids.indexOf('3a-prepare'), ids.indexOf('3a-close') + 1),
     ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate',
-      '3a-baseline', '3b-edges', '3b-cross', '3b-close']);
-  assert.equal(ids.some((id: string) => id.startsWith('review-')), false);
+      '3a-baseline', '3a-validate', '3a-close']);
+  assert.equal(ids.some((id: string) => id.startsWith('review-') || id.startsWith('3b-')), false);
+  assert.equal(ids[ids.indexOf('3a-close') + 1], '4-scope');
   assert.equal(active.stages.some((s: any) => s.id === '3b-author'), false);
   assert.deepEqual(stages.filter((s: any) => s.pipeline).map((s: any) => [s.id, s.pipeline]),
     [['3a-read', 'read'], ['3a-split', 'read'], ['3a-refute', 'read'], ['3a-collect', 'read'], ['3a-adjudicate', 'read']]);
@@ -88,40 +87,39 @@ test('Step 3a is prepare, the reader pipeline and adjudication; 3b closure is un
   assert.deepEqual(byId('3a-adjudicate').cohort({}, '1'), ['1']);
   const ctx = { ...ordinaryCtx, run: 'r', doctor: true };
   assert.equal(byId('3a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-3a-adjudicate.md');
-  assert.equal(byId('3b-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-3b-edges.md');
   assert.deepEqual(byId('3a-prepare').plan(ctx)[0].argv,
     ['node', 'tools/step3-prepare.mjs', '--run', 'r']);
   assert.deepEqual(byId('3a-prepare').artifacts(ctx),
     ['research/r-step3-hash-1-pre.json', 'research/r-step3-hash-2-pre.json', 'research/r-step3-hash-3-pre.json']);
   assert.ok(byId('3a-adjudicate').gates(ctx).some((g: any) => g.id === 'step3-auditor-created-certifications'));
   assert.ok(byId('3a-adjudicate').gates(ctx).some((g: any) => g.id === 'step3-routing-adjudicate'));
-  assert.ok(byId('3b-cross').gates(ctx).some((g: any) => g.id === 'step3-routing-final'));
+  assert.ok(byId('3a-validate').gates(ctx).some((g: any) => g.id === 'step3-routing-final'));
   assert.equal(byId('3a-adjudicate').onGateFailure, undefined);
   assert.equal(byId('3a-adjudicate').onHold, holdStep3);
 });
 
 test('no Step 3 stage carries a repair hook, budget or fingerprint', () => {
   for (const id of ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect',
-    '3a-adjudicate', '3a-baseline', '3b-edges', '3b-cross', '3b-close']) {
+    '3a-adjudicate', '3a-baseline', '3a-validate', '3a-close']) {
     assert.equal(byId(id).onGateFailure, undefined, `${id} must not launch a repair`);
     assert.equal(byId(id).maxFixRounds, undefined, `${id} must not bound repair rounds`);
     assert.equal(byId(id).perItemFixBudget, undefined, `${id} must not charge repair budgets`);
     assert.equal(byId(id).repairFingerprint, undefined, `${id} must not rearm on a fingerprint`);
   }
   assert.equal(byId('3a-adjudicate').onHold, holdStep3);
-  assert.equal(byId('3b-cross').onHold, holdStep3);
+  assert.equal(byId('3a-validate').onHold, holdStep3);
 });
 
 
 test('ordinary introduced stages never count the current 3b Alpha result as their own', () => {
   const ctx = { ...ordinaryCtx, run: 'future-run' };
-  for (const id of ['3b-edges', '3b-close']) {
+  for (const id of ['3a-close']) {
     const pattern = byId(id).pattern;
     assert.ok(pattern instanceof RegExp);
     assert.equal(pattern.test('alpha-3b-lead.result.json'), false,
       `${id} must not be falsely covered by the current run's lead Alpha`);
   }
-  assert.equal(byId('3b-close').pattern.test('tool-step3-close.result.json'), true);
+  assert.equal(byId('3a-close').pattern.test('tool-step3-close.result.json'), true);
 });
 
 test('item ids are extracted from gate output, not citation labels', () => {
@@ -944,13 +942,13 @@ test('the reader pipeline stages declare their frozen prompts, schemas and artif
   }
 });
 
-test('3b content gates hold for the owner instead of racing a peer author', async () => {
+test('Step 3 closure content gates hold for the owner instead of racing a peer author', async () => {
   const root = mkdtempSync(join(tmpdir(), 'step3-peer-author-'));
   try {
     mkdirSync(join(root, 'research'));
-    const stage = byId('3b-cross');
+    const stage = byId('3a-validate');
     assert.equal(stage.onGateFailure, undefined,
-      'a failing 3b gate is owner-held, never repair-dispatched');
+      'a failing closure gate is owner-held, never repair-dispatched');
     for (const [id, output] of [
       ['precheck', 'REPAIR items/thm-foreign.md: canonical labels'],
       ['rendercheck', 'ERROR [thm-foreign]: malformed display'],

@@ -238,7 +238,7 @@ switch (cmd) {
         stateDir: runStateDir,
         dispatchDir: config.dispatchDir ?? join(repo, 'research', `${run}-dispatch`),
         authorizationPath: resolve(repo, authorization),
-        pauseAfter: opt('pause-after', '3b-close'),
+        pauseAfter: opt('pause-after', '3a-close'),
       });
       console.log(`reopen-step3: ${result.reopenId} archived ${result.archived.length} file(s) and cleared `
         + `${result.clearedStages.length} Step-3 stage record(s)`);

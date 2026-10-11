@@ -25,7 +25,7 @@ Authors supply definitions and prerequisites; reviewers and adjudicators check t
 - This dispatch owns exactly one batch: `<i>`, as listed in `covers:`.
 - Read `research/<run>-batch-<i>.pages.json`; open every listed page at `library/<category>/<page>.md` and every listed item at `items/<id>.md`, plus dependencies needed to verify claims. Read items in dependency order, suppliers before consumers.
 - Follow `briefs/reader.md`. The assigned batch is your full scope, and its authors' decisions do not govern your independent review.
-- Repair only confirmed defects in an in-flight item of this batch or its assigned A-page prose. Keep proposed withdrawals present for the 3b lead. Do not edit another batch, `research/plan-spec.json`, B-page prose, or published content.
+- Repair only confirmed defects in an in-flight item of this batch or its assigned A-page prose. Keep proposed withdrawals present for owner disposition. Do not edit another batch, `research/plan-spec.json`, B-page prose, or published content.
 - After a material item repair, update the affected proof contract, remove the stale `verification.judge` record, and run reflow and precheck on each changed item:
   `node tools/physics-support/tsx-run.mjs tools/physics-support/reflow.mts items/<id>.md` and
   `node tools/physics-support/tsx-run.mjs tools/physics-support/precheck.mts items/<id>.md`.

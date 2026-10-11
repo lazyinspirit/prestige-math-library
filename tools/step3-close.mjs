@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Freeze Step 3 after exact routing, currency, plan, and ledger checks pass.
+// Freeze dependency-ordered Step 3a after exact routing, plan, and ledger checks pass.
 // Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
 
 import { createHash } from 'node:crypto';
@@ -27,7 +27,7 @@ if (!run || !['close', 'verify'].includes(mode)) {
 
 const receiptPath = R('research', `${run}-step3-closure.json`);
 const researchNames = () => readdirSync(R('research'));
-const artifactNames = () => researchNames().filter((name) =>
+const artifactNames = (version = 3) => researchNames().filter((name) =>
   name.startsWith(`${run}-step3-hash-`)
   || name.startsWith(`${run}-step3-scope-`)
   || name.startsWith(`${run}-reader-findings-`)
@@ -35,10 +35,9 @@ const artifactNames = () => researchNames().filter((name) =>
   || name.startsWith(`${run}-refute-`)
   || new RegExp(`^${run}-alpha-(?:[a-z]+|batch-[1-9]\\d*)-3a\\.md$`).test(name)
   || (name.startsWith(`${run}-alpha-`) && name.endsWith('-3a-decisions.json'))
-  || name === `${run}-alpha-3b.md`
-  || name === `${run}-cross-group-edges.json`
-  || name === `${run}-3b-verdicts.jsonl`).sort();
-const artifactHashes = () => Object.fromEntries(artifactNames().map((name) => [
+  || version === 2 && [ `${run}-alpha-3b.md`, `${run}-cross-group-edges.json`,
+    `${run}-3b-verdicts.jsonl` ].includes(name)).sort();
+const artifactHashes = (version = 3) => Object.fromEntries(artifactNames(version).map((name) => [
   `research/${name}`, sha256(readFileSync(R('research', name))),
 ]));
 const jsonl = (path) => existsSync(path)
@@ -72,10 +71,11 @@ if (mode === 'verify') {
   try { receipt = JSON.parse(readFileSync(receiptPath, 'utf8')); }
   catch (cause) { fail(`invalid receipt (${cause.message})`); }
   const errors = [];
-  if (receipt.version !== 2 || receipt.run !== run || receipt.status !== 'closed') {
+  if (![2, 3].includes(receipt.version) || receipt.run !== run || receipt.status !== 'closed'
+    || receipt.version === 3 && receipt.basis !== 'dependency-ordered-step3a') {
     errors.push('wrong version, run, or status');
   }
-  const currentArtifacts = artifactHashes();
+  const currentArtifacts = artifactHashes(receipt.version);
   if (JSON.stringify(Object.keys(currentArtifacts)) !== JSON.stringify(Object.keys(receipt.artifacts ?? {}).sort())) {
     errors.push('the exact Step-3 artifact set changed');
   }
@@ -93,7 +93,6 @@ if (mode === 'verify') {
 }
 
 const checks = [
-  ['cross-group-edges', ['tools/cross-group-edges.mjs', 'check', '--run', run]],
   ['step3-routing-final', ['tools/step3-scope.mjs', 'check', '--run', run, '--phase', 'final']],
   ['splice-verify', ['tools/splice-plan.mjs', '--run', run, '--verify']],
   ['validate-plan', ['tools/frontier-item-gate.mjs', '--run', run, '--tool', 'validate-plan']],
@@ -116,7 +115,8 @@ const artifacts = artifactHashes();
 if (!Object.keys(artifacts).length) fail('no exact Step-3 artifacts exist');
 const ledgerRows = step3LedgerRows();
 writeFileSync(receiptPath, `${JSON.stringify({
-  version: 2,
+  version: 3,
+  basis: 'dependency-ordered-step3a',
   run,
   status: 'closed',
   closed_at: new Date().toISOString(),

@@ -14,8 +14,7 @@ test('every report-bearing stage names its deliverable', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
   const expect: Record<string, string | string[]> = {
-    '3b-cross': ['research/frontier-14-alpha-3b.md', 'research/frontier-14-3b-verdicts.jsonl'],
-    '3b-close': 'research/frontier-14-step3-closure.json',
+    '3a-close': 'research/frontier-14-step3-closure.json',
     '6-evidence-v2': 'research/frontier-14-step6-evidence.json',
     '6-owner-report-v2': 'research/frontier-14-step6-report.response.json',
     '6-owner-report-render-v2': 'research/frontier-14-step6-report.md',

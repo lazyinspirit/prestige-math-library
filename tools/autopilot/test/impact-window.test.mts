@@ -76,23 +76,13 @@ test('a missing receipt bootstraps its own template and fails with the remedy', 
   assert.ok(Array.isArray(template.dispositions), 'template carries the pending dispositions to fill');
 });
 
-test('the 3b gate diffs pre-author -> post-3a, and a stage takes the post-3a snapshot first', async () => {
+test('Step 3 snapshots before closure without cross-batch impact review', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id);
-  const bIdx = ids.indexOf('3a-baseline');
-  assert.ok(bIdx > -1, 'no 3a-baseline stage takes the post-3a snapshot');
-  assert.ok(bIdx > ids.indexOf('3a-adjudicate') && bIdx < ids.indexOf('3b-cross'),
-    `3a-baseline sits at index ${bIdx}, outside (3a-adjudicate, 3b-cross)`);
-  const cross = mod.stages.find((s: any) => s.id === '3b-cross');
-  const gate = cross.gates({ run: 'frontier-14', repo: REPO })
-    .find((g: any) => g.id === 'impact-audit');
-  assert.ok(gate, '3b-cross has no impact-audit gate');
-  const argv: string[] = typeof gate.argv === 'function' ? gate.argv() : gate.argv;
-  assert.equal(argv[argv.indexOf('--to') + 1], 'post-3a',
-    'without an explicit --to the gate diffs pre-author against the last snapshot, which at 3b IS pre-author');
-  assert.ok(argv.includes('--direct-boundary'), '3b reviews direct uses and follows later exported-interface changes as new events');
-  const later = cross.gates({ run: 'frontier-14', repo: REPO })
-    .find((g: any) => g.id === 'impact-audit-3b');
-  const laterArgv: string[] = typeof later.argv === 'function' ? later.argv() : later.argv;
-  assert.ok(laterArgv.includes('--direct-boundary'), 'post-3a repairs use the same direct stopping rule');
+  assert.deepEqual(ids.slice(ids.indexOf('3a-adjudicate'), ids.indexOf('4-scope') + 1),
+    ['3a-adjudicate', '3a-baseline', '3a-validate', '3a-close', '4-scope']);
+  const close = mod.stages.find((s: any) => s.id === '3a-validate');
+  assert.ok(close.gates({ run: 'frontier-14', repo: REPO }).every((g: any) =>
+    !/impact-audit|cross-group/.test(g.id)));
+  assert.equal(mod.stages.some((s: any) => /^3b-/.test(s.id) || s.reviewCoverage), false);
 });

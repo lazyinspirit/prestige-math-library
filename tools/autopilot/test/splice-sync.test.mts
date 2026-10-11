@@ -190,7 +190,7 @@ test('a changed manifest without --update stays a hard error', () => {
 test('every repo-wide gate point verifies the two scopes agree', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  for (const id of ['3b-cross', '6-readiness-v2']) {
+  for (const id of ['3a-validate', '6-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const hit = st.gates(ctx).some((g: any) => {
       const argv = typeof g.argv === 'function' ? g.argv() : g.argv;

@@ -1,13 +1,13 @@
 // Owner-authorized re-run of Step 3 after Step 5.
 //
 // WHY THIS EXISTS. Step 5 repairs change the bytes Step 3 audited: every reader
-// repair, refuter finding and 3a/3b decision is keyed to a carrier hash, so a
+// repair, refuter finding and 3a decision is keyed to a carrier hash, so a
 // repaired item's Step-3 coverage is stale by construction. The engine has no
 // generic "re-run a completed step" — coverage comes from successful result
 // receipts in the dispatch directory, and a stamped stage is never re-derived.
 // This command performs that surgery explicitly and reversibly, in the same
 // guarded-recovery idiom: it archives the Step-3 result receipts and the
-// Step-3 artifacts they produced, clears only the ten Step-3 stage records, and
+// Step-3 artifacts they produced, clears only the nine Step-3 stage records, and
 // arms `pause-at` so the re-run stops at its own boundary. Items, contracts,
 // manifests, judge ledgers and the Step-4/Step-5 receipts are left untouched.
 
@@ -17,7 +17,7 @@ import { basename, join } from 'node:path';
 
 export const STEP3_STAGES = [
   '3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate',
-  '3a-baseline', '3b-edges', '3b-cross', '3b-close',
+  '3a-baseline', '3a-validate', '3a-close',
 ] as const;
 
 const sha256 = (data: string | Buffer): string => createHash('sha256').update(data).digest('hex');
@@ -69,7 +69,7 @@ export function reopenStep3({
   stateDir,
   dispatchDir,
   authorizationPath,
-  pauseAfter = '3b-close',
+  pauseAfter = '3a-close',
   now = () => new Date(),
 }: {
   repo: string;
@@ -140,7 +140,7 @@ export function reopenStep3({
     keep(join(researchDir, name));
   }
 
-  // 3. Clear exactly the ten Step-3 stage records, their blockers and their
+  // 3. Clear exactly the nine Step-3 stage records, their blockers and their
   //    (gate, item) attempt counters. Everything else in the run is preserved.
   const clearedStages: string[] = [];
   for (const stage of STEP3_STAGES) {

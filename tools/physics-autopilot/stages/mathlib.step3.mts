@@ -1,14 +1,13 @@
 // Step 3: independent readers, read-only refuters, routed batch adjudication,
-// cross-group audit and closure.
+// exact mechanical closure.
 
-import { withStep3bReviewContinuation } from './step3b-review-continuation.mts';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';
 import { prepareStep3AdjudicationOrder } from '../../physics-support/step3-adjudication-order.mjs';
 import { batchAdjudicator, step3Adjudicators } from '../../physics-support/step3-adjudicators.mjs';
 
-// Step-3 readers, refuters, adjudicators and cross-group agents use Sol 6.1/high.
+// Step-3 readers, refuters and adjudicators use Sol 6.1/high.
 // The live engine can reload this module while retaining an older models.mjs import.
 const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
 
@@ -16,7 +15,7 @@ const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
 export function step3Stages(d: any) {
   const {
     gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
-    impactGate, batches, alphaGroups, resultPattern, touchesPath,
+    batches, alphaGroups, resultPattern, touchesPath,
   } = d;
 
   /** One batch per lane: readers, refuters and adjudicators never share a lane. */
@@ -73,7 +72,7 @@ export function step3Stages(d: any) {
         timeout: 14400,
       })),
       gatesWaived: 'Readers may repair in-flight assigned items; the split, refuter coverage and the full '
-        + '3a-adjudicate battery are what check their work before Step 3b opens.',
+        + '3a-adjudicate battery are what check their work before Step 3 closes.',
     },
     {
       id: '3a-split',
@@ -189,37 +188,24 @@ export function step3Stages(d: any) {
         role: 'tool', label: 'snap-post-3a', job: 'bookkeeping-mechanical', covers: ['all'],
         argv: ['node', 'tools/physics-support/step3-scope.mjs', 'post-3a', '--run', ctx.run],
       }],
-      gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the post-3a impact endpoint. Missing output prevents successful coverage.',
+      gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the exact post-3a historical endpoint. Missing output prevents successful coverage.',
     },
     {
-      id: '3b-edges',
-      label: 'compute cross-batch edges and post-3a changes (mechanical)',
+      id: '3a-validate',
+      label: 'validate final Step 3a carriers and audit manifest (mechanical)',
       units: () => ['all'],
-      pattern: resultPattern('tool', 'cross-group-edges'),
-      artifacts: (ctx: any) => `research/${ctx.run}-cross-group-edges.json`,
+      pattern: resultPattern('tool', 'audit-manifest-3a'),
+      artifacts: (ctx: any) => `research/${ctx.run}-audit-manifest.json`,
       concurrency: 1,
       plan: (ctx: any) => [{
-        role: 'tool', label: 'cross-group-edges', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/physics-support/cross-group-edges.mjs', 'list', '--run', ctx.run],
-      }],
-      gatesWaived: 'The computed lists may be empty; this stage creates the verdict artifact, and 3b-cross re-derives every cross-batch edge, forward reference, and post-3a structural change.',
-    },
-    {
-      id: '3b-cross',
-      label: 'lead Alpha cross-batch audit and final Step 3 closure',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
-      units: () => ['all'],
-      pattern: resultPattern('alpha', '3b-[a-z-]+'),
-      artifacts: (ctx: any) => [`research/${ctx.run}-alpha-3b.md`, `research/${ctx.run}-3b-verdicts.jsonl`],
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'alpha', label: '3b-lead', job: 'audit', covers: ['all'], brief: 'briefs/alpha-step3.md',
-        task: 'briefs/tasks/alpha-3b-edges.md',
-        timeout: 14400,
+        role: 'tool', label: 'audit-manifest-3a', job: 'bookkeeping-mechanical', covers: ['all'],
+        argv: ['node', 'tools/physics-support/audit-manifest.mjs',
+          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
+          '--output', `research/${ctx.run}-audit-manifest.json`],
+        timeout: 600,
       }],
       gates: (ctx: any) => [
         auditorCreatedGate(ctx),
-        gate('cross-group-edges', ['node', 'tools/physics-support/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
         routingGate(ctx, 'final'),
         gate('step3-ledger-valid', ['node', 'tools/physics-support/defect-ledger.mjs', 'validate', '--run', ctx.run]),
         planGate(ctx),
@@ -229,12 +215,7 @@ export function step3Stages(d: any) {
         // hash-bound Step-5 handoff before this bounded pending-audit window.
         ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx),
         urlGate(ctx), backingGate(ctx), policyItemGate(ctx),
-        ...contractGates(ctx, { reviewed: true }), impactGate(ctx),
-        gate('impact-audit-3b', ['node', 'tools/physics-support/frontier-item-gate.mjs',
-          '--run', ctx.run, '--tool', 'impact-audit', '--',
-          '--touches', touchesPath(ctx), '--from', 'post-3a', '--current',
-          '--direct-boundary',
-          '--receipt', `research/${ctx.run}-impact-3b.json`]),
+        ...contractGates(ctx, { reviewed: true }),
         gate('audit-manifest', ['node', 'tools/physics-support/audit-manifest.mjs',
           ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
           '--output', `research/${ctx.run}-audit-manifest.json`], {
@@ -244,7 +225,7 @@ export function step3Stages(d: any) {
       onHold: holdStep3,
     },
     {
-      id: '3b-close',
+      id: '3a-close',
       label: 'freeze exact Step 3 closure (mechanical)',
       units: () => ['all'],
       pattern: resultPattern('tool', 'step3-close'),
@@ -258,9 +239,9 @@ export function step3Stages(d: any) {
         // the tool's internal cap and left no headroom for the other checks.
         timeout: 1800,
       }],
-      gatesWaived: 'The close tool reruns exact Step-3 routing, cross-edge, plan, and ledger checks before writing the immutable closure receipt; any nonzero check produces no successful result.',
+      gatesWaived: 'The close tool reruns exact Step-3a routing, plan and ledger checks after the complete validation battery, then freezes immutable Step-3a history. A nonzero check produces no successful result.',
     },
-  ].map(stage => withStep3bReviewContinuation(stage, { physics: true }));
+  ];
 }
 
 export default { step3Stages };

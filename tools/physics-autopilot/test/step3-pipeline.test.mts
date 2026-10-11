@@ -93,7 +93,7 @@ test('a legacy in-flight group is not duplicated and its final receipt still cov
     'a failed legacy group must not redirect a fresh batch worker to the shared report');
 });
 
-test('real executor carries each batch through Step 3a, gates the join, and closes Step 3b', async t => {
+test('real executor carries each batch through Step 3a, gates the join, and freezes Step 3a without a cross-review dispatch', async t => {
   const repo = mkdtempSync(join(tmpdir(), 'step3-batch-e2e-'));
   t.after(() => rmSync(repo, { recursive: true, force: true }));
   const dispatchDir = join(repo, 'dispatch');
@@ -116,7 +116,6 @@ console.log('1 item(s) routed; over 1 item(s) in fixture');\n`);
   });
   const paths = new Map<string, string[]>();
   for (const stage of stages) {
-    if(stage.reviewCoverage){stage.reviewCoverage=()=>({complete:true,why:'Fixture independent coverage verified'});stage.onProgress=undefined;}
     const plan = stage.plan;
     stage.plan = (ctx: any, pending: string[]) => plan({ ...ctx, doctor: true }, pending).map((p: any) => {
       paths.set(p.label, [...new Set(p.covers.flatMap((unit: string) => [stage.artifacts(ctx, unit)].flat().filter(Boolean)))] as string[]);
@@ -162,6 +161,74 @@ console.log('1 item(s) routed; over 1 item(s) in fixture');\n`);
   const gates = readFileSync(gateLog, 'utf8').trim().split('\n');
   assert.equal(gates.filter(id => id === 'step3-owner-escalations').length, 1);
   assert.ok(calls.indexOf('snap-post-3a') > calls.indexOf('3a-batch-2'));
-  assert.ok(calls.indexOf('3b-lead') > calls.indexOf('cross-group-edges'));
-  assert.equal(ex.stageStatus(stages.find(stage => stage.id === '3b-close')).done, true);
+  assert.ok(calls.indexOf('audit-manifest-3a') > calls.indexOf('snap-post-3a'));
+  assert.ok(calls.indexOf('step3-close') > calls.indexOf('audit-manifest-3a'));
+  assert.equal(state.data.stages['3a-validate']?.gatesPassedAt != null, true);
+  assert.ok(!calls.some(label => /^3b-|cross-group-edges/.test(label)));
+  assert.equal(ex.stageStatus(stages.find(stage => stage.id === '3a-close')).done, true);
+  for (const id of ['step3-routing-final', 'step3-ledger-valid', 'audit-manifest', 'policy', 'urls', 'backing', 'coverage'])
+    assert.ok(gates.includes(id), `${id} remains at closure`);
+  assert.ok(!gates.some(id => /cross-group|impact/.test(id)));
+});
+
+test('Step 3 has only batch review and exact mechanical closure, without implicit cross-review or impact coverage', () => {
+  const gate = (id: string, argv: string[], extra = {}) => ({ id, argv, ...extra });
+  const stages = step3Stages({ gate, batches: () => ['1'], alphaGroups: () => [], resultPattern: () => /result/,
+    repoWide: () => [], contractGates: () => [], coverageGates: () => [],
+    planGate: () => gate('plan', []), urlGate: () => gate('urls', []),
+    backingGate: () => gate('backing', []), policyItemGate: () => gate('policy', []),
+    touchesPath: () => 'research/r-touches.json' });
+  assert.deepEqual(stages.map(stage => stage.id), ['3a-prepare', '3a-read', '3a-split', '3a-refute',
+    '3a-collect', '3a-adjudicate', '3a-baseline', '3a-validate', '3a-close']);
+  assert.ok(stages.every(stage => !('reviewCoverage' in stage) && !('onProgress' in stage)));
+  const close = stages.at(-1)!;
+  assert.equal(close.plan({ run: 'r' }, ['all'])[0].role, 'tool');
+  assert.ok(close.gatesWaived);
+  assert.equal(close.gates, undefined);
+  const gates = stages.find(stage => stage.id === '3a-validate')!.gates({ run: 'r' });
+  assert.ok(gates.every(g => !/cross-group|impact/.test(g.id + g.argv.join(' '))));
+  assert.equal(gates.find(g => g.id === 'audit-manifest').liveness.min, 1);
+});
+
+test('a failed final validation holds before the immutable Step 3a closure tool runs', async t => {
+  const repo = mkdtempSync(join(tmpdir(), 'step3-validation-failure-'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const dispatchDir = join(repo, 'dispatch');
+  mkdirSync(dispatchDir);
+  mkdirSync(join(repo, 'research'));
+  const script = join(repo, 'gate.mjs');
+  writeFileSync(script, "console.log('1 item(s) routed; over 1 item(s) in fixture'); process.exit(process.argv[2] === 'policy' ? 1 : 0);\n");
+  const gate = (id: string, _argv: any, extra: any = {}) => ({ ...extra, id, argv: ['node', script, id] });
+  const stages: any[] = step3Stages({ gate, batches: () => ['1'], alphaGroups: () => [],
+    resultPattern: (role: string, label: string) => new RegExp(`^${role}-${label}\\.result\\.json$`),
+    touchesPath: () => 'research/r-touches.json', repoWide: () => [], coverageGates: () => [],
+    contractGates: () => [], planGate: () => gate('plan', []), urlGate: () => gate('urls', []),
+    backingGate: () => gate('backing', []), policyItemGate: () => gate('policy', []),
+  }).filter(stage => ['3a-validate', '3a-close'].includes(stage.id));
+  stages.push({ id: 'finished', units: () => ['all'], pattern: /^tool-finished\.result\.json$/,
+    plan: () => [{ role: 'tool', label: 'finished', covers: ['all'] }], gates: () => [gate('finished', [])] });
+  for (const stage of stages) {
+    const plan = stage.plan;
+    stage.plan = (ctx: any, pending: string[]) => plan(ctx, pending).map((row: any) => ({ ...row, argv: undefined }));
+  }
+  const calls: string[] = [];
+  const adapter: any = { name: 'fixture', describe: () => 'fixture', invoke: async (vars: any) => {
+    calls.push(vars.label);
+    const stage = stages.find(stage => stage.plan({ run: 'r' }, ['all'])[0].label === vars.label);
+    writeFileSync(join(repo, stage.artifacts({ run: 'r' })), '{}\n');
+    return { ok: true, code: 0, stdout: '', stderr: '' };
+  } };
+  const stateDir = join(repo, '.physics-autopilot');
+  const state = new State(statePath(stateDir)).init('r');
+  const ex = new Executor({ config: { run: 'r', repo, stateDir, dispatchDir, argv: ['true'],
+    concurrency: 30, maxAttempts: 1, coversMap: {}, dispatchStaggerMs: 0, adoptCommand: false } as any,
+    stages, adapter, state, reporter: new Reporter({ dir: stateDir, intervalMs: 10 ** 9, sink: () => {} }) });
+  for (let tick = 0; tick < 10; tick++) {
+    await ex.tick();
+    await Promise.allSettled([...ex.inflight.values()].map(dispatch => dispatch.promise));
+    if (state.data.blockers.length) break;
+  }
+  assert.deepEqual(calls, ['audit-manifest-3a'], JSON.stringify(state.data.blockers));
+  assert.ok(!state.data.stages['3a-close']?.enteredAt, 'failure cannot freeze mutable adjudication evidence');
+  assert.ok(!state.data.stages['3a-validate']?.gatesPassedAt);
 });

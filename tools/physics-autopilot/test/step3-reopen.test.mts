@@ -21,8 +21,7 @@ function fixture({ step5Landed = true, paused = true } = {}) {
     ['3a-refute', 'refuter', 'refute-1'],
     ['3a-adjudicate', 'alpha', '3a-a'],
     ['3a-adjudicate', 'alpha', '3a-batch-1'],
-    ['3b-cross', 'alpha', '3b-lead'],
-    ['3b-close', 'tool', 'step3-close'],
+    ['3a-close', 'tool', 'step3-close'],
   ] as const;
   const dispatches: any = {};
   for (const [stage, role, label] of lanes) {
@@ -82,13 +81,13 @@ test('archives the Step-3 receipts and artifacts, clears only Step-3 state', () 
   for (const stage of STEP3_STAGES) assert.equal(state.stages[stage], undefined, `${stage} cleared`);
   assert.ok(state.stages['5-freeze']?.doneAt, 'Step 5 stamp preserved');
   assert.equal(state.paused, true);
-  assert.equal(state.pauseAfter, '3b-close');
+  assert.equal(state.pauseAfter, '3a-close');
   assert.deepEqual(state.blockers, [{ stage: '5-freeze', message: 'keep' }]);
   assert.deepEqual(Object.keys(state.gateAttempts), ['5-freeze\u0000y']);
   assert.ok(state.dispatches['3a-read:reader-1'], 'dispatch history preserved');
   const receipt = JSON.parse(readFileSync(join(fx.repo, 'research', 'demo-step3-reopen.json'), 'utf8'));
   assert.equal(receipt.run, 'demo');
-  assert.equal(receipt.pause_after, '3b-close');
+  assert.equal(receipt.pause_after, '3a-close');
   assert.equal(receipt.archived_count, result.archived.length);
 });
 

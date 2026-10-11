@@ -1,82 +1,19 @@
+// Historical review evidence remains inspectable; current stages do not dispatch it.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { Executor as MathExecutor } from '../src/executor.mts';
-import { State as MathState, statePath as mathStatePath } from '../src/state.mts';
-import { Reporter as MathReporter } from '../src/reporter.mts';
-import { makeExecAdapter as mathAdapter } from '../src/adapters/exec.mts';
-import { Executor as PhysicsExecutor } from '../../physics-autopilot/src/executor.mts';
-import { State as PhysicsState, statePath as physicsStatePath } from '../../physics-autopilot/src/state.mts';
-import { Reporter as PhysicsReporter } from '../../physics-autopilot/src/reporter.mts';
-import { makeExecAdapter as physicsAdapter } from '../../physics-autopilot/src/adapters/exec.mts';
-import { withStep3bReviewContinuation } from '../stages/step3b-review-continuation.mts';
 import { step3bReviewCoverage } from '../../step3b-review-coverage.mjs';
 import { itemHashGuard, itemSurfaceHash } from '../../item-hash.mjs';
-
-const engines = [
-  { name: 'math', Executor: MathExecutor, State: MathState, statePath: mathStatePath, Reporter: MathReporter, adapter: mathAdapter, physics: false },
-  { name: 'physics', Executor: PhysicsExecutor, State: PhysicsState, statePath: physicsStatePath, Reporter: PhysicsReporter, adapter: physicsAdapter, physics: true },
-];
-const pause = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const engines = [{ name: 'math', physics: false }, { name: 'physics', physics: true }];
 const sha = (x: string) => createHash('sha256').update(x).digest('hex');
 const canonical = (x: any): any => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object' ? Object.fromEntries(Object.keys(x).sort().map(k => [k, canonical(x[k])])) : x;
 const hashValue = (x: any) => sha(JSON.stringify(canonical(x)));
 const TOOLS = join(import.meta.dirname, '../..');
-
 for (const engine of engines) {
-  for (const advances of [true, false]) test(`${engine.name}: partial exit0 ${advances ? 'continues then gates only complete coverage' : 'with no progress holds without another call'}`, async () => {
-    const repo = mkdtempSync(join(tmpdir(), 'step3b-continuation-')), run = 'review-test', dispatchDir = join(repo, 'dispatch');
-    mkdirSync(dispatchDir); mkdirSync(join(repo, 'research')); mkdirSync(join(repo, 'briefs/tasks'), { recursive: true });
-    writeFileSync(join(repo, 'briefs/tasks/alpha-3b-edges.md'), 'Original live review task.');
-    writeFileSync(join(repo, 'briefs/tasks/alpha-3b-unfinished-review.md'), 'Continue missing work only.');
-    const progressPath = join(repo, 'progress.json'), gatesPath = join(repo, 'gates.log');
-    const partial = { complete: false, progress: 'a'.repeat(64), pending: [{ kind: 'edge', from: 'lem-a', to: 'lem-b' }], errors: [], counts: { completed: 1 }, why: 'one actual review remains' };
-    writeFileSync(progressPath, JSON.stringify(partial));
-    const script = join(repo, 'agent.mjs');
-    writeFileSync(script, `import{writeFileSync}from'node:fs';const a=process.argv.slice(2),get=k=>a[a.indexOf('--'+k)+1];${advances ? `writeFileSync(${JSON.stringify(progressPath)},JSON.stringify({complete:true,progress:'b',pending:[],errors:[],counts:{completed:2},why:'all current review complete'}));` : ''}writeFileSync(${JSON.stringify(dispatchDir)}+'/alpha-'+get('label')+'.result.json',JSON.stringify({role:'alpha',run:get('run'),label:get('label'),covers:['all'],ok:true}));`);
-    writeFileSync(join(dispatchDir, 'alpha-3b-lead.result.json'), JSON.stringify({ role: 'alpha', run, label: '3b-lead', covers: ['all'], ok: true }));
-    writeFileSync(join(repo, 'research', run + '-alpha-3b.md'), 'Historical genuine partial review.');
-    writeFileSync(join(repo, 'research', run + '-3b-verdicts.jsonl'), 'Historical reviewed row.');
-    const gateScript = join(repo, 'gate.mjs'); writeFileSync(gateScript, `import{appendFileSync}from'node:fs';appendFileSync(${JSON.stringify(gatesPath)},'gate\\n');`);
-    const original: any = { id: '3b-cross', label: 'review', units: () => ['all'], pattern: /^alpha-3b-[a-z-]+\.result\.json$/, concurrency: 1,
-      artifacts: () => [`research/${run}-alpha-3b.md`, `research/${run}-3b-verdicts.jsonl`],
-      plan: () => [{ role: 'alpha', label: '3b-lead', job: 'audit', covers: ['all'], task: 'briefs/tasks/alpha-3b-edges.md', argv: ['node', script, '--run', '{run}', '--label', '{label}'] }],
-      gates: () => [{ id: 'closure', argv: ['node', gateScript] }] };
-    const stage = withStep3bReviewContinuation(original, { physics: engine.physics, inspect: () => JSON.parse(readFileSync(progressPath, 'utf8')) });
-    const config: any = { repo, run, stateDir: join(repo, 'state'), dispatchDir, argv: [], concurrency: 1, dispatchStaggerMs: 0, gateFailurePolicy: 'owner', maxAttempts: 2 };
-    const state = new engine.State(engine.statePath(config.stateDir)).init(run);
-    const reporter = new engine.Reporter({ dir: config.stateDir, intervalMs: 10 ** 9, sink: () => {} });
-    const executor = new engine.Executor({ config, stages: [stage], state, reporter, adapter: engine.adapter(config) });
-    try {
-      assert.equal(executor.stageStatus(stage).unitsDone, false, 'process success is not a review verdict');
-      assert.equal(executor.unitsComplete(stage).size, 0);
-      assert.equal(existsSync(gatesPath), false);
-      for (let tick = 0; tick < 25; tick++) {
-        const status = await executor.tick();
-        if (status === 'done' || status === 'blocked') break;
-        await pause(40);
-      }
-      const starts = Object.values(state.data.dispatches) as any[];
-      assert.equal(starts.length, 1, JSON.stringify(state.data.blockers));
-      assert.match(starts[0].label, /^3b-review-/);
-      assert.equal(readFileSync(join(dispatchDir, 'alpha-3b-lead.result.json'), 'utf8'), JSON.stringify({ role: 'alpha', run, label: '3b-lead', covers: ['all'], ok: true }));
-      if (advances) { assert.equal(executor.stageStatus(stage).done, true); assert.equal(readFileSync(gatesPath, 'utf8'), 'gate\n'); }
-      else { assert.equal(existsSync(gatesPath), false); assert.ok(state.data.blockers.some((r: any) => /no further.*progress/.test(r.message))); }
-    } finally { rmSync(repo, { recursive: true, force: true }); }
-  });
-
-  test(`${engine.name}: stale current review evidence holds instead of launching review or gates`, () => {
-    const repo = mkdtempSync(join(tmpdir(), 'step3b-stale-')), dispatchDir = join(repo, 'dispatch'); mkdirSync(dispatchDir);
-    writeFileSync(join(dispatchDir, 'alpha-3b-lead.result.json'), JSON.stringify({ run: 'run', role: 'alpha', covers: ['all'], ok: true }));
-    const stage = withStep3bReviewContinuation({ id: '3b-cross', pattern: /^alpha-3b-[a-z-]+\.result\.json$/ }, { inspect: () => ({ complete: false, errors: [{ code: 'edge-verdict-stale', message: 'supplier changed' }] }) });
-    try { assert.throws(() => stage.onProgress({ ctx: { repo, run: 'run', dispatchDir }, stage, executor: { inflight: new Map(), adoptedUnits: () => new Set(), start: () => assert.fail('must not launch stale review') } }), /edge-verdict-stale/); }
-    finally { rmSync(repo, { recursive: true, force: true }); }
-  });
-
   test(`${engine.name}: canonical coverage preserves current reviews, detects pending impact and stale hashes`, () => {
     const repo = mkdtempSync(join(tmpdir(), 'step3b-real-')), run = 'run';
     mkdirSync(join(repo, 'items')); mkdirSync(join(repo, 'research')); mkdirSync(join(repo, 'library'));
@@ -164,22 +101,9 @@ for (const engine of engines) {
   });
 }
 
-for (const engine of engines) test(`${engine.name}: real stage factory opts in only Step3b`, async () => {
-  const module = engine.physics ? await import('../stages/mathlib.step3.mts') : await import('../stages/mathlib.step3.mts');
+for (const engine of engines) test(`${engine.name}: current stage factory has no Step3b review registration`, async () => {
+  const module = engine.physics ? await import('../../physics-autopilot/stages/mathlib.step3.mts') : await import('../stages/mathlib.step3.mts');
   const stages = module.step3Stages({ resultPattern: (role: string, label: string) => new RegExp('^'+role+'-'+label+'\\.result\\.json$') });
-  assert.equal(typeof stages.find((s: any) => s.id === '3b-cross').reviewCoverage, 'function');
-  assert.ok(stages.filter((s: any) => s.id !== '3b-cross').every((s: any) => !s.reviewCoverage));
-});
-
-for (const engine of engines) test(`${engine.name}: changed pending metadata cannot replace completed-obligation progress`, () => {
-  const repo = mkdtempSync(join(tmpdir(), 'step3b-count-')), dispatchDir = join(repo, 'dispatch'); mkdirSync(dispatchDir);
-  mkdirSync(join(repo, 'research')); writeFileSync(join(repo, 'research/checkpoint.md'), 'immutable task');
-  writeFileSync(join(dispatchDir, 'alpha-3b-lead.result.json'), JSON.stringify({run:'run',role:'alpha',covers:['all'],ok:true}));
-  const stage = withStep3bReviewContinuation({id:'3b-cross',pattern:/^alpha-3b-[a-z-]+\.result\.json$/}, {inspect:()=>({complete:false,progress:'changed-order-and-metadata',errors:[],counts:{completed:1},why:'same actual completed count'})});
-  const executor:any={inflight:new Map(),adoptedUnits:()=>new Set(),state:{data:{dispatches:{prior:{stage:'3b-cross',label:'3b-review-aaaaaaaaaaaaaaaa',startedAt:new Date().toISOString(),lastExitOk:true,reviewCheckpoint:{completed:1,task:'research/checkpoint.md',taskSha256:sha('immutable task')}}}}},start:()=>assert.fail('must not dispatch')};
-  try{assert.throws(()=>stage.onProgress({ctx:{repo,run:'run',dispatchDir},stage,executor}),/completed-obligation progress/);}finally{rmSync(repo,{recursive:true,force:true});}
-});
-for (const engine of engines) test(`${engine.name}: queued or adopted review writers defer inspection and continuation`, () => {
-  const stage = withStep3bReviewContinuation({id:'3b-cross',pattern:/^alpha-3b-[a-z-]+\.result\.json$/}, {inspect:()=>assert.fail('cannot inspect while writer active')});
-  for(const adopted of [false,true]) stage.onProgress({ctx:{},stage,executor:{inflight:adopted?new Map():new Map([['queued',{meta:{stage:'3b-cross'}}]]),adoptedUnits:()=>adopted?new Set(['all']):new Set()}});
+  assert.equal(stages.some((s: any) => /^3b-/.test(s.id)), false);
+  assert.ok(stages.every((s: any) => !s.reviewCoverage));
 });

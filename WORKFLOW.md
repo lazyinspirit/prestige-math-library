@@ -11,7 +11,7 @@ worker prompts, supporting tools, content and run state.
 |---|---|---|
 | 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
 | 2 | Scope and prerequisite review/repair | One Luna-max reviewer and one Luna-max repairer per batch; complete current batch acceptance |
-| 3 | Independent review | Batch readers, refuters and adjudicators, followed by cross-batch review and closure |
+| 3 | Independent review | Batch readers, refuters and adjudicators, final validation and mechanical closure |
 | 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
 | 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
 | 6 | Closeout | Contracts, pathways, stamps, readiness, evidence, owner report and local closeout commit |
@@ -108,10 +108,21 @@ acceptance receives native completion coverage at the next controller tick.
 
 ## Independent review through closeout
 
-Step 3 keeps the existing independent batch review, routed adjudication and
-unfinished cross-review continuation. A partial process handoff is not completed
-artifact coverage; continuations require actual completed-obligation progress.
-Source and empirical qualifications survive regeneration.
+Step 3 uses independent batch review and routed adjudication after authoring in
+dependency-level order. Step 3b is retired in both engines: there is no separate
+cross-batch edge review, impact-review window or unfinished cross-review lane.
+The final sequence is `3a-baseline`, `3a-validate`, then `3a-close`. Validation
+retains the current-frontier content, source, contract, routing and ledger gates;
+the mechanical close freezes evidence only after those gates pass. Source and
+empirical qualifications survive regeneration.
+
+New closure receipts use version 3 with basis `dependency-ordered-step3a` and
+bind the exact Step 3a evidence. Historical version-2 receipts remain verifiable
+against their original evidence, including completed Step 3b work. Retiring the
+stage grants no new review coverage, clears no confirmed defect and leaves
+published-repair handoffs for their later independent judgments. Cross-batch
+consumer defects found during review go to the owner for supplier-first repair;
+they are not deferred to a retired stage.
 
 An existing successful Step-3a `accepted_repair` verdict may retain its native
 meaning after accompanying metadata reconciliation through explicit

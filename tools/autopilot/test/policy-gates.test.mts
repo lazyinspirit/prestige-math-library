@@ -18,7 +18,7 @@ const argvOf = (g: any): string[] => (typeof g.argv === 'function' ? g.argv() : 
 test('the post-authoring stages run content-policy in item mode', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['3b-author', '3b-cross']) {
+  for (const id of ['2-scope-review', '3a-validate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const full = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));
@@ -64,7 +64,7 @@ test('scaffold policy resolves same-run cross-batch dependencies at the level jo
 test('author closure checks authored content before plan splicing, not scaffold minting', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  const gates = mod.stages.find((s: any) => s.id === '3b-author').gates(ctx);
+  const gates = mod.stages.find((s: any) => s.id === '2-scope-review').gates(ctx);
   assert.ok(!gates.some((g: any) => argvOf(g).includes('--manifest-only')),
     'scaffold mint checks reject newly authored IDs before Step 3 splices them');
   assert.equal(gates.filter((g: any) => g.id === 'manifest-deps').length, 1);
@@ -75,10 +75,10 @@ test('author closure checks authored content before plan splicing, not scaffold 
   assert.ok(manifests.length > 1, 'authored policy must check the whole level');
 });
 
-test('both scaffold closure joins enforce the recorded-not-proved boundary', async () => {
+test('construction and scope closure joins enforce the recorded-not-proved boundary', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['1-scaffold', '3b-author']) {
+  for (const id of ['1-scaffold', '2-scope-review']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.ok(st.gates(ctx).some((g: any) => g.id === 'extcheck'),
       `${id} does not run extcheck before accepting a scaffold`);

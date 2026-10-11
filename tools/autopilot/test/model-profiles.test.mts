@@ -73,8 +73,6 @@ test('Step 2 scope roles use Luna max and later adjudication uses Sol 6.1 high',
   const adjudicate = stage('3a-adjudicate');
   assert.equal(selected(adjudicate, { role: 'alpha', job: 'adjudication' }), MODEL_PROFILE_NAMES.sol61High,
     'Step 3a adjudication runs on the Sol 6.1 high lane');
-  const cross = stage('3b-cross');
-  assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.sol61High);
 
   const judgeStage = stage('4-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
@@ -104,7 +102,7 @@ test('Step 3a readers use Sol 6.1 high, refuters use Luna max, and tool lanes st
     assert.equal(selected(st, plan), profile);
     assert.equal(selected(st, { role: 'tool' }), undefined, `${id} keeps its tool lane model-free`);
   }
-  for (const id of ['3a-prepare', '3a-split', '3a-collect', '3a-baseline', '3b-edges', '3b-close']) {
+  for (const id of ['3a-prepare', '3a-split', '3a-collect', '3a-baseline', '3a-validate', '3a-close']) {
     const st = stage(id);
     assert.equal(selected(st, st.plan(ctx, ['1'])[0]), undefined, `${id} is a deterministic tool stage`);
   }
