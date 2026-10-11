@@ -547,6 +547,18 @@ function committedAndCurrent(root, scope) {
   }
 }
 
+const recoveryAdministrativePaths = Object.freeze(['WORKFLOW.md', 'tools/run-commit-scope.mjs']);
+
+// Exact metadata binding helper; these paths remain outside-preserved during
+// every native commit. Only this immutable pair can have an original bridge.
+export function inspectAdministrativeRecoveryStates(root) {
+  const index = new Map(indexEntries(root).map(row => [row.path, row]));
+  const head = new Map(treeEntries(root).map(row => [row.path, row]));
+  return recoveryAdministrativePaths.map(path => ({ path, current: {
+    outside_index: index.get(path), outside_head: head.get(path), outside_working: fileState(root, path),
+  } }));
+}
+
 // Authenticate the preserved original baseline rather than replacing it.
 // Frozen runtime metadata reconstructs its exact original full working digest;
 // only the independently live physics runtime is projected away thereafter.
@@ -587,9 +599,36 @@ function verifyRuntimePreservationRecovery(root, run, scope, previousBytes, outs
     throw Error('closeout: recovery dropped original owned paths');
   const baseline = original.closeout_scope.preservation_before;
   assertSame(failure.before, baseline, 'recovery original failure baseline');
-  for (const key of ['outside_index', 'outside_head']) {
-    assertSame(failure.after[key], baseline[key], 'recovery original ' + key);
-    assertSame(digest(outside[key]), baseline[key], 'recovery current ' + key);
+  const administrative = recovery.administrative_continuity;
+  if (typeof administrative?.authorization !== 'string' || administrative.authorization.trim().length < 20)
+    throw Error('closeout: missing exact administrative bridge authorization');
+  const administrativeArchive = JSON.parse(archive(administrative.archive));
+  if (administrativeArchive.version !== 1
+    || administrativeArchive.kind !== 'authenticated-original-administrative-outside-rows'
+    || administrativeArchive.run !== run || administrativeArchive.original_commit !== recovery.original_commit
+    || !Array.isArray(administrativeArchive.administrative_rows) || !Array.isArray(administrative.current_rows)
+    || JSON.stringify(administrativeArchive.administrative_rows.map(row => row.path)) !== JSON.stringify(recoveryAdministrativePaths)
+    || JSON.stringify(administrative.current_rows.map(row => row.path)) !== JSON.stringify(recoveryAdministrativePaths))
+    throw Error('closeout: invalid exact administrative continuity bridge');
+  const currentAdministrative = new Map(administrative.current_rows.map(row => [row.path, row.current]));
+  const originalAdministrative = new Map(administrativeArchive.administrative_rows.map(row => [row.path, row.original]));
+  const originalOutside = {};
+  for (const key of ['outside_index', 'outside_head', 'outside_working']) {
+    for (const path of recoveryAdministrativePaths) {
+      if (scope.owns(path)) throw Error('closeout: administrative continuity path must remain outside-preserved');
+      const matches = outside[key].filter(row => row.path === path);
+      if (matches.length !== 1 || !currentAdministrative.get(path)?.[key]
+        || !originalAdministrative.get(path)?.[key])
+        throw Error('closeout: missing exact administrative outside row');
+      assertSame(matches[0], currentAdministrative.get(path)[key], 'pinned current administrative ' + path + ' ' + key);
+      if (originalAdministrative.get(path)[key].path !== path)
+        throw Error('closeout: mismatched original administrative outside row');
+    }
+    originalOutside[key] = outside[key].map(row => originalAdministrative.get(row.path)?.[key] ?? row);
+    if (key !== 'outside_working') {
+      assertSame(failure.after[key], baseline[key], 'recovery original ' + key);
+      assertSame(digest(originalOutside[key]), baseline[key], 'reconstructed original full ' + key);
+    }
   }
   const seen = new Set();
   for (const row of recovery.original_runtime_rows) {
@@ -608,7 +647,7 @@ function verifyRuntimePreservationRecovery(root, run, scope, previousBytes, outs
       || JSON.stringify(recovery.original_runtime_rows.find(row => row.path === change.path))
         !== JSON.stringify(change.before)))
     throw Error('closeout: original failure is not confined to authenticated runtime rows');
-  const reconstructed = [...outside.outside_working, ...recovery.original_runtime_rows]
+  const reconstructed = [...originalOutside.outside_working, ...recovery.original_runtime_rows]
     .sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : 0);
   assertSame(digest(reconstructed), baseline.outside_working, 'reconstructed original full working');
   // Existing mathematical carriers and canonical ledgers may not change as an

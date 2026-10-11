@@ -221,7 +221,12 @@ and failure diagnostic remain immutable. Frozen original runtime metadata must
 reconstruct the original full working digest when combined with current canonical
 outside rows; original outside index/HEAD digests must still match. Recovery binds
 the current policy/context, retains every original owned path, and requires unchanged
-original items/pages, manifests/contracts and canonical ledgers. All native gates
+original items/pages, manifests/contracts and canonical ledgers. The owner's exact
+administrative bridge for `WORKFLOW.md` and `tools/run-commit-scope.mjs` binds their
+original index/HEAD/working metadata and exact current metadata. Replacing only
+those two rows must reconstruct all three original full digests; both files remain
+outside-preserved throughout native commit and subsequent checks. No other
+administrative/source change is authorized by this bridge. All native gates
 still run. Only after those checks may native closeout write a fresh final receipt
 and commit the administrative recovery; later `--check` uses its ordinary new baseline.
 
