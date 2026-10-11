@@ -35,6 +35,14 @@ a proof strategy or successful process alone is not a completed carrier.
 Readiness records bind the finished carriers. Supplier batches release their
 consumers only after nonempty authored inventories and current readiness exist.
 
+Construction readiness retains its snapshot and receipt-stamped decisions across
+fresh controller contexts belonging to the same configuration and frontier.
+Manifest, coverage, plan, consumed supplier and missing-dependency file stamps
+guard reuse. When alias lookup is used, the entire item inventory is also
+stamp-bound: any change rebuilds alias resolution together with dependency bytes
+and readiness decisions. Failed input scans discard partial cached inputs and
+keep the scaffold incomplete. Scheduling caches never certify changed inputs.
+
 Planning and the existing drift-apply join write `research/RUN-batch-dependency-levels.json` before construction. Before each Step 1 dispatch the engine recomputes this artifact from current page requirements and manifest/carrier logical dependencies, rejects batch cycles, and includes the batch level and suppliers in the worker task. Batch level is zero without in-run suppliers, otherwise one plus their maximum level. Existing transitive supplier completion, authored-carrier/readiness and writer-drain guards still release consumers; numeric levels do not replace them. External suppliers remain context.
 
 Item inventories and logical dependencies are determined in scaffold manifests before item carriers are written; authors compute labels there and construct carriers in ascending item level. Item `dependency_level` is recorded and independently checked in Step 1: zero

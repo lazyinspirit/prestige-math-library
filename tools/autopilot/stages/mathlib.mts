@@ -82,6 +82,7 @@ type ScaffoldSnapshot = {
   snapshot: any;
   levelCheck: ReturnType<typeof dependencyLevels>;
   itemStamps: Map<string, string>;
+  aliasStamp: string | null;
   readiness: Map<string, { stamp: string; closed: boolean }>;
 };
 // Executor.ctx() is transient; its config retains the controller's identity.
@@ -111,7 +112,8 @@ export function scaffoldSnapshot(ctx: any) {
   let cached = scopes.get(scope);
   if (!cached || cached.stamp !== stamp) {
     const snapshot = loadStep3(ctx.repo, ctx.run);
-    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map(), readiness: new Map() };
+    cached = { stamp, snapshot, levelCheck: dependencyLevels(snapshot.pages), itemStamps: new Map(),
+      aliasStamp: null, readiness: new Map() };
     scopes.set(scope, cached);
   } else {
     // Published and in-run item bodies can change without a manifest edit.
@@ -119,23 +121,40 @@ export function scaffoldSnapshot(ctx: any) {
     // Step-1 receipt files themselves are read afresh below.
     for (const [id, prior] of cached.itemStamps) {
       if (fileStamp(R(ctx, 'items', `${id}.md`)) !== prior) {
-        cached.snapshot.cache.clear();
-        cached.itemStamps.clear();
-        cached.readiness.clear();
+        invalidateScaffoldInputs(cached);
         break;
       }
     }
+    // Alias lookup reads all item carriers: an unrelated carrier can acquire
+    // an alias, and a new canonical file can supersede an existing alias.
+    if (cached.aliasStamp !== null && cached.aliasStamp !== scaffoldAliasStamp(ctx)) {
+      invalidateScaffoldInputs(cached);
+    }
   }
   return cached;
+}
+
+function scaffoldAliasStamp(ctx: any): string {
+  return readdirSync(R(ctx, 'items')).filter(name => name.endsWith('.md')).sort()
+    .map(name => `${name}:${fileStamp(R(ctx, 'items', name))}`).join('|');
+}
+
+function invalidateScaffoldInputs(cached: ScaffoldSnapshot): void {
+  cached.snapshot.cache.clear();
+  delete cached.snapshot.aliases;
+  cached.itemStamps.clear();
+  cached.aliasStamp = null;
+  cached.readiness.clear();
 }
 
 function scaffoldArtifacts(ctx: any, unit: string): string[] {
   const manifest = `research/${ctx.run}-batch-${unit}.pages.json`;
   const out = [manifest, `research/${ctx.run}-batch-${unit}.coverage.json`];
   let complete = true;
+  let cached: ScaffoldSnapshot | undefined;
   try {
     const pages = JSON.parse(readFileSync(R(ctx, manifest), 'utf8'));
-    const cached = scaffoldSnapshot(ctx);
+    cached = scaffoldSnapshot(ctx);
     const { snapshot, levelCheck } = cached;
     if (levelCheck.errors.some((error: string) => error.startsWith('dependency cycle:'))) complete = false;
     if (!Array.isArray(pages) || !pages.length) complete = false;
@@ -171,7 +190,11 @@ function scaffoldArtifacts(ctx: any, unit: string): string[] {
     for (const id of inputIds) {
       if (!cached.itemStamps.has(id)) cached.itemStamps.set(id, fileStamp(R(ctx, 'items', `${id}.md`)));
     }
+    if (snapshot.aliases && cached.aliasStamp === null) cached.aliasStamp = scaffoldAliasStamp(ctx);
   } catch {
+    // A failed alias scan can leave a partially populated index. Never let a
+    // later status call reuse it or a decision computed before the failure.
+    if (cached) invalidateScaffoldInputs(cached);
     complete = false;
   }
   // Planning creates empty page shells. A successful Beta receipt and coverage

@@ -15,7 +15,7 @@ function fixture(t: any) {
     { id: 'example', kind: 'B', companion: 'main', order: 2, requires: ['main'], items: [{ id: 'ex-local', kind: 'example', statement: 'Example', deps: ['lem-local'], dependency_level: 1 }] },
   ];
   const put = (name: string, value: any) => writeFileSync(join(repo, 'research', name), JSON.stringify(value));
-  const body = (id: string, text: string) => writeFileSync(join(repo, 'items', `${id}.md`), `---\nid: ${id}\nstatus: ${id === 'lem-published' ? 'published' : 'draft'}\ndeps: []\n---\n${text}\n`);
+  const body = (id: string, text: string, aliases: string[] = []) => writeFileSync(join(repo, 'items', `${id}.md`), `---\nid: ${id}\nstatus: ${id === 'lem-published' ? 'published' : 'draft'}\ndeps: []\naliases: ${JSON.stringify(aliases)}\n---\n${text}\n`);
   body('lem-published', 'Supplier proof'); body('lem-local', 'Local proof');
   put('plan-spec.json', { pages }); put('demo-batch-1.pages.json', pages); put('demo-batch-1.coverage.json', { pages: [] });
   const config = {}, ctx = () => ({ repo, run: 'demo', config });
@@ -84,6 +84,61 @@ test('readiness cache protects missing supplier creation and receipt deletion', 
   assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
   rmSync(join(f.repo, 'research', 'demo-step1-lem-local.json'));
   assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});
+
+test('readiness cache guards absent inputs explicitly listed only in a receipt', t => {
+  const f = fixture(t); f.ready();
+  recordStep1(f.repo, { run: 'demo', item: 'lem-local', decision: 'ready', reason: 'Examined extra input',
+    dependencies: ['lem-published', 'lem-examined-extra'], owner: true });
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  assert.equal(scaffoldSnapshot(f.ctx()).itemStamps.get('lem-examined-extra'), 'missing');
+  f.body('lem-examined-extra', 'Newly supplied examined input');
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});
+
+test('alias reassignment and canonical replacement invalidate retained readiness', t => {
+  const f = fixture(t);
+  f.pages[0].items[0].deps.push('supplier-alias'); f.put('demo-batch-1.pages.json', f.pages);
+  f.body('lem-alias-source', 'Original alias supplier', ['supplier-alias']); f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  const cached = scaffoldSnapshot(f.ctx()); assert.ok(cached.snapshot.aliases.has('supplier-alias'));
+  f.body('lem-alias-source', 'Original alias supplier');
+  f.body('lem-replacement', 'Replacement supplier', ['supplier-alias']);
+  assert.equal(scaffoldSnapshot(f.ctx()), cached, 'config/frontier cache identity survives invalidation');
+  assert.equal(cached.snapshot.aliases, undefined);
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  f.ready(); assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  f.body('supplier-alias', 'Canonical supplier takes precedence');
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});
+
+test('previously missing alias supplier creation invalidates retained readiness', t => {
+  const f = fixture(t);
+  f.pages[0].items[0].deps.push('future-alias'); f.put('demo-batch-1.pages.json', f.pages); f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  f.body('lem-new-alias-source', 'New alias supplier', ['future-alias']);
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  f.ready(); assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  rmSync(join(f.repo, 'items', 'lem-new-alias-source.md'));
+  assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+});
+
+test('ambiguous alias scans stay incomplete on repeated calls and recover after removal', t => {
+  const f = fixture(t);
+  f.pages[0].items[0].deps.push('supplier-alias'); f.put('demo-batch-1.pages.json', f.pages);
+  f.body('lem-alias-source', 'Original supplier', ['supplier-alias']); f.ready();
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+  const cached = scaffoldSnapshot(f.ctx());
+  // This new carrier was outside the consumed closure before it acquired an
+  // alias, so supplier-only stamps cannot detect the ambiguous index.
+  f.body('lem-unrelated', 'Unrelated supplier', ['supplier-alias']);
+  for (let attempt = 0; attempt < 2; attempt++) {
+    assert.ok(f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
+    assert.equal(cached.snapshot.aliases, undefined, 'discard the partially populated alias index');
+    assert.equal(cached.readiness.size, 0);
+  }
+  rmSync(join(f.repo, 'items', 'lem-unrelated.md'));
+  assert.ok(!f.artifacts().some((p: string) => p.endsWith('scaffold-incomplete')));
 });
 
 test('prerequisite scheduling reads current requirements and logical carrier dependencies', t => {
