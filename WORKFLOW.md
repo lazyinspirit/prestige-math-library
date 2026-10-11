@@ -161,6 +161,18 @@ receipts/revisions do not satisfy the rebuilt pipeline. Legacy authoring-prefix
 migration and ready-pair initial-authoring variants are not current entry routes.
 Preserve historical run evidence rather than relabeling it. The retained authoring claim-resolution API is documented in [tools/step3-owner-creation.md](tools/step3-owner-creation.md); it supplies historical origin continuity only.
 
+Current Step-3 owner repair helpers use `tools/auditor-created-items.mjs
+owner-create --run RUN --step 3 --id ITEM --evidence research/JSON` after
+stable source, manifest and proof-contract integration. Immutable origins bind
+baseline exclusion, the actual distinct author, assignment/authorship/escalation
+evidence and all six current carrier hashes; creation records no independent
+review or native execution coverage. Routing also permits an ownership-certified
+draft generated counterexample with `generation.role: counterexample`, an actual
+refutation and no logical consumers in current frontier manifests or authored
+sources. This narrow exception retains ordinary independent review and every
+gate; historical scopes, baselines and worker receipts remain unchanged.
+
+
 An explicitly owner-authorized restored frontier may retain its original
 `pipeline_run` markers. Step-3 dependency routing recognizes those draft IDs
 only through `research/RUN-continuation.json`: exact source run, nonempty

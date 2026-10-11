@@ -25,6 +25,7 @@ import { loadOwnerIdMigrations } from './step3-owner-id-migrations.mjs';
 import { activeOwnershipRows } from './defect-ledger-ownership.mjs';
 import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
+import { isCertifiedOwnerCounterexampleAddition } from './step3-owner-counterexample-addition.mjs';
 import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
 import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
@@ -262,6 +263,13 @@ function currentAuditorCertification(target) {
   // The shared reader already checked the exact current carriers, excluding
   // only the mechanical judge stamp. Do not reintroduce a raw-byte comparison.
   return row ?? null;
+}
+
+function ownerCounterexampleAddition(id, batch) {
+  if (!/^cex-/.test(id)) return false;
+  const manifestRows = Object.keys(manifestItems()).flatMap(ownerBatch =>
+    [...manifestMetadata(ownerBatch).itemRows.values()].map(row => ({ ...row, batch: ownerBatch })));
+  return isCertifiedOwnerCounterexampleAddition({ root: ROOT, run, id, batch, manifestRows });
 }
 
 function ownerContextAddition(id, batch) {
@@ -1008,7 +1016,7 @@ if (command === 'check') {
       if (phase !== 'final') {
         for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 3b`);
         if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
-        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] only local definitions, algorithms and lemmas may be added at 3a`);
+        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch) && !ownerCounterexampleAddition(id, batch)) error('scope-addition', `[${id}] only local definitions, algorithms and lemmas may be added at 3a`);
       }
       continue;
     }
@@ -1023,7 +1031,7 @@ if (command === 'check') {
       error('scope-removal', `[${id}] post-reader item removed without a valid owner representation migration`);
     }
     for (const id of manifests[batch] ?? []) if (!currentPostIds.includes(id)
-      && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
+      && !/^(alg|def|lem)-/.test(id) && !ownerContextAddition(id, batch) && !ownerCounterexampleAddition(id, batch)) error('scope-addition', `[${id}] unsupported post-reader item addition`);
     for (const message of hashSnapshotErrors(pre, batch, 'pre')) error('hash-invalid', `batch ${batch} pre ${message}`);
     for (const message of hashSnapshotErrors(post, batch, 'post')) error('hash-invalid', `batch ${batch} post ${message}`);
     if (scope.version !== 2) error('scope-identity', `batch ${batch} has unsupported scope version ${scope.version}`);
