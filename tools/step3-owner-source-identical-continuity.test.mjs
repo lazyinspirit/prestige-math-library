@@ -353,3 +353,36 @@ test("missing contract on a proof-bearing lemma is rejected", async () => {
     fs.rmSync(f.dir, { recursive: true, force: true });
   }
 });
+
+test("unmatched continuity entries perform no filesystem or rehome reads", async () => {
+  const f = fixture();
+  try {
+    const spyPath = path.join(f.dir, "tools", "read-spy.mjs");
+    fs.writeFileSync(spyPath, `export const calls = [];
+export function readFileSync() { calls.push("readFileSync"); throw Error("unexpected read"); }
+export function existsSync() { calls.push("existsSync"); throw Error("unexpected existence check"); }
+export function loadStep3OwnerRehomes() { calls.push("loadStep3OwnerRehomes"); throw Error("unexpected frontier scan"); }
+export function ownerRehomeCarrierBatch() { calls.push("ownerRehomeCarrierBatch"); throw Error("unexpected carrier lookup"); }
+`);
+    const spyUrl = pathToFileURL(spyPath).href;
+    const helperPath = path.join(f.dir, "tools", "helper.mjs");
+    let code = fs.readFileSync(helperPath, "utf8");
+    code = code.replace(/from ["']node:fs["']/g, `from '${spyUrl}'`)
+      .replace(/from ["'][^"']*step3-owner-rehomes\.mjs["']/g, `from '${spyUrl}'`);
+    fs.writeFileSync(helperPath, code);
+    const original = f.entry;
+    for (const entry of [
+      { ...original, id: "lem-another-subject" },
+      { ...original, obligation: "touched:2:" + id },
+      { ...original, run: "another-run" },
+      null,
+    ]) {
+      f.entry = entry;
+      assert.equal(await evaluate(f), false);
+    }
+    const spy = await import(spyUrl);
+    assert.deepEqual(spy.calls, []);
+  } finally {
+    fs.rmSync(f.dir, { recursive: true, force: true });
+  }
+});

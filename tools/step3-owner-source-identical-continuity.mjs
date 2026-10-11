@@ -51,6 +51,17 @@ export function sourceIdenticalAcceptanceContinuity(
   current,
   entry,
 ) {
+  // Most entries belong to another decision. Reject them before any source or
+  // whole-frontier rehome reads; the full checks below still govern a match.
+  if (
+    !entry ||
+    entry.version !== 1 ||
+    entry.policy !== "step3-source-identical-acceptance-continuity-v1" ||
+    entry.run !== run ||
+    entry.id !== decision?.id ||
+    entry.obligation !== decision?.obligation
+  )
+    return false;
   try {
     const rehomes = loadStep3OwnerRehomes(root, run);
     const currentBatch = ownerRehomeCarrierBatch(
