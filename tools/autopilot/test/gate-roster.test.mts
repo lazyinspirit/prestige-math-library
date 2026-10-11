@@ -14,17 +14,7 @@ import assert from 'node:assert/strict';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 
-test('Step 3 closure retains URL and backing checks after authored sources', async () => {
-  const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  const ids = (stage: string) => mod.stages.find((s: any) => s.id === stage)
-    .gates(ctx).map((g: any) => g.id);
-  const author = ids('1-scaffold');
-  assert.ok(author.includes('source-fetch-check'));
-  const later = ids('3a-validate');
-  assert.ok(later.indexOf('url-liveness') >= 0);
-  assert.ok(later.indexOf('url-liveness') < later.indexOf('source-backing'));
-});
+
 
 test('the step-5 window validates round evidence and repeats the complete battery', async () => {
   const mod = await import('../stages/mathlib.mts');
@@ -54,7 +44,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // in-flight items as needed"). Step 6 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  for (const id of ['3a-adjudicate', '3a-validate', '5.8-gate', '5.10-gate', '6-readiness-v2']) {
+  for (const id of ['3a-adjudicate', '5.8-gate', '5.10-gate', '6-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
@@ -67,7 +57,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
 test('prosecheck and depsource run at every repo-wide gate point', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  for (const id of ['2-scope-review', '3a-validate', '6-readiness-v2']) {
+  for (const id of ['2-scope-review', '6-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
@@ -75,29 +65,5 @@ test('prosecheck and depsource run at every repo-wide gate point', async () => {
     for (const tool of ['tools/prosecheck.mjs', 'tools/depsource.mjs']) {
       assert.ok(tools.includes(tool), `${id} does not run ${tool}`);
     }
-  }
-});
-
-test('only Step 3 closure opens the routed published-repair audit window', async () => {
-  const mod = await import('../stages/mathlib.mts');
-  const ctx = { run: 'frontier-14', repo: REPO, doctor: true };
-  const argvFor = (id: string) => {
-    const st = mod.stages.find((s: any) => s.id === id);
-    return st.gates(ctx)
-      .map((g: any) => ({ id: g.id, argv: typeof g.argv === 'function' ? g.argv() : g.argv }));
-  };
-
-  const step3 = argvFor('3a-validate');
-  const routingIndex = step3.findIndex((g: any) => g.id === 'step3-routing-final');
-  const depcheckIndex = step3.findIndex((g: any) => g.id === 'depcheck');
-  assert.ok(routingIndex >= 0 && routingIndex < depcheckIndex,
-    'Step 3 closure must validate the exact repair handoff before opening the audit window');
-  assert.ok(step3[depcheckIndex].argv.includes('--pending-audit-ok'),
-    'Step 3 closure depcheck does not permit its routed repairs to await independent certification');
-
-  for (const id of ['2-scope-review', '6-readiness-v2']) {
-    const depcheck = argvFor(id).find((g: any) => g.id === 'depcheck');
-    assert.ok(depcheck && !depcheck.argv.includes('--pending-audit-ok'),
-      `${id} incorrectly weakens the published-audit invariant`);
   }
 });

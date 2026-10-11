@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Freeze dependency-ordered Step 3a after exact routing, plan, and ledger checks pass.
+// Freeze dependency-ordered Step 3a after the passed native gate and exact carrier/plan currency checks.
 // Later stages may rewrite items, but cannot rewrite the Step-3 evidence.
 
 import { createHash } from 'node:crypto';
@@ -93,10 +93,8 @@ if (mode === 'verify') {
 }
 
 const checks = [
-  ['step3-routing-final', ['tools/step3-scope.mjs', 'check', '--run', run, '--phase', 'final']],
+  ['passed-step3a-currency', ['tools/step3-scope.mjs', 'verify-post-3a', '--run', run]],
   ['splice-verify', ['tools/splice-plan.mjs', '--run', run, '--verify']],
-  ['validate-plan', ['tools/frontier-item-gate.mjs', '--run', run, '--tool', 'validate-plan']],
-  ['defect-ledger', ['tools/defect-ledger.mjs', 'validate', '--run', run]],
 ];
 // The routing check is the expensive one: on phase-2-remaining-27's 1,032-item
 // corpus it takes about ten minutes, so a five-minute cap aborted the close

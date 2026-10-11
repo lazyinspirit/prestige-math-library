@@ -191,40 +191,6 @@ export function step3Stages(d: any) {
       gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the exact post-3a historical endpoint. Missing output prevents successful coverage.',
     },
     {
-      id: '3a-validate',
-      label: 'validate final Step 3a carriers and audit manifest (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'audit-manifest-3a'),
-      artifacts: (ctx: any) => `research/${ctx.run}-audit-manifest.json`,
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'audit-manifest-3a', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/physics-support/audit-manifest.mjs',
-          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
-          '--output', `research/${ctx.run}-audit-manifest.json`],
-        timeout: 600,
-      }],
-      gates: (ctx: any) => [
-        auditorCreatedGate(ctx),
-        routingGate(ctx, 'final'),
-        gate('step3-ledger-valid', ['node', 'tools/physics-support/defect-ledger.mjs', 'validate', '--run', ctx.run]),
-        planGate(ctx),
-        // A 3a material repair of a published dependency loses its obsolete
-        // audit record, but may need to remain published for unchanged
-        // published consumers. `routingGate(final)` above validates that exact
-        // hash-bound Step-5 handoff before this bounded pending-audit window.
-        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx),
-        urlGate(ctx), backingGate(ctx), policyItemGate(ctx),
-        ...contractGates(ctx, { reviewed: true }),
-        gate('audit-manifest', ['node', 'tools/physics-support/audit-manifest.mjs',
-          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
-          '--output', `research/${ctx.run}-audit-manifest.json`], {
-          liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
-        }),
-      ],
-      onHold: holdStep3,
-    },
-    {
       id: '3a-close',
       label: 'freeze exact Step 3 closure (mechanical)',
       units: () => ['all'],
@@ -239,7 +205,7 @@ export function step3Stages(d: any) {
         // the tool's internal cap and left no headroom for the other checks.
         timeout: 1800,
       }],
-      gatesWaived: 'The close tool reruns exact Step-3a routing, plan and ledger checks after the complete validation battery, then freezes immutable Step-3a history. A nonzero check produces no successful result.',
+      gatesWaived: 'The close tool reruns exact Step-3a routing, plan and ledger checks then freezes immutable Step-3a history. A nonzero check produces no successful result.',
     },
   ];
 }

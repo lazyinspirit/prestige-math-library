@@ -11,7 +11,7 @@ import { Reporter } from '../src/reporter.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
 
 const STEP3 = ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect',
-  '3a-adjudicate', '3a-baseline', '3a-validate', '3a-close'];
+  '3a-adjudicate', '3a-baseline', '3a-close'];
 
 test('Step 3 has no mathematical repair dispatch, repair budget or fingerprint', () => {
   // The rebuild deletes the gate-triggered repair wave: a failing Step 3 gate
@@ -26,7 +26,7 @@ test('Step 3 has no mathematical repair dispatch, repair budget or fingerprint',
     assert.equal(stage.repairFingerprint, undefined, `${id} must not rearm on a repair fingerprint`);
     assert.equal(stage.batchRepairs, undefined, `${id} must not claim a batch repair envelope`);
   }
-  for (const id of ['3a-adjudicate', '3a-validate']) {
+  for (const id of ['3a-adjudicate']) {
     assert.equal((stages.find(s => s.id === id) as any).onHold, holdStep3,
       `${id} reports the item-level owner hold`);
   }

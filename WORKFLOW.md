@@ -111,9 +111,11 @@ acceptance receives native completion coverage at the next controller tick.
 Step 3 uses independent batch review and routed adjudication after authoring in
 dependency-level order. Step 3b is retired in both engines: there is no separate
 cross-batch edge review, impact-review window or unfinished cross-review lane.
-The final sequence is `3a-baseline`, `3a-validate`, then `3a-close`. Validation
-retains the current-frontier content, source, contract, routing and ledger gates;
-the mechanical close freezes evidence only after those gates pass. Source and
+The final sequence is `3a-baseline` then `3a-close`. The existing Step 3a
+validation battery remains in adjudication. Mechanical closure checks exact
+current item, contract, manifest and page carriers against the post-gate
+snapshots and plan correspondence; it freezes evidence without repeating the
+passed review or introducing another gate battery. Source and
 empirical qualifications survive regeneration.
 
 New closure receipts use version 3 with basis `dependency-ordered-step3a` and

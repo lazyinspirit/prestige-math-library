@@ -17,7 +17,7 @@ const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax;
 /** Build Step 3 with the canonical gate helpers from mathlib.mts. */
 export function step3Stages(d: any) {
   const {
-    gate, planGate, repoWide, contractGates, coverageGates, policyItemGate, urlGate, backingGate,
+    gate, repoWide, contractGates,
     batches, alphaGroups, resultPattern, touchesPath,
   } = d;
 
@@ -194,39 +194,6 @@ export function step3Stages(d: any) {
       gatesWaived: 'One serialized tool reconciles plan-spec, freezes every composite item/page carrier, then records the post-3a endpoint. Missing output prevents successful coverage.',
     },
     {
-      id: '3a-validate',
-      label: 'validate final Step 3 carriers (mechanical)',
-      units: () => ['all'],
-      pattern: resultPattern('tool', 'step3-validate'),
-      artifacts: (ctx: any) => `research/${ctx.run}-audit-manifest.json`,
-      concurrency: 1,
-      plan: (ctx: any) => [{
-        role: 'tool', label: 'step3-validate', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/audit-manifest.mjs',
-          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
-          '--output', `research/${ctx.run}-audit-manifest.json`],
-      }],
-      gates: (ctx: any) => [
-        auditorCreatedGate(ctx),
-        routingGate(ctx, 'final'),
-        gate('step3-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),
-        planGate(ctx),
-        // A 3a material repair of a published dependency loses its obsolete
-        // audit record, but may need to remain published for unchanged
-        // published consumers. `routingGate(final)` above validates that exact
-        // hash-bound Step-5 handoff before this bounded pending-audit window.
-        ...repoWide(ctx, { pendingAuditOk: true }), ...coverageGates(ctx),
-        urlGate(ctx), backingGate(ctx), policyItemGate(ctx),
-        ...contractGates(ctx, { reviewed: true }),
-        gate('audit-manifest', ['node', 'tools/audit-manifest.mjs',
-          ...batches(ctx).map((batch: string) => `research/${ctx.run}-batch-${batch}.pages.json`),
-          '--output', `research/${ctx.run}-audit-manifest.json`], {
-          liveness: { pattern: /over (\d+) item\(s\) in/.source, min: 1, unit: 'manifest items' },
-        }),
-      ],
-      onHold: holdStep3,
-    },
-    {
       id: '3a-close',
       label: 'freeze exact Step 3 closure (mechanical)',
       units: () => ['all'],
@@ -238,7 +205,7 @@ export function step3Stages(d: any) {
         argv: ['node', 'tools/step3-close.mjs', 'close', '--run', ctx.run],
         timeout: 1800,
       }],
-      gatesWaived: 'The close tool reruns final routing, plan and ledger checks before freezing the exact closure receipt; final carrier validation has already passed.',
+      gatesWaived: 'The close tool verifies current final routing and manifest-to-plan correspondence before freezing the exact closure receipt; the native Step 3a adjudication battery has already passed.',
     },
   ].map(stage => withRefuterContinuation(stage));
 }

@@ -103,7 +103,7 @@ test('Step 3a readers and refuters run Sol 6.1 high, and the tool lanes stay mod
     assert.equal(selected(st, plan), profile);
     assert.equal(selected(st, { role: 'tool' }), undefined, `${id} keeps its tool lane model-free`);
   }
-  for (const id of ['3a-prepare', '3a-split', '3a-collect', '3a-baseline', '3a-validate', '3a-close']) {
+  for (const id of ['3a-prepare', '3a-split', '3a-collect', '3a-baseline', '3a-close']) {
     const st = stage(id);
     assert.equal(selected(st, st.plan(ctx, ['1'])[0]), undefined, `${id} is a deterministic tool stage`);
   }

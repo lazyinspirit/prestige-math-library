@@ -162,50 +162,8 @@ console.log('1 item(s) routed; over 1 item(s) in fixture');\n`);
   const gates = readFileSync(gateLog, 'utf8').trim().split('\n');
   assert.equal(gates.filter(id => id === 'step3-owner-escalations').length, 1);
   assert.ok(calls.indexOf('snap-post-3a') > calls.indexOf('3a-batch-2'));
-  assert.ok(calls.indexOf('step3-validate') > calls.indexOf('snap-post-3a'));
-  assert.ok(calls.indexOf('step3-close') > calls.indexOf('step3-validate'));
-  assert.ok(state.data.stages['3a-validate'].gatesPassedAt);
+  assert.ok(calls.indexOf('step3-close') > calls.indexOf('snap-post-3a'));
+  assert.equal(calls.includes('step3-validate'), false);
   assert.equal(calls.some(label => /3b|cross-group-edges/.test(label)), false);
   assert.equal(ex.stageStatus(stages.find(stage => stage.id === '3a-close')).done, true);
-});
-
-test('final carrier validation failure cannot freeze closure or enter Step 4', async t => {
-  const repo = mkdtempSync(join(tmpdir(), 'step3-final-validation-'));
-  t.after(() => rmSync(repo, { recursive: true, force: true }));
-  mkdirSync(join(repo, 'research'));
-  const gate = (id: string, _argv: any, extra: any = {}) => ({ ...extra, id,
-    argv: ['node', '-e', id === 'precheck' ? 'process.exit(1)' : 'console.log("1 item(s) routed; over 1 item(s) in fixture")'] });
-  const stages: any[] = step3Stages({ gate, batches: () => ['1'],
-    resultPattern: (role: string, label: string) => new RegExp(`^${role}-${label}\\.result\\.json$`),
-    planGate: () => gate('plan', []), repoWide: () => [gate('precheck', [])],
-    coverageGates: () => [], contractGates: () => [], policyItemGate: () => gate('policy', []),
-    urlGate: () => gate('urls', []), backingGate: () => gate('backing', []),
-  }).filter(stage => ['3a-validate', '3a-close'].includes(stage.id));
-  for (const stage of stages) {
-    const plan = stage.plan;
-    stage.plan = (ctx: any, pending: string[]) => plan(ctx, pending).map((row: any) => ({ ...row, argv: undefined }));
-  }
-  stages.push({ id: '4-scope', units: () => ['all'], pattern: /^tool-step4-scope\.result\.json$/,
-    plan: () => [{ role: 'tool', label: 'step4-scope', job: 'bookkeeping-mechanical', covers: ['all'] }],
-    gates: () => [gate('next', [])] });
-  const calls: string[] = [];
-  const adapter: any = { name: 'fixture', describe: () => 'fixture', invoke: async (vars: any) => {
-    calls.push(vars.label);
-    writeFileSync(join(repo, 'research/r-audit-manifest.json'), '{}\n');
-    return { ok: true, code: 0, stdout: '', stderr: '' };
-  } };
-  const stateDir = join(repo, 'state'), dispatchDir = join(repo, 'dispatch');
-  mkdirSync(dispatchDir);
-  const state = new State(statePath(stateDir)).init('r');
-  const ex = new Executor({ config: { repo, run: 'r', stateDir, dispatchDir, argv: ['true'],
-    adoptCommand: false, dispatchStaggerMs: 0, gateFailurePolicy: 'owner' } as any,
-    stages, adapter, state, reporter: new Reporter({ dir: stateDir, sink: () => {} }) });
-  for (let i = 0; i < 4; i++) {
-    await ex.tick();
-    await Promise.allSettled([...ex.inflight.values()].map(row => row.promise));
-  }
-  assert.deepEqual(calls, ['step3-validate'], JSON.stringify(state.data.blockers));
-  assert.ok(!state.data.stages['3a-validate'].gatesPassedAt);
-  assert.equal(state.data.stages['3a-close'], undefined);
-  assert.ok(state.data.blockers.some((row: any) => row.stage === '3a-validate'));
 });

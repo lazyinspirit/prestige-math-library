@@ -35,7 +35,7 @@ const ROOT = resolve(option('root', (process.env.PHYSICS_REPO ?? (physicsExistsS
 const R = (...parts) => join(ROOT, ...parts);
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const run = option('run');
-if (!run) fail('usage: step3-scope.mjs hash|post-reader|split|collect|post-3a|stamp|check --run <run> [--batch N] [--label pre|post|pre-3a|post-3a] [--phase adjudicate|final]');
+if (!run) fail('usage: step3-scope.mjs hash|post-reader|split|collect|post-3a|verify-post-3a|stamp|check --run <run> [--batch N] [--label pre|post|pre-3a|post-3a] [--phase adjudicate|final]');
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const hashPath = (batch, label) => R('research', `${run}-step3-hash-${batch}-${label}.json`);
@@ -587,6 +587,25 @@ if (command === 'post-reader') {
   runChecked(selfCommand('hash', '--batch', batch, '--label', 'post'), `batch ${batch} post-reader hash`);
   runChecked(selfCommand('split', '--batch', batch), `batch ${batch} routing split`);
   console.log(`step3-scope: batch ${batch} post-reader hash and split complete`);
+  process.exit(0);
+}
+
+// Currency-only handoff after the native Step-3a gate pass. It never rewrites
+// the sealed snapshots or repeats mathematical review.
+if (command === 'verify-post-3a') {
+  const batches = Object.keys(manifestItems()).sort((a, b) => Number(a) - Number(b));
+  if (!batches.length) fail('step3-scope: no post-3a frontier');
+  let count = 0;
+  for (const batch of batches) {
+    const sealed = readJson(hashPath(batch, 'post-3a'), `batch ${batch} sealed post-3a`);
+    const live = liveFingerprints(batch);
+    if (sealed.run !== run || String(sealed.batch) !== batch || sealed.label !== 'post-3a'
+      || hashValue(sealed.hashes) !== hashValue(live.items)
+      || hashValue(sealed.page_hashes) !== hashValue(live.pages))
+      fail(`step3-scope: batch ${batch} changed after the passed Step-3a gate`);
+    count += Object.keys(live.items).length;
+  }
+  console.log(`step3-scope: verified ${count} item carrier(s) in ${batches.length} sealed post-3a batch(es)`);
   process.exit(0);
 }
 

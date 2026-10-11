@@ -7,7 +7,7 @@
 // receipts in the dispatch directory, and a stamped stage is never re-derived.
 // This command performs that surgery explicitly and reversibly, in the same
 // guarded-recovery idiom: it archives the Step-3 result receipts and the
-// Step-3 artifacts they produced, clears only the nine Step-3 stage records, and
+// Step-3 artifacts they produced, clears only the eight Step-3 stage records, and
 // arms `pause-at` so the re-run stops at its own boundary. Items, contracts,
 // manifests, judge ledgers and the Step-4/Step-5 receipts are left untouched.
 
@@ -17,7 +17,7 @@ import { basename, join } from 'node:path';
 
 export const STEP3_STAGES = [
   '3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate',
-  '3a-baseline', '3a-validate', '3a-close',
+  '3a-baseline', '3a-close',
 ] as const;
 
 const sha256 = (data: string | Buffer): string => createHash('sha256').update(data).digest('hex');
@@ -140,7 +140,7 @@ export function reopenStep3({
     keep(join(researchDir, name));
   }
 
-  // 3. Clear exactly the nine Step-3 stage records, their blockers and their
+  // 3. Clear exactly the eight Step-3 stage records, their blockers and their
   //    (gate, item) attempt counters. Everything else in the run is preserved.
   const clearedStages: string[] = [];
   for (const stage of STEP3_STAGES) {

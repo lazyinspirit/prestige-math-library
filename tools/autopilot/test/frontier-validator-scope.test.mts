@@ -70,7 +70,7 @@ function assertSelection(ctx: any, tool: string, args: string[]) {
 
 test('actual stage validators receive only current manifest subjects', t => {
   const ctx = fixture(t);
-  for (const id of ['2-scope-review', '3a-validate', '6-readiness-v2']) {
+  for (const id of ['2-scope-review', '6-readiness-v2']) {
     const stage: any = stages.find(s => s.id === id);
     const gates = stage.gates(ctx);
     for (const tool of ['precheck', 'rendercheck', 'prosecheck', 'depcheck', 'fwdcheck', 'extcheck', 'depsource', 'pathcheck']) {
@@ -132,7 +132,7 @@ test('an assembled stage gate refreshes its selection from current manifests at 
 test('all actual stage plan gates carry the run selector', t => {
   const ctx = fixture(t);
   let count = 0;
-  for (const stage of stages.filter(s => ['1-drift', '1-drift-apply', '1-scaffold', '2-scope-review', '3a-validate', '6-readiness-v2'].includes(s.id))) {
+  for (const stage of stages.filter(s => ['1-drift', '1-drift-apply', '1-scaffold', '2-scope-review', '6-readiness-v2'].includes(s.id))) {
     for (const gate of stage.gates?.(ctx) ?? []) {
       if (gate.id !== 'validate-plan') continue;
       count++;
@@ -140,5 +140,5 @@ test('all actual stage plan gates carry the run selector', t => {
       assert.equal(args[args.indexOf('--run') + 1], ctx.run, stage.id);
     }
   }
-  assert.equal(count, 4, 'current plan validation joins retain their run selection');
+  assert.equal(count, 3, 'current plan validation joins retain their run selection');
 });

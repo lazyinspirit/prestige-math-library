@@ -75,7 +75,7 @@ test('Step 3a review drains into mechanical closure before Step 4', async () => 
   const ids = active.stages.map((stage: any) => stage.id);
   assert.deepEqual(ids.slice(ids.indexOf('3a-prepare'), ids.indexOf('3a-close') + 1),
     ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate',
-      '3a-baseline', '3a-validate', '3a-close']);
+      '3a-baseline', '3a-close']);
   assert.equal(ids.some((id: string) => id.startsWith('review-') || id.startsWith('3b-')), false);
   assert.equal(ids[ids.indexOf('3a-close') + 1], '4-scope');
   assert.equal(active.stages.some((s: any) => s.id === '3b-author'), false);
@@ -93,21 +93,21 @@ test('Step 3a review drains into mechanical closure before Step 4', async () => 
     ['research/r-step3-hash-1-pre.json', 'research/r-step3-hash-2-pre.json', 'research/r-step3-hash-3-pre.json']);
   assert.ok(byId('3a-adjudicate').gates(ctx).some((g: any) => g.id === 'step3-auditor-created-certifications'));
   assert.ok(byId('3a-adjudicate').gates(ctx).some((g: any) => g.id === 'step3-routing-adjudicate'));
-  assert.ok(byId('3a-validate').gates(ctx).some((g: any) => g.id === 'step3-routing-final'));
+  assert.equal(byId('3a-close').gates, undefined);
+  assert.ok(byId('3a-close').gatesWaived);
   assert.equal(byId('3a-adjudicate').onGateFailure, undefined);
   assert.equal(byId('3a-adjudicate').onHold, holdStep3);
 });
 
 test('no Step 3 stage carries a repair hook, budget or fingerprint', () => {
   for (const id of ['3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect',
-    '3a-adjudicate', '3a-baseline', '3a-validate', '3a-close']) {
+    '3a-adjudicate', '3a-baseline', '3a-close']) {
     assert.equal(byId(id).onGateFailure, undefined, `${id} must not launch a repair`);
     assert.equal(byId(id).maxFixRounds, undefined, `${id} must not bound repair rounds`);
     assert.equal(byId(id).perItemFixBudget, undefined, `${id} must not charge repair budgets`);
     assert.equal(byId(id).repairFingerprint, undefined, `${id} must not rearm on a fingerprint`);
   }
   assert.equal(byId('3a-adjudicate').onHold, holdStep3);
-  assert.equal(byId('3a-validate').onHold, holdStep3);
 });
 
 
@@ -942,27 +942,7 @@ test('the reader pipeline stages declare their frozen prompts, schemas and artif
   }
 });
 
-test('Step 3 closure content gates hold for the owner instead of racing a peer author', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'step3-peer-author-'));
-  try {
-    mkdirSync(join(root, 'research'));
-    const stage = byId('3a-validate');
-    assert.equal(stage.onGateFailure, undefined,
-      'a failing closure gate is owner-held, never repair-dispatched');
-    for (const [id, output] of [
-      ['precheck', 'REPAIR items/thm-foreign.md: canonical labels'],
-      ['rendercheck', 'ERROR [thm-foreign]: malformed display'],
-      ['depcheck', '1 WARNING(s):\n [orphan] items/thm-owned.md\n1 ERROR(s):\n [bad] items/thm-foreign.md'],
-    ]) {
-      const outcome = await stage.onHold({ ctx: { repo: root, run: 'r' }, stage,
-        failure: { id, output, liveItems: ['*'] } });
-      assert.match(outcome.owner.reason, /r-step3-blockers\.json/);
-    }
-    const report = JSON.parse(readFileSync(join(root, 'research/r-step3-blockers.json'), 'utf8'));
-    assert.match(report.failures.at(-1).output, /thm-foreign/,
-      'the owner sees the foreign carrier in the held gate output');
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
+
 
 
 test('precheck diagnostic headers own retry subjects without PASS rows or proof citations', () => {

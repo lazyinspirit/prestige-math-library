@@ -17,7 +17,7 @@ import { basename, join } from 'node:path';
 
 export const STEP3_STAGES = [
   '3a-prepare', '3a-read', '3a-split', '3a-refute', '3a-collect', '3a-adjudicate',
-  '3a-baseline', '3a-validate', '3a-close',
+  '3a-baseline', '3a-close',
 ] as const;
 
 const sha256 = (data: string | Buffer): string => createHash('sha256').update(data).digest('hex');

@@ -1692,7 +1692,7 @@ for (const stage of stages) {
   // Refresh the one frontier index at mutable joins, not frozen judge/stamp
   // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
   if (['2-scope-review',
-    '3a-adjudicate', '3a-validate', '5.2-impact', '5.6-impact', '5.9-repair'].includes(stage.id)) {
+    '3a-adjudicate', '5.2-impact', '5.6-impact', '5.9-repair'].includes(stage.id)) {
     const previousGates = stage.gates;
     stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
       ['node', 'tools/physics-support/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run,

@@ -80,9 +80,9 @@ test('Step 3 snapshots before closure without cross-batch impact review', async 
   const mod = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id);
   assert.deepEqual(ids.slice(ids.indexOf('3a-adjudicate'), ids.indexOf('4-scope') + 1),
-    ['3a-adjudicate', '3a-baseline', '3a-validate', '3a-close', '4-scope']);
-  const close = mod.stages.find((s: any) => s.id === '3a-validate');
-  assert.ok(close.gates({ run: 'frontier-14', repo: REPO }).every((g: any) =>
-    !/impact-audit|cross-group/.test(g.id)));
+    ['3a-adjudicate', '3a-baseline', '3a-close', '4-scope']);
+  const close = mod.stages.find((s: any) => s.id === '3a-close');
+  assert.equal(close.gates, undefined);
+  assert.ok(close.gatesWaived);
   assert.equal(mod.stages.some((s: any) => /^3b-/.test(s.id) || s.reviewCoverage), false);
 });
