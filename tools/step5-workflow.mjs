@@ -89,11 +89,130 @@ function restoredRenderedLedgerHistory(root, run, certificate, path, expected) {
     'source41 derived ledger history binding changed');
   return true;
 }
+// Worker supporting metadata describes the bytes observed at that handoff,
+// while the owning batch carriers remain writable by later native workers.
+// This run's recovery binds exact historical bytes to unchanged native reports;
+// it supplies no current-source review or gate coverage.
+function supportingMetadataHistory(history,path,expected) {
+  if(!history||history.run!=='frontier-44-special-representation-examples-28-six-step')return null;
+  const {root,run}=history,base=join(root,'research',`${run}-owner-escalation-repairs`,
+    'resume-20261011','step5-evidence-handoff');
+  const marker=join(base,'historical-support-receipt.json');
+  if(!existsSync(marker))return null;
+  const receipt=read(marker),{sha256,...payload}=receipt;
+  requireValue(sha256===digest(payload)&&receipt.version===1&&receipt.run===run
+    &&receipt.policy==='step5-historical-native-metadata-support-v1'
+    &&receipt.owner_identity==='/root'&&receipt.historical_only===true
+    &&Array.isArray(receipt.carriers)&&Array.isArray(receipt.bindings),
+    'invalid historical supporting metadata receipt');
+  const carrier=receipt.carriers.find(row=>resolve(root,row.path)===resolve(root,path)
+    &&row.original_sha256===expected);
+  if(!carrier)return null;
+  requireValue(new RegExp(`^research/${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(carrier.path),
+    'historical support is limited to batch metadata carriers');
+  const archive=resolve(root,carrier.archive);
+  requireValue(archive.startsWith(resolve(base)+'/')&&existsSync(archive)
+    &&digest(readFileSync(archive,'utf8'))===expected,'historical supporting metadata archive changed');
+  for(const binding of receipt.bindings){
+    const bound=resolve(root,binding.path);
+    requireValue(bound.startsWith(resolve(root,'research')+'/')&&existsSync(bound)
+      &&digest(readFileSync(bound,'utf8'))===binding.sha256,
+      `historical metadata native binding changed: ${binding.path}`);
+  }
+  const origin=read(resolve(root,carrier.origin_report)),originPack=read(resolve(root,carrier.origin_pack));
+  const originDispatch=read(resolve(root,carrier.origin_dispatch));
+  requireValue(origin.run===run&&origin.phase===carrier.origin_phase&&origin.round===1
+    &&String(origin.unit)===carrier.origin_unit&&origin.input_sha256===digest(originPack)
+    &&originPack.run===run&&originPack.phase===origin.phase&&originPack.round===1
+    &&origin.supporting_evidence?.[carrier.path]===expected
+    &&originDispatch.ok===true&&originDispatch.run===run
+    &&originDispatch.label===workerLabel(origin.phase,1,origin.unit)
+    &&originDispatch.role===(origin.phase==='initial'?'alpha-adjudicate':'alpha-repair')
+    &&[carrier.origin_report,carrier.origin_pack,carrier.origin_dispatch].every(path=>
+      receipt.bindings.some(binding=>binding.path===path)),
+    'historical supporting metadata does not bind its native origin');
+  if(carrier.origin_phase==='initial'){
+    const collected=join(workflowDir(root,run),'initial-1-collected.json');
+    requireValue(receipt.bindings.some(binding=>resolve(root,binding.path)===collected)
+      &&read(collected).evidence?.[carrier.path]===expected,
+      'historical initial metadata is not bound by the original collection');
+  }
+  requireValue(Array.isArray(receipt.repairs)&&receipt.repairs.length>0,'missing native metadata repair history');
+  const repairSubjects=new Set();
+  for(const repair of receipt.repairs){
+    const report=read(resolve(root,repair.report)),pack=read(resolve(root,repair.pack));
+    const dispatch=read(resolve(root,repair.dispatch));
+    requireValue([repair.report,repair.pack,repair.dispatch].every(path=>receipt.bindings.some(binding=>binding.path===path))
+      &&report.run===run&&report.phase==='impact-initial'&&report.round===1
+      &&report.input_sha256===digest(pack)&&pack.run===run&&pack.phase===report.phase&&pack.round===1
+      &&pack.assignments?.[report.unit]&&dispatch.ok===true&&dispatch.run===run
+      &&dispatch.role==='alpha-repair'&&dispatch.label===workerLabel(report.phase,1,report.unit)
+      &&dispatch.model===MODELS.sol61.id&&dispatch.provider_effort==='high',
+      'historical metadata repair lacks its genuine native completion');
+    for(const review of report.reviews??[])if(pack.assignments[report.unit].includes(review.id))repairSubjects.add(review.id);
+  }
+  const endpoint=resolve(root,carrier.successor_archive);
+  requireValue(endpoint.startsWith(resolve(base)+'/')&&existsSync(endpoint)
+    &&digest(readFileSync(endpoint,'utf8'))===carrier.successor_sha256,
+    'historical metadata successor archive changed');
+  const before=read(archive),after=read(endpoint),deltas=[];
+  const same=(left,right)=>JSON.stringify(left)===JSON.stringify(right);
+  if(carrier.path.endsWith('.pages.json')){
+    requireValue(Array.isArray(before)&&Array.isArray(after)&&before.length===after.length,
+      'historical manifest page inventory changed');
+    for(let index=0;index<before.length;index++){
+      const prior=before[index],next=after[index],{items:oldItems,...oldPage}=prior,{items:newItems,...newPage}=next;
+      requireValue(same(oldPage,newPage)&&Array.isArray(oldItems)&&Array.isArray(newItems)
+        &&oldItems.length===newItems.length,'historical manifest page identity changed');
+      for(let row=0;row<oldItems.length;row++){
+        const old=oldItems[row],now=newItems[row];
+        requireValue(old.id===now.id,'historical manifest item inventory changed');
+        for(const field of new Set([...Object.keys(old),...Object.keys(now)]))if(!same(old[field],now[field])){
+          requireValue(repairSubjects.has(old.id)&&['deps','statement','strategy'].includes(field),
+            `unbound historical manifest delta: ${old.id}/${field}`);deltas.push({id:old.id,field});
+        }
+      }
+    }
+  }else{
+    const {contracts:oldContracts,...oldEnvelope}=before,{contracts:newContracts,...newEnvelope}=after;
+    requireValue(same(oldEnvelope,newEnvelope)&&same(Object.keys(oldContracts),Object.keys(newContracts)),
+      'historical contract inventory or envelope changed');
+    for(const [id,old]of Object.entries(oldContracts))for(const field of new Set([...Object.keys(old),...Object.keys(newContracts[id])]))
+      if(!same(old[field],newContracts[id][field])){
+        requireValue(repairSubjects.has(id)&&['citations','derivations'].includes(field),
+          `unbound historical contract delta: ${id}/${field}`);deltas.push({id,field});
+      }
+  }
+  requireValue(same(deltas,carrier.metadata_deltas),'historical metadata delta inventory changed');
+  return {archive,marker};
+}
 const verifyEvidence=(evidence,history=null)=>{for(const [p,hash]of Object.entries(evidence??{}))requireValue(
   existsSync(p)&&(digest(readFileSync(p,'utf8'))===hash
-    ||history&&(restoredLedgerHistory(history.root,history.run,history.certificate,p,hash)
-      ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate,p,hash))),
+    ||history&&(supportingMetadataHistory(history,p,hash)
+      ||restoredLedgerHistory(history.root,history.run,history.certificate??{},p,hash)
+      ||restoredRenderedLedgerHistory(history.root,history.run,history.certificate??{},p,hash))),
   `Step 5 evidence changed: ${p}`);};
+function frozenSupportingEvidence(root,run,supporting) {
+  verifyEvidence(supporting,{root,run});
+  const evidence={};
+  for(const [path,hash]of Object.entries(supporting)){
+    // Keep ordinary immutable evidence at its original path. Only batch
+    // metadata needs a separate durable historical carrier.
+    if(!new RegExp(`^${run}-batch-\\d+\\.(?:pages|proof-contracts)\\.json$`).test(basename(path))){
+      evidence[path]=hash;continue;
+    }
+    const history=digest(readFileSync(path,'utf8'))===hash?null:supportingMetadataHistory({root,run},path,hash);
+    const bytes=readFileSync(history?.archive??path,'utf8');
+    requireValue(digest(bytes)===hash,`supporting metadata preimage unavailable: ${path}`);
+    const archive=join(workflowDir(root,run),'supporting-metadata',`${hash}.json`);
+    mkdirSync(resolve(archive,'..'),{recursive:true});
+    if(existsSync(archive))requireValue(readFileSync(archive,'utf8')===bytes,'immutable supporting metadata conflict');
+    else writeFileSync(archive,bytes,{flag:'wx'});
+    evidence[archive]=hash;
+    if(history)evidence[history.marker]=digest(readFileSync(history.marker,'utf8'));
+  }
+  return evidence;
+}
 const rawHashes=root=>Object.fromEntries(readLibraryItems(root).map(row=>[row.id,row.sha256]));
 const creationId=/^(?:alg|def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 function subjectScope(pack,created=[]) {
@@ -594,7 +713,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     return verifyCompletedImpact(root,run,phase,round);
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
   if(existsSync(collectedPath)){
-    const prior=read(collectedPath);verifyEvidence(prior.evidence);
+    const prior=read(collectedPath);verifyEvidence(prior.evidence,{root,run});
     if(!deferImpactClosure){
       const scoped=prerequisiteScope(readLibraryItems(root),[...gateFrontier(root,run),...(prior.created_items??[]).map(row=>row.id)]);
       for(const id of diff(prior.post,hashes(root)).filter(id=>scoped.has(id)))throw Error(`writer changed relevant content after collection: ${id}`);
@@ -632,7 +751,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const [path,hash] of Object.entries(supporting)){
       requireValue(resolve(path).startsWith(resolve(root,'research')+'/')&&/^[a-f0-9]{64}$/.test(hash),`invalid supporting evidence path or hash: ${path}`);
     }
-    verifyEvidence(supporting);Object.assign(evidence,supporting);
+    Object.assign(evidence,frozenSupportingEvidence(root,run,supporting));
     const report=reports.find(value=>String(value.unit)===unit);
     if(report.completion==='mechanical-zero-work'){
       assertEmptyAdjudicationInput(root,run,phase,round,unit,report.input_sha256);
@@ -750,8 +869,8 @@ export function advanceImpact(root,run,phase,round) {
   const path=impactProgressPath(root,run,phase,round);
   const progress=existsSync(path)?read(path):{version:2,run,phase,round,passes:[phase],activePhase:phase,complete:false};
   progress.work_order??=progress.passes.map(pass=>({kind:'frontier',phase:pass}));
-  for(const row of progress.superseded??[])verifyEvidence(row.evidence);
-  verifyEvidence(progress.maintenance_evidence);
+  for(const row of progress.superseded??[])verifyEvidence(row.evidence,{root,run});
+  verifyEvidence(progress.maintenance_evidence,{root,run});
   if(progress.complete)return {complete:true,phase,round,passes:progress.passes};
   if(progress.activeMaintenance){
     const pack=maintenancePack(root,run,progress.activeMaintenance);
@@ -775,7 +894,7 @@ export function advanceImpact(root,run,phase,round) {
   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
   collect(root,run,active.phase,round,{deferImpactClosure:true});
   const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
-  for(const receipt of completed)verifyEvidence(receipt.evidence);
+  for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
@@ -839,12 +958,12 @@ export function verifyCompletedImpact(root,run,phase,round) {
   const dir=workflowDir(root,run),result=read(join(dir,`${phase}-${round}-closed.json`));
   requireValue(result.run===run&&result.phase===phase&&result.round===round
     &&Array.isArray(result.errors)&&result.errors.length===0,'invalid completed owner collection');
-  verifyEvidence(result.evidence);
+  verifyEvidence(result.evidence,{root,run});
   const passes=progress.passes.map(pass=>{
     const path=join(dir,`${pass}-${round}-collected.json`);
     requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
       `completed owner collection does not bind pass: ${pass}`);
-    const receipt=read(path);verifyEvidence(receipt.evidence);return receipt;
+    const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
   });
   const items=readLibraryItems(root),frontier=gateFrontier(root,run),current=hashes(root);
   const stable=prerequisiteScope(items,[...frontier,...(result.created_items??[]).map(row=>row.id)]);
@@ -852,7 +971,7 @@ export function verifyCompletedImpact(root,run,phase,round) {
     throw Error(`writer changed relevant content after completed owner collection: ${id}`);
   const source=phase==='impact-initial'?'initial':phase==='impact-repeat'?'repeat':null;
   const sourceReceipt=source?read(join(dir,`${source}-${round}-collected.json`)):null;
-  if(sourceReceipt)verifyEvidence(sourceReceipt.evidence);
+  if(sourceReceipt)verifyEvidence(sourceReceipt.evidence,{root,run});
   const reviews=new Map([...(sourceReceipt?.reviews??[]),...result.reviews].map(row=>[row.id,row]));
   const snapshots=new Map([sourceReceipt,...passes].filter(Boolean)
     .flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
@@ -952,7 +1071,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
 export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={}) {
   const savedPath=join(workflowDir(root,run),`certification-${phase}-${round}.json`);
   if(existsSync(savedPath)) {
-    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence);
+    const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
     const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
     const current=hashes(root);for(const row of scoped)requireValue(row.guard_sha256===current[row.id],`stale completed certification ${row.id}`);
     const contexts=contextHasher(root,scoped.map(row=>row.id));
@@ -962,7 +1081,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const advanced=advanceImpact(root,run,phase,round);
   requireValue(advanced.complete,'owner impact repair continuation must finish before certification');
   const dir=workflowDir(root,run), result=read(join(dir,`${phase}-${round}-closed.json`));
-  verifyEvidence(result.evidence);
+  verifyEvidence(result.evidence,{root,run});
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=verifyCertification(root,run);
   const sourceResult=phase==='gate'?null:read(join(dir,`${source}-${round}-collected.json`));

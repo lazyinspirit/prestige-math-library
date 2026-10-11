@@ -192,6 +192,15 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Worker supporting evidence for mutable batch manifests and proof contracts is
+archived as exact content-addressed bytes at collection. The original worker
+report remains unchanged; later native repairs may update the live batch carrier.
+The frontier-44 six-step historical handoff additionally requires exact archived
+preimages, unchanged native origin reports, packs and successful dispatches, and
+archived successor deltas within completed native repair assignments. This
+preserves historical evidence only; current review contexts and every gate still
+apply to the actual current carriers.
+
 ## Run controls and cutover
 
 Use `node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts` with the ordinary
