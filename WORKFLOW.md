@@ -121,6 +121,15 @@ snapshot and exact remaining findings/carriers. Both touched and reader
 obligations remain; normal independent adjudication, ledger closure and all
 gates are still required. Missing or changed authority fails closed.
 
+A definition may acquire its first real proof contract after its frozen
+pre-reader snapshot; routing preserves the original null contract hash and
+requires the current contract. A reader's intermediate supplier observation
+whose source bytes were not retained may be registered in
+`RUN-step3-owner-unbound-reader-observations.json`, bound to the exact successful
+reader receipt and unchanged finding/report. The original reported digest stays
+visible, but the observation is explicitly unbound: historical uncertainty,
+independent current-source review, ledger closure and all gates remain required.
+
 Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.

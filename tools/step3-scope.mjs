@@ -27,6 +27,7 @@ import { loadOwnerHistoricalRoutes } from './step3-owner-historical-routes.mjs';
 import { isCertifiedOwnerContextAddition } from './step3-owner-context-addition.mjs';
 import { draftOwnerMatcher } from './run-draft-ownership.mjs';
 import { partialReaderFindings } from './step3-owner-partial-reader-repairs.mjs';
+import { unboundReaderObservations } from './step3-owner-unbound-reader-observations.mjs';
 import { loadOwnerPageRepairs, ownerPageFindingRepair } from './step3-owner-post-reader-page-repairs.mjs';
 
 const argv = process.argv.slice(2);
@@ -511,6 +512,16 @@ function definitionWithoutProofContract(id) {
   } catch { return false; }
 }
 
+// The frozen baseline can honestly precede a definition's first proof
+// contract. Require a real current contract rather than rewriting history.
+function definitionWithCurrentContract(id, current) {
+  if (!current || current.contract_sha256 === hashValue(null)) return false;
+  try {
+    const item = yaml().parse(split(readFileSync(R('items', `${id}.md`), 'utf8')).fm);
+    return item?.kind === 'definition';
+  } catch { return false; }
+}
+
 function producerCarrier(id, producer) {
   const owners = Object.entries(manifestItems()).filter(([, ids]) => ids.includes(id)).map(([batch]) => batch);
   if (owners.length !== 1 || owners[0] !== String(producer)) return undefined;
@@ -532,7 +543,8 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
   const pre = readJson(prePath, `producer ${route.producer_batch} pre-reader snapshot`);
   for (const message of hashSnapshotErrors(pre, route.producer_batch, 'pre')) reportError(`${finding.obligation} producer baseline: ${message}`);
   const historical = pre.hashes?.[finding.id];
-  if (!current || !historical || (historical.contract_sha256 === hashValue(null) && !definitionWithoutProofContract(finding.id)) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+  if (!current || !historical || (historical.contract_sha256 === hashValue(null)
+    && !definitionWithoutProofContract(finding.id) && !definitionWithCurrentContract(finding.id, current)) || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(historical[key] ?? ''))) {
     reportError(`${finding.obligation} lacks exact current/pre-reader producer fingerprints`); return;
   }
@@ -551,9 +563,11 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
     reportError(`${finding.obligation} has malformed observed_source`); return;
   }
   const carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
-  if (observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
-  finding.observation_basis = observed?.snapshot ?? 'unbound';
-  finding.observed_sha256 = observed ? hashValue(carrier) : null;
+  const unbound = unboundReaderObservations(ROOT, run, batch).get(finding.obligation);
+  if (unbound) finding.owner_unbound_reader_observation = unbound;
+  if (!unbound && observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
+  finding.observation_basis = unbound ? 'unbound' : observed?.snapshot ?? 'unbound';
+  finding.observed_sha256 = observed && !unbound ? hashValue(carrier) : null;
 }
 
 function validateInRunFinding(finding, batch, dependencies, reportError) {
@@ -581,7 +595,9 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
   if (carrier?.producer_batch !== finding.producer_batch || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(carrier?.[key] ?? ''))) reportError(`${finding.obligation} has invalid split producer carrier`);
   const observedCarrier = finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier : carrier;
-  if (finding.observation_basis !== (finding.observed_source?.snapshot ?? 'unbound')
+  const unbound = unboundReaderObservations(ROOT, run, batch).get(finding.obligation);
+  if (hashValue(finding.owner_unbound_reader_observation) !== hashValue(unbound)) reportError(`${finding.obligation} lost its exact unbound observation authority`);
+  if (finding.observation_basis !== (unbound ? 'unbound' : finding.observed_source?.snapshot ?? 'unbound')
     || (finding.observation_basis === 'unbound' ? finding.observed_sha256 !== null
       : finding.observed_source?.item_sha256 !== observedCarrier?.item_sha256 || finding.observed_sha256 !== hashValue(observedCarrier))) {
     reportError(`${finding.obligation} conflates original observation and current producer`);
@@ -593,7 +609,8 @@ function reportOnlyFinding(finding, refuter = false) {
     producer_batch: _producer, dependency_path: _path,
     producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
     observation_basis: _basis, owner_page_repair: _ownerPageRepair,
-    owner_partial_reader_repair: _ownerPartialReaderRepair, ...row } = finding;
+    owner_partial_reader_repair: _ownerPartialReaderRepair,
+    owner_unbound_reader_observation: _ownerUnboundReaderObservation, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;
   }

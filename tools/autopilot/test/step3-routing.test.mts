@@ -1077,6 +1077,56 @@ for (const variant of ['other-run', 'ambiguous']) test(`producer and transitive 
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
+test('an owner-bound intermediate observation stays unbound without changing its reader report', () => {
+  const fx = producerRoutingFixture();
+  try {
+    const producerPath = join(fx.root, 'items', `${fx.producer}.md`);
+    const oldBytes = readFileSync(producerPath);
+    const digest = (bytes: any) => createHash('sha256').update(bytes).digest('hex');
+    writeFileSync(producerPath, oldBytes.toString() + '\nCorrected current source.\n');
+    const finding = { id: fx.producer, subject_type: 'in-run-dependency', consumer_id: 'lem-ordinary-item',
+      observed_source: { snapshot: 'current', item_sha256: digest(oldBytes) },
+      location: 'Proof', defect: 'false-claim', evidence: 'Observed intermediate source; current supplier corrected separately.', severity: 'fatal' };
+    const reportPath = join(fx.root, 'research/r-reader-findings-1.json');
+    writeFileSync(reportPath, JSON.stringify({ batch: '1', coverage_note: 'Genuine completed reader.', findings: [finding] }));
+    assert.match(fx.attempt('split', '--run', 'r', '--batch', '1').stderr, /does not match its declared producer snapshot/);
+    mkdirSync(join(fx.root, 'research/r-dispatch'));
+    const resultPath = join(fx.root, 'research/r-dispatch/reader-reader-1.result.json');
+    writeFileSync(resultPath, JSON.stringify({ run: 'r', role: 'reader', covers: ['1'], ok: true }));
+    const entry = { batch: '1', index: 1, id: fx.producer, original_source_unavailable: true,
+      reason: 'Original reader source bytes were not retained. Preserve the original claim and uncertainty; independent current-source adjudication and historical disposition remain required.',
+      report_sha256: digest(readFileSync(reportPath)), result_sha256: digest(readFileSync(resultPath)),
+      finding_sha256: partialReaderHash(finding), producer_sha256_at_registration: digest(readFileSync(producerPath)) };
+    const authorityPath = join(fx.root, 'research/r-step3-owner-unbound-reader-observations.json');
+    writeFileSync(authorityPath, JSON.stringify({ version: 1, run: 'r', registered_by: 'root', mathematical_acceptance: false, observations: [entry] }));
+    const result = fx.attempt('split', '--run', 'r', '--batch', '1');
+    assert.equal(result.status, 0, result.stderr);
+    const scope = JSON.parse(readFileSync(join(fx.root, 'research/r-step3-scope-1.json'), 'utf8'));
+    assert.equal(scope.reader_findings[0].observation_basis, 'unbound');
+    assert.equal(scope.reader_findings[0].observed_sha256, null);
+    assert.deepEqual(scope.reader_findings[0].observed_source, finding.observed_source);
+    assert.equal(digest(readFileSync(reportPath)), entry.report_sha256);
+    entry.finding_sha256 = '0'.repeat(64);
+    writeFileSync(authorityPath, JSON.stringify({ version: 1, run: 'r', registered_by: 'root', mathematical_acceptance: false, observations: [entry] }));
+    assert.notEqual(fx.attempt('split', '--run', 'r', '--batch', '1').status, 0);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('a definition may gain its first proof contract after the frozen baseline', () => {
+  const fx = producerRoutingFixture(undefined, false, 'definition', 'ai-altered');
+  try {
+    writeFileSync(join(fx.root, 'research/r-batch-2.proof-contracts.json'),
+      JSON.stringify({ contracts: { [fx.producer]: { substantive: true } } }));
+    const result = fx.report(fx.producer, 'in-run-dependency');
+    assert.equal(result.status, 0, result.stderr);
+    const finding = JSON.parse(readFileSync(join(fx.root, 'research/r-step3-scope-1.json'), 'utf8')).reader_findings[0];
+    assert.notEqual(finding.producer_pre_snapshot.carrier.contract_sha256,
+      finding.producer_carrier_at_split.contract_sha256);
+    assert.equal(finding.observation_basis, 'unbound');
+    assert.equal(finding.observed_sha256, null);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
 for (const [kind, proof, accepted] of [
   ['definition', 'not-applicable', true],
   ['definition', 'ai-altered', false],
