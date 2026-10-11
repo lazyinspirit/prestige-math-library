@@ -202,6 +202,16 @@ repair, audit, acceptance or initial publication. A changed canonical hash still
 requires the ordinary recorded published repair; neither claim nor native evidence
 is rewritten. The no-op receipt itself belongs to the sealed closeout scope.
 
+Owner-authorized `RUN-closeout-operational-contexts.json` may omit exact temporary
+`overlay`/`shadow` resolver directories beneath the run's owner repair evidence
+from the scoped Git commit. Each directory binds its physical tree (file bytes,
+entry modes and symlink target bytes without dereferencing), reason and external
+hash-bound proposal evidence. Required content/receipts, actual published-repair
+inputs, frozen Step-3 artifacts, additional owned paths and prior committed
+closeout paths cannot be excluded. These contexts remain on disk, retain full
+report protection, and become outside-preservation subjects; the ordinary
+canonical-path symlink refusal remains unchanged.
+
 The mathematics Step-6 report-integrity snapshot excludes the root-relative
 `physics/` namespace owned by the independent physics workflow. Mathematics
 sources, shared tools and run evidence retain their existing protection; the

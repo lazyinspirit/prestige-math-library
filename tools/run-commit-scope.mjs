@@ -293,6 +293,71 @@ function readScopePolicy(root, run) {
   return { policyPath, policyText, policy, reviewedHook };
 }
 
+// Hash operational resolver trees without dereferencing their links. They stay
+// report-protected and outside-preserved even when omitted from the Git commit.
+export function operationalContextState(root, path) {
+  safePath(path);
+  let cursor = root;
+  for (const part of path.split('/')) {
+    cursor = join(cursor, part);
+    if (!lstatSync(cursor).isDirectory() || lstatSync(cursor).isSymbolicLink())
+      throw Error('closeout: operational context root is not a physical directory: ' + path);
+  }
+  const rows = [];
+  const walk = dir => {
+    const state = lstatSync(join(root, dir));
+    rows.push({ path: dir, kind: 'directory', mode: state.mode & 0o777 });
+    for (const name of readdirSync(join(root, dir)).sort()) {
+      const child = dir + '/' + name;
+      safePath(child);
+      if (lstatSync(join(root, child)).isDirectory()) walk(child);
+      else rows.push(fileState(root, child));
+    }
+  };
+  walk(path);
+  return digest(rows);
+}
+
+function operationalContextExclusions(root, run, protectedPaths) {
+  const path = 'research/' + run + '-closeout-operational-contexts.json';
+  if (!existsSync(join(root, path))) return { path: null, sha256: null, excludes: () => false };
+  regularPath(root, path);
+  const text = readFileSync(join(root, path), 'utf8'), evidence = JSON.parse(text);
+  if (evidence.version !== 1 || evidence.run !== run || evidence.authorized_by !== 'owner'
+    || evidence.kind !== 'closeout-operational-context-exclusions'
+    || typeof evidence.authorization !== 'string' || evidence.authorization.trim().length < 20
+    || !Array.isArray(evidence.directories) || !evidence.directories.length)
+    throw Error('closeout: invalid operational context exclusion authority');
+  const seen = new Set();
+  for (const row of evidence.directories) {
+    safePath(row.path);
+    if (!row.path.startsWith('research/' + run + '-owner-escalation-repairs/')
+      || !/\/(?:overlay|shadow)$/.test(row.path) || seen.has(row.path)
+      || typeof row.reason !== 'string' || row.reason.trim().length < 20
+      || !Number.isSafeInteger(row.entries) || !/^[a-f0-9]{64}$/.test(row.sha256 ?? '')
+      || !Array.isArray(row.evidence) || !row.evidence.length)
+      throw Error('closeout: invalid exact operational context directory');
+    seen.add(row.path);
+    for (const supporting of row.evidence) {
+      if (!runResearch(run, supporting.path) || supporting.path.startsWith(row.path + '/'))
+        throw Error('closeout: operational context evidence is not external run evidence');
+      regularPath(root, supporting.path);
+      if (sha256(readFileSync(join(root, supporting.path))) !== supporting.sha256)
+        throw Error('closeout: operational context evidence changed: ' + supporting.path);
+    }
+    for (const protectedPath of protectedPaths) {
+      if (protectedPath === row.path || protectedPath.startsWith(row.path + '/'))
+        throw Error('closeout: operational context contains authoritative input: ' + protectedPath);
+    }
+    if (JSON.stringify(operationalContextState(root, row.path))
+      !== JSON.stringify({ entries: row.entries, sha256: row.sha256 }))
+      throw Error('closeout: operational context directory changed: ' + row.path);
+  }
+  const directories = [...seen];
+  return { path, sha256: sha256(text), excludes: candidate => directories.some(dir =>
+    candidate === dir || candidate.startsWith(dir + '/')) };
+}
+
 function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingReceipt = false) {
   const { policyPath, policyText, policy, reviewedHook } = readScopePolicy(root, run);
   const selected = runScope(run, root);
@@ -312,7 +377,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const claimsPath = 'research/' + run + '-step3-published-claims.jsonl';
   const claimsText = existsSync(join(root, claimsPath)) ? readFileSync(join(root, claimsPath), 'utf8') : '';
   const claims = claimsText.split('\n').filter(line => line.trim()).map(line => JSON.parse(line));
-  const seenClaims = new Set(), noopClosures = [];
+  const seenClaims = new Set(), noopClosures = [], publishedInputs = new Set();
   for (const claim of claims) {
     if (claim.version !== 1 || claim.run !== run || !/^[a-z][a-z0-9-]*$/.test(claim.id ?? '')
       || seenClaims.has(claim.id)) throw Error('closeout: invalid or duplicate published ownership claim');
@@ -322,6 +387,13 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
     const current = readFileSync(join(root, path), 'utf8'), fm = splitFrontmatter(current).frontmatter;
     const receipt = /^ {2}repair:\s*(?:"([^"\n]+)"|'([^'\n]+)'|([^\s'"]+))\s*$/m.exec(fm)?.slice(1).find(Boolean);
     const recorded = recordedPublishedRepair(root, claim.id, current, receipt);
+    if (recorded.ok) {
+      // Actual repair receipts and their archived preimages are authoritative,
+      // even if somebody mislabels their directory as a resolver context.
+      publishedInputs.add(recorded.receipt);
+      const repair = JSON.parse(readFileSync(join(root, recorded.receipt), 'utf8'));
+      publishedInputs.add(repair.before_file);
+    }
     if (!recorded.ok) {
       const unchanged = unchangedPublishedClaim(root, run, claim, current);
       if (!unchanged.ok) throw Error('closeout: unclosed published ownership ' + claim.id
@@ -359,7 +431,13 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   const index = indexEntries(root), tree = treeEntries(root);
   const others = nul(git(root, ['ls-files', '--others', '--exclude-standard', '-z']));
   const inventory = [...new Set([...index.map(row => row.path), ...tree.map(row => row.path), ...others])].sort();
-  const automatic = new Set(inventory.filter(path => runResearch(run, path)));
+  const closurePath = 'research/' + run + '-step3-closure.json';
+  const frozen = existsSync(join(root, closurePath))
+    ? Object.keys(JSON.parse(readFileSync(join(root, closurePath), 'utf8')).artifacts ?? {}) : [];
+  const exclusions = operationalContextExclusions(root, run,
+    new Set([...required, ...additional, ...historyPaths, ...publishedInputs, ...frozen]));
+  if (exclusions.path) required.add(exclusions.path);
+  const automatic = new Set(inventory.filter(path => runResearch(run, path) && !exclusions.excludes(path)));
   for (const row of policy.additional_paths) {
     if (row.sha256 === null && !inventory.includes(row.path) && !historyPaths.includes(row.path)) {
       throw Error('closeout: deleted supporting path has no Git preimage: ' + row.path);
@@ -384,7 +462,7 @@ function loadScope(root, run, finalReceipt, historyPaths = [], allowMissingRecei
   if (ignored.length) throw Error('closeout: required/authorized artifact is ignored by Git: ' + ignored[0]);
   return { policyPath, policySha256: sha256(policyText), paths, owns, inventory, reviewedHook,
     contextSha256: sha256(JSON.stringify({ selected, required: [...required].sort(),
-      claims: sha256(claimsText), noopClosures, additional: policy.additional_paths })) };
+      claims: sha256(claimsText), noopClosures, operationalContexts: exclusions.sha256, additional: policy.additional_paths })) };
 }
 
 function refuseCrossScopeRenames(root, scope) {
