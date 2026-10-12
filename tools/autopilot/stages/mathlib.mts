@@ -1092,7 +1092,7 @@ export const stages = [
     id: '1-scaffold',
     label: 'Beta scaffolding and complete initial authoring',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
-      ? DEEPSEEK_FLASH_MAX
+      ? MODEL_PROFILE_NAMES.lunaMax
       : undefined,
     units: (ctx: any) => batches(ctx),
     unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit),

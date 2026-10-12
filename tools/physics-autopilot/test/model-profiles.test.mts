@@ -109,10 +109,10 @@ test('Step 3a readers and refuters run Sol 6.1 high, and the tool lanes stay mod
   }
 });
 
-test('Step 1 scaffolders use DeepSeek Flash max', () => {
+test('Step 1 scaffolders use GPT-6 Luna max', () => {
   const scaffoldStage = stage('1-scaffold');
   const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.lunaMax);
   assert.equal(selected(scaffoldStage, {
     role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
   }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');

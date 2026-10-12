@@ -9,7 +9,7 @@ worker prompts, supporting tools, content and run state.
 
 | Step | Work | Agents and handoff |
 |---|---|---|
-| 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
+| 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift agents and GPT-6 Luna/max authors; authored items, A/B pages, contracts, source evidence and manifests |
 | 2 | Review, one local repair and owner escalation | Luna-max reviewers/local repairers; at most two reviews and one repair; owner/orchestrator resolves escalations and runs gates |
 | 3 | Independent review | GPT-6 Luna/max readers and refuters; GPT-6.1 Sol/medium batch adjudicators; final validation and mechanical closure |
 | 4 | Batch review and judging | GPT-6.1 Sol/medium read-only batch readers plus GPT-6 Luna/max judges |
@@ -27,7 +27,8 @@ later stages retain their substantive review, repair and finalization duties.
 ## Construction and escalation
 
 Step 1 keeps existing drift/source recovery, readiness, scope, page-capacity and
-owner-hold mechanisms and model assignments. Both drift reviewers and authors
+owner-hold mechanisms. Initial authors use `gpt-6-luna-max`; drift/source recovery
+retains its existing model assignments. Both drift reviewers and authors
 must escalate significant unmet prerequisites directly to the owner, giving the
 smallest missing supplier, consuming claims/steps and affected consumers.
 Scaffolding agents fully author all assigned items, pages and proof contracts;
