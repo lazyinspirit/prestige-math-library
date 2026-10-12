@@ -610,10 +610,27 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
   // bytes. Never rebind a historical counterexample to corrected live bytes.
   const observed = finding.observed_source;
   if (observed !== undefined && (!observed || Object.keys(observed).some(key => !['snapshot', 'item_sha256'].includes(key))
-    || !['pre', 'current'].includes(observed.snapshot) || !/^[a-f0-9]{64}$/.test(observed.item_sha256 ?? ''))) {
+    || !['pre', 'post', 'current'].includes(observed.snapshot) || !/^[a-f0-9]{64}$/.test(observed.item_sha256 ?? ''))) {
     reportError(`${finding.obligation} has malformed observed_source`); return;
   }
-  const carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
+  let carrier = observed?.snapshot === 'pre' ? finding.producer_pre_snapshot.carrier : current;
+  if (observed?.snapshot === 'post') {
+    const postPath = hashPath(route.producer_batch, 'post');
+    const post = readJson(postPath, `producer ${route.producer_batch} post-reader snapshot`);
+    const errors = hashSnapshotErrors(post, route.producer_batch, 'post');
+    for (const message of errors) reportError(`${finding.obligation} producer observed post: ${message}`);
+    const postCarrier = post.hashes?.[finding.id];
+    if (errors.length || !postCarrier || !['item_sha256', 'contract_sha256', 'manifest_sha256']
+      .every(key => /^[a-f0-9]{64}$/.test(postCarrier[key] ?? ''))
+      || (postCarrier.contract_sha256 === hashValue(null) && !definitionWithoutProofContract(finding.id))) {
+      reportError(`${finding.obligation} lacks exact observed post-reader producer fingerprints`); return;
+    }
+    finding.producer_post_snapshot = {
+      path: `research/${run}-step3-hash-${route.producer_batch}-post.json`,
+      sha256: sha256(readFileSync(postPath)), carrier: { producer_batch: route.producer_batch, ...postCarrier },
+    };
+    carrier = finding.producer_post_snapshot.carrier;
+  }
   if (observed && observed.item_sha256 !== carrier.item_sha256) reportError(`${finding.obligation} observed_source does not match its declared producer snapshot`);
   finding.observation_basis = observed?.snapshot ?? 'unbound';
   finding.observed_sha256 = observed ? hashValue(carrier) : null;
@@ -622,15 +639,24 @@ function bindInRunFinding(finding, batch, dependencies, reportError) {
 function validateInRunFinding(finding, batch, dependencies, reportError) {
   if (finding.observed_source !== undefined && (!finding.observed_source
     || Object.keys(finding.observed_source).some(key => !['snapshot', 'item_sha256'].includes(key))
-    || !['pre', 'current'].includes(finding.observed_source.snapshot)
+    || !['pre', 'post', 'current'].includes(finding.observed_source.snapshot)
     || !/^[a-f0-9]{64}$/.test(finding.observed_source.item_sha256 ?? ''))) {
     reportError(`${finding.obligation} has malformed observed_source`);
   }
-  const expected = { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id };
+  const expected = { obligation: finding.obligation, id: finding.id, consumer_id: finding.consumer_id,
+    ...(finding.observed_source?.snapshot === 'post' ? { observed_source: finding.observed_source } : {}) };
   bindInRunFinding(expected, batch, dependencies, reportError);
   if (finding.producer_batch !== expected.producer_batch
     || hashValue(finding.producer_pre_snapshot) !== hashValue(expected.producer_pre_snapshot)) {
     reportError(`${finding.obligation} producer identity/immutable pre-reader snapshot changed`);
+  }
+  if (finding.observed_source?.snapshot === 'post') {
+    if (!finding.producer_post_snapshot
+      || hashValue(finding.producer_post_snapshot) !== hashValue(expected.producer_post_snapshot)) {
+      reportError(`${finding.obligation} immutable observed post-reader snapshot changed`);
+    }
+  } else if (finding.producer_post_snapshot !== undefined) {
+    reportError(`${finding.obligation} has post-reader snapshot metadata without a post observation`);
   }
   // Path bytes at split remain historical evidence; require its exact IDs and
   // valid hashes, while independently rechecking current reachability.
@@ -643,7 +669,8 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
   const carrier = finding.producer_carrier_at_split;
   if (carrier?.producer_batch !== finding.producer_batch || !['item_sha256', 'contract_sha256', 'manifest_sha256']
     .every(key => /^[a-f0-9]{64}$/.test(carrier?.[key] ?? ''))) reportError(`${finding.obligation} has invalid split producer carrier`);
-  const observedCarrier = finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier : carrier;
+  const observedCarrier = finding.observation_basis === 'pre' ? finding.producer_pre_snapshot?.carrier
+    : finding.observation_basis === 'post' ? finding.producer_post_snapshot?.carrier : carrier;
   if (finding.observation_basis !== (finding.observed_source?.snapshot ?? 'unbound')
     || (finding.observation_basis === 'unbound' ? finding.observed_sha256 !== null
       : finding.observed_source?.item_sha256 !== observedCarrier?.item_sha256 || finding.observed_sha256 !== hashValue(observedCarrier))) {
@@ -654,7 +681,7 @@ function validateInRunFinding(finding, batch, dependencies, reportError) {
 function reportOnlyFinding(finding, refuter = false) {
   const { observed_sha256: _observed, pre_sha256: _pre,
     producer_batch: _producer, dependency_path: _path,
-    producer_carrier_at_split: _current, producer_pre_snapshot: _historical,
+    producer_carrier_at_split: _current, producer_pre_snapshot: _historical, producer_post_snapshot: _observedPost,
     observation_basis: _basis, owner_page_repair: _ownerPageRepair, ...row } = finding;
   if (refuter && finding.subject_type === 'in-run-dependency') {
     delete row.subject_type; delete row.consumer_id; delete row.observed_source;

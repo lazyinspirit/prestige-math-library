@@ -339,3 +339,24 @@ not widen split or collect, alter the current dependency graph, close an open
 finding, or authorize a gate. Rebind current hashes only after actual owner
 review when either reviewed carrier changes; native gate requests must include
 this receipt among their inputs.
+
+### An observation of a producer's post-reader carrier
+
+`observed_source` may explicitly name `snapshot: pre`, `post`, or `current`
+with the raw `item_sha256` actually observed. A `post` observation uses the
+immutable `research/RUN-step3-hash-PRODUCER-post.json` snapshot. Native binding
+adds `producer_post_snapshot: {path, sha256, carrier}`, where `sha256` binds
+that snapshot file and `carrier` contains its exact producer identity and
+item/contract/manifest fingerprints. `observation_basis` is `post`, and
+`observed_sha256` is the native canonical carrier fingerprint, not the raw
+item hash. Checking requires the same immutable post snapshot and its exact
+observed item hash, while independently retaining the current unique manifest
+producer and the original pre-reader baseline. The current split carrier is
+kept distinct; it is not relabelled as observed post-reader content.
+
+This option represents genuinely witnessed bytes matching that snapshot. It
+must not be guessed from a current carrier or assigned merely because a post
+snapshot exists. Recover and record exact source-byte evidence when repairing
+historical bindings. The additional post-snapshot metadata is removed when
+comparing routing with original reports, so authentic reader/refuter reports
+remain unchanged. A missing, malformed or changed post snapshot fails binding.
