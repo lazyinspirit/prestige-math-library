@@ -87,7 +87,8 @@ blocked dispositions and all workers drain, the engine writes
 `research/RUN-step2-owner-pass.json` and pauses before attempting Step 2's
 battery. A blocked disposition records unreviewed work honestly. Native bounded
 review/repair loops and escalation histories remain intact. The owner resolves
-escalations, resumes affected remaining loops as needed, and chooses when to
+escalations with hash-bound owner acceptance, without another engine review, and
+chooses when to
 run the full battery. Owner resume and any armed post-Step-2 pause control
 progression to Step 3.
 If the owner resumes remaining native loops, their completion produces a fresh
@@ -111,12 +112,15 @@ validity overriding literature authority.
 After the owner resolves a hold, from the content workspace run:
 
 ```bash
-node tools/batch-scope-review.mjs owner-resolve --run RUN --batch N --decision continue --reviewer OWNER --reason 'Exact resolution'
+node tools/batch-scope-review.mjs owner-resolve --run RUN --batch N --decision accept --reviewer OWNER --reason 'Exact resolution'
 ```
 
-`continue` resumes remaining reviews without resetting counters. After three
-reviews, the owner must independently finish the whole-batch/consumer checks and
-use `--decision accept`; the exact current hash and inventory are recorded.
+Owner resolution confirms the flagged defects and affected consumers are resolved
+and accepts the exact current hash and inventory. It does not dispatch another
+engine review or reset native counters. `accept` is the default; historical
+`--decision continue` commands also accept directly. Historical owner
+continuations can be finalized with the same command after cancelling any
+redundant re-review. Apply resolutions only after active native repair writers drain.
 Resume/retry the same controller only after this explicit resolution. An owner
 acceptance receives native completion coverage at the next controller tick.
 

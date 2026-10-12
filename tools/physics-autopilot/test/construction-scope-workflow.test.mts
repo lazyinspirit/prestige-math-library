@@ -87,19 +87,20 @@ test('scope acceptance CLI executes and fails closed through the workspace tools
   assert.match(accepted.stdout,/2 batch\(es\) accepted/);
 });
 
-test('owner continuation CLI resolves a genuine hold through the workspace tools symlink', t => {
+test('owner resolution CLI accepts a genuine hold through the workspace tools symlink', t => {
   const f=fixture(t);
   symlinkSync(fileURLToPath(new URL('../../',import.meta.url)),join(f.repo,'tools'),'dir');
   complete(f,'1','escalate');
   const result=spawnSync(process.execPath,['tools/physics-support/batch-scope-review.mjs',
-    'owner-resolve','--run','demo','--batch','1','--decision','continue',
-    '--reviewer','owner','--reason','Supplier repaired; resume the remaining native review.'],
+    'owner-resolve','--run','demo','--batch','1','--decision','accept',
+    '--reviewer','owner','--reason','Supplier and affected consumers repaired.'],
     {cwd:f.repo,encoding:'utf8'});
   assert.equal(result.status,0,result.stderr);
   const receipt=JSON.parse(result.stdout);
-  assert.equal(receipt.decision,'continue');
+  assert.equal(receipt.decision,'accept');
   assert.equal(receipt.review_count,1);assert.equal(receipt.repair_count,0);
-  assert.equal(loopState(f.repo,'demo','1').phase,'review');
+  assert.equal(loopState(f.repo,'demo','1').phase,'accepted');
+  assert.equal(batchPlan(f.ctx,'1'),null);
 });
 function scaffoldComplete(f:any,batch:string) {
   const stage:any=stages.find(s=>s.id==='1-scaffold');
@@ -171,13 +172,38 @@ test('two repairs and three whole-batch reviews exhaust durably across reload an
   const third=complete(f,'1','repair');assert.equal(third.state.phase,'held');
   assert.equal(loopState(f.repo,'demo','1').reviews.length,3);assert.equal(loopState(f.repo,'demo','1').repairs.length,2);
   assert.throws(()=>batchPlan(f.ctx,'1'),/held for owner/);
-  assert.throws(()=>resolveOwner(f.repo,'demo','1',{decision:'continue',reason:'Resolved',reviewer:'owner'}),/exhausted/);
   resolveOwner(f.repo,'demo','1',{decision:'accept',reason:'Owner independently resolved and checked the whole batch.',reviewer:'owner'});
   const stage:any=stages.find(s=>s.id==='2-scope-review');
   stage.onProgress({ctx:f.ctx,stage,executor:{inflight:new Map(),adoptedUnits:()=>new Set()}});
   assert.equal(accepted(f.repo,'demo','1'),true);
   assert.ok(existsSync(join(f.ctx.dispatchDir,'tool-scope-accepted-1.result.json')));
   assert.equal(loopState(f.repo,'demo','1').repairs.length,2);
+});
+
+test('owner resolution accepts current inputs without another review and preserves history',t=>{
+  const f=fixture(t);complete(f,'1','escalate');
+  const before=loopState(f.repo,'demo','1');
+  f.writeItem('lem-a',[],'Repaired supplier statement');
+  const receipt=resolveOwner(f.repo,'demo','1',{reviewer:'owner',reason:'Flagged supplier and affected consumers repaired.'});
+  const after=loopState(f.repo,'demo','1');
+  assert.equal(receipt.decision,'accept');assert.equal(after.phase,'accepted');
+  assert.deepEqual(after.reviews,before.reviews);assert.deepEqual(after.repairs,before.repairs);
+  assert.equal(batchPlan(f.ctx,'1'),null);assert.equal(accepted(f.repo,'demo','1'),true);
+  assert.equal(receipt.sha256,batchInput(f.repo,'demo','1').sha256);
+  f.writeItem('lem-a',[],'Later changed supplier');
+  assert.equal(accepted(f.repo,'demo','1'),false);assert.equal(collectBatch(f.ctx,'1').phase,'held');
+});
+
+test('owner acceptance supersedes a historical continuation and its queued review',t=>{
+  const f=fixture(t);complete(f,'1','escalate');
+  const before=loopState(f.repo,'demo','1');
+  const legacy={...before,phase:'review',owner_resolution:{decision:'continue'}};
+  const path=join(loopDir(f.repo,'demo','1'),'state.json');json(path,legacy);
+  batchPlan(f.ctx,'1');
+  const receipt=resolveOwner(f.repo,'demo','1',{decision:'continue',reviewer:'owner',reason:'Resolved; no repeat review.'});
+  assert.equal(receipt.decision,'accept');assert.equal(batchPlan(f.ctx,'1'),null);
+  assert.equal(loopState(f.repo,'demo','1').prepared,undefined);
+  assert.deepEqual(loopState(f.repo,'demo','1').reviews,before.reviews);
 });
 
 test('significant unmet prerequisites escalate immediately and prevent repair dispatch',t=>{
@@ -406,8 +432,10 @@ test('Step 2 hands every pair to the owner while marking blocked unreviewed cons
   assert.deepEqual(receipt.dispositions.map((d:any)=>[d.batch,d.disposition]),[['1','owner-escalation'],['2','prerequisite-blocked'],['3','accepted']]);
   assert.equal(receipt.dispositions[1].reviewed,false);assert.deepEqual(receipt.dispositions[1].blocked_by,['1']);
   assert.equal(loopState(f.repo,'demo','1').reviews.length,1);assert.equal(loopState(f.repo,'demo','1').repairs.length,0);
-  resolveOwner(f.repo,'demo','1',{decision:'continue',reviewer:'owner',reason:'Supplier escalation resolved; continue its native loop.'});
-  complete(f,'1');complete(f,'2');
+  resolveOwner(f.repo,'demo','1',{reviewer:'owner',reason:'Supplier escalation and affected consumers resolved.'});
+  assert.equal(batchPlan(f.ctx,'1'),null,'Resolved escalation must not dispatch another engine review');
+  assert.equal(loopState(f.repo,'demo','1').reviews.length,1);
+  complete(f,'2');
   json(join(stateDir,'control.json'),{command:'resume'});await executor.tick();
   assert.equal(state.paused,true,'Finishing resumed native loops still requires the owner battery decision');
   assert.equal(state.data.stages[loop.id].gatesPassedAt,null);

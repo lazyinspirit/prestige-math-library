@@ -223,17 +223,20 @@ export function collectBatch(ctx,batch) {
   return state;
 }
 
-// Owner resolution is explicit and hash-bound. It never refunds worker rounds.
-export function resolveOwner(root,run,batch,{decision,reason,reviewer}) {
+// Resolved owner escalations are accepted directly, without another native review.
+// Historical rounds remain intact; current inputs are still hash-bound.
+export function resolveOwner(root,run,batch,{decision='accept',reason,reviewer}) {
   const state=loopState(root,run,batch), input=batchInput(root,run,batch);
-  assert(state.phase==='held','Owner resolution requires an actual hold');
+  const legacyContinuation=state.phase==='review' && state.owner_resolution?.decision==='continue';
+  assert(state.phase==='held'||legacyContinuation,'Owner resolution requires an actual hold or a historical owner continuation');
   assert(['accept','continue'].includes(decision)&&reason?.trim()&&reviewer?.trim(),'Specify owner decision, reason and reviewer');
-  assert(decision!=='continue'||state.reviews.length<3,'Three reviews exhausted; owner must independently resolve and accept');
+  // Keep old command lines working, but continuation no longer queues a review.
+  decision='accept';
   const receipt={version:1,run,batch:String(batch),decision,reason,reviewer,at:new Date().toISOString(),
     sha256:input.sha256,inventory:input.inventory,review_count:state.reviews.length,repair_count:state.repairs.length};
   atomic(join(loopDir(root,run,batch),`owner-${digest(receipt).slice(0,16)}.json`),receipt);
-  state.owner_resolution=receipt;state.phase=decision==='accept'?'accepted':'review';delete state.prepared;
-  if(decision==='accept')state.accepted_sha256=input.sha256;
+  state.owner_resolution=receipt;state.phase='accepted';state.reason=reason;delete state.prepared;
+  state.accepted_sha256=input.sha256;
   save(root,run,batch,state);
   return receipt;
 }
@@ -307,7 +310,7 @@ export function checkBatches(root,run) {
 if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
   try{
     const args=process.argv.slice(2),run=args[args.indexOf('--run')+1];
-    const option=name=>args[args.indexOf(`--${name}`)+1];
+    const option=name=>args.includes(`--${name}`)?args[args.indexOf(`--${name}`)+1]:undefined;
     assert(args.includes('--run'),'Specify --run');
     if(args[0]==='owner-resolve')console.log(JSON.stringify(resolveOwner(process.cwd(),run,option('batch'),
       {decision:option('decision'),reason:option('reason'),reviewer:option('reviewer')})));
