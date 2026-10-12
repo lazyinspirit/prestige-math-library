@@ -873,7 +873,7 @@ export class Executor {
     // measuring from the previous ACTUAL launch avoids that stampede. DeepSeek
     // dispatches use the owner's one-second interval; other lanes retain three
     // seconds. Test harnesses may disable pacing with dispatchStaggerMs: 0.
-    const staggerMs = String(vars.profile).startsWith('deepseek-')
+    const staggerMs = stage.id === '2-scope-review' ? 0 : String(vars.profile).startsWith('deepseek-')
       ? (this.config.deepseekDispatchStaggerMs ?? (this.config.dispatchStaggerMs === 0 ? 0 : 1000))
       : (this.config.dispatchStaggerMs ?? 3000);
     const precedingSpawn = this.spawnQueue;
@@ -889,7 +889,7 @@ export class Executor {
     const promise = precedingSpawn.then(async () => {
       const waitMs = Math.max(0, this.lastSpawnAt + staggerMs - this.clock.now());
       if (waitMs > 0) this.reporter.event('spawn-stagger', { label: plan.label, waitMs });
-      await sleep(waitMs, this.signal);
+      if (waitMs > 0) await sleep(waitMs, this.signal);
       if (this.signal?.aborted) throw new Error('dispatch aborted before spawn');
       this.lastSpawnAt = this.clock.now();
       try {
