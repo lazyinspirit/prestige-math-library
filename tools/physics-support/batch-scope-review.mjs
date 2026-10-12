@@ -39,8 +39,8 @@ export function batchInput(root, run, batch) {
 }
 
 /** Actual item and page prerequisites; never infer order from batch numbers. */
-export function prerequisiteBatches(root, run, batch) {
-  const snapshot = loadStep3(root, run), home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
+export function prerequisiteBatches(root, run, batch, pass=null) {
+  const snapshot = pass ? (pass.scopeSnapshot??=loadStep3(root,run)) : loadStep3(root,run), home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
   const out = new Set(), deps = new Set();
   for (const page of snapshot.pages.filter(page => page.batch === String(batch))) {
     for (const id of page.requires ?? []) if (home.has(id) && home.get(id) !== String(batch)) out.add(home.get(id));
@@ -57,7 +57,8 @@ export function prerequisiteBatches(root, run, batch) {
     && !existsSync(join(root, 'items', `${id}.md`))));
   const aliases = new Map();
   if (unresolved.size) {
-    const library = readLibraryItems(root), canonical = new Set(library.map(item => item.id));
+    const library = pass ? (pass.scopeLibrary??=readLibraryItems(root)) : readLibraryItems(root);
+    const canonical = new Set(library.map(item => item.id));
     for (const item of library) for (const alias of item.aliases ?? [])
       if (unresolved.has(alias) && !canonical.has(alias)) {
         assert(!aliases.has(alias) || aliases.get(alias) === item.id, `Ambiguous alias ${alias}`);
@@ -257,7 +258,13 @@ export function loopPattern(ctx,batches) {
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;
 }
 
-export function batchPlan(ctx,batch) {
+// Fresh per-pass inventory: never reuse it across workers or controller ticks.
+export function batchPlans(ctx,batches) {
+  const library=ctx.scopeLibrary??readLibraryItems(ctx.repo);
+  return batches.map(batch=>batchPlan(ctx,batch,library)).filter(Boolean);
+}
+
+export function batchPlan(ctx,batch,library=null) {
   const state=loopState(ctx.repo,ctx.run,batch);
   if(state.phase==='held')throw Error(`Batch ${batch} held for owner: ${state.reason}`);
   if(accepted(ctx.repo,ctx.run,batch))return null;
@@ -265,7 +272,8 @@ export function batchPlan(ctx,batch) {
   assert(phase==='review'?round<3:round<=2,'Batch repair budget exhausted; owner resolution required');
   const input=batchInput(ctx.repo,ctx.run,batch), role=phase==='review'?'scope-reviewer':'scope-repairer';
   // Review order must agree with the actual authored logical dependencies.
-  const library=readLibraryItems(ctx.repo), byId=new Map(library.map(item=>[item.id,item]));
+  library??=readLibraryItems(ctx.repo);
+  const byId=new Map(library.map(item=>[item.id,item]));
   const aliases=new Map(library.flatMap(item=>(item.aliases??[]).map(alias=>[alias,item.id])));
   const actual=input.snapshot.pages.map(page=>({...page,items:page.items.map(item=>{
     const text=readFileSync(join(ctx.repo,'items',`${item.id}.md`),'utf8');
@@ -279,7 +287,7 @@ export function batchPlan(ctx,batch) {
   const dir=loopDir(ctx.repo,ctx.run,batch), task=join(dir,`${phase}-${round}.task.md`);
   if(!state.prepared){
     const p={phase,round,role,label:label(batch,phase,round),input_sha256:input.sha256,inventory:input.inventory,
-      before_items:readLibraryItems(ctx.repo), ...(phase==='repair'?{before_files:fileHashes(ctx.repo)}:{})};
+      before_items:library, ...(phase==='repair'?{before_files:fileHashes(ctx.repo)}:{})};
     atomic(join(dir,`${phase}-${round}.input.json`),p);
     state.prepared=p;save(ctx.repo,ctx.run,batch,state);
     const prior=state.reviews.length?relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,'review',state.reviews.length-1)):null;

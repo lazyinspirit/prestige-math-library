@@ -497,6 +497,7 @@ export class Executor {
 
       const visiting = new Set<string>(), visited = new Set<string>(), trail: string[] = [];
       const transitive = new Map<string, Set<string>>();
+      const levels = new Map<string, number>();
       const visit = (unit: string): string | null => {
         if (visited.has(unit)) return null;
         if (visiting.has(unit)) {
@@ -505,13 +506,15 @@ export class Executor {
         }
         visiting.add(unit); trail.push(unit);
         const closure = new Set<string>();
+        let level = 0;
         for (const dependency of dependencies.get(unit) ?? []) {
           const problem = visit(dependency);
           if (problem) return problem;
           closure.add(dependency);
+          level = Math.max(level, (levels.get(dependency) ?? 0) + 1);
           for (const ancestor of transitive.get(dependency) ?? []) closure.add(ancestor);
         }
-        trail.pop(); visiting.delete(unit); visited.add(unit); transitive.set(unit, closure);
+        trail.pop(); visiting.delete(unit); visited.add(unit); transitive.set(unit, closure); levels.set(unit, level);
         return null;
       };
       for (const unit of owed) {
@@ -543,7 +546,9 @@ export class Executor {
               return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
             })) return false;
           return [...(transitive.get(candidate) ?? [])].every(dep => stable(dep, candidate));
-        }),
+        // Fill every slot from ready work, preferring earlier dependency levels
+        // without waiting for unrelated pairs in those levels to finish.
+        }).sort((a, b) => (levels.get(String(a)) ?? 0) - (levels.get(String(b)) ?? 0)),
         problem: null,
       };
     } catch (error: any) {
@@ -980,7 +985,19 @@ export class Executor {
     // prevents a supplier repair and its consumer repair from launching in the
     // same wave even if an old success receipt still exists for the supplier.
     let readyPlans = plans;
-    if (stage.unitPrerequisites) {
+    if (stage.id === '2-scope-review' && plans.every(plan => plan.role === 'scope-reviewer')) {
+      // Read-only scope reviewers share one current dependency check. They
+      // do not create imminent writes requiring a separate graph per plan.
+      const active = new Set<Unit>([...this.inflight.values()]
+        .filter(row => row.meta.stage === stage.id).flatMap(row => row.meta.covers.map(String)));
+      for (const unit of this.adoptedUnits(stage)) active.add(String(unit));
+      const readiness = this.unitReadiness(stage, this.ctx(), plans.flatMap(plan => (plan.covers ?? []).map(String)), active);
+      if (readiness.problem) { this.recordUnitPrerequisiteBlocker(stage, readiness.problem); return false; }
+      if (readiness.deferred) return true;
+      const ready = new Set(readiness.ready.map(String));
+      readyPlans = plans.filter(plan => (plan.covers ?? []).every(unit => ready.has(String(unit))));
+      this.retireUnitPrerequisiteBlocker(stage);
+    } else if (stage.unitPrerequisites) {
       const active = new Set<Unit>([...this.inflight.values()]
         .filter((row: any) => row.meta.stage === stage.id)
         .flatMap((row: any) => row.meta.covers.map(String)));
@@ -1586,13 +1603,15 @@ export class Executor {
     // The group's ROLE budget sits alongside it, and only bites inside a
     // pipeline: two stages of one group sharing a lane must not each fill it.
     const stageCap = stage.concurrency ?? this.config.concurrency ?? 5;
-    const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length;
+    // Each Step-2 worker covers one pair; adopted workers use the same slots.
+    const externalPairAgents = stage.id === '2-scope-review' ? adopted.size : 0;
+    const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length + externalPairAgents;
     const globalCap = this.config.globalConcurrency ?? Infinity;
     const roleCap = stage.role ? roleBudget(stage.role) : Infinity;
     const inRole = stage.role
       ? [...this.inflight.values()].filter((d: any) => d.meta.role === stage.role).length
       : 0;
-    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size));
+    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size - externalPairAgents));
     if (need.length && slots > 0) {
       let plans;
       try {

@@ -285,6 +285,54 @@ test('a newly accepted prerequisite releases its consumer while an unrelated pai
   for(const batch of ['1','2','3'])assert.equal(accepted(f.repo,'demo',batch),true);
 });
 
+test('Step 2 fills 30 slots across ready levels and refills after one completion',async t=>{
+  const f=fixture(t);complete(f,'1');complete(f,'2');
+  const roots=Array.from({length:14},(_,i)=>String(40+i));
+  const higher=Array.from({length:30},(_,i)=>String(3+i));
+  for(const batch of [...roots,...higher]){
+    independentPair(f,batch);
+    if(higher.includes(batch)){
+      const path=join(f.repo,`research/demo-batch-${batch}.pages.json`);
+      const pages=JSON.parse(readFileSync(path,'utf8'));
+      pages[0].requires=['pair-a'];pages[0].items[0].deps=['lem-a'];pages[0].items[0].dependency_level=1;
+      pages[1].items[0].dependency_level=2;json(path,pages);
+      f.writeItem(`lem-independent-${batch}`,['lem-a']);
+    }
+  }
+  const loop:any=stages.find(s=>s.id==='2-scope-review'),stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const state=new State(statePath(stateDir));state.init('demo');
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,
+    globalConcurrency:100,dispatchStaggerMs:0,adoptCommand:false,ownerGateRecertification:false};
+  const started:string[]=[],finish=new Map<string,()=>void>();
+  const executor=new Executor({config,stages:[loop],state,reporter:new Reporter({dir:stateDir,sink:()=>{}}),
+    adapter:{invoke:async(vars:any)=>new Promise(resolve=>{
+      const batch=String(vars.covers);started.push(batch);
+      finish.set(batch,()=>{
+        const p=loopState(f.repo,'demo',batch).prepared;
+        json(join(f.repo,vars.resultArtifact),{version:1,run:'demo',batch,round:p.round,input_sha256:p.input_sha256,
+          reviewed_items:p.inventory.items,reviewed_pages:p.inventory.pages,decision:'accept',reason:'Current batch checked.',findings:[],consumer_checks:[]});
+        json(join(f.ctx.dispatchDir,`${vars.role}-${vars.label}.result.json`),{run:'demo',role:vars.role,label:vars.label,covers:[batch],ok:true});
+        resolve({code:0,stdout:'',stderr:'',timedOut:false});
+      });
+    })} as any});
+  await executor.dispatchStage(loop,executor.ctx());
+  const waitForStarts=async(count:number)=>{const deadline=Date.now()+3000;while(started.length<count&&Date.now()<deadline)await new Promise(r=>setTimeout(r,1));};
+  await waitForStarts(30);
+  assert.equal(executor.inflight.size,30);
+  assert.deepEqual(started,[...roots,...higher.slice(0,16)]);
+  const done=[...executor.inflight.values()].find(row=>row.meta.covers.includes(roots[0]))!.promise;
+  finish.get(roots[0])!();await done;await executor.tick();await waitForStarts(31);
+  assert.equal(executor.inflight.size,30);assert.equal(started.at(-1),higher[16]);
+  for(const [batch,end] of finish)if(batch!==roots[0])end();
+  await Promise.all([...executor.inflight.values()].map(row=>row.promise));
+  const adopted=[...roots,...higher.slice(0,16)];
+  const lines=adopted.map(batch=>`123 node dispatch --run demo --role scope-reviewer --label scope-review-${batch}-0 --covers ${batch}`).join('\n');
+  executor.config.adoptCommand="printf '%s' '"+lines+"'";
+  const adoptionLoop={...loop,pattern:/^scope-reviewer-/};
+  await executor.dispatchStage(adoptionLoop,executor.ctx());
+  assert.equal(executor.inflight.size,0,'Thirty adopted agents leave no available slot');
+});
+
 test('Step 2 pauses once before its battery and retains the owner handoff across restart',async t=>{
   const f=fixture(t);complete(f,'1');complete(f,'2');
   const loop:any=stages.find(s=>s.id==='2-scope-review'),stateDir=join(f.repo,'state');mkdirSync(stateDir);

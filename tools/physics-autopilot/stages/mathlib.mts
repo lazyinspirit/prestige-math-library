@@ -31,7 +31,7 @@ import { writeBatchDependencyLevels } from '../../physics-support/batch-dependen
 import { step1Decision } from '../../physics-support/step1-decisions.mjs';
 import { dependencyLevels, orderedItems } from '../../physics-support/item-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
-import { batchInput, prerequisiteBatches, loopState, collectBatch, accepted, loopPattern, batchPlan } from '../../physics-support/batch-scope-review.mjs';
+import { batchInput, prerequisiteBatches, loopState, collectBatch, accepted, loopPattern, batchPlans } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
 import { yaml } from '../../physics-support/pathway-lib.mjs';
 
@@ -1143,13 +1143,13 @@ export const stages = [
     id: '2-scope-review', label: 'whole-batch scope and prerequisite review/repair',
     modelProfile: MODEL_PROFILE_NAMES.lunaMax,
     units: batches,
-    unitPrerequisites: (ctx: any, u: string) => prerequisiteBatches(ctx.repo, ctx.run, u),
+    unitPrerequisites: (ctx: any, u: string) => prerequisiteBatches(ctx.repo, ctx.run, u, ctx),
     unitEligible: (ctx: any, u: string) => loopState(ctx.repo, ctx.run, u).phase !== 'held',
     pattern: (ctx: any) => loopPattern(ctx, batches(ctx)),
     artifacts: (ctx: any, u: string) => accepted(ctx.repo, ctx.run, u)
       ? `research/${ctx.run}-scope-review/batch-${u}/state.json`
       : `research/${ctx.run}-scope-review/batch-${u}/acceptance-missing`,
-    concurrency: MAX_RUN_BATCHES,
+    concurrency: 30,
     // Repairs have unrestricted local item inventory authority. Isolate each
     // write wave so its outside-batch byte guard cannot blame another writer.
     exclusiveCohort: (ctx: any, u: string) => batches(ctx).some(b =>
@@ -1209,7 +1209,7 @@ export const stages = [
         outputSchema:'briefs/schemas/batch-scope-review.json',resultArtifact:`research/${ctx.run}-scope-review/batch-${u}/review-0.json`}));
       const eligible = pending.filter(u => loopState(ctx.repo, ctx.run, u).phase !== 'held');
       const repair = eligible.find(u => loopState(ctx.repo, ctx.run, u).phase === 'repair');
-      return (repair ? [repair] : eligible).map(u => batchPlan(ctx, u)).filter(Boolean);
+      return batchPlans(ctx, repair ? [repair] : eligible);
     },
     gates: (ctx: any) => [scopeGate(ctx),
       gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run]),
