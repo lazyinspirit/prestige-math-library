@@ -1496,9 +1496,10 @@ export class Executor {
 
     // PER-UNIT PROGRESSION. Each member of the group is offered the units whose
     // own work is finished at the member before it; a member with nothing ready
-    // simply starts nothing this tick. Stage order, so the earliest work keeps
-    // flowing rather than starving behind a later stage.
-    for (const [i, member] of group.entries()) {
+    // simply starts nothing this tick. Offer slots downstream first so ready
+    // refuters and adjudicators are not delayed by another reader wave. Keep
+    // the original index for predecessor readiness and the group gate order.
+    for (const [i, member] of [...group.entries()].reverse()) {
       if (this.state.data.stages[member.id]?.skipped) continue;
       if (this.stageStatus(member, ctx).unitsDone) continue;
       const firstEntry = !this.state.data.stages[member.id];

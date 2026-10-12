@@ -159,6 +159,31 @@ const inflightAt = (ex: any, stageId: string) =>
 // P1/P2 — a unit moves on while its siblings are still working
 // ---------------------------------------------------------------------------
 
+test('ready refuters and adjudicators take freed slots before another reader wave', async () => {
+  const fx = fixture();
+  const roles = ['reader', 'tool', 'refuter', 'tool', 'alpha'];
+  const labels = ['read', 'split', 'refute', 'collect', 'adjudicate'];
+  const stages: any = roles.map((role, i) => ({
+    id: labels[i], label: labels[i], pipeline: 'read', role,
+    units: () => ['1', '2', '3'], concurrency: 3,
+    pattern: new RegExp(`^${role}-${labels[i]}-`),
+    plan: (_ctx: any, units: string[]) => units.map(unit => ({
+      role, label: `${labels[i]}-${unit}`, job: 'audit', covers: [unit],
+    })),
+    gates: () => [loggingGate(fx, labels[i])],
+  }));
+  const ex = makeExecutor(fx, stages, { hang: true, globalConcurrency: 2 });
+  // Batch 1 is ready for adjudication; batch 2 is ready for refutation;
+  // batch 3 still needs a reader. Only two slots have become available.
+  for (let i = 0; i < 4; i += 1) cover(fx, roles[i], `${labels[i]}-1`, ['1']);
+  for (let i = 0; i < 2; i += 1) cover(fx, roles[i], `${labels[i]}-2`, ['2']);
+  assert.equal(await ex.tick(), 'working');
+  assert.deepEqual([...ex.inflight.values()].map(row => row.meta.label),
+    ['adjudicate-1', 'refute-2']);
+  assert.equal(ex.inflight.size, 2, 'the global cap still applies');
+  assert.deepEqual(gateRuns(fx), [], 'whole-group gates still await every batch');
+});
+
 test('a unit enters the next pipelined stage while a sibling is still in flight at the previous one', async () => {
   // THE FEATURE. Serially this is exactly what the stage barrier forbade: s1 is
   // the current stage and has live work, so nothing else could start. Unit 1's

@@ -1032,16 +1032,27 @@ export class Executor {
 
   /** Every live dispatch for this run, with its label and covered units. */
   liveDispatchLabels(): Array<{ label: string; covers: Unit[] }> {
+    return this.liveDispatches().map(({ label, covers }) => ({ label, covers }));
+  }
+
+  /** Process discovery shared by coverage adoption and slot accounting. */
+  liveDispatches(): Array<{ label: string; role: string; covers: Unit[] }> {
     const cmd = this.config.adoptCommand;
     if (cmd === false) return [];
     const out: any[] = [];
+    const seen = new Set<string>();
     try {
       const r = spawnSync('sh', ['-c', cmd ?? "ps -eo pid,comm,args | awk '$2==\"node\" && /dispatch/'"], { encoding: 'utf8' });
       for (const line of (r.stdout ?? '').split('\n')) {
-        if (!line.includes(`--run ${this.config.run}`)) continue;
+        if (/--run\s+([^\s]+)/.exec(line)?.[1] !== this.config.run) continue;
         const lm = /--label\s+([^\s]+)/.exec(line);
+        const role = /--role\s+([^\s]+)/.exec(line)?.[1] ?? '';
         const cm = /--covers\s+([^\s]+)/.exec(line);
-        if (lm) out.push({ label: lm[1], covers: cm ? cm[1].split(',').filter(Boolean) : [] });
+        if (!lm) continue;
+        const key = `${role}:${lm[1]}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        out.push({ label: lm[1], role, covers: cm ? cm[1].split(',').map(u => u.trim()).filter(Boolean) : [] });
       }
     } catch { /* best effort */ }
     return out;
@@ -1062,35 +1073,22 @@ export class Executor {
    *  a platform without it simply adopts nothing, which degrades to the old
    *  duplicate-risk behaviour rather than to a crash. */
   adoptedUnits(stage: Stage | null = null): Set<Unit> {
-    const cmd = this.config.adoptCommand;
-    if (cmd === false) return new Set();
-    const out = new Set<string>();
-    try {
-      const r = spawnSync('sh', ['-c', cmd ?? "ps -eo pid,comm,args | awk '$2==\"node\" && /dispatch/'"], { encoding: 'utf8' });
-      // Exclude our own children: they are already in `inflight`, and counting
-      // them as external makes the adoption notice fire on every tick for work
-      // this engine started.
-      const mine = new Set([...this.inflight.values()].map((d: any) => d.meta.label));
-      for (const line of (r.stdout ?? '').split('\n')) {
-        if (!line.includes(`--run ${this.config.run}`)) continue;
-        const lm = /--label\s+([^\s]+)/.exec(line);
-        if (lm && mine.has(lm[1])) continue;
-        // Belongs to this stage? The result file a dispatch will write is
-        // `<role>-<label>.result.json`, which is what the stage pattern matches.
-        if (stage?.pattern && lm) {
-          const rm = /--role\s+([^\s]+)/.exec(line);
-          const resultName = `${rm ? rm[1] : ''}-${lm[1]}.result.json`;
-          // Repair-hook labels need not match the primary result pattern.
-          // Their persisted dispatch key still identifies the owning stage.
-          if (!stagePattern(stage, this.ctx()).test(resultName)
-            && !this.state.dispatch(`${stage.id}:${lm[1]}`)) continue;
-        }
-        const m = /--covers\s+([^\s]+)/.exec(line);
-        if (!m) continue;
-        for (const u of m[1].split(',')) if (u.trim()) out.add(u.trim());
-      }
-    } catch { /* adoption is best-effort; never fatal */ }
-    return out;
+    return new Set(this.adoptedDispatches().filter(dispatch => !stage || this.dispatchBelongsToStage(dispatch, stage))
+      .flatMap(dispatch => dispatch.covers));
+  }
+
+  /** Count dispatches, not covered units: a cohort or a recovery with no
+   * primary coverage still occupies one slot. Local children are already
+   * charged through inflight, including those queued behind the spawn stagger. */
+  adoptedDispatches(): Array<{ label: string; role: string; covers: Unit[] }> {
+    const mine = new Set([...this.inflight.values()].map(d => `${d.meta.role}:${d.meta.label}`));
+    return this.liveDispatches().filter(d => !mine.has(`${d.role}:${d.label}`));
+  }
+
+  dispatchBelongsToStage(dispatch: { label: string; role: string }, stage: Stage): boolean {
+    // Repair-hook labels need not match the primary result pattern.
+    return stagePattern(stage, this.ctx()).test(`${dispatch.role}-${dispatch.label}.result.json`)
+      || Boolean(this.state.dispatch(`${stage.id}:${dispatch.label}`));
   }
 
   /** Owner commands. Read, acted on, never awaited. */
@@ -1394,9 +1392,10 @@ export class Executor {
 
     // PER-UNIT PROGRESSION. Each member of the group is offered the units whose
     // own work is finished at the member before it; a member with nothing ready
-    // simply starts nothing this tick. Stage order, so the earliest work keeps
-    // flowing rather than starving behind a later stage.
-    for (const [i, member] of group.entries()) {
+    // simply starts nothing this tick. Offer slots downstream first so ready
+    // refuters and adjudicators are not delayed by another reader wave. Keep
+    // the original index for predecessor readiness and the group gate order.
+    for (const [i, member] of [...group.entries()].reverse()) {
       if (this.state.data.stages[member.id]?.skipped) continue;
       if (this.stageStatus(member, ctx).unitsDone) continue;
       const firstEntry = !this.state.data.stages[member.id];
@@ -1524,7 +1523,10 @@ export class Executor {
     // and treating it as coverage blocked a reader re-run behind an adjudicator
     // that was already working on the same batch. Match the live label against
     // the stage's own result pattern.
-    const adopted = new Set([...this.adoptedUnits(stage)]);
+    // One process snapshot supplies both coverage and capacity after restart.
+    const adoptedDispatches = this.adoptedDispatches();
+    const adoptedInStage = adoptedDispatches.filter(d => this.dispatchBelongsToStage(d, stage));
+    const adopted = new Set(adoptedInStage.flatMap(d => d.covers));
     for (const u of adopted) runningUnits.add(u);
     if (adopted.size) {
       const news = [...adopted].filter((u: any) => need.includes(u));
@@ -1604,15 +1606,15 @@ export class Executor {
     // The group's ROLE budget sits alongside it, and only bites inside a
     // pipeline: two stages of one group sharing a lane must not each fill it.
     const stageCap = stage.concurrency ?? this.config.concurrency ?? 5;
-    // Each Step-2 worker covers one pair; adopted workers use the same slots.
-    const externalPairAgents = stage.id === '2-scope-review' ? adopted.size : 0;
-    const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length + externalPairAgents;
+    const inStage = [...this.inflight.values()].filter((d: any) => d.meta.stage === stage.id).length
+      + adoptedInStage.length;
     const globalCap = this.config.globalConcurrency ?? Infinity;
     const roleCap = stage.role ? roleBudget(stage.role) : Infinity;
     const inRole = stage.role
       ? [...this.inflight.values()].filter((d: any) => d.meta.role === stage.role).length
+        + adoptedDispatches.filter(d => d.role === stage.role).length
       : 0;
-    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size - externalPairAgents));
+    const slots = Math.max(0, Math.min(stageCap - inStage, roleCap - inRole, globalCap - this.inflight.size - adoptedDispatches.length));
     if (need.length && slots > 0) {
       let plans;
       try {

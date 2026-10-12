@@ -7,3 +7,9 @@ The rebuild plan is `research/workflow-rebuild-plan.md`. Step 1 performs complet
 Current revision: `six-step-v1-construction-scope`. Use fresh run state. The engine owns all transitions and enforces the shared 30-agent cap. See `package.json` for typechecking and focused test commands.
 
 Step 3 ends with `3a-baseline` and mechanical `3a-close`. Dependency-level authoring replaces the legacy Step 3b cross-batch review; no Step 3b stage or continuation is dispatched. Historical evidence remains preserved.
+
+Within the Step-3 pipeline, ready downstream work gets available slots before
+upstream work: adjudicators, collection tools, refuters, split tools, then readers.
+Each batch still requires its predecessor receipts and artifacts, with no live
+predecessor writer. Stage, role, and global caps include workers adopted after a
+controller restart; the full group gate barrier remains in place.
