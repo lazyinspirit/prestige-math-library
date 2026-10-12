@@ -164,7 +164,7 @@ above). Alpha applies the amendments list; Tom never writes that file.
 **TS-D4. Category.** The HT pages are homed in the existing `topology`
 category (which grows to 24 A-pages). No new index group, no change to the
 frozen `web/lib/library-categories.ts`. FG pages: `abstract-algebra`. ST
-pages: `foundations`. EU page: `topology`.
+pages: `set-theory`. EU page: `topology`.
 
 **TS-D5. Three standing requirements, owner's words**, binding every page in
 this file: (1) every definition carries its well-definedness obligations as

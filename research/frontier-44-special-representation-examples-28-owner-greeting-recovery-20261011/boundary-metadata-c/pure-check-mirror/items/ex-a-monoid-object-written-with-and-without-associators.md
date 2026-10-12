@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-monoid-object-written-with-and-without-associators.md

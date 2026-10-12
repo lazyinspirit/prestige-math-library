@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-level-zero-integrable-affine-highest-weight-simples-are-one-dimensional.md

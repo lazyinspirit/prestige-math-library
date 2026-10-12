@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-one-cube-average-and-maximal-function-forms-agree.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-topological-kunneth-short-exact-sequence-for-homology.md

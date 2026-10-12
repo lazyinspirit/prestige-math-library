@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-closed-c1-field-on-a-connected-open-set-is-exact.md

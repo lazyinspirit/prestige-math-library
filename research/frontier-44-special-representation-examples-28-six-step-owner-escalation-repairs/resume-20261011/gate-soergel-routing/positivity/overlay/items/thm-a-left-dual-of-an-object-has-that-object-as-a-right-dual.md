@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-left-dual-of-an-object-has-that-object-as-a-right-dual.md

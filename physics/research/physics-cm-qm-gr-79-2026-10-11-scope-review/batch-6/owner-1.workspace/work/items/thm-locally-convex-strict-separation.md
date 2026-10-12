@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-locally-convex-strict-separation.md

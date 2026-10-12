@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-discriminant-lower-bound.md

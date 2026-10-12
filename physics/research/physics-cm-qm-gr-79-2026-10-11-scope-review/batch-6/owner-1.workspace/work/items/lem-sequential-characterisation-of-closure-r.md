@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sequential-characterisation-of-closure-r.md

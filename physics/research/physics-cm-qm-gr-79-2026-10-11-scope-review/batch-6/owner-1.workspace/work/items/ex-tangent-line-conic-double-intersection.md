@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tangent-line-conic-double-intersection.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-pointwise-limit-of-bounded-operators-is-bounded.md

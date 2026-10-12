@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-deformation-lemma-for-a-critical-point-free-slab.md

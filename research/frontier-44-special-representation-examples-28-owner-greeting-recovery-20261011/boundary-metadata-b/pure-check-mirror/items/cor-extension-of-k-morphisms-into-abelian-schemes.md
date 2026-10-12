@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-extension-of-k-morphisms-into-abelian-schemes.md

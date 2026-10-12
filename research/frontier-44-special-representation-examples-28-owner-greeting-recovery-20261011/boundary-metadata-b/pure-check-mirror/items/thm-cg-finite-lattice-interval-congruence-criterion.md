@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-finite-lattice-interval-congruence-criterion.md

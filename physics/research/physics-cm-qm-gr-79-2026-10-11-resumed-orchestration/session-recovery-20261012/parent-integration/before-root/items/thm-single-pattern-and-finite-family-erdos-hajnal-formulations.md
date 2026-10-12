@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-single-pattern-and-finite-family-erdos-hajnal-formulations.md

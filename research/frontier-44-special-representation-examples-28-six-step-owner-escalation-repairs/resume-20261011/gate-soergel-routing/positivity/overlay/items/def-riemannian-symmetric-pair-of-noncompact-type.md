@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-riemannian-symmetric-pair-of-noncompact-type.md

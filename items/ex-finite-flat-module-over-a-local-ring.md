@@ -44,11 +44,8 @@ $M/\mathfrak mM$, then any lifts $x_1,\ldots,x_r\in M$ form an $R$-basis of $M$.
 
 **Proof technique:** direct.
 
+ 1.1 By [L1], the module $M$ is free of rank $r$, because reducing a free basis modulo $\mathfrak m$ gives a basis of $M/\mathfrak mM$. Fix a free basis $e_1,\ldots,e_r$ of $M$. [L1, given, choose]
 
-1.1 By [L1], the module $M$ is free of rank $r$, because reducing a free basis modulo $\mathfrak m$ gives a basis of $M/\mathfrak mM$. Fix a free basis $e_1,\ldots,e_r$ of $M$. [L1, given, choose]
+ 2.1 Let $B\in M_r(R)$ be the coordinate matrix whose columns are the $x_i$ in the basis $e_j$. Reducing modulo $\mathfrak m$ gives an invertible matrix because the $\bar x_i$ form a residue basis, so $\det B\notin\mathfrak m$. By [L2], $\det B$ is a unit. The adjugate identity $B\operatorname{adj}(B)=(\det B)I_r$ therefore makes $B$ invertible over $R$. Thus its columns $x_1,\ldots,x_r$ are a basis. For $r=0$, both bases are empty and the conclusion is immediate. [L2, step 1.1, algebra]
 
-
-2.1 Let $B\in M_r(R)$ be the coordinate matrix whose columns are the $x_i$ in the basis $e_j$. Reducing modulo $\mathfrak m$ gives an invertible matrix because the $\bar x_i$ form a residue basis, so $\det B\notin\mathfrak m$. By [L2], $\det B$ is a unit. The adjugate identity $B\operatorname{adj}(B)=(\det B)I_r$ therefore makes $B$ invertible over $R$. Thus its columns $x_1,\ldots,x_r$ are a basis. For $r=0$, both bases are empty and the conclusion is immediate. [L2, step 1.1, algebra]
-
-
-3.1 So residue-field bases lift to actual bases in the finite flat local case under the stated Choice assumption. [step 2.1] ∎
+ 3.1 So residue-field bases lift to actual bases in the finite flat local case under the stated Choice assumption. [step 2.1] ∎ 

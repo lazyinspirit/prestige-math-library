@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bezout-no-common-component-finite-intersection.md

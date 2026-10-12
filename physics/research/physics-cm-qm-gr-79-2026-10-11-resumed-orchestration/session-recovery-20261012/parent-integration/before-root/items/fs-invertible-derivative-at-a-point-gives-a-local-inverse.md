@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-invertible-derivative-at-a-point-gives-a-local-inverse.md

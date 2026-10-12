@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-integral-closure-is-integrally-closed.md

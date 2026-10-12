@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-componentwise-holomorphy-in-several-complex-variables.md

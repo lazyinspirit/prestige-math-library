@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-f-p-n-is-z-mod-p-n.md

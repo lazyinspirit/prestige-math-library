@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-intersection-gives-the-standard-local-cancelling-model.md

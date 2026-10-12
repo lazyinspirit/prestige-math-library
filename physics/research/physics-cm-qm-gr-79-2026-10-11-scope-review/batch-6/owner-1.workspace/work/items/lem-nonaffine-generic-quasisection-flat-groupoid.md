@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-generic-quasisection-flat-groupoid.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-degree-of-z-to-the-m-on-the-circle-from-a-regular-value.md

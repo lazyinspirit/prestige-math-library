@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-smooth-integrable-function-need-not-be-schwartz.md

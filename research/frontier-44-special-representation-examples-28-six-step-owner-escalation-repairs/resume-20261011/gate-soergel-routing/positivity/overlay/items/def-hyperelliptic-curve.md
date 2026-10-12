@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-hyperelliptic-curve.md

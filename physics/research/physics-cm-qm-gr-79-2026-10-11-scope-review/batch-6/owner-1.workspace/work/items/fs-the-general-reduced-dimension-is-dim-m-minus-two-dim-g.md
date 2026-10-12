@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g.md

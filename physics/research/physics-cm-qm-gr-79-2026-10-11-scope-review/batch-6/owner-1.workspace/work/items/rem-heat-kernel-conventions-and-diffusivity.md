@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-heat-kernel-conventions-and-diffusivity.md

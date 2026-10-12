@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-character-table-of-a-four.md

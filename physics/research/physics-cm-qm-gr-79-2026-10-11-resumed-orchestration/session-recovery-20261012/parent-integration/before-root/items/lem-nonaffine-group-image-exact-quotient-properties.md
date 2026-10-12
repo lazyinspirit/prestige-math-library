@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-group-image-exact-quotient-properties.md

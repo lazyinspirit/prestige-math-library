@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-interior-and-closed-disk-configuration-spaces-are-homotopy-equivalent.md

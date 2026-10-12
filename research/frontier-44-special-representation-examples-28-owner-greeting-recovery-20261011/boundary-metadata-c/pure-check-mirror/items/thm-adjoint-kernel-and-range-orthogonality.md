@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-adjoint-kernel-and-range-orthogonality.md

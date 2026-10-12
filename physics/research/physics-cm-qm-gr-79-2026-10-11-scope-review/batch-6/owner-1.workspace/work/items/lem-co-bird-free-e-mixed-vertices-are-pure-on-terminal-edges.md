@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-co-bird-free-e-mixed-vertices-are-pure-on-terminal-edges.md

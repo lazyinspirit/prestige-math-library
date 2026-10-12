@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-dimensional-normed-spaces-are-banach.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simplicial-and-singular-homology-agree-for-simplicial-complexes.md

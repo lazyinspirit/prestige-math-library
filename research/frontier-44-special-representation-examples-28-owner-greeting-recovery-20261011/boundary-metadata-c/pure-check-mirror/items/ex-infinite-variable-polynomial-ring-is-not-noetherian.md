@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-infinite-variable-polynomial-ring-is-not-noetherian.md

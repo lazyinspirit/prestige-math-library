@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-torus-as-a-product-smooth-manifold.md

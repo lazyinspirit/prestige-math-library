@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-backward-stable-solution-of-an-ill-conditioned-system.md

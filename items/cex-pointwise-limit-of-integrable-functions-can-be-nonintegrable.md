@@ -37,8 +37,7 @@ Every pointwise limit of integrable functions is integrable.
 
 **Proof technique:** direct.
 
-1.1 Each $f_n$ has finite support, so it is integrable on [L1, L2, given]
-$(\mathbb N,\mathcal P(\mathbb N),\#)$.
+1.1 Each $f_n$ has finite support, so it is integrable on [L1, L2, given] $(\mathbb N,\mathcal P(\mathbb N),\#)$. [L1, L2, given]
 
-2.1 For every $k\in\mathbb N$, one has $f_n(k)\to1$. The pointwise limit is the [step 1.1, L1, L2, algebra] ∎
-constant function $1$, whose integral under counting measure is $+\infty$, so it is not integrable by [L2]. Thus the Statement is false.
+2.1 For every $k\in\mathbb N$, one has $f_n(k)\to1$. The pointwise limit is the [step 1.1, L1, L2, algebra] ∎ constant function $1$, whose integral under counting measure is $+\infty$, so it is not integrable by [L2]. Thus the Statement is false. [step 1.1, L1, L2, algebra]
+

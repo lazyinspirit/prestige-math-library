@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-poincare-wirtinger-on-convex-domains.md

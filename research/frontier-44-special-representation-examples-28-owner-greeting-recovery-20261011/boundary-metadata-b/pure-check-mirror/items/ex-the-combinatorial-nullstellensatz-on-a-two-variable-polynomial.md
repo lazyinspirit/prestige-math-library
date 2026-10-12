@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-combinatorial-nullstellensatz-on-a-two-variable-polynomial.md

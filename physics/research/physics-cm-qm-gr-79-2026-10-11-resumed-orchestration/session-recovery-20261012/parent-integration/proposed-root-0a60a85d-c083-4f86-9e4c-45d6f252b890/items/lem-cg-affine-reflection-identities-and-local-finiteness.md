@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-affine-reflection-identities-and-local-finiteness.md

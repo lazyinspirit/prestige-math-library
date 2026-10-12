@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hilbert-90-and-pythagorean-triples.md

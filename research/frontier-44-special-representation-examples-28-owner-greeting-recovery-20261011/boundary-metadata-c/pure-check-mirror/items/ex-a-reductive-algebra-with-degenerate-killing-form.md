@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-reductive-algebra-with-degenerate-killing-form.md

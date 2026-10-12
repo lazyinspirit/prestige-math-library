@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-cayley-hamilton-recurrences-for-matrix-powers.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-vector-valued-ftc-and-lipschitz-bound.md

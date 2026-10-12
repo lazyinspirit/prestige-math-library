@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-highest-weight-fock-submodule-has-the-qg-global-bases.md

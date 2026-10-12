@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gaussian-decay-gives-an-entire-fourier-laplace-transform.md

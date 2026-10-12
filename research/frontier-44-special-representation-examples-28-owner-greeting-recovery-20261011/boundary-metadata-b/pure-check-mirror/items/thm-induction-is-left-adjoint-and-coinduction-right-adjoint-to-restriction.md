@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction.md

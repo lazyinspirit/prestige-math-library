@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-transversality-is-stable-on-a-compact-source.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range.md

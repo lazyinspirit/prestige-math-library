@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-polynomial-module-is-finitely-generated-torsion-with-minimal-annihilator.md

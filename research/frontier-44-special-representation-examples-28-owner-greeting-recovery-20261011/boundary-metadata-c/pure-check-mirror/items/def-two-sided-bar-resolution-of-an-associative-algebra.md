@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-two-sided-bar-resolution-of-an-associative-algebra.md

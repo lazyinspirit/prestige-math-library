@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-generic-sl2-block-is-semisimple.md

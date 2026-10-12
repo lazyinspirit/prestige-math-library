@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-a1-specialization-of-weyl-kac.md

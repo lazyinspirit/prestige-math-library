@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-length-energy-inequality-and-constant-speed-equality-case.md

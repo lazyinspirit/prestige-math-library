@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ga-torsors-over-affine-schemes-are-trivial.md

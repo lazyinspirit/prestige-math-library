@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space.md

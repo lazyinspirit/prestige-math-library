@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-each-artin-atom-divides-delta-on-both-sides.md

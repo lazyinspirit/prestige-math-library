@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-minimal-polynomial-is-well-defined-and-controls-annihilators.md

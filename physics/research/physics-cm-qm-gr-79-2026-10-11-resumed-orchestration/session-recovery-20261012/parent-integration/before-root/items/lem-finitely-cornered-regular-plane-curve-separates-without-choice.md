@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finitely-cornered-regular-plane-curve-separates-without-choice.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-quasi-isomorphism-detected-by-an-acyclic-cone.md

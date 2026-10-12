@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-very-ample-invertible-sheaf-relative.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-many-one-reductions-transfer-decidability-and-recognizability.md

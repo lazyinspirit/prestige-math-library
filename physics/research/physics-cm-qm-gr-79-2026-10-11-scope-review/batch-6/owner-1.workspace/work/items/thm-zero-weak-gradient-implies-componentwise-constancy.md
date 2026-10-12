@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-weak-gradient-implies-componentwise-constancy.md

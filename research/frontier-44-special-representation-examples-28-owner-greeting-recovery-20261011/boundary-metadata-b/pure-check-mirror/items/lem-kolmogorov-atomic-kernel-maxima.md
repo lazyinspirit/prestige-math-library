@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-kolmogorov-atomic-kernel-maxima.md

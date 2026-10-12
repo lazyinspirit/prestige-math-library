@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-wiener-lemma-for-absolutely-convergent-fourier-series.md

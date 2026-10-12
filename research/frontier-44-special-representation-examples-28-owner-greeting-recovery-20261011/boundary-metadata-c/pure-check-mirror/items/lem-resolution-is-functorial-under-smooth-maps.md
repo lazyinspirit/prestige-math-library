@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-resolution-is-functorial-under-smooth-maps.md

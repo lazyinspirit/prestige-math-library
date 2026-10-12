@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-spectrum-compactness-open-cover-to-unit-ideal.md

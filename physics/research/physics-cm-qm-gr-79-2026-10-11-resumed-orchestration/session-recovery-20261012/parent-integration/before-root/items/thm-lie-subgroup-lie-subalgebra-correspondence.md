@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lie-subgroup-lie-subalgebra-correspondence.md

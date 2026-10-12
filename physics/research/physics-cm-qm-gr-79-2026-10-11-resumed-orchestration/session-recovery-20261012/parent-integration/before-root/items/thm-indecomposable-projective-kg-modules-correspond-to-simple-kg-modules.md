@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-indecomposable-projective-kg-modules-correspond-to-simple-kg-modules.md

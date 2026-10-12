@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-elements-form-a-dense-zariski-open-subset-of-a-cartan-subalgebra.md

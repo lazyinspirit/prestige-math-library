@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-canonical-coordinates-for-a-hyperbolic-equation.md

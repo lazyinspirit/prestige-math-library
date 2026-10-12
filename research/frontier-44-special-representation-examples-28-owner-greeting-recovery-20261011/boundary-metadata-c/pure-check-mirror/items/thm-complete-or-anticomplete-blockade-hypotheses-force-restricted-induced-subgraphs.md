@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-complete-or-anticomplete-blockade-hypotheses-force-restricted-induced-subgraphs.md

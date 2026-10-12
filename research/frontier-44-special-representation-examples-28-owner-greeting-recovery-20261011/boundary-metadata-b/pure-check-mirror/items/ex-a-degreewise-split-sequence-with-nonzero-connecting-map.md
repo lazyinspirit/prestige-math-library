@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-degreewise-split-sequence-with-nonzero-connecting-map.md

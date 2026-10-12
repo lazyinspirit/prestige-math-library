@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two.md

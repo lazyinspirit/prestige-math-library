@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-cycle-graph-fails-finite-type-positive-definiteness.md

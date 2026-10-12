@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-singular-cohomology-satisfies-the-eilenberg-steenrod-cohomology-axioms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-null-cobordant-cycle-has-zero-intersection-with-a-disjoint-boundary.md

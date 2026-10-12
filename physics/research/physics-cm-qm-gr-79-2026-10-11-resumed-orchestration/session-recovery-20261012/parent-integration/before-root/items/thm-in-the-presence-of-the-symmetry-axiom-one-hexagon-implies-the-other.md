@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-in-the-presence-of-the-symmetry-axiom-one-hexagon-implies-the-other.md

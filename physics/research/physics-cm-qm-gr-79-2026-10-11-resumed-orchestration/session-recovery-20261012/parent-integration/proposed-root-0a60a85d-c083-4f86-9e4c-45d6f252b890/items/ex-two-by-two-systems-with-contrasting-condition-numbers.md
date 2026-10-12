@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-by-two-systems-with-contrasting-condition-numbers.md

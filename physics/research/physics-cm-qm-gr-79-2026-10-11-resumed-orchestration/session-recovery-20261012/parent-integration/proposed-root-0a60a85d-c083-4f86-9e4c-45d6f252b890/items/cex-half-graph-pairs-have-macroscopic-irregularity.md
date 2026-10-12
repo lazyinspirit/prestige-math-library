@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-half-graph-pairs-have-macroscopic-irregularity.md

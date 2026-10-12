@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-degenerate-surface-parametrization-collapses-to-a-curve.md

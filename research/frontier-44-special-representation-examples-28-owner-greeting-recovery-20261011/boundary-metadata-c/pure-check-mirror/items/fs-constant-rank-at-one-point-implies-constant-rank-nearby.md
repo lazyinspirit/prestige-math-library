@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-constant-rank-at-one-point-implies-constant-rank-nearby.md

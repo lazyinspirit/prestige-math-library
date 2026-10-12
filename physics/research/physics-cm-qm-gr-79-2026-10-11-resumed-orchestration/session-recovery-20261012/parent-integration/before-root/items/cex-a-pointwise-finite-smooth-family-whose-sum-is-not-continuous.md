@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-pointwise-finite-smooth-family-whose-sum-is-not-continuous.md

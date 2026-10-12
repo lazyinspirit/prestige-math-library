@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quotient-graph-of-groups-from-a-tree-action.md

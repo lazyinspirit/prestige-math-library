@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-u-split-pair-is-a-split-pair-in-the-domain.md

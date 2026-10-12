@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-weak-parabolic-projection-and-cover-joins.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-hereditarily-finite-sets-are-v-omega.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-frobenius-divisibility-gives-d-omega-equals-eta-wedge-omega.md

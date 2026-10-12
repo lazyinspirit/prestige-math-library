@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-intersection-of-the-empty-family-is-the-empty-set.md

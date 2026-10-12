@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-four-tooth-comb-with-an-external-complete-vertex.md

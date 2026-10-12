@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-complex-is-zero-in-the-derived-category-exactly-when-it-is-acyclic.md

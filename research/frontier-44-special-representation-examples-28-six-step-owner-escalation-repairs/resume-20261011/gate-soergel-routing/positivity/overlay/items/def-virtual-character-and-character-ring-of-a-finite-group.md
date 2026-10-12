@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-virtual-character-and-character-ring-of-a-finite-group.md

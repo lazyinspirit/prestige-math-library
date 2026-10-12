@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-monoid-object-in-the-endofunctor-category-is-the-definition-of-a-monad.md

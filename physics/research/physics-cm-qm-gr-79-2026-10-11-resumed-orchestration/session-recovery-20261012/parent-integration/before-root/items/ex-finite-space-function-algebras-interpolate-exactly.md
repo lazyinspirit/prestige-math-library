@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-space-function-algebras-interpolate-exactly.md

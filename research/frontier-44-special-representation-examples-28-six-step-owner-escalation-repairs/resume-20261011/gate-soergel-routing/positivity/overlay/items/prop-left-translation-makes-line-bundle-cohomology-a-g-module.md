@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-left-translation-makes-line-bundle-cohomology-a-g-module.md

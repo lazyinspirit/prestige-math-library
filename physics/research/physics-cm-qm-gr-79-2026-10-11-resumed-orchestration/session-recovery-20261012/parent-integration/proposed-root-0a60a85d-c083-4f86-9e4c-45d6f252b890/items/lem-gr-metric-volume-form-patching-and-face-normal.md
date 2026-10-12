@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-metric-volume-form-patching-and-face-normal.md

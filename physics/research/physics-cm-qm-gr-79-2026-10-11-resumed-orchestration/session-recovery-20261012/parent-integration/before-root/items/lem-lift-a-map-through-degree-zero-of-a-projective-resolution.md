@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lift-a-map-through-degree-zero-of-a-projective-resolution.md

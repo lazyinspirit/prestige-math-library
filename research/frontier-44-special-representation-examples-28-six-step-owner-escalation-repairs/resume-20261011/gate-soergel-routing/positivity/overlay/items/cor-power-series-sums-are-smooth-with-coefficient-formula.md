@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-power-series-sums-are-smooth-with-coefficient-formula.md

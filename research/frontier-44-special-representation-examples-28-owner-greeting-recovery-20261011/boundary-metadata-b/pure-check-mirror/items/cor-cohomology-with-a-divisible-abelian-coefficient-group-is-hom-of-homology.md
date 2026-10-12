@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-cohomology-with-a-divisible-abelian-coefficient-group-is-hom-of-homology.md

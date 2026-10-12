@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-line-bundle-associated-to-a-divisor.md

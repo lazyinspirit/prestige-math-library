@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hyperbola-is-multiplicative-group-variety.md

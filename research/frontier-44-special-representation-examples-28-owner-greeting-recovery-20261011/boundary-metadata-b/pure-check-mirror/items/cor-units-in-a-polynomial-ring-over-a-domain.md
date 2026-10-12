@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-units-in-a-polynomial-ring-over-a-domain.md

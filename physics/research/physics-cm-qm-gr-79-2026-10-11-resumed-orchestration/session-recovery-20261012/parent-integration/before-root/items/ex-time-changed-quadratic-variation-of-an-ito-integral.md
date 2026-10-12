@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-time-changed-quadratic-variation-of-an-ito-integral.md

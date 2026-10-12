@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nondegenerate-critical-points-are-isolated.md

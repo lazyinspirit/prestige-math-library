@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-transgression-kernel-is-the-image-of-restriction.md

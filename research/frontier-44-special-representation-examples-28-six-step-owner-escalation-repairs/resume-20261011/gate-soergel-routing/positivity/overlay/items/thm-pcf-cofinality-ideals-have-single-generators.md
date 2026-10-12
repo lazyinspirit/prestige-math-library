@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-pcf-cofinality-ideals-have-single-generators.md

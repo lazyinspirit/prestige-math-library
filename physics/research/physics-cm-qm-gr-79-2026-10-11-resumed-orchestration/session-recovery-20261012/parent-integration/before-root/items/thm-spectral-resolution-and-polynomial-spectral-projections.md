@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-spectral-resolution-and-polynomial-spectral-projections.md

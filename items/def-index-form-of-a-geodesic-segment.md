@@ -106,46 +106,13 @@ by [[thm-additivity-over-subintervals]].
 **Proof technique:** verify the finite-piece definition, bilinearity, symmetry,
 and the fixed-endpoint Hessian interpretation.
 
-1.1 The piecewise integrand is Riemann integrable on each common subdivision piece, and the finite sum is partition-independent. [F2, F3, F5, F7]
-$D_tV$ and $D_tW$ have continuous
-one-sided extensions by [F2], and the curvature expression is continuous there
-by [F3]. Thus each scalar integrand is Riemann integrable by [F5]. The sum is
-finite. If the subdivision is refined, [F7] leaves each piece's integral
-unchanged; the union of two finite breakpoint sets is a finite common
-refinement, so any two choices give the same sum. The expression is therefore
-well-defined.
+1.1 The piecewise integrand is Riemann integrable on each common subdivision piece, and the finite sum is partition-independent. [F2, F3, F5, F7] $D_tV$ and $D_tW$ have continuous one-sided extensions by [F2], and the curvature expression is continuous there by [F3]. Thus each scalar integrand is Riemann integrable by [F5]. The sum is finite. If the subdivision is refined, [F7] leaves each piece's integral unchanged; the union of two finite breakpoint sets is a finite common refinement, so any two choices give the same sum. The expression is therefore well-defined. [F2, F3, F5, F7]
 
-1.2 The displayed form is bilinear in its two vector-field inputs. [F2, F3, F6]
-Covariant differentiation and curvature are linear in the field slots by
-[F2] and [F3], and $g$ is bilinear. Hence the displayed integrand is bilinear
-in $(V,W)$ on every piece. Applying [F6] to its finite integrals and summing
-proves that $I_\gamma$ is bilinear.
+1.2 The displayed form is bilinear in its two vector-field inputs. [F2, F3, F6] Covariant differentiation and curvature are linear in the field slots by [F2] and [F3], and $g$ is bilinear. Hence the displayed integrand is bilinear in $(V,W)$ on every piece. Applying [F6] to its finite integrals and summing proves that $I_\gamma$ is bilinear. [F2, F3, F6]
 
-1.3 Curvature pair symmetry and symmetry of $g$ make the full form symmetric. [F3, F4]
-For every $t$ on each piece, [F3] and the pair interchange and pair skews
-in [F4] give
-$$g(R(V,\dot\gamma)\dot\gamma,W)=\operatorname{Rm}(V,\dot\gamma,\dot\gamma,W)=\operatorname{Rm}(W,\dot\gamma,\dot\gamma,V)=g(R(W,\dot\gamma)\dot\gamma,V).$$
-The derivative-product term is symmetric because $g$ is symmetric. Integrating
-these pointwise equalities proves $I_\gamma(V,W)=I_\gamma(W,V)$. Endpoint
-evaluation is linear, so $\mathcal X_0(\gamma)$ is a vector subspace and the
-restriction remains symmetric bilinear.
+1.3 Curvature pair symmetry and symmetry of $g$ make the full form symmetric. [F3, F4] For every $t$ on each piece, [F3] and the pair interchange and pair skews in [F4] give $$g(R(V,\dot\gamma)\dot\gamma,W)=\operatorname{Rm}(V,\dot\gamma,\dot\gamma,W)=\operatorname{Rm}(W,\dot\gamma,\dot\gamma,V)=g(R(W,\dot\gamma)\dot\gamma,V).$$ The derivative-product term is symmetric because $g$ is symmetric. Integrating these pointwise equalities proves $I_\gamma(V,W)=I_\gamma(W,V)$. Endpoint evaluation is linear, so $\mathcal X_0(\gamma)$ is a vector subspace and the restriction remains symmetric bilinear. [F3, F4]
 
-2.1 For each fixed-endpoint two-parameter variation with central $\gamma$, its mixed energy derivative equals the index form. [F1, step 1.1, step 1.2, step 1.3]
-If a two-parameter variation fixes both endpoints, its variation fields
-vanish at $a$ and $b$. In [F1] the mixed endpoint acceleration therefore
-vanishes, leaving exactly the integral that defines $I_\gamma(V,W)$; this
-proves the stated fixed-endpoint energy-Hessian interpretation for the
-variation fields in question.
+2.1 For each fixed-endpoint two-parameter variation with central $\gamma$, its mixed energy derivative equals the index form. [F1, step 1.1, step 1.2, step 1.3] If a two-parameter variation fixes both endpoints, its variation fields vanish at $a$ and $b$. In [F1] the mixed endpoint acceleration therefore vanishes, leaving exactly the integral that defines $I_\gamma(V,W)$; this proves the stated fixed-endpoint energy-Hessian interpretation for the variation fields in question. [F1, step 1.1, step 1.2, step 1.3]
 
-3.1 The interval, endpoint, empty, dimension, constant-curve, zero-field and choice cases are as follows. [A1, F2, F4, step 1.1, step 1.2, step 1.3, step 2.1]
-The condition $a<b$ excludes the singleton interval, where $D_t$ is not
-defined. At included endpoints the stipulated one-sided derivatives apply.
-If $M$ is empty, no given geodesic exists; in dimension zero all fields and
-the form are zero. In dimension one the curvature term vanishes by
-first-pair skewness in [F4]. A constant geodesic has $\dot\gamma=0$, so its
-curvature term is zero while $D_tV$ and the derivative-product integral may
-remain nonzero. If either field is zero, bilinearity makes the form zero.
-Assumption [A1] is used only for the curvature symmetry in step 1.3; the finite
-refinement and integral operations use no choice. This is a definition and
-identity, not an iff claim.
-$\square$
+3.1 The interval, endpoint, empty, dimension, constant-curve, zero-field and choice cases are as follows. [A1, F2, F4, step 1.1, step 1.2, step 1.3, step 2.1] The condition $a<b$ excludes the singleton interval, where $D_t$ is not defined. At included endpoints the stipulated one-sided derivatives apply. If $M$ is empty, no given geodesic exists; in dimension zero all fields and the form are zero. In dimension one the curvature term vanishes by first-pair skewness in [F4]. A constant geodesic has $\dot\gamma=0$, so its curvature term is zero while $D_tV$ and the derivative-product integral may remain nonzero. If either field is zero, bilinearity makes the form zero. Assumption [A1] is used only for the curvature symmetry in step 1.3; the finite refinement and integral operations use no choice. This is a definition and identity, not an iff claim. $\square$. [A1, F2, F4, step 1.1, step 1.2, step 1.3, step 2.1]
+

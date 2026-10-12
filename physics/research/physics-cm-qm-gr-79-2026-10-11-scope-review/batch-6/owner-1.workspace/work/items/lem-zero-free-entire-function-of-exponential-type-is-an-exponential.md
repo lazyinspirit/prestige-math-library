@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-free-entire-function-of-exponential-type-is-an-exponential.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schurs-lemma-for-pointwise-constant-sectional-curvature.md

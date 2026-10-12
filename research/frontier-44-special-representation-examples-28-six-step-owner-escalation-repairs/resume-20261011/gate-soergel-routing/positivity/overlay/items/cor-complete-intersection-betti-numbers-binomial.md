@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-complete-intersection-betti-numbers-binomial.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-veronese-linear-system-on-the-riemann-sphere.md

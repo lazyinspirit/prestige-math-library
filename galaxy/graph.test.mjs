@@ -51,21 +51,21 @@ test('published census, aliases, multiple categories, missing metadata, and live
   const root = await mkdtemp(join(tmpdir(), 'galaxy-test-'));
   try {
     await mkdir(join(root, 'items'));
-    for (const category of ['foundations', 'test-category']) await mkdir(join(root, 'library', category), { recursive: true });
+    for (const category of ['set-theory', 'test-category']) await mkdir(join(root, 'library', category), { recursive: true });
     const put = (path, fm) => writeFile(join(root, path), `---\n${JSON.stringify(fm)}\n---\n`);
     await put('items/def-a.md', { id: 'def-a', status: 'published', kind: 'definition', aliases: ['old-a'], deps: [] });
     await put('items/thm-b.md', { id: 'thm-b', status: 'published', kind: 'theorem', deps: ['old-a', 'old-a', 'draft'], forward_refs: ['orphan'] });
     await put('items/orphan.md', { id: 'orphan', status: 'published', kind: 'remark' });
     await put('items/draft.md', { id: 'draft', status: 'draft', deps: [] });
-    await put('library/foundations/_category.md', { title: 'Set Theory' });
-    await put('library/foundations/a.md', { status: 'published', items: ['def-a', 'thm-b'] });
+    await put('library/set-theory/_category.md', { title: 'Set Theory' });
+    await put('library/set-theory/a.md', { status: 'published', items: ['def-a', 'thm-b'] });
     await put('library/test-category/b.md', { status: 'published', examples: ['thm-b'] });
     await writeFile(join(root, 'library/test-category/in-progress.md'), 'Incomplete draft');
     const graph = await loadGraph(root);
     assert.equal(graph.nodes.length, 3);
     assert.equal(graph.edges.length, 1);
     assert.deepEqual(graph.unresolved, [{ item: 'thm-b', dependency: 'draft' }]);
-    assert.deepEqual(graph.nodes.find(n => n.id === 'thm-b').categories, ['foundations', 'test-category']);
+    assert.deepEqual(graph.nodes.find(n => n.id === 'thm-b').categories, ['set-theory', 'test-category']);
     assert.ok(graph.categories.some(c => c.title === 'Test Category'));
     assert.deepEqual(graph.nodes.find(n => n.id === 'orphan').categories, ['unassigned']);
     const live = await loadGraph(root, new Set(['def-a', 'thm-b']));
@@ -76,8 +76,8 @@ test('published census, aliases, multiple categories, missing metadata, and live
 
 test('3D scene has finite geometry, real thickness and a central Set Theory bulge', async () => {
   const { layoutItems, createEnvironment } = await import('./galaxy-model.mjs');
-  const nodes = Array.from({ length: 300 }, (_, i) => ({ kind: 'definition', categories: [i < 100 ? 'foundations' : 'algebra'] }));
-  const vertices = layoutItems(nodes, [{ id: 'foundations' }, { id: 'algebra' }], nodes.map(() => []));
+  const nodes = Array.from({ length: 300 }, (_, i) => ({ kind: 'definition', categories: [i < 100 ? 'set-theory' : 'algebra'] }));
+  const vertices = layoutItems(nodes, [{ id: 'set-theory' }, { id: 'algebra' }], nodes.map(() => []));
   assert.ok(vertices.every(Number.isFinite));
   assert.ok(nodes.slice(0, 100).every(n => Math.hypot(n.x, n.y) <= .19));
   assert.ok(nodes.some(n => n.z > .02) && nodes.some(n => n.z < -.02));

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-negative-gradient-lines-for-a-quadratic-morse-function.md

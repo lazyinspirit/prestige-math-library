@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-poincare-primitive-near-a-submanifold.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-constant-query-exponential-pcp-for-quadratic-equations.md

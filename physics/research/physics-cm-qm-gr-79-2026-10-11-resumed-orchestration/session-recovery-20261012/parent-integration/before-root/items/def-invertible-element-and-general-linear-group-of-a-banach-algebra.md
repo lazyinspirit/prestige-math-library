@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-invertible-element-and-general-linear-group-of-a-banach-algebra.md

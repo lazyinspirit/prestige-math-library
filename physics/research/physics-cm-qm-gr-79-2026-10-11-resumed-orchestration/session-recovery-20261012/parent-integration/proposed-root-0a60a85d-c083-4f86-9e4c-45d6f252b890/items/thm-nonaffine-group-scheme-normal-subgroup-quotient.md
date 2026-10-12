@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonaffine-group-scheme-normal-subgroup-quotient.md

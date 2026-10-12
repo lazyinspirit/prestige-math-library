@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-n-is-simple-for-all-n-at-least-four.md

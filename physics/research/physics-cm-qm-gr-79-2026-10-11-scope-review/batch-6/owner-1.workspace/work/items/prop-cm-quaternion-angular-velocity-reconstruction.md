@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-quaternion-angular-velocity-reconstruction.md

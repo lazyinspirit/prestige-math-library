@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-fibonacci-generating-function-and-binet-formula.md

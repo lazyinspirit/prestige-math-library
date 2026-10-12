@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-euler-lagrange-stationarity-does-not-imply-a-minimum.md

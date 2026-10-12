@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner.md

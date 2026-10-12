@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-normalised-mean-zero-hone-atom.md

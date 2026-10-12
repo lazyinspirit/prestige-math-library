@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hereditary-size-exhausts-the-universe-under-choice.md

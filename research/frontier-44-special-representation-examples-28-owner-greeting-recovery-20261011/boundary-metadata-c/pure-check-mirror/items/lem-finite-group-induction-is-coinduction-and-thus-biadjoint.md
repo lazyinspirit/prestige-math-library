@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-group-induction-is-coinduction-and-thus-biadjoint.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-cross-product-from-hodge-star-and-wedge.md

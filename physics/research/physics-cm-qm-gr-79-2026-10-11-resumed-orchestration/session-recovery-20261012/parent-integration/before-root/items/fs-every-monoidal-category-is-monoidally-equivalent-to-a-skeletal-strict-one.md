@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-monoidal-category-is-monoidally-equivalent-to-a-skeletal-strict-one.md

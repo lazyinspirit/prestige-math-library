@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gm-on-projective-line-with-two-linearizations.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-disc-monomial-bergman-basis-and-reproducing-check.md

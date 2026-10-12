@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polynomial-extension-of-cohen-macaulay-rings.md

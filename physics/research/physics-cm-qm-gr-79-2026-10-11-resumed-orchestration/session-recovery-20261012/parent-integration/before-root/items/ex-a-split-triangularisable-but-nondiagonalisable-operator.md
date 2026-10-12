@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-split-triangularisable-but-nondiagonalisable-operator.md

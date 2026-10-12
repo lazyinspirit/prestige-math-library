@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-times-dirichlet-has-a-limit-only-at-zero.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-disk-map-can-be-put-in-generic-position-rel-boundary.md

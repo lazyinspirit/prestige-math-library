@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-boundary-defining-functions-exist-locally-and-detect-inward-vectors.md

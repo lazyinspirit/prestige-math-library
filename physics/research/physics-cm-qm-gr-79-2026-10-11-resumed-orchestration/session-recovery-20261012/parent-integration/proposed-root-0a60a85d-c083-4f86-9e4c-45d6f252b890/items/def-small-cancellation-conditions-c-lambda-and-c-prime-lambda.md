@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-small-cancellation-conditions-c-lambda-and-c-prime-lambda.md

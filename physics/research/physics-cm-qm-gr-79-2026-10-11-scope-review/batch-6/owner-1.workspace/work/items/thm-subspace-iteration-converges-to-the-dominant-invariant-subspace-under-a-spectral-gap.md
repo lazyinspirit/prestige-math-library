@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap.md

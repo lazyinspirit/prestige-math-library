@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-stage-capture-in-finite-support-iterations.md

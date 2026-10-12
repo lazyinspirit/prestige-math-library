@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quotient-and-lifting-regularity-across-a-regular-element.md

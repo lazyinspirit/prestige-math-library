@@ -40,8 +40,6 @@ $$\sigma(f)=\{\varnothing,\ X,\ A,\ X \setminus A\}.$$
 
 **Proof technique:** direct.
 
-1.1 Because $f$ takes only the two values $\alpha$ and $\beta$, every preimage [L1, given]
-$f^{-1}(B)$ is one of $\varnothing$, $X$, $A$, or $X \setminus A$. So $\sigma(f)$ is contained in that four-set family. [L1, given]
+1.1 Because $f$ takes only the two values $\alpha$ and $\beta$, every preimage [L1, given] $f^{-1}(B)$ is one of $\varnothing$, $X$, $A$, or $X \setminus A$. So $\sigma(f)$ is contained in that four-set family. [L1, given]
 
-2.1 Since $\alpha \ne \beta$, choose a real threshold strictly between them. The [step 1.1, L1]
-corresponding open ray has preimage $A$ or $X \setminus A$, and the other three sets arise as in the previous example from $\mathbb{R}$ and $\varnothing$. Hence all four sets belong to $\sigma(f)$, so they are exactly its members. [step 1.1, L1] ∎
+2.1 Since $\alpha \ne \beta$, choose a real threshold strictly between them. The [step 1.1, L1] corresponding open ray has preimage $A$ or $X \setminus A$, and the other three sets arise as in the previous example from $\mathbb{R}$ and $\varnothing$. Hence all four sets belong to $\sigma(f)$, so they are exactly its members. [step 1.1, L1] ∎ 

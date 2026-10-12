@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-polynomial-representation-of-a-klr-algebra.md

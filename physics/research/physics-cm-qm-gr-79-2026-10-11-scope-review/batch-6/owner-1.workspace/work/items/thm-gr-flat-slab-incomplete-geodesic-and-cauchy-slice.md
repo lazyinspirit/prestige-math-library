@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice.md

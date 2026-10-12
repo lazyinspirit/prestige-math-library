@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-split-short-exact-sequence-admits-the-direct-sum-resolution.md

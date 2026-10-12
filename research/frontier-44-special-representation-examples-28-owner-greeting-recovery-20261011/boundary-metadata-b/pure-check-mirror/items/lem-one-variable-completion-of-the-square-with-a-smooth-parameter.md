@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-one-variable-completion-of-the-square-with-a-smooth-parameter.md

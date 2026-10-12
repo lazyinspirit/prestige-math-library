@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-vector-field-is-symplectic-iff-iota-x-omega-is-closed.md

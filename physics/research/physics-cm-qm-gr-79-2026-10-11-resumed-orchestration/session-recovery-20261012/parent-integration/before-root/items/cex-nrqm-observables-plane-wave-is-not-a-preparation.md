@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-observables-plane-wave-is-not-a-preparation.md

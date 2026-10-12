@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-lax-strong-and-strict-monoidal-functor.md

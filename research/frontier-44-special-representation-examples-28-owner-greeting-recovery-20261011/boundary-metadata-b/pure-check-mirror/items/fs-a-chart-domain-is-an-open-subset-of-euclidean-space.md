@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-chart-domain-is-an-open-subset-of-euclidean-space.md

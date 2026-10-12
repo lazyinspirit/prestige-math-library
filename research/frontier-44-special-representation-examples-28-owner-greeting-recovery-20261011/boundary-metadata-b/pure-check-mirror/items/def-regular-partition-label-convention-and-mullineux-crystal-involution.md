@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-regular-partition-label-convention-and-mullineux-crystal-involution.md

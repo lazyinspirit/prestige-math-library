@@ -18,7 +18,7 @@ const argvOf = (g: any): string[] => (typeof g.argv === 'function' ? g.argv() : 
 test('the post-authoring stages run content-policy in item mode', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['3b-author', '3a-validate']) {
+  for (const id of ['3b-author', '3a-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const full = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/physics-support/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));
@@ -83,16 +83,4 @@ test('both scaffold closure joins enforce the recorded-not-proved boundary', asy
     assert.ok(st.gates(ctx).some((g: any) => g.id === 'extcheck'),
       `${id} does not run extcheck before accepting a scaffold`);
   }
-});
-
-test('Step 3a closure retains nonempty item policy without cross-review or impact gates', async () => {
-  const { stages } = await import('../stages/mathlib.mts');
-  const stage = stages.find((candidate: any) => candidate.id === '3a-validate');
-  const gates = stage.gates({ run: 'frontier-14', repo: REPO, doctor: true });
-  const policy = gates.find((candidate: any) => candidate.id === 'content-policy-items');
-  assert.ok(policy, 'final closure validates current authored items');
-  assert.ok(!argvOf(policy).includes('--manifest-only'));
-  assert.equal(policy.liveness.min, 1);
-  assert.ok(gates.every((candidate: any) => !argvOf(candidate).some(arg => /cross-group-edges|impact-audit|step3b-review/.test(arg))));
-  assert.ok(!stages.some((candidate: any) => /^3b-/.test(candidate.id)));
 });

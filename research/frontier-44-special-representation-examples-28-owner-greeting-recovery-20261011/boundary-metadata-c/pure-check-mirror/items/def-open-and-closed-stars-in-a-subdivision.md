@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-open-and-closed-stars-in-a-subdivision.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-ambient-partitions-for-euclidean-boundary-integration.md

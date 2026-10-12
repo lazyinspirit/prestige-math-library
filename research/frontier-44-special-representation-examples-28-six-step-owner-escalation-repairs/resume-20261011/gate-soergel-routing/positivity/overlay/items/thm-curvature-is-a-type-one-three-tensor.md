@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-curvature-is-a-type-one-three-tensor.md

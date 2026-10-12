@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-first-hurewicz-after-killing-lower-torsion-homotopy.md

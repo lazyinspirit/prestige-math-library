@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-degenerate-specht-decomposition-numbers-are-canonical-basis-coefficients-at-one.md

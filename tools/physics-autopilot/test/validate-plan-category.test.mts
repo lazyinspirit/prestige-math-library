@@ -101,16 +101,16 @@ test('a quoted page id is the same home as its unquoted plan id', () => {
   const repo = mkdtempSync(join(tmpdir(), 'validate-plan-quoted-home-'));
   mkdirSync(join(repo, 'research'), { recursive: true });
   mkdirSync(join(repo, 'items'), { recursive: true });
-  mkdirSync(join(repo, 'library', 'foundations'), { recursive: true });
+  mkdirSync(join(repo, 'library', 'set-theory'), { recursive: true });
   writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
-    { order: 1, id: 'page-a', title: 'A', kind: 'A', category: 'foundations',
+    { order: 1, id: 'page-a', title: 'A', kind: 'A', category: 'set-theory',
       companion: 'page-a-examples', requires: [],
       items: [{ id: 'lem-already-authored', kind: 'lemma', deps: [] }] },
-    { order: 2, id: 'page-a-examples', title: 'B', kind: 'B', category: 'foundations',
+    { order: 2, id: 'page-a-examples', title: 'B', kind: 'B', category: 'set-theory',
       companion: 'page-a', requires: ['page-a'], items: [] },
   ] }, null, 2));
   writeFileSync(join(repo, 'items', 'lem-already-authored.md'), '---\nid: lem-already-authored\nstatus: published\n---\n');
-  writeFileSync(join(repo, 'library', 'foundations', 'page-a.md'),
+  writeFileSync(join(repo, 'library', 'set-theory', 'page-a.md'),
     '---\npage: "page-a"\nstatus: published\nitems: [lem-already-authored]\n---\n');
   const result = run(repo);
   assert.equal(result.status, 0, result.stdout + result.stderr);
@@ -129,12 +129,12 @@ test('foundations pages cannot require the Set Theory deferred catalogue', () =>
     },
     {
       order: 2, id: 'set-foundation', title: 'Set foundation', kind: 'A',
-      category: 'foundations', companion: 'set-foundation-examples',
+      category: 'set-theory', companion: 'set-foundation-examples',
       requires: ['deferred-set-theory-beyond-choice'], items: [],
     },
     {
       order: 3, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
-      category: 'foundations', companion: 'set-foundation',
+      category: 'set-theory', companion: 'set-foundation',
       requires: ['set-foundation'], items: [],
     },
   ] }, null, 2));
@@ -165,12 +165,12 @@ test('foundations plans cannot hide a dependency on a deferred Set Theory item',
   writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
     {
       order: 1, id: 'set-foundation', title: 'Set foundation', kind: 'A',
-      category: 'foundations', companion: 'set-foundation-examples', requires: [],
+      category: 'set-theory', companion: 'set-foundation-examples', requires: [],
       items: [{ id: 'thm-consumer', kind: 'theorem', deps: ['lem-existing-middle'] }],
     },
     {
       order: 2, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
-      category: 'foundations', companion: 'set-foundation',
+      category: 'set-theory', companion: 'set-foundation',
       requires: ['set-foundation'], items: [],
     },
   ] }, null, 2));
@@ -210,12 +210,12 @@ test('foundations plans inspect actual items on inherited P pages', () => {
     },
     {
       order: 2, id: 'set-foundation', title: 'Set foundation', kind: 'A',
-      category: 'foundations', companion: 'set-foundation-examples',
+      category: 'set-theory', companion: 'set-foundation-examples',
       requires: ['published-supplier'], items: [],
     },
     {
       order: 3, id: 'set-foundation-examples', title: 'Examples', kind: 'B',
-      category: 'foundations', companion: 'set-foundation',
+      category: 'set-theory', companion: 'set-foundation',
       requires: ['set-foundation'], items: [],
     },
   ] }, null, 2));

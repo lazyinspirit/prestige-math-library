@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-internal-shift-endofunctors-and-tensor-compatibility.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bounded-linear-maps-commute-with-bochner-integration.md

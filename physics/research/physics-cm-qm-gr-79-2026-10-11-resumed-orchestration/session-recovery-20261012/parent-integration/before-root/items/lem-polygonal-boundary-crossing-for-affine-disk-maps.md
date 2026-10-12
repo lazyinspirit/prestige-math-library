@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polygonal-boundary-crossing-for-affine-disk-maps.md

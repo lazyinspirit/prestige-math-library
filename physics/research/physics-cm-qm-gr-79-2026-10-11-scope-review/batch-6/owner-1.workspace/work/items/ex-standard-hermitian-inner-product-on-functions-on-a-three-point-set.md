@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set.md

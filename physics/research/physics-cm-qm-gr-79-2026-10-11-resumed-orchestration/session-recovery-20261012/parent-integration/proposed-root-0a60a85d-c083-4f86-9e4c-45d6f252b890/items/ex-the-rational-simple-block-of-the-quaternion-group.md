@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-rational-simple-block-of-the-quaternion-group.md

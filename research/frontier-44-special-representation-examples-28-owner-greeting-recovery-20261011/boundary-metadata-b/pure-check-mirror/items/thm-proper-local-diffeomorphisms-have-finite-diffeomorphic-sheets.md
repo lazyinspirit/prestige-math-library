@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-local-diffeomorphisms-have-finite-diffeomorphic-sheets.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions.md

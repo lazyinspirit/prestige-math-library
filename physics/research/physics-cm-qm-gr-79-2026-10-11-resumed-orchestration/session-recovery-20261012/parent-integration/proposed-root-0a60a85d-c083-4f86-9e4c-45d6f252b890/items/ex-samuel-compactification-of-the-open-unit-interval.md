@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-samuel-compactification-of-the-open-unit-interval.md

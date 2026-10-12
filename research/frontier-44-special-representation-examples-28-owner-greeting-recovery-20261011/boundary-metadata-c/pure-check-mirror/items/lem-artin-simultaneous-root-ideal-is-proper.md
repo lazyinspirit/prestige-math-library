@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-artin-simultaneous-root-ideal-is-proper.md

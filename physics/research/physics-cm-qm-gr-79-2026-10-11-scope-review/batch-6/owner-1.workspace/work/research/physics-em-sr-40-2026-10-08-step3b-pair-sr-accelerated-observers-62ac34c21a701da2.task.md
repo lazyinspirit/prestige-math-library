@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-sr-accelerated-observers-62ac34c21a701da2.task.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-artin-affine-vanishing-for-constructible-perverse-sheaves.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-triangular-decomposition-from-a-chosen-positive-root-system.md

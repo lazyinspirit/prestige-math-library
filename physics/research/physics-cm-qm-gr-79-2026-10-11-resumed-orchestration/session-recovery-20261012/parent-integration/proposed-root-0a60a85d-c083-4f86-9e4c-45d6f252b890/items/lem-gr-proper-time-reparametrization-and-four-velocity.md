@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-proper-time-reparametrization-and-four-velocity.md

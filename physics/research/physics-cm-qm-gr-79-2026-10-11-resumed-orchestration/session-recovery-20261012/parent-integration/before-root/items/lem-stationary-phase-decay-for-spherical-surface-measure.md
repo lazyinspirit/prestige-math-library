@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stationary-phase-decay-for-spherical-surface-measure.md

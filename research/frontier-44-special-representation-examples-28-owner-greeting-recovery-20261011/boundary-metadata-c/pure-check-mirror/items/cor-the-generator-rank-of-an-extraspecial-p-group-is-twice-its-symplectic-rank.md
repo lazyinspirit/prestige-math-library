@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-generator-rank-of-an-extraspecial-p-group-is-twice-its-symplectic-rank.md

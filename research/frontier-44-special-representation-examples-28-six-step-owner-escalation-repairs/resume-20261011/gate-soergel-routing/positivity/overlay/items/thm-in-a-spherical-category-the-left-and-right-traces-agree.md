@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-in-a-spherical-category-the-left-and-right-traces-agree.md

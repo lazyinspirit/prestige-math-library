@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugacy-of-cyclically-reduced-words.md

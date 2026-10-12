@@ -46,7 +46,6 @@ Hence
 
 $$\int_{I_k}f\,d\lambda\le2^{(k+1)/2}2^{-k-1}=2^{-(k+1)/2}.$$
 
-
-2.1 The partial sums of the integrals over $\bigcup_{k<n}I_k=(2^{-n},1]$ are bounded by $\sum_{k<n}2^{-(k+1)/2}$. [step 1.1, L1, L3, L4]
+ 2.1 The partial sums of the integrals over $\bigcup_{k<n}I_k=(2^{-n},1]$ are bounded by $\sum_{k<n}2^{-(k+1)/2}$. [step 1.1, L1, L3, L4]
 
 That series converges by [L3]. Since $f\chi_{(2^{-n},1]}\uparrow f$, [L1] and [L4] give $\int_0^1x^{-1/2}\,d\lambda<+\infty$. The pointwise values $f(2^{-m})=2^{m/2}$ show that $f$ is unbounded. [step 1.1, L1, L3, L4] ∎

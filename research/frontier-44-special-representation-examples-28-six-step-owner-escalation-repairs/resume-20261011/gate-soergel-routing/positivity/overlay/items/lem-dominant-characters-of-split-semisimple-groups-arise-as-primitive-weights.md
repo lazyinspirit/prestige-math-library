@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dominant-characters-of-split-semisimple-groups-arise-as-primitive-weights.md

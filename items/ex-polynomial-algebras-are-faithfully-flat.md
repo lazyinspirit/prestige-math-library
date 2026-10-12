@@ -45,11 +45,8 @@ $I\subsetneq R$ is the proper ideal $IR[x]$.
 
 **Proof technique:** direct.
 
+ 1.1 As an $R$-module, $ R[x]=\bigoplus_{n\ge0} Rx^n, $ so it is free on the monomial basis. By [L1], it is flat over $R$. [L1, given]
 
-1.1 As an $R$-module, $ R[x]=\bigoplus_{n\ge0} Rx^n, $ so it is free on the monomial basis. By [L1], it is flat over $R$. [L1, given]
+ 1.2 If $I\subsetneq R$, then every polynomial in $IR[x]$ has all coefficients in $I$, so $1\notin IR[x]$. Thus $IR[x]$ is proper. By [L2], the map $R\to R[x]$ is faithfully flat. [L2, algebra]
 
-
-1.2 If $I\subsetneq R$, then every polynomial in $IR[x]$ has all coefficients in $I$, so $1\notin IR[x]$. Thus $IR[x]$ is proper. By [L2], the map $R\to R[x]$ is faithfully flat. [L2, algebra]
-
-
-2.1 Therefore polynomial algebras give basic faithfully flat examples. [algebra] ∎
+ 2.1 Therefore polynomial algebras give basic faithfully flat examples. [algebra] ∎ 

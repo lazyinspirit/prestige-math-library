@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ergodic-averages-are-well-defined-and-l-p-contractive.md

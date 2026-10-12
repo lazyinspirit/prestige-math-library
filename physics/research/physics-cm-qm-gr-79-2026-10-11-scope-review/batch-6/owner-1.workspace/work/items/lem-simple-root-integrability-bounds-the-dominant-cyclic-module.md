@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simple-root-integrability-bounds-the-dominant-cyclic-module.md

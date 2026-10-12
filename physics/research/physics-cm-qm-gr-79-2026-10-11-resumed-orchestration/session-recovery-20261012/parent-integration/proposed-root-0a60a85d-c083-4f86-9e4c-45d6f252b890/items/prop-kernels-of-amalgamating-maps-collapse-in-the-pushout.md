@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-kernels-of-amalgamating-maps-collapse-in-the-pushout.md

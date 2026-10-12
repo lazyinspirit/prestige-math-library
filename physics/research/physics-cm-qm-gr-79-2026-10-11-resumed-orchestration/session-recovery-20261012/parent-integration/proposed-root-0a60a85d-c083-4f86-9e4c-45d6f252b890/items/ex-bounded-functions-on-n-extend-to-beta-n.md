@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bounded-functions-on-n-extend-to-beta-n.md

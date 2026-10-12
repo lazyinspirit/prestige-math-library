@@ -41,8 +41,7 @@ has $|\nu|(E)=|\nu(E)|$.
 
 **Proof technique:** direct.
 
-1.1 By [L1], one has $\nu(E)=\delta_1(E)-\delta_{-1}(E)=1-1=0$, so [L1]
-$|\nu(E)|=0$.
+1.1 By [L1], one has $\nu(E)=\delta_1(E)-\delta_{-1}(E)=1-1=0$, so [L1] $|\nu(E)|=0$. [L1]
 
-2.1 The two singletons $\{1\}$ and $\{-1\}$ form a measurable partition of [L1, L2, step 1.1] ∎
-$E$, and [L1] gives $$|\nu(\{1\})|+|\nu(\{-1\})|=1+1=2.$$ Therefore [L2] yields $|\nu|(E)\ge2>0=|\nu(E)|$, refuting the claim.
+2.1 The two singletons $\{1\}$ and $\{-1\}$ form a measurable partition of [L1, L2, step 1.1] $E$, and [L1] gives $$|\nu(\{1\})|+|\nu(\{-1\})|=1+1=2.$$ Therefore [L2] yields $|\nu|(E)\ge2>0=|\nu(E)|$, refuting the claim. [L1, L2, step 1.1] ∎
+

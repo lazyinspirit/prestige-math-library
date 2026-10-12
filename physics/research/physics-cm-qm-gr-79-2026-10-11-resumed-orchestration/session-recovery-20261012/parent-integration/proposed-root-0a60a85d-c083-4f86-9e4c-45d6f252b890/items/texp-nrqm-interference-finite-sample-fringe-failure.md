@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/texp-nrqm-interference-finite-sample-fringe-failure.md

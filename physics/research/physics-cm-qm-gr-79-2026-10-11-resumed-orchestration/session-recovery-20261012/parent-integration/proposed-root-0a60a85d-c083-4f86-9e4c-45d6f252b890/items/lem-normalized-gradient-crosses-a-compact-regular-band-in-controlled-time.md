@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-gradient-crosses-a-compact-regular-band-in-controlled-time.md

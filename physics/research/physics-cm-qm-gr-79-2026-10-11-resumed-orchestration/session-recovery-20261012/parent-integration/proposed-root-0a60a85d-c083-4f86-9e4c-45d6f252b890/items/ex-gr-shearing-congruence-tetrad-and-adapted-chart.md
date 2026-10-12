@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-shearing-congruence-tetrad-and-adapted-chart.md

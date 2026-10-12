@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-elementary-jucys-murphy-class-sums-through-s4.md

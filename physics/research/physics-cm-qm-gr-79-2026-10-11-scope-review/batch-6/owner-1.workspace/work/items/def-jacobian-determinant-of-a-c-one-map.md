@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-jacobian-determinant-of-a-c-one-map.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-bundle-embedding-produces-its-grassmannian-classifying-map.md

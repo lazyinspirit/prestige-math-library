@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-no-general-positive-combinatorial-rule-for-kronecker-coefficients-is-known.md

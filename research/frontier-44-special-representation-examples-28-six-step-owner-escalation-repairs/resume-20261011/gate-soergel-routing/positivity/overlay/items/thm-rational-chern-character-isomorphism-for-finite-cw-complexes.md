@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-rational-chern-character-isomorphism-for-finite-cw-complexes.md

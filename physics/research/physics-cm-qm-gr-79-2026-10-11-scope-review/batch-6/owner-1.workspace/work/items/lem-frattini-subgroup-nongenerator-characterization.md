@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-frattini-subgroup-nongenerator-characterization.md

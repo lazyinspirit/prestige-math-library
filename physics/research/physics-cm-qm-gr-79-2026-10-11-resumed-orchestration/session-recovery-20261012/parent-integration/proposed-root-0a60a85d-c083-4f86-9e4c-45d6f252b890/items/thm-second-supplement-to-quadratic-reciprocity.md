@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-second-supplement-to-quadratic-reciprocity.md

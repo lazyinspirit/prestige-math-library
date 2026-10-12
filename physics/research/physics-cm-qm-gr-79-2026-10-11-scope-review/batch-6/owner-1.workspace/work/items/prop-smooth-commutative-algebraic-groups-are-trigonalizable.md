@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smooth-commutative-algebraic-groups-are-trigonalizable.md

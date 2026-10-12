@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-positive-square-root-of-a-compact-positive-operator.md

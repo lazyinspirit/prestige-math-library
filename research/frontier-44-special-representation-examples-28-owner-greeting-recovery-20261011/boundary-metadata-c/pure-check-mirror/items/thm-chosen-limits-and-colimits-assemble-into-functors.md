@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-chosen-limits-and-colimits-assemble-into-functors.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-diagonalisability-eigenspace-direct-sum-criterion.md

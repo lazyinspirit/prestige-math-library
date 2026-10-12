@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-identity-on-two-points-is-not-ergodic.md

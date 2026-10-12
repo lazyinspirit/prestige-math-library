@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-completed-product-sections-are-measurable-for-every-parameter.md

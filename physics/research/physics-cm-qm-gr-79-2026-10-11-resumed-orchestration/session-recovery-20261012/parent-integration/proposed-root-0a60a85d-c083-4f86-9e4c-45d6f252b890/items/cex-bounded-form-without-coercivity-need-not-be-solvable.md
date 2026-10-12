@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bounded-form-without-coercivity-need-not-be-solvable.md

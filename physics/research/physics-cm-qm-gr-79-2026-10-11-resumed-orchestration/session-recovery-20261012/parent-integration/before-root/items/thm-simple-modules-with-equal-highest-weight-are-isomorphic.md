@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simple-modules-with-equal-highest-weight-are-isomorphic.md

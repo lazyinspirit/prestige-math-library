@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-koszul-acyclicity-inductive-converse.md

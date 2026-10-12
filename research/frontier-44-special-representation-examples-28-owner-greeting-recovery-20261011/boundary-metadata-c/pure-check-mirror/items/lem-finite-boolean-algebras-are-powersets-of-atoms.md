@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-boolean-algebras-are-powersets-of-atoms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-prime-decomposition-in-q-zeta-twelve.md

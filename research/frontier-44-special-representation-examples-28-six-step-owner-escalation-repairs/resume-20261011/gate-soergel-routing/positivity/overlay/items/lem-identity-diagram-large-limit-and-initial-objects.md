@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-identity-diagram-large-limit-and-initial-objects.md

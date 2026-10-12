@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-w-two-p-dirichlet-estimate.md

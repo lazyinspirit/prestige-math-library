@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-homotopy-equivalent-spaces-are-homeomorphic.md

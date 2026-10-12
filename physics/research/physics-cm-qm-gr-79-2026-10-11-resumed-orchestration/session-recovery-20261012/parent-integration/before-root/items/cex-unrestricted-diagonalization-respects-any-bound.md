@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-unrestricted-diagonalization-respects-any-bound.md

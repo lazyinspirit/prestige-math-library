@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-noetherian-subspaces-and-compact-opens.md

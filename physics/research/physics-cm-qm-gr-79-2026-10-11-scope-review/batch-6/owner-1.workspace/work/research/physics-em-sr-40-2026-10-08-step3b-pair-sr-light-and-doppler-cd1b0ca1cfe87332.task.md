@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-sr-light-and-doppler-cd1b0ca1cfe87332.task.md

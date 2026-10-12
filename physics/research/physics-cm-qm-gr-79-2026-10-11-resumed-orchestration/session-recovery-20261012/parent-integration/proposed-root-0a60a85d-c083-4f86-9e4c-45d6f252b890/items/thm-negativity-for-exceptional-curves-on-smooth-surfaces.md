@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-negativity-for-exceptional-curves-on-smooth-surfaces.md

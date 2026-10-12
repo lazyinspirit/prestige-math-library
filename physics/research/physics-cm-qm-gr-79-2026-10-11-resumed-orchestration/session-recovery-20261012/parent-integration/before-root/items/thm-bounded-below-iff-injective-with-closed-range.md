@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bounded-below-iff-injective-with-closed-range.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-time-homogeneous-markov-chain-with-transition-kernel.md

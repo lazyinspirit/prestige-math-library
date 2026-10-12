@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-translation-to-and-from-a-wall-on-standard-modules.md

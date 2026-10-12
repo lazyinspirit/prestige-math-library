@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-simply-connected-proper-plane-domains-are-regular.md

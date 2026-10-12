@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sum-of-solvable-ideals-is-solvable.md

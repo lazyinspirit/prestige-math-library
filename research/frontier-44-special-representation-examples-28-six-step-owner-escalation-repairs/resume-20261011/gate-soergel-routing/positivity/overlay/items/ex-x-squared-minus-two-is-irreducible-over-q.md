@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-squared-minus-two-is-irreducible-over-q.md

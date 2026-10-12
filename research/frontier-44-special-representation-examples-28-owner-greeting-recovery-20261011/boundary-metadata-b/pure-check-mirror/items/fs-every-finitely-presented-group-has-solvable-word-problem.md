@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-finitely-presented-group-has-solvable-word-problem.md

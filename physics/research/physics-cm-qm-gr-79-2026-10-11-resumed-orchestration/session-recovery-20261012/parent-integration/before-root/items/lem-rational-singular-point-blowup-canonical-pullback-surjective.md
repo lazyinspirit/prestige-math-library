@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-singular-point-blowup-canonical-pullback-surjective.md

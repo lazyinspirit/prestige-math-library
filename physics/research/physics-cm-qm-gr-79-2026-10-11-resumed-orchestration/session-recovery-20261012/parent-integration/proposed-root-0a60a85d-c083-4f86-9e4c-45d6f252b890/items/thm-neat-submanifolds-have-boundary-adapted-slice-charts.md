@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-neat-submanifolds-have-boundary-adapted-slice-charts.md

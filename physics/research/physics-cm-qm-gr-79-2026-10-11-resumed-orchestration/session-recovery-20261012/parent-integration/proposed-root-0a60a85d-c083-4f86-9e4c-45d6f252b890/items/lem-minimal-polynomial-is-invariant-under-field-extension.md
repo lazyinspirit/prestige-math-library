@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimal-polynomial-is-invariant-under-field-extension.md

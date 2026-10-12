@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-strict-right-minima-of-a-quasiperiodic-partial-sum-function.md

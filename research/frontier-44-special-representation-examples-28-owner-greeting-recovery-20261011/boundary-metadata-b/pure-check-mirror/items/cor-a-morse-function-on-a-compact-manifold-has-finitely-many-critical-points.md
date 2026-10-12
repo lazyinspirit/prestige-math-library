@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-morse-function-on-a-compact-manifold-has-finitely-many-critical-points.md

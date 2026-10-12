@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space.md

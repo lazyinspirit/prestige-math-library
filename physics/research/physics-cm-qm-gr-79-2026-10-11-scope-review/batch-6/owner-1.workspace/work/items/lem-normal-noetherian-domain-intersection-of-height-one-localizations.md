@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-noetherian-domain-intersection-of-height-one-localizations.md

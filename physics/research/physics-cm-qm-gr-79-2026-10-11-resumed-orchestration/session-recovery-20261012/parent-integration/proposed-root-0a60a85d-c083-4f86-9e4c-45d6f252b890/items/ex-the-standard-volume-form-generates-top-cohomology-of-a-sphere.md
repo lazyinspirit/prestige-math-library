@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-standard-volume-form-generates-top-cohomology-of-a-sphere.md

@@ -97,7 +97,7 @@ test('authored page prerequisites supplement current manifest metadata', t => {
 test('TypeScript joins refresh the ledger without changing frozen judge stages', async () => {
   const { stages } = await import('../stages/mathlib.mts');
   const ctx = { run: 'r', repo: process.cwd() };
-  for (const id of ['3a-scope', '3b-author', '3a-validate', '5.9-repair']) {
+  for (const id of ['2-scope-review', '3a-adjudicate', '5.9-repair']) {
     const stage = stages.find((s: any) => s.id === id)!;
     assert.equal(stage.gates!(ctx as any)[0].id, 'frontier-dependency-ledger', id);
   }

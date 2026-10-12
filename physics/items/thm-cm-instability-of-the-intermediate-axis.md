@@ -1,0 +1,109 @@
+---
+id: thm-cm-instability-of-the-intermediate-axis
+kind: theorem
+title: "Instability of spin about the intermediate principal axis of the
+  torque-free top"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 6
+deps:
+  - def-maximal-ode-solution
+  - thm-existence-and-uniqueness-of-a-maximal-ode-solution
+  - thm-cm-euler-equations-and-torque-free-invariants
+  - cor-cm-principal-axes-of-the-inertia-matrix
+  - def-cm-equilibrium-and-lyapunov-stability
+  - cor-cm-finite-time-breakdown-requires-escape
+  - thm-picard-lindelof-local-existence-and-uniqueness
+  - def-locally-lipschitz-in-the-state-variable
+  - def-first-order-ode-initial-value-problem-and-solution
+  - def-cross-product-in-r3
+  - thm-cross-product-norm-is-the-two-vector-gram-determinant
+  - thm-algebra-of-derivatives
+  - thm-chain-rule
+  - thm-derivative-of-exponential
+  - thm-monotonicity-from-the-derivative
+  - def-euclidean-inner-product
+  - def-inner-product-space
+  - def-interval
+  - thm-heine-borel-rn
+  - cor-zero-derivative-implies-constant
+dependency_roles:
+  def-maximal-ode-solution: mathematical-premise
+  thm-existence-and-uniqueness-of-a-maximal-ode-solution: mathematical-premise
+  thm-cm-euler-equations-and-torque-free-invariants: mathematical-premise
+  cor-cm-principal-axes-of-the-inertia-matrix: mathematical-premise
+  def-cm-equilibrium-and-lyapunov-stability: mathematical-premise
+  cor-cm-finite-time-breakdown-requires-escape: mathematical-premise
+  thm-picard-lindelof-local-existence-and-uniqueness: mathematical-premise
+  def-locally-lipschitz-in-the-state-variable: mathematical-premise
+  def-first-order-ode-initial-value-problem-and-solution: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  thm-cross-product-norm-is-the-two-vector-gram-determinant: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  thm-derivative-of-exponential: mathematical-premise
+  thm-monotonicity-from-the-derivative: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-inner-product-space: mathematical-premise
+  def-interval: mathematical-premise
+  thm-heine-borel-rn: mathematical-premise
+  cor-zero-derivative-implies-constant: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3,
+        Eqs. (3.40)-(3.45), printed pp. 57-58: explicit small perturbation of
+        intermediate-axis spin, the invariant relation between the
+        perturbations, and exponential growth"
+      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+    - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical
+        Mechanics, 2nd ed. (MIT Press, 2014), §§2.8.2-2.9: intermediate-axis
+        behaviour on the angular-momentum level curves"
+      url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9\
+        579/sicm_edition_2.zip"
+    - title: "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4
+        §4.4: instability of rotation about the intermediate principal axis"
+      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+---
+
+## Statement
+
+Let $I_1<I_2<I_3$ be positive reals, let $I:\mathbb R^3\to\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and consider the torque-free Euler system $l'=F(l)$, $F(l)=l\times(I^{-1}l)$, on $U=\mathbb R^3$ ([[thm-cm-euler-equations-and-torque-free-invariants]], [[def-cm-equilibrium-and-lyapunov-stability]]). Let $L\ne0$. Then $l_0:=Le_2$ is an equilibrium of $F$ and is **not Lyapunov stable**: with $$\varepsilon_0:=\frac{|L|}{2},\qquad a:=\sqrt{\frac{1/I_1-1/I_2}{1/I_2-1/I_3}}>0,\qquad c_0:=a\Bigl(\frac1{I_2}-\frac1{I_3}\Bigr)\frac{\sqrt3}{2}|L|>0,$$ for every $\delta>0$ there is a solution $l$ with $\lVert l(0)-l_0\rVert_2<\delta$ and some $t\ge0$ with $\lVert l(t)-l_0\rVert_2\ge\varepsilon_0$; Moreover, with $\delta_0:=|L|/(2\sqrt{1+a^2})$, the escape can be arranged at a time $t\le c_0^{-1}\log(\delta_0/\eta)$ where $\eta=l_1(0)>0$ may be chosen as small as desired.
+
+## Facts & Assumptions
+
+**Given:** Positive reals $I_1<I_2<I_3$, the diagonal map $I$, the field $F(l)=l\times(I^{-1}l)$ on $U=\mathbb R^3$, and $L\ne0$.
+
+[L1] The system $l'=F(l)$ is read as [[def-first-order-ode-initial-value-problem-and-solution]]; $F$ is continuous and locally Lipschitz in the state variable, since for $\lVert x\rVert_2,\lVert y\rVert_2\le r$ one has $F(x)-F(y)=(x-y)\times(I^{-1}x)+y\times(I^{-1}(x-y))$ and hence $\lVert F(x)-F(y)\rVert_2\le C_r\lVert x-y\rVert_2$ for a finite $C_r$; Picard-Lindelof gives local existence and uniqueness, hence a unique maximal solution through every datum ([[def-maximal-ode-solution]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]), and a solution trapped in a compact subset of $U=\mathbb R^3$ near a finite endpoint extends past it [[def-locally-lipschitz-in-the-state-variable]], [[def-first-order-ode-initial-value-problem-and-solution]], [[thm-picard-lindelof-local-existence-and-uniqueness]], [[cor-cm-finite-time-breakdown-requires-escape]], [[def-cross-product-in-r3]].
+
+[L2] Along every solution the invariants $C(l)=\lVert l\rVert_2^2$ and $E(l)=\tfrac12\langle l,I^{-1}l\rangle$ are constant; in the eigenbasis $Ie_j=I_je_j$ one has $C=\sum_jl_j^2$, $E=\sum_jl_j^2/(2I_j)$, and the component equations $l_1'=(1/I_3-1/I_2)l_2l_3$, $l_2'=(1/I_1-1/I_3)l_1l_3$, $l_3'=(1/I_2-1/I_1)l_1l_2$ The same algebra as in [[thm-cm-euler-equations-and-torque-free-invariants]] applies directly to the present diagonal map: $I^{-1}$ is symmetric, so $C\prime=2\langle l\times(I^{-1}l),l\rangle=0$ and $E\prime=\langle l\times(I^{-1}l),I^{-1}l\rangle=0$ by cross-product orthogonality. Both scalar functions are continuous and differentiable on the solution interval; [[cor-zero-derivative-implies-constant]] therefore makes them constant there. These computations require only the given positive diagonal entries, and no realization as a mass-distribution inertia matrix.
+
+[L3] The Euler field is even: $F(-l)=(-l)\times(I^{-1}(-l))=F(l)$, by bilinearity and linearity ([[def-cross-product-in-r3]]). Put $\sigma:=L/|L|\in\{-1,1\}$, so $\sigma^2=1$ and $L=\sigma|L|$.
+
+[L4] The cross product is bilinear and $\lVert u\times v\rVert_2\le\lVert u\rVert_2\lVert v\rVert_2$; the Euclidean inner product is positive definite [[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[def-euclidean-inner-product]], [[def-inner-product-space]].
+
+[L5] If $f:I\to\mathbb R$ is differentiable on an interval with $f'(t)\ge0$ for all interior $t$, then $f$ is nondecreasing; and the product rule $(gh)'=g'h+gh'$ holds; $(e^{\lambda t})'=\lambda e^{\lambda t}$ for real $\lambda$ [[thm-monotonicity-from-the-derivative]], [[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[thm-derivative-of-exponential]].
+
+[L6] A closed bounded subset of $\mathbb R^3$ is compact by [[thm-heine-borel-rn]], clause 2.
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 $F(Le_2)=Le_2\times(L/I_2)e_2=0$, so $l_0$ is an equilibrium. Put $\sigma=L/|L|$ as in [L3]. Choose the second and third coordinates of the initial datum with signs $\sigma$ and $-\sigma$, respectively. [given, L1, L3]
+
+2.1 Let $0<\eta_0<\delta_0:=|L|/(2\sqrt{1+a^2})$ and let $0<\eta<\eta_0$. Put $s(\eta):=\sqrt{|L|^2-(1+a^2)\eta^2}>0$ and $l^\eta:=(\eta,\,\sigma s(\eta),\,-\sigma a\eta)$, so that $C(l^\eta)=L^2$ and $E(l^\eta)=L^2/(2I_2)$: indeed $C(l^\eta)=\eta^2+|L|^2-(1+a^2)\eta^2+a^2\eta^2=L^2$ and $E(l^\eta)=\tfrac12\bigl(\eta^2/I_1+(|L|^2-(1+a^2)\eta^2)/I_2+a^2\eta^2/I_3\bigr)=\tfrac12L^2/I_2+\tfrac12\eta^2\bigl(1/I_1-1/I_2-a^2(1/I_2-1/I_3)\bigr)=L^2/(2I_2)$ by the definition of $a$. Also $\lVert l^\eta-l_0\rVert_2\to0$ as $\eta\downarrow0$, since $s(\eta)\to|L|$. [step 1.1, given, L2, L3, L4, algebra]
+
+3.1 Let $l$ be the unique maximal solution with $l(0)=l^\eta$; it is defined for all $t\ge0$, because its invariant sphere $C=L^2$ is closed (the norm is continuous by the reverse triangle inequality) and bounded, hence compact by [[thm-heine-borel-rn]], and [L1] rules out breakdown inside a compact set. Let $\tau:=\inf\{t>0:l_1(t)\ge\delta_0\text{ or }l_1(t)\le0\}$, so $0<\tau\le+\infty$, and on $(0,\tau)$ one has $0<l_1<\delta_0$. On that interval $l_1(t)^2+l_3(t)^2\le l_1^2+a^2l_1^2<\delta_0^2(1+a^2)=L^2/4$ by [L2] (which gives $l_3=\pm al_1$ on the invariant level set $E=L^2/(2I_2)$, since $E-C/(2I_2)=0$ and $(1/I_2-1/I_3)>0$), so $l_2(t)^2=L^2-l_1^2-l_3^2>3L^2/4$ and $l_2$ has the constant sign $\sigma$ on $[0,\tau)$, its initial sign. Likewise $l_3=\pm al_1$ cannot change sign on $[0,\tau)$ without vanishing, which would force $l_1=l_3=0$ contrary to $l_1>0$; since $l_3(0)=-\sigma a\eta$, one has $l_3(t)=-\sigma al_1(t)$ there. [step 2.1, given, L1, L2, L4, algebra, L6]
+
+4.1 On $(0,\tau)$, the first component equation of [L2] and step 3.1 give $l_1'=(1/I_3-1/I_2)l_2l_3=a(1/I_2-1/I_3)(\sigma l_2)l_1\ \ge c_0l_1$ with $c_0=a(1/I_2-1/I_3)\tfrac{\sqrt3}{2}|L|>0$, because $\sigma l_2\ge\tfrac{\sqrt3}{2}|L|$. [step 3.1, L2, algebra]
+
+5.1 By step 4.1 and the product and chain rules [L5], $\bigl(e^{-c_0t}l_1(t)\bigr)'=e^{-c_0t}(l_1'(t)-c_0l_1(t))\ge0$ on $(0,\tau)$; since $e^{-c_0t}l_1(t)$ is continuous on $[0,\tau)$, it is nondecreasing there by [L5], so $l_1(t)\ge\eta e^{c_0t}$ for $t\in[0,\tau)$. If $\tau=+\infty$, this would give $l_1(t)\ge\eta e^{c_0t}>\delta_0$ for $t>c_0^{-1}\log(\delta_0/\eta)$, contradicting $l_1<\delta_0$ on $(0,\tau)$; hence $\tau<+\infty$. [step 3.1, 4.1, given, L5, algebra]
+
+6.1 At the time $\tau$ one has $l_1(\tau)=\delta_0$: indeed $l_1(\tau)\neq0$ by step 5.1 and continuity, so by the definition of $\tau$ and continuity it is the alternative $l_1(\tau)\ge\delta_0$ that occurs, and on $[0,\tau]$ the bound $l_1<\delta_0$ holds on $(0,\tau)$ with $l_1$ continuous, so $l_1(\tau)=\delta_0$; moreover $\tau\le c_0^{-1}\log(\delta_0/\eta)$. Therefore $\lVert l(\tau)-l_0\rVert_2^2\ge l_1(\tau)^2+l_3(\tau)^2=(1+a^2)\delta_0^2=L^2/4$, so $\lVert l(\tau)-l_0\rVert_2\ge |L|/2=\varepsilon_0$. [step 3.1, 5.1, given, L4, algebra]
+
+7.1 It remains to make the initial point as close to $l_0$ as prescribed: for any $\delta>0$ choose $\eta>0$ with $\eta<\min\{\delta_0,\delta\}$ and $\lVert l^\eta-l_0\rVert_2<\delta$, possible because $\lVert l^\eta-l_0\rVert_2\to0$ by step 2.1. The corresponding solution then has $\lVert l(0)-l_0\rVert_2<\delta$ and, by step 6.1, escapes the ball of radius $\varepsilon_0$ at time $\tau\le c_0^{-1}\log(\delta_0/\eta)$. This is instability of $l_0$ in the sense of [[def-cm-equilibrium-and-lyapunov-stability]], with the explicit time bound of the statement. [step 2.1, 6.1, given, algebra] ∎

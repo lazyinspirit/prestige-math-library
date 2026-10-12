@@ -54,6 +54,7 @@ Assume AC. For $F_1,F_2\in C_c(G,H;V)$, $q=xH\mapsto\langle F_1(x),F_2(x)\rangle
 1.1 For $h\in H$, covariance and unitarity give $$\langle F_1(xh),F_2(xh)\rangle=\langle\sigma(h)^{-1}F_1(x),\sigma(h)^{-1}F_2(x)\rangle=\langle F_1(x),F_2(x)\rangle.$$ Thus the scalar is independent of the representative. Its continuous lift to $G$ descends continuously because the quotient map is open; its support lies in the intersection of the compact quotient supports. [F1, F2, F3, A1]
 
 2.1 Radon finiteness on that compact support makes the integral finite. For $F_1=F_2=F$, the integral is nonnegative. If it were zero but $F$ were nonzero at some $x$, continuity would make $\|F\|^2$ positive on a nonempty open subset of $G/H$, which has positive measure by full support [F4], a contradiction. Hence the norm is positive definite; integrating the pointwise sesquilinear form gives the asserted inner product. ∎ [A1, F4, step 1.1, algebra]
+
 ## Sources
 
 Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix E §E.1, Definition E.1.6, PDF pp. 412–413. Full relevant text was inspected.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-mostowski-collapse-of-a-finite-chain.md

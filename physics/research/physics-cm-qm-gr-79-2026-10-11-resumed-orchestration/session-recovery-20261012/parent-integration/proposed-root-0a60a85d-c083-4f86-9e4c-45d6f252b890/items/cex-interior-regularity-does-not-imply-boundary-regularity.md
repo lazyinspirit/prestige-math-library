@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-interior-regularity-does-not-imply-boundary-regularity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-zero-dimensional-projective-scheme-has-finite-local-charts.md

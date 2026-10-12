@@ -1,0 +1,9 @@
+Batch64 final handoff extraction, research-only. Successful native attempt1 ended 2026-10-11T14:35:21.973Z; genuine drain was explicitly reported by lead. Original authentic bytes are archived under original-handoff/ (14 item carriers and original ready records, both pages, manifest/contracts/coverage/cross-batch inputs/notes/result/author-check; 38 guarded files).
+
+Complete top-level owned inventory is A10/B4, all draft. Direct requested-scope item-use edges: source41 16, source63 11, source37 8, source60 8, source59 5, source39 2, source57 1, source40 1; total52. Source35 is reached indirectly. No old/current/retained-research/alias item route reaches54,55,62. Page requirements are60 and63. Route counts represent consumer/supplier pairs with one shortest path; exact guarded graph adjacency supports reconstruction.
+
+Current source context is guarded for112 consulted in-run carriers and their available authentic ready records;80 requested-scope supplier public sections are retained. All consulted supplier owner manifests and available proof contracts are copied into source-guards/research/. 831 authentic retained historical research carrier variants supplement available HEAD bytes; proposed candidate drafts are excluded. Missing old bytes are explicitly unavailable.
+
+Author states no unmet mathematical prerequisite or escalation. Preserve the explicit c_j coefficient-conjugation observation for lead assessment; no semantic validation has been performed here. Empirical emission/lifetime evidence remains E-pending; no exact all-time decay/Markov/laboratory-identification claim is reported. Author observations are quoted in author-observations.json.
+
+No production, readiness, control, import or audit-cycle mutation. Lead owns every semantic supplier/consumer review, repair and integration.

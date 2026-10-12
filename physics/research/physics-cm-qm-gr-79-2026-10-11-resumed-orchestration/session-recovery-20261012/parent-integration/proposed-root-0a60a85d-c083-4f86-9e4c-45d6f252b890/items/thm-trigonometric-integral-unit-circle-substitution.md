@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trigonometric-integral-unit-circle-substitution.md

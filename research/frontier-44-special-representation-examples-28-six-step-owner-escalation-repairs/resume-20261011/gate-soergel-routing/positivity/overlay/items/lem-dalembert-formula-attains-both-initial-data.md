@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dalembert-formula-attains-both-initial-data.md

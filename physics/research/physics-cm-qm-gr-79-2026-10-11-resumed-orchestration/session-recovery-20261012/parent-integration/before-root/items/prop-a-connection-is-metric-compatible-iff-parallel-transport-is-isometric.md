@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-connection-is-metric-compatible-iff-parallel-transport-is-isometric.md

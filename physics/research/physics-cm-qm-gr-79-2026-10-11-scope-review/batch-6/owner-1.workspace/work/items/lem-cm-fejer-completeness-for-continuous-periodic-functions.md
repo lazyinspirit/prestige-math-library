@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-fejer-completeness-for-continuous-periodic-functions.md

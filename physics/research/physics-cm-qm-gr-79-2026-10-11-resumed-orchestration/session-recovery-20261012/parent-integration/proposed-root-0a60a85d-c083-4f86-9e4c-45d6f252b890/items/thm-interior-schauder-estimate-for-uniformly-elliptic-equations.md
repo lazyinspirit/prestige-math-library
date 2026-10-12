@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-interior-schauder-estimate-for-uniformly-elliptic-equations.md

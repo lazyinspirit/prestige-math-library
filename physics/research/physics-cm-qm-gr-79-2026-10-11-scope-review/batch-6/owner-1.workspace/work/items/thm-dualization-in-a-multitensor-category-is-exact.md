@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dualization-in-a-multitensor-category-is-exact.md

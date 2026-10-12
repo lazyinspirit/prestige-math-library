@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coordinate-differentials-form-the-dual-cotangent-basis.md

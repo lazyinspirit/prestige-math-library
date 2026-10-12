@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-scheme-theoretic-image-dense-open-immersion.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-lucas-cyclic-tilings-and-the-trace-method.md

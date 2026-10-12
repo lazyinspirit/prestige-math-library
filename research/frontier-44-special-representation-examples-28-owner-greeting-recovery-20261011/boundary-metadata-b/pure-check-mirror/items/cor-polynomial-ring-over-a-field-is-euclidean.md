@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-polynomial-ring-over-a-field-is-euclidean.md

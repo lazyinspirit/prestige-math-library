@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-noetherian-rings-have-noetherian-subrings.md

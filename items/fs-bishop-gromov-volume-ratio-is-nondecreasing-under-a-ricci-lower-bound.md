@@ -109,35 +109,11 @@ infinity because the ball volume saturates at the finite total volume while
 the Euclidean model volume grows without bound; two such radii violate
 monotonicity.
 
-1.1 The witness satisfies the hypothesis. [F1]
-The unit sphere $S^n_1$ is complete, connected, boundaryless and of dimension
-$n\ge2$, and its Ricci curvature is $\operatorname{Ric}=(n-1)g\ge0$, which is
-the lower bound $\operatorname{Ric}\ge(n-1)kg$ at $k=0$ [F1]. The ratio
-$R_p(r)=\operatorname{vol}_g(B(p,r))/V^\star_0(r)$ is defined for every $r>0$
-because $V^\star_0(r)>0$ [F5] and the ball volume is finite [F3].
-[F1, F3, F5]
+1.1 The witness satisfies the hypothesis. [F1] The unit sphere $S^n_1$ is complete, connected, boundaryless and of dimension $n\ge2$, and its Ricci curvature is $\operatorname{Ric}=(n-1)g\ge0$, which is the lower bound $\operatorname{Ric}\ge(n-1)kg$ at $k=0$ [F1]. The ratio $R_p(r)=\operatorname{vol}_g(B(p,r))/V^\star_0(r)$ is defined for every $r>0$ because $V^\star_0(r)>0$ [F5] and the ball volume is finite [F3]. [F1, F3, F5]
 
-1.2 The ratio tends to $1$ at the origin and to $0$ at infinity. [F2, F3, F4, F5]
-Near the origin, $\lim_{r\downarrow0}R_p(r)=1$ by [F4]. At infinity, [F2]
-gives $B(p,r)=S^n_1$ for every $r>\pi$, so
-$$R_p(r)=\frac{\operatorname{vol}_g(S^n_1)}{V^\star_0(r)}\qquad(r>\pi);$$
-here the numerator is finite by [F3] and the denominator satisfies
-$V^\star_0(r)\ge\omega_{n-1}(r-1)\to+\infty$ by [F5], whence
-$\lim_{r\to+\infty}R_p(r)=0$. [F2, F3, F4, F5]
+1.2 The ratio tends to $1$ at the origin and to $0$ at infinity. [F2, F3, F4, F5] Near the origin, $\lim_{r\downarrow0}R_p(r)=1$ by [F4]. At infinity, [F2] gives $B(p,r)=S^n_1$ for every $r>\pi$, so $$R_p(r)=\frac{\operatorname{vol}_g(S^n_1)}{V^\star_0(r)}\qquad(r>\pi);$$ here the numerator is finite by [F3] and the denominator satisfies $V^\star_0(r)\ge\omega_{n-1}(r-1)\to+\infty$ by [F5], whence $\lim_{r\to+\infty}R_p(r)=0$. [F2, F3, F4, F5]
 
-2.1 The ratio is not nondecreasing. [step 1.2]
-Choose $r_1>0$ with $R_p(r_1)>\tfrac12$, possible because
-$\lim_{r\downarrow0}R_p(r)=1$; then choose $r_2>\max\{r_1,\pi\}$ with
-$R_p(r_2)<\tfrac12$, possible because $\lim_{r\to+\infty}R_p(r)=0$. Then
-$0<r_1<r_2$ while $R_p(r_1)>R_p(r_2)$, so the ratio is not nondecreasing on
-$(0,\infty)$. The manifold satisfies every hypothesis of the false claim
-(step 1.1), so the claim is false; the correct monotonicity is the
-nonincreasing one asserted by [F4], and the failure here is precisely the
-saturation of the ball volume at the finite total volume of the compact
-sphere against the unbounded Euclidean model volume. No direction or radius
-family beyond the two explicit radii $r_1,r_2$ is selected, so the inherited
-$\mathrm{AC}_\omega$ of [A1] is not drawn on beyond its declaration.
-[F4, step 1.1, step 1.2] ∎
+2.1 The ratio is not nondecreasing. [step 1.2] Choose $r_1>0$ with $R_p(r_1)>\tfrac12$, possible because $\lim_{r\downarrow0}R_p(r)=1$; then choose $r_2>\max\{r_1,\pi\}$ with $R_p(r_2)<\tfrac12$, possible because $\lim_{r\to+\infty}R_p(r)=0$. Then $0<r_1<r_2$ while $R_p(r_1)>R_p(r_2)$, so the ratio is not nondecreasing on $(0,\infty)$. The manifold satisfies every hypothesis of the false claim (step 1.1), so the claim is false; the correct monotonicity is the nonincreasing one asserted by [F4], and the failure here is precisely the saturation of the ball volume at the finite total volume of the compact sphere against the unbounded Euclidean model volume. No direction or radius family beyond the two explicit radii $r_1,r_2$ is selected, so the inherited $\mathrm{AC}_\omega$ of [A1] is not drawn on beyond its declaration. [F4, step 1.1, step 1.2] ∎
 
 ## Source locator
 

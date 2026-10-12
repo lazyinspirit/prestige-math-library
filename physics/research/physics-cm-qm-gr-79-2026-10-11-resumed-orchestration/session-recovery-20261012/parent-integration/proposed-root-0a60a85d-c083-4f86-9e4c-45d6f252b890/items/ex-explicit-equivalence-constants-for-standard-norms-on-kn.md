@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-explicit-equivalence-constants-for-standard-norms-on-kn.md

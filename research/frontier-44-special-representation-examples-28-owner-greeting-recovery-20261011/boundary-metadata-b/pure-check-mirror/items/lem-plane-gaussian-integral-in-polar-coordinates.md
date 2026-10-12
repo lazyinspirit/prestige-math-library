@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-plane-gaussian-integral-in-polar-coordinates.md

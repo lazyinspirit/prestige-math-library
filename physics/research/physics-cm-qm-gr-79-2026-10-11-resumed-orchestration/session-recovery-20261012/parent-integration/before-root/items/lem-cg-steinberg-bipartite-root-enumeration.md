@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-steinberg-bipartite-root-enumeration.md

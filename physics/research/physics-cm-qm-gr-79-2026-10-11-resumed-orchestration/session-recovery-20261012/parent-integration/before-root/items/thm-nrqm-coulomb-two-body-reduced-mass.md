@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-coulomb-two-body-reduced-mass.md

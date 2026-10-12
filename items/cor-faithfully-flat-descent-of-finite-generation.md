@@ -44,11 +44,8 @@ $M$ is finitely generated as an $R$-module.
 
 **Proof technique:** direct.
 
+ 1.1 Choose generators $u_1,\ldots,u_r$ of $M\otimes_R S$. Write each $u_i$ as a finite sum of simple tensors and collect the finitely many elements of $M$ occurring there, say $m_1,\ldots,m_n$. Let $N\subseteq M$ be the submodule they generate. [given, choose]
 
-1.1 Choose generators $u_1,\ldots,u_r$ of $M\otimes_R S$. Write each $u_i$ as a finite sum of simple tensors and collect the finitely many elements of $M$ occurring there, say $m_1,\ldots,m_n$. Let $N\subseteq M$ be the submodule they generate. [given, choose]
+ 1.2 By construction the images of the $m_j\otimes1$ generate $M\otimes_R S$, so $ (M/N)\otimes_R S=0. $ If $M/N\neq0$, then [L1] applied to the faithfully flat $R$-module $S$ from [L2] would force $(M/N)\otimes_R S\neq0$, contradiction. Therefore $M/N=0$. [L1, L2]
 
-
-1.2 By construction the images of the $m_j\otimes1$ generate $M\otimes_R S$, so $ (M/N)\otimes_R S=0. $ If $M/N\neq0$, then [L1] applied to the faithfully flat $R$-module $S$ from [L2] would force $(M/N)\otimes_R S\neq0$, contradiction. Therefore $M/N=0$. [L1, L2]
-
-
-2.1 Thus $M=N$ is finitely generated. [algebra] ∎
+ 2.1 Thus $M=N$ is finitely generated. [algebra] ∎ 

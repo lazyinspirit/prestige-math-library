@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-mates-under-a-pair-of-adjunctions.md

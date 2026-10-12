@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm13-determinant-tests-for-linear-canonical-maps.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-hom-complex-differential-squares-to-zero.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-henselian-pair-ideal-in-jacobson-radical.md

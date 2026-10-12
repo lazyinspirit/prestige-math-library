@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-independent-set-is-no-larger-than-a-finite-spanning-set.md

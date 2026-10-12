@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-normal-subgroup-induction-irreducibility-criterion.md

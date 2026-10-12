@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-smooth-manifold-admits-a-riemannian-metric.md

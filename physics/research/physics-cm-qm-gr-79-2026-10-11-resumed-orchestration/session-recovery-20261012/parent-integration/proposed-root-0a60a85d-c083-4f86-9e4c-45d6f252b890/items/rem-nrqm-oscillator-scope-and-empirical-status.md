@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-oscillator-scope-and-empirical-status.md

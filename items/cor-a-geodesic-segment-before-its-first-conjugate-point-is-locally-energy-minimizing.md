@@ -87,42 +87,10 @@ function with zero integral vanishes almost everywhere
 
 ## Proof
 
-1.1 The full $H^1$ energy bound. [F1, F2, F3, F4, given]
-Take $\varepsilon$ from [F2] and an admissible $\alpha$. Applying [F4]
-to $s=|\dot\alpha|_g\in L^2$ and the constant function $1$, using [F1],
-gives $L_g(\alpha)^2\le T\int_a^b s^2=2T E(\alpha)$. Both lengths are
-nonnegative and [F2] gives $L_g(\alpha)\ge L_g(\gamma)$. By [F3],
-$$E(\alpha)\ge\frac{L_g(\alpha)^2}{2T}\ge\frac{L_g(\gamma)^2}{2T}=E(\gamma).$$
-This argument uses the $L^2$ speed of every $H^1$ competitor, not a
-smooth approximation of the equality case. [F1, F2, F3, F4, given]
+1.1 The full $H^1$ energy bound. [F1, F2, F3, F4, given] Take $\varepsilon$ from [F2] and an admissible $\alpha$. Applying [F4] to $s=|\dot\alpha|_g\in L^2$ and the constant function $1$, using [F1], gives $L_g(\alpha)^2\le T\int_a^b s^2=2T E(\alpha)$. Both lengths are nonnegative and [F2] gives $L_g(\alpha)\ge L_g(\gamma)$. By [F3], $$E(\alpha)\ge\frac{L_g(\alpha)^2}{2T}\ge\frac{L_g(\gamma)^2}{2T}=E(\gamma).$$ This argument uses the $L^2$ speed of every $H^1$ competitor, not a smooth approximation of the equality case. [F1, F2, F3, F4, given]
 
-2.1 Equality forces constant speed and the radial reparametrization. [F2, F3, F4, step 1.1, given]
-If $E(\alpha)=E(\gamma)$, both inequalities in step 1.1 are equalities.
-Thus $L_g(\alpha)=L_g(\gamma)$. Put $s=|\dot\alpha|_g$ and
-$m=L_g(\alpha)/T$. Expanding the square using $\int s=Tm$ gives
-$\int_a^b(s-m)^2=\int_a^bs^2-Tm^2=2E(\alpha)-L_g(\alpha)^2/T=0$.
-By the zero-integral clause of [F4], $s=m$ a.e., and by [F3]
-$m=|v|_g$. If $v=0$, [F2] already gives
-$\alpha=\gamma$. Suppose $v\ne0$. The equality clause of [F2]
-produces an absolutely continuous nondecreasing $H^1$ surjection
-$\tau$ fixing $a,b$ and satisfying $\alpha=\gamma\circ\tau$.
-[F2, F3, F4, step 1.1]
+2.1 Equality forces constant speed and the radial reparametrization. [F2, F3, F4, step 1.1, given] If $E(\alpha)=E(\gamma)$, both inequalities in step 1.1 are equalities. Thus $L_g(\alpha)=L_g(\gamma)$. Put $s=|\dot\alpha|_g$ and $m=L_g(\alpha)/T$. Expanding the square using $\int s=Tm$ gives $\int_a^b(s-m)^2=\int_a^bs^2-Tm^2=2E(\alpha)-L_g(\alpha)^2/T=0$. By the zero-integral clause of [F4], $s=m$ a.e., and by [F3] $m=|v|_g$. If $v=0$, [F2] already gives $\alpha=\gamma$. Suppose $v\ne0$. The equality clause of [F2] produces an absolutely continuous nondecreasing $H^1$ surjection $\tau$ fixing $a,b$ and satisfying $\alpha=\gamma\circ\tau$. [F2, F3, F4, step 1.1]
 
-3.1 The only equal-energy reparametrization is the identity. [F1, F3, step 2.1, given]
-The a.e. chain rule [F1] applied to the smooth geodesic and $H^1$
-function $\tau$ gives
-$\dot\alpha(t)=\dot\gamma(\tau(t))\tau'(t)$ a.e. Since $\tau$
-is nondecreasing and a primitive, $\tau'\ge0$ a.e.; [F3] then gives
-$|\dot\alpha|_g=|v|_g\tau'$ a.e. By step 2.1 the left side equals
-$|v|_g>0$ a.e., so $\tau'=1$ a.e. The primitive identity for $\tau$
-and $\tau(a)=a$ yield $\tau(t)=a+\int_a^t1\,ds=t$ for every $t$.
-Hence $\alpha=\gamma$. Conversely $\gamma$ is admissible and has its
-own energy, proving the equality clause. [F1, F3, step 2.1]
+3.1 The only equal-energy reparametrization is the identity. [F1, F3, step 2.1, given] The a.e. chain rule [F1] applied to the smooth geodesic and $H^1$ function $\tau$ gives $\dot\alpha(t)=\dot\gamma(\tau(t))\tau'(t)$ a.e. Since $\tau$ is nondecreasing and a primitive, $\tau'\ge0$ a.e.; [F3] then gives $|\dot\alpha|_g=|v|_g\tau'$ a.e. By step 2.1 the left side equals $|v|_g>0$ a.e., so $\tau'=1$ a.e. The primitive identity for $\tau$ and $\tau(a)=a$ yield $\tau(t)=a+\int_a^t1\,ds=t$ for every $t$. Hence $\alpha=\gamma$. Conversely $\gamma$ is admissible and has its own energy, proving the equality clause. [F1, F3, step 2.1]
 
-4.1 Locality and boundaries. [A1, F1, step 1.1, step 3.1, given]
-The radius in [F2] is positive, and [F1] makes its uniform neighborhood
-an open neighborhood in the fixed-endpoint $H^1$ path topology. The preceding
-steps prove strictness there. For a constant geodesic, step 2.1
-handles equality, including dimension zero. Only [A1] and the stated
-local suppliers are used; no global compactness or geodesic completeness
-enters. [A1, F1, step 1.1, step 3.1] ∎
+4.1 Locality and boundaries. [A1, F1, step 1.1, step 3.1, given] The radius in [F2] is positive, and [F1] makes its uniform neighborhood an open neighborhood in the fixed-endpoint $H^1$ path topology. The preceding steps prove strictness there. For a constant geodesic, step 2.1 handles equality, including dimension zero. Only [A1] and the stated local suppliers are used; no global compactness or geodesic completeness enters. [A1, F1, step 1.1, step 3.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum.md

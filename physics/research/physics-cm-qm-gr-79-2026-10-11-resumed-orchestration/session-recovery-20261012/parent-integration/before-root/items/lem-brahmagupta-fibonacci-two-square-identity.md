@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brahmagupta-fibonacci-two-square-identity.md

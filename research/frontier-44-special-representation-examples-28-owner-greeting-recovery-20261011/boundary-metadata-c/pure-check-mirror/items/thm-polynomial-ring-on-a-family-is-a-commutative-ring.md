@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-polynomial-ring-on-a-family-is-a-commutative-ring.md

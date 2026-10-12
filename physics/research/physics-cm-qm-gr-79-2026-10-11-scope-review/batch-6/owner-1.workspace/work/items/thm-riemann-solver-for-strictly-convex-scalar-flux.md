@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riemann-solver-for-strictly-convex-scalar-flux.md

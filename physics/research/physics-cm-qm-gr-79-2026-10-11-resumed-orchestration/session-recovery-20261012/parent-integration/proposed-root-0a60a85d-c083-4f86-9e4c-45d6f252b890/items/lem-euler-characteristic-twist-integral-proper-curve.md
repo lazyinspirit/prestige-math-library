@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-characteristic-twist-integral-proper-curve.md

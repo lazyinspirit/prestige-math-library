@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-algebra-points-as-k-algebra-maps.md

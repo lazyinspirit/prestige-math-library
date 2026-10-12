@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field.md

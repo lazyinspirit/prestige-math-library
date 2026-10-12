@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-laplacian-comparison-for-distance-under-a-ricci-lower-bound.md

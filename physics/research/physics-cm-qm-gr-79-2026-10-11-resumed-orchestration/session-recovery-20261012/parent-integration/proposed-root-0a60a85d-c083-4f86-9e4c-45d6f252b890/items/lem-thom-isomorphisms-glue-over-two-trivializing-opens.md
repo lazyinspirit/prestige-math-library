@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-thom-isomorphisms-glue-over-two-trivializing-opens.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-dimension-of-the-center-of-k-g-is-the-number-of-conjugacy-classes.md

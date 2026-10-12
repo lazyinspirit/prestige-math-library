@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-star-or-special-vertex-obstructions-force-wonderfulness.md

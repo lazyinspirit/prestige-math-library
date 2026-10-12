@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-simply-connected-adjoint-and-intermediate-forms-of-a-semisimple-compact-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-quasi-finite-locus-open-finite-type-algebra.md

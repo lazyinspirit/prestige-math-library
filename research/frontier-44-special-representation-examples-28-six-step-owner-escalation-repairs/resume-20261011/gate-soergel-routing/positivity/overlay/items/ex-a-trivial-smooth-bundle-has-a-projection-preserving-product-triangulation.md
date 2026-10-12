@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-trivial-smooth-bundle-has-a-projection-preserving-product-triangulation.md

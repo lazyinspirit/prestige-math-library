@@ -1,7 +1,8 @@
 # Library galaxy
 
 A JavaScript/WebGL2 view of the published Alphabeta Math library. Set Theory
-occupies the central bulge of a three-dimensional spiral galaxy. Dragging
+occupies the central bulge of a three-dimensional spiral galaxy. Its internal
+category identifier is `set-theory`, matching `library/set-theory/`. Dragging
 orbits the camera above, below or edge-on to its disc. The galaxy has a warm
 stellar core, blue gas, absorbing dust lanes and a pure black surround.
 

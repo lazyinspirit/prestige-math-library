@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-canonical-one-form-on-a-cotangent-bundle-as-a-covariant-tensor.md

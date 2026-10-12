@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimension-shift-along-an-injective-copresentation.md

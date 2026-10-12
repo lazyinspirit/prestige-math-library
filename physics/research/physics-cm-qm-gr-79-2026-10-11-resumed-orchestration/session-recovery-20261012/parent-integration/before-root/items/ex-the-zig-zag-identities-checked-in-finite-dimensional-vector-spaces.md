@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-zig-zag-identities-checked-in-finite-dimensional-vector-spaces.md

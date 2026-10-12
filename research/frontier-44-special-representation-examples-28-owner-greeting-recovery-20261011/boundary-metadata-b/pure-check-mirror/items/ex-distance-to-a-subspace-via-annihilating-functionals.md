@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-distance-to-a-subspace-via-annihilating-functionals.md

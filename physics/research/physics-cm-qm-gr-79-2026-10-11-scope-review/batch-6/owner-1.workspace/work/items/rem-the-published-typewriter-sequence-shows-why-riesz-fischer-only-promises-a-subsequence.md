@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-published-typewriter-sequence-shows-why-riesz-fischer-only-promises-a-subsequence.md

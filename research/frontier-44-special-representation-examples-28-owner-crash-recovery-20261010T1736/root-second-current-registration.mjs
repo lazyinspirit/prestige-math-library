@@ -1,0 +1,30 @@
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadStep3,recordStep3,itemHash,itemDecision} from '../../tools/step3-decisions.mjs';
+const root=process.cwd(),run='frontier-44-special-representation-examples-28';
+const base=`research/${run}-owner-crash-recovery-20261010T1736`;
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const paths=[`${base}/repair_klr_global_basis/final-actual-afterbinding-15-ordinary-decision-ready.json`,`${base}/repair_cell_head_classification/final-actual-afterbinding-19-current-consumer-and-hold-inventory.json`];
+const expected=['513664423ea9708d6def2c9e561a0a89cb0ffd1bdecbf142582ea99b010d7f39','47db7925f283a67b48fe596c890f4db943d3bf74cd4ffd9690f2467f3669d075'];
+const docs=paths.map((p,i)=>{const b=readFileSync(p);if(sha(b)!==expected[i])throw Error(`Evidence changed ${p}`);return JSON.parse(b)});
+const s=loadStep3(root,run);
+const klr=docs[0].ready_for_ordinary_current_decision;
+if(klr.length!==15||klr.some(x=>!x.ordinary_decision_ready))throw Error('Incorrect ready inventory');
+const cell=docs[1].actual_subjects;
+if(cell.length!==19)throw Error('Incorrect cell inventory');
+const rows=[...klr.map(x=>({id:x.id,raw:x.actual_raw_sha256,native:x.actual_native_input_sha256,decision:'repaired'})),...cell.map(x=>({id:x.id,raw:x.actual_current_raw_sha256,decision:x.whole_ready===false?'hold':'repaired'}))];
+if(new Set(rows.map(x=>x.id)).size!==rows.length)throw Error('Duplicate subject');
+for(const x of rows){if(sha(readFileSync(`items/${x.id}.md`))!==x.raw)throw Error(`Carrier drift ${x.id}`);if(x.native&&itemHash(s,x.id)!==x.native)throw Error(`Input drift ${x.id}`)}
+const byId=new Map(rows.map(x=>[x.id,x])),ordered=[],done=new Set(),active=new Set();
+function visit(x){if(done.has(x.id))return;if(active.has(x.id))throw Error('Selected dependency cycle');active.add(x.id);for(const d of s.items.get(x.id).item.deps??[])if(byId.has(d))visit(byId.get(d));active.delete(x.id);done.add(x.id);ordered.push(x)}
+rows.forEach(visit);
+const out=`${base}/root-second-current-registration`;mkdirSync(out,{recursive:true});
+writeFileSync(`${out}/preflight.json`,JSON.stringify({run,at:new Date().toISOString(),evidence:paths.map((path,i)=>({path,sha256:expected[i]})),ordered,gate_attempt:false},null,2)+'\n');
+const scopes=new Set(rows.map(x=>{const page=s.items.get(x.id).page.id;return [...s.pairs].find(([,p])=>p.some(q=>q.id===page))[0]}));
+const scopeReceipts=[...scopes].map(page=>recordStep3(root,{run,phase:'scope',page,owner:true,decision:'proceed',reason:'Retained the approved rich current claims and genuine local helper inventory with unresolved item holds preserved'},s));
+const receipts=ordered.map(x=>recordStep3(root,{run,phase:'item',item:x.id,owner:true,decision:x.decision,reason:x.decision==='hold'?'Preserved the rich repaired local clauses while general finite e survival remains held on the exhausted classifier':'Bound the recovered supplier and consumer owner verified proof and actual affected uses to the current integrated carrier',defects:['proof','dependency']},s));
+const fresh=loadStep3(root,run);
+const current=rows.map(x=>({id:x.id,decision:x.decision,closed:itemDecision(fresh,x.id).closed}));
+if(current.some(x=>x.closed!==(x.decision==='repaired')))throw Error('Unexpected current decision closure');
+writeFileSync(`${out}/registration.json`,JSON.stringify({run,at:new Date().toISOString(),evidence:paths.map((path,i)=>({path,sha256:expected[i]})),scopeReceipts,receipts,current,old_rounds_preserved:true,gate_attempt:false,step4_paused:true},null,2)+'\n');
+console.log(JSON.stringify({registered:rows.length,repaired:rows.filter(x=>x.decision==='repaired').length,held:rows.filter(x=>x.decision==='hold').length,scopeReceipts:scopeReceipts.length}));

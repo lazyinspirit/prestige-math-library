@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-long-exact-ext-sequence-in-the-first-variable.md

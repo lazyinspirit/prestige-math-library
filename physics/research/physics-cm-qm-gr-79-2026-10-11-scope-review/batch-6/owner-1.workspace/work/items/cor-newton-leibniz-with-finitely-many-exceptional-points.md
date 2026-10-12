@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-newton-leibniz-with-finitely-many-exceptional-points.md

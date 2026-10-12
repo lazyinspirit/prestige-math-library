@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-simple-root-power-relations-generate-the-integrable-quotient.md

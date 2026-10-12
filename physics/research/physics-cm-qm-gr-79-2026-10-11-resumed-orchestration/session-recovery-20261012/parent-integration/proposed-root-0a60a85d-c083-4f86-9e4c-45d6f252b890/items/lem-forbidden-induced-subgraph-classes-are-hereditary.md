@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-forbidden-induced-subgraph-classes-are-hereditary.md

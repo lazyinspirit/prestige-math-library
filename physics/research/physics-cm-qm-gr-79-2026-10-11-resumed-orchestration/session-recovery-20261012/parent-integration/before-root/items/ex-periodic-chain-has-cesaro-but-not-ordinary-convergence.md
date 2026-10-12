@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-periodic-chain-has-cesaro-but-not-ordinary-convergence.md

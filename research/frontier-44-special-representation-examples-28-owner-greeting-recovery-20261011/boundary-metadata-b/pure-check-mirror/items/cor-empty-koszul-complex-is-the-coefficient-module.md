@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-empty-koszul-complex-is-the-coefficient-module.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-right-adjoints-preserve-monomorphisms-and-left-adjoints-preserve-epimorphisms.md

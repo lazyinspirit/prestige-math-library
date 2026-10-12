@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bipartite-neighbourhood-hall-condition-and-sdr.md

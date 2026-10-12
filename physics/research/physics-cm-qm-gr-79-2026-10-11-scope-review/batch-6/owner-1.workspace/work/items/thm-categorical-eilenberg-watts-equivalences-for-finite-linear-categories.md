@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-categorical-eilenberg-watts-equivalences-for-finite-linear-categories.md

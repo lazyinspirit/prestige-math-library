@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-courant-fischer-on-a-three-by-three-symmetric-matrix.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-periodic-torus-and-sobolev-spaces.md

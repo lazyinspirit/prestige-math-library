@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fixed-point-schemes-and-centralizers-of-linearly-reductive-actions.md

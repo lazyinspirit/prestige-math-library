@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-analytic-functions-closed-under-algebra-quotients-and-composition.md

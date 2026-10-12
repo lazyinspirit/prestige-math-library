@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dual-of-a-quotient-is-the-annihilator.md

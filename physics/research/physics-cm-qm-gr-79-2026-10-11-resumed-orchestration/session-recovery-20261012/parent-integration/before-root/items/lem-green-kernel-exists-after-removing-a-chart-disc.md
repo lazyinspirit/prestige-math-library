@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-green-kernel-exists-after-removing-a-chart-disc.md

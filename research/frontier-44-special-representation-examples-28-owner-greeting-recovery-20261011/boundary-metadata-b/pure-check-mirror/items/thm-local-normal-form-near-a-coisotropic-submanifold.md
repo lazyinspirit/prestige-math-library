@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-local-normal-form-near-a-coisotropic-submanifold.md

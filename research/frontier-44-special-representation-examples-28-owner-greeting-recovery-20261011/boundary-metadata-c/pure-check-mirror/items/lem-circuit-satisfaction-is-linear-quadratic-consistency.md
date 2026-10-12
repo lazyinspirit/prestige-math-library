@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-circuit-satisfaction-is-linear-quadratic-consistency.md

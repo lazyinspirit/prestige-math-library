@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-thom-and-gysin-constructions-are-compatible-with-pullback-and-composition.md

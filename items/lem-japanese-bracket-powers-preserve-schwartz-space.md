@@ -54,12 +54,10 @@ for both dual topologies ([[lem-smooth-polynomially-bounded-multipliers-on-schwa
 
 **Proof technique:** Chain-rule derivative bounds followed by transposition.
 
-1.1 Put $q(\xi)=1+|\xi|^2$. Induction on $|\alpha|$, differentiating either the polynomial factor or $q^{s/2-j}$, expresses each derivative as a finite sum
-$$\partial^\alpha w_s(\xi)=\sum_j P_{\alpha,j}(\xi)q(\xi)^{s/2-j},$$
-where every $P_{\alpha,j}$ is a polynomial of degree at most $|\alpha|$. Since $q=\langle\xi\rangle^2$, each term is bounded by a constant times $\langle\xi\rangle^{s+|\alpha|}$, and hence by $C_{\alpha,s}\langle\xi\rangle^{\max(0,s+|\alpha|)}$. Enlarging the exponent to an integer gives a polynomial-growth bound for this derivative. [F1, algebra]
+1.1 Put $q(\xi)=1+|\xi|^2$. Induction on $|\alpha|$, differentiating either the polynomial factor or $q^{s/2-j}$, expresses each derivative as a finite sum $$\partial^\alpha w_s(\xi)=\sum_j P_{\alpha,j}(\xi)q(\xi)^{s/2-j},$$ where every $P_{\alpha,j}$ is a polynomial of degree at most $|\alpha|$. Since $q=\langle\xi\rangle^2$, each term is bounded by a constant times $\langle\xi\rangle^{s+|\alpha|}$, and hence by $C_{\alpha,s}\langle\xi\rangle^{\max(0,s+|\alpha|)}$. Enlarging the exponent to an integer gives a polynomial-growth bound for this derivative. [F1, algebra]
 
 2.1 The same induction with $-s$ gives a polynomial-growth bound for every derivative of $w_{-s}$. [step 1.1, algebra]
 
 3.1 The bounds in steps 1.1 and 2.1 meet the hypotheses of [F2], so multiplication by either weight is continuous on Schwartz space. Pointwise $w_sw_{-s}=1$, so both compositions on $\mathcal S$ are the identity. [F1, F2, step 1.1, step 2.1, algebra]
 
-4.1 For $T\in\mathcal S'$, transposition defines $\langle w_{\pm s}T,\varphi\rangle=\langle T,w_{\pm s}\varphi\rangle$. By [F2] these maps are continuous for the weak and strong dual topologies; their compositions evaluate $T$ on $w_sw_{-s}\varphi=\varphi$, so they are inverse on $\mathcal S'$. [F2, step 3.1] ∎
+4.1 For $T\in\mathcal S'$, transposition defines $\langle w_{\pm s}T,\varphi\rangle=\langle T,w_{\pm s}\varphi\rangle$. By [F2] these maps are continuous for the weak and strong dual topologies; their compositions evaluate $T$ on $w_sw_{-s}\varphi=\varphi$, so they are inverse on $\mathcal S'$. [F2, step 3.1] ∎ 

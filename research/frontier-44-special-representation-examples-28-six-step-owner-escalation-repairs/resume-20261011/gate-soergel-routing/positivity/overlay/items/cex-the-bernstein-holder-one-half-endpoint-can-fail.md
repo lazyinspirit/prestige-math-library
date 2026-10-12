@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-bernstein-holder-one-half-endpoint-can-fail.md

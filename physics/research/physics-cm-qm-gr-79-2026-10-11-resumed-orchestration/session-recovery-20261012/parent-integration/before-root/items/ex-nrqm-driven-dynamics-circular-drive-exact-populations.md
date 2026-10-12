@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-driven-dynamics-circular-drive-exact-populations.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unitary-equivalence-of-systems-of-imprimitivity.md

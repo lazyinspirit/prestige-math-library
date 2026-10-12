@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-good-and-geometric-quotient-on-stable-locus.md

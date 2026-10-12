@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simultaneous-smooth-approximation-in-l-one-and-l-two.md

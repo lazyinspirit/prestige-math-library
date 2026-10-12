@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-jordan-decomposition-lies-inside-a-complex-semisimple-lie-algebra.md

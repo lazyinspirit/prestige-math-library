@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tensoring-a-verma-module-by-a-finite-dimensional-module-shifts-types.md

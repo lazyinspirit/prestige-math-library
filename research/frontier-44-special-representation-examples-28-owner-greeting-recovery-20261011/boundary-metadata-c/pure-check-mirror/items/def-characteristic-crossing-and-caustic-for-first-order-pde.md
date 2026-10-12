@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-characteristic-crossing-and-caustic-for-first-order-pde.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-large-set-contains-a-pattern-when-the-homogeneous-number-is-small.md

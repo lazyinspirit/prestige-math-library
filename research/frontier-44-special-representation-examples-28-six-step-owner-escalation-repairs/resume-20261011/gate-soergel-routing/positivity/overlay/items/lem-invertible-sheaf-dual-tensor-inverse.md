@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-invertible-sheaf-dual-tensor-inverse.md

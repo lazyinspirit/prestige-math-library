@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-dimensional-orthogonal-decomposition.md

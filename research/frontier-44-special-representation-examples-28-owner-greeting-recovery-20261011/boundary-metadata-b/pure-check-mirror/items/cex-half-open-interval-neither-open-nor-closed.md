@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-half-open-interval-neither-open-nor-closed.md

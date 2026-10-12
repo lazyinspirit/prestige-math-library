@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-form-generated-sectorial-elliptic-semigroups.md

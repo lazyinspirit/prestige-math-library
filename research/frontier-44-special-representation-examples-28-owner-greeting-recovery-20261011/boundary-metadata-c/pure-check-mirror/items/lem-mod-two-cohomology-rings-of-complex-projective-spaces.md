@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-mod-two-cohomology-rings-of-complex-projective-spaces.md

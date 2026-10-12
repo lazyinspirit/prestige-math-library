@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-numbers-of-products-follow-the-whitney-sum-and-kunneth-formulas.md

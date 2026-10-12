@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mod-two-cohomology-ring-of-real-projective-space.md

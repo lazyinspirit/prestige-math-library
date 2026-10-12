@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hh-finite-coevaluation-in-two-bases.md

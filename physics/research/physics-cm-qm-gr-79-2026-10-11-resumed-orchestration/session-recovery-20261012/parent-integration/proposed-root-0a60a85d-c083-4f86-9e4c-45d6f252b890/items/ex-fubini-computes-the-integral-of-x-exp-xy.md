@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fubini-computes-the-integral-of-x-exp-xy.md

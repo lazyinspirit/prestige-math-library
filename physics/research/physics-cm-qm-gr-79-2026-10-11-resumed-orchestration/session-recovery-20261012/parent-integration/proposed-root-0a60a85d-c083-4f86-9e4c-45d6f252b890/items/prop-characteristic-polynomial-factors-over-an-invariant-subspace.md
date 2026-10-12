@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-characteristic-polynomial-factors-over-an-invariant-subspace.md

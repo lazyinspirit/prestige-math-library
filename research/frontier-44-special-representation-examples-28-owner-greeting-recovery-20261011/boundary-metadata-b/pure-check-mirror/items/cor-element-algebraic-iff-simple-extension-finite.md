@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-element-algebraic-iff-simple-extension-finite.md

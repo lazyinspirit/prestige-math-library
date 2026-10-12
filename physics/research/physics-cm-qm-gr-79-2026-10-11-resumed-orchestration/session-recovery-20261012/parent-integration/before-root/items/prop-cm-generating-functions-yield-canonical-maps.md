@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-generating-functions-yield-canonical-maps.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-first-uniqueness-theorem-primary-decomposition.md

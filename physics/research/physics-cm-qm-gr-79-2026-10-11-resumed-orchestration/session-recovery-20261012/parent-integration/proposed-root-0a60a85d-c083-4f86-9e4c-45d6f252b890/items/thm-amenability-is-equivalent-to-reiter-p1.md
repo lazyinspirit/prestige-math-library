@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-amenability-is-equivalent-to-reiter-p1.md

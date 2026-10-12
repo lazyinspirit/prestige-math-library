@@ -1,0 +1,1848 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-58",
+  "scope": [
+    "lem-nrqm-central-exponential-moments",
+    "lem-nrqm-central-free-operator-differential-identification",
+    "lem-nrqm-central-positive-scaling-spectral-measure",
+    "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+    "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+    "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+    "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+    "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+    "ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass",
+    "ex-nrqm-central-hydrogen-radial-distributions-and-moments"
+  ],
+  "contracts": {
+    "lem-nrqm-central-exponential-moments": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-real-gamma-function-by-the-euler-integral",
+          "source_section": "Definition",
+          "quote": "Its convergence for every $s>0$, and its failure for $s\\le0$, are proved in [[thm-real-gamma-euler-integral-convergence]], which justifies the definition on exactly the displayed domain.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-real-gamma-positive-integer-values",
+          "source_section": "Statement",
+          "quote": "For every natural number $n$, $\\Gamma(n+1)=n!$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Change of variables] Let $T:(0,\\infty)\\to(0,\\infty)$ be $T(x):=x/\\lambda$. Then $T$ is a $C^1$ diffeomorphism of open subsets of $\\mathbb R$ with $T'(x)=1/\\lambda$ and $\\det DT(x)=1/\\lambda$ nonzero and constant, and its inverse is $y\\maps",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "[Gamma value] Taking $s:=k+1>0$ in [F1], the integral $\\int_0^\\infty x^{k}e^{-x}\\,dx=\\Gamma(k+1)$ is finite, and [F2] gives $\\Gamma(k+1)=k!$. [F1, F2]",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Assembly] By [F3] applied to the diffeomorphism of step 1.1 and the function $h$ of that step, $$\\int_0^\\infty r^{k}e^{-\\lambda r}\\,dr=\\int_0^\\infty \\lambda^{-(k+1)}x^{k}e^{-x}\\,dx=\\lambda^{-(k+1)}\\int_0^\\infty x^{k}e^{-x}\\,dx=\\frac{k!}{\\l",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement integrates over the open half-line (0,infinity), which is nonempty for every declared lambda>0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 evaluates the case k=0 through the value Gamma(1)=1 and step 2.1 gives 1/lambda."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 gives the value 1/lambda for k=0 and k!/lambda^{k+1} for every k, including k=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The lemma has no degenerate or repeated-parameter case; lambda>0 is fixed and k ranges over the nonnegative integers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 applies the change of variables on the open half-line and notes that no endpoint value is used, as recorded in the remarks."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the cited change-of-variables lemma, whose hypothesis is the Axiom of Countable Choice, declared in the frontmatter and used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an identity with a domain assertion, not a biconditional over an enumerated class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is an identity with a domain assertion, not a biconditional over an enumerated class."
+        }
+      ]
+    },
+    "lem-nrqm-central-free-operator-differential-identification": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "source_section": "Statement",
+          "quote": "Moreover, if $u=u_f$ and\n$D^\\alpha u=u_g$ for $L^2$ classes $f,g\\in L^2(\\mathbb R^n)$ and their regular\ndistributions, then the unitary Plancherel transforms satisfy\n$$\\mathcal F_2g(\\xi)=(2\\pi i\\xi)^\\alpha\\mathcal F_2f(\\xi)\\qquad\\text{for almost every }\\xi\\in\\mathbb R^n.$$\nThe second assertion compares the Plancherel classes only;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "We say that $v$ is\nthe **weak derivative** $D^\\alpha u$ if\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "source_section": "Statement",
+          "quote": "Define\n\n$$H_0:=\\mathcal F_2^*\\,M_{c|\\xi|^2+b}\\,\\mathcal F_2,\\qquad D(H_0):=\\{f\\in H:|\\xi|^2\\mathcal F_2f\\in H\\}.$$\n\nThen $H_0$ is self-adjoint, $D(H_0)$ coincides with the Sobolev space $W^{2,2}(\\mathbb R^d;\\mathbb C)$ as a set (with equivalent norms, [[def-sobolev-space-wkp-and-its-norm]], [[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]]), $H_0\\ge b$ in the quadratic-form sense, and for every Schwartz function $f\\in\\mathcal S(\\mathbb R^d)$, $H_0f=-(c/4\\pi^2)\\Delta f+bf$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+          "source_section": "Statement",
+          "quote": "Hence the\n   weak-derivative norm and the bracket-weighted $L^2$ norm are equivalent,\n   and the latter is also equivalent to\n   $\\|(1+4\\pi^2|\\xi|^2)^{k/2}\\mathcal F_2f\\|_2$, by\n$$\\|\\langle\\xi\\rangle^k h\\|_2\\le\\|(1+4\\pi^2|\\xi|^2)^{k/2}h\\|_2 \\le(2\\pi)^k\\|\\langle\\xi\\rangle^k h\\|_2,\\qquad h\\in L^2 .$$\n3.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Define $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice and let $n\\ge1$. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "source_section": "Statement",
+          "quote": "(c) If $V:\\mathbb R^d\\to\\mathbb R$ is measurable with $\\|V\\|_\\infty<\\infty$ and $H:=H_0+M_V$ with domain $D(H_0)$, then $H$ is self-adjoint on $D(H_0)$, is bounded below, and the assignment $t\\mapsto e^{itH}$ is a strongly continuous one-parameter unitary group whose generator is $-iH$: the limit $\\lim_{t\\to0}\\frac1t(e^{itH}\\psi-\\psi)$ exists exactly for $\\psi\\in D(H)$ and equals $iH\\psi$ ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Domain and regularity] By [F2] the sets $D(H_{0})$ and $W^{2,2}(\\mathbb R^{3};\\mathbb C)$ coincide. For $f\\in D(H_{0})$, [F3] gives $\\mathcal F_{2}f\\in L^{2}$ and $|\\xi|^{2}\\mathcal F_{2}f\\in L^{2}$, so each $\\xi_{j}^{2}\\mathcal F_{2}f$ li",
+          "inputs": [
+            "F2",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Multiplier comparison] Fix $f\\in D(H_{0})$. By [F2], $\\mathcal F_{2}(H_{0}f)(\\xi)=c|\\xi|^{2}\\mathcal F_{2}f(\\xi)$ for almost every $\\xi$. Let $g:=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f$; by step 1.1 and [F1], $\\mathcal F_{2}g(\\xi)=-\\frac{\\hbar^{",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Bounded perturbations] Let $V$ be real, bounded and measurable and let $f\\in D(H_{0})$. By step 1.1, $f\\in W^{2,2}$, so $\\Delta_{w}f\\in L^{2}$, and $Vf\\in L^{2}$ because $V$ is bounded; moreover, by [F5] and step 2.1, $(H_{0}+M_{V})f=H_{0}",
+          "inputs": [
+            "step 1.1",
+            "F5",
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns the full space L^2(R^3;C) and its Sobolev domain, not an empty family or index set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes V=0, where M_V=0 and H_0+M_V=H_0 coincides with the weak Laplacian operator of clause (a)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The dimension is fixed at d=3 by the statement; the one-dimensional case is a different item and is not claimed here."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No spectral degeneracy or repeated eigenvalue is claimed; the lemma identifies operators on a common domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The domain is all of R^3; there are no spatial endpoints or boundary conditions in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Both clauses rely on the cited Fourier and Kato-Rellich suppliers, whose hypotheses include Countable Choice and the Axiom of Choice, declared and used in steps 1.1, 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the forward reading: f in D(H_0) yields the weak second partials in L^2 and the stated transform."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the reverse reading: the defining condition |xi|^2 F_2 f in L^2 gives membership in W^{2,2}, since the two descriptions coincide by the cited Sobolev characterisation."
+        }
+      ]
+    },
+    "lem-nrqm-central-positive-scaling-spectral-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "$$\nConversely, if $E$ is a regular projection valued measure on $\\mathbb R$, then\nthe operator $\\int\\lambda\\,dE$ with that domain is self-adjoint and its\nspectral projection valued measure is $E$ again.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "A PVM is called **regular** when\n$X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the\n$\\sigma$-algebra is the Borel $\\sigma$-algebra, and every one of the finite\npositive measures\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad x\\in H,\\ B\\in\\Sigma,$$\n\nis a regular Borel measure ([[def-regular-borel-measure-on-an-lch-space]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-scalar-and-complex-measures-from-a-pvm",
+          "source_section": "Statement",
+          "quote": "2. $E_{x,y}$ is a finite complex measure on $(X,\\Sigma)$, the map\n   $(x,y)\\mapsto E_{x,y}$ is linear in $x$ and conjugate-linear in $y$, and\n   $E_{y,x}=\\overline{E_{x,y}}$, meaning $E_{y,x}(B)=\\overline{E_{x,y}(B)}$ for\n   every $B$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-bounded-borel-pvm-integral",
+          "source_section": "Statement",
+          "quote": "Then: 1. there is a unique operator $\\Phi_E(f)\\in\\mathcal B(H)$ with\n   $$\\langle\\Phi_E(f)x,y\\rangle=\\int f\\,dE_{x,y}\\qquad(x,y\\in H),$$\n   and for every sequence $(s_n)$ of complex simple functions with\n   $\\|f-s_n\\|_\\infty\\to0$ one has $\\|\\Phi_E(f)-\\int s_n\\,dE\\|\\to0$:",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pvm-integral-is-a-star-homomorphism",
+          "source_section": "Statement",
+          "quote": "Then: 1. $\\Phi_E$ is linear and unital: $\\Phi_E(\\mathbf 1_X)=I$ and\n   $\\Phi_E(af+bg)=a\\Phi_E(f)+b\\Phi_E(g)$ for bounded measurable $f,g$ and\n   $a,b\\in\\mathbb C$;",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-unbounded-integral-against-a-pvm",
+          "source_section": "Definition",
+          "quote": "Assume Countable Choice. Let $E$ be a projection valued measure on the\nmeasurable space $(X,\\Sigma)$ acting on the complex Hilbert space $H$\n([[def-projection-valued-measure]]), and let $f:X\\to\\mathbb C$ be\n$\\Sigma$-measurable. Put\n$$D(f(E)):=\\Bigl\\{x\\in H:\\int_X|f|^2\\,dE_x<\\infty\\Bigr\\},\\qquad E_x(B)=\\langle E(B)x,x\\rangle,$$\nwhere the scalar measures $E_x$ are those of\n[[lem-scalar-and-complex-measures-from-a-pvm]], and for $x\\in D(f(E))$ set\n$$f(E)x:=\\lim_{n\\to\\infty}\\Phi_E\\bigl(f\\,\\mathbf 1_{\\{|f|\\le n\\}}\\bigr)x,$$\nFor $H\\ne\\{0\\}$, the bounded integrals $\\Phi_E$ are those of\n[[thm-bounded-borel-pvm-integral]], and the limit is taken in the norm of $H$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-unbounded-pvm-integral-is-well-defined-and-closed",
+          "source_section": "Statement",
+          "quote": "Then the\noperator $f(E)$ of [[def-unbounded-integral-against-a-pvm]] is densely defined\nand closed, and it is normal, in the sense $D(f(E))=D(f(E)^*)$ and equal norms for the operator and its adjoint;",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-rn-is-locally-compact-and-sigma-compact",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, Euclidean space $\\mathbb{R}^n$ is locally compact and $\\sigma$-compact.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-regular-borel-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "A **regular Borel measure** here is a Radon measure $\\mu$ for which every\nBorel $E$ satisfies $\\mu(E)=\\sup_{K\\subseteq E,\\ K\\text{ compact}}\\mu(K)$,\nwith equality allowed at $+\\infty$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-radon-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$, $x \\mapsto x$, are continuous on $A$; hence\n   so is $x \\mapsto x^{n}$ for every $n \\in \\mathbb{N}$\n   ([[def-integer-power]]), and hence so is every **polynomial function**\n   $x \\mapsto a_0 + a_1 x + \\dots + a_n x^{n}$ with real coefficients.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-homeomorphism-and-open-maps",
+          "source_section": "Definition",
+          "quote": "- $f$ is a **homeomorphism** if $f$ is a continuous bijection whose inverse\n  $f^{-1} : Y \\to X$ is also continuous. The spaces are **homeomorphic**, written\n  $X \\cong Y$, when a homeomorphism $X \\to Y$ exists.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-continuous-functions-are-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $n,m\\ge1$. Every continuous map\n$f : \\mathbb{R}^n \\to \\mathbb{R}^m$ is Borel measurable in\nthe sense of [[def-borel-and-lebesgue-measurable-function-on-rn]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[$F$ is a PVM] For Borel $B$ the set $c^{-1}B$ is Borel because $m_{c}$ is Borel measurable [F8], so $F(B)=E(c^{-1}B)$ is an orthogonal projection; $F(\\varnothing)=E(\\varnothing)=0$ and $F(\\mathbb R)=E(\\mathbb R)=I$; $c^{-1}(B\\cap C)=c^{-1}",
+          "inputs": [
+            "F8",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[$F$ is regular] Fix $x\\in H$ and write $\\nu:=F_{x}$, so that $\\nu(B)=E_{x}(c^{-1}B)$. By [F3], $E_{x}$ is a finite measure with $E_{x}(\\mathbb R)=\\|x\\|^{2}$, so $\\nu(\\mathbb R)=\\|x\\|^{2}<+\\infty$. For inner regularity let $B$ be Borel and ",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "[Bounded functional identity] Let $f$ be bounded Borel. The functional calculi of $E$ and of $F$ exist by [F4], since $F$ is a PVM by step 1.1. For $f=\\mathbf 1_{B}$ and all $x,y\\in H$, $\\langle\\Phi_{F}(\\mathbf 1_{B})x,y\\rangle=\\int\\mathbf ",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Domain and operator identity] Put $f(\\lambda):=\\lambda$, so that $f(E)=A$ and $f(E_{F})=\\int\\lambda\\,dF(\\lambda)$ by [F1] and [F5], and put $g:=f\\circ m_{c}=m_{c}$, so that $g(E)=cA$. For $n\\ge1$ the truncations $f_{n}:=f\\mathbf 1_{\\{|f|\\l",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 2.2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "[Identification of the spectral measure] By steps 1.1 and 2.1, $F$ is a regular PVM on the Borel sets of $\\mathbb R$, and by step 3.1 the operator $\\int\\lambda\\,dF(\\lambda)=f(E_{F})$ equals $cA$ with domain $D(A)$. The converse clause of th",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The Hilbert space is assumed nonzero in the statement, and the Borel sets considered include R itself, whose measure is not empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the value B=R with nu(R)=||x||^2, and step 4.1 specialises to B=(-infinity,0), whose scaled preimage is itself."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The scaling c>0 is arbitrary but fixed; the case c=1 would be the identity scaling, not asserted as a separate claim."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy of an operator is claimed; the statement transfers the spectral measure along a positive scalar."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 evaluates the half-line endpoint sets (-infinity,0) and, in the physics use, [0,infinity), whose preimages under the scaling are themselves."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the spectral theorem under the Axiom of Choice and the measure-theoretic suppliers under Countable Choice, both declared and used in steps 2.2-4.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves E_{cA}(B)=E(c^{-1}B) in the forward direction by identifying F as the spectral PVM of cA."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The uniqueness clause of the spectral theorem used in step 4.1 makes the identified F the only regular PVM of cA, which is the reverse reading of the same identity."
+        }
+      ]
+    },
+    "pthm-nrqm-central-spherical-reduction-of-smooth-states": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-central-framework-central-potential-model",
+          "source_section": "Definition",
+          "quote": "**assigned energy operator** of the model with central potential $V$ is\n$$H_{V}:=H_{0}^{\\mathrm{free}}+M_{V},\\qquad D(H_{V}):=D(H_{0}^{\\mathrm{free}}).$$\nThe declared energy unit is the joule. By clause (c) of the cited theorem\n$H_{V}$ is self-adjoint on $D(H_{V})$, bounded below by $-\\|V\\|_{\\infty}$; by\n[[lem-nrqm-central-free-operator-differential-identification]] the domain is\nthe Sobolev space $W^{2,2}(\\mathbb R^{3};\\mathbb C)$ and\n$$H_{V}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f+Vf\\qquad(f\\in D(H_{V})),$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqm-central-free-operator-differential-identification",
+          "source_section": "Statement",
+          "quote": "Let $m,\\hbar>0$, put\n$c:=2\\pi^{2}\\hbar^{2}/m$, and let $H_{0}$ be the free operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b) with $d=3$, this $c$ and $b=0$:",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "source_section": "Statement",
+          "quote": "(a) for every $\\psi\\in L^2$ and every $(l,m)$ the function $u_{lm}$ is a well-defined element of $L^2((0,\\infty),dr)$ depending only on the class of $\\psi$, and $U\\psi:=(u_{lm})_{l,m}$ is a linear isometry of $L^2$ into (indeed onto) $K$ with\n$$\\|U\\psi\\|_K^2=\\sum_{l\\ge0}\\sum_{m=-l}^{l}\\int_0^\\infty|u_{lm}(r)|^2\\,dr=\\|\\psi\\|_{L^2}^2;$$\n\n(b) $U$ is unitary, and for every $(u_{lm})\\in K$ the finite-subset sums $\\sum_{l\\le N,\\,|m|\\le l}u_{lm}(r)Y_{lm}(\\Omega)/r$ converge in $L^2$ to a function $\\psi$ with $U\\psi=(u_{lm})$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-classical-derivatives-are-weak-derivatives",
+          "source_section": "Statement",
+          "quote": "For each multi-index\n$\\alpha\\in\\mathbb N_0^n$ with $|\\alpha|\\le k$, the componentwise classical\nderivative $\\partial^\\alpha u$ is locally integrable and is the weak\nderivative $D^\\alpha u$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-weak-derivative-of-a-locally-integrable-function",
+          "source_section": "Definition",
+          "quote": "We say that $v$ is\nthe **weak derivative** $D^\\alpha u$ if\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nBoth integrals are finite because the test and all its derivatives are bounded\nand compactly supported.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "(b) there is a unique regular projection-valued measure $G$ on the Borel sets\nof $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its\nscalar law is the model's Born position law,\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "source_section": "Statement",
+          "quote": "(c) **Stationary states are exactly the eigenrays.** Let $\\psi\\in H$, $\\psi\\ne0$. The pure preparation $[\\psi]$ is stationary, that is $[\\psi(t)]=[\\psi(0)]$ for every $t$, if and only if $\\psi$ is an eigenvector of $H_{\\mathrm{op}}$: $\\psi\\in D(H_{\\mathrm{op}})$ and $H_{\\mathrm{op}}\\psi=\\lambda\\psi$ for some $\\lambda\\in\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "**(e) Stationary preparations.** A preparation $\\rho\\in D(H)$ is **stationary** for the assigned energy observable when $\\rho(t)=\\rho$ for every $t\\in\\mathbb R$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Regularity, domain and sector] By [F2], $\\psi\\in C_{c}^{\\infty}(\\mathbb R^{3}\\setminus\\{0\\})\\subseteq H^{2}(\\mathbb R^{3};\\mathbb C)$, and by [F1] the Sobolev space is exactly $D(H_{V})$; hence $\\psi\\in D(H_{V})$ and the image of $\\psi$ under $U$ is the finite-support vector with entry $u$ at $(l,\\bar m)$ and zero elsewhere. The position quadratic measure is the integral of the nonnegative integrable function $|\\psi|^2$. Unitarity of $U$ gives $\\|\\psi\\|=\\|u\\|_2$, so if $u\\not\\equiv0$ then $\\psi\\ne0$ and $\\widehat\\psi=\\psi/\\|\\psi\\|$ is unit; [F4] gives its normalized position law $\\mu^G_{\\widehat\\psi}(B)=\\|\\psi\\|^{-2}\\int_B|\\psi|^2dx$. This proves clause (a), including the zero quadratic measure when $u=0$. [given, F1, F2, F4]",
+          "inputs": [
+            "F2",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Weak versus classical Laplacian] On the open set $\\mathbb R^{3}\\setminus\\{0\\}$ the function $\\psi$ is of class $C^{\\infty}$ and, by [F3] applied there with $k=2$, its classical second partial derivatives are its weak second partial derivat",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Energy action and stationarity] By [F1], $H_{V}\\psi=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}\\psi+V\\psi$; on $\\mathbb R^{3}\\setminus\\{0\\}$ one has $V\\psi=v(r)\\frac{u(r)}{r}Y_{l\\bar m}(\\Omega)$. Adding the two classes by step 2.1 gives clause (b). If in addition $u$ satisfies the declared radial equation with energy $E$, then the bracket in clause (b) equals $Eu(r)$ pointwise on $(0,\\infty)$, and since equality on the conull set $\\mathbb R^{3}\\setminus\\{0\\}$ determines the class, $H_{V}\\psi=E\\psi$; if $u\\not\\equiv0$, step 1.1 gives $\\psi\\ne0$, so [F5] makes the preparation $[\\psi]$ stationary and every assigned sharp observable has a time-independent outcome law in it. If $u=0$, then $\\psi=0$ and the equality is $H_V0=E0$; no ray or pure preparation is formed. This is clause (c). [step 1.1, step 2.1, F1, F5, algebra]",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "[The exact almost-everywhere converse] Put $g(r):=-\\frac{\\hbar^2}{2m}u^{\\prime\\prime}(r)+(v(r)+\\frac{\\hbar^2l(l+1)}{2mr^2}-E)u(r)$. This measurable function belongs to $L^2((0,\\infty),dr)$, because $u$ and its derivatives have compact support away from zero and $v$ is bounded. Step 3.1 identifies $H_V\\psi-E\\psi$ with $g(r)Y_{l\\bar m}(\\Omega)/r$. The angular-radial unitary and normalized harmonic of [F2] give $\\|H_V\\psi-E\\psi\\|_{L^2(\\mathbb R^3)}^2=\\int_0^\\infty|g(r)|^2dr$; equivalently, polar integration cancels the factor $r^{-2}$ with the volume factor $r^2$ and the angular squared norm is one. Thus $H_V\\psi=E\\psi$ holds exactly when $g=0$ almost everywhere. This includes $u=0$ without a preparation interpretation. If $v$ is continuous then $g$ is continuous, and a continuous function vanishing almost everywhere on $(0,\\infty)$ vanishes everywhere: a nonzero value would persist with positive magnitude on an open interval of positive measure. This proves clause (d), while for measurable $v$ the conclusion remains almost everywhere. [step 3.1, F2, algebra] ∎",
+          "inputs": [
+            "step 3.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The harmonic family is indexed by l>=0,-l<=m<=l and contains (0,0). The Statement fixes one such label; it allows u=0, producing a zero reduced vector without changing that label domain. This empty-axis ruling concerns only the family detector and does not invent a nonzero u hypothesis.",
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_contract_qm_states (outside Codex scoped contract reviewer)",
+            "reason": "The harmonic family is indexed by l>=0,-l<=m<=l and contains (0,0). The Statement fixes one such label; it allows u=0, producing a zero reduced vector without changing that label domain. This empty-axis ruling concerns only the family detector and does not invent a nonzero u hypothesis. Scoped boundary review only; no whole-item acceptance."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1 and 4.1 preserve u=0 as a zero quadratic measure and the linear identity H_V0=E0; neither forms a ray or preparation. The normalized Born law and stationary-preparation reading require u nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers l=0, where the spherical sector is one-dimensional and the barrier term vanishes."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy statement is made; the labels (l,mbar) index an orthonormal family and the sector is fixed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 concerns the region R^3 minus the origin and the compact support of u is away from the endpoint r=0; the radial equation is asserted on (0,infinity)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the angular-radial theorem and the model, whose cited suppliers assume Countable Choice and the Axiom of Choice; the choice hypotheses are used in step 1.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 show that the radial equation gives H_V psi=E psi for every u, including zero; only a nonzero u gives an eigenvector and stationary pure preparation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the squared norm of H_V psi-E psi as the integral of |g| squared. Its vanishing forces the radial equation almost everywhere; the pointwise upgrade explicitly requires continuous v."
+        }
+      ]
+    },
+    "pthm-nrqm-central-coulomb-energy-observable-and-flow": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "source_section": "Definition",
+          "quote": "energy operator** of the one-centre Coulomb model is\n$$H_{\\kappa}:=\\frac{\\hbar^{2}}{2m}\\,C_{\\gamma},$$\nwith domain $D(H_{\\kappa}):=D(C_{\\gamma})$; by\n[[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] clauses (a)\nand (b) it is self-adjoint with the same domain, and by\n[[lem-nrqm-central-free-operator-differential-identification]] together with\nthe action formula of the cited theorem it acts by\n$$H_{\\kappa}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f-\\kappa\\frac{f}{|\\cdot|}\\qquad(f\\in D(H_{\\kappa})),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqm-central-free-operator-differential-identification",
+          "source_section": "Statement",
+          "quote": "Let $m,\\hbar>0$, put\n$c:=2\\pi^{2}\\hbar^{2}/m$, and let $H_{0}$ be the free operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b) with $d=3$, this $c$ and $b=0$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "source_section": "Statement",
+          "quote": "Then the compactly supported smooth\nfunctions $C_c^\\infty(\\mathbb R^n;\\mathbb K)$ are dense in\n$W^{k,p}(\\mathbb R^n;\\mathbb K)$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sobolev-space-wkp-and-its-norm",
+          "source_section": "Definition",
+          "quote": "Define $W^{k,p}(\\Omega;\\mathbb K)$ to be the set of classes\n$u\\in L^p(\\Omega;\\mathbb K)$ such that, for every $\\alpha\\in\\mathcal A_k$,\nthere is an $L^p(\\Omega;\\mathbb K)$ class with a locally integrable\nrepresentative $v_\\alpha$ satisfying\n$$\\int_\\Omega u\\,D^\\alpha\\varphi\\,dx =(-1)^{|\\alpha|}\\int_\\Omega v_\\alpha\\varphi\\,dx \\qquad\\text{for every }\\varphi\\in C_c^\\infty(\\Omega).$$\nHere the weak derivative is the one in\n[[def-weak-derivative-of-a-locally-integrable-function]]. Under\n[[def-countable-choice]], local integrability of $L^p$ representatives and\ninvariance under null-set changes follow from\n[[lem-weak-derivative-is-independent-of-lp-representatives]], while\n[[lem-weak-derivatives-are-unique-almost-everywhere]] gives uniqueness of each\nlocally integrable derivative class. Thus this condition is a condition on the\n$L^p$ class $u$, and each resulting derivative determines one $L^p$ class,\ndenoted $D^\\alpha u$. The test pairing is bilinear, without conjugation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-essential-spectrum",
+          "source_section": "Statement",
+          "quote": "(a) $C$ is bounded below and $\\sigma_{\\mathrm{ess}}(C)=[0,+\\infty)$;\n\n(b) every point of $\\sigma(C)\\cap(-\\infty,0)$ lies in $\\sigma_{\\mathrm d}(C)$: it is an eigenvalue of $C$ of finite multiplicity isolated in $\\mathbb R$, and the set of such eigenvalues is at most countable;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-infinitesimal-kinetic-bound",
+          "source_section": "Statement",
+          "quote": "(c) for every $\\gamma>0$ the operator\n$$C:=H_0-\\gamma M,\\qquad D(C):=D(H_0)=W^{2,2}(\\mathbb R^3;\\mathbb C),$$\nis self-adjoint on $H$, bounded below, and acts by $Cu=-\\Delta u-\\gamma u/|\\cdot|$ for every $u\\in D(C)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Write $cA$ for the operator with domain $D(cA):=D(A)$ and\n$(cA)x:=c\\,(Ax)$. Then:\n\n(a) $cA$ is self-adjoint.\n\n(b) For every $z\\in\\mathbb C$ one has $z\\in\\rho(cA)$ if and only if\n$z/c\\in\\rho(A)$, and then\n$(cA-z)^{-1}=c^{-1}(A-z/c)^{-1}$; consequently\n$\\rho(cA)=c\\,\\rho(A)$ and $\\sigma(cA)=c\\,\\sigma(A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nrqm-observables-framework-observable-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "**(a) Assigned sharp observables.** Adopt the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2) for a declared system whose state space is the model's [[def-nrqm-state-geometry-framework-state-space]].",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nrqm-state-geometry-framework-state-space",
+          "source_section": "Definition",
+          "quote": "The **state space of the system in the model** is the set\n$$D(H)=\\{\\rho:\\rho\\ \\text{is a density operator on}\\ H\\}$$\nof [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]:",
+          "uses": [
+            "1.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "$U(0)=I$, $U(t+s)=U(t)U(s)$, $U(t)^{*}=U(t)^{-1}=U(-t)$ ([[def-strongly-continuous-one-parameter-unitary-group]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "source_section": "Statement",
+          "quote": "(c) **Stationary states are exactly the eigenrays.** Let $\\psi\\in H$, $\\psi\\ne0$. The pure preparation $[\\psi]$ is stationary, that is $[\\psi(t)]=[\\psi(0)]$ for every $t$, if and only if $\\psi$ is an eigenvector of $H_{\\mathrm{op}}$: $\\psi\\in D(H_{\\mathrm{op}})$ and $H_{\\mathrm{op}}\\psi=\\lambda\\psi$ for some $\\lambda\\in\\mathbb R$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "(b) there is a unique regular projection-valued measure $G$ on the Borel sets\nof $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its\nscalar law is the model's Born position law,\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Energy observable and spectrum] By [F1], $H_{\\kappa}$ is self-adjoint on the dense domain $H^{2}(\\mathbb R^{3};\\mathbb C)$; with the declared unit joule the pair $(H_{\\kappa},\\mathrm J)$ is an assigned sharp observable in the sense of [F4]",
+          "inputs": [
+            "F1",
+            "F4",
+            "F3",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Flow] By (a) and [F5] the family $U(t)=\\exp(-itH_{\\kappa}/\\hbar)$ is a strongly continuous one-parameter unitary group; the Schroedinger equation holds in the norm-differentiable sense exactly for $\\psi(0)\\in D(H_{\\kappa})$; density prepar",
+          "inputs": [
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "[Stationary states and readings] Let $\\psi\\ne0$. By [F5], $[\\psi]$ is stationary exactly when $\\psi\\in D(H_{\\kappa})$ and $H_{\\kappa}\\psi=E\\psi$ for some $E\\in\\mathbb R$; then $\\psi(t)=e^{-itE/\\hbar}\\psi(0)$ and every bounded assigned sharp",
+          "inputs": [
+            "F5",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "step": "2.3",
+          "claim": "[Spectral support and exact values] By clause (d) of [F4], $\\mu^{H_{\\kappa}}_{\\rho}(\\sigma(H_{\\kappa}))=1$ for every preparation; by clause (c) of [F4] an exact value $\\lambda$ has probability equal to the total weight of the eigenspace at ",
+          "inputs": [
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Assembly and scope] Steps 1.1 and 2.1 give (a) and (b), steps 2.2 and 2.3 give (c)-(e); only the declared model, the framework postulates P1, P2, P4, P5 and the cited mathematics were used, so the statement is conditional as recorded in (f",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement(b) has a unitary family over every real time, with U(0)=I established in step 2.1. Empty Borel events in clauses (d)-(e) have zero spectral projection and zero outcome probability under F6. These events do not require a nonempty-event restriction."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 covers the value 0, the continuum threshold, and records that no eigenvalue claim is made there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the parametrisation with a single mass parameter m and coupling kappa, and the scaling c_0=hbar^2/2m is strictly positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 records that every negative spectral point is an eigenvalue of finite multiplicity, which includes the possibility of repeated eigenvalues without claiming simplicity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the essential spectrum with the endpoint 0 and step 2.2 treats the exact-value reading at the threshold."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the spectral theorem, Kato-Rellich and the essential-spectrum theorem under Countable Choice and the Axiom of Choice, declared and used in steps 1.1 and 2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the forward direction of the stationary-state criterion: an eigenvector gives a stationary preparation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 invokes the cited stationary-state criterion, which is a biconditional between stationarity and the eigenvector equation, in the reverse direction as well."
+        }
+      ]
+    },
+    "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "source_section": "Definition",
+          "quote": "energy operator** of the one-centre Coulomb model is\n$$H_{\\kappa}:=\\frac{\\hbar^{2}}{2m}\\,C_{\\gamma},$$\nwith domain $D(H_{\\kappa}):=D(C_{\\gamma})$; by\n[[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] clauses (a)\nand (b) it is self-adjoint with the same domain, and by\n[[lem-nrqm-central-free-operator-differential-identification]] together with\nthe action formula of the cited theorem it acts by\n$$H_{\\kappa}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f-\\kappa\\frac{f}{|\\cdot|}\\qquad(f\\in D(H_{\\kappa})),$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+          "source_section": "Statement",
+          "quote": "Then: (a) $(H_{\\kappa},\\mathrm J)$ is an assigned sharp observable of the model: $H_{\\kappa}$ is densely defined, self-adjoint and bounded below on\n$D(H_{\\kappa})=H^{2}(\\mathbb R^{3};\\mathbb C)$, acts by\n$H_{\\kappa}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f-\\kappa f/|\\cdot|$, and\n$$\\sigma_{\\mathrm{ess}}(H_{\\kappa})=[0,+\\infty);$$\nevery point of $\\sigma(H_{\\kappa})\\cap(-\\infty,0)$ is an eigenvalue of finite\nmultiplicity, isolated in $\\mathbb R$, and the set of negative eigenvalues is\nat most countable;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-nrqm-central-free-operator-differential-identification",
+          "source_section": "Statement",
+          "quote": "Let $m,\\hbar>0$, put\n$c:=2\\pi^{2}\\hbar^{2}/m$, and let $H_{0}$ be the free operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b) with $d=3$, this $c$ and $b=0$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-laguerre-bound-energy-exhaustion",
+          "source_section": "Statement",
+          "quote": "(b) the negative eigenvalues of $A_l$ are exactly the numbers\n$$-\\frac{\\gamma^2}{4n^2},\\qquad n\\ge l+1,$$\neach with one-dimensional eigenspace spanned by the corresponding regular solution $u_{\\mathrm{reg}}$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-jost-volterra-solution",
+          "source_section": "Statement",
+          "quote": "(d) *no positive eigenvalue.* For real $k>0$ and $A,B\\in\\mathbb C$, if $g=Af_l+B\\overline{f_l}$ then $\\int_R^L|g(r)|^2dr=(|A|^2+|B|^2)[L-R-\\gamma\\log(L/R)/(2k^2)]+O(1)$ as $L\\to\\infty$ with $R>r_0$ fixed; hence $g\\in L^2(r_0,\\infty)$ if and only if $A=B=0$, and $k^2>0$ is not an eigenvalue of $A_l$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-continuum-spectral-density",
+          "source_section": "Statement",
+          "quote": "(d) *absolutely continuous spectrum; no zero eigenvalue.* For every $g\\in L^2(0,\\infty)$ the measure $E_{A_l,g}$ has no atom in $(0,\\infty)$; the positive spectral subspace $E_{A_l}((0,\\infty))L^2(0,\\infty)$ is purely absolutely continuous and is the closed span of the positive spectral projections of compactly supported functions; it equals the absolutely continuous subspace of $A_l$, and $A_l$ has no singular continuous spectrum on $(0,\\infty)$; moreover $0$ is not an eigenvalue of $A_l$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "(a) each $\\psi_{nlm}$ lies in $D(C)$ and $C\\psi_{nlm}=-\\frac{\\gamma^2}{4n^2}\\psi_{nlm}$; the vectors $\\psi_{nlm}$ with distinct labels are pairwise orthogonal, and for fixed $n$ the eigenspace of $C$ at $-\\gamma^2/(4n^2)$ is exactly their span;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-coulomb-essential-spectrum",
+          "source_section": "Statement",
+          "quote": "(c) the negative spectral subspace $E((-\\infty,0))L^2(\\mathbb R^3;\\mathbb C)$ is the closed linear span of the eigenspaces of $C$ for its negative eigenvalues.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nrqm-coulomb-transported-radial-endpoint-realization",
+          "source_section": "Statement",
+          "quote": "(d) *block identity.* For $\\psi\\in L^2(\\mathbb R^3)$ with $U\\psi=(u_{lm})$ one has $\\psi\\in D(C)$ if and only if $u_{lm}\\in D(A_l)$ for every $(l,m)$ and $\\sum_{l,m}\\bigl(\\|u_{lm}\\|^2+\\|A_lu_{lm}\\|^2\\bigr)<\\infty$;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "source_section": "Statement",
+          "quote": "For $\\psi\\in L^2$ and\neach $(l,m)$ define the coefficient function and the reduced function\n$$c_{lm}(r):=\\int_{S^2}\\psi(r\\Omega)\\overline{Y_{lm}(\\Omega)}\\,d\\sigma(\\Omega)\\quad(r>0,\\ \\text{a.e.}),\\qquad u_{lm}(r):=r\\,c_{lm}(r).$$\nThen:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "source_section": "Statement",
+          "quote": "Write $cA$ for the operator with domain $D(cA):=D(A)$ and\n$(cA)x:=c\\,(Ax)$. Then:\n\n(a) $cA$ is self-adjoint.\n\n(b) For every $z\\in\\mathbb C$ one has $z\\in\\rho(cA)$ if and only if\n$z/c\\in\\rho(A)$, and then\n$(cA-z)^{-1}=c^{-1}(A-z/c)^{-1}$; consequently\n$\\rho(cA)=c\\,\\rho(A)$ and $\\sigma(cA)=c\\,\\sigma(A)$.\n\n(c) If some, hence every, resolvent of $A$ is compact\n([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]],\n[[def-compact-linear-operator]]), then every resolvent of $cA$ is compact,\nthere is a complete orthonormal family $(e_n)_{n\\in\\mathbb N}$ of eigenvectors\nof $A$, the same family consists of eigenvectors of $cA$ with eigenvalues\n$c\\,\\mu_n$, where $\\mu_n$ is the eigenvalue of $e_n$ for $A$, and\n$\\sigma(cA)=\\{c\\,\\mu_n:n\\in\\mathbb N\\}$ with no other spectral points\n([[lem-nrqm-intervals-compact-resolvent-eigenbasis]] clauses (b), (c)).\n\n(d) Eigenvectors correspond exactly: for $\\lambda\\in\\mathbb R$ and $x\\in H$,\n$x\\ne0$, one has $x\\in D(A)$ and $Ax=\\lambda x$ if and only if\n$x\\in D(cA)$ and $(cA)x=(c\\lambda)x$; and every eigenvalue of $cA$ has the same\neigenspace as the corresponding eigenvalue of $A$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nrqm-central-positive-scaling-spectral-measure",
+          "source_section": "Statement",
+          "quote": "(c) consequently $F$ is the spectral projection valued measure $E_{cA}$ of\n$cA$: for every Borel $B\\subseteq\\mathbb R$,\n$$E_{cA}(B)=E\\bigl(c^{-1}B\\bigr);$$in particular the negative spectral subspaces agree,$$E_{cA}\\bigl((-\\infty,0)\\bigr)H=E\\bigl((-\\infty,0)\\bigr)H .$$\n\nThe assertion transfers the spectral measure along positive scaling of the\noperator.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-projection-valued-measure",
+          "source_section": "Definition",
+          "quote": "A PVM is called **regular** when\n$X$ is a locally compact Hausdorff space ([[def-locally-compact-space]]), the\n$\\sigma$-algebra is the Borel $\\sigma$-algebra, and every one of the finite\npositive measures\n\n$$E_x(B):=\\langle E(B)x,x\\rangle,\\qquad x\\in H,\\ B\\in\\Sigma,$$\n\nis a regular Borel measure ([[def-regular-borel-measure-on-an-lch-space]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-nrqm-observables-framework-observable-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "**(b) Spectral measure and outcome law.** Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), the choice hypotheses of the cited spectral suppliers. The self-adjoint operator $A$ has a unique spectral projection-valued measure $E_A$ on the Borel $\\sigma$-algebra of $\\mathbb R$, with $D(A)=\\{x:\\int\\lambda^{2}\\,dE_{A,x}<\\infty\\}$ and $Ax=\\int\\lambda\\,dE_A(\\lambda)x$, where $E_{A,x}(B)=\\langle E_A(B)x,x\\rangle$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]], [[def-borel-sigma-algebra]]). For a preparation $\\rho$, that is a state $\\rho\\in D(H)$ of [[def-nrqm-state-geometry-pure-mixed-states-and-purity]], the **outcome law** of the pair $(A,u_A)$ in the preparation $\\rho$ is the assignment\n$$\\mu^{A}_{\\rho}(B):=\\operatorname{tr}\\bigl(\\rho\\,E_A(B)\\bigr)\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$\nthe reading of clause (ii) of P2; for the pure preparation $[\\psi]$ of a unit vector $\\psi$ it is $\\mu^{A}_{\\psi}(B)=\\|E_A(B)\\psi\\|^{2}$, which depends only on the ray by [[def-nrqm-state-geometry-state-vectors-and-rays]]. The law is a probability measure on the Borel sets by [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b), and it is affine in the preparation: for a statistical mixture $\\sum_nw_n\\rho_n$ one has $\\mu^{A}_{\\sum_nw_n\\rho_n}=\\sum_nw_n\\mu^{A}_{\\rho_n}$ by [[lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity]] clause (b).\n\n**(c) Outcome sets and exact values.** A declared finite-resolution outcome of the quantity is a Borel set $B$; its probability in the preparation $\\rho$ is $\\mu^{A}_{\\rho}(B)$, and a \"value in $B$\" is read only through this number. The reading of an **exact value** $\\lambda$ is the singleton $B=\\{\\lambda\\}$, with probability $\\mu^{A}_{\\rho}(\\{\\lambda\\})$; by [[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]] clauses (a) and (b) this number is zero for every preparation unless $\\lambda$ is an eigenvalue of $A$, and when $\\lambda$ is an eigenvalue it is the total weight of the eigenspace.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "source_section": "Statement",
+          "quote": "in particular $E_A(\\{\\lambda\\})\\ne0$ if and only if $\\lambda$ is an eigenvalue of $A$. (b) For every density operator $\\rho$ on $H$, that is every self-adjoint positive trace-class $\\rho$ with $\\operatorname{tr}\\rho=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)), the number $\\mu^{A}_{\\rho}(\\{\\lambda\\})=\\operatorname{tr}(\\rho E_{A}(\\{\\lambda\\}))$ is the weight that the scalar law $\\mu^{A}_{\\rho}$ assigns to the singleton $\\{\\lambda\\}$:",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "(b) there is a unique regular projection-valued measure $G$ on the Borel sets\nof $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its\nscalar law is the model's Born position law,\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Eigenpairs and degeneracy] By [F3] clause (a), $\\psi_{nlm}\\in D(C_{\\gamma})$ and $C_{\\gamma}\\psi_{nlm}=-\\frac{\\gamma^{2}}{4n^{2}}\\psi_{nlm}$; by [F5] the eigenpair correspondence gives $\\psi_{nlm}\\in D(H_{\\kappa})$ and $H_{\\kappa}\\psi_{nlm",
+          "inputs": [
+            "F3",
+            "F5",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "[Completeness in the negative subspace] By [F3] clause (b) the family $(\\Psi_{nlm})$ is a complete orthonormal family of $E_{C_{\\gamma}}((-\\infty,0))L^{2}$; by [F5] the spectral projections satisfy $E_{H_{\\kappa}}((-\\infty,0))=E_{C_{\\gamma}",
+          "inputs": [
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[No nonnegative eigenvalue] Suppose $H_{\\kappa}\\psi=\\lambda\\psi$ with $\\psi\\ne0$ and $\\lambda\\ge0$; by [F5] this is equivalent to $C_{\\gamma}\\psi=(\\lambda/c_{0})\\psi$ with $\\lambda/c_{0}\\ge0$, and $\\psi\\in D(C_{\\gamma})$. Write $U\\psi=(u_{l",
+          "inputs": [
+            "F5",
+            "F4",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "[Non-exhaustion and the continuum] By [F3] clause (c) the nonnegative spectral subspace of $C_{\\gamma}$ is nonzero, indeed infinite dimensional; by [F5] at $B=[0,+\\infty)$, $E_{H_{\\kappa}}([0,+\\infty))=E_{C_{\\gamma}}([0,+\\infty))$, so the n",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Energy-law reading] For a unit $\\psi$, [F6] gives the sigma-additive law $\\mu^{H_{\\kappa}}_{\\psi}$ with $\\mu^{H_{\\kappa}}_{\\psi}(B)=\\|E_{H_{\\kappa}}(B)\\psi\\|^{2}$; its restriction to $(-\\infty,0)$ is carried by the eigenvalues $E_{n}$ by s",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "[Assembly and scope] Steps 1.1 and 2.1 give (a) and (b), step 1.2 gives (c), step 2.2 gives (d) and step 3.1 gives (e); only the declared model, P1, P2, P4, P5 and the cited mathematics were used, so no measured line, transition rate, photo",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 1.2",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The fixed level labels include n=1,l=m=0. Statement(e) admits empty Borel subsets and a state with zero negative spectral weight; step 3.1 assigns zero to those events and weights by the projection law and additivity. It does not require bound support in every preparation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the value 0 in the eigenvalues-by-exhaustion reading and the nonnegative half-line in step 2.2, where no eigenvalue lies at 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers n=1, where the level carries one state and E_1 is the ground energy; the degeneracy count 1^2=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 compute the model degeneracy n^2 of each level and prove that the eigenspace has exactly that dimension."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the endpoint 0 of the negative half-line and the threshold reading of the continuum, and records that the nonnegative subspace is infinite dimensional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the Coulomb spectral suppliers and the spectral theorem under Countable Choice and the Axiom of Choice, declared and used in steps 1.1-2.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that every eigenvalue of H_kappa is one of the E_n, using the block identity and the absence of nonnegative eigenvalues of the radial operators."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that each E_n is an eigenvalue with the stated eigenvector, which is the reverse reading of the exhaustion claim."
+        }
+      ]
+    },
+    "pthm-nrqm-central-coulomb-bound-state-radial-distributions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "(a) each $\\psi_{nlm}$ lies in $D(C)$ and $C\\psi_{nlm}=-\\frac{\\gamma^2}{4n^2}\\psi_{nlm}$; the vectors $\\psi_{nlm}$ with distinct labels are pairwise orthogonal, and for fixed $n$ the eigenspace of $C$ at $-\\gamma^2/(4n^2)$ is exactly their span; it has dimension $\\sum_{l=0}^{n-1}(2l+1)=n^2$;",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $0\\le l\\le n-1$, $-l\\le m\\le l$ let\n$\\psi_{nlm}$ be the regular bound solutions of\n[[thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy]] and put\n$\\Psi_{nlm}:=\\psi_{nlm}/\\|\\psi_{nlm}\\|$, and put\n$$E_{n}:=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}=-\\frac{\\hbar^{2}}{2ma_{\\kappa}^{2}n^{2}}\\qquad(n\\ge1).$$\nThen:",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "source_section": "Statement",
+          "quote": "(c) *regular solution and general solution.* The function\n$$u_{\\mathrm{reg}}(r):=r^{l+1}e^{-kr}v(2kr)$$\nis a $C^\\infty$ solution of the radial equation on $(0,\\infty)$ with $u_{\\mathrm{reg}}(r)/r^{l+1}\\to1$ as $r\\downarrow0$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-coulomb-ground-radial-probability-and-units",
+          "source_section": "Statement",
+          "quote": "(d) the spatial density $|\\psi_{100}(x)|^2=\\frac{\\gamma^3}{8\\pi}e^{-2r/a_0}$ is strictly decreasing in $r$ and maximal at $x=0$, and for every $\\varepsilon>0$, $\\int_{|x|<\\varepsilon}|\\psi_{100}|^2dx=\\frac16\\bigl(\\frac{2\\varepsilon}{a_0}\\bigr)^3+O(\\varepsilon^4)>0$ tends to $0$ as $\\varepsilon\\downarrow0$:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "source_section": "Definition",
+          "quote": "The model declares the **length\nscale** $a_{\\kappa}:=\\hbar^{2}/(m\\kappa)$, read in metres, and the **energy\nscale** $\\mathcal E_{\\kappa}:=m\\kappa^{2}/(2\\hbar^{2})=\\hbar^{2}/(2ma_{\\kappa}^{2})$,\nread in joules.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Then $\\sigma$\nis a finite Borel measure on $S^{n-1}$, and for every Borel measurable\n$f : \\mathbb R^n \\to [0,\\infty]$,\n$$\\int_{\\mathbb R^n} f(x)\\,d\\lambda_n(x) = \\int_0^\\infty \\int_{S^{n-1}} f(r\\omega) r^{n-1}\\,d\\sigma(\\omega)\\,dr.$$\nMoreover, $\\sigma$ is the unique Borel measure on $S^{n-1}$ with this\nproperty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ and $(Y,\\mathcal B,\\nu)$ be sigma-finite measure\nspaces, and let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then\n$x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable,\nand\n\n$$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-polar-surface-measure-on-the-unit-sphere",
+          "source_section": "Definition",
+          "quote": "$$\\sigma(E):=n\\,\\lambda_n(\\{r\\omega : \\omega \\in E,\\ 0<r\\le 1\\}).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nrqm-orbital-and-spin-sphere-onb",
+          "source_section": "Statement",
+          "quote": "Then $(Y_{lm})$ is a complete orthonormal family of the complex Hilbert space $L^2(S^2,\\sigma)$\n([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-l-p-space-as-a-quotient-by-null-functions]]):\nthe family is orthonormal, and if $F\\in L^2(S^2,\\sigma)$ satisfies\n$\\int_{S^2}F\\overline{Y_{lm}}\\,d\\sigma=0$ for all $l\\ge0$ and $-l\\le m\\le l$, then $F=0$ almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "reviewed": {
+            "upheld": true,
+            "by": "/root/gate_contract_qm_states (outside Codex scoped contract reviewer)",
+            "reason": "F4 uses normalized Y_lm at a bound-state label of the preceding adopted spectrum theorem: n>=1,0<=l<=n-1,-l<=m<=l. The Statement introduces psi_nlm and Psi_nlm as those bound vectors, so l>=0 is inherited rather than dropped. Step 1.1 applies polar disintegration to that fixed label, never a negative-degree harmonic."
+          }
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "(b) there is a unique regular projection-valued measure $G$ on the Borel sets\nof $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its\nscalar law is the model's Born position law,\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-observables-framework-observable-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "**(d) Spectral support.** The outcomes of the observable lie in its spectrum: with $\\sigma(A)$ the spectrum of [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], one has $\\mu^{A}_{\\rho}(B)=\\mu^{A}_{\\rho}(B\\cap\\sigma(A))$ and $\\mu^{A}_{\\rho}(\\sigma(A))=1$ for every preparation by [[lem-nrqm-observables-spectral-support-and-outcome-law]] clause (b).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[General radial law] Fix a label. By [F1], $\\psi_{nlm}(x)=u_{nl}(r)Y_{lm}(\\Omega)/r$ and $u_{nl}$ is a regular solution of [F2]; the unit preparation is $[\\Psi_{nlm}]$ with $\\Psi_{nlm}=\\psi_{nlm}/\\|\\psi_{nlm}\\|$. By [F5] its position law is",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Ground state] Take $n=1$, $l=m=0$; then $F_{3}$ gives $\\psi_{100}(x)=(\\gamma^{3}/8\\pi)^{1/2}e^{-r/a_{0}}$ with $\\|\\psi_{100}\\|=1$, so $\\Psi_{100}=\\psi_{100}$ and the radial density of (a) is $p_{10}(r)=|u_{10}(r)|^{2}$. By [F2] with $l=j=0",
+          "inputs": [
+            "F2",
+            "F4",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "[Polynomial-exponential form] For a general label, [F2] with $j=n-l-1$ and $k=\\gamma/(2n)=1/(na_{\\kappa})$ gives $u_{nl}(r)=c_{nl}r^{l+1}e^{-r/(na_{\\kappa})}L_{n-l-1}^{(2l+1)}(2r/(na_{\\kappa}))$ with $c_{nl}\\ne0$; the normalisation $\\int_{0",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Assembly and scope] Step 1.1 gives (a), step 2.1 gives (b) and step 2.2 gives (c); only the declared model, P1, P2, P5 and the cited mathematics were used, so the reading is conditional as recorded in (d), no orbit, trajectory, measured ra",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The bound states are nonzero and the radial sets considered include (0,infinity), whose probability is one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the ball probability for small epsilon and shows it tends to zero, so the origin carries no atomic probability."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the n=1 ground state explicitly, and the normalisation of the radial density integrates to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 records the general reduced solutions; for fixed (n,l) the density is the modulus squared of one solution, and no degeneracy claim beyond the sector labels is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats radial sets with endpoints 0 and infinity, and step 2.2 states that the density integrates to one over the half-line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the angular-radial and polar-coordinate suppliers under Countable Choice and the Axiom of Choice, declared and used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives identities for the position law and the radial density, not a biconditional over a class of states."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement gives identities for the position law and the radial density, not a biconditional over a class of states."
+        }
+      ]
+    },
+    "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "source_section": "Definition",
+          "quote": "the relative operator is exactly the one-centre Coulomb operator of clause\n(b) with mass parameter $\\mu$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-coulomb-two-body-reduced-mass",
+          "source_section": "Statement",
+          "quote": "(c) the operator $H_2:=-(\\hbar^2/2m_1)\\Delta_{x_1}-(\\hbar^2/2m_2)\\Delta_{x_2}-\\kappa/|x_1-x_2|$ with $D(H_2):=H^2(\\mathbb R^6;\\mathbb C)$ is self-adjoint, and $U_\\Phi H_2U_\\Phi^{-1}=T_R\\otimes I+I\\otimes C_\\mu$ under the identification $L^2(\\mathbb R^6)\\cong L^2(\\mathbb R^3_R)\\widehat\\otimes L^2(\\mathbb R^3_r)$ of [[lem-nrqm-composites-euclidean-l2-product-unitary]], where $T_R:=-(\\hbar^2/2M)\\Delta_R$ and $C_\\mu:=-(\\hbar^2/2\\mu)\\Delta_r-\\kappa/|\\cdot|$;",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-nrqm-coulomb-two-body-reduced-mass",
+          "source_section": "Statement",
+          "quote": "the negative part of its spectrum is the interval $[-\\frac{\\mu\\kappa^2}{2\\hbar^2},0)$, consisting entirely of continuous spectrum, and each relative bound-state energy $-\\frac{\\mu\\kappa^2}{2\\hbar^2n^2}$ of $C_\\mu$ is a threshold of the continuous spectrum of $H_2$ rather than an eigenvalue;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-euclidean-l2-product-unitary",
+          "source_section": "Statement",
+          "quote": "write $H_a=L^2(\\mathbb R^a)$, $H_b=L^2(\\mathbb R^b)$. Then there is a unique linear isometry\n\n$$\\Theta:H_a\\widehat\\otimes H_b\\longrightarrow L^2(\\mathbb R^{a+b})$$\n\nwith $\\Theta(f\\otimes g)(x,y)=f(x)g(y)$ for all $f\\in H_a$, $g\\in H_b$ and a.e.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nrqm-coulomb-two-body-reduced-mass",
+          "source_section": "Statement",
+          "quote": "consequently every eigenvector equation for $H_2$ is incompatible with a normalisable state of definite total momentum.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "in particular\n$H_{\\kappa}$ has no eigenvalues in $[0,+\\infty)$, whose spectral content is\nentirely essential spectrum $[0,+\\infty)$ in the sense of\n[[pthm-nrqm-central-coulomb-energy-observable-and-flow]] (a);",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "source_section": "Statement",
+          "quote": "Then: (a) for every label and every Borel $B\\subseteq\\mathbb R^{3}$ the position\noutcome law in the unit preparation $[\\Psi_{nlm}]$ is\n$$\\mu^{G}_{\\Psi_{nlm}}(B)=\\|\\psi_{nlm}\\|^{-2}\\int_{0}^{\\infty}|u_{nl}(r)|^{2}\\Bigl(\\int_{S^{2}}\\mathbf 1_{B}(r\\Omega)\\,|Y_{lm}(\\Omega)|^{2}\\,d\\sigma(\\Omega)\\Bigr)dr;$$\nin particular, for a **radial** set $B=\\{x:a<|x|<b\\}$ with\n$0\\le a<b\\le+\\infty$ one has\n$$\\mu^{G}_{\\Psi_{nlm}}(B)=\\frac{1}{\\|u_{nl}\\|_{2}^{2}}\\int_{a}^{b}|u_{nl}(r)|^{2}\\,dr,$$\nso the **radial density** $p_{nl}(r):=|u_{nl}(r)|^{2}/\\|u_{nl}\\|_{2}^{2}$ is a\nprobability density on $(0,\\infty)$:",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "source_section": "Statement",
+          "quote": "(c) **Stationary states are exactly the eigenrays.** Let $\\psi\\in H$, $\\psi\\ne0$. The pure preparation $[\\psi]$ is stationary, that is $[\\psi(t)]=[\\psi(0)]$ for every $t$, if and only if $\\psi$ is an eigenvector of $H_{\\mathrm{op}}$: $\\psi\\in D(H_{\\mathrm{op}})$ and $H_{\\mathrm{op}}\\psi=\\lambda\\psi$ for some $\\lambda\\in\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "**(a) Assigned energy observable.** Adopt the autonomous-dynamics postulate [[post-nrqm-framework-autonomous-dynamics]] (P4) for a declared isolated system whose state space is the model's [[def-nrqm-state-geometry-framework-state-space]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Decomposition and relative problem] By [F1] and [F2], $U_{\\Phi}H_{2}U_{\\Phi}^{-1}=T_{R}\\otimes I+I\\otimes C_{\\mu}$ and $C_{\\mu}$ is the one-centre Coulomb operator with mass parameter $\\mu$; with the one-centre model definition this is (a)",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Total spectrum and product vectors] By [F2] the total operator $H_{2}$ has no eigenvalues, $\\sigma(H_{2})=[-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}},\\infty)$ and the negative part of the spectrum is continuous, each $\\mathcal E_{n}$ being a thresh",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "[Reduced-mass factor] By algebra, $\\mu=\\frac{m_{1}m_{2}}{m_{1}+m_{2}}=\\frac{m_{1}}{1+m_{1}/m_{2}}$, hence $\\mu<m_{1}$ and $\\mu<m_{2}$, so $\\mu\\le\\min\\{m_{1},m_{2}\\}$; for fixed $m_{1}$ the expression $\\frac{m_{1}}{1+m_{1}/m_{2}}$ tends to $",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "[Assembly and scope] Step 1.1 gives (a) and (b), step 2.1 gives (c) and (d) and step 2.2 gives (e); only the declared two-body model, P1, P2, P4, P5 and the cited mathematics were used, so the statement is conditional as recorded in (f) and",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two-particle state space is nonzero and the statement quantifies over declared positive masses and over all vectors of L^2(R^3_R)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the case phi=0, where the product vector vanishes and the eigenvector equation is vacuous, and shows no nonzero phi exists."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 evaluates the reduced-mass factor 1/(1+m_1/m_2) and its limiting value 1 as the second mass grows."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degeneracy of the total operator is claimed; the relative degeneracy n^2 is inherited from the one-centre item and is not restated as a total-spectrum claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the threshold E_1 of the continuous spectrum, the endpoint value of the negative spectral interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The proof uses the two-body and one-centre suppliers under Countable Choice and the Axiom of Choice, declared and used in steps 1.1-2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the forward reading: a relative eigenvector tensored with a nonzero centre-of-mass state is not an eigenvector of H_2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the reverse reading: the eigenvector equation for H_2 would force T_R phi=lambda phi, which has no nonzero solution, so no product eigenvector exists."
+        }
+      ]
+    },
+    "ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$, $0\\le l\\le n-1$, $-l\\le m\\le l$ let\n$\\psi_{nlm}$ be the regular bound solutions of\n[[thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy]] and put\n$\\Psi_{nlm}:=\\psi_{nlm}/\\|\\psi_{nlm}\\|$, and put\n$$E_{n}:=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}=-\\frac{\\hbar^{2}}{2ma_{\\kappa}^{2}n^{2}}\\qquad(n\\ge1).$$\nThen:",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-nrqm-coulomb-ground-radial-probability-and-units",
+          "source_section": "Statement",
+          "quote": "(e) *parametrisation and dimensions.* If $\\hbar,m,\\kappa>0$ and $\\gamma:=2m\\kappa/\\hbar^2$, then $a_0=\\hbar^2/(m\\kappa)$ and the eigenvalues of the operator $C_{\\hbar,m,\\kappa}:=-\\frac{\\hbar^2}{2m}\\Delta-\\frac{\\kappa}{|\\cdot|}$ are $-\\frac{m\\kappa^2}{2\\hbar^2n^2}=\\frac{\\hbar^2}{2m}\\Bigl(-\\frac{\\gamma^2}{4n^2}\\Bigr)$ ($n\\ge1$); under the dimensional conventions $[\\hbar]=\\mathrm{J\\,s}$, $[m]=\\mathrm{kg}$, $[\\kappa]=\\mathrm{J\\,m}$, the constants $a_0^2$ and $m\\kappa^2/(2\\hbar^2)$ have the dimensions of $\\mathrm m^2$ and $\\mathrm J$ respectively.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+          "source_section": "Statement",
+          "quote": "the model reads the one-centre model of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (b) with mass\n$m_{1}$ as the fixed-nucleus limiting description, and the relative energies\n$\\mathcal E_{n}$ are strictly weaker in magnitude than the fixed-nucleus\nenergies $-\\frac{m_{1}\\kappa^{2}}{2\\hbar^{2}n^{2}}$;",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "source_section": "Definition",
+          "quote": "The **assigned energy\noperator** is\n$$H_{2}:=-\\frac{\\hbar^{2}}{2m_{1}}\\Delta_{x_{1}}-\\frac{\\hbar^{2}}{2m_{2}}\\Delta_{x_{2}}-\\frac{\\kappa}{|x_{1}-x_{2}|},\\qquad D(H_{2}):=H^{2}(\\mathbb R^{6};\\mathbb C),$$\nwhich is self-adjoint by clause (c) of\n[[thm-nrqm-coulomb-two-body-reduced-mass]].",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nrqm-framework-quantities-and-units",
+          "source_section": "Definition",
+          "quote": "4. Mechanical quantities: action $[\\hbar]=\\mu\\ell^{2}\\tau^{-1}$; energy and the Hamiltonian eigenvalues $\\mu\\ell^{2}\\tau^{-2}$; momentum $\\mu\\ell\\tau^{-1}$; position components $\\ell$; angular momentum and spin $\\mu\\ell^{2}\\tau^{-1}$; mass $\\mu$; velocity of a free spinless model $\\ell\\tau^{-1}$; force $\\mu\\ell\\tau^{-2}$; a real potential energy $\\mu\\ell^{2}\\tau^{-2}$.",
+          "uses": [
+            "1.4"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "[Length-scale identity] By definition $a_{\\kappa}=\\frac{\\hbar^{2}}{m\\kappa}$, so $a_{\\kappa}^{2}=\\frac{\\hbar^{4}}{m^{2}\\kappa^{2}}$ and $\\frac{\\hbar^{2}}{2ma_{\\kappa}^{2}}=\\frac{\\hbar^{2}}{2m}\\cdot\\frac{m^{2}\\kappa^{2}}{\\hbar^{4}}=\\frac{m\\k",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "[Fine-structure parametrisation] By definition $\\alpha=\\frac{\\kappa}{\\hbar c}$, hence $\\kappa=\\alpha\\hbar c$ and $\\kappa^{2}=\\alpha^{2}\\hbar^{2}c^{2}$; substituting into $E_{n}=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}$ gives $E_{n}=-\\frac{m\\alp",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "[Reduced-mass factor] By [L2], $\\mathcal E_{n}=-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}n^{2}}$ and $\\mu=\\frac{m_{1}}{1+m_{1}/m_{2}}$, so $\\mu=\\frac{\\mu}{m_{1}}\\cdot m_{1}$ gives $\\mathcal E_{n}=\\frac{\\mu}{m_{1}}\\bigl(-\\frac{m_{1}\\kappa^{2}}{2\\hbar^",
+          "inputs": [
+            "L2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "step": "1.4",
+          "claim": "[Dimensions] Using [L3]: $[a_{\\kappa}]=\\frac{[\\hbar]^{2}}{[m][\\kappa]}=\\frac{(\\mathrm{kg\\,m^{2}\\,s^{-1}})^{2}}{\\mathrm{kg}\\cdot\\mathrm{kg\\,m^{3}\\,s^{-2}}}=\\mathrm m$; $[\\frac{m\\kappa^{2}}{\\hbar^{2}}]=\\frac{\\mathrm{kg}\\cdot(\\mathrm{kg\\,m^{3}",
+          "inputs": [
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "[Threshold and assembly] By [L2] the bottom of the continuous spectrum of the total operator is $-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}}=\\mathcal E_{1}$, and the relative ground energy is a threshold and not an eigenvalue of the total operator, w",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example concerns the declared positive parameters and the level index n>=1; no empty family or set arises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the limit of zero inverse nuclear mass in the fixed-nucleus reading and the vanishing of the difference between the two energy parametrisations at mu=m_1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 evaluate the n=1 identities E_1=-m kappa^2/2 hbar^2 and the fine-structure form."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The example compares energy parametrisations and the reduced-mass factor; it makes no degeneracy claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the endpoint of the negative spectral interval as the continuum threshold E_1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The example uses no choice-dependent supplier; the cited one-centre and two-body results carry their own choice hypotheses, which are not consumed here beyond their statements."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states equalities, not biconditionals."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states equalities, not biconditionals."
+        }
+      ]
+    },
+    "ex-nrqm-central-hydrogen-radial-distributions-and-moments": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-nrqm-central-exponential-moments",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), the choice hypothesis used by the change-of-variables lemma cited below. For every real $\\lambda>0$ and every integer $k\\ge0$ the function $r\\mapsto r^{k}e^{-\\lambda r}$ is Lebesgue integrable on $(0,\\infty)$ and $$\\int_0^\\infty r^{k}e^{-\\lambda r}\\,dr=\\frac{k!}{\\lambda^{k+1}}.$$ The assertion is an identity for the Lebesgue integral of a nonnegative Borel function; no probabilistic interpretation and no normalised density are asserted. In particular no statement is made about any other exponent, about complex $\\lambda$, or about negative powers.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $\\gamma>0$, $l\\ge0$, $k>0$, let $A_l$ be the radial operator of [[thm-nrqm-coulomb-transported-radial-endpoint-realization]], write $$j:=\\frac{\\gamma}{2k}-l-1,$$ and for $a=2l+1$ and $n\\in\\mathbb N_0$ let $$L_n^{(a)}(x):=\\sum_{i=0}^{n}(-1)^i\\binom{n+a}{n-i}\\frac{x^i}{i!}$$ be the $n$-th Laguerre polynomial of order $a$. Then: (a) *substitution.* A $C^2$ function $u$ on $(0,\\infty)$ satisfies $-u''+(l(l+1)/r^2-\\gamma/r)u=-k^2u$ if and only if $v(x):=e^{x/2}x^{-(l+1)}u(x/2k)$ is $C^2$ and satisfies $xv''+(2l+2-x)v'+jv=0$ on $(0,\\infty)$; (b) *regular series.* With $v_0:=1$ and $$v_{i+1}:=\\frac{(i-j)v_i}{(i+1)(i+2l+2)}\\qquad(i\\ge0),$$ the power series $v(x):=\\sum_{i\\ge0}v_ix^i$ converges for every $x\\in\\mathbb R$ and defines a solution of $xv''+(2l+2-x)v'+jv=0$ on $\\mathbb R$; (c) *regular solution and general solution.* The function $$u_{\\mathrm{reg}}(r):=r^{l+1}e^{-kr}v(2kr)$$ is a $C^\\infty$ solution of the radial equation on $(0,\\infty)$ with $u_{\\mathrm{reg}}(r)/r^{l+1}\\to1$ as $r\\downarrow0$; it is, up to a nonzero scalar multiple, the only solution with $u(r)/r^{l+1}$ bounded as $r\\downarrow0$; every solution of the radial equation on $(0,\\infty)$ is $c_1u_{\\mathrm{reg}}+c_2u_2$ with $u_2$ defined near zero by $u_2(r):=u_{\\mathrm{reg}}(r)\\int_{r_*}^r u_{\\mathrm{reg}}(s)^{-2}ds$, where $0<r_*<\\delta$ and $u_{\\mathrm{reg}}$ has no zero in $(0,\\delta)$, and extended uniquely to $(0,\\infty)$ by the regular initial-value equation, and every solution that is not a multiple of $u_{\\mathrm{reg}}$ has $|u(r)|/r$ unbounded as $r\\downarrow0$; (d) *termination.* $v$ is a polynomial if and only if $j\\in\\mathbb N_0$; in that case $v$ is a nonzero constant multiple of $L_j^{(2l+1)}$, and $$u_{\\mathrm{reg}}(r)=c\\,r^{l+1}e^{-kr}L_j^{(2l+1)}(2kr)\\quad(c\\ne0)$$ lies in $L^2(0,\\infty;dr)$; (e) *eigenfunction.* If $j\\in\\mathbb N_0$ then $u_{\\mathrm{reg}}\\in D(A_l)$ and $A_lu_{\\mathrm{reg}}=-k^2u_{\\mathrm{reg}}$; equivalently, for every $m$ the transported function $\\psi(r\\Omega):=u_{\\mathrm{reg}}(r)Y_{lm}(\\Omega)/r$ lies in $H^2(\\mathbb R^3)\\cap D(C)$ and satisfies $C\\psi=-k^2\\psi$. The assertions are statements about the ordinary differential equation and the operators $A_l,C$; no physical interpretation of $\\gamma,k$ or of any spectral level is made.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "source_section": "Statement",
+          "quote": "Adopt the framework postulates P1, P2 and P5, the readings of the declared one-centre Coulomb model [[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with parameters $\\hbar>0$, $m>0$, $\\kappa>0$ and length scale $a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, the energy-observable reading of [[pthm-nrqm-central-coulomb-energy-observable-and-flow]], the bound-state data of [[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]], and the spin-zero position law [[pthm-nrqm-kinematics-spin-s-outcome-laws]] ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-observables-framework-observable-and-outcome-law]]). Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). For each label let $\\psi_{nlm}$ and $\\Psi_{nlm}=\\psi_{nlm}/\\|\\psi_{nlm}\\|$ be the bound vectors of the cited theorem, and write $u_{nl}$ for the reduced regular solution with $\\psi_{nlm}(x)=u_{nl}(r)Y_{lm}(\\Omega)/r$. Then: (a) for every label and every Borel $B\\subseteq\\mathbb R^{3}$ the position outcome law in the unit preparation $[\\Psi_{nlm}]$ is $$\\mu^{G}_{\\Psi_{nlm}}(B)=\\|\\psi_{nlm}\\|^{-2}\\int_{0}^{\\infty}|u_{nl}(r)|^{2}\\Bigl(\\int_{S^{2}}\\mathbf 1_{B}(r\\Omega)\\,|Y_{lm}(\\Omega)|^{2}\\,d\\sigma(\\Omega)\\Bigr)dr;$$ in particular, for a **radial** set $B=\\{x:a<|x|<b\\}$ with $0\\le a<b\\le+\\infty$ one has $$\\mu^{G}_{\\Psi_{nlm}}(B)=\\frac{1}{\\|u_{nl}\\|_{2}^{2}}\\int_{a}^{b}|u_{nl}(r)|^{2}\\,dr,$$ so the **radial density** $p_{nl}(r):=|u_{nl}(r)|^{2}/\\|u_{nl}\\|_{2}^{2}$ is a probability density on $(0,\\infty)$: $p_{nl}\\ge0$ and $\\int_{0}^{\\infty}p_{nl}(r)\\,dr=1$; (b) for $n=1,l=m=0$ one has $$\\Psi_{100}(x)=(\\pi a_{\\kappa}^{3})^{-1/2}e^{-r/a_{\\kappa}},\\qquad p_{10}(r)=4r^{2}a_{\\kappa}^{-3}e^{-2r/a_{\\kappa}},$$ the mean of $p_{10}$ is $\\int_{0}^{\\infty}r\\,p_{10}(r)\\,dr=3a_{\\kappa}/2$, the unique maximum of $p_{10}$ is at $r=a_{\\kappa}$, the spatial density $|\\Psi_{100}|^{2}$ is strictly decreasing in $r$ and maximal at the origin, and for every $\\varepsilon>0$ $$\\mu^{G}_{\\Psi_{100}}\\bigl(\\{|x|<\\varepsilon\\}\\bigr)=\\frac{1}{6}\\Bigl(\\frac{2\\varepsilon}{a_{\\kappa}}\\Bigr)^{3}+O(\\varepsilon^{4})>0,$$ which tends to $0$ as $\\varepsilon\\downarrow0$: the density maximum at the origin is not an atom of probability at any point; (c) for every label the reduced solution has the polynomial-exponential form $$u_{nl}(r)=c_{nl}\\,r^{l+1}e^{-r/(na_{\\kappa})}L_{n-l-1}^{(2l+1)}\\bigl(2r/(na_{\\kappa})\\bigr)\\qquad(c_{nl}\\ne0),$$ with $L_{j}^{(a)}$ the Laguerre polynomial of integer order, so the radial density of the level $(n,l)$ is a polynomial times $r^{2l+2}$ times a decreasing exponential, and its normalisation constant is fixed by $\\int_{0}^{\\infty}|u_{nl}|^{2}dr=\\|\\psi_{nlm}\\|^{2}$; (d) *Reading and scope.* The statements are conditional on P1, P2, P5, the declared Coulomb model and the cited mathematics. The radial density is the reading of the model's position observable on radial sets; it is not a trajectory, an orbit or a definite distance, and the model assigns positive probability to every open ball around the origin and to arbitrarily large radii. No measured radius, no measured density and no identification of $a_{\\kappa}$ with a laboratory length is asserted; numerical comparison requires the measured constants as qualified empirical inputs and is deferred.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "source_section": "Statement",
+          "quote": "Adopt the framework postulates P1, P2 and P5, the readings of the declared one-centre Coulomb model [[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with parameters $\\hbar>0$, $m>0$, $\\kappa>0$ and length scale $a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, the energy-observable reading of [[pthm-nrqm-central-coulomb-energy-observable-and-flow]], the bound-state data of [[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]], and the spin-zero position law [[pthm-nrqm-kinematics-spin-s-outcome-laws]] ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-observables-framework-observable-and-outcome-law]]). Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). For each label let $\\psi_{nlm}$ and $\\Psi_{nlm}=\\psi_{nlm}/\\|\\psi_{nlm}\\|$ be the bound vectors of the cited theorem, and write $u_{nl}$ for the reduced regular solution with $\\psi_{nlm}(x)=u_{nl}(r)Y_{lm}(\\Omega)/r$. Then: (a) for every label and every Borel $B\\subseteq\\mathbb R^{3}$ the position outcome law in the unit preparation $[\\Psi_{nlm}]$ is $$\\mu^{G}_{\\Psi_{nlm}}(B)=\\|\\psi_{nlm}\\|^{-2}\\int_{0}^{\\infty}|u_{nl}(r)|^{2}\\Bigl(\\int_{S^{2}}\\mathbf 1_{B}(r\\Omega)\\,|Y_{lm}(\\Omega)|^{2}\\,d\\sigma(\\Omega)\\Bigr)dr;$$ in particular, for a **radial** set $B=\\{x:a<|x|<b\\}$ with $0\\le a<b\\le+\\infty$ one has $$\\mu^{G}_{\\Psi_{nlm}}(B)=\\frac{1}{\\|u_{nl}\\|_{2}^{2}}\\int_{a}^{b}|u_{nl}(r)|^{2}\\,dr,$$ so the **radial density** $p_{nl}(r):=|u_{nl}(r)|^{2}/\\|u_{nl}\\|_{2}^{2}$ is a probability density on $(0,\\infty)$: $p_{nl}\\ge0$ and $\\int_{0}^{\\infty}p_{nl}(r)\\,dr=1$; (b) for $n=1,l=m=0$ one has $$\\Psi_{100}(x)=(\\pi a_{\\kappa}^{3})^{-1/2}e^{-r/a_{\\kappa}},\\qquad p_{10}(r)=4r^{2}a_{\\kappa}^{-3}e^{-2r/a_{\\kappa}},$$ the mean of $p_{10}$ is $\\int_{0}^{\\infty}r\\,p_{10}(r)\\,dr=3a_{\\kappa}/2$, the unique maximum of $p_{10}$ is at $r=a_{\\kappa}$, the spatial density $|\\Psi_{100}|^{2}$ is strictly decreasing in $r$ and maximal at the origin, and for every $\\varepsilon>0$ $$\\mu^{G}_{\\Psi_{100}}\\bigl(\\{|x|<\\varepsilon\\}\\bigr)=\\frac{1}{6}\\Bigl(\\frac{2\\varepsilon}{a_{\\kappa}}\\Bigr)^{3}+O(\\varepsilon^{4})>0,$$ which tends to $0$ as $\\varepsilon\\downarrow0$: the density maximum at the origin is not an atom of probability at any point; (c) for every label the reduced solution has the polynomial-exponential form $$u_{nl}(r)=c_{nl}\\,r^{l+1}e^{-r/(na_{\\kappa})}L_{n-l-1}^{(2l+1)}\\bigl(2r/(na_{\\kappa})\\bigr)\\qquad(c_{nl}\\ne0),$$ with $L_{j}^{(a)}$ the Laguerre polynomial of integer order, so the radial density of the level $(n,l)$ is a polynomial times $r^{2l+2}$ times a decreasing exponential, and its normalisation constant is fixed by $\\int_{0}^{\\infty}|u_{nl}|^{2}dr=\\|\\psi_{nlm}\\|^{2}$; (d) *Reading and scope.* The statements are conditional on P1, P2, P5, the declared Coulomb model and the cited mathematics. The radial density is the reading of the model's position observable on radial sets; it is not a trajectory, an orbit or a definite distance, and the model assigns positive probability to every open ball around the origin and to arbitrarily large radii. No measured radius, no measured density and no identification of $a_{\\kappa}$ with a laboratory length is asserted; numerical comparison requires the measured constants as qualified empirical inputs and is deferred.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "Adopt the observable and probability postulate in the reading of [[def-nrqm-observables-framework-observable-and-outcome-law]], the kinematics and massive-particle model postulate P5, and the internal-factor assignment of the postulate P6, all read for the spin-$s$ model of [[def-nrqm-kinematics-framework-massive-spin-s-model]] with mass parameter $m>0$, spin label $s\\in\\{0,\\tfrac12,1,\\dots\\}$ and $r=2s+1$ ([[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[post-nrqm-framework-identical-particles-and-spin]]), and assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H_{s}$ be the model's state space, $Q_{j},P_{k}$ its componentwise position and momentum operators, $U^{(s)}$ its momentum transform, and let $\\mu^{A}_{\\psi}(B)=\\|E_{A}(B)\\psi\\|^{2}$ be the outcome law of an assigned sharp observable $A$ in a unit vector $\\psi$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)). Then: (a) for each $j$ the spectral projection-valued measure of $Q_{j}$ is $$E_{Q_{j}}(B)=M_{\\mathbf 1_{x_{j}^{-1}(B)}}\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$ the componentwise multiplication by the indicator, and $$\\mu^{Q_{j}}_{\\psi}(B)=\\int_{x_{j}^{-1}(B)}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$ the law is atomless, $\\mu^{Q_{j}}_{\\psi}(\\{\\lambda\\})=0$ for every $\\lambda\\in\\mathbb R$, and $\\sigma(Q_{j})=\\mathbb R$; (b) there is a unique regular projection-valued measure $G$ on the Borel sets of $\\mathbb R^{3}$ with $$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$ for all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its scalar law is the model's Born position law, $$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$ (c) for each $k$ the spectral projection-valued measure of $P_{k}$ is $$E_{P_{k}}(B)=U^{(s)-1}M_{\\mathbf 1_{B}(p_{k})}U^{(s)},$$ and with $\\psi_{p}:=U^{(s)}\\psi$ $$\\mu^{P_{k}}_{\\psi}(B)=\\int_{\\{p\\in\\mathbb R^{3}:\\,p_{k}\\in B\\}}\\|\\psi_{p}(p)\\|_{\\mathbb C^{r}}^{2}\\,dp;$$ the law is atomless and $\\sigma(P_{k})=\\mathbb R$; (d) for every unitary $V\\in U(r)$, with $V_{\\times}$ the matrix action of [[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] clause (b), $$\\mu^{Q_{j}}_{V_{\\times}\\psi}=\\mu^{Q_{j}}_{\\psi},\\qquad \\mu^{P_{k}}_{V_{\\times}\\psi}=\\mu^{P_{k}}_{\\psi};$$ (e) **Scope.** The statement is conditional on P2, P5 and P6 and the cited mathematics, and extends the position and momentum laws of the massive model to the spin-$s$ state space. No joint law of a position and a momentum observable is asserted, no dynamics is used or claimed, and the identification of the operators with concrete laboratory apparatus is a tested identification under the preparation and apparatus postulate, not a consequence of this theorem; no empirical result is recorded. Exact values have probability zero although both spectra equal $\\mathbb R$, so an exact value is an idealization outside the sharp finite-resolution reading.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "[Closed forms] For $n=1$, $l=0$: $j=0$, $k=1/(na)=1/a$, so [L2] gives $u_{10}(r)=c\\,r e^{-r/a}$. For $n=2$, $l=0$: $j=1$, $L_{1}^{(1)}(x)=2-x$ and $k=1/(2a)$, so $u_{20}(r)=c\\,r e^{-r/(2a)}(2-r/a)$. For $n=2$, $l=1$: $j=0$, $L_{0}^{(3)}=1$ and $k=1/(2a)$, so $u_{21}(r)=c\\,r^{2}e^{-r/(2a)}$. The constants $c$ are fixed by the normalisation condition $\\|u_{nl}\\|_{2}=1$, evaluated in the next step, giving the displayed coefficients of (a). [given, L2, algebra]",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "[Normalisations] By [L1] with $\\lambda=2/a$: $\\int_{0}^{\\infty}r^{2}e^{-2r/a}dr=2/(2/a)^{3}=a^{3}/4$ and $\\int_{0}^{\\infty}r^{4}e^{-2r/a}dr=24/(2/a)^{5}=3a^{5}/4$; hence $\\int_{0}^{\\infty}(2a^{-3/2}r e^{-r/a})^{2}dr=4a^{-3}\\cdot a^{3}/4=1$, so $c=2a^{-3/2}$ for $u_{10}$ and $\\|u_{10}\\|_{2}=1$. By [L1] with $\\lambda=1/a$: $\\int_{0}^{\\infty}r^{2}e^{-r/a}dr=2a^{3}$, $\\int_{0}^{\\infty}r^{3}e^{-r/a}dr=6a^{4}$, $\\int_{0}^{\\infty}r^{4}e^{-r/a}dr=24a^{5}$; expanding $(2-r/a)^{2}=4-4r/a+r^{2}/a^{2}$ gives $\\int_{0}^{\\infty}r^{2}(2-r/a)^{2}e^{-r/a}dr=8a^{3}-24a^{3}+24a^{3}=8a^{3}$, so $c=2^{-3/2}a^{-3/2}$ yields $\\|u_{20}\\|_{2}=1$; and $c^{2}\\int r^{4}e^{-r/a}dr=c^{2}\\cdot 24a^{5}=1$ gives $c=24^{-1/2}a^{-5/2}=2^{-3/2}3^{-1/2}a^{-5/2}$ for $u_{21}$. This is (b). [step 1.1, L1, algebra]",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "[Moments of the ground state] With $p_{10}=4a^{-3}r^{2}e^{-2r/a}$, [L1] gives $\\int_0^\\infty r\\,p_{10}(r)dr=4a^{-3}\\cdot3!/(2/a)^4=4a^{-3}\\cdot6a^4/16=3a/2$ and $\\int_0^\\infty r^2p_{10}(r)dr=4a^{-3}\\cdot4!/(2/a)^5=4a^{-3}\\cdot24a^5/32=3a^2$. Thus the variance is $3a^2-(3a/2)^2=3a^2/4$. [step 1.1, L1, algebra]",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "2.3",
+          "step": "2.3",
+          "claim": "[Moments of the $n=2$ states] With $p_{20}=2^{-3}a^{-3}r^{2}(2-r/a)^{2}e^{-r/a}$ and $p_{21}=24^{-1}a^{-5}r^{4}e^{-r/a}$, [L1] gives $\\int r\\,p_{20}=2^{-3}a^{-3}\\int r^{3}(2-r/a)^{2}e^{-r/a}dr=2^{-3}a^{-3}\\cdot a^{4}\\int x^{3}(4-4x+x^{2})e^{-x}dx=2^{-3}a^{-3}\\cdot a^{4}(4\\cdot 3!-4\\cdot 4!+5!)=2^{-3}a^{-3}\\cdot 48a^{4}=6a$; and $\\int r\\,p_{21}=24^{-1}a^{-5}\\cdot 5!a^{6}=5a$. Moreover $\\int r^{-1}p_{20}=2^{-3}a^{-3}\\int r(2-r/a)^{2}e^{-r/a}dr=2^{-3}a^{-3}(4\\cdot 1!\\,a^{2}-4\\cdot 2!\\,a^{2}+3!\\,a^{2})=2^{-3}a^{-3}\\cdot 2a^{2}=a^{-1}/4$, and $\\int r^{-1}p_{21}=24^{-1}a^{-5}\\cdot 3!a^{4}=a^{-1}/4$. This is (c). [step 1.1, L1, algebra]",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "2.4",
+          "step": "2.4",
+          "claim": "[Overlaps] With $u_{10}=2a^{-3/2}re^{-r/a}$ and $u_{20}=2^{-3/2}a^{-3/2}(2r-r^{2}/a)e^{-r/(2a)}$ one has $\\int u_{10}u_{20}dr=2^{-1/2}a^{-3}\\int(2r^{2}-r^{3}/a)e^{-3r/(2a)}dr$; by [L1] with $\\lambda=3/(2a)$, $\\int r^{2}e^{-3r/(2a)}dr=2(2a/3)^{3}=16a^{3}/27$ and $\\int r^{3}e^{-3r/(2a)}dr=6(2a/3)^{4}=32a^{4}/27$, so the bracket is $2\\cdot 16a^{3}/27-(32a^{4}/27)/a=0$: the same-$l$ pair is orthogonal. With $u_{21}=2^{-3/2}3^{-1/2}a^{-5/2}r^{2}e^{-r/(2a)}$, the cross overlap is $\\int u_{20}u_{21}dr=2^{-3}3^{-1/2}a^{-4}\\int(2r^{3}-r^{4}/a)e^{-r/a}dr=2^{-3}3^{-1/2}a^{-4}(2\\cdot 6a^{4}-24a^{4})=2^{-3}3^{-1/2}(-12)=-3/(2\\sqrt3)=-\\sqrt3/2$, nonzero. This is (d). [step 1.1, L1, algebra]",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "[Cross-checks and scope] Since $R_{nl}=u_{nl}/r$, step 1.1 gives $R_{10}=2a^{-3/2}e^{-r/a}$, $R_{20}=2^{-3/2}a^{-3/2}(2-r/a)e^{-r/(2a)}$ and $R_{21}=2^{-3/2}3^{-1/2}a^{-3/2}(r/a)e^{-r/(2a)}$, which agree with the cited tabulated radial functions, and the value $5a$ of step 2.3 agrees with the circular-orbit formula $\\langle r\\rangle_{n,n-1}=n(n+\\tfrac12)a$ at $n=2$; this is (e). Only the declared model, the cited mathematics and the exponential-moments lemma were used, and $a$ remains a model scale, so the scope statement (f) holds. [step 1.1, step 2.3, L1, L2, L3] ∎",
+          "inputs": [
+            "1.1",
+            "2.3",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The computed states have nonzero support and the moments are taken over the full half-line; no empty set enters."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 2.3 evaluate moments with vanishing contributions from the polynomial nodes and step 2.4 shows one overlap vanishes while another does not."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the unit normalisations of the three reduced functions and the ground density integrates to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.3 and 2.4 compare two n=2 states with different angular momentum and show explicitly that their overlap need not vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1-2.3 evaluate the integrals over the endpoints 0 and infinity of the half-line."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example uses the exponential-moments lemma, whose hypothesis is Countable Choice, declared in the frontmatter and used in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states identities and a nonvanishing statement, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example states identities and a nonvanishing statement, not a biconditional."
+        }
+      ]
+    }
+  }
+}

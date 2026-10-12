@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-uniform-convergence-uniformity-is-finer-than-pointwise.md

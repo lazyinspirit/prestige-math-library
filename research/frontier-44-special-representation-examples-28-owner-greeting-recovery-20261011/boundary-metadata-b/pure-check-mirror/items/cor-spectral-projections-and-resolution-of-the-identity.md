@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-spectral-projections-and-resolution-of-the-identity.md

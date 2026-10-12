@@ -104,35 +104,15 @@ $T$ from every scalar diagonal operator.
 
 1.1 In the constant standard basis $e_1,e_2$, the four fundamental matrix coefficients of $T_t$ are the Borel functions $0,t,1-t,0$, so $T_t$ is weakly measurable. [F1, F2, algebra]
 
-1.2 The operator-norm and essential-supremum calculations use [F1, F4, F5, F6, F7, algebra].
-For $z=(z_1,z_2)\in\mathbb C^2$,
-$$\|T_tz\|^2=t^2|z_2|^2+(1-t)^2|z_1|^2.$$
-The operator norm definition [F4], with the two standard unit vectors as
-witnesses for the larger coefficient, gives
-$$\|T_t\|=\max\{t,1-t\}.$$
-This is a Borel function bounded by $1$. For every $M\in[0,1)$,
-$\|T_t\|>M$ on $[0,1-M)$, whose measure is $1-M>0$ by [F6] and [F7].
-So no $M<1$ is an almost-everywhere bound, while $1$ is a pointwise bound;
-therefore $\operatorname*{ess\,sup}_{t\in[0,1]}\|T_t\|=1$ by [F5]. The
-field is essentially bounded. At $t=0$ and $t=1$ its rank is one, while for
-$0<t<1$ its rank is two; the norm formula holds in all cases.
+1.2 The operator-norm and essential-supremum calculations use [F1, F4, F5, F6, F7, algebra]. For $z=(z_1,z_2)\in\mathbb C^2$, $$\|T_tz\|^2=t^2|z_2|^2+(1-t)^2|z_1|^2.$$ The operator norm definition [F4], with the two standard unit vectors as witnesses for the larger coefficient, gives $$\|T_t\|=\max\{t,1-t\}.$$ This is a Borel function bounded by $1$. For every $M\in[0,1)$, $\|T_t\|>M$ on $[0,1-M)$, whose measure is $1-M>0$ by [F6] and [F7]. So no $M<1$ is an almost-everywhere bound, while $1$ is a pointwise bound; therefore $\operatorname*{ess\,sup}_{t\in[0,1]}\|T_t\|=1$ by [F5]. The field is essentially bounded. At $t=0$ and $t=1$ its rank is one, while for $0<t<1$ its rank is two; the norm formula holds in all cases. [F1, F4, F5, F6, F7, algebra]
 
-2.1 The action theorem induces $T$ with norm one and identifies its adjoint and square fields. [F3, F7, F8, F9, step 1.1, step 1.2, algebra]
-It gives $T=\int^\oplus T_t\,d\lambda(t)$ and $\|T\|=1$. Direct matrix multiplication yields
-$$T_t^*=\begin{pmatrix}0&1-t\\t&0\end{pmatrix},\qquad T_t^2=\begin{pmatrix}t(1-t)&0\\0&t(1-t)\end{pmatrix}.$$
+2.1 The action theorem induces $T$ with norm one and identifies its adjoint and square fields. [F3, F7, F8, F9, step 1.1, step 1.2, algebra] It gives $T=\int^\oplus T_t\,d\lambda(t)$ and $\|T\|=1$. Direct matrix multiplication yields $$T_t^*=\begin{pmatrix}0&1-t\\t&0\end{pmatrix},\qquad T_t^2=\begin{pmatrix}t(1-t)&0\\0&t(1-t)\end{pmatrix}.$$ [F3, F7, F8, F9, step 1.1, step 1.2, algebra]
 
-3.1 Pointwise commutation and the action theorem put $T$ in $\mathcal D'$. [F3, F9, F10, step 1.1, step 1.2, step 2.1, algebra]
-For $f\in L^\infty([0,1],\lambda)$, the scalar field $f(t)I_2$ induces the corresponding $M_f\otimes I_2$ by [F10] and [F3]. At every $t$, $T_t(f(t)I_2)=f(t)T_t$. The product clause of [F3] therefore
-shows that $T(M_f\otimes I_2)=(M_f\otimes I_2)T$. Hence $T\in\mathcal D'$.
+3.1 Pointwise commutation and the action theorem put $T$ in $\mathcal D'$. [F3, F9, F10, step 1.1, step 1.2, step 2.1, algebra] For $f\in L^\infty([0,1],\lambda)$, the scalar field $f(t)I_2$ induces the corresponding $M_f\otimes I_2$ by [F10] and [F3]. At every $t$, $T_t(f(t)I_2)=f(t)T_t$. The product clause of [F3] therefore shows that $T(M_f\otimes I_2)=(M_f\otimes I_2)T$. Hence $T\in\mathcal D'$. [F3, F9, F10, step 1.1, step 1.2, step 2.1, algebra]
 
-3.2 A vector witness separates $T$ from every $R\in\mathcal D$, proving $T\notin\mathcal D$. [F1, step 2.1, algebra]
-Let $\eta=(\mathbf1,0)\in L^2(\lambda)\oplus L^2(\lambda)$, so
-$\|\eta\|=1$ by [F1]. Then $T\eta=(0,1-t)$. For any
-$R=M_f\otimes I_2\in\mathcal D$, $R\eta=(f,0)$, and
-$$\|T\eta-R\eta\|^2=\|f\|_2^2+\int_0^1(1-t)^2\,d\lambda(t)\ge\frac13>0.$$
-Thus $T\ne R$ for every $R\in\mathcal D$.
+3.2 A vector witness separates $T$ from every $R\in\mathcal D$, proving $T\notin\mathcal D$. [F1, step 2.1, algebra] Let $\eta=(\mathbf1,0)\in L^2(\lambda)\oplus L^2(\lambda)$, so $\|\eta\|=1$ by [F1]. Then $T\eta=(0,1-t)$. For any $R=M_f\otimes I_2\in\mathcal D$, $R\eta=(f,0)$, and $$\|T\eta-R\eta\|^2=\|f\|_2^2+\int_0^1(1-t)^2\,d\lambda(t)\ge\frac13>0.$$ Thus $T\ne R$ for every $R\in\mathcal D$. [F1, step 2.1, algebra]
 
-4.1 Steps 1.1–1.2 prove weak measurability and the exact essential norm; step 2.1 gives the induced operator, its adjoint and square; steps 3.1 and 3.2 prove that $T\in\mathcal D'$ and $T\notin\mathcal D$. $\square$ [step 1.1, step 1.2, step 2.1, step 3.1, step 3.2]
+4.1 Steps 1.1–1.2 prove weak measurability and the exact essential norm; step 2.1 gives the induced operator, its adjoint and square; steps 3.1 and 3.2 prove that $T\in\mathcal D'$ and $T\notin\mathcal D$. ∎ [step 1.1, step 1.2, step 2.1, step 3.1, step 3.2]
 
 ## Source qualifications
 

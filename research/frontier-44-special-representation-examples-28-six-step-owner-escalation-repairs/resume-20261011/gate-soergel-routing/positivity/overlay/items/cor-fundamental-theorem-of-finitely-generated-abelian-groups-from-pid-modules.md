@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules.md

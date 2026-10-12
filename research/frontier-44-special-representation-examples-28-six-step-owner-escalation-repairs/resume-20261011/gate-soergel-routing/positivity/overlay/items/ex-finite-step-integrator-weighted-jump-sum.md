@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-finite-step-integrator-weighted-jump-sum.md

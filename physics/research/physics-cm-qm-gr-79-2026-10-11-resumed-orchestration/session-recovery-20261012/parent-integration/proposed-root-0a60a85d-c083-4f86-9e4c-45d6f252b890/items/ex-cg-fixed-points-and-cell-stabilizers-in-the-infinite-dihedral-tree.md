@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-fixed-points-and-cell-stabilizers-in-the-infinite-dihedral-tree.md

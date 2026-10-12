@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences.md

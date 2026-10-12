@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-affine-algebraic-group-faithful-rational-representation.md

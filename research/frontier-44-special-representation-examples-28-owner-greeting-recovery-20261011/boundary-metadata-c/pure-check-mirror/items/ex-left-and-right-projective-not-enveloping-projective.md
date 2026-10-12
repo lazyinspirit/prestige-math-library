@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-left-and-right-projective-not-enveloping-projective.md

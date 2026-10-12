@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-first-dirichlet-eigenfunction-by-constrained-minimisation.md

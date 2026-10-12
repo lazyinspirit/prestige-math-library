@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-low-degree-admissible-steenrod-monomials.md

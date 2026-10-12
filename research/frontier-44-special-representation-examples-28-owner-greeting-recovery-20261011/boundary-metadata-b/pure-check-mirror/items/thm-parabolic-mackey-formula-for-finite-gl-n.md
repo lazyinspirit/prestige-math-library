@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-parabolic-mackey-formula-for-finite-gl-n.md

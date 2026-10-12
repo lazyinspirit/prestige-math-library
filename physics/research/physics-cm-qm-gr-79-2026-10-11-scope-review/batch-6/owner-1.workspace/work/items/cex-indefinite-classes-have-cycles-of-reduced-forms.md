@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-indefinite-classes-have-cycles-of-reduced-forms.md

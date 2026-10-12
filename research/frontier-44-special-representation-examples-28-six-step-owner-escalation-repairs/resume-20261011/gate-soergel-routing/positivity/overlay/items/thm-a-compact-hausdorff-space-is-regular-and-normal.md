@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-compact-hausdorff-space-is-regular-and-normal.md

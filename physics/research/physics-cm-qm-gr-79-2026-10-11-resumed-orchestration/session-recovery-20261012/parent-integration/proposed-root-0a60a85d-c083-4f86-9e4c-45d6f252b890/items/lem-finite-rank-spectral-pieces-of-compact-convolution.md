@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-rank-spectral-pieces-of-compact-convolution.md

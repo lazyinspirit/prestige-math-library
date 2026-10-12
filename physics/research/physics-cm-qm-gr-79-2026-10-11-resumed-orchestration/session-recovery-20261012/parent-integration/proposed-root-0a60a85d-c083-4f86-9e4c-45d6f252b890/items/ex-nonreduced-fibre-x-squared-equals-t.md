@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonreduced-fibre-x-squared-equals-t.md

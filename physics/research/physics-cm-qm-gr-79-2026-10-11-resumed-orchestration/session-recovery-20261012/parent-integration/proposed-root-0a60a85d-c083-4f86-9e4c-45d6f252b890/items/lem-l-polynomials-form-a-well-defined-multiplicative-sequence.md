@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-l-polynomials-form-a-well-defined-multiplicative-sequence.md

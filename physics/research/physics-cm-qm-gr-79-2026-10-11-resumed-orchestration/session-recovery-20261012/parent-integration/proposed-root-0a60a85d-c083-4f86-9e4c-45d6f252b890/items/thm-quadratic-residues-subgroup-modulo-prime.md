@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quadratic-residues-subgroup-modulo-prime.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-geometric-intersection-descends-through-oriented-cobordism-of-cycles.md

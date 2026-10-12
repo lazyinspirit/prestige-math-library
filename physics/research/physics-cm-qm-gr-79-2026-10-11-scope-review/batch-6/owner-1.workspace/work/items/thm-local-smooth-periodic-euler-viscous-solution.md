@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-smooth-periodic-euler-viscous-solution.md

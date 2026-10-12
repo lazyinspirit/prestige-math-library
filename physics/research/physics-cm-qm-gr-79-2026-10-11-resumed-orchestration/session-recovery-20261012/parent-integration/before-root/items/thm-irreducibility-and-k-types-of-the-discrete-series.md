@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-irreducibility-and-k-types-of-the-discrete-series.md

@@ -66,9 +66,13 @@ Jacobi-field space is $\{0\}$, so its endpoints are not conjugate
 ## Refutation
 
 1.1 Let $p=e_0=(1,0,0)$, $e_1=(0,1,0)$, $e_2=(0,0,1)$, and $u(s)=\cos(s)e_1+\sin(s)e_2$ for $-1<s<1$; then $p,u(s)$ are orthonormal for each $s$. [construct, algebra]
+
 2.1 Define $F(s,t)=\cos(t)e_0+\sin(t)u(s)$ on $(-1,1)\times[0,2\pi]$. Orthonormality and $\cos^2t+\sin^2t=1$ give $|F(s,t)|=1$, so $F$ is a smooth map into $S^2$; by [F1], each longitudinal curve is a great-circle affine geodesic. Thus $F$ is a geodesic variation. [F1, step 1.1, algebra]
+
 3.1 The central geodesic $\gamma(t)=F(0,t)=\cos(t)e_0+\sin(t)e_1$ has $\gamma(0)=\gamma(2\pi)=p$, and differentiating gives $J(t)=\partial_sF(0,t)=\sin(t)e_2$, with $J(0)=J(2\pi)=0$ and $J(\pi/2)=e_2\ne0$. By [F2], $J$ is Jacobi; [F3] makes the endpoints conjugate along this full loop. [F2, F3, step 2.1, algebra]
+
 4.1 On the same interval let $\delta(t)=p$. By [F1] it is a constant geodesic with the same endpoints as $\gamma$, but [F4] says those endpoints are not conjugate along $\delta$; hence this endpoint pair has different conjugacy outcomes along the two segments. [F1, F4, step 3.1]
+
 5.1 Since $0<2\pi$, the witness interval is nondegenerate; $J$ is smooth up to both included endpoints and has the displayed endpoint zeros, while its nonzero value in step 3.1 witnesses conjugacy. The fixed $S^2$ example needs no dimension-zero or dimension-one case, and its standard basis and variation are explicit, so neither AC nor $\mathrm{AC}_\omega$ is used; no iff is asserted. [F1, F2, F3, F4, step 1.1, step 2.1, step 3.1, step 4.1] ∎
 
 ## Source locator

@@ -53,14 +53,10 @@ Hilbert-Samuel multiplicity $e_I(M)$ is a positive integer.
 
 **Proof technique:** direct.
 
+ 1.1 By [L1], there are integers $a_0,\ldots,a_d$ and a polynomial $P_{I,M}(n)=\sum_{j=0}^d a_j\binom{n+j}{j}$ such that $\chi_{I,M}(n)=P_{I,M}(n)$ for all sufficiently large $n$. [L1, given]
 
-1.1 By [L1], there are integers $a_0,\ldots,a_d$ and a polynomial $P_{I,M}(n)=\sum_{j=0}^d a_j\binom{n+j}{j}$ such that $\chi_{I,M}(n)=P_{I,M}(n)$ for all sufficiently large $n$. [L1, given]
+ 1.2 For every $n\ge0$, the quotient $M/I^{n+1}M$ is nonzero. Indeed, if $M/I^{n+1}M=0$, then $M=I^{n+1}M$; since $I^{n+1}\subseteq \mathfrak m=J(R)$, [L2], under the choice assumption [A1], would force $M=0$, contradicting the hypothesis. Thus $\chi_{I,M}(n)=\ell_R(M/I^{n+1}M)>0$ for every $n$. [L2, A1, given, algebra]
 
+ 2.1 The polynomial $P_{I,M}$ therefore takes positive values for all sufficiently large integers, so its leading coefficient is positive. In the binomial expansion of step 1.1 the leading coefficient is $a_d/d!$, hence $a_d>0$. [step 1.1, step 1.2, algebra]
 
-1.2 For every $n\ge0$, the quotient $M/I^{n+1}M$ is nonzero. Indeed, if $M/I^{n+1}M=0$, then $M=I^{n+1}M$; since $I^{n+1}\subseteq \mathfrak m=J(R)$, [L2], under the choice assumption [A1], would force $M=0$, contradicting the hypothesis. Thus $\chi_{I,M}(n)=\ell_R(M/I^{n+1}M)>0$ for every $n$. [L2, A1, given, algebra]
-
-
-2.1 The polynomial $P_{I,M}$ therefore takes positive values for all sufficiently large integers, so its leading coefficient is positive. In the binomial expansion of step 1.1 the leading coefficient is $a_d/d!$, hence $a_d>0$. [step 1.1, step 1.2, algebra]
-
-
-3.1 By [L3], the Hilbert-Samuel multiplicity is $e_I(M)=d!\cdot(\text{leading coefficient of }P_{I,M})=a_d$. Since $a_d\in \mathbb Z_{>0}$, the multiplicity is a positive integer. [L3, step 2.1, algebra] ∎
+ 3.1 By [L3], the Hilbert-Samuel multiplicity is $e_I(M)=d!\cdot(\text{leading coefficient of }P_{I,M})=a_d$. Since $a_d\in \mathbb Z_{>0}$, the multiplicity is a positive integer. [L3, step 2.1, algebra] ∎ 

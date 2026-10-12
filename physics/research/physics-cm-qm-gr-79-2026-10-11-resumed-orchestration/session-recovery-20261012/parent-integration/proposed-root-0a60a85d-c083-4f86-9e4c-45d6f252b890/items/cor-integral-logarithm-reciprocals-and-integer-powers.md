@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-integral-logarithm-reciprocals-and-integer-powers.md

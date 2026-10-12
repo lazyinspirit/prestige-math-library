@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-complex-exponential-cartesian-form-modulus-and-eulers-identity.md

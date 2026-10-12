@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-powers-of-countable-sets-are-countable.md

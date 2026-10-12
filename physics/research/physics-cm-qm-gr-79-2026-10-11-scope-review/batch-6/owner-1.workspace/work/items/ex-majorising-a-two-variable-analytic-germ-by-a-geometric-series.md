@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-majorising-a-two-variable-analytic-germ-by-a-geometric-series.md

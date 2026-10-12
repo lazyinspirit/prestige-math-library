@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-representable-functors-carry-weighted-limits-to-weighted-limits.md

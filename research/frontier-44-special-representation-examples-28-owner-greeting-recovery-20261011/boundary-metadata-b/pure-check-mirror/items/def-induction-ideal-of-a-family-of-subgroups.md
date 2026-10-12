@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-induction-ideal-of-a-family-of-subgroups.md

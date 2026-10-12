@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-truth-at-one-assignment-does-not-survive-substitution.md

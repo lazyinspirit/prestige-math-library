@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-newtons-shell-theorem-from-the-mean-property.md

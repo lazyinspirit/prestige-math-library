@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gamma-2-is-torsion-free-and-has-no-elliptic-points.md

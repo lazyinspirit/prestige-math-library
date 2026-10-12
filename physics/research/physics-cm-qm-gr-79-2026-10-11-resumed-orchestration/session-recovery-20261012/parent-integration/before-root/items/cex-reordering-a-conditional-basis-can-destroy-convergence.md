@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-reordering-a-conditional-basis-can-destroy-convergence.md

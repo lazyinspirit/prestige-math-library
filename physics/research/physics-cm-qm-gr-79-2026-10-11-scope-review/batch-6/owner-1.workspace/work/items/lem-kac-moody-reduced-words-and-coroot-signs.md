@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kac-moody-reduced-words-and-coroot-signs.md

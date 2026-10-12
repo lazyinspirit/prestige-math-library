@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-positive-semidefinite-hessian-gives-strict-convexity.md

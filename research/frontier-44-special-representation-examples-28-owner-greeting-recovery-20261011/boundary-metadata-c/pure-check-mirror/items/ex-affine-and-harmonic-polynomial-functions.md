@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-affine-and-harmonic-polynomial-functions.md

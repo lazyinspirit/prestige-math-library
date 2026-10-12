@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-trace-of-adjacency-power-counts-closed-walks.md

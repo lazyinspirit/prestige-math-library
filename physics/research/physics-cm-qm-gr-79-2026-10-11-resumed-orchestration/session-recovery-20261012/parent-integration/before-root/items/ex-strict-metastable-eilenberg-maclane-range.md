@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-strict-metastable-eilenberg-maclane-range.md

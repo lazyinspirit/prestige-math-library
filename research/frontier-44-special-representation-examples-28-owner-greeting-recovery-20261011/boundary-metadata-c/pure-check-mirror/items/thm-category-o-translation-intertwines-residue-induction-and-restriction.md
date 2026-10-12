@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-category-o-translation-intertwines-residue-induction-and-restriction.md

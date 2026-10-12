@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-energy-continuous-dependence-for-the-forced-wave-equation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-functional-calculus-produces-a-regular-pvm.md

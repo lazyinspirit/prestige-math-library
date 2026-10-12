@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-actions-related-by-automorphisms-give-isomorphic-semidirect-products.md

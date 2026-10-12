@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bessel-inequality-for-an-arbitrary-orthonormal-family.md

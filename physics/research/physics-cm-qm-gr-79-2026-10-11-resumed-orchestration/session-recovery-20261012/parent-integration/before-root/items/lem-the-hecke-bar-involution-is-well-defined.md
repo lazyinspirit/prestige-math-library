@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-hecke-bar-involution-is-well-defined.md

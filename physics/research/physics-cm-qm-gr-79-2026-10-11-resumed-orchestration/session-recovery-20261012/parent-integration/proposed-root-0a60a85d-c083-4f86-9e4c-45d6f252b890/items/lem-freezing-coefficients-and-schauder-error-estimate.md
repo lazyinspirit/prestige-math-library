@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-freezing-coefficients-and-schauder-error-estimate.md

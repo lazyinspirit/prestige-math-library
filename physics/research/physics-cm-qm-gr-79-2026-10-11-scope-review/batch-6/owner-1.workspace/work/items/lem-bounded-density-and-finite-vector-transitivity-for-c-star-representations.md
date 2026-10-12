@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-density-and-finite-vector-transitivity-for-c-star-representations.md

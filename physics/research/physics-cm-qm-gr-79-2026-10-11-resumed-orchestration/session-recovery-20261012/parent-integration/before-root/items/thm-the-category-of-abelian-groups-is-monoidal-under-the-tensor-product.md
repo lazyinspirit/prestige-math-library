@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-category-of-abelian-groups-is-monoidal-under-the-tensor-product.md

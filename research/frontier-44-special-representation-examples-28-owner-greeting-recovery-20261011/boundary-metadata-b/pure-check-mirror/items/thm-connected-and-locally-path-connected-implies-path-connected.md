@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-connected-and-locally-path-connected-implies-path-connected.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-intervals-twisted-periodic-momentum-domain.md

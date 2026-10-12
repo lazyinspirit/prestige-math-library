@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weyl-eigenvalue-singular-value-inequalities.md

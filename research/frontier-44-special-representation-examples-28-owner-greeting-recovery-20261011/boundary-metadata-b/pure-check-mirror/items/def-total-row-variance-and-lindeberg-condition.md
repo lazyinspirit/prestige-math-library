@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-total-row-variance-and-lindeberg-condition.md

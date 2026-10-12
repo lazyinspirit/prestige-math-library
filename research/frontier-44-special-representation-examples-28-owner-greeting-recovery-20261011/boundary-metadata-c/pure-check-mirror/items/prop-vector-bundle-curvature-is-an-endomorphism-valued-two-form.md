@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-vector-bundle-curvature-is-an-endomorphism-valued-two-form.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-sierpinski-gasket-dimension-by-hand.md

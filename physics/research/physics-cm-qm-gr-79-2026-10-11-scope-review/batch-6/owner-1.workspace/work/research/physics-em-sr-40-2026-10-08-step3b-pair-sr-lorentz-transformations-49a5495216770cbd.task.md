@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-sr-lorentz-transformations-49a5495216770cbd.task.md

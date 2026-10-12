@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-closed-cylinder-as-a-finitely-patched-oriented-surface.md

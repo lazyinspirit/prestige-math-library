@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-equal-actions-on-k-zero-do-not-imply-isomorphic-derived-autoequivalences.md

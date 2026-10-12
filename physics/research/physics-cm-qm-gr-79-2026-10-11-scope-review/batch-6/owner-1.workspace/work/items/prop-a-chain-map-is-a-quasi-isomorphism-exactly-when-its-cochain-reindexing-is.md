@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cochain-reindexing-is.md

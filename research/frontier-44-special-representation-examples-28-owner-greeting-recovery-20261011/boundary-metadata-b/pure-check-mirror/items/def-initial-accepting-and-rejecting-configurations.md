@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-initial-accepting-and-rejecting-configurations.md

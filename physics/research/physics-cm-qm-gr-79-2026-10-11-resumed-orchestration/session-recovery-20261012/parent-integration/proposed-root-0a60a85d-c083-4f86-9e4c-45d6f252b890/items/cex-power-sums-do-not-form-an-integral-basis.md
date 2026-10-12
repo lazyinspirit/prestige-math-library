@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-power-sums-do-not-form-an-integral-basis.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-nowhere-differentiable-functions-are-residual-in-c01.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-space-products-are-linearly-independent-in-rational-oriented-bordism.md

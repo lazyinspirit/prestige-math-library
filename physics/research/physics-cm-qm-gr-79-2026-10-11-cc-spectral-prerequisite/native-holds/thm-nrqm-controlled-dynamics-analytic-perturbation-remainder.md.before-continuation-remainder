@@ -1,0 +1,78 @@
+---
+id: thm-nrqm-controlled-dynamics-analytic-perturbation-remainder
+aliases: [nrqm-controlled-dynamics-analytic-perturbation-remainder]
+kind: theorem
+domain: mathematics
+title: "Analytic perturbation remainder"
+status: draft
+origin: pipeline
+dependency_level: 2
+deps: [thm-nrqm-controlled-dynamics-contour-perturbation-projection, thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, cor-cauchy-estimates-taylor-coefficients, thm-cauchy-integral-formula-circle, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]
+dependency_roles:
+  thm-nrqm-controlled-dynamics-contour-perturbation-projection: mathematical-premise
+  thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients: mathematical-premise
+  def-resolvent-and-spectrum-of-a-closed-unbounded-operator: mathematical-premise
+  cor-cauchy-estimates-taylor-coefficients: mathematical-premise
+  thm-cauchy-integral-formula-circle: mathematical-premise
+  def-bounded-linear-operator: mathematical-premise
+  def-operator-norm: mathematical-premise
+  def-hilbert-space: mathematical-premise
+  def-countable-choice: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 6.6 pp. 153-159 (analytic perturbation with remainder control via Cauchy estimates)"
+      url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+    - title: "E. B. Saff and A. D. Snider, Fundamentals of Complex Analysis, Chapter 4 (Cauchy estimates and Taylor remainder bounds; standard reference for the coefficient estimate used here)"
+      url: "https://sci.mu.iq/wp-content/uploads/2021/08/FUNCTIONAL-ANALYSIS-freebookcenter.net_.pdf"
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice ([[def-countable-choice]]) and adopt the
+hypotheses and notation of
+[[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]]:
+$H_0$ self-adjoint with isolated simple eigenvalue $E$, gap $g>0$, normalized
+eigenvector $\psi_0$, $V=V^*$ bounded with $v=\|V\|>0$, $E_\lambda$ the analytic
+eigenvalue branch, $\psi(\lambda)$ the gauge-fixed analytic eigenvector. Put
+$R:=g/(8v)$ and assume $v>0$. Then on the disk $|\lambda|<R$:
+
+(a) $q(\lambda)=2|\lambda|v/g\le1/4$, $\|P_\lambda-P_0\|\le1/3$,
+$\|\psi(\lambda)\|\le2$, and the eigenvalue branch $E_\lambda$ satisfies
+$$E_\lambda=\langle(H_0+\lambda V)\psi(\lambda),\psi(\lambda)\rangle.$$
+
+(b) *Explicit cubic remainder.*
+$$\Bigl|E_\lambda-E-\lambda E'(0)-\frac{\lambda^2}{2}E''(0)\Bigr|\le\frac{Rv\,(|\lambda|/R)^3}{1-|\lambda|/R},\qquad|\lambda|<R,$$
+where $E'(0)=\langle V\psi_0,\psi_0\rangle$ and $E''(0)=-2\langle VSV\psi_0,\psi_0\rangle$.
+In particular the remainder is $O(|\lambda|^3)$ with a constant depending only
+on $v$ and $g$; at $\lambda=R/2$ the bound reads $\frac{1}{8}Rv=\frac{g}{64}$.
+
+(c) *Vanishing perturbation.* If $v=0$ then $E_\lambda\equiv E$ and
+$\psi(\lambda)\equiv\psi_0$.
+
+The estimate is conditional on the strict positive gap and on the boundedness of
+$V$; it makes no claim for unbounded or degenerate perturbations.
+
+## Facts & Assumptions
+
+**Given:** the data of [[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]];
+$R=g/(8v)$ with $v>0$; $\lambda$ with $|\lambda|<R$.
+
+[F1] On $|\lambda|\le R$ one has $q\le1/4$, $\|P_\lambda-P_0\|\le1/3$, and $\psi(\lambda)$ is analytic with $\|\psi(\lambda)\|\le2$ ([[thm-nrqm-controlled-dynamics-contour-perturbation-projection]], [[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]]).
+
+[F2] Cauchy's coefficient estimates: if $f$ is holomorphic on the disk $D(0,\rho)$ with $|f|\le M$ on $|z|=\rho$, and $f=\sum_k c_kz^k$ near $0$, then $|c_k|\le M/\rho^k$; consequently $|f(z)-\sum_{k\le2}c_kz^k|\le\frac{M\,(|z|/\rho)^3}{1-|z|/\rho}$ for $|z|<\rho$ ([[cor-cauchy-estimates-taylor-coefficients]], [[thm-cauchy-integral-formula-circle]]).
+
+[F3] $E_\lambda=\langle(H_0+\lambda V)\psi(\lambda),\psi(\lambda)\rangle$ is analytic in $\lambda$ with the derivatives computed in [[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]]; by the parallelogram identity and self-adjointness of $H_0+\lambda V$, the pairing is real at real $\lambda$ and complex-analytic in $\lambda$ ([[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]], [[def-hilbert-space]]).
+
+[F4] Spectral continuity: $\operatorname{dist}(\sigma(H_0+\lambda V),\sigma(H_0))\le|\lambda|v$ by the resolvent Neumann series of [[thm-nrqm-controlled-dynamics-contour-perturbation-projection]] (convergent for $|\lambda|<g/(2v)$, in particular on $|\lambda|=R$): if $|z-E|<g/2-|\lambda|v$ then the series for the perturbed resolvent converges at $z$, so $z\notin\sigma(H_0+\lambda V)$ ([[thm-nrqm-controlled-dynamics-contour-perturbation-projection]], [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
+
+## Proof
+
+1.1 [Bounding the eigenvalue function] By [F4], the eigenvalue $E_\lambda$ of $H_0+\lambda V$ inside the contour satisfies $|E_\lambda-E|\le|\lambda|v$; in particular on the circle $|\lambda|=R=g/(8v)$ one has $|E_\lambda-E|\le g/8$, so the holomorphic function $f(\lambda):=E_\lambda-E$ obeys $|f|\le M:=g/8=Rv$ on $|\lambda|=R$. Cauchy's estimates [F2] applied to $f$, whose constant Taylor coefficient is $f(0)=0$, give $|E_\lambda-E-\lambda E'(0)-\frac{\lambda^2}{2}E''(0)|\le M(|\lambda|/R)^3/(1-|\lambda|/R)=Rv(|\lambda|/R)^3/(1-|\lambda|/R)$ for $|\lambda|<R$. [F1, F2, F4, algebra]
+
+2.1 [Consistency of the second-order coefficient] The derivatives of [F3] are $E'(0)=\langle V\psi_0,\psi_0\rangle$ and $E''(0)=-2\langle VSV\psi_0,\psi_0\rangle$; both are bounded by $2v$ and $4v^2/g$ respectively, so for $|\lambda|\le R/2$ the quadratic truncation error is at most $2v|\lambda|+2v^2|\lambda|^2/g+O(|\lambda|^3)$; the explicit cubic bound of step 1.1 is the strongest of the displayed estimates and does not require separating these terms. [step 1.1, F1, F3, algebra]
+
+3.1 [The degenerate case] If $v=0$ then $V=0$ and $H_0+\lambda V=H_0$, so $P_\lambda=P_0$ and $\psi(\lambda)=\psi_0$ for all $\lambda$, and $E_\lambda\equiv E$. [F1, F3] ∎

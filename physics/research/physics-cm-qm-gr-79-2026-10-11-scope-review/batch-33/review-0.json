@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "33",
+  "round": 0,
+  "input_sha256": "6c2d38d5a9aee62561a59c4be54ea420ef21c8b0f3f4c3b9ed4b7d2af80c7979",
+  "reviewed_items": [
+    "def-cm17-continuum-body-and-units",
+    "post-cm17-continuum-kinematic-model",
+    "def-cm17-density-and-mass",
+    "post-cm17-mass-balance",
+    "pthm-cm17-transport-and-material-derivative",
+    "pthm-cm17-continuity-equation",
+    "def-cm17-traction-and-stress",
+    "post-cm17-contact-force-model",
+    "post-cm17-momentum-balance",
+    "pthm-cm17-stress-matrix-and-symmetry",
+    "pthm-cm17-momentum-equation",
+    "post-cm17-linear-elastic-constitutive",
+    "pthm-cm17-linear-elastic-equation-of-motion",
+    "pthm-cm17-elastic-plane-wave-speeds",
+    "post-cm17-fluid-constitutive",
+    "pthm-cm17-incompressible-periodic-local-evolution",
+    "pthm-cm17-chain-limit-of-the-string-model",
+    "pthm-cm17-string-wave-solutions",
+    "rem-cm17-boundary-regularity-and-scope",
+    "ex-cm17-uniform-expansion-transport-check",
+    "ex-cm17-elastic-plane-wave-and-energy-check",
+    "ex-cm17-string-modes-and-tail-check",
+    "ex-cm17-spring-chain-limit-numbers",
+    "ex-cm17-riemann-shock-and-rarefaction-check",
+    "ex-cm17-channel-flow-and-no-slip-check",
+    "ex-cm17-periodic-shear-exact-solution-check",
+    "cex-cm17-traction-symmetry-without-stress-matrix"
+  ],
+  "reviewed_pages": [
+    "cm17-classical-continua-with-explicit-constitutive-assumptions",
+    "cm17-classical-continua-with-explicit-constitutive-assumptions-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Full-batch review found significant physical-prerequisite and scope gaps requiring owner resolution.",
+  "findings": [
+    {
+      "id": "post-cm17-fluid-constitutive",
+      "type": "prerequisite",
+      "reason": "The incompressible Newtonian clause requires eta>0 and the barotropic inviscid clause does not supply constant-density incompressible Euler, yet pthm-cm17-incompressible-periodic-local-evolution uses nu=0 and ex-cm17-periodic-shear-exact-solution-check claims that branch; add the missing adopted assumption."
+    },
+    {
+      "id": "def-cm17-continuum-body-and-units",
+      "type": "scope",
+      "reason": "The definition says fields transfer by composition, while the kinematic postulate requires Galilean covariance but defines only velocity and acceleration transforms; scalar, vector, tensor and reference-label rules for rho, b, t, sigma, p and xi are missing for the mass, momentum, elastic and fluid laws."
+    },
+    {
+      "id": "post-cm17-fluid-constitutive",
+      "type": "scope",
+      "reason": "The normalized unit-torus theorem is applied with dimensionful nu=eta/rho, velocity u and an H^s-based time T without spatial, velocity or time scales; pthm-cm17-incompressible-periodic-local-evolution and ex-cm17-periodic-shear-exact-solution-check need a stated nondimensionalization and physical-time conversion."
+    },
+    {
+      "id": "post-cm17-momentum-balance",
+      "type": "scope",
+      "reason": "Clause (ii) admits every piecewise-C1 D whose closure lies in the field domain, which may extend beyond Omega_s, while the stated physical scope restricts balances to regions inside the body; make D subset Omega_s explicit for pthm-cm17-stress-matrix-and-symmetry and pthm-cm17-momentum-equation."
+    },
+    {
+      "id": "post-cm17-momentum-balance",
+      "type": "local",
+      "reason": "Clause (iii) says contact force equals integral(rho b-rho a), but its displayed balance and the supplier's t(n)=sigma n convention imply contact plus body force equals inertia; align the reading without changing the consistent equation."
+    },
+    {
+      "id": "pthm-cm17-momentum-equation",
+      "type": "local",
+      "reason": "physical_scope claims equivalence of force-form balance and the local momentum equation, but the Statement and Proof establish only the forward implication; preserve the claim by proving the converse from the existing regularity and divergence theorem."
+    },
+    {
+      "id": "def-cm17-density-and-mass",
+      "type": "local",
+      "reason": "The density is defined only on U containing the swept set over a compactly contained J0, but m(t,B') is defined for every t in I where rho may be undefined; restrict m to covered times or require U to contain the full swept interval."
+    },
+    {
+      "id": "pthm-cm17-incompressible-periodic-local-evolution",
+      "type": "local",
+      "reason": "Clause (iii) uses unquantified B in ||v0||<=B and says the second solution has v(0)=u(0) rather than v(0)=v0; define B and the common time T_B and state the two initial-data assignments to match the cited stability theorem."
+    },
+    {
+      "id": "post-cm17-fluid-constitutive",
+      "type": "local",
+      "reason": "Clause (b) integrates a pressure law from 1 to a dimensionful density without a reference-density or normalization convention; define a positive reference density or explicitly nondimensionalize the density variable."
+    },
+    {
+      "id": "ex-cm17-uniform-expansion-transport-check",
+      "type": "local",
+      "reason": "The expansion uses 1+t although t has seconds under the framework units; specify a rate alpha with dimension inverse-time in chi and carry it through the interval, density and derivative calculations."
+    },
+    {
+      "id": "ex-cm17-elastic-plane-wave-and-energy-check",
+      "type": "local",
+      "reason": "The final remark says W vanishes exactly on rigid translations, but the supplier proves W(e)=0 iff e=0 and infinitesimal rigid rotations also have zero linear strain; qualify the field-level characterization."
+    }
+  ],
+  "consumer_checks": []
+}

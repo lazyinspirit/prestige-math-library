@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-prime-graph-on-at-least-four-vertices-contains-an-induced-p-four.md

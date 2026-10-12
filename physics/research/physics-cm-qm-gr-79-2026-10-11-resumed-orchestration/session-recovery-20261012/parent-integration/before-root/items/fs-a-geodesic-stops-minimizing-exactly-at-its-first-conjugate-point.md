@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-geodesic-stops-minimizing-exactly-at-its-first-conjugate-point.md

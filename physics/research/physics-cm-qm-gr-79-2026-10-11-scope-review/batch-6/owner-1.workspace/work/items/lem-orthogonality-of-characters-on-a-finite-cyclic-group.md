@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orthogonality-of-characters-on-a-finite-cyclic-group.md

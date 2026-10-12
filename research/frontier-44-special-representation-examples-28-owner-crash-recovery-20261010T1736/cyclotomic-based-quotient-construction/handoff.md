@@ -1,0 +1,7 @@
+Three guarded conditional carriers are prepared. All three Statements and source metadata are preserved; lower and upper are byte-identical to current canonical files. The based quotient makes the already-approved noncircular positive-star argument and FIRST/RIGHT label comparison explicit, declaring the two existing helpers actually consumed.
+
+The history is the exact unfinished Step3 first-pass binding entries in the stable cap ledger. Original global/native11 final2 is unchanged. Historical sufficiency receipts and source proofs are preserved as history and do not certify current carriers.
+
+The owner must bind the actual generic global theorem, quotient-cover duality/normalization, mirror, positive FIRST recursion and canonical survivor graph before accepting the based quotient. Lower also requires the integral vacuum isomorphism and independent free projective basis. Upper requires the canonical unscaled restricted-dual tensor map and the actual highest-weight contravariant form; inverse-Gram upper/lower duality then identifies its delta functionals. The separately proposed K0 restoration supplies the correct conditional route but is not accepted here. No injectivity, perfectness, lattice or linear projective-crystal conclusion is fabricated.
+
+Focused local precheck, renderer and proof-layout checks pass on all three final proposals (10 numbered steps). These are formatting checks only. No canonical/manifests/shared reports/ledger/counters/state/control/gates were edited; no registration, commit or publication.

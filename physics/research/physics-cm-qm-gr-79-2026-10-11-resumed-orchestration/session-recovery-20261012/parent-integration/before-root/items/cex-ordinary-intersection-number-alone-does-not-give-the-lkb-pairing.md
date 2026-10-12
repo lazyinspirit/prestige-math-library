@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ordinary-intersection-number-alone-does-not-give-the-lkb-pairing.md

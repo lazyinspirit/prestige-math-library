@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-kernel-of-identity-minus-compact-is-finite-dimensional.md

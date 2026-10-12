@@ -44,10 +44,8 @@ $$\int s\,d\mu=\int_{\mathrm{simple}} s\,d\mu.$$
 
 **Proof technique:** direct.
 
-1.1 The function $s$ is one of its own admissible simple minorants, so [L1]
-gives $$\int s\,d\mu\ge\int_{\mathrm{simple}} s\,d\mu.$$ [given, L1, L3]
+1.1 The function $s$ is one of its own admissible simple minorants, so [L1] gives $$\int s\,d\mu\ge\int_{\mathrm{simple}} s\,d\mu.$$ [given, L1, L3]
 
-1.2 If $u$ is any admissible simple minorant of $s$, then $u\le s$, so [L2]
-gives $$\int_{\mathrm{simple}} u\,d\mu\le\int_{\mathrm{simple}} s\,d\mu.$$ Taking the supremum over all such $u$ in [L1] yields the reverse inequality. [L1, L2, L3]
+1.2 If $u$ is any admissible simple minorant of $s$, then $u\le s$, so [L2] gives $$\int_{\mathrm{simple}} u\,d\mu\le\int_{\mathrm{simple}} s\,d\mu.$$ Taking the supremum over all such $u$ in [L1] yields the reverse inequality. [L1, L2, L3]
 
-2.1 The two inequalities from steps 1.1 and 1.2 give equality of the nonnegative and simple integrals on $s$. [step 1.1, step 1.2] ∎
+2.1 The two inequalities from steps 1.1 and 1.2 give equality of the nonnegative and simple integrals on $s$. [step 1.1, step 1.2] ∎ 

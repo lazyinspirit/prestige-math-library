@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-generic-extension-transitivity-and-rank-bound.md

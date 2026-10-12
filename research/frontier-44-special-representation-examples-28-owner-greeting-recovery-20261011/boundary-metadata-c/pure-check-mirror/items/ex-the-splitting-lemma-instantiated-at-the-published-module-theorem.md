@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-splitting-lemma-instantiated-at-the-published-module-theorem.md

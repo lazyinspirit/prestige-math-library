@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-geodesic-segment-before-its-first-conjugate-point-is-locally-energy-minimizing.md

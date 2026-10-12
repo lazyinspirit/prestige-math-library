@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-effective-dimension-is-liminf-prefix-complexity-rate.md

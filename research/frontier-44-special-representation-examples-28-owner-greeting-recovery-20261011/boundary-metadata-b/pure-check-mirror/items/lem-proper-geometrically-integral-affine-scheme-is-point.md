@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-proper-geometrically-integral-affine-scheme-is-point.md

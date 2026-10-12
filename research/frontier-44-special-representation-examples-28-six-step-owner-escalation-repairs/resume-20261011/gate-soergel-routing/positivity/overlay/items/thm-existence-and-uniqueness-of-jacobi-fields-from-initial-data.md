@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-and-uniqueness-of-jacobi-fields-from-initial-data.md

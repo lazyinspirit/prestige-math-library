@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-isomorphic-hecke-classes-do-not-by-themselves-prove-homotopy-equivalent-complexes.md

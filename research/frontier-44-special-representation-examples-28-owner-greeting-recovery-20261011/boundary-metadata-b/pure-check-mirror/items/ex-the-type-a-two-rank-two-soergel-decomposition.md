@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-type-a-two-rank-two-soergel-decomposition.md

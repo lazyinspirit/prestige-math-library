@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-parabolic-growth-factorization-and-rationality.md

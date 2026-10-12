@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups.md

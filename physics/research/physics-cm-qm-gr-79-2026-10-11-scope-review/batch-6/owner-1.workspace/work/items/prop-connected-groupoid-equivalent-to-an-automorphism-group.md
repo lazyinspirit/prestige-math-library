@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-connected-groupoid-equivalent-to-an-automorphism-group.md

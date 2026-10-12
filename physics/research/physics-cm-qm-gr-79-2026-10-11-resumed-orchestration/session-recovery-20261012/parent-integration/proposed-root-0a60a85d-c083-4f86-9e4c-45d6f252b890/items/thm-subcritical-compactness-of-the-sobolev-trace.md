@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-subcritical-compactness-of-the-sobolev-trace.md

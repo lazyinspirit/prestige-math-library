@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-singular-simplex-and-singular-chain-group-with-coefficients.md

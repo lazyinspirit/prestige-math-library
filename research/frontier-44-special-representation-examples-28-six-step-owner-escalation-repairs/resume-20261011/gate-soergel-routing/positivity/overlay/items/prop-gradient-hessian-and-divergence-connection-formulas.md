@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-gradient-hessian-and-divergence-connection-formulas.md

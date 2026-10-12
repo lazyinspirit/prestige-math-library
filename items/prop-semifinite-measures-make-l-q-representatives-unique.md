@@ -46,11 +46,9 @@ functional on $L^p(\mu)$ has at most one representing $L^q(\mu)$ class.
 
 **Proof technique:** Subtract the two representing functions, observe that the induced pairing is the zero functional, and use the norm formula for $\Lambda_g$ to force the difference to be the zero $L^q$ class.
 
-1.1 For every $[f] \in L^p(\mu)$, the assumption gives [given, algebra]
-$$\Lambda_{g-h}([f])=\int f(g-h)\,d\mu=0.$$ So $\Lambda_{g-h}$ is the zero functional on $L^p(\mu)$. [given, algebra]
+1.1 For every $[f] \in L^p(\mu)$, the assumption gives [given, algebra] $$\Lambda_{g-h}([f])=\int f(g-h)\,d\mu=0.$$ So $\Lambda_{g-h}$ is the zero functional on $L^p(\mu)$. [given, algebra]
 
-2.1 Applying [L1] to $u=g-h$ yields [L1, step 1.1]
-$$\|g-h\|_q=\|\Lambda_{g-h}\|=0.$$
+2.1 Applying [L1] to $u=g-h$ yields [L1, step 1.1] $$\|g-h\|_q=\|\Lambda_{g-h}\|=0.$$ [L1, step 1.1]
 
-3.1 If $q<\infty$, [L2] says that zero $L^q$ norm means the zero class, so [L2, L3, step 2.1]
-$g=h$ in $L^q(\mu)$. If $q=\infty$, then step 2.1 and [L3] give $g=h$ almost everywhere. In either case the representing class is unique. ∎
+3.1 If $q<\infty$, [L2] says that zero $L^q$ norm means the zero class, so [L2, L3, step 2.1] $g=h$ in $L^q(\mu)$. If $q=\infty$, then step 2.1 and [L3] give $g=h$ almost everywhere. In either case the representing class is unique. [L2, L3, step 2.1] ∎
+

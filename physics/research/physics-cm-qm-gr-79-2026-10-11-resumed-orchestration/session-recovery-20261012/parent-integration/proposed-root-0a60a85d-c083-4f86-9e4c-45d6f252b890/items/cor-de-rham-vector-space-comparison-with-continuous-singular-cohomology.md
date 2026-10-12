@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology.md

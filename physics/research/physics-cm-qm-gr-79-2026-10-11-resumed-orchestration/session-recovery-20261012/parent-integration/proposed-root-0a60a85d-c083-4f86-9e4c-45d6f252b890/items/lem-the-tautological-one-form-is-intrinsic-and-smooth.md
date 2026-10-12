@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-tautological-one-form-is-intrinsic-and-smooth.md

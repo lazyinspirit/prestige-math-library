@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-charpit-momentum-equation-from-differentiating-hamilton-jacobi.md

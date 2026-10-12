@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strong-enriched-yoneda-lemma-as-a-particular-end.md

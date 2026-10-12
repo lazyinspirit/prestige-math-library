@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-compact-square-form-of-enriched-naturality.md

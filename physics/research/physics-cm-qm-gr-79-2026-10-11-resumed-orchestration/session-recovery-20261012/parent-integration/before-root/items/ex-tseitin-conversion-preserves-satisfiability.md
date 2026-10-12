@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tseitin-conversion-preserves-satisfiability.md

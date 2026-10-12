@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-formal-series-over-a-field-is-a-local-domain.md

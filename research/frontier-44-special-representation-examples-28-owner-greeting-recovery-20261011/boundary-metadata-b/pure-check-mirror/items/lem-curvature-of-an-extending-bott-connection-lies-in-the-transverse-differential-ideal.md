@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-curvature-of-an-extending-bott-connection-lies-in-the-transverse-differential-ideal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-stably-trivial-bundles-over-spheres-below-the-rank-are-trivial.md

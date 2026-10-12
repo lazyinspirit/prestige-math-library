@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-natural-actions-of-symmetric-and-alternating-groups.md

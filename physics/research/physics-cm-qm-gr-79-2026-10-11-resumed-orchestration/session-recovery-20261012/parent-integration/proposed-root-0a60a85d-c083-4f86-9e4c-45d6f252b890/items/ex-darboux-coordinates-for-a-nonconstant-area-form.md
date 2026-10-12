@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-darboux-coordinates-for-a-nonconstant-area-form.md

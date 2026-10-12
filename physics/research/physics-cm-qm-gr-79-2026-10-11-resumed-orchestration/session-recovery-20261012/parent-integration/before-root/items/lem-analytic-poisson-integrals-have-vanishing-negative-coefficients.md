@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-poisson-integrals-have-vanishing-negative-coefficients.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-gch-absorbs-sums-and-squares.md

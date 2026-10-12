@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bessel-potential-pre-hilbert-norm-on-schwartz-space.md

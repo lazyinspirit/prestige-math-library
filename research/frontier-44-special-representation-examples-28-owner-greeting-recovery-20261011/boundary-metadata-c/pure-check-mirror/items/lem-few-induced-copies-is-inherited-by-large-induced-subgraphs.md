@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-few-induced-copies-is-inherited-by-large-induced-subgraphs.md

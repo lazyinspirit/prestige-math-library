@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-many-one-reduction-is-parsimonious.md

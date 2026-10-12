@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-pointwise-right-adjoint-extends-uniquely-to-a-functor.md

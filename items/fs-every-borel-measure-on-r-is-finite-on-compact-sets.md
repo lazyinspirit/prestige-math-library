@@ -36,8 +36,6 @@ therefore a genuine hypothesis, not a consequence of being a Borel measure.
 
 **Proof technique:** direct.
 
-1.1 By [L1], counting measure restricts to a Borel measure on $\mathbb{R}$. The [L1, given]
-compact interval $[0,1]$ is infinite. [L1, given]
+1.1 By [L1], counting measure restricts to a Borel measure on $\mathbb{R}$. The [L1, given] compact interval $[0,1]$ is infinite. [L1, given]
 
-2.1 Therefore [L2] gives [step 1.1, L2]
-$\#_{\mathbb{R}}([0,1]) = +\infty$. So this Borel measure is not finite on the compact set $[0,1]$, and the claim is false. [step 1.1, L2] ∎
+2.1 Therefore [L2] gives [step 1.1, L2] $\#_{\mathbb{R}}([0,1]) = +\infty$. So this Borel measure is not finite on the compact set $[0,1]$, and the claim is false. [step 1.1, L2] ∎ 

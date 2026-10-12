@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-polynomial-dimension-zero-ring-boundary.md

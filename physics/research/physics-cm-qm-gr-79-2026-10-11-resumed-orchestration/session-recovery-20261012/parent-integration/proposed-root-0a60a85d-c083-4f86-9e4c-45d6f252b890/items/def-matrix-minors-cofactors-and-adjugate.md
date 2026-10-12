@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-matrix-minors-cofactors-and-adjugate.md

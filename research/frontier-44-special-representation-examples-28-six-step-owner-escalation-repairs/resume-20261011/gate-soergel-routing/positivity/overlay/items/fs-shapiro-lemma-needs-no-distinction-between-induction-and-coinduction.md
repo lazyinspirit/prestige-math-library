@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-shapiro-lemma-needs-no-distinction-between-induction-and-coinduction.md

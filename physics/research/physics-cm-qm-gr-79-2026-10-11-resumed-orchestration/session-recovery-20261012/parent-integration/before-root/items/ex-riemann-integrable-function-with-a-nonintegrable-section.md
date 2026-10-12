@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riemann-integrable-function-with-a-nonintegrable-section.md

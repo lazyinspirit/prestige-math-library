@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-type-decomposition-of-the-sl2-principal-series.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-christoffel-symbols-are-components-of-a-tensor.md

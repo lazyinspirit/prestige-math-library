@@ -46,13 +46,10 @@ The standard contact rank-$2$ distribution on $\mathbb R^3$ is integrable.
 
 **Proof technique:** direct.
 
-1.1 The two fields $X_1$ and $X_2$ are smooth and pointwise independent, so [given]
-they define a smooth rank-$2$ distribution on $\mathbb R^3$. [given]
+1.1 The two fields $X_1$ and $X_2$ are smooth and pointwise independent, so [given] they define a smooth rank-$2$ distribution on $\mathbb R^3$. [given]
 
-1.2 Their bracket is [given]
-$$[X_1,X_2] = -\partial_z,$$ which is not a linear combination of $X_1$ and $X_2$. Therefore the distribution is not involutive, even on this global frame. [given, algebra]
+1.2 Their bracket is [given] $$[X_1,X_2] = -\partial_z,$$ which is not a linear combination of $X_1$ and $X_2$. Therefore the distribution is not involutive, even on this global frame. [given, algebra]
 
-1.3 By [L1], an integrable distribution would have to be involutive. Hence this standard [L1]
-contact distribution is a counterexample to the claim that it is integrable. [L1]
+1.3 By [L1], an integrable distribution would have to be involutive. Hence this standard [L1] contact distribution is a counterexample to the claim that it is integrable. [L1]
 
-2.1 Therefore the displayed statement is refuted. [given] ∎ [given]
+2.1 Therefore the displayed statement is refuted. [given] ∎ [given] 

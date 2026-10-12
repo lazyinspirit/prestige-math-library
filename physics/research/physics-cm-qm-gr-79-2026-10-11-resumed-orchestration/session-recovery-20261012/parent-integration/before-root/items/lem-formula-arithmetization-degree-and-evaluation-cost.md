@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-formula-arithmetization-degree-and-evaluation-cost.md

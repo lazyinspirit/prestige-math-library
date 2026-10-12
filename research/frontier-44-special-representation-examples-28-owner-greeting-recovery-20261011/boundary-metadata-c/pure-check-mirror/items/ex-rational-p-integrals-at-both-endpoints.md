@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-rational-p-integrals-at-both-endpoints.md

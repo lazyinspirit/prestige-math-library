@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-canonical-factor-maps-into-every-group-pushout-are-injective.md

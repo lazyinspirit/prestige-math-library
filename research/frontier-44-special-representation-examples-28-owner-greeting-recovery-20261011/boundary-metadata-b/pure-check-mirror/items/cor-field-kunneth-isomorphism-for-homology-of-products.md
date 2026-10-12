@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-field-kunneth-isomorphism-for-homology-of-products.md

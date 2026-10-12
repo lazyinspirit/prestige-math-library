@@ -46,11 +46,8 @@ $|G|^{1/42}=4$.
 
 **Proof technique:** direct.
 
+ 1.1 By [L1], after taking complements if necessary we may assume that $S$ is $\epsilon$-sparse. [L1]
 
-1.1 By [L1], after taking complements if necessary we may assume that $S$ is $\epsilon$-sparse. [L1]
+ 2.1 Applying [L2] to the $16$-vertex graph $G[S]$ gives $$ \alpha(G[S])\ge \frac{16}{\epsilon\cdot 16+1} = \frac{16}{5}>3. $$ Since $\alpha(G[S])$ is an integer, $\alpha(G[S])\ge 4$. [step 1.1, L2, algebra]
 
-
-2.1 Applying [L2] to the $16$-vertex graph $G[S]$ gives $$ \alpha(G[S])\ge \frac{16}{\epsilon\cdot 16+1} = \frac{16}{5}>3. $$ Since $\alpha(G[S])$ is an integer, $\alpha(G[S])\ge 4$. [step 1.1, L2, algebra]
-
-
-3.1 Because $|G|=2^{84}$, one has $|G|^{1/42}=2^2=4$. Therefore the stable set from step 2.1 already has the same size as the final polynomial bound used in the A-page reduction. If the sparse side had arisen in the complement instead, [L1] would turn the same calculation into a clique of size $4$ in the original graph. [step 2.1, L1, algebra] ∎
+ 3.1 Because $|G|=2^{84}$, one has $|G|^{1/42}=2^2=4$. Therefore the stable set from step 2.1 already has the same size as the final polynomial bound used in the A-page reduction. If the sparse side had arisen in the complement instead, [L1] would turn the same calculation into a clique of size $4$ in the original graph. [step 2.1, L1, algebra] ∎ 

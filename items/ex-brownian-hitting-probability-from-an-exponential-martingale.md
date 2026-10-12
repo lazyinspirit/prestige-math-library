@@ -57,16 +57,17 @@ and for $\mu=0$ the probability is $(x+a)/(a+b)$.
 
 **Proof technique:** direct.
  
+
 1.1 Stopping identity at a bounded continuous time: fix $T>0$, put $\rho=\tau\wedge T$, and for $n\ge1$ round $\rho$ upward to the grid $\{jT2^{-n}:0\le j\le2^n\}$, obtaining $\rho_n$. At a grid point $u<T$, $\{\rho_n\le u\}=\{\rho\le u\}\in\mathcal F_u$, so $\rho_n$ is a bounded stopping index for the sampled discrete martingale. Discrete optional sampling gives $E_xM_{\rho_n}=E_xM_0=e^{-2\mu x}$. It also identifies $M_{\rho_n}$ as a conditional expectation of the fixed integrable variable $M_T$ at the grid stopped sigma-algebra, so [F4] makes $(M_{\rho_n})_n$ uniformly integrable. Continuity gives $M_{\rho_n}\to M_\rho$ almost surely, hence in probability; [F4] upgrades this to $L^1$, proving $E_xM_{\tau\wedge T}=e^{-2\mu x}$. This uses the discrete theorem only on finite grids and proves the continuous bounded-time passage explicitly. [F1, F2, F4]
 
 2.1 Define $X_\tau$ by evaluation on $\{\tau<\infty\}$ and as $0$ otherwise, and define $M_\tau=e^{-2\mu X_\tau}$. These are measurable: bounded-time evaluations are limits of the finite-grid evaluations in step 1.1, and the finite-exit value is their eventual value as integer horizons increase. Since $\tau<\infty$ almost surely by [F3], $M_{\tau\wedge T}\to M_\tau$ as $T\to\infty$; the deterministic bound in [F5] gives $E_xM_\tau=e^{-2\mu x}$ by dominated convergence. [F1, F3, F5, step 1.1]
- 
+
 3.1 The value at the exit: $X_\tau\in\{-a,b\}$ almost surely by continuity and the definition of $\tau$ as the first exit, so $M_\tau=e^{-2\mu X_\tau}$ equals $e^{2\mu a}$ on $\{X_\tau=-a\}$ and $e^{-2\mu b}$ on $\{X_\tau=b\}$. Writing $p:=P_x(X_\tau=b)$, the identity of step 2.1 becomes $e^{-2\mu x}=p\,e^{-2\mu b}+(1-p)e^{2\mu a}$. [F2, step 2.1]
- 
+
 4.1 Solving: $p=\dfrac{e^{-2\mu x}-e^{2\mu a}}{e^{-2\mu b}-e^{2\mu a}} =\dfrac{1-e^{-2\mu(x+a)}}{1-e^{-2\mu(a+b)}}$, multiplying numerator and denominator by $e^{-2\mu a}$; the denominator is nonzero because $\mu\ne0$ and $a+b>0$ make the two endpoint exponentials distinct. [step 3.1]
- 
+
 5.1 The case $\mu=0$: then $X=Z$ is Brownian motion started at $x$, and [[thm-two-sided-exit-probability-for-brownian-motion]] gives $P_x(X_\tau=b)=(x+a)/(a+b)$ directly; this agrees with the limit of the formula of step 4.1 as $\mu\to0$. [F1, given]
- 
+
 6.1 Boundary and consistency cases: for $x\to-a$ the probability tends to $0$ and for $x\to b$ it tends to $1$, consistent with the starting point being at the boundary; for $\mu\to0$ step 4.1 has a removable singularity with limit $(x+a)/(a+b)$; for $\mu<0$ the same computation applies with the sign carried through; the stopping time is not bounded, and the passage to the limit was justified by the uniform boundedness of $M_{\tau\wedge t}$ from [F5] rather than by assuming uniform integrability of an unbounded family; the exit time is finite almost surely by the law of the iterated logarithm; and AC supplies the conditional-expectation interface and the inherited Brownian and LIL choice requirements, as declared in the Given hypotheses. [F3, F5, F6, step 4.1, step 5.1] ∎
 
 ## Source notes

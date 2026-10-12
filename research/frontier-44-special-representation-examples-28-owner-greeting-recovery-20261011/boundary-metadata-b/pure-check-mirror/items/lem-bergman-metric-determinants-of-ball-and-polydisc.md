@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bergman-metric-determinants-of-ball-and-polydisc.md

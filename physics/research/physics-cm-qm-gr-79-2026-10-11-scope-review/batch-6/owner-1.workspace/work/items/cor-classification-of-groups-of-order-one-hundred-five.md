@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-classification-of-groups-of-order-one-hundred-five.md

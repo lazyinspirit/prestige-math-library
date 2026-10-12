@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-green-correspondence-for-modules-of-vertex-exactly-p.md

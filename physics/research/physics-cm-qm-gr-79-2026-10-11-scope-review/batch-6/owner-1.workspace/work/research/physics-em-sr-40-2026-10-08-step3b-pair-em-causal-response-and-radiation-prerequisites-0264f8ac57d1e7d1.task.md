@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-causal-response-and-radiation-prerequisites-0264f8ac57d1e7d1.task.md

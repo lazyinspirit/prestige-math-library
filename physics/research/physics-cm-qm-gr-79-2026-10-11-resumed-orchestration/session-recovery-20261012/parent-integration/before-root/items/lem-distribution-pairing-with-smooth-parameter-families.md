@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-distribution-pairing-with-smooth-parameter-families.md

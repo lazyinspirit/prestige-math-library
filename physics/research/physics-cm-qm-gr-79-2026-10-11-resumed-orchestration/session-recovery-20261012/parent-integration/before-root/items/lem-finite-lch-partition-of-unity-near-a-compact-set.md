@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-lch-partition-of-unity-near-a-compact-set.md

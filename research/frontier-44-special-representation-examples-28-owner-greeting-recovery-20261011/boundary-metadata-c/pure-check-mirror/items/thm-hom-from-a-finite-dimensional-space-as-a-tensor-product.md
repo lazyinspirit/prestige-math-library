@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hom-from-a-finite-dimensional-space-as-a-tensor-product.md

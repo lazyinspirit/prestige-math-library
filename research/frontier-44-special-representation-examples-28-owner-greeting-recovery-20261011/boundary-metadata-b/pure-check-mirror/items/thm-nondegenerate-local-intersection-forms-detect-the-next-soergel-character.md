@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nondegenerate-local-intersection-forms-detect-the-next-soergel-character.md

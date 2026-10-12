@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-equivalent-hnn-presentation-with-associated-subgroups.md

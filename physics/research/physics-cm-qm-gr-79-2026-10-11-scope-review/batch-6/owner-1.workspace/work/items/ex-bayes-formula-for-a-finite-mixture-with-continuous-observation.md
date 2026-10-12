@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bayes-formula-for-a-finite-mixture-with-continuous-observation.md

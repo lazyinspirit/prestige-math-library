@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-right-derived-functors-form-a-cohomological-delta-functor.md

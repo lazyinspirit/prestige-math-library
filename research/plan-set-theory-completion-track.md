@@ -1,6 +1,6 @@
 # Set theory completion track: foundations, independence, and choiceless mathematics
 
-Owner commission 2026-09-07: extend the published `foundations` category into
+Owner commission 2026-09-07: extend the published `set-theory` category into
 a comprehensive set-theory sequence and supply an honest proof route for every
 mathematical result currently recorded on
 `deferred-set-theory-beyond-choice`.
@@ -60,7 +60,7 @@ strictly stronger than `Con(ZFC)` and never discharges a published
 
 ## 1. Summary and genuine dependency graph
 
-All 31 pairs are registered in `plan-spec.json` as category `foundations`.
+All 31 pairs are registered in `plan-spec.json` as category `set-theory`.
 The graph preserves genuine parallel roots; it does not serialize independent
 mathematics merely to control frontier selection.
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space.md

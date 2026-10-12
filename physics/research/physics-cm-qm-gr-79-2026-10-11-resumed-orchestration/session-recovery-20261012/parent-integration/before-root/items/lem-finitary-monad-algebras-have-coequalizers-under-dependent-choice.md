@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice.md

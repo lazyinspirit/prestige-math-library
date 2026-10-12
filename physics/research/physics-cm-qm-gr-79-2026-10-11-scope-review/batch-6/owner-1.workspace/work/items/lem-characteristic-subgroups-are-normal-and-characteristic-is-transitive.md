@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-subgroups-are-normal-and-characteristic-is-transitive.md

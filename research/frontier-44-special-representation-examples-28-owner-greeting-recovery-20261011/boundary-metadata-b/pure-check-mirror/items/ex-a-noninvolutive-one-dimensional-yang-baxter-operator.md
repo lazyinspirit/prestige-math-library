@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-noninvolutive-one-dimensional-yang-baxter-operator.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-conjugates-over-a-finite-field-are-the-frobenius-powers.md

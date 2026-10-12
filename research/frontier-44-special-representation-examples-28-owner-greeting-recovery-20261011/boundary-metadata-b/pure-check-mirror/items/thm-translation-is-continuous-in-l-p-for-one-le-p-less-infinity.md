@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity.md

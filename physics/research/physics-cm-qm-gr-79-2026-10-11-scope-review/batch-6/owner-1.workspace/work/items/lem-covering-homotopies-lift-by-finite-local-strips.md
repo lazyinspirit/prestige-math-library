@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-covering-homotopies-lift-by-finite-local-strips.md

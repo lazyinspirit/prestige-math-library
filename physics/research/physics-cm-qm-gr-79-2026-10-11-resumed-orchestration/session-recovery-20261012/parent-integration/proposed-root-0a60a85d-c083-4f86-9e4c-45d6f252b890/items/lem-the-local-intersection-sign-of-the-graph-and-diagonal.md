@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-local-intersection-sign-of-the-graph-and-diagonal.md

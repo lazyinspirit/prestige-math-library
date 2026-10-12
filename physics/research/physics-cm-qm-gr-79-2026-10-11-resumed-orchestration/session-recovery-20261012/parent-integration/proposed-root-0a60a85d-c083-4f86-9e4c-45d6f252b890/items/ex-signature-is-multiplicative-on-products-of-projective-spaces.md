@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-signature-is-multiplicative-on-products-of-projective-spaces.md

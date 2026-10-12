@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-averaging-operator-projects-onto-the-fixed-subspace.md

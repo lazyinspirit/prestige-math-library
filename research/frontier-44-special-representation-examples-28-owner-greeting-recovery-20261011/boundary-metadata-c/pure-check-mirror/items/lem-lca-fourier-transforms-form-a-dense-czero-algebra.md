@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-lca-fourier-transforms-form-a-dense-czero-algebra.md

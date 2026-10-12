@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-harmonic-gauge-and-reduced-equations.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-projective-embedding-every-smooth-proper-curve.md

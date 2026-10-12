@@ -1,0 +1,81 @@
+# Semisimplicity foundation checkpoint
+
+Run: `frontier-44-special-representation-examples-28`. Author: `/root/klr_semisimplicity_foundations`.
+
+Owner authorization to build necessary new theory and A/B pairs persists after the two exhausted original repair rounds. Those rounds are historical and immutable. This packet is new foundation construction, not another repair-budget reset. Canonical items, pages, planning records, engine state and gates are outside this author's write scope.
+
+After WSL recovery CLAUDE.md and README.md were reread in full. The original cached dcM and BBD PDFs/text survive; `/tmp/klr-foundation-semisimplicity` did not. No semisimplicity draft had been written before the crash. Consequently the following is a mathematical checkpoint, not an assertion that vanished files exist.
+
+Selected current route: the full FINAL projective Hodge proof in de Cataldo–Migliorini, *The Hodge theory of algebraic maps*, arXiv math/0306030, §§4.4–4.7 and 5–6, with its actual prerequisite graph. The v1 proof was read first, but independent checking exposed its incorrect unqualified final bound in Lemma 2.11.1; the final version avoids the stronger primitive-compatible splitting and works with canonical graded perverse groups. No arithmetic purity, mixed Hodge module decomposition theorem, or affine paving of arbitrary quiver-stable flag fibers is assumed.
+
+The exact geometric simplification supplied by the original KLR owner is retained. The incidence is the total space of a vector subbundle $W_\nu\subset E_V\times\mathcal F_\nu$. Write $\mathbb P_{\rm lines}(U)=\operatorname{Proj}\operatorname{Sym}(U^\vee)$, since this repository's ordinary projective-bundle convention parametrizes quotients. The injection $W_\nu\oplus\mathcal O\hookrightarrow(E_V\oplus\mathbb C)\times\mathcal F_\nu$ gives a map $\mathbb P_{\rm lines}(W_\nu\oplus\mathcal O)\to\mathbb P_{\rm lines}(E_V\oplus\mathbb C)$. Its source is smooth projective. Its inverse image of $t\ne0$ is exactly $X_\nu$, with map $\pi_\nu$. Over the finite Stiefel/Grassmannian Borel models the identical construction gives a projective map between smooth projective total spaces. General Hironaka/Chow/quasiprojective decomposition reductions are unnecessary for this consumer.
+
+Exact owned candidate IDs:
+
+- `thm-polarized-hodge-riemann-and-hard-lefschetz-for-smooth-projective-varieties`: assigned initially to this lane; classical Hodge author supplies the upstream proof now. Root must reconcile ownership before integration.
+- `thm-relative-hard-lefschetz-and-perverse-splitting-for-projective-algebraic-maps`.
+- `thm-projective-pushforward-of-smooth-constant-sheaves-has-semisimple-perverse-cohomology`.
+- `cor-quiver-full-flag-pushforwards-are-semisimple-in-characteristic-zero`.
+
+Completed mathematical arguments to write durably next: incidence vectorbundle and smooth projective compactification; elementary hard-Lefschetz splitting in a bounded t-category; conditional equivariance bridge using connected-group perverse-heart full faithfulness and actual finite Borel stabilization. The rational-to-arbitrary-char0 scalar extension proof has been transferred to `/root/klr_hodge_monodromy_weights`, exact ID `lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity`.
+
+Indispensable inputs uncovered by complete proof reading, not hidden as “standard”: (1) arbitrary-dimensional classical Hodge–Riemann and weak Lefschetz; (2) the fixed-part/geometric-monodromy theorem, Deligne Hodge II §§4.1–4.2; (3) mixed Hodge image equality, Hodge III 8.2.6, and the fact that the proper fiber class image is a Hodge substructure; (4) Artin affine vanishing for perverse sheaves, stratified transversality and smooth pullback; (5) universal-hyperplane maximal-subobject theorem BBD 5.4.11–5.4.13 and 4.2.5–4.2.6; (6) graded primitive decomposition and intrinsic nilpotent filtration; both now have complete local finite-dimensional proofs. The stronger primitive-compatible Deligne splitting was initially exposed as an input of v1, but is not an input of the selected final-version proof.
+
+Actual readings before crash: dcM v1 printed/PDF40–70, all of §§4–8, plus 2.7, 2.9–2.12 and §10; complete Deligne Hodge II 4.1.1–4.2.8 and Hodge III 8.2.1–8.2.6. The newly downloaded Deligne files were only in lost `/tmp`; re-retrieval is necessary before hashing their recovered current carriers. Existing cached dcM v1 PDF SHA256 is `b994e591321c239a13ca3d56b0c286ebfb04c8f606850bedb9cc018299127f26`. No full-book reading is claimed.
+
+Current acceptance: **not established**. Reading the full decomposition proof identifies actual suppliers; it is not a substitute for locally proving them. Continue construction in dependency order. Native planning/integration and all actual build transitions belong to root and `tools/autopilot/`.
+
+## Current durable state after substantive construction
+
+The inventory has four proposed A/B pairs, 19 owned item IDs, 17 physical research-only drafts and two explicitly unfinished construction suppliers. Final `node tools/proof-layout.mjs research/frontier-44-special-representation-examples-28-klr-foundation-semisimplicity-drafts/items/*.md` returned `17 items, 61 steps, 0 defects`. This is formatting validation only, not an independent audit or native acceptance.
+
+Five standalone local proofs now exist: bounded t-category splitting, graded-heart primitive decomposition, canonical self-dual nilpotent filtration, full quiver-incidence finite-N compactification and universal/fixed-general-hyperplane defect reduction. Seven further A drafts give complete deductions relative to exact declared upstream suppliers: Artin cohomology from Morse, relative affine exactness from absolute Artin, noncharacteristic pullback from controlled local products, maximal universal-hyperplane subobjects, formal projective-package induction, arbitrary-char0 scalar reduction, and finite-N equivariant projector lifting. Five B examples accompany these.
+
+The two remaining OWNED construction suppliers are `lem-complex-stratified-morse-data-have-tangential-normal-product-and-link-description` and `lem-projective-hodge-perverse-package-closes-under-defect-and-image-dimension-induction`. Their exact dependencies and actual unfinished proof steps are in the inventory and core induction contract. The former still requires a full local controlled Morse product/link construction; notes and the1983 article defer it, and three Springer PDF requests returned HTML. The latter requires writing/checking the central intersection-limit argument, double graded forms, local perverse splitting criterion and moving hyperplane family. Separate topology/control, six-operations, classical Hodge and monodromy/weights owners retain their upstream proof obligations.
+
+Next action: complete those exact two owned proof constructions, reconcile all supplier final Statements, then review the literal semisimplicity clause and dimension shift in actual original KLR consumers before root native integration. No canonical item, page, plan, current10 contract, old repair history, engine state or gate was changed by this author.
+
+
+## Latest durable checkpoint: ordinary cycle removed and two core leaves constructed
+
+The actual ordinary consumers now use `thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes` and `lem-analytic-constructible-sheaves-admit-coherent-six-operations`. The final quiver corollary retains the actual equivariant formalism and explicitly consumes `lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative`. The scalar comparison supplier directly exposes perverse truncation and IC coefficient extension, confirmed by its same author. This removes the genuine ordinary/equivariant dependency cycle without changing a mathematical target.
+
+Two additional physical local suppliers are now written on the existing projective-perverse A page: `lem-perverse-closed-support-splitting-is-equivalent-to-costalk-stalk-isomorphism`, and `lem-middle-lefschetz-primitive-polarization-follows-from-nonmiddle-polarizations`. The first is a five-step recollement deduction exposing the actual invertibility obligation. The second is a six-step finite-dimensional theorem under exact preceding-stage hypotheses; it proves the endpoint Grassmannian limit, the orthogonality induction, identification of the radical and positive quotient polarization. The joint projective core must still establish its geometric hypotheses and identify the middle double primitive Hodge subspace, and construct the moving hyperplane family. Neither new supplier assumes middle positivity or decomposition.
+
+Current inventory: four A/B pairs,21ownedIDs,19physicaldrafts,2unfinishedconstructionIDs. Checks after final edits: precheck19checked0failed; proof-layout19items72steps0defects; rendercheck0errors. Exact current raw hashes and local results are in `semisimplicity-local-checks.json` and refreshed inventory. These are local checks, not independent mathematical audit or native acceptance. The remaining OWNED unfinished constructions are still the genuine controlled Morse product/link/exhaustion and complete geometric joint projective induction. Continue them; do not treat source reading or earlier-stage conditional deductions as proof completion.
+
+
+## Full Morse-book recovery
+
+The authors' current publication index supplies the actual full book at `https://www.math.ias.edu/~goresky/pdf/SMT.pdf`. Retrieval succeeded:279pages,25,209,903bytes,SHA256 `87ec78b5948ef42f7af568ecdda7a71c8bc8feed81af21564dccc07ab9b2387c`. Full PartI chapters4–8,printed70–113/PDF79–122,have now actually been read, including the complete local product verification and halflink/cone construction. This supersedes the earlier missing-full-source obstacle; it does not mark the Morse supplier proved. Next read the complex-link construction PartII chapter2 and generic analytic critical-point clauses PartI chapter2, then locally author the controlled moving-wall/parameter product mechanism and affine exhaustion with exact prerequisites.
+
+
+## Latest affine exhaustion construction
+
+Added actual five-step `lem-affine-algebraic-whitney-strata-admit-finite-critical-strongly-plurisubharmonic-distance-exhaustions`, on the existing affine A page. It locally proves normal nondegeneracy via conormal boundaries, ordinary Hessian nondegeneracy via Morse–Sard, and total finiteness via complexification of squared distance on S×conjugateS and generic zero-dimensional conormal-incidence fibers. This avoids an absent real semialgebraic finiteness theorem. Morse contract and actual Artin consumer now consume it. Current inventory is4pairs22IDs20drafts,2unfinishedconstructionIDs. Current localcheck receipt has20checked0failed,layout77steps0defects,renderer0errors. Original KLR consumer-owner actual read concurrence for the two formal projective leaves is separately hash-bound.
+
+Additional fullbook readings now include PartI12.1–12.6/printed128–139/PDF137–148, PartII2/printed159–172/PDF166–179 and PartII3/printed173–175/PDF180–182. Full generic-Morse parameter proof I2.2.3–4 read (with I2.1–2.5.2). Wall diagrams8.4/PDF112–115 visually read. Next owned construction: transcribe/check the complete local product wall chain using the controlled-isotopy supplier and characteristic covector calculations; then the normal complex-link cone comparison and sheaf-valued transport. For the last wall motion only coefficient ratios a/b∈[0,1] are needed, so use compact uniform estimates there rather than silently asserting a uniform estimate over unbounded ratios. Joint projective geometric stages remain unfinished.
+
+
+## Formal middle-input construction completed relative to preceding stages
+
+The complete proof-only component `semisimplicity-graded-middle-inputs-proof.md` now verifies the middle-limit lemma's(a)–(c) and the middle primitive quotient identification. It uses the already declared relativeHL, gradedbaseHL, intrinsicnilpotentfiltration and nonmiddleHR inputs; no ID/header/home/graph changes. In particular the q_i blocks have exact indices(i+2+2r,i), so no middle positivity is assumed while proving them. The actual earlier geometric induction and localMorse constructions remain unfinished, as does the moving-family/refined-intersection stage.
+
+
+## Morse local construction assembled (2026-10-09T10:30:29.684632+00:00)
+
+The existing Morse ID now has a physical complete draft with both local proof components embedded, not a citation replacing proof. It contains eight numbered proof steps, all eleven verified boundary motions, the normal support arrow, actual derived incidence coefficient transport, finite global attachments, nonpure link upper dimensions and the collar-compatible logarithmic exhaustion. Original consumer owner fully read the two components and reported no further focused defect conditional on the named inputs; persistent normal face cuts and algebraic ball-refinement scope are explicit. The Artin consumer actual body was read and its proof-boundary status reconciled. The new Artin interface review-to-repair Round1 and unchanged historical old repair rounds are recorded separately.
+
+All21 physical item drafts pass precheck21/21, proof-layout85steps0defects and renderer0errors. This is local format evidence only. Inventory/frozen metadata was not rewritten during active native writers; morse-assembly-delta.json supplies the exact eight direct edges and current physical status for root integration. Two newly direct real-triangulation/incidence edges were already transitive, with no new IDs or pairs. Only joint projective Hodge/perverse package remains unphysical; Gysin/cup and refined-fibre/moving-family components remain active construction. The same Hodge author is writing the latter disjoint component. Original KLR global acceptance remains held.
+
+
+## Exact restriction/Gysin interface written (2026-10-09T10:33:26.165465+00:00)
+
+The proof-only hyperplane-thom-cup component now derives positive smooth-divisor counit normalization through actual disk cochain evaluation and Hom adjunction, identifies the transverse universal evaluation line A⊠O(1), and calculates the exact R:A→C[1], G:C→A[1] composite. Its target parameter term vanishes on perverse graded objects by tensor naturality with pτ≤j. Fixed source and target cuts give η and f*L respectively. The full published Thom-transverse-section and tensor-line bodies and actual Verdier construction were read before use. A superficially relevant coherent embedding trace was read and explicitly excluded because its coefficient theory differs. Additional direct published core edges proposed are only the Thom-transverse-section lemma and tensor-line proposition; root retains metadata integration. Refined-fibre intersection and moving-family geometry remain unfinished, being authored by the same Hodge author in the disjoint component.
+
+
+## All22 local drafts assembled (2026-10-09T10:48:40.819734+00:00)
+
+The simultaneous projective core item is now physical. Its nine numbered proof steps embed the complete ordered A–H local constructions: positive Thom/cup, actual generic fixed hyperplanes, relative HL, base HL/nonmiddle HR, exact middle inputs, refined intersection, positive-stratum projective slices/IC splitting, and the actual moving-family quotient. The core owner read both final Hodge-author components in full, including the self-dual zero-support boundary and proper BM/ordinary homology comparison. All own consumers were reread against the exact current output. The final quiver corollary now directly consumes the actual dense-open fundamental-group supplier for simple open restriction, replacing its earlier inline perturbation sketch.
+
+Scoped22 drafts pass precheck22/22, proof-layout94steps0defects and renderer0errors. Final actual header/dependency/hash/home delta is final22-handoff.json; previous frozen inventory is archived before replacing our research inventory. No new IDs/pairs, native state or canonical items changed. Named upstream proof/native review and original global consumer acceptance remain pending root/engine/original owner; these checks do not independently accept mathematics.

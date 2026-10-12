@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space.md

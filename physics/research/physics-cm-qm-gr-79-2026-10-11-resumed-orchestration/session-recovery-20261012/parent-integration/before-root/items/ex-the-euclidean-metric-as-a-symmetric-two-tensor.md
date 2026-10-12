@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-euclidean-metric-as-a-symmetric-two-tensor.md

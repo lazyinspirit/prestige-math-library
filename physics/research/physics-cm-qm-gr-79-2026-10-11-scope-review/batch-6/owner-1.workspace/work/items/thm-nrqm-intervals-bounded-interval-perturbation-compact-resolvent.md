@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-intervals-bounded-interval-perturbation-compact-resolvent.md

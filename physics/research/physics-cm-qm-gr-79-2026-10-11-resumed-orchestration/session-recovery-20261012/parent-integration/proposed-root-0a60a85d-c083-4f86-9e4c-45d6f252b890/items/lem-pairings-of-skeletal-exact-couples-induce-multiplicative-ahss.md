@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pairings-of-skeletal-exact-couples-induce-multiplicative-ahss.md

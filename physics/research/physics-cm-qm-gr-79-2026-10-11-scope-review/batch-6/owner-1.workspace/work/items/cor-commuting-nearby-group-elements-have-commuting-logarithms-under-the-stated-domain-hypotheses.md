@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-commuting-nearby-group-elements-have-commuting-logarithms-under-the-stated-domain-hypotheses.md

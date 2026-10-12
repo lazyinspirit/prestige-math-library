@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-intersection-of-a-set-and-binary-intersection.md

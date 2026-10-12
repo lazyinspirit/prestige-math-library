@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-cat-enriched-category-is-the-same-thing-as-a-strict-two-category.md

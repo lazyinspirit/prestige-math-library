@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-general-linear-group-scheme-and-its-coordinate-ring.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-field-quadratic-isotropy-in-dimension-at-least-three.md

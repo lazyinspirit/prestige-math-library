@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-normal-surface-reduced-to-invertible-canonical-module.md

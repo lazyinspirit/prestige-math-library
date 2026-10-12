@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-deformation-cohomology-of-a-smooth-scheme.md

@@ -42,7 +42,6 @@ measurable representative of $u$.
 
 **Proof technique:** Choose a rapidly convergent subsequence from an $L^p$-convergent sequence and re-use the subsequence construction inside Riesz-Fischer.
 
-1.1 The sequence $(u_n)$ is Cauchy because it converges in norm. Applying [L1]
-to that Cauchy sequence gives an $L^p$ limit together with an almost-everywhere convergent subsequence of representatives. Because metric limits are unique, the limit supplied by [L1] must be the given $u$. [L1, given]
+1.1 The sequence $(u_n)$ is Cauchy because it converges in norm. Applying [L1] to that Cauchy sequence gives an $L^p$ limit together with an almost-everywhere convergent subsequence of representatives. Because metric limits are unique, the limit supplied by [L1] must be the given $u$. [L1, given]
 
-2.1 That subsequence is the required one. [step 1.1] ∎
+2.1 That subsequence is the required one. [step 1.1] ∎ 

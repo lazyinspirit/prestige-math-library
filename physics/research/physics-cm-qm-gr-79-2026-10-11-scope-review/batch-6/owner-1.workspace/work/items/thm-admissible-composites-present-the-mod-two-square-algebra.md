@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-admissible-composites-present-the-mod-two-square-algebra.md

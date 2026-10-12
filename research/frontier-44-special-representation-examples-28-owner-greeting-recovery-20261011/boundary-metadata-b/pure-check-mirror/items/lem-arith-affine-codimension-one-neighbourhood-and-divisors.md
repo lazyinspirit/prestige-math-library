@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-affine-codimension-one-neighbourhood-and-divisors.md

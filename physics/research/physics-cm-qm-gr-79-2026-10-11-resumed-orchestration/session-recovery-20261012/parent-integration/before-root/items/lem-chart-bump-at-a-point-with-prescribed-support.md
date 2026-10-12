@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-chart-bump-at-a-point-with-prescribed-support.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-frattini-free-finite-p-groups-are-elementary-abelian.md

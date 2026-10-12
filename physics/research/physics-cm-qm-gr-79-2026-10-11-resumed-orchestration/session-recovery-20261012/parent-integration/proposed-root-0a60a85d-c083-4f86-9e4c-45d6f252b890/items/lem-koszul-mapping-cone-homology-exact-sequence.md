@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-koszul-mapping-cone-homology-exact-sequence.md

@@ -37,11 +37,10 @@ In $\mathbb R^2$ with the standard inner product, the parallelogram spanned by $
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], $\|u\wedge v\|^2=\det\begin{pmatrix}\langle u,u\rangle&\langle u,v\rangle\\\langle v,u\rangle&\langle v,v\rangle\end{pmatrix}=\det\begin{pmatrix}5&5\\5&10\end{pmatrix}=25$, so the parallelogram area is $\sqrt{25}=5$. [L1, algebra]
+ 1.1 By [L1], $\|u\wedge v\|^2=\det\begin{pmatrix}\langle u,u\rangle&\langle u,v\rangle\\\langle v,u\rangle&\langle v,v\rangle\end{pmatrix}=\det\begin{pmatrix}5&5\\5&10\end{pmatrix}=25$, so the parallelogram area is $\sqrt{25}=5$. [L1, algebra]
 
 1.2 By [L1], $\|u\wedge v\wedge w\|^2=\det\begin{pmatrix}2&0&1\\0&4&2\\1&2&2\end{pmatrix}=2(8-4)+\bigl(0-4\bigr)=4$, so the parallelotope volume is $\sqrt4=2$. [L1, algebra]
 
 2.1 By [L2], the unit volume forms have norm $1$, so the norms computed in steps 1.1 and 1.2 are precisely the unoriented area and volume; the orientation data would only attach a sign, not a size. [L2, step 1.1, step 1.2]
 
-3.1 Steps 1.1, 1.2 and 2.1 recover area and volume from wedges and Gram determinants. [step 1.1, step 1.2, step 2.1] ∎
+3.1 Steps 1.1, 1.2 and 2.1 recover area and volume from wedges and Gram determinants. [step 1.1, step 1.2, step 2.1] ∎ 

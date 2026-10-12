@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-image-of-a-compact-space-is-compact.md

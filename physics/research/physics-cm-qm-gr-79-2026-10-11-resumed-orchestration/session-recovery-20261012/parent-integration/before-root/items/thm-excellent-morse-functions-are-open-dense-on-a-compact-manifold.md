@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-excellent-morse-functions-are-open-dense-on-a-compact-manifold.md

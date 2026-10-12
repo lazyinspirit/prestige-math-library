@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-double-commutant-theorem-for-concrete-von-neumann-algebras.md

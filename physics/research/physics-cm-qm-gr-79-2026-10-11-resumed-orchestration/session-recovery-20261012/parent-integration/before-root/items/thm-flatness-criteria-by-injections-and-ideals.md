@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-flatness-criteria-by-injections-and-ideals.md

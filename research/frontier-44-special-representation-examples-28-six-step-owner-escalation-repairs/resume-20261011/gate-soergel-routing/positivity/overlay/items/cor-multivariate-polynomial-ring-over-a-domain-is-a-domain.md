@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-multivariate-polynomial-ring-over-a-domain-is-a-domain.md

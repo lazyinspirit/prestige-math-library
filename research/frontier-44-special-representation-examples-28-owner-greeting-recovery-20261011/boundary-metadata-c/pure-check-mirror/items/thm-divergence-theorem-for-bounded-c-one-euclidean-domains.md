@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-divergence-theorem-for-bounded-c-one-euclidean-domains.md

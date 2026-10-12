@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-smooth-functions-separate-points-from-closed-sets.md

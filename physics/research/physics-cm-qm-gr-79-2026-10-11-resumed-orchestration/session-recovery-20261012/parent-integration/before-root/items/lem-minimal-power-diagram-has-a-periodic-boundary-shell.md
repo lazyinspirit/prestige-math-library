@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimal-power-diagram-has-a-periodic-boundary-shell.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-smooth-singular-simplices-in-a-coordinate-ball.md

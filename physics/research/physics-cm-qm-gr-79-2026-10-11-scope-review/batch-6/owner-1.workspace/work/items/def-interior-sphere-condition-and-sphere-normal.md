@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-interior-sphere-condition-and-sphere-normal.md

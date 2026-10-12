@@ -2,7 +2,15 @@
 
 Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
 
-Read these complete required sources before drift review or scaffolding:
+The hashes below preserve the original 2026-10-04 source snapshot. They are
+historical at-reading identifiers, not current byte assertions or current
+supplier acceptance. For future drift review and scaffolding, read the repaired
+authoritative prose scaffold and the exact current bindings in
+`research/scaffold-audit-2026-10-12/qft/revised-inventory.json` and
+`research/scaffold-audit-2026-10-12/qft/supplier-map.json`. The original
+inventory, source map, closure ledger, and splice remain read-only context.
+
+Original complete required source hashes:
 
 - `research/extended-frameworks-2026-10-03/quantum-field-theory/inventory-and-pathway.md` (SHA-256 265353d93c1c61d0beba31e0f0503f3d20cf470d81429c2627c851d1ec3ea418).
 - `research/extended-frameworks-2026-10-03/quantum-field-theory/prose-scaffold.md` (SHA-256 c1867fc6ab16c400d9d342347ebb2837e4beee5370df88262c1f1632754c3c94).
@@ -11,6 +19,13 @@ Read these complete required sources before drift review or scaffolding:
 - `research/extended-frameworks-2026-10-03/quantum-field-theory/closure-ledger.json` (SHA-256 27f5c22db306af867c4159f232a04f21c497cacc82ab5d5002d6b90949a45a07).
 
 The mechanical mapping and supplier qualifications are in `research/prose-scaffold-splice.json`. Source page codes and provisional item/module names are research reservations; they are not accepted production claims.
+
+The 2026-10-12 repaired full prose authority is
+`research/extended-frameworks-2026-10-03/quantum-field-theory/prose-scaffold.md`.
+It supersedes the 2026-10-04 prose reservation while preserving all 31
+proposed A/B pairs. Use it with the audit-local current dependency bindings and
+supplier hashes above. Neither this track nor that audit declares the research
+interfaces accepted production claims.
 
 ## Unital star algebra and positive normalized state
 
@@ -121,7 +136,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-mf02`; B companion `qft-mf02-examples`. Category `quantum-field-theory-mathematics`; library `mathematics`.
 Order 515. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `qft-mf01`.
+Declared earlier prerequisites: `qft-mf01`, `sr-spacetime-primitives`.
 
 Original reservation (read together with the full required sources above):
 
@@ -176,7 +191,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-c01`; B companion `qft-c01-examples`. Category `quantum-field-theory`; library `physics`.
 Order 519. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `qft-mc03`.
+Declared earlier prerequisites: `qft-mc03`, `sr-spacetime-primitives`, `em-primitives-and-postulates`.
 
 Original reservation (read together with the full required sources above):
 
@@ -231,7 +246,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-mf03`; B companion `qft-mf03-examples`. Category `quantum-field-theory-mathematics`; library `mathematics`.
 Order 523. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `qft-mf02`, `tempered-distributions-and-the-fourier-transform`.
+Declared earlier prerequisites: `qft-mf02`, `tempered-distributions-and-the-fourier-transform`, `sr-spacetime-primitives`.
 
 Original reservation (read together with the full required sources above):
 
@@ -290,7 +305,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-mg01`; B companion `qft-mg01-examples`. Category `quantum-field-theory-mathematics`; library `mathematics`.
 Order 527. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `fundamental-solutions-newtonian-potentials-and-green-functions`, `orthonormal-bases-parseval-and-fourier-series`, `qft-mf04`.
+Declared earlier prerequisites: `fundamental-solutions-newtonian-potentials-and-green-functions`, `orthonormal-bases-parseval-and-fourier-series`, `qft-mf04`, `em-primitives-and-postulates`, `em-potentials-and-gauge`.
 
 Original reservation (read together with the full required sources above):
 
@@ -431,7 +446,11 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-mx04`; B companion `qft-mx04-examples`. Category `quantum-field-theory-mathematics`; library `mathematics`.
 Order 535. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `probability-spaces-random-variables-and-expectation`, `qft-mx01`.
+Current page prerequisites: `qft-mx04` requires only `qft-mx01`; its B companion requires `qft-mx04`. The removed probability-space supplier is historical and is not a current page or item prerequisite.
+Historical reservation note: the 2026-10-04 plan listed
+`probability-spaces-random-variables-and-expectation` for the then-combined
+ratio/covariance estimator lemma. This prerequisite is withdrawn in the
+current binding below; it is not an active QFT-MX04 dependency.
 
 Original reservation (read together with the full required sources above):
 
@@ -453,6 +472,26 @@ Original reservation (read together with the full required sources above):
   "B_leaf": true
 }
 ```
+
+**Current binding (audit repair, 2026-10-12).** Replace the historical
+`lem-qft-example-covariant-estimate-errors` interface with
+`lem-qft-example-deterministic-ratio-error`, proved locally in
+`research/scaffold-audit-2026-10-12/qft/complete-local-arguments.md#MX04-D`.
+The current A-side math record is the ideal Penning frequency invariant and
+this deterministic ratio/Taylor lemma; the B leaf `ex-qftmath-x08` depends only
+on the latter. The local Taylor contract uses a rectangle
+`[A_-,A_+] × [c_-,c_+]` with `c_->0`, and its explicit remainder constant is
+`K_Q = (A_* + c_+/2) / c_-^3`, where
+`A_* = max(|A_-|, |A_+|)`; the proof obtains an exact rational remainder and
+uses only local quotient limits and an elementary algebraic bound that
+proves the full derivative, with no hidden calculus-supplier edge. Remove the direct statistical
+expectation/moments suppliers
+and the covariance-variance/minimum-variance weighted-estimator clause from
+the current item inventory. This is the owner's scope exclusion for unbuilt
+statistical suppliers, not an open mathematical problem. The full current
+records and their consumer bindings are in
+`research/scaffold-audit-2026-10-12/qft/revised-inventory.json` and
+`supplier-map.json`.
 
 ## Example observable types and scoped meanings
 
@@ -554,7 +593,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-g01`; B companion `qft-g01-examples`. Category `quantum-field-theory`; library `physics`.
 Order 543. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `qft-f01`, `qft-mg01`.
+Declared earlier prerequisites: `qft-f01`, `qft-mg01`, `em-primitives-and-postulates`, `em-potentials-and-gauge`.
 
 Original reservation (read together with the full required sources above):
 
@@ -657,7 +696,7 @@ Original reservation (read together with the full required sources above):
 
 A page `qft-x03`; B companion `qft-x03-examples`. Category `quantum-field-theory`; library `physics`.
 Order 549. Exact source inventory: `research/extended-frameworks-2026-10-03/quantum-field-theory/proposed-inventory.json`.
-Declared earlier prerequisites: `qft-g01`, `qft-mx03`, `qft-mx04`, `qft-x01`.
+Declared earlier prerequisites: `qft-g01`, `qft-mx03`, `qft-mx04`, `qft-x01`, `em-primitives-and-postulates`.
 
 Original reservation (read together with the full required sources above):
 
@@ -684,6 +723,20 @@ Original reservation (read together with the full required sources above):
   "B_leaf": true
 }
 ```
+
+**Current empirical binding (audit repair, 2026-10-12).** In the revised
+QFT-X03 inventory, `exp-qft-fan-electron-moment-2022` depends on the observable
+type definition and the ideal Penning frequency invariant only. It records the
+paper's reported eleven-field corrected value and its authors' stated 1σ
+uncertainty as empirical source data; it does not derive that uncertainty or
+reconstruct the covariance-weighted fit. Its derived same-page affine
+subtraction consumes the experiment record through the retained B-side
+`pthm-qft-reported-electron-anomaly-shift` empirical-premise edge. Both items
+are on QFT-X03 B, and this earlier-item-to-later-item dependency is allowed by
+the B-leaf policy; B-leaf only blocks consumers from another page. The historical QX11
+statistical-estimator interface has no direct or indirect consumer in the
+repaired inventory. See the exact bindings in
+`research/scaffold-audit-2026-10-12/qft/revised-inventory.json`.
 
 ## Exact real scalar free model
 
@@ -900,6 +953,23 @@ Original reservation (read together with the full required sources above):
   "B_leaf": true
 }
 ```
+
+**Current dependency binding (audit repair, 2026-10-12).** The JSON above is
+the historical pair reservation and remains unchanged as provenance. In
+QFT-IR04, `lem-qft-test-frechet-uniform-scaling-order` applies the published
+Baire theorem, whose actual statement assumes Dependent Choice (DC), while the
+historical dependency list names only the Axiom of Choice (AC). The exact
+published theorem `thm-choice-implies-dependent-implies-countable-choice`
+proves AC implies DC in ZF. Add that theorem as a `mathematical-premise` of
+`lem-qft-test-frechet-uniform-scaling-order`, alongside the existing AC,
+Baire, and scaling-degree premises. The complete proposed record and the six
+internal descendants are in
+`research/scaffold-audit-2026-10-12/qft/revised-inventory.json`; the proof
+and current hashes are in `supplier-map.json`. Future builds must use this
+edge. It is a prerequisite for the finite-scaling-degree extension, local
+counterterm jet classification, four-dimensional logarithmic scaling claim,
+unique subcritical extension example, one-loop log-degree example, and
+formal-renormalization scope remark.
 
 ## Finite quartic graph and superficial scaling conventions
 

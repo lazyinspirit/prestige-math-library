@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-alternating-group-is-normal-and-has-half-the-elements.md

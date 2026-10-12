@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-gr-flrw-homogeneous-cosmological-model.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-normalized-circle-integral-about-its-centre-is-one.md

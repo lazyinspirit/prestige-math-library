@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lowest-k-types-of-the-first-holomorphic-discrete-series.md

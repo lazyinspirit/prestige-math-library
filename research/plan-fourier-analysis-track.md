@@ -44,7 +44,7 @@ or item depends on a B-page item.
 | FR-14 | `fourier-restriction-and-the-stein-tomas-theorem` | restriction obstruction, Knapp test, Stein–Tomas |
 | FR-15 | `character-groups-and-elementary-lca-duals` | compact-open character groups, joint evaluation, and concrete duals |
 | FR-16 | `bochner-inversion-and-plancherel-on-lca-groups` | LCA Fourier analysis, Bochner, inversion, and the Plancherel isometry |
-| FR-17 | `pontryagin-duality-for-locally-compact-abelian-groups` | inversion-based biduality, character separation, annihilators, exactness, and full Plancherel |
+| FR-17 | `pontryagin-duality-for-locally-compact-abelian-groups` | range density, full Plancherel, transform localization, Pontryagin biduality, and exactness |
 | FR-18 | `finite-fourier-analysis-and-the-fast-fourier-transform` | DFT, inversion, convolution, radix-two FFT correctness |
 | FR-19 | `poisson-summation-sampling-and-lattice-duality` | Poisson hypotheses, scaled lattices, sampling |
 | FR-20 | `uncertainty-principles-for-fourier-analysis` | Heisenberg, Hardy, and finite-support uncertainty |
@@ -74,7 +74,7 @@ as shown and has exactly `[its A page]` as `requires`; no other page requires it
 | FR-13 | add 458.02615/.02616 | FR-6 A, `the-lp-spaces-holder-minkowski-and-riesz-fischer`, `the-maximal-function-and-lebesgue-differentiation` |
 | FR-14 | move to 458.02617/.02618 | FR-6 A, FR-13 A, `schwartz-space-and-the-plancherel-theorem`, `product-measures-and-the-fubini-tonelli-theorems`, `regular-surfaces-and-surface-integrals` |
 | FR-15 | add 510.06501/.06502 | `uniform-spaces`, `subspaces-products-and-quotients`, FR-6 A, `haar-measure-existence-and-uniqueness` |
-| FR-16 | move to 510.06503/.06504 | FR-15 A, `fourier-transform-convolution-and-approximate-identities`, `banach-algebras-spectrum-and-holomorphic-functional-calculus`, `radon-measures-and-the-riesz-markov-kakutani-theorem`, `haar-measure-existence-and-uniqueness` |
+| FR-16 | move to 510.06503/.06504 | FR-15 A, `fourier-transform-convolution-and-approximate-identities`, `banach-algebras-spectrum-and-holomorphic-functional-calculus`, `gelfand-theory-and-commutative-c-star-algebras`, `radon-measures-and-the-riesz-markov-kakutani-theorem`, `haar-measure-existence-and-uniqueness` |
 | FR-17 | move to 510.06505/.06506 | FR-15 A, FR-16 A, `uniform-spaces`, `subspaces-products-and-quotients` |
 | FR-18 | move to 510.06507/.06508 | FR-15 A, FR-16 A, FR-17 A |
 | FR-19 | move to 510.06509/.06510 | FR-1 A, FR-2 A, FR-15 A, FR-17 A, FR-18 A, `tempered-distributions-and-the-fourier-transform` |
@@ -192,9 +192,11 @@ none licenses an edit to a current library page or item now.
   representation theory.  RG-18 now has the concrete page id
   `haar-measure-existence-and-uniqueness`.  FR-15--FR-17 are therefore moved
   immediately after that A page (not its B companion) and before RG-19.  The
-  LCA pages use the sourced Ko/Lo order: Bochner and inversion precede
-  Pontryagin biduality; full Plancherel surjectivity follows biduality.  FR
-  mints no Haar theorem.  This also removes the former unresolved `RG-?` label.
+  LCA pages retain FR-16 Bochner, inversion and the Plancherel isometry. FR-17
+  derives dense range from the isometry and Fourier--Stieltjes uniqueness,
+  proves full Plancherel, uses Plancherel to construct the compact transform
+  bump, and then proves Pontryagin biduality. FR mints no Haar theorem. This
+  also removes the former unresolved `RG-?` label.
 - The dispatch asks FR to cite PDE for Strichartz estimates, but the current
   PDE scaffold contains no Strichartz page.  Under S-5 no new supplier is
   commissioned: FR-14 retains the sourced interface remark as a non-load-bearing
@@ -323,7 +325,7 @@ a dash in the supplementary column means that no third source was needed.
 | FR-13 | W, §11.2, pp. 73–74 | Gu, complete §§1–3, pp. 1–4 | — |
 | FR-14 | Wo, §§3–7, pp. 10–46 | Taob, notes 8–9, pp. 1–22 and 1–14 | W, §§11.1–11.3, pp. 71–74 |
 | FR-15 | Lo, §§34–35, pp. 134–140 | Ko, §9, pp. 20–22 | EW, Appendix C.1, printed pp. 429–432 |
-| FR-16 | Lo, §§34 and §§36A–D, pp. 134–137 and 141–146 | Ko, §§10–12, pp. 22–26 | EW, Appendix C.2–C.3, printed pp. 432–439 |
+| FR-16 | Lo, §§30C, 31A–E, 34A–C, 26H–I and 36A–D, pp. 118–125, 135–137, 96–98 and 141–146 | EW, Appendix C.2–C.3, printed pp. 432–439 | Ko, §§10–12, pp. 22–26 (statements/exercises only; no theorem proofs); Pedersen, pp. 2–5 (DC-level Haar-inversion comparison proof) |
 | FR-17 | Lo, §§35 and §37, pp. 138–140 and 147–152 | Ko, §§13–14, pp. 26–30 | EW, Appendix C.1, printed pp. 429–432 |
 | FR-18 | T, §§11–12, PDF pp. 86–100 | MITF, complete headings 1–4, unpaginated | EW, Appendix C.1–C.2, printed pp. 429–435 |
 | FR-19 | T, §7, PDF pp. 59–68 | L, chs. 22–23, pp. 129–140 | MITP, §§16.1–16.1.1, pp. 1–3 |
@@ -808,7 +810,7 @@ The $p=1$ case is Banach, the $p<1$ cases are not.
 **Requires:** the FR-8 and FR-9 A pages, MT-17, FA Hahn--Banach, Hilbert Riesz
 representation, and $L^p$ duality; no companion page is a prerequisite.
 **Sources read:** W ch. 7, pp. 29–47; K ch. 3, pp. 34–64; TaoA note 4
-§3, pp. 10–14; UW lectures 18 and 20–22, 27 PDF pages.
+§3, pp. 10–14, and Exercise Q4 in §5, pp. 26–27; UW lectures 18 and 20–22, 27 PDF pages.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
@@ -836,6 +838,7 @@ representation, and $L^p$ duality; no companion page is a prerequisite.
 | 3 | `cex-bmo-functions-need-not-be-globally-integrable` (counterexample) — $\log|x|$ is not in $L^1(\mathbb R^n)$. | Prevents an invalid global pairing integral. | ai-altered | ai-altered | Direct radial tails; pairings use atoms/regularisation. |
 | 4 | `ex-john-nirenberg-tail-integration` (example) — integrate an exponential distribution bound to recover every finite oscillation moment. | Verifies item 5 mechanically. | ai-generated | ai-generated | Layer-cake leaf. |
 | 5 | `rem-one-grid-dyadic-bmo-is-not-identical-to-bmo` (remark, `proved_here: false`) — record the sourced strict distinction. | Prevents confusing a proof device with the adopted space without presenting an unproved counterexample as proved. | literature-derived | not-supplied | UW dyadic discussion. |
+| 6 | `ex-lacunary-exponential-sums-belong-to-bmo` (example) — finite sums with dyadic-comparable frequencies and square-summable coefficients have uniformly bounded BMO norm. | Preserves the lacunary BMO endpoint example without expanding the A-page theory. | literature-derived | ai-altered | TaoA note 4 Q4; direct local L2 estimate by low/high frequency split. |
 
 **Hard proof/boundary obligations.**  If $\|b\|_{\mathrm{BMO}}=0$, John–Nirenberg
 is interpreted through an a.e. constant representative rather than division
@@ -893,6 +896,17 @@ from the smooth theorem.
 **Requires:** the FR-8 A page, MT-14's $L^p$ spaces, MT-17's unweighted maximal theorem,
 and measure-theory Radon–Nikodym facts.  **Sources read:** G §§7.1–7.4,
 pp. 499–545; K chs. 4–5, pp. 65–111.
+
+**Source-scope boundary (owner decision, 2026-10-05).** The Kinnunen
+chapter 4–5 reading is broader than the commissioned FR-12 inventory. The
+weighted-BMO results in §5.1 (Theorem 5.1, Coifman–Rochberg), Theorem 5.5
+(Jones factorization), Theorem 5.7 ($A_2$ as an exponential of BMO), and
+Definition 5.9/Theorems 5.11, 5.16, 5.17 and 5.19 (BLO/BMO
+characterizations) are out of scope with no destination. No FR-12 or FR-10
+proof, dependency, or planned interface consumes them; FR-10's approved BMO
+and $H^1$ scope reads Kinnunen chapter 3. They are not prerequisites of the
+$A_p$ maximal, $A_\infty$ power-decay, or weighted Calderón–Zygmund chain
+below.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
@@ -1014,12 +1028,12 @@ the FR-6 A page for the Euclidean Fourier convention, and RG-18
 `haar-measure-existence-and-uniqueness`.  **Sources read:** Lo §§34--35,
 pp. 134--140; Ko §§6--9, pp. 14--21; EW Appendix C.1, pp. 429--432.
 
-This foundation is deliberately separated from both Fourier inversion and
-biduality.  Körner's actual proof order is retained below: FR-16 proves Bochner
-and inversion first; FR-17 then proves Pontryagin biduality from inversion and
-uses biduality only for the surjectivity half of the full Plancherel theorem.
-This removes the tempting but circular route through compact-group
-Peter--Weyl, which is not available until RG-22.
+This foundation is deliberately separated from Fourier inversion and
+biduality. FR-16 proves Bochner, inversion and the one-way Plancherel isometry.
+FR-17 proves transform-range density from the isometry and Fourier--Stieltjes
+uniqueness, then full Plancherel, then the compact transform bump, and finally
+Pontryagin biduality. The dependency graph is acyclic and does not use the
+later compact-group Peter--Weyl page RG-22.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
@@ -1039,43 +1053,75 @@ Peter--Weyl, which is not available until RG-22.
 presented group $\mathbb Z/N\mathbb Z$ under $k\mapsto(x\mapsto e^{2\pi ikx/N})$;
 only an unnamed abstract cyclic group requires choosing a generator.
 
+**Source-scope boundary (owner decision, 2026-10-05).** EW Appendix C.3
+Examples C.14(3)–(5), the dual computations for locally compact fields,
+$\mathbb Q_p$, and the solenoid dual of $\mathbb Q$, are out of scope with no
+destination. The current FR-15 pair is limited to the four elementary models
+listed above; none of its planned statements or interfaces uses those
+non-Archimedean examples. Adding them would materially expand FR-15.
+
 ## FR-16. Bochner, inversion, and Plancherel on LCA groups
 
 **A page:** `bochner-inversion-and-plancherel-on-lca-groups`
 **B page:** `bochner-inversion-and-plancherel-on-lca-groups-examples`
 **Requires:** the FR-15 A page, FA
 `fourier-transform-convolution-and-approximate-identities` and the FA-17 A
-general Banach-algebra foundations, MT Radon measures/Riesz--Markov, and RG-18
-`haar-measure-existence-and-uniqueness`.  **Sources read:** Lo §§34 and
+general Banach-algebra foundations, FA-18
+`gelfand-theory-and-commutative-c-star-algebras`, MT Radon measures/Riesz--Markov,
+and RG-18 `haar-measure-existence-and-uniqueness`.  **Sources read:** Lo §§34 and
 §§36A--D, pp. 134–137 and 141–146; Ko §§10--12, pp. 22–26; EW Appendix
 C.2–C.3, printed pp. 432–439.
 
-**External prerequisite already included conditionally:** the Gelfand A page
-now carries `rem-lca-group-algebra-and-character-space-external` and
-`ex-gelfand-transform-of-l-one-of-an-lca-group`.  Williams Example 3.10's LCA
-convolution algebra, unit-iff-discrete result, all-character classification and
-compact-open topology identification are explicitly source-backed external
-inputs; the companion example proves the unitization/Gelfand evaluation only
-relative to them.  FR-16 still owes their complete local replacement before
-items 2, 3 and 5 can count as internally dependency-closed; it must reuse these
-stable identities rather than duplicate them.
-Haar existence is available; this substantial local package is not yet proved.
-Do not import the later RG-19 group-algebra page or apply a C*-specific
-unitization theorem to $L^1(G)$. See
-`phase-2-remaining-27-step8-external-inclusion-review.md` for exact remaining
-external assumptions.
+**Local replacement of the conditional Gelfand inputs.** The earlier Gelfand
+A page carries the stable orientation identities
+`rem-lca-group-algebra-and-character-space-external` and
+`ex-gelfand-transform-of-l-one-of-an-lca-group`. Their source-backed assumptions
+are not proof suppliers for this page. Keep those identities and their stated
+claims; the five local A-page lemmas below, together with the DC-level Haar
+inversion support lemma, discharge their LCA hypotheses before the
+inversion/Bochner consumers. At later reconciliation, retarget their
+orientation prose to these proved suppliers rather than create duplicate
+remarks/examples. This does not move their item files or allow a backward
+mathematical dependency from the earlier Gelfand page. The Gelfand A page is
+an explicit earlier page requirement, in addition to FA-17, and supplies
+`thm-characters-on-a-unital-banach-algebra-are-continuous`,
+`thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra`, and
+`def-gelfand-transform`. Use FA-17's Banach-algebra spectral-radius formula and
+holomorphic functional calculus only in their general Banach-algebra form.
+No argument imports RG-19 or a C*-specific unitization theorem.
+
+**Source-read limitation (2026-10-04).** Loomis §§34A–C (printed
+pp. 135–137) give full arguments for classification and topology and explicitly
+use translation continuity from §30C (pp. 118–119), convolution and identities
+from §§31A–E (pp. 121–125), and general Banach-algebra theory. Those local
+arguments are specified below rather than hidden behind the external remark.
+Loomis §26I (printed pp. 97–98) gives the crucial iterated positivity/spectral
+radius proof of the transform sup-norm bound, and §36A (pp. 141–142) applies it
+to the LCA algebra. Körner's cited author PDF §§10–12 (printed pp. 22–26)
+contains definitions, exercises, and theorem statements, including Theorems
+10.6, 12.3, 12.4, 12.6 and 12.7, but no proofs of these theorems. Reading
+those sections does not certify a complete proof. They corroborate statements
+and order; Loomis and the explicit local routes below carry the proof cost.
+In particular, do not label Körner Theorem 12.3 a complete source proof of the
+positive-functional extension step.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
 | 1 | `def-fourier-transform-on-an-lca-group` (definition) — for $f\in L^1(G,m_G)$, $\widehat f(\gamma)=\int_Gf(x)\overline{\gamma(x)}\,dm_G(x)$. | Generalises the existing transform only after Haar is cited. | literature-derived | not-applicable | Lo §34/EW C.2. |
-| 2 | `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` (lemma) — record the exact character factors and $\widehat{f*g}=\widehat f\widehat g$. | Algebraic calculus for all later theorems. | literature-derived | ai-altered | Lo §34/EW C.2; Fubini hypotheses explicit. |
-| 3 | `thm-riemann-lebesgue-lemma-on-lca-groups` (theorem) — $\widehat f\in C_0(\widehat G)$ and $\|\widehat f\|_\infty\le\|f\|_1$. | Identifies the correct transform codomain. | literature-derived | ai-altered | FR-15 joint evaluation, compactly supported $L^1$ approximation, and the unbuilt FR-16-local LCA character-space identification; no Pontryagin separation is used. |
-| 4 | `lem-lca-positive-convolution-squares-form-an-inversion-core` (lemma) — functions $g*\widetilde g$ with $g\in C_c(G)$ give a dense positive core on which both Fourier integrals are absolutely controlled. | Starting point for normalization and inversion. | literature-derived | literature-derived | Lo §36B/Ko §§10--12. |
-| 5 | `lem-fourier-stieltjes-transforms-determine-finite-radon-measures` (lemma) — a finite regular measure on $\widehat G$ whose inverse transform vanishes on $G$ is zero. | Supplies Bochner uniqueness and the inversion construction before biduality. | literature-derived | literature-derived | Ko Theorem 10.6; the proof requires the unbuilt FR-16-local identification of all characters of $L^1(G)$ after FR-15, not $G\cong\widehat{\widehat G}$. |
+| 1a-pre | `lem-lca-haar-measure-is-inversion-invariant` (local support lemma) — under DC, inversion preserves a left Haar measure on an LCA group. | Supplies the inversion step in 1a without importing AC through Haar-measure uniqueness. | literature-derived | ai-altered | Pedersen's second uniqueness comparison; the proof compares the original measure with its inversion using compactly supported continuous kernels and DC-level RMK uniqueness. |
+| 1a | `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra` (lemma) — $A=L^1(G,m_G)$, with convolution and $f^*(x)=\overline{f(-x)}$, is a commutative Banach $*$-algebra; $\|f*g\|_1\le\|f\|_1\|g\|_1$. | Local algebra and scalar-unitization substrate. | literature-derived | ai-altered | Lo §§31A–C, pp. 121–123; Haar translation/inversion invariance and absolute Fubini, with $\sigma$-compact support reduction when the Haar space is not $\sigma$-finite. |
+| 1b | `lem-lca-translations-and-normalised-local-approximate-identities` (lemma) — $T_xf(t)=f(t-x)$ is norm-continuous in $x$ on $L^p(G)$, $1\le p<\infty$; symmetric $u_U\in C_c(G)$, $u_U\ge0$, $\int u_U=1$, $\operatorname{supp}u_U\subset U$, form a contractive convolution approximate identity as neighbourhoods $U$ shrink. | Classification, positivity, and dense inversion core. | literature-derived | ai-altered | Lo §30C, pp. 118–119, and §31E, pp. 124–125; compact-support approximation and the estimate $\|u_U*f-f\|_p\le\sup_{x\in U}\|T_xf-f\|_p$. |
+| 1c | `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations` (lemma) — every algebraically nonzero complex multiplicative linear functional on $L^1(G)$ is exactly $h_\gamma(f)=\widehat f(\gamma)$ for a unique $\gamma\in\widehat G$; each has norm $1$. | Removes the external all-character assumption. | literature-derived | ai-altered | Lo §§34A–B, pp. 135–137; scalar Banach unitization and the earlier general character theorem establish continuity before the translation-ratio argument. |
+| 1d | `lem-lca-lone-character-topology-is-the-compact-open-topology` (lemma) — $\gamma\mapsto h_\gamma$ identifies compact-open topology with pointwise evaluation on all $L^1(G)$ functions. | Local character-space identification; $C_0$ codomain and Stone–Weierstrass. | literature-derived | ai-altered | Lo §34C, p. 137, with §34A's joint continuity; give both net-continuity implications and a finite norm-net for $\{T_xf:x\in K\}$. |
+| 1e | `lem-lca-scalar-unitization-character-space-and-spectrum` (lemma) — the scalar Banach unitization $A^+=\mathbb C\oplus A$ has exactly $q(z,f)=z$ and $h_\gamma^+(z,f)=z+\widehat f(\gamma)$ as characters, and $\sigma_{A^+}(0,f)=\{0\}\cup\widehat f(\widehat G)$; $A$ has an identity iff $G$ is discrete. Its character space is $\widehat G$ with a point at infinity for nondiscrete $G$, and $\widehat G\sqcup\{q\}$ with $q$ isolated for discrete $G$. | General Banach spectrum for the positive sup-norm estimate; exact nonunital cases. | literature-derived | ai-altered | Lo §31D, pp. 123–124, §§19B/25 and §§34A–C; the explicit scalar-unitization, faithful regular-representation, and clopen-projection routes below. |
+| 2 | `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` (lemma) — under DC, record the exact character factors and $\widehat{f*g}=\widehat f\widehat g$. | Algebraic calculus for all later theorems. | literature-derived | ai-altered | Lo §34/EW C.2; Fubini hypotheses explicit. |
+| 3 | `thm-riemann-lebesgue-lemma-on-lca-groups` (theorem) — under AC and DC, $\widehat f\in C_0(\widehat G)$ and $\|\widehat f\|_\infty\le\|f\|_1$. | Identifies the correct transform codomain. | literature-derived | ai-altered | FR-15 joint evaluation, compactly supported $L^1$ approximation, and local items 1c–1e, whose compact unitization spectrum makes each Fourier evaluation vanish at $q$; no Pontryagin separation is used. AC is declared because this proof route uses the AC-dependent compact character-space theorem. |
+| 4 | `lem-lca-positive-convolution-squares-form-an-inversion-core` (lemma) — under DC, functions $g*\widetilde g$ with $g\in C_c(G)$ give a dense positive core on which the dual integral becomes absolutely controlled after compatible Haar normalization; the span is dense in $L^1$ and $L^2$. | Starting point for normalization and inversion. | literature-derived | literature-derived | Lo §36B/Ko §§10--12. |
+| 5 | `lem-fourier-stieltjes-transforms-determine-finite-radon-measures` (lemma) — a finite regular measure on $\widehat G$ whose inverse transform vanishes on $G$ is zero. | Supplies Bochner uniqueness and the inversion construction before biduality. | literature-derived | literature-derived | Ko Theorem 10.6 statement; local items 1c–1e and Stone–Weierstrass density of the self-adjoint Fourier-transform algebra in $C_0(\widehat G)$, followed by absolute Fubini and Riesz–Markov uniqueness; not $G\cong\widehat{\widehat G}$. |
 | 6 | `def-positive-definite-function-on-an-abelian-group` (definition) — $\phi$ is positive definite when $\sum_{j,k}c_j\overline{c_k}\phi(x_j-x_k)\ge0$ for every finite choice, including the empty sum. | Sets the finite-matrix convention for Bochner. | literature-derived | not-applicable | Lo §36A/EW C.3. |
 | 7 | `lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite` (lemma) — $\phi(x)=\int_{\widehat G}\gamma(x)\,d\mu(\gamma)$ is continuous positive definite for finite positive $\mu$. | Easy direction of Bochner with continuity justified. | literature-derived | ai-altered | FR-15 joint evaluation plus compact/tail splitting; sequential DCT is not used on a non-first-countable group. |
-| 8 | `lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core` (lemma) — integrate $\phi$ against convolution squares and prove positivity and the $\phi(0)$ norm bound. | Construction behind Bochner. | literature-derived | literature-derived | Lo §36A/EW C.3. |
-| 9 | `lem-bochner-functional-extends-and-has-a-radon-representing-measure` (lemma) — extend item 8 to the relevant $C_0(\widehat G)$ closure and apply the published Riesz--Markov theorem; prove uniqueness with item 5. | Makes every representation-theorem input explicit. | literature-derived | literature-derived | Lo §36A/Ko Theorem 12.3 and MT Riesz--Markov. |
+| 8 | `lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core` (lemma) — for continuous positive-definite $\phi$, define $L_\phi(f)=\int f(x)\phi(-x)\,dm_G(x)$; prove positivity and $|L_\phi(f)|\le\phi(0)\|\widehat f\|_\infty$, so it descends to a positive bounded functional on the transform core. | Construction behind Bochner. | literature-derived | literature-derived | Lo §26H–I, pp. 96–98, and §36A, pp. 141–142; item 1e and the repeated Cauchy–Schwarz/spectral-radius route specified below. |
+| 9 | `lem-bochner-functional-extends-and-has-a-radon-representing-measure` (lemma) — extend item 8 to the relevant $C_0(\widehat G)$ closure and apply the published Riesz--Markov theorem; prove uniqueness with item 5. | Makes every representation-theorem input explicit. | literature-derived | literature-derived | Lo §26I/§36A and MT Riesz--Markov; Ko Theorem 12.3 supplies only the statement; local items 1c–1e and item 8 supply the proof. |
 | 10 | `thm-bochner-theorem-for-lca-groups` (theorem) — every continuous positive-definite $\phi$ on $G$ is the Fourier–Stieltjes transform of a unique finite positive Radon measure on $\widehat G$, of mass $\phi(0)$. | Required representation theorem. | literature-derived | literature-derived | Items 5--9. |
 | 11 | `cor-normalised-positive-definite-functions-correspond-to-probability-measures` (corollary) — $\phi(0)=1$ in Bochner's theorem iff the representing measure is a probability measure. | Useful probability interface. | literature-derived | ai-altered | Item 10 mass identity. |
 | 12 | `thm-compatible-dual-haar-normalisation` (theorem) — once $m_G$ is fixed, there is a unique scaling of Haar measure on $\widehat G$ for which Fourier inversion holds. | Resolves the reciprocal normalization without reproving Haar existence. | literature-derived | literature-derived | Item 4, Bochner, RG-18 uniqueness, and Ko Theorem 12.4. |
@@ -1083,23 +1129,176 @@ external assumptions.
 | 14 | `lem-lca-parseval-pairing-on-the-integrable-core` (lemma) — on $L^1\cap L^2$ functions with integrable transforms, $\int_Gf\overline g=\int_{\widehat G}\widehat f\overline{\widehat g}$. | Dense isometric core for Plancherel. | literature-derived | ai-altered | Lo §36B; inversion and Fubini. |
 | 15 | `thm-lca-plancherel-isometric-extension` (theorem) — the transform has a unique linear isometric extension $L^2(G,m_G)\to L^2(\widehat G,m_{\widehat G})$, without yet asserting surjectivity. | States exactly what is available before biduality. | literature-derived | literature-derived | Item 14 and Ko Theorems 12.6--12.7; density of $L^1\cap L^2$ in $L^2(G)$. |
 
+**Mandatory local proof routes and dependency order.** Item 1 is notation;
+then author 1a-pre, 1a, 1b, 1c, 2, 1d, 1e, 3, 5, 6–11, 4, 12–15 in that order.
+Item 4's $L^1/L^2$ density may be proved immediately after 1b; its dual
+integrability conclusion is certified only after 10 and 12. No proof may use
+that conclusion to construct Bochner's measure or the dual Haar scale. Rows
+1a–1e are the planned local A-page suppliers; 1a-pre is one necessary local
+support lemma within this same pair, not a new pair. Retain all original fifteen
+A items and all five B leaves.
+
+- **1a–1b:** Reduce an $L^p$ function to its $\sigma$-compact essential
+  support by Radon tightness; the open subgroup generated by a countable
+  compact exhaustion and a compact identity neighbourhood is $\sigma$-compact.
+  Apply product Fubini there and extend by zero. State and prove $C_c(G)$
+  density using Haar regularity and compact cutoffs. For $f\in C_c(G)$,
+  translate inside one compact set of finite measure and use uniform
+  continuity; then use density and translation isometry. Direct every
+  approximate-identity limit by identity neighbourhoods, with no metrization
+  or sequential compactness assumption. Prove inversion invariance in 1a-pre
+  under DC by comparing the Haar integral with its inversion on compactly
+  supported continuous kernels; do not invoke the published Haar uniqueness
+  theorem here, since that supplier assumes AC.
+- **1c:** Define scalar multiplication in $A^+$ by
+  $(z,f)(w,g)=(zw,zg+wf+f*g)$, norm $|z|+\|f\|_1$, and
+  involution $(z,f)^*=(\bar z,f^*)$. Any nonzero multiplicative $h$ on
+  $A$ extends algebraically to $h^+(z,f)=z+h(f)$, so the earlier
+  unital Banach character theorem implies $|h(f)|\le\|f\|_1$.
+  Pick $f$ with $h(f)\ne0$. The identity
+  $T_x(f*g)=(T_xf)*g=f*(T_xg)$ proves
+  $h(T_xf)/h(f)$ is independent of that choice; denote it $a(x)$.
+  Translation continuity, $T_{x+y}=T_xT_y$, and boundedness of $a$ give
+  continuity, multiplicativity, and $|a(x)|=1$ (apply boundedness to all
+  integer powers, including negative powers). Thus $\gamma=\bar a$ is a
+  character in our Fourier convention. For the local approximate identity,
+  $h(u_U)\to1$ and
+  $h(f*u_U)=\int f(x)h(T_xu_U)\,dm_G(x)
+               =h(u_U)\int f(x)a(x)\,dm_G(x)$.
+  The integral identity is justified first for compact-support functions by
+  finite-norm approximation of the continuous translation map, then by
+  $L^1$ truncation; it is not an assumed Bochner-integral theorem.
+  Taking the net limit gives $h=h_\gamma$. Conversely absolute Fubini
+  gives multiplicativity, and a nonnegative compact bump times $\gamma$
+  gives a nonzero evaluation of norm $1$. Local bumps also prove uniqueness
+  of $\gamma$ without any separation theorem for points of $G$.
+- **1d:** Compact-open convergence implies all evaluations converge by a
+  compact/tail split in $L^1$. Conversely take an evaluation-convergent net
+  $h_i\to h_0$ and $f$ with $h_0(f)\ne0$. On any compact $K\subset G$,
+  the set $\{T_xf:x\in K\}$ is norm compact. Its finite norm-nets,
+  together with $\|h_i\|\le1$, make
+  $h_i(T_xf)\to h_0(T_xf)$ uniform on $K$; the ratios in 1c, with
+  denominators bounded away from zero, give uniform character convergence
+  on $K$. This proves the full topology, including arbitrary nets.
+- **1e:** Restrict a character of $A^+$ to the ideal $A$: if zero it is
+  $q$; otherwise 1c gives $h_\gamma^+$. The general unital
+  commutative Banach spectrum theorem gives the displayed spectrum, including
+  its $0$ value even when $A$ itself is unital. The unit in the discrete case
+  is $m_G(\{0\})^{-1}\mathbf1_{\{0\}}$. In the converse, an identity
+  $u\in A$ cannot coexist with arbitrarily small identity neighbourhoods:
+  take a symmetric $V$ with $\int_V|u|<1$, a smaller $W$ with $W-W\subset V$,
+  and test $u*\mathbf1_W=\mathbf1_W$ on $W$, as in Lo §31D.
+  Non-discreteness supplies those small neighbourhoods by Haar regularity;
+  a positive Haar atom at $0$ would force discreteness by fitting arbitrarily
+  many disjoint translates into a fixed compact neighbourhood.
+  The compact character space of $A^+$ has the open subspace
+  $\Delta(A^+)\setminus\{q\}\cong\widehat G$ by 1d. For discrete $G$,
+  evaluation at the actual unit isolates $q$.
+  For completeness prove $A$ semisimple before claiming $q$ is nonisolated
+  in the nondiscrete case: the regular convolution representation
+  $\lambda:A\to B(L^2(G))$ is contractive, a $*$-representation, and faithful
+  (if $\lambda(f)=0$, test on $u_U\in L^1\cap L^2$ and use 1b in $L^1$).
+  Its operators are normal. The scalar extension is unital, so spectral
+  inclusion and the elementary normal-operator identity
+  $\|T\|=r(T)$ give $\|\lambda(f)\|\le\|\widehat f\|_\infty$.
+  Prove that identity from $\|T^*T\|=\|T\|^2$, commutation and the
+  spectral-radius formula, without citing a C*-unitization theorem.
+  Hence a zero transform means $f=0$. If $q$ were isolated, choose finitely
+  many transforms nonzero on a finite cover of the compact complement and
+  set $b=\sum_j f_j*f_j^*$; its transform is bounded below there.
+  Holomorphic calculus in $A^+$ gives an idempotent $e\in A$ with transform
+  $1$ on the complement and $q(e)=0$ by separating $0$ from the positive
+  spectrum of $b$. Semisimplicity gives $e*f=f$, contradicting the unit
+  criterion. Thus $A^+$ has the genuine one-point compactification topology
+  for nondiscrete $G$. This completes the external unit/topology claims.
+- **3 and 5:** The compact spectrum of $A^+$ and $q(0,f)=0$ imply
+  $\widehat f\in C_0(\widehat G)$: every positive superlevel set is compact
+  and misses $q$. The transform algebra is self-adjoint, separates distinct
+  dual characters by compact bumps, and is nonzero at every dual character.
+  Apply `thm-complex-stone-weierstrass-self-adjoint` to the compact character
+  space of $A^+$: the transform algebra separates all its points and its only
+  common zero is $q$. The theorem's vanishing-at-one-point case gives exactly
+  the functions vanishing at $q$, hence uniform density in $C_0(\widehat G)$. For a finite complex Radon measure $\mu$
+  with inverse transform zero, absolute Fubini shows
+  $\int\widehat f\,d\mu=0$ for every $f\in A$ (replace $x$ by $-x$
+  for the conjugate convention); density and Riesz–Markov uniqueness give
+  $\mu=0$. No use of primal character separation or Pontryagin biduality
+  enters either argument.
+- **8–9 (the required positive sup-norm bound):** The finite-matrix
+  definition first gives $\phi(-x)=\overline{\phi(x)}$ and
+  $|\phi(x)|\le k=\phi(0)$. Prove the integrated positivity
+  $L_\phi(f*f^*)\ge0$ from the finite inequalities by compact truncation
+  and finite partitions using uniform continuity, then $L^1$ approximation.
+  Thus $|L_\phi(f)|\le k\|f\|_1$ initially. For $k=0$, everything is zero.
+  For $k>0$, Cauchy–Schwarz for the positive form and the symmetric
+  approximate identity give
+  $|L_\phi(f)|^2\le kL_\phi(f*f^*)$:
+  $L_\phi(f*u_U)\to L_\phi(f)$ and
+  $L_\phi(u_U*u_U^*)\to k$ by continuity at $0$.
+  Apply this estimate repeatedly to the self-adjoint $a=f*f^*$ to get
+  $|L_\phi(f)|\le k\|a^{2^{n-1}}\|_1^{1/2^n}$ after using the initial
+  $L^1$ bound at the final iteration. Taking $n\to\infty$ gives
+  $|L_\phi(f)|\le k\sqrt{r_{A^+}(0,a)}
+       =k\|\widehat f\|_\infty$ by 1e and
+  $\widehat{f*f^*}=|\widehat f|^2$.
+  This is the missing bound in the transform norm, rather than merely the
+  weaker $L^1$ norm estimate. It also proves well-definedness on transforms.
+  Extend by the density in 5; positivity follows by approximating the square
+  root of an arbitrary nonnegative $C_0$ function by transforms and using
+  $L_\phi(f*f^*)\ge0$. Riesz–Markov gives a finite positive measure of mass
+  at most $k$. Finally $L_\phi(u_U)\to k$ and
+  $\widehat u_U\to1$ uniformly on compact dual sets, with
+  $|\widehat u_U|\le1$, give mass exactly $k$ by a compact/tail split.
+  The transform representation gives equality with $\phi$ first against
+  every $C_c$ test function, hence everywhere by continuity and positivity
+  of Haar measure on nonempty open sets; uniqueness is 5.
+
+**Exact local supplier edges to preserve in scaffold/contract generation.**
+External mathematical dependencies remain the earlier Haar, Radon/integration,
+topological cutoff, general Banach-algebra and Gelfand suppliers named above;
+the local edges below are mandatory additions, with no B-page supplier.
+
+| consumer stable id | required local stable supplier ids |
+|---|---|
+| `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra` | `lem-lca-haar-measure-is-inversion-invariant` |
+| `lem-lca-translations-and-normalised-local-approximate-identities` | `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra` |
+| `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations` | `def-fourier-transform-on-an-lca-group`; `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra`; `lem-lca-translations-and-normalised-local-approximate-identities` |
+| `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` | `def-fourier-transform-on-an-lca-group`; `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra` |
+| `lem-lca-lone-character-topology-is-the-compact-open-topology` | `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations`; `lem-lca-translations-and-normalised-local-approximate-identities` |
+| `lem-lca-scalar-unitization-character-space-and-spectrum` | `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra`; `lem-lca-translations-and-normalised-local-approximate-identities`; `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations`; `lem-lca-lone-character-topology-is-the-compact-open-topology`; `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` |
+| `thm-riemann-lebesgue-lemma-on-lca-groups` | `lem-lca-lone-character-topology-is-the-compact-open-topology`; `lem-lca-scalar-unitization-character-space-and-spectrum` |
+| `lem-fourier-stieltjes-transforms-determine-finite-radon-measures` | `thm-riemann-lebesgue-lemma-on-lca-groups`; `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations`; `lem-lca-scalar-unitization-character-space-and-spectrum`; `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` |
+| `lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core` | `def-positive-definite-function-on-an-abelian-group`; `lem-lca-translations-and-normalised-local-approximate-identities`; `lem-lca-scalar-unitization-character-space-and-spectrum`; `lem-lca-fourier-transform-intertwines-translation-modulation-and-convolution` |
+| `lem-bochner-functional-extends-and-has-a-radon-representing-measure` | `lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core`; `lem-fourier-stieltjes-transforms-determine-finite-radon-measures`; `lem-lca-translations-and-normalised-local-approximate-identities` |
+
+**Remaining proof uncertainty.** These are exact authoring obligations and
+proof routes, not newly certified item proofs. There is no residual external
+LCA classification, topology, unitization or positive-bound assumption in the
+specified route. Inversion and Haar normalization still owe the full local
+implementation of Loomis §§26J/36B–D, including the invariant representing
+measure and density of the $L^1/L^2$ positive core; Körner §§10–12 do not fill
+that proof gap. Item 4 must not claim dual absolute integrability before that
+normalization is proved, and 15 must not claim surjectivity before FR-17.
+
 **B-page leaves.**
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
-| 1 | `ex-haar-normalisations-on-the-circle-and-the-integers` (example) — normalised measure on $\mathbb T$ pairs with counting measure on $\mathbb Z$. | Checks the existing Fourier-series convention. | literature-derived | ai-altered | EW/T. |
-| 2 | `ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual` (example) — probability measure on $G$ pairs with counting measure on $\widehat G$ for the nonunitary LCA transform. | Explains the later conversion to the unitary DFT. | literature-derived | ai-altered | EW C.2. |
+| 1 | `ex-haar-normalisations-on-the-circle-and-the-integers` (example) — under Countable Choice, normalized measure on $\mathbb T$ pairs with counting measure on $\mathbb Z$, with direct inversion formulas. | Checks the existing Fourier-series convention. | literature-derived | ai-altered | EW/T and the published Fejer $L^1$ convergence theorem. |
+| 2 | `ex-haar-normalisations-on-a-finite-abelian-group-and-its-dual` (example) — probability measure on a finite abelian $G$ pairs with counting measure on $\widehat G$ for the nonunitary LCA transform, proved by finite orthogonality. | Explains the later conversion to the unitary DFT. | literature-derived | ai-altered | EW C.2; finite calculation is choice-free. |
 | 3 | `ex-a-character-is-positive-definite` (example) — a character gives a rank-one positive semidefinite matrix and corresponds to a point mass. | Minimal Bochner check. | ai-generated | ai-generated | Finite square; leaf. |
 | 4 | `cex-a-continuous-function-of-modulus-at-most-one-need-not-be-positive-definite` (counterexample) — a sourced three-point matrix test fails for an explicit function. | Shows boundedness is not positivity. | literature-derived | ai-altered | EW C.3 example; determinant checked. |
-| 5 | `cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions` (counterexample) — changing a representative at one point preserves its transform but changes that point value. | Tests the representative language in item 5. | ai-generated | ai-generated | Null-set leaf. |
+| 5 | `cex-lca-fourier-inversion-is-not-an-everywhere-statement-for-arbitrary-lone-functions` (counterexample) — on any nondiscrete LCA group, changing a representative at one point preserves its transform and class-determined inverse integral but changes that point value. | Tests the representative language in item 5. | ai-generated | ai-generated | Every Haar singleton is null; the proof is local and choice-free. |
 
 **Hard proof/boundary obligations.**  Haar existence/uniqueness remains an RG
 dependency; item 12 selects only the reciprocal scale.  Fourier inversion
 returns a continuous representative under its hypotheses, never a prescribed
 null-set version.  Positive definiteness includes repeated points and complex
-coefficients.  Bochner's measure is finite because $\phi(0)<\infty$ and is
-unique by item 5.  Item 15 is intentionally only an isometric embedding: its
-range-density/surjectivity supplier belongs after biduality on FR-17.
+coefficients. Bochner's measure is finite because $\phi(0)<\infty$ and is
+unique by item 5. Item 15 is intentionally only an isometric embedding. FR-17
+proves range density from that isometry and Fourier--Stieltjes uniqueness
+before deriving full Plancherel; biduality follows the Plancherel-based
+transform bump.
 
 ## FR-17. Pontryagin duality and full LCA Plancherel
 
@@ -1107,26 +1306,30 @@ range-density/surjectivity supplier belongs after biduality on FR-17.
 **B page:** `pontryagin-duality-for-locally-compact-abelian-groups-examples`
 **Requires:** the FR-15 and FR-16 A pages and the published topological-group
 quotient/product results.  **Sources read:** Lo §§35 and §37, pp. 138–140
-and 147–152; Ko §§13--14, pp. 26–30; EW Appendix C.1, printed pp. 429–432.
+and 147–152; Ko §§13--14, pp. 26–30; EW Appendix C.1, printed pp. 429–432;
+K. A. Ross, “Closed subgroups of compactly generated LCA groups are compactly
+generated,” Theorem 3 proof, p. 3, which quotes and attributes Hewitt--Ross
+Theorem 9.8. The Ross article was read in full; the primary Hewitt--Ross proof
+was not accessible and is not claimed as read.
 
 | # | item id (kind) and one-line statement | for | statement provenance | proof provenance | component rationale |
 |---:|---|---|---|---|---|
 | 1 | `lem-dual-compact-sets-give-a-neighbourhood-basis-on-the-original-lca-group` (lemma) — uniform control on compact subsets of $\widehat G$ gives a neighbourhood basis at each $x\in G$. | Supplies the missing symmetric compact-open topology statement. | literature-derived | literature-derived | Ko Lemma 13.1, using FR-16 inversion. |
-| 2 | `lem-positive-compactly-supported-transform-bump-on-the-dual` (lemma) — every compact neighbourhood of $\gamma\in\widehat G$ supports a nonnegative transform $\widehat f$ with $\widehat f(\gamma)>0$. | Localises bidual characters without Peter--Weyl. | literature-derived | literature-derived | Ko Lemma 13.2 and FR-16 Bochner/inversion. |
-| 3 | `thm-pontryagin-biduality` (theorem) — the evaluation map $G\to\widehat{\widehat G}$ is an isomorphism of topological groups for every LCA group. | Required abstract duality theorem. | literature-derived | literature-derived | Ko Theorem 13.3, with items 1--2 and FR-16 inversion; no RG-22 Peter--Weyl theorem. |
-| 4 | `lem-continuous-characters-separate-points-of-an-lca-group` (lemma) — for $x\ne0$ in $G$, some $\gamma\in\widehat G$ has $\gamma(x)\ne1$. | Records the injectivity consequence used by exactness. | literature-derived | ai-altered | Item 3. |
-| 5 | `lem-lca-transform-range-is-dense-in-ltwo-of-the-dual` (lemma) — a vector orthogonal to the FR-16 transform range vanishes after applying inverse transformation on $\widehat G$. | Exposes the surjectivity step previously hidden in Plancherel. | literature-derived | literature-derived | Lo §36D/EW C.2, FR-16 item 15, and item 3's identification $G\cong\widehat{\widehat G}$. |
-| 6 | `thm-plancherel-theorem-for-lca-groups` (theorem) — the Fourier transform extends uniquely to a unitary $L^2(G,m_G)\to L^2(\widehat G,m_{\widehat G})$. | Completes LCA Plancherel without a circular use in biduality. | literature-derived | literature-derived | FR-16 isometric extension plus item 5. |
-| 7 | `cor-fourier-series-and-discrete-transforms-are-lca-plancherel-special-cases` (corollary) — compact $G$ yields a discrete-dual sum and discrete $G$ a compact-dual integral with compatible weights. | Unifies FA Fourier series and the later finite transform. | literature-derived | ai-altered | FR-15 one-way compact/discrete results and item 6. |
-| 8 | `thm-principal-structure-theorem-for-lca-groups` (theorem) — every LCA group has an open subgroup isomorphic to $\mathbb R^n\times K$ with $K$ compact. | Supplies the standard structural form after, not inside, the duality proof. | literature-derived | literature-derived | Ko §14; expose its compact-neighbourhood and quotient lemmas. |
-| 9 | `lem-character-extension-from-a-closed-subgroup-of-an-lca-group` (lemma) — every continuous character of a closed subgroup extends to the ambient LCA group. | Load-bearing exactness theorem. | literature-derived | literature-derived | Lo §37/Ko §14, using item 3 rather than a future inversion theorem. |
-| 10 | `def-annihilator-of-a-subgroup` (definition) — for $H\le G$, $H^\perp=\{\gamma:\gamma|_H=1\}$, with closure conventions stated. | Names the subgroup/quotient interface. | literature-derived | not-applicable | Lo §35B/EW C.1. |
-| 11 | `thm-pontryagin-dual-of-an-lca-quotient-is-the-annihilator` (theorem) — for closed $H\le G$, pullback identifies $\widehat{G/H}$ topologically with $H^\perp$. | Exact quotient duality without colliding with FA's Banach-space quotient-dual theorem. | literature-derived | ai-altered | Lo §35B/Ko §14; quotient topology explicit. |
-| 12 | `thm-dual-of-a-closed-subgroup-is-the-dual-quotient` (theorem) — restriction $\widehat G\to\widehat H$ is onto with kernel $H^\perp$, hence $\widehat H\cong\widehat G/H^\perp$. | Complementary exact-sequence direction. | literature-derived | ai-altered | Items 9--11 plus the quotient open-map argument. |
-| 13 | `lem-annihilator-reverses-inclusion-and-double-annihilator-closes` (lemma) — $H\subset K$ implies $K^\perp\subset H^\perp$ and $(H^\perp)^\perp=\overline H$ under bidual identification. | Controls nonclosed subgroups and both directions. | literature-derived | ai-altered | Items 3 and 9--12; closure cannot be omitted. |
-| 14 | `thm-compact-discrete-duality-for-lca-groups` (theorem) — $G$ is compact iff $\widehat G$ is discrete, and $G$ is discrete iff $\widehat G$ is compact. | Completes the FR-15 one-way implications. | literature-derived | ai-altered | Apply FR-15 item 6 to $\widehat G$ and use item 3. |
-| 15 | `lem-biduality-is-stable-under-products-closed-subgroups-and-quotients` (lemma) — the evaluation identifications commute with the natural exact diagrams for products, closed subgroups, and quotients. | Records structural transport without making it a premise of biduality. | literature-derived | literature-derived | Items 3 and 9--13. |
-| 16 | `cor-pontryagin-duality-is-a-contravariant-involution` (corollary) — dualisation reverses arrows and the double-dual identifications are natural. | Gives later pages a precise categorical interface. | literature-derived | ai-altered | FR-15 functoriality and item 3; naturality square checked. |
+| 2 | `lem-lca-transform-range-is-dense-in-ltwo-of-the-dual` (lemma) — every vector orthogonal to the FR-16 isometric transform range is zero, by Fourier--Stieltjes uniqueness. | Supplies range density without assuming biduality. | literature-derived | ai-altered | FR-16 isometry, translation formula, Fourier--Stieltjes uniqueness, local cutoffs, and $C_c$ density; no double-dual identification. |
+| 3 | `thm-plancherel-theorem-for-lca-groups` (theorem) — the Fourier transform extends uniquely to a unitary $L^2(G,m_G)\to L^2(\widehat G,m_{\widehat G})$. | Completes LCA Plancherel before biduality. | literature-derived | ai-altered | FR-16 isometric extension, item 2, and Hilbert-space completeness. |
+| 4 | `lem-positive-compactly-supported-transform-bump-on-the-dual` (lemma) — every compact neighbourhood of $\gamma\in\widehat G$ supports a nonnegative transform $\widehat f$ with $\widehat f(\gamma)>0$. | Localises bidual characters using the now-proved full Plancherel theorem. | literature-derived | ai-altered | Ko Lemma 13.2 statement; construct the coefficient from inverse $L^2$ transforms using item 3 and modulation. |
+| 5 | `lem-continuous-characters-separate-points-of-an-lca-group` (lemma) — for $x\ne0$ in $G$, some $\gamma\in\widehat G$ has $\gamma(x)\ne1$. | Records the injectivity consequence used by biduality. | literature-derived | ai-altered | Bochner and the positive-definite Fourier uniqueness route; independent of biduality. |
+| 6 | `thm-pontryagin-biduality` (theorem) — the evaluation map $G\to\widehat{\widehat G}$ is an isomorphism of topological groups for every LCA group. | Required abstract duality theorem. | literature-derived | ai-altered | Ko Theorem 13.3 statement; prove the density step using item 4 and Fourier--Stieltjes uniqueness, with item 1 and item 5 for the topological isomorphism. |
+| 7 | `thm-principal-structure-theorem-for-lca-groups` (theorem) — under the explicitly tracked AC+DC assumptions, every LCA group has an open subgroup isomorphic to $\mathbb R^n\times K$ with $K$ compact. | Supplies the standard structural form after, not inside, the duality proof. | literature-derived | literature-derived | Hewitt--Ross Theorem 9.8; expose the compact-neighbourhood and quotient steps, with Ross Theorem 3 p. 3 as the accessible exact statement locator; the axiom basis is conservative, not claimed minimal. |
+| 8 | `thm-compact-discrete-duality-for-lca-groups` (theorem) — $G$ is compact iff $\widehat G$ is discrete, and $G$ is discrete iff $\widehat G$ is compact. | Completes the FR-15 one-way implications. | literature-derived | ai-altered | Apply FR-15 item 6 to $\widehat G$ and use item 6. |
+| 9 | `cor-fourier-series-and-discrete-transforms-are-lca-plancherel-special-cases` (corollary) — compact $G$ yields a discrete-dual sum and discrete $G$ a compact-dual integral with compatible weights. | Unifies FA Fourier series and the later finite transform. | literature-derived | ai-altered | FR-15 one-way compact/discrete results and items 3 and 8. |
+| 10 | `lem-character-extension-from-a-closed-subgroup-of-an-lca-group` (lemma) — every continuous character of a closed subgroup extends to the ambient LCA group. | Load-bearing exactness theorem. | literature-derived | literature-derived | Lo §37/Ko §14, using item 6 rather than a future inversion theorem. |
+| 11 | `def-annihilator-of-a-subgroup` (definition) — for $H\le G$, $H^\perp=\{\gamma:\gamma|_H=1\}$, with closure conventions stated. | Names the subgroup/quotient interface. | literature-derived | not-applicable | Lo §35B/EW C.1. |
+| 12 | `thm-pontryagin-dual-of-an-lca-quotient-is-the-annihilator` (theorem) — for closed $H\le G$, pullback identifies $\widehat{G/H}$ topologically with $H^\perp$. | Exact quotient duality without colliding with FA's Banach-space quotient-dual theorem. | literature-derived | ai-altered | Lo §35B/Ko §14; quotient topology explicit. |
+| 13 | `thm-dual-of-a-closed-subgroup-is-the-dual-quotient` (theorem) — restriction $\widehat G\to\widehat H$ is onto with kernel $H^\perp$, hence $\widehat H\cong\widehat G/H^\perp$. | Complementary exact-sequence direction. | literature-derived | ai-altered | Items 10--12 plus the quotient open-map argument. |
+| 14 | `lem-annihilator-reverses-inclusion-and-double-annihilator-closes` (lemma) — $H\subset K$ implies $K^\perp\subset H^\perp$ and $(H^\perp)^\perp=\overline H$ under bidual identification. | Controls nonclosed subgroups and both directions. | literature-derived | ai-altered | Items 6 and 10--13; closure cannot be omitted. |
+| 15 | `lem-biduality-is-stable-under-products-closed-subgroups-and-quotients` (lemma) — the evaluation identifications commute with the natural exact diagrams for products, closed subgroups, and quotients. | Records structural transport without making it a premise of biduality. | literature-derived | literature-derived | Items 6 and 10--14. |
+| 16 | `cor-pontryagin-duality-is-a-contravariant-involution` (corollary) — dualisation reverses arrows and the double-dual identifications are natural. | Gives later pages a precise categorical interface. | literature-derived | ai-altered | FR-15 functoriality and item 6; naturality square checked. |
 
 **B-page leaves.**
 
@@ -1136,13 +1339,23 @@ and 147–152; Ko §§13--14, pp. 26–30; EW Appendix C.1, printed pp. 429–43
 | 2 | `ex-bidual-map-on-the-circle-and-the-integers` (example) — compute evaluation under the FR-15 identifications. | Concrete naturality check. | literature-derived | ai-altered | FR-15. |
 | 3 | `cex-the-algebraic-character-group-without-compact-open-topology-is-not-pontryagin-duality` (counterexample) — an explicit compact/discrete model shows that forgetting topology destroys the homeomorphism statement. | Tests why compact-open topology matters. | literature-derived | ai-altered | Use $\mathbb Z$/$\mathbb T$ directly; no exotic unproved construction. |
 
-**Hard proof/boundary obligations.**  All groups here are Hausdorff LCA and
+**Hard proof/boundary obligations.** All groups here are Hausdorff LCA and
 abelian; no assertion is made about irreducible representations of a
-noncommutative group.  Annihilator formulae use closed subgroups or explicitly
-insert closure.  The bidual theorem follows the source's inversion route and
-must cite FR-16; it may not cite RG-22 Peter--Weyl, the full Plancherel theorem,
-or the later exactness results.  Conversely, item 6 may cite biduality because
-its isometric-embedding half was already proved on FR-16.
+noncommutative group. Annihilator formulae use closed subgroups or explicitly
+insert closure. The range-density item must prove the orthogonal complement is
+zero using FR-16's isometry and Fourier--Stieltjes uniqueness, without using
+biduality. Full Plancherel then follows by closedness of an isometric range.
+The compact transform bump uses full Plancherel on inverse transforms of two
+dual-neighborhood indicators. Biduality uses that bump and Fourier--Stieltjes
+uniqueness; it does not use a double-dual identification before proving the
+evaluation map is onto. None of these proofs may cite RG-22 Peter--Weyl or later
+exactness results. This item order is acyclic and preserves the 30-pair scope.
+
+**Source-scope boundary (owner decision, 2026-10-05).** Loomis §37E's Poisson
+summation formula for arbitrary closed subgroups of an LCA group, with
+compatible Haar normalisations, is out of scope with no destination. FR-17's
+subgroup and quotient exactness is retained; the separate general Poisson
+theorem is not part of that interface.
 
 ## FR-18. Finite Fourier analysis and the fast Fourier transform
 
@@ -1224,6 +1437,12 @@ uniform convergence.  Poisson summation is never stated for arbitrary $L^1$
 functions with point values.  Shannon equality is first in $L^2$; endpoint
 frequency values are irrelevant only as null-set data, and pointwise claims
 require the extra sourced hypotheses.
+
+**Source-scope boundary (owner decision, 2026-10-05).** Loomis §37E's
+closed-subgroup LCA Poisson formula is out of scope with no destination.
+FR-19 remains the stated Euclidean full-rank lattice formula, its
+two-sided-decay extension, and sampling; importing the general formula and its
+compatible-Haar proof would materially rebuild this pair.
 
 ## FR-20. Uncertainty principles for Fourier analysis
 
@@ -1358,6 +1577,8 @@ an id may appear twice only when two headings genuinely meet at an interface.
 | 70 | LC §6, tree lemma, pp. 20–24 | `included` | `lem-carleson-single-tree-estimate`; `thm-carleson-maximal-operator-is-strong-ltwo` |
 | 71 | LC §7, $L^p$ Carleson theorem, pp. 24–29 | `included` | `lem-hunt-exceptional-set-and-distribution-estimates`; `thm-carleson-hunt-maximal-inequality-on-the-torus`; FR-5's existing closure lemma/corollary; `rem-carleson-hunt-does-not-include-the-lone-endpoint` |
 | 72 | Fr §286, complete Carleson proof and torus closure, pp. 493–521 | `included` | `thm-carleson-maximal-operator-is-strong-ltwo`; `thm-carleson-hunt-maximal-inequality-on-the-torus`; FR-5's existing closure lemma/corollary |
+| 73 | Lo §30C, translation continuity, pp. 118–119 | `included` | `lem-lca-translations-and-normalised-local-approximate-identities` |
+| 74 | Lo §§31A–E, abelian convolution and local identities, pp. 121–125 | `included` | `lem-lca-lone-convolution-is-a-commutative-banach-star-algebra`; `lem-lca-translations-and-normalised-local-approximate-identities`; `lem-lca-scalar-unitization-character-space-and-spectrum` |
 
 The following audit-added factorisations belong to canonical rows already
 counted above, so they do not enlarge the denominator.  This table makes the
@@ -1372,6 +1593,7 @@ otherwise easy-to-miss supplier IDs explicit.
 | 29 | `lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone`; `rem-one-grid-dyadic-bmo-is-not-identical-to-bmo` |
 | 30--32 | `lem-existence-of-a-smooth-inhomogeneous-dyadic-frequency-partition`; `def-lusin-area-function-for-a-fixed-admissible-kernel`; `rem-square-function-characterisation-of-real-hone`; `rem-littlewood-paley-linfinity-endpoint-needs-bmo-carleson-control` |
 | 33--35 and 59 | `lem-a-p-distribution-decay-from-maximal-cubes`; `lem-unweighted-good-lambda-covering-for-maximal-truncations`; `rem-a-doubling-weight-need-not-be-a-p` |
+| 43 and 45 | `lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations`; `lem-lca-lone-character-topology-is-the-compact-open-topology` |
 | 41--45 and 62 | `ex-annihilator-of-a-closed-subgroup-of-euclidean-space`; `ex-bidual-map-on-the-circle-and-the-integers`; `lem-lca-transform-range-is-dense-in-ltwo-of-the-dual` |
 
 ## Deliberately not decomposed
@@ -1402,7 +1624,7 @@ independent treatment.
 | Wo §1, “$L^1$ Fourier transform,” pp. 1–5 | This is FA-owned transform infrastructure.  Wo's restriction sections 2–7 are retained; the basic transform is not. |
 | Wo §10, “The Kakeya Problem,” pp. 72–81 | Kakeya maximal estimates and the restriction–Kakeya conjectural interface are a substantial geometric branch beyond the requested restriction problem and Stein–Tomas statement.  No open conjecture is turned into a dependency. |
 | T §3, “The Fourier transform,” PDF pp. 24–38 | This is a second full treatment of FA's transform/inversion material.  T's Poisson, LCA special cases, DFT, and FFT sections are used later instead. |
-| Lo §§28–33 — “The topology of locally compact groups,” “The Haar integral,” “The modular function,” “The group algebra,” “Representations,” and “Quotient measures,” pp. 108–133 | Haar existence/uniqueness and representation theory are RG-owned.  Group-algebra and quotient-measure machinery is used only inside Loomis's sourced proof cost; extracting it into FR would violate that seam.  The required Haar supplier is now the concrete RG-18 A page. |
+| Lo §§28–33, excluding the local FR-16 harvest of §30C and §§31A–E — general topological-group, Haar, modular, noncommutative group-algebra, representation and quotient-measure material, pp. 108–133 | Haar existence/uniqueness and representation theory are RG-owned. General noncommutative group-algebra and quotient-measure machinery remains RG-owned. FR-16 locally proves only the abelian $L^1(G)$ package needed before inversion; its five designed local lemmas plus the DC-level inversion-support lemma use §§30C/31A–E and do not import the later RG-19 page. The required Haar supplier is the concrete RG-18 A page. |
 | Lo §37, “Miscellaneous Theorems,” its Wiener–Tauberian and Poisson-summation portions, pp. 147–151 | The exact Banach-algebra infrastructure used by the circle Wiener lemma remains FA-owned, and FA already owns the basic Schwartz Poisson formula.  FR uses only §37's Pontryagin-duality portion and builds the distinct lattice/sampling extensions on FR-19. |
 | FM §2, the dynamical/Schrödinger versions of Hardy uncertainty, pp. 5–8 | These require dispersive PDE and Strichartz estimates.  PDE currently exposes no Strichartz page, so FR records the declared sourced, non-load-bearing forward interface rather than building a PDE branch. |
 | S §1, “The Fourier transform,” pp. 1–2 | Basic definition and transform identities belong to FA.  S §§2–5 supply the uncertainty items retained on FR-20. |
@@ -1431,21 +1653,22 @@ independent treatment.
 ## Verified measurements
 
 The commission target did not exist before this pass, so the verified before
-count is **0 proposed item ids**.  The finished scaffold contains **378 distinct
-proposed item ids**: 280 on A pages and 98 dependency-leaf items on B pages,
+count is **0 proposed item ids**. The finished scaffold contains **384 distinct
+proposed item ids**: 286 on A pages and 98 dependency-leaf items on B pages,
 across **22 A/B pairs** and 44 proposed page ids.  The four FR-15 B ids are
-listed compactly in prose; the remaining 368 ids occupy item rows.
+listed compactly in prose; 378 ids occupy item rows and six are proposed outside those rows.
 
-The crosswalk has **72 `included` canonical-heading dispositions**.  The
-decomposition ratio is therefore **378 / 72 = 5.25×**.  This denominator counts
+The crosswalk has **74 `included` canonical-heading dispositions**.  The
+decomposition ratio is therefore **384 / 74 = 5.19×**. This denominator counts
 one canonical heading for each decomposed source unit; independent corroborating
 treatments are recorded in the per-pair source matrix and are not double-counted.
 
-The largest A page is **FR-8 at 20 items**.  No page
+The largest A page is **FR-16 at 21 items**. No page
 approaches the mandatory split threshold of 60, so no A/B split was made.  The
-source corpus contains 23 full-treatment entries on **18 distinct source hosts**.
-Every pair has at least two independent full treatments; a dash in the
-supplementary column means only that no third source was needed.
+source corpus contains 24 source entries on **19 distinct source hosts**.
+The source matrix records proof treatments and corroboration; Körner §§10–12
+are statement/exercise corroboration, not a full proof treatment. A dash in
+the supplementary column means only that no third source was needed.
 
 Mechanical checks for these figures use only item rows before the canonical
 crosswalk, not repeated ids in the crosswalk or ownership discussion.  The same

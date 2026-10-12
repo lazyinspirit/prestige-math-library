@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-high-dimensional-simply-connected-h-cobordant-manifolds-are-diffeomorphic.md

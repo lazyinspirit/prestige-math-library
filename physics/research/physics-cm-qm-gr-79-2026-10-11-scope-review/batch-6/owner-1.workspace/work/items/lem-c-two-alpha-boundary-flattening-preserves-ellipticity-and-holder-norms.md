@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-two-alpha-boundary-flattening-preserves-ellipticity-and-holder-norms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-subsets-of-cx-for-a-proper-metric-target.md

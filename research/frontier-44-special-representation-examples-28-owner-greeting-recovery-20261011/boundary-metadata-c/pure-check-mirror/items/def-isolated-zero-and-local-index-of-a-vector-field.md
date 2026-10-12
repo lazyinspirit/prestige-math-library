@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-isolated-zero-and-local-index-of-a-vector-field.md

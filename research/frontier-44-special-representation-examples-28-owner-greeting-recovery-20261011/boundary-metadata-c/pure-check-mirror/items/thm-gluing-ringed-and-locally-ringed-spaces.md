@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-gluing-ringed-and-locally-ringed-spaces.md

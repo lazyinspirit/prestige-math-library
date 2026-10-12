@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-two-dimensional-wave-has-an-interior-tail.md

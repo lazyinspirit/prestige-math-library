@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nevanlinna-deficiencies-of-elementary-functions.md

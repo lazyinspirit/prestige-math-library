@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-category-with-finite-products-is-monoidal.md

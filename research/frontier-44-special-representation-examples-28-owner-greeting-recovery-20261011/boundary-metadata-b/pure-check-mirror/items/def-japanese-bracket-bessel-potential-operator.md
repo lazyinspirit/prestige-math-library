@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-japanese-bracket-bessel-potential-operator.md

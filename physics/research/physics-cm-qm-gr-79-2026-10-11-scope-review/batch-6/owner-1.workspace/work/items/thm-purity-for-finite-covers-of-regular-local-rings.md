@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-purity-for-finite-covers-of-regular-local-rings.md

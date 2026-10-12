@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fredholm-determinant-of-a-finite-rank-operator.md

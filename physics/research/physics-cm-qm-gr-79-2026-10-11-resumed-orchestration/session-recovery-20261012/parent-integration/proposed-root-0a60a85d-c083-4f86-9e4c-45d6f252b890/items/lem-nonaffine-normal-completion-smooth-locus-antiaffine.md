@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-normal-completion-smooth-locus-antiaffine.md

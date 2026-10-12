@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-quadratic-residues-and-nonresidues-modulo-eleven.md

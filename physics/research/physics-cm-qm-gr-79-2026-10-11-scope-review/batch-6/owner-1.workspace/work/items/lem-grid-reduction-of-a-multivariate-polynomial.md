@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-grid-reduction-of-a-multivariate-polynomial.md

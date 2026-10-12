@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-skew-multiplicity-module-has-littlewood-richardson-specht-decomposition-over-c.md

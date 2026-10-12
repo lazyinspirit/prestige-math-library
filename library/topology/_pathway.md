@@ -86,12 +86,15 @@ last page asks which of these properties survive subspaces and products.
 
 ## paracompactness-and-compactification
 
-A locally finite refinement is what replaces a finite subcover when compactness is absent,
-and a partition of unity is what makes it usable for building functions. The Tychonoff
-embedding puts a completely regular space inside a cube of intervals, and the Stone-Cech
-compactification is the universal way to compactify it. A uniformity carries the
-comparison of pairs of points that a metric had and a topology does not, which is what
-completeness needs to be stated without numbers.
+A locally finite refinement is what replaces a finite subcover when compactness
+is absent, and a partition of unity is what makes it usable for building
+functions. The Tychonoff embedding puts a completely regular space inside a cube
+of intervals, and the Stone-Cech compactification is the universal way to
+compactify it. A uniformity carries the comparison of pairs of points that a
+metric had and a topology does not, and in a metric space, assuming choice,
+separated closed cores produce discrete open families at each scale whose
+countable union is a $\sigma$-discrete basis, with the conventions the
+metrization criteria use.
 
 ## countability-and-metrization
 

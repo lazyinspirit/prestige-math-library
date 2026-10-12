@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polarization-bijection-in-characteristic-not-two.md

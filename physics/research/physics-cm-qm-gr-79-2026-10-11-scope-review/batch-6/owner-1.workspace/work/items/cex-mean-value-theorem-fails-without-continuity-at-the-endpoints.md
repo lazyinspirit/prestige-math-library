@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mean-value-theorem-fails-without-continuity-at-the-endpoints.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cauchy-schwarz-lagrange-identity-two-terms.md

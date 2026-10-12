@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-exponential-bound-for-a-c-zero-semigroup.md

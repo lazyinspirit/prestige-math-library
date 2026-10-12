@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-index-one-trajectory-spaces-are-zero-dimensional.md

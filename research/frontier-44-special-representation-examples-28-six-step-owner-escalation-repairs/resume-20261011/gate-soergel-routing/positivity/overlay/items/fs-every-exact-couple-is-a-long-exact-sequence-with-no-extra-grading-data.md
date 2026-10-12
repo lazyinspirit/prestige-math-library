@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-exact-couple-is-a-long-exact-sequence-with-no-extra-grading-data.md

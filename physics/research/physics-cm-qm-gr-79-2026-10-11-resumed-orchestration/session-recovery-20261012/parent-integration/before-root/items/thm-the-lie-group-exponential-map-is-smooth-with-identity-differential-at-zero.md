@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-lie-group-exponential-map-is-smooth-with-identity-differential-at-zero.md

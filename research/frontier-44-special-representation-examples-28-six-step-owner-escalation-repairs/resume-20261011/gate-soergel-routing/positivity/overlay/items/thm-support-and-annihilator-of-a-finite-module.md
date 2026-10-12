@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-support-and-annihilator-of-a-finite-module.md

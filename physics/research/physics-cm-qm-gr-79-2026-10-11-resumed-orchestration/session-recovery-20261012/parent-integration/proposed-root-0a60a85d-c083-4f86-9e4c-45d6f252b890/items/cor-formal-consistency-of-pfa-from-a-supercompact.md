@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-formal-consistency-of-pfa-from-a-supercompact.md

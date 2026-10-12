@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-banach-inverse-theorem-for-a-small-lipschitz-perturbation-of-the-identity.md

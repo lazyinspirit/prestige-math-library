@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-l-one-l-two-agreement-of-fourier-transform.md

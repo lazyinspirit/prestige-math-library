@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-scalar-extension-of-an-irreducible-finite-group-representation.md

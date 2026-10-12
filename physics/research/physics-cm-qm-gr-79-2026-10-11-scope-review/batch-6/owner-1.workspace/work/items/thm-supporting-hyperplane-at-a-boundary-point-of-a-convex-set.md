@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-supporting-hyperplane-at-a-boundary-point-of-a-convex-set.md

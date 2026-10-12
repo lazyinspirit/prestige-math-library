@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-local-yang-baxter-operators-on-tensor-powers.md

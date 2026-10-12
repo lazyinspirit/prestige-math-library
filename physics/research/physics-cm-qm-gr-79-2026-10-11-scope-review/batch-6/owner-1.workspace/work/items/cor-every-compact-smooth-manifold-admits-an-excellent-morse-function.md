@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-compact-smooth-manifold-admits-an-excellent-morse-function.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-comparison-map-from-an-exact-complex-into-an-injective-resolution.md

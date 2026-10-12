@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-natural-singular-cohomology-identities-are-detected-on-finite-regular-complexes.md

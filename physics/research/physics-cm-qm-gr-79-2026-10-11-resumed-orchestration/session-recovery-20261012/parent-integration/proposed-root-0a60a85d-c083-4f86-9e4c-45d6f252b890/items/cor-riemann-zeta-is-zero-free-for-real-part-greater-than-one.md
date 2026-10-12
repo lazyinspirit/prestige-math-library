@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-riemann-zeta-is-zero-free-for-real-part-greater-than-one.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-in-a-symmetric-monoidal-category-the-two-closures-agree.md

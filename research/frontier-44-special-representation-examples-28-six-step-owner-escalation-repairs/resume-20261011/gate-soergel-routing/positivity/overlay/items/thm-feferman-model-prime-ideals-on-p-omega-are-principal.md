@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-feferman-model-prime-ideals-on-p-omega-are-principal.md

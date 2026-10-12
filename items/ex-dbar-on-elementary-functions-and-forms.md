@@ -57,12 +57,9 @@ In the last term, $d\bar z_2\wedge dz_2=-dz_2\wedge d\bar z_2$.
 
 **Proof technique:** direct.
 
-1.1 The coordinate Wirtinger derivatives give the displayed derivatives of $f$. [F2, F3, F5, given, algebra]
-From [F2]–[F3] and $z_k=x_k+iy_k$, one has $\partial_{z_j}z_k=\delta_{jk}$, $\partial_{z_j}\bar z_k=0$, $\partial_{\bar z_j}z_k=0$, and $\partial_{\bar z_j}\bar z_k=\delta_{jk}$. The scalar product rule [F5] therefore gives $\partial_{z_1}f=2z_1\bar z_2$, $\partial_{z_2}f=0$, $\partial_{\bar z_1}f=2\bar z_1$, and $\partial_{\bar z_2}f=z_1^2$. Wedge these coefficients with their corresponding one-forms to obtain the displayed $\partial f$ and $\bar\partial f$.
+1.1 The coordinate Wirtinger derivatives give the displayed derivatives of $f$. [F2, F3, F5, given, algebra] From [F2]–[F3] and $z_k=x_k+iy_k$, one has $\partial_{z_j}z_k=\delta_{jk}$, $\partial_{z_j}\bar z_k=0$, $\partial_{\bar z_j}z_k=0$, and $\partial_{\bar z_j}\bar z_k=\delta_{jk}$. The scalar product rule [F5] therefore gives $\partial_{z_1}f=2z_1\bar z_2$, $\partial_{z_2}f=0$, $\partial_{\bar z_1}f=2\bar z_1$, and $\partial_{\bar z_2}f=z_1^2$. Wedge these coefficients with their corresponding one-forms to obtain the displayed $\partial f$ and $\bar\partial f$. [F2, F3, F5, given, algebra]
 
-2.1 Applying the type coefficient formulas to $\eta=f\,dz_2$ yields the two displayed form derivatives. [F1, F4, step 1.1, given, algebra]
-The only type factor in $\eta$ is $dz_2$. Thus [F1]–[F4] give $\partial\eta=(2z_1\bar z_2\,dz_1)\wedge dz_2$ and $\bar\partial\eta=(2\bar z_1\,d\bar z_1+z_1^2\,d\bar z_2)\wedge dz_2$. Anticommutativity gives $d\bar z_2\wedge dz_2=-dz_2\wedge d\bar z_2$, so the sign in the last summand is as stated.
+2.1 Applying the type coefficient formulas to $\eta=f\,dz_2$ yields the two displayed form derivatives. [F1, F4, step 1.1, given, algebra] The only type factor in $\eta$ is $dz_2$. Thus [F1]–[F4] give $\partial\eta=(2z_1\bar z_2\,dz_1)\wedge dz_2$ and $\bar\partial\eta=(2\bar z_1\,d\bar z_1+z_1^2\,d\bar z_2)\wedge dz_2$. Anticommutativity gives $d\bar z_2\wedge dz_2=-dz_2\wedge d\bar z_2$, so the sign in the last summand is as stated. [F1, F4, step 1.1, given, algebra]
 
-3.1 Their sum is the exterior derivative of this example. [F6, step 2.1, given, algebra]
-By [F6], $d\eta=\partial\eta+\bar\partial\eta$, so the two explicitly computed type components in step 2.1 add to $d\eta$ with the same wedge sign.
-∎
+3.1 Their sum is the exterior derivative of this example. [F6, step 2.1, given, algebra] By [F6], $d\eta=\partial\eta+\bar\partial\eta$, so the two explicitly computed type components in step 2.1 add to $d\eta$ with the same wedge sign. [F6, step 2.1, given, algebra] ∎
+

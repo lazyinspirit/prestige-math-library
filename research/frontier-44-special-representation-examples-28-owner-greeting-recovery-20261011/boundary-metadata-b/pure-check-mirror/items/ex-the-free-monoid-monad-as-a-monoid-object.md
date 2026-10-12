@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-free-monoid-monad-as-a-monoid-object.md

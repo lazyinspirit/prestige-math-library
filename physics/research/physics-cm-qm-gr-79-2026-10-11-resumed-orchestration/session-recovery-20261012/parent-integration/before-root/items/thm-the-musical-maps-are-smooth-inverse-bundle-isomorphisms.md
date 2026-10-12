@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-musical-maps-are-smooth-inverse-bundle-isomorphisms.md

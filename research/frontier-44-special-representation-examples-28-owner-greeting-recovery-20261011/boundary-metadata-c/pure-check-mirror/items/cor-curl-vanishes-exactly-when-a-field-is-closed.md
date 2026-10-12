@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-curl-vanishes-exactly-when-a-field-is-closed.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-rsk-shapes-of-all-six-permutations-in-s3.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-primitive-ideal-determines-a-central-character.md

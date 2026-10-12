@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hh-coxeter-exchange-deletion-and-faithfulness.md

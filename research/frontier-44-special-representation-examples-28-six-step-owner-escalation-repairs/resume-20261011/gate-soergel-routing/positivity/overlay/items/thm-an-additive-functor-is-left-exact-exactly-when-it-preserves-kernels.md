@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-additive-functor-is-left-exact-exactly-when-it-preserves-kernels.md

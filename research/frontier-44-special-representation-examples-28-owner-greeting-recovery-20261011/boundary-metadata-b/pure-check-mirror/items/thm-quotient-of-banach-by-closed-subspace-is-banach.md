@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-quotient-of-banach-by-closed-subspace-is-banach.md

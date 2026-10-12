@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-elementary-mathematical-prerequisites-2663d019bb16f7b6.task.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pair-long-exact-sequences-with-local-coefficients.md

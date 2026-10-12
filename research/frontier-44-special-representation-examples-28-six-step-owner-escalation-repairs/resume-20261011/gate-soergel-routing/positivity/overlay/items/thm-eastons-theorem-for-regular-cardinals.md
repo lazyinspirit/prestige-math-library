@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-eastons-theorem-for-regular-cardinals.md

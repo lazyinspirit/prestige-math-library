@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-forgetting-configuration-points-is-locally-trivial.md

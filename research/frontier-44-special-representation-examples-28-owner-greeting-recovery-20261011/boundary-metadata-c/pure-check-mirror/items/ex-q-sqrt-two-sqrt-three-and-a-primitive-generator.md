@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-q-sqrt-two-sqrt-three-and-a-primitive-generator.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-idempotent-endomorphisms-are-diagonalisable-projections.md

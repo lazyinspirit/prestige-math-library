@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-maps-paste-over-an-open-cover.md

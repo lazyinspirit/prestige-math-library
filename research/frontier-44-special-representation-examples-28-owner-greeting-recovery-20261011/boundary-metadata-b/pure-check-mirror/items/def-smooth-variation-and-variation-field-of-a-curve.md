@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-variation-and-variation-field-of-a-curve.md

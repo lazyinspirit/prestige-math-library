@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-graded-bimodule-maps-classify-shift-compatible-transformations.md

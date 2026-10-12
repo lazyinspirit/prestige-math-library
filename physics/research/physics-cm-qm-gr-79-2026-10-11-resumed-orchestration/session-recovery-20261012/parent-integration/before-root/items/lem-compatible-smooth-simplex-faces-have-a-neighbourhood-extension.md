@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compatible-smooth-simplex-faces-have-a-neighbourhood-extension.md

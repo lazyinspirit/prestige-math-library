@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hh-unequal-parameter-dihedral-consistency.md

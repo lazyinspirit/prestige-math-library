@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sobolev-chain-rule-for-c-one-lipschitz-compositions.md

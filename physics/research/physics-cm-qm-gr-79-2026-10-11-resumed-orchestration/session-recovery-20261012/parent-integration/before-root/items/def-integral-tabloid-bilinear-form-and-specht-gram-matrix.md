@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-tabloid-bilinear-form-and-specht-gram-matrix.md

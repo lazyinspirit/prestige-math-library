@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-green-restriction-has-one-distinguished-summand.md

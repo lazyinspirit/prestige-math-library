@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-viete-finite-cosine-product-and-nested-radicals.md

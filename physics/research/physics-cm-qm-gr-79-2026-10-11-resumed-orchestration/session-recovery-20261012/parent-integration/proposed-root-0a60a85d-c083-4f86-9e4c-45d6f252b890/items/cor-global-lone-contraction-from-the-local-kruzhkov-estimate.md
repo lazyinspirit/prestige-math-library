@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-global-lone-contraction-from-the-local-kruzhkov-estimate.md

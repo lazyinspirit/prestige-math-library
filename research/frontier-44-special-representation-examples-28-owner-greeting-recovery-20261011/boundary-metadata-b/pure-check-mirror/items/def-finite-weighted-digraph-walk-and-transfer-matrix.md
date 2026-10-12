@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-finite-weighted-digraph-walk-and-transfer-matrix.md

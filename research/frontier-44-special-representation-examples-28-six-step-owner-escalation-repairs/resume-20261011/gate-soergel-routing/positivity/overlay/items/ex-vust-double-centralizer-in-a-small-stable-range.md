@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-vust-double-centralizer-in-a-small-stable-range.md

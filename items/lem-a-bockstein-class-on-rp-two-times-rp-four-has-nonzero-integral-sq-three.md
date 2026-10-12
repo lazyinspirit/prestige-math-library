@@ -53,10 +53,9 @@ $Sq^3_{\mathbb Z}:=\beta_{\mathbb Z}Sq^2\rho_2$.
 
 1.1 Reduce the cellular incidence numbers in [F3] modulo two. The cellular chain complex of $\mathbb{RP}^m$ is then $\mathbb F_2$ in degrees $0,\ldots,m$, zero elsewhere, with zero differential. Thus its mod-two singular homology is one-dimensional in that range and zero above $m$. Field duality gives the same dimensions and vanishing for cohomology. By [F2], restriction sends $a^j$ to the nonzero power $a_m^j$ for $0\le j\le m$; restriction preserves products. Higher powers vanish by the just-proved cohomological vanishing. Therefore the finite ring is exactly $\mathbb F_2[a_m]/(a_m^{m+1})$. [F2, F3, A1, algebra]
 
-
 1.2 For a degree-one class $t$, [F5] gives $Sq^0t=t$, $Sq^1t=t^2$, and $Sq^it=0$ for $i>1$. Repeated Cartan says that in $Sq^i(t^j)$ only choices of $i$ among the $j$ factors to receive $Sq^1$ contribute; each contributes $t^{j+i}$. Thus $Sq^i(t^j)=\binom ji t^{j+i}$, with the binomial coefficient reduced modulo two. This is a finite product computation, valid directly for the classes $u,v$ on $Y$. In particular $Sq^1(t^2)=0$, $Sq^2(t^2)=t^4$, and $Sq^1(t^4)=0$. [F5, algebra]
-2.1 The homology groups of both finite projective factors are finite free over $\mathbb F_2$ by step 1.1, so the full hypothesis of [F4] holds. Its cross-product ring isomorphism gives $H^*(Y;\mathbb F_2)=\mathbb F_2[u,v]/(u^3,v^5)$, with basis $u^iv^j$ for $0\le i\le2$, $0\le j\le4$. In particular $uv$, $uv^4$ and $u^2v^4$ are nonzero. The two summands $u^2v$ and $uv^2$ are distinct basis elements. [step 1.1, F4, A1, algebra]
 
+2.1 The homology groups of both finite projective factors are finite free over $\mathbb F_2$ by step 1.1, so the full hypothesis of [F4] holds. Its cross-product ring isomorphism gives $H^*(Y;\mathbb F_2)=\mathbb F_2[u,v]/(u^3,v^5)$, with basis $u^iv^j$ for $0\le i\le2$, $0\le j\le4$. In particular $uv$, $uv^4$ and $u^2v^4$ are nonzero. The two summands $u^2v$ and $uv^2$ are distinct basis elements. [step 1.1, F4, A1, algebra]
 
 3.1 Cartan gives $Sq^1(uv)=u^2v+uv^2$. Also $Sq^2(u^2v)=u^4v+0+0=0$ since $u^3=0$, whereas $Sq^2(uv^2)=0+0+uv^4=uv^4$. Additivity therefore gives $Sq^2(u^2v+uv^2)=uv^4$. [step 2.1, step 1.2, F5, algebra]
 

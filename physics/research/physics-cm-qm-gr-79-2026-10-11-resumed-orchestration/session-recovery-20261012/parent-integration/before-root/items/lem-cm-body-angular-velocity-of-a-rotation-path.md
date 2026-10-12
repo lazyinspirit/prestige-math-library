@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-body-angular-velocity-of-a-rotation-path.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-picard-group-of-divisor-classes-and-pic-zero.md

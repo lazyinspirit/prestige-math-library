@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-bundle-connection-is-local-and-restricts-to-open-sets.md

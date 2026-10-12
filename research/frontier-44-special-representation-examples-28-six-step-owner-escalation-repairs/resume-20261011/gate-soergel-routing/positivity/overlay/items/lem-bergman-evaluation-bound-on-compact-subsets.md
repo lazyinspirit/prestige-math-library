@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bergman-evaluation-bound-on-compact-subsets.md

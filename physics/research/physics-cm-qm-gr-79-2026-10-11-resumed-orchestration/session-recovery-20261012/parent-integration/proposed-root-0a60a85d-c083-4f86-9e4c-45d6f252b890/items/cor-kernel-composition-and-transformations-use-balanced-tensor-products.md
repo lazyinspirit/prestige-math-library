@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-kernel-composition-and-transformations-use-balanced-tensor-products.md

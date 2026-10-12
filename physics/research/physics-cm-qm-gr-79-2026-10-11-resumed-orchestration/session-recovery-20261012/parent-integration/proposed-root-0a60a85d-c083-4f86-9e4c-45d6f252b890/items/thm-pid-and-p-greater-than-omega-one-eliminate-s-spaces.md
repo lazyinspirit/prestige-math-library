@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pid-and-p-greater-than-omega-one-eliminate-s-spaces.md

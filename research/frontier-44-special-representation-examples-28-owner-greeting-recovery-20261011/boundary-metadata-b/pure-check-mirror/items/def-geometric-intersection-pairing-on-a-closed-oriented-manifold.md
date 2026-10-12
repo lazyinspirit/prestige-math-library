@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-geometric-intersection-pairing-on-a-closed-oriented-manifold.md

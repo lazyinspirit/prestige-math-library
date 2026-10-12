@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-keyhole-residue-formula-mellin-rational-integrals.md

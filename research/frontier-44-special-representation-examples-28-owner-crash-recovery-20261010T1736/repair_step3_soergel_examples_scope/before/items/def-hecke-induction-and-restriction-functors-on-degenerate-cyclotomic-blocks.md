@@ -1,0 +1,97 @@
+---
+id: def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks
+kind: definition
+title: "Hecke induction and restriction functors on degenerate cyclotomic blocks"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 35
+deps: [def-degenerate-cyclotomic-hecke-algebra,
+       def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality,
+       def-axiom-of-choice]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)"
+      url: "https://arxiv.org/pdf/0901.0057"
+      locator: "Section 3.3, the embedding iota : H^m_d -> H^m_{d+1}, (3.16)-(3.20), printed pp. 24-25: the maps iota_{alpha,alpha_i}, the idempotents e_{alpha,alpha_i}, the induction and restriction functors f_i and e_i, their biadjunction (citing [K, Lemma 8.2.2]) and their commutativity with the duality *."
+    - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
+      url: "https://arxiv.org/pdf/math/0508003"
+      locator: "Chapter 6, Section 6.2, printed pp. 60-66: the embedding H_d into H_{d+1}, the block idempotents and the identification of the induced module with H_{d+1}u tensor_{H_d} M."
+verification:
+  precheck: pass
+---
+
+## Definition
+
+Assume the Axiom of Choice for the module, projective and Grothendieck-group
+interfaces. Fix a multiset of complex roots $\mathbf a=(a_1,\dots,a_l)$ and the
+tower of degenerate cyclotomic Hecke algebras
+$H_d(\mathbf a)\hookrightarrow H_{d+1}(\mathbf a)$ of
+[[def-degenerate-cyclotomic-hecke-algebra]]. The **residue idempotents** are
+the last-coordinate generalized-eigenvalue projectors $u_i$ of $x_{d+1}$, one
+for each residue $i$ in the root-coset block decomposition: for integral roots
+$i$ runs over the integers of the type-A indexing, and for general complex roots
+each coset of $\mathbb C/\mathbb Z$ carries its own integer chain and the
+projectors of different cosets are not identified.
+
+For finite-dimensional modules the **restriction** and **induction** functors
+at the residue $i$ are
+$$e_i(M):=u_iM,\qquad f_i(N):=H_{d+1}(\mathbf a)u_i\otimes_{H_d(\mathbf a)}N,$$
+where $e_i(M)$ is an $H_d(\mathbf a)$-module through the tower inclusion and
+$f_i(N)$ carries the left $H_{d+1}(\mathbf a)$-action on the first factor. The
+verification below records that these functors are well defined, exact and
+biadjoint, that they commute with the ordinary $*$-duality of
+[[def-degenerate-cyclotomic-hecke-algebra]], and that their Grothendieck
+operators are adjoint for the projective/module Hom pairing. The idempotent
+$u_i$ is the actual last-eigenvalue projector; the embedded image of the source
+block in the corner $u_iH_{d+1}(\mathbf a)u_i$ is not claimed to equal that
+corner. The full tower $H_0(\mathbf a)\subset H_1(\mathbf a)\subset\cdots$ is
+obtained inside sufficiently large admissible stable realizations of
+[[def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality]],
+and the image towers use the compatible projected tensor actions there.
+
+## Facts & Assumptions
+
+**Given:** The root multiset $\mathbf a$, the tower $H_d(\mathbf a)\to H_{d+1}(\mathbf a)$, the residues $i$ of the block decomposition, and finite-dimensional modules $M,N$ over $H_{d+1}(\mathbf a),H_d(\mathbf a)$.
+
+[F1] $H_d(\mathbf a)$ has the bounded monomial basis $x_1^{r_1}\cdots x_d^{r_d}w$, $0\le r_i<l$, $w\in S_d$, a polynomial-degree filtration, a generator-fixing anti-involution $*$ with $x_j^*=x_j$, $s_k^*=s_k$, and a nondegenerate symmetric trace whose restriction to every central block corner is nondegenerate ([[def-degenerate-cyclotomic-hecke-algebra]]).
+
+[F2] Finite-dimensional $H_{d+1}(\mathbf a)$-modules decompose into joint generalized weight spaces of $x_1,\dots,x_{d+1}$ with orthogonal idempotents $e(\mathbf i)$ summing to $1$; the $S_{d+1}$-orbit sums are the primitive central block idempotents, and individual $e(\mathbf i)$ are not central. Sufficiently large admissible stable realizations make $H_d(\mathbf a)$ the faithful image of the Hecke action on the truncated tensor space $V_c^{\otimes d}$ with compatible projected tensor actions for the tower ([[def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality]]).
+
+[F3] The Axiom of Choice is assumed for the module and Grothendieck-group interfaces ([[def-axiom-of-choice]]).
+
+
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The tower inclusion, the residue idempotents $u_i$, and the functors $e_i$, $f_i$ of the Definition.
+
+1.1 The tower map. The defining ideal of $H_{d+1}(\mathbf a)$ is generated by the same polynomial in $x_1$ as that of $H_d(\mathbf a)$, and the Hecke relations among $x_1,\dots,x_d,s_1,\dots,s_{d-1}$ are exactly the defining relations of $H_d(\mathbf a)$; hence $\iota_d(x_j)=x_j$ ($j\le d$), $\iota_d(s_k)=s_k$ ($k<d$) defines an algebra homomorphism $\iota_d\colon H_d(\mathbf a)\to H_{d+1}(\mathbf a)$ that is injective on the bounded monomial basis. The cross relations give $x_{d+1}\iota_d(a)=\iota_d(a)x_{d+1}$ for all $a$, since $x_{d+1}$ commutes with every $x_j$ ($j\le d$) and every $s_k$ ($k\le d-1$) in the presentation. [F1, algebra]
+
+2.1 The residue idempotents. By [F2] the algebra $H_{d+1}(\mathbf a)$ decomposes into its joint generalized weight spaces with orthogonal idempotents $e(\mathbf i)$ summing to $1$; set $u_i:=\sum_{i_{d+1}=i}e(\mathbf i)$ for each residue $i$ of [F1]'s indexing. Since the $e(\mathbf i)$ are polynomials in $x_1,\dots,x_{d+1}$, their partial sum $u_i$ lies in $\mathbb C[x_{d+1}]$; therefore $u_iu_j=\delta_{ij}u_i$, $\sum_iu_i=1$, $u_i$ commutes with $\iota_d(H_d(\mathbf a))$ by step 1.1, and $u_i^*=u_i$ because $*$ fixes $x_{d+1}$ and hence every polynomial in it. [F1, F2, step 1.1, algebra]
+
+3.1 The functors and the exactness of $e_i$. Multiplication $M\mapsto u_iM$ and the tensor product $N\mapsto H_{d+1}(\mathbf a)u_i\otimes_{H_d(\mathbf a)}N$ are well-defined additive functors; $e_i$ is exact because $u_i$ is an idempotent natural endomorphism, so $e_i$ is a direct summand of the identity functor. [F1, step 2.1, construct]
+
+4.1 The first adjunction. The tensor-Hom adjunction together with evaluation at $u_i$ gives natural isomorphisms $\mathrm{Hom}_{H_{d+1}}(f_i(N),M)\cong\mathrm{Hom}_{H_d}(N,\mathrm{Hom}_{H_{d+1}}(H_{d+1}(\mathbf a)u_i,M))\cong\mathrm{Hom}_{H_d}(N,u_iM)=\mathrm{Hom}_{H_d}(N,e_i(M))$; hence $f_i\dashv e_i$, so $f_i$ is right exact and $e_i$ is left exact. With step 3.1, $e_i$ is exact. [F1, step 3.1, algebra]
+
+4.2 Duality compatibility. For a finite-dimensional module $M$ let $M^\circledast$ be the linear dual with the action twisted by $*$; the assignment $M\mapsto M^\circledast$ is a contravariant equivalence fixing simple modules. Because $u_i^*=u_i$, restriction along $u_i$ gives $e_i(M^\circledast)\cong(e_iM)^\circledast$. For $f_i$, the nondegenerate trace of [F1] is invariant, $t(xy)=t(yx)$, and combined with $u_i^*=u_i$ it identifies the projective bimodule $H_{d+1}(\mathbf a)u_i$ with its own $*$-dual, compatibly with the right $H_d$-action; using the standard finite-dimensional tensor duality $H_{d+1}(\mathbf a)u_i\otimes_{H_d}N^\circledast\cong(H_{d+1}(\mathbf a)u_i\otimes_{H_d}N)^\circledast$ this gives $f_i(N^\circledast)\cong(f_iN)^\circledast$. Both functors therefore commute with $(-)^\circledast$ up to natural isomorphism. [F1, step 2.1, step 3.1, algebra]
+
+5.1 The second adjunction and exactness. If $F\dashv G$ and a contravariant equivalence $D$ satisfies $DF\cong FD$ and $DG\cong GD$, then $G\dashv F$: dualizing the natural bijection $\mathrm{Hom}(FX,Y)\cong\mathrm{Hom}(X,GY)$ and using $D^\circledast\cong\mathrm{id}$ gives $\mathrm{Hom}(GY,X)\cong\mathrm{Hom}(DX,G(DY))\cong\mathrm{Hom}(F(DX),DY)\cong\mathrm{Hom}(Y,FX)$. Applying this with $F=f_i$, $G=e_i$ and $D=(-)^\circledast$ by step 4.2 yields $e_i\dashv f_i$; with step 4.1 the functor $f_i$ is both left and right exact, hence exact. [step 4.1, step 4.2, algebra]
+
+6.1 Grothendieck operators. Let $K_0(\mathrm{proj})$ and $K_0(\mathrm{mod})$ be the Grothendieck groups of finitely generated projective and finite-dimensional modules, paired by $\langle[P],[M]\rangle:=\dim\mathrm{Hom}(P,M)$. The first adjunction computes $\langle[f_iP],[M]\rangle=\dim\mathrm{Hom}(f_iP,M)=\dim\mathrm{Hom}(P,e_iM)=\langle[P],[e_iM]\rangle$, and the second adjunction gives the same identity with the Grothendieck groups exchanged; hence the operators induced by $e_i$ and $f_i$ are adjoint for the Cartan pairing. [step 4.1, step 5.1, algebra]
+
+7.1 Roots and realization boundaries. If all roots $a_j$ are integers the residues are the integers of the type-A indexing; for general complex roots the functors are defined separately on each integer coset chain and no identification between different cosets is made. Every full Hecke block used below is obtained inside a sufficiently large admissible stable realization, where $H_{d+1}(\mathbf a)$ is the faithful image of the Hecke action on $V_c^{\otimes(d+1)}$ and the tower maps are the compatible projected tensor actions of [F2]. The idempotent $u_i$ is the actual last-eigenvalue projector of $x_{d+1}$, and the image of the source block inside the corner $u_iH_{d+1}(\mathbf a)u_i$ is not asserted to be the whole corner. The Axiom of Choice [F3] is used for the module and Grothendieck-group interfaces declared at the start. [F1, F2, F3, given] ∎
+
+## Remarks
+
+- The two adjunctions are the Frobenius self-duality of the tower: the trace form of the symmetric algebra $H_{d+1}(\mathbf a)$ makes the projective bimodule $H_{d+1}(\mathbf a)u_i$ self-dual, and the first adjunction is the usual tensor-Hom adjunction. The source statement is [BKAR, (3.19)] citing [K, Lemma 8.2.2]; the local steps above record the tower map, the idempotents, the first adjunction, the exactness of $e_i$ and the formal duality argument, and use the self-duality of the trace form for the remaining step.
+
+- For repeated roots ($l$ larger than the number of distinct values, e.g. $\mathbf a=(0,0)$) the projectors $u_i$ are combined generalized-eigenspace projectors, so a residue may carry several root multiplicities; this is the bookkeeping of the block decomposition and not an extra idempotent.

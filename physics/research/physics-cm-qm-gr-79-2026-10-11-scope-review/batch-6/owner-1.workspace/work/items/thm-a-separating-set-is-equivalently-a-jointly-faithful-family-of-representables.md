@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-separating-set-is-equivalently-a-jointly-faithful-family-of-representables.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-maximal-abelian-subgroups-of-the-dihedral-group-of-order-eight.md

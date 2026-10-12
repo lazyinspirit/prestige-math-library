@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-monomial-symmetric-functions-form-the-integral-stable-basis.md

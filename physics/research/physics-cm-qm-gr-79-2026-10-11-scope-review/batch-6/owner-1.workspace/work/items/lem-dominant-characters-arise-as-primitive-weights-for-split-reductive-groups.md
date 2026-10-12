@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dominant-characters-arise-as-primitive-weights-for-split-reductive-groups.md

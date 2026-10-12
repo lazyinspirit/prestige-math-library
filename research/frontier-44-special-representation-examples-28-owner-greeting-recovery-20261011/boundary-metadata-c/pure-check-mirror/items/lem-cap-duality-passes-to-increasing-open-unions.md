@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cap-duality-passes-to-increasing-open-unions.md

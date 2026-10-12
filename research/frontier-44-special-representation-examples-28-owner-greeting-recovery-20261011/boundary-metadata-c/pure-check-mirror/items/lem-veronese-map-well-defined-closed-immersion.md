@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-veronese-map-well-defined-closed-immersion.md

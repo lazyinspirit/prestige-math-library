@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-integrable-pfaffian-equation-with-a-local-first-integral.md

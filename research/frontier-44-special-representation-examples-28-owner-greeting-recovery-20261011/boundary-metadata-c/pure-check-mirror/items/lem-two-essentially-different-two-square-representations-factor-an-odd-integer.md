@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-essentially-different-two-square-representations-factor-an-odd-integer.md

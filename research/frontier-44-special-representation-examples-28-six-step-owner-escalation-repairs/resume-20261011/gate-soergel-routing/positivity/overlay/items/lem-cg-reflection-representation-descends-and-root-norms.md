@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-reflection-representation-descends-and-root-norms.md

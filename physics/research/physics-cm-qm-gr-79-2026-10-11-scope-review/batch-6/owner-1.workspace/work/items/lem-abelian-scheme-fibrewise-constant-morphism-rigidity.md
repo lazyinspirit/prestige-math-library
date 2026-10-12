@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-abelian-scheme-fibrewise-constant-morphism-rigidity.md

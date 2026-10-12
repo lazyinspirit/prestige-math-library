@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-equality-near-a-point-is-an-equivalence-relation-on-local-smooth-functions.md

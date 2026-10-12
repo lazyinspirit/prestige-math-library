@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-euclids-product-of-primes-plus-one-is-prime.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-projective-weak-model-and-rational-mapping.md

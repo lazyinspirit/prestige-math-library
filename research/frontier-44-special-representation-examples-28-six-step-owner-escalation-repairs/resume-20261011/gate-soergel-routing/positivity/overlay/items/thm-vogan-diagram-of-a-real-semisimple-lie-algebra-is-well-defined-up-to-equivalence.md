@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-vogan-diagram-of-a-real-semisimple-lie-algebra-is-well-defined-up-to-equivalence.md

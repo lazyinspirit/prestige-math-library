@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-root-inversions-and-chambers-in-i2-5-a2-and-i2-infinity.md

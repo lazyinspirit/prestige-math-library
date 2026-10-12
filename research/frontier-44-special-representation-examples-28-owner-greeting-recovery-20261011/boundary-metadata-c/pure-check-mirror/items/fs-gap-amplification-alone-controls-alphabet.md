@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-gap-amplification-alone-controls-alphabet.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-coercivity-makes-a-small-form-step-a-contraction.md

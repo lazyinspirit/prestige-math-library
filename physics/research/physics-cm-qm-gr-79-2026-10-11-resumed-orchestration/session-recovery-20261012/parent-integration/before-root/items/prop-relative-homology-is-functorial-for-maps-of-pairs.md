@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-relative-homology-is-functorial-for-maps-of-pairs.md

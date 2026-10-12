@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-unique-kth-root-modulo-prime-for-coprime-exponent.md

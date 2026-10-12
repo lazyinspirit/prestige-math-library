@@ -57,20 +57,14 @@ Then:
 
 **Proof technique:** direct.
 
+ 1.1 Since $K\subseteq I^nM$ for every $n$, Artin-Rees gives some $c$ such that for all $n\ge c$, $ K=I^nM\cap K=I^{n-c}(I^cM\cap K)=I^{n-c}K. $ In particular $IK=K$. [L1, given]
 
-1.1 Since $K\subseteq I^nM$ for every $n$, Artin-Rees gives some $c$ such that for all $n\ge c$, $ K=I^nM\cap K=I^{n-c}(I^cM\cap K)=I^{n-c}K. $ In particular $IK=K$. [L1, given]
+ 1.2 Conversely, if $(1-a)m=0$ for some $a\in I$, then $m=am\in IM$. Iterating gives $m=a^nm\in I^nM$ for every $n\ge0$, hence $m\in K$. [given, algebra]
 
+ 1.3 Steps 2.1 and 1.2 identify $K$ with the set of $(1-a)$-torsion elements claimed in part 1. [algebra]
 
-1.2 Conversely, if $(1-a)m=0$ for some $a\in I$, then $m=am\in IM$. Iterating gives $m=a^nm\in I^nM$ for every $n\ge0$, hence $m\in K$. [given, algebra]
+ 2.1 The submodule $K\subseteq M$ is finite by [L4]. Applying [L2] to $K$ and the equality $IK=K$ from step 1.1 gives $a\in I$ with $ (1-a)K=0. $ So every element of $K$ satisfies the displayed torsion condition. [L2, L4, step 1.1, algebra]
 
+ 3.1 Assume now $I\subseteq J(R)$. For any $m\in K$, step 2.1 gives some $a\in I\subseteq J(R)$ with $(1-a)m=0$. By [L3], $1-a$ is a unit, so multiplying by its inverse gives $m=0$. Thus $K=0$. [L3, step 2.1, algebra]
 
-1.3 Steps 2.1 and 1.2 identify $K$ with the set of $(1-a)$-torsion elements claimed in part 1. [algebra]
-
-
-2.1 The submodule $K\subseteq M$ is finite by [L4]. Applying [L2] to $K$ and the equality $IK=K$ from step 1.1 gives $a\in I$ with $ (1-a)K=0. $ So every element of $K$ satisfies the displayed torsion condition. [L2, L4, step 1.1, algebra]
-
-
-3.1 Assume now $I\subseteq J(R)$. For any $m\in K$, step 2.1 gives some $a\in I\subseteq J(R)$ with $(1-a)m=0$. By [L3], $1-a$ is a unit, so multiplying by its inverse gives $m=0$. Thus $K=0$. [L3, step 2.1, algebra]
-
-
-4.1 Therefore both stated conclusions hold. [algebra] ∎
+ 4.1 Therefore both stated conclusions hold. [algebra] ∎ 

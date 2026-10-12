@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors.md

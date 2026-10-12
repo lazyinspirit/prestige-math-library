@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-resolvent-is-banach-valued-holomorphic.md

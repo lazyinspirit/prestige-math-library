@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary.md

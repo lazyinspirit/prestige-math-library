@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-liminf-passage-makes-the-weak-limit-a-minimiser.md

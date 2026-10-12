@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-zero-second-derivative-extremum-trichotomy.md

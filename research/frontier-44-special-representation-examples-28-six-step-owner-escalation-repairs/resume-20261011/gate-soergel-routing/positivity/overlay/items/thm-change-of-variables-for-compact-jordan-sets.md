@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-change-of-variables-for-compact-jordan-sets.md

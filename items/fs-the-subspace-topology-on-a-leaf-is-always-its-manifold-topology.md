@@ -41,13 +41,10 @@ The subspace topology on a leaf is always its manifold topology.
 
 **Proof technique:** direct.
 
-1.1 As an immersed manifold, the leaf carries the topology transported from [given]
-$\mathbb R$ by its parametrization. [given]
+1.1 As an immersed manifold, the leaf carries the topology transported from [given] $\mathbb R$ by its parametrization. [given]
 
-1.2 If the subspace topology from $\mathbb T^2$ agreed with that intrinsic [given]
-topology, the parametrization would be a topological embedding. The leaf would then be an embedded submanifold of the torus. [given]
+1.2 If the subspace topology from $\mathbb T^2$ agreed with that intrinsic [given] topology, the parametrization would be a topological embedding. The leaf would then be an embedded submanifold of the torus. [given]
 
-1.3 But the same irrational leaf is dense and not embedded. Therefore its [given]
-subspace topology cannot equal its manifold topology. [given]
+1.3 But the same irrational leaf is dense and not embedded. Therefore its [given] subspace topology cannot equal its manifold topology. [given]
 
-2.1 Hence the statement is false. [given] ∎ [given]
+2.1 Hence the statement is false. [given] ∎ [given] 

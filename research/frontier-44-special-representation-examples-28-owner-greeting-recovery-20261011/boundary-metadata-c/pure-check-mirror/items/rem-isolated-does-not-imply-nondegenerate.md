@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-isolated-does-not-imply-nondegenerate.md

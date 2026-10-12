@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-prism-triangulation-has-the-stated-oriented-boundary.md

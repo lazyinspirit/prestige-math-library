@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-regular-local-picard-principal-localization.md

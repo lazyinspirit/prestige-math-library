@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-mean-zero-ltwo-functions-on-a-cube-embed-continuously-in-hone.md

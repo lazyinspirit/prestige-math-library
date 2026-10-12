@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-nilradical-is-defined-as-the-set-of-all-ad-nilpotent-elements.md

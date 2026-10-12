@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-obstacle-complementarity-product-needs-extra-regularity.md

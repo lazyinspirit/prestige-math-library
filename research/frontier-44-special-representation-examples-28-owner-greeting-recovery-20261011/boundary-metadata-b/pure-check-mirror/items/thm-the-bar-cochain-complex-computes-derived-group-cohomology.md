@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-bar-cochain-complex-computes-derived-group-cohomology.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dominant-characters-of-products-of-tori-and-split-semisimple-groups-arise-as-primitive-weights.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-coinvariant-top-degree-and-discriminant.md

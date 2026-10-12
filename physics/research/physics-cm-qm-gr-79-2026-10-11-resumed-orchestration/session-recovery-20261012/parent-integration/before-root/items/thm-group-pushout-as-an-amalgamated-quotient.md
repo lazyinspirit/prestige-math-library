@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-group-pushout-as-an-amalgamated-quotient.md

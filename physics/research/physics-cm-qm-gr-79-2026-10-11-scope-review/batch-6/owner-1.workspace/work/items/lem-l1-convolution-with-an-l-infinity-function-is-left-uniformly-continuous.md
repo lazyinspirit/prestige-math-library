@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-l1-convolution-with-an-l-infinity-function-is-left-uniformly-continuous.md

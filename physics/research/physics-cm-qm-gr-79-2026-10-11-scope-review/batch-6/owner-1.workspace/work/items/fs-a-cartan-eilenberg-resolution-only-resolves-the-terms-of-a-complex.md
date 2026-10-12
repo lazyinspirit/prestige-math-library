@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-cartan-eilenberg-resolution-only-resolves-the-terms-of-a-complex.md

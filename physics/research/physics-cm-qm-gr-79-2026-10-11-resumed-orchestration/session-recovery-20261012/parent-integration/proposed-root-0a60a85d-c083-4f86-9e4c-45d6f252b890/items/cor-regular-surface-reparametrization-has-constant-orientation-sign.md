@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-surface-reparametrization-has-constant-orientation-sign.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-enveloping-algebra-of-a-direct-sum-is-the-tensor-product-of-enveloping-algebras.md

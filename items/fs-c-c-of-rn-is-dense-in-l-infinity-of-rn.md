@@ -33,8 +33,6 @@ sources:
 
 **Proof technique:** direct.
 
-1.1 The constant function $1$ belongs to $L^\infty(\mathbb{R}^n)$ but not to [L1]
-$C_0(\mathbb{R}^n)$, because it does not vanish at infinity. [L1]
+1.1 The constant function $1$ belongs to $L^\infty(\mathbb{R}^n)$ but not to [L1] $C_0(\mathbb{R}^n)$, because it does not vanish at infinity. [L1]
 
-2.1 By [L1], every $L^\infty$-limit of compactly supported continuous functions [L1, step 1.1]
-lies in $C_0(\mathbb{R}^n)$. Therefore $1$ cannot lie in the closure of $C_c(\mathbb{R}^n)$, and the claim is false. [L1, step 1.1] ∎
+2.1 By [L1], every $L^\infty$-limit of compactly supported continuous functions [L1, step 1.1] lies in $C_0(\mathbb{R}^n)$. Therefore $1$ cannot lie in the closure of $C_c(\mathbb{R}^n)$, and the claim is false. [L1, step 1.1] ∎

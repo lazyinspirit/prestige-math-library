@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-comma-category-projection-strictly-creates-limits-preserved-by-the-functor.md

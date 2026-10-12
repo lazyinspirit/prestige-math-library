@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-extension-with-finitely-many-intermediate-fields-is-simple.md

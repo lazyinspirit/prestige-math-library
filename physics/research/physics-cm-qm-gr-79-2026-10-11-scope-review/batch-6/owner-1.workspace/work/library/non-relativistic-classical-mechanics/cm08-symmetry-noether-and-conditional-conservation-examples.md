@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm08-symmetry-noether-and-conditional-conservation-examples.md

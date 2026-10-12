@@ -54,14 +54,10 @@ so the Hilbert polynomial of $A$ is the constant polynomial $2$.
 
 **Proof technique:** direct.
 
+ 1.1 In $k[x,y]$, the degree-$n$ monomials are exactly $x^{n-i}y^i$ for $0\le i\le n$, so the degree-$n$ piece has dimension $n+1$. Therefore $ \operatorname{HS}_{k[x,y]}(t)=\sum_{n\ge0}(n+1)t^n=\frac{1}{(1-t)^2}. $ [L1, given, algebra]
 
-1.1 In $k[x,y]$, the degree-$n$ monomials are exactly $x^{n-i}y^i$ for $0\le i\le n$, so the degree-$n$ piece has dimension $n+1$. Therefore $ \operatorname{HS}_{k[x,y]}(t)=\sum_{n\ge0}(n+1)t^n=\frac{1}{(1-t)^2}. $ [L1, given, algebra]
+ 1.2 In the quotient by $(y^2)$, every monomial containing $y^2$ vanishes. So for $n\ge1$ the degree-$n$ piece is spanned by $x^n$ and $x^{n-1}y$, and these two classes are linearly independent. Hence $ \operatorname{HS}_A(t)=1+\sum_{n\ge1}2t^n=\frac{1+t}{1-t}. $ [given, algebra]
 
+ 2.1 The eventual coefficient sequence of $\operatorname{HS}_A(t)$ is constant equal to $2$, so its Hilbert polynomial is $2$. [step 1.2]
 
-1.2 In the quotient by $(y^2)$, every monomial containing $y^2$ vanishes. So for $n\ge1$ the degree-$n$ piece is spanned by $x^n$ and $x^{n-1}y$, and these two classes are linearly independent. Hence $ \operatorname{HS}_A(t)=1+\sum_{n\ge1}2t^n=\frac{1+t}{1-t}. $ [given, algebra]
-
-
-2.1 The eventual coefficient sequence of $\operatorname{HS}_A(t)$ is constant equal to $2$, so its Hilbert polynomial is $2$. [step 1.2]
-
-
-3.1 Thus both the polynomial ring and this homogeneous quotient realize the expected Hilbert series and Hilbert polynomial. [step 1.1, step 1.2, step 2.1] ∎
+ 3.1 Thus both the polynomial ring and this homogeneous quotient realize the expected Hilbert series and Hilbert polynomial. [step 1.1, step 1.2, step 2.1] ∎ 

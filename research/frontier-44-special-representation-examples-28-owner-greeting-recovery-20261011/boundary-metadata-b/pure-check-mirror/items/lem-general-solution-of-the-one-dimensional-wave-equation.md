@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-general-solution-of-the-one-dimensional-wave-equation.md

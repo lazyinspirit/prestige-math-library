@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-degree-is-homotopy-invariant-and-multiplicative-under-composition.md

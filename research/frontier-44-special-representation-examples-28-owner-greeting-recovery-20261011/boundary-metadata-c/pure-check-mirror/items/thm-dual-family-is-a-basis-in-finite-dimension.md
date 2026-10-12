@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dual-family-is-a-basis-in-finite-dimension.md

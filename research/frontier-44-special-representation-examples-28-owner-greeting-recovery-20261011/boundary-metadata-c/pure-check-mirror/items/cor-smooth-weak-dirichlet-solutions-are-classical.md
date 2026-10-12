@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-smooth-weak-dirichlet-solutions-are-classical.md

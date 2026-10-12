@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cubical-and-spherical-models-of-higher-homotopy-agree.md

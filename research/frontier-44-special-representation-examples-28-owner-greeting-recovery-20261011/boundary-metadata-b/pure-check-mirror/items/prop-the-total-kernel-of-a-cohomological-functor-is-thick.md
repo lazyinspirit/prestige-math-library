@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-total-kernel-of-a-cohomological-functor-is-thick.md

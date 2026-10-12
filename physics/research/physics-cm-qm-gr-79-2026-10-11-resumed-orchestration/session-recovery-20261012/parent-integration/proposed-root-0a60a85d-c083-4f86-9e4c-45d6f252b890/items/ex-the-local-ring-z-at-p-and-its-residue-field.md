@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-local-ring-z-at-p-and-its-residue-field.md

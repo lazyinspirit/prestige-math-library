@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-reducing-arc-and-yamada-vogel-reducing-move.md

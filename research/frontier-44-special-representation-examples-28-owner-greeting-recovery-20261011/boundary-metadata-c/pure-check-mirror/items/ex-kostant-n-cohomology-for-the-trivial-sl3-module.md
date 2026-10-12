@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-kostant-n-cohomology-for-the-trivial-sl3-module.md

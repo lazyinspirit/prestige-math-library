@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-group-cohomology-is-the-derived-functor-of-coinvariants.md

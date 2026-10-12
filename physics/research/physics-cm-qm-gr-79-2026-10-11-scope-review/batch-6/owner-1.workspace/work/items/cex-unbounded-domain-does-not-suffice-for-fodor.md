@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-unbounded-domain-does-not-suffice-for-fodor.md

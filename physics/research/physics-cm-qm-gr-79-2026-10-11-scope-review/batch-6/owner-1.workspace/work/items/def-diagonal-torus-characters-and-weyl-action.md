@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-diagonal-torus-characters-and-weyl-action.md

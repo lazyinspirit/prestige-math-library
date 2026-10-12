@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r.md

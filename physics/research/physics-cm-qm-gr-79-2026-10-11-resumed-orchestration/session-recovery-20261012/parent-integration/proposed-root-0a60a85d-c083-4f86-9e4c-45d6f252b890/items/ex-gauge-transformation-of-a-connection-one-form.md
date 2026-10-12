@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gauge-transformation-of-a-connection-one-form.md

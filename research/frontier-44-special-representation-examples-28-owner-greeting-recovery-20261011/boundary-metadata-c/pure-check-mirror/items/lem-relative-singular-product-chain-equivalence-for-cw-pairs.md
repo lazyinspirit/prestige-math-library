@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-singular-product-chain-equivalence-for-cw-pairs.md

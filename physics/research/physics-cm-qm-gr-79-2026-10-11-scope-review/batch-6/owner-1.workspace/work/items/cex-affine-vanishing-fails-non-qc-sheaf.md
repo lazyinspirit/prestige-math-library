@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-affine-vanishing-fails-non-qc-sheaf.md

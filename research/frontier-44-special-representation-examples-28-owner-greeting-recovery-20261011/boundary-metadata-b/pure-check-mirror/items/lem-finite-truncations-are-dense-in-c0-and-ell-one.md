@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-truncations-are-dense-in-c0-and-ell-one.md

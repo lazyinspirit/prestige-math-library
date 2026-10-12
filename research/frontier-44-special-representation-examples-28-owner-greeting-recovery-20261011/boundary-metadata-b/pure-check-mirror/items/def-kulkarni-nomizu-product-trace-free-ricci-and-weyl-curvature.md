@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-kulkarni-nomizu-product-trace-free-ricci-and-weyl-curvature.md

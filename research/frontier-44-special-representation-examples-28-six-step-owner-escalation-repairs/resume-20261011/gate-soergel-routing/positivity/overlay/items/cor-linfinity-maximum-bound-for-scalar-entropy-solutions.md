@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-linfinity-maximum-bound-for-scalar-entropy-solutions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-equally-spaced-points-on-a-short-circle-are-stationary.md

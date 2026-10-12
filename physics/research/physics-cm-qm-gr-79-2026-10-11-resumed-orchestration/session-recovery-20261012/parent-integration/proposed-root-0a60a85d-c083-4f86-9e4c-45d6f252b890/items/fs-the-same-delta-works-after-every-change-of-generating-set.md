@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-same-delta-works-after-every-change-of-generating-set.md

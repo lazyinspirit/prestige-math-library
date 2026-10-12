@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-forcing-transfer-for-finite-zfc-fragments.md

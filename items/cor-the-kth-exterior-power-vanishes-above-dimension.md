@@ -41,11 +41,10 @@ If $V$ is finite-dimensional with $\dim V=n$ and $k>n$, then $\Lambda^kV=0$.
 
 **Proof technique:** direct.
 
-
-1.1 If some $k$-tuple $(v_1,\ldots,v_k)$ in $V$ were linearly independent, then its image set would be a linearly independent subset of $V$ with $k$ elements. That contradicts [L1] and [L2] because $k>n$. So every $k$-tuple in $V$ is linearly dependent. [L1, L2, algebra]
+ 1.1 If some $k$-tuple $(v_1,\ldots,v_k)$ in $V$ were linearly independent, then its image set would be a linearly independent subset of $V$ with $k$ elements. That contradicts [L1] and [L2] because $k>n$. So every $k$-tuple in $V$ is linearly dependent. [L1, L2, algebra]
 
 2.1 By [L3], step 1.1 forces every decomposable wedge $v_1\wedge\cdots\wedge v_k$ to vanish. [L3, step 1.1]
 
 3.1 By [L4], every element of $\Lambda^kV$ is a linear combination of decomposable wedges, so step 2.1 forces every element of $\Lambda^kV$ to be zero. [L4, step 2.1]
 
-4.1 Hence $\Lambda^kV=0$ whenever $k>n$. [step 3.1] ∎
+4.1 Hence $\Lambda^kV=0$ whenever $k>n$. [step 3.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-empirical-laws-of-a-finite-valued-iid-sample.md

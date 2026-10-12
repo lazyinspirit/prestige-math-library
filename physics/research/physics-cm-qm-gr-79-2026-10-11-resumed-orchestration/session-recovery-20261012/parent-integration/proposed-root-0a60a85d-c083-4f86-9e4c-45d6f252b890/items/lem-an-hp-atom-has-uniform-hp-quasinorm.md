@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-hp-atom-has-uniform-hp-quasinorm.md

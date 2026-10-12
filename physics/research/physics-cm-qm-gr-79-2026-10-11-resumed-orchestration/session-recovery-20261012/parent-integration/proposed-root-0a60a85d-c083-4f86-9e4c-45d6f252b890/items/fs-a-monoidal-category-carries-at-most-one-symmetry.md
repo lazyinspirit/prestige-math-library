@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-monoidal-category-carries-at-most-one-symmetry.md

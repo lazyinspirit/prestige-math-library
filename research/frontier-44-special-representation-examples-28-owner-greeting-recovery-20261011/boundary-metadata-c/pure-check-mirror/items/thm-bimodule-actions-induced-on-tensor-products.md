@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bimodule-actions-induced-on-tensor-products.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-orthogonal-complement-of-a-subspace-under-the-standard-form.md

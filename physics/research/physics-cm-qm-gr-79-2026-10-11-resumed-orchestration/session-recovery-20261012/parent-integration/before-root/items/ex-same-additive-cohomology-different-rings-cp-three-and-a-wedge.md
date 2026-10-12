@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-same-additive-cohomology-different-rings-cp-three-and-a-wedge.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-simplicial-approximation-for-maps-of-pairs.md

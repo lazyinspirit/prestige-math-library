@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cone-triangles-satisfy-the-octahedral-axiom.md

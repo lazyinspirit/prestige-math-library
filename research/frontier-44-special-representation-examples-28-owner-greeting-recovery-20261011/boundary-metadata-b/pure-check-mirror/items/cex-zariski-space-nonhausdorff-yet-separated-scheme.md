@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-zariski-space-nonhausdorff-yet-separated-scheme.md

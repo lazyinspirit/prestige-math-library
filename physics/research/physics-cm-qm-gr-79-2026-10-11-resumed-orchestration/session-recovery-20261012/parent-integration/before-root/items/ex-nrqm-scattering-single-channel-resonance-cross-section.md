@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/parent-integration/alias-repair/before/items/ex-nrqm-scattering-single-channel-resonance-cross-section.md

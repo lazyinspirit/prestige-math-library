@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compact-open-is-uniform-on-a-compact-metric-domain.md

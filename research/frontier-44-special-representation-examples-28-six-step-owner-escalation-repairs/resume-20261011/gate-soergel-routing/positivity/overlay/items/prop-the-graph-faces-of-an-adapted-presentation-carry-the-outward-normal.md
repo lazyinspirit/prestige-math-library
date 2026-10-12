@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-graph-faces-of-an-adapted-presentation-carry-the-outward-normal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-second-isomorphism-theorem-in-an-abelian-category.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dual-identity-neighbourhood-is-compact.md

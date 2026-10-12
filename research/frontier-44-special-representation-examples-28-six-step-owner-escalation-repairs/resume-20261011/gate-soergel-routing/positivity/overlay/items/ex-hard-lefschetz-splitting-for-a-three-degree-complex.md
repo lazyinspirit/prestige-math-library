@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hard-lefschetz-splitting-for-a-three-degree-complex.md

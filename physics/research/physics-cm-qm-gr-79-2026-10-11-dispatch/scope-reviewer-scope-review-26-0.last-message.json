@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "26",
+  "round": 0,
+  "input_sha256": "e719319728ca2ec909e9ac8e322d9024852c5ec22c5679b12220ff531f6121b8",
+  "reviewed_items": [
+    "post-cm10-rigid-material",
+    "def-cm10-rigid-body-configuration",
+    "def-cm10-angular-velocity",
+    "def-cm10-inertia-tensor",
+    "pthm-cm10-kinetic-splitting",
+    "pthm-cm10-principal-axes",
+    "rem-cm10-orientation-charts",
+    "ex-cm10-euler-angle-pole-and-orientation",
+    "pthm-cm10-frame-covariance",
+    "cex-cm10-degenerate-line-mass-singular-inertia",
+    "ex-cm10-equilateral-triangle-rotational-inertia",
+    "ex-cm10-parallel-axis-shift-check"
+  ],
+  "reviewed_pages": [
+    "cm10-rigid-body-configuration-and-inertia",
+    "cm10-rigid-body-configuration-and-inertia-examples"
+  ],
+  "decision": "escalate",
+  "reason": "All 12 items and both pages were reviewed; acceptance is blocked by significant prerequisite gaps, including an outside-batch supplier proof defect.",
+  "findings": [
+    {
+      "id": "rem-cm10-orientation-charts",
+      "type": "prerequisite",
+      "reason": "Supplier thm-cm-quaternion-lift-exists-and-is-unique step 3.1 assumes an arbitrary lift starts at q0, so clause 2 used here is not proved; outside consumers include cex-cm-no-closed-lift-along-a-full-turn, ex-cm-constant-angular-velocity-quaternion-lift, and rem-cm-quaternion-lift-scope-and-sign."
+    },
+    {
+      "id": "rem-cm10-orientation-charts",
+      "type": "prerequisite",
+      "reason": "The claim that the Euler map is a local chart throughout the interior domain has no full-rank/local-inverse argument or thm-smooth-inverse-function-theorem-on-manifolds dependency, while its cited definition explicitly leaves chart status unasserted."
+    },
+    {
+      "id": "pthm-cm10-frame-covariance",
+      "type": "prerequisite",
+      "reason": "This item uses P, K, and Lc via pthm-cm10-kinetic-splitting, whose hypothesis includes ACω, but its statement neither carries that hypothesis nor declares def-countable-choice as a dependency."
+    },
+    {
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "type": "local",
+      "reason": "Clause 5 says the two equal transverse principal moments are its trace without an antecedent for its, and the claim is false if it refers to tr(I)=6m0a²."
+    }
+  ],
+  "consumer_checks": []
+}

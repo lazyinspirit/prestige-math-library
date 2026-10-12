@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-lca-fourier-inversion-for-integrable-transform.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules.md

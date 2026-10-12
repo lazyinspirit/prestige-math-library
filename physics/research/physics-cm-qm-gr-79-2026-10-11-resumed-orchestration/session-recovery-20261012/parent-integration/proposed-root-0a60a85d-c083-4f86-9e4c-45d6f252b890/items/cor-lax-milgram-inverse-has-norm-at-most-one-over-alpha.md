@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lax-milgram-inverse-has-norm-at-most-one-over-alpha.md

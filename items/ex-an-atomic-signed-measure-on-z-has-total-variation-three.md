@@ -40,8 +40,7 @@ $$|\nu|(\mathbb Z)=\sum_{k\in\mathbb Z}2^{-|k|}=3.$$
 
 **Proof technique:** direct.
 
-1.1 The defining series is absolutely convergent on every subset of [L1, A1]
-$\mathbb Z$, so $\nu$ is countably additive. If $E$ contains only even integers, then every term in the series for $\nu(E)$ is nonnegative; if $E$ contains only odd integers, every term is nonpositive. Thus the even integers form a positive set and the odd integers form a negative set.
+1.1 The defining series is absolutely convergent on every subset of [L1, A1] $\mathbb Z$, so $\nu$ is countably additive. If $E$ contains only even integers, then every term in the series for $\nu(E)$ is nonnegative; if $E$ contains only odd integers, every term is nonpositive. Thus the even integers form a positive set and the odd integers form a negative set. [L1, A1]
 
-2.1 The Jordan positive part is therefore the even-atom measure [L1, A1, step 1.1] ∎
-$\nu^+(A)=\sum_{k\in A,\ k\text{ even}}2^{-|k|}$ and the negative part is $\nu^-(A)=\sum_{k\in A,\ k\text{ odd}}2^{-|k|}$. Hence [L1] gives $|\nu|(\mathbb Z)=\nu^+(\mathbb Z)+\nu^-(\mathbb Z)=\sum_{k\in\mathbb Z}2^{-|k|}=3$ by [A1].
+2.1 The Jordan positive part is therefore the even-atom measure [L1, A1, step 1.1] $\nu^+(A)=\sum_{k\in A,\ k\text{ even}}2^{-|k|}$ and the negative part is $\nu^-(A)=\sum_{k\in A,\ k\text{ odd}}2^{-|k|}$. Hence [L1] gives $|\nu|(\mathbb Z)=\nu^+(\mathbb Z)+\nu^-(\mathbb Z)=\sum_{k\in\mathbb Z}2^{-|k|}=3$ by [A1]. [L1, A1, step 1.1] ∎
+

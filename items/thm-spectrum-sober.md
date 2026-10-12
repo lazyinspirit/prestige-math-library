@@ -37,5 +37,4 @@ is sober.
 
 1.2 Any other generic point has the same closure and is equal to $\mathfrak p$ by the uniqueness in [F1]. [F1]
 
-2.1 Therefore every irreducible closed subset has a unique generic point. [step 1.1, step 1.2] ∎
- 
+2.1 Therefore every irreducible closed subset has a unique generic point. [step 1.1, step 1.2] ∎  

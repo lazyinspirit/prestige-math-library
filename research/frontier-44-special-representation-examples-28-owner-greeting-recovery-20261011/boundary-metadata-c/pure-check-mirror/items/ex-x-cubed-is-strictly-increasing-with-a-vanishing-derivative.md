@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-cubed-is-strictly-increasing-with-a-vanishing-derivative.md

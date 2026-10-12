@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-central-character-of-the-enveloping-algebra-arises-from-a-weight.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-stable-normal-inverse-of-the-tangent-bundle.md

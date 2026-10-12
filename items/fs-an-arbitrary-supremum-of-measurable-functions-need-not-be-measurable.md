@@ -36,8 +36,7 @@ functions is measurable. The correct theorem on this page is only the
 
 **Proof technique:** direct.
 
-1.1 Each singleton $\{t\}$ is measurable, so [L2] makes every [given, L2]
-$\mathbf{1}_{\{t\}}$ measurable. [given, L2]
+1.1 Each singleton $\{t\}$ is measurable, so [L2] makes every [given, L2] $\mathbf{1}_{\{t\}}$ measurable. [given, L2]
 
 2.1 The pointwise supremum of the family is [step 1.1, L1, L2]
 

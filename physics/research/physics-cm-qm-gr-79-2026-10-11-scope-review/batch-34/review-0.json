@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "34",
+  "round": 0,
+  "reviewed_items": [
+    "def-cm18-observable-model",
+    "def-cm18-calibration",
+    "def-cm18-sampling-model",
+    "rem-cm18-model-test",
+    "rem-cm18-numerical-error",
+    "rem-cm18-galilean-regime",
+    "rem-cm18-em-bridge",
+    "rem-cm18-qm-bridge",
+    "rem-cm18-primary-report-contract",
+    "ex-cm18-pendulum-calibration-proposal",
+    "ex-cm18-uniform-motion-sampling-check",
+    "ex-cm18-frame-change-of-an-observation-model",
+    "cex-cm18-finite-sample-may-miss-the-signal"
+  ],
+  "reviewed_pages": [
+    "cm18-measurement-uncertainty-and-later-bridges",
+    "cm18-measurement-uncertainty-and-later-bridges-examples"
+  ],
+  "decision": "escalate",
+  "reason": "A significant prerequisite gap is in an upstream numerical theorem and cannot be resolved solely on the assigned CM18 pages. The remaining findings identify local repairs for the owner’s resolution.",
+  "findings": [
+    {
+      "id": "rem-cm18-numerical-error",
+      "type": "prerequisite",
+      "reason": "Its finite-time estimate relies on thm-cm-verlet-finite-time-error-is-quadratic, whose proof step 2.1 uses the flow composition law to identify Phi_h(y_j) with y_{j+1}. def-cm-local-flow-of-an-autonomous-system explicitly says this law is not part of the definition; it is proved in clause 2 of lem-cm-local-flow-composition-law, which the finite-time theorem omits from deps. The assigned remark cites that theorem, so the owner must resolve this upstream proof gap."
+    },
+    {
+      "id": "def-cm18-calibration",
+      "type": "local",
+      "reason": "Clause 1 treats each reference input theta^(r) as a fixed realization, while clause 2 allows that same input to be the random value theta_ref^(r)+eta_r. Distinguish nominal reference values from actual or uncertainty-model values, and state whether the random deviation models uncertainty or physical variability. Clarify separately how uncertainty in the reference observations y is handled."
+    },
+    {
+      "id": "def-cm18-sampling-model",
+      "type": "local",
+      "reason": "The definition claims that IID errors are equivalent to IID observations after adding the fixed prediction Phi(theta,z), but does not justify the equivalence. State that the same constant translation preserves the laws and independence, or supply an exact earlier result."
+    },
+    {
+      "id": "rem-cm18-model-test",
+      "type": "local",
+      "reason": "A declared error bound alone does not specify the probability-measure family needed to define test size; require a law or an explicit class of laws for a robust size calculation. Also, nonrejection does not prove or quantify an effect size, but the nonrejection event can still be informative about effect values under a specified family, so the claim that it carries no information is too strong."
+    },
+    {
+      "id": "rem-cm18-numerical-error",
+      "type": "local",
+      "reason": "The roundoff lemma requires a metric state set X with V_h mapping X into X and a Lipschitz bound on that set. The remark specifies neither X nor invariance, and reuses L from the exact-flow estimate without establishing that it bounds V_h by 1+Lh. State a separate map constant and the positive-step condition for the displayed T/h bound. The listed sampling error also needs a definition or a link to the sampling model."
+    },
+    {
+      "id": "ex-cm18-pendulum-calibration-proposal",
+      "type": "local",
+      "reason": "Define the pendulum model data explicitly: the planar point mass, fixed pivot and length, angle reference, time domain, and the meaning and status of g. Clarify whether the force equation adopts a uniform acceleration field or an inertial/gravitational-mass identification. Define delta as a magnitude, such as the absolute finite-amplitude period discrepancy, rather than leaving the signed difference implicit."
+    },
+    {
+      "id": "ex-cm18-frame-change-of-an-observation-model",
+      "type": "local",
+      "reason": "The example applies the transformed protocol to an arbitrary open configuration domain Q, but post-cm02-force-superposition clause vi notes that a bounded Q can become time-dependent and fall outside the fixed-Q force branch. Restrict the claim to a suitable domain, such as Q=R^(3N), or describe only the coordinate transformation. Also say the error law need not remain the same: its pushforward under R can equal the original law when that law is rotation-invariant; state the transformed open error domain RV."
+    },
+    {
+      "id": "cex-cm18-finite-sample-may-miss-the-signal",
+      "type": "local",
+      "reason": "The product Bernoulli construction proves the sampling claim, but does not exhibit an instance of the repeated-observation protocol it names. Specify an admissible operational observable model, constant prediction and open error domain containing the Bernoulli error values, or narrow the counterexample to the abstract sampling model."
+    },
+    {
+      "id": "rem-cm18-qm-bridge",
+      "type": "scope",
+      "reason": "The unqualified statement that no trajectory is assigned between preparation and detection in a quantum experiment exceeds this CM scope and is not supported by the cited discussion. Rephrase it as a limit on what this classical item asserts, or specify the particular quantum model and definitions. The cited treatment presents a specific canonical-quantization prescription and a one-dimensional leading-order Hamilton-Jacobi example [Tong, section 4.8.1](https://davidtong.org/teaching/classical-dynamics/dynhtml/S4), not a universal claim about quantum models."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "cm18-measurement-uncertainty-and-later-bridges",
+      "decision": "escalate",
+      "reason": "The A-page summary repeats the finite-time numerical estimate that depends on the unresolved upstream theorem proof."
+    },
+    {
+      "id": "cm18-measurement-uncertainty-and-later-bridges-examples",
+      "decision": "repair",
+      "reason": "Recheck the companion summary against the proposed frame-domain qualification and the explicit protocol instance for the counterexample."
+    },
+    {
+      "id": "rem-cm18-model-test",
+      "decision": "repair",
+      "reason": "The calibration and sampling interfaces remain usable, but this item needs the probability-family and nonrejection corrections above."
+    },
+    {
+      "id": "rem-cm18-primary-report-contract",
+      "decision": "accept",
+      "reason": "Its source, setup, sampling, uncertainty and comparison requirements remain compatible with the calibration and sampling clarifications."
+    },
+    {
+      "id": "ex-cm18-pendulum-calibration-proposal",
+      "decision": "repair",
+      "reason": "It uses the calibration interface and needs the pendulum model and discrepancy definitions above."
+    },
+    {
+      "id": "ex-cm18-uniform-motion-sampling-check",
+      "decision": "accept",
+      "reason": "Its use of the adopted IID and second-moment hypotheses and finite sample-mean bound remains valid under the sampling-definition clarification."
+    },
+    {
+      "id": "cex-cm18-finite-sample-may-miss-the-signal",
+      "decision": "repair",
+      "reason": "It needs to instantiate the operational protocol whose sampling behavior it claims to counterexample."
+    }
+  ]
+}

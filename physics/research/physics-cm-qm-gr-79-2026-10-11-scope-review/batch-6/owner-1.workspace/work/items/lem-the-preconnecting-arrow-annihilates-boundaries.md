@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-preconnecting-arrow-annihilates-boundaries.md

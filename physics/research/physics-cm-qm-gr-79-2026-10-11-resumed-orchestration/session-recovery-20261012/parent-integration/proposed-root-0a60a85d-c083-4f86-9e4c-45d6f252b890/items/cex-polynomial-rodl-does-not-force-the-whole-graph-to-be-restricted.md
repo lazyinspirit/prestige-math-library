@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-polynomial-rodl-does-not-force-the-whole-graph-to-be-restricted.md

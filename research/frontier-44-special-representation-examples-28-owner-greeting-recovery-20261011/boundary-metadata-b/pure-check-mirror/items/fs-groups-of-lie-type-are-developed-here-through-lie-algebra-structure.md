@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-groups-of-lie-type-are-developed-here-through-lie-algebra-structure.md

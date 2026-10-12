@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-subalgebras-quotients-and-extensions-of-solvable-lie-algebras.md

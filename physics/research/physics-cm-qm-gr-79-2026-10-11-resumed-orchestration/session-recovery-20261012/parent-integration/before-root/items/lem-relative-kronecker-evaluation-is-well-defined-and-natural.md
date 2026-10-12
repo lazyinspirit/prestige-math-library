@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-kronecker-evaluation-is-well-defined-and-natural.md

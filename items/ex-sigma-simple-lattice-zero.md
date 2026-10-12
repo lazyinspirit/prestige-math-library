@@ -59,9 +59,7 @@ both points.
 
 2.1 ($\sigma(1)=0$.) Put $z=0$ in the sigma quasi-period law for $j=1$: $\omega_1=1$ and $\eta_1=2\zeta(1/2)$, so $\sigma(1)=-\exp(\eta_1\cdot\frac12)\sigma(0)=-\exp(\eta_1/2)\cdot0=0$. [F1, F2, step 1.1]
 
-3.1 ($\sigma'(1)=-\exp(\eta_1/2)\ne0$.) For $u\ne0$ the quasi-period law and step 2.1 give [F2, step 2.1]
-$$\frac{\sigma(1+u)-\sigma(1)}{u}=-\exp\!\bigl(\eta_1(u+1/2)\bigr)\frac{\sigma(u)-\sigma(0)}{u}.$$
-As $u\to0$, the second factor tends to $\sigma'(0)=1$ by step 1.1, and the exponential tends to $\exp(\eta_1/2)$ by the continuity derived in [F4]. Thus $\sigma'(1)=-\exp(\eta_1/2)\ne0$ by [F4]; simplicity and the residue $1$ of $\zeta$ at $1$ also follow directly from [F2]. [F2, F4, step 1.1, step 2.1]
+3.1 ($\sigma'(1)=-\exp(\eta_1/2)\ne0$.) For $u\ne0$ the quasi-period law and step 2.1 give [F2, step 2.1] $$\frac{\sigma(1+u)-\sigma(1)}{u}=-\exp\!\bigl(\eta_1(u+1/2)\bigr)\frac{\sigma(u)-\sigma(0)}{u}.$$ As $u\to0$, the second factor tends to $\sigma'(0)=1$ by step 1.1, and the exponential tends to $\exp(\eta_1/2)$ by the continuity derived in [F4]. Thus $\sigma'(1)=-\exp(\eta_1/2)\ne0$ by [F4]; simplicity and the residue $1$ of $\zeta$ at $1$ also follow directly from [F2]. [F2, F4, step 1.1, step 2.1]
 
 4.1 (Assembly.) Steps 1.1, 2.1 and 3.1 give $\sigma(0)=\sigma(1)=0$ with simple zeros, $\sigma'(0)=1$ and $\sigma'(1)=-\exp(\eta_1/2)\neq0$; step 1.2 gives residue $1$ of $\zeta$ at both points. This is the asserted statement. ∎
 

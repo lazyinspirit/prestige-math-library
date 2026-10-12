@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-length-comparison-for-a-conjugate-free-geodesic.md

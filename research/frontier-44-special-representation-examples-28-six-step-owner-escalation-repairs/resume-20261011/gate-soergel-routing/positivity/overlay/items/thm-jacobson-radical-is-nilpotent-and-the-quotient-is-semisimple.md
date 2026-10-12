@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple.md

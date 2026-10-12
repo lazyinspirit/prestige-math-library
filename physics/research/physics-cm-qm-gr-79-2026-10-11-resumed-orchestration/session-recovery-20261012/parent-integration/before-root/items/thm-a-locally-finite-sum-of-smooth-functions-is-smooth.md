@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-locally-finite-sum-of-smooth-functions-is-smooth.md

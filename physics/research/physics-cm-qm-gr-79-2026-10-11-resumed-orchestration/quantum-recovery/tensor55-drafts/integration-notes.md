@@ -1,0 +1,5 @@
+Research-only candidates for the three final55 consumer findings. No live carriers, manifests, readiness, imports, controllers, gates or mirrors were changed. The lead records the genuine finding and cycle 1/cap 2 before integrating. Candidate bindings describe exact observed bytes and are not acceptance or audit receipts. Recheck live bytes before application.
+
+The local-statistics candidate preserves the crossed effects and the universal pure non-product claim. It corrects Statement (b), proof 1.2 and the four-outcome remark; the positive magnitude is marginal product minus joint probability. Its public Statement changes, so the lead must finish the full direct/indirect consumer cone against the old/current dependency and alias union.
+
+The PVM Statement is byte-preserved. Proof 1.1 proves the limit bound and uses epsilon/(4M+1); proof 1.4 disposes of the zero measure before division. The marker Statement and proof 2.1 are byte-preserved; only proof 1.1 cross coefficients change. No new assumptions or narrower claims occur. Source35 suppliers were read only to establish these exact bindings; none was repaired or re-audited.

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-cycle-lemma-on-a-word-of-length-seven.md

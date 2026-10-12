@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-smooth-affine-conic-as-punctured-plane.md

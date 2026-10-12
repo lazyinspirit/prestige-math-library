@@ -51,13 +51,11 @@ $$f=\lambda g\qquad\mu\text{-almost everywhere}.$$
 
 1.1 If at least one of $f,g$ is zero almost everywhere, then equality is immediate. [L1, given]
 
-1.2 If $f=\lambda g$ almost everywhere for some $\lambda>0$, then [L1, given]
-$$|f+g|=(\lambda+1)|g|$$ almost everywhere, so $$\|f+g\|_p=(\lambda+1)\|g\|_p=\|f\|_p+\|g\|_p.$$
+1.2 If $f=\lambda g$ almost everywhere for some $\lambda>0$, then [L1, given] $$|f+g|=(\lambda+1)|g|$$ almost everywhere, so $$\|f+g\|_p=(\lambda+1)\|g\|_p=\|f\|_p+\|g\|_p.$$ [L1, given]
 
-1.3 Conversely, assume equality in Minkowski and that neither $f$ nor $g$ is zero almost everywhere. [L1, L2, L3, L4]
-The proof of [L1] showed that equality in Minkowski can only occur when both inequalities $$|f+g|\le |f|+|g|$$ and $$\int |f|\,|f+g|^{p-1}\,d\mu\le \|f\|_p\|f+g\|_p^{p-1}$$ and its $g$-analogue are equalities. The second and third equalities force the pairs $(|f|,|f+g|^{p-1})$ and $(|g|,|f+g|^{p-1})$ to satisfy Holder equality. By [L2], this makes $|f|$ and $|g|$ proportional almost everywhere. The first inequality then forces $(|f|+|g|)-|f+g|$ to have integral $0$; [L3] and [L4] therefore give $$|f+g|=|f|+|g|\qquad\mu\text{-almost everywhere}.$$
+1.3 Conversely, assume equality in Minkowski and that neither $f$ nor $g$ is zero almost everywhere. [L1, L2, L3, L4] The proof of [L1] showed that equality in Minkowski can only occur when both inequalities $$|f+g|\le |f|+|g|$$ and $$\int |f|\,|f+g|^{p-1}\,d\mu\le \|f\|_p\|f+g\|_p^{p-1}$$ and its $g$-analogue are equalities. The second and third equalities force the pairs $(|f|,|f+g|^{p-1})$ and $(|g|,|f+g|^{p-1})$ to satisfy Holder equality. By [L2], this makes $|f|$ and $|g|$ proportional almost everywhere. The first inequality then forces $(|f|+|g|)-|f+g|$ to have integral $0$; [L3] and [L4] therefore give $$|f+g|=|f|+|g|\qquad\mu\text{-almost everywhere}.$$ [L1, L2, L3, L4]
 
-2.1 Let $|f|=c|g|$ almost everywhere with $c>0$. Then [step 1.3, algebra]
-on the set where $g\ne0$, step 1.3 gives equality in the real triangle inequality for $f$ and $g$, so they have the same sign there. Hence $f=cg$ almost everywhere on $\{g\ne0\}$, and on $\{g=0\}$ both sides vanish. Thus $f=\lambda g$ almost everywhere for $\lambda=c>0$.
+2.1 Let $|f|=c|g|$ almost everywhere with $c>0$. Then [step 1.3, algebra] on the set where $g\ne0$, step 1.3 gives equality in the real triangle inequality for $f$ and $g$, so they have the same sign there. Hence $f=cg$ almost everywhere on $\{g\ne0\}$, and on $\{g=0\}$ both sides vanish. Thus $f=\lambda g$ almost everywhere for $\lambda=c>0$. [step 1.3, algebra]
 
 3.1 Steps 1.1 and 1.2 prove sufficiency, while steps 1.3 and 2.1 prove necessity. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+

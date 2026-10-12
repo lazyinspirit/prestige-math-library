@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-splitting-field-of-x-four-plus-two-x-squared-minus-eight.md

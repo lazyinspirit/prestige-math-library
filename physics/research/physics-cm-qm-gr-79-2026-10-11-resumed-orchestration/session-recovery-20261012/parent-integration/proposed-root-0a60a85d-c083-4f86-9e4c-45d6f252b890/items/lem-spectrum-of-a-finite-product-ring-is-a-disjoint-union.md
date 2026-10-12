@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectrum-of-a-finite-product-ring-is-a-disjoint-union.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-lefschetz-operator-factors-through-deleted-bott-samelsons.md

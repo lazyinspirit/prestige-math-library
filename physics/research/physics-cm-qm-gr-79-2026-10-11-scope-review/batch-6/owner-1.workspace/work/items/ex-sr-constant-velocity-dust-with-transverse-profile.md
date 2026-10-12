@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sr-constant-velocity-dust-with-transverse-profile.md

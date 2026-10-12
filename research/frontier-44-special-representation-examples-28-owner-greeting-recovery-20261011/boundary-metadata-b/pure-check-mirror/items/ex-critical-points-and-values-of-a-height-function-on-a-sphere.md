@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-critical-points-and-values-of-a-height-function-on-a-sphere.md

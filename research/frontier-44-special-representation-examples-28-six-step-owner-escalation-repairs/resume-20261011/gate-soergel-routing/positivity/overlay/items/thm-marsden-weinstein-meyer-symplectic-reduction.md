@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-marsden-weinstein-meyer-symplectic-reduction.md

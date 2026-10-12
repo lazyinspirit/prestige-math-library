@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-subcoalgebras-in-multiplicative-coordinate-algebras.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-chain-homotopy-is-an-equivalence-relation.md

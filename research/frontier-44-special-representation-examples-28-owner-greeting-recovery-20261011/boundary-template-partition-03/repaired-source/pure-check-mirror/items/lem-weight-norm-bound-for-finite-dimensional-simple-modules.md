@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weight-norm-bound-for-finite-dimensional-simple-modules.md

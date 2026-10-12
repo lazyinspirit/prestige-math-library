@@ -45,5 +45,4 @@ $f(x)<+\infty$ for almost every $x$.
 
 1.1 Let $F:=\{f=+\infty\}$, which is measurable. For every positive integer $n$, $n\chi_F\le f$. By [L1] and [L2], $n\mu(F)=\int n\chi_F\,d\mu\le\int f\,d\mu<+\infty$. [L1, L2, given]
 
-
-2.1 If $\mu(F)>0$, the inequalities in step 1.1 fail for sufficiently large $n$; if $\mu(F)=+\infty$, they fail already for $n=1$. Thus $\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\infty$ almost everywhere. [step 1.1, algebra] ∎
+ 2.1 If $\mu(F)>0$, the inequalities in step 1.1 fail for sufficiently large $n$; if $\mu(F)=+\infty$, they fail already for $n=1$. Thus $\mu(F)=0$, so the exceptional set where $f$ is infinite is null. Equivalently, $f<+\infty$ almost everywhere. [step 1.1, algebra] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-splitting-field-of-a-product-is-the-composite-of-splitting-fields.md

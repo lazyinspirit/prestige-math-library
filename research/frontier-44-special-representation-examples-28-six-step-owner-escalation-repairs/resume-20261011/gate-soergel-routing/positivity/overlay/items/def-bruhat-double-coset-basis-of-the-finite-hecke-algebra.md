@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-bruhat-double-coset-basis-of-the-finite-hecke-algebra.md

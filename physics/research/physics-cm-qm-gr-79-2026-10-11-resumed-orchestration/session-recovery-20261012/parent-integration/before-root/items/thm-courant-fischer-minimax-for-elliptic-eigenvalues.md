@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-courant-fischer-minimax-for-elliptic-eigenvalues.md

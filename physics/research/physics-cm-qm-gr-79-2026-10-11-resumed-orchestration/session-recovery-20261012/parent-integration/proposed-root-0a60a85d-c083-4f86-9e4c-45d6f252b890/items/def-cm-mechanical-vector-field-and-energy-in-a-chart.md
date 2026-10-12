@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-mechanical-vector-field-and-energy-in-a-chart.md

@@ -35,8 +35,7 @@ they agree on the whole generated sigma-algebra.
 
 **Proof technique:** direct.
 
-1.1 The family $\mathcal P=\{\{0\}\}$ is a pi-system by [L1], and [L1, L2]
-$\sigma(\mathcal P)=\mathcal P(X)$ because complements and unions recover $\{1\}$ and $X$. Define signed measures $$\mu(A):=0,\qquad \nu(A):=\mathbf 1_A(1).$$ They agree on the generating pi-system element $\{0\}$.
+1.1 The family $\mathcal P=\{\{0\}\}$ is a pi-system by [L1], and [L1, L2] $\sigma(\mathcal P)=\mathcal P(X)$ because complements and unions recover $\{1\}$ and $X$. Define signed measures $$\mu(A):=0,\qquad \nu(A):=\mathbf 1_A(1).$$ They agree on the generating pi-system element $\{0\}$. [L1, L2]
 
-2.1 However $\mu(\{1\})=0$ while $\nu(\{1\})=1$, so the signed measures are not [L2, step 1.1] ∎
-equal on the generated sigma-algebra. Therefore the claim is false.
+2.1 However $\mu(\{1\})=0$ while $\nu(\{1\})=1$, so the signed measures are not [L2, step 1.1] equal on the generated sigma-algebra. Therefore the claim is false. [L2, step 1.1] ∎
+

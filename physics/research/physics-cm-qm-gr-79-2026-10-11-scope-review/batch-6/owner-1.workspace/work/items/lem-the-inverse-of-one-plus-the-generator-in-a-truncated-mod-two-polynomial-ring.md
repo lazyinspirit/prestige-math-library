@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-inverse-of-one-plus-the-generator-in-a-truncated-mod-two-polynomial-ring.md

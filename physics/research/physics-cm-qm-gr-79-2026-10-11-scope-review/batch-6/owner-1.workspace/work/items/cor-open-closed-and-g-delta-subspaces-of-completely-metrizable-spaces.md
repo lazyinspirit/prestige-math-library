@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces.md

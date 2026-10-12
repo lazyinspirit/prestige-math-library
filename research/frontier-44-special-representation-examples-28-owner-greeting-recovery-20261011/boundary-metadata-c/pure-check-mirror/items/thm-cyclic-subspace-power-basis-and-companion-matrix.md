@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclic-subspace-power-basis-and-companion-matrix.md

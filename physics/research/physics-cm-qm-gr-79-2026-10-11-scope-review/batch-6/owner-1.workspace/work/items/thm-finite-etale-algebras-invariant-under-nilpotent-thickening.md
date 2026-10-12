@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-etale-algebras-invariant-under-nilpotent-thickening.md

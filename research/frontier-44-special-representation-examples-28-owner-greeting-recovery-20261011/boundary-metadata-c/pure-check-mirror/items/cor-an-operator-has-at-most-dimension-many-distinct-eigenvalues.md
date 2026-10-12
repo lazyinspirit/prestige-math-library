@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-an-operator-has-at-most-dimension-many-distinct-eigenvalues.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-type-a-reflection-realization-and-polynomial-ring.md

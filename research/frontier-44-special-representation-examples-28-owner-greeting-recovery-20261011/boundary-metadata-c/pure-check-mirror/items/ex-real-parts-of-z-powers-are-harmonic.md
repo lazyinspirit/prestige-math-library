@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-real-parts-of-z-powers-are-harmonic.md

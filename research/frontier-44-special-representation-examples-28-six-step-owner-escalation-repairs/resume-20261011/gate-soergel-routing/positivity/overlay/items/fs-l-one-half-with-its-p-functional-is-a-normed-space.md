@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-l-one-half-with-its-p-functional-is-a-normed-space.md

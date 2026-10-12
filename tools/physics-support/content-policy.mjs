@@ -28,6 +28,13 @@ const asJson = argv.includes('--json');
 // Step 3.  Keeping these modes explicit prevents expected missing draft files
 // from being misreported as a failed pre-authoring gate.
 const manifestOnly = argv.includes('--manifest-only');
+// Construction joins inspect existing carriers before canonical transcription.
+// This mode binds reuse to their unique actual page home, never just their ID.
+const authored = argv.includes('--authored');
+if (authored && (!manifestOnly || argv.includes('--audit'))) {
+  console.error('--authored requires --manifest-only and cannot be combined with --audit');
+  process.exit(2);
+}
 // `--manifest-only --audit` is the AUDIT's A0 shape. It exists because the two
 // modes ask different questions of the same file. For a future build batch,
 // manifest-only asks "may these ids be minted here?"; for an audit wave the
@@ -76,7 +83,7 @@ const rehomed = new Map();   // id -> {from_page, to_page}
   }
 }
 const files = argv.filter((arg, index) =>
-  arg !== '--json' && arg !== '--manifest-only' && arg !== '--audit' &&
+  arg !== '--json' && arg !== '--manifest-only' && arg !== '--authored' && arg !== '--audit' &&
   arg !== '--ledger' && argv[index - 1] !== '--ledger' &&
   arg !== '--rehomed' && argv[index - 1] !== '--rehomed');
 // The evidence ledger is required by the audit's POST-tagging mode, which reads
@@ -200,6 +207,20 @@ try {
 const scope = [];
 const seen = new Set();
 const plannedItems = new Map();
+const authoredHomes = new Map();
+if (authored) for (const file of readdirSync(join(REPO, 'library'), { recursive: true })) {
+  if (!file.endsWith('.md')) continue;
+  try {
+    const { fm } = split(readFileSync(join(REPO, 'library', file), 'utf8'));
+    if (!fm) continue;
+    const page = parseFrontmatter(fm);
+    if (typeof page.page !== 'string') continue;
+    for (const id of [...list(page, 'items'), ...list(page, 'examples')]) {
+      if (!authoredHomes.has(id)) authoredHomes.set(id, []);
+      authoredHomes.get(id).push({ page: page.page, file: `library/${file}` });
+    }
+  } catch { /* Unreadable pages cannot establish an authored home. */ }
+}
 for (const file of files) {
   const batch = readBatch(file);
   const aPages = batch.filter((page) => page?.kind === 'A');
@@ -236,9 +257,13 @@ for (const file of files) {
         const priorHome = planHomes.get(id);
         // A later run may revisit a draft page whose exact inventory already
         // exists from an earlier run. That is same-page reuse, not a mint.
-        // Keep rejecting an existing id unless the canonical plan already
-        // assigns it to this exact page (or an owner licensed a re-home).
-        const samePageReuse = items.has(id) && priorHome === page?.id;
+        // Pre-authoring reuse requires the canonical home; the authored join
+        // instead binds the unique actual carrier home before transcription.
+        const homes = authoredHomes.get(id) ?? [];
+        const samePageReuse = items.has(id) && (authored
+          ? homes.length === 1 && homes[0].page === page?.id
+            && homes[0].file === `library/${page?.category}/${page?.id}.md`
+          : priorHome === page?.id);
         // Audit scope is published content: every id has a file, by definition.
         if (!auditMode && !licensed && !samePageReuse && !importedIds.has(id) && items.has(id)) error('batch-item-already-exists', `${id} already has an item file and cannot be minted by this future batch`, id);
         if (licensed && !items.has(id)) error('batch-rehome-missing-item', `${id} is declared a re-home but has no item file to move`, id);
@@ -506,7 +531,7 @@ else {
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/physics-support/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only] [--json]');
+  console.error('usage: node tools/physics-support/content-policy.mjs research/level<n>-batch-*.pages.json [--manifest-only [--authored]] [--json]');
   console.error('       node tools/physics-support/content-policy.mjs --audit --ledger research/audit/wave<k>-<cat>.provenance.jsonl [--ledger ...] research/audit/wave<k>-*.pages.json [--json]');
   console.error('       node tools/physics-support/content-policy.mjs --audit --manifest-only research/audit/wave<k>-*.pages.json   # A0; no ledger exists yet');
   process.exit(2);

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-characters-of-direct-sums-tensor-products-and-duals.md

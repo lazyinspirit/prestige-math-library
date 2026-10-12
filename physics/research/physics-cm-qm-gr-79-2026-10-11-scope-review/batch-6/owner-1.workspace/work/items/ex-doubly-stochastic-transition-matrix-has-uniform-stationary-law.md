@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-doubly-stochastic-transition-matrix-has-uniform-stationary-law.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-eikonal-equation-as-a-viscosity-equation.md

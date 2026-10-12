@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cone-triangles-satisfy-tr-two-with-the-declared-rotation-sign.md

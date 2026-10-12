@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-abelian-variety-does-not-have-good-model-over-every-base.md

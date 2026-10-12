@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-twelvefold-way-labelled-labelled-at-three-and-two.md

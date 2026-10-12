@@ -68,36 +68,15 @@ $$\nabla_{\partial_i}\partial_j=\sum_k\Gamma^k{}_{ij}\partial_k.$$
 
 ## Refutation
 
-1.1 Choose the Euclidean line, $M=\mathbb R$, $g=dx^2$, $I=[0,1]$, $\gamma(t)=t$, and $J(t)=t^2\partial_x|_{\gamma(t)}$. [construct, given]
-The field is smooth up to both endpoints, and the interval is nondegenerate.
+1.1 Choose the Euclidean line, $M=\mathbb R$, $g=dx^2$, $I=[0,1]$, $\gamma(t)=t$, and $J(t)=t^2\partial_x|_{\gamma(t)}$. [construct, given] The field is smooth up to both endpoints, and the interval is nondegenerate. [construct, given]
 
-2.1 Verify $\gamma(t)=t$ is an affinely parametrized geodesic from the coordinate equations. [step 1.1, F2, F4, F6, algebra]
-Indeed $g_{11}=1$, so [F2] gives $\Gamma^1{}_{11}=0$. By [F6],
-$\nabla_{\partial_x}\partial_x=0$; [F4] then reduces the geodesic equation
-for $\gamma(t)=t$ to $\ddot\gamma=0$. Thus $\gamma$ is a nonconstant,
-affinely parametrized geodesic.
+2.1 Verify $\gamma(t)=t$ is an affinely parametrized geodesic from the coordinate equations. [step 1.1, F2, F4, F6, algebra] Indeed $g_{11}=1$, so [F2] gives $\Gamma^1{}_{11}=0$. By [F6], $\nabla_{\partial_x}\partial_x=0$; [F4] then reduces the geodesic equation for $\gamma(t)=t$ to $\ddot\gamma=0$. Thus $\gamma$ is a nonconstant, affinely parametrized geodesic. [step 1.1, F2, F4, F6, algebra]
 
-2.2 Compute that the curvature component vanishes, so the Jacobi curvature term is zero. [step 1.1, F2, F3, algebra]
-There is only one curvature component. In [F3] its two derivative terms
-cancel because $i=j=1$, and its two product terms cancel for the same reason;
-indeed all Christoffel symbols are zero by [F2]. Hence $R^1{}_{111}=0$ and
-$R(J,\dot\gamma)\dot\gamma=0$.
+2.2 Compute that the curvature component vanishes, so the Jacobi curvature term is zero. [step 1.1, F2, F3, algebra] There is only one curvature component. In [F3] its two derivative terms cancel because $i=j=1$, and its two product terms cancel for the same reason; indeed all Christoffel symbols are zero by [F2]. Hence $R^1{}_{111}=0$ and $R(J,\dot\gamma)\dot\gamma=0$. [step 1.1, F2, F3, algebra]
 
-2.3 Define instead $\bar J(t)=t^2\partial_x|_0$ along the constant geodesic $\bar\gamma(t)=0$. [step 1.1, F1, F2, F3, F4, F5, F6, algebra]
-Here [F2]-[F3] again give $\Gamma=0$ and $R=0$, [F4] says $\bar\gamma$ is
-geodesic, and [F5]-[F6] give $D_t^2\bar J=2\partial_x|_0\ne0$.
-Thus [F1] shows $\bar J$ is not Jacobi along $\bar\gamma$.
+2.3 Define instead $\bar J(t)=t^2\partial_x|_0$ along the constant geodesic $\bar\gamma(t)=0$. [step 1.1, F1, F2, F3, F4, F5, F6, algebra] Here [F2]-[F3] again give $\Gamma=0$ and $R=0$, [F4] says $\bar\gamma$ is geodesic, and [F5]-[F6] give $D_t^2\bar J=2\partial_x|_0\ne0$. Thus [F1] shows $\bar J$ is not Jacobi along $\bar\gamma$. [step 1.1, F1, F2, F3, F4, F5, F6, algebra]
 
-3.1 Compute the nonzero Jacobi residual for $J$ by pullback covariant differentiation. [step 2.1, step 2.2, F1, F5, F6, algebra]
-From [F5] and [F6], $D_t\partial_x=0$ along $\gamma$. The product rule
-therefore gives $D_tJ=2t\partial_x$ and $D_t^2J=2\partial_x$. By step 2.2,
-$$D_t^2J+R(J,\dot\gamma)\dot\gamma=2\partial_x\ne0,$$
-so [F1] shows $J$ is not a Jacobi field.
+3.1 Compute the nonzero Jacobi residual for $J$ by pullback covariant differentiation. [step 2.1, step 2.2, F1, F5, F6, algebra] From [F5] and [F6], $D_t\partial_x=0$ along $\gamma$. The product rule therefore gives $D_tJ=2t\partial_x$ and $D_t^2J=2\partial_x$. By step 2.2, $$D_t^2J+R(J,\dot\gamma)\dot\gamma=2\partial_x\ne0,$$ so [F1] shows $J$ is not a Jacobi field. [step 2.1, step 2.2, F1, F5, F6, algebra]
 
-4.1 The nonzero residual in step 3.1 refutes the universal claim. [step 1.1, step 2.3, step 3.1, F1, F5, given]
-In dimension zero every field along a geodesic is zero, and on the empty
-manifold there is no geodesic; neither case changes the one-dimensional
-counterexample. The zero field itself satisfies the Jacobi equation, but the
-specified field does not. The residual is nonzero throughout $[0,1]$,
-including its one-sided endpoint values. The examples are fixed data, require
-no choice, and make no if-and-only-if claim. ∎
+4.1 The nonzero residual in step 3.1 refutes the universal claim. [step 1.1, step 2.3, step 3.1, F1, F5, given] In dimension zero every field along a geodesic is zero, and on the empty manifold there is no geodesic; neither case changes the one-dimensional counterexample. The zero field itself satisfies the Jacobi equation, but the specified field does not. The residual is nonzero throughout $[0,1]$, including its one-sided endpoint values. The examples are fixed data, require no choice, and make no if-and-only-if claim. [step 1.1, step 2.3, step 3.1, F1, F5, given] ∎
+

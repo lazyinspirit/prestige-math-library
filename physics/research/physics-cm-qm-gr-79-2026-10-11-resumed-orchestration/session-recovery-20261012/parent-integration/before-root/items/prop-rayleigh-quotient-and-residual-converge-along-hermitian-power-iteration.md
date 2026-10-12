@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-rayleigh-quotient-and-residual-converge-along-hermitian-power-iteration.md

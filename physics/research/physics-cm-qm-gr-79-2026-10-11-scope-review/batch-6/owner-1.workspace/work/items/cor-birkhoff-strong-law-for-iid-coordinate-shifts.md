@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-birkhoff-strong-law-for-iid-coordinate-shifts.md

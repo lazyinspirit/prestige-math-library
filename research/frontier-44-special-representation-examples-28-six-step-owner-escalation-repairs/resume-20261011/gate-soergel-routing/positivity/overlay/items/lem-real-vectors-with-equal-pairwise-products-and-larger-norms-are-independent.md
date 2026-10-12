@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-real-vectors-with-equal-pairwise-products-and-larger-norms-are-independent.md

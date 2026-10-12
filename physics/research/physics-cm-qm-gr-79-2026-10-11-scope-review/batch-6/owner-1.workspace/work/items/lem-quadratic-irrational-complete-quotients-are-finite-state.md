@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quadratic-irrational-complete-quotients-are-finite-state.md

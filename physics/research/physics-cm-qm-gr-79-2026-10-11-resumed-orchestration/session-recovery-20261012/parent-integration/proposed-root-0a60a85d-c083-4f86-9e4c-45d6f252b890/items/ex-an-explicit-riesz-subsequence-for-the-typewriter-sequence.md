@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-explicit-riesz-subsequence-for-the-typewriter-sequence.md

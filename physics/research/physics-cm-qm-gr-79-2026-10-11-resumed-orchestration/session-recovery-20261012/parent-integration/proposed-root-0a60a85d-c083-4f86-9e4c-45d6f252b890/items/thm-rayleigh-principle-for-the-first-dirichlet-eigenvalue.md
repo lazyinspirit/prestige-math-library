@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rayleigh-principle-for-the-first-dirichlet-eigenvalue.md

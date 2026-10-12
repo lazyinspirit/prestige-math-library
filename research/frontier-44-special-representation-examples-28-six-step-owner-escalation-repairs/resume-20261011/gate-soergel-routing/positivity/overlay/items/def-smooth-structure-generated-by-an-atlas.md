@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-structure-generated-by-an-atlas.md

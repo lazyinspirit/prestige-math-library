@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-ck-and-multi-index-notation-in-several-variables.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-module-is-a-quotient-of-a-free-module.md

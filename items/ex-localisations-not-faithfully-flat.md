@@ -44,11 +44,8 @@ is flat but not faithfully flat.
 
 **Proof technique:** direct.
 
+ 1.1 By [L1], $\mathbb Z[1/2]$ is flat over $\mathbb Z$. [L1, given]
 
-1.1 By [L1], $\mathbb Z[1/2]$ is flat over $\mathbb Z$. [L1, given]
+ 1.2 The proper ideal $(2)\subset\mathbb Z$ becomes the unit ideal after localization, since $2$ is invertible in $\mathbb Z[1/2]$. Thus $(2)\mathbb Z[1/2]=\mathbb Z[1/2]$. By [L2], the map is not faithfully flat. [L2]
 
-
-1.2 The proper ideal $(2)\subset\mathbb Z$ becomes the unit ideal after localization, since $2$ is invertible in $\mathbb Z[1/2]$. Thus $(2)\mathbb Z[1/2]=\mathbb Z[1/2]$. By [L2], the map is not faithfully flat. [L2]
-
-
-2.1 So a proper localization can be flat without being faithfully flat. [algebra] ∎
+ 2.1 So a proper localization can be flat without being faithfully flat. [algebra] ∎ 

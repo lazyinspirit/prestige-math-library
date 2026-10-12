@@ -44,7 +44,6 @@ $$ (f*f)(x)= \begin{cases} 0,& x \le 0,\\ x,& 0 \le x \le 1,\\ 2-x,& 1 \le x \le
 
 1.1 For fixed $x$, the integrand is $1$ exactly when $y \in [0,1] \cap [x-1,x]$ and zero otherwise. This bounded-support integrand is integrable for every $x$, and $(f*f)(x)$ is the length of that overlap interval. [given, algebra]
 
-2.1 If $0 \le x \le 1$, the overlap is $[0,x]$, so $(f*f)(x)=x$. If [step 1.1, algebra]
-$1 \le x \le 2$, the overlap is $[x-1,1]$, so $(f*f)(x)=2-x$. For $x \le 0$ or $x \ge 2$, there is no overlap, so $(f*f)(x)=0$. [step 1.1, algebra]
+2.1 If $0 \le x \le 1$, the overlap is $[0,x]$, so $(f*f)(x)=x$. If [step 1.1, algebra] $1 \le x \le 2$, the overlap is $[x-1,1]$, so $(f*f)(x)=2-x$. For $x \le 0$ or $x \ge 2$, there is no overlap, so $(f*f)(x)=0$. [step 1.1, algebra]
 
-3.1 The explicit formula is positive precisely on $(0,2)$, so its support is $[0,2]=[0,1]+[0,1]$, as claimed by the displayed tent function. [step 2.1] ∎
+3.1 The explicit formula is positive precisely on $(0,2)$, so its support is $[0,2]=[0,1]+[0,1]$, as claimed by the displayed tent function. [step 2.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-coordinate-invariance-bezout-sum.md

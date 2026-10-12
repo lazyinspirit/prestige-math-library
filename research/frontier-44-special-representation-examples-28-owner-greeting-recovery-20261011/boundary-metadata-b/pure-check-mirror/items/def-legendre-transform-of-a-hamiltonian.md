@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-legendre-transform-of-a-hamiltonian.md

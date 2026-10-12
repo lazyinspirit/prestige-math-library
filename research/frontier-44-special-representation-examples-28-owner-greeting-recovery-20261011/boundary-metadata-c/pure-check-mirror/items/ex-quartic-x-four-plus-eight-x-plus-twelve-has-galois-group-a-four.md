@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-quartic-x-four-plus-eight-x-plus-twelve-has-galois-group-a-four.md

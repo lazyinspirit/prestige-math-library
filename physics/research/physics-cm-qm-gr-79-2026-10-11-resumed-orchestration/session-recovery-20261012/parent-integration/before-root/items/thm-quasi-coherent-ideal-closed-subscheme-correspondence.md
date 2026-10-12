@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quasi-coherent-ideal-closed-subscheme-correspondence.md

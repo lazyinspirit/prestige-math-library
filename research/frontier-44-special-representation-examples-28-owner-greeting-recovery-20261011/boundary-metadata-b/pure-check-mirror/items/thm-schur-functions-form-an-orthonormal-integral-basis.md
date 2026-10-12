@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-schur-functions-form-an-orthonormal-integral-basis.md

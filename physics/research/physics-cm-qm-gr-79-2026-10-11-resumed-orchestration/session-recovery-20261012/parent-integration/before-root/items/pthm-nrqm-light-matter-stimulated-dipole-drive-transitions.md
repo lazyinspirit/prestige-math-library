@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-light-matter-stimulated-dipole-drive-transitions.md

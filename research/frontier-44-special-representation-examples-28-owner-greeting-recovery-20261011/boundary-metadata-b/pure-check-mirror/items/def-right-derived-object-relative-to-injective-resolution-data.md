@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-right-derived-object-relative-to-injective-resolution-data.md

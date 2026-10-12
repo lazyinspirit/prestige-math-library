@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-littlewood-richardson-coefficients-stabilize-with-rank.md

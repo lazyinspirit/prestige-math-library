@@ -248,103 +248,21 @@ pointwise estimate in [F21] and limit assertion in [F22].
 
 **Proof technique:** direct.
 
-1.1 The declared choice principle is exactly Countable Choice. [F1, given]
-Its uses are confined to the supplier hypotheses listed in the Choice use note
-[F2, F3, F10, F12, F19, F20]; the integer cutoffs below use the Archimedean
-property and the displayed limit, not additional choices.
+1.1 The declared choice principle is exactly Countable Choice. [F1, given] Its uses are confined to the supplier hypotheses listed in the Choice use note [F2, F3, F10, F12, F19, F20]; the integer cutoffs below use the Archimedean property and the displayed limit, not additional choices. [F1, given, F2, F3, F10, F12, F19, F20]
 
-1.2 Openness supplies a positive closed ball, and the common cutoff bound is finite. [F5, F7, F9, construct]
-Choose $R>0$ so that $\overline B_R(0)\subseteq\Omega$, after taking
-an open ball about $0$ and reducing its radius. Take $\phi$ from [F5] and let
-$$ M=1+\sup_{\overline B_1(0)}|\phi| +\max_{1\le j\le n}\sup_{\overline B_1(0)}|\partial_j\phi| +\sup_{0\le t\le1}|\theta'(t)|. $$
-This is finite by [F9]. Also $\phi(0)=1$ and
-$\operatorname{supp}\phi\subset B_{3/4}(0)$.
+1.2 Openness supplies a positive closed ball, and the common cutoff bound is finite. [F5, F7, F9, construct] Choose $R>0$ so that $\overline B_R(0)\subseteq\Omega$, after taking an open ball about $0$ and reducing its radius. Take $\phi$ from [F5] and let $$ M=1+\sup_{\overline B_1(0)}|\phi| +\max_{1\le j\le n}\sup_{\overline B_1(0)}|\partial_j\phi| +\sup_{0\le t\le1}|\theta'(t)|. $$ This is finite by [F9]. Also $\phi(0)=1$ and $\operatorname{supp}\phi\subset B_{3/4}(0)$. [F5, F7, F9, construct]
 
-2.1 For $1\le p<n$, the scaled smooth bumps have supports shrinking to zero and values diverging there. [F4, F5, F8, F15, F17, F18, step 1.2, construct]
-By [F18] choose an integer $q\ge1$ with $q(n-p)>p$, then choose an
-integer $k_0>\max(1,R^{-1})$. For
-each $m\ge1$, put $k=m+k_0$ and
-$$ u_m(x)=k\phi(k^q x). $$
-Since $k\ge k_0>1$ and $q\ge1$, $k^{-q}\le k^{-1}<R$. The support
-of $u_m$, and of each of its first derivatives, lies in
-$B_{k^{-q}}(0)\subset B_R(0)$; thus [F4] gives
-$u_m\in C_c^\infty(\Omega;\mathbb R)\subset C_c^\infty(\Omega;\mathbb K)$.
-The chain rule gives
-$$ \partial_j u_m(x)=k^{q+1}(\partial_j\phi)(k^q x), \qquad u_m(0)=k\longrightarrow\infty. $$
-The derivative support assertion follows because a smooth function is zero
-with all derivatives on the open complement of its support.
+2.1 For $1\le p<n$, the scaled smooth bumps have supports shrinking to zero and values diverging there. [F4, F5, F8, F15, F17, F18, step 1.2, construct] By [F18] choose an integer $q\ge1$ with $q(n-p)>p$, then choose an integer $k_0>\max(1,R^{-1})$. For each $m\ge1$, put $k=m+k_0$ and $$ u_m(x)=k\phi(k^q x). $$ Since $k\ge k_0>1$ and $q\ge1$, $k^{-q}\le k^{-1}<R$. The support of $u_m$, and of each of its first derivatives, lies in $B_{k^{-q}}(0)\subset B_R(0)$; thus [F4] gives $u_m\in C_c^\infty(\Omega;\mathbb R)\subset C_c^\infty(\Omega;\mathbb K)$. The chain rule gives $$ \partial_j u_m(x)=k^{q+1}(\partial_j\phi)(k^q x), \qquad u_m(0)=k\longrightarrow\infty. $$ The derivative support assertion follows because a smooth function is zero with all derivatives on the open complement of its support. [F4, F5, F8, F15, F17, F18, step 1.2, construct]
 
-2.2 If $p=n$, the logarithmic radial cutoffs are smooth, supported, diverge at zero, and have the displayed gradient bound. [F4, F6, F8, F13, F14, F15, F16, F22, step 1.2, construct]
-By [F22], $h^n\exp(-nh^2)\to0$ as integers $h\to\infty$: apply its limit
-assertion with $x=h^2$, polynomial degree $n$, and $a=n$, and use
-$h^n\le h^{2n}$ for $h\ge1$ and [F16]. Choose an integer $h_0\ge1$
-so that $h^n\exp(-nh^2)\le1$ for $h\ge h_0$. For each $m\ge1$, set
-$h=m+h_0$, $L=h^2$, and $r_h=R\exp(-L)$. Since $L>0$, [F16] gives
-$0<\exp(-L)<\exp(0)=1$, so $0<r_h<R$. With
-$Q(x)=\sum_{j=1}^n x_j^2=|x|^2$ by [F6], define
-$$ w_h(x)=\begin{cases} 1,&Q(x)\le r_h^2,\\[2pt] \displaystyle\theta\!\left(\frac{\log(R^2/Q(x))}{2L}\right), &r_h^2<Q(x)<R^2,\\[6pt] 0,&Q(x)\ge R^2, \end{cases} \qquad u_m(x)=h w_h(x). $$
-For $r_h<|x|<R$, the scalar argument equals
-$t=\log(R/|x|)/L\in(0,1)$, by [F16]. The polynomial $Q$ and the
-composition with $\log Q$ are smooth where $Q>0$, by [F15]; $w_h$
-is constant near $0$. Since $\theta$ is smooth and constant on both
-half-lines beyond $[0,1]$, the pieces join smoothly at both radii. Its
-support lies in $\overline B_R(0)\subseteq\Omega$, so [F4] gives
-$u_m\in C_c^\infty(\Omega;\mathbb R)$, and $u_m(0)=h\to\infty$.
-On the annulus, differentiation gives
-$$ |\partial_j u_m(x)| =\frac{h|\theta'(t)||x_j|}{L|x|^2} \le\frac{Mh}{L|x|}. $$
-Outside the annulus the derivatives vanish, including at the joining radii
-because the step is smooth and constant on the adjacent half-lines.
+2.2 If $p=n$, the logarithmic radial cutoffs are smooth, supported, diverge at zero, and have the displayed gradient bound. [F4, F6, F8, F13, F14, F15, F16, F22, step 1.2, construct] By [F22], $h^n\exp(-nh^2)\to0$ as integers $h\to\infty$: apply its limit assertion with $x=h^2$, polynomial degree $n$, and $a=n$, and use $h^n\le h^{2n}$ for $h\ge1$ and [F16]. Choose an integer $h_0\ge1$ so that $h^n\exp(-nh^2)\le1$ for $h\ge h_0$. For each $m\ge1$, set $h=m+h_0$, $L=h^2$, and $r_h=R\exp(-L)$. Since $L>0$, [F16] gives $0<\exp(-L)<\exp(0)=1$, so $0<r_h<R$. With $Q(x)=\sum_{j=1}^n x_j^2=|x|^2$ by [F6], define $$ w_h(x)=\begin{cases} 1,&Q(x)\le r_h^2,\\[2pt] \displaystyle\theta\!\left(\frac{\log(R^2/Q(x))}{2L}\right), &r_h^2<Q(x)<R^2,\\[6pt] 0,&Q(x)\ge R^2, \end{cases} \qquad u_m(x)=h w_h(x). $$ For $r_h<|x|<R$, the scalar argument equals $t=\log(R/|x|)/L\in(0,1)$, by [F16]. The polynomial $Q$ and the composition with $\log Q$ are smooth where $Q>0$, by [F15]; $w_h$ is constant near $0$. Since $\theta$ is smooth and constant on both half-lines beyond $[0,1]$, the pieces join smoothly at both radii. Its support lies in $\overline B_R(0)\subseteq\Omega$, so [F4] gives $u_m\in C_c^\infty(\Omega;\mathbb R)$, and $u_m(0)=h\to\infty$. On the annulus, differentiation gives $$ |\partial_j u_m(x)| =\frac{h|\theta'(t)||x_j|}{L|x|^2} \le\frac{Mh}{L|x|}. $$ Outside the annulus the derivatives vanish, including at the joining radii because the step is smooth and constant on the adjacent half-lines. [F4, F6, F8, F13, F14, F15, F16, F22, step 1.2, construct]
 
-3.1 The subcritical construction has a uniform $W^{1,p}$ bound. [F2, F3, F5, F10, F11, F12, F17, step 1.2, step 2.1]
-The ball $B_{k^{-q}}(0)$ lies in a cube of measure
-$(2k^{-q})^n$, by [F10]. The pointwise bounds from [F5] and step 1.2,
-measurability from [F12], and integral monotonicity and homogeneity [F11]
-give
-$$ \int_\Omega |u_m|^p\,dx\le 2^n k^{p-qn},\qquad \int_\Omega |\partial_j u_m|^p\,dx \le 2^nM^p k^{p(q+1)-qn} =2^nM^p k^{p-q(n-p)}. $$
-Both exponents are negative: $p-q(n-p)<0$ by the choice of $q$, and
-$p-qn<0$ follows since $qn>q(n-p)>p$. Thus [F17] makes both
-quantities uniformly bounded for $k\ge1$. Since the classical
-derivatives are weak derivatives by [F3], [F2] now gives
-$\sup_m\|u_m\|_{W^{1,p}}<\infty$.
+3.1 The subcritical construction has a uniform $W^{1,p}$ bound. [F2, F3, F5, F10, F11, F12, F17, step 1.2, step 2.1] The ball $B_{k^{-q}}(0)$ lies in a cube of measure $(2k^{-q})^n$, by [F10]. The pointwise bounds from [F5] and step 1.2, measurability from [F12], and integral monotonicity and homogeneity [F11] give $$ \int_\Omega |u_m|^p\,dx\le 2^n k^{p-qn},\qquad \int_\Omega |\partial_j u_m|^p\,dx \le 2^nM^p k^{p(q+1)-qn} =2^nM^p k^{p-q(n-p)}. $$ Both exponents are negative: $p-q(n-p)<0$ by the choice of $q$, and $p-qn<0$ follows since $qn>q(n-p)>p$. Thus [F17] makes both quantities uniformly bounded for $k\ge1$. Since the classical derivatives are weak derivatives by [F3], [F2] now gives $\sup_m\|u_m\|_{W^{1,p}}<\infty$. [F2, F3, F5, F10, F11, F12, F17, step 1.2, step 2.1]
 
-3.2 Polar integration gives a uniform $L^n$ bound for each critical gradient term. [F16, F19, F20, step 2.2]
-For each $j$,
-$$ \int_\Omega|\partial_j u_m|^n\,dx \le \sigma(S^{n-1})\left(\frac{Mh}{L}\right)^n \int_{r_h}^R\frac{dr}{r}. $$
-Since $\log(R/r_h)=L$, [F16] and the fundamental theorem in [F20] give
-$\int_{r_h}^Rdr/r=L$. Therefore
-$$ \int_\Omega|\partial_j u_m|^n\,dx \le M^n\sigma(S^{n-1})\frac{h^n}{L^{n-1}} =M^n\sigma(S^{n-1})h^{2-n}, $$
-which is uniformly bounded because $n\ge2$ and $h\ge1$.
+3.2 Polar integration gives a uniform $L^n$ bound for each critical gradient term. [F16, F19, F20, step 2.2] For each $j$, $$ \int_\Omega|\partial_j u_m|^n\,dx \le \sigma(S^{n-1})\left(\frac{Mh}{L}\right)^n \int_{r_h}^R\frac{dr}{r}. $$ Since $\log(R/r_h)=L$, [F16] and the fundamental theorem in [F20] give $\int_{r_h}^Rdr/r=L$. Therefore $$ \int_\Omega|\partial_j u_m|^n\,dx \le M^n\sigma(S^{n-1})\frac{h^n}{L^{n-1}} =M^n\sigma(S^{n-1})h^{2-n}, $$ which is uniformly bounded because $n\ge2$ and $h\ge1$. [F16, F19, F20, step 2.2]
 
-3.3 The core and annulus estimates give a uniform critical $L^n$ bound for the function term. [F10, F11, F13, F14, F16, F17, F19, F20, F21, step 1.2, step 2.2]
-On the core $\overline B_{r_h}(0)$, [F10] bounds the measure by
-$(2r_h)^n$; hence
-$$ \int_{\overline B_{r_h}}|u_m|^n\,dx \le (2R)^n h^n\exp(-nh^2)\le(2R)^n $$
-by the choice of $h_0$. For the annulus, the mean value theorem and the
-derivative bound in step 1.2 imply
-$0\le\theta(t)\le Mt$ for $0\le t\le1$. The substitution
-$r=R\exp(-s)$ is decreasing: its oriented endpoints are $L$ and $0$,
-and reversing them gives the positive integral on $[0,L]$ with Jacobian
-$R\exp(-s)$. Thus [F20] gives
-$$ \begin{aligned} \int_{r_h}^R\left|\theta\!\left(\frac{\log(R/r)}{L}\right)\right|^n r^{n-1}\,dr &\le \frac{M^nR^n}{L^n}\int_0^L s^n\exp(-ns)\,ds\\ &\le \frac{M^nR^nn!}{L^n}\int_0^L\exp(-s)\,ds\\ &\le \frac{M^nR^nn!}{L^n}. \end{aligned} $$
-Here [F21] gives $s^n\le n!\exp(s)$; since $n\ge2$, monotonicity
-of the exponential in [F16] gives
-$\exp(-(n-1)s)\le\exp(-s)$, and [F20] evaluates
-$\int_0^L\exp(-s)ds=1-\exp(-L)\le1$. Applying [F19] to this
-radial annulus integral and multiplying by $h^n$ yields
-$$ \int_{B_R\setminus\overline B_{r_h}}|u_m|^n\,dx \le \sigma(S^{n-1})M^nR^nn!\frac{h^n}{L^n} =\sigma(S^{n-1})M^nR^nn!h^{-n}, $$
-also uniformly bounded.
+3.3 The core and annulus estimates give a uniform critical $L^n$ bound for the function term. [F10, F11, F13, F14, F16, F17, F19, F20, F21, step 1.2, step 2.2] On the core $\overline B_{r_h}(0)$, [F10] bounds the measure by $(2r_h)^n$; hence $$ \int_{\overline B_{r_h}}|u_m|^n\,dx \le (2R)^n h^n\exp(-nh^2)\le(2R)^n $$ by the choice of $h_0$. For the annulus, the mean value theorem and the derivative bound in step 1.2 imply $0\le\theta(t)\le Mt$ for $0\le t\le1$. The substitution $r=R\exp(-s)$ is decreasing: its oriented endpoints are $L$ and $0$, and reversing them gives the positive integral on $[0,L]$ with Jacobian $R\exp(-s)$. Thus [F20] gives $$ \begin{aligned} \int_{r_h}^R\left|\theta\!\left(\frac{\log(R/r)}{L}\right)\right|^n r^{n-1}\,dr &\le \frac{M^nR^n}{L^n}\int_0^L s^n\exp(-ns)\,ds\\ &\le \frac{M^nR^nn!}{L^n}\int_0^L\exp(-s)\,ds\\ &\le \frac{M^nR^nn!}{L^n}. \end{aligned} $$ Here [F21] gives $s^n\le n!\exp(s)$; since $n\ge2$, monotonicity of the exponential in [F16] gives $\exp(-(n-1)s)\le\exp(-s)$, and [F20] evaluates $\int_0^L\exp(-s)ds=1-\exp(-L)\le1$. Applying [F19] to this radial annulus integral and multiplying by $h^n$ yields $$ \int_{B_R\setminus\overline B_{r_h}}|u_m|^n\,dx \le \sigma(S^{n-1})M^nR^nn!\frac{h^n}{L^n} =\sigma(S^{n-1})M^nR^nn!h^{-n}, $$ also uniformly bounded. [F10, F11, F13, F14, F16, F17, F19, F20, F21, step 1.2, step 2.2]
 
-4.1 These estimates bound the critical $W^{1,n}$ norm while the origin values diverge. [F2, F3, step 3.2, step 3.3]
-Steps 3.2 and 3.3 bound the function term and each of the $n$ first
-derivative terms in [F2] uniformly in $L^n$. By [F3], the classical
-derivatives are the weak derivatives, so
-$\sup_m\|u_m\|_{W^{1,n}}<\infty$, while $u_m(0)=h\to\infty$.
+4.1 These estimates bound the critical $W^{1,n}$ norm while the origin values diverge. [F2, F3, step 3.2, step 3.3] Steps 3.2 and 3.3 bound the function term and each of the $n$ first derivative terms in [F2] uniformly in $L^n$. By [F3], the classical derivatives are the weak derivatives, so $\sup_m\|u_m\|_{W^{1,n}}<\infty$, while $u_m(0)=h\to\infty$. [F2, F3, step 3.2, step 3.3]
 
-5.1 Any bounded extension contradicts divergence of the corresponding test sequence at zero. [F23, step 3.1, step 4.1, assume-contra, discharge-contradiction]
-Suppose a bounded linear functional $T:W^{1,p}(\Omega;\mathbb K)\to\mathbb K$ agreed with ordinary point
-evaluation on all test functions. Boundedness would give a constant $C$ such
-that, for the corresponding sequence,
-$$ |u_m(0)|=|T([u_m])|\le C\|u_m\|_{W^{1,p}}. $$
-The right side is uniformly bounded by step 3.1 or step 4.1, while the left side
-tends to infinity. This contradiction proves unboundedness and rules out the
-asserted bounded extension. ∎
+5.1 Any bounded extension contradicts divergence of the corresponding test sequence at zero. [F23, step 3.1, step 4.1, assume-contra, discharge-contradiction] Suppose a bounded linear functional $T:W^{1,p}(\Omega;\mathbb K)\to\mathbb K$ agreed with ordinary point evaluation on all test functions. Boundedness would give a constant $C$ such that, for the corresponding sequence, $$ |u_m(0)|=|T([u_m])|\le C\|u_m\|_{W^{1,p}}. $$ The right side is uniformly bounded by step 3.1 or step 4.1, while the left side tends to infinity. This contradiction proves unboundedness and rules out the asserted bounded extension. [F23, step 3.1, step 4.1, assume-contra, discharge-contradiction] ∎
+

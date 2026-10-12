@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weak-global-w-two-p-dirichlet-regularity-for-the-laplacian.md

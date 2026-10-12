@@ -1,0 +1,1293 @@
+[
+  {
+    "order": 99,
+    "id": "cm-math-numerical",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Numerical",
+    "companion": "cm-math-numerical-examples",
+    "requires": [
+      "analyticity-liouville-and-morera",
+      "cm-math-canonical",
+      "cm-math-dynamics",
+      "compactness-in-metric-spaces",
+      "completeness-and-uniform-continuity",
+      "complex-differentiability-and-cauchy-riemann",
+      "complex-power-series-and-analytic-functions",
+      "contour-integration",
+      "field-extensions-and-the-complex-numbers",
+      "finite-counting-and-binomial-coefficients",
+      "fubini-and-change-of-variables",
+      "goursat-and-cauchys-theorem-in-a-convex-domain",
+      "inverse-and-implicit-function-theorems",
+      "line-integrals-and-the-gradient-theorem",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "metric-spaces",
+      "mixed-partials-taylor-and-extrema",
+      "norming-and-separation-under-hahn-banach",
+      "picard-lindelof-and-first-order-odes",
+      "properties-of-the-integral-and-the-working-ftc",
+      "rn-as-a-normed-space",
+      "the-exponential-function",
+      "the-inverse-function-theorem-completed",
+      "the-total-derivative"
+    ],
+    "items": [
+      {
+        "id": "lem-cm-roundoff-accumulation-in-one-step-schemes",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Additive per-step errors in a Lipschitzian one-step scheme accumulate geometrically: $\\eta((1+Lh)^n-1)/(Lh)$",
+        "dependency_level": 0,
+        "deps": [
+          "def-metric-space",
+          "def-lipschitz-holder-contraction",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "thm-ftc-second-part"
+        ],
+        "dependency_roles": {
+          "def-metric-space": "mathematical-premise",
+          "def-lipschitz-holder-contraction": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 3: accumulation of per-step perturbations with a Lipschitz constant, the summation argument for long-time energy estimates, printed pages 6-7",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Section 1.1: accumulation of per-step errors versus local truncation errors for one-step methods, printed pages 2-5",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $V:X\\to X$ map $X$ into itself, and let $L\\ge0$ and $h>0$. Assume\n\n$$d\\bigl(V(x),V(y)\\bigr)\\le(1+Lh)\\,d(x,y)\\qquad\\text{for all }x,y\\in X,$$\n\nwhich is a Lipschitz hypothesis on $V$ with constant $1+Lh$ ([[def-lipschitz-holder-contraction]]). Fix $z_0\\in X$, put $z_{j+1}:=V(z_j)$ for $j\\in\\mathbb N$, and let $x_0:=z_0$ together with points $x_{j+1}\\in X$ satisfying\n\n$$d\\bigl(x_{j+1},V(x_j)\\bigr)\\le\\eta\\qquad(j\\in\\mathbb N)$$\n\nfor a number $\\eta\\ge0$ (\"computational error per step\"). Then for every $n\\in\\mathbb N$:\n\n1. if $L>0$, $\\displaystyle d(x_n,z_n)\\le\\eta\\,\\frac{(1+Lh)^n-1}{Lh}$, and if $L=0$, $d(x_n,z_n)\\le n\\eta$;\n2. if moreover $F:X\\to\\mathbb R$ satisfies the Lipschitz bound $|F(x)-F(y)|\\le\\Lambda\\,d(x,y)$ for all $x,y\\in X$ and some $\\Lambda<\\infty$, then\n $$|F(x_n)-F(z_n)|\\le\\Lambda\\eta\\,\\frac{(1+Lh)^n-1}{Lh}\\quad(L>0),\\qquad |F(x_n)-F(z_n)|\\le\\Lambda n\\eta\\quad(L=0);$$\n3. if $nh\\le T$ for some $T>0$ and $L>0$, then $(1+Lh)^n\\le e^{LT}$ and therefore\n $$d(x_n,z_n)\\le\\eta\\,\\frac{e^{LT}-1}{Lh}\\le \\eta\\,e^{LT}\\frac{T}{h}.$$",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "def-cm-complex-phase-domains-and-holomorphic-maps",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Complex phase domains, holomorphic maps on $\\mathbb C^m$, and the complexified canonical form and bracket",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-linear-map",
+          "def-linear-map",
+          "def-invertible-euclidean-linear-map",
+          "def-directional-and-partial-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-star-shaped-open-subset-of-rn",
+          "def-transpose-of-a-matrix",
+          "def-matrix-product-and-identity-matrix",
+          "thm-complex-numbers-form-a-field"
+        ],
+        "dependency_roles": {
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-euclidean-linear-map": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-invertible-euclidean-linear-map": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-complex-numbers-form-a-field": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Section 1.1 (holomorphic functions in several variables) and Section 1.2 (polydiscs and power series), printed pages 13-27",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "**Holomorphic maps.** Let $m,p\\ge1$ and let $D\\subseteq\\mathbb C^m$ be open, identified with an open subset of $\\mathbb R^{2m}$ through $\\mathbb C^m\\cong\\mathbb R^{2m}$. A map $F:D\\to\\mathbb C^p$ is **complex differentiable at** $a\\in D$ when there is a map $L:\\mathbb C^m\\to\\mathbb C^p$ that is $\\mathbb C$-linear — $L(u+v)=L(u)+L(v)$ and $L(\\lambda u)=\\lambda L(u)$ for $\\lambda\\in\\mathbb C$ ([[def-linear-map]], [[def-euclidean-linear-map]], [[thm-complex-numbers-form-a-field]]) — with\n\n$$F(a+v)=F(a)+L(v)+r(v),\\qquad \\frac{\\lVert r(v)\\rVert}{\\lVert v\\rVert}\\longrightarrow0\\ \\ (v\\to0),$$\n\nthe norm being the Euclidean norm of $\\mathbb R^{2m}$ and $\\mathbb R^{2p}$ ([[def-total-derivative-in-euclidean-space]]). Such an $L$ is unique by the argument of [[def-complex-differentiability-holomorphic-and-entire]], applied componentwise; it is denoted $DF(a)$. The map $F$ is **holomorphic on** $D$ when it is complex differentiable at every point of $D$; for $m=p=1$ this is the notion of [[def-complex-differentiability-holomorphic-and-entire]]. For holomorphic $F$ and $k\\le m$ put $\\partial_{z_k}F(a):=DF(a)(e_k)$, the $k$-th coordinate derivative; for $p=1$ this is the partial derivative of [[def-directional-and-partial-derivatives]] in the complex coordinate direction.\n\n**Real analytic functions.** Let $N\\ge1$ and let $V\\subseteq\\mathbb R^N$ be open. A function $\\varphi:V\\to\\mathbb R$ is **real analytic at** $x\\in V$ when there are an open set $W\\subseteq\\mathbb C^N$ with $x\\in W$ and a holomorphic $F:W\\to\\mathbb C$ with $F(\\xi)=\\varphi(\\xi)$ for every $\\xi\\in W\\cap V$; $\\varphi$ is **real analytic on** $V$ when it is real analytic at every point of $V$. Thus real analyticity is defined here exactly as *admitting a local holomorphic extension*.\n\n**Polydiscs.** For $a\\in\\mathbb C^m$ and a polyradius $\\rho=(\\rho_1,\\dots,\\rho_m)$ with $0<\\rho_k\\le\\infty$ put\n\n$$\\Delta_\\rho(a):=\\{\\,z\\in\\mathbb C^m:\\ |z_k-a_k|<\\rho_k\\ \\text{for all }k\\,\\},\\qquad \\Gamma_\\rho(a):=\\{\\,z:\\ |z_k-a_k|=\\rho_k\\ \\text{for all }k\\,\\},$$\n\nthe open **polydisc** and its **distinguished boundary**; a polydisc is open and convex ([[def-metric-ball]], [[def-metric-topology]]).\n\n**Complex phase domains.** Let $d\\ge1$. A **complex phase domain** is a nonempty open $D\\subseteq\\mathbb C^{2d}$ whose points are written $Z=(z,w)$ with $z=(z^1,\\dots,z^d)$, $w=(w_1,\\dots,w_d)\\in\\mathbb C^d$. On it define the **complexified canonical two-form** and the **complexified Poisson bracket** of holomorphic functions $f,g:D\\to\\mathbb C$ by\n\n$$\\omega_{\\mathbb C}:=\\sum_{i=1}^d dz^i\\wedge dw_i,\\qquad \\{f,g\\}:=\\sum_{i=1}^d\\bigl(\\partial_{z^i}f\\,\\partial_{w_i}g-\\partial_{w_i}f\\,\\partial_{z^i}g\\bigr),$$\n\nand for a holomorphic $f:D\\to\\mathbb C$ its **complex Hamiltonian field** $X_f:=J\\nabla f$, where $J=\\begin{pmatrix}0_d&I_d\\\\-I_d&0_d\\end{pmatrix}$ is the standard symplectic matrix of [[def-cm-phase-domain-and-standard-symplectic-two-form]] and $\\nabla f=(\\partial_{z^1}f,\\dots,\\partial_{z^d}f,\\partial_{w_1}f,\\dots,\\partial_{w_d}f)$ is the gradient column of coordinate derivatives. The real subspace $\\mathbb R^{2d}\\subseteq\\mathbb C^{2d}$ and the restriction of $\\omega_{\\mathbb C}$, $J$ and $\\{\\,\\cdot\\,,\\,\\cdot\\,\\}$ to real-valued functions reproduce the real objects of [[def-cm-phase-domain-and-standard-symplectic-two-form]].\n\n**Distance domains.** For $U\\subseteq\\mathbb R^{2d}$ and $r>0$ put\n\n$$D(r):=\\{\\,\\zeta\\in\\mathbb C^{2d}:\\ \\operatorname{dist}(\\zeta,\\overline U)<r\\,\\},\\qquad \\operatorname{dist}(\\zeta,\\overline U):=\\inf\\{\\lVert\\zeta-x\\rVert:x\\in\\overline U\\},$$\n\nwhere $\\overline U$ is the closure of $U$ in $\\mathbb R^{2d}$ and the norm is the Euclidean norm of $\\mathbb C^{2d}\\cong\\mathbb R^{4d}$. Each $D(r)$ is open, contains $U$, and $D(r)\\subseteq D(r')$ for $r\\le r'$; if $U$ is star-shaped with respect to $0$ ([[def-star-shaped-open-subset-of-rn]]), then every $D(r)$ is star-shaped with respect to $0$ as well.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "def-cm-splitting-hamiltonian-and-verlet-map",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The splitting Hamiltonian $H=A+B$, the drift and kick maps, and the velocity-Verlet map",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Sections 1 and 5: the Stormer-Verlet scheme and its interpretation as the Strang splitting of the kinetic and potential flows, printed pages 1-3 and 12-13",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Sections 2.3 and 2.5: drift and kick evolution operators and the Stormer-Verlet method, printed pages 18-20 and 23-24",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$ and let $U\\subseteq\\mathbb R^{2d}$ be a phase domain with coordinates $z=(q,p)$, $q=(q^1,\\dots,q^d)$ and $p=(p_1,\\dots,p_d)$, standard two-form $\\omega_U=\\sum_i dq^i\\wedge dp_i$ and standard symplectic matrix $J$ ([[def-cm-phase-domain-and-standard-symplectic-two-form]]).\n\nFix a matrix $M\\in M_d(\\mathbb R)$ that is **symmetric and positive definite**, meaning $M^{\\mathsf T}=M$ ([[def-transpose-of-a-matrix]]) and $v^{\\mathsf T}Mv>0$ for every nonzero $v\\in\\mathbb R^d$; here $v^{\\mathsf T}Mv$ is the matrix product of [[def-matrix-product-and-identity-matrix]]. Fix an open $\\Pi\\subseteq\\mathbb R^d$ with $U\\subseteq\\Pi\\times\\mathbb R^d$ and a function $U_{\\mathrm{pot}}:\\Pi\\to\\mathbb R$ of class $C^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), whose gradient $\\nabla U_{\\mathrm{pot}}$ and Hessian matrix $H_{U_{\\mathrm{pot}}}$ are those of [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]]; write $\\nabla U_{\\mathrm{pot}}(q)$ as a column vector and abbreviate $U_{\\mathrm{pot}}(q)$ by $V(q)$ on $U$.\n\nOn $U$ define the **kinetic part** and **potential part**\n\n$$A(q,p):=\\tfrac12\\,p^{\\mathsf T}M^{-1}p,\\qquad B(q,p):=V(q),\\qquad H:=A+B,$$\n\nand the **drift** and **kick** maps $D_h,K_h:U\\to\\mathbb R^{2d}$,\n\n$$D_h(q,p):=(q+h\\,M^{-1}p,\\;p),\\qquad K_h(q,p):=(q,\\;p-h\\,\\nabla V(q)).$$\n\nBoth are defined wherever their displayed values lie in $U$; in particular $D_h$ is defined on $U$ whenever $(q+hM^{-1}p,p)\\in U$, and $K_h$ on $U$ whenever $(q,p-h\\nabla V(q))\\in U$. The **velocity-Verlet map** of the splitting $H=A+B$ at step $h\\in\\mathbb R$ is the composite\n\n$$V_h:=K_{h/2}\\circ D_h\\circ K_{h/2},$$\n\ndefined on the set of $(q,p)\\in U$ for which the composition exists and its value lies in $U$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Iterated Cauchy formula, power-series expansion and Cauchy estimates for functions continuous and separately holomorphic on a polydisc",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "thm-cauchy-integral-formula-circle",
+          "lem-cauchy-estimates-on-concentric-subdiscs",
+          "cor-cauchy-estimates-taylor-coefficients",
+          "thm-holomorphic-parameter-riemann-integral",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-uniform-limit-interchanges-complex-line-integrals",
+          "cor-ml-estimate-for-complex-line-integrals",
+          "def-complex-contours-reversal-concatenation-and-closedness",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree",
+          "def-vector-valued-derivative-and-integral",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "rem-complex-plane-euclidean-dictionary",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "thm-cauchy-integral-formula-circle": "mathematical-premise",
+          "lem-cauchy-estimates-on-concentric-subdiscs": "mathematical-premise",
+          "cor-cauchy-estimates-taylor-coefficients": "mathematical-premise",
+          "thm-holomorphic-parameter-riemann-integral": "mathematical-premise",
+          "thm-riemann-fubini-on-product-rectangles": "mathematical-premise",
+          "thm-uniform-limit-interchanges-complex-line-integrals": "mathematical-premise",
+          "cor-ml-estimate-for-complex-line-integrals": "mathematical-premise",
+          "def-complex-contours-reversal-concatenation-and-closedness": "mathematical-premise",
+          "thm-riemann-stieltjes-and-parametric-contour-integrals-agree": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "def-ck-and-multi-index-notation-in-several-variables": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "rem-complex-plane-euclidean-dictionary": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Theorem 1.2.1 and the Cauchy estimates following Proposition 1.2.2, printed pages 18-23",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $m\\ge1$, let $a\\in\\mathbb C^m$, let $\\rho$ be a polyradius with $0<\\rho_k<\\infty$, and let $f:\\Delta_\\rho(a)\\to\\mathbb C$ be continuous and holomorphic in each variable separately, that is, for every $k$ and every choice of the other coordinates the slice $\\zeta\\mapsto f(\\dots,\\zeta,\\dots)$ is holomorphic on its open disc ([[def-cm-complex-phase-domains-and-holomorphic-maps]], [[def-complex-differentiability-holomorphic-and-entire]]). For a polyradius $r$ with $r_k<\\rho_k$ put $M(r):=\\sup_{\\Gamma_r(a)}|f|$, a finite number.\n\nThen:\n\n1. **Iterated Cauchy formula.** For every $z\\in\\Delta_r(a)$,\n $$f(z)=\\frac{1}{(2\\pi i)^m}\\oint_{|\\zeta_1-a_1|=r_1}\\cdots\\oint_{|\\zeta_m-a_m|=r_m}\\frac{f(\\zeta)}{\\prod_{k}(\\zeta_k-z_k)}\\,d\\zeta_1\\cdots d\\zeta_m,$$\n and the iterated integrals in any order of the variables agree.\n2. **Power-series expansion.** For every polyradius $r'$ with $r_k<r'_k<\\rho_k$, and every $z\\in\\Delta_r(a)$,\n $$f(z)=\\sum_{\\alpha\\in\\mathbb N^m}c_\\alpha\\,(z-a)^\\alpha,\\qquad c_\\alpha=\\frac{1}{(2\\pi i)^m}\\oint_{\\Gamma_{r'}(a)}\\frac{f(\\zeta)\\,d\\zeta}{(\\zeta-a)^{\\alpha+\\mathbf 1}},$$\n where the coefficients $c_\\alpha$ do not depend on $r'$, the series converges absolutely and uniformly on every compact subset of $\\Delta_\\rho(a)$, and $|c_\\alpha|\\le M(r')\\prod_k (r'_k)^{-\\alpha_k}$.\n3. **Holomorphy, derivatives and estimates.** The function $f$ is holomorphic on $\\Delta_\\rho(a)$ in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]]. Its coordinate derivatives $\\partial_{z_k}f$ exist everywhere on $\\Delta_\\rho(a)$, are continuous and holomorphic in each variable separately there, and satisfy, for $0<s_k<\\rho_k$,\n $$|\\partial_{z_k}f(a)|\\le\\frac{M(s)}{s_k}.$$",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-verlet-local-truncation-error-is-cubic",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The velocity-Verlet step matches the exact flow through order two: local truncation error $O(h^3)$ on a convex tube",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-ftc-second-part",
+          "def-vector-valued-derivative-and-integral",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-matrix-product-and-identity-matrix",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "cor-hessian-is-symmetric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Theorem 2 and Section 5: the Stormer-Verlet method is of order 2 and is the Strang splitting of the kinetic and potential flows, printed pages 1-3 and 12-13",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Sections 1.1-1.2 and 2.5: Taylor comparison of one-step methods with the exact flow and the second-order Stormer-Verlet update, printed pages 2-7 and 23-24",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$ and let $U$, $M$, $V$, $A$, $B$, $H=A+B$, $D_h$, $K_h$ and $V_h$ be as in [[def-cm-splitting-hamiltonian-and-verlet-map]]. Let $W\\subseteq U$ be open, bounded and convex, let $K\\subseteq W$ be nonempty compact, and let $r>0$ satisfy $K+\\overline B_r(0)\\subseteq W$ ([[def-metric-ball]]). Put\n\n$$X_H(q,p):=(M^{-1}p,\\,-\\nabla V(q)),\\qquad M_0:=\\sup_W\\lVert X_H\\rVert,\\quad L_1:=\\sup_W\\lVert DX_H\\rVert,\\quad L_2:=\\sup_W\\lVert D^2X_H\\rVert,$$\n\nthe derivatives being the total derivatives with operator norms ([[def-jacobian-matrix-and-gradient]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-total-derivative-in-euclidean-space]]); assume all three numbers are finite (for example, this holds when $\\overline W\\subseteq U$). Let $\\Phi_t$ be the local flow of $X_H$ ([[def-cm-local-flow-of-an-autonomous-system]]).\n\nThen there exist $h_0>0$ and $C<\\infty$, depending only on $d$, $r$, $\\lVert M^{-1}\\rVert$, $\\sup_K\\lVert p\\rVert$, $M_0$, $L_1$ and $L_2$, such that for every $(q,p)\\in K$ and every $0<|h|\\le h_0$:\n\n1. $\\Phi_h(q,p)$ is defined and lies in $W$, and\n $$\\Bigl\\lVert\\Phi_h(q,p)-(q,p)-hX_H(q,p)-\\tfrac{h^2}{2}DX_H(q,p)X_H(q,p)\\Bigr\\rVert\\le C|h|^3.$$\n2. $V_h(q,p)$ is defined and lies in $W$, and its two block components satisfy\n $$V_h(q,p)=\\Bigl(q+hM^{-1}p-\\tfrac{h^2}{2}M^{-1}\\nabla V(q)+\\rho_1,\\;\\; p-h\\nabla V(q)-\\tfrac{h^2}{2}H_V(q)M^{-1}p+\\rho_2\\Bigr)$$\n with $\\lVert\\rho_1\\rVert,\\lVert\\rho_2\\rVert\\le C|h|^3$; equivalently $V_h$ and $\\Phi_h$ have the same expansion through order two,\n $$X_H(q,p)=\\bigl(M^{-1}p,\\,-\\nabla V(q)\\bigr),\\qquad DX_H(q,p)X_H(q,p)=\\bigl(-M^{-1}\\nabla V(q),\\,-H_V(q)M^{-1}p\\bigr).$$\n3. Consequently $\\lVert V_h(q,p)-\\Phi_h(q,p)\\rVert\\le C|h|^3$ for every $(q,p)\\in K$ and $0<|h|\\le h_0$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-holomorphic-map-calculus",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Calculus of holomorphic maps: chain rule, Wirtinger derivatives, coefficient extraction in one variable, and locally uniform limits",
+        "dependency_level": 3,
+        "deps": [
+          "cor-cauchy-estimates-taylor-coefficients",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "thm-holomorphic-parameter-riemann-integral",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-uniform-limit-continuous-complex-functions",
+          "def-uniform-convergence-of-complex-valued-functions",
+          "rem-locally-uniform-convergence-dictionary",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "rem-complex-plane-euclidean-dictionary",
+          "thm-complex-numbers-are-the-real-coordinate-plane"
+        ],
+        "dependency_roles": {
+          "cor-cauchy-estimates-taylor-coefficients": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-holomorphic-parameter-riemann-integral": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "thm-uniform-limit-continuous-complex-functions": "mathematical-premise",
+          "def-uniform-convergence-of-complex-valued-functions": "mathematical-premise",
+          "rem-locally-uniform-convergence-dictionary": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "rem-complex-plane-euclidean-dictionary": "mathematical-premise",
+          "thm-complex-numbers-are-the-real-coordinate-plane": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Sections 1.1-1.3 (holomorphic maps, power series, derivatives), printed pages 13-31",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $m,l,p\\ge1$ and let $D\\subseteq\\mathbb C^m$, $D'\\subseteq\\mathbb C^l$ be open, with holomorphy in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]].\n\n1. **Chain rule.** If $g:D'\\to D$ and $F:D\\to\\mathbb C^p$ are holomorphic, then $F\\circ g:D'\\to\\mathbb C^p$ is holomorphic and\n $$D(F\\circ g)(z)=DF\\bigl(g(z)\\bigr)\\circ Dg(z)\\qquad(z\\in D').$$\n2. **Wirtinger derivatives and the bracket matrix.** If $f:D\\to\\mathbb C$ is holomorphic, then $f$ is totally differentiable as a map of $\\mathbb R^{2m}$ and, writing $x_k,y_k$ for the real and imaginary parts of $z_k$,\n $$\\partial_{\\bar z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f+i\\,\\partial_{y_k}f\\bigr)=0,\\qquad \\partial_{z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f-i\\,\\partial_{y_k}f\\bigr)=Df(e_k).$$\n Consequently, for holomorphic $f,g$ on a complex phase domain $D\\subseteq\\mathbb C^{2d}$, with $\\nabla f=(\\partial_{z^1}f,\\dots,\\partial_{w_d}f)$ and $J$ the standard matrix,\n $$\\{f,g\\}=(\\nabla f)^{\\mathsf T}J\\,\\nabla g.$$\n3. **Coefficient extraction in a complex step variable.** Let $0<\\sigma\\le\\infty$ and let $D\\subseteq\\mathbb C^m$ be open, and let $F:\\{|h|<\\sigma\\}\\times D\\to\\mathbb C^p$ be holomorphic. Then for every $j\\in\\mathbb N$ the coefficient map\n $$c_j(z):=\\partial_h^jF(0,z)/j!$$\n is holomorphic on $D$, and for every $0<s<\\sigma$, $c_j(z)=\\frac{1}{2\\pi i}\\oint_{|h|=s}\\frac{F(h,z)}{h^{j+1}}\\,dh$.\n4. **Locally uniform limits.** If $F_n:D\\to\\mathbb C^p$ are holomorphic and $F_n\\to F$ locally uniformly on $D$ in the sense of [[rem-locally-uniform-convergence-dictionary]] and [[def-uniform-convergence-of-complex-valued-functions]], then $F$ is holomorphic on $D$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "The drift, kick and velocity-Verlet maps are canonical: $(DC)^{\\mathsf T}J\\,DC=J$ and $C^*\\omega=\\omega$",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "cor-hessian-is-symmetric": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Theorem 2 and its proof: the Stormer-Verlet scheme is symplectic of order 2, being a composition of symplectic Euler maps, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Sections 2.3-2.5: kinetic (drift) and potential (kick) evolution operators and the area-preserving Verlet map, printed pages 18-24",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $U$, $M$, $V$, $A$, $B$, $H=A+B$, $D_h$, $K_h$ and $V_h$ be as in [[def-cm-splitting-hamiltonian-and-verlet-map]], with $\\omega_U$ the standard two-form and $J=\\begin{pmatrix}0_d&I_d\\\\-I_d&0_d\\end{pmatrix}$ the standard symplectic matrix ([[def-cm-phase-domain-and-standard-symplectic-two-form]]). Then, on the sets where the maps are defined:\n\n1. $D_h$ is $C^\\infty$ with constant derivative\n $$DD_h(q,p)=\\begin{pmatrix}I_d&hM^{-1}\\\\0_d&I_d\\end{pmatrix},$$\n and $D_h$ is the time-$h$ map of the local flow ([[def-cm-local-flow-of-an-autonomous-system]]) of the Hamiltonian field $X_A(q,p)=(M^{-1}p,0)$ of the kinetic part; moreover\n $$DD_h(q,p)^{\\mathsf T}J\\,DD_h(q,p)=J.$$\n2. $K_h$ is $C^2$ with derivative\n $$DK_h(q,p)=\\begin{pmatrix}I_d&0_d\\\\-h\\,H_V(q)&I_d\\end{pmatrix},$$\n where $H_V$ is the Hessian matrix of $V$, and $K_h$ is the time-$h$ map of the local flow of the Hamiltonian field $X_B(q,p)=(0,-\\nabla V(q))$ of the potential part; moreover\n $$DK_h(q,p)^{\\mathsf T}J\\,DK_h(q,p)=J.$$\n3. Wherever $V_h$ is defined and $C^1$, its derivative satisfies\n $$DV_h(q,p)^{\\mathsf T}J\\,DV_h(q,p)=J,$$\n so that $V_h^*\\omega_U=\\omega_U$: the velocity-Verlet map preserves the standard two-form and is a local symplectomorphism.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "def-cm-analytic-splitting-data-and-exact-splitting-map",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Analytic splitting data with uniform holomorphic neighbourhood, and the exact symmetric splitting map $\\Psi_h$",
+        "dependency_level": 5,
+        "deps": [
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "def-star-shaped-open-subset-of-rn",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap"
+        ],
+        "dependency_roles": {
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Sections 1-3: the modified differential equation of a splitting method, the modified Hamiltonian for symplectic methods and the star-shaped global existence remark, printed pages 1-7",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Sections 1.1-1.2: holomorphic maps, polydiscs and separate holomorphy on complex domains, printed pages 13-27",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$. **Analytic splitting data** consists of the following objects.\n\n1. A nonempty open bounded set $U\\subseteq\\mathbb R^{2d}$, star-shaped with respect to $0$ ([[def-star-shaped-open-subset-of-rn]]), together with a number $\\rho>0$ and the **uniform holomorphic neighbourhood** $U_\\rho:=D(\\rho)=\\{\\zeta\\in\\mathbb C^{2d}:\\operatorname{dist}(\\zeta,\\overline U)<\\rho\\}$ of [[def-cm-complex-phase-domains-and-holomorphic-maps]].\n2. Functions $A,B:U\\to\\mathbb R$ (written additively as the **splitting** $H:=A+B$) that are real analytic on $U$ and admit **holomorphic extensions** $\\tilde A,\\tilde B:U_\\rho\\to\\mathbb C$ with $\\tilde A|_U=A$ and $\\tilde B|_U=B$, where holomorphy is the $\\mathbb C$-linear total-derivative notion of [[def-cm-complex-phase-domains-and-holomorphic-maps]].\n3. A constant $M\\ge1$ with $\\lVert X_{\\tilde A}\\rVert\\le M$ and $\\lVert X_{\\tilde B}\\rVert\\le M$ pointwise on $U_\\rho$, where $X_F=J\\nabla F$ is the complex Hamiltonian field of a holomorphic $F$ and the norm is the Euclidean norm of $\\mathbb C^{2d}\\cong\\mathbb R^{4d}$ ([[def-cm-complex-phase-domains-and-holomorphic-maps]], [[def-cm-phase-domain-and-standard-symplectic-two-form]]).\n4. A nonempty compact $K\\subseteq U$, star-shaped with respect to $0$; then $\\delta:=\\operatorname{dist}(K,\\mathbb R^{2d}\\setminus U)>0$ because $K$ is compact, $\\mathbb R^{2d}\\setminus U$ is closed and the two sets are disjoint ([[thm-heine-borel-rn]], [[def-metric-topology]], [[lem-relative-compact-closed-sets-have-a-positive-distance-gap]]).\n\nFor $t\\in\\mathbb C$ and $F\\in\\{\\tilde A,\\tilde B\\}$ denote by $\\varphi_F^t$ the local flow of the holomorphic field $X_F$, meaning the (unique) maximal solution family of $\\frac{d}{d\\tau}Y(\\tau)=X_F(Y(\\tau))$, $Y(0)=Z$ in complex time $\\tau$; its existence, uniqueness and differentiability are supplied by [[lem-cm-complex-analytic-flow-existence-and-holomorphy]] on this page, and the objects below are used only on the domains where the three flows are defined.\n\nThe **exact splitting map** at step $h\\in\\mathbb C$ is\n\n$$\\Psi_h:=\\varphi_{\\tilde A}^{h/2}\\circ\\varphi_{\\tilde B}^{h}\\circ\\varphi_{\\tilde A}^{h/2},$$\n\ndefined wherever the composition exists; for $m\\in\\mathbb N$ its $m$-th iterate is $\\Psi_h^m:=\\Psi_h\\circ\\cdots\\circ\\Psi_h$ ($m$ factors, $\\Psi_h^0=\\mathrm{id}$).",
+        "inventory_expansion_required": false,
+        "justified_by": [
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy"
+        ]
+      },
+      {
+        "id": "thm-cm-verlet-finite-time-error-is-quadratic",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-time global error of the velocity-Verlet method: $\\lVert z_n-\\Phi_{nh}(z_0)\\rVert\\le C(e^{LT}-1)h^2/L$",
+        "dependency_level": 5,
+        "deps": [
+          "lem-cm-verlet-local-truncation-error-is-cubic",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form",
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-chain-rule-for-total-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-product-and-identity-matrix",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-exponential-is-strictly-increasing",
+          "thm-derivative-of-exponential",
+          "thm-ftc-second-part"
+        ],
+        "dependency_roles": {
+          "lem-cm-verlet-local-truncation-error-is-cubic": "mathematical-premise",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form": "mathematical-premise",
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Sections 1-2 and 4: order of a one-step method and composition of consistent methods, printed pages 1-9",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Sections 1.1-1.2: local versus global error accumulation for one-step methods, printed pages 2-7",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Use the data, finite field and derivative bounds, and constants $h_1,C_1$ of [[lem-cm-verlet-local-truncation-error-is-cubic]] on an open bounded convex tube $W$, with compact $K_1$ and positive tube margin. Let $T>0$, $0<|h|\\le h_1$, and $n\\in\\mathbb N$ satisfy $n|h|\\le T$. Suppose $z_j=V_h^j(z_0)$ and $y_j=\\Phi_{jh}(z_0)$ both lie in $K_1$ for $0\\le j\\le n$. With $L=L_1=\\sup_W\\|DX_H\\|$, the following holds:\n\n$$\\|z_n-y_n\\|\\le C_1h^2\\frac{e^{LT}-1}{L}\\quad(L>0),\\qquad \\|z_n-y_n\\|\\le C_1Th^2\\quad(L=0).$$\n\nThe constants are independent of $n,h,T$, with the displayed data fixed.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The flow of a bounded holomorphic field on a polydisc: existence in complex time, displacement bound, holomorphy, and the composition law",
+        "dependency_level": 6,
+        "deps": [
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "lem-cm-holomorphic-map-calculus",
+          "thm-holomorphic-parameter-riemann-integral",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-uniform-limit-continuous-complex-functions",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "def-vector-valued-derivative-and-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "def-directional-and-partial-derivatives",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "dependency_roles": {
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "thm-holomorphic-parameter-riemann-integral": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "thm-uniform-limit-continuous-complex-functions": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Sections 1.1-1.3: holomorphic functions, power series and continuous dependence on data, printed pages 13-31",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 1: Taylor expansion of the flow of a modified vector field and the formal expansion of a one-step method, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $n\\ge1$, let $D\\subseteq\\mathbb C^n$ be open, let $F:D\\to\\mathbb C^n$ be holomorphic in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]] with $\\lVert F\\rVert\\le M$ everywhere on $D$ for some $M>0$, let $Z_0\\in D$ and let $s>0$ satisfy $\\Delta_s(Z_0)\\subseteq D$ ([[def-cm-complex-phase-domains-and-holomorphic-maps]]). Put\n\n$$t_0:=\\frac{s}{8nM},\\qquad D_{t_0}:=\\{t\\in\\mathbb C:\\ |t|\\le t_0\\}.$$\n\nThen there is a map $\\Phi:D_{t_0}\\times B(Z_0,s/4)\\to D$ such that:\n\n1. **Solution.** For every $Z\\in B(Z_0,s/4)$ the curve $t\\mapsto\\Phi(t,Z)$ is the unique solution of $\\frac{d}{d\\tau}Y(\\tau)=F(Y(\\tau))$, $Y(0)=Z$, on $D_{t_0}$ among all solutions with values in the ball $B(Z,s/2)$; it satisfies $\\lVert\\Phi(t,Z)-Z\\rVert\\le M|t|$ and $\\|\\Phi(t,Z)-Z\\|\\le s/(8n)$.\n2. **Holomorphy.** $\\Phi$ is holomorphic on the open set $\\{|t|<t_0\\}\\times B(Z_0,s/4)$ in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]], and $\\Phi(0,Z)=Z$.\n3. **Composition and inverse.** The local solutions glue uniquely on overlapping initial-data balls. For the resulting local flow, whenever both sides are defined on the same connected continuation of the solution, $\\Phi(s_2,\\Phi(s_1,Z))=\\Phi(s_1+s_2,Z)$. In particular, for sufficiently small $s_1$ for which the forward and backward local solutions exist, $\\Phi(-s_1,\\Phi(s_1,Z))=Z$. No assertion that every translated point remains in the displayed initial-data ball is made.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Hamiltonian flows and the exact splitting map preserve the complexified canonical form and the Poisson bracket",
+        "dependency_level": 7,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-holomorphic-map-calculus",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-directional-and-partial-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 2: symplectic methods have a locally Hamiltonian modified equation; the matrix identity J f'(y) symmetric, printed pages 5-6",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Section 1 and Theorem 2: the exact flow of a Hamiltonian system is symplectic and symplecticity is closed under composition, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$ and let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data as in [[def-cm-analytic-splitting-data-and-exact-splitting-map]], with $J$ the standard matrix and $\\omega_{\\mathbb C}$, $\\{\\,\\cdot\\,,\\,\\cdot\\,\\}$ the complexified form and bracket of [[def-cm-complex-phase-domains-and-holomorphic-maps]]. Let $F\\in\\{\\tilde A,\\tilde B\\}$ and let $\\varphi_F^t$ be the flow of $X_F$ as in [[lem-cm-complex-analytic-flow-existence-and-holomorphy]], on the domain where it is defined.\n\n1. For every $(t,Z)$ in the flow domain, $\\varphi_F^t$ is holomorphic near $Z$, its derivative is invertible, and\n $$D\\varphi_F^t(Z)^{\\mathsf T}J\\,D\\varphi_F^t(Z)=J.$$\n2. For every $h$ and every point $Z$ where $\\Psi_h$ is defined and holomorphic, $D\\Psi_h(Z)$ is invertible and\n $$D\\Psi_h(Z)^{\\mathsf T}J\\,D\\Psi_h(Z)=J.$$\n3. For all holomorphic $f,g$ on an open set containing $\\Psi_h(Z)$,\n $$\\{f\\circ\\Psi_h,\\;g\\circ\\Psi_h\\}(Z)=\\{f,g\\}\\bigl(\\Psi_h(Z)\\bigr).$$",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-difference-operator-and-domain-loss-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The difference operator $\\Delta_h=\\Psi_h^*-\\mathrm{id}$ loses a controlled domain margin and is bounded by $C_dM|h|/b$",
+        "dependency_level": 8,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "lem-cm-holomorphic-map-calculus",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 1: the difference operator and the modified equation of a one-step method, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Section 1.2: Cauchy estimates on polydiscs and the mean value bound for holomorphic functions, printed pages 18-23",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$ and let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data as in [[def-cm-analytic-splitting-data-and-exact-splitting-map]], with complexified form and bracket as in [[def-cm-complex-phase-domains-and-holomorphic-maps]]. For $r>0$ put $D(r):=\\{\\zeta\\in\\mathbb C^{2d}:\\operatorname{dist}(\\zeta,\\overline U)<r\\}$.\n\nThere is a constant $C_0=C_0(d)\\ge1$ such that for every integer $N\\ge2$, with\n\n$$b:=\\frac{\\rho}{8N},\\qquad r_N:=\\frac{\\rho}{C_0MN},\\qquad q:=\\frac{C_dM|h|}{b},$$\n\nthe following holds for every complex $h$ with $0<|h|\\le r_N$. Write $D_k:=D(\\rho/2-2bk)$ for $0\\le k\\le N$; then $D_0=D(\\rho/2)$, $D_N=D(\\rho/4)\\supseteq K$, and $D_N\\subseteq D_k\\subseteq D_0$ for $k\\le N$. Define the **difference operator**\n\n$$\\Delta_hf:=f\\circ\\Psi_h-f$$\n\nfor functions $f$ holomorphic on $D_{k-1}$, where the composition is read on $D_k$. Then:\n\n1. **Domain control.** For every $k=1,\\dots,N$ the map $\\Psi_h$ is holomorphic on $D_k$, maps $D_k$ into $D_{k-1}$, and satisfies $\\lVert\\Psi_h(Z)-Z\\rVert\\le2M|h|\\le b$ for all $Z\\in D_k$.\n2. **Single-step bound.** If $f$ is holomorphic on $D_{k-1}$ with $|f|\\le F$ there, then $\\Delta_hf$ is holomorphic on $D_k$ and\n $$\\lvert\\Delta_hf(Z)\\rvert\\le\\frac{C_dM|h|}{b}\\,F\\qquad(Z\\in D_k),$$\n with $C_d:=4d^2$.\n3. **Iterates.** Taking $C_0:=\\max\\{16,\\,128d^2\\}$ one has $q\\le1/4$ for $|h|\\le r_N$, and for every $f$ holomorphic on $D_0$ and every $1\\le k\\le N$, the iterate $\\Delta_h^kf$ is holomorphic on $D_k$ and\n $$\\lvert\\Delta_h^kf(Z)\\rvert\\le q^k\\,|f|_{D_0}\\qquad(Z\\in D_k).$$",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "def-cm-modified-log-coefficients-and-truncations",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The truncated binomial family $T_h^{s,N}$, the truncated logarithm $L_N(h)$, its coefficient fields $X_j$ and the truncations $X^{[N]}$",
+        "dependency_level": 9,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "lem-cm-difference-operator-and-domain-loss-bound",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-holomorphic-map-calculus",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-factorial-and-falling-factorial",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "lem-cm-difference-operator-and-domain-loss-bound": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-factorial-and-falling-factorial": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 1: the formal modified equation as the logarithm of the one-step map, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Section 1.2: power series and coefficient extraction in one variable, printed pages 18-23",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data ([[def-cm-analytic-splitting-data-and-exact-splitting-map]]), let $C_0=C_0(d)$ be the constant of [[lem-cm-difference-operator-and-domain-loss-bound]], and fix the notation $D(r)$, $b=\\rho/(8N)$, $r_N=\\rho/(C_0MN)$ and $D_k=D(\\rho/2-2bk)$ of that lemma. Throughout, $N\\ge2$ is an integer, $|h|\\le r_N$, and all functions are read on the domain $D_N$ unless stated otherwise.\n\n**Binomial coefficients.** For $s\\in\\mathbb C$ and $k\\in\\mathbb N$ define\n\n$$\\binom{s}{k}:=\\frac{\\prod_{i=0}^{k-1}(s-i)}{k!},$$\n\nthe empty product being $1$, and $k!$ the factorial of [[def-factorial-and-falling-factorial]] embedded in $\\mathbb C$; thus $\\binom{s}{0}=1$, $\\binom{s}{k}$ is a polynomial in $s$ of degree $k$ with rational coefficients, $\\binom{m}{k}$ agrees with the elementary count for integers $m$, and\n\n$$\\left.\\frac{d}{ds}\\binom{s}{k}\\right|_{s=0}=\\frac{(-1)^{k+1}}{k}\\quad(k\\ge1),\\qquad \\left.\\frac{d}{ds}\\binom{s}{0}\\right|_{s=0}=0.$$\n\n**Difference operator and pullbacks.** For $f$ holomorphic on $D_0$ put $\\Delta_hf:=f\\circ\\Psi_h-f$, a holomorphic function on $D_1$ by [[lem-cm-difference-operator-and-domain-loss-bound]]; for $k\\ge0$ let $\\Delta_h^kf$ be the $k$-fold iterate, holomorphic on $D_k$, and let $\\Psi_h^m$ be the $m$-fold iterate of $\\Psi_h$ (so $\\Psi_h^0=\\mathrm{id}$).\n\n**Truncated binomial family.** For $s\\in\\mathbb C$, $f$ holomorphic on $D_0$ and $Z\\in D_N$ define\n\n$$T_h^{s,N}f:=\\sum_{k=0}^{N}\\binom{s}{k}\\,\\Delta_h^kf,$$\n\na finite sum of functions each holomorphic on $D_k\\supseteq D_N$: it is a holomorphic function on $D_N$, and for fixed $h$ and $f$ the map $s\\mapsto T_h^{s,N}f$ is a polynomial of degree at most $N$ with values in the holomorphic functions on $D_N$.\n\n**Truncated logarithm and coefficient fields.** The **truncated logarithm** is\n\n$$L_N(h)f:=\\sum_{k=1}^{N}\\frac{(-1)^{k+1}}{k}\\,\\Delta_h^kf=T_h^{s,N}f\\Big|_{s=0}\\text{ differentiated in }s,$$\n\nthat is, $L_N(h)f=\\frac{d}{ds}\\bigl(T_h^{s,N}f\\bigr)\\big|_{s=0}$; it is holomorphic on $D_N$. For $1\\le j\\le N$ and each coordinate function $z_i$ ($i=1,\\dots,2d$), the function $h\\mapsto(L_N(h)z_i)(Z)$ is holomorphic on $\\{|h|\\le r_N\\}$ and vanishes at $h=0$ (each $\\Delta_h^kz_i$ is $O(h^k)$), so the quotient $(L_N(h)z_i)(Z)/h$ has a removable singularity at $h=0$ and a well-defined Taylor coefficient of $h^{j-1}$; define the **$j$-th coefficient field** $X_j:D_N\\to\\mathbb C^{2d}$ by\n\n$$(X_j)_i(Z):=\\bigl[h^{j-1}\\bigr]\\frac{(L_N(h)z_i)(Z)}{h}\\qquad(Z\\in D_N,\\ i=1,\\dots,2d),$$\n\nthe coefficient being extracted by Cauchy's formula in the one variable $h$ ([[lem-cm-holomorphic-map-calculus]] clause 3). Finally the **truncation of the modified field** at order $N$ is\n\n$$X^{[N]}(h):=\\sum_{j=1}^{N}h^{j-1}X_j,$$\n\na holomorphic map $D_N\\to\\mathbb C^{2d}$ for every $|h|\\le r_N$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The binomial family of the splitting pullback is multiplicative and bracket-preserving, and its logarithm is a derivation",
+        "dependency_level": 10,
+        "deps": [
+          "def-cm-modified-log-coefficients-and-truncations",
+          "lem-cm-difference-operator-and-domain-loss-bound",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-holomorphic-map-calculus",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-factorial-and-falling-factorial"
+        ],
+        "dependency_roles": {
+          "def-cm-modified-log-coefficients-and-truncations": "mathematical-premise",
+          "lem-cm-difference-operator-and-domain-loss-bound": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-factorial-and-falling-factorial": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 1: the logarithm of a one-step method as a formal series in the step size, printed pages 1-3",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Section 1.2: coefficient extraction and polynomial identities for power series in one variable, printed pages 18-23",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data, and use all notation of [[def-cm-modified-log-coefficients-and-truncations]]: the domains $D(r)$ and $D_k$, the parameters $b=\\rho/(8N)$, $r_N=\\rho/(C_0MN)$, the binomial coefficients $\\binom{s}{k}$, the difference operator $\\Delta_h$, the truncated family $T_h^{s,N}$ and the truncated logarithm $L_N(h)$. Let $f,g$ be holomorphic on $D_0$. Here $D_j$ in a coefficient identity means the common inner domain $D(\\rho/4)$, independent of the truncation order; $j=0,1$ coefficients are extracted using any truncation $N\\ge\\max\\{2,j\\}$. For $j\\in\\mathbb N$, $s\\in\\mathbb C$ and $Z\\in D(\\rho/4)$ define the **coefficient polynomial**\n\n$$P_j(s)f:=\\sum_{k=0}^{j}\\binom{s}{k}\\,\\bigl[h^j\\bigr]\\bigl(\\Delta_h^kf\\bigr),$$\n\nwhere $[h^j](\\Delta_h^kf):=\\frac{1}{j!}\\partial_h^j\\bigl(\\Delta_h^kf\\bigr)\\big|_{h=0}$ is the $j$-th Taylor coefficient at $h=0$ of the function $h\\mapsto(\\Delta_h^kf)(Z)$, holomorphic for $|h|\\le r_j$ by [[lem-cm-difference-operator-and-domain-loss-bound]]; thus $P_j(s)f$ is a polynomial of degree at most $j$ in $s$ with coefficients in the holomorphic functions on $D_j$.\n\nThen:\n\n1. **Integer case.** For all integers $Q\\ge2$, $0\\le m\\le Q$ and every $|h|\\le r_Q$, $T_h^{m,Q}f=f\\circ\\Psi_h^m$ on the domain $D_m$ allocated with order $Q$.\n2. **Multiplicativity and bracket identity.** For every $j\\in\\mathbb N$ and every $s\\in\\mathbb C$, as identities of holomorphic functions on $D_j$,\n $$P_j(s)(fg)=\\sum_{j_1+j_2=j}P_{j_1}(s)f\\cdot P_{j_2}(s)g,\\qquad P_j(s)\\{f,g\\}=\\sum_{j_1+j_2=j}\\bigl\\{P_{j_1}(s)f,\\;P_{j_2}(s)g\\bigr\\}.$$\n3. **The logarithm is a derivation.** Put $D_jf:=P_j'(0)f\\in\\mathcal O(D_j)$ (the derivative in $s$ at $s=0$), so that $D_jf=[h^j]\\bigl(L(h)f\\bigr)$ for the formal logarithm $L(h):=\\sum_{k\\ge1}\\frac{(-1)^{k+1}}{k}\\Delta_h^k$. Then $D_0=0$, each $D_j$ is a $\\mathbb C$-linear local differential operator on holomorphic functions, and\n $$D_j(fg)=D_jf\\cdot g+f\\cdot D_jg,\\qquad D_j\\{f,g\\}=\\{D_jf,\\,g\\}+\\{f,\\,D_jg\\}$$\nas functions on $D_j$; equivalently the coefficient of $h^j$ in $L(h)(fg)$ and in $L(h)\\{f,g\\}$ obeys the product rule and the bracket derivation rule. Moreover $D_jf$ for $h$-degree $j\\le N$ agrees with the $j$-th coefficient of the concrete holomorphic function $h\\mapsto L_N(h)f$ restricted to $|h|\\le r_N$ whenever $j\\le N$.\n\nMoreover $D_jf=\\sum_i(D_jz_i)\\partial_{z_i}f$ for $j\\ge1$: each coefficient derivation is the coordinate vector field used in the later Hamiltonian construction.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-truncated-log-coefficient-bounds",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Bounds for the truncated logarithm: $\\lvert L_N(h)z_i/h\\rvert\\le8M/3$ and $\\lvert X_j\\rvert\\le(8M/3)(C_0Mj/\\rho)^{j-1}$",
+        "dependency_level": 11,
+        "deps": [
+          "def-cm-modified-log-coefficients-and-truncations",
+          "lem-cm-difference-operator-and-domain-loss-bound",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "lem-cm-holomorphic-map-calculus",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "cor-cauchy-estimates-taylor-coefficients",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-cm-modified-log-coefficients-and-truncations": "mathematical-premise",
+          "lem-cm-difference-operator-and-domain-loss-bound": "mathematical-premise",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "cor-cauchy-estimates-taylor-coefficients": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Sections 1-2: the geometric bound on the coefficients of the logarithm of the numerical map, printed pages 1-6",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "J. Lebl, Tasty Bits of Several Complex Variables, Chapter 1, Section 1.2: Cauchy estimates for Taylor coefficients, printed pages 18-23",
+              "url": "https://www.jirka.org/scv/scv.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data, and use the notation of [[def-cm-modified-log-coefficients-and-truncations]] and [[lem-cm-difference-operator-and-domain-loss-bound]]: $b=\\rho/(8N)$, $r_N=\\rho/(C_0MN)$ with $C_0=\\max\\{16,128d^2\\}$, the domains $D_k$, the difference operator $\\Delta_h$, the truncated logarithm $L_N(h)$ and the coefficient fields $X_j$, $1\\le j\\le N$. Then for every integer $N\\ge2$, every $|h|\\le r_N$ and every coordinate index $i$:\n\n1. $\\lVert\\Delta_h^kz_i\\rVert_{D_k}\\le2M|h|\\,q^{k-1}$ for $1\\le k\\le N$, where $q=C_dM|h|/b\\le1/4$.\n2. The function $h\\mapsto\\frac{(L_N(h)z_i)(Z)}{h}$, initially defined for $0<|h|\\le r_N$, extends holomorphically to the disc $|h|\\le r_N$, and\n $$\\left\\lvert\\frac{(L_N(h)z_i)(Z)}{h}\\right\\rvert\\le\\frac{2M}{1-q}\\le\\frac{8M}{3}\\qquad(|h|\\le r_N,\\ Z\\in D_N).$$\n3. For $1\\le j\\le N$ and every $Z\\in D_N$,\n $$\\max_i\\lvert(X_j)_i(Z)\\rvert\\le\\frac{8M}{3}\\,r_N^{-(j-1)},$$\n and the sharper estimate\n $$\\max_i\\lvert(X_j)_i(Z)\\rvert\\le\\frac{8M}{3}\\left(\\frac{C_0Mj}{\\rho}\\right)^{j-1},$$\n obtained for $j\\ge2$ by computing the $j$-th field with truncation order $j$, and for $j=1$ from $X_1=X_{\\tilde A}+X_{\\tilde B}$; the two bounds agree in the form $r_N^{-(j-1)}=(C_0MN/\\rho)^{j-1}$.\nThe corresponding Euclidean field bounds are these component bounds multiplied by $\\sqrt{2d}$.\n\n4. The field $X_j$ is independent of the truncation order: if $N,N'\\ge j$ then the $j$-th coefficient fields of $L_N$ and $L_{N'}$ agree on $D(\\rho/4)$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Each coefficient field $X_j$ of the modified logarithm is a holomorphic symplectic field with a global holomorphic primitive $H_j$ on the star-shaped domain, and $X_1=X_{\\tilde A+\\tilde B}$",
+        "dependency_level": 12,
+        "deps": [
+          "def-cm-modified-log-coefficients-and-truncations",
+          "lem-cm-truncated-log-coefficient-bounds",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-holomorphic-map-calculus",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-poincare-lemma-for-star-shaped-domains",
+          "def-star-shaped-open-subset-of-rn",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-directional-and-partial-derivatives",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "thm-heine-borel-rn",
+          "def-metric-ball",
+          "def-metric-topology"
+        ],
+        "dependency_roles": {
+          "def-cm-modified-log-coefficients-and-truncations": "mathematical-premise",
+          "lem-cm-truncated-log-coefficient-bounds": "mathematical-premise",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-poincare-lemma-for-star-shaped-domains": "mathematical-premise",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Section 2: existence of a local modified Hamiltonian for symplectic methods and its global existence on star-shaped domains, printed pages 5-6",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 1 'Hamiltonian systems', Section 3: symplectic transformations and the closedness of the contracted form, printed pages 5-7",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week1.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data with $\\tilde H:=\\tilde A+\\tilde B$, and let $X_j$, $j\\ge1$, be the coefficient fields of [[def-cm-modified-log-coefficients-and-truncations]] (independent of the truncation order by [[lem-cm-truncated-log-coefficient-bounds]] clause 4), with the bound $\\max_i\\lvert(X_j)_i\\rvert\\le\\beta_j:=\\frac{8M}{3}\\bigl(\\frac{C_0Mj}{\\rho}\\bigr)^{j-1}$ of that lemma on the common retained domain $E:=D(\\rho/4)$. In this item $D_j$ denotes $E$ for every $j\\ge1$, including $j=1$, whose coefficient is extracted using any order $N\\ge2$. Write $X_j=\\sum_{k=1}^d u^{(j)}_k\\partial_{z^k}+\\sum_{k=1}^d v^{(j)}_k\\partial_{w_k}$ in the coordinates $Z=(z,w)$ of [[def-cm-complex-phase-domains-and-holomorphic-maps]], and let $A_j:=\\bigl(\\partial_{Z_l}(X_j)_k\\bigr)_{k,l}$ be its complex Jacobian. Then for every $j\\ge1$:\n\n1. $X_j$ is a holomorphic vector field on $D_j$: all $u^{(j)}_k,v^{(j)}_k$ are holomorphic on $D_j$ and real-valued on $D_j\\cap\\mathbb R^{2d}$.\n2. $A_jJ+JA_j^{\\mathsf T}=0$ on $D_j$; equivalently, the contraction one-form\n $$\\alpha_j:=\\iota_{X_j}\\omega_{\\mathbb C}=\\sum_{k=1}^d u^{(j)}_k\\,dw_k-\\sum_{k=1}^d v^{(j)}_k\\,dz^k$$\n is closed there.\n3. There is a holomorphic $H_j:D_j\\to\\mathbb C$ with $dH_j=\\alpha_j$, $H_j(0)=0$ and $H_j$ real-valued on $D_j\\cap\\mathbb R^{2d}$, and\n $$\\lvert\\nabla H_j\\rvert\\le\\sqrt{2d}\\,\\beta_j,\\qquad \\lvert H_j(Z)\\rvert\\le\\sqrt{2d}\\,\\beta_j\\,\\lvert Z\\rvert\\qquad(Z\\in D_j).$$\n4. $X_1=X_{\\tilde H}=J\\nabla\\tilde H$; that is, for every holomorphic $f$ on the domain of $X_1$, $X_1f=d\\!f(X_{\\tilde H})$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Symmetry of the splitting map forces $X_j=0$ for every even $j$, so the first modified-energy correction is of order $h^2$",
+        "dependency_level": 13,
+        "deps": [
+          "def-cm-modified-log-coefficients-and-truncations",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+          "lem-cm-truncated-log-coefficient-bounds",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+          "lem-cm-holomorphic-map-calculus",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-complex-phase-domains-and-holomorphic-maps",
+          "def-factorial-and-falling-factorial"
+        ],
+        "dependency_roles": {
+          "def-cm-modified-log-coefficients-and-truncations": "mathematical-premise",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations": "mathematical-premise",
+          "lem-cm-truncated-log-coefficient-bounds": "mathematical-premise",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form": "mathematical-premise",
+          "lem-cm-holomorphic-map-calculus": "mathematical-premise",
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-complex-phase-domains-and-holomorphic-maps": "mathematical-premise",
+          "def-factorial-and-falling-factorial": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Sections 2-3: for symmetric methods the modified equation contains only even powers of the step size, printed pages 5-7",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Theorem 7 and Section 4: adjoint methods, symmetric methods and even order, printed pages 7-12",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Let $d\\ge1$, let $(U,U_\\rho,\\tilde A,\\tilde B,M,K,\\delta,\\Psi_h)$ be analytic splitting data ([[def-cm-analytic-splitting-data-and-exact-splitting-map]]), and use the notation of [[def-cm-modified-log-coefficients-and-truncations]] and [[lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives]]: the coefficient fields $X_j$ ($j\\ge1$, with $X_j$ acting on holomorphic functions as the coefficient operator $D_j=[h^j]L(h)$, and $X_j=D_j$ in the notation of that lemma) and the normalized primitives $H_j$ with $dH_j=\\iota_{X_j}\\omega_{\\mathbb C}$, $H_j(0)=0$, on the domains $D_j$.\n\n1. **Reversibility.** For every $h$ for which both sides are defined, $\\Psi_{-h}=\\Psi_h^{-1}$.\n2. **Parity.** $X_j=0$ for every even $j\\ge2$.\n3. **Modified energy.** Consequently $H_2=0$, and the truncated modified Hamiltonian $H^{[N]}:=H+\\sum_{j=2}^{N}h^{j-1}H_j$ equals $H+h^2H_3+\\cdots+h^{N-1}H_N$ on $D_N$, so the first possible correction is of order $h^2$.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-optimal-truncation-gives-exponential-local-defect",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Optimal finite truncation gives an exponential local splitting defect",
+        "dependency_level": 14,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-modified-log-coefficients-and-truncations",
+          "lem-cm-truncated-log-coefficient-bounds",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+          "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-modified-log-coefficients-and-truncations": "mathematical-premise",
+          "lem-cm-truncated-log-coefficient-bounds": "mathematical-premise",
+          "lem-cm-binomial-pullback-family-and-its-log-are-derivations": "mathematical-premise",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives": "mathematical-premise",
+          "lem-cm-symmetric-log-parity-removes-odd-coefficients": "mathematical-premise",
+          "lem-cm-complex-analytic-flow-existence-and-holomorphy": "mathematical-premise",
+          "lem-cm-cauchy-formula-and-power-series-on-polydiscs": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "For analytic splitting data of [[def-cm-analytic-splitting-data-and-exact-splitting-map]], put $m=2d$, $C_0=\\max\\{16,128d^2\\}$, $C_1=1024m^2$, $C_2=16eC_0C_1$, $a=\\rho/(C_2M)$ and $c=a\\log(2)/2$. For $0<h\\le a/3$, set $N=\\lfloor a/h\\rfloor\\ge2$ and\n\n$$H_h=\\tilde H+\\sum_{j=2}^{N}h^{j-1}H_j,\\qquad X^{[N]}(h)=\\sum_{j=1}^{N}h^{j-1}X_j,$$\n\nusing the normalized primitives of [[lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives]]. The time-$h$ flow $\\varphi_{H_h}^h$ exists for initial data in $D(\\rho/8)$, for sufficiently small $h$ depending only on the displayed data. There is $C<\\infty$, independent of $h,N$, such that\n\n$$\\|\\Psi_h(Z)-\\varphi_{H_h}^h(Z)\\|\\le CMh\\,e^{-c/h}\\qquad(Z\\in D(\\rho/8)).$$\n\nThe same result holds for the splitting with $A,B$ interchanged. The series defining $H_h$ is finite.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-modified-energy-differs-by-order-two",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The optimal modified Hamiltonian differs from the original by order two",
+        "dependency_level": 15,
+        "deps": [
+          "lem-cm-optimal-truncation-gives-exponential-local-defect",
+          "lem-cm-truncated-log-coefficient-bounds",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+          "lem-cm-symmetric-log-parity-removes-odd-coefficients"
+        ],
+        "dependency_roles": {
+          "lem-cm-optimal-truncation-gives-exponential-local-defect": "mathematical-premise",
+          "lem-cm-truncated-log-coefficient-bounds": "mathematical-premise",
+          "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives": "mathematical-premise",
+          "lem-cm-symmetric-log-parity-removes-odd-coefficients": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Use the splitting data, constants and $N(h),H_h$ of [[lem-cm-optimal-truncation-gives-exponential-local-defect]]. There are constants $C_E,C_G<\\infty$, independent of $0<h\\le a/3$, such that on $D(\\rho/8)$\n\n$$|H_h-\\tilde H|\\le C_Eh^2,\\qquad \\|\\nabla H_h\\|\\le C_G.$$\n\nIn particular $H_h$ is real analytic on the real part. Its additive normalization is $H_h(0)=H(0)$, so the comparison includes constants.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "thm-cm-analytic-verlet-energy-on-exponential-times",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Analytic Verlet retains order-two energy accuracy on exponential times",
+        "dependency_level": 16,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "lem-cm-optimal-truncation-gives-exponential-local-defect",
+          "lem-cm-modified-energy-differs-by-order-two"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "lem-cm-optimal-truncation-gives-exponential-local-defect": "mathematical-premise",
+          "lem-cm-modified-energy-differs-by-order-two": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "For analytic splitting data, let $0<h\\le h_0$ be sufficiently small as in [[lem-cm-optimal-truncation-gives-exponential-local-defect]], and let $z_j=\\Psi_h^j(z_0)\\in K$ for $0\\le j\\le n$. There are constants $C,c,h_0>0$, independent of $h,n$, such that\n\n$$|H_h(z_n)-H_h(z_0)|\\le Cnh\\,e^{-c/h},\\qquad |H(z_n)-H(z_0)|\\le Ch^2\\quad\\text{if }nh\\le e^{c/(2h)}.$$\n\nHere $H_h$ is the finite optimally truncated Hamiltonian with $|H_h-H|\\le Ch^2$ on a neighbourhood of $K$. For kinetic-plus-potential data, choose the analytic labels $\\tilde A=V$, $\\tilde B=\\tfrac12p^{\\mathsf T}\\mathsf M^{-1}p$ to obtain the velocity-Verlet map $K_{h/2}\\circ D_h\\circ K_{h/2}$; the other order is the position-Verlet variant. Each variant has the stated energy estimate. Compact retention of numerical iterates is assumed; no original-trajectory accuracy on exponential times is asserted.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "lem-cm-separate-roundoff-energy-accumulation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Bounded per-step state perturbations add a separate linear energy term",
+        "dependency_level": 17,
+        "deps": [
+          "thm-cm-analytic-verlet-energy-on-exponential-times",
+          "lem-cm-optimal-truncation-gives-exponential-local-defect",
+          "lem-cm-modified-energy-differs-by-order-two"
+        ],
+        "dependency_roles": {
+          "thm-cm-analytic-verlet-energy-on-exponential-times": "mathematical-premise",
+          "lem-cm-optimal-truncation-gives-exponential-local-defect": "mathematical-premise",
+          "lem-cm-modified-energy-differs-by-order-two": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "Use the analytic data and small step of [[thm-cm-analytic-verlet-energy-on-exponential-times]]. Suppose computed points $x_j\\in K$ satisfy $\\|x_{j+1}-\\Psi_h(x_j)\\|\\le\\eta$, for $0\\le j<n$, with $\\eta\\ge0$ small enough that all comparison segments lie in $D(\\rho/8)$. Then\n\n$$|H(x_n)-H(x_0)|\\le 2C_Eh^2+Cnh e^{-c/h}+C_Gn\\eta.$$\n\nIn particular the state-error contribution is $C_G(t/h)\\eta$ for $t=nh$. This is a deterministic additive-error hypothesis, not an analysis of floating-point arithmetic or a claim of rounded symplecticity.",
+        "inventory_expansion_required": false
+      },
+      {
+        "id": "rem-cm-scope-of-the-certified-verlet-estimates",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope of the certified velocity-Verlet estimates: exact arithmetic, compact tubes, roundoff, and absent all-time claims",
+        "dependency_level": 18,
+        "deps": [
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form",
+          "lem-cm-verlet-local-truncation-error-is-cubic",
+          "thm-cm-verlet-finite-time-error-is-quadratic",
+          "lem-cm-roundoff-accumulation-in-one-step-schemes",
+          "thm-cm-analytic-verlet-energy-on-exponential-times",
+          "lem-cm-separate-roundoff-energy-accumulation",
+          "def-cm-splitting-hamiltonian-and-verlet-map"
+        ],
+        "dependency_roles": {
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form": "mathematical-premise",
+          "lem-cm-verlet-local-truncation-error-is-cubic": "mathematical-premise",
+          "thm-cm-verlet-finite-time-error-is-quadratic": "mathematical-premise",
+          "lem-cm-roundoff-accumulation-in-one-step-schemes": "mathematical-premise",
+          "thm-cm-analytic-verlet-energy-on-exponential-times": "mathematical-premise",
+          "lem-cm-separate-roundoff-energy-accumulation": "mathematical-premise",
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Sections 1-5: symplecticity, symmetry and order of the Stormer-Verlet scheme, printed pages 1-14",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Sections 1-4: the modified equation, its formal divergence, and the separation of exact-arithmetic analysis from numerical observation, printed pages 1-12",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "",
+        "inventory_expansion_required": false
+      }
+    ]
+  },
+  {
+    "order": 100,
+    "id": "cm-math-numerical-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Numerical — Examples",
+    "companion": "cm-math-numerical",
+    "requires": [
+      "cm-math-numerical"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-verlet-map-of-the-harmonic-oscillator",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Oscillator Verlet: a preserved quadratic form and bounded original-energy oscillation",
+        "dependency_level": 5,
+        "deps": [
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form"
+        ],
+        "dependency_roles": {
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "For the dimensionless oscillator $H(q,p)=(q^2+p^2)/2$, velocity Verlet is the matrix map $z\\mapsto S_hz$, where\n\n$$S_h=\\begin{pmatrix}1-h^2/2&h\\\\-h(1-h^2/4)&1-h^2/2\\end{pmatrix}.$$\n\nFor $0<h<2$, put $\\alpha=1-h^2/4$ and $I_h(q,p)=(\\alpha q^2+p^2)/2$. This positive quadratic form is exactly preserved. Every iterate satisfies\n\n$$|H(z_n)-H(z_0)|\\le\\frac{h^2}{4\\alpha}I_h(z_0).$$\n\nThe conclusion is an explicit exact-arithmetic all-step fact for this linear example. At $h=2$ positivity fails; at $h>2$ the map has a real eigenvalue of modulus greater than one.",
+        "inventory_expansion_required": false,
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-analytic-pendulum-verlet-domain-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Analytic pendulum: checking the complex bounds and compact-iterate hypothesis",
+        "dependency_level": 18,
+        "deps": [
+          "def-cm-analytic-splitting-data-and-exact-splitting-map",
+          "thm-cm-analytic-verlet-energy-on-exponential-times",
+          "lem-cm-separate-roundoff-energy-accumulation"
+        ],
+        "dependency_roles": {
+          "def-cm-analytic-splitting-data-and-exact-splitting-map": "mathematical-premise",
+          "thm-cm-analytic-verlet-energy-on-exponential-times": "mathematical-premise",
+          "lem-cm-separate-roundoff-energy-accumulation": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hairer, Geometric Numerical Integration, Lecture 3: backward error analysis, Sections 1–3 and 5; local analytic estimates supplied here",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29",
+        "design_state": "Fully authored draft; outside artifact completion cycle 1; independent native review remains pending",
+        "statement": "On the dimensionless real ball $U=B_4(0)\\subseteq\\mathbb R^2$, take $A(q,p)=1-\\cos q$, $B(q,p)=p^2/2$, $\\rho=1$ and $K=\\overline B_2(0)$. The splitting is velocity Verlet. These data satisfy the analytic hypotheses with $M=5+\\cosh(1)$. Therefore, for sufficiently small constant $h>0$, if the iterates lie in $K$ through $nh\\le e^{c/(2h)}$, their original-energy deviation is $O(h^2)$. Compact retention is an additional hypothesis, which this example does not infer from the estimate.",
+        "inventory_expansion_required": false,
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

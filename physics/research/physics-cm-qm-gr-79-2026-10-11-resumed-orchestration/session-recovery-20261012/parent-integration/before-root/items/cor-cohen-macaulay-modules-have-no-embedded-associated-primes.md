@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cohen-macaulay-modules-have-no-embedded-associated-primes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-two-groups-with-isomorphic-profinite-completions-are-isomorphic.md

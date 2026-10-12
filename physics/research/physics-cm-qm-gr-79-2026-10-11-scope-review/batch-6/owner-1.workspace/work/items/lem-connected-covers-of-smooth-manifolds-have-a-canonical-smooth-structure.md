@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-connected-covers-of-smooth-manifolds-have-a-canonical-smooth-structure.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-non-finitely-generated-ideal-is-prime.md

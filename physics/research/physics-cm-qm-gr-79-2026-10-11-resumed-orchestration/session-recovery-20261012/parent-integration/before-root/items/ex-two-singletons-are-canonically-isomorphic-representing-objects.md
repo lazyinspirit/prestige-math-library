@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-singletons-are-canonically-isomorphic-representing-objects.md

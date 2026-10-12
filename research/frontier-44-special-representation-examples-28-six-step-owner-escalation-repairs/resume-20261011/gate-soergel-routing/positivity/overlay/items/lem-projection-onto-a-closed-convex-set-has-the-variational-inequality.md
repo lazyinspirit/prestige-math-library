@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-projection-onto-a-closed-convex-set-has-the-variational-inequality.md

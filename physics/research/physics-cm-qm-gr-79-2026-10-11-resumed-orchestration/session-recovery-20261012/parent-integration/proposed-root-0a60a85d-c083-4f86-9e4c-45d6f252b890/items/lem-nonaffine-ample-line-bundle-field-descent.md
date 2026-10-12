@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-ample-line-bundle-field-descent.md

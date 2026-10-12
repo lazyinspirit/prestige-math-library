@@ -60,7 +60,7 @@ metric/topological tools. Distinct ids, distinct proofs, both published.
 
 ## New categories and pages
 
-library/foundations/  (exists)
+library/set-theory/  (exists)
   F1  Ordinals, Cardinals, and the Axiom of Choice        (A/B)   NEW PREREQ
 
 library/topology/     (NEW top-level category)

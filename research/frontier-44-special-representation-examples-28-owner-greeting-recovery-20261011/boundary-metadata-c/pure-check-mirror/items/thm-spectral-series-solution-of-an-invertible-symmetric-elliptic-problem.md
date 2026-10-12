@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-series-solution-of-an-invertible-symmetric-elliptic-problem.md

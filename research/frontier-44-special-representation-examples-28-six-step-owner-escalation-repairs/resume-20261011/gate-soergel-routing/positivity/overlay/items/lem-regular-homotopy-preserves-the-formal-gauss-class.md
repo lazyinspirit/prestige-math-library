@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-homotopy-preserves-the-formal-gauss-class.md

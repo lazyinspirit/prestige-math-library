@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conductor-of-a-full-cyclotomic-field.md

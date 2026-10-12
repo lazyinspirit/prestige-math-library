@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conformal-invariance-of-plane-harmonicity.md

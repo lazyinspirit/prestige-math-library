@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-strip-jacobian-at-the-initial-surface.md

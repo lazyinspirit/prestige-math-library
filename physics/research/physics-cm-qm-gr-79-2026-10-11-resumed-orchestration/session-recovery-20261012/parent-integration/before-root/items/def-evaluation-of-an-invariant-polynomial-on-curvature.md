@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-evaluation-of-an-invariant-polynomial-on-curvature.md

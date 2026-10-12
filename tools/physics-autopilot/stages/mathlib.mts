@@ -53,6 +53,7 @@ const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 // A live engine hot-reloads this stage module but retains its first models.mjs
 // import. The new profile name must also resolve in that already-running process.
 const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+const SOL61_MEDIUM = MODEL_PROFILE_NAMES.sol61Medium;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -310,7 +311,7 @@ const manifestDepsGate = (ctx) => gate('manifest-deps', ['node', 'tools/physics-
 const policyGates = (ctx) => [
   manifestDepsGate(ctx),
   gate('content-policy-scaffold', ['node', 'tools/physics-support/content-policy.mjs',
-    '--manifest-only',
+    '--manifest-only', '--authored',
     ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
     liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
   }),
@@ -1254,7 +1255,7 @@ export const stages = [
     id: '4-judge',
     label: 'one stateless judge per item, with batch reviewers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-batch-read'
-      ? SOL61_HIGH
+      ? SOL61_MEDIUM
       : undefined,
     // Completion requires both judge coverage and every batch's own digest.
     units: (ctx) => ['sweep', ...batches(ctx)],
@@ -1284,7 +1285,7 @@ export const stages = [
           // argv, so there is nothing to quote and nothing to parse. The engine
           // writes the result record when this exits zero.
           argv: ['node', 'tools/physics-support/judge-sweep.mjs', '--run', ctx.run,
-            '--lineup', 'sol61', '--effort', 'high',
+            '--lineup', 'luna', '--effort', 'max',
             '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--cost', `research/${ctx.run}-judge-cost.jsonl`,
             '--pages', aPages.join(',')],
@@ -1320,7 +1321,7 @@ export const stages = [
     // list — a careful reading that finds nothing thin is a result, and failing
     // it would teach the lane to manufacture concerns.
     gates: (ctx) => [
-      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'sol61', excludePublished: false }),
+      closureGate(ctx, { allowUnadjudicated: true, judgeLineup: 'luna', excludePublished: false }),
       gate('step5-digests', ['node', 'tools/physics-support/step5-scope.mjs', 'digests', '--run', ctx.run], {
         liveness: { pattern: /(\d+) item\(s\) opened/.source, min: 1, unit: 'items opened while reading' },
       }),
@@ -1374,7 +1375,7 @@ export const stages = [
         return;
       }
       if (args.failure.id !== 'judge-closure') return;
-      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'sol61', judgeEffort: 'high' });
+      const r = await mechanicalRepair({ ctx: args.ctx, failure: { id: 'judge-closure' }, judgeLineup: 'luna', judgeEffort: 'max' });
       // A lane down to an account limit is not a failed repair: report the
       // outage and the executor refunds the round and waits on a clock.
       if (r.outcome === 'outage') return { outage: { reason: r.reason! } };

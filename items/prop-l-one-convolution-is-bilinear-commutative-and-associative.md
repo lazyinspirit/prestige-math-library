@@ -46,11 +46,10 @@ Assume the Axiom of Countable Choice. Convolution on $L^1(\mathbb{R}^n)$, for $n
 
 **Proof technique:** direct.
 
-1.1 Bilinearity follows from linearity of the integral in [L3] once [L1]
-guarantees absolute convergence for almost every $x$. [L1, L3, given, algebra]
+1.1 Bilinearity follows from linearity of the integral in [L3] once [L1] guarantees absolute convergence for almost every $x$. [L1, L3, given, algebra]
 
 1.2 For commutativity, fix $x$ where convolution is defined and use the measure-preserving substitution $u=x-y$ from [L4]: $$ (f*g)(x) = \int f(x-y)g(y)\,dy = \int g(x-u)f(u)\,du = (g*f)(x). $$ The change of variables also preserves absolute integrability, so the two sides agree almost everywhere as $L^1$ classes. [L1, L3, L4, algebra]
 
 1.3 For associativity, Tonelli and translation invariance give $$\iiint |f(x-y-z)g(z)h(y)|\,dx\,dy\,dz=\|f\|_1\|g\|_1\|h\|_1<\infty.$$ Thus for almost every $x$ the double integral is absolutely convergent; [L2] permits interchange of $y,z$, and the two orders yield $((f*g)*h)(x)$ and $(f*(g*h))(x)$ respectively. Representative independence follows from [L1]. [L1, L2, L4, algebra]
 
-2.1 Therefore convolution is bilinear, commutative, and associative on $L^1(\mathbb{R}^n)$ under the stated Countable Choice. [step 1.1, step 1.2, step 1.3] ∎
+2.1 Therefore convolution is bilinear, commutative, and associative on $L^1(\mathbb{R}^n)$ under the stated Countable Choice. [step 1.1, step 1.2, step 1.3] ∎ 

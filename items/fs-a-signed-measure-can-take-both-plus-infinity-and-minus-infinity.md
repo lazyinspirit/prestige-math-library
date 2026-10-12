@@ -37,8 +37,7 @@ set and the value $-\infty$ on another.
 
 **Proof technique:** direct.
 
-1.1 The displayed claim asserts exactly the negation of the second clause in [L1]
-[L1].
+1.1 The displayed claim asserts exactly the negation of the second clause in [L1] [L1]. [L1]
 
-2.1 Therefore no signed measure satisfies the claim, and the statement is [L1, step 1.1] ∎
-false.
+2.1 Therefore no signed measure satisfies the claim, and the statement is [L1, step 1.1] ∎ false. [L1, step 1.1]
+

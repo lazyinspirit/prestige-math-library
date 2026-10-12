@@ -59,14 +59,7 @@ other.
 
 1.1 If $T_\lambda$ is not injective then it is not bounded below: a bounded-below $T_\lambda$ satisfies $c\|x\| \le \|T_\lambda x\|$ for $c>0$, so $T_\lambda x = 0$ forces $x = 0$. Hence $\sigma_p(T) \subseteq \sigma_{ap}(T)$, which is the second inclusion of claim 2. [L2, L3, L5, algebra]
 
-1.2 If $\lambda \in \sigma_r(T)$ then, by definition, $T_\lambda$ is
-injective with non-dense range. Hence $\lambda\in\sigma_{cp}(T)$ and
-$\lambda\notin\sigma_p(T)$, so
-$\sigma_r(T)\subseteq\sigma_{cp}(T)\setminus\sigma_p(T)$. Conversely, if
-$\lambda\in\sigma_{cp}(T)\setminus\sigma_p(T)$, then $T_\lambda$ has
-non-dense range and is injective, which is exactly
-$\lambda\in\sigma_r(T)$. Thus
-$\sigma_r(T)=\sigma_{cp}(T)\setminus\sigma_p(T)$. [L1, L2]
+1.2 If $\lambda \in \sigma_r(T)$ then, by definition, $T_\lambda$ is injective with non-dense range. Hence $\lambda\in\sigma_{cp}(T)$ and $\lambda\notin\sigma_p(T)$, so $\sigma_r(T)\subseteq\sigma_{cp}(T)\setminus\sigma_p(T)$. Conversely, if $\lambda\in\sigma_{cp}(T)\setminus\sigma_p(T)$, then $T_\lambda$ has non-dense range and is injective, which is exactly $\lambda\in\sigma_r(T)$. Thus $\sigma_r(T)=\sigma_{cp}(T)\setminus\sigma_p(T)$. [L1, L2]
 
 1.3 If $\lambda \notin \sigma(T)$ then $T_\lambda$ is invertible, hence bounded below and of dense range; so $\lambda \notin \sigma_{ap}(T) \cup \sigma_{cp}(T)$. [L2, L4, algebra]
 
@@ -74,4 +67,4 @@ $\sigma_r(T)=\sigma_{cp}(T)\setminus\sigma_p(T)$. [L1, L2]
 
 2.1 Claim 3, one inclusion: $\sigma_{ap}(T)\cup\sigma_{cp}(T) \subseteq \sigma(T)$ is the contrapositive of [step 1.3]. [step 1.3]
 
-3.1 Claim 1: for $\lambda \in \sigma(T)$ the operator $T_\lambda$ is not invertible by [L4]; by [L1] it falls into exactly one of the three classical cases, so the three sets are disjoint and their union is $\sigma(T)$. The covering half of claim 3 is [step 1.4] and the reverse half is [step 2.1]; claim 2 consists of [step 1.1] and [step 1.2]. [step 1.1, step 1.2, step 1.4, step 2.1, L1, L4] ∎
+3.1 Claim 1: for $\lambda \in \sigma(T)$ the operator $T_\lambda$ is not invertible by [L4]; by [L1] it falls into exactly one of the three classical cases, so the three sets are disjoint and their union is $\sigma(T)$. The covering half of claim 3 is [step 1.4] and the reverse half is [step 2.1]; claim 2 consists of [step 1.1] and [step 1.2]. [step 1.1, step 1.2, step 1.4, step 2.1, L1, L4] ∎ 

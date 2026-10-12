@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-empirical-tests-and-scope-e8b3778a87e2ebeb.task.md

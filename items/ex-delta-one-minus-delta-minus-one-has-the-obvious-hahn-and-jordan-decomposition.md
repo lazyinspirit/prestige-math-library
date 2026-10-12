@@ -41,5 +41,4 @@ $$\nu^+=\delta_1,\qquad \nu^-=\delta_{-1},\qquad |\nu|=\delta_1+\delta_{-1}.$$
 
 1.1 By [L1], for every measurable $E$ one has [L1, L2] $\nu(E)=\mathbf 1_E(1)-\mathbf 1_E(-1)$. If $E\subseteq P$ is measurable, then $-1\notin E$, so $\nu(E)=\mathbf 1_E(1)\ge0$. If $E\subseteq N$ is measurable, then $1\notin E$, so $\nu(E)=-\mathbf 1_E(-1)\le0$. Thus $P$ is positive and $N$ is negative. [L1, L2]
 
-2.1 Since $\mathbb R=P\sqcup N$, step 1.1 gives a Hahn decomposition. [L2, step 1.1]
-The Jordan measures are therefore $\delta_1$ and $\delta_{-1}$, so $|\nu|=\delta_1+\delta_{-1}$ by [L2]. ∎
+2.1 Since $\mathbb R=P\sqcup N$, step 1.1 gives a Hahn decomposition. [L2, step 1.1] The Jordan measures are therefore $\delta_1$ and $\delta_{-1}$, so $|\nu|=\delta_1+\delta_{-1}$ by [L2]. ∎ 

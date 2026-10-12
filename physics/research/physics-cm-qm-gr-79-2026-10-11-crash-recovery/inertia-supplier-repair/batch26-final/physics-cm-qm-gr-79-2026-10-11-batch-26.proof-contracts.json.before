@@ -1,0 +1,2220 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-26",
+  "scope": [
+    "post-cm10-rigid-material",
+    "def-cm10-rigid-body-configuration",
+    "def-cm10-angular-velocity",
+    "def-cm10-inertia-tensor",
+    "pthm-cm10-kinetic-splitting",
+    "pthm-cm10-principal-axes",
+    "pthm-cm10-frame-covariance",
+    "rem-cm10-orientation-charts",
+    "ex-cm10-equilateral-triangle-rotational-inertia",
+    "cex-cm10-degenerate-line-mass-singular-inertia",
+    "ex-cm10-euler-angle-pole-and-orientation",
+    "ex-cm10-parallel-axis-shift-check"
+  ],
+  "contracts": {
+    "post-cm10-rigid-material": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(v) state explicitly the reference mass distribution with its centring and finiteness, the time window, the motion as a rigid placement x(t,rho)=c(t)+R(t)rho with C^2 configuration path, the rigidity idealization with the mutual-distance consequence, the centre-of-mass and orientation readings and the frame-change consistency requirement."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope excludes deformation, internal degrees of freedom, variable mass, impacts, contact and friction laws, and every force, torque, equation of motion and conservation statement; it states that no measured mass, length, duration or orientation is asserted and that the branch is distinct from the finitely many particle branch."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics, Section 3.1 (printed pages 46-49) defines the rigid body by fixed pairwise distances and derives the translation-plus-rotation description; Likharev, Chapter 4 Section 4.1 (chapter pages 1-3) gives rigidity and the six degrees of freedom; Sussman-Wisdom, Sections 2.1-2.2 (Eqs. 2.8-2.30) and Stewart, Sections 2.1-2.2 (printed pages 29-33) treat the configuration as a placement with an orientation in SO(3)."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof section; provenance.proof is not-applicable; clause (vi) states that no force law, torque law, equation of motion or balance is asserted, and no measured value is recorded."
+        }
+      }
+    },
+    "def-cm10-rigid-body-configuration": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The configuration space is never empty: the reference placement (c,R)=(0,I_3) is a configuration of every model of the branch, and the item defines a single pair, not a family that could be void."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clause (b) includes the zero translation and the reference placement (c,R)=(0,I_3), and clause (a) includes the zero spatial point as a centre-of-mass position."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition clause (c) covers a one-point labeling as degenerate: a single material point does not contain two linearly independent vectors, and the placement then determines the orientation only up to rotations about the line through the origin and the point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clause (c) states the degenerate case of a labeling supported on a line explicitly and records that the placement determines R only up to rotations about that line."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition clause (d) uses the transformation law on the model time window and considers interior times of the nondegenerate interval I_0; no endpoint limit is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made: the configuration path is given model data and the description in another frame is determined by the stated transformation law rather than chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition clause (c) asserts that equality of the placements on a nondegenerate labeling forces $c=\\bar c$ and $R=\\bar R$; the argument evaluates at the origin and applies the stabilizer lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item contains no if-and-only-if assertion: clause (c) asserts the injectivity implication, while the converse (equal configurations give equal placements) is immediate from x=c+R rho and is not stated as a separate equivalence."
+        }
+      ]
+    },
+    "def-cm10-angular-velocity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No family selection or empty sum occurs: the definition fixes the angular velocity of a given motion of the branch, which always exists and is unique."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clause (c) treats the zero angular velocity: omega=0 exactly when R'=0, and the motion is then a pure translation with every material velocity equal to c'."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no cardinality parameter; a single material label plays no role, because the angular velocity is attached to the orientation curve R alone."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clause (e) treats the degenerate case omega_s(t)=0 by not defining an instantaneous rotation axis; the axis is introduced only under the stated nonvanishing hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition clause (a) uses the body angular velocity at every time of the configuration path's interval and the derivative clause of the cited matrix lemma applies at each point of the interval, including endpoints in the one-sided sense."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Uniqueness of omega is proved from the injectivity of the skew-matrix correspondence, not selected; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition clause (c) proves that omega=0 forces the velocity field to be the constant c', using R'=R[omega]_x."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition clause (c) proves the reverse direction: if the motion is a pure translation with constant material velocity c', then R'=0 and hence omega=0 by the injectivity of the skew-matrix correspondence (Definition clause (a))."
+        }
+      ]
+    },
+    "def-cm10-inertia-tensor": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The reference mass distribution has positive total mass by the postulate, and no empty family is formed; the inertia matrix is defined from the fixed measure nu."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition clause (a) includes the zero quadratic forms: omega^T I omega = 0 is possible for nonzero omega precisely in the degenerate case, and clause (d) includes the zero moment about a body axis through a line-supported distribution."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The definition has no cardinality parameter; the mass distribution is an arbitrary bounded finite Borel measure and is not decomposed into a numbered family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition clauses (a) and (d) name the degenerate case (mass supported on a line through the origin) and state where the strict positivity and invertibility criterion must be imported from the principal-axes theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint or limiting process enters the definition: the entries are integrals over the whole bounded support of nu and the formulae are evaluated at ordinary times of the motion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made; the definition is a formula for the inertia data, and the countable-choice assumption inherited from the finiteness lemma is recorded for the integrals only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition clause (c) states the equivalence between the label of a spatial point and its defining relation a(t,p)=R(t)^T(p-c(t)); the forward computation substitutes Ra=p-c in clause (d)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The only equivalence in the item is definitional (the label of p), and its two directions are part of the definition of a(t,p) rather than a proved if-and-only-if statement."
+        }
+      ]
+    },
+    "pthm-cm10-kinetic-splitting": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the bound of [[lem-cm-mass-moments-are-finite]] that makes the two integrands of clause 1 $\\nu$-integrable. Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $\\nu$ be a **centred** mass distribution on $\\mathbb R^3$ with total mass $m$ and inertia matrix $I$ ([[def-cm-mass-d",
+          "uses": [
+            "1.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of\n[[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and\nlet a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of\nclass $C^2$ on the time window $I_0$ ([[def-interval]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial f",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-mass-moments-are-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be a measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-cm-mass-distribution-and-inertia-matrix]]) that is finite and bounded: $\\nu(\\mathbb R^3)<+\\infty$ and $\\nu(\\mathbb R^3\\setminus\\overline B_R(0))=0$ for some $R>0$ ([[def-metric-ball]]). Then:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-mass-distribution-and-inertia-matrix",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$ ([[def-borel-sigma-algebra]]) and let $\\nu$ be a measure on the measurable space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is **finite**, $\\nu(\\mathbb R^3)<+\\infty$, and **bounded**, meaning that there is a real $R>0$ with\n$$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0,$$\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The hypotheses of [L1] are met with the interval $I_0$ and the differentiable maps $c$ and $R$: the measure $\\nu$ is a centred mass distribution with total mass $m$ by [L2], $I_0$ is nondegenerate by [[post-cm10-rigid-material]] clause (ii), and $C^{2}$ implies differentiability. Clause 1 of [L1] gives $\\partial_tx(t,\\rho)=c'(t)+R(t)(\\omega(t)\\times\\rho)$ for every $\\rho$, and the $\\nu$-integrability of the kinetic-energy integrand and of the angular-momentum integrand. [given, L1, L2]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The momentum integrand is a finite sum of the constant functions $\\rho\\mapsto c_j'(t)$ and the linear functions $\\rho\\mapsto\\bigl(R(t)(\\omega(t)\\times\\rho)\\bigr)_j$, which are finite real linear combinations of the coordinate functions $\\rho\\mapsto\\rho_l$; these are $\\nu$-integrable and bounded on the support by [L3], so the momentum integrand is $\\nu$-integrable by linearity of the integral [L3]. Together with step 1.1 this proves clause 1. [step 1.1, L2, L3]",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Kinetic energy: clause 2 of [L1] gives, for the same placement data, $$K(t)=\\frac12\\int\\lVert\\partial_tx(t,\\rho)\\rVert_2^{2}\\,d\\nu(\\rho)=\\frac12m\\lVert c'(t)\\rVert_2^{2}+\\frac12\\omega(t)^{\\mathsf T}I\\omega(t),$$ which is clause 3. [step 1.1, L1]",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Total momentum: by step 1.1, linearity of the integral and the componentwise reading of vector integrals [L3], $$P(t)=\\int\\bigl(c'(t)+R(t)(\\omega(t)\\times\\rho)\\bigr)\\,d\\nu(\\rho)=c'(t)\\int1\\,d\\nu+R(t)\\int(\\omega(t)\\times\\rho)\\,d\\nu(\\rho).$$ The first integral is $m$ by [L3]. The second has components $\\sum_{k}\\varepsilon_{jkl}\\omega_k(t)\\int\\rho_l\\,d\\nu(\\rho)=0$, because $\\int\\rho\\,d\\nu=0$ by [L2] and the sum over the finitely many $(k,l)$ is linear in the integrals [L3]. Hence $P(t)=mc'(t)$, which is clause 2. [step 2.1, L2, L3, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Angular momentum: clause 3 of [L1] gives $$L_c(t)=\\int\\bigl(x(t,\\rho)-c(t)\\bigr)\\times\\bigl(\\partial_tx(t,\\rho)-c'(t)\\bigr)\\,d\\nu(\\rho)=R(t)I\\omega(t),$$ which is clause 4. [step 1.1, L1] \u220e",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has positive total mass and the integrals are over the fixed measure nu; no empty family, empty sum or empty index set occurs in the statement or the proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero data are included: a motion with c'=0 and omega=0 gives P=0, K=0 and L_c=0 by steps 2.2, 3.1 and 4.1, and the identities divide by no quantity."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no cardinality parameter; it concerns one continuous mass distribution and one motion, not an indexed family whose size could be one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate mass distributions are included and explicitly recorded in the Remarks: for nu supported on a line the identity L_c=RI omega still holds (step 4.1) but I is not injective."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The identities are asserted at every t in the time window I_0 (statement), including interval endpoints in the sense of the one-sided derivatives that exist there; the proof uses no limit at the boundary of I_0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The only choice-flavoured hypothesis is the countable-choice assumption AC_omega inherited from the finiteness supplier and used through [L1] and [L3] for integrability; no selection from a family is made in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement consists of identities rather than an if-and-only-if assertion; no equivalence direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement consists of identities rather than an if-and-only-if assertion; no equivalence direction is claimed."
+        }
+      ]
+    },
+    "pthm-cm10-principal-axes": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "cor-cm-principal-axes-of-the-inertia-matrix",
+          "source_section": "Statement",
+          "quote": "Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\\omega$ for the matrix-vector product and $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product on $\\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-inertia-matrix-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only in [L1], through [[lem-cm-mass-moments-are-finite]], to make the entries of $I$ finite real numbers. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m=\\nu(\\mathbb R^3)$ and inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]). Write $\\omega^{\\mathsf T}I\\omega:=\\",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-inertia-tensor-about-a-point",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$\n([[def-borel-sigma-algebra]]), let $\\nu$ be a measure on the measurable space\n$(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is\n**finite** and **bounded**: $\\nu(\\mathbb R^3)<+\\infty$ and\n$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some real $R>0$\n([[def-metric-ball]]). T",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial f",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional real inner product space and let $T:V\\to V$ be\nself-adjoint. Then $V$ has an orthonormal basis consisting of eigenvectors of\n$T$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-self-adjoint-and-normal-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real or complex inner product space and let\n$T:V\\to V$ be an endomorphism. The endomorphism $T$ is **self-adjoint** when",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "This is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "source_section": "Statement",
+          "quote": "For $u,v\\in\\mathbb R^3$, $\\|u\\times v\\|_2^2=\\det G(u,v)$, and this value is positive exactly when $u$ and $v$ are linearly independent.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map $[\\cdot]_\\times:\\mathbb R^3\\to M_3(\\mathbb R)$ by\n$$[\\omega]_\\times:=\\begin{pmatrix}0&-\\omega_3&\\omega_2\\\\ \\omega_3&0&-\\omega_1\\\\ -\\omega_2&\\omega_1&0\\end{pmatrix}.$$\nThen:",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cm-mass-moments-are-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be a measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-cm-mass-distribution-and-inertia-matrix]]) that is finite and bounded: $\\nu(\\mathbb R^3)<+\\infty$ and $\\nu(\\mathbb R^3\\setminus\\overline B_R(0))=0$ for some $R>0$ ([[def-metric-ball]]). Then:",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be\na measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ that is finite and bounded:\n$\\nu(\\mathbb R^3)<+\\infty$ and $\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some\nreal $R>0$ ([[def-metric-ball]]), and let $a\\in\\mathbb R^3$. With the shifted integrands\n$G_a(\\rho)_{jk}=\\lVert\\rho-a\\rVert_",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$. Two subspaces are orthogonal if every vector in one is orthogonal to every vector in the other.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "is the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L2] the matrix $I$ is symmetric, so the map $T:\\omega\\mapsto I\\omega$ satisfies $\\langle T\\omega,z\\rangle=(I\\omega)^{\\mathsf T}z=\\omega^{\\mathsf T}Iz=\\langle\\omega,Tz\\rangle$ for all $\\omega,z$: it is self-adjoint on the Euclidean space $\\mathbb R^3$. Applying the spectral theorem [L4], or equivalently clause 1 of [L1], gives an orthonormal basis $(e_1,e_2,e_3)$ and real $I_j$ with $Ie_j=I_je_j$. This is clause (a). [given, L1, L2, L4]",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L4",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Spatial axis moments: put $a:=a(t,p)=R(t)^{\\mathsf T}(p-c(t))$ and $m:=R(t)^{\\mathsf T}n$, so that $\\lVert m\\rVert_2=\\lVert n\\rVert_2=1$. By [L3] and bilinearity of the matrix product, $$n^{\\mathsf T}I(t,p)n=m^{\\mathsf T}I_\\nu(a)m=\\sum_{j,k}m_jm_k\\int\\bigl(\\lVert\\rho-a\\rVert_2^{2}\\delta_{jk}-(\\rho_j-a_j)(\\rho_k-a_k)\\bigr)d\\nu(\\rho).$$ The integrand is the shifted quadratic polynomial of [L3], integrable by [L6]; pulling the finite sum inside the integral by linearity [L6] and evaluating the sum gives $$\\sum_{j,k}m_jm_k\\bigl(\\lVert\\rho-a\\rVert_2^{2}\\delta_{jk}-(\\rho_j-a_j)(\\rho_k-a_k)\\bigr)=\\lV",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L6",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $\\omega=\\sum_j\\omega_je_j$, linearity of $T$ and $Ie_j=I_je_j$ give $I\\omega=\\sum_jI_j\\omega_je_j$; taking the inner product with $\\omega$ and using $\\langle e_j,e_k\\rangle=\\delta_{jk}$ gives $\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^{2}$, and [L1] gives the further equality $\\sum_jI_j\\omega_j^{2}=\\int\\lVert\\omega\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)$. Setting $\\omega=e_j$ gives $I_j=e_j^{\\mathsf T}Ie_j=\\int\\lVert e_j\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)$. This is clause (b). [step 1.1, L1, L7, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Changing description: for every $\\rho$, $R(t)\\bigl(m\\times(\\rho-a)\\bigr)=(Rm)\\times(R\\rho-Ra)$ by the equivariance clause of [L5], and $Rm=n$ while $R\\rho-Ra=R\\rho-(p-c)=x(t,\\rho)-p$ by the defining relation $Ra=p-c$; since $R(t)$ preserves the norm [L5], $\\lVert m\\times(\\rho-a)\\rVert_2=\\lVert n\\times(x(t,\\rho)-p)\\rVert_2$. Substituting into step 1.2 gives the second identity of clause (c). [step 1.2, L5, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "L5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Invariance on the line: let $p'=p+sn$ with $s\\in\\mathbb R$, so that $a(t,p')=a+s\\,m$ and $\\rho-a(t,p')=(\\rho-a)-s\\,m$; then $m\\times(\\rho-a')=m\\times(\\rho-a)-s\\,(m\\times m)=m\\times(\\rho-a)$ by [L5], so the integral of step 1.2 is unchanged. Replacing $n$ by $-n$ replaces $m$ by $-m$, and $( -m)\\times(\\rho-a)=-m\\times(\\rho-a)$ has the same norm; the quadratic expression $n^{\\mathsf T}I(t,p)n$ is unchanged under $n\\mapsto-n$ by bilinearity. Hence $\\Theta_\\ell(t)$ depends only on the spatial line $\\ell$ and not on the choice of $p$ on it or on the sign of $n$. This completes clause (c). [step 1.2",
+          "step": "2.3",
+          "inputs": [
+            "L5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Body-fixed axis moments: applying step 2.1 with $\\omega=n$ gives $n^{\\mathsf T}In=\\int\\lVert n\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)$ for every $n\\in\\mathbb R^3$, in particular for unit vectors. This is the first identity of clause (c). [step 2.1, given]",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Nonnegativity and vanishing criterion: by step 2.1, $I_j=\\int f_j\\,d\\nu$ with $f_j(\\rho)=\\lVert e_j\\times\\rho\\rVert_2^{2}\\ge0$; by [[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]] and [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] the integral vanishes exactly when $f_j=0$ $\\nu$-almost everywhere, and by [[def-measure-null-set-and-almost-everywhere]] this holds exactly when $\\nu\\bigl(\\{\\rho:f_j(\\rho)\\neq0\\}\\bigr)=0$. Since $e_j\\neq0$, the identity $e_j\\times\\rho=0$ is equivalent to $\\rho\\in\\mathbb Re_j$ ([[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alt",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nondegeneracy: assume $\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb R\\omega\\bigr)>0$ for every $\\omega\\neq0$. For each $j$, the line $\\mathbb Re_j$ is a line through the origin and $\\mathbb Re_j=\\mathbb R\\omega$ for $\\omega=e_j\\neq0$, so $\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb Re_j\\bigr)>0$ and step 3.2 gives $I_j\\neq0$, hence $I_j>0$ by nonnegativity. If $I\\omega=0$ for some $\\omega$, then $\\omega^{\\mathsf T}I\\omega=\\omega^{\\mathsf T}0=0$, so $\\int\\lVert\\omega\\times\\rho\\rVert_2^{2}\\,d\\nu=0$ by [L2] and the argument of step 3.2 gives $\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb R\\omega\\bigr)=0$ for that $\\omeg",
+          "step": "4.1",
+          "inputs": [
+            "step 3.2",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Degenerate support: suppose $\\nu$ is supported on a line through the origin, with direction vector $u\\neq0$, that is $\\nu(\\mathbb R^3\\setminus\\mathbb Ru)=0$. Then $u\\times\\rho=0$ for $\\nu$-almost every $\\rho$, so $u^{\\mathsf T}Iu=\\int\\lVert u\\times\\rho\\rVert_2^{2}\\,d\\nu=0$ by [L2]. For every $k$ and every real $s$, applying [L2] to $u+se_k$ and expanding the quadratic form by bilinearity and symmetry of $I$ gives $$u^{\\mathsf T}Iu+2s\\,e_k^{\\mathsf T}Iu+s^{2}e_k^{\\mathsf T}Ie_k=\\int\\lVert(u+se_k)\\times\\rho\\rVert_2^{2}\\,d\\nu=s^{2}\\int\\lVert e_k\\times\\rho\\rVert_2^{2}\\,d\\nu,$$ because $u\\times\\rho",
+          "step": "4.2",
+          "inputs": [
+            "L2",
+            "step 3.2",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Extremal values: for a unit vector $n=\\sum_jc_je_j$, orthonormality gives $\\sum_jc_j^{2}=\\lVert n\\rVert_2^{2}=1$ by [L7], and step 2.1 gives $n^{\\mathsf T}In=\\sum_jI_jc_j^{2}$; since the coefficients $c_j^{2}$ are nonnegative and sum to $1$ while each $I_j\\ge0$ by step 3.2, the value lies between $\\min_jI_j$ and $\\max_jI_j$; setting $n$ equal to a unit eigenvector whose principal moment is minimal (respectively maximal) attains the minimum (respectively maximum). This is clause (e). [step 2.1, step 3.2, L7, algebra] \u220e",
+          "step": "5.1",
+          "inputs": [
+            "L7",
+            "step 2.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family occurs: the principal basis has exactly three vectors, the mass distribution has positive total mass, and all sums are over the fixed index set {1,2,3}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero cases are covered: the zero vector is excluded from the principal-axis directions by the unit hypothesis, and the vanishing principal moment is treated exactly in steps 3.2 and 4.2 with the criterion nu(R^3 minus Re_j)=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The dimension of the configuration space and of the principal basis is fixed at three; no cardinality parameter of the statement can take the value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case of a mass distribution supported on a line through the origin is proved in step 4.2 (Iu=0, I not invertible), and the nondegenerate case in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement is pointwise in time and concerns a fixed measure; no interval endpoint or limiting process enters the argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The principal basis is produced by the spectral theorem as an existence statement, not selected by the proof, and the only choice assumption recorded is AC_omega for the finiteness of the integrals."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.2 proves that I_j=0 forces nu(R^3 minus Re_j)=0, the forward direction of the vanishing criterion of clause (d)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 also proves the reverse direction: if nu is supported on Re_j then I_j=0, because the integrand f_j vanishes nu-almost everywhere."
+        }
+      ]
+    },
+    "pthm-cm10-frame-covariance": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-adapted-charts-and-galilean-transformations",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\tau,g,A)$ be as in [[def-cm-affine-time-space]] and let $(o,u,(e_1,e_2,e_3))$ and $(o',u',(e_1',e_2',e_3'))$ be two adapted charts, with coordinate functions $(t,x)$ and $(t',x')$ of [[lem-cm-adapted-coordinates-exist-and-are-unique]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm01-frames",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following statements about frames, in the spacetime structure of [[post-cm01-spacetime]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-so3-is-a-matrix-group",
+          "source_section": "Statement",
+          "quote": "In the notation of [[def-cm-special-orthogonal-group]]:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for e",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$f$ is **differentiable at $c$** when that limit exists, and then the\n**derivative of $f$ at $c$** is",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map $[\\cdot]_\\times:\\mathbb R^3\\to M_3(\\mathbb R)$ by\n$$[\\omega]_\\times:=\\begin{pmatrix}0&-\\omega_3&\\omega_2\\\\ \\omega_3&0&-\\omega_1\\\\ -\\omega_2&\\omega_1&0\\end{pmatrix}.$$\nThen:",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-matrix-curve-derivative-rules",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto B(t)_{ij}$ is differentiable at $t_0$ in the sense of [[def-derivative]]; write $A'(t_0)$ for the matrix with entries $A'(t_0)_{ij}:=(t\\mapsto A(t)_{ij})'(t_0)$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals below finite.\nAdopt the model and notation of [[post-cm10-rigid-material]]: a reference\nmass distribution $\\nu$ with total mass $m$ and centred reference coordinates,\na fixed inertial frame, and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^{2}$ on\n",
+          "uses": [
+            "2.3",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], the description of the motion in the second frame is the displayed map $\\tilde x$. Substituting $x(t,\\rho)=c(t)+R(t)\\rho$ at $t=t'-b$ and distributing the matrix product, $$\\tilde x(t',\\rho)=Qc(t'-b)+u\\,(t'-b)+a+QR(t'-b)\\rho,$$ so $\\tilde x=\\tilde c+\\tilde R\\rho$ with $\\tilde c$ and $\\tilde R$ as in clause 1. The map $\\tilde R$ takes values in $SO(3)$ by [L2], and $\\tilde c$, $\\tilde R$ are of class $C^2$ by [L3], since $t'\\mapsto t'-b$, $Q$, $u$ and $a$ are smooth and the composition and product rules for $C^2$ maps apply. This proves clause 1. [given, L1, L2, L3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Derivative of the rotation path: by clause 1, $\\tilde R(t')=Q\\,R(t'-b)$; differentiating with the chain rule [L3] gives $\\frac{d}{dt'}\\tilde R(t')=Q\\,R'(t'-b)$, where $R'$ is the time derivative of the first-frame rotation path (second-frame quantities carry tildes in this item). Hence $$\\tilde R(t')^{\\mathsf T}\\frac{d}{dt'}\\tilde R(t')=R(t'-b)^{\\mathsf T}Q^{\\mathsf T}QR'(t'-b)=R(t'-b)^{\\mathsf T}R'(t'-b)=[\\omega(t'-b)]_\\times$$ by $Q^{\\mathsf T}Q=I_3$ [L2] and the definition of $\\omega$ [L4]; the representing vector of a skew matrix is unique [L4], so $\\tilde\\omega(t')=\\omega(t'-b)$. This is the first assertion of clause 2. [step 1.1, L2, L3, L4, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "L4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Material velocity: differentiating $\\tilde x(t',\\rho)=Qx(t'-b,\\rho)+u\\,(t'-b)+a$ with the chain rule [L3] gives $\\partial_{t'}\\tilde x(t',\\rho)=Q\\partial_tx(t'-b,\\rho)+u$, which is the first identity of clause 3. For the spatial form, let $p$ be a spatial point of the first frame at time $t=t'-b$ and $p'=Qp+u\\,(t'-b)+a=Qp+ut+a$ its image in the second frame at time $t'$; substituting $p=x(t,\\rho)$ and $p'=\\tilde x(t',\\rho)$ gives $\\tilde v(t',p')=Qv(t,p)+u$. This proves clause 3. [step 1.1, L3, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Momentum: by [L5] applied in the second frame, $\\tilde P(t')=m\\,\\frac{d}{dt'}\\tilde c(t')$; differentiating the first identity of clause 1 with the chain rule [L3] gives $\\frac{d}{dt'}\\tilde c(t')=Qc'(t'-b)+u$, where $c'$ is the time derivative of the first-frame path $c$; hence $\\tilde P(t')=Q(mc'(t'-b))+mu=QP(t'-b)+mu$ by [L5] in the first frame. [step 1.1, L3, L5, algebra]",
+          "step": "2.3",
+          "inputs": [
+            "L5",
+            "L3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Spatial angular velocity: $\\tilde\\omega_{\\mathrm s}(t')=\\tilde R(t')\\tilde\\omega(t')=QR(t'-b)\\omega(t'-b)=Q\\omega_{\\mathrm s}(t'-b)$ by step 2.1 and clause 1. This completes clause 2. [step 2.1, step 1.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Inertia data: the reference mass distribution of the model is the same data in either frame; hence the body inertia matrix computed from $\\nu$ is $I$ in both descriptions. The spatial tensor of the second-frame description is $$\\tilde I(t')=\\tilde R(t')I\\tilde R(t')^{\\mathsf T}=QR(t'-b)\\,I\\,R(t'-b)^{\\mathsf T}Q^{\\mathsf T}=Q\\,I(t'-b)\\,Q^{\\mathsf T}$$ by step 1.1 and the transpose rules [L2]. The rotational quadratic forms: $\\tilde\\omega(t')^{\\mathsf T}I\\tilde\\omega(t')=\\omega(t'-b)^{\\mathsf T}I\\omega(t'-b)$ by step 2.1, and $$\\tilde\\omega_{\\mathrm s}(t')^{\\mathsf T}\\tilde I(t')\\tilde\\omega_{\\mathrm s}(t')=\\omega_{\\mathrm s}(t'-b)^{\\mathsf T}Q^{\\mathsf T}QI(t'-b)Q^{\\mathsf T}Q\\,\\omega_{\\mathrm s}(t'-b)=\\omega_{\\mathrm s}(t'-b)^{\\mathsf T}I(t'-b)\\omega_{\\mathrm s}(t'-b)$$ by step 3.1, the display above and $Q^{\\mathsf T}Q=I_3$ [L2]. This proves clause 4. [step 2.1, step 3.1, L2, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Angular momentum: by [L5] in the second frame, $\\tilde L_c(t')=\\tilde R(t')I\\tilde\\omega(t')$, and by steps 1.1 and 2.1 this equals $QR(t'-b)I\\omega(t'-b)=Q\\,L_c(t'-b)$ using [L5] in the first frame. [step 2.1, step 4.1, L5, algebra]",
+          "step": "5.1",
+          "inputs": [
+            "L5",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Kinetic energy: by [L5] in the second frame, $\\tilde K(t')=\\frac12m\\lVert\\frac{d}{dt'}\\tilde c(t')\\rVert_2^{2}+\\frac12\\tilde\\omega(t')^{\\mathsf T}I\\tilde\\omega(t')$; substituting $\\frac{d}{dt'}\\tilde c(t')=Qc'(t'-b)+u$ and $\\tilde\\omega(t')=\\omega(t'-b)$ gives the displayed formula of clause 5. Together with steps 2.3 and 5.1 this proves clause 5. [step 2.3, step 2.1, step 4.1, L5, algebra] \u220e",
+          "step": "6.1",
+          "inputs": [
+            "L5",
+            "step 2.3",
+            "step 5.1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns one motion and two inertial frames; no empty family or empty sum occurs, and the mass is positive."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The boost u=0 and the time shift b=0 are included: the transformation formulae of steps 1.1-5.1 reduce to Q-conjugation and the identities remain valid with a=0, b=0 and u=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The statement has no cardinality parameter; it transforms one configuration path between two frames."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The transformation laws hold for every mass distribution of the branch; the degenerate case (mass supported on a line) is inherited unchanged because the body inertia matrix is not inverted anywhere in steps 2.1-5.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The identities are stated at every t' in the second frame's time window (statement) and the chain rule is applied at interior points; the correspondence t'=t+b is defined on the whole interval I_0+b."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The frame transformation is determined uniquely by the two charts and the motion; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a list of transformation identities, not an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a list of transformation identities, not an if-and-only-if assertion."
+        }
+      ]
+    },
+    "rem-cm10-orientation-charts": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family occurs: the item compares descriptions of the orientation of one rigid-material model and records conventions, with no family whose members could be absent."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The identity orientation is the example of a pole point whose two quaternion preimages are q=1 and q=-1, and the exposition records that the sign of a lift is an initial choice while both signs describe the same orientation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The item has no cardinality parameter; it compares the global orientation, its Euler-angle charts and its quaternion lifts for a single model."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The exposition records the degenerate-labeling case, where the placement determines the orientation only up to rotations about the line, and refers the consumer to clause (c) of the configuration definition."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Euler-angle chart is described with its domain restricted to beta in (0,pi) and its pole boundary values excluded; the example of a smooth path crossing the pole and remaining regular is treated on the companion page."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The countable-choice hypothesis of the rotation double-cover statements is recorded as the assumption under which the kernel {1,-1} and the two-preimage descriptions are used, and no other selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item records descriptions, singularities and conventions; it asserts no if-and-only-if statement, so neither direction is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item records descriptions, singularities and conventions; it asserts no if-and-only-if statement, so neither direction is claimed."
+        }
+      ]
+    },
+    "ex-cm10-equilateral-triangle-rotational-inertia": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "$$\\delta_{x_0}(E):=\\begin{cases}1,&x_0\\in E,\\\\0,&x_0\\notin E,\\end{cases}\\qquad E\\in\\mathcal A.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-nonnegative-weighted-sum-of-measures",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a measure and let $c\\in[0,+\\infty]$. Define the scalar set function $c\\mu$ by three disjoint branches:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "post-cm10-rigid-material",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **rigid-material\nmodel** branch, in the spacetime and frames of [[post-cm01-spacetime]] and\n[[post-cm01-frames]].",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial f",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals finite. Adopt the\nmodel of [[post-cm10-rigid-material]] and its inertia data\n([[def-cm10-inertia-tensor]]): the reference mass distribution $\\nu$ with\ntotal mass $m$ and centred reference coordinates, the body inertia matrix $I$,\nthe spatial inertia tensor $I(t)=R(t)IR(t)^{\\mathsf ",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "These are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-coordinate-rotation-matrices",
+          "source_section": "Statement",
+          "quote": "1. $R_z(a)\\in SO(3)$ and $R_y(a)\\in SO(3)$ for every $a$ ([[def-cm-special-orthogonal-group]]), $R_z(a)e_3=e_3$ and $R_y(a)e_2=e_2$, and $R_z(0)=R_y(0)=I_3$.\n2. $R_z(a)R_z(b)=R_z(a+b)$ and $R_y(a)R_y(b)=R_y(a+b)$ for all $a,b\\in\\mathbb R$.\n3. For every differentiable $a:I\\to\\mathbb R$ on an interval $I\\subseteq\\mathbb R$ ([[def-derivative]], [[def-interval]]), the matrix-valued curves $t\\mapsto R_",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]),",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "source_section": "Statement",
+          "quote": "Equivalently,\n$$\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle u,v\\rangle^2.$$",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "is the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Finite-atomic integration formula: let $f$ be $\\nu$-integrable. If $s=\\sum_ja_j\\chi_{E_j}$ is a nonnegative simple function, then $\\int s\\,d\\nu=\\sum_ja_j\\nu(E_j)=\\sum_ja_j\\,m_0\\sum_k\\delta_{x_k}(E_j)=m_0\\sum_ks(x_k)$ by [L1]; taking the supremum over simple $0\\le s\\le f$ and using the minorant $s_0:=m_0\\sum_kf(x_k)\\chi_{\\{x_k\\}}\\le f$ together with the bound $\\int s\\,d\\nu=m_0\\sum_ks(x_k)\\le m_0\\sum_kf(x_k)$ valid for every simple $0\\le s\\le f$ gives $\\int f\\,d\\nu=m_0\\sum_kf(x_k)$ for nonnegative $f$; the real case follows from $f=f^{+}-f^{-}$ and linearity [L2]. [L1, L2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The measure is a mass distribution: by [L1] it is finite and bounded with support $\\{x_0,x_1,x_2\\}$, and $\\nu(\\mathbb R^3)=3m_0\\in(0,\\infty)$. Its first moment is $\\int\\rho\\,d\\nu=m_0\\sum_kx_k=m_0a\\bigl(\\sum_k\\cos(2\\pi k/3),\\sum_k\\sin(2\\pi k/3),0\\bigr)=0$ by step 1.1 and [L4]: the reference coordinates are centred. [step 1.1, L1, L4, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Inertia matrix: by step 1.1 and [L3], $$I=\\int\\bigl(\\lVert\\rho\\rVert_2^{2}I_3-\\rho\\rho^{\\mathsf T}\\bigr)d\\nu(\\rho)=m_0\\sum_k\\bigl(\\lVert x_k\\rVert_2^{2}I_3-x_kx_k^{\\mathsf T}\\bigr)=m_0\\Bigl(3a^{2}I_3-\\sum_kx_kx_k^{\\mathsf T}\\Bigr),$$ because $\\lVert x_k\\rVert_2=a$ for every $k$. The matrix $\\sum_kx_kx_k^{\\mathsf T}$ has entries $a^{2}\\sum_k\\cos^{2}(2\\pi k/3)$, $a^{2}\\sum_k\\cos(2\\pi k/3)\\sin(2\\pi k/3)$ and $a^{2}\\sum_k\\sin^{2}(2\\pi k/3)$ in the plane and zero in the third row and column, so by [L4] it equals $\\mathrm{diag}(\\frac{3a^{2}}{2},\\frac{3a^{2}}{2},0)$. Hence $I=m_0\\,\\mathrm{diag}(3a^{2",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Principal data: the displayed matrix is diagonal, so $Ie_1=\\frac{3m_0a^{2}}{2}e_1$, $Ie_2=\\frac{3m_0a^{2}}{2}e_2$ and $Ie_3=3m_0a^{2}e_3$: $e_3$ is a principal axis with moment $3m_0a^{2}$, and every $g$-orthonormal pair in the plane $e_3=0$ is a pair of principal axes with the common moment $\\frac{3m_0a^{2}}{2}$. The integral identities are checked directly: $\\int\\lVert e_3\\times\\rho\\rVert_2^{2}\\,d\\nu=m_0\\sum_k((x_k)_1^{2}+(x_k)_2^{2})=m_0\\cdot3a^{2}=3m_0a^{2}$ and $\\int\\lVert e_1\\times\\rho\\rVert_2^{2}\\,d\\nu=m_0\\sum_k((x_k)_2^{2}+(x_k)_3^{2})=m_0\\cdot\\frac{3a^{2}}{2}$ by [L4] and [L6], in agr",
+          "step": "3.1",
+          "inputs": [
+            "L4",
+            "L6",
+            "step 2.2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Nondegeneracy and invertibility: no line through the origin contains two of the points $x_k$, because their arguments modulo $\\pi$ are $0,\\frac{\\pi}{3},\\frac{2\\pi}{3}$ (using [L4]), which are pairwise distinct; hence for every line $L$ through the origin at least two of the three points lie outside $L$ and $\\nu(\\mathbb R^3\\setminus L)\\ge2m_0>0$. The model is therefore nondegenerate, and by clause (d) of [L3] all principal moments are positive (as they visibly are) and $I$ is invertible. [step 3.1, L3, L4, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "L4",
+            "L3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Rotational term: by clause (b) of [L3] and clause 2, for a motion with body angular velocity $\\omega=\\sum_j\\omega_je_j$ the quadratic form is $\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^{2}=\\frac{3m_0a^{2}}{2}(\\omega_1^{2}+\\omega_2^{2})+3m_0a^{2}\\omega_3^{2}$; multiplying by $\\frac12$ and citing clause 3 of [[pthm-cm10-kinetic-splitting]] for the reading of the term as the rotational kinetic energy gives clause 4. In particular a rotation about the symmetry axis $e_3$ with rate $\\varpi$ has rotational term $\\frac32m_0a^{2}\\varpi^{2}$, and a rotation about an in-plane principal axis has term $",
+          "step": "4.2",
+          "inputs": [
+            "L3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-3",
+          "claim": "Symmetry check: $S=R_z(2\\pi/3)$ is the rotation of the reference plane that carries $x_k$ to $x_{k+1}$ for $k=0,1,2$ (indices modulo $3$): its matrix acts on $a(\\cos\\theta,\\sin\\theta,0)$ as $a(\\cos(\\theta+\\frac{2\\pi}{3}),\\sin(\\theta+\\frac{2\\pi}{3}),0)$ by the addition formulas and [L5]. Since $S$ is orthogonal and preserves norms, $$SIS^{\\mathsf T}=m_0\\Bigl(3a^{2}I_3-\\sum_k(Sx_k)(Sx_k)^{\\mathsf T}\\Bigr)=m_0\\Bigl(3a^{2}I_3-\\sum_kx_{k+1}x_{k+1}^{\\mathsf T}\\Bigr)=I$$ by step 2.2, the preservation of norms and the relabelling of the finite sum. Thus $SI=IS$, and the invariance of the inertia data ",
+          "step": "4.3",
+          "inputs": [
+            "L5",
+            "step 2.2",
+            "step 3.1",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Interpretation: the model is a rigid-material model with three equal point masses whose reference shape is symmetric under the threefold rotation; its inertia matrix, principal axes, principal moments and rotational term have been computed, and the symmetry invariance of the inertia matrix checked. The numbers are proportions of the model parameters $m_0$ and $a$; no measured moment of inertia and no concrete physical body is asserted, and the statements are conditional on the model of [[post-cm10-rigid-material]]. [step 4.1, step 4.2, step 4.3, given] \u220e",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 4.2",
+            "step 4.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The support of the measure is the fixed nonempty three-point set, and the mass is positive; no empty family or empty sum occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero data are handled: the Example computes the transverse principal moments as the positive numbers 3m_0a^2/2, so no vanishing-moment case occurs, and the zero vector is not a unit direction in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The configuration has exactly three material points; the item does not assert a one-point or one-dimensional specialization."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 proves the model is nondegenerate by exhibiting that every line through the origin meets the support in at most one point, so nu(R^3 minus L) is at least 2m_0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The computation is at the reference placement and states the quadratic form for general motions; no interval endpoint or limiting process is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made: the three vertices are displayed explicitly and the finite sums are over the named index set."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item computes data and checks identities; it asserts no if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item computes data and checks identities; it asserts no if-and-only-if statement."
+        }
+      ]
+    },
+    "cex-cm10-degenerate-line-mass-singular-inertia": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-dirac-measure",
+          "source_section": "Definition",
+          "quote": "The two branches are exhaustive and disjoint. The fact that this set function is a probability measure is proved in [[prop-dirac-measure-is-a-probability-measure]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "prop-dirac-measure-is-a-probability-measure",
+          "source_section": "Statement",
+          "quote": "For $x_0\\in X$, the Dirac set function $\\delta_{x_0}$ is a probability measure on every sigma-algebra on $X$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-nonnegative-weighted-sums-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $(\\mu_k)$ be measures on one measurable space and let $c_k\\in[0,+\\infty]$. Each scalar multiple $c_k\\mu_k$, defined by the zero, finite-positive, and positive-infinity branches of [[def-nonnegative-weighted-sum-of-measures]], is a measure. Every finite or countable weighted sum $\\sum_kc_k\\mu_k$ is also a measure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-nonnegative-weighted-sum-of-measures",
+          "source_section": "Definition",
+          "quote": "Let $\\mu$ be a measure and let $c\\in[0,+\\infty]$. Define the scalar set function $c\\mu$ by three disjoint branches:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-nonnegative-lebesgue-integral",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable\n([[def-extended-real-valued-measurable-function]]). Its\n**nonnegative Lebesgue integral** is\n$$\\int f\\,d\\mu:=\\sup\\left\\{\\int s\\,d\\mu:\\ s \\text{ is nonnegative simple and } 0\\le s\\le f\\right\\},$$\nwhere the simple integral on the right is the one from\n[[def-integral-of-a-nonnegative-simple-function]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integral-over-a-measurable-set",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let\n$f:X\\to[0,+\\infty]$ be measurable, and let $E\\in\\mathcal A$. Since\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]]\nimplies that $f\\chi_E$ is measurable, define the **integral of $f$ over $E$**\nby\n$$\\int_E f\\,d\\mu:=\\int f\\chi_E\\,d\\mu,$$\nwhere the integral on the right is the nonnegative Lebesgue integral of\n[[def-nonnegative-",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial f",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals finite. Adopt the\nmodel of [[post-cm10-rigid-material]] and its inertia data\n([[def-cm10-inertia-tensor]]): the reference mass distribution $\\nu$ with\ntotal mass $m$ and centred reference coordinates, the body inertia matrix $I$,\nthe spatial inertia tensor $I(t)=R(t)IR(t)^{\\mathsf ",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-inertia-matrix-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only in [L1], through [[lem-cm-mass-moments-are-finite]], to make the entries of $I$ finite real numbers. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m=\\nu(\\mathbb R^3)$ and inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]). Write $\\omega^{\\mathsf T}I\\omega:=\\",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals below finite.\nAdopt the model and notation of [[post-cm10-rigid-material]]: a reference\nmass distribution $\\nu$ with total mass $m$ and centred reference coordinates,\na fixed inertial frame, and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^{2}$ on\n",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of\n[[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and\nlet a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of\nclass $C^2$ on the time window $I_0$ ([[def-interval]]).",
+          "uses": [
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "This is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "is the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]),",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The model. Take $m_0>0$, $a>0$ and\n$$\\nu:=m_0\\delta_{ae_3}+m_0\\delta_{-ae_3},$$\na finite weighted sum of Dirac measures at the distinct points $ae_3$ and $-ae_3$ with positive weights. By [L1] $\\nu$ is a finite bounded measure; its total mass is $m=2m_0\\in(0,\\infty)$ and its first moment is $\\int\\rho\\,d\\nu=m_0ae_3+m_0(-ae_3)=0$ by the finite-atomic formula of step 1.1, so the reference coordinates are centred and $\\nu$ is a mass distribution of the model branch. [given, L1]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Finite-atomic integration formula: for $\\nu$ a finite weighted sum of Dirac measures as in [L1] and $f$ $\\nu$-integrable, $\\int f\\,d\\nu=m_0f(ae_3)+m_0f(-ae_3)$. This is the computation of step 1.1 of the equilateral-triangle example in this pair, repeated for the present weights: for nonnegative simple $s$ one has $\\int s\\,d\\nu=m_0s(ae_3)+m_0s(-ae_3)$, the supremum over minorants gives the nonnegative case, and the real case follows by linearity [L2]. [L1, L2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "step 1.1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Inertia matrix: by step 2.1 and [L3], $$I=m_0\\bigl(\\lVert ae_3\\rVert_2^{2}I_3-(ae_3)(ae_3)^{\\mathsf T}\\bigr)+m_0\\bigl(\\lVert -ae_3\\rVert_2^{2}I_3-(-ae_3)(-ae_3)^{\\mathsf T}\\bigr)=2m_0a^{2}\\bigl(I_3-e_3e_3^{\\mathsf T}\\bigr),$$ which is $\\mathrm{diag}(2m_0a^{2},\\,2m_0a^{2},\\,0)$ in the standard basis by [L5]. In particular $Ie_3=0$ with $e_3\\neq0$, so $I$ is not invertible. [step 2.1, L3, L5, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Principal data and the vanishing criterion: the displayed matrix is diagonal, so the principal moments are $2m_0a^{2}$, $2m_0a^{2}$ and $0$, and $e_3$ is a principal axis with vanishing moment. This is consistent with clause (d) of [L3]: $\\nu$ is supported on the line $\\mathbb Re_3$ of the principal axis $e_3$, so the principal moment about $e_3$ vanishes; the model is degenerate, and the nondegeneracy hypothesis of the positivity statement fails. [step 3.1, L3, L5, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "L3",
+            "step 3.1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "A rotation about the line is invisible to the rotational term. Let the model move with constant orientation path $R(t)=R_z(\\varpi t)$ about the symmetry axis, so that the configuration path is $(c,R)$ with $c$ arbitrary of class $C^{2}$; by [[def-cm10-angular-velocity]] its body angular velocity is $\\omega=\\varpi e_3$ (the axis $e_3$ is fixed by $R_z$, and $R^{\\mathsf T}R'=[\\varpi e_3]_\\times$ by the derivative clause of the coordinate-rotation matrices). Every material point lies on the rotation axis: $\\omega\\times(\\pm ae_3)=\\pm\\varpi(e_3\\times ae_3)=0$ by [L5], so the material velocity field",
+          "step": "4.2",
+          "inputs": [
+            "L5",
+            "L4",
+            "step 3.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Conclusion. The model is a rigid-material model of positive total mass, and its inertia matrix $\\mathrm{diag}(2m_0a^{2},2m_0a^{2},0)$ has a zero principal moment, is not invertible, and fails to detect rotation about the line carrying the masses. The refuted statement \u2014 that every positive-mass model of the branch has positive definite inertia \u2014 is therefore false. The correct criterion is clause (d) of [[pthm-cm10-principal-axes]]: the moment about a principal axis vanishes exactly when the mass is supported on that axis; the model branch, the kinetic splitting and the principal-axis theorem ",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 4.2",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The support of the measure is the fixed nonempty two-point set, and the mass 2m_0 is positive; no empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero cases are exactly the point: step 3.1 computes the zero principal moment and the zero rotational energy of a rotation about the line, and step 4.1 derives Ie_3=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-directional case is represented: the support spans the one-dimensional line Re_3, which is the degenerate span for which the inertia matrix loses rank in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The counterexample is the degenerate case itself: the measure is supported on the line Re_3 and step 2.1 shows that I has a zero eigenvalue."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The construction is pointwise in time and uses the constant orientation path R(t)=R_z(varpi t); no interval endpoint or limiting argument is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two point masses are displayed explicitly; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal positivity claim by counterexample; it asserts no if-and-only-if statement of its own."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item refutes a universal positivity claim by counterexample; it asserts no if-and-only-if statement of its own."
+        }
+      ]
+    },
+    "ex-cm10-euler-angle-pole-and-orientation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-coordinate-rotation-matrices",
+          "source_section": "Statement",
+          "quote": "1. $R_z(a)\\in SO(3)$ and $R_y(a)\\in SO(3)$ for every $a$ ([[def-cm-special-orthogonal-group]]), $R_z(a)e_3=e_3$ and $R_y(a)e_2=e_2$, and $R_z(0)=R_y(0)=I_3$.\n2. $R_z(a)R_z(b)=R_z(a+b)$ and $R_y(a)R_y(b)=R_y(a+b)$ for all $a,b\\in\\mathbb R$.\n3. For every differentiable $a:I\\to\\mathbb R$ on an interval $I\\subseteq\\mathbb R$ ([[def-derivative]], [[def-interval]]), the matrix-valued curves $t\\mapsto R_",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map $[\\cdot]_\\times:\\mathbb R^3\\to M_3(\\mathbb R)$ by\n$$[\\omega]_\\times:=\\begin{pmatrix}0&-\\omega_3&\\omega_2\\\\ \\omega_3&0&-\\omega_1\\\\ -\\omega_2&\\omega_1&0\\end{pmatrix}.$$\nThen:",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-so3-is-a-matrix-group",
+          "source_section": "Statement",
+          "quote": "In the notation of [[def-cm-special-orthogonal-group]]:",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative**",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]),",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm10-rigid-body-configuration",
+          "source_section": "Definition",
+          "quote": "Adopt the model data, the time window $I_0$, the inertial frame and the\nnotation of [[post-cm10-rigid-material]]: the reference mass distribution\n$\\nu$ with total mass $m$ and centred reference coordinates, and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^2$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of\n[[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and\nlet a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of\nclass $C^2$ on the time window $I_0$ ([[def-interval]]).",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Pole values: by the composition law and $R_y(0)=I_3$ of [L1], $\\Phi(\\alpha,0,\\gamma)=R_z(\\alpha)R_z(\\gamma)=R_z(\\alpha+\\gamma)$, so the value depends only on $\\alpha+\\gamma$. For every real $s$, $\\Phi(\\alpha+s,0,\\gamma-s)=R_z(\\alpha+s+\\gamma-s)=R_z(\\alpha+\\gamma)=\\Phi(\\alpha,0,\\gamma)$, and the points $(\\alpha+s,0,\\gamma-s)$ approach $(\\alpha,0,\\gamma)$ as $s\\to0$ while remaining distinct for $s\\neq0$. Hence $\\Phi$ is not injective on any neighbourhood of the pole point; this is clause 1. [given, L1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Partial derivatives at the pole: differentiating with respect to $\\alpha$ with $\\beta,\\gamma$ fixed and using the product rule and [L1], $\\partial_\\alpha\\Phi(\\alpha,\\beta,\\gamma)=[e_3]_\\times R_z(\\alpha)R_y(\\beta)R_z(\\gamma)$, and at $\\beta=0$ this is $[e_3]_\\times R_z(\\alpha+\\gamma)$ by clause 1. Differentiating with respect to $\\gamma$ gives $\\partial_\\gamma\\Phi(\\alpha,\\beta,\\gamma)=R_z(\\alpha)R_y(\\beta)R_z(\\gamma)[e_3]_\\times$; at $\\beta=0$ the middle factor is $I_3$ and the factors $R_z(\\gamma)$ and $[e_3]_\\times$ commute by the identity $R_z(a)[e_3]_\\times=[e_3]_\\times R_z(a)$ of [L1], so",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Rank and absence of a differentiable inverse: the Jacobian matrix $J\\Phi(\\alpha,0,\\gamma)$ has columns $\\partial_\\alpha\\Phi,\\ \\partial_\\beta\\Phi,\\ \\partial_\\gamma\\Phi$ [L3], and the first and third columns coincide by step 1.2; hence its rank is at most $2$ and $D\\Phi(\\alpha,0,\\gamma)$, the linear map with that matrix, is not invertible. If a differentiable local inverse $\\Psi$ of $\\Phi$ existed on a neighbourhood of $\\Phi(\\alpha,0,\\gamma)$, then differentiating the identity $\\Psi\\circ\\Phi=\\mathrm{Id}$ at the pole point with the chain rule [L3] would give $D\\Psi(\\Phi(p))\\circ D\\Phi(p)=\\mathrm{",
+          "step": "2.1",
+          "inputs": [
+            "L3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Angular velocity along a curve through the pole: let $\\Phi_t:=\\Phi(\\alpha(t),\\beta(t),\\gamma(t))$; by the product rule and [L1] at $t=0$, where $\\beta(0)=0$ and $R_y(0)=I_3$, $$\\Phi_0'=\\bigl(\\alpha'(0)+\\gamma'(0)\\bigr)[e_3]_\\times R_z(\\alpha(0)+\\gamma(0))+\\beta'(0)\\,R_z(\\alpha(0))[e_2]_\\times R_z(\\gamma(0)),$$ using the two computations of step 1.2 for the $\\alpha$- and $\\gamma$-directions and the middle derivative $\\partial_\\beta\\Phi=R_z(\\alpha)[e_2]_\\times R_z(\\gamma)$ at the pole. Multiplying on the left by $\\Phi_0^{\\mathsf T}=R_z(-\\gamma(0))R_z(-\\alpha(0))=\\Phi_0^{-1}$ (the matrix is ortho",
+          "step": "2.2",
+          "inputs": [
+            "L1",
+            "step 1.2",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The regular physical path: $R(t)=R_y(t)$ has $R(0)=I_3$ and is the composition of the smooth coordinate-rotation curve with the identity, hence of class $C^\\infty$ [L1]; by the derivative clause of [L1], $R'(t)=R_y(t)[e_2]_\\times$, so $R(t)^{\\mathsf T}R'(t)=[e_2]_\\times$ for every $t$ and the body angular velocity is the constant vector $e_2$ by [L2] and [L4]; in particular the orientation path passes through the pole orientation $R(0)=I_3=\\Phi(0,0,0)$ with a well-defined, constant angular velocity. The failure of clause 2 is thus a failure of the parameter triple to be a chart at the pole, no",
+          "step": "3.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Summary: the parametrization $\\Phi$ is smooth as a map, but at every pole point it is non-injective (clause 1), its derivative has rank at most $2$ and it admits no differentiable local inverse (clause 2), and the Euler-angle rates do not determine the angular velocity (clause 3), while a physical orientation path through the same pole orientation is regular with a perfectly well-defined angular velocity (clause 4). [step 1.1, step 2.1, step 2.2, step 3.1] \u220e",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family occurs: the parametrization is defined on all of R^3 and the neighbourhoods considered are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The pole beta=0 is the zero case treated throughout: steps 1.1, 1.2 and 2.1 evaluate the parametrization and its derivative at beta=0, where the sum alpha+gamma controls the value."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The rank is one less than full: step 2.2 shows the Jacobian at a pole point has rank at most two, the one-defect case of a map from R^3 to a three-dimensional group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degeneration of the parametrization at the pole is the subject of steps 1.1-2.2, while step 3.1 shows that the orientation path R(t)=R_y(t) through the pole orientation remains regular with angular velocity e_2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The parametrization is read on all of R^3 while the chart domain of the definition restricts beta to (0,pi); step 4.1 uses the interior path values and no endpoint limit of the chart."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection is made: the parametrization is an explicit formula and the path R_y is exhibited."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item proves non-injectivity and rank deficiency, not an if-and-only-if criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item proves non-injectivity and rank deficiency, not an if-and-only-if criterion."
+        }
+      ]
+    },
+    "ex-cm10-parallel-axis-shift-check": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "ex-cm10-equilateral-triangle-rotational-inertia",
+          "source_section": "Example",
+          "quote": "Adopt a rigid-material model of [[post-cm10-rigid-material]] whose reference\nmass distribution is the finite weighted sum of Dirac measures\n$$\\nu:=m_0\\delta_{x_1}+m_0\\delta_{x_2}+m_0\\delta_{x_3},\\qquad x_k:=a\\Bigl(\\cos\\frac{2\\pi k}{3},\\ \\sin\\frac{2\\pi k}{3},\\ 0\\Bigr)\\quad(k=0,1,2),$$\nwith equal weights $m_0>0$ and circumradius $a>0$; the parameters are model\ndata, not measurements. Then:",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-parallel-axis-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only\nto make the displayed integrals finite. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with\ntotal mass $m=\\nu(\\mathbb R^3)\\in(0,+\\infty)$ that is **centred**, that is,\n$\\mu(\\nu)=\\int\\rho\\,d\\nu(\\rho)=0\\in\\mathbb R^3$\n([[def-cm-mass-distribution-and-inertia-matrix]]), and let $I(\\nu)$ be its inertia ma",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-inertia-tensor-about-a-point",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$\n([[def-borel-sigma-algebra]]), let $\\nu$ be a measure on the measurable space\n$(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is\n**finite** and **bounded**: $\\nu(\\mathbb R^3)<+\\infty$ and\n$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some real $R>0$\n([[def-metric-ball]]). T",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be\na measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ that is finite and bounded:\n$\\nu(\\mathbb R^3)<+\\infty$ and $\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some\nreal $R>0$ ([[def-metric-ball]]), and let $a\\in\\mathbb R^3$. With the shifted integrands\n$G_a(\\rho)_{jk}=\\lVert\\rho-a\\rVert_",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-mass-distribution-and-inertia-matrix",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$ ([[def-borel-sigma-algebra]]) and let $\\nu$ be a measure on the measurable space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is **finite**, $\\nu(\\mathbb R^3)<+\\infty$, and **bounded**, meaning that there is a real $R>0$ with\n$$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0,$$\n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial f",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]),",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "These are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$,\n$$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$\n$$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin y.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Spatial parallel-axis form: by [L3] and [L2], $$I(t,p)=R(t)\\Bigl[I+m\\bigl(\\lVert a(t,p)\\rVert_2^{2}I_3-a(t,p)a(t,p)^{\\mathsf T}\\bigr)\\Bigr]R(t)^{\\mathsf T}=I(t)+m\\bigl(\\lVert a\\rVert_2^{2}I_3-Ra(Ra)^{\\mathsf T}\\bigr),$$ distributing the conjugation and using [L4]; substituting $Ra=p-c(t)$ and $\\lVert a\\rVert_2=\\lVert p-c(t)\\rVert_2$ [L4] gives the displayed form of clause 1. [given, L2, L3, L4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L2",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Constructor notation is consistent: $I(t,c(t))=I(t)$, because $a(t,c(t))=0$ and $I_\\nu(0)=I$ by [L2] with $a=0$; this is the statement of [[def-cm10-inertia-tensor]] clause (c) that the tensor about the centre of mass is the spatial tensor. [step 1.1, L2, L3, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Vertex evaluation from the supplier: take the reference placement $c=0$, $R=I_3$, so $I(0)=I$ and $a(0,ae_1)=ae_1$ by [L3]; then step 1.1 gives $$I(0,ae_1)=I+m\\bigl(a^{2}I_3-a^{2}e_1e_1^{\\mathsf T}\\bigr)=I+3m_0a^{2}\\bigl(I_3-e_1e_1^{\\mathsf T}\\bigr),$$ and adding the diagonal contributions gives $\\mathrm{diag}(\\frac{3m_0a^{2}}{2}+\\frac{6m_0a^{2}}{2},\\frac{3m_0a^{2}}{2}+\\frac{6m_0a^{2}}{2},3m_0a^{2}+3m_0a^{2})$, which is the matrix of clause 2. [step 1.1, L1, L2, L3, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "L3",
+            "step 1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Direct finite-sum check: by the definition of the shifted tensor [L2] and the finite-atomic formula [L1], $$I(0,ae_1)=\\int\\bigl(\\lVert\\rho-ae_1\\rVert_2^{2}I_3-(\\rho-ae_1)(\\rho-ae_1)^{\\mathsf T}\\bigr)d\\nu(\\rho)=m_0\\sum_k\\bigl(\\lVert x_k-ae_1\\rVert_2^{2}I_3-(x_k-ae_1)(x_k-ae_1)^{\\mathsf T}\\bigr).$$ The contribution of $k=0$ vanishes because $x_0=ae_1$. For $k=1,2$, the displacement vectors are $d_k:=x_k-ae_1=(-\\frac{3a}{2},\\pm\\frac{\\sqrt3a}{2},0)$ with $\\lVert d_k\\rVert_2^{2}=3a^{2}$, and $d_1d_1^{\\mathsf T}+d_2d_2^{\\mathsf T}=\\mathrm{diag}(\\frac{9a^{2}}{2},\\frac{3a^{2}}{2},0)$ because the off-d",
+          "step": "3.1",
+          "inputs": [
+            "L2",
+            "L1",
+            "L5",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Axis moments: by clause (c) of [[pthm-cm10-principal-axes]] the moment about a spatial axis through $p$ with unit direction $n$ is $n^{\\mathsf T}I(t,p)n$; for the axis through the vertex $ae_1$ in direction $e_3$ this is the $(3,3)$ entry of the matrix of clause 2, namely $6m_0a^{2}$; for the parallel axis through the centre of mass the moment is $e_3^{\\mathsf T}Ie_3=3m_0a^{2}$ by the companion example [L1]. Directly, the squared distance of the three material points from the vertex axis is $0,3a^{2},3a^{2}$ (using [L5] for the coordinates of $d_1,d_2$), giving $2m_0\\cdot3a^{2}=6m_0a^{2}$. The",
+          "step": "4.1",
+          "inputs": [
+            "L1",
+            "L5",
+            "L2",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Interpretation: the spatial parallel-axis form of clause 1 is the model's reading of the mathematical supplier [L2], and the two independent computations of clauses 2-3 agree on the triangle data. The computation exercises the shifted tensor about a point of the body that is not the centre of mass; the entries are model quantities computed from $m_0$ and $a$, and no measured inertia or concrete body is asserted. [step 1.1, step 2.2, step 3.1, step 4.1] \u220e",
+          "step": "5.1",
+          "inputs": [
+            "L2",
+            "step 1.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The support is the fixed nonempty three-point set and the mass is positive; no empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 includes the zero contribution of the mass at the vertex itself, whose displacement vector vanishes; the remaining two contributions are positive."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No cardinality-one specialization is asserted; the model has three material points throughout."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Example model is nondegenerate by the companion computation, and the parallel-axis supplier is applied in its centred nondegenerate form; the shifted tensor about a point is well defined for every spatial point by step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The computation is at the reference placement and for general motions; no interval endpoint or limiting process enters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The vertices are displayed explicitly; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item verifies an identity of tensors on explicit data, not an if-and-only-if statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item verifies an identity of tensors on explicit data, not an if-and-only-if statement."
+        }
+      ]
+    }
+  }
+}

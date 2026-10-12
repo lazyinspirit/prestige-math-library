@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-disjoint-union-makes-bordism-classes-abelian-groups.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-potentials-delta-point-interaction-bound-state.md

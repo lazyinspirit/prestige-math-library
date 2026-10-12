@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sr-scalar-field-plane-wave-stress-energy.md

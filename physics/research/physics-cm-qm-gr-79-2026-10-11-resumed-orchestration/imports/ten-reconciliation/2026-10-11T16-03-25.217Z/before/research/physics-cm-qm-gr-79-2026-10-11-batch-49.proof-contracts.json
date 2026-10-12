@@ -1,0 +1,1288 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-49",
+  "scope": [
+    "lem-nrqm-interference-component-cross-term-and-recorded-bin-laws",
+    "pthm-nrqm-interference-coherent-and-mixture-detection-laws",
+    "pthm-nrqm-interference-recorded-bin-laws-loss-and-conditioning",
+    "pthm-nrqm-interference-continuity-and-local-probability-balance",
+    "texp-nrqm-interference-finite-sample-fringe-failure",
+    "ex-nrqm-interference-ideal-flat-two-path-screen-distribution",
+    "ex-nrqm-interference-uniform-phase-averaging",
+    "exp-nrqm-interference-bach-electron-double-slit"
+  ],
+  "contracts": {
+    "lem-nrqm-interference-component-cross-term-and-recorded-bin-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "almost-everywhere equivalence class of measurable representatives. When $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual quotient-vector-space construction of [[def-quotient-vector-space-and-canonical-projection]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "is **measurable** when $u,v$ are real measurable functions. Write $$N_p(f)=\\begin{cases}\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p},&\\displaystyle\\int_X|f|^p\\,d\\mu<\\infty,\\\\+\\infty,&\\displaystyle\\int_X|f|^p\\,d\\mu=+\\infty,\\end{cases}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$ The finite case uses the real power; the infinite case is assigned directly, so $N_p(f)$ is defined for every measurable finite-valued complex $f$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "with it $L^2(\\mu;\\mathbb C)$ is a complex Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-cauchy-schwarz-inequality-for-l-two",
+          "source_section": "Statement",
+          "quote": "\\le\\|f\\|_2\\|g\\|_2.$$ Equality holds if and only if at least one of $f,g$ is zero almost everywhere, or there is a constant $c>0$ with $$|f|^2=c\\,|g|^2\\qquad\\mu\\text{-almost everywhere}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "in a real or complex inner product space, $$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$ Equality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "$\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$. 2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "The second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Pointwise identity] Fix representatives of $a,b$. For every $x\\in D$ the identity $\\|a(x)+b(x)\\|_{\\mathbb C^{r}}^{2}=\\|a(x)\\|_{\\mathbb C^{r}}^{2}+\\|b(x)\\|_{\\mathbb C^{r}}^{2}+2\\operatorname{Re}\\langle a(x),b(x)\\rangle_{\\mathbb C^{r}}$ holds by the expansion of the finite-dimensional inner product; by [F1] the three real functions $x\\mapsto\\|a(x)\\|^{2}$, $\\|b(x)\\|^{2}$ and $\\operatorname{Re}\\langle a(x),b(x)\\rangle$ are measurable, and the last is integrable because $|\\operatorname{Re}\\langle a(x),b(x)\\rangle|\\le\\|a(x)\\|\\,\\|b(x)\\|$ with $\\|a\\|\\,\\|b\\|\\in L^{1}(dx)$; representatives differing on null sets change the identity only on a null set. This proves the pointwise assertion of (a). [given, F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Incoherent law] Assume $\\|a\\|,\\|b\\|>0$. By [F2] each of $B\\mapsto\\int_{B}\\|a\\|^{2}dx$ and $B\\mapsto\\int_{B}\\|b\\|^{2}dx$ is a finite measure with positive total masses $\\|a\\|^{2}$ and $\\|b\\|^{2}$; by [F4] each normalized set function is a probability measure, and a convex combination with $w\\in[0,1]$ of two probability measures is again a probability measure, because countable additivity is preserved and $w\\cdot1+(1-w)\\cdot1=1$. This is (c). [F2, F4, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "[Recorded weights] Applying [F3] with $h=W$ and $H=1$ gives $\\nu(D)=\\int_{D}W\\,d\\mu\\le\\int_{D}1\\,d\\mu=1$ and $\\nu(B)\\ge0$ for every $B$ because $W\\ge0$; countable additivity of $\\nu$ follows from [F2] applied to the measure $\\mu$. If $\\nu(D)>0$, [F4] makes $\\bar\\nu$ a probability measure. For the finite family, $\\nu_{a}=\\int_{D}W_{a}d\\mu\\ge0$ and $\\sum_{a}\\nu_{a}=\\int_{D}\\sum_{a}W_{a}\\,d\\mu\\le\\int_{D}1\\,d\\mu=1$ by finite additivity and [F3]; if $\\sum_{a}W_{a}=1$ pointwise, the middle integral equals $\\mu(D)=1$. This is (d). [F2, F3, F4, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F3",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Integrated identity] Let $B\\in\\mathcal A$. Integrating the identity of step 1.1 over $B$ is legitimate because all three terms are integrable on $B$ by step 1.1 and [F1]; the integral of the left side is $\\int_{B}\\|a+b\\|^{2}dx$ and the integral of the right side is $\\int_{B}\\|a\\|^{2}dx+\\int_{B}\\|b\\|^{2}dx+2\\operatorname{Re}\\langle a,b\\rangle_{B}$, which is the displayed identity of (a). [step 1.1, F1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Coherent law] Assume $\\|a+b\\|>0$. The set function $B\\mapsto\\int_{B}\\|a+b\\|^{2}dx$ is a finite measure with total mass $\\|a+b\\|^{2}$ by [F2], and $\\|a+b\\|^{2}\\in(0,\\infty)$; dividing by this constant gives a finite measure of total mass one, hence a probability measure by [F4], whose value at $B$ is $p_{\\mathrm{coh}}(B)$ with denominator $N+2c$ by step 2.1 applied to $B=D$. This is (b). [step 2.1, F2, F3, F4, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F2",
+            "F4",
+            "step 2.1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Coincidence criterion] By steps 2.1 and 1.2 with $w=w_{*}$, $p_{*}(B)=\\frac{1}{N}\\int_{B}(\\|a\\|^{2}+\\|b\\|^{2})dx$ and $p_{\\mathrm{coh}}(B)=\\frac{\\int_{B}(\\|a\\|^{2}+\\|b\\|^{2})dx+2c(B)}{N+2c}$ with $c(B):=\\operatorname{Re}\\langle a,b\\rangle_{B}$; since $N>0$ and $N+2c=\\|a+b\\|^{2}>0$, the equality $p_{\\mathrm{coh}}(B)=p_{*}(B)$ is equivalent to $N c(B)=c\\,M(B)$ for the finite measure $M(B):=\\int_{B}(\\|a\\|^{2}+\\|b\\|^{2})dx$. The signed measure $N c(\\cdot)-c\\,M(\\cdot)$ vanishes on every $B\\in\\mathcal A$ if and only if its density $N\\operatorname{Re}\\langle a(x),b(x)\\rangle_{\\mathbb C^{r}}-c(\\|a(x)\\|^{2}+\\|b(x)\\|^{2})$ vanishes $dx$-almost everywhere by [F2], since a nonzero integrable density has a level set of strictly positive or strictly negative integral. This is the displayed criterion; if $\\langle a(x),b(x)\\rangle=0$ a.e., then $c=0$ and $c(B)=0$ for every $B$, so the laws coincide, and if $c=0$ the criterion reduces to $\\operatorname{Re}\\langle a(x),b(x)\\rangle=0$ a.e. This proves (e), and steps 1.1, 1.2, 1.3, 2.1, 3.1 prove the remaining clauses. [step 1.2, step 1.3, step 2.1, step 3.1, F1, F2, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 1.2",
+            "F2",
+            "step 1.1",
+            "step 1.3",
+            "step 3.1",
+            "F1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 gives $int_{\u000barnothing}|a+b|^2=0$ and step 2.1 (coherent law) evaluates to zero on $B=\u000barnothing$; step 1.3 gives $\nu(\u000barnothing)=0$ for every weight; the laws of steps 2.1 and 1.2 are evaluated on the empty set without division by a vanishing numerator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Clause (b) requires $|a+b|>0$ and clause (c) requires $|a|,|b|>0$, so the zero-vector cases are excluded exactly where a normalization occurs; step 1.3 includes the zero weight $W=0$ and $W_{a}=0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 3.1 hold for every $rge1$, with $r=1$ the scalar case; the finite family of step 1.3 includes the one-label case $m=1$, and step 1.2 includes $w=0$ and $w=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 handles the degenerate case $a=b$ through its displayed criterion: the density relation $Noperatorname{Re}langle a,b\rangle=c(|a|^{2}+|b|^{2})$ holds for proportional components; the criterion also covers the coincident-support case, since it is an almost-everywhere statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All laws are evaluated on arbitrary measurable $B$ in step 1.2, steps 2.1 and 1.3, halflines and singletons included, and the criterion of step 4.1 quantifies over every measurable $B$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes the Axiom of Countable Choice as the choice hypothesis of the cited Hilbert-space and measure suppliers; steps 1.1-4.1 use it only there and make no further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves that if $p_{mathrm{coh}}(B)=p_{*}(B)$ for every $B$, then the signed measure $Nc(cdot)-cM(cdot)$ vanishes, hence its density vanishes almost everywhere."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 also proves that if the density vanishes almost everywhere, then $Nc(B)=cM(B)$ for every $B$ and the two laws coincide; the two special cases of the statement are read off the same relation."
+        }
+      ]
+    },
+    "pthm-nrqm-interference-coherent-and-mixture-detection-laws": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "source_section": "Statement",
+          "quote": "there is a unique regular projection-valued measure $G$ on the Borel sets of $\\mathbb R^{3}$ with $$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$ for all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its scalar law is the model's Born position law, $$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$ (c) for each $k$ the spectral projection-valued measure of $P_{k}$ is $$E_{P_{k}}(B)=U^{(s)-1}M_{\\mathbf 1_{B}(p_{k})}U^{(s)},$$ and with $\\psi_{p}:=U^{(s)}\\psi$ $$\\mu^{P_{k}}_{\\psi}(B)=\\int_{\\{p\\in\\mathbb R^{3}",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-observables-framework-observable-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "which depends only on the ray by [[def-nrqm-state-geometry-state-vectors-and-rays]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-observables-framework-observable-and-outcome-law",
+          "source_section": "Definition",
+          "quote": "it is affine in the preparation: for a statistical mixture $\\sum_nw_n\\rho_n$ one has $\\mu^{A}_{\\sum_nw_n\\rho_n}=\\sum_nw_n\\mu^{A}_{\\rho_n}$ by [[lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity]] clause (b).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+          "source_section": "Statement",
+          "quote": "the trace-norm convergent sum of [[lem-nrqm-state-geometry-density-set-convex-and-complete]], then for every Borel set $B$ $$\\mu^{A}_{\\rho}(B)=\\sum_nw_n\\,\\mu^{A}_{\\rho_n}(B),$$ the series converging absolutely.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-interference-two-path-preparation-and-detection-model",
+          "source_section": "Definition",
+          "quote": "closed under finite real convex combinations ([[lem-nrqm-state-geometry-density-set-convex-and-complete]] clause (a), [[def-nrqm-state-geometry-framework-state-space]]).",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-nrqm-interference-two-path-preparation-and-detection-model",
+          "source_section": "Definition",
+          "quote": "of relative phase $\\varphi$ is the pure preparation $$\\rho_{\\mathrm{coh}}(\\varphi):=\\widehat\\rho\\bigl(\\psi_{1}+e^{i\\varphi}\\psi_{2}\\bigr),$$ the normalized rank-one operator of the nonzero vector $\\psi_{1}+e^{i\\varphi}\\psi_{2}$ ([[def-nrqm-state-geometry-pure-mixed-states-and-purity]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqm-interference-component-cross-term-and-recorded-bin-laws",
+          "source_section": "Statement",
+          "quote": "2\\operatorname{Re}\\langle a,b\\rangle_{B}.$$ (b) *Coherent bin law.* If $\\|a+b\\|>0$, then $$p_{\\mathrm{coh}}(B):=\\frac{\\displaystyle\\int_{B}\\|a+b\\|^{2}\\,dx}{\\|a+b\\|^{2}}\\qquad(B\\in\\mathcal A)$$ defines a probability measure on $(D,\\mathcal A)$ ([[def-probability-measure]]), and for every $B\\in\\mathcal A$ the expansion of (a) holds with $\\|a+b\\|^{2}=N+2c$ in the denominator.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Coherent law] Assume admissibility. Put $u:=(\\psi_{1}+e^{i\\varphi}\\psi_{2})/\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|$, a unit vector, so that $\\rho_{\\mathrm{coh}}(\\varphi)=\\widehat\\rho(u)$ by [F3]. [F1] gives $\\mu^{G}_{u}(B)=\\int_{B}\\|u(x)\\|^{2}dx$; substituting $u$ and using $\\|u\\|=1$ gives the formula of (a) for the law and the identity $\\|u(x)\\|^{2}=\\|\\psi_{1}(x)+e^{i\\varphi}\\psi_{2}(x)\\|^{2}/\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}$. [given, F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Which-path law] By [F2] and [F3], $\\mu^{G}_{\\rho_{\\mathrm{mix}}(w)}(B)=w\\,\\mu^{G}_{\\widehat\\rho(\\psi_{1})}(B)+(1-w)\\,\\mu^{G}_{\\widehat\\rho(\\psi_{2})}(B)$; applying [F1] to the normalized vectors $\\psi_{1}/\\|\\psi_{1}\\|$ and $\\psi_{2}/\\|\\psi_{2}\\|$ gives $\\mu^{G}_{\\widehat\\rho(\\psi_{j})}(B)=\\int_{B}\\|\\psi_{j}\\|^{2}dx/\\|\\psi_{j}\\|^{2}$ for $j=1,2$, which is (b). [given, F1, F2, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F3",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "[Cross-term expansion] Apply [F4] with $a=\\psi_{1}$ and $b=e^{i\\varphi}\\psi_{2}$: $\\int_{B}\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}dx=\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx+2\\operatorname{Re}\\langle\\psi_{1},e^{i\\varphi}\\psi_{2}\\rangle_{B}$; by conjugate-linearity in the second argument, $\\langle\\psi_{1},e^{i\\varphi}\\psi_{2}\\rangle_{B}=e^{-i\\varphi}\\int_{B}\\langle\\psi_{1}(x),\\psi_{2}(x)\\rangle_{\\mathbb C^{r}}dx$, and at $B=\\mathbb R^{3}$ the denominator is $N+2\\operatorname{Re}(e^{-i\\varphi}c)$ with $N>0$, so it is positive. This is the expansion of (a). [given, F4, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "given",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Coincidence criterion] Apply [F4] to $a=\\psi_{1}$, $b=\\psi_{2}$: the criterion of the math lemma states that $p_{\\mathrm{coh}}(B)=p_{*}(B)$ for every Borel $B$ with $p_{*}(B)=N^{-1}\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx$ if and only if the displayed almost-everywhere relation holds. By step 1.1 with $\\varphi=0$ the framework coherent law equals $p_{\\mathrm{coh}}$, and by step 1.2 with $w=w_{*}$ the framework which-path law equals $p_{*}$; the criterion therefore transfers to the framework laws, and the two special cases follow from the same relation. This proves (c), and steps 1.1-1.3 prove (a) and (b); clause (d) records the scope. [step 1.1, step 1.2, step 1.3, F2, F4, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 evaluate the laws on $B=\u000barnothing$ through the position law of [F1], giving zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The model admissibility condition excludes $psi_{1}+e^{i\u000barphi}psi_{2}=0$ in step 1.1, and the declared components are nonzero for the mixture of step 1.2; no division by a vanishing norm occurs."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 holds for every spin label through $rge1$; step 1.2 includes the weights $w=0$ and $w=1$ (one path only), and the criterion of step 2.1 reduces to the scalar case at $r=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the criterion of [F4] including the case of proportional components, where the equality holds, and the criterion is an almost-everywhere statement covering coincident supports."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The laws of steps 1.1 and 1.2 are evaluated on arbitrary Borel sets, including halflines and singletons, and the criterion of step 2.1 quantifies over every Borel set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 assume the Axiom of Countable Choice and the Axiom of Choice as the hypotheses of the cited spectral, position-law and preparation suppliers, and no step makes an additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 transfers the forward direction of the criterion of [F4]: equality of the two laws on every Borel set forces the displayed almost-everywhere relation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 transfers the reverse direction of the criterion of [F4]: the almost-everywhere relation forces equality on every Borel set; the two special cases are read off."
+        }
+      ]
+    },
+    "pthm-nrqm-interference-recorded-bin-laws-loss-and-conditioning": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-nrqm-framework-observable-and-probability",
+          "source_section": "Postulate",
+          "quote": "the **outcome probabilities** being $p_{a}=\\operatorname{tr}(\\rho F_{a})\\ge0$, $\\sum_{a}p_{a}=1$ by clause (b) of the same lemma.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-interference-recorded-detector-and-sampling-model",
+          "source_section": "Definition",
+          "quote": "**recorded probability** of a label $a\\in A$ and the **no-record probability** are $$\\nu(a):=\\operatorname{tr}\\bigl(\\rho F_{a}\\bigr),\\qquad \\nu(0):=\\operatorname{tr}\\bigl(\\rho F_{0}\\bigr)=1-\\sum_{a\\in A}\\nu(a),$$ the outcome reading of clause (iv) of P2 for the declared effects ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (f) records the reading; the numbers are nonnegative and sum to one).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-composites-rank-one-operator-calculus",
+          "source_section": "Statement",
+          "quote": "$T_{u,v}B=T_{u,B^*v}$; (e) for trace-class $S$, $ST_{u,v}=T_{Su,v}$, $T_{u,v}S=T_{u,S^*v}$ and $\\operatorname{tr}(ST_{x,y})=\\langle Sx,y\\rangle=\\operatorname{tr}(T_{x,y}S)$; (f) the map $(u,v)\\mapsto T_{u,v}$ is continuous $H\\times H\\to\\mathcal S_1(H)$ for the trace norm, so in particular $v\\mapsto T_{v,v}$ and $v\\mapsto T_{u,v}$ are trace-norm continuous for fixed $u$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "source_section": "Statement",
+          "quote": "the trace is linear in the trace-class variable and bounded by the trace norm: for trace-class $S,T$ and scalars $a,b$, $\\operatorname{tr}(aS+bT)=a\\operatorname{tr}(S)+b\\operatorname{tr}(T)$ and $|\\operatorname{tr}(T)|\\le\\|T\\|_1$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "source_section": "Statement",
+          "quote": "the trace-class operators $\\mathcal S_1(H,K)$ ([[def-trace-class-operator]]) form a linear subspace of $\\mathcal B(H,K)$ on which $\\|\\cdot\\|_1$ is a norm, and $$\\|T\\|\\le\\|T\\|_1\\qquad\\text{for every }T\\in\\mathcal S_1(H,K)$$ ([[def-operator-norm]]); 2.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nrqm-interference-component-cross-term-and-recorded-bin-laws",
+          "source_section": "Statement",
+          "quote": "(d) *Recorded weights, sub-probability and conditioning.* Let $\\mu$ be a probability measure on $(D,\\mathcal A)$ and let $W:D\\to[0,1]$ be measurable.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "pthm-nrqm-interference-coherent-and-mixture-detection-laws",
+          "source_section": "Statement",
+          "quote": "(b) *Which-path law.* For the declared weight $w\\in[0,1]$ and every Borel set $B\\subseteq\\mathbb R^{3}$, $$\\mu^{G}_{\\rho_{\\mathrm{mix}}(w)}(B)=w\\,\\frac{\\displaystyle\\int_{B}\\|\\psi_{1}\\|^{2}\\,dx}{\\|\\psi_{1}\\|^{2}}+(1-w)\\,\\frac{\\displaystyle\\int_{B}\\|\\psi_{2}\\|^{2}\\,dx}{\\|\\psi_{2}\\|^{2}} .$$ (c) *Coincidence criterion.* Let $w_{*}:=\\|\\psi_{1}\\|^{2}/N$, so that $\\mu^{G}_{\\rho_{\\mathrm{mix}}(w_{*})}(B)=N^{-1}\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-positive-square-root",
+          "source_section": "Statement",
+          "quote": "has a unique bounded positive square root $T^{1/2}$; it belongs to $C^*(I,T)$, commutes with every bounded operator commuting with $T$, and is obtained by continuous polynomial approximation on $\\sigma(T)$, without Borel calculus.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "The second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Pure-state pairing] Let $\\psi\\ne0$ and let $W$ be a measurable $[0,1]$-valued weight with effect $M_{W}$. Since the normalized rank-one operator of $\\psi$ is $\\widehat\\rho(\\psi)=T_{\\psi,\\psi}/\\|\\psi\\|^{2}$, [F3] with $B=M_{W}$ gives $T_{\\psi,\\psi}M_{W}=T_{\\psi,M_{W}\\psi}$ (the effect is self-adjoint), so $\\operatorname{tr}(\\widehat\\rho(\\psi)M_{W})=\\operatorname{tr}(T_{\\psi,M_{W}\\psi})/\\|\\psi\\|^{2}=\\langle\\psi,M_{W}\\psi\\rangle/\\|\\psi\\|^{2}=\\int_{\\mathbb R^{3}}W\\|\\psi\\|^{2}dx/\\|\\psi\\|^{2}$. [given, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Recorded laws] For the coherent preparation, [F2] and step 1.1 with $\\psi=\\psi_{1}+e^{i\\varphi}\\psi_{2}$ and $W=w_{a}$ give $\\nu_{\\mathrm{coh}(\\varphi)}(a)=\\int w_{a}\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}dx/\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}$; substituting the weighted identity of [F5] gives the stated expansion. For the which-path preparation, [F4] gives $\\operatorname{tr}(\\rho_{\\mathrm{mix}(w)}F_{a})=w\\operatorname{tr}(\\widehat\\rho(\\psi_{1})F_{a})+(1-w)\\operatorname{tr}(\\widehat\\rho(\\psi_{2})F_{a})$, and step 1.1 with $\\psi=\\psi_{j}$ gives the stated formula. This proves (a) and (b). [given, F2, F4, F5, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F2",
+            "step 1.1",
+            "F5",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "[Loss] The completed family $(F_{a})_{a\\in A}\\cup\\{F_{0}\\}$ has nonnegative bounded effects summing to the identity by [F2], so [F1] gives $\\nu(a)=\\operatorname{tr}(\\rho F_{a})\\ge0$, $\\nu(0)=\\operatorname{tr}(\\rho F_{0})\\ge0$ and $\\nu(0)+\\sum_{a}\\nu(a)=1$; hence $\\nu(0)=1-\\nu(A)$ and $\\nu(A)\\le1$, and if $\\sum_{a}w_{a}=1$ almost everywhere then $F_{0}=0$ by [F2] and $\\nu(0)=0$ for every preparation. Conversely assume $F_{0}\\ne0$; then there is $x\\in H_{s}$ with $F_{0}x\\ne0$, and [F7] applied to the bounded positive operator $F_{0}$ gives $F_{0}^{1/2}x\\ne0$ with $\\langle F_{0}x,x\\rangle=\\|F_{0}^{1/2}x\\|^{2}>0$; the pure preparation of the unit vector $\\psi:=x/\\|x\\|$ then has $\\nu(0)=\\operatorname{tr}(\\widehat\\rho(\\psi)F_{0})=\\langle F_{0}\\psi,\\psi\\rangle=\\|x\\|^{-2}\\langle F_{0}x,x\\rangle>0$ by step 1.1. This proves (c) up to conditioning. [given, F1, F2, F7, step 1.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F1",
+            "F7",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Conditioning] When $\\nu(A)>0$, the recorded probabilities $\\nu(a)$ of step 2.1 are nonnegative and sum to the positive number $\\nu(A)$ by [F2], so dividing by $\\nu(A)$ gives nonnegative numbers $\\bar\\nu(a)$ with $\\sum_{a}\\bar\\nu(a)=1$; reading $\\bar\\nu$ as a set function on the finite set $A$ with its $\\sigma$-algebra of all subsets, [F8] exhibits it as a probability measure on $A$. This completes (c). [given, step 2.1, F2, F8, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "F2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Ideal bins and coincidence] For $w_{a}=\\mathbf 1_{B_{a}}$ the effect is the position projection $F_{a}=G(B_{a})$ of the declared model, so $\\nu(a)=\\operatorname{tr}(\\rho G(B_{a}))=\\mu^{G}_{\\rho}(B_{a})$ by [F6], the ideal bin probability. For the coincidence clause, multiply the almost-everywhere relation of the statement by $w_{a}$ and integrate: the weighted density $w_{a}[N\\operatorname{Re}\\langle\\psi_{1},\\psi_{2}\\rangle-c(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})]$ is integrable by [F5] and vanishes almost everywhere, so $N\\int w_{a}\\operatorname{Re}\\langle\\psi_{1},\\psi_{2}\\rangle dx=c\\int w_{a}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx$ for every label; substituting into the formula of step 2.1 with $\\varphi=0$ and into the formula of step 2.1 with $w=w_{*}$ gives $\\nu_{\\mathrm{coh}(0)}(a)=\\nu_{\\mathrm{mix}(w_{*})}(a)$ for every $a$, since $w_{*}\\|\\psi_{1}\\|^{-2}=N^{-1}$. This proves (d), and (e) records the scope. [step 2.1, step 2.2, step 3.1, F5, F6, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F6",
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the recorded laws with $w_{a}=0$ on a bin and gives zero; the label set $A$ may be empty, in which case $\nu(A)=0$ and step 2.2 gives $\nu(0)=1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 handles $F_{0}=0$ (full efficiency, $\nu(0)=0$) and $F_{0}\ne0$ (some preparation has $\nu(0)>0$); step 3.1 handles zero recorded mass by conditioning only when $\nu(A)>0$, and step 2.1 handles zero weights."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1-4.1 hold for every finite label set, including the one-label case; step 4.1 includes the indicator weight $w_{a}=mathbf 1_{B_{a}}$ and the full-efficiency partition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 conditions on a positive recorded mass and excludes the degenerate zero-mass case; step 4.1 includes the case where all recorded weights vanish, in which case no conditioning is claimed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1-3.1 evaluate the recorded probabilities on every label of the finite set, and the ideal-bin reduction of step 4.1 applies to every bin of the declared partition, boundaryless or not, since the weights are indicators."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-4.1 assume the Axiom of Countable Choice and the Axiom of Choice as the hypotheses of the cited trace-class, rank-one and square-root suppliers, and no step makes a further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clause (d) is a one-directional sufficient condition: the almost-everywhere relation implies equality of the recorded laws; no if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: the theorem does not assert that equality of the recorded coherent and which-path laws forces the almost-everywhere relation."
+        }
+      ]
+    },
+    "pthm-nrqm-interference-continuity-and-local-probability-balance": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-nrqm-magnetic-and-detection-smooth-local-continuity-calculation",
+          "source_section": "Statement",
+          "quote": "(a) *pointwise continuity equation.* For every $(x,t)\\in\\Omega\\times I$, $$\\partial_t|\\psi|^2(x,t)+\\operatorname{div}j(x,t)=0,$$ where the divergence is the classical one of the $C^1$ field $x\\mapsto j(x,t)$ ([[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]); (b) *integrated balance.* If $D\\subseteq\\Omega$ is a bounded open set with $C^1$ boundary and $\\overline D\\subseteq\\Omega$ ([[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]]), then $t\\mapsto\\int_D|\\psi(x,t)|^2dx$ is differentiable on $I$ with $$\\frac{d}{dt}\\int_D|\\psi(x,t)|^2dx=-\\int_{\\partial D}j(x,t)",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "source_section": "Definition",
+          "quote": "the componentwise reading of componentwise operators are those of [[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] and [[lem-nrqm-kinematics-componentwise-position-and-momentum]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-autonomous-dynamics-framework-evolution",
+          "source_section": "Definition",
+          "quote": "The **time evolution** or **flow** of the isolated system is the family $$U(t):=\\exp\\!\\Bigl(-\\frac{i}{\\hbar}tH_{\\mathrm{op}}\\Bigr):=\\int_{\\mathbb R}e^{-it\\lambda/\\hbar}\\,dE_H(\\lambda)\\qquad(t\\in\\mathbb R),$$ the reading of clause (ii) of P4 in the spectral calculus of $H_{\\mathrm{op}}$ ([[def-unbounded-integral-against-a-pvm]]); here $\\hbar>0$ is the reduced Planck constant with its value and unit fixed by [[def-nrqm-framework-quantities-and-units]], so that $tH_{\\mathrm{op}}/\\hbar$ is dimensionless.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-nrqm-framework-autonomous-dynamics",
+          "source_section": "Postulate",
+          "quote": "**(ii) Evolution.** The time evolution of the model is the strongly continuous one-parameter unitary group $$U(t):=\\exp\\!\\Bigl(-\\frac{i}{\\hbar}tH_{\\mathrm{op}}\\Bigr)\\qquad(t\\in\\mathbb R),\\qquad U(t+s)=U(t)U(s),\\quad U(t)^{*}=U(t)^{-1},$$ defined by the spectral calculus of the self-adjoint generator ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-unbounded-integral-against-a-pvm]], [[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]], [[def-strongly-continuous-one-parameter-unitary-group]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "source_section": "Postulate",
+          "quote": "**(iv) Baseline Hamiltonian.** For a real bounded measurable potential $V:\\mathbb R^{3}\\to\\mathbb R$ the model uses the scalar Hamiltonian $$H_{\\mathrm{op}}:=-\\frac{\\hbar^{2}}{2m}\\Delta+V(Q),\\qquad D(H_{\\mathrm{op}})=W^{2,2}(\\mathbb R^{3};\\mathbb C)\\ \\text{(componentwise)},$$ with the free part $-\\hbar^{2}\\Delta/2m$ and the bounded multiplier $V(Q)$ as in [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clauses (b) and (c) ([[def-sobolev-space-wkp-and-its-norm]]); that theorem supplies the self-adjointness of each component operator on the displayed domain and the ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow",
+          "source_section": "Statement",
+          "quote": "every orbit has constant norm, $\\|\\psi(t)\\|=\\|\\psi(0)\\|$, so for $\\psi(0)\\ne0$ the ray $[\\psi(t)]$ is a pure preparation of the model for every $t$ ([[def-nrqm-state-geometry-pure-mixed-states-and-purity]]).",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-nrqm-framework-quantities-and-units",
+          "source_section": "Definition",
+          "quote": "a position wave function of a system with $d$ spatial dimensions and $r$ internal components is an almost-everywhere equivalence class in $L^{2}(\\mathbb R^{d};\\mathbb C^{r})$ with dimension $\\ell^{-d/2}$, its norm $\\|\\psi\\|$ is dimensionless, and an abstract normalized state and the density operators of the state postulate are dimensionless.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Componentwise continuity] For each $l$ the component $\\psi_{l}$ satisfies the hypotheses of [F1] with the same $\\Omega,I,V$ by [F2], so $\\partial_{t}|\\psi_{l}|^{2}+\\operatorname{div}j_{l}=0$ pointwise with $j_{l}=\\frac{\\hbar}{m}\\operatorname{Im}(\\overline{\\psi_{l}}\\nabla\\psi_{l})$, and on every admissible $D$ one has $\\frac{d}{dt}\\int_{D}|\\psi_{l}|^{2}dx=-\\int_{\\partial D}j_{l}\\cdot\\nu\\,dS$. [given, F1, F2]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Flow conservation] By [F3] applied to the model's flow, $\\|U(t)\\psi_{0}\\|=\\|\\psi_{0}\\|$ for every $\\psi_{0}\\in H_{s}$ and $t\\in\\mathbb R$; for a unit $\\psi_{0}$ the total position probability is $\\|U(t)\\psi_{0}\\|^{2}=1$ at every time. This proves (d). [given, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Summed local balance] Since $n=\\sum_{l}|\\psi_{l}|^{2}$, $j=\\sum_{l}j_{l}$ and the sum is finite, adding the $r$ equations of step 1.1 gives $\\partial_{t}n+\\operatorname{div}j=\\sum_{l}(\\partial_{t}|\\psi_{l}|^{2}+\\operatorname{div}j_{l})=0$ pointwise on $\\Omega\\times I$, which is (a). For (b), finitely many differentiable functions may be added, so $t\\mapsto\\int_{D}n\\,dx=\\sum_{l}\\int_{D}|\\psi_{l}|^{2}dx$ is differentiable with derivative $-\\sum_{l}\\int_{\\partial D}j_{l}\\cdot\\nu\\,dS=-\\int_{\\partial D}j\\cdot\\nu\\,dS$ by step 1.1 and linearity of the surface integral. [given, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "[Global conservation] Assume the hypotheses of (c). Each component satisfies the domination hypothesis $|\\psi_{l}|^{2}\\le g_{l}$ and the flux hypothesis of [F1], so $\\int|\\psi_{l}|^{2}dx$ is constant on $I$ for every $l$; the finite sum $t\\mapsto\\sum_{l}\\int|\\psi_{l}|^{2}dx$ is then constant on $I$. This proves (c). [given, step 1.1, F1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Conclusion] Steps 2.1, 2.2 and 1.2 establish (a)-(d); the unit computation of (e) reads the wave-function unit, the action unit and the mass unit of [F4]: $\\hbar/m$ has unit $\\mathrm m^{2}\\mathrm s^{-1}$, so $j$ has unit $\\mathrm m^{-2}\\mathrm s^{-1}$ while $n$ has unit $\\mathrm m^{-3}$. The remaining assertions of (e) are scope statements: no regularity of the flow of an arbitrary $L^{2}$ vector is claimed, and no detection law is identified with the flux. [step 1.2, step 2.1, step 2.2, F4, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 2.2",
+            "step 1.2",
+            "F4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "No empty index range arises: $r=2s+1ge1$ and all sums over components are nonempty; the integral balance of step 2.1 may be taken over an admissible region whose boundary is empty only if the region is empty, in which case both sides vanish."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes $psi_{0}=0$ (constant zero curve) and $psi_{0}$ unit; step 2.1 includes $V=0$ and $psiequiv0$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 applies to each component, so the scalar case $r=1$ (spin $s=0$) is included, as is the one-dimensional potential with $V=0$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Repeated or proportional components are summed componentwise in step 2.1 without any independence assumption; vanishing gradient or vanishing density is permitted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 evaluate the equation and the balance on the open sets $Omega$ and $I$ only, so endpoint differentiability is not asserted; the region $D$ of step 2.1 satisfies $overline DsubseteqOmega$, avoiding the boundary points of $Omega$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.2 assume the Axiom of Countable Choice and the Axiom of Choice as the hypotheses of the serial/closedness suppliers and the cited flow theorem, and no step adds a selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No clause of the statement is an if-and-only-if assertion: clauses (a)-(d) are one-directional identities, balance and conservation statements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: in particular clause (d) does not assert that a flow with constant norms must be the model's assigned unitary flow."
+        }
+      ]
+    },
+    "texp-nrqm-interference-finite-sample-fringe-failure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-interference-recorded-detector-and-sampling-model",
+          "source_section": "Definition",
+          "quote": "**mutually independent** in the sense of [[def-independence-of-finite-random-variables]] and **identically distributed** with $\\mathbb P(O_{k}=a)=\\nu(a)$ for every $a\\in A$, $\\mathbb P(O_{k}=0)=\\nu(0)$ and every $k$, where $\\nu$ is the recorded law of clause (b); the numbers $\\nu(a)$ and $\\nu(0)$ sum to one, so this is a probability law on the finite set $A\\cup\\{0\\}$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$, $$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$ It is **pairwise independent** when this identity is required only for two distinct indices.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-bernoulli-and-binomial-random-variables",
+          "source_section": "Definition",
+          "quote": "is a sum $X=\\sum_{i<n}X_i$ of $n$ mutually independent Bernoulli$(p)$ variables. When $n=0$, this is the constant zero random variable.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-chsh-and-finite-sampling-law",
+          "source_section": "Statement",
+          "quote": "(c) *Binomial frequency.* Let $S$ be binomial$(N,p)$ with $N\\ge1$ and $p\\in[0,1]$ ([[def-bernoulli-and-binomial-random-variables]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-nrqm-interference-coherent-and-mixture-detection-laws",
+          "source_section": "Statement",
+          "quote": "(a) *Coherent law.* If the declared model is admissible at phase $\\varphi$, then for every Borel set $B\\subseteq\\mathbb R^{3}$ $$\\mu^{G}_{\\rho_{\\mathrm{coh}}(\\varphi)}(B)=\\frac{\\displaystyle\\int_{B}\\|\\psi_{1}(x)+e^{i\\varphi}\\psi_{2}(x)\\|_{\\mathbb C^{r}}^{2}\\,dx}{\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}} ,$$ and the numerator expands as $$\\int_{B}\\bigl(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2}\\bigr)dx+2\\operatorname{Re}\\Bigl(e^{-i\\varphi}\\int_{B}\\langle\\psi_{1}(x),\\psi_{2}(x)\\rangle_{\\mathbb C^{r}}dx\\Bigr),$$ with denominator $N+2\\operatorname{Re}(e^{-i\\varphi}c)$; in particular $\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}>0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-nrqm-interference-recorded-bin-laws-loss-and-conditioning",
+          "source_section": "Statement",
+          "quote": "(d) *Ideal bins and coincidence.* If $w_{a}=\\mathbf 1_{B_{a}}$ for a declared ideal detector $(B_{a})_{a=1}^{m}$, then $\\nu(a)=\\mu^{G}_{\\rho}(B_{a})$ is the ideal bin probability of [[pthm-nrqm-interference-coherent-and-mixture-detection-laws]].",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Binomial marginals] Fix $a\\in A\\cup\\{0\\}$ and put $X_{k}:=\\mathbf 1_{\\{O_{k}=a\\}}$. By [F1] the $X_{k}$ are mutually independent and identically distributed with $\\mathbb P(X_{k}=1)=\\nu(a)$ and $\\mathbb P(X_{k}=0)=1-\\nu(a)$, that is, Bernoulli$(\\nu(a))$; hence $S_{N}(a)=\\sum_{k=1}^{N}X_{k}$ is binomial$(N,\\nu(a))$, and [F2] applied to $S=S_{N}(a)$ gives the three displayed formulas of (a). [given, F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Positive-probability sequences] By mutual independence [F1], $\\mathbb P(O_{k}=a_{k}\\text{ for every }k)=\\prod_{k}\\nu(a_{k})$, a product of positive numbers; the failure event $\\{(O_{1},\\dots,O_{N})\\notin C\\}$ contains the complementary event of this outcome and is disjoint from it, so [F2] bounds its probability below by $\\prod_{k}\\nu(a_{k})$; the constant sequence is the special case. This proves (b). [given, F1, F2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Conclusion] Under the coincidence hypothesis of (c), [F3] makes the two recorded laws equal as laws on $A\\cup\\{0\\}$, so every event has the same probability under both preparations and no criterion has different acceptance probabilities; this proves (c). Together with steps 1.1 and 1.2 this establishes (a)-(c), and (d) records that the sampling model is a declared assumption and that no numerical failure probability, error rate or empirical conclusion is asserted. [step 1.1, step 1.2, F1, F2, F3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 covers a criterion $C=\u000barnothing$ that rejects every sequence, and step 1.1 covers a label with zero probability by the binomial formula; the sample size satisfies $Nge1$."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 requires all $\nu(a_{k})>0$ and excludes sequences of zero probability; step 1.1 with $\nu(a)=0$ or $1$ gives degenerate binomial laws with the displayed formulas still valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 hold for every $Nge1$, including $N=1$, and for a one-label outcome set; the constant sequence is the special case recorded in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers coincident recorded laws, in which no criterion distinguishes the two preparations; degenerate laws with a single atom are included in the general statements."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The threshold $\u000barepsilon>0$ is arbitrary in step 1.1, and the frequency $F_{N}(a)$ of step 1.1 lies in $[0,1]$ with the endpoint values attained by the degenerate recorded laws $\nu(a)=0$ and $\nu(a)=1$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 assume the Axiom of Countable Choice as the hypothesis of the cited independence and sampling suppliers, and no step makes a further selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clause (c) is a one-directional implication from coincidence of the recorded laws to equality of the acceptance probabilities of every criterion; no if-and-only-if assertion is made."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: the thought experiment does not assert that a criterion with equal acceptance probabilities forces the recorded laws to coincide."
+        }
+      ]
+    },
+    "ex-nrqm-interference-ideal-flat-two-path-screen-distribution": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-nrqm-interference-coherent-and-mixture-detection-laws",
+          "source_section": "Statement",
+          "quote": "(b) *Which-path law.* For the declared weight $w\\in[0,1]$ and every Borel set $B\\subseteq\\mathbb R^{3}$, $$\\mu^{G}_{\\rho_{\\mathrm{mix}}(w)}(B)=w\\,\\frac{\\displaystyle\\int_{B}\\|\\psi_{1}\\|^{2}\\,dx}{\\|\\psi_{1}\\|^{2}}+(1-w)\\,\\frac{\\displaystyle\\int_{B}\\|\\psi_{2}\\|^{2}\\,dx}{\\|\\psi_{2}\\|^{2}} .$$ (c) *Coincidence criterion.* Let $w_{*}:=\\|\\psi_{1}\\|^{2}/N$, so that $\\mu^{G}_{\\rho_{\\mathrm{mix}}(w_{*})}(B)=N^{-1}\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-nrqm-interference-two-path-preparation-and-detection-model",
+          "source_section": "Definition",
+          "quote": "**(e) Ideal detection bins.** A **declared ideal detector** of the model is a finite family $\\mathcal B=(B_{a})_{a=1}^{m}$ of pairwise disjoint Borel subsets of $\\mathbb R^{3}$ with $\\bigcup_{a}B_{a}=\\mathbb R^{3}$; the **ideal bin probabilities** of a preparation $\\rho\\in D(H_{s})$ are the numbers $$p_{a}(\\rho):=\\mu^{G}_{\\rho}(B_{a})=\\operatorname{tr}\\bigl(\\rho\\,G(B_{a})\\bigr)\\qquad(a=1,\\dots,m),$$ the reading of clause (ii) of P2 for the joint position assignment ([[post-nrqm-framework-observable-and-probability]], [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-nrqm-framework-observable-and-probability",
+          "source_section": "Postulate",
+          "quote": "**(ii) Spectral probability.** Let $E_{A}$ be the spectral projection-valued measure of the self-adjoint operator $A$ on the Borel $\\sigma$-algebra of $\\mathbb R$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]], [[def-borel-sigma-algebra]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-l-p-space-as-a-quotient-by-null-functions",
+          "source_section": "Definition",
+          "quote": "almost-everywhere equivalence class of measurable representatives. When $1\\le p\\le\\infty$, the displayed set quotient agrees with the usual quotient-vector-space construction of [[def-quotient-vector-space-and-canonical-projection]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "source_section": "Statement",
+          "quote": "let $f : X \\times Y \\to [0,\\infty]$ be product-measurable. Then $x \\mapsto \\int_Y f_x\\,d\\nu$ and $y \\mapsto \\int_X f^y\\,d\\mu$ are measurable, and $$\\int_{X \\times Y} f\\,d(\\mu \\times \\nu) = \\int_X \\left(\\int_Y f_x\\,d\\nu\\right)d\\mu = \\int_Y \\left(\\int_X f^y\\,d\\mu\\right)d\\nu.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "is Lebesgue measurable with $$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$ In particular this covers the four one-dimensional face conventions in each coordinate — the open box, the closed box $[a,b]$, the half-open box $B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of them, in any combination of coordinates — and it gives measure $0$ to all of them whenever $a_i = b_i$ for some $i<n$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Product-form norms] For $j=1,2$, Tonelli and $\\|g\\|=1$, $\\|f_{j}\\|^{2}=|I_{j}|/L=1$ give $\\|\\psi_{j}\\|^{2}=\\int_{\\mathbb R}\\int_{\\mathbb R^{2}}|f_{j}(x_{1})|^{2}|g(x_{2},x_{3})|^{2}d(x_{2},x_{3})dx_{1}=\\|f_{j}\\|^{2}\\|g\\|^{2}=1\\cdot1=1$, so $\\psi_{1},\\psi_{2}$ are nonzero unit classes. Since $f_{1}=L^{-1/2}$ on $I_{1}\\setminus I_{2}$, a set of length $d>0$, one has $f_{1}+f_{2}\\ne0$ for every $\\varphi$. [given, L2, L3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Densities] On $O$ both indicators equal one, so $|f_{1}+f_{2}|^{2}=\\frac{|1+e^{i\\varphi}|^{2}}{L}=\\frac{2(1+\\cos\\varphi)}{L}$; on $I_{1}\\setminus I_{2}$ only $f_{1}$ contributes, giving $\\frac1L$, and symmetrically on $I_{2}\\setminus I_{1}$; outside $I_{1}\\cup I_{2}$ both vanish. Integrating over $\\mathbb R$ gives $\\|f_{1}+f_{2}\\|^{2}=\\frac{2(1+\\cos\\varphi)(L-d)}{L}+\\frac{2d}{L}=2+\\frac{2(L-d)\\cos\\varphi}{L}=N_{\\varphi}$, so the model is admissible at every phase. [step 1.1, L3, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Slab laws] Write $\\psi_{1}+e^{i\\varphi}\\psi_{2}=(f_{1}+f_{2})g$ and $|\\psi_{1}+e^{i\\varphi}\\psi_{2}|^{2}=|f_{1}+f_{2}|^{2}|g|^{2}$; Tonelli over $B_{1}\\times\\mathbb R^{2}$ gives $\\int_{B_{1}\\times\\mathbb R^{2}}|\\psi_{1}+e^{i\\varphi}\\psi_{2}|^{2}d(x_{1},x_{2},x_{3})=\\bigl(\\int_{B_{1}}|f_{1}+f_{2}|^{2}dx\\bigr)\\|g\\|^{2}=\\int_{B_{1}}|f_{1}+f_{2}|^{2}dx$, and likewise $\\int_{B_{1}\\times\\mathbb R^{2}}|\\psi_{j}|^{2}=\\int_{B_{1}}|f_{j}|^{2}dx=|B_{1}\\cap I_{j}|/L$; substituting into [L1] gives the two displayed laws of (b). [step 1.1, step 2.1, L1, L2, L3, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "L1",
+            "step 1.1",
+            "step 2.1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Overlap, outer and dark values] Using the density values of step 2.1 and additivity of the integral, $\\int_{O}|f_{1}+f_{2}|^{2}dx=\\frac{2(1+\\cos\\varphi)(L-d)}{L}$ and $\\int_{I_{j}\\setminus I_{3-j}}|f_{1}+f_{2}|^{2}dx=\\frac dL$, so the coherent values of (c) follow after dividing by $N_{\\varphi}=2+\\frac{2(L-d)\\cos\\varphi}{L}$: for the overlap, $\\frac{2(1+\\cos\\varphi)(L-d)/L}{2(L+(L-d)\\cos\\varphi)/L}=\\frac{(L-d)(1+\\cos\\varphi)}{L+(L-d)\\cos\\varphi}$, and for each outer region $\\frac{d/L}{2(L+(L-d)\\cos\\varphi)/L}=\\frac{d}{2L+2(L-d)\\cos\\varphi}$; the two outer values and the overlap value sum to one. The which-path values follow from $|B_{1}\\cap I_{j}|/L$ with $w=\\frac12$ and $|O|=L-d$, $|I_{j}\\setminus I_{3-j}|=d$. At $\\varphi=\\pi$ the coherent overlap value is zero, the outer values are $d/(2L-2(L-d))=\\frac12$ each, and the which-path overlap value is $\\frac{L-d}{L}>0$ because $L>d$; a bin contained in $O$ has $|B_{1}\\cap I_{1}|=|B_{1}\\cap I_{2}|=|B_{1}|$ and coherent density zero there, while a bin meeting an outer region in a set of positive length meets $\\{f_{1}+f_{2}\\ne0\\}$ in a set of positive length, so its coherent probability is positive; the which-path positivity for bins meeting $O$ follows from $\\frac12|B_{1}\\cap I_{1}|/L>0$. This proves (c) and (d). [step 3.1, L3, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 2.1",
+            "step 3.1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the laws on a slab bin with $B_{1}=\u000barnothing$, giving zero; the overlap region is nonempty because $L>d$; step 4.1 handles bins contained in the dark region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 computes the zero coherent probability of the overlap region at $\u000barphi=pi$ and the zero probability of bins inside it; the lengths satisfy $0<d<L$, so the outer regions have positive length."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes a slab bin equal to $mathbb R\timesmathbb R^{2}$, where the total probability is one; step 4.1 shows the overlap and outer values sum to one for $w=1/2$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate lengths $d=L$ and $d=0$ are excluded by $0<d<L$; the dark case $\u000barphi=pi$ is the degenerate phase case and is computed explicitly in step 4.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The intervals are closed; the density values of step 2.1 and [L3] show the endpoints do not affect the measure, and step 4.1 states the values on the closed overlap and outer regions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The example assumes the Axiom of Countable Choice, the hypothesis of [L2] and [L3]; the proof makes no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states identities and a case evaluation under the stated hypotheses; no clause is an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: the example does not assert that agreement of the coherent and which-path laws forces the stated overlap-phase or dark-region configuration."
+        }
+      ]
+    },
+    "ex-nrqm-interference-uniform-phase-averaging": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-nrqm-interference-coherent-and-mixture-detection-laws",
+          "source_section": "Statement",
+          "quote": "(a) *Coherent law.* If the declared model is admissible at phase $\\varphi$, then for every Borel set $B\\subseteq\\mathbb R^{3}$ $$\\mu^{G}_{\\rho_{\\mathrm{coh}}(\\varphi)}(B)=\\frac{\\displaystyle\\int_{B}\\|\\psi_{1}(x)+e^{i\\varphi}\\psi_{2}(x)\\|_{\\mathbb C^{r}}^{2}\\,dx}{\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}} ,$$ and the numerator expands as $$\\int_{B}\\bigl(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2}\\bigr)dx+2\\operatorname{Re}\\Bigl(e^{-i\\varphi}\\int_{B}\\langle\\psi_{1}(x),\\psi_{2}(x)\\rangle_{\\mathbb C^{r}}dx\\Bigr),$$ with denominator $N+2\\operatorname{Re}(e^{-i\\varphi}c)$; in particular $\\|\\psi_{1}+e^{i\\varphi}\\psi_{2}\\|^{2}>0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-nrqm-interference-two-path-preparation-and-detection-model",
+          "source_section": "Definition",
+          "quote": "**(c) Coherent preparation.** The declared two-path model is **admissible at phase $\\varphi$** when $\\psi_{1}+e^{i\\varphi}\\psi_{2}\\ne0$ in $H_{s}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-complex-nth-roots-and-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "the $n$th roots of unity are precisely $\\exp\\!\\left(i\\frac{2\\pi\\iota_{\\mathbb R}(k)}{\\iota_{\\mathbb R}(n)}\\right)$ for $k\\in\\mathbb N$ with $0\\le k<n$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-complex-exponential",
+          "source_section": "Definition",
+          "quote": "the factorial $n!$ is nonzero by [[def-factorial-and-falling-factorial]], so $\\iota_{\\mathbb R}(n!)>0$ by [[lem-of-naturals-positive]] and consequently $j(\\iota_{\\mathbb R}(n!))\\ne0$ in the complex field [[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-sum-of-roots-of-unity",
+          "source_section": "Statement",
+          "quote": "For $n\\in\\mathbb N$ with $n\\ge2$, the sum of all $n$th roots of unity is $0$. The conventions and prerequisite facts used below are recorded in [[thm-complex-nth-roots-and-roots-of-unity]], [[thm-complex-numbers-form-a-field]], [[def-complex-integer-powers]], [[def-monoid-finite-product]], [[thm-generalised-associativity]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Phase-independent normalization] For every $k$, [L1] gives $\\|\\psi_{1}+e^{i\\varphi_{k}}\\psi_{2}\\|^{2}=\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2}+2\\operatorname{Re}\\langle\\psi_{1},e^{i\\varphi_{k}}\\psi_{2}\\rangle=N+2\\operatorname{Re}\\bigl(e^{-i\\varphi_{k}}\\langle\\psi_{1},\\psi_{2}\\rangle\\bigr)=N$, since $\\langle\\psi_{1},\\psi_{2}\\rangle=0$. This proves (a). [given, L1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Root sum] The numbers $e^{i\\varphi_{k}}$, $k=0,\\dots,n-1$, are exactly the $n$-th roots of unity and $\\zeta\\mapsto\\zeta^{-1}$ permutes them, so $\\sum_{k=0}^{n-1}e^{-i\\varphi_{k}}=\\sum_{k=0}^{n-1}e^{i\\varphi_{k}}=0$ by [L2]. [given, L2, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Averaged law] By step 1.1 each summand of $\\bar p(B)$ has denominator $N$, and by [L1] its numerator is $\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx+2\\operatorname{Re}(e^{-i\\varphi_{k}}\\int_{B}\\langle\\psi_{1},\\psi_{2}\\rangle dx)$. Averaging the $n$ summands and using linearity of the finite average, the cross term contributes $\\frac{2}{N}\\operatorname{Re}\\bigl(\\bigl(\\frac1n\\sum_{k}e^{-i\\varphi_{k}}\\bigr)\\int_{B}\\langle\\psi_{1},\\psi_{2}\\rangle dx\\bigr)=0$ by step 1.2, and the remaining term is $\\frac1N\\int_{B}(\\|\\psi_{1}\\|^{2}+\\|\\psi_{2}\\|^{2})dx=w_{*}\\frac{\\int_{B}\\|\\psi_{1}\\|^{2}dx}{\\|\\psi_{1}\\|^{2}}+(1-w_{*})\\frac{\\int_{B}\\|\\psi_{2}\\|^{2}dx}{\\|\\psi_{2}\\|^{2}}$, since $w_{*}\\|\\psi_{1}\\|^{-2}=N^{-1}=(1-w_{*})\\|\\psi_{2}\\|^{-2}$; this is $\\mu^{G}_{\\rho_{\\mathrm{mix}}(w_{*})}(B)$ by [L1]. This proves (b) and (c). [step 1.1, step 1.2, L1, L2, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L1",
+            "step 1.2",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 evaluate the averaged coherent laws and the which-path law on $B=\u000barnothing$ through their integrals, giving zero on both sides of the identity of step 2.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The components are nonzero and orthogonal by hypothesis, and $nge2$ excludes the single-phase degenerate average; step 2.1 covers the case where one component has zero weight only through the limit, which is excluded by nonvanishing norms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the two-phase case $n=2$ and the case in which one of the two components carries all the norm weight is excluded by nonvanishing norms; the averaged law is the which-path law for every $w_{*}in(0,1)$ since both norms are positive."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses only the orthogonality hypothesis, so the non-orthogonal case is excluded from the statement; a degenerate pair of proportional nonzero components is impossible under $langlepsi_{1},psi_{2}\rangle=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The uniform average of steps 1.2 and 2.1 includes both endpoint phases $k=0$ and $k=n-1$ with weight $1/n$, and the bin $B$ is an arbitrary Borel set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 assume the Axiom of Countable Choice as the hypothesis of the cited exponential and root-of-unity suppliers, and no step makes a selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves an identity between two laws under the stated hypotheses; no clause is an if-and-only-if assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: the example does not assert that every preparation ensemble whose averaged law equals the which-path law must average the phase over the roots of unity."
+        }
+      ]
+    },
+    "exp-nrqm-interference-bach-electron-double-slit": {
+      "citations": [],
+      "physics_review": {
+        "setup": {
+          "verdict": "pass",
+          "evidence": "The Setup section reports the source-first apparatus exactly as stated in the preprint: 600 eV beam, collimation 2x10 micrometres at 16.5 cm, double-slit 30.5 cm beyond with 50 nm slits at 280 nm separation in a 100 nm silicon-nitride membrane with about 2 nm gold, movable mask 5 micrometres wide 230 micrometres downstream, quadrupole magnification and microchannel-plate/phosphor/CCD detection with blob localisation. It records the source inconsistency in the mask height (10 versus 20 micrometres) rather than resolving it, and names the preparation/apparatus postulate under which the arrangement is a reported experiment."
+        },
+        "procedure": {
+          "verdict": "pass",
+          "evidence": "The Procedure section reports both source procedures: the mask sweep with summed and normalised image frames producing P1, P12 and P2, and the mask-centred accumulation at about 1 Hz over about 2 hours with the quadrupole set to magnify the central five orders. It states that no arrival-process law, occupancy bound, event-selection rule, dead-time model or independence test is reported, so the source claim of at most one electron remains a reported inference, and it explicitly declines to perform a sampling analysis."
+        },
+        "observations": {
+          "verdict": "pass",
+          "evidence": "The Observations section reports only source-stated findings: the slit-selective distributions, the weak first-order double-slit contributions in nominal single-slit configurations attributed by the paper to finite mask separation, and the reported accumulated localised-event counts 2, 7, 209, 1004 and 6235 in the central five orders. Every count is attributed to the figure captions, and no observation is invented or strengthened."
+        },
+        "uncertainty": {
+          "verdict": "pass",
+          "evidence": "The Uncertainty section records the source omissions explicitly: no calibrated efficiency or background, no numerical localisation error, no apparatus-parameter uncertainties, no independence test, no event-selection error rate, no significance or fitted comparison, and the unresolved mask-height inconsistency. It also states that the about-1 Hz rate and about-2 h duration are not converted into a trial count or calibrated rate."
+        },
+        "interpretation": {
+          "verdict": "pass",
+          "evidence": "The Interpretation section separates the source interpretation (a realisation of Feynman's thought experiment illustrating interference and wave-particle duality for electrons) from the item's own qualified reading: the reported distributions are consistent with a coherent-amplitude model under the source conditions, no competing model is specified or tested, classical waves also interfere, each event is localised and the pattern concerns the accumulation. It states that agreement is evidence about combined model and apparatus assumptions, not a proof, and lists the model, detector-response, competing-law and sampling declarations a controlled test would require."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "The single source is the exact preprint version retrieved and read (arXiv:1210.6243v1, 22 October 2012, 8 pages), with the journal reference noted separately and the item limited to the preprint; the key reported numbers were re-verified against a fresh full-text retrieval and extraction of the 8-page PDF."
+        },
+        "statistical_inference": {
+          "verdict": "pass",
+          "evidence": "No statistical inference is performed or invented: the item reports the source counts and rate as descriptive observations, states that no sampling model, significance test, p-value, confidence interval or fitted comparison is supplied, and notes that an independent-trials analysis using the cited finite-sampling mathematics is possible only under a declared sampling model that the source does not provide."
+        }
+      }
+    }
+  }
+}

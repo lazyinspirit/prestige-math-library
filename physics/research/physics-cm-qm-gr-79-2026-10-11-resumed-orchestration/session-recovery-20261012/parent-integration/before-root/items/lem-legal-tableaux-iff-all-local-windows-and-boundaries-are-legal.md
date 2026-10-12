@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unnormalized-homogeneous-bar-resolution.md

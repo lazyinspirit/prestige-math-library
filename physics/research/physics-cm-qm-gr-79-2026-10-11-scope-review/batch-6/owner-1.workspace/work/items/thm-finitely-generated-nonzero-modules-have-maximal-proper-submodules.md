@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finitely-generated-nonzero-modules-have-maximal-proper-submodules.md

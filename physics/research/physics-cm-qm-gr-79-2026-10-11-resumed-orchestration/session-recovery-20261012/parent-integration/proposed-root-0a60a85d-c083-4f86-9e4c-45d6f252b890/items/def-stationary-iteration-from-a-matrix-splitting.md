@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stationary-iteration-from-a-matrix-splitting.md

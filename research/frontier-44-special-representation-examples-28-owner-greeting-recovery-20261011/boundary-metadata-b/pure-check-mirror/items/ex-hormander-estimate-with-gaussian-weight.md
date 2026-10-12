@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hormander-estimate-with-gaussian-weight.md

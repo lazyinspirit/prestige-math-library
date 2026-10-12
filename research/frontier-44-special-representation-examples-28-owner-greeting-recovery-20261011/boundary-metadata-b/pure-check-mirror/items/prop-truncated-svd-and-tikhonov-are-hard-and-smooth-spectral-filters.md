@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters.md

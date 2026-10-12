@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-polygon-content-is-the-sum-of-triangle-contents.md

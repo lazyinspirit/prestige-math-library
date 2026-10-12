@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-copower-presentation-construction-is-left-adjoint-to-generator-hom.md

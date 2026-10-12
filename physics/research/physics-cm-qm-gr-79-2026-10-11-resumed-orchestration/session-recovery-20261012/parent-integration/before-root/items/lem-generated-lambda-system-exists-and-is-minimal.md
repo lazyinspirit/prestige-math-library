@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generated-lambda-system-exists-and-is-minimal.md

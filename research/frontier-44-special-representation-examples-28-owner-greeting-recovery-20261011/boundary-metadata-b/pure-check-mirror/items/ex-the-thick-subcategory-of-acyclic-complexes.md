@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-thick-subcategory-of-acyclic-complexes.md

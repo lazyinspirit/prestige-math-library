@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-oscillation-decay-implies-a-holder-modulus.md

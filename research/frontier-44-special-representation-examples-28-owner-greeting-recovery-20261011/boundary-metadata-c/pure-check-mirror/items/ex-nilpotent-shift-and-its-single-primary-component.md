@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-nilpotent-shift-and-its-single-primary-component.md

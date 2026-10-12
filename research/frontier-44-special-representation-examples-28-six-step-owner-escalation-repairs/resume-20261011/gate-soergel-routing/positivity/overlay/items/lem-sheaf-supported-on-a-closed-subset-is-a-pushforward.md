@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-sheaf-supported-on-a-closed-subset-is-a-pushforward.md

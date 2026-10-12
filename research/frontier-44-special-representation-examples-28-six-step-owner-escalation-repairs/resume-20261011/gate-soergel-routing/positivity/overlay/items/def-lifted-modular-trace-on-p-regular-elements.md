@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-lifted-modular-trace-on-p-regular-elements.md

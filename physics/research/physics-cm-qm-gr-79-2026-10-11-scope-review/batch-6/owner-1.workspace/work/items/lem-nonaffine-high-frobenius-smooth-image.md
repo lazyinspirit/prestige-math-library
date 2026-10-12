@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-high-frobenius-smooth-image.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-coextension-of-scalars-carries-a-module-structure.md

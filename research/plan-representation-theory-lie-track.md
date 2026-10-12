@@ -119,7 +119,7 @@ requirements need not be repeated):
 | RL-8 A | `weyl-character-and-multiplicity-formulas`, `semisimple-lie-algebras-cohomology-and-levi-theory` | never RL-7 B; held while DG is unpublished |
 | RL-9 A | exact future AG-owned A suppliers for $G/B$, associated line bundles, coherent cohomology, projective-line fibres, and Serre duality | whole pair build-held; emit no item before suppliers exist |
 | RL-10 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `homomorphisms-between-verma-modules-and-linkage`, `category-o-finiteness-duality-and-blocks`, `projectives-standard-filtrations-and-bgg-reciprocity`, plus exact future localisation/$D$-module A suppliers | algebraic prefix may later split; Duflo landmarks remain non-items until a full proof route exists |
-| RL-11 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` | build-held until every A supplier is published |
+| RL-11 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence`, `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | build-held until every A supplier is published; DG-33 supplies the compact invariant Hermitian metric |
 | RL-12 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-topology-of-euclidean-space` | tensor-quotient definition and extreme-value interface only; no B prerequisite |
 | RL-13 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `finite-weyl-invariants-bruhat-and-kostant-harmonics` | the published Lie-owned finite root/string/Killing spine replaces the two still-empty DG page labels; no RL-12 B prerequisite |
 | RL-14 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `verma-modules-and-shapovalov-forms`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-13 B prerequisite |
@@ -766,7 +766,7 @@ where the cited source treats the central torus explicitly.
 | `cartan-subalgebras-and-root-space-decompositions` (DG-30) | planned, empty | Cartan subalgebras, roots, coroots, root spaces, triangular decomposition, $\mathfrak{sl}_2$ root triples. |
 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` (DG-31) | planned, empty | abstract root systems, Weyl/Coxeter combinatorics, Cartan matrices, Dynkin diagrams, and classification. |
 | `highest-weight-theory-for-complex-semisimple-lie-algebras` (DG-32) | planned, empty | weights, dominance/integrality, existence and classification of finite-dimensional simples, extremal weights. Verma and character-formula proposals in its prose are rehomed to RL by the subjects-02 seam. |
-| `compact-lie-groups-maximal-tori-and-peter-weyl-theory` (DG-33) | planned, empty | compact integration/Peter--Weyl. RL's character proofs are algebraic and do not invoke Haar integration. |
+| `compact-lie-groups-maximal-tori-and-peter-weyl-theory` (DG-33) | planned, empty | compact integration/Peter--Weyl. RL-11 consumes compact semisimple realization, its simply connected compact form, and finite-dimensional unitarizability for its cochain metric; RL's character proofs are algebraic. |
 | `real-forms-and-real-semisimple-lie-algebras` (DG-34) | planned, empty | real forms and Cartan decompositions; it is the physical splice anchor, not an analytic-representation supplier. |
 | HA-1 `chain-complexes-and-homology`, HA-5 `projective-and-injective-resolutions`, HA-6 `derived-functors`, HA-8 `ext-and-balanced-resolutions`, HA-9 `yoneda-extensions-and-homological-dimension`, HA-15/16 `spectral-sequences` / `double-complexes-exact-couples-and-convergence` | finished prose scaffolds, not live plan pages | complexes, resolutions, derived functors, Ext/Yoneda, and spectral-sequence engines. RL instantiates these in $\mathcal O$ and CE cohomology; it does not rebuild them. |
 | AG interfaces (future algebraic-geometry pages) | not yet assigned live ids | quotients $G/B$, equivariant line bundles, coherent sheaf cohomology, smooth projective varieties, and Serre duality needed by RL-9. RL-9 cannot be built before those suppliers. |
@@ -1204,6 +1204,208 @@ the OWTU thesis chapter 3 §§3.2--3.5, printed pp.64--84 (PDF pp.70--90) and
 Woit pp.1--7; Etingof 18.755 §§45, 48, pp.245--249, 260--264 independently
 checks CE/Ext and reductive consequences.
 
+**Reconciled proof architecture (Step 1 source audit, 2026-10-04).**
+Retain all item IDs and claims below. In this section $\mathfrak g$ is complex
+semisimple, $\lambda$ is dominant integral, and $V=L(\lambda)$ is
+finite-dimensional. The advertised scalar assertion concerns weights actually
+occurring in the finite cochain space, not arbitrary weights in $\mathfrak h^*$.
+The Laplacian and its metric are local constructions inside the existing
+Laplacian lemma; no new item or pair is commissioned.
+
+The full sources distinguish two arguments. OWTU §§3.2.5--3.4 are actually
+printed pp.71--77, PDF pp.78--85: §3.3 proves Casselman--Osborne by injective
+embedding and dimension shifting; §3.4 proves Kostant by cochain weight
+multiplicity plus that central-character constraint. It does **not** construct a
+Hermitian metric, an adjoint, or a cochain Laplacian. Woit pp.3--5 states the
+theorem and describes the Laplacian approach on p.4, referring onward to
+Goodman--Wallach Appendix E; it does **not** give the calculation or the equality
+case. That complete appendix, §§E.2.1--E.2.5 (printed pp.17--27), likewise proves
+a Casimir identity **on cohomology** (Theorem E.2.1) and the necessary equality
+case (Lemma E.2.8), not a CE Laplacian identity on cochains. Thus none of these
+locators may be cited as a completed proof of the latter identity. The local
+calculation specified below is an explicit authoring obligation.
+
+1. **Central action before the harmonic argument.** In the two
+   central-action items, use OWTU Propositions 3.2.10--3.2.11 and Theorem 3.3.1:
+   embed $V$ in an injective $U(\mathfrak g)$-module $I$, restrict injectivity to
+   $U(\mathfrak n^+)$ using PBW freeness, and use the equivariant connecting
+   surjection $H^{p-1}(\mathfrak n^+,I/V)\to H^p(\mathfrak n^+,V)$ to propagate
+   the degree-zero HC identity. Distinguish the unshifted HC projection
+   $\gamma$ from the $\rho$-translated invariant-polynomial isomorphism; conclude
+   $\chi_\mu=\chi_\lambda$ with RL-1's dot convention. This is an independent
+   support argument, not a substitute for the promised cochain calculation.
+2. **Metric and finite Hodge decomposition, inside the Laplacian item.**
+   Choose a compact real form, its conjugation $\tau$, and the Killing form
+   $B$ used by the published quadratic Casimir, whose restriction to the real
+   Cartan span of coroots is positive.
+   Normalize $e_\alpha\in\mathfrak g_\alpha$ and
+   $f_\alpha=-\tau(e_\alpha)$ by $B(e_\alpha,f_\alpha)=1$.
+   Use $\langle x,y\rangle=-B(x,\tau y)$ on $\mathfrak n^+$ and a compact
+   invariant positive Hermitian form on $V$. Consume
+   `thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems`
+   for realization of its root system by a compact group, and
+   `thm-compact-connected-lie-groups-are-classified-by-root-data` for the compact
+   simply connected semisimple covering form; transport the real form using
+   the existing complex semisimple classification. Consume
+   `thm-lie-second-fundamental-theorem` (published DG-29, order 499) to
+   integrate the restricted real Lie-algebra action into
+   $\operatorname{GL}_{\mathbb C}(V)$, and then
+   `thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable`
+   to obtain the invariant positive Hermitian form. These last compact-group
+   suppliers are on published DG-33, order 507, preceding RL-11 at 510.021;
+   the minimal new backward page requirement is
+   `compact-lie-groups-maximal-tori-and-peter-weyl-theory`. Retain the suppliers'
+   Axiom of Choice assumption. The integration theorem is homed at DG-29,
+   not at the invariant-fields/exponential-map page. Then
+   $\pi(e_\alpha)^*=\pi(f_\alpha)$, the root covectors are orthonormal, and
+   distinct cochain weights are orthogonal. Set
+   $C^q=\Lambda^q(\mathfrak n^+)^*\otimes V$, $\delta=d^*$, and
+   $\square=d\delta+\delta d$. Prove
+   $\langle\square c,c\rangle=\|dc\|^2+\|\delta c\|^2$ and the finite
+   orthogonal decomposition
+   $C^q=\operatorname{im}d\oplus\ker\square\oplus\operatorname{im}\delta$.
+   In particular, harmonic representatives identify $H^q$ with
+   $\ker\square\cap C^q$. This is finite linear algebra, requiring no
+   analytic Hodge theorem or new prerequisite pair.
+3. **Exact identity, not an unspecified Casimir comparison.** Let $H_j$ be
+   a $B$-orthonormal basis of the real Cartan span, let
+   $B(H_\rho,H)=\rho(H)$, and put $\Theta(H)=\pi(H)+T(H)$ for the total
+   cochain action, where $T(H)=-\sum_{\alpha>0}\alpha(H)N_\alpha$ and
+   $N_\alpha=\epsilon_\alpha\iota_\alpha$. Here $\epsilon$ is covector wedge
+   multiplication and $\iota=\epsilon^*$. Starting with DG-29's differential
+   verbatim, its tensor expression is
+   $d=A+D$, with
+   $A=\sum_\alpha\epsilon_\alpha\pi(e_\alpha)$ and
+   $D=-\frac12\sum_{\alpha,\beta,\gamma}
+   c_{\alpha\beta}^{\gamma}\epsilon_\alpha\epsilon_\beta\iota_\gamma$,
+   where $[e_\alpha,e_\beta]=\sum_\gamma c_{\alpha\beta}^{\gamma}e_\gamma$.
+   With the linear-first Hermitian convention, take adjoints by reversing
+   operator order and conjugating scalar coefficients, so
+   $D^*=-\frac12\sum_{a,b,c}\overline{c_{ab}^c}
+   \epsilon_c\iota_b\iota_a$ and $A^*=\sum_a\pi(f_a)\iota_a$.
+   The CAR relation first gives
+   $$
+   \{A,A^*\}=\sum_a\pi(f_a)\pi(e_a)+
+      \sum_{a,b}\epsilon_a\iota_b\pi([e_a,f_b]),
+   $$
+   $$
+   \{A,D^*\}=-\sum_{a,b,c}\overline{c_{ab}^c}
+      \epsilon_c\iota_b\pi(e_a),\qquad
+   \{D,A^*\}=\sum_{a,b,c}c_{ab}^c\epsilon_a\iota_c\pi(f_b).
+   $$
+   The degree-four terms cancel in each mixed anticommutator. Invariance and
+   $f_a=-\tau(e_a)$ give $[e_\alpha,f_\beta]=-
+   \overline{c_{\beta\gamma}^{\alpha}}e_\gamma$ when
+   $\alpha=\beta+\gamma$, $[e_\alpha,f_\beta]=-
+   c_{\alpha\gamma}^{\beta}f_\gamma$ when $\beta=\alpha+\gamma$, and
+   $[e_\alpha,f_\alpha]=H_\alpha$. These two non-Cartan root terms cancel
+   termwise against $\{A,D^*\}$ and $\{D,A^*\}$, respectively. The remaining
+   diagonal term is $\sum_\alpha N_\alpha\pi(H_\alpha)=
+   -\sum_j\pi(H_j)T(H_j)$.
+
+   For the exterior identity, fix a total order on positive roots. Normal
+   ordering gives
+   $$
+   \{D,D^*\}=\frac12\sum_{p,q,r}|c_{pq}^r|^2N_r+
+      \sum_{a<b,\,c<d}K_{ab;cd}\epsilon_a\epsilon_b\iota_c\iota_d,
+   $$
+   $$
+   K_{ab;cd}=-\sum_s c_{ab}^s\overline{c_{cd}^s}
+   -\sum_s\overline{c_{sc}^a}c_{sb}^d
+   +\sum_s\overline{c_{sc}^b}c_{sa}^d
+   +\sum_s\overline{c_{sd}^a}c_{sb}^c
+   -\sum_s\overline{c_{sd}^b}c_{sa}^c.
+   $$
+   The degree-six terms cancel. Put $X_{ac}=[e_a,f_c]=
+   X_{ac}^++X_{ac}^0+X_{ac}^-$, with
+   $$
+   X_{ac}^+=\sum_{s>0:a=s+c}\overline{c_{sc}^a}e_s,\quad
+   X_{ac}^0=\mathbf1_{a=c}H_a,\quad
+   X_{ac}^-=-\sum_{s>0:c=a+s}c_{as}^c f_s,
+   $$
+   Thus $[e_b,f_c]=\mathbf1_{b=c}H_b+
+   \sum_s\overline{c_{sc}^b}e_s-\sum_sc_{bs}^c f_s$, and compact
+   conjugation gives $[f_c,f_d]=-\sum_s\overline{c_{cd}^s}f_s$. Let
+   $S(X,Y)=B(X^+,Y^-)+B(Y^+,X^-)$. The first term of $K$ is
+   $J_{ab;cd}=B([e_a,e_b],[f_c,f_d])$; the other four terms group as
+   $-S(X_{ac},X_{bd})+S(X_{ad},X_{bc})$. Jacobi, paired with $f_d$ and using
+   invariance of $B$, gives
+   $$
+   J_{ab;cd}=B(X_{ac},X_{bd})-B(X_{ad},X_{bc}).
+   $$
+   Since $B(X,Y)=S(X,Y)+B(X^0,Y^0)$, the root-space terms cancel and only
+   $$
+   K_{ab;cd}=B(X_{ac}^0,X_{bd}^0)-B(X_{ad}^0,X_{bc}^0)
+   =(a,b)(\mathbf1_{a=c}\mathbf1_{b=d}-
+   \mathbf1_{a=d}\mathbf1_{b=c})
+   $$
+   remains. Thus the quartic part is $-\sum_{a<b}(a,b)N_aN_b$.
+   For the linear coefficient, with $E=\operatorname{ad}e_r$ and
+   $F=\operatorname{ad}f_r$, the trace of $[E,F]=\operatorname{ad}H_r$ on
+   $\mathfrak n^+$ is $2(\rho,r)$. Root strings with $r+\beta$ a root cancel
+   between $EF$ and $FE$; $e_r$ contributes $\|r\|^2$, and each unordered
+   decomposition $r=a+b$ contributes $2|c_{ab}^r|^2$. Hence
+   $\frac12\sum_{a,b}|c_{ab}^r|^2=(\rho,r)-\frac12\|r\|^2$, giving
+   $\{D,D^*\}=-\frac12\sum_jT(H_j)^2-T(H_\rho)$.
+
+   These computations establish the two intermediate identities above.
+   Combining them with the RL-1 polarized Casimir formula
+   $C_{\mathfrak g}=\sum_jH_j^2+2H_\rho+
+   2\sum_{\alpha>0}f_\alpha e_\alpha$ to obtain
+   $$2\square=1\otimes\pi(C_{\mathfrak g})
+      -\sum_j\Theta(H_j)^2-2\Theta(H_\rho).$$
+   Hence on a cochain weight $\mu$ the scalar is exactly
+   $$\square|_{C^\bullet_\mu}
+      =\tfrac12\bigl(\|\lambda+\rho\|^2-\|\mu+\rho\|^2\bigr)\,\mathrm{id}.$$
+   State the common normalization of $B$, Casimir, and root-vector metric;
+   replacing one independently changes the scalar and invalidates the formula.
+4. **Equality case and cochain multiplicity, with a full source proof.**
+   Write any cochain weight as $\mu=\eta-\sum_{\alpha\in S}\alpha$, where
+   $\eta$ is a weight of $L(\lambda)$ and $S\subset\Phi^+$ has size $q$.
+   Reproduce Goodman--Wallach Lemmas E.2.6--E.2.8: signed root permutation
+   shows that the weights $\rho-\sum_S\alpha$ are $W$-stable. Choose $u$ so
+   $\nu=u(\mu+\rho)$ is dominant, and write
+   $u\eta=\lambda-\beta$ and
+   $u(\rho-\sum_S\alpha)=\rho-\sum_T\alpha$.
+   Thus $\nu=\lambda+\rho-\zeta$ with
+   $\zeta=\beta+\sum_T\alpha$ in the positive root cone. Since
+   $\lambda+\rho$ is strictly dominant,
+   $\|\lambda+\rho\|^2-\|\nu\|^2
+   =(\lambda+\rho+\nu,\zeta)$ is nonnegative and is zero only if
+   $\zeta=0$. Equality forces $\eta=w\lambda$ and
+   $\rho-\sum_S\alpha=w\rho$, with $w=u^{-1}$. The coefficient-one
+   argument from the $W$-invariant product
+   $\prod_{\alpha>0}(e^{\alpha/2}+e^{-\alpha/2})$ (Lemma E.2.7) then forces
+   $S=\Phi_w=\{\alpha>0:w^{-1}\alpha<0\}$ uniquely. The extremal weight
+   space $V_{w\lambda}$ is one-dimensional. This proves both the exact
+   equality case and that $C^\bullet_{w\cdot\lambda}$ is a single line in
+   degree $\ell(w)$, absent in every other degree. Alternatively reproduce
+   OWTU Lemmas 3.4.3--3.4.5 for this last cochain multiplicity statement.
+5. **Closed cochain, harmonic line, theorem, in dependency order.** Prove the
+   preceding cochain uniqueness calculation inside the existing closed-cochain
+   lemma before invoking it. Its generator is
+   $\bigwedge_{\alpha\in\Phi_w}\epsilon_\alpha\otimes v_{w\lambda}$,
+   up to ordering and nonzero scaling. Since $d$ preserves weight and the same
+   weight is absent in degree $\ell(w)+1$, it is closed. The same orthogonality
+   and absence in degree $\ell(w)-1$ make it coclosed. In the scalar-Laplacian
+   lemma, prove the displayed operator identity and equality case. The
+   harmonic-space lemma now identifies its zero-eigenspace with that line,
+   using the already established cochain uniqueness, rather than assuming
+   multiplicity one from the theorem being proved. Finite Hodge decomposition
+   then gives the stated Kostant theorem and its endpoints and Euler character.
+
+**Source corrections and remaining proof obligation.** OWTU Lemma 3.4.4's
+printed equality clause says $S=\Phi^+$; its proof and the next lemma require
+$S=\Phi^+(w)$. Remark 3.4.6(ii) prints $\omega\in B^p$ where the argument
+requires a nonzero cocycle in $Z^p$; an exact cochain cannot generate the asserted
+nonzero class. Woit p.4 uses $w\beta<0$ while its vector is indexed by $w\lambda$;
+use the plan's $w^{-1}\alpha<0$ convention consistently. These source slips
+must not be copied. The full cochain equality and multiplicity proof is supplied
+by the read sources; the two displayed CE anticommutator calculations are the
+precise additional mathematical work needed for the promised Laplacian item.
+This plan reconciliation records their target and normalization, not a claim that
+an item proof has already been written or independently checked.
+
 | id | kind and mathematical content | for / dependency role | statement provenance | proof provenance | source locator |
 |---|---|---|---|---|---|
 | `prop-lie-algebra-cohomology-is-derived-invariants` | Proposition: $H^k(\mathfrak a,V)\cong\operatorname{Ext}_{U\mathfrak a}^k(\mathbb C,V)$, using DG-29's CE complex and HA-6/HA-8. | Explains the functorial role without rebuilding Ext. | literature-derived | ai-altered | E755 §45, pp.245--249; OWTU §3.2, pp.64--68 |
@@ -1213,12 +1415,12 @@ checks CE/Ext and reductive consequences.
 | `thm-casselman-osborne-nilradical-cohomology-constraint` | Theorem: every $\mathfrak h$-weight $\mu$ in $H^\bullet(\mathfrak n^+,L(\lambda))$ has $\chi_\mu=\chi_\lambda$, hence lies in $W\cdot\lambda$. | Cuts the candidate weights to the dot orbit. | literature-derived | ai-altered | OWTU §3.3, pp.69--75; Woit pp.2--3 |
 | `def-inversion-set-of-a-weyl-group-element` | Definition: $\Phi_w=\{\alpha>0:w^{-1}\alpha<0\}$ and $\lvert\Phi_w\rvert=\ell(w)$. | Indexes the exterior cochain representing $w$. | literature-derived | not-applicable | Woit pp.2--3; DG-31 |
 | `lem-extremal-weight-cochain-for-a-weyl-element-is-closed` | Lemma: the extremal vector tensored with root covectors for $\Phi_w$ gives a closed cochain of degree $\ell(w)$ and weight $w(\lambda+\rho)-\rho$. | Constructs every asserted Kostant summand. | literature-derived | ai-altered | Woit pp.2--4; OWTU §3.4, pp.75--80 |
-| `lem-kostant-laplacian-is-scalar-on-weight-components` | Lemma: the CE Laplacian/Casimir comparison has a nonnegative scalar on each weight component and vanishes exactly at dot-orbit extremal weights. | Proof-sized exclusion of all other classes. | literature-derived | ai-altered | OWTU §3.4, pp.75--81; Woit pp.3--5 |
-| `lem-each-kostant-extremal-harmonic-space-is-one-dimensional` | Lemma: the zero-eigenspace at $w\cdot\lambda$ is the line generated by the extremal cochain. | Establishes multiplicity one rather than mere support. | literature-derived | ai-altered | OWTU §3.4, pp.78--82; Woit pp.3--5 |
+| `lem-kostant-laplacian-is-scalar-on-weight-components` | Lemma: the CE Laplacian/Casimir comparison has a nonnegative scalar on each weight component and vanishes exactly at dot-orbit extremal weights. | Proof-sized exclusion of all other classes. | literature-derived | ai-altered | Local CE anticommutator proof above; Goodman--Wallach Appendix E, Lemma E.2.8 for equality; Woit p.4 for approach only |
+| `lem-each-kostant-extremal-harmonic-space-is-one-dimensional` | Lemma: the zero-eigenspace at $w\cdot\lambda$ is the line generated by the extremal cochain. | Establishes multiplicity one rather than mere support. | literature-derived | ai-altered | OWTU Lemmas 3.4.3--3.4.5, pp.73--76; Goodman--Wallach Appendix E, Lemmas E.2.7--E.2.8; local Hodge argument above |
 | `thm-kostant-nilradical-cohomology-theorem` | Theorem: $H^k(\mathfrak n^+,L(\lambda))\cong\bigoplus_{\ell(w)=k}\mathbb C_{w\cdot\lambda}$ as $\mathfrak h$-modules. | Requested representation-theoretic cohomology theorem. | literature-derived | ai-altered | OWTU §3.4, pp.75--82; Woit pp.2--5 |
 | `cor-kostant-cohomology-in-degrees-zero-and-top` | Corollary: degree zero is the highest-weight line and top degree is the $w_0\cdot\lambda$ line. | Checks both endpoints, including $\mathfrak n^+=0$. | literature-derived | ai-altered | Kostant theorem; Woit pp.4--5 |
-| `cor-kostant-euler-character-recovers-the-weyl-numerator` | Corollary: the alternating cohomology character is $\sum_w(-1)^{\ell(w)}e^{w\cdot\lambda}$. | Independent cohomological bridge to RL-7. | literature-derived | ai-altered | Woit pp.4--6; OWTU §3.5, pp.82--84 |
-| `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class` | Proposition: applying $\mathfrak n^+$-cohomology/Euler characteristic to the BGG resolution yields the same Weyl alternating sum. | Relates the two proof technologies without rebuilding a spectral sequence. | literature-derived | ai-altered | Woit pp.4--6; HA-15/HA-16; RL-6 |
+| `cor-kostant-euler-character-recovers-the-weyl-numerator` | Corollary: the Kostant decomposition directly gives the alternating cohomology character $\sum_w(-1)^{\ell(w)}e^{w\cdot\lambda}$; BGG comparison separately identifies it as the Weyl numerator. | Independent cohomological computation with a separate character comparison. | literature-derived | ai-altered | Woit pp.4--6; OWTU §3.5, pp.82--84 |
+| `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class` | Proposition: BGG's Euler class in $K_0(\mathcal O_\lambda)$ and the Kostant cohomology Euler character have compatible formal characters after clearing the Verma denominator; no cross-category Grothendieck-class equality is asserted. | Relates the two proof technologies without rebuilding a spectral sequence. | literature-derived | ai-altered | Woit pp.4--6; HA-15/HA-16; RL-6 |
 
 **B companion — finite checks and hypothesis tests.**
 
@@ -1494,6 +1696,7 @@ Stembridge), not merely because it mentions it.
 | Stanciu | Iordan Stanciu, *A Geometric Proof of Duflo's Theorem*: introduction pp.1--3; §§2--6 pp.3--25; §7 pp.26--29. | [arXiv PDF](https://arxiv.org/pdf/2103.16890) |
 | OWTU | *Lie Algebra Cohomology and Representation Theory* thesis: ch.3 §§3.2--3.5 printed pp.64--84, PDF pp.70--90. | [Library and Archives Canada PDF](https://www.collectionscanada.gc.ca/obj/thesescanada/vol2/OWTU/TC-OWTU-5421.pdf) |
 | Woit | Peter Woit, *Lie Algebra Cohomology and the Borel--Weil--Bott Theorem*: complete pp.1--7. | [Columbia notes](https://www.math.columbia.edu/~woit/LieGroups-2012/borelweilbott.pdf) |
+| GW-E | Roe Goodman and Nolan Wallach, *Symmetry, Representations, and Invariants*, Appendix E §§E.2.1--E.2.5, printed pp.17--27: cohomological Casimir identity and Kostant equality lemma. | [Complete Appendix E](https://www.math.rutgers.edu/~goodman/pub/symmetry/appe.pdf) |
 | Klesh | Alexander Kleshchev, *Lectures on Infinite Dimensional Lie Algebras*: §§1.2--1.5 pp.10--25; §2 pp.26--36; §3 pp.37--49; §§4--5 pp.50--76; §§6--8 pp.77--115; §§9--11 pp.116--154. | [Oregon notes](https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf) |
 | Perrin | Nicolas Perrin, *Kac--Moody Groups and Algebras*: §§4--5 pp.29--47; §§7--9 pp.57--84; §§10--11 pp.85--100; §12 pp.101--110; §14 pp.121--126. | [CNRS/LMV notes](https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf) |
 | JKK | K. Jeong, S.-J. Kang, M. Kashiwara, *Crystal Bases for Quantum Generalized Kac--Moody Algebras*: complete journal pp.395--438 (quantum $\mathcal O_{int}$, crystal tensor/existence theorems, global bases). | [Cambridge Core PDF](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/B38D5430A05ED852F551DBA929DB52F9/S0024611504015023a.pdf/crystal-bases-for-quantum-generalized-kacmoody-algebras.pdf) |

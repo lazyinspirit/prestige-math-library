@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rectangle-criterion-for-independent-random-elements.md

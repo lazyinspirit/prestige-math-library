@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-automizer-condition-gives-centralizer-transitivity.md

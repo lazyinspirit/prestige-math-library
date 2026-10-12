@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-sr-spacetime-primitives-2829834d3a12d1fc.task.md

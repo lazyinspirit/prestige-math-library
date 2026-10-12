@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex.md

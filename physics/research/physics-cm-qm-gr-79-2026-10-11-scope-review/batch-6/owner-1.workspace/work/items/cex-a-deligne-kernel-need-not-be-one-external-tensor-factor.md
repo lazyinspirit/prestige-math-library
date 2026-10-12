@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-deligne-kernel-need-not-be-one-external-tensor-factor.md

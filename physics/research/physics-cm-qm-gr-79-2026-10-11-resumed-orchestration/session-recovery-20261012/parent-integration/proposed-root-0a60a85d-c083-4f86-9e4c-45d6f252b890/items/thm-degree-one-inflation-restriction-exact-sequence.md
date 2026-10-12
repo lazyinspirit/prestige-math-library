@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-degree-one-inflation-restriction-exact-sequence.md

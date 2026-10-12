@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-ring-prespectrum-gives-a-graded-product-on-stable-homotopy-groups.md

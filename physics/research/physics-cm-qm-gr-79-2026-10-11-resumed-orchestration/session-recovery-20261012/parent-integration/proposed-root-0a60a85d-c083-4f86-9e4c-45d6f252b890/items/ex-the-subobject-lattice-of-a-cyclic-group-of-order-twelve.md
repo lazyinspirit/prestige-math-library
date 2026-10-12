@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-subobject-lattice-of-a-cyclic-group-of-order-twelve.md

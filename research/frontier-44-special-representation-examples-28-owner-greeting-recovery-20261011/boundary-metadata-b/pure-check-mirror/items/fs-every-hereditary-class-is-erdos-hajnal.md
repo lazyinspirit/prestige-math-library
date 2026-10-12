@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-hereditary-class-is-erdos-hajnal.md

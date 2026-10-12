@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poisson-summation-under-two-sided-polynomial-decay.md

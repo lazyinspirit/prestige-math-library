@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-collapse-does-not-in-general-split-the-abutment.md

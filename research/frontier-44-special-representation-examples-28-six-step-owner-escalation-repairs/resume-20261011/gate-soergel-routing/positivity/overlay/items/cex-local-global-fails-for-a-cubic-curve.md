@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-local-global-fails-for-a-cubic-curve.md

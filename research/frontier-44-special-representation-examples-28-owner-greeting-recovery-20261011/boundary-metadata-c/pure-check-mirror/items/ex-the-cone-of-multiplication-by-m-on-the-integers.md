@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-cone-of-multiplication-by-m-on-the-integers.md

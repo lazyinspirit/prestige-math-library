@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-lagrange-multiplier-rule-for-graph-constraints.md

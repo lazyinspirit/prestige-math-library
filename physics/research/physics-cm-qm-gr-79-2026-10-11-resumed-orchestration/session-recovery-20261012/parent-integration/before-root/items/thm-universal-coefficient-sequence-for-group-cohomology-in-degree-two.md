@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-coefficient-sequence-for-group-cohomology-in-degree-two.md

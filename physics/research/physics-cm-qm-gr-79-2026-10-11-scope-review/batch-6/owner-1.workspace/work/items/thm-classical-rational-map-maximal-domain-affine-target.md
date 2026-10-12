@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-rational-map-maximal-domain-affine-target.md

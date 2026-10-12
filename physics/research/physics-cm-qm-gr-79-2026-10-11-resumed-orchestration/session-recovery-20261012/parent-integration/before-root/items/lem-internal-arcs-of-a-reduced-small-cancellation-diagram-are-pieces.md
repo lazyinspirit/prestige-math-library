@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces.md

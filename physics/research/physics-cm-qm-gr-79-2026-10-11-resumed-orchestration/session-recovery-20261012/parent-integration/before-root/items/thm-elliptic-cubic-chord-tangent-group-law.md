@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-elliptic-cubic-chord-tangent-group-law.md

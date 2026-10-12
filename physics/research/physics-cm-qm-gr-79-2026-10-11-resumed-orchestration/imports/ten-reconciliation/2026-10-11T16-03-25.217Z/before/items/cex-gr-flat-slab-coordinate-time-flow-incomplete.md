@@ -1,0 +1,73 @@
+---
+id: cex-gr-flat-slab-coordinate-time-flow-incomplete
+kind: counterexample
+title: "Counterexample: on the flat slab the coordinate time has Cauchy levels but an incomplete gradient flow"
+status: draft
+origin: session
+domain: mathematics
+dependency_level: 29
+provenance:
+  statement: ai-altered
+  proof: ai-generated
+proof_strategy: direct
+deps: [thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice, def-gr-flat-minkowski-model-and-inertial-charts, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-curves-and-reachability, thm-gr-smooth-cauchy-temporal-splitting, def-gr-inverse-metric-and-musical-isomorphisms, def-complete-vector-field, def-integral-curve-of-a-vector-field, thm-unique-maximal-integral-curve-through-each-point, def-local-and-global-flow, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, cor-zero-derivative-implies-constant, def-c-r-and-smooth-maps-between-smooth-manifolds, def-causal-classification-of-lorentz-vectors]
+dependency_roles:
+  thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice: mathematical-premise
+  def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
+  def-gr-causal-conditions-and-global-hyperbolicity: mathematical-premise
+  def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
+  def-gr-causal-curves-and-reachability: mathematical-premise
+  thm-gr-smooth-cauchy-temporal-splitting: mathematical-premise
+  def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
+  def-complete-vector-field: mathematical-premise
+  def-integral-curve-of-a-vector-field: mathematical-premise
+  thm-unique-maximal-integral-curve-through-each-point: mathematical-premise
+  def-local-and-global-flow: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  cor-zero-derivative-implies-constant: mathematical-premise
+  def-c-r-and-smooth-maps-between-smooth-manifolds: mathematical-premise
+  def-causal-classification-of-lorentz-vectors: mathematical-premise
+sources:
+  references:
+    - title: "A. N. Bernal and M. Sanchez, Smooth globally hyperbolic splittings and temporal functions, arXiv:gr-qc/0308090 (2003): completeness of the gradient flow is a property of the constructed temporal function, not of arbitrary time functions, printed pp. 4-8"
+      url: "https://arxiv.org/pdf/gr-qc/0308090"
+verification:
+  precheck: pending
+---
+
+## Statement refuted
+
+Statement refuted: "on every globally hyperbolic time-oriented smooth
+Lorentzian four-manifold, for every temporal function $T$ in the sense of
+[[def-gr-causal-conditions-and-global-hyperbolicity]] clause (e) the vector
+field $X=\nabla T/g(\nabla T,\nabla T)$ is complete, that is, every maximal
+integral curve of $X$ is defined on all of $\mathbb R$
+([[def-complete-vector-field]])."
+
+## Facts & Assumptions
+
+**Given:** The flat slab $(M,g,N)$ of [[thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice]] with chart $x=(t,z)$, the coordinate time $t:M\to(0,1)$ read in the chart, and the point $p_0:=x^{-1}(1/2,0,0,0)$.
+
+[L1] Slab facts: $(M,g,N)$ is a globally hyperbolic time-oriented smooth Lorentzian four-manifold with metric components $\operatorname{diag}(-1,1,1,1)$ in $x$; the coordinate slices $x^{-1}(\{c\}\times\mathbb R^3)$ are spacelike embedded hypersurfaces and Cauchy sets; the vertical curve $s\mapsto x^{-1}(s,z_0)$ is a geodesic with unit tangent $\partial_0$ and does not converge to a point of $M$ at the endpoints of its parameter interval ([[thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice]] clauses (a)-(c), [[def-gr-causal-conditions-and-global-hyperbolicity]], [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]], [[def-gr-causal-curves-and-reachability]], [[def-local-and-global-flow]]).
+
+[L2] Gradient of the coordinate time: with $\nabla$ the inverse metric of [[def-gr-inverse-metric-and-musical-isomorphisms]], the chart function $t$ has $dt=dx^0$ and $\nabla t=-\partial_0$, because $g(-\partial_0,w)=w^0=dt(w)$; hence $g(\nabla t,\nabla t)=-1<0$, the gradient is past-directed, and $t$ is a temporal function whose gradient field is $X=\nabla t/g(\nabla t,\nabla t)=\partial_0$. [L1]
+
+[L3] Integral curves of $\partial_0$: in the chart, a curve $s\mapsto x^{-1}(t(s),z(s))$ has velocity $(t'(s),z'(s))$, so it is an integral curve of $X=\partial_0$ exactly when $t'(s)=1$ and $z'(s)=0$ for all $s$; by [[cor-zero-derivative-implies-constant]] this means $t(s)=s+c$ and $z(s)=z_0$ is constant. The uniqueness theorem for maximal integral curves identifies the maximal domain of the curve $s\mapsto x^{-1}(s+c,z_0)$ as the largest interval of $s$ with $s+c\in(0,1)$, namely $(-c,1-c)$ ([[thm-unique-maximal-integral-curve-through-each-point]], [[def-integral-curve-of-a-vector-field]]).
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 (The function is temporal with Cauchy levels.) The chart coordinate $t$ is smooth on $M$, and by [L2] its gradient is past timelike with $X=\partial_0$; by [L1] every level $t^{-1}(c)$, $0<c<1$, is a Cauchy set and a spacelike embedded hypersurface. Hence $t$ satisfies the temporal-function condition and has Cauchy levels. [L1, L2]
+
+2.1 (The maximal integral curve leaves the slab at finite parameter.) Take $c=1/2$, so the curve $\gamma(s):=x^{-1}(1/2+s,0,0,0)$. By [L3] it is the maximal integral curve of $X$ through $p_0=\gamma(0)$, and its maximal domain is $(-1/2,1/2)$. At $s\to1/2-$ the curve converges in the ambient flat model to the boundary point $x^{-1}(1,0,0,0)\notin M$ and similarly at the lower end, so it cannot be extended within $M$; its domain is not all of $\mathbb R$. Therefore $X=\partial_0$ is not complete, and its flow is not global. [step 1.1, L1, L3]
+
+3.1 (Conclusion.) The flat slab is globally hyperbolic, the coordinate time is a temporal function with Cauchy levels, and yet its gradient field is incomplete. Hence the refuted statement is false: completeness of $X=\nabla T/g(\nabla T,\nabla T)$ is not a consequence of being a temporal function on a globally hyperbolic manifold, and the completeness clause of [[thm-gr-smooth-cauchy-temporal-splitting]] is a property of the function constructed there. [step 1.1, step 2.1, L1] ∎
+
+## Remarks
+
+- **What is and is not contradicted.** The theorem asserts the existence of at least one temporal function with complete gradient flow on every globally hyperbolic manifold; the counterexample shows that an arbitrary temporal function need not have one, which is why the construction of the theorem cannot be replaced by the coordinate time.
+- **No empirical content.** The counterexample is a mathematical statement about a model and reports no observation.
+
+- **Companion example.** On the same slab, [[ex-gr-flat-slab-explicit-splitting]] constructs a temporal function whose gradient field is complete; this shows that the completeness clause of [[thm-gr-smooth-cauchy-temporal-splitting]] is a property of the constructed function, not of temporal functions in general.

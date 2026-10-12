@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bruhat-rank-two-intervals-are-diamonds.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-heat-and-poisson-semigroups-as-fourier-multipliers.md

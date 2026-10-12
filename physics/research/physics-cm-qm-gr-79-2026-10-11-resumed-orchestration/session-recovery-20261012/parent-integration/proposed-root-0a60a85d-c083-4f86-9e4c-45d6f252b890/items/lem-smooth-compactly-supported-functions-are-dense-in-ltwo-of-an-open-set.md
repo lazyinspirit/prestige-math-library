@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set.md

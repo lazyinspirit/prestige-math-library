@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integration-by-parts-for-brownian-ito-processes.md

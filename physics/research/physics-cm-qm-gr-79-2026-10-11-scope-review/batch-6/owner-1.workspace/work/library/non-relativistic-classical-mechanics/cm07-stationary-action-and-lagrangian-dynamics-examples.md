@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm07-stationary-action-and-lagrangian-dynamics-examples.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-characteristic-polynomial-of-a-recurrence-companion-matrix.md

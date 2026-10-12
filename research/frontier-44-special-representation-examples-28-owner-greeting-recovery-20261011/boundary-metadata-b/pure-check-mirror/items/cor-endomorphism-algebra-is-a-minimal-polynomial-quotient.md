@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-endomorphism-algebra-is-a-minimal-polynomial-quotient.md

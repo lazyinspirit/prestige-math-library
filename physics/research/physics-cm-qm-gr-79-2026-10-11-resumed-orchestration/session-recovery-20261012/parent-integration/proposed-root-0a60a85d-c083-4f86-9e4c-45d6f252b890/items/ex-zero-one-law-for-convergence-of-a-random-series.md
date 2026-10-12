@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-zero-one-law-for-convergence-of-a-random-series.md

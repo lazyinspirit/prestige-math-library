@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-analytic-splitting-data-and-exact-splitting-map.md

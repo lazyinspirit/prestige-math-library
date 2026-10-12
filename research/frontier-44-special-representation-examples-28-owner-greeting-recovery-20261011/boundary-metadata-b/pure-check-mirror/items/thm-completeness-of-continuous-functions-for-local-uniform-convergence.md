@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-completeness-of-continuous-functions-for-local-uniform-convergence.md

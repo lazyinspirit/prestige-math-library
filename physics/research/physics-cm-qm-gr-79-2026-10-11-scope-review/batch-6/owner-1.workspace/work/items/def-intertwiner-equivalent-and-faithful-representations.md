@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-intertwiner-equivalent-and-faithful-representations.md

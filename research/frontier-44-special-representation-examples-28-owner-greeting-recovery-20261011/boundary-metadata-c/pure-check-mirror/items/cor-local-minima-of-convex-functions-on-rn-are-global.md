@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-local-minima-of-convex-functions-on-rn-are-global.md

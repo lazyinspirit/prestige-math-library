@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-clutching-classifies-vector-bundles-over-spheres-in-the-stable-range.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators.md

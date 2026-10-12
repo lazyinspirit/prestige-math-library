@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-ext-from-a-two-term-projective-resolution.md

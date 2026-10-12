@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rigidified-relative-picard-functor-and-dual-abelian-variety.md

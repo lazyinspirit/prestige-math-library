@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-square-and-hexagonal-tori-and-their-j-invariants.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-p-th-power-map-is-a-homomorphism-in-a-class-two-group-for-odd-p.md

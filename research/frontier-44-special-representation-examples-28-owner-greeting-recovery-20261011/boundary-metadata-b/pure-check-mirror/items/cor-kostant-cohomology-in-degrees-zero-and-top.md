@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-kostant-cohomology-in-degrees-zero-and-top.md

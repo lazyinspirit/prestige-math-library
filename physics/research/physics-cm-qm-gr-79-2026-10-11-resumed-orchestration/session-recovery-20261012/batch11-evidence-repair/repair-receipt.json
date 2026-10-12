@@ -1,0 +1,249 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "11",
+  "authorized_consumer_batch": "34",
+  "cycle": 1,
+  "verdict": "local-repair-complete",
+  "native_acceptance_claimed": false,
+  "native_history_mutated": false,
+  "recorded_at": "2026-10-11T19:28:49.858561+00:00",
+  "original_report": "research/physics-cm-qm-gr-79-2026-10-11-scope-review/batch-11/review-0.json",
+  "original_report_raw_sha256": "9cd6f8ab118f3cbb0eaa71ccb5268b1918d46e5b31495afb91f21565fed41f95",
+  "retained_findings": [
+    {
+      "id": "def-cm-measurement-model",
+      "type": "local",
+      "reason": "The additive-error clause maps h(theta,z) to R^d but epsilon to R^m for arbitrary m,d, so their sum and translate proof are undefined; give epsilon and its domain output dimension d or require m=d."
+    },
+    {
+      "id": "def-cm-calibration-rule",
+      "type": "prerequisite",
+      "reason": "Clause 4 subtracts and adds elements of Theta even though def-cm-measurement-model gives Theta only as a set, and Gamma takes y alone although approved E17 requires c=C(y_ref,theta_ref); specify a typed parameter vector and make reference inputs rule arguments."
+    },
+    {
+      "id": "ex-cm-math-evidence-pendulum-propagation",
+      "type": "scope",
+      "reason": "Approved E17 assigns a pendulum propagation with Hessian-bound correction, but this example computes only first-order covariance and expressly defers that reading; add the formal pendulum remainder calculation while keeping physical assumptions outside the mathematical claim."
+    },
+    {
+      "id": "def-cm-confidence-set-and-coverage",
+      "type": "local",
+      "reason": "The definition uses a coverage level 1-alpha without specifying alpha in [0,1], leaving the intended probability threshold unconstrained; state alpha's range."
+    },
+    {
+      "id": "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+      "type": "local",
+      "reason": "Because C maps into 2^Theta, each value must be a subset of Theta, but the displayed formula can return arbitrary real singletons outside Theta; intersect each candidate with Theta or return the empty set when it is outside."
+    },
+    {
+      "id": "ex-cm-math-evidence-chebyshev-sample-mean-check",
+      "type": "local",
+      "reason": "cor-iid-finite-variance-weak-law assumes an infinite IID sequence, while this example defines only two variables on a four-point space; prove the two-sample identity and bound directly or supply an extension before applying it in Steps 2.1 and 3.1."
+    },
+    {
+      "id": "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+      "type": "local",
+      "reason": "Y(omega_2)=3 lies outside U=(-1,3), contradicting the required X(omega) in U; use an open set containing 3, such as (-1,4), and a Hessian bound B at least 24 to invoke the remainder corollary."
+    },
+    {
+      "id": "rem-cm-inference-and-uncertainty-scope",
+      "type": "prerequisite",
+      "reason": "The remark and A-page summary say the nonlinear covariance difference is controlled by cor-cm-linearization-error-bounds, but that corollary bounds scalar R and R^2 only; supply an explicit covariance-error estimate with its scope and hypotheses or limit the claim to the remainder."
+    },
+    {
+      "id": "def-cm18-calibration",
+      "type": "outside-batch",
+      "reason": "This outside-batch definition applies differences and sums to arbitrary, potentially mixed-unit Theta and uses Gamma(y) rather than a reference-input rule; it needs typed parameter coordinates, unit-consistent deviations, and owner repair."
+    },
+    {
+      "id": "ex-cm18-pendulum-calibration-proposal",
+      "type": "outside-batch",
+      "reason": "At Verification step 4.1 this outside-batch item claims the variance difference is controlled by remainder bounds without an explicit inequality; owner should add the scalar covariance-error estimate and its dependency or narrow the claim."
+    }
+  ],
+  "additional_confirmed_defects": [
+    {
+      "id": "ex-cm18-pendulum-calibration-proposal",
+      "reason": "Frobenius bound lacks the second off-diagonal square; displayed uncorrelated covariance incorrectly multiplied by T0^4."
+    },
+    {
+      "id": "def-cm18-sampling-model",
+      "reason": "Finite IID family is insufficient for infinite-sequence imported weak-law hypotheses."
+    },
+    {
+      "id": "ex-cm18-uniform-motion-sampling-check",
+      "reason": "Consumes same finite-family/infinite-sequence mismatch."
+    }
+  ],
+  "repairs": [
+    {
+      "id": "def-cm-measurement-model",
+      "repair": "Additive prediction, error domain and error random element now all use output dimension d."
+    },
+    {
+      "id": "def-cm-calibration-rule",
+      "repair": "Parameters are Euclidean numerical vectors; deviations are ambient Borel vectors; Gamma explicitly takes observations and nominal references."
+    },
+    {
+      "id": "def-cm-confidence-set-and-coverage",
+      "repair": "Coverage threshold explicitly assumes alpha in [0,1]."
+    },
+    {
+      "id": "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+      "repair": "Intersected candidate singleton sets with Theta; the coverage 3/4 and conditional-probability 1 witness remains unchanged."
+    },
+    {
+      "id": "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+      "repair": "Cubic witness now uses (-1,4) containing all outcomes and B=24; exact variance and strict remainder comparisons checked."
+    },
+    {
+      "id": "cor-cm-linearization-error-bounds",
+      "repair": "Preserved scalar bounds and proved full d-dimensional covariance entry bounds and scalar specialization, including zero-variance cases."
+    },
+    {
+      "id": "ex-cm-math-evidence-pendulum-propagation",
+      "repair": "Preserved correlated propagation; supplied explicit local Hessian, both off-diagonal contributions, moment remainder and variance correction."
+    },
+    {
+      "id": "def-cm18-calibration",
+      "repair": "Supplied fixed per-coordinate units/scales, dimensionless normalized deviations and Gamma(y,theta_ref), with actual reference values in Theta."
+    },
+    {
+      "id": "def-cm18-sampling-model",
+      "repair": "Replaced unsupported infinite-IID corollary application by the finite-family local lemma; preserved finite protocol and hypotheses."
+    },
+    {
+      "id": "ex-cm18-pendulum-calibration-proposal",
+      "repair": "Added explicit scalar variance-error inequality, reference-input calibration and numerical-coordinate convention; corrected missing Hessian factor 2 and uncorrelated variance factor."
+    },
+    {
+      "id": "ex-cm18-uniform-motion-sampling-check",
+      "repair": "Finite n observations now consume the finite-family lemma; prediction, sample-mean formula and declared numerical illustration preserved."
+    },
+    {
+      "id": "lem-cm-finite-iid-sample-mean-bound",
+      "repair": "Supplied smallest missing finite-family prerequisite with full variance factorization and general Chebyshev proof; no infinite extension asserted."
+    },
+    {
+      "id": "rem-cm-inference-and-uncertainty-scope",
+      "repair": "Finite sample bound and additional infinite-sequence convergence separated; full vector covariance qualification and inequality explicit."
+    },
+    {
+      "id": "ex-cm-math-evidence-chebyshev-sample-mean-check",
+      "repair": "Proved the second moment and probability bound directly by four-outcome enumeration, removing unsupported infinite-IID use."
+    }
+  ],
+  "current_local_carrier_aggregate_sha256": "0eca4c0e0b1dbcff1cfbc34e6a9e097a79db0078ceb67479acc4d76885401723",
+  "hash_basis": "Lexicographically ordered file:raw SHA256 entries in current-hashes.json; this is not a native batch input hash.",
+  "before_bytes": "before-hashes.json",
+  "current_hashes": "current-hashes.json",
+  "changed_files": [
+    "items/cex-cm-math-evidence-confidence-coverage-is-not-posterior.md",
+    "items/cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps.md",
+    "items/cor-cm-linearization-error-bounds.md",
+    "items/def-cm-calibration-rule.md",
+    "items/def-cm-confidence-set-and-coverage.md",
+    "items/def-cm-measurement-model.md",
+    "items/def-cm18-calibration.md",
+    "items/def-cm18-sampling-model.md",
+    "items/ex-cm-math-evidence-chebyshev-sample-mean-check.md",
+    "items/ex-cm-math-evidence-exact-versus-linear-variance.md",
+    "items/ex-cm-math-evidence-pendulum-propagation.md",
+    "items/ex-cm18-pendulum-calibration-proposal.md",
+    "items/ex-cm18-uniform-motion-sampling-check.md",
+    "items/rem-cm-inference-and-uncertainty-scope.md",
+    "library/non-relativistic-classical-mechanics/cm18-measurement-uncertainty-and-later-bridges-examples.md",
+    "library/non-relativistic-classical-mechanics/cm18-measurement-uncertainty-and-later-bridges.md",
+    "library/non-relativistic-classical-mechanics-mathematics/cm-math-evidence-examples.md",
+    "library/non-relativistic-classical-mechanics-mathematics/cm-math-evidence.md",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-11.coverage.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-11.pages.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-11.proof-contracts.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-34.coverage.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-34.cross-batch-dependencies.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-34.pages.json",
+    "research/physics-cm-qm-gr-79-2026-10-11-batch-34.proof-contracts.json",
+    "items/lem-cm-finite-iid-sample-mean-bound.md"
+  ],
+  "consumer_dispositions": "consumer-dispositions.json",
+  "geometry_context": "geometry-supplier-context.json",
+  "reviewed_inventory": {
+    "items": [
+      "items/def-cm-measurement-model.md",
+      "items/def-cm-calibration-rule.md",
+      "items/def-cm-iid-sampling-model.md",
+      "items/lem-cm-finite-iid-sample-mean-bound.md",
+      "items/def-cm-covariance-matrix-of-a-random-vector.md",
+      "items/lem-cm-linearized-propagation-of-covariance.md",
+      "items/lem-cm-uniform-second-order-remainder-bound.md",
+      "items/cor-cm-linearization-error-bounds.md",
+      "items/def-cm-statistical-test-and-size.md",
+      "items/def-cm-confidence-set-and-coverage.md",
+      "items/def-cm-likelihood-function.md",
+      "items/rem-cm-inference-and-uncertainty-scope.md",
+      "items/ex-cm-math-evidence-pendulum-propagation.md",
+      "items/ex-cm-math-evidence-exact-versus-linear-variance.md",
+      "items/ex-cm-math-evidence-chebyshev-sample-mean-check.md",
+      "items/ex-cm-math-evidence-remainder-bound-check.md",
+      "items/cex-cm-math-evidence-confidence-coverage-is-not-posterior.md",
+      "items/cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps.md",
+      "items/def-cm18-observable-model.md",
+      "items/def-cm18-calibration.md",
+      "items/def-cm18-sampling-model.md",
+      "items/rem-cm18-model-test.md",
+      "items/rem-cm18-numerical-error.md",
+      "items/rem-cm18-galilean-regime.md",
+      "items/rem-cm18-em-bridge.md",
+      "items/rem-cm18-qm-bridge.md",
+      "items/rem-cm18-primary-report-contract.md",
+      "items/ex-cm18-pendulum-calibration-proposal.md",
+      "items/ex-cm18-uniform-motion-sampling-check.md",
+      "items/ex-cm18-frame-change-of-an-observation-model.md",
+      "items/cex-cm18-finite-sample-may-miss-the-signal.md"
+    ],
+    "pages": [
+      "library/non-relativistic-classical-mechanics-mathematics/cm-math-evidence.md",
+      "library/non-relativistic-classical-mechanics-mathematics/cm-math-evidence-examples.md",
+      "library/non-relativistic-classical-mechanics/cm18-measurement-uncertainty-and-later-bridges.md",
+      "library/non-relativistic-classical-mechanics/cm18-measurement-uncertainty-and-later-bridges-examples.md"
+    ]
+  },
+  "checks": "local-checks.json",
+  "source_reading": {
+    "external_full_text_read_in_this_task": [],
+    "local_used_supplier_reading": [
+      "lem-cm-uniform-second-order-remainder-bound",
+      "lem-cm-linearized-propagation-of-covariance",
+      "def-cm-covariance-matrix-of-a-random-vector",
+      "lem-variance-and-covariance-identities-for-random-variables",
+      "thm-factorization-of-expectations-for-independent-variables",
+      "cor-iid-finite-variance-weak-law",
+      "thm-chebyshev-weak-law-for-uncorrelated-arrays",
+      "def-cm-constrained-configuration-and-mass-metric",
+      "def-cm-traction-and-stress"
+    ],
+    "qualification": "Local arguments checked independently; historical bibliography and source retrieval/reading records retained, not re-awarded. Current citation quotes were refreshed mechanically and strict-checked; no new authoritative external full-text reading claimed."
+  },
+  "remaining_blockers": [],
+  "remaining_parent_obligations": [
+    "Authentic native scope-review continuation/owner resolution; this receipt grants no native acceptance.",
+    "Global dependency-level reconciliation, readiness authentication and later independent review/gates remain parent/engine duties."
+  ],
+  "original_report_native_structured_sha256": "9244cdf507ae25f68fd30a58d9d48a7f15a764a456f8cbab0115a8d54540e12b",
+  "checks_additional": {
+    "depcheck": {
+      "command": [
+        "node",
+        "tools/physics-support/depcheck.mjs",
+        "--items-file",
+        "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/batch11-evidence-repair/items-selection.json",
+        "--json"
+      ],
+      "output_file": "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/batch11-evidence-repair/depcheck.txt",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0
+    }
+  }
+}

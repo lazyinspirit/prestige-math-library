@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dual-crystal-reverses-arrows-and-weights.md

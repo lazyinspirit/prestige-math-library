@@ -50,11 +50,8 @@ has sign $(-1)^n$, so the convergents alternate around $\alpha$.
 
 **Proof technique:** direct.
 
-1.1 By [F1] and [F2]. [F1, F2, F3, F4, algebra]
-$$\alpha-\frac{p_n}{q_n} = \frac{q_n(\alpha_{n+1}p_n+p_{n-1})-p_n(\alpha_{n+1}q_n+q_{n-1})} {q_n(\alpha_{n+1}q_n+q_{n-1})} = \frac{(-1)^n}{q_n(\alpha_{n+1}q_n+q_{n-1})}.$$ The denominator is positive by [F3] and [F4], so the sign is $(-1)^n$. [F1, F2, F3, F4, algebra]
+1.1 By [F1] and [F2]. [F1, F2, F3, F4, algebra] $$\alpha-\frac{p_n}{q_n} = \frac{q_n(\alpha_{n+1}p_n+p_{n-1})-p_n(\alpha_{n+1}q_n+q_{n-1})} {q_n(\alpha_{n+1}q_n+q_{n-1})} = \frac{(-1)^n}{q_n(\alpha_{n+1}q_n+q_{n-1})}.$$ The denominator is positive by [F3] and [F4], so the sign is $(-1)^n$. [F1, F2, F3, F4, algebra]
 
-2.1 Fact [F4] gives $\alpha_{n+1}>a_{n+1}$, and [F3] gives. [step 1.1, F3, F4, algebra]
-$$\alpha_{n+1}q_n+q_{n-1} > a_{n+1}q_n+q_{n-1} = q_{n+1}.$$ Taking absolute values in step 1.1 yields $$\left|\alpha-\frac{p_n}{q_n}\right| < \frac{1}{q_nq_{n+1}}.$$ [step 1.1, F3, F4, algebra]
+2.1 Fact [F4] gives $\alpha_{n+1}>a_{n+1}$, and [F3] gives. [step 1.1, F3, F4, algebra] $$\alpha_{n+1}q_n+q_{n-1} > a_{n+1}q_n+q_{n-1} = q_{n+1}.$$ Taking absolute values in step 1.1 yields $$\left|\alpha-\frac{p_n}{q_n}\right| < \frac{1}{q_nq_{n+1}}.$$ [step 1.1, F3, F4, algebra]
 
-3.1 Facts [F3] and [F4] give $q_{n+1}\ge q_n>0$, so the second inequality is immediate. [F3, F4, step 2.1, algebra]
-$$\frac{1}{q_nq_{n+1}}\le \frac{1}{q_n^2}$$ [F3, F4, step 2.1, algebra] ∎
+3.1 Facts [F3] and [F4] give $q_{n+1}\ge q_n>0$, so the second inequality is immediate. [F3, F4, step 2.1, algebra] $$\frac{1}{q_nq_{n+1}}\le \frac{1}{q_n^2}$$ [F3, F4, step 2.1, algebra] ∎ 

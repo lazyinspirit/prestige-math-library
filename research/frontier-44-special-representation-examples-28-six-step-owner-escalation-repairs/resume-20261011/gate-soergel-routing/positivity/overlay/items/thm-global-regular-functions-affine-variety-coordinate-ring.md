@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-regular-functions-affine-variety-coordinate-ring.md

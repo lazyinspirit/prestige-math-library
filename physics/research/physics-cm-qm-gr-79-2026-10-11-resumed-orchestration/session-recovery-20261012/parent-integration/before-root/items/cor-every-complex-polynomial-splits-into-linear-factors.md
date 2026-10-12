@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-complex-polynomial-splits-into-linear-factors.md

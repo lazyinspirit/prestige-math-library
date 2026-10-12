@@ -151,7 +151,7 @@ function pageState(p) {
 /** the page's file under library/<category>/, or null */
 function pageFile(p) {
   const cats = p.category ? [p.category] : [];
-  for (const c of [...cats, 'foundations', 'real-analysis', 'topology', 'abstract-algebra',
+  for (const c of [...cats, 'set-theory', 'real-analysis', 'topology', 'abstract-algebra',
                    'linear-algebra', 'number-theory', 'combinatorics']) {
     const f = join(repo, 'library', c, `${p.id}.md`);
     if (existsSync(f)) return f;

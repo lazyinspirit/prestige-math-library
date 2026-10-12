@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-top-cohomology-vanishes-above-canonical-ample-threshold.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-experiment-analysis-prerequisites-77b9189a6fb78927.task.md

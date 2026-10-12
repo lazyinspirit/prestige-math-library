@@ -1,0 +1,189 @@
+--- a/original-proposed-step3-owner-creation.mjs
++++ b/fixed-proposed-step3-owner-creation.mjs
+@@ -4,7 +4,7 @@
+ import { existsSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs';
+ import { join, resolve, sep } from 'node:path';
+ import { pathToFileURL } from 'node:url';
+-import { itemHash, loadStep3, isMinimalItemReceipt } from './step3-decisions.mjs';
++import { itemHash, itemInputPaths, itemDecision, loadStep3, isMinimalItemReceipt } from './step3-decisions.mjs';
+ import { frontmatterList } from './frontmatter-list.mjs';
+ 
+ export const STEP3_OWNER_CREATION_POLICY = 'owner-spawned-step3-creation-v1';
+@@ -194,17 +194,46 @@
+   return join(root, 'research', `${resolutionStem(run, id)}${claimHash}.json`);
+ };
+ const marker = (root, path) => ({ path: path.slice(root.length + 1), sha256: sha(readFileSync(path)) });
+-function acceptedSubject(root, run, id, rawHash, reviewMarker) {
+-  const review = JSON.parse(readMarker(root, reviewMarker).bytes.toString());
++function declaredSuppliers(root, run, id) {
++  const state = loadStep3(root, run), live = state.items.get(id);
++  const text = readFileSync(join(root, 'items', `${safe(id)}.md`), 'utf8');
++  const fm = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1] ?? '';
++  return [...new Set([...(live?.item.deps ?? []), ...(live?.item.justified_by ?? []),
++    ...['deps', 'justified_by'].flatMap(key => frontmatterList(fm, key))])].sort();
++}
++function requireNoHeldInputs(root, run, id) {
++  const state = loadStep3(root, run);
++  for (const path of itemInputPaths(state, id)) {
++    const input = /[/\\]items[/\\]([a-zA-Z0-9_-]+)\.md$/.exec(path)?.[1];
++    if (!input || !state.items.has(input)) continue;
++    const ownerPath = join(root, 'research', `${run}-step3b-owner-${input}.json`);
++    const reviewPath = join(root, 'research', `${run}-step3b-review-${input}.json`);
++    // Full hash validation is needed only for a potentially held input; avoid
++    // repeating every prerequisite's transitive itemHash in this context pass.
++    const owner = existsSync(ownerPath) ? json(ownerPath) : null;
++    const review = existsSync(reviewPath) ? json(reviewPath) : null;
++    if (!['hold', 'reopen'].includes(owner?.decision)
++      && !(review?.decision === 'escalate' && owner?.decision !== 'repaired')) continue;
++    const disposition = itemDecision(state, input);
++    if (['hold', 'escalate', 'reopen'].includes(disposition.decision?.decision)
++      || (owner?.decision === 'reopen' && !disposition.closed))
++      throw Error(`${id}: unresolved actual proof input ${input}: ${owner?.decision ?? disposition.decision?.decision}`);
++  }
++}
++const reviewMarkerKey = value => `${value.path}:${value.sha256}`;
++function acceptedSubject(root, run, id, rawHash, reviewMarker, { historical = false, reviewArchives = new Map(), seen = new Set() } = {}) {
++  const key = reviewMarkerKey(reviewMarker);
++  if (seen.has(key)) throw Error(`${id}: cyclic retained whole review`);
++  if (historical && seen.size && !reviewArchives.has(key))
++    throw Error(`${id}: missing immutable nested whole-review archive`);
++  const nextSeen = new Set(seen); nextSeen.add(key);
++  const review = JSON.parse(readMarker(root, reviewArchives.get(key) ?? reviewMarker).bytes.toString());
+   if (review.run !== run || !/^\/root\/[a-zA-Z0-9_/-]+$/.test(review.reviewer ?? ''))
+     throw Error(`${id}: missing actual mathematical lead review`);
+   const direct = review.current_subject_decisions?.filter(row => row.id === id) ?? [];
+   const retained = review.original_subjects?.filter(row => row.id === id) ?? [];
+   const expanded = review.expanded_current_whole_accepted_subjects?.filter(row => row.id === id) ?? [];
+   const rows = [...direct, ...retained, ...expanded];
+-  // A current subject and the historical/current-preservation view may both
+-  // occur in a real lead packet. Require one row per view and exact agreement;
+-  // a conflicting hold, source hash or ineligible decision is never ignored.
+   if (!rows.length || [direct, retained, expanded].some(view => view.length > 1)
+     || rows.some(row => row.current_raw_sha256 !== rawHash || row.mathematical_hold === true
+       || row.decision_eligible === false))
+@@ -213,12 +242,39 @@
+     || direct[0].decision_eligible !== true)) throw Error(`${id}: whole-current mathematical acceptance required`);
+   if (retained.length && (retained[0].preserved_disposition !== 'SUFFICIENT_WHOLE_ACTUAL_REVIEW_CURRENT_INPUTS_BOUND'
+     || retained[0].mathematical_hold !== false)) throw Error(`${id}: whole-current mathematical acceptance required`);
++  if (!historical) {
++    requireNoHeldInputs(root, run, id);
++    // These are genuine reviewer-authored guard shapes, not a new acceptance
++    // certificate derived from ordinary owner bookkeeping.
++    const guards = new Map();
++    const add = (source, paths) => {
++      if (source === undefined) return;
++      if (!source || typeof source !== 'object' || Array.isArray(source))
++        throw Error(`${id}: invalid actual supplier guards`);
++      for (const [input, digest] of Object.entries(source)) {
++        const dependency = paths ? /^items\/([a-zA-Z0-9_-]+)\.md$/.exec(input)?.[1] : input;
++        if (!dependency || !isHash(digest)) throw Error(`${id}: invalid actual supplier guard`);
++        safe(dependency);
++        if (guards.has(dependency) && guards.get(dependency) !== digest)
++          throw Error(`${id}: conflicting actual supplier guards`);
++        guards.set(dependency, digest);
++      }
++    };
++    add(review.current_actual_direct_supplier_guards, true);
++    for (const row of rows) add(row.current_direct_supplier_guards, false);
++    for (const dependency of declaredSuppliers(root, run, id)) {
++      if (!guards.has(dependency)) throw Error(`${id}: missing authentic supplier guard for ${dependency}`);
++      if (sha(readFileSync(join(root, 'items', `${dependency}.md`))) !== guards.get(dependency))
++        throw Error(`${id}: stale actual supplier guard for ${dependency}`);
++    }
++  }
+   if (direct.length || retained.length) return;
+   const row = expanded[0];
+   if (row?.mathematical_hold === false && row.retained_whole_actual_review_packet) {
+     const prior = row.retained_whole_actual_review_packet;
+     strictKeys(prior, ['path', 'raw_sha256'], 'retained review marker');
+-    return acceptedSubject(root, run, id, rawHash, { path: prior.path, sha256: prior.raw_sha256 });
++    return acceptedSubject(root, run, id, rawHash, { path: prior.path, sha256: prior.raw_sha256 },
++      { historical, reviewArchives, seen: nextSeen });
+   }
+   throw Error(`${id}: whole-current mathematical acceptance required`);
+ }
+@@ -252,7 +308,7 @@
+       throw Error(`${row.id}: unrelated or stale affected consumer`);
+   }
+ }
+-function validateResolutionEvidence(root, run, id, evidence, s, origin, { historical = false } = {}) {
++function validateResolutionEvidence(root, run, id, evidence, s, origin, { historical = false, reviewArchives = new Map() } = {}) {
+   strictKeys(evidence, ['version', 'policy', 'run', 'id', 'owner', 'owner_identity', 'authorization', 'reason',
+     'origin', 'original_item', 'original_manifest', 'current_claim_sha256', 'current_item_file_sha256',
+     'supplier_review', 'consumers', 'owner_decision', 'previous_resolution'], 'owner claim resolution evidence');
+@@ -275,14 +331,14 @@
+     || current.claim_sha256 === origin.claim_sha256)) throw Error(`${id}: stale or unchanged resolved claim`);
+   if (!isHash(evidence.current_claim_sha256) || !isHash(evidence.current_item_file_sha256))
+     throw Error(`${id}: invalid accepted repair hashes`);
+-  acceptedSubject(root, run, id, evidence.current_item_file_sha256, evidence.supplier_review);
++  acceptedSubject(root, run, id, evidence.current_item_file_sha256, evidence.supplier_review, { historical, reviewArchives });
+   const decision = JSON.parse(readMarker(root, evidence.owner_decision).bytes.toString());
+   if (!isMinimalItemReceipt(decision) || decision.run !== run || decision.target !== id
+     || !decision.owner || decision.decision !== 'repaired'
+     || (!historical && (decision.sha256 !== itemHash(s, id) || !currentStep3OwnerCreationDecision(s, id))))
+     throw Error(`${id}: ordinary current owner repaired receipt required`);
+   if (!historical) requireConsumers(root, id, evidence.consumers);
+-  for (const row of evidence.consumers) acceptedSubject(root, run, row.id, row.item_file_sha256, row.review);
++  for (const row of evidence.consumers) acceptedSubject(root, run, row.id, row.item_file_sha256, row.review, { historical, reviewArchives });
+   // Historical ordinary receipts and reviewer archives prove resolution history;
+   // their currency is not substituted for the separate current-owner check.
+   return { original, current };
+@@ -293,12 +349,22 @@
+   if (seen.has(absolute)) throw Error(`${id}: cyclic owner claim resolution`); seen.add(absolute);
+   const record = json(absolute);
+   strictKeys(record, ['version', 'policy', 'run', 'id', 'recorded_at', 'evidence', 'current_item_archive',
+-    'current_manifest_archive'], 'immutable owner claim resolution record');
++    'current_manifest_archive', 'review_archives'], 'immutable owner claim resolution record');
+   if (record.version !== 1 || record.policy !== STEP3_OWNER_CLAIM_RESOLUTION_POLICY || record.run !== run
+     || record.id !== id || !Number.isFinite(Date.parse(record.recorded_at)))
+     throw Error(`${id}: invalid owner claim resolution record`);
+   const evidence = JSON.parse(readMarker(root, record.evidence).bytes.toString());
+-  const bound = validateResolutionEvidence(root, run, id, evidence, s, origin, { historical: true });
++  if (!Array.isArray(record.review_archives)) throw Error('Missing immutable review archive graph');
++  const reviewArchives = new Map();
++  for (const row of record.review_archives) {
++    strictKeys(row, ['original', 'archive'], 'immutable nested review archive');
++    strictKeys(row.original, markerKeys, 'original nested review marker');
++    const frozen = readMarker(root, row.archive);
++    if (!isHash(row.original.sha256) || sha(frozen.bytes) !== row.original.sha256
++      || reviewArchives.has(reviewMarkerKey(row.original))) throw Error('Invalid immutable nested review binding');
++    reviewArchives.set(reviewMarkerKey(row.original), row.archive);
++  }
++  const bound = validateResolutionEvidence(root, run, id, evidence, s, origin, { historical: true, reviewArchives });
+   const resolved = archiveClaim(root, id, origin.page, origin.batch, record.current_item_archive, record.current_manifest_archive);
+   if (resolved.claim_sha256 !== evidence.current_claim_sha256 || resolved.item_file_sha256 !== evidence.current_item_file_sha256
+     || resolved.claim.id !== bound.original.claim.id || resolved.claim.kind !== bound.original.claim.kind
+@@ -373,14 +439,30 @@
+   };
+   // Freeze all current acceptance sources rather than making original history
+   // depend on later rewrites of shared reviewer or owner bookkeeping carriers.
++  const reviewArchives = new Map();
++  const freezeReview = (input, subject, seen = new Set()) => {
++    const key = reviewMarkerKey(input);
++    if (seen.has(key)) throw Error(`${subject}: cyclic retained whole review`);
++    const bytes = readMarker(root, input).bytes, value = JSON.parse(bytes.toString());
++    const nextSeen = new Set(seen); nextSeen.add(key);
++    const frozen = archive(bytes, 'json');
++    reviewArchives.set(key, { original: input, archive: frozen });
++    for (const row of value.expanded_current_whole_accepted_subjects ?? []) {
++      if (row.id !== subject || !row.retained_whole_actual_review_packet) continue;
++      const reference = row.retained_whole_actual_review_packet;
++      strictKeys(reference, ['path', 'raw_sha256'], 'retained review marker');
++      freezeReview({ path: reference.path, sha256: reference.raw_sha256 }, subject, nextSeen);
++    }
++    return frozen;
++  };
+   const frozen = structuredClone(evidence);
+   frozen.authorization = archive(readMarker(root, evidence.authorization).bytes, 'json');
+-  frozen.supplier_review = archive(readMarker(root, evidence.supplier_review).bytes, 'json');
++  frozen.supplier_review = freezeReview(evidence.supplier_review, id);
+   frozen.owner_decision = archive(readMarker(root, evidence.owner_decision).bytes, 'json');
+   frozen.consumers = evidence.consumers.map(row => ({ ...row,
+-    review: archive(readMarker(root, row.review).bytes, 'json') }));
++    review: freezeReview(row.review, row.id) }));
+   const record = { version: 1, policy: STEP3_OWNER_CLAIM_RESOLUTION_POLICY, run, id,
+-    recorded_at: new Date().toISOString(), evidence: archive(Buffer.from(JSON.stringify(frozen)), 'json'),
++    recorded_at: new Date().toISOString(), review_archives: [...reviewArchives.values()], evidence: archive(Buffer.from(JSON.stringify(frozen)), 'json'),
+     current_item_archive: archive(readFileSync(join(root, 'items', `${id}.md`)), 'md'),
+     current_manifest_archive: archive(Buffer.from(JSON.stringify({ page: bound.current.page,
+       batch: bound.current.batch, item: Object.fromEntries(['id', 'kind', 'title', 'statement']

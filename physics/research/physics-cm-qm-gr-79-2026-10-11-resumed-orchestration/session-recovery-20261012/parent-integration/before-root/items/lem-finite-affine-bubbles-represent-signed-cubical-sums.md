@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-affine-bubbles-represent-signed-cubical-sums.md

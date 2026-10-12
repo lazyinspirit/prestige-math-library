@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-regular-functions-on-affine-algebraic-set.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-primary-component-of-a-module-over-a-domain.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-john-nirenberg-stopping-cubes-have-geometric-decay.md

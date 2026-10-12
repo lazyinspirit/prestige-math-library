@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-root-x-and-its-unbounded-derivative.md

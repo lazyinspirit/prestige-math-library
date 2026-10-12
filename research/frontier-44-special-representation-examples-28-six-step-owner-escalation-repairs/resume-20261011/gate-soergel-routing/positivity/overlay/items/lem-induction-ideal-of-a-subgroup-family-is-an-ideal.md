@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-induction-ideal-of-a-subgroup-family-is-an-ideal.md

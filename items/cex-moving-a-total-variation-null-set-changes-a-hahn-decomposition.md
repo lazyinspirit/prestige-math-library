@@ -41,8 +41,7 @@ total-variation-null sets.
 
 **Proof technique:** direct.
 
-1.1 Because every measurable subset of $X$ has $\nu$-value $0$, every [L1]
-measurable set is both positive and negative. Thus $$P_0=\varnothing,\ N_0=X\qquad\text{and}\qquad P_1=\{0\},\ N_1=\{1\}$$ are both Hahn decompositions.
+1.1 Because every measurable subset of $X$ has $\nu$-value $0$, every [L1] measurable set is both positive and negative. Thus $$P_0=\varnothing,\ N_0=X\qquad\text{and}\qquad P_1=\{0\},\ N_1=\{1\}$$ are both Hahn decompositions. [L1]
 
-2.1 The two decompositions are different, but the moved set $\{0\}$ is [L1, L2, step 1.1] ∎
-$\nu$-null and therefore has total variation $0$ by [L2]. This is exactly the allowed nonuniqueness in [L1].
+2.1 The two decompositions are different, but the moved set $\{0\}$ is [L1, L2, step 1.1] ∎ $\nu$-null and therefore has total variation $0$ by [L2]. This is exactly the allowed nonuniqueness in [L1]. [L1, L2, step 1.1]
+

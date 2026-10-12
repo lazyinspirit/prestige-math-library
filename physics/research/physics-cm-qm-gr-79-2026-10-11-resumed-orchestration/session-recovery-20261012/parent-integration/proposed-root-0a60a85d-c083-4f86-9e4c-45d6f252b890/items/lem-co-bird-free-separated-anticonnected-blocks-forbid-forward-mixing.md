@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-co-bird-free-separated-anticonnected-blocks-forbid-forward-mixing.md

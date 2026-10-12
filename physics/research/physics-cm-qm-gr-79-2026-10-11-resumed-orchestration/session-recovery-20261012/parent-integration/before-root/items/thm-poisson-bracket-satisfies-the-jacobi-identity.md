@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poisson-bracket-satisfies-the-jacobi-identity.md

@@ -39,5 +39,4 @@ primes $p$. The point $(0)$ is generic, while each $(p)$ is closed.
 
 2.2 The closure of $(0)$ is $V((0))=\operatorname{Spec}\mathbb Z$, so it is generic. [step 1.1]
 
-3.1 These are exactly the claimed generic and closed points. [step 2.1, step 2.2] ∎
- 
+3.1 These are exactly the claimed generic and closed points. [step 2.1, step 2.2] ∎  

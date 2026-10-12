@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-category-with-products-and-a-diagram-without-a-limit.md

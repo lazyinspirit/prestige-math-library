@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kernel-of-a-submersion-as-an-integrable-distribution.md

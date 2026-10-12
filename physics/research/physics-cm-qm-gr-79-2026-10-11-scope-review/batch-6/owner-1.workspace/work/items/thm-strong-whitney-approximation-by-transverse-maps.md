@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strong-whitney-approximation-by-transverse-maps.md

@@ -37,5 +37,4 @@ isomorphism.
 
 1.2 If $A\to B$ is an isomorphism, its inverse ring map induces the inverse of $u$. [F1]
 
-2.1 These two implications prove the claim. [step 1.1, step 1.2] ∎
- 
+2.1 These two implications prove the claim. [step 1.1, step 1.2] ∎  

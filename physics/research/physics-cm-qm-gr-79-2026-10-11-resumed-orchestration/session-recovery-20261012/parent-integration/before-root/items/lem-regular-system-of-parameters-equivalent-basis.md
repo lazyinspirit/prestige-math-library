@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-system-of-parameters-equivalent-basis.md

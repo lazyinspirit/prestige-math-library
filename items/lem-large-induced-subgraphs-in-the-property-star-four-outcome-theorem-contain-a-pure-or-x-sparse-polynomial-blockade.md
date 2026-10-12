@@ -58,20 +58,14 @@ or $x$-sparse $(k,|F|/k^d)$-blockade for some integer $k\in[2,x^{-1}]$.
 
 **Proof technique:** apply the Rödl-initialized four-outcome theorem to $F$ and use the three standing failure hypotheses to rule out every branch except the pure-or-sparse blockade branch.
 
+ 1.1 The size hypothesis on $G$ and the bound $|F|\ge \epsilon^d|G|$ imply $$ |F|\ge \epsilon^d\epsilon^{-10d^2}=\epsilon^{-10d^2+d}\ge \epsilon^{-5d^2}=x^{-d}, $$ because $d\ge 1$. Thus [L1] applies to $F$. [given, L1, algebra]
 
-1.1 The size hypothesis on $G$ and the bound $|F|\ge \epsilon^d|G|$ imply $$ |F|\ge \epsilon^d\epsilon^{-10d^2}=\epsilon^{-10d^2+d}\ge \epsilon^{-5d^2}=x^{-d}, $$ because $d\ge 1$. Thus [L1] applies to $F$. [given, L1, algebra]
+ 2.1 Apply [L1] to the induced subgraph $F$. One of its four outcomes holds. [step 1.1, L1]
 
+ 3.1 If [L1] yields an $x$-restricted induced subgraph $S$ of $F$ with at least $x^{23c_4'}|F|$ vertices, then $$ |S|\ge x^{23c_4'}\epsilon^d|G| = \epsilon^{115c_4'd+d}|G| \ge \epsilon^{116c_4'd}|G|, $$ because $c_4'\ge 1$. This contradicts standing hypothesis 3. [step 2.1, algebra]
 
-2.1 Apply [L1] to the induced subgraph $F$. One of its four outcomes holds. [step 1.1, L1]
+ 3.2 If [L1] yields a clique or stable set of size at least $(x^{31c_4'}|F|)^{c_1'}$, then $$ x^{31c_4'}|F|\ge x^{31c_4'}\epsilon^d|G| = \epsilon^{155c_4'd+d}|G| \ge \epsilon^{156c_4'd}|G|, $$ so standing hypothesis 1 is contradicted. [step 2.1, algebra]
 
+ 3.3 If [L1] yields a complete or anticomplete $(k,|F|/k^d)$-blockade with $k\ge x^{-1}$, then [L3] gives $\epsilon^d\ge k^{-1/5}$, and therefore $$ \frac{|F|}{k^d}\ge \frac{\epsilon^d|G|}{k^d}\ge \frac{|G|}{k^{2d}}. $$ Since $k\ge x^{-1}=\epsilon^{-5d}$, this contradicts standing hypothesis 2. [step 2.1, L3, algebra]
 
-3.1 If [L1] yields an $x$-restricted induced subgraph $S$ of $F$ with at least $x^{23c_4'}|F|$ vertices, then $$ |S|\ge x^{23c_4'}\epsilon^d|G| = \epsilon^{115c_4'd+d}|G| \ge \epsilon^{116c_4'd}|G|, $$ because $c_4'\ge 1$. This contradicts standing hypothesis 3. [step 2.1, algebra]
-
-
-3.2 If [L1] yields a clique or stable set of size at least $(x^{31c_4'}|F|)^{c_1'}$, then $$ x^{31c_4'}|F|\ge x^{31c_4'}\epsilon^d|G| = \epsilon^{155c_4'd+d}|G| \ge \epsilon^{156c_4'd}|G|, $$ so standing hypothesis 1 is contradicted. [step 2.1, algebra]
-
-
-3.3 If [L1] yields a complete or anticomplete $(k,|F|/k^d)$-blockade with $k\ge x^{-1}$, then [L3] gives $\epsilon^d\ge k^{-1/5}$, and therefore $$ \frac{|F|}{k^d}\ge \frac{\epsilon^d|G|}{k^d}\ge \frac{|G|}{k^{2d}}. $$ Since $k\ge x^{-1}=\epsilon^{-5d}$, this contradicts standing hypothesis 2. [step 2.1, L3, algebra]
-
-
-4.1 The first three branches are impossible, so the remaining branch of [L1] must hold: $F$ has a pure or $x$-sparse $(k,|F|/k^d)$-blockade for some integer $k\in[2,x^{-1}]$. This is exactly the desired conclusion. [step 3.1, step 3.2, step 3.3] ∎
+ 4.1 The first three branches are impossible, so the remaining branch of [L1] must hold: $F$ has a pure or $x$-sparse $(k,|F|/k^d)$-blockade for some integer $k\in[2,x^{-1}]$. This is exactly the desired conclusion. [step 3.1, step 3.2, step 3.3] ∎ 

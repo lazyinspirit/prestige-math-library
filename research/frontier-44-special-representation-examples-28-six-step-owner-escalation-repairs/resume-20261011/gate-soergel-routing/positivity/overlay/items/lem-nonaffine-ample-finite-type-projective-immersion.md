@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-ample-finite-type-projective-immersion.md

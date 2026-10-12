@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-proper-coercive-and-weakly-lower-semicontinuous-functional.md

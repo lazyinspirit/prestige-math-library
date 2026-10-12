@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps.md

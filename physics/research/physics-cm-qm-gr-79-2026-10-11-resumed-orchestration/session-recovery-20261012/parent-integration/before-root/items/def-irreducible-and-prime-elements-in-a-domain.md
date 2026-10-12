@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-irreducible-and-prime-elements-in-a-domain.md

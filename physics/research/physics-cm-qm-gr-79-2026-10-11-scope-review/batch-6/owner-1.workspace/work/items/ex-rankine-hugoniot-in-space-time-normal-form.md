@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-rankine-hugoniot-in-space-time-normal-form.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-property-star-and-leaf-reducibility-imply-generalized-niceness.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-oriented-area-and-volume-from-gram-determinants.md

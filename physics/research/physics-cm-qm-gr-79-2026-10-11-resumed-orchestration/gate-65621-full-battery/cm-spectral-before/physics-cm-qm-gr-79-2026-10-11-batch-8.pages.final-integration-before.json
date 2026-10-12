@@ -1,0 +1,2333 @@
+[
+  {
+    "order": 95,
+    "id": "cm-math-continuum",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Continuum",
+    "companion": "cm-math-continuum-examples",
+    "requires": [
+      "cm-math-dynamics",
+      "euclidean-surface-measure-divergence-and-green-identities",
+      "fejer-and-poisson-summability-of-fourier-series",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "uniform-convergence-of-functions"
+    ],
+    "items": [
+      {
+        "id": "def-cm-euclidean-spatial-calculus",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Euclidean spatial calculus: gradient, divergence and material derivative",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-directional-and-partial-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "thm-chain-rule-for-total-derivatives",
+          "def-euclidean-linear-map",
+          "def-euclidean-inner-product",
+          "def-trace-of-a-square-matrix",
+          "def-matrix-space",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-gradient-represents-directional-derivatives-and-steepest-ascent": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-euclidean-linear-map": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Throughout, $\\mathbb R^3$ carries its standard ordered orthonormal basis $e_1,e_2,e_3$, its Euclidean inner product $\\langle\\cdot,\\cdot\\rangle_2$ ([[def-euclidean-inner-product]]) and its Lebesgue measure. Let $O\\subseteq\\mathbb R^3$ be open, let $a\\in O$ and let $v:O\\to\\mathbb R^3$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), so that the total derivative $Dv(a):\\mathbb R^3\\to\\mathbb R^3$ is a linear map ([[def-total-derivative-in-euclidean-space]], [[def-euclidean-linear-map]]) whose matrix in the standard bases is $\\bigl(\\partial_jv_i(a)\\bigr)_{1\\le i,j\\le3}$ ([[def-jacobian-matrix-and-gradient]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]). The **divergence** of $v$ at $a$ is $$\\operatorname{div}v(a):=\\operatorname{tr}\\bigl(Dv(a)\\bigr)=\\sum_{i=1}^{3}\\partial_iv_i(a),$$ the trace of the total derivative ([[def-trace-of-a-square-matrix]]), read in the standard basis of $M_3(\\mathbb R)$ ([[def-matrix-space]]). For a $C^1$ scalar field $f:O\\to\\mathbb R$ and $a\\in O$, the **gradient** $\\nabla f(a)\\in\\mathbb R^3$ is the vector of partial derivatives of [[def-jacobian-matrix-and-gradient]]; it is the unique vector with $Df(a)h=\\langle\\nabla f(a),h\\rangle_2$ for every $h\\in\\mathbb R^3$ ([[def-directional-and-partial-derivatives]], [[thm-gradient-represents-directional-derivatives-and-steepest-ascent]]). We write $\\langle\\nabla f(a),v(a)\\rangle_2=:\\nabla f(a)\\cdot v(a)$. Let $I\\subseteq\\mathbb R$ be a nonempty open interval and let $u:O\\to\\mathbb R^3$ and $f:I\\times O\\to\\mathbb R$ be $C^1$. For $(t,x)\\in I\\times O$ define the parti",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 1.3–1.6 (Eulerian and Lagrangian descriptions of physical quantities, spatial and time derivatives, motion of a body) and Section 3.3 (velocity gradient, stretching and spin tensors)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.3 (the continuum velocity field, the material derivative and the continuity equation)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-continuum-motion",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Continuum motions, spatial velocity, material acceleration and swept regions",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-material-region-and-density",
+          "def-cm-euclidean-spatial-calculus",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image",
+          "def-determinant-of-a-square-matrix",
+          "def-total-derivative-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives",
+          "def-interval",
+          "def-metric-ball",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $B\\subseteq\\mathbb R^3$ be a material region (nonempty, bounded, open, [[def-cm-material-region-and-density]]) and let $I\\subseteq\\mathbb R$ be a nonempty open interval ([[def-interval]]). A **motion of $B$ on $I$** consists of an open set $O\\subseteq\\mathbb R^3$ with $\\overline B\\subseteq O$ ([[def-metric-ball]]) together with a map $$\\chi:I\\times O\\longrightarrow\\mathbb R^3$$ such that: 1. $\\chi$ is of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); 2. for every $t\\in I$ the map $\\chi_t:=\\chi(t,\\cdot):O\\to\\mathbb R^3$ is of class $C^1$, is injective, and has $D_X\\chi_t(X)$ invertible for every $X\\in O$; 3. writing $$J(t,X):=\\det\\bigl(D_X\\chi_t(X)\\bigr)$$ with the determinant of [[def-determinant-of-a-square-matrix]], one has $J(t,X)>0$ for every $(t,X)\\in I\\times B$. We call $X\\in B$ the **material label** (reference position), $x=\\chi(t,X)$ the **position** at time $t$ of the label $X$, and $$\\Omega_t:=\\chi_t(B)$$ the **current (material) region** at time $t$. Condition 2 makes each $\\chi_t:O\\to\\chi_t(O)$ a $C^1$ diffeomorphism onto the open set $\\chi_t(O)$ ([[cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image]]). The **spatial velocity field** of the motion is $$u:\\{(t,x):t\\in I,\\ x\\in\\chi_t(O)\\}\\longrightarrow\\mathbb R^3,\\qquad u\\bigl(t,\\chi(t,X)\\bigr):=\\partial_t\\chi(t,X),$$ and the **spatial acceleration field** is the material derivative of $u$ in the sense of [[def-cm-euclidean-spatial-calculus]], $$a(t,x):=D_tu(t,x)=\\partial_tu(t,x)+Du(t,x)u(t,x).$$ For a compact subinterval $K\\subseteq I$ the **swept region** of $B$ over $K$ is $$",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 1.5 (motion of a body) and Sections 3.1 and 3.3 (motion; velocity gradient, stretching and spin tensors)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.3 (velocity field of a continuum, material derivative)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-determinant-derivative-along-a-matrix-curve",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The derivative of the determinant along an invertible C¹ matrix curve: $(\\det A)'=\\det A\\;\\operatorname{tr}(A^{-1}A')$",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-matrices-over-a-commutative-ring",
+          "def-determinant-of-a-square-matrix",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized",
+          "thm-determinant-multiplicative",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "cor-inverse-matrix-by-adjugate",
+          "def-trace-of-a-square-matrix",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-matrices-over-a-commutative-ring": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise",
+          "thm-leibniz-determinant-is-alternating-multilinear-and-normalized": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "thm-real-square-matrix-invertible-iff-determinant-nonzero": "mathematical-premise",
+          "cor-inverse-matrix-by-adjugate": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "prop-trace-is-linear": "mathematical-premise",
+          "thm-trace-of-ab-equals-trace-of-ba": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $I\\subseteq\\mathbb R$ be a nonempty open interval, and let $$A:I\\longrightarrow M_n(\\mathbb R),\\qquad A(t)=\\bigl(a_{ij}(t)\\bigr),$$ be a matrix-valued curve whose entries $a_{ij}:I\\to\\mathbb R$ are differentiable at $t_0\\in I$ ([[def-derivative]], [[def-vector-valued-derivative-and-integral]]); write $A'(t_0):=\\bigl(a_{ij}'(t_0)\\bigr)$ ([[def-matrices-over-a-commutative-ring]]). Suppose $A(t)$ is invertible for every $t\\in I$ ([[thm-real-square-matrix-invertible-iff-determinant-nonzero]], [[cor-inverse-matrix-by-adjugate]]). Then $t\\mapsto\\det A(t)$ is differentiable at $t_0$ ([[def-determinant-of-a-square-matrix]]) and $$(\\det A)'(t_0)=\\det A(t_0)\\;\\operatorname{tr}\\!\\bigl(A(t_0)^{-1}A'(t_0)\\bigr),$$ with the trace of [[def-trace-of-a-square-matrix]]. In particular, a $C^1$ matrix curve with invertible values has $(\\det A)'=\\det A\\,\\operatorname{tr}(A^{-1}A')$ on all of $I$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]).",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 2.4.3 (change of volume under a deformation) and Section 3.4.3 (rate of change of volume), with the transport equations of Section 3.7",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.2.2 (deformation of an infinitesimal volume element by a continuously differentiable velocity field)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-localization-of-vanishing-integrals",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Localization: a continuous function whose integrals vanish over a neighbourhood-basis family is identically zero",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-continuity-real",
+          "def-metric-topology",
+          "def-metric-ball",
+          "def-half-open-box",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-continuity-real": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-half-open-box": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $W\\subseteq\\mathbb R^3$ be open and let $H:W\\to\\mathbb R$ be continuous ([[def-continuity-real]], [[def-metric-topology]]). Let $\\mathcal F$ be a family of nonempty open subsets of $W$ such that $$ \\text{for every }y_0\\in W\\text{ and every neighbourhood }V\\text{ of }y_0\\text{ there is }A\\in\\mathcal F\\text{ with }y_0\\in A\\subseteq V . \\tag{L} $$ Suppose $\\int_AH\\,dx=0$ for every $A\\in\\mathcal F$ ([[def-integral-over-a-measurable-set]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). Then $H=0$ on $W$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 4.1–4.2 (the localization step from a global balance law to a field equation; conservation of mass)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-transport-theorem",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The transport theorem for a $C^1$ family of diffeomorphisms: $\\frac{d}{dt}\\int_{\\psi_t(B)}f=\\int_{\\psi_t(B)}(\\partial_tf+\\operatorname{div}(fw))$",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "def-cm-material-region-and-density",
+          "lem-cm-determinant-derivative-along-a-matrix-curve",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "thm-differentiation-under-the-integral-sign",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-ball",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "lem-cm-determinant-derivative-along-a-matrix-curve": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as used by the change-of-variables theorem below. Let $I\\subseteq\\mathbb R$ be a nonempty open interval ([[def-interval]]), let $B\\subseteq\\mathbb R^3$ be a material region ([[def-cm-material-region-and-density]]) and let $\\psi:I\\times O\\to\\mathbb R^3$ be a motion of $B$ on $I$ in the sense of [[def-cm-continuum-motion]], with associated spatial velocity $$w\\bigl(t,\\psi(t,X)\\bigr)=\\partial_t\\psi(t,X)$$ and Jacobian $J(t,X)=\\det D_X\\psi_t(X)$ ([[def-cm-continuum-motion]], [[def-cm-euclidean-spatial-calculus]]). Let $J_0\\subseteq I$ be an open interval with $\\overline{J_0}\\subseteq I$, put $$\\Sigma:=\\bigl\\{(t,x):t\\in\\overline{J_0},\\ x\\in\\psi_t(\\overline B)\\bigr\\},$$ and let $f:U\\to\\mathbb R$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) on an open set $U\\subseteq\\mathbb R\\times\\mathbb R^3$ containing $\\Sigma$. Then $$F(t):=\\int_{\\psi_t(B)}f(t,x)\\,dx$$ is defined and differentiable on $J_0$ ([[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]]), and for every $t\\in J_0$ $$F'(t)=\\int_{\\psi_t(B)}\\bigl(\\partial_tf+\\operatorname{div}(fw)\\bigr)(t,x)\\,dx,$$ with the divergence and spatial derivative of [[def-cm-euclidean-spatial-calculus]] and the Lebesgue integral of [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]. The same formula holds componentwise for $f$ replaced by a $C^1$ vector field.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 3.7 (transport equations) and 4.2 (conservation of mass)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.2.3, Theorem 1.1 (the transport theorem)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-local-mass-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local mass balance: conservation on every material subregion is equivalent to $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-material-region-and-density",
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-transport-theorem",
+          "lem-cm-localization-of-vanishing-integrals",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-metric-ball",
+          "def-half-open-box",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "thm-total-derivative-computes-directional-and-partial-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-transport-theorem": "mathematical-premise",
+          "lem-cm-localization-of-vanishing-integrals": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-half-open-box": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as used by the transport theorem. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, let $B\\subseteq\\mathbb R^3$ be a material region, let $\\chi$ be a motion of $B$ on $I$ ([[def-cm-continuum-motion]]) with spatial velocity $u$, let $J_0\\subseteq I$ be an open interval with $\\overline{J_0}\\subseteq I$, and let $U\\subseteq\\mathbb R\\times\\mathbb R^3$ be an open set containing the swept region $$\\Sigma:=\\bigl\\{(t,x):t\\in\\overline{J_0},\\ x\\in\\chi_t(\\overline B)\\bigr\\}.$$ Let $\\rho:U\\to(0,\\infty)$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); call it a **density field**. A **material subregion** is a nonempty bounded open $B'\\subseteq B$ with $\\overline{B'}\\subseteq B$ ([[def-cm-material-region-and-density]]); for such $B'$ the same $\\chi$ is a motion of $B'$. **(i) Localization.** If for every material subregion $B'$ and every $t\\in J_0$ $$\\frac{d}{dt}\\int_{\\chi_t(B')}\\rho(t,x)\\,dx=0, \\tag{CM}$$ then $$\\partial_t\\rho(t,x)+\\operatorname{div}\\bigl(\\rho u\\bigr)(t,x)=0$$ for every $(t,x)\\in J_0\\times\\chi_t(B)$, with the material derivative and divergence of [[def-cm-euclidean-spatial-calculus]]. **(ii) Converse.** Conversely, if $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ on an open neighbourhood of $\\Sigma$ in $U$, then (CM) holds for every material subregion $B'$ and every $t\\in J_0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.2 (conservation of mass and the local continuity equation)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.1 (integral and differential forms of the continuity equation)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-local-momentum-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local momentum balance: $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from the integral balance on every material subregion",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-material-region-and-density",
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-transport-theorem",
+          "lem-cm-localization-of-vanishing-integrals",
+          "def-cm-traction-and-stress",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-half-open-box",
+          "def-metric-ball",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-transport-theorem": "mathematical-premise",
+          "lem-cm-localization-of-vanishing-integrals": "mathematical-premise",
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "def-half-open-box": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, let $B\\subseteq\\mathbb R^3$ be a material region, let $\\chi$ be a motion of $B$ on $I$ with spatial velocity $u$ and material derivative $D_t$ ([[def-cm-continuum-motion]], [[def-cm-euclidean-spatial-calculus]]), let $J_0\\subseteq I$ be an open interval with $\\overline{J_0}\\subseteq I$, and let $U$ contain the swept region $\\Sigma=\\{(t,x):t\\in\\overline{J_0},\\ x\\in\\chi_t(\\overline B)\\}$. Let $\\rho:U\\to(0,\\infty)$ be a $C^1$ density field, let $\\sigma:U\\to M_3(\\mathbb R)$ be a $C^1$ field (the stress field of [[def-cm-traction-and-stress]]), and let $b:U\\to\\mathbb R^3$ be continuous. Suppose: **(K)** $\\rho$ satisfies $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ on $U$; **(L)** for every material subregion $B'$ (nonempty bounded open with $\\overline{B'}\\subseteq B$) and every $t\\in J_0$, the set $\\chi_t(B')$ is a bounded $C^1$ domain ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]) and $$\\frac{d}{dt}\\int_{\\chi_t(B')}\\rho(t,x)u(t,x)\\,dx=\\int_{\\chi_t(B')}\\rho(t,x)b(t,x)\\,dx+\\int_{\\partial\\chi_t(B')}\\sigma(t,y)\\,\\nu(y)\\,dS(y),$$ where $\\nu$ is the outward unit normal and the surface integral is that of [[def-surface-integral-on-a-compact-c-one-hypersurface]]. Define the **row divergence** of $\\sigma$ componentwise by $$g(t,x):=\\Bigl(\\sum_{j}\\partial_j\\sigma_{1j},\\ \\sum_{j}\\partial_j\\sigma_{2j},\\ \\sum_{j}\\partial_j\\sigma_{3j}\\Bigr)(t,x).$$ Then for every $(t,x)\\in J_0\\times\\c",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 4.4–4.6 (balance of momentum principles and the field equations)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (the stress tensor and the key equation of continuum dynamics, Eq. (7.25))",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-traction-is-given-by-a-stress-matrix",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A continuous traction field balanced on every piecewise $C^1$ region is given by a continuous stress matrix, and $t(-n)=-t(n)$",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-traction-and-stress",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-extreme-value-metric",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-bounded-piecewise-c-one-euclidean-domain": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-heine-cantor-metric": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ where the surface and divergence machinery of the cited items assumes it. Let $O\\subseteq\\mathbb R^3$ be open, let $t:O\\times S^2\\to\\mathbb R^3$ be continuous, where $S^2=\\{n\\in\\mathbb R^3:\\|n\\|_2=1\\}$ is the unit sphere, and let $g:O\\to\\mathbb R^3$ be continuous and bounded, with $C_g:=\\sup_{O}\\|g\\|_2<+\\infty$. Suppose that for every bounded piecewise $C^1$ Euclidean domain $D$ with a specified finite presentation ([[def-bounded-piecewise-c-one-euclidean-domain]]) whose closure lies in $O$ and whose associated pieces lie in $O$, $$ \\int_{\\partial D}t\\bigl(y,\\nu_D(y)\\bigr)\\,dS(y)+\\int_Dg(y)\\,dy=0, \\tag{B} $$ where $\\nu_D$ is the actual outward unit normal off the edge set of the presentation, the boundary term is the sum of the surface integrals over the specified faces ([[def-surface-integral-on-a-compact-c-one-hypersurface]]), and values of the normal on the edge set are irrelevant. Then there is a unique continuous map $$\\sigma:O\\longrightarrow M_3(\\mathbb R)$$ with $$t(y,n)=\\sigma(y)n\\qquad\\text{for every }(y,n)\\in O\\times S^2,$$ the product being matrix-vector multiplication ([[def-matrix-space]], [[def-matrix-product-and-identity-matrix]]). Explicitly, the columns of $\\sigma(y)$ are the vectors $t(y,e_1),t(y,e_2),t(y,e_3)$; and necessarily $$t(y,-n)=-t(y,n)\\qquad\\text{for every }(y,n)\\in O\\times S^2 .$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.3 (force, traction and Cauchy's hypothesis) and Section 4.5 (the Cauchy tetrahedron and the existence of the stress tensor)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 12.005, Applications of Continuum Mechanics, Lecture 3: tensors, stress, the Cauchy tetrahedron and Cauchy's formula",
+              "url": "https://ocw.mit.edu/courses/12-005-applications-of-continuum-mechanics-to-earth-atmospheric-and-planetary-sciences-spring-2006/5005ac6aec16d031bffbd361c792ca70_lec3.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-stress-matrix-is-symmetric",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Angular-momentum balance without couples forces the stress matrix to be symmetric",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-traction-and-stress",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "lem-cm-localization-of-vanishing-integrals",
+          "def-countable-choice",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "lem-cm-localization-of-vanishing-integrals": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as used by the divergence and surface-integral machinery. Let $O\\subseteq\\mathbb R^3$ be open, let $\\sigma:O\\to M_3(\\mathbb R)$ be of class $C^1$, and let $b:O\\to\\mathbb R^3$ be continuous. Suppose that for every bounded $C^1$ domain $D$ with $\\overline D\\subseteq O$ ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]), with outward unit normal $\\nu$ and the surface integral of [[def-surface-integral-on-a-compact-c-one-hypersurface]]: $$\\int_{\\partial D}\\sigma\\nu\\,dS+\\int_Db\\,dx=0 \\tag{LB}$$ and $$\\int_{\\partial D}y\\times(\\sigma\\nu)\\,dS+\\int_Dy\\times b\\,dx=0. \\tag{AB}$$ Then $$\\sigma(y)^{\\mathsf T}=\\sigma(y)\\qquad\\text{for every }y\\in O .$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.4 (balance of angular momentum) and Section 4.5 (symmetry of the Cauchy stress tensor)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (the Cauchy stress tensor; the torque argument forcing its symmetry)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-control-volume-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Control-volume balance: mass and momentum rates for a moving non-material region",
+        "reference": "expansion-proofs.md#e13",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-transport-theorem",
+          "def-cm-traction-and-stress",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-metric-ball",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-transport-theorem": "mathematical-premise",
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\\subseteq\\mathbb R$ be a nonempty open interval, let $B\\subseteq\\mathbb R^3$ be a material region, let $\\chi$ be a motion of $B$ on $I$ with spatial velocity $u$, let $J_0\\subseteq I$ have compact closure in $I$, and let $U$ contain the swept region of $B$ over $\\overline{J_0}$ ([[def-cm-continuum-motion]]). Let $\\rho:U\\to(0,\\infty)$ and $\\sigma:U\\to M_3(\\mathbb R)$ be $C^1$ and let $b:U\\to\\mathbb R^3$ be continuous. Define $g_i:=\\sum_j\\partial_j\\sigma_{ij}$ and suppose, on $U$: $$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0\\qquad\\text{and}\\qquad\\rho\\,D_tu=\\rho b+g . \\tag{KM}$$ Let $\\psi:I\\times O'\\to\\mathbb R^3$ be a second motion of a material region $B'\\subseteq B$ (with the same reference chart domain $O'=O$ used for $B$; write $w$ for its spatial velocity), and suppose that for every $t\\in J_0$ the control region $C_t:=\\psi_t(B')$ is a bounded $C^1$ domain ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]) with outward unit normal $\\nu$ and boundary surface integral as in [[def-surface-integral-on-a-compact-c-one-hypersurface]]. Then for every $t\\in J_0$: $$\\frac{d}{dt}\\int_{C_t}\\rho\\,dx=-\\int_{\\partial C_t}\\rho\\,(u-w)\\cdot\\nu\\,dS, \\tag{CV1}$$ and componentwise $$\\frac{d}{dt}\\int_{C_t}\\rho u_i\\,dx=\\int_{C_t}\\rho b_i\\,dx+\\Bigl(\\int_{\\partial C_t}\\sigma\\nu\\,dS\\Bigr)_i-\\int_{\\partial C_t}\\rho u_i\\,(u-w)\\cdot\\nu\\,dS\\qquad(i=1,2,3). \\tag{CV2}$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 3.7 and 4.4 (transport equations for a moving part; the balance laws in integral form)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Sections 1.1–1.2 (Eulerian fixed-volume and Lagrangian moving-volume descriptions of the same balance)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-linear-elastic-constitutive-law",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The small-strain isotropic linear elastic constitutive law and its strain energy",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-material-region-and-density",
+          "def-cm-euclidean-spatial-calculus",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-trace-of-a-square-matrix",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $B\\subseteq\\mathbb R^3$ be a material region ([[def-cm-material-region-and-density]]) and let $O\\subseteq\\mathbb R^3$ be open with $\\overline B\\subseteq O$. A **displacement field** on $B$ is a map $\\xi:O\\to\\mathbb R^3$ of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its total derivative $D\\xi(X):\\mathbb R^3\\to\\mathbb R^3$ at $X\\in O$ is linear ([[def-total-derivative-in-euclidean-space]]) and has matrix $\\bigl(\\partial_j\\xi_i(X)\\bigr)$ ([[def-jacobian-matrix-and-gradient]]). Write $\\operatorname{Sym}(3):=\\{A\\in M_3(\\mathbb R):A^{\\mathsf T}=A\\}$ for the real symmetric $3\\times3$ matrices ([[def-matrix-space]], [[def-transpose-of-a-matrix]]) and $I_3$ for the identity ([[def-matrix-product-and-identity-matrix]]). The **linear strain** of the displacement field is the symmetric-matrix field $$e(X):=\\frac{D\\xi(X)+D\\xi(X)^{\\mathsf T}}{2}\\in\\operatorname{Sym}(3),\\qquad e_{ij}(X)=\\frac{\\partial_j\\xi_i(X)+\\partial_i\\xi_j(X)}{2},$$ the symmetric part of the Jacobian matrix, and its **trace** is $\\operatorname{tr}e=\\sum_i\\partial_i\\xi_i$ ([[def-trace-of-a-square-matrix]]). The **Frobenius inner product** of $A,C\\in M_3(\\mathbb R)$ is $\\langle A,C\\rangle_F:=\\operatorname{tr}(A^{\\mathsf T}C)=\\sum_{i,j}A_{ij}C_{ij}$, with squared norm $|A|_F^2=\\langle A,A\\rangle_F$ ([[def-euclidean-inner-product]]); the **deviatoric part** of $e$ is $$e_0:=e-\\frac{\\operatorname{tr}e}{3}I_3 .$$ An **isotropic linear elastic constitutive law** is a pair $(\\lambda,\\mu)\\in\\mathbb R\\times\\mathbb R$ of **Lamé parameters** with $$\\mu>0,\\qquad \\lambda+\\frac{2\\mu}{3}>0 .$$ Its **stress matri",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 (linearized elasticity: strain, stress-strain relations and the elastic moduli)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.3 (Hooke's law: the two elastic moduli of an isotropic medium)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-isotropic-elastic-strain-energy-positivity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The isotropic elastic strain energy is $\\mu|e_0|_F^2+(\\lambda/2+\\mu/3)(\\operatorname{tr}e)^2$, hence positive definite under $\\mu>0$, $\\lambda+2\\mu/3>0$",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-linear-elastic-constitutive-law",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-trace-of-a-square-matrix",
+          "prop-trace-is-linear",
+          "thm-trace-of-ab-equals-trace-of-ba",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "prop-trace-is-linear": "mathematical-premise",
+          "thm-trace-of-ab-equals-trace-of-ba": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $e\\in\\operatorname{Sym}(3)$ with deviatoric part $e_0=e-\\frac{\\operatorname{tr}e}{3}I_3$ and Lamé parameters $\\lambda,\\mu\\in\\mathbb R$ with $\\mu>0$ and $\\lambda+\\frac{2\\mu}{3}>0$ ([[def-cm-linear-elastic-constitutive-law]]). Then $$W(e)=\\mu\\,|e_0|_F^2+\\Bigl(\\frac{\\lambda}{2}+\\frac{\\mu}{3}\\Bigr)(\\operatorname{tr}e)^2\\ \\ge\\ 0,$$ and $W(e)=0$ if and only if $e=0$. Here $|A|_F^2=\\operatorname{tr}(A^{\\mathsf T}A)$ is the squared Frobenius norm ([[def-euclidean-inner-product]], [[def-trace-of-a-square-matrix]]).",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 and Problem 11.5 (strain energy; positive definiteness of the elasticity tensor for an isotropic material)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.3 (the elastic potential energy density and the elastic moduli)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-plane-elastic-waves",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact plane-wave solutions of the isotropic linear elastic model, with longitudinal and transverse speeds",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-linear-elastic-constitutive-law",
+          "def-cm-euclidean-spatial-calculus",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\rho_0>0$ and $\\lambda\\in\\mathbb R$, $\\mu>0$, let $a,k\\in\\mathbb R^3$ and $\\omega\\in\\mathbb R\\setminus\\{0\\}$, and define the **plane wave** $$\\xi:\\mathbb R\\times\\mathbb R^3\\to\\mathbb R^3,\\qquad \\xi(t,x):=a\\cos\\bigl(\\langle k,x\\rangle_2-\\omega t\\bigr),$$ with the Euclidean inner product $\\langle\\cdot,\\cdot\\rangle_2$ ([[def-euclidean-inner-product]]). Let $e:=\\frac12(D\\xi+D\\xi^{\\mathsf T})$ and $\\sigma:=\\lambda(\\operatorname{tr}e)I_3+2\\mu e$ be the strain and stress of the isotropic linear elastic model with parameters $(\\lambda,\\mu)$ ([[def-cm-linear-elastic-constitutive-law]]). Then the componentwise identity $$\\rho_0\\,\\partial_t^2\\xi_i=\\sum_{j=1}^{3}\\partial_j\\sigma_{ij}\\qquad(i=1,2,3)$$ holds on all of $\\mathbb R\\times\\mathbb R^3$ if and only if $$\\rho_0\\omega^2a=\\mu|k|_2^2\\,a+(\\lambda+\\mu)\\,\\langle k,a\\rangle_2\\,k . \\tag{D}$$ Consequently, for $a\\ne0$: if $a$ is parallel to $k$ (**longitudinal**), then $\\rho_0\\omega^2=(\\lambda+2\\mu)|k|_2^2$; if $a$ is orthogonal to $k$ (**transverse**), then $\\rho_0\\omega^2=\\mu|k|_2^2$. Under the positivity hypothesis $\\lambda+\\frac{2\\mu}{3}>0$ both squared speeds are positive, so both branches have real positive frequencies.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 (the isotropic linearized elastic field equations)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.7 (3D acoustic waves: plane longitudinal and transverse waves and their speeds)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-fluid-constitutive-models",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Incompressible Newtonian and barotropic inviscid fluid constitutive models",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-euclidean-spatial-calculus",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-the-integral-function",
+          "thm-ftc-first-part",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative"
+        ],
+        "dependency_roles": {
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-the-integral-function": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval, let $O\\subseteq\\mathbb R^3$ be open, and let $u:I\\times O\\to\\mathbb R^3$ be a $C^1$ spatial velocity field with the conventions of [[def-cm-euclidean-spatial-calculus]]. Write $Du(t,x)$ for the total derivative in the spatial variable and $\\operatorname{div}u=\\operatorname{tr}(Du)$ ([[def-trace-of-a-square-matrix]]). **(a) Incompressible Newtonian fluid.** Model data are a $C^1$ scalar field $p:I\\times O\\to\\mathbb R$ (**pressure**) and a real number $\\eta>0$ (**dynamic viscosity**; a dimensionless mathematical parameter until a unit system is fixed). The model consists of the **incompressibility constraint** $$\\operatorname{div}u(t,x)=0\\qquad\\bigl((t,x)\\in I\\times O\\bigr)$$ and the **Newtonian stress field** $$\\sigma(t,x):=-p(t,x)I_3+\\eta\\bigl(Du(t,x)+Du(t,x)^{\\mathsf T}\\bigr)\\in M_3(\\mathbb R),$$ with $Du^{\\mathsf T}$ the transpose and $I_3$ the identity ([[def-matrix-product-and-identity-matrix]], [[def-matrix-space]]). The second term is symmetric, so $\\sigma$ is symmetric for every $(t,x)$. **(b) Barotropic inviscid fluid.** Model data are a $C^1$ function $p:(0,\\infty)\\to\\mathbb R$ (**pressure law**) and a $C^1$ **potential** $V:I\\times O\\to\\mathbb R$. The **enthalpy** of the pressure law is the $C^1$ function $$h(\\rho):=\\int_1^\\rho\\frac{p'(s)}{s}\\,ds\\qquad(\\rho>0),$$ which is characterised by $h(1)=0$ and $h'(\\rho)=p'(\\rho)/\\rho$ for every $\\rho>0$ ([[def-the-integral-function]], [[thm-ftc-first-part]]). For a $C^1$ positive density field $\\rho:I\\times O\\to(0,\\infty)$ the branch's stress field is $$\\sigma(t,x):=-p",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 12.1–12.3 (compressible inviscid fluids; incompressible viscous fluids with the Newtonian example; incompressible inviscid fluids)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 8.4–8.5 (ideal and viscous fluid models)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-barotropic-momentum-and-bernoulli",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Barotropic inviscid momentum in gradient form, Bernoulli along streamlines and the irrotational constant",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-fluid-constitutive-models",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-local-momentum-balance",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-zero-total-derivative-on-a-convex-open-set-is-constant",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-trace-of-a-square-matrix",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-local-momentum-balance": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "cor-zero-total-derivative-on-a-convex-open-set-is-constant": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be a nonempty open interval and $O\\subseteq\\mathbb R^3$ open. Let $u:I\\times O\\to\\mathbb R^3$ and $\\rho:I\\times O\\to(0,\\infty)$ be $C^1$, let $p:(0,\\infty)\\to\\mathbb R$ be $C^1$ with enthalpy $h(\\rho_0)=\\int_1^{\\rho_0}p'(s)/s\\,ds$, and let $V:I\\times O\\to\\mathbb R$ be $C^1$ ([[def-cm-fluid-constitutive-models]]). Write $\\sigma:=-p(\\rho)I_3$ and suppose that, on $I\\times O$, $$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0 \\qquad\\text{and}\\qquad \\rho\\,D_tu=\\rho\\,(-\\nabla V)+g,\\qquad g_i:=\\sum_j\\partial_j\\sigma_{ij} . \\tag{M}$$ (The local equation (M) is the conclusion of [[thm-cm-local-momentum-balance]] under its integral balance and continuity hypotheses; here it is the adopted local form of the barotropic inviscid model.) **(i)** On $I\\times O$, $$D_tu=-\\nabla\\bigl(h(\\rho)+V\\bigr).$$ **(ii)** Suppose in addition that the flow is **steady**: $\\partial_tu=0$, $\\partial_t\\rho=0$ and $\\partial_tV=0$ on $I\\times O$. If $\\gamma:J\\to O$ is a $C^1$ curve on a nonempty open interval $J\\subseteq I$ with $\\gamma'=u(\\gamma)$, then $$\\frac{d}{dt}\\Bigl(h(\\rho)+V+\\tfrac12|u|_2^2\\Bigr)\\bigl(t,\\gamma(t)\\bigr)=0 ,$$ equivalently $u\\cdot\\nabla\\bigl(h(\\rho)+V+\\tfrac12|u|_2^2\\bigr)=0$ on $I\\times O$: the quantity is constant along every streamline. **(iii)** If in addition the velocity gradient $Du(t,x)$ is symmetric at every $(t,x)$ (irrotational branch in the standard coordinates), then $$\\nabla\\Bigl(h(\\rho)+V+\\tfrac12|u|_2^2\\Bigr)=0\\qquad\\text{on }I\\times O,$$ so the quantity is constant on every Euclidean ball contained in $I\\times O$ (and hence on each connected co",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 12.1 and Problems 12.12 and 12.17 (Bernoulli's theorem for incompressible and compressible inviscid flow)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.4 (ideal fluids and the Bernoulli equation, Eq. (8.27))",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-kelvin-circulation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Kelvin circulation: the circulation around a smooth material loop is constant in the barotropic inviscid model",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 5,
+        "deps": [
+          "def-cm-fluid-constitutive-models",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-barotropic-momentum-and-bernoulli",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-ftc-second-part",
+          "thm-ftc-first-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "def-integral-over-a-measurable-set",
+          "def-euclidean-inner-product",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-barotropic-momentum-and-bernoulli": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $O\\subseteq\\mathbb R^3$ be open, let $I\\subseteq\\mathbb R$ be a nonempty open interval, let $u:I\\times O\\to\\mathbb R^3$ and $\\rho:I\\times O\\to(0,\\infty)$ be $C^1$, let $p:(0,\\infty)\\to\\mathbb R$ be $C^1$ with enthalpy $h$, and let $V:I\\times O\\to\\mathbb R$ be $C^1$, with the barotropic inviscid stress $\\sigma=-p(\\rho)I_3$; assume the local equations (M) of [[thm-cm-barotropic-momentum-and-bernoulli]] on $I\\times O$: $$\\partial_t\\rho+\\operatorname{div}(\\rho u)=0,\\qquad \\rho\\,D_tu=\\rho(-\\nabla V)+g,\\qquad g_i=\\sum_j\\partial_j\\sigma_{ij},$$ so that, by part (i) of that theorem, $D_tu=-\\nabla(h(\\rho)+V)$ on $I\\times O$. Let $[t_0,t_1]\\subseteq I$ and let $\\gamma:[t_0,t_1]\\times[0,1]\\to O$ be $C^1$ with $$\\gamma(t,0)=\\gamma(t,1)\\quad\\text{and}\\quad\\partial_t\\gamma(t,s)=u\\bigl(t,\\gamma(t,s)\\bigr)\\qquad\\bigl((t,s)\\in[t_0,t_1]\\times[0,1]\\bigr) .$$ Then the **circulation** $$\\Gamma(t):=\\int_0^1\\sum_{i=1}^3u_i\\bigl(t,\\gamma(t,s)\\bigr)\\,\\partial_s\\gamma_i(t,s)\\,ds$$ is constant on $[t_0,t_1]$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 12.3 and Problem 12.14 (circulation and Kelvin's theorem)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.4 (the Kelvin theorem for an ideal fluid)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-dalembert-formula-and-string-solutions",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "d'Alembert's formula solves the wave equation, is the unique $C^2$ solution, and the fixed-end sine modes solve it exactly",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-the-integral-function",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "lem-integrability-on-a-subinterval",
+          "thm-additivity-over-subintervals",
+          "thm-continuous-implies-integrable",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval",
+          "thm-linearity-of-the-integral"
+        ],
+        "dependency_roles": {
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-the-integral-function": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "lem-integrability-on-a-subinterval": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $c>0$. **(a) The formula.** For every $f\\in C^2(\\mathbb R)$ and $g\\in C^1(\\mathbb R)$, the function $$u(t,x):=\\frac{f(x-ct)+f(x+ct)}{2}+\\frac{1}{2c}\\int_{x-ct}^{x+ct}g(s)\\,ds \\qquad\\bigl((t,x)\\in\\mathbb R^2\\bigr)$$ is of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) and satisfies $$u_{tt}=c^2u_{xx},\\qquad u(0,x)=f(x),\\qquad u_t(0,x)=g(x)$$ for every $x\\in\\mathbb R$ ([[def-oriented-integral]], [[def-derivative]]). **(b) Uniqueness.** If $u\\in C^2(\\mathbb R^2)$ satisfies $u_{tt}=c^2u_{xx}$ with $u(0,\\cdot)=f$ and $u_t(0,\\cdot)=g$ for $f\\in C^2(\\mathbb R)$, $g\\in C^1(\\mathbb R)$, then $u$ equals the formula in (a). **(c) Fixed ends and modes.** Let $L>0$ and, for each integer $n\\ge1$, $$u_n(t,x):=\\sin\\!\\Bigl(\\frac{n\\pi x}{L}\\Bigr)\\cos\\!\\Bigl(\\frac{n\\pi ct}{L}\\Bigr).$$ Then each $u_n$ is $C^\\infty$ on $\\mathbb R^2$, satisfies $u_{tt}=c^2u_{xx}$, vanishes at $x=0$ and $x=L$ for every $t$, and has $u_n(0,x)=\\sin(n\\pi x/L)$, $\\partial_tu_n(0,x)=0$. Every finite sum $\\sum_{n\\le N}\\alpha_nu_n+\\beta_n v_n$ with the companion modes $v_n(t,x):=\\sin(n\\pi x/L)\\sin(n\\pi ct/L)/(n\\pi c/L)$ also solves the equation, vanishes at both ends and has the corresponding finite initial data.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. K. Hunter, Notes on Partial Differential Equations (UC Davis), Chapter 7, Section 7.1 (the wave equation and the d'Alembert solution)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 6.4–6.5 (the wave equation, its general traveling-wave solution and standing waves)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-cyclic-spring-chain",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The cyclic spring chain, its discrete energy, and the smooth periodic comparison class",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-matrix-space",
+          "def-euclidean-inner-product",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $N\\ge2$ be an integer, let $a>0$ and $c>0$ be real parameters, and let $L:=Na$. Indices are read modulo $N$: $z_{j+N}:=z_j$. **(a) The chain.** A **state of the chain** is a pair $(q,p)\\in\\mathbb R^N\\times\\mathbb R^N$, where $q=(q_1,\\dots,q_N)$ are the positions and $p=(q_1',\\dots,q_N')$ the velocities of the $N$ nodes. The **cyclic spring-chain system** is the first-order system $$q_j'=p_j,\\qquad p_j'=\\frac{c^2}{a^2}\\bigl(q_{j+1}-2q_j+q_{j-1}\\bigr)\\qquad(j\\in\\mathbb Z/N),$$ equivalently the second-order system $q_j''=\\frac{c^2}{a^2}(q_{j+1}-2q_j+q_{j-1})$ for a $C^2$ curve $q:I\\to\\mathbb R^N$. Its **discrete energy** is $$E(q,p):=\\frac12\\sum_{j=1}^N\\Bigl(p_j^2+\\frac{c^2}{a^2}\\bigl(q_{j+1}-q_j\\bigr)^2\\Bigr).$$ **(b) Discrete norms and differences.** For $z,w\\in\\mathbb R^N$ define the **scaled inner product and norm** $$\\langle z,w\\rangle_a:=a\\sum_{j=1}^N z_jw_j,\\qquad \\|z\\|_a:=\\langle z,z\\rangle_a^{1/2},$$ and for the discrete difference $(D_+z)_j:=(z_{j+1}-z_j)/a$. The **discrete Laplacian** is $(\\Delta_az)_j:=(z_{j+1}-2z_j+z_{j-1})/a^2$. **(c) The comparison class.** Let $I\\subseteq\\mathbb R$ be a nonempty open interval and let $u:I\\times\\mathbb R\\to\\mathbb R$ be a function that is $C^2$ in the first variable and $C^4$ in the second, is $L$-periodic in $x$ ($u(t,x+L)=u(t,x)$ for all $(t,x)$), and satisfies $$u_{tt}(t,x)=c^2u_{xx}(t,x)\\qquad\\bigl((t,x)\\in I\\times\\mathbb R\\bigr).$$ For a compact subinterval $[0,T]\\subseteq I$ put $M_T:=\\sup\\{|\\partial_x^4u(t,x)|:(t,x)\\in[0,T]\\times\\mathbb R\\}$ (finite when continuous derivatives are bounded on the compact time interval,",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 6.2–6.3 (N coupled oscillators; the uniform 1D particle chain)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (an infinite chain of masses and springs: Lagrangian (6.1), equations of motion (6.3) and the continuum limit)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-spring-chain-dispersion-relation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact dispersion relation $\\omega^2=(4c^2/a^2)\\sin^2(\\kappa a/2)$ for the cyclic chain and its continuum error bound",
+        "reference": "expansion-proofs.md#e14",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-cyclic-spring-chain",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "dependency_roles": {
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $N\\ge2$, $a>0$, $c>0$, let $\\kappa,\\omega\\in\\mathbb R$ and $A\\in\\mathbb R\\setminus\\{0\\}$, and consider the travelling cosine ansatz for the cyclic chain of [[def-cm-cyclic-spring-chain]]: $$q_j(t):=A\\cos(\\kappa ja-\\omega t)\\qquad(j\\in\\mathbb Z/N).$$ **(a)** The curve $q:\\mathbb R\\to\\mathbb R^N$ solves $q_j''=\\frac{c^2}{a^2}(q_{j+1}-2q_j+q_{j-1})$ for all $t\\in\\mathbb R$ and all $j$ if and only if $$\\omega^2=\\frac{4c^2}{a^2}\\sin^2\\!\\Bigl(\\frac{\\kappa a}{2}\\Bigr). \\tag{DR}$$ **(b)** If $|\\kappa a|\\le1$, then $$\\Bigl|\\omega^2-c^2\\kappa^2\\Bigr|\\le\\frac{c^2\\kappa^4a^2}{12},$$ so the continuum dispersion $\\omega^2=c^2\\kappa^2$ is recovered with an explicit fourth-order error in the spacing.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.3 (wave ansatz, dispersion relation (6.30) and the acoustic low-frequency limit)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (the discrete chain and its continuum limit)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-second-difference-remainder-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The centered second difference differs from the second derivative by at most $Ma^2/12$ when $|u''''|\\le M$",
+        "reference": "expansion-proofs.md#e26",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $J\\subseteq\\mathbb R$ be a nonempty open interval ([[def-interval]]), let $u:J\\to\\mathbb R$ be of class $C^4$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), let $x\\in J$ and $a>0$ satisfy $[x-a,x+a]\\subseteq J$, and put $$M:=\\sup_{s\\in[x-a,x+a]}|u''''(s)|<+\\infty .$$ Then $$\\left|\\frac{u(x+a)-2u(x)+u(x-a)}{a^2}-u''(x)\\right|\\le\\frac{M\\,a^2}{12}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (the discrete-to-continuum limit of the chain)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.3 (the continuum limit of the chain and its regime of validity)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-discrete-periodic-summation-by-parts",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Discrete periodic summation by parts, the scaled Cauchy-Schwarz inequality, and the discrete energy identity",
+        "reference": "expansion-proofs.md#e26",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-cyclic-spring-chain",
+          "prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem",
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "thm-linearity-of-the-integral",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the notation $z_{j+N}=z_j$, $(D_+z)_j=(z_{j+1}-z_j)/a$, $(\\Delta_az)_j=(z_{j+1}-2z_j+z_{j-1})/a^2$, $\\langle z,w\\rangle_a=a\\sum_jz_jw_j$, $\\|z\\|_a^2=\\langle z,z\\rangle_a$ and $E_a(q,p)=\\tfrac12(\\|p\\|_a^2+c^2\\|D_+q\\|_a^2)$ of [[def-cm-cyclic-spring-chain]]. **(a) Summation by parts.** For all $z,w\\in\\mathbb R^N$, $$\\langle D_+z,D_+w\\rangle_a=-\\langle \\Delta_az,w\\rangle_a .$$ **(b) Scaled Cauchy-Schwarz.** For all $z,w\\in\\mathbb R^N$, $|\\langle z,w\\rangle_a|\\le\\|z\\|_a\\|w\\|_a$ ([[prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem]], [[def-euclidean-inner-product]]). **(c) Energy identity.** Let $I\\subseteq\\mathbb R$ be an open interval, let $q:I\\to\\mathbb R^N$ be $C^2$ and let $R:I\\to\\mathbb R^N$ be continuous with $$q_j''=\\frac{c^2}{a^2}\\bigl(q_{j+1}-2q_j+q_{j-1}\\bigr)+R_j=c^2(\\Delta_aq)_j+R_j\\qquad(j\\in\\mathbb Z/N).$$ Then $t\\mapsto E_a(q(t),q'(t))$ is $C^1$ on $I$ with $$\\frac{d}{dt}E_a\\bigl(q(t),q'(t)\\bigr)=a\\sum_{j=1}^N R_j(t)\\,q_j'(t),$$ and consequently $\\bigl|\\frac{d}{dt}E_a\\bigr|\\le\\|R(t)\\|_a\\,\\sqrt{2E_a(t)}$ whenever $E_a\\ge0$ (which always holds).",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (the quadratic chain energy (6.1))",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Problem 5.5 (harmonic crystal in one dimension) and the nearest-neighbour lattice example (8.81) in Section 8.4",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-spring-chain-continuum-limit",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-time continuum limit of the cyclic spring chain: uniform $O(a^{3/2})$ nodal and uniform interpolation convergence",
+        "reference": "expansion-proofs.md#e26",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-cyclic-spring-chain",
+          "lem-cm-second-difference-remainder-bound",
+          "lem-cm-discrete-periodic-summation-by-parts",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem",
+          "thm-rolle",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "lem-cm-second-difference-remainder-bound": "mathematical-premise",
+          "lem-cm-discrete-periodic-summation-by-parts": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem": "mathematical-premise",
+          "thm-rolle": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$, $c>0$, let $N\\ge2$ be an integer and $a:=L/N$, and let $[0,T]$ be a compact time interval. Let $$u:[0,T]\\times\\mathbb R\\to\\mathbb R$$ be $C^2$ in $t$ and $C^4$ in $x$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), $L$-periodic in $x$, and satisfy $u_{tt}=c^2u_{xx}$ on $[0,T]\\times\\mathbb R$; put $$M:=\\sup_{[0,T]\\times\\mathbb R}|\\partial_x^4u|<+\\infty,\\qquad M_2:=\\sup_{[0,T]\\times\\mathbb R}|\\partial_x^2u|<+\\infty .$$ Let $q:[0,T]\\to\\mathbb R^N$ be the (by (i), unique) solution of the cyclic spring-chain system of [[def-cm-cyclic-spring-chain]] with the sampled initial data $q_j(0)=u(0,ja)$, $q_j'(0)=u_t(0,ja)$, and put $$e_j(t):=q_j(t)-u(t,ja),\\qquad C:=\\frac{c^2\\sqrt L\\,M}{12}.$$ Then: **(i)** the solution $q$ exists and is unique on $[0,T]$; **(ii)** for every $t\\in[0,T]$, $$\\|e(t)\\|_a\\le\\frac{Ca^2t^2}{2},\\qquad \\|e'(t)\\|_a\\le Ca^2t ;$$ **(iii)** consequently $\\max_j|e_j(t)|\\le \\tfrac12Ca^{3/2}t^2$ for $t\\in[0,T]$, so the nodal error tends to $0$ uniformly as $a\\to0$; **(iv)** let $I_aq(t,\\cdot)$ be the piecewise-linear function on $[0,L]$ that equals $q_j(t)$ at $x=ja$ and is extended $L$-periodically; then for the periodic extension of $u$, $$\\sup_{x\\in[0,L]}\\bigl|I_aq(t,x)-u(t,x)\\bigr|\\le\\max_j|e_j(t)|+\\frac{M_2a^2}{8}\\qquad(0\\le t\\le T),$$ so the interpolated chain displacement converges to $u$ uniformly on $[0,T]\\times[0,L]$ as $a\\to0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (the chain-to-continuum limit, Eqs. (6.1)–(6.8))",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Problem 5.5 (harmonic crystal in one dimension) and the nearest-neighbour lattice example (8.81) in Section 8.4",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-burgers-characteristics-and-gradient-blowup",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The method of characteristics for $u_t+uu_x=0$ and the finite blow-up time of the gradient",
+        "reference": "expansion-proofs.md#e23",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image",
+          "def-metric-ball",
+          "thm-intermediate-value",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-derivative",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $f\\in C^2(\\mathbb R)$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) be bounded (so $\\|f\\|_\\infty<+\\infty$, [[thm-extreme-value-metric]], [[thm-heine-borel-rn]]) and suppose that $$f'(a)\\ge -K\\quad\\text{for every }a\\in\\mathbb R,\\qquad\\text{and}\\qquad f'(a_*)=-K\\ \\text{for some }a_*\\in\\mathbb R,$$ with $K>0$. Put $T_0:=1/K$, and for $0\\le t<T_0$ define $\\varphi_t(a):=a+t f(a)$. **(i)** For every $t\\in[0,T_0)$ the map $\\varphi_t:\\mathbb R\\to\\mathbb R$ is a $C^1$ diffeomorphism onto $\\mathbb R$ ([[cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image]]), and with $a(t,x):=\\varphi_t^{-1}(x)$ the **characteristic label**, $$u(t,x):=f\\bigl(a(t,x)\\bigr),\\qquad (t,x)\\in[0,T_0)\\times\\mathbb R,$$ is $C^1$ jointly in $(t,x)$, satisfies $u(0,x)=f(x)$ and solves Burgers' equation $$u_t(t,x)+u(t,x)\\,u_x(t,x)=0\\qquad\\text{on }(0,T_0)\\times\\mathbb R . \\tag{B}$$ **(ii)** For every $a_0\\in\\mathbb R$ the function $t\\mapsto u(t,\\varphi_t(a_0))=f(a_0)$ is constant, and the gradient along this characteristic, $q(t):=u_x(t,\\varphi_t(a_0))$, satisfies $q'=-q^2$ and $q(t)=f'(a_0)/(1+tf'(a_0))$ for $0\\le t<T_0$. **(iii)** Put $x_*:=\\varphi_{T_0}(a_*)=a_*+T_0f(a_*)$ and let $a(t):=a(t,x_*)$ for $0\\le t<T_0$. Then $a(t)\\to a_*$ and $$\\sup_{x\\in\\mathbb R}|u_x(t,x)|\\ \\ge\\ |u_x(t,x_*)|\\ =\\ \\frac{|f'(a(t))|}{1+t\\,f'(a(t))}\\ \\longrightarrow\\ +\\infty\\qquad(t\\uparrow T_0),$$ while $|u(t,x_*)|=|f(a(t))|\\le\\|f\\|_\\infty$ stays bounded. Thus the smooth solution obtained by characteristics has a gradient blow-up at the finite time $T_0$ although the solution values and the characteristic locatio",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. C. Evans, Entropy and Partial Differential Equations (lecture notes), Chapter V, Section B (single conservation law: characteristics, shock formation and entropy solutions)",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Chapters 2–3 (characteristics and strong solutions; weak solutions)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-scalar-conservation-law-weak-and-entropy-solution",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Weak and entropy solutions of the scalar conservation law $u_t+(u^2/2)_x=0$",
+        "reference": "expansion-proofs.md#e23",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "def-extended-real-valued-measurable-function",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-extended-real-valued-measurable-function": "mathematical-premise",
+          "prop-closure-properties-of-measurable-functions-used-by-the-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Write $F(u):=\\tfrac12u^2$ and let $\\lambda_2$ be two-dimensional Lebesgue measure on $\\mathbb R^2$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). A **test function** is a function $\\varphi:\\mathbb R^2\\to\\mathbb R$ of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) for which there is a compact set $K\\subseteq\\mathbb R^2$ with $\\varphi=0$ outside $K$ and $\\varphi(t,x)=0$ for all $t<0$; write $\\varphi(0,x)$ for the boundary values at $t=0$, which exist by continuity. A test function is **nonnegative** when $\\varphi\\ge0$ pointwise, and a test function is **admissible** for the integral identity below when it is $C^1$ with compact support in $[0,\\infty)\\times\\mathbb R$. **(a) Weak solutions.** Let $f:\\mathbb R\\to\\mathbb R$ be bounded and Borel measurable ([[def-extended-real-valued-measurable-function]]) and let $u:(0,\\infty)\\times\\mathbb R\\to\\mathbb R$ be bounded and Borel measurable. Then $u$ is a **weak solution of** $$u_t+\\bigl(F(u)\\bigr)_x=0 \\qquad\\text{with }u(0,\\cdot)=f \\tag{CL}$$ when $$\\int_0^\\infty\\!\\!\\int_{\\mathbb R}\\Bigl[u(t,x)\\varphi_t(t,x)+F\\bigl(u(t,x)\\bigr)\\varphi_x(t,x)\\Bigr]dx\\,dt+\\int_{\\mathbb R}f(x)\\varphi(0,x)\\,dx=0 \\tag{W}$$ for every test function $\\varphi$ ([[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]). The integrals exist because $u,f$ are bounded and the test functions have compact support; the identity depends on $u$ and $f$ only through their almost-everywhere classes. **(b) Entropy pairs.** An **entropy pair** is a",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. C. Evans, Entropy and Partial Differential Equations (lecture notes), Chapter V (conservation laws: weak solutions, entropy/entropy-flux pairs and the Lax entropy condition)",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Chapters 3–4 (weak solutions; non-uniqueness and entropy conditions, including the Kružkov condition)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-burgers-riemann-shock-and-rarefaction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Riemann shock and rarefaction waves for $u_t+(u^2/2)_x=0$ are weak solutions, and the shock is an entropy solution",
+        "reference": "expansion-proofs.md#e23",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "def-metric-ball",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution": "mathematical-premise",
+          "def-bounded-piecewise-c-one-euclidean-domain": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $F(u)=\\tfrac12u^2$ and use the weak and entropy formulations of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]]. **(a) Shock.** Let $u_L>u_R$, put $s:=(u_L+u_R)/2$ and $$u(t,x):=\\begin{cases}u_L,&x<st,\\\\ u_R,&x>st,\\end{cases}\\qquad(t>0),$$ with Riemann initial data $f$ equal to $u_L$ for $x<0$ and $u_R$ for $x>0$. Then $u$ is a weak solution of $u_t+(F(u))_x=0$ with initial data $f$. **(b) Entropy of the shock.** For every $k\\in\\mathbb R$, set $\\eta_k(u):=|u-k|$ and $q_k(u):=\\operatorname{sign}(u-k)\\,(u^2-k^2)/2$. Then the entropy inequality (E) of [[def-cm-scalar-conservation-law-weak-and-entropy-solution]] holds for the pair $(\\eta_k,q_k)$, with interface coefficient $$s\\,[\\eta_k]-[q_k]=-(k-u_L)(k-u_R)\\ \\ge\\ 0 ,$$ where $[h]:=h(u_R)-h(u_L)$. Hence the shock satisfies every stated entropy inequality of this family. **(c) Rarefaction.** Let $u_L<u_R$ and define $$u(t,x):=\\begin{cases}u_L,&x\\le u_Lt,\\\\ x/t,&u_Lt<x<u_Rt,\\\\ u_R,&x\\ge u_Rt,\\end{cases}\\qquad(t>0).$$ Then $u$ is continuous on $(0,\\infty)\\times\\mathbb R$, is a weak solution of $u_t+(F(u))_x=0$ with the Riemann initial data, and satisfies the entropy inequality (E) for every pair $(\\eta_k,q_k)$, $k\\in\\mathbb R$ (indeed with equality).",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "L. C. Evans, Entropy and Partial Differential Equations (lecture notes), Chapter V, Section B (shocks, rarefactions and the entropy condition for a single conservation law)",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Chapter 5 (the Riemann problem for a scalar conservation law)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-plane-couette-and-poiseuille-flows",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exact plane Poiseuille and Couette flows of the incompressible Newtonian model, with flux and ansatz uniqueness",
+        "reference": "expansion-proofs.md#e23",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-fluid-constitutive-models",
+          "thm-cm-local-momentum-balance",
+          "def-cm-euclidean-spatial-calculus",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-ftc-first-part",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-integral",
+          "def-derivative",
+          "def-interval",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "thm-cm-local-momentum-balance": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\rho>0$, $\\eta>0$ and $h>0$ be constants and let $O:=\\mathbb R\\times(0,h)\\times\\mathbb R$ with coordinates $(x,y,z)$. For a $C^2$ velocity field $u:O\\to\\mathbb R^3$ of the form $u=(v(y),0,0)$ and a $C^1$ pressure $p:O\\to\\mathbb R$, the incompressible Newtonian equations of [[def-cm-fluid-constitutive-models]] with no body force and steady data read $$\\operatorname{div}u=0,\\qquad \\rho\\,(u\\cdot\\nabla)u=-\\nabla p+\\eta\\,\\Delta u , \\tag{NS}$$ where $\\Delta$ acts componentwise and the second equation is the local momentum balance of [[thm-cm-local-momentum-balance]] with $\\sigma=-pI_3+\\eta(Du+Du^{\\mathsf T})$. **(a) Plane Poiseuille flow.** Let $G\\in\\mathbb R$, $p_0\\in\\mathbb R$ and $$v(y):=\\frac{G\\,y(h-y)}{2\\eta},\\qquad p(x):=p_0-Gx,\\qquad u:=(v,0,0).$$ Then $u$ is $C^\\infty$, satisfies (NS) on $O$, and $v(0)=v(h)=0$. Its flux per unit width is $$\\int_0^hv(y)\\,dy=\\frac{Gh^3}{12\\eta}.$$ Moreover, within the ansatz $u=(v(y),0,0)$, $p=p_0-Gx$ with the same constant $G$ and the no-slip conditions $v(0)=v(h)=0$, this is the only solution: any two such profiles differ by a linear function vanishing at both endpoints, hence coincide. **(b) Plane Couette flow.** Let $V\\in\\mathbb R$, let $v(y):=Vy/h$, let $p$ be constant, and let $u:=(v,0,0)$. Then $u$ satisfies (NS) on $O$ and $v(0)=0$, $v(h)=V$. If $V\\ne0$, the velocity gradient $Du$ is not symmetric, so the flow is not irrotational in the sense used in this collection.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.5 (viscous channel flows: Couette flow and the Poiseuille problem, Eqs. (8.56)–(8.62))",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 12.2, with Problem 12.9 (incompressible viscous fluids; Poiseuille flow of a Newtonian fluid)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "def-cm-sine-coefficients-of-periodic-functions",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Sine coefficients, sine series and the odd periodic extension",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-integral",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-interval",
+          "def-abs-value"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-abs-value": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$. A function $F:\\mathbb R\\to\\mathbb R$ is **$L$-periodic** when $F(x+L)=F(x)$ for all $x\\in\\mathbb R$, and **odd** when $F(-x)=-F(x)$ for all $x$. **(a) Sine coefficients.** Let $F:\\mathbb R\\to\\mathbb R$ be continuous ([[def-continuity-real]]) and $L$-periodic; then $\\int_0^L|F|<\\infty$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-integrable-real-and-complex-functions-and-their-integrals]]). For every integer $n\\ge1$ the **$n$-th sine coefficient** of $F$ is $$b_n(F):=\\frac{2}{L}\\int_0^LF(x)\\sin\\!\\Bigl(\\frac{n\\pi x}{L}\\Bigr)dx \\qquad \\in\\mathbb R ,$$ an ordinary Lebesgue integral of a continuous function on a compact interval ([[def-integral-over-a-measurable-set]], [[def-sine-and-cosine-by-power-series]]). The **sine series** of $F$ is the series of functions $$\\sum_{n\\ge1}b_n(F)\\sin\\!\\Bigl(\\frac{n\\pi x}{L}\\Bigr),$$ whose $N$-th **partial sum** is $S_N^{\\rm s}F(x):=\\sum_{n\\le N}b_n(F)\\sin(n\\pi x/L)$. **(b) Odd periodic extension.** Let $F:[0,L]\\to\\mathbb R$ be continuous with $F(0)=F(L)=0$. The **odd $2L$-periodic extension** of $F$ is the function on $\\mathbb R$ defined by $$F^{\\rm odd}(x):=\\begin{cases}F(x),&0\\le x\\le L,\\\\ -F(-x),&-L\\le x\\le 0,\\end{cases}\\qquad F^{\\rm odd}(x+2L):=F^{\\rm odd}(x).$$ Equivalently, $F^{\\rm odd}$ is the unique $2L$-periodic odd function whose restriction to $[0,L]$ is $F$ (the two definitions agree at $0$ and $L$ because both values vanish; the extension is well defined and continuous). (c) The **fundamental frequency** of mode $n$ is $\\omega_n:=cn\\pi/L$ for the wave speed $c>0$ fixed by the context.",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapter 1 (Fourier coefficients of periodic functions) and Theorem 5.4(c) (the orthonormal trigonometric basis of L²(T))",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of the fixed-end string: the sinusoidal modes)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-cosine-sine-orthogonality-and-odd-extension",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Sine orthogonality on a half period and the full-period integrals of odd $2L$-periodic functions",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-ftc-second-part",
+          "thm-substitution",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "thm-linearity-of-the-integral",
+          "def-integral-over-a-measurable-set",
+          "def-continuity-real",
+          "thm-ftc-first-part"
+        ],
+        "dependency_roles": {
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$. Then: **(a)** For all integers $n,k\\ge1$, $$\\int_0^L\\sin\\Bigl(\\frac{n\\pi x}{L}\\Bigr)\\sin\\Bigl(\\frac{k\\pi x}{L}\\Bigr)dx=\\frac{L}{2}\\,\\delta_{nk}.$$ **(b)** Let $W:\\mathbb R\\to\\mathbb R$ be continuous ([[def-continuity-real]]), odd and $2L$-periodic. Then $$\\int_0^{2L}W(x)\\,dx=0,\\qquad \\int_0^{2L}W(x)\\cos\\Bigl(\\frac{k\\pi x}{L}\\Bigr)dx=0 ,$$ and, for every integer $k\\ge1$, $$\\frac{1}{2L}\\int_0^{2L}W(x)\\sin\\Bigl(\\frac{k\\pi x}{L}\\Bigr)dx=\\frac{1}{L}\\int_0^{L}W(x)\\sin\\Bigl(\\frac{k\\pi x}{L}\\Bigr)dx .$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Theorem 5.4(c) and its proof (orthonormality of the trigonometric system)",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (sinusoidal standing-wave modes with vanishing endpoints)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-fejer-completeness-for-continuous-periodic-functions",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Fejer completeness: a continuous one-periodic function with all integrals against the characters vanishing is zero",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-cesaro-and-abel-means-of-a-fourier-series",
+          "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "def-complex-exponential",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-continuity-real",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-additivity-over-subintervals",
+          "def-oriented-integral"
+        ],
+        "dependency_roles": {
+          "def-cesaro-and-abel-means-of-a-fourier-series": "mathematical-premise",
+          "lem-fejer-kernel-is-a-positive-approximate-identity": "mathematical-premise",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions": "mathematical-premise",
+          "def-complex-exponential": "mathematical-premise",
+          "thm-complex-exponential-addition-and-real-extension": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-linear-change-of-variables-for-lebesgue-measure": "mathematical-premise",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $h:\\mathbb R\\to\\mathbb C$ be one-periodic and continuous ([[def-continuity-real]]) and suppose that $$\\int_0^1h(t)\\,e_k(-t)\\,dt=0\\qquad\\text{for every }k\\in\\mathbb Z,$$ where $e_k(t):=e^{2\\pi ikt}$ ([[def-complex-exponential]]). Then $h=0$ on $\\mathbb R$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapter 2 (summability kernels; the Fejér kernel; Theorem 2.6 and the uniqueness theorem (2.14))",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            },
+            {
+              "title": "L. Grafakos, Classical Fourier Analysis, 3rd ed., Section 1.2 (convolution and approximate identities)",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-uniform-convergence-with-derivatives-on-a-rectangle",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Uniform convergence of a $C^2$ sequence with its first and second derivatives on a rectangle passes $C^2$ regularity and termwise differentiation to the limit",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "thm-uniform-derivative-limit-on-a-closed-interval",
+          "thm-uniform-limit-continuous-real-functions",
+          "def-continuity-real",
+          "def-derivative",
+          "def-directional-and-partial-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-uniform-derivative-limit-on-a-closed-interval": "mathematical-premise",
+          "thm-uniform-limit-continuous-real-functions": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $T,L>0$ and $R:=[0,T]\\times[0,L]$ ([[def-interval]]). For each $k\\in\\mathbb N$ let $u_k$ be of class $C^2$ on an open neighbourhood of $R$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-directional-and-partial-derivatives]]). Suppose that on $R$: $$u_k\\to u,\\quad \\partial_tu_k\\to v,\\quad \\partial_xu_k\\to w,\\quad \\partial_t^2u_k\\to v_2,\\quad \\partial_t\\partial_xu_k\\to z,\\quad \\partial_x^2u_k\\to w_2$$ pointwise for $u$ and uniformly for the five derivative sequences ([[def-continuity-real]]). Then $u$ is $C^2$ on the interior of $R$, all listed limits are continuous on $R$, and on the interior $$\\partial_tu=v,\\quad \\partial_xu=w,\\quad \\partial_t^2u=v_2,\\quad \\partial_t\\partial_xu=\\partial_x\\partial_tu=z,\\quad \\partial_x^2u=w_2 ,$$ the derivatives extending continuously to $R$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "W. Trench, Introduction to Real Analysis, Section 4.4, Theorem 4.4.11 (differentiation of a uniformly convergent sequence of functions)",
+              "url": "https://ramanujan.math.trinity.edu/wtrench/texts/trench_real_analysis.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 18.100B, Real Analysis, Spring 2025 (full lecture notes), Lectures 20–21 (uniform convergence; continuity, integration and differentiation of the limit)",
+              "url": "https://live.ocw.mit.edu/courses/18-100b-real-analysis-spring-2025/mit18_100b_s25_lec_full.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "lem-cm-sine-coefficient-decay-by-integration-by-parts",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Repeated integration by parts gives $|b_n(F)|\\le 2L^5M_5/(\\pi^5n^5)$ for odd $2L$-periodic $C^5$ functions and $|b_n(G)|\\le 2L^4M_4/(\\pi^4n^4)$ for $C^4$",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "thm-algebra-of-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-derivative",
+          "def-abs-value",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "def-metric-ball",
+          "thm-linearity-of-the-integral",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period"
+        ],
+        "dependency_roles": {
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$. Let $F:\\mathbb R\\to\\mathbb R$ be odd and $2L$-periodic of class $C^5$ and let $G:\\mathbb R\\to\\mathbb R$ be odd and $2L$-periodic of class $C^4$ ([[def-cm-sine-coefficients-of-periodic-functions]], [[def-ck-euclidean-maps-and-diffeomorphisms]]); put $$M_5:=\\sup_{\\mathbb R}|F^{(5)}|<+\\infty,\\qquad M_4:=\\sup_{\\mathbb R}|G^{(4)}|<+\\infty .$$ Then for every integer $n\\ge1$, with the sine coefficients $b_n$ of [[def-cm-sine-coefficients-of-periodic-functions]], $$|b_n(F)|\\le\\frac{2L^5M_5}{\\pi^5n^5},\\qquad |b_n(G)|\\le\\frac{2L^4M_4}{\\pi^4n^4}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapter 1 (smoothness and decay: Theorems 1.6–1.8)",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            },
+            {
+              "title": "L. Grafakos, Classical Fourier Analysis, 3rd ed., Section 3.3.2 (decay of Fourier coefficients of smooth functions)",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "thm-cm-smooth-string-fourier-series-solution",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The smooth fixed-end string: the sine series solves the wave equation with the given data, uniquely, with an explicit tail bound",
+        "reference": "expansion-proofs.md#e24",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension",
+          "lem-cm-fejer-completeness-for-continuous-periodic-functions",
+          "lem-cm-uniform-convergence-with-derivatives-on-a-rectangle",
+          "thm-cm-dalembert-formula-and-string-solutions",
+          "thm-weierstrass-m-test-for-function-series",
+          "def-series-of-real-functions",
+          "thm-integral-test-for-series",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-sine-and-cosine-by-power-series",
+          "thm-integration-by-parts",
+          "thm-ftc-second-part",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals",
+          "thm-linearity-of-the-integral",
+          "def-integral-over-a-measurable-set",
+          "def-derivative",
+          "def-interval",
+          "def-abs-value",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_roles": {
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts": "mathematical-premise",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension": "mathematical-premise",
+          "lem-cm-fejer-completeness-for-continuous-periodic-functions": "mathematical-premise",
+          "lem-cm-uniform-convergence-with-derivatives-on-a-rectangle": "mathematical-premise",
+          "thm-cm-dalembert-formula-and-string-solutions": "mathematical-premise",
+          "thm-weierstrass-m-test-for-function-series": "mathematical-premise",
+          "def-series-of-real-functions": "mathematical-premise",
+          "thm-integral-test-for-series": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-integration-by-parts": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$, $c>0$. Let $F:\\mathbb R\\to\\mathbb R$ be odd and $2L$-periodic of class $C^5$ and let $G:\\mathbb R\\to\\mathbb R$ be odd and $2L$-periodic of class $C^4$ ([[def-cm-sine-coefficients-of-periodic-functions]], [[def-ck-euclidean-maps-and-diffeomorphisms]]), with $M_5:=\\sup|F^{(5)}|<\\infty$, $M_4:=\\sup|G^{(4)}|<\\infty$. Put $$a_n:=b_n(F),\\qquad d_n:=\\frac{b_n(G)}{\\omega_n},\\qquad \\omega_n:=\\frac{cn\\pi}{L}\\qquad(n\\ge1),$$ and define, for $(t,x)\\in\\mathbb R^2$, $$u(t,x):=\\sum_{n\\ge1}\\Bigl[a_n\\cos(\\omega_nt)+d_n\\sin(\\omega_nt)\\Bigr]\\sin\\Bigl(\\frac{n\\pi x}{L}\\Bigr). \\tag{S}$$ Then: **(i)** the series (S) and the termwise series of $\\partial_tu,\\partial_xu,\\partial_t^2u,\\partial_t\\partial_xu,\\partial_x^2u$ converge absolutely and uniformly on every strip $[-T,T]\\times[0,L]$; the sum $u$ is $C^2$, is odd and $2L$-periodic in $x$, satisfies $u_{tt}=c^2u_{xx}$, obeys the fixed-end conditions $u(t,0)=u(t,L)=0$, and has $$u(0,x)=F(x),\\qquad u_t(0,x)=G(x)\\qquad(x\\in\\mathbb R).$$ **(ii)** (Uniqueness.) If $v$ is $C^2$ on $[0,T]\\times[0,L]$ for some $T>0$, satisfies $v_{tt}=c^2v_{xx}$ there, $v(t,0)=v(t,L)=0$ for all $t$, and $v(0,\\cdot)=v_t(0,\\cdot)=0$, then $v=0$ on $[0,T]\\times[0,L]$. **(iii)** (Tail bound.) For every $N\\ge1$ and every $(t,x)\\in[-T,T]\\times[0,L]$, $$\\Bigl|u(t,x)-\\sum_{n\\le N}\\Bigl[a_n\\cos(\\omega_nt)+d_n\\sin(\\omega_nt)\\Bigr]\\sin\\Bigl(\\frac{n\\pi x}{L}\\Bigr)\\Bigr|\\le C\\,(N+1)^{-4},$$ where $C:=2\\bigl(\\frac{2L^5M_5}{\\pi^5}+\\frac{2L^5M_4}{c\\pi^5}\\bigr)$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapters 1–2 (Fourier coefficients, summability and the uniqueness theorem (2.14))",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of the fixed-end string)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      }
+    ]
+  },
+  {
+    "order": 96,
+    "id": "cm-math-continuum-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Continuum — Examples",
+    "companion": "cm-math-continuum",
+    "requires": [
+      "cm-math-continuum"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-transport-of-a-translating-uniform-flow",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Transport of a translating rigid region: the rate integral vanishes for a travelling profile",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-continuum-motion",
+          "def-cm-material-region-and-density",
+          "thm-cm-transport-theorem",
+          "def-cm-euclidean-spatial-calculus",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "def-countable-choice",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-algebra-of-derivatives",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "thm-cm-transport-theorem": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $B:=B_1(0)\\subseteq\\mathbb R^3$ be the open unit ball ([[def-metric-ball]]), a nonempty bounded open set and hence a material region in the sense of [[def-cm-material-region-and-density]]; let $v\\in\\mathbb R^3$ be fixed, and let $$\\psi(t,X):=X+tv\\qquad(t\\in\\mathbb R,\\ X\\in\\mathbb R^3)$$ be the uniform translation motion of [[def-cm-continuum-motion]] (each $\\psi_t$ is the identity plus a translation, a $C^\\infty$ diffeomorphism with $D_X\\psi_t=I_3$). Let $h:\\mathbb R^3\\to\\mathbb R$ be $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) and define the travelling profile $$f(t,x):=h(x-tv)\\qquad\\bigl((t,x)\\in\\mathbb R\\times\\mathbb R^3\\bigr).$$ Then $\\int_{\\psi_t(B)}f(t,x)\\,dx$ is independent of $t$, while the transport integrand vanishes pointwise: $$\\partial_tf+\\operatorname{div}(fv)=0,$$ so the transport theorem reproduces the constant rate $0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 3.7, 4.2 and 4.4 (transport equations; mass and momentum balance in integral form)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-cm-elastic-plane-wave-speeds-and-energy",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A longitudinal plane wave in the isotropic elastic model: dispersion check and strain energy at explicit parameters",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-plane-elastic-waves",
+          "def-cm-linear-elastic-constitutive-law",
+          "lem-cm-isotropic-elastic-strain-energy-positivity",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-trace-of-a-square-matrix"
+        ],
+        "dependency_roles": {
+          "thm-cm-plane-elastic-waves": "mathematical-premise",
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "lem-cm-isotropic-elastic-strain-energy-positivity": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take $\\lambda=2$, $\\mu=1$, $\\rho_0=1$ ([[def-cm-linear-elastic-constitutive-law]]: here $\\lambda+\\frac{2\\mu}{3}=\\frac83>0$). Let $k=(\\pi,0,0)$, $a=(1,0,0)$ and $$\\xi(t,x)=a\\cos(\\pi x_1-\\omega t),\\qquad \\omega:=2\\pi .$$ Then $\\xi$ is a longitudinal plane wave with speed $\\sqrt{(\\lambda+2\\mu)/\\rho_0}=2$, and the associated strain and stress satisfy the elastic momentum identity; the strain energy density at time $t$ equals both $W(e)=2\\pi^2\\sin^2(\\pi x_1-\\omega t)$ and the decomposition $\\mu|e_0|_F^2+(\\lambda/2+\\mu/3)(\\operatorname{tr}e)^2$ with the same value.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 (linearized elasticity and strain energy)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.7 (plane longitudinal and transverse elastic waves and their speeds)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-cm-string-modes-and-tail-constants",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The first sine mode with matched velocity data: exact solution and the numerical tail bound $8(N+1)^{-4}$",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-smooth-string-fourier-series-solution",
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension",
+          "thm-cm-dalembert-formula-and-string-solutions",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-integral-test-for-series",
+          "def-integral-over-a-measurable-set"
+        ],
+        "dependency_roles": {
+          "thm-cm-smooth-string-fourier-series-solution": "mathematical-premise",
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts": "mathematical-premise",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension": "mathematical-premise",
+          "thm-cm-dalembert-formula-and-string-solutions": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-integral-test-for-series": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $L>0$, $c>0$ and define the odd $2L$-periodic $C^\\infty$ datum $$F(x):=\\sin\\Bigl(\\frac{\\pi x}{L}\\Bigr),\\qquad G(x):=\\frac{c\\pi}{L}\\sin\\Bigl(\\frac{\\pi x}{L}\\Bigr).$$ Then the sine coefficients of [the definition] are $b_1(F)=1$ and $b_n(F)=0$ for $n\\ge2$, and $b_1(G)=c\\pi/L$, $b_n(G)=0$ for $n\\ge2$; the series solution of the string theorem is the finite expression $$u(t,x)=\\bigl[\\cos(\\omega_1t)+\\sin(\\omega_1t)\\bigr]\\sin\\Bigl(\\frac{\\pi x}{L}\\Bigr),\\qquad \\omega_1=\\frac{c\\pi}{L},$$ which solves $u_{tt}=c^2u_{xx}$ with $u(0,\\cdot)=F$, $u_t(0,\\cdot)=G$ and $u(t,0)=u(t,L)=0$; its tail beyond the first mode vanishes, and the numerical bound of the string theorem at these data is $$|u(t,x)-u_1(t,x)|\\le 8\\,(N+1)^{-4}\\qquad(N\\ge2),$$ so the general bound is valid but far from sharp on this datum.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of the fixed-end string)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapters 1–2 (Fourier coefficients and summability)",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "cex-cm-sine-tail-bound-fails-for-rough-data",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "FALSE: the $O(N^{-4})$ sine-tail bound holds for every continuous odd periodic function. A $C^1$ datum with coefficients $n^{-3}$ refutes it",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-smooth-string-fourier-series-solution",
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts",
+          "thm-weierstrass-m-test-for-function-series",
+          "def-series-of-real-functions",
+          "thm-integral-test-for-series",
+          "thm-uniform-limit-continuous-real-functions",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-ftc-first-part",
+          "thm-substitution",
+          "def-oriented-integral",
+          "thm-additivity-over-subintervals"
+        ],
+        "dependency_roles": {
+          "thm-cm-smooth-string-fourier-series-solution": "mathematical-premise",
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "lem-cm-cosine-sine-orthogonality-and-odd-extension": "mathematical-premise",
+          "lem-cm-sine-coefficient-decay-by-integration-by-parts": "mathematical-premise",
+          "thm-weierstrass-m-test-for-function-series": "mathematical-premise",
+          "def-series-of-real-functions": "mathematical-premise",
+          "thm-integral-test-for-series": "mathematical-premise",
+          "thm-uniform-limit-continuous-real-functions": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "def-oriented-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**False statement.** For every continuous odd $2L$-periodic function $F$ there is a constant $C_F$ such that, for every $N\\ge1$, $$\\sup_{x\\in\\mathbb R}\\Bigl|F(x)-S_N^{\\rm s}F(x)\\Bigr|\\le C_F\\,(N+1)^{-4},$$ where $S_N^{\\rm s}F$ is the $N$-th partial sum of the sine series of [[def-cm-sine-coefficients-of-periodic-functions]]. (The theorem of this collection proves the bound only under the $C^5$ hypothesis of [[thm-cm-smooth-string-fourier-series-solution]]; the statement above drops that hypothesis, and that is exactly what fails.)",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapters 1 and 5 (smoothness and decay of Fourier coefficients; Fourier series in L²(T))",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-cm-burgers-riemann-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Riemann data $u_L=3$, $u_R=1$: shock speed and entropy coefficients, and a rarefaction check",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-derivative",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-cm-burgers-riemann-shock-and-rarefaction": "mathematical-premise",
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take $u_L=3>u_R=1$ in the shock of [[thm-cm-burgers-riemann-shock-and-rarefaction]]. The shock speed is $s=\\frac{u_L+u_R}{2}=2$. For the entropy pair $(\\eta_k,q_k)$: - for $k=2$, which lies strictly between $u_R=1$ and $u_L=3$, the interface coefficient is $s[\\eta_2]-[q_2]=1$; - for $k=0$, which lies outside the interval $[1,3]$, the coefficient is $s[\\eta_0]-[q_0]=0$; both nonnegative, in accordance with the theorem's closed formula $s[\\eta_k]-[q_k]=-(k-u_L)(k-u_R)$ in the interior case and $=0$ in the exterior case. For the rarefaction with $u_L=1<u_R=3$, the fan $u=x/t$ satisfies $u_t+uu_x=0$ identically, and the entropy residuals vanish because the fan is continuous.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Chapter 5 (worked scalar Riemann problems: shocks and rarefactions)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            },
+            {
+              "title": "L. C. Evans, Entropy and Partial Differential Equations (lecture notes), Chapter V, Section B (Burgers examples and entropy admissibility tests)",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-cm-couette-poiseuille-numbers",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Numerical checks for channel flows: $h=\\eta=1$, $G=12$ gives flux $1$ and centre speed $3/2$, and $V=2$ gives shear $2$",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 5,
+        "deps": [
+          "thm-cm-plane-couette-and-poiseuille-flows",
+          "def-cm-fluid-constitutive-models",
+          "thm-cm-local-momentum-balance",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "thm-cm-plane-couette-and-poiseuille-flows": "mathematical-premise",
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "thm-cm-local-momentum-balance": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take $h=1$, $\\eta=1$ in the plane channel of [[thm-cm-plane-couette-and-poiseuille-flows]]. 1. **Poiseuille, $G=12$.** The profile is $v(y)=6y(1-y)$; its flux per unit width is $1$ and its maximal speed is $v(1/2)=3/2$. 2. **Couette, $V=2$.** The profile is $v(y)=2y$; the only nonzero entry of $Du$ is $\\partial_yu_1=2$, so the antisymmetric part of the velocity gradient has magnitude $1$ in the relevant off-diagonal slots and the flow is not irrotational.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.5 (the Couette and Poiseuille channel-flow examples and the discharge law)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      },
+      {
+        "id": "ex-cm-spring-chain-mode-and-limit-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A four-node cyclic chain mode with $a=c=1$: exact ODE check, dispersion value $\\omega^2=2$, and the continuum error bound",
+        "reference": "batch-8 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-spring-chain-dispersion-relation",
+          "def-cm-cyclic-spring-chain",
+          "lem-cm-second-difference-remainder-bound",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-cm-spring-chain-dispersion-relation": "mathematical-premise",
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "lem-cm-second-difference-remainder-bound": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Take $N=4$, $a=1$, $c=1$ in the cyclic chain of [[def-cm-cyclic-spring-chain]]. The wave number $\\kappa=\\pi/2$ gives $$\\omega^2=\\frac{4c^2}{a^2}\\sin^2\\Bigl(\\frac{\\kappa a}{2}\\Bigr)=4\\sin^2\\Bigl(\\frac{\\pi}{4}\\Bigr)=2,\\qquad \\omega=\\sqrt2,$$ and the profile $q_j(t)=\\cos\\bigl(\\frac{\\pi j}{2}-\\sqrt2\\,t\\bigr)$, $j\\in\\mathbb Z/4$, solves the chain equation exactly; the continuum comparison at this wave number gives the exact error $|\\omega^2-c^2\\kappa^2|=\\frac{\\pi^2}{4}-2$ against the exact bound $\\frac{c^2\\kappa^4a^2}{12}=\\frac{\\pi^4}{192}$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.3 (chain modes, dispersion relation and the continuum limit)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014), Section 6.1 (the discrete chain and its continuum limit)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ],
+          "precheck": "pass"
+        }
+      }
+    ]
+  }
+]

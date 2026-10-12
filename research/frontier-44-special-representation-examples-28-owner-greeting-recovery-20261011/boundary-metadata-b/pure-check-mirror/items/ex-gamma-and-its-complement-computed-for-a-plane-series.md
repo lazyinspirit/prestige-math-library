@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gamma-and-its-complement-computed-for-a-plane-series.md

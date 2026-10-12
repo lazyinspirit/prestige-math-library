@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-element-of-a-complex-semisimple-lie-algebra-is-semisimple.md

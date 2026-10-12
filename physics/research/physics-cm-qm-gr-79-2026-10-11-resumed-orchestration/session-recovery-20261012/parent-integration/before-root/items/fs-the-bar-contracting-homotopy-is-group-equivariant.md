@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-bar-contracting-homotopy-is-group-equivariant.md

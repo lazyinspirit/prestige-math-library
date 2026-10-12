@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-manifold-orientation-system-is-a-local-system.md

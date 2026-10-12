@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-hyperplane-slice-at-transverse-point.md

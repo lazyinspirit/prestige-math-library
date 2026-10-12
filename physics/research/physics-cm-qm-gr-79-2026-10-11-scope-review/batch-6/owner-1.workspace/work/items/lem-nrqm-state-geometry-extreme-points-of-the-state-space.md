@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-state-geometry-extreme-points-of-the-state-space.md

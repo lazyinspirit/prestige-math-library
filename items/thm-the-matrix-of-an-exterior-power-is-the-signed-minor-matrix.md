@@ -45,8 +45,7 @@ where $A_{J,I}$ is the $k\times k$ submatrix of $A$ with rows $J=\{j_1<\cdots<j_
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], $\Lambda^kT(e_I)=T(e_{i_1})\wedge\cdots\wedge T(e_{i_k})$. [L1]
+ 1.1 By [L1], $\Lambda^kT(e_I)=T(e_{i_1})\wedge\cdots\wedge T(e_{i_k})$. [L1]
 
 1.2 By [L2], each factor expands as $T(e_{i_r})=\sum_ma_{m,i_r}f_m$. [L2]
 
@@ -54,4 +53,4 @@ where $A_{J,I}$ is the $k\times k$ submatrix of $A$ with rows $J=\{j_1<\cdots<j_
 
 2.1 Expanding step 1.1 with step 1.2 and collecting the coefficient of $f_J=f_{j_1}\wedge\cdots\wedge f_{j_k}$: only tuples with distinct indices survive (a repeated index makes the wedge zero), and reordering the tuple into increasing order multiplies by the permutation sign, so the coefficient is $\sum_{\sigma\in S_k}\operatorname{sgn}(\sigma)\,a_{j_{\sigma(1)},i_1}\cdots a_{j_{\sigma(k)},i_k}$, which is $\det A_{J,I}$ by [L4]. [step 1.1, step 1.2, L4, algebra]
 
-3.1 By step 1.3 and [L2], the coefficients computed in step 2.1 are exactly the entries of the matrix of $\Lambda^kT$ in the wedge bases. [step 1.3, step 2.1, L2] ∎
+3.1 By step 1.3 and [L2], the coefficients computed in step 2.1 are exactly the entries of the matrix of $\Lambda^kT$ in the wedge bases. [step 1.3, step 2.1, L2] ∎ 

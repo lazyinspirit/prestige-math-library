@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rational-cohomology-of-bo-and-bso-by-pontryagin-and-euler-classes.md

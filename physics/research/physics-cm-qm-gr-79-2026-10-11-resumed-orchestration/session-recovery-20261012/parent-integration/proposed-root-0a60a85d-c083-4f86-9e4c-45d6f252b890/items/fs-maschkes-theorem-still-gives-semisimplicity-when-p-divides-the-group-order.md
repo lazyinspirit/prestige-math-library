@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-maschkes-theorem-still-gives-semisimplicity-when-p-divides-the-group-order.md

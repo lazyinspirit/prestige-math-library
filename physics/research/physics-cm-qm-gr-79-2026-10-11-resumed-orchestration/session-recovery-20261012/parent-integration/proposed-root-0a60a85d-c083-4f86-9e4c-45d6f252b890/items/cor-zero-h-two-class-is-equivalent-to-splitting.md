@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-zero-h-two-class-is-equivalent-to-splitting.md

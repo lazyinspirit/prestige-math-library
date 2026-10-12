@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-oscillation-pattern-controls-clopen-membership.md

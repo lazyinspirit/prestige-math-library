@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-consistency-does-not-supply-a-transitive-zfc-model.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-power-basis-discriminant-is-polynomial-discriminant.md

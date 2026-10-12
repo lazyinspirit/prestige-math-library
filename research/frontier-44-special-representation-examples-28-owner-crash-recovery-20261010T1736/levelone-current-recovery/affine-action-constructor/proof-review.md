@@ -1,0 +1,11 @@
+# Affine-action constructor handoff
+
+This is the exact distinct FIRST-CONFIRMED affine-Hecke loop/degree scope allocation. The broad Y_j/full-degree commutation clause already occurs in the approved Oct 8 contract. Its correction is inherited-scope repair, not a current-author regression or a reset of quantum37 history. The canonical raw guard remains 933b3ebb2b05135a5231f63f0809ae0eb4918a9859c28efd6c25122449b56e3b. Previous finite-kernel artifacts were not changed.
+
+The guard records the exact entire before and after Definition and compares the complete approved strategy with the genuine ready reason. The current corrected vector draft is hash-bound as conditional context. The full Laurent action and every Hecke relation remain present. The t polynomial now has roots q^-1 and -q. Full S_i/A_N quantum commutation is retained; individual Y_j intertwine the derived action and satisfy K_d Y_j K_d^-1=qY_j.
+
+The proof supplies all thirteen finite residue order patterns for the finite braid, the three quadratic residue cases, and the full divided-difference identities. The general Laurent braid has all six permutation coefficients explicitly reduced to delta=ab-h(a+b-c)=0. Thus a finite loop sample is not used to prove a general loop identity.
+
+For commutation, the top/bottom table gives both compositions on all four nonspectator pairs, and the spectator order argument exhausts the remaining cases. The arbitrary-loop step uses s(f) rather than f. The affine-color proof changes the Laurent basis to the ordered window z v_e,v_1,...,v_(e-1); direct Bernstein formulas prove that its S matrix is unchanged, while E_0 and F_0 become constant adjacent maps. This supplies a complete all-loop color0 proof with the correct F_0 inverse loop multiplier. The coproduct sum then proves the N-slot identities and degree scope.
+
+No internal proof gap is identified relative to the corrected conditional vector and existing Hopf-algebra suppliers. Parent review alone determines whole binding and all direct/indirect consumer dispositions. No canonical mathematical files, manifests, receipts, counters, engine state or gates were changed; no new source retrieval is claimed. The final draft passes focused precheck, rendercheck and proof-layout (10 rows, zero defects), as recorded in local-checks.json. These are local mechanical checks, not independent audits.

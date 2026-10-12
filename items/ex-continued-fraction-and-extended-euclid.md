@@ -52,8 +52,6 @@ $$37\cdot3-11\cdot10=1.$$
 
 **Proof technique:** direct.
 
-1.1 The Euclidean quotient digits are $3,2,1,3$, so [F1] gives. [F1, given, algebra]
-$$\frac{37}{11}=[3;2,1,3].$$ Its convergents are $$3,\qquad 3+\frac12=\frac72,\qquad 3+\frac{1}{2+\frac11}=\frac{10}{3},\qquad 3+\frac{1}{2+\frac{1}{1+\frac13}}=\frac{37}{11}.$$ [F1, given, algebra]
+1.1 The Euclidean quotient digits are $3,2,1,3$, so [F1] gives. [F1, given, algebra] $$\frac{37}{11}=[3;2,1,3].$$ Its convergents are $$3,\qquad 3+\frac12=\frac72,\qquad 3+\frac{1}{2+\frac11}=\frac{10}{3},\qquad 3+\frac{1}{2+\frac{1}{1+\frac13}}=\frac{37}{11}.$$ [F1, given, algebra]
 
-2.1 The penultimate convergent is $10/3$, and. [F2, step 1.1, algebra]
-$$37\cdot3-11\cdot10=111-110=1.$$ So $1$ is an explicit integer linear combination of $37$ and $11$, which is exactly the Bezout identity for $\gcd(37,11)=1$ in the sense of [F2]. [F2, step 1.1, algebra] ∎
+2.1 The penultimate convergent is $10/3$, and. [F2, step 1.1, algebra] $$37\cdot3-11\cdot10=111-110=1.$$ So $1$ is an explicit integer linear combination of $37$ and $11$, which is exactly the Bezout identity for $\gcd(37,11)=1$ in the sense of [F2]. [F2, step 1.1, algebra] ∎ 

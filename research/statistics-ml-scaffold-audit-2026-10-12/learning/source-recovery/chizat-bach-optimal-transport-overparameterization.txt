@@ -1,0 +1,2282 @@
+On the Global Convergence of Gradient Descent for
+Over-parameterized Models using Optimal Transport
+Lénaïc Chizat
+INRIA, ENS, PSL Research University
+Paris, France
+lenaic.chizat@inria.fr
+Francis Bach
+INRIA, ENS, PSL Research University
+Paris, France
+francis.bach@inria.fr
+Abstract
+Many tasks in machine learning and signal processing can be solved by minimizing
+a convex function of a measure. This includes sparse spikes deconvolution or
+training a neural network with a single hidden layer. For these problems, we study
+a simple minimization method: the unknown measure is discretized into a mixture
+of particles and a continuous-time gradient descent is performed on their weights
+and positions. This is an idealization of the usual way to train neural networks
+with a large hidden layer. We show that, when initialized correctly and in the
+many-particle limit, this gradient ﬂow, although non-convex, converges to global
+minimizers. The proof involves Wasserstein gradient ﬂows, a by-product of optimal
+transport theory. Numerical experiments show that this asymptotic behavior is
+already at play for a reasonable number of particles, even in high dimension.
+1
+Introduction
+A classical task in machine learning and signal processing is to search for an element in a Hilbert
+space F that minimizes a smooth, convex loss function R : F →R+ and that is a linear combination
+of a few elements from a large given parameterized set {φ(θ)}θ∈Θ ⊂F. A general formulation of
+this problem is to describe the linear combination through an unknown signed measure µ on the
+parameter space and to solve for
+J∗=
+min
+µ∈M(Θ) J(µ),
+J(µ) := R
+Z
+φdµ
+
++ G(µ)
+(1)
+where M(Θ) is the set of signed measures on the parameter space Θ and G : M(Θ) →R is an
+optional convex regularizer, typically the total variation norm when sparse solutions are preferred. In
+this paper, we consider the inﬁnite-dimensional case where the parameter space Θ is a domain of Rd
+and θ 7→φ(θ) is differentiable. This framework covers:
+• Training neural networks with a single hidden layer, where the goal is to select, within a
+speciﬁc class, a function that maps features in Rd−1 to labels in R, from the observation
+of a joint distribution of features and labels. This corresponds to F being the space of
+square-integrable real-valued functions on Rd−1, R being, e.g., the quadratic or the logistic
+loss function, and φ(θ) : x 7→σ(Pd−1
+i=1 θixi + θd), with an activation function σ : R →R.
+Common choices are the sigmoid function or the rectiﬁed linear unit [18, 14], see more
+details in Section 4.2.
+• Sparse spikes deconvolution, where one attempts to recover a signal which is a mixture
+of impulses on Θ given a noisy and ﬁltered observation y (a square-integrable function
+on Θ). This corresponds to F being the space of square-integrable real-valued functions
+on Rd, deﬁning φ(θ) : x 7→ψ(x −θ) the translations of the ﬁlter impulse response ψ
+32nd Conference on Neural Information Processing Systems (NIPS 2018), Montréal, Canada.
+arXiv:1805.09545v2  [math.OC]  29 Oct 2018
+
+and R(f) = (1/2λ)∥f −y∥2
+L2, for some λ > 0 that depends on the estimated noise level.
+Solving (1) allows then to reconstruct the mixture of impulses with some guarantees [12, 13].
+• Low-rank tensor decomposition [16], recovering mixture models from sketches [26], see [6]
+for a detailed list of other applications. For example, with symmetric matrices, F = Rd×d
+and Φ(θ) = θθ⊤, we recover low-rank matrix decompositions [15].
+1.1
+Review of optimization methods and previous work
+While (1) is a convex problem, ﬁnding approximate minimizers is hard as the variable is inﬁnite-
+dimensional. Several lines of work provide optimization methods but with strong limitations.
+Conditional gradient / Frank-Wolfe.
+This approach tackles a variant of (1) where the regulariza-
+tion term is replaced by an upper bound on the total variation norm; the associated constraint set
+is the convex hull of all Diracs and negatives of Diracs at elements of θ ∈Θ, and thus adapted to
+conditional gradient algorithms [19]. At each iteration, one adds a new particle by solving a linear
+minimization problem over the constraint set (which correspond to ﬁnding a particle θ ∈Θ), and then
+updates the weights. The resulting iterates are sparse and there is a guaranteed sublinear convergence
+rate of the objective function to its minimum. However, the linear minimization subroutine is hard to
+perform in general : it is for instance NP-hard for neural networks with homogeneous activations [4].
+One thus generally resorts to space gridding (in low dimension) or to approximate steps, akin to
+boosting [36]. The practical behavior is improved with nonconvex updates [6, 7] reminiscent of the
+ﬂow studied below.
+Semideﬁnite hierarchy.
+Another approach is to parameterize the unknown measure by its sequence
+of moments. The space of such sequences is characterized by a hierarchy of SDP-representable
+necessary conditions. This approach concerns a large class of generalized moment problems [22]
+and can be adapted to deal with special instances of (1) [9]. It is however restricted to φ which
+are combinations of few polynomial moments, and its complexity explodes exponentially with the
+dimension d. For d ≥2, convergence to a global minimizer is only guaranteed asymptotically,
+similarly to the results of the present paper.
+Particle gradient descent.
+A third approach, which exploits the differentiability of φ, consists in
+discretizing the unknown measure µ as a mixture of m particles parameterized by their positions and
+weights. This corresponds to the ﬁnite-dimensional problem
+min
+w∈Rm
+θ∈Θm
+Jm(w, θ)
+where
+Jm(w, θ) := J
+ 
+1
+m
+m
+X
+i=1
+wiδθi
+!
+,
+(2)
+which can then be solved by classical gradient descent-based algorithms. This method is simple
+to implement and is widely used for the task of neural network training but, a priori, we may only
+hope to converge to local minima since Jm is non-convex. Our goal is to show that this method also
+beneﬁts from the convex structure of (1) and enjoys an asymptotical global optimality guarantee.
+There is a recent literature on global optimality results for (2) in the speciﬁc task of training neural
+networks. It is known that in this context, Jm has less, or no, local minima in an over-parameterization
+regime and stochastic gradient descent (SGD) ﬁnds a global minimizer under restrictive assump-
+tions [34, 35, 33, 23]; see [33] for an account of recent results. Our approach is not directly
+comparable to these works: it is more abstract and nonquantitative—we study an ideal dynamics
+that one can only hope to approximate—but also much more generic. Our objective, in the space
+of measures, has many local minima, but we build gradient ﬂows that avoids them, relying mainly
+on the homogeneity properties of Jm (see [16, 20] for other uses of homogeneity in non-convex
+optimization). The novelty is to see (2) as a discretization of (1)—a point of view also present in [25]
+but not yet exploited for global optimality guarantees.
+1.2
+Organization of the paper and summary of contributions
+Our goal is to explain when and why the non-convex particle gradient descent ﬁnds global minima.
+We do so by studying the many-particle limit m →∞of the gradient ﬂow of Jm. More speciﬁcally:
+2
+
+• In Section 2, we introduce a more general class of problems and study the many-particle
+limit of the associated particle gradient ﬂow. This limit is characterized as a Wasserstein
+gradient ﬂow (Theorem 2.6), an object which is a by-product of optimal transport theory.
+• In Section 3, under assumptions on φ and the initialization, we prove that if this Wasserstein
+gradient ﬂow converges, then the limit is a global minimizer of J. Under the same conditions,
+it follows that if (w(m)(t), θ(m)(t))t≥0 are gradient ﬂows for Jm suitably initialized, then
+lim
+m,t→∞J(µm,t) = J∗
+where
+µm,t = 1
+m
+m
+X
+i=1
+w(m)
+i
+(t)δθ(m)
+i
+(t).
+• Two different settings that leverage the structure of φ are treated: the 2-homogeneous and the
+partially 1-homogeneous case. In Section 4, we apply these results to sparse deconvolution
+and training neural networks with a single hidden layer, with sigmoid or ReLU activation
+function. In each case, our result prescribes conditions on the initialization pattern.
+• We perform simple numerical experiments that indicate that this asymptotic regime is
+already at play for small values of m, even for high-dimensional problems. The method
+behaves incomparably better than simply optimizing on the weights with a very large set of
+ﬁxed particles.
+Our focus on qualitative results might be surprising for an optimization paper, but we believe that
+this is an insightful ﬁrst step given the hardness and the generality of the problem. We suggest to
+understand our result as a ﬁrst consistency principle for practical and a commonly used non-convex
+optimization methods. While we focus on the idealistic setting of a continuous-time gradient ﬂow
+with exact gradients, this is expected to reﬂect the behavior of ﬁrst order descent algorithms, as they
+are known to approximate the former: see [31] for (accelerated) gradient descent and [21, Thm. 2.1]
+for SGD.
+Notation.
+Scalar products and norms are denoted by · and | · | respectively in Rd, and by ⟨·, ·⟩and
+∥· ∥in the Hilbert space F. Norms of linear operators are also denoted by ∥· ∥. The differential of a
+function f at a point x is denoted dfx. We write M(Rd) for the set of ﬁnite signed Borel measures
+on Rd, δx is a Dirac mass at a point x and P2(Rd) is the set of probability measures endowed with
+the Wasserstein distance W2 (see Appendix A).
+Recent related work.
+Several independent works [24, 28, 32] have studied the many-particle limit
+of training a neural network with a single large hidden layer and a quadratic loss R. Their main focus
+is on quantifying the convergence of SGD or noisy SGD to the limit trajectory, which is precisely a
+mean-ﬁeld limit in this case. Since in our approach this limit is mostly an intermediate step necessary
+to state our global convergence theorems, it is not studied extensively for itself. These papers thus
+provide a solid complement to Section 2.4 (a difference is that we do not assume that R is quadratic
+nor that V is differentiable). Also, [24] proves a quantitive global convergence result for noisy SGD
+to an approximate minimizer: we stress that our results are of a different nature, as they rely on
+homogeneity and not on the mixing effect of noise.
+2
+Particle gradient ﬂows and many-particle limit
+2.1
+Main problem and assumptions
+From now on, we consider the following class of problems on the space of non-negative ﬁnite
+measures on a domain Ω⊂Rd which, as explained below, is more general than (1):
+F ∗=
+min
+µ∈M+(Ω) F(µ)
+where
+F(µ) = R
+Z
+Φdµ
+
++
+Z
+V dµ,
+(3)
+and we make the following assumptions.
+Assumptions 2.1. F is a separable Hilbert space, Ω⊂Rd is the closure of a convex open set, and
+(i) (smooth loss) R : F →R+ is differentiable, with a differential dR that is Lipschitz on bounded
+sets and bounded on sublevel sets,
+3
+
+(ii) (basic regularity) Φ : Ω→F is (Fréchet) differentiable, V : Ω→R+ is semiconvex1, and
+(iii) (locally Lipschitz derivatives with sublinear growth) there exists a family (Qr)r>0 of nested
+nonempty closed convex subsets of Ωsuch that:
+(a) {u ∈Ω; dist(u, Qr) ≤r′} ⊂Qr+r′ for all r, r′ > 0,
+(b) Φ and V are bounded and dΦ is Lipschitz on each Qr, and
+(c) there exists C1, C2 > 0 such that supu∈Qr(∥dΦu∥+∥∂V (u)∥) ≤C1 +C2r for all r > 0,
+where ∥∂V (u)∥stands for the maximal norm of an element in ∂V (u).
+Assumption 2.1-(iii) reduces to classical local Lipschitzness and growth assumptions on dΦ and ∂V if
+the nested sets (Qr)r are the balls of radius r, but unbounded sets Qr are also allowed. These sets are
+a technical tool used later to conﬁne the gradient ﬂows in areas where gradients are well-controlled.
+By convention, we set F(µ) = ∞if µ is not concentrated on Ω. Also, the integral
+R
+Φdµ is a
+Bochner integral [10, App. E6]. It yields a well-deﬁned value in F whenever Φ is measurable and
+R
+∥φ∥d|µ| < ∞. Otherwise, we also set F(µ) = ∞by convention.
+Recovering (1) through lifting.
+It is shown in Appendix A.2 that, for a class of admissible regu-
+larizers G containing the total variation norm, problem (1) admits an equivalent formulation as (3).
+Indeed, consider the lifted domain Ω= R × Θ, the function Φ(w, θ) = wφ(θ) and V (w, θ) = |w|.
+Then J∗equals F ∗and given a minimizer of one of the problems, one can easily build minimizers for
+the other. This equivalent lifted formulation removes the asymmetry between weight and position—
+weight becomes just another coordinate of a particle’s position. This is the right point of view for our
+purpose and this is why F is our central object of study in the following.
+Homogeneity.
+The functions Φ and V obtained through the lifting share the property of being
+positively 1-homogeneous in the variable w. A function f between vector spaces is said positively
+p-homogeneous when for all λ > 0 and argument x, it holds f(λx) = λpf(x). This property is
+central for our global convergence results (but is not needed throughout Section 2).
+2.2
+Particle gradient ﬂow
+We ﬁrst consider an initial measure which is a mixture of particles—an atomic measure— and deﬁne
+the initial object in our construction: the particle gradient ﬂow. For a number m ∈N of particles,
+and a vector u ∈Ωm of positions, this is the gradient ﬂow of
+Fm(u) := F
+ 
+1
+m
+m
+X
+i=1
+δui
+!
+= R
+ 
+1
+m
+m
+X
+i=1
+Φ(ui)
+!
++ 1
+m
+m
+X
+i=1
+V (ui),
+(4)
+or, more precisely, its subgradient ﬂow because V can be non-smooth. We recall that a subgradient
+of a (possibly non-convex) function f : Rd →¯R at a point u0 ∈Rd is a p ∈Rd satisfying
+f(u) ≥f(u0) + p · (u −u0) + o(u −u0) for all u ∈Rd. The set of subgradients at u is a closed
+convex set called the subdifferential of f at u denoted ∂f(u) [27].
+Deﬁnition 2.2 (Particle gradient ﬂow). A gradient ﬂow for the functional Fm is an absolutely
+continuous2 path u : R+ →Ωm which satisﬁes u′(t) ∈−m ∂Fm(u(t)) for almost every t ≥0.
+This deﬁnition uses a subgradient scaled by m, which is the subgradient relative to the scalar product
+on (Rd)m scaled by 1/m: this normalization amounts to assigning a mass 1/m to each particle and
+is convenient for taking the many-particle limit m →∞. We now state basic properties of this object.
+Proposition 2.3. For any initialization u(0) ∈Ωm, there exists a unique gradient ﬂow u : R+ →Ωm
+for Fm. Moreover, for almost every t > 0, it holds d
+dsFm(u(s))|s=t = −|u′(t)|2 and the velocity of
+the i-th particle is given by u′
+i(t) = vt(ui(t)), where for u ∈Ωand µm,t := (1/m) Pm
+i=1 δui(t),
+vt(u) = ˜vt(u) −proj∂V (u)(˜vt(u))
+with
+˜vt(u) = −
+
+R′ R
+Φdµm,t
+
+, ∂jΦ(u)
+d
+j=1 .
+(5)
+1A function f : Rd →R is semiconvex, or λ-convex, if f + λ| · |2 is convex, for some λ ∈R. On a compact
+domain, any smooth fonction is semiconvex.
+2An absolutely continuous function x : R →Rd is almost everywhere differentiable and satisﬁes x(t) −
+x(s) =
+R t
+s x′(r)dr for all s < t.
+4
+
+The expression of the velocity involves a projection because gradient ﬂows select subgradients
+of minimal norm [29]. We have denoted by R′(f) ∈F the gradient of R at f ∈F and by
+∂jΦ(u) ∈F the differential dΦu applied to the j-th vector of the canonical basis of Rd. Note
+that [˜vt(ui)]m
+i=1 is (minus) the gradient of the ﬁrst term in (4) : when V is differentiable, we have
+vt(u) = ˜vt(u) −∇V (u) and we recover the classical gradient of (4). When V is non-smooth, this
+gradient ﬂow can be understood as a continuous-time version of the forward-backward minimization
+algorithm [11].
+2.3
+Wasserstein gradient ﬂow
+The fact that the velocity of each particle can be expressed as the evaluation of a velocity ﬁeld (Eq. (5))
+makes it easy, at least formally, to generalize the particle gradient ﬂow to arbitrary measure-valued
+initializations—not just atomic ones. On the one hand, the evolution of a time-dependent measure
+(µt)t under the action of instantaneous velocity ﬁelds (vt)t≥0 can be formalized by a conservation
+of mass equation, known as the continuity equation, that reads ∂tµt = −div(vtµt) where div is the
+divergence operator3 (see Appendix B). On the other hand, there is a direct link between the velocity
+ﬁeld (5) and the functional F. The differential of F evaluated at µ ∈M(Ω) is represented by the
+function F ′(µ) : Ω→R deﬁned as
+F ′(µ)(u) :=
+
+R′
+Z
+Φdµ
+
+, Φ(u)
+
++ V (u).
+Thus vt is simply a ﬁeld of (minus) subgradients of F ′(µm,t)—it is in fact the ﬁeld of minimal norm
+subgradients. We write this relation vt ∈−∂F ′(µm,t). The set ∂F ′ is called the Wasserstein subdif-
+ferential of F, as it can be interpreted as the subdifferential of F relatively to the Wasserstein metric
+on P2(Ω) (see Appendix B.2.1). We thus expect that for initializations with arbitrary probability
+distributions, the generalization of the gradient ﬂow coindices with the following object.
+Deﬁnition 2.4 (Wasserstein gradient ﬂow). A Wasserstein gradient ﬂow for the functional F on a time
+interval [0, T[ is an absolutely continuous path (µt)t∈[0,T [ in P2(Ω) that satisﬁes, distributionally on
+[0, T[ × Ωd,
+∂tµt = −div(vtµt)
+where
+vt ∈−∂F ′(µt).
+(6)
+This is a proper generalization of Deﬁnition 2.2 since, whenever (u(t))t≥0 is a particle gradient
+ﬂow for Fm, then t 7→µm,t := 1
+m
+Pm
+i=1 δui(t) is a Wasserstein gradient ﬂow for F in the sense of
+Deﬁnition 2.4 (see Proposition B.1). By leveraging the abstract theory of gradient ﬂows developed
+in [3], we show in Appendix B.2.1 that these Wasserstein gradient ﬂows are well-deﬁned.
+Proposition 2.5 (Existence and uniqueness). Under Assumptions 2.1, if µ0 ∈P2(Ω) is concentrated
+on a set Qr0 ⊂Ω, then there exists a unique Wasserstein gradient ﬂow (µt)t≥0 for F starting from µ0.
+It satisﬁes the continuity equation with the velocity ﬁeld deﬁned in (5) (with µt in place of µm,t).
+Note that the condition on the initialization is automatically satisﬁed in Proposition 2.3 because there
+the initial measure has a ﬁnite discrete support: it is thus contained in any Qr for r > 0 large enough.
+2.4
+Many-particle limit
+We now characterize the many-particle limit of classical gradient ﬂows, under Assumptions 2.1.
+Theorem 2.6 (Many-particle limit). Consider (t 7→um(t))m∈N a sequence of classical gradient
+ﬂows for Fm initialized in a set Qr0 ⊂Ω. If µm,0 converges to some µ0 ∈P2(Ω) for the Wasserstein
+distance W2, then (µm,t)t converges, as m →∞, to the unique Wasserstein gradient ﬂow of F
+starting from µ0.
+Given a measure µ0 ∈P2(Qr0), an example for the sequence um(0) is um(0) = (u1, . . . , um)
+where u1, u2, . . . , um are independent samples distributed according to µ0. By the law of large
+numbers for empirical distributions, the sequence of empirical distributions µm,0 =
+1
+m
+Pm
+i=1 δui
+converges (almost surely, for W2) to µ0. In particular, our proof of Theorem 2.6 gives an alternative
+proof of the existence claim in Proposition 2.5 (the latter remains necessary for the uniqueness of the
+limit).
+3For a smooth vector ﬁeld E = (Ei)d
+i=1 : Rd →Rd, its divergence is given by div(E) = Pd
+i=1 ∂Ei/∂xi.
+5
+
+3
+Convergence to global minimizers
+3.1
+General idea
+As can be seen from Deﬁnition 2.4, a probability measure µ ∈P2(Ω) is a stationary point of a
+Wasserstein gradient ﬂow if and only if 0 ∈∂F ′(µ)(u) for µ-a.e. u ∈Ω. It is proved in [25] that
+these stationary points are, in some cases, optimal over probabilities that have a smaller support.
+However, they are not in general global minimizers of F over M+(Ω), even when R is convex. Such
+global minimizers are indeed characterized as follows.
+Proposition 3.1 (Minimizers). Assume that R is convex. A measure µ ∈M+(Ω) such that F(µ) <
+∞minimizes F on M+(Ω) iff F ′(µ) ≥0 and F ′(µ)(u) = 0 for µ-a.e. u ∈Ω.
+Despite these strong differences between stationarity and global optimality, we show in this section
+that Wasserstein gradient ﬂows converge to global minimizers, under two main conditions:
+• On the structure: Φ and V must share a homogeneity direction (see Section 2.1 for the
+deﬁnition of homogeneity), and
+• On the initialization: the support of the initialization of the Wasserstein gradient ﬂow
+satisﬁes a “separation” property. This property is preserved throughout the dynamic and,
+combined with homogeneity, allows to escape from neighborhoods of non-optimal points.
+We turn these general ideas into concrete statements for two cases of interest, that exhibit different
+structures and behaviors: (i) when Φ and V are positively 2-homogeneous and (ii) when Φ and V are
+positively 1-homogeneous with respect to one variable.
+3.2
+The 2-homogeneous case
+In the 2-homogeneous case a rich structure emerges, where the (d−1)-dimensional sphere Sd−1 ⊂Rd
+plays a special role. This covers the case of lifted problems of Section 2.1 when φ is 1-homogeneous
+and neural networks with ReLU activation functions.
+Assumptions 3.2. The domain is Ω= Rd with d ≥2 and Φ is differentiable with dΦ locally
+Lipschitz, V is semiconvex and V and Φ are both positively 2-homogeneous. Moreover,
+(i) (smooth convex loss) The loss R is convex, differentiable with differential dR Lipschitz on
+bounded sets and bounded on sublevel sets,
+(ii) (Sard-type regularity) For all f ∈F, the set of regular values4 of θ ∈Sd−1 7→⟨f, Φ(θ)⟩+V (θ)
+is dense in its range (it is in fact sufﬁcient that this holds for functions f which are of the form
+f = R′(
+R
+Φdµ) for some µ ∈M+(Ω)).
+Taking the balls of radius r > 0 as the family (Qr)r>0, these assumptions imply Assumptions 2.1.
+We believe that Assumption 3.2-(ii) is not of practical importance: it is only used to avoid some
+pathological cases in the proof of Theorem 3.3. By applying Morse-Sard’s lemma [1], it is anyways
+fulﬁlled if the function in question is d −1 times continuously differentiable. We now state our ﬁrst
+global convergence result. It involves a condition on the initialization, a separation property, that can
+only be satisﬁed in the many-particle limit. In an ambient space Ω, we say that a set C separates the
+sets A and B if any continuous path in Ωwith endpoints in A and B intersects C.
+Theorem 3.3. Under Assumptions 3.2, let (µt)t≥0 be a Wasserstein gradient ﬂow of F such that,
+for some 0 < ra < rb, the support of µ0 is contained in B(0, rb) and separates the spheres raSd−1
+and rbSd−1. If (µt)t converges to µ∞in W2, then µ∞is a global minimizer of F over M+(Ω). In
+particular, if (um(t))m∈N,t≥0 is a sequence of classical gradient ﬂows initialized in B(0, rb) such
+that µm,0 converges weakly to µ0 then (limits can be interchanged)
+lim
+t,m→∞F(µm,t) =
+min
+µ∈M+(Ω) F(µ).
+A proof and stronger statements are presented in Appendix C. There, we give a criterion for Wasser-
+stein gradient ﬂows to escape neighborhoods of non-optimal measures—also valid in the ﬁnite-particle
+4For a function g : Θ →R, a regular value is a real number α in the range of g such that g−1(α) is included
+in an open set where g is differentiable and where dg does not vanish.
+6
+
+setting—and then show that it is always satisﬁed by the ﬂow deﬁned above. We also weaken the
+assumption that µt converges: we only need a certain projection of µt to converge weakly. Finally,
+the fact that limits in m and t can be interchanged is not anecdotal: it shows that the convergence is
+not conditioned on a relative speed of growth of both parameters.
+This result might be easier to understand by drawing an informal distinction between (i) the structural
+assumptions which are instrumental and (ii) the technical conditions which have a limited practical
+interest. The initialization and the homogeneity assumptions are of the ﬁrst kind. The Sard-type
+regularity is in contrast a purely technical condition: it is generally hard to check and known counter-
+examples involve artiﬁcial constructions such as the Cantor function [37]. Similarly, when there is
+compactness, a gradient ﬂow that does not converge is an unexpected (in some sense adversarial)
+behavior, see a counter-example in [2]. We were however not able to exclude this possibility under
+interesting assumptions (see a discussion in Appendix C.5).
+3.3
+The partially 1-homogeneous case
+Similar results hold in the partially 1-homogeneous setting, which covers the lifted problems of
+Section 2.1 when φ is bounded (e.g., sparse deconvolution and neural networks with sigmoid
+activation).
+Assumptions 3.4. The domain is Ω= R × Θ with Θ ⊂Rd−1, Φ(w, θ) = w · φ(θ) and V (w, θ) =
+|w| ˜V (θ) where φ and ˜V are bounded, differentiable with Lipschitz differential. Moreover,
+(i) (smooth convex loss) The loss R is convex, differentiable with differential dR Lipschitz on
+bounded sets and bounded on sublevel sets,
+(ii) (Sard-type regularity) For all f ∈F, the set of regular values of gf : θ ∈Θ 7→⟨f, φ(θ)⟩+ ˜V (θ)
+is dense in its range, and
+(iii) (boundary conditions) The function φ behaves nicely at the boundary of the domain: either
+(a) Θ = Rd−1 and for all f ∈F, θ ∈Sd−2 7→gf(rθ) converges, uniformly in C1(Sd−2) as
+r →∞, to a function satisfying the Sard-type regularity, or
+(b) Θ is the closure of an bounded open convex set and for all f ∈F, gf satisﬁes Neumann
+boundary conditions (i.e., for all θ ∈∂Θ, d(gf)θ(⃗nθ) = 0 where ⃗nθ ∈Rd−1 is the normal
+to ∂Θ at θ).
+With the family of nested sets Qr := [−r, r] × Θ, r > 0, these assumptions imply Assumptions 2.1.
+The following theorem mirrors the statement of Theorem 3.3, but with a different condition on the
+initialization. The remarks after Theorem 3.3 also apply here.
+Theorem 3.5. Under Assumptions 3.4, let (µt)t≥0 be a Wasserstein gradient ﬂow of F such that
+for some r0 > 0, the support of µ0 is contained in [−r0, r0] × Θ and separates {−r0} × Θ from
+{r0} × Θ. If (µt)t converges to µ∞in W2, then µ∞is a global minimizer of F over M+(Ω). In
+particular, if (um(t))m∈N,t≥0 is a sequence of classical gradient ﬂows initialized in [−r0, r0] × Θ
+such that µm,0 converges to µ0 in W2 then (limits can be interchanged)
+lim
+t,m→∞F(µm,t) =
+min
+µ∈M+(Ω) F(µ).
+4
+Case studies and numerical illustrations
+In this section, we apply the previous abstract statements to speciﬁc examples and show on synthetic
+experiments that the particle-complexity to reach global optimality is very favorable.
+4.1
+Sparse deconvolution
+For sparse deconvolution, it is typical to consider a signal y ∈F := L2(Θ) on the d-torus Θ = Rd/Zd.
+The loss function is R(f) = (1/2λ)∥y −f∥2
+L2 for some λ > 0, a parameter that increases with the
+noise level and the regularization is V (w, θ) = |w|. Consider a ﬁlter impulse response ψ : Θ →R and
+let Φ(w, θ) : x 7→w · ψ(x −θ). The object sought after is a signed measure on Θ, which is obtained
+from a probability measure on R × Θ by applying a operator deﬁned by h1(µ)(B) =
+R
+R wdµ(w, B)
+for all measurable B ⊂Θ. We show in Appendix D that Theorem 3.5 applies.
+7
+
+Proposition 4.1 (Sparse deconvolution). Assume that the ﬁlter impulse response ψ is min{2, d}
+times continuously differentiable, and that the support of µ0 contains {0} × Θ. If the projection
+(h1(µt))t of the Wasserstein gradient ﬂow of F weakly converges to ν ∈M(Θ), then ν is a global
+minimizer of
+min
+µ∈M(Θ)
+1
+2λ
+y −
+R
+ψdµ
+2
+L2 + |µ|(Θ).
+We show an example of such a reconstruction on the 1-torus on Figure 1, where the ground truth
+consists of m0 = 5 weighted spikes, ψ is an ideal low pass ﬁlter (a Dirichlet kernel of order 7)
+and y is a noisy observation of the ﬁltered spikes. The particle gradient ﬂow is integrated with the
+forward-backward algorithm [11] and the particles initialized on a uniform grid on {0} × Θ.
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+2
+1
+0
+1
+2
+particle gradient flow
+limit of the flow
+optimal positions
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+2
+1
+0
+1
+2
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+2
+1
+0
+1
+2
+Figure 1: Particle gradient ﬂow for sparse deconvolution on the 1-torus (horizontal axis shows
+positions, vertical axis shows weights). Failure to ﬁnd a minimizer with 6 particles, success with 10
+and 100 particles (an animated plot of this particle gradient ﬂow can be found in Appendix D.5).
+4.2
+Neural networks with a single hidden layer
+We consider a joint distribution of features and labels ρ ∈P(Rd−2 × R) and ρx ∈P(Rd−2) the
+marginal distribution of features. The loss is the expected risk R(f) =
+R
+ℓ(f(x), y)dρ(x, y) deﬁned
+on F = L2(ρx), where ℓ: R × R →R+ is either the squared loss or the logistic loss. Also, we set
+Φ(w, θ) : x 7→wσ(Pd−2
+i=1 θixi + θd−1) for an activation function σ : R →R. Depending on the
+choice of σ, we face two different situations.
+Sigmoid activation.
+If σ is a sigmoid, say σ(s) = (1 + e−s)−1, then Theorem 3.5, with domain
+Θ = Rd−1 applies. The natural (optional) regularization term is V (w, θ) = |w|, which amounts to
+penalizing the ℓ1 norm of the weights.
+Proposition 4.2 (Sigmoid activation). Assume that ρx has ﬁnite moments up to order min{4, 2d−2},
+that the support of µ0 is {0} × Θ and that boundary condition 3.4-(iii)-(a) holds. If the Wasserstein
+gradient ﬂow of F converges in W2 to µ∞, then µ∞is a global minimizer of F.
+Note that we have to explicitly assume the boundary condition 3.4-(iii)-(a) because the Sard-type
+regularity at inﬁnity cannot be checked a priori (this technical detail is discussed in Appendix D.3).
+ReLU activation.
+The activation function σ(s) = max{0, s} is positively 1-homogeneous: this
+makes Φ 2-homogeneous and corresponds, at a formal level, to the setting of Theorem 3.3. An
+admissible choice of regularizer here would be the (semi-convex) function V (w, θ) = |w| · |θ| [4].
+However, as shown in Appendix D.4, the differential dΦ has discontinuities: this prevents altogether
+from deﬁning gradient ﬂows, even in the ﬁnite-particle regime.
+Still, a statement holds for a different parameterization of the same class of functions, which makes Φ
+differentiable. To see this, consider a domain Θ which is the disjoint union of 2 copies of Rd. On the
+ﬁrst copy, deﬁne Φ(θ) : x 7→σ(Pd−1
+i=1 s(θi)xi + s(θd)) where s(θi) = θi|θi| is the signed square
+function. On the second copy, Φ has the same deﬁnition but with a minus sign. This trick allows to
+have the same expression power than classical ReLU networks. In practice, it corresponds to simply
+putting, say, random signs in front of the activation. The regularizer here can be V (θ) = |θ|2.
+Proposition 4.3 (Relu activation). Assume that ρx ∈P(Rd−1) has ﬁnite second moments, that the
+support of µ0 is r0Sd−1 for some r0 > 0 (on both copies of Rd) and that the Sard-type regularity
+8
+
+Assumption 3.2-(ii) holds. If the Wasserstein gradient ﬂow of F converges in W2 to µ∞, then µ∞is a
+global minimizer of F.
+We display on Figure 2 particle gradient ﬂows for training a neural network with a single hidden
+layer and ReLU activation in the classical (non-differentiable) parameterization, with d = 2 (no
+regularization). Features are normally distributed, and the ground truth labels are generated with a
+similar network with m0 = 4 neurons. The particle gradient ﬂow is “integrated” with mini-batch
+SGD and the particles are initialized on a small centered sphere.
+2
+1
+0
+1
+2
+3
+2
+1
+0
+1
+2
+particle gradient flow
+optimal positions
+limit measure
+2
+1
+0
+1
+2
+3
+2
+1
+0
+1
+2
+2
+1
+0
+1
+2
+3
+2
+1
+0
+1
+2
+Figure 2: Training a neural network with ReLU activation. Failure with 5 particles (a.k.a. neurons),
+success with 10 and 100 particles. We show the trajectory of |w(t)| · θ(t) ∈R2 for each particle (an
+animated plot of this particle gradient ﬂow can be found in Appendix D.5).
+4.3
+Empirical particle-complexity
+Since our convergence results are non-quantitative, one might argue that similar—and much simpler
+to prove—asymptotical results hold for the method of distributing particles on the whole of Θ
+and simply optimizing on the weights, which is a convex problem. Yet, the comparison of the
+particle-complexity shown in Figure 3 stands strongly in favor of particle gradient ﬂows. While
+exponential particle-complexity is unavoidable for the convex approach, we observed on several
+synthetic problems that particle gradient descent only needs a slight over-parameterization m > m0
+to ﬁnd global minimizers within optimization error (see details in Appendix D.5).
+Excess loss at convergence
+100
+101
+102
+5
+4
+3
+2
+1
+00
+01
+(a) Sparse deconvolution (d = 1)
+101
+102
+6
+5
+4
+3
+2
+1
+00
+particle gradient flow
+convex minimization
+below optim. error
+m0
+(b) ReLU activation (d = 100)
+101
+102
+5
+4
+3
+2
+1
+00
+(c) Sigmoid activation (d = 100)
+Figure 3: Comparison of particle-complexity for particle gradient ﬂow and convex minimization on a
+ﬁxed grid: excess loss at convergence vs. number of particles. Simplest minimizer has m0 particles.
+5
+Conclusion
+We have established asymptotic global optimality properties for a family of non-convex gradient
+ﬂows. These results were enabled by the study of a Wasserstein gradient ﬂow: this object simpliﬁes
+the handling of many-particle regimes, analogously to a mean-ﬁeld limit. The particle-complexity
+to reach global optimality turns out very favorable on synthetic numerical problems. This conﬁrms
+the relevance of our qualitative results and calls for quantitative ones that would further exploit the
+properties of such particle gradient ﬂows. Multiple layer neural networks are also an interesting
+avenue for future research.
+9
+
+Acknowledgments
+We acknowledge supports from grants from Région Ile-de-France and the European Research Council
+(grant SEQUOIA 724063).
+References
+[1] Ralph Abraham and Joel Robbin. Transversal mappings and ﬂows. WA Benjamin New York,
+1967.
+[2] Pierre-Antoine Absil, Robert Mahony, and Benjamin Andrews. Convergence of the iterates of
+descent methods for analytic cost functions. SIAM Journal on Optimization, 16(2):531–547,
+2005.
+[3] Luigi Ambrosio, Nicola Gigli, and Giuseppe Savaré. Gradient ﬂows: in metric spaces and in
+the space of probability measures. Springer Science & Business Media, 2008.
+[4] Francis Bach. Breaking the curse of dimensionality with convex neural networks. Journal of
+Machine Learning Research, 18(19):1–53, 2017.
+[5] Adrien Blanchet and Jérôme Bolte. A family of functional inequalities: Łojasiewicz inequalities
+and displacement convex functions. arXiv preprint arXiv:1612.02619, 2016.
+[6] Nicholas Boyd, Geoffrey Schiebinger, and Benjamin Recht. The alternating descent conditional
+gradient method for sparse inverse problems. SIAM Journal on Optimization, 27(2):616–639,
+2017.
+[7] Kristian Bredies and Hanna Katriina Pikkarainen. Inverse problems in spaces of measures.
+ESAIM: Control, Optimisation and Calculus of Variations, 19(1):190–218, 2013.
+[8] Felix E. Browder. Fixed point theory and nonlinear problems. Proc. Sym. Pure. Math, 39:49–88,
+1983.
+[9] Paul Catala, Vincent Duval, and Gabriel Peyré. A low-rank approach to off-the-grid sparse
+deconvolution. Journal of Physics: Conference Series, 904(1):012015, 2017.
+[10] Donald L. Cohn. Measure theory, volume 165. Springer, 1980.
+[11] Patrick L. Combettes and Jean-Christophe Pesquet. Proximal splitting methods in signal
+processing. In Fixed-point algorithms for inverse problems in science and engineering, pages
+185–212. Springer, 2011.
+[12] Yohann De Castro and Fabrice Gamboa. Exact reconstruction using Beurling minimal extrapo-
+lation. Journal of Mathematical Analysis and applications, 395(1):336–354, 2012.
+[13] Vincent Duval and Gabriel Peyré. Exact support recovery for sparse spikes deconvolution.
+Foundations of Computational Mathematics, 15(5):1315–1355, 2015.
+[14] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning. MIT Press, 2016.
+[15] Suriya Gunasekar, Blake E. Woodworth, Srinadh Bhojanapalli, Behnam Neyshabur, and Nati
+Srebro. Implicit regularization in matrix factorization. In Advances in Neural Information
+Processing Systems 30, 2017.
+[16] Benjamin D. Haeffele and René Vidal. Global optimality in neural network training. In
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, pages
+7331–7339, 2017.
+[17] Daniel Hauer and José Mazón. Kurdyka-Łojasiewicz-Simon inequality for gradient ﬂows in
+metric spaces. arXiv preprint arXiv:1707.03129, 2017.
+[18] Simon Haykin. Neural Networks: A Comprehensive Foundation. Prentice Hall, 1994.
+[19] Martin Jaggi. Revisiting Frank-Wolfe: Projection-free sparse convex optimization. In Proceed-
+ings of the International Conference on Machine Learning (ICML), 2013.
+[20] Michel Journée, Francis Bach, P-A Absil, and Rodolphe Sepulchre. Low-rank optimization on
+the cone of positive semideﬁnite matrices. SIAM Journal on Optimization, 20(5):2327–2351,
+2010.
+[21] Harold Kushner and G. George Yin. Stochastic approximation and recursive algorithms and
+applications, volume 35. Springer Science & Business Media, 2003.
+10
+
+[22] Jean-Bernard Lasserre. Moments, positive polynomials and their applications, volume 1. World
+Scientiﬁc, 2010.
+[23] Yuanzhi Li and Yang Yuan. Convergence analysis of two-layer neural networks with ReLU
+activation. In Advances in Neural Information Processing Systems, pages 597–607, 2017.
+[24] Song Mei, Andrea Montanari, and Phan-Minh Nguyen. A mean ﬁeld view of the landscape of
+two-layer neural networks. Proceedings of the National Academy of Sciences, 115(33):E7665–
+E7671, 2018.
+[25] Atsushi Nitanda and Taiji Suzuki. Stochastic particle gradient descent for inﬁnite ensembles.
+arXiv preprint arXiv:1712.05438, 2017.
+[26] Clarice Poon, Nicolas Keriven, and Gabriel Peyré. A dual certiﬁcates analysis of compressive
+off-the-grid recovery. arXiv preprint arXiv:1802.08464, 2018.
+[27] Ralph T. Rockafellar. Convex Analysis. Princeton University Press, 1997.
+[28] Grant M Rotskoff and Eric Vanden-Eijnden. Neural networks as interacting particle systems:
+Asymptotic convexity of the loss landscape and universal scaling of the approximation error.
+arXiv preprint arXiv:1805.00915, 2018.
+[29] Filippo Santambrogio. Optimal transport for applied mathematicians. Birkäuser, NY, 2015.
+[30] Filippo Santambrogio. {Euclidean, metric, and Wasserstein} gradient ﬂows: an overview.
+Bulletin of Mathematical Sciences, 7(1):87–154, 2017.
+[31] Damien Scieur, Vincent Roulet, Francis Bach, and Alexandre d’Aspremont. Integration methods
+and optimization algorithms. In Advances in Neural Information Processing Systems, pages
+1109–1118, 2017.
+[32] Justin Sirignano and Konstantinos Spiliopoulos. Mean ﬁeld analysis of neural networks. arXiv
+preprint arXiv:1805.01053, 2018.
+[33] Mahdi Soltanolkotabi, Adel Javanmard, and Jason D. Lee. Theoretical insights into the optimiza-
+tion landscape of over-parameterized shallow neural networks. arXiv preprint arXiv:1707.04926,
+2017.
+[34] Daniel Soudry and Elad Hoffer. Exponentially vanishing sub-optimal local minima in multilayer
+neural networks. arXiv preprint arXiv:1702.05777, 2017.
+[35] Luca Venturi, Afonso Bandeira, and Joan Bruna. Neural networks with ﬁnite intrinsic dimension
+have no spurious valleys. arXiv preprint arXiv:1802.06384, 2018.
+[36] Chu Wang, Yingfei Wang, Robert Schapire, et al. Functional Frank-Wolfe boosting for general
+loss functions. arXiv preprint arXiv:1510.02558, 2015.
+[37] Hassler Whitney et al. A function not constant on a connected set of critical points. Duke
+Mathematical Journal, 1(4):514–517, 1935.
+11
+
+Supplementary material
+Supplementary material for the paper: “On the Global Convergence of Gradient Descent for Over-
+parameterized Models using Optimal Transport” authored by Lénaïc Chizat and Francis Bach (NIPS
+2018).
+This appendix is organized as follows:
+• Appendix A: Introductory facts
+• Appendix B: Many-particle limit and Wasserstein gradient ﬂow
+• Appendix C: Convergence to global minimizers
+• Appendix D: Case studies and numerical experiments
+A
+Introductory facts
+A.1
+Tools from measure theory
+In this paper, the term measure refers to a ﬁnite signed measure on Rd, d ≥1, endowed with its Borel
+σ-algebra. We write M(X) for the set of such measures concentrated on a measurable set X ⊂Rd.
+Hereafter, we gather some concepts and facts from measure theory that are used in the proofs.
+Variation of a signed measure.
+The Jordan decomposition theorem [10, Cor. 4.1.6] asserts that any
+ﬁnite signed measure µ ∈M(Rd) can be decomposed as µ = µ+ −µ−where µ+, µ−∈M+(Rd).
+If µ+ and µ−are chosen with minimal total mass, the variation of µ is the nonnegative measure
+|µ| := µ+ + µ−and |µ|(Rd) is the total variation norm of µ.
+Support and concentration set.
+The support spt µ of a measure µ ∈M+(Rd) is the complement
+of the largest open set of measure 0, or, equivalently, the set of points which neighborhoods have
+positive measure. We say that µ is concentrated on a set S ⊂Rd if the complement of S is included
+in a measurable set of measure 0. In particular, µ is concentrated on spt µ.
+Pushforward.
+Let X and Y be measurable subsets of Rd and let T : X →Y be a measurable map.
+To any measure µ ∈M(X) corresponds a measure T#µ ∈M(Y ) called the pushfoward of µ by T. It
+is deﬁned as T#µ(B) = µ(T −1(B)) for all measurable set B ⊂Y and corresponds to the distribution
+of the “mass" of µ after it has been displaced by the map T. It satisﬁes
+R
+Y ϕ d(T#µ) =
+R
+X ϕ ◦T dµ
+whenever ϕ : Y →R is a measurable function such that ϕ ◦T is µ-integrable [10, Prop. 2.6.8]. In
+particular, with a projection map πi : (x1, x2, . . . ) 7→xi, the pushforward πi
+#µ is the marginal of µ
+on the i-th factor.
+Weak convergence and Bounded Lipschitz norm.
+We say that a sequence of measures µn ∈
+M(Rd) weakly (or narrowly) converges to µ if, for all continuous and bounded function ϕ : Rd →R
+it holds
+R
+ϕdµn →
+R
+ϕdµ. For sequences which are bounded in total variation norm, this is
+equivalent to the convergence in Bounded Lipschitz norm. The latter is deﬁned, for µ ∈M(Rd), as
+∥µ∥BL := sup
+Z
+ϕ dµ ; ϕ : Rd →R, Lip(ϕ) ≤1, ∥ϕ∥∞≤1
+
+(7)
+where Lip(ϕ) is the smallest Lipschitz constant of ϕ and ∥· ∥∞the supremum norm.
+Wasserstein metric.
+The p-Wasserstein distance between two probability measures µ, ν ∈P(Rd)
+is deﬁned as
+Wp(µ, ν) :=
+
+min
+Z
+|y −x|pdγ(x, y)
+1/p
+where the minimization is over the set of probability measures γ ∈P(Rd×Rd) such that the marginal
+on the ﬁrst factor Rd is µ and is ν on the second factor. The set of probability measures with ﬁnite
+second moments endowed with the metric W2 is a complete metric space that we denote P2(Rd).
+A sequence (µm)m converges in P2(Rd) iff for all continuous function ϕ : Rd →R with at most
+12
+
+quadratic growth it holds
+R
+ϕdµm →
+R
+ϕdµ [3, Prop. 7.1.5] (this is stronger than weak convergence).
+Using, respectively, the duality formula for W1 [29, Eq. (3.1)] and Jensen’s inequality, it holds
+∥µ −ν∥BL ≤W1(µ, ν) ≤W2(µ, ν).
+Note that the functional of interest in this article is continuous for the Wasserstein metric. This strong
+regularity is rather rare in the study of Wasserstein gradient ﬂows.
+Lemma A.1 (Wasserstein continuity of F). Under Assumptions 2.1, the function F is continuous for
+the Wasserstein metric W2.
+Proof. Let (µm)m, µ ∈P2(Ω) be such that W2(µm, µ) →0. By Assumption 2.1-(iii)-(c), ∥Φ∥
+and |V | have at most quadratic growth. It follows
+R
+V dµm →
+R
+V dµ and since, by the properties
+of Bochner integrals [10, Prop. E.5], it holds ∥
+R
+Φdµm −
+R
+Φdµ∥≤
+R
+∥Φ∥d(µm −µ), we also
+have
+R
+Φdµm →
+R
+Φdµ strongly in F. As R is continuous in the strong topology of F, it follows
+F(µm) →F(µ).
+A.2
+Lifting to the space of probability measures
+Let us give technical details about the lifting introduced in Section 2.1 that allows to pass from a
+problem on the space of signed measures on Θ ⊂Rd−1 (the minimization of J deﬁned in (1)) to an
+equivalent problem on the space of probability measures on a bigger space Ω⊂Rd (the minimization
+of F deﬁned in (3)).
+Homogeneity.
+We recall that a function f from Rd to a vector space is said positively p-
+homogeneous, with p ≥0 if for all u ∈Rd and λ > 0 it holds f(λu) = λpf(u). We often
+use without explicit mention the properties related to homogeneity such as the fact that the (sub)-
+derivative of a positively p-homogeneous function is positively (p −1)-homogeneous and, for f
+differentiable (except possibly at 0), the identity u · ∇f(u) = pf(u) for u ̸= 0.
+A.2.1
+The partially 1-homogeneous case
+We take Ω:= R × Θ, Φ(w, θ) = w · φ(θ) and V (w, θ) = |w| ˜V (θ) for some continuous functions
+φ : Θ →F and ˜V : Θ →R+. This setting covers the lifted problems mentioned in Section 2.1.
+We ﬁrst show that F can be indifferently minimized over M+(Ω) or over P(Ω), thanks to the
+homogeneity of Φ and V in the variable w.
+Proposition A.2. For all µ ∈M+(Ω), there is ν ∈P(Ω) such that F(µ) = F(ν).
+Proof. If |µ|(Ω) = 0 then F(µ) = 0 = F(δ(0,θ0) where θ0 is any point in Θ. Otherwise, we deﬁne
+the map T : (w, θ) 7→(|µ|(Ω) · w, θ) and the probability measure ν := T#(µ/|µ|(Ω)) ∈P(Ω),
+which satisﬁes F(ν) = F(µ).
+We now introduce a projection operator h1 : M+(Ω) →M(Θ) that is adapted to the partial
+homogeneity of Φ and V . It is deﬁned by h1(µ)(B) =
+R
+R wµ(dw, B) for all µ ∈P(Ω) and
+measurable set B ⊂Θ or, equivalently, by the property that for all continuous and bounded test
+function ϕ : Θ →R,
+Z
+Θ
+ϕ(θ)dh1(µ)(θ) =
+Z
+R×Θ
+wϕ(θ)dµ(w, θ).
+This operator is well deﬁned whenever (w, θ) 7→w is µ-integrable.
+Proposition A.3 (Equivalence under lifting). It holds M(Θ) ⊂h1(P(Ω)) = h1(M+(Ω)). For
+a regularizer G on M(Θ) of the form G(µ) = infν∈h−1(µ)
+R
+ΩV dν, it holds infν∈M(Θ) J(ν) =
+infµ∈M+(Ω) F(µ). If the inﬁmum deﬁning G is attained and if ν ∈M(Θ) minimizes J, then there
+exists µ ∈h−1(ν) that minimizes F over M+(Ω).
+Proof. A signed measure ν ∈M(Θ) can be expressed as ν = fσ where σ ∈P(Θ) and f : Θ →
+R ∈L1(σ) (take for instance σ the normalized variation of µ if |µ|(Θ) > 0). The measure
+µ := (f × id)#σ
+(8)
+13
+
+belongs to P(Ω) and satisﬁes h1(ν) = µ. This proves that h1(P(Ω)) is surjective. It is clear by the
+deﬁnition of h1 that for all µ ∈h−1(ν), it holds
+R
+Φ dµ =
+R
+φ dν hence F(µ) ≥J(ν), with equality
+when µ is the minimizer in the deﬁnition of G.
+The class of regularizer considered in Proposition A.3 includes the total variation norm.
+Proposition A.4 (Total variation). Let V (w, θ) = |w|. For µ ∈M(Θ), it holds
+R
+V dµ ≥|h1(µ)|(Θ)
+with equality if, for instance, µ is a lift of h1(µ) of the form (8).
+Proof. Let µ ∈P(Ω) and ν = h1(µ). We deﬁne ˜ν+ :=
+R
+R+ w µ(w, ·) and ˜ν−:= −
+R
+R−w µ(w, ·).
+Clearly, ν = ˜ν+ −˜ν−and by the deﬁnition of the total variation of a signed measure, |ν|(Θ) =
+|ν+|(Θ) + |ν−|(Θ) ≤|˜ν+|(Θ) + |˜ν−|(Θ) =
+R
+V dµ. There is equality whenever spt ˜ν+ ∩spt ˜ν−
+has |ν|-measure 0 (see [10, Cor. 4.1.6]), a condition which is satisﬁed by the lift in (8).
+A.2.2
+The 2-homogeneous case
+Another structure that is studied in this paper is when Φ and V are deﬁned on Rd and are positively
+2-homogeneous. In this case, the role played by Θ is the previous section is played by the unit
+sphere Sd−1 of Rd. We could again make links between F (deﬁned as in Eq. (3)) and a functional on
+nonnegative measures on the sphere (playing the role of J) but here we will limit ourselves to deﬁning
+the projection operator relevant in this setting. It is h2 : M+(Rd) →M+(Sd−1) characterized
+by the relationship, for all continuous and bounded function ϕ : Sd−1 →R (with the convention
+φ(0/0) = 0):
+Z
+Sd−1 ϕ(θ)dh2(µ)(θ) =
+Z
+Rd |u|2ϕ(u/|u|)dµ(u).
+This operator is well-deﬁned iff µ has ﬁnite second order moments.
+B
+Many-particle limit and Wasserstein gradient ﬂow
+B.1
+Proof of Proposition 2.3
+As the sum of a continuously differentiable and a semiconvex function, Fm is locally semiconvex and
+the existence of a unique gradient ﬂow on a maximal interval [0, T[ with the claimed properties is
+standard, see [30, Sec. 2.1]. Now, a general property of gradient ﬂows is that for a.e t ∈R+, u ∈Ω,
+the derivative is (minus) the subgradient of minimal norm. This leads to the explicit formula involving
+the velocity ﬁeld with pointwise minimal norm:
+vt(u) = arg min
+
+|v|2 ; ˜vt(u) −v ∈∂V (u)
+	
+= ˜vt(u) −arg min
+
+|˜vt(u) −z|2 ; z ∈∂V (u)
+	
+= (id −proj∂V (u))(˜vt(u)).
+In the speciﬁc case of gradient ﬂows of lower bounded functions, we can derive estimates that imply
+that T = ∞(even if Fm is not globally semiconvex). Indeed, for all t > 0, it holds
+Fm(u(0)) −Fm(u(t)) = −
+Z t
+0
+d
+dsFm(u(s))ds = 1
+m
+Z t
+0
+|u′(s)|2ds ≥t
+m
+Z t
+0
+|u′(s)|ds
+2
+by Jensen’s inequality. Since Fm is lower bounded, this proves that the gradient ﬂow has bounded
+length on bounded time intervals. By compactness, if T was ﬁnite then u(T) would exist, thus
+contradicting the maximality of T, hence T = ∞and the gradient ﬂow is globally deﬁned.
+B.2
+Link between classical and Wasserstein gradient ﬂows
+We ﬁrst give a rigorous deﬁnition of the continuity equation which appear in the deﬁnition of
+Wasserstein gradient ﬂows (Deﬁnition 2.4).
+14
+
+Continuity equation.
+Considerations from ﬂuid mechanics suggest that if a time dependent dis-
+tribution of mass (µt)t is displaced under the action of a velocity ﬁeld (vt)t, then the continuity
+equation is satisﬁed: ∂tµt = −div(vtµt). For distributions which do not have a smooth density,
+this equation should be understood distributionally, which means that for all smooth test functions
+ϕ : ]0, ∞[×Rd with compact support, it holds
+Z ∞
+0
+Z
+Rd (∂tϕt(u) + ∇uϕt(u) · vt(u)) dµt(u)dt = 0.
+The integrability condition
+R t0
+0
+R
+Rd |vt(u)|dµ(u)dt < ∞for all t0 < T should also hold.
+As we show now, there is a precise link between classical and Wasserstein gradient ﬂow (Deﬁni-
+tions 2.2 and 2.4). This is a simple result but might be instructive for readers who are not familiar
+with the concept of distributional solutions of partial differential equations.
+Proposition B.1 (Atomic solutions of Wasserstein gradient ﬂow). If u : R+ →Ωm is a classical
+gradient ﬂow for Fm in the sense of Deﬁnition 2.2, then t 7→µm,t := 1
+m
+Pm
+i=1 δui(t) is a Wasserstein
+gradient ﬂow of F in the sense of Deﬁnition 2.4.
+Proof. Let us call vt the velocity vector ﬁeld deﬁned in (5). In it easy to see that t 7→µm,t is absolutely
+continuous for W2 and for any smooth function with compact support ϕ : ]0, ∞[ × Rd →R, we have
+0 = 1
+m
+m
+X
+i=1
+Z
+R+
+d
+dtϕt(ui(t)) dt
+= 1
+m
+m
+X
+i=1
+Z
+R+
+(∂tϕt(ui(t)) + ∇uϕt(ui(t)) · vt(ui)) dt
+=
+Z
+R+
+Z
+Ω
+(∂tϕt(u) + ∇uϕt(u) · vt(u)) dµm,tdt
+which precisely means that (µm,t)t≥0 is a distributional solution to (6).
+Note that (µm,t)t has the same number of atoms throughout the dynamic. In particular, if no
+minimizer of F is an atomic measure with at most m atoms, then (µm,t)t is guaranteed to not
+converge to a minimizer.
+B.2.1
+Properties of the Wasserstein gradient ﬂow (proof of Proposition 2.5)
+In this section, we use the general theory of Wasserstein gradient ﬂows developed in [3] to prove
+existence and uniqueness of Wasserstein gradient ﬂows as claimed in Proposition 2.5, under Assump-
+tions 2.1. The “existence” part of the proof is in fact redundant with Theorem 2.6 which provides
+with another constructive proof. We recall that F ′(µ) : Ω→R is deﬁned as
+F ′(µ)(u) = ⟨R′(
+R
+Φdµ), Φ(u)⟩+ V (u)
+and that the ﬁeld of subgradients of minimal norm of F ′(µ) has an explicit formula given in (5). Our
+strategy is to use, as an intermediary step, the Wasserstein gradient ﬂows for the family of functionals
+F (r) : P2(Ω) →R deﬁned, for r > 0, as
+F (r)(µ) =
+F(µ)
+if µ(Qr) = 1,
+∞
+otherwise
+where (Qr)r>0 is the nested family of subsets of Rd that appear in Assumptions 2.1. These “localized”
+functionals have nice properties in the Wasserstein geometry, as shown in Lemma B.2. For r > 0,
+we say that γ ∈P(Ω× Ω) is an admissible transport plan if both its marginals are concentrated
+on Qr and have ﬁnite second moments. The transport cost associated to γ is denoted Cp(γ) :=
+R
+|y −x|pdγ(x, y)
+1/p for p ≥1, and we introduce the quantities
+∥dΦ∥∞,r = sup
+u∈Qr
+∥dΦu∥
+LdΦ =
+sup
+u,˜u∈Qr
+u̸=˜u
+∥dΦ˜u −dΦu∥
+|˜u −u|
+∥dR∥∞,r = sup
+f∈Fr
+∥dRf∥
+LdR =
+sup
+f,g∈Fr
+f̸=g
+∥dRf −dRg∥
+∥f −g∥
+15
+
+where Fr := {
+R
+Φdµ ; µ ∈P(Ω), µ(Qr) = 1} is bounded in F. Those quantities are ﬁnite for all
+r > 0 under Assumptions 2.1. For the sake of clarity, we set V = 0 in the next lemma, and focus on
+the loss term, which is a new object of study. The term involving V , well-studied in the theory of
+Wasserstein gradient ﬂows (see [3, Prop. 10.4.2]), is incorporated later.
+Lemma B.2 (Properties of F (r) in Wasserstein geometry). Under Assumptions 2.1, suppose that
+V = 0. For all r > 0, F (r) is proper and continuous for W2 on its closed domain. Moreover,
+(i) there exists λr > 0 such that for all admissible transport plan γ, considering the transport
+interpolation µγ
+t := ((1 −t)π1 + tπ2)#γ, the function t 7→F(µγ
+t ) is differentiable with a
+λrC2
+2(γ)-Lipschitz derivative;
+(ii) for µ concentrated on Qr, a velocity ﬁeld v ∈L2(µ, Rd) satisﬁes, for any admissible transport
+plan γ with ﬁrst marginal µ,
+F(π2
+#γ) ≥F(µ) +
+Z
+v(u) · (˜u −u)dγ(u, ˜u) + o(C2(γ))
+if and only if v(u) ∈∂(F ′(µ) + ιQr)(u) for µ-almost every u ∈Ω, where ιQr is the convex
+function on Ωthat is worth 0 on Qr and ∞outside.
+Proof. First, it is clear that F is proper because F (r)(δu0) = R(Φ(u0)) is ﬁnite whenever u0 ∈Qr.
+It is moreover continuous (see Lemma A.1) on its closed domain {µ ∈P2(Ω) ; µ(Qr) = 1}.
+Proof of (i).
+Let us denote h(t) := F (r)(µγ
+t ). Since dR and dΦ are Lipschitz on Fr and Qr
+respectively, h(t) is differentiable with
+h′(t) = d
+dtF (r)(µγ
+t ) =
+
+R′(
+R
+Φdµγ
+t ),
+R
+dΦ(1−t)x+ty(y −x)dγ(x, y)
+
+.
+In particular, we can differentiate t 7→
+R
+Φdµγ
+t =
+R
+Φ((1 −t)x + ty)dγ(x, y) because all (µγ
+t )t
+are supported on Qr where dΦ is uniformly bounded and Bochner integrals admit a dominated
+convergence theorem [10, Thm. E6]. For 0 ≤t1 < t2 < 1, we have the bounds
+|h′(t2) −h′(t1)| ≤(I) + (II)
+where, one the one hand,
+(I) =
+
+
+
+R′ R
+Φdµt2
+
+−R′ R
+Φdµt1
+
+,
+R
+dΦ(1−t2)x+t2y(y −x)dγ(x, y)
+
+
+
+≤[LdR · ∥dΦ∥∞,r · |t2 −t1| · C1(γ)] · [∥dΦ∥∞,r · C1(γ)]
+≤LdR · ∥dΦ∥2
+∞,r · C2
+2(γ) · |t2 −t1|
+where we used Hölder’s inequality to obtain C2
+1(γ) ≤C2
+2(γ) is the last line. On the other hand,
+(II) =
+
+
+
+R′ R
+Φdµt1
+
+,
+R 
+dΦ(1−t2)x+t2y −dΦ(1−t1)x+t1y
+
+(y −x)dγ(x, y)
+
+
+
+≤LdΦ · ∥dR∥∞,r · C2
+2(γ) · |t2 −t1|.
+As a consequence, h′ is λr · C2
+2(γ) Lipschitz with λr = LdR∥dΦ∥2
+∞,r + LdΦ∥dR∥∞,r. In particular,
+using the notions deﬁned in [3] , F (r) is (−λr)-geodesically semiconvex. Remark that these bounds
+may explode when r goes to inﬁnity: this explains why we work with measures supported on Qr.
+Proof of (ii).
+The proof is similar, with the difference that this property is a local one. We have the
+ﬁrst-order Taylor expansions, for u, ˜u ∈Qr and f, g ∈Fr,
+Φ(˜u) = Φ(u) + dΦ(˜u −u) + M(u, ˜u)
+R(g) = R(f) + ⟨R′(f), g −f⟩+ N(f, g)
+where the remainders M and N satisfy ∥M(u, ˜u)∥≤1
+2LdΦ · |˜u −u|2 and ∥N(f, g)∥≤1
+2LdR ·
+∥g −f∥2. We denote by µ and ν the ﬁrst and second marginals of γ, assume that they are both
+concentrated on Qr, and obtain, by composition, the Taylor expansion
+F (r)(ν) = F (r)(µ) +
+
+R′(
+R
+Φdµ),
+R
+dΦu(˜u −u)dγ(u, ˜u)
+
++ (I) + (II)
+16
+
+where (I) =
+
+R′(
+R
+Φdµ),
+R
+M(u, ˜u)dγ(u, ˜u)
+
+, so
+|(I)| ≤1
+2∥dR∥∞,r · LdΦ · C2
+2(γ) = o(C2(γ))
+and (II) = N(
+R
+Φdµ,
+R
+Φdν), so
+|(II)| ≤1
+2LdR · ∥
+R
+dΦu(˜u −u)dγ(u, ˜u) +
+R
+M(u, ˜u)dγ(u, ˜u)∥2
+≤1
+2LdR ·
+
+∥dΦ∥∞,r · C1(γ) + 1
+2 · LdΦ · C2
+2(γ)
+2
+= o(C2(γ))
+where we used Hölder’s inequality for the bound C2
+1(γ) ≤C2
+2(γ). As a consequence,
+F (r)(ν) = F (r)(µ) +
+Z
+⟨R′(
+R
+Φdµ), dΦu(˜u −u)⟩dγ(u, ˜u) + o(C2(γ))
+and remember that the j-th component of ∇F ′(µ) is u 7→⟨R′(
+R
+Φdµ), dΦu(ej)⟩where ej is the
+j-th vector of the canonical basis of Rd. This completely characterizes a velocity ﬁeld satisfying (ii)
+on the interior of Qr. On the boundary of Qr, there is more freedom in the choice of v(u) since π2
+#γ
+is constrained to be supported on Qr so v(u) −∇F ′(µ)(u) can live in the normal cone of Qr at u,
+which is the set ∂ιQr(u). The condition thus relaxes as v(u) ∈∂(F ′(µ) + ιQr)(u).
+The previous properties are sufﬁcient to guarantee that Wasserstein gradient ﬂows for the functionals
+F (r) are well deﬁned.
+Lemma B.3. Under Assumptions 2.1, there exists a unique Wasserstein gradient ﬂow for F (r)
+starting from any µ0 ∈P2(Ω) concentrated on Qr, i.e. a curve (µ(r)
+t )t≥0, continuous in P2(Ω), that
+solves ∂tµ(r)
+t
++ div(v(r)
+t
+µ(r)
+t ) = 0 where, for all t > 0, v(r)
+t
+(u) ∈∂(F ′(µ(r)
+t )(u) + ιQr(u)) for
+µ(r)
+t -a.e u ∈Ω.
+Proof. It is easy to see that if V is λV -semiconvex, then the function µ 7→
+R
+V dµ is λV semiconvex
+along generalized geodesics (in the sense of [3, Def. 9.2.4], see [3, Prop. 10.4.2]). Combining with
+Lemma B.2-(i), we have that F (r) is (λV −λr)-semiconvex along generalized geodesics. Moreover,
+Lemma B.2-(ii) implies that F (r) admits strong Wasserstein subdifferentials on its domain [3, Def
+10.3.1] and again, it is an easy adaptation to show that (ii) still holds with a potential term. So the
+existence of a unique Wasserstein gradient ﬂow characterized as above is guaranteed by [3, Thm.
+11.2.1].
+We are in position to prove the well-posedness of Wasserstein gradient ﬂows for the original functional
+F. Notice that, by the characterization in Lemma B.3, the Wasserstein gradient ﬂows for the functions
+F (r) all coincide for r > r0 > 0 on [0, T] if µ(2r0)
+t
+is concentrated in Qr0 for all t ∈[0, T]. Our
+strategy is thus simply to make sure that for all time T, such a r0 > 0 exists, i.e. to make sure that
+the support of gradient ﬂows does not grow too fast.
+Proof of Proposition 2.5. Let r0 be such that µ0 is concentrated on Qr0. Given Lemma B.3, for all
+r > r0, there exists a unique, globally deﬁned, Wasserstein gradient ﬂow (µ(r)
+t )t≥0 for F (r). For all
+r > r0, consider the ﬁrst exit time from Qr:
+tr := inf{t > 0 ; µ(2r)
+t
+(Qr) < 1}.
+Note that the deﬁnition of tr involves the ﬂow (µ2r
+t )t but in fact, for all ¯r > r and 0 ≤t ≤tr, it holds
+µ(2r)
+t
+= µ(¯r)
+t
+by the uniqueness in Lemma B.3. Thus, if tr > 0, we have existence and uniqueness
+of a Wasserstein gradient ﬂow in the sense of Deﬁnition 2.4 on [0, tr]. It only remains to show that
+limr→∞tr = ∞so that the gradient ﬂow can be deﬁned at all times.
+Given the property of v(r) in Lemma B.2-(ii), for all time 0 ≤t ≤tr, it holds v(r)
+t
+∈∂F ′(µ(r)
+t ) in
+L2(µ(r)
+t ; Rd). Therefore, using Assumption 2.1-(iii)-(c) and the boundedness of dR on sublevel sets,
+we have the bound, for 0 ≤t ≤tr,
+|v(r)
+t
+(u)| ≤C1 + C2r
+17
+
+with constants C1 and C2 independent of u, r and t. This shows, by Grönwall’s lemma applied
+to the ﬂow of characteristics of the velocity ﬁeld (this ﬂow is deﬁned below in Lemma B.4), that
+µ(r)
+t
+is concentrated on {u ∈Θ ; dist(u, Qr0) ≤(r0 + C1/C2)etC2} and thus, for all T > 0 there
+exists r > 0 such that tr > T. Hence limr→∞tr = ∞and the gradient ﬂow from Deﬁnition 2.4 is
+uniquely well-deﬁned on [0, T[ for T > 0 arbitrary large.
+Let us now add a useful representation lemma for the Wasserstein gradient ﬂow as the pushforward
+of µ0 by the ﬂow of the velocity ﬁelds.
+Lemma B.4 (Representation of the ﬂow). Under the assumptions of Proposition 2.5, let (µt)t≥0
+be the Wasserstein gradient ﬂow of F and (vt)t the associated velocity ﬁelds. Consider the ﬂow
+X : R+ × Ω→Ωwhich for all u ∈Ω, is an absolutely continuous solution to
+X(0, u) = u
+and
+∂tX(t, u) = vt(X(t, u)) for a.e. t ≥0.
+Then X is uniquely well-deﬁned, continuous, X(t, ·) is Lipschitz on Qr, uniformly on compact time
+intervals for all r > 0, and it holds µt = (Xt)#µ0.
+Proof. The claims concerning X are classical and follow from the fact that vt satisﬁes a one-sided
+Lispchitz property on Qr, uniformly on compact time intervals [3, Lemma 8.1.4]. The expression as
+a pushforward is also a general property of the continuity equation, see [3, Prop. 8.1.8].
+B.3
+Proof of the many-particle limit (Theorem 2.6)
+While we could rely on abstract stability results for Wasserstein gradient ﬂows [3, Thm.11.2.1
+(Stability)] our proof is direct and uses basic arguments. It also gives an independent argument for the
+existence of Wasserstein gradient ﬂows, distinct from the standard one : it involves a discretization in
+space instead of the classical discretization in time.
+Step (i).
+We ﬁrst show that, at least on a small time interval [0, tr], the paths are contained in Qr
+for some r > r0. Let us introduce tr the ﬁrst exit time from Qr
+tr := inf {t > 0 ; ∃m ∈N, µm,t(Qr) < 1} .
+In order to show that tr is strictly positive, it is sufﬁcient to bound the velocity of individual particles
+before tr. Consider LV,r the Lipschitz constant of V on Qr. Given the expression of the velocity
+of each particle (given in Eq. (5)) and the minimum travel distance r −r0 required to exit Qr, we
+obtain the lower bound on the exit time tr ≥(r −r0)/(∥dΦ∥∞,r∥dR∥∞,r + LV,r) > 0.
+Step (ii).
+Let us now work on the time interval [0, tr] and prove the existence of a limit curve
+t 7→µt in the space P2(Θ) using standard estimates for gradient ﬂows and compactness. Our starting
+point is the bound, for 0 ≤t1 < t2 ≤tr,
+W2(µm,t1, µm,t2)2 ≤1
+m
+m
+X
+i=1
+|um,i(t2) −um,i(t1)|2 ≤(t2 −t1)
+m
+Z t2
+t1
+m
+X
+i=1
+|u′
+m,i(s)|2ds
+which follows by matching each particle at t1 to its future position at t2, and by Jensen’s inequality.
+Recalling the identity 1
+m
+Pm
+i=1 |u′
+m,i(t)|2 = −d
+dtF(µm,t) from Proposition 2.3, it follows
+W2(µm,t1, µm,t2)) ≤√t2 −t1
+
+sup
+m F(µm,0) −
+inf
+µ∈P(Rd) F(µ))
+1/2
+and thus the family of curves (t 7→µm,t)m is equicontinuous in W2 on [0, tr], uniformly in m.
+Moreover, for all t ∈[0, tr], the family (µm,t)m lies in a W2 ball, as such weakly precompact (but a
+priori not W2-precompact). Since the weak topology is weaker than the topology of W2, by Ascoli
+theorem, we can extract a subsequence converging weakly to a curve (µt)t≥0 continuous in the weak
+topology, which is concentrated in Qr at all time. We have also uniform convergence in the Bounded
+Lipschitz metric, which metrizes weak convergence of probability measures. In the following we
+only consider this subsequence, still denoted by (µm)m.
+18
+
+Step (iii).
+The next step is to show that the limit curve (µt) satisﬁes a continuity equation as in
+Deﬁnition 2.4. Consider the velocity ﬁelds vm,t deﬁned in Equation (5) and let us deﬁne vt the
+analog for the limit curve (µt)t. We want to show that the sequence (Em)m of momenta, the vector
+valued measures on [0, tr] × Ωdeﬁned by Em := vm,tµm,tdt, converges weakly to E := vtµtdt.
+Notice that these measures are also concentrated on Qr. For any bounded and continuous function
+ϕ : [0, tr] × Rd →Rd, it holds
+
+
+
+
+
+Z
+ϕ · d(Em −E)
+
+
+
+
+ ≤∥ϕ∥∞
+Z
+|vm,t(u) −vt(u)|dµm,t(u)dt +
+
+
+
+
+
+Z
+ϕ · vtd(µm,t −µt)dt
+
+
+
+
+ . (9)
+We ﬁrst prove that the ﬁrst term in (9) tends to 0. Since all (µm,t)m,t are concentrated on Qr, it
+is sufﬁcient to show that the sequence of velocity ﬁelds (t, u) 7→vm,t(u) converges uniformly on
+[0, tr]×Qr to (t, u) 7→vt(u). We have, using the fact that a projection on a convex set is 1-Lipschitz,
+|vm,t(u) −vt(u)| ≤2|˜vt,m(u) −˜vt(u)| ≤2∥dΦ∥∞,r · ∥R′(
+R
+Φdµm,t) −R′(
+R
+Φdµt)∥.
+Moreover, we have for all t ∈[0, tr],
+∥R′(
+R
+Φdµm,t) −R′(
+R
+Φdµt)∥≤∥dR∥∞,r · ∥
+R
+Φdµm,t −
+R
+Φdµt∥
+≤∥dR∥∞,r ·
+sup
+f∈F, ∥f∥≤1
+R
+⟨f, Φ(u)⟩d(µm,t −µt)(u)
+≤∥dR∥∞,r · max{∥Φ∥∞,r, ∥dΦ∥∞,r} · ∥µm,t −µt∥BL.
+Since the convergence of (t →µm,t)m is uniform in the Bounded Lipschitz norm, this proves
+uniform convergence of the velocity ﬁelds and the convergence of the ﬁrst term in (9) to 0. The
+second term also converges to 0 because (t, u) 7→ϕ(t, u) · vt(u) is continuous and bounded. We thus
+conclude that Em tends weakly to E and, in particular, the continuity equation (6) is also satisﬁed
+in the limit. As (vt)t is bounded on Qr, uniformly in time, one has
+R tr
+0
+R
+Ω|vt(u)|2dµt(u)dt < ∞
+which proves that (µt)t is absolutely continuous in W2.
+Step (iv).
+So far, we have shown the convergence, up to a subsequence, to a Wasserstein gradient
+ﬂow on [0, tr]: it remains to show that limr→∞tr = ∞. Since F(µm,0) →F(µ0) and all paths
+(µt,m)t decrease monotonically the value of F, everything lies in a sublevel of R, where dR is
+bounded. It follows that a uniform bound on the velocity of the particles with linear growth in r is
+available and, by Grönwall’s inequality, we obtain that limr→∞tr = ∞, just as in the end of the
+proof of Proposition 2.5. The theorem follows by combining this result with the uniqueness stated in
+Proposition 2.5.
+C
+Convergence to global minimizers
+We give in this section a proof of Theorems 3.3 and 3.5. All results have two versions: one in the
+2-homogeneous setting (Assumptions 3.2) and its counterpart in the partially 1-homogeneous setting
+(Assumptions 3.4). We have displayed in Figure 4 the level sets of functions with these homogeneity
+properties, in order to highlight the differences between these two cases. The proofs tend to be more
+straightforward in the 2-homogeneous setting and they can be read independently of the other case.
+This section is organized as follows:
+• In Section C.1, we justify the global optimality conditions.
+• We give in Section C.2 a criteria for Wasserstein gradient ﬂows to escape from neighborhoods
+of non-optimal stationary points, and we also characterize measures that can be limits of
+Wasserstein gradient ﬂows. These results are valid for arbitrary initializations.
+• In Section C.3, we prove that the assumption on the support of the initialization made in
+Theorems 3.3 and 3.5 is preserved by Wasserstein gradient ﬂows.
+• All these facts combined lead to a proof of Theorems 3.3 and 3.5 in Section C.4.
+It will be often the case in the statements and in the proofs that they involve the projection hi(µ)
+of a probability measure µ ∈P(Ω) (with i = 1, 2) (introduced in Section A.2) instead of µ itself.
+This is motivated by two facts: (i) this projected measure it generally the object of interest in the
+optimization problem as it clears the redundancy caused by homogeneity and (ii) the assumptions
+that the projection hi(µt) of a Wasserstein gradient ﬂow converges is more reasonable than the
+convergence in W2 of the original gradient ﬂow, where generally no compactness is available.
+19
+
+(a) Positively 1-homogeneous in the vertical variable.
+(b) Positively 2-homogeneous.
+Figure 4: Level sets of some functions on Ω= R2 with homogeneity properties. The derivative
+F ′(µ) of F, seen as a continuous function on Ω“looks like” plot (a) in the partially 1-homogeneous
+case and like plot (b) in the 2-homogeneous case. Wasserstein gradient ﬂows of F are simply set
+of particles µt that “slide down” such landscapes following the direction −∇F ′(µt) (the subtlety
+being that the landscape itself depends on µt). Minimizers µ∗of F over M+(Ω) are characterized
+by the fact that this function F ′(µ∗) is nonnegative on Ωand vanishes on the support of µ∗. By
+homogeneity, it is sufﬁcient to study these functions restricted to a subspace (dotted lines) as we do
+in the proofs.
+C.1
+Optimality conditions (proof of Proposition 3.1)
+Let us ﬁrst remark that, by a ﬁrst order Taylor expansion of R, we have that for all µ, σ ∈M(Ω) with
+F(µ), F(σ) < ∞, it holds
+R
+|F ′(µ)|dσ < ∞and
+d
+dϵF(µ + ϵσ)|ϵ=0 =
+Z
+Ω
+F ′(µ)dσ
+with
+F ′(µ) : u 7→⟨R′(
+R
+Φdµ), Φ(u)⟩+ V (u).
+Let µ, ν ∈M+(Ω) be such that F(ν), F(µ) < ∞, consider σ := ν −µ and its Lebesgue decompo-
+sition σ = fµ + σ⊥where f ∈L1(µ), δ⊥∈M+(Ω) is singular to µ (see [10, Thm. 4.3.2]). Clearly,
+by the above ﬁrst order formula, it is necessary to have F ′(µ) ≥0 everywhere with equality µ-a.e.,
+for µ to be a minimizer. It is also sufﬁcient since in this case we have, by convexity,
+0 = d
+dtF(µ + tσ)|t=0 ≤d
+dt ((1 −t)F(µ) + tF(ν)) |t=0 = F(ν) −F(µ).
+C.2
+A criteria to escape from non-optimal stationary points
+We now give a criteria for Wasserstein gradient ﬂows to escape from non-optimal stationary points.
+It is valid both in the ﬁnite-particle regime and in the many-particle limit. Such a result supports
+the idea that, even in the ﬁnite-particle case (i.e. classical gradient ﬂows), the point of view using
+measures is natural.
+C.2.1
+The 2-homogeneous case
+We start with the positively 2-homogeneous setting which is slightly simpler. We consider the
+operator h2 : M+(Rd) →M+(Sd−1) deﬁned in Appendix A.2. To simplify notations, measures on
+the sphere Sd−1 are interpreted hereafter as measures on Rd concentrated on the sphere.
+Proposition C.1 (Criteria to espace local minima). Under Assumptions 3.2, let µ ∈M+(Rd) be such
+that F ′(µ) is not nonnegative. There exists ϵ > 0 and a set A ⊂Ωsuch that if (µt)t is a Wasserstein
+gradient ﬂow of F satisfying ∥h2(µ) −h2(µt0)∥BL < ϵ for some t0 ≥0 and µt0(A) > 0 then there
+exists t1 > t0 such that ∥h2(µ) −h2(µt1)∥BL ≥ϵ.
+Such a set is given by A = {rθ ; r ∈]0, ∞[ and θ ∈K} where K is the (−η)-sublevel set of the
+restriction of F ′(µ) to the unit sphere, for some η > 0 that can be chosen arbitrarily close to 0.
+Proof. Let gµ : Sd−1 →R be the restriction of F ′(µ) to the unit sphere, and ﬁrst assume that 0
+is in the range of gµ. Let −η < 0 be a negative regular value of gµ, which is guaranteed to exist
+20
+
+(arbitrarily close to 0) thanks to Assumption 3.2 and let K ⊂Sd−1 be the corresponding sublevel set.
+By the regular value theorem, its boundary ∂K = g−1
+µ (−η) is a differentiable orientable compact
+submanifold (of the sphere) of dimension d −2 and is orthogonal to the gradient ﬁeld of gµ. Also, V
+is differentiable on a neighborhood of ∂K, by the regular value property. It holds gµ(θ) < −η for
+θ ∈K and ∇gµ(θ) · ⃗nθ < −β for all θ ∈∂K, where ⃗nθ is the unit normal vector to ∂K pointing
+outwards, for some β > 0. In the following lemma, we show that these properties of K are also
+satisﬁed in a neighborhood of µ. We denote by ∥· ∥C1 the maximum of the supremum norm of a
+function and the supremum norm of its gradient.
+Lemma C.2. Let φ be the restriction of Φ to the sphere and let ˜gµ : θ ∈Sd−1 7→⟨R′(
+R
+Φdµ), φ(θ)⟩.
+For all C0 > 0, there exists α > 0 such that for all µ, ν ∈M(Ω), such that ∥h2(µ)∥BL, ∥h2(µ)∥BL <
+η it holds
+∥˜gµ −˜gν∥C1 ≤α∥φ∥2
+C1 · ∥h2(µ) −h2(ν)∥BL.
+Proof. Let us introduce α > 0 the Lipschitz constant of dR on the set {
+R
+Φdµ ;
+µ ∈
+P2(Rd) ; h2(µ) < C0} which is bounded in F. It holds
+∥˜gµ −˜gν∥C1 ≤α∥φ∥C1 · ∥
+R
+Φdµ −
+R
+Φdν∥
+≤α∥φ∥C1 · ∥
+R
+φdh2(µ) −
+R
+φdh2(ν)∥
+≤α∥φ∥C1 ·
+sup
+f∈F,∥f∥≤1
+R
+⟨f, φ⟩d(h2(µ) −h2(ν))
+≤α∥φ∥2
+C1 · ∥h2(µ) −h2(ν)∥BL.
+where the last bound is due to the fact that u 7→⟨f, φ(u)⟩is ∥φ∥2
+C1-Lipschitz and upper bounded in
+norm by ∥φ∥C1 whenever f ∈F satisﬁes ∥f∥≤1, and can be extended from the sphere Sd−1 to Rd
+as a Lipschitz function with the same constant.
+We now ﬁx a large enough C0 > 0 and consider measures ν such that ∥h2(ν)∥BL < C0. By posing
+ϵ = min{η, β}/(4αM 2) where α > 0 is given by the previous lemma, if ∥h2(ν) −h2(µ)∥< ϵ, then
+gν is upper bounded by −η/2 on K and ∇gν(θ) · ⃗nθ < −β/2 for all θ ∈∂K. Now let us consider a
+Wasserstein gradient ﬂow (µt)t of F such that µ0 is concentrated on B(0, r0) for some r0 > 0 and,
+posing ϵ as above, we assume that ∥h2(µ0) −h2(µ)∥BL < ϵ. As long as this holds, the condition
+∥h2(µt)∥BL < C0 for Lemma C.2 to apply also holds (if C0 was chosen large enough in the ﬁrst
+place). Let t1 > 0 be the ﬁrst time such that ∥h2(µt1) −h2(µ)∥BL ≥ϵ, which might a priori be
+inﬁnite.
+Consider the ﬂow X of Lemma B.4. By construction of the set K, any path t 7→ut = X(t, u0) with
+u0 ∈R+K remains in R+K for t ≤t1. Moreover, by positive 2-homogeneity of F ′(µt), the radial
+component of the velocity ﬁeld is lower bounded by r · η so |ut| ≥|u0| exp(ηt). In particular, for
+0 ≤t < t1 and ξ > 0,
+h2(µt)(K) ≥(ξ exp(ηt))2 · µ0(]ξ, ∞[ × K).
+It follows that as long as, for some ξ > 0, µ0(]ξ, ∞[ × K) > 0, then h2(µt)(K) grows exponentially
+fast: this implies that µt leaves the ∥· ∥BL ball (notice that all measures here are nonnegative). Hence
+t1 is ﬁnite. Finally, if we had not assumed that 0 is in the range of gν in the ﬁrst place, then we could
+simply take K = Sd−1 and, by similar arguments, ﬁnd that |h2(µt)|(Sd−1) grows exponentially fast
+for t < t1 if µ0(Rd \ {0}) > 0.
+We now give a general property of the stationary points.
+Lemma C.3. Under Assumptions 3.2, let (µt)t be a Wasserstein gradient ﬂow of F. If h2(µt)
+converges weakly to ν ∈M+(Sd−1), then F ′(ν) vanishes ν-a.e.
+Proof. We again consider the function ˜gµ : θ ∈Sd−1 7→⟨R′(
+R
+Φdµ), φ(θ)⟩for any measure
+µ ∈M+(Rd). At a point θ ∈Sd−1, the velocity ﬁeld (vt)t associated to the gradient ﬂow is obtained
+by applying the 2-Lipschitz map (id −proj∂V (θ)) to the vector of radial component 2˜gµt(θ) and
+tangential component ∇˜gµt(θ). It follows, by Lemma C.2, that vµt converges uniformly to vν on the
+sphere and as a consequence,
+R
+|vt(u)|2dh2(µt)(u) →
+R
+|vν(u)|2dh2(ν)(u). By recalling the energy
+21
+
+identity for gradient ﬂows F(µs1) −F(µs2) =
+R s2
+s1 |vt(u)|2dµtdt (see [3, Eq. (11.2.4)]) and this
+last term also equals
+R s2
+s1 |vt(u)|2dh2(µt)dt because the velocity ﬁeld is positively 1-homogeneous.
+This necessarily implies, since F is lower bounded on P2(Ω), that |vν(u)| = 0 for ν-a.e. u ∈Rd.
+In particular, looking at the radial component which is 2F ′(ν), this implies that F ′(ν) vanishes
+ν-a.e.
+C.2.2
+The partially 1-homogeneous case
+For the partially 1-homogeneous case, we consider the operator h1 : M+(Ω) →M(Θ) deﬁned in
+Appendix A.2.
+Proposition C.4 (Criteria to espace local minima). Under Assumptions 3.4, let µ ∈M(Ω) be such
+that F ′(µ) is not nonnegative. Then there exists ϵ > 0 and a set A ⊂Ωsuch that if (µt)t is a
+Wasserstein gradient ﬂow of F satisfying ∥h1(µ)−h1(µt0)∥BL < ϵ for some t0 ≥0 and µt0(A) > 0
+then there exists t1 > t0 such that ∥h1(µ) −h1(µt1)∥BL ≥ϵ.
+Such a set is given by A = (R+ × K+) ∪(R−× K−) where K+ (respectively K−) is the (−η)-
+sublevel set of θ 7→F ′(µ)(1, θ) (respectively of θ 7→F ′(µ)(−1, θ)) for some η > 0 that can be
+chosen arbitrarily close to 0.
+Proof. Let us suppose that F ′(µ) takes a negative value on R+ × Θ (the case where it takes its
+negative values only on R−× Θ is similar) and let us introduce gµ : Θ →R the restriction of F ′(µ)
+to {1} × Θ, that is gµ(θ) = ⟨R′(
+R
+Φdµ), φ(θ)⟩+ ˜V (θ). Let −η < 0 be a negative regular value of
+g, which is guaranteed to exist (arbitrarily close to 0) thanks to Assumption 3.4, and let K+ ⊂Θ
+be the corresponding sublevel set. By the regular value theorem, its boundary ∂K+ = g−1
+µ (−η) is
+a differentiable orientable manifold of dimension d −2 and is orthogonal to the gradient ﬁeld of
+gµ. In the case where Θ is bounded, ∂K+ is compact and, as a consequence, there is β > 0 such
+that infθ∈∂K |dgµ(θ)| ≥β. If Θ = Rd−1 and the sublevel set K+ is unbounded, then we have to
+choose η so that it is also a regular value of the function on the sphere Sd−2 to which gµ converges
+uniformly at inﬁnity. Then, the same positive lower bound holds for some β > 0. It follows that
+on K, gµ ≤−η and, ∇gµ(θ) · ⃗nθ < −β for all θ ∈∂K, where ⃗nθ is the unit normal vector to ∂K
+pointing outwards. In the following lemma, we show that these properties of K are also true with
+respect to gν if ν is close enough to µ. We denote by ∥· ∥C1 the maximum of the supremum norm of
+a function and the supremum norm of its gradient.
+Lemma C.5. For all C0 > 0, there exists α > 0 such that for all µ, ν ∈M+(Ω) that satisfy
+∥h1(µ)∥BL, ∥h1(ν)∥BL < C0, it holds
+∥gµ −gν∥C1 ≤α∥φ∥2
+C1 · ∥h1(µ) −h1(ν)∥BL.
+Proof. Let us introduce α > 0 the Lipschitz constant of dR on the set {
+R
+Φdµ ;
+µ ∈
+P(Rd) ; h1(µ) < C0} which is bounded in F. It holds
+∥gµ −gν∥C1 ≤α∥φ∥C1 · ∥
+R
+Φdµ −
+R
+Φdν∥
+≤α∥φ∥C1 · ∥
+R
+φdh1(µ) −
+R
+φdh1(ν)∥
+≤α∥φ∥C1 ·
+sup
+f∈F,∥f∥≤1
+R
+⟨f, φ⟩d(h1(µ) −h1(ν))
+≤α∥φ∥2
+C1 · ∥h1(µ) −h1(ν)∥BL.
+where the last bound is due to the fact that u 7→⟨f, φ(u)⟩is ∥φ∥C1-Lipschitz and upper bounded in
+norm by ∥φ∥C1 whenever f ∈F satisﬁes ∥f∥≤1.
+We now ﬁx a large enough C0 > 0 and consider measures ν such that ∥h1(ν)∥BL < C0. By posing
+ϵ = min{η, β}/(4αM 2) where α > 0 is given by the previous lemma, if ∥h1(ν) −h1(µ)∥< ϵ,
+then gν is upper bounded by −η/2 on K and ∇gν(θ) · ⃗nθ < −β/2 for all θ ∈∂K. Now, let us
+consider a Wasserstein gradient ﬂow (µt)t of F such that µ0 is concentrated on [−r0, r0] × Θ for
+some r0 > 0 and ∥h1(µ0) −h1(µ)∥BL < ϵ. As long as this holds, the condition ∥h1(µt)∥BL < C0
+for Lemma C.5 to apply also holds. Let t1 > 0 be the ﬁrst time such that this last condition is not
+satisﬁed, which might a priori be inﬁnite.
+22
+
+Consider the ﬂow X of Lemma B.4. By construction of the set K+, any path t 7→(wt, θt) =
+X(t, (w0, θ0)) with (w0, θ0) ∈R+ × K remains in R+ × K+ for t ≤t1. Moreover, by homogeneity
+of F ′(µt) in the variable w, the component of the velocity ﬁeld on w is lower bounded by η/2 so
+wt ≥w0 + t · η/2. For similar reasons, no path enters the set R−× K+ during this time interval and
+the paths inside this set satisfy wt ≥w0 + t · η/2 (this follows by the fact that F ′(−1, ·) ≥F ′(1, ·)).
+In particular, for 0 ≤t < t1,
+h1(µt)(K+) ≥(t · η/2) · µ0(R+ × K+) + min{0, t · η/2 −r0} · µ0(R−× K+).
+So we see that as long as µ0(R+ × K) > 0, then h1(µt)(K+) grows at least linearly.
+If Θ = K+ then the previous lower bound immediately implies that t1 is ﬁnite (choose the constant
+unit function in the deﬁnition of the norm ∥· ∥BL). Otherwise, in order to ﬁnalize our proof, we need
+to make sure that the mass h1(µt)(K+) does not grow unbounded just near the boundary of K+.
+To do so, let us consider another sublevel set ˜K+ of gµ associated to another regular value in the
+range ˜η ∈] −η, 0[ and such that ˜K+ does not cover Θ. As gµ is Lipschitz, there exists ∆∈]0, 1]
+such that the distance between K+ and Θ \ ˜K+ is at least ∆. Taking another, smaller radius ϵ > 0 if
+necessary, by similar arguments as above, either t1 is smaller than 2r0/˜η, or there exists ˜t > t0 such
+that h1(µt) is nonnegative on ˜K+ for t ∈[˜t, t1[. Choosing, as a test function in the deﬁnition of the
+norm ∥· ∥BL, the distance to the set Θ \ ˜K clipped to 1, one obtains, for t ∈[˜t, t1[,
+∥h1(µt)∥BL ≥∆· h1(µt)(K+)
+which also grows at least linearly with t. So h1(µt) eventually leaves any ∥· ∥BL-ball, hence t1 is
+ﬁnite.
+As for the 2-homogeneous case, we give a general property of the stationary points.
+Lemma C.6. Under Assumptions 3.4, let (µt)t be a Wasserstein gradient ﬂow of F. If h1(µt)
+converges weakly to ν ∈M+(Θ), then F ′(ν) vanishes ν-a.e.
+Proof. At a point (1, θ) ∈Ω, with θ ∈Θ, the velocity ﬁeld (vt)t associated to the gradient ﬂow is
+given by applying the 2-Lipschitz map (id −proj∂V (1,θ)) to the vector with ﬁrst component gµt(θ)
+and other components ∇gµt(θ), where gµt is deﬁned as in the proof of Proposition C.4. It follows,
+by Lemma C.2, that vµt converges uniformly to vν on {1} × Θ. However, in contrast to Lemma C.6,
+the energy dissipation identity is not invariant by the projection operator, so we have to develop
+arguments similar to those used to prove Proposition C.4 (we do so with less details). Using the
+uniform convergence of gµt if there exists θ0 ∈Θ such that gν(θ) > 0 then we can build a set
+R+ × K with θ0 ∈intK such that for some t0 > 0, no trajectory of the ﬂow Xt enters this set after
+t0 and the component of the velocity on w is upper bounded by −gν(θ)/2. Since µt0 is concentrated
+on a set Qr0, this implies that µt0(R∗
++ × K) vanishes in ﬁnite time and in particular, ν(K) = 0. Thus
+we have shown that F ′(ν) is nonpositive ν-a.e. Also it can be deduced by Proposition C.4, that F ′(ν)
+is nonnegative ν-a.e. So F ′(ν) vanishes ν-a.e.
+C.3
+Stability of separation properties
+Here we prove the fact that the separation properties of the support used in Theorems 3.5 and 3.3 are
+preserved by Wasserstein gradient ﬂows. We give a proof based on topological degree theory: this tool
+allows to cover the case of discontinuous velocity ﬁelds, which appear when V is non-differentiable.
+In a more regular setting, the facts that follow are easier to prove because then, µt is the pushforward
+of µ0 by a homeomorphism. Let us give a deﬁnition of the topological degree sufﬁcient to our setting.
+Deﬁnition C.7 (Topological degree). Let f : Rd →Rd be a continuous map, A ⊂Rd a bounded
+open set and y /∈f(∂A). The topological degree deg(f, A, y) is a signed integer that satisﬁes:
+1. If deg(f, A, y) ̸= 0 then there exists x ∈A such that f(x) = y.
+If y ∈A then
+deg(id, A, y) = 1.
+2. If A1, A2 are disjoint open subsets of A and y /∈f(A \ (A1 ∪A2)) then deg(f, A, y) =
+deg(f, A1, y) + deg(f, A2, y).
+3. If X : [0, 1] × Rd →Rd is continuous and y : [0, 1] →Rd is a continuous curve such that
+y(t) /∈Xt(∂A) for all t ∈[0, 1], then deg(Xt, A, yt) is constant on [0, 1].
+23
+
+These properties characterize a uniquely well-deﬁned map deg from the set of triplets (f, A, y) as
+above to the set of signed integers [8, Thm. 1-2]. Intuitively, it gives an algebraic count of the
+number of solutions to f(x) = y for x ∈A, where algebraic means that a solution x counts as +1 if
+f preserves orientation around x and −1 otherwise.
+The following lemma shows that taking the support of a measure and its pushforward by a continuous
+map are operations that almost commute. They commute for instance if the map is closed (i.e. maps
+closed sets to closed set).
+Lemma C.8. If f : Rd →Rd is a continuous map and µ ∈M+(Rd), then spt(f#µ) = f(spt µ).
+Proof. Let y ∈f(spt µ) and V a neighborhood of y. By continuity, f −1(V) is the neighborhood
+of a point in spt µ so 0 < µ(f −1(V)) = f#µ(V), hence y ∈spt f#µ so f(spt µ) ⊂spt f#µ.
+Conversely, let y ∈f(spt µ)
+c and let V a neighborhood of y that does not intersect f(spt µ). This
+neighborhood satisﬁes f −1(V) ⊂(spt µ)c, so it holds f#µ(V) = µ(f −1(V)) ≤µ((spt µ)c) = 0.
+Hence y ∈(spt f#µ)c so f(spt µ)
+c ⊂(spt f#µ)c which implies spt f#µ ⊂f(spt µ).
+C.3.1
+The 2-homogeneous case
+We ﬁrst state the property and the stability result that we wish to establish in the 2-homogeneous
+setting.
+Property C.9 (Separation, 2-homogeneous case). K is a closed subset of Rd contained in B(0, rb)
+that separates raSd−1 from rbSd−1, for some 0 < ra < rb.
+Lemma C.10 (Stability of the separation property). Under Assumptions 3.2, let (µt)t≥0 be a Wasser-
+stein gradient ﬂow of F. If the support of µ0 satisﬁes Property C.9, so does the support of µt, for all
+t > 0.
+Note that this property is generally lost in the limit t →∞. This lemma is a consequence of the
+following, more abstract proposition, that deals with sets instead of measures. The reader can keep
+in mind that we will apply this result with X being the ﬂow of the velocity ﬁeld introduced in
+Lemma B.4 and K being the support of µ0.
+Proposition C.11 (Set separation, spheres). Consider a continuous map X : [0, T] × Rd →Rd such
+that X(0, ·) = id, and such that, for all ϵ > 0, there exists η > 0 such that u ∈B(0, η) implies
+X−1
+t
+(u) ⊂B(0, ϵ). If K satisﬁes Property C.9, then Xt(K) satisﬁes the same property for all
+t ∈[0, T].
+Proof. Let 0 < ϵ < α < β be such that Xt(K) ⊂B(0, α −ϵ) and B(0, α + ϵ) ⊂Xt(B(0, β))
+for all t ∈[0, T] and let A be the intersection of B(0, β) with the (unique) unbounded connected
+component of Rd\K. Consider the function ˜X : (t, x) 7→(t, Xt(x)) and the set S = ˜X([0, T]×∂A)
+which is a compact subset of [0, T] × Rd. Since connected components of Sc (the complement of S
+in [0, T] × Rd) are path connected, recalling Deﬁnition C.7, it follows that
+(t, x) 7→deg(Xt, A, x)
+is constant on each connected component of Sc. Moreover, this degree equals 1 if the connected
+component intersects {0} × A and 0 if it intersects {0} × (Rd \ A). In particular, this degree
+is 1 on [0, T] × αS and, by the assumptions on K and X, there is a small tube [0, T] × B(0, η)
+where the above degree is 0. So for a ﬁxed t ∈[0, T], any path joining (η/2)Sd−1 to αSd−1 must
+intersect Xt(∂A). We restrict our attention to paths conﬁned in B(0, α) and it remains to notice that
+∂A ⊂K ∪βS and so
+Xt(∂A) ∩B(0, α) ⊂(Xt(K) ∪Xt(βS)) ∩B(0, α) = Xt(K)
+This shows that any path joining (η/2)S to αS must intersect Xt(K).
+Proof of Lemma C.10. Consider the continuous ﬂow X : [0, T]×Rd →Rd introduced in Lemma B.4.
+For all t ∈[0, T], the map Xt is coercive and thus closed, so Lemma C.8 applies and gives
+spt((Xt)#µ0) = Xt(spt µ0). We just have to check the assumption of Proposition C.11 concerning
+the stability of the inverse map of Xt near 0. Since Φ and V are 2-homogeneous, we have that dΦ
+and ∂V that are 1-homogeneous and thus, there exists a constant C > 0 such that |vt(u)| ≤C|u| for
+all t ∈[0, T] and u ∈Rd. This upper bound on the velocity implies in particular that if u0 is at a
+distance |u0| from 0, then it is at least at a distance |u0| exp(−Ct) for t ∈[0, T].
+24
+
+C.3.2
+The partially 1-homogeneous case
+Here are the analogous separation property and stability lemma for the partially 1-homogeneous case.
+Property C.12 (Separation, partially 1-homogeneous case). K is a closed set contained in a box
+Qr := [−r, r] × Θ and separates {−r} × Θ from {r} × Θ for some r > 0 (in the ambiant space
+Ω= R × Θ).
+Lemma C.13 (Stability of the separation property). Under Assumptions 3.4, let (µt)t≥0 be a Wasser-
+stein gradient ﬂow of F. If the support of µ0 satisﬁes Property C.12, then so does the support of µt,
+for all t > 0.
+Similarly as above, we ﬁrst prove an abstract topological result.
+Proposition C.14 (Set separation, boxes). Let Θ ⊂Rd be the closure of a bounded, connected,
+open set and, for some T > 0, let X : [0, T] × (R × Θ) →R × Θ be a continuous map such that
+X(0, ·) = id and Xt(R×∂Θ) ⊂R×∂Θ for all t ∈[0, T]. If K satisﬁes Property C.12, then Xt(K)
+satisﬁes Property C.12 for all t ∈[0, T].
+Proof. Let 0 < ϵ < α < β be such that Xt(K) ⊂] −α −ϵ, α + ϵ[ × Θ and [−α, α] × Θ ⊂
+Xt(] −β −ϵ, β + ϵ[ × Θ) for all t ∈[0, T], and let A be the intersection of ] −β, β[×Θ with the
+(unique) connected component of (R × Θ) \ K that contains {α} × Θ. The set A is bounded and
+open in R × Rd−1. Consider the function ˜X : (t, x) 7→(t, Xt(x)) and the set S = ˜X([0, T] × ∂A)
+which is a compact subset of [0, T] × (R × Θ). Since connected components of Sc (the complement
+of S in [0, T] × (R × Θ)) are path connected, recalling Deﬁnition C.7, it follows that
+(t, (w, θ)) 7→deg(Xt, A, (w, θ))
+is constant on each connected component of Sc. Moreover, this degree is 1 on [0, T] × ({α} × Θ)
+and is 0 on [0, T] × ({−α} × Θ). So for a ﬁxed t ∈[0, T], any path joining {−α} × Θ to {α} × Θ
+must intersect Xt(∂A). It is in particular true for paths entirely contained in [−α, α] × int Θ. It
+remains to notice that ∂A ⊂K ∪(R × ∂Θ) ∪({β} × Θ) and so, thanks to our assumption on X,
+Xt(∂A) ∩([−α, α] × int Θ) ⊂Xt(K).
+This shows that Xt(K) separates {−α} × Θ from {α} × Θ in R × int Θ and in fact also in R × Θ
+because Xt(K) is closed.
+Proof of Lemma C.13. Let X be the ﬂow of the velocity ﬁelds introduced in Lemma B.4. It is
+continuous and satisﬁes µt = (Xt)#µ0. Moreover, X0 = id and Xt is closed because it is
+coercive. We have to deal with two cases: when Θ is bounded and when Θ = Rd−1. In the ﬁrst
+case, by Lemma C.8, it is sufﬁcient so verify the assumptions of Proposition C.14. This reduces
+to making sure that Xt(R × ∂Ω) ⊂R × ∂Ω, which is guaranteed by the Neumann boundary
+conditions. For the unbounded case, we bring ourselves back to the bounded case, by means of the
+diffeomorphism ψ : R×Rd →R×int B(0, 1) deﬁned by ψ(w, θ) = (w, (θ/|θ|)·tanh |θ|) if θ ̸= 0
+and ψ(w, 0) = (w, 0) otherwise. Let Yt := Ψ ◦Xt ◦Ψ−1 be the ﬂow where the second variable is
+mapped to the open unit ball. By direct calculus, one sees that Yt is the ﬂow of the velocity ﬁeld
+˜vt(y) = dψψ−1(y)(vt ◦ψ−1(y)) deﬁned on R×int B(0, 1) and that can be extended by continuity on
+R×Sd−2 by (g∞(θ)·sign w, 0) where g∞is the limit which existence is assumed in Assumption 3.4-
+(iii) and, here, sign 0 = 0. As Yt satisﬁes the properties of Proposition C.14, the conclusion of this
+proposition holds for the set ψ(spt µt) = ψ ◦Xt(spt µ0). Since ψ is a diffeomorphism, it preserves
+connectedness properties and Lemma C.13 is proved.
+C.4
+Main theorems: proofs and generalization
+First, let us state a lemma that relates the convergence of the Wasserstein gradient ﬂows to an
+asymptotic property for the classical gradient ﬂows, when m, t →∞. This result is used in the last
+claims of Theorems 3.3 and 3.5.
+Lemma C.15. Under Assumptions 2.1, let (µt) be a Wasserstein gradient ﬂow which initialization
+is concentrated on a set Qr0 and such that F(µt) →F ∗. If (µ0,m)m is a sequence of measures
+concentrated on a set Qr0 that converges to µ0 in W2, then
+F ∗= lim
+t→∞lim
+m→∞F(µm,t) = lim
+m→∞lim
+t→∞F(µm,t).
+25
+
+Proof. The ﬁrst double limit where m goes ﬁrst to ∞is a consequence of Theorem 2.6 combined
+with the continuity of F for the Wasserstein metric, proved in Lemma A.1. The other double limit is
+obtained by the mononicity of F(µt) along Wasserstein gradient ﬂows. Indeed, for all ϵ > 0, there
+exists t0 ∈R+ such that F(µt0) < F ∗+ ϵ/2 and by Theorem 2.6, there is m0 ∈N such that for all
+m ≥m0, F(µt0,m) < F(µt0) + ϵ/2. Since t 7→F(µm,t) is decreasing and lower bounded for all
+m ∈N , it follows
+∀m > m0, lim
+t→∞F(µm,t) ≤F(µm,t0) < F ∗+ ϵ
+which proves the second limit.
+C.4.1
+The 2-homogeneous case
+Theorem C.16. Under the assumptions of Theorem 3.3, if h2(µt) converges weakly, then its limit is
+a global minimizer of F over M+(Ω) and limt→∞F(µt) = F ∗.
+This statement is stronger than Theorem 3.3: indeed, if µt converges for the Wasserstein metric, then
+h2(µt) converges weakly (but the converse is generally not true).
+Proof. Let ν ∈M+(Sd−1) be the weak limit of h2(µt). By Lemma C.3, F ′(ν) vanishes ν-a.e.
+For the sake of contradiction, assume that ν is not a minimizer of F over M+(Ω): this implies
+that F ′(ν) is not nonnegative. Let A ⊂Ωand BBL ⊂M(Sd−1) be the set and the ∥· ∥BL-ball
+provided by Proposition C.1. As h2(µt) converges weakly, there exists t0 > 0 such that for all t > t0,
+h2(µt) ∈BBL. But by Lemma C.10, µt0(A) > 0 and, by Proposition C.1, there exists t1 > t0 such
+that µt1 /∈BBL, which is a contradiction so ν is minimizer of F over M+(Ω). The second claim is a
+consequence of the continuity of F (Lemma A.1).
+C.4.2
+The partially 1-homogeneous case
+Again, we prove a statement in terms of the projected measures: Theorem 3.5 can be deduced as an
+immediate corollary. Some highlights of the proof are given in Figure 5.
+Theorem C.17. Under the assumptions of Theorem 3.5, if h1(µt) converges weakly, then its limit is
+a global minimizer of F over M+(Ω) and limt→∞F(µt) = F ∗.
+Proof. Let ν be the weak limit of h1(µt) and we see it as a measure on {1} × Θ. By Lemma C.6,
+F ′(ν) vanishes ν-a.e. For the sake of contradiction, assume that ν is not a minimizer of F over
+M+(Ω): this implies that F ′(ν) is not nonnegative. Let A ⊂Ωand ϵ be the set and the radius of the
+∥· ∥BL-ball which are provided by Proposition C.1. As h1(µt) converges weakly, there exists t0 > 0
+such that for all t > t0, ∥h1(µt) −ν∥BL < ϵ. In the favorable case where µt0(A) > 0 then we can
+conclude as in the 2-homogeneous case, but this is not immediately guaranteed by Lemma C.10: the
+situation is thus trickier than in the proof of the 2-homogeneous case.
+We take notations from the proof of Proposition C.4 and consider ﬁrst the case when Θ is bounded.
+Let θ0 ∈K+ be a local minimum of gν in the interior of K+ relatively to Θ (the case when K+
+is empty but K−is not could be treated similarly). Thanks to Neumann boundary conditions, it
+holds ∇gν(θ0) = 0, even when θ0 lies on the boundary of Θ. By Lemma C.10, the line R × {θ0}
+intersects the support of µt0. If this intersection lies in R+ × K+, we can conclude immediately by
+Proposition C.1. Otherwise, we ﬁx M > 0 such that µt0 is concentrated on [−M, M] × Θ and we
+resort to applying Lemma C.18 below.
+Let r0 > 0 be such that B(θ0, r0) ∩Θ ⊂K+. By Lemma C.18, there exists t1 > t0 such that if
+the support of µt1 intersects [−M, 0] × {θ0} then it intersects R+ × K+ at a subsequent time and
+again, we can conclude by Proposition C.1. So it remains to check that the support of µt1 intersects
+[−M, 0] × {θ0}; the difﬁculty here is that M was chosen prior to t1. The justiﬁcation is as follows:
+by Lemma C.10, the support of µt1 intersects R−× {θ0} at a point (w0, θ0). The properties of
+K+ imply that the pre-image by the ﬂow Xt of (w0, θ0) is included in [−M, 0[×K+ and, since
+the w-component of the velocity ﬁeld is lower bounded on R−× K+ by η/2 for t > t0, one has
+w0 > M.
+As for the case when Θ = Rd−1, we can reproduce the proof above by mapping the ﬂow to the unit
+sphere, as done in the proof of Lemma C.13. The last claim of the theorem is a consequence of the
+continuity of F (Lemma A.1).
+26
+
+Figure 5: Example, in the partially 1-homogeneous setting, of a stationary point ν that is not a
+minimizer of F over M+(Ω) since F ′(ν) is not nonnegative. The variable w corresponds to the
+vertical axis, the support of ν is the discrete set of red dots, and the lines show the level sets of F ′(ν).
+There is a neighborhood of ν such that if a Wasserstein gradient ﬂow µt enters this neighborhood
+and gives mass to a certain set (shown in red) then µt subsequently escapes this neighborhood. In
+Proposition C.4 this is proved for the lower part of this set (under the horizontal axis, where F ′(ν) is
+negative). Technical Lemma C.18 is concerned with building the upper part of this set. The proof of
+Theorem C.17 lies on the fact that any measure satisfying the separation Property C.12 gives mass to
+this set.
+In the unfavorable case encountered in the proof of Theorem C.17, we had to invoke the following
+lemma. It has a different nature than the other results of this paper because it relies on an explicit
+integration of the trajectories of the gradient ﬂow, which means that it depends on the choice of the
+metric.
+Lemma C.18. Consider, for a measure ν ∈M(Θ), a point θ0 ∈Θ such that |∇gν(θ)| = 0 and
+gν(θ) ≤−η for some η > 0. For any M > 0 and r0 > 0, there exists T, ϵ > 0 such that if (µt)t
+is a Wasserstein gradient ﬂow of F that satisﬁes for all t ∈[0, T], ∥gµt −gν∥C1 ≤ϵ and denoting
+(w(t), θ(t)) the solution of the ﬂow of Lemma B.4 starting from (w0, θ0) with w0 ∈[−M, 0], it holds
+w(T) = 0 and |θ(T) −θ0| < r0.
+Proof. The Lipschitz regularity of gν and its derivative implies that there exists L > 0 such that
+max{|gν(θ) −gν(θ0)|, |∇gν(θ) −∇gν(θ0)|} ≤L|θ −θ0| for all θ ∈Θ. Without loss of generality,
+we assume that r0 < η/(4L). Consider ϵ ∈]0, η/4[ and assume that there exists ¯T > 0 such that
+∥gµt −gν∥C1 ≤ϵ for t ∈[0, ¯T]. Writing q(t) = |θ(t) −θ0|, it holds for t ∈[0, ¯T],
+
+
+
+
+
+dq
+dt ≤−w(ϵ + Lq)
+dw
+dt ≥η −ϵ −Lq
+In particular, if we can make sure that |q(t)| < ¯r for t ∈[0, ¯T] and if ¯T > 2/η then, as (dw/dt) ≥η/2
+on this interval, there exists T < 2/η such that w(T) = 0.
+It remains to make sure that we indeed have |q(t)| < ¯r for t ∈[0, T], by adjusting if necessary the
+value of ϵ. Parametrizing in w instead of t (it is an admissible reparametrization thanks to the positive
+lower bound on its derivative), we get
+dq/dw = (dq/dt) · (dt/dw) ≤−w(ϵ + Lq) · 2/η.
+We can apply Grönwall’s lemma to ˜q(w) = ϵ + Lq(w) which satisﬁes (d/dw)˜q(w) ≤(−2L/η) ·
+w · ˜q(w) and obtain
+˜q(w) ≤˜q(w0) exp
+
+−(2L/η)
+R 0
+w0sds
+
+= ϵ exp(Lw2
+0/η).
+Thus, choosing ϵ < Lr0/(exp(Lw2
+0/η) −1), it is guaranteed that q(t) ≤r0 for t ∈[0, T].
+27
+
+C.5
+Remarks
+We conclude this theoretical section with two opening remarks related to the global convergence
+theorems.
+Convergence of the gradient ﬂow.
+In the statements of Theorems 3.3 and 3.5, the convergence of
+the Wasserstein gradient ﬂow comes as an assumption. In order to prove convergence of gradient
+ﬂows, one generally needs two properties: (i) compactness of the trajectories and (ii) a so-called
+Łojasiewicz inequality which, intuitively, controls how much a function ﬂattens around its critical
+points. As compactness in W2 is a very strong requirement, we have relaxed the topology where
+convergence is required to obtain more reasonable assumptions. Yet, even when a gradient ﬂow lies
+in a compact set, there are some cases where it does not converge. There has been recent progress
+on related issues with the study of Łojasiewicz inequalities in Wasserstein space [5, 17], but to our
+knowledge, no general result is known in our non-geodesically convex case.
+Towards quantitative statements.
+We stress that Propositions C.1 and C.4 provide with an intu-
+itive criterion for a particle gradient ﬂow to escape local minimum: roughly, it is sufﬁcient that, when
+it passes close to a local minimum, at least one particle belongs to a 0-sublevel set of the current
+potential F ′(µ). In this paper we exploit this property by studying the many-particle limit, but other
+approaches are worth exploring. For instance, we could estimate the size of this sublevel set in
+speciﬁc cases, and use it as an indication for the particle-complexity to attain global minimizers. A
+discussion on a speciﬁc example is given in Section D.5.
+D
+Case studies and numerical experiments
+In this section, we verify the assumptions for the examples treated in Section 4.
+D.1
+Loss functions
+We ﬁrst give sufﬁcient conditions to satisfy the assumptions on the loss R, when the Hilbert space is
+F = L2(ρ) for a probability measure ρ on a space X, which is either a domain of Rd or the torus. In
+this setting, typical losses are the form R(f) =
+R
+r(x, f(x))dρ(x) for a function r : X × R →R+.
+The next lemma gathers some properties of such losses.
+Lemma D.1 (Properties of the loss). If r is convex in the second variable, then R is convex. If r
+is differentiable in the second variable with ∂2r Lipschitz, uniformly in the ﬁrst variable, then R
+is differentiable with differential dR Lipschitz. If moreover |∂2r|2 ≤C1r + C2 for some constants
+C1, C2 > 0, then dR is bounded on sublevel sets.
+Proof. The convexity property is easy. If ∂2r is L-Lipschitz (uniformly in the ﬁrst variable), then it
+can be seen that dRf : h 7→
+R
+r′(r, f(x))h(x)dρ(x) is the differential of R because for all f, h ∈F,
+by a Taylor expansion,
+|R(f + h) −R(f) −dRf(h)| ≤L
+2
+Z
+|h(x)|2dρ(x) = L
+2 ∥h∥2 = o(∥h∥).
+It is direct to see that dR is L-Lipschitz in the operator norm. Finally, if |∂2r|2 ≤C1r + C2, then
+∥dRf∥2 =
+Z
+|∂2r(x, f(x))|2dρ(x) ≤C1R(f) + C2
+so dR is bounded on sublevel sets.
+D.2
+Sparse deconvolution
+Let us show that Assumptions 3.4 hold for the setting of Section 4.1. While we did not mention
+explicitly the choice of the torus Θ = Rd/Zd as a domain in our results, it poses no difﬁculties: it is
+similar to the case Θ bounded, but without the difﬁculties related to boundaries. On the separable
+Hilbert space F = L2(Θ) where Θ is the d-torus endowed with the normalized Lebesgue measure,
+the loss R is as in Lemma D.1 with r(x, f) = (f(y) −y(x))2 and the regularization term ˜V = 1
+28
+
+trivially satisﬁes the assumptions. Let us turn our attention to the function φ(θ) : x 7→ψ(x −θ).
+Its norm does not depend on θ, so it is bounded. If ψ is continuously differentiable with Lipschitz
+derivative, then φ is differentiable with dφθ(¯θ) : x 7→∇ψ(x−θ)· ¯θ which is bounded (again, its norm
+∥dΦ∥= ∥∇ψ∥does not depend on θ) and is Lipschitz, as similarly as in the proof of Lemma D.1.
+It remains to check the Morse-type regularity assumption i.e., to check that for all f ∈F, the function
+θ 7→⟨f, φ(θ)⟩=
+R
+f(x)ψ(x −θ)dx has a set of regular values which is dense in its range. If
+this function is constantly 0 then this is trivially true, otherwise, its range is an interval of R. By
+Morse-Sard’s lemma, if this function is d−1-times continuously differentiable, then the set of critical
+values has zero Lebesgue measure and our assumption holds. By differentiating under the integral
+sign, this assumption is thus satisﬁed if ϕ is d −1-times continuously differentiable.
+D.3
+Neural network: sigmoid activation
+Let us show that Assumptions 3.4 hold for the setting presented in Section 4.2 in the case of sigmoid
+activation functions. We write the disintegration of ρ with respect to the variable x as ρ(dx ⊗dy) =
+ρ(dy|x) ⊗ρx(dx) where ρx is the marginal of ρ on X and (ρ(·|x))x∈X a family of conditional
+probabilities on R (see [3, Thm. 5.3.1]). On the separable Hilbert space L2(ρx), the loss R is as in
+Lemma D.1 with r(x, p) =
+R
+R ℓ(p, y)ρ(dy|x) and the regularization term ˜V = 1 satisﬁes trivially the
+assumptions. In order to simplify notations, we consider the augmented variable z = (x, 1) ∈Rd−1
+and ρz its distribution when x is distributed according to ρx. Let φ(θ) : x 7→σ(z · θ), deﬁned on
+Θ = Rd−1.
+Lemma D.2. If ρx has ﬁnite moments up to order 4, then the function φ : Rd−1 →F is differentiable
+with a Lipschitz and bounded differential dφθ(h) : x 7→(h · z)σ′(z · θ) where z = (x, 1).
+Proof. Let us check that the function dφ deﬁned above is indeed the differential of φ. For θ, h ∈Rd−1,
+we have
+∆(h)2 := ∥φ(θ + h) −φ(θ) −dφθ(h)∥2
+=
+Z
+X
+|σ(θ · z + h · z) −σ(θ · z) −(h · z)σ′(z · θ)|2dρz(z)
+≤L2
+4
+Z
+X
+|h · z|4dρz(z)
+where L denotes the Lipschitz constant of σ′. So if ρz has ﬁnite 4-th order moment M4(ρz)
+then ∆(h) ≤
+L√
+M4(ρz)
+2
+|h|2 and dφ is indeed the differential of φ. This differential is bounded
+and Lipschitz since ∥dφθ∥≤∥σ′∥∞
+p
+M2(ρz) and ∥dφθ −dφ˜θ∥≤L
+p
+M4(ρz)|θ −˜θ| for all
+θ, ˜θ ∈Rd−1. Finally, it is clear that if ρx has ﬁnite 4-th moment then so does ρz.
+It remains to check the Sard-type regularity assumption i.e., to check that for all f ∈F, θ 7→
+⟨f, φ(θ)⟩=
+R
+X f(x)σ((x, 1) · θ)dρx(x) has a set of regular values which is dense in its range. If this
+function is constantly 1 then this is trivially true, otherwise, its range is an interval of R. If ρx has
+ﬁnite moments up to order 2d −2 then the function above is d −1 continuously differentiable and
+the conclusion follows by Morse-Sard’s lemma.
+In the statement of Proposition 4.2, the boundary assumption is explicitly mentioned so the proof is
+complete. We now brieﬂy explain why is it difﬁcult to check the Sard-type regularity in the boundary
+condition a priori. Consider the simple setting of a quadratic loss R(f) = 1
+2∥f −f ∗∥2
+F where f ∗is
+the optimal Bayes regressor that we may assume smooth. As required in the boundary assumption,
+consider a function f ∈F of the form f = R′(
+R
+Φdµ) =
+R
+Φdµ−f ∗for some µ in the domain of the
+functional F. In the limit r →∞, the function gf(rθ) := ⟨f, φ(rθ)⟩=
+R
+f(x)σ(rθ · (x, 1))dρx(x)
+converges to the function ¯gf(θ) =
+R
+θ·(x,1)≥0 f(x)dρx(x). This function is continuously differentiable
+on the sphere if the density of ρx is in C0(Rd−2) and f is bounded and continuous (this is the case
+here) and the convergence of gf(r·) →¯gf is indeed in C1. However, we cannot guarantee a very
+high regularity for f in general: differentiating under the integral sign d −1-times requires to have
+moments of order (d −1) bounded for µ, which cannot be assumed a priori (µ is just known to be in
+the domain of F). This prevents us from applying Morse-Sard’s lemma.
+29
+
+D.4
+Neural network: ReLU activation
+D.4.1
+Classical parameterization
+We now consider the activation function σ(s) = max{0, s} and let Φ(w, θ) : x ∈Rd−2 7→
+wσ((x, 1) · θ) be deﬁned on R × Rd−1. We show in the next lemma that Φ is not differentiable on the
+whole space: at points where the θ coordinate vanishes, there is a discontinuity in the derivative. The
+consequence of this Lemma is that particle gradient ﬂows (Deﬁnition 2.2)—and a fortiori Wasserstein
+gradient ﬂows—are not well-deﬁned in this case.
+Lemma D.3. If ρx has ﬁnite moments up to order 2 and has a density, then the function Φ : Rd →F
+is differentiable on the set {(w, θ) ∈R × Rd−1 ; θ ̸= 0}, with differential dΦ(w,θ)( ¯w, ¯θ) : x 7→
+( ¯w + w¯θ · z)σ′(z · θ) where z = (x, 1) and σ′ is the Heaviside step function. Yet, the differential dΦ
+is discontinuous at points of the form (w, 0) for w ̸= 0.
+Proof. Let us verify that the properties of a Fréchet differential are satisﬁed by the function dΦ above.
+For u = (w, θ) such that θ ̸= 0 and ¯u = ( ¯w, ¯θ) in Rd, we have
+∆2
+u(¯u) := ∥Φ(u + ¯u) −Φ(u) −dΦu(¯u)∥2
+=
+Z
+|f(u + ¯u, x) −f(u, x) −df(u,x)(¯u, 0)|2dρx(x)
+where we have introduced the function f : (u, x) 7→wσ(θ · (x, 1)) which is differentiable whenever
+θ·(x, 1) ̸= 0. For θ ∈Rd−1 \{0} and ϵ > 0, we introduce the sets Sθ,ϵ = {x ∈Rd−2 ; |θ·(x, 1)| ≤
+ϵ|(x, 1)|} and decompose the previous integral in two parts: one where f is regular and the integrand
+can be controlled with second order terms, and another one that deals with the non-differentiability
+inside Sθ,ϵ. This choice of deﬁnition for Sθ,ϵ guarantees that we have (θ + ¯θ) · (x, 1) ̸= 0 whenever
+x is not in Sθ,¯θ. This leads to
+∆2
+(w,θ)( ¯w, ¯θ) ≤
+Z
+Sθ,|¯
+θ|
+4|(x, 1)|2 · |¯u|2 · (2|u| + |¯u|))2dρx(x) +
+Z
+Rd−2\Sθ,|¯
+θ|
+| ¯w¯θ · (x, 1)|2dρx(x)
+≤4|¯u|2 · (2|u| + |¯u|))2
+Z
+Sθ,|¯
+θ|
+|(x, 1)|2dρx(x) + 1
+2|¯u|4
+Z
+Rd−2\Sθ,|¯
+θ|
+|(x, 1)|2dρx(x)
+If ρx has ﬁnite second order moment M2(ρx), then the second term is negligible in front of |¯u|2 when
+|¯u| goes to 0. In order to have the same property for the ﬁrst term, it is sufﬁcient that the integral
+R
+Sθ,|¯
+θ| |(x, 1)|2dρx(x) goes to 0 as |¯θ| goes to 0 which is the case since ρx has a density. Therefore,
+under these conditions, dΦ(w,θ) is the differential of Φ at (w, θ). To exhibit a discontinuity, let w ̸= 0
+and θ ∈Sd−1. For t > 0, it holds
+∥dΦ(w,tθ) −dΦ(w,−tθ)∥2 ≥|w|2
+Z
+|θ · (x, 1)|2dρx(x).
+For suitable choices of θ (for instance, θ = (0Rd−1, 1)), this lower bound is strictly positive and
+independent of t.
+Although we do not use this fact explicitly in the paper, it is interesting to note that the regularizing
+potential V : (w, θ) 7→|w| · |θ| is admissible in the 2-homogeneous setting of Assumptions 3.2:
+although it is not differentiable nor convex, it is positively 2-homogeneous and semiconvex.
+Lemma D.4. The function V : (w, θ) 7→|w| · |θ| deﬁned on R × Rd−1 is positively 2-homogeneous
+and semi-convex.
+Proof. The homogeneity property is clear, and to see that V is semi-convex, it is sufﬁcient to remark
+that
+(w, θ) 7→V (w, θ) + 1
+2|w|2 + 1
+2|θ|2 = 1
+2(|θ| + |w|)2
+is convex, since it is the square of a norm.
+30
+
+D.4.2
+A differentiable parameterization
+We now consider the alternative parameterization considered in Proposition 4.3, deﬁned as Φ(θ) :
+x 7→σ(s(θ) · (x, 1)) where σ(t) = max{t, 0} and s is the signed square function s(t) = t|t| =
+sign(t) · t2 that acts entry-wise. As Φ is clearly positively 2-homogeneous so we just have to prove
+the differentiability of Φ, which is done with the same technique as in Lemma D.3.
+Lemma D.5. If ρx has ﬁnite moments up to order 2 and has a density, then the function Φ : Rd →F
+is differentiable, with differential dΦθ(¯θ) : x 7→2(Pd
+i=1 ¯θi|θi|zi)σ′(s(θ) · (x, 1)) where σ′ is the
+Heaviside step function.
+Proof. As in Lemma D.3, we verify that the properties of a Fréchet differential are satisﬁed by
+the function dΦ above. First, Φ is differentiable at 0 with differential 0 since it is positively 2-
+homogeneous. For θ ̸= 0 and ¯θ in Rd, we have
+∆2
+θ(¯θ) := ∥Φ(θ + ¯θ) −Φ(θ) −dΦθ(¯θ)∥2
+=
+Z
+|f(θ + ¯θ, x) −f(θ, x) −df(θ,x)(¯θ, 0)|2dρx(x)
+where we have introduced the function f : (θ, x) 7→σ(s(θ) · (x, 1)) which is differentiable whenever
+s(θ) · (x, 1) ̸= 0. For θ ∈Rd \ {0} and ϵ > 0, we introduce the sets Sθ,ϵ = {x ∈Rd−1 ; |s(θ) ·
+|(x, 1)| ≤ϵ|(x, 1)|} and decompose the previous integral in two parts: one where f is regular and
+the integrand can be controlled with second order terms (through Taylor-Lagrange inequality), and
+another one that deals with the non-differentiability inside Sθ,|θ| (where f is only Lipschitz, locally
+in θ and globally in (x, 1)). This leads to the bounds, for some constants Cθ, C′
+θ > 0 and |¯θ| small
+enough
+∆2
+θ(¯θ) ≤Cθ|¯θ|2
+Z
+Sθ,|¯
+θ|
+|(x, 1)|2dρx(x) + C′
+θ|¯θ|4
+Z
+Rd−1\Sθ,|¯
+θ|
+|(x, 1)|2dρx(x)
+Under the assumption that ρx has a density, we have that ∆2
+θ(¯θ) = o(|¯θ|2). Therefore, dΦθ is the
+differential of Φ at θ.
+Note that the condition on the moments of ρx is less strong for ReLU activation than for sigmoids in
+Lemma D.2: this comes from the fact that ReLU is piece-wise linear. Similarly as what explained in
+the end of Section D.3, it is difﬁcult to verify the Sard-type regularity assumption so it is left as an
+assumption in Proposition 4.3.
+D.5
+Numerical experiments : details and additional results
+Animated plots of the particle gradient ﬂows shown in this article may be found online at https:
+//lchizat.github.io/PGF.html5
+Setting for the empirical particle-complexity plot.
+Here we give more details on the numerical
+experiments behind Figure 3.
+1. For the leftmost panel, the setting is similar to that of Figure 1: for each realization, 5 spikes
+are randomly distributed on the 1-torus (with a minimum separation of 0.1) with random
+weights between 0.5 and 1.5 and a small noise is added to the ﬁltered signal. Then for each
+choice of m, we initialize m particles on a regular grid on {0} × Θ and integrate the particle
+gradient ﬂow with the forward-backward algorithm until the improvement per iteration is
+below a small tolerance threshold.
+2. For the center panel, the setting is similar to that of Figure 2, but here in dimension d = 100.
+The data is normally distributed and the ground truth labels are generated by a similar neural
+network with 20 neurons (with random normally distributed parameters). The objective
+function is the square loss without regularization, so the global minimum corresponds to a 0
+loss. We optimize using SGD with fresh samples at each iteration.
+5These videos appear at this place in the ofﬁcial supplementary material of the NIPS 2018 publication, but
+had to be removed from the present version due to software incompatibility.
+31
+
+3. The rightmost panel shows, similarly, the particle-complexity for training a neural network
+with a single hidden layer and sigmoid activation function, in dimension d = 100. The
+data is distributed on a sphere and the ground truth labels are generated by a similar neural
+network with 20 neurons with random normal weights. Again, we minimize with SGD the
+square loss without regularization and the global minimum corresponds to a 0 loss.
+We compare the performance with the method of simply minimizing on the weights with the same
+initialization. This is a convex problem, and the minimum value attained does not depend on the
+minimization method. We plot for each case the ﬁnal excess loss as a function of m for several random
+realizations of the experiment and, for each value of m, its geometric average over all realizations.
+We have indicated in transparent green the area of loss values which should be interpreted as “optimal”
+but are not exactly 0 because the optimization has been stopped in ﬁnite time and the loss is not
+known exactly but estimated through sampling.
+Choice of the initial weights in the partially 1-homogeneous case.
+In all previous numerical
+experiments dealing with the partially 1-homogeneous case, we have initialized the particle gradient
+ﬂow on a discretization of {0} × Θ. But Theorem 3.5 allows for a large variety of initialization
+patterns. In this paragraph, we comment on the various possibilities and explain how the proof of
+Theorem 3.5 helps understanding why the corresponding particle-complexity is impacted.
+We display on Figure 6 a sparse spikes deconvolution experiment, in a similar setting than in Figure 1,
+but with different initializations. For this problem, where m0 = 5 spikes are to be recovered, we
+have observed numerically that the particle gradient ﬂows initialized on a uniform grid on {0} × Θ
+succeed in ﬁnding a global minimizer as soon as there are more than m = 7 particles. In the ﬁrst
+panel of Figure 6, the particle gradient ﬂow with m = 15 particles initialized on {1} × Θ fails at
+ﬁnding a minimizer and a larger number of particles is needed for success (as shown in the center
+panel, with m = 30).
+This phenomenon can be understood in light of the proof of Theorem 3.5: when (µt)t enters the
+neighborhood (given by Proposition C.4) of the local minimum ν reached in the left panel, say at
+t0 > 0, there exists a set R−× K−such that if a particle of µt for t > t0 falls in this set, then
+(µt)t eventually escapes from this local minimum ν. This set is, to put it simply, a 0-sublevel set
+of the function F ′(ν), which is a positively 1-homogeneous function in the weight coordinate (the
+vertical axis in Figure 6). The difﬁculty here is that, because of the initialization, µt0 is concentrated
+on R+ × Θ, so we can only hope that a particle “slides” on a ridge of F ′(ν) to eventually reach
+the set R−× K−. This is guaranteed to happen in the many-particle limit (this is the object of
+Lemma C.18), but this is likely to require a high density of particles around ridges of F ′(ν) (the set
+R × {θ0} in the proof of Theorem 3.5). This supports the idea that initializing on {0} × Θ is a good
+choice. In the rightmost panel of Figure 6 we also show the behavior for a uniform initialization on
+({1} × Θ) ∪({−1} × Θ) which, in this example, also avoids the difﬁculty described above.
+Figure 6: Particle gradient ﬂow for partially 1-homogeneous problems (sparse spikes recovery): effect
+of the initialization pattern on the particle-complexity. (left) m = 15 particles on {1} × Θ: failure
+(center) m = 30 particles on {1} × Θ: success (right) m = 10 particles on ({1} × Θ) ∪({−1} × Θ):
+success.
+32

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-radial-derivative-expansion-of-the-epd-transform.md

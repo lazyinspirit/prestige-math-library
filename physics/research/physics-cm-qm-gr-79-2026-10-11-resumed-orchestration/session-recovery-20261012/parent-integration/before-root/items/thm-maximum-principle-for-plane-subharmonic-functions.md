@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximum-principle-for-plane-subharmonic-functions.md

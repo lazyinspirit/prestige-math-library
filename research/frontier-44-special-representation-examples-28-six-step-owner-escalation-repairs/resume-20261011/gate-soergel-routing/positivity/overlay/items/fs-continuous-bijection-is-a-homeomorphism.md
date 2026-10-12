@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-continuous-bijection-is-a-homeomorphism.md

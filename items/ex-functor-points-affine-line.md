@@ -37,5 +37,4 @@ naturally in $R$.
 
 1.2 Given $r\in R$, [F1] supplies the unique map with $t\mapsto r$. [F1]
 
-2.1 The assignments are inverse and commute with postcomposition, so the bijection is natural. [step 1.1, step 1.2] ∎
- 
+2.1 The assignments are inverse and commute with postcomposition, so the bijection is natural. [step 1.1, step 1.2] ∎  

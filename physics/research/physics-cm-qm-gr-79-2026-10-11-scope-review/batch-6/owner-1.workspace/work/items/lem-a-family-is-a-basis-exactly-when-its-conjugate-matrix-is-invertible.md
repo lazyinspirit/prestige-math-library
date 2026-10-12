@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-family-is-a-basis-exactly-when-its-conjugate-matrix-is-invertible.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complex-hessian-domination-at-a-common-minimum.md

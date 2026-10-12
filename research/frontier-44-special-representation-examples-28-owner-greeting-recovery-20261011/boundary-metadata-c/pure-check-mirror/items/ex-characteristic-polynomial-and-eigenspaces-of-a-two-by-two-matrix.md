@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-characteristic-polynomial-and-eigenspaces-of-a-two-by-two-matrix.md

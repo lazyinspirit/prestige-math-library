@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-weyl-jacobian-is-well-defined-and-weyl-invariant.md

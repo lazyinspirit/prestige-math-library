@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-leafwise-path-determines-a-germ-of-transverse-diffeomorphism.md

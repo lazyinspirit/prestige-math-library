@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-stationary-distribution-of-a-finite-birth-and-death-chain.md

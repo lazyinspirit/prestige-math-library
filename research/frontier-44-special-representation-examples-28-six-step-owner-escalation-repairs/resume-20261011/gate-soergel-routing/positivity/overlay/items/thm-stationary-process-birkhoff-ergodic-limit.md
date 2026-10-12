@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stationary-process-birkhoff-ergodic-limit.md

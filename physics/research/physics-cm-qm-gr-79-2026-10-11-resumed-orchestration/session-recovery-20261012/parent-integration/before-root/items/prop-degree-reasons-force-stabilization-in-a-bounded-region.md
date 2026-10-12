@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-degree-reasons-force-stabilization-in-a-bounded-region.md

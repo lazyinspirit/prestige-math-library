@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonzero-degree-forces-surjectivity-on-closed-oriented-manifolds.md

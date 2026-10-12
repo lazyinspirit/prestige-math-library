@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-norm-point-of-a-compact-self-adjoint-operator-is-an-eigenvalue-up-to-sign.md

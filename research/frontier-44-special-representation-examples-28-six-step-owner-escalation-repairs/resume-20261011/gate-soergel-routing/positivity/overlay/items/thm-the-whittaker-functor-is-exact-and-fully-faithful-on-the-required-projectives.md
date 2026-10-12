@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives.md

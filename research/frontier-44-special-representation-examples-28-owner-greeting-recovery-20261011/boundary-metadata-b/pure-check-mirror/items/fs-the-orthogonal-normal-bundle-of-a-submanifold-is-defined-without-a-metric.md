@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-orthogonal-normal-bundle-of-a-submanifold-is-defined-without-a-metric.md

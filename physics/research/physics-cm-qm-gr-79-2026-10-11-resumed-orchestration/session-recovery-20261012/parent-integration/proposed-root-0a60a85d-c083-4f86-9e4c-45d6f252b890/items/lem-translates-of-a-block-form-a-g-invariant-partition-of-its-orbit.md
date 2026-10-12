@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-translates-of-a-block-form-a-g-invariant-partition-of-its-orbit.md

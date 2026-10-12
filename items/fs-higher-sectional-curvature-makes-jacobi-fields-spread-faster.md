@@ -106,42 +106,11 @@ $\xi\in(0,t)$.
 the hypotheses of the false claim, and evaluate the asserted inequality at a
 single time where the reverse strict inequality holds.
 
-1.1 The witness pair. [F1, F2, F3, given]
-Take the unit sphere $S^n$ with its round metric of curvature $1$ and
-Euclidean space $\mathbb R^n$, both of dimension $n\ge2$. Let
-$\gamma_1$ be a unit-speed great-circle geodesic on $S^n$ and $\gamma_2$ a
-unit-speed straight line in $\mathbb R^n$; let $E\in T_{\gamma_i(0)}M_i$ be a
-unit normal vector and $\Phi_tE$ its parallel transport along $\gamma_i$
-[F3]. Restrict the witness pair to $[0,1]$. Put
-$$J_1(t):=\operatorname{sn}_1(t)\,\Phi_tE=\sin t\,\Phi_tE,\qquad J_2(t):=t\,\Phi_tE .$$
-By [F1] and [F2] both are normal Jacobi fields with
-$$J_i(0)=0,\qquad |D_tJ_i(0)|=1,$$
-so the initial data have the equal positive norm required by the false claim;
-and
-$$|J_1(t)|=\sin t,\qquad|J_2(t)|=t .$$
-[F1, F2, F3, given]
+1.1 The witness pair. [F1, F2, F3, given] Take the unit sphere $S^n$ with its round metric of curvature $1$ and Euclidean space $\mathbb R^n$, both of dimension $n\ge2$. Let $\gamma_1$ be a unit-speed great-circle geodesic on $S^n$ and $\gamma_2$ a unit-speed straight line in $\mathbb R^n$; let $E\in T_{\gamma_i(0)}M_i$ be a unit normal vector and $\Phi_tE$ its parallel transport along $\gamma_i$ [F3]. Restrict the witness pair to $[0,1]$. Put $$J_1(t):=\operatorname{sn}_1(t)\,\Phi_tE=\sin t\,\Phi_tE,\qquad J_2(t):=t\,\Phi_tE .$$ By [F1] and [F2] both are normal Jacobi fields with $$J_i(0)=0,\qquad |D_tJ_i(0)|=1,$$ so the initial data have the equal positive norm required by the false claim; and $$|J_1(t)|=\sin t,\qquad|J_2(t)|=t .$$ [F1, F2, F3, given]
 
-2.1 The curvature hypothesis holds and the true inequality is reversed. [F1, F2, F4, step 1.1, given]
-Every radial sectional curvature of the unit sphere is $1$, and every
-sectional curvature of Euclidean space is $0$, by [F2]; hence every radial
-curvature of the first manifold is at least every radial curvature of the
-second. For this explicit pair, [F5] gives $\sin t\le t$ on $[0,1]$,
-so directly
-$$|J_1(t)|\le|J_2(t)|\qquad(0\le t\le1).$$
-This calculation refutes the proposed direction without needing to apply
-Rauch or verify its no-conjugate hypothesis. [F1, F2, F4,
-step 1.1, given]
+2.1 The curvature hypothesis holds and the true inequality is reversed. [F1, F2, F4, step 1.1, given] Every radial sectional curvature of the unit sphere is $1$, and every sectional curvature of Euclidean space is $0$, by [F2]; hence every radial curvature of the first manifold is at least every radial curvature of the second. For this explicit pair, [F5] gives $\sin t\le t$ on $[0,1]$, so directly $$|J_1(t)|\le|J_2(t)|\qquad(0\le t\le1).$$ This calculation refutes the proposed direction without needing to apply Rauch or verify its no-conjugate hypothesis. [F1, F2, F4, step 1.1, given]
 
-3.1 The false claim fails at $t=1$. [F5, step 1.1, step 2.1, given]
-By [F5] with $t=1\le2$, $\sin1=\cos\xi<1$ for some $\xi\in(0,1)$, because
-$\cos$ is strictly decreasing on $[0,2]$ and $\cos0=1$. Therefore
-$$|J_1(1)|=\sin1<1=|J_2(1)|,$$
-so the inequality $|J_1(1)|\ge|J_2(1)|$ of the false claim is violated by
-the displayed pair, whose data satisfy every hypothesis of the claim. Hence
-the claim is false; the correct statement is the opposite comparison
-inequality of [F4], on its no-conjugate comparison interval. Both model
-fields are explicit, so the inherited $\mathrm{AC}_\omega$ of [A1] is not
-drawn on beyond its declaration. [F5, step 1.1, step 2.1, given] ∎
+3.1 The false claim fails at $t=1$. [F5, step 1.1, step 2.1, given] By [F5] with $t=1\le2$, $\sin1=\cos\xi<1$ for some $\xi\in(0,1)$, because $\cos$ is strictly decreasing on $[0,2]$ and $\cos0=1$. Therefore $$|J_1(1)|=\sin1<1=|J_2(1)|,$$ so the inequality $|J_1(1)|\ge|J_2(1)|$ of the false claim is violated by the displayed pair, whose data satisfy every hypothesis of the claim. Hence the claim is false; the correct statement is the opposite comparison inequality of [F4], on its no-conjugate comparison interval. Both model fields are explicit, so the inherited $\mathrm{AC}_\omega$ of [A1] is not drawn on beyond its declaration. [F5, step 1.1, step 2.1, given] ∎
 
 ## Source locator
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-real-polynomial-splitting-suffices-for-the-fundamental-theorem-of-algebra.md

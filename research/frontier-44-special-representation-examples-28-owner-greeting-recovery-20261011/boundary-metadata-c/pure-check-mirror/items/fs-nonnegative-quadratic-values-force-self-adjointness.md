@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-nonnegative-quadratic-values-force-self-adjointness.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-higher-eigenvalues-by-orthogonality-constrained-minimisation.md

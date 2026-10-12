@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-radial-geodesics-minimize-length-in-a-normal-neighborhood.md

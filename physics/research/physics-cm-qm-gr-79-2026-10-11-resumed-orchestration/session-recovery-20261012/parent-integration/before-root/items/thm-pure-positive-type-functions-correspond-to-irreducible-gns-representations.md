@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pure-positive-type-functions-correspond-to-irreducible-gns-representations.md

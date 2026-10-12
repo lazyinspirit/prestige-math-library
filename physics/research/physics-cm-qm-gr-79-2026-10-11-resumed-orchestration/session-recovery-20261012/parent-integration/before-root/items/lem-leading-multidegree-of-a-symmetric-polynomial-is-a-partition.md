@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-leading-multidegree-of-a-symmetric-polynomial-is-a-partition.md

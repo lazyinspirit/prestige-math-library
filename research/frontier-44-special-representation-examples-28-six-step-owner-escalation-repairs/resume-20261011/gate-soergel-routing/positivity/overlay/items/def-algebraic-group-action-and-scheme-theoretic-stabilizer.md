@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-algebraic-group-action-and-scheme-theoretic-stabilizer.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-cyclotomic-galois-group-over-a-finite-field.md

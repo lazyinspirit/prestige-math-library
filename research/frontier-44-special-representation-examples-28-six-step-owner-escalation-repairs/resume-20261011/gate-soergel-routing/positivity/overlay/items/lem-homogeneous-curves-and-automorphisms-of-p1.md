@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-homogeneous-curves-and-automorphisms-of-p1.md

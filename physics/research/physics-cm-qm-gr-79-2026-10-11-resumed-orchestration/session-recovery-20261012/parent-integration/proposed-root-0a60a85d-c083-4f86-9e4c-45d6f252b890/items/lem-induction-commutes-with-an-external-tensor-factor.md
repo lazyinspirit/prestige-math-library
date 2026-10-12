@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induction-commutes-with-an-external-tensor-factor.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gauss-bonnet-for-a-euclidean-annulus.md

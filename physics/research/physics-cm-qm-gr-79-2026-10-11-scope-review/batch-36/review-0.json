@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "36",
+  "round": 0,
+  "input_sha256": "b2a687b333336d31c6590fe7905fe435ac515109361297ae22a8d1af8f477c95",
+  "reviewed_items": [
+    "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma",
+    "thm-nrqm-oscillator-diagonal-spectrum",
+    "thm-nrqm-oscillator-hermite-recurrence",
+    "lem-nrqm-oscillator-closed-ladder-domains",
+    "thm-nrqm-oscillator-hermite-orthogonality",
+    "thm-nrqm-oscillator-hermite-completeness",
+    "ex-nrqm-oscillator-formal-nonnormalizable-solution",
+    "thm-nrqm-oscillator-coherent-state-convergence",
+    "thm-nrqm-oscillator-oscillator-scaling-and-exact-realization",
+    "thm-nrqm-oscillator-coherent-evolution-and-variance",
+    "thm-nrqm-oscillator-multidimensional-oscillator-completeness",
+    "ex-nrqm-oscillator-poisson-number-distribution",
+    "ex-nrqm-oscillator-ground-energy-units"
+  ],
+  "reviewed_pages": [
+    "qm-math-oscillator",
+    "qm-math-oscillator-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The coherent overlap in a mathematical result is false, and its physical definition consumer requires an outside-batch correction; batch-local proof repairs also remain.",
+  "findings": [
+    {
+      "id": "thm-nrqm-oscillator-hermite-recurrence",
+      "type": "local",
+      "reason": "The Rodrigues induction at n=1 invokes undefined H_{-1}; F1 also falsely equates ||f||₂||g||₂ with ∫|fg|, and F2 uses reflection invariance of Lebesgue integration without a cited or local change-of-variables argument."
+    },
+    {
+      "id": "thm-nrqm-oscillator-hermite-orthogonality",
+      "type": "local",
+      "reason": "Step 1.1's second adjoint equality does not follow from its stated F2 substitution; apply F2 with φ=ag_m, ψ=g_n and conjugate, and use conjugate symmetry for the n=0 first-index case."
+    },
+    {
+      "id": "thm-nrqm-oscillator-hermite-completeness",
+      "type": "local",
+      "reason": "Step 2.1 asserts a pointwise bound on |h|G from Cauchy–Schwarz, which is only an integral bound; prove ∫|h|G≤||f||₂||g₀G||₂ before applying dominated convergence."
+    },
+    {
+      "id": "ex-nrqm-oscillator-formal-nonnormalizable-solution",
+      "type": "local",
+      "reason": "Step 3.1's lower bound ignores C in C+c√πF(y) for all y≥1, and step 2.1's Wronskian notation is invalid; use sufficiently large y and W(g₀,·) to prove nonintegrability and independence."
+    },
+    {
+      "id": "thm-nrqm-oscillator-coherent-state-convergence",
+      "type": "local",
+      "reason": "Clause (d) omits the overlap phase: the inner product is exp[-(|z|²+|w|²)/2+z w̄], so the claimed inner product and distance are false; its ratio test also does not handle z=0."
+    },
+    {
+      "id": "def-nrqm-oscillator-coherent-states",
+      "type": "outside-batch",
+      "reason": "Correcting the carrier's phase-bearing overlap requires a batch-52 edit to Definition (c), which repeats the false formula; route this required outside-batch repair to the owner."
+    },
+    {
+      "id": "pthm-nrqm-oscillator-coherent-state-fluctuations",
+      "type": "outside-batch",
+      "reason": "Via the coherent-state definition, this batch-52 theorem repeats the false overlap in [F2]; remove or correct that stale fact through the owner."
+    },
+    {
+      "id": "thm-nrqm-oscillator-coherent-evolution-and-variance",
+      "type": "local",
+      "reason": "The statement imports ψ_z from L²(dy) while U acts on L²(dx); define its transported state Dψ_z, disambiguate momentum P from the polynomial-Gaussian P, and replace [F2]'s stale overlap."
+    },
+    {
+      "id": "thm-nrqm-oscillator-coherent-evolution-and-variance",
+      "type": "local",
+      "reason": "Step 3.1's ε_n bound uses a wrong-sign F5 remainder, and step 2.1 calls an ℓ² series absolutely convergent; supply a valid uniform exponential bound and prove the group law by bounded-operator continuity."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-nrqm-oscillator-coherent-states",
+      "decision": "escalate",
+      "reason": "Definition (c) contains the false overlap formula and must be updated with the producer; this is outside batch 36."
+    },
+    {
+      "id": "pthm-nrqm-oscillator-coherent-state-fluctuations",
+      "decision": "escalate",
+      "reason": "Its [F2] repeats the false overlap, although its proof uses ladder moments; remove or correct that outside-batch premise."
+    },
+    {
+      "id": "pthm-nrqm-oscillator-coherent-state-evolution",
+      "decision": "accept",
+      "reason": "Its load-bearing use is the coefficient expansion and free evolution, which remain valid after correcting the overlap phase."
+    },
+    {
+      "id": "ex-nrqm-oscillator-coherent-trajectory",
+      "decision": "accept",
+      "reason": "It uses the coherent label's rotation, means and spreads, not the overlap formula."
+    },
+    {
+      "id": "ex-nrqm-oscillator-ground-state-gaussian",
+      "decision": "accept",
+      "reason": "It uses only ψ₀=Ψ₀ from the coherent family, which remains true."
+    },
+    {
+      "id": "rem-nrqm-oscillator-examples-scope-limits",
+      "decision": "accept",
+      "reason": "Its summary cites the ground, ladder and trajectory results but makes no claim about coherent-state overlaps."
+    },
+    {
+      "id": "rem-nrqm-oscillator-scope-and-empirical-status",
+      "decision": "accept",
+      "reason": "Its model and empirical-scope summary is independent of the overlap phase."
+    },
+    {
+      "id": "ex-nrqm-driven-dynamics-driven-oscillator-coherent-response",
+      "decision": "accept",
+      "reason": "It uses the coherent family, free evolution, means and spreads; these properties remain valid under the corrected inner product."
+    },
+    {
+      "id": "rem-nrqm-driven-dynamics-examples-scope-limits",
+      "decision": "accept",
+      "reason": "It summarizes the driven response and makes no overlap claim."
+    },
+    {
+      "id": "thm-nrqm-oscillator-coherent-evolution-and-variance",
+      "decision": "repair",
+      "reason": "Its [F2] repeats the false overlap, and its state-space notation and generator estimate need the local repairs recorded in findings."
+    },
+    {
+      "id": "ex-nrqm-oscillator-poisson-number-distribution",
+      "decision": "accept",
+      "reason": "It uses coefficients and number moments in the Hermite basis; none depends on the overlap formula."
+    }
+  ]
+}

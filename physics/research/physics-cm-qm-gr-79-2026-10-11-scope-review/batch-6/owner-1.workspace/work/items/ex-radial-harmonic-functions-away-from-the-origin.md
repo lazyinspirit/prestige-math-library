@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-radial-harmonic-functions-away-from-the-origin.md

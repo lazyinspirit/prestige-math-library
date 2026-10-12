@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-dimensional-pulse-has-a-tail-inside-the-cone.md

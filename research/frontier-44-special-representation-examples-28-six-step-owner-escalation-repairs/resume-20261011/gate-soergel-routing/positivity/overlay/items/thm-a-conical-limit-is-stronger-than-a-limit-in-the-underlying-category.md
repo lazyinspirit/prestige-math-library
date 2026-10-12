@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-conical-limit-is-stronger-than-a-limit-in-the-underlying-category.md

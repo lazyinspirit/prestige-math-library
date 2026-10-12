@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-simple-eigenvalues-admit-left-right-normalization.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-of-a-compactly-supported-smooth-density.md

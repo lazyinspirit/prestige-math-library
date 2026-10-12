@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-finite-poincare-exponent-product-and-reciprocity.md

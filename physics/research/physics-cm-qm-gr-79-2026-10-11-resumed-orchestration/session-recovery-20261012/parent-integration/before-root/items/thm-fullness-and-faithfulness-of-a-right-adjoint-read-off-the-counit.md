@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fullness-and-faithfulness-of-a-right-adjoint-read-off-the-counit.md

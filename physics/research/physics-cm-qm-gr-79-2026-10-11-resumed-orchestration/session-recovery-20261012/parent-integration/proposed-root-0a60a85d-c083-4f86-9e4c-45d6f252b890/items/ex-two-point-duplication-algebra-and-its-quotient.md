@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-point-duplication-algebra-and-its-quotient.md

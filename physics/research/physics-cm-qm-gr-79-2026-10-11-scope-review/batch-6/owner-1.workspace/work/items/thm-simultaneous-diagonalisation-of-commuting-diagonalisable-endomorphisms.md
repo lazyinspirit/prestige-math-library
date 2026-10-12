@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms.md

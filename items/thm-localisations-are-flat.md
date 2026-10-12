@@ -48,17 +48,12 @@ Let $R$ be a commutative ring and let $S\subseteq R$ be a multiplicative set.
 
 **Proof technique:** direct.
 
+ 1.1 For an exact sequence $A\to B\to C$ of $R$-modules, [L2] gives an exact sequence $$ S^{-1}A\to S^{-1}B\to S^{-1}C. $$ By [L3] this is $$ (S^{-1}R\otimes_R A)\to (S^{-1}R\otimes_R B)\to (S^{-1}R\otimes_R C), $$ so $S^{-1}R$ is flat over $R$ by [L1]. [L1, L2, L3, given]
 
-1.1 For an exact sequence $A\to B\to C$ of $R$-modules, [L2] gives an exact sequence $$ S^{-1}A\to S^{-1}B\to S^{-1}C. $$ By [L3] this is $$ (S^{-1}R\otimes_R A)\to (S^{-1}R\otimes_R B)\to (S^{-1}R\otimes_R C), $$ so $S^{-1}R$ is flat over $R$ by [L1]. [L1, L2, L3, given]
+ 2.1 Let $M$ be an $S^{-1}R$-module. If $M$ is flat over $S^{-1}R$, then for any exact sequence over $R$ we first tensor with $S^{-1}R$ as in step 1.1 and then tensor over $S^{-1}R$ with $M$; the result is exact, so $M$ is flat over $R$. Conversely, if $M$ is flat over $R$, then every exact sequence of $S^{-1}R$-modules is in particular exact over $R$, and tensoring it with $M$ over $R$ agrees with tensoring over $S^{-1}R$ because the scalars already act through the localization. Hence $M$ is flat over $S^{-1}R$. [L1, L3, step 1.1, algebra]
 
+ 3.1 If $N$ is flat over $R$, then $S^{-1}N\cong S^{-1}R\otimes_R N$ by [L3]. Applying step 2.1 to the $S^{-1}R$-module $S^{-1}N$ proves it is flat over $S^{-1}R$. [L3, step 2.1]
 
-2.1 Let $M$ be an $S^{-1}R$-module. If $M$ is flat over $S^{-1}R$, then for any exact sequence over $R$ we first tensor with $S^{-1}R$ as in step 1.1 and then tensor over $S^{-1}R$ with $M$; the result is exact, so $M$ is flat over $R$. Conversely, if $M$ is flat over $R$, then every exact sequence of $S^{-1}R$-modules is in particular exact over $R$, and tensoring it with $M$ over $R$ agrees with tensoring over $S^{-1}R$ because the scalars already act through the localization. Hence $M$ is flat over $S^{-1}R$. [L1, L3, step 1.1, algebra]
+ 3.2 Step 2.1 applies in particular to localization at a prime ideal by [L4]. [L4]
 
-
-3.1 If $N$ is flat over $R$, then $S^{-1}N\cong S^{-1}R\otimes_R N$ by [L3]. Applying step 2.1 to the $S^{-1}R$-module $S^{-1}N$ proves it is flat over $S^{-1}R$. [L3, step 2.1]
-
-
-3.2 Step 2.1 applies in particular to localization at a prime ideal by [L4]. [L4]
-
-
-4.1 Therefore all three claims hold. [algebra] ∎
+ 4.1 Therefore all three claims hold. [algebra] ∎ 

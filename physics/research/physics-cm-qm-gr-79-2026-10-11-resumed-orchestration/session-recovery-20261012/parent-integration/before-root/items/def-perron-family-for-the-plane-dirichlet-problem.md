@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-perron-family-for-the-plane-dirichlet-problem.md

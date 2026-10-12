@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-formal-immersion-homotopies-extend-over-a-collar.md

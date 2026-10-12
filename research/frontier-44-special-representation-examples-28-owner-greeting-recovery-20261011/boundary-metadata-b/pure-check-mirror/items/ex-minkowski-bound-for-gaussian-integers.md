@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-minkowski-bound-for-gaussian-integers.md

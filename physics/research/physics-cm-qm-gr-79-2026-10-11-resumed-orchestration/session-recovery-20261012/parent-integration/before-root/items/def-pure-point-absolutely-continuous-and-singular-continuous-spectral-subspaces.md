@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pure-point-absolutely-continuous-and-singular-continuous-spectral-subspaces.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-slicing-and-tracing-are-mutually-inverse-on-classes.md

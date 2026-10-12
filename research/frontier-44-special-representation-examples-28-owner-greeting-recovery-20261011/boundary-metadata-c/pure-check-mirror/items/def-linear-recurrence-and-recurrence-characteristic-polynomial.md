@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-linear-recurrence-and-recurrence-characteristic-polynomial.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fourier-inversion-need-not-hold-at-every-point-of-an-l-one-representative.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-exterior-derivative-commutes-with-restriction.md

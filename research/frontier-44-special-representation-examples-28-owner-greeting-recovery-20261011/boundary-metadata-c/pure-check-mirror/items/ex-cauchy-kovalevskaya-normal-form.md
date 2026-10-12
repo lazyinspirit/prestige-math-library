@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cauchy-kovalevskaya-normal-form.md

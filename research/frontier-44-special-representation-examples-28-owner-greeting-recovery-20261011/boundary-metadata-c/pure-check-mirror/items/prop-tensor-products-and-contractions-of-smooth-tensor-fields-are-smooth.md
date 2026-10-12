@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-tensor-products-and-contractions-of-smooth-tensor-fields-are-smooth.md

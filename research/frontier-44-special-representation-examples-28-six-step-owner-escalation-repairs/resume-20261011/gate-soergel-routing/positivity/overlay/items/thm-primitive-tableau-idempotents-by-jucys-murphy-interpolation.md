@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-primitive-tableau-idempotents-by-jucys-murphy-interpolation.md

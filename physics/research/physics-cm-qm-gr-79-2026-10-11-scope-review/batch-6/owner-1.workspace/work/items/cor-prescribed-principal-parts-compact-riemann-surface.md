@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-prescribed-principal-parts-compact-riemann-surface.md

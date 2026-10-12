@@ -44,11 +44,9 @@ a norm in general in the sense of [[def-norm-and-normed-space]].
 
 **Proof technique:** Use two disjoint equal-mass indicators, so the triangle inequality becomes the scalar inequality $2^{1/p}\le2$, which fails because $1/p>1$.
 
-1.1 Work on the two-point counting space $\{0,1\}$ from [L3]. Let [L3, given]
-$e_0:=\chi_{\{0\}}$ and $e_1:=\chi_{\{1\}}$. Then $$\|e_0\|_p=\|e_1\|_p=1,\qquad \|e_0+e_1\|_p=(1+1)^{1/p}=2^{1/p}.$$
+1.1 Work on the two-point counting space $\{0,1\}$ from [L3]. Let [L3, given] $e_0:=\chi_{\{0\}}$ and $e_1:=\chi_{\{1\}}$. Then $$\|e_0\|_p=\|e_1\|_p=1,\qquad \|e_0+e_1\|_p=(1+1)^{1/p}=2^{1/p}.$$ [L3, given]
 
-2.1 Because $0<p<1$, one has $1/p>1$. Strict monotonicity in [L1] therefore [L1, step 1.1]
-gives $$2^{1/p}>2^1=2.$$ So $$\|e_0+e_1\|_p>\|e_0\|_p+\|e_1\|_p.$$
+2.1 Because $0<p<1$, one has $1/p>1$. Strict monotonicity in [L1] therefore [L1, step 1.1] gives $$2^{1/p}>2^1=2.$$ So $$\|e_0+e_1\|_p>\|e_0\|_p+\|e_1\|_p.$$ [L1, step 1.1]
 
-3.1 The triangle inequality from [L2] fails on this concrete measure space, so [L2, step 2.1]
-the $p$-functional is not a norm in general for $0<p<1$. ∎
+3.1 The triangle inequality from [L2] fails on this concrete measure space, so [L2, step 2.1] the $p$-functional is not a norm in general for $0<p<1$. [L2, step 2.1] ∎
+

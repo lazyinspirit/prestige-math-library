@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-projective-embedding-gysin-trace-compatibility.md

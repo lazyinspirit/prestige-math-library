@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-locally-finite-union-of-sigma-locally-finite-bases.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-stabilizing-game-coverings-have-inverse-limits.md

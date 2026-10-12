@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-nonautonomous-equation-made-autonomous-by-adjoining-time.md

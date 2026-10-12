@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-third-map-in-a-morphism-of-triangles-is-unique.md

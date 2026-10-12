@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-adjoint-intertwines-the-exponential-map.md

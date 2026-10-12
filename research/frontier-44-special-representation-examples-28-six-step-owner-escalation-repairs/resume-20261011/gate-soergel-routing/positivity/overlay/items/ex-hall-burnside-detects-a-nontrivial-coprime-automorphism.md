@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hall-burnside-detects-a-nontrivial-coprime-automorphism.md

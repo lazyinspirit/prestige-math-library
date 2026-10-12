@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-rank-complement-theorem-over-compact-hausdorff-bases.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-wide-integral-geometric-layer-forces-a-property-star-blockade.md

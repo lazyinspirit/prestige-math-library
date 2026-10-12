@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence.md

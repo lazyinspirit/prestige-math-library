@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-line-bundle-rational-section-cartier-divisor.md

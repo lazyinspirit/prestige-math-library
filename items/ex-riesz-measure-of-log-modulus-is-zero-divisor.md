@@ -99,8 +99,7 @@ $\Omega\setminus Z(f)$.
 
 3.1 Summing the local identities of step 2.2 over the finite partition $\varphi=\sum_i\varphi_i$ from step 1.2 gives $\mu_u(\varphi)=\sum_i\mu_u(\varphi_i)=\sum_i\int\varphi_i\,d\lambda=\int\varphi\,d\lambda$ for every $\varphi\in C_c^\infty(\Omega)$. [step 1.2, step 2.2]
 
-4.1 Since $\lambda$ is a positive Radon measure by step 2.1 that represents $\mu_u$ on all smooth compactly supported tests, the uniqueness clause of [F3] gives $\mu_u=\lambda=\sum_{a\in Z(f)}\operatorname{ord}_a(f)\delta_a$, which is the asserted formula; in particular every compact subset of $\Omega\setminus Z(f)$ carries no $\lambda$-mass, so $\log|f|$ has no Riesz mass off the zero set. [step 2.1, step 3.1, F3] ∎
-## Remarks
+4.1 Since $\lambda$ is a positive Radon measure by step 2.1 that represents $\mu_u$ on all smooth compactly supported tests, the uniqueness clause of [F3] gives $\mu_u=\lambda=\sum_{a\in Z(f)}\operatorname{ord}_a(f)\delta_a$, which is the asserted formula; in particular every compact subset of $\Omega\setminus Z(f)$ carries no $\lambda$-mass, so $\log|f|$ has no Riesz mass off the zero set. [step 2.1, step 3.1, F3] ∎ ## Remarks
 
 **The vanishing order is exactly the Riesz mass.** Step 3.1 shows the mass at a zero $a$ is the order $m=\operatorname{ord}_a(f)$, not merely a positive integer: the factor $m\log|z-a|$ contributes $m\delta_a$ through the normalization $\Delta\log|z-a|=2\pi\delta_a$, while the zero-free factor $F$ contributes nothing.
 

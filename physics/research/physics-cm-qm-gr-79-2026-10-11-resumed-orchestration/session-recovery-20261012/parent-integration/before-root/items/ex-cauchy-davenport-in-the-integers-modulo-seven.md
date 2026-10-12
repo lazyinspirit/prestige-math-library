@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cauchy-davenport-in-the-integers-modulo-seven.md

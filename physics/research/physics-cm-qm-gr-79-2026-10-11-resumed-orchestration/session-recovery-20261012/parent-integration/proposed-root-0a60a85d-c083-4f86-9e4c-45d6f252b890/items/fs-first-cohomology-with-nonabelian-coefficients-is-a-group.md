@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-first-cohomology-with-nonabelian-coefficients-is-a-group.md

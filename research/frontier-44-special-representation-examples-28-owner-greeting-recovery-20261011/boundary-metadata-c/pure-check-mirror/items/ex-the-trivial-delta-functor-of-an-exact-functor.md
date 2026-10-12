@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-trivial-delta-functor-of-an-exact-functor.md

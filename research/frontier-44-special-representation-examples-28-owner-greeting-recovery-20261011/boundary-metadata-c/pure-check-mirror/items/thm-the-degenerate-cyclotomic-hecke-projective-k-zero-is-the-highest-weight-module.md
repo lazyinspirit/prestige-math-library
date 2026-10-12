@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-degenerate-cyclotomic-hecke-projective-k-zero-is-the-highest-weight-module.md

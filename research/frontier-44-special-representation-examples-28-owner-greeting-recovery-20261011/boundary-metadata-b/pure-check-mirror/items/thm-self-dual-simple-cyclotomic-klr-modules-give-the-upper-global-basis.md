@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-dual-simple-cyclotomic-klr-modules-give-the-upper-global-basis.md

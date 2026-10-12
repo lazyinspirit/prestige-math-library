@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cohen-macaulay-parameter-first-element-regular.md

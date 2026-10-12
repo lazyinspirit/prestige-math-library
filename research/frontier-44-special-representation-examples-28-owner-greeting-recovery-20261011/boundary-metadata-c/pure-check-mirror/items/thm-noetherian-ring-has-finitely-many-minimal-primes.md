@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-noetherian-ring-has-finitely-many-minimal-primes.md

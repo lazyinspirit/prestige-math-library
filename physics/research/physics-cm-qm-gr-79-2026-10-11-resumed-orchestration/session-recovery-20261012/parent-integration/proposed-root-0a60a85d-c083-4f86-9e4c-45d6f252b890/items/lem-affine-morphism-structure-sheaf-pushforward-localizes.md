@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-affine-morphism-structure-sheaf-pushforward-localizes.md

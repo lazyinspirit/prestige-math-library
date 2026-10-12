@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-first-coefficients-of-the-catalan-generating-function.md

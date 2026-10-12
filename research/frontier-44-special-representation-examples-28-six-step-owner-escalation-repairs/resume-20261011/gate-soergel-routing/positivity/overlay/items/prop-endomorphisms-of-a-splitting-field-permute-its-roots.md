@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-endomorphisms-of-a-splitting-field-permute-its-roots.md

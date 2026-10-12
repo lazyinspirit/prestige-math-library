@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-gibbs-phenomenon.md

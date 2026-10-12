@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-lagrange-multiplier-on-an-affine-graph.md

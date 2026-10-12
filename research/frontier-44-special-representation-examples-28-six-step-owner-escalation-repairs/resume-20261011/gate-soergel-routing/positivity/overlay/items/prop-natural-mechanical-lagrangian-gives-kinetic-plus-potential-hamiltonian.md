@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-natural-mechanical-lagrangian-gives-kinetic-plus-potential-hamiltonian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-maps.md

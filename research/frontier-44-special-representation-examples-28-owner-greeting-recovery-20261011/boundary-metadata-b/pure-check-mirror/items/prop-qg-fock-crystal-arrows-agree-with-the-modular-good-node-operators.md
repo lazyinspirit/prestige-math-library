@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators.md

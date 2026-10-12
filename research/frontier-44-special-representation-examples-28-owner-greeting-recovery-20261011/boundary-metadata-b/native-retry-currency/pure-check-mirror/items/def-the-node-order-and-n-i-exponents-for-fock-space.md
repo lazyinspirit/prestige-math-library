@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-the-node-order-and-n-i-exponents-for-fock-space.md

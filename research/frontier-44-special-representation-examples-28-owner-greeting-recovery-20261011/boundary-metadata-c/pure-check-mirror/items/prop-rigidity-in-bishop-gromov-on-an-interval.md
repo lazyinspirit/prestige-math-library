@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-rigidity-in-bishop-gromov-on-an-interval.md

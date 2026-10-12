@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hessian-comparison-for-distance-under-sectional-curvature-bounds.md

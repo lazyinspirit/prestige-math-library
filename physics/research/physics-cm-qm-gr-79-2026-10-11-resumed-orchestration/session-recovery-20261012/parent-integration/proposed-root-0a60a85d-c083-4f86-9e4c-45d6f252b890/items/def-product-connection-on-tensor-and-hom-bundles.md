@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-product-connection-on-tensor-and-hom-bundles.md

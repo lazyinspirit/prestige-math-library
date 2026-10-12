@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compressible-leaf-yields-a-vanishing-cycle.md

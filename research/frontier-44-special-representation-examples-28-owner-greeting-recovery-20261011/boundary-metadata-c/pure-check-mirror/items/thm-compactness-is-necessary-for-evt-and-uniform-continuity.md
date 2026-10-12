@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compactness-is-necessary-for-evt-and-uniform-continuity.md

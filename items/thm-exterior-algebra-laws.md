@@ -41,8 +41,7 @@ All of this holds over every field, including characteristic two.
 
 **Proof technique:** direct.
 
-
-1.1 Well-definedness and bilinearity in each degree pair are recorded in [L1], and the graded containment is the degree count of the concatenation. [L1]
+ 1.1 Well-definedness and bilinearity in each degree pair are recorded in [L1], and the graded containment is the degree count of the concatenation. [L1]
 
 1.2 Unitality: for a decomposable $\alpha$, the convention $1\wedge\alpha=\alpha$ is the definition in [L1]; bilinearity extends it. [L1]
 
@@ -52,4 +51,4 @@ All of this holds over every field, including characteristic two.
 
 2.1 Block swap: for decomposable $\alpha=v_1\wedge\cdots\wedge v_k$ and $\beta=w_1\wedge\cdots\wedge w_\ell$, move each of the $\ell$ factors $w_j$ leftward past all $k$ factors $v_i$ using step 1.4, collecting $\ell k$ factors of $-1$; associativity of step 1.3 makes the block move legitimate, giving $\alpha\wedge\beta=(-1)^{k\ell}\beta\wedge\alpha$, and multilinearity extends this to all homogeneous elements. [step 1.3, step 1.4, L2]
 
-3.1 Steps 1.1 through 2.1 prove the five asserted laws in every characteristic, because the only sign rule used is the alternation identity of step 1.4. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎
+3.1 Steps 1.1 through 2.1 prove the five asserted laws in every characteristic, because the only sign rule used is the alternation identity of step 1.4. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎ 

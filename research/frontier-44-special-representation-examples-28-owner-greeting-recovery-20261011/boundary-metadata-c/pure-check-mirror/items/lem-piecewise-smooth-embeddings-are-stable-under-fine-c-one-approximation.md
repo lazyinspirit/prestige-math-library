@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation.md

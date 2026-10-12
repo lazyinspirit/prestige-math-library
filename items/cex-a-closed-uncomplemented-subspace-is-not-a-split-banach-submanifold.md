@@ -64,13 +64,21 @@ qualification.
 **Proof technique:** contradiction.
 
 1.1 $c_0$ is closed in $\ell^\infty$ and is a Banach space for the sup norm by [F1]; $\ell^\infty$ is not second countable and hence is not a Banach manifold in the library's sense, while the identity chart still makes the split-chart condition meaningful for the pair $(\ell^\infty, c_0)$ by [L1]. [F1, L1]
+
 1.2 Suppose for contradiction that $c_0$ is complemented in $\ell^\infty$: by [L7] fix a bounded linear projection $P : \ell^\infty \to c_0$ of $\ell^\infty$ onto $c_0$, so that $Px = x$ for every $x \in c_0$. [assume-contra, L7]
+
 1.3 Fix an enumeration $(q_n)$ of the rationals; for every irrational $x$ and every $k\ge1$ let $n_k(x)$ be the least index $n$ not already used among $n_1(x),\dots,n_{k-1}(x)$ with $q_n\in(x-\frac1k,x+\frac1k)$, and put $A_x:=\{n_k(x):k\ge1\}$. [L3, L4, construct]
+
 2.1 Each $A_x$ is infinite. If $x\ne y$, choose $K$ so large that the intervals $(x-\frac1k,x+\frac1k)$ and $(y-\frac1\ell,y+\frac1\ell)$ are disjoint whenever $k,\ell\ge K$. Any common index of $A_x$ and $A_y$ must therefore occur among the first $K-1$ choices for at least one of $x,y$, a finite set; hence $A_x\cap A_y$ is finite. It follows that $x\mapsto A_x$ is injective and $\{A_x\}$ is uncountable by [L3]. [step 1.3, L3, algebra]
+
 3.1 Let $u_x$ be the indicator sequence of $A_x$ and let $Q:=\ell^\infty/c_0$ carry the quotient norm; then $u_x\in\ell^\infty$ and $[u_x]\ne0$ because $u_x\notin c_0$. For distinct $x_1,\dots,x_m$, remove the finite union of all pairwise intersections from their supports. The resulting indicators have disjoint supports and differ from the $u_{x_j}$ by finitely supported, hence $c_0$, sequences. Therefore, for scalars $c_1,\dots,c_m$, the quotient norm of $\sum_jc_j[u_{x_j}]$ equals $\max_j|c_j|$: the disjoint representative gives the upper bound, and each remaining infinite support attains the corresponding coefficient infinitely often, giving the lower bound against every $c_0$ perturbation. [step 1.3, step 2.1, F1, L6, algebra]
+
 4.1 For every $g\in Q^*$ and every real $r>0$ the set $\{x:|g([u_x])|\ge r\}$ is finite: for distinct points $x_1,\dots,x_m$ in it choose unimodular scalars $c_j$ with $c_jg([u_{x_j}])=|g([u_{x_j}])|$, so that by [step 3.1] and [L8] one has $mr\le\sum_j|g([u_{x_j}])|=\bigl|g\bigl(\sum_jc_j[u_{x_j}]\bigr)\bigr|\le\|g\|\cdot\bigl\|\sum_jc_j[u_{x_j}]\bigr\|_Q=\|g\|$ and hence $m\le\|g\|/r$. [step 3.1, L8, choose, algebra]
+
 5.1 No countable family in $Q^*$ separates the points of $Q$: given $(g_n)$, the set of $x$ with $g_n([u_x])\ne0$ for some $n$ is the countable union over the pairs $(n,k)$ of the finite sets of [step 4.1] with $r=\frac1k$, hence countable by [L5]; since $\{A_x\}$ is uncountable by [step 2.1], some $x$ lies outside it, and then the nonzero vector $[u_x]$ is annihilated by every $g_n$. [step 4.1, step 2.1, L5]
+
 6.1 Let $P$ be the projection assumed in step 1.2 and put $\psi_n(x+c_0):=x_n-(Px)_n$. By [L2] each $\psi_n$ is a well-defined bounded linear functional on $Q$ — well-defined because $P$ fixes every element of $c_0$ — with $\|\psi_n\|\le1+\|P\|$ by [L8], and if $\psi_n(x+c_0)=0$ for all $n$ then $(x-Px)_n=0$ for all $n$, so $x=Px\in c_0$. The countably many functionals $\psi_n$ would therefore be a countable separating family in $Q^*$, contradicting [step 5.1]. [step 1.2, step 5.1, L2, L6, L8]
+
 7.1 This contradiction with [step 5.1] shows that no bounded linear projection of $\ell^\infty$ onto $c_0$ exists; by [L7] $c_0$ is not complemented in $\ell^\infty$, although it is closed there by [step 1.1], and consequently the identity chart admits no split-chart decomposition of $c_0$, as claimed. [step 1.1, step 5.1, step 6.1, L7, discharge-contradiction] ∎
 
 ## Remarks

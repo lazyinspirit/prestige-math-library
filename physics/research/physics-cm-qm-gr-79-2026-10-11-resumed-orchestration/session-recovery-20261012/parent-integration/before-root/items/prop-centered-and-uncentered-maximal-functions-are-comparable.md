@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-centered-and-uncentered-maximal-functions-are-comparable.md

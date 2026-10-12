@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-removable-isolated-singularity-for-bounded-plane-harmonic-functions.md

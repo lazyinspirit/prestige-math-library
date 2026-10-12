@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-zero-dimensional-local-modules-are-cohen-macaulay.md

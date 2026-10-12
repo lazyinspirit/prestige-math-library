@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-nonnegative-integral-agrees-with-the-simple-integral.md

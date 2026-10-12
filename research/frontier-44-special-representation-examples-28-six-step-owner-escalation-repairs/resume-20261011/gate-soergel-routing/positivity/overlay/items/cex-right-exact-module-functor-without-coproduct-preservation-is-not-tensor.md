@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-right-exact-module-functor-without-coproduct-preservation-is-not-tensor.md

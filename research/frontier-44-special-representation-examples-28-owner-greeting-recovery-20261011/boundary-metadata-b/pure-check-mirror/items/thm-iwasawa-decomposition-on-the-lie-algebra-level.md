@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-iwasawa-decomposition-on-the-lie-algebra-level.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-every-integer-occurs-as-the-degree-of-a-sphere-map.md

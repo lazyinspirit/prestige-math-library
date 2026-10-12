@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-simple-vanishing-cycle-produces-a-compact-leaf.md

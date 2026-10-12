@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gelfand-kolmogorov-for-rings-of-continuous-functions.md

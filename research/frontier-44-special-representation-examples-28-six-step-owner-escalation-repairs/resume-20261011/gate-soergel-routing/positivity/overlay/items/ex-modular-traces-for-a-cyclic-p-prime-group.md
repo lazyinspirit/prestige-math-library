@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-modular-traces-for-a-cyclic-p-prime-group.md

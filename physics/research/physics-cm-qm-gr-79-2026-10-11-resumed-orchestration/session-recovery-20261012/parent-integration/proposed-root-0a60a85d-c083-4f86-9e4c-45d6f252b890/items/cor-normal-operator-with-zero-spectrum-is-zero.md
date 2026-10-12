@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-normal-operator-with-zero-spectrum-is-zero.md

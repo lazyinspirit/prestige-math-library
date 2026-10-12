@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-frattini-quotient-is-the-largest-elementary-abelian-quotient.md

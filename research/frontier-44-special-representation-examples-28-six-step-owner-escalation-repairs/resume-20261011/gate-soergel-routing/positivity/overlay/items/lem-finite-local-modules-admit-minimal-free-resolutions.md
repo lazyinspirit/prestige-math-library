@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-local-modules-admit-minimal-free-resolutions.md

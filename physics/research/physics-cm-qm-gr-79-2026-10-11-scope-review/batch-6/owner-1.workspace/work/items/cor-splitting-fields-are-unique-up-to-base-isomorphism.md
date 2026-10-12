@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-splitting-fields-are-unique-up-to-base-isomorphism.md

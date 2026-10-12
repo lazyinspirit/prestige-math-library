@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hh-tensor-quotient-by-a-one-dimensional-subspace.md

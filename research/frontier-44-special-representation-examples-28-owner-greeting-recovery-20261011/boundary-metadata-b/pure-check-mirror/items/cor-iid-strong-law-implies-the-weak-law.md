@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-iid-strong-law-implies-the-weak-law.md

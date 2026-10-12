@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric.md

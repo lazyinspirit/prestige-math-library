@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-link-angles-of-a2-affine-a2-and-universal-coxeter-nerve.md

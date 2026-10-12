@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-centralizer-dimension-from-vanishing-roots.md

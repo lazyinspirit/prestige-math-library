@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-c1-foliation-leaf-is-an-embedded-hypersurface.md

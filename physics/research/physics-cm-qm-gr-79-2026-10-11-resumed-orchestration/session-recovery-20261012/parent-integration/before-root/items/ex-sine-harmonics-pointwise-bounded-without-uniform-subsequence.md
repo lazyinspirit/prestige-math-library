@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence.md

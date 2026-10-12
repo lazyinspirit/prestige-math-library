@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-gradient-and-hessian-of-the-frobenius-least-squares-functional.md

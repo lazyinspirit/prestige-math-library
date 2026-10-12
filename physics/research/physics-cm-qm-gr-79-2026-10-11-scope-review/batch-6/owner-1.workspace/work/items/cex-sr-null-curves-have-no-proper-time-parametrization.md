@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-null-curves-have-no-proper-time-parametrization.md

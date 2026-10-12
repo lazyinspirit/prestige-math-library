@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-simple-rational-representations-are-finite-dimensional.md

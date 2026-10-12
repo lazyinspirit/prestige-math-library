@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-category-isomorphisms-are-bijective-on-objects-and-morphisms.md

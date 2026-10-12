@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-split-sequence-of-a-direct-sum.md

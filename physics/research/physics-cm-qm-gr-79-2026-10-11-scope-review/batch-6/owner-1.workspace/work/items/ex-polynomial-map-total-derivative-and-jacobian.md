@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-polynomial-map-total-derivative-and-jacobian.md

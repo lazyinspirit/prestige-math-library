@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-mapping-cylinder-differential-squares-to-zero.md

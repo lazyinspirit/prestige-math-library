@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-stroboscopic-map-of-the-plane-oscillator.md

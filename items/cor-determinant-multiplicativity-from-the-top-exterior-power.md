@@ -39,9 +39,8 @@ $$\det(S\circ T)=\det(S)\det(T).$$
 
 **Proof technique:** direct.
 
-
-1.1 By [L2], $\Lambda^n(S\circ T)=\Lambda^nS\circ\Lambda^nT$. [L2]
+ 1.1 By [L2], $\Lambda^n(S\circ T)=\Lambda^nS\circ\Lambda^nT$. [L2]
 
 2.1 Substituting the scalar actions of [L1] gives $\det(S\circ T)\cdot\operatorname{id}=\det(S)\det(T)\cdot\operatorname{id}$ on $\Lambda^nV$. [L1, step 1.1]
 
-3.1 Since $\Lambda^nV$ is one-dimensional and nonzero, comparing the two scalars gives $\det(S\circ T)=\det(S)\det(T)$. [step 2.1] ∎
+3.1 Since $\Lambda^nV$ is one-dimensional and nonzero, comparing the two scalars gives $\det(S\circ T)=\det(S)\det(T)$. [step 2.1] ∎ 

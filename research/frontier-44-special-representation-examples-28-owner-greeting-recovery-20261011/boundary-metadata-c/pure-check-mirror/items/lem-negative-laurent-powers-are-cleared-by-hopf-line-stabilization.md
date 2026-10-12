@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-negative-laurent-powers-are-cleared-by-hopf-line-stabilization.md

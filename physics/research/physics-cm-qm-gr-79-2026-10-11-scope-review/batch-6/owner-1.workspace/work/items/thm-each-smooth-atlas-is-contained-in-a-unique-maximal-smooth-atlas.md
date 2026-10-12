@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas.md

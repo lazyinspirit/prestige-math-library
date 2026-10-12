@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tseitin-transformation-is-linear-size-and-equisatisfiable.md

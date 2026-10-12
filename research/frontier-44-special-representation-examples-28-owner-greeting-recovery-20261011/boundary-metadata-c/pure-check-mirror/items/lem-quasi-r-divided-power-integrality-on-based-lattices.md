@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-r-divided-power-integrality-on-based-lattices.md

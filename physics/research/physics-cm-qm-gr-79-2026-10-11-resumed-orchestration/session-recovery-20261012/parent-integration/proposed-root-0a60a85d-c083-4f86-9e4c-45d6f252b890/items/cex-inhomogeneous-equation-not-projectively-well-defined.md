@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-inhomogeneous-equation-not-projectively-well-defined.md

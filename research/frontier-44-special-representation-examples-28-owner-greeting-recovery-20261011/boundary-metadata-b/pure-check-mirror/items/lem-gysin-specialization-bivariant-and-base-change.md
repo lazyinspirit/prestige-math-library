@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-gysin-specialization-bivariant-and-base-change.md

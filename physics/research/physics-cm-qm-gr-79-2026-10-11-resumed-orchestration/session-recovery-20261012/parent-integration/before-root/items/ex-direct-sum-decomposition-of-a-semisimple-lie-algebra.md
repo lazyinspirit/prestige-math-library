@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-direct-sum-decomposition-of-a-semisimple-lie-algebra.md

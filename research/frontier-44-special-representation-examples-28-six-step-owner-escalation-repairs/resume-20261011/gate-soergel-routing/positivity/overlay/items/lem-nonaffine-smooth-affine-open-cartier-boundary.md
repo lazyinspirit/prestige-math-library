@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nonaffine-smooth-affine-open-cartier-boundary.md

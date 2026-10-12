@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-schwarzschild-circular-orbits-and-photon-sphere.md

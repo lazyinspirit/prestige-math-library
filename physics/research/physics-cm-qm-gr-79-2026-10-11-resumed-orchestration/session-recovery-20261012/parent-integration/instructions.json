@@ -1,0 +1,62 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "scope": "Research preparation and optional parent-only guarded apply; no authoring/math review/acceptance, no native histories or main supervision edits.",
+  "prepare_command": [
+    "node",
+    "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/parent-integration/prepare.mjs",
+    "--drain-receipt",
+    "PATH_TO_PARENT_DRAIN_JSON",
+    "--iid-confirmation",
+    "PATH_TO_PARENT_IID_CONFIRMATION_JSON"
+  ],
+  "baseline_only_command": [
+    "node",
+    "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/parent-integration/prepare.mjs",
+    "--authenticate-baseline-only"
+  ],
+  "apply_command_parent_only": [
+    "node",
+    "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/parent-integration/apply.mjs",
+    "--apply-after-drain",
+    "--proposal",
+    "research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/parent-integration/proposal.json"
+  ],
+  "drain_receipt_required": {
+    "run": "physics-cm-qm-gr-79-2026-10-11",
+    "confirmedByParent": true,
+    "writersDrained": true
+  },
+  "additional_lane_drains_required": [
+    "batch1-geometry-repair/writer-drained.json",
+    "batch11-evidence-repair/writer-drained.json",
+    "batch2-balance-repair/writer-drained.json"
+  ],
+  "iid_confirmation_required": {
+    "run": "physics-cm-qm-gr-79-2026-10-11",
+    "item": "lem-cm-finite-iid-sample-mean-bound",
+    "confirmedByParent": true,
+    "authorConsumerChecksConfirmed": true,
+    "carrier_raw_sha256": "EXACT_CURRENT_FINAL_CARRIER_HASH",
+    "manifest_raw_sha256": "EXACT_CURRENT_BATCH11_MANIFEST_HASH",
+    "receipts": [
+      {
+        "path": "research/EXACT_FINAL_AUTHOR_CONSUMER_CHECK_RECEIPT.json",
+        "raw_sha256": "EXACT_RECEIPT_RAW_HASH"
+      }
+    ],
+    "reason": "Parent supplies actual bounded readiness evidence; no independent acceptance is inferred."
+  },
+  "failure_behavior": "Any missing preimage, invalid binding, stale guard, changed inventory, dependency mismatch/cycle, unknown alias, unconfirmed IID receipts or active writer throws before production mutations; default preparation writes research files only.",
+  "before_hash_authority": "Individual consumed snapshot input bindings are enforced wherever present; native extra context from justified_by/forward_refs is authenticated only by exact reconstruction of itemHash from the original raw snapshot-bound ready row, not latest metadata.",
+  "retry_behavior": "Each late proposal attempt uses a unique research copy-on-write proposed-root, so failed preparation can be rerun safely; existing applied original ready rows require separately authenticated refresh history rather than automatic latest-row inference.",
+  "optional_later_lane_archives": {
+    "argument": [
+      "--extra-before-guards",
+      "PATH_TO_AUTHENTICATED_LATER_LANE_BEFORE_GUARDS_JSON"
+    ],
+    "repeatable": true,
+    "required_if": "A later owner-released writer changes baseline-bound inputs outside the default geometry/evidence/balance archives, such as GR65\u201379.",
+    "format": "Array or {files:[...]} of rows {file or path,before_file,raw_sha256 or before_raw_sha256}; every archive must match its own claimed bytes and the original consumed native binding to be used."
+  },
+  "global_drain_scope": "Parent confirmedByParent global drain must include every native/adopted writer present at evaluation/apply time, including any subsequently released GR65+ lane; the script must not interpret a partial live source as final."
+}

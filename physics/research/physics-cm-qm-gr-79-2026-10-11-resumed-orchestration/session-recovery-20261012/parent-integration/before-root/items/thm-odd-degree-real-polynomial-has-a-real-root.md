@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-odd-degree-real-polynomial-has-a-real-root.md

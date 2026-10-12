@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-vanishing-torsion-implies-product-cobordism.md

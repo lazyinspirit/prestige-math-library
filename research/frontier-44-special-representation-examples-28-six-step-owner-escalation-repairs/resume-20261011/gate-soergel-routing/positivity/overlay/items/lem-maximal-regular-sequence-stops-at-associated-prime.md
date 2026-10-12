@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-regular-sequence-stops-at-associated-prime.md

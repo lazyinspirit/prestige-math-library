@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-complex-algebraic-stratifications-have-finite-conical-cochain-models.md

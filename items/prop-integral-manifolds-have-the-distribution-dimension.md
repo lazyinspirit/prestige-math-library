@@ -43,8 +43,7 @@ $i:N \to M$ be an integral manifold of $\mathcal D$. Then $\dim N = k$.
 
 **Proof technique:** direct.
 
-1.1 Because $i$ is an immersion, each $di_q:T_qN \to T_{i(q)}M$ is injective. [given]
-Since $i$ is integral, its image is $\mathcal D_{i(q)}$, which has dimension $k$. Therefore $\dim T_qN = k$ for every $q \in N$. [given]
+1.1 Because $i$ is an immersion, each $di_q:T_qN \to T_{i(q)}M$ is injective. [given] Since $i$ is integral, its image is $\mathcal D_{i(q)}$, which has dimension $k$. Therefore $\dim T_qN = k$ for every $q \in N$. [given]
 
-1.2 The dimension of a manifold is the common dimension of its tangent spaces, [given]
-so $\dim N = k$. [given] ∎
+2.1 The dimension of a manifold is the common dimension of its tangent spaces, [given] so $\dim N = k$. [given] ∎
+

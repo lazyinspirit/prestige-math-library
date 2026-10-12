@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-coordinate-cauchy-schwarz-agrees-with-the-finite-sum-theorem.md

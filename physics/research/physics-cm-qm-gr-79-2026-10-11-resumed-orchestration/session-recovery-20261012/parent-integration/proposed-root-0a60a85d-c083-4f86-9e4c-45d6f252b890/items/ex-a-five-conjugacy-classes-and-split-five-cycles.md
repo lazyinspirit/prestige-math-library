@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-five-conjugacy-classes-and-split-five-cycles.md

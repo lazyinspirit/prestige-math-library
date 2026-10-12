@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-partition-of-unity-subordinate-to-an-open-cover.md

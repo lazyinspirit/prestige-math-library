@@ -48,7 +48,6 @@ Every bijective smooth map is a diffeomorphism.
 
 1.1 By [L1], the map $F$ is smooth and bijective. [L1]
 
-1.2 The same cited refutation shows that $F^{-1}$ is not smooth, so [F1] rules [F1, L1]
-out $F$ being a diffeomorphism. [F1, L1]
+1.2 The same cited refutation shows that $F^{-1}$ is not smooth, so [F1] rules [F1, L1] out $F$ being a diffeomorphism. [F1, L1]
 
-2.1 Hence $F(x)=x^3$ is the desired counterexample. [step 1.1, step 1.2] ∎
+2.1 Hence $F(x)=x^3$ is the desired counterexample. [step 1.1, step 1.2] ∎ 

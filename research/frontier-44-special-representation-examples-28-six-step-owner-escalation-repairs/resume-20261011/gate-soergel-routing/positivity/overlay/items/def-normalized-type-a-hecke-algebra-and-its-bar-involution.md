@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-normalized-type-a-hecke-algebra-and-its-bar-involution.md

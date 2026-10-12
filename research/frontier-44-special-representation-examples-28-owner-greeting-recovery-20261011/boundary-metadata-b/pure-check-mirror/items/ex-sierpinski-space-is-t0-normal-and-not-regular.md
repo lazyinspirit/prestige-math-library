@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-sierpinski-space-is-t0-normal-and-not-regular.md

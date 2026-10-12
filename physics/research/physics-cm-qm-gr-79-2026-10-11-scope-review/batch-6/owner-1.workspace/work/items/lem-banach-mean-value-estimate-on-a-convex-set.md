@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-banach-mean-value-estimate-on-a-convex-set.md

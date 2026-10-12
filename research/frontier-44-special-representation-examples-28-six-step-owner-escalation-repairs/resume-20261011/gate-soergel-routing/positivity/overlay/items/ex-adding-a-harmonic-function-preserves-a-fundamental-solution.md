@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-adding-a-harmonic-function-preserves-a-fundamental-solution.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-finite-morphism-fibre-characterization.md

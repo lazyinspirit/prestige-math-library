@@ -48,14 +48,10 @@ $R$-module. Then $M$ is free.
 
 **Proof technique:** direct.
 
+ 1.1 Choose elements $x_1,\ldots,x_r\in M$ whose residue classes form a basis of the vector space $M/\mathfrak mM$. By [L1], they generate $M$. Thus there is a surjection $ \varphi:R^r\twoheadrightarrow M $ sending the $i$th standard basis vector to $x_i$. [L1, given, choose]
 
-1.1 Choose elements $x_1,\ldots,x_r\in M$ whose residue classes form a basis of the vector space $M/\mathfrak mM$. By [L1], they generate $M$. Thus there is a surjection $ \varphi:R^r\twoheadrightarrow M $ sending the $i$th standard basis vector to $x_i$. [L1, given, choose]
+ 1.2 Let $K=\ker\varphi$. Because $R$ is Noetherian and $R^r$ is finite, [L2] makes $K$ finitely generated. Tensoring $ 0\to K\to R^r\to M\to0 $ with the residue field $k=R/\mathfrak m$ remains exact by [L3], so $ 0\to K/\mathfrak mK\to k^r\to M/\mathfrak mM\to0. $ The last map is an isomorphism by the choice of the $x_i$, hence $K/\mathfrak mK=0$. [L2, L3, algebra]
 
+ 2.1 Applying [L1] to the finite module $K$ and the empty list of generators gives $K=0$. Thus $\varphi$ is an isomorphism and $M\cong R^r$ is free. [L1, step 1.2, algebra]
 
-1.2 Let $K=\ker\varphi$. Because $R$ is Noetherian and $R^r$ is finite, [L2] makes $K$ finitely generated. Tensoring $ 0\to K\to R^r\to M\to0 $ with the residue field $k=R/\mathfrak m$ remains exact by [L3], so $ 0\to K/\mathfrak mK\to k^r\to M/\mathfrak mM\to0. $ The last map is an isomorphism by the choice of the $x_i$, hence $K/\mathfrak mK=0$. [L2, L3, algebra]
-
-
-2.1 Applying [L1] to the finite module $K$ and the empty list of generators gives $K=0$. Thus $\varphi$ is an isomorphism and $M\cong R^r$ is free. [L1, step 1.2, algebra]
-
-
-3.1 Therefore every finite flat module over a Noetherian local ring is free. [algebra] ∎
+ 3.1 Therefore every finite flat module over a Noetherian local ring is free. [algebra] ∎ 

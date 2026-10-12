@@ -39,5 +39,4 @@ $\operatorname{Spec}A$.
 
 1.2 Every unital $k$-algebra map $A\to k$ is surjective, so its kernel is maximal and hence closed by [F2]. [F2, algebra]
 
-2.1 Thus classical $k$-points and closed points agree, but this makes no assertion that every prime is maximal. [step 1.1, step 1.2] ∎
- 
+2.1 Thus classical $k$-points and closed points agree, but this makes no assertion that every prime is maximal. [step 1.1, step 1.2] ∎  

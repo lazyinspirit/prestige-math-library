@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-left-translation-action-on-a-cayley-graph-restricts-the-embedding-of-cayleys-theorem.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-weierstrass-approximation-on-a-closed-interval.md

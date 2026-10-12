@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-two-generating-sets-of-a-dihedral-group.md

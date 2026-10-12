@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-z-n-acting-geometrically-on-euclidean-n-space.md

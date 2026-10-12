@@ -52,8 +52,6 @@ then $X$ has $K$-BAP, and hence AP.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Each $P_N$ has range in $\operatorname{span}\{e_1,\ldots,e_N\}$ and hence [given, L1, A1, L2]
-has finite rank. By [L1], using [A1] exactly through the coordinate-boundedness theorem, $\|P_N\|\le K$; by [L2], $P_Nx\to x$ for every $x\in X$. [A1, L1, L2]
+1.1 Each $P_N$ has range in $\operatorname{span}\{e_1,\ldots,e_N\}$ and hence [given, L1, A1, L2] has finite rank. By [L1], using [A1] exactly through the coordinate-boundedness theorem, $\|P_N\|\le K$; by [L2], $P_Nx\to x$ for every $x\in X$. [A1, L1, L2]
 
-2.1 Apply [L3] to $(P_N)$ and the identity. On each compact $C$, [given, L3, L4, step 1.1]
-$\sup_{x\in C}\|P_Nx-x\|\to0$. Together with step 1.1, [L4] says precisely that $X$ has $K$-BAP. Since BAP implies AP by [L4], the consequence follows. [L3, L4, step 1.1] ∎
+2.1 Apply [L3] to $(P_N)$ and the identity. On each compact $C$, [given, L3, L4, step 1.1] $\sup_{x\in C}\|P_Nx-x\|\to0$. Together with step 1.1, [L4] says precisely that $X$ has $K$-BAP. Since BAP implies AP by [L4], the consequence follows. [L3, L4, step 1.1] ∎ 

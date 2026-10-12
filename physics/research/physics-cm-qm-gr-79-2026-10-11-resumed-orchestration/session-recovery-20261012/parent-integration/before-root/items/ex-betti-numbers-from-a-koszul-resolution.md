@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-betti-numbers-from-a-koszul-resolution.md

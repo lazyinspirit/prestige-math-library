@@ -48,8 +48,7 @@ Moreover, if $U$ is a vector space and $\wedge':V^k\to U$ is a $k$-linear altern
 
 **Proof technique:** direct.
 
-
-1.1 The wedge is multilinear and alternating: by [L2] it is the composition of the universal multilinear map of [L3] with the quotient projection, and the projection kills every pure tensor with a repeated pair, which is exactly the vanishing condition of [L1]. [L1, L2, L3]
+ 1.1 The wedge is multilinear and alternating: by [L2] it is the composition of the universal multilinear map of [L3] with the quotient projection, and the projection kills every pure tensor with a repeated pair, which is exactly the vanishing condition of [L1]. [L1, L2, L3]
 
 1.2 Since $f$ is $k$-linear, [L3] supplies a unique linear map $\widetilde f:V^{\otimes k}\to W$ with $\widetilde f(v_1\otimes\cdots\otimes v_k)=f(v_1,\ldots,v_k)$. [L3]
 
@@ -59,4 +58,4 @@ Moreover, if $U$ is a vector space and $\wedge':V^k\to U$ is a $k$-linear altern
 
 4.1 For the uniqueness up to unique isomorphism, apply the universal property of $(\Lambda^kV,\wedge)$ to $\wedge'$ and that of $(U,\wedge')$ to $\wedge$, obtaining $u:\Lambda^kV\to U$ and $v:U\to\Lambda^kV$ with $u\wedge=\wedge'$ and $v\wedge'=\wedge$. Then $vu\wedge=\wedge$ and $uv\wedge'=\wedge'$, so the uniqueness clause of step 3.1 forces $vu=\operatorname{id}$ and $uv=\operatorname{id}$; this is the two-application argument of [L5]. [step 3.1, L5]
 
-5.1 Steps 1.1 and 3.1 prove the representing property, and step 4.1 the uniqueness of the representing pair. [step 1.1, step 3.1, step 4.1] ∎
+5.1 Steps 1.1 and 3.1 prove the representing property, and step 4.1 the uniqueness of the representing pair. [step 1.1, step 3.1, step 4.1] ∎ 

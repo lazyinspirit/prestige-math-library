@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-bose-construction-for-the-steiner-triple-system-on-nine-points.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-n-squared-plus-n-plus-forty-one-is-always-prime.md

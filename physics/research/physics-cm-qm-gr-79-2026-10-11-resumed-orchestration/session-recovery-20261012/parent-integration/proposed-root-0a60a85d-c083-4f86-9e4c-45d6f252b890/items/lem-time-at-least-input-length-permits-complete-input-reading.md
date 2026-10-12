@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-time-at-least-input-length-permits-complete-input-reading.md

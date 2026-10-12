@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-extensions-with-coprime-kernel-and-quotient-split.md

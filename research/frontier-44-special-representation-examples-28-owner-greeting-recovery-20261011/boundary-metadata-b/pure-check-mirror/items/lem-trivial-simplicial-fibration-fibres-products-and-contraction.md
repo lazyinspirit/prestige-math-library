@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-trivial-simplicial-fibration-fibres-products-and-contraction.md

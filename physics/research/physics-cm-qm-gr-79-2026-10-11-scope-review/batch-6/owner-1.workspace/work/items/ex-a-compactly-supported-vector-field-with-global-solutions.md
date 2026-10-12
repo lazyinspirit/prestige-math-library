@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-compactly-supported-vector-field-with-global-solutions.md

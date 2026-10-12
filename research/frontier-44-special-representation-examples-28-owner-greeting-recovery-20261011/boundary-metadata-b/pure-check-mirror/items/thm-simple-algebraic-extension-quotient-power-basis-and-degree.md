@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-algebraic-extension-quotient-power-basis-and-degree.md

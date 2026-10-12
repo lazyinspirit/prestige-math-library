@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-subrepresentation-quotient-representation-and-intertwiner.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inverse-bimodule-complexes-give-derived-tensor-equivalences.md

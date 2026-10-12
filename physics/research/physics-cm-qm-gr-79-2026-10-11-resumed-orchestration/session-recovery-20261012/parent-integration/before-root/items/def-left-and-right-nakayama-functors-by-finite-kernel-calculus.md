@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-and-right-nakayama-functors-by-finite-kernel-calculus.md

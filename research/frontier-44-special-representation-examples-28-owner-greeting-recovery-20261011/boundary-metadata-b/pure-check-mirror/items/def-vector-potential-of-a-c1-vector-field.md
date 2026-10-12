@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-vector-potential-of-a-c1-vector-field.md

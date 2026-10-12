@@ -1,0 +1,55 @@
+---
+id: lem-klr-maximal-tail-restriction-and-induction-have-a-unique-simple-head
+kind: lemma
+title: "Maximal KLR tails give a unique induction head and absolute simple modules"
+status: draft
+origin: pipeline
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+deps: [lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases, thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives, def-divided-power-klr-idempotents-and-projectives, def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum]
+justified_by: []
+aliases: []
+landmark: false
+dependency_level: 6
+proof_strategy: direct
+verification:
+  precheck: pass
+sources:
+  scraped: []
+  references:
+    - title: 'Khovanov and Lauda, A diagrammatic approach to categorification of quantum groups I, arXiv:0803.4121v2'
+      url: 'https://arxiv.org/pdf/0803.4121'
+      locator: '§3.2, Lemmas 3.6-3.9, Proposition 3.20 and integral-surjectivity discussion, PDF pp. 39-43; the omitted arguments are expanded locally.'
+    - title: 'Lauda and Vazirani, Crystals from categorified quantum groups, arXiv:0909.1810v2'
+      url: 'https://arxiv.org/pdf/0909.1810'
+      locator: 'Remark 1.3 graded arbitrary-Hermitian-parameter extension; §2.5.1, PDF pp. 17-18, precise tail/head/once assertions.'
+---
+
+## Statement
+
+Let $R$ be any graded KLR datum in this page over any field $k$. For a finite-dimensional graded module $M$ of weight $\beta$ set $\epsilon_i(M)=\max\{r:e(\beta-r\alpha_i,r\alpha_i)M\ne0\}$. If $S$ is simple and $r=\epsilon_i(S)>0$, there is a simple graded $R(\beta-r\alpha_i)$-module $N$ with $\epsilon_i(N)=0$ such that $\Delta_i^rS=N\boxtimes L(i^r)$, where $L(i^r)$ is the unique nil-Hecke simple up to shift. Conversely, for any such $N$, $\mathrm{Ind}(N\boxtimes L(i^r))$ has a unique simple graded head $S$, appearing once as a composition factor, with $\epsilon_i(S)=r$ and $\Delta_i^rS=N\boxtimes L(i^r)$; every other composition factor has smaller $i$-tail. The graded simples of every $R(\beta)$ remain simple without grading and are absolutely simple; all ordinary endomorphisms are $k$ and nonzero homogeneous endomorphisms have degree $0$. The classes of normalized simples and their projective covers are therefore unscaled dual shift-orbit bases for the projective/simple Hom pairing. For each $\beta$ there is a finite family of ordered divided-power words $Y_b$ whose normalized projective classes pair triangularly with the simple classes, with diagonal entries $1$ after choosing the simple grading shifts. Thus the selected $[P(Y_b)]$ form an $A$-basis of $K_0(R(\beta))$; arbitrary divided words span, but need not be a basis. The identical statements hold for maximal FIRST-color blocks, with $\epsilon_i^L(M)=\max\{r:e(r\alpha_i,\beta-r\alpha_i)M\ne0\}$, restriction $\Delta_i^{(L,r)}$ and induction $\mathrm{Ind}(L(i^r)\boxtimes N)$.
+
+## Facts & Assumptions
+
+**Given:** A graded KLR datum over any field $k$, the functors $\Delta_i=\mathrm{Res}_{\beta-r\alpha_i,r\alpha_i}$ and $\mathrm{Ind}$ of [[thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives]], the finite-dimensional graded simples of [[lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases]], and the nil-Hecke idempotents and simple $L(i^r)$ of [[def-divided-power-klr-idempotents-and-projectives]].
+
+[F1] The nil-Hecke algebra $NH_r=R(r\alpha_i)$ is a graded matrix algebra $\mathrm{Mat}_{r!}(k)$ with its defining graded simple $L(i^r)$ absolutely simple, and every finite-dimensional simple module over $R(\mu)\otimes_kNH_r$ is, up to shift, uniquely of the form $N\boxtimes L(i^r)$ with $N$ a graded simple $R(\mu)$-module.
+
+[F2] Exactness, the adjunctions and the Mackey filtration of [[thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives]]: $\mathrm{Ind}$ is left adjoint to $\mathrm{Res}$, both are exact, and a corner restriction has a finite filtration whose subquotients are composites of four-block restrictions, flips and inductions with the displayed shifts.
+
+[F3] Krull-Schmidt and covers ([[lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases]]): finite-dimensional graded modules have finite unique decompositions, simples are finite-dimensional, and the projective/simple Hom pairing has diagonal entries $\dim_k\operatorname{End}^0(S_b)$.
+
+## Proof
+
+**Proof technique:** direct; identify the nil-Hecke tail by matrix units, compute the maximal restriction through the Mackey filtration, then run the triangular basis argument.
+
+1.1 (Nil-Hecke tail and its matrix units.) The constant-colour block $R(r\alpha_i)=NH_r$ is the nil-Hecke algebra, and the explicit Artin polynomial/matrix-unit description exhibits it as a graded matrix algebra $\mathrm{Mat}_{r!}(k)$ with its unique graded simple $L(i^r)$ absolutely simple; the divided-projective idempotent of [[def-divided-power-klr-idempotents-and-projectives]] cuts out a one-dimensional image, so $L(i^r)$ has a projective cover with $\operatorname{End}^0=k$. If $T$ is a finite-dimensional simple module over $R(\mu)\otimes_kNH_r$, then the positive symmetric functions of the tail dots are central and positive, so they act on $T$ by $0$ (a nonzero positive-degree central endomorphism of a finite-dimensional simple module is invertible, hence has a nonzero eigenvalue with a least-degree contradiction); hence $T$ is killed by the augmentation ideal of the tail center and the matrix-unit decomposition of $NH_r$ writes $T=N\boxtimes L(i^r)$ with $N$ a graded simple $R(\mu)$-module, unique up to shift. [given, F1, algebra]
+
+2.1 (Maximal restriction.) Let $S$ be a finite-dimensional graded simple with $r=\epsilon_i(S)>0$ maximal. The finite-dimensional module $\Delta_i^rS$ is nonzero by the definition of $\epsilon_i$ and has a simple submodule; by step 1.1 it is of the form $N\boxtimes L(i^r)$ for a graded simple $R(\beta-r\alpha_i)$-module $N$. If $N$ carried a word ending in $i$, then concatenating any nonzero nil-Hecke tail word would produce a nonzero vector in $S$ of tail $r+1$, contradicting maximality, so $\epsilon_i(N)=0$. By the left adjunction of [F2] the inclusion $N\boxtimes L(i^r)\hookrightarrow\Delta_i^rS$ corresponds to a nonzero map $M:=\mathrm{Ind}(N\boxtimes L(i^r))\to S$, which is surjective since $S$ is simple. In the Mackey filtration of $\Delta_i^rM$ every shuffle bringing $t>0$ colours $i$ from the first block into the final tail contains a factor $\Delta_i^tN$ and is zero; the only surviving filtration quotient is $N\boxtimes L(i^r)$ with zero crossing shift, so $\Delta_i^rM=N\boxtimes L(i^r)$ exactly. This is a one-surviving-quotient computation, not a semisimplicity assumption. [step 1.1, F2, algebra]
+
+3.1 (Unique head and simplicity.) Every nonzero quotient $Q$ of $M$ has nonzero defining corner: if $eQ=0$ with $e=e(\beta-r\alpha_i,r\alpha_i)$, then the composite $Ae\otimes_B(N\boxtimes L(i^r))\to M\to Q$ is zero by the tensor/Res adjunction, hence $Q=0$. The finite graded semisimple head of $M$ therefore has exactly one simple summand, occurring once, because its exact $e$-restriction is a quotient of the simple $eM=N\boxtimes L(i^r)$; this head is $S$, and $eM\to eS$ is an isomorphism, so exactness gives $e\ker(M\to S)=0$ and every other composition factor of $M$ has smaller tail. Underlying and absolute simplicity of $S$: induct on the height of $\beta$. For positive height choose $i$ with $r>0$; by step 2.1 and induction $N$ and $L(i^r)$ are absolutely simple, so $eS=N\boxtimes L(i^r)$ has endomorphism ring $k$; if $U\le S$ is any ungraded submodule with $eU\ne0$, then $eU=eS$ and $U=S$ because $S$ is generated by $eS$; if $eU=0$, the graded submodule generated by the homogeneous components of vectors of $U$ is nonzero, killed by $e$, and hence equal to $S$ by graded simplicity, contradicting $eS\ne0$. Thus $S$ is simple as an ungraded module, and every $R$-endomorphism of $S$ is determined on $eS$, giving $\operatorname{End}_R(S)=k$. The finite-density matrix argument then shows absolute simplicity over every field: any $m$ linearly independent vectors can be sent to arbitrary targets by one algebra element, by induction on $m$ and the commutant $k$ clause, so the action realizes all $k$-linear matrices and remains simple after field extension. [step 2.1, F1, F3, algebra]
+
+4.1 (Triangular divided-string basis.) Choose a cyclic order of the finite colour support and recursively strip maximal $i$-tails, producing for each simple shift orbit a finite tuple $Y_b$ of ordered divided powers; two simples with the same tuple agree by the unique-head recursion of step 3.1. Form $P(Y_b)$ from the reversed ordered normalized divided blocks. Its homogeneous Hom to $S_c$ is the corresponding product of divided idempotents acting on $S_c$; comparing tuples lexicographically, if $Y_b>Y_c$ at the first differing entry then the required tail exceeds the maximal tail of the successively stripped simple $S_c$, and the corner is zero. When the tuples agree, every maximal restriction is the simple tensor computed in step 2.1 and each nil-Hecke divided idempotent reduces the tail to one dimension, so by induction the diagonal Hom is a single Laurent monomial with coefficient $1$. Shifting each $S_b$ makes the diagonal $1$. The finite matrix is triangular over $A=\mathbb Z[q,q^{-1}]$ with diagonal $1$; Krull-Schmidt and the projective-cover/simple Hom pairing (now with $\operatorname{End}(S)=k$ from step 3.1) identify it with the matrix expressing the projective classes in the cover basis, and successive integral triangular elimination proves that the selected classes $[P(Y_b)]$ are an $A$-basis of $K_0(R(\beta))$; the whole family of divided words spans because the recursion covers every simple, while redundancy of non-selected words is allowed. This completes the integral surjectivity argument without a PBW rank or flat-family shortcut. [step 3.1, F3, algebra]
+
+5.1 (First-color version.) For maximal FIRST-color blocks use the defining idempotent $e(r\alpha_i,\mu)$ and $M=\mathrm{Ind}(L(i^r)\boxtimes N)$ with $\epsilon_i^L(N)=0$; a simple submodule of the maximal first-block restriction $\Delta_i^{(L,r)}S$ has the form $L(i^r)\boxtimes N$ by the same nil-Hecke matrix units of step 1.1, and any first-colour support of $N$ would extend the maximal first block, so it vanishes. In the Mackey restriction of $\Delta_i^{(L,r)}M$ every nontrivial shuffle bringing a positive number $t$ of $i$-colours from $N$ into the first block contains $\Delta_i^{(L,t)}N$ and is zero, so the sole uncrossed quotient is $L(i^r)\boxtimes N$ with shift $0$; the defining-corner generation and exact-head argument of steps 3.1 and 3.1 are unchanged. Thus the first-block assertions are proved directly, with no unsigned star-crystal preservation assumed. [step 1.1, step 3.1, step 4.1, F2, algebra] ∎

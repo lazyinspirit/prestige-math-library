@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-characters-of-z-mod-five-and-their-orthogonality.md

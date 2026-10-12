@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-laplace-beltrami-operator-as-trace-of-the-hessian.md

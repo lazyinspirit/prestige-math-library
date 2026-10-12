@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-resolvent-identity-and-holomorphy-for-closed-operators.md

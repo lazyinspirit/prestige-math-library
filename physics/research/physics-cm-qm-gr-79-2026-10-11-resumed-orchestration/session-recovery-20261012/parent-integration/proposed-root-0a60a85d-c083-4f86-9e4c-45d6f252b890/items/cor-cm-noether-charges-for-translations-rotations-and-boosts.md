@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cm-noether-charges-for-translations-rotations-and-boosts.md

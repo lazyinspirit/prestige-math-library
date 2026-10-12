@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-exterior-power-is-a-canonical-subspace-of-the-tensor-power-over-every-field.md

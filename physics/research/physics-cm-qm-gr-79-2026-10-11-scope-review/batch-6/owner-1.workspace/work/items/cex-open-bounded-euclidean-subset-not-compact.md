@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-open-bounded-euclidean-subset-not-compact.md

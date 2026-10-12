@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-unbracketed-and-unordered-tensor-strings-are-well-defined-in-a-symmetric-monoidal-category.md

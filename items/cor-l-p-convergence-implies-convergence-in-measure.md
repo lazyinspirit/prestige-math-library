@@ -42,11 +42,9 @@ representatives $f_n,f$. If $\|u_n-u\|_p\to0$, then $f_n\to f$ in measure.
 
 **Proof technique:** For $1 \le p < infinity$, apply Chebyshev-Markov to $|f_n-f|^p$. For $p = infinity$, the essential-supremum bound makes the bad set null for all large $n$.
 
-1.1 Assume $1\le p<\infty$ and fix $\varepsilon>0$. Apply [L3] to [L2, L3, given, algebra]
-$h:=|f_n-f|^p$ and $t:=\varepsilon^p$: $$\mu(\{|f_n-f|>\varepsilon\})=\mu(\{|f_n-f|^p>\varepsilon^p\})\le\varepsilon^{-p}\int |f_n-f|^p\,d\mu=\varepsilon^{-p}\|u_n-u\|_p^p.$$ By [L2], the right-hand side tends to $0$.
+1.1 Assume $1\le p<\infty$ and fix $\varepsilon>0$. Apply [L3] to [L2, L3, given, algebra] $h:=|f_n-f|^p$ and $t:=\varepsilon^p$: $$\mu(\{|f_n-f|>\varepsilon\})=\mu(\{|f_n-f|^p>\varepsilon^p\})\le\varepsilon^{-p}\int |f_n-f|^p\,d\mu=\varepsilon^{-p}\|u_n-u\|_p^p.$$ By [L2], the right-hand side tends to $0$. [L3, L2, given, algebra]
 
-1.2 Assume $p=\infty$ and fix $\varepsilon>0$. Because $\|u_n-u\|_\infty\to0$, [L2, L4, given]
-for all large $n$ one has $\|u_n-u\|_\infty<\varepsilon$. Then [L4] gives $|f_n-f|\le\varepsilon$ almost everywhere, so $$\mu(\{|f_n-f|>\varepsilon\})=0.$$ Hence the bad-set measures are eventually $0$.
+1.2 Assume $p=\infty$ and fix $\varepsilon>0$. Because $\|u_n-u\|_\infty\to0$, [L2, L4, given] for all large $n$ one has $\|u_n-u\|_\infty<\varepsilon$. Then [L4] gives $|f_n-f|\le\varepsilon$ almost everywhere, so $$\mu(\{|f_n-f|>\varepsilon\})=0.$$ Hence the bad-set measures are eventually $0$. [L2, L4, given]
 
-2.1 Step 1.1 proves the finite-$p$ case and step 1.2 proves the [step 1.1, step 1.2, L1]
-$p=\infty$ case, so [L1] gives convergence in measure. ∎
+2.1 Step 1.1 proves the finite-$p$ case and step 1.2 proves the [step 1.1, step 1.2, L1] $p=\infty$ case, so [L1] gives convergence in measure. [step 1.1, step 1.2, L1] ∎
+

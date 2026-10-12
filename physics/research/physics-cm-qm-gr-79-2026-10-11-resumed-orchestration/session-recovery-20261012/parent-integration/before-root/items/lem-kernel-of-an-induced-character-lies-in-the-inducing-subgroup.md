@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kernel-of-an-induced-character-lies-in-the-inducing-subgroup.md

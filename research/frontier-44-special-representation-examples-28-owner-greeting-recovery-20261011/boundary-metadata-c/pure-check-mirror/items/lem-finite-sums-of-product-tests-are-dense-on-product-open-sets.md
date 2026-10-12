@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-sums-of-product-tests-are-dense-on-product-open-sets.md

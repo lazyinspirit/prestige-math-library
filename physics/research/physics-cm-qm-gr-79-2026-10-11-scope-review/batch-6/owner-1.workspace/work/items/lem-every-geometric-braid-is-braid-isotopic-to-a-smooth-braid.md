@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-geometric-braid-is-braid-isotopic-to-a-smooth-braid.md

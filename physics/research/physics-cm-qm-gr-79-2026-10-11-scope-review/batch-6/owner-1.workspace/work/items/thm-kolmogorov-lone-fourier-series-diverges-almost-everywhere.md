@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere.md

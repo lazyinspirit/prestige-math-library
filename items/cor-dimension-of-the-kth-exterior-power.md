@@ -45,9 +45,8 @@ $$\dim\Lambda^kV=\binom{n}{k}.$$
 
 **Proof technique:** direct.
 
-
-1.1 Since $\dim V=n$, there is an ordered basis $(e_1,\ldots,e_n)$ of $V$ by [L2]. [L2]
+ 1.1 Since $\dim V=n$, there is an ordered basis $(e_1,\ldots,e_n)$ of $V$ by [L2]. [L2]
 
 2.1 By [L1], the set of wedges $e_I$ over the $k$-element subsets $I$ of $\{1,\ldots,n\}$ is a basis of $\Lambda^kV$. [L1, step 1.1]
 
-3.1 By [L3] there are exactly $\binom{n}{k}$ such subsets, and by [L2] the dimension equals that count. [L2, L3, step 2.1] ∎
+3.1 By [L3] there are exactly $\binom{n}{k}$ such subsets, and by [L2] the dimension equals that count. [L2, L3, step 2.1] ∎ 

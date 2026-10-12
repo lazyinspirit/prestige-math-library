@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weierstrass-quotient-is-a-finite-module.md

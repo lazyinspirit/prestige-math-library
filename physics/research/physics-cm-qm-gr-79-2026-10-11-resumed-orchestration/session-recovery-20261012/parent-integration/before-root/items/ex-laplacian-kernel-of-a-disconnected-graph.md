@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-laplacian-kernel-of-a-disconnected-graph.md

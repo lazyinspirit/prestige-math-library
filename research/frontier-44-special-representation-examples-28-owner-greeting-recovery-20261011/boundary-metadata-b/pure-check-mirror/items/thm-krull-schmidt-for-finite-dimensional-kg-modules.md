@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-krull-schmidt-for-finite-dimensional-kg-modules.md

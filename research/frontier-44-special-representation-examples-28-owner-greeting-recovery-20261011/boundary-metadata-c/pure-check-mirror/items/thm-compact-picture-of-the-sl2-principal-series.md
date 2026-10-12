@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-picture-of-the-sl2-principal-series.md

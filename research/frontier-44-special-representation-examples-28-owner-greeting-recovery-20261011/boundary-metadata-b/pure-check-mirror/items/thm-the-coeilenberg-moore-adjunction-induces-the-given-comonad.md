@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-coeilenberg-moore-adjunction-induces-the-given-comonad.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-irreducible-representations-have-degree-at-most-the-group-order.md

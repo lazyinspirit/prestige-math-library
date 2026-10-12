@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-integer-represented-by-binary-quadratic-form.md

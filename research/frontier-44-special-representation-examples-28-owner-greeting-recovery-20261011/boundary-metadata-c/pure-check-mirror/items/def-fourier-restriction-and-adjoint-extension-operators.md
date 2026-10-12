@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-fourier-restriction-and-adjoint-extension-operators.md

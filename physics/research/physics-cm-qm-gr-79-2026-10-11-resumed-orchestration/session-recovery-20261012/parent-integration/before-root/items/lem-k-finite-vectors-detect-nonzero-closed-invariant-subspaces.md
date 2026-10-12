@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-finite-vectors-detect-nonzero-closed-invariant-subspaces.md

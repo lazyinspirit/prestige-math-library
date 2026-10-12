@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-quadratic-subfield-of-q-zeta-seven.md

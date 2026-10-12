@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-effective-cartier-divisor-closed-immersion.md

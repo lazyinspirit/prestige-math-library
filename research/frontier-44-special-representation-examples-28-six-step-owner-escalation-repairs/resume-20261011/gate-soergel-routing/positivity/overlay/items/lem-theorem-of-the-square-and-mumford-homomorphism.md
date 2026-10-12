@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-theorem-of-the-square-and-mumford-homomorphism.md

@@ -43,8 +43,7 @@ Then $u\times v=\star(u\wedge v)$. Equivalently, with the unit volume form $\ome
 
 **Proof technique:** direct.
 
-
-1.1 Every bilinear alternating map $B:\mathbb R^3\times\mathbb R^3\to\mathbb R^3$ is determined by its values on the three pairs $(e_1,e_2),(e_2,e_3),(e_3,e_1)$: expanding in coordinates, $B(u,v)=\sum_{i<j}(u_iv_j-u_jv_i)B(e_i,e_j)$. [algebra]
+ 1.1 Every bilinear alternating map $B:\mathbb R^3\times\mathbb R^3\to\mathbb R^3$ is determined by its values on the three pairs $(e_1,e_2),(e_2,e_3),(e_3,e_1)$: expanding in coordinates, $B(u,v)=\sum_{i<j}(u_iv_j-u_jv_i)B(e_i,e_j)$. [algebra]
 
 1.2 By [L1], $\star(e_1\wedge e_2)=e_3$, $\star(e_2\wedge e_3)=e_1$, and $\star(e_3\wedge e_1)=e_2$; the map $(u,v)\mapsto\star(u\wedge v)$ is bilinear and alternating because the wedge is and $\star$ is linear. [L1, algebra]
 
@@ -56,4 +55,4 @@ Then $u\times v=\star(u\wedge v)$. Equivalently, with the unit volume form $\ome
 
 3.2 Orthogonality: by the defining relation of [L1] and the square law of [L2], $\langle u,\star(u\wedge v)\rangle\omega=u\wedge\star(\star(u\wedge v))=u\wedge u\wedge v=0$, and $\omega\ne0$, so $\langle u,u\times v\rangle=0$; the same argument with $v$ gives $\langle v,u\times v\rangle=0$. [L1, L2, step 2.1, algebra]
 
-4.1 Steps 2.1, 3.1 and 3.2 establish the three equivalent descriptions and the orthogonality. [step 2.1, step 3.1, step 3.2] ∎
+4.1 Steps 2.1, 3.1 and 3.2 establish the three equivalent descriptions and the orthogonality. [step 2.1, step 3.1, step 3.2] ∎ 

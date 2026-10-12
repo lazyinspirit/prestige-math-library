@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invariant-initial-law-makes-the-chain-stationary.md

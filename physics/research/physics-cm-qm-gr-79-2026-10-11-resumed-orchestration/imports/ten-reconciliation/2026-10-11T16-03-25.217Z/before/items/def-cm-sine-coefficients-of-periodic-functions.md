@@ -1,0 +1,65 @@
+---
+id: def-cm-sine-coefficients-of-periodic-functions
+kind: definition
+title: "Sine coefficients, sine series and the odd periodic extension"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 0
+deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-continuity-real, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-integral, def-oriented-integral, thm-additivity-over-subintervals, def-sine-and-cosine-by-power-series, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-interval, def-abs-value]
+dependency_roles:
+  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  def-continuity-real: mathematical-premise
+  def-integral-over-a-measurable-set: mathematical-premise
+  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+  thm-linearity-of-the-integral: mathematical-premise
+  def-oriented-integral: mathematical-premise
+  thm-additivity-over-subintervals: mathematical-premise
+  def-sine-and-cosine-by-power-series: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  def-interval: mathematical-premise
+  def-abs-value: mathematical-premise
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapter 1 (Fourier coefficients of periodic functions) and Theorem 5.4(c) (the orthonormal trigonometric basis of L²(T))"
+      url: "https://arxiv.org/pdf/0903.3845"
+    - title: "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of the fixed-end string: the sinusoidal modes)"
+      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+
+  precheck: pass
+---
+
+## Definition
+
+Let $L>0$. A function $F:\mathbb R\to\mathbb R$ is **$L$-periodic** when $F(x+L)=F(x)$ for all $x\in\mathbb R$, and **odd** when $F(-x)=-F(x)$ for all $x$.
+
+**(a) Sine coefficients.** Let $F:\mathbb R\to\mathbb R$ be continuous ([[def-continuity-real]]) and $L$-periodic; then $\int_0^L|F|<\infty$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-integrable-real-and-complex-functions-and-their-integrals]]). For every integer $n\ge1$ the **$n$-th sine coefficient** of $F$ is
+
+$$b_n(F):=\frac{2}{L}\int_0^LF(x)\sin\!\Bigl(\frac{n\pi x}{L}\Bigr)dx \qquad \in\mathbb R ,$$
+
+an ordinary Lebesgue integral of a continuous function on a compact interval ([[def-integral-over-a-measurable-set]], [[def-sine-and-cosine-by-power-series]]). The **sine series** of $F$ is the series of functions
+
+$$\sum_{n\ge1}b_n(F)\sin\!\Bigl(\frac{n\pi x}{L}\Bigr),$$
+
+whose $N$-th **partial sum** is $S_N^{\rm s}F(x):=\sum_{n\le N}b_n(F)\sin(n\pi x/L)$.
+
+**(b) Odd periodic extension.** Let $F:[0,L]\to\mathbb R$ be continuous with $F(0)=F(L)=0$. The **odd $2L$-periodic extension** of $F$ is the function on $\mathbb R$ defined by
+
+$$F^{\rm odd}(x):=\begin{cases}F(x),&0\le x\le L,\\ -F(-x),&-L\le x\le 0,\end{cases}\qquad F^{\rm odd}(x+2L):=F^{\rm odd}(x).$$
+
+Equivalently, $F^{\rm odd}$ is the unique $2L$-periodic odd function whose restriction to $[0,L]$ is $F$ (the two definitions agree at $0$ and $L$ because both values vanish; the extension is well defined and continuous).
+
+(c) The **fundamental frequency** of mode $n$ is $\omega_n:=cn\pi/L$ for the wave speed $c>0$ fixed by the context.
+
+## Remarks
+
+- All coefficients are ordinary integrals of continuous functions on compact intervals; no choice principle is needed, and no convergence of the sine series is asserted by the definition. Sine coefficients are real because $F$ and the sine functions are real-valued.
+
+- The normalization in $b_n$ is the one that makes the family $\{\sin(n\pi x/L)\}_{n\ge1}$ orthonormal in the large sense: $\int_0^L\sin(n\pi x/L)\sin(k\pi x/L)dx=(L/2)\delta_{nk}$, the factor $(2/L)$ being the inverse of the squared norm $L/2$; the orthogonality is proved in the companion lemma, not assumed here.
+
+- A function that is odd and $2L$-periodic automatically satisfies $F(0)=F(L)=0$ by oddness and periodicity; the extension in (b) is a construction, not a claim that $F$ already has these symmetries.

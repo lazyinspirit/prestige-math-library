@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-cycle-and-overlong-arm-nonpositive-witnesses.md

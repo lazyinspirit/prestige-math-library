@@ -1,0 +1,5 @@
+# Binding multipartition weight scope
+
+The actual Schur algebra C used in Q has exactly multipartition summands and weights. The polynomial and Γ series in the J construction allow arbitrary composition monomials only as AUXILIARY combinatorial tableau series. At an actual multipartition nu their coefficients are the required Kostka multiplicities and actual Schur weight determinants. No Schur modules, summands, idempotents, or additional quasihereditary labels for other compositions are asserted. Every application of a formal character or determinant coefficient to the actual C is restricted to multipartition nu. This note binds every J proof-construction packet without changing its mathematical formulas.
+
+Earlier caveat annotations were applied before parent's preservation message arrived. Their unique inverse recovered the exact original bodies and matched all available recorded guards. Both actual annotated versions and recovered-before bytes are archived locally, and this standalone note preserves the binding clarification. The history record does not claim the annotation was reviewed or invent an earlier physical capture.

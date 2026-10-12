@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-ordinary-homology-theories-have-mayer-vietoris-for-cw-covers.md

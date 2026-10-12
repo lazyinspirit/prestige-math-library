@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-potentials-interval-spectra-completeness-and-nodes.md

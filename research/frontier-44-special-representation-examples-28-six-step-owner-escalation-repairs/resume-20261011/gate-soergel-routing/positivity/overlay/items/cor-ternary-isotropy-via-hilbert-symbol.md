@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-ternary-isotropy-via-hilbert-symbol.md

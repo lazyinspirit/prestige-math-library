@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-union-of-two-subspaces-is-a-subspace.md

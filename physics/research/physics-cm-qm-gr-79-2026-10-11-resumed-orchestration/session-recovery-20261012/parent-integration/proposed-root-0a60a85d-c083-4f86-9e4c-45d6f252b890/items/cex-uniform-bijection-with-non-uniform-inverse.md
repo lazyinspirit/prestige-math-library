@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-uniform-bijection-with-non-uniform-inverse.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-euler-pentagonal-number-theorem-by-franklin.md

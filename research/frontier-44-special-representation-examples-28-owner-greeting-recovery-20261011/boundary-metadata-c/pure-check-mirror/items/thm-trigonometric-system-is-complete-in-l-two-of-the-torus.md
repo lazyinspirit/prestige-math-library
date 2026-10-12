@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-trigonometric-system-is-complete-in-l-two-of-the-torus.md

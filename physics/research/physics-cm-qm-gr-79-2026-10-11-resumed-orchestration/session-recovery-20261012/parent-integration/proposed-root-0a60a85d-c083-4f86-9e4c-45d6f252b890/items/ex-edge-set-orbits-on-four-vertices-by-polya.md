@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-edge-set-orbits-on-four-vertices-by-polya.md

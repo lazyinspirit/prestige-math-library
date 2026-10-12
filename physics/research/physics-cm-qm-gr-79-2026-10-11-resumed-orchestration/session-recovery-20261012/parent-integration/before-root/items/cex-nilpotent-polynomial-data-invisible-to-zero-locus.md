@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nilpotent-polynomial-data-invisible-to-zero-locus.md

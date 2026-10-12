@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-euler-characteristic-is-unchanged-by-edge-and-face-subdivision.md

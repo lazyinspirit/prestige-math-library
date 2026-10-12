@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-transverse-complementary-dimensional-intersection-set.md

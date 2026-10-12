@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-normalised-lu-and-ldu-factorisations-are-unique.md

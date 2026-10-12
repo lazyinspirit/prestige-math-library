@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ricci-decomposition-of-the-riemann-tensor-in-dimension-at-least-three.md

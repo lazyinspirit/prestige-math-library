@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-picard-group-and-intersection-form-of-p1-times-p1.md

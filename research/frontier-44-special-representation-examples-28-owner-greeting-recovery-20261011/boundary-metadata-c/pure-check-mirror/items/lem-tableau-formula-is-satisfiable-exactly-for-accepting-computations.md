@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations.md

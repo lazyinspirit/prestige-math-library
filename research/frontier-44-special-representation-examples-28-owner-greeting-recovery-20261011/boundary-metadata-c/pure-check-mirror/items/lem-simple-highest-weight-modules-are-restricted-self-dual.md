@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-simple-highest-weight-modules-are-restricted-self-dual.md

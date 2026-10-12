@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-c2-holomorphic-components-have-nonpositive-hessian-determinant.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-shapiro-lemma-for-the-trivial-subgroup.md

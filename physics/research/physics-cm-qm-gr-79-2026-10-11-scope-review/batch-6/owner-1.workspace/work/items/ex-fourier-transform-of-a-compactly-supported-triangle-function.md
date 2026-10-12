@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fourier-transform-of-a-compactly-supported-triangle-function.md

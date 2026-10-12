@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-subgroups-and-quotients-of-amenable-groups-are-amenable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-forced-heat-solutions-are-smooth-away-from-the-source-time-diagonal.md

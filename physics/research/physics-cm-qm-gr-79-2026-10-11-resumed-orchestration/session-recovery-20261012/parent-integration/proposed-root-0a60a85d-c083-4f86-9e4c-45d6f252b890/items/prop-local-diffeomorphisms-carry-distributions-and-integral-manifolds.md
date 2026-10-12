@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-diffeomorphisms-carry-distributions-and-integral-manifolds.md

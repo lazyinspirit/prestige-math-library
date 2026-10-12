@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-positive-depth-ring-has-regular-minimal-generator.md

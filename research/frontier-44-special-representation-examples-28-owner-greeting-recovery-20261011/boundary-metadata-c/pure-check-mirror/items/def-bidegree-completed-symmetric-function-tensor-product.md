@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-bidegree-completed-symmetric-function-tensor-product.md

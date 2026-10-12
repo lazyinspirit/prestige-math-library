@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-discrete-generator-of-a-countable-state-transition-matrix.md

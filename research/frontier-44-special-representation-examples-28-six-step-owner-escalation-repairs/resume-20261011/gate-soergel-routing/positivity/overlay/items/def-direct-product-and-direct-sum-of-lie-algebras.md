@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-direct-product-and-direct-sum-of-lie-algebras.md

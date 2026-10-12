@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-noether-normalisation-nonzero-polynomial-made-monic.md

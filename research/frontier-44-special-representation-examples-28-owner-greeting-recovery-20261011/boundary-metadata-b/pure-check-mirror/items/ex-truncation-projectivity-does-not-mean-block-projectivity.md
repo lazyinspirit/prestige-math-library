@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-truncation-projectivity-does-not-mean-block-projectivity.md

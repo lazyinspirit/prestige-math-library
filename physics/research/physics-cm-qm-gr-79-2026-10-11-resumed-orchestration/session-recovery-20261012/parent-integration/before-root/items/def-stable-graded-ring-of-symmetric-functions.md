@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stable-graded-ring-of-symmetric-functions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion.md

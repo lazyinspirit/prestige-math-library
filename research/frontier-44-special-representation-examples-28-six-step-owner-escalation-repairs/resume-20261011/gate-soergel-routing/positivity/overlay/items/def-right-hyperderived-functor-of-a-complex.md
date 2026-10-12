@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-right-hyperderived-functor-of-a-complex.md

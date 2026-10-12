@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-coordinate-formula-for-the-exterior-derivative.md

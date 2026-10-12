@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cyclic-subgroup-is-the-set-of-powers.md

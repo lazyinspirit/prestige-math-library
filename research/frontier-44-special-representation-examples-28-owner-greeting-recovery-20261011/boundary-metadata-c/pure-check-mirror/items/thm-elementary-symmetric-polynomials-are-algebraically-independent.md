@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-elementary-symmetric-polynomials-are-algebraically-independent.md

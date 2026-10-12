@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cubical-pinch-is-additive-on-relative-homology.md

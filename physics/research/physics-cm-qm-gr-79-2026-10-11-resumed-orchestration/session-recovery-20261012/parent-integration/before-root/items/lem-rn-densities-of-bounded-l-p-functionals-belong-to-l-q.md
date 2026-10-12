@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rn-densities-of-bounded-l-p-functionals-belong-to-l-q.md

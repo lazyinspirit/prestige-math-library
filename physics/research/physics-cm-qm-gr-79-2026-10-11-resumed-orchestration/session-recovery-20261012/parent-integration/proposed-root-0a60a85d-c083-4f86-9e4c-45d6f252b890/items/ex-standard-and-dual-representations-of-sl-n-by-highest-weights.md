@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-standard-and-dual-representations-of-sl-n-by-highest-weights.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-differential-sends-derivations-to-derivations-and-is-linear.md

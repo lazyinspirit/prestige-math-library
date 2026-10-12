@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-negation-scales-the-local-index-by-minus-one-to-the-dimension.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ag-base-change-of-standard-smooth-presentations.md

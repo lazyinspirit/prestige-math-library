@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-jucys-murphy-elements-of-the-symmetric-group-algebra.md

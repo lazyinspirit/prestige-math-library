@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-bounded-partition-into-weakly-restricted-sets.md

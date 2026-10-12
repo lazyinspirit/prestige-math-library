@@ -1,0 +1,110 @@
+---
+id: lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient
+kind: lemma
+title: "The parabolic highest-weight truncation factors through the cyclotomic quotient"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 8
+deps: [def-deformed-tensor-space-for-the-type-a-finite-w-algebra,
+       def-degenerate-cyclotomic-hecke-algebra,
+       thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations,
+       def-associated-graded-algebra-of-a-filtered-algebra,
+       thm-skryabins-equivalence-for-the-type-a-whittaker-pair,
+       def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character,
+       def-the-type-a-finite-w-algebra-and-whittaker-category,
+       def-arakawa-suzuki-casimir-operators-on-tensor-functors,
+       thm-nilpotent-jordan-string-basis, def-nilpotent-endomorphism,
+       def-classical-complex-matrix-lie-algebras,
+       thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra,
+       def-universal-enveloping-algebra, def-axiom-of-choice]
+axiom_use: "Inherited AC only from the actual Skryabin equivalence used to establish the raw affine action. The raw flag/minimal-degree calculation and the ordinary induced-module PBW tensor flag are choice-free."
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+sources:
+  references:
+    - title: "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)"
+      url: "https://arxiv.org/pdf/math/0605217"
+      locator: "Introduction, printed p. 4, defines C_-rho by the prefix-column trace shift; Section 4.2, formula (4.2) and the ground-state paragraph, identifies P_c as the induced ground module. Sections 3.3-3.5 give the actual raw transported tensor operator and its minimal polynomial. The indicated ground-module and tensor passages were read for this construction; no fresh full-article reading is claimed."
+    - title: "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)"
+      url: "https://arxiv.org/pdf/math/0508003"
+      locator: "Chapter 8, Sections 8.1-8.3, printed pp. 81-86: the actual balanced tensor map, coherent associativity and the transported Casimir/place action. These relevant passages were read in the current construction session; the raw minimal polynomial is computed locally here."
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Assume the Axiom of Choice [[def-axiom-of-choice]] only for the imported
+Skryabin equivalence identifying the raw Whittaker bimodule and its affine
+action. The finite raw-matrix polynomial and minimal-polynomial calculations
+and the ordinary $P_c\otimes V$ column-flag calculation are choice-free.
+
+Let $\lambda=(0\le p_1\le\cdots\le p_n)$ be a nonempty pyramid with columns
+$q_1\ge\cdots\ge q_l>0$, let $c=(c_1,\dots,c_l)$ be arbitrary complex origins,
+and put $a_j=c_j+q_j-n$ for $1\le j\le l$. For $d\ge1$ consider the raw
+tensor operator $x_1$ on the truncated tensor space $V_c^{\otimes d}$ of
+[[def-deformed-tensor-space-for-the-type-a-finite-w-algebra]] (whose underlying
+space is $V^{\otimes d}$ and whose $x_1$ is the operator displayed there).
+Then the minimal polynomial of $x_1$ on $V_c^{\otimes d}$ is exactly
+$$\prod_{j=1}^l(x-a_j),$$
+including repeated roots with their multiplicities. Consequently the action of
+$H_d$ on $V_c^{\otimes d}$ factors through the cyclotomic quotient
+$H_d(\mathbf a)$ of [[def-degenerate-cyclotomic-hecke-algebra]]. The same
+polynomial annihilates the action of the ordinary Casimir operator on
+$P_c\otimes V^{\otimes d}$, where $P_c$ is the ground induced module with its
+genuine column filtration.
+
+The statement does not assert that every unrelated standard object $N(A)$, or
+every parabolic category-$\mathcal O$ object, carries that same tensor action.
+For $d=0$ there is no operator $x_1$. The integral-root weight $\Lambda$ and
+the arbitrary-root coset bookkeeping are the separate conventions of
+[[def-degenerate-cyclotomic-hecke-algebra]].
+
+## Facts & Assumptions
+
+**Given:** The nonempty pyramid, arbitrary origins $c$, $a_b=c_b+q_b-n$, $N=\sum_bq_b$, and $d\ge0$. The direct polynomial and column-flag arguments are choice-free. Assume AC [[def-axiom-of-choice]] only for the imported Skryabin equivalence establishing the raw affine action.
+
+[F1] Define the raw operator locally on $E=V^{\otimes d}$, $V=\mathbb C^N$, for $d\ge1$ by $x_1=(e+\sum_{j=1}^Na_{\operatorname{col}(j)}E_{jj})^{(1)}-\sum_{k=2}^d\sum_{\operatorname{col}(i)<\operatorname{col}(j)}E_{ij}^{(1)}E_{ji}^{(k)}$. A superscript $(k)$ denotes tensor position $k$. The box-labelled $e$ sends $v_j$ to its left neighbour, with a missing neighbour interpreted as zero, and its longest string has length $l=p_n$ ([[def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character]], [[thm-nilpotent-jordan-string-basis]]). This local display supplies every later-position term, without using the downstream Deformed definition as a prerequisite.
+
+[F2] Put $Q_b=\sum_{h\le b}q_h$, $Q_0=0$, and $\mu_b=c_b+Q_b-n$. The ordinary ground module is $P_c=U(\mathfrak g)\otimes_{U(\mathfrak p)}\mathbb C_\mu$, where $E_{ij}1_\mu=\delta_{ij}\mu_{\operatorname{col}(i)}1_\mu$. This is a Lie character, being a scalar trace on each column-Levi block and zero on the positive nilradical. PBW gives $U(\mathfrak g)$ free as a right $U(\mathfrak p)$-module by ordering $\mathfrak m$ before $\mathfrak p$; the natural module has the $\mathfrak p$-stable flag $V_{\le b}$ spanned by boxes in columns $1,\dots,b$ ([[def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character]], [[thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra]], [[def-universal-enveloping-algebra]]).
+
+[F3] Separately, $\mathbb C_c$ denotes the $\mathfrak p$-character $E_{ij}\mapsto\delta_{ij}c_{\operatorname{col}(i)}$. The actual balanced Skryabin tensor map identifies $\mathrm{Wh}((Q_\chi\otimes_W\mathbb C_c)\otimes V^{\otimes d})$ with $\mathbb C_c\otimes V^{\otimes d}$. Its formula is $(\eta(u)1_\chi\otimes1_c)\otimes v\mapsto u1_c\otimes v$, with $\eta(E_{ij})=E_{ij}+\delta_{ij}(n-\sum_{h\ge\operatorname{col}(i)}q_h)$. The ambient trace-form Casimir/place operators preserve Whittaker vectors and satisfy the affine Hecke relations ([[thm-skryabins-equivalence-for-the-type-a-whittaker-pair]], [[def-the-type-a-finite-w-algebra-and-whittaker-category]], [[def-arakawa-suzuki-casimir-operators-on-tensor-functors]], [[thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations]]). This is a genuine Whittaker model; $P_c$ is treated separately and is not asserted to belong to that category.
+
+[F4] The trace-form Casimir is $\Omega=\sum_{i,j}E_{ij}\otimes E_{ji}$; its operator on a tensor product of genuine $\mathfrak g$-modules commutes with diagonal $\mathfrak g$. The universal first Hecke operator is $\Omega_{01}$, higher operators are $\Omega_{0j}+\sum_{k<j}P_{kj}$, and places satisfy $x_{j+1}=s_jx_js_j+s_j$. The generator-fixing anti-involution converts these endomorphisms into a right action ([[def-arakawa-suzuki-casimir-operators-on-tensor-functors]], [[thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations]], [[def-degenerate-cyclotomic-hecke-algebra]]).
+
+[F5] Matrix units act by $E_{ij}v_a=\delta_{ja}v_i$. For the total grading $\deg v_a=l-\operatorname{col}(a)$, an individual $e$ has degree one and a two-position exchange has total degree zero. Leading symbols multiply in the induced endomorphism filtration ([[def-classical-complex-matrix-lie-algebras]], [[def-associated-graded-algebra-of-a-filtered-algebra]], [[def-nilpotent-endomorphism]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The locally defined raw operator and ordinary induced module of F1–F5. Assume AC only for F3's supplied equivalence and transported action; no integrality or admissibility assumption on $c$ is used.
+
+1.1 Establish the raw affine action without a downstream dependency. Let $Q_c=Q_\chi\otimes_W\mathbb C_c$ and write $\pi_c(\eta(u)1_\chi\otimes1_c)=u1_c$ for the balanced evaluation of F3. For a tensor basis vector $v_{\mathbf j}$ write its actual Whittaker preimage as $z=\sum_{\mathbf i}z_{\mathbf i}\otimes v_{\mathbf i}$, so $\pi_c(z_{\mathbf i})=\delta_{\mathbf i,\mathbf j}$. If $E_{ab}\in\mathfrak p$, then $\pi_c(E_{ab}z_{\mathbf i})=\delta_{ab}(c_{\operatorname{col}(a)}+\sum_{h\ge\operatorname{col}(a)}q_h-n)\delta_{\mathbf i,\mathbf j}$. If $E_{ab}\in\mathfrak m$, the Whittaker equation gives $E_{ab}z_{\mathbf i}=\chi(E_{ab})z_{\mathbf i}-\sum_{t:i_t=a}z_{\mathbf i[a\mapsto b\text{ at }t]}$. Apply these identities to $(\pi_c\otimes1)\Omega_{01}z$. The nonnegative-column terms give the displayed diagonal scalar before subtraction; the negative character terms give the left neighbour of $j_1$; replacement in the first position subtracts $\sum_{h>\operatorname{col}(j_1)}q_h$, while replacement in any later position $k$ contributes the negative swap precisely when $\operatorname{col}(j_k)<\operatorname{col}(j_1)$. Thus the resulting operator is exactly F1. Transported places are ordinary place permutations by naturality. F3–F4 therefore give the affine relations for these raw operators, with $x_{j+1}=s_jx_js_j+s_j$, independently of the lemma's downstream consumer. [F1, F3, F4, construct, algebra]
+
+1.2 On a tensor basis vector the full local formula is $v_{\mathbf j}x_1=v_{L_1(\mathbf j)}+a_{\operatorname{col}(j_1)}v_{\mathbf j}-\sum_{k>1:\operatorname{col}(j_k)<\operatorname{col}(j_1)}v_{\mathbf j\cdot(1\ k)}$. Let $C_b$ be the span of tensors whose first box has column at most $b$, with $C_0=0$. The left shift and every negative swap strictly lower the first column; the diagonal term preserves it. Hence every $C_b$ is stable and $C_b(x_1-a_b)\subseteq C_{b-1}$. Starting with $C_l=E$, apply the factors from $b=l$ down to $b=1$. Their product kills $E$, and the factors commute since all are polynomials in $x_1$. Thus $f(x_1)=0$ for $f(t)=\prod_{b=1}^l(t-a_b)$, including coincident roots with all their repeated factors. [F1, F5, construct, algebra]
+
+1.3 For the ordinary ground module, PBW gives an exact induction functor $U(\mathfrak g)\otimes_{U(\mathfrak p)}-$, since $U(\mathfrak g)$ is right-free over $U(\mathfrak p)$. The tensor identity is the $\mathfrak g$-linear map $\theta:U(\mathfrak g)\otimes_{U(\mathfrak p)}(\mathbb C_\mu\otimes V)\to P_c\otimes V$, $u\otimes(1_\mu\otimes v)\mapsto\sum u_{(1)}(1\otimes1_\mu)\otimes u_{(2)}v$, where $\Delta(E_{ab})=E_{ab}\otimes1+1\otimes E_{ab}$. The matrix-unit relations show that $\Delta$ extends multiplicatively to $U(\mathfrak g)$, and its formula gives the required balancing over $U(\mathfrak p)$. On the PBW basis of $U(\mathfrak m)$, $\theta$ has leading term $u(1\otimes1_\mu)\otimes v$; all other terms have smaller PBW degree in the first factor. Finite descending subtraction proves it is bijective. Exact induction and $\theta$ carry the flag $\mathbb C_\mu\otimes V_{\le b}$ to a genuine $\mathfrak g$-submodule flag $0=F_0\subset F_1\subset\cdots\subset F_l=P_c\otimes V$. This is the column flag of the tensor product, not a finite flag of $P_c$ itself. [F2, construct, algebra]
+
+2.1 Give $E$ the total tensor grading of F5. The left shift raises this degree by one. The diagonal terms have degree zero, and $E_{ij}^{(1)}E_{ji}^{(k)}$ has degree $(\operatorname{col}(j)-\operatorname{col}(i))+(\operatorname{col}(i)-\operatorname{col}(j))=0$, regardless of the column gap. Therefore $\operatorname{gr}_1x_1=e^{(1)}$. For a nonzero polynomial $g$ of degree $r<l$ with leading coefficient $\gamma$, the degree-$r$ symbol of $g(x_1)$ is $\gamma(e^{(1)})^r\ne0$: a top vector in a longest row has a nonzero $r$th left shift, and the remaining tensor positions can be any nonzero basis vectors. This includes $r=0$, whose symbol is a nonzero scalar identity. Consequently no polynomial of degree less than $l$ annihilates $E$. Together with step 1.2, this proves that $f$ is the exact minimal polynomial, even when roots coincide. [F1, F5, step 1.2, algebra]
+
+2.2 Put $m_0=1\otimes1_\mu\in P_c$ and choose a box $j$ in column $b$. By the matrix-unit action, $\Omega(m_0\otimes v_j)=\sum_k E_{jk}m_0\otimes v_k$. For $\operatorname{col}(k)\ge b$, $E_{jk}\in\mathfrak p$, so only $k=j$ survives and contributes $\mu_b m_0\otimes v_j$. For each earlier-column box $k$, the primitive coproduct formula in step 1.3 gives $E_{jk}m_0\otimes v_k=\theta(E_{jk}\otimes(1_\mu\otimes v_k))-m_0\otimes E_{jk}v_k$. The first term belongs to $F_{b-1}$ and the second is $-m_0\otimes v_j$. There are exactly $Q_{b-1}$ such boxes. Hence $\Omega(m_0\otimes v_j)\equiv(\mu_b-Q_{b-1})m_0\otimes v_j=a_bm_0\otimes v_j\pmod{F_{b-1}}$. Since $\Omega$ is $\mathfrak g$-linear and $F_b$ is generated by these ground tensors in columns at most $b$, this also proves that it preserves the full flag and acts by $a_b$ on $F_b/F_{b-1}$. [F2, F4, F5, step 1.3, algebra]
+
+3.1 The raw affine action in step 1.1 kills $f(x_1)$ by step 1.2, so its right representation kills the two-sided ideal generated by this polynomial and descends to $H_d(\mathbf a)$. The generator-fixing anti-involution fixes $f(x_1)$, so the quotient statement respects the right-action convention. The preceding proof uses only the raw first-column flag and total grading, not a purported Skryabin image of an ordinary category-$\mathcal O$ object. [F4, step 1.1, step 1.2, step 2.1, algebra]
+
+3.2 Apply $\Omega-a_l,\dots,\Omega-a_1$ successively to the flag of step 2.2. Each factor moves the relevant flag piece down one column, so their product annihilates $P_c\otimes V$. The factors commute and their order is immaterial. On $P_c\otimes V^{\otimes d}$ the first ordinary Hecke/Casimir operator is $\Omega_{01}$ tensored with the identity on the remaining $d-1$ natural factors. Tensoring the annihilating operator identity therefore gives $f(\Omega_{01})=0$ on this entire module. No irreducibility, integral-origin identification or ordinary-to-Whittaker transfer was used. [F4, step 1.3, step 2.2, algebra]
+
+4.1 The raw minimal-polynomial statement and quotient factorization follow from steps 1.1, 1.2, 2.1 and 3.1, and the ordinary induced-module annihilation follows separately from steps 1.3, 2.2 and 3.2, for arbitrary complex $c$ and every nonempty pyramid. For $d=0$ there are no $x_j$, so there is no $x_1$ or minimal polynomial to assert; the Hecke algebra is $\mathbb C$. The integral-root weight and arbitrary-complex coset conventions remain those of the cyclotomic definition and play no role in either local calculation. [F4, step 3.1, step 3.2, algebra] ∎
+
+## Remarks
+
+- Repeated roots are retained because the first-column flags use one polynomial factor per column; exact minimal degree uses the largest Jordan string and does not require separability.
+
+- The raw proof and the ordinary ground-module proof are separate. The raw action comes from the genuine module $Q_\chi\otimes_W\mathbb C_c$ via the actual balanced Skryabin map, whereas the ordinary ground module is induced from $\mathbb C_\mu$ with $\mu_b=c_b+\sum_{h\le b}q_h-n$.
+
+- The Statement's link to the Deformed definition identifies the actual raw operator context, recorded as a direct dependency. The polynomial and ordinary column-flag arguments remain locally supplied; the Deformed definition independently proves its own raw polynomial and does not depend on this lemma.

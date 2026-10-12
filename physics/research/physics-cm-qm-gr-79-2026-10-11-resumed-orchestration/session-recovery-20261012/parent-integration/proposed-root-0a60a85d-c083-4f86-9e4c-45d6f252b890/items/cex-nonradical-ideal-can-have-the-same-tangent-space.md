@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonradical-ideal-can-have-the-same-tangent-space.md

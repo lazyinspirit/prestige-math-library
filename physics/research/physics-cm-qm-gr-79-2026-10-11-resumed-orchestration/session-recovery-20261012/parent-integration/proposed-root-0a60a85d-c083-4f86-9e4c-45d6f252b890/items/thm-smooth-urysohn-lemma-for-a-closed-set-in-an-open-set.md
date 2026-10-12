@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-special-copy-trichotomy-produces-a-restricted-blockade.md

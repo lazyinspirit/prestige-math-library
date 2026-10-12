@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-type-functions-satisfy-translation-estimates.md

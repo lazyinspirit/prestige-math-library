@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-yoneda-lemma-is-natural-in-both-variables.md

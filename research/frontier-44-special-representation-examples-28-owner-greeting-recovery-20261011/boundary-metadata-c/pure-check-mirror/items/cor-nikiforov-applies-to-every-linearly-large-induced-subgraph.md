@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-nikiforov-applies-to-every-linearly-large-induced-subgraph.md

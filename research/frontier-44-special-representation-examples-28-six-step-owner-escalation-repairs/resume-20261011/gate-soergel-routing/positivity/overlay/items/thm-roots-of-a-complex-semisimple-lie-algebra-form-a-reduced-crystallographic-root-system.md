@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system.md

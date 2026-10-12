@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-normal-equations-for-best-affine-l2-prediction.md

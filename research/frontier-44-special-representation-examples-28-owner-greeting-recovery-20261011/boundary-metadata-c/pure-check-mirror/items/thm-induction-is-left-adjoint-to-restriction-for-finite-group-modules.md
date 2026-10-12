@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-induction-is-left-adjoint-to-restriction-for-finite-group-modules.md

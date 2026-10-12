@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-overlapping-plaques-through-a-point-have-compatible-germs.md

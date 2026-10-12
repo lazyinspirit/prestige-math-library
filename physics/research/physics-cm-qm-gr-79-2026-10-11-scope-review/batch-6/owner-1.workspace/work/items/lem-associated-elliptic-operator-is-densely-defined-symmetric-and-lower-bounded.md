@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded.md

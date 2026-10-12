@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-oriented-chart-integrals-are-coordinate-independent.md

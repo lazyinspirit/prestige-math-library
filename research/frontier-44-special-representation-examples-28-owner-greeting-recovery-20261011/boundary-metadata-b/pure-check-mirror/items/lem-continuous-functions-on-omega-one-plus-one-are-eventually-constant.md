@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-continuous-functions-on-omega-one-plus-one-are-eventually-constant.md

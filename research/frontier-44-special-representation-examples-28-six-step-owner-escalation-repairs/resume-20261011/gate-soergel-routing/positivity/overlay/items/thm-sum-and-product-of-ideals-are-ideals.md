@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sum-and-product-of-ideals-are-ideals.md

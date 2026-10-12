@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-finite-abelian-group-is-a-quotient-of-a-power-of-a-cyclic-group.md

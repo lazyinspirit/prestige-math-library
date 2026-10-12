@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-basic-weyl-invariant-degree-sum-is-the-number-of-positive-roots.md

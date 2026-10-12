@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weyl-orbit-sums-form-a-basis-of-finite-weyl-invariants.md

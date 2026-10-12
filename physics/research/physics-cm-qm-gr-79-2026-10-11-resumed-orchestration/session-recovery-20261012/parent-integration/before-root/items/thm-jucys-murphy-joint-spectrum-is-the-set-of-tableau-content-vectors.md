@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-jucys-murphy-joint-spectrum-is-the-set-of-tableau-content-vectors.md

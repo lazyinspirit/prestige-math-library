@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-comparison-and-uniqueness-for-the-bounded-cylinder-heat-problem.md

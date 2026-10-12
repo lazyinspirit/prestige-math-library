@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells.md

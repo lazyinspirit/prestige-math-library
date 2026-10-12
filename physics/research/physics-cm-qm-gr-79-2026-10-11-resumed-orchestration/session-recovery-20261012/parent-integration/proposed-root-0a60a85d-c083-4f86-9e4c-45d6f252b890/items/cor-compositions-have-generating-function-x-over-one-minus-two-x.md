@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-compositions-have-generating-function-x-over-one-minus-two-x.md

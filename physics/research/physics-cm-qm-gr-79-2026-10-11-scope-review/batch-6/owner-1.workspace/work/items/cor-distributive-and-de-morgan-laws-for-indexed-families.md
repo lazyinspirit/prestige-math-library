@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-distributive-and-de-morgan-laws-for-indexed-families.md

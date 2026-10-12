@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-poincare-duality-gives-a-nonsingular-cup-pairing.md

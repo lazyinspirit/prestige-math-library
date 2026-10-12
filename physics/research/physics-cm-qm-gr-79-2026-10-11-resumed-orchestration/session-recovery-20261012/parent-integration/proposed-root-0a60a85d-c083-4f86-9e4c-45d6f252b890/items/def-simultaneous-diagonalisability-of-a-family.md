@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-simultaneous-diagonalisability-of-a-family.md

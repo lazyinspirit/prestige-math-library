@@ -127,76 +127,17 @@ positive everywhere with infimum zero; on a surface the Ricci tensor is $K$
 times the metric, so the paraboloid has pointwise positive Ricci curvature
 while its curvature infimum is zero, and it is complete and noncompact.
 
-1.1 The paraboloid is a complete, connected, noncompact surface. [F4, F5, given]
-The map $f:\mathbb R^2\to\mathbb R$, $f(x,y)=x^2+y^2$, is smooth and
-continuous, so its graph $P=\{(x,y,f(x,y))\}$ is an embedded submanifold of
-$\mathbb R^2\times\mathbb R\cong\mathbb R^3$ and is closed in $\mathbb R^3$
-by [F4]. The Euclidean metric of $\mathbb R^3$ is complete and its Riemannian
-distance is the Euclidean distance, so [F4] makes $P$ complete in the induced
-Riemannian metric. The map $(x,y)\mapsto(x,y,x^2+y^2)$ is continuous with
-image $P$, and $\mathbb R^2$ is path connected by [F5], so $P$ is path
-connected, hence connected, by [F5]. For noncompactness consider
-$p_t:=(t,0,t^2)\in P$ for $t=1,2,\dots$: the Euclidean norms
-$|p_t|^2=t^2+t^4$ are unbounded, so $(p_t)$ has no convergent subsequence and
-[F4] shows that $P$ is not compact. [F4, F5, given]
+1.1 The paraboloid is a complete, connected, noncompact surface. [F4, F5, given] The map $f:\mathbb R^2\to\mathbb R$, $f(x,y)=x^2+y^2$, is smooth and continuous, so its graph $P=\{(x,y,f(x,y))\}$ is an embedded submanifold of $\mathbb R^2\times\mathbb R\cong\mathbb R^3$ and is closed in $\mathbb R^3$ by [F4]. The Euclidean metric of $\mathbb R^3$ is complete and its Riemannian distance is the Euclidean distance, so [F4] makes $P$ complete in the induced Riemannian metric. The map $(x,y)\mapsto(x,y,x^2+y^2)$ is continuous with image $P$, and $\mathbb R^2$ is path connected by [F5], so $P$ is path connected, hence connected, by [F5]. For noncompactness consider $p_t:=(t,0,t^2)\in P$ for $t=1,2,\dots$: the Euclidean norms $|p_t|^2=t^2+t^4$ are unbounded, so $(p_t)$ has no convergent subsequence and [F4] shows that $P$ is not compact. [F4, F5, given]
 
-1.2 The curvature at each point is $K=4/(1+4r^2)^2$. [F1, given]
-Parametrize $P$ by $X(x,y)=(x,y,f(x,y))$, so that
-$X_x=(1,0,2x)$, $X_y=(0,1,2y)$ and
-$$g=\begin{pmatrix}1+4x^2&4xy\\4xy&1+4y^2\end{pmatrix},\qquad \det g=1+4(x^2+y^2)=1+4r^2,$$
-where $r^2=x^2+y^2$. The upward unit normal is
-$N=(1+4r^2)^{-1/2}(-2x,-2y,1)$, and the second fundamental form has matrix
-$$h=(1+4r^2)^{-1/2}\operatorname{Hess}f=(1+4r^2)^{-1/2}\begin{pmatrix}2&0\\0&2\end{pmatrix},\qquad \det h=\frac{4}{1+4r^2}.$$
-By [F1] the shape operator satisfies $S=g^{-1}h$ and
-$$\det S=\frac{\det h}{\det g}=\frac{4/(1+4r^2)}{1+4r^2}=\frac{4}{(1+4r^2)^2}.$$
-By [F1] the sectional curvature of the tangent plane at $X(x,y)$, the only
-tangent two-plane of the surface, is $K=\det S=4/(1+4r^2)^2$. [F1, given]
+1.2 The curvature at each point is $K=4/(1+4r^2)^2$. [F1, given] Parametrize $P$ by $X(x,y)=(x,y,f(x,y))$, so that $X_x=(1,0,2x)$, $X_y=(0,1,2y)$ and $$g=\begin{pmatrix}1+4x^2&4xy\\4xy&1+4y^2\end{pmatrix},\qquad \det g=1+4(x^2+y^2)=1+4r^2,$$ where $r^2=x^2+y^2$. The upward unit normal is $N=(1+4r^2)^{-1/2}(-2x,-2y,1)$, and the second fundamental form has matrix $$h=(1+4r^2)^{-1/2}\operatorname{Hess}f=(1+4r^2)^{-1/2}\begin{pmatrix}2&0\\0&2\end{pmatrix},\qquad \det h=\frac{4}{1+4r^2}.$$ By [F1] the shape operator satisfies $S=g^{-1}h$ and $$\det S=\frac{\det h}{\det g}=\frac{4/(1+4r^2)}{1+4r^2}=\frac{4}{(1+4r^2)^2}.$$ By [F1] the sectional curvature of the tangent plane at $X(x,y)$, the only tangent two-plane of the surface, is $K=\det S=4/(1+4r^2)^2$. [F1, given]
 
-1.3 On a surface the Ricci tensor is $K$ times the metric. [F2]
-Let $p\in P$ and let $(e_1,e_2)$ be an orthonormal basis of $T_pP$. Since $P$
-is two-dimensional, $T_pP$ is its only tangent two-plane; every orthonormal
-basis of this plane computes its basis-independent sectional curvature, so
-$K=\operatorname{Rm}(e_1,e_2,e_2,e_1)$ by [F2]. Using the orthonormal-basis
-formula of [F2] and the skew symmetries,
-$$\operatorname{Ric}(e_1,e_1)=\operatorname{Rm}(e_1,e_1,e_1,e_1) +\operatorname{Rm}(e_2,e_1,e_1,e_2) =0+\operatorname{Rm}(e_1,e_2,e_2,e_1)=K,$$
-the middle equality by pair interchange, and likewise
-$\operatorname{Ric}(e_2,e_2)=K$; and
-$$\operatorname{Ric}(e_1,e_2)=\operatorname{Rm}(e_1,e_1,e_2,e_1) +\operatorname{Rm}(e_2,e_1,e_2,e_2)=0+0=0,$$
-because the two terms have respectively equal first and equal last entries. By
-bilinearity and symmetry of the Ricci tensor,
-$\operatorname{Ric}_p=K(p)\,g_p$ at every point. [F2]
+1.3 On a surface the Ricci tensor is $K$ times the metric. [F2] Let $p\in P$ and let $(e_1,e_2)$ be an orthonormal basis of $T_pP$. Since $P$ is two-dimensional, $T_pP$ is its only tangent two-plane; every orthonormal basis of this plane computes its basis-independent sectional curvature, so $K=\operatorname{Rm}(e_1,e_2,e_2,e_1)$ by [F2]. Using the orthonormal-basis formula of [F2] and the skew symmetries, $$\operatorname{Ric}(e_1,e_1)=\operatorname{Rm}(e_1,e_1,e_1,e_1) +\operatorname{Rm}(e_2,e_1,e_1,e_2) =0+\operatorname{Rm}(e_1,e_2,e_2,e_1)=K,$$ the middle equality by pair interchange, and likewise $\operatorname{Ric}(e_2,e_2)=K$; and $$\operatorname{Ric}(e_1,e_2)=\operatorname{Rm}(e_1,e_1,e_2,e_1) +\operatorname{Rm}(e_2,e_1,e_2,e_2)=0+0=0,$$ because the two terms have respectively equal first and equal last entries. By bilinearity and symmetry of the Ricci tensor, $\operatorname{Ric}_p=K(p)\,g_p$ at every point. [F2]
 
-2.1 The curvature is positive with infimum zero. [F4, step 1.2]
-For every $(x,y)$ the numerator $4$ and the denominator $(1+4r^2)^2$ are
-positive, so $K=4/(1+4r^2)^2>0$ by step 1.2: the paraboloid has positive
-sectional curvature everywhere. On the other hand, given any $\delta>0$
-choose $r>0$ with $(1+4r^2)^2>4/\delta$; then the point $(r,0,r^2)\in P$ has
-$0<K<\delta$. Hence $0$ lies below every value of $K$ but no positive number
-is a lower bound, so the greatest lower bound of the set of values of $K$ is
-$\inf_PK=0$ by [F4]. [F4, step 1.2]
+2.1 The curvature is positive with infimum zero. [F4, step 1.2] For every $(x,y)$ the numerator $4$ and the denominator $(1+4r^2)^2$ are positive, so $K=4/(1+4r^2)^2>0$ by step 1.2: the paraboloid has positive sectional curvature everywhere. On the other hand, given any $\delta>0$ choose $r>0$ with $(1+4r^2)^2>4/\delta$; then the point $(r,0,r^2)\in P$ has $0<K<\delta$. Hence $0$ lies below every value of $K$ but no positive number is a lower bound, so the greatest lower bound of the set of values of $K$ is $\inf_PK=0$ by [F4]. [F4, step 1.2]
 
-3.1 The paraboloid has pointwise positive Ricci curvature but no uniform positive lower bound. [step 1.3, step 2.1]
-By steps 1.3 and 2.1, for every $p\in P$ and every $0\ne v\in T_pP$,
-$$\operatorname{Ric}_p(v,v)=K(p)\,g_p(v,v)>0,$$
-so the pointwise positivity hypothesis of the false claim holds. If there were
-a constant $k>0$ with $\operatorname{Ric}\ge k\,g$ (the case $n=2$ of the
-Bonnet–Myers bound $(n-1)k\,g$), then evaluating at a unit vector $v$ would
-give $K(p)=\operatorname{Ric}_p(v,v)\ge k$ for every $p$, contradicting
-$\inf_PK=0$ from step 2.1. Hence no uniform positive lower bound exists.
-[step 1.3, step 2.1]
+3.1 The paraboloid has pointwise positive Ricci curvature but no uniform positive lower bound. [step 1.3, step 2.1] By steps 1.3 and 2.1, for every $p\in P$ and every $0\ne v\in T_pP$, $$\operatorname{Ric}_p(v,v)=K(p)\,g_p(v,v)>0,$$ so the pointwise positivity hypothesis of the false claim holds. If there were a constant $k>0$ with $\operatorname{Ric}\ge k\,g$ (the case $n=2$ of the Bonnet–Myers bound $(n-1)k\,g$), then evaluating at a unit vector $v$ would give $K(p)=\operatorname{Ric}_p(v,v)\ge k$ for every $p$, contradicting $\inf_PK=0$ from step 2.1. Hence no uniform positive lower bound exists. [step 1.3, step 2.1]
 
-4.1 The false claim fails, and Bonnet–Myers is not contradicted. [F3, step 1.1, step 3.1]
-The surface $P$ is complete, connected, boundaryless, two-dimensional, and has
-pointwise positive Ricci curvature by step 3.1, but it is noncompact by
-step 1.1. Therefore the claim that pointwise positive Ricci curvature forces
-compactness is false. The theorem of [F3] is unaffected: its hypothesis
-$\operatorname{Ric}\ge(n-1)k\,g$ with a fixed $k>0$ fails on $P$ by step 3.1,
-so no contradiction arises; the example isolates the uniformity of the lower
-bound, not the pointwise sign of the curvature, as the hypothesis that forces
-compactness. Dimension zero and one are not witnesses, since Bonnet–Myers and
-the deduction $\operatorname{Ric}=K\,g$ are stated in dimension at least two;
-the paraboloid realizes the minimal dimension $n=2$. No choice beyond the
-inherited [A1] is used. [F3, step 1.1, step 3.1] ∎
+4.1 The false claim fails, and Bonnet–Myers is not contradicted. [F3, step 1.1, step 3.1] The surface $P$ is complete, connected, boundaryless, two-dimensional, and has pointwise positive Ricci curvature by step 3.1, but it is noncompact by step 1.1. Therefore the claim that pointwise positive Ricci curvature forces compactness is false. The theorem of [F3] is unaffected: its hypothesis $\operatorname{Ric}\ge(n-1)k\,g$ with a fixed $k>0$ fails on $P$ by step 3.1, so no contradiction arises; the example isolates the uniformity of the lower bound, not the pointwise sign of the curvature, as the hypothesis that forces compactness. Dimension zero and one are not witnesses, since Bonnet–Myers and the deduction $\operatorname{Ric}=K\,g$ are stated in dimension at least two; the paraboloid realizes the minimal dimension $n=2$. No choice beyond the inherited [A1] is used. [F3, step 1.1, step 3.1] ∎
 
 ## Source locator
 

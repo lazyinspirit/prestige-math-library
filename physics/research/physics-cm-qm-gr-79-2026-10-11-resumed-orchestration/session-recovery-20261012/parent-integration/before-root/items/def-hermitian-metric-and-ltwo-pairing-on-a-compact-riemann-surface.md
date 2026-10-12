@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface.md

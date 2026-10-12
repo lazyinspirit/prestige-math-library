@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simplex-integrals-are-independent-of-affine-coordinate-identification.md

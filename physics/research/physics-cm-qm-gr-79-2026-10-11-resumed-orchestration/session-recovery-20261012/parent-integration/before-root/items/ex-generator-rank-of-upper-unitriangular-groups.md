@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-generator-rank-of-upper-unitriangular-groups.md

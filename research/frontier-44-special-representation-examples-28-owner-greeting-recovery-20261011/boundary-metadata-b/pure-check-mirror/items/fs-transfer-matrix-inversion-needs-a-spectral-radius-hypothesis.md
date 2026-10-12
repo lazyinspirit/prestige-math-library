@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-transfer-matrix-inversion-needs-a-spectral-radius-hypothesis.md

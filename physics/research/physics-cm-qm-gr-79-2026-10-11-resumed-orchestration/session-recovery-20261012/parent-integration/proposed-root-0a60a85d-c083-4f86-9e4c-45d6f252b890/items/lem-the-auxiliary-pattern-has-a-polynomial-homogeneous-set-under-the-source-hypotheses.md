@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-auxiliary-pattern-has-a-polynomial-homogeneous-set-under-the-source-hypotheses.md

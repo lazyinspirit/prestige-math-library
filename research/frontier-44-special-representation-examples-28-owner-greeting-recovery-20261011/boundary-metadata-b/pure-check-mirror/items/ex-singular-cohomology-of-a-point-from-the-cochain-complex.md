@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-singular-cohomology-of-a-point-from-the-cochain-complex.md

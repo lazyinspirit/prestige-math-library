@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-coefficient-theorem-for-cohomology-over-a-pid.md

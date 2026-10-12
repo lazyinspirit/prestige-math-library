@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-wedge-on-a-product-index-category-is-dinatural-in-each-variable-separately.md

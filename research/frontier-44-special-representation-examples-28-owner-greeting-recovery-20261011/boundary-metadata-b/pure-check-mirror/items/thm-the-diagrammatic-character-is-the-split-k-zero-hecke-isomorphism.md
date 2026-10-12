@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-diagrammatic-character-is-the-split-k-zero-hecke-isomorphism.md

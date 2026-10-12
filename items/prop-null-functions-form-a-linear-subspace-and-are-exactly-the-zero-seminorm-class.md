@@ -58,11 +58,10 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 1.1 Fix $1\le p<\infty$. If $f,g\in\mathcal N_p(\mu)$, choose measurable null sets $E_f,E_g$ outside which $f=0$ and $g=0$. Their union is null, and on its complement one has $f+g=0$ and $af=0$ for every $a\in\mathbb R$. Because $\mathcal L^p(\mu)$ is a vector space, [L4] makes $\mathcal N_p(\mu)$ a linear subspace. [L1, L2, L3, L4]
 
-1.2 If $f\in\mathcal N_p(\mu)$, then $|f|^p=0$ almost everywhere, so [L1, L5]
-$$\int |f|^p\,d\mu=0,$$ hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5] forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere.
+1.2 If $f\in\mathcal N_p(\mu)$, then $|f|^p=0$ almost everywhere, so [L1, L5] $$\int |f|^p\,d\mu=0,$$ hence $\|f\|_p=0$. Conversely, if $\|f\|_p=0$, then the same theorem [L5] forces $|f|^p=0$ almost everywhere and therefore $f=0$ almost everywhere.
 
 1.3 If $f\in\mathcal N_\infty(\mu)$, then $0$ is an essential bound for $|f|$, so $\|f\|_\infty=0$. Conversely, if $\|f\|_\infty=0$, then [L6] gives $|f|\le0$ almost everywhere, hence $f=0$ almost everywhere. [L1, L6]
 
 2.1 If $f,g\in\mathcal N_\infty(\mu)$, the same null-set union argument as in step 1.1 shows that $f+g$ and $af$ vanish almost everywhere, and [L2] places them in $L^\infty(\mu)$. Therefore [L4] makes $\mathcal N_\infty(\mu)$ a linear subspace. [L1, L2, L3, L4]
 
-3.1 Steps 1.1 and 2.1 prove the two subspace claims, and steps 1.2 and 1.3 identify the zero-seminorm class in every range. [step 1.1, step 1.2, step 2.1, step 1.3] ∎
+3.1 Steps 1.1 and 2.1 prove the two subspace claims, and steps 1.2 and 1.3 identify the zero-seminorm class in every range. [step 1.1, step 1.2, step 2.1, step 1.3] ∎ 

@@ -71,14 +71,9 @@ formula equals $f(0)=1$.
 
 **Proof technique:** direct.
 
-1.1 The zero extension is $C^1_c(\mathbb C)$, and its interior $\bar\partial$ derivative is explicit. [F1, given, algebra]
-The function $h(t)=(\max\{t,0\})^2$ is $C^1$ on $\mathbb R$, so $f(z)=h(1-|z|^2)$ is $C^1$. It is zero for $|z|\ge1$, hence has support in the compact closed unit disc. On $D$, the Wirtinger formula [F1] gives $\partial_{\bar\zeta}f=-2\zeta(1-|\zeta|^2)$. In particular $f=0$ on $\partial D$ and $f(0)=1$.
+1.1 The zero extension is $C^1_c(\mathbb C)$, and its interior $\bar\partial$ derivative is explicit. [F1, given, algebra] The function $h(t)=(\max\{t,0\})^2$ is $C^1$ on $\mathbb R$, so $f(z)=h(1-|z|^2)$ is $C^1$. It is zero for $|z|\ge1$, hence has support in the compact closed unit disc. On $D$, the Wirtinger formula [F1] gives $\partial_{\bar\zeta}f=-2\zeta(1-|\zeta|^2)$. In particular $f=0$ on $\partial D$ and $f(0)=1$. [F1, given, algebra]
 
-1.2 The sphere measure in [F4] has total mass $2\pi$. [F3, F4, F5, F6, F7, F8, F9, algebra]
-For the closed unit disc $K\subset\mathbb R^2$, [F5] and [F6] give $\operatorname{cont}(K)=V_2(1)=\pi$, and [F7] makes $K$ Jordan measurable. By [F3], full AC supplies the countable-choice premise of [F8], so $\lambda_2(K)=\pi$. Also [F9] gives $\lambda_2(\{0\})=0$. The set in [F4] for $E=S^1$ is $K\setminus\{0\}$, so its measure is $\pi$ and [F4] yields $\sigma(S^1)=2\pi$.
+1.2 The sphere measure in [F4] has total mass $2\pi$. [F3, F4, F5, F6, F7, F8, F9, algebra] For the closed unit disc $K\subset\mathbb R^2$, [F5] and [F6] give $\operatorname{cont}(K)=V_2(1)=\pi$, and [F7] makes $K$ Jordan measurable. By [F3], full AC supplies the countable-choice premise of [F8], so $\lambda_2(K)=\pi$. Also [F9] gives $\lambda_2(\{0\})=0$. The set in [F4] for $E=S^1$ is $K\setminus\{0\}$, so its measure is $\pi$ and [F4] yields $\sigma(S^1)=2\pi$. [F4, F3, F5, F6, F7, F8, F9, algebra]
 
-2.1 Applying Cauchy–Pompeiu at $z=0$ gives the asserted value of the area term. [F2, F3, F10, step 1.1, step 1.2, given, algebra]
-The unit disc is a bounded $C^1$ domain, and step 1.1 proves the needed $C^1$ hypothesis for $f$. Full AC [F3] supplies the premise of [F2]. Since $f=0$ on $\partial D$, its boundary term vanishes. For $\zeta\ne0$, step 1.1 gives $(\partial_{\bar\zeta}f)/\zeta=-2(1-|\zeta|^2)$, which extends continuously to $-2$ at $0$. Put $q(x)=\max\{1-|x|^2,0\}$, a nonnegative Borel function on $\mathbb R^2$. By [F10] and the sphere mass from step 1.2,
-$$\int_D(1-|\zeta|^2)\,dA(\zeta)=\int_{\mathbb R^2}q\,d\lambda_2=2\pi\int_0^1(1-r^2)r\,dr=\frac\pi2.$$
-Thus the area term equals $-\frac1\pi\int_D\frac{\partial_{\bar\zeta}f}{\zeta}\,dA=\frac2\pi\int_D(1-|\zeta|^2)\,dA=1=f(0)$, as claimed.
-∎
+2.1 Applying Cauchy–Pompeiu at $z=0$ gives the asserted value of the area term. [F2, F3, F10, step 1.1, step 1.2, given, algebra] The unit disc is a bounded $C^1$ domain, and step 1.1 proves the needed $C^1$ hypothesis for $f$. Full AC [F3] supplies the premise of [F2]. Since $f=0$ on $\partial D$, its boundary term vanishes. For $\zeta\ne0$, step 1.1 gives $(\partial_{\bar\zeta}f)/\zeta=-2(1-|\zeta|^2)$, which extends continuously to $-2$ at $0$. Put $q(x)=\max\{1-|x|^2,0\}$, a nonnegative Borel function on $\mathbb R^2$. By [F10] and the sphere mass from step 1.2, $$\int_D(1-|\zeta|^2)\,dA(\zeta)=\int_{\mathbb R^2}q\,d\lambda_2=2\pi\int_0^1(1-r^2)r\,dr=\frac\pi2.$$ Thus the area term equals $-\frac1\pi\int_D\frac{\partial_{\bar\zeta}f}{\zeta}\,dA=\frac2\pi\int_D(1-|\zeta|^2)\,dA=1=f(0)$, as claimed. [F2, F3, F10, step 1.1, step 1.2, given, algebra] ∎
+

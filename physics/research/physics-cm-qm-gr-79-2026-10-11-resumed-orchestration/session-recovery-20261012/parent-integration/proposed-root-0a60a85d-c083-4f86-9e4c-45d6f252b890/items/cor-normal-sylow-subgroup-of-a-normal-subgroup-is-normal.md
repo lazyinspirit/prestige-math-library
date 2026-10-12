@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-normal-sylow-subgroup-of-a-normal-subgroup-is-normal.md

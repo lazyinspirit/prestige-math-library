@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-biduality-is-stable-under-products-closed-subgroups-and-quotients.md

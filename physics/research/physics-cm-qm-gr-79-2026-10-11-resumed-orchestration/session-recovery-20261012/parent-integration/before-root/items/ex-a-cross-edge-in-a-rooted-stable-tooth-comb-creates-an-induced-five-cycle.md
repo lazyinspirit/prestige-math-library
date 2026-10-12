@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cross-edge-in-a-rooted-stable-tooth-comb-creates-an-induced-five-cycle.md

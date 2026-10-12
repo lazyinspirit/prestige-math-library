@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-system-of-parameters-not-a-minimal-generating-set.md

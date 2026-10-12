@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-residue-evaluates-cos-over-one-plus-x-squared.md

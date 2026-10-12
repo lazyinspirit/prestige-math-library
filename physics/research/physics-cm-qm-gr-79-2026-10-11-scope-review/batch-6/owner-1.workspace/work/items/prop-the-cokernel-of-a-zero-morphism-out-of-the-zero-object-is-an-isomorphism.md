@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism.md

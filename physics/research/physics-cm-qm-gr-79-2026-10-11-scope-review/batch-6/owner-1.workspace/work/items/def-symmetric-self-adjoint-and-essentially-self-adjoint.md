@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-symmetric-self-adjoint-and-essentially-self-adjoint.md

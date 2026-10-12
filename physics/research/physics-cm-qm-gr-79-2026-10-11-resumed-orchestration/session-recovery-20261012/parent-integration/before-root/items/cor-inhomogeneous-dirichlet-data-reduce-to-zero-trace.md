@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-inhomogeneous-dirichlet-data-reduce-to-zero-trace.md

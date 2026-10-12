@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-japanese-bracket-powers-preserve-schwartz-space.md

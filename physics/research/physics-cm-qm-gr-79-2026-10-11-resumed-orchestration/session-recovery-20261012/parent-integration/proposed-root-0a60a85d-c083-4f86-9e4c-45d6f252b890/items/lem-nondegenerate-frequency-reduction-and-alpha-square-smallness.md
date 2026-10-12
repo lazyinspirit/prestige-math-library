@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nondegenerate-frequency-reduction-and-alpha-square-smallness.md

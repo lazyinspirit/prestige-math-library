@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-lax-monoidal-functor-that-is-not-strong.md

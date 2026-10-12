@@ -41,5 +41,4 @@ integrable, then $X\in L^1(\mathbb P)$ and $X_n\to X$ in $L^1$.
 
 1.1 The underlying measure has total mass one, hence is finite; [L1] converts the hypothesis to convergence in measure. [L1]
 
-2.1 Apply the finite-measure reverse implication of [L2] to $(X_n)$. [step 1.1, L2]
-It supplies $X\in L^1$ and $\mathbb E|X_n-X|\to0$, namely $L^1$ convergence. [step 1.1, L2] ∎
+2.1 Apply the finite-measure reverse implication of [L2] to $(X_n)$. [step 1.1, L2] It supplies $X\in L^1$ and $\mathbb E|X_n-X|\to0$, namely $L^1$ convergence. [step 1.1, L2] ∎ 

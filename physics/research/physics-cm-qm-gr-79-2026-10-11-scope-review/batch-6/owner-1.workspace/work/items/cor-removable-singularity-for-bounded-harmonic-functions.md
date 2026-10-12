@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-removable-singularity-for-bounded-harmonic-functions.md

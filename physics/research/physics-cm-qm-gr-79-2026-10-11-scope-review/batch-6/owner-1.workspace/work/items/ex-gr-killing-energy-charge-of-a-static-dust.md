@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-killing-energy-charge-of-a-static-dust.md

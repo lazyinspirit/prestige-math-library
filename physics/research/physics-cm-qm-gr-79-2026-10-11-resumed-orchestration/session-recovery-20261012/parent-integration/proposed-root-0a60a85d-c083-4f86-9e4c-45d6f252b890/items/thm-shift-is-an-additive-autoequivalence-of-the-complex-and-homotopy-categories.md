@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-shift-is-an-additive-autoequivalence-of-the-complex-and-homotopy-categories.md

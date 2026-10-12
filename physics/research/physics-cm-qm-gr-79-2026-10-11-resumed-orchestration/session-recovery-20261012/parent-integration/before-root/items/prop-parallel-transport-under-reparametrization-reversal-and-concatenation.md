@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-parallel-transport-under-reparametrization-reversal-and-concatenation.md

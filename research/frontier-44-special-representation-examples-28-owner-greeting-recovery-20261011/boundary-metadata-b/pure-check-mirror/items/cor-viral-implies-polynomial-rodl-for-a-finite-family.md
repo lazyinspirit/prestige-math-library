@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-viral-implies-polynomial-rodl-for-a-finite-family.md

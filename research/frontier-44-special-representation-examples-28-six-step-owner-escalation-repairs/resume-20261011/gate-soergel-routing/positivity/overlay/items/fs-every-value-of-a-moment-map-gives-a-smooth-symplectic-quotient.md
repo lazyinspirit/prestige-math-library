@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-value-of-a-moment-map-gives-a-smooth-symplectic-quotient.md

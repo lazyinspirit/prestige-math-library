@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-takagi-function-is-continuous-and-nowhere-differentiable.md

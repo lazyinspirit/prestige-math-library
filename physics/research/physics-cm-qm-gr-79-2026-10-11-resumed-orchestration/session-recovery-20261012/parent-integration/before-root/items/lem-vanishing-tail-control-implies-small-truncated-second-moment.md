@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vanishing-tail-control-implies-small-truncated-second-moment.md

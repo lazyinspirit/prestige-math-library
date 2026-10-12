@@ -1,0 +1,842 @@
+[
+  {
+    "order": 171,
+    "id": "qm-measurement-and-instruments",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Measurement And Instruments",
+    "companion": "qm-measurement-and-instruments-examples",
+    "requires": [
+      "qm-observables-and-born-probabilities",
+      "qm-math-composites",
+      "qm-state-geometry",
+      "qm-framework-and-quantities"
+    ],
+    "items": [
+      {
+        "id": "lem-nrqm-measurement-selective-luders-update",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The selective Lueders update by an orthogonal projection",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]), let $P$ be an orthogonal projection on $H$ ([[def-hilbert-orthogonal-projection]]) and let $\\rho$ be a density operator with $p:=\\operatorname{tr}(\\rho P)>0$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)). Define the **selective update**\n$$\\rho_{P}:=\\frac{P\\rho P}{p}.$$\nThen:\n\n(a) $P\\rho P$ is a positive trace-class operator with $\\operatorname{tr}(P\\rho P)=p$, so $\\rho_{P}$ is a density operator;\n\n(b) $\\operatorname{tr}(\\rho_{P}P)=1$ and\n$$P\\rho_{P}P=\\rho_{P}=P\\rho_{P}=\\rho_{P}P;$$\nin particular $\\rho_{P}$ commutes with $P$ and is fixed by compression with $P$;\n\n(c) if $Q$ is an orthogonal projection with $QP=0$, then $\\operatorname{tr}(\\rho_{P}Q)=0$ and $Q\\rho_{P}Q=0$;\n\n(d) if $\\rho=T_{u,u}$ for a unit vector $u$ with $Pu\\ne0$, where $T_{u,u}x=\\langle x,u\\rangle u$ ([[lem-nrqm-composites-rank-one-operator-calculus]]), then $\\rho_{P}=T_{Pu,Pu}/\\|Pu\\|^{2}$, the pure state of the normalized vector $Pu$; the value depends only on the ray of $Pu$, meaning its equivalence class of nonzero vectors under $x\\sim y$ if $y=zx$ for some $z\\in\\mathbb C\\setminus\\{0\\}$.\n\nNo physical interpretation of the update is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-non-negative-and-positive-operator",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 8-11 (measurement operators, outcome probabilities (3.26)-(3.29) and post-measurement states (3.27))",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (Born rule, collapse and the degenerate-spectrum update)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-measurement-nonselective-luders-map",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The non-selective Lueders map and the discarded-outcome ensemble",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]), let $(P_{a})_{a\\in A}$ be a finite or countably infinite family of pairwise orthogonal orthogonal projections on $H$ ([[def-hilbert-orthogonal-projection]]) whose strong sum is the identity,\n$$\\sum_{a\\in A}P_{a}x=x\\qquad(x\\in H),$$\nlet $\\rho$ be a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)), and put $p_{a}:=\\operatorname{tr}(\\rho P_{a})$. Define the **non-selective Lueders map**\n$$\\Phi(\\rho):=\\sum_{a\\in A}P_{a}\\rho P_{a}.$$\nThen:\n\n(a) the series converges in trace norm; $\\Phi(\\rho)$ is a positive trace-class operator with $\\operatorname{tr}\\Phi(\\rho)=1$, hence a density operator, and $\\Phi(\\rho)=\\sum_{a}P_{a}\\Phi(\\rho)P_{a}$;\n\n(b) for every $b$, $P_{b}\\Phi(\\rho)=\\Phi(\\rho)P_{b}=P_{b}\\Phi(\\rho)P_{b}=P_{b}\\rho P_{b}$; in particular $\\Phi(\\rho)$ commutes with every $P_{b}$;\n\n(c) *discarded-outcome ensemble.* $\\Phi(\\rho)=\\sum_{a:p_{a}>0}p_{a}\\rho_{a}$, where $\\rho_{a}=P_{a}\\rho P_{a}/p_{a}$ is the selective update of [[lem-nrqm-measurement-selective-luders-update]]; the series converges in trace norm;\n\n(d) if $B\\in\\mathcal B(H)$ is bounded and $P_{a}B=BP_{a}$ for every $a$, then $\\operatorname{tr}(\\Phi(\\rho)B)=\\operatorname{tr}(\\rho B)$;\n\n(e) if $\\psi=\\alpha u+\\beta v$ with $u,v$ orthonormal, $u\\in\\operatorname{ran}P_{1}$, $v\\in\\operatorname{ran}P_{2}$ for distinct labels $1\\ne2$, and $\\rho=T_{\\psi,\\psi}$, then $\\Phi(\\rho)=|\\alpha|^{2}T_{u,u}+|\\beta|^{2}T_{v,v}$, and\n$$\\operatorname{tr}\\bigl(\\Phi(\\rho)(T_{u,v}+T_{v,u})\\bigr)=0,\\qquad \\operatorname{tr}\\bigl(\\rho\\,(T_{u,v}+T_{v,u})\\bigr)=2\\operatorname{Re}(\\alpha\\overline{\\beta});$$\n\n(f) if $\\rho=T_{\\psi,\\psi}$ for a nonzero $\\psi$ then $\\Phi(\\rho)=\\sum_{a:P_{a}\\psi\\ne0}\\|P_{a}\\psi\\|^{2}\\,T_{\\nu(P_{a}\\psi),\\nu(P_{a}\\psi)}$ where $\\nu:H\\setminus\\{0\\}\\to H$ is the normalization map $\\nu(x):=x/\\|x\\|$, the series converging in trace norm.\n\nNo physical interpretation of the map is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-non-negative-and-positive-operator",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-nrqm-composites-countable-kraus-normalization",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-measurement-selective-luders-update",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "lem-nrqm-composites-countable-kraus-normalization": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-measurement-selective-luders-update": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.2.1, printed pages 11-14 (the operator-sum map (3.32) obtained by failing to record the outcome)",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (measurement outcomes and the post-measurement state)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Declared ideal measurements and instruments of the framework",
+        "statement": "Adopt the state postulate [[post-nrqm-framework-state-and-composition]] (P1), the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2) and the ideal conditional-measurement postulate [[post-nrqm-framework-ideal-conditional-measurement]] (P3) for the declared system, whose state space is $D(H)$ for the assigned nonzero separable complex Hilbert space $H$ ([[def-nrqm-state-geometry-framework-state-space]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]). Assume the Axiom of Countable Choice ([[def-countable-choice]]), the hypothesis of the cited mathematics. The following vocabulary is used by this page.\n\n**(a) Declared ideal sharp measurement.** A **declared ideal sharp measurement** of the system is a finite or countably infinite family $(P_{a})_{a\\in A}$ of bounded orthogonal projections on $H$ ([[def-hilbert-orthogonal-projection]]) that are **mutually orthogonal**, $P_{a}P_{b}=0$ for $a\\ne b$, and whose **strong sum** is the identity,\n$$\\sum_{a\\in A}P_{a}x=x\\qquad(x\\in H).$$\nThe index $a$ is the **outcome label** and the family $(P_{a})_{a\\in A}$ is the **outcome structure** of the declared measurement; it is part of the declared apparatus model, not a quantity computed from the state. This is clause (i) of P3.\n\n**(b) The Lueders instrument of a declared ideal sharp measurement.** For a preparation $\\rho$ the **outcome probabilities** are\n$$p_{a}:=\\operatorname{tr}(\\rho P_{a})\\ge0,\\qquad \\sum_{a}p_{a}=1,$$\nand for a pure preparation of the unit ray $[\\psi]$ they are $p_{a}=\\|P_{a}\\psi\\|^{2}$ (clause (ii) of P3, read with the outcome law of [[def-nrqm-observables-framework-observable-and-outcome-law]]). If $p_{a}>0$ the **conditional state** after the outcome $a$ is the selective Lueders update\n$$\\rho_{a}:=\\frac{P_{a}\\rho P_{a}}{p_{a}};$$\nit is a state with $\\operatorname{tr}(\\rho_{a}P_{a})=1$ and $P_{a}\\rho_{a}P_{a}=\\rho_{a}$ ([[lem-nrqm-measurement-selective-luders-update]], clause (iii) of P3). If the outcomes are recorded but not selected, the **discarded-outcome state** is\n$$\\Phi(\\rho):=\\sum_{a\\in A}P_{a}\\rho P_{a},$$\nthe trace-norm convergent series of [[lem-nrqm-measurement-nonselective-luders-map]]; it is a state with $\\Phi(\\rho)=\\sum_{a:p_{a}>0}p_{a}\\rho_{a}$ and $\\operatorname{tr}(\\Phi(\\rho)P_{a})=p_{a}$ (clause (iv) of P3).\n\n**(c) Declared ideal filter.** A **declared ideal filter** is a declared ideal sharp measurement with exactly two outcomes $a=1,2$: the filter **passes** the component in the range of $P_{1}$ and **blocks** the component in the range of $P_{2}=I-P_{1}$. Repeated use of the filter in series means the sequential application of the conditional updates of clause (b).\n\n**(d) Declared instrument.** A **declared finite or countable instrument** for an outcome set $A$ consists of a finite or countable family $(M_{a,r})_{\\substack{a\\in A\\\\r\\in R_{a}}}$ of bounded operators on $H$ with\n$$\\sum_{a\\in A}\\sum_{r\\in R_{a}}M_{a,r}^{*}M_{a,r}=I$$\nin the strong sense ([[lem-nrqm-composites-countable-kraus-normalization]]), the **effects**\n$$F_{a}:=\\sum_{r\\in R_{a}}M_{a,r}^{*}M_{a,r},$$\nwhere each subseries converges strongly, independently of its enumeration. An **effect** on general $H$ is a bounded self-adjoint operator $F$ with $0\\le\\langle Fx,x\\rangle\\le\\|x\\|^2$ for all $x\\in H$; the **order** $F\\le G$ means $\\langle(G-F)x,x\\rangle\\ge0$ for all $x$. Here $\\langle F_a x,x\\rangle=\\sum_r\\|M_{a,r}x\\|^2\\le\\|x\\|^2$, so $0\\le F_a\\le I$. In particular the positive partial sums $S_N$ of any subseries are contractions and have convergent quadratic forms; for a positive tail $D=S_N-S_m$, the positive-form Cauchy-Schwarz inequality gives $\\|Dx\\|^2\\le\\langle Dx,x\\rangle$, so $S_Nx$ is Cauchy and its limit defines $F_a$. The **outcome probabilities** are $p_{a}:=\\operatorname{tr}(\\rho F_{a})$ of clause (iv) of P2, the **conditional updates**\n$$\\rho\\longmapsto\\frac{1}{p_{a}}\\sum_{r\\in R_{a}}M_{a,r}\\rho M_{a,r}^{*}\\qquad(p_{a}>0),$$\nand the **discarded-outcome map** $\\rho\\mapsto\\sum_{a,r}M_{a,r}\\rho M_{a,r}^{*}$. The family $(M_{a,r})$, called the **Kraus family** of the instrument, is part of the declared apparatus model. The effects $(F_{a})$ alone do not determine the conditional updates: distinct normalized Kraus families can share the same effects while defining different updates ([[lem-nrqm-composites-finite-effects-and-instruments]] clause (d); clause (v) of P3). More generally, on a specified measurable space $(X,\\Sigma)$, a **declared abstract instrument** is a map $J:\\Sigma\\to\\mathcal B(\\mathcal S_{1}(H))$ into bounded complex-linear maps of trace-class operators satisfying: each $J_B$ is completely positive, meaning every finite matrix amplification preserves positive trace-class block operators; for disjoint $B_n$ with union $B$, $J_B(T)=\\sum_nJ_{B_n}(T)$ in trace norm for every trace-class $T$; and $J_X$ preserves trace. Its outcome effect $F_B$ is the unique effect with $\\operatorname{tr}(J_B(T))=\\operatorname{tr}(TF_B)$, its probability is $p(B)=\\operatorname{tr}(J_B(\\rho))$, and its conditional state is $J_B(\\rho)/p(B)$ only when $p(B)>0$, as established in [[lem-nrqm-composites-general-trace-class-instrument-and-effect-duality]]. The Kraus case above is a concrete instance on $(A,2^A)$, with $J_B(T)=\\sum_{a\\in B,r}M_{a,r}TM_{a,r}^*$ in trace norm. This declaration does not assert that every abstract instrument has a Kraus representation or that a laboratory apparatus realizes it.\n\n**(e) Declaration discipline.** A model of an apparatus that is used to predict post-measurement states must declare both an outcome structure (effects) and an update rule; the outcome law of P2 alone does not supply the update, and the update is not a mathematical consequence of the effects. The special case in which the Kraus family consists of the projections $P_{a}$ themselves (with a single $r$ per outcome) is the Lueders instrument of clauses (a)-(b). The claim that a concrete laboratory device realizes a particular declared measurement, filter or instrument is a physical identification with uncertainty under the preparation and apparatus postulate P7 ([[post-nrqm-framework-preparation-and-apparatus]]), not a consequence of this definition.\n\n**(f) Limits.** Declared ideal sharp measurements are idealizations of apparatus that are idealized as repeatable and projection-valued; the framework does not assert that every apparatus, or any particular apparatus, is of this form (clause (v) of P3). The following are outside the declared class and require their own models: a measurement of an exact value of a quantity whose spectrum is continuous (no normalization of a delta symbol is intended; clauses (iii) of P2 and (v) of P3); a photon-absorption or other destructive detector, whose declared instrument need not leave an outgoing state of the same form (clause (v) of P3); and a unitary system-apparatus interaction, which by itself produces conditional correlations without selecting a unique recorded outcome or a preferred outcome family (clause (v) of P3).\n\n**(g) Status.** Clauses (a)-(f) read P1, P2 and P3 in the measurement vocabulary of this page and fix the terminology of the page's later items; they add no assumption to those postulates. The cited mathematical items ([[lem-nrqm-measurement-selective-luders-update]], [[lem-nrqm-measurement-nonselective-luders-map]], [[lem-nrqm-composites-finite-effects-and-instruments]], [[lem-nrqm-composites-countable-kraus-normalization]], [[lem-nrqm-composites-general-trace-class-instrument-and-effect-duality]]) are conditional mathematics about the displayed formulas; no physical process, outcome uniqueness or empirical fact is deduced here.",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-countable-kraus-normalization",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nrqm-composites-general-trace-class-instrument-and-effect-duality",
+          "lem-nrqm-measurement-nonselective-luders-map",
+          "lem-nrqm-measurement-selective-luders-update",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "post-nrqm-framework-state-and-composition"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-countable-kraus-normalization": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nrqm-composites-general-trace-class-instrument-and-effect-duality": "mathematical-premise",
+          "lem-nrqm-measurement-nonselective-luders-map": "mathematical-premise",
+          "lem-nrqm-measurement-selective-luders-update": "mathematical-premise",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed page 15 (ideal reproducible measurements and the change of state) and Section 7.4.2, printed pages 161-164 (Stern-Gerlach filters in series)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Sections 3.1.2 and 3.2.1, printed pages 8-14 (generalized measurements, POVMs, Kraus operators and the operator-sum map)",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The measurement vocabulary of the non-relativistic quantum framework for declared ideal apparatus: declared ideal sharp measurements as finite or countable families of mutually orthogonal projections resolving the identity, their Lueders instrument with outcome law, conditional update and discarded-outcome map, declared ideal filters, declared finite or countable Kraus instruments, and declared abstract trace-class instruments on specified measurable outcome spaces, each supplying both outcome effects and state updates. The definition reads the adopted postulates P1, P2 and P3; it asserts no apparatus realization, no uniqueness of recorded outcomes, no collapse of exact continuum values, and no empirical result."
+      },
+      {
+        "id": "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Consequences of a declared ideal sharp measurement: repeatability and discarded ensembles",
+        "statement": "Adopt the state postulate P1, the observable and probability postulate P2 and the ideal conditional-measurement postulate P3 of the framework ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]]), and assume the Axiom of Countable Choice, the hypothesis of the cited mathematics. Let $(P_{a})_{a\\in A}$ be a declared ideal sharp measurement of a system with state space $D(H)$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]], [[def-nrqm-state-geometry-framework-state-space]]) and let $\\rho$ be a state. Then:\n\n**(a) Outcome law.** For every outcome label $a$ the probability is $p_{a}=\\operatorname{tr}(\\rho P_{a})$, with $p_{a}\\ge0$ and $\\sum_{a}p_{a}=1$; for the pure state of a unit vector $\\psi$ it is $p_{a}=\\|P_{a}\\psi\\|^{2}$.\n\n**(b) Conditional state and repeatability.** If $p_{a}>0$, the conditional state after the outcome $a$ is the state $\\rho_{a}=P_{a}\\rho P_{a}/p_{a}$, with $\\operatorname{tr}(\\rho_{a}P_{a})=1$ and $\\operatorname{tr}(\\rho_{a}P_{b})=0$ for $b\\ne a$. Immediate repetition of the same declared measurement therefore returns the same outcome with certainty:\n$$\\mathbb P(\\text{second outcome }b\\mid\\text{first outcome }a)=\\delta_{ab}.$$\n\n**(c) Discarded outcomes.** The discarded-outcome state $\\Phi(\\rho)=\\sum_{a}P_{a}\\rho P_{a}$ is a state and coincides with the outcome-weighted mixture of the conditional states,\n$$\\Phi(\\rho)=\\sum_{a:p_{a}>0}p_{a}\\rho_{a},$$\nthe series converging in trace norm; moreover $\\operatorname{tr}(\\Phi(\\rho)P_{a})=p_{a}$ for every $a$ and $\\Phi(\\rho)=\\sum_{a}P_{a}\\Phi(\\rho)P_{a}$. The conditional-vs-discarded distinction is therefore exactly the distinction between one selected branch $\\rho_{a}$ and the mixture of all branches.\n\n**(d) Compatible bounded quantities.** If $B$ is a bounded operator with $P_{a}B=BP_{a}$ for every $a$, then $\\operatorname{tr}(\\Phi(\\rho)B)=\\operatorname{tr}(\\rho B)$. In particular, if the declared measurement is the spectral measurement of a bounded assigned sharp observable $A=\\sum_{a}a_{a}P_{a}$ (a finite or norm-convergent series with real $a_{a}$), then $A$ commutes with every $P_{a}$ and the mean of $A$ is unchanged by discarding the outcomes.\n\n**(e) Loss of coherence.** If $\\psi=\\alpha u+\\beta v$ with $u,v$ orthonormal, $u\\in\\operatorname{ran}P_{1}$, $v\\in\\operatorname{ran}P_{2}$ for distinct labels $1\\ne2$, and $\\rho=T_{\\psi,\\psi}$, then\n$$\\Phi(\\rho)=|\\alpha|^{2}T_{u,u}+|\\beta|^{2}T_{v,v},\\qquad \\operatorname{tr}\\bigl(\\Phi(\\rho)(T_{u,v}+T_{v,u})\\bigr)=0,$$\nwhereas for the coherent preparation $\\operatorname{tr}(\\rho(T_{u,v}+T_{v,u}))=2\\operatorname{Re}(\\alpha\\overline{\\beta})$: the discarded-outcome ensemble is the classical mixture of the branch states and carries no coherence between the ranges of $P_{1}$ and $P_{2}$.\n\n**(f) Scope.** Clauses (a)-(e) are conditional on the adopted P3 and on the mathematical items cited; they do not assert that any laboratory apparatus realizes a declared ideal sharp measurement, do not select a unique recorded outcome, and do not describe the disturbance produced by an apparatus outside the declared class (clause (v) of P3). The identification of a device with a declared measurement is a tested identification with uncertainty under P7.",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-measurement-nonselective-luders-map",
+          "lem-nrqm-measurement-selective-luders-update",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "post-nrqm-framework-state-and-composition"
+        ],
+        "dependency_roles": {
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-measurement-nonselective-luders-map": "mathematical-premise",
+          "lem-nrqm-measurement-selective-luders-update": "mathematical-premise",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed page 15 (reproducible ideal measurements and the state change) and Section 6.3, printed pages 121-126 (density operators and the trace rule)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (Born rule, collapse and repeat measurement)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the adopted ideal conditional-measurement postulate P3 for a declared ideal sharp measurement: the Born outcome probabilities, the selective Lueders conditional states, the certainty of an immediately repeated outcome, the discarded-outcome state as the outcome-weighted mixture of the conditional states, invariance of bounded quantities compatible with the declared measurement under discarding, and the loss of coherence between non-selected branches. The theorem asserts nothing about any laboratory apparatus, about outcome uniqueness or about measurements outside the declared class."
+      },
+      {
+        "id": "pthm-nrqm-measurement-degenerate-eigenspace-update",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The Lueders update on a degenerate eigenspace preserves intra-eigenspace coherence",
+        "statement": "Adopt the state postulate P1, the observable and probability postulate P2 and the ideal conditional-measurement postulate P3 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]]), and assume the Axiom of Countable Choice and the Axiom of Choice, the hypotheses of the cited spectral mathematics. Let $A$ be a bounded assigned sharp observable of a system with state space $D(H)$ ([[def-nrqm-observables-framework-observable-and-outcome-law]]), with spectral projection-valued measure $E_{A}$ ([[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]]), and let $\\lambda$ be an eigenvalue of $A$ with eigenspace $K=\\ker(A-\\lambda I)$ and $P:=E_{A}(\\{\\lambda\\})$, the orthogonal projection of $H$ onto $K$. Declare the two-outcome ideal sharp measurement $(P,I-P)$, the **$\\lambda$-readout** of $A$. Let $\\psi\\in K$ with $\\|\\psi\\|=1$ and let $\\rho=T_{\\psi,\\psi}$ be the pure state of $\\psi$. Then:\n\n**(a) Certainty and trivial update.** $p_{\\lambda}=\\operatorname{tr}(\\rho P)=1$, and the conditional state after the outcome $\\lambda$ is $\\rho_{\\lambda}=\\rho$: the $\\lambda$-readout leaves this preparation unchanged.\n\n**(b) No disturbance inside the eigenspace.** For every assigned sharp observable $C$ and every Borel set $S\\subseteq\\mathbb R$, the outcome law of $C$ computed in the conditional state equals its law computed in $\\rho$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)); in particular the $\\lambda$-readout induces no decoherence or disturbance within the eigenspace.\n\n**(c) Degenerate case: coherence is retained.** If $\\dim K\\ge2$ and $\\psi=\\alpha u+\\beta v$ with $u,v$ orthonormal vectors of $K$ and $\\alpha,\\beta\\in\\mathbb C\\setminus\\{0\\}$, then the conditional state is the coherent superposition $T_{\\psi,\\psi}$, not the mixture $|\\alpha|^{2}T_{u,u}+|\\beta|^{2}T_{v,v}$: for the bounded assigned sharp observable\n$$W:=T_{w,w}-T_{w',w'},\\qquad w:=\\frac{u+v}{\\sqrt2},\\qquad w'=\\frac{u-v}{\\sqrt2},$$\nwith $W$ declared dimensionless (spectral unit $1$), the conditional state assigns probability $1$ to the value $+1$ of $W$ whenever $\\alpha=\\beta=1/\\sqrt2$, i.e. whenever $\\psi=w$, while the mixture $|\\alpha|^{2}T_{u,u}+|\\beta|^{2}T_{v,v}$ assigns probability $1/2$ to each of the values $+1$ and $-1$ of $W$.\n\n**(d) Scope.** The update used here is the Lueders update with the eigenspace projection $P$ itself, as adopted in P3; no physical apparatus is asserted to perform the $\\lambda$-readout without disturbance, and a declared apparatus that resolves the eigenspace further (a finer family of projections inside $K$) is a different declared measurement, not the coarse $\\lambda$-readout.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-measurement-selective-luders-update",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-measurement-selective-luders-update": "mathematical-premise",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (degenerate spectrum: outcome probability as the sum of |a_n|^2 and collapse to the normalized superposition inside the eigenspace)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed page 15 (ideal measurement leaves the system in a state certain to yield the recorded value) and Section 7.4.2, printed pages 161-164 (successive measurements and their order dependence)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional statement about the declared ideal sharp measurement of a bounded assigned sharp observable at a degenerate eigenvalue: the Lueders update by the eigenspace projection leaves a pure preparation inside that eigenspace unchanged, so no decoherence is induced inside the eigenspace and subsequent laws are those of the unmodified preparation. It asserts no apparatus realization and does not claim that a laboratory eigenvalue readout preserves coherence or that it resolves or fails to resolve the degeneracy in any particular device."
+      },
+      {
+        "id": "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Outcome effects do not determine the conditional update, and general instruments need not be repeatable",
+        "statement": "Adopt the state postulate P1, the observable and probability postulate P2 and the ideal conditional-measurement postulate P3 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]]), and assume the Axiom of Countable Choice. Let a declared two-level system have state space $D(\\mathbb C^{2})$ with orthonormal basis $(e_{1},e_{2})$ of $\\mathbb C^{2}$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]], [[def-nrqm-state-geometry-framework-state-space]]), write $P_{i}:=T_{e_{i},e_{i}}$ for the rank-one projections and $W:=T_{e_{2},e_{1}}+T_{e_{1},e_{2}}$ for the swap, and declare the dimensionless sharp observable $B:=P_{1}-P_{2}$ (its spectral values have unit $1$). Then:\n\n**(a) Two normalized instruments with equal effects.** The families\n$$\\bigl(M_{0},M_{1}\\bigr)=\\bigl(P_{1},P_{2}\\bigr),\\qquad \\bigl(M_{0}',M_{1}'\\bigr)=\\bigl(WP_{1},P_{2}\\bigr)$$\nare both normalized declared instruments on $\\mathbb C^{2}$, and both have the effects $F_{0}=F_{0}'=P_{1}$, $F_{1}=F_{1}'=P_{2}$.\n\n**(b) Different updates and different predictions.** For every state $\\rho$ with $p_{0}=\\operatorname{tr}(\\rho P_{1})>0$ the conditional state after the outcome $0$ is $T_{e_{1},e_{1}}$ for the first instrument and $T_{e_{2},e_{2}}$ for the second. Consequently, for the bounded assigned sharp observable $B=P_{1}-P_{2}$, the probability of the value $+1$ after the outcome $0$ is $1$ under the first instrument and $0$ under the second, although the two instruments have identical outcome effects and identical outcome probabilities $p_{0},p_{1}$ in every preparation. Hence the effects do not determine the conditional update; the update is part of the declared apparatus model (clause (v) of P3, [[lem-nrqm-composites-finite-effects-and-instruments]] clause (d)).\n\n**(c) A non-repeatable declared instrument.** The family\n$$N_{+}:=\\frac{1}{\\sqrt2}I,\\qquad N_{-}:=\\frac{1}{\\sqrt2}B$$\nis a normalized declared instrument with effects $F_{+}=F_{-}=\\tfrac12 I$. Its outcome probabilities are $\\tfrac12,\\tfrac12$ in every preparation, and conditioned on either outcome an immediate repetition of the same declared instrument again yields each outcome with probability $\\tfrac12$; the probability of repeating the same outcome is $\\tfrac12$, not $1$. So declared instruments need not be repeatable, in contrast to the projective Lueders case of [[pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles]] clause (b).\n\n**(d) Scope.** Clauses (a)-(c) are statements about the declared instruments displayed; they assert no property of any laboratory device, no uniqueness of recorded outcomes and no dynamics of an apparatus. Whether a device is described by one of these instruments is a tested identification with uncertainty under P7.",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-non-negative-and-positive-operator",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition"
+        ],
+        "dependency_roles": {
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 9-11 (post-measurement states are not determined by the POVM; repeatability condition via M_b M_a)",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.3.6 and 1.4, printed pages 14-15 (photon analyzers and ideal measurement)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A declared-instrument statement on the two-level model: two normalized instruments with identical outcome effects have different conditional updates and therefore different predictions for a subsequent measurement, and a third instrument with effects proportional to the identity is not repeatable. The theorem is a statement about declared apparatus models under P2(iv) and P3(v); it asserts no apparatus realization and no empirical fact."
+      },
+      {
+        "id": "pthm-nrqm-measurement-finite-effects-dilation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "A declared finite effect family is realised by a dilated ideal projective measurement",
+        "statement": "Adopt the state postulate P1, the observable and probability postulate P2 and the ideal conditional-measurement postulate P3 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]]), and assume the Axiom of Countable Choice and the Axiom of Choice. Let $H$ be the nonzero complex Hilbert space assigned to a declared system, and let $(F_{a})_{a=1}^{n}$ be a declared finite family of effects on $H$: bounded operators with $0\\le F_{a}\\le I$ and $\\sum_{a}F_{a}=I$ ([[def-non-negative-and-positive-operator]], clause (iv) of P2). Let $C=\\mathbb C^{n}$ with orthonormal basis $(e_{a})_{a=1}^{n}$, form the completed tensor product $H\\widehat\\otimes C$ ([[lem-nrqm-composites-hilbert-tensor-construction]]), and define\n$$W:H\\to H\\widehat\\otimes C,\\qquad W\\psi:=\\sum_{a=1}^{n}F_{a}^{1/2}\\psi\\otimes e_{a},\\qquad P_{a}:=I_{H}\\otimes T_{e_{a},e_{a}},$$\nwhere $F_{a}^{1/2}$ is the positive square root supplied by the continuous functional calculus ([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]]) and $T_{x,x}$ is the rank-one projection of [[lem-nrqm-composites-rank-one-operator-calculus]]. Then:\n\n**(a) The dilation.** $W$ is a linear isometry, the operators $P_{a}$ are pairwise orthogonal orthogonal projections on $H\\widehat\\otimes C$ with strong sum $I$, and $W^{*}P_{a}W=F_{a}$ for every $a$ ([[lem-nrqm-composites-finite-naimark-compression]]).\n\n**(b) Realised outcome probabilities.** For every state $\\rho$ on $H$ the operator $\\widetilde\\rho:=W\\rho W^{*}$ is a state on $H\\widehat\\otimes C$, and the declared ideal sharp measurement $(P_{a})_{a=1}^{n}$ on the composite model space has outcome probabilities\n$$\\operatorname{tr}\\bigl(\\widetilde\\rho\\,P_{a}\\bigr)=\\operatorname{tr}(\\rho F_{a})\\qquad(a=1,\\dots,n).$$\n\n**(c) The induced instrument.** Let $\\Lambda$ be the trace-preserving map $\\Lambda(\\sigma)=\\sum_{b=1}^{n}F_{b}^{1/2}\\sigma F_{b}^{1/2}$ (the square-root Kraus map of the effect family). If $p_{a}:=\\operatorname{tr}(\\rho F_{a})>0$, the conditional composite state after the outcome $a$ is $\\widetilde\\rho_{a}=P_{a}\\widetilde\\rho P_{a}/p_{a}$, and its reduction to $H$ is the state\n$$\\operatorname{Tr}_{C}\\widetilde\\rho_{a}=\\frac{1}{p_{a}}\\,\\Lambda\\bigl(F_{a}^{1/2}\\rho F_{a}^{1/2}\\bigr)=\\frac{1}{p_{a}}\\sum_{b=1}^{n}F_{b}^{1/2}F_{a}^{1/2}\\rho F_{a}^{1/2}F_{b}^{1/2};$$\nthe non-selective composite state reduces to $\\operatorname{Tr}_{C}\\sum_{a}P_{a}\\widetilde\\rho P_{a}=\\sum_{b}F_{b}^{1/2}\\bigl(\\sum_{a}F_{a}^{1/2}\\rho F_{a}^{1/2}\\bigr)F_{b}^{1/2}=\\Lambda^{2}(\\rho)$. The instrument that the dilated measurement induces on $H$ is therefore the declared instrument with Kraus family $\\bigl(F_{b}^{1/2}F_{a}^{1/2}\\bigr)_{a,b}$ and effects $F_{a}$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (d)).\n\n**(d) Projective case and non-determination.** If the effects are pairwise orthogonal projections, $F_{a}=P_{a}^{\\circ}$ with $P_{a}^{\\circ}P_{b}^{\\circ}=0$ for $a\\ne b$, then the induced update of clause (c) is the Lueders update $P_{a}^{\\circ}\\rho P_{a}^{\\circ}/p_{a}$. In general the induced update of clause (c) differs from the square-root Kraus update $F_{a}^{1/2}\\rho F_{a}^{1/2}/p_{a}$ of the same effects: for $H=\\mathbb C^{2}$ with orthonormal basis $(e_{1},e_{2})$, $F_{1}=\\operatorname{diag}(3/4,1/4)$, $F_{2}=I-F_{1}$, $\\rho=T_{w,w}$ with $w=(e_{1}+e_{2})/\\sqrt2$ and $p_{1}=1/2$, the two conditional states have matrices\n$$\\frac{1}{p_{1}}\\Lambda\\bigl(F_{1}^{1/2}\\rho F_{1}^{1/2}\\bigr)=\\begin{pmatrix}3/4&3/8\\\\3/8&1/4\\end{pmatrix},\\qquad \\frac{1}{p_{1}}F_{1}^{1/2}\\rho F_{1}^{1/2}=\\begin{pmatrix}3/4&\\sqrt3/4\\\\ \\sqrt3/4&1/4\\end{pmatrix}.$$\nThus the same effect family is compatible with more than one update, in agreement with [[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]].\n\n**(e) Scope.** The ancilla register $C$ and the isometry $W$ are mathematical objects of a declared composite model space; the theorem asserts no physical ancilla, no physical realisation of the dilated projective measurement and no preferred outcome. Whether a laboratory device realises the declared effects or either update is a tested identification with uncertainty under P7.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-non-negative-and-positive-operator",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nrqm-composites-finite-naimark-compression",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-separable-partial-trace",
+          "lem-nrqm-measurement-selective-luders-update",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects",
+          "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nrqm-composites-finite-naimark-compression": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-separable-partial-trace": "mathematical-premise",
+          "lem-nrqm-measurement-selective-luders-update": "mathematical-premise",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects": "physical-result",
+          "thm-continuous-functional-calculus-for-bounded-self-adjoint-operators": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 9-11 (realising a POVM by entangling the system with a pointer and measuring the pointer; eqs. (3.23)-(3.31))",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed page 15 (ideal reproducible measurements and the state they leave), with the density-operator trace rule of Section 6.3, printed pages 121-124",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional model statement: a declared finite family of bounded effects on a system is realised as the outcome probabilities of a declared ideal sharp measurement on an enlarged model space carrying a finite ancilla register, and the induced conditional reduced states are given explicitly. The construction is an idealisation within the declared composite model space; it asserts no physical apparatus, no physical ancilla and no preferred outcome."
+      },
+      {
+        "id": "pthm-nrqm-measurement-countable-kraus-instruments",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Declared countable instruments: normalization, discarded ensembles and the repeatability criterion",
+        "statement": "Adopt the state postulate P1, the observable and probability postulate P2 and the ideal conditional-measurement postulate P3 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]]), and assume the Axiom of Countable Choice, the hypothesis of the cited mathematics. Let $H$ be the nonzero complex Hilbert space assigned to a declared system ([[def-nrqm-state-geometry-framework-state-space]]), and let $(M_{a})_{a\\ge1}$ be a declared normalized countable Kraus family on $H$: bounded operators with\n$$\\sum_{a=1}^{N}M_{a}^{*}M_{a}\\longrightarrow I\\qquad\\text{strongly as }N\\to\\infty .$$\nDeclare the countable instrument with outcome set $\\{1,2,\\dots\\}$, effects $F_{a}:=M_{a}^{*}M_{a}$, outcome probabilities $p_{a}:=\\operatorname{tr}(\\rho F_{a})$, conditional updates $\\rho_{a}:=M_{a}\\rho M_{a}^{*}/p_{a}$ for $p_{a}>0$, and discarded-outcome map $\\Phi(\\rho):=\\sum_{a\\ge1}M_{a}\\rho M_{a}^{*}$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (d)). Then:\n\n**(a) POVM and discarded ensemble.** Each $F_{a}$ is an effect, $0\\le F_{a}\\le I$; for every state $\\rho$ one has $p_{a}\\ge0$ and $\\sum_{a}p_{a}=1$; $\\Phi$ is a positive trace-preserving linear map of the trace-class operators and maps states to states; and $\\Phi(\\rho)=\\sum_{a:p_{a}>0}p_{a}\\rho_{a}$, a trace-norm convergent mixture of the conditional states.\n\n**(b) Repeatability criterion.** The declared instrument is **repeatable**, i.e. for every state $\\rho$ and every $a$ with $p_{a}>0$ an immediate repetition of the same declared instrument returns the outcome $a$ with probability $1$ and every $b\\ne a$ with probability $0$, if and only if\n$$M_{b}M_{a}=0\\qquad\\text{for all }a,b\\text{ with }b\\ne a .$$\nEquivalently, $M_a^*F_aM_a=F_a$ for every $a$. If $H$ is finite-dimensional, this criterion also forces each $F_a$ to be an orthogonal projection; the projection condition is not imposed for general $H$.\n\n**(c) Projective case.** For a declared ideal sharp measurement $(P_{a})$ the Kraus family $M_{a}=P_{a}$ satisfies the criterion of (b) and is repeatable, in agreement with [[pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles]] clause (b); a general normalized Kraus family need not satisfy it ([[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]] clause (c)).\n\n**(d) Non-determination.** The effects $(F_{a})$ determine the outcome probabilities but not the conditional updates; the Kraus family is part of the declared instrument (clause (v) of P3, [[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]] clause (b)).\n\n**(e) Scope.** Clauses (a)-(d) are conditional statements about the declared countable instrument; they assert no apparatus realization, no outcome uniqueness and no empirical fact, and no claim is made that every positive trace-preserving map admits such a Kraus family ([[lem-nrqm-composites-countable-kraus-normalization]] clause (c)).",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-non-negative-and-positive-operator",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-nrqm-composites-countable-kraus-normalization",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nrqm-composites-general-trace-class-instrument-and-effect-duality",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal"
+        ],
+        "dependency_roles": {
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "lem-nrqm-composites-countable-kraus-normalization": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nrqm-composites-general-trace-class-instrument-and-effect-duality": "mathematical-premise",
+          "lem-nrqm-composites-nuclear-bounded-cyclicity": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects": "physical-result",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "post-nrqm-framework-ideal-conditional-measurement": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 9-11 (Kraus operators, POVM (3.29), repeatability condition (3.28))",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.4 and 6.3, printed pages 15 and 121-126 (ideal measurements, density operators and the trace rule for outcome probabilities)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional statement about declared countable instruments of the framework: a normalized countable Kraus family defines outcome effects and probabilities, a trace-preserving discarded-outcome map and conditional updates, and the instrument is repeatable exactly when the Kraus family satisfies the stated algebraic criterion. The theorem asserts no apparatus realization, no preferred outcome and no empirical result; the non-repeatability of general instruments is recorded by an explicit supplied instance."
+      },
+      {
+        "id": "rem-nrqm-measurement-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope and empirical status of the measurement-and-instruments page",
+        "statement": "**Adopted, not derived.** Every measurement statement of this page is conditional on the adopted ideal conditional-measurement postulate P3 ([[post-nrqm-framework-ideal-conditional-measurement]]), read in the vocabulary of [[def-nrqm-measurement-framework-declared-measurements-and-instruments]]. The Lueders update is not derived from the Born outcome law of P2, and the Born outcome law is not derived from the collapse rule: the two are separate adopted clauses, and the theorems of this page deduce conditional consequences of them and of the cited mathematics. P3 itself records that its declared class is an idealization.\n\n**Declared apparatus models only.** [[pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles]] states the outcome law, repeatability, the discarded-outcome ensemble and coherence loss for a declared ideal sharp measurement; [[pthm-nrqm-measurement-degenerate-eigenspace-update]] shows that the update by an eigenspace projection preserves coherence inside a degenerate eigenspace; [[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]] and [[pthm-nrqm-measurement-finite-effects-dilation]] show that a family of outcome effects does not determine the conditional update and that a declared finite effect family admits an ideal dilated projective model; [[pthm-nrqm-measurement-countable-kraus-instruments]] develops declared countable instruments and their repeatability criterion. None of these items asserts that a particular laboratory device realizes the declared measurement, filter or instrument, and none asserts a preferred or unique recorded outcome; the identification of a device with a declared model is a tested identification with uncertainty under P7 ([[post-nrqm-framework-preparation-and-apparatus]]).\n\n**What is excluded from the declared sharp class.** A measurement of an exact value of a quantity with continuous spectrum is not represented here by normalizing a delta symbol (clauses (iii) of P2 and (v) of P3); a destructive or absorbing detector is not a projective measurement of the incoming system and must be modeled by its own instrument, one instance being the finite instrument of the companion page; and a unitary system-apparatus interaction produces conditional correlations without, by itself, selecting a recorded outcome (clause (v) of P3).\n\n**No empirical content.** No item of this page records a measurement, an apparatus calibration, a count, an uncertainty or a comparison with data. The probabilities computed in this page are model probabilities for declared preparations and declared apparatus models; agreement or disagreement with recorded data would test the combined model and apparatus assumptions and is not asserted anywhere here.\n\n**Deferred measurement topics.** Joint and compatible sharp measurements, their order independence and their joint laws are developed with the uncertainty-and-compatibility content of the category. The spatial Stern-Gerlach force model, the magnetic-field geometry and the detector-position analysis belong to the magnetic-and-detection material and are not derived here. Measurement-model boundaries for Bell-type comparisons and finite-sample statistical qualifications belong to the later Bell-models page. The reported Stern-Gerlach experiments of 1922 and other primary experimental reports remain candidate experiment items that are not asserted by this page.",
+        "deps": [
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "pthm-nrqm-measurement-countable-kraus-instruments",
+          "pthm-nrqm-measurement-degenerate-eigenspace-update",
+          "pthm-nrqm-measurement-finite-effects-dilation",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles"
+        ],
+        "dependency_roles": {
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "operational-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "operational-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "operational-prerequisite",
+          "pthm-nrqm-measurement-countable-kraus-instruments": "operational-prerequisite",
+          "pthm-nrqm-measurement-degenerate-eigenspace-update": "operational-prerequisite",
+          "pthm-nrqm-measurement-finite-effects-dilation": "operational-prerequisite",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects": "operational-prerequisite",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (the measurement postulate, collapse and its stated limits)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.4 and 6.5, printed pages 15 and 132-135 (ideal measurement, and the discussion of apparatus dynamics versus collapse)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope audit of the measurement-and-instruments page: it records that the page's measurement content is a conditional development of the adopted ideal conditional-measurement postulate P3 and its declared instruments, that no apparatus realization, outcome uniqueness, exact-continuum collapse or empirical result is asserted, and which measurement topics are deferred to later pages. The remark proves nothing and reports no observation."
+      }
+    ]
+  },
+  {
+    "order": 172,
+    "id": "qm-measurement-and-instruments-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Measurement And Instruments — Examples",
+    "companion": "qm-measurement-and-instruments",
+    "requires": [
+      "qm-measurement-and-instruments",
+      "qm-state-geometry",
+      "qm-math-composites",
+      "qm-framework-and-quantities",
+      "qm-math-orbital-and-spin"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-measurement-serial-stern-gerlach-filters",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Serial ideal Stern-Gerlach filters: a two-level model computation",
+        "statement": "Declare a two-level system whose assigned Hilbert space is $H=\\mathbb C^{2}$ with the standard inner product and orthonormal basis $(e_{+},e_{-})$ ([[def-nrqm-state-geometry-framework-state-space]], [[def-inner-product-space]], [[def-hilbert-space]]), interpreted as the two eigenstates of the $z$-component of a spin-half degree of freedom. By the spin assignment of P6 with $s=\\tfrac12$, the spin operators are $S_{i}=\\hbar J_{i}$ with $J_{i}=\\tfrac12\\sigma_{i}$ for the Pauli matrices in this basis ([[post-nrqm-framework-identical-particles-and-spin]] clause (ii), [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e)).\n\nFor a unit vector $n=(\\sin\\theta,0,\\cos\\theta)$, $0\\le\\theta\\le\\pi$, put\n$$u(\\theta):=\\cos\\frac{\\theta}{2}\\,e_{+}+\\sin\\frac{\\theta}{2}\\,e_{-},\\qquad v(\\theta):=-\\sin\\frac{\\theta}{2}\\,e_{+}+\\cos\\frac{\\theta}{2}\\,e_{-}.$$\nThen $u(\\theta)$ and $v(\\theta)$ are orthonormal and\n$$S_{n}:=n\\cdot \\mathbf S=\\frac{\\hbar}{2}(\\sin\\theta\\,\\sigma_{x}+\\cos\\theta\\,\\sigma_{z}),\\qquad S_{n}u(\\theta)=\\frac{\\hbar}{2}u(\\theta),\\qquad S_{n}v(\\theta)=-\\frac{\\hbar}{2}v(\\theta).$$\nDeclare the **ideal filter** $F(n)$ to be the ideal sharp measurement with the two outcomes $+$ and $-$, whose outcome projections are $T_{u(\\theta),u(\\theta)}$ and $T_{v(\\theta),v(\\theta)}$, the spectral projections of $S_{n}$ at $\\pm\\hbar/2$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (c), [[lem-nrqm-composites-rank-one-operator-calculus]]).\n\nThe example considers three ideal filters in series, $F_{1}=F(e_{z})$ (so $\\theta=0$), $F_{2}=F(n)$ with axis $n$ at angle $\\theta$, and $F_{3}=F(m)$ with axis $m=(\\sin\\varphi,0,\\cos\\varphi)$, and the initial preparation $\\rho_{0}=T_{e_{+},e_{+}}$, the state of a spin-half system with $S_{z}=+\\hbar/2$. Then:\n\n**(i)** Through $F_{1}$ the outcome $+$ has probability $1$ and the conditional state is again $\\rho_{0}$.\n\n**(ii)** Through $F_{2}$, conditioned on having passed $F_{1}$,\n$$\\mathbb P(+)=\\cos^{2}\\frac{\\theta}{2},\\qquad \\mathbb P(-)=\\sin^{2}\\frac{\\theta}{2},$$\nand, if $\\cos^2(\\theta/2)>0$, after the outcome $+$ the conditional state is the pure state of $u(\\theta)$.\n\n**(iii)** If $\\cos^2(\\theta/2)>0$, through $F_{3}$, conditioned on having passed $F_{2}$ with the outcome $+$, the outcome $+$ has probability\n$$\\mathbb P(+)=\\Bigl|\\langle u(\\varphi),u(\\theta)\\rangle\\Bigr|^{2}=\\cos^{2}\\frac{\\varphi-\\theta}{2}.$$\nFor all $0\\le\\theta\\le\\pi$, including the zero-probability first branch, the joint probability of the outcomes $+,+,+$ is $\\cos^{2}(\\theta/2)\\cos^{2}((\\varphi-\\theta)/2)$.\n\n**(iv)** In particular, for $\\theta=\\pi/2$ and $\\varphi=\\pi$ the filter $F_{2}$ passes half of the atoms that reach it, the filter $F_{3}$ passes half of those, and the joint probability of passing all three filters is $\\tfrac12\\cdot\\tfrac12=\\tfrac14$, although without $F_{2}$ in the beam the filter $F_{3}$ would pass none of the atoms emerging from $F_{1}$: $\\cos^{2}(\\pi/2)=0$. The intervening declared measurement changes the statistics of the later one.\n\nThe computation is a model computation for declared ideal filters and the declared spin assignment: it does not derive the spatial Stern-Gerlach deflection or the inhomogeneous-field geometry, records no detector counts, resolution, background or uncertainty, and asserts nothing about the historical silver-atom experiments or about any particular apparatus.",
+        "strategy": "direct",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-bounded-linear-operator",
+          "def-complex-numbers-and-arithmetic",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-inner-product-space",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_roles": {
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 7.4.2, printed pages 161-164 (Stern-Gerlach filters in series, the amplitude cos((phi-theta)/2) and the quarter-intensity example)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-half, Bras, Kets, and Operators', Section 1, printed pages 1-7 (Stern-Gerlach boxes in series and the loss of memory of the first filter)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact finite model computation for a declared two-level spin-half system and declared ideal filters: spin-component readouts along successive magnetic axes, their outcome probabilities and conditional states, and the order dependence of the serial statistics. The computation idealises a Stern-Gerlach filter as a declared ideal sharp measurement of a spin component; it does not derive the spatial deflection, the field geometry or the detector response, reports no measurement and asserts no property of silver atoms or of the 1922 experiments."
+      },
+      {
+        "id": "ex-nrqm-measurement-three-polarizer-chain",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Three ideal analysers in series: the quarter-intensity model computation",
+        "statement": "Declare a two-level system with assigned Hilbert space $H=\\mathbb C^{2}$, orthonormal basis $(e_{x},e_{y})$ and standard inner product, as an idealised fixed-mode polarization degree of freedom ([[def-nrqm-state-geometry-framework-state-space]], [[def-inner-product-space]], [[def-hilbert-space]]). For a real angle $\\alpha$ put\n$$e_{\\alpha}:=\\cos\\alpha\\,e_{x}+\\sin\\alpha\\,e_{y},\\qquad e_{\\alpha}^{\\perp}:=-\\sin\\alpha\\,e_{x}+\\cos\\alpha\\,e_{y}.$$\nThe **ideal analyser** $A(\\alpha)$ is the declared ideal sharp measurement with the two outcomes transmit and block, whose projections are $T_{e_{\\alpha},e_{\\alpha}}$ and $T_{e_{\\alpha}^{\\perp},e_{\\alpha}^{\\perp}}$ respectively ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (c), [[lem-nrqm-composites-rank-one-operator-calculus]]).\n\nThe example takes the preparation $[e_{x}]$, the chain of analysers $A(0)$ with $\\alpha=0^\\circ$, $A(\\pi/4)$ with $\\alpha=45^\\circ$ and $A(\\pi/2)$ with $\\alpha=90^\\circ$, and computes:\n\n**(i)** The analyser $A(\\alpha)$ transmits the preparation $[e_{\\beta}]$ with probability\n$$\\mathbb P(\\text{transmit})=\\bigl|\\langle e_{\\alpha},e_{\\beta}\\rangle\\bigr|^{2}=\\cos^{2}(\\alpha-\\beta),$$\nand, when $\\cos^2(\\alpha-\\beta)>0$, after transmission the conditional state is the pure state of $e_{\\alpha}$.\n\n**(ii)** Consequently the chain $0^\\circ,45^\\circ,90^\\circ$ transmits with joint probability\n$$\\cos^{2}(0-0)\\cdot\\cos^{2}(\\tfrac{\\pi}{4}-0)\\cdot\\cos^{2}(\\tfrac{\\pi}{2}-\\tfrac{\\pi}{4})=1\\cdot\\tfrac12\\cdot\\tfrac12=\\tfrac14 ,$$\nwhereas the chain $0^\\circ,90^\\circ$ alone transmits with probability $\\cos^{2}(\\pi/2)=0$.\n\n**(iii)** Removing the middle analyser therefore changes the transmission of the chain from $0$ to $\\tfrac14$ within the declared model: the intervening declared measurement changes the state, and the later analyser sees the state selected by the earlier one, not the original preparation.\n\n**(iv)** *Model comparison only.* A declared classical amplitude model for a transverse field in the same plane, in which the analyser transmits the component along $e_{\\alpha}$ and the transmitted intensity is stipulated to be proportional to the squared modulus of that component, gives the same ratio $\\cos^{2}(\\alpha-\\beta)$ for a preparation along $e_{\\beta}$. The agreement of these two model computations does not establish that either describes nature, and it does not by itself establish field quantization ([[rem-nrqm-measurement-examples-scope-limits]]); no classical Maxwell theorem is invoked, and the field model is a stipulated finite-dimensional comparison. No transmission counts, detector efficiencies, backgrounds or sampling statistics are reported.",
+        "strategy": "direct",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-complex-numbers-and-arithmetic",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-inner-product-space",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_roles": {
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.3.6, printed pages 14-15 (photon polarization: amplitudes cos(theta) and sin(theta), transmission probability cos^2(theta), and the classical intensity ratio)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-half, Bras, Kets, and Operators', Section 1, printed pages 1-7 (sequential measurement boxes and their probabilities)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact finite model computation for a declared two-level system and declared ideal analysers: transmission probabilities and conditional states of a serial analyser chain, including the standard quarter-transmission case. The two-level system is an idealization of a fixed-mode polarization degree of freedom; the computation asserts no radiation quantization, no detector model, no measured counts and no empirical result, and it explicitly compares only with a declared classical amplitude model with the same ideal analyser convention."
+      },
+      {
+        "id": "ex-nrqm-measurement-absorption-instrument",
+        "kind": "example",
+        "domain": "physics",
+        "title": "An absorbing two-outcome instrument: amplitude suppression and a branch without an outgoing polarization state",
+        "statement": "Declare a three-level system with assigned Hilbert space $H=\\mathbb C^{3}$ and orthonormal basis $(e_{0},e_{1},e_{2})$ ([[def-nrqm-state-geometry-framework-state-space]], [[def-inner-product-space]], [[def-hilbert-space]]). The level $e_{0}$ is a declared **absorbed/no-photon marker** and the plane $\\operatorname{span}(e_{1},e_{2})$ is a declared **polarization plane**; this is a finite idealisation of a fixed-mode absorbing detector model, not a radiation model. Fix a unit vector\n$$v=\\cos\\gamma\\,e_{1}+\\sin\\gamma\\,e_{2},\\qquad v^{\\perp}:=-\\sin\\gamma\\,e_{1}+\\cos\\gamma\\,e_{2},$$\nso that $(e_{0},v,v^{\\perp})$ is an orthonormal basis, and fix a detection parameter $p\\in(0,1)$, a dimensionless model parameter. Declare the two-outcome instrument with Kraus family ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (d))\n$$M_{\\mathrm{det}}:=\\sqrt p\\,T_{e_{0},v},\\qquad M_{\\mathrm{no}}:=T_{e_{0},e_{0}}+\\sqrt{1-p}\\,T_{v,v}+T_{v^{\\perp},v^{\\perp}},$$\nwhere $T_{x,y}z=\\langle z,y\\rangle x$ ([[lem-nrqm-composites-rank-one-operator-calculus]]), with outcomes $\\mathrm{det}$ and $\\mathrm{no}$, effects $F_{\\mathrm{det}}=M_{\\mathrm{det}}^{*}M_{\\mathrm{det}}$, $F_{\\mathrm{no}}=M_{\\mathrm{no}}^{*}M_{\\mathrm{no}}$, probabilities $p_{\\mathrm{det}}=\\operatorname{tr}(\\rho F_{\\mathrm{det}})$, $p_{\\mathrm{no}}=\\operatorname{tr}(\\rho F_{\\mathrm{no}})$ and updates $\\rho\\mapsto M_{a}\\rho M_{a}^{*}/p_{a}$ for positive probabilities. The example considers preparations $\\rho=T_{\\psi,\\psi}$ with\n$$\\psi=\\alpha v+\\beta v^{\\perp},\\qquad |\\alpha|^{2}+|\\beta|^{2}=1,$$\nso that the preparation lies in the polarization plane, and computes:\n\n**(i)** The family is normalized, $M_{\\mathrm{det}}^{*}M_{\\mathrm{det}}+M_{\\mathrm{no}}^{*}M_{\\mathrm{no}}=I$, with effects $F_{\\mathrm{det}}=p\\,T_{v,v}$ and $F_{\\mathrm{no}}=T_{e_{0},e_{0}}+(1-p)T_{v,v}+T_{v^{\\perp},v^{\\perp}}$; hence\n$$p_{\\mathrm{det}}=p\\,|\\alpha|^{2},\\qquad p_{\\mathrm{no}}=1-p\\,|\\alpha|^{2}.$$\n\n**(ii)** When $\\alpha\\ne0$, conditioned on the outcome $\\mathrm{det}$, the conditional state is $T_{e_{0},e_{0}}$: the branch carries the absorbed/no-photon record and leaves **no outgoing state in the polarization plane**. In particular the model does not produce an outgoing one-photon polarization state for the detected branch.\n\n**(iii)** Conditioned on the outcome $\\mathrm{no}$, the conditional state is the pure state of the normalized vector\n$$\\frac{\\sqrt{1-p}\\,\\alpha\\,v+\\beta\\,v^{\\perp}}{\\sqrt{(1-p)|\\alpha|^{2}+|\\beta|^{2}}},$$\nthat is, the $v$-component is amplitude-suppressed by $\\sqrt{1-p}$ rather than projected away. For the fully detectable preparation $\\psi=v$ ($\\alpha=1$) and $p=\\tfrac12$ one has $p_{\\mathrm{det}}=p_{\\mathrm{no}}=\\tfrac12$ and the no-detection conditional state is again $T_{v,v}$; a repetition of the instrument on that branch again detects with probability $\\tfrac12$, so the no-detection outcome is not repeatable.\n\n**(iv)** When $\\alpha\\ne0$, after the detection branch the state is $T_{e_{0},e_{0}}$, and a repetition gives $p_{\\mathrm{det}}=\\operatorname{tr}(T_{e_{0},e_{0}}F_{\\mathrm{det}})=p|\\langle e_{0},v\\rangle|^{2}=0$: the detection outcome is not repeatable either. The effects $F_{\\mathrm{det}}$ and $F_{\\mathrm{no}}$ are not projections for $0<p<1$, so the instrument is not a declared ideal sharp measurement; it is a declared general instrument whose update is part of its declaration ([[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]], clause (v) of the ideal conditional-measurement postulate).\n\nNo real detector, efficiency, dark count, dead time, photon number or measured rate is described; the computation is a model computation in the declared three-level space.",
+        "strategy": "direct",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-bounded-linear-operator",
+          "def-complex-numbers-and-arithmetic",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-inner-product-space",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "pthm-nrqm-measurement-countable-kraus-instruments",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects"
+        ],
+        "dependency_roles": {
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "pthm-nrqm-measurement-countable-kraus-instruments": "physical-result",
+          "pthm-nrqm-measurement-instrument-updates-not-determined-by-effects": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 9-11 (generalized measurements, POVM effects, and the freedom of the post-measurement state)",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.3.6, printed pages 14-15 (photons passed or absorbed by an analyser, with the transmitted state fixed by the analyser)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact finite model computation for a declared three-level system with a declared two-outcome instrument: a polarization-sensitive absorbing branch that leaves the absorbed level rather than an outgoing polarization state, a non-detection branch with amplitude suppression, and the non-repeatability of both branches. The three-level space and its level labels are a declared finite idealization of a fixed-mode absorbing detector; no real detector, photon number, efficiency, dark count or measured rate is described, and no claim about photon absorption in nature is made."
+      },
+      {
+        "id": "ex-nrqm-measurement-degenerate-coarse-versus-fine-update",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Coarse and fine declared measurements of a degenerate subspace: the Lueders update is not eigenvector selection",
+        "statement": "Declare a three-level system with assigned Hilbert space $H=\\mathbb C^{3}$ and orthonormal basis $(e_{1},e_{2},e_{3})$, and put\n$$K:=\\operatorname{span}(e_{1},e_{2}),\\qquad P:=T_{e_{1},e_{1}}+T_{e_{2},e_{2}},\\qquad \\psi:=\\frac{e_{1}+e_{2}}{\\sqrt2},\\qquad w':=\\frac{e_{1}-e_{2}}{\\sqrt2},$$\nwith $T_{x,y}z=\\langle z,y\\rangle x$ ([[def-nrqm-state-geometry-framework-state-space]], [[def-inner-product-space]], [[def-hilbert-space]], [[lem-nrqm-composites-rank-one-operator-calculus]]). Declare the two ideal sharp measurements\n$$\\mathcal C:=(P,\\,I-P)\\quad\\text{(coarse readout of }K\\text{)},\\qquad \\mathcal G:=(T_{e_{1},e_{1}},\\,T_{e_{2},e_{2}},\\,T_{e_{3},e_{3}})\\quad\\text{(fine readout)},$$\nand consider the pure preparation $\\rho=T_{\\psi,\\psi}$ and the bounded self-adjoint observable, declared dimensionless with spectral unit $1$,\n$$W:=T_{\\psi,\\psi}-T_{w',w'}$$\nwith spectral projections $T_{\\psi,\\psi}$ at $+1$, $T_{w',w'}$ at $-1$ and $I-T_{\\psi,\\psi}-T_{w',w'}$ at $0$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]], [[thm-complex-spectral-theorem-for-normal-endomorphisms]]). Then:\n\n**(i)** In the coarse measurement $\\mathcal C$ the outcome $K$ has probability $1$, and the conditional state is again $\\rho=T_{\\psi,\\psi}$: the coarse readout leaves the coherent superposition inside the degenerate subspace intact.\n\n**(ii)** In the fine measurement $\\mathcal G$ the outcomes $e_{1}$ and $e_{2}$ have probabilities $\\tfrac12$ each (and $e_{3}$ has probability $0$), with conditional states $T_{e_{1},e_{1}}$ and $T_{e_{2},e_{2}}$: the fine readout selects a basis state.\n\n**(iii)** For the observable $W$ the two declared measurements give different model predictions: after the coarse outcome the value $+1$ has probability $1$; the mixture $\\tfrac12T_{e_{1},e_{1}}+\\tfrac12T_{e_{2},e_{2}}$ (the discarded ensemble of the fine measurement) assigns probability $\\tfrac12$ to $+1$ and $\\tfrac12$ to $-1$. Hence the coarse Lueders update is not equivalent to selecting one eigenvector of the degenerate subspace with probability $\\tfrac12$ and forgetting the other: that replacement destroys the coherence of $\\psi$ and changes the statistics of $W$.\n\n**(iv)** The fine measurement is a different declared measurement, not a refinement of the reported data of the coarse one. A model that reports only \"the system is in $K$\" and then predicts with the mixture of (iii) is a different model from the coarse Lueders model, with the observable consequence exhibited in (iii). No apparatus is asserted to realize either declared measurement, and no empirical comparison is made.",
+        "strategy": "direct",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-complex-numbers-and-arithmetic",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-inner-product-space",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "pthm-nrqm-measurement-degenerate-eigenspace-update",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms"
+        ],
+        "dependency_roles": {
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "def-complex-numbers-and-arithmetic": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "pthm-nrqm-measurement-degenerate-eigenspace-update": "physical-result",
+          "pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles": "physical-result",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (degenerate spectrum: collapse to the normalized superposition inside the degenerate eigenspace)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 3 'Foundations II: Measurement and Evolution' (updated July 2015), Section 3.1.2, printed pages 9-11 (orthogonal versus generalized measurement and non-repeatability)",
+              "url": "https://preskill.caltech.edu/ph219/chap3_15.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact finite model computation contrasting two declared ideal sharp measurements of a three-level system: a coarse readout of a degenerate two-dimensional subspace and a fine readout resolving it. The example shows that the Lueders update by the subspace projection retains the coherent superposition while the fine measurement selects basis states, and that the two declared measurements give different statistics for a suitable bounded observable. It asserts no apparatus realization and no empirical result."
+      },
+      {
+        "id": "rem-nrqm-measurement-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the worked instruments of the companion page establish",
+        "statement": "**Serial filters.** [[ex-nrqm-measurement-serial-stern-gerlach-filters]] computes, in a declared two-level spin-half model with the spin assignment of P6, the outcome probabilities $\\cos^{2}(\\theta/2)$ and $\\cos^{2}((\\varphi-\\theta)/2)$ of successive ideal filters and the quarter-probability case. The computation verifies the model's serial Lueders statistics for declared ideal filters. It does not derive the inhomogeneous-field force, the spatial splitting or the detector response of a Stern-Gerlach apparatus, and it reports no measured fraction and no property of silver atoms; the reported Stern-Gerlach experiments of 1922 remain a candidate experiment item that is not asserted by this page.\n\n**Analyser chain.** [[ex-nrqm-measurement-three-polarizer-chain]] computes the transmission probabilities of a chain of declared ideal analysers in a declared two-level model and exhibits the standard $\\tfrac14$ case, together with an explicit caveat that a stipulated classical amplitude model with the same ideal analyser convention gives the same ratio. The agreement of the two model computations does not establish field quantization or the applicability of either model to nature, and no transmission counts, efficiencies or backgrounds are reported.\n\n**Absorbing instrument.** [[ex-nrqm-measurement-absorption-instrument]] exhibits a declared two-outcome instrument whose detected branch leaves an absorbed marker with no outgoing polarization-plane state and whose non-detection branch suppresses one amplitude by $\\sqrt{1-p}$ rather than projecting it away; neither outcome is repeatable. The computation verifies that a declared instrument can describe a destructive apparatus within the framework's instrument vocabulary and that its update is part of its declaration. The three-level space is an idealisation; no real detector, photon number, efficiency or rate is described.\n\n**Degenerate readout versus fine readout.** [[ex-nrqm-measurement-degenerate-coarse-versus-fine-update]] contrasts a coarse readout of a degenerate subspace with a fine readout resolving it and shows that the coarse Lueders update retains the coherent superposition while the eigenvector-selection mixture changes the law of a suitable bounded observable. The computation verifies the degeneracy clause of the projective update inside an explicit three-level model; it asserts no preferred basis and no apparatus.\n\n**Empirical neutrality.** None of the four items is an experiment. Each is a finite computation for a declared preparation and a declared measurement model; none records data, calibration, sampling, uncertainty or a comparison with observation, and none claims that a laboratory device realizes the declared instrument. Agreement or disagreement with data would test the combined model and apparatus assumptions under the preparation and apparatus postulate P7 ([[post-nrqm-framework-preparation-and-apparatus]]) and is not established or claimed here.",
+        "deps": [
+          "ex-nrqm-measurement-absorption-instrument",
+          "ex-nrqm-measurement-degenerate-coarse-versus-fine-update",
+          "ex-nrqm-measurement-serial-stern-gerlach-filters",
+          "ex-nrqm-measurement-three-polarizer-chain",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-preparation-and-apparatus"
+        ],
+        "dependency_roles": {
+          "ex-nrqm-measurement-absorption-instrument": "operational-prerequisite",
+          "ex-nrqm-measurement-degenerate-coarse-versus-fine-update": "operational-prerequisite",
+          "ex-nrqm-measurement-serial-stern-gerlach-filters": "operational-prerequisite",
+          "ex-nrqm-measurement-three-polarizer-chain": "operational-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "operational-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.3.6, 1.4 and 7.4.2, printed pages 14-15 and 161-164 (polarization probabilities, ideal measurement and Stern-Gerlach filters in series)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-77 (the measurement postulate and its stated limits)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope audit of the companion page of worked instruments: it records what each finite model computation verifies inside the framework's declared-measurement vocabulary and what none of them claims. It proves nothing, records no measurement, reports no observation and asserts no apparatus realization or empirical agreement."
+      }
+    ]
+  }
+]

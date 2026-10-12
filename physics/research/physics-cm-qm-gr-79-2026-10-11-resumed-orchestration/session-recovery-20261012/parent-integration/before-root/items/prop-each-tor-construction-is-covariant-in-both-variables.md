@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-each-tor-construction-is-covariant-in-both-variables.md

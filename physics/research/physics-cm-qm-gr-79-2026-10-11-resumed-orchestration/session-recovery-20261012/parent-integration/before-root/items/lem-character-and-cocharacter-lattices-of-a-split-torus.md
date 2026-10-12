@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-character-and-cocharacter-lattices-of-a-split-torus.md

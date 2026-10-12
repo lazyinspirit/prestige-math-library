@@ -55,8 +55,7 @@ the Gram determinant of [[def-gram-matrix-and-gram-determinant]], which vanishes
 
 **Proof technique:** direct.
 
-
-1.1 For a fixed list $(w_1,\ldots,w_k)$, the assignment $(v_1,\ldots,v_k)\mapsto\det(\langle v_i,w_j\rangle)$ is $k$-linear and alternating in the $v$'s (determinant multilinear in rows, zero on a repeated row), so by [L5] it descends to a unique linear functional on $\Lambda^kV$; symmetrically in the second slot. This is the well-defined bilinear pairing of [L1]. [L1, L5]
+ 1.1 For a fixed list $(w_1,\ldots,w_k)$, the assignment $(v_1,\ldots,v_k)\mapsto\det(\langle v_i,w_j\rangle)$ is $k$-linear and alternating in the $v$'s (determinant multilinear in rows, zero on a repeated row), so by [L5] it descends to a unique linear functional on $\Lambda^kV$; symmetrically in the second slot. This is the well-defined bilinear pairing of [L1]. [L1, L5]
 
 1.2 By [L1] and [L2], the pure-wedge norm square is $\|v_1\wedge\cdots\wedge v_k\|^2=\det G(v_1,\ldots,v_k)$. [L1, L2]
 
@@ -68,4 +67,4 @@ the Gram determinant of [[def-gram-matrix-and-gram-determinant]], which vanishes
 
 3.1 Expanding $\alpha=\sum_Ic_Ie_I$ in the basis of step 2.1 gives $\langle\alpha,\alpha\rangle=\sum_Ic_I^2\ge0$, with equality exactly when every $c_I=0$, i.e. $\alpha=0$; with steps 1.1 and 1.3 this is a positive-definite inner product. [step 1.1, step 1.3, step 2.1, algebra]
 
-4.1 Steps 1.1, 2.2 and 3.1 prove well-definedness, the Gram-determinant formula, and positive definiteness. [step 1.1, step 1.2, step 2.2, step 3.1] ∎
+4.1 Steps 1.1, 2.2 and 3.1 prove well-definedness, the Gram-determinant formula, and positive definiteness. [step 1.1, step 1.2, step 2.2, step 3.1] ∎ 

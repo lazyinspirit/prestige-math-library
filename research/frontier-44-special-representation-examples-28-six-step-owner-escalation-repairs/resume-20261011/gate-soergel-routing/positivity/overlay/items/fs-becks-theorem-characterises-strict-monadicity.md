@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-becks-theorem-characterises-strict-monadicity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots.md

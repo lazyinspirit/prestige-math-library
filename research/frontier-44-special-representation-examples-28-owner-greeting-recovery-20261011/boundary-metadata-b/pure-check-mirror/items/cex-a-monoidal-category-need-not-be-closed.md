@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-monoidal-category-need-not-be-closed.md

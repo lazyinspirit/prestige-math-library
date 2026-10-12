@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-change-of-injective-resolution-isomorphisms-satisfy-identity-and-cocycle-laws.md

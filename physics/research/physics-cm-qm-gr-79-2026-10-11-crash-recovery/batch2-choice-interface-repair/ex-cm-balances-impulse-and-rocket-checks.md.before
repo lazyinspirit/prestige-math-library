@@ -1,0 +1,69 @@
+---
+id: ex-cm-balances-impulse-and-rocket-checks
+kind: example
+title: "Worked impulse and restitution computations and a variable-mass rocket check"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 2
+deps: [thm-cm-impulse-restitution-and-energy-loss, thm-cm-variable-mass-momentum-balance, thm-cm-center-of-mass-and-kinetic-splitting, def-euclidean-inner-product, def-interval, def-derivative, thm-algebra-of-derivatives, thm-logarithm-derivative-and-integral, thm-chain-rule-for-total-derivatives, cor-vector-valued-ftc-and-lipschitz-bound, thm-cauchy-schwarz-and-the-euclidean-norm]
+dependency_roles:
+  thm-cm-impulse-restitution-and-energy-loss: mathematical-premise
+  thm-cm-variable-mass-momentum-balance: mathematical-premise
+  thm-cm-center-of-mass-and-kinetic-splitting: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-interval: mathematical-premise
+  def-derivative: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-logarithm-derivative-and-integral: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  cor-vector-valued-ftc-and-lipschitz-bound: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+sources:
+  references:
+    - title: "David Tong, Classical Dynamics (University of Cambridge), §§1.2-1.3, printed pp. 2-8: momentum balances and the variable-mass caution"
+      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+    - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, §3.4, Eqs. (3.30)-(3.37), printed pp. 40-42: centre-of-mass and reduced-mass kinetic splitting used in the collision arithmetic"
+      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+---
+
+## Example
+
+Throughout, $e$ is a unit vector of $\mathbb R^3$, i.e. $\lVert e\rVert_2=1$ for the Euclidean norm $u\mapsto\lVert u\rVert_2=\sqrt{\langle u,u\rangle}$ ([[def-euclidean-inner-product]], [[thm-cauchy-schwarz-and-the-euclidean-norm]]); all numbers are pure real numbers, and the notation $v_i^\pm=v_i(t_*^\pm)$, $J$, $\Delta K$, $\mu$ is that of [[thm-cm-impulse-restitution-and-energy-loss]].
+
+**(i) Equal masses, half-elastic impulse.** Take $m_1=m_2=1$, approach velocities $v_1^-=1\,e$, $v_2^-=-1\,e$ and restitution coefficient $e_r=\frac12$. Then the post-impulse velocities, impulse and kinetic-energy change of the theorem are
+
+$$v_1^+=-\tfrac12\,e,\qquad v_2^+=\tfrac12\,e,\qquad J=-\tfrac32\,e,\qquad \Delta K=-\tfrac34 .$$
+
+**(ii) Elastic impulse with unequal masses.** Take $m_1=1$, $m_2=3$, $v_1^-=2\,e$, $v_2^-=0$ and $e_r=1$. Then
+
+$$v_1^+=-1\,e,\qquad v_2^+=1\,e,\qquad J=-3\,e,\qquad \Delta K=0 .$$
+
+**(iii) Rocket check.** On $I=[0,1]$ take $m(t):=2-t$, $v(t):=\ln\!\bigl(\frac{2}{2-t}\bigr)e$, $F\equiv0$, $r_{\mathrm{in}}\equiv0$, $r_{\mathrm{out}}\equiv1$, $w_{\mathrm{out}}(t):=v(t)-u_e\,e$ with $u_e:=1$. Then the two material balance identities of [[thm-cm-variable-mass-momentum-balance]] hold, the derived law reads $m(t)v'(t)=1\cdot e$, and $v(1)=\ln(2)\,e$. The naive closed-system reading $(mv)'=F\equiv0$ would instead force $v\equiv v(0)=0$ on $I$, which does not satisfy the material balance; the two readings differ as soon as $t>0$.
+
+## Facts & Assumptions
+
+**Given:** A unit vector $e\in\mathbb R^3$, the impulse theorem [[thm-cm-impulse-restitution-and-energy-loss]] with its restitution law and energy formula, the variable-mass theorem [[thm-cm-variable-mass-momentum-balance]] with its two balance identities, and the two-body kinetic identity $m_1\lVert u\rVert_2^2+m_2\lVert w\rVert_2^2=M\lVert V\rVert_2^2+\mu\lVert u-w\rVert_2^2$ with $V=(m_1u+m_2w)/M$ ([[thm-cm-center-of-mass-and-kinetic-splitting]]).
+
+[L1] The Euclidean norm is a norm on $\mathbb R^3$ ([[thm-cauchy-schwarz-and-the-euclidean-norm]]), hence homogeneous: $\lVert ce\rVert_2=|c|\,\lVert e\rVert_2=|c|$ for real $c$ and a unit vector $e$ with $\lVert e\rVert_2=1$; the norm is $\lVert u\rVert_2=\sqrt{\langle u,u\rangle}$ of the Euclidean inner product ([[def-euclidean-inner-product]]). Derivatives of real functions obey the sum, product and quotient rules ([[def-derivative]], [[thm-algebra-of-derivatives]]); $\log'=1/x$ on $(0,\infty)$ and the chain rule holds ([[thm-logarithm-derivative-and-integral]], [[thm-chain-rule-for-total-derivatives]]); the vector fundamental theorem $\int_a^bf'=f(b)-f(a)$ holds for continuous $f'$ ([[cor-vector-valued-ftc-and-lipschitz-bound]]).
+
+## Verification
+
+**Proof technique:** direct.
+
+1.1 Claim (i): $M=2$, $\mu=\frac12$, $V=\frac{1\cdot1+1\cdot(-1)}{2}e=0$ and $d:=v_2^--v_1^-=-2e$. The theorem's clause b gives $v_1^+=V+\frac{m_2}{M}e_rd=0+\frac12\cdot\frac12\cdot(-2)e=-\frac12e$ and $v_2^+=V-\frac{m_1}{M}e_rd=\frac12e$; then $J=m_1(v_1^+-v_1^-)=(-\frac12-1)e=-\frac32e$, and indeed $m_2(v_2^+-v_2^-)=(\frac12+1)e=\frac32e=-J$; the total momentum is $0$ on both sides. The energy formula gives $\Delta K=-\frac{1-e_r^2}{2}\mu\lVert d\rVert_2^2=-\frac{3/4}{2}\cdot\frac12\cdot4=-\frac34$, while direct evaluation gives $\frac12(\frac14+\frac14)-\frac12(1+1)=\frac14-1=-\frac34$, the same value. [given, L1, algebra]
+
+
+1.2 Claim (iii): for $t\in(0,1)$, $m(t)=2-t>0$ and $v(t)=\log\frac{2}{2-t}\,e$ is differentiable with $v'(t)=\frac{1}{2-t}e$ by [L1] (the chain rule applied to $\log(2)-\log(2-t)$, whose inner derivative is $+1$). Hence $m'=-1=-r_{\mathrm{out}}$ and $m v'=(2-t)\cdot\frac{1}{2-t}e=e$, so $m'=r_{\mathrm{in}}-r_{\mathrm{out}}$ and $mv'=F+r_{\mathrm{in}}(\cdot)-r_{\mathrm{out}}(w_{\mathrm{out}}-v)=0+0-1\cdot(-u_ee)=e$; equivalently $(mv)'=m'v+mv'=-\log\frac{2}{2-t}e+e=-1\cdot w_{\mathrm{out}}(t)+F$, which is the second material balance identity. [given, L1, algebra]
+
+
+2.1 Claim (ii): $M=4$, $\mu=\frac34$, $V=\frac{1\cdot2+3\cdot0}{4}e=\frac12e$ and $d=-2e$. With $e_r=1$, $v_1^+=\frac12e+\frac34(-2)e=-e$ and $v_2^+=\frac12e-\frac14(-2)e=e$. Total momentum before: $(2+0)e=2e$; after: $(-1+3)e=2e$; the relative velocity reverses: $v_2^+-v_1^+=2e=-(v_2^--v_1^-)$, as the restitution law with $e_r=1$ requires. $\Delta K=0$ by the theorem's formula, and directly $\frac12(1)+\frac32(1)-\frac12(1)(4)=\frac12+\frac32-2=0$. [step 1.1, given, L1, algebra]
+
+
+3.1 At $t=1$ the data give $m(1)=1$ and $v(1)=\log 2\,e$, so the momentum at that time is $\log 2\,e$, which differs from the initial momentum $m(0)v(0)=2\cdot0\cdot e=0$ carried by the naive closed-system law $(mv)'=F\equiv0$; that naive law would force $mv\equiv0$ on $I$ by [L1] (integrate the zero derivative), hence $v\equiv0$, and $v\equiv0$ fails the second material balance identity at every $t\in(0,1)$ because $0\ne e=-r_{\mathrm{out}}(w_{\mathrm{out}}-v)$. This exhibits the distinction the variable-mass theorem records. [step 1.2, given, L1, algebra] ∎

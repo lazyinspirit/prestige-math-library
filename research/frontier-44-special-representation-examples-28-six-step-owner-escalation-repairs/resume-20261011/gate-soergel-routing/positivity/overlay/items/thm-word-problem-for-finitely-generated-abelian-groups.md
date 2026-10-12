@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-word-problem-for-finitely-generated-abelian-groups.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-eigenvalue-iff-shift-is-not-invertible.md

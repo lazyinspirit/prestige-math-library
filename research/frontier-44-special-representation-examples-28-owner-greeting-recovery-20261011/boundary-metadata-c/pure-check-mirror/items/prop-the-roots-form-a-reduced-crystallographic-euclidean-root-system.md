@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-roots-form-a-reduced-crystallographic-euclidean-root-system.md

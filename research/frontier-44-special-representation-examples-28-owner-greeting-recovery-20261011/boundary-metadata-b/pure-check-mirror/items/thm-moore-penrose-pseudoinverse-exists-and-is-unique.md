@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-moore-penrose-pseudoinverse-exists-and-is-unique.md

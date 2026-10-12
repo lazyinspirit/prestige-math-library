@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-total-quotient-ring-and-normalisation-of-reduced-plane-curve-germ.md

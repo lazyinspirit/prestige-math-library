@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pure-inseparability-is-transitive-and-stable-under-composita.md

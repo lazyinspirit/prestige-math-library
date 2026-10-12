@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-c-one-change-of-variables-for-l-one-functions.md

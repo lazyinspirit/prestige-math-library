@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-padded-irreducible-characters-have-character-polynomials.md

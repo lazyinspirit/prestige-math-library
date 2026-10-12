@@ -1,0 +1,11 @@
+# Classical Hodge foundation recovery checkpoint
+
+Actual author: /root/klr_classical_hodge_theory. Scope: four requested classical Hodge/HL/HR/polarized-HS candidates, supporting pointwise Weil/Lefschetz and Kähler identities, rational scalar comparison. No canonical files edited. Owner reopened KLR and authorized necessary new pairs/theory; prior run history remains unchanged.
+
+CLAUDE.md and README.md fully reread after WSL recovery. SCHEMA read; WORKFLOW relevant authoring/origin/gate controls read. Before crash, full Demailly agbook PDF and Schnell MAT545 class16–18 PDFs fetched and their complete relevant arguments read. Temporary carriers vanished; source hashes were not captured before crash and therefore are not claimed. Re-fetch stable carriers and hash them before final source evidence.
+
+Verified published interfaces: general-dimensional scalar interior H^{k+2} elliptic regularity and Rellich extension-domain theorem exist, but compact general-dimensional vector-bundle Hodge theorem does not follow from existing Riemann-surface Dolbeault items. Root's compact elliptic author owns that new analytic supplier. Existing general de Rham theorem, Hodge-star basis formula, finite-CW model under countable choice, local polydisc Dolbeault lemma, smooth-function-module sheaf acyclicity, rational-to-real UCT are available for precise examination.
+
+Proof route: separate pointwise exterior Lefschetz/Weil lemma and Kähler commutator/type-preservation lemma precede compact Hodge to avoid Hodge↔HL cycle. Weyl operator W=exp(L)exp(-Lambda)exp(L)=epsilon(k)J* proved by orthogonal two-plane tensor factors. For primitive degree k, Wv=L^{n-k}v/(n-k)!, yielding *v=epsilon(k)i^{q-p}L^{n-k}v/(n-k)! and primitive positivity. Rational full-H^k polarization uses sign (-1)^r on Lefschetz summands. Rational sub-Hodge complement is Q-orthogonal and positive for the Weil Hermitian metric; arbitrary local subsystem semisimplicity is outside this lemma.
+
+Next: restore exact sources, author supporting lemmas and four complete local candidates, record actual published dependency hashes and remaining analytic interfaces; send exact A/B pair packet to root. No mathematical acceptance or gate pass is recorded here.

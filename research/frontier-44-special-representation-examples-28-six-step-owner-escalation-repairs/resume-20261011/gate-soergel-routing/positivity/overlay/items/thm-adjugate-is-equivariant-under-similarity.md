@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-adjugate-is-equivariant-under-similarity.md

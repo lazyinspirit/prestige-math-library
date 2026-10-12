@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-kernel-on-a-regular-moment-level.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-goursat-triangle-integral-of-z-squared.md

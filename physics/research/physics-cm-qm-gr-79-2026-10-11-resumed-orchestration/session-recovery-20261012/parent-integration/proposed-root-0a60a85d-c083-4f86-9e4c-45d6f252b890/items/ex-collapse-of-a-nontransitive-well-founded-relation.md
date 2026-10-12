@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-collapse-of-a-nontransitive-well-founded-relation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-schwarzschild-static-clock-ratio-explicit.md

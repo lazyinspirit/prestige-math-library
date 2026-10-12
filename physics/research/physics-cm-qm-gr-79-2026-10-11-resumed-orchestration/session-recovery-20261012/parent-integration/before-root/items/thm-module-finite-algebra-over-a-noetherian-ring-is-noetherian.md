@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-module-finite-algebra-over-a-noetherian-ring-is-noetherian.md

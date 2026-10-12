@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-natural-isomorphisms-are-componentwise-isomorphisms.md

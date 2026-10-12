@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-compact-operator-iff-approximation-numbers-tend-to-zero.md

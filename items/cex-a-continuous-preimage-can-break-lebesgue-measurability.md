@@ -37,8 +37,6 @@ be Lebesgue measurable.
 
 **Proof technique:** direct.
 
-1.1 By [L1], the set $E$ is Lebesgue measurable and the map $g$ is continuous. [L1]
-[L1]
+1.1 By [L1], the set $E$ is Lebesgue measurable and the map $g$ is continuous. [L1] [L1]
 
-2.1 The same fact [L1] says that $g^{-1}[E]$ is not Lebesgue measurable, which [step 1.1, L1]
-is exactly the required failure. [step 1.1, L1] ∎
+2.1 The same fact [L1] says that $g^{-1}[E]$ is not Lebesgue measurable, which [step 1.1, L1] is exactly the required failure. [step 1.1, L1] ∎ 

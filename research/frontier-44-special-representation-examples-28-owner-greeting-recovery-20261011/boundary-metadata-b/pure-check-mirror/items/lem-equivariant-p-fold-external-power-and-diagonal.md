@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-equivariant-p-fold-external-power-and-diagonal.md

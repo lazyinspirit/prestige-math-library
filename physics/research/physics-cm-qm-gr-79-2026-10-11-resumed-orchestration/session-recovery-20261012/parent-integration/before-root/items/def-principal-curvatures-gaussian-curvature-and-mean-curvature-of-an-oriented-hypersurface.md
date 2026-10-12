@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-principal-curvatures-gaussian-curvature-and-mean-curvature-of-an-oriented-hypersurface.md

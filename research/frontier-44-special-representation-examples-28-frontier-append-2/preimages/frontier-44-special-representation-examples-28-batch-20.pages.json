@@ -1,0 +1,1038 @@
+[
+  {
+    "order": 1569,
+    "id": "type-a-hecke-specht-modules-and-cellular-bases",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Type-A Hecke Specht Modules and Cellular Bases",
+    "companion": "type-a-hecke-specht-modules-and-cellular-bases-examples",
+    "requires": [
+      "principal-series-representations-of-gl-n-over-a-finite-field",
+      "integral-specht-modules-and-modular-simple-modules",
+      "jucys-murphy-elements-and-seminormal-forms",
+      "rim-hooks-and-the-murnaghan-nakayama-rule",
+      "grothendieck-groups-and-graded-cartan-pairings",
+      "artinian-rings-and-length",
+      "euclidean-domains-pids-and-unique-factorisation"
+    ],
+    "items": [
+      {
+        "id": "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+        "kind": "definition",
+        "title": "The quantum characteristic of an invertible Hecke parameter",
+        "deps": [
+          "def-generic-type-a-hecke-algebra",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $F$ be a field and $q\\in F^{\\times}$ an invertible element. The **quantum characteristic** $e=e(F,q)$ is the least integer $e\\ge2$ such that $1+q+\\cdots+q^{e-1}=0$ in $F$, and $e:=\\infty$ when no such integer exists ([[def-q-integer-q-factorial-and-q-multinomial]], [[def-generic-type-a-hecke-algebra]]). Since $[1]_q=1\\ne0$, the least positive integer $e$ with $[e]_q=0$, when it exists, automatically satisfies $e\\ge2$, so the two formulations coincide. Concretely: (i) if $q\\ne1$ then $[m]_q=(q^m-1)/(q-1)$ for all $m\\ge0$, so a finite $e$ exists exactly when $q$ is a root of unity and then $e$ is the multiplicative order of $q$ in $F^{\\times}$; (ii) if $q=1$ then $[m]_1=m$, so $e=\\operatorname{char}(F)$ when $\\operatorname{char}(F)>0$ and $e=\\infty$ when $\\operatorname{char}(F)=0$ ([[prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra]]). If $e<\\infty$ then $q\\ne1$ implies $q^e=1$, and hence $[m+e]_q=[m]_q$ for every integer $m$; in particular the quantum characteristic, not merely the multiplicative order, is the parameter governing the modular representation theory of the Hecke algebra. No choice principle is used.",
+        "strategy": "A definition item; the identities $[m]_q=(q^m-1)/(q-1)$ for $q\\ne1$ and $[m]_1=m$ are the definition of the quantum integers, and the displayed equivalences are immediate case checks. The last sentence records the reduction $[m+e]_q=[m]_q+q^m[e]_q$ that every later residue computation uses. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, (3.28) with the surrounding quantum-integer conventions, printed pp. 27 and 56",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, section 5.3: the quantum characteristic e, p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cellular-algebra-basis-and-cell-module",
+        "kind": "definition",
+        "title": "Cellular bases and cell modules",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "def-left-and-right-modules",
+          "def-partial-order"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $R$ be a commutative ring with $1$ and $A$ a unital $R$-algebra ([[def-algebra-over-a-commutative-ring]]) which is free as an $R$-module on a finite set $C=\\{c^{\\lambda}_{st}:\\lambda\\in\\Lambda,\\ s,t\\in T(\\lambda)\\}$, where $(\\Lambda,\\unrhd)$ is a finite poset ([[def-partial-order]]; its strict order is written $\\rhd$) and each $T(\\lambda)$ is a finite set. For $\\lambda\\in\\Lambda$ let $A^{\\rhd\\lambda}$ be the $R$-submodule of $A$ spanned by all $c^{\\mu}_{uv}$ with $\\mu\\rhd\\lambda$. Then $(C,\\Lambda)$ is a **cellular basis** of $A$, and $A$ is a **cellular algebra**, if: (i) the $R$-linear map $i:A\\to A$ with $i(c^{\\lambda}_{st})=c^{\\lambda}_{ts}$ for all $\\lambda,s,t$ is an algebra anti-automorphism of $A$, i.e. $i(ab)=i(b)i(a)$ and $i(1)=1$ (equivalently $i$ is an isomorphism of $A$ with the opposite algebra; the displayed formula forces $i^2=\\mathrm{id}$); and (ii) for every $\\lambda\\in\\Lambda$, every $t\\in T(\\lambda)$ and every $a\\in A$ there exist $r_v\\in R$ ($v\\in T(\\lambda)$) with $$c^{\\lambda}_{st}\\,a\\equiv\\sum_{v\\in T(\\lambda)}r_v\\,c^{\\lambda}_{sv}\\pmod{A^{\\rhd\\lambda}}.$$\n\n**Cell modules.** For $\\lambda\\in\\Lambda$ let $C^{\\lambda}$ be the free $R$-module with basis $\\{c^{\\lambda}_t:=c^{\\lambda}_{tt}:t\\in T(\\lambda)\\}$; condition (ii) makes $C^{\\lambda}$ a right $A$-module by $c^{\\lambda}_t a:=\\sum_v r_vc^{\\lambda}_v$ when $c^{\\lambda}_{tt}a\\equiv\\sum_v r_vc^{\\lambda}_{tv}\\pmod{A^{\\rhd\\lambda}}$, and it makes $C^{\\lambda}$ a left $A$-module via $i$. The module $C^{\\lambda}$ is the **(right) cell module** of $\\lambda$, and $A^{\\unrhd\\lambda}/A^{\\rhd\\lambda}\\cong C^{\\lambda}\\otimes_R C^{\\lambda}$ via $c^{\\lambda}_{st}+A^{\\rhd\\lambda}\\mapsto c^{\\lambda}_s\\otimes c^{\\lambda}_t$. A cellular algebra may have several cellular bases.",
+        "strategy": "A definition item recording the Graham-Lehrer axioms exactly as used later. The only point needing care is that the displayed formula really defines a module action: this is Corollary 2.3(i) of the source, obtained by applying the anti-automorphism (i) to the triangular relation; the ideal identification is the display after (2.5). In every application on this page $A=H_{R,q}(S_n)$ is a free $R$-module of finite rank. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Definitions 2.1-2.2, Corollary 2.3, equations (2.4)-(2.6), printed pp. 9-11",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.8-2.15 (the Graham-Lehrer axioms in the form used here), pp. 4-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cell-form-is-associative-and-its-radical-is-a-submodule",
+        "kind": "lemma",
+        "title": "The cell form is associative and its radical is a submodule",
+        "deps": [
+          "def-cellular-algebra-basis-and-cell-module"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $R$ be a commutative ring and $A$ a cellular $R$-algebra with cellular basis $(C,\\Lambda)$ and cell modules $C^{\\lambda}$ ([[def-cellular-algebra-basis-and-cell-module]]). For each $\\lambda\\in\\Lambda$ there is a unique $R$-bilinear form $$\\langle\\ ,\\ \\rangle_\\lambda:C^{\\lambda}\\times C^{\\lambda}\\longrightarrow R$$ with $$c^{\\lambda}_{us}c^{\\lambda}_{tv}\\equiv\\langle c^{\\lambda}_s,c^{\\lambda}_t\\rangle_\\lambda\\,c^{\\lambda}_{uv}\\pmod{A^{\\rhd\\lambda}}$$ for all $s,t,u,v\\in T(\\lambda)$; in particular the right hand side is independent of $u$ and $v$, and $\\langle c^{\\lambda}_s,c^{\\lambda}_t\\rangle_\\lambda$ depends only on $s,t$. This form is (i) symmetric, $\\langle x,y\\rangle_\\lambda=\\langle y,x\\rangle_\\lambda$; (ii) associative, $\\langle xa,y\\rangle_\\lambda=\\langle x,\\,i(a)y\\rangle_\\lambda$ for all $a\\in A$ (and dually for the left action); (iii) characterised by $x\\,c^{\\lambda}_{uv}=\\langle x,c^{\\lambda}_u\\rangle_\\lambda\\,c^{\\lambda}_v$ for $x\\in C^{\\lambda}$; and (iv) its radical $\\mathrm{rad}\\,C^{\\lambda}:=\\{x\\in C^{\\lambda}:\\langle x,y\\rangle_\\lambda=0\\text{ for all }y\\in C^{\\lambda}\\}$ is an $A$-submodule of $C^{\\lambda}$, namely the kernel of $x\\mapsto\\langle x,-\\rangle_\\lambda$.",
+        "strategy": "Uniqueness and independence of $u,v$: multiply $c^{\\lambda}_{us}c^{\\lambda}_{tv}$ on the left by $c^{\\lambda}_{wu}$ and compare the two resulting expressions inside the free quotient $A^{\\unrhd\\lambda}/A^{\\rhd\\lambda}$ using (2.1). Symmetry: apply the anti-automorphism $i$ to $c^{\\lambda}_{us}c^{\\lambda}_{tv}\\equiv\\langle c_s,c_t\\rangle c_{uv}$ and use the stability of $A^{\\rhd\\lambda}$. Associativity is the comparison of the two ways to associate $c^{\\lambda}_{us}(c^{\\lambda}_{tv}a)$ modulo $A^{\\rhd\\lambda}$. For (iv), (iii) shows that for fixed $y$ the map $x\\mapsto\\langle x,y\\rangle_\\lambda$ is $A$-linear where defined, so its kernel is a submodule; the radical is the intersection of these kernels. This is Mathas, Corollary 2.3(iv), (2.6), Proposition 2.7 and Lemma 2.8, printed pp. 10-11; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Corollary 2.3(iv), (2.6), Proposition 2.7, Lemma 2.8, printed pp. 10-11",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 3.1-3.7 (cell forms and their radicals), pp. 9-11",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra",
+        "kind": "theorem",
+        "title": "Nonzero cell heads classify the simple modules of a cellular algebra",
+        "deps": [
+          "def-composition-series-and-length-of-a-module",
+          "def-simple-module",
+          "lem-cell-form-is-associative-and-its-radical-is-a-submodule",
+          "thm-jordan-holder-theorem-for-modules"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $F$ be a field and $A$ a finite-dimensional unital cellular $F$-algebra with cellular basis $(C,\\Lambda)$ over the finite poset $\\Lambda$ ([[def-cellular-algebra-basis-and-cell-module]]). For $\\lambda\\in\\Lambda$ put $D^{\\lambda}:=C^{\\lambda}/\\mathrm{rad}\\,C^{\\lambda}$, where $\\mathrm{rad}\\,C^{\\lambda}$ is the radical of the cell form ([[lem-cell-form-is-associative-and-its-radical-is-a-submodule]]). Then:\n1. if $D^{\\lambda}\\ne0$ then $D^{\\lambda}$ is an absolutely irreducible (absolutely simple) $A$-module: it is simple over $F$ and remains simple after every extension of scalars to a larger field;\n2. $\\{D^{\\lambda}:\\lambda\\in\\Lambda,\\ D^{\\lambda}\\ne0\\}$ is a complete set of pairwise non-isomorphic simple $A$-modules ([[def-simple-module]], [[thm-jordan-holder-theorem-for-modules]]);\n3. $D^{\\lambda}\\ne0$ if and only if the cell form $\\langle\\ ,\\ \\rangle_\\lambda$ is non-degenerate, if and only if $\\mathrm{rad}\\,C^{\\lambda}\\ne C^{\\lambda}$; and $\\mathrm{rad}\\,C^{\\lambda}$ is the Jacobson radical of $C^{\\lambda}$, so $D^{\\lambda}$ is the head of $C^{\\lambda}$.\nNo semisimplicity of $A$ is assumed; the theorem is the Graham-Lehrer classification and applies in particular to $A=H_{F,q}(S_n)$ for every field $F$ and every $q\\in F^{\\times}$.",
+        "strategy": "Follow Graham-Lehrer. (a) If $x\\in C^{\\lambda}\\setminus\\mathrm{rad}\\,C^{\\lambda}$ then after scaling $\\langle x,y\\rangle=1$ for some $y$; the elements built from $y$ and the cellular basis send the image of $x$ to every basis vector of the quotient, so every nonzero submodule of $D^{\\lambda}$ is everything (Proposition 2.9); the computation is field-independent, giving absolute simplicity. (b) Any nonzero homomorphism $C^{\\mu}\\to C^{\\lambda}$ forces comparability of $\\mu,\\lambda$ in $\\Lambda$ (Proposition 2.10), whence distinct nonzero heads are non-isomorphic (Corollary 2.11). (c) For exhaustion, filter $A$ by the two-sided ideals $A^{\\unrhd\\lambda}$ for a linear extension of $\\Lambda$; each successive quotient is a cell module, so every simple $A$-module is a composition factor of some $C^{\\lambda}$; induction on $\\lambda$, using that the composition factors of $\\mathrm{rad}\\,C^{\\lambda}$ occur among the $D^{\\mu}$ with $\\mu\\rhd\\lambda$ (the description of the radical in the proof of Theorem 2.13), reduces every simple factor to a nonzero $D^{\\mu}$. Finally $\\mathrm{rad}\\,C^{\\lambda}=C^{\\lambda}$ exactly when the form is identically zero. This is Mathas, Theorem 2.13 with Propositions 2.9-2.12; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 2.13 (Graham-Lehrer) with Propositions 2.9-2.12 and Corollary 2.11, printed pp. 12-16",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.8-2.15, pp. 4-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-cellular-decomposition-matrices-are-dominance-unitriangular",
+        "kind": "corollary",
+        "title": "Cellular decomposition matrices are unitriangular for the cell order",
+        "deps": [
+          "def-composition-series-and-length-of-a-module",
+          "thm-jordan-holder-theorem-for-modules",
+          "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $F$ be a field, $A$ a finite-dimensional cellular $F$-algebra with cellular basis $(C,\\Lambda)$ and cell modules $C^{\\lambda}$, $D^{\\lambda}=C^{\\lambda}/\\mathrm{rad}\\,C^{\\lambda}$ ([[def-cellular-algebra-basis-and-cell-module]], [[thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra]]). For $\\lambda,\\mu\\in\\Lambda$ with $D^{\\mu}\\ne0$ let $d_{\\lambda\\mu}:=[C^{\\lambda}:D^{\\mu}]$ be the multiplicity of $D^{\\mu}$ as a composition factor of $C^{\\lambda}$ (well defined by [[thm-jordan-holder-theorem-for-modules]] and [[def-composition-series-and-length-of-a-module]]). Then $$d_{\\mu\\mu}=1\\qquad\\text{and}\\qquad d_{\\lambda\\mu}\\ne0\\ \\Longrightarrow\\ \\lambda\\unrhd\\mu,$$ i.e. a nonzero off-diagonal entry can occur only in the allowed direction of the cell order $\\unrhd$ (larger cell first). Equivalently, after any linear extension of $\\unrhd$ and with rows $\\lambda\\in\\Lambda$ and columns $\\mu$ such that $D^{\\mu}\\ne0$, the decomposition matrix of $A$ is lower unitriangular. This determines only the diagonal and the vanishing region: no off-diagonal entry is computed by cellularity.",
+        "strategy": "If $d_{\\lambda\\mu}\\ne0$ then there are a submodule $M\\subseteq C^{\\lambda}$ and a surjection $C^{\\mu}\\to C^{\\lambda}/M$ with image $D^{\\mu}$; composing with the projection onto the head produces a nonzero homomorphism $C^{\\mu}\\to C^{\\lambda}$ modulo submodules supported on strictly smaller cells, and Proposition 2.10(i) forces $\\lambda\\unrhd\\mu$. For $\\lambda=\\mu$ the radical of $C^{\\mu}$ is its unique maximal submodule (Theorem 2.13), so $d_{\\mu\\mu}=1$. This is Mathas, Corollary 2.14; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Corollary 2.14 and its proof, printed pp. 13-16",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.8-2.15, pp. 4-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra",
+        "kind": "lemma",
+        "title": "The star anti-automorphism of the type-A Hecke algebra",
+        "deps": [
+          "def-generic-type-a-hecke-algebra",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, and let $H=H_{R,q}(S_n)$ be the specialized type-A Hecke algebra with generators $T_1,\\dots,T_{n-1}$ and relations $T_i^2=(q-1)T_i+q$, the braid relations and the distant commutations ([[def-generic-type-a-hecke-algebra]], [[thm-standard-basis-of-the-generic-type-a-hecke-algebra]]). Then the assignment $T_i\\mapsto T_i$ ($1\\le i<n$) extends uniquely to an $R$-algebra anti-automorphism $*:H\\to H$, i.e. an $R$-linear map with $(ab)^*=b^*a^*$ and $1^*=1$; it is an involution, $**=\\mathrm{id}_H$, and on the standard basis $$T_w^{*}=T_{w^{-1}}\\qquad(w\\in S_n).$$ In particular $(T_wT_{w^{-1}})^*=T_wT_{w^{-1}}$ and, for the symmetrizers $m_\\lambda=\\sum_{w\\in S_\\lambda}T_w$, one has $m_\\lambda^*=m_\\lambda$.",
+        "strategy": "The presentation ideal of $H$ is stable under reversal of products: the quadratic, braid and distant-commutation relators are palindromic, so the universal property of the presented algebra applied to $H^{\\mathrm{op}}$ yields a unique algebra homomorphism $H\\to H^{\\mathrm{op}}$ sending each $T_i$ to $T_i$, i.e. an anti-automorphism $*$ of $H$. Since $*$ fixes a generating set, $**$ fixes a generating set and hence is the identity. For a reduced word $w=s_{i_1}\\cdots s_{i_\\ell}$ one has $T_w=T_{i_1}\\cdots T_{i_\\ell}$ by definition, so $T_w^*=T_{i_\\ell}\\cdots T_{i_1}=T_{w^{-1}}$, the reversed word being reduced for $w^{-1}$. This is Mathas, Chapter 3 section 2, where $*$ is the $R$-linear antiautomorphism determined by $T_i^*=T_i$ and $T_w^*=T_{w^{-1}}$; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 3 section 2: the antiautomorphism with $T_i^*=T_i$, $T_w^*=T_{w^{-1}}$, printed pp. 20-25",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-murphy-elements-and-murphy-tableau-elements",
+        "kind": "definition",
+        "title": "Murphy elements and Murphy tableau elements",
+        "deps": [
+          "def-generic-type-a-hecke-algebra",
+          "def-row-and-column-stabilizers-of-a-tableau",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "def-young-tableau-standard-tableau-and-shape",
+          "lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, and $H=H_{R,q}(S_n)$ with standard basis $\\{T_w\\}$ and star anti-automorphism $*$ ([[def-generic-type-a-hecke-algebra]], [[thm-standard-basis-of-the-generic-type-a-hecke-algebra]], [[lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra]]). For a composition (in particular a partition) $\\mu$ of $n$ put $m_\\mu:=\\sum_{w\\in S_\\mu}T_w\\in H$, the **row symmetrizer** of the standard Young subgroup $S_\\mu$ ([[def-young-subgroup-tabloid-and-permutation-module]]); the sum has $|S_\\mu|=\\prod_i\\mu_i!$ terms. For a row-standard $\\mu$-tableau $s$ ([[def-young-tableau-standard-tableau-and-shape]]) let $d(s)\\in S_n$ be the unique permutation of minimal length with $s=t^{\\mu}d(s)$, where $t^{\\mu}$ is the row-standard tableau obtained by entering $1,2,\\dots,n$ in increasing order from left to right along the rows; $d(s)$ is the distinguished right-coset representative of $S_\\mu$ in $S_n$ and $S_\\mu$ is the stabiliser of $t^\\mu$ ([[def-row-and-column-stabilizers-of-a-tableau]]). For row-standard $\\mu$-tableaux $s,t$ define the **Murphy element** $$m_{st}:=T_{d(s)}^{*}\\,m_{\\mu}\\,T_{d(t)}\\in H,$$ and for a standard $\\lambda$-tableau $t$ shorten $m_t:=m_{tt}=T_{d(t)}^{*}m_\\lambda T_{d(t)}$. Then $m_{st}^{*}=m_{ts}$ for all row-standard $s,t$ of the same shape, and $m_\\mu T_w=q^{\\ell(w)}m_\\mu$ for every $w\\in S_\\mu$.",
+        "strategy": "A definition item. The existence and uniqueness of $d(s)$, and the identity $\\ell(wd)=\\ell(w)+\\ell(d)$ for $w\\in S_\\mu$, $d\\in D_\\mu$, are Proposition 3.3 and Corollary 3.4 of the source; $m_\\mu T_w=q^{\\ell(w)}m_\\mu$ is Lemma 3.2, and the symmetry $m_{st}^*=m_{ts}$ is immediate from $**=\\mathrm{id}$. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 3 sections 1-2: Lemma 3.2, Proposition 3.3, Corollary 3.4 and the definition of $m_{st}$, printed pp. 18-21",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-murphy-tableau-elements-form-a-cellular-basis",
+        "kind": "theorem",
+        "title": "The Murphy tableau elements form a cellular basis",
+        "deps": [
+          "cor-sum-of-squares-of-standard-tableau-numbers",
+          "def-cellular-algebra-basis-and-cell-module",
+          "def-dominance-order-on-partitions",
+          "def-murphy-elements-and-murphy-tableau-elements",
+          "def-young-tableau-standard-tableau-and-shape",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, and $H=H_{R,q}(S_n)$ ([[def-generic-type-a-hecke-algebra]]). Let $\\Lambda$ be the set of partitions of $n$ ordered by dominance $\\unrhd$ ([[def-dominance-order-on-partitions]]), and for $\\lambda\\in\\Lambda$ let $T(\\lambda)=\\mathrm{Std}(\\lambda)$ be the set of standard $\\lambda$-tableaux ([[def-young-tableau-standard-tableau-and-shape]]). Then the **Murphy basis theorem** holds: the family $$\\mathcal M=\\{m_{st}:\\lambda\\vdash n,\\ s,t\\in\\mathrm{Std}(\\lambda)\\}$$ is an $R$-basis of $H$, and $(\\mathcal M,\\Lambda)$ is a cellular basis of $H$ in the sense of [[def-cellular-algebra-basis-and-cell-module]]. Explicitly: (i) $m_{st}^{*}=m_{ts}$ for all $\\lambda$ and $s,t$; and (ii) for every $\\lambda$, every $t\\in\\mathrm{Std}(\\lambda)$ and every $h\\in H$ there exist $r_v\\in R$ with $$m_{st}h\\equiv\\sum_{v\\in\\mathrm{Std}(\\lambda)}r_v\\,m_{sv}\\pmod{H^{\\rhd\\lambda}},$$ where $H^{\\rhd\\lambda}$ is spanned by the $m_{uv}$ with $\\mu\\rhd\\lambda$. The theorem holds over every commutative coefficient ring with $q\\in R^{\\times}$ and assumes no semisimplicity; the total number of Murphy elements is $\\sum_{\\lambda\\vdash n}|\\mathrm{Std}(\\lambda)|^2=n!$ ([[cor-sum-of-squares-of-standard-tableau-numbers]]), matching the rank of $H$.",
+        "strategy": "Spanning: by Corollary 3.4 every $m_\\mu T_{d(t)}$ with $t$ row-standard lies in $M^\\mu=m_\\mu H$; iterating Mathas's straightening induction (Lemma 3.14 and its left-handed version) rewrites any $m_{st}$ with $s,t$ merely row-standard as an $R$-linear combination of $m_{uv}$ with $u,v$ standard, using the critical column exclusion of Proposition 3.16 (a product $m_{st}h$ can only involve Murphy terms whose entries do not both lie in one column). The resulting expansions are triangular for dominance, which proves (ii) and shows that the $m_{st}$ with $s,t$ standard and of the same shape span $H$; since $\\sum_\\lambda|\\mathrm{Std}(\\lambda)|^2=n!=\\mathrm{rank}_RH$, they form a basis. Finally (i) is [[lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra]], and the reductions modulo $H^{\\rhd\\lambda}$ verify the two cellular axioms. This is Mathas, Theorem 3.18 with Proposition 3.16 and Corollary 3.17; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 3.18 (Murphy Basis Theorem) with Proposition 3.16 and Corollary 3.17, printed pp. 17-25",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-type-a-hecke-specht-module-and-cell-form",
+        "kind": "definition",
+        "title": "The type-A Hecke Specht module and its cell form",
+        "deps": [
+          "def-cellular-algebra-basis-and-cell-module",
+          "lem-cell-form-is-associative-and-its-radical-is-a-submodule",
+          "thm-murphy-tableau-elements-form-a-cellular-basis"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $R$ be a commutative ring and $q\\in R^{\\times}$. With the Murphy cellular basis $(\\mathcal M,\\Lambda)$ of $H=H_{R,q}(S_n)$ ([[thm-murphy-tableau-elements-form-a-cellular-basis]], [[def-cellular-algebra-basis-and-cell-module]]) and the canonical tableau $t^\\lambda$ of shape $\\lambda\\vdash n$ ([[def-murphy-elements-and-murphy-tableau-elements]]), the **Murphy cell module** $S^{\\lambda}_{\\mathrm M}$ is the right cell module $C^{\\lambda}$ of the Murphy basis: it is the free $R$-module with basis $\\{m_t:=m_{t^\\lambda t}:t\\in\\mathrm{Std}(\\lambda)\\}$ - the classes of the Murphy elements whose *first* index is the canonical tableau - and $H$ acts by $m_th=\\sum_vr_vm_v$ whenever $m_{t^\\lambda t}h\\equiv\\sum_vr_vm_{t^\\lambda v}\\pmod{H^{\\rhd\\lambda}}$. (The cellular action rule transforms the second index and fixes the first, so the diagonal elements $m_{tt}$ alone do not span a submodule; the explicit failure for $\\lambda=(2,1)$ is recorded in the proof strategy.) Its **cell form** is the unique bilinear form $\\langle\\ ,\\ \\rangle_\\lambda:S^{\\lambda}_{\\mathrm M}\\times S^{\\lambda}_{\\mathrm M}\\to R$ with $$m_{us}m_{tv}\\equiv\\langle m_s,m_t\\rangle_\\lambda\\,m_{uv}\\pmod{H^{\\rhd\\lambda}}$$ for all $s,t,u,v\\in\\mathrm{Std}(\\lambda)$; it is symmetric and associative and $\\mathrm{rad}\\,S^{\\lambda}_{\\mathrm M}$ is a submodule, so $D^{\\lambda}_{\\mathrm M}:=S^{\\lambda}_{\\mathrm M}/\\mathrm{rad}\\,S^{\\lambda}_{\\mathrm M}$ is a right $H$-module ([[lem-cell-form-is-associative-and-its-radical-is-a-submodule]]).\n\n**Convention (Dipper-James).** This page uses the Dipper-James Specht convention, in which the simple labels are the $e$-regular partitions: the page's **Specht module** $S^{\\lambda}$ is the Dipper-James Specht module, while the source's Murphy cell module of the conjugate shape is its dual, $S^{\\lambda'}_{\\mathrm M}$ being the dual of $S^{\\lambda}$ (source, printed p. 25). Consequently every source statement phrased for $e$-restricted labels is translated on this page by conjugating partitions and dualising, using [[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]] and the dictionary $D^{\\mu}\\cong D(\\mu^{\\mathrm{t}})\\otimes\\operatorname{sgn}$ of Kleshchev's Remark 5.5, whereas the Jucys-Murphy and seminormal theory is stated on this page for the Murphy cell module $S^{\\lambda}_{\\mathrm M}$ itself. No semisimplicity is assumed and no choice principle is used.",
+        "strategy": "A definition item: instantiate the general cell-module and cell-form construction at the Murphy basis, and record the conjugation/duality dictionary explicitly so that no later item silently mixes the two conventions. The cellular rule of [[def-cellular-algebra-basis-and-cell-module]] transforms the second index while fixing the first, so the module basis is indexed by the second index of the Murphy elements with the canonical tableau in the first index, $m_t=m_{t^\\lambda t}$; the diagonal elements $m_{tt}$ alone are not closed under right multiplication: for $\\lambda=(2,1)$ and $q=1$ one has $m_{uu}=1+(13)\\notin m_{(2,1)}\\mathbb Z[S_3]$, the right ideal generated by $m_{(2,1)}=1+(12)$ being spanned by $1+(12)$, $(23)+(123)$ and $(132)+(13)$, while the classes of $m_{t^\\lambda t}=m_\\lambda T_{d(t)}$ do span the cell module (the same pattern holds for $\\lambda=(3,1)$). The properties of the form are [[lem-cell-form-is-associative-and-its-radical-is-a-submodule]]; the dictionary is the printed p. 25 warning of the source together with Kleshchev's Remark 5.5, cross-checked against the Murphy-basis normalisation of Hu-Mathas (Proposition 3.17). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Proposition 3.20 and the convention warning on printed p. 25",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, Remark 5.5 (translation between the dual labelling and James's labelling), p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            },
+            {
+              "title": "Hu-Mathas, Seminormal forms and cyclotomic quiver Hecke algebras of type A, arXiv:1304.0906, Section 3.1 (3.8), Examples 3.10-3.11, Lemma 3.12, Theorem 3.13, Proposition 3.17; arXiv pp. 15-18 (published: Math. Ann.)",
+              "url": "https://arxiv.org/pdf/1304.0906"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-e-regular-and-e-restricted-partitions",
+        "kind": "definition",
+        "title": "e-regular and e-restricted partitions",
+        "deps": [
+          "def-p-regular-and-p-restricted-partitions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $e\\in\\{2,3,4,\\dots\\}\\cup\\{\\infty\\}$ and let $\\lambda\\vdash n$ be a partition with parts $\\lambda_1\\ge\\lambda_2\\ge\\cdots$ and conjugate $\\lambda'$ ([[def-partition-young-diagram-and-conjugate-partition]]). Then $\\lambda$ is **$e$-regular** when every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, i.e. $z_j(\\lambda)<e$ for every $j\\ge1$, and **$e$-restricted** when $\\lambda_i-\\lambda_{i+1}<e$ for every $i\\ge1$ (with $\\lambda_i:=0$ for $i>\\ell(\\lambda)$). For finite $e$ these are exactly the $p$-regular and $p$-restricted notions of [[def-p-regular-and-p-restricted-partitions]] with $p=e$, and $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular. For $e=\\infty$ both conditions are vacuous, so every partition is both $e$-regular and $e$-restricted.",
+        "strategy": "A definition item specialising the published $p$-regular/$p$-restricted definitions along the prime $p=e$; the conjugate equivalence is the finite-$e$ case of the corresponding statement for partitions ([[def-p-regular-and-p-restricted-partitions]]). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, the definition of $e$-restricted partitions in Chapter 3 section 4, printed p. 32",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, section 5.3 (e-restricted labels and Remark 5.5), p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions",
+        "kind": "theorem",
+        "title": "The simple type-A Hecke modules are indexed by e-regular partitions",
+        "deps": [
+          "def-e-regular-and-e-restricted-partitions",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, let $e=e(F,q)\\in\\{2,3,\\dots\\}\\cup\\{\\infty\\}$ be the quantum characteristic ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]) and let $H=H_{F,q}(S_n)$ for $n\\ge0$. For $\\lambda\\vdash n$ let $S^{\\lambda}$ be the Hecke Specht module and $D^{\\lambda}=S^{\\lambda}/\\mathrm{rad}\\,S^{\\lambda}$ its cell-form quotient ([[def-type-a-hecke-specht-module-and-cell-form]]). Then:\n1. $D^{\\lambda}\\ne0$ if and only if $\\lambda$ is $e$-regular ([[def-e-regular-and-e-restricted-partitions]]);\n2. $\\{D^{\\lambda}:\\lambda\\vdash n\\text{ is }e\\text{-regular}\\}$ is a complete set of pairwise non-isomorphic absolutely irreducible $H$-modules;\n3. $H$ is split semisimple if and only if $e>n$ (including $e=\\infty$); when $e\\le n$ the algebra has nonzero radical and some Specht module is reducible.\nThis is the exact root-of-unity replacement for the ordinary Specht classification. At $q=1$ in characteristic $p>0$ it specialises to the classification of the simple $F[S_n]$-modules by $p$-regular partitions ([[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]]). No semisimplicity is assumed and no choice principle is used.",
+        "strategy": "By [[thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra]] the $D^{\\lambda}$ are a complete and irredundant list of simple $H$-modules (up to the zero ones), so it remains to decide exactly when $D^{\\lambda}\\ne0$. In the source's dual convention this is Theorem 3.39: $D^{\\lambda}\\ne0$ iff $\\lambda$ is $e$-restricted. That proof has two halves. (a) If $\\lambda$ is $e$-restricted, the $e$-ladder tableau of Lemma 3.37 is $e$-restricted and Lemma 3.35 produces at least one composition factor of $S^{\\lambda}$ carried by the interpolated $\\mathbb{L}$-modules, so $D^{\\lambda}\\ne0$. (b) If $\\lambda$ is not $e$-restricted then $[e]_q$ divides the determinant $g^{\\lambda}$ of Lemma 3.38, whence $[e]_q=0$ forces every Gram entry $\\langle m_s,m_t\\rangle_\\lambda$ to vanish, so the cell form is identically zero, $\\mathrm{rad}\\,S^{\\lambda}=S^{\\lambda}$ and $D^{\\lambda}=0$. Translating (a),(b) through the conjugate-dual dictionary of [[def-type-a-hecke-specht-module-and-cell-form]] replaces $e$-restricted by $e$-regular. Part (3) is Corollary 3.40 of the source ($e>n$ iff split semisimple). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Lemmas 3.35, 3.37, 3.38, Theorem 3.39 and Corollary 3.40, printed pp. 32-34",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, section 5.3 (simple modules of Hecke algebras of type A), pp. 23-25",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular",
+        "kind": "corollary",
+        "title": "The type-A Hecke decomposition matrix is dominance unitriangular",
+        "deps": [
+          "cor-cellular-decomposition-matrices-are-dominance-unitriangular",
+          "def-dominance-order-on-partitions",
+          "thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions",
+          "thm-symmetric-group-decomposition-matrix-is-dominance-unitriangular"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, $e=e(F,q)$ and $H=H_{F,q}(S_n)$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]). For $\\lambda\\vdash n$ and $e$-regular $\\mu\\vdash n$ let $$d_{\\lambda\\mu}:=[S^{\\lambda}:D^{\\mu}],$$ the multiplicity of $D^{\\mu}$ in a composition series of the Specht module $S^{\\lambda}$ ([[def-type-a-hecke-specht-module-and-cell-form]], [[thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions]]). Then $$d_{\\mu\\mu}=1\\qquad\\text{and}\\qquad d_{\\lambda\\mu}\\ne0\\ \\Longrightarrow\\ \\mu\\unrhd\\lambda,$$ where $\\unrhd$ is the dominance order on partitions ([[def-dominance-order-on-partitions]]): a simple factor $D^{\\mu}$ of $S^{\\lambda}$ can occur only if the $e$-regular label $\\mu$ dominates $\\lambda$. Equivalently the decomposition matrix $(d_{\\lambda\\mu})$ is unitriangular along dominance. This constrains but does not compute the entries: no off-diagonal decomposition number is determined by cellularity.",
+        "strategy": "Apply [[cor-cellular-decomposition-matrices-are-dominance-unitriangular]] to the Murphy cellular basis ([[thm-murphy-tableau-elements-form-a-cellular-basis]], [[def-type-a-hecke-specht-module-and-cell-form]]). In the source's dual normalisation it gives $d_{\\lambda'\\nu'}\\ne0\\Rightarrow\\lambda'\\unrhd\\nu'$, equivalently $\\nu'\\unrhd\\lambda'$, and transposition reverses dominance, giving $\\nu\\unrhd\\lambda$ for the Dipper-James labels used here (equivalently $\\mu\\unrhd\\lambda$ for the simple label $\\mu=\\nu'$). The diagonal value $d_{\\mu\\mu}=1$ is the diagonal statement of the cellular corollary. This is the translation of Mathas, Theorem 3.39(ii) to the page's convention, matching the group-side [[thm-symmetric-group-decomposition-matrix-is-dominance-unitriangular]]. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 3.39(ii) with Corollary 2.14, printed pp. 13-16 and 34",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Groups, Theorems 12.1-12.3 (dominance unitriangularity in the Dipper-James convention), printed pp. 42-43",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-hecke-jucys-murphy-elements-and-q-contents",
+        "kind": "definition",
+        "title": "Hecke Jucys-Murphy elements and q-contents",
+        "deps": [
+          "def-content-vector-of-a-standard-tableau",
+          "def-generic-type-a-hecke-algebra",
+          "def-jucys-murphy-elements-of-the-symmetric-group-algebra",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra",
+          "prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, and $H=H_{R,q}(S_n)$ ([[def-generic-type-a-hecke-algebra]]). For $1\\le k\\le n$ define $$L_1:=0,\\qquad L_k:=q^{-1}T_{(k-1,k)}+q^{-2}T_{(k-2,k)}+\\cdots+q^{1-k}T_{(1,k)}\\in H\\quad(k\\ge2),$$ where $T_{(i,k)}$ is the standard basis element indexed by the transposition $(i\\ k)$ ([[thm-standard-basis-of-the-generic-type-a-hecke-algebra]]). The $L_k$ are the **Hecke Jucys-Murphy elements**. They are fixed by the star anti-automorphism $T_w^*=T_{w^{-1}}$ ([[lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra]]); they commute pairwise and every symmetric polynomial in $L_1,\\dots,L_n$ with coefficients in $R$ is central in $H$ ([[thm-hecke-jucys-murphy-action-is-dominance-triangular]]).\n\n**q-contents.** The quantum integers $[m]_q$ for $m\\ge0$ are those of [[def-q-integer-q-factorial-and-q-multinomial]]; extend the definition to negative indices by $[-m]_q:=-q^{-m}[m]_q$ for $m>0$, so that $[m]_q=(q^m-1)/(q-1)$ for all $m\\in\\mathbb Z$ when $q\\ne1$, and $[m]_1=m$ for all $m\\in\\mathbb Z$. For a standard $\\lambda$-tableau $t$ and $1\\le k\\le n$ let $\\operatorname{content}_t(k)=c-r$ be the content of the node carrying $k$ ([[def-content-vector-of-a-standard-tableau]]) and define the **q-content value** $[\\operatorname{content}_t(k)]_q$. If $e=e(F,q)<\\infty$ for a field $F$ then $[m+e]_q=[m]_q$ for every $m\\in\\mathbb Z$, so the q-content value depends only on the residue of the content modulo $e$. At $q=1$ the specialization $T_w\\mapsto w$ of [[prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra]] sends $L_k$ to the ordinary Jucys-Murphy element $X_k=\\sum_{j<k}(j\\ k)$ ([[def-jucys-murphy-elements-of-the-symmetric-group-algebra]]), and $[\\operatorname{content}_t(k)]_1=\\operatorname{content}_t(k)$.",
+        "strategy": "A definition item. Star-invariance is immediate from $T_{(i,k)}^*=T_{(i,k)}$ and the symmetry of the coefficients; commutation and centrality are deferred to [[thm-hecke-jucys-murphy-action-is-dominance-triangular]]; the $q=1$ limit is the substitution $q^{i-k}\\mapsto1$ followed by $T_{(i,k)}\\mapsto(i\\ k)$. The negative-index extension is the standard convention of the source (3.27). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, the definition of $L_k$, (3.27)-(3.28) and Corollary 3.25, printed pp. 26-28",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, section 2.15 (the Hecke JM family and q-contents), pp. 6-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hecke-jucys-murphy-action-is-dominance-triangular",
+        "kind": "theorem",
+        "title": "The Hecke Jucys-Murphy action is dominance triangular",
+        "deps": [
+          "def-dominance-order-on-partitions",
+          "def-hecke-jucys-murphy-elements-and-q-contents",
+          "def-young-tableau-standard-tableau-and-shape",
+          "thm-murphy-tableau-elements-form-a-cellular-basis",
+          "def-type-a-hecke-specht-module-and-cell-form"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, $H=H_{R,q}(S_n)$, and let $L_1,\\dots,L_n$ be the Hecke Jucys-Murphy elements ([[def-hecke-jucys-murphy-elements-and-q-contents]]). For every $\\lambda\\vdash n$, every standard $\\lambda$-tableau $t$ and every $1\\le k\\le n$ there exist $a_v\\in R$ with $$m_tL_k=[\\operatorname{content}_t(k)]_q\\,m_t+\\sum_{v\\rhd t}a_v\\,m_v,$$ where $(m_t)_{t\\in\\mathrm{Std}(\\lambda)}$ is the Murphy basis of the Murphy cell module $S^{\\lambda}_{\\mathrm M}$ ([[def-type-a-hecke-specht-module-and-cell-form]]) and the sum is over standard $\\lambda$-tableaux $v$ strictly dominating $t$ in the dominance order on tableaux ([[def-dominance-order-on-partitions]], [[def-young-tableau-standard-tableau-and-shape]]). In particular $L_k$ acts on the Murphy cell module $S^{\\lambda}_{\\mathrm M}$ with Murphy basis $(m_t)$ by a triangular matrix whose diagonal entries are the q-content values. Consequently the $L_k$ commute pairwise and every symmetric polynomial in $L_1,\\dots,L_n$ is central in $H$.",
+        "strategy": "Induct on $n$ and then on $k$ exactly as in the source. If $k$ lies in a non-last row of $t$, delete the last row and apply the induction hypothesis to the smaller partition; if $k$ is not in the first column, use $m_tL_k=m_t(1+L_{k-1}T_{k-1})$ together with the induction on $k$ and the quadratic relation; the remaining case (last row and first column) is handled by writing $m_t=hm_{\\mu'}$ with $\\mu'=(\\lambda_2,\\dots,\\lambda_r,1)$ and applying the Garnir relation Lemma 3.31 plus the induction hypothesis. The statement is for the Murphy cell module $S^{\\lambda}_{\\mathrm M}$ ([[def-type-a-hecke-specht-module-and-cell-form]]), whose basis is $m_t=m_{t^\\lambda t}$, so that the correction terms $m_{v^\\lambda v}$ of the source's printed identity $m_{st}L_k=[\\operatorname{res}_t(k)]_qm_{st}+\\sum_{v\\rhd t}r_vm_{sv}$ are the module basis vectors; the same triangularity in the Murphy-basis normalisation is [[Hu-Mathas]] Lemma 3.12 with (3.8). This is Mathas, Theorem 3.30 (Dipper-James) with Proposition 3.24 and Corollary 3.25. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 3.30 with Lemmas 3.27, 3.31 and Proposition 3.24, Corollary 3.25, printed pp. 26-29",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 3.1-3.7 (triangular JM action for cellular algebras), pp. 9-11",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            },
+            {
+              "title": "Hu-Mathas, Seminormal forms and cyclotomic quiver Hecke algebras of type A, arXiv:1304.0906, Section 3.1 (3.8), Examples 3.10-3.11, Lemma 3.12, Theorem 3.13, Proposition 3.17; arXiv pp. 15-18 (published: Math. Ann.)",
+              "url": "https://arxiv.org/pdf/1304.0906"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-separated-hecke-residues-give-seminormal-idempotents-and-bases",
+        "kind": "theorem",
+        "title": "Separated Hecke residues give seminormal idempotents and bases",
+        "deps": [
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "thm-hecke-jucys-murphy-action-is-dominance-triangular",
+          "thm-murphy-tableau-elements-form-a-cellular-basis"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, let $e=e(F,q)$ and assume $e>n$ (with $e=\\infty$ allowed); let $\\lambda\\vdash n$, $H=H_{F,q}(S_n)$, and let $S^{\\lambda}_{\\mathrm M}$ be the Murphy cell module with Murphy basis $(m_t)_{t\\in\\mathrm{Std}(\\lambda)}$ ([[def-type-a-hecke-specht-module-and-cell-form]]).\n1. (**Separation**) If $s,t$ are standard $\\lambda$-tableaux with $[\\operatorname{content}_s(k)]_q=[\\operatorname{content}_t(k)]_q$ for all $1\\le k\\le n$ then $s=t$. More precisely, if the q-content values agree for all $k\\notin\\{i,i+1\\}$ for some $i$, then $s=t$ or $t=s(i\\ i+1)$.\n2. (**Idempotents**) For a standard $\\lambda$-tableau $t$ define, inside the commutative algebra $F[L_1,\\dots,L_n]$, $$F_t:=\\prod_{k=1}^{n}\\ \\prod_{\\substack{s\\in\\mathrm{Std}(\\lambda)\\\\[\\operatorname{content}_s(k)]_q\\ne[\\operatorname{content}_t(k)]_q}}\\frac{L_k-[\\operatorname{content}_s(k)]_q}{[\\operatorname{content}_t(k)]_q-[\\operatorname{content}_s(k)]_q}$$ and put $f_t:=m_tF_t\\in S^{\\lambda}_{\\mathrm M}$. All denominators are nonzero by (1) and the $f_t$ are well-defined spectral projectors: $f_tL_k=[\\operatorname{content}_t(k)]_q\\,f_t$, and $f_t=m_t+\\sum_{s\\rhd t}a_sm_s$ for suitable $a_s\\in F$.\n3. (**Orthogonal seminormal basis**) $\\{f_t:t\\in\\mathrm{Std}(\\lambda)\\}$ is a basis of $S^{\\lambda}_{\\mathrm M}$ satisfying $f_tF_s=\\delta_{ts}f_t$ and $\\langle f_s,f_t\\rangle_\\lambda=\\delta_{st}\\langle f_t,f_t\\rangle_\\lambda$; it is the **seminormal basis** of the Murphy cell module.\n4. (**Generator action**) Let $s$ be a standard $\\lambda$-tableau, $1\\le i<n$ and $t:=s(i\\ i+1)$, and put $\\rho:=\\operatorname{content}_s(i)-\\operatorname{content}_s(i+1)\\in\\mathbb Z$ (an integer; it equals $\\operatorname{res}_s(i)-\\operatorname{res}_t(i)$ in the source's notation). If $i$ and $i+1$ lie in the same row of $s$ then $f_sT_i=q\\,f_s$; if they lie in the same column then $f_sT_i=-f_s$; otherwise $t$ is standard and $$f_sT_i=\\alpha_i(s)\\,f_t-\\frac{1}{[\\rho]_q}f_s,\\qquad \\alpha_i(s):=\\begin{cases}1,&s\\rhd t,\\\\[1mm]\\dfrac{[1+\\rho]_q[1-\\rho]_q}{[\\rho]_q[-\\rho]_q},&t\\rhd s,\\end{cases}$$ where $[-\\rho]_q$ is the extended quantum integer of [[def-hecke-jucys-murphy-elements-and-q-contents]] and for the swapped tableau $\\operatorname{content}_t(i)-\\operatorname{content}_t(i+1)=-\\rho$. No semisimplicity of $H$ is assumed and no choice principle is used.",
+        "strategy": "(1) is Lemma 3.32: when $e>n$ the nodes of equal $e$-residue lie on diagonal lines, so distinct removable nodes have distinct residues, and peeling off $n,n-1,\\dots,1$ determines $t$ from its q-content sequence. (2),(3) are Proposition 3.33 and Theorem 3.34: the triangularity of [[thm-hecke-jucys-murphy-action-is-dominance-triangular]] makes $F_t$ a projector annihilating strictly dominating tableaux; comparing $f_sL_k$ directly and using the associativity of the cellular form ([[def-type-a-hecke-specht-module-and-cell-form]]) gives $f_sF_t=\\delta_{st}f_t$ and orthogonality. (4) is the coefficient computation of Theorem 3.34(ii): $f_sT_i$ is an eigenvector of every $L_k$ with $k\\ne i,i+1$, so by (1) it lies in $\\mathrm{span}(f_s,f_t)$; writing $f_sT_i=\\alpha_i(s)f_t+c_sf_s$ and multiplying on the right by $L_i$ recovers $c_s=-1/[\\rho]_q$ from the relation $T_iL_i=T_iL_{i+1}-1-(q-1)L_{i+1}$ of [[def-hecke-jucys-murphy-elements-and-q-contents]], and the quadratic relation $T_i^2=(q-1)T_i+q$ gives the product $\\alpha_i(s)\\alpha_i(t)=[1+\\rho]_q[1-\\rho]_q/([\\rho]_q[-\\rho]_q)$ for the swapped tableau $t$; since $\\operatorname{content}_t(i)-\\operatorname{content}_t(i+1)=-\\rho$, the two standard cases have $\\rho>0$ with $s\\rhd t$ (branch $1$) and $\\rho<0$ with $t\\rhd s$ (branch $[1+\\rho][1-\\rho]/([\\rho][-\\rho])$). The stated branch assignment is the Mathas-Murphy seminormal coefficient system of Hu-Mathas (Example 3.11 with the axial distance (3.8), Lemma 3.12 and Proposition 3.17), which we verified directly in $H(S_3)$ ($\\rho=2$, $q=3,5,7$) and $H(S_4)$ ($\\rho=3$, $q=2$); the display of Theorem 3.34(ii) in the 1998 prepublication manuscript is inconsistent with the Hecke relations in the $t\\rhd s$ case (exact computation in the batch notes), so the item uses the corrected form. The abstract cellular-algebra form of the same spectral construction is checked independently in Mathas-Soriano (separation condition, Proposition 4.13 and the appendix). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Lemma 3.32, Proposition 3.33, Theorem 3.34, printed pp. 29-31",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, Theorem 3.16, Proposition 4.13, appendix Proposition 4.2, pp. 16-18, 20-21 and 22-29",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            },
+            {
+              "title": "Hu-Mathas, Seminormal forms and cyclotomic quiver Hecke algebras of type A, arXiv:1304.0906, Section 3.1 (3.8), Examples 3.10-3.11, Lemma 3.12, Theorem 3.13, Proposition 3.17; arXiv pp. 15-18 (published: Math. Ann.)",
+              "url": "https://arxiv.org/pdf/1304.0906"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one",
+        "kind": "proposition",
+        "title": "Hecke Specht theory specialises to group Specht theory at q = 1",
+        "deps": [
+          "def-modular-specht-form-and-radical-quotient",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions",
+          "thm-standard-polytabloid-basis"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $F$ be a field, $q=1\\in F$, and let $H_{F,1}(S_n)$ be the specialization of the generic type-A Hecke algebra at $v\\mapsto1$, so that $H_{F,1}(S_n)\\cong F[S_n]$ with $T_w\\mapsto w$ ([[prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra]]). Then the Hecke theory of this page specializes as follows.\n1. The Murphy elements $m_\\mu=\\sum_{w\\in S_\\mu}T_w$ specialize to the row symmetrizers $\\sum_{w\\in S_\\mu}w$, and the Murphy basis $\\{m_{st}\\}$ of $H_{F,1}(S_n)$ specializes to the Murphy basis of the group algebra $F[S_n]$ (the base change $\\mathbb Z[S_n]\\to F[S_n]$ of the integral Murphy basis).\n2. For every $\\lambda\\vdash n$ the specialization of the page's Hecke Specht module $S^{\\lambda}$ ([[def-type-a-hecke-specht-module-and-cell-form]]) is the ordinary Specht module in the Dipper-James convention: $S^{\\lambda}_{q=1}\\cong S^{\\lambda}_{\\mathrm{DJ}}$ as $F[S_n]$-modules, with the standard polytabloid basis ([[thm-standard-polytabloid-basis]]); the specialized cell form is the standard bilinear form on $S^{\\lambda}_k$ whose radical defines the James quotient $D^{\\lambda}$ ([[def-modular-specht-form-and-radical-quotient]]).\n3. The quantum characteristic of $q=1$ is $e=\\operatorname{char}(F)$ when $\\operatorname{char}(F)>0$, and $e=\\infty$ when $\\operatorname{char}(F)=0$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]); in characteristic $p>0$ a partition is $e$-regular exactly when it is $p$-regular. Hence $D^{\\lambda}_{q=1}\\ne0$ exactly for $p$-regular $\\lambda$ ([[thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions]]), and for non-$p$-regular $\\lambda$ one has $\\mathrm{rad}\\,S^{\\lambda}=S^{\\lambda}$, so not every Specht module remains simple in characteristic $p$. This matches the group-side classification [[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]] and the conjugate-sign dictionary [[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]. In characteristic $0$ the specialization is split semisimple and all Specht modules are irreducible.",
+        "strategy": "Base-change the Murphy cellular basis along $\\mathbb Z[v^{\\pm1}]\\to F$, $v\\mapsto1$: the structure constants are polynomials in $q$, so specialization gives a cellular basis of $F[S_n]$, and the cell modules specialize to the modules with the specialized triangular multiplication. The identification with the Dipper-James Specht module uses the printed p. 25 convention warning of the source together with the conjugate-sign duality of [[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]; the polytabloid/Murphy basis comparison is [[thm-standard-polytabloid-basis]]. The simple-label statement is the specialization of [[thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions]] at $e=\\operatorname{char}(F)$, compared with [[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]]. The direction of information is one-way (this item imports the group classification and no group-side item depends on the Hecke theory). No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 1 sections 1-2 (specialization) and the p. 25 convention warning, printed pp. 3-6 and 25",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, Remark 5.5 and section 5.3 (the q=1, xi=1 case), p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-type-a-q-schur-algebra-and-weyl-modules",
+        "kind": "definition",
+        "title": "The type-A q-Schur algebra and its Weyl modules",
+        "deps": [
+          "def-cellular-algebra-basis-and-cell-module",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-dominance-order-on-partitions",
+          "def-generic-type-a-hecke-algebra",
+          "def-left-and-right-modules",
+          "def-murphy-elements-and-murphy-tableau-elements",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 2,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, $d,n\\ge0$, and $H=H_{R,q}(S_n)$ ([[def-generic-type-a-hecke-algebra]]). Let $\\Lambda(d,n)$ be the set of compositions $\\mu=(\\mu_1,\\dots,\\mu_d)$ of $n$ (so $\\mu_i\\in\\mathbb N$ and $\\sum_i\\mu_i=n$). For $\\mu\\in\\Lambda(d,n)$ let $m_\\mu=\\sum_{w\\in S_\\mu}T_w$ ([[def-murphy-elements-and-murphy-tableau-elements]]) and let $M^{\\mu}:=m_\\mu H$ be the right ideal it generates, the **(Hecke) permutation module**; $M^{\\mu}$ is free over $R$ with basis $\\{m_\\mu T_{d(t)}:t\\text{ row-standard }\\mu\\text{-tableau}\\}$ and is the Hecke analogue of the module induced from the trivial representation of the Young subgroup ([[def-young-subgroup-tabloid-and-permutation-module]]). Put $M:=\\bigoplus_{\\mu\\in\\Lambda(d,n)}M^{\\mu}$ ([[def-direct-sum-of-a-family-of-modules]]) and define the **q-Schur algebra** $$S(d,n):=\\mathrm{End}_H(M),$$ the $R$-algebra of right $H$-module endomorphisms of $M$.\n\n**Cellular structure.** For all $\\mu,\\nu\\in\\Lambda(d,n)$, $\\mathrm{Hom}_H(M^{\\mu},M^{\\nu})$ is free with a basis indexed by row-semistandard tableaux; for every partition $\\lambda$ of $n$ with at most $d$ parts and all semistandard $\\lambda$-tableaux $S,T$ there is an element $\\varphi_{ST}\\in S(d,n)$ ([[def-semistandard-tableau-and-kostka-number]]), and the family $$\\{\\varphi_{ST}:\\lambda\\in\\Lambda^{+}(d,n),\\ S,T\\in T_0(\\lambda)\\},$$ where $\\Lambda^{+}(d,n)$ is the set of partitions of $n$ with at most $d$ parts ordered by dominance $\\unrhd$ ([[def-dominance-order-on-partitions]]), is an $R$-basis of $S(d,n)$; the map $\\varphi_{ST}\\mapsto\\varphi_{TS}$ is an algebra anti-automorphism and the triangular axiom holds modulo the span of the $\\varphi_{UV}$ with $\\mu\\rhd\\lambda$. Hence $(\\varphi,\\Lambda^{+}(d,n))$ is a dominance-cellular basis of $S(d,n)$ and its cell modules are the **Weyl modules** $W^{\\lambda}$, free over $R$ with basis $\\{\\varphi_T:T\\in T_0(\\lambda)\\}$. Over a field $F$, $W^{\\lambda}$ has nonzero simple head $L^{\\lambda}$, the $L^{\\lambda}$ for $\\lambda\\in\\Lambda^{+}(d,n)$ form a complete set of pairwise non-isomorphic absolutely irreducible $S(d,n)$-modules, and the decomposition matrix satisfies $d_{\\lambda\\lambda}=1$ and $d_{\\lambda\\mu}\\ne0\\Rightarrow\\lambda\\unrhd\\mu$.",
+        "strategy": "A definition item that also records the semistandard-basis machinery, since the Jantzen/Schaper items consume it directly. Construct $\\mathrm{Hom}_H(M^{\\mu},M^{\\nu})$ from the distinguished coset representatives (Theorem 4.8), define $\\varphi_{ST}$ by (4.13), and obtain the basis, the anti-automorphism $\\varphi_{ST}\\mapsto\\varphi_{TS}$ and the triangular multiplication from Corollary 4.9, Corollary 4.12 and Theorem 4.14 (R. Green's Semistandard Basis Theorem); the cell modules of this basis are the Weyl modules of (4.15), and the simple-head, completeness and unitriangularity statements are Theorem 4.16 and Corollary 4.18. All constructions are finite and explicit; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 4 sections 1-2: (4.1), Theorems 4.8, 4.10, 4.14, 4.15, 4.16 and Corollaries 4.11, 4.18, printed pp. 36-44",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.8-2.15 and 3.1-3.7 (cellular framework used for the q-Schur algebra), pp. 4-11",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents",
+        "kind": "lemma",
+        "title": "The identity of a finite-dimensional algebra decomposes into primitive central idempotents",
+        "deps": [
+          "def-algebra-over-a-commutative-ring"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $F$ be a field and $A$ a finite-dimensional unital $F$-algebra with centre $Z(A):=\\{z\\in A:za=az\text{ for all }a\\in A\\}$ ([[def-algebra-over-a-commutative-ring]]). Then $Z(A)$ is a finite-dimensional commutative $F$-algebra, and the identity $1\\in Z(A)$ admits a decomposition $$1=e_1+\\cdots+e_k$$ into pairwise orthogonal primitive central idempotents of $A$: each $e_i$ is a nonzero idempotent of $Z(A)$ that is not the sum of two nonzero orthogonal idempotents of $Z(A)$. No semisimplicity of $A$ is assumed and no choice principle is used.",
+        "strategy": "A subset of $Z(A)$ that is linearly independent over $F$ is linearly independent in the finite-dimensional space $A$, so it has at most $\\dim_FA$ elements and $Z(A)$ is a finite-dimensional commutative $F$-algebra; its idempotents are exactly the central idempotents of $A$. Start with the family $\\{1\\}$ and split any non-primitive member $e$ as $e=u+v$ with $u,v$ nonzero orthogonal idempotents of $Z(A)$. The corners $uZ(A)u$ and $vZ(A)v$ are subspaces of $eZ(A)e$ of strictly smaller dimension (multiplication by $u$ kills $v$ but fixes $uZ(A)u$), and a mutually orthogonal family of nonzero idempotents is linearly independent, so the process terminates after at most $\\dim_FZ(A)$ splits. The terminal family is the asserted decomposition and every member is primitive by construction. This is the standard finite-dimensional dimension-descent argument applied to the centre; the same argument for arbitrary finite-dimensional algebras is recorded in the published literature cited below. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 5 section 3 (block conventions and primitive central idempotents), printed pp. 53-54",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Jacobsen, Block fusion systems and the center of the group ring, sections 1.1 and 2.2 (finite-dimensional primitive idempotent decompositions), pp. 3-8 and 13-18",
+              "url": "https://www.math.ku.dk/bibliotek/arkivet/phd-theses/phd14mwj.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-central-idempotent-decompositions-of-one-are-unique",
+        "kind": "lemma",
+        "title": "Decompositions of the identity into primitive central idempotents are unique",
+        "deps": [
+          "def-algebra-over-a-commutative-ring"
+        ],
+        "dependency_level": 0,
+        "statement": "Let $A$ be a unital ring, with centre $Z(A):=\\{z\\in A: za=az\text{ for all }a\\in A\\}$. Suppose that $$1=e_1+\\cdots+e_k=f_1+\\cdots+f_\\ell$$ where $\\{e_1,\\dots,e_k\\}$ and $\\{f_1,\\dots,f_\\ell\\}$ are finite families of pairwise orthogonal central idempotents of $A$ that are primitive among central idempotents: each is nonzero and admits no decomposition as a sum of two nonzero orthogonal central idempotents (zero parts are omitted). Then $k=\\ell$ and there is a bijection $\\sigma$ of the index sets with $e_i=f_{\\sigma(i)}$ for all $i$; in particular the decomposition of $1$ into primitive central idempotents is unique up to order. No choice principle is used, the families being finite.",
+        "strategy": "For each pair, $e_if_j$ is an idempotent (all factors commute) and $\\sum_j e_if_j=e_i$ with pairwise orthogonal terms; primitivity of $e_i$ forces all but one term to vanish, say $e_i=e_if_{j(i)}$. Symmetrically each $f_j$ admits exactly one $i$ with $f_j=f_je_i$. The map $i\\mapsto j(i)$ is injective (otherwise some $f_j$ would split as a sum of two nonzero orthogonal idempotents), and counting the two decompositions of $1$ shows that it is a bijection; then $e_i=e_if_{j(i)}=f_{j(i)}e_i=f_{j(i)}$ because all idempotents involved are central, so the families coincide. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Andrew Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 5 section 3 (block conventions) and the standard uniqueness of primitive central orthogonal decompositions, printed pp. 53-54",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Jacobsen, Block fusion systems and the center of the group ring, sections 1.1 and 2.2 (primitive idempotent decompositions), pp. 3-8 and 13-18",
+              "url": "https://www.math.ku.dk/bibliotek/arkivet/phd-theses/phd14mwj.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents",
+        "kind": "definition",
+        "title": "Blocks of a finite-dimensional algebra via primitive central idempotents",
+        "deps": [
+          "def-algebra-over-a-commutative-ring",
+          "lem-central-idempotent-decompositions-of-one-are-unique",
+          "lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents"
+        ],
+        "dependency_level": 1,
+        "statement": "Let $F$ be a field and $A$ a finite-dimensional unital $F$-algebra with centre $Z(A):=\\{z\\in A:za=az\text{ for all }a\\in A\\}$ ([[def-algebra-over-a-commutative-ring]]). A **central idempotent** of $A$ is an idempotent $e\\in Z(A)$; it is **primitive** when $e\\ne0$ and $e$ is not the sum of two nonzero orthogonal central idempotents. Then $Z(A)$ is a finite-dimensional commutative $F$-algebra, so $1\\in Z(A)$ admits a decomposition $$1=e_1+\\cdots+e_k$$ into pairwise orthogonal primitive central idempotents ([[lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents]]), and this decomposition is unique up to order ([[lem-central-idempotent-decompositions-of-one-are-unique]]). A **block** of $A$ is the two-sided ideal $B=eA=Ae$ cut out by a primitive central idempotent $e$. The blocks are pairwise orthogonal two-sided ideals, $A=B_1\\oplus\\cdots\\oplus B_k$ as $F$-algebras with units $e_i$, each $B_i$ is an indecomposable two-sided ideal, and for every (not necessarily finite-dimensional) $A$-module $M$ one has $M=\\bigoplus_{i=1}^ke_iM$ as $A$-modules; a simple $A$-module $S$ satisfies $e_iS\\ne0$ for exactly one $i$ and then $S=e_iS$ lies in the corresponding block. Nothing here asserts that a block is semisimple or simple, and the construction is choice-free.",
+        "strategy": "A definition item whose consistency is supplied by its dependencies: the preceding primitive-idempotent decomposition lemma applied to the commutative finite-dimensional $F$-algebra $Z(A)$ produces the primitive central idempotents (its primitive idempotents are exactly the primitive central idempotents of $A$), and the uniqueness lemma makes the block partition canonical. The module decomposition is idempotent calculus: $\\sum_ie_i=1$ gives $M=\\sum_ie_iM$, orthogonality gives directness, and a nonzero simple $S$ has $e_iS=S$ whenever $e_iS\\ne0$. This avoids the Artinian structure theorem and hence uses no choice principle. The conventions follow Mathas, Chapter 5 section 3 (printed pp. 53-54).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 5 section 3 (block conventions for $S(d,n)$ and $H$), printed pp. 53-54",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Jacobsen, Block fusion systems and the center of the group ring, sections 1.1 and 2.2 (finite-dimensional primitive idempotent decompositions), pp. 3-8 and 13-18",
+              "url": "https://www.math.ku.dk/bibliotek/arkivet/phd-theses/phd14mwj.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+        "kind": "definition",
+        "title": "The Schur idempotent and the Schur functor for type-A q-Schur algebras",
+        "deps": [
+          "def-direct-sum-of-a-family-of-modules",
+          "def-generic-type-a-hecke-algebra",
+          "def-left-and-right-modules",
+          "def-murphy-elements-and-murphy-tableau-elements",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "thm-standard-basis-of-the-generic-type-a-hecke-algebra"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $R$ be a commutative ring, $q\\in R^{\\times}$, $d\\ge n$, and $S:=S(d,n)=\\mathrm{End}_H(M)$ the type-A q-Schur algebra with permutation modules $M^{\\mu}$ and cellular semistandard basis $\\{\\varphi_{ST}\\}$ ([[def-type-a-q-schur-algebra-and-weyl-modules]], [[def-murphy-elements-and-murphy-tableau-elements]]). Put $\\omega:=(1^n)\\in\\Lambda(d,n)$, so that $M^{\\omega}=m_\\omega H=H$ is the regular right $H$-module, and let $t^{\\omega}$ be the unique row-standard $\\omega$-tableau; set $$e:=\\varphi_{t^{\\omega}t^{\\omega}}\\in S.$$ Then:\n1. $e$ is the projection of $M$ onto the direct summand $M^{\\omega}=H$ along the other summands; in particular $e^2=e$ and $$eSe\\cong\\mathrm{End}_H(M^{\\omega})=\\mathrm{End}_H(H),$$ via the algebra isomorphism $$\\rho:H\\longrightarrow eSe,\\qquad h\\longmapsto\\rho_h,\\qquad \\rho_h(x):=hx,$$ left multiplication by $h$ on $M^{\\omega}=H$ being a right $H$-module endomorphism;\n2. the **Schur functor** $$F:\\mathrm{mod}\\text{-}S\\longrightarrow\\mathrm{mod}\\text{-}H,\\qquad F(X):=Xe=X\\otimes_SSe,$$ with the right $H$-action transported along $\\rho$, is exact and $R$-linear on morphisms. Right multiplication by $e$ is a direct-summand projection on underlying $R$-modules which commutes with kernels and cokernels, so exactness is checked directly; equivalently $Se$ is a direct summand of the regular right $S$-module, so $X\\mapsto X\\otimes_SSe$ is exact. The convention is fixed: the functor is $X\\mapsto Xe$ on the right and the left-module formula $X\\mapsto eX$ is not used on this page.",
+        "strategy": "A definition item. The identification $M^{\\omega}=H$ is from Corollary 3.4; $e$ is idempotent because $\\varphi_{t^{\\omega}t^{\\omega}}$ is the projection onto $M^{\\omega}$ by the defining formula (4.13) of the semistandard basis; restriction of an endomorphism supported on $M^{\\omega}$ inverts the extension-by-zero map, giving $eSe\\cong\\mathrm{End}_H(H)$; and left multiplication identifies $\\mathrm{End}_H(H)\\cong H$ as $R$-algebras. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 4 section 3: the idempotent $\\varphi_{\\omega\\omega}$, the isomorphism $H\\cong\\varphi_{\\omega\\omega}S(d,n)\\varphi_{\\omega\\omega}$ and the definition of the Schur functor preceding Proposition 4.19, printed pp. 43-44",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules",
+        "kind": "theorem",
+        "title": "The Schur functor sends Weyl and simple modules to Specht and Hecke simple modules",
+        "deps": [
+          "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality",
+          "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra",
+          "thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, $d\\ge n$, and let $F$ denote the Schur functor of [[def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras]]. For $\\lambda\\in\\Lambda^{+}(d,n)$ let $W^{\\lambda}$ be the Weyl module and $L^{\\lambda}$ its simple head ([[def-type-a-q-schur-algebra-and-weyl-modules]]). Then, in the source's (dual-Specht) normalisation:\n1. $F(W^{\\lambda})\\cong S^{\\lambda}_{\\mathrm{M}}$ and $F(L^{\\lambda})\\cong D^{\\lambda}_{\\mathrm{M}}$ as right $H$-modules (where $S^{\\lambda}_{\\mathrm{M}}$, $D^{\\lambda}_{\\mathrm{M}}$ are the source's cell module and its head);\n2. $F(L^{\\lambda})\\ne0$ if and only if $\\lambda$ is $e$-restricted; and\n3. for every $e$-restricted $\\nu\\vdash n$ one has $[W^{\\lambda}:L^{\\nu}]=[S^{\\lambda}_{\\mathrm{M}}:D^{\\nu}_{\\mathrm{M}}]$.\nIn the Dipper-James convention of this page ([[def-type-a-hecke-specht-module-and-cell-form]]) the dictionary reads: $F(W^{\\lambda'})\\cong (S^{\\lambda})^{*}$ is the dual of the page's Specht module, $F(L^{\\lambda'})\\cong D^{\\lambda}$ is the page's simple module when $\\lambda$ is $e$-regular and $F(L^{\\lambda'})=0$ otherwise, and $[W^{\\lambda'}:L^{\\nu'}]=[S^{\\lambda}:D^{\\nu}]$ for $e$-regular $\\nu$; the labels are conjugated and dualised as in [[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]. The theorem is the exact bridge that transports Jantzen/Schaper identities on Weyl modules to Specht modules and hence to decomposition numbers. No choice is used.",
+        "strategy": "By the definition of $\\varphi_{ST}$, multiplying by $\\varphi_{t^{\\omega}t^{\\omega}}$ kills all semistandard basis elements whose type is not $\\omega$, and for type $\\omega$ the surviving elements are exactly the $\\varphi_t$ with $t$ a standard $\\lambda$-tableau; this identifies the corner $W^{\\lambda}e$ with the free module on the Murphy basis of the Hecke cell module $S^{\\lambda}_{\\mathrm{M}}$, proving (1) for Weyl modules. Passing to heads and using that $F$ is exact ([[def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras]]) and sends the head of $W^{\\lambda}$ to the head of $S^{\\lambda}_{\\mathrm{M}}$ gives $F(L^{\\lambda})\\cong D^{\\lambda}_{\\mathrm{M}}$, which is nonzero exactly when $\\lambda$ is $e$-restricted by Theorem 3.39, proving (2). Part (3) follows by applying the exact functor to a composition series of $W^{\\lambda}$ and using (1)-(2) termwise, the multiplicities of the $D^{\\nu}_{\\mathrm{M}}$ with $\\nu$ $e$-restricted being preserved. This is Mathas, Proposition 4.19 with the printed p. 25 convention warning; the Dipper-James translation is Kleshchev's Remark 5.5. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Proposition 4.19 and its proof, printed pp. 43-44",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, Remark 5.5 (conjugation/sign dictionary), p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+        "kind": "definition",
+        "title": "Virtual Weyl and Specht symbols attached to beta sequences",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "def-type-a-q-schur-algebra-and-weyl-modules"
+        ],
+        "dependency_level": 4,
+        "statement": "Fix an integer $n\\ge1$. For a sequence $b=(b_1,\\dots,b_n)$ of integers let $b^{\\downarrow}=(b^{\\downarrow}_1\\ge\\cdots\\ge b^{\\downarrow}_n)$ be the non-increasing rearrangement and let $w\\in S_n$ be the unique permutation with $b^{\\downarrow}_i=b_{iw}$ for all $i$. A sequence $b$ is a **beta sequence** when it is strictly decreasing with $b_1>b_2>\\cdots>b_n\\ge0$; then $b$ is the sequence of beta numbers $\\beta(\\nu)$ of a unique partition $\\nu$ of some size $|\\nu|=\\sum_ib_i-n(n-1)/2$, namely the partition with conjugate parts $$\\nu'_i=b_i-n+i\\qquad(1\\le i\\le n),$$ and every partition with at most $n$ parts arises this way ([[def-partition-young-diagram-and-conjugate-partition]]). For an arbitrary sequence $b\\in\\mathbb Z^n$ define the **virtual Weyl symbol** $[\\Delta^{b}]$ and the **virtual Specht symbol** $[S^{b}]$ by the same rule $$[\\Delta^{b}]:=\\begin{cases}(-1)^{\\ell(w)}[\\Delta^{\\nu}],& b^{\\downarrow}\\ \\text{strictly decreasing and}\\ b^{\\downarrow}_n\\ge0,\\\\ 0,&\\text{otherwise},\\end{cases}$$ where $[\\Delta^{\\nu}]$ is the class of the Weyl module and $[S^{\\nu}]$ the class of the Hecke Specht module in the source's normalisation, i.e. of the Murphy cell module $S^{\\nu}_{\\mathrm M}$ of [[def-type-a-hecke-specht-module-and-cell-form]], in the appropriate Grothendieck group (the Dipper-James translation is by conjugating partitions) and $\\ell(w)$ is the inversion length; the symbol therefore vanishes on sequences with a repeated entry or with a negative sorted last entry, and changes sign by $(-1)^{\\ell(w)}$ when the entries of $b$ are permuted. The **signed semistandard multiplicity** $d_{\\mu}(b)\\in\\mathbb Z$ for a composition $\\mu$ of $|\\nu|$ is $$d_{\\mu}(b):=(-1)^{\\ell(w)}\\,|T_0(\\nu,\\mu)|$$ when $b=\\beta(\\nu)$ ([[def-semistandard-tableau-and-kostka-number]] for the semistandard tableaux of type $\\mu$), and is extended to arbitrary integer sequences $b\\in\\mathbb Z^n$ by the branching recursion $$d_{\\mu}(b)=\\sum_{\\substack{C\\subseteq\\{1,\\dots,n\\}\\\\|C|=z}}d_{\\mu'}(b^{C}),\\qquad b^{C}_i:=\\begin{cases}-1,&i\\in C,\\\\ b_i,&i\\notin C,\\end{cases}$$ where $z$ is the last nonzero part of $\\mu$ and $\\mu'$ is $\\mu$ with that part deleted; the recursion terminates because $|\\mu|$ strictly decreases. In the applications on this page the beta sequences have length $n=|\\lambda|$ and the recovered partitions have at most $n\\le d$ parts, so the symbols and multiplicities are honest elements of the Grothendieck groups of $S(d,n)$-modules and $H_{F,q}(S_n)$-modules respectively.",
+        "strategy": "A definition item assembled from the source's (5.21)-(5.22). The sorting sign is well defined because a strictly decreasing rearrangement is unique; the recovery formula is the inverse of $\\nu'_i=b_i-n+i$, which produces a partition exactly in the non-vanishing case; and the recursion for $d_\\mu$ on non-beta sequences is (5.22). In every use below either $b$ is the beta sequence of a partition or the displaced sequence is evaluated by Lemma 5.26, so no analytic assertion is smuggled into the definition. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, (5.21), (5.22), (5.26) and the surrounding conventions, printed pp. 52-57",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-q-schur-weyl-weight-space-gram-determinant-hook-product",
+        "kind": "theorem",
+        "title": "The q-Schur Weyl weight-space Gram determinant is a hook product",
+        "deps": [
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "def-hook-arm-leg-and-hook-length",
+          "def-q-integer-q-factorial-and-q-multinomial",
+          "def-removable-border-strip-and-height",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "lem-hooks-correspond-to-removable-border-strips"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $R$ be an integral domain, $q\\in R^{\\times}$, $d,n\\ge1$, and let $S(d,n)$ be the q-Schur algebra with Weyl modules $W^{\\lambda}$ ([[def-type-a-q-schur-algebra-and-weyl-modules]]). For a partition $\\lambda$ of $n$ with at most $d$ parts and a weight (composition of $n$ with at most $d$ parts) $\\mu$, let $G^{\\lambda}_{\\mu}\\in R$ be the determinant of the Gram matrix of the cell form of $W^{\\lambda}$ restricted to its $\\mu$-weight space, computed with respect to the semistandard basis. Let $\\beta=\\beta(\\lambda)=(\\beta_1,\\dots,\\beta_n)$ be the beta sequence $\\beta_i=\\lambda'_i+n-i$ of $\\lambda$ ([[def-alternating-weyl-and-specht-symbols-from-beta-sequences]], [[def-partition-young-diagram-and-conjugate-partition]]) and let $h^{\\lambda}_{ab}=\\lambda_a-b+\\lambda'_b-a+1$ be the hook length of the node $(a,b)\\in[\\lambda]$, with leg length $l^\\lambda_{ab}$ ([[def-hook-arm-leg-and-hook-length]]). Then $$G^{\\lambda}_{\\mu}=q^{N}\\prod_{\\substack{(a,b),(a,c)\\in[\\lambda]\\\\ b<c}}\\left(\\frac{[h^{\\lambda}_{ab}]_q}{[h^{\\lambda}_{ac}]_q}\\right)^{d_{\\mu}(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)},$$ where $N=N(\\lambda,\\mu)$ is the explicit integer $\\sum_T\\ell(d(\\mathrm{last}(T)))$ summed over the semistandard $\\lambda$-tableaux $T$ of type $\\mu$ (the degree of the corresponding semistandard basis vector), $d_{\\mu}$ is the signed semistandard multiplicity of [[def-alternating-weyl-and-specht-symbols-from-beta-sequences]] and $[\\ \\ ]_q$ are the quantum integers ([[def-q-integer-q-factorial-and-q-multinomial]]). The exponent has the exact combinatorial interpretation of Lemma 5.26: $$d_{\\mu}(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)=(-1)^{l^{\\lambda}_{ab}+l^{\\lambda}_{ac}}\\,|T_0(\\eta,\\mu)|$$ whenever $\\eta$ is obtained from $\\lambda$ by unwrapping the removable border strip $R^{\\lambda}_{ac}$ (the hook of $(a,c)$, of size $h^{\\lambda}_{ac}$) and re-wrapping it with its lowest node in column $b$, and it is zero otherwise ([[def-removable-border-strip-and-height]], [[lem-hooks-correspond-to-removable-border-strips]]). The product is interpreted in $R$ after pairing all numerator and denominator factors, so the displayed formula represents an element of $R$ even though individual factors need not be units, and the theorem is stated over an integral domain, not only over a field.",
+        "strategy": "Follow the source's Theorem 5.27 with Proposition 5.24. First orthogonalise the semistandard basis to compute the norms $\\langle\\varphi_T,\\varphi_T\\rangle=q^{\\ell(d(\\mathrm{last}(T)))}$ (Theorem 5.18), so that the determinant is $q^Ng^{\\lambda}_{\\mu}$ with $g^{\\lambda}_\\mu$ the product over the semistandard $\\lambda$-tableaux of type $\\mu$ (Corollary 5.19). Then use Lemmas 5.22-5.26 to regroup the product: an exchange of two adjacent beta numbers changes the determinant by $(-1)$, repeated beta entries annihilate the alternant, and the only nonzero beta displacements $b\\mapsto b-h$ are those by hook lengths; Lemma 5.26 identifies subtracting $h$ at position $b$ with unwrapping the rim hook $R^{\\lambda}_{ab}$. Collecting the signed semistandard multiplicities gives exactly the displayed hook ratio with exponent $d_\\mu(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)$; the hook-to-border-strip identification is [[lem-hooks-correspond-to-removable-border-strips]]. No choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 5.27 (James-Mathas) with Proposition 5.24 and Lemmas 5.22-5.26, printed pp. 52-57",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 3.1-3.7 and section 4 (Gram determinants of cellular forms via orthogonality), pp. 9-11 and 20-21",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-semistandard-weight-dimensions-detect-virtual-weyl-classes",
+        "kind": "lemma",
+        "title": "Semistandard weight dimensions detect virtual Weyl classes",
+        "deps": [
+          "def-grothendieck-group-of-an-essentially-small-abelian-category",
+          "def-semistandard-tableau-and-kostka-number",
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "lem-kostka-change-of-basis-is-dominance-unitriangular"
+        ],
+        "dependency_level": 3,
+        "statement": "Let $F$ be a field, $q\\in F^{\\times}$, $d,n\\ge1$, and let $S=S(d,n)$ be the q-Schur algebra with Weyl modules $W^{\\lambda}$ for $\\lambda\\in\\Lambda^{+}(d,n)$ ([[def-type-a-q-schur-algebra-and-weyl-modules]]). Let $M$ be a finite-dimensional right $S$-module and let $(a_{\\lambda})_{\\lambda\\in\\Lambda^{+}(d,n)}$ be integers such that $$\\dim_F\\bigl(M\\varphi_{T^{\\nu}T^{\\nu}}\\bigr)=\\sum_{\\lambda\\in\\Lambda^{+}(d,n)}a_{\\lambda}\\,\\dim_F\\bigl(W^{\\lambda}\\varphi_{T^{\\nu}T^{\\nu}}\\bigr)$$ for every partition $\\nu\\in\\Lambda^{+}(d,n)$, where $\\varphi_{T^{\\nu}T^{\\nu}}$ are the diagonal semistandard basis elements ([[def-type-a-q-schur-algebra-and-weyl-modules]]). Then $[M]=\\sum_{\\lambda}a_{\\lambda}[W^{\\lambda}]$ in the Grothendieck group $G_0(S\\text{-mod})$ ([[def-grothendieck-group-of-an-essentially-small-abelian-category]]). Consequently equality of all semistandard weight-space dimensions forces equality in the Grothendieck group.",
+        "strategy": "Write $[M]=\\sum_{\\nu}c_{\\nu}[L^{\\nu}]$ and $[W^{\\lambda}]=\\sum_{\\nu}d_{\\lambda\\nu}[L^{\\nu}]$ in the basis of simple classes. The hypothesis reads $0=\\sum_{\\lambda}(c_{\\lambda}-a_{\\lambda})\\dim_F(W^{\\lambda}\\varphi_{T^{\\nu}T^{\\nu}})$ for all $\\nu$, and $\\dim_F(W^{\\lambda}\\varphi_{T^{\\nu}T^{\\nu}})=|T_0(\\lambda,\\nu)|=K_{\\lambda\\nu}$ is the Kostka number counting semistandard $\\lambda$-tableaux of type $\\nu$ ([[def-semistandard-tableau-and-kostka-number]]). The matrix $(K_{\\lambda\\nu})$ is unitriangular with respect to dominance ([[lem-kostka-change-of-basis-is-dominance-unitriangular]]), so the system has only the trivial solution $c_{\\lambda}=a_{\\lambda}$. This is Mathas, Lemma 5.30 with Theorem 4.16; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Lemma 5.30 with Theorem 4.16, printed pp. 58-59",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-jantzen-filtration-of-a-lifted-cell-module",
+        "kind": "definition",
+        "title": "The Jantzen filtration of a lifted cell module",
+        "deps": [
+          "def-free-module-on-a-set-and-standard-basis",
+          "def-principal-ideal-domain",
+          "def-type-a-hecke-specht-module-and-cell-form"
+        ],
+        "dependency_level": 4,
+        "statement": "Let $R$ be a principal ideal domain ([[def-principal-ideal-domain]]) with a chosen prime element $\\pi$, let $F:=R/\\pi R$ be the residue field, and let $M$ be a free $R$-module of finite rank ([[def-free-module-on-a-set-and-standard-basis]]) equipped with a symmetric $R$-bilinear form $\\langle\\ ,\\ \\rangle:M\\times M\\to R$ whose extension to the fraction field $K=\\operatorname{Frac}(R)$ is non-degenerate (equivalently $\\det G\\ne0$ for a Gram matrix $G$ of the form). For $i\\ge1$ put $$M(i):=\\{x\\in M:\\langle x,y\\rangle\\in\\pi^iR\\ \\text{for all }y\\in M\\},\\qquad M_F(i):=(M(i)+\\pi M)/\\pi M\\subseteq M_F:=M\\otimes_RF.$$ Then $M(0)=M$, the $M(i)$ are $R$-submodules with $M(i+1)\\subseteq M(i)$, the descending chain $$M_F=M_F(0)\\supseteq M_F(1)\\supseteq M_F(2)\\supseteq\\cdots$$ stabilises at $0$ (that is, $M_F(z)=0$ for all sufficiently large $z$, because $\\det G\\ne0$), and $M_F(1)=\\mathrm{rad}\\,M_F$, the radical of the reduced form. This finite descending filtration is the **Jantzen filtration** of $M$ with respect to $(R,\\pi,\\langle\\ ,\\ \\rangle)$. The hypotheses are exactly: $R$ a PID, $\\pi$ a prime element, the form non-degenerate over $\\operatorname{Frac}(R)$; no valuation-ring or DVR hypothesis is substituted, and the prime element $\\pi$, its ideal $\\pi R$ and the fraction field $K$ are kept distinct.",
+        "strategy": "A definition item. Each $M(i)$ is a submodule: for the cell forms on this page the associativity identity $\\langle xa,y\\rangle=\\langle x,ya^*\\rangle$ shows closedness under the action. Reduction gives a descending chain of finite-dimensional $F$-spaces, so it stabilises; $\\det G\\ne0$ makes the stable value $0$ because a vector whose pairing with every basis vector lies in all $\\pi^iR$ is zero over $K$. Finally $x\\in M(1)$ reduces into the radical of the reduced form by definition. This is Mathas, Chapter 5 section 2 (setup preceding Lemma 5.29), printed pp. 54-55; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Chapter 5 section 2: the Jantzen filtration over a PID, printed pp. 54-55",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-jantzen-layer-dimensions-equal-the-gram-determinant-valuation",
+        "kind": "lemma",
+        "title": "Jantzen layer dimensions sum to the Gram determinant valuation",
+        "deps": [
+          "def-jantzen-filtration-of-a-lifted-cell-module",
+          "thm-smith-normal-form-existence-over-a-pid"
+        ],
+        "dependency_level": 5,
+        "statement": "In the setting of [[def-jantzen-filtration-of-a-lifted-cell-module]] ($R$ a PID, $\\pi$ a prime element, $F=R/\\pi R$, $M$ free of finite rank with a form whose extension to $K=\\operatorname{Frac}(R)$ is non-degenerate), let $\\nu_\\pi$ be the $\\pi$-adic valuation normalised by $\\nu_\\pi(\\pi)=1$ and let $G\\in R\\setminus\\{0\\}$ be the Gram determinant of the form with respect to any $R$-basis of $M$. Then $$\\nu_\\pi(G)=\\sum_{i>0}\\dim_FM_F(i),$$ where $M_F(i)$ are the Jantzen layers of [[def-jantzen-filtration-of-a-lifted-cell-module]]; in particular the sum is finite and independent of the chosen basis.",
+        "strategy": "Use the Smith normal form ([[thm-smith-normal-form-existence-over-a-pid]]) to choose bases $e_1,\\dots,e_d$ of $M$ and $f_1,\\dots,f_d$ of $\\mathrm{Hom}_R(M,R)$ with $\\langle e_i,f_j\\rangle=\\delta_{ij}r_i$, $r_i\\in R\\setminus\\{0\\}$; non-degeneracy over $K$ is exactly what produces the nonzero $r_i$. Then $G=\\pm\\prod_ir_i$, so $\\nu_\\pi(G)=\\sum_i\\nu_\\pi(r_i)$. On the other hand $x=\\sum_ia_ie_i$ lies in $M(k)$ if and only if $\\nu_\\pi(a_ir_i)\\ge k$ for all $i$, so $M_F(k)$ has as basis the images of those $e_i$ with $\\nu_\\pi(r_i)\\ge k$; hence $\\dim_FM_F(k)=\\#\\{i:\\nu_\\pi(r_i)\\ge k\\}$ and $\\sum_{k>0}\\dim_FM_F(k)=\\sum_i\\nu_\\pi(r_i)$. This is Mathas, Lemma 5.29 (Jantzen), printed p. 58; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Lemma 5.29 (Jantzen) and its proof, printed p. 58",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-q-schaper-virtual-radical-layer-formula",
+        "kind": "theorem",
+        "title": "The q-Schaper virtual radical-layer formula",
+        "deps": [
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "def-removable-border-strip-and-height",
+          "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "lem-hooks-correspond-to-removable-border-strips",
+          "lem-jantzen-layer-dimensions-equal-the-gram-determinant-valuation",
+          "lem-semistandard-weight-dimensions-detect-virtual-weyl-classes",
+          "thm-q-schur-weyl-weight-space-gram-determinant-hook-product",
+          "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules"
+        ],
+        "dependency_level": 6,
+        "statement": "Let $R$ be a principal ideal domain, $\\pi$ a prime element, $F=R/\\pi R$ the residue field, and let $\\hat q\\in R^{\\times}$ satisfy $[n]!_{\\hat q}\\ne0$ in $R$; put $q:=\\hat q+\\pi R\\in F^{\\times}$. Let $d\\ge1$, let $\\lambda$ be a partition of $n$ with at most $d$ parts, and let $W^{\\lambda}_F$ be the Weyl module of the q-Schur algebra $S_F(d,n)=S(d,n)\\otimes_RF$ with its Jantzen filtration $W^{\\lambda}_F(i)$ with respect to $(R,\\pi)$ ([[def-jantzen-filtration-of-a-lifted-cell-module]], [[def-type-a-q-schur-algebra-and-weyl-modules]]).\n1. (**Jantzen sum formula**) In the Grothendieck group of finite-dimensional $S_F(d,n)$-modules, $$\\sum_{i>0}\\bigl[W^{\\lambda}_F(i)\\bigr]=\\sum_{\\substack{(a,b),(a,c)\\in[\\lambda]\\\\ b<c}}\\Bigl(\\nu_\\pi\\bigl([h^{\\lambda}_{ab}]_{\\hat q}\\bigr)-\\nu_\\pi\\bigl([h^{\\lambda}_{ac}]_{\\hat q}\\bigr)\\Bigr)\\Bigl[W_F^{(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)}\\Bigr],$$ where $\\beta=\\beta(\\lambda)$ is the beta sequence of $\\lambda$, $h^{\\lambda}_{ab}$ are its hook lengths and the symbols are the virtual Weyl symbols of [[def-alternating-weyl-and-specht-symbols-from-beta-sequences]].\n2. (**q-Schaper, $d\\ge n$**) If $d\\ge n$ and $\\Pi$ denotes the Schur functor of [[def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras]], then applying $\\Pi$ to (1) gives the corresponding identity for the Hecke Specht modules in the source's normalisation, that is, for the Murphy cell modules $\\Pi(W^{\\lambda}_F)=S^{\\lambda}_{\\mathrm M}$ of [[def-type-a-hecke-specht-module-and-cell-form]] (the Dipper-James form is obtained by conjugating partitions), $$\\sum_{i>0}\\bigl[S^{\\lambda}_F(i)\\bigr]=\\sum_{\\substack{(a,b),(a,c)\\in[\\lambda]\\\\ b<c}}\\Bigl(\\nu_\\pi\\bigl([h^{\\lambda}_{ab}]_{\\hat q}\\bigr)-\\nu_\\pi\\bigl([h^{\\lambda}_{ac}]_{\\hat q}\\bigr)\\Bigr)\\Bigl[S_F^{(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)}\\Bigr]$$ in the Grothendieck group of finite-dimensional $H_{F,q}(S_n)$-modules, with the virtual Specht symbols of [[def-alternating-weyl-and-specht-symbols-from-beta-sequences]]. The formula is a virtual radical-layer identity: each nonzero coefficient bounds the corresponding composition multiplicity from above and forces at least one occurrence of the corresponding simple factor, but it is not a general algorithm for decomposition numbers.",
+        "strategy": "For (1): by [[thm-q-schur-weyl-weight-space-gram-determinant-hook-product]] the Gram determinant on the $\\nu$-weight space is a product of hook ratios times $q^{N}$; the assumption $[n]!_{\\hat q}\\ne0$ (with $R$ a domain) makes every factor nonzero, and by Jantzen's lemma ([[lem-jantzen-layer-dimensions-equal-the-gram-determinant-valuation]]) its $\\pi$-valuation equals the total dimension of the positive Jantzen layers on that weight space. Taking $\\pi$-adic valuations of the hook product turns each factor into the difference $\\nu_\\pi([h^{\\lambda}_{ab}]_{\\hat q})-\\nu_\\pi([h^{\\lambda}_{ac}]_{\\hat q})$, and Lemma 5.26 identifies the index of each term with the virtual Weyl symbol $[W_F^{(\\beta_1,\\dots,\\beta_b+h^{\\lambda}_{ab},\\dots,\\beta_c-h^{\\lambda}_{ac},\\dots,\\beta_n)}]$ (here the hook-to-removable-border-strip correspondence [[lem-hooks-correspond-to-removable-border-strips]] is used). The resulting identities hold for every weight $\\nu$, so the unitriangular detection lemma [[lem-semistandard-weight-dimensions-detect-virtual-weyl-classes]] upgrades them to an identity in the Grothendieck group, giving (1). For (2) apply the exact Schur functor: by [[thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules]] it carries $W^{\\lambda}_F(i)$ to $S^{\\lambda}_F(i)$ and commutes with Grothendieck classes, so (1) transports termwise, the vanishing virtual symbols accounting for the zero terms. This is Mathas, Theorem 5.31 and Corollary 5.32 (q-Schaper), printed pp. 58-60; no choice is used.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 5.31 (Jantzen sum formula) and Corollary 5.32 (q-Schaper theorem), printed pp. 58-60",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-general-type-a-decomposition-numbers-remain-unsolved",
+        "kind": "remark",
+        "title": "General type-A decomposition numbers remain unsolved",
+        "deps": [
+          "cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular",
+          "thm-q-schaper-virtual-radical-layer-formula"
+        ],
+        "dependency_level": 7,
+        "statement": "The two preceding constraints on the decomposition matrix of $H_{F,q}(S_n)$ are real but limited, and neither solves the general problem. (i) Dominance unitriangularity ([[cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular]]) determines only the diagonal entries $d_{\\mu\\mu}=1$ and the vanishing region $d_{\\lambda\\mu}\\ne0\\Rightarrow\\mu\\unrhd\\lambda$; it gives no value for an off-diagonal entry. (ii) The q-Schaper/Jantzen sum formula ([[thm-q-schaper-virtual-radical-layer-formula]]) is a virtual radical-layer identity whose coefficients $\\nu_\\pi([h^{\\lambda}_{ab}]_{\\hat q})-\\nu_\\pi([h^{\\lambda}_{ac}]_{\\hat q})$ bound the corresponding composition multiplicities from above; it neither determines a general multiplicity nor produces a positive combinatorial rule. Special coefficient regimes and low-rank calculations determine additional entries (canonically based, weight-one, and small-$n$ cases), but the classification of irreducible Specht modules in arbitrary positive characteristic is a known open problem, and no general closed formula for the decomposition numbers of $S_n$ in a fixed positive characteristic is claimed anywhere on this page. This remark records the boundary; it carries no proof obligation and no choice principle.",
+        "strategy": "Compare exactly what the two cited results determine, and record the boundary without asserting any unproved classification. Provenance: statement literature-derived, proof not-applicable; the remark is not consumed to prove any replacement.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, the discussion preceding Theorem 5.40 and the closing notes of Chapter 5, printed pp. 63-65",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, section 5.4 and the discussion of decomposition numbers, pp. 25-26",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1575,
+    "id": "type-a-hecke-specht-modules-and-cellular-bases-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Type-A Hecke Specht Modules and Cellular Bases — Examples",
+    "companion": "type-a-hecke-specht-modules-and-cellular-bases",
+    "requires": [
+      "type-a-hecke-specht-modules-and-cellular-bases"
+    ],
+    "items": [
+      {
+        "id": "ex-murphy-cellular-basis-for-h3",
+        "kind": "example",
+        "title": "The Murphy cellular basis of H(S_3)",
+        "deps": [
+          "def-cellular-algebra-basis-and-cell-module",
+          "def-murphy-elements-and-murphy-tableau-elements",
+          "prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one",
+          "thm-murphy-tableau-elements-form-a-cellular-basis"
+        ],
+        "dependency_level": 6,
+        "statement": "Work over any commutative ring $R$ with $q\\in R^{\\times}$ and let $H=H_{R,q}(S_3)$ with generators $T_1,T_2$, the braid relation $T_1T_2T_1=T_2T_1T_2$ and quadratics $T_i^2=(q-1)T_i+q$. The Murphy cellular basis ([[thm-murphy-tableau-elements-form-a-cellular-basis]]) is indexed by the partitions $(3),(2,1),(1^3)$ ordered by dominance. Explicitly, with $*$ the antiautomorphism $T_w^*=T_{w^{-1}}$ ([[def-murphy-elements-and-murphy-tableau-elements]]): (a) for $\\lambda=(3)$, $\\mathrm{Std}(3)=\\{s\\}$ and $m_{ss}=m_{(3)}=1+T_1+T_2+T_1T_2+T_2T_1+T_1T_2T_1$; (b) for $\\lambda=(2,1)$, $\\mathrm{Std}(2,1)=\\{t,u\\}$ with $t=\\begin{smallmatrix}1&2\\\\3\\end{smallmatrix}$, $u=\\begin{smallmatrix}1&3\\\\2\\end{smallmatrix}$, and $m_{(2,1)}=1+T_1$ (the row symmetrizer of $S_{(2,1)}=\\langle(1\\,2)\\rangle$), so that $m_{tt}=1+T_1$, $m_{tu}=(1+T_1)T_2$, $m_{ut}=T_2(1+T_1)$ and $m_{uu}=T_2(1+T_1)T_2$; (c) for $\\lambda=(1^3)$, $\\mathrm{Std}(1^3)=\\{v\\}$ and $m_{vv}=m_{(1^3)}=1$. In total $1+4+1=6=3!=|S_3|$ elements; the middle cell carries $|\\mathrm{Std}(2,1)|^2=4$ basis elements, its two off-diagonal elements satisfy $m_{tu}^*=m_{ut}$, and the largest cell is spanned by $m_{ss}$, illustrating the cellular anti-involution. At $q=1$ this is the Murphy basis of the group algebra $\\mathbb Z[S_3]$ ([[prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one]]).",
+        "strategy": "Read the elements off the definitions: $m_\\mu=\\sum_{w\\in S_\\mu}T_w$ (so $m_{(3)}$ has six terms, $m_{(2,1)}=1+T_1$ has two, $m_{(1^3)}=1$ has one) and $m_{st}=T_{d(s)}^*m_\\lambda T_{d(t)}$ with the distinguished representatives $d(t)=1$, $d(u)=s_2$. The products are then computed directly from $T_i^2=(q-1)T_i+q$ and the braid relation, and they match Mathas's Example 2.2(ii). No choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Example 2.2(ii) and the $S_3$ instance of Theorem 3.18, printed pp. 10 and 25",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.8-2.15 (worked cellular-basis instances), pp. 4-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hecke-jucys-murphy-elements-through-rank-four",
+        "kind": "example",
+        "title": "The Hecke Jucys-Murphy elements through rank four",
+        "deps": [
+          "def-content-vector-of-a-standard-tableau",
+          "def-hecke-jucys-murphy-elements-and-q-contents",
+          "prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra",
+          "thm-hecke-jucys-murphy-action-is-dominance-triangular"
+        ],
+        "dependency_level": 5,
+        "statement": "Let $R$ be a commutative ring and $q\\in R^{\\times}$. In $H=H_{R,q}(S_n)$ the Hecke Jucys-Murphy elements ([[def-hecke-jucys-murphy-elements-and-q-contents]]) for $n\\ge4$ are $$L_1=0,\\quad L_2=q^{-1}T_{(1,2)},\\quad L_3=q^{-1}T_{(2,3)}+q^{-2}T_{(1,3)},\\quad L_4=q^{-1}T_{(3,4)}+q^{-2}T_{(2,4)}+q^{-3}T_{(1,4)},$$ and in general $L_k=\\sum_{j<k}q^{j-k}T_{(j,k)}$. For the standard tableau $t=\\begin{smallmatrix}1&3&4\\\\2\\end{smallmatrix}$ of shape $(3,1)$ the contents of the entries $k=1,2,3,4$ are $0,-1,1,2$ ([[def-content-vector-of-a-standard-tableau]]), so the diagonal eigenvalues of $L_1,\\dots,L_4$ on the Murphy vector $m_t$ are $[0]_q=0$, $[-1]_q=-q^{-1}$, $[1]_q=1$ and $[2]_q=1+q$; the triangular correction terms $\\sum_{v\\rhd t}a_vm_v$ are present in general ([[thm-hecke-jucys-murphy-action-is-dominance-triangular]]) and vanish only in the semisimple range handled by [[thm-separated-hecke-residues-give-seminormal-idempotents-and-bases]]. At $q=1$ the four elements specialize to the ordinary Jucys-Murphy elements $X_1=0$, $X_2=(1\\,2)$, $X_3=(1\\,3)+(2\\,3)$, $X_4=(1\\,4)+(2\\,4)+(3\\,4)$ and the eigenvalues to $0,-1,1,2$, the standard contents of $t$.",
+        "strategy": "Substitute into the defining sum; the contents are read off the tableau; the $q=1$ specialization uses [[prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra]] and $[m]_1=m$ for all integers $m$. The correction terms are governed by [[thm-hecke-jucys-murphy-action-is-dominance-triangular]] and are not asserted to be zero without the hypothesis $e>n$. No choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Example 3.23 and Example 3.29, printed pp. 26 and 28",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, section 2.15 (q-content computations), pp. 6-7",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-residue-sequences-need-not-separate-when-e-is-at-most-n",
+        "kind": "counterexample",
+        "title": "Residue sequences need not separate when e is at most n",
+        "deps": [
+          "def-hecke-jucys-murphy-elements-and-q-contents",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "thm-separated-hecke-residues-give-seminormal-idempotents-and-bases"
+        ],
+        "dependency_level": 6,
+        "statement": "The hypothesis $e>n$ in [[thm-separated-hecke-residues-give-seminormal-idempotents-and-bases]] cannot be dropped. Take $F=\\mathbb C$, $q=-1$ (so $e=e(\\mathbb C,-1)=2$, [[def-quantum-characteristic-of-an-invertible-hecke-parameter]]), $n=3$ and $\\lambda=(2,1)$. The two distinct standard tableaux $s=\\begin{smallmatrix}1&2\\\\3\\end{smallmatrix}$ and $t=\\begin{smallmatrix}1&3\\\\2\\end{smallmatrix}$ have contents $\\operatorname{content}_s(1),\\operatorname{content}_s(2),\\operatorname{content}_s(3)=0,1,-1$ and $\\operatorname{content}_t(1),\\operatorname{content}_t(2),\\operatorname{content}_t(3)=0,-1,1$, and since $[m]_{-1}=[m]+(-1)^{m-1}[1]_{-1}$ reduces modulo $e=2$ one has $[1]_{-1}=1=[-1]_{-1}$ ([[def-hecke-jucys-murphy-elements-and-q-contents]] for the extended quantum integers). Hence $$([\\operatorname{content}_s(k)]_q)_{k=1,2,3}=(0,1,1)=([\\operatorname{content}_t(k)]_q)_{k=1,2,3}\\quad(q=-1):$$ the q-content sequences collide although $s\\ne t$, so the separation conclusion of the theorem fails. Moreover the interpolation denominator for $k=2$ is the difference $[\\operatorname{content}_t(2)]_q-[\\operatorname{content}_s(2)]_q=[-1]_{-1}-[1]_{-1}=0$, so the projector $F_t$ of the theorem is not defined in this case; the same collision $\\rho\\equiv0\\bmod e$ makes $[\\rho]_q=0$ in the generator formula of the theorem's part 4. Consequently no seminormal basis is available beyond the semisimple range, and the theorem's hypothesis $e>n$ is optimal.",
+        "strategy": "Compute the contents from the definitions and compare the quantum integers at $q=-1$; the collision occurs exactly because the two contents differ by $e=2$. This is the boundary of Mathas's Lemma 3.32, whose proof uses $e>n$ so that equal-residue nodes lie on diagonal lines, and it is the counterexample to the naive extension of Theorem 3.34 beyond its hypothesis. No choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Lemma 3.32, Example 3.29 and the hypothesis $e>n$ of Theorem 3.34, printed pp. 28-31",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 2.15 and 3.16 (separation condition), pp. 6-7 and 16-18",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-q-schaper-for-shape-three-two-at-e-two",
+        "kind": "example",
+        "title": "The q-Schaper calculation for (3,2) at e = 2",
+        "deps": [
+          "cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular",
+          "def-alternating-weyl-and-specht-symbols-from-beta-sequences",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "thm-q-schaper-virtual-radical-layer-formula"
+        ],
+        "dependency_level": 7,
+        "statement": "Take $R=\\mathbb C[\\hat q]$, the prime element $\\pi=1+\\hat q$ (so that $F=\\mathbb C$ and $q:=\\hat q+\\pi R$ specialises to $-1$, giving $e=2$), and $\\lambda=(3,2)$, $n=5$. Evaluating the q-Schaper virtual sums ([[thm-q-schaper-virtual-radical-layer-formula]]) with the hook valuations $\\nu_\\pi([2]_{\\hat q})=\\nu_\\pi([4]_{\\hat q})=1$, $\\nu_\\pi([3]_{\\hat q})=\\nu_\\pi([1]_{\\hat q})=0$ gives, in the source's normalisation, $$\\sum_{i>0}\\bigl[W^{(3,2)}_F(i)\\bigr]=\\bigl[W^{(3,1^2)}_F\\bigr]+\\bigl[W^{(2^2,1)}_F\\bigr]-\\bigl[W^{(1^5)}_F\\bigr],\\qquad \\sum_{i>0}\\bigl[S^{(3,2)}_F(i)\\bigr]=2\\bigl[D^{(2^2,1)}_{\\mathrm{M}}\\bigr].$$ Further Jantzen calculations give $W^{(1^5)}_F=L^{(1^5)}_F$, $W^{(2^2,1)}_F=L^{(2^2,1)}_F$ and $W^{(3,1^2)}_F\\sim L^{(3,1^2)}_F+L^{(2^2,1)}_F+L^{(1^5)}_F$, so at the level of the sum formula alone one gets $d_{(3,2),(3,1^2)}=1$ and only the bound $d_{(3,2),(2^2,1)}\\in\\{1,2\\}$. The extra dimension/filtration argument on the Specht side gives $S^{(3,2)}_{\\mathrm{M}}\\cong D^{(2^2,1)}_{\\mathrm{M}}$ (both sides have dimension $5$), whence $d_{(3,2),(2^2,1)}=1$: the virtual sum alone did not determine the entry. Translated to the Dipper-James convention of this page by conjugating and dualising ([[def-type-a-hecke-specht-module-and-cell-form]]), this reads $S^{(2,2,1)}_{\\mathrm{DJ}}\\cong D^{(3,2)}_{\\mathrm{DJ}}$, while the partition $(2,2,1)$ is not $2$-regular, so its own labelled head vanishes, $D^{(2,2,1)}_{\\mathrm{DJ}}=0$. The computed entry is consistent with the dominance bound $d_{\\lambda\\mu}\\ne0\\Rightarrow\\mu\\unrhd\\lambda$ of [[cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular]].",
+        "strategy": "Compute $\\nu_\\pi$ on the quantum hook lengths ($[k]_{\\hat q}$ is divisible by $\\pi=1+\\hat q$ exactly when $k$ is even), use the evaluation of the $(3,2)$ Gram determinant displayed in Example 5.28, and read off the virtual sums; the small-module equalities and the final dimension count are Example 5.33 of the source, including its closing remark that $d_{(3,2),(2^2,1)}$ is determined only after the extra argument. The translation to the page's convention is the conjugate-dual dictionary of [[def-type-a-hecke-specht-module-and-cell-form]]. No choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Examples 5.28 and 5.33 with the displayed decomposition matrix of $S_{\\mathbb C,-1}(d,5)$, printed pp. 56-57 and 59-60",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Kleshchev, Symmetric groups and related Hecke algebras, Remark 5.5 (label translation used for the restatement), p. 24",
+              "url": "https://arxiv.org/pdf/0909.4844"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-cellularity-does-not-make-every-cell-module-simple",
+        "kind": "counterexample",
+        "title": "Cellularity does not make every cell module simple",
+        "deps": [
+          "def-cellular-algebra-basis-and-cell-module",
+          "def-e-regular-and-e-restricted-partitions",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "def-type-a-hecke-specht-module-and-cell-form",
+          "ex-q-schaper-for-shape-three-two-at-e-two",
+          "thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra",
+          "thm-q-schaper-virtual-radical-layer-formula",
+          "thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions"
+        ],
+        "dependency_level": 8,
+        "statement": "A cellular algebra need not be semisimple, its cell modules need not be simple, and a labelled head $D^{\\lambda}$ may vanish although the cell module $C^{\\lambda}$ is nonzero. (a) Abstract degenerate instance: let $F$ be a field and $A=F[x]/(x^2)$, with $\\Lambda=\\{1\\rhd2\\}$ ordered so that $1\\rhd2$, cellular basis $c_{11}:=1$ in cell $1$ and $c_{22}:=x$ in cell $2$ and $i=\\mathrm{id}$ ([[def-cellular-algebra-basis-and-cell-module]]). The triangular axiom holds because $1\\cdot a\\equiv0\\bmod(x)$ for $a\\in(x)$ and $x\\cdot a\\in\\{x,0\\}$, and $A^{\\rhd2}=0$. The cell form on $C^{2}$ has $c_{22}c_{22}=x^2=0$, so it is identically zero, $\\mathrm{rad}\\,C^{2}=C^{2}$ and $D^{2}=0$, while $C^{1}\\cong F$ is simple: cellularity does not force $D^{\\lambda}\\ne0$, and the algebra is not semisimple since $\\mathrm{rad}\\,A=(x)$. (b) Hecke instance: let $F$ be a field of characteristic $2$ and $q=1$, so $e=\\operatorname{char}(F)=2$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]); for $n=3$ and $\\lambda=(1,1,1)$ the partition $(1,1,1)$ is not $2$-regular ([[def-e-regular-and-e-restricted-partitions]]), so $D^{(1,1,1)}=0$ while the page's Specht module $S^{(1,1,1)}\\cong D^{(3)}$ is the nonzero trivial module (in characteristic $2$ the sign module is trivial) ([[thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions]], [[def-type-a-hecke-specht-module-and-cell-form]]). (c) Reducible cell module: at $e=2$ the q-Schur cell module $W^{(3,2)}_F$ satisfies $\\sum_{i>0}[W^{(3,2)}_F(i)]=[L^{(3,1^2)}_F]+2[L^{(2^2,1)}_F]\\ne0$ ([[thm-q-schaper-virtual-radical-layer-formula]], the calculation of [[ex-q-schaper-for-shape-three-two-at-e-two]]), so its radical is nonzero and $W^{(3,2)}_F$ is reducible even though it has a simple head.",
+        "strategy": "Part (a) is a direct computation in the two-dimensional algebra $F[x]/(x^2)$: every product of two elements of the smaller cell vanishes. Part (b) reads the $2$-regularity of $(1,1,1)$ off the definition and applies the classification theorem; the cell module $S^{(1^3)}$ at $q=1$ is the sign module, which is the trivial module in characteristic $2$. Part (c) is the Weyl-module computation of Example 5.33, where the Jantzen layers have positive dimension. All three instances are applications of [[thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra]], whose third clause says that $D^{\\lambda}\\ne0$ holds exactly when the cell form is non-degenerate. No choice is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Mathas, Iwahori-Hecke Algebras and Schur Algebras of the Symmetric Group, Theorem 2.13, Corollary 2.14, Example 5.33 and the p. 60 discussion of vanishing $D^\\nu_F$ for non-$e$-restricted $\\nu$, printed pp. 14-16 and 59-60",
+              "url": "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+            },
+            {
+              "title": "Mathas-Soriano, Seminormal forms and Gram determinants for cellular algebras, sections 3.1-3.7 (degenerate cell forms), pp. 9-11",
+              "url": "https://arxiv.org/pdf/math/0604108"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quadratic-hopf-lax-formula-and-moreau-envelope.md

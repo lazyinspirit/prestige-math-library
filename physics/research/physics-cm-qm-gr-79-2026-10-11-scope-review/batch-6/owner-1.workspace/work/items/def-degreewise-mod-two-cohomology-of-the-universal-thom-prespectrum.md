@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-degreewise-mod-two-cohomology-of-the-universal-thom-prespectrum.md

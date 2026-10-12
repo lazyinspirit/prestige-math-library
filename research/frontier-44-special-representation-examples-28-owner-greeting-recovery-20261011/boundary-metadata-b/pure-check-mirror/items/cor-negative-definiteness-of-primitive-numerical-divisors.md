@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-negative-definiteness-of-primitive-numerical-divisors.md

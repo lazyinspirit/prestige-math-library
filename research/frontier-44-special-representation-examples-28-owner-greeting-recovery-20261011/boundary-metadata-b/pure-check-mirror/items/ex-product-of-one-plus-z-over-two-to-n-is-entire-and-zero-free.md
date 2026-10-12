@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-product-of-one-plus-z-over-two-to-n-is-entire-and-zero-free.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-galois-orbits-classify-simple-modules-after-splitting-base-change.md

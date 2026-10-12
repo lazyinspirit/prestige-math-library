@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-good-and-geometric-quotients-for-group-actions.md

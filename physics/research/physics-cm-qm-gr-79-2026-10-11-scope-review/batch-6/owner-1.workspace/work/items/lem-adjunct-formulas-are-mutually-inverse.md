@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-adjunct-formulas-are-mutually-inverse.md

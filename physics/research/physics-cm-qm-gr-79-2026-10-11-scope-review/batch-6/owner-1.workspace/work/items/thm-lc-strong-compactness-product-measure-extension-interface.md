@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lc-strong-compactness-product-measure-extension-interface.md

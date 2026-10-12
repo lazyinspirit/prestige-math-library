@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-extensions-with-complete-kernel-split-over-the-centralizer.md

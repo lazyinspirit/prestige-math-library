@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-lie-derivative-agrees-with-x-on-functions-and-bracket-on-vector-fields.md

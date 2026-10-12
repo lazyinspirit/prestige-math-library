@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sylvesters-criterion-for-positive-definiteness.md

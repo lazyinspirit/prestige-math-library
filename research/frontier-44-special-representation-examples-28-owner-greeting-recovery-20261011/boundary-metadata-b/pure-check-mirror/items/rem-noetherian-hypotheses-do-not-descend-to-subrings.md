@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-noetherian-hypotheses-do-not-descend-to-subrings.md

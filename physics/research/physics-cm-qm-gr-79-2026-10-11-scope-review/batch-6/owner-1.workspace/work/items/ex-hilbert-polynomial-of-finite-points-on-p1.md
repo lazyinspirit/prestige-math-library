@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hilbert-polynomial-of-finite-points-on-p1.md

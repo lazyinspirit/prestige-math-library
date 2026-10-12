@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-translation-modulation-dilation-and-reflection-laws.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-lc-infinitary-syntax-and-compactness.md

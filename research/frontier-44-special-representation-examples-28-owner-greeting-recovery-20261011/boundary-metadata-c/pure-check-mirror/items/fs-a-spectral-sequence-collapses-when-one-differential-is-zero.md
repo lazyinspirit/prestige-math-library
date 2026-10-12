@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-spectral-sequence-collapses-when-one-differential-is-zero.md

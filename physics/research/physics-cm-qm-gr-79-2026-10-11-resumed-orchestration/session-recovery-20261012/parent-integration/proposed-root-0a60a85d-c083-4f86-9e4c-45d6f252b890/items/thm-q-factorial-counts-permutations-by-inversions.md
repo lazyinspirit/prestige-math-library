@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-q-factorial-counts-permutations-by-inversions.md

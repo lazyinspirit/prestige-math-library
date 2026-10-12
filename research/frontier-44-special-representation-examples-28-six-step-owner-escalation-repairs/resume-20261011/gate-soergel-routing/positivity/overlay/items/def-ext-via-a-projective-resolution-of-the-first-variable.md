@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-ext-via-a-projective-resolution-of-the-first-variable.md

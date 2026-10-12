@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-ag-submersion-criterion-standard-smooth.md

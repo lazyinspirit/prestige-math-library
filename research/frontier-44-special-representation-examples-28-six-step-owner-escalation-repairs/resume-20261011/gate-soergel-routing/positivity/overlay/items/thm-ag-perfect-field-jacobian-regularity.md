@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-ag-perfect-field-jacobian-regularity.md

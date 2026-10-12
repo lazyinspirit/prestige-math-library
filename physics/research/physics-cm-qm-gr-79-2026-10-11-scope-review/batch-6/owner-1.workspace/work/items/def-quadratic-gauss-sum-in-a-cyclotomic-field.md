@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quadratic-gauss-sum-in-a-cyclotomic-field.md

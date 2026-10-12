@@ -59,8 +59,7 @@ $\eta>0$ such that:
 
 1.1 By [L1], the critical set of $f$ is finite; write it as $\{p_1,\dots,p_r\}$. Choose pairwise disjoint coordinate charts $\varphi_i:U_i'\to B_i\subseteq\mathbb R^{n_i}$ with $\varphi_i(p_i)=0$, and then shrink to relatively compact subcharts $U_i\Subset U_i'$ that are still pairwise disjoint. [L1, given, choose]
 
-
-2.1 If $r=0$, take $\eta:=1$; there are no neighbourhood conditions to check, so the conclusion is vacuous. If instead $\dim M=0$, then $M$ is discrete and each $U_i:=\{p_i\}$ is a coordinate neighbourhood. Again take $\eta:=1$. The displayed matrix inequality is vacuous on the zero vector space, every point is critical and nondegenerate, and every function on $U_i$ has exactly the one critical point $p_i$. Thus the conclusion holds in either boundary case. Henceforth assume $r\ge1$ and $\dim M\ge1$. [step 1.1, cases]
+ 2.1 If $r=0$, take $\eta:=1$; there are no neighbourhood conditions to check, so the conclusion is vacuous. If instead $\dim M=0$, then $M$ is discrete and each $U_i:=\{p_i\}$ is a coordinate neighbourhood. Again take $\eta:=1$. The displayed matrix inequality is vacuous on the zero vector space, every point is critical and nondegenerate, and every function on $U_i$ has exactly the one critical point $p_i$. Thus the conclusion holds in either boundary case. Henceforth assume $r\ge1$ and $\dim M\ge1$. [step 1.1, cases]
 
 2.2 Write $F_i:=\nabla(f\circ\varphi_i^{-1})$ on $B_i$. Since $p_i$ is nondegenerate by [F1], the derivative $DF_i(0)$ is the Hessian matrix at $p_i$ and is invertible. By [L2], after shrinking $U_i$ again we may assume $F_i$ is a diffeomorphism from $\varphi_i(U_i)$ onto an open neighbourhood of $0$. [F1, L2, step 1.1]
 
@@ -68,4 +67,4 @@ $\eta>0$ such that:
 
 4.1 If $g$ is sufficiently $C^2$-close to $f$ on $\overline{U_i}$, then the gradient map $\nabla(g\circ\varphi_i^{-1})$ is $C^1$-close to $F_i$. Because $F_i$ is a local diffeomorphism carrying $0$ to $0$ and the Hessian gap from step 3.1 keeps the derivative uniformly invertible on $\overline{U_i}$, the inverse-function argument persists under sufficiently small $C^1$ perturbation: the perturbed gradient has a unique zero in $\varphi_i(U_i)$, and at that zero its derivative is still invertible. Thus $g$ has exactly one nondegenerate critical point in $U_i$. [L2, step 2.2, step 3.1]
 
-5.1 Steps 1.1, 3.1, and 4.1 give the claimed finite critical set, disjoint critical neighbourhoods, uniform Hessian gap, and local persistence statement. [step 1.1, step 3.1, step 4.1] ∎
+5.1 Steps 1.1, 3.1, and 4.1 give the claimed finite critical set, disjoint critical neighbourhoods, uniform Hessian gap, and local persistence statement. [step 1.1, step 3.1, step 4.1] ∎ 

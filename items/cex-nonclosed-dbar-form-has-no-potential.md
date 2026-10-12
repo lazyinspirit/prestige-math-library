@@ -46,11 +46,7 @@ $(0,1)$-form $g|_U=\bar z_1\,d\bar z_2$.
 
 **Proof technique:** counterexample.
 
-1.1 The proposed witness has a nonzero $\bar\partial$ derivative at every point. [F1, given, algebra]
-Applying the coefficient formula [F1] to $g=\bar z_1\,d\bar z_2$ differentiates its coefficient once in each barred coordinate. Only the $j=1$ derivative is nonzero, and it equals $1$, so
-$$\bar\partial g=d\bar z_1\wedge d\bar z_2.$$
-Because the two coordinate covectors are distinct members of the local wedge basis, this $(0,2)$-form is nonzero at every point of $\mathbb C^2$; hence $g|_U$ is not $\bar\partial$-closed on any nonempty open $U$.
+1.1 The proposed witness has a nonzero $\bar\partial$ derivative at every point. [F1, given, algebra] Applying the coefficient formula [F1] to $g=\bar z_1\,d\bar z_2$ differentiates its coefficient once in each barred coordinate. Only the $j=1$ derivative is nonzero, and it equals $1$, so $$\bar\partial g=d\bar z_1\wedge d\bar z_2.$$ Because the two coordinate covectors are distinct members of the local wedge basis, this $(0,2)$-form is nonzero at every point of $\mathbb C^2$; hence $g|_U$ is not $\bar\partial$-closed on any nonempty open $U$. [F1, given, algebra]
 
-2.1 Nonclosedness contradicts the necessary condition for having a potential. [F2, step 1.1, given, algebra]
-If a smooth $u:U\to\mathbb C$ satisfied $\bar\partial u=g|_U$, applying $\bar\partial$ and using [F2] would give $0=\bar\partial^2u=\bar\partial g|_U=d\bar z_1\wedge d\bar z_2$. The last form is nonzero at every point of the nonempty set $U$ by step 1.1, a contradiction. Thus no such $u$ exists.
-∎
+2.1 Nonclosedness contradicts the necessary condition for having a potential. [F2, step 1.1, given, algebra] If a smooth $u:U\to\mathbb C$ satisfied $\bar\partial u=g|_U$, applying $\bar\partial$ and using [F2] would give $0=\bar\partial^2u=\bar\partial g|_U=d\bar z_1\wedge d\bar z_2$. The last form is nonzero at every point of the nonempty set $U$ by step 1.1, a contradiction. Thus no such $u$ exists. [F2, step 1.1, given, algebra] ∎
+

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-observables-position-and-momentum-outcome-laws.md

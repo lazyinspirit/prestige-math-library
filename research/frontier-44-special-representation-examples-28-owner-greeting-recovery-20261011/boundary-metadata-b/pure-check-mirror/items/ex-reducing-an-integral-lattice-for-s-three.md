@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-reducing-an-integral-lattice-for-s-three.md

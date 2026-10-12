@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-graph-with-at-least-four-vertices-has-a-nontrivial-module.md

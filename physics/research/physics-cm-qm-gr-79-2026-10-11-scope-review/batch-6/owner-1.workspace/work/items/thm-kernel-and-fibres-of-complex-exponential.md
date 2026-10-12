@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kernel-and-fibres-of-complex-exponential.md

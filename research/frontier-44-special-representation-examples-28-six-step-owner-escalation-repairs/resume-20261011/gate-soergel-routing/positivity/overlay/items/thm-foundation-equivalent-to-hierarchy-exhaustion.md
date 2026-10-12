@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-foundation-equivalent-to-hierarchy-exhaustion.md

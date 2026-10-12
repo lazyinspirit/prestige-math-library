@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-gorenstein-surface-tangent-conic-and-hilbert-function.md

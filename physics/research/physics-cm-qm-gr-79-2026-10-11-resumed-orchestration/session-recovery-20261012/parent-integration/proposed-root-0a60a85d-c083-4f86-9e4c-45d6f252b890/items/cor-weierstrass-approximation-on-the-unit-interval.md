@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-weierstrass-approximation-on-the-unit-interval.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-r-and-open-interval-homeomorphic-not-uniformly-isomorphic.md

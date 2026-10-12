@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-artin-fixed-field-upper-degree-bound.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-group-ring-is-a-unital-algebra-with-basis-g.md

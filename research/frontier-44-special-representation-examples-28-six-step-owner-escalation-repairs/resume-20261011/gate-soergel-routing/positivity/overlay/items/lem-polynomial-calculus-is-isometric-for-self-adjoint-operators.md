@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-polynomial-calculus-is-isometric-for-self-adjoint-operators.md

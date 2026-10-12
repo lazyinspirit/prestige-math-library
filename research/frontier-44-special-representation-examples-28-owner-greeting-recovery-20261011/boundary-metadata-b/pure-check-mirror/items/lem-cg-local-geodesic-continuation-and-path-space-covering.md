@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-local-geodesic-continuation-and-path-space-covering.md

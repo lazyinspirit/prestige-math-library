@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-connector-compatibility-for-a-two-arc-cover-of-the-circle.md

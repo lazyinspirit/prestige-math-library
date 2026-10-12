@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dynkin-diagrams-of-irreducible-finite-root-systems-are-trees-with-controlled-branching.md

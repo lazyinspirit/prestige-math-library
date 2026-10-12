@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-closed-ideal-quotient-is-a-banach-algebra.md

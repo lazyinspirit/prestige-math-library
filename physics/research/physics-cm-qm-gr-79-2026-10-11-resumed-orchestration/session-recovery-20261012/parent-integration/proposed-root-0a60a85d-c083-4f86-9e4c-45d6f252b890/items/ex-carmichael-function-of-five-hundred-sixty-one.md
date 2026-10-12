@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-carmichael-function-of-five-hundred-sixty-one.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-collapse-map-of-an-equatorial-sphere.md

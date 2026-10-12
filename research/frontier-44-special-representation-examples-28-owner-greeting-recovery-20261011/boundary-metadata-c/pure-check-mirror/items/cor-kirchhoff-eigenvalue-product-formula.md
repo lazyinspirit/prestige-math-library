@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-kirchhoff-eigenvalue-product-formula.md

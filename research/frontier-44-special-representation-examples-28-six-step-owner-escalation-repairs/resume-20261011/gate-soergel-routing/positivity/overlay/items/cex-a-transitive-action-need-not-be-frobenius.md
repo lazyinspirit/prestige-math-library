@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-transitive-action-need-not-be-frobenius.md

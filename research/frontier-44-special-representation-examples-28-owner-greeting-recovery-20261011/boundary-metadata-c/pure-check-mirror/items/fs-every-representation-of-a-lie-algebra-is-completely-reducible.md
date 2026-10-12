@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-representation-of-a-lie-algebra-is-completely-reducible.md

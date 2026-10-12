@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-regular-local-base-coherent-duality-by-embedding.md

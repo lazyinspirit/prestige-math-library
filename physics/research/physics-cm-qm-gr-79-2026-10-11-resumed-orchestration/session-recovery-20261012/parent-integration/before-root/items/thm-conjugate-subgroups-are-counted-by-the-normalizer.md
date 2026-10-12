@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugate-subgroups-are-counted-by-the-normalizer.md

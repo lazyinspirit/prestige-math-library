@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-left-shift-powers-converge-in-sot-not-operator-norm.md

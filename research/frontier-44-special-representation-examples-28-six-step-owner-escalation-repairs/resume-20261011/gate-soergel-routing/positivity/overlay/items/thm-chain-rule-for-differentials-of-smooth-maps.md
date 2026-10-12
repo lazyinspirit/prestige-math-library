@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-chain-rule-for-differentials-of-smooth-maps.md

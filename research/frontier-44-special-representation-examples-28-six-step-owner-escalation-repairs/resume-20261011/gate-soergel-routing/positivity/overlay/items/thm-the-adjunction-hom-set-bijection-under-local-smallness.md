@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-adjunction-hom-set-bijection-under-local-smallness.md

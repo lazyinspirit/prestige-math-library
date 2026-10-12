@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial.md

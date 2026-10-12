@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-prefix-automaton-for-a-finite-forbidden-factor-set.md

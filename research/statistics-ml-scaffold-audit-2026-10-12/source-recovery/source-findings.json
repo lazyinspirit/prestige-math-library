@@ -1,0 +1,33 @@
+{
+  "recorded_at": "2026-10-12T05:10:31.379796+00:00",
+  "scope": "Source proof inspection for independent random-matrix scaffold prerequisites; no library proof certification",
+  "sources": [
+    {
+      "file": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/rubio-mestre-2011.pdf",
+      "url": "https://hal.science/hal-00725102/document",
+      "sha256": "956441da655bc308013c61faf299b984f91166b724c82330529084a2b74445b4",
+      "reading_scope": "Root inspected Theorem1, preliminary lemmas and specifically Lemma4 proof; remaining theorem proof not independently audited here."
+    },
+    {
+      "file": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/bai-miao-pan-2007.pdf",
+      "url": "https://arxiv.org/pdf/0708.1720",
+      "sha256": "2560d318e316fdb8ed677b3f4a5ca6ef7406558e110f9cfd123e4a44e2008c03",
+      "reading_scope": "Root inspected theorem statement, relevant definitions and complete Section2 proof; subsequent CLTs not audited here."
+    }
+  ],
+  "findings": [
+    {
+      "source": "Rubio\u2013Mestre (2011)",
+      "locus": "Lemma 4 and its proof, manuscript pp.7\u20138 (HAL PDF pp.9\u201310)",
+      "finding": "Future-column-dependent centered quadratic forms are not adapted to the stated filtration. The lemma is false for its stated arbitrary leave-one-out matrices. This rejects that proof route; it does not refute Theorem 1 itself.",
+      "counterexample": "Take M=N and iid entries zeta with P(zeta=0)=1/2 and P(zeta=+sqrt(2))=P(zeta=-sqrt(2))=1/4. Set u_n=|zeta_(1,n)|^2-1 and C_(n)=diag(product_(j!=n)u_j,0,...,0). Trace norm is1 and C_(n) is independent of column n. Each centered quadratic form is product_j u_j, so the absolute averaged form equals1 for every N."
+    },
+    {
+      "source": "Bai\u2013Miao\u2013Pan (2007)",
+      "locus": "Theorem 1 PDF pp.8\u20139 and complete Section2 proof PDF pp.12\u201316",
+      "finding": "Finite-fourth-moment directional spectral convergence has an adapted resolvent martingale proof, with prior MP/edge and quadratic-form inequalities required. The isotropic population direction condition holds automatically.",
+      "local_proof_design_corrections": "In (2.6), the elementary stated estimates justify O(N^(-1/2)) after multiplying N, sufficient for convergence. Bound delta3 in (2.8) directly using bounded beta, deterministic bounded C_n and bilinear adapted resolvent concentration; do not drop the correlated b1 term by an unsupported equality.",
+      "risk_closure_design": "For aspect gamma!=1, a separate nonzero spectral edge gap allows continuous cutoffs for the zero-eigenspace projection and the positive-spectrum pseudoinverse. Directional and ordinary spectral weak convergence then give isotropic bias/variance limits without the rejected Rubio lemma or a derivative exchange."
+    }
+  ]
+}

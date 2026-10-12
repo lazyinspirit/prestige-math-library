@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-local-hilbert-samuel-multiplicity-one.md

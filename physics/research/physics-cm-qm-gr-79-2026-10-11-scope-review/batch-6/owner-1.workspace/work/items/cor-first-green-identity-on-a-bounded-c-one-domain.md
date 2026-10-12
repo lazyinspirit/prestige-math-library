@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-first-green-identity-on-a-bounded-c-one-domain.md

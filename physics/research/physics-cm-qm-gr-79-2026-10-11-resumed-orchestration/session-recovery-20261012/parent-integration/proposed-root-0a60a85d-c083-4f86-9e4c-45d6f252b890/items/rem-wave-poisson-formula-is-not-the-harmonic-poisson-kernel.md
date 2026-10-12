@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-wave-poisson-formula-is-not-the-harmonic-poisson-kernel.md

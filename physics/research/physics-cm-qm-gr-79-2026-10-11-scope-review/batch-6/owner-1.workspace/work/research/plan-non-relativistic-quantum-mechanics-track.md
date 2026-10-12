@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/plan-non-relativistic-quantum-mechanics-track.md

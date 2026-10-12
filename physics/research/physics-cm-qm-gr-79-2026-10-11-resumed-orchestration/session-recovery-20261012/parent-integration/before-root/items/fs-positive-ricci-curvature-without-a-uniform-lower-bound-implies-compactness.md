@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-positive-ricci-curvature-without-a-uniform-lower-bound-implies-compactness.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-soergels-struktursatz-full-faithfulness-on-projectives.md

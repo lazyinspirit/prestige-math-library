@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-borel-subgroup-is-the-stabilizer-of-a-maximal-flag.md

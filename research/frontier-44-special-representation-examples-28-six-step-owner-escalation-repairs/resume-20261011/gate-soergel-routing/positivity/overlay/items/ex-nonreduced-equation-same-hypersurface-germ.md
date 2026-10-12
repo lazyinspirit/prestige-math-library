@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-nonreduced-equation-same-hypersurface-germ.md

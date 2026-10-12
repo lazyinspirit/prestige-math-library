@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-chebyshev-minimax-monic-polynomial.md

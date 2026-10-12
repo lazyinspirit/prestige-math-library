@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-geodesic-does-not-minimize-past-its-first-conjugate-point.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-petersen-graph-spectrum-from-the-two-subset-model.md

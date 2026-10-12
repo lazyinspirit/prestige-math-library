@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-equicharacteristic-complete-local-ring-has-coefficient-field.md

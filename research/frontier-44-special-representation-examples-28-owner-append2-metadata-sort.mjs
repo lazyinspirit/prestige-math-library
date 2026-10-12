@@ -1,0 +1,18 @@
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { loadStep3, itemHash } from '../tools/step3-decisions.mjs';
+import { step1Decision } from '../tools/step1-decisions.mjs';
+const run='frontier-44-special-representation-examples-28',root=process.cwd(),dir=`research/${run}-owner-append2-metadata-repair-round1`;
+const path=`research/${run}-batch-11.pages.json`,raw=readFileSync(path),pages=JSON.parse(raw),snapshot=loadStep3(root,run);
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const ids=pages.flatMap(p=>p.items.map(i=>i.id));
+const before=ids.map(id=>{const decision=step1Decision(snapshot,id);if(!decision.closed)throw Error(`Not previously current-ready: ${id}`);return {id,sha256:itemHash(snapshot,id),readiness_sha256:decision.row.sha256}});
+mkdirSync(dir);writeFileSync(`${dir}/native11.before.json`,raw,{flag:'wx'});
+const objects=new Map(pages.flatMap(p=>p.items.map(i=>[i.id,JSON.stringify(i)])));
+for(const page of pages)page.items.sort((a,b)=>a.dependency_level-b.dependency_level||a.id.localeCompare(b.id));
+for(const page of pages)for(const item of page.items)if(JSON.stringify(item)!==objects.get(item.id))throw Error('Item changed');
+writeFileSync(path,JSON.stringify(pages,null,2)+'\n');
+const fresh=loadStep3(root,run);
+for(const row of before)if(itemHash(fresh,row.id)!==row.sha256||!step1Decision(fresh,row.id).closed)throw Error(`Semantic currency changed ${row.id}`);
+writeFileSync(`${dir}/registration.json`,JSON.stringify({run,at:new Date().toISOString(),stable_scope:'append2-frontier-metadata-and-cyclotomic-order',repair_round:1,maximum_rounds:2,action:'Pure native11 item-array dependency ordering',before_sha256:sha(raw),after_sha256:sha(readFileSync(path)),subjects:before,all33_existing_ready_and_semantic_hashes_unchanged:true,item_objects_unchanged:true,original11_math_repair_counter:2,original11_reopened:false,readiness_writes:false,gate_attempt:false},null,2)+'\n',{flag:'wx'});
+console.log(JSON.stringify({sorted:ids.length,item_objects_unchanged:true,semantic_hashes_unchanged:true,receipt:`${dir}/registration.json`}));

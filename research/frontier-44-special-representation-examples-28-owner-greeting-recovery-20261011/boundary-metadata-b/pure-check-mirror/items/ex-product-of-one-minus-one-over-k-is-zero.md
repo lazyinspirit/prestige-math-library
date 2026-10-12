@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-product-of-one-minus-one-over-k-is-zero.md

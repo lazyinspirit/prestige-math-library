@@ -49,7 +49,7 @@
 //                         contract, including each A page's actual companion,
 //                         retain that category in both the plan and their
 //                         top-level `library/<category>/` location
-//  19. set-theory-boundary no Foundations page may directly or transitively
+//  19. set-theory-boundary no Set Theory page may directly or transitively
 //                         require the Set Theory recorded-not-proved catalogue
 //
 // Exit code 0 iff there are no hard errors.
@@ -576,9 +576,9 @@ for (const p of pages) {
   if ((p.forwardRefs ?? []).length && p.kind !== 'B')
     err('forward-whitelist', `page ${p.id} declares forwardRefs but is not a B page; only examples pages are leaves`);
   const closure = reqClosure(p.id);
-  if (p.category === 'foundations' && closure.has(SET_THEORY_DEFERRED_PAGE))
-    err('set-theory-boundary', `page ${p.id} transitively requires ${SET_THEORY_DEFERRED_PAGE}; Foundations must build the recorded results and may never consume that catalogue as a prerequisite`);
-  if (p.category === 'foundations') {
+  if (p.category === 'set-theory' && closure.has(SET_THEORY_DEFERRED_PAGE))
+    err('set-theory-boundary', `page ${p.id} transitively requires ${SET_THEORY_DEFERRED_PAGE}; Set Theory must build the recorded results and may never consume that catalogue as a prerequisite`);
+  if (p.category === 'set-theory') {
     for (const consumedPageId of [p.id, ...closure]) {
       const roots = new Set([
         ...((pageById.get(consumedPageId)?.items ?? []).map((it) => it.id)),

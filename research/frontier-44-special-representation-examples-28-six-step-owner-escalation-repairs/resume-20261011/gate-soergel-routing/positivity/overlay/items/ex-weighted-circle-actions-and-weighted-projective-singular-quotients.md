@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-weighted-circle-actions-and-weighted-projective-singular-quotients.md

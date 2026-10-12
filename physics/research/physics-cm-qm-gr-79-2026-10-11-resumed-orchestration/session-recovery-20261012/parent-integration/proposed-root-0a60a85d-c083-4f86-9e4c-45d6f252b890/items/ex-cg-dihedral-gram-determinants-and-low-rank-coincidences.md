@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-dihedral-gram-determinants-and-low-rank-coincidences.md

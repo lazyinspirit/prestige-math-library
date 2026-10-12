@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-killed-and-absorbed-kernels-are-probability-kernels.md

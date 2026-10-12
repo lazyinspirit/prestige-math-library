@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nondegenerate-local-holder-beltrami-coordinates.md

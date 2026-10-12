@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-geometric-oscillation-decay-implies-a-holder-modulus.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-regular-lagrangians-need-not-be-hyperregular.md

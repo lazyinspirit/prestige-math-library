@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-complex-representations-of-a-cyclic-group-of-order-n-are-the-n-characters.md

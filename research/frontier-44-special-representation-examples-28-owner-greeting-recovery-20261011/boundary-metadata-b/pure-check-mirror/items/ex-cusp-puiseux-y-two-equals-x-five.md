@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cusp-puiseux-y-two-equals-x-five.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-closure-unchanged-across-an-integral-intermediate-domain.md

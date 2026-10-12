@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lc-ultraproduct-quotient-well-defined.md

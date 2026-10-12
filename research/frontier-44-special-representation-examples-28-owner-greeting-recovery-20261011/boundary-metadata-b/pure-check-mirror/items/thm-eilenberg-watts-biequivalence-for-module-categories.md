@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-eilenberg-watts-biequivalence-for-module-categories.md

@@ -50,11 +50,9 @@ bounded interval is Borel measurable.
 
 **Proof technique:** refutation.
 
-1.1 By [L1], the compact set $K$ has positive measure, so [L2] provides a [L1, L2, L3, L4, construct]
-nonmeasurable subset $N\subseteq K$. Put $E:=\psi^{-1}[N]\subseteq C$. Since $C$ is measurable and null by [L3], step 1.1 and [L4] show that $E$ is Lebesgue measurable and null.
+1.1 By [L1], the compact set $K$ has positive measure, so [L2] provides a nonmeasurable subset $N\subseteq K$. Put $E:=\psi^{-1}[N]\subseteq C$. Since $C$ is measurable and null by [L3], [L4] shows that $E$ is Lebesgue measurable and null. [L1, L2, L3, L4, construct]
 
-2.1 Let $h:=\mathbf 1_E$ on $[0,1]$. If $x\notin C$, then [step 1.1, L3, L5, L6]
-an open neighbourhood of $x$ disjoint from $C$, hence disjoint from $E$, so $h$ is identically $0$ there. Thus every discontinuity of $h$ lies in $C$. Since $C$ has Lebesgue measure $0$ by [L3], [L6] makes $h$ Riemann integrable on $[0,1]$.
+2.1 Let $h:=\mathbf 1_E$ on $[0,1]$. If $x\notin C$, then [step 1.1, L3, L5, L6] an open neighbourhood of $x$ disjoint from $C$, hence disjoint from $E$, so $h$ is identically $0$ there. Thus every discontinuity of $h$ lies in $C$. Since $C$ has Lebesgue measure $0$ by [L3], [L6] makes $h$ Riemann integrable on $[0,1]$. [step 1.1, L3, L5, L6]
 
-3.1 Suppose instead that $h$ were Borel measurable on $[0,1]$. [step 1.1, step 2.1, L1, L7, L8, assume-contra, discharge-contradiction]
-Then $E=h^{-1}((1/2,\infty))$ would be Borel in the subspace $[0,1]$. Because $E\subseteq C$, [L7] makes $E$ Borel in the subspace $C$. The restriction $\psi|_C:C\to K$ is a homeomorphism by [L1], so its inverse $(\psi|_C)^{-1}:K\to C$ is continuous; applying [L8] to that inverse shows that $N=\psi[E]$ is Borel in the subspace $K$. Since $K$ is compact and therefore closed in $\mathbb R$, [L7] makes $N$ Borel in $\mathbb R$, contradicting the choice of $N$. Therefore $h$ is Riemann integrable but not Borel measurable, and the statement is false. ∎
+3.1 Suppose instead that $h$ were Borel measurable on $[0,1]$. Then $E=h^{-1}((1/2,\infty))$ would be Borel in the subspace $[0,1]$. Because $E\subseteq C$, [L7] makes $E$ Borel in the subspace $C$. The restriction $\psi|_C:C\to K$ is a homeomorphism by [L1], so its inverse $(\psi|_C)^{-1}:K\to C$ is continuous; applying [L8] to that inverse shows that $N=\psi[E]$ is Borel in the subspace $K$. Since $K$ is compact and therefore closed in $\mathbb R$, [L7] makes $N$ Borel in $\mathbb R$, contradicting the choice of $N$. Therefore $h$ is Riemann integrable but not Borel measurable, and the statement is false. [step 1.1, step 2.1, L1, L7, L8, assume-contra, discharge-contradiction] ∎
+

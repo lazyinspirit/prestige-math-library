@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-auslander-buchsbaum-projective-dimension-one.md

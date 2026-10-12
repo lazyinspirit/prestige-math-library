@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-scheme-ring-anti-equivalence.md

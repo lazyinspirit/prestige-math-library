@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-classical-oscillator-is-sine-of-one-over-x.md

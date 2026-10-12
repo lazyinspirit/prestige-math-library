@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-kg-is-local-iff-g-is-a-p-group.md

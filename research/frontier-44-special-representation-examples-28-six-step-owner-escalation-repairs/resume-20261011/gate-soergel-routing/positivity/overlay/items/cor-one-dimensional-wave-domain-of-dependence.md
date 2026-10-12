@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-one-dimensional-wave-domain-of-dependence.md

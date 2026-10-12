@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups.md

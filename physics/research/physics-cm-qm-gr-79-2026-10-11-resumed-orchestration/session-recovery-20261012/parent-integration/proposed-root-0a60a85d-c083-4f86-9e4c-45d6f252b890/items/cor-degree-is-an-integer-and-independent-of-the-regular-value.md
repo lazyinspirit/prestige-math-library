@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-degree-is-an-integer-and-independent-of-the-regular-value.md

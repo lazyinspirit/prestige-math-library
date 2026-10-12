@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ergodic-imprimitivity-systems-with-regular-orbits-concentrate-on-one-orbit.md

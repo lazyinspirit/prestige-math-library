@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-nonzero-verma-submodule-contains-a-singular-vector.md

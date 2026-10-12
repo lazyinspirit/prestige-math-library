@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-indefinite-and-semidefinite-matrices-fail-positive-diagonal-cholesky.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-translations-preserve-compactly-supported-continuous-functions.md

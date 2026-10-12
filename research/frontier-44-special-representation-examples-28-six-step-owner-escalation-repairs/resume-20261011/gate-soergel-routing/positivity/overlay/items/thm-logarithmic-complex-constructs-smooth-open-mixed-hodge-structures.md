@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-logarithmic-complex-constructs-smooth-open-mixed-hodge-structures.md

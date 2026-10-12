@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-irreducible-space-open-intersection-criterion.md

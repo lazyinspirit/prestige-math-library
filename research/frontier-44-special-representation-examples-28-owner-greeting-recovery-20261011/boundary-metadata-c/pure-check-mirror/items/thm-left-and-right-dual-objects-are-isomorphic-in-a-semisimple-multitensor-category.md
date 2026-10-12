@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-left-and-right-dual-objects-are-isomorphic-in-a-semisimple-multitensor-category.md

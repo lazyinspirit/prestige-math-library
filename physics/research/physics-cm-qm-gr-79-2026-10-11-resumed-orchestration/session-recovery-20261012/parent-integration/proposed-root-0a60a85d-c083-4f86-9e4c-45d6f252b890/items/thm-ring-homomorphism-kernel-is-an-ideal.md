@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ring-homomorphism-kernel-is-an-ideal.md

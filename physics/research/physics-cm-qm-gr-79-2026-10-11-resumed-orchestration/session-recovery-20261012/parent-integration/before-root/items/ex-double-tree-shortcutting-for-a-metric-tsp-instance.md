@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-double-tree-shortcutting-for-a-metric-tsp-instance.md

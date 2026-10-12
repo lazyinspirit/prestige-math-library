@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-coherent-cohomology-finite-and-vanishing.md

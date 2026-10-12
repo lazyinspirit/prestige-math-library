@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-locus-and-normal-orbit-closure.md

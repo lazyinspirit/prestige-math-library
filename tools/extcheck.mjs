@@ -127,7 +127,7 @@ try {
         const pageId = scalar(fm, 'page') ?? basename(entry.name, '.md');
         const pageItems = [...list(fm, 'items'), ...list(fm, 'examples')];
         itemsOnLibraryPage.set(pageId, pageItems);
-        if (category === 'foundations') {
+        if (category === 'set-theory') {
           for (const id of pageItems) {
             const r = resolve(id);
             if (r) foundationsItems.add(r);
@@ -156,7 +156,7 @@ try {
     for (const req of pageById.get(id)?.requires ?? []) collectPage(req);
   };
   for (const page of plan.pages ?? [])
-    if (page.category === 'foundations') collectPage(page.id);
+    if (page.category === 'set-theory') collectPage(page.id);
   for (const id of consumedPages) {
     const page = pageById.get(id);
     const roots = [
@@ -212,7 +212,7 @@ for (const id of [...foundationsItems].sort()) {
   if (!includesItem(itemScope, id)) continue;
   const path = deferredPath(id);
   if (path)
-    err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
+    err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Set Theory dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
 }
 
 // ---------------------------------------------------- retired active fields

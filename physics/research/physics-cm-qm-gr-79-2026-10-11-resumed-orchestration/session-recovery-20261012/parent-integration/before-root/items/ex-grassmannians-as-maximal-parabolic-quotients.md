@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-grassmannians-as-maximal-parabolic-quotients.md

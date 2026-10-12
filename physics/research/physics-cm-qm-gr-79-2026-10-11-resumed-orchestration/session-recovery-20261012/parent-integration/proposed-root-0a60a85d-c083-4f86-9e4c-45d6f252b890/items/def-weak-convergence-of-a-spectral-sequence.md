@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weak-convergence-of-a-spectral-sequence.md

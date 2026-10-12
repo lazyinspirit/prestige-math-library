@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-localisation-and-polynomial-extension-of-regular-rings.md

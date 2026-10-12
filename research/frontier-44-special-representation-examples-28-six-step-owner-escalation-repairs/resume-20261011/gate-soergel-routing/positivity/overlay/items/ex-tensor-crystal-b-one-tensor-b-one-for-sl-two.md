@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-tensor-crystal-b-one-tensor-b-one-for-sl-two.md

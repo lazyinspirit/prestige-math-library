@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-rational-and-jordan-forms-of-one-matrix-over-q-and-c.md

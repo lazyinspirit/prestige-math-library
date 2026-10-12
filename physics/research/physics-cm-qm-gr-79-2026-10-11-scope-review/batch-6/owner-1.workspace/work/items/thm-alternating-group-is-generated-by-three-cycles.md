@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-alternating-group-is-generated-by-three-cycles.md

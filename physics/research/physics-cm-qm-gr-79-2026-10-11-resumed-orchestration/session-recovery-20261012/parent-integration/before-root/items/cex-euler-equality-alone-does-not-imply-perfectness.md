@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-euler-equality-alone-does-not-imply-perfectness.md

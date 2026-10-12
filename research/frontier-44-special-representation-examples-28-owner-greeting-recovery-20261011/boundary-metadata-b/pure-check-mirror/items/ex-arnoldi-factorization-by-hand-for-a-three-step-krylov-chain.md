@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-arnoldi-factorization-by-hand-for-a-three-step-krylov-chain.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-isomorphisms-form-the-maximal-subgroupoid.md

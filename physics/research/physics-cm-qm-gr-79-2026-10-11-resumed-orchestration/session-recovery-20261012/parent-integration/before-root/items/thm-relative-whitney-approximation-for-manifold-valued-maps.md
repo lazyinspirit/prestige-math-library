@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-relative-whitney-approximation-for-manifold-valued-maps.md

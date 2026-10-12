@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-thom-isomorphism-for-the-tautological-complex-line-over-cp-infinity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-filtered-colimits-need-not-commute-with-infinite-products-in-set.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-positive-left-derived-functors-are-effaceable-by-projectives.md

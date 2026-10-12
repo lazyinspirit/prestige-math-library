@@ -56,8 +56,7 @@ Let $(X,\mathcal A,\mu)$ be a measure space.
 
 **Proof technique:** Use the previous proposition to identify the null functions as the kernel of the seminorm. Hence the seminorm is constant on cosets and separates points on the quotient, while Minkowski and homogeneity descend from representatives.
 
-1.1 Suppose first $1\le p<\infty$ and $f-g\in\mathcal N_p(\mu)$. Then $\|f-g\|_p=0$. Applying Minkowski twice yields [L2, L3]
-$$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$ so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined.
+1.1 Suppose first $1\le p<\infty$ and $f-g\in\mathcal N_p(\mu)$. Then $\|f-g\|_p=0$. Applying Minkowski twice yields [L2, L3] $$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p,$$ so $\|f\|_p=\|g\|_p$. Thus $\|[f]\|_p:=\|f\|_p$ is well defined.
 
 1.2 For $p=\infty$, if $f-g\in\mathcal N_\infty(\mu)$ then $f=g$ almost everywhere. Any essential bound for $f$ is therefore an essential bound for $g$ and conversely, so $\|f\|_\infty=\|g\|_\infty$. Thus $\|[f]\|_\infty:=\|f\|_\infty$ is well defined. [L2, L4]
 
@@ -65,4 +64,4 @@ $$\|f\|_p\le\|g\|_p+\|f-g\|_p=\|g\|_p,\qquad \|g\|_p\le\|f\|_p+\|f-g\|_p=\|f\|_p
 
 2.1 By [L1] and [L5], each quotient $L^p(\mu)$ is already a real vector space. The representative functionals are homogeneous, and [L3] supplies the triangle inequality on representatives; steps 1.1 and 1.2 show that these formulas depend only on the class, so homogeneity and triangle inequality descend to the quotient. [step 1.1, step 1.2, L1, L3, L5]
 
-3.1 Steps 2.1 and 1.3 verify the three norm axioms named in [L6]. Therefore $(L^p(\mu),\|\cdot\|_p)$ is a normed space for every $1\le p\le\infty$. [step 2.1, step 1.3, L6] ∎
+3.1 Steps 2.1 and 1.3 verify the three norm axioms named in [L6]. Therefore $(L^p(\mu),\|\cdot\|_p)$ is a normed space for every $1\le p\le\infty$. [step 2.1, step 1.3, L6] ∎ 

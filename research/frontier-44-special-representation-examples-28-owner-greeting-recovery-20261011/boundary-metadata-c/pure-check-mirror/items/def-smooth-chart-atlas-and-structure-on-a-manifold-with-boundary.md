@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cw-quotient-induces-relative-singular-homology-isomorphisms.md

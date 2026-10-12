@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-gelfand-transform-of-a-banach-algebra-need-not-be-isometric.md

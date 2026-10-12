@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pettis-measurability-criterion-for-strong-measurability.md

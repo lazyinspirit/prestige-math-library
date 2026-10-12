@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-full-algebraic-dual-of-a-verma-module-is-not-in-o.md

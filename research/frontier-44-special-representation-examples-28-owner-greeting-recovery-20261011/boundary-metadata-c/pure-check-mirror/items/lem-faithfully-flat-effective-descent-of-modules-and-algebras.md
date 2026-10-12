@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-faithfully-flat-effective-descent-of-modules-and-algebras.md

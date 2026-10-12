@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-row-padding-does-not-preserve-a-kronecker-coefficient-before-stability.md

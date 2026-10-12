@@ -41,9 +41,8 @@ An inner product on a finite-dimensional real vector space determines an orienta
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], the same standard inner product is compatible with both the orientation represented by $(e_1,e_2,e_3)$ and the opposite one represented by $(e_2,e_1,e_3)$; neither is preferred by the metric. [L1]
+ 1.1 By [L1], the same standard inner product is compatible with both the orientation represented by $(e_1,e_2,e_3)$ and the opposite one represented by $(e_2,e_1,e_3)$; neither is preferred by the metric. [L1]
 
 1.2 By [L2], these are genuinely different orientations: the change-of-basis determinant is $-1$, so the two bases lie in opposite classes. [L2]
 
-2.1 Since one inner product is compatible with two different orientations, the inner product does not determine an orientation. [step 1.1, step 1.2] ∎
+2.1 Since one inner product is compatible with two different orientations, the inner product does not determine an orientation. [step 1.1, step 1.2] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-periodic-symmetric-hyperbolic-smooth-persistence.md

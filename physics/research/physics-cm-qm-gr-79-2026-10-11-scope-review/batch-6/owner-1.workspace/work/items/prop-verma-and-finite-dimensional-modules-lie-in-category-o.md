@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-verma-and-finite-dimensional-modules-lie-in-category-o.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimizing-along-a-geodesic-is-an-initial-interval-property.md

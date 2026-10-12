@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm10-degenerate-line-mass-singular-inertia.md

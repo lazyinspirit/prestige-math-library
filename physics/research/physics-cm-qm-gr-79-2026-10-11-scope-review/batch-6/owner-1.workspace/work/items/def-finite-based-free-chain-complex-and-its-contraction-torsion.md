@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-finite-based-free-chain-complex-and-its-contraction-torsion.md

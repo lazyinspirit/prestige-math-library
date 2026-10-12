@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-short-exact-sequence-of-vector-bundles-has-a-canonical-splitting.md

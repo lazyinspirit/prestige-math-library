@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-graph-polynomial-map-closed-subscheme.md

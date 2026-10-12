@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-green-vertex-source-existence-and-conjugacy.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-distribution-convolution-preserves-schwartz-and-tempered-spaces.md

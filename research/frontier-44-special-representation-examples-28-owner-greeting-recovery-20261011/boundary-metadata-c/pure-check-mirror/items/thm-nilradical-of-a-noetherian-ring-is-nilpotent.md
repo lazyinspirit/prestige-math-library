@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nilradical-of-a-noetherian-ring-is-nilpotent.md

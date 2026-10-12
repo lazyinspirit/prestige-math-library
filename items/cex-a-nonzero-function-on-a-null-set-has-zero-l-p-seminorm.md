@@ -37,11 +37,9 @@ Every nonzero measurable function has positive $L^p$ seminorm.
 
 **Proof technique:** Use the indicator of a countable null subset of $[0,1]$. It is not the zero function, but its $p$-seminorm and essential supremum both vanish.
 
-1.1 Let $f:=\chi_{\mathbb Q\cap[0,1]}$. Then $f$ is not the zero function, [given]
-because $f(q)=1$ for every rational $q\in[0,1]$.
+1.1 Let $f:=\chi_{\mathbb Q\cap[0,1]}$. Then $f$ is not the zero function, [given] because $f(q)=1$ for every rational $q\in[0,1]$. [given]
 
-1.2 By [L1], the support of $f$ is null, so $f=0$ almost everywhere. Therefore [L1, L2]
-[L2] gives $\|f\|_p=0$ in every finite-$p$ range treated on the page, and also $\|f\|_\infty=0$.
+1.2 By [L1], the support of $f$ is null, so $f=0$ almost everywhere. Therefore [L1, L2] [L2] gives $\|f\|_p=0$ in every finite-$p$ range treated on the page, and also $\|f\|_\infty=0$. [L1, L2]
 
-2.1 Thus a nonzero measurable function can have zero $L^p$ seminorm. [step 1.1, step 1.2]
-∎
+2.1 Thus a nonzero measurable function can have zero $L^p$ seminorm. [step 1.1, step 1.2] ∎
+

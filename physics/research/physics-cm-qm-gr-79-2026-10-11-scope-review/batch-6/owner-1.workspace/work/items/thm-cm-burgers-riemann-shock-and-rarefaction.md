@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-burgers-riemann-shock-and-rarefaction.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invariance-passes-to-orthogonal-complements-under-the-adjoint.md

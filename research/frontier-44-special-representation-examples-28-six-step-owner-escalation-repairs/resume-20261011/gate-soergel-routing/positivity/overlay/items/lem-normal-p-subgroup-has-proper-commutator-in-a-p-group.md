@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-p-subgroup-has-proper-commutator-in-a-p-group.md

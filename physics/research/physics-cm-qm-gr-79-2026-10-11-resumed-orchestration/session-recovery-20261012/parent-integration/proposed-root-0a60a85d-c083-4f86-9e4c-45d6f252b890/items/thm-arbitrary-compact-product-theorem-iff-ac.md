@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arbitrary-compact-product-theorem-iff-ac.md

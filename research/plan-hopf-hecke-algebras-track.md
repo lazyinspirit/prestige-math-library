@@ -42,7 +42,7 @@ centralizers are only over Q(q); root-of-unity or modular equality is not
 promised by that theorem.
 
 **Distinct homes.** General group representations stay in Representation
-Theory of Groups. Special Topics in Representation Theory owns the existing
+Theory of Groups. The four specialized representation-theory categories own the existing
 specialized representation/application tracks. Braid Groups stays independent.
 The drafted scheme-theory pair
 `affine-group-schemes-hopf-algebras-and-rational-representations` keeps its home;

@@ -41,8 +41,7 @@ is a well-defined injective linear section of the quotient map $\pi:V^{\otimes k
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], $\Lambda^kV$ is a quotient of $V^{\otimes k}$, and the structure map $\pi$ is a surjection with nonzero kernel: for $\dim V\ge2$ and $k\ge2$, extend a nonzero vector $v$ to a basis $(v,e_2,\ldots,e_n)$; then the pure tensor $v\otimes v\otimes e_3\otimes\cdots\otimes e_k\in V^{\otimes k}$ (with the tail omitted when $k=2$) is nonzero yet $\pi$ of it is $v\wedge v\wedge e_3\wedge\cdots\wedge e_k=0$ because the first two entries repeat, so the canonical construction presents $\Lambda^kV$ as a quotient, not a subspace. [L1]
+ 1.1 By [L1], $\Lambda^kV$ is a quotient of $V^{\otimes k}$, and the structure map $\pi$ is a surjection with nonzero kernel: for $\dim V\ge2$ and $k\ge2$, extend a nonzero vector $v$ to a basis $(v,e_2,\ldots,e_n)$; then the pure tensor $v\otimes v\otimes e_3\otimes\cdots\otimes e_k\in V^{\otimes k}$ (with the tail omitted when $k=2$) is nonzero yet $\pi$ of it is $v\wedge v\wedge e_3\wedge\cdots\wedge e_k=0$ because the first two entries repeat, so the canonical construction presents $\Lambda^kV$ as a quotient, not a subspace. [L1]
 
 1.2 For the formula-defined antisymmetrization, [L2] gives
 
@@ -52,4 +51,4 @@ $$\pi(\operatorname{Alt}(v_1\wedge\cdots\wedge v_k))=\sum_\sigma\operatorname{sg
 
 2.1 Over a field whose characteristic divides $k!$, step 1.2 gives $\pi\circ\operatorname{Alt}=k!\cdot\operatorname{id}=0$, while $\Lambda^kV\ne0$ by the hypothesis $\dim V\ge k$; a section must satisfy $\pi\circ s=\operatorname{id}$, so $\operatorname{Alt}$ is not a section over such a field. The concrete witness is $F=\mathbb F_2$, $V=\mathbb F_2^2$, $k=2$: $\operatorname{Alt}(e_1\wedge e_2)=e_1\otimes e_2+e_2\otimes e_1$ and $\pi$ of that is $2\,e_1\wedge e_2=0$. [step 1.1, step 1.2]
 
-3.1 Step 2.1 gives a field $F$, a vector space $V$, and a degree $k$ for which the displayed formula is not a section of $\pi$, so the universal claim "for every field" is false. [step 2.1] ∎
+3.1 Step 2.1 gives a field $F$, a vector space $V$, and a degree $k$ for which the displayed formula is not a section of $\pi$, so the universal claim "for every field" is false. [step 2.1] ∎ 

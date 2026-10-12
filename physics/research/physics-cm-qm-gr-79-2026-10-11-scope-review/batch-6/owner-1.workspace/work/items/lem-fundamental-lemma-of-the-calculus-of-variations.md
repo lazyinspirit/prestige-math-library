@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fundamental-lemma-of-the-calculus-of-variations.md

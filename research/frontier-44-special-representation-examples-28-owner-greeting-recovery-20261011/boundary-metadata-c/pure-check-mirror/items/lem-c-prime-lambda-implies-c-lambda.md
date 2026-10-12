@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-c-prime-lambda-implies-c-lambda.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-intersection-pairing-needs-cartier-or-cycle-hypotheses.md

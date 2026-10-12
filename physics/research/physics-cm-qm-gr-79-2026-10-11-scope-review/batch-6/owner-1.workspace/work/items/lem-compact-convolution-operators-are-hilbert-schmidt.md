@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-convolution-operators-are-hilbert-schmidt.md

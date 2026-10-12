@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-equilibrium-and-lyapunov-stability.md

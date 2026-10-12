@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-curvilinear-triangulation-of-a-compact-riemannian-surface.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-banach-valued-cauchy-integral-vanishes.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-vertex-cover-reduces-to-set-cover.md

@@ -39,12 +39,7 @@ continuous almost everywhere.
 
 **Proof technique:** direct.
 
-1.1 By [L2], there is a continuous function $u : \mathbb{R} \to \mathbb{R}$ with [L2, choose]
-$S = \{x : u(x)=0\}$. Put $f_0:=f_1$, and for $n \ge 1$ define
+1.1 By [L2], there is a continuous function $u : \mathbb{R} \to \mathbb{R}$ with $S = \{x : u(x)=0\}$. Put $f_0:=f_1$, and for $n \ge 1$ define $$f_n(x) := \frac{1}{1+n\,u(x)^2}.$$ Each $f_n$ is continuous, because it is built from $u$ by continuous algebraic operations and the denominator is everywhere positive. [L2, choose]
 
-$$f_n(x) := \frac{1}{1+n\,u(x)^2}.$$
+2.1 If $x \in S$, then $u(x)=0$ and $f_n(x)=1$ for every $n$. If $x \notin S$, [step 1.1, L1] then $u(x)^2>0$, so $1+n\,u(x)^2 \to +\infty$ and $f_n(x)\to0$. Thus the pointwise limit is $\mathbf{1}_S$. Since $S$ is closed and has empty interior by [L1], every point of $S$ is a boundary point of $S$, and the indicator $\mathbf{1}_S$ is discontinuous at every such point. Because $S$ is not Lebesgue null by [L1], the discontinuity set has positive measure. [step 1.1, L1]. [step 1.1, L1] ∎
 
-Each $f_n$ is continuous, because it is built from $u$ by continuous algebraic operations and the denominator is everywhere positive. [L2, choose]
-
-2.1 If $x \in S$, then $u(x)=0$ and $f_n(x)=1$ for every $n$. If $x \notin S$, [step 1.1, L1]
-then $u(x)^2>0$, so $1+n\,u(x)^2 \to +\infty$ and $f_n(x)\to0$. Thus the pointwise limit is $\mathbf{1}_S$. Since $S$ is closed and has empty interior by [L1], every point of $S$ is a boundary point of $S$, and the indicator $\mathbf{1}_S$ is discontinuous at every such point. Because $S$ is not Lebesgue null by [L1], the discontinuity set has positive measure. [step 1.1, L1] ∎

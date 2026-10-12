@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-extension-chain-contraction-is-strict.md

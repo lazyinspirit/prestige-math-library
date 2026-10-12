@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-affine-flux-reduces-the-entropy-semigroup-to-translation.md

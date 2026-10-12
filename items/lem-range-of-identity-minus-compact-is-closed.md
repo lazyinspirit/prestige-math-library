@@ -52,16 +52,15 @@ the distance being the quotient seminorm of [[def-quotient-seminorm]].
 
 1.1 $N$ is a closed linear subspace: $A$ is bounded hence continuous by [A2], so $x_j\in N$ with $x_j\to x$ gives $Ax_j=0\to Ax$, whence $Ax=0$ by [A3]. [A2, A3]
 
-1.2 If the estimate of [A1] fails for every $C$, then for each fixed $n\in\mathbb N$ the set
-$$W_n:=\{w:\operatorname{dist}(w,N)=1,\ \|w\|\le2,\ \|Aw\|<1/(n+1)\}$$
-is nonempty: taking $C=n+1$ gives $x$ with $\operatorname{dist}(x,N)>(n+1)\|Ax\|\ge0$, so the distance is positive; choose $m\in N$ with $\|x-m\|<2\operatorname{dist}(x,N)$ by the definition of the infimum, and set $w:=(x-m)/\operatorname{dist}(x,N)$. Scaling the distance gives $\operatorname{dist}(w,N)=1$, the norm bound $\|w\|<2$ holds, and $\|Aw\|=\|Ax\|/\operatorname{dist}(x,N)<1/(n+1)$ because $Am=0$. [step 1.1, A1, A3, algebra]
+2.1 If the estimate of [A1] fails for every $C$, then for each fixed $n\in\mathbb N$ the set $$W_n:=\{w:\operatorname{dist}(w,N)=1,\ \|w\|\le2,\ \|Aw\|<1/(n+1)\}$$ is nonempty: taking $C=n+1$ gives $x$ with $\operatorname{dist}(x,N)>(n+1)\|Ax\|\ge0$, so the distance is positive; choose $m\in N$ with $\|x-m\|<2\operatorname{dist}(x,N)$ by the definition of the infimum, and set $w:=(x-m)/\operatorname{dist}(x,N)$. Scaling the distance gives $\operatorname{dist}(w,N)=1$, the norm bound $\|w\|<2$ holds, and $\|Aw\|=\|Ax\|/\operatorname{dist}(x,N)<1/(n+1)$ because $Am=0$. [step 1.1, A1, A3, algebra]
 
-2.1 Assume the estimate fails. By Countable Choice in [A2], select $w_n\in W_n$ for every $n$ as in [step 1.2], and put $M:=\{x\in X:\|x\|\le2\}$. The sequence $(w_n)$ lies in the bounded set $M$, and $K$ is compact, so by [A2] there is a strictly increasing $j$ with $Kw_{n_j}\to z$ for some $z\in X$. [step 1.2, A2]
+3.1 Assume the estimate fails. By Countable Choice in [A2], select $w_n\in W_n$ for every $n$ as in [step 2.1], and put $M:=\{x\in X:\|x\|\le2\}$. The sequence $(w_n)$ lies in the bounded set $M$, and $K$ is compact, so by [A2] there is a strictly increasing $j$ with $Kw_{n_j}\to z$ for some $z\in X$. [step 2.1, A2]
 
-3.1 Along that subsequence, $w_{n_j}=Aw_{n_j}+Kw_{n_j}\to z$, because $\|Aw_{n_j}\|<1/(n_j+1)\to0$ by [step 1.2] and $Kw_{n_j}\to z$ by [step 2.1]. [step 1.2, step 2.1, algebra]
+4.1 Along that subsequence, $w_{n_j}=Aw_{n_j}+Kw_{n_j}\to z$, because $\|Aw_{n_j}\|<1/(n_j+1)\to0$ by [step 2.1] and $Kw_{n_j}\to z$ by [step 3.1]. [step 2.1, step 3.1, algebra]
 
-4.1 The limit $z$ lies in $N$: by [step 3.1] and the continuity of $A$, $Az=\lim_jAw_{n_j}=0$. [step 3.1, A2, A3]
+5.1 The limit $z$ lies in $N$: by [step 4.1] and the continuity of $A$, $Az=\lim_jAw_{n_j}=0$. [step 4.1, A2, A3]
 
-5.1 But this contradicts $\operatorname{dist}(w_{n_j},N)=1$: by [A3] the numbers $\operatorname{dist}(w_{n_j},N)$ converge to $\operatorname{dist}(z,N)$, so $\operatorname{dist}(z,N)=1$, whereas $z\in N$ forces $\operatorname{dist}(z,N)=0$. [step 1.2, step 3.1, step 4.1, A3]
+6.1 But this contradicts $\operatorname{dist}(w_{n_j},N)=1$: by [A3] the numbers $\operatorname{dist}(w_{n_j},N)$ converge to $\operatorname{dist}(z,N)$, so $\operatorname{dist}(z,N)=1$, whereas $z\in N$ forces $\operatorname{dist}(z,N)=0$. [step 2.1, step 4.1, step 5.1, A3]
 
-6.1 Hence the estimate of [A1] holds for some real $C>0$, and then [A1] gives that $\operatorname{ran}A$ is closed. [step 5.1, A1] ∎
+7.1 Hence the estimate of [A1] holds for some real $C>0$, and then [A1] gives that $\operatorname{ran}A$ is closed. [step 6.1, A1] ∎
+

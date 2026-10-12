@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-strict-positivity-for-nontrivial-nonnegative-heat-solutions.md

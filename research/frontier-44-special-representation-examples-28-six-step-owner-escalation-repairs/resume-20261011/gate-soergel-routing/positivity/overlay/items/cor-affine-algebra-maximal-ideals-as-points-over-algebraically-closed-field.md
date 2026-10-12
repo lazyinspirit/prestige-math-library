@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-affine-algebra-maximal-ideals-as-points-over-algebraically-closed-field.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-central-product-of-two-quaternion-groups-is-a-central-product-of-two-dihedral-groups.md

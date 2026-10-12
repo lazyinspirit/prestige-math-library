@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-prime-graphs-are-the-graphs-that-are-not-substitutions.md

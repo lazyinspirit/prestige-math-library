@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-classical-varieties-equivalent-integral-separated-finite-type-schemes.md

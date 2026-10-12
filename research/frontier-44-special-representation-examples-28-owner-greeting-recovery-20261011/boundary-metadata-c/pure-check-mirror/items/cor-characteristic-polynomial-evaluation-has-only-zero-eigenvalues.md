@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-characteristic-polynomial-evaluation-has-only-zero-eigenvalues.md

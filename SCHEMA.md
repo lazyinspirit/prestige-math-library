@@ -216,6 +216,10 @@ in `## Definition` triggers the same direct and indirect consumer duties.
 
 ## Pages and categories
 
+Set Theory uses the internal category identifier `set-theory` and directory
+`library/set-theory/` (renamed from `foundations` on 2026-10-12). Page and item
+identities are unchanged; historical run receipts retain their recorded paths.
+
 - Page file: `library/<category>/<page>.md`. Frontmatter uses `page`, `title`,
   `status`, `items: [id, ...]`, and `examples: [id, ...]`; the body is the page
   summary. The two lists control placement, not item kind. Entries must resolve

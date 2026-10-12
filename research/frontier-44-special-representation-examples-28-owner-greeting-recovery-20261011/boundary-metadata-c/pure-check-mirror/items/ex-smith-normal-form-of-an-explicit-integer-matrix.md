@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-smith-normal-form-of-an-explicit-integer-matrix.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-standard-complementary-pair-fills-an-n-ball.md

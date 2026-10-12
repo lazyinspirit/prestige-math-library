@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-complementary-series-converge-to-the-trivial-representation.md

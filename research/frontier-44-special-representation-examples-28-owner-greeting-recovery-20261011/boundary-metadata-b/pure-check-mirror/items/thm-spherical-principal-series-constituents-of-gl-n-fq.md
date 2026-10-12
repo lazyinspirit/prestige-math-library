@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spherical-principal-series-constituents-of-gl-n-fq.md

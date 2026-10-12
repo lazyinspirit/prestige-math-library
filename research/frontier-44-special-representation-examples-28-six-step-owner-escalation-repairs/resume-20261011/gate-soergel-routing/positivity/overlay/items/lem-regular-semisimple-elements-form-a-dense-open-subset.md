@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-semisimple-elements-form-a-dense-open-subset.md

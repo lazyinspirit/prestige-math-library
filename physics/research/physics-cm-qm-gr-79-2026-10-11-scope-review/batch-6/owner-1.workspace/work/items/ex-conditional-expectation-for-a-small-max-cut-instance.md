@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conditional-expectation-for-a-small-max-cut-instance.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-cokernel-of-a-chain-map-is-computed-degreewise.md

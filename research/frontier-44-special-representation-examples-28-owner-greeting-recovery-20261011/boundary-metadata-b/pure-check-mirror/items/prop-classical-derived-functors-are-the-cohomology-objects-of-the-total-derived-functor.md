@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-classical-derived-functors-are-the-cohomology-objects-of-the-total-derived-functor.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-type-r-s-tensor-on-a-finite-dimensional-vector-space.md

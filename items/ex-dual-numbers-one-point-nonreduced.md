@@ -42,5 +42,4 @@ and it is not reduced.
 
 2.1 Every element outside $(\epsilon)$ is a unit by step 1.1, so $R_{(\epsilon)}=R$. The residue-field definition therefore gives $\kappa((\epsilon))=R_{(\epsilon)}/(\epsilon)R_{(\epsilon)}\cong R/(\epsilon)\cong k$. [step 1.1]
 
-3.1 This is the asserted one-point nonreduced scheme. [step 2.1, step 1.2] ∎
- 
+3.1 This is the asserted one-point nonreduced scheme. [step 2.1, step 1.2] ∎  

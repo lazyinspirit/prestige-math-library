@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-and-continuous-real-singular-cohomology-agree.md

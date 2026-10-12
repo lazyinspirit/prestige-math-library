@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-irreducible-separable-polynomial-iff-galois-group-transitive.md

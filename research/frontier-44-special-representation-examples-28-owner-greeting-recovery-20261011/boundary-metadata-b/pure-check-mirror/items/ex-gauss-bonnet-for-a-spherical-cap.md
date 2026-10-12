@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gauss-bonnet-for-a-spherical-cap.md

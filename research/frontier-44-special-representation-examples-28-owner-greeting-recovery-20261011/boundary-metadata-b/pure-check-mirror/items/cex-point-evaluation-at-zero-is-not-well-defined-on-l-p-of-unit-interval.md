@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-point-evaluation-at-zero-is-not-well-defined-on-l-p-of-unit-interval.md

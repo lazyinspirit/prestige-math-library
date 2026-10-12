@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-spectrum-in-a-finite-dimensional-matrix-algebra.md

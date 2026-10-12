@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-diagonal-quasi-compact-iff-quasi-separated.md

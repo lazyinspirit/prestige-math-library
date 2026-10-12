@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-smoothing-a-piecewise-linear-real-valued-function-relative-to-a-closed-set.md

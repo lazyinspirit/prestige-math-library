@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-fock-and-equilibrium-vacuum-emission-dyson-convergence.md

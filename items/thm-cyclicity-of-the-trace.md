@@ -64,5 +64,4 @@ $$\operatorname{tr}(AB)=\operatorname{tr}(BA).$$
 
 2.1 **Cyclicity for general trace-class operators.** By [A1] take a nuclear representation $Tx=\sum_{j\ge1}\langle x,u_j\rangle v_j$ with $C=\sum_{j\ge1}\|u_j\|\|v_j\|<\infty$ and partial sums $R_n=\sum_{1\le j\le n}\langle\cdot,u_j\rangle v_j$ for $n\in\mathbb N$, so $R_0=0$ and $R_n\to T$ in operator norm. Then $SR_n\to ST$ and $R_nS\to TS$: both errors are at most $\|S\|\|T-R_n\|$ by the operator-norm bound. Their terms give nuclear representations $ST=\sum_j\langle\cdot,u_j\rangle Sv_j$ and $TS=\sum_j\langle\cdot,S^*u_j\rangle v_j$. Their sums of norm products are at most $\|S\|C$ and $\|S^*\|C=\|S\|C$, respectively. Both products are already trace class by step 1.1, so [A1] gives $\operatorname{tr}(ST)=\sum_j\langle Sv_j,u_j\rangle=\sum_j\langle v_j,S^*u_j\rangle=\operatorname{tr}(TS)$ by [A4], term by term in absolutely convergent series. No ambient Hilbert basis is used in this part. [step 1.1, A1, A4, A5]
 
-
-3.1 **Conclusion.** The general cyclicity statement is [step 2.1] with [step 1.1], and the Hilbert–Schmidt statement is [step 1.3]. [step 1.1, step 1.3, step 2.1] ∎
+ 3.1 **Conclusion.** The general cyclicity statement is [step 2.1] with [step 1.1], and the Hilbert–Schmidt statement is [step 1.3]. [step 1.1, step 1.3, step 2.1] ∎ 

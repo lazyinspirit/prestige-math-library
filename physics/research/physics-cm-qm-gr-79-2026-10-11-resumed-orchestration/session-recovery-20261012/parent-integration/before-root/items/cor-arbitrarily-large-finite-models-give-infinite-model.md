@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-arbitrarily-large-finite-models-give-infinite-model.md

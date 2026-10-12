@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-exponential-map-is-natural-for-lie-group-homomorphisms.md

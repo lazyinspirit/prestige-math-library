@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-equivalent-characterizations-of-a-totally-geodesic-submanifold.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-kolmogorov-construction-of-the-canonical-gaussian-process.md

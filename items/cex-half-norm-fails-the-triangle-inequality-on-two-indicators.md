@@ -38,8 +38,7 @@ triangle inequality.
 
 **Proof technique:** Take two disjoint indicators of equal positive measure. Then the $1/2$-functional of the sum exceeds the sum of the two $1/2$-functionals.
 
-1.1 On $[0,1]$ with Lebesgue measure, let [L1, given, algebra]
-$f:=\chi_{[0,1/2]}$ and $g:=\chi_{(1/2,1]}$. Then $$\|f\|_{1/2}=\left(\int_0^{1/2} 1\,d\lambda\right)^2=\frac14,\qquad \|g\|_{1/2}=\frac14,$$ while $$\|f+g\|_{1/2}=\left(\int_0^1 1\,d\lambda\right)^2=1.$$
+1.1 On $[0,1]$ with Lebesgue measure, let [L1, given, algebra] $f:=\chi_{[0,1/2]}$ and $g:=\chi_{(1/2,1]}$. Then $$\|f\|_{1/2}=\left(\int_0^{1/2} 1\,d\lambda\right)^2=\frac14,\qquad \|g\|_{1/2}=\frac14,$$ while $$\|f+g\|_{1/2}=\left(\int_0^1 1\,d\lambda\right)^2=1.$$ [L1, given, algebra]
 
-2.1 Therefore [step 1.1, L1]
-$$\|f+g\|_{1/2}=1>\frac14+\frac14=\|f\|_{1/2}+\|g\|_{1/2},$$ so the triangle inequality fails. This is exactly the phenomenon summarized in [L1]. ∎
+2.1 Therefore [step 1.1, L1] $$\|f+g\|_{1/2}=1>\frac14+\frac14=\|f\|_{1/2}+\|g\|_{1/2},$$ so the triangle inequality fails. This is exactly the phenomenon summarized in [L1]. [step 1.1, L1] ∎
+

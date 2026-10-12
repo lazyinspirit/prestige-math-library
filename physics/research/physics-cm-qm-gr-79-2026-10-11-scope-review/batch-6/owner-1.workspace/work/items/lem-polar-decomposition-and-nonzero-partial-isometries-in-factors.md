@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polar-decomposition-and-nonzero-partial-isometries-in-factors.md

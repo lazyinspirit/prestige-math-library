@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sylow-characterizations-of-finite-nilpotence.md

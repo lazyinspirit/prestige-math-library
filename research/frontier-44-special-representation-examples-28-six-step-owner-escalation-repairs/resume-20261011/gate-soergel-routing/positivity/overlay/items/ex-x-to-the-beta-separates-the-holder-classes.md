@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-to-the-beta-separates-the-holder-classes.md

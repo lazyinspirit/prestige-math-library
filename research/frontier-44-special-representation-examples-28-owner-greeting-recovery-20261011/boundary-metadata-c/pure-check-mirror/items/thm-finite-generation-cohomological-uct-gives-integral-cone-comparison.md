@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-generation-cohomological-uct-gives-integral-cone-comparison.md

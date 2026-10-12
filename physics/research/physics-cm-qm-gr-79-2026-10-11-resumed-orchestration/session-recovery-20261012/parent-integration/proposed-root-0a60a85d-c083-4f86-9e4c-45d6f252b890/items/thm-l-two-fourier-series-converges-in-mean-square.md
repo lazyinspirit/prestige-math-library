@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-two-fourier-series-converges-in-mean-square.md

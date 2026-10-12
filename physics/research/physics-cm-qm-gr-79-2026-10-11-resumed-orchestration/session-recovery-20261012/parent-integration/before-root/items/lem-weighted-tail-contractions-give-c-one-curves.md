@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weighted-tail-contractions-give-c-one-curves.md

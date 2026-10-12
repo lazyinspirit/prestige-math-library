@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-type-coefficient-formulas-for-the-sl2-discrete-and-principal-series.md

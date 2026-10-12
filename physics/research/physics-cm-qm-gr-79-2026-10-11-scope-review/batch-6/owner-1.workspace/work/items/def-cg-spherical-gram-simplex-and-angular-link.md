@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-spherical-gram-simplex-and-angular-link.md

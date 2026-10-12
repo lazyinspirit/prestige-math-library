@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-bgg-augmentation-has-image-the-simple-module.md

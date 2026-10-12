@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-polygonal-normal-form-for-compact-connected-surfaces.md

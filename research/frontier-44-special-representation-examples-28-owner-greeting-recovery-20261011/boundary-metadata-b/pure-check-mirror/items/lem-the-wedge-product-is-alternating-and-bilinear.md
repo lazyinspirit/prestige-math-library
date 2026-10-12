@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-wedge-product-is-alternating-and-bilinear.md

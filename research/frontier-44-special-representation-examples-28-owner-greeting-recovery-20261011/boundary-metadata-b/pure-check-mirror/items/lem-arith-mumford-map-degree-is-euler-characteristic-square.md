@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-mumford-map-degree-is-euler-characteristic-square.md

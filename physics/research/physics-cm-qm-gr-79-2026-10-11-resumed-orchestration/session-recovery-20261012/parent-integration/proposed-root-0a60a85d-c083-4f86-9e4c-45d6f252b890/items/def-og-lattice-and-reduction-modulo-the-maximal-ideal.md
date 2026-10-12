@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-og-lattice-and-reduction-modulo-the-maximal-ideal.md

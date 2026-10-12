@@ -1,0 +1,1285 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+    "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+    "lem-corner-adapted-strong-approximations-remain-in-the-same-orthant",
+    "lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection",
+    "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations",
+    "thm-smooth-bundles-admit-relative-finite-triangulations-over-a-fixed-base-triangulation",
+    "ex-a-trivial-smooth-bundle-has-a-projection-preserving-product-triangulation"
+  ],
+  "contracts": {
+    "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "source_section": "Definition",
+          "quote": "A finite geometric simplicial complex $K$ is considered with its Euclidean\nrealization and induced metric; subcomplex, closure, star and link terminology\nfollows [[def-simplicial-subcomplex-star-closure-and-link]]. For $b\\in|K|$ the\n**tangent star** is the union of the tangent cones at $b$ of all simplices\ncontaining $b$, that is, the rays locally contained in the closed star.\n\nA map $f:|K|\\to M$ is **piecewise smooth** when every restriction $f|\\sigma$ to\na closed simplex extends smoothly to a neighbourhood in its affine hull and the\nextensions agree on common faces. In a target coordinate chart the differential\n$df_b$ is then the well-defined continuous piecewise linear map on the tangent\nstar that equals $D(f|\\sigma)(b)$ on the cone of each simplex $\\sigma$\ncontaining $b$; agreement on common faces makes it independent of the chosen\ncontaining simplex. A **smooth immersion of a complex** requires $df_b$\ninjective on the entire tangent star at every point, not merely on each simplex\ntangent space; a **smooth embedding** requires in addition that $f$ be a\nhomeomorphism onto its image, and a **finite smooth triangulation** of $M$ is\nsuch an embedding onto $M$. A corner-adapted triangulation must be face\ncompatible: every local corner face is the image of a subcomplex, and the\ndifferential fan maps the source tangent star homeomorphically onto the\nappropriate tangent orthant, or its specified face sector. This last local\northant condition is the corner-adapted triangulation contract.\n\nAfter an ambient Euclidean realization of the target, or in a fixed finite\nfamily of compact target chart patches, $g:K'\\to M$ on a finite subdivision\n$K'$ of $K$ is a **strong $C^1$ $\\delta$-approximation** to $f$ if\n$\\sup_b|g(b)-f(b)|<\\delta$ and $|dg_b(v)-df_b(v)|<\\delta|v|$ for all $b$ and\nall tangent-star vectors $v$. A relative approximation **fixed on $L$** means\n$g|_{|L|}=f|_{|L|}$, subdivision of $L$ permitted unless explicitly prohibited.\n**Shape control** means a positive lower bound on\n$r(\\sigma)/\\operatorname{diam}\\sigma$ for every positive-dimensional simplex,\nwhere $r(\\sigma)$ is the distance from the barycentre to the relative boundary;\nit is not asserted for arbitrary iterated barycentric subdivisions.\n\nTwo embeddings $f_i:K_i\\to M$ **fit in a subcomplex** if the inverse images of\n$f_1(|K_1|)\\cap f_2(|K_2|)$ are subcomplexes $L_i$ and\n$f_2^{-1}f_1:L_1\\to L_2$ is a simplexwise affine isomorphism; the fit is\n**full** if every simplex all of whose vertices belong to $L_i$ belongs to\n$L_i$. Gluing along that isomorphism defines the union realization and union\nmap; the gluing is well defined because the two maps agree on the identified\nsubcomplexes and the resulting complex is again finite.\n\nFor a smooth bundle $\\pi:E\\to B$ and a supplied base triangulation $h:D\\to B$,\na **projection-preserving diagram** consists of $F:K\\to E$ and a map $r:K\\to D$\nthat is affine on each simplex into a simplex of the original $D$ and satisfies\n$\\pi F=hr$; the affine/PL requirement does not require domain vertices to map\nto vertices of the original fixed base complex. Fitting preserves the\nprojection when all modified maps satisfy the same equality with the original\n$h$ and the original affine $r$ restricted to their subdivisions; a fixed\nrelative bundle piece must already carry such a diagram. A projection-preserving\ndiagram is determined by the pair $(F,r)$ together with its restrictions to\nsubdivisions, so a modification supported away from a piece leaves the original\ndiagram there exactly on the nose. No generic smooth map is called a bundle\nmerely because it is proper.\n\nFor relative extension on a compact manifold with corners, supplied boundary\ndata are admissible only when they are compatible on all corner-face\nintersections and satisfy the tangent-orthant condition above; the extension\nkeeps their pointwise parametrization, with compatible subdivisions permitted,\nand no extension of arbitrary incompatible boundary data is asserted.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-closed-subset-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $F \\subseteq X$ be closed in $X$\n([[def-metric-topology]]). Then $F$ is a compact subset of $X$: the metric\nsubspace $(F, d_F)$ is a compact metric space\n([[def-isometry-and-metric-embedding]]).\n\nNo choice principle is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-continuous-bijection-from-a-compact-space-has-continuous-inverse",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be a metric space ([[def-metric-space]]) and let $f : X \\to Y$ be a\ncontinuous bijection ([[def-metric-continuity]],\n[[def-injection-surjection-bijection]]). Then:\n\n1. $f[U]$ is open in $Y$ for every $U$ open in $X$\n   ([[def-metric-topology]]);\n2. the inverse function $f^{-1} : Y \\to X$ is continuous.\n\nThe words used are deliberately those of open sets and of the inverse map: a\nsingle name for a continuous bijection with continuous inverse is not available\nat this point in the reading order. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Full rank and a uniform lower bound. If $K$ has no positive-dimensional simplex, then its tangent stars are $\\{0\\}$, every $g$ is trivially a whole-star immersion, and the embedding assertion follows from the finite separation of the values of $f$ at the finitely many vertices; assume therefore that some simplex has positive dimension. For a simplex $\\sigma$ and $b\\in\\sigma$, the tangent cone $\\sigma-b$ spans the direction space $D_\\sigma:=\\operatorname{span}\\{x-y:x,y\\in\\sigma\\}$, so injectivity of $df_b$ on that cone gives injectivity on $D_\\sigma$: if $df_b(w)=0$ for $w\\in D_\\sigma$, write $w=w_1-w_2$ with $w_i\\in\\sigma-b$ and conclude $df_b(w_1)=df_b(w_2)$, whence $w_1=w_2$ and $w=0$. The map $(b,v)\\mapsto|D(f|\\sigma)(b)v|$ is continuous and positive on the compact set of pairs with $b\\in\\sigma$ and $v$ a unit vector of $D_\\sigma$ ([F2] applied to the closed bounded set $\\sigma\\times\\{v:|v|=1\\}$), so it has a positive minimum $\\mu_\\sigma$; set $\\mu:=\\min_\\sigma\\mu_\\sigma>0$ over the finitely many positive-dimensional simplices. Then $|df_b(v)|\\ge\\mu|v|$ for every tangent-star vector $v$, and if $\\delta<\\mu/2$ the approximation estimate of [F1] gives $|dg_b(v)|\\ge(\\mu-\\delta)|v|>0$ together with $\\operatorname{angle}(df_b(v),dg_b(v))\\le4\\delta/\\mu$ for every $v\\ne0$ ([F1], [F4]); in particular every $g$ with $\\delta<\\mu/2$ is non-degenerate on every simplex cone.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Separation of two simplices meeting in a common face. Let $\\sigma_1,\\sigma_2$ be simplices with $\\tau=\\sigma_1\\cap\\sigma_2$ a common face that is proper in both, let $\\eta$ be the face of $\\sigma_1$ opposite $\\tau$ and let $c$ be the barycenter of $\\tau$. Every $p\\in\\sigma_1\\setminus\\tau$ has a unique expression $p=(1-t)x+ty$ with $x\\in\\tau$, $y\\in\\eta$ and $t\\in(0,1]$; the point $X(p):=(1-t)x+tc$ lies in $\\tau$, satisfies $p-X(p)=t(y-c)$ and is a continuous function of $p$ fixing $\\tau$ (at $t=1$ the formula gives $X(p)=c$, the limit of $(1-t)x+tc$). Define $\\theta(\\sigma_1,\\sigma_2)$ as the minimum of $\\operatorname{angle}(y-c,z-c)$ over $y\\in\\eta$ and $z\\in\\sigma_2\\setminus\\{c\\}$. This minimum is positive: the unit vectors $(y-c)/|y-c|$ and $(z-c)/|z-c|$ range over compact subsets of the unit sphere (the second is the set of unit directions in the polyhedral cone $\\sigma_2-c$), the angle is continuous there, and an angle $0$ would give $y-c=\\lambda(z-c)$ with $\\lambda>0$; if $\\lambda\\le1$, then $y=(1-\\lambda)c+\\lambda z\\in\\sigma_2$, so $y\\in\\sigma_1\\cap\\sigma_2=\\tau$, contradicting $y\\in\\eta$ with $\\eta\\cap\\tau=\\varnothing$, while if $\\lambda>1$, then $z=(1-\\lambda^{-1})c+\\lambda^{-1}y\\in\\sigma_1$, so $z\\in\\tau$ and $y\\in\\operatorname{aff}(\\tau)\\cap\\eta$, contradicting [F5]. Moreover, for every $p\\in\\sigma_1\\setminus\\tau$ and every $q\\in\\sigma_2\\setminus\\{X(p)\\}$ the angle between $p-X(p)$ and $q-X(p)$ is at least $\\theta(\\sigma_1,\\sigma_2)$: indeed $p-X(p)$ is a positive multiple of $y-c$ for the corresponding $y\\in\\eta$, while $q-X(p)=(q-c)+(c-X(p))$ lies in the cone $\\sigma_2-c$, because $q$ and $X(p)$ both lie in $\\sigma_2$ and every nonzero vector of that cone is a positive multiple of some $z-c$ with $z\\in\\sigma_2\\setminus\\{c\\}$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Two-segment lemma. Let $L=e_1\\cup e_2$ be two closed segments with a common vertex $v$, let $F$ be linear and injective on $L$, let the images $F(e_1)$ and $F(e_2)$ make an angle $\\beta\\in(0,\\pi]$, and let $G$ be $C^1$ on each segment with $\\operatorname{angle}(DG(c)\\tau_i,F(\\tau_i))<\\beta/2$ at every $c\\in e_i\\setminus\\{v\\}$, where $\\tau_i$ is the unit tangent of $e_i$ pointing away from $v$. Then $G$ is injective on $L$. Proof: let $\\ell$ be the line of the plane of $F(L)$ perpendicular to the internal bisector of $\\beta$ when $\\beta<\\pi$, and the line containing $F(L)$ when $\\beta=\\pi$; let $\\pi_\\ell$ be the orthogonal projection onto $\\ell$. With $\\tau_i$ as above, $\\pi_\\ell(F(\\tau_1))>0>\\pi_\\ell(F(\\tau_2))$: for $\\beta<\\pi$ these numbers are $\\pm|F(\\tau_i)|\\sin(\\beta/2)$ in the unit normal direction of the bisector, and for $\\beta=\\pi$ the two image directions are opposite, so the projections are nonzero with opposite signs. For $c=v+s\\tau_1\\in e_1$ with $s>0$, the directional derivative of $G$ along $\\tau_1$ at $c$ is $DG(c)\\tau_1$, and $\\operatorname{angle}(DG(c)\\tau_1,\\ell)\\le\\operatorname{angle}(F(\\tau_1),\\ell)+\\operatorname{angle}(DG(c)\\tau_1,F(\\tau_1))<(\\pi/2-\\beta/2)+\\beta/2=\\pi/2$ when $\\beta<\\pi$, while for $\\beta=\\pi$ it is at most $0+\\pi/2$, again strictly below $\\pi/2$; hence $\\pi_\\ell(DG(c)\\tau_1)>0$ and, by [F3], $\\pi_\\ell(G(c))>\\pi_\\ell(G(v))$ for all $c\\in e_1\\setminus\\{v\\}$. Symmetrically $\\pi_\\ell(G(c))<\\pi_\\ell(G(v))$ for all $c\\in e_2\\setminus\\{v\\}$, so $G$ carries the two open segments into opposite open half-lines of $\\ell$; on each single segment $\\pi_\\ell\\circ G$ is strictly monotone, and therefore $G$ is injective on $L$.",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Naturality of the projection under linear injections. Every linear injection $A$ defined on $\\operatorname{aff}(\\sigma_1\\cup\\sigma_2)$ maps $\\sigma_i$ onto a simplex $A(\\sigma_i)$ with intersection $A(\\tau)$ and carries the projection of $\\sigma_1$ onto $\\tau$ to the projection of $A(\\sigma_1)$ onto $A(\\tau)$: the defining condition $p-X(p)\\parallel y-c$ becomes $A(p)-A(X(p))\\parallel A(y)-A(c)$, and $A(c)$ is the barycenter of $A(\\tau)$. Consequently, for the pair $(\\sigma_1,\\sigma_2)$, every $b\\in\\tau$ and all $p\\in\\sigma_1\\setminus\\tau$, $q\\in\\sigma_2\\setminus\\{X(p)\\}$ satisfy $\\operatorname{angle}(A(p-X(p)),A(q-X(p)))\\ge\\theta(A(\\sigma_1),A(\\sigma_2))$, by step 1.2 applied to the image simplices.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Choice of $\\delta$ and local angle consequences. Take $\\delta>0$ so small that $\\delta<\\mu/2$ and $4\\delta/\\mu<\\alpha/8$, with $\\mu$ from step 1.1, and in addition so small that for every $b\\in|K|$ there is a neighbourhood $U_b$ on which the derivative fields vary by less than $\\alpha/8$: by continuity of the finitely many maps $(c,h)\\mapsto D(f|\\sigma)(c)h$ and $(c,h)\\mapsto D(g|\\sigma')(c)h$ on compacta, one may require $\\operatorname{angle}(Df(c)h,Df(b)h)<\\alpha/8$ and $\\operatorname{angle}(Dg(c)h,Dg(b)h)<\\alpha/8$ whenever $c\\in U_b$ and $h$ is a nonzero vector of a tangent cone at $c$ in a simplex containing both $b$ and $c$ ([F1], [F2], step 1.1). Then for such $c,b,h$ the triangle inequality gives $\\operatorname{angle}(Dg(c)h,Df(b)h)\\le\\operatorname{angle}(Dg(c)h,Df(c)h)+\\operatorname{angle}(Df(c)h,Df(b)h)<\\alpha/8+\\alpha/8=\\alpha/4$, and likewise $\\operatorname{angle}(Dg(b)h,Df(b)h)<\\alpha/8+\\alpha/8+\\alpha/8=3\\alpha/8$; both are strictly below $\\alpha/2$.",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "algebra",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Uniform finite-star separation angle. For each pair $(\\sigma_1,\\sigma_2)$ with $\\tau=\\sigma_1\\cap\\sigma_2$ a proper face of both and for each $b\\in\\tau$, the differential $df_b$ is injective on each of the cones $\\sigma_1-b$, $\\sigma_2-b$, hence injective on $\\sigma_1\\cup\\sigma_2$, so step 2.1 applies with $A=df_b$ and $b\\in\\tau$. Define $\\Theta_{\\sigma_1\\sigma_2}(b):=\\theta(df_b(\\sigma_1),df_b(\\sigma_2))$. It is positive for every $b\\in\\tau$: expanding the definition, it is the minimum of $\\operatorname{angle}(df_b(u_1),df_b(u_2))$ over $u_1$ in the compact set of unit directions of the cone $\\sigma_1-b$ parallel to $\\eta$ and $u_2$ in the compact set of unit directions of the cone $\\sigma_2-c$, a pointwise positive continuous function on a compact product, whose minimum is therefore positive ([F2]); positivity rather than vanishing comes from injectivity of $df_b$ on each cone together with the fact that the two unit directions cannot agree: a common direction would lie in both cones, hence in the cone of $\\tau-b$, forcing the corresponding $y\\in\\eta$ into $\\operatorname{aff}(\\tau)$ and contradicting [F5] as in step 1.2. Taking the minimum of $\\Theta_{\\sigma_1\\sigma_2}(b)$ over the finitely many pairs and all $b\\in\\tau$ gives a positive number $\\alpha$, and replacing it by $\\min(\\alpha,\\pi/2)$ we may assume $0<\\alpha\\le\\pi/2$; by steps 1.2 and 2.1, $\\operatorname{angle}(df_b(p-X(p)),df_b(q-X(p)))\\ge\\alpha$ for all such $b,p,q$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Stability of immersion. Let $b\\in|K|$ and suppose $dg_b$ is not injective on the tangent star at $b$: there are nonzero tangent-star vectors $u\\ne v$ with $dg_b(u)=dg_b(v)$. Multiplying both by any $\\lambda\\in(0,1]$ keeps the equality, so we may assume $p:=b+u$ and $q:=b+v$ are distinct points of the star of $b$ lying in a prescribed small neighbourhood of $b$. If the carriers of $p$ and $q$ are comparable, both lie in one simplex $\\sigma$; let $x:=(p+q)/2\\in\\sigma$ be their midpoint and apply step 1.3 to $L=[x,p]\\cup[x,q]$, $F=df_b$, $G=dg_b$ and $\\beta=\\pi$: $F$ is injective on $L$, and the required angle bound $\\operatorname{angle}(dg_b(\\tau_i),df_b(\\tau_i))<3\\alpha/8<\\pi/2$ holds by step 2.2, because the two segment directions are tangent-cone vectors at the points of their segments. If the carriers $\\sigma_1\\ne\\sigma_2$ are incomparable, let $\\tau=\\sigma_1\\cap\\sigma_2$ and let $x$ be the projection of $p$ onto $\\tau$ as in step 1.2; choosing $p,q$ closer to $b$ if necessary, the segments $[p,x]$ and $[x,q]$ lie in $U_b$ because the projection is continuous and fixes $b$. Then step 2.2 gives $\\operatorname{angle}(dg_b(h),df_b(h))<3\\alpha/8$ for their directions $h$, and steps 1.2 and 2.1 show that the images $df_b([p,x])$ and $df_b([x,q])$ make an angle $\\beta\\ge\\alpha$; since $3\\alpha/8<\\alpha/2\\le\\beta/2$, step 1.3 with $G=dg_b$ gives $dg_b(p)\\ne dg_b(q)$. This contradiction in both cases shows that $dg_b$ is injective on the tangent star at every $b$; hence every strong $\\delta$-approximation with this $\\delta$ is a whole-star immersion.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Local injectivity of $g$. Fix $b\\in|K|$ and retain the neighbourhood $U_b$ and the estimates of step 2.2. We claim that $g$ is injective on a suitable neighbourhood $V_b$ of $b$. Let $p\\ne q$ be points of $U_b$. If $p$ and $q$ lie in a common original simplex $\\sigma$, put $x:=(p+q)/2$ and apply step 1.3 to $L=[x,p]\\cup[x,q]$, $F=df_b$, $G=g$ and $\\beta=\\pi$: the two segments lie in the single simplex $\\sigma$, $F$ is injective on $L$, and the required bound $\\operatorname{angle}(Dg(c)h,df_b(h))<\\alpha/4<\\pi/2$ for the segment directions $h$ at points $c$ of the segments holds by step 2.2; hence $g(p)\\ne g(q)$. If instead the carriers $\\sigma_1,\\sigma_2$ meeting $U_b$ are incomparable, let $\\tau=\\sigma_1\\cap\\sigma_2$ and let $x$ be the projection of $p$ onto $\\tau$ as in step 1.2; shrinking $U_b$ using continuity of the finitely many projections and choosing $p,q$ in a small ball inside $U_b$, we may assume that $x$ and the segments $[p,x]$ and $[x,q]$ all lie in $U_b$. Step 2.2 gives $\\operatorname{angle}(Dg(c)h,df_b(h))<\\alpha/4$ for their directions $h$, while steps 1.2 and 2.1 show that $df_b([p,x])$ and $df_b([x,q])$ make an angle $\\beta\\ge\\alpha$; since $\\alpha/4<\\alpha/2\\le\\beta/2$, step 1.3 with $G=g$ yields $g(p)\\ne g(q)$. Shrinking further by the finitely many continuity conditions (each projection fixes $b$) gives a neighbourhood $V_b$ of $b$ with $g(p)\\ne g(q)$ for all distinct $p,q\\in V_b$, and this neighbourhood is independent of the choice of the strong $\\delta$-approximation $g$.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Global injectivity when $f$ is an embedding. Assume $f$ is an embedding and let $\\{V_{b_1},\\dots,V_{b_m}\\}$ be a finite subcover of $|K|$ by the neighbourhoods of step 4.2, which exists because $|K|$ is compact ([F2]). Let $D:=|K|^2\\setminus\\bigcup_{i=1}^m(V_{b_i}\\times V_{b_i})$. This is a closed subset of the compact metric space $|K|^2$, hence compact ([F2]), and it is disjoint from the diagonal, because every point of $|K|$ lies in some $V_{b_i}$. The continuous function $(p,q)\\mapsto|f(p)-f(q)|$ attains a minimum $\\eta$ on $D$; since $f$ is injective and $p\\ne q$ on $D$, one has $\\eta>0$ (if $D=\\varnothing$ take any $\\eta>0$). Require in addition $\\delta<\\eta/3$. For $(p,q)\\in D$ one gets $|g(p)-g(q)|\\ge|f(p)-f(q)|-|f(p)-g(p)|-|f(q)-g(q)|>\\eta-2\\delta>\\eta/3>0$, while for $(p,q)\\notin D$ both points lie in one $V_{b_i}$ and step 4.2 gives $g(p)\\ne g(q)$. Hence $g$ is injective.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 4.2",
+            "choose"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Conclusion. Choose $\\delta$ as the minimum of the bounds of steps 2.2, 4.1 and 5.1. Every strong $\\delta$-approximation $g$ is a whole-star immersion by step 4.1 and, when $f$ is an embedding, also injective by step 5.1. Then $g$ is continuous and injective on the compact space $|K|$, so $g$ is a homeomorphism onto its image and hence an embedding ([F2]); no mesh or shape bound on the subdivision was used anywhere.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "step 4.1",
+            "step 5.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 disposes of the case with no positive-dimensional simplex, including the empty complex, separately."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the dimension-zero complex is handled by finite separation of the vertex values before the rank argument begins."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the argument is uniform in the number of simplices, so no single-simplex case is treated apart from the k=1 instance of step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: injectivity on each tangent cone forces full rank, so no rank-deficient (degenerate) differential survives."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 treats points in a proper common face, i.e. relative-boundary points of the simplices, by the projection."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "every minimum is over a compact set and every cover used is finite, so no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the statement is an implication, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation. Choose one relative interior point in each nonempty cell; triangulate the boundary in increasing dimension and cone from that point. This construction agrees on every common face and preserves each cell as a subpolyhedron.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-barycentric-subdivision-of-an-abstract-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "The **barycentric subdivision** of $K$ is $\\operatorname{sd}K=\\Delta F(K)$, using [[def-face-poset-and-order-complex]]. Thus its vertices are the nonempty faces $\\sigma$ of $K$, and its nonempty simplices are strict chains $\\sigma_0\\subsetneq\\cdots\\subsetneq\\sigma_q$.\n\nA subcomplex $A\\subseteq K$ gives $F(A)\\subseteq F(K)$ with the induced order; hence every chain in $F(A)$ is a chain in $F(K)$ and $\\operatorname{sd}A$ is a subcomplex. The vertex associated to $\\{v\\}$ is distinct as a label from $v$, though its geometric position will be the same. There is no vertex for the empty face; the complex with no vertices subdivides to itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "source_section": "Definition",
+          "quote": "A finite geometric simplicial complex $K$ is considered with its Euclidean\nrealization and induced metric; subcomplex, closure, star and link terminology\nfollows [[def-simplicial-subcomplex-star-closure-and-link]]. For $b\\in|K|$ the\n**tangent star** is the union of the tangent cones at $b$ of all simplices\ncontaining $b$, that is, the rays locally contained in the closed star.\n\nA map $f:|K|\\to M$ is **piecewise smooth** when every restriction $f|\\sigma$ to\na closed simplex extends smoothly to a neighbourhood in its affine hull and the\nextensions agree on common faces. In a target coordinate chart the differential\n$df_b$ is then the well-defined continuous piecewise linear map on the tangent\nstar that equals $D(f|\\sigma)(b)$ on the cone of each simplex $\\sigma$\ncontaining $b$; agreement on common faces makes it independent of the chosen\ncontaining simplex. A **smooth immersion of a complex** requires $df_b$\ninjective on the entire tangent star at every point, not merely on each simplex\ntangent space; a **smooth embedding** requires in addition that $f$ be a\nhomeomorphism onto its image, and a **finite smooth triangulation** of $M$ is\nsuch an embedding onto $M$. A corner-adapted triangulation must be face\ncompatible: every local corner face is the image of a subcomplex, and the\ndifferential fan maps the source tangent star homeomorphically onto the\nappropriate tangent orthant, or its specified face sector. This last local\northant condition is the corner-adapted triangulation contract.\n\nAfter an ambient Euclidean realization of the target, or in a fixed finite\nfamily of compact target chart patches, $g:K'\\to M$ on a finite subdivision\n$K'$ of $K$ is a **strong $C^1$ $\\delta$-approximation** to $f$ if\n$\\sup_b|g(b)-f(b)|<\\delta$ and $|dg_b(v)-df_b(v)|<\\delta|v|$ for all $b$ and\nall tangent-star vectors $v$. A relative approximation **fixed on $L$** means\n$g|_{|L|}=f|_{|L|}$, subdivision of $L$ permitted unless explicitly prohibited.\n**Shape control** means a positive lower bound on\n$r(\\sigma)/\\operatorname{diam}\\sigma$ for every positive-dimensional simplex,\nwhere $r(\\sigma)$ is the distance from the barycentre to the relative boundary;\nit is not asserted for arbitrary iterated barycentric subdivisions.\n\nTwo embeddings $f_i:K_i\\to M$ **fit in a subcomplex** if the inverse images of\n$f_1(|K_1|)\\cap f_2(|K_2|)$ are subcomplexes $L_i$ and\n$f_2^{-1}f_1:L_1\\to L_2$ is a simplexwise affine isomorphism; the fit is\n**full** if every simplex all of whose vertices belong to $L_i$ belongs to\n$L_i$. Gluing along that isomorphism defines the union realization and union\nmap; the gluing is well defined because the two maps agree on the identified\nsubcomplexes and the resulting complex is again finite.\n\nFor a smooth bundle $\\pi:E\\to B$ and a supplied base triangulation $h:D\\to B$,\na **projection-preserving diagram** consists of $F:K\\to E$ and a map $r:K\\to D$\nthat is affine on each simplex into a simplex of the original $D$ and satisfies\n$\\pi F=hr$; the affine/PL requirement does not require domain vertices to map\nto vertices of the original fixed base complex. Fitting preserves the\nprojection when all modified maps satisfy the same equality with the original\n$h$ and the original affine $r$ restricted to their subdivisions; a fixed\nrelative bundle piece must already carry such a diagram. A projection-preserving\ndiagram is determined by the pair $(F,r)$ together with its restrictions to\nsubdivisions, so a modification supported away from a piece leaves the original\ndiagram there exactly on the nose. No generic smooth map is called a bundle\nmerely because it is proper.\n\nFor relative extension on a compact manifold with corners, supplied boundary\ndata are admissible only when they are compatible on all corner-face\nintersections and satisfy the tangent-orthant condition above; the extension\nkeeps their pointwise parametrization, with compatible subdivisions permitted,\nand no extension of arbitrary incompatible boundary data is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Lattice subdivisions with a uniform thickness bound. Give the finitely many vertices a total order and realize the abstract complex as a union of faces of one standard simplex $\\Delta\\subset\\mathbb R^N$ with vertices $0,e_1,\\dots,e_N$. The original geometric realization is related to this one by a linear isomorphism on each simplex, and finitely many such isomorphisms have uniformly bounded operator norms and inverse norms on their affine spans. In $\\mathbb R^N$ cut the unit lattice cubes by the hyperplanes $\\sum_i x_i=j$, $j\\in\\mathbb Z$, and all their faces; these cuts form a locally finite convex cell complex, since intersections arise by activating the shared supporting equalities. After translating a cube to $[0,1]^N$ only the cuts with $j=0,\\dots,N$ occur, so there are finitely many cell shapes up to translation; triangulating every cell compatibly by [F1] with the translation-invariant choice of the average of its vertices gives finitely many simplex shapes, with maximal diameter $D$ and positive minimum thickness $\\theta_0$ in positive dimensions. The simplex $m\\Delta=\\{x_i\\ge0,\\ \\sum_i x_i\\le m\\}$ and each of its faces are unions of these cells, so scaling by $1/m$ gives subdivisions of $\\Delta$, hence of the embedded abstract complex, with mesh at most $D/m$ and thickness at least $\\theta_0$; restrictions to all faces agree because one global cell complex is used. Transporting back to the original realization multiplies diameter and inradius by the finitely many bounded factors of the linear isomorphisms, leaving the claimed mesh bound and one positive thickness $\\theta$. Iterated barycentric subdivision has no such bound and is not used.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Combinatorial extension of a subdivision, and coned corrections. For the extension statement, extend the given subdivision of $A$ combinatorially in increasing dimension: keep every original simplex outside the closed star of $A$, and for each affected simplex whose boundary has already been subdivided, cone that boundary subdivision from the original barycentre. Each cone over a face simplex from the barycentre of the ambient simplex is a simplex, and the cones agree on common faces by the ray description of a simplex, so this produces a subdivision of $K$ containing the given subdivision of $A$. Suppose a correction $e=g-f$ is already defined and piecewise smooth on the subdivided boundary of an original simplex $\\sigma$ with barycentre $c$; every $x\\ne c$ in $\\sigma$ has the unique expression $x=c+t(y-c)$ with $0<t\\le1$ and $y\\in\\partial\\sigma$. Choose a smooth scalar taper $a$ with $a(t)=0$ for $t\\le1/3$ and $a(t)=1$ for $t\\ge2/3$ and define $G(x)=f(x)+a(t)e(y)$ on $\\sigma\\setminus\\{c\\}$ and $G(c)=f(c)$. On each coned simplex this is smooth across $c$, because $a=0$ near $c$ forces $G=f$ there, and it assumes the prescribed values on the boundary; faces agree because $t$ and $y$ are determined by $x$ and $e$ is one function on the subdivided boundary.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Secant estimate on a shape-controlled simplex. Let $s$ be a refined simplex inside an original simplex $\\sigma$, with barycentre $b$, diameter $h$ and inradius $r\\ge\\theta h$, and put $T_b(x)=f(b)+Df(b)(x-b)$. On the compact simplex $\\sigma$ the derivative of $f$ has a modulus of continuity $\\omega_\\sigma(h)\\to0$ as $h\\to0$, uniformly in the base point. Segment integration along $[b,x]$ gives $|f(x)-T_b(x)|\\le h\\,\\omega_\\sigma(h)$ for $x\\in s$. The affine map $S_m-T_b$ interpolates the vertex errors $f(v)-T_b(v)$, each of modulus at most $h\\,\\omega_\\sigma(h)$, and an affine function on a simplex attains its supremum at a vertex, so $\\sup_s|S_m-T_b|\\le h\\,\\omega_\\sigma(h)$. For an affine map $A$ on $s$ with $\\sup_s|A|\\le E$ and a unit vector $v$ in the affine span of $s$, the point $b+rv$ lies in $s$ because $r$ is the inradius at the barycentre, so $|DA(v)|=|A(b+rv)-A(b)|/r\\le2E/r$. Applying this to $S_m-T_b$ gives $\\|DS_m-Df(b)\\|\\le2\\omega_\\sigma(h)/\\theta$, and adding the continuity term $\\|Df(b)-Df(x)\\|\\le\\omega_\\sigma(h)$ gives $\\|DS_m-Df(x)\\|\\le(2/\\theta+1)\\omega_\\sigma(h)$ for all $x\\in s$. As the mesh tends to zero, both the value and the derivative errors tend to zero uniformly over all base points and all vectors of the refined tangent cones of $\\sigma$; taking the maximum of the finitely many moduli $\\omega_\\sigma$ over the original simplices proves strong piecewise $C^1$ convergence.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Extension error bounds. On a cone over a boundary simplex, $x=c+t(y-c)$; writing the barycentric coordinates of $x$ in $\\sigma$ and summing those outside the face carrying $y$ shows that $t$ is an affine function of $x$ divided by the fixed barycentre-to-face height, and $y=c+(x-c)/t$. On the region $t\\ge1/3$ the bounds $|Dt|\\le C_1(\\sigma)$ and $\\|Dy\\|\\le C_2(\\sigma)$ depend only on the original simplex, not on the subdivision of the boundary. The correction of step 1.2 has value $a(t)e(y)$ and derivative $a'(t)e(y)Dt+a(t)De(y)Dy$ by the chain rule, so its supremum norm and derivative norm are bounded by $C_\\sigma\\|e\\|_{C^1}$ with $C_\\sigma$ depending only on $\\sigma$; near $c$ the correction vanishes identically. Hence, for finitely many affected simplices handled in increasing dimension, the product of the finitely many constants $C_\\sigma$ converts any requested final error into a sufficient bound on the initial error, uniformly over all subdivisions of $A$; a zero correction on an already fixed subcomplex is retained, and the correction is zero outside the closed star of $A$ by construction. If $p$ is affine linear with $p(e)=0$ on $A$, then $p(a(t)e(y))=a(t)p(e(y))=0$, so a vanishing $p$ component is preserved.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Relative approximation with plane preservation. For the relative statement, barycentrically subdivide once if necessary so that $L$ is full: a face chain all of whose barycentric vertices lie in $L$ lies in $L$ by [F1]. Then let $d$ be the sum of the barycentric coordinates at vertices outside $L$; on each subdivision simplex the coordinates are affine, so $d$ is a global continuous piecewise affine nonnegative function, and its zero set is exactly $|L|$: a point of $|L|$ lies in a subdivision simplex all of whose vertices lie in $L$ because $L$ is full, so all coordinates outside $L$ vanish, while $d(x)=0$ forces $x$ into the hull of vertices lying in $L$, hence into $|L|$. The zero set of $d$ is closed and the complement of $U$ is compact, so the minimum of $d$ on $|K|\\setminus U$ is a positive number $d_0$. Choose a smooth cutoff $\\chi$ on $[0,\\infty)$ with $\\chi=0$ on $[0,d_0/3]$ and $\\chi=1$ on $[2d_0/3,\\infty)$ and values in $[0,1]$; its derivative is bounded, and the piecewise affine function $d$ has bounded derivative on the fixed finite subdivision. Setting $g_m=f+\\chi(d)(S_m-f)$ gives, near $|L|$, $g_m=f$; outside $U$, $g_m=S_m$; and the derivative error is bounded by the derivative error of $S_m$ plus a fixed constant times its value error, both of which tend to zero by step 2.1. Each simplex restriction is smooth and face values agree. If $f$ maps an original simplex into an affine plane, then so do its vertex interpolants and every affine combination of $f$ with them, so all affine target-plane constraints are preserved, and the preliminary subdivision still admits the uniformly controlled subdivisions of step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Assembly. The subdivisions of step 1.1 have mesh tending to zero and one positive thickness bound and, by step 2.1, their secant maps converge strongly in piecewise $C^1$ to $f$; step 3.1 provides the relative version, fixing $f$ near $L$, agreeing with a secant map outside $U$ and preserving affine target-plane constraints. For the extension statement, step 1.2 extends the subdivision and defines the coned correction, and step 2.2 bounds its $C^1$ norm by a constant depending only on the original simplices times the $C^1$ norm of the boundary correction, uniformly over all subdivisions of $A$; choosing the initial error small enough, in the finitely many affected simplices in increasing dimension, therefore realises any prescribed final strong-approximation error, keeps the correction zero outside the closed star of $A$, and preserves a vanishing affine-linear component. This proves all three assertions.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: when the subcomplex L is empty, every vertex lies outside L, so d is identically one and the zero set of d is the empty set |L|; the cutoff then fixes nothing and the clause is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: the estimate is stated for a refined simplex of diameter h and is vacuous when h is zero, so no separate zero case arises."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the construction is uniform in the number of simplices; no cardinality-one argument is needed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the lattice construction gives a positive thickness for every positive-dimensional simplex, so no flat (degenerate) refined simplex occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 estimates the errors at the vertices of each refined simplex, that is at its endpoints, and interpolates between them."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "all subdivisions are the explicit lattice cells of step 1.1 and all cutoffs are chosen functions, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the statement asserts convergence and existence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "lem-corner-adapted-strong-approximations-remain-in-the-same-orthant": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+          "source_section": "Statement",
+          "quote": "Let $K$ be finite and $f:K\\to\\mathbb R^q$ a whole-star smooth immersion in the\nsense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere is $\\delta>0$ such that every strong piecewise $C^1$\n$\\delta$-approximation $g:K'\\to\\mathbb R^q$, on any finite subdivision $K'$,\nis a whole-star immersion. If $f$ is also an embedding, $\\delta$ may be chosen\nso that $g$ is an embedding. The subdivision need not have a mesh or shape\nbound.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$.\n\n1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as\n   a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and\n   suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then\n   $$\\int_a^b f' \\;=\\; f(b) - f(a).$$\n2. **A bounded derivative gives a Lipschitz function.** Let\n   $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at\n   every point of $(a,b)$, and let $M \\ge 0$ satisfy\n   $\\lVert f'(t)\\rVert_2 \\le M$ for every $t \\in (a,b)$. Then\n   $$\\lVert f(t) - f(s)\\rVert_2 \\;\\le\\; M\\,|t-s| \\qquad \\text{for all } s,t \\in [a,b],$$\n   that is, $f$ is Lipschitz with constant $M$ as a map\n   $([a,b], d_{\\mathbb{R}}) \\to (\\mathbb{R}^{m}, d_2)$\n   ([[def-lipschitz-holder-contraction]], [[lem-real-line-is-a-metric-space]],\n   [[lem-metrics-on-rn]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "source_section": "Definition",
+          "quote": "A finite geometric simplicial complex $K$ is considered with its Euclidean\nrealization and induced metric; subcomplex, closure, star and link terminology\nfollows [[def-simplicial-subcomplex-star-closure-and-link]]. For $b\\in|K|$ the\n**tangent star** is the union of the tangent cones at $b$ of all simplices\ncontaining $b$, that is, the rays locally contained in the closed star.\n\nA map $f:|K|\\to M$ is **piecewise smooth** when every restriction $f|\\sigma$ to\na closed simplex extends smoothly to a neighbourhood in its affine hull and the\nextensions agree on common faces. In a target coordinate chart the differential\n$df_b$ is then the well-defined continuous piecewise linear map on the tangent\nstar that equals $D(f|\\sigma)(b)$ on the cone of each simplex $\\sigma$\ncontaining $b$; agreement on common faces makes it independent of the chosen\ncontaining simplex. A **smooth immersion of a complex** requires $df_b$\ninjective on the entire tangent star at every point, not merely on each simplex\ntangent space; a **smooth embedding** requires in addition that $f$ be a\nhomeomorphism onto its image, and a **finite smooth triangulation** of $M$ is\nsuch an embedding onto $M$. A corner-adapted triangulation must be face\ncompatible: every local corner face is the image of a subcomplex, and the\ndifferential fan maps the source tangent star homeomorphically onto the\nappropriate tangent orthant, or its specified face sector. This last local\northant condition is the corner-adapted triangulation contract.\n\nAfter an ambient Euclidean realization of the target, or in a fixed finite\nfamily of compact target chart patches, $g:K'\\to M$ on a finite subdivision\n$K'$ of $K$ is a **strong $C^1$ $\\delta$-approximation** to $f$ if\n$\\sup_b|g(b)-f(b)|<\\delta$ and $|dg_b(v)-df_b(v)|<\\delta|v|$ for all $b$ and\nall tangent-star vectors $v$. A relative approximation **fixed on $L$** means\n$g|_{|L|}=f|_{|L|}$, subdivision of $L$ permitted unless explicitly prohibited.\n**Shape control** means a positive lower bound on\n$r(\\sigma)/\\operatorname{diam}\\sigma$ for every positive-dimensional simplex,\nwhere $r(\\sigma)$ is the distance from the barycentre to the relative boundary;\nit is not asserted for arbitrary iterated barycentric subdivisions.\n\nTwo embeddings $f_i:K_i\\to M$ **fit in a subcomplex** if the inverse images of\n$f_1(|K_1|)\\cap f_2(|K_2|)$ are subcomplexes $L_i$ and\n$f_2^{-1}f_1:L_1\\to L_2$ is a simplexwise affine isomorphism; the fit is\n**full** if every simplex all of whose vertices belong to $L_i$ belongs to\n$L_i$. Gluing along that isomorphism defines the union realization and union\nmap; the gluing is well defined because the two maps agree on the identified\nsubcomplexes and the resulting complex is again finite.\n\nFor a smooth bundle $\\pi:E\\to B$ and a supplied base triangulation $h:D\\to B$,\na **projection-preserving diagram** consists of $F:K\\to E$ and a map $r:K\\to D$\nthat is affine on each simplex into a simplex of the original $D$ and satisfies\n$\\pi F=hr$; the affine/PL requirement does not require domain vertices to map\nto vertices of the original fixed base complex. Fitting preserves the\nprojection when all modified maps satisfy the same equality with the original\n$h$ and the original affine $r$ restricted to their subdivisions; a fixed\nrelative bundle piece must already carry such a diagram. A projection-preserving\ndiagram is determined by the pair $(F,r)$ together with its restrictions to\nsubdivisions, so a modification supported away from a piece leaves the original\ndiagram there exactly on the nose. No generic smooth map is called a bundle\nmerely because it is proper.\n\nFor relative extension on a compact manifold with corners, supplied boundary\ndata are admissible only when they are compatible on all corner-face\nintersections and satisfy the tangent-orthant condition above; the extension\nkeeps their pointwise parametrization, with compatible subdivisions permitted,\nand no extension of arbitrary incompatible boundary data is asserted.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Local shape of the zero sets. Fix $i$ and an original simplex $\\sigma$ with $Z:=Z_{i,\\sigma}\\ne\\varnothing$. For $b\\in Z$ the form $\\ell_b:=d(\\rho_iF)_b$ is nonnegative on the convex cone $C_b:=\\sigma-b$ and vanishes exactly on the tangent cone of $Z$ at $b$. As $Z$ is a union of faces of $\\sigma$, that tangent cone is the union of the cones $F-b$ over the faces $F$ of $\\sigma$ with $b\\in F\\subseteq Z$; being also the zero set of the supporting form $\\ell_b$, it is a face of $C_b$, and a face of $C_b$ that is a union of faces of $C_b$ is equal to its maximal-dimensional member. Hence there is a largest face $F_b$ of $\\sigma$ with $b\\in F_b\\subseteq Z$, and the zero set of $\\ell_b$ in $C_b$ is exactly the cone $F_b-b$; in other words $\\ell_b$ is strictly positive on every vector of $C_b$ pointing out of $F_b$, and only the directions staying in $F_b$ are annihilated. On the finitely many rays of $C_b$ generated by the vertices of $\\sigma$ outside $F_b$ the values of $\\ell_b$ are strictly positive, so a positive minimum $\\alpha_b$ is attained; and because the finitely many derivatives $d(\\rho_iF)_b$ depend continuously on $b$, the same lower bound persists on a small neighbourhood of $b$ in $\\sigma$: for every $c$ in that neighbourhood and every unit vector $h$ of $C_c$ whose direction is not tangent to $Z$ at $c$, the derivative $d(\\rho_iF)_c(h)$ is bounded below by $\\alpha_b/2$. The finitely many points $b$ and then the finitely many zero faces and simplices give a single positive lower bound $\\alpha>0$ valid near all of $Z$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "A distance-uniform lower bound. There is $a>0$ with $\\rho_iF(x)\\ge a\\operatorname{dist}(x,Z_{i,\\sigma})$ for every $x\\in\\sigma$ whenever $Z_{i,\\sigma}\\ne\\varnothing$. Near a zero face one argues as follows. Project barycentric coordinates of $x\\in\\sigma$ onto that face by deleting the coordinates outside it and renormalizing the remaining ones; where the sum of the retained coordinates is at least $1/2$ the barycentric projection $\\pi(x)$ is defined, continuous, lies in the face and hence in $Z$, and the segment from $x$ to $\\pi(x)$ is a multiple, of uniformly bounded factor, of the distance from $x$ to the face. Writing $x=\\pi(x)+w$ with $w$ pointing out of the face, the fundamental theorem of calculus gives $\\rho_iF(x)-\\rho_iF(\\pi(x))=\\int_0^1 d(\\rho_iF)_{c(t)}(w)\\,dt$ with $c(t)=\\pi(x)+tw$; for $x$ outside $Z$ the direction of $w$ is not tangent to $Z$ along the segment, and after shrinking to a neighbourhood where the derivative varies by less than half of the bound of step 1.1 each integrand is at least $\\alpha|w|/2$, whence $\\rho_iF(x)\\ge(\\alpha/2)|w|\\ge a\\operatorname{dist}(x,Z)$. The points at distance bounded below from $Z$ form a compact set on which the continuous positive ratio $\\rho_iF(y)/\\operatorname{dist}(y,Z)$ has a positive minimum by [F2]; the finitely many zero faces and simplices give one $a>0$, and the argument is vacuous when $Z_{i,\\sigma}=\\varnothing$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Perturbing the coordinate functions. For $x\\in\\sigma$ choose a closest point $z\\in Z_{i,\\sigma}$ when the zero set is nonempty; it exists by compactness of $Z_{i,\\sigma}$ and the segment $[z,x]$ lies in the convex simplex. Since $\\rho_iG(z)=\\rho_iF(z)=0$ on the zero subcomplex, segment integration of the piecewise smooth difference along $[z,x]$, split into the finitely many refined pieces and added, gives $|\\rho_iG(x)-\\rho_iF(x)|\\le\\delta|x-z|=\\delta\\operatorname{dist}(x,Z_{i,\\sigma})$, using the derivative bound of the strong approximation. Choose $\\delta<a/2$ with $a$ from step 2.1. Then $\\rho_iG(x)\\ge(a/2)\\operatorname{dist}(x,Z_{i,\\sigma})$, so $\\rho_iG\\ge0$ on $\\sigma$ with equality exactly on $Z_{i,\\sigma}$. If $Z_{i,\\sigma}$ is empty, then $\\rho_iF$ has a positive minimum $m_\\sigma$ on the compact simplex by [F2], and the value error $|G-F|<\\delta$ with $\\delta<m_\\sigma/2$ keeps $\\rho_iG$ positive on all of $\\sigma$.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conclusion. Take the minimum of the finitely many positive bounds $a$, $m_\\sigma$ and $\\delta_0$ of steps 2.1, 3.1 and [F1] over all coordinates $i$ and simplices $\\sigma$; call it $\\delta$. Every strong $\\delta$-approximation $G$ preserving the zero subcomplexes then has $\\rho_iG\\ge0$ with zero set exactly $Z_{i,\\sigma}$ on every simplex, for every $i$: all coordinate functions are nonnegative and the coordinate zero sets are exactly the prescribed ones, so $G$ maps $K$ into the same closed orthant with the same boundary structure. By [F1] $G$ is again a whole-star embedding. This supplies the side control that affine-plane preservation alone does not give, as the half-plane warning of [F3] records.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 2.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 explains the bound when the zero set is empty and step 3.1 handles a simplex whose coordinate zero set is empty, so the empty case is disposed of."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: on the zero set itself the bound is exactly zero and the zero set of the perturbation is identified with the prescribed one."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the argument is dimension-uniform, so no single-point case is treated apart from the instance of step 3.1 with one closest point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: the adapted face/tangent hypotheses exclude a vanishing supporting form at a zero point, so no degenerate form arises."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 covers equality at a closest point of the zero set, including corner and boundary endpoints of the simplex."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "the closest point of step 3.1 exists by compactness and all other selections are finite, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the statement is an implication about approximations, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+          "source_section": "Statement",
+          "quote": "Let $K$ be finite and $f:K\\to\\mathbb R^q$ a whole-star smooth immersion in the\nsense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere is $\\delta>0$ such that every strong piecewise $C^1$\n$\\delta$-approximation $g:K'\\to\\mathbb R^q$, on any finite subdivision $K'$,\nis a whole-star immersion. If $f$ is also an embedding, $\\delta$ may be chosen\nso that $g$ is an embedding. The subdivision need not have a mesh or shape\nbound.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite geometric complex and $f:K\\to\\mathbb R^q$ piecewise smooth in\nthe sense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere are subdivisions $K_m$ agreeing on every original face, with mesh\ntending to zero and a single lower thickness bound $\\theta>0$ for every\npositive-dimensional simplex, whose secant maps $S_m$, defined by affine\ninterpolation of the values of $f$ at vertices, converge strongly in piecewise\n$C^1$ to $f$.\n\nIf $L\\subset K$ is a subcomplex and $U$ an open neighbourhood of $|L|$, the\napproximation can instead be chosen pointwise equal to $f$ on a neighbourhood\nof $|L|$ and equal to a secant map outside $U$, on shape-controlled\nsubdivisions; subdivision of $L$ is permitted and does not alter $f$ there, and\nevery affine target-plane constraint already satisfied by $f$ on original\nsimplices is preserved.\n\nThere is also a local extension statement: given a finite subcomplex\n$A\\subset K$, a sufficiently small strong approximation $g$ to $f|_A$ on any\nsubdivision extends to a prescribed small strong approximation $G$ to $f$ on a\nsubdivision of $K$, with $G=f$ and with the original simplices unchanged\noutside the closed star of $A$. The permitted error of $g$ depends on the\nrequested error and the finite original simplices, not on the shape of the\nsubdivision of $A$. If the correction $g-f$ has zero component under an affine\nlinear target map $p$ on $A$, then the extended correction has zero $p$\ncomponent everywhere. This last extension does not assert a shape bound on its\nconed simplices.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "source_section": "Statement",
+          "quote": "If $K$ is a finite abstract simplicial complex, then its geometric realization\n$|K|$ is compact and Hausdorff.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.\n\nDiameters of nonempty subsets of $X$ are defined because a compact space is\nbounded ([[thm-compact-subset-is-closed-and-bounded]]) and a subset of a bounded\nset is bounded. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation. Choose one relative interior point in each nonempty cell; triangulate the boundary in increasing dimension and cone from that point. This construction agrees on every common face and preserves each cell as a subpolyhedron.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "source_section": "Definition",
+          "quote": "A finite geometric simplicial complex $K$ is considered with its Euclidean\nrealization and induced metric; subcomplex, closure, star and link terminology\nfollows [[def-simplicial-subcomplex-star-closure-and-link]]. For $b\\in|K|$ the\n**tangent star** is the union of the tangent cones at $b$ of all simplices\ncontaining $b$, that is, the rays locally contained in the closed star.\n\nA map $f:|K|\\to M$ is **piecewise smooth** when every restriction $f|\\sigma$ to\na closed simplex extends smoothly to a neighbourhood in its affine hull and the\nextensions agree on common faces. In a target coordinate chart the differential\n$df_b$ is then the well-defined continuous piecewise linear map on the tangent\nstar that equals $D(f|\\sigma)(b)$ on the cone of each simplex $\\sigma$\ncontaining $b$; agreement on common faces makes it independent of the chosen\ncontaining simplex. A **smooth immersion of a complex** requires $df_b$\ninjective on the entire tangent star at every point, not merely on each simplex\ntangent space; a **smooth embedding** requires in addition that $f$ be a\nhomeomorphism onto its image, and a **finite smooth triangulation** of $M$ is\nsuch an embedding onto $M$. A corner-adapted triangulation must be face\ncompatible: every local corner face is the image of a subcomplex, and the\ndifferential fan maps the source tangent star homeomorphically onto the\nappropriate tangent orthant, or its specified face sector. This last local\northant condition is the corner-adapted triangulation contract.\n\nAfter an ambient Euclidean realization of the target, or in a fixed finite\nfamily of compact target chart patches, $g:K'\\to M$ on a finite subdivision\n$K'$ of $K$ is a **strong $C^1$ $\\delta$-approximation** to $f$ if\n$\\sup_b|g(b)-f(b)|<\\delta$ and $|dg_b(v)-df_b(v)|<\\delta|v|$ for all $b$ and\nall tangent-star vectors $v$. A relative approximation **fixed on $L$** means\n$g|_{|L|}=f|_{|L|}$, subdivision of $L$ permitted unless explicitly prohibited.\n**Shape control** means a positive lower bound on\n$r(\\sigma)/\\operatorname{diam}\\sigma$ for every positive-dimensional simplex,\nwhere $r(\\sigma)$ is the distance from the barycentre to the relative boundary;\nit is not asserted for arbitrary iterated barycentric subdivisions.\n\nTwo embeddings $f_i:K_i\\to M$ **fit in a subcomplex** if the inverse images of\n$f_1(|K_1|)\\cap f_2(|K_2|)$ are subcomplexes $L_i$ and\n$f_2^{-1}f_1:L_1\\to L_2$ is a simplexwise affine isomorphism; the fit is\n**full** if every simplex all of whose vertices belong to $L_i$ belongs to\n$L_i$. Gluing along that isomorphism defines the union realization and union\nmap; the gluing is well defined because the two maps agree on the identified\nsubcomplexes and the resulting complex is again finite.\n\nFor a smooth bundle $\\pi:E\\to B$ and a supplied base triangulation $h:D\\to B$,\na **projection-preserving diagram** consists of $F:K\\to E$ and a map $r:K\\to D$\nthat is affine on each simplex into a simplex of the original $D$ and satisfies\n$\\pi F=hr$; the affine/PL requirement does not require domain vertices to map\nto vertices of the original fixed base complex. Fitting preserves the\nprojection when all modified maps satisfy the same equality with the original\n$h$ and the original affine $r$ restricted to their subdivisions; a fixed\nrelative bundle piece must already carry such a diagram. A projection-preserving\ndiagram is determined by the pair $(F,r)$ together with its restrictions to\nsubdivisions, so a modification supported away from a piece leaves the original\ndiagram there exactly on the nose. No generic smooth map is called a bundle\nmerely because it is proper.\n\nFor relative extension on a compact manifold with corners, supplied boundary\ndata are admissible only when they are compatible on all corner-face\nintersections and satisfy the tangent-orthant condition above; the extension\nkeeps their pointwise parametrization, with compatible subdivisions permitted,\nand no extension of arbitrary incompatible boundary data is asserted.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-corner-adapted-strong-approximations-remain-in-the-same-orthant",
+          "source_section": "Statement",
+          "quote": "Let $F:K\\to[0,\\infty)^c\\times\\mathbb R^{n-c}$ be a finite whole-star smooth\nembedding, and write $\\rho_iF$ for its first $c$ coordinate functions. Assume\nfor each original simplex $\\sigma$ and each $i$ that\n$Z_{i,\\sigma}=\\{x\\in\\sigma:\\rho_iF(x)=0\\}$ is a union of faces and that, at\nevery $b\\in Z_{i,\\sigma}$, the linear form $d(\\rho_iF)_b$ on the tangent cone of\n$\\sigma$ is nonnegative with zero set precisely the tangent cone of\n$Z_{i,\\sigma}$. These are the adapted face/tangent conditions, not merely\nsimplex rank conditions.\n\nThere is $\\delta>0$ such that every strong $\\delta$-approximation $G$ preserving\neach of these coordinate planes on the specified zero subcomplexes maps all of\n$K$ into the same closed orthant and has exactly the same coordinate zero sets.\nIt is an embedding for this choice of $\\delta$. Thus plane-preserving fitting\nand extension can be used in corner charts when the initial pieces satisfy these\nadapted face conditions.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compactness and margin facts. A finite geometric realization is compact by [F3]: the realization is a continuous image of the compact finite simplex-index set, and inverse images of closed conditions are finite unions of closed simplex traces. Continuous images of compact sets are compact, because an open cover pulls back to an open cover with a finite subcover, and a closed subset of a compact set is compact by adjoining its open complement to a cover. In a local Euclidean chart a compact set is closed, so for a nonempty compact set $A$ disjoint from a nonempty closed set $C$ a positive gap follows directly from compactness: the pairs $(a,r)$ with $B(a,3r)$ disjoint from $C$ cover $A$ by balls $B(a,r)$, a finite subcover $B(a_j,r_j)$ exists, and the triangle inequality then gives $d(x,y)>2r_j$ for $x\\in A$, $y\\in C$ and a covering $j$, so $2\\min_jr_j>0$ is a gap; empty sets impose no constraint. For a compact source with an open chart cover, [F3] gives a positive Lebesgue margin: choosing a finite cover by balls $B(a_j,r_j)$ with $B(a_j,3r_j)$ inside chart members, any set of diameter less than $\\min_jr_j$ that meets $B(a_j,r_j)$ lies in $B(a_j,2r_j)$ and hence in the same chart. By [F3] a closed vertex star has diameter at most twice the mesh and $k$ successive star neighbourhoods at most $2(k+1)$ times the mesh, so a sufficiently fine subdivision puts all finitely many required support stars inside their assigned chart preimages and keeps the protected-region separation; all of this uses only finitely many explicitly chosen balls.",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Euclidean fitting step. Two finite linear embedded complexes in $\\mathbb R^q$ can be placed in one finite convex cell complex even when their underlying sets differ: cut a bounding box by all affine hyperplanes defining the affine hulls and barycentric facet inequalities of the finitely many simplices of both complexes. Each resulting cell is determined by choosing one weak side of each hyperplane; intersections activate further equalities and are common faces; each original simplex is a union of cells because its equalities and weak inequalities are among the cuts, and closed cells outside a simplex can meet it only along common faces. Triangulate this complex compatibly by [F4] and restrict to the two original polyhedra: their intersection is now a subcomplex, and one barycentric subdivision makes it full, because a face chain all of whose barycentric vertices lie in the intersection has its largest face there and hence the whole simplex there. Pulling these subdivisions back through the linear embeddings gives fitting in a full subcomplex by arbitrary-overlap refinement; no same-polyhedron common-refinement theorem is used beyond its scope.",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Local fitting of an attached piece. Work in $\\mathbb R^q$ with a finite complex $P=Q\\cup A$ and a piecewise smooth map $T$ such that $T|_Q$ and $T|_A$ are embeddings, $A$ being the new piece. Let $P_0$ contain the closed stars of all simplices meeting $T^{-1}(T(A))$ and let $P_1$ be the closed star of $P_0$; then $T^{-1}(T(A))$ lies in the relative interior of $|P_0|$, so by step 1.1 the compact image of the complement of that relative interior has positive distance from the compact set $T(A)$, unless the complement is empty, in which case the distance constraint is omitted. Choose the approximation tolerance below a quarter of that distance and small enough for [F1] on the two embeddings separately, and use [F2] to make $T$ secant on $P_1$ and to extend the change over its star while leaving $T$ unchanged outside that star. Every new intersection of $T(Q)$ with $T(A)$ lies in $|P_0|$ by the distance bound and the triangle inequality, and both restricted maps remain embeddings. On $P_1$ the two maps are linear on a finite subdivision, so step 1.2 fits their images there. Pull the subdivisions back and extend them over the whole complexes by coning subdivided faces from original simplex barycentres, without changing the altered map. The resulting union is a whole-star embedding: at a point of the intersection a neighbourhood is an actual geometric linear complex whose differential is the translated affine realization, hence injective on the whole tangent star; at other points one is locally inside a single embedded piece, which is an embedding by [F1]; and the glued map is continuous and bijective from a compact space onto its image, hence a homeomorphism.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Affine-base bundle projection. In a product chart write $T(x)=(h(r(x)),v(x))$ with projection $p_1$ onto the base, and suppose first that $h$ is affine on every base simplex reached by the affected domain simplices. A secant of $T$ then still has first coordinate $hr$, because both $r$ and $h$ are affine there and the secant matches the vertex values; every boundary correction of [F2] has zero first coordinate, and the explicit correction formula multiplies that correction by a scalar, so it retains a zero first-coordinate component. Hence every perturbation of step 2.1 preserves $p_1T=hr$ exactly. At points identified by the fit, equality of the altered maps and injectivity of $h$ give equality of the $r$-values, so $r$ descends to the glued union and is affine on its simplices.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "General base: shift and shift-back. Remove the affine hypothesis on $h$ by the shift construction. On a finite base subcomplex covering the affected projections and their stars, choose a secant approximation $h'$ to $h$ sufficiently close for [F1]; extend it to the required base neighbourhood by [F2]. Replace $T$ temporarily by $T_1=(h'r,v)$. This is an embedding on each original embedded piece: equality of two $T_1$-values gives equal $r$-values by injectivity of $h'$, then equal $v$-values, hence equal original $T$-values. At the differential level the first component is $dh'_{r(x)}dr_x$, and equality on two tangent-star vectors forces equality of their $dr_x$-values by whole-star injectivity of $h'$; equality of the fibre components then gives equality under $dT_x$, hence equality of the original star vectors. Compactness gives the homeomorphism property, so $T_1$ is again a whole-star embedding. Apply step 3.1 to fit $T_1$, obtaining $T_2=(h'r,v')$, and shift back to $T_3=(hr,v')$. The same injectivity and differential argument shows that each embedding and the embedding of the fitted union survive the shift back, and two points have equal images under $T_3$ exactly when they have equal images under $T_2$, because $h$ and $h'$ are injective and the fibre coordinate is unchanged; hence the full-subcomplex identifications remain identical. The first-coordinate changes cancel completely, leaving the original diagram $\\pi T_3=hr$. Choosing the temporary secant and the fitting errors successively small gives the prescribed final strong error, bounded through the chain rule on finitely many compact charts.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Finite induction over the new simplices. In a general smooth target, subdivide the new complex so that each closed simplex and the old pieces in its intersection neighbourhood lie in one coordinate chart; in the bundle case choose product charts and base charts with the same property, using the margins of step 1.1. Order the finitely many new simplices with faces first. Begin with the old embedding and suppose the already processed new simplices fit it in a full subcomplex and their union is an embedding; attach the next simplex along its already processed boundary, giving $P=Q\\cup A$, and apply step 2.1, or the projection-preserving steps 3.1-4.1 in product charts. The changed map on the processed new subcomplex extends over the unprocessed simplices with arbitrarily small prescribed error by [F2], and in product charts its correction has zero base component, so the diagram is preserved. Choose the error at each of the finitely many stages small enough to retain the previous embeddings and fit margins, with the total error below the requested tolerance. Since only finitely many simplices and stages occur, no unevidenced limiting map or infinite subdivision arises.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 4.1",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Supports, protected regions and corner orthants. Every local change and its extension is supported on the closed stars used in that construction; if those supports have images in the prescribed open neighbourhood $V$ of the new piece and $\\overline V\\cap R=\\varnothing$ for the closed protected region $R$, then the parametrizations and diagrams on $R$ are untouched and pieces already fitted outside the supports keep their identifications, so the induction adds only the new fitted regions. For coordinate affine-plane constraints, secants remain in the same plane and the extension formula remains there because the correction lies in the translation space of the plane, and in the bundle shift the fibre coordinate is unchanged by either shift, so fibre-plane constraints persist. For a corner target, after each plane-preserving local change the image still lies in the chart orthant with the same coordinate zero sets by [F6], before the chart inverse is applied. This proves all the fitting, projection-preserving, supported and relative assertions under the stated separation and product-chart hypotheses.",
+          "step": "6.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 omits the distance constraint when the complement of the relative interior is empty, and step 6.1 disposes of empty supports and an empty protected region."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 takes the finite minimum of the positive radii, so an empty family of gaps contributes no constraint and the zero-gap case cannot arise."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "step 1.2 fits a single simplex on each side as the first instance of the Euclidean fitting step, so the one-simplex case is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 keeps both restricted maps embeddings, which excludes degenerate differentials, and the union-embedding argument handles the identification locus."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 identifies points on established boundaries, and step 6.1 keeps the endpoints of the protected region fixed, so the endpoint cases are covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "only finitely many simplices, charts and stages are selected and the choices are made explicitly, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the statement is an existence and preservation claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation",
+          "source_section": "Statement",
+          "quote": "Let $K$ be finite and $f:K\\to\\mathbb R^q$ a whole-star smooth immersion in the\nsense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere is $\\delta>0$ such that every strong piecewise $C^1$\n$\\delta$-approximation $g:K'\\to\\mathbb R^q$, on any finite subdivision $K'$,\nis a whole-star immersion. If $f$ is also an embedding, $\\delta$ may be chosen\nso that $g$ is an embedding. The subdivision need not have a mesh or shape\nbound.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite geometric complex and $f:K\\to\\mathbb R^q$ piecewise smooth in\nthe sense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere are subdivisions $K_m$ agreeing on every original face, with mesh\ntending to zero and a single lower thickness bound $\\theta>0$ for every\npositive-dimensional simplex, whose secant maps $S_m$, defined by affine\ninterpolation of the values of $f$ at vertices, converge strongly in piecewise\n$C^1$ to $f$.\n\nIf $L\\subset K$ is a subcomplex and $U$ an open neighbourhood of $|L|$, the\napproximation can instead be chosen pointwise equal to $f$ on a neighbourhood\nof $|L|$ and equal to a secant map outside $U$, on shape-controlled\nsubdivisions; subdivision of $L$ is permitted and does not alter $f$ there, and\nevery affine target-plane constraint already satisfied by $f$ on original\nsimplices is preserved.\n\nThere is also a local extension statement: given a finite subcomplex\n$A\\subset K$, a sufficiently small strong approximation $g$ to $f|_A$ on any\nsubdivision extends to a prescribed small strong approximation $G$ to $f$ on a\nsubdivision of $K$, with $G=f$ and with the original simplices unchanged\noutside the closed star of $A$. The permitted error of $g$ depends on the\nrequested error and the finite original simplices, not on the shape of the\nsubdivision of $A$. If the correction $g-f$ has zero component under an affine\nlinear target map $p$ on $A$, then the extended correction has zero $p$\ncomponent everywhere. This last extension does not assert a shape bound on its\nconed simplices.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection",
+          "source_section": "Statement",
+          "quote": "Let $F:K\\to M$ and $G:L\\to M$ be whole-star smooth embeddings of finite complexes\ninto a smooth manifold without boundary. Given any positive strong $C^1$\ntolerance, there are approximations on finite subdivisions fitting in a full\nsubcomplex whose union is a whole-star smooth embedding.\n\nThe same conclusion holds for bundle diagrams $\\pi F=hr_K$, $\\pi G=hr_L$ over a\nfixed whole-star smooth base embedding $h:D\\to B$, when all relevant images are\nin a smooth bundle with product trivializations. The final approximations\nsatisfy these **same** diagrams with $h$ and $r_K,r_L$ unchanged as point maps,\nso the bundle projection is preserved exactly. The union map has the induced\naffine map to $D$.\n\nThe construction may be supported in a prescribed open neighbourhood $V$ of the\nnew piece being fitted, including only the old pieces whose images meet that\nneighbourhood. In particular it fixes a closed protected region $R$ pointwise\nwhenever all newly processed pieces and their required closed stars have images\nin $V$, with $\\overline V\\cap R=\\varnothing$, and the maps already fit on the\npieces outside this support. This is the fixed-collar relative interface: it\ndoes not assert arbitrary pointwise fixed-side fitting without the\nneighbourhood/separation hypotheses. Additional local affine plane constraints\nare preserved if the chosen charts make them coordinate planes and the already\nsupplied diagrams respect them. For corner targets the same construction applies\nwhen all pieces satisfy the adapted face/tangent hypotheses of\n[[lem-corner-adapted-strong-approximations-remain-in-the-same-orthant]] in these\ncharts; that lemma proves every altered piece remains in its original orthant.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-corner-adapted-strong-approximations-remain-in-the-same-orthant",
+          "source_section": "Statement",
+          "quote": "Let $F:K\\to[0,\\infty)^c\\times\\mathbb R^{n-c}$ be a finite whole-star smooth\nembedding, and write $\\rho_iF$ for its first $c$ coordinate functions. Assume\nfor each original simplex $\\sigma$ and each $i$ that\n$Z_{i,\\sigma}=\\{x\\in\\sigma:\\rho_iF(x)=0\\}$ is a union of faces and that, at\nevery $b\\in Z_{i,\\sigma}$, the linear form $d(\\rho_iF)_b$ on the tangent cone of\n$\\sigma$ is nonnegative with zero set precisely the tangent cone of\n$Z_{i,\\sigma}$. These are the adapted face/tangent conditions, not merely\nsimplex rank conditions.\n\nThere is $\\delta>0$ such that every strong $\\delta$-approximation $G$ preserving\neach of these coordinate planes on the specified zero subcomplexes maps all of\n$K$ into the same closed orthant and has exactly the same coordinate zero sets.\nIt is an embedding for this choice of $\\delta$. Thus plane-preserving fitting\nand extension can be used in corner charts when the initial pieces satisfy these\nadapted face conditions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation. Choose one relative interior point in each nonempty cell; triangulate the boundary in increasing dimension and cone from that point. This construction agrees on every common face and preserves each cell as a subpolyhedron.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-brouwer-fixed-point-theorem",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f:D^n\\to D^n$ of the closed unit ball has a fixed point, for every integer $n\\ge0$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the initial time. More quantitatively, if $h,r>0$ make\n\n$$[t_0-h,t_0+h]\\times\\overline B(x_0,r)\\subseteq D,$$\n\nif $\\|F\\|_2\\le M$ and $F$ has state-Lipschitz constant $L$ on this cylinder, and if $hM\\le r$ and $Lh<1$, then there is exactly one solution on $[t_0-h,t_0+h]$ through $(t_0,x_0)$ whose graph lies in the cylinder. Any two solutions through the same initial data agree on every common subinterval containing $t_0$.\n\nIn particular, a unique local solution exists on an interval around the initial time.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Box pieces. If $M$ is empty take the empty complex; if $M$ has dimension zero, compactness makes it a finite discrete set whose points are the required vertices. Otherwise choose finitely many corner charts and closed coordinate boxes $Q_i=[0,R_i]^{c_i}\\times[-R_i,R_i]^{n-c_i}$ contained in them whose smaller relative interiors cover $M$; at a point of smaller depth shrink the chart so that all remaining corner coordinates are strictly positive and are treated as ordinary coordinates. Each box has a finite cell triangulation by [F2], whose inverse chart map $F_i:K_i\\to M$ is a whole-star embedding, being the restriction of an invertible smooth coordinate map to an actual geometric complex; its preimages of local corner planes are subcomplexes. In any other corner chart on an overlap, the transition and its inverse map the corresponding tangent orthant and its faces isomorphically onto the target orthant and faces, because their derivatives preserve the tangent cones by taking directional limits; hence the adapted face/tangent hypotheses of [F2] hold for the box pieces in every chart used to fit them.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Collar of the total boundary. If the boundary is empty, the nonrelative construction also gives the relative result. For nonempty boundary build a piecewise smooth collar directly, corners included. Around each boundary point choose a small corner chart and a smooth vector field whose active corner-coordinate components are strictly positive; restrict ordinary Euclidean smooth bump functions to these orthants, extend by zero, normalize their finite sum and form the weighted sum $V$, which is strictly inward along every active local face, because the inward tangent cone is preserved by chart transitions and its strict interior is convex. Extend $V$ over $M$ by the same finite bump construction. In each corner chart its coefficients extend smoothly to a neighbourhood in $\\mathbb R^n$, so [F3] solves the local ODE there and uniqueness makes the solutions agree while in $M$; compactness gives a common positive time for starts on $\\partial M$, and [F3] gives smooth dependence on the initial point. The forward flow $\\Phi$ lies in the interior for small positive times, because every active boundary coordinate has positive derivative.",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fitting inside corner charts. Fit the box pieces and the collar pieces to one another using the supported construction of [F1]. The additional verification in a corner chart is that the specified corner planes are affine, so secant interpolation and the correction extension keep every simplex lying in such a plane inside that same plane; by [F2] sufficiently small strong errors keep each whole box piece in the same orthant, with the same face zero sets, and the derivative supporting inequalities remain strict off those zero cones by the same positive-bound estimates. The changed maps can therefore be carried back through the original corner chart, without evaluating its inverse outside the chart domain. All other steps of the finite fitting induction are unchanged, and on overlaps local face germs are permuted by the chart transition, so preserving them in the active chart preserves the same geometric faces in every chart; the support margins keep images inside the relatively open charts. Fitting the finitely many pieces successively gives one finite complex and an embedding onto their union, whose corner-face inverse images are subcomplexes, with intersections full after the prescribed barycentric refinement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The collar is a whole-star corner collar. The map $\\partial M\\times[0,\\epsilon]\\to M$, $(y,t)\\mapsto\\Phi(y,t)$, is injective for sufficiently small $\\epsilon$: if two values agree, reverse the common interior orbit by uniqueness; if the times differ, the earlier boundary start would occur at a positive time on an orbit starting at another boundary point, impossible because the forward orbit has already entered the interior and cannot meet the boundary while its inward derivatives remain positive there; equal times give equal starting points. On the compact product it is a homeomorphism onto its image, and that image contains a neighbourhood of $\\partial M$: in a sufficiently small boundary chart, following $-V$ decreases every sufficiently small active face coordinate at a uniformly positive rate until the first one reaches zero, within a time bounded by a constant times the distance to the boundary, so the inverse path is represented as $\\Phi(y,t)$; finitely many boundary charts give a uniform neighbourhood and time. The flow is smooth on each boundary face by [F3], so its composite with $f$ is smooth on each cell of $L\\times[0,\\epsilon]$. At a corner its differential is $(w,t)\\mapsto df(w)+tV$, where the boundary differential fan maps onto the union of orthant faces, and every orthant vector $v$ has the unique expression $v=w+tV$ with $w$ in that boundary union and $t\\ge0$: take $t=\\min_jv_j/V_j$ over the active corner coordinates. Hence this product differential is injective on the full tangent star and fills the orthant, so the supplied admissible boundary data give a whole-star corner collar.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The union covers $M$. Each initial box has a compact smaller core and these cores cover $M$. In its coordinates a sufficiently small perturbation of its map is $x\\mapsto x+e(x)$ on the original box, with $\\|e\\|_\\infty$ less than the margin of that core from the artificial box faces and $e_j(x)=0$ on $x_j=0$ for a true corner face. For a target point $y$ in the smaller core, the self-map of the box $x\\mapsto\\operatorname{clip}_{Q_i}(y-e(x))$, clipping each coordinate to its box interval, has a fixed point by [F3], after transporting the box to a ball by radial parametrization from its centre. Clipping at an artificial face cannot occur at a fixed point, because the error is smaller than the core margin; at a true corner face $x_j=0$, fixed-point clipping would give $y_j-e_j(x)\\le0$, hence $y_j=0$ because $e_j(x)=0$ and $y_j\\ge0$, and the equation $x_j+e_j(x)=y_j$ still holds; for unclipped coordinates it holds by definition. Thus the perturbed box still contains its entire core, and choosing the total fitting error below all finitely many such margins makes the union image equal to $M$. Its local differential fans are homeomorphisms onto the tangent orthants: for a target ray $y+tv$ the preimages $x_t$ under the finite union homeomorphism converge to the preimage $b$ of $y$ and lie on a subsequence in one closed simplex containing $b$; full rank gives $|x_t-b|\\le Ct$ by the first-order expansion and the positive least singular value, and a subsequential limit of $(x_t-b)/t$ is a tangent-cone vector mapping to $v$, while injectivity of the fan gives continuity of the resulting finite piecewise linear inverse. Hence the union is a finite corner-adapted whole-star smooth triangulation of $M$ with all intersections full.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Relative case and protected neighbourhoods. Given the admissible boundary triangulation $f:L\\to\\partial M$, triangulate the finite product cells $\\sigma\\times[0,2\\epsilon/3]$, $\\sigma\\in L$, by [F2], keeping the given bottom-face subdivisions and coning the untriangulated higher cells; composing with the collar flow of step 2.2 gives a whole-star embedding agreeing with $f$ on its bottom. Protect the smaller collar through time $\\epsilon/4$. The compact complement of the open collar through time $\\epsilon/3$ lies in the smooth interior of $M$ and is covered by finitely many ordinary closed chart boxes with smaller cores covering it; choose them and all fitting stars disjoint from the protected collar. Fit these boxes and the outer collar pieces with the supported construction of [F1]; all modifications occur away from the protected region in a boundaryless interior target, so the original $f$ remains pointwise fixed, while the coverage argument of step 3.1 applies to the interior cores and to the compact intermediate collar annulus. A fixed triangulated closed neighbourhood piece with a smaller protected subcomplex is handled by the same supported fitting and core-coverage argument.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Conclusion. The construction uses only finitely many chart pieces and finite subdivisions, keeps the face zero sets by step 2.1, and in the relative case keeps the prescribed boundary map and its face intersections by step 4.1; the total-boundary collar was built explicitly in steps 1.2 and 2.2 rather than inferred from the smooth-boundary collar theorem. Hence every specified finite compatible collection of corner faces is a subpolyhedron, the triangulation of $M$ is finite and corner adapted, the relative extensions realise the admissible boundary data pointwise up to compatible subdivision, and no arbitrary incompatible boundary data are extended. The ambient Axiom of Choice is declared but not essentially used, only finitely many choices being made.",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 takes the empty complex for empty M and a finite discrete set for zero-dimensional M, so the empty case is disposed of."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 treats the dimension-zero manifold as a finite discrete set of vertices; higher-dimensional corners are handled by the box pieces."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the construction is uniform in the number of boxes, so no single-box case is separated out apart from the k=1 instance of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 keeps each altered piece in its orthant with unchanged zero sets, so no degenerate face collapse occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.2 and 2.2 treat corner points and the two ends t=0 and t=\\epsilon of the collar explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the Axiom of Choice is declared ambient, and step 5.1 records that only finitely many choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the statement is an existence theorem, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "thm-smooth-bundles-admit-relative-finite-triangulations-over-a-fixed-base-triangulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice as an ambient hypothesis; the finite construction and\nthe ODE interfaces below use no additional choice, so this hypothesis is\ndispensable. A smooth manifold with corners here is Hausdorff and second\ncountable, with charts in relatively open subsets of $[0,\\infty)^c\\times\\mathbb R^{n-c}$\nand transition maps smoothly extendible with invertible derivative at corner\npoints; transitions preserve the local depth and its face germs. Let $M$ be\ncompact. Then $M$ has a finite corner-adapted whole-star smooth triangulation.\nEvery local corner face, and any specified finite union of such closed faces, is\na subpolyhedron.\n\nIf the total boundary already has a finite piecewise smooth triangulation\n$f:L\\to\\partial M$ compatible on all local face intersections, with its\ndifferential fan giving a homeomorphism onto the union of boundary faces of the\ntangent orthant at each point, the triangulation extends to $M$, pointwise\npreserving $f$ with compatible subdivisions allowed. In the resulting finite\nunion construction all intersections may be made full subcomplexes. The same\nrelative conclusion applies to a fixed triangulated closed neighbourhood piece\nwhose smaller protected subcomplex lies in its relative interior: fitting is\nperformed away from that protected subcomplex. No extension of arbitrary\nincompatible boundary data is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection",
+          "source_section": "Statement",
+          "quote": "Let $F:K\\to M$ and $G:L\\to M$ be whole-star smooth embeddings of finite complexes\ninto a smooth manifold without boundary. Given any positive strong $C^1$\ntolerance, there are approximations on finite subdivisions fitting in a full\nsubcomplex whose union is a whole-star smooth embedding.\n\nThe same conclusion holds for bundle diagrams $\\pi F=hr_K$, $\\pi G=hr_L$ over a\nfixed whole-star smooth base embedding $h:D\\to B$, when all relevant images are\nin a smooth bundle with product trivializations. The final approximations\nsatisfy these **same** diagrams with $h$ and $r_K,r_L$ unchanged as point maps,\nso the bundle projection is preserved exactly. The union map has the induced\naffine map to $D$.\n\nThe construction may be supported in a prescribed open neighbourhood $V$ of the\nnew piece being fitted, including only the old pieces whose images meet that\nneighbourhood. In particular it fixes a closed protected region $R$ pointwise\nwhenever all newly processed pieces and their required closed stars have images\nin $V$, with $\\overline V\\cap R=\\varnothing$, and the maps already fit on the\npieces outside this support. This is the fixed-collar relative interface: it\ndoes not assert arbitrary pointwise fixed-side fitting without the\nneighbourhood/separation hypotheses. Additional local affine plane constraints\nare preserved if the chosen charts make them coordinate planes and the already\nsupplied diagrams respect them. For corner targets the same construction applies\nwhen all pieces satisfy the adapted face/tangent hypotheses of\n[[lem-corner-adapted-strong-approximations-remain-in-the-same-orthant]] in these\ncharts; that lemma proves every altered piece remains in its original orthant.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-corner-adapted-strong-approximations-remain-in-the-same-orthant",
+          "source_section": "Statement",
+          "quote": "Let $F:K\\to[0,\\infty)^c\\times\\mathbb R^{n-c}$ be a finite whole-star smooth\nembedding, and write $\\rho_iF$ for its first $c$ coordinate functions. Assume\nfor each original simplex $\\sigma$ and each $i$ that\n$Z_{i,\\sigma}=\\{x\\in\\sigma:\\rho_iF(x)=0\\}$ is a union of faces and that, at\nevery $b\\in Z_{i,\\sigma}$, the linear form $d(\\rho_iF)_b$ on the tangent cone of\n$\\sigma$ is nonnegative with zero set precisely the tangent cone of\n$Z_{i,\\sigma}$. These are the adapted face/tangent conditions, not merely\nsimplex rank conditions.\n\nThere is $\\delta>0$ such that every strong $\\delta$-approximation $G$ preserving\neach of these coordinate planes on the specified zero subcomplexes maps all of\n$K$ into the same closed orthant and has exactly the same coordinate zero sets.\nIt is an embedding for this choice of $\\delta$. Thus plane-preserving fitting\nand extension can be used in corner charts when the initial pieces satisfy these\nadapted face conditions.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps",
+          "source_section": "Statement",
+          "quote": "Let $K$ be a finite geometric complex and $f:K\\to\\mathbb R^q$ piecewise smooth in\nthe sense of [[def-relative-smooth-triangulation-and-projection-preserving-fitting]].\nThere are subdivisions $K_m$ agreeing on every original face, with mesh\ntending to zero and a single lower thickness bound $\\theta>0$ for every\npositive-dimensional simplex, whose secant maps $S_m$, defined by affine\ninterpolation of the values of $f$ at vertices, converge strongly in piecewise\n$C^1$ to $f$.\n\nIf $L\\subset K$ is a subcomplex and $U$ an open neighbourhood of $|L|$, the\napproximation can instead be chosen pointwise equal to $f$ on a neighbourhood\nof $|L|$ and equal to a secant map outside $U$, on shape-controlled\nsubdivisions; subdivision of $L$ is permitted and does not alter $f$ there, and\nevery affine target-plane constraint already satisfied by $f$ on original\nsimplices is preserved.\n\nThere is also a local extension statement: given a finite subcomplex\n$A\\subset K$, a sufficiently small strong approximation $g$ to $f|_A$ on any\nsubdivision extends to a prescribed small strong approximation $G$ to $f$ on a\nsubdivision of $K$, with $G=f$ and with the original simplices unchanged\noutside the closed star of $A$. The permitted error of $g$ depends on the\nrequested error and the finite original simplices, not on the shape of the\nsubdivision of $A$. If the correction $g-f$ has zero component under an affine\nlinear target map $p$ on $A$, then the extended correction has zero $p$\ncomponent everywhere. This last extension does not assert a shape bound on its\nconed simplices.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation. Choose one relative interior point in each nonempty cell; triangulate the boundary in increasing dimension and cone from that point. This construction agrees on every common face and preserves each cell as a subpolyhedron.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-brouwer-fixed-point-theorem",
+          "source_section": "Statement",
+          "quote": "Every continuous map $f:D^n\\to D^n$ of the closed unit ball has a fixed point, for every integer $n\\ge0$.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there\nis a real $\\delta > 0$, a **Lebesgue number** for $\\mathcal{U}$, such that every\nnonempty $A \\subseteq X$ with $\\operatorname{diam}(A) < \\delta$\n([[def-metric-bounded-diameter]]) satisfies $A \\subseteq U$ for some\n$U \\in \\mathcal{U}$.\n\nDiameters of nonempty subsets of $X$ are defined because a compact space is\nbounded ([[thm-compact-subset-is-closed-and-bounded]]) and a subset of a bounded\nset is bounded. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Compact base and star margins. The metric source $|D|$ is compact because $h$ is a homeomorphism onto the compact base $B$: an open cover of $|D|$ transports under $h$ to an open cover of $B$, which has a finite subcover. Pull the finite product-chart base cover back to $|D|$ and apply [F4]: explicitly choose finitely many balls $B(a_j,r_j)$ covering $|D|$ with $B(a_j,3r_j)$ contained in a chosen chart preimage, so that a subset of diameter less than $\\min_jr_j$ that meets $B(a_j,r_j)$ lies in $B(a_j,2r_j)$ and hence in one chart preimage by the triangle inequality. A closed vertex star has diameter at most twice the mesh and $k$ successive required support stars have diameter at most $2(k+1)$ times the mesh, so choosing the mesh of a subdivision of $D$ with $2(k+1)\\operatorname{mesh}$ below this margin puts all finitely many required support stars inside their assigned product-chart domains, where $k$ is the actual finite number of stars needed by the fitting and extension constructions. Relative protected-piece separation uses the finite-ball compact-versus-closed argument already available in the fitting item on compact source pieces: the closed smaller collar and the closed fitting pieces are disjoint by the stated buffer hypothesis, so a positive gap follows from finitely many balls, while empty source pieces or complements require no bound. All these are local finite metric constructions on compact pieces, not an invocation of an unnamed global metric or of properness as bundle structure.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fibre and base pieces. If $E$ is empty take the empty total complex and map. Otherwise triangulate the compact fibre $N$ by [F1], say $g:L\\to N$. Subdivide $D$ finely enough that the closed stars of the relevant simplices have images under $h$ in the base domains of the finitely many bundle product charts, using the margin of step 1.1; the subdivision inclusion into $D$ is affine on each simplex into an original simplex of $D$. Choose finitely many closed base subcomplex pieces $D_i$ with interiors covering $D$ and $h(D_i)$ compactly contained in a product-chart base domain. For each $i$ the product map $F_i(x,y)=\\phi_i(h(x),g(y))$ on $D_i\\times L$ is a whole-star smooth embedding, being the product of embeddings through a face-compatible product chart; triangulate its finite product cells compatibly by [F3], so that projection onto $D_i$ is affine on each product simplex and $\\pi F_i=h\\operatorname{pr}_1$. The face/tangent conditions transfer from those of $h$, of $g$ and of the face-compatible product chart, so these are admissible bundle diagrams.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fitting the finitely many diagrams. Apply [F2] to fit the diagrams of step 2.1 in turn, choosing the accumulated strong error as small as needed on every compact chart. The fitting construction never changes $h$ or the original point map $r_i=\\operatorname{pr}_1$ of a piece, and on an identified overlap injectivity of $h$ forces the same base point, so the maps $r_i$ descend to one map $r$ on the glued finite complex; after the subdivisions each $r_i$ is still affine into a simplex of the original $D$, so $r$ is a valid final affine-base map with $\\pi F=hr$. The union map is a whole-star embedding, all intersections are full, and by [F2] every corner face is retained.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Coverage fibre by fibre. Fix $x\\in D_i$ and put $b=h(x)$. Since the original $r_i$ is unchanged, the perturbed embedding $F_i'$ maps the entire slice $\\{x\\}\\times|L|$ into the same fibre $E_b$, with original fibre map $g$. Cover $N$ by finitely many closed local corner boxes by their smaller cores and parametrize the input slice over one such box by $g^{-1}$, which is continuous because $g$ is a homeomorphism; there the perturbed fibre map is a continuous small perturbation $u\\mapsto u+e(u)$ of the identity, uniformly in $x$, with $e_j=0$ on every true fibre-boundary face because the fitting preserved those zero sets by [F2]. For a target point $v$ in the smaller core, the self-map $u\\mapsto\\operatorname{clip}(v-e(u))$ of the box has a fixed point by [F3], after transporting the box to a ball by radial parametrization from its centre. If the error is below the core margin no artificial box face can clip at a fixed point, and at a true face $u_j=0$ the constraint $e_j=0$ makes clipped equality imply $v_j=0$, so the original equation still holds and $v$ lies in the perturbed slice. Hence each perturbed slice meets every core and therefore all of $N$; since the $D_i$ cover the base, the union embedding of step 2.1 is onto $E$ and is the required finite corner-adapted whole-star smooth triangulation with exact diagram $\\pi F=hr$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Relative case. Start with the supplied diagram $C:J\\to E$, $\\pi C=hr_J$, embedding onto a closed neighbourhood of the protected subpolyhedron $R$ in its relative interior. Cover the compact complement of a still smaller open neighbourhood contained in $C(J)$ by finitely many local product pieces of the form $D_i\\times Q_i$, with $Q_i$ a closed fibre coordinate box. The separation hypothesis and compactness of the pieces let us choose their images and all necessary fitting stars disjoint from $R$ by the finite-ball argument of step 1.1. The domain base pieces come from sufficiently fine subdivisions of $D$, and the product simplices retain affine projection into the original $D$. Each new piece is a genuine diagram as in step 2.1, using the coordinate parametrization of $Q_i$ in place of $g$. Fit these pieces to $C$ and to one another by the supported construction of [F2]; it leaves $C$ pointwise unchanged on $R$ and keeps the exact original projection on every piece. The smaller cores still cover the complement by the box fixed-point argument of step 4.1, and the compact intermediate overlap in the old neighbourhood piece is retained under a sufficiently small approximation, while the protected region itself is untouched. Therefore the union covers $E$. In the collar application the entire boundary lies in $R$, so the prescribed boundary parametrization and all its corner-face intersections remain fixed.",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Conclusion. All constructions are finite, and the affine base coordinates descend consistently to the union: steps 1.1-4.1 prove the nonrelative bundle theorem with the fixed base triangulation unchanged as a point map, and step 5.1 proves exactly the stated relative collar and neighbourhood version with the protected region kept pointwise. No Ehresmann theorem, generic algebraic-map triangulation or unproved smooth fitting primitive has been substituted for the actual product charts and the local fitting proof, and proper smoothness of $\\pi$ alone was not used as a substitute for the supplied trivializations. The ambient Axiom of Choice is declared but not essentially used.",
+          "step": "6.1",
+          "inputs": [
+            "F5",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 takes the empty total complex and map when the total space E is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 covers a zero-dimensional fibre as a finite vertex set; the product-cell construction is uniform in dimension."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "the construction is uniform in the number of product pieces and no one-piece case is separated out apart from the k=1 instance of step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 works with genuine product boxes and the embedding condition, so degenerate differentials are excluded."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 5.1 keeps the protected boundary collar and its corner-face intersections pointwise, so the boundary endpoints are covered."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement: the Axiom of Choice is declared, and step 6.1 records that all selections made are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the theorem is an existence statement, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    },
+    "ex-a-trivial-smooth-bundle-has-a-projection-preserving-product-triangulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-convex-cell-complexes-admit-compatible-triangulations",
+          "source_section": "Statement",
+          "quote": "Every finite convex cell complex has a compatible finite simplicial triangulation. Choose one relative interior point in each nonempty cell; triangulate the boundary in increasing dimension and cone from that point. This construction agrees on every common face and preserves each cell as a subpolyhedron.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-relative-smooth-triangulation-and-projection-preserving-fitting",
+          "source_section": "Definition",
+          "quote": "A finite geometric simplicial complex $K$ is considered with its Euclidean\nrealization and induced metric; subcomplex, closure, star and link terminology\nfollows [[def-simplicial-subcomplex-star-closure-and-link]]. For $b\\in|K|$ the\n**tangent star** is the union of the tangent cones at $b$ of all simplices\ncontaining $b$, that is, the rays locally contained in the closed star.\n\nA map $f:|K|\\to M$ is **piecewise smooth** when every restriction $f|\\sigma$ to\na closed simplex extends smoothly to a neighbourhood in its affine hull and the\nextensions agree on common faces. In a target coordinate chart the differential\n$df_b$ is then the well-defined continuous piecewise linear map on the tangent\nstar that equals $D(f|\\sigma)(b)$ on the cone of each simplex $\\sigma$\ncontaining $b$; agreement on common faces makes it independent of the chosen\ncontaining simplex. A **smooth immersion of a complex** requires $df_b$\ninjective on the entire tangent star at every point, not merely on each simplex\ntangent space; a **smooth embedding** requires in addition that $f$ be a\nhomeomorphism onto its image, and a **finite smooth triangulation** of $M$ is\nsuch an embedding onto $M$. A corner-adapted triangulation must be face\ncompatible: every local corner face is the image of a subcomplex, and the\ndifferential fan maps the source tangent star homeomorphically onto the\nappropriate tangent orthant, or its specified face sector. This last local\northant condition is the corner-adapted triangulation contract.\n\nAfter an ambient Euclidean realization of the target, or in a fixed finite\nfamily of compact target chart patches, $g:K'\\to M$ on a finite subdivision\n$K'$ of $K$ is a **strong $C^1$ $\\delta$-approximation** to $f$ if\n$\\sup_b|g(b)-f(b)|<\\delta$ and $|dg_b(v)-df_b(v)|<\\delta|v|$ for all $b$ and\nall tangent-star vectors $v$. A relative approximation **fixed on $L$** means\n$g|_{|L|}=f|_{|L|}$, subdivision of $L$ permitted unless explicitly prohibited.\n**Shape control** means a positive lower bound on\n$r(\\sigma)/\\operatorname{diam}\\sigma$ for every positive-dimensional simplex,\nwhere $r(\\sigma)$ is the distance from the barycentre to the relative boundary;\nit is not asserted for arbitrary iterated barycentric subdivisions.\n\nTwo embeddings $f_i:K_i\\to M$ **fit in a subcomplex** if the inverse images of\n$f_1(|K_1|)\\cap f_2(|K_2|)$ are subcomplexes $L_i$ and\n$f_2^{-1}f_1:L_1\\to L_2$ is a simplexwise affine isomorphism; the fit is\n**full** if every simplex all of whose vertices belong to $L_i$ belongs to\n$L_i$. Gluing along that isomorphism defines the union realization and union\nmap; the gluing is well defined because the two maps agree on the identified\nsubcomplexes and the resulting complex is again finite.\n\nFor a smooth bundle $\\pi:E\\to B$ and a supplied base triangulation $h:D\\to B$,\na **projection-preserving diagram** consists of $F:K\\to E$ and a map $r:K\\to D$\nthat is affine on each simplex into a simplex of the original $D$ and satisfies\n$\\pi F=hr$; the affine/PL requirement does not require domain vertices to map\nto vertices of the original fixed base complex. Fitting preserves the\nprojection when all modified maps satisfy the same equality with the original\n$h$ and the original affine $r$ restricted to their subdivisions; a fixed\nrelative bundle piece must already carry such a diagram. A projection-preserving\ndiagram is determined by the pair $(F,r)$ together with its restrictions to\nsubdivisions, so a modification supported away from a piece leaves the original\ndiagram there exactly on the nose. No generic smooth map is called a bundle\nmerely because it is proper.\n\nFor relative extension on a compact manifold with corners, supplied boundary\ndata are admissible only when they are compatible on all corner-face\nintersections and satisfy the tangent-orthant condition above; the extension\nkeeps their pointwise parametrization, with compatible subdivisions permitted,\nand no extension of arbitrary incompatible boundary data is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The cells $\\sigma\\times\\tau$, with $\\sigma$ a simplex of $D$ and $\\tau$ a simplex of $L$, form a finite convex cell complex: the intersection $(\\sigma_1\\times\\tau_1)\\cap(\\sigma_2\\times\\tau_2)=(\\sigma_1\\cap\\sigma_2)\\times(\\tau_1\\cap\\tau_2)$ is a product of common faces, hence a common face of $\\sigma_1\\times\\tau_1$. By [F1] there is a finite compatible triangulation $K$ of $|D|\\times|L|$ subdividing these cells. Define $F(x,y):=(h(x),g(y))$ and $r(x,y):=x$. Every simplex $s$ of $K$ lies in a product cell $\\sigma\\times\\tau$, so $F|_s$ is the restriction of the smooth map $(h|_\\sigma)\\times(g|_\\tau)$ and $r|_s$ is the restriction of the affine projection $\\operatorname{pr}_1$ onto $\\sigma$; on common faces the two restrictions agree, so $F$ is piecewise smooth and $r$ is affine on each simplex into a simplex of the original $D$. Pointwise $\\pi F(x,y)=h(x)=h(r(x,y))$, so $\\pi F=hr$ with the original $h$ unchanged.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The map $F$ is a homeomorphism onto $B\\times N$ because $h$ and $g$ are homeomorphisms onto their images and $F$ is their product; its differential on the tangent star at $(x,y)$ is $(u,v)\\mapsto(dh_x(u),dg_y(v))$, where $(u,v)$ runs through the tangent cone of a refined simplex contained in $\\sigma\\times\\tau$, so $u$ lies in the cone $\\sigma-x$ of the tangent star of $D$ at $x$ and $v$ in $\\tau-y$. If $dh_x(u)=0$ and $dg_y(v)=0$, the whole-star injectivity of $h$ and $g$ gives $u=0$ and $v=0$; hence the product differential is injective on the whole tangent star, even after the product-cell subdivision. The corner-face fans of the product are products of those of the factors, and their zero sets are correspondingly products, so the product triangulation is corner adapted; moreover every product face $\\sigma\\times\\tau$ is a union of cells of the triangulation by [F1], so product corner faces are subpolyhedra. Thus $F:K\\to B\\times N$ is a finite corner-adapted whole-star smooth triangulation with $\\pi F=hr$ and $h$ unchanged, proved directly without invoking the general bundle theorem.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1: the product of the two supplied triangulated complexes is nonempty, and an empty factor would make every assertion vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: the construction is uniform in dimension, and the zero-dimensional case is the product of finite vertex sets triangulated by vertices."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "step 1.1 includes the single product cell as the first instance of the finite product cell complex."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 proves the product differential injective on the whole tangent star, so no degenerate differential occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 keeps all common faces of the product cells, including the corner endpoints, as common faces of the compatible triangulation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "the triangulation is the explicit finite product-cell complex of step 1.1, so no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "the example states an existence claim, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "there is no converse direction to verify."
+        }
+      ]
+    }
+  }
+}

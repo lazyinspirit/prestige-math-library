@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-order-of-a-power-in-a-finite-cyclic-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-distributional-gradient-smooth-off-a-point.md

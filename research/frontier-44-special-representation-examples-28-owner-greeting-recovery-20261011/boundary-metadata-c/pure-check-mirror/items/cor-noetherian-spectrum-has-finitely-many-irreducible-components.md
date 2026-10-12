@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-noetherian-spectrum-has-finitely-many-irreducible-components.md

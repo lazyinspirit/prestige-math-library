@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-finite-short-geodesic-network-gives-a-curvilinear-polygon-cellulation.md

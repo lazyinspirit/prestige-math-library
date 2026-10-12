@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-fubini-should-be-applied-after-tonelli-on-absolute-values.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-root-group-expansion-of-a-weight-vector.md

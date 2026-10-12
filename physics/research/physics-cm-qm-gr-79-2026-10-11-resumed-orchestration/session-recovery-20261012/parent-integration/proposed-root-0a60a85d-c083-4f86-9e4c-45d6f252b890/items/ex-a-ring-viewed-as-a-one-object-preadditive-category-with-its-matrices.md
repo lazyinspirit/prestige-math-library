@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-ring-viewed-as-a-one-object-preadditive-category-with-its-matrices.md

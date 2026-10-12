@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-nl-equals-conl-follows-by-state-swapping.md

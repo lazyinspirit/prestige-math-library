@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-surface-admits-a-finite-triangulation.md

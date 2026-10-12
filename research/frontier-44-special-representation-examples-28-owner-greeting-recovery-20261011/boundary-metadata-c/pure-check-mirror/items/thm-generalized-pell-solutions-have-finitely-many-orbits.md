@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-generalized-pell-solutions-have-finitely-many-orbits.md

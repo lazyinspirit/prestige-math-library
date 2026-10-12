@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equivalence-of-categories-is-an-equivalence-relation.md

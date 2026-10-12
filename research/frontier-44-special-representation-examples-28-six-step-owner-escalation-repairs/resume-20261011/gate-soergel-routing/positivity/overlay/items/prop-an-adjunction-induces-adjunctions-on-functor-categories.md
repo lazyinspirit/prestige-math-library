@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-an-adjunction-induces-adjunctions-on-functor-categories.md

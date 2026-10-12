@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-elementary-restriction-detects-generalized-characters.md

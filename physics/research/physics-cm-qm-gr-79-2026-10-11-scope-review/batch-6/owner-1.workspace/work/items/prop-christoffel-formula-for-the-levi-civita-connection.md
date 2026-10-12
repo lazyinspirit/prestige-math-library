@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-christoffel-formula-for-the-levi-civita-connection.md

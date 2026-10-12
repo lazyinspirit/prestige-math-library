@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-opposite-of-a-preadditive-category-is-preadditive.md

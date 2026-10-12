@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-doubling-recurrence-to-a-dyadic-interval.md

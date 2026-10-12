@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonaffine-pointed-group-to-abelian-variety-morphism-homomorphism.md

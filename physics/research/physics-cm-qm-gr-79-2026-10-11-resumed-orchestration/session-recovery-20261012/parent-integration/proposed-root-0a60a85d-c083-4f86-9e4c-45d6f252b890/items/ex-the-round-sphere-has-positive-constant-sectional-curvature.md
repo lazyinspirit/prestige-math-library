@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-round-sphere-has-positive-constant-sectional-curvature.md

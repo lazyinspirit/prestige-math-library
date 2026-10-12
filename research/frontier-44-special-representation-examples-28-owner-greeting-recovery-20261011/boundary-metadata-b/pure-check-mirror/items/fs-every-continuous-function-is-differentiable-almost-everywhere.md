@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-continuous-function-is-differentiable-almost-everywhere.md

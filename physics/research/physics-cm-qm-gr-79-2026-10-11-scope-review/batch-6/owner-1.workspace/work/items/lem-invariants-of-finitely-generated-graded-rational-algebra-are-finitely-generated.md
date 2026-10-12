@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invariants-of-finitely-generated-graded-rational-algebra-are-finitely-generated.md

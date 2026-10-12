@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-signature-is-multiplicative-under-cartesian-products.md

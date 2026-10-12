@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-interval-formulas-for-a-function-with-one-jump.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-parabolic-induction-as-functions-on-partial-flags.md

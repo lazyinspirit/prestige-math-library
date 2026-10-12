@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-gap-implies-connectivity-and-edge-expansion.md

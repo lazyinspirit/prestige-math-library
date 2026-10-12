@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-polyhedral-face-coherence-and-uniform-star-radius.md

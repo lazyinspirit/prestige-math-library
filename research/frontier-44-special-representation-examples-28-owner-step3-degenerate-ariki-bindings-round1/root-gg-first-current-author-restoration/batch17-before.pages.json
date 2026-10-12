@@ -1,0 +1,1218 @@
+[
+  {
+    "order": 1790,
+    "id": "arakawa-suzuki-functors-and-higher-level-schur-weyl-duality",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Arakawa\u2013Suzuki Functors and Higher-Level Schur\u2013Weyl Duality",
+    "companion": "arakawa-suzuki-functors-and-higher-level-schur-weyl-duality-examples",
+    "requires": [
+      "parabolic-category-o-and-fock-space-bases",
+      "tensor-products-of-modules",
+      "graded-bimodules-and-tensor-functors"
+    ],
+    "items": [
+      {
+        "id": "def-degenerate-affine-hecke-algebra",
+        "kind": "definition",
+        "title": "The degenerate affine Hecke algebra",
+        "deps": [
+          "def-symmetric-group",
+          "def-group-ring",
+          "thm-the-symmetric-group-has-the-coxeter-presentation",
+          "def-polynomial-ring-on-a-family-of-indeterminates",
+          "thm-tensor-product-of-algebras-over-a-commutative-ring",
+          "def-algebra-over-a-commutative-ring"
+        ],
+        "statement": "For d\u22650 the degenerate affine Hecke algebra H_d has commuting polynomial generators x_1,\u2026,x_d and the symmetric-group generators s_i, with s_i x_j=x_j s_i outside j=i,i+1 and s_i x_(i+1)=x_i s_i+1, x_(i+1)s_i=s_i x_i+1. Its ordered monomials x_1^r1\u2026x_d^rd w, r_i\u22650 and w\u2208S_d, form a basis. Thus H_0=C and H_1=C[x_1]. The evaluation H_d/(x_1\u2212a)\u2245C[S_d] sends x_j to a+sum_(k<j)(k j), not to the same scalar for every j. Polynomial degree gives a filtration with gr H_d=C[x_1,\u2026,x_d] semidirect C[S_d]; the inhomogeneous cross relation is not a grading with deg x=1, deg s=0.",
+        "strategy": "Assume AC and work over C. Move polynomial generators left using the cross relations; braid and commutation resolve the overlaps. For independence act on rational functions with s_i=permutation_i\u2212(x_i\u2212x_(i+1))^\u22121(1\u2212permutation_i). The coefficient of each distinct rational-function permutation is triangular with invertible diagonal, so the monomials are independent. Verify the cross and braid identities by clearing denominators in two/three adjacent variables. The Jucys sums satisfy the same relations and the quotient recursion identifies every x_j, giving evaluation. This is the explicit rational-operator proof in the affine-Yangian local note \u00a71.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction (printed pp. 1-2): underlying space, subalgebras and the two defining cross relations of the (right) H_d-action; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2 up to (3.8) (printed pp. 23-24): the same presentation with the explicit basis and evaluation quotient; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Lemma 3.5 area (printed pp. 26-30): basis and evaluation quotient of the cyclotomic quotients; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties",
+        "kind": "lemma",
+        "title": "Type-A nilpotent orbit closures are normal via chain varieties",
+        "deps": [
+          "def-nilpotent-endomorphism",
+          "thm-nilpotent-jordan-string-basis",
+          "def-classical-complex-matrix-lie-algebras",
+          "lem-orbit-map-fibres-and-stabilizer-dimension",
+          "thm-jacobian-criterion-affine-variety",
+          "thm-parameters-and-regular-sequences-in-cohen-macaulay-modules",
+          "thm-polynomial-extension-of-cohen-macaulay-rings",
+          "thm-regular-quotients-and-cohen-macaulayness",
+          "thm-krull-height-theorem",
+          "lem-serre-r-zero-s-one-characterises-reducedness",
+          "thm-serre-normality-criterion",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-schur-weyl-double-centralizer",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and let e be a nilpotent endomorphism of a finite-dimensional complex vector space V. The closure X of its GL(V)-conjugacy orbit has a reduced irreducible NORMAL coordinate domain. The orbit boundary has codimension at least2. This holds for every Jordan type, not only the regular nilpotent cone. A complete proof uses the auxiliary chain equations B_1A_1=0 and B_iA_i=A_(i\u22121)B_(i\u22121): their actual scheme is a complete intersection, smooth outside a codimension\u22652 subset, reduced/irreducible/normal, and its internal-vertex GL invariant ring is C[X].",
+        "strategy": "Complete local construction and proof in owner-category-o-batch17-vust-local-proof.md \u00a7\u00a72\u20134. ## 2. Auxiliary chain variety and local rank calculation\n\nFor the Jordan partition \u03b7 of e let t=l, q_1\u2265...\u2265q_t>0 its column lengths. Put n_i=q_t+...+q_{t-i+1}, 1\u2264i\u2264t, n_0=0, U_i=C^{n_i}. Let\nM=product_{i=1}^{t-1}(Hom(U_i,U_{i+1})\u00d7Hom(U_{i+1},U_i)).\nWrite its coordinates (A_i,B_i), and let Z be the actual scheme cut out by\nB_1A_1=0, B_iA_i=A_{i-1}B_{i-1} (2\u2264i<t).\nThere are c=sum_{i<t}n_i\u00b2 equations. On Z\u00b0 where each A_i is injective OR B_i surjective, the differential of these equations is onto: at each stage solve Y_i A_i+B_i X_i=the prescribed residual, using a left inverse of A_i or right inverse of B_i, successively after the earlier variables have been chosen. The actual nonradical Jacobian supplier therefore gives smoothness and dimension D=2sum_{i<t}n_i n_{i+1}\u2212sum_{i<t}n_i\u00b2 there.\n\nThis open set is nonempty. Take U_{t-k}=im(e^k), with inclusions A_i and restrictions B_i=e. Both maps have maximal rank and satisfy the equations. The end map \u03b8=A_{t-1}B_{t-1} has type\u03b7. For t=1 take Z=Spec C, \u03b8=0 and H trivial; the zero orbit is normal directly.\n\n## 3. Complete ab-string dimension and boundary estimate\n\nA nilpotent pair A:U\u2192V,B:V\u2192U is the odd nilpotent operator T on U\u2295V. The usual Jordan string construction can be made homogeneous: kernels, images and all successive quotient spaces are Z/2-graded, so choose homogeneous complements/bases at every stage. Its indecomposables are alternating a/b strings. Suppressing the b letters gives the Jordan diagram of BA, suppressing a gives that of AB. This proves the classification and finiteness without a quiver-classification theorem. Injectivity/surjectivity are read from the first/last letters; in the relevant dimU\u2264dimV case, A injective means every string ends in b, B surjective means every string starts in b.\n\nLet r_j,s_j be the numbers of a,b letters in each string, and let a_k,b_k count odd strings of lengthk starting respectively with a,b. Put Delta=sum_{k odd}a_k b_k. A graded Hom between strings has min(L_i,L_j) possible shifts. For both odd lengths the difference of even/odd Hom dimensions is the product of their endpoint signs. For an odd/even pair the two opposite Hom directions cancel that difference; for two even lengths it is0. Hence the superdimension of the full centralizer is (dimU\u2212dimV)\u00b2. Subtracting the even centralizer dimension from dimGL(U)\u00d7GL(V) proves that the pair orbit has half the dimension of the full GL(U\u2295V) nilpotent orbit, rather than importing this half-dimension fact.\n\nAlso\nmin(r_i+s_i,r_j+s_j)=min(r_i,r_j)+min(s_i,s_j)\nexcept for equal odd lengths of opposite endpoint signs, when it is larger by1. Summing ordered pairs gives the correction2Delta. The ordinary Jordan centralizer has dimension sum_{i,j}min(L_i,L_j), since a module map between C[t]/t^{L_i} and C[t]/t^{L_j} has that dimension. Therefore, if the pair orbit projects to ordinary orbits C_alpha,C_beta,\ndim X_delta=dimU dimV+(dim C_alpha+dim C_beta)/2\u2212Delta.\nAll stabilizers here are unit groups of finite-dimensional even endomorphism algebras, principal opens in vector spaces, hence smooth connected irreducible in characteristic zero.\n\nStratify Z by the finite compatible sequences of these pair diagrams. The pair-orbit maps to their ordinary nilpotent orbits are locally trivial smooth maps with irreducible fibers: locally choose Jordan bases by fixed nonzero rank minors; their stabilizer fibers are quotients of the connected centralizer unit groups just described. Iterating these fiber products proves that each stratum Z_lambda is smooth irreducible and\n dim Z_lambda=sum_{i<t}n_i n_{i+1}+dim C_sigma/2\u2212sum_i Delta_i,\nwhere sigma is the final end-map type. Powers of the end map factor through U_{t-k}, so rank \u03b8^k\u2264n_{t-k}. Thus sigma is dominated by\u03b7 (equivalently the conjugate-partition partial-sum rank inequalities). The ordinary orbit formula is N\u00b2\u2212sum_j q_j\u00b2, or N\u00b2\u2212sum_i(2i\u22121)\u03b7_i. It implies every distinct dominated type has dimension smaller by an even positive integer.\n\nThere is exactly one stratum over type\u03b7: each final b-diagram must be filled internally with the n_{t-1} a letters; there are exactly that many, so every row starts and ends in b. Removing the first column repeats this argument inductively. This stratum lies in Z\u00b0 and has dimensionD. If the final orbit dimension drops by at least4, the displayed stratum formula already gives dim\u2264D\u22122.\n\nFor a drop exactly2, the prefix-sum expression for orbit dimension shows that exactly one prefix drops by1, so the diagram moves a box to the NEXT row. Analyze one link and remove the first column. If the receiving row was nonempty, the internal filling uses all available a's and every row starts/ends in b; the lower a-diagram is again this one-box degeneration. If a new one-box row is created, exactly one a remains after internal filling. The condition that the a-diagram be dominated by the prescribed diagram with its first column removed permits it only at either end of the last shortened b-row, at either end of the new b-row, or as a separate a-row. The first four placements make A or B maximal rank and either remove the degeneration or pass it down. The separate a-row makes both maps nonmaximal and contributes Delta_i\u22651 (there is an a-only and at least one b-only row; for shortened length1 there can be two b-only rows, so equality1 need not be asserted). Induction down the links proves: every stratum outside Z\u00b0 has dim\u2264D\u22122. This is the full two-case/five-placement argument of KP5.4\u20135.6, including the short-string corner, not a nominal dimension estimate.\n\n## 4. Complete intersection, normality and the actual invariant quotient\n\nThe previous estimate gives dimZ=D and no lower-dimensional component: every component of a scheme cut out by c equations has dimension\u2265dimM\u2212c=D, while the complement strata have smaller dimension. Thus the c generators have heightc. In the polynomial Cohen\u2013Macaulay ambient ring they form a regular sequence: localize at the homogeneous maximal ideal, use the height bound for each prefix (Krull height gives height(prefix)\u2265c\u2212remaining=k), extend to a system of parameters and apply the actual CM parameter theorem. Homogeneous localization detects failure of injectivity, so this is global. The quotient is CM, hence S2/S1; it is generically smooth R0. The actual R0+S1 reducedness lemma makes it reduced. The unique irreducible D-dimensional stratum over type\u03b7 is dense: every other stratum has smaller dimension, while every component has dimensionD, so a second component would have a nonempty D-dimensional open subset outside that first closure, impossible. Thus the reduced quotient is a domain. Regularity in codimension1 plus S2 now makes this domain normal by the actual Serre criterion. This proves irreducibility before using a domain-only normality supplier. This avoids assuming reducedness before applying the nonradical Jacobian clause.\n\nLet H=product_{i<t}GL(U_i). We prove, rather than quote, that C[Z]^H is generated by the entries of \u03b8. First, for Hom(U,V)\u00d7Hom(V,U), polynomial invariants under GL(U) are generated by entries of AB. Scalar weights force equal degrees in A,B; polarize and apply the actual Schur\u2013Weyl centralizer to U^\u2297k, whose invariant contractions pair each U with a U* in a permutation. Depolarization gives products of AB entries. No general invariant-theory FFT is imported.\n\nInvariants of a rational polynomial quotient lift. Every vector lies in a finite-dimensional stable subspace (bounded polynomial degree); its scalar torus acts diagonally by integral degree weights. The actual Weyl theorem splits the derived sl modules inside each torus weight. Thus finite-degree rational GL modules are completely reducible and invariant quotient vectors have invariant lifts; integration is checked on elementary unipotents and diagonal matrices, which generate GL. This works also for the needed finite-dimensional coefficient modules. Apply this exact invariant lifting successively at vertices1,...,t\u22121. At the first vertex the invariant generators are A_1B_1 and all remaining matrix entries; on Z the former equal B_2A_2, so they can be eliminated. Continue, leaving only \u03b8's matrix entries. Consequently C[Z]^H is precisely the coordinate ring of the closure of \u03b8(Z). The unique dense stratum maps onto the conjugacy orbit of e (all Jordan bases are covered), so that closure is its orbit closure.\n\nThe invariant subring of a normal domain is normal: an element of Frac(C[Z]^H) integral over that subring is integral over C[Z], hence in C[Z], and remains H-fixed. Thus the desired nilpotent orbit closure has a normal coordinate domain. All its boundary orbits have smaller even dimension by the finite Jordan classification and the orbit formula; the boundary therefore has codimension\u22652. Neither rational singularities nor Hochster\u2013Roberts is needed.\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hanspeter Kraft and Claudio Procesi, Closures of conjugacy classes of matrices are normal, Invent.Math.53 (1979)227\u2013247; authentic complete23-page GDZ scan",
+              "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN356556735_0053/LOG_0017.pdf",
+              "locator": "Actual \u00a7\u00a71\u20136 printed227\u2013246 read via recovered OCR; \u00a7\u00a73\u20135 chain/ab-diagram normality proof and \u00a76 complete Vust proof independently expanded. Printed244\u2013246 also checked visually; no imported normality or invariant-theory black box."
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+        "kind": "definition",
+        "title": "Arakawa-Suzuki Casimir operators on the tensor functors",
+        "deps": [
+          "def-degenerate-affine-hecke-algebra",
+          "def-classical-complex-matrix-lie-algebras",
+          "def-universal-enveloping-algebra",
+          "def-representation-of-a-lie-algebra",
+          "def-tensor-product-of-modules-by-generators-and-relations",
+          "thm-associativity-of-balanced-tensor-products",
+          "thm-tensor-product-basis-from-bases",
+          "def-casimir-operator-relative-to-an-invariant-form"
+        ],
+        "statement": "For gl_N with trace Casimir \u03a9=sum E_ij tensor E_ji, on M tensor V^tensor d put x_j=\u03a9_0j+sum_(k<j)P_kj and s_i=P_(i,i+1). Equivalently x_(j+1)=s_j x_j s_j+s_j; these operators are natural and commute with gl_N. For the sl_N Arakawa\u2013Suzuki normalization, if z=sum E_ii acts on M by z_M, the source generators are y_j=x_j\u2212z_M/N+(N\u22121)/2 and its transpositions are the same P. The sl_N Casimir is \u03a9_gl\u2212z tensor z/N. Degree zero omits all x_j. Trivial M gives x_j=sum_(k<j)P_kj, with x_1=0.",
+        "strategy": "Assume AC and work over C. Expand the trace dual basis and observe \u03a9 on V tensor V is the flip. Subtract the scalar central summand to pass to sl_N: \u03a9_0j loses z_M/N, while each \u03a9_kj loses1/N, which the source's added1/N restores. Its remaining shift is (N\u22121)/2. Read and compare the actual AS2.2.2, rather than identify x and y without this scalar. The universal formulas make naturality and the recursion immediate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Sections 1.2 and 2.2, formulas (1.2.1)-(1.2.2), (2.2.1)-(2.2.5) (printed pp. 4-7): the Casimir tensors r, Omega, the operators y_i and s_ij, and the relations; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction (printed pp. 1-2) and Section 3.4, (3.10)-(3.13) (printed pp. 12-13): the functorial endomorphisms x and s and their recursion; complete passage read."
+            },
+            {
+              "title": "Joseph Chuang and Raphael Rouquier, Derived equivalences for symmetric groups and sl_2-categorification, Ann. of Math. 167 (2008) 245-298 (complete 45-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0407205",
+              "locator": "Section 7.4, Lemma 7.21 area (cited in [BKHL, Section 3.4]; the H_d-functor action); passage checked as cited."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize",
+        "kind": "lemma",
+        "title": "Nilpotent-orbit tensor covariants extend and polarize",
+        "deps": [
+          "lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-schur-weyl-double-centralizer",
+          "lem-normal-domain-implies-s-two",
+          "thm-depth-zero-associated-prime-criterion",
+          "thm-associated-primes-localise",
+          "lem-depth-quotient-by-regular-element",
+          "thm-zero-divisors-on-a-module",
+          "lem-finite-prime-avoidance",
+          "thm-tensor-product-basis-from-bases",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC, e\u2208End_C(V) nilpotent and d\u22650. Every G_e-fixed B\u2208End_C(V^\u2297d) is the value at e of a GL(V)-equivariant POLYNOMIAL tensor covariant Phi:End(V)\u2192End(V^\u2297d). Every such Phi is a sum, with invariant scalar polynomial coefficients, of X\u21a6sigma composed with X^h1\u2297...\u2297X^hd. The extension is proved on the normal codimension-two orbit closure and lifted using finite rational GL complete reducibility; the covariant formula is proved by polarization and Schur\u2013Weyl permutation contractions, not an imported Procesi FFT.",
+        "strategy": "Complete local argument in owner-category-o-batch17-vust-local-proof.md \u00a75. ## 5. Extension and polarized tensor covariants\n\nLet X be this normal orbit closure and O its dense orbit. Regular functions on O extend to X. Here is the needed Hartogs argument without an imported intersection theorem. For f\u2208Frac A regular off codimension\u22652, put J={a\u2208A:af\u2208A}. At every height-one prime J is the unit ideal. If J were proper choose0\u2260a\u2208J. In the normal S2 domain every associated prime of A/(a) has height1, by localization, the actual depth-zero criterion and the regular-element depth shift. Finite prime avoidance supplies b\u2208J avoiding those primes. Since b(af)=a(bf), regularity of b modulo a implies af\u2208aA. Cancellation gives f\u2208A, contradiction. Apply coordinatewise to maps into a finite-dimensional vector representation.\n\nFor B\u2208End(V^\u2297d) fixed by G_e, define on O the equivariant map g e g^{-1}\u21a6g^\u2297d B(g^{-1})^\u2297d. It is well-defined. It is regular: on rank-minor charts of the constant-rank powers choose bases of kerX^k, their image/quotient complements and hence homogeneous Jordan top vectors by Gaussian elimination. The resulting Jordan-basis conjugator g(X) and its inverse are regular where the finitely many chosen minors/determinant do not vanish. These charts coverO and the expressions agree by G_e-invariance. Hartogs extends the map equivariantly to X (equality on the dense orbit gives equality everywhere). Finite-degree GL complete reducibility then lifts it to an equivariant polynomial map Phi:End(V)\u2192End(V^\u2297d).\n\nTo determine Phi, polarize its degree-k matrix input and pair its output with d independent matrices Y_1,...,Y_d by the nondegenerate trace form. This is a multilinear invariant on End(V)^{k+d}; the actual Schur\u2013Weyl theorem identifies all such invariants with permutation contractions. Each permutation gives products of traces along its cycles, by expansion of matrix indices. Depolarizing the k identical X variables leaves cycles consisting only of X (scalar invariant coefficients) and cycles through the Y's, of the form Tr(X^{a_1}Y_{i_1}...X^{a_r}Y_{i_r}). These latter cycles are exactly the trace pairing of Y_1\u2297...\u2297Y_d with a place permutation followed by X^{h_1}\u2297...\u2297X^{h_d}. Nondegeneracy of trace therefore proves that Phi is a sum of these operator covariants with scalar invariant polynomial coefficients. Evaluating at e gives only permutation\u00d7individual e powers; powers\u2265l vanish. This proves the FULL converse centralizer identity for every nilpotent type and every d, independently of stable faithfulness.\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hanspeter Kraft and Claudio Procesi, Closures of conjugacy classes of matrices are normal, Invent.Math.53 (1979)227\u2013247; authentic complete23-page GDZ scan",
+              "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN356556735_0053/LOG_0017.pdf",
+              "locator": "Actual \u00a7\u00a71\u20136 printed227\u2013246 read via recovered OCR; \u00a7\u00a73\u20135 chain/ab-diagram normality proof and \u00a76 complete Vust proof independently expanded. Printed244\u2013246 also checked visually; no imported normality or invariant-theory black box."
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+        "kind": "definition",
+        "title": "The type-A nilpotent pyramid, good grading and Whittaker character",
+        "deps": [
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "def-classical-complex-matrix-lie-algebras",
+          "def-universal-enveloping-algebra",
+          "thm-nilpotent-jordan-string-basis",
+          "def-nilpotent-endomorphism",
+          "prop-trace-forms-are-symmetric-and-invariant"
+        ],
+        "statement": "Let $\\lambda=(0\\le p_1\\le\\cdots\\le p_n)$ be a partition of $N$ with transpose $q_1\\ge\\cdots\\ge q_l\\ge0$ and let $\\mathfrak g=\\mathfrak{gl}_N(\\mathbb C)$. Number the boxes of the diagram of $\\lambda$ by $1,\\dots,N$ down columns from the left, write $\\mathrm{row}(i),\\mathrm{col}(i)$ for the row and column of the $i$-th box, let $L(i)$ and $R(i)$ be the numbers of its immediate left and right neighbours (or $\\emptyset$ if absent), and define the nilpotent $e=\\sum_{i:L(i)\\ne\\emptyset}e_{L(i),i}\\in\\mathfrak g$, $v_i\\mapsto v_{L(i)}$. Declare $\\deg e_{i,j}=\\mathrm{col}(j)-\\mathrm{col}(i)$ and let $\\mathfrak g=\\bigoplus_{r\\in\\mathbb Z}\\mathfrak g_r$, $\\mathfrak p=\\bigoplus_{r\\ge0}\\mathfrak g_r$, $\\mathfrak h=\\mathfrak g_0$, $\\mathfrak m=\\bigoplus_{r<0}\\mathfrak g_r$. Then $e\\in\\mathfrak g_1$ has Jordan type $\\lambda$ (largest Jordan block $l$), $\\mathfrak p$ is a parabolic subalgebra with Levi factor $\\mathfrak h\\cong\\mathfrak{gl}_{q_1}\\oplus\\cdots\\oplus\\mathfrak{gl}_{q_l}$ and nilradical $\\bigoplus_{r>0}\\mathfrak g_r$, $\\mathfrak m$ is the nilradical of the opposite parabolic, $\\mathfrak g^{e}$ is the graded subalgebra $\\bigoplus_{r\\ge0}(\\mathfrak g_r\\cap\\mathfrak g^e)$ generated by the elements $e_{i,j;r}=\\sum_{\\substack{\\mathrm{row}(h)=i,\\mathrm{row}(k)=j\\\\ \\mathrm{col}(k)-\\mathrm{col}(h)=r}}e_{h,k}$ for $s_{i,j}\\le r<p_j$ (where $s_{i,j}=p_j-p_i$ for $i\\le j$ and $s_{i,j}=0$ for $i\\ge j$), Put $I_{box}=\\{1,\\ldots,N\\}$, $J=\\{(a,b)\\in I_{box}^2:\\mathrm{col}(a)\\le\\mathrm{col}(b),\\ R(b)=\\emptyset\\}$ and $K=\\{(i,j,r):1\\le i,j\\le n,\\ s_{i,j}\\le r<p_j\\}$. The map $(a,b)\\mapsto(\\mathrm{row}(a),\\mathrm{row}(b),\\mathrm{col}(b)-\\mathrm{col}(a))$ is a bijection $J\\to K$. Its inverse takes $b$ to the rightmost box of row $j$ and $a$ to the box in row $i$ at column $p_j-r$. The finite sum $\\xi_{a,b}=\\sum_{t=0}^{\\mathrm{col}(a)-1}e_{L^t(a),L^t(b)}$ equals $e_{\\mathrm{row}(a),\\mathrm{row}(b);\\mathrm{col}(b)-\\mathrm{col}(a)}$; these elements for $(a,b)\\in J$ form the same basis of $\\mathfrak g^e$ as the elements indexed by $K$. Finally set $\\chi(x)=(x,e)=\\mathrm{tr}(xe)$ for $x\\in\\mathfrak m$; then $\\chi$ is a Lie algebra character, i.e. $\\chi([\\mathfrak m,\\mathfrak m])=0$. This grading is the type-A pyramid good grading, not the Dynkin grading of an $\\mathfrak{sl}_2$-triple; it is the one used for the finite W-algebra of the higher-level Schur-Weyl duality.",
+        "strategy": "Assume AC and work over C. Check [E_ab,E_cd]=delta_bc E_ad\u2212delta_ad E_cb and e v_i=v_L(i). Each row is one Jordan string. For Hom between strings of lengths p_a,p_b, the sl2 decomposition has top grading2(p_b\u2212k)\u22650 and bottom\u22122(p_a\u2212k)\u22640, 1\u2264k\u2264min(p_a,p_b), under the doubled grading. This proves injectivity/surjectivity of ad e in the negative/nonnegative degrees and the stated centralizer basis, rather than importing the Dynkin grading. The column blocks give the parabolic and opposite radical. Since brackets of negative degrees have degree\u2264\u22122 while e has degree1, trace([m,m]e)=0. The undoubled source grading has e degree1; its doubled version has no odd degrees and e degree2. For fixed row labels i,j, the right endpoint b has column p_j. Requiring a at column p_j\u2212r to exist in row i is exactly max(0,p_j\u2212p_i)\u2264r<p_j, the declared K range. This proves the bijection with J. Successive left shifts terminate after col(a) terms, give every row-pair matrix unit of the same displacement, and commute with e by cancellation of adjacent summands and the right-end boundary. The string calculation gives min(p_i,p_j) independent maps per row pair, so these finite sums are the full centralizer basis. The loop consumers use (i,j,r)\u2208K and T^(r+1), without confusing box and row indices.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Full \u00a72.1 (PDF6\u20137) reread in final ROUND2: L/R neighbours, box set I, J, K, their explicit bijection, finite xi sum2.2 and row-pair basis2.1. The finite sums and range are proved locally, not merely left as source notation."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Sections 3.1-3.2 (printed pp. 24-29): the pyramid pi, the grading, p, m, and the character chi(x)=(x,e); complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan, Simon M. Goodwin and Alexander Kleshchev, Highest weight theory for finite W-algebras, Int. Math. Res. Not. 2008, no. 15, 53pp (complete 38-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0801.1337",
+              "locator": "Sections 1.2, 2.2 and 5.2 (printed pp. 4-8, 30-36): the general good-grading setup, chi and the standard type-A good grading; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations",
+        "kind": "theorem",
+        "title": "The Casimir and place-permutation operators satisfy the degenerate affine Hecke relations",
+        "deps": [
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "def-degenerate-affine-hecke-algebra",
+          "def-classical-complex-matrix-lie-algebras",
+          "prop-trace-forms-are-symmetric-and-invariant",
+          "def-casimir-operator-relative-to-an-invariant-form"
+        ],
+        "statement": "For every gl_N-module M, these x_j and place permutations give a natural commuting right H_d action on M tensor V^tensor d, using the generator-fixing anti-involution to encode right actions. All Coxeter, polynomial commutation and affine cross relations hold. In particular the x_i commute; this is an essential additional check, not a consequence of the permutation braid alone.",
+        "strategy": "\n\n**Given:** $N\\ge1$, a $\\mathfrak g$-module $M$ with $\\mathfrak g=\\mathfrak{gl}_N(\\mathbb C)$, the natural module $V$, $d\\ge0$, and the operators of [[def-arakawa-suzuki-casimir-operators-on-tensor-functors]] built from the trace-form Casimir $\\Omega=\\sum_{i,j}E_{ij}\\otimes E_{ji}$.\n\n[F1] The operators $P_{ab}$ are the place permutations of the labelled tensor factors; $P_{ab}^2=1$, and $P_{ab}$ commutes with $P_{cd}$ when $\\{a,b\\}\\cap\\{c,d\\}=\\varnothing$ ([[def-arakawa-suzuki-casimir-operators-on-tensor-functors]], [[thm-associativity-of-balanced-tensor-products]]).\n\n[F2] On two natural factors $\\Omega_{ij}=P_{ij}$; more generally, for any triple of factors $a,b,c$ the element identity $[\\Omega_{ab},\\Omega_{ac}+\\Omega_{bc}]=0$ holds in $U(\\mathfrak g)^{\\otimes3}$, and $[\\Omega_{ab},P_{cd}]=0$ whenever the pairs of labels are disjoint ([[def-arakawa-suzuki-casimir-operators-on-tensor-functors]], [[def-classical-complex-matrix-lie-algebras]]).\n\n[F3] $[E_{ab},E_{cd}]=\\delta_{bc}E_{ad}-\\delta_{ad}E_{cb}$ in $\\mathfrak{gl}_N(\\mathbb C)$ ([[def-classical-complex-matrix-lie-algebras]]).\n\n[F4] The Hecke algebra $H_d$ is presented by the Coxeter relations for the $s_i$ and the cross relations $s_ix_{i+1}=x_is_i+1$, $x_{i+1}s_i=s_ix_i+1$, together with $x_ix_j=x_jx_i$; the generator-fixing anti-involution $\\omega$ of $H_d$ is the anti-automorphism fixing all generators, and a left action $\\rho$ of $H_d$ defines a right action by $e\\cdot u=\\rho(\\omega(u))e$ ([[def-degenerate-affine-hecke-algebra]]).\n\n[F5] The Casimir operator acts as an intertwiner and commutes with the $\\mathfrak g$-action; place permutations of natural factors also commute with the $\\mathfrak g$-action because the comultiplication is cocommutative ([[lem-the-casimir-operator-is-basis-independent-and-intertwining]], [[def-representation-of-a-lie-algebra]]).\n\n\n\n## Proof\n\n**Proof technique:** direct.\n\n**Given:** The operators $x_j=\\Omega_{0j}+\\sum_{k<j}P_{kj}$ and $s_i=P_{i,i+1}$ on $M\\otimes V^{\\otimes d}$, and the identities of [F1]-[F5].\n\n1.1 The infinitesimal braid identities. For distinct labels $a,b,c$ one has $[\\Omega_{ab},\\Omega_{ac}+\\Omega_{bc}]=0$: expanding $\\Omega=\\sum E_{uv}\\otimes E_{vu}$ and using [F3], the double commutator sum splits into terms $[E_{uv},E_{xy}]\\otimes E_{vu}\\otimes E_{yx}$ and $E_{uv}\\otimes[E_{vu},E_{xy}]\\otimes E_{yx}$, and the two resulting sums cancel term by term after relabelling; equivalently, this is the identity $[\\Omega_{12},\\Omega_{13}+\\Omega_{23}]=0$ in $U(\\mathfrak g)^{\\otimes3}$, which is the derivative of the invariance of $\\Omega$ under the diagonal adjoint action. Consequently $[\\Omega_{ab},\\Omega_{ac}]=-[\\Omega_{ab},\\Omega_{bc}]=[\\Omega_{ac},\\Omega_{bc}]$. In particular, for three natural factors this is the identity $[P_{ab},P_{ac}]+[P_{ab},P_{bc}]=0$ for the flips. [F2, F3, algebra]\n\n1.2 The Coxeter relations for $s_i$. $s_i=P_{i,i+1}$ is an involution; $s_is_j=s_js_i$ for $|i-j|>1$ because the pairs of interchanged labels are disjoint; and $s_is_{i+1}s_i=s_{i+1}s_is_{i+1}$ because both sides are the permutation operator inducing the same permutation of the three labelled factors. [F1, algebra]\n\n2.1 Cross relations. Conjugation by $s_i=P_{i,i+1}$ interchanges the labels $i$ and $i+1$ in any operator supported on those factors, so $s_i\\Omega_{0,i+1}=\\Omega_{0i}s_i$ and $s_iP_{k,i+1}=P_{ki}s_i$ for $k<i$. Therefore $s_ix_{i+1}=s_i\\Omega_{0,i+1}+\\sum_{k<i}s_iP_{k,i+1}+s_iP_{i,i+1}=\\Omega_{0i}s_i+\\sum_{k<i}P_{ki}s_i+1=x_is_i+1$, and symmetrically $x_{i+1}s_i=s_ix_i+1$. For $j<i$, all labels in $x_j$ are disjoint from $\\{i,i+1\\}$, so $s_i$ commutes with every summand. For $j>i+1$, $\\Omega_{0j}$ and the terms $P_{kj}$ with $k\\notin\\{i,i+1\\}$ commute with $s_i$, while conjugation by $s_i$ interchanges $P_{ij}$ and $P_{i+1,j}$. Their sum is invariant, so again $s_ix_j=x_js_i$; the two overlapping summands need not commute individually. [F1, step 1.1, algebra]\n\n2.2 Polynomial commutation. Fix $i<j$. Since $x_i=\\Omega_{0i}+\\sum_{k<i}P_{ki}$ and $x_j=\\Omega_{0j}+\\sum_{l<j}P_{lj}$, the commutator is $[\\Omega_{0i},\\Omega_{0j}]+\\sum_{l<j}[\\Omega_{0i},P_{lj}]+\\sum_{k<i}[P_{ki},\\Omega_{0j}]+\\sum_{k<i}\\sum_{l<j}[P_{ki},P_{lj}]$. The second sum reduces to the single term $[\\Omega_{0i},P_{ij}]$ (all other $P_{lj}$ are disjoint from the labels $0,i$), and the third sum vanishes (all pairs $\\{k,i\\}$, $\\{0,j\\}$ are disjoint since $k<i<j$). In the fourth sum only the terms with $k=l$ or $l=i$ can fail to vanish, so it equals $\\sum_{k<i}([P_{ki},P_{kj}]+[P_{ki},P_{ij}])$. Hence $[x_i,x_j]=([\\Omega_{0i},\\Omega_{0j}]+[\\Omega_{0i},P_{ij}])+\\sum_{k<i}([P_{ki},P_{kj}]+[P_{ki},P_{ij}])$. The first bracket vanishes by step 1.1 with $a=0$, $b=i$, $c=j$ together with $\\Omega_{ij}=P_{ij}$; each summand of the second bracket vanishes by step 1.1 for the three distinct labels $k,i,j$. Therefore $[x_i,x_j]=0$. [F1, F2, step 1.1, algebra]\n\n3.1 Naturality, commutation with $\\mathfrak g$, and the right action. The place permutations are natural in $M$ and commute with $\\mathfrak g$; the Casimir operators are intertwiners by [F5]; hence every $x_j$ and $s_i$ is natural and $\\mathfrak g$-linear. The relations established in steps 1.1, 1.2, 2.1 and 2.2 are exactly the defining relations of $H_d$ [F4], so the assignment $x_j\\mapsto x_j$, $s_i\\mapsto s_i$ defines a left $H_d$-action. The generator-fixing anti-automorphism $\\omega$ of $H_d$ (which preserves each defining relation because the reversed cross relation $x_{i+1}s_i=s_ix_i+1$ is also a defining relation) converts it into a right action by $e\\cdot u:=\\rho(\\omega(u))e$; the anti-automorphism property gives $(e\\cdot u)\\cdot v=\\rho(\\omega(v))\\rho(\\omega(u))e=\\rho(\\omega(uv))e=e\\cdot(uv)$. This proves both assertions. [F4, F5, step 1.2, step 2.1, step 2.2] \u220e\n\n## Remarks\n\n- The two cross relations are not symmetric consequences of the braid relation: the summand $+s_i$ has no counterpart in the Coxeter presentation of $S_d$, and it is exactly the term responsible for the inhomogeneous filtration discussed in [[def-degenerate-affine-hecke-algebra]].\n\n- The computation of step 2.2 uses $\\Omega_{ij}=P_{ij}$ only on pairs of natural factors; the identities involving the module label $0$ are the universal commutation identities of the Casimir element and hold for arbitrary $M$.\n",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Section 2.2, Lemma 2.2.1 and Theorem 2.2.2 (printed pp. 6-7): the operator identities and the induced H_ell-action; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction and Section 3.4 (printed pp. 1-2, 12-13): the same right action obtained from [CR, Lemma 7.21] and identified with [AS, Section 2.2]; complete passage read."
+            },
+            {
+              "title": "Joseph Chuang and Raphael Rouquier, Derived equivalences for symmetric groups and sl_2-categorification, Ann. of Math. 167 (2008) 245-298 (complete 45-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0407205",
+              "locator": "Section 7.4, Lemma 7.21 (as cited in [BKHL]); the functoriality statement; passage checked as cited."
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "def-the-type-a-finite-w-algebra-and-whittaker-category",
+        "kind": "definition",
+        "title": "The type-A finite W-algebra and the Whittaker category",
+        "deps": [
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+          "def-universal-enveloping-algebra",
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "thm-quotient-ring-laws",
+          "def-representation-of-a-lie-algebra"
+        ],
+        "statement": "Keep the type-A pyramid data $(\\mathfrak g,\\mathfrak p,\\mathfrak h,\\mathfrak m,e,\\chi)$ of the preceding item and let $\\eta\\colon U(\\mathfrak p)\\to U(\\mathfrak p)$ be the algebra automorphism with $\\eta(e_{i,j})=e_{i,j}+\\delta_{i,j}(n-q_{\\mathrm{col}(j)}-q_{\\mathrm{col}(j)+1}-\\cdots-q_l)$ for all $e_{i,j}\\in\\mathfrak p$. Let $I_\\chi$ be the kernel of the algebra homomorphism $\\chi\\colon U(\\mathfrak m)\\to\\mathbb C$ extending the Lie character of the preceding item (so $I_\\chi$ is the two-sided ideal generated by $x-\\chi(x)$, $x\\in\\mathfrak m$) and let $U(\\mathfrak g)I_\\chi$ be the left ideal it generates. The type-A finite W-algebra is $W(\\lambda)=\\{u\\in U(\\mathfrak p): [x,\\eta(u)]\\in U(\\mathfrak g)I_\\chi\\ \\text{for all } x\\in\\mathfrak m\\}$; it is a subalgebra of $U(\\mathfrak p)$, and $Q_\\chi=U(\\mathfrak g)/U(\\mathfrak g)I_\\chi$ is a $(U(\\mathfrak g),W(\\lambda))$-bimodule (the right action by $u\\cdot\\bar v=\\overline{v\\eta(u)}$). The Whittaker category $\\mathcal C(\\lambda)$ is the category of $\\mathfrak g$-modules on which $x-\\chi(x)$ acts locally nilpotently for every $x\\in\\mathfrak m$; for $M\\in\\mathcal C(\\lambda)$ the Whittaker vectors $\\mathrm{Wh}(M)=\\{v\\in M: xv=\\chi(x)v\\ \\forall x\\in\\mathfrak m\\}$ form a $W(\\lambda)$-module with $u\\cdot v=\\eta(u)v$, and $\\mathrm{Wh}(M)=0$ implies $M=0$. The associated graded of the loop filtration on $U(\\mathfrak p)$ makes $W(\\lambda)$ a filtered deformation of $U(\\mathfrak g^e)$ (proved below): this is the loop or good filtration, not the Kazhdan filtration.",
+        "strategy": "Show closedness of $W(\\lambda)$ under multiplication and $\\eta$-equivariance of the defining condition; the bimodule structure on $Q_\\chi$ follows because $W(\\lambda)$ preserves the left ideal $U(\\mathfrak g)I_\\chi$ by definition. The $W(\\lambda)$-module structure on $\\mathrm{Wh}(M)$ follows from $[\\mathfrak m,\\eta(W(\\lambda))]\\subseteq U(\\mathfrak g)I_\\chi$: for $m\\in\\mathfrak m$, $u\\in W(\\lambda)$ and a Whittaker vector $v$ one has $m(\\eta(u)v)=\\eta(u)mv+[m,\\eta(u)]v=\\chi(m)\\eta(u)v$. The vanishing statement $\\mathrm{Wh}(M)=0\\Rightarrow M=0$ is proved by the Gan-Ginzburg/Skryabin cohomology argument in the next-but-one item; record it here as part of the categorical interface. The dictionary $\\eta$ is the type-A $\\rho$-shift of [BKHL, Introduction] and is the one used (with the automorphism $\\eta_c$) on tensor space.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction (printed pp. 2-3): the definition of W(lambda), Q_chi, the Whittaker category and the functor Wh; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Sections 3.2-3.3 and 8.5 (printed pp. 26-33, 84-96): W(pi) as a subalgebra of U(p), the automorphism eta, Q_chi and the Whittaker functor; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan, Simon M. Goodwin and Alexander Kleshchev, Highest weight theory for finite W-algebras, Int. Math. Res. Not. 2008, no. 15, 53pp (complete 38-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0801.1337",
+              "locator": "Section 2.1 (printed pp. 5-8) and Section 3.3 (printed pp. 19-21): the Whittaker-model definition of U(g,e) in an arbitrary compatible good grading; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer",
+        "kind": "theorem",
+        "title": "Vust's graded double centralizer for the type-A nilpotent centralizer",
+        "deps": [
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations",
+          "def-classical-complex-matrix-lie-algebras",
+          "def-universal-enveloping-algebra",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties",
+          "lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize"
+        ],
+        "statement": "Assume AC. For d\u22650 and e with largest Jordan string lengthl\u22651 let B=C[x_1,...,x_d]/(x_1^l,...,x_d^l) semidirect C[S_d], with individual x_i=e and place permutations on E=V^\u2297d. Let phi:U(g^e)\u2192End(E) be the diagonal representation and psi:B\u2192End(E)^op the homomorphism encoding the right action. Then phi(U(g^e))=End_B(E) and End_g^e(E)^op=psi(B), for EVERY nilpotent Jordan type and EVERY d. The right action is injective if e has at leastd strings of maximum lengthl. For d=0 the identities and injectivity are scalar identities. The full converse uses the preceding proved normality/extension/tensor-covariant suppliers; it is not an assumed double-commutant inheritance or a stable-only claim.",
+        "strategy": "Complete local proof in owner-category-o-batch17-vust-local-proof.md \u00a7\u00a71\u20135. ## 1. First centralizer and stable faithfulness, independent of normality\n\nLet V be finite-dimensional over C, e nilpotent with largest string length l\u22651, E=V^\u2297d and B=C[x_1,...,x_d]/(x_1^l,...,x_d^l)\u22caC[S_d], acting by individual e operators and places. Put A=End_{C[e]}V=g^e as an associative vector algebra. Under End(E)=End(V)^\u2297d, commuting with each e in its individual position gives A^\u2297d: choose complements to the kernels of [e,-] in the individual End(V) factors and compare the direct tensor summands. Commuting with place permutations then gives (A^\u2297d)^{S_d}, the span of a^\u2297d for a\u2208A by ordinary characteristic-zero polarization.\n\nThis span equals the image of U(g^e). One inclusion is immediate from commuting individual e/operators and places. For the other put a_i=1\u2297...\u2297a\u2297...\u22971; these d operators commute. Newton identities express a_1...a_d as a polynomial over Q in their power sums p_k=sum_i a_i^k=Delta(a^k), 1\u2264k\u2264d. Since a^k\u2208A, each p_k belongs to the enveloping image. Thus a^\u2297d belongs to that image, proving the first equality without a density, distribution or graded-Schur black box. The same argument shows that an operator commutes with U(g^e) iff it commutes with the diagonal tensor action of the invertible elements G_e=A^\u00d7; the reverse direction follows by differentiating (1+t a)^\u2297d, and the forward direction by Newton identities.\n\nIf e has at least d distinct strings of length l, take the tensor of their top vectors. The l^d d! vectors obtained by individual powers 0\u2264r_i<l and all place permutations are distinct members of the Jordan tensor basis (string labels recover the permutation, and positions recover the powers). They give a copy of the regular right B-module, so the right action is injective. For d=0 both identities and injectivity are scalar identities. This stable argument is not used as a replacement for the full converse below.\n The preceding two local suppliers prove the full normal orbit closure, codimension-two extension and polynomial covariance. Evaluate the latter at e, discard powers\u2265l and obtain the second equality with the correct opposite right-action convention. Every claimed geometric and invariant-theoretic input is explicitly proved in those suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hanspeter Kraft and Claudio Procesi, Closures of conjugacy classes of matrices are normal, Invent.Math.53 (1979)227\u2013247; authentic complete23-page GDZ scan",
+              "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN356556735_0053/LOG_0017.pdf",
+              "locator": "Actual \u00a7\u00a71\u20136 printed227\u2013246 read via recovered OCR; \u00a7\u00a73\u20135 chain/ab-diagram normality proof and \u00a76 complete Vust proof independently expanded. Printed244\u2013246 also checked visually; no imported normality or invariant-theory black box."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 2, Lemmas 2.1-2.3 and Theorem 2.4 with proof, Remark 2.5 (printed pp. 6-9): the graded Schur algebra, the double centralizer property and the stable injectivity; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Section 3.6 and [BK5] citation area (printed pp. 30-34): graded deformation context for the centralizer statement; passage read as cited."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra",
+        "kind": "definition",
+        "title": "The shifted Yangian and the pyramid generators of the type-A finite W-algebra",
+        "deps": [
+          "def-the-type-a-finite-w-algebra-and-whittaker-category",
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+          "def-universal-enveloping-algebra",
+          "def-algebra-over-a-commutative-ring"
+        ],
+        "statement": "The shifted Yangian Y_n(\u03c3) has the shifted Drinfeld D,E,F relations and higher root generators, with s_ij=p_j\u2212p_i for i\u2264j and0 otherwise. Its canonical filtration gives the rth modes degree r, and its loop filtration gives them degree r\u22121; these filtrations have different associated graded algebras. W(\u03bb) is its quotient by D_1^(r), r>p_1. It has a PBW set of Gauss generators with s_ij<r\u2264s_ij+p_min(i,j), including 1\u2264r\u2264p_i on the diagonal. Higher D_i modes are polynomial expressions and are not all zero. Define T(u)=F(u)D(u)E(u), with T_ij(u)=sum_(r\u22650) T_ij^(r) u^\u2212r and T_ij^(0)=delta_ij, with no additional u^s_ij multiplier. Its modes vanish for 0<r\u2264s_ij. In the finite quotient they also vanish for r>S_ij=s_ij+p_min(i,j), so the finite PBW indices are exactly s_ij<r\u2264S_ij. The auxiliary signed path polynomials used to construct these Gauss generators must not all be identified with these shifted T modes. Root weights are \u03b5_i\u2212\u03b5_j; the surviving modes have loop leading term (\u22121)^(r\u22121)e_ij;r\u22121.",
+        "strategy": "Assume AC and work over C. Use the explicit source2 parabolic relations and Gauss decomposition, whose coefficient identities are derived by multiplying the RTT matrix blocks and their inverse. Source3\u20134 baby comultiplications preserve the shifted relations. Define the auxiliary signed paths: consecutive endpoints share a row; the cut row\u2264x changes sign and uses the weak reversed column inequality, and row>x uses the strict forward one. First/last sign-interval cuts cancel in pairs, giving the Gauss factorization. Right-column induction proves invariance; the degree-two boundary scalar is q_(l\u22121)\u2212t\u2212(q_(l\u22121)\u2212t)=0. The mirror scalar is t\u2212t=0. The actual left-recursion E/F misprint is corrected from the source's preceding recursions. Higher invariance follows the displayed D/E recursions and the eight cancelling matrix-unit groups. Quotient straightening expresses all higher modes using the stated finite ranges. The finite-W matrix proof \u00a7\u00a71\u20132 expands these steps and the independence calculation. Keep the coefficient index r of the actual FDE product throughout: no reindexing by the shift is permitted. Gauss inversion is triangular by this same r. The source3.4 column recursion proves upper vanishing: for r>S_ij, use S_ij\u2212s_hj=S_ih in its relevant summands and the smaller-column induction; its last-column terms have r\u22121 beyond the smaller bound. Lower vanishing follows directly from the shifted E/F series and shift-additivity in the FDE product. Thus mode r has loop degree r\u22121 and centralizer label (i,j,r\u22121)\u2208K. For p=(1,2), T12^(1)=0 and T12^(2) has nonzero loop symbol \u2212e12;1; this checks the smallest nonzero shifted mode.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Equations2.32\u20132.34 (PDF13\u201314): T=FDE, actual u^\u2212r coefficient indices and vanishing 0<r\u2264s_ij; complete \u00a73.7 (PDF32\u201333), Lemmas3.3\u20133.4, Theorem3.5 and Lemma3.6: column recursion, r>S_ij vanishing and finite T PBW. These complete passages were read again in final ROUND2."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.1 (printed p. 10): description of W(lambda) as generated by the T^{(r+1)}_{i,j} with the grading and Premet's theorem area; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading",
+        "kind": "lemma",
+        "title": "Gan-Ginzburg and Skryabin inputs for the type-A pyramid good grading",
+        "deps": [
+          "def-the-type-a-finite-w-algebra-and-whittaker-category",
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+          "def-lie-algebra-cohomology",
+          "def-chevalley-eilenberg-cochains",
+          "def-chevalley-eilenberg-differential",
+          "prop-zero-th-lie-algebra-cohomology-is-invariants",
+          "thm-long-exact-sequence-in-lie-algebra-cohomology",
+          "def-universal-enveloping-algebra",
+          "def-polynomial-ring-on-a-family-of-indeterminates"
+        ],
+        "statement": "Double the pyramid grading: e has degree2 and the degree\u22121 space is zero. Then m is the sum of the strictly negative even degrees, with character \u03c7. There is a homogeneous transverse complement S=e+ker(ad f), and the conjugation map M_unip tensor S\u2192e+m^perp is a polynomial isomorphism. Kazhdan gr Q\u03c7 is C[M_unip] tensor C[S]; gr W=C[S]. For every W-module X, twisted m cohomology of Q\u03c7 tensor_W X vanishes in positive degree and its invariants are X. Any nonzero module on which all x\u2212\u03c7(x), x\u2208m, act locally nilpotently has nonzero simultaneous invariants. These assertions use the doubled good grading, not a false nondegenerate alternating form on the source degree\u22121 space.",
+        "strategy": "Assume AC and work over C. The string calculation in the pyramid supplier gives m^perp=[m,e] direct sum ker ad f. The differential of the conjugation map is this direct-sum isomorphism. Its positive contracting weights make its inverse polynomial recursively by weight, proving the global isomorphism. Kazhdan PBW identifies the graded twisted Chevalley\u2013Eilenberg complex with the polynomial de Rham complex of the unipotent group, tensored with the slice and X. Euler contraction kills its positive cohomology. Lift a cycle and subtract successively lower-degree boundaries; each element has bounded-below filtration, so this terminates. It also proves the right-free PBW decomposition needed for arbitrary X. For detection, induct through a central series of the nilpotent m: local nilpotence gives a nonzero kernel for a central shifted generator, its kernel is stable, and induction gives common invariants. The gl_N centre splits off as an independent scalar/polynomial coordinate. See Whittaker local proof \u00a71 for the exact conventions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wee Liang Gan and Victor Ginzburg, Quantization of Slodowy slices, Int. Math. Res. Not. 2002, no. 5, 243-255 (complete 10-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0105225",
+              "locator": "Sections 2, 4 and 5-6, Lemmas 2.1, Theorem 4.1, Propositions 5.1-5.2 and Theorem 6.1 with proof (printed pp. 2-8): the decomposition, Kazhdan grading, cohomology vanishing and Skryabin equivalence; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan, Simon M. Goodwin and Alexander Kleshchev, Highest weight theory for finite W-algebras, Int. Math. Res. Not. 2008, no. 15, 53pp (complete 38-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0801.1337",
+              "locator": "Sections 2.1-2.2, 3.1-3.3 (printed pp. 5-21): the Whittaker-model realization in an arbitrary compatible good grading, Lemma 2.2 and Theorem 3.6-3.8, and the reduction to the Dynkin case; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.3 (printed pp. 11-12) and [BK3] Section 8.1 (printed pp. 82-86): the use of Skryabin's theorem and of the isomorphism mu_{M,X}; complete passage read."
+            },
+            {
+              "title": "Anne Moreau, Nilpotent orbits and finite W-algebras, lecture notes, Kent 2014 (complete 44-page lecture-note PDF)",
+              "url": "https://www.imo.universite-paris-saclay.fr/~anne.moreau/KENT2014-Walg-v2.pdf",
+              "locator": "Part 2, Sections 7, 10-11 (printed pp. 16-32): independent lecture-note treatment of the Whittaker-model definition, the Gan-Ginzburg quantization and Skryabin's equivalence, including the good-grading adaptation; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 4
+      },
+      {
+        "id": "thm-ordered-monomial-pbw-basis-for-the-shifted-yangian",
+        "kind": "theorem",
+        "title": "Ordered monomial PBW basis for the shifted Yangian",
+        "deps": [
+          "def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-associated-graded-algebra-of-a-filtered-algebra",
+          "lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading"
+        ],
+        "statement": "For any fixed order on the shifted D,E,F root modes, their ordered monomials form a basis of Y_n(\u03c3). Its canonical associated graded is the polynomial algebra on all those symbols; its loop associated graded is U(gl_n[t](\u03c3)). In W(\u03bb) the ordered monomials in the finite Gauss ranges s_ij<r\u2264s_ij+p_min(i,j) form a basis. Its commutative Kazhdan/canonical associated graded and its noncommutative loop associated graded are distinct. Equivalently the finite T coefficients with s_ij<r\u2264S_ij form an ordered PBW basis; r is the unshifted FDE coefficient index, not r\u2212s_ij.",
+        "strategy": "Assume AC and work over C. Straighten the finite parabolic relations by mode and root height. Prove unshifted independence using products of arbitrary evaluation matrices at finitely many distinct scalar points: the linearization of the first k current modes is a Vandermonde matrix, so every finite relation is detected at a sufficiently large finite jet. Apply finite-dimensional PBW to those jet Lie algebras; no finite-dimensional PBW theorem is silently applied directly to gl_n[t]. Shifted modes are the corresponding triangular subset. For W, straighten the D_1 truncation as in the preceding definition. At distinct scalar column matrices h_c I, the derivative of an allowed off-diagonal Gauss coefficient is z product_extra(1+h z)/(1+h_c z) for E, and z/(1+h_c z) for F. The first common-column coefficients are Vandermonde with nonzero extra-column factors; the diagonal elementary-coefficient Jacobian is Vandermonde as well. Hence the finite symbols are independent. Their degrees match the doubled-good-grading slice coordinates, whose polynomial PBW was proved by the GG supplier; equality of graded Hilbert series makes them generators. These explicit arguments are the affine-Yangian \u00a73 and finite-W matrix \u00a72 local proofs. The FDE coefficient change is triangular in the original index r. Lower modes0<r\u2264s_ij vanish; the column recursion gives upper vanishing r>S_ij. Hence the surviving T symbols have exactly the same finite Gauss coordinate count and loop labels (i,j,r\u22121)\u2208K.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 2, Section 2.2, the PBW theorem area and its proof (printed pp. 10-14); Chapter 3, Theorem 3.5 and Lemma 3.6 (printed pp. 30-32); complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.1, Lemma 3.1 and its proof (printed p. 10): the use of the ordered-monomial basis of W(lambda) and the identification gr W(lambda)=U(g^e); complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+        "kind": "theorem",
+        "title": "Skryabin's equivalence for the type-A Whittaker pair",
+        "deps": [
+          "lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading",
+          "def-the-type-a-finite-w-algebra-and-whittaker-category",
+          "thm-long-exact-sequence-in-lie-algebra-cohomology",
+          "def-chevalley-eilenberg-cochains"
+        ],
+        "statement": "The functor $Q_\\chi\\otimes_{W(\\lambda)}-\\colon W(\\lambda)\\text{-mod}\\to\\mathcal C(\\lambda)$ is an equivalence of categories, with inverse the Whittaker-vector functor $\\mathrm{Wh}$; in particular $\\mathrm{Wh}$ is exact and $\\mathrm{Wh}(M)=0$ implies $M=0$ for $M\\in\\mathcal C(\\lambda)$. For every finite dimensional $\\mathfrak g$-module $X$, the exact functor $?\\otimes X\\colon\\mathcal C(\\lambda)\\to\\mathcal C(\\lambda)$ transports to the exact functor $M\\mapsto M\\circledast X=\\mathrm{Wh}((Q_\\chi\\otimes_{W(\\lambda)}M)\\otimes X)$ on $W(\\lambda)$-mod, and whenever $M$ is a $\\mathfrak p$-module viewed as a $W(\\lambda)$-module by restriction, the natural map $\\mu_{M,X}\\colon M\\circledast X\\to M\\otimes X$, $(\\eta(u)1_\\chi\\otimes m)\\otimes x\\mapsto um\\otimes x$, is an isomorphism of $W(\\lambda)$-modules. The associativity isomorphisms $(M\\circledast X)\\circledast Y\\cong M\\circledast(X\\otimes Y)$ are compatible, and for the one dimensional $\\mathfrak p$-module $\\mathbb C_c$ the resulting isomorphism $\\mu_d\\colon\\mathbb C_c\\circledast V^{\\circledast d}\\to V_c^{\\otimes d}$ is independent of the order of the composed associativity isomorphisms.",
+        "strategy": "Assume AC and work over C. The preceding supplier computes invariants and higher cohomology of Q\u03c7 tensor_W X for arbitrary X, giving the unit isomorphism. For M in the locally nilpotent Whittaker category, apply invariants to the counit; its kernel/cokernel cannot be nonzero by the supplier's detection and cohomological lifting, so the counit is an isomorphism. Tensoring a finite-dimensional gl_N module preserves this category and is exact. To identify the transported tensor product with the ordinary tensor product on a p-module, solve the finite \u03c7 equations in PBW degree: the leading system is polynomial Taylor translation on C[M_unip], with invertible constant term. The finite matrices X,Y are inverse by degree recursion. Their source8.38 prefix-T formulas and finite inverse-column paths satisfy both tail and reflected-head \u03c7 systems, with the corrected reflected E/F recursion. This gives \u03bc, its naturality and associativity, and matches the universal Casimir operators. The finite-W matrix proof \u00a7\u00a73\u20134 gives the complete construction; no quoted Skryabin theorem is used as a missing prerequisite. In the prefix-T tensor matrices the mode is the actual displacement col(a)\u2212col(b), as in source8.38; coefficients at or below the prefix shift vanish and coefficient0 is delta. No u^s reindexing occurs in X or its inverse Y.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Wee Liang Gan and Victor Ginzburg, Quantization of Slodowy slices, Int. Math. Res. Not. 2002, no. 5, 243-255 (complete 10-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0105225",
+              "locator": "Theorem 6.1 and its proof, Section 6.2 (printed pp. 7-8); Lemma 2.1 and Theorem 4.1 (printed pp. 2, 5): the equivalence and the decomposition; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Theorem 8.1, Corollary 8.2, (8.8)-(8.10) and Theorem 8.10 (printed pp. 82-100): the isomorphism mu_{M,X}, associativity and the Skryabin equivalence in the shifted-Yangian setting; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.3, formulas (3.4)-(3.9) and Lemma 3.2 (printed pp. 11-12): the transported functor, the isomorphism mu_d and its independence of choices; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e",
+        "kind": "theorem",
+        "title": "The loop filtration on the type-A finite W-algebra has associated graded U(g^e)",
+        "deps": [
+          "thm-ordered-monomial-pbw-basis-for-the-shifted-yangian",
+          "def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra",
+          "def-the-type-a-finite-w-algebra-and-whittaker-category",
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character",
+          "thm-pbw-ordered-monomial-basis-for-the-enveloping-algebra",
+          "def-associated-graded-algebra-of-a-filtered-algebra"
+        ],
+        "statement": "Equip $W(\\lambda)$ with the loop (good) filtration $F_rW(\\lambda)=W(\\lambda)\\cap\\bigoplus_{s\\le r}U(\\mathfrak p)_s$ induced by the pyramid grading $\\mathfrak p=\\bigoplus_{r\\ge0}\\mathfrak g_r$. Then the associated graded algebra $\\mathrm{gr}\\,W(\\lambda)$ is canonically isomorphic to the enveloping algebra $U(\\mathfrak g^e)$, viewed as a graded algebra via the restriction of the pyramid grading to the centralizer $\\mathfrak g^e$, and the isomorphism sends the leading symbol of the generator $T_{i,j}^{(r+1)}$ to $(-1)^re_{i,j;r}$ (with the elements $e_{i,j;r}$ the basis of $\\mathfrak g^e$ of the previous items). In particular $W(\\lambda)$ is a filtered deformation of $U(\\mathfrak g^e)$ and the loop filtration is separated: the ordered monomials in the generators $T_{i,j}^{(r+1)}$, $(i,j,r)\\in K$, form a basis of $W(\\lambda)$. This filtration is not the Kazhdan filtration: the Kazhdan filtration has associated graded $\\mathbb C[S]$ (a commutative Slodowy slice algebra), while here $\\mathrm{gr}\\,W(\\lambda)=U(\\mathfrak g^e)$ is noncommutative in general. Neither the loop filtration nor its associated graded requires the Kazhdan grading of the Gan-Ginzburg quantization.",
+        "strategy": "Use the shifted-Yangian presentation: $W(\\lambda)$ is generated by the $T_{i,j}^{(r+1)}$ and its ordered monomials form a basis by the PBW theorem of the previous items; compute the leading symbols in the associated graded of $U(\\mathfrak p)$ using [BKHL, Lemma 3.1] and [BK3, Lemma 3.4], which give $\\mathrm{gr}_rT_{i,j}^{(r+1)}=(-1)^re_{i,j;r}$. Since the $e_{i,j;r}$ form a basis of $\\mathfrak g^e$ and satisfy the same PBW relations, comparing ordered monomials with the PBW basis of $U(\\mathfrak g^e)$ gives the algebra isomorphism. This is the proof of [BKHL, Lemma 3.1]; the same statement is [BGK, Theorem 3.8] for arbitrary good gradings, proved via the Kazhdan-filtration comparison with the Gan-Ginzburg quantization. Record explicitly that the filtration here is the good (loop) filtration: [BGK, Section 3.3] distinguishes it from the Kazhdan filtration, and only the former is used by the double centralizer argument. Use exactly the supplier-defined K: T_ij^(r+1), s_ij\u2264r<p_j, has loop degree r and leading symbol (\u22121)^r e_ij;r. Equivalently its coefficient index k=r+1 satisfies s_ij<k\u2264S_ij=p_j in the left-justified convention. T=FDE has no scalar u-shift. Its coefficient PBW basis and the bijection J\u2194K match the same centralizer PBW basis.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.1, Lemma 3.1 and its proof (printed p. 10): gr W(lambda)=U(g^e) with the leading symbols; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Lemma 3.4, Theorem 3.5 and Lemma 3.6 (printed pp. 30-32) with Chapter 2 Section 2.2 (printed pp. 10-14): the ordered monomial basis and the graded structure; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan, Simon M. Goodwin and Alexander Kleshchev, Highest weight theory for finite W-algebras, Int. Math. Res. Not. 2008, no. 15, 53pp (complete 38-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0801.1337",
+              "locator": "Section 3.2-3.3, Lemma 3.7 and Theorem 3.8, and the distinction of the two filtrations (printed pp. 19-21): the general good-grading version of the statement; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-degenerate-cyclotomic-hecke-algebra",
+        "kind": "definition",
+        "title": "The degenerate cyclotomic Hecke algebra",
+        "deps": [
+          "def-degenerate-affine-hecke-algebra",
+          "def-left-right-and-two-sided-ideal",
+          "def-generated-and-principal-ideals",
+          "thm-quotient-ring-laws",
+          "def-associated-graded-algebra-of-a-filtered-algebra",
+          "thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer",
+          "thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair"
+        ],
+        "statement": "For any multiset a_1,\u2026,a_l\u2208C, let H_d(a)=H_d/(product_j(x_1\u2212a_j)). Its basis consists of x_1^r1\u2026x_d^rd w with 0\u2264r_i<l, so dim H_d(a)=l^d d!. Polynomial degree has gr H_d(a)=C[x_1,\u2026,x_d]/(x_1^l,\u2026,x_d^l) semidirect C[S_d]. For integral roots this is H_d(\u039b), \u039b=sum \u039b_a_j on the integer type-A root system. For general roots use a separate integer chain in each coset C/Z; \u039b_a is a formal fundamental weight on that chain, not an index of the integer-only preceding page. Pyramid roots are a_j=c_j+q_j\u2212n. If l=1, x_j=a_1+sum_(k<j)(k j). The generator-fixing anti-involution descends. The top PBW coefficient functional is a nondegenerate symmetric trace, and restricts to every central block corner.",
+        "strategy": "Assume AC and work over C. Cross relations and the cyclotomic polynomial straighten to the bounded monomials. For independence realize the root multiset by an admissible pyramid: in each integer coset take its greatest root as c\u03ba, and choose n sufficiently large that q_j=n+a_j\u2212c\u03ba\u2265d; order q_j decreasingly. The independent W/Skryabin construction gives the raw commuting tensor action. Its leading individual x_i is e_i, and Vust's longest-string vector makes the bounded monomial/permutation action independent. Hence no relation remains and the claimed graded algebra follows. This uses only the raw tensor construction, not the later categorical Morita result. For the trace pair complementary exponents and inverse permutations in the graded basis. Cyclicity against permutations follows by top filtration degree; against x_i the only remaining top term is product x_j^(l\u22121) times a permutation, and this polynomial is symmetric/central by the divided-difference identity. The perfect graded trace rules out a nonzero ideal in its radical. This is the complete BKHL AppendixA argument, expanded in Whittaker-quotient proof \u00a77.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.5, Lemma 3.4 and Lemma 3.5 (printed pp. 14-15): the level polynomial, the quotient H_d(Lambda), its filtered structure and the associated graded; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2, (3.7)-(3.8) and Section 4.1 symmetric-form remark (printed pp. 23-25, 33): quotient, basis and anti-automorphism; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3 (printed pp. 26-33): cyclotomic quotient H_d(Lambda) of the shifted Yangian, Lemma 3.5 and Theorem 3.5 area; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient",
+        "kind": "lemma",
+        "title": "The parabolic highest-weight truncation factors through the cyclotomic quotient",
+        "deps": [
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations",
+          "def-associated-graded-algebra-of-a-filtered-algebra",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+          "def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character"
+        ],
+        "statement": "For a nonempty pyramid and arbitrary complex origins c, put a_j=c_j+q_j\u2212n. For d\u22651, the raw tensor operator x_1 on V_c^tensor d has minimal polynomial exactly product_j(x\u2212a_j), including repeated roots with their multiplicities. Thus its H_d action factors through H_d(a). The ordinary Casimir action on P_c tensor V^tensor d likewise factors through this polynomial when P_c is the ground induced module with its genuine column filtration. This does not assert that every unrelated standard N(A) or every parabolic category-O object carries that same tensor action. For d=0 there is no x_1. Integral-root \u039b and arbitrary-root coset \u039b use the separate conventions in the preceding definition.",
+        "strategy": "Assume AC and work over C. The first tensor step of P_c has a column filtration; its scalar on the jth quotient is a_j by the trace Casimir difference. Successively apply x_1\u2212a_j along that filtration to annihilate the tensor module; tensoring the remaining factors retains this identity. Transfer it through the explicit Skryabin tensor matrix to the raw space. Assign v_i column degree col(i); the leading x_1 is e on the first factor, whose largest string has length l. A polynomial of degree<l would have a nonzero leading e power and cannot vanish. Thus the degree-l polynomial is minimal, also when roots coincide. This proof needs no integral category-O identification for arbitrary c and no blanket assertion about all x_j eigenvalues.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.5, Lemma 3.4 and its proof, with Lemma 3.3 (printed pp. 13-15): the minimal polynomial of x_1 on V_c^{tensor d} and the explicit action formula; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2, (3.7) and the block idempotent discussion (printed pp. 23-24): the cyclotomic quotient and block projections; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Lemma 3.3 and Lemma 3.4 area, and Section 8.3 (printed pp. 30-33, 84-90): action on tensor space and the transported Hecke action; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "def-deformed-tensor-space-for-the-type-a-finite-w-algebra",
+        "kind": "definition",
+        "title": "The deformed tensor space for the type-A finite W-algebra",
+        "deps": [
+          "thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+          "lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient",
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "def-the-type-a-finite-w-algebra-and-whittaker-category"
+        ],
+        "statement": "Fix the pyramid $\\lambda$, the origin $c=(c_1,\\dots,c_l)$ and the truncated tensor space $V_c^{\\otimes d}$: as a vector space it is $V^{\\otimes d}$, it carries the left action of $U(\\mathfrak p)$ twisted by $\\eta_c$, $\\eta_c(e_{i,j})=e_{i,j}+\\delta_{i,j}c_{\\mathrm{col}(i)}$, and the right action of the cyclotomic quotient $H_d(\\Lambda)$, $\\Lambda=\\sum_{j}\\Lambda_{c_j+q_j-n} on the appropriate integer-coset chains$, defined on the generators by $s_i\\mapsto$ place permutation of the $i$-th and $(i+1)$-th factors and $x_1\\mapsto (e+\\sum_{j=1}^N(c_{\\mathrm{col}(j)}+q_{\\mathrm{col}(j)}-n)e_{j,j})\\otimes1^{\\otimes(d-1)}-\\sum_{k=2}^d\\sum_{\\mathrm{col}(i)<\\mathrm{col}(j)}e_{i,j}\\otimes1^{\\otimes(k-2)}\\otimes e_{j,i}\\otimes1^{\\otimes(d-k)}$ and $x_{j+1}\\mapsto s_jx_js_j+s_j$; the action is well defined by the cyclotomic-quotient lemma. Restricting the left action from $U(\\mathfrak p)$ to $W(\\lambda)$ makes $V_c^{\\otimes d}$ a filtered $(W(\\lambda),H_d(\\Lambda))$-bimodule. The associated graded of this bimodule is the Vust tensor space: $\\mathrm{gr}\\,V_c^{\\otimes d}\\cong V^{\\otimes d}$ with the left $U(\\mathfrak g^e)$-action and the right $C_l[x_1,\\dots,x_d]\\rtimes\\mathbb C[S_d]$-action of Vust's theorem, where $\\mathrm{gr}\\,x_1=e\\otimes1^{\\otimes(d-1)}$ and $\\mathrm{gr}\\,s_i$ is the place permutation. The canonical isomorphism $\\mu_d\\colon\\mathbb C_c\\circledast V^{\\circledast d}\\to V_c^{\\otimes d}$ of Skryabin's equivalence is an isomorphism of $(W(\\lambda),H_d)$-bimodules, and the two actions commute: $W(\\lambda)$ and $H_d(\\Lambda)$ generate mutual centralizers of the filtered tensor space (proved in the next item).",
+        "strategy": "Assume AC and work over C. Restrict the ordinary p tensor action twisted by c to W. The explicit tail/head \u03c7 equations from Skryabin's tensor identification give the displayed x_1: the diagonal is c_col+q_col\u2212n, and the negative cross-column correction has the displayed order. Recursion gives the other x_j and matrix-unit expansion gives the affine relations. The raw tensor action commutes with W because its \u03c7 equations identify it with the transported universal Casimir action. The cyclotomic supplier proves its exact polynomial, not just its spectrum. With column grading the c and diagonal corrections are lower degree and the cross-column term has degree0; leading x_1=e_1 and leading W=U(g^e). Thus the associated graded tensor action is exactly Vust's. Associativity follows from uniqueness of the Taylor PBW solution. Full details are the finite-W matrix proof \u00a74 and the Casimir suppliers. In this identification the prefix T modes retain their actual displacement index. The loop symbol of T_ij^(r+1) uses the supplier K index r; the finite xi row/box bijection does not alter the physical box labels in x_1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction and Sections 3.2-3.4, formulas (3.2)-(3.16), and Lemma 3.3 (printed pp. 3, 10-15): the filtered bimodule V_c^{tensor d}, the explicit x-action and the associated graded; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Sections 8.2-8.3 (printed pp. 86-92): the transported functor, the isomorphism mu_{M,V} and the associativity pentagons; complete passage read."
+            },
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Section 2.2, (2.2.2)-(2.2.5) (printed pp. 6-7): the original construction of the Hecke action on tensor space; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "def-the-whittaker-functor-from-the-relevant-parabolic-o-summand",
+        "kind": "definition",
+        "title": "The Whittaker functor from the relevant parabolic category-O summand",
+        "deps": [
+          "def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality",
+          "def-parabolic-category-o-for-a-standard-parabolic",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+          "def-deformed-tensor-space-for-the-type-a-finite-w-algebra",
+          "def-grothendieck-group-and-character-of-category-o",
+          "thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer",
+          "prop-base-change-freeness-and-specialization-in-the-deformed-family",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "thm-specht-to-permutation-homomorphism-dominance",
+          "thm-weyls-complete-reducibility-theorem",
+          "thm-baer-criterion-for-injective-modules",
+          "thm-hilbert-basis-theorem",
+          "thm-duflo-joseph-g-finite-endomorphisms-of-verma-modules",
+          "def-projective-functors-on-a-regular-integral-category-o-block",
+          "thm-parabolic-category-o-is-a-highest-weight-category",
+          "def-standard-parabolic-and-levi-subalgebras-from-simple-roots",
+          "thm-weyl-character-formula",
+          "thm-bgg-reciprocity",
+          "thm-category-o-has-enough-projectives",
+          "thm-standard-tableau-monomials-form-a-basis-of-the-highest-weight-fock-submodule",
+          "thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module",
+          "thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases"
+        ],
+        "statement": "On genuine parabolic O the Whittaker functor V is D_row Wh D_row, using restricted duality for the row-sum torus and the reflected head/tail identification; equivalently it is the appropriate continuous \u03c7-coinvariant functor. It is exact on these U(m)-finitely-generated objects and intertwines finite tensoring, Casimir and flips. It is distinct from the subsequent Hecke quotient Hom_g(T,\u2212). For admissible c define O_c^d from column-strict labels with nonnegative integral differences from each column's ground entries, P_c the ground simple projective-injective and T=P_c tensor V^tensor d. Then V(P_c)=C_c, V(T)=V_c^tensor d, and V(K(A)) is the simple W-module L(A) for Std labels and zero offStd. Nonintegral cosets have an explicit typed equivalence to products of the integral models; no arbitrary complex c is called an integral block of page16. The tensor compatibility is coherent and preserves x,s. After fixing the ground identification i_0:V(P_c)\u2192C_c, the resulting compatible functor and j_d are unique up to the normalized unique natural isomorphism. Without this normalization scalar automorphisms prevent literal uniqueness.",
+        "strategy": "Assume AC and work over C. Use lower-central weights on U(m) to make its augmentation Rees algebra an image of the enveloping algebra of a finite-dimensional Lie algebra generated by y_i t^r, 0\u2264r\u2264w_i. PBW/Hilbert gives noetherianity; Rees submodule finiteness gives Artin\u2013Rees for left ideals. Baer's criterion then proves the continuous dual union(U/I^k)* injective. Evaluation at1 identifies Hom_m(M,E\u03c7) with \u03c7-finite functionals; the right action is \u03bbu(v)=\u03bb(uv), so its E-valued expression is \u03bb(u r v). The row-sum torus has \u03c7 weight0; finite U(m) generation makes these Hom spaces finite, giving exactness after restricted duality. Skryabin supplies the reflected head/tail W action. For nonintegral origins use the actual all-weight page13 adjoint-finite Verma theorem: tensor-projective Hom matrices identify the fixed-character Harish\u2013Chandra category with the ordinary O linkage block. Ore twists across adjacent different integer cosets are exact by injective lowering and flat localization; their Verma highest vector F^\u22121v has s-dot weight, and the finite nilpotent tensor expansion identifies their invariant Hom matrices. Stable coset sorting preserves final Levi simple roots, hence the parabolic Serre subcategories and their largest generalized-Verma quotients. Shift a in a coset to a\u2212c\u03ba+n\u2212n\u03ba; choose common lower alphabet large enough, giving page16 column heights exactly q_j. For standard characters the Levi Weyl numerator is det(z_r^a_s) times the common factor product z_r^(n\u22121); the offsets cancel exactly. Classical Cauchy from Schur\u2013Weyl identifies these nested-row minors with the actual16 highest projection, so offStd simple characters vanish. Its kernel is stable under residue operators; irreducibility of the highest component and nonzero ground force every Std image nonzero. Apply the two filtered-centralizer lifting arguments locally, independent of the later collector. T has only Std socle, so V is faithful on End T; surjectivity of the raw Hecke image gives End_g(T)^op=B_d. Factor exact V through the corner quotient Hom_g(T,\u2212); its factor M tensor_B\u2212 is exact and faithful, hence M_B is a progenerator by projective-cover Nakayama. W_d=End_B(M) gives Morita and proves the Std images simple. The ZA polynomial-induction construction gives two-term add(T) copresentations of every projective; normalized tensor compatibility determines the natural isomorphism on T, then on all projectives via these kernels, then on all objects via projective presentations. Determinant shifts embed each finite coset chunk in a polynomial chunk. The Whittaker, HC, coset-label, quotient and Specht-corner local notes expand every step; no BG, KSX or W-simple-classification black box is required.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 5.2-5.4, formulas (5.1)-(5.2), Lemmas 5.5, 5.11, Theorem 5.10, Theorem 5.14, Theorem 5.17 (printed pp. 27-35): axioms (V1)-(V2), the bimodule isomorphism j_d and the uniqueness; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Section 8.5 (printed pp. 92-96): the Whittaker functor, [BK3, Lemmas 8.16-8.21]; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.5, Theorem 3.7 and its proof (printed pp. 26-28): the Schur functor pi = Hom_g(T^Lambda,-) and its relation to the Whittaker functor; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 31
+      },
+      {
+        "id": "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+        "kind": "theorem",
+        "title": "The finite-W and degenerate cyclotomic Hecke actions satisfy the double centralizer property",
+        "deps": [
+          "def-deformed-tensor-space-for-the-type-a-finite-w-algebra",
+          "thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer",
+          "thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+          "lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient",
+          "thm-ordered-monomial-pbw-basis-for-the-shifted-yangian",
+          "def-the-whittaker-functor-from-the-relevant-parabolic-o-summand"
+        ],
+        "statement": "For every complex origin c and every d, the raw tensor image algebras W_d and B_d=H_d(\u03bb,c) are mutual centralizers on V_c^tensor d. Their graded image algebras are the corresponding U(g^e) and truncated polynomial/permutation images. If q_l\u2265d the H_d(a) action is faithful. Morita equivalence via Hom_W(V_c^tensor d,\u2212) additionally holds for admissible origins, meaning c_i\u2212c_j\u2208Z implies c_i=c_j, as proved by the actual Whittaker quotient construction below. Mutual centralizers alone do not imply Morita for arbitrary c; the explicit c=(0,1), q=(1,1), d=2 example has a nonprojective tensor module.",
+        "strategy": "Assume AC and work over C. For each filtered centralizer, its leading symbol lies in the corresponding graded centralizer. Vust supplies an element of the opposite algebra with that symbol. Lift it by the actual W loop basis or cyclotomic bounded monomials, subtract and descend the finite tensor filtration. This proves both equalities and both graded-image assertions; it is a two-sided leading-symbol argument, not an unjustified inherited double commutant. The longest-string graded vector gives stable injectivity. Under admissibility, the independent Whittaker character/Serre-quotient proof makes the tensor module a right B_d progenerator, and the first identity then gives Morita. The exact nonadmissible finite matrix in Whittaker-quotient \u00a78 separates these assertions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3, Lemma 3.6 and Theorem 3.7 (printed pp. 15-16), with Lemma 3.5 and Theorem 5.10 (printed pp. 14, 29-30); complete passages read."
+            },
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Introduction and Section 2.2 (printed pp. 1-2, 6-7): the Arakawa-Suzuki action and the existence of the cyclotomic quotient action; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Section 3.6 and Chapter 8 (printed pp. 30-33, 82-100): the filtered deformation and its centralizer; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 32
+      },
+      {
+        "id": "thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives",
+        "kind": "theorem",
+        "title": "The Whittaker functor is exact and fully faithful on the required projectives",
+        "deps": [
+          "def-the-whittaker-functor-from-the-relevant-parabolic-o-summand",
+          "def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality",
+          "thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o",
+          "def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category",
+          "thm-specht-to-permutation-homomorphism-dominance",
+          "thm-schur-weyl-decomposition-with-length-cutoff",
+          "thm-parabolic-category-o-is-a-highest-weight-category"
+        ],
+        "statement": "For admissible c the genuine Whittaker functor is exact on O_c^d, and \u03b3:Hom_g(T,\u2212)\u2192Hom_W(V_c^tensor d,V(\u2212)) is a natural isomorphism. Both V and the Hecke quotient are fully faithful on ALL projective objects; the quotient is also fully faithful on tiltings. T is a self-dual prinjective detecting object containing all Std-labelled projective-injective covers, not a generator of the entire O summand. V(T) is a projective generator of W_d-mod and V preserves projectivity on add(T). It need not send every O projective to a W_d-projective. Its composite with the Morita equivalence is the Serre quotient killing exactly offStd simples.",
+        "strategy": "Assume AC and work over C. Construct Z_A from finite column symmetric powers, embed it into V^tensor d by symmetrization and PBW induce. Split the last column and append its ground label: maximal physical-prefix inequalities force every possible larger polynomial label to retain that same ground column. Positive-radical invariants of a simple are its top Levi simple, proved using the nondegenerate contravariant form. Adjunction gives a single head; exact top centre sections and Levi BGG give the projective-cover character, so the lifted cover is an isomorphism. Induct over columns, then tensor the remaining finite symmetric powers. Specht-to-permutation dominance gives every projective cover once among these Z_A summands. The quotient T/Z_A has a standard flag, hence Std socle by actual16; its injective hull is in add(T). Thus every projective has a two-term add(T) copresentation. For the corner right adjoint G=Hom_B(eA,\u2212), the unit on T is injective, splits by injectivity, and its torsion complementary summand vanishes by adjunction. Left exact G applied to a copresentation gives unit isomorphisms on every projective, proving full faithfulness. Modules with Std head and targets with Std socle give the same Hom argument, proving tilting faithfulness. Morita and the counit factorization give \u03b3. The rank-one dominant Verma maps to a nonprojective simple over C[x]/x\u00b2, while add(T) maps to projectives. The complete argument is Whittaker-quotient \u00a7\u00a74\u20136, not the false full-generator inference.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 5.3-5.4, Lemma 5.11, Theorem 5.10, Theorem 5.13, Theorem 5.14, Corollary 5.15 (printed pp. 28-32): exactness, fully faithfulness on projectives, the quotient functor; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Sections 8.5-8.6 (printed pp. 92-100): the exactness of Whittaker vectors and the projective-generator statement; complete passage read."
+            },
+            {
+              "title": "Joseph Chuang and Raphael Rouquier, Derived equivalences for symmetric groups and sl_2-categorification, Ann. of Math. 167 (2008) 245-298 (complete 45-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0407205",
+              "locator": "Section 7.4 and the functoriality lemmas cited there (via [BKHL]); passage checked as cited."
+            }
+          ]
+        },
+        "dependency_level": 32
+      },
+      {
+        "id": "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor",
+        "kind": "definition",
+        "title": "The higher-level Schur-Weyl projective generator and Schur functor",
+        "deps": [
+          "thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives",
+          "def-the-whittaker-functor-from-the-relevant-parabolic-o-summand",
+          "thm-skryabins-equivalence-for-the-type-a-whittaker-pair",
+          "def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality",
+          "thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o",
+          "def-grothendieck-group-and-character-of-category-o",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For admissible origins, T_\u03b1 is the central component of the self-dual prinjective detector T=P_c tensor V^tensor d. On the integral model it is sum_(i\u2208I_\u03b1) f_i_d\u2026f_i_1 P_c. Put B_\u03b1=End_g(T_\u03b1)^op, the corresponding component of the Hecke IMAGE algebra. The exact Schur quotient is \u03c0_\u03b1=Hom_g(T_\u03b1,\u2212); its left adjoint \u03c0*_\u03b1=T_\u03b1 tensor_(B_\u03b1)\u2212 is right exact. It sends B_\u03b1-projectives to O-projectives, and \u03c0*_\u03b1 \u03c0_\u03b1 recovers add(T_\u03b1), including every Std-labelled prinjective. Neither exactness of \u03c0* nor recovery of every O projective is asserted: both fail in the two-equal-charge rank-one example. These components assemble as locally unital sums; all ambient labels, including those killed by \u03c0, remain in the O category. The opposite composition/right-action convention is fixed throughout.",
+        "strategy": "Assume AC and work over C. Use the actual Whittaker/Hecke factorization and choose a full finite O projective generator with T as a summand. Its idempotent e identifies \u03c0 with e(\u2212), giving exactness and the Serre quotient directly. Tensor-Hom gives the left adjoint and its right exactness. Free B modules map to copies of T, and projective summands remain projective. The evaluation isomorphism on add(T) proves the recovery clause. In the rank-one block, \u03c0(P_dom)=C and \u03c0*\u03c0(P_dom)=T/xT is the costandard, not P_dom; tensoring (x)\u2192B with the C summand of T_B shows failure of exactness. AC is inherited from projective covers, duality and the locally unital assembly. This is Whittaker-quotient \u00a76.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Sections 3.5, (3.27)-(3.31), Theorem 3.6 and Theorem 3.7 (printed pp. 26-28): the projective generator T^Lambda, the End identification and the Schur functors; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Theorem 5.13, Corollary 5.12 and the commutative diagram (5.2) (printed pp. 30-32): the identification End_g(P_c tensor V^d)^op = H_d(lambda,c); complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Section 8.5 (printed pp. 92-96): the Hom-isomorphism gamma and the opposite action; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 33
+      },
+      {
+        "id": "def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality",
+        "kind": "definition",
+        "title": "Stable range and block idempotent corner for higher-level Schur-Weyl duality",
+        "deps": [
+          "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor",
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras",
+          "cor-the-regular-module-decomposes-into-projective-indecomposables"
+        ],
+        "statement": "Stable range means at least d Jordan strings have maximum length l, equivalently q_l\u2265d. For every c this makes the raw H_d(a) action injective. For admissible c outside this range, its image is a central block sum f H_d(a) f; f is the sum of the central blocks supporting contractible simple labels after enlarging all columns to a stable pyramid and deleting the added ground rows. Generalized-eigenvalue sequence idempotents e(i) are not individually central; f is a sum of entire central blocks. Nonadmissible c still has its genuine image algebra and full tensor double centralizer, but the same central-corner/Morita conclusion is not inferred without admissibility.",
+        "strategy": "Assume AC and work over C. The longest-string vector proves stable injectivity on associated graded and hence the filtered algebra. To prove the central-corner clause, enlarge n and every q_j by r, preserving every root a_j; the added bottom entries are c_j+1\u2212(n+k). Let e select degree0 on those rows. Ground minima plus fixed central content force all simple labels in a supporting block to be contractible, and highest-weight PBW shows e kills all other simple blocks. On a supported block, e of the enlarged tensor module is the original tensor module. The original graded first-centralizer argument identifies its W image with the e corner. Under the already-proved stable Morita equivalence this eM is a right progenerator exactly for the supporting central blocks, so its right annihilator is their complement and the image is fHf. Row support and cyclicity are proved by the expanded two-row/induction argument in Specht-corner \u00a7\u00a73\u20134; do not assume e is itself central.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.5, Lemmas 3.4-3.5, and Section 6.2, Lemma 6.5, Theorem 6.6, Corollary 6.7 (printed pp. 14-15, 38-41): stable injectivity and the block idempotent corner; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2, (3.7)-(3.14) (printed pp. 23-24): the block decomposition H^Lambda = direct sum H^Lambda_alpha and the idempotents e_alpha; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Lemma 3.5 area (printed pp. 26-30): the basis and injectivity statement for the cyclotomic quotient; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 34
+      },
+      {
+        "id": "def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks",
+        "kind": "definition",
+        "title": "Hecke induction and restriction functors on degenerate cyclotomic blocks",
+        "deps": [
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For H(a) and its root-coset block decomposition, restriction e_i selects the last generalized x_(d+1) eigenvalue i after the tower inclusion; induction f_i is the corresponding B_(d+1)u tensor_(B_d)\u2212. The degree/central-component idempotent u is the actual last-eigenvalue projector, not a claim that its corner equals the source algebra. These functors are exact, biadjoint and commute with ordinary *-duality; their Grothendieck operators are adjoint for the projective/module Hom pairing. Integral roots use the integer type-A indexing; nonintegral roots use their separate integer-coset chains. The full H(a) tower is obtained in sufficiently large admissible stable realizations; the image towers use the compatible projected tensor actions.",
+        "strategy": "Assume AC and work over C. The first d Casimir operators on T_(d+1)=T_d tensor V are those on T_d tensor1, so every zero image operator remains zero and the image tower map is well defined. Tensor adjunction gives \u03c0_d(GN)=Res \u03c0_(d+1)(N). The offStd kernel is stable under residue tensor operators by the actual16 highest projection and positivity of simple coefficients, so exact biadjoints descend to the quotient. Uniqueness of adjoints identifies their induction with B_(d+1)u tensor_(B_d)\u2212 and proves exactness/biadjunction. Finite admissible stable realizations cover every requested full Hecke block. The top PBW symmetric trace and the contravariant form on T identify \u03c0D with ordinary *-duality via the balanced evaluation map; two-term copresentations and projective presentations extend the identity from T to every object. Thus the functors commute with duality and the pairing adjunction follows. No unsupported Koszul grading or arbitrary corner equality is used. See Whittaker-quotient \u00a77.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.3, (3.16)-(3.20) and the following discussion (printed pp. 24-25): the embeddings iota, the idempotents e_{alpha,alpha_i}, the functors f_i,e_i, their biadjunction and their behaviour under duality; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 6, Section 6.2 (printed pp. 60-66): the embedding H_d into H_{d+1} and the block idempotents; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 35
+      },
+      {
+        "id": "thm-higher-level-schur-weyl-endomorphism-isomorphism",
+        "kind": "theorem",
+        "title": "Higher-level Schur-Weyl endomorphism isomorphism",
+        "deps": [
+          "def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality",
+          "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor",
+          "thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives",
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality"
+        ],
+        "statement": "For admissible c, the right Hecke action gives End_g(P_c tensor V^tensor d)^op=B_d, the image H_d(\u03bb,c). On each central component it gives End_g(T_\u03b1)^op=B_\u03b1=f_\u03b1 H_\u03b1(a) f_\u03b1. Stable range gives B_d=H_d(a) and B_\u03b1=H_\u03b1(a); a single component is not identified with the entire degree-d algebra. Outside stable range the central-corner statement uses the preceding admissible-origin supplier. These are surjective endomorphism isomorphisms, with injectivity of the full action precisely as stated.",
+        "strategy": "Assume AC and work over C. Wh is faithful on endomorphisms of T because any nonzero image has a Std socle. \u03b3 maps its Hom algebra into the raw W centralizer; the commuting right Hecke action already surjects onto that centralizer by the two-sided filtered lifting proof. Hence End_g(T)^op=B_d, respecting the right-action opposite. Project central idempotents to obtain the component equalities. Stable injectivity and the outside-range central support follow from the preceding definition. This does not use false preservation of all projectives under Wh.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.5, Theorem 3.6 and its proof (printed pp. 26-27): H^Lambda_alpha = End_g(T^Lambda_alpha)^op, including the references to [BK3] and [B2]; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Corollary 5.12, Lemma 5.11 and Theorem 5.13 (printed pp. 30-32): the image identification and the opposite-algebra convention; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Section 8.5 and Chapter 6 (printed pp. 92-100, 60-72): the two idempotent computations underlying the block decomposition; complete passages read."
+            }
+          ]
+        },
+        "dependency_level": 35
+      },
+      {
+        "id": "thm-higher-level-schur-weyl-double-centralizer",
+        "kind": "theorem",
+        "title": "Higher-level Schur-Weyl double centralizer and full faithfulness on projectives",
+        "deps": [
+          "thm-higher-level-schur-weyl-endomorphism-isomorphism",
+          "def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality",
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor",
+          "thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives"
+        ],
+        "statement": "The raw W_d and Hecke image B_d are mutual centralizers for every complex origin. For admissible origins, V_c^tensor d is a Morita progenerator and Hom_W(V_c^tensor d,\u2212) is the equivalence W_d-mod\u2192B_d-mod. The genuine Whittaker functor followed by this equivalence is the exact Schur Serre quotient killing offStd simples. It is fully faithful on all O projectives and on tiltings. The left adjoint is right exact and recovers add(T), not automatically all projectives. Stable range replaces B_d by H_d(a); otherwise the admissible-origin central-corner component B_d=fH_d(a)f is used.",
+        "strategy": "Assume AC and work over C. Collect the separately proved all-origin filtered centralizers, admissible-origin character/quotient Morita, exact \u03b3, ZA two-term copresentation criterion, head/socle tilting criterion and precise adjoint. Mutual centralizers alone prove no Morita statement. The finite nonadmissible origin matrix and equal-charge rank-one adjoint witness show why the two extra hypotheses/conclusions must stay distinguished. Each consumed supplier uses the same right-action and central-component convention.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Theorems A and B, Theorem 3.7, Theorem 5.10, Theorem 5.14, Corollary 5.15 (printed pp. 3-4, 15-16, 28-32); complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Theorem 3.7 and its proof (printed pp. 27-28), with Section 3.5 (printed pp. 26-27); complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 6, Theorem 6.10 area (printed pp. 60-72): the parabolic Struktursatz and the functor Hom_g(P_c tensor V^d,-); complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 36
+      },
+      {
+        "id": "thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects",
+        "kind": "theorem",
+        "title": "Schur functor images of standard, simple, projective and tilting objects",
+        "deps": [
+          "thm-higher-level-schur-weyl-double-centralizer",
+          "thm-higher-level-schur-weyl-endomorphism-isomorphism",
+          "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor",
+          "thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o",
+          "def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category",
+          "def-dual-canonical-canonical-and-quasi-canonical-fock-bases",
+          "thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases"
+        ],
+        "statement": "For admissible origins, \u03c0(N(A)) is the intrinsic affine-induced Specht module S(A): its jth column contributes the Specht shape read from its nonnegative ground differences and evaluation at a_j=c_j+q_j\u2212n, and the factors are induced along the affine Young subalgebra. \u03c0(K(A))=D(A) is simple for A\u2208Std and zero otherwise; Std labels give all distinct simples of the relevant Hecke image. For A\u2208Std, \u03c0(P(A)) is its projective cover Y(A) and \u03c0*\u03c0(P(A))=P(A). All ambient offStd projectives still have their genuine images, without a false projective-preservation assertion. Tilting images have the actual opposite-parabolic standard/Specht flag coefficients, and \u03c0 is fully faithful on tiltings. For B\u2208Std, [S(A):D(B)]=[N(A):K(B)]=d_(B,A)(1), using the actual typed singular/parabolic coefficient conventions; B offStd is not a simple Hecke label. All these interfaces are ungraded at parameter1.",
+        "strategy": "Assume AC and work over C. In a stable realization choose d distinct full ground rows; their regular graded Hecke vector gives the rank-one weight idempotent e_S and identifies Hom_W(M,\u2212) with e_S(\u2212). Its generators are row permutations and h(x_i)=e_S(\u2212D_(n\u2212d+i)^(2)+e2(c)+e1(c)+d\u2212n\u2212i+1)e_S. The canonical colour fibre of a finite Levi standard is the tensor product of the column Specht modules by ordinary Schur\u2013Weyl; these corner x_i act as a_j plus their within-column Jucys sums. Row permutations generate the other colour fibres, and multinomial dimensions prove the intrinsic induced-Specht isomorphism. This replaces the false source equality with Hom_p, not a definition of S(A) by \u03c0. The cyclic highest-vector proof identifies W types and the stable enlargement/contractible corner extends the conclusion to the original pyramid. Exact quotient/Morita proves the simple claim; add(T) recovery and full-projective FF give the cover claim for Std. Apply exact \u03c0 to the actual16 tilting standard flag and its typed multiplicity dictionary. Exactness gives the restricted-B comparison. Specht-corner \u00a7\u00a71\u20134 contains the explicit corner/evaluation calculations.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Theorem 3.7 and Theorem 3.10 (printed pp. 27-31), Theorem 3.1 (printed pp. 21-22), Section 4.1-4.3, Theorem 4.6-4.7, Lemma 4.10 (printed pp. 33-37): the images and the tilting/Young module statements; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Theorem 6.12, Corollary 6.13 and Theorem 6.15 (printed pp. 45-48): Specht modules, their flags and their composition multiplicities; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 6, Section 6.5 (printed pp. 66-72): parabolic Verma modules and Specht modules; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 37
+      },
+      {
+        "id": "thm-category-o-translation-intertwines-residue-induction-and-restriction",
+        "kind": "theorem",
+        "title": "Category-O translation intertwines residue induction and restriction",
+        "deps": [
+          "def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks",
+          "thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects",
+          "def-residue-translation-functors-on-the-sum-of-parabolic-o-blocks",
+          "lem-residue-casimir-operators-give-local-affine-hecke-actions",
+          "thm-residue-translation-functors-give-the-integrable-fock-space-action",
+          "def-the-higher-level-schur-weyl-projective-generator-and-schur-functor"
+        ],
+        "statement": "There are natural isomorphisms f_i^H \u03c0\u2245\u03c0 f_i^O and e_i^H \u03c0\u2245\u03c0 e_i^O, compatible with residue projectors, units/counits and ordinary restricted/*-dualities. Consequently the ungraded Grothendieck operators at parameter1 agree and the Schur quotient is a module map. Category O uses the genuine typed coset realization for admissible nonintegral origins, not an unqualified integer block. This statement preserves the actual residue/standard filtrations; an unspecified graded parity or Koszul lift is not asserted by these ungraded suppliers.",
+        "strategy": "Assume AC and work over C. Use the actual natural tensor-Hom adjunction \u03c0_d(GN)=Hom_g(T_d tensor V,N)=Res \u03c0_(d+1)(N). Universal Casimir/flip compatibility identifies its last-eigenvalue projectors. The kernel-stable exact quotient descends the biadjoint O translations, so uniqueness of left/right adjoints gives induction, with the actual units and counits. The symmetric-trace/form proof gives the duality natural isomorphism. Apply the same maps to the standard/tensor residue flags and their eigenvalue projections to preserve the genuine filtration. Equality of K0 operators follows directly, without replacing these natural maps by a dimension comparison.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Theorem 3.7(iv) and its proof, Theorem 4.5 and Section 4.1 (printed pp. 27-28, 33-35): fi commuting with pi, and pi commuting with duality; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Lemma 5.16 and its proof (printed pp. 32-33): the natural isomorphisms sigma and tau intertwining induction with ?circledastV and ?tensorV; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 8, Sections 8.3-8.5 (printed pp. 88-96): the functoriality of the transported Hecke action on M circledast V; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 38
+      }
+    ]
+  },
+  {
+    "order": 1791,
+    "id": "arakawa-suzuki-functors-and-higher-level-schur-weyl-duality-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Arakawa\u2013Suzuki Functors and Higher-Level Schur\u2013Weyl Duality \u2014 Examples",
+    "companion": "arakawa-suzuki-functors-and-higher-level-schur-weyl-duality",
+    "requires": [
+      "arakawa-suzuki-functors-and-higher-level-schur-weyl-duality"
+    ],
+    "items": [
+      {
+        "id": "ex-degenerate-affine-hecke-relations-on-two-tensor-factors",
+        "kind": "example",
+        "title": "The degenerate affine Hecke relations on two tensor factors",
+        "deps": [
+          "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations",
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "def-degenerate-affine-hecke-algebra"
+        ],
+        "statement": "For gl_2, M=V and d=2, let P_ab permute factors a,b of V^tensor3. Then x_1=P_01, s_1=P_12 and x_2=P_02+P_12. Their eight-by-eight tensor-basis matrices satisfy s_1\u00b2=1, [x_1,x_2]=0, s_1 x_2\u2212x_1 s_1=1 and x_2 s_1\u2212s_1 x_1=1. For v_1 tensor v_2 tensor v_1, x_1 s_1 sends it to v_1 tensor v_1 tensor v_2, while s_1 x_2 sends it to the sum of that vector and the original. The commutator [s_1,x_2] is not literally1; the affine cross relation has the distinct x_1 on its other side.",
+        "strategy": "Assume AC and work over C. Write each P_ab as its permutation of the eight binary words. Products of the three transpositions verify both affine relations. Expand [P_01,P_02+P_12]; the two oriented three-cycles cancel. Enumerate the basis words to check the displayed example and all matrix entries; this finite example tests the normalization, not the general proof.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Lemma 2.2.1 (printed p. 7): the operator identities checked in the smallest case; the displayed computation specializes the lemma to d=2; passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction (printed pp. 1-2): the d=2 special case of the action; passage read."
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-a-level-two-cyclotomic-polynomial-from-highest-weight-filtration",
+        "kind": "example",
+        "title": "A level-two cyclotomic polynomial from the highest-weight filtration",
+        "deps": [
+          "lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient",
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors"
+        ],
+        "statement": "Take source-ordered row lengths p=(1,2), q=(2,1), N=3, n=2, c=(0,0). Number boxes down columns:1=(1,1),2=(2,1),3=(2,2). Thus e=E23 and x_1 on V is E23+diag(0,0,\u22121). Its eigenvalue0 has multiplicity2 and eigenvalue\u22121 has multiplicity1; the \u22121 eigenspace is C(v_3\u2212v_2). Its minimal polynomial is x(x+1), with roots a=(0,\u22121), \u039b=\u039b_0+\u039b_\u22121. For every d\u22651 the raw tensor x_1 still has exactly this minimal polynomial by the column-filtration and leading-string argument. H_d(\u039b) has dimension2^d d!. At d=1 its image splits the two stated eigenspaces.",
+        "strategy": "Assume AC and work over C. Compute x_1 v_1=x_1 v_2=0 and x_1 v_3=v_2\u2212v_3. Then x_1(x_1+1)=0 and both eigenvalues occur. The raw cyclotomic supplier handles d>1 including its cross-column corrections; leading e has nilpotence index2, so degree1 cannot annihilate. Use the full cyclotomic PBW basis for the dimension. The ordered-row dictionary is essential: the native row numbering and E13 were incompatible with its source-ordered p.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Lemma 3.4 and its proof, and Lemma 3.3 (printed pp. 13-15): the minimal polynomial on V_c^{tensor d} and the action formula; the computation below specializes these; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2 (3.7)-(3.8) (printed pp. 23-24): the quotient and its dimension; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "cex-a-hecke-action-alone-does-not-imply-double-centralizer",
+        "kind": "counterexample",
+        "title": "A Hecke action alone does not imply the double centralizer property",
+        "deps": [
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "def-the-type-a-finite-w-algebra-and-whittaker-category",
+          "def-arakawa-suzuki-casimir-operators-on-tensor-functors",
+          "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations"
+        ],
+        "statement": "Let $M=\\mathbb C^2$ be the trivial $\\mathfrak{gl}_2(\\mathbb C)$-module, $V=\\mathbb C^2$ the natural module and $d=1$. The Arakawa-Suzuki construction provides an action of $H_1=\\mathbb C[x_1]$ on $M\\otimes V\\cong\\mathbb C^4$ commuting with $\\mathfrak{gl}_2$, but here $x_1=\\Omega^{M,V}=0$, so the action is the evaluation action $x_1\\mapsto0$ and $\\mathrm{End}_{H_1}(M\\otimes V)=\\mathrm{End}_\\mathbb C(\\mathbb C^4)=M_4(\\mathbb C)$. On the other hand the image of $U(\\mathfrak{gl}_2)$ in $\\mathrm{End}(M\\otimes V)$ is the subalgebra $1_{\\mathbb C^2}\\otimes M_2(\\mathbb C)$, of dimension $4$. Hence the equality $\\varphi(U(\\mathfrak g))=\\mathrm{End}_{H_d}(M\\otimes V^{\\otimes d})$ fails by a factor of $4$ in dimension, even though the Hecke action is genuine, commutes with $\\mathfrak g$, and is natural in $M$. The other equality also fails: $\\psi(H_1)=\\mathbb C\\cdot\\mathrm{id}\\subsetneq\\mathrm{End}_{\\mathfrak g}(M\\otimes V)\\cong M_2(\\mathbb C)\\otimes1$, of dimension $4$. The hypothesis that is missing is the truncated/deformed setup: the double centralizer theorem applies to the finite-W-algebra tensor space $V_c^{\\otimes d}$ over the pyramid (equivalently to $U(\\mathfrak g^e)$ with the truncated polynomial algebra $C_l[x]\\rtimes\\mathbb C[S_d]$), where the Hecke action is the cyclotomic quotient action and the algebra of the opposite side is the finite W-algebra, not $U(\\mathfrak g)$.",
+        "strategy": "Compute $x_1$ on $M\\otimes V$: the Casimir tensor has its first tensor factor acting on the trivial module $M$, so $x_1=0$; this is a legitimate instance of the Arakawa-Suzuki action, since the construction assigns an $H_d$-action to every $\\mathfrak g$-module $M$. Compute the two centralizers in the bases $\\{u_a\\otimes v_b\\}$: $\\mathrm{End}_{H_1}(M\\otimes V)$ is all of $M_4$ because $H_1$ acts by scalars, while $\\varphi(U(\\mathfrak g))=1\\otimes M_2$ has dimension $4$; the other centralizer is $M_2\\otimes1$ versus $\\mathbb C\\cdot\\mathrm{id}$. Hence both double centralizer equalities fail. This is not a counterexample to the higher-level Schur-Weyl theorem: it shows that the theorem needs the finite-W-algebra deformation/truncation hypotheses, and that a mere commuting Hecke action on an arbitrary tensor module is insufficient.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Introduction (printed pp. 1-2) and Sections 2.2-2.3, Theorem 2.4 (printed pp. 8-9): the Arakawa-Suzuki action for arbitrary M, and the actual hypotheses of the double centralizer (U(g^e), C_l[x]rtimes CS_d); complete passages read."
+            },
+            {
+              "title": "Tomoyuki Arakawa and Takeshi Suzuki, Lie algebras and degenerate affine Hecke algebras of type A, J. Algebra 209 (1998) 288-304 (complete 16-page arXiv article; published version titled Duality between sl_n(C) and the degenerate affine Hecke algebra)",
+              "url": "https://arxiv.org/pdf/q-alg/9710037",
+              "locator": "Section 2.2, Theorem 2.2.2 (printed pp. 6-7): the H_ell-action exists for every g-module X, without a double centralizer claim; complete passage read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Representations of shifted Yangians and finite W-algebras, Mem. Amer. Math. Soc. 196 (2008), no. 918 (complete 109-page arXiv memoir)",
+              "url": "https://arxiv.org/pdf/math/0508003",
+              "locator": "Chapter 3, Lemma 3.1 and Theorem 3.7 area (printed pp. 26-33): the truncated deformed setting in which the double centralizer holds; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 33
+      },
+      {
+        "id": "ex-vust-double-centralizer-in-a-small-stable-range",
+        "kind": "example",
+        "title": "Vust's double centralizer in a small stable range",
+        "deps": [
+          "thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer",
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations",
+          "def-degenerate-cyclotomic-hecke-algebra",
+          "thm-schur-weyl-double-centralizer"
+        ],
+        "statement": "Take $\\lambda=(1,1)$, so $n=2$, $l=1$, $q_1=2$, $N=2$, $e=0$, all boxes in one column and the grading is concentrated in degree $0$: $\\mathfrak g=\\mathfrak g^e=\\mathfrak{gl}_2$, $\\mathfrak m=0$, $C_1[x_1,\\dots,x_d]=\\mathbb C[x_1,\\dots,x_d]/(x_1,\\dots,x_d)=\\mathbb C$, and $C_1[x]\\rtimes\\mathbb C[S_d]=\\mathbb C[S_d]$. Verify Vust's double centralizer for $d=1,2$, which is the stable range for this $\\lambda$ (at least $d$ parts equal to $l=1$ holds for $d\\le2$). For $d=1$: $\\mathrm{End}_{\\mathfrak{gl}_2}(V)=\\mathbb C\\cdot1=\\psi_1(\\mathbb C[S_1])$ and $\\varphi_1(U(\\mathfrak{gl}_2))=\\mathrm{End}_\\mathbb C(V)$, as $U(\\mathfrak{gl}_2)\\to\\mathrm{End}(V)$ is surjective. For $d=2$: $V^{\\otimes2}=S^2V\\oplus\\Lambda^2V$, $\\dim\\mathrm{End}_{\\mathfrak{gl}_2}(V^{\\otimes2})=2=\\dim\\mathbb C[S_2]$ with $\\psi_2$ injective, and $\\dim\\mathrm{End}_{\\mathbb C[S_2]}(V^{\\otimes2})=\\dim\\mathrm{End}(S^2V)+\\dim\\mathrm{End}(\\Lambda^2V)=9+1=10=\\dim\\varphi_2(U(\\mathfrak{gl}_2))$; check the two decompositions explicitly (the flip acts as $+1$ on $S^2V$ and $-1$ on $\\Lambda^2V$, and the image of $U(\\mathfrak{gl}_2)$ is exactly the block-diagonal algebra of the two isotypic components).",
+        "strategy": "Assume AC and work over C. One column has no left-neighbour boxes, so e=0, not E12. Then g^e=gl_2, m=0 and the truncated variables vanish. For d=1 matrix units span End V. For d=2 compute the symmetric and alternating tensor bases; the flip eigenvalues are \u00b11 and ordinary complete reducibility gives their full9+1 endomorphism blocks. Both irreducible constituents occur, so C[S_2] acts injectively. These checks realize the full Vust theorem in its actual stable range.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Theorem 2.4 and the level-one specialization (printed pp. 8-9): for l=1 the truncated polynomial part is trivial and the statement is classical Schur-Weyl duality; complete passage read."
+            },
+            {
+              "title": "Hanspeter Kraft and Claudio Procesi, Closures of conjugacy classes of matrices are normal, Invent. Math. 53 (1979) 227-247",
+              "url": "https://gdz.sub.uni-goettingen.de/download/pdf/PPN356556735_0053/LOG_0017.pdf",
+              "locator": "Authentic complete23-page original KP scan: mathematical \u00a7\u00a71\u20136 printed227\u2013246 OCR-read, with \u00a76 printed244\u2013246 also inspected in rendered originals. The full local normality/covariant/Vust suppliers are now present; original native unread disposition remains archived. Source hold persists pending final root review."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Full \u00a72.1 (PDF6\u20137): for the one-column N=2 pyramid, J=all four box pairs, K={(i,j,0):1\u2264i,j\u22642}, xi_ij=E_ij, e=0 and g^e=gl_2; the double centralizer is the ordinary Schur\u2013Weyl case."
+            }
+          ]
+        },
+        "dependency_level": 33
+      },
+      {
+        "id": "ex-a-block-idempotent-corner-outside-the-stable-range",
+        "kind": "example",
+        "title": "A block idempotent corner outside the stable range",
+        "deps": [
+          "def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality",
+          "thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer",
+          "thm-higher-level-schur-weyl-endomorphism-isomorphism",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field",
+          "thm-schur-weyl-double-centralizer"
+        ],
+        "statement": "Take $\\lambda=(1,1)$ (so $l=1$, two parts equal to $1$) and $d=3$: the stable range fails, because at least $3$ parts of $\\lambda$ equal to $1$ is false. Here $H_3(\\Lambda)=\\mathbb C[S_3]$ (level $l=1$), of dimension $6$, while the image $H_3(\\lambda,c)$ in $\\mathrm{End}_\\mathbb C(V^{\\otimes3})^{\\mathrm{op}}$, $V=\\mathbb C^2$, has dimension $5$: for $\\mathfrak{gl}_2$, $V^{\\otimes3}=L(3)\\oplus L(2,1)^{\\oplus2}$, so $\\mathrm{End}_{\\mathfrak{gl}_2}(V^{\\otimes3})^{\\mathrm{op}}\\cong\\mathbb C\\times M_2(\\mathbb C)$ has dimension $1+4=5$, and it is the image of $\\mathbb C[S_3]$. Under the Wedderburn decomposition $\\mathbb C[S_3]\\cong\\mathbb C\\times\\mathbb C\\times M_2(\\mathbb C)$ (trivial, sign and standard blocks), the map to $\\mathbb C\\times M_2(\\mathbb C)$ kills exactly the sign block; hence $H_3(\\lambda,c)\\cong f\\mathbb C[S_3]f$ with $f$ the central idempotent of the trivial and standard blocks, and $f$ is the block idempotent corner of the Definition. Verify: $\\dim f\\mathbb C[S_3]f=1+4=5$, the map $\\mathbb C[S_3]\\twoheadrightarrow f\\mathbb C[S_3]f$ is multiplication by $f$, and the antisymmetrizer $a=\\sum_{w\\in S_3}\\mathrm{sgn}(w)w$ spans the kernel of the action on $V^{\\otimes3}$ because $\\Lambda^3V=0$ for $\\dim V=2$.",
+        "strategy": "Decompose $V^{\\otimes3}$ for $\\mathfrak{gl}_2$ by the classical Schur-Weyl rule: the partitions of $3$ with at most $2$ rows are $(3)$ and $(2,1)$, so $V^{\\otimes3}\\cong L(3)\\oplus L(2,1)^{\\oplus2}$; hence $\\mathrm{End}_{\\mathfrak{gl}_2}(V^{\\otimes3})\\cong\\mathbb C\\times M_2$, of dimension $5$, and by Schur-Weyl duality it is the image of $\\mathbb C[S_3]$. Compare with the Wedderburn decomposition $\\mathbb C[S_3]\\cong\\mathbb C\\times\\mathbb C\\times M_2$: the sign block acts on $V^{\\otimes3}$ by zero because the sign representation does not occur in $V^{\\otimes3}$ (equivalently $\\Lambda^3V=0$), so the kernel is the sign block and the image is the corner of the other two blocks. The dimension count and the corner identification verify the general statement of the preceding Definition in the smallest non-stable case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Section 3.5 and Section 6.2, Theorem 6.6 and Corollary 6.7 (printed pp. 14-15, 38-41): the stable range and the idempotent corner; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, The degenerate analogue of Ariki's categorification theorem, Math. Z. 266 (2010) 877-919 (complete 44-page arXiv article)",
+              "url": "https://arxiv.org/pdf/0901.0057",
+              "locator": "Section 3.2 (3.7)-(3.14) and Section 4.2 (printed pp. 23-24, 35-36): blocks and idempotents; complete passages read."
+            },
+            {
+              "title": "Jonathan Brundan and Alexander Kleshchev, Schur-Weyl duality for higher levels, Selecta Math. (N.S.) 14 (2008) 1-57 (complete 50-page arXiv article)",
+              "url": "https://arxiv.org/pdf/math/0605217",
+              "locator": "Lemma 3.5 (printed p. 15): the injectivity condition 'at least d parts of lambda equal to l', which fails here; complete passage read."
+            }
+          ]
+        },
+        "dependency_level": 36
+      }
+    ]
+  }
+]

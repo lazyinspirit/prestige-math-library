@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-zero-dirichlet-green-representation-for-poisson-data.md

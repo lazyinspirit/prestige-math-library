@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-finite-k-linear-abelian-category-is-semisimple.md

@@ -1,0 +1,20 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {resolve} from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {spawnSync} from 'node:child_process';
+const p='research/frontier-44-special-representation-examples-28-owner-greeting-recovery-20261011/boundary-template-partition-03';
+const ops=JSON.parse(readFileSync(p+'/operations.json','utf8'));
+const merged=JSON.parse(readFileSync('research/frontier-44-special-representation-examples-28-proof-contracts.json','utf8'));
+for(const o of ops.operations){const bits=o.pointer.split('/').slice(1);let n=merged;for(const b of bits.slice(0,-1))n=n[b];n[bits.at(-1)]=o.after;}
+const path=resolve(p+'/copied-merged.json');writeFileSync(path,JSON.stringify(merged,null,2)+'\n');
+const source=readFileSync('.autopilot/frontier-44-special-representation-examples-28/greeting-recovery/boundary-audit-pure-extraction.mjs','utf8').replace("const files=['research/frontier-44-special-representation-examples-28-proof-contracts.json'];",`const files=[${JSON.stringify(path)}];`);
+writeFileSync(p+'/copied-native-pure-extraction.mjs',source);
+const native=await import(pathToFileURL(resolve(p+'/copied-native-pure-extraction.mjs')));
+const proposed=new Set(ops.operations.map(o=>o.id+'|'+o.case));
+const checked=native.rows.filter(r=>proposed.has(r.id+'|'+r.case)).map(r=>({id:r.id,case:r.case,template_review_valid:native.templateReviewed(r),row_sha256:native.rowHash(r)}));
+const failures=checked.filter(r=>!r.template_review_valid);
+const localContradictions=native.contradicted.filter(r=>proposed.has(r.id+'|'+r.case));
+const check=spawnSync('node',['tools/proof-contract.mjs',path,'--items',[...new Set(ops.operations.map(o=>o.id))].join(','),'--strict','--json'],{encoding:'utf8'});
+const result={scope:'Pure copied proposal validation only; neither native stage gate nor whole frontier pass claimed.',proposed_rows:checked.length,valid_template_reviews:checked.length-failures.length,failures,assigned_proposal_contradictions:localContradictions,whole_frontier_summary_with_other_partitions_unmodified:native.summary,proof_contract_adapter:{command:['node','tools/proof-contract.mjs',path,'--items',[...new Set(ops.operations.map(o=>o.id))].join(','),'--strict','--json'],exit_code:check.status,stdout:check.stdout,stderr:check.stderr},checked};
+writeFileSync(p+'/pure-check-results.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify({proposed:checked.length,valid:checked.length-failures.length,contradictions:localContradictions.length,adapter:check.status}));

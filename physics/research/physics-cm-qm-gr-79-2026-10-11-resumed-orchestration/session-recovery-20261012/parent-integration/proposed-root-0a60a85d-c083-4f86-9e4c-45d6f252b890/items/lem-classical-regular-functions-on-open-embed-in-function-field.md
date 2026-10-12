@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-regular-functions-on-open-embed-in-function-field.md

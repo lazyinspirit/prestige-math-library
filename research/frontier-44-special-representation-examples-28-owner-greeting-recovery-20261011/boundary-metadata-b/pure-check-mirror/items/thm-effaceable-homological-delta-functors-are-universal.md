@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-effaceable-homological-delta-functors-are-universal.md

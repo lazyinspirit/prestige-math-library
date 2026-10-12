@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-degree-reduction-preserves-unsatisfaction.md

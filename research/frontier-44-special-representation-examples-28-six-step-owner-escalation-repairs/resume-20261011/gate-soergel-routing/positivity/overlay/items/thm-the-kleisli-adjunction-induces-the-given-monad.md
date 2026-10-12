@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-kleisli-adjunction-induces-the-given-monad.md

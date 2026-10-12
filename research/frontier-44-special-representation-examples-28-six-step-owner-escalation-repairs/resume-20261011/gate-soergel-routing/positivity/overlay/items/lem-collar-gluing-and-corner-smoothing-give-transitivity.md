@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-collar-gluing-and-corner-smoothing-give-transitivity.md

@@ -1489,14 +1489,15 @@ Euclidean integration tools.
 5. `cor-sobolev-inequality-for-w-one-p-zero` (corollary; **L/A**) — Extend by zero and pass by density on arbitrary open sets.
 6. `thm-poincare-inequality-on-a-ball` (theorem; **L/A**) — $\|u-u_B\|_{L^p(B)}\le Cr\|Du\|_{L^p(B)}$ for $1\le p<\infty$.
 7. `thm-poincare-inequality-for-w-one-p-zero` (theorem; **L/A**) — On a domain bounded in one direction, $\|u\|_p\le C\|Du\|_p$ for $u\in W^{1,p}_0$.
-8. `thm-poincare-wirtinger-on-bounded-connected-extension-domains` (theorem; **L/A**) — The mean-zero inequality holds, with connectedness used to make zero gradient imply one constant.
+8. `lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n` (lemma; **L/A**) — For $1<p<n$, prove the mean-zero $L^p$ estimate by internal extension/cutoff/mollification compactness, without PDE-15.
 9. `thm-sobolev-embedding-on-bounded-extension-domains-for-p-less-than-n` (theorem; **L/A**) — $W^{1,p}(\Omega)\hookrightarrow L^q(\Omega)$ continuously for $p\le q\le p^*$.
-10. `thm-critical-sobolev-embedding-into-every-finite-lq` (theorem; **L/A**) — On bounded extension domains, $W^{1,n}\hookrightarrow L^q$ for every finite $q$, with constants depending on $q$.
-11. `thm-morrey-inequality-for-p-greater-than-n` (theorem; **L/A**) — Produce a $C^{0,1-n/p}$ representative and its Hölder seminorm bound.
-12. `thm-w-one-infinity-functions-have-lipschitz-representatives` (theorem; **L/A**) — On convex domains, $W^{1,\infty}$ agrees with Lipschitz functions and the Lipschitz constant is controlled by $\|Du\|_\infty$.
-13. `thm-higher-order-sobolev-embedding` (theorem; **L/A**) — Iterate first-order embeddings to state the $W^{k,p}\to W^{m,q}$ and $C^{m,\alpha}$ alternatives with integer-borderline cases explicit.
-14. `cor-sobolev-algebra-above-the-critical-index` (corollary; **L/A**) — If $kp>n$ in the stated integer range, products remain in $W^{k,p}$ with a norm estimate; only sourced regimes are claimed.
-15. `rem-critical-sobolev-does-not-embed-in-linfinity` (remark; **L/NA**) — State the endpoint limitation and locate Trudinger--Moser/BMO in the scope-denial ledger.
+10. `thm-sobolev-poincare-on-bounded-connected-extension-domains` (theorem; **L/A**) — Combine the local mean-zero $L^p$ estimate and the existing embedding to prove the exact mean-zero $L^{p^*}$ inequality for $1<p<n$.
+11. `thm-critical-sobolev-embedding-into-every-finite-lq` (theorem; **L/A**) — On bounded extension domains, $W^{1,n}\hookrightarrow L^q$ for every finite $q$, with constants depending on $q$.
+12. `thm-morrey-inequality-for-p-greater-than-n` (theorem; **L/A**) — Produce a $C^{0,1-n/p}$ representative and its Hölder seminorm bound.
+13. `thm-w-one-infinity-functions-have-lipschitz-representatives` (theorem; **L/A**) — On convex domains, $W^{1,\infty}$ agrees with Lipschitz functions and the Lipschitz constant is controlled by $\|Du\|_\infty$.
+14. `thm-higher-order-sobolev-embedding` (theorem; **L/A**) — Iterate first-order embeddings to state the $W^{k,p}\to W^{m,q}$ and $C^{m,\alpha}$ alternatives with integer-borderline cases explicit.
+15. `cor-sobolev-algebra-above-the-critical-index` (corollary; **L/A**) — If $kp>n$ in the stated integer range, products remain in $W^{k,p}$ with a norm estimate; only sourced regimes are claimed.
+16. `rem-critical-sobolev-does-not-embed-in-linfinity` (remark; **L/NA**) — State the endpoint limitation and locate Trudinger--Moser/BMO in the scope-denial ledger.
 
 ### B-page companion
 
@@ -1515,12 +1516,17 @@ Euclidean integration tools.
 Chapters 8--9. Endpoint checks also use [G] §1.6.
 
 **Hard proof obligations.** The $p=1$ proof is separated because the usual
-power/Hölder reduction starts above that endpoint. Mean-zero Poincaré uses the
-direct integral/ball-chain representation proof with connectedness visible; it
-does not invoke PDE-15's later compactness theorem.
-Morrey first constructs ball averages and proves they form a Cauchy family,
-then identifies the resulting representative a.e.; it never evaluates the
-original $L^p$ class.
+power/Hölder reduction starts above that endpoint. The direct mean-zero proof on
+bounded John domains uses the ball-chain representation with connectedness
+visible. For $1<p<n$, PDE-14 also proves the mean-zero $L^p$ estimate on bounded
+connected extension domains by an internal extension/cutoff/mollification
+compactness argument, then uses it with the existing embedding to prove the
+exact $L^{p^*}$ Sobolev--Poincaré theorem; this route does not depend on PDE-15.
+PDE-15 retains the distinct full-range $1\le p<\infty$ same-exponent
+Poincaré--Wirtinger theorem by Rellich compactness. No compactness-free proof is
+claimed for arbitrary extension domains. Morrey first constructs ball averages
+and proves they form a Cauchy family, then identifies the resulting
+representative a.e.; it never evaluates the original $L^p$ class.
 
 **Well-definedness.** $u_B=|B|^{-1}\int_Bu$ is used only for finite positive
 ball measure. Every embedding that produces pointwise or Hölder values names
@@ -1592,13 +1598,14 @@ published metric compactness/Ascoli pages.
 2. `thm-frechet-kolmogorov-compactness-criterion-in-lp` (theorem; **L/A**) — A bounded $L^p(\mathbb R^n)$ family with uniform translation control and tight tails is relatively compact for $1\le p<\infty$.
 3. `thm-rellich-compactness-from-w-one-p-zero-to-lp` (theorem; **L/A**) — On a bounded open set, zero extension plus items 1--2 makes $W^{1,p}_0(\Omega)\hookrightarrow L^p(\Omega)$ compact.
 4. `thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain` (theorem; **L/A**) — A bounded extension operator and cutoff give compactness for bounded extension domains.
-5. `thm-rellich-kondrachov-for-p-less-than-n` (theorem; **L/A**) — $W^{1,p}(\Omega)\Subset L^q(\Omega)$ for $1\le q<p^*$ on a bounded extension domain.
-6. `thm-rellich-kondrachov-at-the-critical-source-exponent` (theorem; **L/A**) — $W^{1,n}(\Omega)\Subset L^q(\Omega)$ for every finite $q$.
-7. `thm-morrey-rellich-compactness-for-p-greater-than-n` (theorem; **L/A**) — Bounded subsets are precompact in $C^{0,\beta}(\overline\Omega)$ for every $0\le\beta<1-n/p$ under the stated domain regularity.
-8. `thm-higher-order-rellich-kondrachov` (theorem; **L/A**) — State compact $W^{k,p}\Subset W^{m,q}$ embeddings whenever the target smoothness exponent is strictly lower.
-9. `cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences` (corollary; **L/A**) — Package the subcritical cases in the exact form elliptic and variational pages will cite.
-10. `cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence` (corollary; **L/A**) — On a bounded extension domain, a weakly $H^1$ convergent sequence converges strongly in $L^2$ after identifying the unique cluster point.
-11. `rem-rellich-is-a-strictly-subcritical-theorem` (remark; **L/NA**) — Critical continuous embeddings and unbounded-domain translations/dilations are excluded.
+5. `thm-poincare-wirtinger-on-bounded-connected-extension-domains` (theorem; **L/A**) — For $1\le p<\infty$ on a bounded connected extension domain, prove $\|u-u_\Omega\|_{L^p(\Omega)}\le C\|Du\|_{L^p(\Omega)}$ by contradiction, Rellich compactness and the zero-gradient constancy theorem.
+6. `thm-rellich-kondrachov-for-p-less-than-n` (theorem; **L/A**) — $W^{1,p}(\Omega)\Subset L^q(\Omega)$ for $1\le q<p^*$ on a bounded extension domain.
+7. `thm-rellich-kondrachov-at-the-critical-source-exponent` (theorem; **L/A**) — $W^{1,n}(\Omega)\Subset L^q(\Omega)$ for every finite $q$.
+8. `thm-morrey-rellich-compactness-for-p-greater-than-n` (theorem; **L/A**) — Bounded subsets are precompact in $C^{0,\beta}(\overline\Omega)$ for every $0\le\beta<1-n/p$ under the stated domain regularity.
+9. `thm-higher-order-rellich-kondrachov` (theorem; **L/A**) — State compact $W^{k,p}\Subset W^{m,q}$ embeddings whenever the target smoothness exponent is strictly lower.
+10. `cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences` (corollary; **L/A**) — Package the subcritical cases in the exact form elliptic and variational pages will cite.
+11. `cor-weak-h-one-convergence-plus-compactness-gives-strong-ltwo-convergence` (corollary; **L/A**) — On a bounded extension domain, a weakly $H^1$ convergent sequence converges strongly in $L^2$ after identifying the unique cluster point.
+12. `rem-rellich-is-a-strictly-subcritical-theorem` (remark; **L/NA**) — Critical continuous embeddings and unbounded-domain translations/dilations are excluded.
 
 ### B-page companion
 
@@ -1618,8 +1625,13 @@ critical counterexample; [H] §§3.10--3.11; [L] “Compact imbedding”; [G] §
 **Hard proof obligations.** Item 2 proves both directions needed here only in
 the stated $1\le p<\infty$ setting; it is not quoted as an unspecified
 compactness slogan. Interpolation obtains $q>p$ only after strong $L^p$ and a
-uniform $L^{p^*}$ bound. Item 10 uses uniqueness of the weak limit to upgrade
+uniform $L^{p^*}$ bound. Item 11 uses uniqueness of the weak limit to upgrade
 subsequence compactness to convergence of the relevant sequence when needed.
+Item 5 normalizes a hypothetical counterexample to have mean zero and unit
+$L^p$ norm with gradients tending to zero. Item 4 supplies a strongly
+convergent subsequence; finite measure passes the mean to the limit, and
+PDE-11's componentwise constancy theorem makes that limit a constant. Connectedness
+and mean zero force it to vanish, contradicting its unit norm.
 
 **Well-definedness.** “Compact embedding” means the inclusion is continuous
 and maps bounded sequences to sequences with strongly convergent subsequences.
@@ -1739,7 +1751,10 @@ the adjoint kernel supplied by item 6. The eigenvalue theorem applies FA-16
 once to the compact shifted inverse and algebraically translates its nonzero
 eigenvalues; it does not build an eigenbasis by repeated arbitrary choices.
 Items 10--12 are mandatory because the later heat-semigroup pages need a
-self-adjoint unbounded operator, not merely a weak eigenpair notation.
+self-adjoint unbounded operator, not merely a weak eigenpair notation. The
+proposed smooth-eigenfunction corollary belongs to PDE-18, after higher-order
+boundary regularity and Sobolev embedding; the spectral construction here
+requires only weak eigenfunctions.
 
 **Well-definedness.** $K_\mu$ is first a map into $H^1_0$ and then regarded on
 $L^2$ through the inclusion; those are distinct maps. Orthogonality is in
@@ -1793,6 +1808,10 @@ difference-quotient integration by parts, commutator control and weak-limit
 identification. At the boundary, tangential derivatives come first and the
 equation recovers only the last normal derivative. Item 14 identifies the
 compactness theorem and homogeneous uniqueness used in the contradiction.
+The relocated `cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth`
+follows item 16: start with the PDE-17 weak eigen-equation $Lu=\lambda u$,
+iterate item 15 with smooth coefficients and smooth boundary, and apply
+Sobolev embedding at each required derivative order.
 
 **Well-definedness.** Difference quotients are only defined on shrunken sets;
 extensions across a Dirichlet boundary occur only after the trace condition is
@@ -2147,7 +2166,10 @@ $D(A^m)$ carry their graph norms.
 **A page:** `hamilton-jacobi-equations-and-viscosity-solutions`  
 **B page:** `hamilton-jacobi-equations-and-viscosity-solutions-examples`  
 **Requires:** PDE-2 and PDE-7--PDE-8; MT-8 and MT-11; FA-1--FA-2; the
-published compactness, semicontinuity, convexity and Legendre--Fenchel items.
+published compactness and semicontinuity items, and
+`convex-and-semicontinuous-functions-on-rn` for convexity and existence of
+subgradients. The Legendre transform and its finite-valued convex biconjugacy
+lemma are proved locally below.
 
 This page treats the Cauchy problem
 \[
@@ -2173,14 +2195,15 @@ functions are mentioned only as orientation.
 12. `cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions` (corollary; **L/A**) — Apply comparison in both directions, including preservation of the initial condition.
 13. `lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump` (lemma; **L/A**) — If the lower envelope of the Perron supremum fails a supersolution test, raise a nearby subsolution by a strict local test-function bump while preserving the barriers, contradicting maximality.
 14. `thm-perron-method-for-hamilton-jacobi-equations` (theorem; **L/A**) — Between a subsolution and supersolution barrier, the upper envelope of subsolutions has subsolution upper envelope and, by item 13, supersolution lower envelope; comparison makes it continuous and unique.
-15. `def-legendre-transform-of-a-hamiltonian` (definition; **L/NA**) — For convex $H(p)$ define $L(v)=\sup_p(p\cdot v-H(p))$ and cite the sibling convex-duality result for biconjugacy rather than re-proving it.
-16. `def-hopf-lax-operator` (definition; **L/NA**) — For convex superlinear $H$ and bounded uniformly continuous $u_0$, set $Q_tu_0(x)=\inf_y\{u_0(y)+tL((x-y)/t)\}$ for $t>0$, with $Q_0u_0=u_0$.
-17. `lem-hopf-lax-infima-localise` (lemma; **L/A**) — Superlinearity confines near-minimisers to a compact ball depending locally on $(x,t)$; continuity then gives attainment when the hypotheses warrant it.
-18. `thm-hopf-lax-dynamic-programming-semigroup` (theorem; **L/A**) — Convexity of $L$ gives $Q_{t+s}=Q_tQ_s$ and the corresponding short-time variational principle.
-19. `thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation` (theorem; **L/A**) — $Q_tu_0$ is the unique bounded uniformly continuous viscosity solution, with the initial trace locally uniform as $t\downarrow0$.
-20. `thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations` (theorem; **L/A**) — Under comparison, equiboundedness and an equicontinuity estimate, solutions of $u_t^\varepsilon+H(x,t,Du^\varepsilon)=\varepsilon\Delta u^\varepsilon$ converge locally uniformly to the viscosity solution.
-21. `cor-finite-speed-of-dependence-for-lipschitz-hamiltonians` (corollary; **L/A**) — If $H$ is Lipschitz in momentum with constant $L$, comparison on cones shows that data outside $B(x,Lt)$ cannot affect $u(x,t)$.
-22. `rem-value-functions-and-hamilton-jacobi-bellman-equations` (remark; **L/NA**) — State the source-cited control interpretation and sign convention without developing admissible controls, measurable selection or dynamic programming for control systems.
+15. `def-legendre-transform-of-a-hamiltonian` (definition; **L/NA**) — For finite-valued convex $H:\mathbb R^n\to\mathbb R$, define $L(v)=\sup_p(p\cdot v-H(p))\in\mathbb R\cup\{+\infty\}$, with $p\cdot v-(+\infty)=-\infty$ in its conjugate. No superlinearity is assumed here.
+16. `lem-finite-valued-convex-hamiltonian-equals-its-biconjugate` (lemma; **L/A**) — For every finite-valued convex $H:\mathbb R^n\to\mathbb R$, its extended-real transform $L$ satisfies $H(p)=\sup_v\{p\cdot v-L(v)\}$ for every $p$. The defining supremum gives the inequality $\sup_v(p\cdot v-L(v))\le H(p)$. Choose $v\in\partial H(p)$ using `thm-convex-functions-have-subgradients-at-interior-points`; the supporting inequality gives $L(v)=p\cdot v-H(p)$ and hence the reverse inequality. Superlinearity and differentiability are unnecessary. S:[TR] Theorem 2.13(ii) and Remark 2.14, pp. 62--63 of the linked preliminary manuscript; P:the two inequalities and the published subgradient supplier.
+17. `def-hopf-lax-operator` (definition; **L/NA**) — For convex superlinear $H$ and bounded uniformly continuous $u_0$, set $Q_tu_0(x)=\inf_y\{u_0(y)+tL((x-y)/t)\}$ for $t>0$, with $Q_0u_0=u_0$.
+18. `lem-hopf-lax-infima-localise` (lemma; **L/A**) — Superlinearity confines near-minimisers to a compact ball depending locally on $(x,t)$; continuity then gives attainment when the hypotheses warrant it.
+19. `thm-hopf-lax-dynamic-programming-semigroup` (theorem; **L/A**) — Convexity of $L$ gives $Q_{t+s}=Q_tQ_s$ and the corresponding short-time variational principle.
+20. `thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation` (theorem; **L/A**) — $Q_tu_0$ is the unique bounded uniformly continuous viscosity solution, with the initial trace locally uniform as $t\downarrow0$.
+21. `thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations` (theorem; **L/A**) — Under comparison, equiboundedness and an equicontinuity estimate, solutions of $u_t^\varepsilon+H(x,t,Du^\varepsilon)=\varepsilon\Delta u^\varepsilon$ converge locally uniformly to the viscosity solution.
+22. `cor-finite-speed-of-dependence-for-lipschitz-hamiltonians` (corollary; **L/A**) — If $H$ is Lipschitz in momentum with constant $L$, comparison on cones shows that data outside $B(x,Lt)$ cannot affect $u(x,t)$.
+23. `rem-value-functions-and-hamilton-jacobi-bellman-equations` (remark; **L/NA**) — State the source-cited control interpretation and sign convention without developing admissible controls, measurable selection or dynamic programming for control systems.
 
 ### B-page companion
 
@@ -2198,7 +2221,12 @@ functions are mentioned only as orientation.
 §§10.1--10.3; Hung V. Tran's *Hamilton--Jacobi Equations: Theory and
 Applications*, Chapters 1--2, source [TR]. [CIL] supplies the stable
 semicontinuous-envelope and Perron formulations; [BHJ] and [TR] give an
-independent first-order treatment and the Hopf--Lax formula.
+independent first-order treatment and the Hopf--Lax formula. For local
+biconjugacy, [TR] Theorem 2.13(ii) and Remark 2.14, pp. 62--63 of the linked
+preliminary manuscript, give the supporting-gradient proof and explicitly
+allow a subgradient in the nondifferentiable case. Only the later Hopf--Lax
+regime assumes superlinearity to make $L$ finite everywhere: for fixed $v$,
+$p\cdot v-H(p)\to-\infty$ as $|p|\to\infty$. This is separate from item 16.
 
 **Hard proof obligations.** Comparison cannot be cited as “doubling variables”:
 item 10 must produce a genuine maximum (with a coercive penalty on
@@ -2211,7 +2239,7 @@ convergent subsequence is not asserted without the stated compactness estimate.
 **Well-definedness.** Sub- and supersolutions are actual semicontinuous
 functions, not $L^p$ equivalence classes. The value of a test derivative is
 independent of adding a locally flat test function because only the contact
-jet enters. The Hopf--Lax infimum is an extended-real expression until item 17
+jet enters. The Hopf--Lax infimum is an extended-real expression until item 18
 proves finiteness and localisation. Half-relaxed limits include both the
 sequence index and the space--time point in the limsup/liminf.
 
@@ -2312,12 +2340,13 @@ The proposed A-page item counts are:
 | PDE-1, PDE-1CK, PDE-2, PDE-2D | 21, 13, 17, 10 |
 | PDE-3--PDE-7 | 18, 20, 15, 14, 14 |
 | PDE-8--PDE-12 | 16, 14, 14, 19, 14 |
-| PDE-13, PDE-14, PDE-14F, PDE-15--PDE-17 | 13, 15, 8, 11, 17, 19 |
+| PDE-13, PDE-14, PDE-14F, PDE-15--PDE-17 | 13, 14, 8, 12, 17, 19 |
 | PDE-18--PDE-22 | 17, 14, 14, 15, 14 |
-| PDE-23--PDE-26 | 21, 14, 22, 23 |
+| PDE-23--PDE-26 | 21, 14, 23, 23 |
 
 Thus the largest base A page is 23, well below the 60-item split threshold.
-After the §12 overlay is inserted, the largest A page is PDE-26 with 30 items.
+After the §12 overlay is inserted, PDE-25 and PDE-26 have the largest A pages
+with 30 items each.
 This is a
 consequence of splitting at mathematical proof boundaries, not of omitting
 canonical material. Every B page is a leaf. A-page dependencies point only to
@@ -2368,8 +2397,8 @@ to audit across page boundaries.
 | mollification, local sums and extension | prove the convolution exists, the locally finite sum converges and chart/reflection definitions agree on overlaps | PDE-12 items 1--12 |
 | trace | first define boundary surface measure and $W^{1-1/p,p}(\partial\Omega)$ chart-independently; prove independence of the smooth approximating sequence | PDE-13 items 1--9 |
 | zero boundary values | use the closure definition first and prove equivalence with zero trace only under the sourced domain and exponent hypotheses | PDE-12 item 6; PDE-13 items 10--12 |
-| Sobolev representatives and critical endpoints | state the precise representative and forbid $W^{1,n}\hookrightarrow L^\infty$ | PDE-14 items 1--15 |
-| compact embedding | name the topology, bounded domain regularity and strict subcritical range; compactness means subsequential convergence in the target quotient space | PDE-15 items 1--11 |
+| Sobolev representatives and critical endpoints | state the precise representative and forbid $W^{1,n}\hookrightarrow L^\infty$ | PDE-14 items 1--14 |
+| compact embedding | name the topology, bounded domain regularity and strict subcritical range; compactness means subsequential convergence in the target quotient space | PDE-15 items 1--12 |
 | $H^{-1}$ and weak boundary data | define dual pairing and lifting; never identify a general functional with an $L^2$ function | PDE-16 items 8--17 |
 | variational form and Lax--Milgram operator | establish integrability, conjugate-linearity convention, boundedness and coercivity before invoking Riesz/fixed point | PDE-16 items 1--14 |
 | shifted elliptic inverse | distinguish $L^2\to H^1_0$ solution map from its compact $L^2\to L^2$ composition | PDE-17 items 3--9 |
@@ -2382,7 +2411,7 @@ to audit across page boundaries.
 | generator, resolvent and mild solution | use the one-sided derivative, prove the inverse is bounded and define the Bochner integral before differentiation | PDE-23 items 4--19 |
 | sectorial contour integral | fix the sign convention, sector and orientation; prove norm convergence and contour independence | PDE-24 items 1--6 |
 | viscosity envelopes and tests | keep USC/LSC functions distinct from a.e. classes; include space--time point and sequence index in half-relaxed limits | PDE-25 items 2--14 |
-| Hopf--Lax infimum | prove finiteness/localisation and specify whether the infimum is attained | PDE-25 items 15--20 |
+| Hopf--Lax infimum | prove finiteness/localisation and specify whether the infimum is attained | PDE-25 items 15--21 |
 | weak conservation law and entropy flux | retain the initial term and strong $L^1_{\rm loc}$ trace; show the additive constant in $q$ is immaterial | PDE-26 items 1--10 |
 | shocks and Hamilton--Jacobi primitives | invoke strong traces only when available and normalise the a.e. spatial primitive | PDE-26 items 5--6 and 22 |
 
@@ -2657,7 +2686,7 @@ full-note/monograph corpus.
 | §2.4 *Wave equation*: spherical means; Kirchhoff and Poisson formulas; nonhomogeneous formula; energy and finite propagation | `included` PDE-9--PDE-10 |
 | §3.1 *Complete integrals, envelopes* | `included` PDE-2 items 11--15; only local smooth characteristic geometry is claimed |
 | §3.2 *Characteristics*; characteristic ODE, local solution of noncharacteristic Cauchy data | `included` PDE-2 |
-| §3.3 *Introduction to Hamilton--Jacobi equations*; Hopf--Lax formula | `included` PDE-25 items 14--18 |
+| §3.3 *Introduction to Hamilton--Jacobi equations*; Hopf--Lax formula | `included` PDE-25 items 15--20 |
 | §3.4 *Conservation laws*; shocks, Rankine--Hugoniot, entropy, Riemann problems | `included` PDE-26 |
 | §4.6 *Power series*: §4.6.1 *Noncharacteristic surfaces*, §4.6.2 *Real analytic functions*, §4.6.3 *Cauchy--Kovalevskaya Theorem* | full majorant proof `included` PDE-1CK; PDE-2 items 16--17 become compatibility remarks citing that proved supplier |
 | §5.1 *Hölder spaces* | `included` PDE-19 items 1--3 |
@@ -2683,7 +2712,7 @@ full-note/monograph corpus.
 | §8.4 *Constraints*; Lagrange multipliers and constrained extrema | `included` PDE-22 |
 | §10.1 *Introduction, viscosity solutions*; vanishing viscosity, stability, Perron orientation | `included` PDE-25 |
 | §10.2 *Uniqueness*; doubling variables and comparison | `included` PDE-25 items 10--12 |
-| §10.3 *Control theory, dynamic programming*; value function, HJB equation, Hopf--Lax revisited | Hopf--Lax is `included` PDE-25; value functions/HJB are `inline` only in PDE-25 item 21; measurable-control existence and feedback synthesis are `out-of-scope` because they require an optimal-control framework and measurable selection not used elsewhere |
+| §10.3 *Control theory, dynamic programming*; value function, HJB equation, Hopf--Lax revisited | Hopf--Lax is `included` PDE-25; value functions/HJB are `inline` only in PDE-25 item 23; measurable-control existence and feedback synthesis are `out-of-scope` because they require an optimal-control framework and measurable selection not used elsewhere |
 
 ### 11.3 Teschl harvest: Parts I--II, Chapters 1--13
 
@@ -2953,7 +2982,7 @@ viscosity theory. They are not claimed as read backing from [S].
 | 3.1 *Gagliardo--Nirenberg--Sobolev inequality* | `included` PDE-14 |
 | 3.2 *Sobolev--Poincaré inequalities* | `included` PDE-14 |
 | 3.3 *Morrey's inequality* | `included` PDE-14 |
-| 3.4 *Lipschitz functions and $W^{1,\infty}$* | `included` PDE-14 item 12 |
+| 3.4 *Lipschitz functions and $W^{1,\infty}$* | `included` PDE-14 item 11 |
 | 3.5 *Summary of the Sobolev embeddings* | `included` PDE-14, with $p=n$ endpoint warning explicit |
 | 3.6 *Compactness*; Rellich and limiting counterexample following Theorem 3.44 | `included` PDE-15 and B |
 
@@ -3129,9 +3158,9 @@ entropy theory, so no PDE-26 claim is attributed to them.
 | §3 *Viscosity solutions*; classical consistency | `included` PDE-25 items 3--6 |
 | §4 *Stability properties* | `included` PDE-25 items 7--9 |
 | §5 *Comparison theorems* | `included` PDE-25 items 10--12 |
-| §6 *Control systems* | `out-of-scope`: admissible-control/measurable-selection framework is not built; orientation only in PDE-25 item 21 |
+| §6 *Control systems* | `out-of-scope`: admissible-control/measurable-selection framework is not built; orientation only in PDE-25 item 23 |
 | §7 *The Pontryagin Maximum Principle* and §8 *Extensions of the PMP* | `out-of-scope`: finite-dimensional optimal-control necessary conditions are not PDE prerequisites |
-| §9 *Dynamic programming* and §10 *The Hamilton--Jacobi--Bellman equation* | `out-of-scope` as a developed control theory; their value-function sign dictionary is `inline` PDE-25 item 21 |
+| §9 *Dynamic programming* and §10 *The Hamilton--Jacobi--Bellman equation* | `out-of-scope` as a developed control theory; their value-function sign dictionary is `inline` PDE-25 item 23 |
 
 **Crandall--Ishii--Lions [CIL].**
 
@@ -3164,10 +3193,10 @@ first-order penalty argument.
 | 1.7 *Introduction to the classical Bernstein method* | `deferred`: gradient estimates by Bernstein are an alternative route and not needed for the chosen existence proof |
 | 1.8 *Introduction to Perron's method* | `included` PDE-25 item 13 |
 | 1.9 *Lipschitz estimates for Cauchy problems using Perron's method* | `inline` PDE-25 comparison/existence hypotheses |
-| 1.10 *Finite speed of propagation for Cauchy problems* | `included` PDE-25 item 20 |
-| 1.11 *Rate of convergence ... via doubling variables* and 1.12 *... via the nonlinear adjoint method* | qualitative convergence `included` PDE-25 item 19; quantitative rates and nonlinear adjoint method `deferred` because they require additional regularity/adjoint estimates not used by the spine |
-| 2.1 *Introduction to optimal control theory*, 2.2 *Dynamic Programming Principle*, 2.3 *Static Hamilton--Jacobi equation for the value function* | `out-of-scope` developed control theory; orientation `inline` PDE-25 item 21 |
-| 2.4 *Legendre's transform* | definition/application `included` PDE-25 item 14; general convex duality `already-planned` sibling analysis |
+| 1.10 *Finite speed of propagation for Cauchy problems* | `included` PDE-25 item 22 |
+| 1.11 *Rate of convergence ... via doubling variables* and 1.12 *... via the nonlinear adjoint method* | qualitative convergence `included` PDE-25 item 21; quantitative rates and nonlinear adjoint method `deferred` because they require additional regularity/adjoint estimates not used by the spine |
+| 2.1 *Introduction to optimal control theory*, 2.2 *Dynamic Programming Principle*, 2.3 *Static Hamilton--Jacobi equation for the value function* | `out-of-scope` developed control theory; orientation `inline` PDE-25 item 23 |
+| 2.4 *Legendre's transform* | definition and finite-valued convex biconjugacy `included` PDE-25 items 15--16; the subgradient supplier is published on `convex-and-semicontinuous-functions-on-rn` |
 | 2.5 *The optimal control formula from the Lagrangian viewpoint* | autonomous straight-line reduction `inline` PDE-25 Hopf--Lax proof; general controls `out-of-scope` |
 | 2.6 *A further hidden structure of convex first-order Hamilton--Jacobi equations* | `deferred`: refined convex structure is not needed for existence/uniqueness |
 | 2.7 *Maximal subsolutions and their representation formulas* | `deferred`: weak-KAM/maximal-subsolution theory requires a later dynamical continuation |
@@ -3627,6 +3656,7 @@ page and the existing conceptual anchor after which the row belongs.
 | A / negative Sobolev data | `thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form` (theorem) — On a bounded domain, represent $F\in H^{-1}$ as $f_0-\sum_iD_if_i$ with $f_i\in L^2$, with a norm-controlled choice. | **L**, S:[H] §4.2; [L] Ch. 4 | **A**, P:Riesz representation in the derivative-product embedding of $H^1_0$ | Supplies the converse to the base embedding lemma. |
 | A / Neumann form | `thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace` (theorem) — A bounded functional $F\in(H^1(\Omega))^*$ satisfying $F(1)=0$ determines a unique mean-zero $H^1$ solution, with constants restored for the full solution set. | **L**, S:[H] §§4.4--4.6; [B] Ch. 9 | **A**, P:Poincaré--Wirtinger and Lax--Milgram on the closed subspace | States compatibility in the correct natural-boundary dual space rather than the Dirichlet-only $H^{-1}=(H^1_0)^*$ notation. |
 | A / lower-order terms | `cor-positive-reaction-restores-coercivity-without-dirichlet-poincare` (corollary) — Uniform ellipticity plus $c\ge c_0>0$ controls the full $H^1$ norm for the natural-boundary form. | **L**, S:[H] §4.6; [Si] Lecture 7 | **A**, P:sum gradient and reaction lower bounds | Records a second legitimate coercivity mechanism. |
+| A / interval coercivity | `lem-sharp-dirichlet-poincare-inequality-on-an-interval` (lemma) — On $(0,L)$, $\|u\|_2\le(L/\pi)\|u\prime\|_2$ for $u\in H^1_0$, with the sharp sine witness and weak eigenfunction identity. | **L**, S:[B] §8.6, Theorem 8.22 and example, printed pp. 231--233 | **A**, P:ground-state identity, $H^1_0$ closure and explicit endpoint cutoffs | Proves the exact interval constant locally; no sine-basis completeness is used, and the general spectral framework remains in PDE-17. |
 | A / weak solution | `lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound` (lemma) — Substitution $v=u$ yields $\alpha\|u\|_H^2\le\|F\|\|u\|_H$. | **L**, S:[H] §4.5; [L] Ch. 4 | **A**, P:admissibility plus duality | Exposes the estimate step often compressed into the theorem. |
 | B / scalar convention | `ex-complex-sesquilinear-coercivity-differs-from-bilinear-positivity` (example) — On $\mathbb C$, compare $a(u,v)=u\overline v$ with the non-sesquilinear expression $uv$. | **L**, S:[B] Ch. 9; [Si] Lecture 7 real convention | **A**, P:direct scalar calculation | Tests the conjugation convention on which Riesz representation depends. |
 | B / sharp estimate | `ex-one-dimensional-form-attains-the-lax-milgram-one-over-alpha-bound` (example) — For $a(u,v)=\alpha u\overline v$, the inverse norm is exactly $1/\alpha$. | **L**, S:[B] Ch. 9 | **A**, P:direct solution | Shows the stability constant cannot improve uniformly. |
@@ -3643,7 +3673,6 @@ page and the existing conceptual anchor after which the row belongs.
 | A / resolvent | `lem-elliptic-resolvent-identity` (lemma) — On the common resolvent set, $R_\lambda-R_\mu=(\lambda-\mu)R_\lambda R_\mu$ with the adopted $L-\lambda$ convention. | **L**, S:[LS] Ch. 6; [Si] Lecture 10 | **A**, P:algebra on the operator domain | Supplies the identity later semigroup pages cite. |
 | A / eigenpairs | `cor-eigenfunctions-for-distinct-symmetric-elliptic-eigenvalues-are-ltwo-orthogonal` (corollary) — Symmetry of the form forces $(\lambda-\mu)(u,v)_2=0$. | **L**, S:[H] §4.10; [Si] Lecture 10 | **A**, P:test the two weak eigenvalue equations against each other | Extracts the elementary spectral calculation. |
 | A / eigenbasis | `thm-spectral-series-solution-of-an-invertible-symmetric-elliptic-problem` (theorem) — Expand $f$ in the orthonormal eigenbasis and divide by nonzero eigenvalues, with convergence in the operator/form domains stated separately. | **L**, S:[H] §4.10; [LS] Ch. 6 | **A**, P:compact spectral theorem plus energy norm identification | Turns the existence theorem into an auditable representation. |
-| A / regularity | `cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth` (corollary) — Apply PDE-18 bootstrapping to $Lu=\lambda u$. | **L**, S:[H] §§4.10--4.12; [Si] Lectures 9--10 | **A**, P:successive regularity with the eigen-equation | Records the standard regularity consequence without new spectral input. |
 | A / variational eigenvalues | `thm-dirichlet-first-eigenvalue-is-monotone-under-domain-inclusion` (theorem) — If $\Omega_1\subset\Omega_2$, zero extension of competitors gives $\lambda_1(\Omega_2)\le\lambda_1(\Omega_1)$. | **L**, S:[H] §4.10; [LS] Ch. 9 | **A**, P:Rayleigh principle and zero extension | Adds a cheap geometric consequence with the correct inequality direction. |
 | A / Neumann spectrum | `thm-first-positive-neumann-eigenvalue-has-the-mean-zero-rayleigh-characterisation` (theorem) — On a connected domain, minimise the energy over nonzero mean-zero functions. | **L**, S:[H] §4.10; [Si] Lecture 10 | **A**, P:compactness and orthogonality to constants | Completes the base zero-mode remark with its next spectral level. |
 | B / nonsymmetry | `ex-coercive-nonsymmetric-form-can-have-nonreal-galerkin-eigenvalues` (example) — A coercive real-part two-dimensional form with a skew component has a conjugate nonreal eigenvalue pair. | **L**, S:[LS] Ch. 4; [H] §4.8 finite-dimensional model | **A**, P:two-by-two characteristic polynomial | Shows, at the Galerkin level actually covered by the calculation, what self-adjointness buys. |
@@ -3664,6 +3693,7 @@ page and the existing conceptual anchor after which the row belongs.
 | A / flattening | `lem-weak-divergence-form-equations-are-invariant-under-c-two-boundary-charts` (lemma) — Write the transformed coefficient and Jacobian factors and verify the weak identity under pullback. | **L**, S:[L] Ch. 5 §5.2; [Si] Lecture 8 | **A**, P:change of variables in the form | Separates weak-form legitimacy from ellipticity preservation. |
 | A / global estimate | `lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates` (lemma) — A finite subordinate partition converts local estimates into the global bound, with cutoff commutators controlled. | **L**, S:[H] §4.12; [Si] Lecture 9 | **A**, P:finite cover and squared-sum estimate | Exposes the globalisation step of boundary regularity. |
 | A / bootstrapping | `lem-weak-equation-for-a-first-derivative-includes-coefficient-commutators` (lemma) — Differentiate the divergence-form equation and display the terms involving $D_ka^{ij}D_ju$. | **L**, S:[H] §4.12; [Si] Lecture 8 | **A**, P:difference quotient limit | Prevents an invalid claim that derivatives solve the identical equation. |
+| A / after higher-order boundary regularity and classical embedding | `cor-smooth-coefficients-and-boundary-make-elliptic-eigenfunctions-smooth` (corollary) — Apply PDE-18 bootstrapping to $Lu=\lambda u$. | **L**, S:[H] §§4.10--4.12; [Si] Lectures 9--10 | **A**, P:successive regularity with the eigen-equation | Records the standard regularity consequence without new spectral input. |
 | B / coefficient threshold | `cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity` (counterexample) — A one-dimensional piecewise constant coefficient has a weak solution with continuous flux and a jump in the first derivative. | **L**, S:[H] §4.11; [Si] Lecture 6 | **A**, P:explicit flux solution | Tests the Lipschitz-coefficient hypothesis directly. |
 | B / corner exponent | `ex-reentrant-sector-harmonic-singularity-has-explicit-sobolev-threshold` (example) — For angle $\omega>\pi$, compute the integrability of $r^{\pi/\omega}\sin(\pi\theta/\omega)$ and its second derivatives. | **L**, S:[L] Ch. 5 §5.2; [ACM] Ch. 2 | **A**, P:polar derivative integral | Quantifies the generic corner warning on the base page. |
 | B / forcing order | `cex-higher-elliptic-regularity-cannot-exceed-the-forcing-regularity-by-more-than-two-derivatives` (counterexample) — In one dimension choose $u''=-f$ with $f\in H^k\setminus H^{k+1}$. | **L**, S:[H] §4.12; [Si] Lecture 8 | **A**, P:one-dimensional derivative identity | Shows the data regularity in the induction is necessary. |
@@ -3679,6 +3709,7 @@ page and the existing conceptual anchor after which the row belongs.
 | A / singular integrals | `lem-ltwo-boundedness-of-second-derivative-newtonian-singular-integrals` (lemma) — The multiplier $\xi_i\xi_j/\vert{}\xi\vert{}^2$ has $L^\infty$ symbol and hence is $L^2$ bounded. | **L**, S:[E] §6.3.2; [T] Ch. 10 §4 | **A**, P:FA Plancherel multiplier theorem | Isolates the seed estimate for interpolation. |
 | A / localisation | `lem-cutoff-commutator-for-local-w-two-p-estimates` (lemma) — Expand $L(\eta u)$ and bound the terms with $D\eta\,Du$ and $D^2\eta\,u$ on the outer ball. | **L**, S:[E] §6.3.2; [T] Ch. 10 §4 | **A**, P:product rule and interpolation absorption | Exposes the lower-order terms in the interior estimate. |
 | A / global estimate | `cor-injectivity-removes-the-lp-kernel-term-from-a-global-w-two-p-estimate` (corollary) — If the homogeneous Dirichlet kernel is trivial, compactness/contradiction yields $\|u\|_{W^{2,p}}\le C\|Lu\|_p$. | **L**, S:[E] §6.3.2; [Si] Lecture 12 | **A**, P:normalised contradiction and compact embedding | Separates an a priori estimate from its injective strengthening. |
+| A / weak global $W^{2,p}$ regularity | `thm-weak-global-w-two-p-dirichlet-regularity-for-the-laplacian` (theorem) — A weak Dirichlet solution with $L^p$ data on a bounded $C^{2,\alpha}$ domain belongs to $W^{2,p}$ for $n<p<\infty$. | **L**, S:Haller-Dintelmann, *Partial Differential Equations* (WiSe 2021/22), §19, Theorem 19.7; **A**, P:shifted resolvent, energy uniqueness and finite capped Sobolev bootstrap | Supplies weak-to-strong regularity before the a priori estimate is applied. |
 | B / modulus | `cex-a-non-dini-continuous-poisson-source-can-destroy-continuity-of-second-derivatives` (counterexample) — A radial/logarithmic modulus yields a Newtonian potential whose Hessian fails to converge at the origin. | **L**, S:[E] §6.2.1; [T] Ch. 10 §3 | **A**, P:cancelled radial integral from the source example | Refines the base continuous-forcing warning to the relevant modulus threshold. |
 | B / coefficients | `cex-bounded-measurable-nondivergence-coefficients-do-not-give-schauder-estimates` (counterexample) — A sourced piecewise-coefficient solution lacks $C^2$ regularity despite uniform ellipticity. | **L**, S:[E] §6.2; [Si] Lecture 12 | **A**, P:explicit interface calculation | Tests coefficient Hölder regularity separately from forcing regularity. |
 | B / absorption | `cex-freezing-coefficients-cannot-absorb-a-fixed-large-oscillation-on-arbitrarily-small-balls` (counterexample) — A jump coefficient retains the same oscillation at every ball centred on its interface. | **L**, S:[E] §6.2.2; [Si] Lecture 12 | **A**, P:direct essential-oscillation computation | Shows why continuity/VMO is the exact small-scale input. |
@@ -3726,7 +3757,8 @@ page and the existing conceptual anchor after which the row belongs.
 | A / multipliers | `lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent` (lemma) — Surjectivity of $DG(u)$ makes its adjoint injective, hence the multiplier vector unique. | **L**, S:[T] Ch. 13 §3; [CV] Ch. 4 §4.4 | **A**, P:annihilator/adjoint argument | Records the independence boundary case. |
 | A / variational inequality | `lem-hilbert-projection-characterisation-by-a-variational-inequality` (lemma) — $u=P_Kx$ iff $u\in K$ and $\langle u-x,v-u\rangle\ge0$ for every $v\in K$. | **L**, S:[CV] Ch. 7; [LS] Ch. 9 | **A**, P:expand squared distances and use convex segments | Supplies the geometric model for Stampacchia's theorem. |
 | A / stability | `thm-lipschitz-stability-of-strongly-monotone-variational-inequalities` (theorem) — Solutions for two right-hand sides differ by at most the dual-data difference divided by the monotonicity constant. | **L**, S:[CV] Ch. 7; [T] Ch. 13 §3 | **A**, P:test each inequality by the other solution and add | Extracts continuous dependence from uniqueness. |
-| A / obstacle reaction | `thm-lewy-stampacchia-bounds-in-the-sourced-obstacle-regularity-class` (theorem) — Bound the obstacle reaction between zero and the positive part of $L\psi-f$ under the stated order-preserving hypotheses. | **L**, S:[CV] Ch. 7; [E] §8.4 | **A**, P:penalisation and comparison, retained in the source's regularity class | Adds a useful consequence without claiming it for arbitrary distributions. |
+| A / one-dimensional obstacle trace | `lem-one-dimensional-trace-truncation-compatibility` (lemma) — On a bounded interval, endpoint trace commutes with positive-part truncation and `ker T=W^{1,p}_0` for $1\le p<\infty$. | **L**, S:[B] Ch. 8 §§8.2--8.3 | **A**, P:AC representatives, endpoint Hardy cutoffs and smooth density | Supplies the exact one-dimensional trace/order interface; PDE-14 zero-trace truncation remains the multidimensional route. |
+| A / obstacle reaction | `thm-lewy-stampacchia-bounds-in-the-sourced-obstacle-regularity-class` (theorem) — For the stated real bounded-coefficient divergence-form obstacle problem with distributional $L\psi\in L^2$, the reaction satisfies $0\le\Lambda_u\le(L\psi-f)^+$ in distributions. | **L**, S:[OU] Theorem 2.5 and §4 corroborate the lower-order-free principal-part case under their entropy/obstacle hypotheses | **A**, P:contact truncation, Sobolev level-set chain rule, ellipticity and dominated convergence; the local argument includes the stated bounded lower-order terms | Supplies the Lewy–Stampacchia bound without relying on the false pointwise estimate for penalized reactions. |
 | A / first eigenfunction | `lem-absolute-value-does-not-increase-dirichlet-energy-or-change-ltwo-normalisation` (lemma) — Replacing a real competitor by $\vert{}u\vert{}$ preserves its $L^2$ norm and its gradient energy. | **L**, S:[E] §8.3; [LS] Ch. 9 | **A**, P:Sobolev absolute-value chain rule | Isolates the sign-selection step in first-eigenfunction minimisation. |
 | A / contact set | `cor-obstacle-reaction-is-supported-on-the-contact-set-under-measure-regularity` (corollary) — Where $u>\psi$ on an open set, the reaction measure vanishes. | **L**, S:[E] §8.4; [CV] Ch. 7 | **A**, P:two-sided local variations inside the noncontact set | Gives the precise support statement behind complementarity. |
 | B / feasibility | `cex-obstacle-admissible-set-can-be-empty-when-trace-and-obstacle-are-incompatible` (counterexample) — An obstacle exceeding prescribed boundary data in the trace-compatible limiting sense admits no continuous/Sobolev competitor in the stated class. | **L**, S:[E] §8.4; [CV] Ch. 7 | **A**, P:trace/order contradiction in the source example | Shows why nonemptiness is a theorem hypothesis. |
@@ -3797,8 +3829,8 @@ page and the existing conceptual anchor after which the row belongs.
 
 The old 583/270/845 arithmetic was stale. A structural recount of the checked-in
 pre-audit file found **589 base rows plus 266 overlay rows = 855 distinct IDs**.
-After this prerequisite audit there are **644 base rows plus the same 266
-overlay rows = 910 distinct IDs**, with no duplicate stable ID. The 55-row net
+After this prerequisite audit there are **645 base rows plus the same 266
+overlay rows = 911 distinct IDs**, with no duplicate stable ID. The 56-row net
 increase includes the PDE-1CK and PDE-2D pairs, published-state rows absent from
 the old prose, and the new load-bearing lemmas; moving the five Euclidean
 integration rows out of PDE-5 is counted as a move/replacement rather than as
@@ -3808,8 +3840,8 @@ The former enrichment ratios are not restated because the denominator changed:
 [CKG] was read as a new complete source, and the CK source disposition changed
 from `deferred` to `included`. The §11/§12 tag tables remain an auditable source
 harvest, but a tag is not necessarily one atomic theorem. No publisher preview
-or table of contents alone backs an item. After overlay insertion PDE-26 has the
-largest A page at 30 rows, still below the 60-item ceiling.
+or table of contents alone backs an item. After overlay insertion PDE-25 and PDE-26 have the
+largest A pages at 30 rows each, still below the 60-item ceiling.
 
 Several PDE source headings still name whole theorem suites, but further
 decomposition (full Wiener theory, rough-domain traces, systems, nonlinear

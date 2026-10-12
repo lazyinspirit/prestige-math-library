@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-section-ring-of-ample-line-bundle-finitely-generated.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-zero-elementary-tensor-has-a-zero-factor.md

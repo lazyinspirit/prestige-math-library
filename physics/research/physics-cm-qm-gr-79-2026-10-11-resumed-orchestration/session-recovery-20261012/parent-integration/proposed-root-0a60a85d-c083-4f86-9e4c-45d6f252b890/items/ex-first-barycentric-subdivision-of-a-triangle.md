@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-barycentric-subdivision-of-a-triangle.md

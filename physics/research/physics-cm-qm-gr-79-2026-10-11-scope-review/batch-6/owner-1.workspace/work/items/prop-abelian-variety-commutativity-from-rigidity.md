@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-abelian-variety-commutativity-from-rigidity.md

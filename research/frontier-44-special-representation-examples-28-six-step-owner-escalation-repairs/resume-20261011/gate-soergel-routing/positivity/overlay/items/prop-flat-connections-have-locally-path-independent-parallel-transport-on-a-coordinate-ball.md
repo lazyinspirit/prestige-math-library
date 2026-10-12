@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-flat-connections-have-locally-path-independent-parallel-transport-on-a-coordinate-ball.md

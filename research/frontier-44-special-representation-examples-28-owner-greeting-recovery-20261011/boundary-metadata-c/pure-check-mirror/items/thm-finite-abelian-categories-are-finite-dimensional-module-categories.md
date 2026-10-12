@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-abelian-categories-are-finite-dimensional-module-categories.md

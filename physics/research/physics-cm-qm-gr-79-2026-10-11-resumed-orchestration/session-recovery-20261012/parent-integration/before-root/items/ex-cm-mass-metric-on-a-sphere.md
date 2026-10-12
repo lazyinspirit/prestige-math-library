@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/session-recovery-20261012/batch1-geometry-repair/before/items/ex-cm-mass-metric-on-a-sphere.md

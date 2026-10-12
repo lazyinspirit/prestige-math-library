@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-fundamental-weight-orbit-and-schreier-distance.md

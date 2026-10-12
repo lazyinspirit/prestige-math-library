@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-zero-locus-of-a-transverse-oriented-bundle-section-represents-the-euler-dual.md

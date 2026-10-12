@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-purity-of-branch-locus-for-finite-normal-covers.md

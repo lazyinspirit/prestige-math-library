@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-submatrix-minors-of-a-rectangular-matrix.md

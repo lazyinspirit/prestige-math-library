@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-weak-nullstellensatz-over-real-numbers.md

@@ -50,11 +50,9 @@ Legendre's criterion.
 
 **Proof technique:** direct.
 
-1.1 Direct decimal comparison gives. [given, algebra]
-$$\left|\pi-\frac{22}{7}\right|\approx1.264\times10^{-3},\qquad \left|\pi-\frac{333}{106}\right|\approx8.322\times10^{-5},$$ $$\left|\pi-\frac{355}{113}\right|\approx2.668\times10^{-7} <\frac{1}{2\cdot113^2}\approx3.916\times10^{-5}.$$ Moreover $355=3\cdot113+16$ and $113=7\cdot16+1$, so $\gcd(355,113)=1$. Thus $355/113$ is reduced and satisfies Legendre's criterion. [given, algebra]
+1.1 Direct decimal comparison gives. [given, algebra] $$\left|\pi-\frac{22}{7}\right|\approx1.264\times10^{-3},\qquad \left|\pi-\frac{333}{106}\right|\approx8.322\times10^{-5},$$ $$\left|\pi-\frac{355}{113}\right|\approx2.668\times10^{-7} <\frac{1}{2\cdot113^2}\approx3.916\times10^{-5}.$$ Moreover $355=3\cdot113+16$ and $113=7\cdot16+1$, so $\gcd(355,113)=1$. Thus $355/113$ is reduced and satisfies Legendre's criterion. [given, algebra]
 
-2.1 By [L1] and [F1], the fraction $355/113$ is a convergent of $\pi$. Then [F2] says no. [L1, F1, F2, step 1.1]
-rational with denominator at most $113$ approximates $\pi$ more closely. Since $22/7$ and $333/106$ have denominators $7$ and $106$, neither can beat $355/113$. [F1, F2, step 1.1]
+2.1 By [L1] and [F1], the fraction $355/113$ is a convergent of $\pi$. Then [F2] says no. [L1, F1, F2, step 1.1] rational with denominator at most $113$ approximates $\pi$ more closely. Since $22/7$ and $333/106$ have denominators $7$ and $106$, neither can beat $355/113$. [F1, F2, step 1.1]
 
-2.2 The direct errors from step 1.1 also show that $333/106$ improves on. [step 1.1, algebra]
-$22/7$, but that both are far worse than $355/113$. [step 1.1, algebra] ∎
+3.1 The direct errors from step 1.1 also show that $333/106$ improves on. [step 1.1, algebra] $22/7$, but that both are far worse than $355/113$. [step 1.1, algebra] ∎
+

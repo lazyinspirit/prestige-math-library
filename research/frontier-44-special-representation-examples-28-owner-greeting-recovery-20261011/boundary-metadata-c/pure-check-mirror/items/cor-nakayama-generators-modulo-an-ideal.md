@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-nakayama-generators-modulo-an-ideal.md

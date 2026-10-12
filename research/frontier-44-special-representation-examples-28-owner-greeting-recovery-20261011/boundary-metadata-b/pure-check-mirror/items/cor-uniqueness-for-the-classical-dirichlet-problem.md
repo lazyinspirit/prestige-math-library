@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-uniqueness-for-the-classical-dirichlet-problem.md

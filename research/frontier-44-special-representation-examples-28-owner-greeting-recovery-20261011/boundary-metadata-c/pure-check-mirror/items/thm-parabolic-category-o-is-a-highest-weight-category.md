@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-parabolic-category-o-is-a-highest-weight-category.md

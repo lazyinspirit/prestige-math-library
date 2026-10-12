@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-definite-and-indefinite-hessian-quadratic-forms.md

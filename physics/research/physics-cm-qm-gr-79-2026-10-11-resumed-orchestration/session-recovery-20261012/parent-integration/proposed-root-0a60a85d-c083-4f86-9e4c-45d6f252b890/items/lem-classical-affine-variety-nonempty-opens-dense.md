@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-affine-variety-nonempty-opens-dense.md

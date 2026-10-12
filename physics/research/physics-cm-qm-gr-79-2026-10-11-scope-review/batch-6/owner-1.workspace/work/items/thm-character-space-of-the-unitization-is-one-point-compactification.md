@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-character-space-of-the-unitization-is-one-point-compactification.md

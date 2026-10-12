@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization.md

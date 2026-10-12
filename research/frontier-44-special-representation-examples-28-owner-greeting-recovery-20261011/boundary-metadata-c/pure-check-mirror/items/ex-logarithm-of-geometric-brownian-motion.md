@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-logarithm-of-geometric-brownian-motion.md

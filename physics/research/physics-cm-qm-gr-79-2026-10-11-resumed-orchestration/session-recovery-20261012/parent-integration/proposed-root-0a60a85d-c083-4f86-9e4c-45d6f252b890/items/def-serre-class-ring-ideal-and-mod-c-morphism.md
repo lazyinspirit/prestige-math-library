@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-serre-class-ring-ideal-and-mod-c-morphism.md

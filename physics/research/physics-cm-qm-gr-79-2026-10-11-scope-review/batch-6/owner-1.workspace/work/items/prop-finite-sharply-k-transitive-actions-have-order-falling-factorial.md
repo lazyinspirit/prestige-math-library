@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-finite-sharply-k-transitive-actions-have-order-falling-factorial.md

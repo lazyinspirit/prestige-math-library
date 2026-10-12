@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stable-homotopy-groups-of-a-sequential-prespectrum.md

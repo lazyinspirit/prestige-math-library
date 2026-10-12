@@ -81,8 +81,7 @@ $R_N=(-1)^{N+1}\int_0^1x^{2N+2}/(1+x^2)\,dx$
 
 5.1 Step 1.1 gives $1\le c\sqrt{|d_K|}$ with $0<c<1$, so $\sqrt{|d_K|}\ge1/c>1$ and hence $|d_K|>1$. [step 1.1, step 4.1, algebra]
 
-6.1 Thus every number field of degree $n>1$ has $|d_K|>1$, so its discriminant is neither $1$ nor $-1$; the degree-one case is excluded by the hypothesis. [step 5.1, given] ∎
-## Remarks
+6.1 Thus every number field of degree $n>1$ has $|d_K|>1$, so its discriminant is neither $1$ nor $-1$; the degree-one case is excluded by the hypothesis. [step 5.1, given] ∎ ## Remarks
 
 The estimate compares the Minkowski constant against the smallest possible
 norm of an integral ideal, namely $1$. Two elementary inequalities drive it:

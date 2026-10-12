@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-schur-functor-compares-first-level-branching-with-hecke-restriction.md

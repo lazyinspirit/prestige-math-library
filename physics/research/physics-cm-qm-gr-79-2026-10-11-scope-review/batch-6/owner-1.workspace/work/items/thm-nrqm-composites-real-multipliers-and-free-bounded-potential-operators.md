@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-peter-weyl-for-compact-lie-groups.md

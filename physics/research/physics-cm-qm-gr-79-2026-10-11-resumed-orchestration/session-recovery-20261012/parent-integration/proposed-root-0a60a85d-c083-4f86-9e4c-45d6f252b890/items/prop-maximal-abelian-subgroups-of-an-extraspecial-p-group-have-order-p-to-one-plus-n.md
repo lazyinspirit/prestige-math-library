@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-maximal-abelian-subgroups-of-an-extraspecial-p-group-have-order-p-to-one-plus-n.md

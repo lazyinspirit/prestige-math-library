@@ -91,5 +91,4 @@ with the definition of the genus.
 
 2.1 Combining step 1.2 with step 1.1 gives $h^0(C,\omega_C)=h^1(C,\mathcal O_C)=g$, which is the first displayed identity and, by [F6], also the identity $i(0)=g$. [F3, F6, step 1.1, step 1.2]
 
-
-3.1 For any canonical divisor $K_C$ one has $\omega_C\cong\mathcal O_C(K_C)$ by [F2], so $l(K_C)=h^0(C,\mathcal O_C(K_C))=h^0(C,\omega_C)=g$ by [F5] and step 2.1; together with step 2.1 this proves both displayed identities and the equivalent formulation, and the Axiom of Choice [F8] is used exactly through the duality and coherent-cohomology suppliers cited above. [F2, F5, F8, step 2.1] ∎
+ 3.1 For any canonical divisor $K_C$ one has $\omega_C\cong\mathcal O_C(K_C)$ by [F2], so $l(K_C)=h^0(C,\mathcal O_C(K_C))=h^0(C,\omega_C)=g$ by [F5] and step 2.1; together with step 2.1 this proves both displayed identities and the equivalent formulation, and the Axiom of Choice [F8] is used exactly through the duality and coherent-cohomology suppliers cited above. [F2, F5, F8, step 2.1] ∎ 

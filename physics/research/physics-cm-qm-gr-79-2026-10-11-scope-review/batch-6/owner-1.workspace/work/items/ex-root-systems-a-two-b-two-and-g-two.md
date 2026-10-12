@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-root-systems-a-two-b-two-and-g-two.md

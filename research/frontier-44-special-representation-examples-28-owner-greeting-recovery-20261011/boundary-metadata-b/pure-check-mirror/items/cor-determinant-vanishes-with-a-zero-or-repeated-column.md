@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-determinant-vanishes-with-a-zero-or-repeated-column.md

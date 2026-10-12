@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lifting-a-primitive-root-through-powers-of-five.md

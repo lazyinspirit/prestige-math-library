@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-coefficient-theorem-for-homology-over-a-pid.md

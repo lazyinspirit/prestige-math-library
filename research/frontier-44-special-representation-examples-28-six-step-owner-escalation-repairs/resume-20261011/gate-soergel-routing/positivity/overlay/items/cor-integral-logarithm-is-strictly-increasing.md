@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-integral-logarithm-is-strictly-increasing.md

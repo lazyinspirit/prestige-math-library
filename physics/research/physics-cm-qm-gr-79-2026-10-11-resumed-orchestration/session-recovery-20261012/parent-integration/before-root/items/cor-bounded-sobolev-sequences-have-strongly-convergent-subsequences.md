@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-bounded-sobolev-sequences-have-strongly-convergent-subsequences.md

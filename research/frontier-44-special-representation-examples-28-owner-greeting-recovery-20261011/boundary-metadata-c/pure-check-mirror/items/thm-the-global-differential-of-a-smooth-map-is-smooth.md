@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-global-differential-of-a-smooth-map-is-smooth.md

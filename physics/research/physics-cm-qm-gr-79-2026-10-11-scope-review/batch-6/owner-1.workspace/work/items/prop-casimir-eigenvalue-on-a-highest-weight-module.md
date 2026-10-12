@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-casimir-eigenvalue-on-a-highest-weight-module.md

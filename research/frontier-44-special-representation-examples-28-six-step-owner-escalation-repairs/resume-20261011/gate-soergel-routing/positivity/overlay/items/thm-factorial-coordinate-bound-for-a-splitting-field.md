@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-factorial-coordinate-bound-for-a-splitting-field.md

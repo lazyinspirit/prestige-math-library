@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fitting-subgroup-of-the-frattini-quotient.md

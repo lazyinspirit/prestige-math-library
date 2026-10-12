@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bipartite-graph-iff-adjacency-spectrum-is-symmetric.md

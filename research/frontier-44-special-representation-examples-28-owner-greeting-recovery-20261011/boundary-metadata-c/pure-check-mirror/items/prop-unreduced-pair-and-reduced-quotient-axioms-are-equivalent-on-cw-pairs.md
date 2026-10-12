@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-unreduced-pair-and-reduced-quotient-axioms-are-equivalent-on-cw-pairs.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra.md

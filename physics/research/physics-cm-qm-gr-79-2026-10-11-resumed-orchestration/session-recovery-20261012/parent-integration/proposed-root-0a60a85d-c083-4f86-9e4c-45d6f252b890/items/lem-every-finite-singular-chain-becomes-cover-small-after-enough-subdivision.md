@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fundamental-theorem-of-riemannian-geometry.md

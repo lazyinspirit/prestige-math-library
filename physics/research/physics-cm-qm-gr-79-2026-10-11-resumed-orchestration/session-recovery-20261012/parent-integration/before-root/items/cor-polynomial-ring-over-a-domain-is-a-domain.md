@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-polynomial-ring-over-a-domain-is-a-domain.md

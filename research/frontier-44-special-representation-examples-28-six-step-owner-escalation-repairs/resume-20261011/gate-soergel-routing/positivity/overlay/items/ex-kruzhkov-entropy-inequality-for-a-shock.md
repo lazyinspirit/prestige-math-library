@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-kruzhkov-entropy-inequality-for-a-shock.md

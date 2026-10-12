@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-bessel-potential-spaces-are-hilbert-and-complete.md

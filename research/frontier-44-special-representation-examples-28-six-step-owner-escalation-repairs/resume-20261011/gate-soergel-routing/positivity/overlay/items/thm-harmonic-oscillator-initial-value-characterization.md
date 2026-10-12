@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-harmonic-oscillator-initial-value-characterization.md

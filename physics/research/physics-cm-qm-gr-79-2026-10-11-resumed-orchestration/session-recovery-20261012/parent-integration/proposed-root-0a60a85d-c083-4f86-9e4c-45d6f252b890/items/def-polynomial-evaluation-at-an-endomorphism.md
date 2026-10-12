@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polynomial-evaluation-at-an-endomorphism.md

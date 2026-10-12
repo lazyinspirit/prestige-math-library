@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-finite-generation-and-generation-degree-of-an-fi-module.md

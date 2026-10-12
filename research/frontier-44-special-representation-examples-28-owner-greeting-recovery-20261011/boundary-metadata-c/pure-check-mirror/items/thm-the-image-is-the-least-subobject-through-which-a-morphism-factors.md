@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-image-is-the-least-subobject-through-which-a-morphism-factors.md

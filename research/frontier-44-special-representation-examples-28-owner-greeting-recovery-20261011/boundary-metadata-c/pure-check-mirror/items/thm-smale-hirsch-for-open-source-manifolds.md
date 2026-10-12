@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smale-hirsch-for-open-source-manifolds.md

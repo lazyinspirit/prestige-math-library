@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-darboux-theorem-makes-all-symplectic-manifolds-globally-symplectomorphic.md

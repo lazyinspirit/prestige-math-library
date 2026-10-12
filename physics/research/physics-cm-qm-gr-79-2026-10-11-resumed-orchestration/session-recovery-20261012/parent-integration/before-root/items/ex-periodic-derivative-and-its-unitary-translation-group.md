@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-periodic-derivative-and-its-unitary-translation-group.md

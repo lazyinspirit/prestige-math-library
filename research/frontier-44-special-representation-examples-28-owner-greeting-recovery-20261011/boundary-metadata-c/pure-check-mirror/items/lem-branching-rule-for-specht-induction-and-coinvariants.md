@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-branching-rule-for-specht-induction-and-coinvariants.md

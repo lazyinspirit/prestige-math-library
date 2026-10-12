@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fixed-part-for-geometric-polarizable-variations-on-smooth-algebraic-bases.md

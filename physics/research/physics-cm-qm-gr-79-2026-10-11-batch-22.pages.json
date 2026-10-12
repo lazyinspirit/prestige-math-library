@@ -1,0 +1,853 @@
+[
+  {
+    "order": 123,
+    "id": "cm06-regular-constraints-and-moving-frames",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Regular constraints and moving frames",
+    "companion": "cm06-regular-constraints-and-moving-frames-examples",
+    "requires": [
+      "cm-math-variations",
+      "cm03-momentum-work-and-energy-balances",
+      "cm02-forces-initial-data-and-newtonian-flow",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-balances",
+      "cm-math-geometry",
+      "cm-math-rigid"
+    ],
+    "items": [
+      {
+        "id": "def-cm06-holonomic-constraint-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Holonomic-constraint models of the force branch: constraint data, the constrained equation, virtual displacements and the scleronomic/rheonomic distinction",
+        "statement": "Adopt the force branch of [[post-cm02-force-superposition]]: $N\\ge1$ particle\nlabels with fixed masses $m_{1},\\dots,m_{N}>0$, a nondegenerate open time window\n$I_{0}\\subseteq\\mathbb R$, an open configuration domain $Q\\subseteq\\mathbb R^{3N}$\n([[def-cm01-configuration]] clause (a)), and a force map\n$$F:I_{0}\\times Q\\times(\\mathbb R^{3})^{N}\\longrightarrow(\\mathbb R^{3})^{N}$$\nwith the standing continuity and state-local-Lipschitz hypotheses of clause\n(iii) of that postulate. Fix one inertial frame of the model with adapted\ncoordinates $(t,x)$ ([[post-cm01-frames]]), identify\n$x=(x_{1},\\dots,x_{N})\\in(\\mathbb R^{3})^{N}=\\mathbb R^{3N}$ with the position\ntuple of the labels ([[def-cm01-configuration]]), and let $\\mathsf M$ be the\nmass operator of clause (d) of that definition, $\\mathsf M(x_{1},\\dots,x_{N})\n=(m_{1}x_{1},\\dots,m_{N}x_{N})$, a symmetric positive definite linear map with\nblock-diagonal matrix and blocks $m_{i}I_{3}$. All components below are read in\nthis frame, and dimensions are read by [[def-cm01-units]].\n\n**(a) Constraint datum.** A **holonomic-constraint datum** on this data is a\ntriple $(O,k,G)$ with:\n\n1. an **ambient set** $O\\subseteq\\mathbb R\\times\\mathbb R^{3N}$, open and\n   nonempty;\n2. an integer $k$ with $1\\le k\\le 3N-1$;\n3. a map $G=(G_{1},\\dots,G_{k}):O\\to\\mathbb R^{k}$ of class $C^{2}$\n   ([[def-ck-euclidean-maps-and-diffeomorphisms]]), each component carrying a\n   declared dimension $[G_{\\alpha}]=\\gamma_{\\alpha}$ fixed by the model (the\n   model may rescale a component by a nonzero constant, which changes\n   $\\gamma_{\\alpha}$ and the component but not its zero set);\n\nsubject to the two hypotheses\n\n4. **nonempty admissible locus:** the **constraint locus**\n   $$\\Sigma:=\\bigl\\{(t,x)\\in O:\\ G(t,x)=0\\bigr\\}$$\n   is nonempty and contained in $I_{0}\\times Q$: every constrained\n   configuration is an admissible configuration of the force-branch model and\n   every constrained time lies in its time window;\n5. **regularity:** for every $(t,x)\\in\\Sigma$ the Jacobian $D_{x}G(t,x)$\n   ([[def-jacobian-matrix-and-gradient]]) is surjective, equivalently has rank\n   $k$.\n\nFor $t\\in\\mathbb R$ write $\\Sigma_{t}:=\\{x\\in\\mathbb R^{3N}:(t,x)\\in\\Sigma\\}$\nfor the **instantaneous constraint locus**. If $\\Sigma_{t}\\neq\\varnothing$,\nthen $x\\mapsto G(t,x)$ has the regular value $0$ with nonempty fibre\n$\\Sigma_{t}$ in the sense of [[def-regular-and-critical-points-and-values]]\n(on the open set $\\{x:(t,x)\\in O\\}$), so by\n[[thm-a-regular-level-set-is-an-embedded-submanifold]] the set $\\Sigma_{t}$ is\nan embedded submanifold of $\\mathbb R^{3N}$ of dimension $3N-k$\n([[def-embedded-submanifold-and-slice-chart]]); when $k=3N-1$ the\ninstantaneous locus is locally a curve, and the number\n$$\\dim\\Sigma_{t}=3N-k$$\nis the **instantaneous degrees of freedom** of the constrained branch. The\nset $V(t,x):=\\ker D_{x}G(t,x)\\subseteq\\mathbb R^{3N}$ has dimension $3N-k$ by\nthe rank-nullity theorem for matrices ([[cor-matrix-rank-nullity]]) and is called the space of **virtual displacements** of the datum\nat $(t,x)$; its elements are the first-order differences of constrained\nconfigurations at fixed time, in the sense of the mathematical definition\n[[def-cm-holonomic-constraint-and-ideal-reactions]]. A vector\n$v\\in\\mathbb R^{3N}$ is a **permitted velocity** at $(t,x)\\in O$ when\n$$G_{t}(t,x)+D_{x}G(t,x)\\,v=0 .$$\n\n**(b) Constrained curve families.** Let $J\\subseteq I_{0}$ be an interval with\nnonempty interior ([[def-interval]]). A **constrained curve family** of the\ndatum is a map $x:J\\to\\mathbb R^{3N}$ of class $C^{2}$ with\n$(t,x(t))\\in O$ and $G(t,x(t))=0$ for every $t\\in J$; writing\n$x=(x_{1},\\dots,x_{N})$ with coordinate curves $x_{i}:J\\to\\mathbb R^{3}$ and\n$w_{i}:=x_{i}'$, the componentwise derivatives of\n[[def-vector-valued-derivative-and-integral]] ([[def-cm01-velocity-acceleration]];\n$w_{i}$ is the coordinate velocity of label $i$), the chain rule\n([[thm-chain-rule-for-total-derivatives]]) applied to $t\\mapsto G(t,x(t))$\ngives\n$$G_{t}\\bigl(t,x(t)\\bigr)+D_{x}G\\bigl(t,x(t)\\bigr)\\,w(t)=0\\qquad(t\\in J),$$\nso the velocity of a $C^{1}$ constrained curve family is permitted at every\ntime. A tuple $(t_{0},x_{0},v_{0})\\in O\\times\\mathbb R^{3N}$ is **consistent\ndata** of the datum when $G(t_{0},x_{0})=0$ and\n$G_{t}(t_{0},x_{0})+D_{x}G(t_{0},x_{0})v_{0}=0$; these are the initial data at\nwhich constrained motions are posed below.\n\n**(c) Reaction field and the constrained equation.** A **reaction field along\na curve family** $x:J\\to\\mathbb R^{3N}$ is a continuous map\n$R:J\\to\\mathbb R^{3N}$, of force dimension $\\mu\\ell\\tau^{-2}$ in each\ncomponent. The **equation of the constrained datum along $x$** is\n$$\\mathsf M\\,x''(t)=F\\bigl(t,x(t),w(t)\\bigr)+R(t)\\qquad(t\\in J),$$\ncomponentwise $m_{i}x_{i}''(t)=F_{i}(t,x(t),w(t))+R_{i}(t)$. A\n**holonomic-constraint model** consists of the force-branch data, a\nholonomic-constraint datum $(O,k,G)$, and the declaration that the position\ntuple of the labels satisfies $G(t,x(t))=0$ for all times while a reaction\nfield acts: a **constrained motion** of the model (with reaction $R$) is a\nconstrained curve family $x:J\\to\\mathbb R^{3N}$ together with a reaction field\n$R$ satisfying the displayed equation. The force map $F$ is the model's\ndeclared interaction force of the force branch, and $R$ is the additional\nforce contribution exerted by the mechanism that realizes the constraint; the\ntotal force along a constrained motion is the pointwise sum $F+R$ in the sense\nof clause (v) of [[post-cm02-force-superposition]], read along the curve. The\nreaction is **not** part of the force map: the constrained branch is the branch\nexcluded by clause (i) of that postulate, and the equation above is the\nadopted equation of the constrained model. For any specified constrained curve\nfamily $x$, this equation fixes the reaction uniquely as the residual field\n$$R(t)=\\mathsf Mx''(t)-F\\bigl(t,x(t),x'(t)\\bigr).$$\nWithout an additional reaction law, the constraint and this equation do not\nselect which constrained curve families are dynamically admissible: every\n$C^{2}$ constrained curve can be paired with its continuous residual field to\nsatisfy the equation. The ideal-reaction law of the postulate of this page is\nthe additional model assumption that selects among these candidates by\nrequiring the reaction to annihilate the virtual displacements.\n\n**(d) Scleronomic and rheonomic constraints.** The datum is **scleronomic**\nwhen the constraint locus is time-independent, in the precise sense that there\nis a set $N\\subseteq\\mathbb R^{3N}$ with\n$$\\Sigma=\\bigl\\{(t,x)\\in O:\\ x\\in N\\bigr\\};$$\nequivalently, membership in the locus is a condition on $x$ alone within $O$:\nif $(t,x)\\in\\Sigma$ and $(t',x)\\in O$, then $(t',x)\\in\\Sigma$ (the two\nformulations are exchanged by passing between $N$ and the projection of\n$\\Sigma$ to $\\mathbb R^{3N}$). For the standard product ambient set\n$O=I_{0}\\times Q$ the condition reads $\\Sigma=I_{0}\\times(N\\cap Q)$. The datum\nis **rheonomic** otherwise.\n\nIf the datum is scleronomic, then the declared presentation $G$, and every\n$C^{2}$ presentation of the same locus with the rank hypothesis, satisfy\n$$G_{t}(t,x)=0\\qquad\\text{for every }(t,x)\\in\\Sigma,$$\nbecause for $x\\in N$ every $(t,x)\\in O$ lies in $\\Sigma$, so $t\\mapsto G(t,x)$\nvanishes identically on the open set of times $\\{t:(t,x)\\in O\\}$; this is the\nform in which the classification is used by the balance theorems of this page.\n\nThe identity is a consequence of time-independence and **not** a criterion for\nit. The presentation $G(t,x):=(x_{1}-t)^{2}$ on\n$O=\\mathbb R\\times\\mathbb R^{3N}$ has the moving zero set $\\{x_{1}=t\\}$ while\n$G_{t}(t,x)=-2(x_{1}-t)$ vanishes at every point of that set; this presentation\nviolates the rank hypothesis, but the identity can also hold for a\nrank-regular presentation: on\n$O=\\bigl((0,1)\\cup(2,3)\\bigr)\\times\\mathbb R^{3N}$ the $C^{2}$ map equal to\n$x_{1}$ on $(0,1)\\times\\mathbb R^{3N}$ and to $1$ on\n$(2,3)\\times\\mathbb R^{3N}$ has the rank-$1$ zero set\n$\\Sigma=(0,1)\\times\\{x\\in\\mathbb R^{3N}:x_{1}=0\\}$ with $G_{t}=0$ on $\\Sigma$,\nyet $\\Sigma$ is not of the form $\\{(t,x)\\in O:x\\in N\\}$ for any $N$: the point\n$(1/2,0)\\in\\Sigma$ would force $0\\in N$, and then $(5/2,0)\\in O$ would lie in\n$\\Sigma$. Hence the classification is a property of the locus, and the\nidentity is used only in the direction proved above.\n\nUnder a nowhere-vanishing $C^{2}$ rescaling $G'=\\rho G$ one has\n$D_{x}G'=\\rho\\,D_{x}G$ and $G'_{t}=\\rho_{t}G+\\rho G_{t}=\\rho G_{t}$ at the\npoints of $\\Sigma$, so the virtual displacements and permitted velocities are\nunchanged, the multiplier of a motion transforms as\n$\\lambda'=\\rho^{-1}\\lambda$, and the reaction $D_{x}G'^{\\mathsf T}\\lambda'$\nand the product $-\\lambda'\\cdot G'_{t}=-\\lambda\\cdot G_{t}$ of the rheonomic\npower theorem are unchanged at the locus.\n\n**(e) Status.** This item defines a model class: it fixes the constraint\ndatum, the constrained curves, the virtual displacements, the reaction field\nand the equation of the constrained branch. It adopts no ideal-reaction law\n(that is the content of the ideal-reaction postulate of this page), no particular force\nlaw, and no measured value. Whether a concrete apparatus — a frictionless\njoint, a smooth track, a taut rod or string, a no-slip contact — is described\nby a holonomic-constraint model is an application-level judgement recorded with\nthe apparatus, together with the regime in which the rigidity, frictionlessness\nor contact assumptions are adequate; the framework itself attaches no empirical\nclaim to the class.",
+        "strategy": "A definition of a model class: it fixes the force-branch data, the regular holonomic-constraint datum with its ambient set, rank hypothesis and declared component dimensions, the constrained curve families and permitted velocities, the virtual displacements, the reaction field and the equation of the constrained branch, the consistent data, and the scleronomic/rheonomic classification of the locus; it adopts no ideal-reaction law, no force law beyond the force branch and no measured value.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm01-frames",
+          "def-cm01-configuration",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "def-regular-and-critical-points-and-values",
+          "def-embedded-submanifold-and-slice-chart",
+          "cor-matrix-rank-nullity",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-vector-valued-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "post-cm01-frames": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-holonomic-constraint-and-ideal-reactions": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "def-regular-and-critical-points-and-values": "mathematical-premise",
+          "def-embedded-submanifold-and-slice-chart": "mathematical-premise",
+          "cor-matrix-rank-nullity": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Definition of the holonomic-constraint branch of the force model: the declared regular constraint map on an ambient set, the constraint locus and its instantaneous configuration manifolds, constrained curve families and permitted velocities, the virtual displacements, the reaction field and the constrained equation of motion, the consistent initial data, and the scleronomic/rheonomic classification of the constraint locus. The item declares a model class; it adopts no ideal-reaction law, no force law beyond the force branch and no measured value, and it does not assert that any real mechanism is described by the class.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1 'Holonomic Constraints', Eqs. (2.29)-(2.33), printed pages 17-19 (PDF pages 23-25): holonomic constraints f_alpha(x_A,t)=0, the time-dependent form, the multipliers and the constraint-force term lambda_alpha d f_alpha/d x_A",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 2.1-2.2, chapter pages 1-3 and Fig. 2.1: generalized coordinates defining a configuration together with constraints, and the bead on a rotating ring as a system with one degree of freedom",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): configurations constrained by maps f:U x I -> R^k of full spatial rank, admissible virtual displacements as the kernel of the spatial derivative at fixed time, and ideal constraint reactions as covectors annihilating them",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "post-cm06-ideal-reaction-law",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted ideal-reaction law for holonomic constraints: the d'Alembert condition, its scope and its limits",
+        "statement": "Adopt as a physical assumption of the framework, in the setting of\n[[def-cm06-holonomic-constraint-model]]:\n\n**(i) The ideal-reaction law.** Along every constrained motion $x:J\\to\n\\mathbb R^{3N}$ of a holonomic-constraint model, with reaction field\n$R:J\\to\\mathbb R^{3N}$, the reaction annihilates every virtual displacement:\n\n$$R(t)\\cdot\\delta=0\\qquad\\text{for every }t\\in J\\text{ and every }\\delta\\in V\\bigl(t,x(t)\\bigr)=\\ker D_{x}G\\bigl(t,x(t)\\bigr),$$\n\nthe pairing being the Euclidean inner product of $\\mathbb R^{3N}$\n([[def-euclidean-inner-product]]). This is the **d'Alembert condition** (the\ncondition of zero virtual work of the reaction) in the sense of\n[[def-cm-holonomic-constraint-and-ideal-reactions]]. By the multiplier lemma\n[[lem-cm-constraint-multipliers-and-accelerations]], applied at each time with\nthe surjective Jacobian $D_{x}G(t,x(t))$, the condition holds at time $t$ if\nand only if there is a unique $\\lambda(t)\\in\\mathbb R^{k}$ with\n$$R(t)=D_{x}G\\bigl(t,x(t)\\bigr)^{\\mathsf T}\\lambda(t);$$\nthis representation is a mathematical consequence of the condition and the\nrank hypothesis, not a separate assumption, and the multiplier has dimension\n$\\mu\\ell^{2}\\tau^{-2}/\\gamma_{\\alpha}$ in component $\\alpha$\n([[def-cm01-units]]). The condition is imposed only along the motions of the\nmodel, and it does not by itself determine $R$: it constrains $R$ at each time\nto the $k$-dimensional conormal space, and which element occurs is fixed by\nthe twice-differentiated constraint through the balance theorem of this page.\n\n**(ii) What is adopted.** Clause (i) is an adopted restriction on the\nmechanism that realizes the constraint, not a theorem about bodies, tracks or\ncontacts. It is the idealization of a mechanism that exerts only the reaction\nneeded to maintain the constraint, distributed normally to the admissible\ndirections at each instant; the force branch of\n[[post-cm02-force-superposition]] excludes constraint reactions from its force\nmaps, and this postulate is the additional law that closes the constrained\nbranch.\n\n**(iii) Intended model identifications.** The framework intends clause (i) to\nmodel, subject to the qualifications of clause (iv): frictionless hinges and\njoints; smooth bilateral contacts and tracks; a taut light rod, and a taut\nstring while it stays taut; and no-slip rolling in the planar holonomic case,\nprovided the contact can supply the required tangential reaction. Each of\nthese identifications is an application-level statement made and recorded with\nthe apparatus; the framework asserts no measurement, no material parameter and\nno numerical value here.\n\n**(iv) Limits of the idealization.** The law is **not** asserted for:\n\n1. constraints with dry sliding friction along an admissible direction, whose\n   force has a component doing virtual work on admissible displacements — such\n   friction must be declared as a separate force contribution with its own\n   model;\n2. unilateral contacts and mechanisms that can release the constraint (a bead\n   on the outside of a surface, a string that can go slack, a block that can\n   separate), which are maintained only while the required reaction satisfies\n   a one-sided capability condition; where the condition fails, the constraint\n   is released and a contact-change model is required, and none is supplied\n   here;\n3. points where the Jacobian $D_{x}G$ drops rank, which lie outside the\n   regularity hypothesis of the datum and outside the representation above;\n4. active mechanisms that drive the constraint (motors, moving walls driven by\n   external equipment): their driving must be declared as an additional force\n   contribution, and the ideal reaction then accounts only for the passive\n   maintenance of the constraint;\n5. any claim that the mechanism can mechanically supply the computed\n   reaction: the law computes the reaction the ideal constraint exerts; whether\n   a physical contact, rod or string can supply it (friction cone, sign of a\n   tensile force, strength limits, no-slip conditions) is an additional\n   premise of an application.\n\n**(v) The law is not a work statement.** Clause (i) concerns virtual\ndisplacements at fixed time; it does not assert that the reaction performs no\nwork along the motion. For a scleronomic constraint the reaction power\nvanishes identically, but for a rheonomic constraint the reaction can do work,\nwith $R\\cdot x'=-\\lambda\\cdot G_{t}$; the precise statement, its static case\nand worked models are the content of the rheonomic-power theorem and the\ncompanion examples of this page.\n\n**(vi) Status and empirical content.** The clause is adopted, not deduced; the\nsources record the ideal-reaction condition as an additional physical\nhypothesis attached to a constraint, not as a consequence of writing the\nconstraint down. The passage from clause (i) to the constrained equation of\nmotion is a theorem with explicit regularity hypotheses, proved on this page.\nWhether the idealization is adequate for a given apparatus is decided by\ncomparing the model's conditional predictions with reported observations under\nthe stated regime, with the qualifications of clause (iv) carried along;\nagreement of such a comparison is evidence about the combined model and\napparatus, not a proof of the idealization.",
+        "strategy": "An adopted postulate: along every constrained motion the reaction annihilates every virtual displacement at fixed time, equivalently it is a transpose multiple of the constraint Jacobian by the multiplier lemma; the item records the intended model identifications, the exclusions (sliding friction, unilateral and contact-change mechanisms, rank loss, active drives, mechanical capability of the reaction) and the fact that the virtual-work condition is not a statement about actual work, conservation or measured values.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "post-cm02-force-superposition",
+          "def-cm01-units",
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "lem-cm-constraint-multipliers-and-accelerations",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-holonomic-constraint-and-ideal-reactions": "formulation-prerequisite",
+          "lem-cm-constraint-multipliers-and-accelerations": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the ideal-reaction law for the holonomic-constraint models of the force branch: along every constrained motion the reaction annihilates every virtual displacement at fixed time, equivalently it is a transpose multiple of the constraint Jacobian. The item records the modelled mechanisms and the exclusions (sliding friction along admissible directions, unilateral and contact-change mechanisms, rank loss, active drives, mechanical capability of the reaction) and separates the virtual-work condition from statements about actual work and energy. No measured value and no conservation claim is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1, Eqs. (2.27)-(2.28) and the constraint-force discussion, printed pages 17-19 (PDF pages 23-25): the pendulum tension and normal reaction as the constraint force, and the multiplier proportional to the tension",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): an ideal constraint reaction annihilates all admissible virtual displacements at fixed time (d'Alembert's virtual-work hypothesis); time-dependent constraints can do actual work despite zero virtual work; sliding and static friction are separate models",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 2.1-2.2, chapter pages 1-4: the ideal constraint reaction as an adopted frictionless restriction, not an automatic consequence of imposing a constraint",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.10.3: d'Alembert's ideal constraint forces and the explicit distinction from stationary augmented-action (vakonomic) formulations",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "pthm-cm06-multiplier-balance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Ideal holonomic constraints determine the reaction: multiplier form, explicit acceleration, unique constrained motions and the reaction-power identity",
+        "statement": "Adopt a holonomic-constraint model of [[def-cm06-holonomic-constraint-model]]\nwith datum $(O,k,G)$, mass operator $\\mathsf M$, force map $F$, and the\nideal-reaction law of [[post-cm06-ideal-reaction-law]]. Suppose, in addition\nto the hypotheses of those items:\n\n**(h1)** $G$ is of class $C^{3}$ on $O$, and $D_{x}G(t,x)$ has rank $k$ for\nevery $(t,x)\\in O$ (not only on the constraint locus);\n\n**(h2)** the force map is of class $C^{1}$ on\n$I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]).\n\nSet $O':=O\\cap(I_{0}\\times Q)$. This is an open nonempty set because\n$\\Sigma\\subseteq O'$ and $\\Sigma$ is nonempty. The matrix-valued map\n$C:O\\to M_{k}(\\mathbb R)$ below is defined on $O$, while\n$\\Lambda:O'\\times(\\mathbb R^{3})^{N}\\to\\mathbb R^{k}$ and\n$a:O'\\times(\\mathbb R^{3})^{N}\\to\\mathbb R^{3N}$ are defined on the\nforce-map domain restricted to the constraint datum; this is the time-state\ndomain of the first-order system. Every constrained motion in the statement has\n$(t,x(t))\\in\\Sigma\\subseteq O'$, so these functions are defined along it.\n\nLet $x:J\\to Q$ be a constrained motion of the model with reaction field $R$\nsatisfying the ideal-reaction law, on an interval $J\\subseteq I_{0}$ with\nnonempty interior, and write $w=x'$ for its velocity. Then:\n\n1. **multiplier form.** For every $t\\in J$ there is a unique\n   $\\lambda(t)\\in\\mathbb R^{k}$ with $R(t)=D_{x}G(t,x(t))^{\\mathsf T}\\lambda(t)$;\n   the map $\\lambda:J\\to\\mathbb R^{k}$ so defined is continuous, and with\n\n$$C(t,x):=D_{x}G(t,x)\\,\\mathsf M^{-1}D_{x}G(t,x)^{\\mathsf T},\\qquad \\Lambda(t,x,v):=-C(t,x)^{-1}\\Bigl[D_{x}G\\,\\mathsf M^{-1}F(t,x,v)+G_{tt}+2G_{tq}[v]+G_{qq}[v,v]\\Bigr],$$\n\n   the terms being evaluated at $(t,x)$ or $(t,x,v)$, the $k\\times k$ matrix\n   $C(t,x)$ is symmetric positive definite and invertible and\n   $$\\lambda(t)=\\Lambda\\bigl(t,x(t),w(t)\\bigr)\\qquad(t\\in J):$$\n   the multiplier, and hence the reaction, is determined by the model data\n   and the motion, not a free or measured quantity.\n\n2. **determined dynamics.** With\n   $a(t,x,v):=\\mathsf M^{-1}\\bigl(F(t,x,v)+D_{x}G(t,x)^{\\mathsf T}\\Lambda(t,x,v)\\bigr)$,\n   the tuple $(x,w)$ solves the first-order system\n   $$x'=v,\\qquad v'=a(t,x,v)$$\n   on $J$; conversely every solution $(x,v)$ of this system on an interval\n   whose initial datum is consistent, with\n   $R(t):=D_{x}G(t,x(t))^{\\mathsf T}\\Lambda(t,x(t),v(t))$, is a constrained\n   motion of the model satisfying the ideal-reaction law; and through every\n   consistent datum $(t_{0},x_{0},v_{0})$ there is a unique maximal solution\n   of the system. Hence the holonomic-constraint model with ideal reactions\n   has determined dynamics on its constraint locus.\n\n3. **preservation.** Along every solution of clause 2 with consistent data,\n   $$G\\bigl(t,x(t)\\bigr)=0,\\qquad G_{t}\\bigl(t,x(t)\\bigr)+D_{x}G\\bigl(t,x(t)\\bigr)v(t)=0$$\n   for every $t$ of its maximal interval.\n\n4. **reaction power.** Along every ideal constrained motion as in clause 1,\n   $$R(t)\\cdot w(t)=-\\lambda(t)\\cdot G_{t}\\bigl(t,x(t)\\bigr)\\qquad(t\\in J),$$\n   the pairings being the Euclidean inner products.\n\nThe statement is conditional on the adopted force branch and ideal-reaction\nlaw and on hypotheses (h1)-(h2); it asserts no empirical value, and the\nmultiplier is a representation tied to the declared components of $G$.",
+        "strategy": "A conditional deduction: identify the model data with the mathematical regular-holonomic constraint chart, use the multiplier lemma for the conormal representation of the ideal reaction and the chart proposition for regularity, existence, uniqueness and preservation; differentiate the constraint twice along the motion to evaluate the multiplier explicitly, and derive the reaction-power identity R dot x' = -lambda G_t.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "post-cm06-ideal-reaction-law",
+          "post-cm02-force-superposition",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "lem-cm-constraint-multipliers-and-accelerations",
+          "prop-cm-ideal-holonomic-system-in-a-time-dependent-chart",
+          "lem-matrix-inversion-preserves-ck-regularity",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-euclidean-inner-product",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "post-cm06-ideal-reaction-law": "physical-assumption",
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-holonomic-constraint-and-ideal-reactions": "mathematical-premise",
+          "lem-cm-constraint-multipliers-and-accelerations": "mathematical-premise",
+          "prop-cm-ideal-holonomic-system-in-a-time-dependent-chart": "mathematical-premise",
+          "lem-matrix-inversion-preserves-ck-regularity": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The conditional dynamics of a holonomic-constraint model with the adopted ideal-reaction law: the reaction is the transpose multiple of the constraint Jacobian with a unique continuous multiplier, the multiplier and the constrained acceleration are the explicit functions Lambda and a of the datum, the constrained motions with permitted velocity are exactly the solutions of the resulting first-order system with consistent data, the constraint and its differentiated form are preserved, and the reaction power equals minus the multiplier paired with the time derivative of the constraint. Empirical qualifications of the idealization and the exclusions of the postulate are carried; no measured value and no energy-conservation claim is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1, Eqs. (2.31)-(2.38), printed pages 18-19 (PDF pages 24-25): the augmented Lagrangian with multipliers, the constraint-force term lambda_alpha d f_alpha/dx_A, and the pendulum multiplier proportional to the tension",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 5.9 and 6.8: Lagrange multipliers for holonomic constraints and the explicit multiplier solution of constrained systems",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 2.1-2.2, chapter pages 1-4: Lagrange equations with constraint forces for a bead on a rotating ring, and the reduced equation for the generalized coordinate",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "pthm-cm06-rheonomic-power",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Reaction work and mechanical-energy balance for ideal holonomic constraints: vanishing power for scleronomic constraints and the rheonomic work term",
+        "statement": "Adopt a holonomic-constraint model of [[def-cm06-holonomic-constraint-model]]\nwith datum $(O,k,G)$ and the ideal-reaction law of\n[[post-cm06-ideal-reaction-law]]. Suppose, in addition to the model\nhypotheses, that $G$ is of class $C^{3}$ on $O$ and $D_{x}G(t,x)$ has rank\n$k$ for every $(t,x)\\in O$, and that the force map is of class $C^{1}$ on\n$I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$; these are hypotheses (h1)-(h2) of\n[[pthm-cm06-multiplier-balance]]. Let\n$x:J\\to Q$ be a constrained motion with ideal reaction $R$ on an interval\n$J\\subseteq I_{0}$ with nonempty interior, with velocity $w=x'$ and multiplier\n$\\lambda:J\\to\\mathbb R^{k}$ as in [[pthm-cm06-multiplier-balance]] clause 1.\nSuppose further that the model's force map is presented through a potential\nwith residual forces in the sense of clause (a) of\n[[def-cm03-potential-and-mechanical-energy]]: a $C^{2}$ function\n$U:I_{0}\\times Q\\to\\mathbb R$ of dimension $\\mu\\ell^{2}\\tau^{-2}$ and maps\n$d_{i}:I_{0}\\times Q\\times(\\mathbb R^{3})^{N}\\to\\mathbb R^{3}$ with the\nstanding regularity of clause (iii) of [[post-cm02-force-superposition]], such\nthat\n$$F_{i}(t,x,v)=-\\nabla_{x_{i}}U(t,x)+d_{i}(t,x,v)\\qquad(i=1,\\dots,N)$$\non the state domain ([[def-cm01-units]] for the dimensions). Write\n$K$ and $E(t):=K(t)+U(t,x(t))$ for the kinetic and mechanical energy of\n[[def-cm03-centre-of-mass-and-momenta]] clauses (b),(d) and of clause (b) of\n[[def-cm03-potential-and-mechanical-energy]], and\n$\\mathfrak d_{i}(t):=d_{i}(t,x(t),w(t))$ for the evaluated residual forces.\nThen:\n\n1. **reaction power and reaction work.** For every $t\\in J$,\n   $$R(t)\\cdot w(t)=-\\lambda(t)\\cdot G_{t}\\bigl(t,x(t)\\bigr),$$\n   and for all $t_{0}<t_{1}$ in $J$, $\\int_{t_{0}}^{t_{1}}R(t)\\cdot w(t)\\,dt\n   =-\\int_{t_{0}}^{t_{1}}\\lambda(t)\\cdot G_{t}(t,x(t))\\,dt$. If the datum is\n   scleronomic, then $R\\cdot w\\equiv0$ on $J$ and the reaction performs no\n   work over any subinterval.\n\n2. **mechanical-energy balance.** $E$ is differentiable on $J$ and\n   $$E'(t)=\\partial_{t}U\\bigl(t,x(t)\\bigr)+\\sum_{i}\\bigl\\langle\\mathfrak d_{i}(t),w_{i}(t)\\bigr\\rangle-\\lambda(t)\\cdot G_{t}\\bigl(t,x(t)\\bigr)\\qquad(t\\in J):$$\n   the mechanical energy changes at the rate of the explicit time dependence\n   of the potential, the power of the residual forces, and the constraint\n   term $-\\lambda\\cdot G_{t}$, which vanishes identically for a scleronomic\n   constraint.\n\n3. **conservation in the static scleronomic case.** If the datum is\n   scleronomic, $\\partial_{t}U\\equiv0$ on $I_{0}\\times Q$, and\n   $\\mathfrak d_{i}\\equiv0$ for every $i$ along the motion, then $E$ is\n   constant on $J$.\n\n4. **integrated work form.** For all $t_{0}<t_{1}$ in $J$,\n   $$K(t_{1})-K(t_{0})=U\\bigl(t_{0},x(t_{0})\\bigr)-U\\bigl(t_{1},x(t_{1})\\bigr)+\\int_{t_{0}}^{t_{1}}\\Bigl[\\partial_{t}U\\bigl(t,x(t)\\bigr)+\\sum_{i}\\bigl\\langle\\mathfrak d_{i}(t),w_{i}(t)\\bigr\\rangle-\\lambda(t)\\cdot G_{t}\\bigl(t,x(t)\\bigr)\\Bigr]dt .$$\n\nThe constraint term of clause 2 is not a force of the model's force map: it is\nthe mechanical work performed by the ideal mechanism that maintains a\ntime-dependent constraint, and clause 1 records that this work is exactly the\nvirtual-work-free reaction's actual power. The statement is conditional on the\nadopted model, idealization and potential presentation; it asserts no measured\nvalue.",
+        "strategy": "A conditional deduction: compute the reaction power from the multiplier representation and the differentiated constraint, then apply the mathematical work-energy balance with the total non-potential force (residual plus reaction); read off the vanishing of the reaction work for scleronomic constraints, the rheonomic work term, the conservation case and the integrated work form.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "post-cm06-ideal-reaction-law",
+          "pthm-cm06-multiplier-balance",
+          "post-cm02-force-superposition",
+          "def-cm03-centre-of-mass-and-momenta",
+          "def-cm03-potential-and-mechanical-energy",
+          "def-cm01-units",
+          "lem-cm-constraint-multipliers-and-accelerations",
+          "thm-cm-work-energy-balance",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-newton-leibniz-with-interior-derivative",
+          "cor-zero-derivative-implies-constant",
+          "def-euclidean-inner-product",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "lem-finite-sum-laws",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "post-cm06-ideal-reaction-law": "physical-assumption",
+          "pthm-cm06-multiplier-balance": "physical-result",
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm03-centre-of-mass-and-momenta": "formulation-prerequisite",
+          "def-cm03-potential-and-mechanical-energy": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "lem-cm-constraint-multipliers-and-accelerations": "mathematical-premise",
+          "thm-cm-work-energy-balance": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The work and energy statements of an ideal holonomic-constraint model with an ambient force map presented through a potential with residual forces: the reaction power equals minus the multiplier paired with the time derivative of the constraint, so scleronomic ideal constraints perform no work, while rheonomic ideal constraints can change the mechanical energy through a term that is not a residual force of the model; the mechanical-energy balance carries that term, conservation holds only for a scleronomic constraint with a static potential and no residual forces, and the integrated work form is stated. The result is a conditional deduction from the adopted model and idealization, with the empirical qualifications of the ideal-reaction postulate carried; no measured value is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): ideal constraint reactions annihilate admissible virtual displacements, and time-dependent constraints can do actual work despite zero virtual work",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.5.1 'Bead on a Rotating Hoop', Eqs. (2.61)-(2.66), printed pages 26-28 (PDF pages 32-34): a time-dependent holonomic constraint with the bead threaded on the rotating hoop and the comparison of the inertial mechanical energy with the reduced autonomous integral",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 2.1-2.2 and 4.6, chapter pages 1-4 and 21-24: Lagrange equations with constraint forces for a bead on a rotating ring, and the distinction between the mechanical energy in the lab frame and a reduced autonomous quantity for a rotating constraint",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "def-cm06-moving-frame",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Moving spatial charts of an inertial frame: rotating and translating coordinates, angular velocity and inertial terms",
+        "statement": "Fix one inertial frame $F=\\bigl(o,u,(e_{1},e_{2},e_{3})\\bigr)$ of the model with\nadapted coordinates $(t,x)$ ([[post-cm01-frames]]); lengths and times are read\nin metres and seconds ([[def-cm01-units]]). A **moving spatial chart** of this\nframe is the following kinematic data:\n\n**(a) Data.** A nondegenerate interval $I\\subseteq\\mathbb R$\n([[def-interval]]) together with maps\n$$c:I\\longrightarrow\\mathbb R^{3},\\qquad R:I\\longrightarrow SO(3),$$\nthe matrix $R(t)$ being identified with its nine entries, such that all\ncomponents of $c$ and all entries of $R$ have continuous second derivatives on\n$I$ ([[def-ck-euclidean-maps-and-diffeomorphisms]],\n[[def-vector-valued-derivative-and-integral]]); we then say that $c$ and $R$\nare of class $C^{2}$. The map\n$$\\Phi:I\\times\\mathbb R^{3}\\longrightarrow I\\times\\mathbb R^{3},\\qquad \\Phi(t,y):=\\bigl(t,\\,R(t)y+c(t)\\bigr),$$\nis the **coordinate change of the chart**: for $t\\in I$ it identifies the\ntriple $y\\in\\mathbb R^{3}$ with the point of the inertial chart whose\ncoordinates are $x=R(t)y+c(t)$. The curve $t\\mapsto c(t)$ is the **reference\ncurve** of the chart and the family $R(t)$ its **rotation**; the chart is\n**attached to** the fixed inertial frame, and its data are kinematic data of\nthe description, not new physical objects.\n\n**(b) Coordinate curves, velocities and accelerations.** Let $J\\subseteq I$\nbe an interval with nonempty interior and let $x:J\\to\\mathbb R^{3}$ be a\ncurve of class $C^{2}$ in the inertial chart (for instance the coordinate\ncurve of a worldline in the sense of [[def-cm01-velocity-acceleration]]). The\n**coordinate curve of $x$ in the moving chart** is\n$$y(t):=R(t)^{\\mathsf T}\\bigl(x(t)-c(t)\\bigr)\\qquad(t\\in J);$$\nits **coordinate velocity** and **coordinate acceleration in the moving\nchart** are the componentwise derivatives $\\dot y:=y'$ and $\\ddot y:=y''$\n([[def-vector-valued-derivative-and-integral]]), of dimensions\n$\\ell\\tau^{-1}$ and $\\ell\\tau^{-2}$. These are chart-local notions: because\nthe moving chart is not an inertial frame of the model (clause (f)), they are\nnot the coordinate velocity and acceleration of an inertial frame, and their\nrelation to the inertial-frame notions is a theorem with hypotheses, not an\nidentification.\n\n**(c) Angular velocity of the chart.** Put $\\Omega(t):=R(t)^{\\mathsf T}R'(t)$.\nBy [[lem-cm-moving-frame-acceleration-identity]] clause 1, $\\Omega(t)$ is\nskew-symmetric for every $t$, and by clause 2 there is a unique\n$\\omega(t)\\in\\mathbb R^{3}$ with\n$$\\Omega(t)z=\\omega(t)\\times z\\qquad(z\\in\\mathbb R^{3}),$$\nthe cross product being that of [[def-cross-product-in-r3]]. The vector\n$\\omega(t)$ is the **angular velocity of the chart** in the convention\n$\\Omega=R^{\\mathsf T}R'$ (the **body convention**), of dimension\n$\\tau^{-1}$ read in radians per second; its components are read off the three\nentries of $\\Omega$ above the diagonal. With the opposite convention\n$\\Omega_{s}:=R'R^{\\mathsf T}$ one has\n$\\Omega_{s}=R\\,\\Omega\\,R^{\\mathsf T}=[R\\omega]_{\\times}$ by clause 3 of\n[[lem-cm-skew-matrix-cross-product-correspondence]] and\n[[def-cm-special-orthogonal-group]], so the representing vector of the\nopposite convention is $R(t)\\omega(t)$: the two conventions differ by the\nrotation, and every statement of this framework names the one it uses. This\ndefinition uses the body convention throughout.\n\n**(d) Inertial terms.** For $(t,y,\\dot y)\\in I\\times\\mathbb R^{3}\\times\\mathbb R^{3}$\ndefine\n$$\\tau(t,y,\\dot y):=-\\Bigl(2\\,\\omega(t)\\times\\dot y+\\omega'(t)\\times y+\\omega(t)\\times\\bigl(\\omega(t)\\times y\\bigr)+R(t)^{\\mathsf T}c''(t)\\Bigr),$$\nof dimension $\\ell\\tau^{-2}$; $\\tau$ is the field of **inertial terms** of the\nchart, per unit mass in the sense that the moving-chart equation of the next\nitem carries the factor $m\\tau$ for a label of mass $m$. Its four additive\ncontributions are named, in order: the **Coriolis term** $-2\\omega\\times\\dot y$,\nthe **Euler term** $-\\omega'\\times y$, the **centrifugal term**\n$-\\omega\\times(\\omega\\times y)$, and the **translational term**\n$-R^{\\mathsf T}c''$. The names are conventions attached to the displayed\nterms; the definition attaches no force to them, and clause (f) records their\nkinematic status.\n\n**(e) Curves at rest in the chart.** For fixed $y_{0}\\in\\mathbb R^{3}$ the\ncurve $t\\mapsto R(t)y_{0}+c(t)$ in the inertial chart is the path of a point\n**at rest in the chart**; it is of class $C^{2}$ because $R$ and $c$ are, and\nit satisfies the parameter condition of [[post-cm01-worldlines]]; whether it\nis the worldline of a particle label is a separate declaration of a model and\nis not made here.\n\n**(f) Status.** A moving chart is a time-dependent coordinate description\nattached to one inertial frame; it is **not** an inertial frame of the model\nin the sense of [[post-cm01-frames]] — that notion requires a fixed spatial\nbasis and an affine reference curve, and the theorem of this page records\nthat the inertial terms of clause (d) vanish identically exactly in that case.\nIt is also not an observer congruence: a congruence is a family of curves of\nthe spacetime data, whereas a chart is a coordinate map. The identity\nrelating the inertial-chart acceleration to the moving-chart acceleration of\nthe same curve is the mathematical lemma cited in clause (c); the equation of\nmotion of a force model in the moving chart, with the inertial terms entering\nas the mass multiples $m\\tau$, is the inertial-forces theorem of this page,\nwith its own hypotheses. Nothing in this definition asserts a force law, an\nequation of motion, a transformation law for physical interactions or a\nmeasured value.",
+        "strategy": "A kinematic definition: it fixes the moving spatial chart of a fixed inertial frame by a C^2 reference curve and rotation, the coordinate curves, velocities and accelerations read in the chart, the angular velocity in the stated body convention with the conversion to the opposite convention, the four inertial terms, the curves at rest in the chart, and the status of the object as a coordinate description rather than an inertial frame or an observer congruence; no force law or measured value.",
+        "deps": [
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "lem-cm-moving-frame-acceleration-identity",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cm-special-orthogonal-group",
+          "def-cross-product-in-r3",
+          "def-vector-valued-derivative-and-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm01-frames": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "lem-cm-moving-frame-acceleration-identity": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Definition of the moving spatial charts of the Newtonian model: a translating and rotating coordinate description attached to a fixed inertial frame, its reference curve and rotation, the coordinate curves, velocities and accelerations read in it, the angular velocity of the chart in a stated convention, and the four inertial terms. The moving chart is a coordinate description, not an inertial frame, an adapted chart of the adopted class or an observer congruence; the item asserts no force law, no equation of motion and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 6.1-6.2, printed pages 93-95 (PDF pages 99-101): rotating frames, the angular velocity of the rotating axes, Eq. (6.4) for the acceleration transfer, and the Coriolis, centrifugal and Euler terms of Eq. (6.5)",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 4.6, chapter pages 21-23 (PDF pages 76-78): the general frame-transfer formulas (4.86)-(4.90), the angular velocity of the moving frame, and the four inertial-force terms of (4.92)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1.1, printed pages 47-49 (PDF pages 53-55): moving orthonormal bases, the antisymmetric matrix R^T Rdot and the angular velocity vector in the body convention",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-36 (PDF pages 36-39): a reference frame as an adapted coordinate map (t,x) -> (t, o(t)+R(t)x) with an origin trajectory and an oriented orthonormal spatial basis map, distinct from an observer congruence",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "pthm-cm06-inertial-forces",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The equation of motion in a moving chart: inertial terms, the inertial forces, and the exact criterion for a chart to be inertial",
+        "statement": "Adopt the force branch of [[post-cm02-force-superposition]]: $N\\ge1$ labels\nwith masses $m_{1},\\dots,m_{N}>0$, time window $I_{0}$, open configuration\ndomain $Q\\subseteq\\mathbb R^{3N}$ and force map $F$ with the standing\nregularity; fix one inertial frame $F$ with adapted coordinates $(t,x)$\n([[post-cm01-frames]], [[def-cm01-velocity-acceleration]],\n[[def-cm01-units]]). Let a moving spatial chart of $F$ be given by data\n$(I,c,R)$ with $I\\subseteq I_{0}$ ([[def-cm06-moving-frame]]), with angular\nvelocity $\\omega$ and inertial-terms field\n$$\\tau(t,y,\\dot y):=-\\Bigl(2\\,\\omega(t)\\times\\dot y+\\omega'(t)\\times y+\\omega(t)\\times\\bigl(\\omega(t)\\times y\\bigr)+R(t)^{\\mathsf T}c''(t)\\Bigr).$$\n\nLet $x:J\\to Q$ be a **motion** of the model on an interval $J\\subseteq I$ with\nnonempty interior ([[def-cm02-newtonian-flow]] clause (c)):\n$$m_{i}x_{i}''(t)=F_{i}\\bigl(t,x(t),w(t)\\bigr)\\qquad(t\\in J),$$\nwith $w=x'$ the coordinate velocity of the labels, and for each label define\nthe moving-chart coordinate curve and its derivatives\n$$y_{i}(t):=R(t)^{\\mathsf T}\\bigl(x_{i}(t)-c(t)\\bigr),\\qquad \\dot y_{i}=y_{i}',\\qquad \\ddot y_{i}=y_{i}''.$$\nThen:\n\n1. **moving-chart equation.** For every $i$ and every $t\\in J$,\n   $$m_{i}\\,\\ddot y_{i}(t)=R(t)^{\\mathsf T}F_{i}\\bigl(t,x(t),w(t)\\bigr)+m_{i}\\,\\tau\\bigl(t,y_{i}(t),\\dot y_{i}(t)\\bigr).$$\n\n2. **inertial forces.** Define the **inertial force** on label $i$ along the\n   motion by $F_{i}^{\\mathrm{in}}(t):=m_{i}\\tau(t,y_{i}(t),\\dot y_{i}(t))$,\n   with the four additive components $-2m_{i}\\omega\\times\\dot y_{i}$,\n   $-m_{i}\\omega'\\times y_{i}$, $-m_{i}\\omega\\times(\\omega\\times y_{i})$ and\n   $-m_{i}R^{\\mathsf T}c''$ (Coriolis, Euler, centrifugal and translational).\n   Then clause 1 reads $m_{i}\\ddot y_{i}=R^{\\mathsf T}F_{i}+F_{i}^{\\mathrm{in}}$.\n   The inertial forces are determined by the chart's motion and the label's\n   mass; they are **not** contributions of the model's force map $F$, and\n   the moving chart is not an inertial frame of the model.\n\n3. **criterion for an inertial chart.** The inertial terms vanish\n   identically, $\\tau(t,y,\\dot y)=0$ for every $(t,y,\\dot y)\\in I\\times\\mathbb R^{3}\\times\\mathbb R^{3}$,\n   if and only if $R$ is constant on $I$ and $c$ is affine on $I$. In that\n   case the moving chart $(t,y)$ is the adapted coordinate chart of an\n   inertial frame $F_{*}$ of the model related to $F$ by a Galilean\n   transformation with vanishing time shift, and clause 1 reduces for each\n   label to $m_{i}\\ddot y_{i}=R^{\\mathsf T}F_{i}(t,x(t),w(t))$, which is the\n   transformed equation of motion of clause (vi) of\n   [[post-cm02-force-superposition]] read in $F_{*}$. Conversely, if the\n   moving chart is the adapted chart of an inertial frame related to $F$ by a\n   Galilean transformation with vanishing time shift, then $R$ is constant\n   and $c$ is affine and $\\tau\\equiv0$.\n\nThe identity of clause 1 is a conditional consequence of the adopted force\nbranch and of the chart's kinematics; clause 3 is its consistency check\nagainst the frame class of [[post-cm01-frames]]. No claim is made that a\nmoving chart is physically equivalent to an inertial frame with an additional\nforce field, and no measured value is asserted.",
+        "strategy": "A conditional deduction: apply the mathematical rotating-frame acceleration identity to each label of a motion of the force model and read off the inertial terms and their mass multiples; characterize the vanishing of the inertial terms by a short computation as exactly the charts with constant rotation and affine reference curve, and identify those charts as the adapted charts of inertial frames, recovering the force-covariance law.",
+        "deps": [
+          "def-cm06-moving-frame",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "post-cm01-frames",
+          "pthm-cm01-galilean-kinematics",
+          "lem-cm-moving-frame-acceleration-identity",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "cor-zero-derivative-implies-constant",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-algebra-of-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm06-moving-frame": "formulation-prerequisite",
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "pthm-cm01-galilean-kinematics": "physical-result",
+          "lem-cm-moving-frame-acceleration-identity": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The conditional description of the motions of a force-branch model in a rigidly moving and rotating spatial chart: the exact identity for the coordinate acceleration with the four inertial terms, the reading of those terms as mass-proportional inertial forces, and the characterization of exactly inertial charts as the charts whose inertial terms vanish, in which case the framework's force-covariance law is recovered. The inertial terms are properties of the chart's motion, not forces of the model's force map; the item asserts no equivalence between a moving chart and a gravitational field, and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 6.1-6.2, Eqs. (6.3)-(6.5), printed pages 94-95 (PDF pages 100-101): the velocity and acceleration transfer to a rotating frame, and Newton's equation with the Coriolis, centrifugal and Euler terms",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 4.6, Eqs. (4.88)-(4.92), chapter pages 21-23 (PDF pages 76-78): the velocity and acceleration transfer formulas and the four inertial-force terms, recorded as mathematical terms rather than physical forces",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-36 (PDF pages 36-39): frames as adapted coordinate maps, and the distinction between frame changes and forces",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "def-cm06-nonholonomic-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Velocity-constraint (nonholonomic) models of the force branch: constant-rank constraint laws, the d'Alembert reaction and holonomic equivalence",
+        "statement": "Adopt the force branch of [[post-cm02-force-superposition]]: $N\\ge1$ labels\nwith masses $m_{1},\\dots,m_{N}>0$, a nondegenerate open time window\n$I_{0}\\subseteq\\mathbb R$, an open configuration domain $Q\\subseteq\\mathbb R^{3N}$\nand a force map $F$ with the standing regularity\n([[def-cm01-configuration]], [[def-cm01-units]]). Fix one inertial frame with\nadapted coordinates $(t,x)$ and write $x=(x_{1},\\dots,x_{N})\\in\\mathbb R^{3N}$\nwith coordinate velocity $w=x'$ ([[def-cm01-velocity-acceleration]],\n[[def-vector-valued-derivative-and-integral]]).\n\n**(a) Velocity-constraint datum.** A **velocity-constraint datum** on this\ndata is a quadruple $(O_{v},k',A,b)$ with:\n\n1. an **ambient set** $O_{v}\\subseteq I_{0}\\times Q$, open and nonempty;\n2. an integer $k'$ with $1\\le k'\\le 3N-1$;\n3. maps $A:O_{v}\\to M_{k'\\times 3N}(\\mathbb R)$ and\n   $b:O_{v}\\to\\mathbb R^{k'}$ of class $C^{2}$\n   ([[def-ck-euclidean-maps-and-diffeomorphisms]]), of declared dimensions\n   chosen so that every row satisfies $[A_{\\alpha j}w_{j}]=[b_{\\alpha}]$ —\n   the output of each row of the law below is a single declared quantity;\n4. the **constant-rank hypothesis**: $A(t,x)$ has rank $k'$ for every\n   $(t,x)\\in O_{v}$, equivalently the linear map\n   $A(t,x):\\mathbb R^{3N}\\to\\mathbb R^{k'}$ is surjective\n   ([[def-linear-map]], [[cor-matrix-rank-nullity]]).\n\nThe **constraint law** of the datum is\n$$A(t,x)\\,w+b(t,x)=0 .$$\n\n**(b) Admissible velocities, virtual displacements, admissible curves.** For\n$(t,x)\\in O_{v}$ the **admissible velocities** are the vectors\n$v\\in\\mathbb R^{3N}$ with $A(t,x)v+b(t,x)=0$. They form the nonempty affine\nsubspace $v_{0}+\\ker A(t,x)$ (nonempty because $A(t,x)$ is surjective), with\ndirection the linear space\n$$V(t,x):=\\ker A(t,x)\\subseteq\\mathbb R^{3N},\\qquad \\dim V(t,x)=3N-k'$$\nby rank-nullity ([[cor-matrix-rank-nullity]]). The elements of $V(t,x)$ are\nthe **virtual displacements** of the datum at $(t,x)$: the admissible\nvelocity differences at frozen time and configuration, in the Chetaev\nprescription of [[def-cm-nonholonomic-velocity-constraint-law]]. A\n**kinematically admissible curve family** is a map $x:J\\to Q$ of class $C^{2}$\non an interval $J\\subseteq I_{0}$ with nonempty interior ([[def-interval]])\nsuch that $(t,x(t))\\in O_{v}$ and\n$A(t,x(t))x'(t)+b(t,x(t))=0$ for every $t\\in J$; its velocity at each time is\nadmissible by definition.\n\n**(c) d'Alembert velocity-constraint model.** A **velocity-constraint model**\nconsists of the force-branch data, a velocity-constraint datum $(O_{v},k',A,b)$\nand the declaration that the labels' motion satisfies the constraint law\nwhile a reaction field acts: a **motion** of the model is a kinematically\nadmissible curve family $x:J\\to Q$ together with a continuous reaction field\n$R:J\\to\\mathbb R^{3N}$ of force dimension satisfying\n$$\\mathsf M\\,x''(t)=F\\bigl(t,x(t),x'(t)\\bigr)+R(t)\\qquad(t\\in J),$$\nwith $\\mathsf M$ the mass operator of [[def-cm01-configuration]] clause (d).\nThe model is a **d'Alembert model** when, in addition, the reaction is\n**ideal**: along every motion,\n$$R(t)\\cdot\\delta=0\\qquad\\text{for every }\\delta\\in V\\bigl(t,x(t)\\bigr)=\\ker A\\bigl(t,x(t)\\bigr),$$\nthe pairing being the Euclidean inner product ([[def-euclidean-inner-product]]).\nThis is the **adopted idealization** of the mechanism that realizes the\nvelocity constraint — the analogue for velocity constraints of the ideal\nreaction law of the holonomic branch — and it is not a consequence of the\nconstraint being imposed. By the multiplier lemma\n([[lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple]]),\napplied at each time to the surjective $A(t,x(t))$, the ideal condition holds\nat time $t$ if and only if there is a unique $\\mu(t)\\in\\mathbb R^{k'}$ with\n$$R(t)=A\\bigl(t,x(t)\\bigr)^{\\mathsf T}\\mu(t);$$\nthe representation is a mathematical consequence of the condition and the\nrank hypothesis, while the ideal condition itself is the adopted part. The\nequation of the d'Alembert model in multiplier form is therefore\n$\\mathsf Mx''=F+A^{\\mathsf T}\\mu$ along an ideal motion.\n\n**(d) Holonomic equivalence and nonholonomic models.** The datum is\n**holonomic-equivalent** on $O_{v}$ when there exist a $C^{2}$ map\n$\\Phi:O_{v}\\to\\mathbb R^{k'}$ with $\\Phi_{x}$ of rank $k'$ on $O_{v}$ and a\n$C^{2}$ map $\\varrho:O_{v}\\to GL(k',\\mathbb R)$\n([[def-invertible-matrix-and-general-linear-group]],\n[[def-jacobian-matrix-and-gradient]]) with\n$$A(t,x)=\\varrho(t,x)\\,\\Phi_{x}(t,x),\\qquad b(t,x)=\\varrho(t,x)\\,\\Phi_{t}(t,x)\\qquad\\text{on }O_{v};$$\nThe datum is **locally holonomic-equivalent at a point** when such a pair exists on some open neighbourhood of that point, and **locally nonholonomic there** when no such neighbourhood and pair exists, as in [[def-cm01-configuration]] clause (e). A **nonholonomic model** in this local sense specifies a point (or region of points) with this failure. Absence of one pair on the whole domain $O_v$ alone is insufficient, since a global obstruction need not be local nonintegrability. In\nthe holonomic-equivalent case the law is the differentiated family of\nposition constraints $\\Phi(t,x)=\\text{constant}$: for a $C^{1}$ curve with\n$(t,x(t))\\in O_{v}$, the chain rule\n([[thm-chain-rule-for-total-derivatives]]) gives\n$$\\frac{d}{dt}\\Phi\\bigl(t,x(t)\\bigr)=\\Phi_{t}+\\Phi_{x}x'=\\varrho^{-1}\\bigl(b+Ax'\\bigr),$$\nso the constraint law holds exactly when $\\Phi(t,x(t))$ is constant; a\nholonomic-equivalent model is thus one whose constraint is equivalent to a\nfamily of $k'$ independent position constraints with regular differentials,\npresented through the nowhere-vanishing factor $\\varrho$. For $k'=1$ the\nfactorization $A=\\varrho\\Phi_x$, $b=\\varrho\\Phi_t$ says that the one-form\n$b\\,dt+A\\cdot dx$ is $\\varrho\\,d\\Phi$: in this single-row case, local\nnonholonomicity means that no such integrating factor and regular potential\nexist on any neighbourhood of the specified point. For $k'>1$, local\nnonholonomicity is defined by failure of the matrix factorization above, not\nby a single one-form criterion. The planar no-slip law of a disk rolling in a straight line is\nholonomic-equivalent with $A=(1,-a)$, $b=0$, $\\Phi(x,\\theta)=x-a\\theta$ and\n$\\varrho=1$; the velocity constraint $z'=xy'$ of\n[[def-cm-nonholonomic-velocity-constraint-law]] is not: an integrating factor\nwould make the distribution $\\ker A$ tangent to the level sets of $\\Phi$, and\n[[prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets]] proves\nthat this distribution is not tangent to the level sets of any $C^{2}$\nfunction with nonvanishing differential. Tong's cited example is a specific\ncoin of radius $R>0$ rolling without slipping down a slope, with generalized\ncoordinates $(x,y,\\theta,\\phi)$ and velocity constraints\n$$x'=R\\phi'\\sin\\theta,\\qquad y'=R\\phi'\\cos\\theta,$$\nwhere $x,y,R$ have length dimension and $\\theta,\\phi$ are angles in radians,\nwhich he identifies as non-holonomic (Section 2.3.2, Eq. (2.41)). This is a\nsource-reported classification of that rolling-coin model; this item does not\nprove it or classify all three-dimensional rolling models.\n\n**(e) Status and scope.** The d'Alembert law of clause (c) is a prescription\nfor the reaction at frozen time and configuration, adopted as the physical\nidealization of the mechanism; it is **not** identified with the vakonomic\n(stationary augmented action) prescription of\n[[def-cm-nonholonomic-velocity-constraint-law]]. For the sample model $z'=xy'$\nwith unit mass, zero applied force and initial data\n$(x,y,z)(0)=(0,0,0)$, $(x',y',z')(0)=(1,1,0)$,\n[[cex-cm-dalembert-and-vakonomic-evolutions-differ]] proves that the unique\nd'Alembert motion is not vakonomic with those data. Thus the d'Alembert\nsolution set is not a subset of the vakonomic solution set for that datum,\nand the two sets are unequal; this does not assert that a vakonomic motion\nwith those data exists. The closing remark of this page records the\ndistinction and its scope. The framework excludes from\nthis branch: points where the rank of $A$ drops (the multiplier system\ndegenerates there, and no continuation is asserted); unilateral constraints\nand contact changes (a skate leaving the ground, a wheel beginning to slip),\nwhich require their own mode-change models; impacts; dry friction along\nadmissible directions, which must be declared as a separate force\ncontribution; and active drives, whose driving is an additional force of the\nmodel. Whether a concrete mechanism is described by this class, and whether\nits reaction can supply the computed multiplier, are application-level\nstatements recorded with the apparatus; the definition asserts no measured\nvalue.",
+        "strategy": "A definition of a model class: it fixes a constant-rank affine velocity law, its admissible velocities and Chetaev virtual displacements at frozen time and configuration, kinematically admissible curve families, the equation of the branch and the adopted d'Alembert ideal-reaction law with its multiplier representation, the holonomic-equivalence classification with the chain-rule explanation and the planar rolling example, and the scope exclusions; no measured value.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm01-configuration",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-cm-nonholonomic-velocity-constraint-law",
+          "cex-cm-dalembert-and-vakonomic-evolutions-differ",
+          "prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets",
+          "lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple",
+          "cor-matrix-rank-nullity",
+          "def-linear-map",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-vector-valued-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "def-euclidean-inner-product",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-nonholonomic-velocity-constraint-law": "mathematical-premise",
+          "cex-cm-dalembert-and-vakonomic-evolutions-differ": "mathematical-premise",
+          "prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets": "mathematical-premise",
+          "lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple": "mathematical-premise",
+          "cor-matrix-rank-nullity": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Definition of the velocity-constraint branch of the force model: a declared constant-rank affine velocity law, its admissible velocities and Chetaev virtual displacements at frozen time and configuration, kinematically admissible curve families, the adopted d'Alembert ideal-reaction law and its multiplier representation, the equation of the branch, the classification of global and local holonomic equivalence and locally nonholonomic models, and the exclusion of rank changes, contact changes, impacts, friction and driving. The item defines a model class; it asserts no measured value and does not claim that any particular mechanism is described by it.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.2 'Non-Holonomic Constraints', Eq. (2.41), printed pages 20-21 (PDF pages 26-27): the specific coin rolling without slipping down a slope, with coordinates (x,y,theta,phi) and constraints xdot=R phidot sin(theta), ydot=R phidot cos(theta), which Tong identifies as non-holonomic",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.10.3: a nonholonomic constraint distribution as a constant-rank subbundle, the d'Alembert ideal reaction, and the explicit distinction from the augmented-action (vakonomic) formulation",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5 and 2.2, printed pages 19-25 and 33-36: velocity constraints A(q,t)qdot+b(q,t)=0 of constant row rank, admissible virtual vectors obeying A delta q=0, and the warning that stationary action with an inserted velocity constraint is a different problem",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "J. Cortes, M. de Leon, D. Martin de Diego and S. Martinez, Geometric description of vakonomic and nonholonomic dynamics. Comparison of solutions (SIAM J. Control Optim., author PDF), Sections 2 and 5: the d'Alembert (Chetaev) equations for linear constraints and the separate vakonomic problem, with the non-integrability discussion",
+              "url": "http://terrano.ucsd.edu/jorge/publications/data/2003_CoLeMaMa-sicon.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "rem-cm06-dalembert-vakonomic-distinction",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "The d'Alembert and vakonomic prescriptions are different models: what is proved, what is adopted, and which questions are open",
+        "statement": "For a velocity-constraint datum $(O_{v},k',A,b)$ of\n[[def-cm06-nonholonomic-model]] the framework's model is the **d'Alembert\nmodel**: admissible curves satisfy $Ax'+b=0$, and the reaction is the ideal\n(Chetaev) reaction, annihilating the frozen virtual displacements\n$\\ker A(t,x(t))$ at each instant, equivalently $R=A^{\\mathsf T}\\mu$ for a\nunique multiplier. The **vakonomic** prescription of\n[[def-cm-nonholonomic-velocity-constraint-law]] is a different construction:\none forms the augmented functional\n$$\\Phi(q,\\eta)=\\int_{a}^{b}\\Bigl[\\tfrac12|q'|^{2}+\\eta\\,(z'-xy')\\Bigr]dt$$\nfor the sample constraint $z'=xy'$ and a multiplier function $\\eta$, and asks\nfor pairs $(q,\\eta)$ stationary under variations of both the curve and the\nmultiplier. The two prescriptions are definitions of two different laws for\nthe same constraint; neither is a theorem about the other, and the framework\nadopts the d'Alembert one for its nonholonomic models.\n\n\n\nThe distinction is not a matter of taste: for the constraint $z'=xy'$ the\nd'Alembert and vakonomic motions from the same initial data differ.\n[[cex-cm-dalembert-and-vakonomic-evolutions-differ]] proves this by\nexhibiting a d'Alembert trajectory $\\bigl(x(t),y(t),z(t)\\bigr)$ with\n$x'(0)=y'(0)=1$, $z'(0)=0$ from the origin and showing that its\n$x''=0$ would force the vakonomic multiplier $\\eta$ to vanish on an interval,\nwhich would in turn force $y''=0$, contradicting the explicit d'Alembert\nsolution. The same constraint is genuinely nonholonomic in the sense of\nclause (d) of [[def-cm06-nonholonomic-model]]:\n[[prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets]] proves\nthat its distribution is not tangent to the level sets of any $C^{2}$ function\nwith nonvanishing differential. The conclusions are mathematical statements\nabout the two prescriptions; they are read into this page's model through the\ndefinitions, with the model's status and exclusions of clause (e) carried\nalong.\n\n\n\nThe ideal (d'Alembert) condition for the holonomic branch is the adopted\npostulate [[post-cm06-ideal-reaction-law]], and the corresponding ideal\ncondition for velocity constraints is built into the definition of the\nd'Alembert model. In particular, no variational principle is claimed for the\nnonholonomic models of this page: inserting the velocity constraint into a\nLagrangian and varying without constraint is the vakonomic construction and\ngenerally produces different equations, and substituting the constraint into\nthe kinetic energy of a constrained system is justified only in the\nholonomic-equivalent case, where the substitution parametrizes the position\nlocus rather than imposing a velocity law. The sources record both warnings\n(SICM §1.10.3; Stewart, printed page 25; Cline §§5.7 and 6.9; Cortes et al.).\n\n\n\nThe following are outside this page and remain open here: the behaviour of\neither prescription at a point where the rank of $A$ drops; unilateral\nconstraints and contact-mode changes (a body that leaves a surface or begins\nto slip), which require mode-change models with impact or friction laws; the\ndetermination of which prescription describes a given physical mechanism; and\nthe quantitative comparison of either model with reported observations.\nRolling is a family of models rather than one model: the planar no-slip law\nused on the companion page is holonomic-equivalent, the straight-rolling\nexception is noted in the sources, and general rolling constraints are\nreported nonholonomic without a local proof on this page. Friction,\nrolling resistance, material deformation and the ability of a contact to\nsupply the required reaction are application-level premises; no measured\nvalue and no empirical adequacy claim is made by any item of this page.",
+        "strategy": "A scope remark: it distinguishes the d'Alembert (Chetaev) prescription adopted by the framework's nonholonomic models from the vakonomic stationary-augmented-action prescription, cites the proved discrepancy for the constraint z'=xy' and the non-integrability result, warns against silent constraint substitution, and records the open questions of rank and contact changes, rolling models and empirical adequacy without any measured value.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "def-cm06-nonholonomic-model",
+          "post-cm06-ideal-reaction-law",
+          "def-cm-nonholonomic-velocity-constraint-law",
+          "cex-cm-dalembert-and-vakonomic-evolutions-differ",
+          "prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "def-cm06-nonholonomic-model": "formulation-prerequisite",
+          "post-cm06-ideal-reaction-law": "physical-assumption",
+          "def-cm-nonholonomic-velocity-constraint-law": "mathematical-premise",
+          "cex-cm-dalembert-and-vakonomic-evolutions-differ": "mathematical-premise",
+          "prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Scope remark distinguishing the two prescriptions for a velocity-constrained model: the d'Alembert (Chetaev, frozen-kernel) law adopted by this framework's nonholonomic models and the vakonomic (stationary augmented action) prescription, with the proved non-inclusion of the d'Alembert solution set in the vakonomic solution set for one specified z'=xy' initial datum, the exclusion of silent constraint substitution, and the open questions of rank and contact changes, rolling models and empirical adequacy. The remark asserts no measured value and no experimental comparison.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.10.3: the explicit statement that d'Alembert's ideal constraint forces do not generally equal the equations obtained by adding lambda times the constraint to an unconstrained variational action",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "J. Cortes, M. de Leon, D. Martin de Diego and S. Martinez, Geometric description of vakonomic and nonholonomic dynamics. Comparison of solutions (SIAM J. Control Optim., author PDF), Sections 2 and 5: the vakonomic problem and the Chetaev/d'Alembert equations for the same linear constraint, and the comparison of their solutions",
+              "url": "http://terrano.ucsd.edu/jorge/publications/data/2003_CoLeMaMa-sicon.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 5.7 and 6.9: constrained variational systems, the straight-rolling exception, and applications involving non-holonomic constraints with the warning about variational substitutions",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.2, printed pages 20-21 (PDF pages 26-27): velocity-dependent constraints that cannot be integrated, the rolling coin, and the statement that no general method covers them",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), printed page 25 (PDF page 28): a nonintegrable velocity constraint uses d'Alembert dynamics, and unconstrained stationary action with the velocity constraint inserted is a different problem",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      }
+    ]
+  },
+  {
+    "order": 124,
+    "id": "cm06-regular-constraints-and-moving-frames-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Regular constraints and moving frames — Examples",
+    "companion": "cm06-regular-constraints-and-moving-frames",
+    "requires": [
+      "cm06-regular-constraints-and-moving-frames",
+      "cm02-forces-initial-data-and-newtonian-flow",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-variations",
+      "cm03-momentum-work-and-energy-balances",
+      "cm-math-geometry"
+    ],
+    "items": [
+      {
+        "id": "ex-cm06-bead-on-a-rotating-wire",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A bead on a uniformly rotating straight wire: the rheonomic ideal constraint, its reaction, and the work it performs",
+        "statement": "Declare a one-label model of the force branch of\n[[post-cm02-force-superposition]] with $N=1$, mass $m>0$, time window\n$I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R^{3}$ and force map\n$$F:I_{0}\\times Q\\times\\mathbb R^{3}\\longrightarrow\\mathbb R^{3},\\qquad F(t,\\mathbf x,\\mathbf v):=(0,\\,0,\\,-mg),$$\nwhere $[m]=\\mu$ and $g>0$ has dimension $\\ell\\tau^{-2}$ (the uniform\ndownward field; conventions of [[def-cm01-units]]). Constrain the label,\nwithout friction, to the straight wire through the origin that rotates in the\nplane $z=0$ about the $z$-axis with constant angular speed $\\Omega>0$, and to\nthat plane, by the regular holonomic-constraint datum\n$$O:=\\mathbb R\\times\\mathbb R^{3},\\quad k:=2,\\qquad G(t,x,y,z):=\\bigl(-x\\sin\\Omega t+y\\cos\\Omega t,\\ z\\bigr)$$\nof [[def-cm06-holonomic-constraint-model]], and adopt the ideal-reaction law\nof [[post-cm06-ideal-reaction-law]]. Both components of $G$ have length\ndimension $\\ell$, and $[\\Omega]=\\tau^{-1}$.\n\nLet $r_{0}>0$ be a length and $u_{0}\\in\\mathbb R$ the initial radial speed,\nwith $[r_{0}]=\\ell$ and $[u_{0}]=\\ell\\tau^{-1}$. The initial data are\n$$t_{0}:=0,\\qquad x_{0}:=(r_{0},0,0),\\qquad \\mathbf v_{0}:=(u_{0},\\Omega r_{0},0).$$\nThen the constrained model with these data has the unique maximal constrained\nmotion\n$$r(t):=Ae^{\\Omega t}+Be^{-\\Omega t},\\qquad A:=\\frac{r_{0}+u_{0}/\\Omega}{2},\\qquad B:=\\frac{r_{0}-u_{0}/\\Omega}{2},\\qquad x(t):=r(t)\\bigl(\\cos\\Omega t,\\ \\sin\\Omega t,\\ 0\\bigr),$$\ndefined for all $t\\in\\mathbb R$, with multiplier, reaction and reaction power\n$$\\lambda(t)=\\bigl(2m\\Omega\\,r'(t),\\ mg\\bigr),\\qquad R(t)=2m\\Omega\\,r'(t)\\,\\bigl(-\\sin\\Omega t,\\ \\cos\\Omega t,\\ 0\\bigr)+mg\\,e_{3},\\qquad R(t)\\cdot x'(t)=2m\\Omega^{2}r(t)r'(t),$$\nkinetic energy $K(t)=\\tfrac12m\\bigl(r'(t)^{2}+\\Omega^{2}r(t)^{2}\\bigr)$ and\nmechanical energy $E(t)=K(t)+mg\\,z(t)=K(t)$ satisfying\n$E'(t)=R(t)\\cdot x'(t)=-\\lambda(t)\\cdot G_{t}(t,x(t))=2m\\Omega^{2}r(t)r'(t)$;\nthe constraint is rheonomic, and the scleronomic conservation clause does not\napply. On the explicit model data\n$$m=1\\,\\mathrm{kg},\\quad \\Omega=2\\,\\mathrm{s}^{-1},\\quad r_{0}=1\\,\\mathrm m,\\quad u_{0}=0\\,\\mathrm m\\,\\mathrm s^{-1},\\quad g=10\\,\\mathrm m\\,\\mathrm s^{-2}$$\none has $r(t)=\\bigl(e^{2t}+e^{-2t}\\bigr)/2\\ \\mathrm m$,\n$E(t)=e^{4t}+e^{-4t}\\ \\mathrm J$ and $E'(t)=4\\bigl(e^{4t}-e^{-4t}\\bigr)\\ \\mathrm W$;\nat $t=\\tfrac12\\,\\mathrm s$, $E=\\bigl(e^{2}+e^{-2}\\bigr)\\ \\mathrm J\\approx7.524391\\,\\mathrm J$\nand $E'=4\\bigl(e^{2}-e^{-2}\\bigr)\\ \\mathrm W\\approx29.014883\\ \\mathrm W$, so the mechanical\nenergy has strictly increased from its initial value $E(0)=2\\ \\mathrm J$ by\nthe work of the ideal reaction. All values are model values under the\ndeclared idealizations, not measurements.",
+        "strategy": "A worked model check: verify that the declared rotating-wire datum is a regular rheonomic holonomic constraint, that the displayed data are consistent and the explicit exponential-radius curve is the unique maximal constrained motion with the computed multiplier and reaction, that the reaction power equals 2 m Omega^2 r r' and the mechanical-energy balance holds with the rheonomic term only, and evaluate explicit model data with a strict energy increase.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "post-cm06-ideal-reaction-law",
+          "pthm-cm06-multiplier-balance",
+          "pthm-cm06-rheonomic-power",
+          "post-cm02-force-superposition",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "def-cm03-centre-of-mass-and-momenta",
+          "def-cm03-potential-and-mechanical-energy",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-derivative-of-exponential",
+          "def-real-exponential-function-and-e",
+          "def-euclidean-inner-product",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "post-cm06-ideal-reaction-law": "physical-assumption",
+          "pthm-cm06-multiplier-balance": "physical-result",
+          "pthm-cm06-rheonomic-power": "physical-result",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-holonomic-constraint-and-ideal-reactions": "mathematical-premise",
+          "def-cm03-centre-of-mass-and-momenta": "formulation-prerequisite",
+          "def-cm03-potential-and-mechanical-energy": "formulation-prerequisite",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked model check of the rheonomic ideal-constraint branch: one label of mass m constrained without friction to a straight wire through the origin that rotates uniformly in a horizontal plane, under the declared uniform downward field; the verification exhibits the unique maximal constrained motion through consistent data, computes the multiplier and the reaction, verifies the reaction-power identity and the mechanical-energy balance, and shows on explicit model data that an ideal rheonomic constraint performs positive work. The example is a model computation with declared idealizations (frictionless bead, massless rigid wire, prescribed uniform rotation, uniform field with the wire supporting the weight); every number is a model value, not a measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.5.1 'Bead on a Rotating Hoop', Eqs. (2.61)-(2.62), printed pages 26-27 (PDF pages 32-33): a time-dependent holonomic constraint realized by a bead threaded on a uniformly rotating hoop, with the explicit embedding and kinetic energy",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.1 and Fig. 2.1, chapter page 1: the bead on a rotating ring as a model with one degree of freedom, and Section 4.6, chapter pages 21-23: the same model described from the non-inertial frame with the inertial forces",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): time-dependent constraints can do actual work despite zero virtual work of the ideal reaction",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm06-pendulum-tension-and-reaction-power",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The planar pendulum as an ideal holonomic model: the multiplier, the tension and the vanishing reaction power of a scleronomic constraint",
+        "statement": "Declare a one-label model of the force branch of\n[[post-cm02-force-superposition]] with $N=1$, mass $m>0$, time window\n$I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R^{3}$ (coordinates\n$(x,y,z)$, dimensions of [[def-cm01-units]]) and force map\n$$F:I_{0}\\times Q\\times\\mathbb R^{3}\\longrightarrow\\mathbb R^{3},\\qquad F(t,\\mathbf x,\\mathbf v):=(0,\\,-mg,\\,0),$$\nwhere $[m]=\\mu$ and the constant $g>0$ has dimension $\\ell\\tau^{-2}$.\nLet $l>0$ have dimension $\\ell$, and use a dimensionless angle $\\theta$ in\nradians. Constrain the label,\nwithout friction, to the circle of radius $l>0$ about the origin in the plane\n$z=0$ --- the ideal pendulum realized as a bead threaded on a smooth circular\nwire in a vertical plane --- by the regular holonomic-constraint datum\n$$O:=\\{(t,x,y,z)\\in\\mathbb R^{4}:(x,y)\\ne(0,0)\\},\\qquad k:=2,\\qquad G(t,x,y,z):=\\bigl(x^{2}+y^{2}-l^{2},\\ z\\bigr)$$\nof [[def-cm06-holonomic-constraint-model]], and adopt the ideal-reaction law\nof [[post-cm06-ideal-reaction-law]]. The two constraint components have\ndimensions $\\ell^{2}$ and $\\ell$. The locus is\n$\\Sigma=\\{(t,l\\sin\\theta,-l\\cos\\theta,0):t,\\theta\\in\\mathbb R\\}$; write\n$$X(\\theta):=\\bigl(l\\sin\\theta,\\,-l\\cos\\theta,\\,0\\bigr),\\qquad X_{\\theta}(\\theta):=\\partial_{\\theta}X(\\theta)=\\bigl(l\\cos\\theta,\\,l\\sin\\theta,\\,0\\bigr),\\qquad u(\\theta):=\\bigl(\\sin\\theta,\\,-\\cos\\theta,\\,0\\bigr),\\qquad X(\\theta)=l\\,u(\\theta).$$\n\nThen:\n\n1. the datum is regular and scleronomic, the tangent vector $X_{\\theta}(\\theta)$\n   is permitted for every $\\theta$, and the virtual displacements at\n   $X(\\theta)$ are the line $\\mathbb R\\,X_{\\theta}(\\theta)$;\n2. along any constrained motion the multiplier is\n   $$\\lambda(\\theta,\\theta')=\\Bigl(-\\frac{m}{2l}\\bigl(g\\cos\\theta+l\\,\\theta'^{2}\\bigr),\\,0\\Bigr)\\in\\mathbb R^{2}$$\n   evaluated at the motion's data, the second component --- tied to the plane\n   constraint $z=0$ --- vanishing along the motion, and the reaction is\n   $$R=-T\\,u(\\theta),\\qquad T=m\\bigl(g\\cos\\theta+l\\,\\theta'^{2}\\bigr),$$\n   a force of magnitude $|T|$ along the line of the link, toward the pivot\n   when $T>0$ (the **tension** of the model); the projection of the constrained\n   equation on the tangent gives $ml^{2}\\theta''+mgl\\sin\\theta=0$, and the\n   projections on $u$ and on the normal $\\mathbf e_{3}$ of the constraining\n   plane give the displayed tension and the vanishing of the second multiplier\n   component;\n3. conversely, for every $C^{2}$ function $\\theta:J\\to\\mathbb R$ with\n   $ml^{2}\\theta''+mgl\\sin\\theta=0$ on an interval $J$ with nonempty interior,\n   the curve $x(t):=X(\\theta(t))$ is a constrained motion of the model with\n   multiplier and reaction as in clause 2;\n4. the reaction power vanishes identically, $R\\cdot x'\\equiv0$, in agreement\n   with the scleronomic case of the rheonomic-power theorem, and the\n   mechanical energy $E=\\tfrac12ml^{2}\\theta'^{2}-mgl\\cos\\theta$ is constant\n   along the motion; expressed through the energy,\n   $T=3mg\\cos\\theta+2E/l$, and through the initial data $(\\theta_{0},\\theta_{0}')$,\n   $T=mg(3\\cos\\theta-2\\cos\\theta_{0})+ml\\,\\theta_{0}'^{2}$;\n5. for a motion with initial data at $t_{0}=0$ given by\n   $m=1\\,\\mathrm{kg}$, $l=1\\,\\mathrm m$,\n   $g=10\\,\\mathrm m\\,\\mathrm s^{-2}$, $\\theta_{0}=\\pi/3$, $\\theta_{0}'=0$, the\n   initial energy is $E=-5\\ \\mathrm J$ and the tension is\n   $T=30\\cos\\theta-10\\ \\mathrm N$, with $T=20\\ \\mathrm N$ at $\\theta=0$ and\n   $T=5\\ \\mathrm N$ at $\\theta=\\pi/3$, positive on the reachable arc\n   $|\\theta|\\le\\pi/3$.\n\nAll values are model values under the declared idealizations; the model is the\nideal pendulum realized by a smooth rigid wire (equivalently a massless link,\nor a taut string while it stays taut), and the empirical qualifications are\nrecorded in the remarks.",
+        "strategy": "A worked model check: verify the regular scleronomic circle datum, compute the multiplier and the reaction read as the tension, project the constrained equation to obtain the pendulum equation and the radial consistency condition, verify the converses on parametrized curves, check the identically vanishing reaction power and the conserved energy, and evaluate the tension formula on explicit model data.",
+        "deps": [
+          "def-cm06-holonomic-constraint-model",
+          "post-cm06-ideal-reaction-law",
+          "pthm-cm06-multiplier-balance",
+          "pthm-cm06-rheonomic-power",
+          "post-cm02-force-superposition",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "def-cm03-centre-of-mass-and-momenta",
+          "def-cm03-potential-and-mechanical-energy",
+          "def-jacobian-matrix-and-gradient",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-cm06-holonomic-constraint-model": "formulation-prerequisite",
+          "post-cm06-ideal-reaction-law": "physical-assumption",
+          "pthm-cm06-multiplier-balance": "physical-result",
+          "pthm-cm06-rheonomic-power": "physical-result",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-holonomic-constraint-and-ideal-reactions": "mathematical-premise",
+          "def-cm03-centre-of-mass-and-momenta": "formulation-prerequisite",
+          "def-cm03-potential-and-mechanical-energy": "formulation-prerequisite",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked model check of the holonomic ideal-constraint branch: a mass point constrained without friction to a circle of radius l in a vertical plane about a fixed pivot under a declared uniform downward field, realized as a bead on a smooth circular wire, with the explicit two-component multiplier (the component tied to the constraining plane vanishing along the motion), the reaction read as the tension along the link, the standard pendulum equation obtained by projecting the constrained equation, the identically vanishing reaction power of the scleronomic constraint, and the conservation of the mechanical energy on explicit model data. The example is a model computation with the declared idealizations (smooth massless wire, equivalently a rigid link or a taut string while it stays taut; frictionless pivot; uniform field); every number is a model value, not a measurement, and the empirical status of a string that can go slack (or of a link that can buckle) is recorded as a limitation of the model.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1, Eqs. (2.27)-(2.28), printed pages 17-18 (PDF pages 23-24): the simple pendulum with the constraint x^2+y^2=l^2, the equation theta-ddot=-(g/l) sin theta and the tension T=ml theta-dot^2+mg cos theta",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Section 6.5 (constrained systems: the plane pendulum) and Section 5.9: the multiplier solution of the pendulum and the constraint force",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 2.1-2.2, chapter pages 1-4: Lagrange equations with a constraint force for a particle on a ring, and the pendulum as a one-degree-of-freedom constrained system",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): ideal constraint reactions as covectors annihilating the fixed-time admissible virtual displacements",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm06-rotating-chart-inertial-terms",
+        "kind": "example",
+        "domain": "physics",
+        "title": "All four inertial terms checked on explicit data, and the exact return to an inertial chart",
+        "statement": "Declare a one-label model of the force branch of\n[[post-cm02-force-superposition]] with $N=1$, mass $m=1\\,\\mathrm{kg}$, time\nwindow $I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R^{3}$ and the\n**zero force map**\n$$F:I_{0}\\times Q\\times\\mathbb R^{3}\\longrightarrow\\mathbb R^{3},\\qquad F(t,\\mathbf x,\\mathbf v)\\equiv0$$\n(admissible: constant, hence of the standing regularity), in a fixed inertial frame $F$ with adapted coordinates $(t,x)$\n([[post-cm01-frames]], [[def-cm01-units]]). For real parameters\n$\\omega_{0},\\beta,\\gamma$, vectors $a_{0},v_{c}\\in\\mathbb R^{3}$ and\n[[def-cm06-moving-frame]] data, take $\\theta$ to be a dimensionless angle in\nradians, with $[\\omega_{0}]=\\tau^{-1}$, $[\\beta]=\\tau^{-2}$,\n$[\\gamma]=\\ell\\tau^{-2}$, $[a_{0,j}]=\\ell$ and\n$[v_{c,j}]=\\ell\\tau^{-1}$ for each spatial component $j$:\n$$\\theta(t):=\\omega_{0}t+\\tfrac12\\beta t^{2},\\qquad R(t):=\\begin{pmatrix}\\cos\\theta(t)&-\\sin\\theta(t)&0\\\\ \\sin\\theta(t)&\\cos\\theta(t)&0\\\\ 0&0&1\\end{pmatrix},\\qquad c(t):=a_{0}+v_{c}t+\\tfrac12\\gamma t^{2}e_{1},$$\nconsider the motion $x(t):=x_{0}+v\\,t$ of the zero-force model with\n$x_{0}=(1,0,0)\\,\\mathrm m$, $v=(0,1,0)\\,\\mathrm{m}\\,\\mathrm{s}^{-1}$, its\nmoving-chart coordinate curve $y(t)=R(t)^{\\mathsf T}(x(t)-c(t))$, and the\ninertial-terms field\n$\\tau(t,y,\\dot y)=-\\bigl(2\\omega(t)\\times\\dot y+\\omega'(t)\\times y+\\omega(t)\\times(\\omega(t)\\times y)+R(t)^{\\mathsf T}c''(t)\\bigr)$.\n\nThen, for the parameter values $\\omega_{0}=2\\,\\mathrm s^{-1}$,\n$\\beta=1\\,\\mathrm s^{-2}$, $\\gamma=3\\,\\mathrm m\\,\\mathrm s^{-2}$ and\n$a_{0}=v_{c}=0$:\n\n1. $R(t)\\in SO(3)$ is $C^{\\infty}$ and $\\Omega=R^{\\mathsf T}R'$ has the\n   angular velocity $\\omega(t)=\\theta'(t)e_{3}=(2+t)e_{3}$ and\n   $\\omega'(t)=e_{3}$, while $c''(t)=(3,0,0)$;\n2. $y(0)=e_{1}$, $\\dot y(0)=-e_{2}$, and the inertial-chart acceleration of\n   the motion gives $\\ddot y(0)=-3e_{1}-e_{2}$ (in units\n   $\\mathrm m\\,\\mathrm s^{-2}$);\n3. the four inertial terms at $t=0$ are $-2\\omega\\times\\dot y=-4e_{1}$,\n   $-\\omega'\\times y=-e_{2}$, $-\\omega\\times(\\omega\\times y)=+4e_{1}$ and\n   $-R^{\\mathsf T}c''=-3e_{1}$, and their sum is $\\tau(0,y(0),\\dot y(0))=-3e_{1}-e_{2}=\\ddot y(0)$;\n   clause 1 of [[pthm-cm06-inertial-forces]] therefore holds at $t=0$ for\n   these data, with $m\\ddot y=R^{\\mathsf T}F+m\\tau=m\\tau$;\n4. because $\\omega\\not\\equiv0$, clause 3 of that theorem identifies the chart\n   as **not** inertial; and with the alternative parameters\n   $\\omega_{0}=\\beta=\\gamma=0$, $a_{0}=(1,0,0)$,\n   $v_{c}=(0,1,0)$, the chart has constant rotation $R\\equiv I_{3}$ and affine\n   reference curve, hence vanishing inertial terms, and the same motion has\n   $\\ddot y\\equiv0$ in the chart, which is the inertial-frame description\n   with $y(t)=x(t)-a_{0}-v_{c}t$.\n\nAll values are model values in the declared coordinates; the example reports\nno measurement and asserts nothing about any apparatus.",
+        "strategy": "A finite check: compute the chart quantities, evaluate all four inertial terms at one time on explicit data and compare with the chart acceleration of a uniform motion of the zero-force model, identify the chart as non-inertial through the criterion, and check an affine chart with constant rotation against the exact return to an inertial frame.",
+        "deps": [
+          "def-cm06-moving-frame",
+          "pthm-cm06-inertial-forces",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "post-cm01-frames",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "lem-cm-moving-frame-acceleration-identity",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm06-moving-frame": "formulation-prerequisite",
+          "pthm-cm06-inertial-forces": "physical-result",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "lem-cm-moving-frame-acceleration-identity": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked finite check of the moving-chart equation of the framework: a zero-force one-label model observed in a chart with a uniformly accelerated rotation angle and a uniformly accelerated reference curve; the four inertial terms are evaluated term by term at one time and compared with the inertial-chart acceleration of the motion, a chart with nonzero angular velocity is identified as non-inertial by the criterion, and an explicit chart with affine reference curve and constant rotation is checked to reproduce the inertial-frame description. All values are model values; the example reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 6.1-6.2, Eqs. (6.4)-(6.5), printed pages 94-95 (PDF pages 100-101): the acceleration transfer to a rotating frame and the Coriolis, centrifugal and Euler terms",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 4.6, Eqs. (4.88)-(4.92), chapter pages 21-23 (PDF pages 76-78): velocity and acceleration transfer and the four inertial-force terms, with the frame-motion terms a0 and omega-dot",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1.1, printed pages 47-49 (PDF pages 53-55): the angular velocity of a rotating basis in the convention R^T Rdot",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "ex-cm06-rolling-disk-model-comparison",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Rolling as distinct models: the planar ideal no-slip disk against frictionless sliding, and the contact capability condition",
+        "statement": "Declare a **reduced planar disk model** on the two coordinates\n$q=(x,\\theta)\\in\\mathbb R^{2}$, where $x$ is the centre coordinate along a\nstraight line and $\\theta$ the oriented spin, with the **declared kinetic\nmatrix**\n$$M:=\\begin{pmatrix}m&0\\\\ 0&I\\end{pmatrix},\\qquad m>0,\\quad I>0,$$\nof dimension $\\mu$ and $\\mu\\ell^{2}$ respectively ([[def-cm01-units]]); the\nreduction of a rigid disk to these two coordinates, with the spin inertia $I$\nas model data, is a declared modelling step and is not derived here. The\napplied generalized force is\n$$\\Phi:=(f,0),\\qquad f\\in\\mathbb R,$$\na force $f$ on the centre and no applied spin torque, and the disk radius is\n$a>0$. Here $[x]=[a]=\\ell$, $[\\theta]=1$ in radians, $[m]=\\mu$,\n$[I]=\\mu\\ell^{2}$, $[f]=\\mu\\ell\\tau^{-2}$, and $[g]=\\ell\\tau^{-2}$;\nthe coefficient $\\mu_s$ below is dimensionless. The two components of\n$\\Phi$ have dimensions of force and torque, respectively.\n\nConsider two models of the planar contact, expressed in the same coordinates\nand with the same $M$ and $\\Phi$:\n\n**(M1) ideal no-slip model.** The holonomic constraint\n$$\\mathcal G(x,\\theta):=x-a\\theta,\\qquad \\mathcal G_{q}=(1,-a),$$\nimposed as $\\mathcal G=0$; the Jacobian has rank one. With the d'Alembert\nideal-reaction law of\n[[def-cm-holonomic-constraint-and-ideal-reactions]] and virtual displacements\n$\\delta\\in\\ker\\mathcal G_{q}=\\mathbb R(a,1)$: the generalized reaction is\n$\\mathcal G_{q}^{\\mathsf T}\\lambda$ for a multiplier $\\lambda$, and the\nmotions satisfy $Mq''=\\Phi+\\mathcal G_{q}^{\\mathsf T}\\lambda$.\n\n**(M2) frictionless sliding model.** No constraint and no reaction: the\nmotions satisfy $Mq''=\\Phi$.\n\nThen:\n\n1. in **M1** the ideal motions satisfy\n   $$\\Bigl(m+\\frac{I}{a^{2}}\\Bigr)x''=f,\\qquad x''=\\frac{fa^{2}}{I+ma^{2}},\\qquad \\theta''=\\frac{af}{I+ma^{2}},$$\n   with the unique multiplier $\\lambda=-\\dfrac{fI}{I+ma^{2}}$, reaction\n   $\\mathcal G_{q}^{\\mathsf T}\\lambda=(\\lambda,-a\\lambda)$ and reaction power\n   identically zero; the planar straight-line no-slip constraint is\n   holonomic-equivalent, since $x-a\\theta$ is constant along every admissible\n   curve;\n2. in **M2** the motions satisfy $x''=f/m$ and $\\theta''=0$;\n3. the two models make different predictions for the same applied force: for\n   $f\\ne0$ and $a^{2}m>0$,\n   $$\\frac{x''_{\\mathrm{M1}}}{x''_{\\mathrm{M2}}}=\\frac{ma^{2}}{I+ma^{2}}=\\frac{1}{1+I/(ma^{2})}<1,$$\n   equal to $\\tfrac23$ for a uniform thin disk $I=\\tfrac12ma^{2}$ and to\n   $\\tfrac12$ for a hoop $I=ma^{2}$;\n4. the ideal no-slip model requires the contact to supply the generalized\n   reaction $(\\lambda,-a\\lambda)$, that is a contact force of magnitude\n   $|\\lambda|=|f|I/(I+ma^{2})$ along the line of rolling together with its\n   torque; if the normal component of the contact force is $N=mg$ (horizontal\n   plane, weight only) and the static-friction coefficient of the declared\n   contact model is $\\mu_{s}$, the no-slip idealization is consistent with the\n   declared contact model only while $|\\lambda|\\le\\mu_{s}N$; for the uniform\n   disk this is $|f|\\le3\\mu_{s}mg$. Where the required force exceeds the\n   contact capability, the no-slip constraint cannot be maintained and a\n   slipping model (with kinetic friction as a separately declared force)\n   applies instead;\n5. on the explicit model data $m=1\\,\\mathrm{kg}$, $a=1\\,\\mathrm m$,\n   $I=\\tfrac12\\,\\mathrm{kg}\\,\\mathrm m^{2}$, $g=10\\,\\mathrm m\\,\\mathrm s^{-2}$\n   and $f=3\\,\\mathrm N$: $x''_{\\mathrm{M1}}=2\\,\\mathrm m\\,\\mathrm s^{-2}$,\n   $x''_{\\mathrm{M2}}=3\\,\\mathrm m\\,\\mathrm s^{-2}$,\n   $\\lambda=-1\\,\\mathrm N$ and $|\\lambda|=1\\,\\mathrm N$, within\n   $\\mu_{s}N=5\\,\\mathrm N$ for the declared $\\mu_{s}=\\tfrac12$; with\n   $f=18\\,\\mathrm N$ instead, M1 requires $|\\lambda|=6\\,\\mathrm N>5\\,\\mathrm N$,\n   so under those parameters the declared contact model cannot maintain the\n   no-slip constraint and M1's premises fail.\n\nAll values are model values under the declared reduction and contact model;\nthe example reports no measurement.",
+        "strategy": "A model-discrimination example: compare the reduced ideal no-slip model (holonomic constraint with ideal reaction) and the frictionless sliding model with the same declared kinetic matrix and applied force, computing the accelerations, multiplier, reaction and vanishing reaction power, deriving the ratio of the predictions, and evaluating the static-friction capability condition on explicit model data.",
+        "deps": [
+          "def-cm-holonomic-constraint-and-ideal-reactions",
+          "lem-cm-constraint-multipliers-and-accelerations",
+          "prop-cm-ideal-holonomic-system-in-a-time-dependent-chart",
+          "def-cm06-nonholonomic-model",
+          "def-cm01-units",
+          "def-linear-map",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-holonomic-constraint-and-ideal-reactions": "mathematical-premise",
+          "lem-cm-constraint-multipliers-and-accelerations": "mathematical-premise",
+          "prop-cm-ideal-holonomic-system-in-a-time-dependent-chart": "mathematical-premise",
+          "def-cm06-nonholonomic-model": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-linear-map": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked model-discrimination example for the rolling contact: two reduced planar models of a disk with the same declared kinetic matrix and applied force — the ideal no-slip model with its holonomic constraint and ideal reaction, and the frictionless sliding model with no constraint — with the accelerations, the multiplier, the required contact force and the empirical static-friction capability condition compared on explicit model data. The example uses a reduced two-coordinate description declared as model data, asserts no measured value, and records that general three-dimensional rolling, slip transitions and contact changes are separate models outside it.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Section 5.7 (Constrained Variational Systems: the straight-rolling exception) and Section 6.8 (a disk rolling on an inclined plane with the constraint force)",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 4.3, Fig. 4.6 and Eqs. (4.45)-(4.47), chapter pages 8-9 (PDF pages 63-64): a round cylinder rolling without slippage, the no-slip kinematic relation as a holonomic constraint, and the effective inertia I_ef=I+Mr^2",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.4, printed page 20 (PDF page 23): rolling, sliding and static friction as distinct model assumptions with separate coefficients, and the breakdown of smooth ODE models for static friction without further structure",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.2, Eq. (2.41), printed pages 20-21 (PDF pages 26-27): a specific coin rolling without slipping down a slope, with coordinates (x,y,theta,phi) and its two velocity constraints, which Tong identifies as non-holonomic",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 10
+      }
+    ]
+  }
+]

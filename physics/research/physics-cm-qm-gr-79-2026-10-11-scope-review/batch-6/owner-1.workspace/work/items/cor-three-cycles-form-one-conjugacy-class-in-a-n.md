@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-three-cycles-form-one-conjugacy-class-in-a-n.md

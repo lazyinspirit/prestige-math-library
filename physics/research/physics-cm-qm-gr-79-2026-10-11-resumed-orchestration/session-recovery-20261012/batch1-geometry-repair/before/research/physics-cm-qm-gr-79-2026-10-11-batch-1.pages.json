@@ -1,0 +1,981 @@
+[
+  {
+    "order": 81,
+    "id": "cm-math-geometry",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Geometry",
+    "companion": "cm-math-geometry-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "rank-theorems-and-embedded-submanifolds",
+      "regular-surfaces-and-surface-integrals",
+      "rn-as-a-normed-space",
+      "the-total-derivative",
+      "compactness-in-metric-spaces",
+      "dual-spaces-bilinear-forms-and-inertia",
+      "linear-independence-bases-and-dimension",
+      "picard-lindelof-and-first-order-odes",
+      "the-derivative-and-mean-value-theorems",
+      "the-inverse-function-theorem-completed",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "vector-spaces-and-subspaces",
+      "determinants-of-matrices-over-a-commutative-ring",
+      "exterior-powers-orientation-and-hodge-duality",
+      "inner-product-spaces-and-orthogonality",
+      "lebesgue-measure-on-euclidean-space",
+      "linear-maps-rank-nullity-and-quotient-spaces",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "metric-spaces",
+      "monotone-sequences-and-cauchy-completeness",
+      "separation-axioms",
+      "smooth-manifolds-and-smooth-maps",
+      "tangent-cotangent-and-the-differential",
+      "the-topology-of-euclidean-space",
+      "eigenvalues-eigenvectors-and-the-characteristic-polynomial"
+    ],
+    "items": [
+      {
+        "id": "def-cm-equilibrium-and-lyapunov-stability",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Equilibria, Lyapunov stability and asymptotic stability of an autonomous first-order system",
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map. Consider the autonomous first-order system\n\n$$z'(t)=F(z(t)),$$\n\nread as the first-order system of [[def-first-order-ode-initial-value-problem-and-solution]] with $D=\\mathbb R\\times U$ and right-hand side $(t,z)\\mapsto F(z)$. A **solution** below means a solution of this system on an interval containing $0$; a solution whose interval is $[0,\\infty)$ or contains it is said to be **defined for all $t\\ge0$**.\n\nA solution $\\tilde z:J\\to U$ **extends** $z:I\\to U$ when $I\\subseteq J$ and $\\tilde z|_I=z$; the extension is proper if $I\\subsetneq J$. A solution is **maximal** when it has no proper extension ([[def-maximal-ode-solution]]). All stability predicates below quantify over maximal solutions whose intervals contain $0$; their local restrictions remain solutions. This convention asserts neither existence nor uniqueness of maximal solutions for an arbitrary map $F$.\n\nA point $z_*\\in U$ is an **equilibrium** (also **fixed point** or **zero**) of $F$ when $F(z_*)=0$; then the constant function $z(t)=z_*$ is a solution on every interval containing $0$.\n\nLet $z_*\\in U$ be an equilibrium.\n\n1. $z_*$ is **Lyapunov stable** (or simply **stable**) when for every Euclidean ball $B_\\varepsilon(z_*)$ with $\\overline{B_\\varepsilon(z_*)}\\subseteq U$ ([[def-metric-ball]]) there is $\\delta\\in(0,\\varepsilon]$ such that every maximal solution $z$ with $\\|z(0)-z_*\\|_2<\\delta$ ([[def-euclidean-inner-product]]) is defined for all $t\\ge0$ and satisfies\n\n$$\\|z(t)-z_*\\|_2<\\varepsilon\\qquad(t\\ge0).$$\n\n2. $z_*$ is **asymptotically stable** when it is Lyapunov stable and in addition there is $\\delta_0>0$ such that every maximal solution $z$ with $\\|z(0)-z_*\\|_2<\\delta_0$ is defined for all $t\\ge0$ and satisfies $\\|z(t)-z_*\\|_2\\to0$ as $t\\to\\infty$.\n\nAn equilibrium which is not Lyapunov stable is **unstable**. An equilibrium is **globally asymptotically stable** when it is asymptotically stable and every maximal solution of the system is defined for all $t\\ge0$ and converges to it as $t\\to\\infty$.",
+        "deps": [
+          "def-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-euclidean-inner-product",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Section 6.5 (Stability of fixed points), printed pages 198-200, licensed author preliminary version",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 6 (Non-inertial frames)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-cm-orbital-and-linear-stability",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Invariant sets, orbital stability of an invariant set, and linear stability of an equilibrium",
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map; retain the convention of [[def-cm-equilibrium-and-lyapunov-stability]] that a solution means a solution of $z'(t)=F(z(t))$, read as a system of [[def-first-order-ode-initial-value-problem-and-solution]], and that it is defined for all $t\\ge0$ when its interval contains $[0,\\infty)$. A maximal solution means one with no proper extension, as defined there; the invariance and stability predicates below quantify over maximal solutions through time $0$, not their arbitrary local restrictions. No existence or uniqueness is asserted for an arbitrary $F$.\n\n**Invariant sets.** A set $S\\subseteq U$ is **forward invariant** (for this system) when every maximal solution $z$ with $z(0)\\in S$ is defined for all $t\\ge0$ and satisfies $z(t)\\in S$ for all $t\\ge0$.\n\n**Distance to a set.** For a nonempty $S\\subseteq U$ define\n\n$$\\operatorname{dist}(z,S):=\\inf\\{\\,\\|z-s\\|_2:s\\in S\\,\\}\\qquad(z\\in\\mathbb R^n),$$\n\nthe infimum of a nonempty set of nonnegative reals that is bounded below, computed for the Euclidean norm of [[def-euclidean-inner-product]]. The map $z\\mapsto\\operatorname{dist}(z,S)$ is nonnegative and vanishes exactly on the closure of $S$. When $S=\\{z_*\\}$ is a singleton, $\\operatorname{dist}(z,S)=\\|z-z_*\\|_2$.\n\n**Orbital stability.** Let $S\\subseteq U$ be nonempty and forward invariant. Then $S$ is **orbitally stable** when for every $\\varepsilon>0$ there is $\\delta>0$ such that every maximal solution $z$ with $\\operatorname{dist}(z(0),S)<\\delta$ is defined for all $t\\ge0$ and satisfies\n\n$$\\operatorname{dist}(z(t),S)<\\varepsilon\\qquad(t\\ge0).$$\n\nIt is **asymptotically orbitally stable** when it is orbitally stable and there is $\\delta_0>0$ such that every maximal solution with $\\operatorname{dist}(z(0),S)<\\delta_0$ is defined for all $t\\ge0$ and satisfies $\\operatorname{dist}(z(t),S)\\to0$ as $t\\to\\infty$.\n\n**Linear stability.** Let $z_*\\in U$ be an equilibrium of $F$ and suppose $F$ is totally differentiable at $z_*$ in the sense of [[def-total-derivative-in-euclidean-space]], with total derivative $DF(z_*):\\mathbb R^n\\to\\mathbb R^n$; write $L:=DF(z_*)$. The **linearized system** at $z_*$ is the autonomous linear system\n\n$$y'(t)=L\\,y(t).$$\n\nThe equilibrium $z_*$ is **linearly stable** when every maximal solution $y$ of the linearized system ([[def-first-order-ode-initial-value-problem-and-solution]]) is defined for all $t\\ge0$ and is bounded on $[0,\\infty)$, that is, there is a real constant $C\\ge0$ with $\\|y(t)\\|_2\\le C$ for every $t\\ge0$. It is **linearly asymptotically stable** when every maximal solution of the linearized system is defined for all $t\\ge0$ and satisfies $\\|y(t)\\|_2\\to0$ as $t\\to\\infty$.",
+        "deps": [
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-inner-product",
+          "def-first-order-ode-initial-value-problem-and-solution"
+        ],
+        "dependency_roles": {
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Sections 3.2 and 6.5, printed pages 61-67 and 198-200",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.2 (small oscillations and equilibrium)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-cm-hyperbolic-equilibrium-and-limit-cycles",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Hyperbolic equilibria, hyperbolic fixed points, periodic orbits, limit cycles and homoclinic trajectories",
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map; a solution means a solution of $z'(t)=F(z(t))$ as in [[def-cm-equilibrium-and-lyapunov-stability]]. **Hyperbolic equilibrium.** Let $z_*\\in U$ be an equilibrium of $F$ and suppose $F$ is totally differentiable at $z_*$ ([[def-total-derivative-in-euclidean-space]]) with total derivative $DF(z_*)$. Then $z_*$ is **hyperbolic** when no eigenvalue of the real matrix of $DF(z_*)$ has real part $0$ ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]). **Hyperbolic fixed point of a map.** Let $\\varphi:V\\to V$ be a map on a set $V\\subseteq\\mathbb R^n$ and let $p\\in V$ satisfy $\\varphi(p)=p$. Suppose $\\varphi$ is totally differentiable at $p$. Then $p$ is a **hyperbolic fixed point** of $\\varphi$ when no eigenvalue of $D\\varphi(p)$ has modulus $1$. **Periodic solutions and periodic orbits.** A solution $z:\\",
+        "deps": [
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "dependency_roles": {
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Section 9.1 (hyperbolic systems), printed pages 253-255, and Section 6.4 (the Poincare map), printed page 198",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.2 and Chapter 4",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1
+      },
+      {
+        "id": "def-cm-stroboscopic-map",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The stroboscopic (time-$P$) map of a $P$-periodic first-order system",
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $P>0$, and let $F:\\mathbb R\\times U\\to\\mathbb R^n$ be a map that is continuous and locally Lipschitz in the state variable, in the sense of the hypotheses of [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], and that is **$P$-periodic**: $$F(t+P,z)=F(t,z)\\qquad(t\\in\\mathbb R,\\ z\\in U).$$ Consider the first-order system $x'(t)=F(t,x(t))$ of [[def-first-order-ode-initial-value-problem-and-solution]] on the open domain $\\mathbb R\\times U$. For $z\\in U$ let $$x_z:J_z\\longrightarrow U$$ be the unique maximal solution of the initial value problem $x'(t)=F(t,x(t))$, $x(0)=z$; here $J_z$ is the open maximal interval of existence containing $0$, and by [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] every solution of this initial value problem is a restriction of $x_z$ ([[def-maximal-ode-solution]], [[def-interval]]). The",
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-maximal-ode-solution",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Section 6.4 (the Poincare map, Problem 6.14) and Sections 4.6-4.7 on periodic equations, printed pages 198 and 133-141",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 6 (motion in a rotating frame, periodic forcing examples)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-cm-stroboscopic-iterate-identity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Iterates of the stroboscopic map, and equilibria as fixed points",
+        "statement": "Retain all notation and hypotheses of [[def-cm-stroboscopic-map]]: $U\\subseteq\\mathbb R^n$ is open, $P>0$, and $F:\\mathbb R\\times U\\to\\mathbb R^n$ is continuous, locally Lipschitz in the state variable, and $P$-periodic. 1. If $z\\in D_P$ and $\\theta_P(z)\\in D_P$, then $[0,2P]\\subseteq J_z$ and $$\\theta_P(\\theta_P(z))=x_z(2P).$$ 2. If $z_*\\in U$ satisfies $F(t,z_*)=0$ for every $t\\in\\mathbb R$, then $z_*\\in D_P$ and $\\theta_P(z_*)=z_*$.",
+        "deps": [
+          "def-cm-stroboscopic-map",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps"
+        ],
+        "dependency_roles": {
+          "def-cm-stroboscopic-map": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Section 6.4 and Section 4.6, printed pages 198 and 133-141",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-constrained-configuration-and-mass-metric",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Constrained configurations, the mass matrix and the mass metric",
+        "statement": "Let $N\\ge1$ and let $n=3N$. Identify $\\mathbb R^{3N}$ with the $N$-fold product $(\\mathbb R^3)^N$ and write a point as $x=(x_1,\\dots,x_N)$ with $x_i\\in\\mathbb R^3$; the Euclidean inner product on $\\mathbb R^{3N}$ is $$\\langle x,y\\rangle_{3N}=\\sum_{i=1}^{N}\\langle x_i,y_i\\rangle_2,$$ with $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle_2$ the inner product of [[def-euclidean-inner-product]]. Let $Q$ be a smooth $n$-dimensional manifold ([[def-smooth-manifold]]) and let $$X:Q\\longrightarrow\\mathbb R^{3N}$$ be a smooth map. The manifold $Q$ is the **configuration space** and $X$ is the **configuration map**; the pair $(Q,X)$ is called a **particle configuration** when $Q$ is an embedded submanifold of $\\mathbb R^{3N}$ and $X$ is the inclusion ([[def-embedded-submanifold-and-slice-chart]]), and a **parametrized configuration** otherwise. For $q\\in Q$ the differential $dX_q:T_qQ\\to\\mathbb R^{3N}$ is the d",
+        "deps": [
+          "def-embedded-submanifold-and-slice-chart",
+          "def-derivation-at-a-point-and-tangent-space",
+          "def-differential-of-a-smooth-map",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-bilinear-symmetric-skew-and-alternating-forms",
+          "def-smooth-manifold"
+        ],
+        "dependency_roles": {
+          "def-embedded-submanifold-and-slice-chart": "mathematical-premise",
+          "def-derivation-at-a-point-and-tangent-space": "mathematical-premise",
+          "def-differential-of-a-smooth-map": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-bilinear-symmetric-skew-and-alternating-forms": "mathematical-premise",
+          "def-smooth-manifold": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.1 (constraints, generalized coordinates) and Section 3.1 (configuration space)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Chapter 3",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-cm-mass-metric-positivity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The mass metric is symmetric, positive semidefinite, and positive definite exactly when the configuration differential is injective",
+        "statement": "Let $N\\ge1$, let $Q$ be a smooth manifold, let $X:Q\\to\\mathbb R^{3N}$ be smooth, let $m_1,\\dots,m_N>0$ and let $G_q$ be the mass metric of [[def-cm-constrained-configuration-and-mass-metric]]. 1. For every $q\\in Q$ the map $G_q$ is a symmetric bilinear form on $T_qQ$. 2. $G_q(u,u)=\\sum_{i=1}^N m_i\\|dX_q(u)_i\\|_2^2\\ge 0$ for every $u\\in T_qQ$, so $G_q$ is positive semidefinite. 3. $G_q$ is positive definite ([[def-definiteness-inertia-and-signature-data-over-the-reals]]) if and only if $dX_q$ is injective. In particular, if $X$ is an immersion ([[def-immersion-submersion-and-constant-rank-map]]) then $G_q$ is positive definite for every $q$. 4. If $b_1,\\dots,b_n$ is an ordered basis of $T_qQ$ and $A$ is the matrix whose $j$-th column is the coordinate vector of $dX_q(b_j)$ in the standard basis of $\\mathbb R^{3N}$, then the matrix of the bilinear form $G_q$ in this basis is $A^{\\mathsf T}",
+        "deps": [
+          "def-cm-constrained-configuration-and-mass-metric",
+          "def-inner-product-space",
+          "def-euclidean-inner-product",
+          "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "def-immersion-submersion-and-constant-rank-map"
+        ],
+        "dependency_roles": {
+          "def-cm-constrained-configuration-and-mass-metric": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-definiteness-inertia-and-signature-data-over-the-reals": "mathematical-premise",
+          "def-immersion-submersion-and-constant-rank-map": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.1 and Section 3.1",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 3.9 (inertia of rigid motions)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-material-region-and-density",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Material regions, densities and their mass",
+        "statement": "Let $\\lambda_3$ be Lebesgue measure on $\\mathbb R^3$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]) and let integrals be Lebesgue integrals ([[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]]). A **material region** is a nonempty, bounded, open subset $B\\subseteq\\mathbb R^3$. A **density** on $B$ is a function $$\\rho:B\\longrightarrow[0,\\infty)$$ that is integrable on $B$ with respect to $\\lambda_3$; the **mass** of the pair $(B,\\rho)$ is $$\\operatorname{mass}(B,\\rho):=\\int_B\\rho\\,d\\lambda_3\\ \\in[0,\\infty).$$ The density is **bounded**, **continuous**, or **of class $C^k$** when $\\rho$ has that property on $B$ (for $C^k$ with $k\\ge1$ the derivatives are taken in the interior and required to extend continuously to $B$ only where stated). A **measured material region** is a triple $(B,\\rho,m)$ with $m=\\operatorname{mass}(B,\\r",
+        "deps": [
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 1.8 (extensive properties and their densities) and Section 4.2 (conservation of mass), printed pages 12-14 and 104",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 5 (the motion of deformable bodies)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-cm-traction-and-stress",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Traction fields and stress matrices representing them",
+        "statement": "Let $S^2:=\\{n\\in\\mathbb R^3:\\|n\\|_2=1\\}$ be the unit sphere of [[def-euclidean-spheres-and-closed-balls]]. A **traction field** is a map $$t:S^2\\longrightarrow\\mathbb R^3,$$ read with the following convention: $t(n)$ is the force per unit area exerted **by the material on the side towards which $n$ points upon the material on the other side**, at the point of a surface whose unit normal is $n$. The dependence of $t$ on position and time is suppressed in this notation; a traction **field on a set** $\\Omega\\times I$ is a map $t:\\Omega\\times I\\times S^2\\to\\mathbb R^3$, and all statements below apply to each fixed $(y,s)$. A matrix $\\sigma\\in M_3(\\mathbb R)$ ([[def-matrix-space]]) **represents** the traction field $t$ when $$t(n)=\\sigma n\\qquad\\text{for every }n\\in S^2,$$ the product being matrix-vector multiplication ([[def-matrix-product-and-identity-matrix]]). A matrix representing a trac",
+        "deps": [
+          "def-euclidean-spheres-and-closed-balls",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space"
+        ],
+        "dependency_roles": {
+          "def-euclidean-spheres-and-closed-balls": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.3 (force, Cauchy's hypothesis, Remarks (b)-(e)), printed pages 105-110",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 12.005, Applications of Continuum Mechanics, Lecture 3: tensors, stress, Cauchy tetrahedron and Cauchy's formula",
+              "url": "https://ocw.mit.edu/courses/12-005-applications-of-continuum-mechanics-to-earth-atmospheric-and-planetary-sciences-spring-2006/5005ac6aec16d031bffbd361c792ca70_lec3.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "def-cm-affine-time-space",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Affine time space with Euclidean simultaneous slices and adapted charts",
+        "statement": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put $$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$ the kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$. Let $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$. Let $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ f",
+        "deps": [
+          "def-vector-space",
+          "def-linear-map",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-inner-product-space",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-vector-space": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-kernel-and-image-of-a-linear-map": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "def-orientation-of-a-finite-dimensional-real-vector-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 1.2.1 (Galilean relativity: translations, rotations, boosts, absolute time), printed pages 5-7",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1 (rigid body kinematics, orthogonal matrices)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "justified_by": [
+          "lem-cm-adapted-coordinates-exist-and-are-unique"
+        ]
+      },
+      {
+        "id": "lem-cm-adapted-coordinates-exist-and-are-unique",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Existence and uniqueness of adapted coordinates, and the affine structure of simultaneous slices",
+        "statement": "Let $(V,\\tau,g,A)$ and an adapted chart $(o,u,(e_1,e_2,e_3))$ be as in [[def-cm-affine-time-space]]. 1. Every $p\\in A$ has exactly one pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ with $$p=o+tu+\\sum_{i=1}^3x_ie_i,$$ so the adapted-coordinate map $\\iota:A\\to\\mathbb R\\times\\mathbb R^3$ of that definition is well defined, and it is a bijection. 2. For every $t\\in\\mathbb R$ the simultaneous slice $A_t=\\{p:\\tau(p-o)=t\\}$ is an affine space modelled on $K=\\ker\\tau$, and for $p,q\\in A_t$ one has $p-q\\in K$ with $p-q=\\sum_i(x_i(p)-x_i(q))e_i$ and $$d_g(p,q)=\\|x(p)-x(q)\\|_2.$$",
+        "deps": [
+          "def-cm-affine-time-space",
+          "def-kernel-and-image-of-a-linear-map",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-linear-map"
+        ],
+        "dependency_roles": {
+          "def-cm-affine-time-space": "mathematical-premise",
+          "def-kernel-and-image-of-a-linear-map": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "def-linear-map": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 1.2.1, printed pages 5-7",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-adapted-charts-and-galilean-transformations",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Transformation between adapted charts and its kinematic consequences",
+        "statement": "Let $(V,\\tau,g,A)$ be as in [[def-cm-affine-time-space]] and let $(o,u,(e_1,e_2,e_3))$ and $(o',u',(e_1',e_2',e_3'))$ be two adapted charts, with coordinate functions $(t,x)$ and $(t',x')$ of [[lem-cm-adapted-coordinates-exist-and-are-unique]]. 1. There are $b\\in\\mathbb R$, $a,v\\in\\mathbb R^3$ and a matrix $R\\in O(3)$ such that for every $p\\in A$ $$t'(p)=t(p)+b,\\qquad x'(p)=R\\,x(p)+v\\,t(p)+a.$$ If $(e_1,e_2,e_3)$ and $(e_1',e_2',e_3')$ are both positively oriented for the fixed orientation of $K$, then $R\\in SO(3)$ ([[def-cm-special-orthogonal-group]]). 2. Let $I\\subseteq\\mathbb R$ be a nondegenerate interval and let $\\gamma:I\\to A$ be a curve whose parameter is the first chart's time coordinate, $t(\\gamma(s))=s$ for all $s\\in I$. Write $x(s):=x(\\gamma(s))$ and $y(s):=x'(\\gamma(s))$. If $\\gamma$ is continuously differentiable then $y$ is continuously differentiable with $$y'(s)=R\\,x'(s)+",
+        "deps": [
+          "def-cm-affine-time-space",
+          "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "def-cm-special-orthogonal-group",
+          "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "thm-chain-rule-for-total-derivatives",
+          "def-vector-valued-derivative-and-integral"
+        ],
+        "dependency_roles": {
+          "def-cm-affine-time-space": "mathematical-premise",
+          "lem-cm-adapted-coordinates-exist-and-are-unique": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-orientation-of-a-finite-dimensional-real-vector-space": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 1.2.1 (translations, rotations, boosts and absolute time), printed pages 5-7",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-moving-frame-acceleration-identity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Angular velocity of a moving frame and the rotating-frame acceleration identity",
+        "statement": "Let $I\\subseteq\\mathbb R$ be a nondegenerate interval, let $R:I\\to SO(3)$ and $c:I\\to\\mathbb R^3$ be twice continuously differentiable in the sense that all entries of $R$ and all components of $c$ have continuous second derivatives, and put $$\\Omega(t):=R(t)^{\\mathsf T}R'(t)\\qquad(t\\in I).$$ 1. $\\Omega(t)$ is skew-symmetric for every $t\\in I$, that is $\\Omega(t)^{\\mathsf T}=-\\Omega(t)$. 2. For every $t\\in I$ there is exactly one vector $\\omega(t)\\in\\mathbb R^3$ such that $$\\Omega(t)z=\\omega(t)\\times z\\qquad(z\\in\\mathbb R^3),$$ the cross product being that of [[def-cross-product-in-r3]]. Its components in the standard basis are read off the three entries of $\\Omega(t)$ above the diagonal. 3. If $y:I\\to\\mathbb R^3$ is twice continuously differentiable and $$x(t):=R(t)y(t)+c(t)\\qquad(t\\in I),$$ then for every $t\\in I$ $$R(t)^{\\mathsf T}x''(t)=y''(t)+2\\,\\omega(t)\\times y'(t)+\\omega'(t)\\time",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "prop-transpose-laws",
+          "thm-algebra-of-derivatives",
+          "def-vector-valued-derivative-and-integral"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1.1 (angular velocity and the antisymmetry of omega), printed pages 47-49",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 6 (non-inertial frames: centrifugal and Coriolis terms), printed pages 101-110",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-special-orthogonal-group",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The orthogonal group $O(3)$ and the rotation group $SO(3)$",
+        "statement": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]]. The **orthogonal group** and the **special orthogonal group** are the subsets $$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$ Equivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+        "deps": [
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "def-determinant-of-a-square-matrix"
+        ],
+        "dependency_roles": {
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Example 8.33 (the orthogonal group) and Example 8.35 (the special orthogonal group), printed pages 194-196",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-cm-so3-is-a-matrix-group",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "$SO(3)$ is a subgroup of the general linear group, with $R^{-1}=R^{\\mathsf T}$",
+        "statement": "In the notation of [[def-cm-special-orthogonal-group]]: 1. $I_3\\in SO(3)$, and for all $R,S\\in SO(3)$ the matrices $RS$ and $R^{\\mathsf T}$ again lie in $SO(3)$; moreover $\\det R=1$, $R$ is invertible, and its inverse is $R^{\\mathsf T}$, so also $RR^{\\mathsf T}=I_3$. 2. Consequently $SO(3)$ is a subgroup of the general linear group $GL_3(\\mathbb R)$ ([[def-invertible-matrix-and-general-linear-group]], [[cor-general-linear-group-is-a-group]]).",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "def-matrix-product-and-identity-matrix",
+          "thm-matrix-multiplication-laws",
+          "prop-transpose-laws",
+          "thm-determinant-multiplicative",
+          "def-determinant-of-a-square-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "cor-general-linear-group-is-a-group"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-matrix-multiplication-laws": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "cor-general-linear-group-is-a-group": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Example 8.35, printed page 196",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "$SO(3)$ is a compact three-dimensional embedded submanifold of $M_3(\\mathbb R)$, with tangent space the matrices $R\\Omega$ for skew $\\Omega$",
+        "statement": "Identify $M_3(\\mathbb R)$ with $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ as in [[def-matrix-space]], with the Euclidean metric of that identification ([[def-euclidean-inner-product]]). 1. $SO(3)$ is an embedded submanifold of $M_3(\\mathbb R)$ of dimension $3$, and it is both open and closed in the subset topology of $O(3)$ inside $M_3(\\mathbb R)$. 2. For every $R\\in SO(3)$ the tangent space is $$T_RSO(3)=\\{\\,R\\Omega:\\Omega\\in M_3(\\mathbb R),\\ \\Omega^{\\mathsf T}=-\\Omega\\,\\}.$$ 3. $SO(3)$ is compact ([[def-metric-compactness]]).",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "thm-metric-continuity-characterisations",
+          "thm-metric-hausdorff-separation",
+          "thm-t1-iff-singletons-are-closed",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "thm-heine-borel-rn",
+          "def-metric-compactness",
+          "def-euclidean-inner-product",
+          "def-matrix-space"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "thm-a-regular-level-set-is-an-embedded-submanifold": "mathematical-premise",
+          "prop-tangent-space-of-a-regular-level-set-is-the-kernel": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-metric-continuity-characterisations": "mathematical-premise",
+          "thm-metric-hausdorff-separation": "mathematical-premise",
+          "thm-t1-iff-singletons-are-closed": "mathematical-premise",
+          "cor-determinant-is-a-polynomial-in-the-matrix-entries": "mathematical-premise",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-metric-compactness": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Examples 8.33 and 8.35, printed pages 195-196",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-rigid-labeling-stabilizer",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "A labeling containing two independent vectors has trivial $SO(3)$-stabilizer",
+        "statement": "Let $u,v\\in\\mathbb R^3$ be linearly independent and let $S\\subseteq\\mathbb R^3$ be a nonempty set with $u,v\\in S$. If $R\\in SO(3)$ satisfies $Rs=s$ for every $s\\in S$, then $R=I_3$. In the terminology of configurations, a labeling whose material points include the origin and two linearly independent vectors determines the rotation uniquely. The companion counterexample on the examples page of this pair shows that neither independence hypothesis may simply be dropped.",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-determinant-multiplicative",
+          "def-matrix-product-and-identity-matrix",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "def-inner-product-space",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Example 8.35, printed page 196",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 82,
+    "id": "cm-math-geometry-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Geometry \u2014 Examples",
+    "companion": "cm-math-geometry",
+    "requires": [
+      "cm-math-geometry",
+      "line-integrals-and-the-gradient-theorem",
+      "the-fundamental-theorems-of-calculus",
+      "sine-cosine-and-the-definition-of-pi"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-galilean-boost-coordinate-change",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked change of adapted chart with a rotation, a boost and a spatial shift",
+        "statement": "Take $V=\\mathbb R^4$ with coordinates $(t,x_1,x_2,x_3)$, $\\tau(t,x_1,x_2,x_3)=t$, so that $K=\\{0\\}\\times\\mathbb R^3$ with the standard inner product $g$, and take $A=V$ as an affine space over itself. Let the first adapted chart be the standard one, $o=0$, $u=e_0$, $(e_1,e_2,e_3)$ the standard basis of $K$. Let the second adapted chart be $$o'=e_2,\\qquad u'=e_0+e_1,\\qquad e_1'=e_2,\\quad e_2'=-e_1,\\quad e_3'=e_3,$$ which is adapted: $\\tau(u')=1$, and $(e_1',e_2',e_3')$ is a positively oriented $g$-orthonormal basis of $K$. For a point with first coordinates $(t,x_1,x_2,x_3)$, equating the two expansions gives $t'=t$, $x_2=x_1'+1$ and $x_1=t'-x_2'$, that is $$x'_1=x_2-1,\\qquad x'_2=t-x_1,\\qquad x'_3=x_3,$$ which is the transformation $x'=Rx+vt+a$ of [[lem-cm-adapted-charts-and-galilean-transformations]] with $b=0$, $$R=\\begin{pmatrix}0&1&0\\\\-1&0&0\\\\0&0&1\\end{pmatrix},\\qquad v=\\begin{pmatri",
+        "deps": [
+          "def-cm-affine-time-space",
+          "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "def-cm-special-orthogonal-group"
+        ],
+        "dependency_roles": {
+          "def-cm-affine-time-space": "mathematical-premise",
+          "lem-cm-adapted-coordinates-exist-and-are-unique": "mathematical-premise",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 1.2.1, printed pages 5-7",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm-rotating-frame-identity",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The rotating-frame acceleration identity for a uniform rotation about an axis",
+        "statement": "Let $\\omega>0$ and let $R(t)$ be the rotation about the third standard axis by angle $\\omega t$: $$R(t)=\\begin{pmatrix}\\cos\\omega t&-\\sin\\omega t&0\\\\ \\sin\\omega t&\\cos\\omega t&0\\\\ 0&0&1\\end{pmatrix}.$$ Then $R(t)\\in SO(3)$ for every $t$, the matrix $\\Omega=R^{\\mathsf T}R'$ is $$\\Omega(t)=\\omega\\begin{pmatrix}0&-1&0\\\\1&0&0\\\\0&0&0\\end{pmatrix},$$ and the angular velocity vector of [[lem-cm-moving-frame-acceleration-identity]] is $\\omega(t)=(0,0,\\omega)$, independent of $t$. With $c:=0$, the acceleration identity of the lemma reads $$R(t)^{\\mathsf T}x''(t)=y''(t)+2\\,\\omega\\times y'(t)+\\omega\\times(\\omega\\times y(t))\\qquad(x=Ry).$$",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "lem-cm-moving-frame-acceleration-identity",
+          "def-cross-product-in-r3",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-moving-frame-acceleration-identity": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1.1, printed pages 47-49",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 6, printed pages 101-110",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm-mass-metric-on-a-sphere",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The mass metric of a particle constrained to the unit sphere in spherical coordinates",
+        "statement": "Let $Q:=S^2=\\{x\\in\\mathbb R^3:\\|x\\|_2=1\\}$ be the unit sphere ([[def-euclidean-spheres-and-closed-balls]]), let $X:Q\\hookrightarrow\\mathbb R^3$ be the inclusion, and let $m>0$ be the mass of one particle, so that the mass matrix of [[def-cm-constrained-configuration-and-mass-metric]] is $M=mI_3$. The mass metric of the inclusion is $G_q(u,v)=m\\langle u,v\\rangle_2$ for $u,v\\in T_qS^2$, hence positive definite at every point by [[lem-cm-mass-metric-positivity]]. On the chart domain $0<\\theta<\\pi$, $0<\\varphi<2\\pi$ consider the parametrization $$\\Psi(\\theta,\\varphi):=(\\sin\\theta\\cos\\varphi,\\ \\sin\\theta\\sin\\varphi,\\ \\cos\\theta).$$ Its differential is injective on the chart domain, and in the coordinate basis $(\\partial_\\theta,\\partial_\\varphi)$ the mass metric has the classical spherical form $$G\\bigl(\\dot\\theta\\partial_\\theta+\\dot\\varphi\\partial_\\varphi,\\ \\dot\\theta\\partial_\\theta+\\dot\\varp",
+        "deps": [
+          "def-cm-constrained-configuration-and-mass-metric",
+          "lem-cm-mass-metric-positivity",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-inner-product",
+          "def-sine-and-cosine-by-power-series",
+          "def-immersion-submersion-and-constant-rank-map"
+        ],
+        "dependency_roles": {
+          "def-cm-constrained-configuration-and-mass-metric": "mathematical-premise",
+          "lem-cm-mass-metric-positivity": "mathematical-premise",
+          "def-euclidean-spheres-and-closed-balls": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-immersion-submersion-and-constant-rank-map": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1 (configuration space) and Section 2.1 (generalized coordinates)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Appendix C (curvilinear coordinates), printed pages 160-162",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-cm-collinear-labeling-admits-a-nontrivial-rotation",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A collinear labeling admits a nontrivial rotation",
+        "statement": "Every nonempty labeling $S\\subseteq\\mathbb R^3$ determines the rotation: if $R\\in SO(3)$ satisfies $Rs=s$ for every $s\\in S$, then $R=I_3$.",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "lem-cm-rigid-labeling-stabilizer",
+          "def-matrix-product-and-identity-matrix",
+          "prop-transpose-laws",
+          "thm-determinant-multiplicative"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-rigid-labeling-stabilizer": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1, printed pages 46-48",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm-closed-one-form-radial-primitive",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A closed field on a star-shaped domain with its radial primitive computed",
+        "statement": "On $U=\\mathbb R^2$, which is star-shaped about the origin ([[def-star-shaped-open-subset-of-rn]]), consider the $C^1$ field $F(x,y):=(2xy,\\,x^2)$ ([[def-closed-and-exact-c1-vector-fields]]). Its potential $$\\phi(x,y):=x^2y$$ has gradient $\\nabla\\phi=(2xy,x^2)=F$, so $F$ is exact with potential $\\phi$. The closed field condition $\\partial_2F_1=\\partial_1F_2$ holds as well, and the radial formula of the published Poincare lemma returns exactly $\\phi$: $$\\int_0^1\\bigl\\langle F(t(x,y)),(x,y)\\bigr\\rangle_2\\,dt=\\int_0^1 3x^2y\\,t^2\\,dt=x^2y.$$",
+        "deps": [
+          "thm-poincare-lemma-for-star-shaped-domains",
+          "def-closed-and-exact-c1-vector-fields",
+          "def-star-shaped-open-subset-of-rn",
+          "def-total-derivative-in-euclidean-space",
+          "def-euclidean-inner-product",
+          "thm-newton-leibniz-with-interior-derivative",
+          "lem-derivative-of-a-power"
+        ],
+        "dependency_roles": {
+          "thm-poincare-lemma-for-star-shaped-domains": "mathematical-premise",
+          "def-closed-and-exact-c1-vector-fields": "mathematical-premise",
+          "def-star-shaped-open-subset-of-rn": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-newton-leibniz-with-interior-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J.-B. Campesato, Poincare Lemma, section 2 (the radial primitive)",
+              "url": "https://www.math.toronto.edu/campesat/ens/1920/poincare.pdf"
+            },
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Theorem 17.14 (the Poincare lemma), printed page 447",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0,
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm-stroboscopic-map-of-the-plane-oscillator",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The stroboscopic map of the plane oscillator",
+        "statement": "Let $\\omega>0$ and let $F:\\mathbb R\\times\\mathbb R^2\\to\\mathbb R^2$, $F(t,z_1,z_2):=(z_2,-\\omega^2z_1)$, the vector field of the undamped plane oscillator. Since $F$ does not depend on $t$, it is $P$-periodic for every $P>0$; it is continuous and locally Lipschitz in the state variable, so [[def-cm-stroboscopic-map]] applies for every $P>0$. For $z=(z_1,z_2)\\in\\mathbb R^2$ the curve $$x_z(t)=\\Bigl(z_1\\cos\\omega t+\\frac{z_2}{\\omega}\\sin\\omega t,\\ -\\omega z_1\\sin\\omega t+z_2\\cos\\omega t\\Bigr)$$ is defined on all of $\\mathbb R$ and solves $x'=F(t,x)$ with $x(0)=z$. Hence $D_P=\\mathbb R^2$ for every $P>0$, and the stroboscopic map is $$\\theta_P(z)=\\Bigl(z_1\\cos\\omega P+\\frac{z_2}{\\omega}\\sin\\omega P,\\ -\\omega z_1\\sin\\omega P+z_2\\cos\\omega P\\Bigr).$$ In particular, for $P=2\\pi/\\omega$ the map $\\theta_P$ is the identity of $\\mathbb R^2$, so every initial state is a fixed point; for $P=\\pi/\\ome",
+        "deps": [
+          "def-cm-stroboscopic-map",
+          "lem-cm-stroboscopic-iterate-identity",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-total-derivative-in-euclidean-space"
+        ],
+        "dependency_roles": {
+          "def-cm-stroboscopic-map": "mathematical-premise",
+          "lem-cm-stroboscopic-iterate-identity": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, Section 3.2 (linear systems) and Section 6.4 (the Poincare map), printed pages 61-67 and 198",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.2 and Section 4.1 (linear oscillators and Hamilton's equations)",
+              "url": "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2,
+        "strategy": "direct"
+      }
+    ]
+  }
+]

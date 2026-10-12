@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-rigid-k-linear-abelian-monoidal-category-is-a-tensor-category.md

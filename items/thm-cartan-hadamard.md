@@ -132,65 +132,12 @@ topological manifold is locally path connected
 
 ## Proof
 
-1.1 The exponential map is a local diffeomorphism and a local isometry for the pulled-back metric. [F1, F2, F5, given]
-If $v\ne0$ and $\gamma(t)=\exp_p(tv)$ had a conjugate pair $(0,1)$, then
-conjugacy and its multiplicity are unchanged under affine reparametrization
-([[prop-conjugate-points-and-multiplicity-are-invariant-under-affine-reparametrization]]),
-so the unit-speed reparametrization of $\gamma$ would carry a nonzero Jacobi
-field vanishing at the start and at a later positive instant, contradicting
-[F1]; hence by [F2] the
-differential $d(\exp_p)_v$ is invertible for every $v\ne0$, and at $v=0$ the
-same holds by [F2]. Thus $\exp_p$ is a local diffeomorphism on all of
-$T_pM$, in particular an immersion, and $\tilde g:=\exp_p^*g$ is a Riemannian
-metric on $T_pM$ by [F5]. By construction $\exp_p:(T_pM,\tilde g)\to(M,g)$
-satisfies $(\exp_p)^*g=\tilde g$, so it is a local isometry, and the
-intertwining property of [F4] applies to it. [F1, F2, F5, given]
+1.1 The exponential map is a local diffeomorphism and a local isometry for the pulled-back metric. [F1, F2, F5, given] If $v\ne0$ and $\gamma(t)=\exp_p(tv)$ had a conjugate pair $(0,1)$, then conjugacy and its multiplicity are unchanged under affine reparametrization ([[prop-conjugate-points-and-multiplicity-are-invariant-under-affine-reparametrization]]), so the unit-speed reparametrization of $\gamma$ would carry a nonzero Jacobi field vanishing at the start and at a later positive instant, contradicting [F1]; hence by [F2] the differential $d(\exp_p)_v$ is invertible for every $v\ne0$, and at $v=0$ the same holds by [F2]. Thus $\exp_p$ is a local diffeomorphism on all of $T_pM$, in particular an immersion, and $\tilde g:=\exp_p^*g$ is a Riemannian metric on $T_pM$ by [F5]. By construction $\exp_p:(T_pM,\tilde g)\to(M,g)$ satisfies $(\exp_p)^*g=\tilde g$, so it is a local isometry, and the intertwining property of [F4] applies to it. [F1, F2, F5, given]
 
-2.1 The straight rays through $0$ are $\tilde g$-geodesics defined for all time. [F3, F4, step 1.1]
-Fix $v\in T_pM$ and let $c(t):=tv$ be the straight ray in $T_pM$; the curve
-$c$ is defined for all $t\in\mathbb R$. Its image under $\exp_p$ is
-$(\exp_p\circ c)(t)=\exp_p(tv)=\gamma_v(t)$, the $g$-geodesic of $M$ with
-$\gamma_v(0)=p$, $\gamma_v'(0)=v$, which by [F3] is defined for all real $t$
-because $M$ is complete. Since $D_t^g(\exp_p\circ c)'=0$ and by step 1.1
-$\exp_p$ is a local isometry, [F4] gives
-$d(\exp_p)_{tv}\bigl(D_t^{\tilde g}c'\bigr)=D_t^g(\exp_p\circ c)'=0$; the
-differential of the local diffeomorphism $\exp_p$ at $tv$ is invertible, so
-$D_t^{\tilde g}c'=0$ and $c$ is a $\tilde g$-geodesic. This holds for every
-$v\in T_pM$; in particular the straight ray begins at $0$ at time $0$, so the
-geodesic in $(T_pM,\tilde g)$ with initial data $(0,u)$ is $t\mapsto tu$.
-[F3, F4, step 1.1]
+2.1 The straight rays through $0$ are $\tilde g$-geodesics defined for all time. [F3, F4, step 1.1] Fix $v\in T_pM$ and let $c(t):=tv$ be the straight ray in $T_pM$; the curve $c$ is defined for all $t\in\mathbb R$. Its image under $\exp_p$ is $(\exp_p\circ c)(t)=\exp_p(tv)=\gamma_v(t)$, the $g$-geodesic of $M$ with $\gamma_v(0)=p$, $\gamma_v'(0)=v$, which by [F3] is defined for all real $t$ because $M$ is complete. Since $D_t^g(\exp_p\circ c)'=0$ and by step 1.1 $\exp_p$ is a local isometry, [F4] gives $d(\exp_p)_{tv}\bigl(D_t^{\tilde g}c'\bigr)=D_t^g(\exp_p\circ c)'=0$; the differential of the local diffeomorphism $\exp_p$ at $tv$ is invertible, so $D_t^{\tilde g}c'=0$ and $c$ is a $\tilde g$-geodesic. This holds for every $v\in T_pM$; in particular the straight ray begins at $0$ at time $0$, so the geodesic in $(T_pM,\tilde g)$ with initial data $(0,u)$ is $t\mapsto tu$. [F3, F4, step 1.1]
 
-3.1 The pulled-back metric is complete. [F3, step 2.1]
-At the point $0\in T_pM$ the exponential map of the Riemannian manifold
-$(T_pM,\tilde g)$ is defined on all of its tangent space: by step 2.1 the
-maximal $\tilde g$-geodesic with initial data $(0,u)$ is $t\mapsto tu$, defined
-for every $t\in\mathbb R$, so
-$\exp^{(\tilde g)}_0(u)=u$ under the canonical identification
-$T_0(T_pM)\cong T_pM$. Thus $\exp^{(\tilde g)}_0$ is globally defined (it is
-the identity of $T_pM$). The manifold $(T_pM,\tilde g)$ is connected and
-boundaryless, so the equivalence of [F3] applied to it yields that
-$(T_pM,\tilde g)$ is geodesically and metrically complete. [F3, step 2.1]
+3.1 The pulled-back metric is complete. [F3, step 2.1] At the point $0\in T_pM$ the exponential map of the Riemannian manifold $(T_pM,\tilde g)$ is defined on all of its tangent space: by step 2.1 the maximal $\tilde g$-geodesic with initial data $(0,u)$ is $t\mapsto tu$, defined for every $t\in\mathbb R$, so $\exp^{(\tilde g)}_0(u)=u$ under the canonical identification $T_0(T_pM)\cong T_pM$. Thus $\exp^{(\tilde g)}_0$ is globally defined (it is the identity of $T_pM$). The manifold $(T_pM,\tilde g)$ is connected and boundaryless, so the equivalence of [F3] applied to it yields that $(T_pM,\tilde g)$ is geodesically and metrically complete. [F3, step 2.1]
 
-4.1 The exponential map is a covering map. [F6, step 1.1, step 3.1]
-The map $\exp_p:(T_pM,\tilde g)\to(M,g)$ is a local isometry by step 1.1
-between connected boundaryless Riemannian manifolds, and the source
-$(T_pM,\tilde g)$ is nonempty and complete by step 3.1. Hence [F6] applies:
-$\exp_p$ is surjective and a smooth covering map. [F6, step 1.1, step 3.1]
+4.1 The exponential map is a covering map. [F6, step 1.1, step 3.1] The map $\exp_p:(T_pM,\tilde g)\to(M,g)$ is a local isometry by step 1.1 between connected boundaryless Riemannian manifolds, and the source $(T_pM,\tilde g)$ is nonempty and complete by step 3.1. Hence [F6] applies: $\exp_p$ is surjective and a smooth covering map. [F6, step 1.1, step 3.1]
 
-5.1 Universal cover and the simply connected case. [F7, F8, step 4.1]
-If $\dim M=0$, then $T_pM=\{0\}$ and $\exp_p$ is the identity of a point, which
-is a diffeomorphism and trivially a universal cover. Otherwise $T_pM\cong
-\mathbb R^n$ is contractible by [F7], hence path connected with trivial
-fundamental group, hence simply connected by [F7]. By step 4.1 and the
-definition of a universal cover in [F6], $\exp_p$ is a universal cover of $M$
-whenever $M$ is connected. If $M$ is simply connected as well, then $M$ is a
-locally path-connected simply connected space by [F8], so [F8] applies to the
-connected covering $\exp_p$: it is one-sheeted and isomorphic to the identity
-covering, in particular bijective. A bijective local diffeomorphism is a
-diffeomorphism, so $\exp_p$ is a diffeomorphism, and through it $M$ is
-diffeomorphic to the Euclidean space $T_pM$. Both assertions hold for every
-$p\in M$; the completeness of $(T_pM,\tilde g)$ was proved, not assumed. The
-only selections are those made one at a time by the Hopf-Rinow and covering
-suppliers [F3] and [F6], so the inherited $\mathrm{AC}_\omega$ of [A1] is
-consumed exactly through them.
-[F7, F8, step 4.1] ∎
+5.1 Universal cover and the simply connected case. [F7, F8, step 4.1] If $\dim M=0$, then $T_pM=\{0\}$ and $\exp_p$ is the identity of a point, which is a diffeomorphism and trivially a universal cover. Otherwise $T_pM\cong \mathbb R^n$ is contractible by [F7], hence path connected with trivial fundamental group, hence simply connected by [F7]. By step 4.1 and the definition of a universal cover in [F6], $\exp_p$ is a universal cover of $M$ whenever $M$ is connected. If $M$ is simply connected as well, then $M$ is a locally path-connected simply connected space by [F8], so [F8] applies to the connected covering $\exp_p$: it is one-sheeted and isomorphic to the identity covering, in particular bijective. A bijective local diffeomorphism is a diffeomorphism, so $\exp_p$ is a diffeomorphism, and through it $M$ is diffeomorphic to the Euclidean space $T_pM$. Both assertions hold for every $p\in M$; the completeness of $(T_pM,\tilde g)$ was proved, not assumed. The only selections are those made one at a time by the Hopf-Rinow and covering suppliers [F3] and [F6], so the inherited $\mathrm{AC}_\omega$ of [A1] is consumed exactly through them. [F7, F8, step 4.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nilradical-of-artinian-ring-is-nilpotent.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fundamental-group-of-finite-wedge-of-circles.md

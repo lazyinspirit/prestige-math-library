@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-left-duality-is-a-contravariant-antimonoidal-functor.md

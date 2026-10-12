@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-power-sums-do-not-generate-in-characteristic-two.md

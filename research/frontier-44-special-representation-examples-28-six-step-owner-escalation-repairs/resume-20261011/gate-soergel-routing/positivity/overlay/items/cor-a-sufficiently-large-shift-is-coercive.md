@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-sufficiently-large-shift-is-coercive.md

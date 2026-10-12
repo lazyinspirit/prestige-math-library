@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-index-two-compactification-is-a-compact-one-manifold-with-boundary.md

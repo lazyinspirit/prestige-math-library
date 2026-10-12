@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-jucys-murphy-elements-generate-the-gelfand-tsetlin-algebra.md

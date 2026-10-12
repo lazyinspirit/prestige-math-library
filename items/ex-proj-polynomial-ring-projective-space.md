@@ -70,5 +70,4 @@ the space is the one-point scheme $\operatorname{Spec}k$.
 
 2.3 The case $n=0$. For $n=0$ we have $S=k[x_0]$ with $S_{(x_0)}=k$ by step 1.1 with $n=0$ variables, so $\operatorname{Proj}k[x_0]=D_+(x_0)=\operatorname{Spec}k$, which is the one-point scheme of [F3]; equivalently $\mathbb P^0_k=\operatorname{Spec}k$ in the published charts. [F1, F3, step 1.1, cases: n=0]
 
-3.1 Conclusion. Steps 2.1 and 2.2 identify the charts and gluing of $\operatorname{Proj}k[x_0,\dots,x_n]$ with those of $\mathbb P^n_k$, in agreement with the canonical isomorphism of [F1], and step 2.3 settles $n=0$; the displayed coordinate change is the transition formula of the published charts. [F1, step 2.1, step 2.2, step 2.3]
-\qed
+3.1 Conclusion. Steps 2.1 and 2.2 identify the charts and gluing of $\operatorname{Proj}k[x_0,\dots,x_n]$ with those of $\mathbb P^n_k$, in agreement with the canonical isomorphism of [F1], and step 2.3 settles $n=0$; the displayed coordinate change is the transition formula of the published charts. [F1, step 2.1, step 2.2, step 2.3] \qed 

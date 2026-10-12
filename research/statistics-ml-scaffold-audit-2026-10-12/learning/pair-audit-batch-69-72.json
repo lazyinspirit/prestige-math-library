@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "batch": "ML-69–ML-72",
+  "status": "complete_with_exact_source_contracts_and_local_proof_boundaries",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "a94a7f944d79c09f98385625a085efc55fdaf9ebcbbcc7d3855932dc4a6e1b29",
+  "plan_sha256_at_checkpoint": "0d1339a45ac94cf9b7e4c1d691601d27e5dd9d9820eb3940b98a774fbc414e34",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "plan_section_hash_method": "SHA-256 of exact raw pair chunk from ### heading through final paragraph, excluding trailing newline bytes and stopping before the next ### or ## heading.",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-06/sources.json",
+  "source_manifest_sha256": "33bb1cf20f39b8d4ab3c269eb3b8d3ca0d9f8d1e0a446c4ec972dcc27a16348b",
+  "pairs": [
+    {
+      "id": "ML-69",
+      "assessment": "audited_exp3_expected_regret_with_exact_loss_based_estimator_and_adversary_boundary",
+      "plan_section_sha256": "98e962d5f18ac8a2614e9908eb5d330215b56c3309838b85fc78b41ed3e54a98",
+      "findings": [
+        "The Lattimore–Szepesvári adversarial model fixes reward vectors x_t in [0,1]^k and measures expected regret over learner action randomization against the best fixed arm. Exp3 uses the loss-based unbiased estimator 1-1{A_t=i}(1-X_t)/P_{t,i}, not the unbounded gain estimator 1{A_t=i}X_t/P_{t,i}; its conditional second moment/variance carries the 1/P_{t,i} factor.",
+        "Theorem 11.2 gives eta=sqrt(2 log(k)/(nk)) and expected regret at most sqrt(2nk log k). The full source proof uses a one-sided exponential inequality and the estimator's second-moment bound; the generic bounded-loss Hedge regret theorem does not apply to these importance-weighted values.",
+        "The source states that expected-regret algebra extends to reward vectors chosen from past history before the current action, while its policy-regret note shows current-action-dependent rewards can defeat the fixed-arm policy benchmark. The scaffold separates those adversary models and makes no Exp3-IX high-probability claim; the IX proof is an exercise."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S02",
+          "citation": "Bandit Algorithms — Tor Lattimore and Csaba Szepesvári (2020; author-hosted free edition)",
+          "url": "https://tor-lattimore.com/downloads/book/book.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.pdf",
+          "pdf_sha256": "b71acb03034d73ca0ea148c9c6a91c34a88dd8c7ab8471af38035b34399bad9f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.txt",
+          "full_text_sha256": "4cbb259313a744b0cc780826599e253a59c93e40f86f5a3f46d3e7592c4e6d4d",
+          "read_status": "Cached author-hosted full text read at the complete Exp3 setup, estimator, algorithm, Theorem 11.2 proof and adversary/IX notes.",
+          "role": "load-bearing Exp3 algorithm, estimator and expected-regret theorem",
+          "pair_audited_ranges": "Adversarial reward-sequence protocol and expected regret, PDF pp. 157–158 (printed pp. 148–149); importance estimator and conditional variance, pp. 159–161 (printed pp. 150–152); Exp3 algorithm and Theorem 11.2 proof, pp. 161–165 (printed pp. 152–156); expected non-anticipating note and Exp3-IX exercise boundary, pp. 167–168 (printed pp. 158–159)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-65",
+          "status": "earlier Category 4 pair",
+          "contract": "Supplies explicit feedback chronology, adversary definitions, best-fixed-action expected regret vocabulary, and comparator distinctions."
+        },
+        {
+          "id": "ML-66",
+          "status": "earlier Category 4 pair; notation only",
+          "contract": "Supplies exponential-weights update notation. Its regret theorem assumes bounded nonnegative expert losses and is not a supplier for unbounded importance-weighted Exp3 estimates."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "The loss-based estimator, its conditional unbiasedness and its conditional second moment must be proved in the Exp3 finite-action model.",
+        "Prove the Exp3 one-sided potential inequality and expectation step locally; do not rely on the generic Hedge theorem or the exercise-only Exp3-IX result."
+      ],
+      "future_proof_authoring_obligations": [
+        "Show P_{t,i}>0 for all i under the exponential-weight update and define the action-sampling conditional law.",
+        "Derive E[widehat Y_{t,i}|F_{t-1}]=1-x_{t,i} and E[widehat Y_{t,i}^2|F_{t-1}]=(1-x_{t,i})^2/P_{t,i}; carry the corresponding aggregate bound into the log-potential proof.",
+        "Keep the theorem expected-regret and oblivious-sequence statement; any past-adaptive extension must use the source's non-anticipating chronology, not a current-action-reactive policy benchmark."
+      ]
+    },
+    {
+      "id": "ML-70",
+      "assessment": "audited_exp4_expected_regret_with_oblivious_experts_and_exercise_proof_gap",
+      "plan_section_sha256": "8fc69ad61f149490ac4fae99a5f476075f95911ad6f8ee497aa23bac35d455bb",
+      "findings": [
+        "The source's contextual bandit with expert advice uses k actions, M experts each reporting a probability vector before the round, and an obliviously fixed reward vector in [0,1]^k. Experts' advice is independent of learner actions; regret is expected against the best single fixed expert.",
+        "Exp4 forms P_t=Q_t E(t), samples an arm, uses the gamma=0 loss-based importance estimator, propagates estimated arm rewards through each expert vector, and exponentiates expert weights. Theorem 18.1 gives eta=sqrt(2 log(M)/(nk)) and expected regret at most sqrt(2nk log M).",
+        "The theorem proof invokes Lemma 18.2, whose proof is Exercise 18.2. Exp4-IX with gamma>0 and high-probability analysis is Exercise 18.3; the scaffold records the theorem contract without attributing these omitted proofs to the textbook."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S02",
+          "citation": "Bandit Algorithms — Tor Lattimore and Csaba Szepesvári (2020; author-hosted free edition)",
+          "url": "https://tor-lattimore.com/downloads/book/book.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.pdf",
+          "pdf_sha256": "b71acb03034d73ca0ea148c9c6a91c34a88dd8c7ab8471af38035b34399bad9f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.txt",
+          "full_text_sha256": "4cbb259313a744b0cc780826599e253a59c93e40f86f5a3f46d3e7592c4e6d4d",
+          "read_status": "Cached full text read across the contextual protocol, finite experts, Exp4, expected theorem, proof, notes and exercises.",
+          "role": "load-bearing Exp4 protocol and expected-regret theorem statement",
+          "pair_audited_ranges": "Contextual protocol/benchmark, PDF pp. 233–235 (printed pp. 224–226); finite experts and oblivious advice, pp. 237–238 (printed pp. 228–229); Exp4 algorithm and Theorem 18.1 proof, pp. 238–240 (printed pp. 229–231); proof exercises and IX caveat, pp. 243–244 (printed pp. 234–235)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-65",
+          "status": "earlier Category 4 pair",
+          "contract": "Supplies protocol chronology, adversary and feedback vocabulary, expected regret and best-fixed-comparator notation."
+        },
+        {
+          "id": "ML-66",
+          "status": "earlier Category 4 pair; update notation only",
+          "contract": "Supplies exponentiated weights notation; the bounded-loss Hedge regret theorem does not cover unbounded importance-weighted estimates."
+        },
+        {
+          "id": "ML-69",
+          "status": "earlier Category 4 pair",
+          "contract": "Supplies the loss-based importance-weighted estimator convention and its conditional unbiasedness template; Exp4's expert mixture and potential lemma remain local."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Require finite M experts, finite k actions, advice available before the action and oblivious to learner actions, reward vectors in [0,1]^k, and gamma=0 for the claimed theorem.",
+        "Define the zero-probability estimator convention on impossible actions if an expert mixture assigns an arm probability zero.",
+        "No stochastic contextual generalization or high-probability Exp4-IX supplier is claimed."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove source Exercise 18.2's expert-weight potential inequality with the exact quadratic estimator term.",
+        "Show gamma=0 conditional unbiasedness and control the expert-mixture second moment using P_t=Q_tE(t).",
+        "Retain the best fixed expert expected-regret benchmark and the oblivious expert/action chronology."
+      ]
+    },
+    {
+      "id": "ML-71",
+      "assessment": "audited_exact_linucb_contract_and_full_scalar_self_normalized_proof_boundary",
+      "plan_section_sha256": "9e51f1b3d314a7ae6407f244f185f95b941fd7b41aeb5e1b27ae948bca35528e",
+      "findings": [
+        "The source model is linear reward r(c,a)=<theta*,psi(c,a)> with conditionally 1-subgaussian noise given the history/context/action before reward. In linear-bandit notation, actions are predictable feature vectors; the context-action formulation is a special case.",
+        "The regularized estimate is theta_hat_t=V_t^{-1}sum_{s<=t} A_s X_s, V_t=lambda I+sum_{s<=t}A_s A_s^T, with lambda>0. Theorem 20.5 gives a simultaneous radius sqrt(lambda)||theta*|| + sqrt(2 log(1/delta)+log(det(V_t)/lambda^d)); this is locally carried into beta_t as a squared-radius parameter.",
+        "Theorem 19.2 additionally requires nondecreasing beta_t>=1, feature norms <=L, and per-round optimal-mean range <=1. It gives the exact high-probability pseudo-regret bound sqrt(8 n beta_n log(det V_n/det V_0)) and the trace/AM-GM bound sqrt(8 d n beta_n log(1+n L^2/(d lambda))). The expected-regret corollary is separate and suppresses fixed problem parameters into its constant.",
+        "The source reads and proves the finite-dimensional scalar self-normalized result via conditional exponential supermartingales, a Gaussian-mixture integral, a maximal crossing bound, and an elliptical-potential determinant argument. No broader matrix self-normalized theorem is imported. The library has optional-sampling and Markov suppliers from which the finite-time crossing inequality can be derived, but no directly matching published self-normalized ellipsoid result."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S02",
+          "citation": "Bandit Algorithms — Tor Lattimore and Csaba Szepesvári (2020; author-hosted free edition)",
+          "url": "https://tor-lattimore.com/downloads/book/book.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.pdf",
+          "pdf_sha256": "b71acb03034d73ca0ea148c9c6a91c34a88dd8c7ab8471af38035b34399bad9f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/lattimore_szepesvari_bandit_algorithms.txt",
+          "full_text_sha256": "4cbb259313a744b0cc780826599e253a59c93e40f86f5a3f46d3e7592c4e6d4d",
+          "read_status": "Cached full text read for Chapter 19 assumptions, estimate, LinUCB algorithm, Theorem 19.2/proof, Chapter 20 Theorems 20.4–20.5 and full Gaussian-mixture proof; theorem equations were visually checked on PDF p. 252.",
+          "role": "load-bearing stochastic linear bandit model, finite-dimensional confidence theorem and regret bound",
+          "pair_audited_ranges": "Conditional linear model and realizability, PDF pp. 247–249 (printed pp. 238–240); UCB and ridge estimate, pp. 250–251 (printed pp. 241–242); Assumption 19.1, Theorem 19.2, exact beta expression and determinant proof, pp. 252–254 (printed pp. 243–245); Chapter 20 self-normalized Theorems 20.4–20.5 and mixture proof, pp. 267–270 (printed pp. 258–261)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-65",
+          "status": "earlier Category 4 pair",
+          "contract": "Supplies online chronology, predictable decision and regret vocabulary."
+        },
+        {
+          "id": "ML-12",
+          "status": "earlier Category 4 pair; vocabulary only",
+          "contract": "Supplies linear-model and least-squares vocabulary. The Cat4 plan states the Lattimore–Szepesvári sample-sum ridge normalization locally rather than assuming ML-12's scaling matches."
+        },
+        {
+          "id": "def-tikhonov-regularised-least-squares",
+          "status": "published",
+          "contract": "Defines the positive-ridge least-squares objective; it does not prove the sequential self-normalized confidence result."
+        },
+        {
+          "id": "def-filtration-and-filtered-probability-space",
+          "status": "published",
+          "contract": "Defines the increasing sigma-algebra filtration for the pre-reward history."
+        },
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Defines conditional expectation against the history sigma algebra; conditional subgaussianity remains an explicit model assumption."
+        },
+        {
+          "id": "def-martingale-submartingale-and-supermartingale",
+          "status": "published; Axiom of Choice premise",
+          "contract": "Defines an integrable adapted supermartingale through its one-step conditional inequality; the exponential process and Gaussian mixture property must be proved locally."
+        },
+        {
+          "id": "thm-optional-sampling-for-bounded-stopping-times",
+          "status": "published; Axiom of Choice premise",
+          "contract": "For bounded stopping times, yields the expectation inequality for a supermartingale; together with nonnegativity and Markov, it locally derives the maximal crossing inequality used in the source."
+        },
+        {
+          "id": "cor-markov-inequality-for-random-variables",
+          "status": "published",
+          "contract": "For a nonnegative random variable and positive threshold, bounds the crossing probability by its expectation divided by the threshold."
+        },
+        {
+          "id": "thm-determinant-multiplicative",
+          "status": "published",
+          "contract": "Supplies determinant multiplicativity for finite square matrices."
+        },
+        {
+          "id": "lem-determinant-rank-one-update-over-a-commutative-ring",
+          "status": "published",
+          "contract": "Supplies det(A+uv^T)=det(A)+v^T adj(A)u; after local inversion, this gives the one-step rank-one determinant ratio used by the elliptical potential proof."
+        },
+        {
+          "id": "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+          "status": "published",
+          "contract": "Supplies the Cholesky factorization of the positive-definite ridge matrix needed to normalize the Gaussian-mixture geometry; multivariate change-of-variables/integration remains local."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Predictable action features, conditional 1-subgaussian noise and the finite-dimensional filtration are part of the theorem; independent fixed designs are not silently assumed.",
+        "The confidence radius has two terms: sqrt(lambda) times the parameter norm and a self-normalized log-determinant term. To put it into Eq. 19.7, define beta_t as the square of that radius.",
+        "Finite-time Ville/maximal inequality must be derived from the actual nonnegative-supermartingale and stopping conditions; AC is inherited from martingale/optional-sampling suppliers.",
+        "Require the reward-range and feature-norm assumptions of Theorem 19.2 and an attained optimistic action; bounded features alone do not prove optimization oracle existence."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the conditional exponential supermartingale for every predictable A_t from the all-real conditional MGF bound.",
+        "Integrate against the stated Gaussian prior using an explicit finite-dimensional Cholesky/change-of-variables calculation and derive Theorem 20.4's determinant expression.",
+        "Derive the maximal crossing inequality under the nonnegative-supermartingale hypotheses and exact finite/infinite horizon passage.",
+        "Prove the elliptical-potential determinant bound, optimism inequality, high-probability pseudo-regret bound and separate expected-regret corollary with fixed parameters."
+      ]
+    },
+    {
+      "id": "ML-72",
+      "assessment": "audited_finite_discounted_mdp_contract_with_exact_banach_supplier_and_tie_safe_policy_iteration",
+      "plan_section_sha256": "eed7ba853219e178cb58d1e8e1626859dbe6d0fa4370c02699ece418680badd9",
+      "findings": [
+        "Sutton–Barto define a finite MDP by finite states/actions/rewards and a joint conditional law p(s',r|s,a); transition probabilities and expected rewards are marginals of this law. The scaffold keeps these finite and bounded so discounted values lie in R^S.",
+        "For 0<=gamma<1, both policy and optimality Bellman maps are sup-norm contractions with constant gamma. This fits the published Banach supplier exactly: its contraction constant is a nonnegative q with 0<=q<1, so q=gamma; no absolute-value convention is substituted.",
+        "The fixed-policy Markov-chain supplier has an explicit Axiom of Choice premise, now carried. Greedy policy improvement is source-proved for deterministic policies, but Sutton's policy-iteration pseudocode can cycle on ties (Exercise 4.4); the design requires exact evaluation and deterministic tie retention. General value-iteration convergence is cited/sketched by Sutton, so the contraction proof remains local."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 author draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "Cached author draft read at the full finite-MDP setup, return/value/Bellman, dynamic-programming and policy-improvement ranges; source's tie-cycling exercise inspected.",
+          "role": "load-bearing finite MDP semantics, Bellman equations and policy-improvement theorem",
+          "pair_audited_ranges": "Finite MDP dynamics and joint state/reward law, PDF pp. 67–72 (printed pp. 47–52); rewards, returns and discounted values, pp. 73–92 (printed pp. 53–72); policy and value Bellman equations, pp. 82–92 (printed pp. 62–72); policy improvement theorem/proof and greedy construction, pp. 98–99 (printed pp. 78–79); exact finite policy-iteration discussion and Exercise 4.4 tie-cycling warning, pp. 100–101 (printed pp. 80–81); Chapter 4 value iteration convergence context, pp. 103–110 (printed pp. 83–90)."
+        },
+        {
+          "manifest_id": "L06-S05",
+          "citation": "Planning and Acting in Partially Observable Stochastic Domains — Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra (1996, Brown CS-96-08)",
+          "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/kaelbling_littman_cassandra_pomdp_brown_1996.pdf",
+          "pdf_sha256": "5bef8536d5a79bdefdd928ff7ae251d33e7d32cbb1e9cbfe217cdb5fe20b718c",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/kaelbling_littman_cassandra_pomdp_brown_1996.txt",
+          "full_text_sha256": "7362d182dfae159a9f0bd23fb27c69e070234057320e0108bd3d0dc5f484d036",
+          "read_status": "Complete Brown technical report PDF pp. 1–29 read; body pp. 3–27 used for finite MDP/POMDP semantics. It is complementary exposition, not a Bellman-contraction proof supplier.",
+          "role": "complementary finite state/action transition and policy semantics",
+          "pair_audited_ranges": "Finite MDP/POMDP model and finite policy-tree/value semantics, report body pp. 3–27 (PDF pp. 1–29). Formula text extraction is incomplete in places; material formal claims rely on the visual PDF/source, and this report is not used for the contraction theorem."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-measure-kernel-and-probability-kernel",
+          "status": "published",
+          "contract": "Defines a probability kernel pointwise in the state, supplying the transition law interface for finite MDPs."
+        },
+        {
+          "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "status": "published; Axiom of Choice premise",
+          "contract": "Defines a process whose conditional next-state law is a fixed probability kernel of the current state relative to a filtration. A fixed stationary policy induces this finite-state chain."
+        },
+        {
+          "id": "thm-banach-fixed-point",
+          "status": "published",
+          "contract": "For a nonempty complete metric space and contraction d(fu,fv)<=q d(u,v) with 0<=q<1, supplies unique fixed point and convergence of iterates. The Bellman contraction has q=gamma."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite state/action/reward sets and bounded reward support keep the one-step expectation and discounted value finite.",
+        "Carry Axiom of Choice if using the published time-homogeneous Markov-chain definition.",
+        "Policy iteration's termination theorem requires exact policy evaluation and a deterministic tie rule that keeps already-greedy actions; approximate evaluation with tolerance is a separate algorithm.",
+        "The source does not provide the planned local sup-norm contraction proof for the optimality operator; prove the max inequality and Banach iteration estimate locally."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive T^pi and T* from the joint kernel and prove both are maps R^S to R^S with sup-norm contraction constant gamma.",
+        "Use Banach with q=gamma to get the fixed points and value-iteration convergence/error bound.",
+        "Prove monotonicity and the greedy policy-improvement inequality; show strict improvement when a non-greedy action is changed, then use finiteness of deterministic policies and tie retention for termination.",
+        "Keep gamma=1, average-reward and improper undiscounted cases outside the discounted contraction theorem."
+      ]
+    }
+  ]
+}

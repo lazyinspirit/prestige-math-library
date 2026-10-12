@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-intersection-form-on-the-homology-of-a-closed-oriented-surface.md

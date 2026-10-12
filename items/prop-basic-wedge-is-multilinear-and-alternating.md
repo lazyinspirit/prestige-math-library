@@ -41,9 +41,8 @@ from $V^k$ to $\Lambda^kV$ is $k$-linear and alternating, in the sense of [[def-
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], the wedge of [[def-decomposable-k-vector-and-basic-wedge-product]] is obtained from the universal multilinear map by a linear quotient map, so it is linear in each of its $k$ arguments. [L1]
+ 1.1 By [L1], the wedge of [[def-decomposable-k-vector-and-basic-wedge-product]] is obtained from the universal multilinear map by a linear quotient map, so it is linear in each of its $k$ arguments. [L1]
 
 1.2 By [L1], the quotient projection sends every pure tensor with a repeated pair to zero, so the wedge vanishes whenever two arguments are equal. [L1]
 
-2.1 Steps 1.1 and 1.2 are exactly multilinearity and alternation; they match the structure map described in [L2], whose universal property supplies the same statements. [step 1.1, step 1.2, L2] ∎
+2.1 Steps 1.1 and 1.2 are exactly multilinearity and alternation; they match the structure map described in [L2], whose universal property supplies the same statements. [step 1.1, step 1.2, L2] ∎ 

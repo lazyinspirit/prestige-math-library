@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-ext-balance-isomorphisms-satisfy-change-of-resolution-cocycle-laws.md

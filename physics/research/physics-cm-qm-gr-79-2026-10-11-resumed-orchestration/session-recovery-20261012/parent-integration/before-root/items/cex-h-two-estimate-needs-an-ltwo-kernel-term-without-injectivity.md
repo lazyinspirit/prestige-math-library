@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity.md

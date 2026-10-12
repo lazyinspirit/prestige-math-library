@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains.md

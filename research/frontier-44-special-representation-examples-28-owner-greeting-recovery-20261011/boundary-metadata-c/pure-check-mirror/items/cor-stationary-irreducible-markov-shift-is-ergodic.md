@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-stationary-irreducible-markov-shift-is-ergodic.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-exponent-of-an-extraspecial-p-group.md

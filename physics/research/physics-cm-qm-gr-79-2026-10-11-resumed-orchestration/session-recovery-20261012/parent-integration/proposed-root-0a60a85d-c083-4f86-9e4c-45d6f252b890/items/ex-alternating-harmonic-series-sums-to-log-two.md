@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-alternating-harmonic-series-sums-to-log-two.md

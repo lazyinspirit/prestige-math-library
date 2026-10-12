@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-direct-method-in-a-reflexive-banach-space.md

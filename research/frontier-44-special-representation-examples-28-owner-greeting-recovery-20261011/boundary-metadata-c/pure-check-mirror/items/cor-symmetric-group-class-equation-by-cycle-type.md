@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-symmetric-group-class-equation-by-cycle-type.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dirichlet-problem-on-a-ball-by-the-poisson-integral.md

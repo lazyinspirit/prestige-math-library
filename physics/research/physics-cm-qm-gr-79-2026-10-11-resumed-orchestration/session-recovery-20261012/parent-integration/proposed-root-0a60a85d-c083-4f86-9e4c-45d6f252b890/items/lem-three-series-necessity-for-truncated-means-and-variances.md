@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-three-series-necessity-for-truncated-means-and-variances.md

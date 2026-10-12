@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-etale-specialization-trait-through-a-specialization.md

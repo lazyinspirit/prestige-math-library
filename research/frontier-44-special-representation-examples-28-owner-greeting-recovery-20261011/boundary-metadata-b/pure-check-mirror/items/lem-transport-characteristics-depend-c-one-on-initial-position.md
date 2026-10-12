@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-transport-characteristics-depend-c-one-on-initial-position.md

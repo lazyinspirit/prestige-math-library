@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity.md

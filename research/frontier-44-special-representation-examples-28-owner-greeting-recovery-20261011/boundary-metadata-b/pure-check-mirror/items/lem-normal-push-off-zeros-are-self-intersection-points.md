@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-push-off-zeros-are-self-intersection-points.md

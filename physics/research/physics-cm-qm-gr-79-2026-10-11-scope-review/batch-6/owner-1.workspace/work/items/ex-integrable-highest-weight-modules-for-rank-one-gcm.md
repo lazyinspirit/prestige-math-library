@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integrable-highest-weight-modules-for-rank-one-gcm.md

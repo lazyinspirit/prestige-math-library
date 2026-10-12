@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-dominant-integral-weights-are-nonnegative-combinations-of-fundamental-weights.md

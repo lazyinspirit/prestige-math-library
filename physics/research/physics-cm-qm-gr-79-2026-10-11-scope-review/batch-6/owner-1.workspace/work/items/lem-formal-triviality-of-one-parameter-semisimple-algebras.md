@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-formal-triviality-of-one-parameter-semisimple-algebras.md

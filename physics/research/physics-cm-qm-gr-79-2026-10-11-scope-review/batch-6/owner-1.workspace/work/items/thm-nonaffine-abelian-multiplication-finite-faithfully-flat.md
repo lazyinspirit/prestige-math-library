@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonaffine-abelian-multiplication-finite-faithfully-flat.md

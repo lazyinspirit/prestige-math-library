@@ -46,14 +46,10 @@ for every $n\ge c$.
 
 **Proof technique:** direct.
 
+ 1.1 The $I$-adic filtration on $M$ is already stable, since $I(I^nM)=I^{n+1}M$ for every $n\ge0$. Hence [L1] makes $ \mathcal R_I(M):=\bigoplus_{n\ge0} I^nMt^n $ a finite module over the Noetherian ring $\mathcal R(I)$. [L1, given]
 
-1.1 The $I$-adic filtration on $M$ is already stable, since $I(I^nM)=I^{n+1}M$ for every $n\ge0$. Hence [L1] makes $ \mathcal R_I(M):=\bigoplus_{n\ge0} I^nMt^n $ a finite module over the Noetherian ring $\mathcal R(I)$. [L1, given]
+ 2.1 The induced filtration $ N_n:=I^nM\cap N $ defines a graded submodule $ \mathcal R_N:=\bigoplus_{n\ge0} N_nt^n \subseteq \mathcal R_I(M). $ The module $\mathcal R_I(M)$ is finite over the Noetherian ring $\mathcal R(I)$ by step 1.1 and [L1], hence is Noetherian by [L2]. Therefore its submodule $\mathcal R_N$ is finite. [L1, L2, step 1.1, algebra]
 
+ 3.1 Applying the stability direction of [L1] to the finite Rees module established in step 2.1 yields an index $c$ with $ N_n=I^{n-c}N_c\qquad (n\ge c). $ Since $N_n=I^nM\cap N$ and $N_c=I^cM\cap N$, this is exactly the displayed Artin-Rees equality. [L1, step 2.1]
 
-2.1 The induced filtration $ N_n:=I^nM\cap N $ defines a graded submodule $ \mathcal R_N:=\bigoplus_{n\ge0} N_nt^n \subseteq \mathcal R_I(M). $ The module $\mathcal R_I(M)$ is finite over the Noetherian ring $\mathcal R(I)$ by step 1.1 and [L1], hence is Noetherian by [L2]. Therefore its submodule $\mathcal R_N$ is finite. [L1, L2, step 1.1, algebra]
-
-
-3.1 Applying the stability direction of [L1] to the finite Rees module established in step 2.1 yields an index $c$ with $ N_n=I^{n-c}N_c\qquad (n\ge c). $ Since $N_n=I^nM\cap N$ and $N_c=I^cM\cap N$, this is exactly the displayed Artin-Rees equality. [L1, step 2.1]
-
-
-4.1 Therefore the required constant $c$ exists. [step 3.1] ∎
+ 4.1 Therefore the required constant $c$ exists. [step 3.1] ∎ 

@@ -55,14 +55,11 @@ exists.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 For $x\in\ell^\infty$ define [given, L2, L3]
-$p(x)=\limsup_N\frac1{N+1}\sum_{n=0}^Nx_n$. This is finite because $x$ is bounded. Linearity of finite averages, positive homogeneity of limsup, and [L2] show that $p$ is sublinear in the sense of [L3]. [L2, L3, definition]
+1.1 For $x\in\ell^\infty$ define [given, L2, L3] $p(x)=\limsup_N\frac1{N+1}\sum_{n=0}^Nx_n$. This is finite because $x$ is bounded. Linearity of finite averages, positive homogeneity of limsup, and [L2] show that $p$ is sublinear in the sense of [L3]. [L2, L3, construct]
 
-2.1 Let $c$ be the subspace of ordinarily convergent sequences and let [given, L1, A1, step 1.1]
-$f(x)=\lim_nx_n$ on $c$. Cesaro means preserve an ordinary limit, so $f(x)=p(x)$ on $c$; in particular $f\le p$. Apply [L1]. The exact non-finite choice use is [A1] in Hahn--Banach, producing a real-linear extension $L$ with $L(x)\le p(x)$ for every $x$. [A1, L1, step 1.1, Cesaro convergence]
+2.1 Let $c$ be the subspace of ordinarily convergent sequences and let [given, L1, A1, step 1.1] $f(x)=\lim_nx_n$ on $c$. Cesaro means preserve an ordinary limit, so $f(x)=p(x)$ on $c$; in particular $f\le p$. Apply [L1]. The exact non-finite choice use is [A1] in Hahn--Banach, producing a real-linear extension $L$ with $L(x)\le p(x)$ for every $x$. [A1, L1, L2, step 1.1]
 
-3.1 If $x_n\ge0$, then $p(-x)\le0$, hence [given, step 2.1]
-$-L(x)=L(-x)\le p(-x)\le0$; thus $L$ is positive. Since $\mathbf1\in c$, $L(\mathbf1)=1$. Positivity applied to $\|x\|_\infty\mathbf1\pm x$ gives $|L(x)|\le\|x\|_\infty$, while $L(\mathbf1)=1$ gives the reverse norm bound. Therefore $\|L\|=1$. [step 2.1, positivity]
+3.1 If $x_n\ge0$, then $p(-x)\le0$, hence [given, step 2.1] $-L(x)=L(-x)\le p(-x)\le0$; thus $L$ is positive. Since $\mathbf1\in c$, $L(\mathbf1)=1$. Positivity applied to $\|x\|_\infty\mathbf1\pm x$ gives $|L(x)|\le\|x\|_\infty$, while $L(\mathbf1)=1$ gives the reverse norm bound. Therefore $\|L\|=1$. [step 2.1, algebra]
 
-4.1 The Cesaro average of $x-Sx$ equals [given, step 2.1, step 1.1, step 3.1]
-$(x_0-x_{N+1})/(N+1)$ and tends to zero; the same is true of $Sx-x$. Therefore $p(x-Sx)=p(Sx-x)=0$. Domination gives $L(x-Sx)\le0$ and $-L(x-Sx)=L(Sx-x)\le0$, so $L(x-Sx)=0$ and $L(Sx)=L(x)$. On the original subspace $c$, step 2.1 already says that $L$ extends the ordinary limit. [step 1.1, step 2.1, telescoping] ∎
+4.1 The Cesaro average of $x-Sx$ equals [given, step 2.1, step 1.1, step 3.1] $(x_0-x_{N+1})/(N+1)$ and tends to zero; the same is true of $Sx-x$. Therefore $p(x-Sx)=p(Sx-x)=0$. Domination gives $L(x-Sx)\le0$ and $-L(x-Sx)=L(Sx-x)\le0$, so $L(x-Sx)=0$ and $L(Sx)=L(x)$. On the original subspace $c$, step 2.1 already says that $L$ extends the ordinary limit. [L2, step 1.1, step 2.1, algebra] ∎
+

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-power-sums-form-a-rational-not-integral-stable-basis.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm-free-particle-hamilton-jacobi-complete-integral.md

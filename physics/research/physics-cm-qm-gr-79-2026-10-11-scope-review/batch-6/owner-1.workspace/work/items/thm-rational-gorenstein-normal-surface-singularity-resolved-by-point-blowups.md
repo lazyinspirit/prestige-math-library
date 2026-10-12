@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rational-gorenstein-normal-surface-singularity-resolved-by-point-blowups.md

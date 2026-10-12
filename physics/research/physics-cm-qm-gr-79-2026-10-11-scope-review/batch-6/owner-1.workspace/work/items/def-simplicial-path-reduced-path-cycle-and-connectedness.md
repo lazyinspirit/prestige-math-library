@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-simplicial-path-reduced-path-cycle-and-connectedness.md

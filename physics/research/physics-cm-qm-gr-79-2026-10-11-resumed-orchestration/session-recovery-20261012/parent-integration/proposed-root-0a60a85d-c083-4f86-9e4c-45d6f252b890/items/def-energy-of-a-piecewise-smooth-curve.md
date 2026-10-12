@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-energy-of-a-piecewise-smooth-curve.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-iterated-restricted-sparsification-reaches-the-target-scale.md

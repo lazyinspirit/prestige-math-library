@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-all-norms-on-any-real-vector-space-are-equivalent.md

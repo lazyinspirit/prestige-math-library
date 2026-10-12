@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stable-thom-cohomology-is-degreewise-eventually-constant.md

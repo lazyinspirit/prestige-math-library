@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-countable-elementary-submodel-is-a-transitive-subset.md

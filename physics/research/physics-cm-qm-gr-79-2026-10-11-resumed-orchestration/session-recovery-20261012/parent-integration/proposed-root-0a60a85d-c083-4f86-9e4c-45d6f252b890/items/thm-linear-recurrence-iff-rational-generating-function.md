@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-linear-recurrence-iff-rational-generating-function.md

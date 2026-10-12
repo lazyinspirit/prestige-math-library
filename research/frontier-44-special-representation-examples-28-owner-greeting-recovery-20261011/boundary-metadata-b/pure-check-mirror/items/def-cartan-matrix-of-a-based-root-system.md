@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-cartan-matrix-of-a-based-root-system.md

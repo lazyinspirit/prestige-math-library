@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-degenerate-pullback-metric-under-a-constant-map.md

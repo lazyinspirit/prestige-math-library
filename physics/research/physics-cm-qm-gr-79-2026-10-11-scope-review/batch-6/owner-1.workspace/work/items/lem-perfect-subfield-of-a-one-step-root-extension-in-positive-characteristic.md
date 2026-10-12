@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-perfect-subfield-of-a-one-step-root-extension-in-positive-characteristic.md

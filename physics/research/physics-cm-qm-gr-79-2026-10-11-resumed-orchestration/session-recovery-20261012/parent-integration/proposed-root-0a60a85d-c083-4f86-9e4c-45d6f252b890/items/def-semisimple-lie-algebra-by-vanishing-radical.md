@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-semisimple-lie-algebra-by-vanishing-radical.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-transversely-oriented-codimension-one-foliation.md

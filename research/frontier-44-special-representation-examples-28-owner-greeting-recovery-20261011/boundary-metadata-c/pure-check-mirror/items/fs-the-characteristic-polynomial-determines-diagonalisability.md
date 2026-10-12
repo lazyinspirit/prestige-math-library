@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-characteristic-polynomial-determines-diagonalisability.md

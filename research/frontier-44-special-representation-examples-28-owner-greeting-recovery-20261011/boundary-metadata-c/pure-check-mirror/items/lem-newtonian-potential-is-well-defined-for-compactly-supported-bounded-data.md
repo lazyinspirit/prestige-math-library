@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bose-construction-produces-a-steiner-triple-system.md

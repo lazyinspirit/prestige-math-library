@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-transitive-smooth-actions-identify-m-with-g-mod-h.md

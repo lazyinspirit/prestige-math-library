@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-critical-point-and-critical-value-of-a-smooth-function.md

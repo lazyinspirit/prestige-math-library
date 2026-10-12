@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-orbit-stabilizer-and-orbit-map-of-a-smooth-action.md

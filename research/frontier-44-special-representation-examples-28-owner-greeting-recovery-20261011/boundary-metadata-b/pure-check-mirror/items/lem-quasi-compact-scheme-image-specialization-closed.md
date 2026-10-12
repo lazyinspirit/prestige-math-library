@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-quasi-compact-scheme-image-specialization-closed.md

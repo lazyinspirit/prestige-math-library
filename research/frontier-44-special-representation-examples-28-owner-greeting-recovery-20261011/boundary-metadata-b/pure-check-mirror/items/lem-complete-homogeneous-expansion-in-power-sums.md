@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-complete-homogeneous-expansion-in-power-sums.md

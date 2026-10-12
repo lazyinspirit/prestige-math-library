@@ -43,5 +43,4 @@ from commutative rings to affine schemes, with quasi-inverse global sections.
 
 2.1 Locality determines its point map by contraction and localization determines each basic-open section map, so $u=\operatorname{Spec}(u^\sharp)$. [step 1.2, algebra]
 
-3.1 The constructions of steps 1.1--2.1 are inverse and natural; global sections is the quasi-inverse. [step 1.1, step 2.1] ∎
- 
+3.1 The constructions of steps 1.1--2.1 are inverse and natural; global sections is the quasi-inverse. [step 1.1, step 2.1] ∎  

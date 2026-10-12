@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-transitive-actions-of-prime-degree-are-primitive.md

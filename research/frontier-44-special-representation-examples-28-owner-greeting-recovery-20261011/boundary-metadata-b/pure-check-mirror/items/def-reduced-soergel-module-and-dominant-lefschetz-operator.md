@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-reduced-soergel-module-and-dominant-lefschetz-operator.md

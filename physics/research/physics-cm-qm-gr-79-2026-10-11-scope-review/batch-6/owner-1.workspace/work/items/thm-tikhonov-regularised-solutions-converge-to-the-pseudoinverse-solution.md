@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tikhonov-regularised-solutions-converge-to-the-pseudoinverse-solution.md

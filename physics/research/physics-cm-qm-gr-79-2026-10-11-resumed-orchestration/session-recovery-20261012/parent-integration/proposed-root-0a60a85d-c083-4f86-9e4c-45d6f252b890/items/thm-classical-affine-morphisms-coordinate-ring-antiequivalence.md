@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-affine-morphisms-coordinate-ring-antiequivalence.md

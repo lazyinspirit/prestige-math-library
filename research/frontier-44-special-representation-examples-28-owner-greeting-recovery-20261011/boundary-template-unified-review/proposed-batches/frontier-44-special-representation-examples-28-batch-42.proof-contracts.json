@@ -1,0 +1,1547 @@
+{
+  "version": 1,
+  "scope": [
+    "def-geometric-polarizable-hodge-variation",
+    "lem-regular-trace-kernel-descends-the-complex-socle",
+    "lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity",
+    "lem-algebraic-open-inclusion-surjects-on-fundamental-groups",
+    "lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations",
+    "thm-fixed-part-for-geometric-polarizable-variations-on-smooth-algebraic-bases",
+    "thm-smooth-projective-gauss-manin-local-systems-are-semisimple",
+    "ex-cyclic-etale-covers-give-geometric-semisimple-weight-zero-monodromy"
+  ],
+  "contracts": {
+    "def-geometric-polarizable-hodge-variation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition includes the empty finite sum of realized families, so the zero local system is a geometric polarizable variation; no nonemptiness is imposed on the local system itself, only on the Zariski realization open (Definition)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero local system is realized by the empty sum and its polarization is the zero form, vacuously positive on every fiber; the definition quantifies over finite data only (Definition)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Rank one is not excluded: a rank-one Hodge direct summand of a realized family and the rank-one Tate structure $\\mathbb Q(0)$ satisfy every clause (Definition)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Non-pure objects are allowed as finite direct sums of pure weights, and the direct-summand notion is restricted to flat Hodge idempotents; degenerate local subsystems that are not such summands are deliberately not covered (Definition)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The realization is required on a nonempty Zariski open of the base and no boundary or puncture condition is imposed there; the analytic punctured-disc case is outside the definition (Definition)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used: every existential clause of the Definition quantifies over finite data (finitely many $f_i$, finite direct sums, a single idempotent) (Definition)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item is a definition of terminology and asserts no biconditional theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction belongs to a definition of terminology.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/template_case_15",
+            "reason": "Geometric realization is part of the specified data: a flat rational Hodge idempotent cuts out a summand of finitely many projective-family cohomology variations on an algebraic open. No assertion says that an arbitrary analytic variation or polarizable local system must possess such a realization.",
+            "item_sha256": "74b21d64ae2ae9740029f1fef6c009c9f607592dbf35f74fdad8707388d4a901",
+            "row_sha256": "4ef6636bb1ca5dd7e7191b0e5ce1647b638e8d482277acde07012878bf072049"
+          }
+        }
+      ]
+    },
+    "lem-regular-trace-kernel-descends-the-complex-socle": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite-dimensional algebra over a field and let $J=J(A)$. Then $J$ is nilpotent, and the quotient algebra $A/J$ is semisimple.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-trace-form-nondegeneracy-characterizes-semisimple-finite-dimensional-algebras",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite-dimensional associative $\\mathbb C$-algebra with unit, and let $(\\cdot,\\cdot):A\\times A\\to\\mathbb C$ be the **trace form** $$(a,b):=\\operatorname{tr}(L_{ab}),$$ where $L_c:A\\to A$ is left multiplication by $c$, $L_c(x)=cx$, and the trace is that of [[def-trace-of-an-endomorphism]]. Then: 1. $(\\cdot,\\cdot)$ is a symmetric associative bilinear form: $(a,b)=(b,a)$ and $(ab,c)=(a,bc)$ for all $a,b,c\\i",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-wedderburn-artin-theorem",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero unital ring. Then $R$ is semisimple if and only if $$R\\cong\\prod_{i=1}^rM_{n_i}(D_i)$$ for positive integers $r,n_i$ and division rings $D_i$. See [[thm-endomorphism-ring-of-the-left-regular-module-is-opposite]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-simple-modules-over-semisimple-rings",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let every $n_i\\ge1$, let every $D_i$ be a division ring, and put $R=\\prod_{i=1}^rM_{n_i}(D_i)$. Then every simple left $R$-module is supported on exactly one factor and is isomorphic to that factor's column module $D_i^{n_i}$. These column modules give all simple left $R$-module isomorphism classes, with one class for each factor. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-finite-length-semisimple-module-characterizations",
+          "source_section": "Statement",
+          "quote": "For a finite-length module, the direct-sum, sum-of-simples, and complement characterizations of semisimplicity are equivalent without any choice principle. See [[thm-equivalent-characterizations-of-semisimple-modules]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-socle-of-a-module",
+          "source_section": "Definition",
+          "quote": "For a left $R$-module $M$, the **socle** is $$\\operatorname{Soc}(M):=\\sum\\{S\\le M:S\\text{ is simple}\\}.$$ Concretely it is the submodule generated by the union of all simple submodules. If there are none, the sum is $0$, so the definition is always meaningful.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Identify the radical of the regular trace form with $J$. The ideal $J$ is nilpotent and $B/J$ is semisimple, by [F1]. Choose a composition series of the left regular $B$-module; the simple factors are killed by $J$, since $JS=S$ for a simple factor would give $J^kS=S$ for every $k$, contradicting nilpotence. Each simple type of $B/J$ occurs among these factors: $B/J$ is a quotient of $B$, so its left regular module is a quotient of the regular module and its composition factors, namely $d_i\\ge1$ copies of each column module, occur in the series. In a basis adapted to the series the diagonal blocks of $L_b$ are the factor actions, so $\\operatorname{tr}(L_b)=\\sum_im_i\\operatorname{tr}(\\overline b_i)$ with multiplicities $m_i\\ge1$. Therefore the radical $\\{b:(b,c)=0\\text{ for all }c\\}$ of the trace form is exactly $J$: it contains $J$, and on $B/J$ the induced form is the sum over $i$ of $m_i$ times the nondegenerate matrix trace pairing of the factor $M_{d_i}(\\mathbb C)$, which is nondegenerate because $m_i\\ne0$ and $\\mathbb C$ has characteristic zero, by [F2]. [F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Descend the kernel to a rational subspace. Evaluate the trace form in the rational basis $a_1,\\dots,a_d$ of $A$: the Gram matrix $T=(\\operatorname{tr}(L_{a_ia_j}))_{i,j}$ has rational entries, because each $L_{a_ia_j}$ is the extension to $\\mathbb C$ of the rational endomorphism of $A$ given by left multiplication by $a_ia_j$, and the trace of such an extension is the trace of a rational matrix. By step 1.1 its kernel in $B$ is $J$. Let $J_0=\\{a\\in A:Ta=0\\}\\subseteq A$ be the kernel computed in $\\mathbb Q$-coordinates, a rational subspace; then $J_0\\otimes\\mathbb C=J$, since a rational linear system has the same solutions after extension of scalars and its solution space over $\\mathbb C$ is the complexification of its rational solution space. Since $J$ is a two-sided ideal of $B$, the intersection $J_0=J\\cap A$ is a two-sided ideal of $A$, and $W=\\{v\\in V:J_0v=0\\}$ is a rational $A$-submodule of $V$. [step 1.1, given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Identify $W_{\\mathbb C}$ with the socle. Because $J_0\\otimes\\mathbb C=J$, one has $W_{\\mathbb C}=\\{v\\in V_{\\mathbb C}:Jv=0\\}$. Every simple $B$-submodule $S\\subseteq V_{\\mathbb C}$ is killed by $J$: otherwise $JS=S$, and then $J^kS=S$ for all $k$, contradicting nilpotence of $J$. Hence the socle of $V_{\\mathbb C}$ is contained in $\\{v:Jv=0\\}$. Conversely $\\{v:Jv=0\\}$ is a module over the semisimple algebra $B/J$, and it is a sum of simple modules: for each of its vectors $v$, the cyclic module $(B/J)v$ is a quotient of the regular $B/J$-module, and that regular module is a finite direct sum of the column modules of [F2], so its image is a sum of simple modules. Since $V_{\\mathbb C}$ has finite length, [F3] turns a sum of simple submodules into a finite direct sum of simples, so $\\{v:Jv=0\\}$ is semisimple and, containing every simple submodule, is exactly the socle. Thus the socle of $V_{\\mathbb C}$ equals $W_{\\mathbb C}=W\\otimes\\mathbb C$, a rational $A$-submodule complexified. [F2, F3, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 Nonvanishing for nonzero $V$. If $V\\ne0$ then $V_{\\mathbb C}\\ne0$. Let $n$ be an exponent with $J^n=0$, which exists by nilpotence, and let $r\\ge1$ be least with $J^rV_{\\mathbb C}=0$; such an $r$ exists since $J^n=0$. Then $J^{r-1}V_{\\mathbb C}\\ne0$ by minimality of $r$, and $J\\cdot J^{r-1}V_{\\mathbb C}=J^rV_{\\mathbb C}=0$, so the nonzero subspace $J^{r-1}V_{\\mathbb C}$ is contained in the socle, which is therefore nonzero. By step 3.1 the socle is $W\\otimes\\mathbb C$, so $W\\ne0$. [F1, F3, step 3.1, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For $V=0$ the socle is zero, and step 3.1 identifies it with $W\\otimes\\mathbb C$ for the rational subspace $W=0$; the nonvanishing clause has empty hypothesis (statement)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero module is included in step 3.1 and its socle is $0$; step 4.1 covers exactly the nonzero case for the nonvanishing assertion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument is uniform in the rank: for a one-dimensional $V_{\\mathbb C}$ the Gram kernel of step 1.1 and the annihilator description of step 3.1 give $W=0$ or $W=V$ (steps 1.1, 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The algebra $B$ may have nonzero radical, so $V_{\\mathbb C}$ need not be semisimple; step 1.1 identifies the radical of the trace form with $J$ and step 3.1 uses the annihilator of $J$, with no separability or reducedness assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limiting endpoint or asymptotic boundary occurs; the statement and proof are finite-dimensional algebra."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice is used: step 1.1 builds one composition series by choosing successive minimal positive dimensions, and steps 1.1-2.1 solve rational linear systems (steps 1.1, 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is not a biconditional: it asserts rational descent of the socle and a nonvanishing implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/template_case_10",
+            "reason": "The lemma descends the complex socle using the rational kernel of the regular trace form and then proves its nonvanishing for a nonzero module. It does not characterize rational descent by a converse condition on the radical.",
+            "item_sha256": "aafba778687b6af1a98fa407f50f0fc6b6695217c9124550b402c6120261f0aa",
+            "row_sha256": "fc227a75bf7c330544cf22648e3c8ebc9699b45da7df7a01c0debf389cec0a41"
+          }
+        }
+      ]
+    },
+    "lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite-dimensional algebra over a field and let $J=J(A)$. Then $J$ is nilpotent, and the quotient algebra $A/J$ is semisimple.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-semisimple-ring",
+          "source_section": "Definition",
+          "quote": "A unital ring $R$ is **semisimple** when its left regular module ${}_R R$ is semisimple. This is a left-module definition and uses no Jacobson radical. For the zero ring, the regular module is zero and hence semisimple; the Wedderburn-Artin theorem below is stated for nonzero rings.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-trace-form-nondegeneracy-characterizes-semisimple-finite-dimensional-algebras",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite-dimensional associative $\\mathbb C$-algebra with unit, and let $(\\cdot,\\cdot):A\\times A\\to\\mathbb C$ be the **trace form** $$(a,b):=\\operatorname{tr}(L_{ab}),$$ where $L_c:A\\to A$ is left multiplication by $c$, $L_c(x)=cx$, and the trace is that of [[def-trace-of-an-endomorphism]]. Then: 1. $(\\cdot,\\cdot)$ is a symmetric associative bilinear form: $(a,b)=(b,a)$ and $(ab,c)=(a,bc)$ for all $a,b,c\\i",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-nilpotent-endomorphism-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $N$ be an endomorphism of a nonzero $n$-dimensional vector space over $F$. The following are equivalent: 1. $N$ is nilpotent; 2. $\\mu_N=x^r$ for some $1\\le r\\le n$; 3. $\\chi_N=x^n$; 4. some ordered basis gives $N$ a strictly upper-triangular matrix. In that case $r$ is the nilpotency index. The nonzero hypothesis is needed for condition 2. On the zero space the unique endomorphism $N=0$ is nilpotent with nilpoten",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-length-semisimple-module-characterizations",
+          "source_section": "Statement",
+          "quote": "For a finite-length module, the direct-sum, sum-of-simples, and complement characterizations of semisimplicity are equivalent without any choice principle. See [[thm-equivalent-characterizations-of-semisimple-modules]].",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Let $A\\subseteq\\operatorname{End}_{\\mathbb Q}(V)$ be the $\\mathbb Q$-span of the monodromy matrices. It contains the identity and is closed under multiplication, because a product of monodromy matrices is a monodromy matrix, so it is a finite-dimensional unital $\\mathbb Q$-algebra. For every field $E$ over $\\mathbb Q$ the canonical map $A\\otimes_{\\mathbb Q}E\\to\\operatorname{End}_E(V\\otimes_{\\mathbb Q}E)$ is injective: rationally independent matrices stay independent after extending scalars, as one sees by comparing coordinates in a rational basis of $V$. Its image is the $E$-span of the monodromy matrices, so submodules for this image are exactly the monodromy-invariant subspaces of $V\\otimes_{\\mathbb Q}E$; in particular the action of $A_{\\mathbb C}=A\\otimes_{\\mathbb Q}\\mathbb C$ on $V_{\\mathbb C}$ is faithful. [given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Assume $V_{\\mathbb C}$ is semisimple. Let $J=J(A_{\\mathbb C})$. If $T\\subseteq V_{\\mathbb C}$ is a simple submodule, then $JT$ is a submodule equal to $0$ or $T$, and $JT=T$ would give $J^kT=T$ for every $k\\ge1$, contradicting the nilpotence of $J$ from [F1]. Hence $J$ kills every simple summand of $V_{\\mathbb C}$ and therefore kills all of $V_{\\mathbb C}$, since a semisimple module is a direct sum of simple submodules by [F4]. Faithfulness of the action, established in step 1.1, then forces $J=0$: an element of $J$ acts as zero on $V_{\\mathbb C}$. Therefore $A_{\\mathbb C}$ is semisimple. [F1, F4, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Choose the rational basis $a_1,\\dots,a_d$ of $A$ and let $T=(\\operatorname{tr}(L_{a_ia_j}))_{i,j}$ be the Gram matrix of the regular trace form of $A$ in this basis. Its entries are rational: passing from $A$ to $A_{\\mathbb C}$ extends the rational matrix of left multiplication by $a_ia_j$ to a complex matrix with the same trace. By step 2.1 and [F2] the regular trace form of $A_{\\mathbb C}$ is nondegenerate, so $\\det T\\ne0$ as a complex number, and since $\\det T\\in\\mathbb Q$ it is a nonzero rational number. For every field $k$ the scalar extension $\\mathbb Q\\hookrightarrow k$ therefore makes $T$, viewed over $k$, a nondegenerate matrix. No embedding of $k$ into $\\mathbb C$ is used. [F2, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 Let $k$ be any characteristic-zero field and put $A_k=A\\otimes_{\\mathbb Q}k$. For $x\\in J(A_k)$ and $b\\in A_k$ the product $xb$ lies in the nilpotent ideal $J(A_k)$ by [F1], so $(xb)^n=0$ for some $n$ and the endomorphism $L_{xb}$ of $A_k$ is nilpotent; by [F3] its trace vanishes. Nondegeneracy of the extended matrix $T$ from step 3.1 then forces $x=0$, so $J(A_k)=0$. By [F1] the quotient $A_k/J(A_k)=A_k$ is a semisimple ring. [F1, F3, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "5.1 Finally $V_k=V\\otimes_{\\mathbb Q}k$ is semisimple over $A_k$. Choose a $\\mathbb Q$-basis $v_1,\\dots,v_d$ of $V$. The map $(A_k)^d\\to V_k$, $(x_1,\\dots,x_d)\\mapsto\\sum_ix_iv_i$, is a surjective $A_k$-module homomorphism, and the regular module of the semisimple ring $A_k$ is a direct sum of simple modules by [F1]. Hence $V_k$ is a sum of images of simple modules, each of which is simple or zero, and $V_k$ has finite length over $k$; by [F4] it is a finite direct sum of simple modules, that is, semisimple. By step 1.1 this is exactly semisimplicity of the monodromy module, equivalently every invariant subspace has an invariant complement by [F4], which is semisimplicity of the local system $\\mathcal V_{\\mathbb Q}\\otimes k$. The zero fiber is the empty direct sum and is included. [F1, F4, step 1.1, step 4.1, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero fiber is the empty direct sum and is semisimple; step 5.1 includes it explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The key determinant is nonzero: step 3.1 shows $\\det T\\in\\mathbb Q\\setminus\\{0\\}$ and the zero vector space is handled in step 5.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The argument is uniform in the dimension; for a rank-one fiber the surjection of step 5.1 is an isomorphism on a simple or zero module."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The rational algebra $A$ need not be semisimple: step 2.1 proves $A_{\\mathbb C}$ is semisimple from the hypothesis, and steps 3.1-4.1 push nondegeneracy and vanishing radical to every characteristic-zero field without assuming separability of $k$ over $\\mathbb Q$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, limit or boundary parameter occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice is used: step 1.1 takes a finite rational span, step 3.1 computes a determinant, and step 5.1 uses a finite basis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication (complex semisimplicity implies semisimplicity over every characteristic-zero field), not a biconditional; no forward case is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse is false in general and is not asserted."
+        }
+      ]
+    },
+    "lem-algebraic-open-inclusion-surjects-on-fundamental-groups": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, $$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$ DC here includes a prescribed initial point.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-parametric-transversality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\mathcal F:M\\times S\\to N$ be a smooth family of maps and let $Z\\subseteq N$ be an embedded submanifold. If $\\mathcal F\\pitchfork Z$, then the set of parameters $s\\in S$ for which the slice $\\mathcal F_s:M\\to N$ fails to be transverse to $Z$ is a null subset of $S$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-a-smooth-map-transverse-to-an-embedded-submanifold",
+          "source_section": "Definition",
+          "quote": "Let $F:M\\to N$ be smooth, and let $Z\\subseteq N$ be an embedded submanifold. Then $F$ is **transverse to $Z$**, written $F\\pitchfork Z$, when for every $p\\in F^{-1}(Z)$, $$dF_p(T_pM)+T_{F(p)}Z=T_{F(p)}N.$$ If $F(M)\\cap Z=\\varnothing$, this condition is vacuous, so $F\\pitchfork Z$ still holds.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-a-submersion-is-transverse-to-every-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "If $F:M\\to N$ is a submersion, then $F\\pitchfork Z$ for every embedded submanifold $Z\\subseteq N$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-family-of-maps-and-evaluation-map",
+          "source_section": "Definition",
+          "quote": "Let $M$, $S$, and $N$ be smooth manifolds. A **smooth family of maps from $M$ to $N$ parametrized by $S$** is a smooth map $$\\mathcal F:M\\times S\\to N.$$ For each $s\\in S$, its **slice map** is $$\\mathcal F_s:M\\to N,\\qquad \\mathcal F_s(p):=\\mathcal F(p,s).$$ The map $\\mathcal F$ itself is the **evaluation map** of the family.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-a-tubular-target-produces-a-submersive-finite-dimensional-perturbation-family",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $f:M\\to N$ be smooth. Then there exist an open ball $$ B\\subseteq\\mathbb R^m $$ containing $0$ and a smooth family of maps $$ \\mathcal F:M\\times B\\to N $$ such that $\\mathcal F_0=f$ and, for every $p\\in M$, the parameter map $$ \\mathcal F_p:B\\to N,\\qquad a\\longmapsto \\mathcal F(p,a), $$ is a submersion. In particular, the evalua",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "2.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "source_section": "Statement",
+          "quote": "Assume countable choice $\\mathrm{AC}_\\omega$. Let $F:M\\to N$ be continuous, let $A\\subseteq M$ be closed, and suppose $F$ is smooth on an open neighbourhood of $A$. Then there exist a smooth map $\\widetilde F:M\\to N$ and an open neighbourhood $W$ of $A$ such that $\\widetilde F=F$ on $W$ and $F$ is homotopic to $\\widetilde F$ by a homotopy fixed on $W$, hence relative to $A$. No compactness of $A$ or its neighbourhood",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-null-subset-of-a-smooth-manifold",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth $m$-manifold, and let $\\mathcal A$ be a smooth atlas on $M$. A subset $A\\subseteq M$ is **$\\mathcal A$-null** when, for every chart $(U,\\varphi)\\in\\mathcal A$, the set $$\\varphi(A\\cap U)\\subseteq\\mathbb R^m$$ is null in the Euclidean sense of [[def-null-and-content-zero-in-rn]] when $m\\ge 1$, and is empty when $m=0$. Equivalently, on a $0$-manifold the only null subset is the empty set. Under the ",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-countable-unions-and-subsets-of-manifold-null-sets-are-null",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Every subset of a manifold null set is null, and every countable union of manifold null sets is null.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a positive-dimensional smooth manifold, let $\\mathcal A$ be a smooth atlas on $M$, and let $E\\subseteq M$ be $\\mathcal A$-null in the sense of [[def-null-subset-of-a-smooth-manifold]]. Then $M\\setminus E$ is dense in $M$. In particular, under Countable Choice the conclusion holds for any manifold-null set $E$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-analytic-topology-and-finite-smooth-algebraic-stratifications",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a classical algebraic variety over $\\mathbb C$ in the sense of [[def-classical-algebraic-prevariety-regular-maps-and-varieties]]: a separated quasi-compact locally ringed space over $\\mathbb C$ with a finite cover by affine models $Z\\subseteq\\mathbb C^n$, the morphisms being the regular maps, i.e. the morphisms of locally ringed spaces over $\\mathbb C$ ([[def-morphism-locally-ringed-spaces]]). (a) **Analyt",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-smooth-variety-classical-scheme-conventions-agree",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $k$ be a field and let $X$ be a finite-type $k$-scheme. Consider the three conditions * (classical) $X\\to\\operatorname{Spec}k$ is smooth in the earlier local-standard-smooth convention ([[def-smooth-morphism-classical]], [[def-smooth-morphism-to-field-classical]]); * (scheme) $X\\to\\operatorname{Spec}k$ is smooth in the scheme-theoretic sense of [[def-smooth-morphism-schemes]]; * (",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-jacobian-criterion-smooth-morphism",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to S$ be a morphism locally of finite presentation ([[def-locally-finite-presentation-morphism]]) and let $x\\in X$ with $s=f(x)$. Then $f$ is smooth at $x$ ([[def-smooth-morphism-schemes]]) if and only if there are affine open neighbourhoods $U=\\operatorname{Spec}C$ of $x$ and $V=\\operatorname{Spec}A$ of $s$ with $f(U)\\subseteq V$ and a presentation of $C_h$, for some $h\\in C\\smal",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-holomorphic-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb C^m\\times\\mathbb C^n$ be open, let $f:U\\to\\mathbb C^n$ be holomorphic, and let $(a,b)\\in U$ satisfy $f(a,b)=0$. Assume the complex Jacobian with respect to the second block is invertible: $$\\det\\left(\\frac{\\partial f_j}{\\partial w_k}(a,b)\\right)_{1\\le j,k\\le n}\\ne0.$$ Then there are neighbourhoods $A$ of $a$ and $B$ of $b$, and a unique holomorphic map $\\varphi:A\\to B$, such that",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-dimension-classical-variety",
+          "source_section": "Definition",
+          "quote": "For a classical variety $X$, let $\\dim X$ be its chain dimension. If $X_1,\\ldots,X_m$ are its irreducible components and $x\\in X$ is a closed point, define $\\dim_xX=\\max_{x\\in X_i}\\dim X_i$. The indexing family is nonempty. Say that $X$ has pure dimension $d$ if every irreducible component has dimension $d$; the condition on components is vacuous for the empty variety, whose dimension is nevertheless $-\\infty$. Work ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-generic-smoothness-on-source-characteristic-zero",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $k$ be an algebraically closed field of characteristic $0$, let $X$ and $Y$ be irreducible classical varieties over $k$, and let $f\\colon X\\to Y$ be a dominant morphism. Regard $X$ and $Y$ as integral finite-type $k$-schemes under [[thm-classical-varieties-equivalent-integral-separated-finite-type-schemes]], let $X_{\\mathrm{reg}},Y_{\\mathrm{reg}}$ be their reg",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-smooth-locus-open",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice (AC). Let $f:X\\to S$ be a morphism locally of finite presentation ([[def-locally-finite-presentation-morphism]]) and let $\\operatorname{Sm}(f)\\subseteq X$ be its smooth locus ([[def-smooth-locus-morphism]]). Then $\\operatorname{Sm}(f)$ is an open subset of $X$, and the restriction of $f$ to this open subset is a smooth morphism.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-classical-varieties-equivalent-integral-separated-finite-type-schemes",
+          "source_section": "Statement",
+          "quote": "Let $k$ be algebraically closed. The closed-point construction and its inverse whose points are the nonempty irreducible closed subsets (with each original point identified with its singleton) give an equivalence between irreducible classical $k$-varieties (which have a finite affine cover by definition) and integral finite-type $k$-schemes satisfying the affine-overlap separation condition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-transverse-preimage-theorem",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth and let $Z\\subseteq N$ be an embedded submanifold of codimension $c$. If $F\\pitchfork Z$, then $F^{-1}(Z)$ is an embedded submanifold of $M$ of codimension $c$. For each $p\\in F^{-1}(Z)$, $$ T_pF^{-1}(Z)=\\{v\\in T_pM:dF_p(v)\\in T_{F(p)}Z\\}. $$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-fundamental-groupoid-of-a-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. Its **fundamental groupoid** $\\Pi_1(X)$ is the following category ([[def-category]]). - The objects are the points of $X$. - A morphism $x\\to y$ is an endpoint-fixed path-homotopy class $[\\alpha]$ of paths $\\alpha:[0,1]\\to X$ with $\\alpha(0)=x$ and $\\alpha(1)=y$, in the sense of [[def-homotopy-relative-and-path-homotopy]]. - If $\\alpha:x\\to y$ and $\\beta:y\\to z$, composition is $$[\\bet",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-connected-and-locally-path-connected-implies-path-connected",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a locally path-connected topological space ([[def-locally-connected]]). Then: 1. **Path components are open**, hence clopen, hence unions of them are clopen. 2. **Components and path components agree**: $P(x) = C(x)$ for every $x \\in X$ ([[def-path-connected]], [[def-connected-component-and-quasicomponent]]). 3. **If $X$ is moreover connected ([[def-connected-space]]) then $X$ is path-connected.** Claim 3 ",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-path-connected",
+          "source_section": "Definition",
+          "quote": "Throughout, $I := [0,1] = \\{\\, t \\in \\mathbb{R} : 0 \\le t \\le 1 \\,\\}$ ([[def-interval]]) carries the subspace topology inherited from $\\mathbb{R}$ with its usual topology ([[def-subspace-topology-top]], [[lem-real-line-is-a-metric-space]], [[def-metric-topology]], [[def-metrizable-space]]). It is called the **unit interval**. Let $X$ be a topological space ([[def-topological-space]]) and let $x, y \\in X$. - A **path ",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Charts and path-connected neighbourhoods. By [F7] we may view $S$ as a finite-type separated integral scheme over $\\mathbb C$; smoothness of the algebraic variety means every local ring is regular, so by the equivalence of [F7] the structure morphism $S\\to\\operatorname{Spec}\\mathbb C$ is scheme-smooth. Fix $x\\in S$. Applying the Jacobian criterion of [F7] to this morphism gives an affine neighbourhood of $x$ with a presentation $C_h\\cong(\\mathbb C[t_1,\\dots,t_m]/(f_1,\\dots,f_r))_g$ in which some $r\\times r$ minor of the Jacobian matrix $(\\partial f_j/\\partial t_i)$ is invertible at $x$, and whose fibres have dimension $m-r$; here the fibre is the local variety itself, so $m-r=n=\\dim S$. After relabelling the coordinates and applying the holomorphic implicit function theorem of [F7] to the holomorphic map $(f_1,\\dots,f_r)$ near the image of $x$, the common zero locus is locally the graph of a holomorphic function of the remaining $m-r=n$ coordinates; the graph coordinate map identifies a neighbourhood of $x$ in the analytic topology with an open ball in $\\mathbb C^n$, and this analytic topology is the one of [F7]. The same presentation and implicit-function argument applied to the reduced induced structure of a locally closed smooth complex subvariety exhibits its points as complex charts of dimension equal to its complex dimension. Consequently $S$, and every smooth locally closed complex subvariety of $S$, is a complex manifold for the analytic topology, hence in particular a smooth real manifold of twice its complex dimension; the chart balls are path-connected neighbourhoods, so $S$ and its open subsets are locally path connected. [F7, given, construct]",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "1.2 Smoothing a based loop. Let $\\gamma:S^1\\to S$ be a continuous based loop. Choose a continuous surjection $\\psi:S^1\\to S^1$ with $\\psi(*)=*$ that is constant on a neighbourhood of $*$ and is homotopic to the identity of $S^1$ by a homotopy fixing $*$; then $\\gamma_1=\\gamma\\circ\\psi$ is a continuous based loop, constant on an open arc $W_0\\ni*$ where $\\gamma_1= s$, and it is based-homotopic to $\\gamma$. The map $\\gamma_1$ is smooth (indeed constant) on an open neighbourhood of the closed set $A=\\{*\\}$, so the relative Whitney approximation of [F5] applies: there are a smooth based loop $\\gamma_2:S^1\\to S$ and an open neighbourhood $W$ of $*$ such that $\\gamma_2=\\gamma_1$ on $W$ and $\\gamma_1$ is homotopic to $\\gamma_2$ by a homotopy fixed on $W$. Thus $\\gamma_2$ is a smooth based loop, equal to $\\gamma_1=s$ on the open neighbourhood $W\\cap W_0$ of the base point, with $[\\gamma_2]=[\\gamma_1]=[\\gamma]$ in $\\pi_1(S,s)$. [F1, F5, F8, given, construct]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F5",
+            "F8",
+            "1.2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 A finite decomposition of the complement into codimension-two smoothies. The complement $Z=S\\setminus U$ is closed and proper, and $S$ is irreducible because it is connected and locally irreducible at each point by step 1.1. We construct pairwise disjoint smooth locally closed complex subvarieties $(Z_j)$ covering $Z$, each of complex dimension at most $n-1$, by downward induction on dimension. Every irreducible component $C$ of $Z$ is a proper closed irreducible subvariety of the irreducible $S$, so the chain-dimension drop of [F7] gives $\\dim C\\le n-1$. Suppose a closed algebraic subset $T\\subseteq Z$ is given in which every irreducible component has dimension at most $d$. For each irreducible component $C$ of $T$ of dimension exactly $d$, the regular locus $C_{\\mathrm{reg}}$ is a nonempty Zariski open subset of $C$: the generic-smoothness corollary of [F7], applied to the constant morphism from the irreducible classical variety $C$ to a point, produces a nonempty open subset of the regular locus, which is open by [F7]. The sets $C_{\\mathrm{reg}}\\setminus\\bigcup_{C'\\ne C}C'$, for the finitely many top-dimensional components $C$, are pairwise disjoint smooth locally closed complex subvarieties of dimension $d$. What they do not cover of $T$ is contained in the union of the singular loci of the top-dimensional components and of the pairwise intersections of distinct components; each of these is a proper closed subset of an irreducible component, hence has dimension at most $d-1$ by [F7], so the leftover $T'$ is a closed algebraic subset all of whose components have dimension at most $d-1$. Iterating from $T=Z$ and $d=n-1$ produces finitely many disjoint smooth locally closed pieces, and the iteration stops at dimension $0$, where the pieces are points and nothing is left over. Each piece has complex dimension at most $n-1$, so its real dimension is at most $2n-2$ and its real codimension in the smooth real manifold $S$ of step 1.1 is at least two; being a smooth locally closed complex subvariety, each piece is an embedded submanifold of $S$. [F7, step 1.1, construct, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F7",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "2.2 A cutoff vanishing at the base point and equal to one over the bad set. Let $\\gamma_2$ be the smooth loop of step 1.2, denoting by $\\gamma_2^{-1}(Z)\\subseteq S^1$ the compact bad set. If it is empty, then $\\gamma_2$ already lies in $U$ and its class is represented in $U$; assume it is nonempty. Since $\\gamma_2$ equals the constant $s\\in U$ on the open neighbourhood $W_2=W\\cap W_0$ of $*$, the compact set $K=\\gamma_2^{-1}(Z)$ is disjoint from $W\\cap W_0$. Choose an open arc $W'\\ni*$ with $\\overline{W'}\\subseteq W_2$, put $U_1=S^1\\setminus\\overline{W'}$ and $U_2=W_2$; these open sets cover $S^1$, and $K\\subseteq S^1\\setminus W_2\\subseteq U_1$. By the partition-of-unity theorem [F4] applied to the cover $\\{U_1,U_2\\}$ choose a subordinate smooth partition of unity $(\\chi_1,\\chi_2)$ and set $\\chi=\\chi_1$. Then $\\chi$ is smooth with values in $[0,1]$, equal to $1$ on the open set $S^1\\setminus\\operatorname{supp}(\\chi_2)\\supseteq S^1\\setminus W_2\\supseteq K$, and equal to $0$ on the open set $S^1\\setminus\\operatorname{supp}(\\chi_1)\\supseteq S^1\\setminus U_1=\\overline{W'}\\ni*$; moreover whenever $\\chi(p)=0$ we have $p\\in\\overline{W'}\\subseteq W_2$ and hence $\\gamma_2(p)=s\\in U$. In particular $\\chi(*)=0$. [F1, F4, step 1.2, construct, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 The truncated perturbation family is transverse to every piece. Apply the perturbation lemma [F3] to the smooth loop $\\gamma_2:S^1\\to S$: there are an open ball $B\\subseteq\\mathbb R^m$, positive-dimensional as recorded in [F3] because $S\\ne\\varnothing$, and a smooth family $\\mathcal F:S^1\\times B\\to S$ with $\\mathcal F_0=\\gamma_2$ and with every parameter map $a\\mapsto\\mathcal F(p,a)$ a submersion; in particular the evaluation map $\\mathcal F$ is a submersion, hence transverse to every embedded submanifold by [F2]. Define $\\widetilde{\\mathcal F}:S^1\\times B\\to S$ by $\\widetilde{\\mathcal F}(p,a)=\\mathcal F(p,\\chi(p)a)$; since $|\\chi(p)a|\\le|a|<1$ this is well defined and smooth, and $\\widetilde{\\mathcal F}_0=\\mathcal F_0=\\gamma_2$. For every $a\\in B$ one has $\\widetilde{\\mathcal F}(*,a)=\\mathcal F(*,\\chi(*)a)=\\mathcal F(*,0)=\\gamma_2(*)=s$, so every slice $\\widetilde{\\mathcal F}_a$ is a based loop. At a point $(p,a)$ with $\\chi(p)>0$ the derivative of $\\widetilde{\\mathcal F}$ in the parameter direction is $\\chi(p)$ times the parameter derivative of $\\mathcal F$ at $(p,\\chi(p)a)$, which is surjective, so $\\widetilde{\\mathcal F}$ is a submersion there. Hence $\\widetilde{\\mathcal F}\\pitchfork Z_j$ for every piece $Z_j$ of step 2.1: if $\\widetilde{\\mathcal F}(p,a)\\in Z_j\\subseteq Z$ then $\\chi(p)>0$, since $\\chi(p)=0$ would give $\\widetilde{\\mathcal F}(p,a)=\\mathcal F(p,0)=\\gamma_2(p)$ with $\\gamma_2(p)\\in U$ by step 2.2, and at a point with $\\chi(p)>0$ the map is a submersion and therefore transverse by [F2]. [F1, F3, F2, step 2.1, step 2.2, construct, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 A parameter outside all bad sets, and surjectivity. For each piece $Z_j$ of step 2.1 the set $N_j\\subseteq B$ of parameters $a$ with $\\widetilde{\\mathcal F}_a$ not transverse to $Z_j$ is null by the parametric transversality theorem [F2]. Since there are finitely many pieces, the union $N=\\bigcup_jN_j$ is null in the positive-dimensional smooth manifold $B$ by [F6], so its complement is dense by [F6] and in particular nonempty; choose $a\\in B\\setminus N$. Then the slice $\\widetilde{\\mathcal F}_a:S^1\\to S$ is a smooth based loop transverse to every $Z_j$. A transverse map from a one-dimensional manifold cannot meet a piece of real codimension at least two: if $\\widetilde{\\mathcal F}_a(p)\\in Z_j$, transversality would give $\\dim T_{\\widetilde{\\mathcal F}_a(p)}S\\le\\dim\\operatorname{im}(d(\\widetilde{\\mathcal F}_a)_p)+\\dim T_{\\widetilde{\\mathcal F}_a(p)}Z_j\\le1+(2n-2)<2n$, a contradiction. Hence $\\widetilde{\\mathcal F}_a(S^1)$ meets no $Z_j$ and therefore lies in $U$. The family $\\widetilde{\\mathcal F}$ is a homotopy from $\\gamma_2$ to $\\widetilde{\\mathcal F}_a$ through based loops, so $[\\widetilde{\\mathcal F}_a]=[\\gamma_2]=[\\gamma]$ in $\\pi_1(S,s)$ by [F8], while $[\\widetilde{\\mathcal F}_a]$ lies in the image of $\\pi_1(U,s)\\to\\pi_1(S,s)$ by [F8]. In the discarded case $K=\\varnothing$ of step 2.2 the loop $\\gamma_2$ itself already lies in $U$, so the same conclusion holds. Since every class in $\\pi_1(S,s)$ has a continuous based loop representative, the map $\\pi_1(U,s)\\to\\pi_1(S,s)$ is surjective. [F2, F6, F8, step 1.2, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "F8",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "5.1 Path connectedness. Let $x,y\\in U$. By step 1.1 the space $S$ is locally path connected, and it is connected by hypothesis, so [F9] makes $S$ path connected; choose a path in $S$ from $x$ to $y$, reparametrize it so that it is constant near $0$ and near $1$, and apply the relative approximation [F5] with the closed set $\\{0,1\\}$ (on which the reparametrized path is smooth because it is constant) to obtain a smooth path $\\beta:[0,1]\\to S$ from $x$ to $y$ that is constant near $0$ and $1$. Likewise choose a smooth path $\\eta:[0,1]\\to S$ from $y$ to $x$, constant near its endpoints. Glue these into a smooth based loop $\\gamma:S^1\\to S$: traverse $\\beta$ on the first quarter of the circle, $\\eta$ on the second quarter, and the constant loop at $x$ on the second half; the loops are constant near the three junction points and agree there, so $\\gamma$ is smooth, and $\\gamma$ is based at $x$. Its bad set $\\gamma^{-1}(Z)$ is disjoint from a neighbourhood of the junction points, because $\\gamma$ is constant with value $x$ or $y$, both in $U$, near those points. Apply the constructions of steps 2.2, 3.1 and 4.1 with this loop $\\gamma$ in place of $\\gamma_2$ and with the same finite family of pieces $Z_j$: the cutoff $\\chi$ vanishes on a neighbourhood of the junction points and equals one near $\\gamma^{-1}(Z)$, the truncated family is transverse to every piece, and a good parameter $a$ yields a smooth loop $\\gamma'=\\widetilde{\\mathcal F}_a:S^1\\to U$ that agrees with $\\gamma$ on a neighbourhood of the junction points and is homotopic to $\\gamma$ through based loops. Restricting $\\gamma'$ to the first quarter of the circle gives a continuous path in $U$ from $\\gamma'(0)=\\gamma(0)=x$ to $\\gamma'(1/4)=\\gamma(1/4)=y$. As $x,y\\in U$ were arbitrary, $U$ is path connected. [F9, F5, F4, F3, F2, F6, step 1.1, step 2.1, construct, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F9",
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If $n=0$ then $S$ is a point, $Z=\\varnothing$ and $U=S$; the discarded case $K=\\varnothing$ of step 4.1 proves surjectivity and step 5.1 the path-connectedness criterion (steps 4.1, 5.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Dimension zero and the empty complement are exactly the cases handled in step 4.1's $K=\\varnothing$ branch and step 5.1; no positive-dimensional parameter count is needed there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-dimensional base $S$, $Z$ is finite and the strata of step 2.1 are points, of real codimension two in the surface $S$; steps 2.2-5.1 apply verbatim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The complement $Z$ may be empty, reducible, singular or of mixed dimension; step 2.1 iterates the dimension descent using only generic smoothness of components, and step 4.1 discards the empty bad set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The base point is kept fixed: the cutoff of step 2.2 vanishes at the base point and the slice is based for every parameter (step 3.1); no other endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is assumed and used exactly through the $\\mathrm{AC}_\\omega$ suppliers invoked in steps 1.2, 2.2 and 4.1; the stratification and finitely many perturbations are otherwise choice-free (statement, step 1.2)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts path-connectedness and surjectivity, not a biconditional; no forward iff direction is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ]
+    },
+    "lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-projective-morphism-proper",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every projective morphism in the finite-dimensional\nH-projective convention of this page is proper: if $f:X\\to S$ factors over $S$\nas\n$$X\\xrightarrow{i}\\mathbb P^n_S\\longrightarrow S$$\nwith $n\\ge0$, $i$ a closed immersion and the second arrow the projection, then\n$f$ is proper. The empty source, the empty base and the case $n=0$ are\nincluded, and no Noetherian, field, reducedness or nonemptiness hypothesis is\nimposed.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-smooth-projective-analytification-has-rational-kahler-polarization",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nJacobian-criterion, ample-powers, Chern-form and comparison suppliers below.\nLet $X$ be a smooth projective complex scheme of pure dimension $n\\ge0$.\n\nThen the closed points of $X$ carry a structure of **complex manifold**\n$X^{\\mathrm{an}}$, its **analytification**: if $X\\ne\\varnothing$ and $n\\ge1$\nthis is a compact Hausdorff second-countable smooth complex manifold of complex\ndimension $n$\n([[def-complex-manifolds-and-holomorphic-vector-bundles]]); if $n=0$ it is the\nfinite discrete set $X(\\mathbb C)$ with its unique complex structure in the\nconvention of\n[[def-compact-kahler-manifold-and-hodge-polarization-conventions]]; and if\n$X=\\varnothing$ then $X^{\\mathrm{an}}=\\varnothing$. Every standard smooth\nalgebraic chart of $X$ becomes a holomorphic chart of $X^{\\mathrm{an}}$, and\nevery morphism of smooth complex schemes $X\\to Y$ induces a holomorphic map\n$X^{\\mathrm{an}}\\to Y^{\\mathrm{an}}$.\n\nMoreover, for every ample invertible sheaf $A$ on $X$ there is a smooth\npositive closed real $(1,1)$-form $\\eta_A$ on $X^{\\mathrm{an}}$ whose de Rham\nclass is the real image of the topological first Chern class\n$c_1(A):=c_1(A^{\\mathrm{an}})\\in H^2(X^{\\mathrm{an}};\\mathbb Z)$:\n$$J_{X^{\\mathrm{an}}}[\\eta_A]=\\rho_{X^{\\mathrm{an}}}\\bigl(c_1(A)\\bigr),$$\nwhere $J$ is the de Rham comparison and $\\rho$ the change of coefficients\n$\\mathbb Z\\to\\mathbb R$\n([[lem-rational-cohomology-scalar-comparison-for-compact-smooth-manifolds]]).\nIn dimension $n=0$ and for $X=\\varnothing$ every $2$-form and every degree-two\ncohomology class is zero and $\\eta_A=0$, so the identity holds trivially.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-jacobian-criterion-smooth-morphism",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $f:X\\to S$ be a morphism locally of\nfinite presentation ([[def-locally-finite-presentation-morphism]]) and let\n$x\\in X$ with $s=f(x)$. Then $f$ is smooth at $x$\n([[def-smooth-morphism-schemes]]) if and only if there are affine open\nneighbourhoods $U=\\operatorname{Spec}C$ of $x$ and\n$V=\\operatorname{Spec}A$ of $s$ with $f(U)\\subseteq V$ and a presentation of\n$C_h$, for some $h\\in C\\smallsetminus\\mathfrak q$ with $\\mathfrak q$ the prime\nof $x$, as\n$$C_h\\;\\cong\\;\\Bigl(A[t_1,\\dots,t_m]/(f_1,\\dots,f_r)\\Bigr)_g,$$\nin which some $r\\times r$ minor of the Jacobian matrix\n$\\bigl(\\partial f_j/\\partial t_i\\bigr)$ has image a unit of $C_h$. Such a chart\nis flat over $A$ with geometrically regular fibres whose components have\ndimension $m-r$; in the local-dimension convention of\n[[def-relative-dimension-smooth-morphism]] it exhibits relative dimension\n$m-r$ at $x$.\n\nThe criterion demands that *some* presentation have an invertible $r\\times r$\nminor; it does not demand this of an arbitrary redundant equation list, and\n$r>m$ makes an invertible $r\\times r$ minor impossible by definition of the\nmatrix shape.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-holomorphic-implicit-function-theorem",
+          "source_section": "Statement",
+          "quote": "Let $m,n\\ge1$, let $U\\subseteq\\mathbb C^m\\times\\mathbb C^n$ be open, let\n$f:U\\to\\mathbb C^n$ be holomorphic, and let $(a,b)\\in U$ satisfy $f(a,b)=0$.\nAssume the complex Jacobian with respect to the second block is invertible:\n\n$$\\det\\left(\\frac{\\partial f_j}{\\partial w_k}(a,b)\\right)_{1\\le j,k\\le n}\\ne0.$$\n\nThen there are neighbourhoods $A$ of $a$ and $B$ of $b$, and a unique\nholomorphic map $\\varphi:A\\to B$, such that\n\n$$f(z,\\varphi(z))=0\\qquad(z\\in A),$$\n\nand, after shrinking $A\\times B$ if needed,\n\n$$f(z,w)=0\\quad\\Longleftrightarrow\\quad w=\\varphi(z).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-for-nonautonomous-smooth-odes",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open and let\n$F:D\\to\\mathbb R^n$ be smooth. For every base point $(t_0,x_0)\\in D$ there are\n$h>0$ and an open neighbourhood $W$ of $(t_0,x_0)$ such that each initial pair\n$(s,y)\\in W$ has a unique solution on $[s-h,s+h]$, and the resulting local\nsolution map is smooth in the initial time and initial state.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "source_section": "Statement",
+          "quote": "Let $F(t,x,\\lambda)$ be jointly $C^\\infty$ in $(t,x,\\lambda)$ on an open time-state-parameter\ndomain. Near any base data $(t_0,x_0,\\lambda_0)$ there are a compact time\ninterval $I$ and a neighbourhood $W$ of $(x_0,\\lambda_0)$ such that, for every\n$(y,\\lambda)\\in W$, the solution of\n\n$$x'(t)=F(t,x(t),\\lambda),\\qquad x(t_0)=y,$$\n\nis defined on $I$, and the resulting solution map is smooth in the pair\n$(y,\\lambda)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-the-maximal-solution-domain-is-open",
+          "source_section": "Statement",
+          "quote": "Let $V:U\\to\\mathbb R^n$ be a smooth vector field on an open set $U$, and for\neach $x_0\\in U$ let $x(\\,\\cdot\\,;x_0)$ denote the unique maximal solution of\n$x'=V(x)$ with $x(0)=x_0$. Then the maximal solution domain\n\n$$\\Omega:=\\{(t,x_0)\\in\\mathbb R\\times U:t\\text{ lies in the maximal interval of }x(\\,\\cdot\\,;x_0)\\}$$\n\nis open in $\\mathbb R\\times U$. On $\\Omega$, the evaluation map\n$\\Phi(t,x_0):=x(t;x_0)$ is smooth in the state variable and continuous jointly in\n$(t,x_0)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-a-closed-smooth-manifold-has-the-homotopy-type-of-a-finite-cw-complex",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $M$ be a closed smooth\nmanifold ([[def-smooth-manifold]]). Then $M$ has the homotopy type of a finite\nCW complex ([[def-cw-complex-with-closure-finiteness-and-weak-topology]]).",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a metric space\n([[def-metric-space]]) having a neighbourhood basis of contractible open sets at\nevery point, and let $k$ be a field. Write $k_X$ for its constant sheaf. There\nare natural isomorphisms\n$$H^q(X,k_X)\\cong H^q_{\\operatorname{sing}}(X;k)$$\nin every degree, where the left side is derived cohomology in the category of\nsheaves of $k$-vector spaces (computed with the functorial $k$-linear injective\nresolutions supplied by\n[[lem-ringed-space-module-sheaves-enough-injectives]]; compare\n[[def-sheaf-cohomology-derived-global-sections]]). The same assertion holds on\nevery open subset of $X$. In particular a nonempty contractible space with this\nlocal property has constant-sheaf cohomology $k$ in degree zero and zero\notherwise. This applies to every finite-polyhedral open star and to its\nnonempty intersection with a closed simplex.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+          "source_section": "Statement",
+          "quote": "Assume AC and the actual geometric and derived-incidence suppliers of the Verdier theorem. For analytic algebraic maps on its proved constructible subcategory, the six operations $f^*,Rf_*,Rf_!,f^!,\\otimes_k^L,R\\mathcal Hom$ have their three adjunctions, composition and identity comparisons, ordinary proper and extraordinary proper base change, projection formula, support localization, dualizing transitivity and trace. The comparisons commute with Cartesian pasting, composition of maps, evaluation and trace, giving a coherent pull-push product calculus. For a locally trivial product projection with finite-type smooth fibre $F$, the actual finite product cochain model gives $R\\mathrm{pr}_*\\mathrm{pr}^*B\\simeq B\\otimes_k C^*(F;k)$, with its ordinary unit. Smooth base change for $Rf_*$ holds whenever a supplied factorization $f=p\\circ j$ has $p$ proper and $j$ an open inclusion with the conical local models below; proper maps already satisfy it. Their finite constructible models commute with extension of coefficient fields. Geometric output preservation is the exact geometric supplier, not an additional axiom.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compact-kahler-hodge-decomposition-via-elliptic-harmonic-forms",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a compact Kähler manifold $X$ in the sense of\n[[def-compact-kahler-manifold-and-hodge-polarization-conventions]], every de\nRham class has a unique smooth harmonic representative and\n$$H^k(X;\\mathbb C)=\\bigoplus_{p+q=k}H^{p,q}(X),\\qquad \\overline{H^{p,q}(X)}=H^{q,p}(X).$$\nHere $H^{p,q}(X)$ is precisely the set of classes with a $d$-closed smooth\nrepresentative of type $(p,q)$, so the decomposition is independent of the\nKähler metric. Writing $\\Omega_X^p$ for the sheaf of holomorphic $p$-forms (the\nkernel of $\\bar\\partial$ on the sheaf $\\mathcal A^{p,0}$ of smooth $(p,0)$-forms),\n$H^{p,q}(X)$ is isomorphic to $H^q(X,\\Omega_X^p)$, the sheaf cohomology of\n[[def-sheaf-cohomology-derived-global-sections]]. The Hodge filtration\n$F^a=\\bigoplus_{p\\ge a}H^{p,k-p}$ of $H^k(X;\\mathbb C)$ equals the filtration\ninduced by the holomorphic-degree filtration of the de Rham complex, whose\nspectral sequence has $E_1^{p,q}=H^q(X,\\Omega_X^p)$ and degenerates at $E_1$.\nPullback by holomorphic maps of compact Kähler manifolds and cup product\npreserve Hodge type, so $H^k(X;\\mathbb Q)$ is a functorial rational pure Hodge\nstructure.",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M,E,P$ have exactly the compact, boundaryless, scalar-positive-symbol and formal symmetry hypotheses of [[thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity]], with $\\operatorname{dom}P=H^2(M,E)$. Write $\\mathcal H=\\ker P$.\n\nThen $\\mathcal H$ is finite dimensional and consists of smooth sections, $\\operatorname{ran}P=\\mathcal H^\\perp$ is closed in $L^2$, and\n$$L^2(M,E)=\\mathcal H\\mathbin{\\oplus^\\perp}\\operatorname{ran}P.$$\nLet $\\Pi$ be the orthogonal projection onto $\\mathcal H$. There is a unique linear operator $G:L^2\\to H^2\\cap\\mathcal H^\\perp$ with\n$$PG=I-\\Pi\\quad\\hbox{on }L^2,\\qquad GP=I-\\Pi\\quad\\hbox{on }H^2,\\qquad G\\Pi=\\Pi G=0.$$\nIt is bounded from $H^k$ to $H^{k+2}$ for every integer $k\\ge0$, compact and selfadjoint on $L^2$, and preserves smooth sections. For all such $k$,\n$$H^k=\\mathcal H\\oplus P(H^{k+2}),\\qquad C^\\infty(M,E)=\\mathcal H\\oplus P(C^\\infty(M,E)),$$\nwhere the second summands are the corresponding intersections with $\\mathcal H^\\perp$, and the decompositions are topological. The projection is smoothing: for every integer $r\\ge0$, $\\|\\Pi f\\|_{C^r}\\le C_r\\|f\\|_2$. Consequently $G$ is a two-sided parametrix with finite-rank smoothing remainders. If additionally $(Pu,u)_2\\ge0$ for smooth $u$, then $P$ and $G$ are nonnegative on their respective domains.",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-hodge-riemann-bilinear-relations-for-smooth-projective-varieties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nanalytic suppliers below. Let $X$ be a compact Kähler $n$-fold in the\nconventions of\n[[def-compact-kahler-manifold-and-hodge-polarization-conventions]], with\nKähler form $\\omega$, and let $0\\le k\\le n$. On the primitive space $P^k$ put\n$$Q_k(a,b)=\\epsilon(k)\\int_Xa\\wedge b\\wedge\\omega^{n-k},$$\nwhere $a,b$ are closed smooth representatives of the classes and the integral\nis independent of the representatives. This form is $(-1)^k$-symmetric, pairs\n$P^{p,q}$ only with $P^{q,p}$, and for nonzero $a\\in P^{p,q}$ satisfies\n$$i^{p-q}Q_k(a,\\bar a)=(n-k)!\\,\\|a_{\\mathrm{harm}}\\|_{L^2}^2>0.$$\nIf $[\\omega]=\\ell\\in H^2(X;\\mathbb Q)$, then $Q_k$ is a rational polarization\nof $P^k$, and full $H^k$ is polarized by the orthogonal direct sum form $S_k$\nthat on $L^rP^{k-2r}$ is $(-1)^rQ_k$, equivalently\n$S_k(L^ru,L^rv)=Q_{k-2r}(u,v)$ for $u,v\\in P^{k-2r}$; degrees $k>n$ are\npolarized by transporting the polarization of $H^{2n-k}$ along $L^{k-n}$, with\nTate shift. For every real Kähler class the same positivity and nondegeneracy\nstatements hold, without rationality. In particular this applies to smooth\nclosed complex projective submanifolds of projective space with a hyperplane\npolarization, hence to smooth projective complex varieties through their smooth\nprojective analytifications; more generally it applies to every real Kähler\nclass, including $\\ell+\\epsilon\\eta$ when represented by a positive closed\nform. For any continuous family of Kähler classes the primitive kernels (of\nevery fixed degree $0\\le k\\le n$) vary continuously as subspaces; rational\nprimitive spaces are asserted only at rational classes.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $X,Y$ spaces such that every $H_q(Y;R)$ is a finite free $R$-module. For every $n\\ge0$ the additive singular cohomology cross product gives an isomorphism\n$$\\bigoplus_{p+q=n}H^p(X;R)\\otimes_RH^q(Y;R)\\xrightarrow{\\ \\sim\\ }H^n(X\\times Y;R).$$\nAll indices are nonnegative. The symmetric assertion holds when every $H_p(X;R)$ is finite free instead. No bound on the number of nonzero homology degrees and no finite-rank hypothesis on the singular chain groups is required.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-local-system-of-r-modules-and-its-pullback",
+          "source_section": "Definition",
+          "quote": "Fix a commutative unital ring $R$. A **left $R$-module local system** on a\nspace $X$ is a covariant functor\n$$\\mathcal L:\\Pi_1(X)\\longrightarrow R\\text{-}\\mathbf{Mod},$$\nwhere the source is [[def-fundamental-groupoid-of-a-space]], functor means\n[[def-functor-and-contravariant-functor]], and the target is the category in\n[[prop-modules-and-homomorphisms-form-category-rmod]]. Write\n$\\mathcal L_x$ for its value at $x$ and\n$$T_\\gamma=\\mathcal L([\\gamma]):\\mathcal L_x\\longrightarrow\\mathcal L_y$$\nfor transport along a path $\\gamma:x\\to y$. Every arrow of the source has a\nreversed inverse, so functoriality makes every $T_\\gamma$ an isomorphism, with\n$T_{\\bar\\gamma}=T_\\gamma^{-1}$ and\n$T_{\\alpha*\\beta}=T_\\beta T_\\alpha$.\n\nA **morphism of local systems** $\\eta:\\mathcal L\\to\\mathcal K$ is a natural\ntransformation ([[def-natural-transformation]]): it is a family of\n$R$-linear maps $\\eta_x:\\mathcal L_x\\to\\mathcal K_x$ satisfying\n$$\\eta_yT^\\mathcal L_\\gamma=T^\\mathcal K_\\gamma\\eta_x$$\nfor every path $\\gamma:x\\to y$. Isomorphisms of local systems are natural\nisomorphisms.\n\nA continuous map $f:X\\to Y$ induces a functor\n$\\Pi_1(f):\\Pi_1(X)\\to\\Pi_1(Y)$ by $x\\mapsto f(x)$ and\n$[\\gamma]\\mapsto[f\\gamma]$. Postcomposition preserves constants, reversals,\nand concatenation, so this is well defined. The **pullback local system** is\n$$f^*\\mathcal K=\\mathcal K\\circ\\Pi_1(f),\\qquad (f^*\\mathcal K)_x=\\mathcal K_{f(x)},\\qquad T^{f^*\\mathcal K}_\\gamma=T^\\mathcal K_{f\\gamma}.$$\nPullback of a coefficient morphism is defined componentwise. Thus\n$(gf)^*=f^*g^*$ and $1_X^*$ are literal equalities of functors with these\nconventions.\n\nAll definitions work independently on every path component. The empty space\nhas the unique empty local system. No basepoint, universal cover, common fiber,\nor choice principle is required.\n\nFor later comparison with group rings, if $x$ is fixed and\n$g=[\\alpha]\\in\\pi_1(X,x)$, the base fiber is given the **left monodromy\nconvention**\n$$g\\cdot m:=T_{\\bar\\alpha}(m).$$\nThe reversal is essential: covariance and first-path-first multiplication give\n$T_{\\alpha*\\beta}=T_\\beta T_\\alpha$, so\n$T_{\\overline{\\alpha*\\beta}}=T_{\\bar\\alpha}T_{\\bar\\beta}$, exactly the left\naction law $(gh)m=g(hm)$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Local product structure. The analytification $f^{\\mathrm{an}}$ is a proper holomorphic map, because $f$ is projective by hypothesis and projective morphisms are proper by [F1]; its fibres are closed complex submanifolds, compact by properness. At every point of $X$ the smooth algebraic morphism $f$ admits the presentation of [F2], and the holomorphic implicit function theorem of [F2] exhibits holomorphic charts in which $f^{\\mathrm{an}}$ is the linear projection of a product of polydiscs; consequently each fibre is a compact complex manifold. In particular, for every $s\\in S$ the fibre $f^{-1}(s)$ is compact and, by [F1] applied fibrewise, carries a Kähler structure.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Transport and the cohomology local systems. Choose a smooth horizontal complement to $\\ker df^{\\mathrm{an}}$ on $X^{\\mathrm{an}}$ (locally the product charts of step 1.1 provide one; glue the local choices with a smooth partition of unity on the manifold $X^{\\mathrm{an}}$ [F9]). For a path $\\gamma:[0,1]\\to S$ and a point $x\\in f^{-1}(\\gamma(0))$, the horizontal ODE $\\dot x(t)\\in H_{x(t)}$ with $f(x(t))=\\gamma(t)$ has a unique maximal solution by [F3]; because $f$ is proper, the lifted solution stays in the compact set $f^{-1}(K)$ for a compact neighbourhood $K$ of $\\gamma([0,1])$, so by the openness of the maximal solution domain in [F3] it exists on all of $[0,1]$. The resulting transport map $\\tau_\\gamma:f^{-1}(\\gamma(0))\\to f^{-1}(\\gamma(1))$ is a diffeomorphism, smooth in the initial point by the smooth dependence on initial data in [F3], and an endpoint-fixed smooth homotopy of paths gives a homotopy of terminal diffeomorphisms by the parameter dependence in [F3]. The terminal point maps need not be identical, but their induced maps on cohomology are identical by homotopy invariance. Piecewise smooth representatives and homotopies suffice for the fundamental groupoid: subdividing a path or homotopy into finitely many parameter pieces lying in coordinate charts and using linear interpolation in smaller convex charts gives the usual piecewise smooth representatives without changing the endpoint-fixed homotopy class. Concatenation and reversal give composition and inverses of the cohomology transports. The assignments $x\\mapsto H^m(f^{-1}(x);R)$ for $R=\\mathbb Z,\\mathbb Q$, together with the isomorphisms $\\tau_\\gamma^*$, therefore define functors on the fundamental groupoid of $S$, that is, $R$-module local systems in the sense of [F8]; this is the local system $R^mf^{\\mathrm{an}}_*\\underline R$ of the family.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F8",
+            "F9",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Identification with the sheaves and integral lattices. On each fibre, and on each product chart of step 1.1, the space is a metric space with a neighbourhood basis of contractible open sets, so [F4] identifies singular cohomology with constant-sheaf cohomology there. The proper base change clause of [F5] identifies the sheaf $R^mf_*\\mathbb Q$ with the fibrewise cohomology of the local system of step 2.1; the same identification for $\\mathbb Z$-coefficients gives the local system $R^mf_*\\mathbb Z$. Each fibre is a closed smooth manifold, so its integral cohomology is finitely generated by [F4]; hence the quotient of $H^m(f^{-1}(x);\\mathbb Z)$ by its torsion group is a full finitely generated free lattice in $H^m(f^{-1}(x);\\mathbb Q)$, and the transport isomorphisms of step 2.1 preserve the torsion subgroups and these lattices. Passing to the quotient by torsion therefore produces the full monodromy-stable integral lattice of the variation.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Continuous pure Hodge decomposition. Fix $s\\in S$ and a smooth trivialization $B\\times F\\cong f^{-1}(B)$ near $s$ obtained by transporting the whole compact fibre along radial paths in a sufficiently small convex base chart using step 2.1, with $F$ the fibre over $s$. The restrictions of a smooth family of Kähler metrics — for instance the pullback along the projective embedding of the positive closed forms supplied in [F1] — give a smooth family $\\Delta_t$, $t\\in B$, of formally self-adjoint elliptic Laplacians on the fixed compact manifold $F$, with continuously varying uniformly elliptic coefficients on the fixed manifold; here the smooth family of metrics is obtained from the projective embedding into $S\\times\\mathbb P^N$ by restricting the Fubini-Study form, and the identification of the fibres with $F$ is the product chart. By the elliptic parametrix and Fredholm theory of [F6], the kernel of $\\Delta_{t_0}$ is finite dimensional and the resolvent is bounded from $L^2$ to $H^2$; a fixed contour around $0$ separating the zero spectrum gives, for $t$ near $t_0$, convergent Neumann series for $(\\Delta_t-\\lambda)^{-1}$ and hence a continuously varying finite-rank projection onto the kernel of $\\Delta_t$, compare [F6]. Its rank equals $\\dim\\ker\\Delta_{t_0}$ for $t$ near $t_0$ and the kernel dimension is the constant Betti number of the fixed fibre by [F6], so no nonzero eigenspace can occur inside this contour projection; the projection is smoothing and therefore projects exactly onto the harmonic space; applying the same continuously varying projections to the type projections of the forms yields continuously varying subspaces $H^{p,q}_t$ of the harmonic representatives. Since the decomposition is independent of the metric and functorial by [F6], the resulting family of decompositions of $H^m(f^{-1}(t);\\mathbb C)$ is a continuous pure Hodge decomposition of weight $m$ of the local system $R^mf_*\\mathbb Q$ in the sense of the definition.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 2.1",
+            "construct",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Flat Lefschetz operators and polarization. Let $L$ be a relatively ample line bundle on $X$. Its first Chern class lies in $H^2(X;\\mathbb Q)$. Apply the positive Chern-metric construction of [F1] to the ample restriction on each compact fibre, extend that metric to a neighbourhood using the smooth trivialization of step 2.1, and shrink the base chart so vertical positivity persists by compactness. Relative to a fixed smooth reference metric on $L$, patch the logarithms of the local metric ratios with a smooth partition of unity pulled back from the base. On a fibre these base weights are constant, so the resulting Chern curvature is their positive convex combination; it is globally closed, represents $c_1(L)$ and restricts on every fibre to a Kähler form with rational class. No positivity in base directions is asserted. Then in the product chart the restrictions to the fibres induce one and the same class on the fixed model $F$ under the identifications $\\tau_\\gamma$ of step 2.1, because those identifications are induced by the homotopic family of inclusions of the fibres into $X$ and cohomology is homotopy invariant; explicitly, if $\\psi_t:F\\to f^{-1}(t)$ are the product-chart identifications, then the maps $(t,x)\\mapsto\\psi_t(x)$ exhibit the composites $i_t\\circ\\psi_t$ as homotopic to $i_s\\circ\\psi_s$, so $\\psi_t^*(c_1(L)|_{f^{-1}(t)})=\\psi_s^*(c_1(L)|_{f^{-1}(s)})$. Cup product and integration are compatible with the transport isomorphisms, so the map $a\\mapsto c_1(L)\\smile a$ is a flat Lefschetz operator, and the polarized Lefschetz decomposition supplied by [F7] is flat. The forms $Q_k$ of [F7] applied to the primitive pieces give a flat rational bilinear form, since their defining integrals involve only cup products, the flat powers of the Kähler class just described, and the constant sign $\\epsilon(k)$; the positivity clause of [F7] holds on every fibre, and the full polarization is the sign-adjusted orthogonal sum along the flat Lefschetz decomposition, hence also flat, rational and positive. This supplies the flat rational polarization required in the definition.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "step 2.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Geometric closures and full lattices. All assertions are made over a fixed open piece of the base, and may be pulled back along a base change to any smooth $S'$ by change of the parameter. Products: for smooth projective $f_i:X_i\\to S$, $i=1,2$, the product family $X_1\\times_SX_2\\to S$ is smooth projective, and the cohomological Künneth isomorphism of [F8] identifies $R^{m}(f_1\\times_Sf_2)_*\\mathbb Q$ with the direct sum of tensor products $R^pf_{1*}\\mathbb Q\\otimes R^{q}f_{2*}\\mathbb Q$, $p+q=m$, compatible with Hodge type because pullback and wedge of $(p,q)$ forms preserve bidegree by [F6]; this rational comparison uses [F8] over the field $\\mathbb Q$, where the finite-dimensional homology groups are free. The ambient product-family cohomology has a full stable integral lattice by step 3.1; intersecting it with each rational tensor summand gives a full monodromy-stable lattice in that summand, since a rational basis can be multiplied by common denominators into the ambient lattice. Thus products and their full lattices are geometric without assuming that the integral cohomology of every smooth projective fibre is torsion-free. Direct sums are realized by disjoint unions of families over $S$. The degree-two cohomology of the constant family $\\mathbb P^1\\times S\\to S$ is $\\mathbb Q(-1)$, of type $(1,1)$, and its rational Hodge dual is $\\mathbb Q(1)$, of type $(-1,-1)$, by the dual and Tate conventions in the definition. For a realization $H|_U\\subseteq\\bigoplus_i R^{m_i}(f_i)_*\\mathbb Q(r_i)$, twisting by any integer $r$ gives the realization inside $\\bigoplus_i R^{m_i}(f_i)_*\\mathbb Q(r_i+r)$, which is allowed directly by that definition; the same rational idempotent remains flat and preserves the shifted Hodge types. Thus all integer Tate twists have the stated geometric realizations, without identifying a positive twist with untwisted degree-two cohomology. For a pure variation of weight $w$, its flat rational nondegenerate polarization of step 4.1 gives $H^*\\cong H(w)$ as Hodge variations, so the just-proved Tate realization also realizes the dual; the dual of a full stable lattice is again full and stable. Finite sums of pure weights are handled componentwise. Exterior powers are Hodge direct summands of tensor powers cut out by the rational alternating idempotent, which is flat and a Hodge morphism on every fibre; more generally a prescribed flat rational idempotent that is a Hodge morphism on every fibre cuts out a geometric Hodge direct summand of a realized variation. Intersecting such a rational direct summand with the full ambient lattice of step 3.1 gives its full monodromy-stable lattice: a rational basis of the summand can be cleared to integral vectors of the ambient lattice, and flatness of the summand makes the intersection monodromy-stable. Finally, for a morphism $g:X'\\to X$ of smooth projective complex varieties, $g^*:H^m(X;\\mathbb Q)\\to H^m(X';\\mathbb Q)$ preserves Hodge types by the pullback functoriality clause of [F6], so rational pullbacks between smooth projective fibres are morphisms of pure Hodge structures. This proves every closure and lattice clause of the statement concerning a single smooth projective family; the Gauss-Manin family itself is geometric and polarizable by steps 2.1-5.1.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "step 3.1",
+            "step 4.1",
+            "construct",
+            "algebra",
+            "step 2.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Conclusion. Steps 2.1 and 3.1 produce the finite-rank rational and integral local systems with full monodromy-stable lattices, step 3.2 the continuous pure Hodge decomposition, step 4.1 the flat Lefschetz operators and the flat rational polarization, and step 5.1 the remaining closure, lattice and pullback clauses. Hence $R^mf_*\\mathbb Q$ is a geometric polarizable rational Hodge variation in the sense of the definition, with the stated additional properties. No analytic-variation theorem or Gauss-Manin semisimplicity theorem is imported; the argument is the fibre-bundle, harmonic and Künneth construction of the family categories.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "step 5.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement and step 6.1 quantify over every permitted smooth projective family; step 3.1 uses its fibre cohomology including vanishing groups."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 includes m=0 and zero Hodge summands in the fibrewise decomposition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 4.1 apply to rank-one Hodge pieces with the stated polarization and Tate conventions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 5.1 treat the fibrewise decomposition and summand/tensor/dual closures on the supplied realization."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 provides whole-path transport and homotopy comparisons; step 3.2 uses full-fibre radial transport."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is assumed and used in step 2.1 (partition of unity) and through the analytic suppliers of steps 3.1-3.2 and 5.1; the horizontal ODE, Künneth and lattice arguments are otherwise choice-free (statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a list of existence and closure assertions, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction is asserted.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/template_case_13",
+            "reason": "The Gauss-Manin statement constructs a local system, integral lattice and polarization from a smooth projective family; it does not claim that every polarizable rational Hodge variation arises from such a family.",
+            "item_sha256": "0ac344077ce086a9b8ade53784a6e954f09490af8e7165e5d139d469560ac655",
+            "row_sha256": "fc227a75bf7c330544cf22648e3c8ebc9699b45da7df7a01c0debf389cec0a41"
+          }
+        }
+      ]
+    },
+    "thm-fixed-part-for-geometric-polarizable-variations-on-smooth-algebraic-bases": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). For a smooth projective morphism\n$f:X\\to S$ of smooth quasiprojective complex varieties, $R^mf_*\\mathbb Q$ is a\nfinite-rank local system ([[def-local-system-of-r-modules-and-its-pullback]]),\nwith full monodromy-stable integral lattice obtained from\n$R^mf_*\\mathbb Z$ modulo torsion, and with a continuous pure Hodge\ndecomposition of weight $m$ ([[def-geometric-polarizable-hodge-variation]]). A\nrelatively ample line bundle supplies flat Lefschetz operators and a flat\nrational polarization of this variation. Products, sums, Tate twists, exterior\npowers and Hodge direct summands have the corresponding geometric realizations\nand full integral lattices. Pullbacks of algebraic maps between smooth\nprojective fibers preserve rational Hodge structures.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-hard-lefschetz-splits-a-bounded-t-structure-complex",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal T$ be a triangulated category with a bounded t-structure, with truncation functors and t-cohomology as in [[def-truncation-functors-and-cohomology-of-a-t-structure]] and [[lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude]]. Let $K\\in\\mathcal T$ and let $L:K\\to K[2]$ be a morphism such that for every integer $j\\ge0$ the map\n$$H^{-j}_t(L^j):H^{-j}_t(K)\\longrightarrow H^{-j}_t(K[2j])\\cong H^j_t(K)$$\nis an isomorphism, where $L^j:=L[2j-2]\\circ\\cdots\\circ L[2]\\circ L$ is the $j$-fold iterate (so $L^0=1_K$) and the identification is the shift isomorphism $H^j_t(K)\\cong H^{-j}_t(K[2j])$ of that lemma. Then there is an isomorphism\n$$K\\cong\\bigoplus_j H^j_t(K)[-j]$$\nin $\\mathcal T$; the sum is finite because the t-structure is bounded. The isomorphism is not asserted to be canonical, and no compatibility with primitive lifts is claimed: this is the abstract splitting criterion, not the stronger primitive-compatible decomposition used in the Hodge theory of projective maps. The degenerate case in which $H^{-n}_t(K)$ and $H^n_t(K)$ are both zero (they vanish together because $H^{-n}_t(L^n)$ is an isomorphism) is covered by the same formulas, all of which are then the zero maps between zero objects.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-kahler-identities-give-lefschetz-sl-two-and-hard-lefschetz",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]), inherited from the\nanalytic suppliers below. Let $X$ be a compact Kähler $n$-fold with Kähler form\n$\\omega$, in the conventions of\n[[def-compact-kahler-manifold-and-hodge-polarization-conventions]], and put\n$L=[\\omega]\\smile(-)$ on cohomology. Then the following hold.\n\n- $L^{n-k}:H^k(X;\\mathbb R)\\to H^{2n-k}(X;\\mathbb R)$ is an isomorphism for\n  $0\\le k\\le n$.\n- Harmonic representatives transport $(L,\\Lambda,H)$ to an $\\mathfrak{sl}_2$\n  action: $L$ is cup product with $[\\omega]$, $\\Lambda$ on cohomology means\n  applying $\\Lambda$ to the harmonic representative and not to an arbitrary\n  closed form, $H$ acts by $\\deg-n$, and\n  $[L,\\Lambda]=H$, $[H,L]=2L$, $[H,\\Lambda]=-2\\Lambda$ hold on cohomology.\n- Primitive cohomology is\n  $P^k=\\{a\\in H^k(X;\\mathbb R):\\text{the harmonic representative of }a\\text{ lies in }\\ker\\Lambda\\}$,\n  and for $0\\le k\\le n$ one has\n  $P^k=\\ker\\bigl(L^{n-k+1}:H^k(X;\\mathbb R)\\to H^{2n-k+2}(X;\\mathbb R)\\bigr)$;\n  for every $k$,\n  $$H^k(X;\\mathbb R)=\\bigoplus_{r\\ge\\max(0,k-n)}L^rP^{k-2r},$$\n  and a class of type $(p,q)$ has primitive components of type $(p-r,q-r)$.\n- If $[\\omega]$ is the real image of a rational class\n  $\\ell\\in H^2(X;\\mathbb Q)$, all these decompositions and $L$-isomorphisms are\n  rational, and they remain isomorphisms after extension to every\n  characteristic-zero field.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithmic-complex-constructs-smooth-open-mixed-hodge-structures",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $U$ be smooth quasiprojective over $\\mathbb C$, and choose an SNC smooth projective compactification $j:U\\hookrightarrow X$, boundary $D$. The logarithmic de Rham complex with Hodge filtration by degree and pole-count weight filtration constructs a functorial rational mixed Hodge structure on $H^n(U,\\mathbb Q)$, independent of the compactification. Its weights are at least $n$, and\n$$W_nH^n(U,\\mathbb Q)=\\operatorname{im}(H^n(X,\\mathbb Q)\\longrightarrow H^n(U,\\mathbb Q)).$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-quasiprojective-varieties-admit-snc-projective-compactifications",
+          "source_section": "Statement",
+          "quote": "Assume AC. Every smooth quasiprojective complex variety $U$ admits a smooth projective compactification $j:U\\hookrightarrow X$ with reduced boundary a simple normal crossings divisor $D$. Given finitely many such compactifications, there is another dominating all of them and restricting to the identity on $U$. A morphism of smooth quasiprojective varieties extends to a morphism of such compactifications after modifying the source compactification outside its open variety.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-morphisms-of-mixed-hodge-structures-are-strict",
+          "source_section": "Statement",
+          "quote": "Every morphism $f\\colon H\\to K$ of rational mixed Hodge structures is strict for\n$W$ and for $F$:\n$$f(W_nH)=f(H)\\cap W_nK,\\qquad f(F^pH_{\\mathbb C})=f(H_{\\mathbb C})\\cap F^pK_{\\mathbb C}$$\nfor all $n,p$. Its kernel, image and cokernel, with the induced or quotient\nfiltrations, are mixed Hodge structures; the functor $\\operatorname{Gr}^W_n$ is\nexact; and a morphism from a structure of weights at least $n$ (that is\n$W_{n-1}H=0$) to a structure of weights at most $n$ (that is $W_nK=K$) has\npure image of weight $n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-algebraic-open-inclusion-surjects-on-fundamental-groups",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). If $U$ is a nonempty\nZariski open subset of a connected smooth complex algebraic variety $S$, then\n$U$ is path connected and $\\pi_1(U,s)\\to\\pi_1(S,s)$ is surjective for every\n$s\\in U$ ([[def-fundamental-groupoid-of-a-space]]).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+          "source_section": "Statement",
+          "quote": "Assume AC and the actual geometric and derived-incidence suppliers of the Verdier theorem. For analytic algebraic maps on its proved constructible subcategory, the six operations $f^*,Rf_*,Rf_!,f^!,\\otimes_k^L,R\\mathcal Hom$ have their three adjunctions, composition and identity comparisons, ordinary proper and extraordinary proper base change, projection formula, support localization, dualizing transitivity and trace. The comparisons commute with Cartesian pasting, composition of maps, evaluation and trace, giving a coherent pull-push product calculus. For a locally trivial product projection with finite-type smooth fibre $F$, the actual finite product cochain model gives $R\\mathrm{pr}_*\\mathrm{pr}^*B\\simeq B\\otimes_k C^*(F;k)$, with its ordinary unit. Smooth base change for $Rf_*$ holds whenever a supplied factorization $f=p\\circ j$ has $p$ proper and $j$ an open inclusion with the conical local models below; proper maps already satisfy it. Their finite constructible models commute with extension of coefficient fields. Geometric output preservation is the exact geometric supplier, not an additional axiom.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Leray edge map in the family case. Let $f:X\\to S$ be smooth projective and put $H=R^mf_*\\mathbb Q$. By [F3] choose an SNC smooth projective compactification $\\overline X$ of $X$. A relatively ample line bundle exists because $f$ is projective, and by [F2] its class acts on the ordinary bounded t-structure by centered hard-Lefschetz isomorphisms, so [F2] splits $Rf_*\\mathbb Q\\cong\\bigoplus_jR^jf_*\\mathbb Q[-j]$ in the constructible derived category. Under the Leray identification $H^m(X;\\mathbb Q)\\cong H^m(S,Rf_*\\mathbb Q)$ supplied by [F6], this decomposition expresses $H^m(X;\\mathbb Q)$ as the direct sum of the groups $H^{m-j}(S,R^jf_*\\mathbb Q)$; the edge map $H^m(X;\\mathbb Q)\\to H^0(S,R^mf_*\\mathbb Q)$ is the projection onto the $j=m$ summand and is therefore surjective. The stalk of $R^mf_*\\mathbb Q$ at $s$ is $H^m(X_s;\\mathbb Q)$ by proper base change [F6], and evaluation at $s$ from the global flat sections $H^0(S,R^mf_*\\mathbb Q)$ is injective because $S$ is connected; its image is exactly the monodromy-invariant subspace $H^m(X_s;\\mathbb Q)^{\\pi_1(S,s)}$. Consequently the composite $H^m(X;\\mathbb Q)\\to H^m(X_s;\\mathbb Q)$ has image the invariant subspace.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Weights and strictness identify the invariant subspace. The space $H^m(X,\\mathbb Q)$ carries the mixed Hodge structure of [F3], whose weights are at least $m$; the target $H^m(X_s,\\mathbb Q)$ is pure of weight $m$, because $X_s$ is a smooth projective variety and the restriction $H^m(X,\\mathbb Q)\\to H^m(X_s,\\mathbb Q)$ is a morphism of mixed Hodge structures by [F6] and [F1]. Strictness [F4] applied to this morphism, whose target has $W_{m-1}=0$ and $W_m=H$, gives that the image of $H^m(X,\\mathbb Q)$ equals the image of its minimal weight part $W_mH^m(X,\\mathbb Q)$; by [F3] that minimal weight part is the image of $H^m(\\overline X,\\mathbb Q)\\to H^m(X,\\mathbb Q)$. Combining with step 1.1, the image of $H^m(\\overline X,\\mathbb Q)\\to H^m(X_s,\\mathbb Q)$ equals the image of $H^m(X,\\mathbb Q)\\to H^m(X_s,\\mathbb Q)$, which is the monodromy-invariant subspace. Since $H^m(\\overline X,\\mathbb Q)$ and $H^m(X_s,\\mathbb Q)$ are pure of weight $m$ and the restriction is a Hodge morphism by [F1], its image is a Hodge substructure; this proves that the invariant subspace is a Hodge substructure in the family case.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1",
+            "algebra",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Base-point independence and flatness of Hodge components in the family case. The restriction $H^m(\\overline X,\\mathbb Q)\\to H^m(X_s,\\mathbb Q)$ factors through the canonical map $E:H^m(\\overline X,\\mathbb Q)\\to H^0(S,R^mf_*\\mathbb Q)$ followed by evaluation at $s$, and $E$ is independent of $s$. Its kernel $K=\\ker E$ is therefore one fixed rational subspace, and evaluation identifies $H^0(S,R^mf_*\\mathbb Q)$ with the quotient $H^m(\\overline X,\\mathbb Q)/K$, carrying the quotient Hodge structure, at every base point simultaneously; this is the asserted one constant Hodge structure on the invariant spaces. Now let $v$ be a global flat section of $H$. Since the invariant space at $s$ is a Hodge substructure by step 2.1, the Hodge components of the value $v_s$ lie again in the invariant space, hence are values of global flat sections $w_1,\\dots,w_r$; their sum $\\sum_iw_i$ is a global flat section with the same value at $s$ as $v$, so it equals $v$ by connectedness. Since the Hodge decomposition of the invariant fibre is the fixed quotient structure of step 2.1, the section $w_i$ is the Hodge component of $v$ of the corresponding type at every fibre. This proves, in the family case, both that the invariant subspace is a Hodge substructure and that the Hodge components of global flat sections are global flat sections.",
+          "step": "3.1",
+          "inputs": [
+            "F6",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Reduction of a general geometric variation to the realization open. Let $U\\subseteq S$ be a nonempty Zariski open on which $H$ has an algebraic realization: $H|_U$ is the image of a flat rational idempotent $p$ that is a Hodge morphism at every point, inside $A=\\bigoplus_iR^{m_i}(f_i)_*\\mathbb Q(r_i)$ for smooth projective $f_i:X_i\\to U$; this is the definition of a geometric variation, and each summand is a finite direct sum of weight pieces. By steps 1.1-3.1 applied to each $f_i$ over $U$ (note $U$ is again connected smooth quasiprojective), the statement holds for every $R^{m_i}(f_i)_*\\mathbb Q(r_i)$: its invariant part is a constant Hodge substructure and the Hodge components of its global flat sections are flat. Finite direct sums and Tate twists preserve both assertions, because monodromy acts componentwise and the twist changes only the weight; hence the statement holds for $A|_U$. Because $p$ is flat and a Hodge morphism, it commutes with monodromy and with the Hodge decompositions, so the invariant space of $H|_U$ is the image under $p$ of the invariant space of $A|_U$, and it inherits the constant Hodge structure; the Hodge components of a flat section of $H|_U$ are the images under $p$ of the components of a lift and are therefore flat. This proves the assertions for $H|_U$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Extension from $U$ to $S$. The inclusion $U\\hookrightarrow S$ induces a surjection $\\pi_1(U,s)\\to\\pi_1(S,s)$ by [F5]. Therefore a vector of $H_s$ fixed by $\\pi_1(U,s)$ is fixed by $\\pi_1(S,s)$, so restriction of flat sections $H^0(S,H)\\to H^0(U,H|_U)$ is an isomorphism: it is injective because $S$ is connected, and surjective by the preceding sentence. Given a global flat section $v$ of $H$, its restriction to $U$ has, by step 4.1, Hodge components that are flat sections of $H|_U$; each extends uniquely to a global flat section $w_i$ of $H$, and $v-\\sum_iw_i$ is a global flat section vanishing on the dense open $U$, hence vanishes by continuity. For each type $(a,b)$, the corresponding $w_i$ takes its values in the continuous Hodge subbundle of that type on $U$. Membership in this subbundle is a closed condition: in a local trivialization its continuously varying projection has kernel describing the complement, and the difference between $w_i$ and its type projection is continuous. This difference vanishes on the dense open $U$, hence on all of $S$. Thus $w_i$ has the prescribed type everywhere; uniqueness of the fiber decomposition makes these global flat sections exactly the Hodge components of $v$. In particular the invariant space $H_s^{\\pi_1(S,s)}$, the values of global flat sections, is stable under all Hodge type projections and is a Hodge substructure with the induced pure decomposition.",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Independence of the base point for a general variation. Evaluation identifies the rational space $E=H^0(S,H)$ with each invariant fiber $H_s^{\\pi_1(S,s)}$. Transport along a path identifies these invariant fibers through this one space $E$, since a global flat section is transported to its own value. Step 5.1 proves that the Hodge components of every global flat section are again global flat sections. On the realization open $U$, steps 3.1 and 4.1 identify these type decompositions with one fixed quotient Hodge structure on $E$, and the closed-membership argument of step 5.1 extends those same types to every point of $S$. Consequently evaluation gives one Hodge structure on $E$ independent of $s$, and transport restricted to the invariant fibers preserves that structure. This assertion concerns the invariant constant subsystem; it does not assume that transport on the full variation preserves the moving Hodge decomposition. Finite sums of pure weights are handled one weight at a time, proving every clause of the statement.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty and zero variations are covered: step 1.1's family case with $X=\\varnothing$ has zero cohomology, and steps 4.1-5.1 handle the zero direct sum uniformly (steps 1.1, 4.1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 6.1 identify the invariant image/subspace and evaluation for every rank, including zero; weight zero alone is not labelled trivial monodromy."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The arguments of steps 3.1-5.1 are uniform in the rank; for rank one the invariant space is either zero or the whole fiber and the Hodge-substructure clause is immediate (statement, step 3.1)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The realization open may be a proper dense open and the realized object a proper Hodge direct summand; steps 4.1 and 5.1 handle exactly this, extending flat sections across the complement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The analytic punctured-disc endpoint is excluded by the realization hypothesis (statement), and the extension from the dense open $U$ uses density and continuity in step 5.1, not an analytic limiting argument."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used through the suppliers of steps 1.1-2.1 and 5.1 ([F1]-[F6]); the strictness, weight and quotient arguments are choice-free (statement, step 1.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 establish that the Hodge components of invariant global flat sections are flat."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 identifies invariant fibres with the same rational space E and its constant Hodge decomposition."
+        }
+      ]
+    },
+    "thm-smooth-projective-gauss-manin-local-systems-are-semisimple": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fixed-part-for-geometric-polarizable-variations-on-smooth-algebraic-bases",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). Let $H$ be a geometric polarizable rational Hodge variation ([[def-geometric-polarizable-hodge-variation]]) on a connected smooth quasiprojective complex variety $S$. For each base point $s$, the monodromy-invariant space $H_s^{\\pi_1(S,s)}$ ([[def-local-system-of-r-modules-and-its-pullback]]) is a Hodge substructure of $H_s$ ([[def-rational-mixed-hodge-structure]]), and parallel t",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-regular-trace-kernel-descends-the-complex-socle",
+          "source_section": "Statement",
+          "quote": "Let $A\\subseteq\\operatorname{End}_{\\mathbb Q}(V)$ be a finite-dimensional rational algebra. The socle ([[def-socle-of-a-module]]) of the $A_{\\mathbb C}$-module $V_{\\mathbb C}$ is defined over $\\mathbb Q$: it is $W\\otimes\\mathbb C$ for a rational $A$-submodule $W\\subseteq V$. If $V\\ne0$, then $W\\ne0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-socle-of-a-module",
+          "source_section": "Definition",
+          "quote": "For a left $R$-module $M$, the **socle** is $$\\operatorname{Soc}(M):=\\sum\\{S\\le M:S\\text{ is simple}\\}.$$ Concretely it is the submodule generated by the union of all simple submodules. If there are none, the sum is $0$, so the definition is always meaningful.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations",
+          "source_section": "Statement",
+          "quote": "Assume AC ([[def-axiom-of-choice]]). For a smooth projective morphism $f:X\\to S$ of smooth quasiprojective complex varieties, $R^mf_*\\mathbb Q$ is a finite-rank local system ([[def-local-system-of-r-modules-and-its-pullback]]), with full monodromy-stable integral lattice obtained from $R^mf_*\\mathbb Z$ modulo torsion, and with a continuous pure Hodge decomposition of weight $m$ ([[def-geometric-polarizable-hodge-vari",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-length-semisimple-module-characterizations",
+          "source_section": "Statement",
+          "quote": "For a finite-length module, the direct-sum, sum-of-simples, and complement characterizations of semisimplicity are equivalent without any choice principle. See [[thm-equivalent-characterizations-of-semisimple-modules]].",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-stiefel-space-grassmannian-and-tautological-bundle",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F=\\mathbb R$ or $\\mathbb C$, and let $0\\leq n\\leq N$. The **Stiefel space** $$V_n(\\mathbb F^N)=\\{(v_1,\\ldots,v_n):\\langle v_i,v_j\\rangle=\\delta_{ij}\\}$$ has the subspace topology from $(\\mathbb F^N)^n$. The group $K_n=\\operatorname O(n)$ in the real case and $K_n=\\operatorname U(n)$ in the complex case acts freely on the right by change of orthonormal frame. The **Grassmannian** $\\operatorname{Gr}_n(\\mat",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-heine-borel-in-the-product-topology",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ ([[lem-metrics-on-rn]]) carrying the product topology of $n$ copies of the usual topology of $\\mathbb{R}$ ([[def-product-topology]]), and let $d_2$ be the Euclidean metric. Then: 1. The product topology on $\\mathbb{R}^n$ **is** the metric topology of $d_2$ ([[def-metric-topology]]), so $\\mathbb{R}^n$ as a product and ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-continuous-image-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let $f : X \\to Y$ be continuous ([[def-metric-continuity]]). Then: 1. If $(X,d_X)$ is compact ([[def-metric-compactness]]), the image $f[X] \\subseteq Y$ is a compact subset of $Y$. 2. More generally, if $K \\subseteq X$ is a compact subset of $X$, then $f[K]$ is a compact subset of $Y$. No choice principle is used.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity",
+          "source_section": "Statement",
+          "quote": "Let $S$ be connected and let $\\mathcal V_{\\mathbb Q}$ be a finite-rank rational local system ([[def-local-system-of-r-modules-and-its-pullback]]). If $\\mathcal V_{\\mathbb Q}\\otimes\\mathbb C$ is semisimple, then $\\mathcal V_{\\mathbb Q}\\otimes k$ is semisimple for every characteristic-zero field $k$ ([[def-semisimple-module]]). In particular this applies to rational Gauss-Manin local systems after complex geometric sem",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Rational descent of the socle and its lattice. Let $H$ be a nonzero pure geometric object of rank $r$ over the connected base $S$, and let $W_{\\mathbb C}$ be the socle of the complex monodromy module $V_{s,\\mathbb C}$, a nonzero finite-dimensional complex module by [F2]. By [F2] there is a rational flat subspace $W_{\\mathbb Q}\\subseteq V_s$ with $W_{\\mathbb C}=W_{\\mathbb Q}\\otimes\\mathbb C$; since it is monodromy-invariant it is the fibre at $s$ of a local subsystem of $H$, which we again call $W$. Let $H_{\\mathbb Z}$ be the full monodromy-stable integral lattice of [F3] and put $W_{\\mathbb Z}=W_{\\mathbb Q}\\cap H_{\\mathbb Z}$; a rational basis of $W_{\\mathbb Q}$ becomes integral after clearing denominators, so $W_{\\mathbb Z}$ is a full lattice in $W_{\\mathbb Q}$, and the monodromy preserves it and acts by invertible integral matrices. On the determinant line $\\det W=\\bigwedge^{e}W$, $e=\\dim_{\\mathbb Q}W_{\\mathbb Q}$, the monodromy therefore acts by $\\pm1$, so $(\\det W)^{\\otimes2}$ is a constant rank-one local subsystem of the geometric tensor object $\\bigwedge^eH\\otimes\\bigwedge^eH$ of [F3], generated by a global horizontal section. [F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 The determinant line of a simple summand and the torus images. Write $W_{\\mathbb C}=\\bigoplus_{i=1}^{m}S_i$ as a direct sum of simple submodules, possible because the socle is a sum of simples and the module has finite length ([F4]). Fix one simple summand $T=S_1$ of dimension $d$ and let $T'=\\bigoplus_{i\\ge2}S_i$, a flat complement with $\\dim T'=e-d$. The exterior algebra gives a canonical identification $\\det W\\cong\\bigwedge^dT\\otimes\\bigwedge^{e-d}T'$, so $V:=\\bigwedge^dT\\otimes\\bigwedge^{e-d}T'$ is a rank-one flat complex subsystem of the geometric tensor object $A:=\\bigwedge^dH_{\\mathbb C}\\otimes\\bigwedge^{e-d}H_{\\mathbb C}$, and $V^{\\otimes2}=(\\det W)^{\\otimes2}$ is constant by step 1.1; the fixed part of $A$ is a constant family of Hodge substructures by [F1]. For every $t\\in\\mathbb C^\\times$ the line $tV=(t\\bigwedge^dT)\\otimes(t\\bigwedge^{e-d}T')$ has square $(tV)^{\\otimes2}=t(V^{\\otimes2})$, a line inside the fixed part of $A$, hence a flat line: the torus acts on the fixed part, which is constant and consists of Hodge substructures, and every line of a constant subsystem is flat. Over a simply connected open $U$ on which the ambient tensor object is trivialized by a flat frame, let $\\sigma$ be a nowhere zero local generator of $tV|_U$ and let $h$ be a horizontal generator of the flat line $(tV)^{\\otimes2}|_U$; then $\\sigma^{\\otimes2}=g\\cdot h$ for a nowhere zero smooth function $g$, so the projective class of $\\sigma^{\\otimes2}$ is the constant class of $h$. In the flat frame the coefficients of $\\sigma^{\\otimes2}$ are the quadratic monomials in the coefficients of $\\sigma$, and this squaring map on projective classes is injective, as the Veronese embedding of a projective space is injective; hence the projective class of $\\sigma$ is constant, $\\sigma$ may be rescaled to a horizontal generator, and $tV$ is flat. Now a nonzero decomposable tensor $p\\otimes q$, with $p$ a generator of $\\bigwedge^d(tT)$ and $q$ a generator of $\\bigwedge^{e-d}(tT')$, determines each factor line: its image under the canonical identification is the line spanned by $p$, and its kernel the hyperplane annihilating the line spanned by $q$, so a horizontal decomposable generator of the flat line $tV$ makes both factors locally constant. Therefore $\\bigwedge^d(tT)$ and $\\bigwedge^{e-d}(tT')$ are flat for every $t$. Finally the Plücker line of a subspace determines the subspace by $tT=\\{v:v\\wedge\\bigwedge^d(tT)=0\\}$, an identity that commutes with the transport of the tensor object, so $tT$ is a flat subspace of $H_{\\mathbb C}$ for every $t\\in\\mathbb C^\\times$. [F1, F3, F4, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "3.1 Openness of irreducibility and torus-stability of the socle. For $t$ near $1$ the flat subspace $tT$ is simple: were there $t_n\\to1$ with $t_nT$ reducible, there would be, for each $n$, a proper nonzero flat subspace $U_n\\subset t_nT$ of some fixed dimension $\\varrho$, $1\\le\\varrho<d$; the invariance condition under the finitely many monodromy operators is closed in the Grassmannian, and the Grassmannian of $\\varrho$-planes in a fixed finite-dimensional complex space is compact by [F5], so a subsequence of the $U_n$ converges to a $\\varrho$-plane $U\\subseteq T$ that is again flat, contradicting simplicity of $T$. Hence, for $t$ in a neighbourhood of $1$, each $tS_i$ is a simple flat subspace of $H_{\\mathbb C}$, and every simple flat subspace is contained in the socle $W_{\\mathbb C}$ by [F2]; summing over the finitely many $S_i$ gives $tW\\subseteq W$, hence $tW=W$ by dimension. Thus the stabilizer of $W$ in $\\mathbb C^\\times$ contains a neighbourhood of the identity; a subgroup of a topological group with nonempty interior is open, and the connected group $\\mathbb C^\\times$ has no proper nonempty open subgroup, so $tW=W$ for every $t\\in\\mathbb C^\\times$. Consequently $W_s$ is stable under the Hodge torus at every point $s$, so $W_{\\mathbb Q}$ is a Hodge substructure of $H$ at every point; since it is already flat, it is a Hodge subvariation. [F2, F5, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "4.1 Polarization splitting and induction. Let $Q$ be a polarization of the pure object $H$. Its restriction to the Hodge subvariation $W$ is nondegenerate: if $v\\in W_s$ were a nonzero radical vector, then with the Weil operator $C$ of the Hodge structure the vector $C\\bar v$ lies in $W_{s,\\mathbb C}$ because $W_s$ is a Hodge substructure, so the positivity of the Weil-operator Hermitian form $h(v,v)=\\pm Q(v,C\\bar v)$ would give the contradiction $0=Q(v,C\\bar v)\\ne0$. Hence the $Q$-orthogonal complement $W^\\perp$ is a flat Hodge subvariation and $H=W\\oplus W^\\perp$; the orthogonal projection onto $W$ is a flat rational idempotent that is a Hodge morphism, so $W^\\perp$ is a geometric direct summand of $H$ by [F3], of smaller rank unless $W=H$. The submodule $W_{\\mathbb C}$ is a direct sum of simples by construction, and by induction over the rank the complex monodromy module of $W^\\perp$ is semisimple; a direct sum of semisimple modules is semisimple, so the complex monodromy module of $H$ is semisimple. A non-pure object is a finite direct sum of pure weight pieces, handled one weight at a time, and the rank-zero case is the empty direct sum. [F3, F4, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "5.1 Coefficient fields and the Gauss-Manin case. Complex semisimplicity of the monodromy module of $H$ means exactly that the complex local system $H\\otimes\\mathbb C$ is semisimple in the sense of [F4]. By [F6] the rational local system $H$ is then semisimple over $\\mathbb Q$ and over every characteristic-zero field, with no embedding of that field into $\\mathbb C$ used. For a smooth projective $f:X\\to S$, the local systems $R^mf_*\\mathbb Q$ are geometric and polarizable by [F3], so step 4.1 and [F6] apply to give their semisimplicity over $\\mathbb Q$ and over every characteristic-zero field. This proves both asserted clauses; the algebraic realization and the integral lattice were used exactly in steps 1.1 and 2.1, and no statement is made about an arbitrary polarized analytic variation on a punctured disk. [F1, F3, F6, step 4.1, algebra] ∎",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "1.1",
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero variation is semisimple as the empty direct sum, and step 4.1 has the rank-zero base case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 assumes a nonzero pure object; the zero and rank-zero cases are handled separately in step 4.1, where the zero module is semisimple by definition (step 4.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Rank one: the socle is the whole fiber and step 2.1 applies with $e=d=1$ and $T'=0$, the empty exterior power being the constant line; the splitting of step 4.1 is then trivial."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The complex monodromy module need not be semisimple initially and the socle may be a proper subspace; steps 1.1-3.1 prove the socle is a Hodge substructure and step 4.1 splits it off. A non-pure object is handled weight by weight."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "No punctured-disc endpoint is used: the statement excludes analytic punctured-disc variations and step 5.1 restates that boundary; all constructions are algebraic and finite-dimensional."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited through the fixed-part and family-construction suppliers used in steps 1.1 and 4.1; the socle, determinant-line, Grassmannian and polarization arguments are choice-free modulo those suppliers (statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts semisimplicity, not a biconditional; no iff direction is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted."
+        }
+      ]
+    },
+    "ex-cyclic-etale-covers-give-geometric-semisimple-weight-zero-monodromy": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "1.1 Geometric structure and the local system. The graph $\\{(t,[u:v])\\in\\mathbb C^\\times\\times\\mathbb P^1:u^r=tv^r\\}$ is closed, and $z\\mapsto(z^r,[z:1])$ identifies $\\mathbb C^\\times$ with it over $\\mathbb C^\\times$, so $f$ is projective and proper and its fibres are the $r$ distinct $r$-th roots of the base point. On coordinate rings $f$ is module-finite, the source ring being generated over the target ring by $1,z,\\dots,z^{r-1}$; and it is smooth of relative dimension zero because the derivative $rz^{r-1}$ is a unit on $\\mathbb C^\\times$, so the Jacobian criterion [[thm-jacobian-criterion-smooth-morphism]] applies and the relative dimension is $1-1=0$, which is exactly étaleness by the definition [[def-etale-morphism-schemes]]. Thus $f$ is finite étale. Therefore $R^0f_*\\mathbb Q$ is a finite-rank local system of rank $r$ in the sense of [[def-local-system-of-r-modules-and-its-pullback]]: over each base point the fibre is $H^0$ of $r$ reduced points, with the sheet-indicator functions as a rational basis, and these bases are transported by the deck identifications of the fibres. Every indicator function is locally constant of Hodge type $(0,0)$, so the local system is pure of weight zero. The standard positive definite dot product in the indicator basis is rational, flat because transport permutes the basis vectors and hence preserves the form, and positive on every fibre; it is therefore the polarization required for a geometric polarizable weight-zero variation, whose algebraic realization is $f$ itself on the open $U=\\mathbb C^\\times$. [given, construct, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "2.1 Monodromy and semisimplicity. A positively oriented generator of $\\pi_1(\\mathbb C^\\times)$ is represented by the loop $t\\mapsto e^{2\\pi it}t_0$; transporting the base point $t_0$ along it replaces a chosen $r$-th root $z_0$ by $\\zeta z_0$ with $\\zeta=e^{2\\pi i/r}$, a primitive $r$-th root of unity ([[def-roots-of-unity-in-a-field]]), and hence cyclically permutes the $r$ sheet indicators. In the complexified fibre the vectors $v_j=\\sum_{a=0}^{r-1}\\zeta^{ja}e_a$, $j=0,\\dots,r-1$, satisfy $\\sigma v_j=\\zeta^{-j}v_j$ for the cyclic permutation $\\sigma$, and the eigenvalues $\\zeta^{-j}$ are pairwise distinct because $\\zeta$ has order $r$; the Vandermonde matrix $(\\zeta^{ja})_{j,a}$ is therefore invertible, so the complexification is the direct sum of $r$ distinct one-dimensional characters and is semisimple ([[def-semisimple-module]]). Finally [[thm-smooth-projective-gauss-manin-local-systems-are-semisimple]], which applies because $f$ is smooth projective over the connected smooth quasiprojective base $\\mathbb C^\\times$, gives the same semisimplicity over every characteristic-zero coefficient field, including fields that do not contain all $r$-th roots. [step 1.1, given, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example is stated for $r\\ge1$, so no empty fibre occurs; the sheet-indicator basis of step 1.1 always has $r\\ge1$ elements."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The only cohomology used is $H^0$, of weight zero and Hodge type $(0,0)$, and the base point $t_0\\ne0$ is nonzero throughout steps 1.1-2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For $r=1$ the map is the identity, the monodromy is trivial, and the Fourier decomposition of step 2.1 is the single trivial character."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For every $r$ and every $t\\ne0$ the equation $z^r=t$ has $r$ simple roots, since the derivative $rz^{r-1}$ is a unit on $\\mathbb C^\\times$; no repeated root or nonreduced fibre occurs (step 1.1)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The generator loop of step 2.1 winds once around the puncture $z=0$, which is exactly the monodromy boundary of the example; the primitive root $\\zeta$ and its distinct powers are computed there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is inherited from the semisimplicity theorem and the Jacobian-criterion supplier used in steps 1.1-2.1; the finite Fourier computation is choice-free (statement)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a computation, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The power-map cover supplies a particular polarized local system and its cyclic permutation monodromy; diagonalizing that permutation is not a claim that every semisimple weight-zero representation comes from this cover.",
+          "template_review": {
+            "upheld": true,
+            "by": "/root/recover_math_gate_packets",
+            "reason": "The power-map cover supplies a particular polarized local system and its cyclic permutation monodromy; diagonalizing that permutation is not a claim that every semisimple weight-zero representation comes from this cover.",
+            "item_sha256": "a322feddd4e3c7dac44ab0f8a14248d0d86d84f6307e8101817dd5e03a72b29d",
+            "row_sha256": "2b9bde402413bb5f53477e5ae8a5c55d7153d14760ccf19b265b3c4db32edd28"
+          }
+        }
+      ]
+    }
+  }
+}

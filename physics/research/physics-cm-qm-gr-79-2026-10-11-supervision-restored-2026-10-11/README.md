@@ -1,0 +1,7 @@
+# Restored physics supervision
+
+Verified 2026-10-11T05:21:29.237877+00:00: native controller 1920911 is live and unpaused in Step 1 construction with 47 successful scaffold result files. The native engine retains all dispatch/transition authority. Existing interactive Codex repair sessions retain their ownership, confirmed by the user; their quantum, inertia and shared metadata scopes must not be duplicated. Existing Dollard completeness prerequisite hold and repair counters remain intact.
+
+New drained batch73 findings are assigned to `/root/physics_cosmology_scaling_repair`: incorrect constant-rescaling sectional-curvature claim and undeclared hyperbolic-model logical supplier. The same reviewer owns supplier and affected consumer checks, using old/current graph union and actual hypotheses. No outside batch, shared-plan or imported snapshot writes are delegated. Shared source-home registration awaits guarded semantic confirmation and existing metadata writer coordination.
+
+Current dispatch/result identities and hashes are in checkpoint.json. This checkpoint is operational restoration evidence, not independent mathematical acceptance or a gate pass. No control or gate was changed. Continue ready construction without a global pause. The next native join needs all escalations resolved and fresh dependency-ordered formatting/metadata-only recertification, including current owner-direction bindings; existing requests from completed drift gates confer no authorization.

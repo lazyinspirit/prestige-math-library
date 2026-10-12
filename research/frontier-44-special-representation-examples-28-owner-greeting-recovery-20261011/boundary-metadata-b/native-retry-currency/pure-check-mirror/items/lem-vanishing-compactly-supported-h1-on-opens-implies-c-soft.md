@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft.md

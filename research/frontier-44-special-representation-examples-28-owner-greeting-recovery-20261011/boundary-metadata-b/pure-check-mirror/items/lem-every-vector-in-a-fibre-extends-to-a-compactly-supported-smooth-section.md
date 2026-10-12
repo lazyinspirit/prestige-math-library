@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section.md

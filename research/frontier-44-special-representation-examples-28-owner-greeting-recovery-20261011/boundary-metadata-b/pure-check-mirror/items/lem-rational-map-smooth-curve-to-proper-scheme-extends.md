@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-map-smooth-curve-to-proper-scheme-extends.md

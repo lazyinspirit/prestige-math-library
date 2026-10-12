@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-smooth-vector-bundle-rank-fibre-and-trivial-bundle.md

@@ -35,5 +35,4 @@ with respect to Lebesgue measure.
 
 1.1 By [L1], the measure $\mu_c$ is atomless. [L1]
 
-2.1 The same fact [L1] says that $\mu_c$ is singular and has total mass $1$. [step 1.1, L1]
-If it were also absolutely continuous with respect to Lebesgue measure, its concentration on a Lebesgue-null set would force its total mass to be $0$, a contradiction. Therefore atomlessness does not imply absolute continuity. [step 1.1, L1] ∎
+2.1 The same fact [L1] says that $\mu_c$ is singular and has total mass $1$. [step 1.1, L1] If it were also absolutely continuous with respect to Lebesgue measure, its concentration on a Lebesgue-null set would force its total mass to be $0$, a contradiction. Therefore atomlessness does not imply absolute continuity. [step 1.1, L1] ∎ 

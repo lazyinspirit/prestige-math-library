@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-dft-delta-and-constant-extremisers.md

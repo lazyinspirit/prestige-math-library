@@ -42,8 +42,7 @@ $$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$
 
 **Proof technique:** direct.
 
-1.1 By [L1], $\mu_c$ vanishes on measurable subsets of $\mathbb R\setminus C$, [L1, L2]
-while $\lambda_0$ vanishes on measurable subsets of $C$ because $\lambda(C)=0$. Thus $\mu_c\perp\lambda_0$. Both are positive measures, so $\nu=\mu_c-\lambda_0$ is a signed measure already written as a difference of mutually singular positive measures.
+1.1 By [L1], $\mu_c$ vanishes on measurable subsets of $\mathbb R\setminus C$, [L1, L2] while $\lambda_0$ vanishes on measurable subsets of $C$ because $\lambda(C)=0$. Thus $\mu_c\perp\lambda_0$. Both are positive measures, so $\nu=\mu_c-\lambda_0$ is a signed measure already written as a difference of mutually singular positive measures. [L1, L2]
 
-2.1 The uniqueness clause in [L2] now forces [L2, step 1.1] ∎
-$$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$ Hence $\mu_c-\lambda_0$ is already in Jordan form.
+2.1 The uniqueness clause in [L2] now forces [L2, step 1.1] ∎ $$\nu^+=\mu_c,\qquad \nu^-=\lambda_0.$$ Hence $\mu_c-\lambda_0$ is already in Jordan form. [L2, step 1.1]
+

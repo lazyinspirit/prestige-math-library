@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-unitary-representation-of-a-compact-group-is-finite-dimensional.md

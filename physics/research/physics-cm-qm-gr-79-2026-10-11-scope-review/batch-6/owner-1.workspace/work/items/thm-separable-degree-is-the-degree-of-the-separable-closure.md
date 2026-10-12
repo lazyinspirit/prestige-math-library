@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-separable-degree-is-the-degree-of-the-separable-closure.md

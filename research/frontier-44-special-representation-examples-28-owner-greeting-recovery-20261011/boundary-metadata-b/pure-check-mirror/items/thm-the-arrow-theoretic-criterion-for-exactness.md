@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-arrow-theoretic-criterion-for-exactness.md

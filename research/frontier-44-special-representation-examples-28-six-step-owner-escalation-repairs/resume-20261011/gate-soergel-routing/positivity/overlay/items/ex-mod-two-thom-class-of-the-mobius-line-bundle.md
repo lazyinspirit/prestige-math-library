@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-mod-two-thom-class-of-the-mobius-line-bundle.md

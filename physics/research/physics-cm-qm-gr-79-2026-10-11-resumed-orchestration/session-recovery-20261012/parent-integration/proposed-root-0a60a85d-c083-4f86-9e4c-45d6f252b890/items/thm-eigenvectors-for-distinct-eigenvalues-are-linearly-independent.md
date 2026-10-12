@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-eigenvectors-for-distinct-eigenvalues-are-linearly-independent.md

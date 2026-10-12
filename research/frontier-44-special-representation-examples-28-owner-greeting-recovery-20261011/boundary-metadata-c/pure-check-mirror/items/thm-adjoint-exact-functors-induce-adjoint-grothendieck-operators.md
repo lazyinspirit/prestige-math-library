@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-adjoint-exact-functors-induce-adjoint-grothendieck-operators.md

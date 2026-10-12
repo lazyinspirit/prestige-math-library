@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-elementary-hnn-reductions-preserve-the-represented-element.md

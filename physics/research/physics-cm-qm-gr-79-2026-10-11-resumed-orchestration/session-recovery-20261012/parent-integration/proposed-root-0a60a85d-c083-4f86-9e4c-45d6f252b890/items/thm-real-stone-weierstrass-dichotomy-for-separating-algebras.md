@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-real-stone-weierstrass-dichotomy-for-separating-algebras.md

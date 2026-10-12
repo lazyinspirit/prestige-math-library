@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-growth-degree-of-the-discrete-heisenberg-group.md

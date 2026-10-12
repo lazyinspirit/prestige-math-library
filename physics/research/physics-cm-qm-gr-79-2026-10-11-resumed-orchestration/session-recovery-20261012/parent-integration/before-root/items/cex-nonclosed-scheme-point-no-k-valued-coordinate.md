@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonclosed-scheme-point-no-k-valued-coordinate.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-functions-form-a-poisson-algebra.md

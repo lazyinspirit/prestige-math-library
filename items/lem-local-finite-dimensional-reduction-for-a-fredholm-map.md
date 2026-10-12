@@ -84,9 +84,7 @@ claim is made, and $g$ depends on both variables.
 
 **Proof technique:** direct.
 
-1.1 The set
-$$\Omega:=\{x\in E:a+x\in\varphi[\operatorname{dom}\varphi\cap f^{-1}(\operatorname{dom}\psi)]\}$$
-is an open neighbourhood of $0$. The recentered representative $\widehat f(x)=\psi(f(\varphi^{-1}(a+x)))-b$ is $C^k$ on $\Omega$, satisfies $\widehat f(0)=0$, and has derivative $D\widehat f(0)=L$ by definition. The source and target translations have identity derivative, so chart independence identifies $L$ with the tangent map $Df(p)$ up to the bounded chart isomorphisms; hence $L$ is Fredholm. No translated coordinate map is asserted to be a member of either specified atlas. [L1, L5, L6]
+1.1 The set $$\Omega:=\{x\in E:a+x\in\varphi[\operatorname{dom}\varphi\cap f^{-1}(\operatorname{dom}\psi)]\}$$ is an open neighbourhood of $0$. The recentered representative $\widehat f(x)=\psi(f(\varphi^{-1}(a+x)))-b$ is $C^k$ on $\Omega$, satisfies $\widehat f(0)=0$, and has derivative $D\widehat f(0)=L$ by definition. The source and target translations have identity derivative, so chart independence identifies $L$ with the tangent map $Df(p)$ up to the bounded chart isomorphisms; hence $L$ is Fredholm. No translated coordinate map is asserted to be a member of either specified atlas. [L1, L5, L6]
 
 2.1 Use the fixed splittings from the statement. The restriction $L_1:=L|_{E_1}:E_1\to\operatorname{ran}L$ is bounded and injective because $E_1\cap\ker L=\{0\}$; it is surjective because writing any $x\in E$ as $x=v+x_1$ gives $Lx=Lx_1$. The range is closed and hence Banach, and $C$ is finite dimensional with $\dim_{\mathbb R}C=\dim_{\mathbb R}\operatorname{coker}L$, as guaranteed by [L2]. [step 1.1, L2]
 
@@ -98,4 +96,4 @@ is an open neighbourhood of $0$. The recentered representative $\widehat f(x)=\p
 
 6.1 Define $g:U_0\times A_0\to C$ by $g(u,w):=c(w+\theta(w,u))$. It is $C^k$, and for $(u,w)\in U_0\times A_0$ one has $\widehat f(S^{-1}(u,w))=(u,g(u,w))$ under the fixed decomposition $F=\operatorname{ran}L\oplus C$. [step 4.1, step 5.1, L5]
 
-7.1 Returning through the given atlas charts $\varphi,\psi$ and undoing the affine translations by $a,b$, [step 6.1] is exactly the asserted local normal form for the recentered representative and the fixed splittings; the kernel variable and obstruction target are finite dimensional by [L2]. [step 2.1, step 5.1, step 6.1, L1] ∎
+7.1 Returning through the given atlas charts $\varphi,\psi$ and undoing the affine translations by $a,b$, [step 6.1] is exactly the asserted local normal form for the recentered representative and the fixed splittings; the kernel variable and obstruction target are finite dimensional by [L2]. [step 2.1, step 5.1, step 6.1, L1] ∎ 

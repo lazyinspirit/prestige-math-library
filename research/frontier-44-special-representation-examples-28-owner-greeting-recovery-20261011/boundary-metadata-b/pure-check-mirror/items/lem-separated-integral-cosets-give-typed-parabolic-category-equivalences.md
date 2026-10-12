@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-separated-integral-cosets-give-typed-parabolic-category-equivalences.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-free-module-functor-is-left-adjoint-to-the-underlying-set-functor.md

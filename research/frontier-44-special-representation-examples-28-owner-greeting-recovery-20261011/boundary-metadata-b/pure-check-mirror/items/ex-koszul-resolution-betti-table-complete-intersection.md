@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-koszul-resolution-betti-table-complete-intersection.md

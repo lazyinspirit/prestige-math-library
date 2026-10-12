@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-integral-of-the-indicator-of-a-stopping-interval.md

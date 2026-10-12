@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rabinowitsch-auxiliary-ideal-has-empty-zero-locus.md

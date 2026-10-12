@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pseudocompact-euclidean-subset-is-closed.md

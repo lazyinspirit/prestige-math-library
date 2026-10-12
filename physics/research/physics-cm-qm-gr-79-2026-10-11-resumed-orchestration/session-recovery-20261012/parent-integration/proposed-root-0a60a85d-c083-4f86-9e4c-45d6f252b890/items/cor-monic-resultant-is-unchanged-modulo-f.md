@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-monic-resultant-is-unchanged-modulo-f.md

@@ -41,8 +41,6 @@ $$ \bigcap_{n\ge0}\mathfrak m^n=0. $$
 
 **Proof technique:** direct.
 
+ 1.1 View $R$ as a finite module over itself. Since $(R,\mathfrak m)$ is local, its maximal ideal lies in the Jacobson radical. Therefore [L1] applies with $M=R$ and gives $ \bigcap_{n\ge0}\mathfrak m^n=0. $ [L1, given]
 
-1.1 View $R$ as a finite module over itself. Since $(R,\mathfrak m)$ is local, its maximal ideal lies in the Jacobson radical. Therefore [L1] applies with $M=R$ and gives $ \bigcap_{n\ge0}\mathfrak m^n=0. $ [L1, given]
-
-
-2.1 This is the promised local-domain instance of Krull intersection. [algebra] ∎
+ 2.1 This is the promised local-domain instance of Krull intersection. [algebra] ∎ 

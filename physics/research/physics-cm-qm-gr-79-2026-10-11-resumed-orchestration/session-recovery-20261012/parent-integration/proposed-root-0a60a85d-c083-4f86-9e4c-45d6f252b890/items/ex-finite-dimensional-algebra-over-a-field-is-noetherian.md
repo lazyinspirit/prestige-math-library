@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-dimensional-algebra-over-a-field-is-noetherian.md

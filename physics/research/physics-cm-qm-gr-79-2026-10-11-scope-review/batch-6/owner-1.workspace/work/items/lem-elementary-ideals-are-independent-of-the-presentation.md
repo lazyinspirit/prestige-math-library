@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-elementary-ideals-are-independent-of-the-presentation.md

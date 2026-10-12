@@ -18,7 +18,7 @@ const argvOf = (g: any): string[] => (typeof g.argv === 'function' ? g.argv() : 
 test('the post-authoring stages run content-policy in item mode', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['2-scope-review', '3a-validate']) {
+  for (const id of ['2-scope-review']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const full = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));

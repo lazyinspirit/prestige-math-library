@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-north-east-west-walks-without-immediate-horizontal-reversal.md

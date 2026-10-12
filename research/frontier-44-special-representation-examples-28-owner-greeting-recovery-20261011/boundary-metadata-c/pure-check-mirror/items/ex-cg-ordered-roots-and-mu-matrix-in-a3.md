@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-ordered-roots-and-mu-matrix-in-a3.md

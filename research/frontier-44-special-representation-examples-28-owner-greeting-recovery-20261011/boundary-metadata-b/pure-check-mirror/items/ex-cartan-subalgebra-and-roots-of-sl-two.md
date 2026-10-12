@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cartan-subalgebra-and-roots-of-sl-two.md

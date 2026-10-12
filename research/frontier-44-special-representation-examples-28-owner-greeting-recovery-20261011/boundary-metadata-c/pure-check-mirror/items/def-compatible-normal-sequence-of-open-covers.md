@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-compatible-normal-sequence-of-open-covers.md

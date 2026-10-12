@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-positive-type-gaussian-on-the-real-line.md

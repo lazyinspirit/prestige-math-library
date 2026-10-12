@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-minres-on-a-symmetric-indefinite-system.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-squared-distance-is-strictly-convex-along-geodesics-in-a-hadamard-manifold.md

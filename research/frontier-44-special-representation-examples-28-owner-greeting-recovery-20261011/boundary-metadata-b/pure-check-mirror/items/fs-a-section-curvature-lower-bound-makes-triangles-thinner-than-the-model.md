@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-section-curvature-lower-bound-makes-triangles-thinner-than-the-model.md

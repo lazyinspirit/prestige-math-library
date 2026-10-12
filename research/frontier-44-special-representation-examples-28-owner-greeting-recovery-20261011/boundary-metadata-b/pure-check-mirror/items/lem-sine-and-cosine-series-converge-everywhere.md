@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-sine-and-cosine-series-converge-everywhere.md

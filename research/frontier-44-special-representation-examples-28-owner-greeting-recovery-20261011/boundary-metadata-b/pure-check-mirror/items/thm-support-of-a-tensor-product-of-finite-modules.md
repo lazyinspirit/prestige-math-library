@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-support-of-a-tensor-product-of-finite-modules.md

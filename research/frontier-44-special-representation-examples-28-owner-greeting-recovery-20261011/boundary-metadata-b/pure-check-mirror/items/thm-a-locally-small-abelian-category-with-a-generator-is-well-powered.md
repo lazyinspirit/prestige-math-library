@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-locally-small-abelian-category-with-a-generator-is-well-powered.md

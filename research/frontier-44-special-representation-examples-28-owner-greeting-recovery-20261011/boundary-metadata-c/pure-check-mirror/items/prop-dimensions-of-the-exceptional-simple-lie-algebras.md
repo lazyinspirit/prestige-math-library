@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-dimensions-of-the-exceptional-simple-lie-algebras.md

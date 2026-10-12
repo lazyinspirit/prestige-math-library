@@ -1,0 +1,746 @@
+[
+  {
+    "order": 147,
+    "id": "cm18-measurement-uncertainty-and-later-bridges",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Measurement, uncertainty and later bridges",
+    "companion": "cm18-measurement-uncertainty-and-later-bridges-examples",
+    "requires": [
+      "cm-math-evidence",
+      "cm-math-numerical",
+      "cm03-momentum-work-and-energy-balances"
+    ],
+    "items": [
+      {
+        "id": "def-cm18-observable-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Operational observable model of the force branch: parameters, preparations, observation times, readout, units and additive error",
+        "statement": "## Definition\n\nFix a force model of the force branch [[post-cm02-force-superposition]]: a\nnondegenerate open time window $I_{0}\\subseteq\\mathbb R$, an open configuration\ndomain $Q\\subseteq\\mathbb R^{3N}$ for $N\\ge1$ particle labels, with the\ncollision set removed when the model's force law is singular there\n([[def-cm01-configuration]] clause (a)), fixed masses $m_{1},\\dots,m_{N}>0$\n([[post-cm01-worldlines]] clause (v)), and a force map\n$$F:I_{0}\\times Q\\times(\\mathbb R^{3})^{N}\\longrightarrow(\\mathbb R^{3})^{N}$$\nwith the standing continuity and state-local-Lipschitz hypotheses of clause\n(iii) of that postulate. Fix one inertial frame of the model with adapted\ncoordinates $(t,x)$ ([[post-cm01-frames]]) and read all times and positions\nbelow in this frame; dimensions and units are those of [[def-cm01-units]].\n\n**Protocol.** An **operational observable model** of this force model in the\nframe consists of the following data.\n\n1. **Parameters.** A nonempty set $\\Theta$, the **model parameters**, with a\n   family $(F_{\\theta})_{\\theta\\in\\Theta}$ of force maps on\n   $I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$, each satisfying the standing\n   hypotheses of the force branch, so that $\\bigl(I_{0},Q,(m_{i}),F_{\\theta}\\bigr)$\n   is a force model of that branch for every $\\theta\\in\\Theta$.\n2. **Preparations.** A nonempty set $Z$, the **apparatus and preparation\n   settings**, and a map $\\zeta:Z\\to I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$,\n   written $\\zeta(z)=\\bigl(t_{0}(z),x_{0}(z),v_{0}(z)\\bigr)$, assigning to\n   each setting an initial datum of the model.\n3. **Observation times.** A finite strictly increasing family\n   $t_{1}<\\dots<t_{k}$ in $I_{0}$ with $k\\ge1$, the **observation times**.\n4. **Definedness.** For every $(\\theta,z)\\in\\Theta\\times Z$ the model with\n   force map $F_{\\theta}$ and initial datum $\\zeta(z)$ has a unique maximal\n   motion $x_{\\theta,z}:J_{\\theta,z}\\to Q$, with $J_{\\theta,z}\\subseteq\n   I_{0}$ an open interval containing $t_{0}(z)$\n   ([[def-cm02-newtonian-flow]], [[pthm-cm02-ivp]]), and the protocol requires\n   $[t_{1},t_{k}]\\subseteq J_{\\theta,z}$. Its **state** at $t_{j}$ is\n   $$s_{\\theta,z}(t_{j}):=\\bigl(x_{\\theta,z}(t_{j}),\\,w_{\\theta,z}(t_{j})\\bigr) \\in Q\\times(\\mathbb R^{3})^{N},$$\n   where $w_{\\theta,z}:=x_{\\theta,z}'$ is the coordinate velocity.\n5. **Readout.** An integer $d\\ge1$ and a map\n   $$R:\\Theta\\times Z\\times\\bigl(\\mathbb R^{3N}\\times\\mathbb R^{3N}\\bigr)^{k} \\longrightarrow\\mathbb R^{d},$$\n   the **readout**, whose value at $(\\theta,z)$ is the tuple of the $k$\n   states of clause 4 in order; the **prediction map** is\n   $$\\Phi:\\Theta\\times Z\\longrightarrow\\mathbb R^{d},\\qquad \\Phi(\\theta,z):=R\\bigl(\\theta,z,s_{\\theta,z}(t_{1}),\\dots, s_{\\theta,z}(t_{k})\\bigr).$$\n   No regularity of $R$ in the parameters is assumed; continuity,\n   differentiability or measurability in $\\theta$ or in the states is an\n   additional hypothesis, declared where it is used.\n6. **Units.** For each $j\\le d$ a dimension $[\\Phi_{j}]$ from\n   [[def-cm01-units]] is declared, and the coordinate $\\Phi_{j}(\\theta,z)$ is\n   read in the corresponding unit.\n7. **Error and observation.** A probability space $(\\Omega,\\mathfrak F,\n   \\mathbb P)$ ([[def-probability-measure]]), an open **error domain**\n   $V\\subseteq\\mathbb R^{d}$ with $0\\in V$, and a random element\n   $\\varepsilon:\\Omega\\to\\mathbb R^{d}$ with $\\varepsilon(\\omega)\\in V$ for\n   every $\\omega$ ([[def-random-element-and-real-random-variable]]). The\n   **observation** at $(\\theta,z)$ is the random element\n   $$Y_{\\theta,z}:=\\Phi(\\theta,z)+\\varepsilon:\\Omega\\longrightarrow\\mathbb R^{d},$$\n   the sum being read coefficientwise in the declared units, so that the\n   coordinate $\\varepsilon_{j}$ carries the dimension $[\\Phi_{j}]$ for every\n   $j$ (rule (b) of [[def-cm01-units]]).\n\n### Well-definedness and conventions\n\n**Well-definedness.** The prediction map is well defined: for each\n$(\\theta,z)$ the maximal motion is unique by [[pthm-cm02-ivp]], and clause 4\nputs the observation times in its interval. For fixed $(\\theta,z)$ the\nobservation is a random element in the sense of\n[[def-random-element-and-real-random-variable]]: the map\n$\\tau(u):=\\Phi(\\theta,z)+u$ is a translate of $\\mathbb R^{d}$, hence\ncontinuous, its preimages of Borel sets are Borel, and\n$Y_{\\theta,z}^{-1}(B)=\\varepsilon^{-1}\\bigl(\\tau^{-1}(B)\\bigr)\\in\\mathfrak F$\nby the measurability of $\\varepsilon$. This repeats the argument of\n[[def-cm-measurement-model]] for the additive-error observation model with\n$h=\\Phi$; the mathematical interface used below is exactly that definition.\n\n**No hypothesis on the error is part of the definition.** Mean zero,\nsquare-integrability, boundedness, a stated law, independence across\nrepetitions, stationarity and calibration are **not** part of the definition;\neach must be stated at its point of use, with its exact quantifiers, exactly\nas in [[def-cm-measurement-model]]. In particular a deterministic error, for\nwhich $\\varepsilon$ is a constant random element, is admitted; the definition\nthen records a modelled residual rather than a probabilistic error.\n\n**Frame relativity of the protocol.** The observation times are times of the\ndeclared frame, and the prediction map is read in that frame's coordinates;\na change of inertial frame changes the coordinate times and the readout of\nthe same physical protocol. The framework therefore always names the frame\nin which a protocol is specified; no frame-independent reading of $\\Phi$ or\n$\\varepsilon$ is asserted.\n\n**Scope.** The definition constructs an interface, not a measurement. It does\nnot assert that any apparatus realizes the protocol, that any preparation can\nbe reproduced, that the declared error domain or law is correct, or that\n$\\Phi$ agrees with any physical system. A statement that a physical procedure\nsatisfies the protocol requires separate empirical evidence, and no such\nevidence is part of this item.",
+        "strategy": "Definition with explicit well-definedness and convention paragraphs; no proof supplied.",
+        "deps": [
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "def-cm-measurement-model",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable"
+        ],
+        "dependency_roles": {
+          "post-cm01-frames": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "def-cm-measurement-model": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-random-element-and-real-random-variable": "mathematical-premise"
+        },
+        "dependency_level": 11,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clauses 4.1.1-4.1.4 and equation (1): the measurand function Y = f(X1, ..., XN), the input quantities and the correction quantities; clause 4.1.3 on values brought in from calibrated standards",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the equation of motion m a = F as model input with the force law and its parameters supplied by the model, and the empirical status of the law itself",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, printed pages 5-9 (PDF pages 11-15): external forces as declared model contributions and the open-system warning that a force whose source is not modelled must be declared as external",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "Operational observable models of an adopted force model: a parameter set indexing force maps, a preparation map assigning initial data, a finite family of observation times lying in the maximal motions, a declared readout of the model states, declared units for the readout coordinates, a probability space and an additive error random element with values in a declared open error domain. The item fixes the interface between the force branch and the measurement-model machinery of the companion mathematics page; it asserts no distributional, moment, independence or calibration hypothesis, no apparatus realization and no measurement, and it does not claim that any physical situation satisfies the protocol."
+      },
+      {
+        "id": "def-cm18-calibration",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Calibration of a mechanical apparatus against the primitive standards of the framework: reference inputs, deviations, rules and calibrated prediction maps",
+        "statement": "## Definition\n\nFix the force branch and one inertial frame as in\n[[def-cm18-observable-model]], and fix the observation times and readout of a\nprotocol of that definition. A **calibration family** is a family\n$$\\bigl(\\Phi_{c}\\bigr)_{c\\in C},\\qquad \\Phi_{c}:\\Theta\\longrightarrow\\mathbb R^{d},$$\nof prediction maps on a nonempty parameter set $\\Theta$, indexed by a\nnonempty set $C$ of **apparatus settings**, each $\\Phi_{c}$ arising as the\nprediction map of an operational observable model of the force branch as in\n[[def-cm18-observable-model]]; the setting $c$ selects the apparatus state in\nwhich the readout is taken. The dimensions and units are those of\n[[def-cm01-units]].\n\nA **calibration datum** for this family consists of:\n\n1. a finite family $\\bigl(\\theta^{(1)},\\dots,\\theta^{(n)}\\bigr)$, $n\\ge1$, of\n   **reference inputs** $\\theta^{(r)}\\in\\Theta$, together with a **reference\n   realization** of each: the parameter value $\\theta^{(r)}$ is fixed by\n   declared realizations of the primitive quantities of the framework — a\n   duration in seconds, a length in metres or a mass in kilograms\n   ([[def-cm01-units]], [[post-cm01-spacetime]], [[post-cm01-worldlines]]\n   clause (v)) — supplied by a **reference standard** under stated\n   conditions;\n2. for each $r$ a declared **deviation** of the reference input from its\n   nominal value $\\theta^{(r)}_{\\mathrm{ref}}$ assigned by the standard:\n   either a bound $\\bigl\\lvert\\theta^{(r)}-\\theta^{(r)}_{\\mathrm{ref}}\\bigr\\rvert\\le\\delta_{r}$\n   for a declared number $\\delta_{r}\\ge0$ in the unit of the parameter, or a\n   random element $\\eta_{r}:\\Omega\\to\\Theta$ of deviations with a stated law\n   on a stated probability space ([[def-random-element-and-real-random-variable]]),\n   so that the reference input is the random value\n   $\\theta^{(r)}_{\\mathrm{ref}}+\\eta_{r}$;\n3. a set $Y\\subseteq(\\mathbb R^{d})^{n}$ of admissible **reference\n   observations** and a declared vector $y=(y_{1},\\dots,y_{n})\\in Y$;\n4. a **calibration rule**, that is, a map\n   $$\\Gamma:Y\\longrightarrow C,\\qquad y\\longmapsto c .$$\n\nGiven the datum, the **calibrated setting** is $c:=\\Gamma(y)$ and the\n**calibrated prediction map** is $\\Phi_{c}$. This is the physical instance of\nthe calibration structure of [[def-cm-calibration-rule]], whose clauses 1-4\nit reproduces with the framework's primitive quantities as the reference\nrealizations.\n\n### Well-definedness and conventions\n\nThe sets $\\Theta$, $C$, $Y$, the maps $\\zeta$, $R$ of the underlying\nprotocols, the reference inputs, the deviations and the rule $\\Gamma$ are\ndata. Nothing in the definition requires $\\Gamma$ to be injective,\ncontinuous or measurable, or to return a setting whose prediction map is\naccurate; [[def-cm-calibration-rule]] records the same conventions for the\nmathematical structure. The deviation clauses 2 are the only interface\nthrough which the reference standard's uncertainty enters, and they must be\ncarried into every quantitative conclusion about $\\Phi_{c}$; a calibration\nfrom which the deviations have been dropped supports no quantitative\nstatement.\n\nCalibration is the step at which the framework's units and a standard's\nvalues assign numerical values to model parameters. The framework by itself\nfixes no numerical value of any parameter (clause (e) of\n[[def-cm01-units]]), and the value $\\theta^{(r)}_{\\mathrm{ref}}$ is the value\nattached by the standard, not a measured value of this item. A calibrated\nprediction map is a model object; a claim that an apparatus realizes it\nrequires separate evidence.",
+        "strategy": "Definition with explicit well-definedness and convention paragraphs; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm-calibration-rule",
+          "def-cm01-units",
+          "post-cm01-spacetime",
+          "post-cm01-worldlines",
+          "def-random-element-and-real-random-variable"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm-calibration-rule": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm01-spacetime": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-random-element-and-real-random-variable": "mathematical-premise"
+        },
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 200:2012, International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), definition 2.39 'calibration' with its notes on the relation between the indication and the corresponding value of a quantity and on the uncertainty of the reference",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf"
+            },
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clause 4.1.3 (input quantities brought in from calibrated standards and reference data) and clauses 4.2-4.3 on the evaluation of standard uncertainty of such inputs",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "B. N. Taylor and C. E. Kuyatt, Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results, NIST Technical Note 1297 (1994), Section 2 and Appendix A on the combination of standard uncertainties including those of reference standards",
+              "url": "https://physics.nist.gov/cuu/pdf/tn1297.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "Calibration of an apparatus for an operational observable model of the force branch: a family of prediction maps indexed by apparatus settings, a finite family of reference inputs traced to realizations of the framework's primitive quantities (durations in seconds, lengths in metres, masses in kilograms) with declared deviations, declared reference observations and a calibration rule. The item defines the datum that assigns numerical values in the framework's units to model parameters; it asserts no accuracy, consistency or unbiasedness of any calibration, no realized standard and no measurement."
+      },
+      {
+        "id": "def-cm18-sampling-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Repeated-observation protocols of the force branch: adopted IID and second-moment sampling hypotheses and the sample mean",
+        "statement": "## Definition\n\nFix an operational observable model of the force branch\n([[def-cm18-observable-model]]) in a fixed inertial frame, with parameter set\n$\\Theta$, preparation settings $Z$, prediction map $\\Phi:\\Theta\\times Z\\to\n\\mathbb R$, probability space $(\\Omega,\\mathfrak F,\\mathbb P)$, error domain\n$V\\subseteq\\mathbb R$ and error random element $\\varepsilon$; the readout is\nscalar here ($d=1$), since the mathematical sampling interface used below is\nstated for real random variables, and vector readouts are treated\ncoordinatewise where needed.\n\nA **repeated-observation protocol** for this model consists of\n\n1. a **repetition count** $n\\ge1$ and one error random element\n   $\\varepsilon_{k}:\\Omega\\to\\mathbb R$ for each $k=1,\\dots,n$, with\n   $\\varepsilon_{k}(\\omega)\\in V$ for every $\\omega$, the error of the $k$-th\n   repetition on the common probability space\n   ([[def-probability-measure]],\n   [[def-random-element-and-real-random-variable]]);\n2. the **observations** $Y_{k}:=\\Phi(\\theta,z)+\\varepsilon_{k}$ at a fixed\n   pair $(\\theta,z)\\in\\Theta\\times Z$: the same parameter value and the same\n   preparation are declared for every repetition, so that the repetition\n   changes only the error.\n\nThe protocol **satisfies the IID sampling hypothesis** when the family\n$(\\varepsilon_{1},\\dots,\\varepsilon_{n})$ — equivalently the family\n$(Y_{1},\\dots,Y_{n})$ — is independent and identically distributed in the\nsense of [[def-identically-distributed-and-iid-random-variables]]; it\n**satisfies the second-moment hypothesis** when $E\\bigl[Y_{1}^{2}\\bigr]<+\\infty$.\nUnder both hypotheses the common mean and variance\n$$\\mu:=E[Y_{1}]\\in\\mathbb R,\\qquad\\sigma^{2}:=\\operatorname{Var}(Y_{1})\\in[0,+\\infty)$$\nare defined by [[def-moments-variance-and-covariance]], the **sample mean** is\n$$\\overline Y:=\\frac1n\\sum_{k=1}^{n}Y_{k},$$\nand the mathematical consequences of the two hypotheses are those of the\nsampling model [[def-cm-iid-sampling-model]], namely the conclusions of\n[[cor-iid-finite-variance-weak-law]]: $E\\bigl\\lvert\\overline Y-\\mu\\bigr\\rvert^{2}\n=\\sigma^{2}/n$ and, for every $a>0$,\n$$\\mathbb P\\bigl(\\bigl\\lvert\\overline Y-\\mu\\bigr\\rvert\\ge a\\bigr) \\le\\frac{\\sigma^{2}}{n\\,a^{2}}.$$\n\n### Well-definedness and conventions\n\nThe IID and second-moment hypotheses are **adopted model hypotheses about the\nrepetitions**, not consequences of the protocol and not properties of the\ndata. Independence of the errors fails when successive repetitions share a\nsystematic effect, when the apparatus drifts between repetitions or when the\nsame recorded data are reused; identical distribution fails when the\npreparation or the conditions change between repetitions. A use of the\ndisplayed bounds must state both hypotheses, the declared law (if any) of\n$\\varepsilon$, and the conditions under which the repetitions are claimed to\nbe comparable.\n\nThe sample mean $\\overline Y$ is a random variable of the model. The\ndefinition attaches no observed value to $\\mu$ or $\\sigma^{2}$; in\nparticular $\\sigma^{2}$ is model data and not a measured uncertainty, as\n[[rem-cm-inference-and-uncertainty-scope]] records for the mathematical\ninterface. A physical claim that a stated procedure satisfies the IID\nsampling hypothesis requires separate empirical evidence and is not part of\nthis item.",
+        "strategy": "Definition with explicit well-definedness and convention paragraphs; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm-iid-sampling-model",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-moments-variance-and-covariance",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "rem-cm-inference-and-uncertainty-scope",
+          "cor-iid-finite-variance-weak-law"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm-iid-sampling-model": "mathematical-premise",
+          "def-identically-distributed-and-iid-random-variables": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-random-element-and-real-random-variable": "mathematical-premise",
+          "rem-cm-inference-and-uncertainty-scope": "mathematical-premise",
+          "cor-iid-finite-variance-weak-law": "mathematical-premise"
+        },
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clause 4.2.1 on repeated observations, the arithmetic mean and the experimental standard deviation, with the conditions attached to repeated observations",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 2.2.1 (independent and identically distributed sequences) and Section 2.1 (independence); Section 1.6.3 on expectation and variance of a real random variable",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "L. Wasserman, All of Statistics: A Concise Course in Statistical Inference (Springer, 2004), Section 4.1 on the law of large numbers for i.i.d. sequences; full text copy at the cited URL",
+              "url": "https://egrcc.github.io/docs/math/all-of-statistics.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "Repeated-observation protocols with a scalar readout for an operational observable model of the force branch: a repetition count, one error random element per repetition on a common probability space, the resulting observations, and the adopted IID and second-moment hypotheses on the repeated preparation. The item records what the sampling hypotheses assume about repetitions and what follows for the sample mean by the cited mathematical supplier; it does not assert that any physical sequence of repetitions satisfies the hypotheses and reports no observed value."
+      },
+      {
+        "id": "rem-cm18-model-test",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Model testing for the force branch: what a test specifies, what rejection and retention establish, and what is not claimed",
+        "statement": "## The ingredients a test must specify\n\nA test of a null set is a rejection region $R$ inside a measurable data space\n$S$ for a specified family $(\\mathbb P_{\\theta})_{\\theta\\in\\Theta}$ of\nprobability measures and a specified null set $\\Theta_{0}\\subseteq\\Theta$;\nits power function is $\\beta(\\theta)=\\mathbb P_{\\theta}(R)$ and its size is\n$\\sup_{\\theta\\in\\Theta_{0}}\\beta(\\theta)$\n([[def-cm-statistical-test-and-size]]). The size is computed from the null\nset and the family alone; no alternative set and no prior distribution enter\nit, and a test at level $\\alpha$ rejects a true null with probability at most\n$\\alpha$ **under the specified family**.\n\nFor the force branch of [[post-cm02-force-superposition]], a family and a\nrejection region are obtained only after specifying: one inertial frame; an\noperational observable model of [[def-cm18-observable-model]] — parameters,\npreparations, observation times, readout and units — whose prediction map is\ncomputed from the maximal motions supplied by [[pthm-cm02-ivp]]; a\ncalibration datum of [[def-cm18-calibration]] with its reference deviations;\na sampling model of [[def-cm18-sampling-model]] with its adopted IID and\nsecond-moment hypotheses, or an explicitly different dependence model; the\nlaw of the error random element, or its declared bounds; a null set\n$\\Theta_{0}$ of parameter values; and a rejection region. Until these data\nare fixed, the phrase \"a test of Newton's law\" names no test, and the size\nand power of no test are defined.\n\n## What rejection and retention establish\n\nA rejection is a decision about the specified triple of null family,\napparatus behaviour and sampling assumptions. It is evidence against that\ntriple at the declared size; it is not a proof that a force law, a spacetime,\nor classical mechanics is false, and the realized discrepancy does not by\nitself identify which ingredient failed. A discrepancy may expose the force\nlaw, a wrong or incomplete calibration, a changed preparation, correlated\nerrors violating the sampling hypothesis, or an analysis error; separating\nthese requires further stated models and further data. Conversely, retaining\nthe null is not proof of the null: a test with low power fails to reject\nalternatives it cannot distinguish, and the absence of a rejection under one\nrejection region carries no information about the size of an effect.\n\nThe indices of this page attach no probability to a parameter value. The\nlevel of a confidence set is a pre-data infimum of coverage probabilities\n([[def-cm-confidence-set-and-coverage]]); a likelihood value is the density\nof the observed datum at a parameter value, not the probability of the value\n([[def-cm-likelihood-function]]); and a size is a supremum over the null set\nof probabilities of a region. In particular a $p$-value computed from a\nspecified family is not the probability that the tested hypothesis is true,\nas [[rem-cm-inference-and-uncertainty-scope]] records for this mathematical\ninterface. The cited interpretive warnings of the sources state the same\nproperties for statistical tests in general.\n\n## What agreement does not establish\n\nAgreement of a prediction with observations is evidence for the combined\nadopted assumptions — force model, calibration, preparation, sampling model\nand analysis — at the stated uncertainty; it is not a deductive proof of the\nmodel and it does not test \"classical physics\" as a whole, only the specified\nfamily. A finite sample can fail to exhibit a feature that the declared\nsampling model predicts with positive probability per trial; such a sample is\nnot by itself a refutation of the model, and the elementary probability of\nthat outcome under the sampling model is part of the specification, not an\nempirical result.\n\nNo datum, no rejection, no retention, no $p$-value, no effect size and no\nmeasured uncertainty is asserted anywhere in this item.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm-statistical-test-and-size",
+          "def-cm-confidence-set-and-coverage",
+          "def-cm-likelihood-function",
+          "def-cm18-observable-model",
+          "def-cm18-calibration",
+          "def-cm18-sampling-model",
+          "rem-cm-inference-and-uncertainty-scope",
+          "post-cm02-force-superposition",
+          "pthm-cm02-ivp"
+        ],
+        "dependency_roles": {
+          "def-cm-statistical-test-and-size": "mathematical-premise",
+          "def-cm-confidence-set-and-coverage": "mathematical-premise",
+          "def-cm-likelihood-function": "mathematical-premise",
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm18-calibration": "formulation-prerequisite",
+          "def-cm18-sampling-model": "formulation-prerequisite",
+          "rem-cm-inference-and-uncertainty-scope": "mathematical-premise",
+          "post-cm02-force-superposition": "physical-assumption",
+          "pthm-cm02-ivp": "physical-result"
+        },
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. Greenland, S. J. Senn, K. J. Rothman, J. B. Carlin, C. Poole, S. N. Goodman and D. G. Altman, Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations, European Journal of Epidemiology 31 (2016), 337-350, sections on uncertainty and statistical significance and on the interpretation of P values",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, section 7.1.3, What are statistical tests?, on the components of a statistical test including the null hypothesis, the test statistic and the critical region",
+              "url": "https://www.itl.nist.gov/div898/handbook/prc/section1/prc13.htm"
+            },
+            {
+              "title": "L. Wasserman, All of Statistics: A Concise Course in Statistical Inference (Springer, 2004), Chapter 10 (hypothesis testing and p-values) and the warnings in Sections 10.2 and 11.1; full text copy at the cited URL",
+              "url": "https://egrcc.github.io/docs/math/all-of-statistics.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark on the logic of testing a force model against data: the ingredients a test must specify, the meaning of a rejection or a retention under a specified model family and sampling model, the distinction between evidence and proof, and the reasons a discrepancy does not by itself identify a failing ingredient. The item reports no measurement, asserts no p-value, no effect size and no empirical conclusion, and makes no claim that any model or law has been tested or confirmed."
+      },
+      {
+        "id": "rem-cm18-numerical-error",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Numerical error in a prediction pipeline: certified velocity-Verlet bounds, additive per-step error, the analytic long-time branch, and the separation from model error",
+        "statement": "## Model error and numerical error are different\n\nThe prediction map of an operational observable model\n([[def-cm18-observable-model]]) is defined from the exact maximal motions of\nthe force model. A numerical pipeline replaces those motions by a computed\nsequence, and at least five distinct errors must be kept apart: the\n**model-versus-nature error**, the difference between the model's exact\nmotion and a physical system, about which the framework proves nothing; the\n**discretization error**, the difference between the computed sequence and\nthe exact flow of the same model; the **implementation error**, the per-step\nresidual of the arithmetic actually performed; the **observation error**\n$\\varepsilon$ of the protocol; and the **sampling error** of a repeated\nprotocol. Only the second and third admit the certified statements below,\nand those statements are always about the model.\n\n## Finite-time discretization error of velocity Verlet\n\nFix a splitting $H=A+B$ of a mechanical Hamiltonian and the velocity-Verlet\nmap $V_{h}=K_{h/2}\\circ D_{h}\\circ K_{h/2}$ of\n[[def-cm-splitting-hamiltonian-and-verlet-map]], and let $\\Phi_{t}$ be the\nexact flow of the system ([[def-cm-local-flow-of-an-autonomous-system]]).\nUnder the hypotheses of [[thm-cm-verlet-finite-time-error-is-quadratic]] — a\nbounded convex tube with the local truncation constants $h_{1},C_{1}$ of\n[[lem-cm-verlet-local-truncation-error-is-cubic]], a compact set $K_{1}$\ninside the tube, a step $0<\\lvert h\\rvert\\le h_{1}$ and $n\\lvert h\\rvert\\le\nT$, with the computed iterates $z_{j}=V_{h}^{j}(z_{0})$ and the exact flow\npoints $y_{j}=\\Phi_{jh}(z_{0})$ both retained in $K_{1}$ — the finite-time\nbound\n$$\\lVert z_{n}-y_{n}\\rVert\\le C_{1}h^{2}\\frac{e^{LT}-1}{L}\\quad(L>0), \\qquad \\lVert z_{n}-y_{n}\\rVert\\le C_{1}Th^{2}\\quad(L=0)$$\nholds with $L$ the sup-norm bound on the derivative of the Hamiltonian\nfield over the tube. The hypothesis that the iterates remain in the compact\nset is part of the statement; no first-exit claim is made here.\n\n## Additive per-step error\n\nThe implementation error is not analysed as floating-point arithmetic.\nInstead, [[lem-cm-roundoff-accumulation-in-one-step-schemes]] assumes\ncomputed points $x_{j}$ with $\\lVert x_{j+1}-V_{h}(x_{j})\\rVert\\le\\eta$ and a\nLipschitz bound for $V_{h}$ with constant $1+Lh$, and concludes\n$$\\lVert x_{n}-z_{n}\\rVert\\le\\eta\\,\\frac{(1+Lh)^{n}-1}{Lh} \\le\\eta\\,e^{LT}\\frac{T}{h}\\quad(nh\\le T,\\ L>0),$$\nand, for any observable $F$ Lipschitz with constant $\\Lambda$,\n$\\lvert F(x_{n})-F(z_{n})\\rvert\\le\\Lambda\\eta\\bigl((1+Lh)^{n}-1\\bigr)/(Lh)$.\nA Lipschitz readout of the protocol therefore converts a trajectory bound\ninto a bound on the difference of the computed and exact prediction maps by\nmultiplication with its Lipschitz constant. The number $\\eta$ is a\n**hypothesis on the per-step residual**, not a measurement of an arithmetic\nunit, and the lemma says nothing about the distribution of rounding.\n\n## The analytic long-time branch\n\nFor analytic splitting data on a complex neighbourhood, with the domain\nradius, step-size restriction $0<h\\le h_{0}$ and compact retention of the\niterates through the stated time window, there are constants $C,c>0$ with\n$$|H_{h}(z_{n})-H_{h}(z_{0})|\\le Cnh\\,e^{-c/h},\\qquad |H(z_{n})-H(z_{0})|\\le Ch^{2}\\quad\\text{when }nh\\le e^{c/(2h)},$$\nwhere $H_{h}$ is the finite optimally truncated modified Hamiltonian of\n[[thm-cm-analytic-verlet-energy-on-exponential-times]]. Adding the\nimplementation error, [[lem-cm-separate-roundoff-energy-accumulation]] gives\n$$|H(x_{n})-H(x_{0})|\\le 2C_{E}h^{2}+Cnh\\,e^{-c/h}+C_{G}n\\eta$$\nfor computed points with per-step residual at most $\\eta$. Both statements\nkeep every hypothesis of the cited items, including the small-step bound,\nthe holomorphy domain and the retention of iterates in the compact set; the\nfirst is a discrete-time energy estimate, not an estimate of the original\ntrajectory on exponentially long times.\n\n## What is and is not certified\n\nThe bounds above compare the computed sequence with the exact motion of the\nsame model. They are silent about the difference between the model and a\nphysical system, and they do not certify any apparatus. Exact\nsymplecticity of the Verlet map is a statement about exact arithmetic\n([[rem-cm-scope-of-the-certified-verlet-estimates]]); the additive residual\nhypothesis is the only interface through which the arithmetic enters, and\nrounded symplecticity is not claimed. Consequently a numerically computed\ntrajectory, fit or error budget is a computation on the model under the\nstated hypotheses, not an experiment, not a measurement, and not evidence\nfor the model. The constants $C_{1},L,h_{1},C,C_{E},C_{G},c$ are data of\nthe cited statements; no numerical value of any of them for a physical\nsystem is asserted here.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-cm-splitting-hamiltonian-and-verlet-map",
+          "lem-cm-verlet-local-truncation-error-is-cubic",
+          "thm-cm-verlet-finite-time-error-is-quadratic",
+          "lem-cm-roundoff-accumulation-in-one-step-schemes",
+          "thm-cm-analytic-verlet-energy-on-exponential-times",
+          "lem-cm-separate-roundoff-energy-accumulation",
+          "rem-cm-scope-of-the-certified-verlet-estimates"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-cm-splitting-hamiltonian-and-verlet-map": "mathematical-premise",
+          "lem-cm-verlet-local-truncation-error-is-cubic": "mathematical-premise",
+          "thm-cm-verlet-finite-time-error-is-quadratic": "mathematical-premise",
+          "lem-cm-roundoff-accumulation-in-one-step-schemes": "mathematical-premise",
+          "thm-cm-analytic-verlet-energy-on-exponential-times": "mathematical-premise",
+          "lem-cm-separate-roundoff-energy-accumulation": "mathematical-premise",
+          "rem-cm-scope-of-the-certified-verlet-estimates": "mathematical-premise"
+        },
+        "dependency_level": 19,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 2 'Symplectic integrators', Sections 1-2 and 4: the Stormer-Verlet scheme, its symmetry and order, printed pages 1-9",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week2.pdf"
+            },
+            {
+              "title": "E. Hairer, Geometric Numerical Integration (TU Munchen 2010), Lecture 3 'Backward error analysis', Sections 1-3 and 5: local versus global error, accumulation of per-step perturbations, the modified equation and its exponential-time estimates, printed pages 1-12",
+              "url": "https://www.unige.ch/~hairer/poly_geoint/week3.pdf"
+            },
+            {
+              "title": "A. Quillen, PHY411 Lecture notes Part 7 'Integrators' (University of Rochester), Sections 1.1-1.2: local versus global error accumulation for one-step methods, printed pages 2-7",
+              "url": "https://astro.pas.rochester.edu/~aquillen/phy411/lecture7.pdf"
+            }
+          ]
+        },
+        "reference": "analytic-backward-error.md#e29 and expansion-proofs.md#e15",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark on the numerical phase of a prediction pipeline for an operational observable model of the force branch: the certified finite-time discretization and additive per-step error bounds for the velocity-Verlet method, the analytic long-time energy estimates under their holomorphy, step-size and compact-retention hypotheses, and the strict separation of these numerical bounds from the model-versus-nature error and the observation and sampling errors. The item asserts no numerical result for a physical system and no all-time accuracy of any method."
+      },
+      {
+        "id": "rem-cm18-galilean-regime",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "The Galilean regime of the framework: frame-relative protocols, the absence of an intrinsic slow-motion parameter, and the empirical status of a validity claim",
+        "statement": "## The adopted kinematic regime\n\nThe spacetime of the framework is the affine event space with its surjective\nabsolute-time covector, its three-dimensional Euclidean spatial displacement\nspace and its fixed orientation ([[post-cm01-spacetime]]); it contains no\ninner product on the full displacement space, no light cones, no null\ndisplacements and no universal speed bound. The frames are the adapted\naffine charts of these data, and the allowed changes between them are the\nGalilean transformations $t'=t+b$, $x'=Rx+vt+a$ with $R\\in SO(3)$\n([[post-cm01-frames]]); the resulting kinematic laws, the\nframe-independence of vanishing coordinate acceleration and the group\nstructure of the changes are the content of\n[[pthm-cm01-galilean-kinematics]]. The force model transforms by its own\ndeclared covariance rule ([[post-cm02-force-superposition]]), and the\nexistence and uniqueness statements for maximal motions are stated in the\nchosen frame ([[pthm-cm02-ivp]]).\n\n## Protocols are frame-relative\n\nAn operational observable model ([[def-cm18-observable-model]]) is specified\nin one inertial frame: its observation times are times of that frame, its\nreadout is a function of the coordinate states, and its error random element\ncarries the units of the readout coordinates. Changing the frame shifts the\ncoordinate times, transforms positions affinely and rotates and boosts\ncoordinate velocities, so the same physical protocol has a different\nprediction map in a different frame. A measurement model must therefore name\nits frame, and a claim that two frames \"agree\" is a claim about the declared\ntransformation law of the model, not a separate empirical discovery.\n\n## No intrinsic slow-motion parameter\n\nThe dimension group of the framework is generated by length, duration and\nmass ([[def-cm01-units]] clause (a)); the framework contains no quantity of\ndimension $\\ell\\tau^{-1}$ that is a constant of nature. Consequently the\nframework cannot by itself form a dimensionless parameter that measures how\nclose a system is to some other kinematic regime, and it states no numerical\ncutoff: every regime statement such as \"the motion is adequately described\nby this model at the required accuracy\" is an **external, empirically\nqualified premise** of a use of the model, not a theorem of it. Quantifying\nthe error of such a statement would require a distinct model carrying a\nspeed scale together with a limit or approximation theorem relating the two\nmodels; no such theorem is asserted, used or presupposed here.\n\n## What is not claimed\n\nThe framework distinguishes no inertial frame ([[rem-cm01-model-limit]]);\n\"at rest\" is a frame-relative description, not an absolute state. No\nmeasured speed, no numerical validity boundary, no comparison with any other\nkinematic framework, and no claim that a physical system is exactly\nGalilean is made. The Galilean transformations are exact symmetries of the\nadopted model by [[pthm-cm01-galilean-kinematics]]; whether a physical\nsituation is adequately represented by the model is an empirical question\nthat this item leaves open.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "post-cm01-spacetime",
+          "post-cm01-frames",
+          "pthm-cm01-galilean-kinematics",
+          "rem-cm01-model-limit",
+          "def-cm01-units",
+          "post-cm02-force-superposition",
+          "pthm-cm02-ivp"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "post-cm01-spacetime": "physical-assumption",
+          "post-cm01-frames": "physical-assumption",
+          "pthm-cm01-galilean-kinematics": "physical-result",
+          "rem-cm01-model-limit": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm02-force-superposition": "physical-assumption",
+          "pthm-cm02-ivp": "physical-result"
+        },
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1 'Galilean Relativity', printed page 5 (PDF page 11), and Section 1.4 'Looking Forwards: The Validity of Newtonian Mechanics', printed page 9 (PDF page 15): the Galilean transformations between inertial frames and the domain limitations of Newtonian mechanics",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 1.1-1.2, chapter pages 1-3 (PDF pages 5-7): absolute time and Euclidean space, velocity and acceleration transfers between frames, and the absence of a speed restriction in the model",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "reference": "prose-scaffold.md#evidence-review-and-cross-framework-limits",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark on the kinematic regime of the framework and its consequences for observable models: the adopted absolute time and Euclidean slices, the Galilean frame changes, the frame-relativity of protocols and prediction maps, and the absence of any intrinsic speed scale or numerical validity cutoff inside the framework. The item asserts no measured speed, no numerical regime boundary and no limit theorem relating the framework to any other model."
+      },
+      {
+        "id": "rem-cm18-em-bridge",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "The electromagnetic bridge: what a charged-particle coupling must add to the framework, what the force branch then yields, and what is not imported",
+        "statement": "## What the framework already supplies\n\nThe particle side of the framework is complete on its own terms: labels with\n$C^{2}$ worldlines parametrized by frame time and fixed positive masses\n([[post-cm01-worldlines]]); a force branch in which the force map is declared\nmodel input with standing continuity and state-local-Lipschitz hypotheses\n([[post-cm02-force-superposition]]); motions, unique maximal motions and the\ncontinuation criterion ([[def-cm02-newtonian-flow]], [[pthm-cm02-ivp]],\n[[pthm-cm02-continuation]]); the mechanical quantities and their balance\ntheorems, conditional on the declared interaction structure\n([[def-cm03-centre-of-mass-and-momenta]], [[pthm-cm03-frame-transformations]],\n[[rem-cm03-conservation-scope]]); and the operational observable model\nthrough which predictions at observation times are read\n([[def-cm18-observable-model]]). The framework contains no charge, no field\nand no coupling law.\n\n## What an electromagnetic coupling must add\n\nA charged-particle coupling is a **new physical assumption**, not a\nconsequence of the framework, and it must supply at least:\n\n1. **Charge attributes.** To each label an attribute with a declared\n   dimension and unit. The dimension group of the framework is generated by\n   length, duration and mass alone ([[def-cm01-units]] clause (a)); the\n   dimension and unit of charge, and of the components of any field used,\n   must therefore be declared by the coupling and cannot be inferred from\n   this framework.\n2. **Field maps.** Electric and magnetic fields (or the corresponding\n   potentials) as maps with declared domains, regularity, sources and\n   boundary or radiation conditions, supplied by an independently developed\n   electromagnetic model; the particle framework constrains none of these.\n3. **A coupling law.** An added force map $F^{\\mathrm{EM}}$ per label, for\n   instance a declared function of the fields, the charge and the label's\n   velocity in the chosen frame, as in the Lorentz force of the cited\n   electromagnetic treatment. The coupling law is adopted: the framework\n   neither derives it nor tests it.\n4. **Field-side bookkeeping.** If statements about the energy or momentum of\n   the combined system are wanted, the field contributions and their balance\n   with the particles must be declared as separate objects; this framework\n   contains no field energy or field momentum.\n\n## What the force branch yields conditionally\n\nOnce a coupling has been declared, the mechanical theorems apply to the\ntotal force map $F+F^{\\mathrm{EM}}$ provided it satisfies the standing\nhypotheses of the force branch (continuity and state-local Lipschitz,\nlocally uniformly in time) on the declared domain: then\n[[pthm-cm02-ivp]] and [[pthm-cm02-continuation]] give the local, unique and\nmaximal motions of the coupled model, and the balance laws of the\n[[def-cm03-centre-of-mass-and-momenta|balance page]] apply with the coupling\nforce among the external contributions.\n\nNo field-momentum theorem is imported. With the electromagnetic force\ntreated as external to the declared particle labels, the particle mechanical\nmomentum alone need not be conserved; the balance laws record the exchange\nthrough the external force, and the open-system boundary of\n[[rem-cm02-open-system-warning]] applies. A conservation statement for\nmatter plus field requires the field contributions of item 4 above as\nadditional declared data, and is not a consequence of this framework.\n\n## What is not claimed\n\nNo field equation, no value or dimension of any charge or coupling constant,\nno derivation or validation of a coupling law, no prediction of any\nelectromagnetic phenomenon and no measured electromagnetic quantity is\nasserted. The observable models of [[def-cm18-observable-model]] acquire an\nelectromagnetic readout only after a coupling has been declared; until then\nthis framework is silent about electric and magnetic effects.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm01-units",
+          "post-cm01-worldlines",
+          "post-cm02-force-superposition",
+          "post-cm02-interactions",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "pthm-cm02-continuation",
+          "rem-cm02-open-system-warning",
+          "def-cm03-centre-of-mass-and-momenta",
+          "pthm-cm03-frame-transformations",
+          "rem-cm03-conservation-scope"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "post-cm02-force-superposition": "physical-assumption",
+          "post-cm02-interactions": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "pthm-cm02-continuation": "physical-result",
+          "rem-cm02-open-system-warning": "formulation-prerequisite",
+          "def-cm03-centre-of-mass-and-momenta": "formulation-prerequisite",
+          "pthm-cm03-frame-transformations": "physical-result",
+          "rem-cm03-conservation-scope": "formulation-prerequisite"
+        },
+        "dependency_level": 15,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Electromagnetism (Cambridge lecture notes, 2006-2007; current author-hosted file electro.pdf), Section 1.1, printed page 5 (PDF page 5), equation (1.2): the Lorentz force law F = q(E + rdot x B) as the declared force on a charge, with the motion then determined by Newton's equation F = m rddot; Section 5.4.1, printed page 115, for the covariant display",
+              "url": "https://www.davidtong.org/pdfs/teaching/electromagnetism/electro.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, printed pages 5-9 (PDF pages 11-15): external forces as declared model contributions and the open-system warning that momentum exchange with an omitted field is not covered by the particle system's pair structure",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the force law and its parameters as model input, with an external force whose microscopic source is not modelled treated as declared data",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "reference": "prose-scaffold.md#evidence-review-and-cross-framework-limits",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark on the interface between the particle framework and a separately developed electromagnetic model: the additional data a coupling requires (charge attributes with declared dimensions, field maps with domains and regularity, and an added coupling force law), the conditional reuse of the force-branch existence and balance results once such an added force map satisfies the standing hypotheses, and the explicit non-import of field equations, field energy-momentum theorems and coupling-constant values. The item derives no electromagnetic law, predicts no electromagnetic phenomenon and asserts no measured value."
+      },
+      {
+        "id": "rem-cm18-qm-bridge",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "The quantum bridge: a distinct framework, the shape of a quantization or correspondence result, and the absence of any such theorem in this framework",
+        "statement": "## Two distinct frameworks\n\nThis framework describes a physical system by labels with $C^{2}$ worldlines\nparametrized by frame time, fixed masses ([[post-cm01-worldlines]]) and a\ndeclared force map whose maximal motions are deterministic objects\n([[post-cm02-force-superposition]], [[def-cm02-newtonian-flow]],\n[[pthm-cm02-ivp]]). The point-particle idealization itself is an adopted\ndescription: the cited treatment records that it neglects the\nquantum-mechanical uncertainties of the position. A quantum framework is a\n**different model** with its own primitives — states, observables and\nprobability postulates — and none of its objects is defined here. The\nprobability space of an operational observable model\n([[def-cm18-observable-model]]) is attached to the declared error random\nelement of a coordinate readout; it is not a state, not an observable\nalgebra, and not a probability rule for a physical system, as\n[[rem-cm-inference-and-uncertainty-scope]] already records for the\nmathematical interface.\n\n## What a correspondence result would require\n\nRelating the two frameworks is a mathematical task with two parts:\n\n1. a **reconstruction or quantization construction**: a declared map from\n   data of the mechanical model to the objects of the quantum framework, with\n   its domain, its algebraic consistency conditions and its treatment of\n   ordering ambiguities. The cited treatment presents canonical quantization\n   as exactly such a prescription between Poisson brackets and commutators;\n   it is an additional rule, not a theorem of this framework, and the\n   replacement of a classical phase-space variable by an operator is not a\n   deduction inside it.\n2. **limit theorems with explicit hypotheses**: statements that specified\n   quantum predictions converge, in a stated topology and under stated\n   regularity and small-parameter conditions, to specified classical\n   predictions, with an error estimate. The cited treatment performs the\n   classical limit only under an explicit inequality on the phase of the\n   wavefunction and obtains the Hamilton-Jacobi equation at leading order;\n   that is an approximation argument with hypotheses, not an identity\n   between the two frameworks.\n\n## What is not claimed\n\nNo quantization construction, no semiclassical limit theorem, no\ncorrespondence principle, no derivation of quantum mechanics from this\nframework and no derivation of this framework from a quantum one is\nasserted. No quantum phenomenon is predicted, explained or excluded here;\nno trajectory is assigned to a particle between preparations and detections\nof a quantum experiment; and the error random element of an observable\nmodel is not identified with a quantum measurement outcome. A bridge\nbetween the frameworks would be a separate development stating its own\nconstruction, hypotheses and error control, and would not change the status\nof any statement on this page.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "post-cm01-spacetime",
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "rem-cm01-model-limit",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "rem-cm-inference-and-uncertainty-scope"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "post-cm01-spacetime": "physical-assumption",
+          "post-cm01-frames": "physical-assumption",
+          "post-cm01-worldlines": "physical-assumption",
+          "rem-cm01-model-limit": "formulation-prerequisite",
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "rem-cm-inference-and-uncertainty-scope": "mathematical-premise"
+        },
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.8 and Section 4.8.1, printed pages 125-129 (PDF pages 125-129): canonical quantization as a prescription between Poisson brackets and commutators, and the classical limit taken under the explicit condition hbar |d2W/dq2| << |dW/dq| leading to the Hamilton-Jacobi equation at leading order",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.1 point (vi), chapter page 3 (PDF page 7): classical mechanics neglects the quantum-mechanical uncertainties, which is why the position of a particle is modelled by a single point; and Section 1.2, chapter page 3: Newton's laws are experimental in nature and cannot be derived from purely theoretical arguments",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "reference": "prose-scaffold.md#evidence-review-and-cross-framework-limits",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark on the relation between this particle framework and a non-relativistic quantum framework: the point-particle idealization that the framework adopts, the ingredients a quantization or correspondence result would need (a reconstruction construction plus limit theorems with explicit domains and hypotheses), and the explicit absence of any such result from this framework. The item derives no quantum statement, predicts no quantum phenomenon, and attaches no quantum interpretation to the probability space of its observable models."
+      },
+      {
+        "id": "rem-cm18-primary-report-contract",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Contract for a future reported experiment of the framework: source, setup, calibration, procedure, sampling, observations, uncertainty and interpretation",
+        "statement": "## What a reported experiment must supply\n\nA later **experiment item** for this framework is a report of an actual\nmeasurement, and must be assembled from an actually retrieved primary source\nand record, separately:\n\n1. **Source.** A primary report with a resolvable reference, read in full:\n   an apparatus paper, an instrument report or a data release, not a\n   textbook exposition of a law and not a secondary anecdote.\n2. **Setup.** The prepared system in the vocabulary of the model: labels,\n   declared parameters, configurations and the initial-data region\n   ([[def-cm18-observable-model]]); the apparatus and its settings; and the\n   **calibration** with its reference inputs and their declared deviations\n   ([[def-cm18-calibration]]).\n3. **Procedure.** The measurement protocol in a declared inertial frame:\n   observation times, readout, units; the **sampling model** with its\n   adopted IID and second-moment hypotheses, or an explicit statement of the\n   dependence or drift that replaces them ([[def-cm18-sampling-model]]); and\n   the selection of the reported data.\n4. **Observations.** The values actually reported by the source, with their\n   units and their conditions, quoted or transcribed faithfully. If the\n   source records no quantitative detail, only a correspondingly limited\n   qualitative account is supported; no precision, count or value may be\n   supplied from elsewhere.\n5. **Uncertainty.** The statistical and systematic uncertainty treatment of\n   the source and of the calibration: Type A evaluation from repeated\n   observations, Type B evaluation from declared bounds and reference data,\n   combination and expansion, and the deviations of the reference standards.\n   Measured inputs of the comparison model carry their uncertainties and\n   conditions into the conclusion ([[rem-cm-inference-and-uncertainty-scope]]).\n6. **Interpretation.** A specified comparison between the reported\n   observations and a specified prediction of the model, including the\n   idealizations the prediction uses; a specified discrepancy measure; and a\n   specified test — data space, model family, null set and rejection region\n   with its size ([[def-cm-statistical-test-and-size]]) — or a specified\n   estimation or confidence construction ([[def-cm-confidence-set-and-coverage]],\n   [[def-cm-likelihood-function]]). Agreement is evidence for the joint\n   assumptions of model, apparatus and analysis, and a discrepancy may\n   expose any of them.\n\n## What is and is not available now\n\nThe treatments cited by this framework are model exposition; they are not\nprimary reports of a measurement of the framework's parameters under a\ncontrolled preparation, and the citations of this page therefore close no\nexperiment obligation. No experiment item, no observation, no measured\nvalue, no uncertainty, no $p$-value and no effect size is asserted by this\npage. The worked computations on the companion page are **proposals**: they\ncompute what a protocol would imply under declared hypothetical data and\nuncertainties. Turning such a proposal into a reported experiment requires\nall six items above, in particular an actually retrieved primary source.",
+        "strategy": "Scope and status remark; no proof supplied.",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm18-calibration",
+          "def-cm18-sampling-model",
+          "def-cm-statistical-test-and-size",
+          "def-cm-likelihood-function",
+          "def-cm-confidence-set-and-coverage",
+          "rem-cm-inference-and-uncertainty-scope"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm18-calibration": "formulation-prerequisite",
+          "def-cm18-sampling-model": "formulation-prerequisite",
+          "def-cm-statistical-test-and-size": "mathematical-premise",
+          "def-cm-likelihood-function": "mathematical-premise",
+          "def-cm-confidence-set-and-coverage": "mathematical-premise",
+          "rem-cm-inference-and-uncertainty-scope": "mathematical-premise"
+        },
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clauses 4.1-4.4 (measurement model, Type A and Type B evaluation of standard uncertainty), clause 5 (combined standard uncertainty) and clause 6 (expanded uncertainty)",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "JCGM 200:2012, International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), definitions 2.39 (calibration), 2.9 (measurement result) and 2.26 (measurement uncertainty)",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf"
+            },
+            {
+              "title": "B. N. Taylor and C. E. Kuyatt, Guidelines for Evaluating and Expressing the Uncertainty of NIST Measurement Results, NIST Technical Note 1297 (1994), Sections 2-6 on Type A and Type B evaluation, combined and expanded uncertainty, and reporting",
+              "url": "https://physics.nist.gov/cuu/pdf/tn1297.pdf"
+            }
+          ]
+        },
+        "reference": "prose-scaffold.md#evidence-review-and-cross-framework-limits",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A scope remark fixing the inventory a future reported experiment of this framework must provide: an actually retrieved primary source, the preparation and apparatus with its calibration data, the measurement protocol in a declared frame, the sampling and selection model, the reported observations with units, the statistical and systematic uncertainty treatment, and a specified comparison model. The item reports no experiment, no observation, no uncertainty and no empirical conclusion; it is a contract for later items, not an experiment."
+      }
+    ]
+  },
+  {
+    "order": 148,
+    "id": "cm18-measurement-uncertainty-and-later-bridges-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Measurement, uncertainty and later bridges — Examples",
+    "companion": "cm18-measurement-uncertainty-and-later-bridges",
+    "requires": [
+      "cm18-measurement-uncertainty-and-later-bridges",
+      "finite-probability-spaces-and-random-variables"
+    ],
+    "items": [
+      {
+        "id": "ex-cm18-pendulum-calibration-proposal",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A proposed small-angle pendulum calibration of a gravitational parameter: linearized propagation and a bounded nonlinearity remainder on declared data",
+        "statement": "## Example\n\nAdopt as the declared physical content of a **proposed protocol** the ideal\nplanar pendulum of the cited treatments: parameters $m,l,g>0$, exact\nequation $ml^{2}\\theta''+mgl\\sin\\theta=0$, and small-angle idealization\n$T=2\\pi\\sqrt{l/g}$ for the period $T$ of a small oscillation, whose\nlinearization at $\\theta=0$ is the quadratic mode of angular frequency\n$\\omega=\\sqrt{g/l}$. The model and its small-angle idealization are **declared\ndata** of the example, adopted from the cited treatments; the exact\nfinite-amplitude period discrepancy is not derived here. No measurement is\nperformed and no measured value is used.\n\n**The declared protocol.** The protocol of [[def-cm18-observable-model]]\nreads two coordinates of one oscillation: the pendulum length $l$ and the\nperiod $T$, both with the dimensions and units of [[def-cm01-units]]\n($[l]=\\ell$, $[T]=\\tau$). As its prediction map for a gravitational\nparameter it uses\n$$h:U\\longrightarrow\\mathbb R,\\qquad U:=\\bigl\\{(l,T)\\in\\mathbb R^{2}:l>0,\\ T>0\\bigr\\},\\qquad h(l,T):=\\frac{4\\pi^{2}l}{T^{2}},$$\nan idealization whose exact justification would require the small-angle\nperiod relation of the cited treatments. The difference between the exact\nperiod of the ideal pendulum at finite amplitude and $2\\pi\\sqrt{l/g}$ is a\n**model discrepancy** of the protocol, denoted $\\delta\\ge0$ in units of\n$\\tau$; this example neither estimates nor bounds $\\delta$, and a\nquantitative use of the protocol must supply it separately. The reference\ndeviations of any calibration of the apparatus are likewise data of\n[[def-cm18-calibration]] and are not part of the computation below.\n\n**Declared data.** Fix a nominal input $\\mu=(l_{0},T_{0})\\in U$ with\n$l_{0},T_{0}>0$ and radii $0<\\rho_{l}<l_{0}$, $0<\\rho_{T}<T_{0}$, and put\n$$U_{B}:=(l_{0}-\\rho_{l},\\,l_{0}+\\rho_{l})\\times(T_{0}-\\rho_{T},\\,T_{0}+\\rho_{T}) \\subseteq U,$$\nan open convex box. Let $X=(l,T):\\Omega\\to U_{B}$ be a square-integrable\nrandom vector with\n$$E[X]=\\mu,\\qquad \\operatorname{Cov}(X)=\\begin{pmatrix}\\sigma_{l}^{2}&\\sigma_{lT}\\\\ \\sigma_{lT}&\\sigma_{T}^{2}\\end{pmatrix}.$$\nAll entries are declared **model data**: no reading of an apparatus is\nasserted. With $h$ as above:\n\n1. $h$ is $C^{\\infty}$ on $U$, with\n   $$\\frac{\\partial h}{\\partial l}(l,T)=\\frac{4\\pi^{2}}{T^{2}}=\\frac{h(l,T)}{l}, \\qquad \\frac{\\partial h}{\\partial T}(l,T)=-\\frac{8\\pi^{2}l}{T^{3}} =-\\frac{2h(l,T)}{T},$$\n   so $Dh(\\mu)$ has the two components $h(\\mu)/l_{0}$ and $-2h(\\mu)/T_{0}$;\n2. the Hessian on $U$ is\n   $$H_{h}(l,T)=\\begin{pmatrix}0&-\\dfrac{8\\pi^{2}}{T^{3}}\\\\[2mm] -\\dfrac{8\\pi^{2}}{T^{3}}&\\dfrac{24\\pi^{2}l}{T^{4}}\\end{pmatrix},$$\n   and on $U_{B}$ its operator norm is at most the Frobenius bound\n   $$B:=\\Bigl(\\Bigl(\\frac{8\\pi^{2}}{(T_{0}-\\rho_{T})^{3}}\\Bigr)^{2} +\\Bigl(\\frac{24\\pi^{2}(l_{0}+\\rho_{l})}{(T_{0}-\\rho_{T})^{4}}\\Bigr)^{2} \\Bigr)^{1/2};$$\n3. the covariance of the linearization\n   $T_{\\mu}(x)=h(\\mu)+Dh(\\mu)\\cdot(x-\\mu)$ is the $1\\times1$ matrix\n   $$\\operatorname{Cov}\\bigl(T_{\\mu}(X)\\bigr) =\\frac{16\\pi^{4}}{T_{0}^{4}}\\,\\sigma_{l}^{2} -\\frac{64\\pi^{4}l_{0}}{T_{0}^{5}}\\,\\sigma_{lT} +\\frac{64\\pi^{4}l_{0}^{2}}{T_{0}^{6}}\\,\\sigma_{T}^{2},$$\n   which for uncorrelated inputs ($\\sigma_{lT}=0$) reads\n   $$T_{0}^{4}\\,\\operatorname{Cov}\\bigl(T_{\\mu}(X)\\bigr) =16\\pi^{4}\\Bigl(\\sigma_{l}^{2}+\\frac{4l_{0}^{2}}{T_{0}^{2}}\\,\\sigma_{T}^{2}\\Bigr) =h(\\mu)^{2}\\Bigl(\\frac{\\sigma_{l}^{2}}{l_{0}^{2}} +\\frac{4\\sigma_{T}^{2}}{T_{0}^{2}}\\Bigr);$$\n4. for the nonlinearity remainder\n   $R:=h(X)-h(\\mu)-Dh(\\mu)\\cdot(X-\\mu)$ one has the pointwise bound\n   $\\lvert R\\rvert\\le\\frac{B}{2}\\lvert X-\\mu\\rvert^{2}$, hence\n   $\\lvert E[R]\\rvert\\le E\\lvert R\\rvert\\le\\frac{B}{2}E\\lvert X-\\mu\\rvert^{2}$,\n   and if $E\\lvert X-\\mu\\rvert^{4}<+\\infty$ then\n   $E[R^{2}]\\le\\frac{B^{2}}{4}E\\lvert X-\\mu\\rvert^{4}$.\n\nSince $E[X]=\\mu$ gives $E\\bigl[Dh(\\mu)(X-\\mu)\\bigr]=0$, the mean of the\nreading $\\hat g:=h(X)$ satisfies\n$\\bigl\\lvert E[\\hat g]-h(\\mu)\\bigr\\rvert\\le\\frac{B}{2}E\\lvert X-\\mu\\rvert^{2}$,\nwhile the exact variance of the linearization is the matrix of clause 3. The\nactual variance of $\\hat g$ differs from it by terms controlled by clause 4\nonly under the stated fourth-moment hypothesis; the model discrepancy\n$\\delta$ and the reference deviations of the calibration contribute further\nunquantified terms. The protocol is a proposal: no value of $l$, $T$, $g$,\n$\\sigma_{l}$, $\\sigma_{T}$, $\\sigma_{lT}$, $\\delta$ or $B$ is a measurement\nhere.\n\n## Facts & Assumptions\n\n**Given:** The declared protocol and its idealization of the statement, the open convex set $U$, the map $h(l,T)=4\\pi^{2}lT^{-2}$, the point $\\mu=(l_{0},T_{0})\\in U$, the open box $U_{B}\\subseteq U$, and the random vector $X$ with mean $\\mu$ and covariance matrix as displayed.\n\n[L1] The declared model: the ideal pendulum equation $ml^{2}\\theta''+mgl\\sin\\theta=0$ and the small-angle period relation $T=2\\pi\\sqrt{l/g}$, with linearized angular frequency $\\omega=\\sqrt{g/l}$, are the model adopted from the cited treatments ([[def-cm18-observable-model]] for the protocol structure); the prediction map $h(l,T)=4\\pi^{2}l/T^{2}$ is this relation written for the parameter $g$, and the finite-amplitude period discrepancy is the declared model error $\\delta$, not bounded here.\n\n[L2] Powers and their derivatives: for $n\\ge1$ the function $x\\mapsto x^{-n}$ is differentiable on $\\{x\\ne0\\}$ with derivative $-n x^{-n-1}$, and the algebra of derivatives gives the product and quotient rules ([[lem-derivative-of-a-power]], [[thm-algebra-of-derivatives]]); the set $U$ is open and convex, and $h$ is $C^{\\infty}$ on it because $T>0$ there; total differentiability and the Jacobian and Hessian conventions are those of [[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]] and [[def-hessian-and-euclidean-critical-point]], with the Euclidean norm of [[def-euclidean-inner-product]].\n\n[L3] Linearized propagation: for a totally differentiable $h:U\\to\\mathbb R$ at $\\mu$, a random element $X$ with values in $U$, mean $\\mu$ and covariance matrix $\\Sigma$, the affine map $T_{\\mu}(x)=h(\\mu)+Dh(\\mu)\\cdot(x-\\mu)$ applied to $X$ has covariance matrix $Dh(\\mu)\\Sigma Dh(\\mu)^{\\mathsf T}$ ([[lem-cm-linearized-propagation-of-covariance]], [[def-cm-covariance-matrix-of-a-random-vector]]).\n\n[L4] Remainder bounds: on an open convex set with $\\lVert H_{h}\\rVert\\le B$ and $X$ taking values in it with $E[X]=\\mu$, the remainder $R=h(X)-h(\\mu)-\\nabla h(\\mu)\\cdot(X-\\mu)$ satisfies $\\lvert R\\rvert\\le\\frac{B}{2}\\lvert X-\\mu\\rvert^{2}$ pointwise, $\\lvert E[R]\\rvert\\le E\\lvert R\\rvert\\le\\frac{B}{2}E\\lvert X-\\mu\\rvert^{2}$, and $E[R^{2}]\\le\\frac{B^{2}}{4}E\\lvert X-\\mu\\rvert^{4}$ when the fourth moment is finite ([[lem-cm-uniform-second-order-remainder-bound]], [[cor-cm-linearization-error-bounds]]).\n\n[L5] Linearity of expectation for integrable components: the expectation of a finite linear combination of integrable real random variables is the same linear combination of the expectations, so for a fixed vector $u$ and a square-integrable random vector $X$ with $E[X]=\\mu$ one has $E\\bigl[u\\cdot(X-\\mu)\\bigr]=0$ ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]).\n\n## Verification\n\n**Proof technique:** direct computation of the first and second derivatives, application of the linearized propagation identity, and application of the uniform second-order remainder bound.\n\n1.1 On $U$ the function $l\\mapsto 4\\pi^{2}l$ is a polynomial and $T\\mapsto T^{-2}$ has derivative $-2T^{-3}$ by [L2], so the product rule gives $\\partial h/\\partial l=4\\pi^{2}T^{-2}$ and $\\partial h/\\partial T=4\\pi^{2}l\\cdot(-2T^{-3})=-8\\pi^{2}lT^{-3}$, which the identity $h=4\\pi^{2}lT^{-2}$ turns into $h/l$ and $-2h/T$; hence $Dh(\\mu)=\\bigl(h(\\mu)/l_{0},\\,-2h(\\mu)/T_{0}\\bigr)$. [given, L2, algebra]\n\n2.1 Differentiating the first derivatives with the same rules gives $\\partial^{2}h/\\partial l^{2}=0$, $\\partial^{2}h/\\partial l\\partial T=-8\\pi^{2}T^{-3}$ and $\\partial^{2}h/\\partial T^{2}=24\\pi^{2}lT^{-4}$, the symmetric Hessian $H_{h}$ of clause 2 of the statement; for $(l,T)\\in U_{B}$ one has $T>T_{0}-\\rho_{T}>0$ and $l<l_{0}+\\rho_{l}$, so the moduli of the two second derivatives are below $8\\pi^{2}(T_{0}-\\rho_{T})^{-3}$ and $24\\pi^{2}(l_{0}+\\rho_{l})(T_{0}-\\rho_{T})^{-4}$; since the Euclidean operator norm of a real symmetric $2\\times2$ matrix is at most its Frobenius norm, the square root of the sum of the squares of the entries, $\\lVert H_{h}(x)\\rVert\\le B$ holds on $U_{B}$ with the displayed $B$. [step 1.1, L2, algebra]\n\n2.2 The map $h$ is $C^{2}$ on the open convex $U$, hence totally differentiable at $\\mu$ with $Dh(\\mu)$ as in step 1.1, and $X$ takes values in $U_{B}\\subseteq U$ with mean $\\mu$ and covariance matrix $\\Sigma$, so [L3] identifies the covariance matrix of $T_{\\mu}(X)$ as the $1\\times1$ matrix $Dh(\\mu)\\Sigma Dh(\\mu)^{\\mathsf T}=\\bigl(h(\\mu)/l_{0}\\bigr)^{2}\\sigma_{l}^{2}-2\\bigl(h(\\mu)/l_{0}\\bigr)\\bigl(2h(\\mu)/T_{0}\\bigr)\\sigma_{lT}+\\bigl(2h(\\mu)/T_{0}\\bigr)^{2}\\sigma_{T}^{2}$; substituting $h(\\mu)=4\\pi^{2}l_{0}/T_{0}^{2}$ gives the three terms of clause 3, and at $\\sigma_{lT}=0$ the relation $Dh\\Sigma Dh^{\\mathsf T}=h(\\mu)^{2}\\bigl(\\sigma_{l}^{2}/l_{0}^{2}+4\\sigma_{T}^{2}/T_{0}^{2}\\bigr)$ follows by factoring out $h(\\mu)^{2}=16\\pi^{4}l_{0}^{2}/T_{0}^{4}$. [given, step 1.1, L3, algebra]\n\n3.1 Steps 1.1 and 2.1 exhibit $h$ as $C^{2}$ on the open convex box $U_{B}$ with $\\lVert H_{h}\\rVert\\le B$ there, and $X$ takes values in $U_{B}$ with $E[X]=\\mu$; [L4] with this $B$ gives the pointwise bound, the two mean bounds and the squared-moment bound of clause 4, the last under its stated fourth-moment hypothesis. [step 2.1, L4, algebra]\n\n4.1 By [L5] with $u=Dh(\\mu)$ the term $E\\bigl[Dh(\\mu)(X-\\mu)\\bigr]$ vanishes because $E[X]=\\mu$, so $E[\\hat g]=h(\\mu)+E[R]$ and clause 4 bounds $\\lvert E[\\hat g]-h(\\mu)\\rvert$ by $\\frac{B}{2}E\\lvert X-\\mu\\rvert^{2}$, while the exact variance of $\\hat g$ equals the propagated covariance of step 2.2 plus the covariance contributions of $R$, controlled by clause 4 only under the fourth-moment hypothesis; the model discrepancy $\\delta$ of [L1] and the reference deviations of [[def-cm18-calibration]] are additional, separately declared terms, no number in the statement is a measured value, and the protocol has the status of a proposal for a future reported experiment in the sense of [[rem-cm18-primary-report-contract]]. [step 2.2, step 3.1, L1, L5, given] ∎",
+        "strategy": "direct",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm18-calibration",
+          "rem-cm18-primary-report-contract",
+          "lem-cm-linearized-propagation-of-covariance",
+          "lem-cm-uniform-second-order-remainder-bound",
+          "cor-cm-linearization-error-bounds",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-cm-covariance-matrix-of-a-random-vector",
+          "def-cm01-units",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-euclidean-inner-product",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm18-calibration": "formulation-prerequisite",
+          "rem-cm18-primary-report-contract": "formulation-prerequisite",
+          "lem-cm-linearized-propagation-of-covariance": "mathematical-premise",
+          "lem-cm-uniform-second-order-remainder-bound": "mathematical-premise",
+          "cor-cm-linearization-error-bounds": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "def-cm-covariance-matrix-of-a-random-vector": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clauses 5.1.2-5.1.3 (law of propagation of uncertainty, sensitivity coefficients), clause 5.2.2 (correlated inputs, equation (13)), and example H.5.2 on the period of a pendulum model, which treats exactly the relation between a period, a length and a gravitational parameter",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.1, chapter pages 1-3 (PDF pages 39-41): the pendulum equation and its small-oscillation linearization with frequency omega0 = sqrt(g/l), with the small-angle approximation treated as an idealization",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2.4 and Chapter 3, printed pages 6-7 and 52-59: the pendulum as a one-dimensional system and its small-oscillation description",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A worked, explicitly hypothetical calibration proposal inside the pendulum branch: the declared protocol reads a length and a duration and uses the small-angle period relation 4 pi^2 l / T^2 as its prediction map for a gravitational parameter, with the period relation declared as the model adopted from the cited treatments and the finite-amplitude discrepancy left as an unquantified model error. The item computes the first and second derivatives of the model function, the exactly propagated covariance of the linearization, and the bounded nonlinearity remainder on a declared box; it asserts no measured length, period, parameter value or uncertainty."
+      },
+      {
+        "id": "ex-cm18-uniform-motion-sampling-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Repeated observation of a uniform motion: prediction map, adopted IID sampling hypotheses and the resulting sample-mean bound on declared data",
+        "statement": "## Example\n\n**The declared model.** In the force branch [[post-cm02-force-superposition]]\ntake $N=1$ label of mass $m>0$, time window $I_{0}=\\mathbb R$, configuration\ndomain $Q=\\mathbb R^{3}$ and the **zero force map** $F(t,x,v):=0$. It is\ncontinuous and state-Lipschitz with constant $0$, so it satisfies the\nstanding hypotheses of the branch. With $e_{1}$ the first standard basis\nvector and a parameter $v\\in\\mathbb R$ of dimension $\\ell\\tau^{-1}$\n([[def-cm01-units]]), declare the initial datum $\\zeta(v):=(0,0,v e_{1})$ at\ntime $t_{0}=0$, so that $\\Theta:=\\mathbb R$ and the datum map $\\zeta$ of\n[[def-cm18-observable-model]] is defined. Fix an observation time $t_{1}>0$\nand the **position readout** $\\Phi(v):=x_{v}(t_{1})\\cdot e_{1}$, where\n$x_{v}$ is the motion of the model with datum $\\zeta(v)$; the readout has\ndimension $\\ell$ and is read in metres.\n\n**The motion.** The curve $x_{v}(t):=(vt,0,0)$, $t\\in\\mathbb R$, is a\nmotion of the declared model with datum $\\zeta(v)$: its coordinate velocity\nis $w_{v}(t)=(v,0,0)$ ([[def-cm01-velocity-acceleration]]), its coordinate\nacceleration vanishes, and $m\\ddot x_{v}=0=F$ identically\n([[def-cm02-newtonian-flow]]). Hence the prediction map is\n$\\Phi(v)=v\\,t_{1}$, of dimension $\\ell$ with $[t_{1}]=\\tau$.\n\n**The repeated protocol.** Fix $n\\ge1$ and adopt the IID sampling hypothesis\nand the second-moment hypothesis of [[def-cm18-sampling-model]] for the\nerrors $\\varepsilon_{1},\\dots,\\varepsilon_{n}$ of $n$ repetitions of the\nprotocol at the same parameter $v$ and the same preparation, on a common\nprobability space. Suppose additionally that $E[\\varepsilon_{1}]=0$ and\n$\\operatorname{Var}(\\varepsilon_{1})=\\sigma^{2}\\in[0,+\\infty)$; these two\nstatements are extra model hypotheses, not part of either definition. Then\nthe observations are $Y_{k}=v t_{1}+\\varepsilon_{k}$ and\n$$\\mu:=E[Y_{1}]=v\\,t_{1},\\qquad \\sigma^{2}=\\operatorname{Var}(Y_{1}),\\qquad \\overline Y=\\frac1n\\sum_{k=1}^{n}Y_{k}.$$\nConsequently, by [[cor-iid-finite-variance-weak-law]],\n$$E\\bigl\\lvert\\overline Y-v t_{1}\\bigr\\rvert^{2}=\\frac{\\sigma^{2}}{n}, \\qquad \\mathbb P\\bigl(\\bigl\\lvert\\overline Y-v t_{1}\\bigr\\rvert\\ge a\\bigr) \\le\\frac{\\sigma^{2}}{n\\,a^{2}}\\quad(a>0).$$\n\n**A declared illustration.** With the declared model data\n$v:=2\\,\\mathrm m\\,\\mathrm s^{-1}$, $t_{1}:=3\\,\\mathrm s$, $\\sigma^{2}:=4\\,\\mathrm m^{2}$\nand $n:=16$, the nominal prediction is $v t_{1}=6\\,\\mathrm m$ and the bound\nreads $\\mathbb P(\\lvert\\overline Y-6\\,\\mathrm m\\rvert\\ge1\\,\\mathrm m)\\le\\frac{4}{16\\cdot1}=\\frac14$.\nThese numbers are hypothetical illustration of the formula; they are not\nmeasured values, and no apparatus is asserted to realize the protocol.\n\n## Facts & Assumptions\n\n**Given:** The one-label model with zero force map of the statement, the datum map $\\zeta(v)=(0,0,ve_{1})$, the observation time $t_{1}>0$, the position readout $\\Phi(v)=x_{v}(t_{1})\\cdot e_{1}$, and the adopted IID, second-moment, zero-mean and variance hypotheses on the errors of $n$ repetitions.\n\n[L1] The curve $x_{v}(t)=(vt,0,0)$ is of class $C^{\\infty}$; coordinate velocities and accelerations are obtained componentwise, and a motion of the model is a $C^{2}$ curve satisfying $m\\ddot x=F$ on the time window ([[def-cm01-velocity-acceleration]], [[def-cm02-newtonian-flow]]); the zero force map satisfies the standing hypotheses of [[post-cm02-force-superposition]] because it is continuous and state-Lipschitz with constant $0$.\n\n[L2] Under the IID and second-moment hypotheses, the sampling model [[def-cm18-sampling-model]] has common mean $\\mu=E[Y_{1}]$ and variance $\\sigma^{2}=\\operatorname{Var}(Y_{1})$ defined by [[def-moments-variance-and-covariance]], and the mathematical consequences for the sample mean are those of [[cor-iid-finite-variance-weak-law]]: $E\\lvert\\overline Y-\\mu\\rvert^{2}=\\sigma^{2}/n$ and $\\mathbb P(\\lvert\\overline Y-\\mu\\rvert\\ge a)\\le\\sigma^{2}/(na^{2})$ for $a>0$.\n\n[L3] Variance and covariance identities: for square-integrable real random variables, $\\operatorname{Var}(X)=E[X^{2}]-E[X]^{2}$ and covariance is symmetric and bilinear on finite linear combinations; consequently adding a constant to a random variable leaves its variance unchanged ([[lem-variance-and-covariance-identities-for-random-variables]], [[def-moments-variance-and-covariance]]).\n\n## Verification\n\n**Proof technique:** direct substitution to exhibit the motion, evaluation of the readout, and application of the cited sampling corollary to the declared data.\n\n1.1 For every $t\\in\\mathbb R$ one has $x_{v}(t)=(vt,0,0)$, $w_{v}(t)=x_{v}'(t)=(v,0,0)$ and $\\ddot x_{v}(t)=(0,0,0)$, so the equation $m\\ddot x_{v}(t)=F(t,x_{v}(t),w_{v}(t))=0$ holds identically by [L1], and $x_{v}(0)=(0,0,0)$ with $w_{v}(0)=(v,0,0)$ matching the datum $\\zeta(v)$; hence $x_{v}$ is a motion with datum $\\zeta(v)$. [given, L1]\n\n1.2 Evaluating the readout at the state of that motion at $t_{1}$ gives $\\Phi(v)=x_{v}(t_{1})\\cdot e_{1}=v\\,t_{1}$, linear in $v$, with $[\\Phi(v)]=\\ell$ because $[v]=\\ell\\tau^{-1}$ and $[t_{1}]=\\tau$ ([[def-cm01-units]]); by [[def-cm18-observable-model]] the observation of a single run at parameter $v$ is $Y=\\Phi(v)+\\varepsilon$, and the repeated protocol of [[def-cm18-sampling-model]] has $Y_{k}=\\Phi(v)+\\varepsilon_{k}$. [given, L1, algebra]\n\n1.3 The hypotheses $E[\\varepsilon_{1}]=0$ and $\\operatorname{Var}(\\varepsilon_{1})=\\sigma^{2}$ transfer to $Y_{k}=vt_{1}+\\varepsilon_{k}$ by linearity of expectation and the translation invariance of variance from [L3], so $\\mu=vt_{1}$ and $E\\lvert Y_{1}\\rvert^{2}=\\mu^{2}+\\sigma^{2}<+\\infty$; the family $(Y_{k})_{k\\le n}$ is IID with common mean $\\mu$ and variance $\\sigma^{2}$, and [L2] gives the two displayed conclusions for $\\overline Y$. [given, L2, L3, algebra]\n\n2.1 Substituting the declared model data into the identity and the bound of step 1.3 gives $E\\lvert\\overline Y-6\\,\\mathrm m\\rvert^{2}=\\frac{4}{16}\\,\\mathrm m^{2}=\\frac14\\,\\mathrm m^{2}$ and $\\mathbb P(\\lvert\\overline Y-6\\,\\mathrm m\\rvert\\ge1\\,\\mathrm m)\\le\\frac14$, computations on declared data. [step 1.3, algebra]\n\n3.1 The computed quantities are model quantities of the declared force model and the adopted sampling hypotheses; the example asserts no motion of a physical body, no apparatus reading and no measured uncertainty, and a use of the displayed bound in inference carries the IID and second-moment hypotheses, the zero-mean and variance hypotheses of the errors, and the declared units. [step 1.3, step 2.1, given] ∎",
+        "strategy": "direct",
+        "deps": [
+          "def-cm18-observable-model",
+          "def-cm18-sampling-model",
+          "def-cm02-newtonian-flow",
+          "post-cm02-force-superposition",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "cor-iid-finite-variance-weak-law",
+          "def-moments-variance-and-covariance",
+          "lem-variance-and-covariance-identities-for-random-variables"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "def-cm18-sampling-model": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "cor-iid-finite-variance-weak-law": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise",
+          "lem-variance-and-covariance-identities-for-random-variables": "mathematical-premise"
+        },
+        "dependency_level": 13,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clause 4.2.1 on the arithmetic mean of repeated observations and clause 5.1.2, equation (10), on the combination of standard uncertainties",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 2.2.1: the variance of a sum of independent variables and the L2 weak law for i.i.d. sequences (Theorem 2.2.3)",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): Newton's second law for a particle and the free particle with constant velocity",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A worked conditional computation on a declared one-label force model with zero force: the motion with constant coordinate velocity is checked to be a motion, the protocol reads one position coordinate at one time, and under the adopted IID and second-moment hypotheses of the sampling model the sample mean of repeated readings satisfies the displayed variance identity and probability bound. All numerical values are declared model data and hypothetical illustration; no physical motion, apparatus reading, measured velocity or uncertainty is asserted."
+      },
+      {
+        "id": "ex-cm18-frame-change-of-an-observation-model",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Frame change of a declared protocol: how the prediction map and an additive error transform between two inertial frames",
+        "statement": "## Example\n\nFix the force branch and a model as in [[def-cm18-observable-model]], and fix\ntwo inertial frames $F$, $F'$ of the model with adapted coordinates $(t,x)$\nand $(t',x')$. By [[pthm-cm01-galilean-kinematics]] there are $b\\in\\mathbb R$,\n$a_{0},v\\in\\mathbb R^{3}$ and $R\\in SO(3)$ with\n$$t'(p)=t(p)+b,\\qquad x'(p)=R\\,x(p)+v\\,t(p)+a_{0}\\qquad\\text{for every event }p .$$\n\n**The protocol in $F$.** Take a protocol of [[def-cm18-observable-model]]\nwith a single observation time $t_{1}\\in I_{0}$ and the **position readout**\n$\\Phi(\\theta,z):=x_{\\theta,z}(t_{1})\\in\\mathbb R^{3}$ of dimension $\\ell$,\nread in metres ([[def-cm01-units]]); the observation is\n$$Y=\\Phi(\\theta,z)+\\varepsilon$$\nfor an error random element $\\varepsilon:\\Omega\\to\\mathbb R^{3}$ on a\nprobability space $(\\Omega,\\mathfrak F,\\mathbb P)$.\n\n**The protocol in $F'$.** The same event at which the readout is taken has\n$F'$-time $t_{1}+b$; reading the same label position in $F'$ at that time\ndefines the prediction map of the protocol in $F'$,\n$$\\Phi'(\\theta,z):=x'_{\\theta,z}(t_{1}+b)=R\\,\\Phi(\\theta,z)+v\\,t_{1}+a_{0},$$\nand the $F'$-coordinates of the recorded point are\n$$Y':=R\\,Y+v\\,t_{1}+a_{0}=\\Phi'(\\theta,z)+R\\,\\varepsilon,$$\nso the additive-error form is preserved with the rotated error\n$\\varepsilon':=R\\varepsilon$.\n\n**Transform of the error law.** Suppose $\\varepsilon$ is square-integrable\nwith mean $E[\\varepsilon]=0$ and covariance matrix $\\Sigma$ in the sense of\n[[def-cm-covariance-matrix-of-a-random-vector]]. Then $\\varepsilon'=R\\varepsilon$\nhas mean $0$ and covariance\n$$\\operatorname{Cov}(\\varepsilon')=R\\,\\Sigma\\,R^{\\mathsf T},$$\nand $\\lvert\\varepsilon'\\rvert=\\lvert\\varepsilon\\rvert$ componentwise in the\nEuclidean norm because $R$ is orthogonal. In particular an additive error\ndeclared in one frame is **not** an additive error with the same law in\nanother: the law transforms by the pushforward under $R$, and the prediction\nmap acquires the known affine term $v\\,t_{1}+a_{0}$. A protocol must declare\nthe frame of its readout and of its error model.\n\n## Facts & Assumptions\n\n**Given:** Two inertial frames $F$, $F'$ with the transformation of [[pthm-cm01-galilean-kinematics]], a protocol with the single position readout $\\Phi(\\theta,z)=x_{\\theta,z}(t_{1})$, and a square-integrable error $\\varepsilon$ with mean $0$ and covariance $\\Sigma$.\n\n[L1] The transformation law between the two frames is $t'(p)=t(p)+b$ and $x'(p)=R x(p)+v t(p)+a_{0}$ for every event $p$, with $b\\in\\mathbb R$, $a_{0},v\\in\\mathbb R^{3}$ and $R\\in SO(3)$; the parameters have dimensions $[b]=\\tau$, $[a_{0,j}]=\\ell$, $[v_{j}]=\\ell\\tau^{-1}$ and $R$ is dimensionless ([[pthm-cm01-galilean-kinematics]], [[post-cm01-frames]], [[def-cm01-units]]).\n\n[L2] A continuous map preimage of a Borel set is Borel, and composing a random element with a Borel map gives a random element: for the continuous affine map $\\alpha(y):=Ry+v t_{1}+a_{0}$ one has $\\alpha^{-1}(B)$ Borel for Borel $B$, and $(\\alpha\\circ\\varepsilon)^{-1}(B)=\\varepsilon^{-1}(\\alpha^{-1}(B))$ ([[def-measurable-function-between-measurable-spaces]], [[thm-continuous-preimages-of-borel-sets-are-borel]], [[def-random-element-and-real-random-variable]]).\n\n[L3] For a square-integrable random vector $X$ with mean $\\mu$ and covariance $\\Sigma$ and a linear map $A$, the affine map $T(x)=h(\\mu)+A(x-\\mu)$ applied to $X$ has covariance $A\\Sigma A^{\\mathsf T}$ ([[lem-cm-linearized-propagation-of-covariance]], [[def-cm-covariance-matrix-of-a-random-vector]]); expectations of integrable components are linear and the components of a linear image are finite linear combinations of integrable components ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]).\n\n## Verification\n\n**Proof technique:** direct transformation of the worldline and of the recorded point by the cited frame-change law, followed by the linear propagation of the error mean and covariance.\n\n1.1 The worldline of the label described in $F'$ satisfies $x'_{\\theta,z}(t')=R\\,x_{\\theta,z}(t'-b)+v(t'-b)+a_{0}$ for $t'\\in J_{\\theta,z}+b$ by [L1] applied to the events of the worldline; the readout event in $F$ has $F$-time $t_{1}$, hence $F'$-time $t_{1}+b$, and evaluating at $t'=t_{1}+b$ gives $\\Phi'(\\theta,z)=R\\,x_{\\theta,z}(t_{1})+v\\,t_{1}+a_{0}=R\\,\\Phi(\\theta,z)+v\\,t_{1}+a_{0}$. [given, L1, algebra]\n\n1.2 Square-integrability of $\\varepsilon$ and the hypothesis $E[\\varepsilon]=0$ give $E[\\varepsilon_{j}]=0$ for every $j$, and the components of $R\\varepsilon$ are finite linear combinations of the integrable components $\\varepsilon_{j}$, so $E[R\\varepsilon]=R\\,E[\\varepsilon]=0$ by linearity of expectation of the components [L3]; for the covariance, [L3] applied to $X=\\varepsilon$, $\\mu=0$ and the affine map $y\\mapsto Ry$ (whose derivative is $R$ at every point) gives $\\operatorname{Cov}(R\\varepsilon)=R\\,\\Sigma\\,R^{\\mathsf T}$, and orthogonality of $R$ gives $\\lvert R u\\rvert=\\lvert u\\rvert$ for every $u$, hence equality of the norms of $\\varepsilon'$ and $\\varepsilon$ pointwise. [given, L3, algebra]\n\n2.1 The recorded point has $F'$-coordinates $Y'=R\\,Y+v\\,t_{1}+a_{0}$ by the same transformation law applied to the observed event, and substituting $Y=\\Phi+\\varepsilon$ together with step 1.1 gives $Y'=\\Phi'+R\\varepsilon$; the rotated error $\\varepsilon':=R\\varepsilon$ is a random element of $\\mathbb R^{3}$ by [L2], since $y\\mapsto Ry$ is linear and continuous and addition of the constant vector $v t_{1}+a_{0}$ is a translation. [given, step 1.1, L2]\n\n3.1 The computation is a transformation of declared protocol data; it asserts nothing about which frame an apparatus realizes, no measured position and no measured error, and it shows that the prediction map and the error model of [[def-cm18-observable-model]] are frame-relative and that a change of frame applies to both, with the affine shift $v\\,t_{1}+a_{0}$ and the rotation of the error. [step 1.1, step 2.1, step 1.2, given] ∎",
+        "strategy": "direct",
+        "deps": [
+          "def-cm18-observable-model",
+          "pthm-cm01-galilean-kinematics",
+          "post-cm01-frames",
+          "def-cm-covariance-matrix-of-a-random-vector",
+          "lem-cm-linearized-propagation-of-covariance",
+          "def-cm01-units",
+          "def-random-element-and-real-random-variable",
+          "def-measurable-function-between-measurable-spaces",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "dependency_roles": {
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "pthm-cm01-galilean-kinematics": "physical-result",
+          "post-cm01-frames": "formulation-prerequisite",
+          "def-cm-covariance-matrix-of-a-random-vector": "mathematical-premise",
+          "lem-cm-linearized-propagation-of-covariance": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-random-element-and-real-random-variable": "mathematical-premise",
+          "def-measurable-function-between-measurable-spaces": "mathematical-premise",
+          "thm-continuous-preimages-of-borel-sets-are-borel": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise"
+        },
+        "dependency_level": 12,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed page 5 (PDF page 11): the Galilean transformations t' = t + b, x' = Rx + vt + a between inertial frames",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.1 point (v), chapter pages 2-3 (PDF pages 6-7): the transfer of the radius vector and of velocity and acceleration between frames, with the warning that rotating frames require more care",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "JCGM 100:2008, Evaluation of measurement data - Guide to the expression of uncertainty in measurement (BIPM, 2008 corrected version), clauses 5.1.2 and 5.2.2, equations (10) and (13): propagation of covariance through a linear relation, used here for the rotating error",
+              "url": "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A worked conditional computation of the frame behaviour of one declared protocol: a protocol whose readout is the position of one label at one observation time is described in a second inertial frame, and the prediction map and the additive error are transformed by the displayed affine law. The item asserts no measured position, no measured error and no frame-independent reading; it records that the prediction map and the error model are frame-relative data of a protocol."
+      },
+      {
+        "id": "cex-cm18-finite-sample-may-miss-the-signal",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A finite sample can miss a predicted outcome with positive probability: an elementary product-model counterexample",
+        "statement": "## Statement refuted\n\nLet a repeated-observation protocol of [[def-cm18-sampling-model]] satisfy\nits IID sampling hypothesis and its second-moment hypothesis, and let $A$ be\nan event of a single observation with $0<\\mathbb P(A)=p<1$. Then **every\nfinite sample $(Y_{1},\\dots,Y_{n})$ of the protocol contains at least one\noutcome in $A$** for every $n\\ge1$; equivalently, if a finite sample\ncontains no outcome in $A$, the declared sampling model is refuted.\n\n## Facts & Assumptions\n\n**Given:** The notation of [[def-cm18-sampling-model]] and\n[[def-cm18-observable-model]] for the stated protocol, and a probability\n$p\\in(0,1)$.\n\n[L1] Finite probability spaces: a finite set $\\Omega_{i}$ with weights\n$w_{i}\\ge0$ summing to $1$, every subset an event, and event probability the\nsum of the weights of its outcomes; for events $A\\subseteq B$ one has\n$\\mathbb P(A^{c})=1-\\mathbb P(A)$ ([[def-finite-probability-space-and-event]],\n[[lem-finite-probability-basic-laws]]).\n\n[L2] Products: the product probability space of a finite family\n$((\\Omega_{i},w_{i}))_{i\\le n}$ has outcome set $\\prod_{i}\\Omega_{i}$ and\nweights $w(\\omega)=\\prod_{i}w_{i}(\\omega_{i})$; coordinate events are\nmutually independent and $\\mathbb P(\\bigcap_{i\\in J}C_{i})=\\prod_{i\\in J}\\mathbb P_{i}(A_{i})$\nfor every $J\\subseteq\\{1,\\dots,n\\}$\n([[def-product-of-finite-probability-spaces]],\n[[thm-product-probability-has-independent-coordinate-events]]).\n\n[L3] Bernoulli variables: a Bernoulli$(p)$ random variable takes the value\n$1$ with probability $p$ and $0$ with probability $1-p$\n([[def-bernoulli-and-binomial-random-variables]]).\n\n## Counterexample\n\n**Proof technique:** direct; build the finite product model of $n$\nindependent trials, apply the product probability law to the event that no\ntrial takes the designated value, and interpret the result as a probability\nstatement about finite samples.\n\n1.1 Let $p\\in(0,1)$ and let $\\Omega_{0}:=\\{0,1\\}$ with weights $w_{0}(1):=p$ and $w_{0}(0):=1-p$; these weights are nonnegative and sum to $1$, so $(\\Omega_{0},w_{0})$ is a finite probability space in the sense of [L1], and the event $A_{0}:=\\{1\\}$ has $\\mathbb P(A_{0})=p$ by [L3], with $A_{0}\\neq\\varnothing$ and $\\mathbb P(A_{0})\\in(0,1)$. [given, L1, L3]\n\n1.2 For $n\\ge1$ form the finite product of $n$ copies of $(\\Omega_{0},w_{0})$: the outcome set is $\\Omega:=\\{0,1\\}^{n}$ with weights $w(\\omega)=\\prod_{k=1}^{n}w_{0}(\\omega_{k})$, a finite probability space by [L2]; the single-observation event of the refuted statement corresponds to the coordinate event $C_{k}:=\\{\\omega_{k}=1\\}$ in the $k$-th coordinate, with coordinate probability $p$ by mutual independence of the coordinates in [L2], and reading $Y_{k}:=\\omega_{k}$ as the $k$-th observation makes the family $(Y_{k})_{k\\le n}$ identically distributed by construction and mutually independent by [L2], so it satisfies the IID sampling hypothesis of [[def-cm18-sampling-model]]; each $Y_{k}$ is bounded, so the second-moment hypothesis holds as well. [given, L2, L3]\n\n2.1 The event \"no outcome in $A$ occurs in the finite sample\" is $E:=\\{\\omega\\in\\Omega:\\omega_{k}=0\\ \\text{for every }k\\le n\\}=\\bigcap_{k=1}^{n}\\{\\omega_{k}=0\\}$; by the product formula of [L2] applied to the coordinate events $\\{\\omega_{k}=0\\}$, whose coordinate probabilities are $1-p$, one has $\\mathbb P(E)=\\prod_{k=1}^{n}(1-p)=(1-p)^{n}$. [step 1.2, L2, algebra]\n\n3.1 Since $0<p<1$ one has $0<1-p<1$ and therefore $0<(1-p)^{n}<1$ for every $n\\ge1$; the event $E$ of a finite sample with no outcome in $A$ has strictly positive probability. [step 2.1, L1, algebra]\n\n4.1 Under the product model of steps 1.2 and 2.1 the single observation lies in the designated event with probability $p\\in(0,1)$, the coordinates are mutually independent, and yet the finite sample avoids the event with positive probability $(1-p)^{n}$ by step 3.1; therefore the implication asserted in the refuted statement is false: a finite sample with no outcome in $A$ can occur with positive probability under the declared sampling model, so its occurrence does not refute that model. [step 2.1, step 3.1]\n\n5.1 The probability that at least one outcome in $A$ is seen in the finite sample is $1-(1-p)^{n}$, which tends to $1$ as $n$ grows but equals $1$ for no finite $n$ when $0<p<1$; the failure to exhibit the feature in a finite sample is a positive-probability event of the model, not a refutation of it. [step 3.1, step 4.1, algebra] ∎\n\n## Remarks\n\nThe construction is a finite probability computation; it contains no\napparatus, no preparation, no data and no observed sequence. Its physical\nreading is the elementary consistency statement of\n[[def-cm18-sampling-model]]: a model assigning probability $p$ per trial to\nan outcome class is compatible with a finite sample that misses it, and the\nprobability of the miss is $(1-p)^{n}$ when the trials are independent.\n\nWhat the counterexample does **not** show is that the declared model is\ntrue, or that some other model is false: consistency of one finite sample\nwith a model is not evidence for it, and comparing models requires a\nspecified test — data space, model family, null set, rejection region and\nsize — as in [[rem-cm18-model-test]] in its role as a scope item of the\ncompanion page.",
+        "strategy": "direct",
+        "deps": [
+          "def-cm18-sampling-model",
+          "def-cm18-observable-model",
+          "rem-cm18-model-test",
+          "def-product-of-finite-probability-spaces",
+          "thm-product-probability-has-independent-coordinate-events",
+          "def-bernoulli-and-binomial-random-variables",
+          "def-finite-probability-space-and-event",
+          "lem-finite-probability-basic-laws"
+        ],
+        "dependency_roles": {
+          "def-cm18-sampling-model": "formulation-prerequisite",
+          "def-cm18-observable-model": "formulation-prerequisite",
+          "rem-cm18-model-test": "formulation-prerequisite",
+          "def-product-of-finite-probability-spaces": "mathematical-premise",
+          "thm-product-probability-has-independent-coordinate-events": "mathematical-premise",
+          "def-bernoulli-and-binomial-random-variables": "mathematical-premise",
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "lem-finite-probability-basic-laws": "mathematical-premise"
+        },
+        "dependency_level": 14,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. Greenland, S. J. Senn, K. J. Rothman, J. B. Carlin, C. Poole, S. N. Goodman and D. G. Altman, Statistical tests, P values, confidence intervals, and power: a guide to misinterpretations, European Journal of Epidemiology 31 (2016), 337-350, sections on absence of evidence and on the interpretation of non-significant results",
+              "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4877414/"
+            },
+            {
+              "title": "Rick Durrett, Probability: Theory and Examples, 5th ed., Section 2.1 on independence and Section 2.2.1 on i.i.d. sequences and their finite product laws",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "NIST/SEMATECH e-Handbook of Statistical Methods, section 7.1.3.5, 'What are Type I and Type II errors?', on failing to reject a hypothesis and the meaning of false negatives",
+              "url": "https://www.itl.nist.gov/div898/handbook/prc/section1/prc135.htm"
+            }
+          ]
+        },
+        "reference": "expansion-proofs.md#e17",
+        "design_state": "Fully authored draft; complete local authoring for batch 34 of run physics-cm-qm-gr-79-2026-10-11; independent native review remains pending",
+        "inventory_expansion_required": false,
+        "physical_scope": "A counterexample to a stated inference rule for finite samples: it exhibits a finite probability model, of the product form used for independent repetitions, in which a designated outcome occurs with probability p in (0,1) at every trial while a finite sample avoids it with probability (1-p)^n in (0,1). The item refutes only the implication from a finite sample without the outcome to the falsehood of the declared sampling model; it asserts no experiment, no observed sequence and nothing about the truth or falsity of any physical model."
+      }
+    ]
+  }
+]

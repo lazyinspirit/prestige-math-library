@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-radical-commutes-with-quotient-correspondence.md

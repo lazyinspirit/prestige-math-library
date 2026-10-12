@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-canonical-subgroups-of-an-external-semidirect-product.md

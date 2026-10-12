@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-an-acyclic-complex-that-becomes-zero-in-d-but-not-in-k.md

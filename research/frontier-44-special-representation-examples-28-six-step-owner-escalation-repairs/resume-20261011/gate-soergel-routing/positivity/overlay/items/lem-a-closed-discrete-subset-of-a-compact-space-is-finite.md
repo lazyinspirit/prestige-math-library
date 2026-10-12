@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-closed-discrete-subset-of-a-compact-space-is-finite.md

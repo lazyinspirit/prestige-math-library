@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-inverse-of-a-quasiconformal-map-is-quasiconformal.md

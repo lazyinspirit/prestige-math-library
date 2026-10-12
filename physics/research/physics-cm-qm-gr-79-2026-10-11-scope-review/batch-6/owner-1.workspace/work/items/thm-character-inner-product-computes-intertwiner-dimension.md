@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-character-inner-product-computes-intertwiner-dimension.md

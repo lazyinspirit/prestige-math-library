@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimensional-obstacle-problem-and-contact-set.md

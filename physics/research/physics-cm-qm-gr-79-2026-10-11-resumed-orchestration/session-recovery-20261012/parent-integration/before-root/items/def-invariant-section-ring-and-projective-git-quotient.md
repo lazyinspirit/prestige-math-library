@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-invariant-section-ring-and-projective-git-quotient.md

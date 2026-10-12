@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-positive-leading-principal-minors-are-equivalent-to-positive-cholesky-pivots.md

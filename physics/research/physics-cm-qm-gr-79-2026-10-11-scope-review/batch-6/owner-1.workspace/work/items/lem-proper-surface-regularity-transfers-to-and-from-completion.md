@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-proper-surface-regularity-transfers-to-and-from-completion.md

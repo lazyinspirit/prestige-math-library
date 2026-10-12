@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-primitive-root-modulo-thirteen-by-prime-divisor-tests.md

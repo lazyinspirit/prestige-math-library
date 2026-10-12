@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stabilizers-are-closed-embedded-lie-subgroups.md

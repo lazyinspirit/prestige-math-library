@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bass-guivarch-growth-degree-formula-with-proof.md

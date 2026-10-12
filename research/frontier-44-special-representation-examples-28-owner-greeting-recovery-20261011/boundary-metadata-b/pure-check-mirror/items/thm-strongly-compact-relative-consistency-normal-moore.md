@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-strongly-compact-relative-consistency-normal-moore.md

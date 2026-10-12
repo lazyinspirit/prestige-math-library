@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-symplectic-form-and-symplectic-manifold.md

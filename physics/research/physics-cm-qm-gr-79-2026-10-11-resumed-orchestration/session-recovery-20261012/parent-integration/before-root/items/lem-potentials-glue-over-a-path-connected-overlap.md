@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-potentials-glue-over-a-path-connected-overlap.md

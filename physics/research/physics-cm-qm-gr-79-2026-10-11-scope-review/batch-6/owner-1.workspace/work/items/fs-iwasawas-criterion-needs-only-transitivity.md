@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-iwasawas-criterion-needs-only-transitivity.md

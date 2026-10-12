@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-heat-evolution-of-affine-and-quadratic-polynomials.md

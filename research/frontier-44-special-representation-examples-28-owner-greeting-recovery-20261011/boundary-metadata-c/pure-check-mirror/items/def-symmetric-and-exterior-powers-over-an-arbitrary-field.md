@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-symmetric-and-exterior-powers-over-an-arbitrary-field.md

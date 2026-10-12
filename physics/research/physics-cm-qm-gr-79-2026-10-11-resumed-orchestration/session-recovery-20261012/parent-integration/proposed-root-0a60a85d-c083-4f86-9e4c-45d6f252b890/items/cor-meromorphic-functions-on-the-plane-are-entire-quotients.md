@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-meromorphic-functions-on-the-plane-are-entire-quotients.md

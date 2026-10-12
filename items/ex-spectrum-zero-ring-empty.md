@@ -36,5 +36,4 @@ empty affine scheme has global ring $0$.
 
 2.1 Thus $\operatorname{Spec}(0)$ has no points and is empty. [step 1.1]
 
-3.1 By [F1], its global sections are $0$. [F1, step 2.1] ∎
- 
+3.1 By [F1], its global sections are $0$. [F1, step 2.1] ∎  

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-convex-function-on-a-convex-set-is-continuous.md

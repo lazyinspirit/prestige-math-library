@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/exp-nrqm-interference-bach-electron-double-slit.md

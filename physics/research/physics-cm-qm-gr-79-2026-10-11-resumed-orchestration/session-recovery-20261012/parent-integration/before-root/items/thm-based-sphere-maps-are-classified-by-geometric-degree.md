@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-based-sphere-maps-are-classified-by-geometric-degree.md

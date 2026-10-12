@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-oriented-simplicial-subdivision-commutes-with-boundary.md

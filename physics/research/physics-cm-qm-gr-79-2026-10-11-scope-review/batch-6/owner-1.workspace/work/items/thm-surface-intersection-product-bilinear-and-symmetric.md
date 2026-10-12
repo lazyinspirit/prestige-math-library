@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-surface-intersection-product-bilinear-and-symmetric.md

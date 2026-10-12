@@ -35,14 +35,10 @@ $g$ is measurable. This fails on incomplete measure spaces.
 
 ## Refutation
 
+
 **Proof technique:** direct.
 
-1.1 By [L1], choose a nonmeasurable subset $N \subseteq K$, and put [L1, L2, L3, choose]
-$E := \psi^{-1}[N] \subseteq C$. Since $E \subseteq C$ and $C$ is Lebesgue null, [L2] makes $E$ Lebesgue measurable. If $E$ were Borel, then continuity of $\psi^{-1}|_K$ from [L3] would make $N$ Borel in the subspace $K$, hence Lebesgue measurable, which contradicts the choice of $N$. So $E$ is Lebesgue measurable but not Borel. [L1, L2, L3, choose]
+1.1 By [L1], choose a nonmeasurable subset $N \subseteq K$, and put [L1, L2, L3, choose] $E := \psi^{-1}[N] \subseteq C$. Since $E \subseteq C$ and $C$ is Lebesgue null, [L2] makes $E$ Lebesgue measurable. If $E$ were Borel, then continuity of $\psi^{-1}|_K$ from [L3] would make $N$ Borel in the subspace $K$, hence Lebesgue measurable, which contradicts the choice of $N$. So $E$ is Lebesgue measurable but not Borel. [L1, L2, L3, choose]
 
-2.1 Let $f=0$ and $g=\mathbf{1}_E$ on $\mathbb{R}$. The function $f$ is Borel [step 1.1, L2]
-measurable, and $g=f$ on $\mathbb{R} \setminus C$, so $g=f$ almost everywhere with respect to $\lambda|_{\mathcal{B}(\mathbb{R})}$ because $C$ is a measurable null set by [L2]. But
+2.1 Let $f=0$ and $g=\mathbf{1}_E$ on $\mathbb{R}$. The function $f$ is Borel [step 1.1, L2] measurable, and $g=f$ on $\mathbb{R} \setminus C$, so $g=f$ almost everywhere with respect to $\lambda|_{\mathcal{B}(\mathbb{R})}$ because $C$ is a measurable null set by [L2]. But $$g^{-1}((1/2,\infty)) = E,$$ and $E$ is not Borel by step 1.1, so $g$ is not measurable on this incomplete measure space. [step 1.1, L2] ∎
 
-$$g^{-1}((1/2,\infty)) = E,$$
-
-and $E$ is not Borel by step 1.1, so $g$ is not measurable on this incomplete measure space. [step 1.1, L2] ∎

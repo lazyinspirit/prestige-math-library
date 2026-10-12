@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-strong-convergence-of-a-spectral-sequence.md

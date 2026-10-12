@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-ratio-test-is-kummer-with-constant-weights.md

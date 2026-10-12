@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-halpern-lauchli-rule-soundness-and-finite-thinning.md

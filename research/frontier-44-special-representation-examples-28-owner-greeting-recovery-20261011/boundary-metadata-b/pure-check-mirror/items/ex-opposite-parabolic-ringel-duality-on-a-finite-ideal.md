@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-opposite-parabolic-ringel-duality-on-a-finite-ideal.md

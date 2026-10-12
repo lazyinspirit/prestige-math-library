@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-lambda-g-has-operator-norm-equal-to-the-l-q-norm.md

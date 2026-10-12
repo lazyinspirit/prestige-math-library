@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dihedral-actions-of-prime-and-composite-degree.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-fifth-minus-x-minus-one-has-a-real-root.md

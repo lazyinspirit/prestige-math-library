@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-acyclic-mapping-cone-is-contractible.md

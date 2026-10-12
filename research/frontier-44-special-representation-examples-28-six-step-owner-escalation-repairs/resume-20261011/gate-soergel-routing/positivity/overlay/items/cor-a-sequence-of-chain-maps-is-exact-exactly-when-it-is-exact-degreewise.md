@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-sequence-of-chain-maps-is-exact-exactly-when-it-is-exact-degreewise.md

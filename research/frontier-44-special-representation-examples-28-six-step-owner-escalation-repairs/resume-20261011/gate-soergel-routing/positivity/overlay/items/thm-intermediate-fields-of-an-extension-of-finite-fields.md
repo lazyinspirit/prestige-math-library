@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-intermediate-fields-of-an-extension-of-finite-fields.md

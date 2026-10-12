@@ -196,6 +196,28 @@ function makeChecks() { return {
     if (split === 0) return fail('no nonscalar dominated example was exercised');
     return { ok: true, summary: `checked ${positive} C2 positive-type Grams, ${dominated} dominated pairs, ${split} nonscalar splits, ${characters} normalized characters, ${trivial} trivial-group dominated cases, 16 pointed unitary phase pairs and nine purity samples` };
   },
+  'positive-definite-trapezoid-three-point-witness': () => {
+    // Independently evaluate the three-point positive-definiteness witness
+    // used by the Fourier counterexample.  The trapezoid is 1 on [-1,1],
+    // decreases linearly to 0 at |x|=2, and vanishes beyond that interval.
+    const phi = x => {
+      const r = Math.abs(x);
+      return r <= 1 ? 1 : r < 2 ? 2 - r : 0;
+    };
+    const points = [0, 1, 2];
+    const coefficients = [1, -2, 1];
+    const matrix = points.map(x => points.map(y => phi(x - y)));
+    const [[a, b, c], [d, e, f], [g, h, i]] = matrix;
+    const determinant = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
+    const quadratic = coefficients.reduce((sum, left, row) => sum + coefficients.reduce(
+      (inner, right, column) => inner + left * right * matrix[row][column], 0), 0);
+    const expected = [[1, 1, 0], [1, 1, 1], [0, 1, 1]];
+    if (matrix.some((row, r) => row.some((value, c) => value !== expected[r][c])))
+      return { ok: false, summary: `trapezoid Gram matrix differs from the displayed witness: ${JSON.stringify(matrix)}` };
+    if (determinant !== -1 || quadratic !== -2)
+      return { ok: false, summary: `determinant/quadratic form are ${determinant}/${quadratic}, expected -1/-2` };
+    return { ok: true, summary: 'three-point trapezoid Gram matrix has determinant -1 and the displayed coefficient vector has quadratic form -2' };
+  },
   'base-b-digit-orbit-cylinders': ({ max_base = 4 } = {}) => {
     // Independent finite arithmetic views of the selected digit-cylinder
     // lemma: repeated quotient/remainder digits versus the half-open interval
@@ -414,6 +436,143 @@ function makeChecks() { return {
     if (outer === inner) return { ok: false, summary: `both meets are ${outer}: the limit does NOT differ` };
     if (subset.includes(outer)) return { ok: false, summary: `the ambient meet ${outer} is retained, so the subposet cannot differ for this reason` };
     return { ok: true, summary: `ambient meet of ${a},${b} is ${outer}; the full subposet omits it, so its meet is ${inner} — the inclusion does not preserve this limit` };
+  },
+
+  // Independent finite verification of the interval-partition claims on the
+  // three-element chain C and the diamond D. Every set partition of each
+  // lattice is enumerated, the interval partitions are identified, the
+  // endpoint maps are tested for monotonicity on every comparable pair, the
+  // congruence property is tested directly on every pair of equivalent
+  // pairs, and the counts, the surviving partitions, the explicit failure of
+  // {0,a}|{b}|{1} and the quotient of each survivor are asserted.
+  // Exhaustive for these two lattices; it is not a proof of the general
+  // interval criterion, and it verifies the finite claims of the citing
+  // chain/diamond example and counterexample rather than the whole theory.
+  'interval-partition-criterion-on-chain-and-diamond': () => {
+    const fail = summary => ({ ok: false, summary });
+    const lattice = covers => {
+      const P = poset(covers);
+      if (!P.ok) return { ok: false, summary: `covers are not a poset: ${P.why}` };
+      const join = (x, y) => {
+        const upper = P.elements.filter(z => P.le(x, z) && P.le(y, z));
+        const least = upper.filter(z => upper.every(w => P.le(z, w)));
+        return least.length === 1 ? least[0] : null;
+      };
+      return { ok: true, elements: P.elements, le: P.le, meet: (x, y) => meet(P, x, y), join };
+    };
+    const partitionsOf = elements => {
+      // every set partition, via restricted growth strings
+      const out = [];
+      const assign = (index, blocks) => {
+        if (index === elements.length) { out.push(blocks.map(block => block.slice())); return; }
+        for (let slot = 0; slot <= blocks.length; slot += 1) {
+          const fresh = slot === blocks.length;
+          if (fresh) blocks.push([elements[index]]); else blocks[slot].push(elements[index]);
+          assign(index + 1, blocks);
+          if (fresh) blocks.pop(); else blocks[slot].pop();
+        }
+      };
+      assign(0, []);
+      return out;
+    };
+    const keyOf = blocks => blocks.map(block => block.slice().sort().join(',')).sort().join('|');
+    const analyse = (L, expected) => {
+      const { elements } = L;
+      let partitions = 0, intervalPartitions = 0, monotoneCount = 0, congruenceCount = 0, comparableChecks = 0, quotientChecks = 0;
+      let criterionAgrees = true, quotientOk = true;
+      const sizes = {}, surviving = [], failing = [];
+      for (const blocks of partitionsOf(elements)) {
+        partitions += 1;
+        const blockOf = new Map();
+        blocks.forEach((block, index) => block.forEach(x => blockOf.set(x, index)));
+        const same = (x, y) => blockOf.get(x) === blockOf.get(y);
+        const lower = new Map(), upper = new Map();
+        let isInterval = true;
+        for (const block of blocks) {
+          const least = block.filter(x => block.every(y => L.le(x, y)));
+          const greatest = block.filter(x => block.every(y => L.le(y, x)));
+          if (least.length !== 1 || greatest.length !== 1) { isInterval = false; break; }
+          if (!elements.every(z => block.includes(z) === (L.le(least[0], z) && L.le(z, greatest[0])))) { isInterval = false; break; }
+          for (const x of block) { lower.set(x, least[0]); upper.set(x, greatest[0]); }
+        }
+        if (!isInterval) continue;
+        intervalPartitions += 1;
+        let monotone = true;
+        for (const x of elements) for (const y of elements) if (L.le(x, y)) {
+          comparableChecks += 1;
+          if (!L.le(lower.get(x), lower.get(y)) || !L.le(upper.get(x), upper.get(y))) monotone = false;
+        }
+        let congruence = true;
+        for (const x of elements) for (const y of elements) for (const u of elements) for (const v of elements) {
+          if (!same(x, y) || !same(u, v)) continue;
+          if (!same(L.join(x, u), L.join(y, v)) || !same(L.meet(x, u), L.meet(y, v))) congruence = false;
+        }
+        const key = keyOf(blocks);
+        if (monotone) monotoneCount += 1;
+        if (congruence) congruenceCount += 1;
+        if (monotone !== congruence) criterionAgrees = false;
+        if (congruence) { surviving.push(key); sizes[key] = blocks.length; } else failing.push(key);
+        if (congruence) {
+          // quotient of a congruence: [x]<=[y] iff x join y = y, with the class
+          // operations [x] join [y] = [x join y] and [x] meet [y] = [x meet y];
+          // check the class order is representative-independent, that those
+          // operations are the least upper and greatest lower bounds, and that
+          // a two-class quotient is a chain.
+          const classes = blocks.map((block, index) => ({ index, block }));
+          const classOf = x => blockOf.get(x);
+          const leClass = (A, B) => same(L.join(A.block[0], B.block[0]), B.block[0]);
+          let wellDefined = true;
+          for (const A of classes) for (const B of classes) {
+            let value = null;
+            for (const x of A.block) for (const y of B.block) {
+              const here = same(L.join(x, y), y);
+              if (value === null) value = here; else if (value !== here) wellDefined = false;
+            }
+          }
+          for (const A of classes) for (const B of classes) {
+            const joinClass = classes.find(C => C.index === classOf(L.join(A.block[0], B.block[0])));
+            const meetClass = classes.find(C => C.index === classOf(L.meet(A.block[0], B.block[0])));
+            quotientChecks += 1;
+            const isLub = leClass(A, joinClass) && leClass(B, joinClass)
+              && classes.every(C => (!leClass(A, C) || !leClass(B, C)) || leClass(joinClass, C));
+            const isGlb = leClass(meetClass, A) && leClass(meetClass, B)
+              && classes.every(C => (!leClass(C, A) || !leClass(C, B)) || leClass(C, meetClass));
+            if (!isLub || !isGlb) quotientOk = false;
+          }
+          if (classes.length === 2 && leClass(classes[0], classes[1]) === leClass(classes[1], classes[0])) quotientOk = false;
+          if (!wellDefined) quotientOk = false;
+        }
+      }
+      const sameKeys = (list, keys) => JSON.stringify(list.slice().sort()) === JSON.stringify(keys.slice().sort());
+      if (partitions !== expected.partitions) return fail(`${expected.name}: ${partitions} set partitions, expected ${expected.partitions}`);
+      if (intervalPartitions !== expected.intervalPartitions) return fail(`${expected.name}: ${intervalPartitions} interval partitions, expected ${expected.intervalPartitions}`);
+      if (monotoneCount !== expected.monotone) return fail(`${expected.name}: ${monotoneCount} interval partitions with monotone endpoint maps, expected ${expected.monotone}`);
+      if (congruenceCount !== expected.congruence) return fail(`${expected.name}: ${congruenceCount} lattice congruences, expected ${expected.congruence}`);
+      if (!criterionAgrees) return fail(`${expected.name}: monotone endpoints and congruence did not agree on every interval partition`);
+      if (!sameKeys(surviving, Object.keys(expected.sizes))) return fail(`${expected.name}: surviving partitions ${surviving.join(' ; ')} differ from ${Object.keys(expected.sizes).join(' ; ')}`);
+      if (!sameKeys(failing, expected.failing)) return fail(`${expected.name}: failing partitions ${failing.join(' ; ')} differ from ${expected.failing.join(' ; ')}`);
+      for (const [key, size] of Object.entries(expected.sizes)) if (sizes[key] !== size) return fail(`${expected.name}: quotient of ${key} has ${sizes[key]} classes, expected ${size}`);
+      if (!quotientOk) return fail(`${expected.name}: a quotient class order or class operation failed its lattice check`);
+      return { ok: true, parts: { partitions, intervalPartitions, monotoneCount, congruenceCount, comparableChecks, quotientChecks } };
+    };
+    const chain = lattice([['0', 'a'], ['a', '1']]);
+    if (!chain.ok) return fail(`chain C: ${chain.summary}`);
+    const diamond = lattice([['0', 'a'], ['0', 'b'], ['a', '1'], ['b', '1']]);
+    if (!diamond.ok) return fail(`diamond D: ${diamond.summary}`);
+    const onChain = analyse(chain, { name: 'chain C', partitions: 5, intervalPartitions: 4, monotone: 4, congruence: 4,
+      sizes: { '0|1|a': 3, '0,a|1': 2, '0|1,a': 2, '0,1,a': 1 }, failing: [] });
+    if (!onChain.ok) return onChain;
+    const onDiamond = analyse(diamond, { name: 'diamond D', partitions: 15, intervalPartitions: 8, monotone: 4, congruence: 4,
+      sizes: { '0|1|a|b': 4, '0,a|1,b': 2, '0,b|1,a': 2, '0,1,a,b': 1 },
+      failing: ['0,a|1|b', '0,b|1|a', '0|1,a|b', '0|1,b|a'] });
+    if (!onDiamond.ok) return onDiamond;
+    // the explicit witness of {0,a}|{b}|{1}: u(0)=a, u(b)=b, 0<=b but a!<=b,
+    // and 0 join b = b against a join b = 1 across the classes {b} and {1}
+    if (!(diamond.le('0', 'b') && !diamond.le('a', 'b')
+      && diamond.join('0', 'b') === 'b' && diamond.join('a', 'b') === '1'))
+      return fail('the explicit endpoint/join witness for {0,a}|{b}|{1} did not check out');
+    const p = onChain.parts, q = onDiamond.parts;
+    return { ok: true, summary: `checked all ${p.partitions + q.partitions} set partitions of the chain and the diamond, ${p.intervalPartitions + q.intervalPartitions} interval partitions, ${p.comparableChecks + q.comparableChecks} comparable endpoint pairs, the congruence property of every partition, the explicit failure of {0,a}|{b}|{1}, and the ${p.quotientChecks + q.quotientChecks} quotient join/meet classes of the ${p.congruenceCount + q.congruenceCount} surviving congruences` };
   },
 
   // The covariance calculation for two Brownian increments reduces to a
@@ -741,6 +900,17 @@ function makeChecks() { return {
     }
     return { ok: true, summary: `checked ${equivalentPairs} equivalent state-pairs across all ${automata} DFAs through ${maxStates} states over ${alphabetSize} letters` };
   },
+
+  // Independent exact re-computation of the finite arithmetic of the hexagonal
+  // A_2 cell. That cell is one regular hexagon, so every vertex distance,
+  // perpendicularity, barycentric slope and star-radius value displayed in the
+  // citing example is a finite computation in Q + Q*sqrt(3); the field is
+  // implemented below with BigInt fractions, so the comparison is exact and no
+  // floating-point tolerance can mask a wrong constant. The twelve v-m-o
+  // triangles, the three slopes 2, 4/sqrt(3), 2/sqrt(3), L = 4/sqrt(3),
+  // delta = sqrt(3)/24, the vertex distances 1, sqrt(3), 2 and the C_6 graph
+  // distances are recomputed from the six vertices. The general star lemma and
+  // the passage from the cell to the chain metric are NOT proved here.
   // The collapsing recursion of thm-mostowski-collapse on a finite chain: the
   // von Neumann numeral for x is {0,1,...,x-1}, so the defining equation
   // F(x) = {F(y) : y < x} must reproduce F(x) = x on a chain of length n and
@@ -776,6 +946,117 @@ function makeChecks() { return {
     return { ok: true, summary: `checked the collapsing recursion on chains of length 1..${max}: F(x) equals the von Neumann numeral x, order is reflected as membership, and the image is the ordinal n` };
   },
 
+  'hexagon-a2-cell-triangulation-arithmetic': () => {
+    const gcd = (a, b) => { while (b) { const t = a % b; a = b; b = t; } return a < 0n ? -a : a; };
+    const frac = (n, d = 1n) => {
+      n = BigInt(n); d = BigInt(d);
+      if (d === 0n) throw new Error('zero denominator in a rational literal');
+      if (d < 0n) { n = -n; d = -d; }
+      const g = gcd(n, d) || 1n;
+      return { n: n / g, d: d / g };
+    };
+    const fAdd = (x, y) => frac(x.n * y.d + y.n * x.d, x.d * y.d);
+    const fSub = (x, y) => frac(x.n * y.d - y.n * x.d, x.d * y.d);
+    const fMul = (x, y) => frac(x.n * y.n, x.d * y.d);
+    const fSign = (x) => (x.n > 0n ? 1 : x.n < 0n ? -1 : 0);
+    const three = frac(3n);
+    // Q + Q*sqrt(3): { a, b } means a + b*sqrt(3) with a, b fractions.
+    const num = (a, b = frac(0n)) => ({ a, b });
+    const nAdd = (x, y) => num(fAdd(x.a, y.a), fAdd(x.b, y.b));
+    const nSub = (x, y) => num(fSub(x.a, y.a), fSub(x.b, y.b));
+    const nMul = (x, y) => num(fAdd(fMul(x.a, y.a), fMul(three, fMul(x.b, y.b))), fAdd(fMul(x.a, y.b), fMul(x.b, y.a)));
+    const nEq = (x, y) => fSign(fSub(x.a, y.a)) === 0 && fSign(fSub(x.b, y.b)) === 0;
+    const nSign = (x) => {
+      const a = x.a, b = x.b;
+      if (a.n >= 0n && b.n >= 0n) return a.n > 0n || b.n > 0n ? 1 : 0;
+      if (a.n <= 0n && b.n <= 0n) return a.n < 0n || b.n < 0n ? -1 : 0;
+      const c = fSign(fSub(fMul(a, a), fMul(three, fMul(b, b))));
+      return a.n > 0n ? c : -c;
+    };
+    const f = (n, d = 1n) => num(frac(n, d));
+    const g = (n, d = 1n) => num(frac(0n), frac(n, d)); // (n/d)*sqrt(3)
+    const half = f(1n, 2n);
+    const problems = [];
+    const want = (test, message) => { if (!test) problems.push(message); };
+    try {
+      const V = [
+        [f(1n), f(0n)],
+        [f(1n, 2n), g(1n, 2n)],
+        [f(-1n, 2n), g(1n, 2n)],
+        [f(-1n), f(0n)],
+        [f(-1n, 2n), g(-1n, 2n)],
+        [f(1n, 2n), g(-1n, 2n)],
+      ];
+      const o = [f(0n), f(0n)];
+      const sub = (u, w) => [nSub(u[0], w[0]), nSub(u[1], w[1])];
+      const dot = (u, w) => nAdd(nMul(u[0], w[0]), nMul(u[1], w[1]));
+      const norm2 = (u) => dot(u, u);
+      const mid = (u, w) => [nMul(nAdd(u[0], w[0]), half), nMul(nAdd(u[1], w[1]), half)];
+
+      let sx = f(0n), sy = f(0n);
+      for (const vtx of V) { sx = nAdd(sx, vtx[0]); sy = nAdd(sy, vtx[1]); }
+      want(nEq(sx, f(0n)) && nEq(sy, f(0n)), 'the six vertices do not sum to the centre');
+
+      V.forEach((u, k) => {
+        want(nEq(norm2(u), f(1n)), `|v_${k}|^2 is not 1`);
+        want(nEq(norm2(sub(u, V[(k + 1) % 6])), f(1n)), `side ${k} does not have squared length 1`);
+      });
+
+      // The three barycentric slopes, written in Q + Q*sqrt(3).
+      const slopes = [f(2n), g(4n, 3n), g(2n, 3n)]; // 2, 4/sqrt(3), 2/sqrt(3)
+      let triangles = 0;
+      for (let k = 0; k < 6; k += 1) {
+        const u = V[k], w = V[(k + 1) % 6];
+        const m = mid(u, w);
+        for (const vtx of [u, w]) {
+          triangles += 1;
+          const legVM = norm2(sub(vtx, m));
+          const legMO = norm2(sub(o, m));
+          const hypVO = norm2(sub(vtx, o));
+          want(nEq(legVM, f(1n, 4n)), 'leg |vm|^2 is not 1/4');
+          want(nEq(legMO, f(3n, 4n)), 'leg |mo|^2 is not 3/4');
+          want(nEq(hypVO, f(1n)), 'hypotenuse |vo|^2 is not 1');
+          want(nEq(dot(sub(vtx, m), sub(o, m)), f(0n)), 'the angle at m is not right');
+          const twoCont2 = nMul(legVM, legMO); // (|vm| |om|)^2 = (2 content)^2 at a right angle
+          want(nEq(twoCont2, f(3n, 16n)), '(2 content)^2 is not 3/16');
+          const hM2 = nMul(g(1n, 4n), g(1n, 4n)); // (sqrt(3)/4)^2, the height at m over the base |vo|
+          want(nEq(nMul(hM2, hypVO), twoCont2), 'the height at m does not invert the base |vo| through (2 content)^2');
+          want(nEq(nMul(nMul(slopes[0], slopes[0]), legVM), f(1n)), 'slope 2 does not invert the height at v');
+          want(nEq(nMul(nMul(slopes[1], slopes[1]), hM2), f(1n)), 'slope 4/sqrt(3) does not invert the height at m');
+          want(nEq(nMul(nMul(slopes[2], slopes[2]), legMO), f(1n)), 'slope 2/sqrt(3) does not invert the height at o');
+        }
+      }
+      want(triangles === 12, `enumerated ${triangles} triangles rather than 12`);
+
+      const L = g(4n, 3n); // 4/sqrt(3)
+      want(nEq(nMul(L, g(1n)), f(4n)), 'L * sqrt(3) is not 4');
+      want(nSign(nSub(L, f(1n))) === 1, 'L is not greater than 1');
+      const delta = g(1n, 24n); // sqrt(3)/24
+      want(nEq(nMul(delta, nMul(f(6n), L)), f(1n)), 'delta * 2(D+1)L is not 1 for D = 2');
+
+      want(nEq(norm2(sub(V[0], V[1])), f(1n)), 'd(v_0,v_1) is not 1');
+      want(nEq(norm2(sub(V[0], V[2])), f(3n)), 'd(v_0,v_2)^2 is not 3');
+      want(nEq(norm2(sub(V[0], V[3])), f(4n)), 'd(v_0,v_3)^2 is not 4');
+      want(fSign(fSub(frac(3n), frac(4n))) < 0, 'sqrt(3) < 2 failed: 3 is not below 4');
+
+      const dist = Array.from({ length: 6 }, () => Infinity);
+      dist[0] = 0;
+      const queue = [0];
+      for (let index = 0; index < queue.length; index += 1) {
+        const here = queue[index];
+        for (const next of [(here + 1) % 6, (here + 5) % 6]) {
+          if (dist[next] === Infinity) { dist[next] = dist[here] + 1; queue.push(next); }
+        }
+      }
+      want(dist[1] === 1 && dist[2] === 2 && dist[3] === 3, `the C_6 graph distances are ${dist.slice(1, 4)}`);
+      want(queue.length === 6, 'the walk on the 1-skeleton did not reach all six vertices');
+
+      if (problems.length) return { ok: false, summary: problems[0] };
+      return { ok: true, summary: `recomputed all ${triangles} v-m-o triangles of the regular hexagon in exact Q(sqrt 3) arithmetic: legs 1/2 and sqrt(3)/2, hypotenuse 1, right angle at each midpoint, slopes 2, 4/sqrt(3), 2/sqrt(3), L = 4/sqrt(3), delta = sqrt(3)/24, vertex distances 1, sqrt(3), 2 against the C_6 graph distances 1, 2, 3` };
+    } catch (error) {
+      return { ok: false, summary: String(error && error.message ? error.message : error) };
+    }
+  },
 }; }
 
 // A finite poset from its cover relations: reflexive-transitive closure, then

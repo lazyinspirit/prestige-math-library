@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-epsilon-closure-and-word-transition-on-a-three-state-nfa.md

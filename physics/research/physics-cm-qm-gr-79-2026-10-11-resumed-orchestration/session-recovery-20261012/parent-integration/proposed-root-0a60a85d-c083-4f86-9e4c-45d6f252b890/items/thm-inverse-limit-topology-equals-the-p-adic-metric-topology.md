@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inverse-limit-topology-equals-the-p-adic-metric-topology.md

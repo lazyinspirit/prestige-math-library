@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-quasi-isomorphism-is-a-chain-homotopy-equivalence.md

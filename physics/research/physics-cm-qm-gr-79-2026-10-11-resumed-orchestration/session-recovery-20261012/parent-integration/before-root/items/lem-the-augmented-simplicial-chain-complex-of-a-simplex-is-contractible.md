@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-augmented-simplicial-chain-complex-of-a-simplex-is-contractible.md

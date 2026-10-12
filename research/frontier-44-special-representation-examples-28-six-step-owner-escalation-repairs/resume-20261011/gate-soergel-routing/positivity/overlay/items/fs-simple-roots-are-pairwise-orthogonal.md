@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-simple-roots-are-pairwise-orthogonal.md

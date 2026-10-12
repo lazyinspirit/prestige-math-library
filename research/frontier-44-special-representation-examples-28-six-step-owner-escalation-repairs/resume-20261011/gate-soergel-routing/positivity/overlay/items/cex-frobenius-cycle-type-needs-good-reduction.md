@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-frobenius-cycle-type-needs-good-reduction.md

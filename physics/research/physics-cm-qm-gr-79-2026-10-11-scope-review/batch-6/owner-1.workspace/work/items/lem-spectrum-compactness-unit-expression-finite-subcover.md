@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectrum-compactness-unit-expression-finite-subcover.md

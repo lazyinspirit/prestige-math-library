@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euclidean-hypersurface-sectional-curvature-from-principal-curvatures.md

@@ -1,0 +1,14 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadStep3,itemHash,itemInputPaths,itemDecision} from '../../../tools/step3-decisions.mjs';
+import {step3OwnerCreationClaim} from '../../../tools/step3-owner-creation.mjs';
+import {frontmatterList} from '../../../tools/frontmatter-list.mjs';
+const run='frontier-44-special-representation-examples-28',s=loadStep3(process.cwd(),run),base='research/'+run+'-owner-crash-recovery-20261010T1736/',own=base+'repair_klr_global_basis/';
+const plan=JSON.parse(readFileSync(base+'remaining-third-wave-integration-preparation/guarded-integration-plan-v4.json'));
+const old=JSON.parse(readFileSync(own+'actual-current-three-producers-norm-integral-focused-binding.json'));
+const extra=[...old.subjects.map(x=>x.id),'def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules','thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module','lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize','thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer','def-deformed-tensor-space-for-the-type-a-finite-w-algebra'];
+const sha=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const ids=[...plan.targets.map(x=>x.id),...extra,'ex-projective-versus-simple-grothendieck-classes-in-a-small-block'];
+const rows=ids.map(id=>{const entry=s.items.get(id).item,txt=readFileSync('items/'+id+'.md','utf8'),fm=/^---\r?\n([\s\S]*?)\r?\n---/.exec(txt)?.[1]??'',deps=[...new Set([...entry.deps??[],...entry.justified_by??[],...entry.forward_refs??[],...['deps','justified_by','forward_refs'].flatMap(k=>frontmatterList(fm,k))])].sort(),r=plan.targets.find(x=>x.id===id);return {id,current_claim:step3OwnerCreationClaim(s,id),current_item_raw_sha256:sha('items/'+id+'.md'),exact_accepted_source:r?sha(r.accepted_source)===sha('items/'+id+'.md'):null,current_manifest_entry:entry,audited_dependencies:deps,current_native_input_sha256:itemHash(s,id,deps),input_guards:itemInputPaths(s,id,deps).map(p=>({path:p.replace(process.cwd()+'/',''),raw_sha256:sha(p)})),ordinary_decision:itemDecision(s,id),whole_readiness:r?.readiness??(id==='def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules'?'FULL_SUFFICIENT_UNCHANGED_DICTIONARY':'UNCHANGED_INDEPENDENT_PREDECESSOR_CURRENT_BINDING'),do_not_ordinary_accept_whole:r?.do_not_ordinary_accept_whole??false};});
+writeFileSync(own+'actual-third-wave-33-current-native-projections.json',JSON.stringify({run,at:new Date().toISOString(),read_only_actual_derivation:true,subjects:rows},null,2)+'\n');
+console.log(JSON.stringify(rows.map(x=>({id:x.id,exact:x.exact_accepted_source,whole:x.whole_readiness,raw:x.current_item_raw_sha256,native:x.current_native_input_sha256})),null,2));

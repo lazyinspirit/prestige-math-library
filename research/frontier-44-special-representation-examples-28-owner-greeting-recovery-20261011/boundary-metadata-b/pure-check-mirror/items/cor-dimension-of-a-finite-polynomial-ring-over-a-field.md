@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-dimension-of-a-finite-polynomial-ring-over-a-field.md

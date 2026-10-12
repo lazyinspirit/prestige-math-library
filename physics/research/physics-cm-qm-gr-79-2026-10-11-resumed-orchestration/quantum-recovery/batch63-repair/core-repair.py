@@ -1,0 +1,42 @@
+from pathlib import Path
+def read(i):return (Path('items')/f'{i}.md').read_text()
+def save(i,s):(Path('items')/f'{i}.md').write_text(s)
+def swap(s,a,b):assert a in s,a[:100];return s.replace(a,b,1)
+i='lem-nrqm-photons-fixed-mode-number-isometry';s=read(i);s=s.replace('are closed linear respectively conjugate-linear operators','are closed linear operators in the state vector; creation is linear and annihilation conjugate-linear in the mode parameter,');a=s.index('2.2 [Ladder transfer]');b=s.index('\n\n2.3',a);s=s[:a]+r'''2.2 [Ladder transfer on the exact domains] Write $\psi=\sum_n\psi_ne_n$. By [F4] and [F5], $\psi\in D(A_+(1))$ exactly when $\sum_n(n+1)|\psi_n|^2<\infty$, while $\psi\in D(A_-(1))$ exactly when $\sum_n(n+1)|\psi_{n+1}|^2=\sum_{m\ge1}m|\psi_m|^2<\infty$. For the unit mode $\varphi$, [F2] gives $P_+^{(n+1)}(\varphi\otimes\psi_n\Phi_n)=\psi_n\Phi_{n+1}$ and [F4] gives $\Psi_\varphi^{(n)}(\psi_{n+1}\Phi_{n+1})=\psi_{n+1}\Phi_n$. Therefore the two exact domain sums for $U_\varphi\psi$ equal the respective scalar sums, without any extra weighted output assumption. On these domains, $(A_+(\varphi)U_\varphi\psi)_n=\sqrt n\psi_{n-1}\Phi_n=(U_\varphi A_+(1)\psi)_n$ for $n\ge1$, with zero vacuum coordinate, and $(A_-(\varphi)U_\varphi\psi)_n=\sqrt{n+1}\psi_{n+1}\Phi_n=(U_\varphi A_-(1)\psi)_n$. This proves (c), including its coherent-vector specialization by [F5]. [F2, F4, F5, step 1.1, algebra]''' +s[b:]
+a='if moreover $\\varphi\\in D(\\varepsilon_{\\mathfrak h}^{2})$, then';b=r'''Already under $\varphi\in D(\varepsilon_{\mathfrak h})$, writing $\bar\varepsilon=\langle\varepsilon\varphi,\varphi\rangle$, the finite spectral second moment is
+$$\|T_n\varphi^{\otimes n}\|^2=n\|\varepsilon\varphi\|^2+n(n-1)\bar\varepsilon^2.$$
+If moreover $\varphi\in D(\varepsilon_{\mathfrak h}^{2})$, the vector lies in $D(T_n^2)$ and this norm square equals the literal operator pairing below; then''';assert a in s;s=s.replace(a,b,1)
+a='Therefore for a finite combination';b=r'''The actual domain is also justified: by the triangle inequality on the product space, $\|T_n\Phi_n\|\le n\|\varepsilon\varphi\|$, since each factor multiplier has that norm and all other factors have norm one. Hence $\sum_n|\psi_n|^2\|T_n\Phi_n\|^2\le\|\varepsilon\varphi\|^2\sum_n n^2|\psi_n|^2<\infty$, so $U_\varphi\psi\in D(H_f)$ and its finite-sector truncations converge in the graph norm: the squared graph-tail norms are the tails of these two convergent nonnegative series. Therefore for a finite combination''';assert a in s;s=s.replace(a,b,1)
+a=s.index('4.1 [Second energy moment]');b=s.index('\n\n## Remarks',a);s=s[:a]+r'''4.1 [Spectral second moment and literal square domain] For $\varphi\in D(\varepsilon)$, expand $\varepsilon_n^2=\sum_i\varepsilon(k_i)^2+\sum_{i\ne j}\varepsilon(k_i)\varepsilon(k_j)$ and integrate against $\prod_i\|\varphi(k_i)\|^2$. Tonelli gives $\|T_n\Phi_n\|^2=n\|\varepsilon\varphi\|^2+n(n-1)\bar\varepsilon^2$, finite by the stated domain and Cauchy-Schwarz. This is the spectral second moment and requires no $T_n^2\Phi_n$. If $\varphi\in D(\varepsilon^2)$, the inequality $(\sum_{i=1}^n\varepsilon(k_i))^4\le n^3\sum_i\varepsilon(k_i)^4$ gives $\|T_n^2\Phi_n\|^2\le n^4\|\varepsilon^2\varphi\|^2<\infty$, so $\Phi_n\in D(T_n^2)$; self-adjointness then gives $\langle T_n^2\Phi_n,\Phi_n\rangle=\|T_n\Phi_n\|^2$, exactly the original operator-square display. The vacuum has energy zero and all its moments vanish, handled separately when $n=0$. [F6, step 1.1, algebra] ∎''' +s[b:];save(i,s)
+i='lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers';s=read(i);s=swap(s,'and lies in $D(A)$ because $\\int m^{2}\\|f\\|^{2}<\\infty$.','with no assertion that $mf$ belongs to $D(A)$; that stronger assertion would require $m^2f\\in L^2$.');save(i,s)
+i='def-nrqm-photons-framework-radiation-sector-and-quantum-assignments';s=read(i);a='every unit one-photon vector has strictly positive variance in\neach of these quantities';b='every unit one-photon vector in the corresponding multiplier domain has\nfinite strictly positive variance in that quantity';assert a in s;s=s.replace(a,b,1);a='so the phrase "photon of energy $\\hbar\\omega$" names a spectral assignment of\nthe model, not a normalisable state with an exact energy.';b=r'''The push-forward laws themselves exist for every unit $f\in\mathfrak h$, without a moment-domain assumption; all their singleton probabilities vanish by the null level sets in the cited lemma, so they are non-Dirac laws even when finite means or variances do not exist. Thus "photon of energy $\hbar\omega$" names a spectral assignment of the model, not a normalisable state with an exact energy.''';assert a in s;s=s.replace(a,b,1);save(i,s)
+i='pthm-nrqm-photons-fixed-mode-number-and-energy-statistics';s=read(i);s=s.replace('are strictly positive in variance','are strictly positive in variance for n>=1 and z!=0 (the vacuum cases have zero variance)');s=s.replace('if moreover $\\varphi\\in D(\\varepsilon_{\\mathfrak h}^{2})$, writing\n$\\overline{\\varepsilon^{2}}:=\\langle\\varepsilon_{\\mathfrak h}^{2}\\varphi,\\varphi\\rangle$',r'under the same condition $\varphi\in D(\varepsilon_{\mathfrak h})$, writing'+'\n'+r'$\overline{\varepsilon^{2}}:=\|\varepsilon_{\mathfrak h}\varphi\|^2$')
+a=s.index('[F4] **Energy moments');b=s.index('\n\n[F5]',a);s=s[:a]+r'''[F4] **Energy moments on mode sectors.** For a unit $\varphi\in D(\varepsilon_{\mathfrak h})$, put $\bar\varepsilon=\langle\varepsilon\varphi,\varphi\rangle$ and $\overline{\varepsilon^2}=\|\varepsilon\varphi\|^2$. Then $\Phi_n=\varphi^{\otimes n}\in D(T_n)$, $\langle T_n\Phi_n,\Phi_n\rangle=n\bar\varepsilon$ and $\|T_n\Phi_n\|^2=n\overline{\varepsilon^2}+n(n-1)\bar\varepsilon^2$. The last is the spectral second moment, not an assertion of membership in $D(T_n^2)$ ([[lem-nrqm-photons-fixed-mode-number-isometry]] clause (d)).''' +s[b:]
+s=s.replace('The mean exists because both sides are finite:', 'The Poisson second number moment is finite by step 2.1, so [F1] places $U\\psi_z$ in the actual domain of $H_f$ and justifies the graph-truncation passage. The mean exists because both sides are finite:')
+s=s.replace(r'$\langle H_f^{2}Ue_{n},Ue_{n}\rangle=\langle T_{n}^{2}\varphi^{\otimes n},\varphi^{\otimes n}\rangle=',r'$\|H_fUe_n\|^2=\|T_n\varphi^{\otimes n}\|^2=').replace(r'\langle H_f^{2}U\psi_{z},U\psi_{z}\rangle=',r'\|H_fU\psi_z\|^2=')
+s=s.replace('For the coherent preparation the sector-diagonal expansion gives','For the coherent preparation, its Poisson second moment and [F1] give $U\\psi_z\\in D(H_f)$; the orthogonal-sector norm expansion therefore gives');save(i,s)
+i='ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal';s=read(i);a=s.index('- **Why the parameter is declared.**');b=s.index('- **Counts are model quanta.**',a);s=s[:a]+r'''- **Independent effective-energy assignment and Gibbs compression.** The
+  example independently declares $\varepsilon_0$; a normalisable mode is not
+  an eigenmode of the free energy, so the free Hamiltonian does not restrict
+  to $\varepsilon_0N'$ on this mode subspace. Nevertheless a compression of
+  its bounded Gibbs operator is possible. Put
+  $a_\beta:=\langle e^{-\beta\varepsilon}\varphi,\varphi\rangle$.
+  Since $0<e^{-\beta\varepsilon(k)}<1$ off the null set $\{k=0\}$ and
+  $\|\varphi\|=1$, $0<a_\beta<1$. The sector multiplier representation of
+  [[thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian]]
+  gives $e^{-\beta T_n}=M_{\prod_i e^{-\beta\varepsilon(k_i)}}$ on the
+  symmetric transverse sector. Its pairing on $\varphi^{\otimes n}$ is
+  $a_\beta^n$ by the product integral, and different sectors have zero cross
+  pairing. Hence $U^*e^{-\beta H_f}U$ is the diagonal operator with entries
+  $a_\beta^n$; its trace is $(1-a_\beta)^{-1}$ and its normalization gives
+  the geometric weights $(1-a_\beta)a_\beta^n$. At each fixed $\beta$ these
+  correspond to the effective scale
+  $\varepsilon_{\rm eff}(\beta)=-\beta^{-1}\log a_\beta>0$, generally
+  dependent on $\beta$. This is compression and normalization of a positive
+  operator, not a normalized Gibbs state of the full continuum or an
+  invariant free-energy mode. The full Gibbs operator remains non-trace-class
+  by clause (e) of
+  [[pthm-nrqm-photons-fixed-mode-number-and-energy-statistics]]; no
+  thermalisation or temperature identification follows.
+''' +s[b:];save(i,s)
+print('Five focused63carriers integrated; totalmomentum prerequisite draft pending.')

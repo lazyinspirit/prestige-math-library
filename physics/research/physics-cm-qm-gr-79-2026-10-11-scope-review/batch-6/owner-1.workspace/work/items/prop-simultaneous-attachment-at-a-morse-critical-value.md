@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-simultaneous-attachment-at-a-morse-critical-value.md

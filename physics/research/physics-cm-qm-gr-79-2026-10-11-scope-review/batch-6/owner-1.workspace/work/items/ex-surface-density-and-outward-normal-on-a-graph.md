@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-surface-density-and-outward-normal-on-a-graph.md

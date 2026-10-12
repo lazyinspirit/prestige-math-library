@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-extend-a-degree-zero-transformation-through-one-dimension-shift.md

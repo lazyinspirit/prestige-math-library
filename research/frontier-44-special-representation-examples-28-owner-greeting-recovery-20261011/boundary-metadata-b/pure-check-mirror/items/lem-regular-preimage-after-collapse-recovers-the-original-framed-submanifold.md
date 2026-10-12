@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-preimage-after-collapse-recovers-the-original-framed-submanifold.md

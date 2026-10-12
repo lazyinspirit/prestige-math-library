@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-equivalence-of-powers-of-a-marked-ideal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem.md

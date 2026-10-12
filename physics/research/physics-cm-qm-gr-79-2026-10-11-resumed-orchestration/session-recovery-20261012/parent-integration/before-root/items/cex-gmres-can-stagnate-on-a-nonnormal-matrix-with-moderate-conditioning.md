@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gmres-can-stagnate-on-a-nonnormal-matrix-with-moderate-conditioning.md

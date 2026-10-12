@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-grothendieck-group-of-o-has-simple-and-standard-bases.md

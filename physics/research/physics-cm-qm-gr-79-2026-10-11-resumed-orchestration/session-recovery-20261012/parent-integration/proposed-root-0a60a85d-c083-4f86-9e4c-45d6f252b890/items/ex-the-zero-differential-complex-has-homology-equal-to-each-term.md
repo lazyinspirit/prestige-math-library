@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-zero-differential-complex-has-homology-equal-to-each-term.md

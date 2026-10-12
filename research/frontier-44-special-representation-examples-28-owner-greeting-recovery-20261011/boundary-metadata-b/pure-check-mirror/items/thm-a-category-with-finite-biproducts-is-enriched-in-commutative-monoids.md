@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-category-with-finite-biproducts-is-enriched-in-commutative-monoids.md

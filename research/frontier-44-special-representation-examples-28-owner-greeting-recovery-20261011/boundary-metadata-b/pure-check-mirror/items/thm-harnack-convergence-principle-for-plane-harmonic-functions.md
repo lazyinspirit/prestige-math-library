@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-harnack-convergence-principle-for-plane-harmonic-functions.md

@@ -42,9 +42,8 @@ An arbitrary disjoint union of second-countable manifolds is second-countable.
 
 **Proof technique:** direct.
 
-1.1 By [L1], every singleton of $X$ is open and any basis of $X$ must contain [L1]
-uncountably many distinct singleton sets. [L1]
+1.1 By [L1], every singleton of $X$ is open and any basis of $X$ must contain [L1] uncountably many distinct singleton sets. [L1]
 
 2.1 Therefore $X$ is not second countable in the sense of [F1]. [F1, step 1.1]
 
-3.1 So $X$ is the desired counterexample. [step 2.1] ∎
+3.1 So $X$ is the desired counterexample. [step 2.1] ∎ 

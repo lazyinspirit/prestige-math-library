@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducible-weak-containment-in-a-family-selects-one-coefficient.md

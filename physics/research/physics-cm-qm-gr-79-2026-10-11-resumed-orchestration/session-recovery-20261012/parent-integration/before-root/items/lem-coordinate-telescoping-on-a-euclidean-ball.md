@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coordinate-telescoping-on-a-euclidean-ball.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normal-form-data-for-amalgamated-free-products.md

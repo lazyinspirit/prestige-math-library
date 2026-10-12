@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-a-tilde-1-infinity-edge-versus-finite-dihedral.md

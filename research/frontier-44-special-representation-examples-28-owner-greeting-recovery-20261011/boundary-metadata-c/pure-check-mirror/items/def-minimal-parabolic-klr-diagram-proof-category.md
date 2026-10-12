@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-minimal-parabolic-klr-diagram-proof-category.md

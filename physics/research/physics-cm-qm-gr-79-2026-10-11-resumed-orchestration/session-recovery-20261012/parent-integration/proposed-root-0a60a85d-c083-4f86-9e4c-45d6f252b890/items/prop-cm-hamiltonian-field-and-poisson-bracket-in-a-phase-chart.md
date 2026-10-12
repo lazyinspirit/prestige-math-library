@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart.md

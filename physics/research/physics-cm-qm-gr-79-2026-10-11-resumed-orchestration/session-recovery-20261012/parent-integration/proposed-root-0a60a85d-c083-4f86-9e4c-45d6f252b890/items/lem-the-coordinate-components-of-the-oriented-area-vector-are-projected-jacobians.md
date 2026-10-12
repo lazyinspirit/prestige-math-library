@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-coordinate-components-of-the-oriented-area-vector-are-projected-jacobians.md

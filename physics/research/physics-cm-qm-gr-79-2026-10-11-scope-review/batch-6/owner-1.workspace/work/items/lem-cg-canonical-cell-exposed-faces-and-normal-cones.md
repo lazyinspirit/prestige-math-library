@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-canonical-cell-exposed-faces-and-normal-cones.md

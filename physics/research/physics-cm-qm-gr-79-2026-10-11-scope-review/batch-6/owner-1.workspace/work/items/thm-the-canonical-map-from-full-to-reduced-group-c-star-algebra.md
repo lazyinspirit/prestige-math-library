@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-canonical-map-from-full-to-reduced-group-c-star-algebra.md

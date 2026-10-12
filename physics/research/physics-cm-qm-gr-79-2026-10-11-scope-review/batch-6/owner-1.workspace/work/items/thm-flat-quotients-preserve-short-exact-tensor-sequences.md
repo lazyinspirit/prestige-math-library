@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-flat-quotients-preserve-short-exact-tensor-sequences.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weierstrass-products-canonical-products-and-genus.md

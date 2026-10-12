@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-prime-power-conjugacy-class-forces-a-proper-nontrivial-normal-subgroup.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-weighted-limit-is-the-ordinary-limit-of-the-same-diagram.md

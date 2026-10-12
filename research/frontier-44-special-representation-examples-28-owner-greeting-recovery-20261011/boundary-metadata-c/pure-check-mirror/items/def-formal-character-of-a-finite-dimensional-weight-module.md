@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-formal-character-of-a-finite-dimensional-weight-module.md

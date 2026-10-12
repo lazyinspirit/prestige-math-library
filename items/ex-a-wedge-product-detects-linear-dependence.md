@@ -39,8 +39,7 @@ In $\mathbb R^3$, four samples pair the zero/nonzero behaviour of the wedge with
 
 **Proof technique:** direct.
 
-
-1.1 The pair $(e_1,2e_1)$ is dependent and its wedge is $e_1\wedge(2e_1)=2(e_1\wedge e_1)=0$, the zero case of [L1]. [L1, algebra]
+ 1.1 The pair $(e_1,2e_1)$ is dependent and its wedge is $e_1\wedge(2e_1)=2(e_1\wedge e_1)=0$, the zero case of [L1]. [L1, algebra]
 
 1.2 The pair $(e_1,e_2)$ is independent and its wedge $e_1\wedge e_2$ is a basis vector of $\Lambda^2\mathbb R^3$, hence nonzero, the nonzero case of [L1]. [L1]
 
@@ -48,4 +47,4 @@ In $\mathbb R^3$, four samples pair the zero/nonzero behaviour of the wedge with
 
 2.1 For $u=(1,0,0)$ and $v=(0,1,0)$, one has $u\wedge v=e_1\wedge e_2$, which step 1.2 shows is nonzero, matching the independence. [step 1.2, L1]
 
-3.1 In all four samples the wedge is zero exactly for the dependent pairs, in agreement with [L1]. [step 1.1, step 1.2, step 1.3, step 2.1] ∎
+3.1 In all four samples the wedge is zero exactly for the dependent pairs, in agreement with [L1]. [step 1.1, step 1.2, step 1.3, step 2.1] ∎ 

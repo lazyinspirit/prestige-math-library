@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-exceptional-curve-normal-bundle-minus-one.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-shift-preserves-chain-homotopy-equivalences-contractibility-and-quasi-isomorphisms.md

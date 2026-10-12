@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-snake-lemma-under-the-weaker-stacks-hypotheses.md

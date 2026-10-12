@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-isomorphism-theorem-for-complex-semisimple-lie-algebras.md

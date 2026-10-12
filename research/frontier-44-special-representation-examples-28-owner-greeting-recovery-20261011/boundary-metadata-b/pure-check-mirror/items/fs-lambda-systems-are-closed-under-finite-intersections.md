@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-lambda-systems-are-closed-under-finite-intersections.md

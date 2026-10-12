@@ -47,11 +47,7 @@ For every integer $m\ge1$ there is a deterministic algorithm which, given $m$, r
 
 **Proof technique:** constructive.
 
-1.1 For a partial assignment $a\in\{0,1\}^s$ of the first $s$ entries let $F(a):=\{M\in\Omega: M_j=a_j\text{ for }j\le s\}$ be its fiber and define
-$$\bar X(a):=\frac{1}{\lvert F(a)\rvert}\sum_{M\in F(a)}X(M)=2^{-(N-s)}\sum_{M\in F(a)}X(M),$$
-the average of $X$ over the fiber. Then $\bar X(\varnothing)=\mathbb EX$ by [F2], and for every $s<N$
-$$\bar X(a)=\tfrac12\bigl(\bar X(a0)+\bar X(a1)\bigr),$$
-because $F(a)$ is the disjoint union of the two fibers $F(a0)$ and $F(a1)$, which have equal size $2^{N-s-1}$; this is the elementary averaging identity for finite sums. [F2, algebra]
+1.1 For a partial assignment $a\in\{0,1\}^s$ of the first $s$ entries let $F(a):=\{M\in\Omega: M_j=a_j\text{ for }j\le s\}$ be its fiber and define $$\bar X(a):=\frac{1}{\lvert F(a)\rvert}\sum_{M\in F(a)}X(M)=2^{-(N-s)}\sum_{M\in F(a)}X(M),$$ the average of $X$ over the fiber. Then $\bar X(\varnothing)=\mathbb EX$ by [F2], and for every $s<N$ $$\bar X(a)=\tfrac12\bigl(\bar X(a0)+\bar X(a1)\bigr),$$ because $F(a)$ is the disjoint union of the two fibers $F(a0)$ and $F(a1)$, which have equal size $2^{N-s-1}$; this is the elementary averaging identity for finite sums. [F2, algebra]
 
 1.2 Fix $a\in\{0,1\}^s$ and $u\ne0$. A row $i$ is *determined* for $(a,u)$ when all coordinates $j$ in the support of $u$ have $a_j$ already fixed, in which case the $i$-th bit of $Mu$ equals the known value $\sum_{j\in\operatorname{supp}u}M_{ij}u_j$; otherwise that bit is a fair coin, because at least one of its summands is an undecided uniform bit and the bits of distinct rows are independent. Writing $D_u$ for the number of determined rows whose determined bit is $1$ and $R_u$ for the number of undetermined rows, the conditional law of $\operatorname{wt}(Mu)$ over the uniform fiber $F(a)$ is $D_u+\operatorname{Bin}(R_u,\tfrac12)$; hence $\Pr[\operatorname{wt}(Mu)<4m\mid F(a)]=\Pr[\operatorname{Bin}(R_u,\tfrac12)<4m-D_u]$, a number of the form $2^{-R_u}c$ with $c$ a nonnegative integer. [algebra, given]
 

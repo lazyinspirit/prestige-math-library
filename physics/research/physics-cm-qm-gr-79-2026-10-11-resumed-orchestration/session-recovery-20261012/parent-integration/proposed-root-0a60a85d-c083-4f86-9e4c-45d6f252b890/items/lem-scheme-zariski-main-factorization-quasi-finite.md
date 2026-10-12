@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-scheme-zariski-main-factorization-quasi-finite.md

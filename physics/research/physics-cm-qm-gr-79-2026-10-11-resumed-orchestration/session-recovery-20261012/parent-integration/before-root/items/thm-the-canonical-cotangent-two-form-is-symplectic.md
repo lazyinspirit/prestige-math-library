@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-canonical-cotangent-two-form-is-symplectic.md

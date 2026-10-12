@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dirichlet-heat-semigroup-from-the-laplacian.md

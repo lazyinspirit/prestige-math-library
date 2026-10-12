@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ltwo-normalisation-of-sine-modes-on-the-interval.md

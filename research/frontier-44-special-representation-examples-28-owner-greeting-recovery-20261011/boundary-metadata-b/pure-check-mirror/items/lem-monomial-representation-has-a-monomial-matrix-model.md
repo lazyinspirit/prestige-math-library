@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-monomial-representation-has-a-monomial-matrix-model.md

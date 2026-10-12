@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-pure-blockade-with-perfect-but-not-cograph-pattern.md

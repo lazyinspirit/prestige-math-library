@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-shifted-inverse-iteration-targets-a-nondominant-eigenvalue.md

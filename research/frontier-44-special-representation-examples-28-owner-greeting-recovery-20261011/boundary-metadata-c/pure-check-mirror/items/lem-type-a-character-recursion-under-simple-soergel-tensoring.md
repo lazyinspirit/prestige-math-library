@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-type-a-character-recursion-under-simple-soergel-tensoring.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-nrqm-orbital-and-spin-finite-spin-matrices.md

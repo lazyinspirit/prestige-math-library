@@ -37,11 +37,10 @@ Let $T:V\to V$ be a linear isomorphism of an oriented real vector space with $\d
 
 **Proof technique:** direct.
 
-
-1.1 Fix a positively oriented ordered basis $\mathcal B=(b_1,\ldots,b_n)$; the transported list $T(\mathcal B)=(T(b_1),\ldots,T(b_n))$ is again an ordered basis because $T$ is an isomorphism, and the change-of-basis map from $\mathcal B$ to $T(\mathcal B)$ is $T$ itself. [given, L1]
+ 1.1 Fix a positively oriented ordered basis $\mathcal B=(b_1,\ldots,b_n)$; the transported list $T(\mathcal B)=(T(b_1),\ldots,T(b_n))$ is again an ordered basis because $T$ is an isomorphism, and the change-of-basis map from $\mathcal B$ to $T(\mathcal B)$ is $T$ itself. [given, L1]
 
 1.2 By [L1], $T(\mathcal B)$ is positively oriented exactly when $\det T>0$, and negatively oriented exactly when $\det T<0$; both cases are exhaustive because $T$ invertible has $\det T\ne0$. [L1]
 
 2.1 The top exterior action of [L2] records the same sign: $T(b_1)\wedge\cdots\wedge T(b_n)=\Lambda^nT(b_1\wedge\cdots\wedge b_n)=\det(T)\,b_1\wedge\cdots\wedge b_n$, so the transported basis belongs to the class of $\mathcal B$ precisely when the scalar is positive. [L2, step 1.1]
 
-3.1 Steps 1.2 and 2.1 prove both the preservation and the reversal claims, and the orientation class of the transported basis is independent of the positively oriented basis chosen. [step 1.2, step 2.1] ∎
+3.1 Steps 1.2 and 2.1 prove both the preservation and the reversal claims, and the orientation class of the transported basis is independent of the positively oriented basis chosen. [step 1.2, step 2.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-center-is-morita-invariant-via-natural-endomorphisms.md

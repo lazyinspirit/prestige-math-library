@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-canonical-iterated-free-resolution-of-a-module.md

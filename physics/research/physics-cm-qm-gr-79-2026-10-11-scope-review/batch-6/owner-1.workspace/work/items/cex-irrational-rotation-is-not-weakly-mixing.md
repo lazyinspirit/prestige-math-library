@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-irrational-rotation-is-not-weakly-mixing.md

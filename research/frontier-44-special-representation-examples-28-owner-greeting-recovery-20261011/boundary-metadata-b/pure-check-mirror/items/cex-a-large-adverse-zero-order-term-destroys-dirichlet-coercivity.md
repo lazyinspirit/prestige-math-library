@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-large-adverse-zero-order-term-destroys-dirichlet-coercivity.md

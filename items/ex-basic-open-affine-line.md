@@ -37,5 +37,4 @@ $\operatorname{Spec}k[t,t^{-1}]$.
 
 1.2 By [F1], $D(t)\cong\operatorname{Spec}(k[t]_t)$. [F1]
 
-2.1 Combining the two identifications proves the example. [step 1.1, step 1.2] ∎
- 
+2.1 Combining the two identifications proves the example. [step 1.1, step 1.2] ∎  

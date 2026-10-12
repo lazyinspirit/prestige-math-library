@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-first-fundamental-theorem-of-calculus-for-l-one.md

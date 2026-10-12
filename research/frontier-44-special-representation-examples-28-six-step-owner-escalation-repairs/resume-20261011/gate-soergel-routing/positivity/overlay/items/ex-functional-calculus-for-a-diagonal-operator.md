@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-functional-calculus-for-a-diagonal-operator.md

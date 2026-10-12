@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-variety-dimension-coordinate-ring.md

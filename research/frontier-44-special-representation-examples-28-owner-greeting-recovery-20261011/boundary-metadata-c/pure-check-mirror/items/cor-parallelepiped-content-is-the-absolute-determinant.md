@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-parallelepiped-content-is-the-absolute-determinant.md

@@ -48,8 +48,6 @@ codimension one in $J^{**}$. In particular, $J$ is not reflexive.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 By [A1] and [L1], the quotient of $J^{**}$ by its canonical $J$ summand is [given, A1, L1]
-identified by $x+\lambda\mathbf1\mapsto\lambda$ with $\mathbb R$. The scalar $\lambda=\lim_nz_n$ satisfies $|\lambda|\le\|z\|_{J^{**}}$ because singleton endpoint variations are $|z_n|$, so the zero-constant summand is closed. [A1, L1]
+1.1 By [A1] and [L1], the quotient of $J^{**}$ by its canonical $J$ summand is [given, A1, L1] identified by $x+\lambda\mathbf1\mapsto\lambda$ with $\mathbb R$. The scalar $\lambda=\lim_nz_n$ satisfies $|\lambda|\le\|z\|_{J^{**}}$ because singleton endpoint variations are $|z_n|$, so the zero-constant summand is closed. [A1, L1]
 
-2.1 The constant sequence $\mathbf1$ has bidual norm one and is not in the [given, L2, L1, step 1.1]
-canonical image, since elements of $J\subset c_0$ tend to zero. Thus the quotient is nonzero and exactly one-dimensional. The canonical map is not surjective, so [L2] says $J$ is not reflexive. [L1, L2, step 1.1] ∎
+2.1 The constant sequence $\mathbf1$ has bidual norm one and is not in the [given, L2, L1, step 1.1] canonical image, since elements of $J\subset c_0$ tend to zero. Thus the quotient is nonzero and exactly one-dimensional. The canonical map is not surjective, so [L2] says $J$ is not reflexive. [L1, L2, step 1.1] ∎ 

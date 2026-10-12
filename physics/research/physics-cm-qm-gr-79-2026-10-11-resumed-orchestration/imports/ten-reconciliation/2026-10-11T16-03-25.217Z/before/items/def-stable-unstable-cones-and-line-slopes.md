@@ -1,0 +1,82 @@
+---
+id: def-stable-unstable-cones-and-line-slopes
+kind: definition
+title: "Stable and unstable cones, invariant line slopes, stable and unstable sets, and transverse homoclinic points of the quadratic family"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 0
+deps: [def-metric-space, def-metric-convergence, def-derivative, def-interval, def-abs-value, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, def-ck-euclidean-maps-and-diffeomorphisms]
+dependency_roles:
+  def-metric-space: mathematical-premise
+  def-metric-convergence: mathematical-premise
+  def-derivative: mathematical-premise
+  def-interval: mathematical-premise
+  def-abs-value: mathematical-premise
+  def-total-derivative-in-euclidean-space: mathematical-premise
+  def-jacobian-matrix-and-gradient: mathematical-premise
+  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems, AMS Graduate Studies in Mathematics 140 (author's preliminary online edition, complete PDF), Section 13.2, stable and unstable manifolds and transverse homoclinic points of a hyperbolic fixed point"
+      url: "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+    - title: "R. Devaney and Z. Nitecki, Shift automorphisms in the Hénon mapping, Communications in Mathematical Physics 67 (1979) 137-146, Lemma 4 and Proposition 3, invariant sectors with a uniform expansion factor"
+      url: "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-67/issue-2/Shift-automorphisms-in-the-H%C3%A9non-mapping/cmp/1103905161.pdf"
+    - title: "P. Cvitanović, R. Artuso, R. Mainieri, G. Tanner, G. Vattay, Chaos: Classical and Quantum (ChaosBook.org, edition 17.6.8, complete PDF), Chapter 15 Section 15.1, stable and unstable manifolds of a fixed point"
+      url: "https://chaosbook.org/chapters/ChaosBook.pdf"
+verification:
+  precheck: pass
+---
+
+## Definition
+
+**The quadratic family.** For $a\in\mathbb R$ let
+
+$$F_a:\mathbb R^2\longrightarrow\mathbb R^2,\qquad F_a(x,y):=(y,\,y^2-a-x),$$
+
+with differential and inverse differential at $(x,y)\in\mathbb R^2$
+
+$$DF_a(x,y)=\begin{pmatrix}0&1\\-1&2y\end{pmatrix},\qquad DF_a(x,y)^{-1}=\begin{pmatrix}2x&-1\\1&0\end{pmatrix};$$
+
+the matrices act on column vectors of $\mathbb R^2$ ([[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]]). The inverse differential is displayed as the differential of $F_a^{-1}(x,y)=(x^2-a-y,x)$.
+
+**Cones.** Fix $k\in(0,1)$. The **unstable cone** and **stable cone** of aperture $k$ are
+
+$$C^u_k:=\{\,(u,v)\in\mathbb R^2\ :\ |u|\le k|v|\,\},\qquad C^s_k:=\{\,(u,v)\in\mathbb R^2\ :\ |v|\le k|u|\,\}$$
+
+([[def-abs-value]]); both are closed subsets of $\mathbb R^2$, they are closed under multiplication by real scalars, and $C^u_k\cap C^s_k=\{0\}$, because a nonzero vector in the intersection would satisfy $|u|\le k|v|$ and $|v|\le k|u|$, hence $|u|\le k^2|u|<|u|$.
+
+**Slopes.** A line through the origin not contained in the vertical axis is written uniquely as $\{(hv,v):v\in\mathbb R\}$ with the **slope parameter** $h=u/v$; here $|h|\le k$ characterises the lines contained in $C^u_k$. Similarly a line not contained in the horizontal axis is written uniquely as $\{(u,ru):u\in\mathbb R\}$ with the **slope parameter** $r=v/u$, and $|r|\le k$ characterises the lines contained in $C^s_k$.
+
+For real numbers $x,y$ two maps on slope parameters are defined:
+
+$$\Phi_y(h):=\frac{1}{2y-h}\quad(h\ne2y)\quad\text{(forward slope map)},\qquad \Psi_x(r):=\frac{1}{2x-r}\quad(r\ne2x)\quad\text{(backward slope map)}.$$
+
+The intended reading is the graph-transform reading: $DF_a(x,y)$ carries the line $\{(hv,v)\}$ at $(x,y)$ to the line $\{(h'v,v)\}$ at $F_a(x,y)$ with $h'=\Phi_y(h)$, and $DF_a(x,y)^{-1}$ carries the line $\{(u,ru)\}$ at $(x,y)$ to the line $\{(u,r'u)\}$ at $F_a^{-1}(x,y)$ with $r'=\Psi_x(r)$. These two statements are assertions about the displayed matrices and are proved in the companion lemma on this page, not part of this definition.
+
+**Invariant line fields on a sequence.** Let $s=(s_n)_{n\in\mathbb Z}$ be a real bilateral sequence and let $z_n:=(s_{n-1},s_n)$. An **unstable line field along $s$** is a family $(L^u_n)_{n\in\mathbb Z}$ of lines through the origin of $\mathbb R^2$ such that $DF_a(z_n)$ maps $L^u_n$ onto $L^u_{n+1}$ for every $n$; a **stable line field along $s$** is a family $(L^s_n)$ with $DF_a(z_n)^{-1}$ mapping $L^s_{n+1}$ onto $L^s_n$ for every $n$. Existence and uniqueness of line fields with slopes in $[-k,k]$ for sequences with $|s_n|\ge L$ are proved in the companion lemma on this page.
+
+**Stable and unstable sets, homoclinic and transverse homoclinic points.** Let $G:Z\to Z$ be a bijection of a metric space $(Z,d)$ ([[def-metric-space]]) with fixed point $\bar z$ (so $G(\bar z)=\bar z$). Put
+
+$$W^s(\bar z):=\{\,z\in Z\ :\ G^n(z)\ \text{is defined for every }n\ge0\text{ and }G^n(z)\to\bar z\ \text{as }n\to\infty\,\},$$
+
+$$W^u(\bar z):=\{\,z\in Z\ :\ G^{-n}(z)\ \text{is defined for every }n\ge0\text{ and }G^{-n}(z)\to\bar z\ \text{as }n\to\infty\,\},$$
+
+where convergence is that of the metric $d$ ([[def-metric-convergence]]). The sets $W^s(\bar z)$ and $W^u(\bar z)$ are the **stable set** and the **unstable set** of $\bar z$. A **homoclinic point** of $\bar z$ is a point $z\in W^s(\bar z)\cap W^u(\bar z)$ with $z\ne\bar z$.
+
+A homoclinic point $z$ is **transverse** when there are $\varepsilon>0$ and $C^1$ maps ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-derivative]])
+
+$$\gamma_s,\gamma_u:(-\varepsilon,\varepsilon)\longrightarrow Z$$
+
+such that $\gamma_s(0)=\gamma_u(0)=z$, $\gamma_s\bigl((-\varepsilon,\varepsilon)\bigr)\subseteq W^s(\bar z)$, $\gamma_u\bigl((-\varepsilon,\varepsilon)\bigr)\subseteq W^u(\bar z)$, both $\gamma_s$ and $\gamma_u$ are injective on $(-\varepsilon,\varepsilon)$ with $\gamma_s'(0)\ne0\ne\gamma_u'(0)$, and the tangent vectors $\gamma_s'(0)$ and $\gamma_u'(0)$ are linearly independent. The interval $(-\varepsilon,\varepsilon)$ is that of [[def-interval]].
+
+## Remarks
+
+- The definition records the two vocabularies used by the coding theorem and the transversality theorem: the linear cone and slope objects of the quadratic family, and the invariant-set objects of a general bijection. It asserts no invariance of the cones, no convergence of the slope maps and no transversality; those are the contents of [[lem-slope-graph-transforms-converge]] and [[lem-tail-curve-tangents-and-homoclinic-transversality]].
+
+- The transversality condition above is stated with two $C^1$ curves through the point, one lying in each invariant set, whose tangents span $\mathbb R^2$. When the local stable and unstable sets are themselves $C^1$ curves near $z$ (which holds at the fixed points and their finite images in the situation of [[lem-tail-curve-tangents-and-homoclinic-transversality]]), this agrees with the usual formulation "$W^s$ and $W^u$ meet transversely at $z$".
+
+- All slopes at a point with second coordinate $y$ are defined for $|y|>k$ and parameters in $[-k,k]$, since then $|2y-h|\ge2|y|-k>0$; this strict margin is what makes the transforms of [[lem-slope-graph-transforms-converge]] contractions.

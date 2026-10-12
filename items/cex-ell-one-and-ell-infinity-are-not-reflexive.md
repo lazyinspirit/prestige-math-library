@@ -52,11 +52,8 @@ reflexive.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 AC in [A1] supplies the ultrafilter lemma, DC, Hahn--Banach, and Countable [given, A1, L1, L2]
-Choice needed by [L1] and [L2]. Thus [L1] already refutes reflexivity of $\ell^1$, over both scalar fields. [A1, L1]
+1.1 AC in [A1] supplies the ultrafilter lemma, DC, Hahn--Banach, and Countable [given, A1, L1, L2] Choice needed by [L1] and [L2]. Thus [L1] already refutes reflexivity of $\ell^1$, over both scalar fields. [A1, L1]
 
-2.1 By [L3], $(\ell^1)^*=\ell^\infty$. If $\ell^\infty$ were reflexive, [given, L3, L2, step 1.1]
-the reverse implication in [L2] would make $\ell^1$ reflexive, contradicting step 1.1. Hence $\ell^\infty$ is not reflexive. [L2, L3, step 1.1]
+2.1 By [L3], $(\ell^1)^*=\ell^\infty$. If $\ell^\infty$ were reflexive, [given, L3, L2, step 1.1] the reverse implication in [L2] would make $\ell^1$ reflexive, contradicting step 1.1. Hence $\ell^\infty$ is not reflexive. [L2, L3, step 1.1]
 
-3.1 Independently, [L4] exhibits the bidual surplus: under the identification [given, L4, A1, step 2.1]
-$(\ell^1)^{**}=(\ell^\infty)^*=ba$, the canonical $\ell^1$ image is only the proper subspace of countably additive charges. This is a concrete failed- surjectivity witness consistent with steps 1.1-2.1. [A1, L4] ∎
+3.1 Independently, [L4] exhibits the bidual surplus: under the identification [given, L4, A1, step 2.1] $(\ell^1)^{**}=(\ell^\infty)^*=ba$, the canonical $\ell^1$ image is only the proper subspace of countably additive charges. This is a concrete failed- surjectivity witness consistent with steps 1.1-2.1. [A1, L4] ∎ 

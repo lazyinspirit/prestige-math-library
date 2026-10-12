@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble.md

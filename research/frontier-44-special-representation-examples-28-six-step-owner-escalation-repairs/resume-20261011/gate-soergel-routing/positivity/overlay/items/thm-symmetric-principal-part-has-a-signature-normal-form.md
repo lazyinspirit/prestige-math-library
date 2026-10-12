@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetric-principal-part-has-a-signature-normal-form.md

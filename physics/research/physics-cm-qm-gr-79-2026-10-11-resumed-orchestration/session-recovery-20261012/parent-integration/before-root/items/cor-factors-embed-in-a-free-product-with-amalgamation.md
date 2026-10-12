@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-factors-embed-in-a-free-product-with-amalgamation.md

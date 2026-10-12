@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-khovanov-seidel-algebra-has-finite-homological-dimension.md

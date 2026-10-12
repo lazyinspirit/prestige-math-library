@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lca-group-has-an-open-compactly-generated-subgroup-with-no-open-subgroup-of-infinite-index.md

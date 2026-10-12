@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-wirtinger-chain-rule-for-real-differentiable-maps.md

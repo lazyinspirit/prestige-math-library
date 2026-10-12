@@ -49,19 +49,14 @@ $R$-modules.
 
 **Proof technique:** direct.
 
-1.1 For an object $(n,e)$, define its splitting module $P_e:=\operatorname{im}(e:R^n\to R^n)$. [L1, L2, construct]
-By [L1], $e$ is an idempotent endomorphism of $R^n$. Let $i_e:P_e\rightarrowtail R^n$ be inclusion, and let $p_e:R^n\twoheadrightarrow P_e$ be $e$ with codomain restricted to its image. Then $i_ep_e=e$ and $p_ei_e=1_{P_e}$, so these maps give an actual splitting in $R\text{-}\mathbf{Mod}$. [L1, L2, algebra]
+1.1 For an object $(n,e)$, define its splitting module $P_e:=\operatorname{im}(e:R^n\to R^n)$. [L1, L2, construct] By [L1], $e$ is an idempotent endomorphism of $R^n$. Let $i_e:P_e\rightarrowtail R^n$ be inclusion, and let $p_e:R^n\twoheadrightarrow P_e$ be $e$ with codomain restricted to its image. Then $i_ep_e=e$ and $p_ei_e=1_{P_e}$, so these maps give an actual splitting in $R\text{-}\mathbf{Mod}$. [L1, L2, algebra]
 
-2.1 The module $P_e$ is finitely generated and projective. [L3, step 1.1]
-Since $R^n$ is projective by [L3], composing any lifting problem for $P_e$ with $p_e$ and then restricting the resulting lift along $i_e$ proves that $P_e$ is projective. It is finitely generated because the images under $p_e$ of the standard generators of $R^n$ generate it. [L3, step 1.1]
+2.1 The module $P_e$ is finitely generated and projective. [L3, step 1.1] Since $R^n$ is projective by [L3], composing any lifting problem for $P_e$ with $p_e$ and then restricting the resulting lift along $i_e$ proves that $P_e$ is projective. It is finitely generated because the images under $p_e$ of the standard generators of $R^n$ generate it. [L3, step 1.1]
 
-2.2 The object assignment $(n,e)\mapsto P_e$ and restriction on morphisms define a functor $\overline K$. [L1, L2, step 1.1, construct]
-If $u:(n,e)\to(m,f)$ is a Karoubi morphism, [L2] gives $fue=u$, equivalently $fu=u=ue$. Hence $u$ maps $P_e$ into $P_f$; define $\overline K(u):=u|_{P_e}:P_e\to P_f$. Restrictions preserve identities and composition, so this defines a functor. [L1, L2, step 1.1]
+2.2 The object assignment $(n,e)\mapsto P_e$ and restriction on morphisms define a functor $\overline K$. [L1, L2, step 1.1, construct] If $u:(n,e)\to(m,f)$ is a Karoubi morphism, [L2] gives $fue=u$, equivalently $fu=u=ue$. Hence $u$ maps $P_e$ into $P_f$; define $\overline K(u):=u|_{P_e}:P_e\to P_f$. Restrictions preserve identities and composition, so this defines a functor. [L1, L2, step 1.1]
 
-3.1 The functor $\overline K$ is fully faithful. [L1, L2, L4, step 1.1, step 2.2, algebra]
-For objects $(n,e)$ and $(m,f)$, the map on hom-sets in step 2.2 is bijective. Indeed, for any homomorphism $h:P_e\to P_f$, the composite $$u:=i_fhp_e:R^n\longrightarrow R^m$$ corresponds by [L1] to a matrix and satisfies $fue=u$, so it is a Karoubi morphism whose restriction is $h$. Conversely, $ue=u$ forces every Karoubi morphism to equal $i_f(u|_{P_e})p_e$, proving uniqueness. Thus $\overline K$ is fully faithful by [L4]. [L1, L2, L4, step 1.1, step 2.2, algebra]
+3.1 The functor $\overline K$ is fully faithful. [L1, L2, L4, step 1.1, step 2.2, algebra] For objects $(n,e)$ and $(m,f)$, the map on hom-sets in step 2.2 is bijective. Indeed, for any homomorphism $h:P_e\to P_f$, the composite $$u:=i_fhp_e:R^n\longrightarrow R^m$$ corresponds by [L1] to a matrix and satisfies $fue=u$, so it is a Karoubi morphism whose restriction is $h$. Conversely, $ue=u$ forces every Karoubi morphism to equal $i_f(u|_{P_e})p_e$, proving uniqueness. Thus $\overline K$ is fully faithful by [L4]. [L1, L2, L4, step 1.1, step 2.2, algebra]
 
-3.2 Every finitely generated projective $R$-module lies in the essential image of $\overline K$. [L2, L3, step 1.1, step 2.2]
-Indeed, let $P$ be a finitely generated projective module. A finite generating set gives a surjection $q:R^n\to P$. Projectivity from [L3] supplies a section $s:P\to R^n$ with $qs=1_P$. Then $e:=sq$ is idempotent, and $q$ restricts to an isomorphism $P_e\to P$ with inverse $s$. Hence every finitely generated projective module lies in the essential image of $\overline K$. [L2, L3, step 1.1, step 2.2]
+3.2 Every finitely generated projective $R$-module lies in the essential image of $\overline K$. [L2, L3, step 1.1, step 2.2] Indeed, let $P$ be a finitely generated projective module. A finite generating set gives a surjection $q:R^n\to P$. Projectivity from [L3] supplies a section $s:P\to R^n$ with $qs=1_P$. Then $e:=sq$ is idempotent, and $q$ restricts to an isomorphism $P_e\to P$ with inverse $s$. Hence every finitely generated projective module lies in the essential image of $\overline K$. [L2, L3, step 1.1, step 2.2]
 
-4.1 Step 2.1 and step 3.2 identify the essential image, and step 3.1 proves full faithfulness; hence the stated claim holds. [L4, step 2.1, step 3.1, step 3.2] ∎
+4.1 Step 2.1 and step 3.2 identify the essential image, and step 3.1 proves full faithfulness; hence the stated claim holds. [L4, step 2.1, step 3.1, step 3.2] ∎ 

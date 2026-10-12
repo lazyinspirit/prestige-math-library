@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-skeletal-exactness-computes-axiomatic-homology.md

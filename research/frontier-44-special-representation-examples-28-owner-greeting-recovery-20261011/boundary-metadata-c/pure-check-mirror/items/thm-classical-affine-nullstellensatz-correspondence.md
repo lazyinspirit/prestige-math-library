@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-classical-affine-nullstellensatz-correspondence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-cosine-sine-orthogonality-and-odd-extension.md

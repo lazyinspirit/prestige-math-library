@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-immersion-affine-quotient-and-base-change.md

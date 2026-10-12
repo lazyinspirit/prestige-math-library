@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-nowhere-zero-section-forces-the-euler-class-to-vanish.md

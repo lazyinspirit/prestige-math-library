@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-general-stokes-agrees-with-classical-gauss-flux.md

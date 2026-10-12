@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-critical-holder-boundary-at-zero-from-the-brownian-lil.md

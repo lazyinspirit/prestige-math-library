@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generic-linear-coordinate-makes-a-holomorphic-germ-regular.md

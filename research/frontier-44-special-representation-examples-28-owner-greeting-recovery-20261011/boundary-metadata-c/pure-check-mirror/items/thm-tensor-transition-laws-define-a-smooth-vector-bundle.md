@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-tensor-transition-laws-define-a-smooth-vector-bundle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-endomorphism-ring-of-the-left-regular-module-is-opposite.md

@@ -1,0 +1,2695 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-21",
+  "scope": [
+    "lem-cm05-radial-potential-gradient",
+    "pthm-cm05-relative-reduction",
+    "post-cm05-central-model",
+    "pthm-cm05-plane-area",
+    "pthm-cm05-effective-potential",
+    "pthm-cm05-circular-orbit",
+    "post-cm05-gravity",
+    "pthm-cm05-conic",
+    "pthm-cm05-kepler-period",
+    "rem-cm05-collision-scope",
+    "ex-cm05-gravitational-ellipse-and-period-check",
+    "ex-cm05-parabolic-and-hyperbolic-branch-check",
+    "ex-cm05-barycentric-orbits-check",
+    "ex-cm05-circular-orbit-frequency-check",
+    "cex-cm05-external-force-breaks-relative-reduction"
+  ],
+  "contracts": {
+    "lem-cm05-radial-potential-gradient": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[rem-real-and-complex-normed-space-convention]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-reverse-triangle-inequality-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a normed space. For all $x,y\\in V$, $$\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|.$$ In particular, the norm map is $1$-Lipschitz for the norm metric.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean inner product and the Euclidean norm as in [[def-euclidean-inner-product]]. Then: 1. **Cauchy-Schwarz.** $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\; \\lVert x\\rVert_2\\,\\lVert y\\rVert_2 ,$$ with equality if and only if there is a pair $(\\lambda,\\mu) \\ne (0,0)$ of reals with $\\lambda x_k = \\mu y_k$ for every $k < n$. 2. **$\\lVert\\cdot\\rVert_2$ is",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-directional-and-partial-derivatives",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$, $a\\in U$, $v\\in\\mathbb R^m$, and $f:U\\to\\mathbb R^n$. If the line map $t\\mapsto f(a+tv)$ is defined near $0$, its derivative at $0$ is the **directional derivative** $$D_vf(a):=\\lim_{t\\to0}\\frac{f(a+tv)-f(a)}{t}.$$ For a standard basis vector $e_j$ ([[lem-standard-basis-of-f-n]]), $D_{e_j}f(a)$ is the **$j$th partial derivative**, written $\\partial_jf(a)$. These are ordinary vector-valued",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is $$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$ with coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivativ",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally differentiable at $a$, and $Df(a)$ is the linear map with matrix $Jf(a)$.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "source_section": "Statement",
+          "quote": "If a scalar-valued $f:U\\to\\mathbb R$ is totally differentiable at $a$, then $D_vf(a)=\\langle\\nabla f(a),v\\rangle$ for every $v$. Among unit vectors $v$, this is at most $\\|\\nabla f(a)\\|_2$; if the gradient is nonzero, equality holds exactly in the direction $\\nabla f(a)/\\|\\nabla f(a)\\|_2$. If the gradient is zero, every unit direction has directional derivative zero.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-ck-and-multi-index-notation-in-several-variables",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R$. A **multi-index** is $\\alpha=(\\alpha_0,\\ldots,\\alpha_{m-1})\\in\\mathbb N^m$. Put $$|\\alpha|:=\\sum_{i<m}\\alpha_i,\\qquad \\alpha!:=\\prod_{i<m}\\alpha_i!,\\qquad h^\\alpha:=\\prod_{i<m}h_i^{\\alpha_i}\\quad(h\\in\\mathbb R^m).$$ Here $|\\alpha|$ and $\\alpha!$ use the natural-number sum and product of [[def-nat-finite-sum-and-product]], and $n!$ is the fac",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-real-power-continuity-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For $a>0$, the function $x\\mapsto a^x$ is continuous on $\\mathbb R$ and $$(a^x)'=a^x\\log a.$$ For $\\alpha\\in\\mathbb R$, the function $x\\mapsto x^\\alpha$ is continuous and differentiable on $(0,\\infty)$, with $$(x^\\alpha)'=\\alpha x^{\\alpha-1}.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-real-power",
+          "source_section": "Definition",
+          "quote": "For $a>0$ and $x\\in\\mathbb R$, define $$a^x:=\\exp(x\\log a).$$ For the supplementary zero-base convention, define $0^x:=0$ when $x>0$. The expressions $0^0$ and $0^x$ for $x<0$ are left undefined. Negative bases are not assigned arbitrary real powers.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The norm is continuous on $\\mathbb R^3$ by the reverse triangle inequality [L2], so $A$, the preimage of the open set $J_0$ under $N$, is open; and $N(0)=0\\notin J_0$ gives $0\\notin A$. This is clause 1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Fix $x\\in A$ and $h\\in\\mathbb R^3$ with $x+h\\in A$. By bilinearity, symmetry and [L1], $\\lvert x+h\\rvert^2-\\lvert x\\rvert^2=2\\langle x,h\\rangle+\\lvert h\\rvert^2$, and therefore $\\lvert x+h\\rvert-\\lvert x\\rvert=\\bigl(2\\langle x,h\\rangle+\\lvert h\\rvert^2\\bigr)/\\bigl(\\lvert x+h\\rvert+\\lvert x\\rvert\\bigr)$, the denominator being at least $\\lvert x\\rvert>0$.",
+          "step": "1.2",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Remainder estimate at $x$: subtracting $\\langle x,h\\rangle/\\lvert x\\rvert$ from step 1.2 and putting over the common denominator $\\lvert x\\rvert(\\lvert x+h\\rvert+\\lvert x\\rvert)$ gives $$\\Bigl\\lvert\\lvert x+h\\rvert-\\lvert x\\rvert-\\frac{\\langle x,h\\rangle}{\\lvert x\\rvert}\\Bigr\\rvert\\le\\frac{\\lvert x\\rvert\\,\\lvert h\\rvert^2+\\lvert\\langle x,h\\rangle\\rvert\\,\\bigl\\lvert\\lvert x\\rvert-\\lvert x+h\\rvert\\bigr\\rvert}{\\lvert x\\rvert\\,(\\lvert x+h\\rvert+\\lvert x\\rvert)}\\le\\frac{2\\lvert h\\rvert^2}{\\lvert x\\rvert},$$ where [L3] bounds the first numerator term by $\\lvert x\\rvert\\lvert h\\rvert^2$, [L2] bounds the second by $\\lvert x\\rvert\\lvert h\\rvert\\cdot\\lvert h\\rvert$, and the denominator is at least $\\lvert x\\rvert^2$. Hence the normalized remainder tends to $0$ as $h\\to0$: $N$ is totally differentiable at $x$ with $DN(x)h=\\langle x,h\\rangle/\\lvert x\\rvert$.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The representing vector: for every $v$, [L4] gives $D_vN(x)=DN(x)v=\\langle x,v\\rangle/\\lvert x\\rvert=\\langle x/\\lvert x\\rvert,v\\rangle$; comparing with $D_vN(x)=\\langle\\nabla N(x),v\\rangle$ and taking $v$ over the standard basis shows $\\nabla N(x)=x/\\lvert x\\rvert$. In particular every first partial derivative of $N$ agrees on $A$ with a component of $x/\\lvert x\\rvert$ and is continuous, so $N$ is $C^1$ by [[def-ck-euclidean-maps-and-diffeomorphisms]].",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L4",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Chain rule for the composite $U=u\\circ N$: $u$ is $C^k$ hence totally differentiable, $N$ is totally differentiable at every point of $A$ by step 2.1, and the domains compose, so [L4] gives $DU(x)=Du(N(x))\\circ DN(x)$; and $DU(x)h=u'(\\lvert x\\rvert)\\cdot DN(x)h=u'(\\lvert x\\rvert)\\langle x,h\\rangle/\\lvert x\\rvert$ because the total derivative of the real function $u$ at $t$ is multiplication by $u'(t)$ by [L4]. This is the displayed formula for $DU$.",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The induction on smoothness: the base case $m=1$ is step 3.1. Assume $m\\ge1$ and $N\\in C^m(A)$. The map $t\\mapsto t^{-1}$ is $C^\\infty$ on $(0,\\infty)$ by [L6] with $\\alpha=-1$ iterated, so $x\\mapsto1/\\lvert x\\rvert$ is $C^m$ on $A$ as the composite $t\\mapsto t^{-1}$ after $N$. The coordinate maps $x\\mapsto x_j$ are the components of the identity, whose partial derivatives are the constants $\\delta_{jk}$; they are therefore $C^\\infty$, hence $C^m$, by [[def-ck-euclidean-maps-and-diffeomorphisms]] and [[def-directional-and-partial-derivatives]]. So $\\nabla N(x)=x/\\lvert x\\rvert$, a finite product of $C^m$ maps, is $C^m$; since a map is $C^{m+1}$ exactly when its first partial derivatives are $C^m$ ([[def-ck-and-multi-index-notation-in-several-variables]]), $N$ is $C^{m+1}$. By induction [L7], $N\\in C^m(A)$ for every $m$, that is $N\\in C^\\infty(A)$. This completes clause 2.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L5",
+            "L6",
+            "L7"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The gradient and the regularity: the display of step 3.2 writes $DU(x)$ as the linear map $h\\mapsto\\langle u'(\\lvert x\\rvert)x/\\lvert x\\rvert,h\\rangle$, so $\\nabla U(x)=u'(\\lvert x\\rvert)x/\\lvert x\\rvert$ by the same uniqueness argument as step 3.1; and $U$, a composite of the $C^k$ maps $u$ and $N$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), is $C^k$ on $A$ by [L5]. This is clause 3 and completes the proof.",
+          "step": "5.1",
+          "inputs": [
+            "3.1",
+            "3.2",
+            "L4",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If the open interval J_0 is empty then A is empty and clauses 1-3 are vacuous; step 1.1 still proves A open and 0 not in A."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The regularity index satisfies k>=1, so the zero-smoothness case k=0 is excluded by the statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case k=1 is included: step 3.1 proves C^1 regularity and the induction base of step 4.1 starts at m=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The increment h=0 is included; the difference quotient of steps 1.2 and 2.1 is trivial there and the denominator |x+h|+|x| is at least |x|>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "J_0 is open, so its endpoints are not part of the domain; step 1.1 also shows 0 is not in A, so no derivative at the norm singularity is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made; the argument differentiates an explicit map and runs an induction on the natural number m."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts regularity and a derivative identity, not an equivalence of conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the lemma."
+        }
+      ]
+    },
+    "pthm-cm05-relative-reduction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "The precise notion of a motion of the model, its associated first-order system and its maximal motions is [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm02-interactions",
+          "source_section": "Postulate",
+          "quote": "**(iii) Potential model.** A model may present its force map through a scalar **potential** $U:I_{0}\\times Q\\to\\mathbb R$ of class $C^{2}$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), of dimension $\\mu\\ell^{2}\\tau^{-2}$, read in joules ([[def-cm01-units]]), through the rule $$F_{i}(t,z)=-\\nabla_{x_{i}}U(t,x)\\qquad(i=1,\\dots,N),$$ the gradient being the Euclidean gradient in the position variable of each label ([[def-jacobian-matrix-and-gradient]], [[def-euclidean-inner-product]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "Let a force model of [[post-cm02-force-superposition]] be given: time window $I_{0}\\subseteq\\mathbb R$ nondegenerate and open, configuration domain $Q\\subseteq\\mathbb R^{3N}$ open ([[def-cm01-configuration]] clause (a)), fixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), and a force map $F$ with the standing continuity and state-local-Lipschitz hypotheses of clause (iii) of that postulate. **(a",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm03-centre-of-mass-and-momenta",
+          "source_section": "Definition",
+          "quote": "Fix a model of the force branch [[post-cm02-force-superposition]]: $N\\ge1$ particle labels with fixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), a time window $I_{0}\\subseteq\\mathbb R$, an open configuration domain $Q\\subseteq\\mathbb R^{3N}$ with its collision set removed when the model's force law is singular there ([[def-cm01-configuration]]), and a force map $$F:I_{0}\\times Q\\times(\\mathbb",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm05-radial-potential-gradient",
+          "source_section": "Statement",
+          "quote": "Let $J_0\\subseteq(0,\\infty)$ be an open interval ([[def-interval]]), let $u:J_0\\to\\mathbb R$ be of class $C^k$ for some $k\\ge1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and put $$A:=\\{\\,x\\in\\mathbb R^3:\\lvert x\\rvert\\in J_0\\,\\},\\qquad \\lvert x\\rvert:=\\lVert x\\rVert_2=\\sqrt{\\langle x,x\\rangle},$$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "pthm-cm03-momentum-balance",
+          "source_section": "Statement",
+          "quote": "Adopt the force model and one inertial frame of [[def-cm03-centre-of-mass-and-momenta]], and suppose in addition that the model invokes the external-plus-pair presentation of clause (i) of [[post-cm02-interactions]], $$F_{i}(t,z)=F_{i}^{\\mathrm{ext}}(t,x_{i},v_{i})+\\sum_{j\\ne i}F_{ij}(t,x_{i},x_{j},v_{i},v_{j}),$$ with the antisymmetry clause (ii)1 of that postulate, $F_{ij}(t,x_{i},x_{j},v_{i},v_{j})=-F_{ji}(t,x_{j}",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-derivative-of-pairings-of-curves",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be differentiable at $t_0$ ([[def-derivative]]). Write $x'(t_0),y'(t_0)\\in\\mathbb R^3$ for the derivatives, $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product and $\\lVert\\cdot\\",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be a **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of $f$ at $c$** is the vector-valued function $$q_{f,c} : A \\setminu",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$. 1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at every point of $[a,b]$ as a function on $[a,b]$ ([[def-vector-valued-derivative-and-integral]]), and suppose $f' : [a,b] \\to \\mathbb{R}^{m}$ is integrable. Then $$\\int_a^b f' \\;=\\; f(b) - f(a).$$ 2. **A bounded derivativ",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "x \\le b\\}$ | | | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ | An interval is **open** when both of its written endpoints are excluded, that is for the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$;",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-cm01-configuration",
+          "source_section": "Definition",
+          "quote": "**(a) Unconstrained branch.** The **unconstrained configuration domain** is an open set $Q\\subseteq\\mathbb R^{3N}$, chosen as part of the model.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Setup: $x$ is a $C^2$ curve family with values in the open $Q$, $\\lvert r(t)\\rvert\\in J_0$ for every $t$, $r$ is $C^2$ by [L5], and $M>0$, $\\mu>0$, and the curves $X,V,P$ are defined; the evaluated gradient $\\nabla_{x_i}U(x(t))$ is defined because $U$ is $C^1$ on the open $Q$ and $x(t)\\in Q$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pair forces: put $S(x_1,x_2):=x_1-x_2$ and $G(y):=u(\\lvert y\\rvert)$ on $A$, so that $U=G\\circ S$. By [L2] and [L3], $DU(x)(h_1,h_2)=DG(r)(h_1-h_2)=u'(\\lvert r\\rvert)\\langle r/\\lvert r\\rvert,h_1-h_2\\rangle=\\langle u'(\\lvert r\\rvert)r/\\lvert r\\rvert,h_1\\rangle-\\langle u'(\\lvert r\\rvert)r/\\lvert r\\rvert,h_2\\rangle$; reading off the partial gradients gives $\\nabla_{x_1}U(x)=u'(\\lvert r\\rvert)r/\\lvert r\\rvert$ and $\\nabla_{x_2}U(x)=-u'(\\lvert r\\rvert)r/\\lvert r\\rvert$. The equation of motion [L1] therefore gives $F_1(t,x(t),w(t))=m_1x_1''(t)=-u'(\\lvert r\\rvert)r/\\lvert r\\rvert$ and $F_2(t,x(t),w(t))=+u'(\\lvert r\\rvert)r/\\lvert r\\rvert$, and the presentation with $F_1^{\\mathrm{ext}}=F_2^{\\mathrm{ext}}=0$ and $F_{12}:=-u'(\\lvert r\\rvert)r/\\lvert r\\rvert$, $F_{21}:=-F_{12}$ is an identity for the force map; $F_{21}=-F_{12}$ is antisymmetry and both pair forces are parallel to $r=x_1-x_2$, which is centrality. This is clause 1.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Centre of mass: the presentation of step 2.1 has total external force $\\sigma=\\sum_iF_i^{\\mathrm{ext}}\\equiv0$, so [L4] gives that $P$ and $V$ are constant on $J$, and $MX''=\\sigma=0$ there. For $t_0<t$ in $J$, [L6] applied to the $C^1$ curve $X$ on $[t_0,t]$ gives $X(t)-X(t_0)=\\int_{t_0}^{t}X'=\\int_{t_0}^{t}V=(t-t_0)V$, and similarly for $t<t_0$; hence $X(t)=X(t_0)+(t-t_0)V$ for all $t,t_0\\in J$, and $V=M^{-1}P$ is the constant of clause 2.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L4",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Relative equation: by [L5], $r=x_1-x_2$ is $C^2$ with $r''=x_1''-x_2''$, so step 2.1 and $M=m_1+m_2$ give $\\mu r''=-\\mu\\bigl(\\frac1{m_1}+\\frac1{m_2}\\bigr)\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}r=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}r$, because $\\mu\\bigl(\\frac1{m_1}+\\frac1{m_2}\\bigr)=\\frac{m_1m_2}{M}\\cdot\\frac{M}{m_1m_2}=1$. Since $r$ is $C^2$ on the interval $J$ with nonempty interior and $\\lvert r(t)\\rvert\\in J_0$ for every $t\\in J$, all hypotheses of [[def-cm-central-force-trajectory]] hold with $(\\mu,U)$ replaced by $(\\mu,u)$ and the equation just displayed: $r$ is a central-force trajectory for $(\\mu,u)$, and $j=\\mu r\\times r'$, $E=\\frac12\\mu\\lVert r'\\rVert_2^2+u(\\lvert r\\rvert)$ are its attached objects. This is clause 3.",
+          "step": "3.2",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Reconstruction: the linear system $X=M^{-1}(m_1x_1+m_2x_2)$, $r=x_1-x_2$ has the unique solution $x_1=X+\\frac{m_2}{M}r$, $x_2=X-\\frac{m_1}{M}r$ on $J$, which is the first assertion. Conversely, let $X^{\\circ}$ be affine on $J$ with $(X^{\\circ})''=0$ and let $r^{\\circ}$ be a $C^2$ curve with $\\lvert r^{\\circ}\\rvert\\in J_0$ and $\\mu(r^{\\circ})''=-u'(\\lvert r^{\\circ}\\rvert)r^{\\circ}/\\lvert r^{\\circ}\\rvert$. Define $x_1^{\\circ},x_2^{\\circ}$ by the displayed formulas; then $x^{\\circ}$ has values in $Q$ because $\\lvert x_1^{\\circ}-x_2^{\\circ}\\rvert=\\lvert r^{\\circ}\\rvert\\in J_0$, is $C^2$, and $M^{-1}(m_1x_1^{\\circ}+m_2x_2^{\\circ})=X^{\\circ}$, $x_1^{\\circ}-x_2^{\\circ}=r^{\\circ}$. Moreover $m_1(x_1^{\\circ})''=m_1\\frac{m_2}{M}(r^{\\circ})''=-\\frac{u'(\\lvert r^{\\circ}\\rvert)}{\\lvert r^{\\circ}\\rvert}r^{\\circ}=F_1$ and $m_2(x_2^{\\circ})''=-m_2\\frac{m_1}{M}(r^{\\circ})''=+\\frac{u'(\\lvert r^{\\circ}\\rvert)}{\\lvert r^{\\circ}\\rvert}r^{\\circ}=F_2$ by step 2.1, so $x^{\\circ}$ is a motion with centre of mass $X^{\\circ}$ and relative coordinate $r^{\\circ}$. The two constructions are mutually inverse by the uniqueness in the first assertion, so $x\\mapsto(X,r)$ is a bijection onto the stated pairs. This is clause 4 and completes the proof.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "L1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has exactly two labels and a nonempty motion is assumed, so no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero pair force u prime identically 0 and the zero total external force sigma=0 are included: step 2.1 gives F_12=F_21=0 and step 3.1 applies the momentum balance with sigma=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is exactly one pair channel; step 2.1 writes the single antisymmetric pair F_12=-F_21 and uses it once in each equation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The colliding configuration r=0 is excluded by Q; step 1.1 records |r(t)| in J_0 and the denominators |r| in steps 2.1-3.2 are nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "J is an interval with nonempty interior; step 3.1 integrates X over [t_0,t] for t_0<t and reverses the endpoints for t<t_0, so no derivative at an endpoint of J is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family selection is made; the reconstruction is an explicit linear formula and the equations are differentiated directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction from a motion to its centre-of-mass and relative data is steps 2.1-3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse direction from affine X and a reduced trajectory to a motion is step 4.1."
+        }
+      ]
+    },
+    "post-cm05-central-model": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(v) state the adopted class explicitly: the two-label force model with fixed positive masses, time window, collision-excluded annulus Q, C^2 static central pair potential and the potential presentation F_i=-grad_{x_i}U with F_i^ext=0; the reduced one-label problem of mass mu and its equation; the separate one-label fixed-centre idealization with its external force map; the reading conventions for force centre and orbit; and the exclusions and model-data status. The reduction itself is referred to its proved theorem, not assumed."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and clause (v) delimit the class to two labels, static C^2 central potentials on an annulus, no external forces and no collisions, and exclude velocity- or time-dependent, non-central, non-potential, constrained, many-body, dissipative, finite-size and relativistic effects. The fixed-centre model is marked as a separate idealization, and no law of nature or measured value is asserted."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics Section 2.5.4 (printed pp. 31-33, PDF pp. 37-39): two bodies through a central force, separation and reduced mass, planarity, neglect of the centre-of-mass piece. Likharev, Essential Graduate Physics CM Section 3.4 Eqs. (3.30)-(3.38) (chapter pp. 7-9, PDF pp. 40-42): conservative central interaction, relative vector and centre of mass, effective single particle of mass mu in U(r). Stewart, Advanced Classical Mechanics Section 4.5 (printed p. 79, PDF p. 82): two masses in a central potential, centre-of-mass coordinate and reduced mass. Locators and fetch stamps are recorded in the batch coverage file."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof, Refutation, Verification or Counterexample section; provenance.proof is not-applicable; clauses (iii) and (v) state that the class and its idealization are adopted assumptions and every theorem of the page is conditional on them."
+        }
+      }
+    },
+    "pthm-cm05-plane-area": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "Adopt the reduced problem as the object that the central-force statements of this page describe, and the central-force-trajectory vocabulary of [[def-cm-central-force-trajectory]] (attached angular momentum $j=\\mu\\,r\\times r'$ and energy $E=\\tfrac12\\mu\\lVert r'\\rVert_2^2+u(\\lvert r\\rvert)$) as the vocabulary in which those statements are phrased.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "**(Relative motion.)** $r$ is of class $C^2$ on $J$, satisfies $$\\mu\\,r''(t)=-\\frac{u'(\\lvert r(t)\\rvert)}{\\lvert r(t)\\rvert}\\,r(t)\\qquad(t\\in J),$$ and is therefore a **central-force trajectory for $(\\mu,u)$** in the sense of [[def-cm-central-force-trajectory]];",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "**Attached objects.** The **angular momentum vector** of such a trajectory is the curve $j:I\\to\\mathbb R^3$, $$j(t):=\\mu\\,r(t)\\times r'(t),$$ with $\\times$ the cross product of $\\mathbb R^3$ ([[def-cross-product-in-r3]]);",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-central-force-angular-momentum-conservation",
+          "source_section": "Statement",
+          "quote": "Let $\\mu>0$, let $J_0\\subseteq(0,\\infty)$ be an open interval, let $U:J_0\\to\\mathbb R$ be of class $C^2$, let $I\\subseteq\\mathbb R$ be an interval with at least two points, and let $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with angular momentum vector $j=\\mu\\,r\\times r'$ ([[def-cm-central-force-trajectory]]). Then: 1. $j$ is differentiable on $I$ with $j'(t)=0$ for every $t\\in I$; hence $j$ is c",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cm-central-force-polar-reduction",
+          "source_section": "Statement",
+          "quote": "Then there are twice differentiable $\\rho:I\\to(0,\\infty)$ and $\\theta:I\\to\\mathbb R$ with $$r(t)=\\rho(t)\\bigl(\\cos\\theta(t)\\,e_1+\\sin\\theta(t)\\,e_2\\bigr)\\qquad(t\\in I),$$ and for **every** such pair $(\\rho,\\theta)$:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-oriented-orthonormal-triads",
+          "source_section": "Statement",
+          "quote": "consequently, for every oriented orthonormal triad $(e_1,e_2,e_3)$ and every $x\\in\\mathbb R^3$, $$x=\\langle x,e_1\\rangle e_1+\\langle x,e_2\\rangle e_2+\\langle x,e_3\\rangle e_3, \\qquad |x|^2=\\langle x,e_1\\rangle^2+\\langle x,e_2\\rangle^2+\\langle x,e_3\\rangle^2 .$$ Throughout, $\\langle\\cdot,\\cdot\\rangle$ and $|\\cdot|$ are the Euclidean inner product and norm ([[def-euclidean-inner-product]]), $\\times$ is the cross product ([[def-cross-product-in-r3]]), and $s_1,s_2,s_3$ is the standard basis of $\\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-derivative-of-pairings-of-curves",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be differentiable at $t_0$ ([[def-derivative]]). Write $x'(t_0),y'(t_0)\\in\\mathbb R^3$ for the derivatives, $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product and $\\lVert\\cdot\\",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be a **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of $f$ at $c$** is the vector-valued function $$q_{f,c} : A \\setminu",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a **primitive of $f$ on $I$** when $G$ is differentiable at every point of $I$ as a function on $I$ with $G' = f$ there ([[def-derivative]]). Then: 1. **Existence.** Fix $c_0 \\in I$. The function $$F : I \\to \\mathbb{R}, \\q",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and $$f(x)=G'(x)\\qquad(a<x<b),$$ then $$\\int_a^b f=G(b)-G(a).$$ No derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "**Nothing here is proved through a sequence.** Claims 1 and 4 are read off from [[thm-algebra-of-function-limits]], which is itself proved from $\\varepsilon$ and $\\delta$, and claims 2, 3 and 5 are proved directly below.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clause 1: by [L1] the curve $r$ is a central-force trajectory for $(\\mu,u)$, so [L2] gives $j'=0$ on $J$, hence $j$ constant, and $\\langle r(t),j\\rangle=\\langle r'(t),j\\rangle=0$ for every $t$. If $j\\ne0$ this says exactly that every value $r(t)$ lies in the plane through the origin of the relative coordinate with normal $j$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 2: assume $j=Je_3$, $J>0$. By [L3] there are polar data $(\\rho,\\theta)$ with $r=\\rho(\\cos\\theta\\,e_1+\\sin\\theta\\,e_2)$ and $\\rho^2\\theta'=J/\\mu$, the right side being positive, so the displayed rate identity holds. Since $j=\\mu r\\times r'$ by definition, $r\\times r'=j/\\mu$; multiplying by $\\frac12$ gives $\\omega=\\frac12r\\times r'=j/(2\\mu)$, a constant vector, and taking norms gives $\\lvert\\omega\\rvert=J/(2\\mu)$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 3: the integrand $s\\mapsto\\rho(s)^2\\theta'(s)$ is continuous on $J$ (products of continuous functions, [L5]); its primitive $A$ has $A'=\\frac12\\rho^2\\theta'=J/(2\\mu)$ by step 2.1, so $A$ is $C^1$. For $t_0<t_1$ in $J$, [L5] gives $A(t_1)-A(t_0)=\\int_{t_0}^{t_1}A'=(t_1-t_0)J/(2\\mu)$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L3",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Clause 4: by [L1], $x_1-X=\\frac{m_2}{M}r$ and $x_2-X=-\\frac{m_1}{M}r$; differentiating with [L4] gives $(x_1-X)'=\\frac{m_2}{M}r'$ and $(x_2-X)'=-\\frac{m_1}{M}r'$. By bilinearity of the cross product and $\\frac12r\\times r'=\\omega$ from step 2.1, $$\\tfrac12(x_1-X)\\times(x_1-X)'=\\Bigl(\\frac{m_2}{M}\\Bigr)^{2}\\tfrac12r\\times r'=\\Bigl(\\frac{m_2}{M}\\Bigr)^{2}\\omega,$$ and similarly with the sign removed by the two sign changes in the second factor, giving $\\bigl(\\frac{m_1}{M}\\bigr)^{2}\\omega$; both vectors are constant because $\\omega$ is. Their norms are $\\bigl(\\frac{m_2}{M}\\bigr)^{2}\\frac{J}{2\\mu}$ and $\\bigl(\\frac{m_1}{M}\\bigr)^{2}\\frac{J}{2\\mu}$, whose ratio is $(m_2/m_1)^{2}$.",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model and motion are fixed; no possibly empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The radial case j=0 is excluded from clauses 2-4 by the hypothesis J>0; clause 1 remains valid and steps 1.1 and 2.1 read the areal vector as zero there."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is one relative coordinate and one force centre; the polar data and the swept-area integral of steps 2.1 and 3.1 are one-dimensional along the single orbit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case j=0 is excluded at step 2.1 by J>0, and the collision r=0 is excluded by the configuration domain recorded in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The swept-area increment is computed for t_0<t_1 in J at step 3.1; J has nonempty interior by the statement, so no endpoint derivative is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made; the argument differentiates cross products and integrates a continuous function on an interval."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clauses 1-4 are identities and implications about a fixed trajectory; no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the item."
+        }
+      ]
+    },
+    "pthm-cm05-effective-potential": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "Suppose the model presents its force map through the time-independent potential $$U(x_1,x_2):=u(\\lvert x_1-x_2\\rvert),$$ where $u:J_0\\to\\mathbb R$ is of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), so that $F_i(t,x,v)=-\\nabla_{x_i}U(x)$ on the state domain ([[post-cm02-interactions]], clauses (iii) and (iv), [[lem-cm05-radial-potential-gradient]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "Adopt the reduced problem as the object that the central-force statements of this page describe, and the central-force-trajectory vocabulary of [[def-cm-central-force-trajectory]] (attached angular momentum $j=\\mu\\,r\\times r'$ and energy $E=\\tfrac12\\mu\\lVert r'\\rVert_2^2+u(\\lvert r\\rvert)$) as the vocabulary in which those statements are phrased.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-central-force-polar-reduction",
+          "source_section": "Statement",
+          "quote": "Then there are twice differentiable $\\rho:I\\to(0,\\infty)$ and $\\theta:I\\to\\mathbb R$ with $$r(t)=\\rho(t)\\bigl(\\cos\\theta(t)\\,e_1+\\sin\\theta(t)\\,e_2\\bigr)\\qquad(t\\in I),$$ and for **every** such pair $(\\rho,\\theta)$:",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-oriented-orthonormal-triads",
+          "source_section": "Statement",
+          "quote": "consequently, for every oriented orthonormal triad $(e_1,e_2,e_3)$ and every $x\\in\\mathbb R^3$, $$x=\\langle x,e_1\\rangle e_1+\\langle x,e_2\\rangle e_2+\\langle x,e_3\\rangle e_3, \\qquad |x|^2=\\langle x,e_1\\rangle^2+\\langle x,e_2\\rangle^2+\\langle x,e_3\\rangle^2 .$$ Throughout, $\\langle\\cdot,\\cdot\\rangle$ and $|\\cdot|$ are the Euclidean inner product and norm ([[def-euclidean-inner-product]]), $\\times$ is the cross product ([[def-cross-product-in-r3]]), and $s_1,s_2,s_3$ is the standard basis of $\\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-derivative-of-pairings-of-curves",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be differentiable at $t_0$ ([[def-derivative]]). Write $x'(t_0),y'(t_0)\\in\\mathbb R^3$ for the derivatives, $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product and $\\lVert\\cdot\\",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $A, B \\subseteq \\mathbb{R}$, let $g : A \\to \\mathbb{R}$ with $g[A] \\subseteq B$ and let $f : B \\to \\mathbb{R}$, so that the composite $f \\circ g : A \\to \\mathbb{R}$ is defined. Let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]) at which $g$ is differentiable ([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$ at which $f$ is differentiable. Then $f \\circ g$ is differentiable",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "That the restriction still has $c$ as a limit point, so that a derivative there means anything at all, is not free either, and it is the last claim of [[lem-sign-preservation-near-a-limit]] applied to $g$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be a **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of $f$ at $c$** is the vector-valued function $$q_{f,c} : A \\setminu",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a **primitive of $f$ on $I$** when $G$ is differentiable at every point of $I$ as a function on $I$ with $G' = f$ there ([[def-derivative]]). Then: 1. **Existence.** Fix $c_0 \\in I$. The function $$F : I \\to \\mathbb{R}, \\q",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality;",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "x \\le b\\}$ | | | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ | An interval is **open** when both of its written endpoints are excluded, that is for the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "its **energy** is the function $E:I\\to\\mathbb R$, $$E(t):=\\tfrac12\\mu\\,\\lVert r'(t)\\rVert_2^2+U(|r(t)|);$$ and for every $J\\ge0$ the **effective potential of momentum magnitude** $J$ is the function $U^{\\mathrm{eff}}_J:J_0\\to\\mathbb R$, $$U^{\\mathrm{eff}}_J(\\rho):=U(\\rho)+\\frac{J^2}{2\\mu\\,\\rho^2}.$$ **Why the objects are defined.** Since $\\rho>0$ throughout $J_0$, the right-hand side of the central-force equation is defined, the map $\\rho\\mapsto J^2/(2\\mu\\rho^2)$ is $C^2$ on $(0,\\infty)$ (a quotient of $C^2$ functions with nowhere vanishing denominator), and $U^{\\mathrm{eff}}_J$ is again $C^2$;",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clause 1: by [L1], $r$ is a central-force trajectory for $(\\mu,u)$ with constant $j=Je_3$, so the hypotheses of [L2] hold and its conclusions give $\\rho^2\\theta'=J/\\mu$, $\\mu\\rho''=-(U^{\\mathrm{eff}}_J)'(\\rho)$, and $E=\\frac12\\mu(\\rho')^2+U^{\\mathrm{eff}}_J(\\rho)$ constant on $J$; [L5] makes $U^{\\mathrm{eff}}_J$ a $C^2$ function, so the displayed equation is the one-dimensional mechanical equation for the coordinate $\\rho$ on $\\rho>0$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Clause 2, construction and equations: define $n:=\\cos\\theta^{\\circ}e_1+\\sin\\theta^{\\circ}e_2$ and $n_\\perp:=-\\sin\\theta^{\\circ}e_1+\\cos\\theta^{\\circ}e_2$, and $r^{\\circ}:=\\rho^{\\circ}n$. By [L3], $r^{\\circ}$ is $C^2$ with $n'=(\\theta^{\\circ})'n_\\perp$, $n_\\perp'=-(\\theta^{\\circ})'n$ and $(r^{\\circ})'=(\\rho^{\\circ})'n+\\rho^{\\circ}(\\theta^{\\circ})'n_\\perp$, hence $(r^{\\circ})''=\\bigl((\\rho^{\\circ})''-\\rho^{\\circ}((\\theta^{\\circ})')^2\\bigr)n+\\bigl(2(\\rho^{\\circ})'(\\theta^{\\circ})'+\\rho^{\\circ}(\\theta^{\\circ})''\\bigr)n_\\perp$. With $(\\theta^{\\circ})'=J/(\\mu(\\rho^{\\circ})^2)$ the second coefficient is $\\frac{1}{\\rho^{\\circ}}\\bigl((\\rho^{\\circ})^2(\\theta^{\\circ})'\\bigr)'=0$, and the radial equation gives $\\mu\\bigl((\\rho^{\\circ})''-\\rho^{\\circ}((\\theta^{\\circ})')^2\\bigr)=\\mu(\\rho^{\\circ})''-\\frac{J^2}{\\mu(\\rho^{\\circ})^3}=-u'(\\rho^{\\circ})$, since $-(U^{\\mathrm{eff}}_J)'(\\rho^{\\circ})=-u'(\\rho^{\\circ})+\\frac{J^2}{\\mu(\\rho^{\\circ})^3}$. Therefore $\\mu(r^{\\circ})''=-u'(\\rho^{\\circ})n=-\\frac{u'(\\lvert r^{\\circ}\\rvert)}{\\lvert r^{\\circ}\\rvert}r^{\\circ}$, the last equality by $\\lvert r^{\\circ}\\rvert=\\rho^{\\circ}$ and $r^{\\circ}=\\rho^{\\circ}n$ from [L4].",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 2, consequences: $\\lvert r^{\\circ}\\rvert=\\rho^{\\circ}$ takes values in $J_0$ and $\\rho^{\\circ}$ is positive, so step 1.2 exhibits $r^{\\circ}$ as a central-force trajectory for $(\\mu,u)$ in the sense of the definition, with $r^{\\circ}\\times(r^{\\circ})'=(\\rho^{\\circ})^2(\\theta^{\\circ})'\\,(n\\times n_\\perp)=(\\rho^{\\circ})^2(\\theta^{\\circ})'e_3=\\frac{J}{\\mu}e_3$ by [L4] and $n\\times n_\\perp=e_3$; hence $j^{\\circ}=\\mu\\,r^{\\circ}\\times(r^{\\circ})'=Je_3$. Its energy is $\\frac12\\mu\\lVert(r^{\\circ})'\\rVert_2^2+u(\\rho^{\\circ})=\\frac12\\mu\\bigl((\\rho^{\\circ})'\\bigr)^2+\\frac{J^2}{2\\mu(\\rho^{\\circ})^2}+u(\\rho^{\\circ})=\\frac12\\mu\\bigl((\\rho^{\\circ})'\\bigr)^2+U^{\\mathrm{eff}}_J(\\rho^{\\circ})$ by [L3] and orthonormality.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 3: if $(\\rho,\\theta)$ are the polar data of a trajectory $r$ as in clause 1, the construction of clause 2 applied to $(\\rho,\\theta)$ returns $\\rho(\\cos\\theta\\,e_1+\\sin\\theta\\,e_2)=r$. Conversely, if $r^{\\circ}$ is constructed from $(\\rho^{\\circ},\\theta^{\\circ})$ and $(\\tilde\\rho,\\tilde\\theta)$ is any polar data of $r^{\\circ}$ supplied by [L2], then $\\tilde\\rho=\\lvert r^{\\circ}\\rvert=\\rho^{\\circ}$ and $\\tilde\\rho^2\\tilde\\theta'=J/\\mu=\\tilde\\rho^2(\\theta^{\\circ})'$, so $(\\tilde\\theta-\\theta^{\\circ})'=0$ and the two angle functions differ by a constant. Combining with [L1] clause 4, the pair $(\\rho^{\\circ},\\theta^{\\circ})$ together with any affine $X^{\\circ}$ with $(X^{\\circ})''=0$ reconstructs a motion of the two-label model with relative coordinate $r^{\\circ}$ and centre of mass $X^{\\circ}$, and by step 2.1 that motion has angular momentum $Je_3$. This completes the proof.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model, the motion and the nonzero angular momentum are fixed; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The statement assumes J>0 throughout, so the zero-angular-momentum case is excluded by hypothesis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The radial problem is one-dimensional in rho; the equations and energy identity of step 1.1 are scalar, and the reconstruction of steps 1.2 and 2.1 has one planar trajectory."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The denominator rho^2 is nonzero on J_0 and step 1.2 divides by rho^0>0; the quotient defining U_eff is C^2 there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "J is an interval with nonempty interior; the angular primitive of step 3.1 is evaluated between t_0 and t in J and no endpoint derivative is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made; the reconstruction is an explicit formula and the equations are checked by differentiation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Clause 3 from polar data to the reconstructed trajectory is the forward construction of steps 1.2 and 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Clause 3 from a reconstructed trajectory back to its polar data is the inversion argument of step 3.1."
+        }
+      ]
+    },
+    "pthm-cm05-circular-orbit": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "Conversely, if $X^{\\circ}:J\\to\\mathbb R^3$ is affine with $(X^{\\circ})''=0$ and $r^{\\circ}:J\\to\\mathbb R^3$ is a $C^2$ curve with $\\lvert r^{\\circ}(t)\\rvert\\in J_0$ and $\\mu(r^{\\circ})''=-u'(\\lvert r^{\\circ}\\rvert)r^{\\circ}/\\lvert r^{\\circ}\\rvert$ on $J$, then $$x_1^{\\circ}:=X^{\\circ}+\\frac{m_2}{M}r^{\\circ},\\qquad x_2^{\\circ}:=X^{\\circ}-\\frac{m_1}{M}r^{\\circ}$$ define a motion $x^{\\circ}:J\\to Q$ of the model whose centre of mass is $X^{\\circ}$ and whose relative coordinate is $r^{\\circ}$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "The **reduced problem** of the model is the one-label problem of mass $\\mu$ whose unknown is the relative coordinate $r=x_1-x_2$ and whose equation is $$\\mu\\,r''=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ by [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of a model of class (i) solves this equation, and every pair of a uniform centre-of-mass motion and a solution of the reduced equation on a common interval reconstructs a motion of the model.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-circular-orbit-and-radial-frequency",
+          "source_section": "Statement",
+          "quote": "if moreover $\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)>0$, then the associated linearised equation $\\mu\\delta''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)\\delta$ has exactly the solutions $\\delta(t)=A\\cos(\\omega_{\\rm lin}(t-t_0))+B\\sin(\\omega_{\\rm lin}(t-t_0))$ with $A,B\\in\\mathbb R$ and $\\omega_{\\rm lin}:=\\sqrt{\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)/\\mu}>0$, for any $t_0\\in I$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-oriented-orthonormal-triads",
+          "source_section": "Statement",
+          "quote": "consequently, for every oriented orthonormal triad $(e_1,e_2,e_3)$ and every $x\\in\\mathbb R^3$, $$x=\\langle x,e_1\\rangle e_1+\\langle x,e_2\\rangle e_2+\\langle x,e_3\\rangle e_3, \\qquad |x|^2=\\langle x,e_1\\rangle^2+\\langle x,e_2\\rangle^2+\\langle x,e_3\\rangle^2 .$$ Throughout, $\\langle\\cdot,\\cdot\\rangle$ and $|\\cdot|$ are the Euclidean inner product and norm ([[def-euclidean-inner-product]]), $\\times$ is the cross product ([[def-cross-product-in-r3]]), and $s_1,s_2,s_3$ is the standard basis of $\\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-second-order-oscillator-form",
+          "source_section": "Statement",
+          "quote": "Let $\\omega>0$, let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, and let $v:I\\to\\mathbb R$ be twice differentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $$v''(t)+\\omega^2v(t)=0\\qquad(t\\in I).$$ Then there are reals $A,B$ with $$v(t)=A\\cos\\bigl(\\omega(t-t_0)\\bigr)+B\\sin\\bigl(\\omega(t-t_0)\\bigr)\\qquad(t\\in I).$$ Conversely, for all reals $A,B$ the func",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "its **energy** is the function $E:I\\to\\mathbb R$, $$E(t):=\\tfrac12\\mu\\,\\lVert r'(t)\\rVert_2^2+U(|r(t)|);$$ and for every $J\\ge0$ the **effective potential of momentum magnitude** $J$ is the function $U^{\\mathrm{eff}}_J:J_0\\to\\mathbb R$, $$U^{\\mathrm{eff}}_J(\\rho):=U(\\rho)+\\frac{J^2}{2\\mu\\,\\rho^2}.$$ **Why the objects are defined.** Since $\\rho>0$ throughout $J_0$, the right-hand side of the central-force equation is defined, the map $\\rho\\mapsto J^2/(2\\mu\\rho^2)$ is $C^2$ on $(0,\\infty)$ (a quotient of $C^2$ functions with nowhere vanishing denominator), and $U^{\\mathrm{eff}}_J$ is again $C^2$;",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]) at which $g$ is differentiable ([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$ at which $f$ is differentiable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "That the restriction still has $c$ as a limit point, so that a derivative there means anything at all, is not free either, and it is the last claim of [[lem-sign-preservation-near-a-limit]] applied to $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "x \\le b\\}$ | | | | $(-\\infty,\\infty)$ | $\\mathbb{R}$ | An interval is **open** when both of its written endpoints are excluded, that is for the forms $(a,b)$, $(a,\\infty)$, $(-\\infty,b)$ and $(-\\infty,\\infty)$;",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clause 1: differentiating the definition of $U^{\\mathrm{eff}}_J$ with [L3] gives $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0)=u'(r_0)-J^{2}/(\\mu r_0^{3})$, so the first two conditions are equivalent; and $\\mu r_0\\omega^{2}=\\mu r_0\\cdot J^{2}/(\\mu^{2}r_0^{4})=J^{2}/(\\mu r_0^{3})$ by the definition of $\\omega$, so $u'(r_0)=J^{2}/(\\mu r_0^{3})$ is equivalent to $\\mu r_0\\omega^{2}=u'(r_0)$.",
+          "step": "1.1",
+          "inputs": [
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 2: assume $(U^{\\mathrm{eff}}_J)'(r_0)=0$. By [L2] clause (ii) the displayed curve $r^{\\circ}$ is a central-force trajectory for $(\\mu,u)$ on $\\mathbb R$ with $\\lvert r^{\\circ}\\rvert\\equiv r_0$, $j=Je_3$ and $E=U^{\\mathrm{eff}}_J(r_0)$; combined with an affine $X^{\\circ}$ and [L1] clause 4 it reconstructs a motion of the two-label model with $x_1-X^{\\circ}=\\frac{m_2}{M}r^{\\circ}$ and $x_2-X^{\\circ}=-\\frac{m_1}{M}r^{\\circ}$. Taking norms gives the displayed constant radii; and since $(r^{\\circ})'$ is tangent to the circle $\\lvert y\\rvert=r_0$ and $\\lvert(r^{\\circ})'\\rvert=r_0\\omega$, each label traverses its circle with angular velocity $\\omega$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Clause 3: assume $\\lvert r\\rvert\\equiv r_0$ on $J$ with $j=Je_3$, $J>0$. By [L1] and [L2] clause (i), $(U^{\\mathrm{eff}}_J)'(r_0)=0$, the polar angular coordinate satisfies $\\theta'\\equiv J/(\\mu r_0^{2})=\\omega$, so $\\theta(t)=\\theta_0+\\omega t$ on $J$ up to the additive constant, and $r=r_0(\\cos\\theta\\,e_1+\\sin\\theta\\,e_2)$ is the uniform rotation of clause 2; the reconstruction of [L1] clause 4 gives the two labels on the circles of clause 2 about the affine centre of mass.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 4: under the two derivatives hypotheses, [L2] clause (iii) gives exactly the stated solutions of the linearised equation with the stated positive frequency $\\omega_{\\mathrm{lin}}=\\sqrt{(U^{\\mathrm{eff}}_J)''(r_0)/\\mu}$, as an identity on any interval with at least two points containing $t_0$.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L2",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model, the radius r_0 and the trajectory are fixed data; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero radial perturbation is included: the linearised equation of step 3.1 has the solution delta=0, the rest perturbation. The case J=0 is excluded by the hypothesis J>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is one circular radius and one relative trajectory; step 1.1 computes the single critical-point identity and step 2.1 the single uniform rotation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The linearised clause assumes (U_eff) double prime (r_0)>0, so the degenerate zero-curvature case is excluded; step 3.1 uses omega_lin>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The linearised equation is stated on an interval I with at least two points in clause 4 and step 3.1; no endpoint derivative is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family is made; the criterion is an algebraic identity and the trigonometric solutions are checked directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equivalence of the three forms of the criterion in clause 1 is the calculation of step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse equivalences in clause 1 are the same algebraic identities of step 1.1."
+        }
+      ]
+    },
+    "post-cm05-gravity": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(v) state the gravitational pair potential -G_N m_1^g m_2^g/|x_1-x_2| with positive couplings and the constant G_N, its dimensions and SI reading; the empirical identification m_i^g=m_i as a separate adopted assumption; the measured CODATA 2022 value 6.67430(15)*10^{-11} m^3 kg^-1 s^-2 with standard and relative uncertainty and the expansion factor 3.9; the non-relativistic weak-field point-particle scope with exclusions; and the adopted, non-derived status."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and clause (iv) restrict the model to two point labels, fixed masses, no external bodies or non-gravitational forces, no rotation, deformation, mass loss or radiation, non-relativistic weak field and no coincident configurations; clause (ii) confines the mass identification to statements that explicitly adopt it, and clause (iii) records that any numerical use inherits the uncertainty and measurement conditions."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Likharev Section 1.2 Eq. (1.15) and footnote 11 (chapter p. 4, PDF p. 8): the gravity law with the gravitational constant and the weak-equivalence footnote. Tong Sections 1.2.4 and 2.5.4 (printed pp. 4 and 31-33, PDF pp. 10 and 37-39): F=-(GMm/r^2) rhat from V=-GMm/r and the two-body gravitational potential. CODATA 2022, arXiv:2409.03787 Section XIV and Table XXX: the recommended value, its uncertainty and the 16 mutually inconsistent measurements. Locators and fetch stamps are recorded in the batch coverage file."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof, Refutation, Verification or Counterexample section; provenance.proof is not-applicable; clauses (i)-(iii) are explicitly adopted model data and empirical premises, and clause (v) states that no law of nature and no measurement of this item is proved."
+        }
+      }
+    },
+    "pthm-cm05-conic": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "**(Relative motion.)** $r$ is of class $C^2$ on $J$, satisfies $$\\mu\\,r''(t)=-\\frac{u'(\\lvert r(t)\\rvert)}{\\lvert r(t)\\rvert}\\,r(t)\\qquad(t\\in J),$$ and is therefore a **central-force trajectory for $(\\mu,u)$** in the sense of [[def-cm-central-force-trajectory]];",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label central model.** A model of class (i) is a force model of [[post-cm02-force-superposition]] with $N=2$ labels, fixed masses $m_1,m_2>0$ ([[post-cm01-worldlines]] clause (v)), a time window $I_0$, the collision-excluded configuration domain $$Q:=\\{\\,x=(x_1,x_2)\\in(\\mathbb R^3)^2:\\lvert x_1-x_2\\rvert\\in J_0\\,\\}$$ for an open interval $J_0\\subseteq(0,\\infty)$ ([[def-cm01-configuration]]), and the force map presented through the time-independent **static central pair potential** $$U(x_1,x_2):=u(\\lvert x_1-x_2\\rvert),\\qquad u:J_0\\to\\mathbb R\\ \\text{of class }C^2,$$ so that $F_i(t,x,v)=-\\nabla_{x_i}U(x)$ on the state domain (clauses (iii) and (iv) of [[post-cm02-interactions]];",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label gravitational model.** A model of the gravitational branch is a model of class (i) of [[post-cm05-central-model]] with $J_0=(0,\\infty)$, $Q=\\{x=(x_1,x_2):x_1\\ne x_2\\}$, masses $m_1,m_2>0$ in the equation of motion, and the **gravitational pair potential** $$U(x_1,x_2)=-\\frac{G_{\\mathrm N}\\,m_1^{g}m_2^{g}}{\\lvert x_1-x_2\\rvert},$$ where $G_{\\mathrm N}>0$ is the **Newtonian constant of gravitation**, a constant of dimension $\\ell^{3}\\mu^{-1}\\tau^{-2}$ read in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $m_1^{g},m_2^{g}>0$ are the **gravitational coupling parameters** of the labels, primitive model data distinct from the inertial masses $m_1,m_2$ ([[post-cm02-interactions]] clause (v), [[def-cm01-units]]).",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-binet-equation",
+          "source_section": "Statement",
+          "quote": "Let $\\mu>0$, $\\kappa>0$, let $U:(0,\\infty)\\to\\mathbb R$ be $U(\\rho):=-\\kappa/\\rho$ (of class $C^2$), let $I$ be an interval with at least two points, and let $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with constant angular momentum $j=Je_3$, $J>0$. Let $(\\rho,\\theta)$ be polar data as in [[thm-cm-central-force-polar-reduction]], let $I^\\circ$ be the interior of $I$ (a nonempty interval with at le",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-conic-and-eccentricity",
+          "source_section": "Statement",
+          "quote": "Let $\\mu>0$, $\\kappa>0$, $U(\\rho)=-\\kappa/\\rho$ on $(0,\\infty)$, let $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with constant angular momentum $j=Je_3$, $J>0$ and constant energy $E$ ([[def-cm-central-force-trajectory]]), and let $u:W\\to(0,\\infty)$, $\\theta$ and $\\sigma$ be as in [[thm-cm-kepler-binet-equation]], with $W=\\theta(I^\\circ)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-ellipse-geometry",
+          "source_section": "Statement",
+          "quote": "Thus the conic $Q=0$ is the ellipse with centre $(-ae,0)$, semiaxes $a,b$, its right focus at the origin, and enclosed area $\\pi ab$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-orbit-period",
+          "source_section": "Statement",
+          "quote": "Let $e\\in[0,1)$, $\\theta_0\\in\\mathbb R$, $p=J^2/(\\mu\\kappa)$, $a=p/(1-e^2)$, $b=a\\sqrt{1-e^2}$, and $\\varrho(\\varphi):=p/(1+e\\cos(\\varphi-\\theta_0))$ be the conic data of [[thm-cm-kepler-conic-and-eccentricity]], and let $(\\rho,\\theta)$ be polar data as in [[thm-cm-central-force-polar-reduction]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-central-force-polar-reduction",
+          "source_section": "Statement",
+          "quote": "the effective-potential equation $\\mu\\rho''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(\\rho)$ holds on $I$, with $U^{\\mathrm{eff}}_J=U+J^2/(2\\mu\\rho^2)$ ([[def-cm-central-force-trajectory]]);",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-oriented-orthonormal-triads",
+          "source_section": "Statement",
+          "quote": "consequently, for every oriented orthonormal triad $(e_1,e_2,e_3)$ and every $x\\in\\mathbb R^3$, $$x=\\langle x,e_1\\rangle e_1+\\langle x,e_2\\rangle e_2+\\langle x,e_3\\rangle e_3, \\qquad |x|^2=\\langle x,e_1\\rangle^2+\\langle x,e_2\\rangle^2+\\langle x,e_3\\rangle^2 .$$ Throughout, $\\langle\\cdot,\\cdot\\rangle$ and $|\\cdot|$ are the Euclidean inner product and norm ([[def-euclidean-inner-product]]), $\\times$ is the cross product ([[def-cross-product-in-r3]]), and $s_1,s_2,s_3$ is the standard basis of $\\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]) at which $g$ is differentiable ([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$ at which $f$ is differentiable.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "The four identities are four algebraic rearrangements of an increment, each followed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality;",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clause 1: by [L1] the curve $r$ is a central-force trajectory for $(\\mu,u)$ with constant nonzero angular momentum $Je_3$ and constant energy $E$, so the hypotheses of the inverse-square orbit theory [L2] are met and its conic representation and eccentricity-energy relation give exactly clause 1, including the equivalence of the signs of $E$ and $e^{2}-1$ because $\\mu\\kappa^{2}/(2J^{2})>0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 2: differentiating $U^{\\mathrm{eff}}_J$ gives $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(\\rho)=\\bigl(\\kappa\\rho-J^{2}/\\mu\\bigr)/\\rho^{3}$, which vanishes exactly at $\\rho_*$ and is negative for $\\rho<\\rho_*$ and positive for $\\rho>\\rho_*$; for $0<\\rho<\\rho'\\le\\rho_*$ the difference identity $$U^{\\mathrm{eff}}_J(\\rho')-U^{\\mathrm{eff}}_J(\\rho)=\\frac{(\\rho'-\\rho)\\bigl[2\\mu\\kappa\\rho\\rho'-J^{2}(\\rho'+\\rho)\\bigr]}{2\\mu\\rho^{2}(\\rho')^{2}}$$ has numerator at most $(\\rho'-\\rho)\\bigl[2J^{2}\\rho-J^{2}(\\rho'+\\rho)\\bigr]=-J^{2}(\\rho'-\\rho)^{2}<0$, where the inequality uses $\\rho\\le\\rho'$ and $\\rho'\\le\\rho_*=J^{2}/(\\mu\\kappa)$; hence $U^{\\mathrm{eff}}_J$ is strictly decreasing on $(0,\\rho_*]$ and $\\rho_*$ is its unique minimum. Direct substitution gives $$-\\frac{\\kappa}{\\rho_{\\min}(E)}+\\frac{J^{2}}{2\\mu\\rho_{\\min}(E)^{2}}=E,$$ by multiplying by $\\rho_{\\min}^{2}$, clearing denominators with the definition of $\\rho_{\\min}$ and using $\\bigl(\\mu\\kappa+\\sqrt{\\mu^{2}\\kappa^{2}+2\\mu EJ^{2}}\\bigr)\\bigl(-\\mu\\kappa+\\sqrt{\\mu^{2}\\kappa^{2}+2\\mu EJ^{2}}\\bigr)=2\\mu EJ^{2}$. Along the motion, the energy identity of [L2] gives $\\tfrac12\\mu(\\rho')^{2}+U^{\\mathrm{eff}}_J(\\rho)=E$, so $U^{\\mathrm{eff}}_J(\\rho(t))\\le E=U^{\\mathrm{eff}}_J(\\rho_{\\min}(E))$; if $\\rho(t)\\le\\rho_*$ then strict decrease on $(0,\\rho_*]$ forces $\\rho(t)\\ge\\rho_{\\min}(E)$, while if $\\rho(t)>\\rho_*$ then $\\rho(t)>\\rho_*\\ge\\rho_{\\min}(E)$ because $\\rho_{\\min}(E)\\le\\rho_*$ (its defining denominator is at least $\\mu\\kappa$). Hence $\\rho\\ge\\rho_{\\min}(E)>0$ throughout.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 3: assume $E<0$, so $e<1$ by step 1.1. Clause (a) is [L2] for the relative trajectory together with [L1] clause 4, which reconstructs the extension of $x$ to $\\mathbb R$ and gives its uniqueness through the uniqueness of the extension of $r$ and the affine $X$. Clause (b) is the ellipse clause of [L2], including $a=p/(1-e^{2})=-\\kappa/(2E)$ and the bound on $\\rho$. Clause (c): by [L1] and [L2], $\\lvert x_1-X\\rvert=\\frac{m_2}{M}\\lvert r\\rvert=\\frac{m_2}{M}\\rho$ and $\\lvert x_2-X\\rvert=\\frac{m_1}{M}\\rho$, so substituting the conic of clause 1 gives the two displayed conic formulas; their semimajor axes are $p_j/(1-e^{2})=\\frac{m_j}{M}a$ with the same eccentricity and the focus at the origin of $x_i-X$, which is the centre of mass.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Clause 4: if $E=0$ then $e=1$ by step 1.1 and the conic formula reads $\\rho=p/(1+\\cos(\\theta-\\theta_0))$; its denominator is at most $2$, so the periapsis is $p/2=\\rho_{\\min}(0)$ by the formula of step 2.1, and the open conic has the single periapsis at $\\theta=\\theta_0$. If $E>0$ then $e>1$; the formula of clause 1 holds wherever it is evaluated, and $\\rho>0$ forces $1+e\\cos(\\theta-\\theta_0)>0$, so the orbit lies on the branch of the hyperbola through periapsis; the periapsis is $\\rho_{\\min}(E)=p/(1+e)$ by step 2.1. No assertion is made about the extent of these trajectories, their asymptotic directions or scattering, which are outside this item.",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model, the motion and the nonzero angular momentum are fixed; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-energy parabolic case E=0 is clause 4 and is treated in step 4.1; the zero-angular-momentum case is excluded by J>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The parabolic case e=1 and the circular subcase e=0 of the elliptic branch are included in steps 3.1 and 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundary e=0 between the circular and elliptic cases is included in the elliptic clause e<1; the collision rho=0 is excluded by the barrier of step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The domain of the motion is an interval with nonempty interior; the elliptic extension to all of R is step 3.1, and the open branches of step 4.1 are asserted only on the actual angular domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 assumes the Axiom of Countable Choice, used through the Kepler orbit-theory suppliers at step 1.1; the dependency def-countable-choice is declared."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward sign implications E<0 implies e<1, E=0 implies e=1 and E>0 implies e>1 are step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse sign implications e<1 implies E<0, e=1 implies E=0 and e>1 implies E>0 are the same equivalence of step 1.1."
+        }
+      ]
+    },
+    "pthm-cm05-kepler-period": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "Conversely, if $X^{\\circ}:J\\to\\mathbb R^3$ is affine with $(X^{\\circ})''=0$ and $r^{\\circ}:J\\to\\mathbb R^3$ is a $C^2$ curve with $\\lvert r^{\\circ}(t)\\rvert\\in J_0$ and $\\mu(r^{\\circ})''=-u'(\\lvert r^{\\circ}\\rvert)r^{\\circ}/\\lvert r^{\\circ}\\rvert$ on $J$, then $$x_1^{\\circ}:=X^{\\circ}+\\frac{m_2}{M}r^{\\circ},\\qquad x_2^{\\circ}:=X^{\\circ}-\\frac{m_1}{M}r^{\\circ}$$ define a motion $x^{\\circ}:J\\to Q$ of the model whose centre of mass is $X^{\\circ}$ and whose relative coordinate is $r^{\\circ}$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "The **reduced problem** of the model is the one-label problem of mass $\\mu$ whose unknown is the relative coordinate $r=x_1-x_2$ and whose equation is $$\\mu\\,r''=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ by [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of a model of class (i) solves this equation, and every pair of a uniform centre-of-mass motion and a solution of the reduced equation on a common interval reconstructs a motion of the model.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm05-conic",
+          "source_section": "Statement",
+          "quote": "**(Conic and eccentricity.)** There are $e\\ge0$ and $\\theta_0\\in\\mathbb R$ with $$\\rho=\\frac{p}{1+e\\cos(\\theta-\\theta_0)}$$ on the interior of $J$, and the energy satisfies $E=\\dfrac{\\mu\\kappa^{2}}{2J^{2}}\\bigl(e^{2}-1\\bigr)$;",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-orbit-period",
+          "source_section": "Statement",
+          "quote": "Let $e\\in[0,1)$, $\\theta_0\\in\\mathbb R$, $p=J^2/(\\mu\\kappa)$, $a=p/(1-e^2)$, $b=a\\sqrt{1-e^2}$, and $\\varrho(\\varphi):=p/(1+e\\cos(\\varphi-\\theta_0))$ be the conic data of [[thm-cm-kepler-conic-and-eccentricity]], and let $(\\rho,\\theta)$ be polar data as in [[thm-cm-central-force-polar-reduction]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-kepler-ellipse-geometry",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $p>0$ and $0\\le e<1$, and put $$a:=\\frac{p}{1-e^2}>0,\\qquad b:=a\\sqrt{1-e^2},\\qquad \\varrho(\\varphi):=\\frac{p}{1+e\\cos\\varphi}\\quad(\\varphi\\in\\mathbb R).$$ 1. $\\varrho$ is $C^1$, $2\\pi$-periodic, and $\\dfrac{p}{1+e}\\le\\varrho\\le\\dfrac{p}{1-e}$. 2. Let $Q(x,y):=(1-e^2)x^2+y^2+2pex-p^2$ and $E_{\\rm ell}:=\\{(x,y)\\in\\mathbb R^2:Q(x,y)\\le0\\}$. Then $E_{\\",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm05-plane-area",
+          "source_section": "Statement",
+          "quote": "Adopt the central-force model of [[post-cm05-central-model]] clause (i): masses $m_1,m_2>0$, $M=m_1+m_2$, reduced mass $\\mu=m_1m_2/M$, static central pair potential $u\\in C^2(J_0)$, and a motion $x:J\\to Q$ on an interval $J$ with nonempty interior; let $X$ be its centre of mass, $r=x_1-x_2$ its relative coordinate, and $j:=\\mu\\,r\\times r'$ the attached angular-momentum vector ([[pthm-cm05-relative-reduction]], [[def-",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(ii) The empirical mass identification.** For the quantitative applications of this page, adopt in addition the identification $$m_i^{g}=m_i\\qquad(i=1,2)$$ of the gravitational coupling parameters with the inertial masses.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Clause 1: by [L1] the relative trajectory meets the hypotheses of [L2] with $E<0$, and [L2] supplies the unique extension to $\\mathbb R$, the periodicity with $T$ determined by one full revolution of $\\theta$, and the two displayed period formulas; substituting $a=p/(1-e^{2})$ and $p=J^{2}/(\\mu\\kappa)$ into $T=2\\pi\\mu ab/J$ and $T=2\\pi\\sqrt{\\mu/\\kappa}\\,a^{3/2}$ is exactly [L2].",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 2: substituting $\\mu=m_1m_2/M$ and $\\kappa=G_{\\mathrm N}m_1^{g}m_2^{g}$ from [L4] into $T^{2}=4\\pi^{2}\\mu a^{3}/\\kappa$ gives $T^{2}=4\\pi^{2}a^{3}m_1m_2/\\bigl(MG_{\\mathrm N}m_1^{g}m_2^{g}\\bigr)$; if additionally $m_i^{g}=m_i$, the numerator and denominator simplify by $m_1m_2$ to $T^{2}=4\\pi^{2}a^{3}/(G_{\\mathrm N}M)$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Clause 3: by [L1], $x_i-X=\\pm\\frac{m_j}{M}r$, and $r$, hence $x_i-X$, is $T$-periodic by step 1.1; also $X(t+T)-X(t)=VT$ because $X$ is affine with constant derivative $V$, so $x_i(t+T)-x_i(t)=VT+\\bigl(x_i(t+T)-X(t+T)\\bigr)-\\bigl(x_i(t)-X(t)\\bigr)=VT$. This vanishes identically exactly when $VT=0$, that is $V=0$.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 4: by [L2] the relative motion extends to $\\mathbb R$; applying [L3] to that extended motion, its swept-area function has derivative $J/(2\\mu)$, so the area swept over one period is $JT/(2\\mu)$. Since $\\theta:[t_0,t_0+T]\\to[\\theta(t_0),\\theta(t_0)+2\\pi]$ is a strictly increasing $C^1$ bijection with $\\theta'=\\rho^{-2}\\mu^{-1}J$ on the extension, the substitution rule gives $$A(t_0+T)-A(t_0)=\\frac12\\int_{t_0}^{t_0+T}\\rho^{2}\\theta'=\\frac12\\int_{\\theta(t_0)}^{\\theta(t_0)+2\\pi}\\varrho(\\varphi)^{2}\\,\\mathrm d\\varphi=\\frac12\\int_{0}^{2\\pi}\\varrho(\\varphi)^{2}\\,\\mathrm d\\varphi=\\pi ab$$ by the $2\\pi$-periodicity of $\\varrho$ and [L2]; combining with $A(t_0+T)-A(t_0)=JT/(2\\mu)$ gives $T=2\\pi\\mu ab/J$.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model and the negative-energy motion are fixed; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero centre-of-mass velocity case V=0 gives absolute periodic motions in clause 3, and the zero case of the absolute displacement is covered by step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is one relative period and two labels i=1,2; step 2.2 handles both signs of the mass-ratio factor uniformly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The circular subcase e=0 of the elliptic branch [0,1) is allowed and the formulas of step 1.1 remain defined; the denominator 1-e^2 is positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The relative motion is extended to all of R (clause 1 and [L2]), and the area integral of step 3.1 is evaluated over [t_0,t_0+T]; no endpoint derivative is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "A1 assumes the Axiom of Countable Choice, used through the Kepler period and ellipse-geometry suppliers at steps 1.1 and 3.1; the dependency def-countable-choice is declared."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction of the equivalence in clause 3, absolute periodicity implies V=0, is step 2.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction, V=0 implies absolute periodicity, is also step 2.2."
+        }
+      ]
+    },
+    "rem-cm05-collision-scope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark audits a fixed finite list of page items and asserts no indexed-family claim of its own."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The remark makes no zero-parameter computation; the collision and radial exclusions it records are dispositions of the cited items."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark makes no one-dimensional computation; it is a scope audit."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The remark identifies degenerate cases (collision r=0 and radial motion) as exclusions rather than deriving claims about them."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no interval or endpoint argument; the cited items own their time-domain hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark selects nothing from a family; it lists cited items and their status."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The remark asserts no equivalence; it is a status audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the remark."
+        }
+      ]
+    },
+    "ex-cm05-gravitational-ellipse-and-period-check": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label gravitational model.** A model of the gravitational branch is a model of class (i) of [[post-cm05-central-model]] with $J_0=(0,\\infty)$, $Q=\\{x=(x_1,x_2):x_1\\ne x_2\\}$, masses $m_1,m_2>0$ in the equation of motion, and the **gravitational pair potential** $$U(x_1,x_2)=-\\frac{G_{\\mathrm N}\\,m_1^{g}m_2^{g}}{\\lvert x_1-x_2\\rvert},$$ where $G_{\\mathrm N}>0$ is the **Newtonian constant of gravitation**, a constant of dimension $\\ell^{3}\\mu^{-1}\\tau^{-2}$ read in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $m_1^{g},m_2^{g}>0$ are the **gravitational coupling parameters** of the labels, primitive model data distinct from the inertial masses $m_1,m_2$ ([[post-cm02-interactions]] clause (v), [[def-cm01-units]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "The **reduced problem** of the model is the one-label problem of mass $\\mu$ whose unknown is the relative coordinate $r=x_1-x_2$ and whose equation is $$\\mu\\,r''=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ by [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of a model of class (i) solves this equation, and every pair of a uniform centre-of-mass motion and a solution of the reduced equation on a common interval reconstructs a motion of the model.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-conic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Adopt the two-label gravitational model of [[post-cm05-gravity]] clause (i): inertial masses $m_1,m_2>0$, $M=m_1+m_2$, reduced mass $\\mu=m_1m_2/M$, gravitational couplings $m_1^{g},m_2^{g}>0$, $\\kappa=G_{\\mathrm N}m_1^{g}m_2^{g}>0$, and the central pair potential $u(\\rho)=-\\kappa/\\rho$ on $J_0=(0,\\infty)$. Let $x:J\\to Q$ be a motion on an interval $J$ w",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm05-kepler-period",
+          "source_section": "Statement",
+          "quote": "Let $x:J\\to Q$ be a motion with relative coordinate $r$, angular momentum $j=Je_3$, $J>0$, and energy $E<0$, and let $e\\in[0,1)$, $\\theta_0\\in\\mathbb R$, $$p=\\frac{J^{2}}{\\mu\\kappa},\\qquad a=\\frac{p}{1-e^{2}}=-\\frac{\\kappa}{2E},\\qquad b=a\\sqrt{1-e^{2}}$$ be its conic data ([[pthm-cm05-conic]] clauses 1 and 3).",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm05-plane-area",
+          "source_section": "Statement",
+          "quote": "let $X$ be its centre of mass, $r=x_1-x_2$ its relative coordinate, and $j:=\\mu\\,r\\times r'$ the attached angular-momentum vector ([[pthm-cm05-relative-reduction]], [[def-cm-central-force-trajectory]]).",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "its value is a real multiple of that unit, and the conventions fix how the numerical value of a quantity is read (a coordinate value alone is a real number, and the unit declaration attaches its dimension).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Energy: with $\\mu\\kappa^{2}=(10^{24})(10^{48})=10^{72}$ and $2J^{2}=2\\times10^{54}$, the coefficient is $\\tfrac12\\times10^{18}$; $e^{2}-1=\\tfrac{9}{25}-1=-\\tfrac{16}{25}$, so $E=\\tfrac12\\times10^{18}\\times(-\\tfrac{16}{25})=-\\tfrac{8}{25}\\times10^{18}=-\\tfrac{16}{5}\\times10^{17}$ J, and $e<1$ corresponds to $E<0$ as [[pthm-cm05-conic]] clause 1 states.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Semiaxes: $1-e^{2}=\\tfrac{16}{25}$, so $a=p/(1-e^{2})=10^{6}\\cdot\\tfrac{25}{16}=\\tfrac{25}{16}\\times10^{6}$ m and $b=a\\sqrt{1-e^{2}}=\\tfrac{25}{16}\\times10^{6}\\cdot\\tfrac45=\\tfrac54\\times10^{6}$ m; and $-\\kappa/(2E)=-\\tfrac{10^{24}}{-\\tfrac{16}{25}\\times10^{18}}=\\tfrac{25}{16}\\times10^{6}$ m, so $a=-\\kappa/(2E)$ holds.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Period: $a^{3}=\\left(\\tfrac{25}{16}\\right)^{3}\\times10^{18}=\\tfrac{15625}{4096}\\times10^{18}$, so $\\mu a^{3}/\\kappa=a^{3}=\\tfrac{15625}{4096}\\times10^{18}$ and $T=2\\pi\\sqrt{a^{3}}=2\\pi\\tfrac{125}{64}\\times10^{9}=\\tfrac{125\\pi}{32}\\times10^{9}$ s; by the second route $\\mu ab/J=\\tfrac{10^{24}\\cdot\\tfrac{25}{16}\\times10^{6}\\cdot\\tfrac54\\times10^{6}}{10^{27}}=\\tfrac{125}{64}\\times10^{9}$ s, the same, so $T=2\\pi\\mu ab/J$ and $T^{2}=\\tfrac{15625}{1024}\\pi^{2}\\times10^{18}=\\tfrac{4\\pi^{2}\\mu a^{3}}{\\kappa}$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Third law with the declared identification: $G_{\\mathrm N}M=\\tfrac52\\times10^{-25}\\cdot4\\times10^{24}=1$, so $\\dfrac{4\\pi^{2}a^{3}}{G_{\\mathrm N}M}=4\\pi^{2}a^{3}=\\dfrac{4\\cdot15625}{4096}\\pi^{2}\\times10^{18}=\\dfrac{15625}{1024}\\pi^{2}\\times10^{18}$, the same as $T^{2}$ from step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "Areal rate: $J/(2\\mu)=\\tfrac{10^{27}}{2\\times10^{24}}=500\\ \\mathrm{m^{2}\\,s^{-1}}$, and $\\dfrac{\\pi ab}{T}=\\dfrac{\\pi\\cdot\\tfrac{25}{16}\\times10^{6}\\cdot\\tfrac54\\times10^{6}}{\\tfrac{125\\pi}{32}\\times10^{9}}=\\dfrac{125}{64}\\cdot\\dfrac{32}{125}\\cdot10^{3}=500\\ \\mathrm{m^{2}\\,s^{-1}}$, so $\\pi ab/T=J/(2\\mu)$.",
+          "step": "4.2",
+          "inputs": [
+            "3.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Barycentric orbits: by [L1] each label's conic has parameter $p_i=\\tfrac12 p=5\\times10^{5}$ m, eccentricity $e=\\tfrac35$ and semimajor axis $a_i=\\tfrac12a=\\tfrac{25}{32}\\times10^{6}$ m; the periods about the centre of mass are $T$ by [[pthm-cm05-kepler-period]] clause 3, and with equal masses both semiaxes are equal.",
+          "step": "5.1",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example declares fixed model data and one conic; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The declared data have J=10^{27}>0 and e=3/5, so the zero-angular-momentum and zero-eccentricity cases are not instances of this check; the general theorems cover them."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The check evaluates one relative orbit; the two labels are obtained from one mass ratio at step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The declared eccentricity e=3/5 has 1-e^2=16/25>0, so no degenerate denominator occurs at steps 2.1-3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All data are time-independent and the period is evaluated in step 3.1; no time-domain endpoint enters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All quantities are computed from declared data; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies the listed formulas constructively and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the example."
+        }
+      ]
+    },
+    "ex-cm05-parabolic-and-hyperbolic-branch-check": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-conic",
+          "source_section": "Statement",
+          "quote": "Let $x:J\\to Q$ be a motion on an interval $J$ with nonempty interior, with relative coordinate $r$, attached angular momentum $j=\\mu\\,r\\times r'$ and energy $E=\\tfrac12\\mu\\lVert r'\\rVert_2^2-\\kappa/\\lvert r\\rvert$ ([[pthm-cm05-relative-reduction]], [[def-cm-central-force-trajectory]]), and suppose $j=Je_3$, $J>0$, for an oriented orthonormal triad $(e_1,e_2,e_3)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label gravitational model.** A model of the gravitational branch is a model of class (i) of [[post-cm05-central-model]] with $J_0=(0,\\infty)$, $Q=\\{x=(x_1,x_2):x_1\\ne x_2\\}$, masses $m_1,m_2>0$ in the equation of motion, and the **gravitational pair potential** $$U(x_1,x_2)=-\\frac{G_{\\mathrm N}\\,m_1^{g}m_2^{g}}{\\lvert x_1-x_2\\rvert},$$ where $G_{\\mathrm N}>0$ is the **Newtonian constant of gravitation**, a constant of dimension $\\ell^{3}\\mu^{-1}\\tau^{-2}$ read in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $m_1^{g},m_2^{g}>0$ are the **gravitational coupling parameters** of the labels, primitive model data distinct from the inertial masses $m_1,m_2$ ([[post-cm02-interactions]] clause (v), [[def-cm01-units]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "Adopt the reduced problem as the object that the central-force statements of this page describe, and the central-force-trajectory vocabulary of [[def-cm-central-force-trajectory]] (attached angular momentum $j=\\mu\\,r\\times r'$ and energy $E=\\tfrac12\\mu\\lVert r'\\rVert_2^2+u(\\lvert r\\rvert)$) as the vocabulary in which those statements are phrased.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "its **energy** is the function $E:I\\to\\mathbb R$, $$E(t):=\\tfrac12\\mu\\,\\lVert r'(t)\\rVert_2^2+U(|r(t)|);$$ and for every $J\\ge0$ the **effective potential of momentum magnitude** $J$ is the function $U^{\\mathrm{eff}}_J:J_0\\to\\mathbb R$, $$U^{\\mathrm{eff}}_J(\\rho):=U(\\rho)+\\frac{J^2}{2\\mu\\,\\rho^2}.$$ **Why the objects are defined.** Since $\\rho>0$ throughout $J_0$, the right-hand side of the central-force equation is defined, the map $\\rho\\mapsto J^2/(2\\mu\\rho^2)$ is $C^2$ on $(0,\\infty)$ (a quotient of $C^2$ functions with nowhere vanishing denominator), and $U^{\\mathrm{eff}}_J$ is again $C^2$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Parabolic branch: $e=1$ gives $E=\\tfrac12\\times10^{18}\\cdot(1-1)=0$, and conversely $E=0$ gives $e^{2}-1=0$, hence $e=1$ because $e\\ge0$; the denominator $1+\\cos(\\theta-\\theta_0)$ ranges over $(0,2]$, so $\\rho\\ge p/2$ with equality at $\\theta=\\theta_0$, and $\\rho_{\\min}(0)=J^{2}/(\\mu\\kappa+J)=10^{6}/2=5\\times10^{5}$ m. Direct substitution gives $U^{\\mathrm{eff}}_J(5\\times10^{5})=-\\tfrac{10^{24}}{5\\times10^{5}}+\\tfrac{10^{54}}{2\\times10^{24}\\cdot25\\times10^{10}}=-2\\times10^{18}+2\\times10^{18}=0$.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Hyperbolic branch: with $e=2$, $E=\\tfrac12\\times10^{18}\\cdot3=\\tfrac32\\times10^{18}$ J, and conversely $E>0$ forces $e^{2}-1>0$, hence $e>1$; the periapsis is $p/(1+e)=10^{6}/3$ m, and direct substitution gives $U^{\\mathrm{eff}}_J(10^{6}/3)=-\\tfrac{3\\times10^{24}}{10^{6}}+\\tfrac{10^{54}\\cdot9}{2\\times10^{24}\\cdot10^{12}}=-3\\times10^{18}+\\tfrac92\\times10^{18}=\\tfrac32\\times10^{18}$ J, which is $E$. The condition $\\rho>0$ reads $1+2\\cos(\\theta-\\theta_0)>0$, i.e. $\\cos(\\theta-\\theta_0)>-\\tfrac12$, which by [L2] is $\\lvert\\theta-\\theta_0\\rvert<2\\pi/3$ modulo $2\\pi$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consistency: by [L1] the barrier bound $\\rho\\ge\\rho_{\\min}(E)$ holds in both cases with the displayed positive periapsis, so the relative coordinate stays a positive distance from the force centre; both $e=1$ and $e=2$ give $e\\ge1$, hence open conics, and the classification $E<0\\iff e<1$ of [[pthm-cm05-conic]] clause 1 excludes an elliptic interpretation of these data.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example declares fixed model data and two branches; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The parabolic branch E=0 is exactly the zero-energy case checked in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The parabolic case e=1 and the hyperbolic case e=2 are each evaluated once at steps 1.1 and 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The parabola e=1 is the degenerate boundary of the conic family; step 3.1 uses the barrier bound to exclude the denominator zero at rho=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The hyperbolic branch is evaluated only where 1+2cos(theta-theta_0)>0; the excluded angular endpoint is not part of the motion, as recorded in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All quantities are computed from declared data; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward implication E=0 implies e=1 is step 1.1 (and E>0 implies e>1 is step 2.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse implication e=1 implies E=0 is step 1.1 (and e>1 implies E>0 is step 2.1)."
+        }
+      ]
+    },
+    "ex-cm05-barycentric-orbits-check": {
+      "citations": [
+        {
+          "fact": "A1",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following statement. > For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by > $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that > $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$. Equivalently, in the vocabulary of [[def-choice-function]]: every at most countable family of nonempty sets ([[def-countable]]) has",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-conic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Adopt the two-label gravitational model of [[post-cm05-gravity]] clause (i): inertial masses $m_1,m_2>0$, $M=m_1+m_2$, reduced mass $\\mu=m_1m_2/M$, gravitational couplings $m_1^{g},m_2^{g}>0$, $\\kappa=G_{\\mathrm N}m_1^{g}m_2^{g}>0$, and the central pair potential $u(\\rho)=-\\kappa/\\rho$ on $J_0=(0,\\infty)$. Let $x:J\\to Q$ be a motion on an interval $J$ w",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "**(Relative motion.)** $r$ is of class $C^2$ on $J$, satisfies $$\\mu\\,r''(t)=-\\frac{u'(\\lvert r(t)\\rvert)}{\\lvert r(t)\\rvert}\\,r(t)\\qquad(t\\in J),$$ and is therefore a **central-force trajectory for $(\\mu,u)$** in the sense of [[def-cm-central-force-trajectory]];",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "The **reduced problem** of the model is the one-label problem of mass $\\mu$ whose unknown is the relative coordinate $r=x_1-x_2$ and whose equation is $$\\mu\\,r''=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ by [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of a model of class (i) solves this equation, and every pair of a uniform centre-of-mass motion and a solution of the reduced equation on a common interval reconstructs a motion of the model.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label gravitational model.** A model of the gravitational branch is a model of class (i) of [[post-cm05-central-model]] with $J_0=(0,\\infty)$, $Q=\\{x=(x_1,x_2):x_1\\ne x_2\\}$, masses $m_1,m_2>0$ in the equation of motion, and the **gravitational pair potential** $$U(x_1,x_2)=-\\frac{G_{\\mathrm N}\\,m_1^{g}m_2^{g}}{\\lvert x_1-x_2\\rvert},$$ where $G_{\\mathrm N}>0$ is the **Newtonian constant of gravitation**, a constant of dimension $\\ell^{3}\\mu^{-1}\\tau^{-2}$ read in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $m_1^{g},m_2^{g}>0$ are the **gravitational coupling parameters** of the labels, primitive model data distinct from the inertial masses $m_1,m_2$ ([[post-cm02-interactions]] clause (v), [[def-cm01-units]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm05-kepler-period",
+          "source_section": "Statement",
+          "quote": "**(Both labels.)** For each $i=1,2$ the position relative to the centre of mass is periodic with period $T$, $x_i(t+T)-X(t+T)=x_i(t)-X(t)$, while the absolute motions satisfy $$x_i(t+T)-x_i(t)=V\\,T\\qquad(t\\in\\mathbb R),$$ with the constant centre-of-mass velocity $V=X'$ of [[pthm-cm05-relative-reduction]] clause 2;",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm05-plane-area",
+          "source_section": "Statement",
+          "quote": "**(Both labels about the centre of mass.)** For every $t\\in J$, $$\\tfrac12\\bigl(x_1(t)-X(t)\\bigr)\\times\\bigl(x_1(t)-X(t)\\bigr)'=\\Bigl(\\frac{m_2}{M}\\Bigr)^{2}\\omega(t),\\qquad \\tfrac12\\bigl(x_2(t)-X(t)\\bigr)\\times\\bigl(x_2(t)-X(t)\\bigr)'=\\Bigl(\\frac{m_1}{M}\\Bigr)^{2}\\omega(t),$$ so each label's areal-velocity vector about the centre of mass is constant;",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number $$\\langle x, y\\rangle \\;:=\\;",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Relative conic data: $1-e^{2}=\\tfrac34$, so $a=p/(1-e^{2})=2\\times10^{6}\\cdot\\tfrac43=\\tfrac83\\times10^{6}$ m and $b=\\tfrac83\\times10^{6}\\cdot\\tfrac{\\sqrt3}{2}=\\tfrac{4\\sqrt3}{3}\\times10^{6}$ m; the energy identity of [L1] gives $E=-\\kappa/(2a)=-\\bigl(\\tfrac65\\times10^{25}\\bigr)\\big/\\bigl(\\tfrac{16}{3}\\times10^{6}\\bigr)=-\\tfrac94\\times10^{18}$ J; and the period is $T=2\\pi\\sqrt{\\mu a^{3}/\\kappa}=2\\pi\\sqrt{\\tfrac{64}{27}\\times10^{18}}=\\tfrac{16\\pi}{3\\sqrt3}\\times10^{9}$ s.",
+          "step": "1.1",
+          "inputs": [
+            "A1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Barycentric scaling: $m_2/M=\\tfrac34$ and $m_1/M=\\tfrac14$, so [L1] gives $p_1=\\tfrac34\\cdot2\\times10^{6}=\\tfrac32\\times10^{6}$ m, $p_2=\\tfrac14\\cdot2\\times10^{6}=\\tfrac12\\times10^{6}$ m, $a_1=\\tfrac34\\cdot\\tfrac83\\times10^{6}=2\\times10^{6}$ m and $a_2=\\tfrac14\\cdot\\tfrac83\\times10^{6}=\\tfrac23\\times10^{6}$ m, with eccentricity $e=\\tfrac12$ and the focus at the centre of mass for both.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Areal rates: by [L2] the label-1 areal-velocity magnitude is $\\bigl(\\tfrac34\\bigr)^{2}J/(2\\mu)=\\tfrac{9}{16}\\cdot2000=1125\\ \\mathrm{m^{2}\\,s^{-1}}$ and that of label 2 is $\\bigl(\\tfrac14\\bigr)^{2}\\cdot2000=125\\ \\mathrm{m^{2}\\,s^{-1}}$; their ratio is $9=(m_2/m_1)^{2}$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Periods: by [L2] both labels are $T$-periodic about the centre of mass with the common period $T=\\tfrac{16\\pi}{3\\sqrt3}\\times10^{9}$ s from step 1.1; equivalently $T^{2}=4\\pi^{2}\\mu a^{3}/\\kappa=\\tfrac{256\\pi^{2}}{27}\\times10^{18}\\ \\mathrm{s^{2}}$ with the arithmetic of [L3].",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example declares fixed model data and one relative orbit; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The declared data have J=6*10^{27}>0 and e=1/2, so the zero-angular-momentum and zero-eccentricity cases are excluded; step 1.1 checks the nonzero energy E=-9/4*10^{18}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The check evaluates one relative orbit and the two barycentric scaled orbits at step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The eccentricity e=1/2 gives 1-e^2=3/4>0, so the semiaxes of step 1.1 are nondegenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "All data are time-independent and the common period is evaluated at step 4.1; no time-domain endpoint enters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All quantities are computed from declared data; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example verifies the listed formulas constructively and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the example."
+        }
+      ]
+    },
+    "ex-cm05-circular-orbit-frequency-check": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-circular-orbit",
+          "source_section": "Statement",
+          "quote": "and for every affine centre-of-mass curve $X^{\\circ}$ with $(X^{\\circ})''=0$ the reconstructed motion of the two-label model ([[pthm-cm05-relative-reduction]] clause 4) has both labels moving uniformly on circles about the centre of mass:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "The **reduced problem** of the model is the one-label problem of mass $\\mu$ whose unknown is the relative coordinate $r=x_1-x_2$ and whose equation is $$\\mu\\,r''=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ by [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of a model of class (i) solves this equation, and every pair of a uniform centre-of-mass motion and a solution of the reduced equation on a common interval reconstructs a motion of the model.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-gravity",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label gravitational model.** A model of the gravitational branch is a model of class (i) of [[post-cm05-central-model]] with $J_0=(0,\\infty)$, $Q=\\{x=(x_1,x_2):x_1\\ne x_2\\}$, masses $m_1,m_2>0$ in the equation of motion, and the **gravitational pair potential** $$U(x_1,x_2)=-\\frac{G_{\\mathrm N}\\,m_1^{g}m_2^{g}}{\\lvert x_1-x_2\\rvert},$$ where $G_{\\mathrm N}>0$ is the **Newtonian constant of gravitation**, a constant of dimension $\\ell^{3}\\mu^{-1}\\tau^{-2}$ read in $\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$, and $m_1^{g},m_2^{g}>0$ are the **gravitational coupling parameters** of the labels, primitive model data distinct from the inertial masses $m_1,m_2$ ([[post-cm02-interactions]] clause (v), [[def-cm01-units]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "**(Relative motion.)** $r$ is of class $C^2$ on $J$, satisfies $$\\mu\\,r''(t)=-\\frac{u'(\\lvert r(t)\\rvert)}{\\lvert r(t)\\rvert}\\,r(t)\\qquad(t\\in J),$$ and is therefore a **central-force trajectory for $(\\mu,u)$** in the sense of [[def-cm-central-force-trajectory]];",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "its **energy** is the function $E:I\\to\\mathbb R$, $$E(t):=\\tfrac12\\mu\\,\\lVert r'(t)\\rVert_2^2+U(|r(t)|);$$ and for every $J\\ge0$ the **effective potential of momentum magnitude** $J$ is the function $U^{\\mathrm{eff}}_J:J_0\\to\\mathbb R$, $$U^{\\mathrm{eff}}_J(\\rho):=U(\\rho)+\\frac{J^2}{2\\mu\\,\\rho^2}.$$ **Why the objects are defined.** Since $\\rho>0$ throughout $J_0$, the right-hand side of the central-force equation is defined, the map $\\rho\\mapsto J^2/(2\\mu\\rho^2)$ is $C^2$ on $(0,\\infty)$ (a quotient of $C^2$ functions with nowhere vanishing denominator), and $U^{\\mathrm{eff}}_J$ is again $C^2$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "The coordinates of an adapted chart of [[def-cm-affine-time-space]] are read with the time coordinate $t$ in seconds, $[t]=\\tau$, and the spatial coordinate components $x_{1},x_{2},x_{3}$ in metres, $[x_{i}]=\\ell$;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Critical radius and criterion: substituting the data gives $r_0=J^{2}/(\\mu\\kappa)=\\bigl(36\\times10^{54}\\bigr)/\\bigl(18\\times10^{48}\\bigr)=2\\times10^{6}$ m, which lies in $J_0=(0,\\infty)$, and $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0)=u'(r_0)-J^{2}/(\\mu r_0^{3})=3\\times10^{12}-3\\times10^{12}=0$ by the three arithmetic evaluations of [L2]; since $\\mu r_0\\omega^{2}=3\\times10^{12}$ as well, all three forms of the criterion of [[pthm-cm05-circular-orbit]] clause 1 hold simultaneously.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Angular velocity, energy and the labels: $\\omega=J/(\\mu r_0^{2})=10^{-9}$ s$^{-1}$ by [L2]; the energy is $E=U^{\\mathrm{eff}}_J(r_0)=-\\kappa/r_0+J^{2}/(2\\mu r_0^{2})=-6\\times10^{18}+3\\times10^{18}=-3\\times10^{18}$ J, which also equals $-\\mu\\kappa^{2}/(2J^{2})=\\bigl(\\tfrac32\\times10^{24}\\cdot144\\times10^{48}\\bigr)/\\bigl(2\\cdot36\\times10^{54}\\bigr)\\cdot(-1)=-3\\times10^{18}$ J; by [L1] the labels' circles have radii $\\frac34r_0=\\tfrac32\\times10^{6}$ m and $\\frac14r_0=5\\times10^{5}$ m with angular velocity $\\omega$, each with period $2\\pi\\times10^{9}$ s.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Linearised frequency: $\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)=-2\\kappa/r_0^{3}+3J^{2}/\\bigl(\\mu r_0^{4}\\bigr)$; with $J^{2}=\\mu\\kappa r_0$ the two terms are $-2\\kappa/r_0^{3}$ and $+3\\kappa/r_0^{3}$, giving $\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)=\\kappa/r_0^{3}=\\tfrac32\\times10^{6}$, so $\\omega_{\\mathrm{lin}}=\\sqrt{\\tfrac32\\times10^{6}/\\bigl(\\tfrac32\\times10^{24}\\bigr)}=\\sqrt{10^{-18}}=10^{-9}$ s$^{-1}=\\omega$. This is the equality of the linearised radial and orbital frequencies for the inverse-square potential.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example declares fixed model data and one circular radius; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement solution delta=0 of the linearised equation is included in the frequency statement of step 3.1; the data have J>0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The check evaluates one circular orbit and the two label circles at steps 1.1-2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The data give (U_eff) double prime (r_0)=3/2*10^6>0, so the linearised frequency of step 3.1 is real and no degenerate zero-curvature case occurs."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The data are time-independent; the angular period 2*pi/omega is evaluated at step 2.1 and no endpoint derivative is taken."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All quantities are computed from declared data; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The three equivalent forms of the circular criterion are verified simultaneously in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse equivalence is the same simultaneous verification of step 1.1."
+        }
+      ]
+    },
+    "cex-cm05-external-force-breaks-relative-reduction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "for force maps $F^{(1)},\\dots,F^{(k)}$ on a common domain satisfying (iii), $$F(t,z)=\\sum_{a=1}^{k}F^{(a)}(t,z),$$ and the sum again satisfies (iii), because a finite sum of continuous maps is continuous and a finite sum of maps that are locally Lipschitz in the state variable is locally Lipschitz with a locally uniform constant.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm02-interactions",
+          "source_section": "Postulate",
+          "quote": "**(i) External-plus-pair decomposition.** The model's force map is presented as $$F_{i}(t,z)=F_{i}^{\\mathrm{ext}}(t,x_{i},v_{i})+\\sum_{j\\ne i}F_{ij}(t,x_{i},x_{j},v_{i},v_{j}) \\qquad(i=1,\\dots,N),$$ where each $F_{i}^{\\mathrm{ext}}$ is a single-label **external** force map and each $F_{ij}$ (for $i\\ne j$, an ordered pair) is a **pair** force map, all defined on their stated open domains and satisfying the standing continuity and state-local-Lipschitz hypotheses of clause (iii) of [[post-cm02-force-superposition]] with respect to the arguments they actually depend on.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "Let a force model of [[post-cm02-force-superposition]] be given: time window $I_{0}\\subseteq\\mathbb R$ nondegenerate and open, configuration domain $Q\\subseteq\\mathbb R^{3N}$ open ([[def-cm01-configuration]] clause (a)), fixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), and a force map $F$ with the standing continuity and state-local-Lipschitz hypotheses of clause (iii) of that postulate. **(a",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm03-centre-of-mass-and-momenta",
+          "source_section": "Definition",
+          "quote": "Fix a model of the force branch [[post-cm02-force-superposition]]: $N\\ge1$ particle labels with fixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), a time window $I_{0}\\subseteq\\mathbb R$, an open configuration domain $Q\\subseteq\\mathbb R^{3N}$ with its collision set removed when the model's force law is singular there ([[def-cm01-configuration]]), and a force map $$F:I_{0}\\times Q\\times(\\mathbb",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm05-central-model",
+          "source_section": "Postulate",
+          "quote": "**(i) The two-label central model.** A model of class (i) is a force model of [[post-cm02-force-superposition]] with $N=2$ labels, fixed masses $m_1,m_2>0$ ([[post-cm01-worldlines]] clause (v)), a time window $I_0$, the collision-excluded configuration domain $$Q:=\\{\\,x=(x_1,x_2)\\in(\\mathbb R^3)^2:\\lvert x_1-x_2\\rvert\\in J_0\\,\\}$$ for an open interval $J_0\\subseteq(0,\\infty)$ ([[def-cm01-configuration]]), and the force map presented through the time-independent **static central pair potential** $$U(x_1,x_2):=u(\\lvert x_1-x_2\\rvert),\\qquad u:J_0\\to\\mathbb R\\ \\text{of class }C^2,$$ so that $F_i(t,x,v)=-\\nabla_{x_i}U(x)$ on the state domain (clauses (iii) and (iv) of [[post-cm02-interactions]];",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "**(c) Reference units.** The **metre** is the reference unit of length, the **second** the reference unit of duration and the **kilogram** the reference unit of mass.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-derivative-of-pairings-of-curves",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be differentiable at $t_0$ ([[def-derivative]]). Write $x'(t_0),y'(t_0)\\in\\mathbb R^3$ for the derivatives, $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product and $\\lVert\\cdot\\",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be a **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of $f$ at $c$** is the vector-valued function $$q_{f,c} : A \\setminu",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "**Bounded intervals.** An interval is **bounded** ([[def-bounded-set]]) exactly when it is of one of the four forms in the left column:",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm05-relative-reduction",
+          "source_section": "Statement",
+          "quote": "**(Pair forces.)** On $J$ the evaluated forces are $$F_1\\bigl(t,x(t),x'(t)\\bigr)=-\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r,\\qquad F_2\\bigl(t,x(t),x'(t)\\bigr)=+\\frac{u'(\\lvert r\\rvert)}{\\lvert r\\rvert}\\,r;$$ thus the model invokes the external-plus-pair presentation of [[post-cm02-interactions]] clause (i) with $F_i^{\\mathrm{ext}}\\equiv0$ and the single pair force $F_{12}=-u'(\\lvert r\\rvert)r/\\lvert r\\rvert=-F_{21}$, which is central and antisymmetric in the sense of clause (ii).",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-central-force-trajectory",
+          "source_section": "Definition",
+          "quote": "The curve $r$ is a **central-force trajectory for** $(\\mu,U)$ when $$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$ where $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm ([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the open interval $J_0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The model is admissible for the force branch: the pair maps are $F_{12}=F_{21}\\equiv0$ (the negative gradients of $u\\equiv0$, a $C^\\infty$ function on $(0,\\infty)$) and the external maps are the constants $F_1^{\\mathrm{ext}}=\\gamma$, $F_2^{\\mathrm{ext}}=-\\gamma$; constant maps on $I_0\\times Q\\times(\\mathbb R^3)^2$ are continuous and state-locally Lipschitz with constant $0$, so the standing hypotheses of [[post-cm02-force-superposition]] clause (iii) hold, the presentation is the identity $F_i=F_i^{\\mathrm{ext}}+\\sum_{j\\ne i}F_{ij}$, and the pair forces are antisymmetric and (trivially) central.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "General relative acceleration: by [L2], any motion of a model with this structure has $r''=x_1''-x_2''=\\frac{F_1}{m_1}-\\frac{F_2}{m_2}=\\frac{F_1^{\\mathrm{ext}}}{m_1}-\\frac{F_2^{\\mathrm{ext}}}{m_2}+\\frac{F_{12}}{m_1}-\\frac{F_{21}}{m_2}$; with $F_{21}=-F_{12}$ and $\\mu^{-1}=\\frac1{m_1}+\\frac1{m_2}$ this reads $\\mu r''=F_{12}+\\mu\\bigl(\\frac{F_1^{\\mathrm{ext}}}{m_1}-\\frac{F_2^{\\mathrm{ext}}}{m_2}\\bigr)$; for the model at hand $F_{12}=0$, $F_1^{\\mathrm{ext}}=\\gamma$, $F_2^{\\mathrm{ext}}=-\\gamma$ and $m_1=m_2=1$, so $\\mu r''=\\gamma$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The displayed curves are a motion: $x_1''=\\gamma$ and $x_2''=-\\gamma$, so $m_1x_1''=\\gamma=F_1$ and $m_2x_2''=-\\gamma=F_2$; the curves are polynomials hence $C^2$, and $\\lvert x_1-x_2\\rvert^2=\\lvert (t^2-2)\\mathbf e_1-t\\mathbf e_2\\rvert^2=(t^2-2)^2+t^2>0$ for every $t$ (the two squares cannot vanish simultaneously), so $x(t)\\in Q$ throughout. Its relative coordinate is $r=(t^2-2)\\mathbf e_1-t\\mathbf e_2$.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Failure of the reduction: for this motion $\\mu r''=\\gamma=\\mathbf e_1\\ne0$, while the false statement asserts for the pair potential $u\\equiv0$ that $\\mu r''=-u'(\\lvert r\\rvert)r/\\lvert r\\rvert=0$; the two disagree, so $r$ is not a central-force trajectory for $(\\mu,0)$. Moreover the total external force is $\\sigma=F_1^{\\mathrm{ext}}+F_2^{\\mathrm{ext}}=\\gamma-\\gamma=0$, and indeed the centre of mass $X=\\frac12(x_1+x_2)=\\mathbf e_1+\\frac t2\\mathbf e_2$ is affine, consistent with the balance of [[pthm-cm03-momentum-balance]]; hence even a vanishing total external force does not restore the reduction, and the hypothesis $F_i^{\\mathrm{ext}}\\equiv0$ of [[pthm-cm05-relative-reduction]] is necessary.",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "L1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample fixes one model and one motion; no empty family is quantified."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero pair potential u=0 and the zero total external force sigma=0 are declared and checked at steps 2.1 and 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "There is one relative coordinate for the two labels; step 1.1 declares the single pair force zero and steps 2.1-3.1 use it once."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The collision r=0 is excluded: step 3.1 verifies |r|^2=(t^2-2)^2+t^2>0 for every t."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The motion is polynomial on all of R and is checked at every t in step 3.1; no endpoint is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The model and motion are displayed explicitly; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an implication by a witness and asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed by the counterexample."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-symmetric-difference-formula-for-fourier-partial-sums.md

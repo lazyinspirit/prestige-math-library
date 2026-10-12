@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-adjoint-depends-linearly-on-complex-scalars.md

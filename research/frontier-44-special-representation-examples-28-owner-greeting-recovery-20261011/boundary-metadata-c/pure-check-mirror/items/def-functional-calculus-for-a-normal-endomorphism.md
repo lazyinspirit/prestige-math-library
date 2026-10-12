@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-functional-calculus-for-a-normal-endomorphism.md

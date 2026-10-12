@@ -190,95 +190,19 @@ $\operatorname{sn}_{-a^2}(t)=\sinh(at)/a$ gives the two closed forms, and the
 lower bound $\sinh x\ge e^x/4$ for $x\ge1$ converts the hyperbolic integral
 into an exponential lower bound.
 
-1.1 The radial density of the nonpositively curved model. [F3, given]
-Let $v\in S_pM$ and let $\gamma_v(t)=\exp_p(tv)$ be the radial geodesic, a
-unit-speed geodesic along which the sectional curvature is constantly $k\le0$.
-By [F3] the radial Jacobi tensor is $A(t)=\operatorname{sn}_k(t)P_t$ and the
-radial volume Jacobian is
-$$\det a_v(t)=J_p(t,v)=\operatorname{sn}_k(t)^{n-1},\qquad 0<t<c_p(v).$$
-[F3, given]
+1.1 The radial density of the nonpositively curved model. [F3, given] Let $v\in S_pM$ and let $\gamma_v(t)=\exp_p(tv)$ be the radial geodesic, a unit-speed geodesic along which the sectional curvature is constantly $k\le0$. By [F3] the radial Jacobi tensor is $A(t)=\operatorname{sn}_k(t)P_t$ and the radial volume Jacobian is $$\det a_v(t)=J_p(t,v)=\operatorname{sn}_k(t)^{n-1},\qquad 0<t<c_p(v).$$ [F3, given]
 
-1.2 There are no cut points in nonpositive curvature. [F5, F6, given]
-The manifold is complete, connected, boundaryless and simply connected with
-sectional curvature $K=k\le0$, so by [F6] the exponential map
-$\exp_p:T_pM\to M$ is a diffeomorphism, in particular injective. Let
-$v\in S_pM$, $t>0$ and $q:=\gamma_v(t)=\exp_p(tv)$. By [F6] (Hopf–Rinow)
-there is $w\in T_pM$ with $\exp_p(w)=q$ and $|w|_{g_p}=d_g(p,q)$; injectivity
-forces $w=tv$, so $d_g(p,q)=|w|_{g_p}=t$. As $t>0$ was arbitrary, the
-minimizing-time set $A_p(v)$ of [F5] contains every positive time, so its
-supremum is $c_p(v)=+\infty$. [F5, F6, given]
+1.2 There are no cut points in nonpositive curvature. [F5, F6, given] The manifold is complete, connected, boundaryless and simply connected with sectional curvature $K=k\le0$, so by [F6] the exponential map $\exp_p:T_pM\to M$ is a diffeomorphism, in particular injective. Let $v\in S_pM$, $t>0$ and $q:=\gamma_v(t)=\exp_p(tv)$. By [F6] (Hopf–Rinow) there is $w\in T_pM$ with $\exp_p(w)=q$ and $|w|_{g_p}=d_g(p,q)$; injectivity forces $w=tv$, so $d_g(p,q)=|w|_{g_p}=t$. As $t>0$ was arbitrary, the minimizing-time set $A_p(v)$ of [F5] contains every positive time, so its supremum is $c_p(v)=+\infty$. [F5, F6, given]
 
-2.1 The ball volume is the model volume. [F2, F4, F5, F7, step 1.1, step 1.2, given]
-Fix $p\in M$ and $r>0$. The ball $B(p,r)$ is open, hence Borel, so by [F7]
-the polar formula [F4] applies to $f=\mathbf 1_{B(p,r)}$:
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_{S_pM}\int_0^{c_p(v)}\mathbf 1_{B(p,r)}(\gamma_v(t))\det a_v(t)\,dt\,d\sigma_p(v).$$
-For $0<t<c_p(v)$ the minimizing property in [F5] gives
-$d_g(p,\gamma_v(t))=t$, so $\mathbf 1_{B(p,r)}(\gamma_v(t))=\mathbf 1_{\{t<r\}}$,
-while step 1.1 gives $\det a_v(t)=\operatorname{sn}_k(t)^{n-1}$. By step 1.2
-the cut time is infinite, so the inner integral equals
-$$\int_0^{\min\{c_p(v),r\}}\operatorname{sn}_k(t)^{n-1}\,dt=\int_0^r\operatorname{sn}_k(t)^{n-1}\,dt,$$
-a finite number independent of $v$. Therefore the outer integral is the
-constant inner value times $\sigma_p(S_pM)=\omega_{n-1}$ by [F4, F2], and
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\omega_{n-1}\int_0^r\operatorname{sn}_k(t)^{n-1}\,dt=\int_0^rA_k(t)\,dt=V_k(r)=V^\star_k(r),$$
-using $A_k=\omega_{n-1}\operatorname{sn}_k^{n-1}$ and $V^\star_k=V_k$ for
-$k\le0$ from [F2]. [F2, F4, F5, F7, step 1.1, step 1.2, given]
+2.1 The ball volume is the model volume. [F2, F4, F5, F7, step 1.1, step 1.2, given] Fix $p\in M$ and $r>0$. The ball $B(p,r)$ is open, hence Borel, so by [F7] the polar formula [F4] applies to $f=\mathbf 1_{B(p,r)}$: $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_{S_pM}\int_0^{c_p(v)}\mathbf 1_{B(p,r)}(\gamma_v(t))\det a_v(t)\,dt\,d\sigma_p(v).$$ For $0<t<c_p(v)$ the minimizing property in [F5] gives $d_g(p,\gamma_v(t))=t$, so $\mathbf 1_{B(p,r)}(\gamma_v(t))=\mathbf 1_{\{t<r\}}$, while step 1.1 gives $\det a_v(t)=\operatorname{sn}_k(t)^{n-1}$. By step 1.2 the cut time is infinite, so the inner integral equals $$\int_0^{\min\{c_p(v),r\}}\operatorname{sn}_k(t)^{n-1}\,dt=\int_0^r\operatorname{sn}_k(t)^{n-1}\,dt,$$ a finite number independent of $v$. Therefore the outer integral is the constant inner value times $\sigma_p(S_pM)=\omega_{n-1}$ by [F4, F2], and $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\omega_{n-1}\int_0^r\operatorname{sn}_k(t)^{n-1}\,dt=\int_0^rA_k(t)\,dt=V_k(r)=V^\star_k(r),$$ using $A_k=\omega_{n-1}\operatorname{sn}_k^{n-1}$ and $V^\star_k=V_k$ for $k\le0$ from [F2]. [F2, F4, F5, F7, step 1.1, step 1.2, given]
 
-3.1 The flat case. [F1, F8, F11, step 2.1]
-Let $k=0$. Then $\operatorname{sn}_0(t)=t$ by [F1], so step 2.1 gives
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=V_0(r)=\omega_{n-1}\int_0^rt^{n-1}\,dt .$$
-The power integral [F8] with $m=n-1\ge1$ and $s=0$ evaluates this as
-$\omega_{n-1}r^n/n$. This is the polynomial flat volume $V_0$; Euclidean
-$n$-space, of identically zero curvature and metrically complete, realizes
-the case $k=0$ [F11]. [F1, F8, F11, step 2.1]
+3.1 The flat case. [F1, F8, F11, step 2.1] Let $k=0$. Then $\operatorname{sn}_0(t)=t$ by [F1], so step 2.1 gives $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=V_0(r)=\omega_{n-1}\int_0^rt^{n-1}\,dt .$$ The power integral [F8] with $m=n-1\ge1$ and $s=0$ evaluates this as $\omega_{n-1}r^n/n$. This is the polynomial flat volume $V_0$; Euclidean $n$-space, of identically zero curvature and metrically complete, realizes the case $k=0$ [F11]. [F1, F8, F11, step 2.1]
 
-3.2 The hyperbolic case, closed form. [F1, step 2.1]
-Let $k=-a^2$. Then $\sqrt{-k}=a$, so $\operatorname{sn}_{-a^2}(t)=\sinh(at)/a$
-by [F1], and step 2.1 gives
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=V_{-a^2}(r)=\omega_{n-1}\int_0^r\left(\frac{\sinh(at)}{a}\right)^{n-1}dt .$$
-[F1, step 2.1]
+3.2 The hyperbolic case, closed form. [F1, step 2.1] Let $k=-a^2$. Then $\sqrt{-k}=a$, so $\operatorname{sn}_{-a^2}(t)=\sinh(at)/a$ by [F1], and step 2.1 gives $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=V_{-a^2}(r)=\omega_{n-1}\int_0^r\left(\frac{\sinh(at)}{a}\right)^{n-1}dt .$$ [F1, step 2.1]
 
-4.1 Exponential growth in negative curvature. [F9, F10, step 3.2, given]
-Write $f(t):=\bigl(\sinh(at)/a\bigr)^{n-1}\ge0$ for $t\ge0$. If $t\ge1/a$
-then $at\ge1$, and [F9] gives
-$\sinh(at)\ge e^{at}/4$, hence
-$$f(t)\ge\frac{e^{a(n-1)t}}{(4a)^{n-1}} .$$
-Now let $r\ge2/a$ and $t\in[r/2,r]$. Then $t\ge1/a$ and $t\ge r/2$, so
-$e^{a(n-1)t}\ge e^{a(n-1)r/2}$ because $n-1\ge1$ and the exponential is
-strictly increasing by [F9]; consequently
-$f\ge e^{a(n-1)r/2}/(4a)^{n-1}$ on the whole interval $[r/2,r]$. Since $f$
-is nonnegative, the additivity and monotonicity of the integral [F10] give
-$$\int_0^rf\ge\int_{r/2}^rf\ge\frac r2\cdot\frac{e^{a(n-1)r/2}}{(4a)^{n-1}} ,$$
-and multiplying by $\omega_{n-1}>0$ and combining with step 3.2 yields
-$$V_{-a^2}(r)\ge\frac{\omega_{n-1}\,r}{2\,(4a)^{n-1}}\,e^{a(n-1)r/2},\qquad r\ge\frac2a .$$
-The exponent rate $a(n-1)/2$ is strictly positive because $n\ge2$, so the
-hyperbolic volume grows at least exponentially, in contrast with the
-polynomial flat volume of step 3.1; the constants $n$, $a$ and $\omega_{n-1}$
-are fixed by the model. [F9, F10, step 3.2, given]
+4.1 Exponential growth in negative curvature. [F9, F10, step 3.2, given] Write $f(t):=\bigl(\sinh(at)/a\bigr)^{n-1}\ge0$ for $t\ge0$. If $t\ge1/a$ then $at\ge1$, and [F9] gives $\sinh(at)\ge e^{at}/4$, hence $$f(t)\ge\frac{e^{a(n-1)t}}{(4a)^{n-1}} .$$ Now let $r\ge2/a$ and $t\in[r/2,r]$. Then $t\ge1/a$ and $t\ge r/2$, so $e^{a(n-1)t}\ge e^{a(n-1)r/2}$ because $n-1\ge1$ and the exponential is strictly increasing by [F9]; consequently $f\ge e^{a(n-1)r/2}/(4a)^{n-1}$ on the whole interval $[r/2,r]$. Since $f$ is nonnegative, the additivity and monotonicity of the integral [F10] give $$\int_0^rf\ge\int_{r/2}^rf\ge\frac r2\cdot\frac{e^{a(n-1)r/2}}{(4a)^{n-1}} ,$$ and multiplying by $\omega_{n-1}>0$ and combining with step 3.2 yields $$V_{-a^2}(r)\ge\frac{\omega_{n-1}\,r}{2\,(4a)^{n-1}}\,e^{a(n-1)r/2},\qquad r\ge\frac2a .$$ The exponent rate $a(n-1)/2$ is strictly positive because $n\ge2$, so the hyperbolic volume grows at least exponentially, in contrast with the polynomial flat volume of step 3.1; the constants $n$, $a$ and $\omega_{n-1}$ are fixed by the model. [F9, F10, step 3.2, given]
 
-5.1 Realizations, Bishop–Gromov consistency and edge cases. [F11, F12, step 2.1, step 3.1, step 4.1, given]
-Euclidean $n$-space has zero curvature and the upper-half-space metric of
-parameter $a$ has curvature $-a^2$, by [F11], so the two computed cases
-carry the flat and hyperbolic curvature normalizations (the general statement
-is proved for every $(M,g)$ satisfying the hypotheses). By [F12] a space form
-of curvature $k$ has $\operatorname{Ric}=(n-1)k\,g$, so both cases satisfy
-the hypotheses of the Bishop–Gromov comparison [F12], whose
-conclusion $\operatorname{vol}_g(B(p,r))\le V^\star_k(r)$ is attained with
-equality by step 2.1. Thus the comparison is sharp on the model, and step 4.1
-shows that on the negative-curvature side the volume is allowed to grow
-exponentially, whereas the flat volume $V_0(r)=\omega_{n-1}r^n/n$ of step 3.1
-is polynomial: a Ricci lower bound $\operatorname{Ric}\ge-(n-1)a^2g$ does not
-force polynomial volume growth. The degenerate cases are excluded or
-explained: $a>0$ and $r>0$ are fixed positive numbers; the threshold
-$r=2/a$ is finite; $n\ge2$ makes $n-1\ge1$, which is exactly what the
-exponential rate needs (for $n=1$ the integrand is constant and the growth is
-linear); and $k=0$, $k<0$ exhaust the stated nonpositive curvature. The
-lower bound is stated only for $r\ge2/a$, while the closed formula of
-step 3.2 holds for every $r>0$; no upper bound and no exact asymptotic is
-claimed. No choice beyond the inherited [A1] is used: the radial direction,
-the minimizing geodesic and the model functions are fixed or explicit, and
-the cut-time, polar-integration, Cartan–Hadamard and Hopf–Rinow interfaces
-carry exactly $\mathrm{AC}_\omega$.
-[F11, F12, step 2.1, step 3.1, step 4.1, given] ∎
+5.1 Realizations, Bishop–Gromov consistency and edge cases. [F11, F12, step 2.1, step 3.1, step 4.1, given] Euclidean $n$-space has zero curvature and the upper-half-space metric of parameter $a$ has curvature $-a^2$, by [F11], so the two computed cases carry the flat and hyperbolic curvature normalizations (the general statement is proved for every $(M,g)$ satisfying the hypotheses). By [F12] a space form of curvature $k$ has $\operatorname{Ric}=(n-1)k\,g$, so both cases satisfy the hypotheses of the Bishop–Gromov comparison [F12], whose conclusion $\operatorname{vol}_g(B(p,r))\le V^\star_k(r)$ is attained with equality by step 2.1. Thus the comparison is sharp on the model, and step 4.1 shows that on the negative-curvature side the volume is allowed to grow exponentially, whereas the flat volume $V_0(r)=\omega_{n-1}r^n/n$ of step 3.1 is polynomial: a Ricci lower bound $\operatorname{Ric}\ge-(n-1)a^2g$ does not force polynomial volume growth. The degenerate cases are excluded or explained: $a>0$ and $r>0$ are fixed positive numbers; the threshold $r=2/a$ is finite; $n\ge2$ makes $n-1\ge1$, which is exactly what the exponential rate needs (for $n=1$ the integrand is constant and the growth is linear); and $k=0$, $k<0$ exhaust the stated nonpositive curvature. The lower bound is stated only for $r\ge2/a$, while the closed formula of step 3.2 holds for every $r>0$; no upper bound and no exact asymptotic is claimed. No choice beyond the inherited [A1] is used: the radial direction, the minimizing geodesic and the model functions are fixed or explicit, and the cut-time, polar-integration, Cartan–Hadamard and Hopf–Rinow interfaces carry exactly $\mathrm{AC}_\omega$. [F11, F12, step 2.1, step 3.1, step 4.1, given] ∎
 
 ## Source locator
 

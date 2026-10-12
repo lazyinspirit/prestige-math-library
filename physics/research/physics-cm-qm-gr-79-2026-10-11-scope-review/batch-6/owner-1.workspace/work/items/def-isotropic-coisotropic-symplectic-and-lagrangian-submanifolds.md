@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds.md

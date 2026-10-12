@@ -1,0 +1,13 @@
+# Objective and state
+
+Objective: finalize exact arbitrary-rank/arbitrary-level integer-color support, degenerate/nondegenerate affine local inverse tables, and whole cyclotomic tower, binding actual A1/A2 prerequisites without cyclic or quotient-faithfulness shortcuts.
+
+Verified state: all four current subjects and eight literal prerequisites fully read; immutable local before-carriers and raw input guards saved. New proposals keep every integer field/charge/rank/level domain and all five rank3 equality patterns. Support explicitly propagates GLOBAL nilpotence using equal Φ-involution and adjacent polynomial relation; full-content/window finite dimension follows without an isomorphism. Degenerate local proof retained with exact arbitrary-base input binding. Nondegenerate actual affine Laurent PBW, polynomial faithfulness and true central completion/projector identification supplied BEFORE quotients. Tower binds the proved same ψ=-τ/dot/Q contracts, both entire cyclotomic ideals, CR spectral idempotents, both composites, genuine right-appending maps, color projectors/bimodules and all finite windows/ranks/levels. Its conditional status clause is discharged by those concrete supplier proofs, not removed blindly.
+
+Final actual local checks after the necessary fifth supplier addition: precheck5/5, render5, proof-layout5items56steps0defects. Normative dependency-layer formatting adopted and before/after maps saved. Five proposal/current canonical hashes in final-chain.json; all canonical input guards still matched at construction close. No canonical/shared/native state/history/counters touched. These checks are not independent mathematical acceptance.
+
+Blocker: supplier owner must scrutinize and accept exact final chain; no unresolved mathematical premise identified by this constructor. Standard-class/word-character transfer remains separately owned by graded constructor/lead.
+
+Next action: lead reads final-chain guard and proposal files, retains supplier/consumer acceptance; root integrates supplier-first only against matching current canonical bytes. Preserve old counters/history and keep this in current authorized work. No transcripts stored.
+
+Necessary fifth supplier: lead observed exact FIRST1 scalar/orientation defect in bounded-spanning Proof2.1. Guarded surgical fullfile replaces it by X_(r+1)^-1=q_H T_r^-1 X_r^-1 T_r^-1, preserving Statement/restproof. This new literal does not reset any older exhausted history. See exact-first1-bounded-spanning-inverse-recursion.json. Nondegenerate completion projector phrase corrected: formal CRT limits become finite polynomial projectors in nilpotent quotients.

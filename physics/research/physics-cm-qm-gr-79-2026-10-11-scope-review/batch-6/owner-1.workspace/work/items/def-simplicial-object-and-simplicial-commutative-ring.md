@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-simplicial-object-and-simplicial-commutative-ring.md

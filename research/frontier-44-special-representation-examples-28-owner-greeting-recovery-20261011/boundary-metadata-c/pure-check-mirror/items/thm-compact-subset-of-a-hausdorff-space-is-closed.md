@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-subset-of-a-hausdorff-space-is-closed.md

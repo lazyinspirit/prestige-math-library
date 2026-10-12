@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-principal-value-one-over-x-is-tempered-and-its-fourier-transform.md

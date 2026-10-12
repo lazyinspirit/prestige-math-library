@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hall-condition-fails-three-left-two-neighbours.md

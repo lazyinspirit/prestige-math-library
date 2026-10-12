@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hilbert-noetherian-base-fixed-polarization.md

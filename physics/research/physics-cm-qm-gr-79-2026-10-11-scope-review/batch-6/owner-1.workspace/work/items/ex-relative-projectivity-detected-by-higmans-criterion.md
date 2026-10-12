@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-projectivity-detected-by-higmans-criterion.md

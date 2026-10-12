@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-zero-morphism-of-a-preadditive-category-is-the-neutral-element-of-its-hom-group.md

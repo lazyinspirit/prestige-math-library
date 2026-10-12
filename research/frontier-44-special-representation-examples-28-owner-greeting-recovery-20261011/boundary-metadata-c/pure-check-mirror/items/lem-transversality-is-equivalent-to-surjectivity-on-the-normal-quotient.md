@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-transversality-is-equivalent-to-surjectivity-on-the-normal-quotient.md

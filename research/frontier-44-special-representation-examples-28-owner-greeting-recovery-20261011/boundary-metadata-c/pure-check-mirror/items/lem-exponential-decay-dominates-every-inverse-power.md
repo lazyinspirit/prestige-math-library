@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-exponential-decay-dominates-every-inverse-power.md

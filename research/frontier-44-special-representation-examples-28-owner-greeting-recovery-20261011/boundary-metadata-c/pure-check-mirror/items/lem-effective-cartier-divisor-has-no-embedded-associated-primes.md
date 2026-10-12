@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-effective-cartier-divisor-has-no-embedded-associated-primes.md

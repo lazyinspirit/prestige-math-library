@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-relative-automorphism-order-divides-extension-degree.md

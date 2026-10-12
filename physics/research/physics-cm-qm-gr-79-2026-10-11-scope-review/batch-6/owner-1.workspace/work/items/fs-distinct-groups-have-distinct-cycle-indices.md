@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-distinct-groups-have-distinct-cycle-indices.md

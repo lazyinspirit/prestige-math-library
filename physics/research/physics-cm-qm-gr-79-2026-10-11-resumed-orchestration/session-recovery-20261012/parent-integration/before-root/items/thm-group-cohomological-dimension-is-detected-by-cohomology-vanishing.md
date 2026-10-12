@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-group-cohomological-dimension-is-detected-by-cohomology-vanishing.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-adjoint-equivalence-is-an-adjunction-with-invertible-unit-and-counit.md

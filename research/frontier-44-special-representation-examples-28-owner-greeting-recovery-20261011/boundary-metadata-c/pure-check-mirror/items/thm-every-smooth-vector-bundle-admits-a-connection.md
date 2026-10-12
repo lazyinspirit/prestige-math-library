@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-smooth-vector-bundle-admits-a-connection.md

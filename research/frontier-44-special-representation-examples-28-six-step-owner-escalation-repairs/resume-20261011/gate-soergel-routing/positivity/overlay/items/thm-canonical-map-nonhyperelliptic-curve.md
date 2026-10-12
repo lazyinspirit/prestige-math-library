@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-canonical-map-nonhyperelliptic-curve.md

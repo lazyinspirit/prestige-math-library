@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-group-schemes-hopf-algebra-antiequivalence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectrum-map-preimage-of-vanishing-set.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-compactly-supported-distributions-extend-to-smooth-functions.md

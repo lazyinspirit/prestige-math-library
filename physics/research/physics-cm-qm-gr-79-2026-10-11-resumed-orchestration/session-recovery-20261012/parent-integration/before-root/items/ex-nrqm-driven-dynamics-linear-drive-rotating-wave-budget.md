@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-driven-dynamics-linear-drive-rotating-wave-budget.md

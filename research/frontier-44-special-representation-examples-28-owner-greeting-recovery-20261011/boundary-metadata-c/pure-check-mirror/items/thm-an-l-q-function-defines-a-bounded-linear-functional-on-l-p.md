@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-l-q-function-defines-a-bounded-linear-functional-on-l-p.md

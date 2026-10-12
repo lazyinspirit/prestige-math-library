@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-partition-of-unity-subordinate-to-a-cover.md

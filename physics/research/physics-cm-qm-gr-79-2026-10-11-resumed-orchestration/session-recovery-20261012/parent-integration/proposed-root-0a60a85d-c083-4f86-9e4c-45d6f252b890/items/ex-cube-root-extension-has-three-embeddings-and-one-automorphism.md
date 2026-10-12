@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cube-root-extension-has-three-embeddings-and-one-automorphism.md

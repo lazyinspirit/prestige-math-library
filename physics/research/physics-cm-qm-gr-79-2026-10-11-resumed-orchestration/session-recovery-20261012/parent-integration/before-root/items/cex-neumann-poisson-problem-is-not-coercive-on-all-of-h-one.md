@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-neumann-poisson-problem-is-not-coercive-on-all-of-h-one.md

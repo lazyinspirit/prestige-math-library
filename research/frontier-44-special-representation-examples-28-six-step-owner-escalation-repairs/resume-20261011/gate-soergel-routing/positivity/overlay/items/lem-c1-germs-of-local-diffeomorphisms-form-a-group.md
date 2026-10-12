@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-c1-germs-of-local-diffeomorphisms-form-a-group.md

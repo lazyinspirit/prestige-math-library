@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tableau-to-cnf-map-has-polynomial-size-and-time.md

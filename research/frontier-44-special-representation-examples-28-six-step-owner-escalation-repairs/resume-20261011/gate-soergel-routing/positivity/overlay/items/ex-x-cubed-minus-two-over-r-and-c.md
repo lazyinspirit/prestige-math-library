@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-x-cubed-minus-two-over-r-and-c.md

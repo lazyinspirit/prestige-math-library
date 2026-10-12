@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm17-classical-continua-with-explicit-constitutive-assumptions-examples.md

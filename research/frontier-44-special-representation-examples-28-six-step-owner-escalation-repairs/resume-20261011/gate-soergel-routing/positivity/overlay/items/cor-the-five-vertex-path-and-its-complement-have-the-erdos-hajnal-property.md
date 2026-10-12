@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-five-vertex-path-and-its-complement-have-the-erdos-hajnal-property.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-brauer-pairs-detect-defect-groups.md

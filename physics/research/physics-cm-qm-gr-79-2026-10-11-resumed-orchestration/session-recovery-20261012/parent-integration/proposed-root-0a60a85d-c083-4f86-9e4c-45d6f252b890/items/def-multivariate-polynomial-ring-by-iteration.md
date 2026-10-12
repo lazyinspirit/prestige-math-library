@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-multivariate-polynomial-ring-by-iteration.md

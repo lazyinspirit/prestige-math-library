@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-p-minus-t-is-irreducible-and-inseparable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-diagonal-yang-baxter-operator-on-graded-vector-spaces.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-subgroups-of-finite-nilpotent-groups.md

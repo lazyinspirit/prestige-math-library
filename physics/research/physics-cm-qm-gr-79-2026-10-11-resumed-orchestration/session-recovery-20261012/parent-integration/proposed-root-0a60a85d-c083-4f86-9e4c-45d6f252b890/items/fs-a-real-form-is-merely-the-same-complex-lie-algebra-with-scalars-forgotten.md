@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-real-form-is-merely-the-same-complex-lie-algebra-with-scalars-forgotten.md

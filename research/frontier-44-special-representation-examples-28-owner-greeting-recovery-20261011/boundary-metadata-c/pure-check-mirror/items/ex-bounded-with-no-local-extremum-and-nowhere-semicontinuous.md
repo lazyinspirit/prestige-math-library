@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous.md

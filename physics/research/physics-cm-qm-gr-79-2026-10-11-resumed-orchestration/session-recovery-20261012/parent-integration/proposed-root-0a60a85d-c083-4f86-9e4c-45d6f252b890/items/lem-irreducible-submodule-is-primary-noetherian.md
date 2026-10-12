@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducible-submodule-is-primary-noetherian.md

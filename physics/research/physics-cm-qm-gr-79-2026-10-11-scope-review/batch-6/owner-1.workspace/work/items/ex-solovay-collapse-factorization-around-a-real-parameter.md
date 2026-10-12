@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-solovay-collapse-factorization-around-a-real-parameter.md

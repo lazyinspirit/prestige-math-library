@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lower-limit-line-is-regular-and-lindelof.md

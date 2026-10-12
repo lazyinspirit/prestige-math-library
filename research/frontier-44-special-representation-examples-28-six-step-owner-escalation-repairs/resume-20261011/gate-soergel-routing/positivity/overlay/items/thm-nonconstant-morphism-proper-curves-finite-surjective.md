@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonconstant-morphism-proper-curves-finite-surjective.md

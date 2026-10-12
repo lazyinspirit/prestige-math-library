@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm13-verlet-map-of-the-mechanical-splitting-is-canonical.md

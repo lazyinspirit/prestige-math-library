@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm03-closed-force-field-without-a-global-potential.md

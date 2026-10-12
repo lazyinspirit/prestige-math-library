@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-positive-ext-vanishes-whenever-either-variable-is-injective.md

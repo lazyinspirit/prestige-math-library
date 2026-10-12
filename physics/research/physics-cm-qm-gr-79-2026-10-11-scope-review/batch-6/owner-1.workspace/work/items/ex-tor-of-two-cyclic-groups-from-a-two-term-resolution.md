@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tor-of-two-cyclic-groups-from-a-two-term-resolution.md

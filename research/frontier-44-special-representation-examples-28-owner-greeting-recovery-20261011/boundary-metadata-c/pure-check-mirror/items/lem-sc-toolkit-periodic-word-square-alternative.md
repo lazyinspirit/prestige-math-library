@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-sc-toolkit-periodic-word-square-alternative.md

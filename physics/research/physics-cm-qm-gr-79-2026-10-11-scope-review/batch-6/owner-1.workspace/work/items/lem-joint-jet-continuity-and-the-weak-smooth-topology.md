@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-joint-jet-continuity-and-the-weak-smooth-topology.md

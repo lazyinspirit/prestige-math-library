@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-simple-roots-and-fundamental-weights-of-a-n.md

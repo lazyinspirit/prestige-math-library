@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-chain-map-is-a-quasi-isomorphism-exactly-when-its-cone-is-acyclic.md

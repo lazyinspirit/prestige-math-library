@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors.md

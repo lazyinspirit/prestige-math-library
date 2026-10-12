@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-locally-integrable-functions-embed-in-distributions.md

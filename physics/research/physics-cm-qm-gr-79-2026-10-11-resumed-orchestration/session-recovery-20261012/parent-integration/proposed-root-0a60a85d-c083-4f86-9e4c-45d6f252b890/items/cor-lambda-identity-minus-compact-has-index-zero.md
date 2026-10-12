@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lambda-identity-minus-compact-has-index-zero.md

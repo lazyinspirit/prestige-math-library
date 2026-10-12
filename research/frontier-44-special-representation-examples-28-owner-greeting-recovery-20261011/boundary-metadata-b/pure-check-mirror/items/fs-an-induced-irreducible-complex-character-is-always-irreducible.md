@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-induced-irreducible-complex-character-is-always-irreducible.md

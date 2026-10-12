@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-zariski-closed-set-has-a-radical-defining-ideal.md

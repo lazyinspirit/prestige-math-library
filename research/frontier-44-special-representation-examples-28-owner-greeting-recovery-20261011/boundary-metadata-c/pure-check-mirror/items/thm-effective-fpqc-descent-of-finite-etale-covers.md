@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-effective-fpqc-descent-of-finite-etale-covers.md

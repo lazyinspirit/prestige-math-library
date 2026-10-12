@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-upper-sectional-curvature-bounds-delay-conjugate-points.md

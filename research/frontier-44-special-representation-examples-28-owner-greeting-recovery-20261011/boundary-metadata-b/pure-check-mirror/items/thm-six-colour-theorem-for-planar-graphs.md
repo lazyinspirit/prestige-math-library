@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-six-colour-theorem-for-planar-graphs.md

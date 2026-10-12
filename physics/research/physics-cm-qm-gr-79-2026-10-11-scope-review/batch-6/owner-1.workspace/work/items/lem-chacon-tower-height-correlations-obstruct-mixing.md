@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-chacon-tower-height-correlations-obstruct-mixing.md

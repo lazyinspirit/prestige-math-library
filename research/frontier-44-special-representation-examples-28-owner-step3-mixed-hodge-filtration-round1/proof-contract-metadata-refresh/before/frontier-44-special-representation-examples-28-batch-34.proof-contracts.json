@@ -1,0 +1,721 @@
+{
+ "version": 1,
+ "level": "frontier-44-special-representation-examples-28",
+ "scope": [
+  "def-rational-mixed-hodge-structure",
+  "lem-deligne-splitting-of-a-mixed-hodge-structure",
+  "def-cohomological-mixed-hodge-complex",
+  "lem-morphisms-of-mixed-hodge-structures-are-strict",
+  "lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights",
+  "ex-a-mixed-hodge-extension-need-not-split-rationally"
+ ],
+ "contracts": {
+  "def-rational-mixed-hodge-structure": {
+   "citations": [],
+   "derivations": [],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The vanishing clauses $W_a=0$ (a small enough) and $F^a=H_{\\mathbb C}$ (a small enough) are part of the Definition, so empty filtration levels are named rather than omitted."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The Definition includes the zero structure $H=0$: all graded pieces and both filtrations are zero and the opposition condition is vacuous."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The pure case $W_{n-1}=0$, $W_n=H$ is an explicit clause of the Definition, covering one-step weight filtrations and the Tate structures $\\mathbb Q(r)$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The Definition permits degenerate finiteness data (repeated filtration levels, vanishing graded pieces); the axiom is vacuous on a zero graded piece."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The two endpoints of the finiteness convention, $W_a=0$ and $W_a=H$ for all large $a$, are explicit clauses of the Definition."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The Definition quantifies over a fixed finite-dimensional space and its two filtrations; no family of nonempty sets is selected."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The Definition records that the decomposed, vanishing and spanning forms of opposition are interchangeable and refers this implication to the splitting lemma below, where it is proved."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The reverse implication of the same equivalence is proved in the splitting lemma below; the Definition asserts no other biconditional."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "lem-deligne-splitting-of-a-mixed-hodge-structure": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "2.2",
+      "3.1",
+      "3.2",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "def-associated-graded-object-of-a-filtered-object",
+     "source_section": "Definition",
+     "quote": "For an increasing filtration, the **associated graded object** is the indexed family $$\\operatorname{gr}^F_pA=\\operatorname{coker}(F_{p-1}A\\hookrightarrow F_pA)=F_pA/F_{p-1}A\\quad(p\\in\\mathbb Z).$$ For a decreasing filtration it is $\\operatorname{gr}^p_FA=F^pA",
+     "uses": [
+      "2.2",
+      "3.1",
+      "3.2",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "2.2",
+      "3.2",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-internal-direct-sum",
+     "source_section": "Definition",
+     "quote": "**The definition.** $V$ is the **internal direct sum** of the family $U$, written $$V \\;=\\; \\bigoplus_{i<n} U_i ,$$ when both of the following hold: - **(D1)** $\\displaystyle\\sum_{i<n} U_i = V$; - **(D2)** for every $j < n$, $\\displaystyle U_j \\cap \\sum_{i \\ne",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "(Two-filtration lemma, spanning and partial sums.) Let $V$ be a finite-dimensional $\\mathbb C$-vector space with finite decreasing filtrations $F$ and $\\bar F$ such that $V=\\bigoplus_{p+q=n}(F^pV\\cap\\bar F^qV)$ for an integer $n$. Then (i) $F^aV+\\bar F^{n+1-a}V=V$ for every $a$, and (ii) $F^aV=\\bigoplus_{p\\ge a}(F^pV\\cap\\bar F^{n-p}V)$, with the conjugate formula $\\bar F^bV=\\bigoplus_{q\\ge b}(F^{n",
+     "step": "1.1",
+     "inputs": [
+      "algebra",
+      "given"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "(Two-filtration lemma, vanishing.) Under the hypothesis of step 1.1, $F^aV\\cap\\bar F^bV=0$ whenever $a+b>n$. Indeed, let $x\\in F^aV\\cap\\bar F^bV$ and let $x=\\sum_{p+q=n}x_{p,q}$ be its unique decomposition with $x_{p,q}\\in F^pV\\cap\\bar F^qV$. Since $x\\in F^aV$, its decomposition lies in $\\bigoplus_{p\\ge a}(F^pV\\cap\\bar F^{n-p}V)$ by step 1.1 (ii), so $x_{p,n-p}=0$ for every $p<a$; since $x\\in\\bar ",
+     "step": "2.1",
+     "inputs": [
+      "1.1",
+      "algebra",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-2.2",
+     "claim": "(Lifting.) Let $m=p+q$. Every $d\\in W_{m-1}$ can be written as $d=z+g$ with $z\\in F^p\\cap W_{m-1}$ and $g\\in(\\bar F^q\\cap W_{m-1})+\\sum_{j\\ge1}(\\bar F^{q-j}\\cap W_{m-j-1})$. To see this, construct elements $d_1,d_2,\\dots$ and vectors $f_j,g_j$ as follows. Put $d_1=d$, and suppose $d_j\\in W_{m-j}$ has been constructed for some $j\\ge1$. By [F1] the induced filtrations on $\\operatorname{Gr}^W_{m-j}$ ",
+     "step": "2.2",
+     "inputs": [
+      "1.1",
+      "F1",
+      "F2",
+      "construct",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "(Surjectivity onto the graded summand.) Let $\\xi\\in H^{p,q}_m$. Since $H^{p,q}_m\\subseteq F^p\\operatorname{Gr}^W_m$ is the image of $F^p\\cap W_m$, choose $x_0\\in F^p\\cap W_m$ representing $\\xi$; since $H^{p,q}_m\\subseteq\\bar F^q\\operatorname{Gr}^W_m$ is the image of $\\bar F^q\\cap W_m$, choose $y_0\\in\\bar F^q\\cap W_m$ also representing $\\xi$. Then $d:=x_0-y_0$ lies in $W_{m-1}$, so step 2.2 gives $",
+     "step": "3.1",
+     "inputs": [
+      "2.2",
+      "F1",
+      "algebra",
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "d-3.2",
+     "claim": "(Injectivity modulo the lower weight.) $I^{p,q}\\cap W_{m-1}=0$. Suppose $0\\ne x\\in I^{p,q}\\cap W_{m-1}$. By [F2] there is a least integer $r$ with $x\\in W_r$; then $x\\notin W_{r-1}$ and $r\\le m-1$. Write $x=y+g$ with $y\\in\\bar F^q\\cap W_m$ and $g\\in\\sum_{j\\ge1}(\\bar F^{q-j}\\cap W_{m-j-1})$; each summand of $g$ has weight index at most $m-2$, so $g\\in W_{m-2}$, and also $g\\in\\bar F^{q-1}$ because $",
+     "step": "3.2",
+     "inputs": [
+      "2.1",
+      "F1",
+      "F2",
+      "algebra",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "(The weight decomposition and the direct-sum identity.) For every $m$ the projection restricts to an isomorphism $\\bigoplus_{p+q=m}I^{p,q}\\to\\operatorname{Gr}^W_mH_{\\mathbb C}$: by steps 3.1 and 3.2 each $I^{p,q}$ maps isomorphically onto $H^{p,q}_m$, and by [F1] the summands $H^{p,q}_m$ are independent with sum $\\operatorname{Gr}^W_m$. In particular $\\dim I^{p,q}=\\dim H^{p,q}_m$, so $\\sum_{p+q=m}",
+     "step": "4.1",
+     "inputs": [
+      "3.1",
+      "3.2",
+      "F1",
+      "F2",
+      "F3",
+      "algebra",
+      "step 3.1",
+      "step 3.2"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "(The Hodge and conjugate decompositions.) For all $a$ and $m$ one has $F^a\\cap W_m=\\bigoplus_{p\\ge a,\\ p+q\\le m}I^{p,q}$, and dually $\\bar F^b\\cap W_m=\\bigoplus_{q\\ge b,\\ p+q\\le m}I^{p,q}$. Proved by induction on $m$: let $x\\in F^a\\cap W_m$ and decompose it by step 4.1 as $x=\\sum_{p+q\\le m}x_{p,q}$ with $x_{p,q}\\in I^{p,q}$. Its class in $\\operatorname{Gr}^W_m$ is $\\sum_{p+q=m}\\overline{x_{p,q}}$,",
+     "step": "5.1",
+     "inputs": [
+      "1.1",
+      "3.2",
+      "4.1",
+      "F1",
+      "F2",
+      "algebra",
+      "step 1.1",
+      "step 3.2",
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "d-6.1",
+     "claim": "(Functoriality.) Let $f\\colon H\\to K$ be a morphism of rational mixed Hodge structures. Since $f$ is defined over $\\mathbb Q$, $f_{\\mathbb C}$ commutes with the conjugations, so $f_{\\mathbb C}(\\bar F^qH_{\\mathbb C})=\\overline{f_{\\mathbb C}(F^qH_{\\mathbb C})}\\subseteq\\bar F^qK_{\\mathbb C}$; it also satisfies $f_{\\mathbb C}(F^pH_{\\mathbb C})\\subseteq F^pK_{\\mathbb C}$ and $f_{\\mathbb C}(W_aH_{\\mathb",
+     "step": "6.1",
+     "inputs": [
+      "algebra",
+      "given"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The induction base of step 4.1 is $W_m=0$ for small $m$, where all $I^{p,q}$ with $p+q\\le m$ vanish and the decompositions hold trivially."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 3.2 proves $I^{p,q}\\cap W_{m-1}=0$, the zero-intersection content of the direct sums used in steps 4.1 and 5.1."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "For a pure structure ($W_{m-1}=0$, $W_m=H$) the corrections in step 2.2 degenerate and $I^{p,q}=F^p\\cap\\bar F^q$, the one-piece case."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "When $m-j-1$ lies below the bottom of the filtration the corresponding summands vanish and the recursion of step 2.2 terminates, the degenerate-index case of the finite filtration."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The partial-sum ranges $p+q\\le m$ and $p\\ge a$ in steps 4.1 and 5.1 are inclusive at both endpoints, and the sum over $j\\ge1$ is truncated by finiteness."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "All selections are representatives and corrections inside fixed finite-dimensional vector spaces; no choice from a family of nonempty sets is used."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 2.1 deduces the vanishing form of opposition from the decomposed form; step 1.1 deduces the spanning and partial-sum forms."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Steps 1.1, 2.1 and 4.1 recover the direct-sum decomposition from the spanning, vanishing and partial-sum data, so the equivalence of the three forms is proved in both directions."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "def-cohomological-mixed-hodge-complex": {
+   "citations": [],
+   "derivations": [],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The Definition is a datum-plus-axiom statement; the bounded-below and finiteness clauses give the empty filtration levels $W_a=0$ and $F^p=0$ at the extremes."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The Definition is satisfied vacuously by a complex with zero cohomology, and all comparisons on zero graded pieces are quasi-isomorphisms."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The Definition covers the case of a single weight-graded piece, the weight-zero Hodge complex, as an instance of the axiom with $r+w=r$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The Definition permits degenerate finiteness data (a filtration with repeated levels, an empty range of weights), and the axiom is vacuous on vanishing graded pieces."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The Definition states the shift $W_mH^n=\\operatorname{im}(H^n(W_{m-n}K))$ for all integers $m$, including the two endpoints where the image is $0$ or all of $H^n$."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The Definition quantifies over the given complexes and their filtrations; no family of nonempty sets is selected."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The Definition imposes conditions on given data; it asserts no biconditional, so no implication direction is owed."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "The standard equivalence with $E_1$-degeneration of the graded complexes is deliberately not asserted here, so no reverse direction is claimed."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "lem-morphisms-of-mixed-hodge-structures-are-strict": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-deligne-splitting-of-a-mixed-hodge-structure",
+     "source_section": "Statement",
+     "quote": "For integers $p,q$ put $m=p+q$ and $$I^{p,q}=\\bigl(F^p\\cap W_m\\bigr)\\cap\\Bigl(\\bigl(\\bar F^q\\cap W_m\\bigr)+\\sum_{j\\ge1}\\bigl(\\bar F^{q-j}\\cap W_{m-j-1}\\bigr)\\Bigr),$$ the intersections and the sum taken in $H_{\\mathbb C}$. Then: (a) $I^{p,q}\\subseteq W_m\\cap F^p$, the intersection $I^{p,q}\\cap W_{m-",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.2",
+      "2.3"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "2.2"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "(Weight strictness.) Let $y=f(x)\\in f(H)\\cap W_nK$ and decompose $x=\\sum_{p,q}x^{p,q}$ along the splitting of $H_{\\mathbb C}$; then $y=\\sum_{p,q}f_{\\mathbb C}(x^{p,q})$ with $f_{\\mathbb C}(x^{p,q})\\in I^{p,q}(K)$ by [F1]. Since $y\\in W_nK=\\bigoplus_{p+q\\le n}I^{p,q}(K)$ and the sum is direct, all components with $p+q>n$ vanish: $f_{\\mathbb C}(x^{p,q})=0$ whenever $p+q>n$. Hence $x':=\\sum_{p+q\\le n",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "d-1.2",
+     "claim": "(Hodge strictness.) The same computation with the condition $p<a$ instead of $p+q>n$: if $y=f_{\\mathbb C}(x)\\in f(H_{\\mathbb C})\\cap F^aK_{\\mathbb C}$, decompose $x$ and use $F^aK_{\\mathbb C}=\\bigoplus_{p\\ge a}I^{p,q}(K)$ to conclude that $f_{\\mathbb C}(x^{p,q})=0$ for $p<a$, so $x'=\\sum_{p\\ge a}x^{p,q}$ lies in $F^aH_{\\mathbb C}$ and maps to $y$. [F1, algebra]",
+     "step": "1.2",
+     "inputs": [
+      "F1",
+      "algebra"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "(Rational form.) Tensoring step 1.1 with $\\mathbb C$ gives $f_{\\mathbb C}(W_nH_{\\mathbb C})=f_{\\mathbb C}(H_{\\mathbb C})\\cap W_nK_{\\mathbb C}$. Both sides are the complexifications of the rational subspaces $f(W_nH)$ and $f(H)\\cap W_nK$, and a rational subspace of a rational vector space is recovered from its complexification as the set of $\\sigma$-fixed vectors; hence $f(W_nH)=f(H)\\cap W_nK$, whi",
+     "step": "2.1",
+     "inputs": [
+      "1.1",
+      "1.2",
+      "algebra",
+      "step 1.1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "d-2.2",
+     "claim": "(Kernel, image and cokernel.) By [F1], $f_{\\mathbb C}$ maps each summand of $\\bigoplus_{p,q}I^{p,q}(H)$ into the summand with the same indices of $K$, so kernel, image and cokernel decompose componentwise: $\\ker f_{\\mathbb C}=\\bigoplus_{p,q}(\\ker f_{\\mathbb C}\\cap I^{p,q}(H))$, $f(H_{\\mathbb C})=\\bigoplus_{p,q}f_{\\mathbb C}(I^{p,q}(H))$ and $\\operatorname{coker}f_{\\mathbb C}=\\bigoplus_{p,q}\\bigl(I",
+     "step": "2.2",
+     "inputs": [
+      "1.1",
+      "1.2",
+      "F1",
+      "F2",
+      "algebra",
+      "step 1.1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "d-2.3",
+     "claim": "(Exactness of $\\operatorname{Gr}^W_n$.) Let $0\\to A\\xrightarrow{i}B\\xrightarrow{p}C\\to 0$ be a short exact sequence of mixed Hodge structures. By [F1] the splitting identifies $\\operatorname{Gr}^W_nA$, $\\operatorname{Gr}^W_nB$, $\\operatorname{Gr}^W_nC$ with $\\bigoplus_{p+q=n}I^{p,q}(A)$ and its analogues, and the maps $\\operatorname{Gr}^W_n i$, $\\operatorname{Gr}^W_n p$ with the direct sums of the",
+     "step": "2.3",
+     "inputs": [
+      "1.1",
+      "F1",
+      "algebra",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "(Pure image.) Now suppose $W_{n-1}H=0$ and $W_nK=K$. By step 2.2 the image is a mixed Hodge structure with the induced filtration, and step 1.1 gives $W_{n-1}(\\operatorname{im}f)=f(W_{n-1}H)=0$ and $W_n(\\operatorname{im}f)=f(H)\\cap W_nK=f(H)=\\operatorname{im}f$; hence the image is pure of weight $n$. [step 1.1, step 2.2, algebra] \u220e",
+     "step": "3.1",
+     "inputs": [
+      "1.1",
+      "2.2",
+      "algebra",
+      "step 1.1",
+      "step 2.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The zero map has $\\ker f=H$, $\\operatorname{im}f=0$ and $\\operatorname{coker}f=K$, for which the equalities of steps 1.1 and 2.1 read $0=0$."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero vector lies on both sides of each displayed equality, and step 2.1 shows the equalities of subspaces descend from the complexification."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Morphisms between pure structures of one weight are the case in which $W_{n-1}$ of source and $W_n$ of target are the whole theory; steps 1.1 and 1.2 reduce to the single jump."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Step 3.1 covers degenerate weight data $W_{n-1}H=0$, $W_nK=K$, including the zero image and the zero morphism."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The equalities are proved for all integers $n,p$ in steps 1.1, 1.2 and 2.1, including endpoint levels where one side is zero or all of the space."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The proof uses only the canonical decompositions of the splitting lemma; no choice from a family of nonempty sets occurs."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The item asserts strictness equalities and their structural consequences for every morphism, not a biconditional; no implication direction is owed."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "There is no converse assertion (not every strict filtered map is such a morphism), so no reverse direction is claimed."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "thm-the-cohomological-filtered-complex-construction",
+     "source_section": "Statement",
+     "quote": "Let K be a cochain complex with decreasing filtration by subcomplexes. Set $C_n=K^{-n}$, $F_pC_n=F^{-p}K^{-n}$ and $d_n=d_K^{-n}$. Then $$E_r^{p,q}(K)=E^r_{-p,-q}(C),\\qquad d_r:E_r^{p,q}\\to E_r^{p+r,q-r+1}.$$ The construction gives $E_0^{p,q}=\\operatorname{gr}",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1",
+      "4.2"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-morphisms-of-mixed-hodge-structures-are-strict",
+     "source_section": "Statement",
+     "quote": "Every morphism $f\\colon H\\to K$ of rational mixed Hodge structures is strict for $W$ and for $F$: $$f(W_nH)=f(H)\\cap W_nK,\\qquad f(F^pH_{\\mathbb C})=f(H_{\\mathbb C})\\cap F^pK_{\\mathbb C}$$ for all $n,",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-cochain-complex-in-an-abelian-category",
+     "source_section": "Definition",
+     "quote": "A **cochain complex in $\\mathcal A$** is a family of objects $(C^n)_{n\\in\\mathbb Z}$ together with morphisms $$d^n:C^n\\to C^{n+1}$$ such that $$d^{n+1}\\circ d^n=0$$ for every $n\\in\\mathbb Z$. This page uses the reindexing convention that a ",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-cohomological-mixed-hodge-complex",
+     "source_section": "Definition",
+     "quote": "A **rational cohomological mixed Hodge complex** consists of (a) a bounded-below cochain complex $K_{\\mathbb Q}$ of $\\mathbb Q$-vector spaces with an increasing filtration $W$ by subcomplexes, finite on each cochain group; (b) a cochain complex $K_{\\mathbb C}$ of $\\mathbb C$-vector spaces with an in",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "(Weight spectral sequence and its first page.) Apply [F1] to $K_{\\mathbb C}$ with the decreasing filtration $G^p:=W_{-p}K_{\\mathbb C}$, a filtration by subcomplexes that is finite on each cochain group by the definition of a mixed Hodge complex. Its first page is $E_1^{p,q}\\cong H^{p+q}(\\operatorname{gr}^p_GK_{\\mathbb C})=H^{p+q}(\\operatorname{Gr}^W_{-p}K_{\\mathbb C})$, and because the filtration ",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F3",
+      "given"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "(Degeneration at $E_2$.) The differential $d_1$ is induced by the differential of $K_{\\mathbb C}$ and by its rational counterpart, so it is complex-linear, preserves the rational structures and, because $F$ is a filtration by subcomplexes, preserves the Hodge filtration on the pages. Hence $d_1:E_1^{p,q}\\to E_1^{p+1,q}$ is a morphism of the pure Hodge structures of weight $q$ of step 1.1, and by [",
+     "step": "2.1",
+     "inputs": [
+      "1.1",
+      "F1",
+      "F2",
+      "algebra",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "(The graded pieces as $E_2$-terms.) Substituting $p=n-m$ and $q=m$ into the abutment of step 1.1 gives $\\operatorname{Gr}^{n-m}_GH^n(K)=\\operatorname{im}(H^n(W_{m-n}K))/\\operatorname{im}(H^n(W_{m-n-1}K))=W_mH^n(K)/W_{m-1}H^n(K)=\\operatorname{Gr}^W_mH^n(K)$; since $E_\\infty=E_2$ by step 2.1, this is an isomorphism $\\operatorname{Gr}^W_mH^n(K)\\cong E_2^{n-m,m}$ of rational vector spaces, natural in ",
+     "step": "3.1",
+     "inputs": [
+      "1.1",
+      "2.1",
+      "F1",
+      "step 1.1",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.1",
+     "claim": "(Filtered compatibility of morphisms.) A morphism of cohomological mixed Hodge complexes is a pair of filtered chain maps compatible with the comparisons; by the naturality in [F1] it induces maps on every page of the weight spectral sequences and on their abutments, commuting with the identifications of step 3.1 and with the rational structures, and it maps $W_{m-n}K$ into $W_{m-n}L$ and $F^pK_{\\",
+     "step": "4.1",
+     "inputs": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "F1",
+      "step 1.1",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "d-4.2",
+     "claim": "(The cosimplicial case.) Let $K^\\bullet$ be as in part (ii) and form $sK^n=\\bigoplus_{p+q=n}K^{p,q}$ with the standard total differential; the cosimplicial identities and $d^2=0$ make it a cochain complex, and the filtration $L_\\ell sK^n=\\bigoplus_{i\\ge-\\ell}K^{i,n-i}$ is increasing, by subcomplexes, and finite on each $sK^n$ because $0\\le p\\le n$ in degree $n$. Its graded pieces are $\\operatornam",
+     "step": "4.2",
+     "inputs": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "F1",
+      "construct",
+      "given",
+      "step 1.1",
+      "step 2.1",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "d-5.1",
+     "claim": "(Weights at most the degree.) In the situation of step 4.2 one has $K^{p,q}=0$ for $p<0$, so $E_1^{p,q}=H^q(K^p)=0$ for $p<0$ and hence $E_2^{n-q,q}=0$ whenever $q>n$; by step 4.2 the graded pieces $\\operatorname{Gr}^L_qH^n(sK)$ therefore vanish for $q>n$, that is, all weights of $H^n(sK)$ are at most $n$. [step 3.1, step 4.2, algebra] \u220e",
+     "step": "5.1",
+     "inputs": [
+      "3.1",
+      "4.2",
+      "algebra",
+      "step 3.1",
+      "step 4.2"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "Vanishing pages are used throughout: step 5.1 uses $E_1^{p,q}=0$ for $p<0$, and step 2.1 concludes $E_2=E_\\infty$ after all higher differentials vanish."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "A mixed Hodge complex with $H^r(\\operatorname{Gr}^W_wK)=0$ satisfies the purity axiom vacuously; steps 1.1 and 2.1 give zero pages there."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "A pure Hodge complex has its weight spectral sequence on a single diagonal, and the identification of step 3.1 still applies with $m=n-p$."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "Degenerate differentials with kernel equal to image are covered by the purity induction of step 2.1, where $E_r$ collapses and $d_r=0$."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The substitutions $p=n-m$, $q=m$ of step 3.1 and the index ranges $0\\le p\\le n$ of step 4.2 are exact at the endpoints."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "All constructions are subquotients of the given complexes and finite-dimensional linear algebra; no choice principle is used."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The item asserts degeneration, purity and identifications, not a biconditional; the Hodge-compatibility direction that would complete an equivalence is recorded in the Remarks as an open obligation."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse of the degeneration statement is asserted, so no reverse direction is owed."
+    }
+   ],
+   "finite_smoke": []
+  },
+  "ex-a-mixed-hodge-extension-need-not-split-rationally": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-rational-mixed-hodge-structure",
+     "source_section": "Definition",
+     "quote": "A **rational mixed Hodge structure** consists of a $\\mathbb{Q}$-vector space $H$ with a finite basis ([[def-linear-basis]]) together with - a finite increasing filtration $W$ of $H$, the **weight filtration**, and - a finite decreasing filtration $F$ of $H_{\\mathbb C}:=H\\otimes_{\\mathbb Q}\\mathbb C$",
+     "uses": [
+      "1.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "d-1.1",
+     "claim": "The weight filtration is finite with $\\operatorname{Gr}^W_{-2}=\\mathbb Q e_1$, $\\operatorname{Gr}^W_{-1}=0$ and $\\operatorname{Gr}^W_0=H/\\mathbb Q e_1\\cong\\mathbb Q e_0$. On $\\operatorname{Gr}^W_{-2}$ the induced $F$ has $F^0=0$ and $F^{-1}=\\operatorname{Gr}^W_{-2}$, since $F^0\\cap W_{-2}=\\mathbb C(e_0+ie_1)\\cap\\mathbb C e_1=0$; the conjugate filtration satisfies $\\bar F^{-1}=\\operatorname{Gr}^W_{",
+     "step": "1.1",
+     "inputs": [
+      "F1",
+      "F2",
+      "F3",
+      "algebra",
+      "given"
+     ]
+    },
+    {
+     "id": "d-2.1",
+     "claim": "Let $\\iota\\colon\\mathbb Q(1)\\to H$ be the inclusion $\\mathbb C\\to H_{\\mathbb C}$ sending $1$ to $e_1$ and let $\\pi\\colon H\\to\\mathbb Q(0)$ be the $\\mathbb Q$-linear map $e_0\\mapsto1$, $e_1\\mapsto0$. Both preserve the filtrations: $\\iota$ sends the weight-$(-2)$ structure into $W_{-2}H=\\mathbb Q e_1$ and $F^{-1}\\mathbb Q(1)_{\\mathbb C}=\\mathbb C$ into $F^{-1}H_{\\mathbb C}=H_{\\mathbb C}$, while $F^0",
+     "step": "2.1",
+     "inputs": [
+      "1.1",
+      "F1",
+      "F2",
+      "algebra",
+      "given",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "d-3.1",
+     "claim": "Every $\\mathbb Q$-linear section $s$ of $\\pi$ satisfies $s(1)=e_0+q e_1$ with $q\\in\\mathbb Q$, because $\\pi(e_0+q e_1)=1$ and $\\pi(e_1)=0$. If $s$ were a morphism of mixed Hodge structures, it would satisfy $s_{\\mathbb C}(F^0\\mathbb Q(0)_{\\mathbb C})\\subseteq F^0H_{\\mathbb C}=\\mathbb C(e_0+ie_1)$; since $F^0\\mathbb Q(0)_{\\mathbb C}=\\mathbb C$ and $s_{\\mathbb C}(1)=e_0+qe_1$, there would be $\\lambd",
+     "step": "3.1",
+     "inputs": [
+      "2.1",
+      "F1",
+      "algebra",
+      "given",
+      "step 2.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The empty index cases are the trivial filtrations $W_{-3}=0$ and $F^1=0$ used in the verification step 1.1."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "Step 2.1 uses the zero module $\\ker\\pi=\\mathbb Q e_1$, and step 3.1 uses the zero intersection $F^0\\cap\\bar F^0=0$."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "Both graded pieces are one-dimensional and their $(p,q)$ types are computed in step 1.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate step $W_{-2}=W_{-1}$ produces the zero graded piece $\\operatorname{Gr}^W_{-1}=0$, recorded in step 1.1."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The two endpoints of the extension $0\\to\\mathbb Q(1)\\to H\\to\\mathbb Q(0)\\to0$ are checked in steps 2.1 and 3.1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "not_applicable",
+     "reason": "The only quantifiers are over the two displayed basis vectors and rational scalars; no choice from a family of nonempty sets occurs."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "Step 3.1 is the forward direction: a mixed Hodge splitting would force the rational coefficient $q=i$, which does not exist."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "Step 3.1 also shows $F^0H_{\\mathbb C}\\cap\\bar F^0H_{\\mathbb C}=0$, so no rational vector can lie in $F^0$ and be conjugation-fixed; a nonzero rational vector of $F^0$ would conversely give a section."
+    }
+   ],
+   "finite_smoke": []
+  }
+ }
+}

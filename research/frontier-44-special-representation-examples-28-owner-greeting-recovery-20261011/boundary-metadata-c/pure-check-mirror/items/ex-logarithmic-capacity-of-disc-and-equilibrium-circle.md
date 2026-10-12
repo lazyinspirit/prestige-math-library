@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-logarithmic-capacity-of-disc-and-equilibrium-circle.md

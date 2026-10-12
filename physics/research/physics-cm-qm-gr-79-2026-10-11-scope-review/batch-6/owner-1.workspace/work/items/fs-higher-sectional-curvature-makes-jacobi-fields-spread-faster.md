@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-higher-sectional-curvature-makes-jacobi-fields-spread-faster.md

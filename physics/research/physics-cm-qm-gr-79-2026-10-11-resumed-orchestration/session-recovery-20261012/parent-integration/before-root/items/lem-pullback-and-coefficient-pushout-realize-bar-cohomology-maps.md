@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps.md

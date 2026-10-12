@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-ltwo-operator-associated-with-a-symmetric-elliptic-form.md

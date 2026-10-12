@@ -40,6 +40,5 @@ is Borel measurable and nowhere continuous.
 
 1.1 By [L1], the function $D$ is Borel measurable. [L1]
 
-2.1 Let $x \in \mathbb{R}$ and let $U$ be any neighbourhood of $x$. By [L2], the [step 1.1, given, L2]
-set $U$ contains both a rational point and an irrational point, so $D$ takes both values $1$ and $0$ on $U$. Therefore $D$ cannot be continuous at $x$. Since $x$ was arbitrary, $D$ is nowhere continuous. [step 1.1, given, L2] ∎
+2.1 Let $x \in \mathbb{R}$ and let $U$ be any neighbourhood of $x$. By [L2], the [step 1.1, given, L2] set $U$ contains both a rational point and an irrational point, so $D$ takes both values $1$ and $0$ on $U$. Therefore $D$ cannot be continuous at $x$. Since $x$ was arbitrary, $D$ is nowhere continuous. [step 1.1, given, L2] ∎
 

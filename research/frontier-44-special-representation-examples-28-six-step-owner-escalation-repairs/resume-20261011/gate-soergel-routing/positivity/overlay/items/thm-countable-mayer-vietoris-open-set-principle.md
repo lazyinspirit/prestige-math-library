@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-countable-mayer-vietoris-open-set-principle.md

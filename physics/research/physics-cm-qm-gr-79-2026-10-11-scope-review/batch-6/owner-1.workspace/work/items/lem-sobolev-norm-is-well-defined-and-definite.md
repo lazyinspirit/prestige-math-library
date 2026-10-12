@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sobolev-norm-is-well-defined-and-definite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-three-radius-one-series-with-different-endpoint-behaviour.md

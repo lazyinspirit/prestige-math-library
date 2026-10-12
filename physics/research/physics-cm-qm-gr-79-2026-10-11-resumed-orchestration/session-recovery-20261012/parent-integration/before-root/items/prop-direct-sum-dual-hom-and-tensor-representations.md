@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-direct-sum-dual-hom-and-tensor-representations.md

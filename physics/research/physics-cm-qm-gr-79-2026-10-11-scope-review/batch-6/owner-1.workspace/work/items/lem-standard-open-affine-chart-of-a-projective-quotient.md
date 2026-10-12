@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-standard-open-affine-chart-of-a-projective-quotient.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonaffine-exact-group-sequence-affine-smooth-connected-properties.md

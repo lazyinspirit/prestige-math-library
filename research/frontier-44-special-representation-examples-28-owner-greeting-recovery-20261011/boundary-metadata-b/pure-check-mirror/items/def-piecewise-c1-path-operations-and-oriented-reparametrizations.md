@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-piecewise-c1-path-operations-and-oriented-reparametrizations.md

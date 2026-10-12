@@ -41,9 +41,8 @@ $$\star\circ\star=(-1)^{k(n-k)}\operatorname{id}_{\Lambda^kV}.$$
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], $\star$ sends the orthonormal wedge basis $(e_I)_I$ to the family $(\varepsilon_I e_{I^c})_I$, which is the complementary orthonormal wedge basis with signs attached; hence $\langle\star e_I,\star e_J\rangle=\delta_{I,J}=\langle e_I,e_J\rangle$, and bilinearity gives the isometry on all of $\Lambda^kV$. [L1, algebra]
+ 1.1 By [L1], $\star$ sends the orthonormal wedge basis $(e_I)_I$ to the family $(\varepsilon_I e_{I^c})_I$, which is the complementary orthonormal wedge basis with signs attached; hence $\langle\star e_I,\star e_J\rangle=\delta_{I,J}=\langle e_I,e_J\rangle$, and bilinearity gives the isometry on all of $\Lambda^kV$. [L1, algebra]
 
 1.2 For each $I$, apply [L1] twice: $\star(\star e_I)=\varepsilon_I\,\star e_{I^c}=\varepsilon_I\varepsilon_{I^c}e_I$, where $\varepsilon_{I^c}$ is the sign of the permutation listing $I^c$ followed by $I$. The two permutations differ by interchanging a block of size $k$ with a block of size $n-k$, whose sign is $(-1)^{k(n-k)}$, so $\varepsilon_{I^c}=(-1)^{k(n-k)}\varepsilon_I$ and $\star^2e_I=(-1)^{k(n-k)}e_I$. [L1, algebra]
 
-2.1 Since the $e_I$ form a basis, step 1.2 gives $\star\circ\star=(-1)^{k(n-k)}\operatorname{id}$ on $\Lambda^kV$. [step 1.2] ∎
+2.1 Since the $e_I$ form a basis, step 1.2 gives $\star\circ\star=(-1)^{k(n-k)}\operatorname{id}$ on $\Lambda^kV$. [step 1.2] ∎ 

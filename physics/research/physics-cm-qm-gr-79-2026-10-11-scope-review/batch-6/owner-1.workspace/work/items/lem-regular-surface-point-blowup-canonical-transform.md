@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-surface-point-blowup-canonical-transform.md

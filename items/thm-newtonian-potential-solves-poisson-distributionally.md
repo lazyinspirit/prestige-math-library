@@ -176,8 +176,7 @@ continuous maps have Borel preimages. ([[thm-arithmetic-and-lattice-operations-p
 
 7.1 By [F7], step 6.1 is exactly $\langle-\Delta T_{Nf},\varphi\rangle=\langle T_f,\varphi\rangle$ for every test $\varphi$. The locally integrable embedding makes both sides distributions, so they are equal in $\mathcal D'$. [F7, step 5.1, step 6.1]
 
-8.1 The logarithmic kernel at $n=2$ and power kernel at $n\ge3$ are both covered by [F1], [F2] and [F12]; the distinct $n=1$ case is excluded by the statement. The zero source and empty or null support were handled in step 2.1; the Hölder endpoint cases $p=1,\infty$ are explicit in step 1.2. Countable Choice is used to obtain a Borel representative, and is inherited by the published kernel identity and distribution embedding [F2, F7, F12]. No full Axiom of Choice or later result is used; the statement is not an iff. [A1, F1, F2, F7, F12, step 2.1, step 1.2, cases] ∎
-## Source notes
+8.1 The logarithmic kernel at $n=2$ and power kernel at $n\ge3$ are both covered by [F1], [F2] and [F12]; the distinct $n=1$ case is excluded by the statement. The zero source and empty or null support were handled in step 2.1; the Hölder endpoint cases $p=1,\infty$ are explicit in step 1.2. Countable Choice is used to obtain a Borel representative, and is inherited by the published kernel identity and distribution embedding [F2, F7, F12]. No full Axiom of Choice or later result is used; the statement is not an iff. [A1, F1, F2, F7, F12, step 2.1, step 1.2, cases] ∎ ## Source notes
 
 Schmidt §2.11, Remark (3), printed pp.70–71, proves the very weak pairing
 identity for compactly supported $L^\infty$ data by Fubini and the point-source

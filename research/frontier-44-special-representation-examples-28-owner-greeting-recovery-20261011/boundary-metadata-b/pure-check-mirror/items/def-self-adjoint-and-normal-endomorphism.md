@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-self-adjoint-and-normal-endomorphism.md

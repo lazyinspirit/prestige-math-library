@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-convergent-series-are-cesaro-and-abel-summable.md

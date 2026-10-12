@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-of-the-long-exact-sequence-of-a-pair.md

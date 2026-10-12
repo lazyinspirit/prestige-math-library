@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hopf-line-calculation-of-k-zero-of-the-two-sphere.md

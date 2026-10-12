@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-sum-of-squared-irreducible-character-values-at-g-is-the-centralizer-size.md

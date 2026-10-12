@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-euclidean-tubular-neighbourhood-theorem.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-multiplicative-type-groups-are-linearly-reductive.md

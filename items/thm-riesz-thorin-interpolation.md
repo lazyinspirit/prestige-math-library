@@ -54,14 +54,10 @@ $$\|\widetilde T f\|_{q_\theta}\le M_0^{1-\theta}M_1^\theta\|f\|_{p_\theta} \qqu
 
 **Proof technique:** the published normalized finite-simple-core estimate, followed by completion.
 
-1.1 Since both target endpoint exponents are finite, [L1] applies on the arbitrary measure spaces in the statement. Put $K=M_0^{1-\theta}M_1^\theta$. For every finite simple class $f$ in the domain of $T$, it proves both $Tf\in L^{q_\theta}(\nu;\mathbb C)$ and [L1, given]
-$$\|Tf\|_{q_\theta}\le K\|f\|_{p_\theta}.$$
-The source proof treats $f=0$ separately and normalizes every nonzero $f$ before applying the three-lines bound, so the endpoint powers of its norm are not replaced by a first power without justification. This also covers $M_0=0$ or $M_1=0$. [L1, given]
+1.1 Since both target endpoint exponents are finite, [L1] applies on the arbitrary measure spaces in the statement. Put $K=M_0^{1-\theta}M_1^\theta$. For every finite simple class $f$ in the domain of $T$, it proves both $Tf\in L^{q_\theta}(\nu;\mathbb C)$ and [L1, given] $$\|Tf\|_{q_\theta}\le K\|f\|_{p_\theta}.$$ The source proof treats $f=0$ separately and normalizes every nonzero $f$ before applying the three-lines bound, so the endpoint powers of its norm are not replaced by a first power without justification. This also covers $M_0=0$ or $M_1=0$. [L1, given]
 
 2.1 Let $f\in L^{p_\theta}(\mu;\mathbb C)$. Since $p_\theta<\infty$, [L2] supplies a sequence of finite simple classes $f_n\to f$ in $L^{p_\theta}$. By step 1.1, $(Tf_n)$ is Cauchy in $L^{q_\theta}$. Countable choice is used through [L3] to obtain its limit; define $\widetilde T f=\lim_nTf_n$. [L2, L3, step 1.1]
 
-3.1 If $g_n\to f$ is another finite-simple approximation, step 1.1 gives [step 1.1, step 2.1]
-$$\|Tf_n-Tg_n\|_{q_\theta}\le K\|f_n-g_n\|_{p_\theta}\to0,$$
-so the limit is independent of the approximation. Taking limits in the same estimate gives $\|\widetilde T f\|_{q_\theta}\le K\|f\|_{p_\theta}$. Constant approximations show that $\widetilde T$ extends $T$, and termwise linearity shows that it is complex-linear. [step 1.1, step 2.1]
+3.1 If $g_n\to f$ is another finite-simple approximation, step 1.1 gives [step 1.1, step 2.1] $$\|Tf_n-Tg_n\|_{q_\theta}\le K\|f_n-g_n\|_{p_\theta}\to0,$$ so the limit is independent of the approximation. Taking limits in the same estimate gives $\|\widetilde T f\|_{q_\theta}\le K\|f\|_{p_\theta}$. Constant approximations show that $\widetilde T$ extends $T$, and termwise linearity shows that it is complex-linear. [step 1.1, step 2.1]
 
-4.1 Any bounded linear extension agrees with $T$ on the dense core from [L2]; continuity makes it agree with $\widetilde T$ on every $f$. Thus the extension is unique and has the asserted norm bound. [L2, step 3.1] ∎
+4.1 Any bounded linear extension agrees with $T$ on the dense core from [L2]; continuity makes it agree with $\widetilde T$ on every $f$. Thus the extension is unique and has the asserted norm bound. [L2, step 3.1] ∎ 

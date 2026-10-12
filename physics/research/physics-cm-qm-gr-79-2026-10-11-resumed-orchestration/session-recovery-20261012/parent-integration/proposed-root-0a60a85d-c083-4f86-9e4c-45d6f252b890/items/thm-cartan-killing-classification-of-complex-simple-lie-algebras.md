@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cartan-killing-classification-of-complex-simple-lie-algebras.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-distance-from-p-is-smooth-off-p-and-the-cut-locus.md

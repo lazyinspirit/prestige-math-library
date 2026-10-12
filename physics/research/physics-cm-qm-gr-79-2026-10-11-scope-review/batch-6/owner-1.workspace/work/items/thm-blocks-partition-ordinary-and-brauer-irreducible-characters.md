@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-blocks-partition-ordinary-and-brauer-irreducible-characters.md

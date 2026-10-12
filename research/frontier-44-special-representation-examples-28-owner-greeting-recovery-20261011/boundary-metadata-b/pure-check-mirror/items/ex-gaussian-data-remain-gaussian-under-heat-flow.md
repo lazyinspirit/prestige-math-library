@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gaussian-data-remain-gaussian-under-heat-flow.md

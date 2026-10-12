@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-sobolev-duality-from-the-fourier-pairing.md

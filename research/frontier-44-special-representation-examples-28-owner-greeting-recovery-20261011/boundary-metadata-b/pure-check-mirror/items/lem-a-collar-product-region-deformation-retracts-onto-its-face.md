@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-collar-product-region-deformation-retracts-onto-its-face.md

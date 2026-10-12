@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-preimage-orientation-agrees-with-the-local-intersection-sign.md

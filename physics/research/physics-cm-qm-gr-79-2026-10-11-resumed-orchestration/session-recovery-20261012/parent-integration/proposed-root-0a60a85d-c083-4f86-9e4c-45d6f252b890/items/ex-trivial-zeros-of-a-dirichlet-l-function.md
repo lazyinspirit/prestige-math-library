@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-trivial-zeros-of-a-dirichlet-l-function.md

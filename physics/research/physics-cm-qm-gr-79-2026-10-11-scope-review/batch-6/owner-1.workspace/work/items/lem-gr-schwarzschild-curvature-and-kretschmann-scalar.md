@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-schwarzschild-curvature-and-kretschmann-scalar.md

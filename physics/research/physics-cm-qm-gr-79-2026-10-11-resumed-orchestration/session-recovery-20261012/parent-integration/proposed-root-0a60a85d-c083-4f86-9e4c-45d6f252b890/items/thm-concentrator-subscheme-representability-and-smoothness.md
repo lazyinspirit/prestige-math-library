@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-concentrator-subscheme-representability-and-smoothness.md

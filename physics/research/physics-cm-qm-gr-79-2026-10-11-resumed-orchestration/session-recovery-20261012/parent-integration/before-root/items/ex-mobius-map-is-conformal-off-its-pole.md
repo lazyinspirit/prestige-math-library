@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mobius-map-is-conformal-off-its-pole.md

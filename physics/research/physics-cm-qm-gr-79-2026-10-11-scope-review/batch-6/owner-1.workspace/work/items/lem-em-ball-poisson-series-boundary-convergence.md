@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-ball-poisson-series-boundary-convergence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-primitive-element-theorem-for-finite-separable-extensions.md

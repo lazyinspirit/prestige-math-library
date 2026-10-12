@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-skips-and-cone-walls-for-a-sorting-word-in-a3.md

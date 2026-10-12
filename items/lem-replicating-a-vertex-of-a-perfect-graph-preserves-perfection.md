@@ -59,8 +59,7 @@ a perfect graph is perfect ([[def-subgraph-induced-subgraph-and-spanning-subgrap
 
 3.1 Suppose $\omega(G')=w$. No $w$-clique of $G$ contains $x$, since its union with $x'$ would be a $(w+1)$-clique of $G'$. Fix a proper $w$-coloring of $G$, and let $X$ be the color class of $x$. Every $w$-clique of $G$ meets $X$ exactly once by [L2], and that meeting vertex is not $x$. Hence the induced graph $H=G-(X\setminus\{x\})$ has no $w$-clique and $\omega(H)\le w-1$. Since $H$ is perfect by [L3], it admits a coloring with at most $w-1$ colors. [L1, L2, L3, step 2.1, choose]
 
-4.1 The remaining set $(X\setminus\{x\})\cup\{x'\}$ is stable in $G'$: $X$ was a color class, and $x'$ is adjacent outside $x$ only to neighbors of $x$, none of which lies in $X$. Give that set one new color, extending the coloring of $H$ to a $w$-coloring of $G'$. Thus $\chi(G')\le w=\omega(G')$; the opposite inequality is universal. With step 2.1, this proves $G'$ perfect by step 1.1. To replace $x$ by a clique of $k\ge1$ true twins, replicate $x$ successively $k-1$ times; each step starts from a perfect graph and creates one further twin. [step 1.1, step 2.1, step 3.1, L1, L2, induction] ∎
-## Source notes
+4.1 The remaining set $(X\setminus\{x\})\cup\{x'\}$ is stable in $G'$: $X$ was a color class, and $x'$ is adjacent outside $x$ only to neighbors of $x$, none of which lies in $X$. Give that set one new color, extending the coloring of $H$ to a $w$-coloring of $G'$. Thus $\chi(G')\le w=\omega(G')$; the opposite inequality is universal. With step 2.1, this proves $G'$ perfect by step 1.1. To replace $x$ by a clique of $k\ge1$ true twins, replicate $x$ successively $k-1$ times; each step starts from a perfect graph and creates one further twin. [step 1.1, step 2.1, step 3.1, L1, L2, induction] ∎ ## Source notes
 
 Diestel, Lemma 5.5.5, pp. 142-143, gives the same induction and the key
 color-class argument. The PDF was read in full for this lemma. The finite

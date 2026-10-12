@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-thom-class-realizes-the-poincare-dual-of-a-submanifold.md

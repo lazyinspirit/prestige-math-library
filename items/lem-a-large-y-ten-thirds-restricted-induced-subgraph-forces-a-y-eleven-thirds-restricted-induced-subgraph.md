@@ -59,26 +59,18 @@ $y^{c_4+2}|F|$ vertices.
 
 **Proof technique:** apply the previous lemma to $F$ with parameter $y$ and show that every outcome except the deeper restricted-set outcome contradicts one of the assumed global failures.
 
+ 1.1 Because $y\le c^3$, one has $y^{10/3}=y^3y^{1/3}\le cy^3$. Thus [L2] upgrades the hypothesis that $F$ is $y^{10/3}$-restricted to the statement that $F$ is $cy^3$-restricted. [given, L2, algebra]
 
-1.1 Because $y\le c^3$, one has $y^{10/3}=y^3y^{1/3}\le cy^3$. Thus [L2] upgrades the hypothesis that $F$ is $y^{10/3}$-restricted to the statement that $F$ is $cy^3$-restricted. [given, L2, algebra]
+ 2.1 Apply [L1] to the graph $F$ with the original parameter $x$ and the current parameter $y$. One of the five outcomes of [L1] holds for $F$. [step 1.1, L1]
 
+ 3.1 Suppose the first outcome of [L1] holds for $F$: there is an $x$-sparse or complete blockade in $F$ of length at least $y^{-1}$ and width at least $y^{c_4+2}|F|$. Since $y^{-1}\in[c^{-1},x^{-1}]\subseteq[c^{-1},x^{-2}]$ and $$ y^{c_4+2}|F|\ge y^{11(c_4+2)}|G|\ge y^{29c_4}|G|, $$ this produces the forbidden global outcome 4. [step 2.1, algebra]
 
-2.1 Apply [L1] to the graph $F$ with the original parameter $x$ and the current parameter $y$. One of the five outcomes of [L1] holds for $F$. [step 1.1, L1]
+ 3.2 Suppose the second outcome of [L1] holds for $F$. Because $2y^4\le y^{11/3}$ for $0<y<1$, the resulting induced subgraph is already the desired $y^{11/3}$-restricted induced subgraph of size at least $y^{c_4+2}|F|$. [step 2.1, algebra]
 
+ 3.3 Suppose the third outcome of [L1] holds for $F$. Then $$ (x^{10}|F|)^{c_1}\ge (x^{10}\cdot y^{10(c_4+2)}|G|)^{c_1} \ge (x^{10c_4+30}|G|)^{c_1} \ge (x^{30c_4}|G|)^{c_1}, $$ because $y\ge x$ and $c_4\ge 4$. This contradicts the failure of global outcome 2. [step 2.1, algebra]
 
-3.1 Suppose the first outcome of [L1] holds for $F$: there is an $x$-sparse or complete blockade in $F$ of length at least $y^{-1}$ and width at least $y^{c_4+2}|F|$. Since $y^{-1}\in[c^{-1},x^{-1}]\subseteq[c^{-1},x^{-2}]$ and $$ y^{c_4+2}|F|\ge y^{11(c_4+2)}|G|\ge y^{29c_4}|G|, $$ this produces the forbidden global outcome 4. [step 2.1, algebra]
+ 3.4 Suppose the fourth outcome of [L1] holds for $F$: there is a complete or anticomplete $(k,|F|/k^{c_2+7/c_3})$-blockade with $k\ge y^{-c_3}$. If $k\ge 2$, then $$ \frac{|F|}{k^{c_2+7/c_3}} \ge \frac{y^{10(c_4+2)}|G|}{k^{c_2+7/c_3}} \ge \frac{|G|}{k^{c_2+7/c_3+10(c_4+2)/c_3}} \ge \frac{|G|}{k^{c_2+27c_4/c_3}}, $$ so global outcome 3 holds, a contradiction. If instead $1<k<2$, then the blockade has at least two blocks, and $$ \frac{|F|}{k^{c_2+7/c_3}} \ge \frac{|F|}{2^{c_2+7/c_3}} \ge \frac{|G|}{2^{c_2+7/c_3+10(c_4+2)/c_3}} \ge \frac{|G|}{2^{c_2+27c_4/c_3}}, $$ because $|F|\ge y^{10(c_4+2)}|G|$, the inequality $y^{-c_3}\le k<2$ implies $y^{10(c_4+2)}\ge 2^{-10(c_4+2)/c_3}$, and $7+10(c_4+2)\le 27c_4$ for $c_4\ge 4$. Thus $G$ has a complete or anticomplete $(2,|G|/2^{c_2+27c_4/c_3})$-blockade, again contradicting the failure of global outcome 3. [step 2.1, algebra]
 
+ 3.5 Suppose the fifth outcome of [L1] holds for $F$: there is a pure $(\ell,|F|/\ell^9)$-blockade with $\ell\in[y^{-1},x^{-2}]$. Then $$ \frac{|F|}{\ell^9}\ge \frac{y^{10(c_4+2)}|G|}{\ell^9}\ge \frac{|G|}{\ell^{29c_4}}, $$ because $\ell\ge y^{-1}$. This again gives the forbidden global outcome 4. [step 2.1, algebra]
 
-3.2 Suppose the second outcome of [L1] holds for $F$. Because $2y^4\le y^{11/3}$ for $0<y<1$, the resulting induced subgraph is already the desired $y^{11/3}$-restricted induced subgraph of size at least $y^{c_4+2}|F|$. [step 2.1, algebra]
-
-
-3.3 Suppose the third outcome of [L1] holds for $F$. Then $$ (x^{10}|F|)^{c_1}\ge (x^{10}\cdot y^{10(c_4+2)}|G|)^{c_1} \ge (x^{10c_4+30}|G|)^{c_1} \ge (x^{30c_4}|G|)^{c_1}, $$ because $y\ge x$ and $c_4\ge 4$. This contradicts the failure of global outcome 2. [step 2.1, algebra]
-
-
-3.4 Suppose the fourth outcome of [L1] holds for $F$: there is a complete or anticomplete $(k,|F|/k^{c_2+7/c_3})$-blockade with $k\ge y^{-c_3}$. If $k\ge 2$, then $$ \frac{|F|}{k^{c_2+7/c_3}} \ge \frac{y^{10(c_4+2)}|G|}{k^{c_2+7/c_3}} \ge \frac{|G|}{k^{c_2+7/c_3+10(c_4+2)/c_3}} \ge \frac{|G|}{k^{c_2+27c_4/c_3}}, $$ so global outcome 3 holds, a contradiction. If instead $1<k<2$, then the blockade has at least two blocks, and $$ \frac{|F|}{k^{c_2+7/c_3}} \ge \frac{|F|}{2^{c_2+7/c_3}} \ge \frac{|G|}{2^{c_2+7/c_3+10(c_4+2)/c_3}} \ge \frac{|G|}{2^{c_2+27c_4/c_3}}, $$ because $|F|\ge y^{10(c_4+2)}|G|$, the inequality $y^{-c_3}\le k<2$ implies $y^{10(c_4+2)}\ge 2^{-10(c_4+2)/c_3}$, and $7+10(c_4+2)\le 27c_4$ for $c_4\ge 4$. Thus $G$ has a complete or anticomplete $(2,|G|/2^{c_2+27c_4/c_3})$-blockade, again contradicting the failure of global outcome 3. [step 2.1, algebra]
-
-
-3.5 Suppose the fifth outcome of [L1] holds for $F$: there is a pure $(\ell,|F|/\ell^9)$-blockade with $\ell\in[y^{-1},x^{-2}]$. Then $$ \frac{|F|}{\ell^9}\ge \frac{y^{10(c_4+2)}|G|}{\ell^9}\ge \frac{|G|}{\ell^{29c_4}}, $$ because $\ell\ge y^{-1}$. This again gives the forbidden global outcome 4. [step 2.1, algebra]
-
-
-4.1 The first, third, fourth, and fifth cases are impossible under the standing global failure hypotheses. Therefore the second case, recorded in step 3.2, must hold, which is exactly the desired conclusion. [step 3.1, step 3.2, step 3.3, step 3.4, step 3.5] ∎
+ 4.1 The first, third, fourth, and fifth cases are impossible under the standing global failure hypotheses. Therefore the second case, recorded in step 3.2, must hold, which is exactly the desired conclusion. [step 3.1, step 3.2, step 3.3, step 3.4, step 3.5] ∎ 

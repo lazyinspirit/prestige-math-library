@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-b-n-and-c-n-are-isomorphic-root-systems-for-all-n.md

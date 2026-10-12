@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orbit-map-fibres-and-stabilizer-dimension.md

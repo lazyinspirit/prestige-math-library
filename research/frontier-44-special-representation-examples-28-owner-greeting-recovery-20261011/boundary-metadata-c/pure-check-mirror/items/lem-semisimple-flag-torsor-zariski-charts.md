@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-semisimple-flag-torsor-zariski-charts.md

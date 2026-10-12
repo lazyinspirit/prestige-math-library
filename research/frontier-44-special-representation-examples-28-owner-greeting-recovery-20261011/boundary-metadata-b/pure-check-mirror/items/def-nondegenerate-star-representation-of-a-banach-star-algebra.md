@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-nondegenerate-star-representation-of-a-banach-star-algebra.md

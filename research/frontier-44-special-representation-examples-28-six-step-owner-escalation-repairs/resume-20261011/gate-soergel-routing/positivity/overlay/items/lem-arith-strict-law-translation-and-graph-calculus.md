@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-arith-strict-law-translation-and-graph-calculus.md

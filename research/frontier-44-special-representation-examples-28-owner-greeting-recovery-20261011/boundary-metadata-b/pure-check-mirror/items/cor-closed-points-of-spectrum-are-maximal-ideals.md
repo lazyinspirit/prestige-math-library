@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-closed-points-of-spectrum-are-maximal-ideals.md

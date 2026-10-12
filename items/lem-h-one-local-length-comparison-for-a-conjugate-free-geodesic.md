@@ -78,72 +78,12 @@ integrable function through the Lebesgue integral
 
 ## Proof
 
-1.1 The square-integrable inverse-branch pullback. [F1, F2, given]
-Take the radius, partition and branches of [F2]. Their domain and gluing
-arguments use the continuity of $\alpha$, which follows from [F1]; no
-piecewise-$C^1$ hypothesis is used in that part. On each closed strip,
-$\varphi_i=\beta_i\circ\alpha$ is a smooth composition of an $H^1$ curve
-and hence a vector-valued primitive with $L^2$ derivative by [F1]. The
-finitely many $\varphi_i$ agree at strip boundaries by [F2], and so glue to
-one $H^1$ vector primitive $\varphi$ with $\varphi(a)=0$,
-$\varphi(b)=X$ and $\alpha=\exp_p\circ\varphi$. The a.e. chain rule gives
-$\dot\alpha=d(\exp_p)_\varphi\varphi'$ on each strip. [F1, F2]
+1.1 The square-integrable inverse-branch pullback. [F1, F2, given] Take the radius, partition and branches of [F2]. Their domain and gluing arguments use the continuity of $\alpha$, which follows from [F1]; no piecewise-$C^1$ hypothesis is used in that part. On each closed strip, $\varphi_i=\beta_i\circ\alpha$ is a smooth composition of an $H^1$ curve and hence a vector-valued primitive with $L^2$ derivative by [F1]. The finitely many $\varphi_i$ agree at strip boundaries by [F2], and so glue to one $H^1$ vector primitive $\varphi$ with $\varphi(a)=0$, $\varphi(b)=X$ and $\alpha=\exp_p\circ\varphi$. The a.e. chain rule gives $\dot\alpha=d(\exp_p)_\varphi\varphi'$ on each strip. [F1, F2]
 
-2.1 Radial comparison on every subinterval. [F1, F3, step 1.1, given]
-For $\sigma>0$ set $f_\sigma(t)=\sqrt{|\varphi(t)|_g^2+\sigma^2}$.
-This is a primitive with $L^2$ derivative
-$f_\sigma'=\langle\varphi,\varphi'\rangle/f_\sigma$ a.e. by [F1]. At a
-point where $\varphi\ne0$, decompose $\varphi'=c\varphi+w$ with
-$w\perp\varphi$. Gauss lemma [F3] and step 1.1 give
-$$|\dot\alpha|_g^2=c^2|\varphi|_g^2+|d(\exp_p)_\varphi w|_g^2\ge |f_\sigma'|^2.$$
-At $\varphi=0$, $f_\sigma'=0$, so the inequality remains true. Thus on
-every $[u,z]\subset[a,b]$, integration of the nonnegative speed and the
-primitive identity on the finite strips yield
-$$L_g(\alpha|_{[u,z]})\ge\int_u^z|f_\sigma'|\,dt\ge|f_\sigma(z)-f_\sigma(u)|.$$
-Letting $\sigma\downarrow0$ proves the subinterval bound
-$L_g(\alpha|_{[u,z]})\ge||\varphi(z)|_g-|\varphi(u)|_g|$ and, at the
-endpoints, $L_g(\alpha)\ge|X|_g=L_g(\gamma)$ by [F3]. [F1, F3, step 1.1]
+2.1 Radial comparison on every subinterval. [F1, F3, step 1.1, given] For $\sigma>0$ set $f_\sigma(t)=\sqrt{|\varphi(t)|_g^2+\sigma^2}$. This is a primitive with $L^2$ derivative $f_\sigma'=\langle\varphi,\varphi'\rangle/f_\sigma$ a.e. by [F1]. At a point where $\varphi\ne0$, decompose $\varphi'=c\varphi+w$ with $w\perp\varphi$. Gauss lemma [F3] and step 1.1 give $$|\dot\alpha|_g^2=c^2|\varphi|_g^2+|d(\exp_p)_\varphi w|_g^2\ge |f_\sigma'|^2.$$ At $\varphi=0$, $f_\sigma'=0$, so the inequality remains true. Thus on every $[u,z]\subset[a,b]$, integration of the nonnegative speed and the primitive identity on the finite strips yield $$L_g(\alpha|_{[u,z]})\ge\int_u^z|f_\sigma'|\,dt\ge|f_\sigma(z)-f_\sigma(u)|.$$ Letting $\sigma\downarrow0$ proves the subinterval bound $L_g(\alpha|_{[u,z]})\ge||\varphi(z)|_g-|\varphi(u)|_g|$ and, at the endpoints, $L_g(\alpha)\ge|X|_g=L_g(\gamma)$ by [F3]. [F1, F3, step 1.1]
 
-3.1 Equality makes the radius monotone. [F1, step 1.1, step 2.1, given]
-Suppose $L_g(\alpha)=|X|_g$ and put $r=|\varphi|_g$. Because length is an
-integral, it is additive across any finite subdivision. If $r(s)>r(z)$
-for some $s<z$, first $r(z)\le|X|_g$: otherwise the subinterval bounds
-on $[a,z]$ and $[z,b]$ give
-$L_g(\alpha)\ge r(z)+(r(z)-|X|_g)>|X|_g$. Then step 2.1 on
-$[a,s]$, $[s,z]$, and $[z,b]$ gives
-$L_g(\alpha)\ge r(s)+(r(s)-r(z))+(|X|_g-r(z))>|X|_g$, a contradiction.
-Hence $r$ is nondecreasing. If $X=0$, then the same bound gives $r=0$;
-step 1.1 gives $\alpha=\exp_p(0)=\gamma$. If $X\ne0$, continuity and
-monotonicity imply $\{r>0\}=(c,b]$ for some $c\in[a,b)$, with $r=0$
-before $c$. [F1, step 1.1, step 2.1]
+3.1 Equality makes the radius monotone. [F1, step 1.1, step 2.1, given] Suppose $L_g(\alpha)=|X|_g$ and put $r=|\varphi|_g$. Because length is an integral, it is additive across any finite subdivision. If $r(s)>r(z)$ for some $s<z$, first $r(z)\le|X|_g$: otherwise the subinterval bounds on $[a,z]$ and $[z,b]$ give $L_g(\alpha)\ge r(z)+(r(z)-|X|_g)>|X|_g$. Then step 2.1 on $[a,s]$, $[s,z]$, and $[z,b]$ gives $L_g(\alpha)\ge r(s)+(r(s)-r(z))+(|X|_g-r(z))>|X|_g$, a contradiction. Hence $r$ is nondecreasing. If $X=0$, then the same bound gives $r=0$; step 1.1 gives $\alpha=\exp_p(0)=\gamma$. If $X\ne0$, continuity and monotonicity imply $\{r>0\}=(c,b]$ for some $c\in[a,b)$, with $r=0$ before $c$. [F1, step 1.1, step 2.1]
 
-4.1 The radial primitive and a.e. equality. [F1, F3, F4, step 1.1, step 3.1, given]
-The function $r$ is itself a primitive. Indeed $f_\sigma\to r$ uniformly,
-while $f_\sigma'$ is dominated by $|\varphi'|\in L^1$ and converges a.e.
-as $\sigma\downarrow0$ to
-$h=\langle\varphi,\varphi'\rangle/r$ on $\{r>0\}$ and $h=0$ on
-$\{r=0\}$. Dominated convergence [F4] in the primitive identities gives
-$r(t)=r(a)+\int_a^t h$, so $r'=h$ a.e. and $r'\ge0$ a.e. On $\{r>0\}$
-Gauss lemma gives, with
-$w=\varphi'-(r'/r)\varphi\perp\varphi$,
-$$|\dot\alpha|_g^2=(r')^2+|d(\exp_p)_\varphi w|_g^2.$$
-On $\{r=0\}$ the comparison $|\dot\alpha|_g\ge r'=0$ is trivial.
-Thus $|\dot\alpha|_g-r'\ge0$ a.e.; its integral is
-$L_g(\alpha)-(r(b)-r(a))=|X|_g-|X|_g=0$. It follows that
-$|\dot\alpha|_g=r'$ a.e. Each inverse branch is a diffeomorphism,
-so $d(\exp_p)_\varphi$ is injective on its strip; the displayed identity
-then gives $w=0$ a.e. on $\{r>0\}$. [F1, F3, F4, step 1.1, step 3.1]
+4.1 The radial primitive and a.e. equality. [F1, F3, F4, step 1.1, step 3.1, given] The function $r$ is itself a primitive. Indeed $f_\sigma\to r$ uniformly, while $f_\sigma'$ is dominated by $|\varphi'|\in L^1$ and converges a.e. as $\sigma\downarrow0$ to $h=\langle\varphi,\varphi'\rangle/r$ on $\{r>0\}$ and $h=0$ on $\{r=0\}$. Dominated convergence [F4] in the primitive identities gives $r(t)=r(a)+\int_a^t h$, so $r'=h$ a.e. and $r'\ge0$ a.e. On $\{r>0\}$ Gauss lemma gives, with $w=\varphi'-(r'/r)\varphi\perp\varphi$, $$|\dot\alpha|_g^2=(r')^2+|d(\exp_p)_\varphi w|_g^2.$$ On $\{r=0\}$ the comparison $|\dot\alpha|_g\ge r'=0$ is trivial. Thus $|\dot\alpha|_g-r'\ge0$ a.e.; its integral is $L_g(\alpha)-(r(b)-r(a))=|X|_g-|X|_g=0$. It follows that $|\dot\alpha|_g=r'$ a.e. Each inverse branch is a diffeomorphism, so $d(\exp_p)_\varphi$ is injective on its strip; the displayed identity then gives $w=0$ a.e. on $\{r>0\}$. [F1, F3, F4, step 1.1, step 3.1]
 
-5.1 Constant direction and reparametrization. [F1, F2, step 1.1, step 3.1, step 4.1, given]
-On each compact subinterval of $(c,b]$, the map $e=\varphi/r$ is an
-$H^1$ primitive by smooth superposition [F1], and step 4.1 gives
-$e'=w/r=0$ a.e. Its primitive identity makes $e$ constant there;
-overlapping subintervals make the constant common. Since
-$\varphi(b)=X$, it is $e_0=X/|X|_g=v/|v|_g$. Thus
-$\varphi(t)=r(t)e_0$ for all $t$, including $[a,c]$ where both sides
-vanish. Define $\tau(t)=a+r(t)/|v|_g$. By step 4.1 it is an absolutely
-continuous nondecreasing function with $L^2$ derivative; its endpoint
-values are $a,b$, hence it is a surjection. The radial exponential identity
-in [F2] now gives
-$\alpha(t)=\exp_p(r(t)e_0)=\gamma(\tau(t))$ for every $t$.
-Together with step 3.1 this proves both equality cases. [F1, F2, step 1.1, step 3.1, step 4.1] ∎
+5.1 Constant direction and reparametrization. [F1, F2, step 1.1, step 3.1, step 4.1, given] On each compact subinterval of $(c,b]$, the map $e=\varphi/r$ is an $H^1$ primitive by smooth superposition [F1], and step 4.1 gives $e'=w/r=0$ a.e. Its primitive identity makes $e$ constant there; overlapping subintervals make the constant common. Since $\varphi(b)=X$, it is $e_0=X/|X|_g=v/|v|_g$. Thus $\varphi(t)=r(t)e_0$ for all $t$, including $[a,c]$ where both sides vanish. Define $\tau(t)=a+r(t)/|v|_g$. By step 4.1 it is an absolutely continuous nondecreasing function with $L^2$ derivative; its endpoint values are $a,b$, hence it is a surjection. The radial exponential identity in [F2] now gives $\alpha(t)=\exp_p(r(t)e_0)=\gamma(\tau(t))$ for every $t$. Together with step 3.1 this proves both equality cases. [F1, F2, step 1.1, step 3.1, step 4.1] ∎ 

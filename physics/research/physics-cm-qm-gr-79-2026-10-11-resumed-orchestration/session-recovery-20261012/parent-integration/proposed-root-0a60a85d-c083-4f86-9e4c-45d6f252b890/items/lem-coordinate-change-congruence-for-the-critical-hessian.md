@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coordinate-change-congruence-for-the-critical-hessian.md

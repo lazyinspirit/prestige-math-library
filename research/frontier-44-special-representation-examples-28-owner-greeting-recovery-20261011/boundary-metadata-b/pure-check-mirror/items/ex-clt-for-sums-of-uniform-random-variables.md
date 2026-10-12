@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-clt-for-sums-of-uniform-random-variables.md

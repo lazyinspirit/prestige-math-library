@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-an-involutive-yang-baxter-operator-factors-through-the-symmetric-group.md

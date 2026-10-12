@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sphere-finite-graph-charts-and-surface-density.md

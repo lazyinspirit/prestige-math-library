@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-set-valued-coend-is-a-quotient-of-a-coproduct-by-the-dinaturality-relation.md

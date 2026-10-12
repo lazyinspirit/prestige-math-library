@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c1-holonomy-is-a-well-defined-representation-into-transverse-germs.md

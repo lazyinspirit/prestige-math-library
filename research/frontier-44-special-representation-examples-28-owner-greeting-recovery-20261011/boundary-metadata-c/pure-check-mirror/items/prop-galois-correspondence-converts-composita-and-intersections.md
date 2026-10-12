@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-galois-correspondence-converts-composita-and-intersections.md

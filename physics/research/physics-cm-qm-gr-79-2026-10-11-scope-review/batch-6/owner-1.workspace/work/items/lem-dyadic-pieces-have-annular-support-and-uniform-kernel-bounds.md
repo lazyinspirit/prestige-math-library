@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dyadic-pieces-have-annular-support-and-uniform-kernel-bounds.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-effaceable-homological-delta-functor-in-positive-degrees.md

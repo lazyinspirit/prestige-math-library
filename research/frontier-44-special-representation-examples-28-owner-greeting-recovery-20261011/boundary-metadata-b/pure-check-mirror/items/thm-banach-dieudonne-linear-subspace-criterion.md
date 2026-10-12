@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-banach-dieudonne-linear-subspace-criterion.md

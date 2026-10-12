@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-orthogonal-latin-squares-and-complete-families.md

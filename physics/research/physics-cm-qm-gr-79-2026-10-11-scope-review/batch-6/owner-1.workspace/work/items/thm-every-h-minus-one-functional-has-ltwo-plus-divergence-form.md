@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-h-minus-one-functional-has-ltwo-plus-divergence-form.md

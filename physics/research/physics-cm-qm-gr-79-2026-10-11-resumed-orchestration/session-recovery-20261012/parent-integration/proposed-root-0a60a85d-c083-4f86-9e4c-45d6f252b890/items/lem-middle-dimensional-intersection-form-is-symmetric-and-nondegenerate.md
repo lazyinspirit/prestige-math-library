@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-middle-dimensional-intersection-form-is-symmetric-and-nondegenerate.md

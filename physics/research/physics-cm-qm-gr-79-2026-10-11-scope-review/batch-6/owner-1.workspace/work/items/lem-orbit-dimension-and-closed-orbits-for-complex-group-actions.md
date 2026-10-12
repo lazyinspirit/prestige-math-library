@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orbit-dimension-and-closed-orbits-for-complex-group-actions.md

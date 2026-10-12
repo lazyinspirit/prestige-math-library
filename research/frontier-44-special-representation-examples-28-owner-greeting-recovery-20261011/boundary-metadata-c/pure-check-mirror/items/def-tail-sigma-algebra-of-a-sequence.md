@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-tail-sigma-algebra-of-a-sequence.md

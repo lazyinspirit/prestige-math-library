@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-distance-from-p-is-smooth-on-m-minus-p.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-only-the-highest-dot-orbit-can-occur-in-the-integrable-numerator.md

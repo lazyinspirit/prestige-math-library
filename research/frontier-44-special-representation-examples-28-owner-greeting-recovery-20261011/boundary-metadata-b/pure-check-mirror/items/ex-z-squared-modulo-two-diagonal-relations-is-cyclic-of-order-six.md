@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-z-squared-modulo-two-diagonal-relations-is-cyclic-of-order-six.md

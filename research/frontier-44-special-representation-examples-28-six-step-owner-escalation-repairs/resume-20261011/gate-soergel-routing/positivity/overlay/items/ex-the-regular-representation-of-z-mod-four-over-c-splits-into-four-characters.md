@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-regular-representation-of-z-mod-four-over-c-splits-into-four-characters.md

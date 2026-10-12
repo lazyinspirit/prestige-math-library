@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-internal-face-cancellation-for-two-glued-regions.md

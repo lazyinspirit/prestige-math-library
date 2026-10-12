@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-t0-t1-and-hausdorff-are-hereditary.md

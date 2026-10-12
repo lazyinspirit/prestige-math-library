@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-pullback-of-the-tangent-bundle-of-euclidean-space-is-trivial.md

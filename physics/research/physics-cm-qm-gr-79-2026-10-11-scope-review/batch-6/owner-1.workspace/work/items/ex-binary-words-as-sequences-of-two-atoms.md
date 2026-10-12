@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-binary-words-as-sequences-of-two-atoms.md

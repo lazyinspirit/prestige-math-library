@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-trace-norm-of-hilbert-exterior-powers.md

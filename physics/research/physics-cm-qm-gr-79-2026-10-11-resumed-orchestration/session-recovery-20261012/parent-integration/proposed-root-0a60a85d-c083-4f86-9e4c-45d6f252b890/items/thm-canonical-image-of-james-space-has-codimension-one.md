@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-canonical-image-of-james-space-has-codimension-one.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-even-dimensional-wave-formula-by-descent.md

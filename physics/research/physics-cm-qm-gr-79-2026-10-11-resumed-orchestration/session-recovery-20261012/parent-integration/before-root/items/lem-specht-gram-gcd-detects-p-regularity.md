@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-specht-gram-gcd-detects-p-regularity.md

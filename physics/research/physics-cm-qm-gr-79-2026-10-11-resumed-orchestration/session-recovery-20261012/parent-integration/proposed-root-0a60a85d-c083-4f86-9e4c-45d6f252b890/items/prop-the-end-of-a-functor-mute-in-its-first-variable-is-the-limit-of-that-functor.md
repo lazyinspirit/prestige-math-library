@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-end-of-a-functor-mute-in-its-first-variable-is-the-limit-of-that-functor.md

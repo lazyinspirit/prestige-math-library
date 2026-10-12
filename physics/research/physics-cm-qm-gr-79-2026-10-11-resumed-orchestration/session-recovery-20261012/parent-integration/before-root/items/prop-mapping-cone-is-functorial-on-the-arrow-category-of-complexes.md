@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-mapping-cone-is-functorial-on-the-arrow-category-of-complexes.md

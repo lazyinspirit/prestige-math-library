@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-trace-form-nondegeneracy-characterizes-semisimple-finite-dimensional-algebras.md

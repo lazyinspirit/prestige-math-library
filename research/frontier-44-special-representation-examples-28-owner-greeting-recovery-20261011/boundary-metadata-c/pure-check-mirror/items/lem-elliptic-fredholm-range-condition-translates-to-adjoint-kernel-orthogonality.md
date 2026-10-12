@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-elliptic-fredholm-range-condition-translates-to-adjoint-kernel-orthogonality.md

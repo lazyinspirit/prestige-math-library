@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-maximal-torus-and-weyl-group-of-so-three.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-prime-one-mod-four-powers-have-primitive-two-square-representations.md

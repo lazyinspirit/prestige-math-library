@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-invariant-ring-finite-generation-and-affine-categorical-quotient.md

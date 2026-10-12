@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-adjacent-transpositions-generate-the-symmetric-group.md

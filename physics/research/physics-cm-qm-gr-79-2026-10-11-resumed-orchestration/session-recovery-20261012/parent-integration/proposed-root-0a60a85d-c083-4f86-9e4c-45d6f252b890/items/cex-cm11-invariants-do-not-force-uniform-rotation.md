@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm11-invariants-do-not-force-uniform-rotation.md

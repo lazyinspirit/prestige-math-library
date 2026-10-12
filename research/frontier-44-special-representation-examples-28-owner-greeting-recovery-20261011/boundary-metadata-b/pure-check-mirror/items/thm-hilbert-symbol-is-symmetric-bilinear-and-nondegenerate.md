@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hilbert-symbol-is-symmetric-bilinear-and-nondegenerate.md

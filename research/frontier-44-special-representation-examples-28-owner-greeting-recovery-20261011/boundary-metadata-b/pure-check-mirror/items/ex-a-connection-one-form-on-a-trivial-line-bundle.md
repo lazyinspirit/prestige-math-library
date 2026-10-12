@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-connection-one-form-on-a-trivial-line-bundle.md

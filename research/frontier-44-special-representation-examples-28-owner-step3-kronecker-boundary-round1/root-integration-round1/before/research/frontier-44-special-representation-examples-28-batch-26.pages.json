@@ -1,0 +1,561 @@
+[
+  {
+    "order": 1582,
+    "id": "kronecker-coefficients-and-internal-products",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Kronecker Coefficients and Internal Products",
+    "companion": "kronecker-coefficients-and-internal-products-examples",
+    "requires": [
+      "frobenius-characteristic-and-the-symmetric-group-character-dictionary",
+      "specht-modules-and-the-irreducibles-of-the-symmetric-group",
+      "outer-products-skew-specht-modules-and-littlewood-richardson"
+    ],
+    "items": [
+      {
+        "id": "def-kronecker-coefficient-and-internal-tensor-product",
+        "kind": "definition",
+        "title": "Kronecker coefficients and the internal tensor product",
+        "deps": [
+          "def-tensor-product-of-complex-representations",
+          "thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order",
+          "cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order",
+          "def-completely-reducible-representation",
+          "thm-complex-specht-modules-are-irreducible",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules",
+          "cor-distinct-specht-modules-are-inequivalent",
+          "def-isotypic-component-of-a-completely-reducible-representation"
+        ],
+        "dependency_level": 0,
+        "statement": "Fix n >= 0 and work over C. For partitions lambda, mu, nu of n the diagonal tensor product S^lambda (x) S^mu is a finite-dimensional complex S_n-module; by Maschke's theorem it is completely reducible, and by the classification of complex irreducibles of S_n the Specht modules S^nu (nu |- n) are a complete set of pairwise inequivalent irreducibles. Let (S^lambda (x) S^mu)_{(S^nu)} be the isotypic component of type S^nu and put g(lambda,mu,nu) := dim (S^lambda (x) S^mu)_{(S^nu)} / dim S^nu; equivalently g(lambda,mu,nu) is the multiplicity of S^nu in S^lambda (x) S^mu. Call (lambda,mu) -> S^lambda (x) S^mu the internal (Kronecker) product of S_n-representations. Unlike the outer induction product this operation keeps the rank: both inputs and the output are S_n-modules of the same degree n, and it is never the same operation as Ind_{S_a x S_b}^{S_{a+b}}.",
+        "strategy": "Complete reducibility comes from complex Maschke applied to the finite-dimensional S_n-module S^lambda (x) S^mu; the classification and pairwise inequivalence of the S^nu make the isotypic component decomposition available. Well-definedness of the multiplicity is canonical: the isotypic component of a completely reducible module is defined as the sum of all irreducible submodules equivalent to S^nu, so it does not depend on a chosen decomposition, and dim S^nu > 0 because S^nu is irreducible. The contrast with the outer product is prose only and creates no logical dependency; the outer induction product is not used.",
+        "axiom_use": "None: the argument is finite-dimensional complex representation theory of a finite group and is choice-free (complex Maschke and the Specht classification are choice-free in the cited suppliers).",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Group, Encyclopedia of Mathematics and its Applications 16, Addison-Wesley 1981; \u00a7\u00a77 and 11 (the invariant tabloid form, self-pairing and irreducibility), \u00a725 (the Frobenius characteristic)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complex-specht-modules-are-self-dual",
+        "kind": "lemma",
+        "title": "Complex Specht modules are self-dual with real-valued characters",
+        "deps": [
+          "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "def-invariant-inner-product-on-a-tabloid-module",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "lem-specht-module-has-nondegenerate-self-pairing-in-characteristic-zero",
+          "def-dual-complex-representation",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "prop-basic-value-properties-of-a-complex-character",
+          "thm-complex-irreducibles-of-symmetric-groups-are-specht-modules"
+        ],
+        "dependency_level": 0,
+        "statement": "For every lambda |- n the complex Specht module S^lambda carries a nondegenerate symmetric S_n-invariant bilinear form b(x,y) = sum_T x_T y_T (coefficientwise product in the tabloid basis), so v -> b(v,-) is an isomorphism of C S_n-modules S^lambda -> (S^lambda)^*; equivalently S^lambda is self-dual. Consequently chi^lambda(g^{-1}) = chi^lambda(g), i.e. every irreducible character of S_n is real-valued.",
+        "strategy": "The coefficientwise product b is symmetric, bilinear and invariant because S_n permutes the tabloid basis. It is nondegenerate on the tabloid module M^lambda. Every polytabloid has integer tabloid coefficients and is fixed by coefficientwise conjugation; conjugating an arbitrary complex linear combination of these generators gives another such combination, so S^lambda is stable under conjugation; writing H(x,y) = sum_T conj(x_T) y_T for the published invariant Hermitian form (which the previous item proves to be nondegenerate on S^lambda), we have b(x,y) = H(conj(x), y) for x,y in S^lambda, and conj(S^lambda) = S^lambda. For nonzero x in S^lambda, conj(x) is also a nonzero vector of S^lambda, so nondegeneracy of H supplies y in S^lambda with H(conj(x),y) != 0; hence b is nondegenerate on S^lambda. Invariance of b gives equivariance of v -> b(v,-) with the dual action (g.f)(w) = f(g^{-1}w); nondegeneracy plus finite dimension makes it an isomorphism. Finally chi_{(S^lambda)^*}(g) = conj(chi^lambda(g)) by the tensor/dual character theorem, so chi^lambda(g) = chi^lambda(g^{-1}) = conj(chi^lambda(g)) is real.",
+        "axiom_use": "None: the tabloid form, conjugation in the tabloid basis and the character comparison are finite-dimensional and choice-free.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (complete lecture notes); Chapter 9, Definition 9.1, Remark 9.2 and Lemma 9.3, printed pp. 31-32, for the invariant tabloid form and its restriction",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Group, Encyclopedia of Mathematics and its Applications 16, Addison-Wesley 1981; \u00a7\u00a77 and 11 (the invariant tabloid form, self-pairing and irreducibility), \u00a725 (the Frobenius characteristic)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.); \u00a73.2 character inner products, \u00a74.3 Proposition 4.3.2 for the tensor-product model of induction",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-kronecker-coefficient-is-a-three-character-inner-product",
+        "kind": "proposition",
+        "title": "The Kronecker coefficient is a three-character inner product",
+        "deps": [
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "lem-complex-specht-modules-are-self-dual",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "def-standard-inner-product-on-complex-class-functions"
+        ],
+        "dependency_level": 1,
+        "statement": "For all lambda,mu,nu |- n, g(lambda,mu,nu) = <chi^lambda chi^mu, chi^nu> = (1/n!) sum_{sigma in S_n} chi^lambda(sigma) chi^mu(sigma) chi^nu(sigma), where the sum uses the real-valuedness of the irreducible characters (no conjugation on the third factor).",
+        "strategy": "The character of a tensor product is the pointwise product, so S^lambda (x) S^mu has character chi^lambda chi^mu. For a finite-dimensional completely reducible module with character phi the multiplicity of the irreducible character chi^nu equals <phi, chi^nu>, computed by the intertwiner-dimension formula together with the orthonormality of irreducible characters on S_n. Finally chi^nu(g^{-1}) = conj(chi^nu(g)) by the dual-character formula and chi^nu(g^{-1}) = chi^nu(g) by self-duality, so the inner product can be written as the plain average of the triple product.",
+        "axiom_use": "None: finite-dimensional character theory over C.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+        "kind": "corollary",
+        "title": "Kronecker coefficients are nonnegative integers with full S_3 and conjugation symmetries",
+        "deps": [
+          "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "prop-sign-twist-corresponds-to-the-omega-involution",
+          "def-kronecker-coefficient-and-internal-tensor-product"
+        ],
+        "dependency_level": 2,
+        "statement": "For all lambda,mu,nu |- n: (a) g(lambda,mu,nu) is a nonnegative integer; (b) g(lambda,mu,nu) is invariant under every permutation of lambda,mu,nu; (c) conjugating exactly two of the three partitions preserves the coefficient: g(lambda,mu,nu) = g(lambda',mu',nu) = g(lambda',mu,nu') = g(lambda,mu',nu'). No positive combinatorial rule is asserted.",
+        "strategy": "(a) is the multiplicity definition; the character formula expresses it as a nonnegative integer. (b) follows from the symmetric form of the three-character average together with commutativity of pointwise multiplication and real-valuedness of the three characters. (c) uses S^{lambda'} = S^lambda (x) sgn from the sign-twist/omega item: S^{lambda'} (x) S^{mu'} = (S^lambda (x) S^mu) (x) (sgn (x) sgn) and sgn (x) sgn is the trivial representation, so the tensor product is unchanged; the multiplicity of S^{nu'} (respectively S^nu) in it equals that of S^nu (respectively S^{nu'}) because sgn is one-dimensional, giving the three displayed equalities.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-internal-product-on-symmetric-functions",
+        "kind": "definition",
+        "title": "The internal (Kronecker) product on symmetric functions",
+        "deps": [
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism",
+          "def-graded-ordinary-representation-ring-of-symmetric-groups",
+          "def-frobenius-characteristic-map",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions"
+        ],
+        "dependency_level": 1,
+        "statement": "Let ch: R_S -> Lambda be the Frobenius characteristic, a degree-preserving ring isomorphism from the graded character ring of the symmetric groups onto the stable symmetric-function ring. For f in Lambda^m and g in Lambda^n define f * g := ch( ch^{-1}(f) . ch^{-1}(g) ) if m = n, where the dot is the pointwise (internal tensor) product of class functions, and f * g := 0 if m != n; extend bilinearly. Then * is a degree-preserving, commutative, associative, bilinear product on Lambda with degreewise unit h_n = s_(n) = ch(trivial character of S_n) on Lambda^n (h_0 = 1); the direct sum Lambda has no global unit for *, and for partitions lambda,mu of n, s_lambda * s_mu = sum_nu g(lambda,mu,nu) s_nu.",
+        "strategy": "Closure of R(S_n) under the pointwise product: honest characters of S_n multiply to the character of the tensor product of the corresponding representations, and virtual characters are integral combinations, so the product of two elements of R(S_n) lies in R(S_n). Hence the transport through the graded isomorphism ch is well defined and inherits bilinearity, commutativity and associativity from pointwise multiplication. The Schur expansion follows from ch(chi^lambda) = s_lambda and the definition of g. On Lambda^n the trivial character is the unit for pointwise multiplication, so its characteristic h_n = s_(n) is the internal-product unit. Every element of the graded direct sum has finite degree support; for a degree n outside that support its internal product with the nonzero h_n is zero, so it cannot be a global unit. In particular the ordinary-product unit 1 in degree zero is not a unit for * on positive degrees.",
+        "axiom_use": "None: the transport uses the choice-free Frobenius characteristic isomorphism.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-power-sums-diagonalize-the-internal-product",
+        "kind": "proposition",
+        "title": "Power sums diagonalize the internal product",
+        "deps": [
+          "def-internal-product-on-symmetric-functions",
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "def-frobenius-characteristic-map",
+          "def-class-function-and-the-space-of-complex-class-functions",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions"
+        ],
+        "dependency_level": 2,
+        "statement": "For partitions rho,sigma of n one has p_rho * p_sigma = delta_{rho,sigma} z_rho p_rho, where z_rho = prod_i i^{m_i(rho)} m_i(rho)!; consequently s_lambda * s_mu = sum_{nu |- n} g(lambda,mu,nu) s_nu. The internal product of symmetric functions is therefore diagonal in the power-sum basis and has integer structure constants (the Kronecker coefficients) in the Schur basis.",
+        "strategy": "Let 1_rho denote the class function that is 1 on the conjugacy class of cycle type rho and 0 elsewhere. The characteristic map gives ch(1_rho) = p_rho / z_rho, and class functions multiply pointwise: 1_rho . 1_sigma = delta_{rho,sigma} 1_rho. Transporting through the internal product of symmetric functions gives (p_rho/z_rho)*(p_sigma/z_sigma) = delta_{rho,sigma} p_rho/z_rho, and bilinearity gives p_rho * p_sigma = delta_{rho,sigma} z_rho p_rho. The Schur form is the definition of g together with ch(chi^lambda) = s_lambda.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-first-row-padding-of-a-partition",
+        "kind": "definition",
+        "title": "First-row padding of a partition",
+        "deps": [
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 0,
+        "statement": "For a partition alpha and an integer n, define alpha[n] := (n - |alpha|, alpha_1, alpha_2, ...) whenever n >= |alpha| + alpha_1; the displayed sequence is then a partition of n, and below the threshold it is not a partition (the first part is smaller than the second, or negative). The threshold |alpha| + alpha_1 is exact. This notation is neutral: it records no constancy and is shared with the FI-module and representation-stability developments.",
+        "strategy": "Weak decrease of (n - |alpha|, alpha_1, alpha_2, ...) is equivalent to n - |alpha| >= alpha_1, i.e. n >= |alpha| + alpha_1, because alpha itself is weakly decreasing; conversely n < |alpha| + alpha_1 makes the first entry smaller than alpha_1 (when alpha is nonempty) so the sequence is not a partition. The empty partition case alpha = empty gives alpha[n] = (n).",
+        "axiom_use": "None: finite arithmetic with partitions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, FI-modules and stability for representations of symmetric groups, arXiv:1204.4533 (2014); \u00a73.2 Definition 3.2.1 and Proposition 3.4.1 for the padded family and its threshold",
+              "url": "https://arxiv.org/pdf/1204.4533"
+            },
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009); pp. 1-10, Thms 1.1-1.2, Lemma 3.1 and Thm 3.2 for first-row padding and reduced coefficients",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-padded-kronecker-coefficient-sequence",
+        "kind": "definition",
+        "title": "Padded Kronecker coefficient sequences",
+        "deps": [
+          "def-first-row-padding-of-a-partition",
+          "def-kronecker-coefficient-and-internal-tensor-product"
+        ],
+        "dependency_level": 1,
+        "statement": "Let alpha,beta,gamma be partitions and let n_0 := max{|alpha|+alpha_1, |beta|+beta_1, |gamma|+gamma_1}. For integers n >= n_0 all three padded sequences alpha[n], beta[n], gamma[n] are partitions of n, and one defines g_n(alpha,beta,gamma) := g(alpha[n], beta[n], gamma[n]). Below n_0 the notation is undefined because at least one padded sequence is not a partition. This definition asserts no eventual constancy; Murnaghan stability is a theorem about this sequence proved elsewhere.",
+        "strategy": "On the common domain each alpha[n] is a partition of n by the preceding item, so g_n is the already-defined Kronecker coefficient of three partitions of n; the maximum threshold is exactly where the common domain starts. No well-definedness beyond this is claimed and no limit is taken.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009); pp. 1-10, Thms 1.1-1.2, Lemma 3.1 and Thm 3.2 for first-row padding and reduced coefficients",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, FI-modules and stability for representations of symmetric groups, arXiv:1204.4533 (2014); \u00a73.2 Definition 3.2.1 and Proposition 3.4.1 for the padded family and its threshold",
+              "url": "https://arxiv.org/pdf/1204.4533"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-littlewood-internal-product-outer-compatibility",
+        "kind": "lemma",
+        "title": "Littlewood's identity: the internal product against an outer product",
+        "deps": [
+          "def-internal-product-on-symmetric-functions",
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "thm-outer-littlewood-richardson-rule",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "cor-frobenius-reciprocity-for-complex-characters",
+          "thm-frobenius-formula-for-induced-characters",
+          "def-outer-induction-product-for-symmetric-group-characters",
+          "def-induced-character-of-a-complex-representation",
+          "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "lem-frobenius-characteristic-preserves-outer-products",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "lem-frobenius-characteristic-is-an-isometry",
+          "def-frobenius-characteristic-map"
+        ],
+        "dependency_level": 2,
+        "statement": "For partitions lambda |- n, tau |- r and theta |- n - r, Littlewood's identity holds in Lambda^n: s_lambda * (s_tau s_theta) = sum_{alpha |- r, beta |- n-r} c^lambda_{alpha,beta} (s_alpha * s_tau)(s_beta * s_theta), with c^lambda_{alpha,beta} the Littlewood-Richardson coefficient. Both sides have degree n and the sum is finite.",
+        "strategy": "Work with class functions and pass to symmetric functions only at the end. Let H <= S_n be the two-block subgroup S_r x S_{n-r}. By the outer Littlewood-Richardson rule, Ind_H^{S_n}(S^alpha (x) S^beta) = sum_lambda c^lambda_{alpha,beta} S^lambda, so Frobenius reciprocity gives the restriction multiplicity [Res_H chi^lambda : chi^alpha (x) chi^beta] = c^lambda_{alpha,beta}. Frobenius' formula writes the induced character chi^tau o chi^theta at sigma as a sum over cosets of the values at x^{-1} sigma x, and chi^lambda(sigma) = chi^lambda(x^{-1} sigma x) because chi^lambda is a class function. Multiplying pointwise and using the restriction expansion of chi^lambda at every coset term that lies in H turns the product into sum_{alpha,beta} c^lambda_{alpha,beta} Ind_H^{S_n}((chi^alpha . chi^tau) (x) (chi^beta . chi^theta)). Applying the characteristic map, which preserves outer products and sends chi^mu to s_mu, and using that * is defined by transporting pointwise products gives the stated identity.",
+        "axiom_use": "None: induction, Frobenius reciprocity and the outer LR rule are choice-free in the cited suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            },
+            {
+              "title": "G. D. James, The Representation Theory of the Symmetric Group, Encyclopedia of Mathematics and its Applications 16, Addison-Wesley 1981; \u00a7\u00a77 and 11 (the invariant tabloid form, self-pairing and irreducibility), \u00a725 (the Frobenius characteristic)",
+              "url": "https://www-users.cse.umn.edu/~webb/oldteaching/Year2010-11/the-representation-theory-of-the-symmetric-groups-SLN.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kronecker-reduction-lemma",
+        "kind": "lemma",
+        "title": "The Kronecker reduction lemma of Pak and Panova",
+        "deps": [
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "def-internal-product-on-symmetric-functions",
+          "prop-power-sums-diagonalize-the-internal-product",
+          "lem-littlewood-internal-product-outer-compatibility",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 3,
+        "statement": "Let lambda,mu,nu |- n with lengths at most l and put s := n - nu_1 (missing parts, including nu_1 for the empty partition, are zero). (i) If |lambda_i - mu_i| > s for some i <= l, then g(lambda,mu,nu) = 0. (ii) If |lambda_i - mu_i| <= s for all i <= l, then g(lambda,mu,nu) = g(phi(lambda),phi(mu),phi(nu)) for the explicit reduction map phi: with rho := lambda cap mu, omega := lambda cup mu, I := {i : rho_i >= omega_{i+1} + s, 1 <= i <= l} union {l+1} (rho_{l+1} = omega_{l+1} := 0), i_j := min{i in I : i >= j}, and ind_I(i) := #{i' in I : l >= i' >= i} for i <= l, with ind_I(l+1) := 1, set phi(theta)_j := theta_j - rho_{i_j} + s(l-i_j+ind_I(i_j)) for 1 <= j <= l and phi(nu) := (r - s, nu_2, nu_3, ...), where r := |phi(lambda)| = |phi(mu)| = |phi(nu)| <= 2 s l^2. All of phi(lambda), phi(mu), phi(nu) are partitions of r.",
+        "strategy": "Part (i): Suppose |lambda_i - mu_i| > s for some i, say lambda_i > mu_i. Then |lambda cap mu| <= sum_{j != i} lambda_j + mu_i < n - s, so there are no partitions alpha |- n - s, beta |- s with c^lambda_{alpha,beta} != 0 and c^mu_{alpha,beta} != 0, since a nonzero LR coefficient forces alpha to be contained in both lambda and mu. With pi := (nu_2,nu_3,...), so nu = (n-s,pi), Littlewood's identity and s_alpha * s_{n-s} = s_alpha give [s_mu](s_lambda*(s_{n-s}s_pi)) = sum c^lambda_{alpha,beta} c^mu_{alpha,gamma} g(beta,pi,gamma) = 0. The horizontal Pieri expansion s_{n-s}s_pi = s_nu + sum_{eta} s_eta (eta obtained from pi by adding a horizontal strip of length n-s, eta != nu), itself a consequence of the LR product expansion and the LR-tableau description of content-(n-s) tableaux, converts this into 0 = g(lambda,mu,nu) + sum_eta g(lambda,mu,eta); all terms are nonnegative, so g(lambda,mu,nu) = 0. Part (ii): Use the corrected map of PP3 Lemma 5.1, including the sentinel l+1 and the block-rank term ind_I; the older Bounds display omits these. Put d_j := rho_{i_j} - s(l-i_j+ind_I(i_j)), so phi(theta) = theta - d. On each block with constant i_j this is a horizontal translation; the defining gap inequalities give weak decrease at block boundaries for the near-rho partitions used below. The inverse translation theta -> theta + d is used only for the nonzero LR terms of the compared sums, not asserted to map every partition to a partition. For the nonzero terms of the sum above one has alpha contained in rho and rho contained in alpha + (s^l), so phi(alpha) is defined; the explicit row inequality phi(alpha)_{i_j} - phi(lambda)_{i_j+1} >= 0 shows that phi preserves the connected components of the skew shapes, hence c^lambda_{alpha,beta} = c^{phi(lambda)}_{phi(alpha),beta} and the same for mu, and dually for the inverse. For each tail degree q with 0 <= q <= s, a nonzero term has alpha subset rho and |rho|-|alpha| <= q, hence rho subset alpha+(s^l). The translations preserve the LR tableaux within every connected skew component. Conversely, a nonzero reduced term has theta subset phi(lambda) cap phi(mu) = phi(rho) and |phi(rho)|-|theta| <= q <= s, so the inverse translations preserve the same components and recover precisely the original terms. This gives the equality of the two coefficient sums (PP3 identity (6)) for every q <= s. Expanding s_nu with the Jacobi-Trudi identity as a finite signed combination of products s_{n-s+j}s_eta of complete functions and Schur functions, applying identity (6) term by term, and collecting s_{r-s+j}s_eta back into s_{(r-s,pi)} = s_{phi(nu)} yields g(lambda,mu,nu) = g(phi(lambda),phi(mu),phi(nu)). For the size bound, inside a block ending at k=i_j <= l each non-gap row satisfies omega_a < rho_{a+1}+s and omega_a-rho_a <= s; telescoping gives lambda_j-rho_k <= 2s(k-j)+s. Adding s(l-k+ind_I(k)), with ind_I(k) <= l-k+1, bounds each reduced part by 2sl. In the sentinel block the same telescoping to rho_{l+1}=0 gives that bound. Thus r <= 2sl^2. For s=0 the premise forces lambda=mu and nu=(n); the map reduces all three to the empty partition, with coefficient 1.",
+        "axiom_use": "None intended: the argument uses Littlewood's identity, LR/Pieri expansions of symmetric functions, the Jacobi-Trudi identity and finite tableau combinatorics. The authoring stage must confirm that no cited supplier silently assumes the Axiom of Choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-row-gap-reduction-and-conditional-k-stability",
+        "kind": "theorem",
+        "title": "Row-gap reduction and conditional k-stability of Kronecker coefficients",
+        "deps": [
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "lem-kronecker-reduction-lemma",
+          "def-first-row-padding-of-a-partition",
+          "def-partition-young-diagram-and-conjugate-partition",
+          "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric"
+        ],
+        "dependency_level": 4,
+        "statement": "Fix lambda,mu,nu |- n and k >= 1. Write (t^k) for the partition (t,...,t) with k parts and (tk) for the one-part partition of size t k, and read every missing part of lambda, mu and nu as zero. Part (i): If lambda_1 <= mu_1 <= nu_1, put s := n - nu_1, and suppose min{lambda_k,mu_k} >= max{lambda_{k+1},mu_{k+1}} + s. Then for every t >= 0, g(lambda + (t^k), mu + (t^k), nu + (tk)) = g(lambda,mu,nu). (The added partitions all have size t k, so all three Kronecker arguments are partitions of n + t k; for k = 1 this is nu + (t) = (nu_2,nu_3,...)[n+t] in first-row-padding notation.) Part (ii): For arbitrary lambda,mu,nu |- n and k >= 1 the sequence G_k(t) := g(lambda + (t^k), mu + (t^k), nu + (tk)), t >= 0, is eventually constant: it is constant for all t at which min{lambda_k,mu_k} + t >= max{lambda_{k+1},mu_{k+1}} + (n - nu_1) and the first parts are ordered lambda_1 + t <= mu_1 + t <= nu_1 + t k (after exchanging lambda and mu, which leaves G_k unchanged; for k = 1 one may also relabel all three arguments, by S_3 symmetry, so that nu_1 is the largest first part). No monotonicity of G_k is asserted here.",
+        "strategy": "Part (i): Choose a common row bound l at least k and the lengths of all original and shifted partitions, padding absent parts by zero. Apply the Reduction Lemma to the triple (lambda,mu,nu) with parameter s = n - nu_1 and to the shifted triple (alpha,beta,gamma) := (lambda + (t^k), mu + (t^k), nu + (tk)) with parameter (n + tk) - gamma_1 = n - nu_1 = s. Because alpha_i - beta_i = lambda_i - mu_i for all i, the two triples lie in the same case of the Reduction Lemma: condition (*) gives rho_k = min{lambda_k,mu_k} >= max{lambda_{k+1},mu_{k+1}} + s = omega_{k+1} + s, so k lies in the index set I of the original triple and also in that of the shifted triple, and the two index sets agree (the defining inequalities coincide for i < k and for i > k, and both contain k); note also that rho' = alpha cap beta = rho + (t^k) and omega' = omega + (t^k). The common index set gives the same i_j and ind_I(i_j). If j <= k then i_j <= k because k is in I, so both the j-th part and rho_{i_j} increase by t and cancel in the corrected reduction formula; if j > k neither changes. Thus the two triple-dependent reduction maps have phi_shifted(alpha) = phi_original(lambda) and phi_shifted(beta) = phi_original(mu), while phi(gamma) = (r - s, nu_2, nu_3, ...) = phi(nu) because gamma and nu share all parts from the second on. The Reduction Lemma gives g(alpha,beta,gamma) = g(phi(alpha),phi(beta),phi(gamma)) = g(phi(lambda),phi(mu),phi(nu)) = g(lambda,mu,nu). Part (ii): Exchange lambda and mu if necessary so that lambda_1 <= mu_1; the family is unchanged. Choose t large enough that mu_1 <= nu_1 + t(k-1) (automatic when k >= 2 for t >= (mu_1 - nu_1)/(k-1), and for k = 1 relabel all three arguments using S_3 symmetry of g so that nu_1 = max{lambda_1,mu_1,nu_1}) and min{lambda_k,mu_k} + t >= max{lambda_{k+1},mu_{k+1}} + (n - nu_1). For such t the shifted triple satisfies the hypotheses of part (i) with its own parameter (n + tk) - (nu_1 + tk) = n - nu_1, so part (i) applied to the shifted triple with shifts (u^k, u^k, uk) gives G_k(t+u) = G_k(t) for every u >= 0. Hence G_k is eventually constant at the value G_k(t) for all larger t. No monotonicity is used or claimed.",
+        "axiom_use": "None intended: the proof is a direct application of the local reduction lemma and finite ordering of the shifted triple. Re-verify supplier AC status at authoring.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-no-general-positive-combinatorial-rule-for-kronecker-coefficients-is-known",
+        "kind": "remark",
+        "title": "No general positive combinatorial rule for Kronecker coefficients is known",
+        "deps": [
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "def-internal-product-on-symmetric-functions",
+          "lem-kronecker-reduction-lemma",
+          "thm-row-gap-reduction-and-conditional-k-stability"
+        ],
+        "dependency_level": 5,
+        "statement": "The character formula, the reduction lemma and k-stability of this page do not supply a general positive combinatorial rule: it remains a well-known open problem to give a combinatorial interpretation of, or a positive formula for, all Kronecker coefficients g(lambda,mu,nu). In particular this page claims no such rule, no polynomial-time algorithm and no general positivity criterion. Provenance: literature-derived statement, no proof section.",
+        "strategy": "No proof section. Quote the exact source boundary (Pak-Panova, Bounds, Introduction and Section 7.3: the coefficients themselves are integer and nonnegative by definition but lack a combinatorial interpretation or any meaningful positive formula) and keep the page's claim boundary explicit.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Igor Pak and Greta Panova, On the complexity of computing Kronecker coefficients, arXiv:1404.0653v3 (2015); \u00a72.3 Littlewood's identity (1), \u00a75.1 the Reduction Lemma 5.1 with its complete proof, \u00a78.9 Corollary 8.3",
+              "url": "https://arxiv.org/pdf/1404.0653"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1583,
+    "id": "kronecker-coefficients-and-internal-products-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Kronecker Coefficients and Internal Products \u2014 Examples",
+    "companion": "kronecker-coefficients-and-internal-products",
+    "requires": [
+      "kronecker-coefficients-and-internal-products"
+    ],
+    "items": [
+      {
+        "id": "ex-kronecker-products-for-s3",
+        "kind": "example",
+        "title": "The complete internal product table for S_3",
+        "deps": [
+          "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "def-frobenius-characteristic-map",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "thm-youngs-rule-for-permutation-modules",
+          "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "def-sign-representation-and-restriction-of-a-representation",
+          "cor-sign-from-disjoint-cycle-structure",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 3,
+        "statement": "For S_3 the three irreducibles are S^(3) (trivial), S^(2,1) (standard, dim 2) and S^(1,1,1) (sign). The character values on cycle types (1^3),(2,1),(3) are (1,1,1), (2,0,-1), (1,-1,1) respectively; consequently the complete internal product table is: S^(3) (x) X = X for every irreducible X; S^(2,1) (x) S^(2,1) = S^(3) + S^(2,1) + S^(1,1,1); S^(2,1) (x) S^(1,1,1) = S^(2,1); S^(1,1,1) (x) S^(1,1,1) = S^(3). Equivalently all Kronecker coefficients g(lambda,mu,nu) for n=3 are 0 or 1 and the table is invariant under all permutations of the three arguments.",
+        "strategy": "Compute the character table from the Frobenius dictionary: ch(chi^lambda) = s_lambda, and h_3, h_2h_1 - h_3, e_3 expand in power sums with the complete-homogeneous expansion, giving the character values displayed. Multiply the three characters pointwise and decompose the products with the three-character inner product (the previous proposition), using the class sizes 1, 3, 2 for the three cycle types of S_3. Verify each resulting coefficient against the S_3 symmetry from the corollary. All computations are finite and explicit; the S_3 character table is recomputed here rather than imported from an examples page.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (complete lecture notes); Chapter 9, Definition 9.1, Remark 9.2 and Lemma 9.3, printed pp. 31-32, for the invariant tabloid form and its restriction",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Ch. I \u00a77 (the Hall inner product, power sums and the internal/Kronecker product of symmetric functions), Example I.7.20",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-first-row-padding-before-the-partition-threshold-is-undefined",
+        "kind": "counterexample",
+        "title": "First-row padding below the threshold is undefined",
+        "deps": [
+          "def-first-row-padding-of-a-partition",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 1,
+        "statement": "For alpha = (2,1) the padded sequence alpha[n] = (n-3,2,1) is a partition exactly when n >= 5. In particular alpha[3] = (0,2,1) and alpha[4] = (1,2,1) are not partitions, so the padded family and the padded Kronecker coefficient g_n(alpha,beta,gamma) are undefined below the stated threshold; the stable family for this shape begins only at n = 5.",
+        "strategy": "By the definition of first-row padding, alpha[n] is a partition exactly when n >= |alpha| + alpha_1 = 3 + 2 = 5. For n = 3 the first entry n - 3 = 0 is not a positive part and (0,2,1) is not weakly decreasing; for n = 4 the first entry 1 is smaller than the second entry 2, so (1,2,1) is not a partition. For n = 5 the padded partition is (2,2,1).",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, FI-modules and stability for representations of symmetric groups, arXiv:1204.4533 (2014); \u00a73.2 Definition 3.2.1 and Proposition 3.4.1 for the padded family and its threshold",
+              "url": "https://arxiv.org/pdf/1204.4533"
+            },
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009); pp. 1-10, Thms 1.1-1.2, Lemma 3.1 and Thm 3.2 for first-row padding and reduced coefficients",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-row-padding-does-not-preserve-a-kronecker-coefficient-before-stability",
+        "kind": "counterexample",
+        "title": "Row padding need not preserve a Kronecker coefficient before stability",
+        "deps": [
+          "thm-row-gap-reduction-and-conditional-k-stability",
+          "def-first-row-padding-of-a-partition",
+          "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "thm-youngs-rule-for-permutation-modules",
+          "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "def-young-subgroup-tabloid-and-permutation-module",
+          "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "thm-centralizer-cardinality-from-cycle-type",
+          "def-partition-young-diagram-and-conjugate-partition"
+        ],
+        "dependency_level": 5,
+        "statement": "With lambda = mu = (2,2) and nu = (3,1) (n = 4, k = 1) one has g((2,2),(2,2),(3,1)) = 0, whereas g((2+t,2),(2+t,2),(3+t,1)) = 1 for every t >= 1. Thus adding (t^k) does not preserve the coefficient from t = 0 on: the separation hypothesis of the row-gap theorem fails at t = 0, since min{lambda_1,mu_1} = 2 < max{lambda_2,mu_2} + (n - nu_1) = 2 + 1 = 3. Eventual constancy is not immediacy.",
+        "strategy": "Compute the coefficients with characters. For t = 0: V_(2,2) (x) V_(2,2) = Sym^2 V_(2,2) + Lambda^2 V_(2,2) = (trivial + V_(2,2)) + sign, and V_(3,1) does not occur, so g((2,2),(2,2),(3,1)) = 0. For t = 1: the triple ((3,2),(3,2),(4,1)) satisfies the conditions of the row-gap theorem with k = 1 (3 <= 3 <= 4, s = n - nu_1 = 1, and min{3,3} = 3 >= max{2,2} + 1 = 3), so the theorem gives g((3+t',2),(3+t',2),(4+t',1)) = g((3,2),(3,2),(4,1)) for all t' >= 0; substituting t = t' + 1 identifies the sequence in the statement. The single value needed is g((3,2),(3,2),(4,1)) = 1: compute the character of S^(3,2) from the permutation module M^(3,2) = S^(5) + S^(4,1) + S^(3,2) (Young's rule; the character of M^(3,2) at sigma counts the 3-element unions of cycles), with chi^(4,1) = chi(M^(4,1)) - chi^(5) (the standard representation), and use the dictionary to get the S_5 character table; the inner product (1/120) sum over the seven cycle types of S_5 gives 120/120 = 1.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Igor Pak and Greta Panova, Bounds on the Kronecker coefficients, arXiv:1406.2988v2 (2014); Theorem 1.1 (k-stability), Theorem 2.2 (Manivel's inequality), \u00a74.1 Theorem 4.1 and Corollary 4.2, \u00a74.2 Reduction Lemma 4.3, Example 4.4, \u00a72.3 (definition and symmetries)",
+              "url": "https://arxiv.org/pdf/1406.2988"
+            },
+            {
+              "title": "Charlotte Chan, Representation Theory of Symmetric Groups (complete lecture notes); Chapter 9, Definition 9.1, Remark 9.2 and Lemma 9.3, printed pp. 31-32, for the invariant tabloid form and its restriction",
+              "url": "https://web.math.princeton.edu/~charchan/RepresentationTheorySymmetricGroupsNotes.pdf"
+            },
+            {
+              "title": "Peter Webb, A Course in Finite Group Representation Theory (complete author-hosted textbook, 294 pp.); \u00a73.2 character inner products, \u00a74.3 Proposition 4.3.2 for the tensor-product model of induction",
+              "url": "https://www-users.math.umn.edu/~webb/RepBook/RepBookLatex.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

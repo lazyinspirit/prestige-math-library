@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniform-dirichlet-test-for-function-series.md

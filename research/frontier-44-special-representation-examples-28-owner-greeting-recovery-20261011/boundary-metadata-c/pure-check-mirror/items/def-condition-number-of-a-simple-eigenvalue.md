@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-condition-number-of-a-simple-eigenvalue.md

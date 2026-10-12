@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-elliptic-hyperbolic-dichotomy-for-tree-automorphisms.md

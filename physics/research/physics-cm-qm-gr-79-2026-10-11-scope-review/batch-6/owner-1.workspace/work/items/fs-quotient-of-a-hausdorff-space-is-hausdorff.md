@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-quotient-of-a-hausdorff-space-is-hausdorff.md

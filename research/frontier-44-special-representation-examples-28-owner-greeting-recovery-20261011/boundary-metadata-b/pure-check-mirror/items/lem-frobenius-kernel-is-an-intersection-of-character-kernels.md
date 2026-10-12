@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-frobenius-kernel-is-an-intersection-of-character-kernels.md

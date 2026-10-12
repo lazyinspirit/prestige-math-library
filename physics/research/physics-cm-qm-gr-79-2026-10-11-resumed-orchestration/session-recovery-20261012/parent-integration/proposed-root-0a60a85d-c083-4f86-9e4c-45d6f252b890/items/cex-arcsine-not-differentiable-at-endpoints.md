@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-arcsine-not-differentiable-at-endpoints.md

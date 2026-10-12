@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-k-type-eigenvalue-recurrence-for-the-sl2-intertwiner.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sobolev-integration-by-parts-for-dual-exponents.md

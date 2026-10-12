@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-convergent-positive-continuous-unbounded-integrand.md

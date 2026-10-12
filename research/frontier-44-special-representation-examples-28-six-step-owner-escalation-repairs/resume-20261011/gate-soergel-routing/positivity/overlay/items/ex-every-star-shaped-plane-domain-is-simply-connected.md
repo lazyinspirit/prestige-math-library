@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-every-star-shaped-plane-domain-is-simply-connected.md

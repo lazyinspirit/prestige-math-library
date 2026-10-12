@@ -180,83 +180,15 @@ integral of the model density cut off at the cut time; the cut time is
 $+\infty$ for $k\le0$ by Cartan–Hadamard and $\pi/\sqrt k$ for the round
 sphere, and the saturated model volume reproduces exactly this cutoff.
 
-1.1 The radial density of the model. [F2, F3, given]
-Fix $v\in S_pM$. By [F3], for every $w\in N_0$ the radial field is
-$A(t)w=\operatorname{sn}_k(t)P_tw$, so the parallel-frame matrix of $A(t)$ is
-the scalar matrix $\bar A_v(t)=\operatorname{sn}_k(t)\cdot\mathrm{id}_{N_0}$.
-Since $\dim N_0=n-1$ by [F2], its determinant is
-$$\det\bar A_v(t)=\operatorname{sn}_k(t)^{n-1},\qquad 0<t<c_p(v),$$
-and [F2] identifies this determinant with the radial volume Jacobian,
-$\det a_v(t)=J_p(t,v)=\operatorname{sn}_k(t)^{n-1}$, in the notation of [F1].
-[F2, F3, given]
+1.1 The radial density of the model. [F2, F3, given] Fix $v\in S_pM$. By [F3], for every $w\in N_0$ the radial field is $A(t)w=\operatorname{sn}_k(t)P_tw$, so the parallel-frame matrix of $A(t)$ is the scalar matrix $\bar A_v(t)=\operatorname{sn}_k(t)\cdot\mathrm{id}_{N_0}$. Since $\dim N_0=n-1$ by [F2], its determinant is $$\det\bar A_v(t)=\operatorname{sn}_k(t)^{n-1},\qquad 0<t<c_p(v),$$ and [F2] identifies this determinant with the radial volume Jacobian, $\det a_v(t)=J_p(t,v)=\operatorname{sn}_k(t)^{n-1}$, in the notation of [F1]. [F2, F3, given]
 
-1.2 The cut time of the model in each curvature regime. [F4, F5, F6, F7, given]
-Let $v\in S_pM$. Suppose first that $k\le0$. Then $(M,g)$ is complete,
-connected, boundaryless and simply connected with constant sectional
-curvature $k\le0$, so [F5] makes $\exp_p:T_pM\to M$ a diffeomorphism, in
-particular injective. Let $t>0$ and $q:=\gamma_v(t)=\exp_p(tv)$. By [F6]
-there is $w\in T_pM$ with $\exp_p(w)=q$ and $|w|_{g_p}=d_g(p,q)$.
-Injectivity gives $w=tv$, so $d_g(p,q)=|w|_{g_p}=t$; since $t>0$ was
-arbitrary, the set $A_p(v)$ of [F4] contains every positive time, hence
-$c_p(v)=+\infty$. Suppose now that $k>0$, so that $(M,g)=S^n_{1/\sqrt k}$ by
-the hypothesis of the example; then [F7] gives $c_p(v)=\pi/\sqrt k$ for every
-unit $v$. Consequently $\min\{c_p(v),r\}=r$ when $k\le0$ and
-$\min\{c_p(v),r\}=\min\{r,\pi/\sqrt k\}$ when $k>0$, for every $r>0$.
-[F4, F5, F6, F7, given]
+1.2 The cut time of the model in each curvature regime. [F4, F5, F6, F7, given] Let $v\in S_pM$. Suppose first that $k\le0$. Then $(M,g)$ is complete, connected, boundaryless and simply connected with constant sectional curvature $k\le0$, so [F5] makes $\exp_p:T_pM\to M$ a diffeomorphism, in particular injective. Let $t>0$ and $q:=\gamma_v(t)=\exp_p(tv)$. By [F6] there is $w\in T_pM$ with $\exp_p(w)=q$ and $|w|_{g_p}=d_g(p,q)$. Injectivity gives $w=tv$, so $d_g(p,q)=|w|_{g_p}=t$; since $t>0$ was arbitrary, the set $A_p(v)$ of [F4] contains every positive time, hence $c_p(v)=+\infty$. Suppose now that $k>0$, so that $(M,g)=S^n_{1/\sqrt k}$ by the hypothesis of the example; then [F7] gives $c_p(v)=\pi/\sqrt k$ for every unit $v$. Consequently $\min\{c_p(v),r\}=r$ when $k\le0$ and $\min\{c_p(v),r\}=\min\{r,\pi/\sqrt k\}$ when $k>0$, for every $r>0$. [F4, F5, F6, F7, given]
 
-2.1 The ball volume as the model integral. [F1, F4, F8, F9, step 1.1, step 1.2, given]
-Fix the point $p$ and the radius $r>0$. By [F9] the ball $B(p,r)$ is Borel
-and $\mathbf 1_{B(p,r)}$ is a Borel function, so the polar formula [F1]
-applies to $f=\mathbf 1_{B(p,r)}$:
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_{S_pM}\int_0^{c_p(v)}\mathbf 1_{B(p,r)}(\gamma_v(t))\det a_v(t)\,dt\,d\sigma_p(v).$$
-For $0<t<c_p(v)$ the minimizing property of [F4] gives
-$d_g(p,\gamma_v(t))=t$, hence
-$\mathbf 1_{B(p,r)}(\gamma_v(t))=\mathbf 1_{\{t<r\}}$, while step 1.1 gives
-$\det a_v(t)=\operatorname{sn}_k(t)^{n-1}$. Therefore the inner integral
-equals the extended nonnegative integral
-$$\int_0^{\min\{c_p(v),r\}}\operatorname{sn}_k(t)^{n-1}\,dt,$$
-a finite real number. By step 1.2 this number depends on $v$ only through the
-case distinction: it equals $\int_0^r\operatorname{sn}_k(t)^{n-1}dt$ when
-$k\le0$ and $\int_0^{\min\{r,\pi/\sqrt k\}}\operatorname{sn}_k(t)^{n-1}dt$
-when $k>0$. Write $I(r)$ for this common value. The outer integrand of the
-polar formula is then the constant $I(r)$, and $\sigma_p$ is a finite measure
-with $\sigma_p(S_pM)=\omega_{n-1}$ by [F8], so
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\omega_{n-1}I(r).$$
-[F1, F4, F8, F9, step 1.1, step 1.2, given]
+2.1 The ball volume as the model integral. [F1, F4, F8, F9, step 1.1, step 1.2, given] Fix the point $p$ and the radius $r>0$. By [F9] the ball $B(p,r)$ is Borel and $\mathbf 1_{B(p,r)}$ is a Borel function, so the polar formula [F1] applies to $f=\mathbf 1_{B(p,r)}$: $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_{S_pM}\int_0^{c_p(v)}\mathbf 1_{B(p,r)}(\gamma_v(t))\det a_v(t)\,dt\,d\sigma_p(v).$$ For $0<t<c_p(v)$ the minimizing property of [F4] gives $d_g(p,\gamma_v(t))=t$, hence $\mathbf 1_{B(p,r)}(\gamma_v(t))=\mathbf 1_{\{t<r\}}$, while step 1.1 gives $\det a_v(t)=\operatorname{sn}_k(t)^{n-1}$. Therefore the inner integral equals the extended nonnegative integral $$\int_0^{\min\{c_p(v),r\}}\operatorname{sn}_k(t)^{n-1}\,dt,$$ a finite real number. By step 1.2 this number depends on $v$ only through the case distinction: it equals $\int_0^r\operatorname{sn}_k(t)^{n-1}dt$ when $k\le0$ and $\int_0^{\min\{r,\pi/\sqrt k\}}\operatorname{sn}_k(t)^{n-1}dt$ when $k>0$. Write $I(r)$ for this common value. The outer integrand of the polar formula is then the constant $I(r)$, and $\sigma_p$ is a finite measure with $\sigma_p(S_pM)=\omega_{n-1}$ by [F8], so $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\omega_{n-1}I(r).$$ [F1, F4, F8, F9, step 1.1, step 1.2, given]
 
-3.1 The volume is the saturated model volume. [F8, step 1.2, step 2.1, given]
-Put
-$$m:=\begin{cases}r,&k\le0,\\[2pt] \min\{r,\pi/\sqrt k\},&k>0.\end{cases}$$
-By step 2.1 the ball volume is $\omega_{n-1}I(r)$, and by step 1.2 the inner
-integral $I(r)$ is exactly $\int_0^m\operatorname{sn}_k(t)^{n-1}dt$ in both
-cases. Since $A_k(t)=\omega_{n-1}\operatorname{sn}_k(t)^{n-1}$ by [F8],
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_0^mA_k(t)\,dt=V_k(m)=V^\star_k(r),$$
-the last equality being the case distinction defining the saturated model
-volume in [F8]. Moreover $V^\star_k(r)>0$: the integrand $A_k$ is continuous
-and positive on the nondegenerate interval $(0,m)$, by the positivity of
-$\operatorname{sn}_k$ on its positive domain. The value $r=\pi/\sqrt k$ for
-$k>0$ is included, since the definition of $V^\star_k$ cuts off at that
-endpoint. [F8, step 1.2, step 2.1, given]
+3.1 The volume is the saturated model volume. [F8, step 1.2, step 2.1, given] Put $$m:=\begin{cases}r,&k\le0,\\[2pt] \min\{r,\pi/\sqrt k\},&k>0.\end{cases}$$ By step 2.1 the ball volume is $\omega_{n-1}I(r)$, and by step 1.2 the inner integral $I(r)$ is exactly $\int_0^m\operatorname{sn}_k(t)^{n-1}dt$ in both cases. Since $A_k(t)=\omega_{n-1}\operatorname{sn}_k(t)^{n-1}$ by [F8], $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=\int_0^mA_k(t)\,dt=V_k(m)=V^\star_k(r),$$ the last equality being the case distinction defining the saturated model volume in [F8]. Moreover $V^\star_k(r)>0$: the integrand $A_k$ is continuous and positive on the nondegenerate interval $(0,m)$, by the positivity of $\operatorname{sn}_k$ on its positive domain. The value $r=\pi/\sqrt k$ for $k>0$ is included, since the definition of $V^\star_k$ cuts off at that endpoint. [F8, step 1.2, step 2.1, given]
 
-4.1 Unit ratio, saturation and sharpness of the comparison. [F8, F10, F11, step 1.2, step 3.1, given]
-By step 3.1, $\operatorname{vol}_g(B(p,r))=V^\star_k(r)>0$ for every $p\in M$
-and every $r>0$, so the Bishop–Gromov ratio is $R_p(r)=1$ at every positive
-radius: it is a constant function of $r$. When $k>0$ and $r\ge\pi/\sqrt k$,
-step 1.2 makes the cutoff $m=\pi/\sqrt k$ independent of $r$, so both
-$\operatorname{vol}_g(B(p,r))$ and $V^\star_k(r)=V_k(\pi/\sqrt k)$ are
-constant there; this is the saturation clause of [F8] and of the comparison
-[F11]. Finally, by [F10] the model space satisfies
-$\operatorname{Ric}=(n-1)k\,g$, so the hypotheses of the Bishop–Gromov
-comparison [F11] hold, and its general conclusion $R_p(r)\le1$ with limit $1$
-at the origin is attained with equality at every radius: the model space is an
-equality case of the comparison, and the comparison is sharp. The cases
-$n=2$, where $A_k=2\pi\operatorname{sn}_k$, and $r$ below, equal to, or above
-$\pi/\sqrt k$ (for $k>0$) are all covered by the single cutoff $m$; the value
-$r=0$ is excluded, as in the definition of $R_p$. No choice beyond the
-inherited [A1] is used: the point, the radial direction $v$, the minimizing
-geodesic of [F6] and the sphere realization of [F7] are fixed or explicit, and
-the polar, cut-time, Jacobi, Cartan–Hadamard and Hopf–Rinow interfaces carry
-exactly $\mathrm{AC}_\omega$. [F8, F10, F11, step 1.2, step 3.1, given] ∎
+4.1 Unit ratio, saturation and sharpness of the comparison. [F8, F10, F11, step 1.2, step 3.1, given] By step 3.1, $\operatorname{vol}_g(B(p,r))=V^\star_k(r)>0$ for every $p\in M$ and every $r>0$, so the Bishop–Gromov ratio is $R_p(r)=1$ at every positive radius: it is a constant function of $r$. When $k>0$ and $r\ge\pi/\sqrt k$, step 1.2 makes the cutoff $m=\pi/\sqrt k$ independent of $r$, so both $\operatorname{vol}_g(B(p,r))$ and $V^\star_k(r)=V_k(\pi/\sqrt k)$ are constant there; this is the saturation clause of [F8] and of the comparison [F11]. Finally, by [F10] the model space satisfies $\operatorname{Ric}=(n-1)k\,g$, so the hypotheses of the Bishop–Gromov comparison [F11] hold, and its general conclusion $R_p(r)\le1$ with limit $1$ at the origin is attained with equality at every radius: the model space is an equality case of the comparison, and the comparison is sharp. The cases $n=2$, where $A_k=2\pi\operatorname{sn}_k$, and $r$ below, equal to, or above $\pi/\sqrt k$ (for $k>0$) are all covered by the single cutoff $m$; the value $r=0$ is excluded, as in the definition of $R_p$. No choice beyond the inherited [A1] is used: the point, the radial direction $v$, the minimizing geodesic of [F6] and the sphere realization of [F7] are fixed or explicit, and the polar, cut-time, Jacobi, Cartan–Hadamard and Hopf–Rinow interfaces carry exactly $\mathrm{AC}_\omega$. [F8, F10, F11, step 1.2, step 3.1, given] ∎
 
 ## Source locator
 

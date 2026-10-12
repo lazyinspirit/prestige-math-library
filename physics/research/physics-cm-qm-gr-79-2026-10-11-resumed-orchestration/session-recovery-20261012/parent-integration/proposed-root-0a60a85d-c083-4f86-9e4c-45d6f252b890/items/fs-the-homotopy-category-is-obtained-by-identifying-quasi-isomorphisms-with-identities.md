@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-homotopy-category-is-obtained-by-identifying-quasi-isomorphisms-with-identities.md

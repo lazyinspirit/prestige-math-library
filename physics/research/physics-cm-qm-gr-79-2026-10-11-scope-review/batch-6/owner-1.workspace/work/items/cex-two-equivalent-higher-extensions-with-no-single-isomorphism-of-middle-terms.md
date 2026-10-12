@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-equivalent-higher-extensions-with-no-single-isomorphism-of-middle-terms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-by-two-delta-complex-for-a-double-tower.md

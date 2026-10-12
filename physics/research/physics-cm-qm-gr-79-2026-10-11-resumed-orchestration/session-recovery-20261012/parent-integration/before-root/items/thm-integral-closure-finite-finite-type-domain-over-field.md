@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integral-closure-finite-finite-type-domain-over-field.md

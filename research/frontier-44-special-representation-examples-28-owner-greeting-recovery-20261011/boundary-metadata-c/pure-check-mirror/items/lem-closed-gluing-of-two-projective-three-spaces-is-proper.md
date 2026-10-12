@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-closed-gluing-of-two-projective-three-spaces-is-proper.md

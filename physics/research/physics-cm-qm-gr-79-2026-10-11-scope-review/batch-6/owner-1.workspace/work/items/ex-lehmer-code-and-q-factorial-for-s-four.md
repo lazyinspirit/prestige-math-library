@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lehmer-code-and-q-factorial-for-s-four.md

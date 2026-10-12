@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-paradoxical-groups-admit-no-invariant-mean.md

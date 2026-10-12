@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-interior-oscillation-controls-harmonic-gradient.md

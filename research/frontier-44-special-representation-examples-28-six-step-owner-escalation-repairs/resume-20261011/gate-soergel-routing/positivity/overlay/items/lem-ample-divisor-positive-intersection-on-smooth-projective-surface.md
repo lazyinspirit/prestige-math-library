@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ample-divisor-positive-intersection-on-smooth-projective-surface.md

@@ -48,11 +48,8 @@ for each $i$.
 
 **Proof technique:** direct.
 
+ 1.1 The four sets $B_1,B_2,B_3,B_4$ are pairwise disjoint and each has $4$ vertices, so $(B_1,B_2,B_3,B_4)$ is a $(4,4)$-blockade. [given, L1]
 
-1.1 The four sets $B_1,B_2,B_3,B_4$ are pairwise disjoint and each has $4$ vertices, so $(B_1,B_2,B_3,B_4)$ is a $(4,4)$-blockade. [given, L1]
+ 2.1 Each tooth $a_i$ is adjacent to every vertex of $B_i$ and to no vertex of $B_j$ for $j\ne i$, and the teeth $a_1,a_2,a_3,a_4$ are distinct and lie outside the blocks. Hence $((a_i,B_i):i\in[4])$ is a $(4,4)$-comb by [L1]. [step 1.1, L1]
 
-
-2.1 Each tooth $a_i$ is adjacent to every vertex of $B_i$ and to no vertex of $B_j$ for $j\ne i$, and the teeth $a_1,a_2,a_3,a_4$ are distinct and lie outside the blocks. Hence $((a_i,B_i):i\in[4])$ is a $(4,4)$-comb by [L1]. [step 1.1, L1]
-
-
-3.1 The vertex $v$ lies outside the comb, is adjacent to every vertex in $\bigcup_{i=1}^4 B_i$, and is nonadjacent to every $a_i$. Since this comb has $\ell=w=4$, the pair consisting of the comb and $v$ realizes the geometric trigger configuration occurring in [L2]. No assertion that an unspecified family has property $(*)$ is being made. [step 2.1, L2] ∎
+ 3.1 The vertex $v$ lies outside the comb, is adjacent to every vertex in $\bigcup_{i=1}^4 B_i$, and is nonadjacent to every $a_i$. Since this comb has $\ell=w=4$, the pair consisting of the comb and $v$ realizes the geometric trigger configuration occurring in [L2]. No assertion that an unspecified family has property $(*)$ is being made. [step 2.1, L2] ∎ 

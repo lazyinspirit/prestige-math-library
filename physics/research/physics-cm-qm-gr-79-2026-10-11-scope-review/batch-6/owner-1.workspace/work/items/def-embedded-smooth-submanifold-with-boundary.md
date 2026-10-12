@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-embedded-smooth-submanifold-with-boundary.md

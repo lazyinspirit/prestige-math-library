@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-skeletal-mapping-telescope-of-a-cw-pair.md

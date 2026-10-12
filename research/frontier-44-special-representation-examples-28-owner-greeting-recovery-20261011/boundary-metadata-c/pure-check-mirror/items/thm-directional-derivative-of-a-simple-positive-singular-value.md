@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-directional-derivative-of-a-simple-positive-singular-value.md

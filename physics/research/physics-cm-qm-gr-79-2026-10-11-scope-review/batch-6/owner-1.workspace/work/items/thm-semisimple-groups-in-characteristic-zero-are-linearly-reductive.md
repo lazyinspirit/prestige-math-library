@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-semisimple-groups-in-characteristic-zero-are-linearly-reductive.md

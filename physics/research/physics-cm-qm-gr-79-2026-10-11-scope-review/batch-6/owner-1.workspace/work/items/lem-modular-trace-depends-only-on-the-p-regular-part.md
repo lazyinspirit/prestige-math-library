@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-modular-trace-depends-only-on-the-p-regular-part.md

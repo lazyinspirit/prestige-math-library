@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-outgoing-source-helmholtz-and-diffraction.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-standard-inner-products-on-kn-ell-two-and-l-two.md

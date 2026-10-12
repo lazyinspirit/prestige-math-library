@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-oscillator-boundary-value-nonuniqueness.md

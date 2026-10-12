@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-symmetry-lemma-for-forcing-automorphisms.md

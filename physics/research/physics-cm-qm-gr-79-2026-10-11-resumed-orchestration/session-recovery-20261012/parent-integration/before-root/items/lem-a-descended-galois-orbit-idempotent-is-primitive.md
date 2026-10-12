@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-descended-galois-orbit-idempotent-is-primitive.md

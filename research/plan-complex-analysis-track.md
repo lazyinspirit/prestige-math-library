@@ -298,7 +298,7 @@ computes absolute placement in a future build.
 the enrichment pairs will not fit inside
 `real-analysis` (which already carries 24) and is not `topology`. Verified in
 the frozen `web/lib/library-categories.ts`: `STYLES` contains
-`foundations`, `real-analysis`, `abstract-algebra`, `linear-algebra`,
+`set-theory`, `real-analysis`, `abstract-algebra`, `linear-algebra`,
 `number-theory`, `combinatorics`, `not-proved-here` — and **there is no
 `topology` entry**, so the existing `topology` group already renders through
 `FALLBACK` (neutral). **Adding `complex-analysis` therefore requires NO change

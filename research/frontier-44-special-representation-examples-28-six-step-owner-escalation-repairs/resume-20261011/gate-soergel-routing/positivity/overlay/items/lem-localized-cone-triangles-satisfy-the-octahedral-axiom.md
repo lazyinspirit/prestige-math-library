@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-localized-cone-triangles-satisfy-the-octahedral-axiom.md

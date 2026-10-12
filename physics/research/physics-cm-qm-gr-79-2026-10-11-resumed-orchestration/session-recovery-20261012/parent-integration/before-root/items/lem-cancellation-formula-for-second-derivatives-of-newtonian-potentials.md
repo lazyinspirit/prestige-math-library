@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cancellation-formula-for-second-derivatives-of-newtonian-potentials.md

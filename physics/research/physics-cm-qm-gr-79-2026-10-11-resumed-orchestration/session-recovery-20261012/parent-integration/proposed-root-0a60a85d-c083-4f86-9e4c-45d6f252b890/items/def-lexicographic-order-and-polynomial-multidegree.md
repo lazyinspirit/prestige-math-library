@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lexicographic-order-and-polynomial-multidegree.md

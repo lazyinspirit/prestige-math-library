@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-restriction-coproduct-is-schur-skewing.md

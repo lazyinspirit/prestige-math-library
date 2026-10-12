@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-smooth-section-can-be-perturbed-transverse-to-the-zero-section.md

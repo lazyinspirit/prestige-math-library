@@ -38,7 +38,6 @@ intermediate probability is possible.
 
 **Proof technique:** direct.
 
-1.1 The displayed event is exactly the convergence event covered by [L1].
-[L1]
+1.1 The displayed event is exactly the convergence event covered by [L1]. [L1]
 
-2.1 Therefore its probability belongs to $\{0,1\}$. [step 1.1, algebra] ∎
+2.1 Therefore its probability belongs to $\{0,1\}$. [step 1.1, algebra] ∎ 

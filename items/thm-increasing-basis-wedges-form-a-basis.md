@@ -48,8 +48,7 @@ Then the family $(e_I)_{I}$ indexed by the $k$-element subsets of $\{1,\ldots,n\
 
 **Proof technique:** direct.
 
-
-1.1 If $k=0$, then [L1] gives $\Lambda^0V=F$, and the unique $0$-element subset of $\{1,\ldots,n\}$ is $\varnothing$, with $e_\varnothing:=1_F$ a basis of $F$. So only the case $k\ge1$ remains. [L1]
+ 1.1 If $k=0$, then [L1] gives $\Lambda^0V=F$, and the unique $0$-element subset of $\{1,\ldots,n\}$ is $\varnothing$, with $e_\varnothing:=1_F$ a basis of $F$. So only the case $k\ge1$ remains. [L1]
 
 1.2 Assume $k\ge1$. By [L2], every element of $V^{\otimes k}$ is a linear combination of the pure tensors over all $k$-tuples; passing to the quotient of [L1], every element of $\Lambda^kV$ is a linear combination of the wedges $e_{i_1}\wedge\cdots\wedge e_{i_k}$ over all $k$-tuples. [L1, L2]
 
@@ -63,4 +62,4 @@ Then the family $(e_I)_{I}$ indexed by the $k$-element subsets of $\{1,\ldots,n\
 
 3.1 If $k\ge1$ and $\sum_Ic_Ie_I=0$, applying $\overline\varphi_J$ of step 1.4 gives $c_J=0$ for every $J$ by step 2.2, so the increasing wedges are linearly independent in the sense of [L4]. [step 1.4, step 2.2, L4]
 
-4.1 Step 1.1 handles $k=0$, while steps 2.1 and 3.1 show that for $k\ge1$ the increasing wedges are a spanning independent set. Therefore in every case the family $(e_I)_I$ is a basis of $\Lambda^kV$. [step 1.1, step 2.1, step 3.1, L4] ∎
+4.1 Step 1.1 handles $k=0$, while steps 2.1 and 3.1 show that for $k\ge1$ the increasing wedges are a spanning independent set. Therefore in every case the family $(e_I)_I$ is a basis of $\Lambda^kV$. [step 1.1, step 2.1, step 3.1, L4] ∎ 

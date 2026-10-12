@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-kac-moody-verma-module-has-a-unique-simple-quotient.md

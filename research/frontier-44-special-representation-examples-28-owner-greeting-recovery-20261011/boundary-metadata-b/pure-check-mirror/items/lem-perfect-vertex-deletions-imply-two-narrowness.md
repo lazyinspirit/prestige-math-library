@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-perfect-vertex-deletions-imply-two-narrowness.md

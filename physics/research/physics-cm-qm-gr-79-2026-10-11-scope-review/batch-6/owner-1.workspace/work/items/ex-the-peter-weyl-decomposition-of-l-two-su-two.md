@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-peter-weyl-decomposition-of-l-two-su-two.md

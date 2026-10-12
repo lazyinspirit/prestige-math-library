@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-conjugacy-of-decomposition-and-inertia-groups.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-power-series-uniform-on-compact-subintervals.md

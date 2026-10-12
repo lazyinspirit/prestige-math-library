@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-vertex-mixed-on-a-connected-set-mixes-on-an-edge.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-vector-bundles-locally-free-sheaves-equivalence.md

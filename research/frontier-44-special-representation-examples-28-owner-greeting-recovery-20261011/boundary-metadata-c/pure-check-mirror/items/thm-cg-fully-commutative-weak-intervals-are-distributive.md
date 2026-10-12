@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-fully-commutative-weak-intervals-are-distributive.md

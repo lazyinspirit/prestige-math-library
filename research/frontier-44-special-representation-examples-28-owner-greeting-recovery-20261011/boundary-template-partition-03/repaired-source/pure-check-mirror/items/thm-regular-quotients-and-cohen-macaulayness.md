@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-regular-quotients-and-cohen-macaulayness.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-smooth-map-with-everywhere-smooth-local-inverses-is-a-local-diffeomorphism.md

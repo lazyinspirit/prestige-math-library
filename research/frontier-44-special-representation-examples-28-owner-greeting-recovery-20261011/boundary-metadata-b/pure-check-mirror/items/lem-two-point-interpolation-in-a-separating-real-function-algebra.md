@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-two-point-interpolation-in-a-separating-real-function-algebra.md

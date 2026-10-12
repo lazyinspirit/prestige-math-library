@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases.md

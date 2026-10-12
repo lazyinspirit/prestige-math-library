@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-cauchy-formula-and-power-series-on-polydiscs.md

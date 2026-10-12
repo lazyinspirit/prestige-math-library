@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-torsion-free-connection-that-is-not-metric-compatible.md

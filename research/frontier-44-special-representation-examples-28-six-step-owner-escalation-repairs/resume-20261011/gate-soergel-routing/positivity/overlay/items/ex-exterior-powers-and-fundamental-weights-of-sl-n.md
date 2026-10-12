@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-exterior-powers-and-fundamental-weights-of-sl-n.md

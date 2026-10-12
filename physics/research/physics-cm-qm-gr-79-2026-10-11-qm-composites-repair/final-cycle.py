@@ -1,0 +1,31 @@
+from pathlib import Path
+import re,yaml,json
+r=Path('physics/items');out=Path('physics/research/physics-cm-qm-gr-79-2026-10-11-qm-composites-repair')
+p=r/'lem-nrqm-composites-bounded-tensor-maps.md';s=p.read_text()
+s=s.replace(r'=\kappa\prime\prime(SS\prime u',r'=\kappa\prime(SS\prime u').replace("=\\kappa''(SS'u","=\\kappa'(SS'u")
+s=s.replace('the dense subspace $H\\odot K$, hence everywhere by uniqueness of bounded extensions, giving the first identity of (b)','the dense subspace $H\prime\prime\\odot K\prime\prime$, hence everywhere by uniqueness of bounded extensions, giving the first identity of (b)')
+s=s.replace("For $u,u'\\in H$ and $v,v'\\in K$", "For $u\\in H$, $u'\\in H'$ and $v\\in K$, $v'\\in K'$")
+p.write_text(s)
+p=r/'lem-nrqm-composites-compatible-luders-repeatability.md';s=p.read_text().replace('(d) *Repeatability.* With $\\sigma', '(d) *Repeatability.* Under the positive-probability hypothesis $\\operatorname{tr}(\\rho R_{ij})>0$ of (c), with $\\sigma');p.write_text(s)
+p=r/'lem-nrqm-composites-marker-overlap-contraction.md';s=p.read_text().replace('(a) the reduced state $\\rho:=','(a) the reduced positive trace-class weight $\\rho:=')
+s=s.replace('These are identities for the specified model state;',r'The weight satisfies $\operatorname{tr}\rho=\|\Psi\|^2=1+2\operatorname{Re}(\alpha\overline\beta\langle a,b\rangle\langle e_1,e_2\rangle)$; it is a density operator precisely when $\|\Psi\|=1$. The stated assumptions do not force this normalization. These are identities for the specified vector and its unnormalized weight;')
+s=s.replace('which is (a). [given, F1, F2, algebra]',r'which is (a). The trace-preserving partial trace [F2] gives $\operatorname{tr}\rho=\|\Psi\|^2$; expanding the tensor norm by [F1] gives the displayed normalization formula. Positivity follows from positivity of $T_{\Psi,\Psi}$ and the positive partial trace [F2], so trace one is exactly the density condition. [given, F1, F2, algebra]')
+p.write_text(s)
+p=r/'lem-nrqm-composites-permutation-sector-projections.md';s=p.read_text().replace('in particular $P_-(u\\otimes u','in particular, for $n\\ge2$, $P_-(u\\otimes u');p.write_text(s)
+p=r/'lem-nrqm-composites-continuous-measurable-kraus-instrument.md';s=p.read_text()
+for d in ['thm-tonelli-theorem-for-sigma-finite-product-spaces','thm-monotone-convergence-for-the-integral','thm-minkowski-inequality-for-integrals','cor-cauchy-schwarz-inequality-for-l-two','def-measure-null-set-and-almost-everywhere']:
+ fm=yaml.safe_load(re.split(r'^---\s*$',s,flags=re.M)[1])
+ if d not in fm['deps']:s=s.replace('deps: [','deps: ['+d+', ',1).replace('dependency_roles:\n','dependency_roles:\n  '+d+': mathematical-premise\n',1)
+a=s.index('Then:\n\n(a)');s=s[:a]+r'''Here $E:=\ell^2(H)$ is the space of sequences $z=(z_r)_{r\ge1}$ with $\sum_r\|z_r\|^2<\infty$, with inner product $\langle z,w\rangle_E:=\sum_r\langle z_r,w_r\rangle_H$. Define $L^2(X,\mu;E)$ as the vector space of strongly measurable fields $f:X\to E$ with $\int_X\|f(x)\|_E^2d\mu<\infty$, modulo equality almost everywhere; its inner product is $\langle[f],[g]\rangle:=\int_X\langle f(x),g(x)\rangle_Ed\mu$. The proof establishes that both spaces are Hilbert spaces before using adjoints or PVMs on this target.
+
+'''+s[a:]
+s=s.replace('[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]], [[lem-nrqm-composites-rank-one-operator-calculus]]','[[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[lem-nrqm-composites-rank-one-operator-calculus]]')
+s=s.replace('## Proof',r'''[F6] Monotone convergence applies to nonnegative scalar functions; scalar $L^2$ Cauchy–Schwarz and Minkowski give the integral product and sum bounds. Equality almost everywhere means equality outside a measurable null set ([[thm-monotone-convergence-for-the-integral]], [[cor-cauchy-schwarz-inequality-for-l-two]], [[thm-minkowski-inequality-for-integrals]], [[def-measure-null-set-and-almost-everywhere]]).
+
+## Proof''')
+a=s.index('1.1 [The $L^2');proof=s[a:].replace('1.1 [The $L^2','1.2 [The $L^2').replace('step 1.1','step 1.2')
+proof=proof.replace('[given, F1, F3, construct, algebra]','[step 1.1, given, F1, F3, F6, construct, algebra]',1)
+s=s[:a]+r'''1.1 [Construction and completeness of the Hilbert target] Coordinate Cauchy–Schwarz makes the inner product of $E=\ell^2(H)$ absolutely convergent and gives its squared norm $\sum_r\|z_r\|^2$. If $(z^{(n)})$ is Cauchy in this norm, each coordinate converges in the complete space $H$ to $z_r$; taking limits of finite squared sums shows $\sum_r\|z_r\|^2<\infty$ and $\|z^{(n)}-z\|_E\to0$. Thus $E$ is Hilbert. Strongly measurable $E$-valued fields have measurable norm and inner-product functions by their simple approximants; scalar Cauchy–Schwarz [F6] gives absolute integrability of the target inner product. This integral descends to the almost-everywhere quotient, is positive definite there, and has the stated norm; scalar Minkowski gives its triangle inequality. For completeness, take a Cauchy sequence of classes and a subsequence with representatives $f_k$ satisfying $\|f_{k+1}-f_k\|_2\le2^{-k}$; Countable Choice permits the countable representative selection. Set $d_k=f_{k+1}-f_k$. For $g_N:=\sum_{k\le N}\|d_k(\cdot)\|_E$, scalar Minkowski gives $\|g_N\|_2\le\sum_{k\le N}2^{-k}\le1$. Monotone convergence [F6] applied to $g_N^2$ gives $g:=\sum_k\|d_k\|_E\in L^2$ and $g<\infty$ almost everywhere. Hence $f_1+\sum_kd_k$ converges pointwise off a measurable null set in complete $E$; define its limit as zero on that set. The limit is strongly measurable: the countably many simple approximant ranges for all $f_k$ have a separable closed span, norm distances to a countable dense subset are measurable, and choosing the nearest of the first $N$ dense points gives finite-valued simple approximants converging pointwise. Scalar Minkowski and monotone convergence also give $\|f-f_k\|_2\le\sum_{j\ge k}2^{-j}\to0$, and $f\in L^2$ since $\|f\|_E\le\|f_1\|_E+g$. The original Cauchy sequence converges to the same class by the triangle inequality. Therefore the defined target is a Hilbert space; the construction uses no assumption that $\mu(X)$ is finite. [given, F1, F3, F6, choose, construct, algebra]
+
+'''+proof
+p.write_text(s)

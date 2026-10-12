@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homology-is-a-homological-functor-on-the-homotopy-category.md

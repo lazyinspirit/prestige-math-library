@@ -114,54 +114,17 @@ $n$-dimensional real vector space
 its compactness passes to subsequences of the sphere, and the limit stays on
 the sphere because the norm is distance-controlling.
 
-1.1 $\overline B_V=\{v\in V:\|v\|\le1\}$ is compact. [F2, F3]
-Since $V$ is finite-dimensional, [F3] supplies a basis $B$ with $B\approx n$
-for some $n\in\mathbb N$; the bijection $n\to B$ witnessing the equinumerosity
-is an injective list whose image is a basis of $V$, that is, an ordered basis
-of finite length $n$. The implication from clause 2 to clause 1 of [F2]
-therefore gives compactness of $\overline B_V$ in the norm metric.
+1.1 $\overline B_V=\{v\in V:\|v\|\le1\}$ is compact. [F2, F3] Since $V$ is finite-dimensional, [F3] supplies a basis $B$ with $B\approx n$ for some $n\in\mathbb N$; the bijection $n\to B$ witnessing the equinumerosity is an injective list whose image is a basis of $V$, that is, an ordered basis of finite length $n$. The implication from clause 2 to clause 1 of [F2] therefore gives compactness of $\overline B_V$ in the norm metric. [F2, F3]
 
-2.1 Let $(v_k)$ be a sequence in $S$. [F4, F5, F1, step 1.1]
-Then $\|v_k\|=1\le1$, so $(v_k)$ is a sequence in $\overline B_V$. By the first
-implication of [F4] the compact space $\overline B_V$ is countably compact, and
-by the second it is sequentially compact; hence there are a strictly increasing
-index map $k$ and a point $w\in\overline B_V$ with $v_{k_j}\to w$ in the norm
-metric of $V$. Sequential compactness of the metric space $\overline B_V$ is
-applied to the sequence $(v_k)$ read in that subspace; by [F7] the resulting
-convergence is convergence in $V$ to the same limit $w$, which lies in
-$\overline B_V$.
+2.1 Let $(v_k)$ be a sequence in $S$. [F4, F5, F1, step 1.1] Then $\|v_k\|=1\le1$, so $(v_k)$ is a sequence in $\overline B_V$. By the first implication of [F4] the compact space $\overline B_V$ is countably compact, and by the second it is sequentially compact; hence there are a strictly increasing index map $k$ and a point $w\in\overline B_V$ with $v_{k_j}\to w$ in the norm metric of $V$. Sequential compactness of the metric space $\overline B_V$ is applied to the sequence $(v_k)$ read in that subspace; by [F7] the resulting convergence is convergence in $V$ to the same limit $w$, which lies in $\overline B_V$. [F4, F5, F1, step 1.1, F7]
 
-3.1 $w\in S$. [F6, step 2.1]
-For every $j$ we have $\|v_{k_j}\|=1$, and [F6] gives
-$\bigl|\|v_{k_j}\|-\|w\|\bigr|\le\|v_{k_j}-w\|$. Since
-$v_{k_j}\to w$ in the norm metric $d(u,v)=\|u-v\|$, the right-hand side tends
-to $0$, so $\|w\|=1$ and $w\in S$; moreover $v_{k_j}\to w$ with $w\in S$ is
-convergence in the subspace $(S,d_S)$ by [F7].
+3.1 $w\in S$. [F6, step 2.1] For every $j$ we have $\|v_{k_j}\|=1$, and [F6] gives $\bigl|\|v_{k_j}\|-\|w\|\bigr|\le\|v_{k_j}-w\|$. Since $v_{k_j}\to w$ in the norm metric $d(u,v)=\|u-v\|$, the right-hand side tends to $0$, so $\|w\|=1$ and $w\in S$; moreover $v_{k_j}\to w$ with $w\in S$ is convergence in the subspace $(S,d_S)$ by [F7]. [F6, step 2.1, F7]
 
-4.1 $S$ is sequentially compact. [F5, F7, step 2.1, step 3.1]
-Steps 2.1 and 3.1 take an arbitrary sequence in $S$ to a subsequence converging
-in the norm metric to a point of $S$, which by [F7] is convergence in the
-subspace metric $d_S$; that is exactly the condition defining sequential
-compactness in [F5].
+4.1 $S$ is sequentially compact. [F5, F7, step 2.1, step 3.1] Steps 2.1 and 3.1 take an arbitrary sequence in $S$ to a subsequence converging in the norm metric to a point of $S$, which by [F7] is convergence in the subspace metric $d_S$; that is exactly the condition defining sequential compactness in [F5]. [F5, F7, step 2.1, step 3.1]
 
-5.1 The Riemannian consequence holds. [F8, F9, step 4.1]
-By [F8], $g_p$ is a positive definite symmetric bilinear form on the real
-vector space $T_pM$, and $|v|_g=\sqrt{g(v,v)}$ is the norm it induces; by [F9],
-$T_pM$ is $n$-dimensional for $n=\dim M$, hence finite-dimensional. So
-$V=T_pM$ with $\|\cdot\|=|\cdot|_g$ is a finite-dimensional real normed space
-and $S_pM$ is its unit sphere, so step 4.1 applies verbatim.
+5.1 The Riemannian consequence holds. [F8, F9, step 4.1] By [F8], $g_p$ is a positive definite symmetric bilinear form on the real vector space $T_pM$, and $|v|_g=\sqrt{g(v,v)}$ is the norm it induces; by [F9], $T_pM$ is $n$-dimensional for $n=\dim M$, hence finite-dimensional. So $V=T_pM$ with $\|\cdot\|=|\cdot|_g$ is a finite-dimensional real normed space and $S_pM$ is its unit sphere, so step 4.1 applies verbatim. [F8, F9, step 4.1]
 
-6.1 Boundary and choice audit. [F2, F4, F8, step 1.1, step 4.1, step 5.1]
-In dimension zero, $V=\{0\}$ and $S=\varnothing$: the closed unit ball is the
-singleton $\{0\}$, compact by step 1.1 with the empty ordered basis, and the
-sequential-compactness condition holds vacuously because there is no sequence
-into $S$. In dimension one, $S=\{\pm u\}$ for a unit vector $u$ and compactness
-is immediate. The empty manifold carries no point $p$, so the Riemannian
-consequence has no instance there. Finally, no choice principle is used: the
-implication of [F2] that is applied is the direction from a finite ordered
-basis to compactness of the ball, both implications of [F4] are theorems of
-ZF, and the limit computation of step 3.1 uses only the inequality of [F6].
-$\square$
+6.1 Boundary and choice audit. [F2, F4, F8, step 1.1, step 4.1, step 5.1] In dimension zero, $V=\{0\}$ and $S=\varnothing$: the closed unit ball is the singleton $\{0\}$, compact by step 1.1 with the empty ordered basis, and the sequential-compactness condition holds vacuously because there is no sequence into $S$. In dimension one, $S=\{\pm u\}$ for a unit vector $u$ and compactness is immediate. The empty manifold carries no point $p$, so the Riemannian consequence has no instance there. Finally, no choice principle is used: the implication of [F2] that is applied is the direction from a finite ordered basis to compactness of the ball, both implications of [F4] are theorems of ZF, and the limit computation of step 3.1 uses only the inequality of [F6]. [F2, F4, F8, step 1.1, step 4.1, step 5.1, F6] ∎
 
 ## Source locator
 

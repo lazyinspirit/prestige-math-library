@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conserved-energy-of-a-travelling-wave-packet.md

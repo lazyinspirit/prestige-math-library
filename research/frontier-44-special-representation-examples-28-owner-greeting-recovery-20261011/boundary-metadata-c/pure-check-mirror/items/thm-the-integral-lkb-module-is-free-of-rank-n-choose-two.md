@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-integral-lkb-module-is-free-of-rank-n-choose-two.md

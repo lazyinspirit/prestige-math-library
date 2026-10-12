@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-wide-pullbacks-compute-intersections-independently-of-representatives.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-opposite-root-spaces-bracket-to-the-killing-dual-line.md

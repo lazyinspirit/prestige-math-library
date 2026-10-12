@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-thom-stiefel-whitney-number-detection-of-unoriented-bordism.md

@@ -50,8 +50,7 @@ contractions, so the basis constant is exactly one in every nonzero case.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 For $N\ge1$, $P_N$ retains coordinates $0,\ldots,N-1$, and $P_0=0$. [given, L1, L2]
-Thus in $c_0$, [L1] (with its truncation index $N-1$) gives $P_Nx\to x$ in supremum norm. In $\ell^p$, [L2] gives $\|x-P_Nx\|_p^p=\sum_{m\ge N}|x_m|^p\to0$; for $p=1$ this is also [L1]. The coefficients are necessarily the coordinates, so the expansions are unique. [L1, L2]
+1.1 For $N\ge1$, $P_N$ retains coordinates $0,\ldots,N-1$, and $P_0=0$. [given, L1, L2] Thus in $c_0$, [L1] (with its truncation index $N-1$) gives $P_Nx\to x$ in supremum norm. In $\ell^p$, [L2] gives $\|x-P_Nx\|_p^p=\sum_{m\ge N}|x_m|^p\to0$; for $p=1$ this is also [L1]. The coefficients are necessarily the coordinates, so the expansions are unique. [L1, L2]
 
-2.1 Deleting coordinates cannot increase either the supremum norm or the [given, L3, step 1.1]
-$p$-norm, hence $\|P_N\|\le1$. In a nonzero space $P_Ne_1=e_1$ for $N\ge1$, so $\|P_N\|=1$ and [L3] gives basis constant one. [L3, coordinate calculation] ∎
+2.1 Deleting coordinates cannot increase either the supremum norm or the [given, L3, step 1.1] $p$-norm, hence $\|P_N\|\le1$. In a nonzero space $P_Ne_1=e_1$ for $N\ge1$, so $\|P_N\|=1$ and [L3] gives basis constant one. [L3] ∎
+

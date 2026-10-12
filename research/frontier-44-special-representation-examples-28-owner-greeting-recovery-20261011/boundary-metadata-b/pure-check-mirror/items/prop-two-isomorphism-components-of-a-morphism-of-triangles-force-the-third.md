@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-two-isomorphism-components-of-a-morphism-of-triangles-force-the-third.md

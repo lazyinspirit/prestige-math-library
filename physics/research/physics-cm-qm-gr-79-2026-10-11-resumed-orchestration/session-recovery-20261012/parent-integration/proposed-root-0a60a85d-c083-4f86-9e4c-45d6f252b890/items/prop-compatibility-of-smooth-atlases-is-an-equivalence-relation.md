@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compatibility-of-smooth-atlases-is-an-equivalence-relation.md

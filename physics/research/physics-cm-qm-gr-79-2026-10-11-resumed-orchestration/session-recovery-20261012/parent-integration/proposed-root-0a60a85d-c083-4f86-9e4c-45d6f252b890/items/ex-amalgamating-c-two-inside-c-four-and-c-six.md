@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-amalgamating-c-two-inside-c-four-and-c-six.md

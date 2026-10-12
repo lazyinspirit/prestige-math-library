@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-conjugate-points-and-multiplicity-are-invariant-under-affine-reparametrization.md

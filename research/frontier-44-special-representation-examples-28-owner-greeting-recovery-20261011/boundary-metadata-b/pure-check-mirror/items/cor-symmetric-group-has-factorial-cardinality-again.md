@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-symmetric-group-has-factorial-cardinality-again.md

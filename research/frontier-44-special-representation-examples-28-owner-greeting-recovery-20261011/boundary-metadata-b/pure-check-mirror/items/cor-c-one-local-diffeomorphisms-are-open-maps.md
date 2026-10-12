@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-c-one-local-diffeomorphisms-are-open-maps.md

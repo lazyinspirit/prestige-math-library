@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-category-is-tensored-exactly-when-every-covariant-hom-has-a-left-enriched-adjoint.md

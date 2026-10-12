@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hopf-lax-minimiser-satisfies-the-characteristic-euler-relation-at-differentiability-points.md

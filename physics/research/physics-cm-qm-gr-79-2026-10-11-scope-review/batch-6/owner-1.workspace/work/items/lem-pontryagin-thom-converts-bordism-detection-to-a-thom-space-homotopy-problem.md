@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pontryagin-thom-converts-bordism-detection-to-a-thom-space-homotopy-problem.md

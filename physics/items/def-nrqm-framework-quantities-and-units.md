@@ -1,0 +1,51 @@
+---
+id: def-nrqm-framework-quantities-and-units
+kind: definition
+title: "Dimensions, SI unit conventions and quantity types of the framework"
+status: draft
+origin: session
+domain: physics
+dependency_level: 4
+deps: [def-nrqm-framework-newtonian-spacetime, def-nrqm-framework-galilei-transformations]
+dependency_roles:
+  def-nrqm-framework-newtonian-spacetime: formulation-prerequisite
+  def-nrqm-framework-galilei-transformations: formulation-prerequisite
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+physical_scope: "Conventions fixing how the quantities of the framework are read with dimensions and SI reference units: the dimension group on length, duration, mass and charge, the metre, second, kilogram and coulomb, the exact defining constants of the current SI and the dimensions and mathematical types of the framework's quantities. The item fixes conventions only: it asserts no measured constant value, adopts no law and makes no claim about any system."
+sources:
+  references:
+    - title: "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25 and Table 2: the SI base and derived units, and the exact defining constants h, c and e"
+      url: "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): probability interpretation of the wave function and observable operators"
+      url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+**(a) Dimensions.** Write $\ell$, $\tau$, $\mu$, $\vartheta$ for the four independent dimension symbols of length, duration, mass and electric charge. A **dimension** is an element of $\mathbb Z^{4}$, written $\ell^{a}\tau^{b}\mu^{c}\vartheta^{d}$; products and inverses of dimensions are componentwise addition and negation, and the dimensionless dimension $\ell^{0}\tau^{0}\mu^{0}\vartheta^{0}$ is abbreviated $1$. The conventions assign to each quantity of the framework a dimension $[X]$, subject to $[XY]=[X][Y]$, $[X/Y]=[X][Y]^{-1}$ and $[dX/du]=[X][u]^{-1}$, with sums meaningful only between quantities of equal dimension, in which case the sum carries that dimension. These are consistency requirements on the conventions, not laws of nature.
+
+**(b) Reference units.** The **metre** (m), **second** (s), **kilogram** (kg) and **coulomb** (C) are the reference units of length, duration, mass and charge; a quantity of dimension $\ell^{a}\tau^{b}\mu^{c}\vartheta^{d}$ is expressed in the unit $\mathrm m^{a}\mathrm s^{b}\mathrm kg^{c}\mathrm C^{d}$. Coordinates of an inertial frame are read with the time coordinate $t$ in seconds, $[t]=\tau$, and the spatial coordinates $x_{i}$ in metres, $[x_{i}]=\ell$; slice distances of the arena are read in metres.
+
+**(c) Defining constants of the current SI.** The framework keeps $\hbar$ explicit. In the current SI the constants $h$, $c$ and $e$ are exact defining constants, with the values $h=6{,}626\,070\,15\times10^{-34}$ J s, $c=2{,}99792458\times10^{8}$ m s$^{-1}$ and $e=1{,}602\,176\,634\times10^{-19}$ C, and $\hbar:=h/(2\pi)$; the vacuum permeability $\mu_{0}$ is experimentally determined and $\varepsilon_{0}:=(\mu_{0}c^{2})^{-1}$. These are unit-convention statements of the SI, not measurements reported by this framework; $c$ enters the framework only through the separate radiation assumptions adopted on their own pages, not in the nonrelativistic spacetime of [[def-nrqm-framework-newtonian-spacetime]].
+
+**(d) Dimensions and types of the framework's quantities.** The dimension map is fixed on the following quantities.
+
+1. State quantities: a position wave function of a system with $d$ spatial dimensions and $r$ internal components is an almost-everywhere equivalence class in $L^{2}(\mathbb R^{d};\mathbb C^{r})$ with dimension $\ell^{-d/2}$, its norm $\|\psi\|$ is dimensionless, and an abstract normalized state and the density operators of the state postulate are dimensionless.
+2. Probability: the outcome probability $\mu(B)$ of the observable postulate is a dimensionless number; a position density $|\psi|^{2}$ has dimension $\ell^{-d}$; a momentum wave function normalized against $\mathrm d^{d}p$ has dimension $(\mu\ell\tau^{-1})^{-d/2}$; an amplitude for a finite outcome is a dimensionless complex number, while an amplitude read against a detector coordinate carries the square-root of the inverse of the detector measure.
+3. Frame parameters ([[def-nrqm-framework-galilei-transformations]]): $[b]=\tau$, $[a_{i}]=\ell$, $[v_{i}]=\ell\tau^{-1}$ and $[R_{ij}]=1$.
+4. Mechanical quantities: action $[\hbar]=\mu\ell^{2}\tau^{-1}$; energy and the Hamiltonian eigenvalues $\mu\ell^{2}\tau^{-2}$; momentum $\mu\ell\tau^{-1}$; position components $\ell$; angular momentum and spin $\mu\ell^{2}\tau^{-1}$; mass $\mu$; velocity of a free spinless model $\ell\tau^{-1}$; force $\mu\ell\tau^{-2}$; a real potential energy $\mu\ell^{2}\tau^{-2}$.
+5. Probability current: $j$ has dimension $\ell^{1-d}\tau^{-1}$; it is a probability flux, not a charge flux.
+6. Electric quantities of the model parameters: charge has dimension $\vartheta$; a magnetic moment has dimension $\ell^{2}\vartheta\tau^{-1}$, equivalently $\mathrm A\,\mathrm m^{2}=\mathrm J\,\mathrm T^{-1}$, and a gyromagnetic parameter $\gamma$ in the relation $\boldsymbol\mu=\gamma\mathbf S$ has dimension $\mu^{-1}\vartheta$, equivalently $\mathrm s^{-1}\mathrm T^{-1}$; these quantities appear only in the model assumptions that introduce them.
+7. Statistical quantities: a mean has the dimension of its outcome coordinate, a variance the square of it and a standard deviation it; a mean, variance or higher moment exists only when the corresponding moment of the outcome probability is finite, so a symbolic average is not a number unless that integrability is established. Angles and phases are dimensionless under the radian convention.
+8. Quantities of later extension assumptions - radiation frequencies and energies, electric dipole moments, cross sections, temperatures and entropies - are declared with their dimensions and units by the items that introduce those assumptions, under the rules fixed here; they are not part of the present list.
+
+**(e) Conventions only.** No numerical value of any model parameter is fixed by this item: no mass, charge, spin label, potential or measured constant is asserted, and natural-unit shorthand (for example setting $\hbar=1$ or $c=1$) is read as an abbreviation for the corresponding SI-dimensioned statement with the constant restored.
+
+## Remarks
+
+- The dimension rules fix bookkeeping only. They neither predict a value nor restrict which models are admissible; each later item that introduces an operation outside the product, quotient and derivative rules declares the dimensions of its outputs.
+- The framework's exact constants of (c) are conventions of the current SI: they assert nothing about the validity of the model, and the measured constants of the model (masses, charges, magnetic parameters) are qualified empirical inputs wherever they enter.

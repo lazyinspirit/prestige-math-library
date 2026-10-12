@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-graph-characterization-by-transversality-to-vertical-fibres.md

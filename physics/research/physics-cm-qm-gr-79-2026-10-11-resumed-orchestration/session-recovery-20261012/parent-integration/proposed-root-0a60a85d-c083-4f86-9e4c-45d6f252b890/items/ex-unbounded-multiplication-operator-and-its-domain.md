@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unbounded-multiplication-operator-and-its-domain.md

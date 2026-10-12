@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-conjugate-specht-sign-duality-over-fields.md

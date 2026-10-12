@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-limits-and-colimits-are-adjoint-to-the-diagonal-functor.md

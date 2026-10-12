@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-restricted-weyl-group-is-the-reflection-group-of-the-restricted-root-system.md

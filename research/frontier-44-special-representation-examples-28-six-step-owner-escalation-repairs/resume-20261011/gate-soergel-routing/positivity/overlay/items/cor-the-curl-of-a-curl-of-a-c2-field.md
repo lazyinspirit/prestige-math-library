@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-curl-of-a-curl-of-a-c2-field.md

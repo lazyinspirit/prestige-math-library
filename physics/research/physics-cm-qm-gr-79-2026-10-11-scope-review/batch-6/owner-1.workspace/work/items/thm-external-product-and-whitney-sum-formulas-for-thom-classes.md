@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-external-product-and-whitney-sum-formulas-for-thom-classes.md

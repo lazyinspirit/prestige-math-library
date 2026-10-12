@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-nonsplit-two-dimensional-representation-of-a-solvable-lie-algebra.md

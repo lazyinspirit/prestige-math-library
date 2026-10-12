@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-chain-stokes-on-an-oriented-two-simplex.md

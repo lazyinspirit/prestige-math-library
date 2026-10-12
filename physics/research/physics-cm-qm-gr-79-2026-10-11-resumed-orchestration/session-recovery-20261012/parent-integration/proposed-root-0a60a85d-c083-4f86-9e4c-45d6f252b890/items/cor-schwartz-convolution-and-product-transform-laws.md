@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-schwartz-convolution-and-product-transform-laws.md

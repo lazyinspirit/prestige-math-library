@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-abelian-scheme-is-the-neron-model-of-its-generic-fibre.md

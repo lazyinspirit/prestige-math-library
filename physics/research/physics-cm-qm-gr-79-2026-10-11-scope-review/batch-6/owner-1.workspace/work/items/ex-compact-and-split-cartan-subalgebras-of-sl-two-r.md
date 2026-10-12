@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-compact-and-split-cartan-subalgebras-of-sl-two-r.md

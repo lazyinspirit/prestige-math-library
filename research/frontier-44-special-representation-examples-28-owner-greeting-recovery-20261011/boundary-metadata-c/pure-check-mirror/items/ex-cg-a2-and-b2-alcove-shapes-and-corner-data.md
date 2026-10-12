@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-a2-and-b2-alcove-shapes-and-corner-data.md

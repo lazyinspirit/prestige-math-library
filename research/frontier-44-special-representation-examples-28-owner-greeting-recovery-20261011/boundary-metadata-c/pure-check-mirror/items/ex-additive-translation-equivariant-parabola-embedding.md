@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-additive-translation-equivariant-parabola-embedding.md

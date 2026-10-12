@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lc-scott-quotients-are-sets-and-membership-is-setlike.md

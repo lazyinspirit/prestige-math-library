@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-published-module-statement-is-the-instance-of-this-corollary.md

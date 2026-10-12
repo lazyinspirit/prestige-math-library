@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-residue-evaluates-sine-over-x-principal-value.md

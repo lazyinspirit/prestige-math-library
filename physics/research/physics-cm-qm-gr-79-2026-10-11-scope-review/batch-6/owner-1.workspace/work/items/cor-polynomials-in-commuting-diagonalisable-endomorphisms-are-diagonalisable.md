@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-polynomials-in-commuting-diagonalisable-endomorphisms-are-diagonalisable.md

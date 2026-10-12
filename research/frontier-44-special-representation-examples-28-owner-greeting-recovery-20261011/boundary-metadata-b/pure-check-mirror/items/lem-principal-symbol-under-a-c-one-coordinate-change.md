@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-principal-symbol-under-a-c-one-coordinate-change.md

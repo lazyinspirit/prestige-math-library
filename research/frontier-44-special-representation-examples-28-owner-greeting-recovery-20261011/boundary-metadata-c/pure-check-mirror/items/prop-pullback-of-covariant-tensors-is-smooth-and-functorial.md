@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-pullback-of-covariant-tensors-is-smooth-and-functorial.md

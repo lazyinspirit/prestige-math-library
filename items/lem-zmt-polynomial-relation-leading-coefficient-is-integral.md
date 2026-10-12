@@ -56,10 +56,8 @@ $R\to S$ need not be injective.
 
 1.2 Set $y=\varphi(a_{n})t\in S$, so that $\varphi(a_{n})^{n}t^{n}=y^{n}$, and for each $0\le i\le n-1$ the identity $\varphi(a_{n})^{n-1}\cdot t^{i}=\varphi(a_{n})^{n-1-i}\,y^{i}$ holds in $S$; these are the ordinary power identities for a single element. [given, algebra]
 
-2.1 Multiplying the given relation by $\varphi(a_{n})^{n-1}$ and using step 1.2 in every summand gives the identity
-$$ y^{n}+\sum_{i=0}^{n-1}\varphi\!\left(a_{i}a_{n}^{\,n-1-i}\right)y^{i}=0 $$
-in $S$: the term $\varphi(a_{n})^{n-1}\varphi(a_{i})t^{i}$ equals $\varphi(a_{i}a_{n}^{n-1-i})y^{i}$, and the term of index $n$ becomes $y^{n}$ after multiplication, with coefficient $1$. [step 1.2, algebra]
+2.1 Multiplying the given relation by $\varphi(a_{n})^{n-1}$ and using step 1.2 in every summand gives the identity $$ y^{n}+\sum_{i=0}^{n-1}\varphi\!\left(a_{i}a_{n}^{\,n-1-i}\right)y^{i}=0 $$ in $S$: the term $\varphi(a_{n})^{n-1}\varphi(a_{i})t^{i}$ equals $\varphi(a_{i}a_{n}^{n-1-i})y^{i}$, and the term of index $n$ becomes $y^{n}$ after multiplication, with coefficient $1$. [step 1.2, algebra]
 
 3.1 The displayed identity of step 2.1 is a vanishing statement for the monic polynomial $P(X)=X^{n}+\sum_{i=0}^{n-1}\varphi(c_{i})X^{i}$ with coefficients $c_{i}=a_{i}a_{n}^{\,n-1-i}\in R$: its leading coefficient is $1$, so it is monic in the sense of [L1], and $P(y)=0$. [step 2.1, algebra]
 
-4.1 Steps 1.2 and 3.1 exhibit $y=\varphi(a_{n})t$ as a root of a monic polynomial with coefficients in $R$, so $\varphi(a_{n})t$ is integral over $R$ by [L1]. Together with step 1.1 (the case $n=0$), this proves the statement for every $n\ge0$, including $a_{n}=0$ and $t=0$, where $y=0$ is integral and the identity of step 2.1 reads $0=0$. ∎ [step 1.1, step 3.1, L1, L2]
+4.1 Steps 1.2 and 3.1 exhibit $y=\varphi(a_{n})t$ as a root of a monic polynomial with coefficients in $R$, so $\varphi(a_{n})t$ is integral over $R$ by [L1]. Together with step 1.1 (the case $n=0$), this proves the statement for every $n\ge0$, including $a_{n}=0$ and $t=0$, where $y=0$ is integral and the identity of step 2.1 reads $0=0$. ∎ [step 1.1, step 3.1, L1, L2] 

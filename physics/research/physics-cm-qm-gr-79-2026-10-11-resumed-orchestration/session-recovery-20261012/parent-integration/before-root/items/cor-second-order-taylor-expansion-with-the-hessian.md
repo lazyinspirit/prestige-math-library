@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-second-order-taylor-expansion-with-the-hessian.md

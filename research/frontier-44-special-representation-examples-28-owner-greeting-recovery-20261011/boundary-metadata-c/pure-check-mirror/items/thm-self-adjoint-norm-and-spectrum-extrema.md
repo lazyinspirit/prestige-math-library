@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-adjoint-norm-and-spectrum-extrema.md

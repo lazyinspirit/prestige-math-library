@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-distributive-law-between-two-finite-closure-operator-monads.md

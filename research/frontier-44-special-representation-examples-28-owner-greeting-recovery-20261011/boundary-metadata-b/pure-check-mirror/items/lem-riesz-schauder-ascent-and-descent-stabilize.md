@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-riesz-schauder-ascent-and-descent-stabilize.md

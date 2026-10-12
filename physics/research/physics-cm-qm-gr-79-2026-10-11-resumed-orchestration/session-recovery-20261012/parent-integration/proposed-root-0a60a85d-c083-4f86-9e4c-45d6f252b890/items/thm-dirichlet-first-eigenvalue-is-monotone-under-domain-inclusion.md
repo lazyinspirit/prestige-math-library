@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dirichlet-first-eigenvalue-is-monotone-under-domain-inclusion.md

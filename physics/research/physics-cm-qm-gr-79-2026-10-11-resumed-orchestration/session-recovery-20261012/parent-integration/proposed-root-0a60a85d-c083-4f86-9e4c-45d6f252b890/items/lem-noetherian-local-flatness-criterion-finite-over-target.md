@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noetherian-local-flatness-criterion-finite-over-target.md

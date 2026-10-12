@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-terminal-e-overlap-quotient-pattern-is-e-free.md

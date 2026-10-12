@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-leading-coefficient-is-minimal-in-a-reduced-class.md

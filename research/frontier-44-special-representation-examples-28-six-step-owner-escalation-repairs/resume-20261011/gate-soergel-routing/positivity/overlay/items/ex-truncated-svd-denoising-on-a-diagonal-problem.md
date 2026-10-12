@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-truncated-svd-denoising-on-a-diagonal-problem.md

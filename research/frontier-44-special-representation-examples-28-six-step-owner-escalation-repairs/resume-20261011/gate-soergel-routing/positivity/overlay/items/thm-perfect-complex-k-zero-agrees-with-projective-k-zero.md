@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-perfect-complex-k-zero-agrees-with-projective-k-zero.md

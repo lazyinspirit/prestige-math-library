@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces.md

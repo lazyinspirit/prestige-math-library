@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-poincare-duality-with-the-orientation-local-system.md

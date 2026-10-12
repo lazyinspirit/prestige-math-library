@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-kernel-generators-for-the-weak-bgg-complex.md

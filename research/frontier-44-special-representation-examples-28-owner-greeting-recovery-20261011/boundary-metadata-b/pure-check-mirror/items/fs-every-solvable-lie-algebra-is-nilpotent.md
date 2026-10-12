@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-solvable-lie-algebra-is-nilpotent.md

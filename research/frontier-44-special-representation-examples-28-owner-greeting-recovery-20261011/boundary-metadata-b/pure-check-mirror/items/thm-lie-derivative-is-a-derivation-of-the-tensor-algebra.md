@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-lie-derivative-is-a-derivation-of-the-tensor-algebra.md

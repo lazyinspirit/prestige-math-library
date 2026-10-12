@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-split-simple-projective-hom-pairing-has-dual-bases.md

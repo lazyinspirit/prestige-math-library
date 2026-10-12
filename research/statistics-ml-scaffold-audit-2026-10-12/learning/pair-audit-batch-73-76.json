@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "batch": "ML-73–ML-76",
+  "status": "complete_with_exact_source_contracts_and_local_proof_boundaries",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "d4c4afd15cacd99f38f1c04213d0814f834a1d1bdc52e11a90e2e4f881aa4633",
+  "plan_sha256_at_checkpoint": "03478fa510f65e4d52714c0cf5d695406efd1549d2491e898118eed2390e1a01",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "plan_section_hash_method": "SHA-256 of exact raw pair chunk from ### heading through final paragraph, excluding trailing newline bytes and stopping before the next ### or ## heading.",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-06/sources.json",
+  "source_manifest_sha256": "33bb1cf20f39b8d4ab3c269eb3b8d3ca0d9f8d1e0a446c4ec972dcc27a16348b",
+  "pairs": [
+    {
+      "id": "ML-73",
+      "assessment": "audited_tabular_algorithms_with_convergence_proof_boundary",
+      "plan_section_sha256": "4f0f01e47b1be6cde9276faabdfd6160e9b8cf67bee810b493cf1c08b34894ee",
+      "findings": [
+        "Sutton–Barto Chs. 5–6 supply episodic Monte Carlo, TD(0), Sarsa, and Q-learning algorithms and the relevant exploration/importance-sampling conventions. Monte Carlo return methods are stated for episodic tasks whose episodes terminate under every selected action.",
+        "A Q-learning convergence claim needs a stationary finite discounted model, bounded rewards, infinite visitation of every state-action pair, per-pair Robbins–Monro step sizes, and the theorem’s bounded martingale-noise condition. The textbook cites external convergence proofs and does not provide the complete stochastic-approximation argument.",
+        "The book expressly leaves the exploring-starts Monte Carlo control convergence proof open; algorithm presentation must not be represented as that theorem. Ordinary importance sampling can have infinite variance; weighted estimates have different finite-sample bias."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 complete draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "The full cached author/source PDF and text were available; this pair uses only the cited ranges below. The complete source dossier records wider chapter/article coverage and gaps.",
+          "role": "episodic Monte Carlo, TD/Sarsa/Q-learning definitions, convergence citations, and source proof-gap review",
+          "pair_audited_ranges": "Monte Carlo and control/exploring-starts contract, PDF pp. 111–138 (printed pp. 91–117); TD(0), Sarsa, Q-learning, and convergence conditions/citation status, pp. 139–160 (printed pp. 119–140). The complete source text explicitly says standard tabular TD/Q convergence results are cited/sketched rather than proved; the MC control proof remains open."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-filtration-and-filtered-probability-space",
+          "status": "published",
+          "contract": "Supplies the increasing sigma-algebra sequence for adapted updates; no stochastic-approximation convergence conclusion."
+        },
+        {
+          "id": "def-adapted-and-integrable-stochastic-process",
+          "status": "published",
+          "contract": "Supplies adaptedness and integrability vocabulary for the reward/TD-noise sequence."
+        },
+        {
+          "id": "def-martingale-difference-sequence",
+          "status": "published",
+          "contract": "Requires integrable adapted increments with zero conditional mean; the local theorem must verify its conditional moment bound."
+        },
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Supplies conditional expectation as an almost-sure class; not a pointwise noise or convergence theorem."
+        },
+        {
+          "id": "thm-tower-property-of-conditional-expectation",
+          "status": "published",
+          "contract": "Allows nested conditional expectations under its integrability hypotheses."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite stationary discounted MDP; bounded reward and Bellman target; every state-action pair visited infinitely often; per-pair step-size sums diverge and squared sums converge.",
+        "An explicitly proved finite-dimensional stochastic-approximation/supermartingale result matching the conditional noise and asynchronous visitation scheme."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive Q-learning’s asynchronous update as a noisy contraction iteration and verify the chosen theorem’s conditional variance/boundedness hypotheses.",
+        "Keep Sarsa, Q-learning, MC prediction, and MC control as distinct algorithms; do not claim exploring-starts MC-control convergence from Sutton’s exercise."
+      ]
+    },
+    {
+      "id": "ML-74",
+      "assessment": "audited_PAC-MDP_bad-step_definition_and_theorem_boundaries",
+      "plan_section_sha256": "50b4a1737703a939480193e1a66bc021df13b46e710a78eac76f2ce6d2383c9c",
+      "findings": [
+        "The source defines sample complexity on a realized infinite path as the number of times V^{pi_t}(s_t)<V*(s_t)-epsilon; its high-probability polynomial bound allows bad steps to occur at any times and is not an output-only permanent-stopping guarantee.",
+        "R-MAX and Delayed Q-learning have separate admissible-heuristic theorems and sample thresholds. Suppressing logarithms with the uninformative Vmax=(1-gamma)^-1 yields leading orders S^2 A/[epsilon^3(1-gamma)^6] and S A/[epsilon^4(1-gamma)^8], respectively; these do not replace the more refined heuristic-dependent bounds.",
+        "The source explicitly flags adaptive online transition concentration as needing a martingale argument whose details it refers elsewhere. Conditional Hoeffding/Azuma suppliers are usable only after that sampling/filtration match is established."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S09",
+          "citation": "Reinforcement Learning in Finite MDPs: PAC Analysis — Alexander L. Strehl, Lihong Li, and Michael L. Littman (2009)",
+          "url": "https://jmlr.org/papers/volume10/strehl09a/strehl09a.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/strehl_li_littman_pac_mdp_2009.pdf",
+          "pdf_sha256": "c1f1008f5105e5ccd04e886f57fa78050b0c69ede907c8efa3814080cee8439b",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/strehl_li_littman_pac_mdp_2009.txt",
+          "full_text_sha256": "90f6b7adcdcad173baf198cd93e00cd77ea6a66d3bdf43687e9a7773a9de0c57",
+          "read_status": "The full cached author/source PDF and text were available; this pair uses only the cited ranges below. The complete source dossier records wider chapter/article coverage and gaps.",
+          "role": "complete finite-MDP PAC article, algorithms, escape theorem, and upper/lower proof inspection",
+          "pair_audited_ranges": "Definitions of finite MDP, admissible heuristic, pathwise bad-step count and PAC-MDP, PDF pp. 4–7 (printed pp. 2416–2419); R-MAX and Delayed Q algorithms, pp. 9–13; escape-event theorem and proofs, pp. 16–23; algorithm-specific bounds, pp. 23–27; lower-bound assumptions/proof, pp. 28–31."
+        },
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 complete draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "The full cached author/source PDF and text were available; this pair uses only the cited ranges below. The complete source dossier records wider chapter/article coverage and gaps.",
+          "role": "Sutton–Barto planning context only",
+          "pair_audited_ranges": "Chapter 8, PDF pp. 179–213 (printed pp. 159–193); not used as the PAC proof source."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "status": "published",
+          "contract": "Bounds sums of bounded martingale differences; requires the actual adaptively selected increments to be adapted, conditionally centered, and to have the stated deterministic or predictable widths."
+        },
+        {
+          "id": "thm-azuma-hoeffding-inequality",
+          "status": "published",
+          "contract": "Bounds martingale sums from bounded difference widths; does not by itself establish the PAC exploration escape event or adaptively selected transition confidence."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite state/action sets; known discount gamma in [0,1); rewards in [0,1]; admissible U with 0<=U<=Vmax<=(1-gamma)^-1; epsilon/delta and algorithm-specific sample thresholds.",
+        "A conditional reward/transition sampling model and finite-history filtration for every state-action count."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the exact pathwise bad-step count and source theorem thresholds separately for R-MAX and Delayed Q-learning.",
+        "Supply the missing adaptive concentration argument or a precisely matching existing theorem before deriving the escape-event bound; retain the source’s lower-bound policy restrictions."
+      ]
+    },
+    {
+      "id": "ML-75",
+      "assessment": "audited_exact_UCRL2_upper_lower_bounds_and_model_scope",
+      "plan_section_sha256": "e74087c90aec88d49f3071aaea8a33d1a5f5ad8baceaa0fed83aa855ac6a0d4f",
+      "findings": [
+        "The complete JMLR article gives the finite communicating MDP/diameter assumptions, UCRL2 confidence sets and extended-value-iteration algorithm, and proves its upper bound.",
+        "Theorem 2’s exact bound is 34 D S sqrt(A T log(T/delta)) with probability at least 1-delta for every initial state and T>=1. Theorem 5’s expected lower bound 0.015 sqrt(D S A T) applies only when integer S,A>=10, D>=20 log_A S, and T>=D S A.",
+        "The theorem is for average reward, not discounted return; finite diameter/communication cannot be dropped or silently extended to transient/uncommunicating models."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S10",
+          "citation": "Near-optimal Regret Bounds for Reinforcement Learning — Thomas Jaksch, Ronald Ortner, and Peter Auer (2010)",
+          "url": "https://jmlr.org/papers/volume11/jaksch10a/jaksch10a.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/jaksch_ortner_auer_ucrl2_2010.pdf",
+          "pdf_sha256": "ba0c7c37932ce45e92fb0424d67fd0f3d61b4a500d4e8b08381fb35b5684d7e3",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/jaksch_ortner_auer_ucrl2_2010.txt",
+          "full_text_sha256": "2afb1cb9c03b1f34bb9aaf5110b5fa05aab95ca848f11a91e14b17812d6741d6",
+          "read_status": "The full cached author/source PDF and text were available; this pair uses only the cited ranges below. The complete source dossier records wider chapter/article coverage and gaps.",
+          "role": "complete UCRL2 article including model conditions, algorithm, upper/lower bounds, and proofs",
+          "pair_audited_ranges": "Model and finite-diameter definitions and Theorem 2, PDF pp. 2–5 (printed pp. 1564–1567); confidence sets, UCRL2, and episode construction, pp. 7–12; regret analysis, pp. 12–21; Theorem 5 assumptions and hard-instance proof, pp. 22–27."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-time-homogeneous-markov-chain-with-transition-kernel",
+          "status": "published",
+          "contract": "Supplies time-homogeneous Markov-chain semantics for a fixed policy/kernel; its definition carries the stated Axiom of Choice premise."
+        },
+        {
+          "id": "def-martingale-difference-sequence",
+          "status": "published",
+          "contract": "Supplies adapted conditionally centered increments after the source’s reward/transition filtration is specified."
+        },
+        {
+          "id": "lem-conditional-hoeffding-bound-for-bounded-martingale-differences",
+          "status": "published",
+          "contract": "Applies only to bounded martingale differences with its precise conditional range hypotheses; the categorical transition argument is separate."
+        },
+        {
+          "id": "thm-azuma-hoeffding-inequality",
+          "status": "published",
+          "contract": "Supplies the matching bounded-increment martingale tail inequality; it does not supply the UCRL confidence-set construction."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite communicating MDP with known finite S/A and unknown model, rewards in [0,1], finite diameter D, and average-reward comparator.",
+        "Carry Choice where the consumed Markov-chain definition requires it."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the reward and categorical-L1 confidence events and verify their union-bound allocation.",
+        "Show the source’s bias-span and extended-value-iteration approximation steps and the episode/doubling sum without weakening the finite-diameter premise.",
+        "Use Theorem 5’s exact S,A,D,T restrictions for the hard-MDP lower bound."
+      ]
+    },
+    {
+      "id": "ML-76",
+      "assessment": "audited_episodic_policy_gradient_identity_and_baseline_scope",
+      "plan_section_sha256": "61dcf6d7601691d3703854b52e6f3ad8dc35cf7b80f13739f8bfd81d9038c057",
+      "findings": [
+        "Sutton–Barto displays the episodic policy-gradient theorem proof, starting with a fixed start state and undiscounted terminating episodes; the policy gradient is expressed through occupancy/action-value terms.",
+        "The REINFORCE trajectory score estimator with return-to-go is unbiased when differentiation can pass through the trajectory law and score/return terms are integrable. An integrable state-only baseline preserves the expected update because conditional expected policy score is zero.",
+        "The source gives algorithm identities, not nonlinear/deep actor–critic optimizer convergence. Continuing average-reward results require the separately stated ergodic steady-state distribution."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 complete draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "The full cached author/source PDF and text were available; this pair uses only the cited ranges below. The complete source dossier records wider chapter/article coverage and gaps.",
+          "role": "episodic policy-gradient proof, REINFORCE, baseline and actor–critic algorithms",
+          "pair_audited_ranges": "Episodic objective and theorem, PDF pp. 343–347 (printed pp. 323–327); theorem proof, pp. 347–348; REINFORCE and baseline, pp. 348–353; actor–critic algorithms, pp. 357–359. The full source dossier records the continuing-case ergodicity requirement and absence of nonlinear actor–critic convergence."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-chain-rule-for-total-derivatives",
+          "status": "published",
+          "contract": "Supplies finite-dimensional composition differentiation; it does not justify differentiating under an expectation."
+        },
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Supplies the conditional expectation used to show the action-independent baseline score term has mean zero."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Differentiable policy probabilities with common support on the relevant trajectories; terminating episodes; finite expected return and score products; a dominated-differentiation or equivalent condition.",
+        "A fixed start-state distribution/objective and a policy score defined wherever sampled actions have positive probability."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the score identity from the trajectory likelihood with explicit differentiation/interchange justification.",
+        "Verify that the baseline is measurable with respect to state/history before action sampling, then condition to prove zero score mean.",
+        "Keep the one-step bootstrapped critic target distinct from unbiased return-to-go and from optimizer convergence."
+      ]
+    }
+  ]
+}

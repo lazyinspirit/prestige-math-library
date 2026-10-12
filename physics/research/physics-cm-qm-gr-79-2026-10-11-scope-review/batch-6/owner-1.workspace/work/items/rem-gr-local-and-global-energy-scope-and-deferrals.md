@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-gr-local-and-global-energy-scope-and-deferrals.md

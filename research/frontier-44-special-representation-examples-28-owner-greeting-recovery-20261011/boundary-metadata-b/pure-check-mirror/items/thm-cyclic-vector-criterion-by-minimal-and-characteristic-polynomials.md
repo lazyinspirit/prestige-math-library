@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclic-vector-criterion-by-minimal-and-characteristic-polynomials.md

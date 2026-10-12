@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-transform-decay-of-real-hardy-space-elements.md

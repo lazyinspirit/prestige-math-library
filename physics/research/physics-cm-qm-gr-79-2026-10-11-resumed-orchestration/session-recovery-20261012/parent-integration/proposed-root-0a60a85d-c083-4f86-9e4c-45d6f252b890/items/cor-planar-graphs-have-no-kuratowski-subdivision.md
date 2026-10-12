@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-planar-graphs-have-no-kuratowski-subdivision.md

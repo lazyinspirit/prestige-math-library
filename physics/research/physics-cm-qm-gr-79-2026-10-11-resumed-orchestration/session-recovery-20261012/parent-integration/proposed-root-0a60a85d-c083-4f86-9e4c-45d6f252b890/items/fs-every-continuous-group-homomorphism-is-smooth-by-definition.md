@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-continuous-group-homomorphism-is-smooth-by-definition.md

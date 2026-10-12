@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gl-one-and-the-trivial-parabolic-boundary.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-positive-characteristic-specht-head-and-cyclotomic-crystal-labels-agree.md

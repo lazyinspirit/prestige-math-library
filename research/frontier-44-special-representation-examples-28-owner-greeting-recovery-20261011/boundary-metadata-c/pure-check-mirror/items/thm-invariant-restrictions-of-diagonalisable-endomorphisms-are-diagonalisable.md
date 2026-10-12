@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-invariant-restrictions-of-diagonalisable-endomorphisms-are-diagonalisable.md

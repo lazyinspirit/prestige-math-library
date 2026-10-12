@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dual-and-hom-transition-functions-define-smooth-bundles.md

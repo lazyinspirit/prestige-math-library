@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-circle-quotient-model-agrees-with-published-examples.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-photons-framework-radiation-sector-and-quantum-assignments.md

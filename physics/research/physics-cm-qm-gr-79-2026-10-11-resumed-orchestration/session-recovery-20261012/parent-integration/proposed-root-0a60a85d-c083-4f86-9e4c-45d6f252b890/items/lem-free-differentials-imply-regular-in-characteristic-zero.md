@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-free-differentials-imply-regular-in-characteristic-zero.md

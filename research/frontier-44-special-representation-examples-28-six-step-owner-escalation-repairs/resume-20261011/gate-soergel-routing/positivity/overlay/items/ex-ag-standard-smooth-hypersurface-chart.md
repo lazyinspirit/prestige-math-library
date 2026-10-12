@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-ag-standard-smooth-hypersurface-chart.md

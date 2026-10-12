@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hg-toolkit-exponential-projection-contraction.md

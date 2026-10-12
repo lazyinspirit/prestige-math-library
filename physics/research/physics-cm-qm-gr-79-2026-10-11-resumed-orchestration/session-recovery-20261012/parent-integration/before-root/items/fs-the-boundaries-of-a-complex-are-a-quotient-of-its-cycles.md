@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-boundaries-of-a-complex-are-a-quotient-of-its-cycles.md

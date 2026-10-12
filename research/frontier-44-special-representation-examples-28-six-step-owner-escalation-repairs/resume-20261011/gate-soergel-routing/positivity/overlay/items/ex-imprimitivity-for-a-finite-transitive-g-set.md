@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-imprimitivity-for-a-finite-transitive-g-set.md

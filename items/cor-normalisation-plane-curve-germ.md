@@ -165,9 +165,7 @@ Weierstrass polynomial $W_i$ of degree $m_i$ in the second variable
 
 4.1 The injection $\bar\sigma_i$ extends to an injective field homomorphism $K_i\to\mathbb C((t_i))$ whose image contains $\mathbb C((t_i^{m_i}))$ and has degree $[K_i:L_i]=m_i$ over it by steps 2.3 and 3.2. Since $[\mathbb C((t_i)):\mathbb C((t_i^{m_i}))]=m_i$, the image is all of $\mathbb C((t_i))$; thus $\bar\sigma_i$ induces an isomorphism $K_i\to\mathbb C((t_i))$. [step 2.3, step 3.2]
 
-5.1 By [F9] there is an isomorphism $Q(A)\to\prod_iK_i$ restricting to the componentwise quotient maps on $A$; composing with the componentwise isomorphisms $K_i\to\mathbb C((t_i))$ of step 4.1 gives an isomorphism
-$$\Psi:Q(A)\longrightarrow\prod_i\mathbb C((t_i))$$
-whose restriction to $A$ is exactly $\Phi$. [step 3.1, step 4.1, F9]
+5.1 By [F9] there is an isomorphism $Q(A)\to\prod_iK_i$ restricting to the componentwise quotient maps on $A$; composing with the componentwise isomorphisms $K_i\to\mathbb C((t_i))$ of step 4.1 gives an isomorphism $$\Psi:Q(A)\longrightarrow\prod_i\mathbb C((t_i))$$ whose restriction to $A$ is exactly $\Phi$. [step 3.1, step 4.1, F9]
 
 6.1 $\prod_i\mathbb C\{t_i\}$ is integral over $\Phi(A)$: it is a finitely generated $\Phi(A)$-module by step 3.3, so [F8] applies with $R'=\Phi(A)\ne0$. Consequently, if $b\in Q(A)$ has $\Psi(b)\in\prod_i\mathbb C\{t_i\}$, then $\Psi(b)$ satisfies a monic equation with coefficients in $\Phi(A)$, and applying $\Psi^{-1}$ exhibits $b$ as integral over $A$. [step 3.3, step 5.1, F8]
 
@@ -175,4 +173,4 @@ whose restriction to $A$ is exactly $\Phi$. [step 3.1, step 4.1, F9]
 
 7.1 By steps 6.1 and 6.2 the integral closure of $A$ in $Q(A)$ is $\Psi^{-1}\bigl(\prod_i\mathbb C\{t_i\}\bigr)$; identifying $Q(A)$ with $\prod_i\mathbb C((t_i))$ along the isomorphism $\Psi$, the normalisation of $A$ is exactly $\prod_i\mathbb C\{t_i\}$. This proves the finite, integral, birational and normalisation assertions. [step 3.1, step 3.3, step 6.1, step 6.2]
 
-8.1 Steps 3.1, 3.3, 5.1 and 7.1 give the finite birational integral embedding and the identification of the normalisation with $\prod_i\mathbb C\{t_i\}$; steps 1.2 and 2.4 give the separation of the branches and the local biholomorphism statement. ∎
+8.1 Steps 3.1, 3.3, 5.1 and 7.1 give the finite birational integral embedding and the identification of the normalisation with $\prod_i\mathbb C\{t_i\}$; steps 1.2 and 2.4 give the separation of the branches and the local biholomorphism statement. ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-weyl-length-equals-positive-root-inversion-number.md

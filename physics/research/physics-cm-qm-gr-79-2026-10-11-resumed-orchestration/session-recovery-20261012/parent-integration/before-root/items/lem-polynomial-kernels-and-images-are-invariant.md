@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polynomial-kernels-and-images-are-invariant.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-finite-product-measures-are-the-base-case-for-countable-product-constructions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-integral-of-every-exact-form-on-every-manifold-is-zero.md

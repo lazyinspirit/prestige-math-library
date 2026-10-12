@@ -1,0 +1,239 @@
+[
+  {
+    "order": 1573,
+    "id": "modular-branching-and-the-good-node-crystal",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Modular Branching and the Good-Node Crystal",
+    "companion": "modular-branching-and-the-good-node-crystal-examples",
+    "requires": [
+      "integral-specht-modules-and-modular-simple-modules",
+      "cores-quotients-and-blocks-of-symmetric-groups",
+      "type-a-hecke-specht-modules-and-cellular-bases",
+      "the-branching-rule-and-the-young-graph",
+      "jucys-murphy-elements-and-seminormal-forms",
+      "group-cohomology-as-a-derived-functor"
+    ],
+    "items": [
+      {
+        "id": "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+        "kind": "definition",
+        "title": "Residue signatures, normal, good, conormal and cogood nodes",
+        "deps": [
+          "def-p-regular-and-p-restricted-partitions",
+          "def-removable-and-addable-nodes-of-a-partition"
+        ],
+        "statement": "Let $p>0$ and let $\\mu$ be a $p$-restricted partition ([[def-p-regular-and-p-restricted-partitions]]). A node $(r,c)$ is an $i$-node if its residue $\\operatorname{res}(r,c):=c-r\\bmod p$ equals $i\\in\\mathbb Z/p$; the $i$-nodes of $\\mu$ are its addable and removable nodes of residue $i$ ([[def-removable-and-addable-nodes-of-a-partition]]). Fix $i$ and list the $i$-nodes $A_1,\\dots,A_n$ from top to bottom (increasing row index, then increasing column index). Form the word $\\sigma=(\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m=+$ if $A_m$ is addable and $\\sigma_m=-$ if $A_m$ is removable. Whenever $r<s$, $\\sigma_r=-$, $\\sigma_s=+$ and $\\sigma_{r+1}=\\dots=\\sigma_{s-1}=0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies to the left of a $+$. The resulting reduced $i$-signature has the form $+\\cdots+-\\cdots-$ with the zeros deleted: the removable nodes corresponding to its $-$ signs are the normal $i$-nodes, the topmost (first listed) of these is the good $i$-node, the addable nodes corresponding to its $+$ signs are the conormal $i$-nodes, the bottommost (last listed) of these is the cogood $i$-node. Write $\\varepsilon_i(\\mu)$ and $\\varphi_i(\\mu)$ for the numbers of normal and of conormal $i$-nodes. The residue $c-r$ is the negative of Brundan's $\\ell$-residue $r-c$, and a removable node is normal here exactly when its transposed node is normal in Brundan's sense for the transpose partition; the two conventions must never be mixed silently. At most one cogood node and at most one good node occur in each residue.",
+        "strategy": "A definition item fixing the residue, ordering, cancellation and naming conventions used by the whole page. It is the level-one, zero-charge specialization of Kleshchev's signature of a node of a multipartition (Kleshchev, *Representation Theory of Symmetric Groups and Related Hecke Algebras*, §§3.4, complete 66-page arXiv:0909.4844, printed pp. 18-19: nodes ordered so that $A_m$ is above $A_{m+1}$, residues $k_m+(b-a)$, cancellation of $-+$ pairs), together with §11.4 (printed p. 53: normal $\\leftrightarrow$ surviving $-$, conormal $\\leftrightarrow$ surviving $+$, good = top normal, cogood = bottom conormal, $\\varepsilon_i,\\varphi_i$ the counts). The residue sign is checked against Brundan, *Modular branching rules and the Mullineux map*, §2.2-2.4 (complete 34-page author manuscript, pp. 3-4): his $\\ell$-residue is $r-c$, and by his Remark 2.4(II) his normal rows of $\\lambda$ are exactly the transposed normal nodes of $\\lambda'$ in Kleshchev's convention. No choice principle is used and no module theory is invoked; the existence and uniqueness of the reduced word follow from the cancellation procedure.",
+        "dependency_level": 0
+      },
+      {
+        "id": "def-good-node-and-cogood-node-crystal-operators",
+        "kind": "definition",
+        "title": "Good-node deletion and cogood-node addition operators",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "def-p-regular-and-p-restricted-partitions"
+        ],
+        "statement": "On the set of $p$-restricted partitions ([[def-p-regular-and-p-restricted-partitions]]) define partial operators $\\tilde e_i,\\tilde f_i$ for $i\\in\\mathbb Z/p$ by: $\\tilde e_i\\mu:=\\mu\\setminus A$ if $\\varepsilon_i(\\mu)>0$, where $A$ is the good $i$-node of $\\mu$ ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]), and undefined otherwise; $\\tilde f_i\\mu:=\\mu\\cup B$ if $\\varphi_i(\\mu)>0$, where $B$ is the cogood $i$-node, and undefined otherwise. Then $\\mu=\\tilde f_i\\nu$ if and only if $\\nu=\\tilde e_i\\mu$, for all $p$-restricted $\\mu,\\nu$; in particular the two operators are mutual inverses on their domains, each $\\tilde e_i$ lowers and each $\\tilde f_i$ raises the rank by one, and at most one good and one cogood node exist per residue. No module-theoretic statement is made here.",
+        "strategy": "Pure combinatorial definition. The mutual-inverse property is the source's elementary observation that a removable node $A$ is good for $\\mu$ if and only if $A$ is cogood for $\\mu\\setminus A$ (Kleshchev survey §3.4, printed p. 19, equation (3.13)); the good/conormal counts are the lengths of the reduced $i$-signature from ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]). This item deliberately stops at the combinatorics: the identification of these operators with the crystal operators of the level-one Fock space is a theorem of the later Fock-space page, not an input here.",
+        "dependency_level": 1
+      },
+      {
+        "id": "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+        "kind": "definition",
+        "title": "Generalized Jucys-Murphy primary idempotents and the residue-summand functors $E_i$, $F_i$",
+        "deps": [
+          "def-jucys-murphy-elements-of-the-symmetric-group-algebra",
+          "def-restriction-induction-and-coinduction-for-group-modules",
+          "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "def-p-blocks-by-primitive-central-idempotents"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$ and let $L_1,\\dots,L_n\\in kS_n$ be the Jucys-Murphy elements $L_r=\\sum_{s<r}(s,r)$ ([[def-jucys-murphy-elements-of-the-symmetric-group-algebra]]). (i) *Primary idempotents.* In the commutative subalgebra $k[L_1,\\dots,L_n]$ the minimal polynomial of each $L_r$ on the regular module splits into powers of the linear factors $X-\\lambda$ with $\\lambda$ in the prime field $\\mathbb F_p$, and the commuting family admits simultaneous primary decomposition: there are pairwise orthogonal idempotents $e(\\mathbf i)\\in kS_n$, one for each $\\mathbf i=(i_1,\\dots,i_n)\\in(\\mathbb Z/p)^n$, with $\\sum_{\\mathbf i}e(\\mathbf i)=1$ and $e(\\mathbf i)M=M_{\\mathbf i}$ the simultaneous generalized $L_1,\\dots,L_n$-weight space $M_{\\mathbf i}=\\{m:(L_r-\\lambda(i_r))^Nm=0\\ \\forall r,\\ N\\gg0\\}$ for every finite-dimensional $kS_n$-module $M$. Each $e(\\mathbf i)$ commutes with $S_{n-1}$ and is invariant under the antipode $g\\mapsto g^{-1}$. (ii) *Block idempotents.* For $\\alpha\\in(\\mathbb Z/p)^n$ the sum $e_\\alpha=\\sum_{\\mathbf i\\sim\\alpha}e(\\mathbf i)$ over all sequences with content $\\alpha$ ([[def-p-blocks-by-primitive-central-idempotents]]) is the primitive central idempotent of the block of content $\\alpha$, and every block idempotent arises this way. (iii) *Residue-summand functors.* For a finite-dimensional $kS_n$-module $M$, $i\\in\\mathbb Z/p$ and $\\alpha\\in(\\mathbb Z/p)^{n-1}$ put $E_iM:=\\sum_{\\alpha}e_{\\alpha,\\alpha_i}M$, where $e_{\\alpha,\\alpha_i}=\\sum_{\\mathbf j\\sim\\alpha,\\ \\mathbf j\\in(\\mathbb Z/p)^{n-1}}e(\\mathbf j,i)\\in kS_n$ (concatenation of sequences). Each $E_iM$ is a $kS_{n-1}$-submodule of the restriction (the projectors commute with $S_{n-1}$) and $\\operatorname{Res}^{S_n}_{S_{n-1}}M=\\bigoplus_{i\\in\\mathbb Z/p}E_iM$. For a finite-dimensional $kS_d$-module $M$ of content $\\alpha\\in(\\mathbb Z/p)^d$ put $F_iM:=kS_{d+1}e_{\\alpha,\\alpha_i}\\otimes_{kS_d}M$, where now $e_{\\alpha,\\alpha_i}\\in kS_{d+1}$; then $\\operatorname{Ind}^{S_{d+1}}_{S_d}M=\\bigoplus_i F_iM$. The endofunctors $E_i$ and $F_i$ are exact and additive, preserve finite-dimensionality, and commute with contragredient duality because the projectors are invariant under the antipode. All statements are valid at $p=2$.",
+        "strategy": "A definition item with its construction proof. Form the finite-dimensional commutative algebra $B=k[L_1,\\dots,L_n]\\subseteq kS_n$. Since $k$ has characteristic $p$, every eigenvalue of every $L_r$ on the regular module lies in the prime field $\\mathbb F_p$ (Kleshchev survey, Lemma 2.4, printed p. 8), so each minimal polynomial factors into powers of $X-a$, $a\\in\\mathbb F_p$; iterated Bézout/Chinese-remainder projection for the commuting generators ([[thm-chinese-remainder-theorem-for-comaximal-ideals]]) produces the orthogonal idempotents $e(\\mathbf i)$ in $B$ with sum $1$, and their images are exactly the simultaneous generalized eigenspaces because a product of polynomials in the several $L_r$ is an algebra element acting by the correct projector on every module. Functoriality in $M$ and the $S_{n-1}$-stability hold because each $L_r$ commutes with $S_{r-1}$ and each $e_r$ is a polynomial in $L_r$. The block identity (ii) is Kleshchev survey §2.9, equation (2.41), p. 11; the functors (iii) are the level-one specializations of (7.16)-(7.17) and Lemma 7.1 of the same source (printed pp. 30-31), and exactness follows since multiplication by an idempotent is a direct-summand projection and $kS_{n+1}e$ is a direct summand of the free module $kS_{n+1}$. Sources: Kleshchev survey §§2.3-2.4, (2.6)-(2.8), §2.9 (2.41), §7.4 (7.16)-(7.17), Lemma 7.1 (printed pp. 8-11, 30-31). No algebraic closedness, splitting, or choice hypothesis is used. The item replaces nothing: it supplies the modular JM primary decomposition that the complex seminormal items of the Hecke/JM page cannot supply.",
+        "dependency_level": 0
+      },
+      {
+        "id": "prop-schur-functor-compares-first-level-branching-with-hecke-restriction",
+        "kind": "proposition",
+        "title": "The Schur functor compares first-level branching with Hecke restriction",
+        "deps": [
+          "def-type-a-q-schur-algebra-and-weyl-modules",
+          "def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras",
+          "thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules",
+          "def-quantum-characteristic-of-an-invertible-hecke-parameter",
+          "prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one"
+        ],
+        "statement": "Let $F$ be a field, $q\\in F^\\times$, $\\ell$ the quantum characteristic of $q$ ([[def-quantum-characteristic-of-an-invertible-hecke-parameter]]) and $n\\ge r$ as in the source. Let $S(n,r)$ be the type-A q-Schur algebra with the idempotent $e$ of the weight $(1^r)$, so that $eS(n,r)e\\cong H(r)$, and let $f_{n,r}:S(n,r)\\text{-mod}\\to H(r)\\text{-mod}$, $V\\mapsto eV$, be the exact Schur functor with left adjoint $h_{n,r}$ ([[def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras]]). Let $L_n(\\lambda)$ be the irreducible $S(n,r)$-module for an $\\ell$-restricted $\\lambda\\vdash r$, and $L_n(\\lambda)^1$ its first level. Then (i) $f_{n-1,r-1}\\bigl(L_n(\\lambda)^1\\bigr)=f_{n,r}\\bigl(L_n(\\lambda)\\bigr)\\bigl\\downarrow_{H(r-1)}$ as $H(r-1)$-modules, naturally; (ii) for $S(n,r)$-modules $W,V$ with $W^{(e)}=W$ and $V_{(e)}=0$ one has $\\operatorname{Hom}_{S(n,r)}(W,V)\\cong\\operatorname{Hom}_{H(r)}(fW,fV)$, so the functor detects and preserves the relevant Hom spaces and (being exact) transfers composition multiplicities of first-level modules; (iii) if $\\lambda$ is $\\ell$-restricted then the socle of $L_n(\\lambda)^1$ restricted to the Levi subalgebra $U(n-1)$ consists of $\\ell$-restricted labels; at $q=1$ (so $\\ell=p$ in characteristic $p$; characteristic zero gives $\\ell=\\infty$) the specialization $H(r)\\to kS_r$ of ([[prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one]]) makes (i)-(iii) statements about $kS_r$-modules and the simple $kS_{r-1}$-modules of ([[thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules]]).",
+        "strategy": "Complete argument, Brundan 1998 §5.5-5.7 (complete 34-page author manuscript, pp. 30-32) and Kleshchev I §2.12(v), whose citation is replaced by this proof-bearing comparison. (i) Take the permitted stable rank $n=r$ and write the $(1^r)$-weight idempotent of $S(n,r)$; by §3.22 of the source the weight belongs to the level-1 summand, and deleting the last (level) coordinate of the weight identifies it with the $(1^{r-1})$-weight of $S(n-1,r-1)$, while the generators $T_1,\\dots,T_{r-2}$ act identically before and after the deletion. Hence both sides are equal as explicit simultaneous weight spaces, naturally in $V$; this uses neither semisimplicity nor an identification of cellular and crystal labels. (ii) Is Brundan's Lemma 5.6(i)-(ii), proved by the adjunction $h\\dashv f$ and the submodule $V_{(e)}$; (iii) is Lemma 5.7, whose proof uses the good-node description of the socle and shows that $i\\in R^{good}(\\lambda)$ implies $\\lambda(i)$ is $\\ell$-restricted. Composition multiplicities: apply the exact functor $f$ to a composition series of the first-level module; a surviving restricted simple maps to a Hecke simple, a killed simple contributes nothing, and by (ii) the multiplicity of a selected surviving simple is preserved. The $q=1$ specialization is the Hecke/group identification of the batch-20 item. This is the exact replacement for Kleshchev I §2.12(v) as recorded by the SYMR-9 evidence report; Step 3 must keep the weight-idempotent computation explicit.",
+        "dependency_level": 6
+      },
+      {
+        "id": "thm-kleshchev-first-level-branching-multiplicity",
+        "kind": "theorem",
+        "title": "Kleshchev's first-level multiplicity formula for $D^\\lambda$ restricted to $S_{n-1}$",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "prop-schur-functor-compares-first-level-branching-with-hecke-restriction",
+          "def-p-regular-and-p-restricted-partitions",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "def-restriction-induction-and-coinduction-for-group-modules"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$ (every field is splitting for symmetric groups, so no algebraic closedness is needed) and let $\\lambda$ be a $p$-regular partition of $n$ ([[def-p-regular-and-p-restricted-partitions]]), so that $D^\\lambda$ is the simple head of $S^\\lambda$ ([[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]]). Let $A=(j,\\lambda_j)$ be a removable node of $\\lambda$ whose removal $\\lambda(j)$ is again $p$-regular, and call $A$ normal for $\\lambda$ when the transposed node $(\\lambda_j,j)$ of the $p$-restricted partition $\\lambda'$ is a normal node in the sense of ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]) (this is Kleshchev's normality; it is computed in the reduced signature of the correct residue class of $\\lambda'$). Then\n$$[\\,D^\\lambda{\\downarrow}_{S_{n-1}}:D^{\\lambda(j)}\\,]=0$$\nif $A$ is not normal, and\n$$[\\,D^\\lambda{\\downarrow}_{S_{n-1}}:D^{\\lambda(j)}\\,]=1+\\#\\{B:\\ B\\ \\text{is a normal removable node of }\\lambda\\text{ strictly above }A\\text{ with }\\operatorname{res}(B)=\\operatorname{res}(A)\\}$$\nif $A$ is normal. Here $\\operatorname{res}$ is the residue $c-r\\bmod p$ and 'above' means strictly smaller row index. Equivalently, the multiplicity is the first-level multiplicity $\\gamma(A)$ of Kleshchev 1997, so it is the number of normal nodes of $\\lambda$ weakly above $A$ in $A$'s residue class, and $A$ is normal precisely when this number is nonzero.",
+        "strategy": "Full primary route, Kleshchev, *On decomposition numbers and branching coefficients for symmetric and special linear groups*, Proc. LMS 75 (1997) 497-558, complete 66-page author manuscript (author PostScript, fetched and hash-checked): §1 formulates the main results (Theorem 1.4 is the statement above; Theorem 1.10 gives $[S^\\lambda:D^{\\lambda(i,j)}]=Q_{i,j}(\\lambda)$ for the quasi-latticed count $Q$), §§2-6 (Part I) develop the combinatorial theory of essential and compensated subsets and normality (Definitions 1.1-1.6, Lemmas 2.1-2.4, Lemmas 3.2-3.6, Corollary 5.8 which is the recurrence satisfied by the first-level count), §§7-10 (Part II) prove the representation-theoretic input: the first level $L(\\lambda)^1$ over the algebraic group $A_l(K)$ (Definition 7.2), the dimension and three bases of the weight space $L(\\lambda)_{\\lambda-\\alpha}$ (Theorem 8.6, Theorems 8.8 and 8.9, Corollary 8.10), and the first-level composition multiplicities $c_i=[L(\\lambda)^1|_{A_{l-1}(K)}:L(\\lambda-\\alpha(i,l))]$ with $c_i=\\gamma(i,l)$ via the recurrence of Corollary 5.8(ii) (Definitions 9.1, Lemma 9.2, Theorem 9.3, Corollary 9.4). §11 transfers to the symmetric group: Proposition 11.1 is James' identification of Specht decomposition numbers with the Weyl-module ones, Proposition 11.2 (Kleshchev I §2.12(v)) identifies $[D^\\lambda{\\downarrow}_{S_{n-1}}:D^{\\lambda(j)}]$ with the corresponding $A_{l-1}(K)$-multiplicity, and Proposition 11.3 is Klyachko's Young-module/weight-multiplicity identity; pp. 64-65 deduce Theorem 1.4 from Theorem 9.3 and Proposition 11.2 using the index identities $\\lambda_k-\\lambda_j+j-k+1=B_{w_n(\\lambda)}(\\lambda_j,\\lambda_k)$ and $\\lambda_k-\\lambda_j+j-k=C_{w_n(\\lambda)}(\\lambda_j,\\lambda_k)$. In this page's graph the Kleshchev I §2.12(v) citation is replaced by the proof-bearing comparison [[prop-schur-functor-compares-first-level-branching-with-hecke-restriction]] (Brundan 1998 §5.5-5.7), exactly as the SYMR-9 evidence report requires; the worked examples of the same source (p. 5: $\\lambda=(5,3,2)$, $p=3$, multiplicities $1,2,0$ for the removable nodes $(1,5),(2,3),(3,2)$) are the calibration used by the B page. No Fock-space or Ariki input is used, so the route does not depend on the later crystal pages. Step 3 owns the full authoring of the Part I/Part II basis theorems; nothing here is a citation-sized shortcut.",
+        "dependency_level": 7
+      },
+      {
+        "id": "thm-normal-node-composition-multiplicities-under-residue-restriction",
+        "kind": "theorem",
+        "title": "Normal-node composition multiplicities under residue restriction",
+        "deps": [
+          "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "thm-kleshchev-first-level-branching-multiplicity",
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$, $\\mu$ a $p$-restricted partition of $d$ and $A$ a removable $i$-node of $\\mu$ such that $\\nu=\\mu\\setminus A$ is again $p$-restricted; let $D(\\mu)$ be the simple $kS_d$-module labelled by $\\mu$ in the dual-Specht (cellular) convention, so that $D(\\mu)\\cong D^{\\mu'}\\otimes\\operatorname{sgn}$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]), and let $E_i$ be the residue-summand functor of ([[def-generalized-jm-primary-idempotents-and-residue-summand-functors]]). Then\n$$[\\,E_iD(\\mu):D(\\nu)\\,]=0$$\nif $A$ is not a normal $i$-node of $\\mu$, and\n$$[\\,E_iD(\\mu):D(\\nu)\\,]=\\#\\{B:\\ B\\ \\text{normal }i\\text{-node of }\\mu\\text{ weakly below }A\\}$$\n(counting $A$ itself) if $A$ is normal. The corresponding Specht-to-restriction Hom criterion (Brundan 1998 Theorem 2.5, equivalently Kleshchev II Theorem 0.4) is a distinct statement and is not asserted here.",
+        "strategy": "Transfer the p-regular theorem [[thm-kleshchev-first-level-branching-multiplicity]] through the transpose/sign duality $D(\\mu)\\cong D^{\\mu'}\\otimes\\operatorname{sgn}$ of the published dictionary item: restriction multiplicities are unchanged by the sign twist, the transpose exchanges rows and columns so 'strictly above $A$' becomes 'weakly below $A$', and residues negate, $c-r\\mapsto r-c$; at $p=2$ the sign is trivial but neither the transpose nor the order reversal may be dropped. The residue summand $E_i$ is the projection onto the summand of $\\operatorname{Res}D(\\mu)$ whose JM content ends in $i$; since the composition factor $D(\\nu)$ differs from $\\mu$ by the node $A$ of residue $i$, it lies in that summand and the projection does not change its multiplicity. This is Kleshchev's Theorem 11.6(ii) (Kleshchev survey, printed pp. 53-54, attributed there to Kleshchev 1995, 1997) and it is the exact form used by the residue functors of this page. The count direction 'above $\\to$ below' and the residue negation were verified against the source's worked example $p=3$, $\\lambda=(5,3,2)$ with multiplicities $1,2,0$ (Kleshchev 1997 p. 5), whose transpose $\\mu=(3,3,2,1,1)$ gives the normal $2$-nodes $(3,2),(5,1)$ and the counts $2$ and $1$.",
+        "dependency_level": 8
+      },
+      {
+        "id": "lem-finite-group-induction-is-coinduction-and-thus-biadjoint",
+        "kind": "lemma",
+        "title": "Finite-group induction is coinduction, hence biadjoint to restriction",
+        "deps": [
+          "def-restriction-induction-and-coinduction-for-group-modules",
+          "lem-the-group-ring-is-free-over-a-subgroup-ring",
+          "thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction"
+        ],
+        "statement": "Let $H\\le G$ be finite groups and $k$ any field. For every $kH$-module $M$ the map\n$$\\Phi_M:\\ \\operatorname{Ind}_H^G M=kG\\otimes_{kH}M\\longrightarrow\\operatorname{Coind}_H^G M=\\operatorname{Hom}_{kH}(kG,M),\\qquad \\Phi_M(g\\otimes m)(x)=\\begin{cases}(xg)m,&xg\\in H,\\\\ 0,&xg\\notin H,\\end{cases}$$\nis a natural isomorphism of $kG$-modules ([[def-restriction-induction-and-coinduction-for-group-modules]]). Consequently $\\operatorname{Ind}_H^G\\cong\\operatorname{Coind}_H^G$ naturally, so induction is both a left and a right adjoint of restriction ([[thm-induction-is-left-adjoint-and-coinduction-right-adjoint-to-restriction]]) and is exact. No hypothesis on the characteristic of $k$, on splitting fields, or on the prime $2$ is needed.",
+        "strategy": "Define $\\Phi_M$ as displayed. It is $kH$-linear in $x$: $(x h)g=hg$... precisely, $\\Phi_M(g\\otimes hm)(x)=(xg)(hm)=((xg)h)m=\\Phi_M(g\\otimes m)(xh)$ for $h\\in H$, so it respects the balancing relation; and $\\Phi_M(g_0g\\otimes m)(x)=(xg_0g)m=\\Phi_M(g\\otimes m)(xg_0)$, so it is a $kG$-map. Fix a left-coset transversal $R$ of $H$ in $G$ and send a coinduced map $\\varphi$ to $\\sum_{r\\in R}r^{-1}\\otimes\\varphi(r)$; the two constructions are inverse because every $x\\in G$ lies in exactly one double coset $H r$, so each summand of the inverse is supported on a single coset and the finiteness of $G/H$ makes the sums finite. Combining with the two published adjunctions gives that $\\operatorname{Ind}$ is both left and right adjoint to $\\operatorname{Res}$; exactness follows from $\\operatorname{Ind}=\\operatorname{Coind}$ together with the right-exactness of induction, or alternatively from the freeness of $kG$ over $kH$ ([[lem-the-group-ring-is-free-over-a-subgroup-ring]]). This is the exact finite-group relative Frobenius isomorphism used for the modular biadjunction of the branching page; the argument uses the fixed transversal $R$ and is choice-free in the finite setting.",
+        "dependency_level": 0
+      },
+      {
+        "id": "thm-conormal-node-composition-multiplicities-under-residue-induction",
+        "kind": "theorem",
+        "title": "Conormal-node composition multiplicities under residue induction",
+        "deps": [
+          "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "thm-normal-node-composition-multiplicities-under-residue-restriction",
+          "lem-finite-group-induction-is-coinduction-and-thus-biadjoint",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality"
+        ],
+        "statement": "In the notation of ([[thm-normal-node-composition-multiplicities-under-residue-restriction]]), let $B$ be an addable $i$-node of the $p$-restricted partition $\\mu$ such that $\\nu=\\mu\\cup B$ is again $p$-restricted, and let $F_i$ be the residue-summand induction functor. Then\n$$[\\,F_iD(\\mu):D(\\nu)\\,]=0$$\nif $B$ is not a conormal $i$-node of $\\mu$, and\n$$[\\,F_iD(\\mu):D(\\nu)\\,]=\\#\\{B':\\ B'\\ \\text{conormal }i\\text{-node of }\\mu\\text{ weakly above }B\\}$$\n(counting $B$ itself) if $B$ is conormal. The Specht-to-induction Hom criterion (Kleshchev survey Theorem 11.7(i), Brundan 1998 Theorem 2.5 dual form) is a distinct statement and is not asserted here.",
+        "strategy": "Modular biadjunction and duality argument: by ([[lem-finite-group-induction-is-coinduction-and-thus-biadjoint]]) the functor $\\operatorname{Ind}_{S_d}^{S_{d+1}}$ is right adjoint to restriction, and the projection $e_{(\\alpha,i)}$ is invariant under the antipode, so $F_i$ and $E_i$ are right adjoints of one another up to the contragredient duality of finite-dimensional modules; consequently $[F_iD(\\mu):D(\\nu)]=[E_iD(\\nu):D(\\mu)]$. Apply the normal-node theorem ([[thm-normal-node-composition-multiplicities-under-residue-restriction]]) to $\\nu$ and the removable node $B$: the multiplicity equals $1$ plus the number of normal $i$-nodes strictly below $B$ in $\\nu$, which under the transpose/sign dictionary is exactly the number of conormal $i$-nodes above $B$ in $\\mu$; the identity $[\\tilde e_i\\nu=\\mu]\\Leftrightarrow[\\tilde f_i\\mu=\\nu]$ ([[def-good-node-and-cogood-node-crystal-operators]]) accounts for the node $B$ itself. Source: Kleshchev survey Theorem 11.7 (printed pp. 53-54, attributed to [29]; complete 66-page arXiv text); the source's convention check (addable nodes listed top to bottom, residue negation under the dictionary) is reproduced in the strategy of ([[thm-normal-node-composition-multiplicities-under-residue-restriction]]). The complex-character reciprocity item is deliberately not used: multiplicities in positive characteristic are not computed by complex character theory.",
+        "dependency_level": 9
+      },
+      {
+        "id": "cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues",
+        "kind": "corollary",
+        "title": "The socle of an uncoloured modular restriction is the multiplicity-free sum over the good residues",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$ and $\\mu$ a $p$-restricted partition of $d\\ge1$; write $D(\\mu)$ for the simple $kS_d$-module labelled by $\\mu$ ([[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]], [[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]). Let $A_i$ denote the good $i$-node of $\\mu$, for those $i\\in\\mathbb Z/p$ with $\\varepsilon_i(\\mu)>0$ ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]). Then\n$$\\operatorname{soc}_{S_{d-1}}\\bigl(D(\\mu){\\downarrow}_{S_{d-1}}\\bigr)=\\bigoplus_{i:\\,\\varepsilon_i(\\mu)>0}D(\\mu\\setminus A_i),$$\na multiplicity-free sum over distinct simple modules (distinct residues give distinct summands). The sum runs over the distinct good nodes, one per residue with $\\varepsilon_i(\\mu)>0$; the completely reducible special case (the restriction is semisimple iff every normal node is good) is the separate source statement Kleshchev II Theorem 0.6 and is not asserted here.",
+        "strategy": "The source theorem is Kleshchev II (1995) Theorem 0.5 (socle $=$ sum over good nodes, with equal head), restated as Kleshchev survey Theorem 11.6/§11.4 (printed pp. 53-54); a complete proof-bearing version in this page's convention is Brundan 1998 Theorems 2.6 and 5.4 together with the Schur-functor deduction in Brundan §5.5-5.7 (the socle of $L_n(\\lambda)^1|_{U(n-1)}$ is $\\bigoplus_{i\\in R^{good}(\\lambda)}L_{n-1}(\\lambda(i))$), translated by Brundan Remark 2.4(II) (normal/good nodes of $\\lambda$ are the transposed normal/good nodes of $\\lambda'$). The residue decomposition refines the displayed socle through $\\operatorname{Res}=\\bigoplus_iE_i$ ([[def-generalized-jm-primary-idempotents-and-residue-summand-functors]]): the good $i$-node contributes to the $i$-summand, and the good nodes of distinct residues lie in distinct summands, so the sum is multiplicity-free. The completely-reducible case is Kleshchev II Theorem 0.6; it is recorded only as the special case it is, not as the general restriction. Choice-free. The refinement used on the companion page (two good nodes force decomposability) is Remark 2.7 of Brundan 1998: the good-node socle summands lie in pairwise different blocks of $H(r-1)$, hence occupy different block components of the restriction; that remark is cited rather than restated as a separate item.",
+        "dependency_level": 1
+      },
+      {
+        "id": "thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction",
+        "kind": "theorem",
+        "title": "The good node gives the simple socle and head of the residue restriction",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "thm-normal-node-composition-multiplicities-under-residue-restriction",
+          "cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues",
+          "def-module-radical-socle-head-and-loewy-series"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$, $\\mu$ a $p$-restricted partition of $d$ and $i\\in\\mathbb Z/p$ with $\\varepsilon_i(\\mu)>0$; let $A$ be the good $i$-node and $\\nu=\\mu\\setminus A$. For the residue-summand functor $E_i$ of ([[def-generalized-jm-primary-idempotents-and-residue-summand-functors]]) the module $E_iD(\\mu)$ has simple socle and simple head, both isomorphic to $D(\\nu)$, and the total (ungraded) multiplicity of $D(\\nu)$ in $E_iD(\\mu)$ is $\\varepsilon_i(\\mu)$. Thus the Loewy endpoints are simple even though the formal character of $E_iD(\\mu)$ may contain the additional normal-node factors of ([[thm-normal-node-composition-multiplicities-under-residue-restriction]]).",
+        "strategy": "Socle: by ([[cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues]]) the socle of $\\operatorname{Res}D(\\mu)$ is $\\bigoplus_{j:\\varepsilon_j>0}D(\\mu\\setminus A_j)$, a multiplicity-free sum over distinct simple modules; the $i$-summand $E_iD(\\mu)$ contains precisely the summand $D(\\mu\\setminus A)=D(\\nu)$ (the good $i$-node is unique for its residue). Head: the contragredient dual of $E_iD(\\mu)$ is $E_i(D(\\mu)^*)\\cong E_iD(\\mu)$ because the primary idempotents are invariant under the antipode ([[def-generalized-jm-primary-idempotents-and-residue-summand-functors]]) and $D(\\mu)$ is self-dual; for a finite-dimensional self-dual module the head is the dual of the socle, so the head is $D(\\nu)$ as well ([[def-module-radical-socle-head-and-loewy-series]]). Multiplicity: apply the normal-node theorem ([[thm-normal-node-composition-multiplicities-under-residue-restriction]]) with $A$ the good node; the normal $i$-nodes weakly below $A$ are exactly all normal $i$-nodes, whose number is $\\varepsilon_i(\\mu)$. The ungraded statement is the one asserted; no graded shift is displayed before the Hecke/KLR bridge. Source: Kleshchev survey Theorem 11.6(ii) with the socle statement of §11.4; the complete proof in the Hecke convention is Brundan 1998 Theorems 5.4 and the §5.5-5.7 transfer, valid at $p=2$.",
+        "dependency_level": 9
+      },
+      {
+        "id": "thm-cogood-node-gives-the-simple-socle-and-head-of-residue-induction",
+        "kind": "theorem",
+        "title": "The cogood node gives the simple socle and head of the residue induction",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction",
+          "thm-conormal-node-composition-multiplicities-under-residue-induction",
+          "lem-finite-group-induction-is-coinduction-and-thus-biadjoint",
+          "def-module-radical-socle-head-and-loewy-series"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$, $\\mu$ a $p$-restricted partition of $d$ and $i\\in\\mathbb Z/p$ with $\\varphi_i(\\mu)>0$; let $B$ be the cogood $i$-node and $\\nu=\\mu\\cup B$. Then $F_iD(\\mu)$ has simple socle and simple head, both isomorphic to $D(\\nu)$, and the total (ungraded) multiplicity of $D(\\nu)$ in $F_iD(\\mu)$ is $\\varphi_i(\\mu)$.",
+        "strategy": "Dual of ([[thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction]]) under the modular biadjunction and contragredient duality: by ([[lem-finite-group-induction-is-coinduction-and-thus-biadjoint]]) induction is a right adjoint of restriction, so $F_i$ is right adjoint to $E_i$ up to duality, and since the residue idempotents are antipode-invariant the adjunction identifies the relevant submodule lattices; the good-node socle/head statement for $F_iD(\\mu)$ is the image of the good-node statement for $\\nu$ with the removable node $B$: $B$ is a good node of $\\nu$ (the duality $[\\tilde f_i\\ \\text{cogood}]\\Leftrightarrow[\\tilde e_i\\ \\text{good}]$ of ([[def-good-node-and-cogood-node-crystal-operators]])), so $E_iD(\\nu)$ has simple socle and head $D(\\mu)$ and multiplicity $\\varepsilon_i(\\nu)=\\varphi_i(\\mu)$. Source for the statement: Kleshchev survey Theorem 11.7 with §11.4 (printed pp. 53-54); no complex-character reciprocity and no graded input is used.",
+        "dependency_level": 10
+      },
+      {
+        "id": "prop-every-p-restricted-partition-is-reached-by-cogood-node-additions",
+        "kind": "proposition",
+        "title": "Every $p$-restricted partition is reached from the empty partition by cogood additions",
+        "deps": [
+          "def-good-node-and-cogood-node-crystal-operators",
+          "cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues",
+          "thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads",
+          "lem-the-group-ring-is-free-over-a-subgroup-ring",
+          "def-restriction-induction-and-coinduction-for-group-modules"
+        ],
+        "statement": "Let $k$ be a field of characteristic $p>0$. Every $p$-restricted partition $\\mu$ of $d$ is obtained from the empty partition by $d$ successive cogood additions: there are residues $i_1,\\dots,i_d$ with $\\mu=\\tilde f_{i_d}\\cdots\\tilde f_{i_1}\\varnothing$; equivalently, every $p$-restricted $\\mu\\ne\\varnothing$ has at least one good node, and successive good deletions carry $\\mu$ to $\\varnothing$. Hence $\\varnothing$ is the unique rank-$0$ vertex of the modular branching graph.",
+        "strategy": "Induction on $d$. Let $\\mu\\ne\\varnothing$ be $p$-restricted, so $D(\\mu)\\ne0$ is a simple $kS_d$-module ([[thm-modular-simple-modules-of-sn-are-the-p-regular-specht-heads]]). Restriction is faithful on nonzero modules: since $kS_d$ is free of rank $d$ on either side over $kS_{d-1}$ ([[lem-the-group-ring-is-free-over-a-subgroup-ring]]), the tensor identity $M\\cong kS_d\\otimes_{kS_d}M\\cong(kS_{d-1})^{\\oplus d}\\otimes_{kS_{d-1}}\\operatorname{Res}M$ ([[def-restriction-induction-and-coinduction-for-group-modules]]) forces $\\operatorname{Res}M\\ne0$; hence $\\operatorname{soc}(\\operatorname{Res}D(\\mu))\\ne0$. By the socle corollary ([[cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues]]) the socle is $\\bigoplus_{i:\\varepsilon_i(\\mu)>0}D(\\mu\\setminus A_i)\\ne0$, so some good node exists; the labels $\\mu\\setminus A_i$ are again $p$-restricted, and $\\mu=\\tilde f_i(\\mu\\setminus A_i)$ by ([[def-good-node-and-cogood-node-crystal-operators]]). Apply the inductive hypothesis to $\\mu\\setminus A_i$. The converse direction is the involution property of the operator item. This is Kleshchev's connectivity statement for the modular branching graph (survey §11.4, printed pp. 53-54, and Theorem 11.2), proved here from the socle theorem without any Fock-space input; the argument is choice-free.",
+        "dependency_level": 2
+      },
+      {
+        "id": "rem-the-crystal-identification-does-not-elementarily-identify-cellular-simple-labels",
+        "kind": "remark",
+        "title": "The crystal identification does not elementarily identify the cellular simple labels",
+        "deps": [
+          "def-good-node-and-cogood-node-crystal-operators",
+          "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality"
+        ],
+        "statement": "The inductive labels $\\dot D(\\mu)$ obtained from the socles of the residue summands ([[def-good-node-and-cogood-node-crystal-operators]]) and the cellular labels $D(\\mu)=\\operatorname{head}(S(\\mu))$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]) are known to agree only through the Ariki/graded theory: Kleshchev's survey states the identification $\\dot D(\\mu)\\cong D(\\mu)$ as a conjecture-until-Ariki (survey §11.2, printed p. 52, equation (11.1)). Consequently no proof on this page may use Fock-space reachability to establish the cellular classification, or the cellular classification to establish the Fock component; the two directions are separated by this reminder.",
+        "strategy": "No proof section: this is a boundary remark recorded so that neither direction of the labelling comparison is used circularly on this page or on the later Fock-space page. Provenance literature-derived (Kleshchev survey §11.2, equation (11.1), printed p. 52; the identification is due to Ariki and to the graded arguments cited there).",
+        "dependency_level": 2
+      }
+    ]
+  },
+  {
+    "order": 1574,
+    "id": "modular-branching-and-the-good-node-crystal-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Modular Branching and the Good-Node Crystal — Examples",
+    "companion": "modular-branching-and-the-good-node-crystal",
+    "requires": [
+      "modular-branching-and-the-good-node-crystal"
+    ],
+    "items": [
+      {
+        "id": "ex-normal-and-good-nodes-for-a-large-partition",
+        "kind": "example",
+        "title": "Normal and good nodes for the partition (6,4,4,3,2)",
+        "deps": [
+          "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues",
+          "thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction"
+        ],
+        "statement": "Work Brundan's Example 2.8 (complete 34-page author manuscript, p. 5) in his conventions: $\\lambda=(6,4,4,3,2)$ is $\\ell$-restricted for $\\ell=3$ and $\\ell=4$, residues are $r-c\\bmod\\ell$, $R(\\lambda)=\\{1,3,4,5\\}$ is the set of removable rows, and for $i\\in R(\\lambda)$ one compares $B_{i,5}(\\lambda)\\cap R(\\lambda)\\downarrow C_{i,5}(\\lambda)\\cap R(\\lambda)$ in the lattice order $\\downarrow$ ($A\\downarrow B$ iff there is an injection $\\theta:A\\to B$ with $\\theta(a)\\le a$).\nFor $\\ell=3$ the removable nodes have residues $1,2,1,0$ for $i=1,3,4,5$ and $(B\\cap R,C\\cap R)=(\\varnothing,\\{4\\}),(\\{4,5\\},\\varnothing),(\\varnothing,\\varnothing),(\\varnothing,\\varnothing)$; hence $R^{normal}(\\lambda)=\\{1,4,5\\}$ and, since rows $4$ and $1$ share residue $1$, $R^{good}(\\lambda)=\\{1,5\\}$. For $\\ell=4$ the residues are $3,3,1,3$ and $(B\\cap R,C\\cap R)=(\\varnothing,\\{3,5\\}),(\\varnothing,\\{5\\}),(\\{5\\},\\varnothing),(\\varnothing,\\varnothing)$; hence row $4$ is normal-refuted by $\\{5\\}\\not\\downarrow\\varnothing$, $R^{normal}(\\lambda)=\\{1,3,5\\}$ and $R^{good}(\\lambda)=\\{1\\}$. By the branching theorems the restriction of $D^{\\lambda}$ to $H(r-1)$ is therefore decomposable for $\\ell=3$ (socle $D^{(5,4,4,3,2)}\\oplus D^{(6,4,4,3,1)}$) and indecomposable for $\\ell=4$ (socle $D^{(6,4,4,2,2)}$).",
+        "strategy": "Entirely finite until the last step: list the removable rows, compute the residues, and evaluate the two index sets from the definition $B_{i,j}(\\lambda)=\\{k\\in[i..j):\\operatorname{res}(i,\\lambda_i)=\\operatorname{res}(k+1,\\lambda_{k+1}+1)\\}$, $C_{i,j}(\\lambda)=\\{k\\in(i..j):\\operatorname{res}(i,\\lambda_i)=\\operatorname{res}(k,\\lambda_k)\\}$, then the prefix test $|B\\cap R\\cap[1,m]|\\le|C\\cap R\\cap[1,m]|$ for all $m$ (equivalently the injection $\\theta$). The table above is the source's printed table, rechecked row by row; the good-node set is the set of normal rows minimal in each residue class (Brundan Remark 2.4(I) allows the intersection with $R$, and the uniqueness of a good node in a residue is Remark 2.7). The final decomposability statement follows by translating the A-page socle corollary to the Hecke convention and using Brundan Remark 2.7 (the good-node socle summands lie in pairwise different blocks): for $\\ell=3$ the socle is $D^{(5,4,4,3,2)}\\oplus D^{(6,4,4,3,1)}$ with the two simples in different blocks, so the restriction is decomposable, while for $\\ell=4$ the restriction is self-dual with simple socle $D^{(6,4,4,2,2)}$ (Brundan (2.9)), hence has simple head and is indecomposable, as in the A-page head/socle argument. The example is a full convention stress test: it shows that the residue list alone does not determine normality (row 4 looks normal by residues yet fails the lattice test at $\\ell=4$) and that good nodes are the minimal normal nodes per residue, not the removable nodes whose residue occurs once. Step 3 must keep the printed table and the two characteristics distinct.",
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-good-node-path-from-empty-to-a-p-restricted-partition",
+        "kind": "example",
+        "title": "A full cogood-addition path from the empty partition to (3,1,1) at p = 3",
+        "deps": [
+          "def-good-node-and-cogood-node-crystal-operators",
+          "prop-every-p-restricted-partition-is-reached-by-cogood-node-additions"
+        ],
+        "statement": "At $p=3$ the $p$-restricted partition $(3,1,1)$ is reached from the empty partition by the five cogood additions\n$$\\varnothing\\xrightarrow{\\,0\\,}(1)\\xrightarrow{\\,2\\,}(1,1)\\xrightarrow{\\,1\\,}(1,1,1)\\xrightarrow{\\,1\\,}(2,1,1)\\xrightarrow{\\,2\\,}(3,1,1),$$\ni.e. $(1)=\\tilde f_0\\varnothing$, $(1,1)=\\tilde f_2(1)$, $(1,1,1)=\\tilde f_1(1,1)$, $(2,1,1)=\\tilde f_1(1,1,1)$, $(3,1,1)=\\tilde f_2(2,1,1)$, with the labels recording the residues of the added nodes; reversing gives the good deletions $(3,1,1)\\xrightarrow{2}(2,1,1)\\xrightarrow{1}(1,1,1)\\xrightarrow{1}(1,1)\\xrightarrow{2}(1)\\xrightarrow{0}\\varnothing$. The relevant reduced signatures are: $(1)$ at $i=0$: $(-)$; $(1,1)$ at $i=2$: $(-)$; $(1,1,1)$ at $i=1$: $(+,-)$; $(2,1,1)$ at $i=1$: $(-,-)$; $(3,1,1)$ at $i=2$: $(-)$.",
+        "strategy": "Direct computation from the signature definition: list the addable and removable nodes of each partition (for $(1)$: removable $(1,1)$ at residue $0$; for $(1,1)$: removable $(2,1)$ at residue $2$, addables $(1,2),(3,1)$ at residue $1$; for $(1,1,1)$: removable $(3,1)$ at residue $1$, addables $(1,2)$ at residue $1$ and $(4,1)$ at residue $0$; for $(2,1,1)$: removable $(1,2),(3,1)$ at residue $1$, addables $(1,3)$ at residue $2$, $(2,2)$ and $(4,1)$ at residue $0$; for $(3,1,1)$: removable $(1,3)$ at residue $2$, addables $(1,4),(2,2),(4,1)$ at residue $0$), cancel $-+$ pairs top to bottom, and read off the rightmost $+$ (cogood) and the leftmost $-$ (good) of each residue. Every forward step is the addition of a cogood node and every reverse step the deletion of a good node, as predicted by the mutual-inverse property of the crystal operators; the path also verifies the reachability proposition in a case where the reduced signatures are not multiplicity-free. Method: Kleshchev survey §3.4 (printed pp. 18-19).",
+        "dependency_level": 3
+      }
+    ]
+  }
+]

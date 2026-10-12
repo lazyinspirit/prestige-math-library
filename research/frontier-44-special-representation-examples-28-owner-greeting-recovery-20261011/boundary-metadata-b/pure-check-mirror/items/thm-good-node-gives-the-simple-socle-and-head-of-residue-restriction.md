@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-periodic-resolution-for-a-finite-cyclic-group.md

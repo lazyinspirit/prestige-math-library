@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-regularity-excludes-the-classical-choice-pathologies.md

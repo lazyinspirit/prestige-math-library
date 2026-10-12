@@ -1,0 +1,359 @@
+{
+  "schema_version": 1,
+  "batch": "ML-24–ML-29",
+  "status": "complete",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "2acedda97c0b7d236abba0b196bd7efbf11adc2729ecb5d511972e3a68983368",
+  "plan_after_batch_sha256": "f6ad002f9e4e4e3327e4acc85c0790fd11ba6444b82c9bd0696c50b7683f8478",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-02/sources.json",
+  "inventory_counts_before": {
+    "main_pairs": 83,
+    "prerequisite_pairs": 12
+  },
+  "inventory_counts_after": {
+    "main_pairs": 83,
+    "prerequisite_pairs": 12
+  },
+  "additional_scoped_repairs": [
+    {
+      "pair": "ML-59",
+      "status": "cross_interface_repair_only_full_pair_audit_pending",
+      "findings": [
+        "Restated BCS-22 ELBO conditions in the DDPM consumer: finite-positive marginal normalizer, proper posterior, q absolutely continuous with respect to that posterior, and finite absolute q-integrability of the log variational density and generative joint.",
+        "Added positive forward/reverse Gaussian variance requirements and separated the t=1 reconstruction likelihood from the degenerate q(x0|x1,x0) conditional."
+      ],
+      "full_pair_audit": "Outstanding for the ML-51–64 source batch."
+    }
+  ],
+  "pairs": [
+    {
+      "id": "ML-24",
+      "pages": [
+        "ml02-graphical-models",
+        "ml02-graphical-models-examples"
+      ],
+      "assessment": "repaired_with_local_gaussian_and_logdet_proofs",
+      "findings": [
+        "Defined pairwise/global Markov properties separately from finite-state clique factorization; no Hammersley–Clifford equivalence is claimed without a local proof.",
+        "Restricted the Gaussian precision graph to Σ≻0 and made the conditional two-coordinate precision proof local because ESL Exercise 17.3 leaves the equivalence open.",
+        "Fixed the source's graphical-lasso objective to penalize every Θ entry including the diagonal, stated the distinct off-diagonal-only alternative, explicit KKT subgradient, λ>0 existence/uniqueness conditions, and no coordinate-descent convergence claim.",
+        "Specified finite binary RBM energy and conditional layer independence; contrastive divergence remains a finite-chain approximation."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Hastie, Tibshirani & Friedman, The Elements of Statistical Learning, corrected 12th printing, Ch. 17 §§17.2–17.4.4, printed pp. 627–645: pairwise/global graph properties and cited Hammersley–Clifford result; Gaussian conditional distribution and precision parametrization; Exercise 17.3 leaves the precision-zero/conditional-independence proof to the reader; graphical lasso (17.21) and Algorithm 17.2; RBM and contrastive-divergence equations.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/esl.pdf",
+          "pdf_sha256": "8d098d65cf53925ba0fc13a52a2790d48a32433223cbd876d0a527cd1afe2e0f",
+          "full_text_sha256": "a166784d77bab60f6e61901967d15ce31d607281387f6c33ed1008fe86709b24"
+        },
+        {
+          "citation": "Friedman, Hastie & Tibshirani, “Sparse Inverse Covariance Estimation with the Lasso,” §§1–5, printed pp. 1–9: objective (1) penalizes the sum of all absolute entries, KKT equation (5), covariance-lasso/block algorithm and coordinate updates; the article supplies no global convergence proof for its cyclic implementation.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/graphical_lasso_friedman.pdf",
+          "pdf_sha256": "307b9bc8bdee0fe2b467464f5a8c7159b7bb46cd5b58735df9a896a8e39f57a8",
+          "full_text_sha256": "715c89b7c18080391218f6d1acf611ced6b9af658941cdbcbe3b4e4fd8021068"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-multivariate-normal-law",
+          "status": "published",
+          "inspected_contract": "Under AC, every finite-dimensional symmetric PSD covariance defines a possibly singular Gaussian law with specified mean/covariance; the ML-24 density/precision graph adds Σ≻0."
+        },
+        {
+          "id": "def-conditional-independence-given-a-sigma-algebra",
+          "status": "published",
+          "inspected_contract": "Under AC, conditional independence is equality of conditional expectations for all pairs of bounded measurable functions, a.s."
+        },
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "inspected_contract": "Expectation is the extended integral for nonnegative measurable variables and a finite integral for integrable variables."
+        },
+        {
+          "id": "thm-non-negative-operator-characterisations",
+          "status": "published",
+          "inspected_contract": "On finite-dimensional real/complex inner-product spaces, nonnegative operators are self-adjoint with nonnegative eigenvalues and admit PSD matrix/S*S characterizations."
+        },
+        {
+          "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional real self-adjoint endomorphisms have an orthonormal eigenbasis; used only for the finite PSD/spectral clauses."
+        },
+        {
+          "id": "thm-hessian-characterises-convexity",
+          "status": "published",
+          "inspected_contract": "A C² function on an open convex Euclidean domain is convex iff its Hessian is PSD; only the logdet smooth term uses this criterion."
+        },
+        {
+          "id": "def-convex-and-strictly-convex-functions-on-euclidean-sets",
+          "status": "published",
+          "inspected_contract": "Defines convexity/strict convexity on Euclidean domains; local trace and entrywise absolute-value arguments establish the needed objective properties."
+        }
+      ],
+      "new_pair_prerequisites": [],
+      "future_proof_authoring_obligations": [
+        "Prove the conditional two-variable Gaussian precision-block formula and the iff independence criterion.",
+        "Prove logdet derivatives, trace Hessian positivity, entrywise ℓ1 subgradient/KKT and coercivity/unique maximizer for λ>0; keep the cyclic optimizer convergence claim excluded.",
+        "If claiming Hammersley–Clifford equivalence, supply the finite-state strictly-positive proof."
+      ]
+    },
+    {
+      "id": "ML-25",
+      "pages": [
+        "ml02-causal-pc",
+        "ml02-causal-pc-examples"
+      ],
+      "assessment": "repaired_with_SME20_interfaces_and_local_CPDAG_proof_obligations",
+      "findings": [
+        "Removed the duplicate local SCM/d-separation/faithfulness package and consumes SME-20's four exact proposed interfaces.",
+        "Added local oracle regime, finite-level PC operations, exact separator/v-structure and skeleton/Markov-equivalence/CPDAG proof design, and Meek R1–R3 closure for the no-background case.",
+        "The primary PC article's displayed R4 condition is internally inconsistent (it requires k→ℓ and also says k,ℓ are nonadjacent); the scaffold records this and uses the verified background-free R1–R3 completion theorem."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Kalisch & Bühlmann, “Estimating High-Dimensional Directed Acyclic Graphs with the PC-Algorithm,” §§2.1–2.3, printed pp. 614–619: exact DAG/faithfulness setup, PCpop algorithm and separation sets, Gaussian partial-correlation/Fisher test, and displayed orientation rules; §3 and Theorems 1–2, pp. 619–620: assumptions A1–A4 and skeleton/CPDAG error rate; Appendix A, pp. 628–636: consistency proof.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/causal_pc_kalisch_buehlmann.pdf",
+          "pdf_sha256": "af2c2704f645c413c88d55c525cee8f305c377c0df15546a2264df3791f99cbc",
+          "full_text_sha256": "d65f586e55f123995808a7da34450afd71921a669f4fe5402e414b60cd93be81"
+        },
+        {
+          "citation": "Meek, “Causal Inference and Causal Explanation with Background Knowledge,” UAI 1995, printed pp. 403–410: full paper and appendix proof units consulted. Theorem 1 and §2.1, pp. 404–405, give the skeleton/unshielded-collider equivalence characterization; Theorems 2–3 and appendix, pp. 406, 408–410, give orientation soundness and completeness of background-free R1–R3 closure.",
+          "cached_source": "https://arxiv.org/pdf/1302.4972",
+          "pdf_sha256": "75012e99821d06b368102a58250917199e8a8f55a8e90d123bf100ec7424793e",
+          "full_text_sha256": "fb552df0c9eddba86532c145f09d8c6d7ac0401cad714f7329eedde234485bec"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-conditional-independence-given-a-sigma-algebra",
+          "status": "published",
+          "inspected_contract": "Under AC, CI is equality of bounded conditional-product expectations a.s.; it supplies probability notation, not a DAG implication."
+        },
+        {
+          "id": "def-independent-random-elements",
+          "status": "published",
+          "inspected_contract": "A family of random elements is independent when their generated sigma-algebras are independent."
+        },
+        {
+          "id": "def-multivariate-normal-law",
+          "status": "published",
+          "inspected_contract": "Under AC, finite-dimensional PSD covariance Gaussian laws exist, including singular ones; PC's Gaussian tests assume nondegenerate covariance locally."
+        }
+      ],
+      "cross_category_supplier_contracts": [
+        {
+          "id": "SME-20:def-recursive-structural-causal-model-and-dag",
+          "status": "proposed_upstream",
+          "inspected_contract": "Finite DAG; measurable structural functions and explicit exogenous law; Markovian expanded model has mutually independent exogenous variables; full-joint law is topological product of probability kernels, observed law marginalizes latent nodes; observed-only factorization is restricted to causal sufficiency or explicit latent structure."
+        },
+        {
+          "id": "SME-20:def-d-separation-in-a-dag",
+          "status": "proposed_upstream",
+          "inspected_contract": "D-separation on the finite full DAG by active paths with collider-descendant activation and noncollider blocking."
+        },
+        {
+          "id": "SME-20:thm-dag-factorization-implies-d-separation-conditional-independence",
+          "status": "proposed_upstream",
+          "inspected_contract": "Global-Markov direction only: full-DAG factorization implies d-separation conditional independence."
+        },
+        {
+          "id": "SME-20:def-faithfulness-of-a-dag-model",
+          "status": "proposed_upstream",
+          "inspected_contract": "Faithfulness is the converse direction for the specified law, stated separately from the global-Markov theorem; SME-20 disclaims Markov-equivalence/skeleton/unshielded-collider results."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "SME-20 exact SCM/DAG, d-separation, global Markov and faithfulness interfaces; ML-25 locally owns Markov equivalence, CPDAG and oracle PC proof machinery."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove local Gaussian CI iff zero partial correlation under nondegenerate covariance and reproduce source's uniform Fisher-transform concentration/union-bound arguments with every triangular-array assumption.",
+        "Prove DAG Markov equivalence iff same skeleton/unshielded colliders, collider orientation from separators, soundness/completeness of Meek R1–R3 and equivalence-class CPDAG extension.",
+        "Do not treat the source's internally inconsistent R4 line as a theorem or claim latent-confounded causal recovery."
+      ]
+    },
+    {
+      "id": "ML-26",
+      "pages": [
+        "ml02-causal-anm",
+        "ml02-causal-anm-examples"
+      ],
+      "assessment": "repaired_with_exact_restricted_ANM_conditions",
+      "findings": [
+        "Added the exact bivariate Condition 19 differential-equation exclusion and causal-minimality condition for Theorem 20.",
+        "Added the multivariate restricted-ANM quantifier over each parent and each intermediate conditioning set, the positive-density witness p_S(x_S)>0, source regularity, and causal minimality for Theorem 28.",
+        "Kept RESIT's Theorem 34 population-only with consistent nonparametric regression and a perfect independence oracle; no practical finite-sample consistency theorem is claimed."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Peters, Mooij, Janzing & Schölkopf, “Causal Discovery with Continuous Additive Noise Models,” §2, Definitions 18 and 27, Condition 19, Theorem 20, §§3.2–3.3, Theorems 28 and 34, printed pp. 2014–2029; Appendix A.5 and A.11–A.15, pp. 2040–2049. Relevant definitions/statements and all named proof units were read.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/causal_additive_noise_peters_et_al.pdf",
+          "pdf_sha256": "333f16ef62b40d5b848a55f1939be4381a33ebea29f912e545b8ba5bfa55c4b7",
+          "full_text_sha256": "511b1cbde2decc33f833efdea6b89c516ff597e5c2dfddc8fedb2c4f34ca74b6"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-law-or-distribution-of-a-random-element",
+          "status": "published",
+          "inspected_contract": "A random element's law is its pushforward probability measure."
+        },
+        {
+          "id": "def-measurable-function-between-measurable-spaces",
+          "status": "published",
+          "inspected_contract": "Measurability is inverse-image preservation for all target measurable sets."
+        },
+        {
+          "id": "def-independent-random-elements",
+          "status": "published",
+          "inspected_contract": "Exogenous random elements are independent iff their generated sigma-algebras are independent."
+        }
+      ],
+      "cross_category_supplier_contracts": [
+        {
+          "id": "SME-20:def-recursive-structural-causal-model-and-dag",
+          "status": "proposed_upstream",
+          "inspected_contract": "Finite recursive SCM on a DAG with measurable structural equations, explicit exogenous law, and topological structural-equation convention; ML-26's additive-noise independence/smoothness/identifiability conditions remain local."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "SME-20 recursive SCM/DAG notation only; no SME-20 faithfulness or Markov-equivalence result is consumed."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the reverse-model density/differential-equation contradiction under the exact Condition 19 derivative, positive-density and causal-minimality hypotheses.",
+        "Prove the restricted-ANM multivariate induction and RESIT sink/pruning correctness for the source's population oracle; do not infer finite-sample HSIC consistency."
+      ]
+    },
+    {
+      "id": "ML-27",
+      "pages": [
+        "ml02-differential-privacy",
+        "ml02-differential-privacy-examples"
+      ],
+      "assessment": "repaired_with_exact_composition_and_utility_contracts",
+      "findings": [
+        "Defined add/remove adjacency and randomized mechanisms on arbitrary measurable output spaces, fixed the sensitivity/parameter domains, and retained the continuous-noise implementation limitation.",
+        "Added the exponential-mechanism finite-range utility-tail formula, adaptive basic composition, and the exact advanced-composition epsilon/delta expression.",
+        "Corrected the probability prerequisites from finite-only event spaces to measurable spaces, probability measures and probability kernels."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Dwork & Roth, The Algorithmic Foundations of Differential Privacy, Ch. 2 §§2.1–2.4, printed pp. 11–27 (adjacency, DP, postprocessing, group privacy and limitations); Ch. 3 §§3.2–3.5.1, pp. 29–50 (global sensitivity, Laplace, exponential-mechanism privacy/utility, basic and advanced composition with complete proofs); §§3.9–3.10, pp. 58–65 (additional privacy/composition discussion).",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/dwork_roth.pdf",
+          "pdf_sha256": "599bb0add9a0ec7bf85a6561dbc7619f45403892a19084eb1fe622352ef91ef7",
+          "full_text_sha256": "d44d97a4d8c0c683b25afa8200bde4d155d0b9aa58b4317d34cc711b5af12e00"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-measurable-space",
+          "status": "published",
+          "inspected_contract": "A measurable space is a set with a sigma-algebra; DP event quantification is over measurable output events."
+        },
+        {
+          "id": "def-probability-measure",
+          "status": "published",
+          "inspected_contract": "A probability measure has total mass one; its measurable sets are events."
+        },
+        {
+          "id": "def-measure-kernel-and-probability-kernel",
+          "status": "published",
+          "inspected_contract": "A probability kernel is pointwise a probability measure in the output and measurable in the input; this is the randomized-mechanism contract."
+        },
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "inspected_contract": "Expectation as nonnegative extended integral or finite integral for integrable privacy-loss variables."
+        }
+      ],
+      "new_pair_prerequisites": [],
+      "future_proof_authoring_obligations": [
+        "Derive the Laplace density ratio for add/remove neighbors, exponential score/partition-function ratios, and postprocessing event preimages.",
+        "Prove adaptive basic composition and advanced composition via the source privacy-loss moment bound, carrying ε, δ, δ′ and the nontrivial-total-δ range."
+      ]
+    },
+    {
+      "id": "ML-28",
+      "pages": [
+        "ml02-private-learning",
+        "ml02-private-learning-examples"
+      ],
+      "assessment": "repaired_with_exact_sample_and_online_regret_contracts",
+      "findings": [
+        "Fixed finite-class agnostic private ERM to an iid model, add/remove sensitivity 1/n, explicit alpha/beta/epsilon ranges, and the source's joint private/generalization sample complexity.",
+        "Defined average Hedge regret and the source's per-round loss-vector adjacency protecting the full transcript.",
+        "Added the exact RWM privacy parameter and source high-probability private regret rate under advanced composition."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Dwork & Roth, Ch. 11 §11.1, printed pp. 217–221: agnostic PAC risk, empirical error sensitivity 1/n, exponential-mechanism utility and sample complexity; §11.2, pp. 222–226: Theorems 11.1–11.4, adversarial average regret, whole-loss-vector adjacency, advanced composition and high-probability private regret. Complete proofs read.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/dwork_roth.pdf",
+          "pdf_sha256": "599bb0add9a0ec7bf85a6561dbc7619f45403892a19084eb1fe622352ef91ef7",
+          "full_text_sha256": "d44d97a4d8c0c683b25afa8200bde4d155d0b9aa58b4317d34cc711b5af12e00"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "inspected_contract": "Population classification error and expected regret are probability integrals; this definition supplies only the expectation operation."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "ML-27 differential privacy mechanisms/composition; ML-02 finite-class PAC/uniform convergence. Both are earlier local pairs."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove private empirical utility accuracy plus uniform convergence for all h∈C with the iid Hoeffding/union-bound conditions; do not imply efficiency in |C|.",
+        "Reproduce the RWM log-partition regret proof, event-level sensitivity-one exponential mechanism, advanced composition and source bounded-loss tail argument."
+      ]
+    },
+    {
+      "id": "ML-29",
+      "pages": [
+        "ml02-federated-optimization",
+        "ml02-federated-optimization-examples"
+      ],
+      "assessment": "repaired_with_correct_SCAFFOLD_step_and_exact_regime_contracts",
+      "findings": [
+        "Separated McMahan's weighted-count empirical FedAvg setting from equal-client theorem objectives, local-SGD finite-sum sampling and SCAFFOLD's equal-client setting.",
+        "Restored Stich's exact weighted-average iterate, synchronization-gap bound, stepsize, constants and second-moment/variance assumptions.",
+        "Corrected SCAFFOLD Theorem III's global step from the prior √(N/S) to the source's η_g=√S and stated its strong/general/nonconvex local-step constraints and rates.",
+        "Kept Theorem IV restricted to quadratic clients and the nonconvex theorem as a squared-gradient stationarity guarantee, not objective convergence."
+      ],
+      "source_evidence": [
+        {
+          "citation": "McMahan et al., “Communication-Efficient Learning of Deep Networks from Decentralized Data,” §§1–4, Algorithm 1, printed pp. 1–12: weighted client aggregation and empirical evaluation; no general convergence proof.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/fedavg_mcmahan.pdf",
+          "pdf_sha256": "2faf5593d9db413dee96a9be6ab9527cb0413b34fd5024aa60db3a5ad5795384",
+          "full_text_sha256": "de9b3f9df2bce2bfc05a27c2095718df186054022f7ffcbf1e4ece89ac747939"
+        },
+        {
+          "citation": "Stich, “Local SGD Converges Fast and Communicates Little,” §§2–3, Definition 2.1, Algorithm 1, Theorem 2.2 and Corollary 2.3, printed pp. 4–8; complete proof of Theorem 2.2 in Appendix A, printed pp. 14–17. The nonconvex and one-shot regimes are expressly outside this guarantee.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/local_sgd_stich.pdf",
+          "pdf_sha256": "98fb2c50800106cb84fe820260e788567a48396fe9a5528c2b91744f6015797b",
+          "full_text_sha256": "826ad7558b933813c587090260e788567a48396fe9a5528c2b91744f6015797b"
+        },
+        {
+          "citation": "Karimireddy et al., “SCAFFOLD: Stochastic Controlled Averaging for Federated Learning,” §§2–5, Algorithm 1, Theorems I–III, printed pp. 3–6; Appendix B assumptions A1–A5; Appendix D.2, E.1–E.2 proof routes. Theorem IV/Appendix F is quadratic-only; full relevant proof units read.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/scaffold_karimireddy.pdf",
+          "pdf_sha256": "efe06c86acc7a06116e372a7ab6386c300f4d0dc9c7ba2dd5c82e95111a1d694",
+          "full_text_sha256": "ec4ce4704d225dac55fbb4aa4ada33a1fc7c57e0569c4a3ccd1455af781b8c18"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "inspected_contract": "The local-SGD/FedAvg/SCAFFOLD bounds use expectation over sample and client-selection randomness; definitions of smoothness, convexity, stochastic gradients and sampling are stated locally."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "ML-12 for one example only; ML-27 only for privacy interpretation. No Cat3 optimizer item is assumed for any rate proof."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove Stich's virtual-sequence variance/drift estimate and weighted-iterate telescope under finite-sum uniform sampling and exact synchronization gap.",
+        "Reproduce FedAvg Theorem I under A1/A3/A4/A5 and SCAFFOLD Theorem III under its separate A3–A5 hypotheses, uniform client sampling, algorithm options and each local/global step constraint.",
+        "Keep output measures distinct: weighted expected objective gap for convex cases, expected squared-gradient stationarity for nonconvex; do not generalize the quadratic-only similarity theorem."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm08-symmetry-of-the-mechanical-lagrangian.md

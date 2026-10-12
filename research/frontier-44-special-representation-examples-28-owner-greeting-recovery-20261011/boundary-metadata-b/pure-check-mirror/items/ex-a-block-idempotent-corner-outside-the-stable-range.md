@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-block-idempotent-corner-outside-the-stable-range.md

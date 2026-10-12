@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dual-numbers-tensor-functor-is-right-exact-but-not-left-exact.md

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "2",
+  "round": 0,
+  "input_sha256": "af3983a62d347d67c598f9e1e717aed51d6f6c694dba14d9a1b7d5e7785ac388",
+  "reviewed_items": [
+    "lem-cm-derivative-of-pairings-of-curves",
+    "lem-cm-piecewise-c1-jump-derivative",
+    "thm-cm-center-of-mass-and-kinetic-splitting",
+    "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+    "thm-cm-variable-mass-momentum-balance",
+    "cor-cm-finite-time-breakdown-requires-escape",
+    "thm-cm-impulse-restitution-and-energy-loss",
+    "thm-cm-momentum-and-angular-momentum-balance",
+    "thm-cm-work-energy-balance",
+    "ex-cm-balances-impulse-and-rocket-checks",
+    "ex-cm-balances-continuation-boundary-checks"
+  ],
+  "reviewed_pages": [
+    "cm-math-balances",
+    "cm-math-balances-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The batch has repairable local gaps, and outside-batch consumers contain prerequisite-scope and proof issues requiring owner routing.",
+  "findings": [
+    {
+      "id": "lem-cm-piecewise-c1-jump-derivative",
+      "type": "local",
+      "reason": "Step 1.1 treats arbitrary compact K⊂I as an interval, and steps 2.1–2.2 call the one-sided extensions C¹ without proving endpoint differentiability; reduce to compact subintervals and justify the endpoint derivative, e.g. by the mean value inequality."
+    },
+    {
+      "id": "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+      "type": "local",
+      "reason": "Step 3.1 applies the estimate from step 2.1 to t-values that need not satisfy t>b−δ; restrict the claimed neighborhood to (b−δ,b) as well."
+    },
+    {
+      "id": "thm-cm-work-energy-balance",
+      "type": "local",
+      "reason": "The statement allows any interval I but calls U C¹ on I×Q, while the cited C¹ definition requires an open domain; specify a C¹ extension to an open time neighborhood to preserve endpoint cases."
+    },
+    {
+      "id": "thm-cm-impulse-restitution-and-energy-loss",
+      "type": "local",
+      "reason": "The title says one-dimensional impact, but the Statement permits arbitrary R³ velocities under a full-vector restitution law; retitle it to match the proved vector model without narrowing its scope."
+    },
+    {
+      "id": "ex-cm-balances-continuation-boundary-checks",
+      "type": "local",
+      "reason": "Step 3.1 proves escape only for η∈(0,1), although the Example claims every η>0; reduce arbitrary η to a smaller positive value below 1."
+    },
+    {
+      "id": "cex-cm15-restitution-above-one-increases-energy",
+      "type": "outside-batch",
+      "reason": "At items/cex-cm15-restitution-above-one-increases-energy.md, [L1] and steps 2.1–3.1 apply the impulse theorem and pthm-cm15-impact-balance at e=2, although both require 0≤e≤1 and post-cm15-impulse excludes e>1; route a hypothetical-extension and local-derivation repair to its owner."
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "type": "outside-batch",
+      "reason": "At items/pthm-cm15-impact-balance.md step 1.5, the quadratic −Jₙdₙ+Jₙ²/(2μ) at Jₙ=μdₙ equals −μdₙ²/2, not +μdₙ²/2; route this proof correction to its owner."
+    }
+  ],
+  "consumer_checks": []
+}

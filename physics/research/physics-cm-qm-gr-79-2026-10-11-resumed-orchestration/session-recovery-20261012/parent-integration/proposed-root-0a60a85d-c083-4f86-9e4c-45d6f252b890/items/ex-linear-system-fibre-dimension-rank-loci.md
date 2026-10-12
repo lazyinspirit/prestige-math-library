@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-linear-system-fibre-dimension-rank-loci.md

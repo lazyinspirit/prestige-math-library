@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-euclidean-hypersurface-graph-and-localization.md

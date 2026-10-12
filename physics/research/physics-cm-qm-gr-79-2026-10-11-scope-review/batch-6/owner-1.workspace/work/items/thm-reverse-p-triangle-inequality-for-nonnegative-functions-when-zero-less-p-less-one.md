@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reverse-p-triangle-inequality-for-nonnegative-functions-when-zero-less-p-less-one.md

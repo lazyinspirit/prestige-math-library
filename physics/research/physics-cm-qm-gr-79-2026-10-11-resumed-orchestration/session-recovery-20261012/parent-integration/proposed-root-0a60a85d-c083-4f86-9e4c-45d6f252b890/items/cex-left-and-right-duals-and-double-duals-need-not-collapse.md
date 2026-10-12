@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-left-and-right-duals-and-double-duals-need-not-collapse.md

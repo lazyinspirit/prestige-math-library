@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-injective-modules-over-a-pid-are-exactly-divisible.md

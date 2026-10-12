@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-principal-localisation-spectrum-is-distinguished-open.md

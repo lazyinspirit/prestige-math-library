@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-subreciprocal-functions-close-under-the-density-recursion.md

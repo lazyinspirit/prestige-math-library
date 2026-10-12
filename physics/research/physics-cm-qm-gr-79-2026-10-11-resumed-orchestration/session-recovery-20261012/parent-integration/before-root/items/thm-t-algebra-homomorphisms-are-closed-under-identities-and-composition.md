@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-t-algebra-homomorphisms-are-closed-under-identities-and-composition.md

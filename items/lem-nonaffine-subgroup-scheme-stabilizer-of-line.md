@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-10-05
   judge:
     model: "gpt-6.1-sol"
     verdict: pass

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weyl-coinvariant-hilbert-series-has-order-w-dimension.md

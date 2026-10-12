@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-projective-planes-are-symmetric-two-designs.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetric-invariants-restrict-to-weyl-invariants.md

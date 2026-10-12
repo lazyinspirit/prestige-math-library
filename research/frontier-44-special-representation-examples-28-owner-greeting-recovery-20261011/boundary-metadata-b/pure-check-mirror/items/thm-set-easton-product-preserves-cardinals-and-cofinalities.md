@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-set-easton-product-preserves-cardinals-and-cofinalities.md

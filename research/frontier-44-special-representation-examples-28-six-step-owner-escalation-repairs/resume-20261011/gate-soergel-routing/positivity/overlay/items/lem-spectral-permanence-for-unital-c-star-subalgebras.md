@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-spectral-permanence-for-unital-c-star-subalgebras.md

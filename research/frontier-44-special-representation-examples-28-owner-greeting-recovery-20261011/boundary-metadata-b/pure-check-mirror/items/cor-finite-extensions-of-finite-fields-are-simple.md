@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-extensions-of-finite-fields-are-simple.md

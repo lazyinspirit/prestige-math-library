@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-sequential-uniform-boundedness-for-coordinate-partial-sums.md

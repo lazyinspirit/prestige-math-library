@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-natural-boundary-condition-for-free-boundary-variations.md

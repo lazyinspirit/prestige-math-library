@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-loop-algebra-of-a-simple-lie-algebra.md

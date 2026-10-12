@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hardy-littlewood-maximal-function-is-l-infinity-bounded.md

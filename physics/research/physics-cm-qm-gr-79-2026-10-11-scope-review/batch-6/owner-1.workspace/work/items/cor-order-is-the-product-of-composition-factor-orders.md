@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-order-is-the-product-of-composition-factor-orders.md

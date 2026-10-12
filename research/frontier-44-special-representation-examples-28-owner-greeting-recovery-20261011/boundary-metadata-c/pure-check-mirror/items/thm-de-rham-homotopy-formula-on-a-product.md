@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-de-rham-homotopy-formula-on-a-product.md

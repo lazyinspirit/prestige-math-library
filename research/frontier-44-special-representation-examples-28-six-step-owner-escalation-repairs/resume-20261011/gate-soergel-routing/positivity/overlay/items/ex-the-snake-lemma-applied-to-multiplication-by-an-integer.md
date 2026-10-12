@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-snake-lemma-applied-to-multiplication-by-an-integer.md

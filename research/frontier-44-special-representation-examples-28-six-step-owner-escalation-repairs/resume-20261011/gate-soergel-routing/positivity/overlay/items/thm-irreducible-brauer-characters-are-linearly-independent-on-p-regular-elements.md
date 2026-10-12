@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements.md

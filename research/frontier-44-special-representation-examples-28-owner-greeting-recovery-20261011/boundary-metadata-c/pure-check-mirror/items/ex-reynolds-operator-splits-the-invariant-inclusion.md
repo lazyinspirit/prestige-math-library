@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-reynolds-operator-splits-the-invariant-inclusion.md

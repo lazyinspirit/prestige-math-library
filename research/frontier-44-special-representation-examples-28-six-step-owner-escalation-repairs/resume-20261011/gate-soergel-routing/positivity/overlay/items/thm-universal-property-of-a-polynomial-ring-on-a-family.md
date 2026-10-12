@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-property-of-a-polynomial-ring-on-a-family.md

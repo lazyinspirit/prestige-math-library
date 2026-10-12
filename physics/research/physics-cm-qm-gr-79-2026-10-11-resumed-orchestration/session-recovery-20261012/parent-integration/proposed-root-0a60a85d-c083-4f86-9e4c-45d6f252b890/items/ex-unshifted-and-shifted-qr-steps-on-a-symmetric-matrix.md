@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unshifted-and-shifted-qr-steps-on-a-symmetric-matrix.md

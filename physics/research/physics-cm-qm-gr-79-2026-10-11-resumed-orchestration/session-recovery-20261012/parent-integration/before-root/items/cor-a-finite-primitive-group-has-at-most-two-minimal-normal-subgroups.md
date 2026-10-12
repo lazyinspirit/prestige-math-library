@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-finite-primitive-group-has-at-most-two-minimal-normal-subgroups.md

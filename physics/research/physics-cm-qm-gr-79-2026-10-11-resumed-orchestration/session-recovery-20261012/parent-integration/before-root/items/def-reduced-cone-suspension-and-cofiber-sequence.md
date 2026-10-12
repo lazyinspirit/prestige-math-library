@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-reduced-cone-suspension-and-cofiber-sequence.md

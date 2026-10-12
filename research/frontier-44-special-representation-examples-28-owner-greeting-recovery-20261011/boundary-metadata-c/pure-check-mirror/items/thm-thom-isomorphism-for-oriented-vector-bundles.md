@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-thom-isomorphism-for-oriented-vector-bundles.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-empirical-state-frequencies-converge-to-stationary-masses.md

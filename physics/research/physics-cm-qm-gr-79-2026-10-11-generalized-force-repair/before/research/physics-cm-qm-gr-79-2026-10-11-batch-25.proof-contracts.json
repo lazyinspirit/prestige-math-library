@@ -1,0 +1,2785 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-25",
+  "scope": [
+    "def-cm09-coupled-quadratic-model",
+    "pthm-cm09-free-modes-and-degeneracy",
+    "pthm-cm09-linearization-at-a-strict-minimum",
+    "pthm-cm09-linearization-error-bound",
+    "pthm-cm09-forced-modal-response",
+    "pthm-cm09-averaging-for-weak-damping",
+    "rem-cm09-zero-modes-degeneracy-and-scope",
+    "ex-cm09-two-mass-spring-modes",
+    "ex-cm09-triatomic-translation-zero-mode",
+    "ex-cm09-double-pendulum-linear-modes",
+    "ex-cm09-degenerate-oscillator-subspace",
+    "ex-cm09-unstable-quadratic-mode",
+    "ex-cm09-forced-resonant-mode-check",
+    "ex-cm09-weak-damping-averaging-check",
+    "ex-cm09-cubic-potential-error-check"
+  ],
+  "contracts": {
+    "def-cm09-coupled-quadratic-model": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero force, zero velocity and zero coordinate are included: clauses (b) and (c) of the Definition admit J≡0, v=0 and q=0 without any positivity condition beyond M positive definite."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional instance n=1 is recorded in the Definition and its remarks, and all clauses are stated for every n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explicitly includes a singular stiffness K (zero and negative modal stiffnesses are named) while keeping M positive definite; no invertibility of K is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition fixes no interval endpoints: the model is declared on a time interval with nonempty interior and each later statement states its own horizon."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "pthm-cm09-free-modes-and-degeneracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-cm-quadratic-mode-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $M\\in M_n(\\mathbb R)$ be symmetric positive definite and let $K\\in M_n(\\mathbb R)$ be symmetric and non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v\\in\\mathbb R^n$. Let",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-cm-oscillator-degenerate-and-repulsive-cases",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$, let $k\\le0$, and consider the model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]). In the three cases below, $x:J\\to\\mathbb R$ runs over solutions on",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cm-oscillator-model-and-phase-system",
+          "source_section": "Definition",
+          "quote": "Let $m>0$, $c\\ge0$ and $k\\in\\mathbb R$ be given real numbers, let $I\\subseteq\\mathbb R$ be an interval with nonempty interior ([[def-interval]]) and let $f:I\\to\\mathbb R$ be continuous",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cm-variation-of-constants-for-linear-systems",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A\\in M_n(\\mathbb R)$, let $t_0\\in\\mathbb R$ and $z_0\\in\\mathbb R^n$, and let $b:\\mathbb R\\to\\mathbb R^n$ be continuous ([[def-vector-valued-derivative-and-integral]]). Define the",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Let $x:I\\to\\mathbb R^n$ and $y:J\\to\\mathbb R^n$ solve the same IVP. The solution $y$ is an **extension** of $x$ when $I\\subseteq J$ and $y|_I=x$. It is a proper extension when $I\\subsetneq J$. A",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cm-equilibrium-and-lyapunov-stability",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map. Consider the autonomous first-order system $$z'(t)=F(z(t)),$$ read as the first-order system of",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Modal equivalence: by [F1] the curve $q$ is a motion if and only if $z_{i}''+\\lambda_{i}z_{i}=0$ on $J$ for every $i$. [F1, given]",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Global solution: the free phase system is $z'=Az$ with the constant matrix $A$ of clause (b) of [[def-cm09-coupled-quadratic-model]]; by [F3] the curve $z(t)=E(t-t_{0})(q_{0},v_{0})$ solves it on $\\mathbb R$ with the prescribed datum, and every solution with that datum agrees with it on every interval containing $t_{0}$. Writing $q(t)$ for the first $n$ components and $v(t)$ for the last $n$, the equivalence of the phase system with the model equation of clause (b) gives that $q$ is a motion with $q(t_{0})=q_{0}$, $q'(t_{0})=v_{0}$; conversely every motion's phase curve is a solution, hence agrees with this one. This is clause 1. [F3, given]",
+          "step": "1.2",
+          "inputs": [
+            "F3"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Pure-$\\lambda$ motions, intrinsic form: let $\\lambda$ be a modal stiffness and put $S:=M^{-1/2}KM^{-1/2}$, so that $K=M^{1/2}SM^{1/2}$; for $u\\in E_{\\lambda}^{S}$ one has $Su=\\lambda u$ and hence $K(M^{-1/2}u)=M^{1/2}S u=\\lambda M^{1/2}u=\\lambda M(M^{-1/2}u)$, so that $N_{\\lambda}=M^{-1/2}E_{\\lambda}^{S}\\subseteq\\{q:Kq=\\lambda Mq\\}$ (*). Conversely, if $Kq=\\lambda Mq$ then with $u:=M^{1/2}q$ we get $M^{1/2}Su=Kq=\\lambda Mq=\\lambda M^{1/2}u$ and $Su=\\lambda u$ by invertibility of $M^{1/2}$, so $q\\in N_{\\lambda}$; hence the two sets are equal. The modal coordinates satisfy $z=O^{\\mathsf T}M^{1/2}q$ and $M^{1/2}q\\in E_{\\lambda}^{S}$ is equivalent to the support of $z$ lying in the index set $\\{i:\\lambda_{i}=\\lambda\\}$, because the columns of $O$ are an orthonormal eigenbasis of $S$. [F1, given, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Scalar families: for each $i$, [F2] gives that the scalar solutions are exactly the displayed families with unique coefficients determined by $z_{i}(0)$ and $z_{i}'(0)$; combining with step 1.1 gives clause 2 and its coefficient formulas. [assume-case oscillatory, assume-case zero, assume-case exponential, F1, F2, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Pure-$\\lambda$ motions, equation: let $q:J\\to N_{\\lambda}$ be $C^{2}$ on an interval $J$. Since $N_{\\lambda}$ is a linear subspace, the difference quotients of $q$ lie in $N_{\\lambda}$, so $q'\\in N_{\\lambda}$ and then $q''\\in N_{\\lambda}$ as limits in a finite-dimensional normed space; hence with (*) of step 1.3, $M$ invertible, and $q(t),q''(t)\\in N_{\\lambda}$, $$Mq''+Kq=Mq''+\\lambda Mq=M\\bigl(q''+\\lambda q\\bigr),$$ so $q$ is a motion if and only if $q''+\\lambda q=0$. This proves the equivalence of clause 4 for such curves and, combined with the support statement of step 1.3, identifies the pure-$\\lambda$ motions with the $C^{2}$ solutions of $q''+\\lambda q=0$ with values in $N_{\\lambda}$. [step 1.3, F5, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "1.3",
+            "F5"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Unstable direction: suppose $\\lambda_{i}<0$ and let $u_{i}=M^{-1/2}Oe_{i}$ satisfy $Ku_{i}=\\lambda_{i}Mu_{i}$ and $u_{i}^{\\mathsf T}Mu_{i}=1$ ([[def-cm09-coupled-quadratic-model]] clause (e)). For $c>0$ define $q_{c}(t):=(c/\\kappa_{i})\\sinh(\\kappa_{i}t)u_{i}$; then $q_{c}''=\\kappa_{i}^{2}(c/\\kappa_{i})\\sinh(\\kappa_{i}t)u_{i}$ and $Mq_{c}''+Kq_{c}=(\\kappa_{i}^{2}+\\lambda_{i})Mc\\sinh(\\kappa_{i}t)u_{i}/\\kappa_{i}=0$ because $\\kappa_{i}^{2}=-\\lambda_{i}$ and $Ku_{i}=\\lambda_{i}Mu_{i}$; so $q_{c}$ is a motion with datum $(0,c u_{i})$, whose phase norm $\\lVert(q_{c}(t),q_{c}'(t))\\rVert_{2}\\ge\\lVert q_{c}(t)\\rVert_{2}=c\\kappa_{i}^{-1}\\sinh(\\kappa_{i}t)\\lVert u_{i}\\rVert_{2}$ is unbounded as $t\\to\\infty$. Fix $\\varepsilon_{0}:=1$; given $\\delta>0$ choose $c>0$ with $c\\lVert u_{i}\\rVert_{2}<\\delta$, so that $\\lVert(0,cu_{i})\\rVert_{2}<\\delta$; by continuity and unboundedness the motion reaches $\\lVert(q_{c}(t),q_{c}'(t))\\rVert_{2}=1$ at some $t>0$. Hence the condition of [F4] for stability fails, which is clause 6. [F4, step 1.2, F5, given, algebra]",
+          "step": "2.3",
+          "inputs": [
+            "F4",
+            "1.2",
+            "F5"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Energy: along a motion, differentiating $E(q,q')=\\tfrac12q'^{\\mathsf T}Mq'+\\tfrac12q^{\\mathsf T}Kq$ and using $Mq''+Kq=0$ together with the symmetry of $M$ and $K$ gives $\\frac{d}{dt}E=q'^{\\mathsf T}Mq''+\\tfrac12\\bigl(q'^{\\mathsf T}Kq+q^{\\mathsf T}Kq'\\bigr)=q'^{\\mathsf T}(Mq''+Kq)=0$, so $E$ is constant; the identities $q'^{\\mathsf T}Mq'=|z'|_{2}^{2}$ and $q^{\\mathsf T}Kq=\\sum_{i}\\lambda_{i}z_{i}^{2}$ of [F1] give $E=\\sum_{i}E_{i}$ with $E_{i}=\\tfrac12(z_{i}'^{2}+\\lambda_{i}z_{i}^{2})$, and $E_{i}'=z_{i}'(z_{i}''+\\lambda_{i}z_{i})=0$ shows that each $E_{i}$ is constant. Substituting the three families of step 2.1 gives the displayed values, using $\\cosh^{2}-\\sinh^{2}=1$ for $\\lambda_{i}<0$ and $\\cos^{2}+\\sin^{2}=1$ with $\\omega_{i}^{2}=\\lambda_{i}$ for $\\lambda_{i}>0$. This is clause 3. [F1, F2, F5, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "2.1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "D8",
+          "claim": "Explicit pure-$\\lambda$ families: a $C^{2}$ curve with values in the subspace $N_{\\lambda}$ and $q''+\\lambda q=0$ is uniquely determined by $q(0),q'(0)\\in N_{\\lambda}$, and the displayed formulas $\\cos(\\omega t)q_{0}+\\omega^{-1}\\sin(\\omega t)q_{1}$ for $\\lambda>0$, $q_{0}+tq_{1}$ for $\\lambda=0$ and $\\cosh(\\kappa t)q_{0}+\\kappa^{-1}\\sinh(\\kappa t)q_{1}$ for $\\lambda<0$ define such curves for all $q_{0},q_{1}\\in N_{\\lambda}$: they take values in $N_{\\lambda}$, and the scalar identities $\\cos''=-\\cos$, $\\sin''=-\\sin$, $\\cosh''=\\cosh$, $\\sinh''=\\sinh$ verify the equation. Since $q(0)=q_{0}$, $q'(0)=q_{1}$ and $\\lVert\\cdot\\rVert_{2}$ makes the finite-dimensional subspace complete, two such curves with equal data agree; hence the families are exactly the pure-$\\lambda$ motions. The statements of clause 4 about independence of $O$ and the non-intrinsic modal vectors follow because $N_{\\lambda}$ and the equations above involve only $M$ and $K$: the admissible decouplings differ by an orthogonal change of coordinates preserving $N_{\\lambda}$, and when the multiplicity of $\\lambda$ exceeds one, any $q_{0}\\in N_{\\lambda}$ not parallel to a chosen $u_{i}$ exhibits a pure-$\\lambda$ motion not covered by that single modal vector. [step 2.2, F1, F5, algebra]",
+          "step": "3.2",
+          "inputs": [
+            "2.2",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "D9",
+          "claim": "Boundedness: if $K$ is positive definite then every modal stiffness is $>0$: for $u\\ne0$ with $Su=\\lambda u$ one has $0<q^{\\mathsf T}Kq=\\lambda|M^{1/2}q|^{2}$ with $q=M^{-1/2}u\\ne0$, so $\\lambda>0$. By clause 2 every modal coordinate satisfies $|z_{i}(t)|\\le\\sqrt{a_{i}^{2}+b_{i}^{2}}$ and $|z_{i}'(t)|\\le\\omega_{i}\\sqrt{a_{i}^{2}+b_{i}^{2}}$ on $\\mathbb R$; since $q=M^{-1/2}Oz$ and $q'=M^{-1/2}Oz'$ are bounded linear functions of $(z,z')$, every motion is bounded on $\\mathbb R$. If instead $\\lambda_{i}=0$ for some $i$ and a motion has $b_{i}\\ne0$ in the affine family, then $|z_{i}(t)|=|a_{i}+b_{i}t|\\to\\infty$ as $t\\to\\infty$. The map $z\\mapsto q=M^{-1/2}Oz$ is a linear bijection, so if $(q,q')$ were bounded then $(z,z')$ would be bounded — its components are the coordinates of $(z,z')$ in the basis given by the columns of the invertible block-diagonal matrix $\\operatorname{diag}(O^{\\mathsf T}M^{1/2},O^{\\mathsf T}M^{1/2})$, and coordinate functionals of a bounded set are bounded; contrapositively the unbounded modal component forces $(q,q')$ unbounded. This is clause 5. [F1, F2, step 2.1, algebra]",
+          "step": "3.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D10",
+          "claim": "Clauses 1-6 are proved: the free model has globally unique motions classified by the three scalar families, the energy decomposition holds, degenerate families are intrinsic subspaces, positive definite stiffness bounds every motion, zero modes are affine and negative modal stiffnesses give an unstable rest point. [cases-exhaustive:three-scalar-index-types, step 1.2, step 2.1, step 3.1, step 3.2, step 3.3, step 2.3] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero modal stiffness and the zero datum are included: step 2.1 gives the affine family for λ_i=0, and the zero curve solves the system."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement is quantified over every n≥1 and the scalar case n=1 is included with no change; step 4.1 summarizes the classification."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 proves that degenerate families are intrinsic and that individual modal vectors are not: repeated eigenvalues are within the statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The interval endpoints are handled by the maximal-solution vocabulary: the statement restricts motions to intervals with nonempty interior and asserts existence on all of R, as in steps 1.2 and 3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Forward direction of the modal classification: step 1.1 uses [F1] to pass from the motion to the decoupled scalar equations."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction: step 2.1 uses [F1] to return from the scalar families to a motion, and step 3.2 writes the explicit families."
+        }
+      ]
+    },
+    "pthm-cm09-linearization-at-a-strict-minimum": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-hessian-is-symmetric",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cm-strict-minimum-has-positive-semidefinite-hessian",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $U:\\Omega\\to\\mathbb R$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $q_0\\in\\Omega$ be a local minimum of $U$:",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, and let",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cm-quadratic-mode-decomposition",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $M\\in M_n(\\mathbb R)$ be symmetric positive definite and let $K\\in M_n(\\mathbb R)$ be symmetric and non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v\\in\\mathbb R^n$. Let",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cm-energy-stability-of-a-strict-minimum",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, let",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cm-equilibrium-and-lyapunov-stability",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map. Consider the autonomous first-order system $$z'(t)=F(z(t)),$$ read as the first-order system of",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Clause 1: by [F1] the stiffness $K=D^{2}U(q_{0})$ is symmetric and non-negative; by [F3] the small-oscillation model at $q_{0}$ is the coupled quadratic model with data $(M_{0},K,0)$, and a coupled quadratic model whose stiffness is non-negative is oscillatory in the sense of the definition's clause (e). [F1, F3, given]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Clause 2: by [F2] the derivative of $G$ at $(q_{0},0)$ is $(\\delta q,\\delta v)\\mapsto(\\delta v,-M_{0}^{-1}K\\delta q)$; by [F3] the phase system of the small-oscillation model is $y'=Ay$ for the same block matrix $A$, and the model equation $M_{0}\\xi''+K\\xi=0$ is equivalent to $(\\xi,\\xi')'=A(\\xi,\\xi')$ by the product rule and invertibility of $M_{0}$. This proves clause 2. [F2, F3, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Clause 4: the hypotheses of [F5] are the $C^{2}$ positive definite metric field, the $C^{2}$ potential and the strict local minimum of the statement; its conclusion is exactly the Lyapunov stability assertion of clause 4 for the field $G$ and the rest point $(q_{0},0)$, whose equilibrium property is recorded in [[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. [F5, given]",
+          "step": "1.3",
+          "inputs": [
+            "F5"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Clause 3: apply the classification of [F4] to the data $(M_{0},K,0)$ of the small-oscillation model; since $K$ is non-negative by [F1], every modal stiffness satisfies $\\lambda_{i}\\ge0$, so no exponential family occurs and the oscillatory and zero families of the free-mode theorem exhaust the motions, with frequencies $\\omega_{i}=\\sqrt{\\lambda_{i}}$ and the intrinsic pure-$\\lambda$ families described there. [F1, F3, F4, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F1",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-4 are proved. Clause 4 is a nonlinear conclusion obtained from exact energy conservation, not from the linearization; clauses 2 and 3 describe the linearized model only, and no accuracy of that model as an approximation of the nonlinear motion, and no attraction, is claimed here. [step 1.1, step 1.2, step 2.1, step 1.3] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero velocities and the zero displacement are included: the equilibrium point (q_0,0) and the zero curve at it are the base case of the statement, used in steps 1.1-1.3."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case n=1 is included: the statement is quantified over n≥1 and the stability conclusion of step 1.3 applies verbatim."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A degenerate strict minimum with a non-isolated flat direction is allowed: only strictness of the minimum is assumed and step 2.1 permits zero modal stiffnesses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The stability statement is a forward-time statement (all t≥0) with no interval endpoint; the interval vocabulary is that of the maximal solutions used in step 1.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Equivalence of the model equation with the linearized system: step 1.2 passes from the second-order model to the first-order block system."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Reverse direction of the equivalence: step 1.2 uses invertibility of M_0 to return from the block system to M_0 xi''+K xi=0."
+        }
+      ]
+    },
+    "pthm-cm09-linearization-error-bound": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $M(q)$ symmetric and positive definite",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-inverse-matrix-by-adjugate",
+          "source_section": "Statement",
+          "quote": "If $R$ is a commutative ring, $n\\geq1$, $A\\in M_n(R)$, and $\\det(A)$ is a unit, then",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R^n$. Suppose every partial derivative $\\partial_jf$ exists on a neighbourhood of $a\\in U$ and is continuous at $a$. Then $f$ is totally",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$. The map $F$ is **locally Lipschitz in the state variable, locally uniformly in",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, and let",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-hessian-is-symmetric",
+          "source_section": "Statement",
+          "quote": "For a $C^2$ scalar field $f$, $H_f(a)^T=H_f(a)$ at every point",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions $n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it ([[lem-metrics-on-rn]]). Then: 1. **Closed boxes are",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$, and let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at every point of $(a,b)$ as a",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let $r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define $$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r)",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-vector-valued-ftc-and-lipschitz-bound",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$ and let $a, b \\in \\mathbb{R}$ with $a < b$. 1. **Fundamental theorem, second part, in $\\mathbb{R}^{m}$.** Let $f : [a,b] \\to \\mathbb{R}^{m}$ be differentiable at",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-norm-inequality-for-the-vector-valued-integral",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a \\le b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$. If $a<b$, assume that $f$ is integrable",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cm-finite-time-linearization-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open with $0\\in U$, let $F:U\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $r>0$, $C\\ge0$, $L\\ge0$ and $A\\in",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Let $x:I\\to\\mathbb R^n$ and $y:J\\to\\mathbb R^n$ solve the same IVP. The solution $y$ is an **extension** of $x$ when $I\\subseteq J$ and $y|_I=x$. It is a proper extension when $I\\subsetneq J$. A",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Clauses 1 and the derivative identity: by [F1] the translated field $F$ is $C^{2}$ on its open domain and locally Lipschitz; $F(0)=0$ and $A=DF(0)=DG(q_{0},0)$ with the displayed block form are [F2]. [F1, F2]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Quantitative remainder and growth bounds: since $F$ is $C^{2}$, $DF$ is $C^{1}$, hence continuous on the compact ball $\\overline B(0,r_{0})$; thus $L:=\\sup_{\\lVert\\eta\\rVert_{2}\\le r_{0}}\\lVert DF(\\eta)\\rVert$ is finite, and $DF$ is Lipschitz on the convex ball with some finite constant $\\Lambda$ (each entry of $DF$ has continuous gradient and is Lipschitz on the ball by [F3] with the supremum of that gradient; a finite sum of such bounds bounds $\\lVert DF(\\eta)-DF(\\eta')\\rVert$). For $\\lVert\\zeta\\rVert_{2}\\le r_{0}$, [F4] applied to the $C^{1}$ curve $t\\mapsto F(t\\zeta)-tA\\zeta$, whose derivative is $DF(t\\zeta)\\zeta-A\\zeta=(DF(t\\zeta)-DF(0))\\zeta$, gives $$F(\\zeta)-A\\zeta=\\int_{0}^{1}\\bigl(DF(t\\zeta)-DF(0)\\bigr)\\zeta\\,dt,$$ hence $\\lVert F(\\zeta)-A\\zeta\\rVert_{2}\\le\\int_{0}^{1}\\Lambda t\\lVert\\zeta\\rVert_{2}^{2}dt=\\tfrac{\\Lambda}{2}\\lVert\\zeta\\rVert_{2}^{2}$; and $F(\\zeta)=F(\\zeta)-F(0)$ with [F3] gives $\\lVert F(\\zeta)\\rVert_{2}\\le L\\lVert\\zeta\\rVert_{2}$. This proves the bounds of clause 1 with $C=\\Lambda/2$. [F1, F3, F4, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "The finite-time bound: apply [F5] to $F$, the constants $r_{0},C,L$, the matrix $A$ and the datum $z_{0}$; under $\\delta e^{LT}<r_{0}$ the maximal solution $z$ of $z'=F(z)$ is defined on $[0,T]$ with the displayed error bound. Since $F(\\zeta)=G(q_{0}+\\delta q,\\delta v)$, the curve $z$ is exactly the phase curve of the mechanical system translated to the equilibrium, i.e. $z(t)=(q(t),q'(t))$ for the maximal solution $q$ of the mechanical system with datum $(q_{0}+\\delta q_{0},v_{0})$; this is clause 2. [F5, step 1.2, given]",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Identification of the linear solution: by [F2] the matrix $A$ is the block matrix $(\\delta q,\\delta v)\\mapsto(\\delta v,-M(q_{0})^{-1}D^{2}U(q_{0})\\delta q)$; the linear solution $y=(\\xi,\\eta)$ of $y'=Ay$, $y(0)=z_{0}$ therefore satisfies $\\eta=\\xi'$, hence $\\xi''=-M(q_{0})^{-1}D^{2}U(q_{0})\\xi$, equivalently $M(q_{0})\\xi''+D^{2}U(q_{0})\\xi=0$, with $\\xi(0)=\\delta q_{0}$, $\\xi'(0)=v_{0}$; by [F6] this is exactly the motion of the small-oscillation model with that datum, and it is unique by the model's phase-system uniqueness. This is clause 3. [F2, F6, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F6",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-3 are proved. The estimate is a finite-time statement under the explicit smallness hypothesis $\\delta e^{LT}<r_{0}$; the constants $C,L$ exist by compactness and are not asserted to be optimal, and no long-time, stability or empirical conclusion is drawn. [step 1.1, step 1.2, step 2.1, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement at the equilibrium gives F(0)=0 and the zero-datum case is excluded by delta>0 only to avoid a trivial normalization; the constants of step 1.2 are finite also at zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional case n=1 is included; the statement is quantified over every n≥1 and the state dimension 2n is named in [F5]."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank, invertibility or distinctness hypothesis degenerates in the statement: M is positive definite on the ball, so no eigenvalue condition arises."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon endpoints are explicit: the estimate holds on the closed interval [0,T] under delta e^{LT}<r_0, as used in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "pthm-cm09-forced-modal-response": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-cm-forced-modal-oscillator-response",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $M\\in M_n(\\mathbb R)$ be symmetric positive definite, let $K\\in M_n(\\mathbb R)$ be symmetric and non-negative, let $S:=M^{-1/2}KM^{-1/2}=O\\Lambda O^{\\mathsf T}$ with $O$ orthogonal",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cm-forced-oscillator-sinusoidal-response",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $k>0$, $c\\ge0$, let $f_0\\in\\mathbb R$ and $\\Omega\\ge0$, and consider the forced model $m\\,x''+c\\,x'+k\\,x=f$ with $f(t)=f_0\\cos(\\Omega t)$ ([[def-cm-oscillator-model-and-phase-system]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-cm04-sinusoidal-drive-model",
+          "source_section": "Postulate",
+          "quote": "**(i) Setting.** Work in the one-dimensional model class of [[def-cm04-one-dimensional-models-and-equilibria]] with time window $I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R$, mass $m>0$,",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-cm-oscillator-model-and-phase-system",
+          "source_section": "Definition",
+          "quote": "Let $m>0$, $c\\ge0$ and $k\\in\\mathbb R$ be given real numbers, let $I\\subseteq\\mathbb R$ be an interval with nonempty interior ([[def-interval]]) and let $f:I\\to\\mathbb R$ be continuous",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function $T:V\\to W$ is **linear** when $$T(au+bv)=aT(u)+bT(v)$$ for all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Clause 1 is the instantiation of [F1] at the data of the statement: the hypotheses are $M$ symmetric positive definite, $K$ symmetric non-negative, $I_{0}$ an interval with nonempty interior and $\\varphi=J$ continuous, so the unique motion with the datum is $q=M^{-1/2}Oz$ with the displayed scalar solutions and $\\psi=O^{\\mathsf T}M^{-1/2}J$. [F1, given]",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Sinusoidal modal force: for $J(t)=J_{0}\\cos(\\Omega t)$ linearity of the map $J\\mapsto O^{\\mathsf T}M^{-1/2}J$ gives $\\psi(t)=O^{\\mathsf T}M^{-1/2}J_{0}\\cos(\\Omega t)=\\psi_{0}\\cos(\\Omega t)$. [F5, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F5"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Scalar particular solutions: for $\\lambda_{i}>0$ and $\\Omega^{2}\\ne\\lambda_{i}$, [F2] applies with $k=\\lambda_{i}$ and $f_{0}=\\psi_{0,i}$ and supplies the solution $\\psi_{0,i}\\cos(\\Omega t)/(\\lambda_{i}-\\Omega^{2})$ of amplitude $|\\psi_{0,i}|/|\\lambda_{i}-\\Omega^{2}|$, which is (a); for $\\lambda_{i}>0$ and $\\Omega^{2}=\\lambda_{i}$, [F2] supplies $\\psi_{0,i}t\\sin(\\omega_{i}t)/(2\\omega_{i})$ and its unboundedness, which is (b); for $\\lambda_{i}=0$ direct differentiation by [F5] gives $(-\\psi_{0,i}\\cos(\\Omega t)/\\Omega^{2})''=\\psi_{0,i}\\cos(\\Omega t)$ when $\\Omega>0$ and $(\\psi_{0,i}t^{2}/2)''=\\psi_{0,i}$ when $\\Omega=0$, with the stated boundedness and unboundedness; this is (c). [assume-case nonresonant, assume-case resonant, assume-case zero, F2, F5, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Reduction: let $q$ be a motion of the forced model; the particular functions of step 2.1 for all indices combine into $z^{\\mathrm{p}}$ with $z_{i}^{\\mathrm{p}}$ solving $z_{i}''+\\lambda_{i}z_{i}=\\psi_{i}$, and $q^{\\mathrm{p}}:=M^{-1/2}Oz^{\\mathrm{p}}$ is a motion by [F1]; since the system $Mq''+Kq=J$ is linear, the difference $q^{\\mathrm{h}}:=q-q^{\\mathrm{p}}$ solves the free system $Mq''+Kq=0$, hence is a free motion, and by [F4] its modal coordinates are the oscillatory or affine families of [[pthm-cm09-free-modes-and-degeneracy]] clause 2. [F1, F4, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Resonance: suppose some index $i$ has $\\psi_{0,i}\\ne0$ and is resonant in the sense of clause 3(a). If $\\lambda_{i}>0$ and $\\Omega^{2}=\\lambda_{i}$, then the $i$-th modal coordinate of every motion is, by steps 3.1 and 1.1, the sum of the unbounded particular function $\\psi_{0,i}t\\sin(\\omega_{i}t)/(2\\omega_{i})$ of step 2.1(b) and a bounded homogeneous oscillatory function, hence is unbounded on $[0,\\infty)$; if $\\lambda_{i}=0$ and $\\Omega=0$, it is the sum of the quadratic particular function $\\psi_{0,i}t^{2}/2$ and an affine homogeneous function, hence also unbounded. Since the bijection $z\\mapsto q=M^{-1/2}Oz$ with fixed coefficients preserves unboundedness by [F5], every motion of the model is unbounded; this is clause 3(a). [F4, F5, step 3.1, step 2.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "1.1",
+            "2.1",
+            "F5",
+            "F4"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Boundedness: suppose $K$ is positive definite, so every $\\lambda_{i}>0$ by [[pthm-cm09-free-modes-and-degeneracy]] clause 5, and no index with $\\psi_{0,i}\\ne0$ has $\\Omega^{2}=\\lambda_{i}$. For every index, the particular function of step 2.1(a) is bounded (for $\\psi_{0,i}=0$ it vanishes identically) and the homogeneous functions of step 3.1 are bounded oscillations by [F4]; hence every modal coordinate and its derivative are bounded on $[0,\\infty)$, and by the fixed-coefficient bijection of [F5] every motion $(q,q')$ is bounded; this is clause 3(b). The list of resonant frequencies in clause 3 is the direct reading of the cases of step 2.1. [F4, F5, step 2.1, step 3.1, algebra]",
+          "step": "4.2",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Clauses 1-3 are proved. The generalized force is prescribed external data in the modelling status of [F3]: the model has no back-reaction, no damping, and the resonance statement is a property of the declared undamped forced model, not a measured response. [cases-exhaustive:all-modal-and-drive-cases, F3, step 1.1, step 4.1, step 4.2] ∎",
+          "step": "5.1",
+          "inputs": [
+            "F3",
+            "1.1",
+            "4.1",
+            "4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero modal stiffness and the zero modal force are included: step 2.1(c) treats λ_i=0 with the bounded and quadratic solutions, and ψ_{0,i}=0 is allowed throughout."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional instance n=1 reduces to the scalar forced oscillator of the cited items; the statement is quantified over every n≥1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate modal stiffnesses are admitted, as the statement records; the remark then notes that the resonance condition is basis-independent."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The motion is asserted on the whole interval I_0 with nonempty interior and the sinusoid case on all of R, as used in steps 1.1 and 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "pthm-cm09-averaging-for-weak-damping": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-cm04-linear-damping-model",
+          "source_section": "Postulate",
+          "quote": "**(i) Setting.** Work in the one-dimensional model class of [[def-cm04-one-dimensional-models-and-equilibria]] with time window $I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R$, a fixed mass",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cm-oscillator-model-and-phase-system",
+          "source_section": "Definition",
+          "quote": "Let $m>0$, $c\\ge0$ and $k\\in\\mathbb R$ be given real numbers, let $I\\subseteq\\mathbb R$ be an interval with nonempty interior ([[def-interval]]) and let $f:I\\to\\mathbb R$ be continuous",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-cm-variation-of-constants-for-linear-systems",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $A\\in M_n(\\mathbb R)$, let $t_0\\in\\mathbb R$ and $z_0\\in\\mathbb R^n$, and let $b:\\mathbb R\\to\\mathbb R^n$ be continuous ([[def-vector-valued-derivative-and-integral]]). Define the",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Let $x:I\\to\\mathbb R^n$ and $y:J\\to\\mathbb R^n$ solve the same IVP. The solution $y$ is an **extension** of $x$ when $I\\subseteq J$ and $y|_I=x$. It is a proper extension when $I\\subsetneq J$. A",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-exponential-is-entire-with-derivative-itself",
+          "source_section": "Statement",
+          "quote": "The complex exponential is entire, and $$ \\exp'(z)=\\exp z $$ for every $z\\in\\mathbb",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "source_section": "Statement",
+          "quote": "For real $x,y$, $\\exp(x+iy)=e^x(\\cos y+i\\sin y)$ and $|\\exp(x+iy)|=e^x$. In particular $e^{i\\pi}+1=0$. The conventions and prerequisite facts used below are recorded in",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$ ([[thm-complex-numbers-form-a-field]]). Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-primitives-of-a-continuous-function",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex with at least two elements ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]). Call $G : I \\to \\mathbb{R}$ a",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their components and their limits are as in [[def-vector-valued-functions-limits-and-continuity]]. ### The derivative Let",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cm-averaging-for-fast-periodic-oscillations",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, $P>0$, let $O\\subseteq\\mathbb R^n$ be open, and let $f:\\mathbb R\\times O\\to\\mathbb R^n$ be continuous, continuously partially differentiable in the second variable and $P$-periodic in",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cm-averaging-data-and-averaged-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $P>0$, let $O\\subseteq\\mathbb R^n$ be open, and let $f:\\mathbb R\\times O\\to\\mathbb R^n$ be continuous ([[def-vector-valued-functions-limits-and-continuity]]) and continuously",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let $r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define $$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r)",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let $T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-vector-valued-functions-limits-and-continuity",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and $\\mathbb{R}^{m}$ carries the Euclidean norm $\\lVert\\cdot\\rVert_2$ of [[def-euclidean-inner-product]] and [[def-p-norms-on-rn]], whose induced metric",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]). A subset $I \\subseteq \\mathbb{R}$ is",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Identification of the slow system. Let $x$ be a motion and put $u(t):=\\omega_{0}x(t)+ix'(t)$, so that $\\zeta=e^{i\\omega_{0}t}u/\\sqrt{2\\omega_{0}}$ and $\\operatorname{Im}u=\\sqrt{2\\omega_{0}}\\bigl(\\cos(\\omega_{0}t)\\operatorname{Im}\\zeta-\\sin(\\omega_{0}t)\\operatorname{Re}\\zeta\\bigr)$ by [F2]. From $x''=-\\omega_{0}^{2}x-(\\varepsilon\\gamma/m)x'$ of the model, $$u'=\\omega_{0}x'+ix''=\\omega_{0}x'-i\\omega_{0}^{2}x-i\\frac{\\varepsilon\\gamma}{m}x'=-i\\omega_{0}u-i\\frac{\\varepsilon\\gamma}{m}\\operatorname{Im}u,$$ so differentiating $\\zeta$ with the product and chain rules of [F2] gives $\\zeta'=-\\frac{i\\varepsilon\\gamma}{m}\\frac{e^{i\\omega_{0}t}}{\\sqrt{2\\omega_{0}}}\\operatorname{Im}u=\\varepsilon F(t,\\zeta)$. Conversely, if $\\zeta$ solves $\\zeta'=\\varepsilon F(t,\\zeta)$ and $u:=\\sqrt{2\\omega_{0}}e^{-i\\omega_{0}t}\\zeta$, then $u'=-i\\omega_{0}u-i(\\varepsilon\\gamma/m)\\operatorname{Im}u$, so $x:=\\operatorname{Re}(u)/\\omega_{0}$ satisfies $x'=\\operatorname{Re}(u')/\\omega_{0}=\\operatorname{Im}u$ and $x''=\\operatorname{Im}(u')=-\\omega_{0}\\operatorname{Re}u-(\\varepsilon\\gamma/m)\\operatorname{Im}u=-\\omega_{0}^{2}x-(\\varepsilon\\gamma/m)x'$, that is, $x$ is a motion with the stated inverse formula. The two constructions are inverse to each other because $x$ and $x'$ are recovered from $\\zeta$ and $\\zeta$ is recovered from $x,x'$. [F1, F2, given, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Smoothness, periodicity and average. $F$ is smooth on $\\mathbb R\\times\\mathbb C$ because $\\zeta\\mapsto F(t,\\zeta)$ is real-linear and the coefficients $t\\mapsto e^{i\\omega_{0}t}\\cos(\\omega_{0}t)$ and $t\\mapsto e^{i\\omega_{0}t}\\sin(\\omega_{0}t)$ are smooth; it is $P$-periodic with $P=2\\pi/\\omega_{0}$ because $e^{i\\omega_{0}(t+P)}=e^{i\\omega_{0}t}$ and $\\cos(\\omega_{0}(t+P))=\\cos(\\omega_{0}t)$, $\\sin(\\omega_{0}(t+P))=\\sin(\\omega_{0}t)$. Expanding the product, $$F(t,\\zeta)=\\frac{\\gamma}{m}\\Bigl(\\sin(\\omega_{0}t)\\cos(\\omega_{0}t)\\operatorname{Im}\\zeta-\\sin^{2}(\\omega_{0}t)\\operatorname{Re}\\zeta\\Bigr)-\\frac{i\\gamma}{m}\\Bigl(\\cos^{2}(\\omega_{0}t)\\operatorname{Im}\\zeta-\\sin(\\omega_{0}t)\\cos(\\omega_{0}t)\\operatorname{Re}\\zeta\\Bigr),$$ so by [F3] the one-period average of the first bracket is $-\\gamma\\operatorname{Re}\\zeta/(2m)$ and that of the second is $-\\gamma\\operatorname{Im}\\zeta/(2m)$, giving $\\bar F(\\zeta)=-\\frac{\\gamma}{2m}(\\operatorname{Re}\\zeta+i\\operatorname{Im}\\zeta)=-\\frac{\\gamma}{2m}\\zeta$. The averaged system is linear with constant coefficient and has the displayed global exponential solution. This is clause 2. [F3, F4, F5, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Bounds on the ball. For $\\lvert\\zeta-\\zeta_{0}\\rvert\\le R$ one has $\\lvert\\zeta\\rvert\\le\\lvert\\zeta_{0}\\rvert+R$, so $$\\lVert F(t,\\zeta)\\rVert_{2}=\\frac{\\gamma}{m}\\bigl\\lvert\\cos(\\omega_{0}t)\\operatorname{Im}\\zeta-\\sin(\\omega_{0}t)\\operatorname{Re}\\zeta\\bigr\\rvert\\le\\frac{\\gamma}{m}\\bigl(\\lvert\\operatorname{Im}\\zeta\\rvert+\\lvert\\operatorname{Re}\\zeta\\rvert\\bigr)\\le\\frac{\\gamma}{m}\\sqrt2\\,\\bigl(\\lvert\\zeta_{0}\\rvert+R\\bigr)=M .$$ The state derivative is $D_{\\zeta}F(t,\\zeta)h=-(\\gamma/m)e^{i\\omega_{0}t}\\bigl(\\cos(\\omega_{0}t)\\operatorname{Im}h-\\sin(\\omega_{0}t)\\operatorname{Re}h\\bigr)$, whose modulus is at most $(\\gamma/m)\\sqrt2\\,\\lvert h\\rvert$ by the same inequality, so $\\lVert D_{\\zeta}F(t,\\zeta)\\rVert\\le L=(\\gamma/m)\\sqrt2$ by [F5]. [F5, given, algebra]",
+          "step": "1.3",
+          "inputs": [
+            "F5"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Existence and uniqueness. By [F1] every datum has exactly one maximal motion and it is defined on all of $\\mathbb R$; by step 1.1 its amplitude solves the slow system on $\\mathbb R$ with the datum $\\zeta(0)$, and distinct motions have distinct amplitudes. Conversely a solution of the slow system on $\\mathbb R$ produces a motion by step 1.1; this proves the bijection of clause 1. [F1, step 1.1, given]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Averaged trajectory and the estimate. The averaged solution $\\bar\\zeta(t)=\\zeta_{0}e^{-\\varepsilon\\gamma t/(2m)}$ satisfies $\\lvert\\bar\\zeta(t)-\\zeta_{0}\\rvert=\\lvert\\zeta_{0}\\rvert\\bigl(1-e^{-\\varepsilon\\gamma t/(2m)}\\bigr)\\le R-\\rho$ on $[0,A/\\varepsilon]$ under the stated trapping hypothesis; if $\\lvert\\zeta_{0}\\rvert>R-\\rho$ and $\\varepsilon\\gamma A/(2m)\\le\\ln\\bigl(\\lvert\\zeta_{0}\\rvert/(\\lvert\\zeta_{0}\\rvert-(R-\\rho))\\bigr)$, then $e^{-\\varepsilon\\gamma A/(2m)}\\ge\\bigl(\\lvert\\zeta_{0}\\rvert-(R-\\rho)\\bigr)/\\lvert\\zeta_{0}\\rvert$, which is the same inequality, so the trapping hypothesis holds in that case. Applying [F4] with $f=F$, the constants $M,L$ of step 1.3, the radius $R$, the parameter $\\rho$, the horizon parameter $A$ and the smallness hypothesis $\\varepsilon K<\\rho$ gives that the solution $\\zeta$ of the slow system with $\\zeta(0)=\\zeta_{0}$ exists on $[0,A/\\varepsilon]$ and satisfies $\\lVert\\zeta(t)-\\bar\\zeta(t)\\rVert_{2}\\le\\varepsilon K$ there; this is clause 3. [F4, step 1.2, step 1.3, given, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F4",
+            "1.3",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Energy identity and estimate. With $\\zeta=(1/\\sqrt{2\\omega_{0}})(\\omega_{0}x+ix')e^{i\\omega_{0}t}$ one has $2\\omega_{0}\\lvert\\zeta\\rvert^{2}=\\omega_{0}^{2}x^{2}+x'^{2}$ by [F2], hence $$m\\omega_{0}\\lvert\\zeta\\rvert^{2}=\\tfrac12 m x'^{2}+\\tfrac12 m\\omega_{0}^{2}x^{2}=\\tfrac12mx'^{2}+\\tfrac12kx^{2}=E .$$ For $0\\le t\\le A/\\varepsilon$, $\\bigl\\lvert\\,\\lvert\\zeta(t)\\rvert^{2}-\\lvert\\bar\\zeta(t)\\rvert^{2}\\bigr\\rvert=\\bigl\\lvert\\lvert\\zeta(t)\\rvert-\\lvert\\bar\\zeta(t)\\rvert\\bigr\\rvert\\bigl(\\lvert\\zeta(t)\\rvert+\\lvert\\bar\\zeta(t)\\rvert\\bigr)\\le\\varepsilon K\\bigl(2\\lvert\\zeta_{0}\\rvert+\\varepsilon K\\bigr)$, because $\\lvert\\zeta(t)\\rvert\\le\\lvert\\bar\\zeta(t)\\rvert+\\varepsilon K\\le\\lvert\\zeta_{0}\\rvert+\\varepsilon K$; multiplying by $m\\omega_{0}$ and using $m\\omega_{0}\\lvert\\bar\\zeta(t)\\rvert^{2}=E_{0}e^{-\\varepsilon\\gamma t/m}$ gives the displayed energy estimate; this is clause 4. [F2, step 2.2, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Clauses 1-4 are proved. The averaged equation defines a different model from the exact one; the estimate is finite-time, of order $\\varepsilon$ in the amplitude, and holds only on the stated horizon under the smallness and trapping hypotheses; no exact decay law and no empirical qualification is asserted. [step 2.1, step 1.2, step 2.2, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "1.2",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement includes gamma>0 fixed and epsilon small, and the field vanishes identically at zeta=0; the datum zeta_0 is required nonzero only to state the relative trapping threshold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The model is one-dimensional by declaration (n=1) and the statement quantifies over the single amplitude coordinate; no dimensional special case is omitted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No eigenvalue, rank or distinctness hypothesis appears: the statement concerns a scalar damped equation with fixed positive parameters and an explicitly inverted map, so no degenerate configuration arises."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon endpoints are explicit: the estimate holds on the closed interval [0,A/epsilon] under the stated smallness and trapping hypotheses, as used in step 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "rem-cm09-zero-modes-degeneracy-and-scope": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement of the remark is about the zero modal stiffness and records its affine, unbounded behaviour from the cited items."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The remark reads the general n≥1 case and singles out no dimensional special case; no one-dimensional assertion is made."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement of the remark treats the degenerate modal stiffness with multiplicity m as one of its main subjects."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark makes no interval-endpoint assertion; the finite-time and finite-horizon qualifications are the scope statements of the cited theorems."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-two-mass-spring-modes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Modal identities: $M$ is symmetric positive definite and $K$ is symmetric with $q^{\\mathsf T}Kq=(k+c)(x_{1}^{2}+x_{2}^{2})-2cx_{1}x_{2}=k(x_{1}^{2}+x_{2}^{2})+c(x_{1}-x_{2})^{2}\\ge0$ for $k>0, c>0$ (indeed positive definite), so the model is an oscillatory coupled quadratic model of [F1]. Multiplying, $Ku_{+}=(k,k)/\\sqrt{2m}=k(1,1)/\\sqrt{2m}=\\frac{k}{m}Mu_{+}$ and $Ku_{-}=(k+2c,-(k+2c))/\\sqrt{2m}=\\frac{k+2c}{m}Mu_{-}$; and $u_{\\pm}^{\\mathsf T}Mu_{\\pm}=m\\lvert u_{\\pm}\\rvert_{2}^{2}=m\\cdot\\frac{2}{2m}=1$, $u_{+}^{\\mathsf T}Mu_{-}=m(1-1)/(2m)=0$. This proves clause 1 with $\\lambda_{\\pm}$ as displayed. [F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Modal coordinates: with $e_{\\pm}=(1,\\pm1)/\\sqrt2$ the matrix $O=[e_{+}\\ e_{-}]$ is orthogonal and $M^{-1/2}KM^{-1/2}=\\frac1mK$ has the orthonormal eigenbasis $e_{\\pm}$ with eigenvalues $\\lambda_{\\pm}$ by clause 1; hence $z=O^{\\mathsf T}M^{1/2}q$ has $z_{\\pm}=e_{\\pm}^{\\mathsf T}\\sqrt m\\,q=\\sqrt{m/2}(x_{1}\\pm x_{2})$ and $u_{\\pm}=M^{-1/2}e_{\\pm}$, so the modal data of clause (e) of [[def-cm09-coupled-quadratic-model]] are exactly those displayed. [F1, F3, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Frequency comparison: $\\omega_{+}=\\sqrt{k/m}$ contains no $c$, while $c\\mapsto\\omega_{-}=\\sqrt{(k+2c)/m}$ is strictly increasing on $c>0$ with $\\omega_{-}>\\omega_{+}$: the in-phase oscillation is softer than the anti-phase one. This is clause 4. [step 1.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Zero stiffness: if $k=0$ then $K=c\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}$, $Ku_{+}=0$ and $Ku_{-}=\\frac{2c}{m}Mu_{-}$, so $\\lambda_{+}=0$ and $\\lambda_{-}=2c/m$; by [F2] the general motion is the affine-plus-oscillatory family displayed in clause 5, in which the pair translates as a whole (arbitrary constant velocity $B$) and only the relative coordinate $x_{1}-x_{2}$ oscillates, with $\\omega_{-}=\\sqrt{2c/m}$. This is clause 5. [F2, step 1.1, algebra]",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Motions: by [F2] and [F4], every motion is the superposition of clause 2 with $\\lambda_{\\pm}>0$, i.e. the displayed two-frequency family, and the coefficients $(A,B,C,D)$ are bijective onto the data $(q(0),q'(0))=\\bigl(Au_{+}+Cu_{-},\\,B\\omega_{+}u_{+}+D\\omega_{-}u_{-}\\bigr)$. This is clause 2. [F2, F4, step 1.1, step 2.1]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Single-mode data: for $q(0)=u_{+}$, $q'(0)=0$ the coefficient system gives $A=1$, $B=C=D=0$, so $q(t)=\\cos(\\omega_{+}t)u_{+}$; its energy is $E=\\tfrac12q'^{\\mathsf T}Mq'+\\tfrac12q^{\\mathsf T}Kq =\\tfrac12\\omega_{+}^{2}\\sin^{2}(\\omega_{+}t)+\\tfrac12\\tfrac{k}{m}\\cos^{2}(\\omega_{+}t)=\\tfrac{k}{2m}$, constant because $\\omega_{+}^{2}=k/m$; the same computation with $\\lambda_{-}=(k+2c)/m$ gives $E=(k+2c)/(2m)$ for the anti-phase datum. This is clause 3. [F2, step 1.1, step 3.1, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D7",
+          "claim": "Clauses 1-5 are verified on the explicit data; all parameters are model data with declared units, and no measured frequency, damping or apparatus behaviour is asserted. [step 1.1, step 3.1, step 4.1, step 2.2, step 2.3] ∎",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-stiffness case k=0 is clause 5 and is verified in step 2.3, with the affine zero mode and the relative oscillation."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-degree-of-freedom instance; the one-mass scalar case is not asserted and belongs to the one-dimensional models page."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The limit c=0 is addressed in step 2.2 by the frequency comparison and lies in the companion degeneracy example; within this example the two modal stiffnesses k/m and (k+2c)/m differ for c>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example asserts motions on all of R and no interval-endpoint condition; the affine family is evaluated on the forward halfline only for the unboundedness statement of step 2.3."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-triatomic-translation-zero-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-cm-two-mass-spring-modes",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $k\\ge0$ and $c\\ge0$, and put $$K:=\\begin{pmatrix}k+c&-c\\\\-c&k+c\\end{pmatrix},\\qquad u_+:=\\frac1{\\sqrt2}\\begin{pmatrix}1\\\\1\\end{pmatrix},\\qquad",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Kernel and positivity: $q^{\\mathsf T}Kq=k\\bigl((x_{1}-x_{2})^{2}+(x_{2}-x_{3})^{2}\\bigr)\\ge0$ with equality if and only if $x_{1}=x_{2}=x_{3}$, so $K$ is symmetric non-negative with the stated kernel; $M$ is diagonal with positive entries. [F1, F4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Eigenpairs: multiplying, $$Ku_{1}=0,\\qquad Ku_{2}=k(1,0,-1)=\\frac{k}{m}Mu_{2},\\qquad Ku_{3}=k\\Bigl(1+\\frac{2m}{M}\\Bigr)(1,-2,1)=\\frac{k}{m}\\Bigl(1+\\frac{2m}{M}\\Bigr)Mu_{3},$$ using $Mu_{3}=m(1,-2,1)$; and $u_{1}^{\\mathsf T}Mu_{1}=1$, $u_{2}^{\\mathsf T}Mu_{2}=1$, $u_{3}^{\\mathsf T}Mu_{3}=1$, with mixed products zero because distinct eigenvalues of the generalized problem are $M$-orthogonal when $M$ is symmetric. This proves clauses 1 and 2. [F1, F4, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Consistency check: the antisymmetric sector (outer labels opposite, no middle motion) has effective outer stiffness $k$ and coupling $2c$ with $c=k$ in the two-label reduction $x_{1}=-x_{3}$, $x_{2}=0$: the frequency $\\sqrt{k/m}$ of $u_{2}$ matches [F3]. [F3, step 1.2]",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Motions: since $\\lambda_{1}=0<\\lambda_{2}<\\lambda_{3}$, [F2] gives that every motion is the displayed superposition with the affine family for $\\lambda_{1}$ and oscillatory families for $\\lambda_{2},\\lambda_{3}$; the pure-zero-mode motions form the affine curves in $N_{0}=\\ker K=\\operatorname{span}\\{u_{1}\\}$, i.e. $q(t)=(a+bt)u_{1}$, which are unbounded on $[0,\\infty)$ for $b\\ne0$ because $\\lvert a+bt\\rvert\\to\\infty$. This is clause 3. [F2, F5, step 1.2]",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Frequency ordering: $\\omega_{3}^{2}/\\omega_{2}^{2}=1+2m/M>1$, so $\\omega_{3}>\\omega_{2}$ for every $M>0$; this is clause 4. [step 1.2, algebra]",
+          "step": "2.3",
+          "inputs": [
+            "1.2"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Clauses 1-4 are verified on the explicit data. The comparison in clause 4 is read off the eigenvalues computed from the displayed matrices; the cited treatment's sentence comparing the two frequencies is not used, because with the matrices it displays the computed eigenvalues give the opposite ordering, and the discrepancy is recorded as a source error in the reader record for that treatment. All parameters are model data; no molecular frequency, force constant or apparatus behaviour is asserted. [step 1.2, step 2.2, step 2.3, given] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero modal stiffness λ_1=0 and its affine family are clauses 1-3 and steps 1.1-2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a three-label chain; no one-degree-of-freedom instance is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The three modal stiffnesses 0, k/m and (k/m)(1+2m/M) are pairwise distinct for m,M>0, so no degeneracy arises in this instance."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The affine motion is evaluated on the forward halfline for its unboundedness in step 2.2, and existence is on all of R by the free-mode theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-double-pendulum-linear-modes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Positive definiteness: $M$ is symmetric with leading principal minors $2ml^{2}>0$ and $\\det M=(2\\cdot1-1^{2})m^{2}l^{4}=m^{2}l^{4}>0$, hence positive definite; $K$ is diagonal with positive diagonal entries, hence symmetric positive definite; so the model is oscillatory with both modal stiffnesses positive. [F1, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Eigenpairs: multiplying, $$Kw_{s}=mgl\\begin{pmatrix}2\\\\ \\sqrt2\\end{pmatrix},\\qquad Mw_{s}=ml^{2}\\begin{pmatrix}2+\\sqrt2\\\\ 1+\\sqrt2\\end{pmatrix},$$ and $2/(2+\\sqrt2)=\\sqrt2/(1+\\sqrt2)=2-\\sqrt2$, so $Kw_{s}=\\frac{g}{l}(2-\\sqrt2)Mw_{s}$; similarly $$Kw_{f}=mgl\\begin{pmatrix}2\\\\-\\sqrt2\\end{pmatrix},\\qquad Mw_{f}=ml^{2}\\begin{pmatrix}2-\\sqrt2\\\\ 1-\\sqrt2\\end{pmatrix},$$ and $2/(2-\\sqrt2)=-\\sqrt2/(1-\\sqrt2)=2+\\sqrt2$, so $Kw_{f}=\\frac{g}{l}(2+\\sqrt2)Mw_{f}$. The normalizations give $u_{s}^{\\mathsf T}Mu_{s}=u_{f}^{\\mathsf T}Mu_{f}=1$ and $u_{s}^{\\mathsf T}Mu_{f}=0$, because $w_{s}^{\\mathsf T}Mw_{s}=2ml^{2}\\gamma_{s}$, $w_{f}^{\\mathsf T}Mw_{f}=2ml^{2}\\gamma_{f}$ and $w_{s}^{\\mathsf T}Mw_{f}=ml^{2}(2-1-2)=0$; this proves clauses 1 and 2. [F1, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Motions: by [F2] with $\\lambda_{s},\\lambda_{f}>0$ every motion is the displayed two-frequency superposition, with coefficients bijective onto the data, and it is bounded on $\\mathbb R$ because both modal families are bounded; the frequencies are $\\sqrt{\\lambda_{s}}$ and $\\sqrt{\\lambda_{f}}$ by [F4]. This is clause 3. [F2, F4, step 1.2]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Mode patterns and pure-mode data: reading the coordinates of $w_{s}=(1,\\sqrt2)$ and $w_{f}=(1,-\\sqrt2)$ gives $\\theta_{2}=\\sqrt2\\,\\theta_{1}$ in the slow mode and $\\theta_{2}=-\\sqrt2\\,\\theta_{1}$ in the fast mode; the data $q(0)=u_{s}$, $q'(0)=0$ correspond to $A=1$, $B=C=D=0$, hence to $q(t)=\\cos(\\omega_{s}t)u_{s}$, and analogously for $u_{f}$. This is clause 4. [F2, step 1.2, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Frequency comparison: $\\gamma_{f}-\\gamma_{s}=2\\sqrt2>0$ gives $\\omega_{f}>\\omega_{s}$: the mode in which the rods swing in opposite directions is the faster one, consistent with the cited treatment's conclusion. [step 1.2, algebra]",
+          "step": "2.3",
+          "inputs": [
+            "1.2"
+          ]
+        },
+        {
+          "id": "D6",
+          "claim": "Clauses 1-4 are verified on the declared matrices, which are the small-oscillation data attributed to the double pendulum in the cited linearization. The verification does not derive those matrices from the pendulum Lagrangian, makes no claim about the accuracy of the linear approximation at finite angle, and asserts no measured period; the gravitational acceleration $g$ is a model parameter. [given, step 1.1, step 2.1, step 2.2] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement datum and zero velocity at the equilibrium are the base of the pure-mode data of step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-angle instance; no scalar reduction is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The two modal stiffnesses (g/l)(2-sqrt2) and (g/l)(2+sqrt2) are distinct, as step 2.3 uses; no degeneracy arises."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "All motions are asserted on R with no interval endpoint; the example states no boundary-value problem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-degenerate-oscillator-subspace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "ex-cm09-two-mass-spring-modes",
+          "source_section": "Example",
+          "quote": "Consider two particle labels of equal mass $m>0$ constrained to a line, with coordinates $x_{1},x_{2}$ in metres read in a fixed inertial frame ([[def-cm01-units]]). Each label is attached to a fixed",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Degeneracy: by [F4] the matrix $M^{-1/2}KM^{-1/2}$ is $(k/m)I_{2}$, whose only eigenvalue is $k/m$ with eigenspace $\\mathbb R^{2}$; any orthonormal basis diagonalizes it because a scalar matrix commutes with every matrix. Hence $\\lambda_{1}=\\lambda_{2}=k/m$, $E_{\\lambda}=\\mathbb R^{2}$, $N_{\\lambda}=\\mathbb R^{2}$ and the decoupling data of clause (e) of [[def-cm09-coupled-quadratic-model]] are non-unique. This is clause 1. [F1, F4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Motions: by [F2] and [F5] the motions are the superpositions of the scalar families with the single frequency $\\omega=\\sqrt{k/m}$ in every direction, i.e. the displayed four-parameter family $q(t)=\\cos(\\omega t)a+\\sin(\\omega t)b$; the datum $q(0)=a$, $q'(0)=0$ corresponds to $b=0$ and gives $q(t)=\\cos(\\omega t)a$, a motion whose values lie in the line spanned by $a$ for all $t$: by clause 4 of [F2] this is a pure-$\\lambda$ motion, and every nonzero $a$ gives one. This is clause 2. [F1, F2, F5, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F5",
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Splitting by coupling: the stiffness of [F3] reduces to $kI_{2}$ at $c=0$, so the data of this example and of the coupled two-mass model agree at $c=0$; for $c>0$, [F3] gives the distinct modal stiffnesses $k/m$ (the in-phase mode, unchanged by the coupling) and $(k+2c)/m$ (the relative motion, raised by the coupling). This is clause 4. [F3, step 1.1]",
+          "step": "2.2",
+          "inputs": [
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Intrinsic versus non-intrinsic data: the number $\\lambda=k/m$ and the subspace $N_{\\lambda}=\\mathbb R^{2}$ are determined by $M$ and $K$ alone, whereas an individual modal vector is a member of a chosen orthonormal basis and different admissible decouplings assign the same motion different coordinate labels; hence no basis-independent decomposition of the four-parameter family into two distinguished one-parameter families exists here. This is clause 3. [F2, step 1.1, step 2.1]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-4 are verified on the explicit data; the splitting statement is a comparison of two explicitly specified models at different parameter values and is not a general assertion that degeneracies are always removed by perturbations. [step 1.1, step 3.1, step 2.2] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement and zero velocity data are included in the four-parameter family of step 2.1; the stiffness itself is positive definite."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-degree-of-freedom instance; its whole point is the repeated eigenvalue, so no scalar case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The double eigenvalue λ=k/m with two-dimensional eigenspace is the subject of clauses 1-3 and steps 1.1-3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur: motions are asserted on R and the comparison of step 2.2 concerns two parameter values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-unstable-quadratic-mode": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $M(q)$ symmetric and positive definite",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "pthm-cm09-free-modes-and-degeneracy",
+          "source_section": "Statement",
+          "quote": "Adopt the free coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $J\\equiv0$, $M$ is symmetric positive definite and $K$ is symmetric, with modal data",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-cm-instability-of-a-hyperbolic-saddle",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open with $0\\in U$, and let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $F(0)=0$. Put $A:=DF(0)$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cm-equilibrium-and-lyapunov-stability",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map. Consider the autonomous first-order system $$z'(t)=F(z(t)),$$ read as the first-order system of",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cm-homogeneous-oscillator-solution-classification",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$ and $k>0$, and consider the homogeneous damped oscillator model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]), with characteristic polynomial",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Equilibrium and stiffness: $U'(\\theta)=-mgl\\sin\\theta$ vanishes at $\\theta=0$, and $U(\\theta)<U(0)$ for $0<\\lvert\\theta\\rvert<\\pi$ on the chart, so $\\theta=0$ is a strict local maximum and $K=U''(0)=-mgl<0$; the small-oscillation model has data $M=ml^{2}$, $K=-mgl$, i.e. modal stiffness $\\lambda=-g/l$. This is clause 1. [F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Exponential families: by [F3] and [F5] the motions of the quadratic model are exactly $\\xi(t)=a\\cosh(\\kappa t)+b\\sinh(\\kappa t)$ with $\\kappa=\\sqrt{g/l}$; for the datum $a=0$, $b\\ne0$ the motion is $(b/\\kappa)\\sinh(\\kappa t)$, which is unbounded on $[0,\\infty)$. This is clause 2. [F3, F5, step 1.1]",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Nonlinear instability: the field $F(\\theta,v)=(v,(g/l)\\sin\\theta)$ is $C^{1}$ on $\\mathbb R^{2}$ with $F(0,0)=0$; by [F6] its derivative at the origin has the real eigenvalues $\\pm\\sqrt{g/l}$, none on the imaginary axis and one positive, so the hypotheses of [F4] hold and $(0,0)$ is not a Lyapunov stable equilibrium of the pendulum chart system. This is clause 4. [F4, F6, step 1.1]",
+          "step": "2.2",
+          "inputs": [
+            "F6",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Quadratic instability: by clause 6 of [F3] applied to the one-dimensional free model with negative modal stiffness, the rest point is not Lyapunov stable, with the displayed escaping family; explicitly, for every $\\delta>0$ choose $\\lvert b\\rvert$ so small that $\\lVert(0,b)\\rVert_{2}<\\delta$, and the motion $(b/\\kappa)\\sinh(\\kappa t)$ reaches norm $1=\\varepsilon_{0}$ for $t=\\kappa^{-1}\\operatorname{arsinh}(\\kappa/\\lvert b\\rvert)>0$. This is clause 3. [F3, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-4 are verified on the explicit chart data; clause 4 is the nonlinear conclusion supplied by the hyperbolic-saddle theorem, whereas clause 3 concerns the quadratic model alone. The parameters $m,l,g$ are model data, and no escape time, measured period or apparatus behaviour is asserted. [step 1.1, step 2.1, step 3.1, step 2.2] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement datum and zero velocity are included; the escaping family of step 3.1 starts from (0,b) with b small."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is exactly the scalar one-degree-of-freedom case; clause 6 of the free-mode theorem is instantiated at λ=-g/l in step 3.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The single modal stiffness -g/l is nonzero and simple, so no degeneracy arises."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The escaping motion is evaluated on the forward halfline [0,infinity) in steps 2.1 and 3.1; no endpoint derivative is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-forced-resonant-mode-check": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-cm09-two-mass-spring-modes",
+          "source_section": "Example",
+          "quote": "Consider two particle labels of equal mass $m>0$ constrained to a line, with coordinates $x_{1},x_{2}$ in metres read in a fixed inertial frame ([[def-cm01-units]]). Each label is attached to a fixed",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-forced-modal-response",
+          "source_section": "Statement",
+          "quote": "Adopt the coupled quadratic model of [[def-cm09-coupled-quadratic-model]] with data $(M,K,J)$ in which $M$ is symmetric positive definite, $K$ is symmetric and non-negative, $I_{0}\\subseteq\\mathbb R$",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "post-cm04-sinusoidal-drive-model",
+          "source_section": "Postulate",
+          "quote": "**(i) Setting.** Work in the one-dimensional model class of [[def-cm04-one-dimensional-models-and-equilibria]] with time window $I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R$, mass $m>0$,",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Modal force: with $J_{0}=Fu_{+}=F(1,1)/\\sqrt{2m}$, $$\\psi_{0}=O^{\\mathsf T}M^{-1/2}J_{0}=\\frac{F}{\\sqrt m}\\begin{pmatrix}e_{+}^{\\mathsf T}\\\\ e_{-}^{\\mathsf T}\\end{pmatrix}\\frac{(1,1)}{\\sqrt{2m}}=\\frac{F}{m}\\begin{pmatrix}1\\\\ 0\\end{pmatrix},$$ because $e_{+}^{\\mathsf T}(1,1)=\\sqrt2$ and $e_{-}^{\\mathsf T}(1,1)=0$. This is clause 1. [F1, F4, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Resonant case: for $\\Omega=\\omega_{+}$, $\\lambda_{+}=\\Omega^{2}$ and $\\psi_{0,+}=F/m\\ne0$; by [F2] clause 2(b) the function $z_{+}^{\\mathrm{p}}(t)=\\frac{F}{m}\\frac{t\\sin(\\omega_{+}t)}{2\\omega_{+}}$ solves the in-phase modal equation and $q^{\\mathrm{p}}=M^{-1/2}Oz^{\\mathrm{p}}=\\frac{F}{2m\\omega_{+}}t\\sin(\\omega_{+}t)u_{+}$ is a motion of the model, with the stated linearly growing amplitude; and by [F2] clause 3(a) every motion of the model is unbounded on $[0,\\infty)$. This is clause 2. [F1, F2, F4, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F1",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Non-resonant case: if $\\Omega^{2}\\ne k/m=\\lambda_{+}$, then the only index with $\\psi_{0,i}\\ne0$ is $i=+$ (since $\\psi_{0,-}=0$), and it is not resonant; $K$ is positive definite by [F1], so [F2] clause 3(b) gives that every motion is bounded on $[0,\\infty)$. At $\\Omega=\\omega_{-}$ the steady in-phase response of [F2] clause 2(a) has amplitude $\\lvert\\psi_{0,+}\\rvert/\\lvert\\lambda_{+}-\\Omega^{2}\\rvert=\\frac{\\lvert F\\rvert}{m}\\big/\\frac{2c}{m}=\\lvert F\\rvert/(2c)$, and the relative mode has zero modal force. This is clause 3. [F1, F2, F4, step 1.1, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Resonance reading: by [F2] the resonant frequencies are exactly the frequencies of the modal directions with nonzero modal force component; here $\\psi_{0}$ is supported on the in-phase direction alone, so the resonance is at $\\omega_{+}$ and the equally available frequency $\\omega_{-}$ of the relative mode does not produce resonance for this drive. This is clause 4. [F2, step 1.1, step 2.1, step 2.2]",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-4 are verified on the explicit data under the prescribed drive [F3]; no damping, back-reaction, measured response or apparatus detail is asserted, and the parameters are model data. [F3, step 1.1, step 2.1, step 2.2, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero modal force component ψ_{0,-}=0 and the zero datum at the relative mode are included in step 1.1 and used in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-mode instance with a drive along one mode; no scalar case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The limit c=0 merging the two frequencies is recorded in the remark and is consistent with clauses 2 and 3 through the amplitude |F|/(2c) of step 2.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Motions are asserted on all of R and the unboundedness statement concerns the forward halfline; no boundary-value condition occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-weak-damping-averaging-check": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "pthm-cm09-averaging-for-weak-damping",
+          "source_section": "Statement",
+          "quote": "Adopt the strictly damped oscillator model of [[post-cm04-linear-damping-model]] with fixed data $m>0$, $k>0$ and drag coefficient $c=\\varepsilon\\gamma$, where $\\varepsilon>0$ and $\\gamma>0$ are",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cm-averaging-data-and-averaged-field",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $P>0$, let $O\\subseteq\\mathbb R^n$ be open, and let $f:\\mathbb R\\times O\\to\\mathbb R^n$ be continuous ([[def-vector-valued-functions-limits-and-continuity]]) and continuously",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$ ([[thm-complex-numbers-form-a-field]]). Define $$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$ and define its",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Specialization: with $m=k=\\gamma=1$ and $\\varepsilon=10^{-4}$ the quantities of [F1] become $\\omega_{0}=1$, $P=2\\pi$, $\\bar F(\\zeta)=-\\zeta/2$ and $\\bar\\zeta(t)=e^{-\\varepsilon t/2}=e^{-t/10^{4}}$; the field is the one displayed in clause 1. [F1, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Constants: substituting $\\lvert\\zeta_{0}\\rvert=1$, $R=1/2$, $\\gamma/m=1$ gives $M=\\sqrt2\\cdot\\frac32=\\frac{3\\sqrt2}{2}$ and $L=\\sqrt2$, hence $B=2MP=6\\sqrt2\\,\\pi$ and $B_{1}=2LP=4\\sqrt2\\,\\pi$. Then $LB=\\sqrt2\\cdot6\\sqrt2\\,\\pi=12\\pi$ and $B_{1}M=4\\sqrt2\\,\\pi\\cdot\\frac{3\\sqrt2}{2}=12\\pi$, so $$K=e^{\\sqrt2/2}\\Bigl[6\\sqrt2\\,\\pi+\\tfrac12\\bigl(12\\pi+12\\pi\\bigr)\\Bigr] =2\\pi\\bigl(3\\sqrt2+6\\bigr)e^{\\sqrt2/2},$$ and $K<198<200$ because $\\sqrt2<3/2$ and $e^{\\sqrt2/2}<e<3$ give $K<2\\pi\\cdot(3\\cdot\\frac32+6)\\cdot3=63\\pi$, while $\\pi<22/7$ gives $63\\pi<198$. This is clause 2. [F1, given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Hypotheses: $\\varepsilon K<198/10^{4}<1/50<1/4=\\rho$ by step 1.2, so the smallness condition holds; the trapping quantity is $\\lvert\\zeta_{0}\\rvert(1-e^{-\\varepsilon\\gamma A/(2m)})=1-e^{-1/(4\\cdot10^{4})}\\le1/(4\\cdot10^{4})<1/4=R-\\rho$ using $1-e^{-u}\\le u$ for $u\\ge0$; and the sufficient logarithmic condition $\\varepsilon\\gamma A/(2m)=1/(4\\cdot10^{4})<1/4\\le\\ln(4/3)$ holds because $-\\ln x\\ge1-x$ at $x=3/4$; hence the averaged solution stays in the required ball. This is clause 3. [F1, step 1.2, given, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "F1"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Conclusion: applying [F1] with the verified hypotheses and the horizon $A/\\varepsilon=5000$ gives $\\lVert\\zeta(t)-\\bar\\zeta(t)\\rVert_{2}\\le\\varepsilon K<1/50$ for $0\\le t\\le5000$, hence the energy bound $\\lvert E(t)-e^{-t/10^{4}}\\rvert\\le\\varepsilon K(2+\\varepsilon K)<\\frac{101}{2500}<\\frac1{24}$ J; the datum corresponds to $x(0)=\\sqrt2$ m, $x'(0)=0$, $E_{0}=1$ J, and the horizon contains more than $795$ periods of the undamped frequency, because $5000>1590\\pi$ and $1590\\pi<1590\\cdot\\frac{22}{7}=\\frac{34980}{7}<5000$; at $t=5000$ the averaged energy is $e^{-1/2}>1/3$, so the bound is below one eighth of it. This is clauses 4 and 5. [F1, F3, step 1.1, step 1.2, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-5 are verified by exact computation from the formulas of the averaging theorem, with the rational and elementary estimates above in place of decimal arithmetic; no measured quantity, apparatus or empirical claim is present. [step 1.1, step 1.2, step 2.1, step 3.1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The statement fixes the instance with epsilon approaching zero and datum zeta_0=1 nonzero; the field of the theorem vanishes at zeta=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The instance is the scalar damped oscillator, the one-dimensional case of the averaging theorem, specialized in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank or distinctness hypothesis occurs; all data are fixed positive numbers and the map is explicitly inverted in step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon endpoint A/epsilon=5000 is explicit and the estimate is asserted on the closed interval in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    },
+    "ex-cm09-cubic-potential-error-check": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $M(q)$ symmetric and positive definite",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, and let",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cm09-coupled-quadratic-model",
+          "source_section": "Definition",
+          "quote": "**(a) Data of a coupled quadratic model.** A **coupled quadratic model** (a **quadratic oscillator model**) is declared by the following data: an integer $n\\ge1$, the number of **degrees of",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm09-linearization-error-bound",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^{n}$ be open, let $M:\\Omega\\to M_{n}(\\mathbb R)$ be a field of class $C^{3}$ with $M(q)$ symmetric positive definite for every $q\\in\\Omega$, and let",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\;",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let $T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The **operator norm** of $T$ is $$\\|T\\| := \\sup\\{\\|Tx\\| : x",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-mean-value-inequality",
+          "source_section": "Statement",
+          "quote": "Let $m \\in \\mathbb{N}$ with $m \\ge 1$, let $a, b \\in \\mathbb{R}$ with $a < b$, and let $f : [a,b] \\to \\mathbb{R}^{m}$ be continuous on $[a,b]$ and differentiable at every point of $(a,b)$ as a",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1",
+          "claim": "Equilibrium and linearization: $U'(0)=0$ gives the equilibrium; $U''(0)=k$; by [F1] the small-oscillation model is $m\\xi''+k\\xi=0$ with frequency $\\sqrt{k/m}$, and the derivative of $G$ at the origin is the displayed $A$. This is clause 1. [F1, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "D2",
+          "claim": "Exact remainder: the translated field is $F(\\zeta)=(\\delta v,-(k\\delta q+\\frac{\\lambda}{2}\\delta q^{2})/m)$ and $A\\zeta=(\\delta v,-\\frac{k}{m}\\delta q)$, so subtracting gives $F(\\zeta)-A\\zeta=(0,-\\frac{\\lambda}{2m}\\delta q^{2})$; its norm is $\\frac{\\lvert\\lambda\\rvert}{2m}\\lvert\\delta q\\rvert^{2}\\le\\frac{\\lvert\\lambda\\rvert}{2m}\\lVert\\zeta\\rVert_{2}^{2}$, so $C=\\lvert\\lambda\\rvert/(2m)$ is exact on every ball; the growth bound with $L$ and the norm of $A$ are [F3]. This is clause 2. [F1, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "D3",
+          "claim": "Numerical instance: with $m=k=\\lambda=r=1$ one has $C=1/2$, $L=\\max(1,3/2)=3/2$ and $\\lVert A\\rVert=1$; for $\\delta=10^{-2}$ and $T=1$ the smallness condition $\\delta e^{LT}=e^{3/2}/100<1=r$ holds because $e^{3/2}<e^{2}<8$, so the bound applies and gives $C\\delta^{2}Te^{(\\lVert A\\rVert+2L)T}=e^{4}/20000$; this is clause 3. [F2, step 1.2, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D4",
+          "claim": "Linear case: for $\\lambda=0$ the potential is exactly quadratic and $F(\\zeta)=A\\zeta$ for all $\\zeta$; hence $C=0$, the theorem's bound reads $\\lVert z(t)-y(t)\\rVert_{2}\\le0$, and the nonlinear motion and its linearization coincide on the whole line. This is clause 4. [F2, step 1.2, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D5",
+          "claim": "Clauses 1-4 are verified by exact computation from the model formulas; the numbers in clause 3 are arithmetic evaluations of the displayed expressions and are not measured quantities. [step 1.1, step 1.2, step 2.1, step 2.2] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement quantifies over no possibly empty family; all objects are finite-dimensional model data, displayed matrices and curves, and no union or limit over an empty index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero displacement at the equilibrium and the exactly linear case λ=0 are included; step 2.2 treats λ=0 with C=0 and an exact identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is exactly the one-dimensional chart case, the scalar instance of the error-bound theorem."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No rank, invertibility or distinctness hypothesis occurs; the metric is constant and positive and the stiffness at the origin is k>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The horizon endpoints are explicit: the instance fixes T=1 and asserts the estimate on [0,1] in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All selections are finite or explicitly displayed — orthonormal eigenbases of a finite-dimensional symmetric matrix, fixed indices, matrices, curves and constants; no infinite selection principle and no form of the Axiom of Choice is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-directional implication, identity or classification, not an equivalence chain with two directions to discharge for this boundary worksheet."
+        }
+      ]
+    }
+  }
+}

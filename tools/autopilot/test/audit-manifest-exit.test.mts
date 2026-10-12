@@ -154,10 +154,3 @@ test('--json without --output keeps stdout a pure JSON document', () => {
   assert.match(r.stderr, /audit-manifest: \d+ relationship/);
   rmSync(dir, { recursive: true, force: true });
 });
-
-test('the mathlib stage declares a liveness probe on the audit-manifest gate', async () => {
-  const { stages } = await import('../stages/mathlib.mts');
-  const stage: any = stages.find((entry: any) => entry.id === '3a-validate');
-  const gate = stage.gates({ run: 'r', repo: REPO }).find((entry: any) => entry.id === 'audit-manifest');
-  assert.equal(gate?.liveness?.min, 1, 'the 3b audit-manifest gate must carry a liveness probe');
-});

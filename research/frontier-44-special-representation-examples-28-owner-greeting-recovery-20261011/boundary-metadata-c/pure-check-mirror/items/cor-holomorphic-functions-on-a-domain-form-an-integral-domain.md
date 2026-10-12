@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-holomorphic-functions-on-a-domain-form-an-integral-domain.md

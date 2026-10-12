@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-tensor-products-of-finite-free-modules-and-dimension.md

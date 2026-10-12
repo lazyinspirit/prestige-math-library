@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fundamental-class-of-a-boundary-pushes-forward-to-zero.md

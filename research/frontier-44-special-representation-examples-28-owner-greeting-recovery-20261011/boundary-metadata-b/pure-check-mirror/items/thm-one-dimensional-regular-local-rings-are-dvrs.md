@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-one-dimensional-regular-local-rings-are-dvrs.md

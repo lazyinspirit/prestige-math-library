@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-determinant-is-alternating-multilinear-in-the-rows.md

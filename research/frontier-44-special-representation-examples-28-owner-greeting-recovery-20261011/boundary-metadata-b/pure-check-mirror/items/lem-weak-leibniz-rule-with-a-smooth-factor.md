@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weak-leibniz-rule-with-a-smooth-factor.md

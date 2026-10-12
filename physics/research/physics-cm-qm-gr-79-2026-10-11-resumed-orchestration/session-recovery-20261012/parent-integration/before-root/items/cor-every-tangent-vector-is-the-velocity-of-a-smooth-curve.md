@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-tangent-vector-is-the-velocity-of-a-smooth-curve.md

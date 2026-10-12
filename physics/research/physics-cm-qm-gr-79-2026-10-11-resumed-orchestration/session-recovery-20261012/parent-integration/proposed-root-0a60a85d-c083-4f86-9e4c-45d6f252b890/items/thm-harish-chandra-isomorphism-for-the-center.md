@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-harish-chandra-isomorphism-for-the-center.md

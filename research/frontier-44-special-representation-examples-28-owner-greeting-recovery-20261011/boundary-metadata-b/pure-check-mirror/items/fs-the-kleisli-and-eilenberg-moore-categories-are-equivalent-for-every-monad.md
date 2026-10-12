@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-kleisli-and-eilenberg-moore-categories-are-equivalent-for-every-monad.md

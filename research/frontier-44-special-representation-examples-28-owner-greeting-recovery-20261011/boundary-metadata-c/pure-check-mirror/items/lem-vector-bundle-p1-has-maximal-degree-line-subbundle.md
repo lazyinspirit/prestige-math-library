@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-vector-bundle-p1-has-maximal-degree-line-subbundle.md

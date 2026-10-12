@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-radical-of-a-primary-ideal-is-prime.md

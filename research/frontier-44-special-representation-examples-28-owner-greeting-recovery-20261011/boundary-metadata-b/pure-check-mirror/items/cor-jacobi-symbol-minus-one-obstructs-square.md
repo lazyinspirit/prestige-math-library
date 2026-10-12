@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-jacobi-symbol-minus-one-obstructs-square.md

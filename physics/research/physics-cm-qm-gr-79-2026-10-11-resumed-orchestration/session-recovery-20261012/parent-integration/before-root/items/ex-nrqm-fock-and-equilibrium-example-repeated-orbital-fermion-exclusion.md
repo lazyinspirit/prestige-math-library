@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-fock-and-equilibrium-example-repeated-orbital-fermion-exclusion.md

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "1",
+  "round": 0,
+  "input_sha256": "b8c1b6a61d849add52db4fa3d0218223ab6110fb8a52797bc3b1dcb58ca85709",
+  "reviewed_items": [
+    "def-cm-affine-time-space",
+    "def-cm-constrained-configuration-and-mass-metric",
+    "def-cm-equilibrium-and-lyapunov-stability",
+    "def-cm-material-region-and-density",
+    "def-cm-special-orthogonal-group",
+    "def-cm-stroboscopic-map",
+    "def-cm-traction-and-stress",
+    "ex-cm-closed-one-form-radial-primitive",
+    "def-cm-hyperbolic-equilibrium-and-limit-cycles",
+    "def-cm-orbital-and-linear-stability",
+    "lem-cm-adapted-coordinates-exist-and-are-unique",
+    "lem-cm-mass-metric-positivity",
+    "lem-cm-moving-frame-acceleration-identity",
+    "lem-cm-rigid-labeling-stabilizer",
+    "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold",
+    "lem-cm-so3-is-a-matrix-group",
+    "lem-cm-stroboscopic-iterate-identity",
+    "lem-cm-adapted-charts-and-galilean-transformations",
+    "cex-cm-collinear-labeling-admits-a-nontrivial-rotation",
+    "ex-cm-mass-metric-on-a-sphere",
+    "ex-cm-rotating-frame-identity",
+    "ex-cm-stroboscopic-map-of-the-plane-oscillator",
+    "ex-cm-galilean-boost-coordinate-change"
+  ],
+  "reviewed_pages": [
+    "cm-math-geometry",
+    "cm-math-geometry-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The mass metric definition excludes approved lower-dimensional constrained configurations, and the sphere example lacks a smooth-manifold prerequisite; these scope and prerequisite holds prevent acceptance.",
+  "findings": [
+    {
+      "id": "def-cm-constrained-configuration-and-mass-metric",
+      "type": "scope",
+      "reason": "`n=3N` forces `dim(Q)=3N`, excluding approved `ex-cm-mass-metric-on-a-sphere` (N=1,d=2) and outside `def-cm01-configuration`/`ex-cm01-two-particle-rigid-rod-configuration` (N=2,d=5); direct consumers also include `lem-cm-mass-metric-positivity` and `rem-cm01-model-limit`, so separate ambient dimension from `dim(Q)` before repair."
+    },
+    {
+      "id": "ex-cm-mass-metric-on-a-sphere",
+      "type": "prerequisite",
+      "reason": "The example uses `S²` with `T_qS²` and calls `Ψ` a chart, but the sphere supplier gives only subspace topology; establish its smooth embedded structure via `thm-a-regular-level-set-is-an-embedded-submanifold` and justify that `Ψ` is a chart on its stated image."
+    },
+    {
+      "id": "lem-cm-so3-is-a-matrix-group",
+      "type": "local",
+      "reason": "Proof step 3.1 cites `steps 1.1–3.1` while establishing subgroup closure, so it cites itself; replace this with the already established steps 1.1, 1.2, and 2.1."
+    },
+    {
+      "id": "def-cm-traction-and-stress",
+      "type": "local",
+      "reason": "The signature `t:Ω×I×S²→R³` uses spatial and time inputs without defining `Ω⊆R³` or an interval `I`; declare those domains before referring to fixed `(y,s)`."
+    }
+  ],
+  "consumer_checks": []
+}

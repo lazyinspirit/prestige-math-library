@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-equality-in-a-filtered-colimit-of-sets-is-eventual.md

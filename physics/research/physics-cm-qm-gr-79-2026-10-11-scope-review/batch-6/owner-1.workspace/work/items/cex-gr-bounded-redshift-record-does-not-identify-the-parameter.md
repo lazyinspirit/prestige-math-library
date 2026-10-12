@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-bounded-redshift-record-does-not-identify-the-parameter.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonnegative-test-pairings-imply-a-e-nonnegativity-for-ltwo-functions.md

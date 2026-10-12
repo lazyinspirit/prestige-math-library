@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symmetric-alternating-relations-by-characteristic.md

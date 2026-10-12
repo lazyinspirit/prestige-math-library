@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-scheme-theoretic-inverse-image-subscheme.md

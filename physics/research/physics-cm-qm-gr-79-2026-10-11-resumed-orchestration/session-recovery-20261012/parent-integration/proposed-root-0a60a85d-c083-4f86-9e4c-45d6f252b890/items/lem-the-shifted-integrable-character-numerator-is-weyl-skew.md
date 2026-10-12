@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-shifted-integrable-character-numerator-is-weyl-skew.md

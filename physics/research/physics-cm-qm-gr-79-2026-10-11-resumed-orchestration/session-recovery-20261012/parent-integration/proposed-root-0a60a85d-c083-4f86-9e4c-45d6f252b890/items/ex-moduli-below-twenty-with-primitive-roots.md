@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-moduli-below-twenty-with-primitive-roots.md

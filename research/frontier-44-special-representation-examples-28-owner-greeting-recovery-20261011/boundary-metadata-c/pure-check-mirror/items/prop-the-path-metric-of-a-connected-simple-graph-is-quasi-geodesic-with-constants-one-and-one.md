@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-path-metric-of-a-connected-simple-graph-is-quasi-geodesic-with-constants-one-and-one.md

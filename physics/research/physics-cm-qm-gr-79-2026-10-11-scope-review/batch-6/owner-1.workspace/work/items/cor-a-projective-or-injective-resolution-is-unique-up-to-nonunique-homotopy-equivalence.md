@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-projective-or-injective-resolution-is-unique-up-to-nonunique-homotopy-equivalence.md

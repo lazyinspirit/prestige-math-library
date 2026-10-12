@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-nonzero-polynomial-in-several-variables-does-not-vanish-on-an-infinite-subring.md

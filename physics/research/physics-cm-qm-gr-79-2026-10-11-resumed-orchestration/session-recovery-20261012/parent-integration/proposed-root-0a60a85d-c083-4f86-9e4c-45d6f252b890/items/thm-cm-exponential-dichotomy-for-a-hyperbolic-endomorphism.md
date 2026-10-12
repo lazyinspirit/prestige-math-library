@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism.md

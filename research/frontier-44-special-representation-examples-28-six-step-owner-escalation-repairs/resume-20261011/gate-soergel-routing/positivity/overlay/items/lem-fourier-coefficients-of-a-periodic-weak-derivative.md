@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-fourier-coefficients-of-a-periodic-weak-derivative.md

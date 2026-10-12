@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-koszul-complex-resolves-a-regular-quotient.md

@@ -134,8 +134,7 @@ zero named inputs the input cube is a singleton.
 **Given:** Fix $C,X_1,X_2$ and then fix any proof tuple before sampling
 verifier randomness.
 
-
-1.1 Deterministically reorder the primary input list as $X_1\Vert X_2\Vert(\text{remaining inputs})$; this relabeling preserves circuit evaluation. Apply [F1] with named prefix length $n=n_1+n_2$, obtaining a QUADEQ instance with $N=s+m$ variables and $M=m+1$ equations. Its first $n_1$ variables are $X_1$, and the next $n_2$ are $X_2$, so the coordinate injections are $j_1(r)=(r,0^{N-n_1})$ and $j_2(r)=(0^{n_1},r,0^{N-n})$. The two designated slices are disjoint and have the prescribed order. [F1, F11, given, construct]
+ 1.1 Deterministically reorder the primary input list as $X_1\Vert X_2\Vert(\text{remaining inputs})$; this relabeling preserves circuit evaluation. Apply [F1] with named prefix length $n=n_1+n_2$, obtaining a QUADEQ instance with $N=s+m$ variables and $M=m+1$ equations. Its first $n_1$ variables are $X_1$, and the next $n_2$ are $X_2$, so the coordinate injections are $j_1(r)=(r,0^{N-n_1})$ and $j_2(r)=(0^{n_1},r,0^{N-n})$. The two designated slices are disjoint and have the prescribed order. [F1, F11, given, construct]
 
 1.2 Split the fixed proof into external tables $\pi_1,\pi_2$ and private tables $F,G$ of lengths $2^{n_1},2^{n_2},2^N,2^{N^2}$. Choose uniformly among eight families: BLR on each table, the six-query tensor test, the two-query equation test, and the four-query corrected slice test for each $j_i$. Each family samples only its own independent uniform coins, and every query location is computed before any answer is read. [F2, F3, F4, F6, F7, F8, F9, F14, given, construct]
 

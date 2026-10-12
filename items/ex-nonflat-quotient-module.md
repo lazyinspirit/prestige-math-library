@@ -41,11 +41,8 @@ $I=(\varepsilon)$ is not flat.
 
 **Proof technique:** direct.
 
+ 1.1 Here $I^2=(\varepsilon^2)=0$, while $I\neq0$. So $I\neq I^2$. [given, algebra]
 
-1.1 Here $I^2=(\varepsilon^2)=0$, while $I\neq0$. So $I\neq I^2$. [given, algebra]
+ 1.2 By [L1], the quotient $R/I$ cannot be flat. Equivalently, the ideal criterion [L2] fails for the inclusion $I\hookrightarrow R$ after tensoring with $R/I$. [L1, L2]
 
-
-1.2 By [L1], the quotient $R/I$ cannot be flat. Equivalently, the ideal criterion [L2] fails for the inclusion $I\hookrightarrow R$ after tensoring with $R/I$. [L1, L2]
-
-
-2.1 Thus quotients by nonidempotent ideals need not be flat. [algebra] ∎
+ 2.1 Thus quotients by nonidempotent ideals need not be flat. [algebra] ∎ 

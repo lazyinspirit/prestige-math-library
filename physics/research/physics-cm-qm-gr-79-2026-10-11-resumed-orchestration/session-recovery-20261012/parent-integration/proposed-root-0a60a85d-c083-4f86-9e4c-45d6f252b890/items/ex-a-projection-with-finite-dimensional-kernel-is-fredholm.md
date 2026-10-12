@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-projection-with-finite-dimensional-kernel-is-fredholm.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-euclidean-local-extrema-and-critical-points.md

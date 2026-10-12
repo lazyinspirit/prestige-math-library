@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-gauss-bonnet-for-an-arbitrary-disk-region.md

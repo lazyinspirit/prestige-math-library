@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-convex-and-strictly-convex-functionals-on-a-banach-space.md

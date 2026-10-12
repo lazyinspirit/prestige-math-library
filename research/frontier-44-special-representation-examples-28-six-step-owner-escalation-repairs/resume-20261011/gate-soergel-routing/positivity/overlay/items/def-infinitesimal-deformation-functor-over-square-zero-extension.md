@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-infinitesimal-deformation-functor-over-square-zero-extension.md

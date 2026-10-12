@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-product-sigma-algebra-and-finite-product-sigma-algebras.md

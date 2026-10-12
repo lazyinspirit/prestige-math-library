@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-pure-and-mixed-pairs-in-p-four.md

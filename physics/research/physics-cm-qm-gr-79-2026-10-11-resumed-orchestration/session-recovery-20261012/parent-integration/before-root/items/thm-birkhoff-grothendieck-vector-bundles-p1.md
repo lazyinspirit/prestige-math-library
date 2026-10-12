@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-birkhoff-grothendieck-vector-bundles-p1.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-polar-coordinates-recover-the-published-ball-volume-and-gaussian-formulas.md

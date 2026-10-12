@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-pythagorean-identity-by-identity-theorem.md

@@ -1,0 +1,56 @@
+import { readFileSync, readdirSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { join, dirname } from 'node:path';
+import { dependencyLevels, orderedItems } from '../../../tools/item-dependency-levels.mjs';
+import { frontmatterList } from '../../../tools/frontmatter-list.mjs';
+const root=process.cwd(), run='frontier-44-special-representation-examples-28';
+const out='research/'+run+'-owner-crash-recovery-20261010T1736/cellular-dependency-metadata-preparation';
+const input='research/'+run+'-owner-crash-recovery-20261010T1736/repair_cell_head_classification/manifest-mirrors/guarded-selected-fields-12.json';
+const sha=x=>createHash('sha256').update(x).digest('hex'), read=p=>readFileSync(p,'utf8'), equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const inputRaw=read(input), accepted=JSON.parse(inputRaw);
+if(sha(inputRaw)!=='426dfd2d854714986d3b9196c200f89e90f7d3d03e1f4aeb73daaa8d12aa091d'||accepted.patches.length!==12)throw Error('Fresh accepted inventory guard mismatch');
+const originals=new Map(), pages=[], paths=new Map();
+for(const name of readdirSync('research').filter(n=>new RegExp('^'+run+'-batch-\\d+\\.pages\\.json$').test(n)).sort()){
+ const path='research/'+name,raw=read(path),rows=JSON.parse(raw);originals.set(path,{raw,rows});
+ for(const page of rows){pages.push({...structuredClone(page),batch:name.match(/-batch-(\d+)/)[1]});paths.set(page.id,path);}
+}
+const beforeLevels=dependencyLevels(pages,{validateLabels:false});
+for(const p of accepted.patches){
+ const original=originals.get(p.target);if(!original||sha(original.raw)!==p.observed_full_manifest_raw_sha256)throw Error('Actual manifest guard mismatch '+p.target);
+ if(sha(read(p.authentic_before_file))!==p.observed_full_manifest_raw_sha256)throw Error('Owner authentic snapshot mismatch '+p.id);
+ const page=pages.find(x=>x.id===p.page),item=page?.items.find(x=>x.id===p.id);if(!item)throw Error('Missing exact selected item '+p.id);
+ for(const [key,value]of Object.entries(p.before))if(!equal(item[key],value))throw Error('Before field mismatch '+p.id+' '+key);
+ if(sha(read(p.proposal_path))!==p.canonical_after_raw_sha256)throw Error('Proposal guard mismatch '+p.id);
+ if(sha(read(p.canonical_target))!==p.canonical_before_raw_sha256)throw Error('Canonical before guard mismatch '+p.id);
+ if(!equal(frontmatterList(read(p.proposal_path),'deps'),p.after.deps))throw Error('Proposal/manifest dependency mismatch '+p.id);
+ Object.assign(item,structuredClone(p.after));
+}
+const graph=dependencyLevels(pages,{validateLabels:false}), roots=new Set(accepted.patches.map(p=>p.id));
+const affected=new Set(roots);let grown=true;while(grown){grown=false;for(const [id,{item}]of graph.items)if(!affected.has(id)&&item.deps.some(d=>affected.has(d))){affected.add(id);grown=true;}}
+const relevant=new Set();const visitManifest=id=>{if(relevant.has(id))return;relevant.add(id);for(const d of graph.items.get(id)?.item.deps??[])if(graph.items.has(d))visitManifest(d);};for(const id of affected)visitManifest(id);
+const relevantNativeErrors=graph.errors.filter(e=>[...relevant].some(id=>e.includes(id)));
+if(relevantNativeErrors.length)throw Error(relevantNativeErrors.join('\n'));
+const levelPatches=[];for(const id of affected){const r=graph.items.get(id);if(r.item.dependency_level!==graph.levels.get(id)){levelPatches.push({id,page:r.page.id,target:paths.get(r.page.id),before:r.item.dependency_level,after:graph.levels.get(id),baseline_computed:beforeLevels.levels.get(id)});r.item.dependency_level=graph.levels.get(id);}}
+const affectedPages=new Set([...affected].map(id=>graph.items.get(id).page.id)), orderPatches=[];
+for(const pid of affectedPages){const page=pages.find(p=>p.id===pid),before=page.items.map(i=>i.id);page.items.sort((a,b)=>graph.levels.get(a.id)-graph.levels.get(b.id)||a.id.localeCompare(b.id));const after=page.items.map(i=>i.id);if(!equal(before,after))orderPatches.push({page:pid,target:paths.get(pid),before,after});}
+const planRaw=read('research/plan-spec.json'),plan=JSON.parse(planRaw),planPages=new Map(plan.pages.map(p=>[p.id,structuredClone(p)]));for(const p of pages)planPages.set(p.id,p);
+const homes=new Map();for(const p of planPages.values())for(const i of p.items??[])homes.set(typeof i==='string'?i:i.id,p.id);
+const corpus=new Map(),aliases=new Map();for(const name of readdirSync('items').filter(n=>n.endsWith('.md'))){const path='items/'+name,raw=read(path),id=name.slice(0,-3);corpus.set(id,{path,raw,deps:frontmatterList(raw,'deps')});for(const a of frontmatterList(raw,'aliases'))aliases.set(a,id);}
+for(const p of accepted.patches)corpus.set(p.id,{path:p.proposal_path,raw:read(p.proposal_path),deps:p.after.deps});
+// Actual authored page homes override obsolete planned external item locations.
+for(const cat of readdirSync('library',{withFileTypes:true}).filter(d=>d.isDirectory()).map(d=>d.name))for(const name of readdirSync('library/'+cat).filter(n=>n.endsWith('.md')&&!n.startsWith('_'))){const raw=read('library/'+cat+'/'+name),pid=name.slice(0,-3);for(const id of [...frontmatterList(raw,'items'),...frontmatterList(raw,'examples')])if(!graph.items.has(id))homes.set(aliases.get(id)??id,pid);}
+const closure=new Set(),itemCycles=[],unresolved=[],canonicalGuards=[];const visiting=new Set();
+function walk(id,path=[]){id=aliases.get(id)??id;if(visiting.has(id)){itemCycles.push([...path,id]);return;}if(closure.has(id))return;const r=corpus.get(id);if(!r){unresolved.push({id,path});return;}closure.add(id);visiting.add(id);canonicalGuards.push({id,path:r.path,raw_sha256:sha(r.raw)});for(const d of r.deps)walk(d,[...path,id]);visiting.delete(id);}
+for(const id of roots)walk(id);
+const reqClosure=pid=>{const found=new Set();function visit(id){for(const d of planPages.get(id)?.requires??[])if(!found.has(d)){found.add(d);visit(d);}}visit(pid);return found;};
+const requiresPatches=[],unhomed=[];for(const pid of new Set(accepted.patches.map(p=>p.page))){const p=planPages.get(pid),before=[...(p.requires??[])],needed=new Set();for(const item of p.items)for(let d of item.deps){d=aliases.get(d)??d;const home=homes.get(d);if(!home)unhomed.push({page:pid,item:item.id,dep:d});else if(home!==pid)needed.add(home);}if(p.kind==='B')needed.add(p.companion);const already=reqClosure(pid),add=[...needed].filter(x=>!already.has(x)&&!before.includes(x));add.sort((a,b)=>(planPages.get(a)?.order??Infinity)-(planPages.get(b)?.order??Infinity)||a.localeCompare(b));if(add.length){p.requires=[...before,...add];requiresPatches.push({page:pid,target:paths.get(pid),before,after:p.requires,added:add,removed:[],reason:'Retain declared reading prerequisites and add only actual dependency homes absent from their current transitive closure'});}}
+const pageCycles=[],pageOrderProblems=[];function pageWalk(pid,stack=[],done=new Set()){if(stack.includes(pid)){pageCycles.push([...stack,pid]);return;}if(done.has(pid))return;done.add(pid);const p=planPages.get(pid);for(const d of p?.requires??[]){const q=planPages.get(d);if(!q)pageOrderProblems.push({page:pid,requires:d,error:'unresolved'});else if(q.order>=p.order)pageOrderProblems.push({page:pid,requires:d,page_order:p.order,requires_order:q.order});pageWalk(d,[...stack,pid],done);}}
+for(const pid of new Set(accepted.patches.map(p=>p.page)))pageWalk(pid);
+// Actual item-induced page cycles are checked only in the selected prerequisite cone.
+const induced=new Map();for(const id of closure){const h=homes.get(id);if(!h)continue;if(!induced.has(h))induced.set(h,new Set());for(let d of corpus.get(id)?.deps??[]){d=aliases.get(d)??d;const dh=homes.get(d);if(dh&&dh!==h)induced.get(h).add(dh);}}
+const inducedCycles=[];function inducedWalk(pid,stack=[],done=new Set()){if(stack.includes(pid)){inducedCycles.push([...stack,pid]);return;}if(done.has(pid))return;done.add(pid);for(const d of induced.get(pid)??[])inducedWalk(d,[...stack,pid],done);}for(const pid of new Set(accepted.patches.map(p=>p.page)))inducedWalk(pid);
+const changedPaths=new Set([...accepted.patches.map(p=>p.target),...levelPatches.map(p=>p.target),...orderPatches.map(p=>p.target),...requiresPatches.map(p=>p.target)]),manifestGuards=[];
+for(const path of changedPaths){const original=originals.get(path),file=path.split('/').at(-1),beforePath=out+'/before/'+file;mkdirSync(dirname(beforePath),{recursive:true});if(existsSync(beforePath)&&read(beforePath)!==original.raw)throw Error('Refuse to replace prior authentic before snapshot');writeFileSync(beforePath,original.raw);const next=pages.filter(p=>paths.get(p.id)===path).map(({batch,...p})=>p);const proposalPath=out+'/proposed-manifests/'+file;mkdirSync(dirname(proposalPath),{recursive:true});const raw=JSON.stringify(next,null,2)+'\n';writeFileSync(proposalPath,raw);manifestGuards.push({target:path,authentic_before_file:beforePath,before_raw_sha256:sha(original.raw),proposed_file:proposalPath,proposed_raw_sha256:sha(raw)});}
+const report={version:1,run,prepared_at:new Date().toISOString(),policy:'mechanical-dependency-metadata-preparation-only',accepted_inventory:{path:input,raw_sha256:sha(inputRaw),ids:[...roots]},semantics:{levels:'tools/item-dependency-levels.mjs dependencyLevels with accepted exact manifest edge overlay; out-of-run dependencies do not raise in-run levels',order:'tools/item-dependency-levels.mjs orderedItems: level, page order, item ID; page order values preserved',requires:'Minimal uncovered actual dependency-home additions; preserve all declared prerequisites including editorial reading-order edges'},native_context:{pages:pages.length,items:graph.items.size,affected_items:[...affected],unrelated_native_errors_as_context:graph.errors.filter(e=>!relevantNativeErrors.includes(e))},manifest_guards:manifestGuards,all_manifest_input_guards:[...originals].map(([path,{raw}])=>({path,raw_sha256:sha(raw)})),plan_input_guard:{path:'research/plan-spec.json',raw_sha256:sha(planRaw)},field_limited_patch_plan:{accepted_fields_owner_input:input,dependency_level:levelPatches,item_array_permutations:orderPatches,page_requires:requiresPatches,page_order:[]},selected_prerequisite_context:{items:closure.size,item_cycles:itemCycles,unresolved,unhomed,page_requires_cycles:pageCycles,page_order_problems:pageOrderProblems,actual_induced_page_cycles:inducedCycles,raw_guards:canonicalGuards},preservation:{inventories:true,all_nonselected_entry_fields:true,page_identity_and_order:true,state_controls_ledgers_counters_untouched:true},source_readiness:'Partial accepted Schur supplier steps 1–5 and held full finite-e survival remain exactly owner-held; deleting a classifier dependency confers no global readiness or acceptance',gate_attempt:false,canonical_writes:false,native_completion_claim:false};
+writeFileSync(out+'/dependency-metadata-plan.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify({selected:roots.size,level_patches:levelPatches.length,item_order_patches:orderPatches.length,requires_patches:requiresPatches.length,selected_context:closure.size,item_cycles:itemCycles.length,page_cycles:pageCycles.length,induced_cycles:inducedCycles.length,unresolved:unresolved.length,unhomed:unhomed.length,page_order_problems:pageOrderProblems.length,changed_manifests:manifestGuards.length},null,2));

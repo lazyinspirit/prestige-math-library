@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-holomorphic-difference-quotient-segment-formula.md

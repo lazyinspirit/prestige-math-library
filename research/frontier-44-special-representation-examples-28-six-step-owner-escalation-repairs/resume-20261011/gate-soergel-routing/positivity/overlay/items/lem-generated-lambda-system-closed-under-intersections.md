@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-generated-lambda-system-closed-under-intersections.md

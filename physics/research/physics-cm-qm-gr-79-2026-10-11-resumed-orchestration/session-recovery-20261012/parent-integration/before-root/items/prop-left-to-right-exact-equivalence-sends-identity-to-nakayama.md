@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-left-to-right-exact-equivalence-sends-identity-to-nakayama.md

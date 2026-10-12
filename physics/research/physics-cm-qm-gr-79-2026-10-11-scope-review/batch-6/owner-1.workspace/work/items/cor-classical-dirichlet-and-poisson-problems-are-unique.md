@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-classical-dirichlet-and-poisson-problems-are-unique.md

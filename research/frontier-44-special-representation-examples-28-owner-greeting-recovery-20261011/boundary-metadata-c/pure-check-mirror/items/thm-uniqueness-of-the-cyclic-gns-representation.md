@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-uniqueness-of-the-cyclic-gns-representation.md

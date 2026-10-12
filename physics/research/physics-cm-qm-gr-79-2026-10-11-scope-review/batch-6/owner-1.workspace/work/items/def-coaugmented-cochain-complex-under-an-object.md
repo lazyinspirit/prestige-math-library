@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coaugmented-cochain-complex-under-an-object.md

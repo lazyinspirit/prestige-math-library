@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-separated-hecke-residues-give-seminormal-idempotents-and-bases.md

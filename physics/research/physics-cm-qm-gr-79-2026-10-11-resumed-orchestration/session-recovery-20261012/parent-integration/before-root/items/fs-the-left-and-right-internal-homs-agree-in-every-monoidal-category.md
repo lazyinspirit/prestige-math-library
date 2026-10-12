@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-left-and-right-internal-homs-agree-in-every-monoidal-category.md

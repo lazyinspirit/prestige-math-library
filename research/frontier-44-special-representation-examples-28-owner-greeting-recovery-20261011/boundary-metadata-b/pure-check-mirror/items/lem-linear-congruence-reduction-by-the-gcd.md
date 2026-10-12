@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-linear-congruence-reduction-by-the-gcd.md

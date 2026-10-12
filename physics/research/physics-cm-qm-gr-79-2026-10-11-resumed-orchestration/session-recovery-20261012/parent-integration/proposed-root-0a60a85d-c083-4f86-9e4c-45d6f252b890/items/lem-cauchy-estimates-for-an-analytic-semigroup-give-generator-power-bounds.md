@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cauchy-estimates-for-an-analytic-semigroup-give-generator-power-bounds.md

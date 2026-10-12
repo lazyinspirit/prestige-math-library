@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weierstrass-finite-projection-hypersurface-germ.md

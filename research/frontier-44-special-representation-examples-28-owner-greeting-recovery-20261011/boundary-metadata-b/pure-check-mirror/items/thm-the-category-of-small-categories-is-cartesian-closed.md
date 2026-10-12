@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-category-of-small-categories-is-cartesian-closed.md

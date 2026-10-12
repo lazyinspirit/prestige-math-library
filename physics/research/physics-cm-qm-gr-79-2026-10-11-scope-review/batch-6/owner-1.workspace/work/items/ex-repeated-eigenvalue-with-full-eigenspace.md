@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-repeated-eigenvalue-with-full-eigenspace.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-multivariable-taylor-formula-with-peano-remainder.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-density-as-a-self-kan-extension-for-a-small-category.md

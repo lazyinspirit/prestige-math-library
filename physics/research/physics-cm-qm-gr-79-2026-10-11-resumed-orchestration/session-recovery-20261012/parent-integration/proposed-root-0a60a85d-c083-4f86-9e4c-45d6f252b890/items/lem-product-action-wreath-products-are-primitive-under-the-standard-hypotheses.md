@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses.md

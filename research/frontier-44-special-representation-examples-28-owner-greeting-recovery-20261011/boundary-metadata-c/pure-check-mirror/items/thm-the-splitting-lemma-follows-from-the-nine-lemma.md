@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-splitting-lemma-follows-from-the-nine-lemma.md

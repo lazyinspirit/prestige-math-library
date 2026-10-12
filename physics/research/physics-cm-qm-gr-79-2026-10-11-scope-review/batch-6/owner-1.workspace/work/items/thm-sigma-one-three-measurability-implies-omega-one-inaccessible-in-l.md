@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sigma-one-three-measurability-implies-omega-one-inaccessible-in-l.md

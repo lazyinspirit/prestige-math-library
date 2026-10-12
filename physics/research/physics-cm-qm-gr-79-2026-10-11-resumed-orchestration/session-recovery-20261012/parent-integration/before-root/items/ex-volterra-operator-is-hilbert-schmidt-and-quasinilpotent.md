@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-volterra-operator-is-hilbert-schmidt-and-quasinilpotent.md

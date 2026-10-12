@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-operator-norm-is-the-largest-eigenvalue-modulus.md

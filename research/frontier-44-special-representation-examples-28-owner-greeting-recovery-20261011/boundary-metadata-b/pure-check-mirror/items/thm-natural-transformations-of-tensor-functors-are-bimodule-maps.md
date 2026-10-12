@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-natural-transformations-of-tensor-functors-are-bimodule-maps.md

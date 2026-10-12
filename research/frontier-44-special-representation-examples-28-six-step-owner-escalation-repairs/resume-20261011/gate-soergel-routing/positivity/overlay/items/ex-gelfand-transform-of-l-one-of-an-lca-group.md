@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gelfand-transform-of-l-one-of-an-lca-group.md

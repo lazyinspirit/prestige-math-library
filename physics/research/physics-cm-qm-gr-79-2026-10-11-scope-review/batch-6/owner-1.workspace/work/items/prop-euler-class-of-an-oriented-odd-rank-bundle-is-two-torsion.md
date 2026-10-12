@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euler-class-of-an-oriented-odd-rank-bundle-is-two-torsion.md

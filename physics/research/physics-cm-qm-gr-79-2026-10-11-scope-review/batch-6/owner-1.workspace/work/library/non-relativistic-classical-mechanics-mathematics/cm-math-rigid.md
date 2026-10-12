@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics-mathematics/cm-math-rigid.md

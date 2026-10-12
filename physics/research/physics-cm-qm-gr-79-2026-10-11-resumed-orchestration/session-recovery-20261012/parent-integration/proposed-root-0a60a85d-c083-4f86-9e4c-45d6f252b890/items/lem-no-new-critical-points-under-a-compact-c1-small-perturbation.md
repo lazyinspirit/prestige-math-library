@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-no-new-critical-points-under-a-compact-c1-small-perturbation.md

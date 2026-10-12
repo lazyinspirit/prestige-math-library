@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonaffine-affine-normal-group-quotient-affine.md

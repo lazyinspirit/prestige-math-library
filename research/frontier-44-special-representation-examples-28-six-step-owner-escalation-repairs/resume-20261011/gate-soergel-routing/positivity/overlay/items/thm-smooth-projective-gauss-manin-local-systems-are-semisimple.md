@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-projective-gauss-manin-local-systems-are-semisimple.md

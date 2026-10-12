@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-trimming-a-self-regular-set-of-low-density.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-representable-hom-functors-on-a-triangulated-category-are-homological-or-cohomological.md

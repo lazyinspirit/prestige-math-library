@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-decay-of-the-newtonian-potential-of-compactly-supported-data.md

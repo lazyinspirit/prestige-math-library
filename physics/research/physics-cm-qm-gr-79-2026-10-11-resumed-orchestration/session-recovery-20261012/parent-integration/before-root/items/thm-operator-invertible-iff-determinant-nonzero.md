@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-operator-invertible-iff-determinant-nonzero.md

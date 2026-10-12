@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-serre-duality-for-coherent-sheaves-on-projective-cm-scheme.md

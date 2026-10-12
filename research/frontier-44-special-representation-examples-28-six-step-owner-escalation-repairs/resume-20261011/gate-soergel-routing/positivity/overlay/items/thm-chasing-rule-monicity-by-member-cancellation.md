@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-chasing-rule-monicity-by-member-cancellation.md

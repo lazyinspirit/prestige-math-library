@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-exact-couple-generates-a-spectral-sequence.md

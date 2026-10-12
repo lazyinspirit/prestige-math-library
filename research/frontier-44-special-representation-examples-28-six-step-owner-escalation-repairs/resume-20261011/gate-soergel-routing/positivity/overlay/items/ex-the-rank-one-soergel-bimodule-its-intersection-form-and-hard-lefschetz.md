@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-rank-one-soergel-bimodule-its-intersection-form-and-hard-lefschetz.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartesian-product-makes-bordism-a-graded-ring.md

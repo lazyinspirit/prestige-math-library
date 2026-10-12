@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-khovanov-rozansky-homology-categorifies-the-homflypt-polynomial.md

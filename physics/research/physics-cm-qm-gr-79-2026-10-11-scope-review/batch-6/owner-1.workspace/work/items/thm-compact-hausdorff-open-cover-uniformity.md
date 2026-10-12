@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-compact-hausdorff-open-cover-uniformity.md

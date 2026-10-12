@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nontrivial-normal-subgroup-of-a-n-contains-a-three-cycle.md

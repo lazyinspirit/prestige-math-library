@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-kunneth-cross-product-is-graded-commutative-under-the-twist-map.md

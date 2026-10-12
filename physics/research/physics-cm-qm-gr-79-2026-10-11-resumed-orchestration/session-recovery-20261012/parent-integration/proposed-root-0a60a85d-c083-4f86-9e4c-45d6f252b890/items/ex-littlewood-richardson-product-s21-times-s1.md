@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-littlewood-richardson-product-s21-times-s1.md

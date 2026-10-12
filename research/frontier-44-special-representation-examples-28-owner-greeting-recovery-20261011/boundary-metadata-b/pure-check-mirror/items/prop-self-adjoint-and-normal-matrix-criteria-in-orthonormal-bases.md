@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases.md

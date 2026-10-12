@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-cauchy-schwarz-inequality-for-l-two.md

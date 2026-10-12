@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-abstract-generator-domain-smoothing-becomes-spatial-regularity-only-after-domain-identification.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-trivial-and-steinberg-splitting-on-p1-fq.md

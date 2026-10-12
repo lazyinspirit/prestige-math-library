@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-holomorphic-functions-are-closed-for-local-uniform-convergence.md

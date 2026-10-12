@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stationarity-is-sufficient-for-a-global-minimum-of-a-convex-differentiable-functional.md

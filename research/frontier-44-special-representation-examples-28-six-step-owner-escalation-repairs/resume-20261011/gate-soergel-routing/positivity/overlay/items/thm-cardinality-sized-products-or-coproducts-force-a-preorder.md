@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cardinality-sized-products-or-coproducts-force-a-preorder.md

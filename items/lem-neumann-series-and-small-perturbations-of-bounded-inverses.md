@@ -57,9 +57,7 @@ Let $X$ and $Y$ be Banach spaces over the same scalar field
 
 1.1 For every $n$ one has $\|R^n\|\le\|R\|^n$, and $\sum_n\|R\|^n$ converges to $1/(1-\|R\|)$. [A1, A2]
 
-2.1 The space $\mathcal B(X)$ is Banach, so the absolutely convergent series $\sum_nR^n$ converges in operator norm to some $S\in\mathcal B(X)$. For every $N$, the finite triangle inequality and [step 1.1] give
-$$\|S_N\|\le\sum_{n<N}\|R^n\|\le\sum_{n=0}^{\infty}\|R\|^n=\frac1{1-\|R\|}.$$
-Since $S_N\to S$ and the norm is continuous, taking the limit yields $\|S\|\le1/(1-\|R\|)$. [step 1.1, A2, A3, A4]
+2.1 The space $\mathcal B(X)$ is Banach, so the absolutely convergent series $\sum_nR^n$ converges in operator norm to some $S\in\mathcal B(X)$. For every $N$, the finite triangle inequality and [step 1.1] give $$\|S_N\|\le\sum_{n<N}\|R^n\|\le\sum_{n=0}^{\infty}\|R\|^n=\frac1{1-\|R\|}.$$ Since $S_N\to S$ and the norm is continuous, taking the limit yields $\|S\|\le1/(1-\|R\|)$. [step 1.1, A2, A3, A4]
 
 2.2 For every $N$ one has $(I-R)S_N=S_N(I-R)=I-R^N$, and $\|R^N\|\le\|R\|^N\to0$, so $R^N\to0$. [step 1.1, A1, algebra]
 
@@ -69,4 +67,4 @@ Since $S_N\to S$ and the norm is continuous, taking the limit yields $\|S\|\le1/
 
 4.2 For the perturbation, $A+E=A\bigl(I+A^{-1}E\bigr)$ and $\|{-A^{-1}E}\|=\|A^{-1}E\|<1$, so by [step 3.1] applied to $R:=-A^{-1}E\in\mathcal B(X)$ the operator $I+A^{-1}E$ is invertible with bounded inverse, and therefore $(A+E)^{-1}=(I+A^{-1}E)^{-1}A^{-1}\in\mathcal B(Y,X)$, which is claim 2. [step 3.1, algebra]
 
-5.1 Claims 1 and 2 are exactly the two parts of the statement. [step 4.1, step 4.2] ∎
+5.1 Claims 1 and 2 are exactly the two parts of the statement. [step 4.1, step 4.2] ∎ 

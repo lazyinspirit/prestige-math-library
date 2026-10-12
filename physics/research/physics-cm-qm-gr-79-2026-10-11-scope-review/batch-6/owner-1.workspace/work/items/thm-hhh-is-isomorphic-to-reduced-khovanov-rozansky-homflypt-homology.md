@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hhh-is-isomorphic-to-reduced-khovanov-rozansky-homflypt-homology.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-many-body-framework-entropy-and-free-energy.md

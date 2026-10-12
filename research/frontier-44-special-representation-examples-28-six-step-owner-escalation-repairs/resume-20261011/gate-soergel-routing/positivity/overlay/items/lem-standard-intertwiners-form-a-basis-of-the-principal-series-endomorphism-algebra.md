@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-intertwiners-form-a-basis-of-the-principal-series-endomorphism-algebra.md

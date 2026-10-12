@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smooth-sections-form-a-module-over-smooth-functions.md

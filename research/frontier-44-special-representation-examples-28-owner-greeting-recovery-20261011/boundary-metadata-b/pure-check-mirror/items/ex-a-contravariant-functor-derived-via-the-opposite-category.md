@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-contravariant-functor-derived-via-the-opposite-category.md

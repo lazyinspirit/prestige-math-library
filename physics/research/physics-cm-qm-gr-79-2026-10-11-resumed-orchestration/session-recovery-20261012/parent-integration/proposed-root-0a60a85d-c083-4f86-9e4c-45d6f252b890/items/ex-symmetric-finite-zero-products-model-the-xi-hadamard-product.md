@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-symmetric-finite-zero-products-model-the-xi-hadamard-product.md

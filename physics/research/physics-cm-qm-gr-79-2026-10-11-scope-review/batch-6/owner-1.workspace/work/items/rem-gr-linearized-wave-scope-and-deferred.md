@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-gr-linearized-wave-scope-and-deferred.md

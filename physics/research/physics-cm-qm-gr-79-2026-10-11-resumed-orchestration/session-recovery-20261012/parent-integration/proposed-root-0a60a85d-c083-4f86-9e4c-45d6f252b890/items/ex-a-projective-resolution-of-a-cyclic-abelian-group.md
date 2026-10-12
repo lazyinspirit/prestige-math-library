@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-projective-resolution-of-a-cyclic-abelian-group.md

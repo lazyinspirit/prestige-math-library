@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mercator-series-does-not-define-logarithm-globally.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-large-arc-vanishing-follows-from-pointwise-decay-alone.md

@@ -33,8 +33,7 @@ On $\mathbb R$ with Lebesgue measure, every $L^1$ function lies in $L^2$.
 
 **Proof technique:** Use the power-function family $x^{-a}$ near $0$ with $1/2\le a<1$.
 
-1.1 Choose $a=3/4$ and set $f(x):=x^{-3/4}\chi_{(0,1)}(x)$. Then [L1, given]
-$a\cdot1=3/4<1$, so [L1] gives $f\in L^1$. But $a\cdot2=3/2>1$, so [L1] also gives $f\notin L^2$.
+1.1 Choose $a=3/4$ and set $f(x):=x^{-3/4}\chi_{(0,1)}(x)$. Then [L1, given] $a\cdot1=3/4<1$, so [L1] gives $f\in L^1$. But $a\cdot2=3/2>1$, so [L1] also gives $f\notin L^2$. [L1, given]
 
-2.1 Thus $f$ is an $L^1$ function on $\mathbb R$ that does not lie in $L^2$, [step 1.1]
-refuting the claim. ∎
+2.1 Thus $f$ is an $L^1$ function on $\mathbb R$ that does not lie in $L^2$, [step 1.1] refuting the claim. [step 1.1] ∎
+

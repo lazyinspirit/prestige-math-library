@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-lax-monoidal-functor-carries-monoid-objects-to-monoid-objects.md

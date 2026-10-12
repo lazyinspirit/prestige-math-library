@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-semisimple-root-exponential-algebraic-subgroups.md

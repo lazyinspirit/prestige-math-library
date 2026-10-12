@@ -35,5 +35,4 @@ commutative rings, then $X\cong Y$ as schemes.
 
 1.2 Their composites induce identity natural transformations, so faithfulness in [F1] makes both composites identity morphisms. [F1]
 
-2.1 The two morphisms are inverse scheme isomorphisms. [step 1.1, step 1.2] ∎
- 
+2.1 The two morphisms are inverse scheme isomorphisms. [step 1.1, step 1.2] ∎  

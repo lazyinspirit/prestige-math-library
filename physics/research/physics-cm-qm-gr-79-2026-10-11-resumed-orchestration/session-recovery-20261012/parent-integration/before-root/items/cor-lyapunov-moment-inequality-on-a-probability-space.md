@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lyapunov-moment-inequality-on-a-probability-space.md

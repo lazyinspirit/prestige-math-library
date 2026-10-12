@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-quotient-of-a-function-by-its-kernel-computed.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-alexander-subbase-lemma-applied-to-a-closed-interval.md

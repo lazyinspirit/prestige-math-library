@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-additive-jordan-chevalley-is-supplied-by-x-two.md

@@ -38,5 +38,4 @@ $$F'(t)=-\int_0^\infty x e^{-tx}\sin x\,dx.$$
 
 1.1 Fix a compact interval $[a,b]\subset(0,\infty)$. For $$f(x,t):=e^{-tx}\sin x,$$ one has $$\frac{\partial f}{\partial t}(x,t)=-xe^{-tx}\sin x,$$ so $$\left|\frac{\partial f}{\partial t}(x,t)\right|\le xe^{-ax}\qquad(t\in[a,b]).$$ [given, construct, algebra]
 
-
-2.1 The function $x\mapsto xe^{-ax}$ is integrable on $[0,\infty)$, so [L1] applies on every compact parameter interval and yields $$F'(t)=-\int_0^\infty x e^{-tx}\sin x\,dx.$$ This is exactly the advertised differentiation step. [step 1.1, L1] ∎
+ 2.1 The function $x\mapsto xe^{-ax}$ is integrable on $[0,\infty)$, so [L1] applies on every compact parameter interval and yields $$F'(t)=-\int_0^\infty x e^{-tx}\sin x\,dx.$$ This is exactly the advertised differentiation step. [step 1.1, L1] ∎ 

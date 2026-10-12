@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-closed-immersion-regular-conormal-sequence.md

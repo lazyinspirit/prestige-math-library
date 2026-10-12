@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-midpoint-convexity-extends-to-dyadic-weights.md

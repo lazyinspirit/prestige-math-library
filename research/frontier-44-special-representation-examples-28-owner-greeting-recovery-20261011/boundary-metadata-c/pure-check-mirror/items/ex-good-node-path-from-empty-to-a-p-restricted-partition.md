@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-good-node-path-from-empty-to-a-p-restricted-partition.md

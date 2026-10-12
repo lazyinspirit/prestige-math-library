@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power.md

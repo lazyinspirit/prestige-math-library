@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-zero-exponent-is-bounded-by-entire-order.md

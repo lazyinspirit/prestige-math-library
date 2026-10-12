@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stokes-for-piecewise-smooth-surface-regions.md

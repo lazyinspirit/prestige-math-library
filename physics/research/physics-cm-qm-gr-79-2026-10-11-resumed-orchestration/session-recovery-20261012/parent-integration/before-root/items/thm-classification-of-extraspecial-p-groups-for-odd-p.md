@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classification-of-extraspecial-p-groups-for-odd-p.md

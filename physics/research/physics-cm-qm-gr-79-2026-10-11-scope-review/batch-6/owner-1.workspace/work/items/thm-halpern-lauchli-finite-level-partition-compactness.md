@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-halpern-lauchli-finite-level-partition-compactness.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-dirichlet-resolvent-h-two-and-smooth-test-density.md

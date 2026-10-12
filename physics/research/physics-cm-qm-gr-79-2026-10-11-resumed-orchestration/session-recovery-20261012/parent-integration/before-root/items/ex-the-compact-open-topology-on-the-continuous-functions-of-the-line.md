@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-compact-open-topology-on-the-continuous-functions-of-the-line.md

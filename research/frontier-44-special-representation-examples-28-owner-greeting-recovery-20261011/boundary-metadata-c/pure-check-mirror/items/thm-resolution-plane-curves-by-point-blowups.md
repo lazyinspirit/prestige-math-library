@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-resolution-plane-curves-by-point-blowups.md

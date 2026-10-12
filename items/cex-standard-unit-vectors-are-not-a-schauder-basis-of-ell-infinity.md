@@ -45,8 +45,7 @@ The standard unit vectors form a Schauder basis of $\ell^\infty$.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Every finite linear combination of standard unit vectors has finite [given, L2]
-support. A supremum-norm limit of finite-support sequences lies in $c_0$: for a given tolerance, approximate uniformly by one finite-support sequence and use its finite support to bound the tail. [L2, uniform limit]
+1.1 Every finite linear combination of standard unit vectors has finite [given, L2] support. A supremum-norm limit of finite-support sequences lies in $c_0$: for a given tolerance, approximate uniformly by one finite-support sequence and use its finite support to bound the tail. [L2]
 
-2.1 The constant-one sequence belongs to $\ell^\infty$ but not to $c_0$. [given, L1, L2, step 1.1]
-Therefore it is not the norm limit of standard-unit-vector partial sums, in violation of [L1]. This explicit witness refutes the statement. [L1, L2, step 1.1] ∎
+2.1 The constant-one sequence belongs to $\ell^\infty$ but not to $c_0$. [given, L1, L2, step 1.1] Therefore it is not the norm limit of standard-unit-vector partial sums, in violation of [L1]. This explicit witness refutes the statement. [L1, L2, step 1.1] ∎
+

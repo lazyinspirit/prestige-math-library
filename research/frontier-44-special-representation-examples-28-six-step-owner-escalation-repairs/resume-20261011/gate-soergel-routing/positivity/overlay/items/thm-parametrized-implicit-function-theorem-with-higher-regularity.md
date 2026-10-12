@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-parametrized-implicit-function-theorem-with-higher-regularity.md

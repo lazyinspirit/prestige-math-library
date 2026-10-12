@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-discriminant-square-criterion-for-an-alternating-galois-group.md

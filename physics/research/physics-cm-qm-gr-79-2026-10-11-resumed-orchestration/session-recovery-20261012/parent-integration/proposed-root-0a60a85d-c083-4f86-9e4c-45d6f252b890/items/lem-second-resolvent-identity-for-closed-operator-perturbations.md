@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-second-resolvent-identity-for-closed-operator-perturbations.md

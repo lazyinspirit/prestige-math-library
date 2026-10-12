@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-regular-sequences-give-acyclic-koszul-complexes.md

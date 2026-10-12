@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-simplicial-homology-of-a-point-and-an-edge.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bessel-inequality-and-finite-parseval-identity.md

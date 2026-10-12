@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-codensity-monad-of-the-small-skeleton-of-finite-sets-is-the-ultrafilter-monad.md

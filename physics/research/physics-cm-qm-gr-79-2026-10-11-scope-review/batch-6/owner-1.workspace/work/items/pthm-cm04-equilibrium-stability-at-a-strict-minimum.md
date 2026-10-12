@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-cm04-equilibrium-stability-at-a-strict-minimum.md

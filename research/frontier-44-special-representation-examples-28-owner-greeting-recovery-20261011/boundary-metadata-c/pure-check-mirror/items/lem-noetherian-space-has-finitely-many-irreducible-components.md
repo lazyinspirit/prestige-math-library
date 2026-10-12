@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-noetherian-space-has-finitely-many-irreducible-components.md

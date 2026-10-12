@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-manifold-exhaustion-passes-local-duality-to-the-colimit.md

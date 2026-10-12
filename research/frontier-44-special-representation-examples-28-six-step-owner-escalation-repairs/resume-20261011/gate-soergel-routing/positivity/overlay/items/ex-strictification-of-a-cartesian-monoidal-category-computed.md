@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-strictification-of-a-cartesian-monoidal-category-computed.md

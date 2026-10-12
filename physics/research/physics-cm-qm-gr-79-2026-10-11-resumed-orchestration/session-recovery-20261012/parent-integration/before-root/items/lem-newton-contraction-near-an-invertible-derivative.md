@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-newton-contraction-near-an-invertible-derivative.md

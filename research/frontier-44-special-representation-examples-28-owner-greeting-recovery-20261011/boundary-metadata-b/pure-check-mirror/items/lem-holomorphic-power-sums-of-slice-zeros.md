@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-holomorphic-power-sums-of-slice-zeros.md

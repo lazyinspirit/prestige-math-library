@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-open-mapping-theorem-holomorphic-functions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-primitive-ideals-of-usl2-at-a-generic-central-character.md

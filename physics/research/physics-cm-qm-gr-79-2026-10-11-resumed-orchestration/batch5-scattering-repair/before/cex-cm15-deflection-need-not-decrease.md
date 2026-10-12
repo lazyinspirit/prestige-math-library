@@ -1,0 +1,110 @@
+---
+id: cex-cm15-deflection-need-not-decrease
+kind: counterexample
+title: "Smooth finite-range free scattering refutes global strict decrease; as a separate contact comparison, an attractive refracting shell with index $3/2$ has $\\theta(b)=2(\\arcsin(b/a)-\\arcsin(2b/(3a)))$ strictly increasing, with a jump down to $0$ at grazing incidence"
+status: draft
+origin: session
+domain: physics
+dependency_level: 18
+deps: [post-cm15-impulse,
+       def-cm15-asymptotic-data,
+       def-cm15-cross-section,
+       pthm-cm15-central-scattering,
+       def-cm01-units,
+       def-interval,
+       def-euclidean-inner-product,
+       def-cross-product-in-r3,
+       def-principal-inverse-sine-and-cosine,
+       thm-sine-cosine-signs-monotonicity-and-ranges,
+       thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions,
+       thm-monotonicity-from-the-derivative,
+       thm-intermediate-value,
+       thm-chain-rule,
+       thm-algebra-of-derivatives,
+       cor-mean-value-theorem]
+dependency_roles:
+  post-cm15-impulse: physical-assumption
+  def-cm15-asymptotic-data: formulation-prerequisite
+  def-cm15-cross-section: formulation-prerequisite
+  pthm-cm15-central-scattering: physical-result
+  def-cm01-units: formulation-prerequisite
+  def-interval: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  def-principal-inverse-sine-and-cosine: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
+  thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions: mathematical-premise
+  thm-monotonicity-from-the-derivative: mathematical-premise
+  thm-intermediate-value: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  cor-mean-value-theorem: mathematical-premise
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+physical_scope: "The smooth finite-range model has zero deflection for every impact parameter beyond its range, so any globally defined deflection map is constant on this tail and cannot be strictly decreasing. The zero potential is a genuine smooth witness with unique deflection for every positive impact parameter. As a separate model comparison, the adopted attractive refracting shell of index 3/2 retains its strictly increasing deflection on 0<b<a and its declared grazing jump to zero; it is outside the smooth central-scattering class. All computations concern declared model data and report no observations."
+sources:
+  references:
+    - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.5, the discussion after Eq. (3.69): the assertion that the scattering angle decreases as the particle energy or the impact parameter is increased, the unqualified form of which is refuted here"
+      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+    - title: "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), §6.4, Eqs. (352)-(357): the impenetrable-sphere example, where the deflection is monotone for the reflection contact rule; the contrast with the refracting rule below shows that monotonicity is a property of the interaction rule, not of central scattering as such"
+      url: "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+---
+
+## Statement refuted
+
+**False statement.** *Let a conservative central scattering model with a
+finite-range interaction, positive energy and nonzero angular momentum have
+a unique scattering angle for every impact parameter. Then the scattering
+angle is a strictly decreasing function of the impact parameter.*
+
+The smooth finite-range witness below refutes this claim within the exact
+central-scattering class of [[def-cm15-asymptotic-data]]: the zero potential
+has deflection $0$ at every positive impact parameter. More generally,
+beyond the range of any finite-range potential the scattering trajectories
+are free, so a globally defined deflection map has a constant tail. The
+separate adopted refracting-shell comparison retains its increasing branch;
+that contact rule is outside the smooth $C^2$ class and is not used as the
+witness for the stated claim. [[pthm-cm15-central-scattering]] clause 5 makes
+no global monotonicity assertion, and [[def-cm15-cross-section]] uses
+specified deflection branches instead of inverting a global decreasing map.
+
+## Facts & Assumptions
+
+**Given:** A length $a>0$, a reduced mass $\mu>0$, a positive energy $E>0$, and the **refracting-shell model**: the label moves freely for $r\ne a$; at $r=a$ the adopted radial contact rule preserves the tangential velocity component (the contact force is radial, so the angular momentum about the centre is conserved) and conserves the energy with a potential drop $U_0>0$ inside, so that the speed inside is $v_{\mathrm{in}}=\sqrt{v_\infty^2+2U_0/\mu}$ with $v_\infty=\sqrt{2E/\mu}$; the rule is the index-$3/2$ choice $v_{\mathrm{in}}=\frac32v_\infty$, i.e. $n:=\frac32$ and $U_0=\frac54E$. The incoming motion is a straight line with impact parameter $b\ge0$ and speed $v_\infty$. The interface rule is applied at transverse crossings; at grazing $b=a$ adopt the free continuation. Separately, for the genuine smooth witness use the central model on time window $\mathbb R$ with $u=0$ and two equal label masses $2\mu$.
+
+[L1] Rule consistency and existence of the broken straight motion ([[post-cm15-impulse]] clauses (i)-(ii) for the contact-law format, [[def-cm15-asymptotic-data]] clauses (ii)-(iii) for the deflection vocabulary, [[def-cross-product-in-r3]], [[def-euclidean-inner-product]]): with the tangential velocity component and the energy preserved at the interface, the inside velocity obtains by Snell's law $\sin\alpha=n\sin\beta$ at the entry and, by the symmetry of the chord, the exit is the mirror configuration; the inside radial kinetic energy at $r=a$ is $\frac\mu2(v_{\mathrm{in}}^2-v_\infty^2b^2/a^2)=\frac\mu2v_\infty^2(n^2-b^2/a^2)>0$ for $b<a$. The outgoing radial energy is $\frac\mu2v_\infty^2(1-b^2/a^2)>0$, so the label reaches the second intersection and transmits without internal reflection.
+
+[L2] Chord and refraction geometry ([[def-euclidean-inner-product]]): for an entry point $P=a\,e_x$, incident direction $\hat u=-\cos\alpha\,e_x+\sin\alpha\,e_y$ with $\sin\alpha=b/a$, inside direction $\hat u_{\mathrm{in}}=-\cos\beta\,e_x+\sin\beta\,e_y$ and chord length $2a\cos\beta$, the exit point is $Q=a(-\cos2\beta\,e_x+\sin2\beta\,e_y)$ with outward normal $\hat n_Q=Q/a$, and the outgoing direction is $\hat u_{\mathrm{out}}=\cos\alpha\,\hat n_Q+\sin\alpha\,\hat t_Q$ with $\hat t_Q:=-\sin2\beta\,e_x-\cos2\beta\,e_y$; expanding gives $\hat u_{\mathrm{out}}=-\cos(2\beta-\alpha)e_x+\sin(2\beta-\alpha)e_y$, so the angle between $\hat u$ and $\hat u_{\mathrm{out}}$ is $2(\alpha-\beta)$.
+
+[L3] Inverse trigonometry and monotonicity ([[def-principal-inverse-sine-and-cosine]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-monotonicity-from-the-derivative]], [[thm-intermediate-value]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-interval]], [[cor-mean-value-theorem]]): $\arcsin$ is increasing and differentiable on $(-1,1)$ with derivative $(1-x^2)^{-1/2}$, so $b\mapsto\arcsin(b/a)$ and $b\mapsto\arcsin(b/(na))$ are differentiable on $(0,a)$; a differentiable function with positive derivative on an interval is strictly increasing; and a strictly increasing function is injective, so a value is attained at most once.
+
+[L4] Smooth central scattering ([[def-cm15-asymptotic-data]] clauses (i)-(iii), [[pthm-cm15-central-scattering]] clauses 1-3 and 5): the adopted smooth model has masses $m_1,m_2>0$, reduced mass $\mu$ and static $C^2$ potential $u$. For $u=0$ on $[R,\infty)$, the effective potential on that region is $V(r)=J^2/(2\mu r^2)$. The theorem applies to a model trajectory attaining a simple outer turning radius with $V=E$ and $V<E$ beyond it; the scattering angle is the angle between the nonzero asymptotic relative velocities. No global monotonicity is asserted.
+
+## Counterexample
+
+**Proof technique:** direct.
+
+1.1 Motion: for $0<b<a$ the model of the Facts admits the exact broken-straight motion: an incoming straight line, a chord inside $r<a$ (the label moves freely there with speed $v_{\mathrm{in}}$), and an outgoing straight line; the entry and exit data are related by the two conservation rules as in [L1], and [L2] computes the outgoing direction. For $b>a$ the line misses the shell; at $b=a$ it has the adopted free grazing continuation. In both cases the deflection is $0$. [given, L1, L2]
+
+1.2 Deflection formula: by [L2], for $b\in(0,a)$ the angle between the incoming and outgoing directions is $\theta(b)=2(\alpha-\beta)$ with $\sin\alpha=b/a$ and $\sin\beta=\sin\alpha/n=b/(na)$, that is
+$$\theta(b)=2\Bigl(\arcsin\frac{b}{a}-\arcsin\frac{2b}{3a}\Bigr)\qquad(0<b<a).$$ [step 1.1, L2, algebra]
+
+1.3 Genuine smooth finite-range witness and the general obstruction: fix an adopted smooth central model on time window $\mathbb R$ with $u(r)=0$ for $r\ge R$, and let $b>R$, $v_\infty=\sqrt{2E/\mu}$ and $r_b(t)=(v_\infty t,b,0)$. Then $|r_b(t)|\ge b>R$, so $u=u'=0$ along it and $r_b''=0$ solves the reduced equation. With $M=m_1+m_2$, the curves $x_1=(m_2/M)r_b$, $x_2=-(m_1/M)r_b$ have separation $r_b$, zero accelerations and zero force, hence are motions of the adopted model with zero centre of mass. Their angular momentum has magnitude $J=\mu b v_\infty>0$ and energy $E$; at the turning radius $b$, $V(b)=E$, $V'(b)=-J^2/(\mu b^3)<0$ and $V(r)<E$ for every $r>b$, matching [L4]. Both asymptotic relative velocities equal $(v_\infty,0,0)$, so the deflection is uniquely $0$. Any incoming line with impact parameter $b>R$ stays outside the interaction region and continues freely; thus every finite-range model has this constant deflection tail. In particular $u=0$ is $C^2$ and finite-range, and the same construction works for every $b>0$, giving a unique angle $0$ for every positive impact parameter; two distinct positive parameters therefore violate the asserted strict decrease. [given, L4, algebra]
+
+2.1 Monotonicity: differentiating [L3], $$\theta'(b)=2\left(\frac{1}{\sqrt{a^2-b^2}}-\frac{1}{\sqrt{n^2a^2-b^2}}\right)>0\qquad(0<b<a),$$ because $n>1$ gives $\sqrt{n^2a^2-b^2}>\sqrt{a^2-b^2}>0$, so the first reciprocal exceeds the second; hence $\theta$ is strictly increasing on $(0,a)$, the opposite of the claimed decrease. [step 1.2, L3, algebra]
+
+2.2 Consistency of the contact rule: at the entry the angular momentum about the centre is $\mu b v_\infty$, and inside it equals $\mu a v_{\mathrm{in}}\sin\beta=\mu a\,nv_\infty\sin\beta=\mu b v_\infty$, so angular momentum is conserved across the interface as the radial contact force requires; the energy is conserved by construction of $v_{\mathrm{in}}$ with $U_0=\frac54E$. This separate contact model is conservative and finite-range as an adopted radial rule; it is not a member of the smooth central-scattering class. [step 1.1, L1, L2, algebra]
+
+3.1 Values and the grazing jump: $\theta(0)=0$ and, as $b\uparrow a$, $\alpha\to\pi/2$ and $\beta\to\arcsin(1/n)=\arcsin\frac23$, so $\theta(b)\to\pi-2\arcsin\frac23\approx1.682$ rad $\approx96.4^\circ$; while for every $b\ge a$ the deflection is $0$. The map is therefore not decreasing (it increases on $(0,a)$ and then drops to $0$), and it is not injective: the value $0$ is attained for every $b\ge a$, in addition to its branch value at $b=0$. [step 2.1, L3, algebra]
+
+4.1 Conclusion: step 1.3 refutes the stated global strict-decrease claim with a genuine smooth central-scattering model satisfying its positive-energy, nonzero-angular-momentum and unique-angle hypotheses. More generally, any finite-range model whose angle is defined for every positive impact parameter has the constant free tail established there, so global strict decrease fails even when the interaction inside the range is nontrivial. Steps 1.1-3.1 separately retain the increasing refracting-shell branch and its adopted grazing jump; that contact comparison lies outside the smooth class and supplies no claim that $C^2$ regularity implies or is necessary for monotonicity. The central-scattering theorem itself records no global monotonicity claim and assumes a chosen nondegenerate branch for its cross-section formula. [step 1.3, step 1.1, step 3.1, step 2.2, L4] ∎
+
+## Remarks
+
+- **What is and is not claimed about the model.** The refracting-shell rule is *adopted*, exactly as the reflection rule of [[ex-cm15-hard-sphere-reflection-check]]: the tangential-velocity and energy conditions are the model's contact law, consistent with a radial impulsive force at the shell. Unlike the impenetrable-sphere contact, this rule is *not* specular reflection; the inside speed exceeds the outside speed and the contact bends the path toward the normal.
+
+- **The grazing discontinuity.** At $b=a$ the contact angle is grazing, the chord length shrinks to zero, and the deflection jumps from $\pi-2\arcsin\frac23$ to $0$. This is a genuine model feature (a "glory" concentration near forward angles in the associated cross-section) and a further reason why the cross-section must be built from branch data rather than from a single monotone inverse.
+
+- **No empirical claim.** The index $3/2$, the radius $a$ and the energy $E$ are declared model data; the computation checks an assertion about model functions, not a measurement of any material.

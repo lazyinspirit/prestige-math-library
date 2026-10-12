@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-blowups-of-projective-schemes-are-projective.md

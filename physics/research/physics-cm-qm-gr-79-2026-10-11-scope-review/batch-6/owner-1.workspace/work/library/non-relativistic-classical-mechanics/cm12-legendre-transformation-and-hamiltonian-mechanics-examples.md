@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm12-legendre-transformation-and-hamiltonian-mechanics-examples.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-differentiable-convex-functions-and-gradient-inequality.md

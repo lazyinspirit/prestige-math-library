@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-translated-distribution-associated-to-a-lie-subalgebra.md

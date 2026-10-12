@@ -26,7 +26,7 @@ import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 import { resolveDispatchProfile } from './model-profile-overrides.mjs';
 
 // tools/physics-support/models.mjs owns model IDs and semantic lane assignments.
-import { lane, modelProfile } from './models.mjs';
+import { lane, modelProfile, MODELS } from './models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../physics-autopilot/src/capacity.mjs';
 
 // OWNER RULE (2026-10-01): every agent in the workflow auto-compacts its context
@@ -54,7 +54,7 @@ const ROLES = Object.freeze({
   // One Beta or reader owns one batch. The pair ceiling permits one batch per
   // pair, so neither lane should add an artificial second wave.
   beta:         { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'batch scaffolding and scoped later repairs; full run width' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-3 audit of a foreign batch; full run width' },
+  reader:       { ...lane('agentic'), model: MODELS.luna.id, sandbox: 'workspace-write', effort: 'max', cap: MAX_RUN_BATCHES, web: true, why: 'independent step-3 audit of a foreign batch; full run width' },
   // `web: true` is a required capability. A Codex lane
   // without `tools.web_search` does not fail, it asserts from memory (the failure
   // this file records for the build lanes before 2026-08-11). The flag records
@@ -65,7 +65,7 @@ const ROLES = Object.freeze({
   //
   // Twenty-seven disjoint groups own at most three batches each. Shared-file stages
   // remain serial; lane capacity does not authorize overlapping writes.
-  alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: MAX_GROUPS, web: true, why: 'Sol 6.1 high group Alpha, <=3 batches each; groups cover the full batch ceiling' },
+  alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, why: 'Sol 6.1 medium Step-3 group Alpha, <=3 batches each; groups cover the full batch ceiling' },
   // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
   // Step 1 performs initial authoring; closeout stages
@@ -105,7 +105,7 @@ const ROLES = Object.freeze({
   'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: MAX_GROUPS, web: true, requiresTask: true, why: 'Step-5 final adjudication after the one paid judge recheck; one independent Astra-medium agent per affected group, with authoritative web verification' },
   // `alpha-batch-read` — the step-4 pass that reads a batch's A/B pairs while the
   // judges are still sweeping (owner, 2026-08-25). Step 4 applies the Sol 6.1
-  // high profile; the durable digest hands its findings to a fresh Sol 6.1 high
+  // medium profile; the durable digest hands its findings to a fresh Sol 6.1 high
   // adjudicator at Step 5.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 4 judges a frozen text; an
@@ -122,9 +122,9 @@ const ROLES = Object.freeze({
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // Read-only readers also consult authoritative web sources when unsure.
-  'alpha-batch-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'Sol 6.1 high step-4 whole-batch read; one read-only lane per batch, handed to step 5 by compact digest' },
-  // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
-  refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: MAX_RUN_BATCHES, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
+  'alpha-batch-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'medium', cap: MAX_RUN_BATCHES, why: 'Sol 6.1 medium step-4 whole-batch read; one read-only lane per batch, handed to step 5 by compact digest' },
+  // Step-3 refuters use the stage-selected GPT-6 Luna max profile.
+  refuter:      { ...lane('secondary'), model: MODELS.luna.id, sandbox: 'read-only', effort: 'max', cap: MAX_RUN_BATCHES, why: 'one independent GPT-6 Luna max read-only refuter per batch; returns evidence, never edits' },
 
   // The `supervisor` role was removed 2026-08-16. It existed to take "is the
   // stage done, and what fires next" away from the orchestrator, which was the

@@ -41,8 +41,7 @@ $$\|u+v\|_2^2+\|u-v\|_2^2=2\|u\|_2^2+2\|v\|_2^2.$$
 
 **Proof technique:** Expand $|f + g|^2 + |f - g|^2$ pointwise to $2|f|^2 + 2|g|^2$ and integrate.
 
-1.1 Because $f,g\in L^2(\mu)$, step [L2] puts $fg$ in $L^1(\mu)$, so every term [L2, L3, given, algebra]
-in the algebraic expansions below is integrable. Pointwise, $$|f+g|^2+|f-g|^2=(f+g)^2+(f-g)^2=2f^2+2g^2.$$ Integrating and using [L3] gives $$\int |f+g|^2\,d\mu+\int |f-g|^2\,d\mu=2\int |f|^2\,d\mu+2\int |g|^2\,d\mu.$$
+1.1 Because $f,g\in L^2(\mu)$, step [L2] puts $fg$ in $L^1(\mu)$, so every term [L2, L3, given, algebra] in the algebraic expansions below is integrable. Pointwise, $$|f+g|^2+|f-g|^2=(f+g)^2+(f-g)^2=2f^2+2g^2.$$ Integrating and using [L3] gives $$\int |f+g|^2\,d\mu+\int |f-g|^2\,d\mu=2\int |f|^2\,d\mu+2\int |g|^2\,d\mu.$$ [L2, L3, given, algebra]
 
-2.1 Rewriting the four integrals as $\|u+v\|_2^2$, $\|u-v\|_2^2$, [step 1.1, L1]
-$\|u\|_2^2$, and $\|v\|_2^2$ is legitimate by [L1]. That yields the parallelogram identity. ∎
+2.1 Rewriting the four integrals as $\|u+v\|_2^2$, $\|u-v\|_2^2$, [step 1.1, L1] $\|u\|_2^2$, and $\|v\|_2^2$ is legitimate by [L1]. That yields the parallelogram identity. [step 1.1, L1] ∎
+

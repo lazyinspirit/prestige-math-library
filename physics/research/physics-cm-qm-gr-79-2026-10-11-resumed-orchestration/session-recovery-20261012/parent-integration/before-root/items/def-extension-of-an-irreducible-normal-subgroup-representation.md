@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-extension-of-an-irreducible-normal-subgroup-representation.md

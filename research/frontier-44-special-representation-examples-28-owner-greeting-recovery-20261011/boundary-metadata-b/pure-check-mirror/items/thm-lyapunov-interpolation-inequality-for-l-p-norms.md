@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-lyapunov-interpolation-inequality-for-l-p-norms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-volume-of-a-glued-elementary-solid-from-its-outward-boundary-flux.md

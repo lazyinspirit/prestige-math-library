@@ -42,13 +42,10 @@ Every faithfully flat homomorphism of commutative rings is injective.
 
 **Proof technique:** direct.
 
+ 1.1 Let $K=\ker f$. Since $S$ is flat over $R$ by [L1], tensoring the exact sequence $$ 0\to K\to R\xrightarrow{f} S $$ with $S$ remains exact: $$ 0\to K\otimes_R S\to R\otimes_R S\to S\otimes_R S. $$ [L1, given]
 
-1.1 Let $K=\ker f$. Since $S$ is flat over $R$ by [L1], tensoring the exact sequence $$ 0\to K\to R\xrightarrow{f} S $$ with $S$ remains exact: $$ 0\to K\otimes_R S\to R\otimes_R S\to S\otimes_R S. $$ [L1, given]
+ 2.1 Under the canonical identification $R\otimes_R S\cong S$, the middle map in step 1.1 is $s\mapsto 1\otimes s$. Multiplication $\mu:S\otimes_R S\to S$, $\mu(s\otimes t)=st$, is a left inverse to this map, so the middle map is injective. Therefore $K\otimes_R S=0$. [step 1.1, algebra]
 
+ 3.1 Because $S$ is faithfully flat over $R$ by [L1], [L2] applied to $N=K$ shows that $K=0$. [L1, L2, step 2.1]
 
-2.1 Under the canonical identification $R\otimes_R S\cong S$, the middle map in step 1.1 is $s\mapsto 1\otimes s$. Multiplication $\mu:S\otimes_R S\to S$, $\mu(s\otimes t)=st$, is a left inverse to this map, so the middle map is injective. Therefore $K\otimes_R S=0$. [step 1.1, algebra]
-
-
-3.1 Because $S$ is faithfully flat over $R$ by [L1], [L2] applied to $N=K$ shows that $K=0$. [L1, L2, step 2.1]
-
-4.1 Hence $f$ is injective. [algebra] ∎
+4.1 Hence $f$ is injective. [algebra] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums.md

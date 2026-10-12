@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-fourier-series-and-discrete-transforms-are-lca-plancherel-special-cases.md

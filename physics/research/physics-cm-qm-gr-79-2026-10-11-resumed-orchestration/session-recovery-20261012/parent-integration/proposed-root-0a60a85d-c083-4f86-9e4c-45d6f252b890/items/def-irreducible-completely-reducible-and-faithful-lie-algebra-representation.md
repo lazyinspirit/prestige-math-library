@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-irreducible-completely-reducible-and-faithful-lie-algebra-representation.md

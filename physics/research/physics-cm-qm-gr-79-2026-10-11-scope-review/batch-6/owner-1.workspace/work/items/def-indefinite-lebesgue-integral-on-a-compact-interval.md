@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-indefinite-lebesgue-integral-on-a-compact-interval.md

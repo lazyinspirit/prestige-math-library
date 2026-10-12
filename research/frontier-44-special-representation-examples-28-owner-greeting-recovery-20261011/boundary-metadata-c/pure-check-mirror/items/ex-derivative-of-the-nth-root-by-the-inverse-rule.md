@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-derivative-of-the-nth-root-by-the-inverse-rule.md

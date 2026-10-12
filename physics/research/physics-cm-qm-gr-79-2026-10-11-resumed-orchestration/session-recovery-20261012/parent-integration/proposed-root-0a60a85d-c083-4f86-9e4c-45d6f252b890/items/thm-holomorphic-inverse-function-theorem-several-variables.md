@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-holomorphic-inverse-function-theorem-several-variables.md

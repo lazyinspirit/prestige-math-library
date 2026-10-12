@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bessel-potential-space-has-the-weighted-tempered-distribution-characterisation.md

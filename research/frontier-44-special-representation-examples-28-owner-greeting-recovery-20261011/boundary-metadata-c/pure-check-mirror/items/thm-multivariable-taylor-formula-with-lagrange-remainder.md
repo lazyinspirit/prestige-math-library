@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-multivariable-taylor-formula-with-lagrange-remainder.md

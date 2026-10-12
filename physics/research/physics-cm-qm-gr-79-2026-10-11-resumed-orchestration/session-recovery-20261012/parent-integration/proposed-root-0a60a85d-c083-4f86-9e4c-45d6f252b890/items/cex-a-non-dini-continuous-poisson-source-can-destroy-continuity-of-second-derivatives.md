@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-non-dini-continuous-poisson-source-can-destroy-continuity-of-second-derivatives.md

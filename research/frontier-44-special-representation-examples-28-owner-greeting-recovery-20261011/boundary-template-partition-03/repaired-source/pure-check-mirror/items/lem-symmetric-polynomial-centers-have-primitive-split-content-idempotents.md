@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-symmetric-polynomial-centers-have-primitive-split-content-idempotents.md

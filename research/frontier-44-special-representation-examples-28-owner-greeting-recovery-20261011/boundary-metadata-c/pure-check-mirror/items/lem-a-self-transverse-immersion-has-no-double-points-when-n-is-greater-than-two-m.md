@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m.md

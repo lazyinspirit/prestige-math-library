@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-rearrangement-sums-lie-in-an-affine-subspace.md

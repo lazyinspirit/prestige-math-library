@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-zero-sequence-admits-a-genus-zero-canonical-product.md

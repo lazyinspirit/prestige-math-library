@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-specht-irreducibility-fails-without-the-characteristic-zero-hypothesis.md

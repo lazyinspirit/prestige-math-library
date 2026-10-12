@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-enveloping-algebra-has-no-hidden-linear-relations-in-degree-one.md

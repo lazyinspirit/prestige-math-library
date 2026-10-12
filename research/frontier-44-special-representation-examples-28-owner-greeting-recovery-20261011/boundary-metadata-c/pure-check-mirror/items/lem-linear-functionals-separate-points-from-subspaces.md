@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-linear-functionals-separate-points-from-subspaces.md

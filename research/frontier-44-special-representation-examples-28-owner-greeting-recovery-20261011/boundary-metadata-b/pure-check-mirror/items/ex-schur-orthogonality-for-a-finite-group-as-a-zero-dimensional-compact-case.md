@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-schur-orthogonality-for-a-finite-group-as-a-zero-dimensional-compact-case.md

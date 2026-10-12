@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-system-of-imprimitivity-gives-a-representation-of-the-transformation-algebra.md

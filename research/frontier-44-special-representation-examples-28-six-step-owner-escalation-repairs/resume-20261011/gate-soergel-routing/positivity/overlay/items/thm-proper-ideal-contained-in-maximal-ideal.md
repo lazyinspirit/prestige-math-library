@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-proper-ideal-contained-in-maximal-ideal.md

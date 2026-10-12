@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-group-ring-is-free-over-a-subgroup-ring.md

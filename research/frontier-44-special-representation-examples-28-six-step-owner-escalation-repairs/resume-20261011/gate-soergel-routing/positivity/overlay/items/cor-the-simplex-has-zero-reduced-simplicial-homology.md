@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-simplex-has-zero-reduced-simplicial-homology.md

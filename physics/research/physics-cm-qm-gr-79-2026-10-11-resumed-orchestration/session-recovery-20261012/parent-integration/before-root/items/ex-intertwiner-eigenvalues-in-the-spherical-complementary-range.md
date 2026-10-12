@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-intertwiner-eigenvalues-in-the-spherical-complementary-range.md

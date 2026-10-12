@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weierstrass-division-of-z-one-by-z-two-squared-minus-z-one.md

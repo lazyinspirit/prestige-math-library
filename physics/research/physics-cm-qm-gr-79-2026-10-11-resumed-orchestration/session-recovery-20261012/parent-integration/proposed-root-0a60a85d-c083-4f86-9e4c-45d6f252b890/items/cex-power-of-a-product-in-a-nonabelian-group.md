@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-power-of-a-product-in-a-nonabelian-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-trace-pairing-for-a-finite-separable-extension.md

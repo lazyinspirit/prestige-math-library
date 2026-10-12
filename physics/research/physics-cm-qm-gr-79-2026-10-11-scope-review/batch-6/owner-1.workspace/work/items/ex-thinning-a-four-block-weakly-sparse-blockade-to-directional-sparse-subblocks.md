@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-thinning-a-four-block-weakly-sparse-blockade-to-directional-sparse-subblocks.md

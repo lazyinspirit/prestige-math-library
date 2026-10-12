@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-one-generalized-pell-solution-gives-infinitely-many.md

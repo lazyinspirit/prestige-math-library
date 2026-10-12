@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-figure-eight-is-an-immersed-image-not-an-embedded-submanifold.md

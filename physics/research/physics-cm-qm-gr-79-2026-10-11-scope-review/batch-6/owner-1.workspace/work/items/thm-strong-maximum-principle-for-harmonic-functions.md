@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strong-maximum-principle-for-harmonic-functions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-classical-parabolic-corner-regularity-needs-compatible-initial-and-boundary-data.md

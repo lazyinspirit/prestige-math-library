@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-open-c-one-map-has-invertible-derivative.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-trivial-line-bundle-and-its-sections-as-functions.md

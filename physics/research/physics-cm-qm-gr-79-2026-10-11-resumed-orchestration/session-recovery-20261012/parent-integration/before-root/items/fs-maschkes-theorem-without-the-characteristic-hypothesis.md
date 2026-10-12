@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-maschkes-theorem-without-the-characteristic-hypothesis.md

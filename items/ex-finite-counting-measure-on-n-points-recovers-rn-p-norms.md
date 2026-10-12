@@ -50,8 +50,7 @@ itself remains valid for every real $p>0$.
 
 **Proof technique:** Unwind the counting-measure integral on a finite set and compare it term by term with the published $p$-norms on $\mathbb R^n$.
 
-1.1 Extending $(x_0,\dots,x_{n-1})$ by zeros outside $\{0,\dots,n-1\}$ turns it [L1, given]
-into a sequence in the setting of [L1]. The resulting $\ell^p$ and $L^\infty$ formulas are exactly the two displayed expressions.
+1.1 Extending $(x_0,\dots,x_{n-1})$ by zeros outside $\{0,\dots,n-1\}$ turns it into a sequence in the setting of [L1]. The resulting $\ell^p$ and $L^\infty$ formulas are exactly the two displayed expressions. [L1, given]
 
-2.1 In the ranges stated in [L2], those expressions are exactly the published [step 1.1, L2]
-norms on $\mathbb R^n$. For other real $p>0$, step 1.1 still gives the displayed $L^p$ functional, without claiming that the earlier finite-dimensional page called it a norm. ∎
+2.1 In the ranges stated in [L2], those expressions are exactly the published [step 1.1, L2] norms on $\mathbb R^n$. For other real $p>0$, step 1.1 still gives the displayed $L^p$ functional, without claiming that the earlier finite-dimensional page called it a norm. [L2, step 1.1] ∎
+

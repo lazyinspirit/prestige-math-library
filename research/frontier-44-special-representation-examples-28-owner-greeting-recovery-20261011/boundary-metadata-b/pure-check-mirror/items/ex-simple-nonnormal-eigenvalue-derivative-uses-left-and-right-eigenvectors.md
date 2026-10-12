@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-simple-nonnormal-eigenvalue-derivative-uses-left-and-right-eigenvectors.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-global-dimension-equals-residue-field-projective-dimension.md

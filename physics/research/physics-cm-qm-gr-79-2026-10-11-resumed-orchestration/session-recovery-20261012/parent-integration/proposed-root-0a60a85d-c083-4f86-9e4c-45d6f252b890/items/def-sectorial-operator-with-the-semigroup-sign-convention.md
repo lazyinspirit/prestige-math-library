@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sectorial-operator-with-the-semigroup-sign-convention.md

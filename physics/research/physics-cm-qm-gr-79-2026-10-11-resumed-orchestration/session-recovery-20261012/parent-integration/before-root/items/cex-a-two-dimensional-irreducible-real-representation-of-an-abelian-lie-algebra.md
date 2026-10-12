@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-two-dimensional-irreducible-real-representation-of-an-abelian-lie-algebra.md

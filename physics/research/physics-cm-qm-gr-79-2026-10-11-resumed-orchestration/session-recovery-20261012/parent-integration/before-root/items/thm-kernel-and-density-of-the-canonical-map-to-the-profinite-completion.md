@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kernel-and-density-of-the-canonical-map-to-the-profinite-completion.md

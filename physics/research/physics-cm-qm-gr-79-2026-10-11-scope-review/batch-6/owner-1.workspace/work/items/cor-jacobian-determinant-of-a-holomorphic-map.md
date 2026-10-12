@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-jacobian-determinant-of-a-holomorphic-map.md

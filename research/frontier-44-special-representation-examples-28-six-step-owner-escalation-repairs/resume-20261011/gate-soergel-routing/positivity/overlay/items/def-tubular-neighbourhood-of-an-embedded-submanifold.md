@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-tubular-neighbourhood-of-an-embedded-submanifold.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-power-sum-and-complete-homogeneous-symmetric-polynomials.md

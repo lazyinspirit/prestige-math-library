@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-differentiating-the-laplace-sine-integral-under-the-integral-sign.md

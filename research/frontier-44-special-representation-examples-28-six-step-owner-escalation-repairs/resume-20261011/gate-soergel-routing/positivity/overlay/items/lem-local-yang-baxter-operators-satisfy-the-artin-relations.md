@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-yang-baxter-operators-satisfy-the-artin-relations.md

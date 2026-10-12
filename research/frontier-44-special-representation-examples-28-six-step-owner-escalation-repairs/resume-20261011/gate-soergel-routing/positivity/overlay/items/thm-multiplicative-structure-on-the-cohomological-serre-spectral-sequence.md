@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiplicative-structure-on-the-cohomological-serre-spectral-sequence.md

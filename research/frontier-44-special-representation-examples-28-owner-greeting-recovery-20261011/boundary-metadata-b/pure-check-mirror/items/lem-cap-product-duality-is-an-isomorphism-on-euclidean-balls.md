@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls.md

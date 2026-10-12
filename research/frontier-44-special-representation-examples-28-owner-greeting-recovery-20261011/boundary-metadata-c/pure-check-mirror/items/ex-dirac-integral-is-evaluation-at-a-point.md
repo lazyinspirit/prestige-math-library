@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dirac-integral-is-evaluation-at-a-point.md

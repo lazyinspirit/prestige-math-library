@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-constant-vector-is-a-top-eigenvector.md

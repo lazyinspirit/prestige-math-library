@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-exponent-of-convergence-of-a-zero-sequence.md

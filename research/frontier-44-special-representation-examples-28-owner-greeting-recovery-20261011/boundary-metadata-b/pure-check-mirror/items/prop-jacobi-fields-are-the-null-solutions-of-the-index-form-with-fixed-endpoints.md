@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-jacobi-fields-are-the-null-solutions-of-the-index-form-with-fixed-endpoints.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-antipodal-circle-map-has-odd-lift-increment.md

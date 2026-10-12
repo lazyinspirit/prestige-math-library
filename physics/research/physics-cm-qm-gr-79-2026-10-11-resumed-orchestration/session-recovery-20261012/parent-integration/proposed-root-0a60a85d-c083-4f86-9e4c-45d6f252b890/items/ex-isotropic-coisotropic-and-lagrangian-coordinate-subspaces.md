@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-isotropic-coisotropic-and-lagrangian-coordinate-subspaces.md

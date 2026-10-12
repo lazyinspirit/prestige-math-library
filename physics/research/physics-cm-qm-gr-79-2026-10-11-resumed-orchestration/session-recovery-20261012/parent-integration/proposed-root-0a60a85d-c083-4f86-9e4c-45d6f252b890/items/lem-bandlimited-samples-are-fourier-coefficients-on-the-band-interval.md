@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bandlimited-samples-are-fourier-coefficients-on-the-band-interval.md

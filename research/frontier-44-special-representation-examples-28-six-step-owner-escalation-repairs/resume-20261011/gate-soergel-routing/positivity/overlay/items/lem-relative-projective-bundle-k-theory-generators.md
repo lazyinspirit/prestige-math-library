@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-relative-projective-bundle-k-theory-generators.md

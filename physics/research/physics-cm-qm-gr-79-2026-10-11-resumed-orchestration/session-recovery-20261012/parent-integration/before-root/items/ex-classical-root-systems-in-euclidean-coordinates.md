@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-classical-root-systems-in-euclidean-coordinates.md

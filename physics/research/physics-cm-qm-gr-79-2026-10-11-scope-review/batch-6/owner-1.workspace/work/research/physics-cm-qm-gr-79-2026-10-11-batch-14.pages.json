@@ -1,0 +1,900 @@
+[
+  {
+    "order": 107,
+    "id": "cm-math-kam",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Kam",
+    "companion": "cm-math-kam-examples",
+    "requires": [
+      "analytic-majorants-and-the-cauchy-kovalevskaya-theorem",
+      "analyticity-liouville-and-morera",
+      "cm-math-canonical",
+      "goursat-and-cauchys-theorem-in-a-convex-domain",
+      "holomorphic-functions-of-several-variables",
+      "complex-differentiability-and-cauchy-riemann",
+      "construction-of-r-via-cauchy-sequences",
+      "fubini-and-change-of-variables",
+      "contour-integration",
+      "fejer-and-poisson-summability-of-fourier-series",
+      "bounded-linear-operators-and-quotient-spaces",
+      "connectedness",
+      "the-exponential-function"
+    ],
+    "items": [
+      {
+        "id": "def-holomorphic-kam-domain-and-diophantine-labels",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Analytic KAM data: angular tori, action-angle neighbourhoods, Fourier cutoffs and Diophantine frequency labels",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-definition",
+        "dependency_level": 3,
+        "deps": [
+          "def-separately-holomorphic-function",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "def-balls-and-polydiscs-in-complex-euclidean-space",
+          "rem-complex-euclidean-space-dictionary",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "def-quotient-topology",
+          "def-product-topology",
+          "def-continuous-map-top",
+          "def-integers",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart",
+          "def-sections-and-iterated-riemann-integrals",
+          "thm-riemann-fubini-on-product-rectangles",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-separately-holomorphic-function": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "def-balls-and-polydiscs-in-complex-euclidean-space": "mathematical-premise",
+          "rem-complex-euclidean-space-dictionary": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "def-quotient-topology": "mathematical-premise",
+          "def-product-topology": "mathematical-premise",
+          "def-continuous-map-top": "mathematical-premise",
+          "def-integers": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart": "mathematical-premise",
+          "def-sections-and-iterated-riemann-integrals": "mathematical-premise",
+          "thm-riemann-fubini-on-product-rectangles": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Throughout, fix an integer $n\\ge1$. The space $\\mathbb R^n$ is read through\n[[rem-complex-euclidean-space-dictionary]] and $\\mathbb C^n$ carries the polydisc\ngeometry of [[def-balls-and-polydiscs-in-complex-euclidean-space]]. All norms\nbelow are supremum norms: for $z\\in\\mathbb C^m$,\n\n$$|z|_\\infty:=\\max_{1\\le i\\le m}|z_i|,\\qquad |z|_1:=\\sum_{i=1}^m|z_i| .$$\n\n**Angular torus.** Let $\\mathbb Z$ be the integers ([[def-integers]]). Write\n$k=(k_1,\\dots,k_n)\\in\\mathbb Z^n$, $|k|_1=|k_1|+\\dots+|k_n|$, and let\n$(2\\pi\\mathbb Z)^n:=\\{2\\pi k:k\\in\\mathbb Z^n\\}\\subseteq\\mathbb R^n$. On\n$\\mathbb R^n$ define the relation $\\vartheta\\sim\\vartheta'$ by\n$\\vartheta-\\vartheta'\\in(2\\pi\\mathbb Z)^n$. This is an equivalence relation, and\nthe **angular torus** is the quotient set\n\n$$\\mathbb T^n:=(\\mathbb R/2\\pi\\mathbb Z)^n:=\\mathbb R^n/\\!\\sim$$\n\nwith the quotient topology ([[def-quotient-topology]], [[def-product-topology]]),\nand canonical projection $\\pi:\\mathbb R^n\\to\\mathbb T^n$, which is continuous\n([[def-continuous-map-top]]). A map $f:\\mathbb R^n\\to X$ is **$2\\pi$-periodic** if\n$f(\\vartheta+2\\pi k)=f(\\vartheta)$ for all $\\vartheta\\in\\mathbb R^n$,\n$k\\in\\mathbb Z^n$; such an $f$ factors uniquely through $\\pi$, and a map on\n$\\mathbb T^n$ is, by definition, a $2\\pi$-periodic map on $\\mathbb R^n$ read\nthrough this factorisation. A function on $\\mathbb T^n$ is **continuous**, resp.\n**real analytic**, when its $2\\pi$-periodic representative has that property.\n\n**Action-angle neighbourhoods.** For $0<r$ and $0<s\\le\\infty$ put\n\n$$B_r:=\\{I\\in\\mathbb C^n:|I|_\\infty<r\\},\\qquad S_s:=\\{\\vartheta\\in\\mathbb C^n:|\\mathrm{Im}\\,\\vartheta|_\\infty<s\\},$$\n\nand, for a set $\\Omega\\subseteq\\mathbb R^n$ (always measurably or\ntopologically qualified in the uses below) and $h\\ge0$,\n\n$$O_h(\\Omega):=\\{\\nu\\in\\mathbb C^n:\\operatorname{dist}_\\infty(\\nu,\\Omega)<h\\}, \\qquad \\operatorname{dist}_\\infty(\\nu,\\Omega):=\\inf_{\\omega\\in\\Omega}|\\nu-\\omega|_\\infty .$$\n\nFor $\\Omega=\\varnothing$ the infimum is taken in the extended nonnegative reals with $\\inf\\varnothing=+\\infty$, so $O_h(\\varnothing)=\\varnothing$ for every finite $h\\ge0$. Supremum norms of functions on an empty domain are $0$ (the supremum in $[0,+\\infty]$). Thus an empty Diophantine label set gives an empty parameter family; results quantified over its labels are vacuous, and positive-measure assertions require their separately stated hypotheses.\n\nThe **action-angle neighbourhood** of width $(r,s,h)$ over $\\Omega$ is the open\nproduct\n\n$$D_{r,s,h}(\\Omega):=B_r\\times S_s\\times O_h(\\Omega)\\subseteq\\mathbb C^{2n}\\times\\mathbb C^n,$$\n\nand $D_{r,s}(\\Omega):=B_r\\times S_s$. In the KAM construction the parameter set\nis a **frequency label set** $\\Omega_\\alpha\\subseteq\\mathbb R^n$ (defined below)\nand the relevant parameter neighbourhoods are $O_h(\\Omega_\\alpha)$; the\ntemperature of a step is measured by the three widths $r,s,h$ and an angular\nmargin $\\sigma>0$.\n\n**Holomorphic data and norms.** A function $g:D_{r,s,h}(\\Omega)\\to\\mathbb C$\nis **holomorphic on $D_{r,s,h}(\\Omega)$** when it is continuous and separately\nholomorphic in each of the $2n+n$ complex variables\n([[def-separately-holomorphic-function]],\n[[def-complex-differentiability-holomorphic-and-entire]]); equivalently, by\n[[thm-power-series-expansion-in-several-complex-variables]], it is given near\nevery point by an absolutely convergent power series in the $(I,\\vartheta,\\nu)$\nvariables. The **sup-norms** are\n\n$$|g|_{r,s}:=|g|_{r,s,0}:=\\sup_{D_{r,s}(\\Omega)}|g|,\\qquad |g|_{r,s,h}:=|g|_{r,s,h}(\\Omega):=\\sup_{D_{r,s,h}(\\Omega)}|g|\\in[0,+\\infty].$$\n\nWhere no parameter occurs we write $g\\in\\mathcal H_{r,s}$ if $g$ is holomorphic\non $D_{r,s}(\\Omega)$ for some fixed open $\\Omega$ and $|g|_{r,s}<+\\infty$; and\n$g\\in\\mathcal H_{r,s,h}$ if $g$ is holomorphic on $D_{r,s,h}(\\Omega)$ with\n$|g|_{r,s,h}<+\\infty$. Functions of $\\vartheta$ alone are read through the\n$2\\pi$-periodicity of the $\\vartheta$-variables, so that all integrals and\nnorms below are well defined on $\\mathbb T^n$.\n\n**Fourier coefficients, mean and cutoff.** Let $g\\in\\mathcal H_{r,s}$. For\n$k\\in\\mathbb Z^n$ and $I\\in B_r$ the **Fourier coefficient** is the iterated\nRiemann integral\n\n$$g_k(I):=\\frac1{(2\\pi)^n}\\int_0^{2\\pi}\\!\\!\\cdots\\!\\int_0^{2\\pi} g(I,\\vartheta)\\,e^{-ik\\cdot\\vartheta}\\,d\\vartheta_n\\cdots d\\vartheta_1 ,$$\n\nas in [[def-sections-and-iterated-riemann-integrals]]; by\n[[thm-riemann-fubini-on-product-rectangles]] it equals the multiple Riemann\nintegral over $[0,2\\pi]^n$ and is independent of the order of integration. The\n**angular mean** of $g$ is $[g]:=g_0$, so $[g](I)=\\frac1{(2\\pi)^n}\\int_{[0,2\\pi]^n}g(I,\\vartheta)\\,d\\vartheta$;\n$g$ is **zero-mean** if $[g]=0$ for every $I\\in B_r$. For a real number $K\\ge0$\nthe **Fourier cutoff** $T_Kg$ is the trigonometric polynomial\n\n$$T_Kg(I,\\vartheta):=\\sum_{k\\in\\mathbb Z^n,\\ |k|_1\\le K}g_k(I)\\,e^{ik\\cdot\\vartheta}.$$\n\nThe sum is finite because $|k|_1\\le K$ bounds each $|k_i|$ by $K$. For a\nfunction $g$ of $(I,\\vartheta,\\nu)$ the same notations apply with the\n$\\nu$-variable carried along; e.g. $[g]$, $g_k$ and $T_Kg$ are then functions of\n$(I,\\nu)$.\n\n**Frequency label sets.** Let $\\Omega\\subseteq\\mathbb R^n$ be open, $\\alpha>0$\nand $\\tau>n-1$. A frequency $\\nu\\in\\mathbb R^n$ is **$(\\alpha,\\tau)$-Diophantine**\nif\n\n$$|k\\cdot\\nu|\\ge\\alpha\\,|k|_1^{-\\tau}\\qquad\\text{for every }k\\in\\mathbb Z^n\\setminus\\{0\\},$$\n\nwith $k\\cdot\\nu=\\sum_ik_i\\nu_i$. The **label set** is\n\n$$\\Omega_{\\alpha,\\tau}:=\\Omega\\cap\\{\\nu\\in\\mathbb R^n:\\nu\\text{ is }(\\alpha,\\tau)\\text{-Diophantine}\\}.$$\n\n$\\Omega_{\\alpha,\\tau}$ is closed in $\\Omega$ and contained in the global\n$(\\alpha,\\tau)$-Diophantine set; it need not have interior points. Write\n$\\widehat\\Omega:=\\Omega$ when $\\tau,\\alpha$ are fixed and no confusion arises.\nThe parameter neighbourhoods used below are $O_h(\\Omega_{\\alpha,\\tau})$.\n\n**Hamiltonians, canonical form and Poisson bracket.** A **Hamiltonian datum**\non $D_{r,s,h}(\\Omega)$ is a holomorphic $H:D_{r,s,h}(\\Omega)\\to\\mathbb C$ which\nis real-valued on real points; more generally we consider families\n$H(I,\\vartheta;\\nu)=e(\\nu)+\\nu\\cdot I+P(I,\\vartheta,\\nu)$ where $e$ is\nholomorphic on $O_h(\\Omega)$ and real on real points, and\n$P\\in\\mathcal H_{r,s,h}$ is real on real points. Pair the coordinates as\n$q=\\vartheta$, $p=I$ in the phase-domain notation of\n[[def-cm-phase-domain-and-standard-symplectic-two-form]]; the **standard\ntwo-form** in these coordinates is\n\n$$\\omega=\\sum_{i=1}^n d\\vartheta_i\\wedge dI_i,$$\n\nand the **Hamiltonian vector field** of a $C^1$ Hamiltonian $H$ is, by\n[[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] with\n$(q,p)=(\\vartheta,I)$,\n\n$$X_H=(H_I,-H_\\vartheta),\\qquad \\theta'=H_I,\\quad I'=-H_\\vartheta\\ \\ \\text{(Hamilton's equations)},$$\n\ncharacterised by $\\iota_{X_H}\\omega=dH$; the **Poisson bracket** is\n\n$$\\{f,g\\}=f_\\vartheta\\cdot g_I-f_I\\cdot g_\\vartheta,\\qquad \\{f,g\\}=\\nabla f^{\\mathsf T}J\\nabla g\\ \\ \\text{in the notation of that item}.$$\n\nIn particular $\\{f,e+\\nu\\cdot I\\}=\\nu\\cdot f_\\vartheta$ for every\n$C^1$ function $f$.\n\n**Angular parametrisations and Lagrangian images.** Fix a Hamiltonian datum\n$H$. An **angular parametrisation** is a map $\\psi=(\\psi_I,\\psi_\\vartheta)$\nwith $\\psi_I:\\mathbb R^n\\to\\mathbb C^n$ $2\\pi$-periodic and\n$\\psi_\\vartheta:\\mathbb R^n\\to\\mathbb C^n$ satisfying\n$\\psi_\\vartheta(\\vartheta+2\\pi k)=\\psi_\\vartheta(\\vartheta)+2\\pi k$ for all\n$k\\in\\mathbb Z^n$, so that\n$\\pi\\circ\\psi_\\vartheta=\\pi\\circ(\\psi_\\vartheta\\big|_{\\mathbb R^n})$ descends to\n$\\mathbb T^n$; it is **holomorphic on the strip $S_s$** when both components\nextend holomorphically to $S_s$, and **real analytic** when in addition\n$\\psi(\\mathbb R^n)\\subseteq\\mathbb R^{2n}$ and the components are real analytic\nin the real variables. It is **faithful** if\n$\\psi(\\vartheta)=\\psi(\\vartheta')$ implies\n$\\vartheta-\\vartheta'\\in(2\\pi\\mathbb Z)^n$, and an **immersion** if\n$D\\psi(\\vartheta)$ has rank $n$ for every $\\vartheta\\in\\mathbb R^n$; a tuple\nthat is both is an **embedded torus parametrisation**. Its image is\n**Lagrangian** (with respect to $\\omega$) if\n$\\psi^*\\omega=\\sum_{i=1}^n d(\\psi_\\vartheta)_i\\wedge d(\\psi_I)_i=0$ as a\ntwo-form on the parameter space of the representative, and **invariant with\nfrequency $\\nu$** if\n\n$$X_H(\\psi(\\vartheta))=\\sum_{j=1}^n\\nu_j\\,\\partial_{\\vartheta_j}\\psi(\\vartheta) \\qquad\\text{for all real }\\vartheta .$$",
+        "strategy": "Define the KAM analytic data, domains, Fourier calculus and Diophantine labels with explicit quantifiers and conventions; no existence claim and no proof obligation is smuggled into the definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §2 (the domain $D_{r,s}$, the parameter neighbourhood $O_h$, the sup-norm and the Diophantine sets $\\mathcal D_\\alpha$), PDF pp. 8-13.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.1 (analytic preliminaries and quasi-periodic data), §3.3 (Diophantine properties and the resonant strips) and §3.5 (geometric structures: symplectic forms and Lagrangian submanifolds), printed pp. 24-31, 32-36 and 40-49.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cauchy-fourier-and-lattice-shell-bounds",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Fourier decay, Cauchy derivative bounds, lattice shell counts and the exponential small-divisor sums on action-angle neighbourhoods",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 4,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "cor-goursat-rectangle-theorem",
+          "prop-reversal-and-concatenation-of-complex-line-integrals",
+          "def-complex-line-integral-over-a-rectifiable-path",
+          "lem-cauchy-estimates-on-concentric-subdiscs",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "cor-locally-uniformly-convergent-holomorphic-series",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "def-sections-and-iterated-riemann-integrals",
+          "thm-riemann-fubini-on-product-rectangles",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-geometric-series",
+          "def-interval",
+          "def-metric-ball",
+          "def-directional-and-partial-derivatives"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "cor-goursat-rectangle-theorem": "mathematical-premise",
+          "prop-reversal-and-concatenation-of-complex-line-integrals": "mathematical-premise",
+          "def-complex-line-integral-over-a-rectifiable-path": "mathematical-premise",
+          "lem-cauchy-estimates-on-concentric-subdiscs": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "cor-locally-uniformly-convergent-holomorphic-series": "mathematical-premise",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions": "mathematical-premise",
+          "def-sections-and-iterated-riemann-integrals": "mathematical-premise",
+          "thm-riemann-fubini-on-product-rectangles": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Fix $n\\ge1$, $r>0$, $s>0$, $h\\ge0$ and a set $\\Omega\\subseteq\\mathbb R^n$; write\n$D_{r,s,h}:=D_{r,s,h}(\\Omega)$ and let $g$ be holomorphic on $D_{r,s,h}$ with\nfinite norm $M:=|g|_{r,s,h}\\in[0,\\infty)$ ([[def-holomorphic-kam-domain-and-diophantine-labels]]).\nThen:\n\n1. **Fourier decay and representation.** For every $0<\\sigma\\le s$ the Fourier\n   coefficients of $g$ satisfy\n$$|g_k(I,\\nu)|\\le M\\,e^{-(s-\\sigma)|k|_1}\\qquad(I\\in B_r,\\ \\nu\\in O_h,\\ k\\in\\mathbb Z^n),$$\n   and for $0<\\sigma\\le\\min(s/2,1)$ the series\n   $\\sum_{k\\in\\mathbb Z^n}g_k(I,\\nu)e^{ik\\cdot\\vartheta}$ converges absolutely\n   and uniformly on $B_r\\times S_{s-2\\sigma}\\times O_h$ to $g$; moreover each\n   $g_k$ is holomorphic on $B_r\\times O_h$, and the series can be differentiated\n   termwise:\n$$\\partial_{\\vartheta_j}g=\\sum_kg_k\\,ik_j\\,e^{ik\\cdot\\vartheta},\\qquad \\partial_{I_j}g=\\sum_k(\\partial_{I_j}g_k)\\,e^{ik\\cdot\\vartheta},\\qquad \\partial_{\\nu_j}g=\\sum_k(\\partial_{\\nu_j}g_k)\\,e^{ik\\cdot\\vartheta}$$\n   on $B_r\\times S_{s-2\\sigma}\\times O_h$ (the last only when $h>0$), with absolute\n   and uniform convergence of the differentiated series there.\n\n2. **Cauchy bounds for the first and second derivatives.** For all $j$,\n$$|\\partial_{I_j}g|_{r-\\delta,s,h}\\le\\frac{M}{\\delta}\\ (0<\\delta<r),\\qquad |\\partial_{\\vartheta_j}g|_{r,s-\\delta',h}\\le\\frac{M}{\\delta'}\\ (0<\\delta'<s),$$\n$$|\\partial_{\\nu_j}g|_{r,s,h-\\delta''}\\le\\frac{M}{\\delta''}\\ (0<\\delta''<h),\\qquad |\\partial_{I_i}\\partial_{I_j}g|_{r-\\delta,s,h}\\le\\frac{2M}{\\delta^2},\\qquad |\\partial_{\\vartheta_i}\\partial_{\\vartheta_j}g|_{r,s-\\delta',h}\\le\\frac{2M}{\\delta'^2},\\qquad |\\partial_{I_i}\\partial_{\\vartheta_j}g|_{r-\\delta,s-\\delta',h}\\le\\frac{2M}{\\delta\\delta'}$$\n   for all $i,j$ (the second-order bounds stated only for the ranges in which the\n   norms on the left are defined).\n\n3. **Lattice shells.** For every integer $m\\ge1$,\n$$\\#\\{k\\in\\mathbb Z^n:|k|_1=m\\}\\le 4^{\\,n}m^{\\,n-1},$$\n   and for every $0<\\sigma\\le1$ the following finite sums satisfy\n$$\\sum_{k\\in\\mathbb Z^n}e^{-\\sigma|k|_1}\\le C_n\\sigma^{-n},\\qquad \\sum_{k\\ne0}|k|_1^{\\,\\tau}e^{-\\sigma|k|_1}\\le C_{n,\\tau}\\,\\sigma^{-(\\tau+n)}\\quad(\\tau\\ge0),$$\n$$\\sum_{k\\ne0}|k|_1^{-\\tau}e^{-\\sigma|k|_1}\\le C_n\\,\\sigma^{-1}\\quad(\\tau\\ge n-1),$$\n   where $C_n$, $C_{n,\\tau}$ depend only on the indicated arguments.\n\n4. **Fourier truncation.** For $K\\ge0$ and $0<\\sigma\\le\\min(s/2,1)$,\n$$|g-T_Kg|_{r,s-2\\sigma,h}\\le C_n\\sigma^{-n}e^{-\\sigma K}M .$$\n\n5. **Algebra and uniform limits.** If $u,v$ are holomorphic and bounded on\n   $D_{r,s,h}$ then $uv$ is holomorphic with $|uv|_{r,s,h}\\le|u|_{r,s,h}|v|_{r,s,h}$;\n   and if $(g^{(m)})$ is a sequence of holomorphic functions on $D_{r,s,h}$\n   converging uniformly to $g$ on $D_{r,s,h}$ with $|g^{(m)}|_{r,s,h}\\le M$ for all\n   $m$, then $g$ is holomorphic on $D_{r,s,h}$ and $|g|_{r,s,h}\\le M$.",
+        "strategy": "direct; shift the Fourier contours into the complex strip with Goursat's rectangle theorem, identify the series by Fejer uniqueness, bound derivatives by one-variable Cauchy estimates, and evaluate the lattice sums by shell counting and geometric comparison.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1-§2 (contour shift for Fourier coefficients $|g_k|\\le|g|_s e^{-s|k|_1}$; lattice shell estimate $\\sum_k|k|^\\tau e^{-\\sigma|k|_1}\\le C\\sigma^{-\\tau-n}$; Fourier truncation), PDF pp. 5-13.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.1 (analytic norms and Fourier coefficients) and §3.3 (Diophantine properties and the shell counts for the resonant strips), printed pp. 24-31 and 32-36.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-truncated-homological-equation-with-conservative-loss",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The linear homological equation $\\nu\\cdot\\partial_\\vartheta u=v$ on a Diophantine label set, with uniform parameter bounds and conservative loss",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 5,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "def-directional-and-partial-derivatives",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "cor-locally-uniformly-convergent-holomorphic-series"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "cor-locally-uniformly-convergent-holomorphic-series": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, $\\tau>n-1$, $\\alpha>0$, let $\\Omega\\subseteq\\mathbb R^n$ carry its\n$(\\alpha,\\tau)$-label set $\\Omega_{\\alpha,\\tau}$\n([[def-holomorphic-kam-domain-and-diophantine-labels]]), and let $r>0$, $s>0$,\n$K\\ge0$ and $h\\ge0$. Suppose one of the following two hypotheses holds, always with $2\\pi$-periodicity in the angular variables and zero angular mean:\n\n- **(G) general case:** $h=0$. For each fixed real $\\nu\\in\\Omega_{\\alpha,\\tau}$, the function $v(\\cdot,\\cdot,\\nu)$ is holomorphic on $B_r\\times S_s$, with a finite uniform bound $N:=\\sup_{\\nu,I,\\vartheta}|v(I,\\vartheta,\\nu)|$. This is a parameter-free convention local to this item: the phase domain is $B_r\\times S_s$ at that fixed real label, and no holomorphy in a nonopen real parameter set is asserted.\n- **(T) truncated case:** $v$ is jointly holomorphic on $D_{r,s,h}(\\Omega_{\\alpha,\\tau})$ with finite norm $N:=|v|_{r,s,h}$, and $v_k=0$ for $|k|_1>K$. For $K>0$, assume $h\\le\\alpha/(2K^{\\tau+1})$. If $K=0$, the zero-mean datum is identically zero and no divisor restriction on $h$ is needed.\n\nThen there is a constant $\\alpha_0\\ge\\alpha/2$ (namely $\\alpha_0=\\alpha$ in case\n(G) and $\\alpha_0=\\alpha/2$ in case (T)) such that\n$|k\\cdot\\nu|\\ge\\alpha_0|k|_1^{-\\tau}$ for every parameter in the specified case (real $\\nu\\in\\Omega_{\\alpha,\\tau}$ in (G), complex $\\nu\\in O_h(\\Omega_{\\alpha,\\tau})$ in (T)) and every $k$ in the Fourier support of $v$, and:\n\n1. **Existence, uniqueness and the equation.** For nonzero $k$, define $a_k:=v_k/(ik\\cdot\\nu)$ in (G), and for $0<|k|_1\\le K$ in (T); set $a_k:=0$ for $|k|_1>K$ in (T). Thus discarded divisors are never used. The series\n$$u(I,\\vartheta,\\nu):=\\sum_{k\\in\\mathbb Z^n,\\,k\\ne0}a_k(I,\\nu)e^{ik\\cdot\\vartheta}$$\n   converges absolutely and uniformly on $B_r\\times S_{s-2\\sigma}$ for every fixed real case-(G) label, and on $D_{r,s-2\\sigma,h}(\\Omega_{\\alpha,\\tau})$ in (T), whenever $0<\\sigma\\le1$ and $2\\sigma<s$. Its sum is phase-holomorphic in (G), jointly holomorphic in (T), periodic and zero-mean, and satisfies $\\nu\\cdot\\partial_\\vartheta u=v$. Any two periodic holomorphic zero-mean solutions on a common such case domain agree there.\n2. **Bounds.** For every $0<\\sigma\\le1$ with $4\\sigma<s$, every $i,j\\in\\{1,\\ldots,n\\}$ and every $0<\\delta<r$:\n$$|u|_{r,s-2\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0}\\sigma^{-(\\tau+n)}N,\\qquad |\\partial_{\\vartheta_j}u|_{r,s-3\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0}\\sigma^{-(\\tau+n+1)}N,$$\n$$|\\partial_{I_j}u|_{r-\\delta,s-2\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0\\,\\delta}\\sigma^{-(\\tau+n)}N,\\qquad |\\partial_{\\vartheta_i}\\partial_{\\vartheta_j}u|_{r,s-4\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0}\\sigma^{-(\\tau+n+2)}N,$$\n$$|\\partial_{\\vartheta_i}\\partial_{I_j}u|_{r-\\delta,s-3\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0\\,\\delta}\\sigma^{-(\\tau+n+1)}N,\\qquad |\\partial_{I_i}\\partial_{I_j}u|_{r-\\delta,s-2\\sigma,h}\\le\\frac{C_{n,\\tau}}{\\alpha_0\\,\\delta^2}\\sigma^{-(\\tau+n)}N .$$\n3. **Truncation.** In case (T), the solution $u$ has $u_k=0$ for $|k|_1>K$;\n   in particular $u$ and its derivatives displayed in clause 2 have the same\n   Fourier support as $v$.",
+        "strategy": "direct; estimate the small divisors on the complex parameter neighbourhood, sum the absolutely convergent Fourier series and differentiate it termwise.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §2-§3 (solution of $\\langle\\omega,\\partial_\\vartheta u\\rangle=v$ by Fourier series, with the uniform small-divisor bound on $O_h$ for $h\\le\\alpha K^{-\\tau-1}/2$), PDF pp. 8-19.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.4 (estimates for the linearized (cohomological) equation $\\omega\\cdot\\partial_\\theta h=g$), printed pp. 36-40.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-affine-taylor-fourier-truncation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Affine Taylor splitting in the actions and conservative Fourier truncation of a small perturbation",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 5,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "def-directional-and-partial-derivatives",
+          "def-interval",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, $r>0$, $s>0$, $h>0$, let $\\Omega\\subseteq\\mathbb R^n$, let\n$K\\ge0$, $0<\\eta\\le1/4$, $0<\\sigma\\le\\min(1,s/4)$, and let $P$ be holomorphic\non $D_{r,s,h}(\\Omega)$ with $|P|_{r,s,h}\\le\\varepsilon$\n([[def-holomorphic-kam-domain-and-diophantine-labels]]). Define the **affine\naction-Taylor polynomial**\n\n$$Q(I,\\vartheta,\\nu):=P(0,\\vartheta,\\nu)+\\sum_{j=1}^n \\partial_{I_j}P(0,\\vartheta,\\nu)\\,I_j ,$$\n\nand the **truncated perturbation** $R:=T_KQ$ (Fourier cutoff in $\\vartheta$).\nThen:\n\n1. **Taylor remainder.** $|P-Q|_{2\\eta r,s,h}\\le C\\eta^2\\varepsilon$ with a\n   constant $C=C(n)$.\n2. **Affine structure.** $Q$ and $R$ are holomorphic on $D_{r,s,h}(\\Omega)$ and\n   affine in $I$: $R(I,\\vartheta,\\nu)=R_0(\\vartheta,\\nu)+\\sum_{j=1}^nR_j(\\vartheta,\\nu)I_j$\n   with $R_0,R_j$ trigonometric polynomials in $\\vartheta$ of degree at most\n   $K$; $[R]=[Q]$ is affine in $I$, and $R-[R]$ is zero-mean.\n3. **Size bounds.** $|Q|_{r,s,h}\\le(n+1)\\varepsilon$ and\n$$|R|_{r,s-2\\sigma,h}\\le C_n\\sigma^{-n}\\varepsilon,\\qquad \\max_j|R_j|_{r,s-2\\sigma,h}\\le C_n\\sigma^{-n}\\varepsilon/r,\\qquad |\\partial_{\\vartheta_i}R|_{r,s-2\\sigma,h}\\le C_n\\sigma^{-n-1}\\varepsilon .$$\n4. **Truncation error.** $|Q-R|_{r,s-2\\sigma,h}\\le C_n\\sigma^{-n}e^{-\\sigma K/2}\\varepsilon$.",
+        "strategy": "direct; expand $P$ in the action variable along the segment $tI$, bound the quadratic remainder by Cauchy estimates, and truncate the Fourier series of $Q$ with the exponential tail bound.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §3-§4 (the affine splitting $Q=P(0,\\vartheta)+P_I(0,\\vartheta)I$, the Taylor estimate $|P-Q|\\le C\\eta^2\\varepsilon$ and the truncation $R=T_KQ$), PDF pp. 14-22.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.1 (analytic estimates in the strip norm) and §3.6 (canonical perturbation theory: Taylor expansion in the actions and truncation), printed pp. 24-31 and 49-58.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-generator-flow-and-remainder-bound",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "One KAM step: the affine generator, its canonical time-one flow, and the quadratic remainder bound",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 6,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "lem-truncated-homological-equation-with-conservative-loss",
+          "lem-kam-affine-taylor-fourier-truncation",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-cm-smooth-dependence-and-the-variational-equation",
+          "lem-cm-continuous-dependence-on-initial-data",
+          "def-variational-equation-along-an-ode-solution",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-hamiltonian-flows-preserve-the-symplectic-form",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "rem-complex-euclidean-space-dictionary",
+          "thm-gronwall-integral-inequality",
+          "def-operator-norm",
+          "def-metric-ball",
+          "def-interval",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "lem-truncated-homological-equation-with-conservative-loss": "mathematical-premise",
+          "lem-kam-affine-taylor-fourier-truncation": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-cm-smooth-dependence-and-the-variational-equation": "mathematical-premise",
+          "lem-cm-continuous-dependence-on-initial-data": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-hamiltonian-flows-preserve-the-symplectic-form": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "rem-complex-euclidean-space-dictionary": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, $\\tau>n-1$, $\\alpha>0$, and let $\\Omega_{\\alpha,\\tau}$ be the label set of [[def-holomorphic-kam-domain-and-diophantine-labels]]. Put $\\mu:=\\tau+3n+2$. Suppose $0<r\\le1$, $s,h>0$, $K\\ge1$, $0<\\sigma\\le1$, $8\\sigma<s$, $0<\\eta\\le1/8$, and\n\n$$h\\le\\frac{\\alpha}{2K^{\\tau+1}},\\qquad K\\sigma\\ge1,\\qquad \\eta\\le\\sigma .$$\n\nLet $P$ be holomorphic and $2\\pi$-periodic in the angles on $D_{r,s,h}(\\Omega_{\\alpha,\\tau})$, real-valued on real points, with $|P|_{r,s,h}\\le\\varepsilon$. Set\n\n$$E:=\\frac{\\varepsilon}{\\alpha r\\sigma^\\mu},\\qquad E\\le c\\eta,$$\n\nwhere $c=c(n,\\tau)>0$ is sufficiently small. All constants $C$ below depend only on $n,\\tau$. Define the affine Taylor polynomial $Q$ and $R=T_KQ$ by [[lem-kam-affine-taylor-fourier-truncation]], and put $\\widehat R=[R]$, $N=\\nu\\cdot I$. Let $F$ be the zero-mean solution, with Fourier support $|k|_1\\le K$, of\n\n$$\\nu\\cdot\\partial_\\vartheta F=R-\\widehat R$$\n\nfrom [[lem-truncated-homological-equation-with-conservative-loss]]. Order phase coordinates as $(I,\\vartheta)$, so $X_F=(-F_\\vartheta,F_I)$, $\\omega=\\sum_i d\\vartheta_i\\wedge dI_i$, and $\\{f,g\\}=f_\\vartheta\\cdot g_I-f_I\\cdot g_\\vartheta$. Put $W=\\operatorname{diag}(r^{-1}I_n,\\sigma^{-1}I_n)$. Then:\n\n1. **Generator.** $F$ is holomorphic on $D_{r,s-2\\sigma,h}$, affine in $I$, and $F_I$ is independent of $I$. It satisfies $\\{F,N\\}+\\widehat R=R$ and\n$$r^{-1}|F_\\vartheta|_{3r/4,s-6\\sigma,h}+\\sigma^{-1}|F_I|_{3r/4,s-6\\sigma,h}\\le CE\\sigma^{n+1},\\qquad |W(DX_F)W^{-1}|_{3r/4,s-6\\sigma,h}\\le CE\\sigma^{n+1}.$$\n2. **Flow.** For $0\\le t\\le1$, the flow $\\Phi_t$ is defined and holomorphic on $D_{r/2,s-8\\sigma,h}$, with\n$$\\Phi_t:D_{r/2,s-8\\sigma,h}\\longrightarrow D_{3r/4,s-7\\sigma,h}.$$\nHere parameters are held fixed; $D\\Phi_t$ denotes the derivative in $(I,\\vartheta)$. The map is affine in $I$, its angle component is independent of $I$, and it obeys $\\Phi_t(I,\\vartheta+2\\pi k,\\nu)=\\Phi_t(I,\\vartheta,\\nu)+(0,2\\pi k)$. It is canonical, and real on real points. Uniformly in $t$,\n$$|W(\\Phi_t-\\mathrm{id})|_{r/2,s-8\\sigma,h}\\le CE,\\qquad |W(D\\Phi_t-\\mathrm{id})W^{-1}|_{r/2,s-8\\sigma,h}\\le CE,$$\n$$h|W\\partial_{\\nu_j}\\Phi_t|_{r/2,s-8\\sigma,h/2}\\le CE\\qquad(1\\le j\\le n).$$\nIn addition, the small action domain has the inclusion\n$$\\Phi_t(D_{\\eta r,s-8\\sigma,h})\\subseteq D_{2\\eta r,s-7\\sigma,h}.$$\n3. **Remainder.** For $\\Phi=\\Phi_1$ and $\\chi_t=(1-t)\\widehat R+tR$, the identity\n$$(N+P)\\circ\\Phi=N+\\widehat R+P_+,\\qquad P_+=(P-R)\\circ\\Phi+\\int_0^1\\{\\chi_t,F\\}\\circ\\Phi_t\\,dt$$\nholds on $D_{r/2,s-8\\sigma,h}$, and on the smaller action domain\n$$|P_+|_{\\eta r,s-8\\sigma,h}\\le C\\bigl[E+\\eta^2+\\sigma^{-n}e^{-\\sigma K/2}\\bigr]\\varepsilon .$$\n4. **Frequency shift.** Write $\\widehat R(I,\\nu)=a(\\nu)+v(\\nu)\\cdot I$. Then $v$ is holomorphic on $O_h(\\Omega_{\\alpha,\\tau})$, real on real points, and\n$$|v|_{O_h}\\le B:=C\\frac{\\varepsilon}{r}=C\\alpha E\\sigma^\\mu,\\qquad |Dv|_{O_{h/2}}\\le\\frac{2nB}{h}.$$",
+        "strategy": "direct; build the generator from the homological equation, construct its flow first on the real points and then extend holomorphically, and differentiate the identity $(N+P)\\circ\\Phi_t$ along that flow to obtain the new perturbation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §3-§4 (the generator $F$ with $\\{F,N\\}+\\hat R=R$, the estimates $r^{-1}|F_\\vartheta|+\\sigma^{-1}|F_I|\\le C\\varepsilon/(\\alpha r\\sigma^{\\mu})$, the time-one flow of $X_F$ and the transformed perturbation $\\varepsilon_+\\le C[\\varepsilon/(\\alpha r\\sigma^{\\mu})+\\eta^2+K^ne^{-K\\sigma}]\\varepsilon$), PDF pp. 14-22.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.6 (construction of the correcting canonical transformation, linear in the actions) and §6.1-§6.2 (the quadratic remainder of the Newton step), printed pp. 49-58 and 92-106.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-frequency-reparametrization-by-contraction",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Elimination of the frequency shift by a holomorphic contraction retraction",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 5,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "thm-banach-fixed-point",
+          "thm-complete-subspace-iff-closed",
+          "thm-euclidean-space-complete",
+          "cor-euclidean-closed-balls-and-spheres-are-compact",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "def-lipschitz-holder-contraction",
+          "def-complete-metric-space",
+          "def-operator-norm",
+          "def-metric-ball",
+          "def-metric-topology"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "thm-banach-fixed-point": "mathematical-premise",
+          "thm-complete-subspace-iff-closed": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "cor-euclidean-closed-balls-and-spheres-are-compact": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "def-lipschitz-holder-contraction": "mathematical-premise",
+          "def-complete-metric-space": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, $h>0$, let $\\Omega\\subseteq\\mathbb R^n$, and let $v:O_h(\\Omega)\\to\\mathbb C^n$ be holomorphic with $|v|_{O_h(\\Omega)}\\le B$ where\n$$B\\le\\frac{h}{16n}.$$\nThen:\n\n1. **Existence and uniqueness.** For every $\\nu_+\\in O_{h/4}(\\Omega)$ there is exactly one $\\nu\\in O_{h/2}(\\Omega)$ with\n$$\\nu+v(\\nu)=\\nu_+.$$\n   The assignment $\\phi(\\nu_+):=\\nu$ defines a map $\\phi:O_{h/4}(\\Omega)\\to O_{h/2}(\\Omega)$ with $|\\phi(\\nu_+)-\\nu_+|_\\infty\\le B$ for every $\\nu_+$.\n2. **Holomorphy.** $\\phi$ is holomorphic on $O_{h/4}(\\Omega)$.\n3. **Derivative bounds.** With $D\\phi$ the complex Jacobian and the row-sum norm, for every $\\nu_+\\in O_{h/4}(\\Omega)$\n$$\\|D\\phi(\\nu_+)-I_n\\|\\le\\frac{16n}{7}\\,\\frac{B}{h},\\qquad\\text{equivalently}\\qquad h\\,\\|D\\phi(\\nu_+)-I_n\\|\\le\\frac{16n}{7}B.$$",
+        "strategy": "direct; solve the frequency equation by the contraction principle on a complex ball of radius $2B$, prove holomorphy from the uniformly convergent iteration, and differentiate the defining identity to bound the Jacobian.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §3 (the parameter retraction $\\nu=\\nu_++v(\\nu)$ solved by a contraction with $|Dv|\\le2nB/h\\le1/8$, giving $|\\phi-\\mathrm{id}|\\le B$ and $h|D\\phi-\\mathrm{id}|\\le(16n/7)B$), PDF pp. 16-19.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.4 (estimates for the linearized equation) and §6.1-§6.2 (solution of the frequency-shift equation by the contraction principle on a complex parameter ball), printed pp. 36-40 and 92-106.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-parameter-sequences-satisfy-all-step-hypotheses",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The KAM parameter sequence: every step satisfies the smallness, truncation, parameter and contraction hypotheses",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 7,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "lem-frequency-reparametrization-by-contraction",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "thm-geometric-series",
+          "def-interval",
+          "thm-exponential-beats-every-polynomial"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "lem-frequency-reparametrization-by-contraction": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-exponential-beats-every-polynomial": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge2$, $\\tau>n-1$, $\\mu:=\\tau+3n+2$, $\\alpha>0$, $s_0>0$, and let $C\\ge1$ bound the constants in [[lem-kam-generator-flow-and-remainder-bound]] and [[lem-frequency-reparametrization-by-contraction]]. Let $c=c(n,\\tau)\\in(0,1]$ be the one-step smallness constant, and fix $C_*\\ge3C2^\\mu$. Put\n$$q:=4^{-(\\mu+1)},\\qquad D:=\\max(16nC4^\\mu,1/c).$$\nFix $0<\\sigma_0\\le\\min(1,s_0/32)$, $0<r_0\\le1$, $K_0\\ge1$, and $h_0,E_0>0$ satisfying:\n\n1. $E_0\\le\\min(c^2,c,\\sigma_0^2,1/64,q^2/C_*^2)$;\n2. with $A:=C_*^2E_0$ and $L:=|\\log A|+n\\log(1/\\sigma_0)+2\\log C_*+n\\log2+1$, one has $K_0\\sigma_0\\ge\\max(1,2L)$;\n3. $D\\alpha E_0\\sigma_0^\\mu\\le h_0\\le\\min(1,\\alpha/(2K_0^{\\tau+1}))$.\n\nDefine for all integers $j\\ge0$\n$$\\sigma_j:=\\sigma_02^{-j},\\qquad K_j:=K_04^j,\\qquad h_j:=h_04^{-\\mu j},\\qquad s_j:=s_0-8\\sum_{i<j}\\sigma_i,$$\n$$E_{j+1}:=C_*E_j^{3/2},\\qquad\\eta_j:=\\sqrt{E_j},\\qquad r_{j+1}:=\\eta_jr_j,\\qquad\\varepsilon_j:=\\alpha E_jr_j\\sigma_j^\\mu,\\qquad B_j:=C\\varepsilon_j/r_j.$$\nThen every $j\\ge0$ satisfies:\n\n(a) $0<r_j\\le1$, $0<\\sigma_j\\le\\min(1,s_j/8)$, $K_j\\sigma_j\\ge1$, $0<h_j\\le1$, $s_j\\ge s_0/2$, $s_j-8\\sigma_j\\ge s_0/2$, and $0<\\eta_j\\le\\min(1/8,\\sigma_j)$;\n(b) $E_j\\le c\\eta_j$, $E_{j+1}\\le qE_j$, and $E_j\\le q^jE_0\\le4^{-j}E_0$;\n(c) $\\varepsilon_j\\le c\\alpha\\eta_jr_j\\sigma_j^\\mu$ and $\\varepsilon_j\\le ch_jr_j$;\n(d) $h_j\\le\\alpha/(2K_j^{\\tau+1})$ and $h_{j+1}\\le h_j/4$;\n(e) $\\sigma_j^{-n}e^{-K_j\\sigma_j/2}\\le E_j$;\n(f) $B_j=C\\alpha E_j\\sigma_j^\\mu\\le h_{j+1}/(16n)$, so the frequency contraction applies with $B=B_j$; moreover\n$$\\frac{E_j}{h_{j+1}}\\le\\frac{4^\\mu E_0}{h_0}4^{-j},\\qquad \\frac{B_j}{h_{j+1}}\\le\\frac{C4^\\mu\\alpha E_0\\sigma_0^\\mu}{h_0}2^{-(\\mu+2)j};$$\n(g) all the following sums converge:\n$$\\sum_{j\\ge0}(r_j+\\sigma_j)E_j\\le4(r_0+\\sigma_0)E_0,\\qquad \\sum_{j\\ge0}E_j\\le2E_0,\\qquad \\sum_{j\\ge0}2^jE_j\\le2E_0,\\qquad \\sum_{j\\ge0}\\frac{\\varepsilon_j}{r_jh_j}\\le\\frac43\\frac{\\alpha E_0\\sigma_0^\\mu}{h_0}.$$\nThe recurrence has precisely the perturbation budget\n$$\\varepsilon_{j+1}=C_*2^{-\\mu}E_j\\varepsilon_j\\ge3CE_j\\varepsilon_j.$$\nConsequently the one-step remainder estimate $|P_j^+|\\le C[E_j+\\eta_j^2+\\sigma_j^{-n}e^{-K_j\\sigma_j/2}]\\varepsilon_j$ on the retained action and angle domain closes with $|P_{j+1}|\\le\\varepsilon_{j+1}$ after frequency retraction. For fixed $n,\\tau,c,C,C_*,\\sigma_0$ the initial conditions are simultaneously satisfiable for all sufficiently small $E_0$ and every fixed $\\alpha>0$; for $0<\\alpha\\le1$ the allowed threshold for $E_0$ can be chosen independently of $\\alpha$.",
+        "strategy": "direct; verify each displayed hypothesis of the one-step and contraction lemmas by induction and elementary estimates.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §4-§5 (the sequences $r_j=2^{-j}r$, $s_{j+1}=s_j-5\\sigma_j$, $K_j=4^jK$, $h_j=4^{-j}h$, $E_{j+1}=CE_j^{3/2}$, and the verification $K_j\\sigma_j\\ge1$, $h_j\\le\\alpha/(2K_j^{\\tau+1})$, $\\sigma_j^{-n}e^{-K_j\\sigma_j}\\le E_j$; existence of the simultaneous choices of $K_0,E_0$), PDF pp. 20-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §6.1-§6.2 (choice of the geometric sequences of strips and truncations, and the quadratic-convergence bookkeeping), printed pp. 92-106.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-composed-map-and-derivative-convergence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Convergence of the composed KAM transformations, with derivative and frequency-Lipschitz bounds",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 8,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "lem-frequency-reparametrization-by-contraction",
+          "lem-kam-affine-taylor-fourier-truncation",
+          "lem-truncated-homological-equation-with-conservative-loss",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "thm-geometric-series",
+          "def-operator-norm",
+          "def-interval",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "lem-frequency-reparametrization-by-contraction": "mathematical-premise",
+          "lem-kam-affine-taylor-fourier-truncation": "mathematical-premise",
+          "lem-truncated-homological-equation-with-conservative-loss": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the sequences and hypotheses of [[lem-kam-parameter-sequences-satisfy-all-step-hypotheses]], with $n\\ge2$, $\\mu=\\tau+3n+2$, $\\sigma_0\\le s_0/32$, $h_j=h_04^{-\\mu j}$ and $E_j\\le E_04^{-(\\mu+1)j}$. The step constants may be enlarged and their smallness constant decreased, depending only on $n,\\tau$. Put $\\Lambda:=\\Omega_{\\alpha,\\tau}$ and $W_j:=\\operatorname{diag}(r_j^{-1}I_n,\\sigma_j^{-1}I_n)$.\n\nLet $H_0(z,\\nu)=e_0(\\nu)+\\nu\\cdot I+P_0(z,\\nu)$ be holomorphic and real on real points on $D_{r_0,s_0,h_0}(\\Lambda)$, with $|P_0|\\le\\varepsilon_0$. Suppose at every stage the cited one-step suppliers produce the following data:\n\n1. A canonical, $2\\pi$-equivariant holomorphic phase map $\\widetilde\\Phi_j$ on $D_{r_j/2,s_j-8\\sigma_j,h_j}(\\Lambda)$ with the weighted estimates of [[lem-kam-generator-flow-and-remainder-bound]], affine in $I$ and with angle component independent of $I$.\n2. A frequency shift $v_j$ with $|v_j|\\le B_j:=C\\varepsilon_j/r_j=C\\alpha E_j\\sigma_j^\\mu$, and its inverse $\\phi_j$ supplied by [[lem-frequency-reparametrization-by-contraction]] on $O_{h_j/4}(\\Lambda)$, satisfying $\\phi_j+v_j\\circ\\phi_j=\\mathrm{id}$, $|\\phi_j-\\mathrm{id}|\\le B_j$ and $\\|D\\phi_j-I_n\\|\\le(16n/7)B_j/h_j$.\n3. The exact transformed identity\n$$H_j(\\widetilde\\Phi_j(z,\\phi_j(\\nu)),\\phi_j(\\nu))=e_{j+1}(\\nu)+\\nu\\cdot I+P_{j+1}(z,\\nu)=:H_{j+1}(z,\\nu),$$\nwhere $|P_{j+1}|\\le\\varepsilon_{j+1}$ on $D_{r_{j+1},s_{j+1},h_{j+1}}(\\Lambda)$.\n\nDefine the **extended** step and composition by\n$$T_j(z,\\nu):=(\\widetilde\\Phi_j(z,\\phi_j(\\nu)),\\phi_j(\\nu)),\\qquad T_0\\circ\\cdots\\circ T_{j-1}(z,\\nu)=(\\Psi_j(z,\\nu),\\chi_j(\\nu)),$$\nwith $(\\Psi_0,\\chi_0)=(\\mathrm{id},\\mathrm{id})$. Thus parameter changes in every earlier factor are included. Set\n$$D_j:=B_{r_j/2}\\times S_{s_j-8\\sigma_j}\\times O_{h_{j+1}}(\\Lambda),\\qquad \\mathcal L:=\\{0\\}\\times S_{s_0/4}\\times\\Lambda.$$\nThere are constants $A,C_L$ depending only on $n,\\tau$ such that:\n\n1. $T_j(D_{j+1})\\subseteq D_j$; all extended compositions are holomorphic on $D_j$, take values in $D_0$, and are equivariant in the angles. They are canonical in the phase variables for each real parameter. Every $D_j$ contains $\\mathcal L$.\n2. On $\\mathcal L$, $\\Psi_j$ converges uniformly, together with every angular derivative, to $\\Psi_\\infty$, holomorphic in the angles for each label. Writing $\\Delta_j\\Psi:=\\Psi_{j+1}-\\Psi_j$, one has\n$$|W_0\\Delta_j\\Psi|\\le A E_j2^{-j},\\qquad |W_0\\partial_{\\vartheta_i}\\Delta_j\\Psi|\\le A E_j2^{-j}/\\sigma_0.$$\n3. For every pair $\\nu,\\nu'\\in\\Lambda$,\n$$\\sup_{\\vartheta\\in S_{s_0/4}}|W_0(\\Delta_j\\Psi(0,\\vartheta,\\nu)-\\Delta_j\\Psi(0,\\vartheta,\\nu'))|\\le C_L(E_0/h_0)2^{-j}|\\nu-\\nu'|.$$\nConsequently the phase limit has weighted frequency-Lipschitz constant $2C_LE_0/h_0$. In the unweighted norm the corresponding bound is $2C_L(r_0+\\sigma_0)E_0/h_0$.\n4. Writing $\\Psi_\\infty(0,\\vartheta,\\nu)=(b(\\vartheta,\\nu),\\vartheta+w(\\vartheta,\\nu))$, the bounds are\n$$|b|\\le Ar_0E_0,\\qquad |w|\\le A\\sigma_0E_0,\\qquad |\\partial_{\\vartheta_i}b|\\le Ar_0E_0/\\sigma_0,\\qquad |\\partial_{\\vartheta_i}w|\\le AE_0.$$\nOne may impose $nAE_0\\le1/2$ by decreasing the initial smallness constant.\n5. The parameter maps converge uniformly on $\\Lambda$ to $\\chi_\\infty$, with $|\\chi_\\infty-\\mathrm{id}|\\le AB_0$ and $\\operatorname{Lip}(\\chi_\\infty-\\mathrm{id})\\le C_LB_0/h_0$. The exact finite-stage normal form is\n$$H_0(\\Psi_j(z,\\nu),\\chi_j(\\nu))=e_j(\\nu)+\\nu\\cdot I+P_j(z,\\nu),\\qquad |P_j|\\le\\varepsilon_j\\quad\\text{on }D_j.$$",
+        "strategy": "direct; bound the one-step increments and their derivatives, telescope the composition, and pass to the uniform limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §4-§5 (weighted composed Jacobians, uniform convergence of the corrections on $I=0$, Lipschitz dependence on the parameter, and $C^1_{\\vartheta}$ convergence), PDF pp. 20-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §6.1-§6.2 (limits of the composed Newton transformations and uniformity of the estimates in the parameter), printed pp. 92-106.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parameter-kam-torus-invariance-and-lagrangianity",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The parameter KAM limit: invariant quasi-periodic motion with frequency $\\nu$ and Lagrangian images",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 9,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses",
+          "lem-kam-composed-map-and-derivative-convergence",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-identity-theorem-in-several-complex-variables",
+          "ex-convex-subsets-of-rn-are-path-connected",
+          "thm-path-connected-implies-connected",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-power-series-expansion-in-several-complex-variables",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "rem-complex-euclidean-space-dictionary",
+          "def-operator-norm",
+          "def-metric-ball",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses": "mathematical-premise",
+          "lem-kam-composed-map-and-derivative-convergence": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport": "mathematical-premise",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-identity-theorem-in-several-complex-variables": "mathematical-premise",
+          "ex-convex-subsets-of-rn-are-path-connected": "mathematical-premise",
+          "thm-path-connected-implies-connected": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-power-series-expansion-in-several-complex-variables": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "rem-complex-euclidean-space-dictionary": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume all the data, constants and hypotheses of\n[[lem-kam-composed-map-and-derivative-convergence]] (in particular the sequences\nof [[lem-kam-parameter-sequences-satisfy-all-step-hypotheses]], the initial\nperturbation $P_0$ with $|P_0|\\le\\varepsilon_0$ and the one-step construction at\nevery stage), and assume in addition that the fixed data satisfy\n$CE_0\\le1/16$, where $C$ bounds both the composition constant $A$ and the one-step constant of\n[[lem-kam-generator-flow-and-remainder-bound]] (a smallness condition on the\nconstants, available in the applications by shrinking the step constant). Let\n$\\Psi_\\infty$ be the limiting family of\n[[lem-kam-composed-map-and-derivative-convergence]], let\n$$H(I,\\vartheta,\\nu):=e(\\nu)+\\nu\\cdot I+P_0(I,\\vartheta,\\nu)$$\nbe the parameter Hamiltonian whose perturbing term is $P_0$, and let\n$\\omega=\\sum_{i=1}^nd\\vartheta_i\\wedge dI_i$. Then for every\n$\\nu\\in\\Omega_{\\alpha,\\tau}$:\n\n1. **Invariance.** For every real $\\vartheta$ in the strip,\n$$X_H\\bigl(\\Psi_\\infty(0,\\vartheta,\\nu);\\chi_\\infty(\\nu)\\bigr) =\\sum_{j=1}^n\\nu_j\\,\\partial_{\\vartheta_j}\\Psi_\\infty(0,\\vartheta,\\nu),$$\n   and the identity extends to the complex strip\n   $|\\mathrm{Im}\\,\\vartheta|_\\infty<s_0/4$ by holomorphy of both sides.\n   Here the second argument of $X_H$ records the original family parameter after all frequency retractions; the desired rotation frequency remains the target label $\\nu$.\n2. **Quasi-periodic motion.** For every $\\vartheta_0\\in\\mathbb R^n$ the curve\n   $s\\mapsto\\Psi_\\infty(0,\\vartheta_0+s\\nu,\\nu)$ is an integral curve of the\n   autonomous vector field $X_H(\\,\\cdot\\,;\\chi_\\infty(\\nu))$ wherever it is defined; that is,\n$$\\frac{d}{ds}\\Psi_\\infty(0,\\vartheta_0+s\\nu,\\nu) =X_H\\bigl(\\Psi_\\infty(0,\\vartheta_0+s\\nu,\\nu);\\chi_\\infty(\\nu)\\bigr).$$\n3. **Lagrangian images.** For every $\\nu$ the pullback of $\\omega$ along the\n   real slice of $\\vartheta\\mapsto\\Psi_\\infty(0,\\vartheta,\\nu)$ vanishes:\n$$\\Psi_\\infty(\\,\\cdot\\,,\\nu)^*\\omega=0\\qquad\\text{on the real slice, i.e.}\\qquad \\sum_{i=1}^nd(\\Psi_\\infty)_i^\\vartheta\\wedge d(\\Psi_\\infty)_i^I=0 .$$",
+        "strategy": "direct; transport the finite-step normal forms through the limit using the vanishing weighted Cauchy residuals and the convergence of the composed maps.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §4-§5 (the limit satisfies $X_H\\circ\\Phi=D\\Phi\\cdot X_N$, i.e. invariance with frequency $\\omega$ and Lagrangian images), PDF pp. 20-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §6.1-§6.3 (the limiting torus is invariant and carries linear motion; comparison criteria for the Lagrangian character), printed pp. 92-110.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-limit-is-an-embedding",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The KAM limit parametrisation is an embedding of the torus: injectivity modulo $2\\pi$, rank-$n$ differential and Lipschitz inverse",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 10,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses",
+          "lem-kam-composed-map-and-derivative-convergence",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity",
+          "lem-kam-conjugation-symmetry-of-the-construction",
+          "thm-mean-value-inequality",
+          "def-quotient-topology",
+          "def-product-topology",
+          "def-continuous-map-top",
+          "def-metric-ball",
+          "def-cm-phase-domain-and-standard-symplectic-two-form"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses": "mathematical-premise",
+          "lem-kam-composed-map-and-derivative-convergence": "mathematical-premise",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity": "mathematical-premise",
+          "lem-kam-conjugation-symmetry-of-the-construction": "mathematical-premise",
+          "thm-mean-value-inequality": "mathematical-premise",
+          "def-quotient-topology": "mathematical-premise",
+          "def-product-topology": "mathematical-premise",
+          "def-continuous-map-top": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the data, constants, sequences, one-step construction and notation of\n[[lem-kam-composed-map-and-derivative-convergence]], the conjugacy symmetry of\n[[lem-kam-conjugation-symmetry-of-the-construction]] (so that the initial\nperturbation is conjugation-symmetric), and assume in addition that the fixed\ndata satisfy\n$$4nCE_0\\le1,$$\nwhere $C$ bounds both the one-step constant and the composition constant $A$; this is a smallness condition on the fixed\nconstants, available in the applications by shrinking the step constant. Let\n$\\Psi_\\infty(0,\\vartheta,\\nu)=(b(\\vartheta,\\nu),\\vartheta+w(\\vartheta,\\nu))$ be\nthe limiting family of [[lem-kam-composed-map-and-derivative-convergence]] and\n$\\Theta_\\nu(\\vartheta):=\\vartheta+w(\\vartheta,\\nu)$ its angle component. Then for\nevery $\\nu\\in\\Omega_{\\alpha,\\tau}$:\n\n1. **Contraction and injectivity.** For all real $\\vartheta,\\vartheta'$,\n$$|w(\\vartheta,\\nu)-w(\\vartheta',\\nu)|_1\\le\\tfrac12|\\vartheta-\\vartheta'|_1,\\qquad |\\Theta_\\nu(\\vartheta)-\\Theta_\\nu(\\vartheta')|_1\\ge\\tfrac12|\\vartheta-\\vartheta'|_1;$$\n   in particular $\\Theta_\\nu$ is injective on $\\mathbb R^n$ and\n   $\\Psi_\\infty(0,\\vartheta,\\nu)=\\Psi_\\infty(0,\\vartheta',\\nu)$ with real\n   $\\vartheta,\\vartheta'$ forces $\\vartheta=\\vartheta'$.\n2. **Descent to the torus.** $\\Psi_\\infty(0,\\vartheta+2\\pi k,\\nu)=\\Psi_\\infty(0,\\vartheta,\\nu)+(0,2\\pi k)$ for every $k\\in\\mathbb Z^n$; consequently the parametrisation induces a well-defined continuous injective map\n$$\\widehat\\Psi_\\nu:\\mathbb T^n\\longrightarrow\\mathbb R^n\\times\\mathbb T^n,\\qquad \\widehat\\Psi_\\nu\\circ\\pi=\\Pi\\circ\\Psi_\\infty(0,\\,\\cdot\\,,\\nu),$$\n   where $\\pi:\\mathbb R^n\\to\\mathbb T^n$ is the quotient map and $\\Pi$ reads the angle coordinates modulo $2\\pi$.\n3. **Immersion.** At every real $\\vartheta$ the differential $D_\\vartheta\\Psi_\\infty(0,\\vartheta,\\nu)$ has rank $n$; equivalently $I_n+\\partial_\\vartheta w(\\vartheta,\\nu)$ is invertible.\n4. **Embedding with Lipschitz inverse.** With $d_{\\mathbb T^n}$ the quotient distance $d_{\\mathbb T^n}(\\pi\\vartheta,\\pi\\vartheta'):=\\min_{k\\in\\mathbb Z^n}|\\vartheta-\\vartheta'-2\\pi k|_\\infty$ and the supremum distance on $\\mathbb R^n\\times\\mathbb T^n$, the inverse of $\\widehat\\Psi_\\nu$ on its image is Lipschitz with constant $2n$, and $\\widehat\\Psi_\\nu$ is a homeomorphism of $\\mathbb T^n$ onto its image; in particular the image is an embedded $n$-dimensional torus in the phase space, and it is real (clause 3 of [[lem-kam-conjugation-symmetry-of-the-construction]]).\n5. **Dynamical reading.** The image of $\\widehat\\Psi_\\nu$ is invariant under $X_H(\\,\\cdot\\,;\\chi_\\infty(\\nu))$ with frequency $\\nu$ and Lagrangian, in the sense of clauses 1-3 of [[thm-parameter-kam-torus-invariance-and-lagrangianity]].",
+        "strategy": "direct; bound the angle error from the derivative bound, descend to the torus by equivariance, and control the inverse through the contraction estimate.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §4-§5 (the limiting embedding of the torus, its closeness to the identity and the parametrisation of the invariant tori), PDF pp. 20-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.1 (analytic preliminaries and the torus data) and §6.1-§6.3 (limiting parametrisations of the invariant tori), printed pp. 24-31 and 92-110.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nondegenerate-frequency-reduction-and-alpha-square-smallness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Nondegenerate frequency reduction: translating the action variable by the inverse frequency map and the $\\varepsilon\\le c\\alpha^2$ smallness",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 10,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "def-directional-and-partial-derivatives",
+          "def-metric-ball",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity": "mathematical-premise",
+          "prop-cm-canonical-map-tests-and-hamiltonian-transport": "mathematical-premise",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge2$, $\\tau>n-1$, $\\mu:=\\tau+3n+2$, $\\alpha>0$, $s_0>0$,\n$0<\\sigma_0\\le\\min(1,s_0/24)$, and let $c_1\\in(0,1]$ be the one-step smallness\nconstant (the constant $c$ of the estimates of\n[[lem-kam-generator-flow-and-remainder-bound]]). Let the following\ndata be given.\n\n1. An open set $U\\subseteq\\mathbb C^n$, a compact set $K\\subseteq U\\cap\\mathbb R^n$, a radius $0<r_0\\le1$ with $\\{J\\in\\mathbb C^n:\\operatorname{dist}_\\infty(J,K)<2r_0\\}\\subseteq U$, a nonempty set $\\Omega\\subseteq\\mathbb R^n$ and a conjugation-invariant open complex neighbourhood $\\Omega'\\subseteq\\mathbb C^n$ containing $\\Omega$; and a holomorphic map $b:\\Omega'\\to U$ with $Dh(b(\\nu))=\\nu$ for every $\\nu\\in\\Omega'$, where $h:U\\to\\mathbb C$ is holomorphic and $b(\\Omega)+(B_{r_0}\\cap\\mathbb R^n)\\subseteq K$. (In the applications $b=(Dh)^{-1}$ on a regular frequency patch, supplied by the real analytic inverse function theorem; here it is part of the data.)\n2. A constant $M_2\\ge1$ with $|I^{\\mathsf T}D^2h(J)\\,I|\\le M_2|I|_\\infty^2$ for all $I\\in\\mathbb C^n$ and all $J\\in\\{J':\\operatorname{dist}_\\infty(J',K)<2r_0\\}$.\n3. A holomorphic function $F$ on $\\{J:\\operatorname{dist}_\\infty(J,K)<2r_0\\}\\times S_{s_0}$, $2\\pi$-periodic in $\\vartheta$, with $|F|\\le\\varepsilon$.\n\nPut $r:=\\sqrt{\\varepsilon/M_2}$ and assume $0<r\\le r_0$. Then:\n\n1. **Taylor decomposition.** For every $\\nu\\in\\Omega$ and $|I|_\\infty\\le r$,\n$$h(b(\\nu)+I)=h(b(\\nu))+\\nu\\cdot I+P_h(I,\\nu),\\qquad |P_h(I,\\nu)|\\le M_2|I|_\\infty^2 .$$\n2. **Effective perturbation.** The function\n$$G(I,\\vartheta,\\nu):=h(b(\\nu)+I)-h(b(\\nu))-\\nu\\cdot I+F(b(\\nu)+I,\\vartheta)$$\nis holomorphic on $D_{r,s_0,h_0'}(\\Omega)$ whenever $O_{h_0'}(\\Omega)\\subseteq\\Omega'$ and $b(O_{h_0'}(\\Omega))+B_r\\subseteq\\{J:\\operatorname{dist}_\\infty(J,K)<2r_0\\}$, $2\\pi$-periodic in $\\vartheta$, and satisfies\n$$|G|\\le M_2r^2+\\varepsilon=2\\varepsilon .$$\n3. **$\\alpha^2$-smallness.** If\n$$\\varepsilon\\le\\frac{c_1^2}{4}\\cdot\\frac{\\alpha^2\\sigma_0^{2\\mu}}{M_2},$$\nthen $|G|\\le c_1\\alpha r\\sigma_0^{\\mu}$; equivalently the relative smallness $E:=|G|/(\\alpha r\\sigma_0^{\\mu})$ satisfies $E\\le c_1$.\n4. **Transfer to the physical Hamiltonian.** Let $H(p,\\vartheta):=h(p)+F(p,\\vartheta)$ and suppose that the parameter Hamiltonian\n$$H_{\\mathrm{par}}(I,\\vartheta,\\nu):=h(b(\\nu))+\\nu\\cdot I+G(I,\\vartheta,\\nu)$$\nsatisfies the hypotheses of [[thm-parameter-kam-torus-invariance-and-lagrangianity]] on $D_{r,s_0,h_0'}(\\Omega_{\\alpha,\\tau})$ (same sequences, same one-step construction, with $P_0:=G$), with limit phase family $\\Phi_\\infty=(\\Phi_I,\\Phi_\\vartheta)$ and limit original-parameter map $\\chi_\\infty$. Then for every $\\nu\\in\\Omega_{\\alpha,\\tau}$ the physical family\n$$\\Psi_\\nu(\\vartheta):=\\bigl(b(\\chi_\\infty(\\nu))+\\Phi_I(0,\\vartheta,\\nu),\\ \\Phi_\\vartheta(0,\\vartheta,\\nu)\\bigr)$$\nsatisfies\n$$X_H\\bigl(\\Psi_\\nu(\\vartheta)\\bigr)=\\sum_{j=1}^n\\nu_j\\,\\partial_{\\vartheta_j}\\Psi_\\nu(\\vartheta),\\qquad \\Psi_\\nu^*\\omega=0,$$\nwhere $\\omega=\\sum_jd\\vartheta_j\\wedge dI_j$ and $X_H=(-H_\\vartheta,H_I)$ is taken in the action-angle coordinates $(p,\\vartheta)$; that is, the image is an invariant Lagrangian torus of the physical Hamiltonian $H$ with frequency $\\nu$.",
+        "strategy": "direct; expand the integrable part to second order along the action segment, bound by the Hessian constant, choose $r$ to balance the two error terms, and translate the parameter family back to the physical variables.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1, §5 and Appendix A (nondegeneracy of the integrable part via the frequency map and the implicit function theorem; the reduction of the perturbation size to the form $\\varepsilon\\le c\\alpha^2$ on a fixed analytic domain), PDF pp. 5-6 and 23-30.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §6.1-§6.2 (elimination of the parameters by the frequency map and the resulting $\\alpha^2$-smallness of the mechanical perturbation), printed pp. 92-106.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-diophantine-resonance-slab-measure",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Small-divisor slabs and the positive measure of the Diophantine set: the resonance covering has measure $O(\\alpha)$",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 5,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-cauchy-fourier-and-lattice-shell-bounds",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-product-measure-on-sigma-finite-spaces",
+          "def-metric-ball",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-cauchy-fourier-and-lattice-shell-bounds": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, $\\tau>n-1$, $\\alpha>0$ and $R>0$, and write\n$\\ell(k):=|k|_1$ for $k\\in\\mathbb Z^n$ and $C_R:=(-R,R)^n$. For every nonzero\n$k$ put\n$$S_k:=\\{\\nu\\in C_R:|k\\cdot\\nu|<\\alpha\\,\\ell(k)^{-\\tau}\\},\\qquad \\mathcal R:=\\bigcup_{k\\in\\mathbb Z^n\\setminus\\{0\\}}S_k,$$\nand let $D:=C_R\\setminus\\mathcal R$. Then:\n\n1. **Slab bound.** For every $k\\ne0$,\n$$|S_k|\\le 2^{n}n^{n/2}R^{n-1}\\alpha\\,\\ell(k)^{-\\tau-1}.$$\n2. **Resonant set.** With $C_{n,\\tau}:=2^{n}n^{n/2}4^{n}\\sum_{m\\ge1}m^{\\,n-2-\\tau}$ (a finite constant, since $\\tau>n-1$),\n$$|\\mathcal R|\\le C_{n,\\tau}R^{n-1}\\alpha .$$\n3. **Diophantine set.** $D$ is measurable, is contained in the $(\\alpha,\\tau)$-Diophantine set\n   $\\{\\nu\\in C_R:|k\\cdot\\nu|\\ge\\alpha\\ell(k)^{-\\tau}\\ \\text{for all }k\\ne0\\}$, and\n$$|D|\\ge(2R)^n-C_{n,\\tau}R^{n-1}\\alpha ;$$\n   consequently, for every $0<\\alpha<\\alpha_0(R,n,\\tau):=(2R)^n/(C_{n,\\tau}R^{n-1})$ the Diophantine set inside $C_R$ has positive measure.\n4. **Boundary layer.** For every $0<\\rho<R$ the same bounds hold with $R$ replaced by $R-\\rho$, so the Diophantine set inside the closed cube $[-R+\\rho,R-\\rho]^n$ has measure at least $(2(R-\\rho))^n-C_{n,\\tau}(R-\\rho)^{n-1}\\alpha$; in particular frequencies at distance at least $\\rho$ from the boundary of $C_R$ form a positive-measure Diophantine set once $\\alpha$ is small enough.\n\nAll measures are $n$-dimensional Lebesgue measure\n([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]); the countable union\nand the re-summation over shells use the standard countable bookkeeping\nconvention of [[def-countable-choice]], which is the only choice principle\ninvolved.",
+        "strategy": "direct; estimate each slab by slicing in the direction of $k$, sum over lattice shells, and take the complement.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1-§2 and §5 (the Diophantine sets $\\mathcal D_\\alpha$ and the estimate $\\mathrm{mes}(\\mathcal D_\\alpha\\cap B)=\\mathrm{mes}(B)-O(\\alpha)$), PDF pp. 5-13 and 23-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.3 (Diophantine properties and the measure of the resonant slabs), printed pp. 32-36, and §6.1 (the measure of the persistence set), printed pp. 92-100.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-positive-measure-analytic-kam-family",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Positive-measure families of invariant Lagrangian tori for nondegenerate real analytic Hamiltonians: persistence for $\\varepsilon\\le c\\alpha^2$",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 11,
+        "deps": [
+          "def-countable-choice",
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "lem-frequency-reparametrization-by-contraction",
+          "lem-truncated-homological-equation-with-conservative-loss",
+          "lem-kam-affine-taylor-fourier-truncation",
+          "lem-kam-composed-map-and-derivative-convergence",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity",
+          "lem-kam-limit-is-an-embedding",
+          "lem-nondegenerate-frequency-reduction-and-alpha-square-smallness",
+          "lem-diophantine-resonance-slab-measure",
+          "lem-kam-conjugation-symmetry-of-the-construction",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart",
+          "def-cm-phase-domain-and-standard-symplectic-two-form",
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-kam-parameter-sequences-satisfy-all-step-hypotheses": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "lem-frequency-reparametrization-by-contraction": "mathematical-premise",
+          "lem-truncated-homological-equation-with-conservative-loss": "mathematical-premise",
+          "lem-kam-affine-taylor-fourier-truncation": "mathematical-premise",
+          "lem-kam-composed-map-and-derivative-convergence": "mathematical-premise",
+          "thm-parameter-kam-torus-invariance-and-lagrangianity": "mathematical-premise",
+          "lem-kam-limit-is-an-embedding": "mathematical-premise",
+          "lem-nondegenerate-frequency-reduction-and-alpha-square-smallness": "mathematical-premise",
+          "lem-diophantine-resonance-slab-measure": "mathematical-premise",
+          "lem-kam-conjugation-symmetry-of-the-construction": "mathematical-premise",
+          "prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart": "mathematical-premise",
+          "def-cm-phase-domain-and-standard-symplectic-two-form": "mathematical-premise",
+          "thm-real-analytic-inverse-and-implicit-function-theorems": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), as required by the Lebesgue-measure frequency-set supplier. Let $n\\ge2$, $\\tau>n-1$, $\\mu:=\\tau+3n+2$, $s_0>0$ and\n$0<\\sigma_0\\le\\min(1,s_0/24)$. Let the following real analytic data be fixed.\n\n1. An open set $U\\subseteq\\mathbb C^n$, a compact set $K\\subseteq U\\cap\\mathbb R^n$, a radius $0<r_0\\le1$ with $\\{J\\in\\mathbb C^n:\\operatorname{dist}_\\infty(J,K)<2r_0\\}\\subseteq U$, and a holomorphic, conjugation-symmetric function $h:U\\to\\mathbb C$ (so $h$ is real on the real points) with $h(K)\\subseteq\\mathbb R$.\n2. A nonempty open set $\\Omega\\subseteq\\mathbb R^n$, a conjugation-invariant open complex neighbourhood $\\Omega'\\subseteq\\mathbb C^n$ containing $\\Omega$ and a holomorphic, conjugation-symmetric map $b:\\Omega'\\to U$ with $Dh(b(\\nu))=\\nu$ on $\\Omega'$ and $b(\\Omega)+(B_{r_0}\\cap\\mathbb R^n)\\subseteq K$ (in the applications $b=(Dh)^{-1}$ on a regular frequency patch, supplied by [[thm-real-analytic-inverse-and-implicit-function-theorems]] when $\\det D^2h\\ne0$).\n3. A constant $M_2\\ge1$ with $|I^{\\mathsf T}D^2h(J)I|\\le M_2|I|_\\infty^2$ for all $I\\in\\mathbb C^n$ and all $J\\in U$ with $\\operatorname{dist}_\\infty(J,K)<2r_0$.\n4. A holomorphic, conjugation-symmetric, $2\\pi$-periodic in $\\vartheta$ function $F$ on $\\{J:\\operatorname{dist}_\\infty(J,K)<2r_0\\}\\times S_{s_0}$ with $|F|\\le\\varepsilon$, where $\\varepsilon>0$ is the perturbation size of the statement, and a compact cube $C^*$ with positive side length and $\\overline{C^*}\\subseteq\\Omega$ and $\\operatorname{dist}_\\infty(\\overline{C^*},\\partial\\Omega)>0$.\n\nThen there exists a constant $c=c(n,\\tau,s_0,\\sigma_0,r_0,M_2,U,K,\\Omega,h,b,C^*)>0$, and for every $0<\\alpha$ with $\\alpha<c$ and every perturbation size\n$$0<\\varepsilon\\le c\\,\\alpha^2,$$\nthe following hold for the Hamiltonian $H(p,\\vartheta):=h(p)+F(p,\\vartheta)$ on the phase domain $U\\cap\\mathbb R^n\\times\\mathbb T^n$ with the two-form $\\omega=\\sum_jd\\vartheta_j\\wedge dI_j$:\n\n1. **Positive-measure frequency set.** The set\n$$\\Omega_{\\alpha,\\tau}:=\\{\\nu\\in\\overline{C^*}:|k\\cdot\\nu|\\ge\\alpha|k|_1^{-\\tau}\\ \\text{for all }k\\in\\mathbb Z^n\\setminus\\{0\\}\\}$$\n   has positive Lebesgue measure, with $|\\Omega_{\\alpha,\\tau}|\\ge|\\overline{C^*}|-C_{n,\\tau}\\,(\\operatorname{diam}C^*)^{n-1}\\alpha$ for the constant $C_{n,\\tau}$ of [[lem-diophantine-resonance-slab-measure]].\n2. **Invariant Lagrangian tori.** For every $\\nu\\in\\Omega_{\\alpha,\\tau}$ there is a continuous injective map\n$$\\widehat\\Psi_\\nu:\\mathbb T^n\\longrightarrow\\bigl(U\\cap\\mathbb R^n\\bigr)\\times\\mathbb T^n,\\qquad \\widehat\\Psi_\\nu\\circ\\pi=\\Pi\\circ\\Psi_\\infty(0,\\,\\cdot\\,,\\nu),$$\n   which is a homeomorphism onto its image and satisfies\n$$X_H\\bigl(\\widehat\\Psi_\\nu(\\vartheta)\\bigr)=\\sum_{j=1}^n\\nu_j\\,\\partial_{\\vartheta_j}\\widehat\\Psi_\\nu(\\vartheta),\\qquad \\widehat\\Psi_\\nu^*\\omega=0 ;$$\n   the parametrisation is read in the lifts, and $\\pi,\\Pi$ are the quotient maps of the angle variables.\n3. **Closeness and regularity.** Writing $\\Psi_\\infty(0,\\vartheta,\\nu)=(b(\\nu)+\\Phi_I(0,\\vartheta,\\nu),\\vartheta+w(\\vartheta,\\nu))$, one has the bounds $|\\Phi_I(0,\\vartheta,\\nu)|\\le2C_{\\mathrm{phys}}rE_0$ and $|w(\\vartheta,\\nu)|\\le2C_{\\mathrm{phys}}\\sigma_0E_0$ with $r=\\sqrt{\\varepsilon/M_2}$ and $E_0=2\\sqrt{\\varepsilon M_2}/(\\alpha\\sigma_0^{\\mu})$, and the total action correction $\\Phi_I$ includes the frequency-retraction change of its centre. Here $C_{\\mathrm{phys}}$ is a fixed finite constant depending on the stated analytic data, including a bound for $Db$ near $C^*$. The family $\\nu\\mapsto\\Psi_\\infty(0,\\vartheta,\\nu)$ is Lipschitz on $\\Omega_{\\alpha,\\tau}$ with a finite constant at most $C_{\\mathrm{phys}}[1+(r+\\sigma_0)E_0/h_0]$, where $h_0=\\alpha/(2K_0^{\\tau+1})$ is the initial frequency width chosen in the proof. The constant term retains the variation of the unperturbed centre $b(\\nu)$.\n\nNo probability, frequency-of-occurrence or empirical claim is made; the\nconclusion is a statement about the Lebesgue measure of a set of frequencies.",
+        "strategy": "direct; fix the constants so that the reduction applies with $E_0\\le c$, invoke the parameter theory for the reduced perturbation, transfer to the physical Hamiltonian, and estimate the frequency set by the slab lemma.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1, §5 and Appendices A-B (the classical KAM theorem for real analytic nondegenerate Hamiltonians, the $\\varepsilon\\le c\\alpha^2$ smallness and the positive measure $\\mathrm{mes}(\\mathcal D_\\alpha\\cap B)=\\mathrm{mes}(B)-O(\\alpha)$ of the surviving frequencies), PDF pp. 1-7, 23-30 and 31-33.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §6.1-§6.4 (the invariant tori of the perturbed mechanical system, their Lagrangian character, and the measure of the persistence set), printed pp. 92-118.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kam-conjugation-symmetry-of-the-construction",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Conjugation symmetry of the KAM construction: real perturbations produce real tori",
+        "reference": "analytic-kam.md#e28",
+        "design_state": "completed-local-argument",
+        "dependency_level": 9,
+        "deps": [
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-truncated-homological-equation-with-conservative-loss",
+          "lem-kam-affine-taylor-fourier-truncation",
+          "lem-kam-generator-flow-and-remainder-bound",
+          "lem-frequency-reparametrization-by-contraction",
+          "lem-kam-composed-map-and-derivative-convergence",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-weierstrass-convergence-holomorphic-functions",
+          "def-complex-differentiability-holomorphic-and-entire",
+          "rem-complex-euclidean-space-dictionary"
+        ],
+        "dependency_roles": {
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-truncated-homological-equation-with-conservative-loss": "mathematical-premise",
+          "lem-kam-affine-taylor-fourier-truncation": "mathematical-premise",
+          "lem-kam-generator-flow-and-remainder-bound": "mathematical-premise",
+          "lem-frequency-reparametrization-by-contraction": "mathematical-premise",
+          "lem-kam-composed-map-and-derivative-convergence": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-weierstrass-convergence-holomorphic-functions": "mathematical-premise",
+          "def-complex-differentiability-holomorphic-and-entire": "mathematical-premise",
+          "rem-complex-euclidean-space-dictionary": "mathematical-premise"
+        },
+        "inventory_expansion_required": true,
+        "statement": "Assume the data, constants, sequences, one-step construction and notation of\n[[lem-kam-composed-map-and-derivative-convergence]], and assume that the initial\nperturbation is **conjugation-symmetric**:\n$$P_0(\\bar I,\\bar\\vartheta,\\bar\\nu)=\\overline{P_0(I,\\vartheta,\\nu)}\\qquad\\text{for every }(I,\\vartheta,\\nu)\\in D_{r_0,s_0,h_0}(\\Omega_{\\alpha,\\tau}).$$\nFor a holomorphic $g$ on a conjugation-invariant domain put\n$g^c(I,\\vartheta,\\nu):=\\overline{g(\\bar I,\\bar\\vartheta,\\bar\\nu)}$, and call $g$\nconjugation-symmetric when $g^c=g$. Then:\n\n1. **One-step objects.** For every $j\\ge0$ the functions $P_j$, $Q_j$, $R_j$,\n   $\\widehat R_j$, $F_j$ and $v_j=\\partial_I\\widehat R_j(0,\\cdot)$ are\n   conjugation-symmetric on their domains, and\n   $\\phi_j(\\bar\\nu)=\\overline{\\phi_j(\\nu)}$; in particular $\\phi_j$ maps real\n   points to real points.\n2. **The maps.** The extended steps $T_j(z,\\nu)=(\\widetilde\\Phi_j(z,\\phi_j(\\nu)),\\phi_j(\\nu))$ and their compositions are conjugation-symmetric. In particular $\\Psi_j^c=\\Psi_j$ and $\\chi_j^c=\\chi_j$ for every $j$.\n3. **The limit.** $\\Psi_\\infty^c=\\Psi_\\infty$ and $\\chi_\\infty^c=\\chi_\\infty$; in particular for real\n   $\\vartheta$ and real $\\nu$ the point $\\Psi_\\infty(0,\\vartheta,\\nu)$ is real,\n   that is $b(\\vartheta,\\nu)\\in\\mathbb R^n$ and $w(\\vartheta,\\nu)\\in\\mathbb R^n$.",
+        "strategy": "direct; induction on the stage, using that the one-step operations (Taylor truncation, Fourier cutoff, solving the homological equation, flowing, and the frequency retraction) commute with conjugation, and passing to the limit.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1 and §4-§5 (the real-analytic perturbation is complexified to a holomorphic function of the action-angle-parameter variables; the constructed transformations are limits of real-analytic maps), PDF pp. 5-6 and 20-27.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §3.1 (real analytic functions and their complexifications) and §6.1-§6.3 (reality of the limiting embedding when the data are real), printed pp. 24-31 and 92-110.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 108,
+    "id": "cm-math-kam-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Kam — Examples",
+    "companion": "cm-math-kam",
+    "requires": [
+      "cm-math-kam"
+    ],
+    "items": [
+      {
+        "id": "ex-two-rotor-kam-model-with-units",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "A two-rotor model with units: dimensionless normalisation, Diophantine measure and the conditional KAM family",
+        "reference": "analytic-kam.md#e28; batch-14-local-construction; recorded in the batch notes",
+        "design_state": "scaffolder-constructed-explicit-mathematical-example; recorded in the batch notes",
+        "dependency_level": 12,
+        "deps": [
+          "def-countable-choice",
+          "thm-positive-measure-analytic-kam-family",
+          "lem-diophantine-resonance-slab-measure",
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-geometric-series",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-positive-measure-analytic-kam-family": "mathematical-premise",
+          "lem-diophantine-resonance-slab-measure": "mathematical-premise",
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), inherited from the positive-measure supplier.\n\n**The dimensionless model.** On the phase space $\\mathbb R^2\\times\\mathbb T^2$ with\nangular variables $\\theta_1,\\theta_2$ read modulo $2\\pi$, consider the Hamiltonian\n$$H(I,\\theta):=\\tfrac12(I_1^2+I_2^2)+\\varepsilon\\cos\\theta_1\\cos\\theta_2,\\qquad I=(I_1,I_2)\\in\\mathbb R^2,$$\nso that $h(I)=\\tfrac12|I|^2$ and $F(I,\\theta)=\\varepsilon\\cos\\theta_1\\cos\\theta_2$.\nThis is the standard dimensionless two-rotor (two decoupled rigid rotors with a\ncosine coupling) and is a worked instance of\n[[thm-positive-measure-analytic-kam-family]]. The example is conditional\nmathematics: nothing below asserts that any physical rotor is governed by this\nmodel, and no empirical quantity, measurement or statistical inference occurs.\n\n**The physical reading with units.** Let $E_0$ be a chosen energy unit and let a\nphysical two-rotor have common moment of inertia $\\mathcal I>0$ and coupling\nenergy $\\lambda>0$ (both measured in their own units), with Hamiltonian\n$$H_{\\mathrm{phys}}(p,q)=\\frac{p_1^2+p_2^2}{2\\mathcal I}+\\lambda\\cos q_1\\cos q_2 .$$\nWith the action unit $J_0:=(\\mathcal I E_0)^{1/2}$ and the time unit\n$t_0:=\\mathcal I/J_0$ (so that $\\mathcal I=J_0^2/E_0=J_0t_0$), the substitutions\n$p=J_0I$, $t=t_0\\tau$, $\\lambda=\\varepsilon E_0$ identify $H_{\\mathrm{phys}}/E_0$\nwith the dimensionless $H$ above, and the frequency $\\nu$ of a torus of $H$\ncorresponds to the physical angular velocities $\\nu_j/t_0=\\nu_jJ_0/\\mathcal I$.\n\n**Data.** Take $K:=[1,2]^2\\subseteq\\mathbb R^2$, $U:=\\mathbb C^2$,\n$r_0:=1/10$, $\\Omega:=(1.1,1.9)^2$, $C^*:=[1.2,1.8]^2$ and strip width $s_0>0$ with\n$0<\\sigma_0\\le\\min(1,s_0/24)$. Then $Dh(I)=I$ is the identity, so the inverse\nfrequency map is $b(\\nu)=\\nu$, $K$ is the closed square of side $1$ and\n$C^*+(B_{r_0}\\cap\\mathbb R^2)\\subseteq K$; the Hessian is $D^2h=I_2$, so $M_2=2$. The perturbation\nhas complex sup-norm $|F|=\\varepsilon\\cosh(s_0)^2$ on the strip of width\n$s_0$ if $F(I,\\theta)=\\varepsilon\\cos\\theta_1\\cos\\theta_2$ is evaluated\nthere.",
+        "strategy": "direct; write the dimensionless normalisation, check the data of the KAM theorem with explicit constants, estimate the Diophantine measure arithmetically, and translate the conclusion back to physical units.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem, arXiv:0908.2234, §1 and §5 (the general perturbation form $H=h(p)+f_\\varepsilon(p,q)$, $f_\\varepsilon=\\epsilon f_*(p,q,\\epsilon)$, real analytic, with the standard symplectic structure; and the $\\alpha^2$ smallness of the iteration); the concrete two-rotor specialisation is constructed in this example, PDF pp. 5-6 and 23-30.",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (AMS Proc. Sympos. Pure Math. 69, revised version), §2.1-§2.2 (model examples of perturbation theory) and §3.3 (Diophantine frequencies and the measure of the resonant set), printed pp. 7-23 and 32-36.",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

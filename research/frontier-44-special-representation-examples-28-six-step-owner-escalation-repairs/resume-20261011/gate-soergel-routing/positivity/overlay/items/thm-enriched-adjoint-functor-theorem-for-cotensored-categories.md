@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-enriched-adjoint-functor-theorem-for-cotensored-categories.md

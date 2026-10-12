@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-kernel-map-is-a-homeomorphism-onto-the-primitive-ideal-space.md

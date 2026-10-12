@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-splitting-reaping-comparison-with-b-and-d.md

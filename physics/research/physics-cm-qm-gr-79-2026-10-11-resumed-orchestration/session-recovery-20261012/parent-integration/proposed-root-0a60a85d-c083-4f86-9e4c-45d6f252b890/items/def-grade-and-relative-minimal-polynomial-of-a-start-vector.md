@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-grade-and-relative-minimal-polynomial-of-a-start-vector.md

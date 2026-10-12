@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-i-string-components-of-a-crystal-lattice.md

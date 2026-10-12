@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-first-weight-layers-of-the-basic-affine-sl2-character.md

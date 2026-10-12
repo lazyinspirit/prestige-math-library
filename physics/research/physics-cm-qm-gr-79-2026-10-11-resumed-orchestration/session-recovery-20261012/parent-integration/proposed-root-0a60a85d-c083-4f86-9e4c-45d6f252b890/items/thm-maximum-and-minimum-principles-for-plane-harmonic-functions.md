@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximum-and-minimum-principles-for-plane-harmonic-functions.md

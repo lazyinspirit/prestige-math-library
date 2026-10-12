@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-diagonal-cohomological-double-complex-spectral-sequences.md

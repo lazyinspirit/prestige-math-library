@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-polar-cartan-decomposition-of-sl-n-r.md

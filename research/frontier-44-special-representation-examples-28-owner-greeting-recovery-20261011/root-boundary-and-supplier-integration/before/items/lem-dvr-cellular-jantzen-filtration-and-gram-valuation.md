@@ -1,0 +1,122 @@
+---
+id: lem-dvr-cellular-jantzen-filtration-and-gram-valuation
+kind: lemma
+title: "DVR cellular Jantzen filtration and exact Gram valuation"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+dependency_level: 1
+deps: [def-discrete-valuation-ring, def-left-and-right-modules,
+       def-cellular-algebra-basis-and-cell-module,
+       def-module-radical-socle-head-and-loewy-series,
+       def-determinant-of-a-square-matrix]
+justified_by: []
+aliases: []
+proof_strategy: direct
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+verification:
+  precheck: pass
+sources:
+  references:
+    - title: "Mathas, Positive Jantzen sum formulas for cyclotomic Hecke algebras, arXiv:2106.15486v2"
+      url: "https://arxiv.org/pdf/2106.15486v2"
+      locator: "Extracted text PDF pp. 14–15 §4.1/Lemma 4.1/Proposition 4.3 actually read; elementary DVR/weight principle, no Specht-to-Schur converse."
+    - title: "Lyle–Mathas, Blocks of cyclotomic Hecke algebras, math/0607451v4"
+      url: "https://arxiv.org/pdf/math/0607451v4"
+      locator: "Extracted text PDF pp. 5–6 Definition 2.5/Theorem 2.6 actually read. Original JM full proof unread; complete independent local alternative supplied."
+---
+
+## Statement
+
+Let $O$ be a discrete valuation ring with uniformizer $\pi$ and residue field
+$F=O/\pi O$ ([[def-discrete-valuation-ring]]), and let $\nu_\pi$ denote its
+valuation. Let $M$ be a finite free $O$-module with an $O$-valued bilinear
+pairing $b$ ([[def-left-and-right-modules]]) whose scalar extension to
+$\operatorname{Frac}(O)$ is nondegenerate. For $s\ge0$ put
+$$M(s):=\{x\in M:b(x,M)\subseteq\pi^sO\},\qquad M_F^s:=(M(s)+\pi M)/\pi M .$$
+Then:
+
+1. $M_F^0=M/\pi M$ and $M_F^1=\operatorname{rad}(b_F)$, where $b_F$ is the
+   reduced pairing on $M_F$;
+2. the filtration terminates ($M_F^s=0$ for all sufficiently large $s$), and
+   for any Gram matrix $G$ of $b$ one has the exact identity
+   $$\sum_{s>0}\dim_FM_F^s=\nu_\pi(\det G);$$
+3. if an $O$-algebra $A$ acts on $M$ with an anti-involution $*$ satisfying
+   $b(ax,y)=b(x,a^*y)$ for all $a\in A$, $x,y\in M$, then every $M(s)$, and
+   hence every $M_F^s$, is an $A$-submodule;
+4. if $M_F$ is a cellular standard module with nonzero cellular form
+   ([[def-cellular-algebra-basis-and-cell-module]]), then
+   $\operatorname{rad}(b_F)$ is its unique maximal submodule and therefore
+   coincides with its module radical
+   ([[def-module-radical-socle-head-and-loewy-series]]).
+
+The Smith reduction used in the proof works over $O$ without any
+characteristic restriction, in particular in characteristic $2$; it uses
+independent bases of $M$ and of $M^*=\operatorname{Hom}_O(M,O)$, never a
+diagonalization of a symmetric form.
+
+## Facts & Assumptions
+
+**Given:** A discrete valuation ring $O$ with uniformizer $\pi$, residue field
+$F$, valuation $\nu_\pi$; a finite free $O$-module $M$ of rank $n$ with
+bilinear pairing $b$, Gram matrix $G$ with respect to an $O$-basis, and the
+submodules $M(s)$ of the Statement.
+
+[F1] Every nonzero element of $O$ is a unit times a unique power of $\pi$, and
+$\nu_\pi$ is additive on products; a square matrix over $O$ is invertible if and
+only if its determinant is a unit, and $\nu_\pi(\det(UV))=\nu_\pi(\det U)+\nu_\pi(\det V)$
+([[def-discrete-valuation-ring]], [[def-determinant-of-a-square-matrix]]).
+
+[F2] $M^*=\operatorname{Hom}_O(M,O)$ is free of rank $n$, with dual basis
+$\varepsilon_1,\dots,\varepsilon_n$; an $O$-linear map $\varphi\colon M\to M^*$
+has matrix $G=(b(u_i,u_j))$ in these bases, and $\varphi$ is injective with
+free cokernel if and only if $\det G\ne0$, in which case
+$\operatorname{coker}\varphi$ is a finite torsion module
+([[def-left-and-right-modules]], [[def-determinant-of-a-square-matrix]]).
+
+[F3] $M_F=M/\pi M$ carries the reduced pairing $b_F(\bar x,\bar y):=b(x,y)\bmod\pi$;
+$\operatorname{rad}(b_F)=\{x\in M_F:b_F(x,M_F)=0\}$; for any submodule the
+quotient by the radical of a nonzero form is the head of the module
+([[def-module-radical-socle-head-and-loewy-series]]).
+
+[F4] In a cellular standard module with nonzero cellular form, for every basis
+label $u$ and every label $v$ the cell element of the cellular basis acts as
+$w\mapsto b_F(v,w)u$ (with left and right conventions transposed if necessary)
+([[def-cellular-algebra-basis-and-cell-module]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+**Given:** The data of [F1]–[F4]: the DVR $O$ with uniformizer $\pi$, the free
+
+module $M$ with pairing $b$ and Gram matrix $G$, the submodules $M(s)$, and the
+
+reduced pairing $b_F$.
+
+1.1 Smith reduction of the form. View $b$ as the $O$-linear map $\varphi\colon M\to M^*$, $\varphi(x)=b(x,-)$, with matrix $G$ in chosen bases by [F2]; nondegeneracy over $\operatorname{Frac}(O)$ gives $\det G\ne0$, so $\varphi$ has full rank. Choose a matrix entry of $\varphi$ of least valuation $\nu_\pi$ and move it to position $(1,1)$ by permuting the bases, then multiply its row by a unit of $O$ to make it $\pi^{a_1}$; every entry of the matrix is divisible by $\pi^{a_1}$ by minimality. Subtracting suitable $O$-multiples of the first row from the other rows and of the first column from the other columns (all coefficients in $O$, all operations unimodular by [F1]) kills the first row and column outside position $(1,1)$, leaving a smaller matrix over $O$. Iterating over the remaining rows and columns produces bases $u_1,\dots,u_n$ of $M$ and $v_1,\dots,v_n$ of $M^*$ with $\varphi(u_j)=\pi^{a_j}v_j$ and $0\le a_1\le\dots\le a_n$. [F1, F2, construct]
+
+1.2 Reduction of the radical. For $\bar x\in M_F$ one has $b_F(\bar x,M_F)=0$ if and only if $b(x,M)\subseteq\pi O$, i.e. $x\in M(1)$; hence $\operatorname{rad}(b_F)=(M(1)+\pi M)/\pi M=M_F^1$ by [F3], the containment $\pi M\subseteq M(1)$ being immediate from $b(\pi x,M)\subseteq\pi O$. [F3, algebra]
+
+1.3 Submodule stability. Let $a\in A$ and $x\in M(s)$; by the hypothesis $b(ax,y)=b(x,a^*y)\in\pi^sO$ for every $y\in M$, since $a^*y\in M$. Hence $ax\in M(s)$ and $M(s)$ is an $A$-submodule; consequently $M_F^s=(M(s)+\pi M)/\pi M$ is an $A$-submodule of $M_F$, the $\pi M$-cosets of $M(s)$ being stable because $\pi M$ is stable. [F3, algebra]
+
+1.4 The cellular standard module. Assume $M_F$ is a cellular standard module with nonzero cellular form, and let $N\subseteq M_F$ be a proper submodule. If some $w\in N$ lies outside $\operatorname{rad}(b_F)$, choose a label $v$ with $b_F(v,w)\ne0$; by the rank-one action [F4] every basis vector $u$ equals $b_F(v,w)^{-1}$ times the image of $w$ under the cell element of the pair $(u,v)$, so $u\in N$ for every basis label $u$ and $N=M_F$, a contradiction. Thus every proper submodule is contained in $\operatorname{rad}(b_F)$, which is proper because the form is nonzero, and the same rank-one argument shows that the quotient $M_F/\operatorname{rad}(b_F)$ is simple (it has no nonzero proper submodule). Hence $\operatorname{rad}(b_F)$ is the unique maximal submodule of $M_F$, i.e. its module radical by [F3]. [F3, F4, algebra]
+
+2.1 The filtration in the Smith bases. In the bases of step 1.1 one computes for $s\ge0$ that $b(u_j,M)=\pi^{a_j}O$, so $M(s)=\bigoplus_{j=1}^{n}\pi^{\max(0,s-a_j)}Ou_j,\qquad \dim_FM_F^s=\#\{j:a_j\ge s\}.$ In particular $M(0)=M$, so $M_F^0=M/\pi M$; the filtration terminates because $M(s)=0$ for $s>\max_ja_j$; and each $M_F^s$ is a subspace of the finite-dimensional $F$-space $M_F$. [step 1.1, algebra]
+
+3.1 The Gram valuation identity. By the matrix form of step 1.1, the determinant of $G$ equals $\det(\pi^{a_j}\delta_{jk})$ times a unit, since both change-of-basis matrices are invertible over $O$; hence, using additivity of $\nu_\pi$ by [F1], $\nu_\pi(\det G)=\sum_{j=1}^{n}a_j =\sum_{s>0}\#\{j:a_j\ge s\} =\sum_{s>0}\dim_FM_F^s,$ the middle equality counting each $a_j$ as the number of positive integers $s\le a_j$. [F1, F2, step 2.1, algebra]
+
+4.1 Conclusion. Steps 1.2–1.4 and 2.1–3.1 establish all four assertions of the Statement: the identification of $M_F^0$ and $M_F^1=\operatorname{rad}(b_F)$, the termination together with the exact identity $\sum_{s>0}\dim_FM_F^s=\nu_\pi(\det G)$, the submodule stability under an anti-involution action, and the equality of $\operatorname{rad}(b_F)$ with the module radical in the cellular standard case. The Smith reduction of step 1.1 is valid over any discrete valuation ring, including residue characteristic $2$, because it uses independent domain and codomain bases and no symmetric diagonalization. [step 2.1, step 3.1, step 1.2, step 1.3, step 1.4] ∎
+
+
+
+## Remarks
+
+The exactness of the sum formula is the point of the lemma: the multiplicities
+$\dim_FM_F^s$ of the Jantzen filtration are read off from the $\pi$-adic
+valuation of the Gram determinant, and in positive residue characteristic the
+valuation is the full $p$-power of the corresponding binomial coefficient, not
+merely an indicator. No choice principle is used: all bases are obtained by
+finitely many unimodular operations on finite matrices.

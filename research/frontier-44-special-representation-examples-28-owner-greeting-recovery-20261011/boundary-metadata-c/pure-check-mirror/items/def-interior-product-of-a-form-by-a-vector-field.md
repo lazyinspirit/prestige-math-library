@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-interior-product-of-a-form-by-a-vector-field.md

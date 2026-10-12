@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-level-one-charge-zero-crystal-through-rank-four-at-e-three.md

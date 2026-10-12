@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-burau-determinant-recovers-the-alexander-polynomial-of-a-closed-braid.md

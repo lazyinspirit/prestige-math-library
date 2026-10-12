@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-w-one-infinity-functions-have-lipschitz-representatives.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-frameable-decomposition-of-a-regular-disk-region.md

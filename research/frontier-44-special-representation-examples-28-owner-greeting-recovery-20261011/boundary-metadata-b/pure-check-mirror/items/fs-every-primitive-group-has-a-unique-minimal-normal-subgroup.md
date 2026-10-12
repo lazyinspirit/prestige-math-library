@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-primitive-group-has-a-unique-minimal-normal-subgroup.md

@@ -64,14 +64,7 @@ index, after which all values have modulus below $\epsilon$.
 
 **Proof technique:** direct.
 
-1.1 By [L0], $c_0(\mathbb N)=C_0(\mathbb N)$. This space is a nonzero
-commutative C\*-algebra: completeness is [L1], pointwise multiplication and
-conjugation preserve null sequences,
-$\|ab\|_\infty\leq\|a\|_\infty\|b\|_\infty$, and
-$\|a^*a\|_\infty=\|a\|_\infty^2$; it has no unit, since a unit $e$ would
-satisfy $e\delta_n=\delta_n$ for every $n$, hence $e(n)=1$ for all $n$,
-contradicting $e\in c_0$. This proves claim 2 and licenses [L2].
-[L0, L1, algebra]
+1.1 By [L0], $c_0(\mathbb N)=C_0(\mathbb N)$. This space is a nonzero commutative C\*-algebra: completeness is [L1], pointwise multiplication and conjugation preserve null sequences, $\|ab\|_\infty\leq\|a\|_\infty\|b\|_\infty$, and $\|a^*a\|_\infty=\|a\|_\infty^2$; it has no unit, since a unit $e$ would satisfy $e\delta_n=\delta_n$ for every $n$, hence $e(n)=1$ for all $n$, contradicting $e\in c_0$. This proves claim 2 and licenses [L2]. [L0, L1, algebra]
 
 1.2 Each $\mathrm{ev}_n$ is a character of $c_0(\mathbb N)$: it is complex-linear and multiplicative because evaluation at a point is, and it is nonzero because $\mathrm{ev}_n(\delta_n) = 1$ for the coordinate vector $\delta_n \in c_0(\mathbb N)$. [algebra]
 

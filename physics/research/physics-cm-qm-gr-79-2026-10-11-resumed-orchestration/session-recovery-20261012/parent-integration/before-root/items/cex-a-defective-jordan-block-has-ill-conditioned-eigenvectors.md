@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-defective-jordan-block-has-ill-conditioned-eigenvectors.md

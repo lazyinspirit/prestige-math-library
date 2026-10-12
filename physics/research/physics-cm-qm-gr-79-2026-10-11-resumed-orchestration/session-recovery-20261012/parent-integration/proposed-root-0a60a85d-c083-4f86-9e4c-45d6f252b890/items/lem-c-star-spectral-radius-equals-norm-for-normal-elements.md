@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-star-spectral-radius-equals-norm-for-normal-elements.md

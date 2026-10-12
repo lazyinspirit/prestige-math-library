@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-curvature-of-a-vector-bundle-connection.md

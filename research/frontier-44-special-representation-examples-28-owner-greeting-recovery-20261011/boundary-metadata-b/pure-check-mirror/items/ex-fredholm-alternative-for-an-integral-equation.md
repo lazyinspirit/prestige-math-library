@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-fredholm-alternative-for-an-integral-equation.md

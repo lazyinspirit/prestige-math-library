@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p.md

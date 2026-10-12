@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-recurrence-coefficients-alone-determine-the-sequence.md

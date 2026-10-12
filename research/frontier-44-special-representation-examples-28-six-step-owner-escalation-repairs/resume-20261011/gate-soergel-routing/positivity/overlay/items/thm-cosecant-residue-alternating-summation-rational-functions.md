@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cosecant-residue-alternating-summation-rational-functions.md

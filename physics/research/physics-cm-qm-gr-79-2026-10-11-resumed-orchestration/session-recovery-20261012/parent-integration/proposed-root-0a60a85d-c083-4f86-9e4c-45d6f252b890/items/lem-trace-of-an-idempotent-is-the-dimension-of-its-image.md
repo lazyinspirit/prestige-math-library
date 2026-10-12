@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-trace-of-an-idempotent-is-the-dimension-of-its-image.md

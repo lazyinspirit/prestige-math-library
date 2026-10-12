@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-finite-family-with-the-erdos-hajnal-property-is-viral.md

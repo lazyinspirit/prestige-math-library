@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-acyclic-complex-of-projective-objects-is-contractible.md

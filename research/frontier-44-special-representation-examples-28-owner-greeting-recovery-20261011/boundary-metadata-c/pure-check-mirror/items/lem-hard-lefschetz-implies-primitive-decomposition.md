@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hard-lefschetz-implies-primitive-decomposition.md

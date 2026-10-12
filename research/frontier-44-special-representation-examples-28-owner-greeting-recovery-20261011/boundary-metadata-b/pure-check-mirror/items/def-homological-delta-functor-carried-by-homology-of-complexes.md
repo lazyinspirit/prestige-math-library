@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-homological-delta-functor-carried-by-homology-of-complexes.md

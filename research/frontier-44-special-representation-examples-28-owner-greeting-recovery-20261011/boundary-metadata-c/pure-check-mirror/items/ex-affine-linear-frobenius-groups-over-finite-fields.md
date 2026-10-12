@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-affine-linear-frobenius-groups-over-finite-fields.md

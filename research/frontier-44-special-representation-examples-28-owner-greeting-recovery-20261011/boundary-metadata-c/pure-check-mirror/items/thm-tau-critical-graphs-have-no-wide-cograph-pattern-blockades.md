@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-tau-critical-graphs-have-no-wide-cograph-pattern-blockades.md

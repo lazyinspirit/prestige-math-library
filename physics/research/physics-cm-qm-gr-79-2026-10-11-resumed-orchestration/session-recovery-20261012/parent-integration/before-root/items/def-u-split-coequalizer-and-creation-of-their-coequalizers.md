@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-u-split-coequalizer-and-creation-of-their-coequalizers.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-triangle-counting-lemma-for-regular-triples.md

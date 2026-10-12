@@ -40,5 +40,4 @@ Almost-sure convergence need not imply $L^p$ convergence, even for $1\le p<\inft
 
 1.1 For every $x\in(0,1)$, eventually $1/(n+1)<x$, so $X_n(x)=0$. Thus $X_n\to0$ everywhere on $(0,1)$, hence almost surely by [L1]. [L1]
 
-2.1 Yet $\mathbb E|X_n|^p=\int_0^{1/(n+1)}(n+1)\,dx=1$, so [step 1.1, L2]
-$\|X_n\|_p=1$ for every $n$. By [L2], there is no $L^p$ convergence to zero. [step 1.1, L2] ∎
+2.1 Yet $\mathbb E|X_n|^p=\int_0^{1/(n+1)}(n+1)\,dx=1$, so [step 1.1, L2] $\|X_n\|_p=1$ for every $n$. By [L2], there is no $L^p$ convergence to zero. [step 1.1, L2] ∎ 

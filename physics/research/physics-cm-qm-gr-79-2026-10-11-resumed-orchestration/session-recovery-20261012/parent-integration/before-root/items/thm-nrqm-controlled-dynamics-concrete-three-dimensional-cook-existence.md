@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-controlled-dynamics-concrete-three-dimensional-cook-existence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-finite-modification-preserves-rationality-and-eventual-recurrence.md

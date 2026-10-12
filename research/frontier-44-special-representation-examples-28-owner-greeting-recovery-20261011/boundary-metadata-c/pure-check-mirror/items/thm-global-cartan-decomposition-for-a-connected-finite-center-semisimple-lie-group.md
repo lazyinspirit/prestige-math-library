@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-cartan-decomposition-for-a-connected-finite-center-semisimple-lie-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-primes-represented-by-x-squared-plus-two-y-squared.md

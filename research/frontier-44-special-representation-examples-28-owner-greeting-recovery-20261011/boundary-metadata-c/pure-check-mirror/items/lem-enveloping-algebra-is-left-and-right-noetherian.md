@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-enveloping-algebra-is-left-and-right-noetherian.md

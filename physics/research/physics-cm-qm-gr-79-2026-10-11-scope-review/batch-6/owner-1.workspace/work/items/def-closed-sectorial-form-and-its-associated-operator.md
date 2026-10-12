@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-closed-sectorial-form-and-its-associated-operator.md

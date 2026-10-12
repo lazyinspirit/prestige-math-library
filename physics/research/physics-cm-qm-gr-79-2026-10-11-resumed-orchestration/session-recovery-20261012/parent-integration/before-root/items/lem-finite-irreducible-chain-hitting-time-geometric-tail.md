@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-irreducible-chain-hitting-time-geometric-tail.md

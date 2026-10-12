@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-dual-and-poincare-bundle-finite-field-descent.md

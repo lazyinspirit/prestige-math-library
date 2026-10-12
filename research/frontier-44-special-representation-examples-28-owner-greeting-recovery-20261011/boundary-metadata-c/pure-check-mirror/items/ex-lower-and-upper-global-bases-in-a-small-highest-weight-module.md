@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-lower-and-upper-global-bases-in-a-small-highest-weight-module.md

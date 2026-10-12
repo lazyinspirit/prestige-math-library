@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quotient-by-a-closed-normal-subgroup-is-a-lie-group.md

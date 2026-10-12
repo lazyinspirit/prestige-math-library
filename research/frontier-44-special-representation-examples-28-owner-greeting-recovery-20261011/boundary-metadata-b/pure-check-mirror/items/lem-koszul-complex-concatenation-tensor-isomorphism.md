@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-koszul-complex-concatenation-tensor-isomorphism.md

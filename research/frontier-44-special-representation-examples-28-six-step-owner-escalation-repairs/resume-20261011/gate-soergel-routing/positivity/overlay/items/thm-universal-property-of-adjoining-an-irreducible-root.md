@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-property-of-adjoining-an-irreducible-root.md

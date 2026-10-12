@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-additive-module-functor-preserves-colimits-iff-right-exact-and-coproduct-preserving.md

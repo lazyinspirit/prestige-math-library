@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-representations-with-kernel-containing-a-normal-subgroup-factor-through-the-quotient.md

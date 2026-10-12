@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stone-resolvent-formula-for-spectral-projections.md

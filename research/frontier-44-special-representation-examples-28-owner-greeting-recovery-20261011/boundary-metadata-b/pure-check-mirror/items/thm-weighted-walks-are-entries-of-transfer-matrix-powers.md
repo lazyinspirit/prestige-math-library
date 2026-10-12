@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weighted-walks-are-entries-of-transfer-matrix-powers.md

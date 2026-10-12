@@ -46,5 +46,4 @@ $$\int_E f\,d\mu=0.$$
 
 1.1 Let $s=\sum_j c_j\chi_{A_j}$ be a nonnegative simple minorant of $f\chi_E$, with $c_j\ge0$. If $c_j>0$, then $A_j\subseteq E$ because $s=0$ outside $E$; hence $\mu(A_j)=0$. The simple-integral formula, equivalently the finite-sum calculation in [L1], gives $\int s\,d\mu=\sum_j c_j\mu(A_j)=0$, including when the original representation overlaps. [L1, L2, given]
 
-
-2.1 Taking the supremum over all such simple minorants in [L3] gives $\int_E f\,d\mu=\int f\chi_E\,d\mu=0$. [step 1.1, L2, L3] ∎
+ 2.1 Taking the supremum over all such simple minorants in [L3] gives $\int_E f\,d\mu=\int f\chi_E\,d\mu=0$. [step 1.1, L2, L3] ∎ 

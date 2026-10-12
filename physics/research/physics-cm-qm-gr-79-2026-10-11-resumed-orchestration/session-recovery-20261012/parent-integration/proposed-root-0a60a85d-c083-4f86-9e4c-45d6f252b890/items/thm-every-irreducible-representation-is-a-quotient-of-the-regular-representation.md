@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-irreducible-representation-is-a-quotient-of-the-regular-representation.md

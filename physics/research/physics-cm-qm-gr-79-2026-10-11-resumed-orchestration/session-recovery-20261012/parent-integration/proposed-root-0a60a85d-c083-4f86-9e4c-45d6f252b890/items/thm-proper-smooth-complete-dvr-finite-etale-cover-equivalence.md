@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-proper-smooth-complete-dvr-finite-etale-cover-equivalence.md

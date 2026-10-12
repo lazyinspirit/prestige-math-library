@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dirichlet-laplacian-eigenpairs-on-an-interval.md

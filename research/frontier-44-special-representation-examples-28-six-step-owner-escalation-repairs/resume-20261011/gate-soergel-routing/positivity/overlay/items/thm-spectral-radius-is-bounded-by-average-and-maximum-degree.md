@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-radius-is-bounded-by-average-and-maximum-degree.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-closed-projective-embedding-by-homogeneous-generators.md

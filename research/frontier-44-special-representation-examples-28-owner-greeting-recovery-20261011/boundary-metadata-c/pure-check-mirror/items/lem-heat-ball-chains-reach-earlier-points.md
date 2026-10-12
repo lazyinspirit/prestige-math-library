@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-heat-ball-chains-reach-earlier-points.md

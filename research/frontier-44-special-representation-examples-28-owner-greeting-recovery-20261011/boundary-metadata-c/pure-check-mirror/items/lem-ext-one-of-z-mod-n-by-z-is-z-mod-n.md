@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ext-one-of-z-mod-n-by-z-is-z-mod-n.md

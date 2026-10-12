@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-boundary-green-corrector-is-smooth.md

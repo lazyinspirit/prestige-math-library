@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-fifth-minus-two-is-solvable-by-radicals.md

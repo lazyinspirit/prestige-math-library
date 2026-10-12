@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-hausdorff-diagonals-and-closed-quotients.md

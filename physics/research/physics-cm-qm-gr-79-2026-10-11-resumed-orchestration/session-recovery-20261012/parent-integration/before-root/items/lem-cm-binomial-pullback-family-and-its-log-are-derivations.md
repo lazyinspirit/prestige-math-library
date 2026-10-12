@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-binomial-pullback-family-and-its-log-are-derivations.md

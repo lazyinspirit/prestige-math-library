@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-integer-determinant-two-is-invertible-over-q-not-z.md

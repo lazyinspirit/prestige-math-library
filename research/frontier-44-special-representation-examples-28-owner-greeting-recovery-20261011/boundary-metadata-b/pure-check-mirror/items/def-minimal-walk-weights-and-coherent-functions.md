@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-minimal-walk-weights-and-coherent-functions.md

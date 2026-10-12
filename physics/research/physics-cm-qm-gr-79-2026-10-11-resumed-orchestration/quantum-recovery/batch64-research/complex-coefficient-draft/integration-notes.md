@@ -1,0 +1,9 @@
+Linear-first physical c_j=<D_jv_a,v_b> is exactly source41 golden-rule(c). Conjugating coefficients without conjugating physical mode vectors changes interference for complex Hermitian/transverse data. Candidates compute the actual Dyson projection directly. Physical amplitudes are output-first; absorption=−conjugate(emission) for the same actual gap/g and real eta0, with arbitrary complex matrices/modes retained. First absorption term is a finite-photon-sector norm integral even for g outside D(epsilon), with no full non-vacuum Dyson-series assertion.
+
+P_b,t remains a formal probability law for M!=0,t>0 independent of eta0. Normalizing A_b requires A_b!=0, equivalent to eta0!=0 under these hypotheses. eta0=0 produces no amplitude-derived unit preparation.
+
+Stimulated64 has correct <Dv_i,v_k> coefficients but misses the reverse minus sign. Necessary source60 transfer corrections are e^{i E_k tau} and K=sup||V||/hbar. Both repeated native F1/F3 copies are corrected without restructuring. Real Pauli two-level example needs no coefficient-convention edit; inspected bytes are retained. No separate example audit verdict is claimed.
+
+Lead reconciles manifests/contracts/readiness and all consumers (golden-rule physics/detection/model-comparison and scope). Native notes' conjugate-coefficient rationale becomes stale. No live/source41/readiness/control edits or audit rounds.
+
+Complex interference check: take v_a=e1,v_b=e2, D1=sigma_x,D2=sigma_y, and modes g1=h,g2=i h for any nonzero admissible transverse cutoff h. Physical c1=1,c2=i yields M=h+i(ih)=0; the former conjugated coefficients produce M_old=h−i(ih)=2h. Thus no general complex-coefficient substitution can preserve the actual photon density. This is an algebraic witness within the declared data, not an empirical claim or new live item.

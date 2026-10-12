@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-ceiling-and-floor-are-adjoint-to-the-inclusion-of-the-integers.md

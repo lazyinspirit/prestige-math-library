@@ -2,7 +2,8 @@
 page: construction-of-r-via-cauchy-sequences
 title: "Construction of the Real Numbers via Cauchy Sequences"
 status: published
-items: [def-integers, lem-int-equivalence, def-int-operations,
+items: [def-field, def-ordered-field, def-complete-ordered-field,
+        def-integers, lem-int-equivalence, def-int-operations,
         lem-int-add-well-defined, lem-int-mul-well-defined, thm-int-comm-ring,
         def-int-order, thm-int-ordered-ring, lem-int-cancellation, lem-nat-embeds-int,
         def-rationals, lem-rat-equivalence, def-rat-operations,

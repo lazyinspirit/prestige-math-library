@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-outer-function-with-prescribed-boundary-modulus.md

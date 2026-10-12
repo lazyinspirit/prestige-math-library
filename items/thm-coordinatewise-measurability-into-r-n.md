@@ -38,18 +38,9 @@ if each coordinate function $f_j : X \to \mathbb{R}$ is measurable.
 
 **Proof technique:** direct.
 
-1.1 Suppose $f$ is measurable. Fix $j$ and a real $a$. Then [L3, given]
+1.1 Suppose $f$ is measurable. Fix $j$ and a real $a$. Then $$\{x : f_j(x) > a\} = f^{-1}\!\big(\mathbb{R}^{j-1} \times (a,\infty) \times \mathbb{R}^{n-j}\big).$$ The displayed strip is open, hence Borel in $\mathbb{R}^n$, so the preimage is measurable. By [L3], each coordinate $f_j$ is measurable. [L3, given]
 
-$$\{x : f_j(x) > a\} = f^{-1}\!\big(\mathbb{R}^{j-1} \times (a,\infty) \times \mathbb{R}^{n-j}\big).$$
+1.2 Conversely, suppose every coordinate $f_j$ is measurable. Let $B = \prod_{j=1}^n (a_j,b_j)$ be a rational open box. Then $$f^{-1}(B) = \bigcap_{j=1}^n \{x : a_j < f_j(x) < b_j\},$$ and each factor on the right is measurable by [L3]. Therefore $f^{-1}(B) \in \mathcal{A}$ for every rational open box $B$. [L1, L3, algebra]
 
-The displayed strip is open, hence Borel in $\mathbb{R}^n$, so the preimage is measurable. By [L3], each coordinate $f_j$ is measurable. [L3, given]
+2.1 By [L1] and [L2], step 1.2 implies that $f$ is measurable. Together with [step 1.1, step 1.2, L1, L2] step 1.1, this proves the equivalence. [step 1.1, step 1.2, L1, L2]. [L1, L2, step 1.1, step 1.2] ∎
 
-1.2 Conversely, suppose every coordinate $f_j$ is measurable. Let [L1, L3, algebra]
-$B = \prod_{j=1}^n (a_j,b_j)$ be a rational open box. Then
-
-$$f^{-1}(B) = \bigcap_{j=1}^n \{x : a_j < f_j(x) < b_j\},$$
-
-and each factor on the right is measurable by [L3]. Therefore $f^{-1}(B) \in \mathcal{A}$ for every rational open box $B$. [L1, L3, algebra]
-
-2.1 By [L1] and [L2], step 1.2 implies that $f$ is measurable. Together with [step 1.1, step 1.2, L1, L2]
-step 1.1, this proves the equivalence. [step 1.1, step 1.2, L1, L2] ∎

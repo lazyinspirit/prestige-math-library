@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-laver-guided-iteration-size-collapse-and-factorization.md

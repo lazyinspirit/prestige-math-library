@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pentagonal-recurrence-computes-p-ten.md

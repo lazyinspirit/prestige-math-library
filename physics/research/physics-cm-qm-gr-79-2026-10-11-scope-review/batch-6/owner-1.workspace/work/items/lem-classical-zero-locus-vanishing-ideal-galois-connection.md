@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-classical-zero-locus-vanishing-ideal-galois-connection.md

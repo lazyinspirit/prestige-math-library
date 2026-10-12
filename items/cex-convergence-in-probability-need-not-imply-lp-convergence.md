@@ -38,8 +38,6 @@ Convergence in probability need not imply $L^p$ convergence, for $1\le p<\infty$
 
 **Proof technique:** direct.
 
-1.1 For fixed $\varepsilon>0$, $X_n$ is nonzero only on $E_n$, hence [L1]
-$\mathbb P(|X_n|>\varepsilon)\le1/(n+1)\to0$. Thus $X_n\to0$ in probability by [L1]. [L1]
+1.1 For fixed $\varepsilon>0$, $X_n$ is nonzero only on $E_n$, hence [L1] $\mathbb P(|X_n|>\varepsilon)\le1/(n+1)\to0$. Thus $X_n\to0$ in probability by [L1]. [L1]
 
-2.1 Nevertheless, [step 1.1, L2]
-$\mathbb E|X_n|^p=(n+1)\mathbb P(E_n)=1$ for all $n$. By [L2], $X_n$ does not converge to zero in $L^p$. [step 1.1, L2] ∎
+2.1 Nevertheless, [step 1.1, L2] $\mathbb E|X_n|^p=(n+1)\mathbb P(E_n)=1$ for all $n$. By [L2], $X_n$ does not converge to zero in $L^p$. [step 1.1, L2] ∎ 

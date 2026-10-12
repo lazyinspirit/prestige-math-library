@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arc-length-is-lower-semicontinuous-under-uniform-convergence.md

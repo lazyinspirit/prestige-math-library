@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectral-measure-multiplicity-model-for-a-transitive-system.md

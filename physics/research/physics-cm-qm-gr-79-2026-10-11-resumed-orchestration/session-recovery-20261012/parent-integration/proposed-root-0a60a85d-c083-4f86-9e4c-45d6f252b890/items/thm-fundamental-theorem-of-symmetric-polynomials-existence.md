@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fundamental-theorem-of-symmetric-polynomials-existence.md

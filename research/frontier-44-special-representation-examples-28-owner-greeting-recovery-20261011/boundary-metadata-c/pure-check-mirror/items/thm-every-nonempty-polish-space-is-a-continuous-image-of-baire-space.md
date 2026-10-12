@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-boone-machine-semigroup-and-augmented-configurations.md

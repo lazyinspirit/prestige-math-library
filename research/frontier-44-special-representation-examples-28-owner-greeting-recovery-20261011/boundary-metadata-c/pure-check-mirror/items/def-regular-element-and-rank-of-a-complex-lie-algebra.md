@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-regular-element-and-rank-of-a-complex-lie-algebra.md

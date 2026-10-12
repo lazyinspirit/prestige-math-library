@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chebyshev-markov-inequality-for-the-integral.md

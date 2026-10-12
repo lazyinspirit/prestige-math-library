@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cellwise-vanishing-obstructions-with-incompatible-choices-need-not-give-a-global-extension.md

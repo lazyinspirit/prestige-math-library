@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-comparison-maps-respect-composition-up-to-homotopy.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-fixed-halting-machine-for-boone-simulation.md

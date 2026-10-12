@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonprincipal-dirichlet-l-holomorphic-right-half-plane.md

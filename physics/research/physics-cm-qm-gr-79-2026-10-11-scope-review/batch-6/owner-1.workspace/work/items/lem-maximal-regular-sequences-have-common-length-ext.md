@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-regular-sequences-have-common-length-ext.md

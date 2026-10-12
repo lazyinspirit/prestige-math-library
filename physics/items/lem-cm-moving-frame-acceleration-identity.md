@@ -1,0 +1,89 @@
+---
+id: lem-cm-moving-frame-acceleration-identity
+kind: lemma
+title: "Angular velocity of a moving frame and the rotating-frame acceleration identity"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 1
+deps: [def-cm-special-orthogonal-group, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal, def-euclidean-inner-product, def-matrix-product-and-identity-matrix, prop-transpose-laws, thm-algebra-of-derivatives, def-vector-valued-derivative-and-integral]
+dependency_roles:
+  def-cm-special-orthogonal-group: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  lem-cross-product-is-bilinear-alternating-and-orthogonal: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-matrix-product-and-identity-matrix: mathematical-premise
+  prop-transpose-laws: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  def-vector-valued-derivative-and-integral: mathematical-premise
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+proof_strategy: direct
+sources:
+  references:
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 3.1.1 (angular velocity and the antisymmetry of omega), printed pages 47-49"
+      url: "https://www.damtp.cam.ac.uk/user/tong/dynamics/clas.pdf"
+    - title: "D. Tong, Dynamics and Relativity (Cambridge lecture notes, 2013), Section 6 (non-inertial frames: centrifugal and Coriolis terms), printed pages 101-110"
+      url: "https://www.damtp.cam.ac.uk/user/tong/relativity/dynrel.pdf"
+verification:
+  precheck: pass
+---
+
+## Statement
+
+Let $I\subseteq\mathbb R$ be a nondegenerate interval, let $R:I\to SO(3)$ and $c:I\to\mathbb R^3$ be twice continuously differentiable in the sense that all entries of $R$ and all components of $c$ have continuous second derivatives, and put
+
+$$\Omega(t):=R(t)^{\mathsf T}R'(t)\qquad(t\in I).$$
+
+1. $\Omega(t)$ is skew-symmetric for every $t\in I$, that is $\Omega(t)^{\mathsf T}=-\Omega(t)$.
+2. For every $t\in I$ there is exactly one vector $\omega(t)\in\mathbb R^3$ such that
+
+$$\Omega(t)z=\omega(t)\times z\qquad(z\in\mathbb R^3),$$
+
+the cross product being that of [[def-cross-product-in-r3]]. Its components in the standard basis are read off the three entries of $\Omega(t)$ above the diagonal.
+3. If $y:I\to\mathbb R^3$ is twice continuously differentiable and
+
+$$x(t):=R(t)y(t)+c(t)\qquad(t\in I),$$
+
+then for every $t\in I$
+
+$$R(t)^{\mathsf T}x''(t)=y''(t)+2\,\omega(t)\times y'(t)+\omega'(t)\times y(t)+\omega(t)\times\bigl(\omega(t)\times y(t)\bigr)+R(t)^{\mathsf T}c''(t).$$
+
+4. For every $t\in I$ and $z\in\mathbb R^3$, $\|R(t)z\|_2=\|z\|_2$: the rotation part of the change of coordinates preserves Euclidean norms ([[def-euclidean-inner-product]]).
+
+## Facts & Assumptions
+
+**Given:** A nondegenerate interval $I$, twice continuously differentiable maps $R:I\to SO(3)$ and $c:I\to\mathbb R^3$, and a twice continuously differentiable $y:I\to\mathbb R^3$; write $\Omega=R^{\mathsf T}R'$ and $x=Ry+c$.
+
+[L1] $R(t)^{\mathsf T}R(t)=I_3$ for every $t$, and the matrix entries of $R$ are twice differentiable ([[def-cm-special-orthogonal-group]]).
+
+[L2] Matrix products, transposes and vector-valued derivatives obey the componentwise product, sum and scalar rules, and $(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$, $(A^{\mathsf T})^{\mathsf T}=A$ ([[def-matrix-product-and-identity-matrix]], [[prop-transpose-laws]], [[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]]).
+
+[L3] The cross product is bilinear and alternating, and $\Omega z=\omega\times z$ for all $z$ holds exactly for the matrix $\Omega$ with entries $\Omega_{12}=-\omega_3$, $\Omega_{13}=\omega_2$, $\Omega_{23}=-\omega_1$ and the opposite entries fixed by skew-symmetry ([[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]]).
+
+[L4] The Euclidean norm satisfies $\|z\|_2^2=\langle z,z\rangle_2=z^{\mathsf T}z$, and $\langle z,z\rangle_2=0$ only for $z=0$ ([[def-euclidean-inner-product]]).
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Differentiate the identity $R^{\mathsf T}R=I_3$ of [L1] componentwise using [L2]: $0=(R^{\mathsf T}R)'=R'^{\mathsf T}R+R^{\mathsf T}R'$, so $R^{\mathsf T}R'=-R'^{\mathsf T}R$. Transposing this last identity with [L2] gives $\Omega^{\mathsf T}=(R^{\mathsf T}R')^{\mathsf T}=R'^{\mathsf T}(R^{\mathsf T})^{\mathsf T}=R'^{\mathsf T}R=-\Omega$. This proves clause 1. [L1, L2, algebra]
+
+1.2 Differentiate $x=Ry+c$ twice using [L2]: $x'=R'y+Ry'+c'$ and $x''=R''y+2R'y'+Ry''+c''$. Multiplying on the left by $R^{\mathsf T}$ gives $R^{\mathsf T}x''=R^{\mathsf T}R''y+2R^{\mathsf T}R'y'+y''+R^{\mathsf T}c''$. [L1, L2, algebra]
+
+2.1 Write the entries of the skew matrix $\Omega(t)$ as $\Omega_{ij}$; by step 1.1, $\Omega_{ji}=-\Omega_{ij}$ and $\Omega_{ii}=0$, so $\Omega$ is determined by the three entries $\Omega_{12},\Omega_{13},\Omega_{23}$. Define $\omega:=(\omega_1,\omega_2,\omega_3)$ by $\omega_1:=-\Omega_{23}$, $\omega_2:=\Omega_{13}$, $\omega_3:=-\Omega_{12}$, and substitute into the defining formula of [L3]: for every $z$, the $i$-th component of $\Omega z$ and of $\omega\times z$ agree by the displayed finite computation of the cross product, so $\Omega z=\omega\times z$. [step 1.1, L3, algebra]
+
+3.1 If also $\omega'\in\mathbb R^3$ satisfies $\Omega z=\omega'\times z$ for every $z$, then $(\omega-\omega')\times z=0$ for every $z$; taking $z$ the standard basis vectors and using bilinearity of the cross product [L3] shows that all components of $\omega-\omega'$ vanish, so $\omega=\omega'$. This proves clause 2. [step 2.1, L3, algebra]
+
+4.1 By definition of $\Omega$ and [L2], $\Omega'=(R^{\mathsf T}R')'=R'^{\mathsf T}R'+R^{\mathsf T}R''$, hence $R^{\mathsf T}R''=\Omega'-R'^{\mathsf T}R'=\Omega'+\Omega^2$, where the last equality uses $R'=R\Omega$, which follows from $R^{\mathsf T}R'=\Omega$ after multiplying on the left by $R$ and using $RR^{\mathsf T}=I_3$; indeed $R'^{\mathsf T}R'=(R\Omega)^{\mathsf T}(R\Omega)=\Omega^{\mathsf T}R^{\mathsf T}R\Omega=\Omega^{\mathsf T}\Omega=-\Omega^2$ by clause 1. Also $R^{\mathsf T}R'=\Omega$. Substituting into step 3.1, $R^{\mathsf T}x''=(\Omega'+\Omega^2)y+2\Omega y'+y''+R^{\mathsf T}c''$. [step 1.1, step 3.1, L1, L2, algebra]
+
+5.1 Applying step 2.1 to the vectors $y,y'$, $\Omega'y=\omega'\times y$, $\Omega^2y=\Omega(\omega\times y)=\omega\times(\omega\times y)$ and $\Omega y'=\omega\times y'$. Substituting these into step 4.1 gives the displayed identity of clause 3. [step 2.1, step 4.1, L3, algebra]
+
+6.1 For $z\in\mathbb R^3$, $\|Rz\|_2^2=(Rz)^{\mathsf T}(Rz)=z^{\mathsf T}R^{\mathsf T}Rz=z^{\mathsf T}z=\|z\|_2^2$ by [L1], [L2] and [L4]; taking square roots proves clause 4. [L1, L2, L4, algebra] ∎
+
+## Remarks
+
+- The vector $\omega(t)$ is the angular velocity of the frame in the body-fixed convention $\Omega=R^{\mathsf T}R'$. The vector attached to the other convention $R'R^{\mathsf T}$ is the spatial angular velocity, and the two differ by a rotation by $R$; this item records only the convention used in clause 3, and its consumers must state which convention they use.
+
+- The identity of clause 3 is a coordinate identity for twice differentiable curves. It asserts nothing about forces: reading the terms $2\omega\times y'$ and $\omega\times(\omega\times y)$ as "Coriolis" and "centrifugal" accelerations is an interpretation made by the physical items, under their own mass and force hypotheses.

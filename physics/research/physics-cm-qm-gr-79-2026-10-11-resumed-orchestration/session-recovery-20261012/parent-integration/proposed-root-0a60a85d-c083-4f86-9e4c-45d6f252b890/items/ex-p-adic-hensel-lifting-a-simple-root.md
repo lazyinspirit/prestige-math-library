@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-p-adic-hensel-lifting-a-simple-root.md

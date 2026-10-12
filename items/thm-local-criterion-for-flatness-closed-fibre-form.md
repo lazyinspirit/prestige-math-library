@@ -49,11 +49,8 @@ Then $M$ is flat over $R$.
 
 **Proof technique:** direct.
 
+ 1.1 The ring $R/\mathfrak m$ is a field. Since $M/\mathfrak mM$ is flat over the $S/\mathfrak mS$-algebra in hypothesis 1, it is in particular a vector space over $R/\mathfrak m$, hence flat over $R/\mathfrak m$. [given, algebra]
 
-1.1 The ring $R/\mathfrak m$ is a field. Since $M/\mathfrak mM$ is flat over the $S/\mathfrak mS$-algebra in hypothesis 1, it is in particular a vector space over $R/\mathfrak m$, hence flat over $R/\mathfrak m$. [given, algebra]
+ 1.2 Hypothesis 2 is exactly the injectivity condition required in [L1] for the ideal $I=\mathfrak m$. Therefore [L1] applies and yields that $M$ is flat over $R$. [L1, given]
 
-
-1.2 Hypothesis 2 is exactly the injectivity condition required in [L1] for the ideal $I=\mathfrak m$. Therefore [L1] applies and yields that $M$ is flat over $R$. [L1, given]
-
-
-2.1 This is the claimed closed-fibre criterion. [algebra] ∎
+ 2.1 This is the claimed closed-fibre criterion. [algebra] ∎ 

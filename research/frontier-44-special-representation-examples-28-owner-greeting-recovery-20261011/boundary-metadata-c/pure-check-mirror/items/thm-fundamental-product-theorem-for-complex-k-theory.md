@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fundamental-product-theorem-for-complex-k-theory.md

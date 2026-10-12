@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-isomorphism-theorem-for-a-coordinate-map.md

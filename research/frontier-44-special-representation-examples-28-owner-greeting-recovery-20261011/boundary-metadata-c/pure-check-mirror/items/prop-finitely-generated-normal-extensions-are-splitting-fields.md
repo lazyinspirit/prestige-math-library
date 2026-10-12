@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-finitely-generated-normal-extensions-are-splitting-fields.md

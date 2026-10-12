@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lie-algebra-of-the-stabilizer-of-a-subspace-and-lie-stable-subspaces.md

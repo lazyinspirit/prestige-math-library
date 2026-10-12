@@ -138,118 +138,27 @@ rank-one trivial smooth bundle ([[def-smooth-vector-bundle-rank-fibre-and-trivia
 **Proof technique:** compute in common local frames, then use exactness and
 transgression for the arbitrary-connection class statement.
 
-1.1 In concatenated local frames, the direct-sum connection has block-diagonal curvature. [F2, F3]
-On a common trivializing neighbourhood, concatenate frames of $E$ and $F$.
-The connection matrix is $\operatorname{diag}(\omega_E,\omega_F)$. The
-structure equation shows that both exterior derivative and matrix wedge
-product preserve this block form, so the curvature matrix is
-$\operatorname{diag}(\Omega_E,\Omega_F)$. [F2, F3]
+1.1 In concatenated local frames, the direct-sum connection has block-diagonal curvature. [F2, F3] On a common trivializing neighbourhood, concatenate frames of $E$ and $F$. The connection matrix is $\operatorname{diag}(\omega_E,\omega_F)$. The structure equation shows that both exterior derivative and matrix wedge product preserve this block form, so the curvature matrix is $\operatorname{diag}(\Omega_E,\Omega_F)$. [F2, F3]
 
-1.2 Pullback of the connection transformation law glues the local pullback matrices, including in boundary charts. [F5, F6, F7]
-Let $f:N\to M$ be smooth and let $e'=eA$ be a frame change on a target
-trivializing overlap. The connection forms satisfy the transformation law
-[F6]. Pull it back. By [F7], pullback preserves matrix products and wedges
-and commutes with $d$, so the pulled-back matrices satisfy the same transition
-law with transition matrix $f^*A$. Thus they glue to the pullback connection
-in boundary as well as interior charts. This supplies the local connection
-calculation without assuming that $f$ is an immersion, submersion, or maps
-interior points only to interior points. [F5, F6, F7]
+1.2 Pullback of the connection transformation law glues the local pullback matrices, including in boundary charts. [F5, F6, F7] Let $f:N\to M$ be smooth and let $e'=eA$ be a frame change on a target trivializing overlap. The connection forms satisfy the transformation law [F6]. Pull it back. By [F7], pullback preserves matrix products and wedges and commutes with $d$, so the pulled-back matrices satisfy the same transition law with transition matrix $f^*A$. Thus they glue to the pullback connection in boundary as well as interior charts. This supplies the local connection calculation without assuming that $f$ is an immersion, submersion, or maps interior points only to interior points. [F5, F6, F7]
 
-1.3 Strict form-level Pontryagin multiplicativity can fail without metric compatibility; two trivial real lines witness the failure. [F1, F3, F11, algebra]
-On $M=\mathbb R^4$, take trivial real line bundles with connections
-$D_E=d+x_1\,dx_2$ and $D_F=d+x_3\,dx_4$. Expanding $D(fs)$ verifies the
-connection Leibniz rule [F11]. Their curvature forms are
-$F_E=dx_1\wedge dx_2$ and $F_F=dx_3\wedge dx_4$. Each rank-one total
-Pontryagin form is $1$. On the direct sum, the complexified curvature is
-block diagonal and the determinant convention gives
-$$c_2((D_E\oplus D_F)_{\mathbb C})=-\frac{F_E\wedge F_F}{(2\pi)^2},\qquad p_1(D_E\oplus D_F)=\frac{dx_1\wedge dx_2\wedge dx_3\wedge dx_4}{(2\pi)^2}\ne0.$$
-Thus this chosen total form differs from $p(D_E)\wedge p(D_F)=1$, so strict
-form-level multiplicativity fails in this explicit example. [F1, F3, F11,
-algebra]
+1.3 Strict form-level Pontryagin multiplicativity can fail without metric compatibility; two trivial real lines witness the failure. [F1, F3, F11, algebra] On $M=\mathbb R^4$, take trivial real line bundles with connections $D_E=d+x_1\,dx_2$ and $D_F=d+x_3\,dx_4$. Expanding $D(fs)$ verifies the connection Leibniz rule [F11]. Their curvature forms are $F_E=dx_1\wedge dx_2$ and $F_F=dx_3\wedge dx_4$. Each rank-one total Pontryagin form is $1$. On the direct sum, the complexified curvature is block diagonal and the determinant convention gives $$c_2((D_E\oplus D_F)_{\mathbb C})=-\frac{F_E\wedge F_F}{(2\pi)^2},\qquad p_1(D_E\oplus D_F)=\frac{dx_1\wedge dx_2\wedge dx_3\wedge dx_4}{(2\pi)^2}\ne0.$$ Thus this chosen total form differs from $p(D_E)\wedge p(D_F)=1$, so strict form-level multiplicativity fails in this explicit example. [F1, F3, F11, algebra]
 
-2.1 The block determinant factors over even-degree curvature entries, giving the total Chern product. [F1, F4, step 1.1, algebra]
-The curvature entries have even degree and commute in the exterior algebra,
-so
-$$\det\!\left(I-\frac{\operatorname{diag}(\Omega_E,\Omega_F)}{2\pi i}\right)=\det\!\left(I-\frac{\Omega_E}{2\pi i}\right)\wedge\det\!\left(I-\frac{\Omega_F}{2\pi i}\right).$$
-Taking each homogeneous degree gives the total Chern form identity. The empty
-determinant gives the rank-zero unit. [F1, F4, step 1.1, algebra]
+2.1 The block determinant factors over even-degree curvature entries, giving the total Chern product. [F1, F4, step 1.1, algebra] The curvature entries have even degree and commute in the exterior algebra, so $$\det\!\left(I-\frac{\operatorname{diag}(\Omega_E,\Omega_F)}{2\pi i}\right)=\det\!\left(I-\frac{\Omega_E}{2\pi i}\right)\wedge\det\!\left(I-\frac{\Omega_F}{2\pi i}\right).$$ Taking each homogeneous degree gives the total Chern form identity. The empty determinant gives the rank-zero unit. [F1, F4, step 1.1, algebra]
 
-2.2 For the ordered-sum orientation, the block-diagonal Pfaffian is the product of the two Pfaffians. [F1, F2, step 1.1, algebra]
-In oriented orthonormal frames, metric compatibility makes the curvature
-matrices skew-symmetric. The concatenated frame has the ordered-sum
-orientation, and the direct-sum curvature is block diagonal by step 1.1. In
-the Pfaffian alternating-sum formula, every nonzero term pairs indices inside
-one block; because the $E$ block precedes the $F$ block, the surviving terms
-factor with no permutation sign. Thus
-$\operatorname{Pf}(\Omega_E\oplus\Omega_F)=
-\operatorname{Pf}(\Omega_E)\wedge\operatorname{Pf}(\Omega_F)$, also when a
-block has rank zero and its Pfaffian is $1$. The normalizing powers of $2\pi$
-respect the product, proving the Euler form identity. [F1, F2, step 1.1,
-algebra]
+2.2 For the ordered-sum orientation, the block-diagonal Pfaffian is the product of the two Pfaffians. [F1, F2, step 1.1, algebra] In oriented orthonormal frames, metric compatibility makes the curvature matrices skew-symmetric. The concatenated frame has the ordered-sum orientation, and the direct-sum curvature is block diagonal by step 1.1. In the Pfaffian alternating-sum formula, every nonzero term pairs indices inside one block; because the $E$ block precedes the $F$ block, the surviving terms factor with no permutation sign. Thus $\operatorname{Pf}(\Omega_E\oplus\Omega_F)= \operatorname{Pf}(\Omega_E)\wedge\operatorname{Pf}(\Omega_F)$, also when a block has rank zero and its Pfaffian is $1$. The normalizing powers of $2\pi$ respect the product, proving the Euler form identity. [F1, F2, step 1.1, algebra]
 
-2.3 The local curvature equation gives $\Omega_{f^*\nabla}=f^*\Omega_\nabla$, hence every characteristic form pulls back exactly. [F3, F4, F5, F7, step 1.2, algebra]
-In the pulled-back frame, [F3], [F5], and [F7] give
-$$\Omega_{f^*\nabla}=d(f^*\omega)+(f^*\omega)\wedge(f^*\omega)=f^*(d\omega+\omega\wedge\omega)=f^*\Omega_\nabla.$$ 
-Invariant-polynomial evaluation [F4] is a finite sum of scalar coefficients
-times wedges of curvature entries, and [F7] preserves those wedges; hence
-every such curvature form pulls back exactly. This includes Chern and
-Pontryagin determinant coefficients and the oriented Euler Pfaffian. Pullback
-preserves the supplied metric and orientation, so the Euler clause stays in
-its stated domain. [F1, F3, F4, F5, F7, step 1.2, algebra]
+2.3 The local curvature equation gives $\Omega_{f^*\nabla}=f^*\Omega_\nabla$, hence every characteristic form pulls back exactly. [F3, F4, F5, F7, step 1.2, algebra] In the pulled-back frame, [F3], [F5], and [F7] give $$\Omega_{f^*\nabla}=d(f^*\omega)+(f^*\omega)\wedge(f^*\omega)=f^*(d\omega+\omega\wedge\omega)=f^*\Omega_\nabla.$$ Invariant-polynomial evaluation [F4] is a finite sum of scalar coefficients times wedges of curvature entries, and [F7] preserves those wedges; hence every such curvature form pulls back exactly. This includes Chern and Pontryagin determinant coefficients and the oriented Euler Pfaffian. Pullback preserves the supplied metric and orientation, so the Euler clause stays in its stated domain. [F1, F3, F4, F5, F7, step 1.2, algebra]
 
-3.1 For metric-compatible real connections, total Pontryagin forms multiply strictly. [F1, step 2.1, algebra]
-Each complexified curvature matrix is skew-symmetric, so its odd Chern forms
-vanish pointwise by [F1]. Apply step 2.1 to the complexifications of $E,F$:
-only even-indexed Chern components remain. In degree $4j$, write their indices
-as $2r,2s$ with $r+s=j$. Since $(-1)^j=(-1)^r(-1)^s$, the signed even
-Chern coefficient of the direct sum is exactly
-$\sum_{r+s=j}p_r(\nabla^E)\wedge p_s(\nabla^F)$. This proves the total
-Pontryagin form identity in every degree. [F1, step 2.1, algebra]
+3.1 For metric-compatible real connections, total Pontryagin forms multiply strictly. [F1, step 2.1, algebra] Each complexified curvature matrix is skew-symmetric, so its odd Chern forms vanish pointwise by [F1]. Apply step 2.1 to the complexifications of $E,F$: only even-indexed Chern components remain. In degree $4j$, write their indices as $2r,2s$ with $r+s=j$. Since $(-1)^j=(-1)^r(-1)^s$, the signed even Chern coefficient of the direct sum is exactly $\sum_{r+s=j}p_r(\nabla^E)\wedge p_s(\nabla^F)$. This proves the total Pontryagin form identity in every degree. [F1, step 2.1, algebra]
 
-3.2 For arbitrary real connections on the summands, odd-odd Chern cross terms change the product only by exact forms. [A1, F1, step 2.1, algebra]
-Let $D_E,D_F$ be arbitrary real connections and first use their direct-sum
-connection $D_E\oplus D_F$. By step 2.1 applied to the complexifications,
-the degree-$4j$ Pontryagin form of the sum expands into even-even and odd-odd
-Chern terms. The even-even terms are precisely
-$p_r(D_E)\wedge p_s(D_F)$ for $r+s=j$. For an odd-odd term
-$c_{2a+1}((D_E)_{\mathbb C})\wedge c_{2b+1}((D_F)_{\mathbb C})$, [F1]
-and full AC give a primitive $\alpha$ for its first factor; the second
-factor is closed by [F1]. Thus the term is
-$d\bigl(\alpha\wedge c_{2b+1}((D_F)_{\mathbb C})\bigr)$. There are only
-finitely many such terms in each rank, so the difference is exact and
-$$[p(D_E\oplus D_F)]=[p(D_E)]\wedge[p(D_F)].$$ [A1, F1, step 2.1,
-algebra]
+3.2 For arbitrary real connections on the summands, odd-odd Chern cross terms change the product only by exact forms. [A1, F1, step 2.1, algebra] Let $D_E,D_F$ be arbitrary real connections and first use their direct-sum connection $D_E\oplus D_F$. By step 2.1 applied to the complexifications, the degree-$4j$ Pontryagin form of the sum expands into even-even and odd-odd Chern terms. The even-even terms are precisely $p_r(D_E)\wedge p_s(D_F)$ for $r+s=j$. For an odd-odd term $c_{2a+1}((D_E)_{\mathbb C})\wedge c_{2b+1}((D_F)_{\mathbb C})$, [F1] and full AC give a primitive $\alpha$ for its first factor; the second factor is closed by [F1]. Thus the term is $d\bigl(\alpha\wedge c_{2b+1}((D_F)_{\mathbb C})\bigr)$. There are only finitely many such terms in each rank, so the difference is exact and $$[p(D_E\oplus D_F)]=[p(D_E)]\wedge[p(D_F)].$$ [A1, F1, step 2.1, algebra]
 
-4.1 Any real connection on $E\oplus F$ has Pontryagin forms cohomologous to those of the direct-sum connection. [F8, step 3.2]
-For any real connection $D$ on $E\oplus F$, apply [F8] degree by degree to
-the invariant polynomial defining each $p_j$. For $j=0$ the curvature
-evaluation is the constant unit; for $j>0$ transgression shows
-$p_j(D)-p_j(D_E\oplus D_F)$ is exact. Consequently
-$[p(D)]=[p(D_E\oplus D_F)]$, which with step 3.2 proves the class formula.
-[F8, step 3.2]
+4.1 Any real connection on $E\oplus F$ has Pontryagin forms cohomologous to those of the direct-sum connection. [F8, step 3.2] For any real connection $D$ on $E\oplus F$, apply [F8] degree by degree to the invariant polynomial defining each $p_j$. For $j=0$ the curvature evaluation is the constant unit; for $j>0$ transgression shows $p_j(D)-p_j(D_E\oplus D_F)$ is exact. Consequently $[p(D)]=[p(D_E\oplus D_F)]$, which with step 3.2 proves the class formula. [F8, step 3.2]
 
-5.1 The comparison theorem identifies the class formula with multiplicativity of the real coefficient images of topological Pontryagin classes. [F9, F10, step 4.1]
-Apply [F9] to $D_E,D_F$, and $D$ on the stated smooth bases. The de Rham
-ring isomorphism [F10] carries the equality in step 4.1 to multiplicativity
-of the real coefficient images of the topological Pontryagin classes. This
-comparison is over $\mathbb R$ only; no integral torsion equality is asserted.
-[F9, F10, step 4.1]
+5.1 The comparison theorem identifies the class formula with multiplicativity of the real coefficient images of topological Pontryagin classes. [F9, F10, step 4.1] Apply [F9] to $D_E,D_F$, and $D$ on the stated smooth bases. The de Rham ring isomorphism [F10] carries the equality in step 4.1 to multiplicativity of the real coefficient images of the topological Pontryagin classes. This comparison is over $\mathbb R$ only; no integral torsion equality is asserted. [F9, F10, step 4.1]
 
-6.1 Empty, zero-rank, rank-one, degenerate-map, boundary, choice, and non-iff cases are covered as stated. [A1, F1, F7, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, step 5.1, cases]
-On an empty base each equality is the equality of the unique empty form.
-Rank-zero Chern, Pontryagin, and Euler forms are units, so a zero-rank
-summand contributes the multiplicative unit. A complex line has only $c_0$
-and $c_1$ components; a real rank-one bundle has $p=1$ by the rank cutoff,
-and there is no odd-rank Euler form in this definition. Forms of degree
-exceeding the base dimension vanish. Steps 1.2 and 2.3 apply to constant and
-rank-deficient maps as written; for constant $f$, $f^*\omega=0$ and
-positive-degree curvature forms pull back to zero. All calculations extend
-to boundary points by [F7]. No statement is an iff. Full AC is used through
-[F1] in step 3.2 for exact odd Chern forms and through [F9] in step 5.1 for
-the topological comparison. The direct-sum, Pfaffian, pullback and explicit
-counterexample calculations are choice-free once the data are supplied.
-[A1, F1, F7, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, step 5.1,
-cases] ∎
+6.1 Empty, zero-rank, rank-one, degenerate-map, boundary, choice, and non-iff cases are covered as stated. [A1, F1, F7, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, step 5.1, cases] On an empty base each equality is the equality of the unique empty form. Rank-zero Chern, Pontryagin, and Euler forms are units, so a zero-rank summand contributes the multiplicative unit. A complex line has only $c_0$ and $c_1$ components; a real rank-one bundle has $p=1$ by the rank cutoff, and there is no odd-rank Euler form in this definition. Forms of degree exceeding the base dimension vanish. Steps 1.2 and 2.3 apply to constant and rank-deficient maps as written; for constant $f$, $f^*\omega=0$ and positive-degree curvature forms pull back to zero. All calculations extend to boundary points by [F7]. No statement is an iff. Full AC is used through [F1] in step 3.2 for exact odd Chern forms and through [F9] in step 5.1 for the topological comparison. The direct-sum, Pfaffian, pullback and explicit counterexample calculations are choice-free once the data are supplied. [A1, F1, F7, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, step 5.1, cases] ∎
 
 ## Source notes
 

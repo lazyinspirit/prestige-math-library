@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-group-algebra-of-a-nontrivial-finite-group-is-a-field.md

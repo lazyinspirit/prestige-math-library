@@ -33,7 +33,7 @@ sources:
   references:
     - title: "Ved Datar, Lectures on Riemannian Geometry (2025)"
       url: https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf
-      locator: "§§20.1 and 24.3, pp.147–149 and 178–179: the flat torus as the complete non-simply-connected flat model"
+      locator: "§9.2, Proposition 9.2.6 and Example 9.2.9, printed pp.55–56: the lattice quotient with its induced flat metric and Riemannian covering; Example 11.1.5, printed p.72: the flat torus has vanishing curvature"
     - title: "J.-H. Eschenburg, Comparison Theorems in Riemannian Geometry"
       url: https://www.math.toronto.edu/~vtk/eschenburg-comparison.pdf
       locator: "§5, pp.17–19: completeness and the exponential map of a flat quotient"
@@ -41,7 +41,7 @@ sources:
       url: https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf
       locator: "Proposition 21.4 and Theorem 21.10, printed pp.543–547: quotient manifolds of free proper actions; Example 21.14, the torus"
 verification:
-  repair: research/frontier-38-owner-30-published-format-prop-flat-torus-model-geometry-receipt.json
+  repair: research/frontier-44-special-representation-examples-28-klr-foundation-elliptic-native31-locator/integration-receipt.json
 ---
 
 ## Statement

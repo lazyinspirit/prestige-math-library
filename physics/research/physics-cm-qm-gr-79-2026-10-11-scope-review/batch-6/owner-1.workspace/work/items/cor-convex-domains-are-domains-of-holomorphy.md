@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-convex-domains-are-domains-of-holomorphy.md

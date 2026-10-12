@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-separating-a-point-from-a-finite-set-in-a-hausdorff-space.md

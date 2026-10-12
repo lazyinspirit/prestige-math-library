@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compactly-supported-covariant-generators-are-dense.md

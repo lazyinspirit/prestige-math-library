@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poisson-representation-for-disc-harmonic-functions.md

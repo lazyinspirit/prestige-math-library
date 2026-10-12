@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-rational-canonical-form-of-an-explicit-four-by-four-matrix.md

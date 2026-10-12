@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-locus-of-an-ideal-equals-zero-locus-of-its-radical.md

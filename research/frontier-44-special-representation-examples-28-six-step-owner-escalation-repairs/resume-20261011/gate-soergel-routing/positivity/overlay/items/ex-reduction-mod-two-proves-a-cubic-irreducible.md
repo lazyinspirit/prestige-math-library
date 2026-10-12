@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-reduction-mod-two-proves-a-cubic-irreducible.md

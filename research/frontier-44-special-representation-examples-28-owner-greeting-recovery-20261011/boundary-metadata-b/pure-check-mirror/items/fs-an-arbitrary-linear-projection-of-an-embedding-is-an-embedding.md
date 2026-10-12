@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-arbitrary-linear-projection-of-an-embedding-is-an-embedding.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-kruskals-minimum-spanning-tree-algorithm.md

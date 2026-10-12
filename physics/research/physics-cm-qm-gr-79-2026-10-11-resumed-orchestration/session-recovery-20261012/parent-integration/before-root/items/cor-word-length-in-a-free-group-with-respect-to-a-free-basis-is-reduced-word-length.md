@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-word-length-in-a-free-group-with-respect-to-a-free-basis-is-reduced-word-length.md

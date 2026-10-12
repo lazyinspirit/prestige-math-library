@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-universal-pontryagin-thom-correspondence-for-unoriented-and-oriented-bordism.md

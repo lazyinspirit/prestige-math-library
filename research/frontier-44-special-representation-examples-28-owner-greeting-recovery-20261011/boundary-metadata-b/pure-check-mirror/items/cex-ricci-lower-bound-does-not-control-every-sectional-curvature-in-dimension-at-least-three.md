@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-ricci-lower-bound-does-not-control-every-sectional-curvature-in-dimension-at-least-three.md

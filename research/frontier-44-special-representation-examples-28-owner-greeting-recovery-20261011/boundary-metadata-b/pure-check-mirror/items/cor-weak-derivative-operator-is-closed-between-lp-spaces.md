@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-weak-derivative-operator-is-closed-between-lp-spaces.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-gradient-represents-directional-derivatives-and-steepest-ascent.md

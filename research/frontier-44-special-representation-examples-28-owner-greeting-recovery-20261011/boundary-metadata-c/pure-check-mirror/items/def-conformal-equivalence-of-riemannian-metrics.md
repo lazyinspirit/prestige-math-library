@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-conformal-equivalence-of-riemannian-metrics.md

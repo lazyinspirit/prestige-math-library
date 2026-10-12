@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-module-meets-an-induced-subgraph-in-a-module.md

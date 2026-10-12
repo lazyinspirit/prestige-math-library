@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-objectwise-isomorphisms-x-isomorphic-to-x-double-dual-supply-a-pivotal-structure.md

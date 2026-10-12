@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-monomial-symmetric-polynomials-form-a-basis.md

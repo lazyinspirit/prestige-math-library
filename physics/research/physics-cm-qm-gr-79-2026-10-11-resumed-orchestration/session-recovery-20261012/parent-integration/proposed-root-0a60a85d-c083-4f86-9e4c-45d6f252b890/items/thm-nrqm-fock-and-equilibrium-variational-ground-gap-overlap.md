@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-fock-and-equilibrium-variational-ground-gap-overlap.md

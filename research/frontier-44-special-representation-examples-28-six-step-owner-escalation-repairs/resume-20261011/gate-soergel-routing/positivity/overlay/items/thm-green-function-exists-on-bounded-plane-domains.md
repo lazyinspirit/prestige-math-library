@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-green-function-exists-on-bounded-plane-domains.md

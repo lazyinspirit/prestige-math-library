@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-bounded-functions-with-sup-metric-are-complete.md

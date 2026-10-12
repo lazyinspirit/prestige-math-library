@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniform-boundary-convergence-of-ball-poisson-integrals.md

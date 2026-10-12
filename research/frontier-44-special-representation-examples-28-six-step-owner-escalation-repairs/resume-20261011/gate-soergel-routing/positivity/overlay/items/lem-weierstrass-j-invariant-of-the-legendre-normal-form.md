@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weierstrass-j-invariant-of-the-legendre-normal-form.md

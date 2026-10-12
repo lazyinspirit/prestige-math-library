@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-frattini-subgroup-of-a-quotient-finite-p-group.md

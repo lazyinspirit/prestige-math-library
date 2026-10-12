@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-nonreduced-bc-root-system-from-a-real-form.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-rigidity-alone-does-not-make-a-tensor-category.md

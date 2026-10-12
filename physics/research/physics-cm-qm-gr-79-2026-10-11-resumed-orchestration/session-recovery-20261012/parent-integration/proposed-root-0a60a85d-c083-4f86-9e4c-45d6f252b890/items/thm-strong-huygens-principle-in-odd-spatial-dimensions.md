@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-strong-huygens-principle-in-odd-spatial-dimensions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-k-to-the-minus-a-membership-in-ell-p.md

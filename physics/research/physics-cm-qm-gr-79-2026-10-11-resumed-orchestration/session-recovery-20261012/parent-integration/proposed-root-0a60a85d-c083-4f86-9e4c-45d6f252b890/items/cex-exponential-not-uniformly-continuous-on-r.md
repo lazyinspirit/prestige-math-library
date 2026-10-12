@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-exponential-not-uniformly-continuous-on-r.md

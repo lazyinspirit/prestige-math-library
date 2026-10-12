@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number.md

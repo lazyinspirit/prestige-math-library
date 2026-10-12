@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-one-dimensional-euler-lagrange-equation.md

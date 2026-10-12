@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-morita-equivalence-is-invertibility-of-a-bimodule.md

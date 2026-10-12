@@ -67,6 +67,4 @@ contains this pair of nonsummable products.
 
 1.3 **The difference has trace one.** $P_0=\langle\cdot,u_0\rangle u_0$ is a rank-one operator whose trace is $\langle u_0,u_0\rangle=1$ by [A3]; note that $u_0\ne0$ because it is a unit vector. [A3]
 
-2.1 **Conclusion.** Suppose that a linear functional $\tau$ on a linear subspace containing the trace-class operators, $S^*S$, and $SS^*$ agreed with the usual trace on trace-class operators and satisfied $\tau(S^*S)=\tau(SS^*)$. By linearity, [step 1.1], and [step 1.3],
-$$0=\tau(S^*S)-\tau(SS^*)=\tau(P_0)=\operatorname{tr}(P_0)=1,$$
-a contradiction. Hence no such cyclic linear extension exists. The products themselves are not trace class by [step 1.2], so [A4] neither asserts nor assigns their individual traces. [step 1.1, step 1.2, step 1.3, A4, assume-contra, discharge-contradiction] ∎
+2.1 **Conclusion.** Suppose that a linear functional $\tau$ on a linear subspace containing the trace-class operators, $S^*S$, and $SS^*$ agreed with the usual trace on trace-class operators and satisfied $\tau(S^*S)=\tau(SS^*)$. By linearity, [step 1.1], and [step 1.3], $$0=\tau(S^*S)-\tau(SS^*)=\tau(P_0)=\operatorname{tr}(P_0)=1,$$ a contradiction. Hence no such cyclic linear extension exists. The products themselves are not trace class by [step 1.2], so [A4] neither asserts nor assigns their individual traces. [step 1.1, step 1.2, step 1.3, A4, assume-contra, discharge-contradiction] ∎ 

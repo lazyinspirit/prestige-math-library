@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-at-a-conjugate-endpoint-the-index-form-is-degenerate.md

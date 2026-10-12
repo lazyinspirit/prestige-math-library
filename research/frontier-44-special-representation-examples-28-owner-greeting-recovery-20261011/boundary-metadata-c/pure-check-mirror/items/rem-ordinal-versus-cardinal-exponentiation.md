@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-ordinal-versus-cardinal-exponentiation.md

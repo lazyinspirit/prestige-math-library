@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-symmetries-framework-symmetry-groups-and-conservation.md

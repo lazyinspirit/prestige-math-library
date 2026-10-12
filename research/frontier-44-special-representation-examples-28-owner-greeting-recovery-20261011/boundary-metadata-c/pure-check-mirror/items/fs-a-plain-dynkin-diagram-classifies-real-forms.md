@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-plain-dynkin-diagram-classifies-real-forms.md

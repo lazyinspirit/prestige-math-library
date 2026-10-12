@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action.md

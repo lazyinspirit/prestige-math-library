@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem.md

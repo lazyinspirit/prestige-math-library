@@ -36,8 +36,6 @@ For $1\le p<q<\infty$, $L^p$ convergence need not imply $L^q$ convergence.
 
 **Proof technique:** direct.
 
-1.1 Direct calculation gives [L1]
-$\mathbb E|X_n|^p=(n+1)^{p/q-1}\to0$, since $p/q-1<0$. Thus $X_n\to0$ in $L^p$ by [L1]. [L1]
+1.1 Direct calculation gives [L1] $\mathbb E|X_n|^p=(n+1)^{p/q-1}\to0$, since $p/q-1<0$. Thus $X_n\to0$ in $L^p$ by [L1]. [L1]
 
-2.1 But $\mathbb E|X_n|^q=(n+1)/(n+1)=1$ for every $n$, so the [step 1.1, L1]
-$L^q$ norm never tends to zero. Hence [L1] rules out $L^q$ convergence. [step 1.1, L1] ∎
+2.1 But $\mathbb E|X_n|^q=(n+1)/(n+1)=1$ for every $n$, so the [step 1.1, L1] $L^q$ norm never tends to zero. Hence [L1] rules out $L^q$ convergence. [step 1.1, L1] ∎ 

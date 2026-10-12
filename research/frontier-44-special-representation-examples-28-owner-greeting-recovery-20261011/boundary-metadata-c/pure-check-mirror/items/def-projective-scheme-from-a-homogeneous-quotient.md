@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-projective-scheme-from-a-homogeneous-quotient.md

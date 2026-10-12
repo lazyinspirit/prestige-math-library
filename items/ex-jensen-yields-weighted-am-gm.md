@@ -35,9 +35,7 @@ $$\prod_{j=1}^m a_j^{\lambda_j}\le\sum_{j=1}^m\lambda_ja_j.$$
 
 **Proof technique:** direct.
 
-1.1 Put a discrete probability measure on $\{1,\dots,m\}$ by[L1, construct]
-$\mathbb P(\{j\})=\lambda_j$, let $f(j)=a_j$, and choose the convex function $\varphi(x)=-\log x$ on $(0,\infty)$. Applying [L1] gives $$-\log\!\left(\sum_{j=1}^m\lambda_ja_j\right)\le-\sum_{j=1}^m\lambda_j\log a_j.$$
+1.1 Put a discrete probability measure on $\{1,\dots,m\}$ by $\mathbb P(\{j\})=\lambda_j$, let $f(j)=a_j$, and choose the convex function $\varphi(x)=-\log x$ on $(0,\infty)$. Applying [L1] gives $$-\log\!\left(\sum_{j=1}^m\lambda_ja_j\right)\le-\sum_{j=1}^m\lambda_j\log a_j.$$. [L1, construct]
 
+2.1 Multiply by $-1$ and exponentiate to obtain $$\prod_{j=1}^m a_j^{\lambda_j}\le\sum_{j=1}^m\lambda_ja_j,$$ the weighted AM-GM inequality. [step 1.1, algebra] ∎
 
-2.1 Multiply by $-1$ and exponentiate to obtain [step 1.1, algebra] ∎
-$$\prod_{j=1}^m a_j^{\lambda_j}\le\sum_{j=1}^m\lambda_ja_j,$$ the weighted AM-GM inequality.

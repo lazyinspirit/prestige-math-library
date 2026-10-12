@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-simple-root-and-factor-hensel-same-lift.md

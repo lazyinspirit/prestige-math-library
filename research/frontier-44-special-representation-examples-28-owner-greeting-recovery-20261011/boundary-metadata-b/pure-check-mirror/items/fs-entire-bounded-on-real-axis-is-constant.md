@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-entire-bounded-on-real-axis-is-constant.md

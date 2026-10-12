@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-values-form-a-dense-g-delta-set.md

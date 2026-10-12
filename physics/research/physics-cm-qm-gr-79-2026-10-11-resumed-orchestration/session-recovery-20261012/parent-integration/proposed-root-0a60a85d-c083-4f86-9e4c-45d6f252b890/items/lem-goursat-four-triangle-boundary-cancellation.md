@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-goursat-four-triangle-boundary-cancellation.md

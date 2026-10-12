@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-algebraic-intersection-one-with-three-geometric-points.md

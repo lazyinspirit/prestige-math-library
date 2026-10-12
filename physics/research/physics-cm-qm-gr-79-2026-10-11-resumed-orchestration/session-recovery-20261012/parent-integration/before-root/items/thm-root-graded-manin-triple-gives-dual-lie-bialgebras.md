@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-root-graded-manin-triple-gives-dual-lie-bialgebras.md

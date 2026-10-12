@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-complex-pullback-is-exact-for-the-middle-perverse-t-structure.md

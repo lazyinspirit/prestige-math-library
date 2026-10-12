@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-quasi-isometry-is-continuous-or-bijective.md

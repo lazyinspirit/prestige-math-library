@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-verdier-duality-identification-intertwines-yoneda-product-and-convolution.md

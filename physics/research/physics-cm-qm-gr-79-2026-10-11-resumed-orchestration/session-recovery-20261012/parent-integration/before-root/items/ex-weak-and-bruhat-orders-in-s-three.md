@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weak-and-bruhat-orders-in-s-three.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-isomorphism-extends-across-a-simple-root-adjunction.md

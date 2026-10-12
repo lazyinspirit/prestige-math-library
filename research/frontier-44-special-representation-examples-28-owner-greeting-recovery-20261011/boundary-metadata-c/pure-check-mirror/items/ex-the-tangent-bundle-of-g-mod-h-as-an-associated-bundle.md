@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-tangent-bundle-of-g-mod-h-as-an-associated-bundle.md

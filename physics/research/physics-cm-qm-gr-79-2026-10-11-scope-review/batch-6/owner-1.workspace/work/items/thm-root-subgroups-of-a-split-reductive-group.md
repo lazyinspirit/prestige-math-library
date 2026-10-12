@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-root-subgroups-of-a-split-reductive-group.md

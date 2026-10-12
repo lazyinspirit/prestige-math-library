@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-power-sums-generate-when-factorial-is-invertible.md

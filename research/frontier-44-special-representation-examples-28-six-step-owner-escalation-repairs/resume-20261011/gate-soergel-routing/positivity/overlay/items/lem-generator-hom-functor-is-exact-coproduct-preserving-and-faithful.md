@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-generator-hom-functor-is-exact-coproduct-preserving-and-faithful.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-monoidal-category-is-isomorphic-to-a-strict-one.md

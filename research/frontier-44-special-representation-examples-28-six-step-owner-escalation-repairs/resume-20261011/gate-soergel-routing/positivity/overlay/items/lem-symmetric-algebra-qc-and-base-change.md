@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-symmetric-algebra-qc-and-base-change.md

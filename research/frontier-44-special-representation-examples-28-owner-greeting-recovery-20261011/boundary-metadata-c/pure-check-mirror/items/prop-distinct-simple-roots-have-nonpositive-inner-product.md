@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-distinct-simple-roots-have-nonpositive-inner-product.md

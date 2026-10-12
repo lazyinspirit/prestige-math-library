@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group.md

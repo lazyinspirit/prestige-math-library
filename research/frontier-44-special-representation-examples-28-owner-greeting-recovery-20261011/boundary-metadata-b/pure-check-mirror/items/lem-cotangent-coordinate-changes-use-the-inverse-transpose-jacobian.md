@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cotangent-coordinate-changes-use-the-inverse-transpose-jacobian.md

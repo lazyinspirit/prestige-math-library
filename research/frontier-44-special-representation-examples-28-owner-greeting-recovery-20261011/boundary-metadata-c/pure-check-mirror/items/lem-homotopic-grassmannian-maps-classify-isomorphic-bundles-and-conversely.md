@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-homotopic-grassmannian-maps-classify-isomorphic-bundles-and-conversely.md

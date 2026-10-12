@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fourier-partial-sums-converge-in-periodic-lp.md

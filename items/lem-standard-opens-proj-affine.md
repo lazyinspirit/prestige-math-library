@@ -61,5 +61,4 @@ $S_{(f)}=0$, and $\operatorname{Spec}0=\varnothing$.
 
 2.2 Empty charts. If $f$ is nilpotent then $D_+(f)=\varnothing$ by [F2] and $S_{(f)}=0$ by [F1], while $\operatorname{Spec}0=\varnothing$ by [F3]; the canonical chart map is therefore the unique map $\varnothing\to\varnothing$, which is an isomorphism. If $S=0$ then $\operatorname{Proj}S=\varnothing$ by [F1], every homogeneous $f$ is nilpotent, and the same conclusion holds. [F1, F2, F3, step 1.1]
 
-3.1 The Axiom of Choice [A1] is inherited only through the construction of $\operatorname{Proj}S$ in [F1] (prime existence and affine gluing); no choice is made in the present argument. Steps 2.1 and 2.2 prove the claim for every homogeneous $f$ of positive degree, including the empty chart. [A1, step 2.1, step 2.2]
-\qed
+3.1 The Axiom of Choice [A1] is inherited only through the construction of $\operatorname{Proj}S$ in [F1] (prime existence and affine gluing); no choice is made in the present argument. Steps 2.1 and 2.2 prove the claim for every homogeneous $f$ of positive degree, including the empty chart. [A1, step 2.1, step 2.2] \qed 

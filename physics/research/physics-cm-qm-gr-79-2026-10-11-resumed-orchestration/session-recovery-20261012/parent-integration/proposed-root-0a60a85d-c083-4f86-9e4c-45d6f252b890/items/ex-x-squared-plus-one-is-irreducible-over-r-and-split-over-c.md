@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-squared-plus-one-is-irreducible-over-r-and-split-over-c.md

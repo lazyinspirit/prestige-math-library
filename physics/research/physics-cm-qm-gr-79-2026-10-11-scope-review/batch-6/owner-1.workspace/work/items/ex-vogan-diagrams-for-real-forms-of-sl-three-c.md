@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-vogan-diagrams-for-real-forms-of-sl-three-c.md

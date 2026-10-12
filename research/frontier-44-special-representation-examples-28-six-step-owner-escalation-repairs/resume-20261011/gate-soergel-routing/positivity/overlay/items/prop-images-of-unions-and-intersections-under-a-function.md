@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-images-of-unions-and-intersections-under-a-function.md

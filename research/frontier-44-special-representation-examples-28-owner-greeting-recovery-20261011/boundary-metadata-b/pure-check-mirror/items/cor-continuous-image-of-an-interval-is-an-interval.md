@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-continuous-image-of-an-interval-is-an-interval.md

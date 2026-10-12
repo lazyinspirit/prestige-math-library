@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-embedding-dimension-at-least-local-dimension.md

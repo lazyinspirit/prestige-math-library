@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-unit-square-has-jacobi-symbol-one.md

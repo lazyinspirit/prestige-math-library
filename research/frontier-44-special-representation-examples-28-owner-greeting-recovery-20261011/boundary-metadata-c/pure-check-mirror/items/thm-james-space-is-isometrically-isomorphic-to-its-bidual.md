@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-james-space-is-isometrically-isomorphic-to-its-bidual.md

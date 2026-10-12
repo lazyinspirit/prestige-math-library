@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cauchy-schwarz-in-an-inner-product-space.md

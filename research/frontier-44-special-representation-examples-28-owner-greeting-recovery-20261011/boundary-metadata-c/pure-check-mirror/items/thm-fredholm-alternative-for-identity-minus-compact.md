@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fredholm-alternative-for-identity-minus-compact.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-localisation-of-modules-commutes-with-quotients-and-sums.md

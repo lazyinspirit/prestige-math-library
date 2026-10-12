@@ -36,11 +36,8 @@ unique limits.
 
 **Proof technique:** Take the constant sequence equal to a nonzero function supported on a null set. Its distance to the zero function is $0$, so it converges to both itself and $0$ in the pseudometric on calligraphic $L^p$.
 
-1.1 Let $f_n:=h$ for every $n$, where $h$ is the function from [L1]. Then [L1, L2]
-$(f_n)$ is constant, hence Cauchy in the representative $p$-distance.
+1.1 Let $f_n:=h$ for every $n$, where $h$ is the function from [L1]. Then $(f_n)$ is constant, hence Cauchy in the representative $p$-distance. [L1, L2]
 
-2.1 Also [L1, step 1.1]
-$$\|f_n-h\|_p=0,\qquad \|f_n-0\|_p=\|h\|_p=0$$ for every $n$. So the same sequence converges both to $h$ and to $0$, even though those two functions are distinct pointwise.
+2.1 Also $$\|f_n-h\|_p=0,\qquad \|f_n-0\|_p=\|h\|_p=0$$ for every $n$. So the same sequence converges both to $h$ and to $0$, even though those two functions are distinct pointwise. [L1, step 1.1]
 
-3.1 Therefore the representative-space distance does not have unique limits [step 2.1]
-before passing to almost-everywhere classes. ∎
+3.1 Therefore the representative-space distance does not have unique limits before passing to almost-everywhere classes. [step 2.1] ∎

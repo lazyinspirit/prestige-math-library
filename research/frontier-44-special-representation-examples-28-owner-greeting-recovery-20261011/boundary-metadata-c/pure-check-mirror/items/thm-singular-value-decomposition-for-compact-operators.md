@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-singular-value-decomposition-for-compact-operators.md

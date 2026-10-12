@@ -1,0 +1,5 @@
+Explicit new model normalization n_inc>0[m^-3], with no sample value: physical Phi=sqrt(n_inc)Psi has unit m^-3/2; all mathematical unit-amplitude fields and source current identities remain unchanged. The current functional is quadratic, so j_phys=n_inc j_unit. Incident J=n_inc hbar k/m, scattered j=n_inc[(hbar k/m)|f|²/r²+O(r^-3)] and ratios cancel n_inc. f remains the unit-incident relative amplitude in metres; all amplitude integrals/partial-wave/Born/on-shell statements remain in that reading.
+
+Only the model definition and stationary physical theorem require naked physical current formula changes in inspected61 carriers. Current lemma remains a mathematical function identity, untouched. Scope/current consumers were inspected only for exact normalization transfer: scope exclusions still apply, n_inc is not target density or measured apparatus data, and no L² preparation is created. No separate semantic consumer audit verdict is asserted.
+
+Lead owns full old/current/alias consumer cone and manifest/contract/readiness integration. Source40/source35/imports, native metadata/readiness/controller/gates untouched; no review/cycle spending.

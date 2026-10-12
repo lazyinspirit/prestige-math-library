@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-generalized-fitting-subgroup-contains-its-centralizer.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coded-quadratic-recurrence-is-a-contraction.md

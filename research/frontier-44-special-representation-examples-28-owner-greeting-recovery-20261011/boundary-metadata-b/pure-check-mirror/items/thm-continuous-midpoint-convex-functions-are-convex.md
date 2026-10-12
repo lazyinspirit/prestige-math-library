@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-midpoint-convex-functions-are-convex.md

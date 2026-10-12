@@ -45,11 +45,8 @@ intrinsic $I$-adic filtration of $N$ agree up to a bounded shift.
 
 **Proof technique:** direct.
 
+ 1.1 For every $n$, one always has $I^nN\subseteq I^nM\cap N$, since $N\subseteq M$. [given]
 
-1.1 For every $n$, one always has $I^nN\subseteq I^nM\cap N$, since $N\subseteq M$. [given]
+ 1.2 Choose $c$ as in [L1]. Then for $n\ge c$, $ I^nM\cap N=I^{n-c}(I^cM\cap N)\subseteq I^{n-c}N $ because $I^cM\cap N\subseteq N$. [L1, algebra]
 
-
-1.2 Choose $c$ as in [L1]. Then for $n\ge c$, $ I^nM\cap N=I^{n-c}(I^cM\cap N)\subseteq I^{n-c}N $ because $I^cM\cap N\subseteq N$. [L1, algebra]
-
-
-2.1 Combining the preceding steps gives the two-sided eventual inclusion, hence the two filtrations are equivalent. [algebra] ∎
+ 2.1 Combining the preceding steps gives the two-sided eventual inclusion, hence the two filtrations are equivalent. [algebra] ∎ 

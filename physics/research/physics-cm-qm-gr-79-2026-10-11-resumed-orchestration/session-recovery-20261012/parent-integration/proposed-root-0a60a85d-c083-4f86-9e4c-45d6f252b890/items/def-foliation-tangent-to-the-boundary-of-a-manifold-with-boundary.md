@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-foliation-tangent-to-the-boundary-of-a-manifold-with-boundary.md

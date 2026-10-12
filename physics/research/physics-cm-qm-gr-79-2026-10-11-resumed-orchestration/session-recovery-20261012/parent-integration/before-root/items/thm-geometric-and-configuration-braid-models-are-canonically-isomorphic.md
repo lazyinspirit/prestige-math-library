@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-geometric-and-configuration-braid-models-are-canonically-isomorphic.md

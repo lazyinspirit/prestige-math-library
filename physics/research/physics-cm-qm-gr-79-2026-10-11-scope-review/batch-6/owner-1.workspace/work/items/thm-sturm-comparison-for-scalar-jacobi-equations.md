@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sturm-comparison-for-scalar-jacobi-equations.md

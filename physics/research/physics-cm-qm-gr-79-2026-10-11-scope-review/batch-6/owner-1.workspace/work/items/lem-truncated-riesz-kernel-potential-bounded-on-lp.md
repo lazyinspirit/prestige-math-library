@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-truncated-riesz-kernel-potential-bounded-on-lp.md

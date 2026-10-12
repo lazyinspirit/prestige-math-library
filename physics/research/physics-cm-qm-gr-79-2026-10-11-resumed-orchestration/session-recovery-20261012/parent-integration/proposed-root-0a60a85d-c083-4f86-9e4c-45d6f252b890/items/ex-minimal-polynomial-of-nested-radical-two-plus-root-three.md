@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-minimal-polynomial-of-nested-radical-two-plus-root-three.md

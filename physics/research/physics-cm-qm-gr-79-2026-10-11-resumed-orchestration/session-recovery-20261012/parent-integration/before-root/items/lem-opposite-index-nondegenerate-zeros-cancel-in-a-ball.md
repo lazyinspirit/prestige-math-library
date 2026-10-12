@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-opposite-index-nondegenerate-zeros-cancel-in-a-ball.md

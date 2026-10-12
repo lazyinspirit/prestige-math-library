@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-finite-dimensional-reduction-for-a-fredholm-map.md

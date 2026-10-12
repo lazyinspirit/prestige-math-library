@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-p-classes-are-open-in-the-exponent.md

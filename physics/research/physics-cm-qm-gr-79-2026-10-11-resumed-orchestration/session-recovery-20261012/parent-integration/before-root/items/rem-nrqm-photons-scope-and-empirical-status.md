@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-photons-scope-and-empirical-status.md

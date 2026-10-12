@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-g-equivariant-maps-are-the-fixed-points-of-the-dual-tensor-representation.md

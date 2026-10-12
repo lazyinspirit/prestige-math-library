@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-dual-object-in-the-endofunctor-category-is-an-adjoint-functor.md

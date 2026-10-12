@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-comparison-triangle-in-the-two-dimensional-space-form.md

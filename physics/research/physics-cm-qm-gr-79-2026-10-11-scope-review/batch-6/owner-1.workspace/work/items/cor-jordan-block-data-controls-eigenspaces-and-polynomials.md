@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-jordan-block-data-controls-eigenspaces-and-polynomials.md

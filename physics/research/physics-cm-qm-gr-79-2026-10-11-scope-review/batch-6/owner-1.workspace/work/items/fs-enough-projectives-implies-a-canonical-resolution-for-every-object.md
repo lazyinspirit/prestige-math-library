@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-enough-projectives-implies-a-canonical-resolution-for-every-object.md

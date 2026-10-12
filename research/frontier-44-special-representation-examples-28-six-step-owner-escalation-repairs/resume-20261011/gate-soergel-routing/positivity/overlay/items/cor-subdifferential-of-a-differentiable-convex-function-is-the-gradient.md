@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-subdifferential-of-a-differentiable-convex-function-is-the-gradient.md

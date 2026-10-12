@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-banach-constraint-directions-are-realised-by-level-set-curves.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-zero-and-split-triangles-are-distinguished.md

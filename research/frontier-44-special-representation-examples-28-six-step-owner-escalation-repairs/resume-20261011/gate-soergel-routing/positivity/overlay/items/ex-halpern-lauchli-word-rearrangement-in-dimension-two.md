@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-halpern-lauchli-word-rearrangement-in-dimension-two.md

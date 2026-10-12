@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-cellular-maps-induce-cellular-chain-maps.md

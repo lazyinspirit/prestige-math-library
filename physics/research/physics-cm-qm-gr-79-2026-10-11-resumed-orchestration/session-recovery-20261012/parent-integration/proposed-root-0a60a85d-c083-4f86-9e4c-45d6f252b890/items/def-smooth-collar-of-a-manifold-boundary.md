@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-collar-of-a-manifold-boundary.md

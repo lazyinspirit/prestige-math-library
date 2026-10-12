@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ideals-in-a-dedekind-domain-are-two-generated.md

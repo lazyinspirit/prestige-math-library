@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-degree-of-the-power-map-on-the-circle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-power-series-expansion-of-the-coordinate-product-on-a-bidisc.md

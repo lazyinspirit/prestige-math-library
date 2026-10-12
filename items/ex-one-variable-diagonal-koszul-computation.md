@@ -51,8 +51,7 @@ $$
 
 **Proof technique:** direct.
 
-1.1 Specialize the diagonal complex to one variable. [F1, F3, given]
-It has the two terms $R^e\theta_1\cong R^e\{2\}$ in homological degree one and $R^e$ in degree zero, with differential $d(\theta_1)=u_1=x\otimes1-1\otimes x$ and augmentation $\mu:R^e\to R$. Thus the displayed augmented complex is $0\longrightarrow R^e\{2\}\xrightarrow{\,x\otimes1-1\otimes x\,}R^e\xrightarrow{\,\mu\,}R\longrightarrow0$. The polynomial Hochschild theorem applies to this diagonal complex under AC [F4]. [F1, F2, F4, given]
+1.1 Specialize the diagonal complex to one variable. [F1, F3, given] It has the two terms $R^e\theta_1\cong R^e\{2\}$ in homological degree one and $R^e$ in degree zero, with differential $d(\theta_1)=u_1=x\otimes1-1\otimes x$ and augmentation $\mu:R^e\to R$. Thus the displayed augmented complex is $0\longrightarrow R^e\{2\}\xrightarrow{\,x\otimes1-1\otimes x\,}R^e\xrightarrow{\,\mu\,}R\longrightarrow0$. The polynomial Hochschild theorem applies to this diagonal complex under AC [F4]. [F1, F2, F4, given]
 
 2.1 Tensor with the regular bimodule and compute the only differential. [F2, F3, step 1.1, algebra] The theorem gives the coefficient complex $R\{2\}\xrightarrow{d}R$. Writing the degree-one generator as $\theta_1$, for $m\in R$ its differential is $d(m\theta_1)=xm-mx=0$, since the left and right actions on the regular bimodule agree. This is a degree-zero map because $x$ and $\theta_1$ both have internal degree $2$. [F2, F3, step 1.1, algebra]
 

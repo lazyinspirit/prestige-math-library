@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-residue-of-exp-over-z-cubed-by-derivative-formula.md

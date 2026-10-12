@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-group-algebra-in-defining-characteristic-is-a-symmetric-frobenius-algebra.md

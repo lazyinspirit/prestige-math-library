@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-closure-distributivity-and-no-short-sequences.md

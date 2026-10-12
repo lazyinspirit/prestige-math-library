@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-triangular-decomposition-of-a-complex-semisimple-lie-algebra.md

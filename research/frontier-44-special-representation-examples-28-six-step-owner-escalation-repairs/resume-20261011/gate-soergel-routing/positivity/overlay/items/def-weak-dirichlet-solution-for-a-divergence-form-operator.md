@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-weak-dirichlet-solution-for-a-divergence-form-operator.md

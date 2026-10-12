@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-value-of-an-irreducible-complex-character-is-real.md

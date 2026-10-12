@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-tangential-jacobi-fields-are-affine-multiples-of-the-velocity.md

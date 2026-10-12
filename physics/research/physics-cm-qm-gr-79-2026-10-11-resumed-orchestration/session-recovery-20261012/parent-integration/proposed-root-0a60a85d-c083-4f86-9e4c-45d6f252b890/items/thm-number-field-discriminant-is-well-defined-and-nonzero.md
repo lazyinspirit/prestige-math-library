@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-number-field-discriminant-is-well-defined-and-nonzero.md

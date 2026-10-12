@@ -1,0 +1,102 @@
+# Mandatory physics instructions
+
+Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+
+**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+
+**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
+
+**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
+
+**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
+
+**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
+
+Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
+
+Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
+
+**Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks. In physics, algorithms may have either domain like definitions. Pure mathematical properties use mathematical result kinds and only mathematical prerequisites; consequences relying on physical premises use `physics-theorem` (or `thought-experiment`). Preserve physical scope and empirical qualifications.
+
+---
+
+# Batch scope and prerequisite local repairer
+
+Be unbiased: assess actual arguments, not the identity of their author or earlier verdicts. Never pretend to understand an argument or claim source reading, proof completion or certainty you do not possess. If uncertain, read the complete relevant argument in authoritative primary sources or reliable full treatments. Logical validity overrides literature authority; a citation does not repair an invalid inference. Report unresolved uncertainty precisely.
+
+Step 2 is only substantive review, local source repair and escalation. Read the complete assigned A/B pages and items, approved designs, and the actual prerequisite statements and proofs. Use existing records only as navigation context. Preserve the richest sound approved claims. Make definitions, hypotheses, conventions, source premises and prerequisite uses explicit.
+
+Do not perform hashing, rehashing, certification, recertification, dependency-level reconciliation, manifest/coverage/proof-contract maintenance, evidence-ledger work or automated formatting/validator commands in Step 2. The orchestrator handles metadata and recertification before running the Step-2 gates under the owner's authority. Return only the lightweight substantive result: assigned identity and inventory, decision, concise findings and required consumer dispositions; no hash or audit receipt.
+
+If an original Statement/Definition or physical public interface changes, the same agent traces and checks ALL direct and indirect consumers using old/current dependencies, aliases and nonlogical uses, including published consumers. Check actual supplier uses and assumptions. Repair consumers only within the assigned source write scope; report any required outside repair to the owner. Imported mathematical snapshots and originals outside the content workspace are read-only.
+
+Inspect actual suppliers before their consumers within the assigned work; mathematical dependencies determine this order. Pair dispatch does not wait for prerequisite-pair acceptance. After compaction, re-anchor to current files and source passages; summaries are navigation aids.
+
+Act only on the preceding COMPLETE first batch review. You have ONE local repair round. Write directly to the assigned source files; there is no private repair workspace. Make the smallest sound repairs that can be completed locally on the same page and rigorously author necessary local intermediate results. Preserve page/pair identities, approved inventory promises and the strongest sound claims. Do not delete promised scope or rehome another page's items. Context outside the assigned write scope is read-only.
+
+Trace and check every consumer of a changed original interface. Return accept when the local findings and required consumer repairs are resolved, or escalate a significant prerequisite gap that cannot be rigorously resolved locally on the same page. Include the precise remaining prerequisite, consuming steps/IDs and required outside repairs. Never request a second local repair. Report the prepared inventory and every affected consumer disposition. Your completed repair returns to the final whole-batch review, which accepts or escalates; this is not independent acceptance.
+
+Do not edit engine state, run history, shared plans or CLAUDE.md. The engine permits only two reviews and one local repair. Owner escalation resolution is outside that loop; only the owner/orchestrator resolves it and runs the Step-2 gates and recertification.
+
+
+---
+
+# This dispatch
+
+run: physics-cm-qm-gr-79-2026-10-11
+role: scope-repairer
+label: scope-repair-50-1
+covers: 50
+output: research/physics-cm-qm-gr-79-2026-10-11-scope-review/batch-50/acceptance-missing
+
+# Batch 50: repair 1
+
+Run: physics-cm-qm-gr-79-2026-10-11
+Batch: 50
+Round: 1
+Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.
+Pages: qm-uncertainty-and-compatibility, qm-uncertainty-and-compatibility-examples
+Items: def-nrqm-uncertainty-strong-spectral-commutation, lem-nrqm-uncertainty-schrodinger-robertson-anticommutator-bound, def-nrqm-uncertainty-preparation-spread, lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators, thm-nrqm-uncertainty-joint-pvm-criterion, lem-nrqm-uncertainty-product-domain-commutator-identity, lem-nrqm-uncertainty-approximation-by-product-domain-vectors, pthm-nrqm-uncertainty-robertson-relation, pthm-nrqm-uncertainty-position-momentum-relation, pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law, pthm-nrqm-uncertainty-position-momentum-incompatible, rem-nrqm-uncertainty-scope-and-empirical-status, ex-nrqm-uncertainty-gaussian-minimum-spread, texp-nrqm-uncertainty-spin-half-incompatibility, cex-nrqm-uncertainty-commutator-zero-on-a-core-is-not-spectral-compatibility, rem-nrqm-uncertainty-energy-time-caveat, rem-nrqm-uncertainty-error-disturbance-distinction, rem-nrqm-uncertainty-examples-scope-limits
+Consolidated findings: [{"id":"def-nrqm-uncertainty-strong-spectral-commutation","type":"local","reason":"Clause (c) does not require D to be dense, so its bounded-operator equivalence fails for D={0}. Even for dense invariant D, strong spectral commutation implies AB=BA on D; the counterexample establishes only that the converse fails. Correct the comparison and define D as dense if a core is intended. Teschl's §4.2 gives the commuting bounded Borel calculus for strongly commuting self-adjoint operators [source](https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf)."},{"id":"lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators","type":"local","reason":"F4 partitions a real interval although h may be complex-valued; partition a bounded subset of C, such as a square containing its range. The norm-limit extension in (b) also needs closedness of A: use T_n x→Tx and AT_n x=T_n Ax→T Ax to infer Tx∈D(A) and ATx=T Ax."},{"id":"lem-nrqm-uncertainty-approximation-by-product-domain-vectors","type":"local","reason":"Step 2.2 claims L2 convergence from scalar dominated convergence without applying it to squared moduli. Give integrable majorants |psi|^2, |x_j psi|^2 and |D_j psi|^2. Step 3.1 defines normalized vectors only for sufficiently large n; reindex that tail as the stated sequence."},{"id":"ex-nrqm-uncertainty-gaussian-minimum-spread","type":"prerequisite","reason":"The example explicitly assumes Countable Choice, but its P2 spectral-law, preparation-moment and position-momentum suppliers also assume the Axiom of Choice. State and list that mathematical premise and identify its spectral-calculus use. Step 1.1 also calls the normalized vector's ray a pure preparation; make the relevant P1 ray assignment explicit."},{"id":"ex-nrqm-uncertainty-gaussian-minimum-spread","type":"local","reason":"With the declared inner product linear in the first argument and P_j psi_sigma=i hbar sigma^-2 Q_j psi_sigma, the pairing is -i hbar sigma^-2 ||Q_j psi_sigma||^2, not +i as written in step 4.1. Its real part is still zero."},{"id":"pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law","type":"local","reason":"Clause (c) needs to restrict conditional states and repeatability to positive-probability joint outcomes; P3 and the cited Lüders result define no conditional state at probability zero. Its scope also says no disturbance statement although clause (c) derives ideal Lüders updates; distinguish those model updates from any universal or apparatus-level disturbance claim."},{"id":"pthm-nrqm-uncertainty-position-momentum-relation","type":"local","reason":"The physical_scope lists P2, P5 and P6 but omits P1, which the Statement adopts to interpret unit vectors as pure preparations. Include P1 in the scope summary."},{"id":"rem-nrqm-uncertainty-scope-and-empirical-status","type":"prerequisite","reason":"The remark says the A page adds no physical assumptions beyond P5 and P6, but the compatible-sharp-observables item also adopts P3 for its ideal Lüders instrument. Record P3 and its role in the finite-bin update claim."},{"id":"rem-nrqm-uncertainty-scope-and-empirical-status","type":"scope","reason":"The blanket phrase no joint position-momentum law exceeds the proved claim: the theorem rules out a joint sharp PVM with the exact spectral marginals, while leaving unsharp joint measurements unclaimed. The blanket no-disturbance wording also needs to distinguish P3's ideal updates from apparatus or universal disturbance claims."},{"id":"rem-nrqm-uncertainty-energy-time-caveat","type":"local","reason":"The cited Heisenberg-picture theorem establishes equality of laws for bounded observables, but this sentence extends it to domain-qualified observables. Restrict that identification to bounded A, or supply a domain-qualified result; the graph-domain Ehrenfest theorem itself supports the stated Schrödinger-picture derivative under its hypotheses."},{"id":"qm-uncertainty-and-compatibility-examples","type":"local","reason":"The page says the companion has two scope remarks, but its six-item inventory includes three remark items: the energy-time caveat, error-disturbance distinction, and examples-scope-limits audit. Correct the page summary and the matching count in rem-nrqm-uncertainty-examples-scope-limits."}]
+Authorized source files: ["items/def-nrqm-uncertainty-strong-spectral-commutation.md","items/lem-nrqm-uncertainty-schrodinger-robertson-anticommutator-bound.md","items/def-nrqm-uncertainty-preparation-spread.md","items/lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators.md","items/thm-nrqm-uncertainty-joint-pvm-criterion.md","items/lem-nrqm-uncertainty-product-domain-commutator-identity.md","items/lem-nrqm-uncertainty-approximation-by-product-domain-vectors.md","items/pthm-nrqm-uncertainty-robertson-relation.md","items/pthm-nrqm-uncertainty-position-momentum-relation.md","items/pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law.md","items/pthm-nrqm-uncertainty-position-momentum-incompatible.md","items/rem-nrqm-uncertainty-scope-and-empirical-status.md","items/ex-nrqm-uncertainty-gaussian-minimum-spread.md","items/texp-nrqm-uncertainty-spin-half-incompatibility.md","items/cex-nrqm-uncertainty-commutator-zero-on-a-core-is-not-spectral-compatibility.md","items/rem-nrqm-uncertainty-energy-time-caveat.md","items/rem-nrqm-uncertainty-error-disturbance-distinction.md","items/rem-nrqm-uncertainty-examples-scope-limits.md","library/non-relativistic-quantum-mechanics/qm-uncertainty-and-compatibility.md","library/non-relativistic-quantum-mechanics/qm-uncertainty-and-compatibility-examples.md"]. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.
+Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.
+Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.
+Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.
+Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.
+Previous repair consumers: [].
+
+
+## Mathematical honesty
+
+Be honest about your understanding of the mathematics. If unsure, search the web
+and consult authoritative sources, reading the complete relevant argument.
+Report unresolved uncertainty and potentially defective published items to the
+owner with exact evidence. Never invent confidence, source reading or proof
+completion. This rule applies to every workflow role, including reviewers.
+
+
+## Mathematical context continuity
+
+Read exact task paths first. Search current owned artifacts before historical runs;
+exclude dispatch logs from routine content searches. Fetch complete relevant source
+sections and dependency statements, using bounded output chunks. A truncated result
+is not evidence of absence; continue reading until the required argument is complete.
+Do not dump entire ledgers, source books, or repository-wide search results into context.
+
+Read each file ONCE per session, in the order the task gives it, and pull only the sections
+and clauses you need — use the rendered evidence bundle first, and read the cited lines
+rather than re-reading whole items. Budget the context you carry: this same
+context is re-sent on every turn. The bundle is an entry point, never a fence: read
+whatever else the mathematics requires, including other items of this frontier and the
+published library, and search the web when a source must be checked.
+
+For writing roles, after each completed item update the task-authorized notes or report with the
+current item IDs, exact claim and conventions, source paths/URLs and locators,
+dependency IDs, decisions, validation results, unresolved obligations, and next action.
+Automatic compaction can occur mid-proof. After compaction or handoff, reread the
+current item, relevant dependency statements, source passages, and these obligations
+before continuing a proof or repair. A summary is a navigation aid, never a substitute
+for mathematical evidence. If a hypothesis or source qualification cannot be
+recovered, record the blocker rather than infer it. Preserve all independent reviews
+and exact-hash gates. Never mark an unfinished obligation complete to save context.
+Checkpoint only in the task-authorized notes/report; do not create transcripts or alter other owners’ artifacts.

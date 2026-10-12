@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-real-singular-cochains-identify-with-functions-on-the-supplied-simplex-basis.md

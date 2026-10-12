@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cech-cocycle-projective-line-o-minus-two.md

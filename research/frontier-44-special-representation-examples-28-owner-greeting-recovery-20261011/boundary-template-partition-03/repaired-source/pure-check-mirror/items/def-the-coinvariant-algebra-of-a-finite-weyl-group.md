@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-the-coinvariant-algebra-of-a-finite-weyl-group.md

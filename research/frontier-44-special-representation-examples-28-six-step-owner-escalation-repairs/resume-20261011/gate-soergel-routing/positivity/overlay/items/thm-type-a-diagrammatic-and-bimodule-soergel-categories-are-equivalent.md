@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-type-a-diagrammatic-and-bimodule-soergel-categories-are-equivalent.md

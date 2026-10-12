@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cofinal-subsystems-have-isomorphic-inverse-limits.md

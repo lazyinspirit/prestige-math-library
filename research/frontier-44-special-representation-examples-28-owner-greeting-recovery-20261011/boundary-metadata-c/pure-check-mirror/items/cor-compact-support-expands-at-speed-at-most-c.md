@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-support-expands-at-speed-at-most-c.md

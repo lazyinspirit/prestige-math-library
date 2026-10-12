@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-formal-negative-consistency-of-ch-and-gch.md

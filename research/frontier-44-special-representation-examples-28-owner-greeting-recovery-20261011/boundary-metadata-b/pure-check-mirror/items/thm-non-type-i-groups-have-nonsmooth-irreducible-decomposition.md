@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-non-type-i-groups-have-nonsmooth-irreducible-decomposition.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-centre-fixing-automorphism-of-an-extraspecial-p-group-preserves-its-commutator-pairing.md

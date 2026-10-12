@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-oriented-intersection-reduces-to-mod-two-intersection.md

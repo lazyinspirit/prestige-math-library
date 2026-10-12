@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-complete-simply-connected-local-cat-zero-globalization.md

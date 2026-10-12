@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-entourage-uniformities-are-generated-by-gauges.md

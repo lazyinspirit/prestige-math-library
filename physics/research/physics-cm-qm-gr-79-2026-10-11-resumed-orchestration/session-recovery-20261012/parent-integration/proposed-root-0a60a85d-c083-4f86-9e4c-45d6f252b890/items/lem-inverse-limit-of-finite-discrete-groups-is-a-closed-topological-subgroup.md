@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-inverse-limit-of-finite-discrete-groups-is-a-closed-topological-subgroup.md

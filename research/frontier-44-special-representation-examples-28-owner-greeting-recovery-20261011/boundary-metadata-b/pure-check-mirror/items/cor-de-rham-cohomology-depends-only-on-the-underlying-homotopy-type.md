@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-de-rham-cohomology-depends-only-on-the-underlying-homotopy-type.md

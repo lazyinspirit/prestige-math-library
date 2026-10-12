@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-short-exact-sequence-of-smooth-vector-bundles-splits.md

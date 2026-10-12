@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sl-n-r-has-property-t-for-n-at-least-three.md

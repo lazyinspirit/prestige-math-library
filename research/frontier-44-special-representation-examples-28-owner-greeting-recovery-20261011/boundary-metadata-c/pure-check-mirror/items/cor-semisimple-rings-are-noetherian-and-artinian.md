@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-semisimple-rings-are-noetherian-and-artinian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-polynomial-ring-over-a-field-is-a-ufd.md

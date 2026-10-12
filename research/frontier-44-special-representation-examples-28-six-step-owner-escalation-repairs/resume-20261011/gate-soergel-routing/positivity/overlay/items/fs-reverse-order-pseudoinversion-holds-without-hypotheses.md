@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-reverse-order-pseudoinversion-holds-without-hypotheses.md

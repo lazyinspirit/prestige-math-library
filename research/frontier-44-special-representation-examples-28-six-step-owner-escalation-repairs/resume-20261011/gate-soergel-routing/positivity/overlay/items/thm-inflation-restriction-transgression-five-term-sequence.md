@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-inflation-restriction-transgression-five-term-sequence.md

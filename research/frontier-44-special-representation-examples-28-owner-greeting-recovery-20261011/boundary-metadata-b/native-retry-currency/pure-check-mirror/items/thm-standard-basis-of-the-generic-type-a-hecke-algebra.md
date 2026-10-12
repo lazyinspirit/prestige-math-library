@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-standard-basis-of-the-generic-type-a-hecke-algebra.md

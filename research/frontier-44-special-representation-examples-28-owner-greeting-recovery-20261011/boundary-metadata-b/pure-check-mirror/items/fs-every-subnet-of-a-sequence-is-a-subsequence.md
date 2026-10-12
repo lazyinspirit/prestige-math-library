@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-subnet-of-a-sequence-is-a-subsequence.md

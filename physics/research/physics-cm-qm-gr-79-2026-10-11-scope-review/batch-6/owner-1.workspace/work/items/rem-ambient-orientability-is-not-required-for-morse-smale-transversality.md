@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-ambient-orientability-is-not-required-for-morse-smale-transversality.md

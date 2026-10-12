@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invertible-group-is-open-and-inversion-is-continuous.md

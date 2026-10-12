@@ -43,11 +43,7 @@ $$F(x) := \begin{cases} 0, & x < 0,\\ 1, & x \ge 0. \end{cases}$$
 
 **Proof technique:** direct.
 
-1.1 The function $F$ is nondecreasing and right-continuous, so [L2] defines its [given, L2]
-Lebesgue-Stieltjes measure $\mu_F$. At the point $0$, one has $F(0)=1$ and $F(0^-)=0$.
+1.1 The function $F$ is nondecreasing and right-continuous, so [L2] defines its Lebesgue-Stieltjes measure $\mu_F$. At the point $0$, one has $F(0)=1$ and $F(0^-)=0$. [L2, given]
 
-2.1 Applying [L1] at $a=0$ gives [step 1.1, L1]
+2.1 Applying [L1] at $a=0$ gives [step 1.1, L1] $$\mu_F(\{0\}) = F(0) - F(0^-) = 1.$$ So the singleton $\{0\}$ has positive measure, and the claim is false. [step 1.1, L1]. [L1, step 1.1] ∎
 
-$$\mu_F(\{0\}) = F(0) - F(0^-) = 1.$$
-
-So the singleton $\{0\}$ has positive measure, and the claim is false. [step 1.1, L1] ∎

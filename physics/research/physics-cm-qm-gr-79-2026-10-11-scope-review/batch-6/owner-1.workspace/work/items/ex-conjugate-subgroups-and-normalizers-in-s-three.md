@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-conjugate-subgroups-and-normalizers-in-s-three.md

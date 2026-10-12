@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-principal-curvatures-of-a-round-sphere.md

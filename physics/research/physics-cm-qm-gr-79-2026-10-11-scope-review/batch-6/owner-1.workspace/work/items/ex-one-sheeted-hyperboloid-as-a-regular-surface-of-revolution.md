@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-sheeted-hyperboloid-as-a-regular-surface-of-revolution.md

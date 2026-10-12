@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-solvable-and-locally-finite-groups-are-amenable.md

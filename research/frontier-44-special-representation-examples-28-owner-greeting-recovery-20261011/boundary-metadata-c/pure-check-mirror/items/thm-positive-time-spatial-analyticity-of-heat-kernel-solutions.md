@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-positive-time-spatial-analyticity-of-heat-kernel-solutions.md

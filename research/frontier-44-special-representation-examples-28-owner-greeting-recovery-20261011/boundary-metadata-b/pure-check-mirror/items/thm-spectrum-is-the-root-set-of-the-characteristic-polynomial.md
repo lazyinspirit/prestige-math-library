@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectrum-is-the-root-set-of-the-characteristic-polynomial.md

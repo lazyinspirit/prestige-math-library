@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-symmetric-algebra-of-a-vector-space.md

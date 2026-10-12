@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-simple-eigenvalue-has-one-dimensional-eigenspace.md

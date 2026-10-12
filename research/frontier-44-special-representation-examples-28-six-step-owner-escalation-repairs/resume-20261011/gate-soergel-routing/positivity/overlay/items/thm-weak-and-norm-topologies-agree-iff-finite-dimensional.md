@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weak-and-norm-topologies-agree-iff-finite-dimensional.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-second-bianchi-identity-for-a-bundle-connection.md

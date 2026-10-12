@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-depth-of-a-finite-local-module-at-most-its-dimension.md

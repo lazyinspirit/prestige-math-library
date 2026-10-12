@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-cyclic-small-mesh-polygon-and-midpoint-energy.md

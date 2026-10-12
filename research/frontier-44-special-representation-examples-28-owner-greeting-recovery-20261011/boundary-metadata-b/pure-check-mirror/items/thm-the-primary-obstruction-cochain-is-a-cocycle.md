@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-primary-obstruction-cochain-is-a-cocycle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-n-sphere-with-its-standard-smooth-atlas.md

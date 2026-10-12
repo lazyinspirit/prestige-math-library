@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-dependence-of-solutions-on-initial-data.md

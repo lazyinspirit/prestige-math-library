@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dual-homomorphisms-are-continuous-and-functorial.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-finite-projective-model-for-khovanov-seidel-modules.md

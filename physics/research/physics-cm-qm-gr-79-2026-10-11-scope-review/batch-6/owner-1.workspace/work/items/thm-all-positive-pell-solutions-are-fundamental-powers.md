@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-all-positive-pell-solutions-are-fundamental-powers.md

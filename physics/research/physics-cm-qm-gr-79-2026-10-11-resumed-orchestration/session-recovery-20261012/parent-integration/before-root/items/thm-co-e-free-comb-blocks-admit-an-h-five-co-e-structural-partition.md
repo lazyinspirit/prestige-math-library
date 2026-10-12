@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-co-e-free-comb-blocks-admit-an-h-five-co-e-structural-partition.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-change-of-variables-for-compactly-supported-functions.md

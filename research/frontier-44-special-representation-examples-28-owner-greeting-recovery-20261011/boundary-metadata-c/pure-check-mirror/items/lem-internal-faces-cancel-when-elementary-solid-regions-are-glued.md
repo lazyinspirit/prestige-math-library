@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-internal-faces-cancel-when-elementary-solid-regions-are-glued.md

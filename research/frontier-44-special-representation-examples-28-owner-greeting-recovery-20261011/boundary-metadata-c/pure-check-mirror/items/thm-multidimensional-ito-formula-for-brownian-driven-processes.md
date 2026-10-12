@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-multidimensional-ito-formula-for-brownian-driven-processes.md

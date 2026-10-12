@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-burgers-slope-obeys-a-riccati-law-along-characteristics.md

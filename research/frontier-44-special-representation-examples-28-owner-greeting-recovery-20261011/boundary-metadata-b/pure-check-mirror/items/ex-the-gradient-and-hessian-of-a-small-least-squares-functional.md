@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-gradient-and-hessian-of-a-small-least-squares-functional.md

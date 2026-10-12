@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-convergence-at-one-noncentral-point-forces-entire-convergence.md

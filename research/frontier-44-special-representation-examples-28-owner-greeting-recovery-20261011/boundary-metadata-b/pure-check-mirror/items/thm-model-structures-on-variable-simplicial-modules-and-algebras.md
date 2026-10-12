@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-model-structures-on-variable-simplicial-modules-and-algebras.md

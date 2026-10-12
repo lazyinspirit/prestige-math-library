@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-naturality-alone-implies-that-two-comparison-maps-commute-with-mayer-vietoris-connectors.md

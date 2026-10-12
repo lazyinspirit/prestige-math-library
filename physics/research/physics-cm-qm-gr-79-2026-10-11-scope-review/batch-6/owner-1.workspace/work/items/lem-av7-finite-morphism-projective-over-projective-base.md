@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-av7-finite-morphism-projective-over-projective-base.md

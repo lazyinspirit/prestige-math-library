@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-cw-pairs-admit-finite-simplicial-homotopy-models.md

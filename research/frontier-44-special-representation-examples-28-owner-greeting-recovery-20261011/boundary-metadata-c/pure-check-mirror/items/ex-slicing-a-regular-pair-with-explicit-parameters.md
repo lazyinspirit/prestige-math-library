@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-slicing-a-regular-pair-with-explicit-parameters.md

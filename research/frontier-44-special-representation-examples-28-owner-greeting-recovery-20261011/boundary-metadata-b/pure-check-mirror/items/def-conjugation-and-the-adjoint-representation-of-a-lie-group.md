@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-conjugation-and-the-adjoint-representation-of-a-lie-group.md

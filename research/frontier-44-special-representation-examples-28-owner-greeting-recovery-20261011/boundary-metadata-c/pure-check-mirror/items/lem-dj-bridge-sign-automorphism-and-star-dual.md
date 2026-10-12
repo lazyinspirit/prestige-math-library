@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dj-bridge-sign-automorphism-and-star-dual.md

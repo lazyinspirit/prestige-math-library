@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclotomic-klr-induction-is-projective-on-the-right.md

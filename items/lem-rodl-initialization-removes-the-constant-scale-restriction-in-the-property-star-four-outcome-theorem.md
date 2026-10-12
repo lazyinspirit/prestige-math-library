@@ -55,26 +55,18 @@ $|G|\ge x^{-d}$, at least one of the following holds:
 
 **Proof technique:** apply Rödl at the fixed scale $\xi=c^{10}$, then transfer each outcome of the constant-scale theorem back to $G$ by choosing $d$ large enough.
 
+ 1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [L1], and set $\xi:=c^{10}$. Let $\delta>0$ be the constant from [L2] for the family $\overline{\mathcal F}$ and the parameter $\xi$. [L1, L2, choose]
 
-1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [L1], and set $\xi:=c^{10}$. Let $\delta>0$ be the constant from [L2] for the family $\overline{\mathcal F}$ and the parameter $\xi$. [L1, L2, choose]
+ 2.1 Choose $d$ so large that $$ d\ge 58c_4,\qquad 2^{-d}<c^{10},\qquad \delta\ge 2^{116c_4-d},\qquad \delta\ge 2^{c_2+27c_4/c_3-d}. $$ [step 1.1, choose]
 
+ 3.1 By [L2], the graph $G$ has a $\xi$-restricted induced subgraph $F\subseteq G$ with $|F|\ge \delta|G|$. Since $x<2^{-d}<\xi$, the parameter $x$ lies in the range allowed by [L1], so [L1] applies to $F$. [step 2.1, L1, L2]
 
-2.1 Choose $d$ so large that $$ d\ge 58c_4,\qquad 2^{-d}<c^{10},\qquad \delta\ge 2^{116c_4-d},\qquad \delta\ge 2^{c_2+27c_4/c_3-d}. $$ [step 1.1, choose]
+ 4.1 If [L1] gives an $x$-restricted induced subgraph of $F$ with at least $x^{22c_4}|F|$ vertices, then $$ x^{22c_4}|F|\ge x^{22c_4}\delta|G| \ge x^{22c_4}2^{58c_4-d}|G| \ge x^{23c_4}|G|, $$ because $x<2^{-d}$ implies $x^{c_4}\le 2^{58c_4-d}$. Thus outcome 1 holds. [step 2.1, step 3.1, L1, algebra]
 
+ 4.2 If [L1] gives a clique or stable set of size at least $(x^{30c_4}|F|)^{c_1}$, then the same estimate yields $(x^{30c_4}|F|)^{c_1}\ge (x^{31c_4}|G|)^{c_1}$, so outcome 3 holds. [step 2.1, step 3.1, L1, algebra]
 
-3.1 By [L2], the graph $G$ has a $\xi$-restricted induced subgraph $F\subseteq G$ with $|F|\ge \delta|G|$. Since $x<2^{-d}<\xi$, the parameter $x$ lies in the range allowed by [L1], so [L1] applies to $F$. [step 2.1, L1, L2]
+ 4.3 If [L1] gives a complete or anticomplete $(k,|F|/k^{c_2+27c_4/c_3})$-blockade with $k\ge 2$, let $j:=\lceil k\rceil$. Its actual length is integral and at least $k$, hence at least $j$, while $$ \frac{|F|}{k^{c_2+27c_4/c_3}} \ge \frac{\delta|G|}{k^{c_2+27c_4/c_3}} \ge \frac{|G|}{k^d}\ge\frac{|G|}{j^d}. $$ Thus the same blocks form a complete or anticomplete $(j,|G|/j^d)$-blockade. If $j\ge x^{-1}$ this is outcome 4; if $j<x^{-1}$, then the integer $j\in[2,x^{-1}]$ gives outcome 2. [step 2.1, step 3.1, L1, algebra, choose, cases]
 
+ 4.4 If [L1] gives a pure or $x$-sparse $(\ell,|F|/\ell^{29c_4})$-blockade with $\ell\in[c^{-1},x^{-2}]$, set $$ k:=\lfloor\sqrt{\ell}\rfloor. $$ Then $k$ is an integer in $[2,x^{-1}]$, because $\ell\ge c^{-1}\ge 2^4$ and $\sqrt{\ell}\le x^{-1}$. The blockade has length at least $\ell\ge k$, and $\ell<(k+1)^2\le 4k^2$, so $$ \frac{|F|}{\ell^{29c_4}}\ge \frac{|F|}{(4k^2)^{29c_4}}=\frac{|F|}{2^{58c_4}k^{58c_4}} \ge \frac{\delta|G|}{2^{58c_4}k^{58c_4}} \ge \frac{|G|}{k^d}, $$ because $k\ge 2$ and step 2.1 gives $\delta\ge 2^{116c_4-d}$. Hence outcome 2 holds. [step 2.1, step 3.1, L1, algebra, choose]
 
-4.1 If [L1] gives an $x$-restricted induced subgraph of $F$ with at least $x^{22c_4}|F|$ vertices, then $$ x^{22c_4}|F|\ge x^{22c_4}\delta|G| \ge x^{22c_4}2^{58c_4-d}|G| \ge x^{23c_4}|G|, $$ because $x<2^{-d}$ implies $x^{c_4}\le 2^{58c_4-d}$. Thus outcome 1 holds. [step 2.1, step 3.1, L1, algebra]
-
-
-4.2 If [L1] gives a clique or stable set of size at least $(x^{30c_4}|F|)^{c_1}$, then the same estimate yields $(x^{30c_4}|F|)^{c_1}\ge (x^{31c_4}|G|)^{c_1}$, so outcome 3 holds. [step 2.1, step 3.1, L1, algebra]
-
-
-4.3 If [L1] gives a complete or anticomplete $(k,|F|/k^{c_2+27c_4/c_3})$-blockade with $k\ge 2$, let $j:=\lceil k\rceil$. Its actual length is integral and at least $k$, hence at least $j$, while $$ \frac{|F|}{k^{c_2+27c_4/c_3}} \ge \frac{\delta|G|}{k^{c_2+27c_4/c_3}} \ge \frac{|G|}{k^d}\ge\frac{|G|}{j^d}. $$ Thus the same blocks form a complete or anticomplete $(j,|G|/j^d)$-blockade. If $j\ge x^{-1}$ this is outcome 4; if $j<x^{-1}$, then the integer $j\in[2,x^{-1}]$ gives outcome 2. [step 2.1, step 3.1, L1, algebra, choose, cases]
-
-
-4.4 If [L1] gives a pure or $x$-sparse $(\ell,|F|/\ell^{29c_4})$-blockade with $\ell\in[c^{-1},x^{-2}]$, set $$ k:=\lfloor\sqrt{\ell}\rfloor. $$ Then $k$ is an integer in $[2,x^{-1}]$, because $\ell\ge c^{-1}\ge 2^4$ and $\sqrt{\ell}\le x^{-1}$. The blockade has length at least $\ell\ge k$, and $\ell<(k+1)^2\le 4k^2$, so $$ \frac{|F|}{\ell^{29c_4}}\ge \frac{|F|}{(4k^2)^{29c_4}}=\frac{|F|}{2^{58c_4}k^{58c_4}} \ge \frac{\delta|G|}{2^{58c_4}k^{58c_4}} \ge \frac{|G|}{k^d}, $$ because $k\ge 2$ and step 2.1 gives $\delta\ge 2^{116c_4-d}$. Hence outcome 2 holds. [step 2.1, step 3.1, L1, algebra, choose]
-
-
-5.1 The four branches 4.1-4.4 exhaust the conclusion of [L1], so one of the stated outcomes always holds for $G$. [step 3.1, step 4.1, step 4.2, step 4.3, step 4.4, cases-exhaustive] ∎
+ 5.1 The four branches 4.1-4.4 exhaust the conclusion of [L1], so one of the stated outcomes always holds for $G$. [step 3.1, step 4.1, step 4.2, step 4.3, step 4.4, cases-exhaustive] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-nonnegative-integrable-with-zero-integral-vanishes.md

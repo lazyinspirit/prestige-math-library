@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-horizontal-composition-of-natural-transformations-is-natural.md

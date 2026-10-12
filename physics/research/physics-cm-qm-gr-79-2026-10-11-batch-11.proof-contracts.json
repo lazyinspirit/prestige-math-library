@@ -1,0 +1,1825 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11",
+  "scope": [
+    "lem-cm-uniform-second-order-remainder-bound",
+    "lem-cm-linearized-propagation-of-covariance",
+    "cor-cm-linearization-error-bounds",
+    "ex-cm-math-evidence-pendulum-propagation",
+    "ex-cm-math-evidence-exact-versus-linear-variance",
+    "ex-cm-math-evidence-chebyshev-sample-mean-check",
+    "ex-cm-math-evidence-remainder-bound-check",
+    "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+    "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+    "lem-cm-finite-iid-sample-mean-bound"
+  ],
+  "contracts": {
+    "lem-cm-uniform-second-order-remainder-bound": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$, let $U\\subseteq\\mathbb R^m$ be open and convex, $a,a+h\\in U$, and $f\\in C^{k+1}(U)$. Write $\\iota:\\mathbb N\\to\\mathbb R$ for the canonical-natural map of [[def-multivariable-taylor-polynomial]]. Then some $\\theta\\in(0,1)$ satisfies\n\n$$f(a+h)=T_kf(a;h)+\\sum_{|\\alpha|=k+1}\\frac{D^\\alpha f(a+\\theta h)}{\\iota(\\alpha!)}h^\\alpha.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-multivariable-taylor-polynomial",
+          "source_section": "Definition",
+          "quote": "For a natural $k$, a map $f:U\\subseteq\\mathbb R^m\\to\\mathbb R$ with the derivatives $D^\\alpha f(a)$ for $|\\alpha|\\le k$, and with $\\iota:\\mathbb N\\to\\mathbb R$ the canonical embedding of [[def-canonical-natural]], the **Taylor polynomial of degree at most $k$ at $a$** is\n\n$$T_kf(a;h):=\\sum_{|\\alpha|\\le k}\\frac{D^\\alpha f(a)}{\\iota(\\alpha!)}h^\\alpha.$$\n\nThe multi-index conventions are those of [[def-ck-and-multi-index-notation-in-several-variables]], and the displayed sum is the real finite sum of [[def-finite-sum]]. When $m=1$, this agrees with the polynomial of [[def-taylor-polynomial-and-remainder]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\mu,y\\in U$ and put $v:=y-\\mu$. If $v=0$, then $h(y)-h(\\mu)-\\nabla h(\\mu)\\cdot v=0$ and the estimate is $0\\le0$; assume from now on that $v\\neq0$. Since $h$ is $C^2$ and $U$ is open and convex, [L1] applied with $k=1$, $f=h$, $a=\\mu$ and increment $v$ supplies a $\\theta\\in(0,1)$ with $h(y)=T_1h(\\mu;v)+\\sum_{\\lvert\\alpha\\rvert=2}\\frac{D^\\alpha h(\\mu+\\theta v)}{\\alpha!}v^\\alpha$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L2] the polynomial term is $h(\\mu)+\\nabla h(\\mu)\\cdot v$, and by [L3] the second-order sum is $\\tfrac12v^{\\mathsf T}H_h(\\mu+\\theta v)v$. Hence the Taylor remainder is $$R:=h(y)-h(\\mu)-\\nabla h(\\mu)\\cdot v=\\tfrac12\\,v^{\\mathsf T}H_h(\\mu+\\theta v)v .$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Convexity puts $\\mu+\\theta v\\in U$, so the hypothesis gives $\\lVert H_h(\\mu+\\theta v)\\rVert\\le B$; [L4] with $A=H_h(\\mu+\\theta v)$ yields $\\lvert v^{\\mathsf T}H_h(\\mu+\\theta v)v\\rvert\\le B\\lvert v\\rvert^2$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Taking absolute values in step 2.1 and inserting step 2.2 gives $\\lvert R\\rvert\\le\\tfrac12B\\lvert v\\rvert^2=\\tfrac{B}{2}\\lvert y-\\mu\\rvert^2$, and the case $v=0$ was already disposed of in step 1.1. [step 1.1, step 2.1, step 2.2, algebra] \u220e\n\nThe bound uses only the operator norm of the Hessian; no symmetry of $H_h$ is needed beyond the identification of the second-order multi-index sum with the quadratic form in [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 1.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement concerns finitely many points of an open convex set and one Taylor point; no empty family, empty index set or empty domain occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats v=0 separately with bound 0<=0, and B=0 is admissible; step 2.1 then forces R=0 because the right-hand side vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional case m=1 is included throughout: the Hessian is the 1x1 matrix of the second derivative and step 2.2 bounds its quadratic form by B; no dimension >= 2 assumption is used."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degeneracy is not excluded: h may have vanishing Hessian (B=0) and then step 2.1 gives equality; the hypotheses indeed exclude only the empty domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the Lagrange point mu + theta v, which lies in the open convex set U by the convexity argument of step 2.2; no boundary point of U is evaluated and no endpoint hypothesis is needed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 selects the single Taylor point theta that (L1) supplies for the fixed pair (mu, y); this is a definite finite selection, not a simultaneous choice from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is an inequality, not an equivalence, so there is no forward implication of a biconditional to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: a bounded Taylor remainder is not asserted to imply a Hessian bound."
+        }
+      ]
+    },
+    "lem-cm-linearized-propagation-of-covariance": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]), let $m\\ge1$, and let\n$X=(X_1,\\dots,X_m):\\Omega\\to\\mathbb R^m$ be a random element with target\n$(\\mathbb R^m,\\mathcal B(\\mathbb R^m))$ that is **square-integrable**:\n$$E\\bigl[|X|^2\\bigr]=\\sum_{i=1}^{m}E\\bigl[X_i^2\\bigr]<+\\infty ,$$\nwhere $|\\cdot|$ is the Euclidean norm of [[def-euclidean-inner-product]].\nIts **mean vector** is\n$$\\mu=E[X]:=\\bigl(E[X_1],\\dots,E[X_m]\\bigr)\\in\\mathbb R^m ,$$\nthe coordinates being the expectations of\n[[def-moments-variance-and-covariance]]. Its **covariance matrix** is the\n$m\\times m$ real matrix of [[def-matrix-space]]\n$$\\Sigma=\\operatorname{Cov}(X):=\\bigl(\\Sigma_{ij}\\bigr)_{i,j=1}^{m},\\qquad \\Sigma_{ij}:=E\\bigl[(X_i-\\mu_i)(X_j-\\mu_j)\\bigr]\\in\\mathbb R .$$\nFor a random vector $Y$ the entries $\\Sigma_{ij}$ are also written\n$\\operatorname{Cov}(X_i,X_j)$, and $\\Sigma_{ii}=\\operatorname{Var}(X_i)$.\n\n### Well-definedness and elementary properties\n\n**Integrability of the entries.** Square-integrability gives\n$E[X_i^2]<+\\infty$ for each $i$. Since $X$ takes values in a probability\nspace, the elementary inequality\n$$|X_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)$$\nand monotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) show that each\n$X_i$ is integrable, so $\\mu_i=E[X_i]$ is a finite real number\n([[def-moments-variance-and-covariance]]). Likewise\n$$|X_i-\\mu_i|\\le |X_i|+|\\mu_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)+|\\mu_i|,$$\nso $X_i-\\mu_i$ is square-integrable and integrable. Finally\n$$|(X_i-\\mu_i)(X_j-\\mu_j)|\\le \\tfrac12\\bigl((X_i-\\mu_i)^2+(X_j-\\mu_j)^2\\bigr),$$\nand the right-hand side is integrable by additivity, monotonicity and\nhomogeneity of the nonnegative integral\n([[cor-additivity-of-the-nonnegative-lebesgue-integral]],\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]); hence every\n$\\Sigma_{ij}$ is a finite real number.\n\n**Symmetry.** For all $i,j$ the real numbers $(X_i-\\mu_i)(X_j-\\mu_j)$ and\n$(X_j-\\mu_j)(X_i-\\mu_i)$ are equal pointwise, so $\\Sigma_{ij}=\\Sigma_{ji}$;\nthus $\\Sigma^{\\mathsf T}=\\Sigma$.\n\n**Positive semidefiniteness.** Let $z=(z_1,\\dots,z_m)\\in\\mathbb R^m$. The\nrandom variable $W:=\\sum_{i=1}^{m}z_iX_i$ is a finite linear combination of\nsquare-integrable random variables, hence square-integrable, and bilinearity\nof covariance ([[lem-variance-and-covariance-identities-for-random-variables]])\ngives\n$$z^{\\mathsf T}\\Sigma z=\\sum_{i,j=1}^{m}z_iz_j\\operatorname{Cov}(X_i,X_j) =\\operatorname{Cov}(W,W)=\\operatorname{Var}(W) =E\\bigl[(W-E[W])^2\\bigr]\\ge0 ,$$\nthe inequality holding because $(W-E[W])^2\\ge0$ pointwise and expectation is\nmonotone ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]). In\nparticular $z^{\\mathsf T}\\Sigma z=0$ exactly when $W$ is almost surely\nconstant, so $\\Sigma$ is positive definite exactly when for every $z\\neq0$\nthe random variable $\\sum_{i=1}^{m}z_iX_i$ fails to be almost surely\nconstant.\n\nNo independence hypothesis is used anywhere in this definition; $\\Sigma$\nrecords the pairwise covariances of the coordinates.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-coordinatewise-measurability-into-r-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $(X,\\mathcal{A})$ be a measurable space, and let\n$f = (f_1,\\dots,f_n) : X \\to \\mathbb{R}^n$. Then $f$ is measurable if and only\nif each coordinate function $f_j : X \\to \\mathbb{R}$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-matrix-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]) and let $m, n \\in \\mathbb{N}$. Recall that a\nnatural number is a von Neumann natural ([[def-natural-numbers]]), so\n$m = \\{0, \\dots, m-1\\}$ and $n = \\{0, \\dots, n-1\\}$\n([[lem-nat-order-is-membership]]), and let $m \\times n$ be their cartesian\nproduct. An **$m$ by $n$ matrix over $F$** is an element of the function space\n$F^{\\,m \\times n}$ ([[def-function-space]]), that is a function\n$a : m \\times n \\to F$; we write\n\n$$a_{ij} \\;:=\\; a(i,j) \\qquad (i < m,\\; j < n)$$\n\nfor its **entries**, $i$ being the **row index** and $j$ the **column index**.\nWrite\n\n$$M_{m \\times n}(F) \\;:=\\; F^{\\,m \\times n},$$\n\nand $M_n(F) := M_{n \\times n}(F)$ for the square case.\n\nSince $M_{m \\times n}(F)$ *is* the function space $F^{\\,m \\times n}$, it is a\nvector space over $F$ with the pointwise operations of [[def-function-space]],\nwhich read **entrywise**:\n\n$$(a + b)_{ij} = a_{ij} + b_{ij}, \\qquad (\\lambda a)_{ij} = \\lambda\\, a_{ij} \\qquad (i < m,\\; j < n),$$\n\nand the zero of $M_{m \\times n}(F)$ is the matrix all of whose entries are $0_F$.\nNo verification is needed beyond that already carried out in\n[[def-function-space]] for an arbitrary index set: this is the case\n$X = m \\times n$.\n\n**Both indices start at $0$.** The rows are indexed by $i \\in m = \\{0,\\dots,m-1\\}$\nand the columns by $j \\in n = \\{0,\\dots,n-1\\}$, so the entries of a $2$ by $3$\nmatrix are $a_{00}, a_{01}, a_{02}, a_{10}, a_{11}, a_{12}$.\n\n**The degenerate shapes.** $\\mathbb{N}$ contains $0$, so $m = 0$ and $n = 0$ are\ngenuine cases. If $m = 0$ or $n = 0$ then $m \\times n = \\varnothing$, so\n$M_{m \\times n}(F)$ has exactly one element, the empty function, and is the zero\nspace; there is no matrix of shape $0$ by $n$ other than that one.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For each $i$ the real-valued function $x\\mapsto h_i(\\mu)+\\sum_{j=1}^{m}a_{ij}(x_j-\\mu_j)$ is Borel measurable on $U$ by [L4], and each coordinate $X_j$ is a random variable, so $T_i(X)=h_i(\\mu)+\\sum_{j=1}^{m}a_{ij}(X_j-\\mu_j)$ is measurable; moreover it is integrable as a finite linear combination of the integrable variables $1$ and $X_j-\\mu_j$ by [L2] and [L1]. Since all coordinates of $T\\circ X$ are measurable, $T\\circ X$ is a random element of $\\mathbb R^d$ by [L4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For each $i$, [L2] and $E[X_j]=\\mu_j$ give $E[T_i(X)]=h_i(\\mu)+\\sum_{j=1}^{m}a_{ij}E[X_j-\\mu_j]=h_i(\\mu)+\\sum_{j=1}^{m}a_{ij}\\cdot0=h_i(\\mu)$, so $E[T(X)]=h(\\mu)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix $i,j$. By step 2.1, $T_i(X)-E[T_i(X)]=\\sum_{k=1}^{m}a_{ik}(X_k-\\mu_k)$ and likewise with $j$ in place of $i$. The identity $\\operatorname{Cov}(U,V)=E[UV]-E[U]E[V]$ of [L2] and the finite linearity of expectation give $$\\operatorname{Cov}\\bigl(T_i(X),T_j(X)\\bigr)=\\sum_{k=1}^{m}\\sum_{l=1}^{m}a_{ik}a_{jl}\\,E\\bigl[(X_k-\\mu_k)(X_l-\\mu_l)\\bigr]=\\sum_{k,l=1}^{m}a_{ik}a_{jl}\\Sigma_{kl},$$ the expectations being finite by [L1]; equivalently, covariance is bilinear on the finite combinations by [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L5], $\\sum_{k,l=1}^{m}a_{ik}a_{jl}\\Sigma_{kl}=\\bigl(A\\Sigma A^{\\mathsf T}\\bigr)_{ij}$ for every $i,j$; with steps 2.1 and 3.1 this proves $E[T(X)]=h(\\mu)$ and $\\operatorname{Cov}(T(X))=A\\Sigma A^{\\mathsf T}$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "L5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "m and d are at least 1 and every sum runs over a nonempty finite index set; no empty family or empty product occurs in the statement or proof."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If X = mu almost surely then Sigma = 0 by (L1) and step 3.1 gives Cov(T(X)) = A 0 A^T = 0, which is the zero matrix of the asserted formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The scalar case m = d = 1 is included: A is the 1x1 matrix (h prime at mu) and step 3.1 reduces to Var(T(X)) = h prime (mu)^2 Var(X)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A may be rank-deficient and Sigma singular; steps 2.1 to 3.1 use only finite sums, measurability and covariance bilinearity, so no invertibility of A, Sigma or h is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval parameter or limiting process occurs: mu is an interior point of the open set U and the computation is purely algebraic."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used; the coordinates i, j, k, l range over the fixed finite index sets and the argument is a universal computation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts an identity and a mean, not an equivalence, so there is no forward direction of a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the covariance of an arbitrary nonlinear observation map is not claimed to equal A Sigma A^T."
+        }
+      ]
+    },
+    "cor-cm-linearization-error-bounds": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-uniform-second-order-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex\n([[def-convex-subset-of-euclidean-space]]), let $h:U\\to\\mathbb R$ be of class\n$C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $B\\in[0,+\\infty)$\nsatisfy\n$$\\bigl\\lVert H_h(x)\\bigr\\rVert\\le B\\qquad\\text{for every }x\\in U,$$\nwhere $H_h(x)$ is the Hessian of $h$ at $x$\n([[def-hessian-and-euclidean-critical-point]]) and $\\lVert\\cdot\\rVert$ is the\noperator norm on the finite-dimensional inner-product space of real\n$m\\times m$ matrices ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]).\nThen for all $\\mu,y\\in U$,\n$$\\bigl\\lvert h(y)-h(\\mu)-\\nabla h(\\mu)\\cdot(y-\\mu)\\bigr\\rvert \\le\\frac{B}{2}\\,\\lvert y-\\mu\\rvert^2 ,$$\nwhere $\\nabla h(\\mu)\\cdot(y-\\mu)$ is the Euclidean pairing\n([[def-euclidean-inner-product]], [[def-jacobian-matrix-and-gradient]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-continuous-preimages-of-borel-sets-are-borel",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is continuous between topological spaces, then\n$f^{-1}[B]\\in\\mathcal B(X)$ for every $B\\in\\mathcal B(Y)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A})$ and $(Y,\\mathcal{B})$ be measurable spaces\n([[def-measurable-space]]). A function $f : X \\to Y$ is **measurable** when\n\n$$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$\n\nEquivalently, the family\n\n$$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$\n\nis a sigma-algebra on $Y$ containing $\\mathcal{B}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-random-element-and-real-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space and let\n$(S,\\Sigma)$ be a measurable space. A **random element** of $S$ is a measurable\nmap\n$$X:(\\Omega,\\mathcal F)\\to(S,\\Sigma)$$\nin the sense of [[def-measurable-function-between-measurable-spaces]].\n\nWhen $S=\\mathbb R$ and $\\Sigma=\\mathcal B(\\mathbb R)$ from\n[[def-borel-sigma-algebra]], the map $X$ is a **real random variable**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. If $c>0$, then $\\int cf\\,d\\mu=c\\int f\\,d\\mu$. For $c=0$,\n   the integral of the zero function is $0$. Neither clause forms the\n   undefined extended-real product $0\\cdot(+\\infty)$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-linearized-propagation-of-covariance",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, let $\\mu\\in U$, and let\n$h:U\\to\\mathbb R^d$ be Borel measurable and totally differentiable at $\\mu$\nwith total derivative $A:=Dh(\\mu):\\mathbb R^m\\to\\mathbb R^d$\n([[def-total-derivative-in-euclidean-space]],\n[[def-measurable-function-between-measurable-spaces]]); for instance this\nholds when $h$ is $C^1$ on $U$, since continuous maps have Borel preimages of\nBorel sets ([[thm-continuous-preimages-of-borel-sets-are-borel]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with values in $U$,\nsquare-integrable with mean vector $E[X]=\\mu$ and covariance matrix $\\Sigma$\n([[def-cm-covariance-matrix-of-a-random-vector]]), and define the\n**linearization**\n$$T:U\\longrightarrow\\mathbb R^d,\\qquad T(x):=h(\\mu)+A(x-\\mu).$$\nThen $T\\circ X$ is a random element of $\\mathbb R^d$, its mean vector is\n$$E\\bigl[T(X)\\bigr]=h(\\mu),$$\nand its covariance matrix is\n$$\\operatorname{Cov}\\bigl(T(X)\\bigr)=A\\Sigma A^{\\mathsf T},$$\nwhere $A$ is identified with its Jacobian matrix\n$\\bigl(\\partial_jh_i(\\mu)\\bigr)_{i,j}$ and $A\\Sigma A^{\\mathsf T}$ is the\nmatrix product of [[thm-matrix-multiplication-laws]] in the matrix space of\n[[def-matrix-space]].",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cm-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]), let $m\\ge1$, and let\n$X=(X_1,\\dots,X_m):\\Omega\\to\\mathbb R^m$ be a random element with target\n$(\\mathbb R^m,\\mathcal B(\\mathbb R^m))$ that is **square-integrable**:\n$$E\\bigl[|X|^2\\bigr]=\\sum_{i=1}^{m}E\\bigl[X_i^2\\bigr]<+\\infty ,$$\nwhere $|\\cdot|$ is the Euclidean norm of [[def-euclidean-inner-product]].\nIts **mean vector** is\n$$\\mu=E[X]:=\\bigl(E[X_1],\\dots,E[X_m]\\bigr)\\in\\mathbb R^m ,$$\nthe coordinates being the expectations of\n[[def-moments-variance-and-covariance]]. Its **covariance matrix** is the\n$m\\times m$ real matrix of [[def-matrix-space]]\n$$\\Sigma=\\operatorname{Cov}(X):=\\bigl(\\Sigma_{ij}\\bigr)_{i,j=1}^{m},\\qquad \\Sigma_{ij}:=E\\bigl[(X_i-\\mu_i)(X_j-\\mu_j)\\bigr]\\in\\mathbb R .$$\nFor a random vector $Y$ the entries $\\Sigma_{ij}$ are also written\n$\\operatorname{Cov}(X_i,X_j)$, and $\\Sigma_{ii}=\\operatorname{Var}(X_i)$.\n\n### Well-definedness and elementary properties\n\n**Integrability of the entries.** Square-integrability gives\n$E[X_i^2]<+\\infty$ for each $i$. Since $X$ takes values in a probability\nspace, the elementary inequality\n$$|X_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)$$\nand monotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) show that each\n$X_i$ is integrable, so $\\mu_i=E[X_i]$ is a finite real number\n([[def-moments-variance-and-covariance]]). Likewise\n$$|X_i-\\mu_i|\\le |X_i|+|\\mu_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)+|\\mu_i|,$$\nso $X_i-\\mu_i$ is square-integrable and integrable. Finally\n$$|(X_i-\\mu_i)(X_j-\\mu_j)|\\le \\tfrac12\\bigl((X_i-\\mu_i)^2+(X_j-\\mu_j)^2\\bigr),$$\nand the right-hand side is integrable by additivity, monotonicity and\nhomogeneity of the nonnegative integral\n([[cor-additivity-of-the-nonnegative-lebesgue-integral]],\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]); hence every\n$\\Sigma_{ij}$ is a finite real number.\n\n**Symmetry.** For all $i,j$ the real numbers $(X_i-\\mu_i)(X_j-\\mu_j)$ and\n$(X_j-\\mu_j)(X_i-\\mu_i)$ are equal pointwise, so $\\Sigma_{ij}=\\Sigma_{ji}$;\nthus $\\Sigma^{\\mathsf T}=\\Sigma$.\n\n**Positive semidefiniteness.** Let $z=(z_1,\\dots,z_m)\\in\\mathbb R^m$. The\nrandom variable $W:=\\sum_{i=1}^{m}z_iX_i$ is a finite linear combination of\nsquare-integrable random variables, hence square-integrable, and bilinearity\nof covariance ([[lem-variance-and-covariance-identities-for-random-variables]])\ngives\n$$z^{\\mathsf T}\\Sigma z=\\sum_{i,j=1}^{m}z_iz_j\\operatorname{Cov}(X_i,X_j) =\\operatorname{Cov}(W,W)=\\operatorname{Var}(W) =E\\bigl[(W-E[W])^2\\bigr]\\ge0 ,$$\nthe inequality holding because $(W-E[W])^2\\ge0$ pointwise and expectation is\nmonotone ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]). In\nparticular $z^{\\mathsf T}\\Sigma z=0$ exactly when $W$ is almost surely\nconstant, so $\\Sigma$ is positive definite exactly when for every $z\\neq0$\nthe random variable $\\sum_{i=1}^{m}z_iX_i$ fails to be almost surely\nconstant.\n\nNo independence hypothesis is used anywhere in this definition; $\\Sigma$\nrecords the pairwise covariances of the coordinates.",
+          "uses": [
+            "1.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-coordinatewise-measurability-into-r-n",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $(X,\\mathcal{A})$ be a measurable space, and let\n$f = (f_1,\\dots,f_n) : X \\to \\mathbb{R}^n$. Then $f$ is measurable if and only\nif each coordinate function $f_j : X \\to \\mathbb{R}$ is measurable.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $h$ is continuous because it is $C^2$, hence Borel measurable, so $h\\circ X$ is a random variable; the function $x\\mapsto\\nabla h(\\mu)\\cdot(x-\\mu)$ is an affine map, hence Borel measurable, so its composition with $X$ is a random variable too. Therefore $R$, their difference, is a random variable.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For any square-integrable real variables $V,W$, center them as $V_0=V-E[V]$, $W_0=W-E[W]$, and write $a=E[V_0^2]$, $b=E[W_0^2]$, $c=E[V_0W_0]$. Products are integrable by $2|V_0W_0|\\le V_0^2+W_0^2$. Monotonicity and linearity give $0\\le E[(V_0+tW_0)^2]=a+2tc+t^2b$ for every real $t$. If $b>0$, take $t=-c/b$ to obtain $c^2\\le ab$; if $b=0$, the affine expression $a+2tc$ is nonnegative for all $t$, forcing $c=0$. Consequently $|\\operatorname{Cov}(V,W)|\\le\\sqrt{\\operatorname{Var}(V)\\operatorname{Var}(W)}$, including zero variances.",
+          "step": "1.2",
+          "inputs": [
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying [L1] at $y=X(\\omega)$ for every $\\omega$ gives the pointwise bound $\\lvert R\\rvert\\le\\frac{B}{2}\\lvert X-\\mu\\rvert^2$, and squaring gives $R^2\\le\\frac{B^2}{4}\\lvert X-\\mu\\rvert^4$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The function $\\lvert X-\\mu\\rvert^2$ is integrable by hypothesis, so step 2.1 with $g=R$, $c=B/2$ and $f=\\lvert X-\\mu\\rvert^2$ makes $R$ integrable by [L3], and [L4] applied to $R$ and to the pair $(0,\\lvert R\\rvert)$ gives $\\lvert E[R]\\rvert\\le E\\lvert R\\rvert\\le\\frac{B}{2}E\\lvert X-\\mu\\rvert^2$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "If $E\\lvert X-\\mu\\rvert^4<+\\infty$, then step 2.1 with $g=R^2$, $c=B^2/4$ and $f=\\lvert X-\\mu\\rvert^4$ makes $R^2$ integrable by [L3], and [L4] gives $E[R^2]\\le\\frac{B^2}{4}E\\lvert X-\\mu\\rvert^4$.",
+          "step": "3.2",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "given",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "In the vector case apply steps 1.1\u20133.2 componentwise to $f_i$ and put $R_i=f_i(X)-L_i$. Each $R_i$ is measurable and $E[R_i^2]\\le q_i$. Each $L_i$ is square-integrable as a finite linear combination of the square-integrable coordinates of $X$: $(\\sum_{k=1}^m a_kv_k)^2\\le(\\sum_{k=1}^m a_k^2)|v|^2$. Thus $f_i(X)=L_i+R_i$ is square-integrable by $(u+v)^2\\le2u^2+2v^2$. Coordinatewise measurability gives a random vector $f(X)$, and [L5] gives $\\operatorname{Cov}(L)=S$ and $\\operatorname{Var}(R_i)\\le q_i$.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "step 3.2",
+            "L5",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "By covariance bilinearity, $\\operatorname{Cov}(f_i(X),f_j(X))-S_{ij}=\\operatorname{Cov}(L_i,R_j)+\\operatorname{Cov}(R_i,L_j)+\\operatorname{Cov}(R_i,R_j)$. Apply step 1.2 to these three terms and use $\\operatorname{Var}(L_i)=S_{ii}$ and $\\operatorname{Var}(R_i)\\le q_i$ from step 4.1. The triangle inequality yields $|\\operatorname{Cov}(f(X))_{ij}-S_{ij}|\\le\\sqrt{S_{ii}q_j}+\\sqrt{S_{jj}q_i}+\\sqrt{q_iq_j}$.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 1.2",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Steps 3.1 and 3.2 establish the scalar mean and mean-square conclusions; step 5.1 proves the full vector covariance conclusion, and setting $d=1$ with $B_1=B$ gives $2\\sqrt{s^2q}+q=B\\sqrt{s^2M_4}+B^2M_4/4$.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "step 5.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The expectation is over the single random element X on one probability space; no empty family, sum or index set occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and final step 6.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: If X = mu almost surely or B = 0 then R = 0 by the preceding argument, and steps the preceding argument and the preceding argument give E[R] = 0 and E[R^2] = 0, so both displayed bounds are attained."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and final step 6.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: The statement is scalar in the output, so the one-component case is the statement itself; the preceding argument confirms both conclusions for it."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and final step 6.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Degenerate data are included: B = 0 (affine h), X constant, or a vanishing fourth central moment all satisfy the hypotheses, and steps the preceding argument and the preceding argument still apply."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No limit at an endpoint of U is taken: step 2.1 evaluates the pointwise bound at X(omega) in U, and integrability is decided by the moment hypotheses."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The domination criterion of step 3.1 is applied with the given constants c and f; no selection from any family of nonempty sets is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The corollary proves two inequalities, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed: bounded linearization error is not asserted to imply a Hessian bound."
+        }
+      ]
+    },
+    "ex-cm-math-evidence-pendulum-propagation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-linearized-propagation-of-covariance",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, let $\\mu\\in U$, and let\n$h:U\\to\\mathbb R^d$ be Borel measurable and totally differentiable at $\\mu$\nwith total derivative $A:=Dh(\\mu):\\mathbb R^m\\to\\mathbb R^d$\n([[def-total-derivative-in-euclidean-space]],\n[[def-measurable-function-between-measurable-spaces]]); for instance this\nholds when $h$ is $C^1$ on $U$, since continuous maps have Borel preimages of\nBorel sets ([[thm-continuous-preimages-of-borel-sets-are-borel]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with values in $U$,\nsquare-integrable with mean vector $E[X]=\\mu$ and covariance matrix $\\Sigma$\n([[def-cm-covariance-matrix-of-a-random-vector]]), and define the\n**linearization**\n$$T:U\\longrightarrow\\mathbb R^d,\\qquad T(x):=h(\\mu)+A(x-\\mu).$$\nThen $T\\circ X$ is a random element of $\\mathbb R^d$, its mean vector is\n$$E\\bigl[T(X)\\bigr]=h(\\mu),$$\nand its covariance matrix is\n$$\\operatorname{Cov}\\bigl(T(X)\\bigr)=A\\Sigma A^{\\mathsf T},$$\nwhere $A$ is identified with its Jacobian matrix\n$\\bigl(\\partial_jh_i(\\mu)\\bigr)_{i,j}$ and $A\\Sigma A^{\\mathsf T}$ is the\nmatrix product of [[thm-matrix-multiplication-laws]] in the matrix space of\n[[def-matrix-space]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]), let $m\\ge1$, and let\n$X=(X_1,\\dots,X_m):\\Omega\\to\\mathbb R^m$ be a random element with target\n$(\\mathbb R^m,\\mathcal B(\\mathbb R^m))$ that is **square-integrable**:\n$$E\\bigl[|X|^2\\bigr]=\\sum_{i=1}^{m}E\\bigl[X_i^2\\bigr]<+\\infty ,$$\nwhere $|\\cdot|$ is the Euclidean norm of [[def-euclidean-inner-product]].\nIts **mean vector** is\n$$\\mu=E[X]:=\\bigl(E[X_1],\\dots,E[X_m]\\bigr)\\in\\mathbb R^m ,$$\nthe coordinates being the expectations of\n[[def-moments-variance-and-covariance]]. Its **covariance matrix** is the\n$m\\times m$ real matrix of [[def-matrix-space]]\n$$\\Sigma=\\operatorname{Cov}(X):=\\bigl(\\Sigma_{ij}\\bigr)_{i,j=1}^{m},\\qquad \\Sigma_{ij}:=E\\bigl[(X_i-\\mu_i)(X_j-\\mu_j)\\bigr]\\in\\mathbb R .$$\nFor a random vector $Y$ the entries $\\Sigma_{ij}$ are also written\n$\\operatorname{Cov}(X_i,X_j)$, and $\\Sigma_{ii}=\\operatorname{Var}(X_i)$.\n\n### Well-definedness and elementary properties\n\n**Integrability of the entries.** Square-integrability gives\n$E[X_i^2]<+\\infty$ for each $i$. Since $X$ takes values in a probability\nspace, the elementary inequality\n$$|X_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)$$\nand monotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) show that each\n$X_i$ is integrable, so $\\mu_i=E[X_i]$ is a finite real number\n([[def-moments-variance-and-covariance]]). Likewise\n$$|X_i-\\mu_i|\\le |X_i|+|\\mu_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)+|\\mu_i|,$$\nso $X_i-\\mu_i$ is square-integrable and integrable. Finally\n$$|(X_i-\\mu_i)(X_j-\\mu_j)|\\le \\tfrac12\\bigl((X_i-\\mu_i)^2+(X_j-\\mu_j)^2\\bigr),$$\nand the right-hand side is integrable by additivity, monotonicity and\nhomogeneity of the nonnegative integral\n([[cor-additivity-of-the-nonnegative-lebesgue-integral]],\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]); hence every\n$\\Sigma_{ij}$ is a finite real number.\n\n**Symmetry.** For all $i,j$ the real numbers $(X_i-\\mu_i)(X_j-\\mu_j)$ and\n$(X_j-\\mu_j)(X_i-\\mu_i)$ are equal pointwise, so $\\Sigma_{ij}=\\Sigma_{ji}$;\nthus $\\Sigma^{\\mathsf T}=\\Sigma$.\n\n**Positive semidefiniteness.** Let $z=(z_1,\\dots,z_m)\\in\\mathbb R^m$. The\nrandom variable $W:=\\sum_{i=1}^{m}z_iX_i$ is a finite linear combination of\nsquare-integrable random variables, hence square-integrable, and bilinearity\nof covariance ([[lem-variance-and-covariance-identities-for-random-variables]])\ngives\n$$z^{\\mathsf T}\\Sigma z=\\sum_{i,j=1}^{m}z_iz_j\\operatorname{Cov}(X_i,X_j) =\\operatorname{Cov}(W,W)=\\operatorname{Var}(W) =E\\bigl[(W-E[W])^2\\bigr]\\ge0 ,$$\nthe inequality holding because $(W-E[W])^2\\ge0$ pointwise and expectation is\nmonotone ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]). In\nparticular $z^{\\mathsf T}\\Sigma z=0$ exactly when $W$ is almost surely\nconstant, so $\\Sigma$ is positive definite exactly when for every $z\\neq0$\nthe random variable $\\sum_{i=1}^{m}z_iX_i$ fails to be almost surely\nconstant.\n\nNo independence hypothesis is used anywhere in this definition; $\\Sigma$\nrecords the pairwise covariances of the coordinates.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-uniform-second-order-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex\n([[def-convex-subset-of-euclidean-space]]), let $h:U\\to\\mathbb R$ be of class\n$C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $B\\in[0,+\\infty)$\nsatisfy\n$$\\bigl\\lVert H_h(x)\\bigr\\rVert\\le B\\qquad\\text{for every }x\\in U,$$\nwhere $H_h(x)$ is the Hessian of $h$ at $x$\n([[def-hessian-and-euclidean-critical-point]]) and $\\lVert\\cdot\\rVert$ is the\noperator norm on the finite-dimensional inner-product space of real\n$m\\times m$ matrices ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]).\nThen for all $\\mu,y\\in U$,\n$$\\bigl\\lvert h(y)-h(\\mu)-\\nabla h(\\mu)\\cdot(y-\\mu)\\bigr\\rvert \\le\\frac{B}{2}\\,\\lvert y-\\mu\\rvert^2 ,$$\nwhere $\\nabla h(\\mu)\\cdot(y-\\mu)$ is the Euclidean pairing\n([[def-euclidean-inner-product]], [[def-jacobian-matrix-and-gradient]]).",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-cm-linearization-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex, let $h:U\\to\\mathbb R$\nbe of class $C^2$, and let $B\\in[0,+\\infty)$ satisfy\n$\\lVert H_h(x)\\rVert\\le B$ for every $x\\in U$\n([[lem-cm-uniform-second-order-remainder-bound]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with $X(\\omega)\\in U$ for every\n$\\omega$, with $E[X]=\\mu\\in U$ and $E\\lvert X-\\mu\\rvert^2<+\\infty$, and put\n$$R:=h(X)-h(\\mu)-\\nabla h(\\mu)\\cdot(X-\\mu).$$\nThen $R$ is integrable and\n$$\\lvert E[R]\\rvert\\le E\\lvert R\\rvert \\le\\frac{B}{2}\\,E\\lvert X-\\mu\\rvert^2 .$$\nIf moreover $E\\lvert X-\\mu\\rvert^4<+\\infty$, then $R^2$ is integrable and\n$$E\\bigl[R^2\\bigr]\\le\\frac{B^2}{4}\\,E\\lvert X-\\mu\\rvert^4 .$$\n\n\n**Vector covariance error.** Let $f=(f_1,\\ldots,f_d):U\\to\\mathbb R^d$, $d\\ge1$, have $C^2$ components satisfying $\\|H_{f_i}(x)\\|\\le B_i$ on $U$, $B_i\\ge0$. Keep the same input hypotheses and assume $M_4:=E|X-\\mu|^4<\\infty$. Put $A=Df(\\mu)$, $L=f(\\mu)+A(X-\\mu)$, $S=A\\operatorname{Cov}(X)A^{\\mathsf T}$ and $q_i=B_i^2 M_4/4$. Then $f(X)$ is square-integrable and for every $1\\le i,j\\le d$,\n$$|\\operatorname{Cov}(f(X))_{ij}-S_{ij}|\\le\\sqrt{S_{ii}q_j}+\\sqrt{S_{jj}q_i}+\\sqrt{q_iq_j}.$$\nIn particular, for the scalar function $h$ above, writing $s^2=\\operatorname{Var}(h(\\mu)+\\nabla h(\\mu)\\cdot(X-\\mu))$ and $q=B^2 M_4/4$ gives\n$$|\\operatorname{Var}(h(X))-s^2|\\le2\\sqrt{s^2q}+q=B\\sqrt{s^2M_4}+\\frac{B^2}{4}M_4.$$\nNo independence of input coordinates or remainders is assumed. These covariance bounds require the fourth moment; the second-moment mean bound alone does not control a covariance difference.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cauchy-schwarz-in-an-inner-product-space",
+          "source_section": "Statement",
+          "quote": "For all vectors $x,y$ in a real or complex inner-product space,\n\n$$|\\langle x,y\\rangle|\\le\\|x\\|\\,\\|y\\| ,$$\n\nwith equality if and only if $x$ and $y$ are linearly dependent.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The set $U=\\{T>0\\}$ is open and convex, and the partial derivatives of [L3] are continuous on $U$, so $h$ is $C^1$, hence totally differentiable at $\\mu$, with Jacobian matrix $Dh(\\mu)=\\bigl(-8\\pi^2l_0T_0^{-3},\\ 4\\pi^2T_0^{-2}\\bigr)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiating [L3] once more gives $h_{TT}=24\\pi^2l/T^4$, $h_{Tl}=h_{lT}=-8\\pi^2/T^3$ and $h_{ll}=0$, hence the displayed Hessian by [L6]. On $U_B$, $T>t_->0$ and $|l|<l_+$; the sum of squared entries is at most $(24\\pi^2l_+/t_-^4)^2+2(8\\pi^2/t_-^3)^2$, so [L6] gives $\\|H_h\\|\\le B$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L3",
+            "L6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L1] and [L2] the propagated covariance is the single entry $\\sum_{k,l=1}^{2}a_{1k}a_{1l}\\Sigma_{kl}$ with $a_{11}=-8\\pi^2l_0T_0^{-3}$, $a_{12}=4\\pi^2T_0^{-2}$, $\\Sigma_{11}=\\sigma_T^2$, $\\Sigma_{22}=\\sigma_l^2$ and $\\Sigma_{12}=\\Sigma_{21}=\\sigma_{Tl}$: $$a_{11}^2\\sigma_T^2+2a_{11}a_{12}\\sigma_{Tl}+a_{12}^2\\sigma_l^2=\\frac{64\\pi^4l_0^2}{T_0^{6}}\\sigma_T^2-\\frac{64\\pi^4l_0}{T_0^{5}}\\sigma_{Tl}+\\frac{16\\pi^4}{T_0^{4}}\\sigma_l^2 .$$",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Under the additional box hypothesis, $|X-\\mu|^2<\\rho_T^2+\\rho_l^2$ pointwise, so $M_4\\le(\\rho_T^2+\\rho_l^2)^2<\\infty$. The box is open and convex and contains $\\mu$ and all values of $X$, so [L5] with step 1.2 gives the pointwise, mean, mean-square and scalar covariance-error bounds displayed in the Example.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "step 1.2",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The three coefficients computed in step 2.1 are exactly those displayed in the Example: $a_{11}^2=64\\pi^4l_0^2T_0^{-6}$, $2a_{11}a_{12}=-64\\pi^4l_0T_0^{-5}$ and $a_{12}^2=16\\pi^4T_0^{-4}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Steps 2.1 and 3.1 establish the exact propagated covariance of the linearization for the initial square-integrable model; steps 1.2 and 2.2 establish its explicit Hessian correction under the additional box hypothesis.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 1.2",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family occurs: the model has two input coordinates and the computation uses both partial derivatives."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement and final step 4.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Setting sigma_T^2 = sigma_Tl = sigma_l^2 = 0 makes the propagated variance in the preceding argument equal to 0, and the boundary T_0 = 0 is excluded because the domain is T > 0 (the preceding argument)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement and final step 4.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: The output is one-dimensional, so the preceding argument computes the single entry of the 1x1 propagated covariance while both input coordinates are used through the two partial derivatives of the preceding argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and final step 4.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Step the preceding argument keeps the cross term sigma_Tl, so correlated and singular covariance matrices are admitted; no invertibility of the covariance matrix is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and final step 4.1: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Statement and final the preceding argument: Step the preceding argument fixes U = {T > 0}, excluding the boundary value T = 0, and evaluates the derivatives at the interior nominal input (T_0, l_0)."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made: the partial derivatives are computed and the quadratic form is expanded directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes an identity for the linearization, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; in particular the example does not claim the propagated value is the exact variance of h(T, l)."
+        }
+      ]
+    },
+    "ex-cm-math-evidence-exact-versus-linear-variance": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "cor-cm-linearization-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex, let $h:U\\to\\mathbb R$\nbe of class $C^2$, and let $B\\in[0,+\\infty)$ satisfy\n$\\lVert H_h(x)\\rVert\\le B$ for every $x\\in U$\n([[lem-cm-uniform-second-order-remainder-bound]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with $X(\\omega)\\in U$ for every\n$\\omega$, with $E[X]=\\mu\\in U$ and $E\\lvert X-\\mu\\rvert^2<+\\infty$, and put\n$$R:=h(X)-h(\\mu)-\\nabla h(\\mu)\\cdot(X-\\mu).$$\nThen $R$ is integrable and\n$$\\lvert E[R]\\rvert\\le E\\lvert R\\rvert \\le\\frac{B}{2}\\,E\\lvert X-\\mu\\rvert^2 .$$\nIf moreover $E\\lvert X-\\mu\\rvert^4<+\\infty$, then $R^2$ is integrable and\n$$E\\bigl[R^2\\bigr]\\le\\frac{B^2}{4}\\,E\\lvert X-\\mu\\rvert^4 .$$\n\n\n**Vector covariance error.** Let $f=(f_1,\\ldots,f_d):U\\to\\mathbb R^d$, $d\\ge1$, have $C^2$ components satisfying $\\|H_{f_i}(x)\\|\\le B_i$ on $U$, $B_i\\ge0$. Keep the same input hypotheses and assume $M_4:=E|X-\\mu|^4<\\infty$. Put $A=Df(\\mu)$, $L=f(\\mu)+A(X-\\mu)$, $S=A\\operatorname{Cov}(X)A^{\\mathsf T}$ and $q_i=B_i^2 M_4/4$. Then $f(X)$ is square-integrable and for every $1\\le i,j\\le d$,\n$$|\\operatorname{Cov}(f(X))_{ij}-S_{ij}|\\le\\sqrt{S_{ii}q_j}+\\sqrt{S_{jj}q_i}+\\sqrt{q_iq_j}.$$\nIn particular, for the scalar function $h$ above, writing $s^2=\\operatorname{Var}(h(\\mu)+\\nabla h(\\mu)\\cdot(X-\\mu))$ and $q=B^2 M_4/4$ gives\n$$|\\operatorname{Var}(h(X))-s^2|\\le2\\sqrt{s^2q}+q=B\\sqrt{s^2M_4}+\\frac{B^2}{4}M_4.$$\nNo independence of input coordinates or remainders is assumed. These covariance bounds require the fourth moment; the second-moment mean bound alone does not control a covariance difference.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]), let $m\\ge1$, and let\n$X=(X_1,\\dots,X_m):\\Omega\\to\\mathbb R^m$ be a random element with target\n$(\\mathbb R^m,\\mathcal B(\\mathbb R^m))$ that is **square-integrable**:\n$$E\\bigl[|X|^2\\bigr]=\\sum_{i=1}^{m}E\\bigl[X_i^2\\bigr]<+\\infty ,$$\nwhere $|\\cdot|$ is the Euclidean norm of [[def-euclidean-inner-product]].\nIts **mean vector** is\n$$\\mu=E[X]:=\\bigl(E[X_1],\\dots,E[X_m]\\bigr)\\in\\mathbb R^m ,$$\nthe coordinates being the expectations of\n[[def-moments-variance-and-covariance]]. Its **covariance matrix** is the\n$m\\times m$ real matrix of [[def-matrix-space]]\n$$\\Sigma=\\operatorname{Cov}(X):=\\bigl(\\Sigma_{ij}\\bigr)_{i,j=1}^{m},\\qquad \\Sigma_{ij}:=E\\bigl[(X_i-\\mu_i)(X_j-\\mu_j)\\bigr]\\in\\mathbb R .$$\nFor a random vector $Y$ the entries $\\Sigma_{ij}$ are also written\n$\\operatorname{Cov}(X_i,X_j)$, and $\\Sigma_{ii}=\\operatorname{Var}(X_i)$.\n\n### Well-definedness and elementary properties\n\n**Integrability of the entries.** Square-integrability gives\n$E[X_i^2]<+\\infty$ for each $i$. Since $X$ takes values in a probability\nspace, the elementary inequality\n$$|X_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)$$\nand monotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) show that each\n$X_i$ is integrable, so $\\mu_i=E[X_i]$ is a finite real number\n([[def-moments-variance-and-covariance]]). Likewise\n$$|X_i-\\mu_i|\\le |X_i|+|\\mu_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)+|\\mu_i|,$$\nso $X_i-\\mu_i$ is square-integrable and integrable. Finally\n$$|(X_i-\\mu_i)(X_j-\\mu_j)|\\le \\tfrac12\\bigl((X_i-\\mu_i)^2+(X_j-\\mu_j)^2\\bigr),$$\nand the right-hand side is integrable by additivity, monotonicity and\nhomogeneity of the nonnegative integral\n([[cor-additivity-of-the-nonnegative-lebesgue-integral]],\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]); hence every\n$\\Sigma_{ij}$ is a finite real number.\n\n**Symmetry.** For all $i,j$ the real numbers $(X_i-\\mu_i)(X_j-\\mu_j)$ and\n$(X_j-\\mu_j)(X_i-\\mu_i)$ are equal pointwise, so $\\Sigma_{ij}=\\Sigma_{ji}$;\nthus $\\Sigma^{\\mathsf T}=\\Sigma$.\n\n**Positive semidefiniteness.** Let $z=(z_1,\\dots,z_m)\\in\\mathbb R^m$. The\nrandom variable $W:=\\sum_{i=1}^{m}z_iX_i$ is a finite linear combination of\nsquare-integrable random variables, hence square-integrable, and bilinearity\nof covariance ([[lem-variance-and-covariance-identities-for-random-variables]])\ngives\n$$z^{\\mathsf T}\\Sigma z=\\sum_{i,j=1}^{m}z_iz_j\\operatorname{Cov}(X_i,X_j) =\\operatorname{Cov}(W,W)=\\operatorname{Var}(W) =E\\bigl[(W-E[W])^2\\bigr]\\ge0 ,$$\nthe inequality holding because $(W-E[W])^2\\ge0$ pointwise and expectation is\nmonotone ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]). In\nparticular $z^{\\mathsf T}\\Sigma z=0$ exactly when $W$ is almost surely\nconstant, so $\\Sigma$ is positive definite exactly when for every $z\\neq0$\nthe random variable $\\sum_{i=1}^{m}z_iX_i$ fails to be almost surely\nconstant.\n\nNo independence hypothesis is used anywhere in this definition; $\\Sigma$\nrecords the pairwise covariances of the coordinates.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-linearized-propagation-of-covariance",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, let $\\mu\\in U$, and let\n$h:U\\to\\mathbb R^d$ be Borel measurable and totally differentiable at $\\mu$\nwith total derivative $A:=Dh(\\mu):\\mathbb R^m\\to\\mathbb R^d$\n([[def-total-derivative-in-euclidean-space]],\n[[def-measurable-function-between-measurable-spaces]]); for instance this\nholds when $h$ is $C^1$ on $U$, since continuous maps have Borel preimages of\nBorel sets ([[thm-continuous-preimages-of-borel-sets-are-borel]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with values in $U$,\nsquare-integrable with mean vector $E[X]=\\mu$ and covariance matrix $\\Sigma$\n([[def-cm-covariance-matrix-of-a-random-vector]]), and define the\n**linearization**\n$$T:U\\longrightarrow\\mathbb R^d,\\qquad T(x):=h(\\mu)+A(x-\\mu).$$\nThen $T\\circ X$ is a random element of $\\mathbb R^d$, its mean vector is\n$$E\\bigl[T(X)\\bigr]=h(\\mu),$$\nand its covariance matrix is\n$$\\operatorname{Cov}\\bigl(T(X)\\bigr)=A\\Sigma A^{\\mathsf T},$$\nwhere $A$ is identified with its Jacobian matrix\n$\\bigl(\\partial_jh_i(\\mu)\\bigr)_{i,j}$ and $A\\Sigma A^{\\mathsf T}$ is the\nmatrix product of [[thm-matrix-multiplication-laws]] in the matrix space of\n[[def-matrix-space]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] the weights make $(\\Omega,w)$ a probability space and the expectations below are the finite weighted sums of [[def-expectation-on-a-finite-probability-space]]: $$E[Y]=\\frac12\\cdot0+\\frac14\\cdot1+\\frac14\\cdot3=1,\\qquad E[Y^2]=\\frac14\\cdot1+\\frac14\\cdot9=\\frac52,$$ $$E[Y^4]=\\frac14\\cdot1+\\frac14\\cdot81=\\frac{82}{4}=\\frac{41}{2},\\qquad E\\bigl[(Y-1)^2\\bigr]=\\frac12\\cdot1+\\frac14\\cdot0+\\frac14\\cdot4=\\frac32,$$ and $E[(Y-1)^4]=\\frac12\\cdot1+\\frac14\\cdot0+\\frac14\\cdot16=\\frac12+4=\\frac92$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The function $h(y)=y^2$ is $C^2$ on the open convex set $U=(-1,4)$, with $h'(y)=2y$, so $h(1)=1$ and $h'(1)=2$; its Hessian is the constant matrix $(2)$, of operator norm $B=2$ by [L3] and [L4], and the values $0,1,3$ of $Y$ and the mean $\\mu=1$ all lie in $U$.",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [L4], $\\operatorname{Var}(Y)=E[Y^2]-E[Y]^2=\\frac52-1=\\frac32$ and $\\operatorname{Var}(h(Y))=E[Y^4]-E[Y^2]^2=\\frac{41}{2}-\\frac{25}{4}=\\frac{82-25}{4}=\\frac{57}{4}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The linearization error is $R=h(Y)-1-2(Y-1)=Y^2-2Y+1=(Y-1)^2$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By [L3] the propagated covariance is $h'(1)^2\\operatorname{Var}(Y)=4\\cdot\\frac32=6=\\frac{24}{4}$, while step 2.1 gives $\\operatorname{Var}(h(Y))=\\frac{57}{4}$; these differ, so the propagated covariance is not the exact variance of $h(Y)$ in this model.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "With $B=2$ and the moments of step 1.1, the bounds of [L2] read $\\frac{B}{2}E[(Y-1)^2]=1\\cdot\\frac32=\\frac32$ and $\\frac{B^2}{4}E[(Y-1)^4]=1\\cdot\\frac92=\\frac92$; since $R^2=(Y-1)^4$ by step 2.2, one has $E[R]=\\frac32$ and $E[R^2]=\\frac92$, so both bounds are attained.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The weighted set has three outcomes and every expectation is a nonempty finite sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The outcome Y = 0 carries weight 1/2 and contributes remainder R = 1 there, by the R = (Y - 1)^2 identity of step 2.2 and the moments of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The example is one-dimensional in input and output; step 4.1 computes E[R] = 3/2 and E[R^2] = 9/2 equal to the bounds, so both inequalities are attained rather than strict."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The quadratic h has nonzero curvature B = 2, so the example is nondegenerate in its second derivative and step 4.1 shows the bound is attained; the degenerate zero-curvature case is not needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 places the support {0, 1, 3} and the mean 1 inside the open set U = (-1, 4), and step 4.1 exhibits equality at the support points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The probability space and the random variable are displayed explicitly; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example is a computation, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the example compares two numbers rather than proving a biconditional."
+        }
+      ]
+    },
+    "ex-cm-math-evidence-chebyshev-sample-mean-check": {
+      "citations": [
+        {
+          "fact": "L3",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$,\n$$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$\nIt is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-identically-distributed-and-iid-random-variables",
+          "source_section": "Definition",
+          "quote": "Let $(X_i)_{i\\in I}$ be random elements with the same measurable target $(E,\\mathcal E)$. They are **identically distributed** if $\\mathbb P(X_i\\in B)=\\mathbb P(X_j\\in B)$ for all $i,j\\in I$ and $B\\in\\mathcal E$, that is, their laws in [[def-law-or-distribution-of-a-random-element]] agree. They are **independent and identically distributed (IID)** if, in addition, the whole family is independent in [[def-independent-random-elements]]. Independence means mutual independence, not merely pairwise independence. No moment assumption is part of either definition. The empty family satisfies these universal conditions vacuously.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The four outcomes have weight $1/4$ each, so $\\mathbb P(X_1=-1)=\\mathbb P(X_1=1)=1/2$ and the same for $X_2$; for every pair $(a,b)\\in\\{-1,1\\}^2$ one has $\\mathbb P(X_1=a,X_2=b)=1/4=\\mathbb P(X_1=a)\\mathbb P(X_2=b)$. By [L4] the family is independent, the two distributions agree, and $E[X_1]=\\frac12(-1)+\\frac12(1)=0$, $E[X_1^2]=\\frac12(1)+\\frac12(1)=1$ by [L3].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Enumerating $\\overline X=(X_1+X_2)/2$ on the four outcomes gives the values $1,0,0,-1$, each with weight $1/4$; hence $$\\mathbb P(\\lvert\\overline X\\rvert\\ge1)=\\frac{2}{4}=\\frac12,\\qquad \\mathbb P\\Bigl(\\lvert\\overline X\\rvert\\ge\\frac12\\Bigr)=\\frac{2}{4}=\\frac12 .$$",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By the enumeration in step 1.2 and the expectation formula [L3], $E[\\overline X]=0$ and $E|\\overline X|^2=\\tfrac14+\\tfrac14=\\tfrac12=\\sigma^2/2$. For any $a>0$, the pointwise inequality $a^2\\mathbf1_{\\{|\\overline X|\\ge a\\}}\\le|\\overline X|^2$ and summation with nonnegative weights give $\\mathbb P(|\\overline X|\\ge a)\\le E|\\overline X|^2/a^2=\\sigma^2/(2a^2)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "At $a=1$ the bound of step 2.1 is $1/2$, equal to the exact probability from step 1.2; at $a=1/2$ it is $2$, strictly larger than the exact probability $1/2$. These establish the displayed finite-sample identity and bounds without requiring an infinite IID extension.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The outcome set has four elements and the family two members; no empty sum or empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The displayed model has mean zero, mu = 0, entered into the identity and the bound in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n = 1 case of the corollary is the single-observation identity E|X_1|^2 = sigma^2; step 2.1 computes its n = 2 analogue and step 3.1 attains the bound at a = 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 computes sigma^2 = 1, so the example is nondegenerate in variance; the zero-variance case is permitted by the corollary but not displayed, and no claim about it is made here."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 shows the bound is attained at the value a = 1 and strict at a = 1/2, so both equality and strictness of the inequality are exhibited."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The four outcomes and their weights are enumerated explicitly; no selection is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks a stated identity and inequality; it proves no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted, and in particular the example does not claim that the bound characterises the IID model."
+        }
+      ]
+    },
+    "ex-cm-math-evidence-remainder-bound-check": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-uniform-second-order-remainder-bound",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex\n([[def-convex-subset-of-euclidean-space]]), let $h:U\\to\\mathbb R$ be of class\n$C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $B\\in[0,+\\infty)$\nsatisfy\n$$\\bigl\\lVert H_h(x)\\bigr\\rVert\\le B\\qquad\\text{for every }x\\in U,$$\nwhere $H_h(x)$ is the Hessian of $h$ at $x$\n([[def-hessian-and-euclidean-critical-point]]) and $\\lVert\\cdot\\rVert$ is the\noperator norm on the finite-dimensional inner-product space of real\n$m\\times m$ matrices ([[def-operator-norm-on-a-finite-dimensional-inner-product-space]]).\nThen for all $\\mu,y\\in U$,\n$$\\bigl\\lvert h(y)-h(\\mu)-\\nabla h(\\mu)\\cdot(y-\\mu)\\bigr\\rvert \\le\\frac{B}{2}\\,\\lvert y-\\mu\\rvert^2 ,$$\nwhere $\\nabla h(\\mu)\\cdot(y-\\mu)$ is the Euclidean pairing\n([[def-euclidean-inner-product]], [[def-jacobian-matrix-and-gradient]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-hessian-and-euclidean-critical-point",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open and let $f:U\\to\\mathbb R$ have second partial derivatives. Its **Hessian** at $a\\in U$ is the matrix $H_f(a)=(\\partial_i\\partial_j f(a))_{i,j<m}$ in the matrix space of [[def-matrix-space]], using the multi-index notation of [[def-ck-and-multi-index-notation-in-several-variables]]. A point $a$ is **critical** when its gradient $\\nabla f(a)$ is zero, with the gradient convention of [[def-jacobian-matrix-and-gradient]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-jacobian-matrix-and-gradient",
+          "source_section": "Definition",
+          "quote": "If every partial derivative $\\partial_jf_i(a)$ of $f:U\\to\\mathbb R^n$ exists, the **Jacobian matrix** is $Jf(a)=(\\partial_jf_i(a))_{i<n,j<m}$. For scalar-valued $f$, its **gradient** is\n\n$$\\nabla f(a):=(\\partial_0f(a),\\ldots,\\partial_{m-1}f(a))\\in\\mathbb R^m,$$\n\nwith coordinates understood in the standard basis ([[lem-standard-basis-of-f-n]]). The partial derivatives are those of [[def-directional-and-partial-derivatives]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $T:V\\to W$ be a linear map between finite-dimensional real or complex inner\nproduct spaces. If $V=0$, define $\\lVert T\\rVert:=0$. If $V\\ne0$, define the\n**operator norm** of $T$ by\n\n$$\\lVert T\\rVert:=\\max\\{\\lVert Tv\\rVert:\\lVert v\\rVert=1\\}.$$\n\nThe next theorem proves that this maximum exists and equals the largest\nsingular value.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-convex-subset-of-euclidean-space",
+          "source_section": "Definition",
+          "quote": "A subset $U\\subseteq\\mathbb R^m$ is **convex** when, for all $x,y\\in U$ and $t\\in[0,1]$ ([[def-interval]]), the point $(1-t)x+ty$ lies in $U$. Thus the full line segment from $x$ to $y$ remains in $U$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "On $U=(-1,3)$ the second derivative of $h$ is the constant $2$, so $H_h=(2)$ and $\\lVert H_h\\rVert=2$ by [L2] and [L3]; $U$ is open and convex by [L4].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "On $V=(-1,2)$ the second derivative of $g$ is $6y$, so $H_g(y)=(6y)$ and $\\lVert H_g(y)\\rVert=\\lvert6y\\rvert\\le12$ for $\\lvert y\\rvert<2$; $V$ is open and convex by [L4].",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $h$ with $\\mu=1$ and $B=2$, the difference in the Example equals $(y-1)^2$ by expansion, and the bound of [L1] is $\\frac{2}{2}(y-1)^2$, so equality holds for every $y\\in U$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For $g$ with $\\mu=1/2$ and $B=12$, the difference at $y=1$ is $1-\\frac18-\\frac38=\\frac12$, while the bound of [L1] is $\\frac{12}{2}\\cdot\\frac14=\\frac32$, and $\\frac12<\\frac32$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.2",
+            "given",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Step 2.1 exhibits equality in the bound, and step 2.2 exhibits strict inequality, so both alternatives occur under the lemma's hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty family occurs: the two functions are single-variable and the intervals are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At y = mu the remainder is 0 and the bound reads 0 <= 0; for the quadratic with B = 2 step 2.1 gives equality for every y in U."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Both cases are one-dimensional, and steps 1.1 and 1.2 record the Hessian as the 1x1 matrices (2) and (6y)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cubic case has a non-sharp admissible constant B = 12 and step 2.2 shows the bound is strict there, while the quadratic case has the sharp constant B = 2; neither case is excluded as degenerate."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The evaluations are at interior points of the open intervals: the quadratic equality holds for every y in U = (-1, 3), and the cubic check is at y = 1 in V = (-1, 2) by step 2.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice is made; the derivatives, the Hessians and the remainders are computed directly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example checks an inequality in two cases; no equivalence is proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: a bounded remainder is not claimed to force a particular Hessian bound."
+        }
+      ]
+    },
+    "cex-cm-math-evidence-confidence-coverage-is-not-posterior": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]). The triple $(X,\\mathcal A,\\mathbb P)$ is a **probability space** ([[def-measure-space]]); $X$ is its sample space and the members of $\\mathcal A$ are its events.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-sigma-algebra",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **sigma-algebra on $X$** is an algebra of subsets\n$\\mathcal A$ ([[def-algebra-of-subsets]]) that is closed under countable unions:\nwhenever $(A_n)_{n\\in\\mathbb N}$ is a sequence in $\\mathcal A$,\n\n$$\\bigcup_{n\\in\\mathbb N}A_n\\in\\mathcal A.$$\n\nThe pair $(X,\\mathcal A)$ then has a fixed ambient set $X$. Complements in the\nsigma-algebra axioms always mean complements relative to that $X$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-confidence-set-and-coverage",
+          "source_section": "Definition",
+          "quote": "Let $(S,\\mathcal S)$ be a measurable space, the **data space**\n([[def-measurable-space]]), let $\\Theta$ be a nonempty set, the **parameter\nset**, and let $(\\mathbb P_\\theta)_{\\theta\\in\\Theta}$ be a family of\nprobability measures on $(S,\\mathcal S)$ ([[def-probability-measure]]). Write\n$2^{\\Theta}$ for the power set of $\\Theta$. A **confidence set** for\n$\\Theta$ is a map\n$$C:S\\longrightarrow 2^{\\Theta},\\qquad s\\longmapsto C(s),$$\nsuch that for every $\\theta\\in\\Theta$ the set\n$$\\{s\\in S:\\theta\\in C(s)\\}$$\nis an element of $\\mathcal S$. The **coverage of $C$ at $\\theta$** is\n$$\\gamma(\\theta):=\\mathbb P_\\theta\\bigl(\\theta\\in C\\bigr),$$\nand, for $\\alpha\\in[0,1]$, $C$ has **coverage level** $1-\\alpha$ when\n$$\\inf_{\\theta\\in\\Theta}\\gamma(\\theta)\\ge1-\\alpha .$$\n\n### Well-definedness and conventions\n\nThe measurability requirement is exactly what makes each $\\gamma(\\theta)$\ndefined, since $\\{\\theta\\in C\\}$ is then an event in $\\mathcal S$. The family\n$\\{\\gamma(\\theta):\\theta\\in\\Theta\\}$ is nonempty and bounded below by $0$, so\nits infimum exists in $\\mathbb R$ by [[thm-infimum-property]], is unique by\n[[lem-sup-unique]], and equals $\\inf_\\theta\\gamma(\\theta)$ as written\n([[def-infimum]], [[def-complete-ordered-field]]).\n\nThe level is a property of the family $(\\mathbb P_\\theta)_{\\theta\\in\\Theta}$\nand of the map $C$; it is an infimum of probabilities of the events\n$\\theta\\in C$, calculated before the datum is observed. It contains no\ndistribution on $\\Theta$ and no conditional probability given the datum; a\ndata-dependent reading requires further structure that is not part of this\ndefinition.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-conditional-probability",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be events in a finite probability space with $\\mathbb P(B)>0$. The **conditional probability of $A$ given $B$** is\n$$\\mathbb P(A\\mid B):=\\frac{\\mathbb P(A\\cap B)}{\\mathbb P(B)}.$$\nNo value is assigned to $\\mathbb P(A\\mid B)$ when $\\mathbb P(B)=0$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] each $\\theta\\in\\Theta$ determines a probability measure $\\mathbb P_\\theta$ on $(S,\\mathcal S)$ with $\\mathbb P_\\theta(\\{s\\})=1/4$ for $s\\in D_\\theta$ and $\\mathbb P_\\theta(\\{s\\})=0$ otherwise. Define $$C(s):=\\begin{cases}\\{s_1-1\\}\\cap\\Theta,&s_1=s_2,\\\\ \\Bigl\\{\\dfrac{s_1+s_2}{2}\\Bigr\\}\\cap\\Theta,&s_1\\neq s_2 .\\end{cases}$$ Each $C(s)$ is a subset of $\\Theta$, and each set $\\{\\theta\\in C\\}$ is a subset of $S$ and therefore an element of the full power set $\\mathcal S=2^{S}$, so $C$ is a confidence set by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For fixed $\\theta$ the four points of $D_\\theta$ evaluate under $C$ as follows: $(\\theta+1,\\theta+1)$ gives $C=\\{(\\theta+1)-1\\}=\\{\\theta\\}$, which contains $\\theta$; $(\\theta-1,\\theta-1)$ gives $C=\\{(\\theta-1)-1\\}=\\{\\theta-2\\}$, which does not contain $\\theta$; and the two points with distinct coordinates, $(\\theta+1,\\theta-1)$ and $(\\theta-1,\\theta+1)$, both give $C=\\{\\theta\\}$. Hence $\\mathbb P_\\theta(\\theta\\in C)=3/4$ for every $\\theta\\in\\Theta$, and the coverage level of $C$ is $3/4$ by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Let $s^\\ast:=(15,17)$. Since $s^\\ast$ has distinct coordinates, step 1.1 gives $C(s^\\ast)=\\{(15+17)/2\\}=\\{16\\}$. Moreover, $s^\\ast\\in D_\\theta$ holds exactly for $\\theta=16$, so $\\mathbb P_\\theta(\\{s^\\ast\\})$ equals $1/4$ for $\\theta=16$ and $0$ for $\\theta\\in\\{14,18\\}$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Fix weights $\\pi(14),\\pi(16),\\pi(18)\\ge0$ summing to $1$ with $\\pi(16)>0$, and let $Q$ be the finite probability measure on $\\Theta\\times S$ given by $Q(\\{(\\theta,s)\\})=\\pi(\\theta)\\mathbb P_\\theta(\\{s\\})$ for the twelve pairs with $\\mathbb P_\\theta(\\{s\\})>0$; by [L3] this is the probability measure of the finite weighted model. The event $\\{s=s^\\ast\\}$ has $Q$-probability $\\pi(16)\\cdot\\frac14>0$, so the conditional probability given $s^\\ast$ is defined by [L3].",
+          "step": "3.1",
+          "inputs": [
+            "step 2.2",
+            "given",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The event $\\{\\theta\\in C(s),\\,s=s^\\ast\\}$ equals $\\{\\theta=16,\\,s=s^\\ast\\}$, because $C(s^\\ast)=\\{16\\}$ by step 2.2; its $Q$-probability is $\\pi(16)\\cdot\\frac14$, the same as $Q(\\{s=s^\\ast\\})$ by step 2.2. Hence $$Q\\bigl(\\theta\\in C(s)\\,\\big|\\,s=s^\\ast\\bigr)=\\frac{\\pi(16)/4}{\\pi(16)/4}=1 .$$",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The confidence set $C$ has level $3/4$ by step 2.1, while for the prior $\\pi$ and the datum $s^\\ast$ the conditional probability that $\\theta\\in C(s)$ is $1$ by step 4.1; since $1\\neq3/4$, the refuted statement is false.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 requires pi(16) > 0 so that the conditioning event has positive probability; the case of a prior with zero mass at 16 is excluded rather than assigned a value."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "If pi(16) = 0 then Q(s = s*) = 0 by step 2.2, so the conditional probability is undefined; the counterexample excludes that case in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 computes the realized confidence set at the witness datum as the singleton {16}, and step 4.1 gives conditional probability 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A degenerate prior concentrated at 16 is admissible; step 2.1 keeps the coverage level at 3/4 and step 4.1 gives conditional probability 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 compares the level 3/4 with the conditional probability 1, a strict failure of the refuted identity; no limit or endpoint of a family of sets is involved."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes arbitrary weights pi with pi(16) > 0; no selection from a family of nonempty sets is made, and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes one statement by a witness; it proves no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the counterexample does not claim that coverage and conditional probability always differ."
+        }
+      ]
+    },
+    "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-expectation-on-a-finite-probability-space",
+          "source_section": "Definition",
+          "quote": "The **expectation** of a real random variable $X$ on a finite probability space $(\\Omega,w)$ is\n$$\\mathbb E[X]:=\\sum_{\\omega\\in\\Omega}X(\\omega)w(\\omega).$$\nFor a real constant $c$, the notation $c$ also denotes the constant random variable $\\omega\\mapsto c$.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-finite-probability-space-and-event",
+          "source_section": "Definition",
+          "quote": "A **finite probability space** is a pair $(\\Omega,w)$ consisting of a finite set $\\Omega$ and a function $w:\\Omega\\to\\mathbb R$ such that $w(\\omega)\\ge0$ for every $\\omega\\in\\Omega$ and\n$$\\sum_{\\omega\\in\\Omega}w(\\omega)=1.$$\nThe elements of $\\Omega$ are **outcomes**. Every subset $A\\subseteq\\Omega$ is an **event**, and its probability is\n$$\\mathbb P(A):=\\sum_{\\omega\\in A}w(\\omega).$$\n\nAn outcome of weight zero remains an outcome. Thus an event can be nonempty and still have probability zero.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+          "source_section": "Statement",
+          "quote": "Let $\\Omega$ be a finite set.\n\n1. If $(\\Omega,w)$ is a finite probability space in the sense of\n   [[def-finite-probability-space-and-event]], then\n   $$\\mathbb P_w(A):=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega)$$\n   is a probability measure on $(\\Omega,\\mathcal P(\\Omega))$.\n2. Conversely, if $\\mathbb P$ is a probability measure on\n   $(\\Omega,\\mathcal P(\\Omega))$, then\n   $$w(\\omega):=\\mathbb P(\\{\\omega\\})\\qquad(\\omega\\in\\Omega)$$\n   makes $(\\Omega,w)$ a finite probability space and\n   $$\\mathbb P(A)=\\sum_{\\omega\\in A}w(\\omega)\\qquad(A\\subseteq\\Omega).$$\n\nThese two constructions are inverse to each other. In particular, zero-weight\noutcomes remain genuine outcomes in both descriptions.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-linearized-propagation-of-covariance",
+          "source_section": "Statement",
+          "quote": "Let $m,d\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, let $\\mu\\in U$, and let\n$h:U\\to\\mathbb R^d$ be Borel measurable and totally differentiable at $\\mu$\nwith total derivative $A:=Dh(\\mu):\\mathbb R^m\\to\\mathbb R^d$\n([[def-total-derivative-in-euclidean-space]],\n[[def-measurable-function-between-measurable-spaces]]); for instance this\nholds when $h$ is $C^1$ on $U$, since continuous maps have Borel preimages of\nBorel sets ([[thm-continuous-preimages-of-borel-sets-are-borel]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with values in $U$,\nsquare-integrable with mean vector $E[X]=\\mu$ and covariance matrix $\\Sigma$\n([[def-cm-covariance-matrix-of-a-random-vector]]), and define the\n**linearization**\n$$T:U\\longrightarrow\\mathbb R^d,\\qquad T(x):=h(\\mu)+A(x-\\mu).$$\nThen $T\\circ X$ is a random element of $\\mathbb R^d$, its mean vector is\n$$E\\bigl[T(X)\\bigr]=h(\\mu),$$\nand its covariance matrix is\n$$\\operatorname{Cov}\\bigl(T(X)\\bigr)=A\\Sigma A^{\\mathsf T},$$\nwhere $A$ is identified with its Jacobian matrix\n$\\bigl(\\partial_jh_i(\\mu)\\bigr)_{i,j}$ and $A\\Sigma A^{\\mathsf T}$ is the\nmatrix product of [[thm-matrix-multiplication-laws]] in the matrix space of\n[[def-matrix-space]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-covariance-matrix-of-a-random-vector",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]), let $m\\ge1$, and let\n$X=(X_1,\\dots,X_m):\\Omega\\to\\mathbb R^m$ be a random element with target\n$(\\mathbb R^m,\\mathcal B(\\mathbb R^m))$ that is **square-integrable**:\n$$E\\bigl[|X|^2\\bigr]=\\sum_{i=1}^{m}E\\bigl[X_i^2\\bigr]<+\\infty ,$$\nwhere $|\\cdot|$ is the Euclidean norm of [[def-euclidean-inner-product]].\nIts **mean vector** is\n$$\\mu=E[X]:=\\bigl(E[X_1],\\dots,E[X_m]\\bigr)\\in\\mathbb R^m ,$$\nthe coordinates being the expectations of\n[[def-moments-variance-and-covariance]]. Its **covariance matrix** is the\n$m\\times m$ real matrix of [[def-matrix-space]]\n$$\\Sigma=\\operatorname{Cov}(X):=\\bigl(\\Sigma_{ij}\\bigr)_{i,j=1}^{m},\\qquad \\Sigma_{ij}:=E\\bigl[(X_i-\\mu_i)(X_j-\\mu_j)\\bigr]\\in\\mathbb R .$$\nFor a random vector $Y$ the entries $\\Sigma_{ij}$ are also written\n$\\operatorname{Cov}(X_i,X_j)$, and $\\Sigma_{ii}=\\operatorname{Var}(X_i)$.\n\n### Well-definedness and elementary properties\n\n**Integrability of the entries.** Square-integrability gives\n$E[X_i^2]<+\\infty$ for each $i$. Since $X$ takes values in a probability\nspace, the elementary inequality\n$$|X_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)$$\nand monotonicity and homogeneity of the nonnegative integral\n([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]) show that each\n$X_i$ is integrable, so $\\mu_i=E[X_i]$ is a finite real number\n([[def-moments-variance-and-covariance]]). Likewise\n$$|X_i-\\mu_i|\\le |X_i|+|\\mu_i|\\le \\tfrac12\\bigl(1+X_i^2\\bigr)+|\\mu_i|,$$\nso $X_i-\\mu_i$ is square-integrable and integrable. Finally\n$$|(X_i-\\mu_i)(X_j-\\mu_j)|\\le \\tfrac12\\bigl((X_i-\\mu_i)^2+(X_j-\\mu_j)^2\\bigr),$$\nand the right-hand side is integrable by additivity, monotonicity and\nhomogeneity of the nonnegative integral\n([[cor-additivity-of-the-nonnegative-lebesgue-integral]],\n[[prop-order-and-scalar-rules-for-the-nonnegative-integral]]); hence every\n$\\Sigma_{ij}$ is a finite real number.\n\n**Symmetry.** For all $i,j$ the real numbers $(X_i-\\mu_i)(X_j-\\mu_j)$ and\n$(X_j-\\mu_j)(X_i-\\mu_i)$ are equal pointwise, so $\\Sigma_{ij}=\\Sigma_{ji}$;\nthus $\\Sigma^{\\mathsf T}=\\Sigma$.\n\n**Positive semidefiniteness.** Let $z=(z_1,\\dots,z_m)\\in\\mathbb R^m$. The\nrandom variable $W:=\\sum_{i=1}^{m}z_iX_i$ is a finite linear combination of\nsquare-integrable random variables, hence square-integrable, and bilinearity\nof covariance ([[lem-variance-and-covariance-identities-for-random-variables]])\ngives\n$$z^{\\mathsf T}\\Sigma z=\\sum_{i,j=1}^{m}z_iz_j\\operatorname{Cov}(X_i,X_j) =\\operatorname{Cov}(W,W)=\\operatorname{Var}(W) =E\\bigl[(W-E[W])^2\\bigr]\\ge0 ,$$\nthe inequality holding because $(W-E[W])^2\\ge0$ pointwise and expectation is\nmonotone ([[cor-expectation-linearity-monotonicity-and-modulus-bound]]). In\nparticular $z^{\\mathsf T}\\Sigma z=0$ exactly when $W$ is almost surely\nconstant, so $\\Sigma$ is positive definite exactly when for every $z\\neq0$\nthe random variable $\\sum_{i=1}^{m}z_iX_i$ fails to be almost surely\nconstant.\n\nNo independence hypothesis is used anywhere in this definition; $\\Sigma$\nrecords the pairwise covariances of the coordinates.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space.\n\n- For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is\n  integrable, and is then\n  $$\\mathbb E[|X|^p].$$\n- If $X$ is integrable, its **mean** is $\\mathbb E[X]$.\n- If $X$ is square-integrable, its **variance** is\n  $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$\n\nIf $X$ and $Y$ are square-integrable real random variables on the same\nprobability space, their **covariance** is\n$$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-cm-linearization-error-bounds",
+          "source_section": "Statement",
+          "quote": "Let $m\\ge1$, let $U\\subseteq\\mathbb R^m$ be open and convex, let $h:U\\to\\mathbb R$\nbe of class $C^2$, and let $B\\in[0,+\\infty)$ satisfy\n$\\lVert H_h(x)\\rVert\\le B$ for every $x\\in U$\n([[lem-cm-uniform-second-order-remainder-bound]]). Let\n$X:\\Omega\\to\\mathbb R^m$ be a random element with $X(\\omega)\\in U$ for every\n$\\omega$, with $E[X]=\\mu\\in U$ and $E\\lvert X-\\mu\\rvert^2<+\\infty$, and put\n$$R:=h(X)-h(\\mu)-\\nabla h(\\mu)\\cdot(X-\\mu).$$\nThen $R$ is integrable and\n$$\\lvert E[R]\\rvert\\le E\\lvert R\\rvert \\le\\frac{B}{2}\\,E\\lvert X-\\mu\\rvert^2 .$$\nIf moreover $E\\lvert X-\\mu\\rvert^4<+\\infty$, then $R^2$ is integrable and\n$$E\\bigl[R^2\\bigr]\\le\\frac{B^2}{4}\\,E\\lvert X-\\mu\\rvert^4 .$$\n\n\n**Vector covariance error.** Let $f=(f_1,\\ldots,f_d):U\\to\\mathbb R^d$, $d\\ge1$, have $C^2$ components satisfying $\\|H_{f_i}(x)\\|\\le B_i$ on $U$, $B_i\\ge0$. Keep the same input hypotheses and assume $M_4:=E|X-\\mu|^4<\\infty$. Put $A=Df(\\mu)$, $L=f(\\mu)+A(X-\\mu)$, $S=A\\operatorname{Cov}(X)A^{\\mathsf T}$ and $q_i=B_i^2 M_4/4$. Then $f(X)$ is square-integrable and for every $1\\le i,j\\le d$,\n$$|\\operatorname{Cov}(f(X))_{ij}-S_{ij}|\\le\\sqrt{S_{ii}q_j}+\\sqrt{S_{jj}q_i}+\\sqrt{q_iq_j}.$$\nIn particular, for the scalar function $h$ above, writing $s^2=\\operatorname{Var}(h(\\mu)+\\nabla h(\\mu)\\cdot(X-\\mu))$ and $q=B^2 M_4/4$ gives\n$$|\\operatorname{Var}(h(X))-s^2|\\le2\\sqrt{s^2q}+q=B\\sqrt{s^2M_4}+\\frac{B^2}{4}M_4.$$\nNo independence of input coordinates or remainders is assumed. These covariance bounds require the fourth moment; the second-moment mean bound alone does not control a covariance difference.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1] the finite weighted set is a probability space and the expectations below are its finite weighted sums: $E[Y]=\\frac12\\cdot0+\\frac14\\cdot1+\\frac14\\cdot3=1$, $E[Y^2]=\\frac14+\\frac94=\\frac52$, and hence $\\operatorname{Var}(Y)=\\frac52-1=\\frac32$ by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $h(y)=y^3$ is $C^2$ on $U=(-1,4)$, with $h'(y)=3y^2$, so $h'(1)=3$ and the propagated variance is $h'(1)^2\\operatorname{Var}(Y)=9\\cdot\\frac32=\\frac{27}{2}$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The exact moments of $h(Y)=Y^3$ are $E[Y^3]=\\frac14\\cdot1+\\frac14\\cdot27=7$ and $E[Y^6]=\\frac14\\cdot1+\\frac14\\cdot729=\\frac{730}{4}=\\frac{365}{2}$, so $\\operatorname{Var}(h(Y))=\\frac{365}{2}-7^2=\\frac{365}{2}-\\frac{98}{2}=\\frac{267}{2}$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Steps 2.1 and 2.2 give propagated value $\\frac{27}{2}$ and exact variance $\\frac{267}{2}$; these are unequal, so the refuted identity fails under the stated hypotheses.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The comparison does not contradict [L3]: on $U=(-1,4)$ the second derivative of $h$ is $6y$, of absolute value at most $24$, so $B=24$ is admissible, and the linearization error $R=Y^3-1-3(Y-1)=Y^3-3Y+2$ satisfies $R=2,0,20$ at $Y=0,1,3$, giving $E[R]=6\\le\\frac{24}{2}\\cdot\\frac32=18$ and $E[R^2]=102\\le\\frac{24^2}{4}\\cdot\\frac92=648$, both bounds of [L3] holding strictly.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "given",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The hypotheses of the refuted statement hold, the propagated covariance $\\frac{27}{2}$ differs from the exact variance $\\frac{267}{2}$, and the remainder bounds of [L3] remain satisfied; hence the propagated covariance controls the actual covariance only through those bounds.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The weighted set has three outcomes and the finite sums are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The outcome Y = 0 has weight 1/2 and the remainder there is R = 2, contributing E[R] = 1 and E[R^2] = 2 to step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The counterexample is one-dimensional in input and output; step 2.1 computes the scalar propagated value 27/2 against the exact variance 267/2 of step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The cubic h(y) = y^3 has nonvanishing second derivative 6y on U, so the failure of equality is not caused by a degenerate (affine) map; the hypotheses of the linearization lemma are met by step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The comparison uses the finitely many support points in the open set U = (-1, 3), and step 2.2 verifies the two domination bounds strictly at those points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The probability space and the random variable are displayed explicitly; no selection from a family is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item refutes an identity by a witness; no biconditional is proved."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the counterexample does not claim that the propagated covariance always differs from the exact one."
+        }
+      ]
+    },
+    "lem-cm-finite-iid-sample-mean-bound": {
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Statement excludes an empty observation family by n>=1. At n=1 the off-diagonal index set {(i,j):1<=i,j<=n, i!=j} is empty: its covariance sum is zero, and step 2.1 leaves the single diagonal variance sigma^2. Step 3.1 explicitly includes n=1. No sample mean for n=0 is asserted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes zero variance without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 includes n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes deterministic observations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only positive thresholds a are asserted in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The given finite family requires no choice construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is a bound, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is a bound, not an equivalence."
+        }
+      ],
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-iid-sampling-model",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathfrak F,\\mathbb P)$ be a probability space\n([[def-probability-measure]]) and let $n\\ge1$ be a natural number. A\n**repeated-observation sampling model** for a real quantity consists of random\nvariables\n$$Y_0,\\dots,Y_{n-1}:\\Omega\\longrightarrow\\mathbb R$$\n([[def-random-element-and-real-random-variable]]) together with the following\nmodel hypotheses, each of which is adopted as part of the model and is not a\nconsequence of the data:\n\n1. **(IID hypothesis)** the family $(Y_k)_{k<n}$ is independent and\n   identically distributed in the sense of\n   [[def-identically-distributed-and-iid-random-variables]]; that is, the\n   whole family is mutually independent and the laws of the $Y_k$ all agree;\n2. **(second-moment hypothesis)** $E\\bigl[Y_0^2\\bigr]<+\\infty$.\n\nUnder hypotheses 1 and 2 the numbers\n$$\\mu:=E[Y_0]\\in\\mathbb R,\\qquad \\sigma^2:=\\operatorname{Var}(Y_0)\\in[0,+\\infty)$$\nare finite by [[def-moments-variance-and-covariance]], and hypothesis 1 makes\nthem the common mean and variance of the family; in particular\n$E[Y_k]=\\mu$ and $\\operatorname{Var}(Y_k)=\\sigma^2$ for every $k<n$. The\n**sample mean** of the model is the random variable\n$$\\overline Y:=\\frac1n\\sum_{k=0}^{n-1}Y_k .$$\n\n### Conventions and scope\n\nThe data of the model are the probability space, the variables $Y_k$, and the\nadopted hypotheses; hypotheses 1 and 2 can fail for the same family of\nvariables on the same probability space, so they must be stated, not inferred\nfrom the notation. The definition assumes no particular law for the $Y_k$: it\nneither assumes a normal law, nor a finite fourth moment, nor a continuous\ndistribution. Hypotheses of that kind, and any conclusion needing them, must\nbe stated separately at their point of use.\n\nA sampling model is a mathematical description of repeated observation. It\ndoes not assert that any physical sequence of measurements satisfies the IID\nand second-moment hypotheses, and it attaches no value to $\\mu$ or $\\sigma^2$\nbeyond the one supplied by the model.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-factorization-of-expectations-for-independent-variables",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $X_0,\\dots,X_{n-1}$ be independent real random variables on a\ncommon probability space, and let $g_i:\\mathbb R\\to\\mathbb R$ be Borel\nmeasurable for each $i<n$.\n\n1. If every $g_i$ is nonnegative, then\n   $$\\mathbb E\\left[\\prod_{i<n}g_i(X_i)\\right]=\\prod_{i<n}\\mathbb E[g_i(X_i)]$$\n   in $[0,+\\infty]$. In this finite product of expectations, a zero factor\n   makes the product zero even when another factor is $+\\infty$; otherwise\n   multiplication has its usual extended nonnegative meaning.\n2. If every $g_i(X_i)$ is integrable, then $\\prod_{i<n}g_i(X_i)$ is integrable\n   and the same factorization holds in $\\mathbb R$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-variance-and-covariance-identities-for-random-variables",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be square-integrable real random variables on one probability space.\nThen\n$$\\operatorname{Var}(X)=\\mathbb E[X^2]-\\mathbb E[X]^2,$$\n$$\\operatorname{Cov}(X,Y)=\\mathbb E[XY]-\\mathbb E[X]\\mathbb E[Y].$$\nMoreover, covariance is symmetric and bilinear on finite linear combinations.\nOn finite full-power-set probability spaces these formulas reduce to the\npublished finite identities.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability\nspace.\n\n1. For scalars $a,b$,\n   $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$\n2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then\n   $$\\mathbb E[X]\\le\\mathbb E[Y].$$\n3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then\n$$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Square-integrability makes each $Y_k$ integrable by $2|Y_k|\\le1+Y_k^2$, and the finite mean is square-integrable by $(\\sum_k y_k)^2\\le n\\sum_k y_k^2$. Therefore [L4] gives $E[\\overline Y]=n^{-1}\\sum_k\\mu=\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $i\\ne j$, mutual independence and [L2] give $E[Y_iY_j]=\\mu^2$, hence $\\operatorname{Cov}(Y_i,Y_j)=0$ by [L3]. Bilinearity gives $\\operatorname{Var}(\\overline Y)=n^{-2}\\sum_{i,j}\\operatorname{Cov}(Y_i,Y_j)=n^{-2}\\sum_{i=1}^n\\sigma^2=\\sigma^2/n$. Together with step 1.1 this is $E|\\overline Y-\\mu|^2=\\sigma^2/n$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "step 1.1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Apply [L5] to $\\overline Y$ using steps 1.1 and 2.1 to obtain the stated probability bound for every $a>0$. The finite calculation includes $n=1$ and $\\sigma^2=0$ without dividing by a variance.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L5",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": []
+    }
+  }
+}

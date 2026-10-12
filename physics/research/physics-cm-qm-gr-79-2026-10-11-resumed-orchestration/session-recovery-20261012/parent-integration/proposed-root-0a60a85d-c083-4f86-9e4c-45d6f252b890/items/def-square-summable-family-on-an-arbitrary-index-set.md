@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-square-summable-family-on-an-arbitrary-index-set.md

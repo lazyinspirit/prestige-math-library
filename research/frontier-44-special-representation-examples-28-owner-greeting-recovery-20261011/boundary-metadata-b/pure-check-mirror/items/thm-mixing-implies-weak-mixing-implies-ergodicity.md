@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-mixing-implies-weak-mixing-implies-ergodicity.md

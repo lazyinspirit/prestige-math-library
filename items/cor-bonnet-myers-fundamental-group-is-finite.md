@@ -129,78 +129,19 @@ set with the discrete topology is compact exactly when it is finite
 **Proof technique:** direct: pass to the universal cover, lift the metric and
 the Ricci bound, apply Bonnet–Myers to the compact cover, and count the fibre.
 
-1.1 $M$ has a universal cover. [F1, given]
-Being a connected topological manifold, $M$ is locally path-connected by [F1],
-so it is path-connected by the same reference. It is semilocally simply
-connected: every point has a chart whose domain is homeomorphic to an open set
-of $\mathbb R^n$, and inside a Euclidean ball around the image of the point,
-which is convex and hence contractible by [F1], every loop is null-homotopic;
-the chart transports this null-homotopy into $M$. By [F1] there is therefore a
-universal covering space $\pi:N\to M$, with $N$ connected and simply connected.
-[F1, given]
+1.1 $M$ has a universal cover. [F1, given] Being a connected topological manifold, $M$ is locally path-connected by [F1], so it is path-connected by the same reference. It is semilocally simply connected: every point has a chart whose domain is homeomorphic to an open set of $\mathbb R^n$, and inside a Euclidean ball around the image of the point, which is convex and hence contractible by [F1], every loop is null-homotopic; the chart transports this null-homotopy into $M$. By [F1] there is therefore a universal covering space $\pi:N\to M$, with $N$ connected and simply connected. [F1, given]
 
-2.1 The lifted metric is complete and $\pi$ is a local isometry. [F2, given, step 1.1]
-Both $M$ and $N$ are connected boundaryless smooth $n$-manifolds, $\pi$ is a
-smooth covering map and a local diffeomorphism, and $M$ is complete with
-$\dim M=n\ge2$; [F2] applies with $\hat M=M$, $\hat g=g$ and gives that
-$\pi^*g$ is a Riemannian metric on $N$, that
-$\pi:(N,\pi^*g)\to(M,g)$ is a local isometry, and that $(N,\pi^*g)$ is complete.
-[F2, given, step 1.1]
+2.1 The lifted metric is complete and $\pi$ is a local isometry. [F2, given, step 1.1] Both $M$ and $N$ are connected boundaryless smooth $n$-manifolds, $\pi$ is a smooth covering map and a local diffeomorphism, and $M$ is complete with $\dim M=n\ge2$; [F2] applies with $\hat M=M$, $\hat g=g$ and gives that $\pi^*g$ is a Riemannian metric on $N$, that $\pi:(N,\pi^*g)\to(M,g)$ is a local isometry, and that $(N,\pi^*g)$ is complete. [F2, given, step 1.1]
 
-3.1 Local isometries transport the curvature and the Ricci tensor. [F2, F3, step 2.1]
-Write $\hat g=\pi^*g$. Since $\pi$ is a local diffeomorphism and
-$d\pi$ preserves the metric, pushing the Levi-Civita connection of $\hat g$
-forward by $\pi$ produces a connection on $M$ that is torsion-free and
-metric-compatible; by the uniqueness in [F3] it is the Levi-Civita connection
-of $g$. Consequently $\pi$ carries the curvature endomorphism of $\hat g$ to
-that of $g$:
-$$d\pi\bigl(\hat R(X,Y)Z\bigr)=R(d\pi X,d\pi Y)\,d\pi Z \qquad(X,Y,Z\in T_xN).$$
-Let $X,Y\in T_xN$ and let $(e_i)_{i=1}^n$ be an orthonormal basis of $T_xN$;
-then $(d\pi e_i)$ is an orthonormal basis of $T_{\pi(x)}M$, because $d\pi$ is
-an isometry. Using the orthonormal-basis formula of [F3] twice,
-$$\operatorname{Ric}_{\hat g}(X,Y) =\sum_{i=1}^n\hat g\bigl(\hat R(e_i,X)Y,e_i\bigr) =\sum_{i=1}^n g\bigl(R(d\pi e_i,d\pi X)d\pi Y,d\pi e_i\bigr) =\operatorname{Ric}_g(d\pi X,d\pi Y).$$
-[F2, F3, step 2.1]
+3.1 Local isometries transport the curvature and the Ricci tensor. [F2, F3, step 2.1] Write $\hat g=\pi^*g$. Since $\pi$ is a local diffeomorphism and $d\pi$ preserves the metric, pushing the Levi-Civita connection of $\hat g$ forward by $\pi$ produces a connection on $M$ that is torsion-free and metric-compatible; by the uniqueness in [F3] it is the Levi-Civita connection of $g$. Consequently $\pi$ carries the curvature endomorphism of $\hat g$ to that of $g$: $$d\pi\bigl(\hat R(X,Y)Z\bigr)=R(d\pi X,d\pi Y)\,d\pi Z \qquad(X,Y,Z\in T_xN).$$ Let $X,Y\in T_xN$ and let $(e_i)_{i=1}^n$ be an orthonormal basis of $T_xN$; then $(d\pi e_i)$ is an orthonormal basis of $T_{\pi(x)}M$, because $d\pi$ is an isometry. Using the orthonormal-basis formula of [F3] twice, $$\operatorname{Ric}_{\hat g}(X,Y) =\sum_{i=1}^n\hat g\bigl(\hat R(e_i,X)Y,e_i\bigr) =\sum_{i=1}^n g\bigl(R(d\pi e_i,d\pi X)d\pi Y,d\pi e_i\bigr) =\operatorname{Ric}_g(d\pi X,d\pi Y).$$ [F2, F3, step 2.1]
 
-4.1 The cover satisfies the hypotheses of Bonnet–Myers and is compact. [F3, F4, given, step 1.1, step 2.1, step 3.1]
-For every $x\in N$ and $Z\in T_xN$ the identity of step 3.1 and the hypothesis
-on $M$ give
-$$\operatorname{Ric}_{\hat g}(Z,Z)=\operatorname{Ric}_g(d\pi Z,d\pi Z) \ge(n-1)k\,g(d\pi Z,d\pi Z)=(n-1)k\,\hat g(Z,Z),$$
-because $d\pi$ is an isometry. Here $k>0$, $n\ge2$, and $(N,\hat g)$ is
-complete, connected and boundaryless by steps 1.1 and 2.1. By [F4] the cover
-$(N,\hat g)$ is compact. [F3, F4, given, step 1.1, step 2.1, step 3.1]
+4.1 The cover satisfies the hypotheses of Bonnet–Myers and is compact. [F3, F4, given, step 1.1, step 2.1, step 3.1] For every $x\in N$ and $Z\in T_xN$ the identity of step 3.1 and the hypothesis on $M$ give $$\operatorname{Ric}_{\hat g}(Z,Z)=\operatorname{Ric}_g(d\pi Z,d\pi Z) \ge(n-1)k\,g(d\pi Z,d\pi Z)=(n-1)k\,\hat g(Z,Z),$$ because $d\pi$ is an isometry. Here $k>0$, $n\ge2$, and $(N,\hat g)$ is complete, connected and boundaryless by steps 1.1 and 2.1. By [F4] the cover $(N,\hat g)$ is compact. [F3, F4, given, step 1.1, step 2.1, step 3.1]
 
-5.1 Every fibre of $\pi$ is finite. [F4, F5, F6, step 2.1, step 4.1]
-Fix $p\in M$ and let $F=\pi^{-1}(p)$. The fibre is nonempty because $\pi$ is a
-covering map and hence surjective. It is a discrete subspace of $N$: given
-$y\in F$, an evenly covered neighbourhood $U$ of $p$ in $M$ has
-$\pi^{-1}(U)=\bigsqcup_\alpha V_\alpha$ with $\pi|V_\alpha$ a homeomorphism
-onto $U$ and $y\in V_\alpha$, so $V_\alpha\cap F=\{y\}$ and $\{y\}$ is open in
-$F$ by [F5]. The fibre is closed in $N$: by [F6] the singleton $\{p\}$ is
-closed in the metric space $M$, and $F=\pi^{-1}(\{p\})$ is the preimage of a
-closed set under the continuous map $\pi$. Since $N$ is compact by step 4.1,
-[F4] makes $F$ compact; a compact space with the discrete topology is finite by
-[F6]. [F4, F5, F6, step 2.1, step 4.1]
+5.1 Every fibre of $\pi$ is finite. [F4, F5, F6, step 2.1, step 4.1] Fix $p\in M$ and let $F=\pi^{-1}(p)$. The fibre is nonempty because $\pi$ is a covering map and hence surjective. It is a discrete subspace of $N$: given $y\in F$, an evenly covered neighbourhood $U$ of $p$ in $M$ has $\pi^{-1}(U)=\bigsqcup_\alpha V_\alpha$ with $\pi|V_\alpha$ a homeomorphism onto $U$ and $y\in V_\alpha$, so $V_\alpha\cap F=\{y\}$ and $\{y\}$ is open in $F$ by [F5]. The fibre is closed in $N$: by [F6] the singleton $\{p\}$ is closed in the metric space $M$, and $F=\pi^{-1}(\{p\})$ is the preimage of a closed set under the continuous map $\pi$. Since $N$ is compact by step 4.1, [F4] makes $F$ compact; a compact space with the discrete topology is finite by [F6]. [F4, F5, F6, step 2.1, step 4.1]
 
-6.1 The fundamental group is finite. [F5, given, step 1.1, step 5.1]
-Fix a basepoint $b\in M$ and let $F=\pi^{-1}(b)$, finite by step 5.1, with a
-chosen point $y_0\in F$. By [F5] the deck group of the universal cover is
-isomorphic to $\pi_1(M,b)$, and the evaluation map
-$\operatorname{Deck}(\pi)\to F$, $h\mapsto h(y_0)$, is injective because deck
-transformations of the connected total space $N$ agreeing at one point are
-equal. Hence $|\pi_1(M,b)|=|\operatorname{Deck}(\pi)|\le|F|<\infty$. As $b$ was
-arbitrary this proves finiteness of the fundamental group at every basepoint.
-[F5, given, step 1.1, step 5.1]
+6.1 The fundamental group is finite. [F5, given, step 1.1, step 5.1] Fix a basepoint $b\in M$ and let $F=\pi^{-1}(b)$, finite by step 5.1, with a chosen point $y_0\in F$. By [F5] the deck group of the universal cover is isomorphic to $\pi_1(M,b)$, and the evaluation map $\operatorname{Deck}(\pi)\to F$, $h\mapsto h(y_0)$, is injective because deck transformations of the connected total space $N$ agreeing at one point are equal. Hence $|\pi_1(M,b)|=|\operatorname{Deck}(\pi)|\le|F|<\infty$. As $b$ was arbitrary this proves finiteness of the fundamental group at every basepoint. [F5, given, step 1.1, step 5.1]
 
-7.1 Boundary cases and conventions. [F4, F6, step 4.1, step 5.1, step 6.1]
-If $M$ is empty then it has no basepoint and the assertion about
-$\pi_1(M,b)$ is vacuous; if $M$ is nonempty, connectedness makes the universal
-cover nonempty and every fibre nonempty. The case $n=2$ is included: the normal
-trace has one term and the Ricci bound is a scalar-curvature bound. The case
-$k>0$ is essential, since a flat torus is complete with
-$\operatorname{Ric}=0$ and infinite fundamental group; the statement assumes
-$k>0$ and no uniform bound is weakened here. The inequality in step 4.1 is
-pointwise and no integrability or completeness of the cover beyond step 2.1 is
-used. No choice beyond the inherited [A1] is used. [F4, F6, step 4.1, step 5.1, step 6.1] ∎
+7.1 Boundary cases and conventions. [F4, F6, step 4.1, step 5.1, step 6.1] If $M$ is empty then it has no basepoint and the assertion about $\pi_1(M,b)$ is vacuous; if $M$ is nonempty, connectedness makes the universal cover nonempty and every fibre nonempty. The case $n=2$ is included: the normal trace has one term and the Ricci bound is a scalar-curvature bound. The case $k>0$ is essential, since a flat torus is complete with $\operatorname{Ric}=0$ and infinite fundamental group; the statement assumes $k>0$ and no uniform bound is weakened here. The inequality in step 4.1 is pointwise and no integrability or completeness of the cover beyond step 2.1 is used. No choice beyond the inherited [A1] is used. [F4, F6, step 4.1, step 5.1, step 6.1] ∎
 
 ## Source locator
 

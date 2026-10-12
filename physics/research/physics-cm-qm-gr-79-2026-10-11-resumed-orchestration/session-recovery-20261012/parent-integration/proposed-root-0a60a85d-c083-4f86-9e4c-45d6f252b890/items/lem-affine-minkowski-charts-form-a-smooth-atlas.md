@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-affine-minkowski-charts-form-a-smooth-atlas.md

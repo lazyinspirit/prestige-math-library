@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-index-of-a-fredholm-map-is-locally-constant.md

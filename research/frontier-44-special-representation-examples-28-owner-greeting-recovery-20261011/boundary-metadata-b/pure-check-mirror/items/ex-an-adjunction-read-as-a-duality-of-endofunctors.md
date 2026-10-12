@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-an-adjunction-read-as-a-duality-of-endofunctors.md

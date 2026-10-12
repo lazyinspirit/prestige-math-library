@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-heat-cauchy-solution-for-bounded-continuous-data.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-neighbouring-differentials-after-a-gaussian-basis-change.md

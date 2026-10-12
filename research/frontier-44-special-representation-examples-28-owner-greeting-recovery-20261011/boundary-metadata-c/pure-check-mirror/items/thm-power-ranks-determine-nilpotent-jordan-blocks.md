@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-power-ranks-determine-nilpotent-jordan-blocks.md

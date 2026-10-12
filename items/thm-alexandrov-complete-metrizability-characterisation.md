@@ -54,10 +54,9 @@ Assume Dependent Choice. For a subspace $Y$ of a complete metric space $X$, $Y$ 
 
 1.1 The empty subspace satisfies both conditions. [given, F1, F2]
 
-1.2 The assumed DC supplies the Countable Choice needed by [F1]. [given, F3]
-For any sequence of nonempty sets, take the set of finite lists choosing from its first finitely many members. This set contains the empty list, and the one-term-extension relation is entire. DC starting at the empty list gives nested lists of every finite length; their union is the required choice function. No implication theorem from a later choice page is used.
+1.2 The assumed DC supplies the Countable Choice needed by [F1]. [given, F3] For any sequence of nonempty sets, take the set of finite lists choosing from its first finitely many members. This set contains the empty list, and the one-term-extension relation is entire. DC starting at the empty list gives nested lists of every finite length; their union is the required choice function. No implication theorem from a later choice page is used. [F1, given, F3]
 
-2.1 Apply [F1] with the given complete ambient metric and the Countable [step 1.2, F1, F2]
-Choice just derived. For the converse apply [F2] under the given DC; it needs only a compatible complete metric on $Y$, not completeness of its inherited metric. Thus both implications have their stated hypotheses.
+2.1 Apply [F1] with the given complete ambient metric and the Countable [step 1.2, F1, F2] Choice just derived. For the converse apply [F2] under the given DC; it needs only a compatible complete metric on $Y$, not completeness of its inherited metric. Thus both implications have their stated hypotheses. [F1, step 1.2, F2]
 
 3.1 The preceding construction and implications establish the assertion. [step 2.1] ∎
+

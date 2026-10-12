@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-homotopic-maps-induce-equal-maps-in-singular-cohomology.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-grothendieck-category-has-enough-injectives-and-every-object-admits-an-injective-resolution.md

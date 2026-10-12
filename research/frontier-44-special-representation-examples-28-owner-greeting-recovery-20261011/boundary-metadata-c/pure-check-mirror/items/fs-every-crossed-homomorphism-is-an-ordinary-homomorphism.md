@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-crossed-homomorphism-is-an-ordinary-homomorphism.md

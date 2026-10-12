@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cech-cohomology-holomorphic-line-bundle-sections.md

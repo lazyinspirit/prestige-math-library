@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-standard-chart-prime-and-local-ring-correspondence.md

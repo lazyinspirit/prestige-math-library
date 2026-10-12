@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-eisenstein-prime-is-totally-ramified.md

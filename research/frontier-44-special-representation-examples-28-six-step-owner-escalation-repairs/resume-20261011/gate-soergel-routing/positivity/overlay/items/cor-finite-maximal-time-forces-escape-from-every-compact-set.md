@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-maximal-time-forces-escape-from-every-compact-set.md

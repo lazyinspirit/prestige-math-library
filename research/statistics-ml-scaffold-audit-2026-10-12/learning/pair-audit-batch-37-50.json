@@ -1,0 +1,946 @@
+{
+  "schema_version": 1,
+  "batch": "ML-37\u2013ML-50",
+  "status": "audited_with_scoped_repairs_and_explicit_future_proof_obligations",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_sha256_at_checkpoint": "b3d1e6fb4b98d04d4cf7219554d1c76fca49c9f51fa4d1dc1720bca542439cd1",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "pairs": [
+    {
+      "id": "ML-37",
+      "assessment": "audited_finite_graph_ad_and_exact_derivative_suppliers",
+      "plan_section_sha256": "3f1a0d9c956dac666af92eaa54fd6a49f13445f267e2b638f94f7d0354cea23d",
+      "findings": [
+        "The scope distinguishes forward Jv and reverse J^T v, sums adjoints at fan-out, and limits a one-pass full-gradient cost claim to a scalar output and a finite differentiable executed trace.",
+        "Branchwise differentiation is local to the executed branch; a classical derivative is not supplied at ReLU kinks. Storage and recomputation remain algorithmic costs, while floating-point accuracy is explicitly outside the theorem.",
+        "Baydin et al. is a survey, so the mathematical correctness theorem remains the pair\u2019s local reverse-topological chain-rule induction."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S01",
+          "citation": "At\u0131l\u0131m G\u00fcne\u015f Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, Jeffrey Mark Siskind, Automatic Differentiation in Machine Learning: a Survey (2018; JMLR 18(153), 1-43)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/baydin-autodiff-survey.pdf",
+          "pdf_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/baydin-autodiff-survey.txt",
+          "full_text_sha256": "80131c041640dbc76640609c7b88332fce8780be3f1f9af54e641d842b3666b1",
+          "dossier_read_status": "Relevant units complete: \u00a7\u00a72.1-2.2, 3.1-3.3, 4.1-4.2, JMLR pp.3-19. Survey/derivation source, not a standalone formal reverse-mode theorem; local proof route is finite-graph chain-rule induction.",
+          "manifest_anchors": [
+            "\u00a72.1 finite-difference truncation/roundoff and dimension cost",
+            "\u00a72.2 symbolic differentiation and expression swell",
+            "\u00a73 computational graph, forward mode, dual numbers, reverse mode and adjoint accumulation, pp.8-13",
+            "\u00a74.1 gradient-based optimization and \u00a74.2 reverse-mode AD as backpropagation/dynamic control flow, pp.14-19"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "JMLR pp. 3\u201319; especially \u00a73 computational graph pp. 8\u201313 (forward mode \u00a73.1; reverse mode \u00a73.2) and \u00a74.1\u20134.2 pp. 14\u201319"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-chain-rule-for-total-derivatives",
+          "status": "published",
+          "contract": "Euclidean total-derivative chain rule for a composition at a point; supplies finite-dimensional node composition."
+        },
+        {
+          "id": "thm-chain-sum-product-and-composition-rules-for-banach-derivatives",
+          "status": "published",
+          "contract": "Sum/product/composition rules for Frechet derivatives on Banach spaces; use only for the stated Banach-valued primitive extension."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A finite ordered computation DAG with each primitive differentiable on an open domain and its local derivative available."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove reverse correctness by induction in reverse topological order, including shared nodes/fan-out accumulation.",
+        "State primitive-domain, local-derivative, branch-path, and memory/recomputation assumptions; do not infer a classical derivative at a kink or finite-precision accuracy."
+      ]
+    },
+    {
+      "id": "ML-38",
+      "assessment": "audited_local_descent_lemma_with_exact_step_threshold",
+      "plan_section_sha256": "67300c229dc7ef2192b5d01080f2fcfaf2e8d4426f8f9ad8358398e7472c8ae5",
+      "findings": [
+        "The plan now gives the exact step range 0<alpha<=1/L and descent inequality F(w_{t+1})<=F(w_t)-alpha/2||grad F(w_t)||^2.",
+        "A lower bound along the iterate sequence makes the sum of squared gradients finite, hence gradient norms vanish; this does not imply convergence of iterates or a local/global minimizer.",
+        "Bottou et al. supplies smoothness notation/context but the deterministic descent theorem is a short local proof."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S02",
+          "citation": "L\u00e9on Bottou, Frank E. Curtis, Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning (2018; SIAM Review 60(2); arXiv:1606.04838v3)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.pdf",
+          "pdf_sha256": "6d09a78cc225e29a10fcff75974692e1900810fb04222076bf69dfbbf35931d2",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.txt",
+          "full_text_sha256": "46c42c1d8811bb26734a498de78ce908cec0dea2da4d173ccefd052056e9036b",
+          "dossier_read_status": "Relevant units and displayed proofs read: Algorithm 4.1, Assumptions 4.1/4.3, Lemmas 4.2/4.4, Theorems 4.8-4.10, \u00a76.5 diagonal scaling, \u00a77.1 momentum/Nesterov. Printed pp.21-24, 31-34, 64-70; Appendix B proof references read where used.",
+          "manifest_anchors": [
+            "\u00a73.1-3.3 expected/empirical objectives and stochastic-vs-batch setup",
+            "Algorithm 4.1 and minibatch interpretation, pp.21-22",
+            "Assumptions 4.1/4.3 and Lemmas 4.2/4.4, pp.23-24",
+            "Theorems 4.8-4.10 and step condition (4.19), pp.31-34",
+            "\u00a76.5 AdaGrad/RMSProp/diagonal scaling, pp.64-67",
+            "\u00a77.1 heavy-ball quadratic rates and stochastic-momentum caveat, pp.68-69"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Algorithm 4.1 and smoothness setup, printed pp. 21\u201324; deterministic GD descent is proved locally, not attributed as a source theorem"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-chain-rule-for-total-derivatives",
+          "status": "published",
+          "contract": "Euclidean total derivative/composition rule."
+        },
+        {
+          "id": "def-jacobian-matrix-and-gradient",
+          "status": "published",
+          "contract": "Defines the Euclidean gradient from partial derivatives."
+        },
+        {
+          "id": "thm-gradient-represents-directional-derivatives-and-steepest-ascent",
+          "status": "published",
+          "contract": "For a totally differentiable scalar function, directional derivative is inner product with gradient."
+        },
+        {
+          "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "status": "published",
+          "contract": "Finite-dimensional Euclidean Cauchy\u2013Schwarz and norm inequality."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "An L-smoothness definition and objective lower bound over the actual iterate sequence."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the descent lemma from the integral/Taylor remainder under L-Lipschitz gradient and telescope.",
+        "Do not convert stationary-point convergence into optimizer or global-minimum convergence."
+      ]
+    },
+    {
+      "id": "ML-39",
+      "assessment": "audited_source_faithful_stochastic_direction_and_random_iterate_contracts",
+      "plan_section_sha256": "2723181e87b2431872b2c1e0358565f99fb3be465405345096eade1c57206735",
+      "findings": [
+        "Bottou\u2013Curtis\u2013Nocedal are kept in their general stochastic-direction regime: lower-bounded smooth F, expected direction positively aligned with grad F and norm-comparable, with conditional variance M+M_V||grad F||^2.",
+        "The fixed-step result carries alpha<=mu/(L M_G) and its exact noise floor plus initialization term; the diminishing-step result uses sum alpha=infinity and sum alpha^2<infinity and concludes weighted expected average stationarity.",
+        "Ghadimi\u2013Lan is separately stated as an RSG method with a nonuniform output distribution proportional to 2 gamma_k-L gamma_k^2; its exact bound is retained. No global-minimum conclusion is made."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S02",
+          "citation": "L\u00e9on Bottou, Frank E. Curtis, Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning (2018; SIAM Review 60(2); arXiv:1606.04838v3)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.pdf",
+          "pdf_sha256": "6d09a78cc225e29a10fcff75974692e1900810fb04222076bf69dfbbf35931d2",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.txt",
+          "full_text_sha256": "46c42c1d8811bb26734a498de78ce908cec0dea2da4d173ccefd052056e9036b",
+          "dossier_read_status": "Relevant units and displayed proofs read: Algorithm 4.1, Assumptions 4.1/4.3, Lemmas 4.2/4.4, Theorems 4.8-4.10, \u00a76.5 diagonal scaling, \u00a77.1 momentum/Nesterov. Printed pp.21-24, 31-34, 64-70; Appendix B proof references read where used.",
+          "manifest_anchors": [
+            "\u00a73.1-3.3 expected/empirical objectives and stochastic-vs-batch setup",
+            "Algorithm 4.1 and minibatch interpretation, pp.21-22",
+            "Assumptions 4.1/4.3 and Lemmas 4.2/4.4, pp.23-24",
+            "Theorems 4.8-4.10 and step condition (4.19), pp.31-34",
+            "\u00a76.5 AdaGrad/RMSProp/diagonal scaling, pp.64-67",
+            "\u00a77.1 heavy-ball quadratic rates and stochastic-momentum caveat, pp.68-69"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Assumptions 4.1/4.3, Lemmas 4.2/4.4, Theorems 4.8\u20134.10 and proofs, printed pp. 21\u201334"
+        },
+        {
+          "manifest_id": "S03",
+          "citation": "Saeed Ghadimi, Guanghui Lan, Stochastic First- and Zeroth-Order Methods for Nonconvex Stochastic Programming (2013; SIAM Journal on Optimization 23(4), 2341-2368; arXiv:1309.5549)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/ghadimi-lan-nonconvex-stochastic-optimization.pdf",
+          "pdf_sha256": "00a913e9c9fff9130a7ed203f3f4fc6d691c5f6f1c10ab84164579256597eac7",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/ghadimi-lan-nonconvex-stochastic-optimization.txt",
+          "full_text_sha256": "faab700b1400c563e65df2b162585a0fc812ee7a11d7f575a4a31993ec2cb597",
+          "dossier_read_status": "Relevant unit complete with Theorem 2.1 proof: L-smooth objective, unbiased stochastic oracle with bounded variance (A1), randomized SGD output and constant-step corollary. Source PDF pp.2-8.",
+          "manifest_anchors": [
+            "Assumption A1, \u00a71, pp.2-3",
+            "\u00a72.1 RSG algorithm, Theorem 2.1 and complete proof, pp.5-8",
+            "Corollary 2.2 randomized-iterate stationarity rate"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Assumption A1, randomized stochastic-gradient algorithm, Theorem 2.1 and proof, PDF pp. 2\u20138"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "contract": "Defines expectation for nonnegative/integrable random variables."
+        },
+        {
+          "id": "def-filtration-and-filtered-probability-space",
+          "status": "published",
+          "contract": "Defines filtration and adapted information flow."
+        },
+        {
+          "id": "def-adapted-and-integrable-stochastic-process",
+          "status": "published",
+          "contract": "Adapted/integrable process conventions."
+        },
+        {
+          "id": "def-conditional-expectation-as-an-ae-class",
+          "status": "published",
+          "contract": "Conditional expectation is an almost-sure equivalence class; carries its AC existence premise."
+        },
+        {
+          "id": "thm-tower-property-of-conditional-expectation",
+          "status": "published",
+          "contract": "Conditional-expectation tower law for nested sigma-algebras under its integrability premise."
+        },
+        {
+          "id": "def-martingale-difference-sequence",
+          "status": "published",
+          "contract": "Integrable adapted increments with zero conditional mean; its definition carries AC."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "The objective risk/sample-risk definitions from ML-01 and a filtration adapted to the stochastic oracle."
+      ],
+      "future_proof_authoring_obligations": [
+        "Keep conditional unbiasedness, direction-alignment, second-moment and variance assumptions distinct.",
+        "For the random iterate, preserve the theorem\u2019s exact probability weights and finite-sample schedule."
+      ]
+    },
+    {
+      "id": "ML-40",
+      "assessment": "audited_quadratic_heavy_ball_asymptotic_factor_and_no_stochastic_transfer",
+      "plan_section_sha256": "63651a815ac84e9514fa902743f195dc5a49c27b7f33c6bcedfe301f4d8c6036",
+      "findings": [
+        "The pair defines heavy-ball with w0=w1 and the separate Nesterov lookahead update.",
+        "For a symmetric positive-definite quadratic with spectrum [c,L], it now gives the source parameters and asymptotic worst-case spectral factor; repeated endpoint roots mean this is not a one-step Euclidean contraction.",
+        "Bottou et al. explicitly say general stochastic-momentum guarantees remain elusive; no such rate is inferred."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S02",
+          "citation": "L\u00e9on Bottou, Frank E. Curtis, Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning (2018; SIAM Review 60(2); arXiv:1606.04838v3)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.pdf",
+          "pdf_sha256": "6d09a78cc225e29a10fcff75974692e1900810fb04222076bf69dfbbf35931d2",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.txt",
+          "full_text_sha256": "46c42c1d8811bb26734a498de78ce908cec0dea2da4d173ccefd052056e9036b",
+          "dossier_read_status": "Relevant units and displayed proofs read: Algorithm 4.1, Assumptions 4.1/4.3, Lemmas 4.2/4.4, Theorems 4.8-4.10, \u00a76.5 diagonal scaling, \u00a77.1 momentum/Nesterov. Printed pp.21-24, 31-34, 64-70; Appendix B proof references read where used.",
+          "manifest_anchors": [
+            "\u00a73.1-3.3 expected/empirical objectives and stochastic-vs-batch setup",
+            "Algorithm 4.1 and minibatch interpretation, pp.21-22",
+            "Assumptions 4.1/4.3 and Lemmas 4.2/4.4, pp.23-24",
+            "Theorems 4.8-4.10 and step condition (4.19), pp.31-34",
+            "\u00a76.5 AdaGrad/RMSProp/diagonal scaling, pp.64-67",
+            "\u00a77.1 heavy-ball quadratic rates and stochastic-momentum caveat, pp.68-69"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "\u00a77.1 printed pp. 68\u201369; quadratic heavy-ball and Nesterov update definitions"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published",
+          "contract": "Finite-dimensional self-adjoint real operator admits an orthonormal eigenbasis."
+        },
+        {
+          "id": "prop-gradient-of-a-quadratic-matrix-form",
+          "status": "published",
+          "contract": "For q(x)=1/2||Cx||^2, gradient is C*Cx and Hessian is C*C; quadratic scalar recurrence/parameters remain local."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A symmetric positive-definite finite-dimensional Hessian and the source-specific tuned parameter selection."
+      ],
+      "future_proof_authoring_obligations": [
+        "Diagonalize the Hessian and solve each scalar second-order recurrence, treating repeated endpoint roots and spectral/asymptotic rate accurately.",
+        "Do not transfer the theorem to stochastic or general nonquadratic neural objectives."
+      ]
+    },
+    {
+      "id": "ML-41",
+      "assessment": "audited_adam_counterexamples_including_epsilon_and_amsgrad_schedule",
+      "plan_section_sha256": "3fdf0c29c3129483355f47e942de84c5e4715f62eb309657fffec6cfd6a366f5",
+      "findings": [
+        "Reddi et al. Theorems 1\u20132 show nonzero average regret for Adam on one-dimensional online convex sequences, for fixed beta1,beta2 in [0,1) with beta1<sqrt(beta2); Theorem 6 extends the counterexample to every fixed epsilon>0 under its Adam parameter conditions.",
+        "AMSGrad Theorem 4 needs a bounded-diameter feasible set, coordinate-gradient bound, alpha_t=alpha/sqrt(t), beta_1t<=beta_1, and gamma=beta_1/sqrt(beta_2)<1. Its O(sqrt(T)) corollary uses decaying beta_1t; constant beta1 practice is not that corollary.",
+        "These are online-convex regret results, not nonconvex neural-loss convergence; source algorithm pseudocode and guarantees stay separate."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S04",
+          "citation": "Sashank J. Reddi, Satyen Kale, Sanjiv Kumar, On the Convergence of Adam and Beyond (2019 arXiv version of ICLR 2018; arXiv:1904.09237v1)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/reddi-adam-amsgrad.pdf",
+          "pdf_sha256": "75a949b0751e81c490e7eee76efadd1eb8868c64f44275d8d1542a8f42cb7c01",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/reddi-adam-amsgrad.txt",
+          "full_text_sha256": "fe7412826e61bbfd98021224f5c39ef3de05495a6c7f20cccb0311472627ac19",
+          "dossier_read_status": "Relevant units/proofs complete: online-convex setup and Algorithms 1-2, Adam counterexample/Theorem 1, AMSGrad Theorem 4 and Appendix D proof including Lemma 2. Main pp.2-6; Appendix A pp.10-11; Appendix D pp.16-19.",
+          "manifest_anchors": [
+            "\u00a72 adaptive methods and Adam recurrence",
+            "\u00a73 Theorems 1-3 online/stochastic convex counterexamples",
+            "\u00a74 Algorithm 2 AMSGrad and Theorem 4 assumptions/regret",
+            "Appendix A proof of Theorem 1",
+            "Appendix D proof of Theorem 4; decaying \u03b21t is required for stated sublinear regret corollary"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Algorithms 1\u20132/Theorems 1\u20134; Appendix A/D proofs; additional Theorem 6 and Appendix F fixed-epsilon proof, PDF pp. 21\u201322 (read in this audit)",
+          "additional_reading": "Appendix F/Theorem 6 and its fixed-epsilon proof, PDF pages 21\u201322, read directly after noticing the dossier\u2019s original selected range omitted it."
+        },
+        {
+          "manifest_id": "S02",
+          "citation": "L\u00e9on Bottou, Frank E. Curtis, Jorge Nocedal, Optimization Methods for Large-Scale Machine Learning (2018; SIAM Review 60(2); arXiv:1606.04838v3)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.pdf",
+          "pdf_sha256": "6d09a78cc225e29a10fcff75974692e1900810fb04222076bf69dfbbf35931d2",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bottou-curtis-nocedal-optimization.txt",
+          "full_text_sha256": "46c42c1d8811bb26734a498de78ce908cec0dea2da4d173ccefd052056e9036b",
+          "dossier_read_status": "Relevant units and displayed proofs read: Algorithm 4.1, Assumptions 4.1/4.3, Lemmas 4.2/4.4, Theorems 4.8-4.10, \u00a76.5 diagonal scaling, \u00a77.1 momentum/Nesterov. Printed pp.21-24, 31-34, 64-70; Appendix B proof references read where used.",
+          "manifest_anchors": [
+            "\u00a73.1-3.3 expected/empirical objectives and stochastic-vs-batch setup",
+            "Algorithm 4.1 and minibatch interpretation, pp.21-22",
+            "Assumptions 4.1/4.3 and Lemmas 4.2/4.4, pp.23-24",
+            "Theorems 4.8-4.10 and step condition (4.19), pp.31-34",
+            "\u00a76.5 AdaGrad/RMSProp/diagonal scaling, pp.64-67",
+            "\u00a77.1 heavy-ball quadratic rates and stochastic-momentum caveat, pp.68-69"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "\u00a76.5 and \u00a77.1, printed pp. 64\u201370, adaptive/momentum context only"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-39",
+          "status": "earlier Category 4 pair",
+          "contract": "Update/noise notation only; ML-41 does not depend on the later online-decision pair."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Online convex regret definitions and bounded-gradient inequalities; proof kept local."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the Adam loss sequence and evaluate its regret, including the fixed-epsilon scaling argument.",
+        "State the AMSGrad time-varying beta schedule exactly and prove/retain its potential bound; do not cite practical constant-beta results as theorem evidence."
+      ]
+    },
+    {
+      "id": "ML-42",
+      "assessment": "audited_rectifier_second_moment_recursions_with_symmetry_and_backward_independence",
+      "plan_section_sha256": "3fd89ea8da42272512c6436e03142ca9a4fcf8e3ee4914486f3810d988154556",
+      "findings": [
+        "The forward recurrence carries the source\u2019s independent identically distributed weights, independent equal-distribution inputs, symmetric-about-zero weight law, zero bias and symmetric preactivation contract; zero mean alone is insufficient.",
+        "The backward recurrence separately assumes layer weights independent of incoming gradients and gates independent of downstream gradients; fan-out differs from fan-in.",
+        "PReLU factors are distinguished for forward fan-in and backward fan-out. The formulas are initialization moment calculations, not learning/generalization guarantees."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S05",
+          "citation": "Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun, Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification (2015; ICCV; arXiv:1502.01852)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/he-rectifier-initialization.pdf",
+          "pdf_sha256": "738cb88db1250d9bdbf51569c5ec3a87303c7e946167d58381003d2f93d4127d",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/he-rectifier-initialization.txt",
+          "full_text_sha256": "90fd5e812e3fdc20ebeb5e862b2657a4397de3013c1f29baba5af3ae0743e1e2",
+          "dossier_read_status": "Relevant unit complete: \u00a72.2 forward/backward variance derivations, PReLU extension and empirical comparisons, printed pp.3-5.",
+          "manifest_anchors": [
+            "\u00a72.2 forward recurrences (6)-(10)",
+            "\u00a72.2 backward recurrence (12)-(14)",
+            "\u00a72.2 PReLU formula (15), Xavier comparison and experiments"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "\u00a72.2, printed pp. 3\u20135, forward equations (5)\u2013(10), backward equations (11)\u2013(15)"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-independent-random-elements",
+          "status": "published",
+          "contract": "Defines independence of random elements via product laws on measurable spaces."
+        },
+        {
+          "id": "thm-independent-random-elements-have-product-joint-law",
+          "status": "published",
+          "contract": "Independent random elements have their product joint law."
+        },
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "contract": "Expectation/integrability notation."
+        },
+        {
+          "id": "def-moments-variance-and-covariance",
+          "status": "published",
+          "contract": "First/second moments, variance and covariance definitions."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Layer-wise finite second moments and the exact independence/symmetry assumptions stated in the pair."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove the ReLU half-second-moment and derivative-gate half-moment separately.",
+        "Prove the forward/backward independence assumptions or state them as explicit model premises; do not infer them from Gaussian initialization alone without the model\u2019s dependency structure."
+      ]
+    },
+    {
+      "id": "ML-43",
+      "assessment": "audited_three_regimes_and_clarke_flow_scope_repaired",
+      "plan_section_sha256": "67b193324ea184f0199b305235f5f5cb03752641175fd0622db0e65f57cfc965",
+      "findings": [
+        "Linear least-squares selection reuses the published pseudoinverse minimum-norm theorem and normal equations; Soudry\u2019s separable linear-loss regime is separate and keeps its tight-tail, step-size and generic/degenerate-data distinctions.",
+        "Lyu\u2013Li\u2019s nonsmooth flow is a Clarke differential inclusion under local Lipschitzness and a chain-rule premise (A1), homogeneity, exponential loss, and separability after some t0; global AC trajectory existence must be assumed or proved.",
+        "The source\u2019s discrete-GD theorem separately assumes C2-smooth output away from zero and a small-step condition; ordinary ReLU does not satisfy S1. No pointwise ReLU derivative is promoted to a classical ODE field.",
+        "No published Clarke inclusion or full nonconvex inequality KKT supplier was found; KKT/MFCQ proof duties remain local and are not made a global-optimality claim."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S06",
+          "citation": "Daniel Soudry, Elad Hoffer, Mor Shpigel Nacson, Suriya Gunasekar, Nathan Srebro, The Implicit Bias of Gradient Descent on Separable Data (2018; JMLR 19; arXiv:1710.10345)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/soudry-implicit-bias-separable-data.pdf",
+          "pdf_sha256": "048be5291cd8bd4c23989dc3988cde8c27624f526c0d43ab9a2c74a11bd076ee",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/soudry-implicit-bias-separable-data.txt",
+          "full_text_sha256": "211df128d696257641a587998f0d2d2d750e9a14714cc85044832e93f2e2f25f",
+          "dossier_read_status": "Linear separable-data theorem and full proof route read: main \u00a72/Theorem 3, pp.2-4; Appendix A Lemmas 10-11/generic-data proof, pp.15-24; Appendix B KKT support-vector conditions, p.25; Appendix C recursive proof for degenerate data/Theorem 13, pp.26-42.",
+          "manifest_anchors": [
+            "Assumptions 1-3 and Theorem 3: separability, smooth decreasing tight-exponential-tail loss, small fixed GD step",
+            "Theorem 3 expansion and hard-margin L2 direction",
+            "Theorem 9 and Appendix A generic-data proof; Lemmas 10-11",
+            "Lemma 12 generic KKT coefficients",
+            "Theorem 13 recursive projected support-vector decomposition"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Main \u00a72/Theorem 3, PDF pp. 2\u20134; Appendix A pp. 15\u201324, Appendix B p. 25, Appendix C pp. 26\u201342"
+        },
+        {
+          "manifest_id": "S07",
+          "citation": "Kaifeng Lyu, Jian Li, Gradient Descent Maximizes the Margin of Homogeneous Neural Networks (2020; ICLR; arXiv:1906.05890v4)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/lyu_li_homogeneous_margin.pdf",
+          "pdf_sha256": "9774b840158add3d311e69b80fde1b6d3b10bc4c4ef5cec90722121aa59d73a5",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/lyu_li_homogeneous_margin.txt",
+          "full_text_sha256": "0f2744c64889fb0028047491fcdf8767682963b5e604fcbe23f73e93a2bb0f9b",
+          "dossier_read_status": "Main assumptions, Theorems 4.1-4.4 and Appendix A.8/C.6 KKT proof route read (main PDF pp.5-7; appendix anchors A.8, C.6). Appendix B margin-monotonicity proof and full discrete-GD Appendix E proof were not completely audited; local proof obligation remains explicit.",
+          "manifest_anchors": [
+            "\u00a71 homogeneous models and separability/loss threshold",
+            "\u00a74.1 assumptions A1-A4/S1/S5",
+            "\u00a74.2 Theorems 4.1-4.3 smoothed margin and loss/weight growth",
+            "\u00a74.3 Theorem 4.4 KKT limit points, not necessarily global maxima",
+            "Appendix A.8/C.6 KKT proof route and kernel-SVM corollary"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Assumptions A1\u2013A4/S1/S5 and Theorem 4.4, PDF pp. 4\u20137; A.8/C.6 KKT route read. Auxiliary margin proof and full discrete-GD Appendix E not fully audited."
+        },
+        {
+          "manifest_id": "S11",
+          "citation": "Trevor Hastie, Andrea Montanari, Saharon Rosset, Ryan J. Tibshirani, Surprises in High-Dimensional Ridgeless Least Squares Interpolation (2020 arXiv v5; Annals of Statistics; arXiv:1903.08560v5)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hastie-ridgeless-interpolation.pdf",
+          "pdf_sha256": "b671592188609aae4a4b99bfeb6505dcd8fadffb8916126a71570e2d0b658814",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hastie-ridgeless-interpolation.txt",
+          "full_text_sha256": "9f542ed660eafdb0f41eb35aad512948a65a1bcb8c13a096bfff2256a94f6589",
+          "dossier_read_status": "Relevant units and proof complete: min-norm estimator/gradient-descent Proposition 1, risk decomposition, isotropic Theorem 1 and Appendix C.1-C.2 proofs. Main pp.1-10; Theorem 1 proof, Appendix C.2, pp.39-40.",
+          "manifest_anchors": [
+            "\u00a72.2 minimum-norm estimator and zero-init GD selection",
+            "\u00a72.3 conditional bias/variance",
+            "\u00a72.4 underparameterized Marchenko-Pastur risk",
+            "\u00a73.2 Theorem 1 isotropic risk on each side of \u03b3=1",
+            "Appendix C.1 Proposition 2 and C.2 Theorem 1 proof"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Proposition 1 and risk/gradient-descent selection, PDF pp. 1\u201310; Theorem 1 proof pp. 39\u201340"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "status": "published",
+          "contract": "For finite real/complex A,b, A^+b is a least-squares minimizer and the unique minimum-Euclidean-norm minimizer."
+        },
+        {
+          "id": "thm-least-squares-solutions-and-normal-equation",
+          "status": "published",
+          "contract": "Finite-dimensional least-squares minimizers are characterized by the normal equation and differ by the kernel."
+        },
+        {
+          "id": "thm-lagrange-multipliers-for-regular-level-set-constraints",
+          "status": "published",
+          "contract": "Necessary multiplier condition only for a regular equality level set; not the source\u2019s full nonconvex inequality KKT theorem."
+        },
+        {
+          "id": "def-subgradient-and-subdifferential",
+          "status": "published",
+          "contract": "Convex subdifferential definition only; not Clarke\u2019s generalized gradient."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Local definitions/proofs for Clarke subdifferential, differential inclusion and global trajectory existence unless an exact earlier source/interface is added.",
+        "Source\u2019s MFCQ/active-margin multiplier and complementary-slackness argument."
+      ],
+      "future_proof_authoring_obligations": [
+        "Keep linear least squares, separable linear classification, nonsmooth homogeneous gradient flow, and smooth discrete gradient descent as separate theorems.",
+        "Do not claim the gradient-flow inclusion has a global solution without a matching existence theorem or an explicit trajectory premise.",
+        "Complete the source\u2019s A.1\u2013A.8 normalized-margin proof and discrete-gradient estimates before authoring the homogeneous theorem; no KKT point implies global optimum."
+      ]
+    },
+    {
+      "id": "ML-44",
+      "assessment": "audited_exact_du_network_architectures_widths_and_training_only_scope",
+      "plan_section_sha256": "b0384019f1577d24ad3371f34f83c63421e3d1b170c4a687c566f5428a1f2a4f",
+      "findings": [
+        "The architecture and quadratic empirical objective are now stated explicitly; source activation conditions include bounded-at-zero, Lipschitz sigma and Lipschitz derivative, plus analytic nonpolynomial sigma.",
+        "The exact Theorem 5.1 and 6.1 width/step-size orders, Gram eigenvalue and probability are carried into the plan; the residual skip is at every layer and is not a standard two-layer ResNet block.",
+        "The theorem proves zero training loss only. Its extensive Gaussian initialization/Gram persistence proof lemmas were read as a proof route but not independently rederived; those remain authoring/import obligations."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S10",
+          "citation": "Simon S. Du, Jason D. Lee, Haochuan Li, Liwei Wang, Xiyu Zhai, et al., Gradient Descent Finds Global Minima of Deep Neural Networks (2019; ICML; arXiv:1811.03804v4)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/du_resnet_global_minima.pdf",
+          "pdf_sha256": "dc79243379d2ad27d0ed75522eccec88e05694c72556104a35ca78209c9edb8e",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/du_resnet_global_minima.txt",
+          "full_text_sha256": "eff16052904dc5a32dd6ac76b1e53f366a7155285c4994bfd63b991ce1ec1727",
+          "dossier_read_status": "Main setup, proof strategy, Theorems 5.1/6.1 and Appendix C Lemmas C.1-C.7 proof route read (main PDF pp.3-8; Appendix C begins at PDF p.21). Long low-level initialization/concentration derivations were not independently rederived.",
+          "manifest_anchors": [
+            "\u00a73 activation smoothness/analyticity and squared empirical loss/Gaussian initialization",
+            "\u00a74 Gram-matrix dynamics and stability proof strategy",
+            "\u00a75 Theorem 5.1 fully connected width/depth conditions",
+            "\u00a76 Theorem 6.1 every-layer-skip residual network polynomial-width result",
+            "Appendix C Lemmas C.1-C.7 initialization, Gram eigenvalue and perturbation controls"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Problem/architecture setup PDF pp. 3\u20134; Theorem 5.1 PDF pp. 5\u20136; Theorem 6.1 PDF pp. 7\u20138; Appendix C begins PDF p. 21 and Lemmas C.1\u2013C.7 proof route was read; exact formulas were checked against the PDF",
+          "additional_visual_check": "Theorem 5.1 and 6.1/architecture formulas checked against cached PDF pages 4\u20138; the exact architecture scaling in this plan uses sqrt(c_sigma/m), with c_sigma=(E_{Z~N(0,1)} sigma(Z)^2)^(-1)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published",
+          "contract": "Finite-dimensional real symmetric Gram matrices admit orthonormal eigenbases."
+        },
+        {
+          "id": "thm-operator-norm-is-the-largest-singular-value",
+          "status": "published",
+          "contract": "Finite-dimensional operator norm is the largest singular value; supplies norm notation only."
+        },
+        {
+          "id": "ML-37",
+          "status": "earlier Category 4 pair",
+          "contract": "Backpropagation/derivative implementation notation."
+        },
+        {
+          "id": "ML-38",
+          "status": "earlier Category 4 pair",
+          "contract": "Gradient-descent update notation and local descent result."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A nondegenerate data condition ensuring the source-defined Gram matrix has positive lambda_min.",
+        "Matching Gaussian concentration, matrix perturbation, and iterate-stability lemmas; none was found as an existing published supplier."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the theorem-specific initialization Gram concentration, eigenvalue persistence, update-size control and geometric descent or import exact audited lemmas.",
+        "Keep ReLU, conventional residual blocks, population risk and test accuracy outside the theorem."
+      ]
+    },
+    {
+      "id": "ML-45",
+      "assessment": "audited_isotropic_risk_proof_design_with_bmp_route_and_rubio_gap",
+      "plan_section_sha256": "484da02ebfa4128167fdb68db576bbdee5e68a08d7538a7a8dafad550e3675ec",
+      "findings": [
+        "Hastie\u2019s isotropic risk statement is restricted to iid finite-(4+eta)-moment features, independent centered noise, deterministic fixed-norm beta and p/n->gamma, with under/overparameterized formulas separated.",
+        "The P-RMT-02 supplier route now uses Bai\u2013Miao\u2013Pan\u2019s finite-fourth directional spectral law for isotropic T=I; a separate P-RMT-01 lower-positive-edge gap and continuous cutoffs close the pseudoinverse bias/trace without exchanging z->0 limits.",
+        "The Rubio\u2013Mestre generic Lemma 4 martingale proof is invalid as stated: its leave-one-out matrices depend on future columns. Theorem1 itself is not refuted; it is not used as proof evidence.",
+        "The local BMP proof route corrects the (2.6) post-prefactor bound to O(N^-1/2) and replaces the unsupported (2.8) equality with a direct adapted-resolvent concentration/polarization bound."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S11",
+          "citation": "Trevor Hastie, Andrea Montanari, Saharon Rosset, Ryan J. Tibshirani, Surprises in High-Dimensional Ridgeless Least Squares Interpolation (2020 arXiv v5; Annals of Statistics; arXiv:1903.08560v5)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hastie-ridgeless-interpolation.pdf",
+          "pdf_sha256": "b671592188609aae4a4b99bfeb6505dcd8fadffb8916126a71570e2d0b658814",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hastie-ridgeless-interpolation.txt",
+          "full_text_sha256": "9f542ed660eafdb0f41eb35aad512948a65a1bcb8c13a096bfff2256a94f6589",
+          "dossier_read_status": "Relevant units and proof complete: min-norm estimator/gradient-descent Proposition 1, risk decomposition, isotropic Theorem 1 and Appendix C.1-C.2 proofs. Main pp.1-10; Theorem 1 proof, Appendix C.2, pp.39-40.",
+          "manifest_anchors": [
+            "\u00a72.2 minimum-norm estimator and zero-init GD selection",
+            "\u00a72.3 conditional bias/variance",
+            "\u00a72.4 underparameterized Marchenko-Pastur risk",
+            "\u00a73.2 Theorem 1 isotropic risk on each side of \u03b3=1",
+            "Appendix C.1 Proposition 2 and C.2 Theorem 1 proof"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Hastie et al. Proposition 1, risk decomposition, Theorem 1 and Appendix C.1\u2013C.2, PDF pp. 1\u201310 and 39\u201340"
+        },
+        {
+          "manifest_id": "S12",
+          "citation": "Mikhail Belkin, Daniel Hsu, Siyuan Ma, Soumik Mandal, Reconciling modern machine-learning practice and the bias-variance trade-off (2019; PNAS 116(32); arXiv:1812.11118v2)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/belkin-double-descent.pdf",
+          "pdf_sha256": "aa968bc49b5676254e5a4bb045435b9c508e2a1d3ce45f1b0cce645fcedfe79b",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/belkin-double-descent.txt",
+          "full_text_sha256": "fc27008e9a303ccf37219acd9717bc8ae304a992fd4f0610a8a6da5f4f79d936",
+          "dossier_read_status": "Relevant empirical and noiseless-RKHS units complete: \u00a72 RFF/neural-network observations and Appendix A Theorem 1/proof. Main pp.3-8; Appendix A pp.14-15. Modern-network double-descent observations are empirical.",
+          "manifest_anchors": [
+            "\u00a72 random Fourier features/minimum-norm coefficients and MNIST curves",
+            "\u00a72 fully connected two-layer network experiments and optimization caveat",
+            "Appendix A Theorem 1 noiseless Gaussian-RKHS interpolation under uniform compact-domain sampling"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Belkin et al. empirical observations and noiseless Gaussian-RKHS theorem, PDF pp. 3\u20138 and Appendix A pp. 14\u201315"
+        },
+        {
+          "citation": "Bai, Miao, and Pan (2007), \u201cOn Asymptotics of Eigenvectors of Large Sample Covariance Matrix,\u201d Theorem 1 and complete Section 2 proof.",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/bai-miao-pan-2007.pdf",
+          "pdf_sha256": "2560d318e316fdb8ed677b3f4a5ca6ef7406558e110f9cfd123e4a44e2008c03",
+          "full_text_path": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/bai-miao-pan-2007.txt",
+          "full_text_sha256": "2fdbedfbae977f7e78911e58c6435bbd596fff9dda61f9b93e664150f3743875",
+          "pair_audited_ranges": "Theorem 1 PDF pp. 8\u20139; complete Section 2 proof pp. 12\u201316. Root directly read source and saved proof-design corrections in source-findings.json.",
+          "read_status": "Finite-fourth-moment directional spectral theorem and complete proof audited; source proof corrections/local suppliers remain explicit."
+        },
+        {
+          "citation": "Rubio\u2013Mestre (2011), \u201cSpectral Convergence for a General Class of Random Matrices,\u201d Theorem 1 and Lemma 4 proof.",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/rubio-mestre-2011.pdf",
+          "pdf_sha256": "956441da655bc308013c61faf299b984f91166b724c82330529084a2b74445b4",
+          "pair_audited_ranges": "Theorem 1 and preliminary lemmas; Lemma 4 proof, manuscript pp. 7\u20138 / HAL PDF pp. 9\u201310, as recorded in source-findings.json.",
+          "read_status": "Lemma 4 proof inspected by root and found invalid as stated because the centered forms depend on future columns; Theorem 1 itself is not refuted. Do not use this proof route."
+        },
+        {
+          "citation": "Source-finding and counterexample record for the Rubio\u2013Mestre Lemma 4 defect and BMP corrected proof design.",
+          "evidence_file": "research/statistics-ml-scaffold-audit-2026-10-12/source-recovery/source-findings.json",
+          "read_status": "Root-authored read-only source findings; proof design only, not library certification."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution",
+          "status": "published",
+          "contract": "Finite-dimensional Moore\u2013Penrose minimum-norm least-squares selector."
+        },
+        {
+          "id": "P-RMT-01",
+          "status": "independent prerequisite design, not library item",
+          "contract": "Separate MP weak law and Bai\u2013Yin nonzero edge bounds."
+        },
+        {
+          "id": "P-RMT-02",
+          "status": "independent prerequisite design, not library item",
+          "contract": "BMP isotropic directional spectral law with finite-fourth moment and local proof corrections."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Exact iid moment, aspect-ratio, deterministic-signal, independent-noise and design-conditional-risk assumptions.",
+        "Independent P-RMT-01 MP and Bai\u2013Yin proofs; P-RMT-02 adapted directional-resolvent proof and concentration suppliers."
+      ],
+      "future_proof_authoring_obligations": [
+        "Complete the local risk decomposition and continuous cutoff argument under the edge gap; distinguish structural zero eigenvalues for gamma>1.",
+        "Prove/import MP weak convergence, Bai\u2013Yin edge, finite-fourth quadratic-form concentration and Burkholder inputs with exact contracts.",
+        "Do not use Rubio\u2013Mestre Lemma 4 as a proof source; retain its counterexample record."
+      ]
+    },
+    {
+      "id": "ML-46",
+      "assessment": "audited_sequential_ntk_limit_and_sphere_positivity_dependency_boundary",
+      "plan_section_sha256": "6216a95b584e636a172d47634e18df8ad8d9b89220fee89ed2014fb70bb795ec",
+      "findings": [
+        "The initialization kernel theorem is tied to the paper\u2019s 1/sqrt(width) normalization, iid Gaussian initialization and sequential width limits; kernel constancy is only for fixed time intervals under the integrated-direction bound.",
+        "Finite-data kernel-gradient convergence is conditional on a positive-definite limiting Gram matrix; least-squares eigenmodes decay exponentially.",
+        "The sphere-positivity corollary uses a Hermite expansion and Schoenberg coefficient criterion. The library supplies Hermite definitions/orthogonality only; Hermite completeness and Schoenberg\u2019s criterion remain absent and local/import obligations."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S08",
+          "citation": "Arthur Jacot, Franck Gabriel, Cl\u00e9ment Hongler, Neural Tangent Kernel: Convergence and Generalization in Neural Networks (2020 arXiv v4; NeurIPS 2018; arXiv:1806.07572v4)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/jacot-neural-tangent-kernel.pdf",
+          "pdf_sha256": "e052eb972f646747ac4554a294eb62874077e59a5f585f459e2dbd5cb2a0975d",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/jacot-neural-tangent-kernel.txt",
+          "full_text_sha256": "babacd859eb68d1502aefc823932f14a49e9eebfc44c2a9eb8d9a4f290b8405d",
+          "dossier_read_status": "Relevant main units/proofs complete: network normalization, Theorems 1-2, least-squares kernel dynamics, Appendix A.1-A.4. Main pp.2-7; appendix pp.11-19.",
+          "manifest_anchors": [
+            "\u00a72 fully connected 1/sqrt(width) scaling",
+            "\u00a74.1 Proposition 1/Theorem 1 sequential infinite-width NTK limit",
+            "\u00a74.2 Theorem 2 fixed-time kernel constancy under integrated-direction bound",
+            "\u00a75 least-squares kernel ODE/eigenmodes",
+            "Appendix A.1-A.3 induction/LLN/Gronwall proofs",
+            "Appendix A.4 non-polynomial activation positive definiteness on unit sphere, depth at least 2"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Main normalization and Theorems 1\u20132, PDF pp. 2\u20137; least-squares kernel dynamics; Appendices A.1\u2013A.4, PDF pp. 11\u201319"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-30",
+          "status": "earlier Category 4 pair",
+          "contract": "Network notation/UAT only."
+        },
+        {
+          "id": "ML-37",
+          "status": "earlier Category 4 pair",
+          "contract": "Parameter-Jacobian/AD notation."
+        },
+        {
+          "id": "ML-14",
+          "status": "earlier Category 4 pair",
+          "contract": "Kernel/RKHS notation only."
+        },
+        {
+          "id": "def-monic-probabilists-hermite-polynomials",
+          "status": "published",
+          "contract": "Probabilists Hermite polynomial normalization and recurrence."
+        },
+        {
+          "id": "lem-hermite-orthogonality-and-monomial-expansion",
+          "status": "published",
+          "contract": "Hermite orthogonality under standard Gaussian and finite-degree monomial expansion; it does not prove Hermite completeness or Schoenberg\u2019s sphere-kernel theorem."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "For the sphere-positivity corollary: Hermite completeness/coefficient expansion and Schoenberg\u2019s strictly positive even/odd coefficient criterion; these are not existing exact library suppliers."
+      ],
+      "future_proof_authoring_obligations": [
+        "Keep infinite-width sequential limits separate from finite-width fixed-kernel claims.",
+        "Either prove/import Hermite completeness and Schoenberg criterion with hypotheses or omit the sphere-positivity corollary."
+      ]
+    },
+    {
+      "id": "ML-47",
+      "assessment": "audited_chizat_bach_particle_limit_and_conditional_global_optimality",
+      "plan_section_sha256": "72ef69e2d8ef99484fd7d4bbd35e70374346b19f2badd43f600ba5e0070c7c62",
+      "findings": [
+        "The pair states Chizat\u2013Bach Hilbert/feature/semiconvexity/growth assumptions, support localization, characteristic-flow control and particle-limit conclusion; it does not infer W2 geodesic convexity from ordinary mixture convexity.",
+        "Global-optimum results remain separate theorems requiring the source-specific homogeneity, convexity, Sard/boundary, separating initialization and flow-convergence hypotheses.",
+        "P-WGF-01/02 are independent pre-category dependencies, not Category 4 suppliers to Category 3; ReLU is represented using the source signed-square parameterization."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S09",
+          "citation": "L\u00e9na\u00efc Chizat, Francis Bach, On the Global Convergence of Gradient Descent for Over-parameterized Models using Optimal Transport (2018; NeurIPS; arXiv:1805.09545v2)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/chizat-bach-optimal-transport-overparameterization.pdf",
+          "pdf_sha256": "7f4762ff7ecb08f158831dfb3259848551c720cd7d8d60102b5e3365f2d815f0",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/chizat-bach-optimal-transport-overparameterization.txt",
+          "full_text_sha256": "bf63ad7ef0b5ee163ef017fc52dc12cb0e4cc15ee3fbb8180d60fb01e468c8d3",
+          "dossier_read_status": "Relevant units/proofs read: Assumptions 2.1, particle/Wasserstein flows, Theorems 2.6/3.3/3.5 and neural-network application; Appendix B.3 many-particle proof; Appendix C.1-C.4 escape/stationarity/separation and Theorem C.16/C.17 proofs. Main pp.3-8; appendix pp.18-26.",
+          "manifest_anchors": [
+            "\u00a72.1 measure functional and regularity/growth assumptions",
+            "\u00a72.2 particle gradient flow and Proposition 2.3",
+            "\u00a72.3 Wasserstein-flow existence/uniqueness Proposition 2.5",
+            "\u00a72.4 Theorem 2.6 many-particle limit; Appendix B.3 proof",
+            "\u00a73.2/3.3 global minimizer theorems under homogeneity/separating initialization",
+            "\u00a74.2 one-hidden-layer sigmoid/ReLU reparameterization and classical-ReLU differentiability limit",
+            "Appendix C.1-C.4 escape, support-separation and global-limit proofs"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Assumptions 2.1/3.2/3.4, Proposition 2.5, Theorems 2.6/3.3/3.5 and neural application, PDF pp. 3\u20138; Appendix A, B.3, C.1\u2013C.4, PDF pp. 12\u201326"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-30",
+          "status": "earlier Category 4 pair",
+          "contract": "Parameterized network model notation only."
+        },
+        {
+          "id": "def-hilbert-space",
+          "status": "published",
+          "contract": "Hilbert-space structure definition only."
+        },
+        {
+          "id": "def-bochner-integrable-function",
+          "status": "published",
+          "contract": "Strong/Bochner integrability definition."
+        },
+        {
+          "id": "thm-bochner-integrability-criterion",
+          "status": "published",
+          "contract": "Bochner integrability criterion under its separability/measurability/norm-integrability conditions."
+        },
+        {
+          "id": "thm-bounded-linear-maps-commute-with-bochner-integration",
+          "status": "published",
+          "contract": "Bounded linear maps commute with Bochner integration."
+        },
+        {
+          "id": "P-WGF-01",
+          "status": "independent prerequisite design, not library item",
+          "contract": "W2 metric/continuity equation foundation."
+        },
+        {
+          "id": "P-WGF-02",
+          "status": "independent prerequisite design, not library item",
+          "contract": "Localized Wasserstein flow existence/stability under exact Chizat\u2013Bach assumptions."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Exact model feature-map, Bochner-integrability and local-growth premises in Chizat\u2013Bach."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the generalized-geodesic second-order estimate, localization, characteristic-flow escape control and empirical-measure compactness proof.",
+        "Do not claim an unconstrained finite-particle rate or general finite-width SGD global convergence."
+      ]
+    },
+    {
+      "id": "ML-48",
+      "assessment": "audited_spectral_margin_bound_and_local_mixed_norm_covering_proof",
+      "plan_section_sha256": "3d76df7172ba65dbc12b5e3ecb86a561e459d31cfbd26db2c0d0a36ed606d9a6",
+      "findings": [
+        "The bound is restricted to iid multiclass examples, fixed Lipschitz layers vanishing at zero, source reference matrices, nonzero layer norms, empirical margin and source width convention.",
+        "The source theorem\u2019s spectral complexity, ramp-margin covering-number and uniformization route is distinct from the general ML-04 Rademacher theorem; ML-04 is notation only.",
+        "The bound cannot imply that a trained optimizer achieves small complexity or margin."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S13",
+          "citation": "Peter L. Bartlett, Dylan J. Foster, Matus J. Telgarsky, Spectrally-normalized margin bounds for neural networks (2017; NeurIPS 30; arXiv:1706.08498)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bartlett-spectral-margin-bounds.pdf",
+          "pdf_sha256": "5674595cb6e6b13c43add644ca5f189f5c42ac38c877016f65358c20878812b6",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/bartlett-spectral-margin-bounds.txt",
+          "full_text_sha256": "cb6752a47edf053e5083a751f14466bda0b54deeca5a1ad64f26bcbf3153bf7d",
+          "dossier_read_status": "Theorem 1.1, margin lemma, covering-number theorem and Appendix A.7 proof route read (main pp.2-8; Appendix A.7 pp.21-24).",
+          "manifest_anchors": [
+            "Equation (1.2) spectral complexity",
+            "Theorem 1.1 multiclass margin bound",
+            "Lemma 3.1 ramp-margin Rademacher bound",
+            "Theorem 3.3 network covering estimate",
+            "Appendix A.7 Lemmas A.8-A.9 and union-bound proof"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Complexity (1.2), Theorem 1.1, Lemma 3.1, Theorem 3.3, Appendix A.7 proof; PDF pp. 2\u20138 and 21\u201324"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published",
+          "contract": "Finite symmetric matrix eigenbasis."
+        },
+        {
+          "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+          "status": "published",
+          "contract": "Finite-dimensional induced operator norm definition."
+        },
+        {
+          "id": "thm-operator-norm-is-the-largest-singular-value",
+          "status": "published",
+          "contract": "Operator norm equals largest singular value."
+        },
+        {
+          "id": "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+          "status": "published",
+          "contract": "Finite matrix spectral/Frobenius norm and singular-value formulas."
+        },
+        {
+          "id": "ML-04",
+          "status": "earlier Category 4 pair",
+          "contract": "Only generalization notation if reused; not a supplier of BFT\u2019s specialized complexity theorem."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "The source-specific layer mixed (2,1)-norm, covering-number estimate, margin-ramp argument and uniformization proof."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce the exact reference-matrix complexity and covering theorem conditions; retain any nonzero denominators or define zero-layer cases separately.",
+        "Do not use a Cat3 contraction inequality unless its exact nonabsolute-L contract matches the chosen margin argument; local proof is the planned route."
+      ]
+    },
+    {
+      "id": "ML-49",
+      "assessment": "audited_and_corrected_source_factor_two_gap_in_margin_compression",
+      "plan_section_sha256": "ae9bd26b61e0eb612972e522b8ee9e9ee26a685b802188131e53f09ec7564990",
+      "findings": [
+        "Source Theorem 2.1 (PDF p. 4) and Appendix A.1 (PDF p. 19) were checked visually and in full extracted text. The proof claims per-coordinate score distortion epsilon preserves labels when the original margin is only epsilon; this is false because the margin may change by 2epsilon.",
+        "The local item repairs the theorem: coordinatewise score distortion epsilon yields empirical compressed zero-one loss at most the original empirical 2epsilon-margin loss. A confidence-1-delta Hoeffding/union bound over at most r^q codes yields sqrt((q log r+log(1/delta))/(2m)).",
+        "The guarantee is for the compressed classifier. The original network needs a separate all-domain loss-preservation argument; specialized neural construction remains unaudited."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S15",
+          "citation": "Sanjeev Arora, Rong Ge, Behnam Neyshabur, Yi Zhang, Stronger generalization bounds for deep nets via a compression approach (2018; arXiv:1802.05296v4)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/arora-compression-generalization.pdf",
+          "pdf_sha256": "ccdbe269c585b9bce9aee0ec0b551d6a60349051847ffe30012ee92953e4c7be",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/arora-compression-generalization.txt",
+          "full_text_sha256": "e5decfd3a9272229fc66bd2d55594ef5321c87e62d2eab49c97ef34df2441e82",
+          "dossier_read_status": "General compression theorem and complete Appendix A.1 proof read: Definitions 1-2, Theorem 2.1 and Chernoff/union-bound proof, main pp.4-5 and Appendix A.1 p.19. Architecture-specific compression proofs are not claimed as audited.",
+          "manifest_anchors": [
+            "Definitions 1-2 margin-preserving compression with/without helper string",
+            "Theorem 2.1 discrete description-size compression bound",
+            "Appendix A.1 complete Chernoff/finite-class union-bound proof",
+            "Theorem concerns compressed classifier unless all-domain preservation is established"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Definitions 1\u20132 and Theorem 2.1, PDF p. 4; complete Appendix A.1 proof, PDF p. 19; PDF pages visually checked, relevant text full source hash is bound",
+          "source_gap": "The source proof factor-of-two error is not a theorem certified from that source; the repaired local item carries the corrected margin."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-02",
+          "status": "earlier Category 4 pair",
+          "contract": "Finite-class iid deviation/union-bound interface; use the exact bounded zero-one loss and count at most r^q codes."
+        },
+        {
+          "id": "ML-01",
+          "status": "earlier Category 4 pair",
+          "contract": "Population/empirical risk and iid sample notation."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A fixed helper string independent of the training sample and a finite code class of size at most r^q."
+      ],
+      "future_proof_authoring_obligations": [
+        "Retain the corrected factor-two margin threshold, or redefine the compression tolerance as gamma/2 when stating a gamma-margin bound.",
+        "Prove the label-preservation step and exact Hoeffding union-bound confidence term locally; do not repeat the source\u2019s incorrect Appendix A.1 implication.",
+        "Do not bound the original classifier from sample-only compression without all-domain preservation."
+      ]
+    },
+    {
+      "id": "ML-50",
+      "assessment": "audited_convex_and_nonconvex_sgd_stability_with_sample_size_boundary",
+      "plan_section_sha256": "29455127989d74f8584b520d8562ac41c353e51a34c42af782d5c41bcb0bd78f",
+      "findings": [
+        "The convex stability result uses convex, beta-smooth, L-Lipschitz losses and alpha_t<=2/beta; the nonconvex theorem separately uses losses in [0,1], L-Lipschitz/beta-smoothness, and nonincreasing alpha_t<=c/t.",
+        "The nonconvex displayed formula has denominator n-1, so the pair explicitly requires n>=2. It is an expected generalization gap under the source SGM sample-selection rules, not a universal SGD claim.",
+        "The couple-neighboring-samples proof uses the same selection sequence and a different recursion in convex/nonconvex regimes."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "S14",
+          "citation": "Moritz Hardt, Benjamin Recht, Yoram Singer, Train faster, generalize better: Stability of stochastic gradient descent (2016; NeurIPS 29; arXiv:1509.01240)",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hardt-sgd-stability.pdf",
+          "pdf_sha256": "f25c44207c24f6a940eb92e06cb36bc53ed4c57a7632850be1b78b334022749e",
+          "full_text_path": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-04/hardt-sgd-stability.txt",
+          "full_text_sha256": "9ef7c4a0d454a2377a036660d05d2d7ed2a2066a2284df44148fbc63f1eac36a",
+          "dossier_read_status": "Relevant stability framework and full proofs read: Theorem 2.2, Lemma 3.7, Theorems 3.8/3.12 and Lemma 3.11. PDF pp.4-14.",
+          "manifest_anchors": [
+            "Definitions 2.1/Theorem 2.2 uniform stability and expected generalization",
+            "Lemma 3.7 update expansivity",
+            "Theorem 3.8 convex SGM stability",
+            "Lemma 3.11/Theorem 3.12 nonconvex SGM stability for bounded losses and \u03b1_t\u2264c/t"
+          ],
+          "role": "load_bearing",
+          "pair_audited_ranges": "Definitions 2.1/3.1\u20133.6 and proofs; Theorem 2.2, Lemma 3.7, Theorems 3.8/3.12 and Lemma 3.11; PDF pp. 4\u201314"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "ML-01",
+          "status": "earlier Category 4 pair",
+          "contract": "Population/empirical loss and iid sample convention."
+        },
+        {
+          "id": "ML-39",
+          "status": "earlier Category 4 pair",
+          "contract": "SGM update/noise notation only; stability proof supplies its own sampling coupling."
+        },
+        {
+          "id": "ML-37",
+          "status": "earlier Category 4 pair",
+          "contract": "Update gradient notation only."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Uniform stability definition and expected-generalization theorem with the exact bounded loss/sample assumptions."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove the coupled-update recursion and average the replacement difference for each theorem separately.",
+        "Preserve random-with-replacement and random-permutation sampling cases supported by the source; do not infer test guarantees for arbitrary optimization algorithms."
+      ]
+    }
+  ],
+  "cross_category_constraints": [
+    "ML-45 consumes P-RMT-01/02 only as independent pre-category prerequisites, never from a Category 4 item.",
+    "All Category 4 dependencies among ML-37\u201350 are earlier-category pair references only; no Category 3 pair is made dependent on ML-owned results.",
+    "The source-specific matrix concentration, Clarke differential inclusion, Schoenberg criterion, and numerical proof obligations remain local or explicitly separate prerequisites."
+  ]
+}

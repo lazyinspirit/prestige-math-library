@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-locally-equicontinuous-family-on-a-plane-domain.md

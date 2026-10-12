@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-one-dimensional-constant-zero-mode-of-dolbeault-laplacian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-frobenius-characteristic-dictionary-for-s3.md

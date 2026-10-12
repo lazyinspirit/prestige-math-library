@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-affine-reparametrization-of-a-geodesic-is-a-geodesic.md

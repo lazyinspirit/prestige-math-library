@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-lower-limit-line-is-regular-and-not-metrizable.md

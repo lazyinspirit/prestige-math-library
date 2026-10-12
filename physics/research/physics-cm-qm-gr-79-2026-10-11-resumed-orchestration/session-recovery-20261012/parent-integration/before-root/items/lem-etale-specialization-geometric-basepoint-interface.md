@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-etale-specialization-geometric-basepoint-interface.md

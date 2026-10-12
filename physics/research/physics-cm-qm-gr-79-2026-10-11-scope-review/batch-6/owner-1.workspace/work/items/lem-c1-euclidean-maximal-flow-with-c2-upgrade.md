@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c1-euclidean-maximal-flow-with-c2-upgrade.md

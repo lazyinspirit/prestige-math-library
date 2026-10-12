@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hereditarily-symmetric-interpretations-form-a-zf-model.md

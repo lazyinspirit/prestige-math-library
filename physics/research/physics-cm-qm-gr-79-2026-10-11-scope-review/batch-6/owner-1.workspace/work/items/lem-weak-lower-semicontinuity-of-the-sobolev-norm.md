@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-lower-semicontinuity-of-the-sobolev-norm.md

@@ -38,8 +38,6 @@ Almost-sure convergence alone need not imply convergence of expectations.
 
 **Proof technique:** direct.
 
-1.1 For every $x\in(0,1)$, eventually $x>1/(n+1)$, so $X_n(x)=0$. [L1]
-Hence $X_n\to0$ almost surely by [L1]. [L1]
+1.1 For every $x\in(0,1)$, eventually $x>1/(n+1)$, so $X_n(x)=0$. [L1] Hence $X_n\to0$ almost surely by [L1]. [L1]
 
-2.1 Yet [L2] gives [step 1.1, L2]
-$\mathbb E X_n=\int_0^{1/(n+1)}(n+1)\,dx=1$ for every $n$, whereas $\mathbb E0=0$. Thus the expectations do not converge. [step 1.1, L2] ∎
+2.1 Yet [L2] gives [step 1.1, L2] $\mathbb E X_n=\int_0^{1/(n+1)}(n+1)\,dx=1$ for every $n$, whereas $\mathbb E0=0$. Thus the expectations do not converge. [step 1.1, L2] ∎ 

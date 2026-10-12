@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm13-isotropic-oscillator-flow-symplectic-and-volume-checks.md

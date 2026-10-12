@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-minimal-parabolic-diagrams-have-pbw-bubble-normal-form.md

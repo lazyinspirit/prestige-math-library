@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-based-sphere-maps-have-finite-affine-bubble-normal-forms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-semistable-and-stable-points-for-a-linearization.md

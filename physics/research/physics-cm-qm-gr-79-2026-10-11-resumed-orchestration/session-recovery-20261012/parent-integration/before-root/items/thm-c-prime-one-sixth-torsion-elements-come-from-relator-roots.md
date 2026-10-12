@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c-prime-one-sixth-torsion-elements-come-from-relator-roots.md

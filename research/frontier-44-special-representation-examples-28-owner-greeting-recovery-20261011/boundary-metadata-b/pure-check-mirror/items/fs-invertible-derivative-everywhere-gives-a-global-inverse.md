@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-invertible-derivative-everywhere-gives-a-global-inverse.md

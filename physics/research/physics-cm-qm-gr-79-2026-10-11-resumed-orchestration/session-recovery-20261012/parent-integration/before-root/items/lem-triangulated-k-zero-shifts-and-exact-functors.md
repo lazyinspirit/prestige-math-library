@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-triangulated-k-zero-shifts-and-exact-functors.md

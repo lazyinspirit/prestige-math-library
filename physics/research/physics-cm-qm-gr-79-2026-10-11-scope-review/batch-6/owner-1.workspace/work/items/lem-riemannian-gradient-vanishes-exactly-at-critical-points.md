@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riemannian-gradient-vanishes-exactly-at-critical-points.md

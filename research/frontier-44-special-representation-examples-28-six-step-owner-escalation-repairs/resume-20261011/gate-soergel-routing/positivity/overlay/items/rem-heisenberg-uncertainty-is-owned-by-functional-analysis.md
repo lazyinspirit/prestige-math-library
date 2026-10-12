@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-heisenberg-uncertainty-is-owned-by-functional-analysis.md

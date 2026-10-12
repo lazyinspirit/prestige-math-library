@@ -46,14 +46,10 @@ flat over $S$.
 
 **Proof technique:** direct.
 
+ 1.1 If $N$ is flat over $R$, then $N\otimes_R S$ is flat over $S$ by [L1]. [L1, given]
 
-1.1 If $N$ is flat over $R$, then $N\otimes_R S$ is flat over $S$ by [L1]. [L1, given]
+ 1.2 Conversely, assume $N\otimes_R S$ is flat over $S$. Let $ A\to B\to C $ be an exact sequence of $R$-modules. Tensoring with $N$ and then with $S$ gives $ ((A\otimes_R N)\otimes_R S)\to ((B\otimes_R N)\otimes_R S)\to ((C\otimes_R N)\otimes_R S). $ Associativity of tensor product identifies this with $ A\otimes_R (N\otimes_R S)\to B\otimes_R (N\otimes_R S)\to C\otimes_R (N\otimes_R S), $ which is exact because $N\otimes_R S$ is flat over $S$ and [L2] transports that flatness back along $R\to S$. [L2, given, algebra]
 
+ 1.3 Since $R\to S$ is faithfully flat, [L3] reflects exactness. Therefore the sequence $ A\otimes_R N\to B\otimes_R N\to C\otimes_R N $ was already exact, so $N$ is flat over $R$. [L3]
 
-1.2 Conversely, assume $N\otimes_R S$ is flat over $S$. Let $ A\to B\to C $ be an exact sequence of $R$-modules. Tensoring with $N$ and then with $S$ gives $ ((A\otimes_R N)\otimes_R S)\to ((B\otimes_R N)\otimes_R S)\to ((C\otimes_R N)\otimes_R S). $ Associativity of tensor product identifies this with $ A\otimes_R (N\otimes_R S)\to B\otimes_R (N\otimes_R S)\to C\otimes_R (N\otimes_R S), $ which is exact because $N\otimes_R S$ is flat over $S$ and [L2] transports that flatness back along $R\to S$. [L2, given, algebra]
-
-
-1.3 Since $R\to S$ is faithfully flat, [L3] reflects exactness. Therefore the sequence $ A\otimes_R N\to B\otimes_R N\to C\otimes_R N $ was already exact, so $N$ is flat over $R$. [L3]
-
-
-2.1 Hence flatness descends and ascends along faithfully flat base change. [algebra] ∎
+ 2.1 Hence flatness descends and ascends along faithfully flat base change. [algebra] ∎ 

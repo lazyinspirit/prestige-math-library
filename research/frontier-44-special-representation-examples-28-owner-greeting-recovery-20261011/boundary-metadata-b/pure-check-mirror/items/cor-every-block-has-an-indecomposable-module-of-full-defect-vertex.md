@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-block-has-an-indecomposable-module-of-full-defect-vertex.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dold-kan-equivalence-for-simplicial-modules.md

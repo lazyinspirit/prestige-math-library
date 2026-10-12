@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-littlewood-paley-square-function-equivalence-on-lp.md

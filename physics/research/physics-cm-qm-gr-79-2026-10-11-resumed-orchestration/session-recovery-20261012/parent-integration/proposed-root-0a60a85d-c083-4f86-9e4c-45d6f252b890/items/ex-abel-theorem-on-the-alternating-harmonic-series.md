@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-abel-theorem-on-the-alternating-harmonic-series.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-cobounded-and-cocompact-are-unconditionally-identical.md

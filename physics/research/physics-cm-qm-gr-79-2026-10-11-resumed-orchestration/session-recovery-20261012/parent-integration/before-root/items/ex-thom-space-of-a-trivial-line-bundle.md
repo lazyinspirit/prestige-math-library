@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-thom-space-of-a-trivial-line-bundle.md

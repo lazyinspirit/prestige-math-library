@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-canonical-morphism-from-the-coimage-to-the-image-exists-and-is-unique.md

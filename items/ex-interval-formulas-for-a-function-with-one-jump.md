@@ -44,8 +44,6 @@ $$\mu_F((-1,0)) = 0,\qquad \mu_F((-1,0]) = 1,\qquad \mu_F([0,1)) = 1,\qquad \mu_
 
 **Proof technique:** direct.
 
-1.1 For this $F$, one has [given]
-$F(-1)=F(-1^-)=0$, $F(0^-)=0$, $F(0)=1$, $F(1^-)=1$, and $F(1)=1$. [given]
+1.1 For this $F$, one has [given] $F(-1)=F(-1^-)=0$, $F(0^-)=0$, $F(0)=1$, $F(1^-)=1$, and $F(1)=1$. [given]
 
-2.1 Substituting those values into [L1] gives [step 1.1, L1]
-$\mu_F((-1,0))=0-0=0$, $\mu_F((-1,0])=1-0=1$, $\mu_F([0,1))=1-0=1$, and $\mu_F((0,1])=1-1=0$. [step 1.1, L1] ∎
+2.1 Substituting those values into [L1] gives [step 1.1, L1] $\mu_F((-1,0))=0-0=0$, $\mu_F((-1,0])=1-0=1$, $\mu_F([0,1))=1-0=1$, and $\mu_F((0,1])=1-1=0$. [step 1.1, L1] ∎ 

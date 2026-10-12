@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-prime-containing-a-multiplicative-set-disjoint-ideal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-manifold-chart-coordinate-domain-and-coordinate-functions.md

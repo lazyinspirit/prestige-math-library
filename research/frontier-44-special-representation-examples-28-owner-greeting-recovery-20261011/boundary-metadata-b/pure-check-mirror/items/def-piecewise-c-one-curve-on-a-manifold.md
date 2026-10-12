@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-piecewise-c-one-curve-on-a-manifold.md

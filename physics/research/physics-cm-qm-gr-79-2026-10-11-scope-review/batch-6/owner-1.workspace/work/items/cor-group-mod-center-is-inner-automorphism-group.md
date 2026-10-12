@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-group-mod-center-is-inner-automorphism-group.md

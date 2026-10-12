@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence.md

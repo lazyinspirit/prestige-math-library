@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-smooth-isotopy-of-compact-embedded-submanifolds-extends-to-an-ambient-isotopy.md

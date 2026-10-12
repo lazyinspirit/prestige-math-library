@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-serre-finite-generation-torsion-and-p-primary-transfer.md

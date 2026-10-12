@@ -39,5 +39,4 @@ $$ \operatorname{Spec}(A\times B)\cong\operatorname{Spec}A\sqcup\operatorname{Sp
 
 2.2 Their localizations are $A_{\mathfrak p}$ and $B_{\mathfrak q}$, so these homeomorphisms identify the structure sheaves. [step 1.1, algebra]
 
-3.1 Hence the spectrum is the claimed disjoint union of locally ringed spaces. [step 2.1, step 2.2] ∎
- 
+3.1 Hence the spectrum is the claimed disjoint union of locally ringed spaces. [step 2.1, step 2.2] ∎  

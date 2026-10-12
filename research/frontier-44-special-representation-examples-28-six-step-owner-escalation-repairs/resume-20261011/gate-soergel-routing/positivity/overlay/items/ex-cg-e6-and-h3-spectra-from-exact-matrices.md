@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-e6-and-h3-spectra-from-exact-matrices.md

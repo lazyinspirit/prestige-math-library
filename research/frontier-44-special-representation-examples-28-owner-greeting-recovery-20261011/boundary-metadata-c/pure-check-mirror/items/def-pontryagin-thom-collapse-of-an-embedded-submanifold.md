@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-pontryagin-thom-collapse-of-an-embedded-submanifold.md

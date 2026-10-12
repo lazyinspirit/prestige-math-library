@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-bilateral-shift-metric-and-sequential-compactness.md

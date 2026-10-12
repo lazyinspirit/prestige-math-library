@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-diagonalisable-iff-characteristic-polynomial-splits-and-multiplicities-agree.md

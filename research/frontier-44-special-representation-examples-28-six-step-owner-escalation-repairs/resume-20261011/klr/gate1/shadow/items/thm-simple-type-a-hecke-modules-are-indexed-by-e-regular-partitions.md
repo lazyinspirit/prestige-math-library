@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions.md

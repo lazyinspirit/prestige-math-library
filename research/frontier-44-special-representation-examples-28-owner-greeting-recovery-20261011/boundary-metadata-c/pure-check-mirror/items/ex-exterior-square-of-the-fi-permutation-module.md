@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-exterior-square-of-the-fi-permutation-module.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-complex-linear-and-compatible-bundle-connections.md

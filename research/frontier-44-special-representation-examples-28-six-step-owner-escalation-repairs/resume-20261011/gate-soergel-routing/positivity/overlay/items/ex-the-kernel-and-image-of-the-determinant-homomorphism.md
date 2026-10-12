@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-kernel-and-image-of-the-determinant-homomorphism.md

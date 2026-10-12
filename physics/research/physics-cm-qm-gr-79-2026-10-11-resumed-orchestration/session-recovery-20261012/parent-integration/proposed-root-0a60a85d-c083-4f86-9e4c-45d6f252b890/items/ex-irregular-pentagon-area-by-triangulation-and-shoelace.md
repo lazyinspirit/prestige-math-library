@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-irregular-pentagon-area-by-triangulation-and-shoelace.md

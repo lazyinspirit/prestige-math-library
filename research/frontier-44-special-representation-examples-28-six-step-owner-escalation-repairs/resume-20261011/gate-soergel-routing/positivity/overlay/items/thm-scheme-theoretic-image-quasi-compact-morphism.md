@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-scheme-theoretic-image-quasi-compact-morphism.md

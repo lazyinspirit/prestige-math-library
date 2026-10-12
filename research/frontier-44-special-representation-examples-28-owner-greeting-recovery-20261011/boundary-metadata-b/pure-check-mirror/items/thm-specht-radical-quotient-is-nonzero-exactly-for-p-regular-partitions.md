@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-specht-radical-quotient-is-nonzero-exactly-for-p-regular-partitions.md

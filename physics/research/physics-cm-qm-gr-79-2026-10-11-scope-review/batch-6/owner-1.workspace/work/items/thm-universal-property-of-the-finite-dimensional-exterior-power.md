@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-property-of-the-finite-dimensional-exterior-power.md

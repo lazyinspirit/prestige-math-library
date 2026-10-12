@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dual-of-a-closed-subgroup-is-the-dual-quotient.md

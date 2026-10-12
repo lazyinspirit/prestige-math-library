@@ -1,0 +1,9 @@
+# Research-only resonance energy-domain corrections
+
+The theorem keeps E_r arbitrary real and Gamma>0. L(E) is an auxiliary rational function on the real axis; its peak and two half-height points exist algebraically for every allowed parameter. The physical S, phase, k and cross section keep their original positive-energy domain. The all-positive Gamma denominator never vanishes, and the phase is minus the explicitly defined upper-half-plane argument, including x=0 as -pi/2 modulo pi. Physical evaluation at E_r requires E_r>0.
+
+The companion example keeps E_r>0 with Gamma arbitrary. Its upper half-height point is positive; its lower point is physical only for Gamma<2E_r. Equality puts the lower point at excluded zero energy; larger Gamma puts it below threshold. Both cases retain the auxiliary real-axis width Gamma and receive no cross-section division by zero or negative-energy wave number. The numerical E_r=4 Gamma case remains unchanged. No slow-variation assumption is imposed on 1/E.
+
+The definition already has the correct positive-energy domain; its candidate clarifies that a real parameter is not automatically a physical energy. It also aligns the physical_scope sentence with its existing body: no claim of a producing potential is made, rather than asserting that no potential could produce the factor. The mathematical supplier source40 already computes the rational factor for real E and explicitly restricts its sqrt(E) cross-section substitution to E>0; it is unchanged and not reopened.
+
+All three full candidates keep their original dependency metadata. Exact current-source and candidate hashes are in bindings. Interface qualifications are changed, so the lead owns independent integration and all consumer maintenance. Inherited verification is context, not new certification. No production, readiness, live metadata, source40 or controller/history write occurred and no repair round is charged.

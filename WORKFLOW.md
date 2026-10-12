@@ -11,8 +11,8 @@ worker prompts, supporting tools, content and run state.
 |---|---|---|
 | 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
 | 2 | Review, one local repair and owner escalation | Luna-max reviewers/local repairers; at most two reviews and one repair; owner/orchestrator resolves escalations and runs gates |
-| 3 | Independent review | Batch readers, refuters and adjudicators, final validation and mechanical closure |
-| 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
+| 3 | Independent review | GPT-6 Luna/max readers and refuters; GPT-6.1 Sol/medium batch adjudicators; final validation and mechanical closure |
+| 4 | Batch review and judging | GPT-6.1 Sol/medium read-only batch readers plus GPT-6 Luna/max judges |
 | 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
 | 6 | Closeout | Contracts, pathways, stamps, readiness, evidence, owner report and local closeout commit |
 
@@ -126,6 +126,9 @@ work.
 Step 3 uses independent batch review and routed adjudication after authoring in
 dependency-level order. Step 3b is retired in both engines: there is no separate
 cross-batch edge review, impact-review window or unfinished cross-review lane.
+Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
+Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
+per-item judge sweep uses GPT-6 Luna/max.
 The final sequence is `3a-baseline` then `3a-close`. The existing Step 3a
 validation battery remains in adjudication. Mechanical closure checks exact
 current item, contract, manifest and page carriers against the post-gate

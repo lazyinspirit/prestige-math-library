@@ -51,8 +51,6 @@ so $\nu$ is not countably additive.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Use [A1] exactly through [L1] and define $\nu$ by [L2]. Positivity of $L$ [given, A1, L1, L2]
-makes $\nu$ positive, and normalization gives $\nu(\mathbb N)=L(\mathbf1)=1$. [A1, L1, L2]
+1.1 Use [A1] exactly through [L1] and define $\nu$ by [L2]. Positivity of $L$ [given, A1, L1, L2] makes $\nu$ positive, and normalization gives $\nu(\mathbb N)=L(\mathbf1)=1$. [A1, L1, L2]
 
-2.1 Shift invariance makes all singleton masses equal, say to $c\ge0$. [given, L1, L2, step 1.1]
-Finite additivity gives $Nc\le\nu(\mathbb N)=1$ for every positive integer $N$, hence $c=0$. If $\nu$ were countably additive, the disjoint singleton decomposition of $\mathbb N$ would give $\nu(\mathbb N)=\sum_n0=0$, a contradiction. [L1, L2, step 1.1] ∎
+2.1 Shift invariance makes all singleton masses equal, say to $c\ge0$. [given, L1, L2, step 1.1] Finite additivity gives $Nc\le\nu(\mathbb N)=1$ for every positive integer $N$, hence $c=0$. If $\nu$ were countably additive, the disjoint singleton decomposition of $\mathbb N$ would give $\nu(\mathbb N)=\sum_n0=0$, a contradiction. [L1, L2, step 1.1] ∎ 

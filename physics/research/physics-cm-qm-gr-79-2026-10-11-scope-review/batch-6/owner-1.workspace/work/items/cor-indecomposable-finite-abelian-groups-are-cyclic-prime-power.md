@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-indecomposable-finite-abelian-groups-are-cyclic-prime-power.md

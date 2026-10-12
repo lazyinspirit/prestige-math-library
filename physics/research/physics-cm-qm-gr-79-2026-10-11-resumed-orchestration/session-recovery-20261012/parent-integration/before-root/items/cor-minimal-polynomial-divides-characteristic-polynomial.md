@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-minimal-polynomial-divides-characteristic-polynomial.md

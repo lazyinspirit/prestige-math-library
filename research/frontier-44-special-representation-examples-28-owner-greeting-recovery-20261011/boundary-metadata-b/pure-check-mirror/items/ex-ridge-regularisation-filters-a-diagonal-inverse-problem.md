@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-ridge-regularisation-filters-a-diagonal-inverse-problem.md

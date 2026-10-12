@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize.md

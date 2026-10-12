@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-vanishing-derivative-forbids-strict-increase.md

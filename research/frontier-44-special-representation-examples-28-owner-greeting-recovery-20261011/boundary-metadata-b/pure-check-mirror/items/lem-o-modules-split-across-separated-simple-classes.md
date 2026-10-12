@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-o-modules-split-across-separated-simple-classes.md

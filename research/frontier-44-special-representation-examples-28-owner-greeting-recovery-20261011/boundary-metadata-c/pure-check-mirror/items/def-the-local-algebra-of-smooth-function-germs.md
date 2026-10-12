@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-the-local-algebra-of-smooth-function-germs.md

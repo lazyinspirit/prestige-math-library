@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-non-noetherian-ring-with-a-strict-chain-of-principal-ideals.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-differential-annihilates-the-tangent-kernel-at-a-constrained-extremum.md

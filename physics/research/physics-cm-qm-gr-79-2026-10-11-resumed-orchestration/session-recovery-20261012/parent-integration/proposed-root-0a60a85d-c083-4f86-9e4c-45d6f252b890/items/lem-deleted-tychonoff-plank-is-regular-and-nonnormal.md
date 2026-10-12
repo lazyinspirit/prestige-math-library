@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-deleted-tychonoff-plank-is-regular-and-nonnormal.md

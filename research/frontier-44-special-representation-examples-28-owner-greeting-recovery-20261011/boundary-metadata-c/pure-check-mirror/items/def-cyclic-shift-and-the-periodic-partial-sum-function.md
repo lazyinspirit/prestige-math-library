@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-cyclic-shift-and-the-periodic-partial-sum-function.md

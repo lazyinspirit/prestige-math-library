@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-graph-of-a-continuous-map-into-a-hausdorff-space-is-closed.md

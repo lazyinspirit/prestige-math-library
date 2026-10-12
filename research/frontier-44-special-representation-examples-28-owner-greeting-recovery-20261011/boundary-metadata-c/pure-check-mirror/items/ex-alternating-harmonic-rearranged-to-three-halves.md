@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-alternating-harmonic-rearranged-to-three-halves.md

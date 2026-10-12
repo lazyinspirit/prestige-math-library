@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-geodesic-flow-as-a-hamiltonian-flow-on-the-cotangent-bundle.md

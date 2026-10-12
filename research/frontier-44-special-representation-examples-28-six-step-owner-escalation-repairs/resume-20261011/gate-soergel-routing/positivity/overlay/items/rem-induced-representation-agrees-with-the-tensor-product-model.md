@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-induced-representation-agrees-with-the-tensor-product-model.md

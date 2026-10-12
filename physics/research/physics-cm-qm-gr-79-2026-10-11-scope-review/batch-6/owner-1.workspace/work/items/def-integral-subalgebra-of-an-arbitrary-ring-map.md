@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-subalgebra-of-an-arbitrary-ring-map.md

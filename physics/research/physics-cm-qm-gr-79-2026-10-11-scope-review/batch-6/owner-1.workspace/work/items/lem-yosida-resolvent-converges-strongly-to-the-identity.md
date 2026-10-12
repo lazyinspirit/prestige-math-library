@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-yosida-resolvent-converges-strongly-to-the-identity.md

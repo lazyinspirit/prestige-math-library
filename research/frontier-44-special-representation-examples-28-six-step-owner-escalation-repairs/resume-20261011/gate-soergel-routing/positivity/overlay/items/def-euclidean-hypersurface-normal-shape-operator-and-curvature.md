@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-euclidean-hypersurface-normal-shape-operator-and-curvature.md

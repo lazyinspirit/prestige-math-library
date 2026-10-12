@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-no-isolated-holomorphic-singularities-in-several-complex-variables.md

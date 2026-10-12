@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c1-lipschitz-ac-bv-hierarchy.md

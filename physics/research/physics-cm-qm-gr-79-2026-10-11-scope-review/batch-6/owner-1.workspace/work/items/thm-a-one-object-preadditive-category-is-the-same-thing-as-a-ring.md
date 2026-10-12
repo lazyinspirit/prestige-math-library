@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-one-object-preadditive-category-is-the-same-thing-as-a-ring.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-blowup-affine-three-space-origin-exceptional-p2.md

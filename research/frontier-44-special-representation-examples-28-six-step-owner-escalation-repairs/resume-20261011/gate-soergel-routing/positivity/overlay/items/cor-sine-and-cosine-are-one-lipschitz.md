@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-sine-and-cosine-are-one-lipschitz.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-galois-group-of-an-irreducible-quartic-by-its-resolvent.md

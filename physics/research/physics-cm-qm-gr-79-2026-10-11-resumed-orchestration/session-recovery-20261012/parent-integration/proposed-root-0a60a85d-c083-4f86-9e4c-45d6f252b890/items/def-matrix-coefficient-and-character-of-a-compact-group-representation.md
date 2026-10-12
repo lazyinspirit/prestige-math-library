@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-matrix-coefficient-and-character-of-a-compact-group-representation.md

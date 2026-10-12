@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-dimension-of-an-object-is-independent-of-the-pivotal-structure.md

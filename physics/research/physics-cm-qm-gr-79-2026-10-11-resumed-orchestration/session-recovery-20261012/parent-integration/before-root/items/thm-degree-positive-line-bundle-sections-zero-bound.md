@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-degree-positive-line-bundle-sections-zero-bound.md

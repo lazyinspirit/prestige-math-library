@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-polynomial-injection-killed-by-tensoring.md

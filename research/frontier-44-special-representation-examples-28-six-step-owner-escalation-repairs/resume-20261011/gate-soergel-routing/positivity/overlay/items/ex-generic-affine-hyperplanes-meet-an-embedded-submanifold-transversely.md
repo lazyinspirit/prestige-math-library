@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-generic-affine-hyperplanes-meet-an-embedded-submanifold-transversely.md

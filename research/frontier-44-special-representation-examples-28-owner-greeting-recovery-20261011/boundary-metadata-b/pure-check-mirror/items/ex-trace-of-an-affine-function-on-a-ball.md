@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-trace-of-an-affine-function-on-a-ball.md

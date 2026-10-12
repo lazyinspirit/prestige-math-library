@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-canonical-map-locally-has-a-generating-function.md

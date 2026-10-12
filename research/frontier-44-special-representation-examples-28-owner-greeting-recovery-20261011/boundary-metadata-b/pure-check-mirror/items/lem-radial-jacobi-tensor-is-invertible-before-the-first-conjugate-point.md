@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-radial-jacobi-tensor-is-invertible-before-the-first-conjugate-point.md

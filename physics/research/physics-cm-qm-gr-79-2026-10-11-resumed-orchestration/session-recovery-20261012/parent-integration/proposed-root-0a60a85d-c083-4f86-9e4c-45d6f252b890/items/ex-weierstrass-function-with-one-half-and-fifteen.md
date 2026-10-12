@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weierstrass-function-with-one-half-and-fifteen.md

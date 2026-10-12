@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-opposite-rouquier-generator-complexes-are-homotopy-inverse.md

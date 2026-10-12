@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-geometric-multiplicity-does-not-exceed-algebraic-multiplicity.md

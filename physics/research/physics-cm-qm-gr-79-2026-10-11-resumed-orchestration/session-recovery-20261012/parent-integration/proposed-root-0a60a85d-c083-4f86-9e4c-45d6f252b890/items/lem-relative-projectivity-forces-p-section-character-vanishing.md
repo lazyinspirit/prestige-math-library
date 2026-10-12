@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-projectivity-forces-p-section-character-vanishing.md

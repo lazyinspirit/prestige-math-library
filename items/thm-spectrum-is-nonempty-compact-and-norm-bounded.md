@@ -61,12 +61,7 @@ $z\mapsto R(z,a)$ is norm holomorphic there and hence norm continuous
 
 **Proof technique:** direct.
 
-1.1 If $|z| > \|a\|$ then $\|a/z\| = \|a\|/|z| < 1$, so by [L3] the element $1 - a/z$ is invertible and hence $z1 - a = z(1 - a/z)$ is invertible with
-$$R(z,a)=z^{-1}(1-a/z)^{-1}=\sum_{n\ge0}z^{-n-1}a^n.$$
-The Neumann-series norm estimate gives
-$\|R(z,a)\|\le |z|^{-1}/(1-\|a\|/|z|)=1/(|z|-\|a\|)$.
-Therefore $z \in \rho_A(a)$ and
-$\sigma_A(a) \subseteq \{|z| \le \|a\|\}$. [L1, L2, L3, algebra]
+1.1 If $|z| > \|a\|$ then $\|a/z\| = \|a\|/|z| < 1$, so by [L3] the element $1 - a/z$ is invertible and hence $z1 - a = z(1 - a/z)$ is invertible with $$R(z,a)=z^{-1}(1-a/z)^{-1}=\sum_{n\ge0}z^{-n-1}a^n.$$ The Neumann-series norm estimate gives $\|R(z,a)\|\le |z|^{-1}/(1-\|a\|/|z|)=1/(|z|-\|a\|)$. Therefore $z \in \rho_A(a)$ and $\sigma_A(a) \subseteq \{|z| \le \|a\|\}$. [L1, L2, L3, algebra]
 
 2.1 The set $\rho_A(a)$ is open by [L4], so its complement $\sigma_A(a)$ is closed; combined with the boundedness of [step 1.1] this makes $\sigma_A(a)$ a closed bounded subset of $\mathbb C$, hence compact, which is claim 1. [step 1.1, L4]
 
@@ -84,4 +79,4 @@ $\sigma_A(a) \subseteq \{|z| \le \|a\|\}$. [L1, L2, L3, algebra]
 
 9.1 But $g(0) = \varphi(R(0,a)) \ne 0$ by the choice of $\varphi$ in [step 5.1], contradicting $g \equiv 0$; hence $\sigma_A(a) \ne \varnothing$, which is claim 2. [step 8.1, step 5.1]
 
-10.1 Claim 1 was proved in [step 2.1] and claim 2 in [step 9.1], so the spectrum of $a$ is a nonempty compact subset of the disc of radius $\|a\|$. [step 2.1, step 9.1] ∎
+10.1 Claim 1 was proved in [step 2.1] and claim 2 in [step 9.1], so the spectrum of $a$ is a nonempty compact subset of the disc of radius $\|a\|$. [step 2.1, step 9.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-componentwise-holomorphy-of-an-explicit-map-into-complex-three-space.md

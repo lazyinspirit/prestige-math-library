@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-line-meets-degree-d-curve-counted-with-multiplicity.md

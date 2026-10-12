@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-barycentric-subdivision-is-a-chain-map.md

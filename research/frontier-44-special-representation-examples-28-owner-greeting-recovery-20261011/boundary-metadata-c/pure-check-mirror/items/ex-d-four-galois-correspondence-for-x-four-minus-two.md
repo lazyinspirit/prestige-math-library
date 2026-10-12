@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-d-four-galois-correspondence-for-x-four-minus-two.md

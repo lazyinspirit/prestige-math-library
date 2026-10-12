@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-restrictions-corestrictions-and-products-of-smooth-maps-are-smooth.md

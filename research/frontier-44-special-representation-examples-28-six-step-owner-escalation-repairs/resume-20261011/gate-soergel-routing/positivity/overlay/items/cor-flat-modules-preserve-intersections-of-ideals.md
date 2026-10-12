@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-flat-modules-preserve-intersections-of-ideals.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-integer-pairings-and-allowed-dihedral-labels.md

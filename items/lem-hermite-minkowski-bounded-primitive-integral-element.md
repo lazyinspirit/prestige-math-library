@@ -168,8 +168,7 @@ $[K:\mathbb Q]=[K:\mathbb Q(\alpha)][\mathbb Q(\alpha):\mathbb Q]$
 
 7.1 The fibre of the restriction map [F7] over $\sigma_1|_{\mathbb Q(\alpha)}$ is the set $\{\varphi:\varphi(\alpha)=\sigma_1(\alpha)\}$, and the fibre is nonempty because it contains $\sigma_1$; by step 6.1 it is the singleton $\{\sigma_1\}$. Hence $[K:\mathbb Q(\alpha)]_s=1$ by [F7], and [F8] upgrades this to $[K:\mathbb Q(\alpha)]=1$, that is, $K=\mathbb Q(\alpha)$. [F7, F8, step 6.1]
 
-8.1 Steps 7.1, 5.2, and 4.3 cover respectively the real-embedding case, the totally complex case with $r_2\ge2$, and the totally complex quadratic case; each gives $K=\mathbb Q(\alpha)$ for the constructed integral $\alpha$. In the real-embedding case step 6.1 bounds the distinguished real conjugate and all others have modulus $<1$. In the totally complex cases step 2.4 bounds $\tau_1(\alpha)$ and its conjugate, while all other conjugates have modulus $<1$ by the chosen window. Since $B\ge1$, these bounds are all at most $\sqrt{B+2}$. [step 5.1, step 2.4, step 6.1, step 5.2, step 4.3, step 7.1] ∎
-## Remarks
+8.1 Steps 7.1, 5.2, and 4.3 cover respectively the real-embedding case, the totally complex case with $r_2\ge2$, and the totally complex quadratic case; each gives $K=\mathbb Q(\alpha)$ for the constructed integral $\alpha$. In the real-embedding case step 6.1 bounds the distinguished real conjugate and all others have modulus $<1$. In the totally complex cases step 2.4 bounds $\tau_1(\alpha)$ and its conjugate, while all other conjugates have modulus $<1$ by the chosen window. Since $B\ge1$, these bounds are all at most $\sqrt{B+2}$. [step 5.1, step 2.4, step 6.1, step 5.2, step 4.3, step 7.1] ∎ ## Remarks
 
 The two windows are the ones used by Milne: the real case enlarges the first
 real coordinate, and the totally complex case enlarges the imaginary part of

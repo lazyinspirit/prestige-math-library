@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-nonzero-period-obstructs-exactness-and-bounding.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-gabriels-horn-has-unbounded-truncated-lateral-area.md

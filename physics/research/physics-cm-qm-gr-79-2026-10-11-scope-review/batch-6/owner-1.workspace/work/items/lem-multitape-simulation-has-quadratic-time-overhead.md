@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-multitape-simulation-has-quadratic-time-overhead.md

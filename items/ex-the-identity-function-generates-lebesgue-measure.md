@@ -45,5 +45,4 @@ $$\lambda((a,b]) = b-a,\quad \lambda((a,b)) = b-a,\quad \lambda([a,b]) = b-a.$$
 
 1.1 By [L1], the measure attached to $F(x)=x$ is $\lambda$. [L1]
 
-2.1 Applying [L2] with $F(x)=x$ gives [step 1.1, L2]
-$F(b)-F(a)=F(b^-)-F(a)=F(b)-F(a^-)=b-a$, so every one of the four interval conventions has measure $b-a$. [step 1.1, L2] ∎
+2.1 Applying [L2] with $F(x)=x$ gives [step 1.1, L2] $F(b)-F(a)=F(b^-)-F(a)=F(b)-F(a^-)=b-a$, so every one of the four interval conventions has measure $b-a$. [step 1.1, L2] ∎ 

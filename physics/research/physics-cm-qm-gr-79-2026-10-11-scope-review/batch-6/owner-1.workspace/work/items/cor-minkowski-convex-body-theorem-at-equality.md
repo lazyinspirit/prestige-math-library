@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-minkowski-convex-body-theorem-at-equality.md

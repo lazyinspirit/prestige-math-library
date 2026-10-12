@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-embeddings-of-a-simple-algebraic-extension-correspond-to-distinct-roots.md

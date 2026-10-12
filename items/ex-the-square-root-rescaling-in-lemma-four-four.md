@@ -46,11 +46,8 @@ and assume $|F|\ge |G|$.
 
 **Proof technique:** direct arithmetic.
 
+ 1.1 Since $k=\sqrt{\ell}$, one has $$ \ell^{29c_4}=(k^2)^{29c_4}=k^{58c_4}=k^d. $$ [A1, algebra]
 
-1.1 Since $k=\sqrt{\ell}$, one has $$ \ell^{29c_4}=(k^2)^{29c_4}=k^{58c_4}=k^d. $$ [A1, algebra]
+ 2.1 Therefore $$ \frac{|F|}{\ell^{29c_4}}=\frac{|F|}{k^d}\ge \frac{|G|}{k^d}, $$ using the assumption $|F|\ge |G|$. [step 1.1, algebra]
 
-
-2.1 Therefore $$ \frac{|F|}{\ell^{29c_4}}=\frac{|F|}{k^d}\ge \frac{|G|}{k^d}, $$ using the assumption $|F|\ge |G|$. [step 1.1, algebra]
-
-
-3.1 This standalone calculation isolates the square-root renormalization: after replacing $\ell$ by $k=\sqrt{\ell}$, the width bound takes exactly the target form $|G|/k^d$ when the numerical relation $d=58c_4$ holds. [step 2.1] ∎
+ 3.1 This standalone calculation isolates the square-root renormalization: after replacing $\ell$ by $k=\sqrt{\ell}$, the width bound takes exactly the target form $|G|/k^d$ when the numerical relation $d=58c_4$ holds. [step 2.1] ∎ 

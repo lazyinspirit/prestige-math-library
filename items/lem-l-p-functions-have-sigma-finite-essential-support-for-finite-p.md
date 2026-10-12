@@ -44,11 +44,9 @@ $S \subseteq X$ such that $f=0$ almost everywhere on $X \setminus S$.
 
 **Proof technique:** Take a representative $u$ and use the level sets $\{|u|\ge1/n\}$. Chebyshev-Markov makes each level set finite-measure, and their union contains every point where $u\ne0$.
 
-1.1 Choose a measurable representative $u$ of $[f]$ and, for each $n \ge 1$, [L1, L2, given, choose, construct]
-set $$E_n:=\{|u|\ge1/n\}=\{|u|^p\ge n^{-p}\}.$$ Since $u \in \mathcal L^p(\mu)$, [L2] gives $$\mu(E_n)\le n^p\int |u|^p\,d\mu<\infty.$$ So every $E_n$ has finite measure.
+1.1 Choose a measurable representative $u$ of $[f]$ and, for each $n \ge 1$, [L1, L2, given, choose, construct] set $$E_n:=\{|u|\ge1/n\}=\{|u|^p\ge n^{-p}\}.$$ Since $u \in \mathcal L^p(\mu)$, [L2] gives $$\mu(E_n)\le n^p\int |u|^p\,d\mu<\infty.$$ So every $E_n$ has finite measure. [L1, L2, given, choose, construct]
 
-2.1 Put [L3, step 1.1]
-$$S:=\bigcup_{n=1}^\infty E_n.$$ By step 1.1 and [L3], the set $S$ is sigma-finite.
+2.1 Put [L3, step 1.1] $$S:=\bigcup_{n=1}^\infty E_n.$$ By step 1.1 and [L3], the set $S$ is sigma-finite. [L3, step 1.1]
 
-3.1 If $x \notin S$, then $|u(x)|<1/n$ for every $n \ge 1$, hence $u(x)=0$. [step 2.1, algebra]
-Therefore $u=0$ on $X \setminus S$, so the class $[f]$ vanishes almost everywhere outside the sigma-finite set $S$. ∎
+3.1 If $x \notin S$, then $|u(x)|<1/n$ for every $n \ge 1$, hence $u(x)=0$. [step 2.1, algebra] Therefore $u=0$ on $X \setminus S$, so the class $[f]$ vanishes almost everywhere outside the sigma-finite set $S$. [step 2.1, algebra] ∎
+

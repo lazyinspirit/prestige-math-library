@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-subdivision-chain-of-an-oriented-two-simplex.md

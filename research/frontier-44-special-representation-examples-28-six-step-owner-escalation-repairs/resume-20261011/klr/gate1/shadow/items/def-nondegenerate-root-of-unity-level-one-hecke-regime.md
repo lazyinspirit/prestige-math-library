@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-nondegenerate-root-of-unity-level-one-hecke-regime.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-adjoint-representation-has-highest-weight-the-highest-root.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-integrability-of-absolute-values-products-and-lattice-operations.md

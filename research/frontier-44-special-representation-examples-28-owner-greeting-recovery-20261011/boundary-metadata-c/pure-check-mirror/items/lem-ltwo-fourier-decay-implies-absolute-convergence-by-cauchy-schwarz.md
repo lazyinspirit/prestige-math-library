@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-ltwo-fourier-decay-implies-absolute-convergence-by-cauchy-schwarz.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-finite-dimensional-representation-of-a-reductive-lie-algebra-is-completely-reducible.md

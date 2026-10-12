@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-rational-function-is-real-analytic-via-a-geometric-series.md

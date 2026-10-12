@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integrating-a-compactly-supported-form-in-two-overlapping-charts.md

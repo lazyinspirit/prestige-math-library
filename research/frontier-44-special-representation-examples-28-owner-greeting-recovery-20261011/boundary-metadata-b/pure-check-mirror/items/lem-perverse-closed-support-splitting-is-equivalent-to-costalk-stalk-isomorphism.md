@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-perverse-closed-support-splitting-is-equivalent-to-costalk-stalk-isomorphism.md

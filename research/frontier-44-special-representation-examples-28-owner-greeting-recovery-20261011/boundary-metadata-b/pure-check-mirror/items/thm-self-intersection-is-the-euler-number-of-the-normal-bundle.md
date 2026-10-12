@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-intersection-is-the-euler-number-of-the-normal-bundle.md

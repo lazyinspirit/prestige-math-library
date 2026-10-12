@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-exterior-derivative-depends-on-a-riemannian-metric.md

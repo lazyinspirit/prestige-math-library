@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "batch": "ML-12–ML-15",
+  "status": "complete",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": null,
+  "before_hash_note": "The inherited ML-01–ML-11 scaffold received small edits after its saved batch hash; no exact pre-ML-12 hash was captured at takeover.",
+  "plan_after_batch_sha256": "5f187ac96c85e01e1049cda2e7bd713bf4c04aa03c710bc12fc42bd60406b4bf",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-02/sources.json",
+  "pairs": [
+    {
+      "id": "ML-12",
+      "pages": [
+        "ml02-linear-sparse-models",
+        "ml02-linear-sparse-models-examples"
+      ],
+      "assessment": "repaired",
+      "findings": [
+        "Made least-squares/ridge/lasso normalization explicit and gave OLS uniqueness and ridge minimizer premises. Added the exact Wainwright signed-support success event, covariance/mutual-incoherence/eigenvalue assumptions, asymptotic regime, both threshold constants, asymmetric lower/upper sample thresholds, regularization scaling, beta-min condition, and identity-covariance sharp constant.",
+        "Separated deterministic optimization, feature-scaling/intercept conventions, and support recovery from any unsupported risk/generalization claim."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Hastie, Tibshirani & Friedman, The Elements of Statistical Learning, 2e corrected 12th printing, ch. 3 §§3.2–3.9, printed pp. 43–100; §18.4, pp. 661–667. Relevant complete units recorded in learning-02/sources.json.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/esl.pdf",
+          "pdf_sha256": "8d098d65cf53925ba0fc13a52a2790d48a32433223cbd876d0a527cd1afe2e0f"
+        },
+        {
+          "citation": "Wainwright, Sharp Thresholds for High-Dimensional and Noisy Recovery of Sparsity, §§2.2–2.3 and 3.1–3.4, printed pp. 5–15, Theorem 1 and complete proof. Inspected exact conditions (17)–(21), support-success event, threshold formulas, tuning sequence, and proof.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/lasso_support_recovery_wainwright.pdf",
+          "pdf_sha256": "0e6c3f08ca171c14c8e29b8d1c68a070da414ada2e9a01100035e04e2c4e521f"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-least-squares-solutions-and-normal-equation",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional inner-product-space map: minimizers exist, satisfy T*(Tx-b)=0, and form x0+ker(T)."
+        },
+        {
+          "id": "def-tikhonov-regularised-least-squares",
+          "status": "published",
+          "inspected_contract": "Finite real/complex matrix and λ>0 objective ||Ax-b||²+λ||x||²."
+        },
+        {
+          "id": "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+          "status": "published",
+          "inspected_contract": "For every finite real/complex A and λ>0, strict convexity and unique (A*A+λI)^−1 A*b minimizer."
+        },
+        {
+          "id": "thm-singular-value-decomposition",
+          "status": "published",
+          "inspected_contract": "Every finite-dimensional real/complex linear map has an SVD."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Wainwright primal-dual witness, Gaussian maximum concentration and Gaussian conditional-law proof must be authored locally; a Cat1 learning-theory result is required for any separate excess-risk/generalization bound."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove orthonormal lasso soft thresholding at the declared nλ threshold.",
+        "Write out the active-set candidate, inactive KKT/subgradient condition, concentration, incoherence and beta-min arguments for the Wainwright theorem; retain the source event “there exists a signed-support-correct optimizer” rather than silently strengthening it to uniqueness.",
+        "If Gauss–Markov is included, prove the covariance comparison locally because ESL leaves it as an exercise."
+      ]
+    },
+    {
+      "id": "ML-13",
+      "pages": [
+        "ml02-linear-classification",
+        "ml02-linear-classification-examples"
+      ],
+      "assessment": "repaired",
+      "findings": [
+        "Specified class-conditional covariance and prior assumptions for affine LDA scores, positive-definite QDA covariances, a binary logistic likelihood and full-rank finite-coefficient condition for invertible IRLS systems, and the nonattainment caveat under separation.",
+        "Turned the perceptron statement into an exact cyclic augmented-input update with a unit-margin/R bound and explicit R²/γ² mistake limit; ESL Exercise 4.6 remains a local proof obligation, not evidence of a proof."
+      ],
+      "source_evidence": [
+        {
+          "citation": "ESL, ch. 4 §§4.1–4.5, printed pp. 101–135; inspected the perceptron algorithm/update (4.44), statement that separable finite training converges, Exercise 4.6 proof gap, and cycle caveat for nonseparable data. §18.4, printed pp. 661–664, for L1 logistic.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/esl.pdf",
+          "pdf_sha256": "8d098d65cf53925ba0fc13a52a2790d48a32433223cbd876d0a527cd1afe2e0f"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-hessian-characterises-convexity",
+          "status": "published",
+          "inspected_contract": "Convexity criterion for a C² function on an open convex domain; do not extend beyond that domain/regularity."
+        },
+        {
+          "id": "thm-least-squares-solutions-and-normal-equation",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional normal equations and full affine minimizer set."
+        },
+        {
+          "id": "thm-singular-value-decomposition",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional real/complex SVD."
+        }
+      ],
+      "new_pair_prerequisites": [],
+      "future_proof_authoring_obligations": [
+        "Derive LDA/QDA discriminants and logistic Hessian locally. Prove IRLS/Newton equation under full rank without asserting iterative convergence.",
+        "Give the perceptron progress/norm-squared proof of the stated finite mistake bound; show complete-separation likelihood nonattainment by a diverging ray."
+      ]
+    },
+    {
+      "id": "ML-14",
+      "pages": [
+        "ml02-rkhs-svm",
+        "ml02-rkhs-svm-examples"
+      ],
+      "assessment": "repaired",
+      "findings": [
+        "Made PSD kernel/RKHS construction and nondecreasing-norm representer hypotheses explicit, with optimizer existence kept separate.",
+        "Fixed soft-margin SVM convention (C penalty, unpenalized bias, slack constraints), dual box/equality constraints, KKT representation and Slater strict-feasibility route; separated convex optimization from solver convergence."
+      ],
+      "source_evidence": [
+        {
+          "citation": "ESL §5.8, printed pp. 167–173 (finite-sample representer form; Exercise 5.15/cited proof gap); ch. 12 §§12.2–12.4, pp. 417–438; ch. 18 §18.5, pp. 668–672.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/esl.pdf",
+          "pdf_sha256": "8d098d65cf53925ba0fc13a52a2790d48a32433223cbd876d0a527cd1afe2e0f"
+        },
+        {
+          "citation": "Rasmussen & Williams, Gaussian Processes for Machine Learning, ch. 6 §§6.1–6.4, printed pp. 129–150: RKHS, representer statement, SVM primal/dual; general representer/Moore–Aronszajn proofs are cited, not supplied.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/gpml.pdf",
+          "pdf_sha256": "20355ed64b3df27c4477850dd5fcff8bfc25f56dcde043dbd08d1e5d5582db25"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-orthogonal-projection-is-the-unique-nearest-point",
+          "status": "published",
+          "inspected_contract": "Projection onto a finite-dimensional subspace gives the unique nearest point; only the finite projection use is imported."
+        },
+        {
+          "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional real self-adjoint spectral theorem; kernel Gram checks only."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "No published RKHS, general representer theorem, finite-dimensional convex Slater/strong-duality, or SVM KKT supplier was found in the inspected dossier; these are local proof designs and create no backward Cat3 dependency."
+      ],
+      "future_proof_authoring_obligations": [
+        "Construct RKHS from PSD Gram kernel sections by quotient/completion and prove reproducing evaluation.",
+        "Prove representer projection; do not assume existence. Derive the dual/KKT conditions and justify strong duality from explicit strict feasibility, with the finite-dimensional span reduction when feature space is infinite-dimensional."
+      ]
+    },
+    {
+      "id": "ML-15",
+      "pages": [
+        "ml02-gaussian-process-regression",
+        "ml02-gaussian-process-regression-examples"
+      ],
+      "assessment": "repaired",
+      "findings": [
+        "Aligned the consumer to final Cat3 BCS-11 `thm-finite-gaussian-process-posterior-and-predictive-laws`: nonzero mean allowed, prior/noise/predictive covariances PSD, finite evaluation vectors, observed covariance SPD for inverse formulas, and conditional covariance may be singular.",
+        "Separated latent and noisy-test prediction, specified KRR sum-loss/noise penalty normalization and nonzero-mean condition, and carried AC from the actual published multivariate-normal, Gaussian-process, and Kolmogorov construction interfaces."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Rasmussen & Williams, GPML ch. 2 §§2.1–2.8, printed pp. 7–30; ch. 4 §§4.1–4.4, pp. 79–102; ch. 6 §§6.1–6.4, pp. 129–150. Finite Gaussian conditioning is derived; kernel theorem proofs are referenced.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/gpml.pdf",
+          "pdf_sha256": "20355ed64b3df27c4477850dd5fcff8bfc25f56dcde043dbd08d1e5d5582db25"
+        },
+        {
+          "citation": "ESL §5.8, printed pp. 167–173, finite-sample kernel ridge/posterior-mean discussion.",
+          "cached_source": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-02/esl.pdf",
+          "pdf_sha256": "8d098d65cf53925ba0fc13a52a2790d48a32433223cbd876d0a527cd1afe2e0f"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-multivariate-normal-law",
+          "status": "published",
+          "inspected_contract": "AC assumed; finite-dimensional normal law allows PSD singular covariance."
+        },
+        {
+          "id": "def-gaussian-process",
+          "status": "published",
+          "inspected_contract": "AC assumed; real process with possibly singular finite-dimensional multivariate-normal laws."
+        },
+        {
+          "id": "thm-kolmogorov-extension-for-standard-borel-coordinate-spaces",
+          "status": "published",
+          "inspected_contract": "AC assumed; consistent finite-dimensional laws on standard-Borel coordinates extend to the cylinder sigma algebra."
+        },
+        {
+          "id": "thm-non-negative-operator-characterisations",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional positive/self-adjoint operator characterization used for covariance/kernel algebra."
+        },
+        {
+          "id": "thm-singular-value-decomposition",
+          "status": "published",
+          "inspected_contract": "Finite-dimensional real/complex SVD for Cholesky/operation-count context only."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "BCS-11 planned theorem `thm-finite-gaussian-process-posterior-and-predictive-laws` is the finite posterior consumer interface with observed covariance SPD and singular conditional covariance allowed; it is a planned prose interface, not a published item."
+      ],
+      "future_proof_authoring_obligations": [
+        "Consume the finalized BCS-11 wording without broadening its inverse condition; prove the normalized KRR/posterior-mean identity locally.",
+        "Prove PSD only for explicit kernels selected as examples; state AC if using existing GP or multivariate-normal construction suppliers. No path-continuity result is implied."
+      ]
+    }
+  ]
+}

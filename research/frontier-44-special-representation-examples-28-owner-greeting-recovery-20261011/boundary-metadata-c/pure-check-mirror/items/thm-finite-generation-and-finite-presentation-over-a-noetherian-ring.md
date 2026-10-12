@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-finite-generation-and-finite-presentation-over-a-noetherian-ring.md

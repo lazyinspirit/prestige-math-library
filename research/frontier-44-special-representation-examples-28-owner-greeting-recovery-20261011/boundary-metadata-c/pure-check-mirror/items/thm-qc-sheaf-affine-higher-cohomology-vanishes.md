@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-qc-sheaf-affine-higher-cohomology-vanishes.md

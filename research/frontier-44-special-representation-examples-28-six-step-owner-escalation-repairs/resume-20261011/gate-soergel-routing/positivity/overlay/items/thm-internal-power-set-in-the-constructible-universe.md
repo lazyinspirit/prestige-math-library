@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-internal-power-set-in-the-constructible-universe.md

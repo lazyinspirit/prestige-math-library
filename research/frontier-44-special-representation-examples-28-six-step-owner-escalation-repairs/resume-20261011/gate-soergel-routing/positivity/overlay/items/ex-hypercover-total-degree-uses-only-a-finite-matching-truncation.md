@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hypercover-total-degree-uses-only-a-finite-matching-truncation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-symmetrisation-has-the-same-normal-closure.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-sum-of-squares-formula-for-irreducible-degrees.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-punctured-domain-functions-must-be-unbounded.md

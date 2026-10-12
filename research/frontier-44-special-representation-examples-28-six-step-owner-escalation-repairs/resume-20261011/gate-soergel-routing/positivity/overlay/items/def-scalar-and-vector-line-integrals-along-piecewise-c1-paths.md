@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-scalar-and-vector-line-integrals-along-piecewise-c1-paths.md

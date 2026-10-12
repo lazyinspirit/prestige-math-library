@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fourier-basis-and-parseval-on-the-n-torus.md

@@ -60,13 +60,10 @@ $$ e_Q(M)=e_{Q'}(M/xM). $$
 
 **Proof technique:** direct.
 
-
-1.1 Put $K=(0:_M x)$ and $C=M/xM$. The parameter hypothesis gives finite length of $M/QM$, so [L3] makes $Q'$ a module-relative ideal of definition for both $C$ and $K$ (including the zero-module case). The $(d-1)$-generator degree bound in [L2] gives $\deg P_{Q',C},\deg P_{Q',K}\le d-1$ whenever the polynomials are nonzero. [L2, L3, given]
+ 1.1 Put $K=(0:_M x)$ and $C=M/xM$. The parameter hypothesis gives finite length of $M/QM$, so [L3] makes $Q'$ a module-relative ideal of definition for both $C$ and $K$ (including the zero-module case). The $(d-1)$-generator degree bound in [L2] gives $\deg P_{Q',C},\deg P_{Q',K}\le d-1$ whenever the polynomials are nonzero. [L2, L3, given]
 
 2.1 By [L2], $e_Q^{[d]}(M)=\chi(K(x,x_2,\ldots,x_d;M))$. The exact first-element reduction [L3] makes this $\chi(K(x_2,\ldots,x_d;C))-\chi(K(x_2,\ldots,x_d;K))$. Apply [L2] to each $Q'$-complex, with the degree-indexed convention [L4], to obtain $$e_Q^{[d]}(M)=e_{Q'}^{[d-1]}(C)-e_{Q'}^{[d-1]}(K).$$ [L2, L3, L4, step 1.1]
 
+ 3.1 If $x$ is $M$-regular, then $K=0$. By [L1], $\deg P_{Q,M}=d$, so $e_Q^{[d]}(M)=e_Q(M)\ne0$. Step 2.1 therefore makes $e_{Q'}^{[d-1]}(C)$ nonzero. The degree bound in step 1.1 forces $\deg P_{Q',C}=d-1$, and hence $e_{Q'}^{[d-1]}(C)=e_{Q'}(C)$. This proves $$e_Q(M)=e_{Q'}(M/xM).$$ [L1, step 1.1, step 2.1, algebra]
 
-3.1 If $x$ is $M$-regular, then $K=0$. By [L1], $\deg P_{Q,M}=d$, so $e_Q^{[d]}(M)=e_Q(M)\ne0$. Step 2.1 therefore makes $e_{Q'}^{[d-1]}(C)$ nonzero. The degree bound in step 1.1 forces $\deg P_{Q',C}=d-1$, and hence $e_{Q'}^{[d-1]}(C)=e_{Q'}(C)$. This proves $$e_Q(M)=e_{Q'}(M/xM).$$ [L1, step 1.1, step 2.1, algebra]
-
-
-4.1 Therefore the parameter-reduction formula holds. [step 2.1, step 3.1] ∎
+ 4.1 Therefore the parameter-reduction formula holds. [step 2.1, step 3.1] ∎ 

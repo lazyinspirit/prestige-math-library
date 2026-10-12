@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution.md

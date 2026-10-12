@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-eilenberg-watts-is-a-biequivalence.md

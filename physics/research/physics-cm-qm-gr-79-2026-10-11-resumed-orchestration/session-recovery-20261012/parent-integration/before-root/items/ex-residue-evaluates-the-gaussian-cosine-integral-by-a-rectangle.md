@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-residue-evaluates-the-gaussian-cosine-integral-by-a-rectangle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-topological-simplex-and-its-affine-face-maps.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-partitions-with-k-parts-equal-largest-part-k.md

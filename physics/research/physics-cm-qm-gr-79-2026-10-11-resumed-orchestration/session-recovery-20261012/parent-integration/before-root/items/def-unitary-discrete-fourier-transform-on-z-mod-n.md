@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unitary-discrete-fourier-transform-on-z-mod-n.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-omega-one-strongly-compact-normal-moore-refinement.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-perron-method-for-hamilton-jacobi-equations.md

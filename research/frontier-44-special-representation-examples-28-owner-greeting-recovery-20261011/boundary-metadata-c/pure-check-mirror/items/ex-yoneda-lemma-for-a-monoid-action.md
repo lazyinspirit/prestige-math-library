@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-yoneda-lemma-for-a-monoid-action.md

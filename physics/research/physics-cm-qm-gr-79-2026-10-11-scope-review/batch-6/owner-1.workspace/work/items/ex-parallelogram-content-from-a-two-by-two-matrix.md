@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-parallelogram-content-from-a-two-by-two-matrix.md

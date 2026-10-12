@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-pythagorean-theorem-and-finite-orthogonal-sums.md

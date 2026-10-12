@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-absolutely-summable-fourier-coefficients-give-uniform-convergence.md

@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadStep3,itemHash,itemInputPaths,itemDecision} from '../../../tools/step3-decisions.mjs';
+import {step3OwnerCreationClaim} from '../../../tools/step3-owner-creation.mjs';
+const run='frontier-44-special-representation-examples-28',s=loadStep3(process.cwd(),run),base='research/'+run+'-owner-crash-recovery-20261010T1736/repair_klr_global_basis/';
+const prior=JSON.parse(readFileSync(base+'actual-current-three-producers-norm-integral-focused-binding.json'));
+const ids=[...prior.subjects.map(x=>x.id),'thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module','lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize','thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer','def-deformed-tensor-space-for-the-type-a-finite-w-algebra'];
+const sha=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const rows=ids.filter(id=>s.items.has(id)).map(id=>({id,current_claim:step3OwnerCreationClaim(s,id),current_item_raw_sha256:sha('items/'+id+'.md'),current_manifest_entry:s.items.get(id).item,current_native_input_sha256:itemHash(s,id),input_guards:itemInputPaths(s,id).map(p=>({path:p.replace(process.cwd()+'/',''),raw_sha256:sha(p)})),ordinary_decision:itemDecision(s,id),prior_exact_guard:prior.subjects.find(x=>x.id===id)?.guard??null}));
+writeFileSync(base+'joint-third-wave-independent-supplier-current-projections.json',JSON.stringify({run,at:new Date().toISOString(),read_only:true,subjects:rows,skipped_ids:ids.filter(id=>!s.items.has(id)),no_new_mathematical_cycle:true},null,2)+'\n');
+console.log(rows.map(x=>({id:x.id,raw:x.current_item_raw_sha256,native:x.current_native_input_sha256,closed:x.ordinary_decision.closed})));console.log('skipped',ids.filter(id=>!s.items.has(id)));

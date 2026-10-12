@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-standard-two-dimensional-representation-of-s-three-is-irreducible.md

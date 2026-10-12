@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-polynomials-and-roots-transport-along-field-isomorphisms.md

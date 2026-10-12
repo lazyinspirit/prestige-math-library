@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dominant-weights-are-maxima-of-their-weyl-orbits.md

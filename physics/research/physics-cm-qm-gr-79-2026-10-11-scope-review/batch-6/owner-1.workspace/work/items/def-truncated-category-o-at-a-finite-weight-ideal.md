@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-truncated-category-o-at-a-finite-weight-ideal.md

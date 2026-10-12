@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-product-with-a-fixed-space-is-a-functor.md

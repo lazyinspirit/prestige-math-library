@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-four-band-d-pair-case-is-a-markov-sequence.md

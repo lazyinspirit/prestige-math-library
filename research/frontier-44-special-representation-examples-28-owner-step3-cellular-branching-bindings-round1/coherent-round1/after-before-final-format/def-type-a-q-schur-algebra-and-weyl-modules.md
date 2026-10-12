@@ -1,0 +1,116 @@
+---
+id: def-type-a-q-schur-algebra-and-weyl-modules
+kind: definition
+title: "The type-A q-Schur algebra and its Weyl modules"
+status: draft
+origin: pipeline
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+deps: [def-cellular-algebra-basis-and-cell-module, def-direct-sum-of-a-family-of-modules, def-dominance-order-on-partitions, def-generic-type-a-hecke-algebra, def-left-and-right-modules, def-murphy-elements-and-murphy-tableau-elements, def-semistandard-tableau-and-kostka-number, def-young-subgroup-tabloid-and-permutation-module, thm-standard-basis-of-the-generic-type-a-hecke-algebra]
+justified_by: []
+aliases: []
+landmark: true
+dependency_level: 2
+verification:
+  precheck: n/a
+sources:
+  scraped: []
+  references:
+    - title: "Andrew Mathas, Hecke algebras and Schur algebras of the symmetric group, complete prepublication manuscript (1998; expanded published edition: AMS University Lecture Series 15, 1999); complete 79-page manuscript, SHA-256 8cfeb611a95a3ff25cb95ad22bfd3a68475818301c34b04d131a8480a1b997e0"
+      url: "https://web.math.ucsb.edu/~bigelow/books/mathas.pdf"
+      locator: "Chapter 4 Section 1, printed pp. 36-44: Theorem 4.8 (a basis of Hom_H(M^mu,M^nu) indexed by row-semistandard tableaux), (4.13) and Corollaries 4.9/4.12 (the elements phi_{ST}), Theorem 4.14 (R. Green's Semistandard Basis Theorem), (4.15) (the Weyl modules W^lambda and their bases), Theorem 4.16 and Corollary 4.18 (the nonzero simple heads, completeness and dominance unitriangularity)"
+    - title: "Alexander Kleshchev, Representation theory of symmetric groups and related Hecke algebras, arXiv:0909.4844; Bull. Amer. Math. Soc. 47 (2010) 419-481; complete 66-page arXiv survey, SHA-256 8685199608967fa7c479e4dd883990b716a6f708e71cf75f6ce4aba41c6f2cab"
+      url: "https://arxiv.org/pdf/0909.4844"
+      locator: "Section 6.2, printed pp. 28-30: the q-Schur algebra S(d,n) as the endomorphism algebra of the sum of permutation modules, and the Weyl modules"
+---
+
+## Definition
+
+Let $R$ be a commutative ring, $q\in R^{\times}$, $d,n\ge0$, and
+$H=H_{R,q}(S_n)$ ([[def-generic-type-a-hecke-algebra]]). Let $\Lambda(d,n)$ be
+the set of compositions $\mu=(\mu_1,\dots,\mu_d)$ of $n$ (so $\mu_i\in\mathbb N$
+and $\sum_i\mu_i=n$). For $\mu\in\Lambda(d,n)$ let
+$m_\mu=\sum_{w\in S_\mu}T_w$
+([[def-murphy-elements-and-murphy-tableau-elements]]) and let $M^{\mu}:=m_\mu H$
+be the right ideal it generates, the **(Hecke) permutation module**; $M^{\mu}$
+is free over $R$ with basis
+$\{m_\mu T_{d(t)}:t\text{ row-standard }\mu\text{-tableau}\}$ and is the Hecke
+analogue of the module induced from the trivial representation of the Young
+subgroup ([[def-young-subgroup-tabloid-and-permutation-module]]).
+
+Here is the freeness statement in detail: the cosets $S_\mu d$ with $d\in D_\mu$
+partition $S_n$, and $\ell(ud)=\ell(u)+\ell(d)$ for $u\in S_\mu$, $d\in D_\mu$
+([[def-murphy-elements-and-murphy-tableau-elements]]), so the standard basis
+theorem ([[thm-standard-basis-of-the-generic-type-a-hecke-algebra]]) gives
+$T_uT_{d(t)}=T_{ud(t)}$ and
+$m_\mu T_{d(t)}=\sum_{u\in S_\mu}T_{u\,d(t)}$; these are the standard basis
+elements indexed by the single coset $S_\mu d(t)$, and the cosets are disjoint,
+whence $M^\mu=\bigoplus_tR\,m_\mu T_{d(t)}$ is free with the displayed basis as
+$t$ runs over the row-standard $\mu$-tableaux.
+
+Put $M:=\bigoplus_{\mu\in\Lambda(d,n)}M^{\mu}$
+([[def-direct-sum-of-a-family-of-modules]]) and define the **q-Schur algebra**
+$$S(d,n):=\mathrm{End}_H(M),$$
+the $R$-algebra of right $H$-module endomorphisms of $M$
+([[def-left-and-right-modules]]).
+
+**Cellular structure.** For all $\mu,\nu\in\Lambda(d,n)$,
+$\mathrm{Hom}_H(M^{\mu},M^{\nu})$ is free with a basis indexed by row-semistandard
+tableaux; for every partition $\lambda$ of $n$ with at most $d$ parts and all
+semistandard $\lambda$-tableaux $S,T$ there is an element
+$\varphi_{ST}\in S(d,n)$
+([[def-semistandard-tableau-and-kostka-number]]), and the family
+$$\{\varphi_{ST}:\lambda\in\Lambda^{+}(d,n),\ S,T\in T_0(\lambda)\},$$
+where $\Lambda^{+}(d,n)$ is the set of partitions of $n$ with at most $d$ parts
+ordered by dominance $\unrhd$ ([[def-dominance-order-on-partitions]]), is an
+$R$-basis of $S(d,n)$; the map $\varphi_{ST}\mapsto\varphi_{TS}$ is an algebra
+anti-automorphism and the triangular axiom holds modulo the span of the
+$\varphi_{UV}$ with $\mu\rhd\lambda$. Hence
+$(\varphi,\Lambda^{+}(d,n))$ is a dominance-cellular basis of $S(d,n)$
+([[def-cellular-algebra-basis-and-cell-module]]) and its cell modules are the
+**Weyl modules** $W^{\lambda}$, free over $R$ with basis
+$\{\varphi_T:T\in T_0(\lambda)\}$. Over a field $F$, $W^{\lambda}$ has nonzero
+simple head $L^{\lambda}$, the $L^{\lambda}$ for
+$\lambda\in\Lambda^{+}(d,n)$ form a complete set of pairwise non-isomorphic
+absolutely irreducible $S(d,n)$-modules, and the decomposition matrix satisfies
+$d_{\lambda\lambda}=1$ and $d_{\lambda\mu}\ne0\Rightarrow\lambda\unrhd\mu$.
+
+**Explicit normalization of the semistandard maps.** For a standard
+$\lambda$-tableau $s$, let $\mu(s)$ replace each entry by the row of that
+entry in the canonical $\mu$-tableau. For semistandard $S,T$ of respective
+types $\mu,\nu$, put
+$$m_{ST}:=\sum_{\substack{s,t\in\operatorname{Std}(\lambda)\\
+\mu(s)=S,\ \nu(t)=T}}m_{st}.$$
+The normalized basis map $\varphi_{ST}$ is zero on the other summands and
+sends $m_\nu h\in M^\nu$ to $m_{ST}h\in M^\mu$. The intersection
+$m_{ST}\in M^\mu\cap(M^\nu)^*$ makes this well-defined: if
+$m_\nu h=0$, write $m_{ST}=a m_\nu$ and obtain $m_{ST}h=0$.
+The semistandard intersection-basis theorem gives exactly these maps as
+the Hom basis; their composition is ordinary composition of endomorphisms.
+For the regular type $\omega=(1^n)$ the fibers are singleton standard
+tableaux, so evaluation at $1$ identifies the corner map with $m_{st}$.
+This fixes the actual module-and-form normalization used by the corner
+and weight-Gram calculations (Mathas (4.13), with Corollary 4.12 and
+Theorem 4.14). No quantum factorial is inverted in this definition.
+
+**Weight idempotents and weight spaces.** For each composition
+$\nu\in\Lambda(d,n)$, let $1_\nu\in\operatorname{End}_H(M)$ be the
+identity on the summand $M^\nu$ and zero on every other summand. These
+weight projections satisfy
+$$1_\nu^2=1_\nu,\qquad 1_\mu1_\nu=0\ (\mu\ne\nu),\qquad
+  \sum_\nu1_\nu=1.$$
+They are not all of the diagonal cellular elements $\varphi_{TT}$:
+a general cellular diagonal is not asserted idempotent or orthogonal.
+For a partition $\nu$ the canonical tableau $T^\nu$ of shape and type
+$\nu$ gives $1_\nu=\varphi_{T^\nu T^\nu}$; for a general composition the
+projection is defined directly as above, without pretending that an
+arbitrary composition is a partition-shaped semistandard tableau.
+The basis map $\varphi_{ST}$ is supported between the summands indicated
+by the types of $S$ and $T$. Thus the fixed-first-index Weyl basis vector
+$\varphi_T$ survives right multiplication by $1_\nu$ exactly when $T$ has
+type $\nu$. Over any field,
+$$\dim_F(W^\lambda1_\nu)=|T_0(\lambda,\nu)|=K_{\lambda\nu}.$$
+This follows by applying the projection to the displayed free Weyl basis,
+not by assuming every diagonal cellular element is a projection
+([[def-semistandard-tableau-and-kostka-number]]).

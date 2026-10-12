@@ -52,8 +52,7 @@ $$\star e_I=\varepsilon_I\,e_{I^c}.$$
 
 **Proof technique:** direct.
 
-
-1.1 By [L3] and [L4], the positively oriented orthonormal basis exists and yields the wedge bases $(e_I)_I$ of $\Lambda^kV$ and $(e_J)_J$ of $\Lambda^{n-k}V$. [L3, L4]
+ 1.1 By [L3] and [L4], the positively oriented orthonormal basis exists and yields the wedge bases $(e_I)_I$ of $\Lambda^kV$ and $(e_J)_J$ of $\Lambda^{n-k}V$. [L3, L4]
 
 2.1 Define a linear map $\star:\Lambda^kV\to\Lambda^{n-k}V$ by $\star e_I:=\varepsilon_I\,e_{I^c}$ on the basis of step 1.1. [step 1.1]
 
@@ -63,4 +62,4 @@ $$\star e_I=\varepsilon_I\,e_{I^c}.$$
 
 5.1 Uniqueness: if $\star'$ also satisfies [L1], fix $\beta$ and write $\delta:=\star\beta-\star'\beta=\sum_{|J|=n-k}c_J e_J$ in the basis of [L4]. Then $e_{J^c}\wedge\delta=0$ for every $J$ by subtracting the two defining identities. All terms except $c_Je_{J^c}\wedge e_J$ vanish because they repeat a basis vector, while $e_{J^c}\wedge e_J=\pm\omega\ne0$. Hence every $c_J=0$ and $\delta=0$. This argument also covers $k=0,n$ and $n=0$, where the relevant bases each have one empty or full wedge. [L3, L4, step 3.1, step 4.1]
 
-6.1 Steps 2.1 and 4.1 prove existence with the complementary-basis formula, and step 5.1 proves uniqueness. [step 2.1, step 4.1, step 5.1] ∎
+6.1 Steps 2.1 and 4.1 prove existence with the complementary-basis formula, and step 5.1 proves uniqueness. [step 2.1, step 4.1, step 5.1] ∎ 

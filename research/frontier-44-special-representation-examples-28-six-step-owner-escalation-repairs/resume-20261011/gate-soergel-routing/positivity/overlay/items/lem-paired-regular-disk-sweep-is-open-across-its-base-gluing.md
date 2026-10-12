@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-paired-regular-disk-sweep-is-open-across-its-base-gluing.md

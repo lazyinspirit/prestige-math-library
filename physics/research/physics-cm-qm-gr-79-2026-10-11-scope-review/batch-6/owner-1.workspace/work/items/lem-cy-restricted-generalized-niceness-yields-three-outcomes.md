@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cy-restricted-generalized-niceness-yields-three-outcomes.md

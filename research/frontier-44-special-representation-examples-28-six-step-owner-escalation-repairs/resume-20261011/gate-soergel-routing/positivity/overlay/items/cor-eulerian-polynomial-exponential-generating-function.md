@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-eulerian-polynomial-exponential-generating-function.md

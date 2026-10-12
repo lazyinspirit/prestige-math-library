@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-symplectic-and-hamiltonian-lie-group-action.md

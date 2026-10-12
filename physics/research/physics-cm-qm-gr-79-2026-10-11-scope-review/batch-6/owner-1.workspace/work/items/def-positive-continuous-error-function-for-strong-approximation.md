@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-positive-continuous-error-function-for-strong-approximation.md

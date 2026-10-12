@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-periodic-perturbation-preserves-the-gamma-recurrence-and-factorial-values.md

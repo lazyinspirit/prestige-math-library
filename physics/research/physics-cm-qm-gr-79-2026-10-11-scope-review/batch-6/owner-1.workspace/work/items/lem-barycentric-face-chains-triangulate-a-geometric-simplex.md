@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-barycentric-face-chains-triangulate-a-geometric-simplex.md

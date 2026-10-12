@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-section-zero-scheme-invertible-sheaf.md

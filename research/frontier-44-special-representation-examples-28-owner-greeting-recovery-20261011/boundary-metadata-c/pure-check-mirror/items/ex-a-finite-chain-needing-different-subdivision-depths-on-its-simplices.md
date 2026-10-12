@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices.md

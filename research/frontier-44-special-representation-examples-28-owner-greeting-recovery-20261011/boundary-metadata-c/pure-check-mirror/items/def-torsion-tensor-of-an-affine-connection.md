@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-torsion-tensor-of-an-affine-connection.md

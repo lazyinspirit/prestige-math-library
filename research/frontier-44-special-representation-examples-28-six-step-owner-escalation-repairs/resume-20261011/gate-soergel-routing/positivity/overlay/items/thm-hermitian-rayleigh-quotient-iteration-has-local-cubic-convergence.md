@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence.md

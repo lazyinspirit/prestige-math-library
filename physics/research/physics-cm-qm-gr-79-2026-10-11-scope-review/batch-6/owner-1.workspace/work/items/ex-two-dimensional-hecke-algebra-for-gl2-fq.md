@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-dimensional-hecke-algebra-for-gl2-fq.md

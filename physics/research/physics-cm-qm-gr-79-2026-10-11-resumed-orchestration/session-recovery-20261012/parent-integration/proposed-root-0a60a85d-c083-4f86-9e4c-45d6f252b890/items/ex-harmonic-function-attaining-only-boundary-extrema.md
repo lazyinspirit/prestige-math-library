@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-harmonic-function-attaining-only-boundary-extrema.md

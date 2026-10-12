@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-products-and-coproducts-of-complexes-are-degreewise-when-they-exist-and-preserve-differentials.md

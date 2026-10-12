@@ -17,11 +17,11 @@ test('watch additions, alterations, body edits, unpublication, deletion and reco
   let store;
   try {
     await mkdir(join(root, 'items'));
-    await mkdir(join(root, 'library', 'foundations'), { recursive: true });
+    await mkdir(join(root, 'library', 'set-theory'), { recursive: true });
     const put = (file, fm, body = '') => writeFile(join(root, file), `---\n${JSON.stringify(fm)}\n---\n${body}`);
     const item = { id: 'def-a', title: 'A', status: 'published', kind: 'definition', deps: [] };
     await put('items/def-a.md', item);
-    await put('library/foundations/page.md', { status: 'published', items: ['def-a', 'thm-b'] });
+    await put('library/set-theory/page.md', { status: 'published', items: ['def-a', 'thm-b'] });
     const errors = [];
     store = await new GraphStore(root, { debounceMs: 20, pollMs: 80, onError: message => errors.push(message) }).start();
     const original = store.snapshot.revision;

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-strong-nullstellensatz-nonradical-ideal.md

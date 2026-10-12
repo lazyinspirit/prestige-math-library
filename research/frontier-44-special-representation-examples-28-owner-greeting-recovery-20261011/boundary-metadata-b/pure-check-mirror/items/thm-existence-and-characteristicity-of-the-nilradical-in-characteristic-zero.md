@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-existence-and-characteristicity-of-the-nilradical-in-characteristic-zero.md

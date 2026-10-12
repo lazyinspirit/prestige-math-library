@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-formal-adjoints-of-differential-operators-exist-and-are-unique.md

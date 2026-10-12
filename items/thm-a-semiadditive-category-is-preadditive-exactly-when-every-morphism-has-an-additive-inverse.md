@@ -48,9 +48,8 @@ additive inverse for the canonical commutative-monoid law on its hom-set.
 
 **Proof technique:** direct.
 
-1.1 Assume $\mathcal C$ is preadditive. [L2, L3]
-For parallel $f,g:A\to B$, product uniqueness gives $\langle f,g\rangle=i_1f+i_2g$, and bilinearity gives $\nabla\langle f,g\rangle=f+g$. Thus the hom-group addition is compatible with the biproduct diagrams and equals the canonical law by [L3]. Every hom-set is an abelian group by [L2], so every morphism has an inverse for the canonical law. [L2, L3]
+1.1 Assume $\mathcal C$ is preadditive. [L2, L3] For parallel $f,g:A\to B$, product uniqueness gives $\langle f,g\rangle=i_1f+i_2g$, and bilinearity gives $\nabla\langle f,g\rangle=f+g$. Thus the hom-group addition is compatible with the biproduct diagrams and equals the canonical law by [L3]. Every hom-set is an abelian group by [L2], so every morphism has an inverse for the canonical law. [L2, L3]
 
 1.2 Conversely, assume every morphism in $\mathcal C$ has an additive inverse for the commutative-monoid law from [L1]. Then every hom-set is a commutative monoid in which each element has an inverse, hence an abelian group. The bilinearity of composition is already part of [L1]. [L1]
 
-2.1 Therefore the hom-sets are abelian groups with bilinear composition exactly when every morphism has an additive inverse, which is the definition of preadditivity in [L2]. [L1, L2, step 1.1, step 1.2] ∎
+2.1 Therefore the hom-sets are abelian groups with bilinear composition exactly when every morphism has an additive inverse, which is the definition of preadditivity in [L2]. [L1, L2, step 1.1, step 1.2] ∎ 

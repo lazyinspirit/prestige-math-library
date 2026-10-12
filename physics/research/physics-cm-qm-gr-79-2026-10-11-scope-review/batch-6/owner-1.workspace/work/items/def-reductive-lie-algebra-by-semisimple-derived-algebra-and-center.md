@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-reductive-lie-algebra-by-semisimple-derived-algebra-and-center.md

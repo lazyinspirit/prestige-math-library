@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-moment-map-components-generate-the-negative-infinitesimal-action.md

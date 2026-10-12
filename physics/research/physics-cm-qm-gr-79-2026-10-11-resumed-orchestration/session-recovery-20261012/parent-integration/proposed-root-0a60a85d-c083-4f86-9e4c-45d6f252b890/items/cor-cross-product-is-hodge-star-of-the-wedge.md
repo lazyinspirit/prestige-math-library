@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cross-product-is-hodge-star-of-the-wedge.md

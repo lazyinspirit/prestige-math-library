@@ -36,8 +36,6 @@ $$\sigma(f)=\{\varnothing,\ X,\ A,\ X \setminus A\}.$$
 
 **Proof technique:** direct.
 
-1.1 Because $f$ takes only the values $0$ and $1$, every preimage $f^{-1}(B)$ is [L1, given]
-one of $\varnothing$, $X$, $A$, or $X \setminus A$. So $\sigma(f)$ is contained in that four-set family. [L1, given]
+1.1 Because $f$ takes only the values $0$ and $1$, every preimage $f^{-1}(B)$ is [L1, given] one of $\varnothing$, $X$, $A$, or $X \setminus A$. So $\sigma(f)$ is contained in that four-set family. [L1, given]
 
-2.1 The four sets all occur as preimages: [step 1.1, L1]
-$A=f^{-1}((1/2,\infty))$, $X \setminus A=f^{-1}((-\infty,1/2))$, $X=f^{-1}(\mathbb{R})$, and $\varnothing=f^{-1}(\varnothing)$. Therefore they are exactly the members of $\sigma(f)$. [step 1.1, L1] ∎
+2.1 The four sets all occur as preimages: [step 1.1, L1] $A=f^{-1}((1/2,\infty))$, $X \setminus A=f^{-1}((-\infty,1/2))$, $X=f^{-1}(\mathbb{R})$, and $\varnothing=f^{-1}(\varnothing)$. Therefore they are exactly the members of $\sigma(f)$. [step 1.1, L1] ∎ 

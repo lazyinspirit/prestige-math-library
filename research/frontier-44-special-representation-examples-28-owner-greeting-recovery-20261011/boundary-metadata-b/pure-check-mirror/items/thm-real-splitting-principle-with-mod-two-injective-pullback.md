@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-real-splitting-principle-with-mod-two-injective-pullback.md

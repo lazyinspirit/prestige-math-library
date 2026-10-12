@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dot-orbit-weight-spaces-detect-o-subquotients.md

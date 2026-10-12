@@ -1,0 +1,24 @@
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+const run='frontier-44-special-representation-examples-28',dir=`research/${run}-owner-native24-cyclotomic-consumer-review/source-title-metadata-correction`;
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const proposalPath=`${dir}/guarded-source-title-patch-round2.json`,proposal=JSON.parse(readFileSync(proposalPath,'utf8'));
+const state=JSON.parse(readFileSync(`.autopilot/${run}/state.json`,'utf8'));
+const resultPath=`research/${run}-dispatch/beta-batch-25.result.json`;
+if(!state.paused||!existsSync(resultPath))throw Error('Wait for paused native25 writer completion');
+const result=JSON.parse(readFileSync(resultPath,'utf8'));
+if(result.ok!==true||result.exit_code!==0||result.process_exit_code!==0)throw Error('Native25 successful result required');
+if(!state.dispatches?.['1-scaffold:batch-25']?.endedAt)throw Error('Wait for nativeengine writer-drain acknowledgement');
+for(const g of proposal.guards)if(sha(readFileSync(g.path))!==g.sha256)throw Error(`Guard drift: ${g.path}`);
+const p=proposal.preimage.path,before=readFileSync(p);if(sha(before)!==proposal.preimage.sha256)throw Error('Native24 preimage changed');
+const pages=JSON.parse(before),item=pages.flatMap(p=>p.items).find(i=>i.id===proposal.subject);
+if(item.sources.references[0].title!==proposal.patch.before)throw Error('Exact title preimage mismatch');
+item.sources.references[0].title=proposal.patch.after;
+const after=Buffer.from(JSON.stringify(pages,null,2)+'\n');
+// Verify the inverse recovers all original bytes, including every proof field.
+item.sources.references[0].title=proposal.patch.before;
+if(!Buffer.from(JSON.stringify(pages,null,2)+'\n').equals(before))throw Error('Unexpected serialization or non-title change');
+writeFileSync(`${dir}/native24-title-round2.before.pages.json`,before,{flag:'wx'});
+writeFileSync(p,after);
+writeFileSync(`${dir}/root-title-round2-integration.json`,JSON.stringify({version:1,run,at:new Date().toISOString(),repair_round:2,maximum_rounds:2,proposal:{path:proposalPath,sha256:sha(readFileSync(proposalPath))},before:{path:p,sha256:sha(before),archive:`${dir}/native24-title-round2.before.pages.json`},after:{path:p,sha256:sha(after)},subject:proposal.subject,changed_field:'sources.references[0].title',mathematical_fields_unchanged:true,native25_result:{path:resultPath,sha256:sha(readFileSync(resultPath))},ready_written:false,gate_attempt:false,same_reviewer_final_afterbinding_required:true},null,2)+'\n',{flag:'wx'});
+console.log('Exact source-title correction integrated; mandatory finalafterbinding still required');

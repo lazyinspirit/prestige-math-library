@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-regular-distribution-from-a-locally-integrable-function.md

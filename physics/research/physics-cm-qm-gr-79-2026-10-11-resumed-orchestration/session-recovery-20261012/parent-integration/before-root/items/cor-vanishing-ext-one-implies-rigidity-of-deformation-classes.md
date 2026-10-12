@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-vanishing-ext-one-implies-rigidity-of-deformation-classes.md

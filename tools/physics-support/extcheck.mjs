@@ -53,7 +53,7 @@ const physicsToolRoot = fileURLToPath(new URL('../../', import.meta.url));
 //   external-unused      an `external_refs` entry is never linked in the body,
 //                        so the declaration marks the item for nothing visible
 //
-//   foundations-deferred-dependency  an item homed on a Foundations page has
+//   foundations-deferred-dependency  an item homed on a Set Theory page has
 //                        a deps/justified_by/forward_refs path to an item on
 //                        Set Theory Beyond Choice: Recorded, Not Proved Here
 //
@@ -186,7 +186,7 @@ for (const id of unknownItems(itemScope, items.keys()))
 
 // ------------------------------------- Set Theory bootstrapping hard boundary
 //
-// The Foundations track exists to replace the Set Theory deferred catalogue.
+// The Set Theory track exists to replace the Set Theory deferred catalogue.
 // Its authored items may mention a deferred result through `external_refs` as
 // non-load-bearing orientation, but no logical or well-definedness path may
 // reach the catalogue. This is category-aware and transitive so an apparently
@@ -206,7 +206,7 @@ try {
         const pageId = scalar(fm, 'page') ?? basename(entry.name, '.md');
         const pageItems = [...list(fm, 'items'), ...list(fm, 'examples')];
         itemsOnLibraryPage.set(pageId, pageItems);
-        if (category === 'foundations') {
+        if (category === 'set-theory') {
           for (const id of pageItems) {
             const r = resolve(id);
             if (r) foundationsItems.add(r);
@@ -239,7 +239,7 @@ try {
     for (const req of pageById.get(id)?.requires ?? []) collectPage(req);
   };
   for (const page of plan.pages ?? [])
-    if (page.category === 'foundations') collectPage(page.id);
+    if (page.category === 'set-theory') collectPage(page.id);
   for (const id of consumedPages) {
     const page = pageById.get(id);
     const roots = [
@@ -295,7 +295,7 @@ for (const id of [...foundationsItems].sort()) {
   if (!includesItem(itemScope, id)) continue;
   const path = deferredPath(id);
   if (path)
-    err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Foundations dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
+    err('foundations-deferred-dependency', `${items.get(id)?.file ?? `research/plan-spec.json#${id}`}: Set Theory dependency path reaches Set Theory recorded-not-proved material: ${path.join(' -> ')}`);
 }
 
 // -------------------------------------------------------- shape of an unproved item

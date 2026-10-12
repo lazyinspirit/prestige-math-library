@@ -44,8 +44,7 @@ $\ell^\infty$ for the supremum norm.
 
 **Given:** The objects and hypotheses in the Statement.
 
-1.1 Let $x\in\ell^\infty$ and $\varepsilon>0$. In the real case partition the [given, L1]
-bounded interval containing all $x_n$ into finitely many half-open intervals of length below $\varepsilon$, and replace every $x_n$ by a fixed endpoint of its cell. The resulting sequence $s$ has finite range and $\|x-s\|_\infty<\varepsilon$. [L1, finite partition]
+1.1 Let $x\in\ell^\infty$ and $\varepsilon>0$. In the real case partition the bounded interval containing all $x_n$ into finitely many half-open intervals of length below $\varepsilon$, and replace every $x_n$ by a fixed endpoint of its cell. The resulting sequence $s$ has finite range and $\|x-s\|_\infty<\varepsilon$. [L1, finite partition] (finite partition). [given, L1]
 
-2.1 In the complex case partition a square containing all $x_n$ into finitely [given, L1, step 1.1]
-many squares of side below $\varepsilon/\sqrt2$ and replace by one corner of the containing cell. Again $s$ has finite range and $\|x-s\|_\infty<\varepsilon$. This proves density in both scalar fields. [L1, step 1.1, Euclidean estimate] ∎
+2.1 In the complex case partition a square containing all $x_n$ into finitely many squares of side below $\varepsilon/\sqrt2$ and replace by one corner of the containing cell. Again $s$ has finite range and $\|x-s\|_\infty<\varepsilon$. This proves density in both scalar fields. [L1, step 1.1, Euclidean estimate] (Euclidean estimate). [given, L1, step 1.1] ∎
+

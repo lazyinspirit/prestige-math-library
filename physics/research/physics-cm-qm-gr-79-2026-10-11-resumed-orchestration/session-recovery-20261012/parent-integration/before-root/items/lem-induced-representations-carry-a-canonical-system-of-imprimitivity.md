@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induced-representations-carry-a-canonical-system-of-imprimitivity.md

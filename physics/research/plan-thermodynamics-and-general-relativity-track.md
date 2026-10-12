@@ -93,7 +93,7 @@ Original reservation (read together with the full required sources above):
 
 A page `tgr-mc01`; B companion `tgr-mc01-examples`. Category `thermodynamics-and-general-relativity-mathematics`; library `mathematics`.
 Order 603. Exact source inventory: `research/extended-frameworks-2026-10-03/thermodynamics-and-general-relativity/proposed-inventory.json`.
-Declared earlier prerequisites: `gr-connections-and-free-fall`, `inverse-and-implicit-function-theorems`, `td-math-nonsmooth-equilibrium`.
+Declared earlier prerequisites: `gr-connections-and-free-fall`, `inverse-and-implicit-function-theorems`.
 
 Original reservation (read together with the full required sources above):
 

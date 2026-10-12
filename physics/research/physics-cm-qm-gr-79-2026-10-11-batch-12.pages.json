@@ -1,0 +1,1014 @@
+[
+  {
+    "order": 103,
+    "id": "cm-math-verification",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Verification",
+    "companion": "cm-math-verification-examples",
+    "requires": [
+      "cm-math-approximation",
+      "cm-math-rigid",
+      "cm-math-variations",
+      "darboux-lhopital-and-taylor"
+    ],
+    "items": [
+      {
+        "id": "def-cm-second-variation-of-the-action",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The fixed-endpoint second variation of a time-dependent action at a curve",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-time-dependent-lagrangian-and-action",
+          "lem-cm-first-variation-formula"
+        ],
+        "dependency_roles": {
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "lem-cm-first-variation-formula": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-cm-second-variation-formula"
+        ],
+        "reference": "batch-12-local-construction; the fixed-endpoint family of D. Cline, Variational Principles, Sections 5.1-5.2, materialised as a definition and recorded in the batch notes",
+        "design_state": "completed-local-definition",
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $a<b$ be reals, let $U\\subseteq\\mathbb R^n$ be open and nonempty, and let\n$(O,\\mathcal L)$ be a time-dependent Lagrangian chart over $[a,b]\\times U$ in the sense of\n[[def-cm-time-dependent-lagrangian-and-action]]: $O\\subseteq\\mathbb R\\times\\mathbb R^n\\times\\mathbb R^n$\nis open with\n\n$$[a,b]\\times U\\times\\mathbb R^n\\subseteq O,$$\n\nand $\\mathcal L:O\\to\\mathbb R$ is of class $C^2$. Recall from that definition that a $C^2$ curve\n$q:[a,b]\\to U$ is the restriction to $[a,b]$ of a $C^2$ map on an open interval, that a\n**variation** of $q$ is such a map $\\eta:[a,b]\\to\\mathbb R^n$ with\n\n$$\\eta(a)=\\eta(b)=0,$$\n\nand that the **action** of a $C^2$ curve is\n\n$$S(q):=\\int_a^b\\mathcal L\\bigl(t,q(t),q'(t)\\bigr)\\,dt .$$\n\n**The fixed-endpoint family.** Let $q:[a,b]\\to U$ be a $C^2$ curve and let $\\eta$ be a variation\nof $q$. For $\\varepsilon\\in\\mathbb R$ put\n\n$$q_\\varepsilon(t):=q(t)+\\varepsilon\\eta(t)\\qquad(t\\in[a,b]).$$\n\nBy clause 1 of [[lem-cm-first-variation-formula]] there is $\\varepsilon_0>0$ such that\n$q_\\varepsilon$ is a $C^2$ admissible curve with values in $U$ for every\n$\\varepsilon\\in(-\\varepsilon_0,\\varepsilon_0)$, so that the action $S(q_\\varepsilon)$ is defined\nfor those $\\varepsilon$.\n\n**The second variation.** The **second variation of $S$ at $q$ in the direction $\\eta$** is the\nsecond derivative at $\\varepsilon=0$ of the function $\\varepsilon\\mapsto S(q+\\varepsilon\\eta)$:\n\n$$\\delta^2S(q)[\\eta,\\eta]:=\\frac{d^2}{d\\varepsilon^2}\\Big|_{\\varepsilon=0}S(q+\\varepsilon\\eta).$$\n\nThis is a well-defined real number under the present hypotheses: the map\n$\\varepsilon\\mapsto S(q+\\varepsilon\\eta)$ is twice differentiable at $0$, with the explicit\nintegral formula, by [[lem-cm-second-variation-formula]], which depends on this definition only\nfor the notation $\\delta^2S(q)[\\eta,\\eta]$. The value is a single real number determined by the\npair $(q,\\eta)$ and does not depend on the choice of the $C^2$ extensions of $q$ and $\\eta$, since\nthe values of $q_\\varepsilon$ and $q_\\varepsilon'$ on $[a,b]$ are those of any such extension and\nthe derivative on $[a,b]$ is extension-independent\n([[def-cm-time-dependent-lagrangian-and-action]]).\n\n**Scope.** The definition introduces the one-parameter family and its second derivative at\n$\\varepsilon=0$, nothing else. It asserts nothing about minimising or maximising $S$, nothing\nabout the sign of $\\delta^2S$, and no physical interpretation of $\\mathcal L$; stationarity of a\ncurve is the separate first-order condition recorded in\n[[def-cm-time-dependent-lagrangian-and-action]], and no equivalence with the vanishing of an\nEuler-Lagrange expression is used at this point.",
+        "strategy": "Define the family and the second derivative with the chart and extension conventions of def-cm-time-dependent-lagrangian-and-action; state the well-definedness and its exact source without proving it here.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 5.1-5.2: the parametric family $q+\\epsilon\\eta$ of a path with fixed endpoints and stationarity as the vanishing of the first-order term, pages 143-147 of the PDF pagination; the second derivative of the family is not computed there",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.1: first variation of the action with fixed endpoints, and the remark that the true path may be a minimum or a saddle point, printed page 12",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-second-variation-formula",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The second variation of a time-dependent action: twice differentiability of the fixed-endpoint family and the Hessian integral formula",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-second-variation-of-the-action",
+          "def-cm-time-dependent-lagrangian-and-action",
+          "lem-cm-first-variation-formula",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-total-derivative-in-euclidean-space",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-jacobian-matrix-and-gradient",
+          "def-directional-and-partial-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "thm-linearity-of-the-integral",
+          "def-derivative",
+          "def-continuity-real",
+          "def-abs-value",
+          "thm-heine-borel-rn",
+          "thm-heine-cantor-metric",
+          "thm-monotonicity-of-the-integral",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations"
+        ],
+        "dependency_roles": {
+          "def-cm-second-variation-of-the-action": "mathematical-premise",
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "lem-cm-first-variation-formula": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-ck-and-multi-index-notation-in-several-variables": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-heine-cantor-metric": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "cor-integrability-of-absolute-values-products-and-lattice-operations": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19 (the second-order step that the prose section differentiates silently)",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Let $(O,\\mathcal L)$ be a time-dependent Lagrangian chart over $[a,b]\\times U$ in the sense of\n[[def-cm-time-dependent-lagrangian-and-action]] (so $\\mathcal L$ is $C^2$ and\n$[a,b]\\times U\\times\\mathbb R^n\\subseteq O$), let $q:[a,b]\\to U$ be a $C^2$ curve and let $\\eta$\nbe a variation of $q$ (a $C^2$ map with $\\eta(a)=\\eta(b)=0$). Write\n$\\psi(\\varepsilon,t):=\\bigl(t,q(t)+\\varepsilon\\eta(t),q'(t)+\\varepsilon\\eta'(t)\\bigr)$ and, for\n$|\\varepsilon|<\\varepsilon_0$ with $\\varepsilon_0$ as in clause 1 below,\n\n$$H(\\varepsilon,t):=\\sum_{j,k=1}^n\\Bigl[\\frac{\\partial^2\\mathcal L}{\\partial q_j\\partial q_k}\\bigl(\\psi(\\varepsilon,t)\\bigr)\\eta_j(t)\\eta_k(t)+2\\frac{\\partial^2\\mathcal L}{\\partial q_j\\partial v_k}\\bigl(\\psi(\\varepsilon,t)\\bigr)\\eta_j(t)\\eta_k'(t)+\\frac{\\partial^2\\mathcal L}{\\partial v_j\\partial v_k}\\bigl(\\psi(\\varepsilon,t)\\bigr)\\eta_j'(t)\\eta_k'(t)\\Bigr].$$\n\nThen:\n\n1. there is $\\varepsilon_0>0$ such that for every $\\varepsilon\\in(-\\varepsilon_0,\\varepsilon_0)$\n   the curve $q+\\varepsilon\\eta$ is a $C^2$ admissible curve with values in $U$, and the map\n   $\\varepsilon\\mapsto S(q+\\varepsilon\\eta)$ is of class $C^2$ on $(-\\varepsilon_0,\\varepsilon_0)$;\n2. for every $\\varepsilon\\in(-\\varepsilon_0,\\varepsilon_0)$,\n\n$$\\frac{d^2}{d\\varepsilon^2}S(q+\\varepsilon\\eta)=\\int_a^bH(\\varepsilon,t)\\,dt ;$$\n\n3. in particular the second variation of [[def-cm-second-variation-of-the-action]] is\n\n$$\\delta^2S(q)[\\eta,\\eta]=\\int_a^bH(0,t)\\,dt,$$\n\nthe formula of clause 2 with every second partial of $\\mathcal L$ evaluated at\n$\\bigl(t,q(t),q'(t)\\bigr)$.",
+        "strategy": "Apply the compact-rectangle differentiation theorem twice: the first epsilon-derivative is the first-variation integrand, the second is the chain-rule derivative of that integrand along the affine family, computed with the C^1 gradients L_q and L_v; symmetrise the mixed sums by Clairaut.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 5.1-5.2: the parametric family and the first-variation computation; the second variation is not treated there",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.1: the first variation of the action with fixed endpoints, printed pages 11-12",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-oscillator-second-variation-signs",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Second variation of the oscillator action on a finite interval: both signs for $T>\\pi/\\omega$ and the value at $T=\\pi/\\omega$",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-second-variation-of-the-action",
+          "lem-cm-second-variation-formula",
+          "def-cm-time-dependent-lagrangian-and-action",
+          "thm-cm-stationarity-iff-euler-lagrange",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-linearity-of-the-integral",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "def-interval",
+          "thm-of-archimedean",
+          "def-abs-value"
+        ],
+        "dependency_roles": {
+          "def-cm-second-variation-of-the-action": "mathematical-premise",
+          "lem-cm-second-variation-formula": "mathematical-premise",
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "thm-cm-stationarity-iff-euler-lagrange": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-of-archimedean": "mathematical-premise",
+          "def-abs-value": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Let $\\omega>0$ and $T>0$, let $U:=\\mathbb R$, and consider the time-dependent Lagrangian chart\nover $[0,T]\\times U$ with $O:=\\mathbb R\\times\\mathbb R\\times\\mathbb R$ and\n$\\mathcal L(q,v):=\\tfrac12\\bigl(v^2-\\omega^2q^2\\bigr)$\n([[def-cm-time-dependent-lagrangian-and-action]]). Write $S$ for its action and $\\delta^2S$ for\nthe second variation of [[def-cm-second-variation-of-the-action]]. Then:\n\n1. the zero curve $q_0\\equiv0$ is a $C^2$ admissible curve and is stationary for $S$;\n2. for every integer $n\\ge1$ the map $\\eta_n(t):=\\sin(n\\pi t/T)$ is a variation of $q_0$, and\n\n$$\\delta^2S(q_0)[\\eta_n,\\eta_n]=\\frac T2\\Bigl(\\Bigl(\\frac{n\\pi}{T}\\Bigr)^2-\\omega^2\\Bigr);$$\n\nmoreover $S(\\varepsilon\\eta_n)=\\frac{\\varepsilon^2}{2}\\delta^2S(q_0)[\\eta_n,\\eta_n]$ for every\nreal $\\varepsilon$;\n3. if $T>\\pi/\\omega$, then $\\delta^2S(q_0)[\\eta_1,\\eta_1]<0$ and\n$\\delta^2S(q_0)[\\eta_n,\\eta_n]>0$ for every integer $n>\\omega T/\\pi$. Consequently, for every real\n$\\delta_0>0$ there exist variations $\\eta$ of $q_0$ with\n$\\sup_{t\\in[0,T]}\\bigl(|\\eta(t)|+|\\eta'(t)|+|\\eta''(t)|\\bigr)<\\delta_0$ and $S(\\eta)<0$, and\nvariations with the same bound and $S(\\eta)>0$; hence the zero curve is neither a local minimiser\nnor a local maximiser of $S$, in the sense that every neighbourhood of $q_0$ for the supremum\ndistance $\\sup_{[0,T]}(|q-q_0|+|q'-q_0'|+|q''-q_0''|)$ contains curves whose action is below\n$S(q_0)$ and curves whose action is above $S(q_0)$;\n4. if $T=\\pi/\\omega$, then $\\delta^2S(q_0)[\\eta_1,\\eta_1]=0$, while\n$\\delta^2S(q_0)[\\eta_n,\\eta_n]>0$ for every integer $n\\ge2$.",
+        "strategy": "Compute the second variation with the Hessian formula, evaluate the elementary trigonometric integrals by the fundamental theorem of calculus, obtain the exact action along the family from the degree-two homogeneity of L, and read off the signs using the Archimedean property to select a large n.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.1, printed page 12: the proof of the action principle only requires $\\delta S=0$ and does not specify whether the stationary value is a maximum or a minimum; the true path may be either a minimum or a saddle point",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Section 5.2, page 147 of the PDF pagination: the function satisfying Euler's equation is stationary, and the stationary value could be either a maximum or a minimum",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics (complete volume), Chapter 5 Section 5.1, Eqs. (5.1)-(5.3): the harmonic oscillator Lagrangian, equation of motion and general oscillatory solution, printed pages 1-2 of Chapter 5 (PDF pages 87-88)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-oscillator-boundary-value-nonuniqueness",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "The undamped oscillator: Dirichlet non-uniqueness at $T=n\\pi/\\omega$ despite unique initial-value solutions",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-oscillator-model-and-phase-system",
+          "thm-cm-homogeneous-oscillator-solution-classification",
+          "def-cm-time-dependent-lagrangian-and-action",
+          "thm-cm-stationarity-iff-euler-lagrange",
+          "thm-of-square-roots",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule-for-total-derivatives",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-oscillator-model-and-phase-system": "mathematical-premise",
+          "thm-cm-homogeneous-oscillator-solution-classification": "mathematical-premise",
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "thm-cm-stationarity-iff-euler-lagrange": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Let $m>0$ and $k>0$, put $\\omega:=(k/m)^{1/2}>0$ ([[thm-of-square-roots]]), and let $T>0$.\nConsider the undamped homogeneous oscillator equation\n\n$$m\\,x''(t)+k\\,x(t)=0$$\n\nof [[def-cm-oscillator-model-and-phase-system]] on intervals with nonempty interior. Then:\n\n1. for every real $A$ the function $x_A(t):=A\\sin(\\omega t)$ is a $C^2$ (indeed $C^\\infty$)\n   solution on $\\mathbb R$ with $x_A(0)=0$ and $x_A(T)=A\\sin(\\omega T)$; moreover $x_A(T)=0$ if\n   and only if $A=0$ or $\\omega T\\in\\pi\\mathbb Z$\n   ([[thm-sine-cosine-zero-sets-and-fundamental-period]]);\n2. if $T=n\\pi/\\omega$ for some integer $n\\ge1$, then the set of $C^2$ solutions of the Dirichlet\n   problem on $[0,T]$,\n\n$$m\\,x''+k\\,x=0,\\qquad x(0)=x(T)=0,$$\n\n   is exactly $\\{x_A:A\\in\\mathbb R\\}$; this set is a one-dimensional real vector space, so the\n   boundary-value problem has infinitely many distinct solutions with the same endpoint data\n   $(0,0)$, one for each initial velocity $A\\omega$;\n3. by contrast, for every $(x_0,v_0)\\in\\mathbb R^2$ the initial-value problem\n   $m\\,x''+k\\,x=0$, $x(0)=x_0$, $x'(0)=v_0$, has exactly one solution on $\\mathbb R$, namely\n   $x(t)=x_0\\cos(\\omega t)+(v_0/\\omega)\\sin(\\omega t)$\n   ([[thm-cm-homogeneous-oscillator-solution-classification]], clauses 3 and 4 with $c=0$);\n   uniqueness for the initial-value problem therefore does not imply uniqueness for the\n   boundary-value problem;\n4. for the chart with $O=\\mathbb R\\times\\mathbb R\\times\\mathbb R$ and\n   $\\mathcal L(q,v)=\\tfrac12(v^2-\\omega^2q^2)$ over $[0,T]\\times\\mathbb R$\n   ([[def-cm-time-dependent-lagrangian-and-action]]), each $x_A$ is a stationary curve of the\n   action; and if $T=n\\pi/\\omega$, the stationary curves on $[0,T]$ satisfying the endpoint\n   conditions $x(0)=x(T)=0$ are exactly the curves $x_A$, so the fixed-endpoint problem with zero\n   data has infinitely many stationary curves ([[thm-cm-stationarity-iff-euler-lagrange]]).",
+        "strategy": "Verify the explicit family by differentiation, determine its endpoint values from the zero set of the sine, classify all Dirichlet solutions through the oscillator solution classification theorem, and identify stationarity with the Euler-Lagrange expression.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics (complete volume), Chapter 5 Section 5.1, Eqs. (5.1)-(5.3): the harmonic oscillator equation and its two-constant oscillatory solution, printed pages 1-2 of Chapter 5 (PDF pages 87-88)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.6 and the start of Section 2.6.1, printed pages 37-41: linearised oscillations about an equilibrium with arbitrary two-constant families, and the statement that the solution of a linearised system matches prescribed initial data uniquely",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-inertia-tensor-about-a-point",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The inertia tensor of a finite bounded Borel measure about any point of $\\mathbb R^3$",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "def-countable-choice",
+          "def-borel-sigma-algebra",
+          "def-measure",
+          "def-measure-space",
+          "def-metric-ball",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-measure": "mathematical-premise",
+          "def-measure-space": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-cm-inertia-tensor-about-a-point-is-finite"
+        ],
+        "reference": "expansion-proofs.md#e19 (the shifted integrand of the parallel-axis computation, materialised as a definition and recorded in the batch notes)",
+        "design_state": "completed-local-definition",
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$\n([[def-borel-sigma-algebra]]), let $\\nu$ be a measure on the measurable space\n$(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is\n**finite** and **bounded**: $\\nu(\\mathbb R^3)<+\\infty$ and\n$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some real $R>0$\n([[def-metric-ball]]). Put $m:=\\nu(\\mathbb R^3)\\in[0,+\\infty)$; nonnegativity follows from the\ndefinition of measure [[def-measure]]. If $m>0$, then $\\nu$ is a mass distribution in the sense of\n[[def-cm-mass-distribution-and-inertia-matrix]]. If $m=0$, then for every Borel set\n$E\\subseteq\\mathbb R^3$ one has $0\\le\\nu(E)\\le\\nu(\\mathbb R^3)=0$, so $\\nu$ is the zero measure.\nIntegrals against $\\nu$ are Lebesgue integrals as in [[def-integral-over-a-measurable-set]] and\n[[def-integrable-real-and-complex-functions-and-their-integrals]], defined componentwise for\nvector- and matrix-valued integrands. When $m>0$, recall that the inertia matrix of $\\nu$ is\n\n$$I(\\nu)=\\int\\bigl(\\lVert\\rho\\rVert_2^2I_3-\\rho\\rho^{\\mathsf T}\\bigr)\\,d\\nu(\\rho)\\in M_3(\\mathbb R),$$\n\nwith $I_3$ the identity matrix and entrywise integrals\n$I(\\nu)_{jk}=\\int(\\lVert\\rho\\rVert_2^2\\delta_{jk}-\\rho_j\\rho_k)\\,d\\nu$, where $\\lVert\\cdot\\rVert_2$\nand the matrix conventions are those of [[def-euclidean-inner-product]],\n[[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]].\n\n**Shifted integrand and inertia tensor about a point.** For $a\\in\\mathbb R^3$ define the\ncomponent functions\n\n$$G_a(\\rho)_{jk}:=\\lVert\\rho-a\\rVert_2^2\\,\\delta_{jk}-(\\rho_j-a_j)(\\rho_k-a_k)\\qquad(j,k\\in\\{1,2,3\\}),$$\n\nequivalently the matrix-valued function\n$G_a(\\rho)=\\lVert\\rho-a\\rVert_2^2I_3-(\\rho-a)(\\rho-a)^{\\mathsf T}$, and define the **inertia\ntensor of $\\nu$ about $a$** $I_\\nu(a)\\in M_3(\\mathbb R)$ by its entries\n\n$$I_\\nu(a)_{jk}:=\\int G_a(\\rho)_{jk}\\,d\\nu(\\rho).$$\n\nUnder the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) each entry is\na finite real number; this is the content of [[lem-cm-inertia-tensor-about-a-point-is-finite]],\nwhich depends on this definition only for its notation. For $a=0$ the shifted integrand is the\nparent integrand $\\lVert\\rho\\rVert_2^2I_3-\\rho\\rho^{\\mathsf T}$. Thus\n$I_\\nu(0)=I(\\nu)$ when $m>0$; if $m=0$, the parent definition does not define $I(\\nu)$, while\nthe shifted integral remains defined and equals the zero matrix $0_{3\\times3}$ for every $a$.\n\n**Scope.** The definition names a mathematical function $a\\mapsto I_\\nu(a)$ from $\\mathbb R^3$ to\n$M_3(\\mathbb R)$ determined by any finite bounded Borel measure $\\nu$ and its coordinate origin.\nFor the zero measure this function is identically $0_{3\\times3}$. No physical body, unit system or\nmeasured mass is asserted. No translation identity for nonzero $a$ is asserted here; the centred,\npositive-total-mass case is proved separately on this page.",
+        "strategy": "Define the shifted integrand and its componentwise integral against the measure with the conventions of def-cm-mass-distribution-and-inertia-matrix; declare the finiteness result that makes the entries well-defined.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2.1, Eq. (3.25) with the derivation (3.26), printed pp. 52-53: the inertia tensor about a displaced point and the axis-shift relation",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 4 Section 4.2, Eqs. (4.27)-(4.29), printed page 6 of Chapter 4 (PDF page 60): the axis-shift theorem, I'_{jj'}=I_{jj'}+M(delta_{jj'}d^2-d_jd_{j'}), for an arbitrary shift vector d",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-inertia-tensor-about-a-point-is-finite",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finiteness and a uniform bound for the entries of the inertia tensor about an arbitrary point",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-inertia-tensor-about-a-point",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "def-countable-choice",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-integral-over-a-measurable-set",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "cor-triangle-inequality-for-inner-product-norm",
+          "lem-finite-sum-laws",
+          "lem-of-square-positive",
+          "def-abs-value",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "cor-integral-over-a-null-set-vanishes"
+        ],
+        "dependency_roles": {
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "def-borel-and-lebesgue-measurable-function-on-rn": "mathematical-premise",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "cor-triangle-inequality-for-inner-product-norm": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "lem-of-square-positive": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure": "mathematical-premise",
+          "cor-integral-over-a-null-set-vanishes": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "batch-12-local-construction; the finiteness/boundedness step added to make the shifted inertia tensor well-defined, recorded in the batch notes",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be\na measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ that is finite and bounded:\n$\\nu(\\mathbb R^3)<+\\infty$ and $\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some\nreal $R>0$ ([[def-metric-ball]]), and let $a\\in\\mathbb R^3$. With the shifted integrands\n$G_a(\\rho)_{jk}=\\lVert\\rho-a\\rVert_2^2\\delta_{jk}-(\\rho_j-a_j)(\\rho_k-a_k)$ of\n[[def-cm-inertia-tensor-about-a-point]] ([[def-euclidean-inner-product]] for the norm), then:\n\n1. for all $j,k$ the function $G_a(\\cdot)_{jk}:\\mathbb R^3\\to\\mathbb R$ is Borel measurable and\n   $\\nu$-integrable\n   ([[def-borel-and-lebesgue-measurable-function-on-rn]]);\n2. each entry $I_\\nu(a)_{jk}$ is a finite real number and\n\n$$\\bigl|I_\\nu(a)_{jk}\\bigr|\\le 2\\bigl(R+\\lVert a\\rVert_2\\bigr)^2\\,\\nu(\\mathbb R^3).$$",
+        "strategy": "Prove measurability of the continuous polynomial integrands, bound the integrand on the support ball by the constant 2(R+||a||)^2 using the triangle inequality and the elementary inequality 2uv<=u^2+v^2, and integrate the constant against the finite measure.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2.1, Eqs. (3.25)-(3.26), printed pp. 52-53: the shifted-integrand expansion whose boundedness makes the displaced inertia tensor finite for a bounded body",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 4 Section 4.2, Eqs. (4.27)-(4.28), printed page 6 of Chapter 4 (PDF page 60): the shifted inertia integral is a finite combination of second moments of a bounded body",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-parallel-axis-theorem",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Parallel-axis theorem: the inertia tensor about a displaced point of a centred mass distribution",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-inertia-tensor-about-a-point",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-tensor-about-a-point-is-finite": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only\nto make the displayed integrals finite. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with\ntotal mass $m=\\nu(\\mathbb R^3)\\in(0,+\\infty)$ that is **centred**, that is,\n$\\mu(\\nu)=\\int\\rho\\,d\\nu(\\rho)=0\\in\\mathbb R^3$\n([[def-cm-mass-distribution-and-inertia-matrix]]), and let $I(\\nu)$ be its inertia matrix. Then\nfor every $a\\in\\mathbb R^3$ the inertia tensor of $\\nu$ about $a$\n([[def-cm-inertia-tensor-about-a-point]]) satisfies\n\n$$I_\\nu(a)=I(\\nu)+m\\bigl(\\lVert a\\rVert_2^2I_3-aa^{\\mathsf T}\\bigr),$$\n\nwhere $\\lVert\\cdot\\rVert_2$ is the Euclidean norm, $I_3$ the identity matrix and\n$aa^{\\mathsf T}$ the matrix product of [[def-euclidean-inner-product]],\n[[def-matrix-space]] and [[def-matrix-product-and-identity-matrix]]. Entrywise,\n\n$$I_\\nu(a)_{jk}=I(\\nu)_{jk}+m\\bigl(\\lVert a\\rVert_2^2\\delta_{jk}-a_ja_k\\bigr)\\qquad(j,k\\in\\{1,2,3\\}).$$",
+        "strategy": "Expand ||rho-a||^2 and (rho-a)(rho-a)^T, integrate the finite real combination termwise by L^1 linearity, and cancel the first-moment terms by the centredness hypothesis.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2.1, Eqs. (3.25)-(3.26), printed pp. 52-53: claim and proof that (I_c)_{ab}=(I_{c.o.m})_{ab}+M(c^2delta_{ab}-c_ac_b) when the linear terms vanish in the centre-of-mass frame",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 4 Section 4.2, Eqs. (4.27)-(4.29), printed pages 6-7 of Chapter 4 (PDF pages 60-61): the axis-shift theorem obtained by expanding the shifted inertia integral and using that the first moments vanish in the centre-of-mass frame",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-two-mass-spring-modes",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Two equal masses with two outer springs and a coupling spring: eigenmodes, decoupling and the explicit normal frequencies",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-homogeneous-oscillator-solution-classification",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases",
+          "def-cm-oscillator-model-and-phase-system",
+          "thm-of-square-roots",
+          "thm-sine-and-cosine-addition-formulas",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "def-transpose-of-a-matrix",
+          "def-euclidean-inner-product",
+          "def-vector-valued-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "thm-cm-homogeneous-oscillator-solution-classification": "mathematical-premise",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases": "mathematical-premise",
+          "def-cm-oscillator-model-and-phase-system": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Let $m>0$, $k\\ge0$ and $c\\ge0$, and put\n\n$$K:=\\begin{pmatrix}k+c&-c\\\\-c&k+c\\end{pmatrix},\\qquad u_+:=\\frac1{\\sqrt2}\\begin{pmatrix}1\\\\1\\end{pmatrix},\\qquad u_-:=\\frac1{\\sqrt2}\\begin{pmatrix}1\\\\-1\\end{pmatrix},$$\n\nand $\\omega_+:=(k/m)^{1/2}$, $\\omega_-:=((k+2c)/m)^{1/2}$ (nonnegative square roots,\n[[thm-of-square-roots]]). Consider the linear system\n\n$$m\\,x''(t)=-Kx(t)$$\n\nfor $C^2$ curves $x:J\\to\\mathbb R^2$ on intervals $J\\subseteq\\mathbb R$ with nonempty interior\n([[def-interval]], [[def-vector-valued-derivative-and-integral]]). Then:\n\n1. $Ku_+=ku_+$ and $Ku_-=(k+2c)u_-$; the vectors $u_+,u_-$ are orthonormal, and every\n   $x\\in\\mathbb R^2$ satisfies $x=\\langle u_+,x\\rangle u_++\\langle u_-,x\\rangle u_-$\n   ([[def-euclidean-inner-product]]);\n2. $x$ is a solution if and only if there are solutions $y_+,y_-:J\\to\\mathbb R$ of the scalar\n   equations\n\n$$m\\,y_+''+k\\,y_+=0,\\qquad m\\,y_-''+(k+2c)\\,y_-=0$$\n\n   of [[def-cm-oscillator-model-and-phase-system]] with $x=y_+u_++y_-u_-$; the pair\n   $(y_+,y_-)$ is unique and is given by $y_\\pm=\\langle u_\\pm,x\\rangle$;\n3. consequently, for $k>0$ the solutions are exactly the curves\n\n$$x(t)=\\bigl(A_+\\cos(\\omega_+t)+B_+\\sin(\\omega_+t)\\bigr)u_++\\bigl(A_-\\cos(\\omega_-t)+B_-\\sin(\\omega_-t)\\bigr)u_-\\qquad(A_\\pm,B_\\pm\\in\\mathbb R),$$\n\n   that is, the system is a superposition of an in-phase normal mode with squared frequency\n   $k/m$ and an anti-phase normal mode with squared frequency $(k+2c)/m$\n   ([[thm-cm-homogeneous-oscillator-solution-classification]]);\n4. if $k=0$ and $c\\ge0$, then $Ku_+=0$, and the curves $x(t)=(A+Bt)u_+$\n   ($A,B\\in\\mathbb R$) are solutions; for $B\\ne0$ such a curve is unbounded on $[0,\\infty)$, so\n   the zero-frequency mode is affine rather than oscillatory. The bijection of clause 2 remains\n   valid with the scalar equations $m\\,y_+''=0$ and $m\\,y_-''+2c\\,y_-=0$, and for $c>0$ the\n   $u_-$-component is the trigonometric family with $\\omega_-=(2c/m)^{1/2}$\n   ([[thm-cm-homogeneous-oscillator-solution-classification]]); if $c=0$, it is affine as well\n   ([[prop-cm-oscillator-degenerate-and-repulsive-cases]]).",
+        "strategy": "Verify the eigenrelations and orthonormality by matrix multiplication, prove the decoupling bijection by pulling the system back along the eigenbasis and conversely reassembling two scalar solutions, and read the scalar solution families off the oscillator classification theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 6 Section 6.1, Eqs. (6.1)-(6.13), printed pages 1-4 of Chapter 6 (PDF pages 125-128): two coupled linear oscillators, the characteristic equation, and the symmetric case with the in-phase soft mode omega_-^2=(k_L)/m and anti-phase hard mode",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.6, printed pages 39-40: normal modes as eigenvectors of the linearised problem, each ringing at a single frequency",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 14.2-14.3, pages 488-490 of the PDF pagination: two identical masses coupled by a middle spring, normal coordinates rotated by 45 degrees and two characteristic frequencies",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-pendulum-small-angle-linearization-bound",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "The pendulum field near the downward equilibrium: bounded force derivative, cubic remainder and the finite-time small-angle error bound",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-finite-time-linearization-error-bound",
+          "cor-taylor-remainder-bound",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-mean-value-theorem",
+          "thm-of-square-roots",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "def-operator-norm",
+          "def-metric-ball",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-total-derivative-in-euclidean-space",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-lipschitz-holder-contraction",
+          "def-vector-valued-derivative-and-integral",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-interval",
+          "cor-cm-variation-of-constants-for-linear-systems",
+          "def-matrix-product-and-identity-matrix",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "dependency_roles": {
+          "thm-cm-finite-time-linearization-error-bound": "mathematical-premise",
+          "cor-taylor-remainder-bound": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-lipschitz-holder-contraction": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "cor-cm-variation-of-constants-for-linear-systems": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "justified_by": [],
+        "reference": "expansion-proofs.md#e19 (the E8 instantiation θ''=-(g/l) sin θ with cubic remainder)",
+        "design_state": "completed-local-argument",
+        "inventory_expansion_required": false,
+        "statement": "Let $g>0$ and $l>0$, put $\\omega:=(g/l)^{1/2}>0$ ([[thm-of-square-roots]]), and define the field\n\n$$F:\\mathbb R^2\\to\\mathbb R^2,\\qquad F(\\theta,v):=\\bigl(v,-\\omega^2\\sin\\theta\\bigr),$$\n\nso that $z'=F(z)$ for $z=(\\theta,v)$ is the first-order form of the pendulum equation\n$\\theta''=-\\omega^2\\sin\\theta$ ([[def-vector-valued-derivative-and-integral]] for the\ncomponentwise first-order reduction). Put\n\n$$A:=\\begin{pmatrix}0&1\\\\-\\omega^2&0\\end{pmatrix},\\qquad L:=\\max\\{1,\\omega^2\\}.$$\n\nThen:\n\n1. $F$ is of class $C^\\infty$ (in particular continuous and locally Lipschitz in the state\n   variable), $F(0)=0$, $A=DF(0)$ is the total derivative of $F$ at the origin, and for every\n   $r>0$ and every $z=(\\theta,v)$ with $\\lVert z\\rVert_2\\le r$ ([[def-metric-ball]] for the ball,\n   [[def-euclidean-inner-product]] for the norm)\n\n$$\\lVert F(z)-Az\\rVert_2=\\omega^2\\lvert\\sin\\theta-\\theta\\rvert\\le\\frac{\\omega^2}{6}\\lvert\\theta\\rvert^3\\le\\frac{\\omega^2r}{6}\\lVert z\\rVert_2^2,\\qquad\\lVert F(z)\\rVert_2\\le L\\lVert z\\rVert_2 ;$$\n\n   moreover $F$ is globally Lipschitz in the state variable with constant $L$\n   ([[def-lipschitz-holder-contraction]]), and the operator norm of $A$ for the Euclidean norm is\n   $\\lVert A\\rVert=L$ ([[def-operator-norm]]);\n2. let $z_0\\in\\mathbb R^2$ with $\\delta:=\\lVert z_0\\rVert_2>0$, let $T>0$ and $r>0$ satisfy\n   $\\delta e^{LT}<r$, and let $y:\\mathbb R\\to\\mathbb R^2$ be the solution of the linear initial\n   value problem $y'=Ay$, $y(0)=z_0$\n   ([[cor-cm-variation-of-constants-for-linear-systems]]). Then the maximal solution $z$ of\n   $z'=F(z)$, $z(0)=z_0$, is defined on $[0,T]$ with $\\lVert z(t)\\rVert_2\\le\\delta e^{Lt}$ for\n   $t\\in[0,T]$, and for every $t\\in[0,T]$\n\n$$\\lVert z(t)-y(t)\\rVert_2\\le\\frac{\\omega^2r}{6}\\delta^2\\int_0^te^{\\lVert A\\rVert(t-s)}e^{2Ls}\\,ds\\le\\frac{\\omega^2r}{6}\\delta^2\\,t\\,e^{(\\lVert A\\rVert+2L)t}$$\n\n   ([[thm-cm-finite-time-linearization-error-bound]]);\n3. the linear system $y'=Ay$ is the linearised pendulum: writing $y=(y_1,y_2)$ one has\n   $y_1''=-\\omega^2y_1$ and $y_2=y_1'$, and the first components satisfy\n   $\\lvert z_1(t)-y_1(t)\\rvert\\le\\lVert z(t)-y(t)\\rVert_2$ with the bounds of clause 2. The\n   estimate is a finite-time statement of order $\\delta^2$: it neither states nor implies that the\n   nonlinear pendulum is exactly harmonic, and it makes no claim beyond $[0,T]$.",
+        "strategy": "Compute the total derivative of F, bound the quadratic remainder by the cubic Taylor estimate for the sine, identify the Lipschitz and operator norms, and instantiate thm-cm-finite-time-linearization-error-bound.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 1 Section 1.2, Eq. (1.18), printed page 6 of Chapter 1 (PDF page 10): the point-pendulum equation mR theta'' = -mg sin theta",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 3 Section 3.2, Eqs. (3.18)-(3.23), printed pages 3-4 of Chapter 3 (PDF pages 36-37): stability analysis by linearising the equation of motion about a fixed point, using the linear Taylor expansion of the effective force",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 2.6, printed pages 37-39: linearisation near equilibrium, eta''=f'(x_0)eta+O(eta^2), with the explicit remark that quadratic and higher terms are neglected",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-cm-verification-scope-and-limits",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope and limits of the verification items on this page",
+        "dependency_level": 5,
+        "deps": [
+          "def-cm-second-variation-of-the-action",
+          "lem-cm-second-variation-formula",
+          "prop-cm-oscillator-second-variation-signs",
+          "prop-cm-oscillator-boundary-value-nonuniqueness",
+          "def-cm-inertia-tensor-about-a-point",
+          "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "thm-cm-parallel-axis-theorem",
+          "prop-cm-two-mass-spring-modes",
+          "prop-cm-pendulum-small-angle-linearization-bound"
+        ],
+        "dependency_roles": {
+          "def-cm-second-variation-of-the-action": "mathematical-premise",
+          "lem-cm-second-variation-formula": "mathematical-premise",
+          "prop-cm-oscillator-second-variation-signs": "mathematical-premise",
+          "prop-cm-oscillator-boundary-value-nonuniqueness": "mathematical-premise",
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "lem-cm-inertia-tensor-about-a-point-is-finite": "mathematical-premise",
+          "thm-cm-parallel-axis-theorem": "mathematical-premise",
+          "prop-cm-two-mass-spring-modes": "mathematical-premise",
+          "prop-cm-pendulum-small-angle-linearization-bound": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "reference": "batch-12-local-construction; scope record for the verification items, recorded in the batch notes",
+        "design_state": "completed-local-remark; scope recorded in the batch notes",
+        "inventory_expansion_required": false,
+        "statement": "Scope of the verification items: all are mathematics with no physical or empirical content; the second-variation sign results are finite-time statements about the action functional; the degeneracy at T=pi/omega concerns an underdetermined boundary-value problem; the parallel-axis theorem is the centred case; the coupled-oscillator statement is exact for the linear system; the pendulum bound is finite-time, conditional and of order delta^2, and asserts no exact harmonicity of the nonlinear model.",
+        "strategy": "Record the limits that are part of the claims and their provenance, so consumers carry them; no proof obligation.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2.1, printed pp. 52-53: the parallel-axis claim is stated for a body of total mass M with the sum of the linear terms vanishing in the centre-of-mass frame",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.1, printed page 12: the stationary path may be a minimum or a saddle point, so stationarity alone certifies neither minimisation nor maximisation",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 3 Section 3.2, printed pages 3-4 of Chapter 3 (PDF pages 36-37): linearisation about a fixed point is an analysis of the linearised equation, with the nonlinear equation retained as the actual model",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 104,
+    "id": "cm-math-verification-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Verification — Examples",
+    "companion": "cm-math-verification",
+    "requires": [
+      "cm-math-verification",
+      "cm-math-variations",
+      "cm-math-rigid",
+      "cm-math-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-oscillator-saddle-second-variation-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "An explicit saddle of the oscillator action at $T=2\\pi$: the two variations $\\sin(t/2)$ and $\\sin(3t/2)$",
+        "dependency_level": 5,
+        "deps": [
+          "prop-cm-oscillator-second-variation-signs",
+          "def-cm-second-variation-of-the-action",
+          "lem-cm-second-variation-formula",
+          "def-cm-time-dependent-lagrangian-and-action",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-linearity-of-the-integral",
+          "thm-ftc-second-part",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "prop-cm-oscillator-second-variation-signs": "mathematical-premise",
+          "def-cm-second-variation-of-the-action": "mathematical-premise",
+          "lem-cm-second-variation-formula": "mathematical-premise",
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "reference": "batch-12-constructed-B-example; recorded in the batch notes",
+        "design_state": "completed-local-example",
+        "inventory_expansion_required": false,
+        "statement": "Fix $\\omega=1$ and $T=2\\pi$ in the chart $\\mathcal L(q,v)=\\tfrac12(v^2-q^2)$ on\n$O=\\mathbb R\\times\\mathbb R\\times\\mathbb R$ over $[0,2\\pi]\\times\\mathbb R$\n([[def-cm-time-dependent-lagrangian-and-action]]), and consider the variations\n\n$$\\eta_1(t)=\\sin\\frac t2,\\qquad\\eta_3(t)=\\sin\\frac{3t}{2}$$\n\nof the zero curve $q_0\\equiv0$. The proposition [[prop-cm-oscillator-second-variation-signs]]\ngives\n\n$$\\delta^2S(q_0)[\\eta_1,\\eta_1]=-\\frac{3\\pi}{4}<0,\\qquad\\delta^2S(q_0)[\\eta_3,\\eta_3]=\\frac{5\\pi}{4}>0,$$\n\nand with the exact identity $S(\\varepsilon\\eta)=\\frac{\\varepsilon^2}{2}\\delta^2S(q_0)[\\eta,\\eta]$\nof that proposition,\n\n$$S(\\varepsilon\\eta_1)=-\\frac{3\\pi\\varepsilon^2}{8}<0<\\frac{5\\pi\\varepsilon^2}{8}=S(\\varepsilon\\eta_3)\\qquad(\\varepsilon\\ne0).$$\n\nThus at the duration $T=2\\pi>\\pi=\\pi/\\omega$ the stationary zero curve has variations that\ndecrease and variations that increase the action arbitrarily close to it: it is a saddle, and\nneither a local minimiser nor a local maximiser. Every number below is exact; no measurement or\nnumerical integration is involved.",
+        "strategy": "Substitute T=2pi and omega=1 in the second-variation formula, evaluate the two trigonometric integrals independently as a check, and read the saddle behaviour off the exact action identity.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.1, printed page 12: the true path of the action may be a minimum or a saddle point, the qualitative fact checked numerically here",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 5 Section 5.1, Eqs. (5.1)-(5.3), printed pages 1-2 of Chapter 5 (PDF pages 87-88): the harmonic oscillator model whose action is evaluated here",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-oscillator-boundary-value-nonuniqueness-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two distinct oscillator solutions with the same zero endpoints at $T=\\pi$, and their common action value",
+        "dependency_level": 4,
+        "deps": [
+          "prop-cm-oscillator-boundary-value-nonuniqueness",
+          "def-cm-time-dependent-lagrangian-and-action",
+          "thm-cm-stationarity-iff-euler-lagrange",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-linearity-of-the-integral",
+          "def-darboux-integral",
+          "thm-continuous-implies-integrable",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "prop-cm-oscillator-boundary-value-nonuniqueness": "mathematical-premise",
+          "def-cm-time-dependent-lagrangian-and-action": "mathematical-premise",
+          "thm-cm-stationarity-iff-euler-lagrange": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-linearity-of-the-integral": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "reference": "batch-12-constructed-B-example; recorded in the batch notes",
+        "design_state": "completed-local-example",
+        "inventory_expansion_required": false,
+        "statement": "Take $m=1$, $k=1$, hence $\\omega=1$, and $T=\\pi$ in\n[[prop-cm-oscillator-boundary-value-nonuniqueness]], and consider the two curves\n\n$$x_1(t)=\\sin t,\\qquad x_2(t)=2\\sin t\\qquad(t\\in[0,\\pi]).$$\n\nBoth are $C^\\infty$ solutions of $x''+x=0$ on $[0,\\pi]$ with $x(0)=x(\\pi)=0$, and they are\ndistinct; they have different initial velocities $1$ and $2$. On the chart\n$\\mathcal L(q,v)=\\tfrac12(v^2-q^2)$ over $[0,\\pi]\\times\\mathbb R$\n([[def-cm-time-dependent-lagrangian-and-action]]) both are stationary curves of the action, and\ntheir action values agree:\n\n$$S(x_1)=S(x_2)=0.$$\n\nThis is the concrete $T=\\pi$ case of the non-uniqueness in\n[[prop-cm-oscillator-boundary-value-nonuniqueness]] and of the signed-action checks of\n[[ex-cm-oscillator-saddle-second-variation-checks]]; all numbers are exact.",
+        "strategy": "Verify the two solutions and their boundary data, note distinctness and the differing initial velocities, and evaluate the action along the family with the double-angle formula and the fundamental theorem of calculus.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 5 Section 5.1, Eqs. (5.1)-(5.3), printed pages 1-2 of Chapter 5 (PDF pages 87-88): the harmonic oscillator equation and its general two-constant solution",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), Section 2.1, printed pages 10-12: the action functional with fixed endpoints and Lagrange's equations for its stationary paths",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-parallel-axis-two-point-masses",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Parallel-axis theorem checked on two equal point masses on the third axis",
+        "dependency_level": 4,
+        "deps": [
+          "thm-cm-parallel-axis-theorem",
+          "def-cm-inertia-tensor-about-a-point",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "lem-finite-sum-laws",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "thm-cm-parallel-axis-theorem": "mathematical-premise",
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-tensor-about-a-point-is-finite": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dirac-measure": "mathematical-premise",
+          "prop-dirac-measure-is-a-probability-measure": "mathematical-premise",
+          "thm-nonnegative-weighted-sums-of-measures": "mathematical-premise",
+          "def-nonnegative-weighted-sum-of-measures": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "reference": "batch-12-constructed-B-example; recorded in the batch notes",
+        "design_state": "completed-local-example",
+        "inventory_expansion_required": false,
+        "statement": "Let $m>0$, $r>0$, and let\n\n$$\\nu:=m\\,\\delta_{r e_3}+m\\,\\delta_{-r e_3}$$\n\nbe the weighted sum of the two Dirac measures at $\\pm re_3$ ([[def-dirac-measure]],\n[[thm-nonnegative-weighted-sums-of-measures]]), a bounded finite Borel measure and hence a mass\ndistribution of total mass $2m$ ([[def-cm-mass-distribution-and-inertia-matrix]]). Assume the\nAxiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the\ndisplayed integrals finite ([[lem-cm-inertia-tensor-about-a-point-is-finite]],\n[[lem-cm-mass-moments-are-finite]]). Then:\n\n- $\\nu$ is centred, $\\mu(\\nu)=m\\,re_3+m(-re_3)=0$, and its inertia matrix about the origin is\n  $I(\\nu)=\\mathrm{diag}(2mr^2,2mr^2,0)$;\n- the inertia tensor about $a=ce_3$, computed directly from the definition, is\n  $I_\\nu(ce_3)=\\mathrm{diag}(2m(r^2+c^2),2m(r^2+c^2),0)$, and the parallel-axis identity of\n  [[thm-cm-parallel-axis-theorem]], $I_\\nu(a)=I(\\nu)+2m(\\lVert a\\rVert_2^2I_3-aa^{\\mathsf T})$,\n  reproduces exactly this value.\n\nAll entries are exact polynomial expressions in $m,r,c$; no measurement is involved.",
+        "strategy": "Evaluate the atomic integrals against the two Dirac measures, compute the shifted inertia tensor directly at a=c e_3, and compare with the parallel-axis formula.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2.1, Eqs. (3.25)-(3.26), printed pp. 52-53: the parallel-axis formula verified here on a two-point distribution",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 4 Section 4.2, Eq. (4.28), printed page 6 of Chapter 4 (PDF page 60): the axis-shift theorem I'_{jj'}=I_{jj'}+M(delta_{jj'}d^2-d_jd_{j'})",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-two-mass-modes-numerical-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two-mass spring eigenmodes at explicit parameters: eigenrelations, a mode solution, and the zero-frequency case",
+        "dependency_level": 3,
+        "deps": [
+          "prop-cm-two-mass-spring-modes",
+          "thm-cm-homogeneous-oscillator-solution-classification",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases",
+          "def-cm-oscillator-model-and-phase-system",
+          "thm-of-square-roots",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-matrix-space",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "prop-cm-two-mass-spring-modes": "mathematical-premise",
+          "thm-cm-homogeneous-oscillator-solution-classification": "mathematical-premise",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases": "mathematical-premise",
+          "def-cm-oscillator-model-and-phase-system": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "reference": "batch-12-constructed-B-example; recorded in the batch notes",
+        "design_state": "completed-local-example",
+        "inventory_expansion_required": false,
+        "statement": "Take $m=1$, $k=1$, $c=3$ in [[prop-cm-two-mass-spring-modes]], so that\n$K=\\begin{pmatrix}4&-3\\\\-3&4\\end{pmatrix}$ and\n$u_\\pm=\\frac1{\\sqrt2}(1,\\pm1)^{\\mathsf T}$; the proposition gives $Ku_+=u_+$ and $Ku_-=7u_-$, hence\nsquared frequencies $k/m=1$ and $(k+2c)/m=7$. The curve\n\n$$x(t)=\\cos(t)\\,u_++\\cos(\\sqrt7\\,t)\\,u_-$$\n\nsolves $x''=-Kx$ with $x(0)=(\\sqrt2,0)$ and $x'(0)=0$. In the degenerate case $k=0$, $c=1$ one has\n$K=\\begin{pmatrix}1&-1\\\\-1&1\\end{pmatrix}$ and $Ku_+=0$, so $x(t)=(1+t)u_+$ solves $x''=-Kx$ and\nis unbounded on $[0,\\infty)$: the zero-frequency mode is affine, not oscillatory. All entries are\nexact; no numerical integration or measurement is involved.",
+        "strategy": "Multiply the two explicit matrices into the eigenvectors, substitute the eigenrelations into the mode solution and differentiate, and check the degenerate affine mode.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 6 Section 6.1, Eqs. (6.1)-(6.13), printed pages 1-4 of Chapter 6 (PDF pages 125-128): the two coupled oscillators and their normal frequencies, checked here at explicit parameters",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 14.2-14.3, pages 488-490 of the PDF pagination: normal coordinates of two identical coupled oscillators",
+              "url": "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-pendulum-linearization-error-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The pendulum linearisation bound at $g=l=1$: exact error expression for the data $\\delta=1/100$, $T=1$",
+        "dependency_level": 4,
+        "deps": [
+          "prop-cm-pendulum-small-angle-linearization-bound",
+          "thm-cm-finite-time-linearization-error-bound",
+          "cor-two-less-than-e-less-than-three",
+          "cor-taylor-remainder-bound",
+          "thm-derivative-of-exponential",
+          "def-real-exponential-function-and-e",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "def-euclidean-inner-product",
+          "def-operator-norm",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "def-interval",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "prop-cm-pendulum-small-angle-linearization-bound": "mathematical-premise",
+          "thm-cm-finite-time-linearization-error-bound": "mathematical-premise",
+          "cor-two-less-than-e-less-than-three": "mathematical-premise",
+          "cor-taylor-remainder-bound": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "reference": "batch-12-constructed-B-example; recorded in the batch notes",
+        "design_state": "completed-local-example",
+        "inventory_expansion_required": false,
+        "statement": "Take $g=l=1$ in [[prop-cm-pendulum-small-angle-linearization-bound]], so that $\\omega=1$,\n$F(\\theta,v)=(v,-\\sin\\theta)$, $A=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$, $L=1$ and\n$\\lVert A\\rVert=1$. Choose the ball radius $r=1/2$, the datum\n$z_0=(\\delta,0)$ with $\\delta=1/100$, and the horizon $T=1$. Then\n$\\delta e^{LT}=e/100<3/100<1/2=r$ because $2<e<3$\n([[cor-two-less-than-e-less-than-three]]), so the proposition applies and gives\n\n$$\\lVert z(t)-y(t)\\rVert_2\\le\\frac{1}{12\\cdot10^4}\\bigl(e^{2t}-e^{t}\\bigr)\\qquad(0\\le t\\le1),$$\n\nwhere $y(t)=\\delta(\\cos t,-\\sin t)$ solves $y'=Ay$, $y(0)=z_0$; at $t=1$ the bound reads\n$(e^2-e)/(12\\cdot10^4)$ and is at most $e^3/(12\\cdot10^4)$. The remainder checks at\n$\\lVert z\\rVert_2\\le r$ are: $\\lvert\\sin\\theta-\\theta\\rvert\\le\\lvert\\theta\\rvert^3/6\\le1/48$, and\n$\\lvert\\sin\\theta\\rvert\\le\\lvert\\theta\\rvert\\le r=1/2$. All constants are exact; the single\ninequality $e<3$ is the only numerical input.",
+        "strategy": "Instantiate the proposition at the stated constants, verify the smallness condition with the published bound on e, evaluate the integral by the fundamental theorem, and check the pointwise remainder bounds.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Chapter 1 Section 1.2, Eq. (1.18), printed page 6 of Chapter 1 (PDF page 10): the pendulum equation whose linearisation error is bounded here",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.4 and Sections 6.2-6.3: the linearisation estimate that the proposition instantiates",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

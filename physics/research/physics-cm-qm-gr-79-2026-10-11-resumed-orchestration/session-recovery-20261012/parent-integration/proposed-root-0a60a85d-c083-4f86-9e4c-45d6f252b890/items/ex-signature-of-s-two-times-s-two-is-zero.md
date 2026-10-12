@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-signature-of-s-two-times-s-two-is-zero.md

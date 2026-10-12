@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-normal-stiefel-whitney-and-pontryagin-classes-of-a-closed-manifold.md

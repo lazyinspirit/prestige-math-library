@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-gradient-of-a-quadratic-matrix-form.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-an-additive-category-with-kernels-is-idempotent-complete.md

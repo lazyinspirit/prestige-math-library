@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-smooth-manifolds-have-finite-cw-models-under-countable-choice.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-euclidean-norm-and-squared-norm-are-convex.md

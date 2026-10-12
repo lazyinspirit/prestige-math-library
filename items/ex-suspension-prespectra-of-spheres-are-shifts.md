@@ -44,9 +44,8 @@ $$ \boxed{\ \pi_k(\Sigma^\infty S^r)\cong\pi_{k-r}^s.\ } $$
 
 **Given:** An integer $r\geq0$.
 
-1.1 At level $n$, the canonical smash associator gives [F1]
-$$ (\Sigma^\infty S^r)_n=S^n\wedge S^r \cong S^{n+r}=\mathbb S_{n+r} =(\operatorname{sh}^r\mathbb S)_n. $$ [F1]
+1.1 At level $n$, the canonical smash associator gives [F1] $$ (\Sigma^\infty S^r)_n=S^n\wedge S^r \cong S^{n+r}=\mathbb S_{n+r} =(\operatorname{sh}^r\mathbb S)_n. $$ [F1]
 
 1.2 Both structure maps add a leading $S^1$ coordinate. Smash coherence says the level homeomorphisms commute with these structure maps, so they form a strict prespectrum isomorphism. [F1]
 
-2.1 Applying [F2] $r$ times gives $\pi_k(\operatorname{sh}^r\mathbb S)\cong\pi_{k-r}(\mathbb S) =\pi_{k-r}^s$. The opposite sign in the Step-1 scaffold is incompatible with the direct reindexing and is not used. $\square$ [F2, step 1.2]
+2.1 Applying [F2] $r$ times gives $\pi_k(\operatorname{sh}^r\mathbb S)\cong\pi_{k-r}(\mathbb S) =\pi_{k-r}^s$. The opposite sign in the Step-1 scaffold is incompatible with the direct reindexing and is not used. $\square$ [F2, step 1.2] 

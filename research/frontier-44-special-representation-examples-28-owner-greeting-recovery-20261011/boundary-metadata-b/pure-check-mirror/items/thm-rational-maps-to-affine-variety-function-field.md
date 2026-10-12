@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-rational-maps-to-affine-variety-function-field.md

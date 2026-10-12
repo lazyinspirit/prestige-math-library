@@ -1,0 +1,21 @@
+# Relative smooth triangulation supplier: active checkpoint
+
+Root assigned disjoint new differential-topology A/B pair `relative-smooth-triangulation-and-bundle-fitting` / `relative-smooth-triangulation-and-bundle-fitting-examples`, six exact A IDs and trivial bundle B ID in topology-triangulation-open-construction.md. User authorizes missing prerequisite construction. No canonical items, plans or engine edits; elliptic packet frozen.
+
+Full CLAUDE/README and topology open-construction note read. Actual Putz1967 fifteen-page full text read from topology author's cache; Theorem1.3,3.2,3.3 fitting and3.4 extension import Munkres, so cannot be assumed. Putz defines immersion by derivative injectivity on the entire tangent star (not merely rank on each simplex). Topology author agrees this is essential. Arbitrary simplex-immersion embedding is not stable under piecewise C1 perturbations: tangent cusp branches supply obstruction. Definition supplier must retain full-star nondegeneracy and corner-face-compatible relative data.
+
+Found legitimate complete Munkres1966 revised Elementary Differential Topology public scan at https://www.maths.ed.ac.uk/~v1ranick/papers/munkresdiff.pdf ;117PDFpages;SHA2567157fa3f5b9876d75424e6b7dbbca9eb2a8cb8ac4e7df3b9f12c83d3902fc016. Title, preface and contents actually visually read. Relevant ChII§§7–10 printed69–108; full proof reading underway, not yet claimed. Wrong initial munkres.pdf URL was an Elements of Algebraic Topology excerpt and is NOT cited as differential topology evidence. SMT author-source also fetched as auxiliary context, not yet read.
+
+Temporary source/OCR files confined /tmp/klr-foundation-relative-triangulation. Installed no system software: downloaded Ubuntu OCR packages and unpacked a standalone tesseract plus dependencies into task-temp solely for reading scanned source.
+
+Next: read actual complete Munkres geometry/stability/secant/fitting proofs; build local derivatives/shape control and fitting construction, then relative corners and fixed-base bundle cases. Coordinate exact interfaces with topology author who owns commuting radial/mapping-cylinder consumers. No accepted verdict or full proof completion claimed at this checkpoint.
+
+## Current completed draft checkpoint
+
+All seven A and one B carriers now have actual local content: one definition and seven full draft proofs. Necessary orthant-side leaf is included explicitly; the exact ID/dependency/page graph is frozen in relative-triangulation-proposal.json for ORIGINAL49-pair integration. No separate run created. Actual complete relevant Munkres ChapterII69–108 read, with critical96/99/105/106 scan verification; actual full Putz15-page text read. Source-ledger and source-notes record complete source hashes and caveats.
+
+Local final checks passed:8selecteditems,7proofs,10renderedfiles,36proofsteps,zero layout defects. Final hashes/actual commands are in relative-triangulation-local-checks.json. No mathematical acceptance or native gate claim. Parent keeps two conservative unused AC edges frozen until normal metadata cleanup; proof explicitly uses inline finite corner bump normalization and actual choice-free ODE interfaces.
+
+Topology author actually read all7A bodies and confirmed its positive-width closed radial collars carry exact projection-preserving diagrams throughout, including horizontal/vertical face intersections and protected buffer. Its final compatible-triangulation consumer body was still a construction-status carrier at my read; SAME supplier author must read/check complete actual consumer once available. No canonical/engine writes. Elliptic packet remains stable.
+
+The actual topology compact consumer is now a complete26-step draft and its original downstream theorem a complete5-step draft. Both full bodies were read and hash-bound in relative-triangulation-consumer-check.json. Actual steps7–11/16–21 satisfy the compact corner, finite product, closed collar, whole-star and support-buffer hypotheses; no substantive supplier-interface defect found in this bounded read. Suggested optional21 prose clarification distinguishes the ordinary fitting clause from the bundle theorem. Native independent review remains required; refresh the focused check if actual consumer bytes change.

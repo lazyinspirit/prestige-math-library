@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weingarten-equation-and-adjointness-of-the-shape-operator.md

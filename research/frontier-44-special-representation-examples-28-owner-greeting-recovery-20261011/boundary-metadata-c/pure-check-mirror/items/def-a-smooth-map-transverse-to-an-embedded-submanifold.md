@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-a-smooth-map-transverse-to-an-embedded-submanifold.md

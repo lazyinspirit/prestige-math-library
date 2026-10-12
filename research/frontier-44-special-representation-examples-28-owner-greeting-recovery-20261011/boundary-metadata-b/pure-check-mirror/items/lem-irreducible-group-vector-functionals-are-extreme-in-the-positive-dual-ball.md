@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-irreducible-group-vector-functionals-are-extreme-in-the-positive-dual-ball.md

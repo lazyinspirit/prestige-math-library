@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extension-by-zero-for-distributions-with-ambient-closed-support.md

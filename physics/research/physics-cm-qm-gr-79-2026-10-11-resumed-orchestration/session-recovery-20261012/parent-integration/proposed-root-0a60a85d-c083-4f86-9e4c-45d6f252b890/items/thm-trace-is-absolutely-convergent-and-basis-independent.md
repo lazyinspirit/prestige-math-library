@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trace-is-absolutely-convergent-and-basis-independent.md

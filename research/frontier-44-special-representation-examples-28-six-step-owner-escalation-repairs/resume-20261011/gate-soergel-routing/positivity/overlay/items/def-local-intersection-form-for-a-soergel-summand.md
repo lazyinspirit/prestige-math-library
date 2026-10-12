@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-local-intersection-form-for-a-soergel-summand.md

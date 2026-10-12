@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-green-functions-need-not-exist-with-the-naive-boundary-regularity.md

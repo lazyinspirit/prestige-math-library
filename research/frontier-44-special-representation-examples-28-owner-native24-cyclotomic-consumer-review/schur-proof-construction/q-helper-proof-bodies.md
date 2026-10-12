@@ -1,0 +1,482 @@
+# Q helper contracts and actual proof bodies
+
+Research only. Native24 first coherent repair remains pending. The two parent-owned incoming helpers are required new registrations, not existing canonical IDs. No signed Jantzen weight-Gram formula, primitive-content closure or native acceptance is claimed.
+
+
+## def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules
+
+### Contract
+
+Let R be a commutative ring, n≥0, ℓ≥1, and z,U_1,...,U_ℓ units of R. Define H_n by commuting invertible X_1,...,X_n, finite generators T_i satisfying (T_i−z)(T_i+1)=0, the type-A braid/distant relations, T_iX_iT_i=zX_(i+1), distant mixed commutation, and ∏_a(X_1−U_a)=0. For n=0 set H_0=R. The grading variable v is not z. An ℓ-multipartition λ of n is an ordered tuple of partitions; dominance compares every cumulative component/row sum. Fill tλ in component,row,column order. Put a_k=Σ_(b<k)|λ^(b)|, uλ=∏_k∏_(j≤a_k)(X_j−U_k), xλ=Σ_(w∈Sλ)T_w, mλ=xλuλ, Mλ=mλH_n. The row subgroup Sλ stabilizes the rows of tλ. The presentation involution * fixes all X_j,T_i and reverses products. For standard s,t of shapeλ put m_st=T_d(s)*mλT_d(t), where tλd(s)=s. Denote by H^{>λ} the span of higher Murphy shapes once their basis/cell law is established by [[thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular]], and Sλ the right cell/Specht module with basis m_t and action from that cell law. Its cellular form defines Dλ=Sλ/radSλ; Dλ may vanish.
+
+Types are EXACTLY all ℓ-multipartitions of n, including empty components, not all multicompositions. A semistandard tableau S has labels (row,component) ordered by component then row, weak rows, strict columns, and a label of component a can occur only in physical component b≤a; its type counts each label with the multiplicity of that multipartition row. For a standard s, µ(s) replaces each entry by its row/component in tµ. Set m_(S,t)=Σ_(s:µ(s)=S)m_st and m_(S,T)=Σ_(s,t:µ(s)=S,ν(t)=T)m_st. Define M=⊕_(λ multipartition of n)Mλ and C_n=End_(H_n)(M), with ordinary composition. For S,T of shapeλ and typesµ,ν, the map φ_ST, once justified by [[lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis]], sends mαh to δ_(α,ν)m_(S,T)h. Its right cell module ∆λ has basis v_T for semistandard T of multipartition types, contravariant cell form and quotient Lλ. Let Tλ be the unique tableau of shape/typeλ, and let eλ be the identity projection onto Mλ. Put ω=(∅,...,∅,(1^n)) and e=eω; mω=1, so Mω=H_n. In particular H_n is an actual direct summand of M. Weight projections for Jantzen theory are eν with ν multipartition. Define K_(λ,ν)=#SStdν(λ). All asserted module/form/map laws are discharged by the linked local theorem/lemma suppliers; the definition itself does not claim their proofs or the primitive residue-content classification.
+
+### Exact incoming IDs
+
+def-algebra-over-a-commutative-ring, def-left-and-right-modules, def-finite-symmetric-group-and-permutation-notation, def-generic-type-a-hecke-algebra, def-young-tableau-standard-tableau-and-shape, def-semistandard-tableau-and-kostka-number, def-direct-sum-of-a-family-of-modules
+
+### Proof body
+
+Explicit definitions; existence of quotient and finite direct sums is elementary. The asserted cell/module/map well-definedness is supplied by the declared justified_by local results, whose statements refer back to this definition.
+
+
+## lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis
+
+### Contract
+
+For the affine presentation associated to [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] over the universal Laurent parameter ring R, without imposing the first-variable cyclotomic relation, both families X^aT_w and T_wX^a, a∈Z^n,w∈S_n, are R-bases. Left multiplication by any nonzero Laurent polynomial is injective. Localizing at variable differences embeds this algebra into its rational crossed product; Φ_i=T_i−(z−1)X_(i+1)/(X_(i+1)−X_i) obeys Φ_i f=s_i(f)Φ_i. No cyclotomic basis, BK theorem, trace or primitive-content assertion is used.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, thm-standard-basis-of-the-generic-type-a-hecke-algebra, thm-the-symmetric-group-has-the-coxeter-presentation
+
+### Proof body
+
+## 1. Affine PBW and the localization used only to prove divisibility
+
+Here is a local PBW proof so that polynomial divisibility does not depend on an unproved affine independence assertion. Bernstein commutation moves every polynomial to the left, and the finite standard-basis relations then give spanning by `X^a T_w`. Set
+
+`c_ij=(z-1)X_j/(X_j-X_i)` and `d_ij=(X_j-zX_i)/(X_j-X_i)`.
+
+In the rational crossed product of the polynomial fraction field with S_n, represent `T_i=c_(i,i+1)+d_(i,i+1)s_i`. These operators satisfy Bernstein commutation and the finite Hecke relations. The quadratic relation uses `c_ij+c_ji=z-1` and `d_ij d_ji=z+(z-1)c_ij-c_ij²`. For three distinct variables the single identity
+
+`c_ij c_jk=c_ik(c_ij+c_jk-(z-1))`
+
+proves the braid relation: coefficients of the longest permutation are both `d_ij d_ik d_jk`; coefficients of the two length2 permutations agree by commutativity; the two length1 coefficients reduce to that displayed identity; the identity coefficient reduces to `(c_ij-c_jk)[c_ij c_jk-c_ik(c_ij+c_jk-(z-1))]=0`. Distant generators involve disjoint variable pairs. These equalities are obtained by substituting their displayed rational functions and clearing the three nonzero differences. Thus this is an actual representation of the universal presentation.
+
+For a reduced word w, the coefficient of its permutation in T_w is a nonzero product of d-functions. All other terms are proper Bruhat subwords. Distinct permutations are independent in the crossed product; if desired this is verified as operators by applying a putative dependence to powers of `f=Σ_j j X_j`: the distinct polynomials w(f) form a Vandermonde matrix over the fraction field. A maximal Bruhat term in a putative PBW dependence therefore has nonzero leading coefficient and cannot cancel. This proves independence and hence affine PBW. The same argument gives right PBW by the involution. In particular left multiplication by a nonzero element of P is injective. All this occurs over the universal characteristic-zero domain; its actual polynomial identities then specialize.
+
+Localize P at the differences `X_i-X_j`, i≠j. Define
+
+`Φ_i=T_i-c_(i,i+1)`.
+
+The Bernstein relation gives `Φ_i f=s_i(f)Φ_i` for every polynomial or localized rational f. Expanding a reduced word T_w as a product of Φ_i+c_i shows that `T_w f` is a sum of terms each containing `v(f)` on the left, where v is the permutation of a subword of that reduced word, multiplied by a coefficient whose only denominators are products of variable differences. Every such v is Bruhat-below w: deletion of adjacent cancelling pairs reduces a subword to a reduced subexpression, or equivalently the standard subword characterization gives this inequality. No denominators `U_a-U_b`, quantum factorials, or Gram determinants are inverted.
+
+
+
+
+## lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations
+
+### Contract
+
+For every commutative ring R, invertible z, ordinary finite type-A Hecke algebra H_n and composition ρ of n, xρH_n has R-basis m_(S,t)=Σ_(s:ρ(s)=S)m_st for semistandard partition-shape S of typeρ and standard t of the same shape. It has a Specht filtration with multiplicity #SStdρ(λ) of the ordinary Specht Sλ. The row-double-coset membership uses each coset word once and no quantum-factorial division. Over the generic field this number equals the trivial-character multiplicity of the ρ-row parabolic in Sλ. The explicit ordinary Garnir row-coset identity, additive nonstandard-tableau factorization, and same-column generator refinement T_a m_st≡−m_st+Σ_(u⊲s)c_u m_ut modulo higher shapes hold; row-standard straightening has no smaller-shape terms and its same-shape terms increase tableau-prefix dominance. Shape support uses the already proved ordinary Murphy dominance ideals; the finite Garnir algorithm terminates in lexicographic shape/tableau order before that dominance refinement.
+
+### Exact incoming IDs
+
+thm-murphy-tableau-elements-form-a-cellular-basis, thm-standard-basis-of-the-generic-type-a-hecke-algebra, def-murphy-elements-and-murphy-tableau-elements, def-semistandard-tableau-and-kostka-number, def-young-tableau-standard-tableau-and-shape, def-dominance-order-on-partitions, lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage, thm-hecke-jucys-murphy-action-is-dominance-triangular
+
+### Proof body
+
+This is the narrow ordinary type-A supplier actually needed by Q-S1's finite Mackey count. It is stated separately so that the higher-level theorem does not pretend that a definition of the ordinary Schur algebra supplies its proof. Inputs are the ordinary finite-Hecke standard and Murphy bases/cell law, including the explicit ordinary Garnir construction below. Everything is over a commutative ring with invertible z; prove the coefficient statements first universally over Z[z,z^-1].
+
+Let ρ be a composition of n, xρ its row symmetrizer, and µ a partition shape. For ordinary semistandard S of shapeµ/typeρ and standard t of shapeµ set `m_(S,t)=Σ_(s:ρ(s)=S)m_st`. Then these sums are an R-basis of `xρ H`; ordering them by higher shape first yields a Specht filtration with one copy of Sµ for every such S.
+
+The finite row-double-coset identity gives exact membership. Every row-standard refinement of column-strict S is standard, so `Σ_s T_d(s)* xµ` is the sum of T_w over the double coset `Sρ d(s0)^-1 Sµ`, each w exactly once. Its left Sρ-coset expansion writes it as `xρ h0`. Appending T_d(t) gives `m_(S,t)=xρ h`. No row-intersection quantum factorial is introduced. The sums are independent since their Murphy fibres are disjoint and all coefficients are1.
+
+We spell out the column refinement used in the coefficient argument. In the ordinary Garnir proof, for a violation at adjacent rows i,i+1 and column j, use the composition `ν=(µ_1,...,µ_(i-1),j-1,µ_i+1,µ_(i+1)-j,µ_(i+2),...)`. The two length-additive coset sums of `Sν Sµ` give
+
+`Σ_(w∈Sν∩Dµ)xµT_w=Σ_(v∈Sµ∩Dν)T_v* xν`.
+
+Its distinguished Garnir term occurs with coefficient1. All other terms in its original shape have strictly more dominant row tableaux; the reordered ν has strictly higher lexicographic shape, and the ordinary Murphy dominance refinement puts these shape errors in higher-cell ideals. A nonstandard tableau factors as that Garnir tableau followed by an additive-length word, obtained by removing inversions while keeping the column violation. Bruhat subword support preserves the strict tableau-prefix inequality on multiplication by that word. When the entries in the offending column are consecutive a,a+1, sorting the Garnir belt has a unique standard term whose single adjacent swap produces its distinguished Garnir term; its coefficient in the isolated relation is−1. Every other same-shape term is strictly more dominant. This proves, after the ordinary dominance refinement,
+
+`T_a m_st ≡ -m_st+Σ_(u⊲s)c_u m_ut (mod higher shapes)`
+
+whenever a,a+1 occupy one column of s. The right analogue follows by *. In contrast, if `s s_a` is standard, length/quadratic multiplication gives exactly the two usual swapped-tableau terms, with no shape error; if they occupy one row it gives exactly z m_st. These are the complete local finite-generator rules used below.
+
+For a fixed a, the left z-eigenspace of T_a in the finite Hecke algebra is `(1+T_a)H`. Indeed in the T_w basis, pair w and s_aw with the latter of larger length; coefficient comparison in `T_a h=z h` gives equality of their two coefficients. Their sum is `(1+T_a)T_w`. This argument uses z as a unit, not z+1 as a unit.
+
+Over the universal domain, no element of this row eigenspace has a nonzero Murphy coefficient at a tableau with a,a+1 in one column. To prove this, choose a least shape and then a least left tableau in a dominance-compatible support order. Higher-cell terms cannot contribute to its shape and a column correction from another tableau can contribute only from a strictly less dominant left tableau, absent by minimality. If its a,a+1 are in a column, its coefficient in `T_a h` is the negative of its coefficient in h, contradicting the z-eigenvalue equation because z+1 is nonzero in the domain. If they share a row, its basis element is itself a z-eigenvector, hence belongs to the row ideal by the preceding standard-basis test; subtract its coefficient times that element. If their swap is standard, the coefficient equation at the less dominant of the pair makes the two coefficients equal, and their sum is a z-eigenvector by the exact two-tableau rules. Subtract this common coefficient times the pair. Each subtraction stays in the row ideal and removes at least the chosen support term without creating any new support term. Induction on the finite support eliminates it and proves the asserted column exclusion. Specializing the resulting coordinate-zero identities for the standard row-ideal generators proves the same assertion over every base ring; no cancellation of z+1 at a singular parameter is used.
+
+Now h∈xρH is a z-eigenvector for every generator inside every ρ-row interval. The column exclusion applies for each consecutive pair inside such an interval. Consequently every supported tableau has those pairs in different columns. For an adjacent swap that is standard, comparison of the exact two-tableau coefficient equations gives equality of its two coefficients; column-state correction terms cannot interfere, because every such state has coefficient0 by the just-proved exclusion.
+
+The standard refinements of a fixed row-label tableau are linear extensions of the finite node posets within its repeated-label classes. Two extensions are connected by swaps of adjacent incomparable elements: moving the first differing desired element left across its preceding incomparable elements reduces their inversion distance, and finite induction proves connectivity. If a repeated label occupies one column, an adjacent vertical cover in that repeated-label subposet can be consecutive in some extension; contract that cover, take any finite topological order, and expand the contracted element as its two endpoints. Thus valid adjacent swaps carry its coefficient to one excluded consecutive-column state, and the whole fibre has coefficient0. Otherwise the row-label tableau is column-strict, and every fibre coefficient is one common coefficient. This proves that h has zero coefficients off semistandard fibres and constant coefficients on every semistandard fibre, hence lies in the span of the sums. Exact membership and disjoint unit pivots prove the basis theorem.
+
+Finally, order semistandard S's in a linear extension of shape dominance. The Murphy cell law preserves the corresponding higher-shape filtration. For a fixed S the action on the vectors m_(S,t) modulo higher terms is the ordinary Specht action, since its coefficients do not depend on the left refinement. Thus the successive quotients are the stated Specht modules. Over the generic field, finite-Hecke semisimplicity makes their multiplicities equal to the trivial-character multiplicities under the ρ-row parabolic by induction/restriction adjunction. This is exactly the ordinary number consumed in the higher-level Mackey count.
+
+
+For the generic finite-Hecke assertion, ordinary JM words distinguish tableaux across all partition shapes by their successive addable-node contents. By [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]], every simple is a nonzero cellular head. A simple factor of an ordinary cell module has a word character from that module and from the head’s own cell shape; disjoint word sets force that same shape. Existence of a factor forces its own head nonzero, and diagonal multiplicity1 forces the cell module simple. The sum of their squared dimensions equals the finite-Hecke rank, so the generic algebra and each parabolic are split semisimple. This supplies the generic multiplicity premise locally.
+
+
+## thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular
+
+### Contract
+
+For H_n in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] over the universal Laurent parameter ring, the m_st indexed by all ℓ-multipartitions of n and standard s,t are a basis and a dominance-cellular datum: m_st*=m_ts and m_sth≡Σ_v r_(t,v)(h)m_sv modulo higher shapes, with coefficients independent of s. The higher spans are actual two-sided ideals. Every commutative specialization with unit parameters inherits this cellular basis. In particular arbitrary-field finite-e charged specializations and the LM DVR retain the result. Its universal rank is supplied independently by [[lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis]], not by a primitive-block classification.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis, thm-murphy-tableau-elements-form-a-cellular-basis, thm-standard-basis-of-the-generic-type-a-hecke-algebra, cor-sum-of-squares-of-standard-tableau-numbers, thm-the-symmetric-group-has-the-coxeter-presentation, lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations
+
+### Proof body
+
+## 1. Finite-generator straightening
+
+Every component-preserving row-standard tableau admits a factorization of its distinguished permutation into a permutation inside the contiguous component intervals followed by the unique shuffle of the component intervals preserving their internal order. The inversion sets of these two permutations are disjoint: the first consists of pairs in one initial interval, and the second of pairs in different intervals. Consequently the factorization is length-additive. The same factorization applies to an arbitrary row-standard multitableau after factoring out its component shuffle.
+
+Ordinary Murphy straightening in each component applies after multiplying by `u_λ`, because `u_λ` commutes with the Hecke generators internal to those intervals. Higher ordinary component shapes preserve component sizes and strictly increase multipartition dominance. The final component shuffle relabels each internal component by an increasing list. At any cutoff r its selected entries in that component are an initial segment of that increasing list. Hence each tableau-prefix inequality after shuffling is exactly the ordinary inequality for that component at the corresponding initial-segment length. This proves that component straightening preserves the asserted dominance; it uses an explicit cutoff count, not a stronger unproved simultaneous inequality.
+
+For the fixed initial left row, right multiplication by `T_i` is now as follows. If `t s_i` is standard, the finite quadratic/length formula gives the usual single standard term or `q_H` times that term plus `(q_H-1)m_(t^λ,t)`. If i,i+1 are in the same row, the result is `q_H m_(t^λ,t)`. If they are in the same component and their interchange fails standardness, factor out the increasing component shuffle and apply the ordinary component cell law. This yields same-shape terms with the same initial left row, and strictly higher multipartition terms. The intertwining equality needed to move the generator through the shuffle is `T_c T_i=T_j T_c`: here c sends adjacent internal labels j,j+1 to i,i+1, so `c s_i=s_j c`, and both sides have identical ascent/descent status; the length or quadratic formula proves the equality in either case. A column failure across components is impossible because column standardness is imposed componentwise.
+
+Descending induction over a linear extension of multipartition dominance establishes finite-generator stability of each span `N^{≥λ}` of all standard pairs of shapes at least λ, and of `N^{>λ}`. Indeed, the fixed-row calculation has only higher-shape errors, already stable under all finite words by the induction. Multiplying on the left by `T_d(s)^*` then proves right stability for every `m_st`; applying * proves left stability. Thus the higher spans are two-sided ideals for the finite-generator subalgebra. Modulo `N^{>λ}`, the fixed-initial-row span is a right module for that subalgebra. This induction concerns spanning sets; it does not assume they are independent or already cellular.
+
+## 2. The cyclotomic component shift, including its coefficient and order
+
+Let `a=(a_1,...,a_ℓ)` as above and abbreviate `u_a=u_λ`. Suppose component k is nonempty and let `b=a+e_k`. Put `u_b=u_a(X_(a_k+1)-Q_k)`; all factors commute. For `a=a_k`, the defining recurrence gives the exact identity
+
+`u_a T_a...T_1 X_1 T_1...T_a = q_H^a(Q_k u_a+u_b)`.
+
+This follows by substituting `T_a...T_1 X_1 T_1...T_a=q_H^a X_(a+1)` and adding/subtracting `Q_k u_a`; no cancellation or generic parameter assumption occurs. The case a=0 is included.
+
+For k>1 form the multicomposition ν by appending a singleton row to component k−1 and deleting the first node of the first row of component k (omit a resulting zero row). Its cumulative sizes are b, so `u_ν=u_b`. Its Young subgroup is a subgroup of `S_λ`: inside the old first row of component k we have replaced its first position by a singleton and retained its remaining positions as a row. All other rows agree. The **left** length-additive coset expansion is
+
+`x_λ=Σ_v T_v^* x_ν`, hence `x_λu_b=Σ_v T_v^*m_ν`.
+
+The left expansion is essential: the right expansion cannot move `u_b` through its coset representatives. Sorting the rows of ν separately in each component conjugates its Young subgroup by a distinguished permutation and gives `m_ν=T_d m_(sort ν) T_d^{-1}`; `u_ν` commutes with this component-preserving permutation. The ordinary row-sorting/coset argument therefore expresses each term in standard pairs of shapes at least `sort ν`. That shape strictly dominates λ: within component k−1 every cumulative row sum can only increase by sorting the appended singleton, and its final total increases by1; within component k the extra preceding1 cancels the loss of the first node, and sorting the shortened first row cannot decrease a cumulative sum. The cumulative total through component k−1 increases strictly. Earlier and later components do not decrease any cumulative sum. Thus `x_λu_b∈N^{>λ}`.
+
+For k=1, nonemptiness of component1 implies `a_s≥1` for every s≥2. Therefore `u_b` contains all factors `(X_1-Q_s)`, including s=1, and is zero by the cyclotomic relation. This proves `x_λu_b∈N^{>λ}` in this case as well.
+
+## 3. Right multiplication by X1 and cellularity
+
+In a standard t whose entry1 lies in component k, that entry is its first node. The initial label of that node is `a+1`, where `a=a_k`. The distinguished permutation satisfies `d(t)=(s_a...s_1)w`, with w fixing1, and `len d(t)=a+len w`. To see the length equality, pull label a+1 to value1. It crosses exactly the a smaller initial labels, all of whose final values are greater than1; all remaining inversions are those of w. A permutation fixing1 has a reduced word in `s_2,...,s_(n−1)`, hence `T_w` commutes with `X_1`.
+
+Multiplying the identity in §2 on the right by `(T_1...T_a)^{-1}` and then `T_w` gives
+
+`m_λ T_d(t) X_1 = q_H^a Q_k m_λ(T_1...T_a)^{-1}T_w + q_H^a x_λu_b(T_1...T_a)^{-1}T_w`.
+
+The second term belongs to `N^{>λ}` by §2 and the finite-generator stability of §1. The first term belongs, modulo `N^{>λ}`, to the fixed-initial-row span by §1. Thus that span is stable under `X_1`. As in §1, multiplication on the left by `T_d(s)^*` and finite left stability of higher shapes gives the coefficient-independence law
+
+`m_st h ≡ Σ_v r_(t,v)(h)m_sv (mod N^{>λ})`
+
+first for each generator, and then for every word, with coefficients independent of s. All higher spans are stable on the right under every generator; * gives two-sidedness. Since `X_r=q_H^{1-r}T_(r−1)...T_1 X_1 T_1...T_(r−1)` and the cyclotomic constant term is invertible when all Q's are invertible, these generators also generate the Laurent affine quotient.
+
+The smallest multipartition `ω=(∅,...,∅,(1^n))` has `u_ω=x_ω=m_ω=1`. Therefore the generator-stable span of all standard `m_st` contains1 and is all of H. This proves spanning directly. By [[lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis]], H_R is independently free of rank ℓ^n n!. Count standard pairs using the ordinary identity Σ_(ρ⊢m)fρ²=m!: at component sizes n_a the contribution is (n!)²/∏n_a!, and summing gives ℓ^n n! by the multinomial theorem. Thus the generator-stable standard Murphy spanning family has exactly that rank. Its coefficient matrix in the independently proved ordered PBW basis is square and surjective, hence has a right inverse because its codomain is a free module. Its determinant is a unit, so it is invertible. Therefore the family is an R-basis, and the proved involution/coefficient-independence laws are actual cellularity. Tensoring this already proved basis and presentation supplies every commutative specialization, including repeated charges and the LM DVR. No generic-flatness inference occurs. This helper is downstream of the parent universal PBW proof, which itself is downstream of primitive-free early field BK and the ordinary KLR Hom norm; it cannot feed that earlier BK proof. Rank0 is the singleton empty basis.
+
+
+## lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular
+
+### Contract
+
+On Sλ in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], X_r acts dominance-triangularly with diagonal U_a z^(j−i) at the node (i,j,a) carrying r. Over a field with z=q_H of finite order e≥2 and U_a=q_H^(c_a), every simultaneous generalized-eigenword of Sλ is among the standard-tableau residue words c_a+j−i modulo e; every such word has the fixed node-residue multiplicities of λ. The universal triangularity also specializes to the LM DVR and generic fibre, with no semisimplicity or affine-center premise.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular, thm-hecke-jucys-murphy-action-is-dominance-triangular, lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis
+
+### Proof body
+
+## 5. Initial-row JM eigenvalues
+
+For component k and `a=a_k`, §2 immediately gives
+
+`m_λ(X_(a+1)-Q_k)=x_λu_b∈N^{>λ}`.
+
+Consider the internal finite-Hecke submodule generated by `m_λ` modulo higher global shapes. By ordinary component Murphy straightening it is spanned by standard internal component permutations. Each such permutation fixes the smallest internal label a+1, because that label must occupy the first node of its component. Consequently its Hecke element commutes with `X_(a+1)`: it has a reduced word in the internal generators with indices at least a+2. Thus `X_(a+1)` acts as the scalar Q_k on this whole internal finite-Hecke submodule. Errors in this computation are in `N^{>λ}`, already proved to be an ideal for every generator.
+
+The recurrence for the X's therefore identifies the action of `X_(a+i)` on that submodule with Q_k times the ordinary multiplicative JM element
+
+`M_i=q_H^{1-i}T_(i−1)...T_1²...T_(i−1)=1+(q_H-1)L_i`,
+
+with indices translated by a. The displayed equality is proved inductively from the finite quadratic relation and the defining additive-JM recurrence; it is a polynomial identity also when `q_H=1`. Ordinary JM triangularity gives diagonal `1+(q_H-1)[content]_q=q_H^{content}`. For the initial component tableau, which is maximal in tableau dominance, there are no strictly more dominant same-shape terms. Hence for the node (i,j,k) carrying r in `t^λ`,
+
+`m_λ X_r ≡ Q_k q_H^{j-i}m_λ (mod N^{>λ})`.
+
+## 6. JM triangularity for every standard multitableau
+
+The Bernstein relations are
+
+`T_i X_i=X_(i+1)T_i-(q_H-1)X_(i+1)` and `T_i X_(i+1)=X_iT_i+(q_H-1)X_(i+1)`,
+
+with commutation for the other indices. Inductively through a reduced word of w, these give
+
+`T_w X_r=X_(w^{-1}(r))T_w+Σ_(v<w)Σ_b a_(v,b)X_bT_v`.
+
+The correction terms are supported on proper Bruhat subwords: at the first correction a generator is deleted; moving its linear X coefficient through preceding generators only deletes further generators; the finite quadratic multiplication of any remaining subword has Bruhat support below that subword. The leading term follows the permutation of the index at every undeleted step. This proves both the coefficient degree1 and the strict subword bound.
+
+Apply this with `w=d(t)` and multiply by `m_λ` on the left. Section5 evaluates every X coefficient modulo higher shapes. A correction `m_λT_v` is reduced first to a row-standard representative d(u) of its Young-subgroup coset. The multiplication by the removed row subgroup contributes its row eigenvalue and has `d(u)≤v<d(t)`. The ordinary Bruhat/tableau-prefix relation, applied to the ordered rows of all components, therefore says `u` strictly dominates t. Componentwise ordinary straightening of u then either raises shape or produces same-shape standard tableaux at least u in prefix dominance, as proved by the cutoff argument of §1. Its same-shape terms consequently strictly dominate t. The leading eigenvalue is the Q_k times q_H to the content of the node carrying r in t, because `w^{-1}(r)` is precisely its initial-row label. Thus
+
+`m_(t^λ,t)X_r ≡ Q_k q_H^{j-i}m_(t^λ,t)+Σ_(v⊲t) a_v m_(t^λ,v) (mod N^{>λ})`.
+
+This proves the exact arbitrary-level JM content statement, independently of an affine-center theorem, semisimplicity, or block classification. On the resulting Specht module all simultaneous generalized eigenwords are among the standard-tableau residue words `(c_k+j-i mod e)`: a total ordering extending tableau dominance triangularizes all X's simultaneously, its one-dimensional successive quotients have exactly these characters, and applying commuting CRT projectors to that finite filtration gives the assertion. The residue multiplicities of every such word equal the node-residue multiplicities of λ.
+
+For rank0, H=C=F, the sole shape/tableau is empty, and all module, corner, basis, and triangularity assertions have their immediate one-dimensional interpretation. Therefore the construction is uniform over every rank needed by the core-reduction consumer.
+
+
+
+
+## lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage
+
+### Contract
+
+For a finite-dimensional cellular algebra over a field F, every nonzero cell-form quotient Dλ is an absolutely simple head, all simples occur exactly once this way, and [Cλ:Dµ]≠0 implies λ≥µ, with [Cµ:Dµ]=1 when Dµ≠0. Nonzero quotient means nonzero form, not necessarily nondegenerate form on Cλ. Every nonzero cell module, including zero-form labels, has all factors in one block. Two cell modules share a block exactly when they are linked by a finite chain of cell modules whose neighboring terms share a simple factor. For one primitive idempotent eµ per simple, dim eµAeν=Σλ[Cλ:Dµ][Cλ:Dν].
+
+### Exact incoming IDs
+
+def-cellular-algebra-basis-and-cell-module, def-simple-module, def-composition-series-and-length-of-a-module, thm-jordan-holder-theorem-for-modules, lem-finite-dimensional-algebras-admit-primitive-idempotent-decompositions, thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras, thm-jacobson-radical-is-nilpotent-and-the-quotient-is-semisimple, def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents
+
+### Proof body
+
+## 1. Cell forms and all simple labels
+
+Let A be a finite-dimensional cellular F-algebra with basis `c_st^λ`, higher ideals `A^{>λ}`, and right cell modules Cλ. Multiplication and its involution show that the coefficient of `c_uv^λ` in `c_us^λ c_tv^λ` modulo higher shapes is a scalar `Gλ(s,t)` independent of u,v. Indeed the right cell axiom first leaves the first index u unchanged, and the left axiom then leaves the last index v unchanged; comparing the two expansions leaves only that common index pair. The involution gives `Gλ(s,t)=Gλ(t,s)`. Associativity of three factors yields `<x a,y>=<x,y a*>`. Consequently the radical Rλ of this finite Gram matrix is a submodule, and the rank-one action is `x c_uv^λ=<x,c_u> c_v`.
+
+If the form is nonzero, any vector outside Rλ has nonzero pairing with some u; after scaling and using the rank-one operators it generates every basis vector of Cλ. Therefore every proper submodule is contained in Rλ, and `Dλ=Cλ/Rλ` is a nonzero simple head with unique maximal submodule Rλ. Extending the field preserves the Gram rank and these rank-one operators, so Dλ is absolutely simple. The correct criterion is **nonzero form**, not nondegenerate form on Cλ. Degenerate but nonzero forms are allowed. No questionable “nonzero iff nondegenerate” clause from another contract is consumed.
+
+To exhaust the simples, let D be any simple A-module. Pick a cell ideal `Iλ=A^{≥λ}` that acts nontrivially on D and is maximal in the finite cell order among such ideals. All strictly higher ideals then annihilate D. Thus the cell layer `Jλ=Iλ/A^{>λ}` acts nontrivially, and `D Jλ=D`. If its Gram matrix were zero, `Jλ²=0`, contradicting `D Jλ²=D`. Choose u with `D c_uu^λ≠0` or, more generally, a nonzero `d c_su^λ`; multiplying by `c_uv^λ` produces the right cell row. Its span is a quotient of Cλ that is all of D by simplicity. Since every proper submodule of this nonzero-form Cλ lies in Rλ, that simple quotient is Dλ. For the general off-diagonal choice, first choose s,u,d with `d c_su≠0`; the map `c_v↦d c_sv` is the cell-row map and has nonzero image. This proves all simple labels without classifying which multipartitions have nonzero forms.
+
+The order and distinctness follow directly from the ideals. Cλ annihilates Iµ whenever λ does not dominate µ: products in `Iλ∩Iµ` have only shapes strictly above λ in this case. Dµ does not annihilate Iµ because its rank-one action is nonzero. Hence `[Cλ:Dµ]≠0` implies λ dominates µ. Rλ annihilates Iλ by the rank-one action, while Dλ does not, so `[Cλ:Dλ]=1`. Distinct nonzero heads cannot be isomorphic: their ideal supports would force both λ≥µ and µ≥λ. This proves the complete split simple-label and triangular multiplicity statements over every F.
+
+## 2. Each cell module belongs to a single block, even if its form is zero
+
+Let z be a central idempotent of A. On the cell layer `Jλ≅(Cλ)^*⊗_F Cλ`, equality of left and right multiplication by z gives `B⊗Id=Id⊗Aλ`, where B and Aλ are its first- and second-factor coefficient matrices. Choose bases in both factors and compare matrix coefficients. Every off-diagonal coefficient of B and Aλ is zero, and every diagonal coefficient of either equals every diagonal coefficient of the other. Thus both are one scalar θλ times the identity. Since z is idempotent, θλ is0 or1. This tensor argument does not divide by the Gram matrix and still works when it is identically zero.
+
+Apply it to all primitive central idempotents, whose sum is1. Exactly one acts as1 on the nonzero cell module Cλ, the others as0. Thus Cλ and every composition factor of it belong to one block. This proves the cell-purity claim required for all Specht modules, including labels with Dλ=0.
+
+## 3. The exact shared-cell-factor linkage criterion
+
+Because the simples are absolutely split and self-dual under * (their nonsingular quotient forms identify each with its contragredient), choose one primitive idempotent eµ for each simple Dµ with `dim Dν eµ=δµν`. The exact functor `V↦V eµ` gives `dim Cλ eµ=[Cλ:Dµ]=dλµ`; the corresponding left-factor dimension is the same after applying *. Filter A by a linear extension of its cellular ideals and apply `eµ(-)eν`. The cell layer is the outer tensor product of its two cell modules. Exactness and dimension additivity therefore give
+
+`dim_F eµ A eν=Σ_λ dλµ dλν`.
+
+No multiplicity computation is hidden in this identity. Projecting with an idempotent is exact: for a surjection lift a vector and multiply the lift by the idempotent; for an injection restrict it. The same reasoning gives exactness for the two-sided projection.
+
+A finite split algebra's blocks are the connected components of its primitive-idempotent corner graph: put an edge whenever `e A f` or `f A e` is nonzero. For a union of graph components, the sum of its full primitive idempotents commutes with every corner of A and is central. Conversely, a central block idempotent is0 or1 on each primitive idempotent and cannot separate a nonzero corner. These two statements prove the graph characterization; repeated primitive idempotents for the same simple are linked because their matrix units survive in the semisimple quotient.
+
+The displayed Cartan identity says that two simple labels have a nonzero corner exactly when they occur together as factors of some cell module. Consequently two simples lie in the same block exactly when a finite chain of cell modules links their factors. Since every cell module is pure and every simple occurs in a nonzero-form cell head, two cell modules lie in the same block exactly when there is a chain of cell modules with each neighboring pair sharing a simple composition factor. This is the exact typed shared-standard/Specht linkage criterion; it is not inferred for arbitrary unrelated modules.
+
+
+
+
+## lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases
+
+### Contract
+
+For H_n in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]] and every multipartition typeµ, Mµ=mµH_n has basis m_(S,t), S semistandard of arbitrary multipartition shapeλ/typeµ and t standard of shapeλ. This holds over the universal Laurent parameter ring and every commutative specialization. Each sum has a disjoint coefficient1 Murphy pivot, so Mµ is an R-direct summand of H_n. In the affine algebra the proof explicitly constructs h with m_(S,t)=mµh, without quantum-factorial or parameter-difference division. Its Specht filtration is ordered by higher shapes and contains one copy of Sλ per semistandard S. No basis is inferred from generic flatness.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis, thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular, lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular, lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage, lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations, thm-standard-basis-of-the-generic-type-a-hecke-algebra, thm-the-symmetric-group-has-the-coxeter-presentation
+
+### Proof body
+
+## 1. Affine PBW and the localization used only to prove divisibility
+
+The affine PBW proof below is the proved incoming [[lem-universal-nondegenerate-affine-hecke-ordered-monomials-form-a-basis]]; it is repeated to make the monic division checkable. Bernstein commutation moves every polynomial to the left, and the finite standard-basis relations then give spanning by `X^a T_w`. Set
+
+`c_ij=(z-1)X_j/(X_j-X_i)` and `d_ij=(X_j-zX_i)/(X_j-X_i)`.
+
+In the rational crossed product of the polynomial fraction field with S_n, represent `T_i=c_(i,i+1)+d_(i,i+1)s_i`. These operators satisfy Bernstein commutation and the finite Hecke relations. The quadratic relation uses `c_ij+c_ji=z-1` and `d_ij d_ji=z+(z-1)c_ij-c_ij²`. For three distinct variables the single identity
+
+`c_ij c_jk=c_ik(c_ij+c_jk-(z-1))`
+
+proves the braid relation: coefficients of the longest permutation are both `d_ij d_ik d_jk`; coefficients of the two length2 permutations agree by commutativity; the two length1 coefficients reduce to that displayed identity; the identity coefficient reduces to `(c_ij-c_jk)[c_ij c_jk-c_ik(c_ij+c_jk-(z-1))]=0`. Distant generators involve disjoint variable pairs. These equalities are obtained by substituting their displayed rational functions and clearing the three nonzero differences. Thus this is an actual representation of the universal presentation.
+
+For a reduced word w, the coefficient of its permutation in T_w is a nonzero product of d-functions. All other terms are proper Bruhat subwords. Distinct permutations are independent in the crossed product; if desired this is verified as operators by applying a putative dependence to powers of `f=Σ_j j X_j`: the distinct polynomials w(f) form a Vandermonde matrix over the fraction field. A maximal Bruhat term in a putative PBW dependence therefore has nonzero leading coefficient and cannot cancel. This proves independence and hence affine PBW. The same argument gives right PBW by the involution. In particular left multiplication by a nonzero element of P is injective. All this occurs over the universal characteristic-zero domain; its actual polynomial identities then specialize.
+
+Localize P at the differences `X_i-X_j`, i≠j. Define
+
+`Φ_i=T_i-c_(i,i+1)`.
+
+The Bernstein relation gives `Φ_i f=s_i(f)Φ_i` for every polynomial or localized rational f. Expanding a reduced word T_w as a product of Φ_i+c_i shows that `T_w f` is a sum of terms each containing `v(f)` on the left, where v is the permutation of a subword of that reduced word, multiplied by a coefficient whose only denominators are products of variable differences. Every such v is Bruhat-below w: deletion of adjacent cancelling pairs reduces a subword to a reduced subexpression, or equivalently the standard subword characterization gives this inequality. No denominators `U_a-U_b`, quantum factorials, or Gram determinants are inverted.
+
+## 2. The flag condition is Bruhat-downward closed
+
+Use the permutation convention in which the transport of the physical initial variable X_r through `T_d(s)^*` is the variable whose integer labels that node in s. For its corresponding permutation π, being µ-flagged is the rank-matrix condition
+
+`#{r≤A_k : π(r)≤B_k}=B_k` for all k.
+
+The left side cannot exceed B_k. In the Bruhat order, a smaller permutation has at least as many entries in each upper-left rank rectangle. Thus if π satisfies these equalities, every Bruhat-smaller permutation does too. This rank characterization follows directly from the usual distinguished-row/Bruhat prefix criterion used in the ordinary Murphy proof; it is also unchanged upon inverting permutations, so either conventional word-action convention gives the same conclusion after transport is fixed.
+
+If π is flagged, a variable X_j whose µ-component is a came from a physical component b≤a. The transported polynomial `π(uλ)` therefore contains every factor `(X_j-U_k)` with k>b. In particular it contains every factor with k>a that appears in uµ. The exact quotient is the monic polynomial
+
+`π(uλ)/uµ = ∏_j ∏_(b(j)<k≤a(j))(X_j-U_k)`.
+
+This is actual polynomial divisibility, including all overlapping row-label classes; no parameter difference is divided out.
+
+## 3. Exact affine membership, with an explicit finite algorithm for h
+
+Let s0 be the least distinguished standard refinement of S, and let D be the row double coset `Sµ d(s0)^(-1) Sλ`. Every row-standard refinement of S is standard: repeated equal row labels never share a column, and distinct row-label classes correspond to disjoint increasing intervals of integers. Hence the ordinary length-additive **left** row-double-coset expansion gives
+
+`Σ_(s:µ(s)=S) T_d(s)^* xλ = Σ_(w∈D)T_w`.
+
+One may enumerate D using representatives of the row intersection, with each element once. This is exactly the finite disjoint coset sum; it does not replace it by `xµ T_d(s0)^* xλ`, which would introduce intersection quantum-factorial multiplicities. Since xλ commutes with uλ, the explicit sum defining m_(S,t) is
+
+`m_(S,t)=(Σ_(w∈D)T_w)uλ T_d(t)`.
+
+Every w in D is flagged. The left/right row subgroups preserve the relevant µ/λ component intervals, and the least refinement is flagged by hypothesis. Thus every Bruhat subword v of w is flagged by §2. Apply the Φ-expansion in §1 with f=uλ. Each transported v(uλ) is divisible by uµ, so `T_w uλ` belongs to `uµ H_aff` after localization at variable differences.
+
+Expand the actual unlocalized element in the left affine PBW basis. Its coefficients are Laurent polynomials in P. Localized membership says each coefficient lies in `uµ P[(X_i-X_j)^(-1)]`. Every factor `X_j-U_k` of uµ is prime in P and is not associated to, and does not divide, any variable difference. The same holds for its multiplicity if needed. Therefore localization at those differences cannot remove any required uµ factor; every coefficient is already divisible by uµ in P. This proves an exact unlocalized equality
+
+`(Σ_(w∈D)T_w)uλ=uµ b`
+
+with b in the actual universal affine algebra.
+
+For each simple generator inside a µ row, the finite double-coset sum has left eigenvalue z; multiplication by uλ on the right retains that eigenvalue. Also that generator commutes with uµ, which is symmetric on every µ component interval. Cancelling uµ in the affine PBW module gives `T_i b=z b` for all those row generators.
+
+Write b in the **right** PBW basis `Σ_w T_w f_w(X)`. The left-eigenvalue equation for a pair w,s_iw forces `f_w=f_(s_iw)`: if the latter has greater length, comparison of the two coefficients using `T_i²=(z-1)T_i+z` gives `z f_(s_iw)=z f_w` and the second equation agrees. Thus the coefficients are constant on each left Sµ coset. Its distinguished representative r has the length-additive expansion `xµ T_r=Σ_(v∈Sµ)T_(vr)`. Consequently
+
+`b=xµ h0`, where `h0=Σ_(r∈Sµ\S_n distinguished)T_r f_r(X)`.
+
+Since uµ commutes with xµ, the exact membership identity is
+
+`m_(S,t)=mµ h`, with `h=h0 T_d(t)`.
+
+This constructs h by a finite algorithm: enumerate the row double coset once; compute its Bernstein/PBW expansion with uλ; divide each polynomial coefficient by the explicit monic uµ (the divisibility proof guarantees zero remainder); normalize to right PBW; take one common coefficient for each left row coset; append T_d(t). It is an actual affine element and has no inverted quantum factorial. The equality is exact, so its coefficient at the selected Murphy pivot is1 and its other coefficients are precisely the other1's in that same fibre. No higher-shape remainder is being assumed admissible. Passing to the cyclotomic quotient and then specializing any commutative R-algebra preserves this identity.
+
+## 4. The flag-supported Murphy span is a right ideal
+
+Let Wµ be the free subspace spanned by `m_st` with left tableau s µ-flagged. The proved Murphy generator construction tracks its support as follows.
+
+For right finite generators, same-shape terms retain s. Higher terms come from ordinary straightening inside physical component intervals; these do not change their sizes. Before straightening, their left permutations are products of d(s) with permutations inside those physical intervals. Such permutations only rearrange which nodes of an old component receive its allowed µ-labels. They therefore stay flagged. Finite quadratic expansion of such products consists at each step of retaining the preceding permutation or multiplying it by an internal generator; both preserve the physical component sets. Row normalization and ordinary straightening inside components preserve those sets as well. This verifies flagged support for every finite-generator correction, rather than assuming that all higher shapes have it.
+
+For right X1, the same-shape term again has the old left s. In the higher component-shift term of the proved formula, one node of physical component k moves to physical component k−1. The left row-coset representatives used in `xλu_b=Σ_v T_v* mν` are in the old row subgroup, hence preserve every old physical component. Their products with d(s) can only transport an integer from that old component k to the new earlier component k−1. Its µ-component was at least k, so it is still admissible. In cumulative-profile language the new boundary A_(k−1) increases by1 and no other boundary decreases. Every previously valid rank rectangle remains valid. Sorting ν and the subsequent finite Murphy straightening take place inside the new component intervals and keep that compatibility. The k=1 term is zero. Thus X1 corrections preserve the flag condition too.
+
+This proves Wµ is a right ideal. It contains mµ because its initial tableau has physical/type components equal. Therefore `Mµ=mµH_R⊆Wµ`. The same support tracking for left generators inside a µ row preserves the flag condition, because they exchange integers of the same µ-component; their finite straightening keeps physical component sizes. Thus Wµ and its cellular-ideal filtration are left modules for the µ-row parabolic algebra. Every element of Mµ also has the left eigenvalue z for all µ-row generators, since `mµ=xµuµ`. These are the exact support/eigen constraints used in the next dimension bound.
+
+## 5. Generic upper bound by an ordinary finite-Hecke Mackey count
+
+The finite generic semisimplicity premise used here has the following local proof. Over K, ordinary JM word characters distinguish standard ordinary tableaux across all shapes by successive addable-node contents. Every simple is a nonzero cellular head by [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]]. A nonzero simple factor of an ordinary cell module has a character from that module and from its own head's cell shape, so disjoint word sets force its label to be that same shape. Existence of a factor forces its head nonzero; diagonal multiplicity1 forces the cell module simple. The sum of their squared dimensions is the finite Hecke rank, so the algebra is split semisimple. The same argument applies to every row parabolic. The ordinary semistandard number in the Mackey computation below is supplied by [[lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations]], whose complete proof is independent of higher level.
+
+Over K the finite type-A Hecke algebra, and every row parabolic, is split semisimple: z is indeterminate and the ordinary Specht modules are simple (the ordinary JM words are distinct, or the corresponding narrow ordinary generic theorem). We use its exactness only here, not an inference of integral module freeness. The trivial character sends each row generator to z. Consequently its multiplicity/invariant functor is exact on finite K-modules.
+
+The shapeλ left cell module restricted to the finite Hecke algebra is the induction of the tensor product of ordinary Specht modules of its physical components, from their component parabolic. This follows directly from the component-shuffle basis in the proved finite-generator construction: a standard multitableau is an internal standard tableau in each component followed by a component shuffle, the lengths add, and internal higher-shape errors are exactly the ordinary Specht quotient relations. The resulting induced-module map carries these basis vectors bijectively to the Murphy cell vectors, and their finite-generator actions agree. This verifies the restriction statement without a cyclotomic semistandard theorem.
+
+Restrict that induced module to the µ-row parabolic. The finite double-coset decomposition is a direct bimodule decomposition: the basis elements T_w for each row/component double coset form a sub-bimodule, since multiplying by a parabolic simple generator retains its double coset under either term of the length/quadratic formula. For a distinguished minimal double-coset representative, length-additive row cosets identify its bimodule with induction from the row/component intersection. This gives the usual Mackey decomposition by an explicit basis map, not an abstract unproved assertion. The double cosets are indexed by the nonnegative allocation matrix `N_(r,b)`: how many integers in µ row r enter physical component b. Its row totals are the µ-row sizes and column totals the component sizes of λ. The flag-supported part keeps precisely those matrices with `N_(r,b)=0` whenever b exceeds the µ-component containing row r. Its basis assignments form entire µ-row orbits, so this is exactly the direct sum of those Mackey summands.
+
+The intersection parabolic inside physical component b has composition `ρ_b=(N_(r,b))_r`, in the fixed type-row order. The dimension of its trivial-character multiplicity in the ordinary Specht module of shape λ^(b) is the ordinary semistandard number `K_(λ^(b),ρ_b)`. To see this using only ordinary suppliers, apply induction/restriction adjunction to the ordinary permutation module `x_(ρ_b)H`; its proved ordinary semistandard Specht filtration has exactly this multiplicity, and generic semisimplicity converts the filtration multiplicity to the required Hom dimension. Likewise induction from an intersection to the µ-row group preserves this trivial multiplicity: in semisimple modules it is the dimension of Hom to the trivial module, and induction adjunction identifies that Hom with the corresponding one at the intersection. No separate Frobenius-trace claim is needed.
+
+Therefore the trivial-character multiplicity in the flagged left cell module equals
+
+`Σ_(flag-compatible N) ∏_b K_(λ^(b),ρ_b)`.
+
+This is exactly `#SStdµ(λ)`: a semistandard multitableau determines such a matrix and, separately in each physical component, an ordinary semistandard tableau with those row-label multiplicities; conversely those component tableaux assemble uniquely, and compatibility is exactly the flag condition. This is a finite combinatorial bijection.
+
+Apply the exact trivial-character multiplicity functor to the cell-ideal filtration of Wµ. Its λ-layer is the flagged left cell space tensored with the full right cell space, so its invariant dimension is `#SStdµ(λ) · #Stdλ`. Summing the layers gives
+
+`dim_K (Wµ)_trivial = Σ_λ #SStdµ(λ) · #Stdλ`.
+
+By §4, Mµ lies in this invariant space. By §3, it already contains that many independent semistandard sums m_(S,t), whose disjoint Murphy fibres give their independence. The upper and lower dimensions agree. Thus over K, `Mµ` is exactly the span of these sums. This proves the upper bound rather than assuming fibre constancy of a generator remainder.
+
+## 6. Return to R by coefficient equalities, and specialize without flatness
+
+For any actual h in `mµH_R`, its Murphy coefficients are in R because the universal Murphy basis was already established. The result over K says that these coefficients are zero outside admissible left fibres and constant on each admissible left fibre for each fixed right tableau. These are literal equalities of coefficients in R, since R injects into K. Reading the common coefficient at the unit pivot expresses h as an R-linear combination of the semistandard sums. Thus `Mµ⊆Vµ` over R. Exact membership from §3 gives the reverse inclusion.
+
+Therefore
+
+`mµH_R = ⊕_(λ,S∈SStdµ(λ),t∈Stdλ) R m_(S,t)`.
+
+This uses generic information only to prove specific zero/equal coefficient identities in an already proved universal free Murphy basis. It does not infer an integral basis from generic rank. For any commutative specialization, every sum m_(S,t) is still in mµH by the explicit affine identity. Conversely each product mµ with a Murphy basis vector has its R-coordinate identity in Vµ, and that identity specializes. These two inclusions prove the same statement after base change, independently of any claim that images commute with tensor products. The semistandard sums retain their disjoint coefficient1 pivots, so are a basis over the specialized ring. This includes arbitrary fields, repeated Q's, finite e≥2, and the LM deformation DVR.
+
+The previously missing finite generator coefficient identities now follow from this actual equality of submodules: every m_(S,t)g belongs to Mµ, hence its computed Murphy coefficients are constant on the permitted fibres and zero outside them. Their higher-shape support is already the Murphy ideal law. This closes S1 relative to the stated narrow ordinary basis/semistandard suppliers and the proved universal Murphy route.
+
+
+
+The Specht filtration follows by ordering the semistandard left tableaux in a shape-compatible order. The Murphy cell law on a fixed left fibre has the same right coefficients as Sλ, and the proven one-sided basis identifies every successive fixed-fibre quotient with Sλ. Disjoint coefficient1 fibres extend to a full Murphy-coordinate basis: replace each chosen pivot basis vector by its fibre sum and retain all other coordinates; the finite transformation has determinant1. This proves the direct-summand clause.
+
+
+## lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis
+
+### Contract
+
+For the actual multipartition-summand C_n in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], evaluation identifies Hom_H(Mν,Mµ) with Mµ∩H mν, with basis m_(S,T). The maps φ_ST are actual well-defined endomorphisms and form a free dominance-cellular basis, φ_ST*=φ_TS and φ_STφ≡Σ_W r_(T,W)(φ)φ_SW modulo higher shapes independently of S. Formation of this basis and its constants specializes to every commutative unit-parameter base, including the LM DVR. The proof uses the perfect symmetric trace [[lem-universal-cyclotomic-hecke-canonical-trace-is-perfect-and-symmetric]] and the codomain direct-summand pivots [[lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases]], with no field-only double-annihilator or nonsaturated-lattice argument.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular, lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases, lem-universal-cyclotomic-hecke-canonical-trace-is-perfect-and-symmetric, def-cellular-algebra-basis-and-cell-module
+
+### Proof body
+
+By [[lem-universal-cyclotomic-hecke-canonical-trace-is-perfect-and-symmetric]], the canonical coefficient trace is symmetric and perfect over the universal ring and every unit-parameter specialization. By [[lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases]], mνH is a direct summand of the codomain H, not merely a free image. Apply the following local annihilator argument.
+
+ Let L_m:A→A,a↦ma. Its image mA is projective, so 0→K→A→mA→0 is split exact over R, K=rAnn(m). A functional on A vanishing on K descends to a functional on mA. Because mA is a DIRECT SUMMAND OF THE CODOMAIN A, that descended functional extends to A; composing its extension with L_m recovers the original functional. Conversely every such composition vanishes on K. Thus the functionals vanishing on K are exactly the image of L_m*:A*→A*. Projectivity of the image/source-split alone would not prove this codomain extension, and is not substituted for the stated direct-summand premise. For the perfect symmetric pairing, the adjoint of L_m is R_m:a↦am: τ((ma)b)=τ(a(bm)). Hence K^perp=Am. If xK=0 then τ(xk)=0 for everyk∈K, so x∈Am. Conversely if τ(xk)=0 for everyk∈K, then for any a∈A, ka∈K because K is a right ideal; therefore τ((xk)a)=0 for everya. Perfectness implies xk=0. Thus the orthogonal and left-annihilator conditions coincide. No field, dimension count, rationalization, generic flatness, or nonsaturated-lattice argument is used.
+
+
+
+Evaluation f↦f(mν) is injective, and its image is exactly {x∈mµH:x rAnn(mν)=0}: the inverse sends mνa to xa, well-defined by that annihilator condition. The proved equality lAnn(rAnn(mν))=H mν makes this image mµH∩H mν.
+
+Once [[lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases]] gives the two one-sided semistandard bases, applying * gives the corresponding basis of H mν. Because the first module's Murphy coefficients are constant on admissible left fibres and the second's on admissible right fibres, their intersection has coefficients constant on both fibres and zero off their admissible intersection. It is consequently the direct sum of the disjoint rectangular-fibre sums m_(S,T). This proves the intersection-basis step **from S1**, rather than leaving a second unrelated straightening gap. The double-annihilator equality was proved above using the perfect trace and the actual S1 codomain direct summand.
+
+For each S,T define `φ_ST(mαh)=δ_(α,type T)m_(S,T)h`. The double-annihilator identity proves these are actual H-maps; the intersection basis then proves they are a basis of C. Their cellular multiplication has a complete reduction from these data. For h with `m_(U,V)=m_(type U)h`, the product is zero unless type(U)=type(T); otherwise evaluating it gives `m_(S,T)h`. The Murphy cell law gives its same-shape part as `Σ_(s∈fibre S)Σ_v b_(T,v)(h)m_sv`, where `b_(T,v)=Σ_(t∈fibre T)r_(t,v)(h)` is independent of s and S. Since the product is an actual H-map, the already proved rectangular-fibre basis groups v into its semistandard fibres and proves those b coefficients constant on each right fibre. Thus the resulting coefficient of φ_SW depends on T,W and the multiplier, not S; every remaining term has higher shape. No further coefficient axiom is missing after S1 and the double-annihilator equality.
+
+The transpose rule is also genuinely multiplicative. Write `m_(S,T)=m_(type S)h_ST`; then `m_(T,S)=h_ST* m_(type S)`. For a composable pair with type(T)=type(U), the star of its evaluated product `m_(S,T)h_UV` is `h_UV* m_(T,S)`. But `m_(T,S)=m_(type T)h_TS` and `m_(V,U)=h_UV* m_(type U)`, so this is precisely the evaluated opposite product `m_(V,U)h_TS`. For noncomposable types both products are zero. Evaluation injectivity proves `(φ_ST φ_UV)*=φ_VU φ_TS`. Hence transposition gives an involutory anti-automorphism and the semistandard datum is cellular. A generic split character count is not used.
+
+
+
+
+## thm-cyclotomic-schur-standards-and-schur-functor-control-block-linkage
+
+### Contract
+
+For C_n=End_H(⊕_(λ multipartition)mλH) in [[def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules]], over every field F with unit parameters, its standards ∆λ have nonzero absolutely simple heads Lλ indexed by all multipartitions, [∆λ:Lλ]=1 and [∆λ:Lµ]≠0 only if λ≥µ; C_n is split quasihereditary. Its standard classes form a Z-basis of G_0 and weight dimensions dim ∆λeν=K_(λ,ν) give a unitriangular multipartition Kostka matrix. Over the universal ring/DVR the standards and forms are free and eν*=eν. The exact corner functor V↦Veω gives ∆λeω≅Sλ and Lλeω≅Dλ (possibly0), so [∆λ:Lµ]=[Sλ:Dµ] for Dµ≠0. The centers Z(C_n) and Z(H_n) are canonically isomorphic because Mω=H_n is a summand, and ∆λ,∆µ share a C_n-block iff Sλ,Sµ share an H_n-block. Standard/Specht linkage is exactly shared-simple-factor linkage. No equality-of-residue-contents ⇒ primitive-block assertion is included.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis, lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage, lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular, def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents, def-grothendieck-group-of-an-essentially-small-abelian-category, thm-jordan-holder-theorem-for-modules
+
+### Proof body
+
+## 4. Endomorphism covers containing the regular module preserve the center
+
+This part requires no Schur cellular or semistandard theorem. Let H be any finite-dimensional F-algebra and M any finite right H-module containing H as a direct summand. Put `C=End_H(M)` with ordinary composition and let e project onto that summand. Then `eCe=End_H(H)≅H` via left multiplication; moreover `Ce≅Hom_H(H,M)≅M` as a left C-module by evaluation at1. Thus `End_C(M)≅H^op`, correctly interpreted as the right-H action.
+
+There is a more explicit center proof. If c is central in C, it commutes with e and restricts on the H summand to left multiplication by some h. For every m∈M, the H-map `f_m:H→M`, `a↦ma`, is an off-diagonal block of C. Commuting c with that block gives `c(m)=mh`. Since c is H-linear, applying this equality to m=1 in the H summand gives `ah=ha` for every a∈H. Hence h∈Z(H). Conversely, for h∈Z(H), the right-action map `m↦mh` is H-linear and commutes with every H-endomorphism of M, hence belongs to Z(C). These constructions are inverse unital F-algebra homomorphisms.
+
+Therefore `Z(C)≅Z(H)` and their primitive central idempotents correspond bijectively. In the cyclotomic case `ω=(∅,...,∅,(1^n))` has `mω=1`, so `M=⊕_(λ multipartition)mλH` always contains H and this center/block correspondence applies already. It neither assumes nor proves the desired residue-content block classification.
+
+## 5. Schur standards, nonzero heads, and split quasiheredity
+
+By [[lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis]], the maps φ_ST form the actual cellular basis of C, indexed by all multipartition shapes and EXACTLY multipartition types. No full multicomposition Schur algebra is substituted. Let ∆λ be its right cell module with basis v_T. The unique semistandard tableau `Tλ` of shape/type λ gives `φ_(Tλ,Tλ)=eλ`, the identity projection onto Mλ. This is an actual idempotent, so the defining cell product gives `<v_(Tλ),v_(Tλ)>=1`. Hence every standard head `Lλ=∆λ/rad∆λ` is nonzero. [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]] proves all Lλ are absolutely simple, pairwise distinct and exhaustive, with `dλµ≠0⇒λ≥µ` and `dλλ=1`.
+
+For completeness, here is the quasiheredity proof rather than a citation. Remove maximal remaining cells successively in a linear extension. In the relevant quotient algebra B, the next cell layer J has basis c_st and a distinguished index u with Gram value G(u,u)=1. Then `e=c_uu` is idempotent, `c_su c_ut=c_st`, and the multiplication map `Be⊗_F eB→J` is an isomorphism on those basis elements. Also `eBe=Fe`: the cell law and J's maximality show that any `e b e` is scalar e. Thus Be is projective as a left B-module, J is a direct sum of copies of Be, and `e rad(B)e=0` since the corner is a field. Hence J is a split heredity ideal. Iterating gives a split heredity chain and identifies the cell modules ∆λ as its standards. This proof works equally in the integral cellular situation when the unit Gram entry remains1; the projective tensor argument is explicit. For the current field claim no separate abstract quasiheredity result is required.
+
+The triangular matrix of standard multiplicities has diagonal1, so the classes `[∆λ]` form a Z-basis of `G_0(C-mod)` (invert its finite unitriangular matrix by backward substitution). Projecting to blocks is exact. Since each ∆λ is block-pure by the cellular-purity clause of [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]], if an actual class supported in one block equals `Σ aλ[∆λ]`, every coefficient of a standard in another block vanishes by this basis independence. This is exactly the character/block-separation input for the Jantzen equivalence argument.
+
+Weight projections eν are self-adjoint: their semistandard representatives are `φ_(Tν,Tν)`, fixed by the cellular involution. Their action on ∆λ is `v_T eν=δ_(type(T),ν)v_T`, so `dim ∆λ eν` is the semistandard Kostka number. A semistandard tableau of shapeλ and typeν implies λ≥ν. For a component k and row cutoff r, entries whose type component is below k cannot occur in physical components at least k; entries with type component k and row at most r cannot occur in physical components greater than k, and within physical component k they occupy at most r nodes per column by strict column increase. Thus their total number `Σ_(a<k)|ν^(a)|+Σ_(i≤r)ν_i^(k)` is at most `Σ_(a<k)|λ^(a)|+Σ_(i≤r)λ_i^(k)`, exactly the multipartition dominance inequality. There is one tableau of shape/typeλ. Thus the finite Kostka matrix on multipartition weights is unitriangular, and the vector of weight dimensions is injective on the Z-span of standard characters. This claim is a consequence of the proved actual semistandard basis [[lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis]].
+
+## 6. The Schur functor and the radical calculation
+
+The corner functor `V↦Ve` for `e=eω` is exact, and `eCe≅H` as in §4. Semistandard tableaux of typeω are canonically standard multitableaux: replace the label (r,ℓ) by r. The assumed semistandard cell multiplication therefore identifies the surviving standard vectors `v_t` in ∆λe with the Murphy vectors m_t of Sλ, with identical right-H action. This is an explicit `∆λe≅Sλ`.
+
+Their forms agree as well. In C, `<v_s,v_t> eλ ≡φ_(Tλ,s)φ_(t,Tλ)` modulo higher C-shapes. Evaluate the two maps at mλ. The first map is an H-map from H to Mλ, hence is left multiplication by `m_(t^λ,s)`; the second sends mλ to `m_(t,t^λ)` in H. The evaluated product is therefore `m_(t^λ,s)m_(t,t^λ)`, whose coefficient of mλ modulo higher H-shapes is exactly the Specht Gram entry. Evaluating a higher Schur map produces a sum of higher Murphy shapes by its explicit m_ST definition, so the comparison is legitimate.
+
+Because e*=e, the e and 1−e parts of ∆λ are orthogonal. If x∈∆λe pairs to0 against ∆λe, it also pairs to0 against ∆λ(1−e), since `<x,y(1−e)>=<x(1−e),y>=0`. Thus
+
+`rad(∆λ)e = rad(∆λ)∩∆λe = rad(∆λe)`.
+
+The form comparison then gives `Lλe≅Dλ`, including zero Dλ. Apply the exact functor to a composition series of ∆λ. Each simple factor Lµ becomes Dµ or0. [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]] proves that the nonzero Dµ are pairwise distinct and exhaustive. Therefore for every µ with Dµ≠0,
+
+`[∆λ:Lµ]=[Sλ:Dµ]`.
+
+This proves the multiplicity identity locally, including arbitrary field characteristic and repeated charges. It does not assume a simple-label bijection through e; vanishing Schur-simple images are expressly retained.
+
+## 7. Typed Schur/Specht block linkage
+
+The center isomorphism in §4 sends a central block idempotent b of H to the same right-action projection on M, hence to its corresponding central idempotent b_C of C. On the corner functor, `V b_C e=(Ve)b`. Every ∆λ is nonzero and block-pure by the cellular-purity clause of [[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]], and `∆λe=Sλ` is nonzero (its Murphy standard-tableau basis exists). Consequently the block supporting ∆λ corresponds to exactly the block supporting Sλ. Thus
+
+`∆λ,∆µ same C-block ⇔ Sλ,Sµ same H-block`.
+
+[[lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage]] gives both sides' chain description by shared constituents. Section6 gives the exact nonzero-simple multiplicity transfers when needed. This completes the algebraic block-linkage implication from the semistandard construction; it does not assert that equal residue contents suffice for linkage. That separate content/Jantzen/combinatorial theorem remains with its own constructor.
+
+
+
+
+## lem-cyclotomic-schur-generic-deformation-standards-have-nondegenerate-forms
+
+### Contract
+
+Over the fraction field of the universal Laurent parameter ring, all cyclotomic Specht modules are simple and H_n is split semisimple; all Schur standards ∆λ equal Lλ and have nondegenerate cellular forms. Also fix N≥1 and any field F with nonzero q_H,Q_a; for 0≤d≤N take O=F[t,t^(-1)]_(t−1), z=q_Ht, U_a=Q_at^(Na). Over F(t), all rank-d Specht/Schur standards are simple and their forms nondegenerate. This includes the charged finite-e specialization used by LM. It establishes generic nondegeneracy only, not any signed rim-hook weight-Gram determinant valuation formula.
+
+### Exact incoming IDs
+
+def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules, thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular, lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular, lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage, lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis, thm-cyclotomic-schur-standards-and-schur-functor-control-block-linkage
+
+### Proof body
+
+## 7. Generic simple standards: the part that follows before the trace
+
+The universal Murphy/JM result also gives generic split semisimplicity of H. For two different standard multitableaux, their first differing prefix adds two different addable nodes. In a component their contents are different; in different components `U_a z^c` are distinct in K. Thus the entire joint JM words determine the tableaux, even across different shapes. Every cell module has a simultaneous triangular filtration by its own word characters. Every simple quotient Dµ has a nonempty subset of the characters of its own shapeµ. Since all simples are the nonzero cellular heads, any composition factor Dµ of Cλ forces an intersection between the λ and µ character sets. Distinct shapes have disjoint sets, so µ=λ. Existence of a composition factor forces Dλ≠0, and cellular diagonal multiplicity1 then forces Cλ=Dλ simple. Summing their squared dimensions equals the Murphy basis dimension, so the Jacobson radical of H_K is zero and H_K is split semisimple.
+
+For LM's one-variable generic deformation `z=q_H t`, `U_a=Q_a t^(Na)`, the same word-separation argument applies in F(t). At the first differing step r≤N, two addable nodes of distinct components have content difference of absolute value at most r−1<N: the sum of their component sizes is at most r−1, and each addable content is bounded by its own component size. A collision would require t exponent `N(a-b)` to equal that content difference; this is impossible for a≠b. In the same component z has infinite order and distinct addable contents remain distinct. This proves word separation and hence generic Hecke semisimplicity for that deformation, without an affine-center or block-classification theorem.
+
+By [[thm-cyclotomic-schur-standards-and-schur-functor-control-block-linkage]], the actual Schur corner functor and multiplicity identities are proved, and its generic standards are simple as well. Its standard decomposition matrix contains the Hecke one on every nonzero D-column. Here every Dλ is nonzero and every Hecke Specht Sλ is simple, so the multiplicity identity gives `∆λ=Lλ` for every λ. Their cellular forms are nondegenerate. This is exactly the generic nondegeneracy input for the Jantzen filtration, by the proved incoming perfect-trace and Schur-basis suppliers. It does not prove the signed rim-hook weight-Gram determinant formula.
+
+

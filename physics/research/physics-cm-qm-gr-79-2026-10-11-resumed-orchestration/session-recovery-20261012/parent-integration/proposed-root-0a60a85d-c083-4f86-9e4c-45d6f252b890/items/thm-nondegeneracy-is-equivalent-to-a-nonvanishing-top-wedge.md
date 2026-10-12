@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nondegeneracy-is-equivalent-to-a-nonvanishing-top-wedge.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-normalization-lowers-arithmetic-genus-delta.md

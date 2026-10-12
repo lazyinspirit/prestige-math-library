@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-reduced-kronecker-support-satisfies-size-triangle-inequalities.md

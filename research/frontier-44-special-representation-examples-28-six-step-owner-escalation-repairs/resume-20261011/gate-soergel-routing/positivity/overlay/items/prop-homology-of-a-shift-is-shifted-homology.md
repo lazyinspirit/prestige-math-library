@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-homology-of-a-shift-is-shifted-homology.md

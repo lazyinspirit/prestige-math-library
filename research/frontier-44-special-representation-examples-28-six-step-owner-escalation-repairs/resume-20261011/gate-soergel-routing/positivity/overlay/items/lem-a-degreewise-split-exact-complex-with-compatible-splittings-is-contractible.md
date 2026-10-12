@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-degreewise-split-exact-complex-with-compatible-splittings-is-contractible.md

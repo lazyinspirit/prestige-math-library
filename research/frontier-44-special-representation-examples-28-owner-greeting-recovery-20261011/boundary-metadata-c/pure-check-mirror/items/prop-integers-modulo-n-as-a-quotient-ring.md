@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-integers-modulo-n-as-a-quotient-ring.md

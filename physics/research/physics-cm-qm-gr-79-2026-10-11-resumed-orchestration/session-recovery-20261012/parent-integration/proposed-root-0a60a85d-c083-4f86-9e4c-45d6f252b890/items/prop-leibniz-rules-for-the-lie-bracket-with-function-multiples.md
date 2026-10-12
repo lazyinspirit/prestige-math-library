@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-leibniz-rules-for-the-lie-bracket-with-function-multiples.md

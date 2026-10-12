@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-regular-foliations-and-integrable-distributions-correspond.md

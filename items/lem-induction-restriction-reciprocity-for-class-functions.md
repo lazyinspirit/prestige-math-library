@@ -60,10 +60,8 @@ $$\bigl\langle\operatorname{Ind}_H^G\theta,\ \psi\bigr\rangle_G =\bigl\langle\th
 
 2.1 By the linearity of induction in [F1], $\operatorname{Ind}_H^G\theta=\sum_i a_i\operatorname{Ind}_H^G\varphi_i$, and the functions $\operatorname{Ind}_H^G\varphi_i$ are the honest induced characters of the characters $\varphi_i$; likewise $\operatorname{Res}_H^G\psi=\sum_j b_j\operatorname{Res}_H^G\chi_j$. [F1, step 1.1]
 
-3.1 The inner product is linear in the first argument and conjugate-linear in the second, by [F3] on $G$ and on $H$ respectively, so bilinearity and the expansions of step 2.1 give
-$\langle\operatorname{Ind}_H^G\theta,\psi\rangle_G=\sum_{i,j}a_i\overline{b_j}\langle\operatorname{Ind}_H^G\varphi_i,\chi_j\rangle_G$ and
-$\langle\theta,\operatorname{Res}_H^G\psi\rangle_H=\sum_{i,j}a_i\overline{b_j}\langle\varphi_i,\operatorname{Res}_H^G\chi_j\rangle_H$. [F3, step 2.1]
+3.1 The inner product is linear in the first argument and conjugate-linear in the second, by [F3] on $G$ and on $H$ respectively, so bilinearity and the expansions of step 2.1 give $\langle\operatorname{Ind}_H^G\theta,\psi\rangle_G=\sum_{i,j}a_i\overline{b_j}\langle\operatorname{Ind}_H^G\varphi_i,\chi_j\rangle_G$ and $\langle\theta,\operatorname{Res}_H^G\psi\rangle_H=\sum_{i,j}a_i\overline{b_j}\langle\varphi_i,\operatorname{Res}_H^G\chi_j\rangle_H$. [F3, step 2.1]
 
 3.2 For every pair of indices $i,j$ the honest-character reciprocity [F4] applies to the character $\varphi_i$ of $H$ and the character $\chi_j$ of $G$, giving $\langle\operatorname{Ind}_H^G\varphi_i,\chi_j\rangle_G=\langle\varphi_i,\operatorname{Res}_H^G\chi_j\rangle_H$; by step 2.1 the left-hand side is the same as $\langle\operatorname{Ind}_H^G\varphi_i,\chi_j\rangle_G$ computed with the induced class function. [F1, F4, step 2.1]
 
-4.1 Substituting the identities of step 3.2 into the two expansions of step 3.1 makes the sums equal term by term, so $\langle\operatorname{Ind}_H^G\theta,\psi\rangle_G=\langle\theta,\operatorname{Res}_H^G\psi\rangle_H$, as claimed. ∎ [step 3.1, step 3.2]
+4.1 Substituting the identities of step 3.2 into the two expansions of step 3.1 makes the sums equal term by term, so $\langle\operatorname{Ind}_H^G\theta,\psi\rangle_G=\langle\theta,\operatorname{Res}_H^G\psi\rangle_H$, as claimed. ∎ [step 3.1, step 3.2] 

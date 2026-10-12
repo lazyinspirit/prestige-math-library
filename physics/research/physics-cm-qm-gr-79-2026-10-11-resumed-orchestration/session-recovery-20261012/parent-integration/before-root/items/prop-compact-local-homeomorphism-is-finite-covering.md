@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compact-local-homeomorphism-is-finite-covering.md

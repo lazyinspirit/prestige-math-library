@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-arbitrary-product-of-open-sets-is-open.md

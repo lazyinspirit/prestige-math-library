@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-littlewood-internal-product-outer-compatibility.md

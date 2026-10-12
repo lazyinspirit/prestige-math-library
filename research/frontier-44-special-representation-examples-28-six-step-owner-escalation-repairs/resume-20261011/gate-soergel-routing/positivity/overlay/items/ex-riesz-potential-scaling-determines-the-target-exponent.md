@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-riesz-potential-scaling-determines-the-target-exponent.md

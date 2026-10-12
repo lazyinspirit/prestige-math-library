@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-connected-coverings-of-circle-classified-by-nonnegative-integers.md

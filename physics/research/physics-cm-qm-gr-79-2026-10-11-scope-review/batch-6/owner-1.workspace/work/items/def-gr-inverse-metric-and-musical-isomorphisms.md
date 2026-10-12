@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-inverse-metric-and-musical-isomorphisms.md

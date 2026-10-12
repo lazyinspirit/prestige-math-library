@@ -2,11 +2,13 @@
 
 Spliced on 2026-10-04 at the owner’s request, using the mathematics future-track convention. Canonical item arrays remain empty until engine scaffolding and authoring. Preserve every promised claim and source qualification in the linked full designs and inventories. Resolve the exact source dependencies before accepting consumers.
 
-2026-10-11 audit addendum: the assigned prose scaffold was repaired for explicit state/process spaces, rest-frame scope, SI dimensions, primitive and derived quantities, reversible bath/work couplings, and published-only mathematical dependencies. The current audit report and supplier map are in `scaffold-audit-2026-10-11/thermodynamics/`. They pin 77 direct canonical mathematical suppliers and their 2,317-item published prerequisite closure; every selected physics import matches the current canonical item and `math-imports.json` bytes. The historical supplier reports remain unchanged and are not the current status/hash receipt. This addendum preserves the existing proposed item arrays, homes, order and budgets; no production item or canonical plan-spec was created or changed.
+2026-10-11 audit addendum (historical): the assigned prose scaffold was repaired for state/process spaces, rest-frame scope, SI dimensions, primitive/derived quantities and reversible bath/work couplings. Its supplier report and status language are superseded by the 2026-10-12 audit and should not be used as the current eligibility rule or byte receipt.
+
+2026-10-12 audit addendum: the prose scaffold and this track now use a status-neutral source policy. The current root-mathematics supplier set has 77 direct suppliers and a 2,317-item, 13,785-edge prerequisite closure; the closure happens to be all published at this inspection, with current originals, pinned Physics imports and `math-imports.json` agreeing byte-for-byte. The selected Physics-supplier branch also inspects and uses relevant `draft` contracts from NRQM; status alone neither selects nor excludes a result and does not certify its proof. Exact contracts, hypotheses, proof reviews, dependency closures, inspected hashes and consumer mappings are in `scaffold-audit-2026-10-12/thermodynamics/supplier-map.json`, whose file paths resolve from the physics workspace root (`physics/`). Read ranges and source limits are in its `source-reading.json`; cross-framework holds and integration requests are in its `report.md` and `integration-changes.json`. The scaffold's current SHA-256 is recorded in the audit report after the final prose revision. Existing page homes, sequence and reserved caps remain the design baseline; root performs any shared inventory/metadata integration after this audit.
 
 Read these complete required sources before drift review or scaffolding:
 
-- `research/first-principles-2026-10-03/thermodynamics/scaffold/prose-scaffold.md` (SHA-256 `3d65d214ccd3db944f6d951b309d9f987174b5ddb2de78230f1b9835b79c0fd8`).
+- `research/first-principles-2026-10-03/thermodynamics/scaffold/prose-scaffold.md` (SHA-256 `7a43de23c9d8d1b91696ddacd2bb9654152cebc2f5bb536c01c476a52f792fec`).
 - `research/first-principles-2026-10-03/thermodynamics/baseline-claim-map.json` (SHA-256 fc652c88efa972ae8ef34e820fd27547e7350484a80e62ea23f8371fb96d5131).
 - `research/first-principles-2026-10-03/thermodynamics/closure-ledger.json` (SHA-256 b1dd3cbd1901c3909697ef06f372ac38bcd4e07d200df34105f407185c4bb12a).
 
@@ -253,16 +255,20 @@ Original reservation (read together with the full required sources above):
     "pthm-td-invariant-regular-microcanonical-shell",
     "pthm-td-lattice-bulk-pressure",
     "pthm-td-measurable-canonical-identities",
+    "pthm-td-finite-quantum-free-energy-minimum",
+    "pthm-td-finite-mode-occupation-and-trace-formulas",
     "pthm-td-qualified-discrete-quantum-dephasing",
     "rem-td-ensemble-limit-hypotheses"
   ],
-  "named_A_count": 16,
+  "named_A_count": 18,
   "A_reserved_item_cap": 32,
-  "B_reserved_item_cap": 18,
+  "B_reserved_item_cap": 21,
   "hard_cap_each_page": 100,
   "production_items_created": false
 }
 ```
+
+2026-10-12 supplier binding for TD8 and TD9: the finite-quantum A-page proofs may use the following Physics-library contracts at their current `draft` status, under the exact hypotheses recorded in the audit supplier map: adopted preparation `post-nrqm-many-body-canonical-equilibrium-ensemble`; definition `def-nrqm-many-body-framework-entropy-and-free-energy`; theorem `thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum`; conditional characterization `pthm-nrqm-many-body-thermal-equilibrium-characterization`; occupation result `pthm-nrqm-many-body-thermal-occupation-predictions`; single-mode trace result `thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace`; two-level formula lemma `lem-nrqm-many-body-two-level-thermal-formulas`; and unitary entropy result `pthm-nrqm-many-body-unitary-evolution-preserves-entropy`. Proposed TD8 A consumers are `pthm-td-finite-quantum-free-energy-minimum` and `pthm-td-finite-mode-occupation-and-trace-formulas`; proposed TD9 A consumer `pthm-td-unitary-entropy-invariance` must state that unitary invariance does not establish canonical preparation, bath relaxation or thermalization. The inspected NRQM finite-mode, two-site, no-automatic-equilibration, infinite-identical-mode-divergence and no-thermalization examples are B-leaf context/comparisons only. No Thermodynamics A or B proof may depend on an NRQM B-leaf item. Each proposed Thermodynamics B example (`ex-td-finite-mode-thermal-ensemble`, `ex-td-two-site-thermal-ensemble`, `ex-td-infinite-mode-trace-divergence`, `ex-td-no-automatic-equilibration`, `ex-td-two-site-no-thermalization`) must state its model and calculate its claims locally from the named A-page assumptions/results; the external NRQM leaf is not a proof premise or prerequisite. These are research inventory adjustments for root review, not production item creation or certification. TD8 has 18 named A reservations against its 32-item cap and a 21-item B budget; TD9 has 6 named A reservations against its 14-item cap and an 11-item B budget. Each remains below the 100-item page limit, subject to root's shared-inventory validation.
 
 ## Irreversible Boundaries
 
@@ -282,11 +288,12 @@ Original reservation (read together with the full required sources above):
     "rem-td-empirical-evidence-contract",
     "rem-td-fluctuation-model-hypotheses",
     "rem-td-local-equilibrium-branch",
+    "pthm-td-unitary-entropy-invariance",
     "rem-td-transport-branch"
   ],
-  "named_A_count": 5,
+  "named_A_count": 6,
   "A_reserved_item_cap": 14,
-  "B_reserved_item_cap": 8,
+  "B_reserved_item_cap": 11,
   "hard_cap_each_page": 100,
   "production_items_created": false
 }

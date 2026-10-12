@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-riemannian-distance-with-no-cross-component-finite-value.md

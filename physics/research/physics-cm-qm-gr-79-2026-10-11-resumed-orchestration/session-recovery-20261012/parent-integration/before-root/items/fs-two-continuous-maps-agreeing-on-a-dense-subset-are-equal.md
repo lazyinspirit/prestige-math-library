@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-two-continuous-maps-agreeing-on-a-dense-subset-are-equal.md

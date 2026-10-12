@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-logarithmic-capacity-of-a-real-interval.md

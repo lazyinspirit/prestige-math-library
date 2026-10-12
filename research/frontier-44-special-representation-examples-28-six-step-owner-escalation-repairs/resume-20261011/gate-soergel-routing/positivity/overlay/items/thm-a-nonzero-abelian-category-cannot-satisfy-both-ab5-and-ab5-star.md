@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-nonzero-abelian-category-cannot-satisfy-both-ab5-and-ab5-star.md

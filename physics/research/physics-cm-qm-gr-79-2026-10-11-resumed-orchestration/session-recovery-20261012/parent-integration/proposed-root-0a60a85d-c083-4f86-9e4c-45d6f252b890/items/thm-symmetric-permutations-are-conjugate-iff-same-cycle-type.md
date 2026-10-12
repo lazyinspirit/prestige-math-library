@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symmetric-permutations-are-conjugate-iff-same-cycle-type.md

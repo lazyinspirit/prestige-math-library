@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quadratic-tower-characterization-of-algebraic-constructibility.md

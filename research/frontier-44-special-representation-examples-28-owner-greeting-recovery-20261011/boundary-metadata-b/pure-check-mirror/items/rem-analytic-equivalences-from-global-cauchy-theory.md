@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-analytic-equivalences-from-global-cauchy-theory.md

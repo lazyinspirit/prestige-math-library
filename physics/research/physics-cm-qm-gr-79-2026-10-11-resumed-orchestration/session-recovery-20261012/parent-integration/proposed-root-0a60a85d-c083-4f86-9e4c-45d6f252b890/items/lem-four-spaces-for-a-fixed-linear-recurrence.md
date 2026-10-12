@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-four-spaces-for-a-fixed-linear-recurrence.md

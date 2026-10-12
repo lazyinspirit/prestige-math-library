@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-v-shaped-path-is-rectifiable-but-not-c1.md

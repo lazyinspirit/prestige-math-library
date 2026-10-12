@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-simple-lie-algebra-viewed-as-a-real-simple-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-unitary-dual-to-primitive-ideal-map-is-continuous-and-surjective.md

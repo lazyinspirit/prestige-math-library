@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-h0-projective-space-o-d-homogeneous-polynomials.md

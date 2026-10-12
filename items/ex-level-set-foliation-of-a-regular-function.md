@@ -44,11 +44,9 @@ they form a regular foliation of the punctured plane.
 
 **Proof technique:** direct.
 
-1.1 On the punctured plane, the differential $df$ is never zero, so $f$ is a [given]
-submersion to $(0,\infty)$. [given]
+1.1 On the punctured plane, the differential $df$ is never zero, so $f$ is a [given] submersion to $(0,\infty)$. [given]
 
-1.2 Therefore $\ker df$ is an integrable line distribution, and its leaves are [given]
-the connected components of the level sets $x^2 + y^2 = c$. Those components are exactly the circles of radius $\sqrt c$. [given]
+1.2 Therefore $\ker df$ is an integrable line distribution, and its leaves are [given] the connected components of the level sets $x^2 + y^2 = c$. Those components are exactly the circles of radius $\sqrt c$. [given]
 
-1.3 The correspondence between integrable distributions and regular foliations [given]
-turns this family of circles into a regular foliation of $\mathbb R^2 \setminus \{0\}$. [given] ∎
+2.1 The correspondence between integrable distributions and regular foliations [given] turns this family of circles into a regular foliation of $\mathbb R^2 \setminus \{0\}$. [given] ∎
+

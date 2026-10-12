@@ -53,17 +53,14 @@ $$ \sum_{i=1}^n a_ib_{ij}=0\quad\text{for every }j. $$
 
 **Proof technique:** direct.
 
-
-1.1 Assume $M$ is flat, and let $I=(a_1,\ldots,a_n)\subseteq R$. The surjection $\pi:R^n\to I$ sending $e_i$ to $a_i$ has kernel $K$. Tensoring the exact sequence $$ K\longrightarrow R^n \xrightarrow{\pi} I\longrightarrow 0 $$ with $M$ remains exact by [L1]. [L1, given, algebra]
+ 1.1 Assume $M$ is flat, and let $I=(a_1,\ldots,a_n)\subseteq R$. The surjection $\pi:R^n\to I$ sending $e_i$ to $a_i$ has kernel $K$. Tensoring the exact sequence $$ K\longrightarrow R^n \xrightarrow{\pi} I\longrightarrow 0 $$ with $M$ remains exact by [L1]. [L1, given, algebra]
 
 1.2 Conversely, assume the stated relation-lifting property. To prove flatness it is enough by [L3] to show that for every finitely generated ideal $I=(a_1,\ldots,a_n)$, the multiplication map $I\otimes_R M\to M$ is injective. Take an element $\sum_{i=1}^n a_i\otimes x_i$ in its kernel, so $\sum_i a_ix_i=0$. By the relation-lifting property, $x_i=\sum_j b_{ij}y_j$ and $\sum_i a_ib_{ij}=0$ for every $j$. Then $$ \sum_i a_i\otimes x_i =\sum_j \left(\sum_i a_ib_{ij}\right)\otimes y_j =0 $$ in $I\otimes_R M$. Hence the map is injective. [L3, given, algebra]
 
 1.3 The ideal-injection criterion [L3] now shows that $M$ is flat. [L3]
 
-
-2.1 The relation $\sum_{i=1}^n a_ix_i=0$ says exactly that the tensor $\eta=\sum_i a_i\otimes x_i\in I\otimes_R M$ maps to $0$ under the multiplication map $I\otimes_R M\to M$. By [L3], that map is injective, so $\eta=0$. Therefore the tensor $$ \widetilde\eta:=\sum_i e_i\otimes x_i\in R^n\otimes_R M $$ lies in the image of $K\otimes_R M\to R^n\otimes_R M$ from step 1.1. [L3, step 1.1, algebra]
+ 2.1 The relation $\sum_{i=1}^n a_ix_i=0$ says exactly that the tensor $\eta=\sum_i a_i\otimes x_i\in I\otimes_R M$ maps to $0$ under the multiplication map $I\otimes_R M\to M$. By [L3], that map is injective, so $\eta=0$. Therefore the tensor $$ \widetilde\eta:=\sum_i e_i\otimes x_i\in R^n\otimes_R M $$ lies in the image of $K\otimes_R M\to R^n\otimes_R M$ from step 1.1. [L3, step 1.1, algebra]
 
 3.1 Write a preimage of $\widetilde\eta$ as a finite sum $\sum_{j=1}^m k_j\otimes y_j$ with $k_j\in K$ and $y_j\in M$. Under the identification $R^n\otimes_R M\cong M^n$ from [L2], if $k_j=(b_{1j},\ldots,b_{nj})$, then comparing coordinates gives $$ x_i=\sum_{j=1}^m b_{ij}y_j\qquad\text{for every }i. $$ Since each $k_j$ lies in $\ker\pi$, one also has $$ \sum_{i=1}^n a_ib_{ij}=0\qquad\text{for every }j. $$ This is the required decomposition. [L2, step 2.1, algebra]
 
-
-4.1 Therefore the equational criterion is equivalent to flatness. [algebra] ∎
+ 4.1 Therefore the equational criterion is equivalent to flatness. [algebra] ∎ 

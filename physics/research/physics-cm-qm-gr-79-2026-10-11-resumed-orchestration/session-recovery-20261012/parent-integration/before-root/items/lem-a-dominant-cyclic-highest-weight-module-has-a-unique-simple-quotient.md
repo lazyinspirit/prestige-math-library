@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient.md

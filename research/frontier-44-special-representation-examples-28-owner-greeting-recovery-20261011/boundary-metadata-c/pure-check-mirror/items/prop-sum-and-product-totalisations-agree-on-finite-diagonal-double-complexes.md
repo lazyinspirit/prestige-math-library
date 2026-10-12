@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes.md

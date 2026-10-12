@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-enveloping-algebra-of-an-abelian-lie-algebra-is-its-symmetric-algebra.md

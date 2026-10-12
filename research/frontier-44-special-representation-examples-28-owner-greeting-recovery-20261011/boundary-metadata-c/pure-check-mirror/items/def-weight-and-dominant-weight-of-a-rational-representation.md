@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-weight-and-dominant-weight-of-a-rational-representation.md

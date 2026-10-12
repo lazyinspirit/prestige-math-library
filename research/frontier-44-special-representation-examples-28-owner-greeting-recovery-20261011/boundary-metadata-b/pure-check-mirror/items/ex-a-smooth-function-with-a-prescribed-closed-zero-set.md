@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-smooth-function-with-a-prescribed-closed-zero-set.md

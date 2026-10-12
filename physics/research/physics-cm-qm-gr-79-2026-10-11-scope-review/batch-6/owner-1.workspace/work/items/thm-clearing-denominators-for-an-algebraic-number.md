@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-clearing-denominators-for-an-algebraic-number.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-galois-orbit-sums-of-split-central-idempotents-descend.md

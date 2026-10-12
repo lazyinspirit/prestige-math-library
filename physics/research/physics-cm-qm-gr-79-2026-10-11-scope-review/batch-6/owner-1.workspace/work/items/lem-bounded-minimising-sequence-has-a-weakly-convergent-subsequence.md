@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-minimising-sequence-has-a-weakly-convergent-subsequence.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-an-underdetermined-system-and-its-minimum-norm-exact-solution.md

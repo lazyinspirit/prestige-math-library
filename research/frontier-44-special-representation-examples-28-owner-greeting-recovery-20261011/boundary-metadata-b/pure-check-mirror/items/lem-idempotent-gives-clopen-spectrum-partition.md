@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-idempotent-gives-clopen-spectrum-partition.md

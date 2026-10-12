@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hessian-of-distance-in-terms-of-radial-jacobi-fields.md

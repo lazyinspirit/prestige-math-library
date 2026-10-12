@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-gaussian-integral-is-finite-and-positive.md

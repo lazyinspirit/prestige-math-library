@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf.md

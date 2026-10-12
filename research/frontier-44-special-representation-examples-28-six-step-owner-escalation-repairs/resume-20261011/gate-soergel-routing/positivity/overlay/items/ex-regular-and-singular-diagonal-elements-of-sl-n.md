@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-regular-and-singular-diagonal-elements-of-sl-n.md

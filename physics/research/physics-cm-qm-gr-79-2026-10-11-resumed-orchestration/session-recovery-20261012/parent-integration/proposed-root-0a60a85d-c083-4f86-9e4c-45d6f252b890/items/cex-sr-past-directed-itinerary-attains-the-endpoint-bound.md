@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-past-directed-itinerary-attains-the-endpoint-bound.md

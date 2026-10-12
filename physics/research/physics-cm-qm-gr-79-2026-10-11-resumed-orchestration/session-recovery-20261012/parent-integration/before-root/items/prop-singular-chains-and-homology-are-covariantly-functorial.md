@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-singular-chains-and-homology-are-covariantly-functorial.md

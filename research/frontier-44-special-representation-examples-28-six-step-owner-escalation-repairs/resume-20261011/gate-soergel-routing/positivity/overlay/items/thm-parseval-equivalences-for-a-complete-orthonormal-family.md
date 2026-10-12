@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-parseval-equivalences-for-a-complete-orthonormal-family.md

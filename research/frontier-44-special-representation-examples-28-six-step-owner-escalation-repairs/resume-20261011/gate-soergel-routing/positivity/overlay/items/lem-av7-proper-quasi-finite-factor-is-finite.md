@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-av7-proper-quasi-finite-factor-is-finite.md

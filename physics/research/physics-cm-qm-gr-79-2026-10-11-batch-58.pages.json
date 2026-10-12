@@ -1,0 +1,912 @@
+[
+  {
+    "order": 195,
+    "id": "qm-central-potentials-and-hydrogen",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Central Potentials And Hydrogen",
+    "companion": "qm-central-potentials-and-hydrogen-examples",
+    "requires": [
+      "qm-composites-entanglement-and-reduced-states",
+      "qm-math-coulomb",
+      "qm-one-dimensional-potentials",
+      "qm-math-composites",
+      "qm-framework-and-quantities",
+      "qm-massive-particle-kinematics",
+      "qm-observables-and-born-probabilities",
+      "qm-state-geometry",
+      "qm-autonomous-dynamics",
+      "qm-math-orbital-and-spin"
+    ],
+    "items": [
+      {
+        "id": "lem-nrqm-central-exponential-moments",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Moments of the exponential law on the half-line",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), the choice\nhypothesis used by the change-of-variables lemma cited below. For every real\n$\\lambda>0$ and every integer $k\\ge0$ the function $r\\mapsto r^{k}e^{-\\lambda\nr}$ is Lebesgue integrable on $(0,\\infty)$ and\n\n$$\\int_0^\\infty r^{k}e^{-\\lambda r}\\,dr=\\frac{k!}{\\lambda^{k+1}}.$$\n\nThe assertion is an identity for the Lebesgue integral of a nonnegative Borel\nfunction; no probabilistic interpretation and no normalised density are\nasserted. In particular no statement is made about any other exponent, about\ncomplex $\\lambda$, or about negative powers.",
+        "strategy": "direct",
+        "deps": [
+          "def-real-gamma-function-by-the-euler-integral",
+          "cor-real-gamma-positive-integer-values",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-real-gamma-function-by-the-euler-integral": "mathematical-premise",
+          "cor-real-gamma-positive-integer-values": "mathematical-premise",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.4 pp. 229-235 (evaluation of the Laguerre normalisation integrals of the Coulomb eigenfunctions, which reduce to the moments of this lemma)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, §5.2 'Definitions' (the gamma function as an integral, and its values at positive integers: §5.2(i) and the recurrence of §5.5(i))",
+              "url": "https://dlmf.nist.gov/5.2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-central-free-operator-differential-identification",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The three-dimensional free Schrödinger operator as the weak Laplacian on its Sobolev domain",
+        "statement": "Assume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Let $m,\\hbar>0$, put\n$c:=2\\pi^{2}\\hbar^{2}/m$, and let $H_{0}$ be the free operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b) with $d=3$, this $c$ and $b=0$:\n$$H_{0}:=\\mathcal F_{2}^{*}M_{c|\\xi|^{2}}\\mathcal F_{2},\\qquad D(H_{0}):=\\bigl\\{f\\in L^{2}(\\mathbb R^{3};\\mathbb C):|\\xi|^{2}\\mathcal F_{2}f\\in L^{2}(\\mathbb R^{3};\\mathbb C)\\bigr\\},$$\nwhere $\\mathcal F_{2}$ is the unitary Plancherel transform of that theorem.\nLet $D^{2}_{j}$ denote the second weak partial derivative in the $j$-th\ncoordinate, defined componentwise on the locally integrable classes of\n$\\mathbb R^{3}$ ([[def-weak-derivative-of-a-locally-integrable-function]]),\nwrite $\\Delta_{w}:=D^{2}_{1}+D^{2}_{2}+D^{2}_{3}$ for the weak Laplacian\n(defined on the classes whose three second weak partial derivatives lie in\n$L^{2}$), and let $W^{2,2}(\\mathbb R^{3};\\mathbb C)$ be the Sobolev space\n([[def-sobolev-space-wkp-and-its-norm]]). Then:\n\n(a) $D(H_{0})=W^{2,2}(\\mathbb R^{3};\\mathbb C)$ as sets and\n$$H_{0}f=-\\frac{\\hbar^{2}}{2m}\\,\\Delta_{w}f\\qquad\\text{for every }f\\in D(H_{0});$$\nequivalently, $\\mathcal F_{2}(H_{0}f)(\\xi)=c|\\xi|^{2}\\mathcal F_{2}f(\\xi)$ and\n$\\mathcal F_{2}\\bigl(-\\tfrac{\\hbar^{2}}{2m}\\Delta_{w}f\\bigr)(\\xi)=c|\\xi|^{2}\\mathcal F_{2}f(\\xi)$\nfor almost every $\\xi$, and the two $L^{2}$ classes agree.\n\n(b) For every real bounded measurable $V:\\mathbb R^{3}\\to\\mathbb R$, the\noperator $H_{0}+M_{V}$ of clause (c) of the cited theorem, with domain\n$D(H_{0})$, coincides with the operator $f\\mapsto-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f+Vf$\non the same domain; in particular, for $E\\in\\mathbb R$ and\n$\\psi\\in W^{2,2}(\\mathbb R^{3};\\mathbb C)$ the eigenvalue equation\n$(H_{0}+M_{V})\\psi=E\\psi$ is equivalent to the weak equation\n$-\\frac{\\hbar^{2}}{2m}\\Delta_{w}\\psi+V\\psi=E\\psi$ elementwise in\n$L^{2}(\\mathbb R^{3};\\mathbb C)$.\n\nThe statement identifies operators on the same domain; it asserts neither\nsmoothness of the classes in $W^{2,2}$ nor any physical interpretation.",
+        "strategy": "direct",
+        "deps": [
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+          "thm-plancherel",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers": "mathematical-premise",
+          "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Theorem 7.8, printed page 168 (the free Schrödinger operator and its domain), and Section 10.1, printed pages 221-222 (the weak Laplacian of the hydrogen Hamiltonian)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.2, printed pages 104-105 (the three-dimensional Schrödinger equation with a central potential and its spherical Laplacian)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-central-framework-central-potential-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The declared central-potential model: state space, assigned energy operator, spherical reading and bound-state vocabulary",
+        "statement": "**(a) Framework data.** Adopt the state and composition postulate P1, the\nobservable and probability postulate P2, the autonomous-dynamics postulate P4,\nthe kinematics and massive-particle model postulate P5, the identical-particle\nand spin postulate P6, and the preparation and apparatus discipline P7\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[post-nrqm-framework-identical-particles-and-spin]],\n[[post-nrqm-framework-preparation-and-apparatus]]). Fix a mass parameter\n$m>0$ and a spin label $s=0$, so that the framework's one-particle model\n[[def-nrqm-kinematics-framework-massive-spin-s-model]] reads its state space as\n$H_{0}=L^{2}(\\mathbb R^{3};\\mathbb C)$ with the pairing linear in the first\nargument, its componentwise position family $Q_{1},Q_{2},Q_{3}$, its\ncomponentwise momentum family $P_{1},P_{2},P_{3}$ and the action constant\n$\\hbar>0$; the spin-zero internal factor carries the trivial representation of\nP6. Units are those of [[def-nrqm-framework-quantities-and-units]]: position is\nread in metres, momentum in $\\mathrm{kg\\,m\\,s^{-1}}$, energy and potential\nenergy in joules, and $\\hbar$ in $\\mathrm{J\\,s}$. Assume the Axiom of\nCountable Choice and the Axiom of Choice as the choice hypotheses of the cited\nmathematical suppliers ([[def-countable-choice]], [[def-axiom-of-choice]]).\n\n**(b) The declared central-potential model.** As an additional model\nassumption of the pair, adopt the **central-potential model**. Its declared\nstate space is $H_{0}=L^{2}(\\mathbb R^{3};\\mathbb C)$ of clause (a), with the\nposition and momentum families $Q_{j}$, $P_{k}$ of that clause\n([[def-nrqm-kinematics-framework-massive-spin-s-model]]). A **declared central\npotential** of the model is a function $V:\\mathbb R^{3}\\to\\mathbb R$ of the\nform $V(x):=v(|x|)$ for $x\\ne0$, where $v:(0,\\infty)\\to\\mathbb R$ is real,\nbounded and measurable and $\\|V\\|_{\\infty}:=\\|v\\|_{\\infty}=\\sup_{r>0}|v(r)|$ is\nfinite; the assignment $V(0):=0$ is a declared convention that does not affect\nthe $L^{2}$ theory. The potential energy is read in joules. The model declares\nthe **Born position law** of the framework for a unit class $\\psi$,\n$$\\mu^{G}_{\\psi}(B):=\\int_{B}|\\psi(x)|^{2}\\,dx\\qquad(B\\subseteq\\mathbb R^{3}\\ \\text{Borel}),$$\nthe spin-zero reading of clause (b) of\n[[pthm-nrqm-kinematics-spin-s-outcome-laws]]. The pair asserts no derivation\nof a central force law from $H_{0}$ or from P5: the restriction to a declared\ncentral potential is an assumption of the model, and an assignment of a\nconcrete material system to the model is an identification in the sense of\nclause (iii) of P7 and carries the corresponding uncertainty.\n\n**(c) The assigned energy operator.** Let $\\mathcal F_{2}$ be the unitary\nPlancherel transform of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b), $c:=2\\pi^{2}\\hbar^{2}/m$, and let\n$$H_{0}^{\\mathrm{free}}:=\\mathcal F_{2}^{*}M_{c|\\xi|^{2}}\\mathcal F_{2},\\qquad D(H_{0}^{\\mathrm{free}}):=\\bigl\\{f\\in H_{0}:|\\xi|^{2}\\mathcal F_{2}f\\in H_{0}\\bigr\\}$$\nbe the free operator of that clause with $d=3$ and $b=0$. With $M_{V}$ the\nbounded multiplication operator of clause (a) of the same theorem, the\n**assigned energy operator** of the model with central potential $V$ is\n$$H_{V}:=H_{0}^{\\mathrm{free}}+M_{V},\\qquad D(H_{V}):=D(H_{0}^{\\mathrm{free}}).$$\nThe declared energy unit is the joule. By clause (c) of the cited theorem\n$H_{V}$ is self-adjoint on $D(H_{V})$, bounded below by $-\\|V\\|_{\\infty}$; by\n[[lem-nrqm-central-free-operator-differential-identification]] the domain is\nthe Sobolev space $W^{2,2}(\\mathbb R^{3};\\mathbb C)$ and\n$$H_{V}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f+Vf\\qquad(f\\in D(H_{V})),$$\n$\\Delta_{w}=D_{1}^{2}+D_{2}^{2}+D_{3}^{2}$ the weak Laplacian of that lemma. If\n$\\psi\\in D(H_{V})\\setminus\\{0\\}$ and $E\\in\\mathbb R$ satisfy\n$H_{V}\\psi=E\\psi$, the time-independent equation\n$-\\frac{\\hbar^{2}}{2m}\\Delta_{w}\\psi+V\\psi=E\\psi$ is an equality in\n$L^{2}(\\mathbb R^{3};\\mathbb C)$ and hence in distributions; it is a partial\ndifferential equation in the three spatial variables. If $V\\in C^{2}(\\Omega)$\non an open set $\\Omega\\subseteq\\mathbb R^{3}$, then the class $\\psi$ has a\nrepresentative in $C^{2,\\alpha}_{\\mathrm{loc}}(\\Omega)$ for every\n$0<\\alpha<1/2$, and the equation holds pointwise there. To justify this,\nwrite $f:=(2m/\\hbar^{2})(E-V)\\psi$, so $-\\Delta\\psi=f$ in distributions.\nOn every relatively compact open subset of $\\Omega$, the weak product rule\n(obtained by local smooth mollification of the $C^{2}$ factor and passage to\nthe $L^{2}$ limit) gives, for every multi-index $\\beta$ with $|\\beta|\\le2$,\n$$D^{\\beta}f=\\frac{2m}{\\hbar^{2}}\\sum_{\\eta\\le\\beta}\\binom{\\beta}{\\eta}D^{\\eta}(E-V)D^{\\beta-\\eta}\\psi\\in L^{2};$$\nthe factors $D^{\\eta}(E-V)$ are bounded on compact subsets and\n$\\psi\\in W^{2,2}(\\mathbb R^{3})$, so $f\\in H^{2}_{\\mathrm{loc}}(\\Omega)$.\nIntegration by parts against compactly supported smooth test functions makes\n$\\psi\\in H^{1}(\\Omega)$ a local weak solution in the sense of\n[[def-local-weak-solution-for-a-divergence-form-operator]] for\n$L=-D_i(\\delta_{ij}D_j)=-\\Delta$, whose divergence coefficients are\n$a^{ij}=\\delta_{ij}$ and $b^{i}=c=0$. They satisfy the uniform ellipticity\ncondition of [[def-uniformly-elliptic-divergence-form-operator]] with\n$\\theta=1$ and have the required local coefficient derivatives of every\norder. The interior regularity theorem\n[[thm-interior-h-k-plus-two-elliptic-regularity]] with $k=2$ therefore gives\n$\\psi\\in H^{4}_{\\mathrm{loc}}(\\Omega)$. Every ball compactly contained in\n$\\Omega$ is a bounded smooth domain and hence a $W^{4,2}$ extension domain by\n[[thm-extension-theorem-for-bounded-smooth-domains]]. The higher-order Sobolev\nembedding [[thm-higher-order-sobolev-embedding]] with $n=3$, $k=4$, $p=2$\nthen gives a representative with continuous derivatives through order two and\nlocally Hölder-continuous second derivatives of every exponent\n$0<\\alpha<1/2$; this is the meaning of\n$C^{2,\\alpha}_{\\mathrm{loc}}(\\Omega)$ here. These representatives agree on\noverlaps because they are continuous and represent the same almost-everywhere\nclass. Both sides of the equation are then continuous and agree almost\neverywhere, so they agree pointwise. The model adopts\n$(H_{V},\\mathrm J)$ as its declared energy observable; its self-adjointness is\nthe cited theorem's, and no further spectral property is presupposed here.\n\n**(d) The declared spherical reading.** Let $U$ be the unitary of\n[[thm-nrqm-coulomb-angular-radial-unitary-reduction]] from\n$H_{0}$ onto $K=\\bigoplus_{(l,m)}L^{2}((0,\\infty),dr;\\mathbb C)$, written\n$U\\psi=(u_{lm})_{l\\ge0,-l\\le m\\le l}$, and let $(Y_{lm})$ be the complete\northonormal family of that theorem. As an additional reading of the model, the\npair declares the **spherical sector** $(l,m)$ and the **effective potential**\n$$v^{\\mathrm{eff}}_{l}(r):=v(r)+\\frac{\\hbar^{2}l(l+1)}{2mr^{2}}\\qquad(r>0),$$\nwhose second summand is called the **angular-momentum barrier**; both\nsummands, and $v^{\\mathrm{eff}}_{l}$, are read in joules. The model's\n**declared radial equation** in the sector $(l,m)$ is the eigenvalue equation\nfor the one-dimensional expression\n$$u\\longmapsto-\\frac{\\hbar^{2}}{2m}u''+\\Bigl(v(r)+\\frac{\\hbar^{2}l(l+1)}{2mr^{2}}\\Bigr)u,\\qquad u:(0,\\infty)\\to\\mathbb C,$$\nrestricted to declared admissible classes (for instance $u\\in\nC_{c}^{\\infty}((0,\\infty))$). The pair does not presuppose that the assigned\nenergy operator of clause (c) literally reduces to this expression; the\nconsistency of the two readings on smooth states is the content of the\nspherical-reduction theorem of this page, which is proved from the cited\nmathematics. The angular-momentum quantum numbers $l$ and $m$\nappearing in the reading are labels of the orthonormal family $(Y_{lm})$; the\nidentification of $l$ with a total angular momentum of a material system is a\nseparate assignment of the framework's angular-momentum items and is not made\nhere.\n\n**(e) Stationary and bound-state vocabulary.** A **stationary vector** of the\nmodel with potential $V$ and **energy** $E\\in\\mathbb R$ is a nonzero class\n$\\psi\\in D(H_{V})$ with $H_{V}\\psi=E\\psi$; the pair $(\\psi,E)$ is an\n**eigenpair** of the model. A **bound state** of the model is a stationary\nvector with energy $E<0$ whose representative is normalised, $\\|\\psi\\|=1$; its\neigenvalue is its **binding energy**, read in joules, and the value $0$ is\ncalled the **continuum threshold** of the model. The model reads the energy\noutcome law of the pure preparation of a unit eigenvector with eigenvalue $E$\nas the point mass $\\delta_{E}$, the reading of clause (c) of\n[[def-nrqm-observables-framework-observable-and-outcome-law]], and the\nposition density of that preparation as $|\\psi|^{2}$ by clause (b). These are\ndeclarations of the model under P2; they construct no sample, detector or\nmeasured value, and they assert no stability, decay or formation claim.\n\n**(f) Status and scope.** Clauses (a)-(e) fix the data of the pair: a declared\nstate space, position and momentum assignments, an assigned energy operator\nfor a real bounded measurable central potential, a declared spherical reading\nwith its effective potential and radial equation, and a stationary-state and\nbound-state vocabulary. They introduce no assumption beyond P1, P2, P4, P5,\nP6, P7 and the cited mathematics; in particular the central form of the\npotential, the model's use of the full three-dimensional space as its state\nspace and the identification of the spherical sectors with angular-momentum\nlabels are declarations of the pair. The model excludes from its scope, until\ntheir own items introduce them: the Coulomb potential $\\propto-1/r$ and other\nunbounded or singular potentials; spin and magnetic couplings; relativistic\ncorrections; finite nuclear size; the radiation extension, spontaneous\nemission and radiation reaction; external electromagnetic fields; and any\nmany-body or shielding modification of a central potential. No numerical value\nof $m$, $\\hbar$ or of any potential is fixed here, and no empirical result is\nasserted.",
+        "strategy": "n/a",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "lem-nrqm-central-free-operator-differential-identification",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "thm-interior-h-k-plus-two-elliptic-regularity",
+          "thm-higher-order-sobolev-embedding",
+          "thm-extension-theorem-for-bounded-smooth-domains",
+          "def-uniformly-elliptic-divergence-form-operator",
+          "def-local-weak-solution-for-a-divergence-form-operator",
+          "def-hk-and-hk-zero-notation",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "lem-nrqm-central-free-operator-differential-identification": "mathematical-premise",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction": "mathematical-premise",
+          "thm-interior-h-k-plus-two-elliptic-regularity": "mathematical-premise",
+          "thm-higher-order-sobolev-embedding": "mathematical-premise",
+          "thm-extension-theorem-for-bounded-smooth-domains": "mathematical-premise",
+          "def-uniformly-elliptic-divergence-form-operator": "mathematical-premise",
+          "def-local-weak-solution-for-a-divergence-form-operator": "mathematical-premise",
+          "def-hk-and-hk-zero-notation": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.2, printed pages 104-110 (central potentials, the radial equation, the effective potential, the boundary condition at the origin and three-dimensional bound states) and Section 4.3, printed pages 111-114 (the hydrogen atom)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 182-189 (the gross-structure model of a hydrogen-like ion, the effective potential and the radial Hamiltonian)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.1 printed pages 221-222 (Schrödinger operators with singular potentials on H^2) and Section 10.2 printed pages 222-225 (spherical coordinates and separation)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. K. Hunter, Notes on Partial Differential Equations, Section 4.11, Theorem 4.28, printed page 114 (higher interior Sobolev regularity and the C^2 consequence when k>n/2)",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The pair's declared central-potential model for one spinless massive particle: its state space, its position and momentum assignments, its assigned energy operator for a real bounded measurable central potential, its declared spherical angular-radial reading and effective potential, and its stationary-state, bound-state and continuum-threshold vocabulary. The model is an additional assumption of the pair, not a derivation from the three-dimensional massive-particle model P5; the Coulomb and other unbounded or singular potentials, spin, relativistic and radiative corrections, finite nuclear size and external fields are excluded and are introduced only by their own later items. No identification of a concrete material system with the model, no empirical value and no measured energy are asserted."
+      },
+      {
+        "id": "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The declared central-potential model: spherical reduction of smooth compactly supported radial states",
+        "statement": "Adopt the state and composition postulate P1, the observable and probability\npostulate P2, the autonomous-dynamics postulate P4 and the kinematics and\nmassive-particle model postulate P5, read through the declared\ncentral-potential model of\n[[def-nrqm-central-framework-central-potential-model]] with mass parameter\n$m>0$, spin label $s=0$, a real bounded measurable central potential\n$V(x)=v(|x|)$ and assigned energy operator $H_{V}$\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]],\n[[def-nrqm-autonomous-dynamics-framework-evolution]]). Assume the Axiom of\nCountable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Let $l\\ge0$, $-l\\le \\bar m\\le l$, let\n$u\\in C_{c}^{\\infty}((0,\\infty);\\mathbb C)$, and define\n$$\\psi(x):=\\frac{u(r)}{r}Y_{l\\bar m}(\\Omega)\\qquad(x=r\\Omega,\\ r=|x|>0),$$\nwith $(Y_{lm})$ the complete orthonormal family and $U$ the unitary of\n[[thm-nrqm-coulomb-angular-radial-unitary-reduction]]. Then:\n\n(a) $\\psi$ lies in $C_{c}^{\\infty}(\\mathbb R^{3}\\setminus\\{0\\})\\subseteq\nH^{2}(\\mathbb R^{3};\\mathbb C)=D(H_{V})$, its image under $U$ is the\nfinite-support vector whose only potentially nonzero entry is the $(l,\\bar m)$-entry $u$,\nand $B\\mapsto\\int_B|\\psi|^2dx$ is its position quadratic measure. For $u\\not\\equiv0$, the unit vector $\\widehat\\psi:=\\psi/\\|\\psi\\|$ represents its pure preparation and has position outcome law\n$$\\mu^G_{\\widehat\\psi}(B)=\\|\\psi\\|^{-2}\\int_B|\\psi|^2dx;$$\n\n(b) for almost every $x\\in\\mathbb R^{3}\\setminus\\{0\\}$,\n$$H_{V}\\psi(x)=\\frac{1}{r}\\Bigl[-\\frac{\\hbar^{2}}{2m}u''(r)+\\Bigl(v(r)+\\frac{\\hbar^{2}l(l+1)}{2mr^{2}}\\Bigr)u(r)\\Bigr]Y_{l\\bar m}(\\Omega),$$\nthe two sides being equal as $L^{2}(\\mathbb R^{3};\\mathbb C)$ classes; thus\nthe model's assigned energy acts on the smooth spherical sector by the\ndeclared radial differential expression with effective potential\n$v^{\\mathrm{eff}}_{l}(r)=v(r)+\\frac{\\hbar^{2}l(l+1)}{2mr^{2}}$;\n\n(c) if $E\\in\\mathbb R$ and $u$ satisfies the declared radial equation\n$$-\\frac{\\hbar^{2}}{2m}u''(r)+\\Bigl(v(r)+\\frac{\\hbar^{2}l(l+1)}{2mr^{2}}\\Bigr)u(r)=Eu(r)\\qquad(0<r<\\infty)$$\npointwise on $(0,\\infty)$, then $H_{V}\\psi=E\\psi$, when $u\\not\\equiv0$, $\\psi$ is a nonzero stationary vector of the model with energy $E$ and the pure preparation $[\\psi]$ is stationary, every assigned sharp observable having a time-independent outcome law in it. For $u=0$, only the linear identity $H_V0=E0$ is asserted and no pure preparation is assigned;\n\n(d) for every $u\\in C_c^\\infty((0,\\infty);\\mathbb C)$, including $u=0$,\nthe radial equation\n$$-\\frac{\\hbar^2}{2m}u^{\\prime\\prime}(r)+\\Bigl(v(r)+\\frac{\\hbar^2l(l+1)}{2mr^2}\\Bigr)u(r)=Eu(r)$$\nholds for almost every $r>0$ if and only if $H_V\\psi=E\\psi$ as Hilbert-space vectors. If $v$ is continuous on $(0,\\infty)$, this radial equality is also equivalent to its pointwise version. For general measurable $v$, no pointwise converse is asserted.\n\nThe statement is conditional on P1, P2, P4, P5 and the declared model; it\nasserts no converse for general reduced functions, no completeness of any\nfamily of radial solutions, no discrete spectrum, and no measured energy, and\nit does not apply to the Coulomb potential, whose self-adjointness and spectral\ntheory are supplied separately.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-central-potential-model",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "lem-nrqm-central-free-operator-differential-identification",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-central-potential-model": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "lem-nrqm-central-free-operator-differential-identification": "mathematical-premise",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.2, printed pages 104-110 (separation of the three-dimensional central-potential equation into radial and angular parts, the effective potential and the reduced radial equation (4.21))",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 183-185 (the radial Hamiltonian H_l and the effective potential V_eff(r) for a hydrogen-like ion)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.2, printed pages 222-225 (spherical coordinates and the separation of the Coulomb eigenvalue equation)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the declared central-potential model of this pair: a smooth reduced function u compactly supported away from the origin, transported to the three-dimensional vector psi = u(r)Y_lm(Omega)/r of the spherical sector (l,m), lies in the model's energy domain, and the model's assigned energy acts on psi by the declared radial differential expression with the effective potential v(r) + hbar^2 l(l+1)/(2 m r^2); consequently the radial equation holds almost everywhere exactly when the linear operator equation holds on that vector, including the zero vector. A nonzero reduced function alone defines a pure preparation, whose position law is normalized and which is stationary when the radial equation holds. The statement is an exact identity for the declared model and the cited mathematics; it asserts no converse for arbitrary reduced classes, no completeness of any family of radial solutions, no spectral classification, no measured energy and no empirical result, and it excludes the Coulomb potential from its hypotheses, which are treated by the following items of the page."
+      },
+      {
+        "id": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The declared Coulomb and two-body hydrogen model: one-centre operator, relative problem, reduced mass and scope exclusions",
+        "statement": "**(a) Framework data.** Adopt the framework data of clause (a) of the declared\ncentral-potential model [[def-nrqm-central-framework-central-potential-model]]\nwith a declared mass parameter $m>0$, spin label $s=0$, the state space\n$H_{0}=L^{2}(\\mathbb R^{3};\\mathbb C)$, the componentwise position and momentum\nfamilies and the action constant $\\hbar>0$ of\n[[def-nrqm-kinematics-framework-massive-spin-s-model]]; units are those of\n[[def-nrqm-framework-quantities-and-units]]. Assume the Axiom of Countable\nChoice and the Axiom of Choice as the choice hypotheses of the cited\nmathematical suppliers ([[def-countable-choice]], [[def-axiom-of-choice]]).\n\n**(b) The declared one-centre Coulomb model.** As an additional model\nassumption of the pair, fix a real **coupling** $\\kappa>0$ with the declared\nunit $\\mathrm{J\\,m}$ and put\n$$\\gamma:=\\frac{2m\\kappa}{\\hbar^{2}}\\qquad(\\text{unit }\\mathrm{m^{-1}}),\\qquad C_{\\gamma}:=-\\Delta-\\frac{\\gamma}{|\\cdot|}\\ \\text{ on }\\ D(C_{\\gamma})=H^{2}(\\mathbb R^{3};\\mathbb C),$$\nthe self-adjoint operator of\n[[thm-nrqm-coulomb-infinitesimal-kinetic-bound]] clause (c). The **assigned\nenergy operator** of the one-centre Coulomb model is\n$$H_{\\kappa}:=\\frac{\\hbar^{2}}{2m}\\,C_{\\gamma},$$\nwith domain $D(H_{\\kappa}):=D(C_{\\gamma})$; by\n[[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] clauses (a)\nand (b) it is self-adjoint with the same domain, and by\n[[lem-nrqm-central-free-operator-differential-identification]] together with\nthe action formula of the cited theorem it acts by\n$$H_{\\kappa}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f-\\kappa\\frac{f}{|\\cdot|}\\qquad(f\\in D(H_{\\kappa})),$$\nwhere $\\Delta_{w}$ is the weak Laplacian. The model declares the **length\nscale** $a_{\\kappa}:=\\hbar^{2}/(m\\kappa)$, read in metres, and the **energy\nscale** $\\mathcal E_{\\kappa}:=m\\kappa^{2}/(2\\hbar^{2})=\\hbar^{2}/(2ma_{\\kappa}^{2})$,\nread in joules. The model adopts $(H_{\\kappa},\\mathrm J)$ as its declared\nenergy observable for the one-centre problem; the self-adjointness is the\ncited theorem's and no spectral property is presupposed here.\n\n**(c) The declared radial reading of the one-centre model.** Let $U$ and\n$(A_{l})_{l\\ge0}$ be the unitary and the radial operators of\n[[thm-nrqm-coulomb-transported-radial-endpoint-realization]] clauses (a)-(d):\n$U$ maps $H_{0}$ onto $K=\\bigoplus_{(l,m)}L^{2}((0,\\infty),dr;\\mathbb C)$ with\n$UH_{\\kappa}U^{*}=\\bigoplus_{(l,m)}(\\hbar^{2}/2m)A_{l}$, and each $A_{l}$ is self-adjoint\nwith form domain $V_{l}$ and domain $D(A_{l})$. The model declares the\n**sector $(l,m)$ radial energy operator** $A_{l}^{(\\kappa)}:=(\\hbar^{2}/2m)A_{l}$,\nread in joules, and, for a class $u\\in D(A_{l})$, the **declared radial\nequation** is the distributional identity\n$$-u''(r)+\\Bigl(\\frac{l(l+1)}{r^{2}}-\\frac{\\gamma}{r}\\Bigr)u(r)=A_{l}u(r)\\qquad\\text{on }(0,\\infty),$$\nwhich by clause (c) of the cited theorem is an ordinary differential equation\nwith $C^{2}$ representative whenever $A_{l}u=Eu$ for a constant $E$. The\n**regular reduced solution** at energy attribute $k>0$ is the function\n$u_{\\mathrm{reg}}(r)=r^{l+1}e^{-kr}v(2kr)$ of clause (c) of\n[[thm-nrqm-coulomb-kummer-recurrence-and-termination]], with $v$ the regular\npower series of that clause; the pair uses it as the declared radial template\nof the model, not as a physical state, until the normalisation and spectral\ntheorems of the page identify it.\n\n**(d) The declared two-body Coulomb model.** As a further model assumption,\ntake two **distinguishable** spinless massive particles with declared mass\nparameters $m_{1},m_{2}>0$ (unit kg) and opposite declared charges: particle 1\ncarries charge $-q_{-}$ and particle 2 carries charge $+q_{+}$, where the\ncharge magnitudes $q_{-},q_{+}>0$ are read in coulombs. Declare the **pair\ncoupling**\n$$\\kappa:=\\frac{q_{-}q_{+}}{4\\pi\\varepsilon_{0}},\\qquad \\varepsilon_{0}:=(\\mu_{0}c^{2})^{-1},$$\nwhere $\\mu_{0}$ is the declared magnetic constant of the SI conventions and\n$c$ the speed of light, both as in clause (c) of\n[[def-nrqm-framework-quantities-and-units]]; the identification\n$\\kappa=q_{-}q_{+}/(4\\pi\\varepsilon_{0})$ is a constitutive assumption of the\nmodel, and $\\kappa$ is read in $\\mathrm{J\\,m}$. Its equal-magnitude,\nnet-neutral submodel is $q_{-}=q_{+}=q>0$, with charges $-q,+q$ and\n$\\kappa=q^{2}/(4\\pi\\varepsilon_{0})$; this is the branch used by the later\nrelative-dipole consumers. The two-particle state space is the Hilbert tensor product of\ntwo copies of the one-particle space of clause (a) as in\n[[lem-nrqm-composites-hilbert-tensor-construction]], identified with\n$L^{2}(\\mathbb R^{6};\\mathbb C)$ through\n[[lem-nrqm-composites-euclidean-l2-product-unitary]]; the spin-zero internal\nfactor is trivial, and because the two particles are of different species no\nsymmetrisation is imposed (the case of identical species belongs to the\nidentical-particle sector of P6 and is not used here). The **assigned energy\noperator** is\n$$H_{2}:=-\\frac{\\hbar^{2}}{2m_{1}}\\Delta_{x_{1}}-\\frac{\\hbar^{2}}{2m_{2}}\\Delta_{x_{2}}-\\frac{\\kappa}{|x_{1}-x_{2}|},\\qquad D(H_{2}):=H^{2}(\\mathbb R^{6};\\mathbb C),$$\nwhich is self-adjoint by clause (c) of\n[[thm-nrqm-coulomb-two-body-reduced-mass]]. Let\n$$\\Phi(x_{1},x_{2}):=(R,r),\\qquad R:=\\frac{m_{1}x_{1}+m_{2}x_{2}}{M},\\quad r:=x_{1}-x_{2},\\quad M:=m_{1}+m_{2},$$\nbe the centre-of-mass/relative coordinate map of that theorem, with its\nunitary $U_{\\Phi}$. The model declares the **centre-of-mass/relative reading**\n$U_{\\Phi}H_{2}U_{\\Phi}^{-1}=T_{R}\\otimes I+I\\otimes C_{\\mu}$ of clause (c) of\nthat theorem, with the **reduced mass**\n$$\\mu:=\\frac{m_{1}m_{2}}{m_{1}+m_{2}}\\qquad(\\text{unit }\\mathrm{kg}),$$\nthe centre-of-mass kinetic operator $T_{R}:=-\\frac{\\hbar^{2}}{2M}\\Delta_{R}$\nand the **relative operator** $C_{\\mu}:=-\\frac{\\hbar^{2}}{2\\mu}\\Delta_{r}-\\frac{\\kappa}{|r|}$;\nthe relative operator is exactly the one-centre Coulomb operator of clause\n(b) with mass parameter $\\mu$. The energy operators $H_{2}$, $T_{R}$ and\n$C_{\\mu}$ are each read in joules. The model further declares the **fixed-nucleus\nreading**: the one-centre model of clauses (b), (c) with mass parameter $m_{1}$\nis read as the limiting description in which the second particle is\ninfinitely heavy, $\\mu\\to m_{1}$ as $m_{2}\\to\\infty$ at fixed $m_{1},\\kappa$;\nthis is a declared limiting reading, and no convergence theorem for operators\nor states is asserted by it.\n\n**(e) The hydrogen-like identification.** A **hydrogen-like ion** assignment of\nthe two-body model is the choice $m_{1}=m_{\\mathrm e}$ (electron mass\nparameter), $m_{2}=m_{\\mathrm n}$ (nuclear mass parameter), $q_{-}=e$ (the\nelementary charge of clause (c) of\n[[def-nrqm-framework-quantities-and-units]]) and $q_{+}=Ze$ (nuclear charge\nmagnitude), so that $\\kappa=Ze^{2}/(4\\pi\\varepsilon_{0})$ for a declared\npositive integer $Z$. The **hydrogen assignment** is the specialization\n$Z=1$, $m_{2}=m_{\\mathrm p}$, for which $q_{-}=q_{+}=e$ and the pair is\nnet-neutral. These assignments use empirical mass and charge parameters; any\ncomparison of the model's consequences with a laboratory hydrogen atom is a\ntested identification in the sense of clause (iii) of P7\n([[post-nrqm-framework-preparation-and-apparatus]]) and carries the\nuncertainty of that identification. The model declares no numerical value of\n$m_{\\mathrm e},m_{\\mathrm n},e,\\mu_{0}$ or $\\hbar$; numerical evaluations, when\nmade, use their declared or measured values as explicitly qualified empirical\ninputs.\n\n**(f) Scope exclusions.** Until their own items introduce them, the Coulomb\nand hydrogen models exclude: spin, magnetic moment couplings and\nspin–statistics assignments beyond the trivial spin-zero factor; relativistic\ncorrections, in particular any fine-structure splitting of the degeneracy of\nthe gross-structure levels; finite nuclear size, nuclear recoil beyond the\ntwo-body reduction of clause (d), and nuclear structure; QED corrections such\nas vacuum polarisation and the Lamb shift, and hyperfine structure; shielding\nand many-body modification of the $1/r$ potential; the radiation extension,\nspontaneous emission, radiation reaction and any photon, transition-frequency\nor line-intensity statement; external electromagnetic fields; and any\nscattering, ionisation or continuum process, which belongs to the scattering\nitems of the quantum-mechanics track. The model asserts no empirical result\nand fixes no measured quantity.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-central-framework-central-potential-model",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "lem-nrqm-central-free-operator-differential-identification",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound",
+          "thm-nrqm-coulomb-transported-radial-endpoint-realization",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "thm-nrqm-coulomb-two-body-reduced-mass",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-euclidean-l2-product-unitary",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-central-potential-model": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "lem-nrqm-central-free-operator-differential-identification": "mathematical-premise",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound": "mathematical-premise",
+          "thm-nrqm-coulomb-transported-radial-endpoint-realization": "mathematical-premise",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination": "mathematical-premise",
+          "thm-nrqm-coulomb-two-body-reduced-mass": "mathematical-premise",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-euclidean-l2-product-unitary": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3, printed pages 111-117 (the hydrogen atom: the Coulomb potential -e^2/(4 pi eps_0 r), the radial equation and energy spectrum, the Bohr radius and the fine-structure exclusion) and Section 4.2.3, printed pages 110-111 (the boundary condition at the origin and self-adjointness)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 182-185 (equation (8.1) gives the pair potential -Ze^2/(4 pi epsilon_0 r) for charges -e,+Ze, and equations (8.3)-(8.10) give the centre-of-mass and relative coordinates, reduced mass and radial Hamiltonian)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.1 printed pages 221-222 (the Coulomb Hamiltonian -Delta - gamma/|x| as a self-adjoint operator on H^2) and Section 10.2 printed pages 222-225 (the one-particle reduction and separation)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The pair's declared Coulomb model, in a one-centre form for a spinless particle of declared mass and coupling in a fixed centre, and in a two-body form for two distinguishable spinless massive particles with charges -q_- and +q_+ and pair potential -kappa/|x1-x2|, where kappa is determined by the product q_-q_+; the equal-magnitude branch -q,+q is retained for the dipole consumers. It includes the declared centre-of-mass/relative decomposition with reduced mass mu, the hydrogen-like-ion identification for nuclear charge +Ze, and the model's scope exclusions. The item fixes model assumptions and readings of P1, P2, P4, P5, P6 and P7 together with cited mathematics; it asserts no empirical identification, no measured constant, no transition, photon or line-intensity claim, and no spectral or scattering consequence, which are supplied by the theorems of the page or by later radiation and scattering items. Spin, relativistic and QED corrections, finite nuclear size, external fields, many-body and shielding effects and radiation reaction are excluded."
+      },
+      {
+        "id": "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The one-centre Coulomb model: energy observable, flow, stationary states and spectral support",
+        "statement": "Adopt the state and composition postulate P1, the observable and probability\npostulate P2, the autonomous-dynamics postulate P4 and the kinematics and\nmassive-particle model postulate P5, read through the declared one-centre\nCoulomb model of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with\nparameters $\\hbar>0$, $m>0$ and coupling $\\kappa>0$, its assigned energy\noperator $H_{\\kappa}$ on $D(H_{\\kappa})=H^{2}(\\mathbb R^{3};\\mathbb C)$, the\nassigned sharp-observable reading\n[[def-nrqm-observables-framework-observable-and-outcome-law]], the flow and\npreparation reading [[def-nrqm-autonomous-dynamics-framework-evolution]], and\nthe spin-zero position law\n[[pthm-nrqm-kinematics-spin-s-outcome-laws]]\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]],\n[[def-nrqm-autonomous-dynamics-framework-evolution]]). Assume the Axiom of\nCountable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Then:\n\n(a) $(H_{\\kappa},\\mathrm J)$ is an assigned sharp observable of the model:\n$H_{\\kappa}$ is densely defined, self-adjoint and bounded below on\n$D(H_{\\kappa})=H^{2}(\\mathbb R^{3};\\mathbb C)$, acts by\n$H_{\\kappa}f=-\\frac{\\hbar^{2}}{2m}\\Delta_{w}f-\\kappa f/|\\cdot|$, and\n$$\\sigma_{\\mathrm{ess}}(H_{\\kappa})=[0,+\\infty);$$\nevery point of $\\sigma(H_{\\kappa})\\cap(-\\infty,0)$ is an eigenvalue of finite\nmultiplicity, isolated in $\\mathbb R$, and the set of negative eigenvalues is\nat most countable;\n\n(b) *Flow.* The family $U(t):=\\exp(-itH_{\\kappa}/\\hbar)$ is the model's\nstrongly continuous one-parameter unitary group; the Schroedinger equation\n$i\\hbar\\frac{d}{dt}\\psi(t)=H_{\\kappa}\\psi(t)$ holds in the norm-differentiable\nsense exactly for initial vectors $\\psi(0)\\in D(H_{\\kappa})$, and for other\nvectors the evolution is continuous but the equation is not asserted; density\npreparations evolve by $\\rho(t)=U(t)\\rho(0)U(t)^{*}$ with $\\rho(t)$ a density\noperator for every $t$;\n\n(c) *Stationary states.* For $\\psi\\in H_{0}$, $\\psi\\ne0$, the pure preparation\n$[\\psi]$ is stationary, $[\\psi(t)]=[\\psi(0)]$ for all $t$, if and only if\n$\\psi$ is an eigenvector of $H_{\\kappa}$; in that case, with eigenvalue $E$,\none has $\\psi(t)=e^{-itE/\\hbar}\\psi(0)$, the energy outcome law is the point\nmass $\\delta_{E}$ for a normalised $\\psi$, and every bounded assigned sharp\nobservable compatible with the energy has a time-independent outcome law in\nthis preparation;\n\n(d) *Position reading.* In a unit vector $\\psi$ the position outcome law is\n$\\mu^{G}_{\\psi}(B)=\\int_{B}|\\psi|^{2}dx$; if $\\psi$ is in addition a unit\neigenvector of $H_{\\kappa}$ with eigenvalue $E$, then the position density\n$|\\psi|^{2}$ and the energy point mass at $E$ are readings of the same\npreparation through the declared observables, with no joint-measurement claim;\n\n(e) *Spectral support and exact values.* For every preparation $\\rho$ one has\n$\\mu^{H_{\\kappa}}_{\\rho}(\\sigma(H_{\\kappa}))=1$, and an exact energy value\n$\\lambda$ has $\\mu^{H_{\\kappa}}_{\\rho}(\\{\\lambda\\})=0$ unless $\\lambda$ is an\neigenvalue, in which case the probability is the total weight of the\neigenspace; in particular no exact value in $\\mathbb R\\setminus\\sigma(H_{\\kappa})$\nis admissible, and the item asserts neither that $0$ is an eigenvalue nor any\nstatement about eigenvalues in the positive half-line, which are excluded by\nthe following radial items;\n\n(f) *Scope.* The statement is conditional on P1, P2, P4, P5 and the declared\nCoulomb model and the cited mathematics. It asserts no eigenvalue list, no\ndegeneracy, no transition, radiation or line-intensity statement, no\nidentification of $\\kappa$, $m$ or $\\hbar$ with measured constants, and no\nempirical result.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "def-nrqm-central-framework-central-potential-model",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "def-nrqm-state-geometry-framework-state-space",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound",
+          "thm-nrqm-coulomb-essential-spectrum",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "lem-nrqm-central-free-operator-differential-identification",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "def-nrqm-central-framework-central-potential-model": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound": "mathematical-premise",
+          "thm-nrqm-coulomb-essential-spectrum": "mathematical-premise",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+          "lem-nrqm-central-free-operator-differential-identification": "mathematical-premise",
+          "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.1, printed pages 221-222 (self-adjointness of -Delta - gamma/|x| on H^2 and sigma_ess = [0,infinity)), and Section 5.1, printed pages 123-125 (Stone's theorem and the time evolution)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.2.3, printed pages 110-111 (self-adjointness of the radial Coulomb Hamiltonian and the admissible states) and Section 4.3, printed pages 111-112 (the Coulomb problem and its negative-energy bound states)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 182-185 (the stationary states of the hydrogen-like model and their energies)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the declared one-centre Coulomb model and the framework postulates P1, P2, P4 and P5: the model's assigned energy is a sharp observable on H^2 with essential spectrum [0,infinity) and negative spectrum consisting only of isolated finite-multiplicity discrete eigenvalues; its flow is the strongly continuous unitary group of P4 with the norm-differentiable Schroedinger equation exactly on the domain; its stationary preparations are exactly the eigenrays with point-mass energy law; and position and energy readings coexist. The item asserts no measured energy, no apparatus, no eigenvalue list or degeneracy, no transition or radiation statement and no empirical result; it does not identify the coupling, mass or charge with any measured constants."
+      },
+      {
+        "id": "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The one-centre Coulomb model: bound energies, n^2-degeneracy, completeness of the bound states in the negative spectral subspace and the continuum",
+        "statement": "Adopt the framework postulates P1, P2, P4 and P5 and the readings of the\ndeclared one-centre Coulomb model\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with\nparameters $\\hbar>0$, $m>0$ and coupling $\\kappa>0$, its assigned energy\noperator $H_{\\kappa}$ with length scale $a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, and\nthe energy-observable content of\n[[pthm-nrqm-central-coulomb-energy-observable-and-flow]]\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]],\n[[def-nrqm-state-geometry-framework-state-space]]). Assume the Axiom of\nCountable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). For $n\\ge1$, $0\\le l\\le n-1$, $-l\\le m\\le l$ let\n$\\psi_{nlm}$ be the regular bound solutions of\n[[thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy]] and put\n$\\Psi_{nlm}:=\\psi_{nlm}/\\|\\psi_{nlm}\\|$, and put\n$$E_{n}:=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}=-\\frac{\\hbar^{2}}{2ma_{\\kappa}^{2}n^{2}}\\qquad(n\\ge1).$$\nThen:\n\n(a) for every label, $\\Psi_{nlm}\\in D(H_{\\kappa})$, $\\|\\Psi_{nlm}\\|=1$,\n$H_{\\kappa}\\Psi_{nlm}=E_{n}\\Psi_{nlm}$, and vectors with distinct labels are\northogonal; the vectors $\\Psi_{nlm}$ of fixed $n$ span a subspace of dimension\n$\\sum_{l=0}^{n-1}(2l+1)=n^{2}$;\n\n(b) the eigenvalues of $H_{\\kappa}$ are exactly the numbers $E_{n}$, $n\\ge1$;\nthe eigenspace of $H_{\\kappa}$ at $E_{n}$ is exactly\n$\\operatorname{span}\\{\\Psi_{nlm}:0\\le l\\le n-1,\\ -l\\le m\\le l\\}$, so the model\nassigns to the level $n$ the **model degeneracy** $n^{2}$; in particular\n$H_{\\kappa}$ has no eigenvalues in $[0,+\\infty)$, whose spectral content is\nentirely essential spectrum $[0,+\\infty)$ in the sense of\n[[pthm-nrqm-central-coulomb-energy-observable-and-flow]] (a);\n\n(c) the family\n$(\\Psi_{nlm})_{n\\ge1,\\,0\\le l\\le n-1,\\,-l\\le m\\le l}$ is a complete orthonormal\nfamily of the negative spectral subspace\n$E_{H_{\\kappa}}((-\\infty,0))L^{2}(\\mathbb R^{3};\\mathbb C)$: the bound states\nspan exactly the preparations whose energy outcomes are negative almost surely;\n\n(d) the family is not complete in $L^{2}(\\mathbb R^{3};\\mathbb C)$: the\nnonnegative spectral subspace $E_{H_{\\kappa}}([0,+\\infty))L^{2}(\\mathbb R^{3};\\mathbb C)$\nis nonzero, indeed infinite dimensional, and every unit vector $\\psi$ in it has\n$\\mu^{H_{\\kappa}}_{\\psi}(B)=0$ for every Borel $B\\subseteq(-\\infty,0)$, i.e.\nstrictly negative energy outcomes have probability zero in such a preparation;\nconsequently the bound states of the model do not exhaust its state space and\nthe model possesses continuum states which are not bound states;\n\n(e) *Energy-law reading.* For every unit vector $\\psi$ the restriction of the\nenergy outcome law to the negative half-line is the discrete law\n$\\sum_{n\\ge1}w_{n}\\delta_{E_{n}}$ with weights\n$w_{n}:=\\|E_{H_{\\kappa}}(\\{E_{n}\\})\\psi\\|^{2}\\ge0$ and\n$\\sum_{n\\ge1}w_{n}=\\|E_{H_{\\kappa}}((-\\infty,0))\\psi\\|^{2}\\le1$; for\n$\\psi=\\Psi_{nlm}$ the whole law is the point mass $\\delta_{E_{n}}$;\n\n(f) *Scope.* The statement is conditional on P1, P2, P4, P5, the declared\nCoulomb model and the cited mathematics. The values $E_{n}$ are model\nparameters determined by $\\hbar,m,\\kappa$; no numerical value, no measured\nline, no transition rate, no photon or light-matter coupling and no empirical\nresult is asserted. The absolute continuity of the positive spectral subspace\nis recorded by the cited mathematics for the unscaled operator and is not\nrestated for the scaled model here.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "def-nrqm-state-geometry-framework-state-space",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound",
+          "thm-nrqm-coulomb-transported-radial-endpoint-realization",
+          "thm-nrqm-coulomb-laguerre-bound-energy-exhaustion",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy",
+          "thm-nrqm-coulomb-jost-volterra-solution",
+          "thm-nrqm-coulomb-continuum-spectral-density",
+          "thm-nrqm-coulomb-essential-spectrum",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "lem-nrqm-central-positive-scaling-spectral-measure",
+          "lem-nrqm-central-free-operator-differential-identification",
+          "def-projection-valued-measure",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow": "physical-result",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "thm-nrqm-coulomb-infinitesimal-kinetic-bound": "mathematical-premise",
+          "thm-nrqm-coulomb-transported-radial-endpoint-realization": "mathematical-premise",
+          "thm-nrqm-coulomb-laguerre-bound-energy-exhaustion": "mathematical-premise",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy": "mathematical-premise",
+          "thm-nrqm-coulomb-jost-volterra-solution": "mathematical-premise",
+          "thm-nrqm-coulomb-continuum-spectral-density": "mathematical-premise",
+          "thm-nrqm-coulomb-essential-spectrum": "mathematical-premise",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+          "lem-nrqm-central-positive-scaling-spectral-measure": "mathematical-premise",
+          "lem-nrqm-central-free-operator-differential-identification": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.4 printed pages 229-235 (Theorem 10.9: the bound states psi_(n,l,m), the eigenvalues E_n = -(gamma/(2n))^2 and the n^2-dimensional eigenspace) and Section 10.4 p. 233 (the non-terminating solution is not square integrable)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 185-186 (the energy spectrum E = -Z^2 mu e^4/(2 n^2 (4 pi eps_0 hbar)^2), the n^2-fold degeneracy and the series limit) and Section 8.1.1, printed page 186 (the Lyman, Balmer and Paschen series as model consequences)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.1, printed pages 112-116 (the terminating-series argument, the spectrum (4.30), the Bohr radius (4.31), the n^2 degeneracy and the fine-structure exclusion)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the declared one-centre Coulomb model with parameters hbar, m, kappa: the model's bound energies are exactly E_n = -m kappa^2/(2 hbar^2 n^2), the level n carrying an n^2-dimensional eigenspace spanned by the transported Laguerre solutions, the bound states forming a complete orthonormal family of the negative spectral subspace, and the nonnegative spectral subspace containing no eigenvectors and being infinite dimensional, so the bound states alone do not exhaust the model's state space. The item asserts no measured spectral line, no transition rate, no photon, no light-matter coupling and no empirical result, and it does not assert absolute continuity of the positive spectral subspace of the scaled model, which is recorded for the unscaled operator by the cited mathematics."
+      },
+      {
+        "id": "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The one-centre Coulomb model: position and radial distributions of the bound states, with the ground-state density and its scales",
+        "statement": "Adopt the framework postulates P1, P2 and P5, the readings of the declared\none-centre Coulomb model\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with\nparameters $\\hbar>0$, $m>0$, $\\kappa>0$ and length scale\n$a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, the energy-observable reading of\n[[pthm-nrqm-central-coulomb-energy-observable-and-flow]], the bound-state data\nof [[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]], and the\nspin-zero position law\n[[pthm-nrqm-kinematics-spin-s-outcome-laws]]\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]]). Assume the\nAxiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). For each label let $\\psi_{nlm}$ and\n$\\Psi_{nlm}=\\psi_{nlm}/\\|\\psi_{nlm}\\|$ be the bound vectors of the cited\ntheorem, and write $u_{nl}$ for the reduced regular solution with\n$\\psi_{nlm}(x)=u_{nl}(r)Y_{lm}(\\Omega)/r$. Then:\n\n(a) for every label and every Borel $B\\subseteq\\mathbb R^{3}$ the position\noutcome law in the unit preparation $[\\Psi_{nlm}]$ is\n$$\\mu^{G}_{\\Psi_{nlm}}(B)=\\|\\psi_{nlm}\\|^{-2}\\int_{0}^{\\infty}|u_{nl}(r)|^{2}\\Bigl(\\int_{S^{2}}\\mathbf 1_{B}(r\\Omega)\\,|Y_{lm}(\\Omega)|^{2}\\,d\\sigma(\\Omega)\\Bigr)dr;$$\nin particular, for a **radial** set $B=\\{x:a<|x|<b\\}$ with\n$0\\le a<b\\le+\\infty$ one has\n$$\\mu^{G}_{\\Psi_{nlm}}(B)=\\frac{1}{\\|u_{nl}\\|_{2}^{2}}\\int_{a}^{b}|u_{nl}(r)|^{2}\\,dr,$$\nso the **radial density** $p_{nl}(r):=|u_{nl}(r)|^{2}/\\|u_{nl}\\|_{2}^{2}$ is a\nprobability density on $(0,\\infty)$: $p_{nl}\\ge0$ and\n$\\int_{0}^{\\infty}p_{nl}(r)\\,dr=1$;\n\n(b) for $n=1,l=m=0$ one has\n$$\\Psi_{100}(x)=(\\pi a_{\\kappa}^{3})^{-1/2}e^{-r/a_{\\kappa}},\\qquad p_{10}(r)=4r^{2}a_{\\kappa}^{-3}e^{-2r/a_{\\kappa}},$$\nthe mean of $p_{10}$ is $\\int_{0}^{\\infty}r\\,p_{10}(r)\\,dr=3a_{\\kappa}/2$, the\nunique maximum of $p_{10}$ is at $r=a_{\\kappa}$, the spatial density\n$|\\Psi_{100}|^{2}$ is strictly decreasing in $r$ and maximal at the origin,\nand for every $\\varepsilon>0$\n$$\\mu^{G}_{\\Psi_{100}}\\bigl(\\{|x|<\\varepsilon\\}\\bigr)=\\frac{1}{6}\\Bigl(\\frac{2\\varepsilon}{a_{\\kappa}}\\Bigr)^{3}+O\\Bigl(\\bigl(\\frac{\\varepsilon}{a_{\\kappa}}\\bigr)^{4}\\Bigr)>0,$$\nwhich tends to $0$ as $\\varepsilon\\downarrow0$: the density maximum at the\norigin is not an atom of probability at any point;\n\n(c) for every label the reduced solution has the polynomial-exponential form\n$$u_{nl}(r)=c_{nl}\\,r^{l+1}e^{-r/(na_{\\kappa})}L_{n-l-1}^{(2l+1)}\\bigl(2r/(na_{\\kappa})\\bigr)\\qquad(c_{nl}\\ne0),$$\nwith $L_{j}^{(a)}$ the Laguerre polynomial of integer order, so the radial\ndensity of the level $(n,l)$ is a polynomial times $r^{2l+2}$ times a\ndecreasing exponential, and its normalisation constant is fixed by\n$\\int_{0}^{\\infty}|u_{nl}|^{2}dr=\\|\\psi_{nlm}\\|^{2}$;\n\n(d) *Reading and scope.* The statements are conditional on P1, P2, P5, the\ndeclared Coulomb model and the cited mathematics. The radial density is the\nreading of the model's position observable on radial sets; it is not a\ntrajectory, an orbit or a definite distance, and the model assigns positive\nprobability to every open ball around the origin and to arbitrarily large\nradii. No measured radius, no measured density and no identification of\n$a_{\\kappa}$ with a laboratory length is asserted; numerical comparison\nrequires the measured constants as qualified empirical inputs and is deferred.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "def-nrqm-state-geometry-framework-state-space",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy",
+          "thm-nrqm-coulomb-ground-radial-probability-and-units",
+          "thm-nrqm-orbital-and-spin-sphere-onb",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "def-polar-surface-measure-on-the-unit-sphere",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow": "physical-result",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "thm-nrqm-coulomb-angular-radial-unitary-reduction": "mathematical-premise",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination": "mathematical-premise",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy": "mathematical-premise",
+          "thm-nrqm-coulomb-ground-radial-probability-and-units": "mathematical-premise",
+          "thm-nrqm-orbital-and-spin-sphere-onb": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "def-polar-surface-measure-on-the-unit-sphere": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.2, printed pages 116-117 (the hydrogen wavefunctions r^l f_(n,l)(r) e^(-beta r/2n) Y_lm with generalised Laguerre polynomials, the ground state psi = (1/sqrt(pi r_B^3)) e^(-r/r_B) and its nodes)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1.2, printed pages 187-190 (the radial eigenfunctions u_n^l, the ground-state radial function, the r-expectation values and the probability outside classically allowed radii)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.4, printed pages 229-235 (the explicit normalised bound states and the lowest eigenvalue, with the ground-state formula)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the declared one-centre Coulomb model: the position outcome law of any normalised bound state, its disintegration into the radial density |u_nl|^2/||u_nl||^2 times the angular spherical-harmonic weight, and the explicit ground-state density, its mean radius 3 a_kappa/2, its mode a_kappa, the positivity of the probability in every ball around the origin and the absence of an atomic probability at the origin. The scales a_kappa and the density are model data; the item asserts no measured radius, no orbit, no trajectory, no formation or decay process, and does not identify a_kappa with any measured length."
+      },
+      {
+        "id": "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The declared two-body Coulomb model: reduced-mass decomposition, relative levels as thresholds and the absence of stationary total states",
+        "statement": "Adopt the framework postulates P1, P2, P4 and P5 and the readings of the\ndeclared two-body Coulomb model\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a), (b),\n(d) and (e) with declared masses $m_{1},m_{2}>0$, opposite charge magnitudes\n$q_{-},q_{+}>0$, and coupling\n$\\kappa=q_{-}q_{+}/(4\\pi\\varepsilon_{0})$ (the equal-magnitude branch\n$q_{-}=q_{+}=q$ has $\\kappa=q^{2}/(4\\pi\\varepsilon_{0})$), reduced mass\n$\\mu=m_{1}m_{2}/(m_{1}+m_{2})$, the centre-of-mass/relative coordinate map\n$\\Phi$, its unitary $U_{\\Phi}$, the total operator $H_{2}$ on\n$H^{2}(\\mathbb R^{6};\\mathbb C)$, the centre-of-mass kinetic operator $T_{R}$\nand the relative operator $C_{\\mu}$, together with the one-centre results\n[[pthm-nrqm-central-coulomb-energy-observable-and-flow]] and\n[[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]] applied with mass\nparameter $\\mu$\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]],\n[[def-nrqm-autonomous-dynamics-framework-evolution]]). Assume the Axiom of\nCountable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Then:\n\n(a) the identity $U_{\\Phi}H_{2}U_{\\Phi}^{-1}=T_{R}\\otimes I+I\\otimes C_{\\mu}$\nholds on the tensor product, and $C_{\\mu}$ is exactly the one-centre Coulomb\noperator of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (b) with mass\nparameter $\\mu$; the model's relative problem is therefore the declared\none-centre Coulomb model with parameters $(\\hbar,\\mu,\\kappa)$;\n\n(b) the relative bound energies are\n$$\\mathcal E_{n}:=-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}n^{2}}=-\\frac{\\hbar^{2}}{2\\mu a_{\\mu}^{2}n^{2}},\\qquad a_{\\mu}:=\\frac{\\hbar^{2}}{\\mu\\kappa}\\qquad(n\\ge1),$$\nwith model degeneracy $n^{2}$ within the relative problem and the same radial\nand position readings as in\n[[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]] and\n[[pthm-nrqm-central-coulomb-bound-state-radial-distributions]] with $m$\nreplaced by $\\mu$;\n\n(c) the total operator $H_{2}$ has no eigenvalues at all:\n$\\sigma(H_{2})=[-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}},+\\infty)$, the whole negative\npart $[-\\frac{\\mu\\kappa^{2}}{2\\hbar^{2}},0)$ of the spectrum is continuous,\nand each relative bound energy $\\mathcal E_{n}$ is the lower endpoint of its\ncontinuous centre-of-mass channel $[\\mathcal E_{n},+\\infty)$, hence a channel\nthreshold rather than an eigenvalue of $H_{2}$;\n\n(d) let $P_{R,j}:=-i\\hbar\\partial_{R_j}$ on the factor domain\n$$D(P_{R,j})=\\{\\varphi\\in L^{2}(\\mathbb R^{3}_{R};\\mathbb C):\\partial_{R_j}\\varphi\\in L^{2}(\\mathbb R^{3}_{R};\\mathbb C)\\text{ as a weak derivative}\\},$$\nand define the lifted total-momentum component on the composite state space by\n$$\\widetilde P_{R,j}:=U_{\\Phi}^{-1}(P_{R,j}\\otimes I)U_{\\Phi},\\qquad D(\\widetilde P_{R,j})=U_{\\Phi}^{-1}\\{F\\in L^{2}(\\mathbb R^{3}_{R}\\times\\mathbb R^{3}_{r};\\mathbb C):\\partial_{R_j}F\\in L^{2}\\text{ as a weak derivative}\\};$$\nit is self-adjoint on this maximal weak-derivative domain, has momentum unit\n$\\mathrm{kg\\,m\\,s^{-1}}$, and has no nonzero eigenvectors in\n$L^{2}(\\mathbb R^{6};\\mathbb C)$. A state of definite total momentum would\nbe a simultaneous eigenvector of the three lifted components, so the model\nhas no such normalisable state. Since $H_{2}$ has no\neigenvalues, for every $\\varphi\\in L^{2}(\\mathbb R^{3}_{R};\\mathbb C)$ and\nnonzero relative bound vector $u$ with $C_{\\mu}u=\\mathcal E_{n}u$, any\nnonzero tensor product $\\varphi\\otimes u$ in the transformed $(R,r)$ tensor\nspace, equivalently $U_{\\Phi}^{-1}(\\varphi\\otimes u)$ in the composite\n$L^{2}(\\mathbb R^{6})$ state space, is not an eigenvector; the\nstationary-state criterion therefore excludes its pure preparation as a\nstationary state;\n\n(e) *Reading.* The reduced mass obeys $\\mu=\\frac{m_{1}}{1+m_{1}/m_{2}}$ and\nsatisfies $\\mu\\le\\min\\{m_{1},m_{2}\\}$ with $\\mu\\to m_{1}$ as $m_{2}\\to\\infty$\nat fixed $m_{1}$; the model reads the one-centre model of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (b) with mass\n$m_{1}$ as the fixed-nucleus limiting description, and the relative energies\n$\\mathcal E_{n}$ are strictly weaker in magnitude than the fixed-nucleus\nenergies $-\\frac{m_{1}\\kappa^{2}}{2\\hbar^{2}n^{2}}$;\n\n(f) *Scope.* The statement is conditional on P1, P2, P4, P5, the declared\ntwo-body model and the cited mathematics; it asserts no measured mass, charge\nor level, no transition, photon or radiation statement, no binding or\nformation dynamics, and no identification of the model with a laboratory\natom beyond the tested identification of clause (e) of the model definition.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+          "def-nrqm-state-geometry-framework-state-space",
+          "thm-nrqm-coulomb-two-body-reduced-mass",
+          "thm-nrqm-coulomb-onto-radial-continuum-transform",
+          "lem-nrqm-central-positive-scaling-spectral-measure",
+          "lem-nrqm-composites-euclidean-l2-product-unitary",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "thm-plancherel",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "thm-closed-graph-theorem",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow": "physical-result",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions": "physical-result",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation": "physical-result",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "thm-nrqm-coulomb-two-body-reduced-mass": "mathematical-premise",
+          "thm-nrqm-coulomb-onto-radial-continuum-transform": "mathematical-premise",
+          "lem-nrqm-central-positive-scaling-spectral-measure": "mathematical-premise",
+          "lem-nrqm-composites-euclidean-l2-product-unitary": "mathematical-premise",
+          "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-polar-coordinates-formula-for-lebesgue-measure": "mathematical-premise",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator": "mathematical-premise",
+          "thm-closed-graph-theorem": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 182-185 (equations (8.3)-(8.10): the centre-of-mass and relative coordinates, the reduced mass mu = m_e m_n/(m_e+m_n), the separated Hamiltonians and the product eigenfunctions)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.1-10.2, printed pages 221-225 (the one-particle reduction of the two-body Coulomb problem and the parameters of the relative equation)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3, printed pages 111-112 (the hydrogen atom as a two-body Coulomb problem with the electron mass in the relative equation)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional consequence of the declared two-body Coulomb model with masses m1, m2, opposite charge magnitudes q_- and q_+, and coupling kappa=q_-q_+/(4 pi epsilon_0), including its equal-magnitude neutral branch: the centre-of-mass/relative decomposition U_Phi H_2 U_Phi^(-1) = T_R tensor I + I tensor C_mu, the identification of the relative problem with the one-centre Coulomb model of mass mu, the relative gross-structure levels E_n^mu = -mu kappa^2/(2 hbar^2 n^2) with degeneracy n^2 within the relative problem, the fact that the total two-body Hamiltonian has no eigenvalues and continuous negative spectrum with the relative levels as channel thresholds, and the absence of normalisable total-momentum eigenstates on the composite L2(R6) state space. H2, T_R and C_mu are energy operators in joules; the lifted total-momentum components have unit kg m s^-1. The item asserts no measured level, no transition, no photon, no external-field or many-body effect and no empirical result; it does not model binding or formation dynamics and does not identify the parameters with measured masses or charges."
+      },
+      {
+        "id": "rem-nrqm-central-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope and empirical status of the central-potential and hydrogen page",
+        "statement": "## Remarks\n\n- **What the page establishes.** The pair declares a central-potential model\n  ([[def-nrqm-central-framework-central-potential-model]]) and a Coulomb and\n  two-body hydrogen model\n  ([[def-nrqm-central-framework-coulomb-and-hydrogen-model]]), proves the\n  spherical reduction of smooth compactly supported vectors, with the radial\n  equation read almost everywhere and pure-preparation readings only for\n  nonzero vectors after normalization\n  ([[pthm-nrqm-central-spherical-reduction-of-smooth-states]]), and derives\n  the energy-observable and flow reading\n  ([[pthm-nrqm-central-coulomb-energy-observable-and-flow]]), the bound\n  energies $E_{n}=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}$ with $n^{2}$-fold\n  model degeneracy and the completeness of the bound states in the negative\n  spectral subspace with a nonzero continuum\n  ([[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]]), the radial\n  and ground-state position readings\n  ([[pthm-nrqm-central-coulomb-bound-state-radial-distributions]]), and the\n  two-body reduced-mass decomposition with the relative levels as thresholds\n  and the absence of stationary total states\n  ([[pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum]]). Every\n  item is conditional on the cited postulates, the declared model and the\n  cited mathematics; none establishes that the model or its postulates\n  describes nature.\n\n- **What the page does not contain.** No experiment, no reported spectral\n  line, no count, no calibration, no detector model, no sampling assumption\n  and no statistical inference appears on the page, and no numerical value of\n  $\\hbar$, $m$, $\\kappa$, $q$, $m_{1}$, $m_{2}$ or $\\varepsilon_{0}$ is fixed\n  by any item. The transition frequencies, line intensities and selection\n  rules of a hydrogen-like system require the radiation extension and the\n  light-matter coupling of later items, and the scattering, ionisation and\n  continuum processes require the three-dimensional scattering pair; neither\n  is built or assumed here. The dipole matrix elements and their angular\n  selection rules are reserved to the light-matter pair, and the numerical\n  comparison with measured spectra to a future experiment item with its own\n  preparation, calibration, sampling and uncertainty record; no such item\n  exists in this batch.\n\n- **Excluded physics.** The gross-structure model excludes spin and magnetic\n  couplings, relativistic fine structure and the splitting of the\n  $n^{2}$-fold degeneracy, finite nuclear size and nuclear structure,\n  recoil corrections beyond the two-body reduced-mass formulation, QED\n  corrections including the Lamb shift, hyperfine structure, shielding and\n  many-body modifications of the $1/r$ potential, external fields, and\n  radiation reaction. The source treatments describe several of these\n  corrections as small compared with the gross-structure energies; no such\n  magnitude comparison is a premise of any item on this page, and none of the\n  excluded effects is claimed to be negligible by this page.\n\n- **Empirical status of the model's numbers.** Statements such as \"the\n  hydrogen ground-state binding energy is about $13.6$ electronvolts\" are\n  conditional evaluations of the model's formula with measured constants\n  (such as the fine-structure constant, the electron-to-proton mass ratio or\n  the Rydberg constant) as inputs; they carry the uncertainties, conditions\n  and conventions of those inputs and are not measurements of hydrogen by\n  this page. Agreement of a computed transition frequency with a measured\n  line would test the combined model, apparatus and constant assumptions; it\n  would not be a deductive proof of the model.\n\n- **Physical-interface note.** The model declarations, the readings and the\n  scope exclusions above are the public physical interface of the pair;\n  changing them requires the ordinary direct and indirect consumer review\n  under the workflow rules, and the empirical qualifications carried here\n  must be preserved by every later item that consumes these results.\n",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-central-framework-central-potential-model",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-central-potential-model": "formulation-prerequisite",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-spherical-reduction-of-smooth-states": "physical-result",
+          "pthm-nrqm-central-coulomb-energy-observable-and-flow": "physical-result",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions": "physical-result",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum": "physical-result",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1.1, printed page 186 (the Lyman, Balmer and Paschen series as consequences of the model, and the Balmer fit as historical evidence) and Section 8.1.3-8.1.4, printed pages 190-193 (shielding, the Lamb shift and the leading corrections beyond the gross-structure model)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.1, printed pages 115-116 (the Rydberg scale, the degeneration of the spectrum on orbital angular momentum and the fine-structure exclusion), and Section 4.4.1, printed pages 119-121 (the Bohr model as a precursor)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope record for the central-potential and hydrogen pair: the conditional model content of the page, its exclusions, its relation to later radiation, scattering and angular-momentum items, and the empirical status of its statements. The record asserts no mathematical theorem and no empirical result; it states that no experiment is reported on the page and that comparisons with measured spectra require a separate experiment item with its own preparation, calibration and uncertainty record."
+      }
+    ]
+  },
+  {
+    "order": 196,
+    "id": "qm-central-potentials-and-hydrogen-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Central Potentials And Hydrogen — Examples",
+    "companion": "qm-central-potentials-and-hydrogen",
+    "requires": [
+      "qm-central-potentials-and-hydrogen",
+      "qm-framework-and-quantities",
+      "qm-massive-particle-kinematics",
+      "qm-math-coulomb"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Bound-energy parametrisations of the Coulomb model: exact identities, units and the reduced-mass factor",
+        "statement": "For this example take the equal-magnitude, opposite-charge branch\n$q_{-}=q_{+}=q$ of clause (d) of the declared Coulomb model. When the example\nis read as hydrogen, the hydrogen assignment is $Z=1$, so $q=e$ and\n$\\kappa=e^{2}/(4\\pi\\varepsilon_{0})$; for a general hydrogen-like ion the\ncharge product is $q_{-}q_{+}=Ze^{2}$ and must replace $q^{2}$ in $\\kappa$.\nAdopt the declared one-centre Coulomb model\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with\nparameters $\\hbar>0$, $m>0$, coupling $\\kappa>0$ and length scale\n$a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, the bound-energy result\n[[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]] and the two-body\nreading [[pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum]]\nwith masses $m_{1},m_{2}>0$ and reduced mass\n$\\mu=m_{1}m_{2}/(m_{1}+m_{2})$. Let the charge parameter be $q>0$ with\n$\\kappa=q^{2}/(4\\pi\\varepsilon_{0})$, let $c$ be the speed of light of the SI\nconventions of [[def-nrqm-framework-quantities-and-units]] clause (c), and put\n$$\\alpha:=\\frac{q^{2}}{4\\pi\\varepsilon_{0}\\hbar c}=\\frac{\\kappa}{\\hbar c},$$\nthe dimensionless coupling of the model. Then the following identities hold\nexactly for the declared parameters:\n\n(a) $E_{n}:=-\\dfrac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}=-\\dfrac{\\hbar^{2}}{2ma_{\\kappa}^{2}n^{2}}$\nfor every $n\\ge1$, so\n$\\dfrac{m\\kappa^{2}}{2\\hbar^{2}}=\\dfrac{\\hbar^{2}}{2ma_{\\kappa}^{2}}$ and\n$E_{1}=-\\dfrac{\\hbar^{2}}{2ma_{\\kappa}^{2}}$;\n\n(b) $\\kappa=\\alpha\\hbar c$, hence\n$E_{n}=-\\dfrac{m\\alpha^{2}c^{2}}{2n^{2}}$ and\n$a_{\\kappa}=\\dfrac{\\hbar}{m\\alpha c}$;\n\n(c) the relative bound energies of the two-body model are\n$\\mathcal E_{n}=-\\dfrac{\\mu\\kappa^{2}}{2\\hbar^{2}n^{2}}\n=\\dfrac{\\mu}{m_{1}}\\Bigl(-\\dfrac{m_{1}\\kappa^{2}}{2\\hbar^{2}n^{2}}\\Bigr)$\nwith\n$\\dfrac{\\mu}{m_{1}}=\\dfrac{1}{1+m_{1}/m_{2}}\\in(0,1)$;\n\n(d) in the reference units of [[def-nrqm-framework-quantities-and-units]]\nclause (b), $[\\hbar]=\\mathrm{kg\\,m^{2}\\,s^{-1}}$,\n$[\\kappa]=\\mathrm{kg\\,m^{3}\\,s^{-2}}$,\n$[a_{\\kappa}]=\\mathrm m$,\n$[E_{n}]=\\mathrm{kg\\,m^{2}\\,s^{-2}}=\\mathrm J$ and $[\\alpha]=1$, so every\ndisplayed identity is dimensionally consistent;\n\n(e) the bottom of the continuous spectrum of the total two-body operator is\n$\\mathcal E_{1}=-\\dfrac{\\mu\\kappa^{2}}{2\\hbar^{2}}$, which coincides with the\nrelative ground energy, and the total operator has no eigenvalue there.\n\nThe identities are conditional model computations in terms of declared\nparameters; no numerical value of any parameter is assigned, and no measured\nquantity is reported. A numerical evaluation of $E_{1}$ requires measured\nvalues of constants such as $\\alpha$ and of the mass ratio $m_{1}/m_{2}$ as\nqualified empirical premises; it is not performed here.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+          "def-nrqm-framework-quantities-and-units",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "thm-nrqm-coulomb-ground-radial-probability-and-units",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum": "physical-result",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "thm-nrqm-coulomb-ground-radial-probability-and-units": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 184-186 (equations (8.25)-(8.27): E = -Z^2 mu e^4/(2 n^2 (4 pi eps_0 hbar)^2), the Rydberg constant R = (1/2) mu (e^2/(4 pi eps_0 hbar))^2 and E = -R/n^2)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.1, printed pages 114-116 (equations (4.30) and (4.31): the energy spectrum and the Bohr radius, and the fine-structure-constant rewriting E = -alpha^2 m_e c^2/(2n^2))",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact algebraic and dimensional verification in the declared one-centre and two-body Coulomb models, using the equal-magnitude, opposite-charge branch q_-=q_+=q and the Z=1 hydrogen assignment: the equivalence of the bound-energy parametrisations in terms of (m, kappa), (hbar, m, a_kappa), (m, alpha, c) and the fixed-nucleus reference, the reduced-mass factor mu/m_1 = 1/(1+m_1/m_2), the identification of the continuum threshold of the two-body operator, and the dimensional consistency of each displayed identity in the reference units of the framework. General hydrogen-like ions use kappa=q_-q_+/(4 pi epsilon_0)=Ze^2/(4 pi epsilon_0). The example assigns no numerical value, reports no measurement and makes no empirical identification; a numerical evaluation would require measured constants as qualified empirical premises and is explicitly deferred."
+      },
+      {
+        "id": "ex-nrqm-central-hydrogen-radial-distributions-and-moments",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Low-lying radial distributions of the Coulomb model: normalisations, moments and the failure of cross-l orthogonality of reduced functions",
+        "statement": "Adopt the declared one-centre Coulomb model\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clauses (a)-(c) with\nparameters $\\hbar>0$, $m>0$, coupling $\\kappa>0$ and\n$a:=a_{\\kappa}=\\hbar^{2}/(m\\kappa)$, and the radial reading of\n[[pthm-nrqm-central-coulomb-bound-state-radial-distributions]]. In the\nnotation of that item, $u_{nl}$ denotes the reduced regular solution with\n$\\psi_{nlm}(x)=u_{nl}(r)Y_{lm}(\\Omega)/r$ and $p_{nl}=|u_{nl}|^{2}/\\|u_{nl}\\|_{2}^{2}$\nthe radial density of the normalised bound state. For the three reduced\nsolutions below choose the normalisation $\\|u_{nl}\\|_2=1$ and the phase\nfor which the coefficient $c_{nl}$ multiplying the displayed Laguerre\npolynomial-exponential expression is positive real. Then:\n\n(a) $u_{10}(r)=2a^{-3/2}r\\,e^{-r/a}$ and\n$u_{20}(r)=2^{-3/2}a^{-3/2}\\bigl(2r-\\frac{r^{2}}{a}\\bigr)e^{-r/(2a)}$ and\n$u_{21}(r)=2^{-3/2}3^{-1/2}a^{-5/2}r^{2}e^{-r/(2a)}$;\n\n(b) $\\|u_{10}\\|_{2}=\\|u_{20}\\|_{2}=\\|u_{21}\\|_{2}=1$, so for these states the\nreduced solution is already normalised and $p_{nl}=|u_{nl}|^{2}$;\n\n(c) the moments\n$$\\int_{0}^{\\infty}r\\,p_{10}(r)\\,dr=\\frac{3a}{2},\\qquad \\int_{0}^{\\infty}r^{2}p_{10}(r)\\,dr=3a^{2},\\qquad \\int_{0}^{\\infty}r\\,p_{20}(r)\\,dr=6a,\\qquad \\int_{0}^{\\infty}r\\,p_{21}(r)\\,dr=5a,$$\nand\n$$\\int_{0}^{\\infty}\\frac{p_{20}(r)}{r}\\,dr=\\int_{0}^{\\infty}\\frac{p_{21}(r)}{r}\\,dr=\\frac{1}{4a};$$\n\n(d) the same-$l$ pair is orthogonal,\n$\\int_{0}^{\\infty}u_{10}(r)u_{20}(r)\\,dr=0$, while the different-$l$ pair is\nnot: $\\int_{0}^{\\infty}u_{20}(r)u_{21}(r)\\,dr=-\\frac{\\sqrt 3}{2}\\ne0$, so the\nreduced radial functions of different angular momentum are not orthogonal in\n$L^{2}((0,\\infty),dr)$, the orthogonality of the full bound states being\ncarried by the angular factor;\n\n(e) the closed forms of (a) agree with the standard radial functions\n$R_{nl}=u_{nl}/r$ of the cited treatments for these states, and the value\n$\\int r\\,p_{nl}$ for the circular state $n=2$, $l=1$ agrees with the general\ncircular-orbit formula $\\langle r\\rangle_{n,n-1}=n(n+\\tfrac12)a$ at $n=2$;\n\n(f) *Scope.* The computation is conditional on the declared model and the\ncited mathematics; $a$ is a model scale, the moments are moments of the\nmodel's radial reading and not measured radii, and no measurement, orbit or\ntrajectory is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "lem-nrqm-central-exponential-moments",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "def-nrqm-framework-quantities-and-units",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-bound-state-radial-distributions": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "lem-nrqm-central-exponential-moments": "mathematical-premise",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1.2, printed pages 187-193 (Table 8.1 of radial eigenfunctions for n <= 3, equation (8.37) <r> = n(n+1/2)a_0/Z for circular orbits and equations (8.52)-(8.60) for <r^-1>, <r^-2>, <r^-3>)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.2, printed pages 116-117 (the generalised Laguerre radial functions L^{2l+1}_{n-l-1}(2r/(n r_B)) and the ground state)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 10.4, printed pages 229-235 (the explicit Laguerre eigenfunctions and their normalisation)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact computation of the reduced radial functions, their normalisations and low moments for the states with n = 1 and n = 2 of the declared one-centre Coulomb model, together with the explicit check that reduced radial functions of different angular momentum are not orthogonal in L^2(dr). The example is a conditional model computation in terms of the declared parameters; it reports no measured radius or density, identifies no size with a laboratory length, and asserts no orbit or trajectory."
+      },
+      {
+        "id": "rem-nrqm-central-hydrogen-spectroscopy-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Empirical status of the hydrogen spectrum on this pair: pending spectroscopy evidence and the limits of the model's spectral statements",
+        "statement": "\n## Remarks\n\n- **What the pair's spectral statements are.** The model's content is the\n  conditional spectral statement of\n  [[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]]: bound energies\n  $E_{n}=-\\frac{m\\kappa^{2}}{2\\hbar^{2}n^{2}}$ with $n^{2}$-fold model\n  degeneracy, a complete negative spectral subspace and a nonzero continuum,\n  together with the two-body threshold reading of\n  [[pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum]]. These\n  are statements about the declared model and its assigned parameters; they\n  are not statements about any measured hydrogen line.\n\n- **Why no experiment appears on this pair.** The design reservation for this\n  pair names a spectroscopy data candidate and marks it pending. No\n  source-backed observation record with preparation, apparatus, calibration,\n  sampling and uncertainty was harvested for this batch, so no experiment\n  item is built and no measured wavelength, frequency or transition is\n  reported. The source treatments do describe the Lyman, Balmer, Paschen and\n  Brackett series and the historical Balmer fit; this page neither reproduces\n  their numerical values nor treats them as its own observations, and the\n  comparison of the model with measured spectra is deferred to a future\n  experiment item carrying its own uncertainty record.\n\n- **What a comparison would presuppose.** A transition-frequency statement\n  $\\nu=(E_{n}-E_{n'})/h$ is a reading of the model together with the radiation\n  extension and the light-matter coupling of later pairs; it is not made on\n  this page. Any comparison with a measured line would test the combined\n  model, apparatus and constant assumptions: the preparation and isolation\n  idealization, the identification of the species parameters with measured\n  masses and charges, the treatment of linewidth, Doppler and instrumental\n  response, and the sampling model of the recorded sample. Agreement of a\n  finite set of measured lines with the predicted values would be evidence\n  about the combined assumptions; it would not be a deductive proof of the\n  model, and disagreement would require the same auxiliary assumptions to be\n  examined before the model is rejected.\n\n- **Excluded corrections and their status.** The gross-structure model omits\n  spin, relativistic fine structure, finite nuclear size, QED corrections\n  including the Lamb shift, hyperfine structure and shielding, as recorded in\n  [[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (f); the\n  source treatments describe some of these corrections and their\n  consequences, but no magnitude, splitting or numerical value is asserted or\n  used by this pair.\n\n- **Identification caution.** The assignment of the model's parameters to a\n  laboratory hydrogen atom is the tested identification of clause (e) of the\n  model definition under the preparation and apparatus postulate\n  ([[post-nrqm-framework-preparation-and-apparatus]]); it is not derived from\n  the mathematics of the model and carries the uncertainty of that\n  identification. The model's spectral statements remain conditional until\n  such an identification, with its qualifications, is supplied.\n",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "post-nrqm-framework-state-and-composition",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum": "physical-result",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1.1, printed page 186 (the emission-line spectrum nu = (R/h)(1/n'^2 - 1/n^2), the Lyman, Balmer, Paschen and Brackett series and the historical Balmer fit as evidence for the model); Section 8.1.3, printed pages 190-192 (the Lamb shift and shielding as corrections beyond the gross-structure model)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3.1, printed pages 115-116 (the Rydberg scale, the infinite number of bound states and the fine-structure exclusion, with the numerical value alpha ~ 1/137)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A status record for the empirical comparison of the Coulomb model's spectrum with hydrogen spectroscopy: the model's spectral statements, what a comparison would presuppose, why no experiment item is built in this batch, and the deferral of transition-frequency and line-intensity statements to the radiation and light-matter items. The record asserts no measured line, no wavelength, no frequency and no empirical result, and it does not endorse or reproduce any numerical value appearing in the cited source treatments."
+      },
+      {
+        "id": "rem-nrqm-central-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope of the central-potential and hydrogen examples page",
+        "statement": "\n## Remarks\n\n- **What the page contains.** Two conditional computations and one status\n  record in the declared Coulomb model: the exact equivalence of the\n  bound-energy parametrisations in terms of $(m,\\kappa)$, $(\\hbar,m,a_{\\kappa})$\n  and $(m,\\alpha,c)$, the reduced-mass factor between the relative and\n  fixed-nucleus energies, and the dimensional checks of those identities\n  ([[ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass]]); the\n  explicit reduced radial functions, normalisations and low moments for the\n  states with $n\\le2$, including the check that reduced radial functions of\n  different angular momentum are not orthogonal\n  ([[ex-nrqm-central-hydrogen-radial-distributions-and-moments]]); and the\n  empirical-status record deferring the comparison with measured spectra\n  ([[rem-nrqm-central-hydrogen-spectroscopy-status]]).\n\n- **What the page does not contain.** No experiment, no reported line, no\n  wavelength or frequency value, no count, no calibration and no statistical\n  inference appears; no item assigns a numerical value to any model parameter\n  or measured constant, and none of the computations establishes that the\n  model or its postulates describes nature. The identification of a concrete\n  hydrogen atom with the declared model is a tested identification under the\n  preparation and apparatus postulate\n  ([[post-nrqm-framework-preparation-and-apparatus]]) and is not made here.\n\n- **Dependence on the A page.** Every statement of the page is conditional on\n  the declared Coulomb model, its assigned energy observable and the spectral\n  theorem\n  ([[def-nrqm-central-framework-coulomb-and-hydrogen-model]],\n  [[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]]); the model\n  scales $a_{\\kappa}=\\hbar^{2}/(m\\kappa)$ and the energies are model data, not\n  measured lengths or energies.\n\n- **Deferred content.** Transition frequencies, line intensities, selection\n  rules and photon statements belong to the radiation and light-matter items\n  of the quantum-mechanics track; scattering and ionisation belong to the\n  three-dimensional scattering pair. The numerical spectroscopic comparison\n  remains a pending experiment candidate and is not anticipated by any claim\n  of this page.\n",
+        "strategy": "n/a",
+        "deps": [
+          "ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass",
+          "ex-nrqm-central-hydrogen-radial-distributions-and-moments",
+          "rem-nrqm-central-hydrogen-spectroscopy-status",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "post-nrqm-framework-preparation-and-apparatus"
+        ],
+        "dependency_roles": {
+          "ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass": "formulation-prerequisite",
+          "ex-nrqm-central-hydrogen-radial-distributions-and-moments": "formulation-prerequisite",
+          "rem-nrqm-central-hydrogen-spectroscopy-status": "formulation-prerequisite",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 18,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 8.1, printed pages 182-193 (the gross-structure model, its radial eigenfunctions and the historical series evidence discussed on this page)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.3, printed pages 111-117 (the hydrogen atom, its spectrum, the Bohr radius and the ground-state wavefunction)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope record for the examples companion of the central-potential and hydrogen pair: the conditional computations it contains, their model reliance and the content it does not supply. The record asserts no mathematical theorem and no empirical result."
+      }
+    ]
+  }
+]

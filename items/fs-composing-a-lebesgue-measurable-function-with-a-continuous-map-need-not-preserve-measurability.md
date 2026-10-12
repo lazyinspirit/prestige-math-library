@@ -36,11 +36,7 @@ Lebesgue measurable, then $g \circ f$ is Lebesgue measurable.
 
 **Proof technique:** direct.
 
-1.1 Choose a nonmeasurable $N\subseteq K$ by [L1], put [L1, L2, choose]
-$E:=\psi^{-1}[N]\subseteq C$, let $g:=\mathbf1_E:[0,1]\to\mathbb R$, and let $f:=\psi^{-1}:[0,2]\to[0,1]$. Completeness makes $E$ Lebesgue measurable in $\mathbb R$, hence measurable in the trace sigma-algebra on $[0,1]$, so [L2] makes $g$ measurable, while [L1] makes $f$ continuous.
+1.1 Choose a nonmeasurable $N\subseteq K$ by [L1], put [L1, L2, choose] $E:=\psi^{-1}[N]\subseteq C$, let $g:=\mathbf1_E:[0,1]\to\mathbb R$, and let $f:=\psi^{-1}:[0,2]\to[0,1]$. Completeness makes $E$ Lebesgue measurable in $\mathbb R$, hence measurable in the trace sigma-algebra on $[0,1]$, so [L2] makes $g$ measurable, while [L1] makes $f$ continuous. [L1, L2, choose]
 
-2.1 But [step 1.1, L1]
+2.1 But [step 1.1, L1] $$(g \circ f)^{-1}((1/2,\infty)) = f^{-1}[E]=N,$$ which does not lie in the trace sigma-algebra $\mathcal L(\mathbb R)|_{[0,2]}$, even though $g$ is measurable and $f$ is continuous. [step 1.1, L1] ∎
 
-$$(g \circ f)^{-1}((1/2,\infty)) = f^{-1}[E]=N,$$
-
-which does not lie in the trace sigma-algebra $\mathcal L(\mathbb R)|_{[0,2]}$, even though $g$ is measurable and $f$ is continuous. [step 1.1, L1] ∎

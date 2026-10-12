@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tensoring-defines-a-pseudofunctor-with-interchange.md

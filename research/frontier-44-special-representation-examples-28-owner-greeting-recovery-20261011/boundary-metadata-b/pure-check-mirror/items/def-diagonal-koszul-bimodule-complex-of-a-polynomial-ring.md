@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-diagonal-koszul-bimodule-complex-of-a-polynomial-ring.md

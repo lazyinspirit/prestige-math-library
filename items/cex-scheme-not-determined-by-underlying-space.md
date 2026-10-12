@@ -40,5 +40,4 @@ sources:
 
 2.1 The first scheme is reduced because a field has no nonzero nilpotents. The second is not reduced: $\epsilon$ is nonzero in $D$ because the polynomial $\epsilon$ does not belong to $(\epsilon^2)$, but its square is zero. [F2, step 1.1, algebra]
 
-3.1 Scheme isomorphisms preserve affine coordinate rings up to isomorphism and hence reducedness, so these schemes are not isomorphic. [step 1.1, step 2.1] ∎
- 
+3.1 Scheme isomorphisms preserve affine coordinate rings up to isomorphism and hence reducedness, so these schemes are not isomorphic. [step 1.1, step 2.1] ∎  

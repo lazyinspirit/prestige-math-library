@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full.md

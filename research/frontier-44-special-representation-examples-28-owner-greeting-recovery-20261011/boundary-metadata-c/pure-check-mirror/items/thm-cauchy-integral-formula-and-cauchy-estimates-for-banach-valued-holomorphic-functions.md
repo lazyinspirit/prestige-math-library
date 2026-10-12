@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cauchy-integral-formula-and-cauchy-estimates-for-banach-valued-holomorphic-functions.md

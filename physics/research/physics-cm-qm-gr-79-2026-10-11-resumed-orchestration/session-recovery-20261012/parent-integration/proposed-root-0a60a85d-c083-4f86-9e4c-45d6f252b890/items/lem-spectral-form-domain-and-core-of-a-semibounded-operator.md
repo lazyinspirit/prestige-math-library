@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectral-form-domain-and-core-of-a-semibounded-operator.md

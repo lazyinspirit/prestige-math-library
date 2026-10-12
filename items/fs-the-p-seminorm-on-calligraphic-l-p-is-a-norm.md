@@ -36,8 +36,7 @@ $f\mapsto\|f\|_p$ is a norm.
 
 **Proof technique:** Refute with a nonzero function supported on a null set, whose seminorm is $0$.
 
-1.1 Let $f$ be the function from [L1]. Then $f\ne0$ pointwise but [L1]
-$\|f\|_p=0$.
+1.1 Let $f$ be the function from [L1]. Then $f\ne0$ pointwise but [L1] $\|f\|_p=0$. [L1]
 
-2.1 This violates the separation axiom in [L2], so the $p$-seminorm on [step 1.1, L2]
-$\mathcal L^p(\mu)$ is not a norm. ∎
+2.1 This violates the separation axiom in [L2], so the $p$-seminorm on [step 1.1, L2] $\mathcal L^p(\mu)$ is not a norm. [L2, step 1.1] ∎
+

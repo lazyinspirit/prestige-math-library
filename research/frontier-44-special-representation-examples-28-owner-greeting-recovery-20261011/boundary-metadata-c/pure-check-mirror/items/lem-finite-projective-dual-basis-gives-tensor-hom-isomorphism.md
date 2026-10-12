@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-projective-dual-basis-gives-tensor-hom-isomorphism.md

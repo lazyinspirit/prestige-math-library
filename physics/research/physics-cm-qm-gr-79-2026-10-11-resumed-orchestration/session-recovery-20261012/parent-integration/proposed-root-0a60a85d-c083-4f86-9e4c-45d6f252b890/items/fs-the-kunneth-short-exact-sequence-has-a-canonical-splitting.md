@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-kunneth-short-exact-sequence-has-a-canonical-splitting.md

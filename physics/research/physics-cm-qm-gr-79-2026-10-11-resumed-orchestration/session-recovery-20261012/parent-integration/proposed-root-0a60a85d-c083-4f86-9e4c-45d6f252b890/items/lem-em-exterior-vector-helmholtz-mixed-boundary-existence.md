@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-exterior-vector-helmholtz-mixed-boundary-existence.md

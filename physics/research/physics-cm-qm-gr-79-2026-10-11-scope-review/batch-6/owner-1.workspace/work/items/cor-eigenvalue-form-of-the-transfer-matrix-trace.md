@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-eigenvalue-form-of-the-transfer-matrix-trace.md

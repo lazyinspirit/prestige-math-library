@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-product-dirichlet-l-nonvanishing-line-one.md

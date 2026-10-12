@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cg-shrinking-edge-ray-is-locally-finite-but-not-complete.md

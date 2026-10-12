@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-derived-algebra-of-the-radical-lies-in-the-nilradical.md

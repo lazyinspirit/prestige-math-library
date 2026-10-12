@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-birkhoff-ergodic-theorem-holds-for-every-measurable-function.md

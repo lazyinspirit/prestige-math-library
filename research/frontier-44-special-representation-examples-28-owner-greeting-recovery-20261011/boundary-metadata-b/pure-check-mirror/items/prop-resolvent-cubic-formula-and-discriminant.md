@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-resolvent-cubic-formula-and-discriminant.md

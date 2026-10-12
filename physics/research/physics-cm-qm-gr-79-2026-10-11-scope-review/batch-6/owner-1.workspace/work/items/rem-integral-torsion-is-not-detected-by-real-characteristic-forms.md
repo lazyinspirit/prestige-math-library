@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-integral-torsion-is-not-detected-by-real-characteristic-forms.md

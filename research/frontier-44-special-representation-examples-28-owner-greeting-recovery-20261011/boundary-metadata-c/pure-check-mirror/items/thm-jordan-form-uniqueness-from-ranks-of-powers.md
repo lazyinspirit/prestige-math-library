@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-jordan-form-uniqueness-from-ranks-of-powers.md

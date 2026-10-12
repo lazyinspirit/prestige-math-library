@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-in-a-strict-braided-monoidal-category-the-braiding-satisfies-the-yang-baxter-equation.md

@@ -1,0 +1,172 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "10",
+  "round": 1,
+  "reviewed_items": [
+    "lem-cm-roundoff-accumulation-in-one-step-schemes",
+    "def-cm-complex-phase-domains-and-holomorphic-maps",
+    "def-cm-splitting-hamiltonian-and-verlet-map",
+    "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+    "lem-cm-verlet-local-truncation-error-is-cubic",
+    "lem-cm-holomorphic-map-calculus",
+    "prop-cm-drift-kick-and-verlet-preserve-the-canonical-form",
+    "def-cm-analytic-splitting-data-and-exact-splitting-map",
+    "thm-cm-verlet-finite-time-error-is-quadratic",
+    "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+    "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+    "lem-cm-difference-operator-and-domain-loss-bound",
+    "def-cm-modified-log-coefficients-and-truncations",
+    "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+    "lem-cm-truncated-log-coefficient-bounds",
+    "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+    "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+    "lem-cm-optimal-truncation-gives-exponential-local-defect",
+    "lem-cm-modified-energy-differs-by-order-two",
+    "thm-cm-analytic-verlet-energy-on-exponential-times",
+    "lem-cm-separate-roundoff-energy-accumulation",
+    "rem-cm-scope-of-the-certified-verlet-estimates",
+    "ex-cm-verlet-map-of-the-harmonic-oscillator",
+    "ex-cm-analytic-pendulum-verlet-domain-check"
+  ],
+  "reviewed_pages": [
+    "cm-math-numerical",
+    "cm-math-numerical-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The round-0 fixes for Cauchy-radius independence, completeness, vector-valued estimates, realness, coefficient bounds, and roundoff qualifications are present. This final review still finds unsupported mechanical-flow identifications and a local stage-domain proof gap; unresolved items must be escalated after the second review.",
+  "findings": [
+    {
+      "id": "def-cm-analytic-splitting-data-and-exact-splitting-map",
+      "type": "prerequisite",
+      "reason": "Its mechanical-case Remark identifies the analytic flows with D_t and K_t by the drift/kick proposition without carrying that proposition's hypothesis that the entire affine segment stays in U. State this condition or prove the identity for the analytic extensions on a specified domain."
+    },
+    {
+      "id": "thm-cm-analytic-verlet-energy-on-exponential-times",
+      "type": "prerequisite",
+      "reason": "The mechanical clause identifies the exact splitting map with V_h under compact retention of step endpoints alone. That does not ensure the internal kick/drift segments stay in U, as required to apply the real-map flow identification. Require internal-stage admissibility or choose and justify a smaller h0 using the compact margin; this affects ex-cm-analytic-pendulum-verlet-domain-check."
+    },
+    {
+      "id": "lem-cm-difference-operator-and-domain-loss-bound",
+      "type": "local",
+      "reason": "Step 1.1 bounds intermediate composition points by the final endpoint displacement norm, which can be smaller through cancellation. The per-flow bounds in [F2] suffice if summed to bound each intermediate point by 2M|h|; use that bound to establish the stated domain margins."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "def-cm-splitting-hamiltonian-and-verlet-map",
+      "decision": "accept",
+      "reason": "Its Remark now restricts flow identification to cases where the full segment stays in U, matching the proposition."
+    },
+    {
+      "id": "def-cm-analytic-splitting-data-and-exact-splitting-map",
+      "decision": "escalate",
+      "reason": "The mechanical-flow Remark still omits the segment-containment condition from the cited proposition."
+    },
+    {
+      "id": "thm-cm-analytic-verlet-energy-on-exponential-times",
+      "decision": "escalate",
+      "reason": "Endpoint retention alone does not establish the required internal-stage containment for its V_h identification."
+    },
+    {
+      "id": "rem-cm-scope-of-the-certified-verlet-estimates",
+      "decision": "accept",
+      "reason": "The roundoff summary now includes the numerical-map Lipschitz hypothesis and separates its constant from exact-flow stability."
+    },
+    {
+      "id": "lem-cm-verlet-local-truncation-error-is-cubic",
+      "decision": "accept",
+      "reason": "Its convex-tube argument controls the intermediate stages and supplies the local defect hypotheses used downstream."
+    },
+    {
+      "id": "thm-cm-verlet-finite-time-error-is-quadratic",
+      "decision": "accept",
+      "reason": "It uses the stated compact-tube retention and exact-flow stability hypotheses; the changed flow-identification condition is not needed for its recurrence."
+    },
+    {
+      "id": "lem-cm-exact-splitting-map-preserves-the-complex-canonical-form",
+      "decision": "accept",
+      "reason": "Its mechanical remark uses the canonicality result, not an unrestricted identification of real flows with endpoint-defined maps."
+    },
+    {
+      "id": "lem-cm-difference-operator-and-domain-loss-bound",
+      "decision": "escalate",
+      "reason": "Step 1.1's intermediate-point bound does not follow from the final endpoint displacement as written."
+    },
+    {
+      "id": "lem-cm-complex-analytic-flow-existence-and-holomorphy",
+      "decision": "accept",
+      "reason": "The proof now supplies coordinatewise completeness, vector-valued estimates, and componentwise parameter-integral arguments."
+    },
+    {
+      "id": "def-cm-modified-log-coefficients-and-truncations",
+      "decision": "accept",
+      "reason": "Its definitions and coefficient extractions use the stated holomorphic-flow and difference-operator domains."
+    },
+    {
+      "id": "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+      "decision": "accept",
+      "reason": "Its pullback and bracket arguments rely on complex canonicity, which remains valid on the declared composition domains."
+    },
+    {
+      "id": "lem-cm-truncated-log-coefficient-bounds",
+      "decision": "accept",
+      "reason": "Step 3.1 now applies the Cauchy estimate at strictly smaller radii and takes the limit."
+    },
+    {
+      "id": "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+      "decision": "accept",
+      "reason": "The real-analytic continuation and real-preserving Picard arguments are now explicit."
+    },
+    {
+      "id": "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+      "decision": "accept",
+      "reason": "Its formal reversibility and parity argument does not depend on the real U flow identification."
+    },
+    {
+      "id": "lem-cm-optimal-truncation-gives-exponential-local-defect",
+      "decision": "accept",
+      "reason": "Its analytic local-defect claim concerns the exact holomorphic splitting map and retains its stated domain hypotheses."
+    },
+    {
+      "id": "lem-cm-modified-energy-differs-by-order-two",
+      "decision": "accept",
+      "reason": "Its finite-sum bounds follow from the coefficient and primitive estimates as stated."
+    },
+    {
+      "id": "lem-cm-separate-roundoff-energy-accumulation",
+      "decision": "accept",
+      "reason": "It uses the analytic splitting map and an explicit residual hypothesis, not the unsupported mechanical identification."
+    },
+    {
+      "id": "ex-cm-analytic-pendulum-verlet-domain-check",
+      "decision": "escalate",
+      "reason": "Its application of the energy theorem to velocity Verlet needs a step restriction or proof ensuring all internal stages remain in U."
+    },
+    {
+      "id": "ex-cm-verlet-map-of-the-harmonic-oscillator",
+      "decision": "accept",
+      "reason": "Its formulas and canonicity use the global oscillator maps; the full affine paths remain in the domain."
+    },
+    {
+      "id": "ex-cm13-verlet-map-of-the-mechanical-splitting-is-canonical",
+      "decision": "accept",
+      "reason": "Its declared configuration domain is R^3, so the drift and kick paths remain in the full phase domain."
+    },
+    {
+      "id": "def-cm13-canonical-map",
+      "decision": "accept",
+      "reason": "Its use of the proposition concerns canonicality only."
+    },
+    {
+      "id": "rem-cm13-locality-topology",
+      "decision": "accept",
+      "reason": "Its numerical summary claims canonicality only and does not use the flow identity."
+    },
+    {
+      "id": "rem-cm18-numerical-error",
+      "decision": "accept",
+      "reason": "It states a separate numerical-map Lipschitz bound for roundoff and preserves the finite-time theorem's tube hypotheses."
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-greendlinger-lemma-for-c-prime-one-sixth-presentations.md

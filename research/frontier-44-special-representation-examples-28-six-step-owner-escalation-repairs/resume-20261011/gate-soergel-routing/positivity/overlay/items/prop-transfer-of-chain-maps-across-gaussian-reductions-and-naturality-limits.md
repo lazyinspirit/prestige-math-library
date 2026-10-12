@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-transfer-of-chain-maps-across-gaussian-reductions-and-naturality-limits.md

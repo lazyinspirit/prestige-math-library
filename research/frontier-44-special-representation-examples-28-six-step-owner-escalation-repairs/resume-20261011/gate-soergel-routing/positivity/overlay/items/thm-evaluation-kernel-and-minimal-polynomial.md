@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-evaluation-kernel-and-minimal-polynomial.md

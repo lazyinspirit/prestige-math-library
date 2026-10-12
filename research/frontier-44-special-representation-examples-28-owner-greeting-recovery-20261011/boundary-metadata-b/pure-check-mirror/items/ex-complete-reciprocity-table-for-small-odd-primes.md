@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-complete-reciprocity-table-for-small-odd-primes.md

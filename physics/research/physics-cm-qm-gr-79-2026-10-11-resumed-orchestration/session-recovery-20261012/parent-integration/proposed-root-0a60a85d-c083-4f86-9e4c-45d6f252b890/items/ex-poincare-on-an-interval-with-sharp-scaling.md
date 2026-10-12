@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poincare-on-an-interval-with-sharp-scaling.md

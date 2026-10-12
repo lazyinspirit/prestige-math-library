@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction.md

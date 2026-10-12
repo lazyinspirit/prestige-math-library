@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-locally-compact-hausdorff-spaces-are-cech-complete.md

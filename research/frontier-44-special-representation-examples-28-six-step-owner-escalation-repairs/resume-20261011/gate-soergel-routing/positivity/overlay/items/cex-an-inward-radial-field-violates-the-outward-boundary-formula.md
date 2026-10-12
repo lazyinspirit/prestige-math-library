@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-an-inward-radial-field-violates-the-outward-boundary-formula.md

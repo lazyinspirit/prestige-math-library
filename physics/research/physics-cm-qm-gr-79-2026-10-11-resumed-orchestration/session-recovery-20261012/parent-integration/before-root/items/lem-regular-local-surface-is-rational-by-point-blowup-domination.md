@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-local-surface-is-rational-by-point-blowup-domination.md

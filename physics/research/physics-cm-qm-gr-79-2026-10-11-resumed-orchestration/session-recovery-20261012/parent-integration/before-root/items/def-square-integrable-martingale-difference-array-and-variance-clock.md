@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-square-integrable-martingale-difference-array-and-variance-clock.md

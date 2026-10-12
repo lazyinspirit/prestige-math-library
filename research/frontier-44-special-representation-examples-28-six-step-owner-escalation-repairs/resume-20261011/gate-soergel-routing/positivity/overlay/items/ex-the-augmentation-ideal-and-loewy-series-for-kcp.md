@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-augmentation-ideal-and-loewy-series-for-kcp.md

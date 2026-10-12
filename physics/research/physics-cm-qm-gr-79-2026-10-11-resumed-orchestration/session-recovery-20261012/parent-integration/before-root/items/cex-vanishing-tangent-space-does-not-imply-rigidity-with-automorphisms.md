@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-vanishing-tangent-space-does-not-imply-rigidity-with-automorphisms.md

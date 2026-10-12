@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems.md

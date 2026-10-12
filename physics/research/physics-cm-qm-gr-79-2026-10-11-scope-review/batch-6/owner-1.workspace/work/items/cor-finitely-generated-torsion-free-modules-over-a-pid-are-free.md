@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finitely-generated-torsion-free-modules-over-a-pid-are-free.md

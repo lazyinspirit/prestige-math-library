@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-liouville-theorem-for-plane-harmonic-functions.md

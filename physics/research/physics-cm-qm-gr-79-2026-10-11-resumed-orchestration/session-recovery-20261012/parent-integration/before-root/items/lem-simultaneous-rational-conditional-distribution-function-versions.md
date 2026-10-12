@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simultaneous-rational-conditional-distribution-function-versions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-support-gives-an-entire-fourier-laplace-transform.md

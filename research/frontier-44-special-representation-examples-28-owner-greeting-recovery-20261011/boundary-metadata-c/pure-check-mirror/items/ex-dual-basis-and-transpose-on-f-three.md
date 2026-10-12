@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dual-basis-and-transpose-on-f-three.md

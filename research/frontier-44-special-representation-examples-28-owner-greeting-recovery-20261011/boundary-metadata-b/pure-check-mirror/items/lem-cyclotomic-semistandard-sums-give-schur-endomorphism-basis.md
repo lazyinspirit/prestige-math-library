@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis.md

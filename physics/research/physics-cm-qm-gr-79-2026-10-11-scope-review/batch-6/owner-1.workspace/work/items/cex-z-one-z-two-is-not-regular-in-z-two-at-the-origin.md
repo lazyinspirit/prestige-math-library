@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-z-one-z-two-is-not-regular-in-z-two-at-the-origin.md

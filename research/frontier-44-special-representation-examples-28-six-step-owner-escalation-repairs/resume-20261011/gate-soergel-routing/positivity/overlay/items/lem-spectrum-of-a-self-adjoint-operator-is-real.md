@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-spectrum-of-a-self-adjoint-operator-is-real.md

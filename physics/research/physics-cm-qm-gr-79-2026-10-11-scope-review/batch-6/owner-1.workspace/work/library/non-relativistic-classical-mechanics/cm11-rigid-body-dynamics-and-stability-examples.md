@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm11-rigid-body-dynamics-and-stability-examples.md

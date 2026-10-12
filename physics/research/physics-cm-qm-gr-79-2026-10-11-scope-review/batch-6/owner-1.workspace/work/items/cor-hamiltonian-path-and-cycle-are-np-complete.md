@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hamiltonian-path-and-cycle-are-np-complete.md

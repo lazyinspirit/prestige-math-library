@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-perturbed-scalar-recurrence-root-bounds.md

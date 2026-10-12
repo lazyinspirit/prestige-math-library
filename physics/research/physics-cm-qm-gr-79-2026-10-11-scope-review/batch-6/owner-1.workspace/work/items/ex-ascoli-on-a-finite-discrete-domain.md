@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ascoli-on-a-finite-discrete-domain.md

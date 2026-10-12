@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-proper-morse-slabs-give-complete-connecting-trajectories.md

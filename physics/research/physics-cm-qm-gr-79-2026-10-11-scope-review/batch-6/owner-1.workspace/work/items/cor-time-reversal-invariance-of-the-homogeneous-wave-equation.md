@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-time-reversal-invariance-of-the-homogeneous-wave-equation.md

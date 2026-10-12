@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-intersection-pairing-of-a-closed-oriented-surface.md

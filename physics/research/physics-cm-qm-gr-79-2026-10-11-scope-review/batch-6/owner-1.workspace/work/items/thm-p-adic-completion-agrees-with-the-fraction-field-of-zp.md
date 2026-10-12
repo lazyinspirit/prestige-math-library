@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-p-adic-completion-agrees-with-the-fraction-field-of-zp.md

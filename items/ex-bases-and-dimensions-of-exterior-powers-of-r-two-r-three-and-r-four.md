@@ -39,11 +39,10 @@ In the standard bases, the exterior powers have the following bases and dimensio
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], the listed families are exactly the increasing-index wedges of the standard bases, so they are bases of the corresponding exterior powers. [L1, given]
+ 1.1 By [L1], the listed families are exactly the increasing-index wedges of the standard bases, so they are bases of the corresponding exterior powers. [L1, given]
 
 1.2 By [L2], the dimensions are the binomial counts: $1,2,1$ for $\mathbb R^2$; $1,3,3,1$ for $\mathbb R^3$; and $1,4,6,4,1$ for $\mathbb R^4$, matching the sizes of the listed families. [L2]
 
 1.3 By [L3], every degree above the top vanishes, so no further nonzero pieces appear. [L3]
 
-2.1 Steps 1.1, 1.2 and 1.3 verify all displayed bases, dimensions, and vanishing statements. [step 1.1, step 1.2, step 1.3] ∎
+2.1 Steps 1.1, 1.2 and 1.3 verify all displayed bases, dimensions, and vanishing statements. [step 1.1, step 1.2, step 1.3] ∎ 

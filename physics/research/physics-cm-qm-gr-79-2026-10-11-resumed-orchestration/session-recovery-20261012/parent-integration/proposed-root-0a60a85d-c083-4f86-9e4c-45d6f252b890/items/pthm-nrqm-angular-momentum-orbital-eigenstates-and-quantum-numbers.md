@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-angular-momentum-orbital-eigenstates-and-quantum-numbers.md

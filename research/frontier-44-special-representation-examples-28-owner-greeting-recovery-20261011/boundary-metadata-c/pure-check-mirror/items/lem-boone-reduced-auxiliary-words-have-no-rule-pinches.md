@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-boone-reduced-auxiliary-words-have-no-rule-pinches.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-real-cartan-subalgebra-is-conjugate-to-a-theta-stable-one.md

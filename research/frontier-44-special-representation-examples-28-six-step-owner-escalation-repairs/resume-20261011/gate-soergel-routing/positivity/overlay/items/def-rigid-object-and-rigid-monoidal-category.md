@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-rigid-object-and-rigid-monoidal-category.md

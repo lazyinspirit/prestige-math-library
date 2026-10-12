@@ -1,0 +1,2885 @@
+{
+  "version": 1,
+  "scope": [
+    "def-proper-continuous-map",
+    "lem-proper-continuous-map-stability",
+    "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+    "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+    "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+    "lem-analytic-six-operation-support-and-trace-calculus",
+    "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+    "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+    "ex-dualizing-and-closed-support-shifts-on-the-complex-line",
+    "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+    "thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+    "lem-smooth-complex-pullback-is-exact-for-the-middle-perverse-t-structure"
+  ],
+  "contracts": {
+    "def-proper-continuous-map": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition applies to the empty space and to empty preimages: the condition quantifies over compact subsets and their preimages only, and imposes nothing when there are none."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero value, zero-dimensional computation or vanishing count occurs; the Definition is a condition on preimages of compacta."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton hypothesis occurs; a one-point space is simply a special case of an arbitrary topological space."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no degenerate parameter or limiting construction; properness is a plain condition on f."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval, boundary point or asymptotic endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition is choice-free: it quantifies over given compact subsets and their preimages and selects nothing."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition records the equivalence between the intrinsic and ambient readings of compactness as a convention, citing lem-compactness-of-a-subspace-is-ambient; this is a Definition-level comparison, not a separate theorem with a forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The same Definition-level comparison supplies the reverse reading of compactness of preimages; no converse theorem is asserted beyond the cited equivalence of the two readings."
+        }
+      ]
+    },
+    "lem-proper-continuous-map-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-proper-continuous-map",
+          "source_section": "Definition",
+          "quote": "Then $f$ is **proper** when for every compact subset $K\\subseteq Y$ ([[def-compact-space]]) its preimage $f^{-1}(K)$ is a compact subset of $X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "**Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y, \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a continuous bijection, then $f$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]).",
+          "uses": [
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "The union of the empty list is $\\varnothing$, which is a compact subset of every space.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-products-of-compact-spaces",
+          "source_section": "Statement",
+          "quote": "In particular a binary product $X \\times Y$ of compact spaces is compact, and the empty product, a one-point space, is compact.",
+          "uses": [
+            "1.3",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hausdorff-iff-the-diagonal-is-closed",
+          "source_section": "Statement",
+          "quote": "Then $X$ is Hausdorff ([[def-hausdorff-space]]) if and only if the diagonal $\\Delta_X$ ([[def-the-diagonal-of-a-space]]) is closed in $X \\times X$: $$X \\text{ Hausdorff} \\iff \\Delta_X = \\overline{\\Delta_X} \\text{ in } X \\times X .$$ The condition on the right is a single closedness statement about one subset of one space, with no quantifier over pairs of",
+          "uses": [
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-the-diagonal-of-a-space",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ and $(Y, \\mathcal{T}_Y)$ be topological spaces ([[def-topological-space]]).",
+          "uses": [
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-compactness-of-a-subspace-is-ambient",
+          "source_section": "Statement",
+          "quote": "**Compactness read in the ambient space.** $A$ is a compact subset of $X$ ([[def-compact-space]]), that is $(A, \\mathcal{T}_A)$ is a compact space, if and only if for every family $\\mathcal{U} \\subseteq \\mathcal{T}$ with $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "A subset of $S$ that lies in $\\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the ambient space needs emphasis.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "- $(X,\\mathcal{T})$ is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0 \\cup \\dots \\cup U_n .$$ - A subset $A \\subseteq X$ is a **compact subset** of $X$ when the",
+          "uses": [
+            "1.1",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "**The product topology.** The **product topology** $\\mathcal{T}^{\\Pi}$ on $\\prod_i X_i$ is the initial topology of the family of projections $(\\pi_i)_{i \\in I}$ ([[def-initial-and-final-topology]]): the topology generated by the subbasis $$\\mathcal{G} \\;:=\\;",
+          "uses": [
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-initial-and-final-topology",
+          "source_section": "Definition",
+          "quote": "**Two degenerate cases, stated because they are used.** For $I = \\varnothing$ the initial topology is $\\langle \\varnothing \\rangle = \\{\\varnothing, X\\}$, the indiscrete topology, and the final topology is $\\mathcal{P}(X)$, the discrete topology, the defining condition being vacuous ([[def-standard-topologies]], [[def-topology-basis-subbasis]]).",
+          "uses": [
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-continuous-map-top",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous at $x$** if for every neighbourhood $V$ of $f(x)$ in $Y$ the preimage $f^{-1}[V]$ is a neighbourhood of $x$ in $X$.",
+          "uses": [
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "**A neighbourhood base of compact sets.** If $X$ is locally compact ([[def-locally-compact-space]]) and Hausdorff ([[def-hausdorff-space]]), then every neighbourhood $N$ of a point $x \\in X$ ([[def-neighbourhood-top]]) contains a compact neighbourhood of $x$;",
+          "uses": [
+            "1.6",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "**In a compact Hausdorff space the two classes coincide.** If in addition $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if it is closed.",
+          "uses": [
+            "1.6",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Closed inclusions are proper. Let $i:Z\\hookrightarrow X$ be the inclusion of a closed subset and let $K\\subseteq X$ be compact. Then $i^{-1}(K)=K\\cap Z=K$ as a set; the subspace topology that $K$ inherits from $Z$ is the topology ",
+          "step": "1.1",
+          "inputs": [
+            "F6",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Composites of proper maps are proper. For $K\\subseteq Z$ compact, $(gf)^{-1}(K)=f^{-1}(g^{-1}(K))$; the set $g^{-1}(K)$ is compact by [F1] applied to $g$, and then its $f$-preimage is compact by [F1] applied to $f$. Hence $gf$ is ",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Fibres of a proper map are compact. A one-point space is compact by [F4], so for each $y\\in Y$ the preimage $f^{-1}(\\{y\\})$ is compact by [F1].",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Restrictions to closed subspaces are proper. Let $S\\subseteq X$ be closed, and give $S$ its subspace topology. For a compact $K\\subseteq Y$ one has $(f|_S)^{-1}(K)=f^{-1}(K)\\cap S$. The set $f^{-1}(K)$ is compact by [F1], and $f^{",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F6",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "Properness is preserved by base change along a map into a Hausdorff space. Let $K\\subseteq Y'$ be compact and put $K_0=u[K]$, a compact subset of $Y$ by [F2]. Then $f^{-1}(K_0)$ is compact by [F1], so the product $f^{-1}(K_0)\\time",
+          "step": "1.5",
+          "inputs": [
+            "F7",
+            "F1",
+            "F4",
+            "F6",
+            "F2",
+            "F5",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "Proper maps into locally compact Hausdorff spaces are closed. Let $f:X\\to Y$ be proper with $Y$ locally compact Hausdorff, let $F\\subseteq X$ be closed and let $y\\in Y\\setminus f[F]$. By [F8] there is an open neighbourhood $V$ of ",
+          "step": "1.6",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The six stability properties are established: claim 1 by step 1.1, claim 2 by step 1.2, claim 4 by step 1.3, claim 5 by step 1.4, claim 3 by step 1.5 and claim 6 by step 1.6. Every argument uses only the preimage form of propernes",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 1.5",
+            "step 1.6",
+            "F7",
+            "F1",
+            "F4",
+            "F8",
+            "F6",
+            "F2",
+            "F5",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the empty closed subspace and the empty compact set: the preimage is empty and compact, and the empty product in step 1.5 is compact by theorem F4."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero value or vanishing count occurs; the statements are conditional on properness."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 records that a one-point space is compact and therefore fibres are compact, and step 1.1 uses the one-point base in the closed-inclusion case."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no degenerate parameter; the six claims are structural and hold for arbitrary topological spaces under their stated hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records that no choice principle is used: the compactness and closedness arguments are finite or reduce to closedness of compact subsets in Hausdorff spaces."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the six stated stability implications are asserted, and none of them is a biconditional, so no forward direction of an equivalence is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Each clause is a sufficient stability condition on proper maps; none asserts the converse of the others."
+        }
+      ]
+    },
+    "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, $$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$ DC here includes a prescribed initial point.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ringed-space-module-sheaves-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Then the abelian category $\\mathrm{Mod}(\\mathcal O_X)$ of $\\mathcal O_X$-modules has enough injectives: every $\\mathcal O_X$-module embeds into an injective $\\mathcal O_X$-module, and the functorial injective embedding supplied by the Grothendieck injective-embedding theorem for Grothendieck categories supplies, by iteration of cokernels, one specific",
+          "uses": [
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-below-complexes-admit-injective-replacements",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal A$ has enough injectives and $X^n=0$ for $n<a$, there is a termwise monic quasi-isomorphism $j:X\\to I$ with each $I^n$ injective and $I^n=0$ for $n<a$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-injective-complexes-model-the-bounded-below-derived-category",
+          "source_section": "Statement",
+          "quote": "With supplied bounded-below injective replacements $j_X:X\\to I_X$ (and DC or supplied homotopy extensions), $K^+(\\operatorname{Inj}\\mathcal A)\\to D^+(\\mathcal A)$ is an equivalence of triangulated categories.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-stalk-inverse-image-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let $x\\in X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Then the sequence is exact if and only if, for every point $x\\in X$, the stalk sequence $$ \\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots $$ is exact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-inverse-direct-image-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let $\\mathcal F$ be a sheaf on $X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification of this presheaf: $$ f^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-tensor-product",
+          "source_section": "Definition",
+          "quote": "The **tensor-product sheaf** is the sheafification of this presheaf: $$\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G := a(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G).$$",
+          "uses": [
+            "1.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, and let $\\mathcal F,\\mathcal G$ be $\\mathcal O_X$-modules.",
+          "uses": [
+            "1.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "1.2",
+            "2.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied injective resolution data on all objects of $\\mathcal A$, and let $F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor.",
+          "uses": [
+            "2.2",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-positive-right-derived-functors-vanish-on-injective-objects",
+          "source_section": "Statement",
+          "quote": "Let $I$ be a supplied injective resolution datum on a class $\\mathcal D$ and $F:\\mathcal A\\to\\mathcal B$ an additive functor between abelian categories.",
+          "uses": [
+            "2.2",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Fix a topological space $X$, let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied functorial injective resolution datum on $\\mathrm{Ab}(X)$ of [[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian sheaf $\\mathcal F$ one",
+          "uses": [
+            "2.2",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-flasque-kernel-lifts-quotient-sections",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space and let $$0\\to\\mathcal F\\to\\mathcal G\\xrightarrow{\\ \\varphi\\ }\\mathcal H\\to0$$ be a short exact sequence of abelian sheaves on $X$ ([[def-exact-sequence-sheaves]]) in which $\\mathcal F$ is flasque ([[def-flasque-sheaf]]).",
+          "uses": [
+            "1.3",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-flasque-sheaf",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **flasque**, also called **flabby**, when each of these restriction maps is surjective: for all open $U\\subseteq V\\subseteq X$ the map $\\rho^V_U$ is onto.",
+          "uses": [
+            "1.3",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "cor-the-cone-criterion-from-the-general-long-exact-sequence",
+          "source_section": "Statement",
+          "quote": "For a chain map $f:C_\\bullet\\to D_\\bullet$, the cone $\\operatorname{Cone}(f)$ is acyclic if and only if $f$ is a quasi-isomorphism.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-long-exact-sequence-in-cohomology",
+          "source_section": "Statement",
+          "quote": "Let $$0\\to A^\\bullet\\to B^\\bullet\\to C^\\bullet\\to0$$ be a short exact sequence of cochain complexes in an abelian category.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-acyclic-assembly-by-exact-columns",
+          "source_section": "Statement",
+          "quote": "Let $K^{p,q}$ be a first-quadrant double cochain complex whose signed total complex uses finite direct sums on every diagonal.",
+          "uses": [
+            "2.3",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The inverse image $f^*=f^{-1}$ is exact and $f^*\\dashv f_*$, and $f_*$ preserves injective objects. By [F4] there is a natural isomorphism $(f^{-1}G)_x\\cong G_{f(x)}$ under which the stalk of $f^{-1}\\varphi$ is $\\varphi_{f(x)}$; s",
+          "step": "1.1",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The tensor product has the expected stalks, and tensoring is exact in each variable. Define $A\\otimes_kB$ as the sheafification of the sectionwise tensor presheaf of [F5]. By [F5] sheafification preserves stalks, so $(A\\otimes_kB)",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Injective $k$-sheaves are flasque. Let $I$ be injective and let $U\\subseteq V$ be open. The canonical map $j_{U!}k_U\\to j_{V!}k_V$ of [F6] is a monomorphism of $k$-sheaves: over an open $W$ it is the identity $k\\to k$ when $W\\subs",
+          "step": "1.3",
+          "inputs": [
+            "F6",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The adjunction $f^*\\dashv Rf_*$ holds on bounded-below derived categories. Let $F$ be a bounded-below complex on $X$ and let $j:F\\to I_F$ be a bounded-below termwise injective replacement, supplied under DC by [F3]; declare $Rf_*F",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Flasque $k$-sheaves are acyclic for sections on every open set. Let $F$ be flasque and embed it into an injective $I$ using [F2], with quotient $Q$. Viewed as a short exact sequence of underlying abelian sheaves, the sequence $0\\t",
+          "step": "2.2",
+          "inputs": [
+            "step 1.3",
+            "F7",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Bounded complexes are K-flat, and the signed total tensor computes the derived tensor. Let $A$ be a bounded complex, say $A^p=0$ for $p\\notin[a,b]$, and let $C$ be an acyclic bounded-below complex. Form the double cochain complex ",
+          "step": "2.3",
+          "inputs": [
+            "step 1.2",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-2-4",
+          "claim": "The sheaf tensor–Hom adjunction holds on sections over each open. For $k_X$-modules $H,A,G$ there is a natural bijection $\\operatorname{Hom}_X(H\\otimes_kA,G)\\cong\\operatorname{Hom}_X(H,\\mathcal Hom(A,G))$: on sections over an open",
+          "step": "2.4",
+          "inputs": [
+            "step 1.2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The internal derived Hom is computed by the injective model. Let $A$ be a bounded complex, let $B$ be a bounded-below complex, and let $j_B:B\\to I_B$ be a bounded-below termwise injective replacement supplied by [F3]; the complex ",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 2.4",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Bounded-below flasque complexes are acyclic for derived sections. Let $C^\\bullet$ be a bounded-below complex of flasque $k$-sheaves, with $C^n=0$ for $n<b$, let $\\varphi:C^\\bullet\\to J^\\bullet$ be a bounded-below termwise injectiv",
+          "step": "3.2",
+          "inputs": [
+            "step 2.2",
+            "F7",
+            "F3",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The internal derived Hom is well defined on the bounded derived categories. Let $A\\to A'$ be a quasi-isomorphism of bounded complexes and let $I$ be a bounded-below complex of injectives. The canonical map $\\mathcal Hom^\\bullet(A'",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F9",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The tensor–Hom adjunction and its coherence identities hold on the derived category. For a bounded complex $C$ and a bounded-below complex $I$ of injectives, the currying map $\\mathcal Hom^\\bullet(A\\otimes_kC,I)\\to\\mathcal Hom^\\bu",
+          "step": "5.1",
+          "inputs": [
+            "step 2.3",
+            "step 2.4",
+            "step 3.1",
+            "step 4.1",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The claims are now assembled. Inverse image is exact and $f^*\\dashv Rf_*$ on $D^+$ is step 2.1; the derived tensor of bounded complexes is the signed total tensor by step 2.3; the internal derived Hom is the injective model of ste",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "step 3.2",
+            "step 4.1",
+            "step 5.1",
+            "F7",
+            "F1",
+            "F8",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 covers empty open sets and zero objects in the flasque-resolution argument, and step 1.1 covers the empty space in the stalk and adjunction computations."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.3 treats the zero and acyclic complexes in the K-flatness assembly, and step 3.1 the vanishing of the Hom complex in low degrees; the zero section is used throughout."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 computes the tensor of a single sheaf with the constant sheaf, and step 2.4 verifies the adjunction on a single open, which is the one-generator case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The boundedness hypotheses include complexes concentrated in a single degree and the zero complex; steps 2.3 and 3.1 treat these degenerate ranges explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur; cohomological degrees are arbitrary integers and the bounded-below bounds are handled in steps 2.3 and 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 records the exact AC uses: the AC to DC derivation, the injective replacement and enough-injectives data, the delta-functor and injective-acyclicity statements, and the flasque section lifting, while the stalk, tensor, Hom and adjunction verifications are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states exactness, adjunction and acyclicity assertions; no equivalence between two conditions is part of the claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse statements, such as reconstructing exactness from the adjunction, are not part of the claim and are not used."
+        }
+      ]
+    },
+    "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition covers the empty open set and the empty resolution: K_U and the exceptional candidate are formed for arbitrary opens, and empty supports satisfy the properness condition vacuously."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition specifies the zero complex and the zero sheaf conventions through the derived categories, and the resolution may be the zero resolution in degrees outside 0 to d."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No singleton hypothesis; the terminal map and the constant field k are fixed data, and k_X is a single structure sheaf."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no degenerate parameter in the Definition itself; the finite-dimensional hypotheses on the terminal map are hypotheses, not constructions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or endpoint occurs; cohomological shifts are recorded for all integers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition states that AC is used only for injective replacements, and that the proper-support sections, extension by zero and the exceptional candidate are choice-free constructions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item fixes definitions and construction data; no biconditional claim is introduced by the Definition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A definition of notation has no converse direction to establish."
+        }
+      ]
+    },
+    "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+          "source_section": "Definition",
+          "quote": "The prescriptions are those of Verdier's exposé: $f^*$ is the exact inverse image, $f_!$ is the sheaf of sections whose closed support is proper over the base — a presheaf by the local nature of properness, whose sheaf property on bounded-below injective inputs is proved by the exceptional-adjoint theorem recorded in `justified_by` — $Rf_*$ is derived from",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-bounded-below-complexes-admit-injective-replacements",
+          "source_section": "Statement",
+          "quote": "If $\\mathcal A$ has enough injectives and $X^n=0$ for $n<a$, there is a termwise monic quasi-isomorphism $j:X\\to I$ with each $I^n$ injective and $I^n=0$ for $n<a$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+          "source_section": "Statement",
+          "quote": "For bounded complexes $A,B$ ([[def-bounded-bounded-below-and-bounded-above-complex]]) the derived tensor over $k$ is their signed total tensor ([[def-sheaf-tensor-product]]), and for bounded $A$ and bounded-below $B$ the derived internal Hom $R\\mathcal Hom(A,B)$ is computed by $\\mathcal Hom^\\bullet(A,I_B)$ in a $k$-linear bounded-below injective model $B\\to",
+          "uses": [
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "source_section": "Statement",
+          "quote": "Moreover, for pairwise disjoint compact subsets $K_1,\\dots,K_m\\subseteq X$ and sections $s_j\\in\\mathcal F(U_j)$ over open neighbourhoods $U_j$ of the respective $K_j$, there are an open neighbourhood $U$ of $K_1\\cup\\dots\\cup K_m$ and a section $s\\in\\mathcal F(U)$, together with, for every $j$, an open neighbourhood $W_j\\subseteq U_j$ of $K_j$ with",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "**Flasque implies c-soft.** If $\\mathcal F$ is flasque ([[def-flasque-sheaf]]) then $\\mathcal F$ is c-soft: a class in $(i^{-1}\\mathcal F)(K)$ is represented by a section $s$ over an open neighbourhood $U$ of $K$, and flasqueness extends $s$ to a global section $t\\in\\mathcal F(X)$ with $t|_U=s$, so $t$ is a preimage of that class.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "if $\\mathcal F$ is c-soft ([[def-c-soft-sheaf]]), every section of $\\mathcal F$ over a compact subset $K\\subseteq X$ extends to a compactly supported global section whose support is contained in any prescribed open neighbourhood of $K$;",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "**Delta functor and the compact case.** Since $\\Gamma_c(X,-)$ is additive and left exact and the datum is defined on all of $\\mathrm{Ab}(X)$, the functors $R^q\\Gamma_c(X,-)$, $q\\ge0$, carry connecting maps that make them a cohomological delta functor with $R^0\\Gamma_c(X,-)\\cong\\Gamma_c(X,-)$, and every short exact sequence of abelian sheaves has a long",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "**Delta functor and the compact case.** Since $\\Gamma_c(X,-)$ is additive and left exact and the datum is defined on all of $\\mathrm{Ab}(X)$, the functors $R^q\\Gamma_c(X,-)$, $q\\ge0$, carry connecting maps that make them a cohomological delta functor with $R^0\\Gamma_c(X,-)\\cong\\Gamma_c(X,-)$, and every short exact sequence of abelian sheaves has a long",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions",
+          "source_section": "Statement",
+          "quote": "Then every sheaf $\\mathcal A$ of $k$-vector spaces on $X$ has a bounded resolution by fibrewise c-soft sheaves: there is an exact sequence $$0\\longrightarrow\\mathcal A\\longrightarrow\\mathcal K^0\\longrightarrow\\mathcal K^1\\longrightarrow\\cdots\\longrightarrow\\mathcal K^d\\longrightarrow0$$ in which each $\\mathcal K^j$ restricts to a c-soft sheaf on every fibre",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-proper-continuous-map",
+          "source_section": "Definition",
+          "quote": "The stability properties consumed by the later items — closed inclusions are proper, composites of proper maps are proper, properness is preserved by base change along a continuous map into a Hausdorff space, and fibres and closed subspaces of a proper map inherit properness — are proved in the lemma `lem-proper-continuous-map-stability` on this page.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-proper-continuous-map-stability",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is proper and $Y$ is locally compact Hausdorff ([[def-locally-compact-space]]), then $f$ is a closed map: the image of every closed subset of $X$ is closed in $Y$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-support-of-a-sheaf-section",
+          "source_section": "Definition",
+          "quote": "If every germ of $s$ is zero then $s=0$ by the locality axiom of a sheaf applied to the cover of $U$ by its open subsets ([[lem-section-zero-if-all-germs-zero]]);",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-abelian-sheaves-admit-bounded-above-flat-resolutions",
+          "source_section": "Statement",
+          "quote": "Then there are a cochain complex $\\mathcal P^\\bullet$ of abelian sheaves with $\\mathcal P^n$ flat for every $n$ ([[def-flat-abelian-sheaf]]) and $\\mathcal P^n=0$ for every $n>a$, and a cochain map ([[def-cochain-map]]) $\\alpha:\\mathcal P^\\bullet\\to\\mathcal C^\\bullet$ that is surjective on stalks in every degree and induces an isomorphism",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-derived-hom-in-the-bounded-setting",
+          "source_section": "Definition",
+          "quote": "Alternatively, with supplied bounded-below injective models under [[thm-injective-complexes-model-the-bounded-below-derived-category]], use $Q\\underline{\\operatorname{Hom}}(M,I_N)$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "Then for every open subspace $U\\subseteq X$ and every integer $q>0$, $$H^q(U,\\mathcal F|_U)=0,$$ where $H^q(U,-)$ denotes sheaf cohomology on the space $U$ ([[def-sheaf-cohomology-derived-global-sections]]) computed with the global sections functor of $U$, and $\\mathcal F|_U$ is the restriction of $\\mathcal F$ to $U$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-flasque-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]]).",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "**A neighbourhood base of compact sets.** If $X$ is locally compact ([[def-locally-compact-space]]) and Hausdorff ([[def-hausdorff-space]]), then every neighbourhood $N$ of a point $x \\in X$ ([[def-neighbourhood-top]]) contains a compact neighbourhood of $x$;",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space ([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in [[def-compact-space]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "**Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y, \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a continuous bijection, then $f$ is a homeomorphism ([[def-homeomorphism-and-open-maps]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]), with subspaces as in [[def-subspace-topology-top]] and compactness as in [[def-compact-space]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The proper-support functor is a sheaf, additive and left exact; for proper $f$ it equals $f_*$, for an open inclusion it is extension by zero, and for a closed inclusion it is direct image. For a sheaf $A$ and open $V\\subseteq Y$ ",
+          "step": "1.1",
+          "inputs": [
+            "F9",
+            "F12",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The comparison map to compactly supported fibre sections is injective. For $y\\in Y$ and a sheaf $A$ on $X$, restriction of representatives defines $(f_!A)_y\\to\\Gamma_c(X_y,A|_{X_y})$: a germ represented by $s\\in f_!A(V)$ restricts",
+          "step": "1.2",
+          "inputs": [
+            "F9",
+            "F3",
+            "F12",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The comparison map is surjective, hence an isomorphism. Let $t\\in\\Gamma_c(X_y,A|_{X_y})$ be represented by a section near its compact support $Q=\\operatorname{Supp}(t)\\subseteq X_y$; by [F3] applied to the sheaf $A$ on $X$ there i",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F12",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Fibrewise acyclicity and the fibre formula. If $A$ is injective then $A$ is $c$-soft by [F5], and restriction of a $c$-soft sheaf to a closed subspace is $c$-soft by [F4]; a fibre $X_y=f^{-1}(\\{y\\})$ is closed because $\\{y\\}$ is c",
+          "step": "2.1",
+          "inputs": [
+            "step 1.3",
+            "F7",
+            "F4",
+            "F6",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The complex $H_K(I)$ is a termwise flasque sheaf complex with lower bound $\\inf(I)-d$. Let $I$ be a bounded-below injective complex on $Y$ and $K$ the finite fibrewise-soft resolution of [F7] in degrees $0,\\dots,d$, with $K_U=j_{U",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F7",
+            "F1",
+            "F4",
+            "F5",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The generators $E_U=j_{U!}k_U$ are resolved by $K_U$ against $f_!$, and derived sections of $H_K(I)$ are computed by the ordinary section complex. By [F9] and [F1], $\\operatorname{Hom}_X(E_U,H_K(I))=\\operatorname{H}^0$ of the comp",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F9",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The generator resolution of a bounded complex and the derived comparison. Let $A$ be a bounded complex of $k$-sheaves. By [F10] the descending kernel recursion produces a bounded-above complex $M$ of direct sums of generators $E_U",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "F7",
+            "F1",
+            "F10",
+            "F2",
+            "F11"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The Hom transposition, the adjoint candidate and its lower bound. Taking $I=I_B$ a bounded-below injective replacement of a bounded-below complex $B$ with $I_B^n=0$ for $n<\\inf(B)$ by [F1], step 5.1 gives $\\operatorname{RHom}_X(A,",
+          "step": "6.1",
+          "inputs": [
+            "step 3.1",
+            "step 5.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "The counit and the coherence laws on the bounded constructible specialization. For each closed $Q\\subseteq f^{-1}V$ with $Q\\to V$ proper, the complex of $Q$-supported sections of $H_K(I)$ is $\\operatorname{Hom}^\\bullet_Y(f_!(K|_Q)",
+          "step": "7.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 6.1",
+            "F1",
+            "F8",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats the empty open set and empty supports in the sheaf and left-exactness argument, and step 2.1 the zero complex in the Cech resolution."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 cover the zero complex and the vanishing of the complex below the stated bound, and step 4.1 the zero Hom complex in low degrees."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers the one-point base and singleton fibres in the surjectivity of the comparison map, and step 3.1 the single-generator resolution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case d=0 is included: step 3.1 uses the finite resolution in degrees 0 to d, which is a single term when d=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 records the lower bound inf(B)-d of the adjoint and the vanishing of its terms below that bound, which is the endpoint statement for the cohomological range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 7.1 and the assumption record that AC is consumed only through the injective replacements, the enough-injectives data and the flasque lifting, while the fibre and generator computations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts exactness, a fibre formula, boundedness and a Hom transposition, all one-directional; no equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse implication from the Hom transposition back to the fibre formula is not asserted."
+        }
+      ]
+    },
+    "lem-analytic-six-operation-support-and-trace-calculus": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+          "source_section": "Statement",
+          "quote": "For a continuous map $f:X\\to Y$ of locally compact Hausdorff spaces, the proper-support functor $f_!$ of [[def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces]] is left exact, satisfies $(Rf_!A)_y\\simeq R\\Gamma_c(X_y,A|_{X_y})$ on every fibre, and maps bounded derived categories into bounded derived categories.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+          "source_section": "Definition",
+          "quote": "The prescriptions are those of Verdier's exposé: $f^*$ is the exact inverse image, $f_!$ is the sheaf of sections whose closed support is proper over the base — a presheaf by the local nature of properness, whose sheaf property on bounded-below injective inputs is proved by the exceptional-adjoint theorem recorded in `justified_by` — $Rf_*$ is derived from",
+          "uses": [
+            "1.2",
+            "1.4",
+            "1.5",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+          "source_section": "Statement",
+          "quote": "For bounded complexes $A,B$ ([[def-bounded-bounded-below-and-bounded-above-complex]]) the derived tensor over $k$ is their signed total tensor ([[def-sheaf-tensor-product]]), and for bounded $A$ and bounded-below $B$ the derived internal Hom $R\\mathcal Hom(A,B)$ is computed by $\\mathcal Hom^\\bullet(A,I_B)$ in a $k$-linear bounded-below injective model $B\\to",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "The **internal Hom sheaf** $$ \\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G) $$ is the sheaf on $X$ defined by $$U\\longmapsto \\operatorname{Hom}_{\\mathcal O_X|_U}(\\mathcal F|_U,\\mathcal G|_U)$$ for each open set $U \\subseteq X$.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-tensor-product",
+          "source_section": "Definition",
+          "quote": "The **tensor-product sheaf** is the sheafification of this presheaf: $$\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G := a(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G).$$",
+          "uses": [
+            "1.1",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "if $\\mathcal F$ is c-soft ([[def-c-soft-sheaf]]), every section of $\\mathcal F$ over a compact subset $K\\subseteq X$ extends to a compactly supported global section whose support is contained in any prescribed open neighbourhood of $K$;",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "**Neighbourhood formulation.** By [[lem-sections-near-a-compact-set-are-sections-on-that-set]], the source of the restriction map may be replaced by the defining colimit of the inverse-image presheaf, $(i^{-1}\\mathcal F)(K)=\\varinjlim_{U\\supseteq K}\\mathcal F(U)$, so that $\\mathcal F$ is c-soft if and only if for every compact $K$ and every open",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "For a sheaf $\\mathcal F$ on $X$ define the **compactly supported global sections** of $\\mathcal F$ to be the subgroup $$\\Gamma_c(X,\\mathcal F):=\\{\\,s\\in\\Gamma(X,\\mathcal F):\\operatorname{Supp}(s)\\ \\text{is a compact subset of }X\\,\\}\\subseteq\\Gamma(X,\\mathcal F),$$ where the support of a section is the set of points at which its germ is nonzero",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-proper-continuous-map",
+          "source_section": "Definition",
+          "quote": "The stability properties consumed by the later items — closed inclusions are proper, composites of proper maps are proper, properness is preserved by base change along a continuous map into a Hausdorff space, and fibres and closed subspaces of a proper map inherit properness — are proved in the lemma `lem-proper-continuous-map-stability` on this page.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-proper-continuous-map-stability",
+          "source_section": "Statement",
+          "quote": "If $f:X\\to Y$ is proper and $Y$ is locally compact Hausdorff ([[def-locally-compact-space]]), then $f$ is a closed map: the image of every closed subset of $X$ is closed in $Y$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of abelian groups $\\mathcal G$ on $X$, there is a natural bijection $$\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G) \\cong \\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G).$$ 2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "For an open set $V \\subseteq X$, define $$(j_!\\mathcal F)(V) := \\left\\{ s\\in \\mathcal F(V\\cap U): \\operatorname{Supp}(s)\\text{ is closed in }V \\right\\}.$$ Equivalently, $s$ lies in $(j_!\\mathcal F)(V)$ exactly when for every $x\\in V\\setminus U$ there exists an open neighbourhood $W_x \\subseteq V$ with $$ s|_{W_x\\cap U}=0.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-extension-by-zero-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "the adjoint transpose of the identity of $\\mathcal F|_U$ under the adjunction of [[thm-extension-by-zero-adjunction-exactness]] and the unit of the adjunction ([[thm-inverse-direct-image-adjunction]]) fit into a short exact sequence of sheaves of abelian groups on $X$ $$0\\to j_!(\\mathcal F|_U)\\to\\mathcal F\\to i_*(\\mathcal F|_Z)\\to0,$$ where $j_!$ is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-sheaf-supported-on-a-closed-subset-is-a-pushforward",
+          "source_section": "Statement",
+          "quote": "Let $i:Z\\hookrightarrow X$ be the inclusion of a closed subset $Z\\subseteq X$ carrying the subspace topology ([[def-subspace-topology-top]]), and let $\\mathcal G$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]]) whose stalks vanish off $Z$, that is $\\mathcal G_x=0$ for every $x\\in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "source_section": "Statement",
+          "quote": "Moreover, for pairwise disjoint compact subsets $K_1,\\dots,K_m\\subseteq X$ and sections $s_j\\in\\mathcal F(U_j)$ over open neighbourhoods $U_j$ of the respective $K_j$, there are an open neighbourhood $U$ of $K_1\\cup\\dots\\cup K_m$ and a section $s\\in\\mathcal F(U)$, together with, for every $j$, an open neighbourhood $W_j\\subseteq U_j$ of $K_j$ with",
+          "uses": [
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification of this presheaf: $$ f^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-inverse-direct-image-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map, let $\\mathcal G$ be a sheaf on $Y$, and let $\\mathcal F$ be a sheaf on $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Thus a sheaf is exactly a presheaf whose compatible local sections glue uniquely.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Fix a topological space $X$, let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied functorial injective resolution datum on $\\mathrm{Ab}(X)$ of [[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian sheaf $\\mathcal F$ one",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derived-hom-in-the-bounded-setting",
+          "source_section": "Definition",
+          "quote": "Alternatively, with supplied bounded-below injective models under [[thm-injective-complexes-model-the-bounded-below-derived-category]], use $Q\\underline{\\operatorname{Hom}}(M,I_N)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-flasque-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]], [[thm-abelian-sheaves-form-abelian-category]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Closed-support localization. Let $i:Z\\hookrightarrow X$ be a closed inclusion with open complement $j$, and put $\\Gamma_Z\\mathcal F=\\ker(\\mathcal F\\to j_*j^*\\mathcal F)$. Its stalks vanish off $Z$ by [F7], so it is $i_*i^{-1}\\Gamm",
+          "step": "1.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Cartesian base change. In the Cartesian square, inverse image of an injective $I$ on $X$ restricts on every fibre of $f'$ to the restriction of $I$ on the canonically homeomorphic original fibre, so it is fibrewise $c$-soft by [F3",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Independent verification for proper maps. For proper $f$ the same identification can be checked through ordinary compactly supported cohomology: restriction of injectives to compact fibres is $c$-soft and $\\Gamma$-acyclic by [F3],",
+          "step": "1.3",
+          "inputs": [
+            "F3",
+            "F6",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The projection formula. For bounded $A$ choose a bounded-below injective replacement $A\\to I$. On each fibre $X_y$ the restriction $I|_{X_y}$ is $c$-soft by [F3], and $f^*B$ restricts to the constant complex $B_y$; tensoring with ",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "Composition of proper-support direct images. The support definition gives $(gf)_!=g_!f_!$: a section whose support is proper over $Z$ has support proper over $Y$ because the inverse image of a compact $L\\subseteq Y$ is a closed su",
+          "step": "1.5",
+          "inputs": [
+            "F3",
+            "F6",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Exceptional composition and traces on the bounded constructible specialization. If the represented right adjoints preserve the bounded constructible subcategory, so that the Hom formula of [F1] is a full adjunction there, then exc",
+          "step": "2.1",
+          "inputs": [
+            "step 1.5",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Pasting coherence, and the boundary of the claim. The two composites of base-change maps in a pasted rectangle restrict a representative section to the same fibre section, hence agree before deriving, and resolution comparisons pr",
+          "step": "3.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.4",
+            "step 2.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the empty open set and the empty closed complement in the localization triangles, and step 2.1 the empty rectangle in the pasting coherence."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.1 treat the zero tensor factor and the zero complex, and the zero section is prescribed in the support arguments."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles a single closed point in the closed-support localization, and the one-generator case occurs throughout the generator computations."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs; the identities are conditional on the locally compact, finite-dimensional hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the squares are Cartesian and the identities are exact."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records that AC enters only through the assumed injective models of the preceding items, while the support, base-change, projection and pasting computations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma lists isomorphisms and coherence identities, each one-directional in content; no forward direction of a biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse directions, such as deriving the exchange from an ad hoc isomorphism, are not claimed."
+        }
+      ]
+    },
+    "thm-verdier-duality-on-oriented-stratified-complex-varieties": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+          "source_section": "Definition",
+          "quote": "The prescriptions are those of Verdier's exposé: $f^*$ is the exact inverse image, $f_!$ is the sheaf of sections whose closed support is proper over the base — a presheaf by the local nature of properness, whose sheaf property on bounded-below injective inputs is proved by the exceptional-adjoint theorem recorded in `justified_by` — $Rf_*$ is derived from",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+          "source_section": "Statement",
+          "quote": "For a continuous map $f:X\\to Y$ of locally compact Hausdorff spaces, the proper-support functor $f_!$ of [[def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces]] is left exact, satisfies $(Rf_!A)_y\\simeq R\\Gamma_c(X_y,A|_{X_y})$ on every fibre, and maps bounded derived categories into bounded derived categories.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-analytic-six-operation-support-and-trace-calculus",
+          "source_section": "Statement",
+          "quote": "Bounded tensor factors satisfy the projection formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+          "source_section": "Statement",
+          "quote": "Inverse image of sheaves of $k$-vector spaces ([[def-sheaf-on-topological-space]], [[def-inverse-image-presheaf-and-sheaf]]) is exact and $f^*\\dashv Rf_*$, where $Rf_*$ is computed on bounded-below $k$-linear injective replacements ([[lem-bounded-below-complexes-admit-injective-replacements]],",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "The **internal Hom sheaf** $$ \\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G) $$ is the sheaf on $X$ defined by $$U\\longmapsto \\operatorname{Hom}_{\\mathcal O_X|_U}(\\mathcal F|_U,\\mathcal G|_U)$$ for each open set $U \\subseteq X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "source_section": "Definition",
+          "quote": "$A$ is **algebraically constructible**: there exists a finite smooth algebraic stratification with the frontier condition $\\mathfrak S$ of $X$ ([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]) such that for every stratum $S\\in\\mathfrak S$ and every integer $j$ the restriction $H^j(A)|_S$ is locally constant of finite rank",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-locally-constant-sheaf-of-finite-rank",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **locally constant of finite rank** if every point $x\\in S$ has an open neighbourhood $U\\subseteq S$ for which there are an integer $n\\ge0$ and an isomorphism of sheaves on $U$ $$\\mathcal F|_U\\;\\cong\\;k_U^{\\,n},$$ where $k_U$ is the constant sheaf on $U$ with value $k$ and $\\mathcal F|_U$ is the restriction of $\\mathcal F$ to the open",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+          "source_section": "Statement",
+          "quote": "On any separated finite-type complex variety, bounded algebraically constructible objects have bounded finite ordinary and compact-support cohomology, ordinary derived Hom and bounded constructible internal Hom, with coefficient-extension compatibility, by these models locally and finite affine-open descent globally.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+          "source_section": "Statement",
+          "quote": "Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of abelian groups $\\mathcal G$ on $X$, there is a natural bijection $$\\operatorname{Hom}_X(j_!\\mathcal F,\\mathcal G) \\cong \\operatorname{Hom}_U(\\mathcal F,j^{-1}\\mathcal G).$$ 2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification of this presheaf: $$ f^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-support-of-a-sheaf-section",
+          "source_section": "Definition",
+          "quote": "Since $\\operatorname{Supp}(s)$ is closed in $U$ by fact 1, a section whose support is contained in some compact subset of $X$ is compactly supported: a closed subset of a compact space is compact.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derived-hom-in-the-bounded-setting",
+          "source_section": "Definition",
+          "quote": "With supplied bounded-above projective models under [[thm-projective-complexes-model-the-bounded-above-derived-category]], define $\\mathbf R\\operatorname{Hom}(M,N)=Q\\underline{\\operatorname{Hom}}(P_M,N)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an abelian category.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]],",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Fix a topological space $X$, let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]]), and let $I$ be the supplied functorial injective resolution datum on $\\mathrm{Ab}(X)$ of [[thm-abelian-sheaves-have-enough-injectives]]: it assigns to every abelian sheaf $\\mathcal F$ one",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The dualizing object and duality transform. The operations supply $\\omega_X=a_X^!k$ and $D_XA=R\\mathcal Hom(A,\\omega_X)$ [F1]. Dualizing transitivity is $f^!\\omega_Y\\simeq\\omega_X$, and it is established directly by local section ",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Orientation. On an oriented real $n$-manifold and a small contractible ball $U$, the compact-support cochains of $k$ have a single cohomology class in degree $n$, normalized by the positive orientation generator: on a closed simpl",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Local systems on smooth strata. For a finite-rank local system $L$ on a smooth stratum the same local model gives $D_XL\\simeq L^\\vee[n]$ with $n$ the real dimension, and finite-dimensional vector-space evaluation gives $L\\stackrel",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "The incidence model. Choose a finite regular triangulation $P$ with deleted subcomplex $L$ modelling $X$, subordinate to the given constructible $A$; this is a triangulation of a space, not a globally simplicial presentation of an",
+          "step": "1.4",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Duals of the cogenerators. The compact-support local dual formula of step 1.1 computes $D_XI_\\sigma$ directly: at an interior point of $\\sigma$ a small neighbourhood in $\\overline\\sigma$ is an oriented real $\\dim\\sigma$-ball, whos",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Biduality. Since $D_X$ is contravariant exact, its double is covariant exact, and evaluation is a natural transformation of exact functors. Apply it to the finite injective incidence resolution of $A$ supplied by step 1.4; every t",
+          "step": "3.1",
+          "inputs": [
+            "step 1.4",
+            "step 2.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The duality exchange and the extraordinary proper exchange. After biduality, the internally localized exceptional adjunction with $B=\\omega_Y$ gives $Rf_*D_XA\\simeq D_YRf_!A$: both sides represent the sheaf of derived morphisms fr",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "F1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.4 covers the empty deleted subcomplex and the empty set of cells in the finite triangulation model, and step 3.1 the zero object of the heart."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the zero complex in the biduality induction, and step 1.1 the zero coefficients in the local dual formula."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the smooth point case d=0 of the orientation normalization, and step 2.1 the identity map case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 2.1 treat the degenerate case of proper faces and boundary sectors, where the local compact-support complex is acyclic."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the local models are relative cellular complexes and the shifts are integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 records that AC is consumed through the actual finite conical and incidence suppliers and the injective models, while the orientation and cellular evaluations are finite."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts duality isomorphisms, an orientation normalization and exchange identities; none of these is a biconditional claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse of the duality or exchange identities is asserted or needed."
+        }
+      ]
+    },
+    "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-analytic-six-operation-support-and-trace-calculus",
+          "source_section": "Statement",
+          "quote": "Bounded tensor factors satisfy the projection formula.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+          "source_section": "Statement",
+          "quote": "Then $\\omega_X=a_X^!k$ and $D_X=R\\mathcal Hom(-,\\omega_X)$ preserve bounded constructible objects and the natural evaluation $A\\to D_XD_XA$ is an isomorphism.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+          "source_section": "Statement",
+          "quote": "For bounded complexes $A,B$ ([[def-bounded-bounded-below-and-bounded-above-complex]]) the derived tensor over $k$ is their signed total tensor ([[def-sheaf-tensor-product]]), and for bounded $A$ and bounded-below $B$ the derived internal Hom $R\\mathcal Hom(A,B)$ is computed by $\\mathcal Hom^\\bullet(A,I_B)$ in a $k$-linear bounded-below injective model $B\\to",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+          "source_section": "Statement",
+          "quote": "On any separated finite-type complex variety, bounded algebraically constructible objects have bounded finite ordinary and compact-support cohomology, ordinary derived Hom and bounded constructible internal Hom, with coefficient-extension compatibility, by these models locally and finite affine-open descent globally.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+          "source_section": "Statement",
+          "quote": "Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "There are natural isomorphisms $$H^q(X,k_X)\\cong H^q_{\\operatorname{sing}}(X;k)$$ in every degree, where the left side is derived cohomology in the category of sheaves of $k$-vector spaces (computed with the functorial $k$-linear injective resolutions supplied by [[lem-ringed-space-module-sheaves-enough-injectives]];",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-locally-constant-sheaf-of-finite-rank",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **locally constant of finite rank** if every point $x\\in S$ has an open neighbourhood $U\\subseteq S$ for which there are an integer $n\\ge0$ and an isomorphism of sheaves on $U$ $$\\mathcal F|_U\\;\\cong\\;k_U^{\\,n},$$ where $k_U$ is the constant sheaf on $U$ with value $k$ and $\\mathcal F|_U$ is the restriction of $\\mathcal F$ to the open",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "source_section": "Definition",
+          "quote": "it is an abelian category ([[thm-abelian-sheaves-form-abelian-category]]), so its bounded derived category $D^b(\\operatorname{Sh}_k(X))$ is defined with the conventions of [[def-derived-category-of-an-abelian-category]], under the standing smallness hypothesis recorded there.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derived-hom-in-the-bounded-setting",
+          "source_section": "Definition",
+          "quote": "With supplied bounded-above projective models under [[thm-projective-complexes-model-the-bounded-above-derived-category]], define $\\mathbf R\\operatorname{Hom}(M,N)=Q\\underline{\\operatorname{Hom}}(P_M,N)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-tensor-product",
+          "source_section": "Definition",
+          "quote": "The **tensor-product sheaf** is the sheafification of this presheaf: $$\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G := a(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "The **internal Hom sheaf** $$ \\mathcal Hom_{\\mathcal O_X}(\\mathcal F,\\mathcal G) $$ is the sheaf on $X$ defined by $$U\\longmapsto \\operatorname{Hom}_{\\mathcal O_X|_U}(\\mathcal F|_U,\\mathcal G|_U)$$ for each open set $U \\subseteq X$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]],",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "For sheaves of abelian groups $\\Gamma_c$ and $H^q_c$ of [[def-compactly-supported-global-sections]] are the compactly supported analogues of $\\Gamma$ and $H^q$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The ordinary and support-locality clauses. Apply [F1] to the actual analytic maps. Its proper-support construction and injective models give the ordinary Cartesian exchange, the projection formula, both support localization triang",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The constructible and extraordinary clauses. Apply [F2] to the actual finite conical and incidence models. It supplies duality, orientation and the extraordinary exchange by dualizing the already canonical ordinary proper base-cha",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "The product projection. For a locally trivial projection $V\\times F\\to V$ with finite-type smooth fibre $F$, use the actual finite product incidence resolution of [F4]: tensor the finite base diagram resolution with the constant-d",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Coefficient extension. For a field extension $k\\to K$ use the geometric supplier's finite local cellular and cochain models [F4]. Scalar extension is exact on vector spaces, commutes with finite sums and cohomology, and commutes w",
+          "step": "2.1",
+          "inputs": [
+            "F5",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the empty open set and empty support in the localization clauses, and step 1.3 the empty product fibration."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 2.1 treat the zero coefficient complex and the zero tensor factor in the product model and the field-extension argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers the trivial fibre F=pt, where C*(F;k)=k in degree zero and the comparison reduces to the identity of B."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs; the clauses are conditional on the supplied geometric models and factorizations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the comparisons are exact and the Cartesian squares are pasted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records that AC is consumed through the geometric and incidence suppliers and the injective models, while the finite cochain comparisons and scalar extensions are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem collects adjunctions, comparisons and coherence identities; no forward direction of an equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse direction of any comparison is claimed."
+        }
+      ]
+    },
+    "ex-dualizing-and-closed-support-shifts-on-the-complex-line": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+          "source_section": "Statement",
+          "quote": "On a smooth complex $d$-variety, the complex orientation normalizes $\\omega_X\\simeq k_X[2d]$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-analytic-six-operation-support-and-trace-calculus",
+          "source_section": "Statement",
+          "quote": "For a closed inclusion $i:Z\\to X$ with complement $j$, $i^!$ is the derived functor of $i^{-1}\\Gamma_Z$, and both localization triangles hold.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+          "source_section": "Statement",
+          "quote": "For a continuous map $f:X\\to Y$ of locally compact Hausdorff spaces, the proper-support functor $f_!$ of [[def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces]] is left exact, satisfies $(Rf_!A)_y\\simeq R\\Gamma_c(X_y,A|_{X_y})$ on every fibre, and maps bounded derived categories into bounded derived categories.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]],",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-derived-hom-in-the-bounded-setting",
+          "source_section": "Definition",
+          "quote": "With supplied bounded-above projective models under [[thm-projective-complexes-model-the-bounded-above-derived-category]], define $\\mathbf R\\operatorname{Hom}(M,N)=Q\\underline{\\operatorname{Hom}}(P_M,N)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces",
+          "source_section": "Definition",
+          "quote": "The prescriptions are those of Verdier's exposé: $f^*$ is the exact inverse image, $f_!$ is the sheaf of sections whose closed support is proper over the base — a presheaf by the local nature of properness, whose sheaf property on bounded-below injective inputs is proved by the exceptional-adjoint theorem recorded in `justified_by` — $Rf_*$ is derived from",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse-image presheaf** $$ f_{\\mathrm p}\\mathcal G $$ on $X$ is defined by $$ (f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V), $$ where $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by reverse inclusion.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "A positively complex-oriented disk $D\\subset\\mathbb C$ has compact-support cochain complex with a single cohomology generator in degree $2$ over $k$: the closed disk with its boundary is the finite relative cellular model $(D,\\par",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Closed-support cohomology at the origin. By [F2] the object $i^!k_{\\mathbb C}$ is $R\\Gamma_{\\{0\\}}(\\mathbb C,k_{\\mathbb C})$, the derived functor of $i^{-1}\\Gamma_{\\{0\\}}$, and the localization triangle of [F2] computes it as the ",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the empty closed subset and the empty disk boundary cases through the relative cellular model of the pair (D,D\\{0\\})."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 records the degree-zero class k = i^! omega_C obtained after the shift, and step 1.1 the degree-zero vanishing outside the top degree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 compute the single generator of a disk in degree 2, the one-cell relative model that produces both shifts."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs; the example is the d=1 smooth case with a single closed point."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the disk boundary enters only through the relative cellular model."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 records that the displayed relative-cellular computation is choice-free, AC entering only through the consumed Verdier supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes specified objects and shifts; it asserts no equivalence and therefore owes no forward direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts no converse computation; both routes give the same direct answer."
+        }
+      ]
+    },
+    "lem-analytic-constructible-sheaves-admit-coherent-six-operations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+          "source_section": "Statement",
+          "quote": "For analytic algebraic maps on its proved constructible subcategory, the six operations $f^*,Rf_*,Rf_!,f^!,\\otimes_k^L,R\\mathcal Hom$ have their three adjunctions, composition and identity comparisons, ordinary proper and extraordinary proper base change, projection formula, support localization, dualizing transitivity and trace.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+          "source_section": "Statement",
+          "quote": "On any separated finite-type complex variety, bounded algebraically constructible objects have bounded finite ordinary and compact-support cohomology, ordinary derived Hom and bounded constructible internal Hom, with coefficient-extension compatibility, by these models locally and finite affine-open descent globally.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+          "source_section": "Statement",
+          "quote": "Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint",
+          "source_section": "Statement",
+          "quote": "Its exceptional inverse-image candidate $f^!$ represents the natural Hom transposition $$\\operatorname{Hom}(Rf_!A,B)\\simeq\\operatorname{Hom}(A,f^!B)$$ for bounded source objects $A$ and bounded-below target objects $B$, and has lower cohomological bound $\\inf(B)-d$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+          "source_section": "Statement",
+          "quote": "Proper base change has the coherent extraordinary dual exchange $u^!Rf_*\\simeq Rf'_*v^!$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+          "source_section": "Definition",
+          "quote": "$A$ is **algebraically constructible**: there exists a finite smooth algebraic stratification with the frontier condition $\\mathfrak S$ of $X$ ([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]) such that for every stratum $S\\in\\mathfrak S$ and every integer $j$ the restriction $H^j(A)|_S$ is locally constant of finite rank",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The operations restrict to $D_c^b$ and satisfy the stated adjunctions and diagrams. The compact-support adjoint and the coherent six-operation suppliers [F1] construct the functors together with their adjunction units and counits,",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Proper equality and involutive duality. Proper $f$ satisfies $Rf_!=Rf_*$ by [F1]. The oriented stratified Verdier supplier [F4] gives the evaluation isomorphism and proves the natural evaluation $A\\to D_XD_XA$ is an isomorphism on",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Smooth normalization and relative pullback. On a smooth complex $d$-fold the complex orientation identifies $\\omega_X\\simeq k_X[2d]$ by [F4]. For a smooth map $a:X\\to Y$ of pure relative dimension $d$, the duality exchange $D_Xa^*",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Coefficient extension. The finite local cellular and cochain models of [F2] have finite-dimensional terms and $k$-linear comparison maps, so extending scalars along $k\\to K$ is exact, commutes with finite sums, cohomology and fini",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 cover the empty variety and the empty support collection through the finite conical and incidence models and their coefficient-extension clauses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero complex on constructible inputs and the zero tensor factor under coefficient extension."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 covers the smooth point case d=0 of the relative pullback normalization, and step 2.1 the trivial extension k=K."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs; the restrictions are conditional on the geometric suppliers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the operations are exact on the bounded constructible category."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 and the assumption record that AC is consumed through the geometric and incidence suppliers and the injective models; the finite cochain and coefficient-extension comparisons are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma states restrictions, adjunctions and compatibility properties; no biconditional is part of the claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted; the restrictions are one-way compatibility statements."
+        }
+      ]
+    },
+    "thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+          "source_section": "Statement",
+          "quote": "On separated finite-type complex varieties, the ordinary analytic sheaf operations restrict to bounded algebraically constructible complexes $D_c^b(-;k)$ ([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]): $f^*\\dashv Rf_*$, $Rf_!\\dashv f^!$, the tensor/internal-Hom adjunction, coherent composition, support localization, ordinary and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-canonical-t-structure-on-a-derived-category",
+          "source_section": "Definition",
+          "quote": "For a triangulated category $T$ with shift $[1]$, a **t-structure** is a pair of strictly full subcategories $(T^{\\leq0},T^{\\geq0})$ such that $T^{\\leq0}[1]\\subseteq T^{\\leq0}$, $T^{\\geq0}[-1]\\subseteq T^{\\geq0}$, $\\operatorname{Hom}_T(T^{\\leq0},T^{\\geq1})=0$, and every $X$ has a distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in T^{\\leq0}$ and $B\\in",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal A$ be an abelian category.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-cone-triangles-satisfy-the-octahedral-axiom",
+          "source_section": "Statement",
+          "quote": "The distinguished cone triangles in $K(\\mathcal A)$ satisfy TR4.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-octahedral-gives-a-triangle-relating-the-cones-of-f-g-and-gf",
+          "source_section": "Statement",
+          "quote": "For composable $X\\xrightarrow fY\\xrightarrow gZ$, choices of cone objects $Q_f,Q_{gf},Q_g$ fit into a distinguished triangle $$Q_f\\longrightarrow Q_{gf}\\longrightarrow Q_g\\longrightarrow Q_f[1].$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+          "source_section": "Statement",
+          "quote": "For quasi-projective complex varieties and finitely many algebraic operations/support collections, the geometric suppliers give individually chosen compatible smooth Whitney strata, conical local products and finite deleted-boundary triangulation models for each operation.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-locally-constant-sheaf-of-finite-rank",
+          "source_section": "Definition",
+          "quote": "Then $\\mathcal F$ is **locally constant of finite rank** if every point $x\\in S$ has an open neighbourhood $U\\subseteq S$ for which there are an integer $n\\ge0$ and an isomorphism of sheaves on $U$ $$\\mathcal F|_U\\;\\cong\\;k_U^{\\,n},$$ where $k_U$ is the constant sheaf on $U$ with value $k$ and $\\mathcal F|_U$ is the restriction of $\\mathcal F$ to the open",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification of this presheaf: $$ f^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The recollement and the glued t-structure. Let $U\\xrightarrow{j}X\\xleftarrow{i}Z$ be an algebraic open/closed decomposition. By [F1] the six-operation supplier gives $j_!\\dashv j^*\\dashv Rj_*$ and $i^*\\dashv i_*\\dashv i^!$, full f",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Independence of compatible refinement and gluing. Let $T\\subset S$ be a refinement of smooth complex strata of codimension $c$ along the same algebraic variety. Ordinary pullback preserves the upper bound $-\\dim_{\\mathbb C}S\\le-\\d",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Duality exchanges the aisles. Let $S$ be a smooth complex stratum with $e=\\dim_{\\mathbb C}S$. The exchange identities of [F1] give $i_S^!D_XA\\cong D_Si_S^*A$ and $i_S^*D_XA\\cong D_Si_S^!A$, and on bounded complexes with finite-ran",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The heart: abelian, intersection complexes, simplicity and finite length. The heart is abelian by the general t-structure argument: the kernel and cokernel of a heart map $u:A\\to B$ are the perverse cohomology objects in degrees $",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Negative Hom and division endomorphism algebras over every field. For $m<0$ the shift $B[m]$ lies in $T^{\\geq-m}\\subseteq T^{\\geq1}$ and $A$ lies in $T^{\\leq0}$, so orthogonality gives $\\operatorname{Hom}(A,B[m])=0$: heart objects",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F1",
+            "F2",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 covers the empty open stratum and empty closed complement in the recollement, and step 3.1 the zero object of the heart."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 uses the zero object and the vanishing of negative Hom; the zero local system has the zero intersection complex."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 covers the one-stratum case of the heart, and step 2.1 the identity refinement of a single stratum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the degenerate refinement of codimension c=0 and the boundary-supported degenerate simple cases in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the perversity bounds are integral inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 records that AC is assumed and consumed through the six-operation supplier; the recollement, duality-exchange, heart and finite-length arguments are otherwise choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem defines a t-structure by two inequalities and lists its properties; no biconditional theorem is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse claim that every bounded t-structure of this shape arises from a stratification is not asserted."
+        }
+      ]
+    },
+    "lem-smooth-complex-pullback-is-exact-for-the-middle-perverse-t-structure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+          "source_section": "Statement",
+          "quote": "On $D_c^b(X;k)$ for a separated finite-type complex variety $X$, middle perversity is given on smooth complex strata $S$ by the two inequalities $H^q(i_S^*A)=0$ for $q>-\\dim_{\\mathbb C}S$ and $H^q(i_S^!A)=0$ for $q<-\\dim_{\\mathbb C}S$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+          "source_section": "Statement",
+          "quote": "On separated finite-type complex varieties, the ordinary analytic sheaf operations restrict to bounded algebraically constructible complexes $D_c^b(-;k)$ ([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]): $f^*\\dashv Rf_*$, $Rf_!\\dashv f^!$, the tensor/internal-Hom adjunction, coherent composition, support localization, ordinary and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications",
+          "source_section": "Statement",
+          "quote": "There exist finite smooth complex algebraic Whitney (a),(b) stratifications with frontier on $X$ and $Y$ respecting all prescribed subsets, such that each source stratum maps surjectively and smoothly onto one target stratum.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-derived-category-of-an-abelian-category",
+          "source_section": "Definition",
+          "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheaf-hom",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, and let $\\mathcal F,\\mathcal G$ be $\\mathcal O_X$-modules.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse-image presheaf** $$ f_{\\mathrm p}\\mathcal G $$ on $X$ is defined by $$ (f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V), $$ where $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by reverse inclusion.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Thus direct image is just precomposition of the presheaf with the inverse-image map on open sets.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ be a presheaf on a topological space $X$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Preservation of the upper aisle. Let $S\\subseteq Y$ be a smooth target stratum of complex dimension $e$ and let $T\\subseteq a^{-1}(S)$ be a smooth source stratum mapping smoothly onto $S$; by [F3] the nonempty such $T$ have comple",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Preservation of the lower aisle. The ordinary six-operation construction [F2] gives $D_Xa^*\\cong a^!D_Y$ and the complex-orientation normalization $a^!\\cong a^*[2d]$, where the relative dimension is $d$. Consequently $D_X(a^*A[d])",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Truncation, cohomology and reflection. Applying the t-exact functor $a^*[d]$ of steps 1.1 and 2.1 to a truncation triangle produces the unique target truncation triangle, proving that it commutes with perverse truncation and perve",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover the empty stratum and empty preimage in the dimension count, and the empty surjectivity hypothesis is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 covers the degenerate pure relative dimension d=0, where a^*[d]=a^* and the exactness reduces to the smooth immersion case."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 treats a single target stratum and its single smooth preimage stratum; a surjective a with one stratum is the base case of the reflection argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No degenerate parameter occurs; the map is smooth of pure relative dimension, and strata are handled uniformly by the dimension shift."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or limiting endpoint occurs; the perversity inequalities are integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 records that AC is consumed through the perverse and six-operation suppliers and the compatible-stratification theorem; the dimension count, duality and reflection arguments are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts t-exactness, commutation, a normalization and a reflection property, all one-directional; no equivalence is claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The converse, that t-exactness forces smoothness, is not claimed."
+        }
+      ]
+    }
+  }
+}

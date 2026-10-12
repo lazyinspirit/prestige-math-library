@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hh-rank-one-hecke-multiplication-in-both-normalizations.md

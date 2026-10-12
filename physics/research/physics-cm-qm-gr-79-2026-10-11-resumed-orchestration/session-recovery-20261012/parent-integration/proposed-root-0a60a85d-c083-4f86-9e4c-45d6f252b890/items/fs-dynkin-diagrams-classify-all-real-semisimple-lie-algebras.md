@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-dynkin-diagrams-classify-all-real-semisimple-lie-algebras.md

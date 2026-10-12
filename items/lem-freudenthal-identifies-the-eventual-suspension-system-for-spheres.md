@@ -45,9 +45,8 @@ is an isomorphism when $n>k+1$ and is a surjection when $n=k+1$.
 
 **Given:** Integers $k\geq0$ and $n\geq1$.
 
-1.1 Apply [F2] to $X=S^n$ using [F1] and set $i=n+k$. The isomorphism inequality becomes [F1, F2]
-$$n+k<2n-1\quad\Longleftrightarrow\quad n>k+1.$$ [F1, F2]
+1.1 Apply [F2] to $X=S^n$ using [F1] and set $i=n+k$. The isomorphism inequality becomes [F1, F2] $$n+k<2n-1\quad\Longleftrightarrow\quad n>k+1.$$ [F1, F2]
 
 1.2 The endpoint equation $n+k=2n-1$ is exactly $n=k+1$, so [F2] gives the claimed surjection there and makes no injectivity claim. [F2]
 
-2.1 The quotient from the two-cone suspension to the reduced suspension collapses precisely the basepoint track, a nonempty contractible CW subcomplex. By [F4] it induces an isomorphism on the displayed homotopy group, while [F3] identifies the resulting reduced-suspension map with the sphere-system bonding map. Thus the computed range applies to that system itself. $\square$ [F3, F4, step 1.1, step 1.2]
+2.1 The quotient from the two-cone suspension to the reduced suspension collapses precisely the basepoint track, a nonempty contractible CW subcomplex. By [F4] it induces an isomorphism on the displayed homotopy group, while [F3] identifies the resulting reduced-suspension map with the sphere-system bonding map. Thus the computed range applies to that system itself. $\square$ [F3, F4, step 1.1, step 1.2] 

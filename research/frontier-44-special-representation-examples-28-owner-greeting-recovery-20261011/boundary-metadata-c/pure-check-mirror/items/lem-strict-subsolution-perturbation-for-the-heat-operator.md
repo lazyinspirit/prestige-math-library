@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-strict-subsolution-perturbation-for-the-heat-operator.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-objects-of-category-o-are-highest-weight-modules.md

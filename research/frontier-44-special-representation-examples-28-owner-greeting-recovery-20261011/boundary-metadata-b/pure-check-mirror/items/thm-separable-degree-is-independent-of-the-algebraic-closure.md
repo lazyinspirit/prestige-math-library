@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-separable-degree-is-independent-of-the-algebraic-closure.md

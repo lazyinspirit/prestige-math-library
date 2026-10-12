@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-action-groupoid-orbits-and-stabilizers.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-empirical-measures-of-iid-euclidean-samples-converge-weakly.md

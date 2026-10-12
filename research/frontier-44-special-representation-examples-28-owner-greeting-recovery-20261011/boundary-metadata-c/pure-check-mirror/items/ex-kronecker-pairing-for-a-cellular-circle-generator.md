@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-kronecker-pairing-for-a-cellular-circle-generator.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-binary-words-avoiding-consecutive-ones.md

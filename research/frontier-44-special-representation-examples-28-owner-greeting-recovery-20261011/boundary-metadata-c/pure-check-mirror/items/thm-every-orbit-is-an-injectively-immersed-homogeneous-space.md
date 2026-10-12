@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-orbit-is-an-injectively-immersed-homogeneous-space.md

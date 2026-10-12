@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-directed-union-of-subgroups-meeting-a-fixed-subgroup.md

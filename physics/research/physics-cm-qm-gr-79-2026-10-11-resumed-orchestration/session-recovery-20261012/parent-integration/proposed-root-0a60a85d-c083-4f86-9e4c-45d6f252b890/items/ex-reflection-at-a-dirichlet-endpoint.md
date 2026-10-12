@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reflection-at-a-dirichlet-endpoint.md

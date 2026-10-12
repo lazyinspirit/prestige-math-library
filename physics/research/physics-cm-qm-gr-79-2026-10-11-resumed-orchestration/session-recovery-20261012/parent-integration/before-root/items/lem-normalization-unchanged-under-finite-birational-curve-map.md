@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalization-unchanged-under-finite-birational-curve-map.md

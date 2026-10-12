@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-an-extraspecial-p-group-is-a-product-of-two-maximal-abelian-subgroups.md

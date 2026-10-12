@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-frobenius-automizer-criterion-for-p-nilpotence.md

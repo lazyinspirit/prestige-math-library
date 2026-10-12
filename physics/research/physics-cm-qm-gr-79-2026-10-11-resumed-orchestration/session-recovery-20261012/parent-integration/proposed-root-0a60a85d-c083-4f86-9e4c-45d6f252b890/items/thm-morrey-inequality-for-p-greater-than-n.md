@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-morrey-inequality-for-p-greater-than-n.md

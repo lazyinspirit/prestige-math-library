@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-reversing-the-tensor-product-exchanges-left-and-right-duals.md

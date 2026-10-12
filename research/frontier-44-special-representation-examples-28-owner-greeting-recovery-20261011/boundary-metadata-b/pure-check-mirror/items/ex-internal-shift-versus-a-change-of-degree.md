@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-internal-shift-versus-a-change-of-degree.md

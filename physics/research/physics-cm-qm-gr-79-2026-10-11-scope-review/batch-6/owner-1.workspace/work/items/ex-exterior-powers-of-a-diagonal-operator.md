@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-exterior-powers-of-a-diagonal-operator.md

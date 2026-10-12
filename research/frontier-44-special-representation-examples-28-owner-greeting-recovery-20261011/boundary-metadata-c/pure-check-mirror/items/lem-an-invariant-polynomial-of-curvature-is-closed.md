@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-an-invariant-polynomial-of-curvature-is-closed.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-lie-derivatives-are-natural-for-related-vector-fields.md

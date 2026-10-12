@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonaffine-finite-flat-affine-equivalence-quotient.md

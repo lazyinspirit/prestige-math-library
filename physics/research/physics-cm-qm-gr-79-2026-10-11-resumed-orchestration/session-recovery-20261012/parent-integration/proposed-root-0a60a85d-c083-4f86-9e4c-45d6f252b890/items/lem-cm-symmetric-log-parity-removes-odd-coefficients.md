@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-symmetric-log-parity-removes-odd-coefficients.md

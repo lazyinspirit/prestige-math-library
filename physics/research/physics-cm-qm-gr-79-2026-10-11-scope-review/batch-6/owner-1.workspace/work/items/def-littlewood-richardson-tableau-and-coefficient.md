@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-littlewood-richardson-tableau-and-coefficient.md

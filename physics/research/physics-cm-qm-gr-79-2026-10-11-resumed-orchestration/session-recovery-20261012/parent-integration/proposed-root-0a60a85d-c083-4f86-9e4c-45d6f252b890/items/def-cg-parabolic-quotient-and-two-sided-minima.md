@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-parabolic-quotient-and-two-sided-minima.md

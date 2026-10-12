@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-slobodeckij-seminorm-is-well-defined.md

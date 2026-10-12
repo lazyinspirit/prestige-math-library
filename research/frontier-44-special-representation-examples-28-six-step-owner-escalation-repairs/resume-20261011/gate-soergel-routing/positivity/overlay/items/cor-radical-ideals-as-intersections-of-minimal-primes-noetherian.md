@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-radical-ideals-as-intersections-of-minimal-primes-noetherian.md

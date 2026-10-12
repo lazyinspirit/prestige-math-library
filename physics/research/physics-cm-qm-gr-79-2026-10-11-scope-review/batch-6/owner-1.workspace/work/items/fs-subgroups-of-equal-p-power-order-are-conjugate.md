@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-subgroups-of-equal-p-power-order-are-conjugate.md

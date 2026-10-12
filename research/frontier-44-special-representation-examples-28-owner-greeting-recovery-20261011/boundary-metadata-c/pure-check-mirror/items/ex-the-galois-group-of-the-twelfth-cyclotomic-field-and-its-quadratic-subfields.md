@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-galois-group-of-the-twelfth-cyclotomic-field-and-its-quadratic-subfields.md

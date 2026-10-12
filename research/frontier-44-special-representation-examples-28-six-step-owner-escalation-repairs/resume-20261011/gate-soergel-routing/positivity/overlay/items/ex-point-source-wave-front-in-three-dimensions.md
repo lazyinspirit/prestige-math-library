@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-point-source-wave-front-in-three-dimensions.md

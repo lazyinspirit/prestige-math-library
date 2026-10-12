@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-minimal-free-resolution-reduces-to-zero-differential.md

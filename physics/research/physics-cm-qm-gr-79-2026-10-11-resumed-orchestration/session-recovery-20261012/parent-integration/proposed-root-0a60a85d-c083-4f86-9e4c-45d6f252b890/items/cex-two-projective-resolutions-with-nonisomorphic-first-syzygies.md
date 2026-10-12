@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-projective-resolutions-with-nonisomorphic-first-syzygies.md

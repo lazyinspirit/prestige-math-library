@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-symplectic-normal-form-of-a-degenerate-alternating-form.md

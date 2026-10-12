@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-regular-conditional-law-of-one-coordinate-given-another.md

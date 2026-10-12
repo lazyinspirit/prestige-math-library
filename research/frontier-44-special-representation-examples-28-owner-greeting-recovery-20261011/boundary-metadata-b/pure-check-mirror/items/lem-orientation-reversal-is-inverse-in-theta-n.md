@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-orientation-reversal-is-inverse-in-theta-n.md

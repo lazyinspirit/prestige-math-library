@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-large-fundamental-pell-solution-for-sixty-one.md

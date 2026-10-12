@@ -1,0 +1,1769 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-18",
+  "scope": [
+    "pthm-cm02-ivp",
+    "pthm-cm02-continuation",
+    "ex-cm02-uniform-field",
+    "ex-cm02-force-model-regularity-checks",
+    "ex-cm02-constant-field-projectile",
+    "ex-cm02-drag-terminal-velocity",
+    "cex-cm02-nonunique-flow-for-a-continuous-force",
+    "cex-cm02-singular-collision-finite-time",
+    "post-cm02-force-superposition",
+    "post-cm02-interactions",
+    "post-cm02-drag",
+    "rem-cm02-open-system-warning"
+  ],
+  "contracts": {
+    "pthm-cm02-ivp": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "The restriction statement transfers from the associated first-order system to motions through the equivalence in (c).",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "The **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number",
+          "uses": [
+            "1.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "1. **Continuity.** $F$ is continuous on its domain $D:=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$. 2. **State-local Lipschitz regularity, locally uniform in time.** $F$ is locally Lipschitz in the state variable $z=(x,v)$, locally uniformly in time, in the sense of [[def-locally-lipschitz-in-the-state-variable]]: every compact cylinder $C\\subseteq D$ carries a finite $L\\ge0$ with $\\lVert F(t,z)-F(t,z')\\rVert_{2}\\le L\\lVert z-z'\\rVert_{2}$ whenever $(t,z),(t,z')\\in C$ share their time coordinate.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Any two solutions through the same initial data agree on every common subinterval containing $t_0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Its domain is its **maximal interval of existence**.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "1. **Cauchy-Schwarz.** $$\\lvert\\langle x,y\\rangle\\rvert \\;\\le\\;",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $f :",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$\\mathcal F$ is continuous on $D$: its first component is the linear map $(x,v)\\mapsto v$, and its second is the composition of the continuous map $F$ with the linear map $\\mathsf M^{-1}$, so both components are continuous ([L1], [L2], algebra). $\\mathcal F$ is locally Lipschitz in the state variable, locally uniformly in time: let $C\\subseteq D$ be a compact time-state cylinder and let $L$ be a state-Lipschitz constant of $F$ on $C$ ([L2]); then for $(t,z),(t,z')\\in C$ with $z=(x,v)$, $z'=(x',v')$, the identity $\\mathcal F(t,z)-\\mathcal F(t,z')=\\bigl(v-v',\\ \\mathsf M^{-1}(F(t,z)-F(t,z'))\\bigr)$ gives, with $m_{\\min}:=\\min_{i}m_{i}>0$ and $\\lVert\\mathsf M^{-1}u\\rVert_{2}\\le m_{\\min}^{-1}\\lVert u\\rVert_{2}$, $$\\lVert\\mathcal F(t,z)-\\mathcal F(t,z')\\rVert_{2}^{2}=\\lVert v-v'\\rVert_{2}^{2}+\\lVert\\mathsf M^{-1}(F(t,z)-F(t,z'))\\rVert_{2}^{2}\\le\\lVert v-v'\\rVert_{2}^{2}+\\frac{L^{2}}{m_{\\min}^{2}}\\lVert z-z'\\rVert_{2}^{2}\\le\\Bigl(1+\\frac{L^{2}}{m_{\\min}^{2}}\\Bigr)\\lVert z-z'\\rVert_{2}^{2},$$ so $\\mathcal F$ is state-Lipschitz on $C$ with constant $\\sqrt{1+L^{2}/m_{\\min}^{2}}$, finite and depending on $C$ alone.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Pick $h,r>0$ with $C:=[t_{0}-h,t_{0}+h]\\times\\overline B(z_{0},r)\\subseteq D$: possible because $D$ is open and $(t_{0},z_{0})\\in D$ ([L2], algebra). Then $\\mathcal F$ satisfies the hypotheses of [L3] on $C$: it is continuous, it is state-Lipschitz there by step 1.1, and $\\lVert\\mathcal F\\rVert_{2}\\le M<+\\infty$ with $M$ as in clause 3 by [L6]. Applying [L3] to $z'=\\mathcal F(t,z)$, $z(t_{0})=z_{0}$, there is exactly one solution $z$ on $[t_{0}-h,t_{0}+h]$ with graph in $C$, and any two solutions of this initial value problem agree on every common subinterval containing $t_{0}$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3",
+            "L6"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "For clause 3 with its own numbers $h,r,M,\\Lambda$: the same application of [L3] gives exactly one solution on $[t_{0}-h,t_{0}+h]$ with graph in $C$, provided $hM\\le r$ and $\\Lambda h<1$; the agreement clause of [L3] then gives the stated uniqueness on intersections.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Write the solution of step 2.1 as $z(t)=(x(t),v(t))$. From $z'=\\mathcal F(t,z)$ we get $x'=v$ and $v'=\\mathsf M^{-1}F(t,x,v)$; hence $v$ is $C^{1}$ and $x$ is $C^{2}$ on $[t_{0}-h,t_{0}+h]$, and multiplying $v'=\\mathsf M^{-1}F(t,x,v)$ by the masses returns $m_{i}\\ddot x_{i}(t)=F_{i}(t,x(t),\\dot x(t))$ for every $i$; moreover $x(t)\\in Q$ and $t\\in I_{0}$ because $(t,z(t))\\in C\\subseteq D$, and $x(t_{0})=x_{0}$, $\\dot x(t_{0})=v(t_{0})=v_{0}$. By the equivalence of clause (c) of [L1], $x$ is a motion of the model on $[t_{0}-h,t_{0}+h]$; this proves clause 1 and, with clause 3's cylinder hypotheses, the existence half of clause 3.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "2.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Uniqueness: let $x:J\\to Q$ and $\\tilde x:\\tilde J\\to Q$ be motions with the same datum and let $z=(x,\\dot x)$, $\\tilde z=(\\tilde x,\\dot{\\tilde x})$ be their state curves; by [L1] both solve $z'=\\mathcal F(t,z)$ through $(t_{0},z_{0})$ on their intervals, so the uniqueness clause of [L3] applied on a common cylinder gives $z=\\tilde z$ on $J\\cap\\tilde J$, hence $x=\\tilde x$ there; this proves clause 2 and the uniqueness half of clause 3.",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Clause 4: by step 1.1 the field $\\mathcal F$ satisfies the Picard–Lindelöf hypotheses at every point of $D$, so [L4] provides a unique maximal solution $z_{\\max}$ of the associated first-order system through $(t_{0},z_{0})$ whose domain is an open interval containing $t_{0}$ and contained in $I_{0}$, every other solution through the datum being its restriction; writing $z_{\\max}=(x_{\\max},\\dot x_{\\max})$ with $x_{\\max}$ the corresponding motion by [L1], every motion with the datum is a restriction of $x_{\\max}$ by step 3.2 and the equivalence of [L1]; this proves clause 4. [step 3.2, L1, L4] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "3.2",
+            "L1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes one model and one datum and asserts a local existence; there is no indexed family or union whose empty case could arise."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero data are included: $x_{0}$ may be any point of $Q$ and $v_{0}$ any velocity, and the cylinder of step 2.1 is chosen around them; the zero-force case is covered by the estimate of step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-label case is included in the statement for every $N\\ge1$; step 1.1 uses only $m_{\\min}>0$ and the per-label components of the field."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate data $v_{0}=0$ with $F\\equiv0$ give the constant solution, which the proof does not exclude; step 4.1 returns it as the maximal motion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The cylinder is closed in time and the local solution is stated on $[t_{0}-h,t_{0}+h]$; step 3.1 reads the endpoint derivatives with the one-sided convention of the definition in [L1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only selection is the cylinder radius and half-length of step 2.1, chosen from an open set around the datum; nothing is selected from an infinite family and no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; clauses 1-4 are separate existence, uniqueness, quantitative and maximality statements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the same reason there is no converse direction to check."
+        }
+      ]
+    },
+    "pthm-cm02-continuation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "The restriction statement transfers from the associated first-order system to motions through the equivalence in (c).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "1. **Continuity.** $F$ is continuous on its domain $D:=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$. 2. **State-local Lipschitz regularity, locally uniform in time.** $F$ is locally Lipschitz in the state variable $z=(x,v)$, locally uniformly in time, in the sense of [[def-locally-lipschitz-in-the-state-variable]]: every compact cylinder $C\\subseteq D$ carries a finite $L\\ge0$ with $\\lVert F(t,z)-F(t,z')\\rVert_{2}\\le L\\lVert z-z'\\rVert_{2}$ whenever $(t,z),(t,z')\\in C$ share their time coordinate.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "Adopt the force model of [[post-cm02-force-superposition]]: time window $I_{0}$, open configuration domain $Q\\subseteq\\mathbb R^{3N}$, masses $m_{1},\\dots,m_{N}>0$, and a force map $F$ continuous and locally Lipschitz in the state variable, locally uniformly in time, on $D=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "source_section": "Statement",
+          "quote": "1. there is $\\varepsilon>0$ and a solution $\\tilde x:[t_0,b+\\varepsilon)\\to\\mathbb R^n$ of the same initial value problem with $\\tilde x(t)=x(t)$ for all $t\\in[t_0,b)$; in particular $\\tilde x(b)=\\lim_{t\\uparrow b}x(t)$ exists and lies in the state projection of $K$; 2. if moreover $D=\\mathbb R\\times U$ for an open $U\\subseteq\\mathbb R^n$ and $F$ is autonomous, $F(t,z)=G(z)$ with $G:U\\to\\mathbb R^n$ continuous and locally Lipschitz in the state variable ([[def-locally-lipschitz-in-the-state-variable]]), and if there is a compact $K_0\\subseteq U$ with $x(t)\\in K_0$ for every $t\\in(b-\\delta,b)$, then the extension conclusion of clause 1 holds as well.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-cm-finite-time-breakdown-requires-escape",
+          "source_section": "Statement",
+          "quote": "Suppose $x$ admits no extension past $b$: there do not exist $\\varepsilon>0$ and a solution $\\tilde x:[t_0,b+\\varepsilon)\\to\\mathbb R^n$ of the same initial value problem with $\\tilde x(t)=x(t)$ for every $t\\in[t_0,b)$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Its domain is its **maximal interval of existence**.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "If $hM\\le r$ and $\\Lambda h<1$, then there is exactly one motion on $[t_{0}-h,t_{0}+h]$ through the datum whose state graph $(t,(x(t),\\dot x(t)))$ lies in $C$, and every motion through the datum agrees with it on the intersection of its interval with $[t_{0}-h,t_{0}+h]$. 4. **Maximal motion.** There is exactly one maximal motion with the datum: its maximal interval $J_{\\max}$ is an open interval containing $t_{0}$ and contained in $I_{0}$, and every motion with the datum is its restriction.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$ is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]). 2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$ ([[def-metric-topology]]) and bounded ([[def-metric-bounded-diameter]]). 3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$ ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in $\\mathbb{R}$ and bounded.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "$\\mathcal F$ is continuous on $D$ and locally Lipschitz in the state variable, locally uniformly in time, by the admissibility estimate proved in [[pthm-cm02-ivp]] from clauses (i) and (iii) of [[post-cm02-force-superposition]]; the state graph $(t,z(t))$ of the maximal motion lies in $D$ and $z$ solves $z'=\\mathcal F(t,z)$ on $J_{\\max}=(a,b)$ by [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Clause 1 is [L5] read through [L1]: the associated initial value problem satisfies the Picard–Lindelöf hypotheses at every point of $D$ by step 1.1, so its maximal solution exists, is unique, has open domain containing $t_{0}$ and contained in $I_{0}$, and every solution through the datum is its restriction; writing it as $(x_{\\max},\\dot x_{\\max})$ returns the maximal motion, whose interval is therefore $J_{\\max}=(a,b)$ with $a<b$ and $t_{0}\\in(a,b)$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Clause 2: by step 2.1 the state curve $z$ admits no extension to a solution of the associated system on an interval strictly larger than $J_{\\max}$; [L4] clause 1 applied to this solution with its finite endpoint $b$ gives exactly the displayed statement: for every compact $K\\subseteq D$ and every $\\eta>0$ there is $t$ in the indicated range with $(t,z(t))\\notin K$. The equivalent formulation follows by contraposition: if such a compact $K$ and $\\delta>0$ trapped the graph near $b$, [L3] clause 1 would produce an extension, contradicting the maximality established in step 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Clause 3, extension: assume $F(t,x,v)=F_{0}(x,v)$ with $F_{0}$ satisfying the standing regularity. Then $\\mathcal F$ is independent of $t$ and, as a map on $U$, continuous and locally Lipschitz in the state variable, so it extends to the autonomous field $\\mathbb R\\times U\\ni(t,z)\\mapsto\\mathcal F_{0}^{\\,*}(z):=(v,\\mathsf M^{-1}F_{0}(x,v))$; the model's equations on the extended window are the same equations, and the standing hypotheses of clause (iii) of [[post-cm02-force-superposition]] hold for the extended model by the same estimates. If a compact $K_{0}\\subseteq U$ and $\\delta>0$ contain $z(t)$ for all $t\\in(b-\\delta,b)\\cap J_{\\max}$, then [L3] clause 2, or equivalently [L4] clause 2, supplies an extension of the maximal solution past $b$ in the extended autonomous system.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L3",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Clause 3, corollary: with the extension of step 4.1 available, $b$ cannot be the right endpoint of the maximal interval of the extended autonomous system; by step 2.1, read on the extended window, the maximal interval is still $(a,b)$, so $b=+\\infty$ and the motion is defined at every forward time $t\\ge t_{0}$.",
+          "step": "5.1",
+          "inputs": [
+            "2.1",
+            "4.1",
+            "L1",
+            "L5"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Clause 4: assume $I_{0}=\\mathbb R$ and $b<+\\infty$, let $K_{0}\\subseteq U$ be compact and $\\delta>0$. The set $K:=[b-\\delta,b]\\times K_{0}$ is a compact subset of $D=\\mathbb R\\times U$ by [L6]; applying clause 2 (step 3.1) with this $K$ and with any $0<\\eta<\\delta$ gives $t\\in(b-\\eta,b)\\subseteq(b-\\delta,b)$ with $(t,z(t))\\notin K$, that is, $z(t)\\notin K_{0}$; hence the state leaves every compact subset of $U$ near $b$. If in addition the state stayed, near $b$, in a bounded subset $B$ of $U$ with $\\overline B\\subseteq U$, then $\\overline B$ would be compact and would contain $z(t)$ for all $t$ sufficiently close to $b$, contradicting what was just proved; so either the state is unbounded near $b$ or the positions approach the complement of the open set $Q$, which is the stated reading. [step 3.1, L1, L6] ∎",
+          "step": "6.1",
+          "inputs": [
+            "3.1",
+            "L1",
+            "L6"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement fixes one maximal motion and its interval; no indexed family, union or intersection with an empty case occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "A vanishing force with zero velocity gives the constant motion; steps 4.1 and 5.1 then extend it past any finite trapped endpoint, as the autonomous clause requires."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The statement concerns one maximal motion, so the single-component case is the general case; step 2.1 applies the maximal-solution theorem to that solution."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is the autonomous field of clause 3; steps 4.1 and 5.1 handle the trapped maximal motion of that field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite right endpoint $b$ and the open maximal interval are the subject of clauses 1-2; step 3.1 applies the one-sided escape statement near $b$ and step 6.1 handles the unbounded window."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The compact set of clause 2 is given by hypothesis, not selected; steps 3.1 and 6.1 apply the quantified statements of the cited theorems without choosing from any family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; the clauses are one-way implications and a corollary."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse direction in the statement."
+        }
+      ]
+    },
+    "ex-cm02-uniform-field": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "The precise notion of a motion of the model, its associated first-order system and its maximal motions is [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "**(b) Associated first-order system.** The **associated first-order field** of the model is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F(t,x,v)=\\bigl(v,\\mathsf M^{-1}F(t,x,v)\\bigr)$ be the associated first-order field and let motions and maximal motions be as in [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in $\\mathbb{R}^{m}$, and then the **derivative** is",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Then $P$ is differentiable at every $c \\in \\mathbb{R}$, and, defining $e :",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "$f$ is **differentiable at $c$** when that limit exists, and then the **derivative of $f$ at $c$** is",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm01-galilean-kinematics",
+          "source_section": "Statement",
+          "quote": "Equivalently, the property \"the coordinate curve is an affine function of the frame time\" is an inertial-frame-independent property of the motion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "**(d) Dimensions of the quantities of this framework.** The dimension map is fixed on the following quantities:",
+          "uses": [
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $F_{i}(t,x,v)=m_{i}\\mathbf g$ is constant on $D=\\mathbb R\\times\\mathbb R^{3N}\\times\\mathbb R^{3N}$, hence continuous there; and for every pair of states $(t,z),(t,z')$ one has $\\lVert F(t,z)-F(t,z')\\rVert_{2}=0\\le 0\\cdot\\lVert z-z'\\rVert_{2}$, so the local-Lipschitz requirement of clause (iii) of [[post-cm02-force-superposition]] holds on every compact cylinder with constant $L=0$, in particular with a constant not depending on time; this proves claim 1.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiate the displayed curve: by [L2] applied to the three components, $\\dot x(t)=v_{0}+\\mathbf g\\,t$ and $\\ddot x(t)=\\mathbf g$ for every $t\\in\\mathbb R$; hence $m_{i}\\ddot x_{i}(t)=m_{i}\\mathbf g=F_{i}(t,x(t),\\dot x(t))$ for every $i$, and $x(t)\\in Q=\\mathbb R^{3N}$, $t\\in I_{0}=\\mathbb R$; the initial values $x(0)=x_{0}$ and $\\dot x(0)=v_{0}$ are immediate. By the equivalence of clause (c) of [[def-cm02-newtonian-flow]], $x$ is a motion of the model on $\\mathbb R$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Dimensions: $[\\mathbf g]=\\ell\\tau^{-2}$, so $[\\tfrac12\\mathbf g t^{2}]=\\ell\\tau^{-2}\\cdot\\tau^{2}=\\ell$, matching the position dimension, and $[m_{i}\\mathbf g]=\\mu\\ell\\tau^{-2}$, matching the force dimension of clause (iii) of [[post-cm02-force-superposition]]; $[\\dot x]=\\ell\\tau^{-1}$ and $[\\ddot x]=\\ell\\tau^{-2}$ by the derivative rule of [[def-cm01-units]]; this proves claim 3.",
+          "step": "1.3",
+          "inputs": [
+            "L4"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The datum $(0,x_{0},v_{0})$ has exactly one maximal motion by [[pthm-cm02-ivp]] clause 4, and every motion with this datum is a restriction of it; since the motion of step 1.2 is defined on all of $\\mathbb R=I_{0}$, it is itself maximal (any extension would have to agree with it where both are defined, so no strictly larger interval is possible), and it is the unique maximal motion; this proves claim 2, including existence on the whole time window. The alternatives of [[pthm-cm02-continuation]] are not needed here, but the agreement is consistent with its clause 3: the state is quadratic in time and not trapped in any compact set, and the motion is global because the explicit formula is.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Covariance: let a second inertial frame be related to the chosen one by $t'=t+b$, $x'=Rx+vt+a_{0}$ with $R\\in SO(3)$, and let $\\eta$ be the description of the motion of step 1.2 in that frame; by [L3], $\\eta_{i}''(t')=R\\,\\ddot x_{i}(t'-b)=R\\,\\mathbf g$ for every $i$, so the second frame sees the same equation of motion with the constant vector $R\\mathbf g$ in place of $\\mathbf g$; hence the class of uniform-force models is covariant under changes of inertial frame, with the parameter transforming as a spatial vector under the rotation and unaffected by the translation, boost or time shift; this proves claim 4. [step 1.2, L3, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "L3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The model has a fixed finite label set and one datum; no empty indexed family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The values $\\mathbf g=0$ and $v_{0}=0$ are admitted; step 1.2 verifies the displayed motion for every declared $\\mathbf g$ including zero, and step 1.3 checks its dimensions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case $N=1$ is the case of the computation, and the verification is per label, so the general case follows componentwise (statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate parameter $\\mathbf g=0$ reduces the motion to uniform linear motion; steps 1.2 and 2.1 apply verbatim."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time window is all of $\\mathbb R$ and the motion is defined on $\\mathbb R$; no finite endpoint is evaluated."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family occurs; the parameter and datum are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; the items are existence, uniqueness, dimension and covariance claims."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "ex-cm02-force-model-regularity-checks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "1. **Continuity.** $F$ is continuous on its domain $D:=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$. 2. **State-local Lipschitz regularity, locally uniform in time.** $F$ is locally Lipschitz in the state variable $z=(x,v)$, locally uniformly in time, in the sense of [[def-locally-lipschitz-in-the-state-variable]]: every compact cylinder $C\\subseteq D$ carries a finite $L\\ge0$ with $\\lVert F(t,z)-F(t,z')\\rVert_{2}\\le L\\lVert z-z'\\rVert_{2}$ whenever $(t,z),(t,z')\\in C$ share their time coordinate.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder $C\\subseteq D$ has a finite $L\\ge0$ such that",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality; it is not assumed here.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "\\tfrac14\\Bigl(\\lVert x+y\\rVert_2^{2} - \\lVert x-y\\rVert_2^{2}\\Bigr),$$ so the inner product is recovered from the norm it induces.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-reverse-triangle-inequality-in-a-normed-space",
+          "source_section": "Statement",
+          "quote": "For all $x,y\\in V$, $$\\bigl|\\|x\\|-\\|y\\|\\bigr|\\le \\|x-y\\|.$$ In particular, the norm map is $1$-Lipschitz for the norm metric.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Suppose $f$ and $g$ are continuous at $c$ ([[def-continuity-real]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "$f$ is **continuous on $A$** when it is continuous at every point of $A$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Model 1: the constant map $z\\mapsto m\\mathbf g$ is continuous by [L3]; and for any two states $\\lVert F(t,z)-F(t,z')\\rVert_{2}=\\lVert m\\mathbf g-m\\mathbf g\\rVert_{2}=0$, so $L=0$ is a state-Lipschitz constant on every cylinder, independent of time. Hence model 1 satisfies [L1].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Model 2: the map $(t,x,v)\\mapsto m\\mathbf g-c\\,v$ is a constant plus a scalar multiple of the linear map $v\\mapsto v$, hence continuous by [L3]; and for states $z=(x,v)$, $z'=(x',v')$, $\\lVert F(t,z)-F(t,z')\\rVert_{2}=\\lVert c(v'-v)\\rVert_{2}=c\\,\\lVert v-v'\\rVert_{2}\\le c\\,\\lVert z-z'\\rVert_{2}$ by [L2], so $L=c$ is a state-Lipschitz constant on every cylinder and does not depend on time; in particular model 2 satisfies [L1].",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Model 3, Lipschitz bound on an annulus: let $0<r\\le R$ and let $x,y\\in\\mathbb R^{3}$ with $r\\le\\lvert x\\rvert,\\lvert y\\rvert\\le R$. Then $$\\Bigl\\lVert\\frac{x}{\\lvert x\\rvert^{3}}-\\frac{y}{\\lvert y\\rvert^{3}}\\Bigr\\rVert_{2}\\le\\frac{\\lVert x-y\\rVert_{2}}{\\lvert x\\rvert^{3}}+\\lvert y\\rvert\\,\\bigl|\\lvert x\\rvert^{-3}-\\lvert y\\rvert^{-3}\\bigr|\\le\\frac{\\lVert x-y\\rVert_{2}}{r^{3}}+R\\cdot\\frac{3R^{2}}{r^{6}}\\lVert x-y\\rVert_{2},$$ where the first inequality inserts $y/\\lvert x\\rvert^{3}$ and uses the triangle inequality, and the second uses $\\bigl|\\lvert x\\rvert^{-3}-\\lvert y\\rvert^{-3}\\bigr|\\le 3R^{2}r^{-6}\\bigl|\\lvert x\\rvert-\\lvert y\\rvert\\bigr|\\le 3R^{2}r^{-6}\\lVert x-y\\rVert_{2}$, the factorization $\\lvert v^{3}-u^{3}\\rvert=\\lvert v-u\\rvert\\,(v^{2}+vu+u^{2})$ applied to $u=\\lvert x\\rvert$, $v=\\lvert y\\rvert$ and the reverse triangle inequality of [L2]; multiplying by $k$ gives the constant $L=k(r^{-3}+3R^{3}r^{-6})$ for $F=-kx/\\lvert x\\rvert^{3}$ on the annulus (the state variable enters only through $x$).",
+          "step": "1.3",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Model 3, continuity and local-Lipschitz on the domain: every compact subset of $Q=\\mathbb R^{3}\\setminus\\{0\\}$ lies in an annulus $r\\le\\lvert x\\rvert\\le R$ with $r=\\min_{K}\\lvert x\\rvert>0$ (the minimum is attained and positive because $K$ is compact and does not contain $0$); by step 1.3 the map is Lipschitz with the finite constant above on each such annulus, hence locally Lipschitz, and in particular continuous, on $Q$; the time variable does not occur, so the constant is locally uniform in time. Model 3 therefore satisfies [L1] on its domain.",
+          "step": "2.1",
+          "inputs": [
+            "1.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Model 3, no extension to the excluded point: for $x\\ne0$ one has $\\lVert F(x)\\rVert_{2}=k\\lvert x\\rvert^{-2}$, so for every bound $M>0$ there is $\\delta=\\sqrt{k/M}>0$ with $\\lVert F(x)\\rVert_{2}>M$ whenever $0<\\lvert x\\rvert<\\delta$; hence no continuous extension of $F$ to $x=0$ exists ([[def-continuity-real]]: a continuous extension would carry a sequence $x_{n}\\to0$ to a convergent image sequence, but the values are unbounded). The collision exclusion $Q=\\mathbb R^{3}\\setminus\\{0\\}$ is therefore not cosmetic: it is what places model 3 inside the force branch at all.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Conclusion: models 1-3 satisfy the standing hypotheses of clause (iii) of [[post-cm02-force-superposition]], with the constants computed above; hence the associated first-order fields of [[def-cm02-newtonian-flow]] satisfy the Picard–Lindelöf hypotheses and the local existence, uniqueness and maximal-motion conclusions of [[pthm-cm02-ivp]], as well as the continuation criterion of [[pthm-cm02-continuation]], apply to each of them on its stated domain. [step 1.1, step 1.2, step 2.1, L1] ∎",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "L1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Each model is checked on its stated domain; there is no indexed family with an empty case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The constant model has Lipschitz constant $L=0$ (step 1.1) and the excluded centre is exactly the point where no continuous extension exists (step 3.1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-label case is the Example; steps 1.1-2.1 are pointwise estimates and the conclusion of step 4.1 applies per model (statement)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate coefficient $c=0$ in model 2 gives the same estimate as step 1.1, and the degenerating annulus radius $r\\downarrow0$ is excluded from the domain, which step 3.1 records as the non-extendability at $0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The annulus boundary values $r,R$ are handled by the closed-annulus hypothesis of step 1.3, and the domain boundary point $0$ is analysed in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every constant is exhibited by an inequality in steps 1.1-1.3; nothing is selected from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "ex-cm02-constant-field-projectile": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "**(iv) Equation of motion.** Adopt: the motion of the labels of a model with force map $F$ in an inertial frame is governed by",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "ex-cm02-uniform-field",
+          "source_section": "Example",
+          "quote": "The **uniform-force model** is the force map",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "**(e) Newtonian flow.** The **Newtonian flow** of the model is the map",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F(t,x,v)=\\bigl(v,\\mathsf M^{-1}F(t,x,v)\\bigr)$ be the associated first-order field and let motions and maximal motions be as in [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "A \\to \\mathbb{R}^{m}$ are differentiable at $c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable at $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read componentwise through the displayed equivalence, these are clauses 1 and 2 of the published [[thm-algebra-of-derivatives]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "A \\to \\mathbb{R}$ and let $c \\in A$ be a **limit point of $A$**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-double-angle-and-power-reduction-identities",
+          "source_section": "Statement",
+          "quote": "The conventions and prerequisite facts used below are recorded in [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-tangent-cotangent-secant-cosecant]].",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "**(b) The dimension map.** The conventions assign to the quantities of the framework a **dimension** $[X]$, subject to the rules",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The datum's Euler coordinates are $x_{0}=0$ and $v_{0}^{\\flat}=v_{0}\\cos\\alpha\\,e_{1}+v_{0}\\sin\\alpha\\,e_{3}$; the constant-field model with $N=1$, $m_{1}=m$ and $\\mathbf g=-g\\,e_{3}$ is a force model of [[post-cm02-force-superposition]] by [[ex-cm02-uniform-field]] claim 1, and by its claim 2 the unique maximal motion through $(x_{0},v_{0}^{\\flat})$ is $x(t)=v_{0}^{\\flat}t-\\frac12g\\,t^{2}e_{3}$, which is the displayed formula; its maximal interval is all of $\\mathbb R$.",
+          "step": "1.1",
+          "inputs": [
+            "L1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Direct verification of the formula, independently of [L1]: differentiating componentwise by [L2] gives $\\dot x(t)=v_{0}\\cos\\alpha\\,e_{1}+(v_{0}\\sin\\alpha-g\\,t)e_{3}$ and $\\ddot x(t)=-g\\,e_{3}=F(t,x(t),\\dot x(t))/m$; the initial values are $x(0)=0$ and $\\dot x(0)=v_{0}(\\cos\\alpha\\,e_{1}+\\sin\\alpha\\,e_{3})$, so the curve is a motion of the model by [[def-cm02-newtonian-flow]] clause (c), and by [[pthm-cm02-ivp]] clause 2 it is the only motion through the datum on any interval containing $0$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Planarity: the coefficient of $e_{2}$ in $x(t)$ is $0$ for every $t$, so the trajectory lies in the plane spanned by $e_{1}$ and $e_{3}$; equivalently $\\langle x(t),e_{2}\\rangle=0$ for all $t$ for the frame's Euclidean inner product. The motion is a parabola in that plane: eliminating $t=x_{1}/(v_{0}\\cos\\alpha)$ from the $e_{3}$-component gives $x_{3}=\\tan\\alpha\\,x_{1}-\\frac{g}{2v_{0}^{2}\\cos^{2}\\alpha}x_{1}^{2}$, a quadratic relation between the two nonzero coordinates.",
+          "step": "2.1",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Return time and range: the height above the launch level is $h(t):=v_{0}\\sin\\alpha\\,t-\\frac12g\\,t^{2}$; for $g>0$ and $v_{0}\\sin\\alpha>0$ one has $h(t)=0$ exactly when $t=0$ or $t=\\frac{2v_{0}\\sin\\alpha}{g}=:T_{\\mathrm f}$, so $T_{\\mathrm f}$ is the positive return-to-launch-height time; the first coordinate at that time is $v_{0}\\cos\\alpha\\,T_{\\mathrm f}=\\frac{2v_{0}^{2}\\sin\\alpha\\cos\\alpha}{g}=\\frac{v_{0}^{2}\\sin(2\\alpha)}{g}$ by [L3], the displayed range $R_{\\mathrm{range}}$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Dimensions and scope: $[g]=\\ell\\tau^{-2}$ so $[T_{\\mathrm f}]=\\ell\\tau^{-1}/(\\ell\\tau^{-2})=\\tau$ and $[R_{\\mathrm{range}}]=\\ell^{2}\\tau^{-2}/(\\ell\\tau^{-2})=\\ell$, consistent with [[def-cm01-units]]; the computation uses no drag term, so it does not describe motion through a medium (compare the drag model [[post-cm02-drag]]), and a realistic gravitational field is constant only as an approximation, so treating a measured local field strength as the parameter $g$ is an empirical premise with its own conditions and uncertainty. [step 3.1, given, L4, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "One label and one datum; no indexed family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The distinct zero times of the height are $t=0$ and $t=T_{\\mathrm f}$; step 3.1 selects the positive one, the division by $g,v_{0}$ being licensed by $g>0$, $v_{0}>0$ in the statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example has one label; there is no family whose length-one case could be special."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The endpoint values $\\alpha=0$ and $\\alpha=\\pi/2$ lie outside the stated range $0<\\alpha<\\pi/2$, and the formulas of step 3.1 are evaluated only under those hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The return-to-launch-height times are the two zeros of the height function, and step 3.1 evaluates the range at the positive one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family occurs; the datum and parameter are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "ex-cm02-drag-terminal-velocity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm02-force-superposition",
+          "source_section": "Postulate",
+          "quote": "The precise notion of a motion of the model, its associated first-order system and its maximal motions is [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm02-drag",
+          "source_section": "Postulate",
+          "quote": "It is therefore a force map of the branch [[post-cm02-force-superposition]] clause (iii), and the existence, uniqueness and continuation theorems of this page apply to it; the regularity check is recorded with the model checks on the companion page.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "Motions of the labels of the model are exactly these curves by [[post-cm02-force-superposition]] clause (iv).",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F(t,x,v)=\\bigl(v,\\mathsf M^{-1}F(t,x,v)\\bigr)$ be the associated first-order field and let motions and maximal motions be as in [[def-cm02-newtonian-flow]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-oscillator-model-and-phase-system",
+          "source_section": "Definition",
+          "quote": "The **damped driven oscillator model** with data $(m,c,k,f)$ is the second-order equation",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-forced-oscillator-variation-of-constants",
+          "source_section": "Statement",
+          "quote": "There is exactly one solution $x:I\\to\\mathbb R$ of the forced model $m\\,x''+c\\,x'+k\\,x=f$ with $x(t_0)=x_0$ and $x'(t_0)=v_0$, and it is of class $C^2$ on $I$. 2.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-cm-oscillator-degenerate-and-repulsive-cases",
+          "source_section": "Statement",
+          "quote": "Let $m>0$, $c\\ge0$, let $k\\le0$, and consider the model $m\\,x''+c\\,x'+k\\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-derivative-of-exponential",
+          "source_section": "Statement",
+          "quote": "The real exponential function is $C^\\infty$, and for every $m\\in\\mathbb N$, $$\\exp^{(m)}=\\exp.$$ In particular $(\\exp)'=\\exp$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "Let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]) at which $g$ is differentiable ([[def-derivative]]), put $b := g(c)$, and suppose $b$ is a limit point of $B$ at which $f$ is differentiable.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "\\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "\\lim_{x \\to c} \\frac{f(x) - f(c)}{x - c} .$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "**Oriented limits.** Following [[def-oriented-integral]] componentwise, set",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-exponential-dominates-one-plus-x",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$1+x\\le\\exp(x).$$ Consequently, if $0\\le p\\le1$ and $m\\in\\mathbb N$, then $$ (1-p)^m\\le\\exp(-mp).",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-exponential-reciprocal-and-positivity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $\\exp(x)>0$ and $$\\exp(-x)=\\frac1{\\exp(x)}.$$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-of-inverse-positive",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) with positive cone $P$, and let $a, b \\in F$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-limits-at-infinity",
+          "source_section": "Definition",
+          "quote": "when for every real $\\varepsilon > 0$ there is a real $M$ such that",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean inner product and the Euclidean norm as in [[def-euclidean-inner-product]].",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality; it is not assumed here.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector equation $m\\ddot x=m\\mathbf g-c\\dot x$ is, in the frame's coordinates, the three scalar equations $m\\ddot x_{j}=m g_{j}-c\\dot x_{j}$ for $j=1,2,3$, each the scalar model of [L2] with $k=0$, $c>0$ and constant forcing $f_{0}=mg_{j}$; in particular each scalar initial value problem has exactly one solution on $\\mathbb R$ by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Candidate and its derivatives: set $v_{\\infty}=(m/c)\\mathbf g$ and $$\\xi_{j}(t):=x_{0,j}+v_{\\infty,j}t+\\frac{m}{c}\\bigl(v_{0,j}-v_{\\infty,j}\\bigr)\\bigl(1-e^{-ct/m}\\bigr);$$ then by [L3] $\\xi_{j}'(t)=v_{\\infty,j}+(v_{0,j}-v_{\\infty,j})e^{-ct/m}$ and $\\xi_{j}''(t)=-\\frac{c}{m}(v_{0,j}-v_{\\infty,j})e^{-ct/m}$, so $$m\\xi_{j}''+c\\xi_{j}'=-c(v_{0,j}-v_{\\infty,j})e^{-ct/m}+c v_{\\infty,j}+c(v_{0,j}-v_{\\infty,j})e^{-ct/m}=cv_{\\infty,j}=mg_{j},$$ the scalar equation of step 1.1; moreover $\\xi_{j}(0)=x_{0,j}$ and $\\xi_{j}'(0)=v_{\\infty,j}+(v_{0,j}-v_{\\infty,j})=v_{0,j}$.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "L2",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By uniqueness in [L2] each $\\xi_{j}$ is the unique scalar solution on $\\mathbb R$ with the datum, so the vector curve $x(t):=(\\xi_{1}(t),\\xi_{2}(t),\\xi_{3}(t))$ displayed in the Example satisfies the vector equation for all $t\\in\\mathbb R$ with values in $Q=\\mathbb R^{3}$ and the stated datum; by [[def-cm02-newtonian-flow]] clause (c) it is a motion of the model, and it is defined on all of the time window. By [[pthm-cm02-ivp]] clauses 2 and 4 every motion with the same datum is the restriction of this one, so it is the unique maximal motion, with maximal interval $\\mathbb R$; this proves claim 1.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Velocity and approach to the terminal velocity: from step 2.1, $\\dot x(t)-v_{\\infty}=(v_{0}-v_{\\infty})e^{-ct/m}$, so by [L4] $\\lvert\\dot x(t)-v_{\\infty}\\rvert_{2}=\\lvert v_{0}-v_{\\infty}\\rvert_{2}\\,e^{-ct/m}$ for every $t$. The factor decays to $0$: given $\\varepsilon>0$, for $t>\\frac{m}{c}\\cdot\\frac{1}{\\varepsilon}$ one has $\\frac{ct}{m}>\\frac{1}{\\varepsilon}$ and hence, using $\\exp(s)\\ge1+s$ at $s=\\frac{ct}{m}>0$, the reciprocal comparison of [L3] and $\\frac{m}{ct}<\\varepsilon$, $$0<e^{-ct/m}=\\frac{1}{e^{ct/m}}\\le\\frac{1}{1+ct/m}<\\frac{m}{ct}<\\varepsilon.$$ Therefore $\\lvert\\dot x(t)-v_{\\infty}\\rvert_{2}\\le\\lvert v_{0}-v_{\\infty}\\rvert_{2}\\,e^{-ct/m}\\to0$ as $t\\to+\\infty$, i.e. $\\dot x(t)\\to v_{\\infty}$ ([[def-limits-at-infinity]]); this proves claim 2. [step 2.1, L3, L4, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "L3",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "One label and one datum; no indexed family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case $v_{0}=v_{\\infty}$ gives the constant-velocity solution and the bound of step 4.1 is then trivially zero; the coefficient range is $c>0$ by the statement."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The Example has one label; no length-one family case arises."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate difference $v_{0}-v_{\\infty}=0$ is covered by the estimate of step 4.1 without division by the difference."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The explicit solution is defined on all of $\\mathbb R$ and the limit at $+\\infty$ is computed in step 4.1; no finite endpoint of the time window occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No selection from a family occurs; the parameters and datum are given."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "cex-cm02-nonunique-flow-for-a-continuous-force": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "**(e) Newtonian flow.** The **Newtonian flow** of the model is the map",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "**Every point of a nondegenerate interval is a limit point of it.** Let $J \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) with at least two elements and let $p \\in J$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "The only assertion here that is not immediate from the defining conditions is that $a < b$ makes $(a,b)$ nonempty with at least two points.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-abs-value",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-continuous-inverse",
+          "source_section": "Statement",
+          "quote": "I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and injective ([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-composition-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "If $g$ is continuous at $c$ and $f$ is continuous at $g(c) \\in B$, then $f \\circ g$ is continuous at $c$ ([[def-continuity-real]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-continuous-functions",
+          "source_section": "Statement",
+          "quote": "Suppose $f$ and $g$ are continuous at $c$ ([[def-continuity-real]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-continuity-real",
+          "source_section": "Definition",
+          "quote": "A \\to \\mathbb{R}$ is continuous at $c$: take $\\delta := \\eta$, so that the only $x \\in A$ with $|x - c| < \\delta$ is $c$ itself, and $|f(c) - f(c)| = 0 < \\varepsilon$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "The **difference quotient of $f$ at $c$** is the function",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The map $F$ is continuous on $\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}$: its first component is the composition of the continuous coordinate map $x\\mapsto x_{1}$ (a projection, [L2]), the absolute value and the square root, and its other components are constant; hence $F$ meets the weakened hypothesis of the refuted statement.",
+          "step": "1.1",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The zero curve $x_{0}(t):=(0,0,0)$ is a motion through the datum on $\\mathbb R$: it is $C^{2}$ with $\\ddot x_{0}=0$ and $F(t,x_{0}(t),\\dot x_{0}(t))=(0,0,0)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Define $x_{1}:\\mathbb R\\to\\mathbb R^{3}$ by $x_{1}(t):=(0,0,0)$ for $t\\le1$ and $x_{1}(t):=\\bigl(\\frac{(t-1)^{4}}{144},0,0\\bigr)$ for $t\\ge1$. On $(-\\infty,1)$ and on $(1,\\infty)$ it is given by polynomials and is $C^{\\infty}$ there, with first component $\\frac{(t-1)^{4}}{144}$, first derivative $\\frac{(t-1)^{3}}{36}$ and second derivative $\\frac{(t-1)^{2}}{12}$ for $t>1$ by [L3]. At $t=1$ the difference quotient of the first component is $\\frac{(1+h-1)^{4}}{144h}=\\frac{h^{3}}{144}\\to0$ as $h\\downarrow0$ and is identically $0$ for $h<0$, so the first derivative exists and equals $0$ there by [L3]; the same computation applied to the first derivative gives second derivative $0$ at $t=1$; hence $x_{1}$ is of class $C^{2}$ on $\\mathbb R$ with $x_{1}(0)=0$ and $\\dot x_{1}(0)=0$.",
+          "step": "1.3",
+          "inputs": [
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "$x_{1}$ satisfies the equation: for $t<1$ both sides vanish; for $t>1$, $\\ddot x_{1}(t)=\\bigl(\\frac{(t-1)^{2}}{12},0,0\\bigr)$ and $F(t,x_{1}(t),\\dot x_{1}(t))=\\bigl(\\sqrt{\\frac{(t-1)^{4}}{144}},0,0\\bigr)=\\bigl(\\frac{(t-1)^{2}}{12},0,0\\bigr)$; at $t=1$, $\\ddot x_{1}(1)=0$ and $F=(0,0,0)$. Hence $x_{1}$ is a motion of the model on $\\mathbb R$ through the datum by [L1].",
+          "step": "2.1",
+          "inputs": [
+            "1.3",
+            "L1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The two motions differ: $x_{1}(2)=\\bigl(\\frac{1}{144},0,0\\bigr)\\neq x_{0}(2)$, so the initial value problem for the continuous force map $F$ has two distinct solutions on every interval containing $[0,2]$; the refuted statement is false. [step 1.2, step 2.1, algebra] ∎",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The refutation uses one force map and one datum; no empty indexed family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero datum and the zero motion are the centre of the counterexample; step 1.2 exhibits the zero motion and step 3.1 compares it with the quartic motion at $t=2$."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The motion is supported on a line and the equation is scalar along it, so the one-dimensional case is the construction itself (Statement refuted)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The junction $t=1$ and the vanishing force at the origin are the degenerate points; step 1.3 computes one-sided difference quotients at the junction and step 2.1 checks the equation there."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The junction $t=1$ is treated with one-sided difference quotients in step 1.3, and the exhibited difference is evaluated at the interior time $t=2$ in step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family is selected from; the two solutions are written explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; the counterexample refutes one implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "cex-cm02-singular-collision-finite-time": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "A **maximal motion** with this datum is a motion $x:J_{\\max}\\to Q$ with $x(t_{0})=x_{0}$ and $\\dot x(t_{0})=v_{0}$ that has no extension to a motion of the model on a strictly larger interval.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm02-ivp",
+          "source_section": "Statement",
+          "quote": "1. **Local existence.** There is $h>0$ and there is a motion $x$ of the model on $[t_{0}-h,t_{0}+h]$ with $x(t_{0})=x_{0}$ and $\\dot x(t_{0})=v_{0}$; moreover such a motion is exactly one of class $C^{2}$ satisfying $m_{i}\\ddot x_{i}(t)=F_{i}(t,x(t),\\dot x(t))$ for all $i$ and all $t\\in[t_{0}-h,t_{0}+h]$. 2. **Uniqueness.** If $x:J\\to Q$ and $\\tilde x:\\tilde J\\to Q$ are motions of the model with the same initial datum, $x(t_{0})=\\tilde x(t_{0})=x_{0}$ and $\\dot x(t_{0})=\\dot{\\tilde x}(t_{0})=v_{0}$, then $x=\\tilde x$ on $J\\cap\\tilde J$. 3. **Quantitative cylinder.** Let $h,r>0$ satisfy $C:=[t_{0}-h,t_{0}+h]\\times\\overline B(z_{0},r)\\subseteq D$, put $M:=\\sup\\{\\lVert\\mathcal F(t,z)\\rVert_{2}:(t,z)\\in C\\}$ and let $\\Lambda$ be a state-Lipschitz constant of $\\mathcal F$ on $C$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "ex-cm02-force-model-regularity-checks",
+          "source_section": "Example",
+          "quote": "Verify: each map is continuous on its domain and locally Lipschitz in the state variable, locally uniformly in time, with the explicit constants $L=0$ for model 1, $L=c$ for model 2 and, on each annulus $r\\le\\lvert x\\rvert\\le R$ inside $\\mathbb R^{3}\\setminus\\{0\\}$, $L=k\\bigl(r^{-3}+3R^{3}r^{-6}\\bigr)$ for model 3; and the inverse-square map has no continuous extension to the excluded point $0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "\\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let $P :",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-chain-rule",
+          "source_section": "Statement",
+          "quote": "A \\to \\mathbb{R}$ with $g[A] \\subseteq B$ and let $f :",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "A \\to \\mathbb{R}$ agree with $q_{f,c}$ at every point of $A \\setminus \\{c\\}$, and let $L \\in \\mathbb{R}$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $x, y \\in \\mathbb{R}^{n}$, with the Euclidean inner product and the Euclidean norm as in [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "That $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]] is proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle inequality is obtained from the Cauchy-Schwarz inequality; it is not assumed here.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "pthm-cm02-continuation",
+          "source_section": "Statement",
+          "quote": "Then for every compact $K_{0}\\subseteq U$ and every $\\delta>0$ there is $t\\in(b-\\delta,b)$ with $z(t)\\notin K_{0}$: near a finite breakdown the state leaves every compact subset of the open state domain $U=Q\\times\\mathbb R^{3N}$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm02-newtonian-flow",
+          "source_section": "Definition",
+          "quote": "Let a force model of [[post-cm02-force-superposition]] be given: time window $I_{0}\\subseteq\\mathbb R$ nondegenerate and open, configuration domain $Q\\subseteq\\mathbb R^{3N}$ open ([[def-cm01-configuration]] clause (a)), fixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), and a force map $F$ with the standing continuity and state-local-Lipschitz hypotheses of clause (iii) of that postulate.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Force from the potential: for $x\\neq0$ the function $x\\mapsto-k\\lvert x\\rvert^{-1}$ is differentiable with $\\partial_{i}\\bigl(-k\\lvert x\\rvert^{-1}\\bigr)=k\\,x_{i}\\lvert x\\rvert^{-3}$ (chain rule and power rule, [L2]), so $-\\nabla U(x)=-k\\,x/\\lvert x\\rvert^{3}$; this is the force map of the model, continuous and locally Lipschitz on $Q$ by [L1] and [[ex-cm02-force-model-regularity-checks]].",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Set $\\kappa:=k/m>0$, let $r_{0}>0$, define $$T:=\\frac{\\sqrt{2}\\,r_{0}^{3/2}}{3\\sqrt{\\kappa}},\\qquad v_{0}:=-\\sqrt{\\frac{2\\kappa}{r_{0}}},$$ and consider the datum $x(0)=r_{0}e_{1}$, $\\dot x(0)=v_{0}e_{1}$; note the elementary identity $\\dfrac{2r_{0}}{3T}=\\sqrt{\\dfrac{2\\kappa}{r_{0}}}=-v_{0}$, obtained from the definition of $T$ by multiplying numerator and denominator.",
+          "step": "1.2",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Define $r:(-\\infty,T)\\to(0,\\infty)$ by $r(t):=r_{0}\\bigl(1-\\frac{t}{T}\\bigr)^{2/3}$ and $x(t):=r(t)e_{1}$. Then $x$ is $C^{2}$ on $(-\\infty,T)$ with first component $r$, and by [L2] $$\\dot r(t)=-\\frac{2r_{0}}{3T}\\Bigl(1-\\frac{t}{T}\\Bigr)^{-1/3},\\qquad \\ddot r(t)=-\\frac{2r_{0}}{9T^{2}}\\Bigl(1-\\frac{t}{T}\\Bigr)^{-4/3}.$$",
+          "step": "1.3",
+          "inputs": [
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The equation holds: from $T^{2}=\\dfrac{2r_{0}^{3}}{9\\kappa}$ one has $\\dfrac{2r_{0}}{9T^{2}}=\\dfrac{\\kappa}{r_{0}^{2}}$, so $$\\ddot r(t)=-\\frac{\\kappa}{r_{0}^{2}}\\Bigl(1-\\frac{t}{T}\\Bigr)^{-4/3}=-\\frac{\\kappa}{r(t)^{2}}.$$ Hence $\\ddot x(t)=\\ddot r(t)e_{1}=-\\dfrac{\\kappa}{r(t)^{2}}e_{1}=-\\dfrac{k}{m\\,r(t)^{2}}e_{1}$ and $F(x(t))=-\\dfrac{k\\,r(t)e_{1}}{r(t)^{3}}=-\\dfrac{k}{r(t)^{2}}e_{1}$, so $m\\ddot x(t)=F(x(t))$ for every $t\\in(-\\infty,T)$; moreover $x(t)\\in Q$ and $t\\in I_{0}=\\mathbb R$ throughout, and the initial values are $x(0)=r_{0}e_{1}$ and $\\dot x(0)=\\dot r(0)e_{1}=-\\frac{2r_{0}}{3T}e_{1}=v_{0}e_{1}$ by step 1.2. By [L1], $x$ is a motion of the model on $(-\\infty,T)$ through the datum.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "1.3",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "No extension past $T$: suppose a motion $\\tilde x$ with the same datum were defined on an interval containing some $t_{*}>T$. By the uniqueness clause of [L1] it agrees with $x$ on $(-\\infty,T)$, and being continuous at $T$ it would satisfy $\\tilde x(T)=\\lim_{t\\uparrow T}x(t)=(0,0,0)$, because $r(t)\\to0$ as $t\\uparrow T$; but a motion's values must lie in $Q=\\mathbb R^{3}\\setminus\\{0\\}$ at every time of its interval, and $(0,0,0)\\notin Q$ — a contradiction. Hence no motion with the datum is defined beyond $T$, and by the maximality clause of [L1] the maximal motion with the datum is $x$, whose maximal interval is $(-\\infty,T)$ with finite right endpoint $b=T$.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Escape consistent with the breakdown criterion: as $t\\uparrow T$ one has $\\lvert\\dot r(t)\\rvert=\\frac{2r_{0}}{3T}(1-t/T)^{-1/3}\\to+\\infty$ while $r(t)\\to0$; the state $(x(t),\\dot x(t))$ therefore leaves every compact subset of $U=Q\\times\\mathbb R^{3}$ near $T$, in the two ways predicted by [[pthm-cm02-continuation]] clause 4: the velocity is unbounded and the position approaches the excluded configuration. The refuted all-time-existence statement is false for this model. [step 3.1, L4, algebra] ∎",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "One force model and one datum; no indexed family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The radial coordinate tends to $0$ as $t\\uparrow T$ and the value $0$ is never attained (step 3.1 uses the continuity limit and the excluded configuration), while the initial velocity is nonzero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The construction is the radial one-dimensional motion on the line through the centre, which is the case exhibited (Statement refuted)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The datum of zero reduced energy is the degenerate (parabolic) case of the radial problem; step 2.1 verifies the equation for it and the energy check is recorded in the Remarks."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The finite endpoint $T$ is the subject of the counterexample; step 1.3 computes the one-sided derivatives for $t<T$ and step 3.1 evaluates the limit of $x$ at $T$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No family is selected from; the solution is explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse direction occurs."
+        }
+      ]
+    },
+    "post-cm02-force-superposition": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(viii) state the adopted content explicitly: the configuration domain and its collision exclusion, the time window, the force map with its continuity and state-local-Lipschitz hypotheses and dimensions, the equation of motion in an inertial frame, additive composition of declared contributions, the transformation rule under a Galilean change of frame, the excluded model classes, and the status of every clause. No solution or empirical value is selected."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and clauses (vii)-(viii) delimit the regime: no impacts, dry or static friction, stochastic or distributional forcing, no constraint reactions, no conservation law, no claim that any interaction has this form; the covariance clause states exactly which transformations a force law must satisfy."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics Section 1.2 (printed pages 2-5): F = dp/dt with force a function of position and velocity in an inertial frame. Likharev, Essential Graduate Physics CM Section 1.2 (chapter pages 3-4): force through the momentum derivative, superposition assumed separately, gravity as an additional law. Stewart, Advanced Classical Mechanics Section 1.2 (printed pages 1-2): Newton's second law with initial position and velocity data. Tong, Dynamics and Relativity Section 1.2.1 (printed page 5): accelerations transform as spatial vectors under a boost. Locators and fetch stamps are recorded in the coverage file."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof, Refutation, Verification or Counterexample section; provenance.proof is not-applicable; clause (viii) states that the postulates are adopted and not deduced, and that the page's theorems are conditional on them."
+        }
+      }
+    },
+    "post-cm02-interactions": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(vii) state explicitly the external-plus-pair decomposition, the optional antisymmetry and centrality assumptions, the potential model with the Euclidean gradient and its units, the example subclasses, the gravitational pair-potential branch with its coupling parameters and the elementary gradient remark, the status of the mass identification as an empirical assumption, and the overall status clause."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and the status section record that the decomposition is relative to the declared labels, that open subsystems see external forces without pair restrictions, that being a potential model is a restriction, and that no conservation law, measurement or inverse-square derivation is claimed."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics Section 1.3 (printed pages 5-9): F_i = sum_j F_ij + F_i^ext, weak and strong forms of the third law, and the omitted-field caution. Likharev Section 1.2 (chapter pages 3-4): superposition and the gravity law with the weak-equivalence footnote. Likharev Section 1.3 (chapter pages 5-8): the central internal-force assumption. Stewart Section 1.3 (printed pages 12-15): internal forces obeying the third law and the centre-of-mass balance. Locators and fetch stamps are recorded in the coverage file."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No proof section; provenance.proof is not-applicable; clause (vii) marks every clause as adopted and the gravity clause is explicitly recorded as an additional law rather than a consequence of the equation of motion."
+        }
+      }
+    },
+    "post-cm02-drag": {
+      "citations": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(v) state the setting (medium at rest, external effect), the force map F = m g - c v with its dimensions and domain, the explicit regularity estimate with constant c, the phenomenological status with the Stokes example, the regime alternatives (quadratic, Coulomb) and the fluctuation-neglect qualification, and the status clause."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope and clause (iv) restrict the model to the slow/viscous regime, record that the coefficient depends on body and medium, exclude dry and static friction from the branch, and deny any measured value or derivation; the zero-coefficient remark and the no-static-friction remark are recorded."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Likharev Section 5.1 (chapter page 2, PDF page 88, Eqs. (5.5)-(5.6) and footnote 4): the linear drag force with the drag coefficient, explicitly phenomenological, with the fluctuation-neglect condition. Stewart Section 1.4 (printed pages 20-21): fluid friction at low velocity -b v, distinct friction models and the Stokes-sphere example. Tong Section 1.2 (printed pages 2-5): velocity-dependent forces as model input. Locators and fetch stamps are recorded in the coverage file."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No proof section; provenance.proof is not-applicable; clauses (iv)-(v) state that the model is adopted rather than derived and that its consequences within the model belong to the companion example."
+        }
+      }
+    },
+    "rem-cm02-open-system-warning": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The remark audits a fixed finite list of cited items and states no indexed-family claim with an empty case."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No zero parameter or degenerate limit is asserted; the remark classifies adopted, defined, proved and not-claimed content."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No indexed family occurs; each cited item is named individually."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "No algebraic or geometric assertion is made whose degenerate cases could arise."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The remark contains no interval or limiting-endpoint assertion of its own."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The remark performs no selection and invokes no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; the remark is a status audit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "For the same reason no converse direction is asserted."
+        }
+      ]
+    }
+  }
+}

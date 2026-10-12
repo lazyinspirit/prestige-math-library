@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-principal-logarithm-is-holomorphic-on-the-slit-plane.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-whitney-approximation-for-manifold-valued-maps.md

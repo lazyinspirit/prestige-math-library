@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-gr-einstein-consistency-and-energy-conditions.md

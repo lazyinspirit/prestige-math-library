@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monoidal-functors-compose-and-laxness-is-preserved.md

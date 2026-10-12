@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-choice-strength-of-the-grand-equivalence.md

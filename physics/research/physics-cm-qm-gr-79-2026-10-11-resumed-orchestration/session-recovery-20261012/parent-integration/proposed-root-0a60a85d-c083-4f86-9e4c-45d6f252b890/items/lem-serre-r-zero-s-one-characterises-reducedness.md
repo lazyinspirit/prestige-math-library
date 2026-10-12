@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-serre-r-zero-s-one-characterises-reducedness.md

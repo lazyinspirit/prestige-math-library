@@ -109,11 +109,7 @@ number field satisfies $r_1+2r_2=[L:\mathbb Q]$
 
 1.3 The field $K=\mathbb Q(\zeta)$ has no real embedding: if $\sigma(K)\subseteq\mathbb R$ for an embedding $\sigma$, then $\sigma(\zeta)\in\mathbb R$ is a root of unity whose order is exactly $f\ge3$, because $\sigma(\zeta)^{m}=1$ if and only if $\zeta^{m}=1$ if and only if $f\mid m$; but by [F6] a real root of unity has order $1$ or $2$, a contradiction. Hence $r_1=0$, complex conjugation acts on the $n$ embeddings as a fixed-point-free involution, and $r_2=n/2=\varphi(f)/2$ by [F6]. [F6, given]
 
-1.4 In the separate case from the Statement with $f=1$, one has $K=\mathbb Q$,
-and [F3] gives the integral basis $(1)$ of $\mathcal O_{\mathbb Q}=\mathbb Z$.
-Its trace Gram matrix is the $1\times1$ matrix
-$[\operatorname{Tr}_{\mathbb Q/\mathbb Q}(1\cdot1)]=[1]$, so its determinant
-is $1$; by the discriminant definition in [F3], $d_{\mathbb Q}=1$. [F3]
+1.4 In the separate case from the Statement with $f=1$, one has $K=\mathbb Q$, and [F3] gives the integral basis $(1)$ of $\mathcal O_{\mathbb Q}=\mathbb Z$. Its trace Gram matrix is the $1\times1$ matrix $[\operatorname{Tr}_{\mathbb Q/\mathbb Q}(1\cdot1)]=[1]$, so its determinant is $1$; by the discriminant definition in [F3], $d_{\mathbb Q}=1$. [F3]
 
 2.1 By induction on $j$, $|d_{M_j}|=\prod_{i\le j}|d_{K_i}|^{\varphi(n_j)/e_i}$: for $j=1$, $M_1=K_1$ and the exponent is $1$; for $j\ge2$, [F4] gives $[M_{j-1}:\mathbb Q]=\varphi(n_{j-1})$ and $[K_j:\mathbb Q]=e_j$ with $M_j=M_{j-1}K_j$, the discriminants $d_{M_{j-1}}$ and $d_{K_j}$ are coprime because one is $\pm$ a product of powers of $p_1,\dots,p_{j-1}$ and the other is $\pm p_j^{L_j}$, and [F2] then gives $|d_{M_j}|=|d_{M_{j-1}}|^{e_j}|d_{K_j}|^{\varphi(n_{j-1})}$. [F2, F4, step 1.2]
 
@@ -121,10 +117,7 @@ is $1$; by the discriminant definition in [F3], $d_{\mathbb Q}=1$. [F3]
 
 3.1 Taking absolute values in the induction of step 2.1 with $j=r$ and using $M_r=K$ and $\varphi(n_r)=\varphi(f)$ gives $|d_K|=\prod_{i\le r}p_i^{\,L_i\varphi(f)/e_i}=\prod_{i\le r}p_i^{\,\varphi(f)\bigl(a_i-1/(p_i-1)\bigr)}=f^{\varphi(f)}/\prod_{i\le r}p_i^{\varphi(f)/(p_i-1)}$. [F4, step 1.2, step 2.1]
 
-4.1 Combining the sign of step 2.2 with the absolute value of step 3.1 gives
-$d_K=(-1)^{\varphi(f)/2}f^{\varphi(f)}/\prod_{p\mid f}p^{\varphi(f)/(p-1)}$
-for the given reduced index $f>1$; the separate $f=1$ case has
-$d_{\mathbb Q}=1$ by step 1.4. These are the cases in the Statement. [step 2.2, step 3.1, step 1.4] ∎
+4.1 Combining the sign of step 2.2 with the absolute value of step 3.1 gives $d_K=(-1)^{\varphi(f)/2}f^{\varphi(f)}/\prod_{p\mid f}p^{\varphi(f)/(p-1)}$ for the given reduced index $f>1$; the separate $f=1$ case has $d_{\mathbb Q}=1$ by step 1.4. These are the cases in the Statement. [step 2.2, step 3.1, step 1.4] ∎
 
 ## Remarks
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-cone-object-of-a-map-is-unique-up-to-nonunique-isomorphism.md

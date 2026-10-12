@@ -225,121 +225,16 @@ determinant and spectrum results cited in [A7]–[A12].
 
 **Given:** the data in the statement and facts [A1]–[A12].
 
-1.1 Build a countable dense subset of $H$ by pairing restricted rational-box steps. [A2, A3, A4]
-Let $S$ be the countable dense family of real rational-box steps in
-$L^2(\mathbb R)$ from [A3]. For $f\in H$, choose a measurable representative
-$f=u+iv$. By [A2], both real components belong to real $L^2([0,1])$. Extend
-each by zero to $\mathbb R$. For a Borel set $B\subseteq\mathbb R$, the
-extension's inverse image is $(u^{-1}(B)\cap[0,1])$, together with
-$\mathbb R\setminus[0,1]$ exactly when $0\in B$; these sets are Lebesgue
-measurable, so the extension is measurable. Its norm agrees with the norm on
-$[0,1]$ by the integral-over-a-set definition [A4]. Restriction from
-$\mathbb R$ to $[0,1]$ is contractive by [A4].
-Thus, for any $\varepsilon>0$, choose $s,t\in S$ with each component's
-restriction error less than $\varepsilon/\sqrt2$. The set
-$$ D:=\{\left.(s+it)\right|_{[0,1]}:s,t\in S\} $$
-is countable by [A3], and its members are bounded step functions. The identity
-$|a+ib|^2=a^2+b^2$ and additivity in [A2] give
-$$ \|f-\left.(s+it)\right|_{[0,1]}\|_2^2 =\|u-\left.s\right|_{[0,1]}\|_2^2 +\|v-\left.t\right|_{[0,1]}\|_2^2<\varepsilon^2. $$
-Hence $D$ is dense and $H$ is separable. [A2, A3, A4]
+1.1 Build a countable dense subset of $H$ by pairing restricted rational-box steps. [A2, A3, A4] Let $S$ be the countable dense family of real rational-box steps in $L^2(\mathbb R)$ from [A3]. For $f\in H$, choose a measurable representative $f=u+iv$. By [A2], both real components belong to real $L^2([0,1])$. Extend each by zero to $\mathbb R$. For a Borel set $B\subseteq\mathbb R$, the extension's inverse image is $(u^{-1}(B)\cap[0,1])$, together with $\mathbb R\setminus[0,1]$ exactly when $0\in B$; these sets are Lebesgue measurable, so the extension is measurable. Its norm agrees with the norm on $[0,1]$ by the integral-over-a-set definition [A4]. Restriction from $\mathbb R$ to $[0,1]$ is contractive by [A4]. Thus, for any $\varepsilon>0$, choose $s,t\in S$ with each component's restriction error less than $\varepsilon/\sqrt2$. The set $$ D:=\{\left.(s+it)\right|_{[0,1]}:s,t\in S\} $$ is countable by [A3], and its members are bounded step functions. The identity $|a+ib|^2=a^2+b^2$ and additivity in [A2] give $$ \|f-\left.(s+it)\right|_{[0,1]}\|_2^2 =\|u-\left.s\right|_{[0,1]}\|_2^2 +\|v-\left.t\right|_{[0,1]}\|_2^2<\varepsilon^2. $$ Hence $D$ is dense and $H$ is separable. [A2, A3, A4]
 
-1.2 Compute the triangle area and identify its indicator kernel with $V$. [A4, A5, A7, A9]
-Put
-$$ \Delta:=\{(x,t)\in[0,1]^2:0\le t\le x\le1\}. $$
-It is closed in $\mathbb R^2$, hence Borel and product-measurable by [A5].
-The two restricted Lebesgue factors are finite, so their product measure
-$\rho$ exists by [A4, A5], and the rectangle formula gives
-$\rho([0,1]^2)=1$. Tonelli and [A4] give
-$$ \rho(\Delta)=\int_0^1\lambda([0,x])\,dx=\int_0^1x\,dx=\tfrac12. $$
-For the last equality, $x\mapsto x$ is continuous, the primitive $x^2/2$
-has derivative $x$ by [A9], Newton–Leibniz evaluates the Riemann integral,
-and [A9] identifies it with the Lebesgue integral. Thus
-$k_1=\mathbf1_\Delta$ is in $L^2(\overline\rho)$ with
-$\|k_1\|_2^2=1/2$. The kernel theorem [A7] identifies $V=T_{k_1}$ and gives
-$$ \|V\|_{HS}=\|k_1\|_2=1/\sqrt2. $$
-[A4, A5, A7, A9]
+1.2 Compute the triangle area and identify its indicator kernel with $V$. [A4, A5, A7, A9] Put $$ \Delta:=\{(x,t)\in[0,1]^2:0\le t\le x\le1\}. $$ It is closed in $\mathbb R^2$, hence Borel and product-measurable by [A5]. The two restricted Lebesgue factors are finite, so their product measure $\rho$ exists by [A4, A5], and the rectangle formula gives $\rho([0,1]^2)=1$. Tonelli and [A4] give $$ \rho(\Delta)=\int_0^1\lambda([0,x])\,dx=\int_0^1x\,dx=\tfrac12. $$ For the last equality, $x\mapsto x$ is continuous, the primitive $x^2/2$ has derivative $x$ by [A9], Newton–Leibniz evaluates the Riemann integral, and [A9] identifies it with the Lebesgue integral. Thus $k_1=\mathbf1_\Delta$ is in $L^2(\overline\rho)$ with $\|k_1\|_2^2=1/2$. The kernel theorem [A7] identifies $V=T_{k_1}$ and gives $$ \|V\|_{HS}=\|k_1\|_2=1/\sqrt2. $$ [A4, A5, A7, A9]
 
-1.3 Prove $V^2$ is trace class. [A1, A7, A8]
-By [A7], AC supplies a Hilbert basis $E$ of $H$ and $V$ is
-Hilbert–Schmidt relative to it. By [A1], AC supplies Countable Choice for
-[A8]; hence [A8] makes $V$ compact and then $V^2=V\circ V$ compact. Apply
-the Hilbert–Schmidt product theorem [A8] with both factors $V$ and the same
-basis $E$. It follows that $V^2$ is trace class and
-$$ \|V^2\|_1\le\|V\|_{HS}^2=\tfrac12. $$
-[A1, A7, A8]
+1.3 Prove $V^2$ is trace class. [A1, A7, A8] By [A7], AC supplies a Hilbert basis $E$ of $H$ and $V$ is Hilbert–Schmidt relative to it. By [A1], AC supplies Countable Choice for [A8]; hence [A8] makes $V$ compact and then $V^2=V\circ V$ compact. Apply the Hilbert–Schmidt product theorem [A8] with both factors $V$ and the same basis $E$. It follows that $V^2$ is trace class and $$ \|V^2\|_1\le\|V\|_{HS}^2=\tfrac12. $$ [A1, A7, A8]
 
-2.1 Bound the kernel operators $T_{k_n}$. [A4, A5, A7, step 1.2]
-For each integer $n\ge1$, define
-$$ k_n(x,t):=\frac{(x-t)^{n-1}}{(n-1)!}\mathbf1_\Delta(x,t). $$
-Each $k_n$ is product-measurable by [A5]. Since $|x-t|\le1$ on $\Delta$,
-[A4] gives
-$$ \|k_n\|_2^2\le\frac{\rho(\Delta)}{((n-1)!)^2} =\frac1{2((n-1)!)^2} \le\frac1{((n-1)!)^2}, $$
-using $\rho(\Delta)=1/2$ from step 1.2. The kernel theorem [A7] therefore
-defines a bounded operator $T_{k_n}$ with $\|T_{k_n}\|\le1/(n-1)!$.
-[A4, A5, A7, step 1.2]
+2.1 Bound the kernel operators $T_{k_n}$. [A4, A5, A7, step 1.2] For each integer $n\ge1$, define $$ k_n(x,t):=\frac{(x-t)^{n-1}}{(n-1)!}\mathbf1_\Delta(x,t). $$ Each $k_n$ is product-measurable by [A5]. Since $|x-t|\le1$ on $\Delta$, [A4] gives $$ \|k_n\|_2^2\le\frac{\rho(\Delta)}{((n-1)!)^2} =\frac1{2((n-1)!)^2} \le\frac1{((n-1)!)^2}, $$ using $\rho(\Delta)=1/2$ from step 1.2. The kernel theorem [A7] therefore defines a bounded operator $T_{k_n}$ with $\|T_{k_n}\|\le1/(n-1)!$. [A4, A5, A7, step 1.2]
 
-3.1 Prove the power-kernel identity and factorial norm estimate by induction. [A2, A3, A5, A6, A7, A9, step 1.1, step 2.1, algebra]
-We prove $V^nd=T_{k_n}d$ for every $d\in D$. At $n=1$ this is the
-definition of $V$. Suppose the identity holds for $n$. Choose a bounded
-Borel step representative of $d$, since its rational half-open boxes are
-Borel. For each fixed $x\in[0,1]$, the
-integrand on $[0,1]^2$
-$$ (s,t)\longmapsto \mathbf1_{\{0\le t\le s\le x\}}(s-t)^{n-1}d(t) $$
-is product-measurable by [A5] and bounded; the product space has finite
-measure. It is therefore in $L^1$ by [A6], so Fubini changes the order of
-integration. If $t=x$ the inner integral is zero. If $t<x$, [A9], applied
-to the primitive $(s-t)^n/n!$, gives
-$$ \int_t^x\frac{(r-t)^{n-1}}{(n-1)!}\,dr =\frac{(x-t)^n}{n!}. $$
-Indeed $r\mapsto r-t$ has derivative $1$: the identity has derivative $1$
-by the $n=1$ power case, while the constant $-t$ has zero difference
-quotient. The chain rule differentiates the shifted power, and the factorial
-recursion cancels its factor $n$. Consequently
-$$ V^{n+1}d(x)=\int_0^x\frac{(x-t)^n}{n!}d(t)\,dt $$
-for almost every $x$. This proves the induction. Both $V^n$ and $T_{k_n}$
-are bounded; since $D$ is dense by step 1.1, equality on $D$ extends to all
-$H$. Thus
-$$ \|V^n\|=\|T_{k_n}\|\le\frac1{(n-1)!}\qquad(n\ge1). $$
-[A2, A3, A5, A6, A7, A9, step 1.1, step 2.1, algebra]
+3.1 Prove the power-kernel identity and factorial norm estimate by induction. [A2, A3, A5, A6, A7, A9, step 1.1, step 2.1, algebra] We prove $V^nd=T_{k_n}d$ for every $d\in D$. At $n=1$ this is the definition of $V$. Suppose the identity holds for $n$. Choose a bounded Borel step representative of $d$, since its rational half-open boxes are Borel. For each fixed $x\in[0,1]$, the integrand on $[0,1]^2$ $$ (s,t)\longmapsto \mathbf1_{\{0\le t\le s\le x\}}(s-t)^{n-1}d(t) $$ is product-measurable by [A5] and bounded; the product space has finite measure. It is therefore in $L^1$ by [A6], so Fubini changes the order of integration. If $t=x$ the inner integral is zero. If $t<x$, [A9], applied to the primitive $(s-t)^n/n!$, gives $$ \int_t^x\frac{(r-t)^{n-1}}{(n-1)!}\,dr =\frac{(x-t)^n}{n!}. $$ Indeed $r\mapsto r-t$ has derivative $1$: the identity has derivative $1$ by the $n=1$ power case, while the constant $-t$ has zero difference quotient. The chain rule differentiates the shifted power, and the factorial recursion cancels its factor $n$. Consequently $$ V^{n+1}d(x)=\int_0^x\frac{(x-t)^n}{n!}d(t)\,dt $$ for almost every $x$. This proves the induction. Both $V^n$ and $T_{k_n}$ are bounded; since $D$ is dense by step 1.1, equality on $D$ extends to all $H$. Thus $$ \|V^n\|=\|T_{k_n}\|\le\frac1{(n-1)!}\qquad(n\ge1). $$ [A2, A3, A5, A6, A7, A9, step 1.1, step 2.1, algebra]
 
-4.1 Exclude every nonzero scalar from $\sigma(V^2)$. [A2, A10, step 3.1, algebra]
-Fix $\lambda\ne0$ and put
-$$ R_N:=\sum_{m=0}^N\lambda^{-m-1}(V^2)^m. $$
-For $m\ge1$, step 3.1 gives
-$$ \|\lambda^{-m-1}(V^2)^m\| \le\frac{|\lambda|^{-m-1}}{(2m-1)!} \le\frac{|\lambda|^{-m-1}}{m!}, $$
-because $(2m-1)!\ge m!$. The scalar majorant is summable by the
-exponential-series fact [A10]. Since $\mathcal B(H)$ is Banach [A10], its
-series criterion gives an operator-norm limit $R_\lambda=\lim_NR_N$. Finite
-telescoping gives on both sides
-$$ (\lambda I-V^2)R_N=R_N(\lambda I-V^2) =I-\lambda^{-N-1}V^{2N+2}. $$
-The remainder tends to zero by step 3.1 and the vanishing terms of the
-convergent scalar majorant. Submultiplicativity [A10] lets the products pass
-to the operator-norm limit, so $R_\lambda$ is a bounded two-sided inverse of
-$\lambda I-V^2$. Therefore every nonzero $\lambda$ lies in the resolvent
-set [A10], and
-$$ \sigma(V^2)\subseteq\{0\}. $$
-[A2, A10, step 3.1, algebra]
+4.1 Exclude every nonzero scalar from $\sigma(V^2)$. [A2, A10, step 3.1, algebra] Fix $\lambda\ne0$ and put $$ R_N:=\sum_{m=0}^N\lambda^{-m-1}(V^2)^m. $$ For $m\ge1$, step 3.1 gives $$ \|\lambda^{-m-1}(V^2)^m\| \le\frac{|\lambda|^{-m-1}}{(2m-1)!} \le\frac{|\lambda|^{-m-1}}{m!}, $$ because $(2m-1)!\ge m!$. The scalar majorant is summable by the exponential-series fact [A10]. Since $\mathcal B(H)$ is Banach [A10], its series criterion gives an operator-norm limit $R_\lambda=\lim_NR_N$. Finite telescoping gives on both sides $$ (\lambda I-V^2)R_N=R_N(\lambda I-V^2) =I-\lambda^{-N-1}V^{2N+2}. $$ The remainder tends to zero by step 3.1 and the vanishing terms of the convergent scalar majorant. Submultiplicativity [A10] lets the products pass to the operator-norm limit, so $R_\lambda$ is a bounded two-sided inverse of $\lambda I-V^2$. Therefore every nonzero $\lambda$ lies in the resolvent set [A10], and $$ \sigma(V^2)\subseteq\{0\}. $$ [A2, A10, step 3.1, algebra]
 
-5.1 Prove quasinilpotence, the trace and determinant conclusions, and the nonzero witness. [A1, A2, A4, A11, A12, step 1.1, step 1.3, step 3.1, step 4.1, algebra]
-By [A2], $H$ is a complex Hilbert space; it is separable by step 1.1 and
-$V^2$ is trace class by step 1.3. Step 4.1 puts its spectrum inside
-$\{0\}$, while [A12] makes the
-spectrum nonempty; hence $\sigma(V^2)=\{0\}$ and $V^2$ is quasinilpotent.
-The local quasinilpotent lemma [A11] applies, yielding
-$$ \operatorname{tr}(V^2)=0,\qquad D_{V^2}(z)=1\quad(z\in\mathbb C). $$
-This particular operator is not zero: $1\in H$, $\|1\|_2=1$ by [A4],
-and the same Newton–Leibniz calculation gives $V1(x)=x$ and
-$V^21(x)=x^2/2$, which is positive on $[1/2,1]$ of positive measure [A4].
-The formula includes the degenerate endpoint $x=0$ because that integral is
-zero; the closed triangle convention retains both endpoints, and no boundary
-point is discarded in Tonelli or Fubini. The base case $n=1$ is step 3.1.
-AC is the exact declared assumption [A1]: it supplies the Hilbert basis used
-in step 1.3 and supplies Countable Choice for the stated auxiliary results;
-the separability approximation selects only two approximants for a single
-tolerance. There is no one-dimensional branch: the intervals
-$I_n=(2^{-n},2^{-(n-1)})$, indexed by integers $n\ge1$, lie in $[0,1]$,
-are pairwise disjoint and have measure $2^{-n}>0$
-by [A4]; if a finite linear combination of their indicator classes is zero,
-restricting to each $I_n$ forces its coefficient to vanish. Thus $H$ is
-infinite-dimensional. The assertion is a conjunction, not an iff, so neither
-iff direction applies. [A1, A2, A4, A11, A12, step 1.1,
-step 1.3, step 3.1, step 4.1, algebra] ∎
+5.1 Prove quasinilpotence, the trace and determinant conclusions, and the nonzero witness. [A1, A2, A4, A11, A12, step 1.1, step 1.3, step 3.1, step 4.1, algebra] By [A2], $H$ is a complex Hilbert space; it is separable by step 1.1 and $V^2$ is trace class by step 1.3. Step 4.1 puts its spectrum inside $\{0\}$, while [A12] makes the spectrum nonempty; hence $\sigma(V^2)=\{0\}$ and $V^2$ is quasinilpotent. The local quasinilpotent lemma [A11] applies, yielding $$ \operatorname{tr}(V^2)=0,\qquad D_{V^2}(z)=1\quad(z\in\mathbb C). $$ This particular operator is not zero: $1\in H$, $\|1\|_2=1$ by [A4], and the same Newton–Leibniz calculation gives $V1(x)=x$ and $V^21(x)=x^2/2$, which is positive on $[1/2,1]$ of positive measure [A4]. The formula includes the degenerate endpoint $x=0$ because that integral is zero; the closed triangle convention retains both endpoints, and no boundary point is discarded in Tonelli or Fubini. The base case $n=1$ is step 3.1. AC is the exact declared assumption [A1]: it supplies the Hilbert basis used in step 1.3 and supplies Countable Choice for the stated auxiliary results; the separability approximation selects only two approximants for a single tolerance. There is no one-dimensional branch: the intervals $I_n=(2^{-n},2^{-(n-1)})$, indexed by integers $n\ge1$, lie in $[0,1]$, are pairwise disjoint and have measure $2^{-n}>0$ by [A4]; if a finite linear combination of their indicator classes is zero, restricting to each $I_n$ forces its coefficient to vanish. Thus $H$ is infinite-dimensional. The assertion is a conjunction, not an iff, so neither iff direction applies. [A1, A2, A4, A11, A12, step 1.1, step 1.3, step 3.1, step 4.1, algebra] ∎ 

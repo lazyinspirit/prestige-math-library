@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-riemann-localisation-principle-for-fourier-series.md

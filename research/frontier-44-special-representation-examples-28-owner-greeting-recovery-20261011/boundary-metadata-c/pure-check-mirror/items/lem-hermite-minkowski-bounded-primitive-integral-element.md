@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hermite-minkowski-bounded-primitive-integral-element.md

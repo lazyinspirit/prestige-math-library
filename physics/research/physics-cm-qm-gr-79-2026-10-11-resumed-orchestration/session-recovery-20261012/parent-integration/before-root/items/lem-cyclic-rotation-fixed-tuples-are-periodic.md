@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cyclic-rotation-fixed-tuples-are-periodic.md

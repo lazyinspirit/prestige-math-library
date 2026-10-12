@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bounded-right-inverse-for-the-sobolev-trace.md

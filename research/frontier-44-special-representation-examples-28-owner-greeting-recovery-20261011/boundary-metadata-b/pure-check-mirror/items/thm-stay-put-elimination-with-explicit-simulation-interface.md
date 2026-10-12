@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stay-put-elimination-with-explicit-simulation-interface.md

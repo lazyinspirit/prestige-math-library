@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-characters-on-a-unital-banach-algebra-are-continuous.md

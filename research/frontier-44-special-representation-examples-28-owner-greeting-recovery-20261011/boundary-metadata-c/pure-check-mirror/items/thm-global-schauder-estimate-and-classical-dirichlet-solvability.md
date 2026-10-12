@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-global-schauder-estimate-and-classical-dirichlet-solvability.md

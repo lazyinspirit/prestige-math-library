@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separated-characteristic-disk-has-an-inclusion-minimal-nonidentity-simple-cycle.md

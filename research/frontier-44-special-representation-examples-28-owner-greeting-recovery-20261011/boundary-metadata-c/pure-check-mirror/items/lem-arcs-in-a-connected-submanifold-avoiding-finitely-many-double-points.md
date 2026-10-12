@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-arcs-in-a-connected-submanifold-avoiding-finitely-many-double-points.md

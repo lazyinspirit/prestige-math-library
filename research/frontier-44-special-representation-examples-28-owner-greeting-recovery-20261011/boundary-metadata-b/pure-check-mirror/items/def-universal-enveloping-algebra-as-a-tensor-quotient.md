@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-universal-enveloping-algebra-as-a-tensor-quotient.md

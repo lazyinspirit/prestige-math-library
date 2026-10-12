@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-khovanov-seidel-type-a-quiver-algebra.md

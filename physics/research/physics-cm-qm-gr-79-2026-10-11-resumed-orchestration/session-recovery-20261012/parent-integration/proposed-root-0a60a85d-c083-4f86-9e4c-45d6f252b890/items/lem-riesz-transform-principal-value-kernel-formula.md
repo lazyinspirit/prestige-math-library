@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riesz-transform-principal-value-kernel-formula.md

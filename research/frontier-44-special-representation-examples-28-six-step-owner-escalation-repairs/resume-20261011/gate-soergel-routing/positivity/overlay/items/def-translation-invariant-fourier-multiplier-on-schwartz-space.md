@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-translation-invariant-fourier-multiplier-on-schwartz-space.md

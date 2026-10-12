@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-finite-bad-place-test-for-a-ternary-form.md

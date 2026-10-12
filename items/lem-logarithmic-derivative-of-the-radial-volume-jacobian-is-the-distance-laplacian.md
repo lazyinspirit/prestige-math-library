@@ -102,49 +102,13 @@ Jacobi matrix with Jacobi's formula, identify the trace of $\bar A'\bar A^{-1}$
 with the trace of the shape operator of the distance sphere, and use that the
 Laplace–Beltrami operator is the trace of the Hessian.
 
-1.1 The logarithmic derivative of the radial volume Jacobian is the trace of $S_v$. [F1, F2, F5]
-On $0<t<c_p(v)$ the matrix family $\bar A_v$ is smooth and invertible by [F1].
-Jacobi's formula of [F5], applied to $A(t)=\bar A_v(t)$ and divided by the
-nonvanishing determinant, gives
-$$\frac{d}{dt}\log J_p(t,v) =\frac{1}{\det\bar A_v(t)}\frac{d}{dt}\det\bar A_v(t) =\operatorname{tr}\bigl(\bar A_v(t)^{-1}\bar A_v'(t)\bigr).$$
-The trace is invariant under cyclic permutation of a product, so
-$\operatorname{tr}(\bar A_v^{-1}\bar A_v')
-=\operatorname{tr}(\bar A_v'\bar A_v^{-1})
-=\operatorname{tr}S_v(t)$ by the definition of the Riccati operator in [F2].
-[F1, F2, F5]
+1.1 The logarithmic derivative of the radial volume Jacobian is the trace of $S_v$. [F1, F2, F5] On $0<t<c_p(v)$ the matrix family $\bar A_v$ is smooth and invertible by [F1]. Jacobi's formula of [F5], applied to $A(t)=\bar A_v(t)$ and divided by the nonvanishing determinant, gives $$\frac{d}{dt}\log J_p(t,v) =\frac{1}{\det\bar A_v(t)}\frac{d}{dt}\det\bar A_v(t) =\operatorname{tr}\bigl(\bar A_v(t)^{-1}\bar A_v'(t)\bigr).$$ The trace is invariant under cyclic permutation of a product, so $\operatorname{tr}(\bar A_v^{-1}\bar A_v') =\operatorname{tr}(\bar A_v'\bar A_v^{-1}) =\operatorname{tr}S_v(t)$ by the definition of the Riccati operator in [F2]. [F1, F2, F5]
 
-2.1 The trace of the Hessian of the distance equals the trace of $S_v$. [F2, F3, step 1.1]
-Put $q=\gamma_v(t)$ with $0<t<c_p(v)$ and $T=\dot\gamma_v(t)$. Choose an
-orthonormal basis of $T_qM$ consisting of $T$ together with an orthonormal basis
-$e_1,\dots,e_{n-1}$ of $T^{\perp}$. By [F3] the Hessian entries in the radial
-direction vanish, $(\nabla^2r_p)_q(T,\cdot)=0$, and on $T^{\perp}$ the
-endomorphism representing the Hessian is
-$D_tJ(t)\circ J(t)^{-1}$. In the parallel frame of [F2] this endomorphism is
-exactly $S_v(t)$, and conjugation by the isometry $P_t$ preserves the trace,
-so
-$$\operatorname{tr}_g(\operatorname{Hess}r_p)_q =\sum_{i=1}^{n-1}g_q\bigl(D_tJ_{e_i}(t),e_i\bigr) =\operatorname{tr}S_v(t).$$
-[F2, F3, step 1.1]
+2.1 The trace of the Hessian of the distance equals the trace of $S_v$. [F2, F3, step 1.1] Put $q=\gamma_v(t)$ with $0<t<c_p(v)$ and $T=\dot\gamma_v(t)$. Choose an orthonormal basis of $T_qM$ consisting of $T$ together with an orthonormal basis $e_1,\dots,e_{n-1}$ of $T^{\perp}$. By [F3] the Hessian entries in the radial direction vanish, $(\nabla^2r_p)_q(T,\cdot)=0$, and on $T^{\perp}$ the endomorphism representing the Hessian is $D_tJ(t)\circ J(t)^{-1}$. In the parallel frame of [F2] this endomorphism is exactly $S_v(t)$, and conjugation by the isometry $P_t$ preserves the trace, so $$\operatorname{tr}_g(\operatorname{Hess}r_p)_q =\sum_{i=1}^{n-1}g_q\bigl(D_tJ_{e_i}(t),e_i\bigr) =\operatorname{tr}S_v(t).$$ [F2, F3, step 1.1]
 
-3.1 Conclusion. [F4, step 1.1, step 2.1]
-By [F4] the Laplace–Beltrami operator of $r_p$ at $q$ is the trace of the
-Hessian, and by step 2.1 this trace equals $\operatorname{tr}S_v(t)$; by
-step 1.1 the logarithmic derivative of $J_p(t,v)$ equals the same trace.
-Therefore
-$$\frac{d}{dt}\log J_p(t,v)=\operatorname{tr}S_v(t) =\Delta_g r_p\bigl(\exp_p(tv)\bigr)$$
-for every $0<t<c_p(v)$. [F4, step 1.1, step 2.1]
+3.1 Conclusion. [F4, step 1.1, step 2.1] By [F4] the Laplace–Beltrami operator of $r_p$ at $q$ is the trace of the Hessian, and by step 2.1 this trace equals $\operatorname{tr}S_v(t)$; by step 1.1 the logarithmic derivative of $J_p(t,v)$ equals the same trace. Therefore $$\frac{d}{dt}\log J_p(t,v)=\operatorname{tr}S_v(t) =\Delta_g r_p\bigl(\exp_p(tv)\bigr)$$ for every $0<t<c_p(v)$. [F4, step 1.1, step 2.1]
 
-4.1 Boundary cases. [F1, F2, F3, step 1.1, step 2.1, step 3.1]
-The identity is asserted on the open interval $0<t<c_p(v)$: at $t=0$ the
-Jacobian vanishes, $\log J_p$ is not defined at $0$ and $r_p$ is not
-differentiable at $p$; at $t=c_p(v)$ (when the cut time is finite and attained)
-the distance function need not be smooth, and [F3] does not apply. If
-$c_p(v)=+\infty$ the identity holds on all of $(0,\infty)$. In dimension
-$n=2$ the normal space is one-dimensional, $S_v(t)$ is a scalar and
-$\operatorname{tr}S_v(t)$ is that scalar; the argument above already covers
-this case because the basis $e_1,\dots,e_{n-1}$ then has one element. The
-statement is for unit $v$; for a general $w\ne0$ one applies it to $v=w/|w|$
-and the affine reparametrization $t\mapsto|w|t$, while $w=0$ has no radial
-direction. No choice beyond the inherited [A1] is used. [F1, F2, F3, step 1.1, step 2.1, step 3.1] ∎
+4.1 Boundary cases. [F1, F2, F3, step 1.1, step 2.1, step 3.1] The identity is asserted on the open interval $0<t<c_p(v)$: at $t=0$ the Jacobian vanishes, $\log J_p$ is not defined at $0$ and $r_p$ is not differentiable at $p$; at $t=c_p(v)$ (when the cut time is finite and attained) the distance function need not be smooth, and [F3] does not apply. If $c_p(v)=+\infty$ the identity holds on all of $(0,\infty)$. In dimension $n=2$ the normal space is one-dimensional, $S_v(t)$ is a scalar and $\operatorname{tr}S_v(t)$ is that scalar; the argument above already covers this case because the basis $e_1,\dots,e_{n-1}$ then has one element. The statement is for unit $v$; for a general $w\ne0$ one applies it to $v=w/|w|$ and the affine reparametrization $t\mapsto|w|t$, while $w=0$ has no radial direction. No choice beyond the inherited [A1] is used. [F1, F2, F3, step 1.1, step 2.1, step 3.1] ∎
 
 ## Source locator
 

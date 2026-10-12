@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-continuous-functions-on-the-unit-interval-with-the-sup-metric.md

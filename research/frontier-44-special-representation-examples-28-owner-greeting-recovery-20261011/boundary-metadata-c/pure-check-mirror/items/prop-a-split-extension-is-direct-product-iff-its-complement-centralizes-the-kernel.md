@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-split-extension-is-direct-product-iff-its-complement-centralizes-the-kernel.md

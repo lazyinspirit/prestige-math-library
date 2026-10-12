@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-one-minus-two-plus-three-is-abel-but-not-cesaro-summable.md

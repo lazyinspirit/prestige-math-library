@@ -1,5 +1,5 @@
 // Shared repair fingerprint. Step 3's gate-triggered repair wave was deleted in
-// the 3a rebuild: a failing 3a/3b gate is an owner hold, so only the stages that
+// the 3a rebuild: a failing 3a gate is an owner hold, so only the stages that
 // still own a repair loop (7-adjudicate and legacy paths) use this.
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';

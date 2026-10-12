@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-proper-subspace-with-an-equinumerous-basis.md

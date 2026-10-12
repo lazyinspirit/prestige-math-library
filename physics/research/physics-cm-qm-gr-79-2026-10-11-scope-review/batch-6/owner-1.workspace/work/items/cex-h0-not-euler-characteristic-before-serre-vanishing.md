@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-h0-not-euler-characteristic-before-serre-vanishing.md

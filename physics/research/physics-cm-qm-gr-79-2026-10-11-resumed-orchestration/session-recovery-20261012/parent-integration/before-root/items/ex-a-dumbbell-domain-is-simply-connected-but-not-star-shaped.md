@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-dumbbell-domain-is-simply-connected-but-not-star-shaped.md

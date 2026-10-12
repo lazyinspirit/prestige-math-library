@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-born-rigid-motion-need-not-be-killing.md

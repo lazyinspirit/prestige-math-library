@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-degenerate-cyclotomic-hecke-g-zero-is-the-dual-highest-weight-module.md

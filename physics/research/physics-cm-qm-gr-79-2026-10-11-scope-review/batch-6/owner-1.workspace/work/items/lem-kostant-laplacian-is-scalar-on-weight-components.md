@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kostant-laplacian-is-scalar-on-weight-components.md

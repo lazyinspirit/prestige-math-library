@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-qcqs-structure-pushforward-affine-local.md

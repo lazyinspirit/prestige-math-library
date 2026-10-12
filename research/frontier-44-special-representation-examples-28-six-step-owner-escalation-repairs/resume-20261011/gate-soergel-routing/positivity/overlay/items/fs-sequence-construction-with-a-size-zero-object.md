@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-sequence-construction-with-a-size-zero-object.md

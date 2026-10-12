@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-normal-stiefel-whitney-class-is-the-multiplicative-inverse-of-the-tangent-class.md

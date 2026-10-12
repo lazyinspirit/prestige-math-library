@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-circle-of-convergence-contains-a-singular-point.md

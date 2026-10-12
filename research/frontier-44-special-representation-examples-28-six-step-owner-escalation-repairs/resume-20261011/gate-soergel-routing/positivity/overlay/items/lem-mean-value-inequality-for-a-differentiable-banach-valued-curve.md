@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-mean-value-inequality-for-a-differentiable-banach-valued-curve.md

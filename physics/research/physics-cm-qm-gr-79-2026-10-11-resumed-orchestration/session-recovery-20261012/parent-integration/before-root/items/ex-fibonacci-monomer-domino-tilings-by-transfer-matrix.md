@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fibonacci-monomer-domino-tilings-by-transfer-matrix.md

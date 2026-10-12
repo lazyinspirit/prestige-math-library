@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-star-shaped-plane-domains-are-homologically-simply-connected.md

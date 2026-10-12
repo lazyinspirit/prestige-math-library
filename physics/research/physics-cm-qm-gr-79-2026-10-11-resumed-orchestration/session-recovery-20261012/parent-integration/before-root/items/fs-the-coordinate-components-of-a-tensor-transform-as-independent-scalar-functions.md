@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-coordinate-components-of-a-tensor-transform-as-independent-scalar-functions.md

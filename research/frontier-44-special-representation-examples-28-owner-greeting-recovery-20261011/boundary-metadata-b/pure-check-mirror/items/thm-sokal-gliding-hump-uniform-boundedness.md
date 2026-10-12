@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sokal-gliding-hump-uniform-boundedness.md

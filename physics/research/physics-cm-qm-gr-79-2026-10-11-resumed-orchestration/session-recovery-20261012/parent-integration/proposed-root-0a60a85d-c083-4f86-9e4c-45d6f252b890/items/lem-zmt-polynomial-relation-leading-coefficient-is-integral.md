@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zmt-polynomial-relation-leading-coefficient-is-integral.md

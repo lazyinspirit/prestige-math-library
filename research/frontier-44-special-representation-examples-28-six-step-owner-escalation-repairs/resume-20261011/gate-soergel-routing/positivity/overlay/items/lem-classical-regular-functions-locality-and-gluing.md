@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-classical-regular-functions-locality-and-gluing.md

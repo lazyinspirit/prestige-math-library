@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-vanishing-gradient-and-time-derivative-imply-constancy-on-convex-sets.md

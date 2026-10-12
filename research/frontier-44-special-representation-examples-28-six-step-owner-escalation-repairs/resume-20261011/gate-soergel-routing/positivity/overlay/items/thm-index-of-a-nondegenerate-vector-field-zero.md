@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-index-of-a-nondegenerate-vector-field-zero.md

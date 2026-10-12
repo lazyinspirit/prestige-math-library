@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-regular-weight-has-a-unique-dominant-dot-translate.md

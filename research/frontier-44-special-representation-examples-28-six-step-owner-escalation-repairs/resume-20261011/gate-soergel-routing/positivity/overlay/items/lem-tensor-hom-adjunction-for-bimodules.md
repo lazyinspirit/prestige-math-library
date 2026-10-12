@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-tensor-hom-adjunction-for-bimodules.md

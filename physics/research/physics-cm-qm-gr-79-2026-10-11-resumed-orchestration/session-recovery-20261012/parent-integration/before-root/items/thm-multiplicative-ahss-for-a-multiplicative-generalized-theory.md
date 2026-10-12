@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-multiplicative-ahss-for-a-multiplicative-generalized-theory.md

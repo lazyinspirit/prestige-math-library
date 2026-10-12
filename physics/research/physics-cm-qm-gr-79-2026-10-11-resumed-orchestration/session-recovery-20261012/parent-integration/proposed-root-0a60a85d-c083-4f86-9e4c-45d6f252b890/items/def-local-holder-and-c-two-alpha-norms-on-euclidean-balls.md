@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-local-holder-and-c-two-alpha-norms-on-euclidean-balls.md

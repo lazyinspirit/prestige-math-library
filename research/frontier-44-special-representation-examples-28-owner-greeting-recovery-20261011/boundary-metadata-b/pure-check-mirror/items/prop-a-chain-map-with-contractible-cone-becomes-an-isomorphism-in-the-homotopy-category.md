@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-chain-map-with-contractible-cone-becomes-an-isomorphism-in-the-homotopy-category.md

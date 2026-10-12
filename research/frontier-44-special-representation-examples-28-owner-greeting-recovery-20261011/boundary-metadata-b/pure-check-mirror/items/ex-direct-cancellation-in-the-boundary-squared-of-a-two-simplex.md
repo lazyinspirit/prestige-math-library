@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-direct-cancellation-in-the-boundary-squared-of-a-two-simplex.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-acyclic-resolution-is-the-same-thing-as-an-injective-resolution.md

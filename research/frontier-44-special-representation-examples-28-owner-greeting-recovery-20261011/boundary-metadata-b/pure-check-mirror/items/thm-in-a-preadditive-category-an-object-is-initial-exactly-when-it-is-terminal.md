@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-in-a-preadditive-category-an-object-is-initial-exactly-when-it-is-terminal.md

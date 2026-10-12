@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-global-gauss-bonnet-for-closed-oriented-riemannian-surfaces.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riesz-projection-for-a-matrix-with-separated-spectrum.md

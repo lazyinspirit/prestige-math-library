@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-interior-h-k-plus-two-elliptic-regularity.md

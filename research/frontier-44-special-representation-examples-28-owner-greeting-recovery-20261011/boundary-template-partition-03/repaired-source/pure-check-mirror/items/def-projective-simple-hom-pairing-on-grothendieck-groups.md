@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-projective-simple-hom-pairing-on-grothendieck-groups.md

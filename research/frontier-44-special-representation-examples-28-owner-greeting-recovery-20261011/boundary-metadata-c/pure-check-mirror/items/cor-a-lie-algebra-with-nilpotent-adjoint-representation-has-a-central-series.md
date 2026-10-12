@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-lie-algebra-with-nilpotent-adjoint-representation-has-a-central-series.md

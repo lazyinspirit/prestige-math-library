@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-countable-intersection-of-completely-metrizable-subspaces.md

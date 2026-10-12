@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-transverse-holonomy-transport-is-well-defined-and-equivariant.md

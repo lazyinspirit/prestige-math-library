@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-decomposition-matrix-of-s-three-in-characteristic-two.md

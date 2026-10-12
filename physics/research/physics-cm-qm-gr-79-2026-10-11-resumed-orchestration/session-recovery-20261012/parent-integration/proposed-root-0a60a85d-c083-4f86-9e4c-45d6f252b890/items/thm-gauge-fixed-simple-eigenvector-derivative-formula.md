@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gauge-fixed-simple-eigenvector-derivative-formula.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-canonical-map-g-to-u-g-is-injective-by-the-definition-of-a-quotient.md

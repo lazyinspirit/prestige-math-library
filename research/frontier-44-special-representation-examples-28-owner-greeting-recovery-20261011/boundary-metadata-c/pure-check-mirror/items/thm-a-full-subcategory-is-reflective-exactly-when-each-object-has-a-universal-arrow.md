@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-full-subcategory-is-reflective-exactly-when-each-object-has-a-universal-arrow.md

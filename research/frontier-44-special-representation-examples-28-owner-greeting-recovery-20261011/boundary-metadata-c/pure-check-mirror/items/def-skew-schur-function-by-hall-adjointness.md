@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-skew-schur-function-by-hall-adjointness.md

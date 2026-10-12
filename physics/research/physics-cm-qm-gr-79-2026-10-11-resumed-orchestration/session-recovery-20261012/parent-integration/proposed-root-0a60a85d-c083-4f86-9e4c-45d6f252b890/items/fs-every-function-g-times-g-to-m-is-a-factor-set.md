@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-function-g-times-g-to-m-is-a-factor-set.md

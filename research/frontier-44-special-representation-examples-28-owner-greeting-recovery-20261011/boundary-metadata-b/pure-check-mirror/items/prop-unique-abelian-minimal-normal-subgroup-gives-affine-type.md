@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-unique-abelian-minimal-normal-subgroup-gives-affine-type.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-pushout-of-a-monomorphism-is-a-monomorphism.md

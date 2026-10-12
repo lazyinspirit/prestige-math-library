@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hermite-functions-as-fourier-eigenfunctions.md

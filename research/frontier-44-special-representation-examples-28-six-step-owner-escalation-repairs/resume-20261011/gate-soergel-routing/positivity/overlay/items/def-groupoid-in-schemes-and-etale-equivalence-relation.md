@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-groupoid-in-schemes-and-etale-equivalence-relation.md

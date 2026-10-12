@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-change-of-basis-for-a-sesquilinear-form.md

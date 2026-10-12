@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate.md

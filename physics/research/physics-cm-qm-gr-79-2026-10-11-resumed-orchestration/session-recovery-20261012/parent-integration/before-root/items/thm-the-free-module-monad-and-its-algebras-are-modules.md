@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-free-module-monad-and-its-algebras-are-modules.md

@@ -78,26 +78,17 @@ compact space to a Hausdorff space is a homeomorphism
 
 1.1 $A(\mathbb D)$ is a complex vector space closed under pointwise multiplication, with unit the constant function $1$ of norm one, and the supremum norm is submultiplicative; the constant functions and the coordinate function $z$ show that it is nonzero. [algebra]
 
-1.2 $A(\mathbb D)$ is complete: if $(f_n)\subseteq A(\mathbb D)$ is Cauchy
-in the supremum norm, then it is uniformly Cauchy on
-$\overline{\mathbb D}$, so [L3] supplies a uniform limit $f$, and [L3] also
-makes $f$ continuous. For every filled triangle
-$\Delta\subseteq\mathbb D$, [L4] gives
-$\int_{\partial\Delta}f_n=0$ because $f_n$ is holomorphic. Passing to the
-uniform limit in the contour integral by [L3] gives
-$\int_{\partial\Delta}f=0$, and Morera's direction of [L4] makes $f$
-holomorphic on $\mathbb D$. Hence $f\in A(\mathbb D)$ and
-$\|f_n-f\|_\infty\to0$. [step 1.1, L3, L4]
+1.2 For every $a \in \overline{\mathbb D}$ the evaluation $\mathrm{ev}_a$ is a character: it is nonzero, complex-linear and multiplicative, and $\mathrm{ev}_a(1) = 1$. [algebra]
 
-1.3 For every $a \in \overline{\mathbb D}$ the evaluation $\mathrm{ev}_a$ is a character: it is nonzero, complex-linear and multiplicative, and $\mathrm{ev}_a(1) = 1$. [algebra]
+1.3 Let $\chi$ be a character of $A(\mathbb D)$ and put $a := \chi(z)$, where $z$ denotes the coordinate function. By [L1] $|a| \le \|z\|_\infty = 1$, so $a \in \overline{\mathbb D}$; and for every polynomial $p$ one has $\chi(p) = p(a)$ by linearity, multiplicativity and $\chi(1) = 1$. [1.2, L1, algebra]
 
-1.4 Let $\chi$ be a character of $A(\mathbb D)$ and put $a := \chi(z)$, where $z$ denotes the coordinate function. By [L1] $|a| \le \|z\|_\infty = 1$, so $a \in \overline{\mathbb D}$; and for every polynomial $p$ one has $\chi(p) = p(a)$ by linearity, multiplicativity and $\chi(1) = 1$. [1.2, L1, algebra]
+1.4 Polynomials are uniformly dense in $A(\mathbb D)$: for $f \in A(\mathbb D)$ and $0 < r < 1$ the function $f_r(z) := f(rz)$ is holomorphic on the disc $|z| < 1/r$ and agrees with the sum of its Taylor series there, and the partial sums converge uniformly on the compact set $\overline{\mathbb D}$ by [L2]; moreover $f_r \to f$ uniformly on $\overline{\mathbb D}$ as $r \uparrow 1$ by uniform continuity of $f$ on the compact disc; hence $f$ is a uniform limit of polynomials. [1.2, L2, algebra]
 
-1.5 Polynomials are uniformly dense in $A(\mathbb D)$: for $f \in A(\mathbb D)$ and $0 < r < 1$ the function $f_r(z) := f(rz)$ is holomorphic on the disc $|z| < 1/r$ and agrees with the sum of its Taylor series there, and the partial sums converge uniformly on the compact set $\overline{\mathbb D}$ by [L2]; moreover $f_r \to f$ uniformly on $\overline{\mathbb D}$ as $r \uparrow 1$ by uniform continuity of $f$ on the compact disc; hence $f$ is a uniform limit of polynomials. [1.2, L2, algebra]
+2.1 $A(\mathbb D)$ is complete: if $(f_n)\subseteq A(\mathbb D)$ is Cauchy in the supremum norm, then it is uniformly Cauchy on $\overline{\mathbb D}$, so [L3] supplies a uniform limit $f$, and [L3] also makes $f$ continuous. For every filled triangle $\Delta\subseteq\mathbb D$, [L4] gives $\int_{\partial\Delta}f_n=0$ because $f_n$ is holomorphic. Passing to the uniform limit in the contour integral by [L3] gives $\int_{\partial\Delta}f=0$, and Morera's direction of [L4] makes $f$ holomorphic on $\mathbb D$. Hence $f\in A(\mathbb D)$ and $\|f_n-f\|_\infty\to0$. [step 1.1, L3, L4]
 
-2.1 Consequently $\chi(f) = f(a)$ for every $f \in A(\mathbb D)$: by [step 1.5] take polynomials $p_n \to f$ uniformly and use continuity of $\chi$ from [L1] together with $\chi(p_n) = p_n(a)$ from [step 1.4]; hence $\chi = \mathrm{ev}_a$ with $a = \chi(z) \in \overline{\mathbb D}$, so every character is an evaluation at a point of the disc, and the point is unique because $\mathrm{ev}_a = \mathrm{ev}_b$ forces $a = \mathrm{ev}_a(z) = \mathrm{ev}_b(z) = b$. [step 1.4, step 1.5, L1, algebra]
+2.2 Consequently $\chi(f) = f(a)$ for every $f \in A(\mathbb D)$: by [step 1.4] take polynomials $p_n \to f$ uniformly and use continuity of $\chi$ from [L1] together with $\chi(p_n) = p_n(a)$ from [step 1.3]; hence $\chi = \mathrm{ev}_a$ with $a = \chi(z) \in \overline{\mathbb D}$, so every character is an evaluation at a point of the disc, and the point is unique because $\mathrm{ev}_a = \mathrm{ev}_b$ forces $a = \mathrm{ev}_a(z) = \mathrm{ev}_b(z) = b$. [step 1.3, step 1.4, L1, algebra]
 
-3.1 The map $a \mapsto \mathrm{ev}_a$ is continuous because every coordinate $a\mapsto\mathrm{ev}_a(f)=f(a)$ is continuous; it is a bijection by [step 2.1] and [step 1.3]. Its domain $\overline{\mathbb D}$ is compact and its target is Hausdorff by [L6], so [L6] makes it a homeomorphism. [step 1.3, step 2.1, L6]
+3.1 The map $a \mapsto \mathrm{ev}_a$ is continuous because every coordinate $a\mapsto\mathrm{ev}_a(f)=f(a)$ is continuous; it is a bijection by [step 2.2] and [step 1.2]. Its domain $\overline{\mathbb D}$ is compact and its target is Hausdorff by [L6], so [L6] makes it a homeomorphism. [step 1.2, step 2.2, L6]
 
 4.1 The boundary restriction is isometric: by [L5] applied to the bounded domain $\mathbb D$ and the function $f$, continuous on the closure, one has $\sup_{\overline{\mathbb D}}|f| = \max_{\partial\mathbb D}|f|$, so $\|f\|_\infty = \|f|_{\partial\mathbb D}\|_\infty$ and $R$ preserves norms; and the character space is $\Delta(A(\mathbb D)) \cong \overline{\mathbb D}$, which contains points not on the boundary, so it is not the circle alone. [step 3.1, L5, algebra] ∎
 

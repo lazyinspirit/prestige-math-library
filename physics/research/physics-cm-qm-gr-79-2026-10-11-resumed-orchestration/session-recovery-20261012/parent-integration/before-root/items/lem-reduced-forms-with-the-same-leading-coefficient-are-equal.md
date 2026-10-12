@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reduced-forms-with-the-same-leading-coefficient-are-equal.md

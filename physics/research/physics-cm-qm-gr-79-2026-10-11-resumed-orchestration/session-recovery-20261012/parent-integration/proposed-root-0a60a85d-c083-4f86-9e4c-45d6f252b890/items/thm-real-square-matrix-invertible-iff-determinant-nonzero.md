@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-real-square-matrix-invertible-iff-determinant-nonzero.md

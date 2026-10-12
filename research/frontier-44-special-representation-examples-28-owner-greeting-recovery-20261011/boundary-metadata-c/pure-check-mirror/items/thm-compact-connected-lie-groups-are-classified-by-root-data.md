@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-connected-lie-groups-are-classified-by-root-data.md

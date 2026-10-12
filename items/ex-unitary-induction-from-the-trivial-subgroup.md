@@ -50,7 +50,5 @@ Assume AC. For $H=\{e\}$ with its standard Haar measure of mass $1$ and the one-
 
 1.1 When $H=\{e\}$, the rho covariance imposes no restriction, and $\rho=1$ is valid. The averaging map $T_H$ is identity and the Weil formula becomes $\int_G f(x)dx=\int_G f(x)d\mu_\rho(x)$. Radon uniqueness [F2] identifies $\mu_\rho$ with left Haar measure. [F2, given, A1]
 
-2.1 Covariance is empty for the trivial subgroup, so the dense model is $C_c(G)$ and its completion is $L^2(G)$. The density cocycle is $D_g(x)=1$, hence the induced action is $F(x)\mapsto F(g^{-1}x)$, exactly [F3]. The construction theorem [F1] supplies strong continuity and unitarity. ∎ [A1, F1, F2, F3, step 1.1]
-## Sources
+2.1 Covariance is empty for the trivial subgroup, so the dense model is $C_c(G)$ and its completion is $L^2(G)$. The density cocycle is $D_g(x)=1$, hence the induced action is $F(x)\mapsto F(g^{-1}x)$, exactly [F3]. The construction theorem [F1] supplies strong continuity and unitarity. [A1, F1, F2, F3, step 1.1] ## Sources Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix E §E.1, Example E.1.8(i), PDF p. 414; Vogan, *On the Definition of Induced Representations*, §2. All relevant lines were inspected. [F3, F1, A1, F2, step 1.1] ∎
 
-Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix E §E.1, Example E.1.8(i), PDF p. 414; Vogan, *On the Definition of Induced Representations*, §2. All relevant lines were inspected.

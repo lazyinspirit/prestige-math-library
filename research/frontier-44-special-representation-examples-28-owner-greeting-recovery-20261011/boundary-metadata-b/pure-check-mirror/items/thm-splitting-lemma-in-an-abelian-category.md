@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-splitting-lemma-in-an-abelian-category.md

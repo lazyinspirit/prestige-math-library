@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-graph-transversality-is-fixed-point-nondegeneracy.md

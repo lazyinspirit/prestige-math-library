@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-regular-and-singular-torus-characters-in-gl3-fq.md

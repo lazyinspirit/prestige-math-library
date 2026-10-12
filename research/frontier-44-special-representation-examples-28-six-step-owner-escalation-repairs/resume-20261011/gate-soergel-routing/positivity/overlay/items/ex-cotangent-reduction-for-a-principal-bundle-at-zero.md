@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cotangent-reduction-for-a-principal-bundle-at-zero.md

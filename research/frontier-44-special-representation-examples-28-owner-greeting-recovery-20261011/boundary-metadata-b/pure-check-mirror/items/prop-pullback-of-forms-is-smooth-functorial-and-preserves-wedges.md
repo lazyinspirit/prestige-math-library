@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges.md

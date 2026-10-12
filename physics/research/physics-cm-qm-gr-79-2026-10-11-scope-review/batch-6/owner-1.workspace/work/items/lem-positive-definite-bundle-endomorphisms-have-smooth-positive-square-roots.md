@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-fppf-quotient-for-affine-finite-locally-free-equivalence-relation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cubic-polynomial-large-circle-loop-has-degree-three.md

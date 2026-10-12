@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-proper-injective-immersion-is-a-smooth-embedding.md

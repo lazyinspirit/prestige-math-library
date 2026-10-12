@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-littlewood-richardson-schur-product-expansion.md

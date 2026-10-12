@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder.md

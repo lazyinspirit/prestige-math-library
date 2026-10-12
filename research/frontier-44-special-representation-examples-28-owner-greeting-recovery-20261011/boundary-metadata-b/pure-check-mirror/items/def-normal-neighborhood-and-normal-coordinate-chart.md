@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-normal-neighborhood-and-normal-coordinate-chart.md

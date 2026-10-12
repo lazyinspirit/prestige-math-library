@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-compactly-supported-de-rham-cochain-complex-and-cohomology.md

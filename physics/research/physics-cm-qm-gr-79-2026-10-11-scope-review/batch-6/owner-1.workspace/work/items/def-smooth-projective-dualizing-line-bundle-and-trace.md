@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-smooth-projective-dualizing-line-bundle-and-trace.md

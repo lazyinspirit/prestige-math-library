@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-countable-paracompactness-shrinking-criterion.md

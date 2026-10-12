@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-two-syzygies-of-an-object-are-canonically-isomorphic.md

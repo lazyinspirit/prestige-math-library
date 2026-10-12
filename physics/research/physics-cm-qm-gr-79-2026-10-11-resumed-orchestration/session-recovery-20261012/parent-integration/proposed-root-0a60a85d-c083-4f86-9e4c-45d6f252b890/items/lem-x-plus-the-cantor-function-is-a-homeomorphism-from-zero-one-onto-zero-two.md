@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-x-plus-the-cantor-function-is-a-homeomorphism-from-zero-one-onto-zero-two.md

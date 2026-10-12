@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spatial-and-time-derivatives-pass-through-heat-convolution-for-positive-time.md

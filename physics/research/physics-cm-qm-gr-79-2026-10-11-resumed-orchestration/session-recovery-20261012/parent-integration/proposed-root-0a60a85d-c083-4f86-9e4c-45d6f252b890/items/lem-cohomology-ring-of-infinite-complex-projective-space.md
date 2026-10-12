@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cohomology-ring-of-infinite-complex-projective-space.md

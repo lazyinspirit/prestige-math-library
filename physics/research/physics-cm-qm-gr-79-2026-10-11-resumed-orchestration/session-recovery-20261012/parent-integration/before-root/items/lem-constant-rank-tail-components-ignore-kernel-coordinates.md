@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-constant-rank-tail-components-ignore-kernel-coordinates.md

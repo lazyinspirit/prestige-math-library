@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-injective-or-monotone-derivative-is-continuous.md

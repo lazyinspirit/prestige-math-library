@@ -20,7 +20,7 @@ function item(id: string, deps = '[]', extra: string[] = []) {
 test('extcheck rejects a transitive Foundations dependency on the Set Theory deferred catalogue', () => {
   const repo = mkdtempSync(join(tmpdir(), 'extcheck-set-boundary-'));
   mkdirSync(join(repo, 'items'), { recursive: true });
-  mkdirSync(join(repo, 'library', 'foundations'), { recursive: true });
+  mkdirSync(join(repo, 'library', 'set-theory'), { recursive: true });
   mkdirSync(join(repo, 'library', 'not-proved-here'), { recursive: true });
 
   writeFileSync(join(repo, 'items', 'rem-deferred-result.md'), item('rem-deferred-result', '[]', [
@@ -38,7 +38,7 @@ test('extcheck rejects a transitive Foundations dependency on the Set Theory def
     '---', 'page: deferred-set-theory-beyond-choice', 'status: published',
     'items: [rem-deferred-result]', 'examples: []', '---', '',
   ].join('\n'));
-  writeFileSync(join(repo, 'library', 'foundations', 'consumer.md'), [
+  writeFileSync(join(repo, 'library', 'set-theory', 'consumer.md'), [
     '---', 'page: consumer', 'status: draft', 'items: [thm-consumer]', 'examples: []', '---', '',
   ].join('\n'));
 
@@ -73,7 +73,7 @@ test('extcheck also protects planned Foundations items before their page file ex
   writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [{
     order: 1,
     id: 'future-foundations-page',
-    category: 'foundations',
+    category: 'set-theory',
     items: [{ id: 'thm-planned-consumer', kind: 'theorem', deps: ['lem-existing-middle'] }],
   }] }));
 
@@ -112,7 +112,7 @@ test('extcheck inspects actual items on inherited published prerequisite pages',
   ].join('\n'));
   writeFileSync(join(repo, 'research', 'plan-spec.json'), JSON.stringify({ pages: [
     { order: 1, id: 'published-supplier', kind: 'P', category: 'real-analysis', requires: [], items: [] },
-    { order: 2, id: 'future-foundations-page', kind: 'A', category: 'foundations', requires: ['published-supplier'], items: [] },
+    { order: 2, id: 'future-foundations-page', kind: 'A', category: 'set-theory', requires: ['published-supplier'], items: [] },
   ] }));
 
   const result = spawnSync(process.execPath, [TOOL, '--quiet', '--repo', repo], {

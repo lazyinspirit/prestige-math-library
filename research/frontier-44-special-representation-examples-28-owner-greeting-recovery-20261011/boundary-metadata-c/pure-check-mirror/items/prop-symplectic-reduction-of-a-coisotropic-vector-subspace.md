@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-symplectic-reduction-of-a-coisotropic-vector-subspace.md

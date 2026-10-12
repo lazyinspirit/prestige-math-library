@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-socle-is-the-largest-semisimple-submodule.md

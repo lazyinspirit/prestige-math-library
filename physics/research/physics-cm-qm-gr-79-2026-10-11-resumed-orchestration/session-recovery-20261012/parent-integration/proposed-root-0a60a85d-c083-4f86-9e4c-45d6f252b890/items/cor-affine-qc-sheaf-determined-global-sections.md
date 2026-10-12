@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-affine-qc-sheaf-determined-global-sections.md

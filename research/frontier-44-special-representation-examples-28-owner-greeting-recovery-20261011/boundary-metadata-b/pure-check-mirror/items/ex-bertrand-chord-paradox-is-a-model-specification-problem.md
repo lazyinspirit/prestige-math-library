@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-bertrand-chord-paradox-is-a-model-specification-problem.md

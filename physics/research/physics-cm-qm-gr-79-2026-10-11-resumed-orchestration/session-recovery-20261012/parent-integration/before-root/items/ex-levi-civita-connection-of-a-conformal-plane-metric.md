@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-levi-civita-connection-of-a-conformal-plane-metric.md

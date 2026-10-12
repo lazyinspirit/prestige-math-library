@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-artinian-local-ring-has-nilpotent-maximal-ideal.md

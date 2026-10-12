@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-independent-but-not-identically-distributed-coordinate-sequence.md

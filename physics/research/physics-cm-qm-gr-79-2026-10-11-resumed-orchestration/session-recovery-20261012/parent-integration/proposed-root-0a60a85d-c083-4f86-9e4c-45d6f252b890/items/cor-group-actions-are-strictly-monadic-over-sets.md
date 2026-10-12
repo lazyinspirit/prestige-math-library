@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-group-actions-are-strictly-monadic-over-sets.md

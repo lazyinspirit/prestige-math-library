@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-localised-ideal-generated-by-contracted-numerators.md

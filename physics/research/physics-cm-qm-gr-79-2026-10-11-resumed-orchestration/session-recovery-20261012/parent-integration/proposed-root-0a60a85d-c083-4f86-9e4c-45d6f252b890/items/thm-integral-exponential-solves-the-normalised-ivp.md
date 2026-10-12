@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integral-exponential-solves-the-normalised-ivp.md

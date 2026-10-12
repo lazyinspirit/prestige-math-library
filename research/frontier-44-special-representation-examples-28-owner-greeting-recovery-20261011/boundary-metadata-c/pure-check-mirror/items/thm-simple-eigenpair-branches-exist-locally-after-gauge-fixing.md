@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-simple-eigenpair-branches-exist-locally-after-gauge-fixing.md

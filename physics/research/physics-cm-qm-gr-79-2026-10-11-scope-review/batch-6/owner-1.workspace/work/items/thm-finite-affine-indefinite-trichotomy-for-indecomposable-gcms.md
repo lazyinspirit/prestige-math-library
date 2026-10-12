@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms.md

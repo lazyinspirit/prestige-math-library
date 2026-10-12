@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-regular-open-sets-form-a-complete-boolean-algebra.md

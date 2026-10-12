@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-category-enriched-in-categories-is-exactly-a-small-object-strict-two-category-with-small-homs.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective.md

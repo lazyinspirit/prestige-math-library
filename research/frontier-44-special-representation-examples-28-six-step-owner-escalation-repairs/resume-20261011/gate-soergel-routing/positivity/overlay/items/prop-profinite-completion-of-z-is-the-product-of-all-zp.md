@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-profinite-completion-of-z-is-the-product-of-all-zp.md

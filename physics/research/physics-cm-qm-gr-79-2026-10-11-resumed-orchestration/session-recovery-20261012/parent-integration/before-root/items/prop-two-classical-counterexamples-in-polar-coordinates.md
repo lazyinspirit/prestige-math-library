@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-two-classical-counterexamples-in-polar-coordinates.md

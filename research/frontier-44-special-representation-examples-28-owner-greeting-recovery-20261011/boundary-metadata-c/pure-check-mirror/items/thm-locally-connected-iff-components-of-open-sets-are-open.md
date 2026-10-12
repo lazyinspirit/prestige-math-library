@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-locally-connected-iff-components-of-open-sets-are-open.md

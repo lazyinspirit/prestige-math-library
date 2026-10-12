@@ -58,6 +58,7 @@ singular homology, preserving Euler characteristic as established in [L1]
 1.1 If $h:M\to N$ is a homeomorphism, transport a local orientation section by $h_{*x}:H_2(M,M\setminus\{x\};\mathbb Z)\to H_2(N,N\setminus\{h(x)\};\mathbb Z)$. The inverse homeomorphism transports it back, so integral orientability is equivalent for $M,N$. The induced homology isomorphisms and Euler–Poincaré identity in [L1] give $\chi(M)=\chi(N)$. [L1,L2]
 
 2.1 Conversely, suppose orientability and Euler characteristic agree. If both are orientable, [L1] gives genera $g_M=(2-\chi(M))/2=(2-\chi(N))/2=g_N$, including the $g=0$ sphere. If both are nonorientable, [L1] gives crosscap numbers $k_M=2-\chi(M)=2-\chi(N)=k_N$. In either case [L1] makes both surfaces homeomorphic to the same fixed polygonal quotient, so composing one homeomorphism with the inverse of the other yields $M\cong N$. The only AC use is inherited from [L1]. [L1] ∎
+
 ## Remarks
 
 For example, the torus and Klein bottle both have Euler characteristic zero

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-coadjoint-orbit-inclusion-is-an-equivariant-moment-map.md

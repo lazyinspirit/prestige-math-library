@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hard-lefschetz-and-hodge-riemann-relations-for-the-coinvariant-algebra-of-s-three.md

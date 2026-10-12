@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-fundamental-solution-of-a-constant-coefficient-operator.md

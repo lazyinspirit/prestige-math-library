@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-coulomb-laguerre-bound-energy-exhaustion.md

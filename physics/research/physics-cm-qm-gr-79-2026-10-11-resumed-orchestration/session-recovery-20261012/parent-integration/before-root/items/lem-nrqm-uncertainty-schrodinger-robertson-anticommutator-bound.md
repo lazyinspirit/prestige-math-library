@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-uncertainty-schrodinger-robertson-anticommutator-bound.md

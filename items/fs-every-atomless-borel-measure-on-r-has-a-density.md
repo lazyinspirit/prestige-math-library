@@ -36,5 +36,5 @@ from absolute continuity.
 
 1.1 By [L1], the Cantor measure $\mu_c$ is atomless. [L1]
 
-2.1 The same fact [L1] says that $\mu_c$ is singular and has total mass $1$. [step 1.1, L1]
-If it were absolutely continuous with respect to Lebesgue measure, its concentration on a Lebesgue-null set would force its total mass to be $0$. Thus it is not absolutely continuous and cannot arise from a density. ∎
+2.1 The same fact [L1] says that $\mu_c$ is singular and has total mass $1$. [step 1.1, L1] If it were absolutely continuous with respect to Lebesgue measure, its concentration on a Lebesgue-null set would force its total mass to be $0$. Thus it is not absolutely continuous and cannot arise from a density. [L1, step 1.1] ∎
+

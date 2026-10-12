@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-algebras-for-a-closure-operator-monad-are-its-fixed-points.md

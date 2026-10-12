@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-partition-and-the-equivalence-relation-it-induces-computed.md

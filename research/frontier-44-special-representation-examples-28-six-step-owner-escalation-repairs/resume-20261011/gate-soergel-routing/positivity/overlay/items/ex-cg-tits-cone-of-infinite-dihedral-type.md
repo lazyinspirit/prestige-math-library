@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-tits-cone-of-infinite-dihedral-type.md

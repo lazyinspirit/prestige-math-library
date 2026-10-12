@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induction-restriction-reciprocity-for-class-functions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nonreduced-infinitesimal-thickening-affine.md

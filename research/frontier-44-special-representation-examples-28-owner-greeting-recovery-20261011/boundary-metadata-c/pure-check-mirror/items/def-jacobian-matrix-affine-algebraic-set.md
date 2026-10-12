@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-jacobian-matrix-affine-algebraic-set.md

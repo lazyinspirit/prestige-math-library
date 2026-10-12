@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-gamma-extends-to-the-nonpositive-integers.md

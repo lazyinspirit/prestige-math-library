@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-specht-garnir-straightening-and-field-basis.md

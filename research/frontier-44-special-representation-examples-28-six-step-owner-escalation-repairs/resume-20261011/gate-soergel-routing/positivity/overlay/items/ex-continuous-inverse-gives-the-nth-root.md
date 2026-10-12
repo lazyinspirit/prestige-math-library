@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-continuous-inverse-gives-the-nth-root.md

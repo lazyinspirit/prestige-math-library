@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cauchy-kernel-has-power-complete-and-schur-expansions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-deterministic-automata-are-special-nondeterministic-automata.md

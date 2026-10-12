@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-ideals-of-c-of-x-and-zero-set-ultrafilters.md

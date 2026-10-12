@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-explicit-perturbed-horseshoe-and-transversality.md

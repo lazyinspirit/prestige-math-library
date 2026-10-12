@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-connection-on-a-smooth-vector-bundle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-volume-under-a-continuous-graph-over-a-jordan-base.md

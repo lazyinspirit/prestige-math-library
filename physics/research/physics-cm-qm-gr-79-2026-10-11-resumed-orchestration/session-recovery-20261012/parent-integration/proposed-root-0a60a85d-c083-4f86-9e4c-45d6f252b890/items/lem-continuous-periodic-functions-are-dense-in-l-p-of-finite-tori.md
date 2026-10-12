@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori.md

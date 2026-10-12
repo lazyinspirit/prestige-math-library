@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ltwo-almost-orthogonality-of-dyadic-pieces.md

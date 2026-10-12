@@ -54,9 +54,7 @@ A fundamental solution of $L$ is a distribution $E$ such that $LE=\delta_0$. Her
 
 1.1 Define $E_y$ by the displayed pairing. By [F3], $T_{-y}\varphi$ is a test function, and by [F1] composition with $E$ is a continuous complex-linear functional. Thus $E_y$ is a distribution; the formula is bilinear and uses no complex conjugation. [given, F1, F3]
 
-1.2 For every multi-index $\alpha$, use [F2] and then differentiate the translated test directly to obtain
-$$\langle\partial^\alpha E_y,\varphi\rangle=(-1)^{|\alpha|}\langle E,T_{-y}\partial^\alpha\varphi\rangle=(-1)^{|\alpha|}\langle E,\partial^\alpha T_{-y}\varphi\rangle=\langle\partial^\alpha E,T_{-y}\varphi\rangle.$$
-The equality $T_{-y}\partial^\alpha\varphi=\partial^\alpha T_{-y}\varphi$ follows because $T_{-y}\varphi(x)=\varphi(x+y)$ and $y$ is fixed. [F2, F3]
+1.2 For every multi-index $\alpha$, use [F2] and then differentiate the translated test directly to obtain $$\langle\partial^\alpha E_y,\varphi\rangle=(-1)^{|\alpha|}\langle E,T_{-y}\partial^\alpha\varphi\rangle=(-1)^{|\alpha|}\langle E,\partial^\alpha T_{-y}\varphi\rangle=\langle\partial^\alpha E,T_{-y}\varphi\rangle.$$ The equality $T_{-y}\partial^\alpha\varphi=\partial^\alpha T_{-y}\varphi$ follows because $T_{-y}\varphi(x)=\varphi(x+y)$ and $y$ is fixed. [F2, F3]
 
 2.1 By linearity of the distribution pairing, step 1.2 extends from each partial derivative to their finite constant-coefficient combination $L$. Hence $\langle LE_y,\varphi\rangle=\langle LE,T_{-y}\varphi\rangle$. If $LE=\delta_0$, [F4] makes the right side $(T_{-y}\varphi)(0)=\varphi(y)=\delta_y(\varphi)$, so $LE_y=\delta_y$. This proves the translated point-source assertion. [step 1.2, F1, F4, algebra]
 

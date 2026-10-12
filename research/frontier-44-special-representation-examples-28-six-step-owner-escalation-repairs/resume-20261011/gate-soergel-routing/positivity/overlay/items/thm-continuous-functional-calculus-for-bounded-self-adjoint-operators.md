@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-continuous-functional-calculus-for-bounded-self-adjoint-operators.md

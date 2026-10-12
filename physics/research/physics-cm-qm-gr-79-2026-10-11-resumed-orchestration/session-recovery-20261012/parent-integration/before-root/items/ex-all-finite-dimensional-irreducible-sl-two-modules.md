@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-all-finite-dimensional-irreducible-sl-two-modules.md

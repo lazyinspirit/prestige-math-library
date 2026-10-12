@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-jech-sochor-socks-transfer-is-uniformly-formalizable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-root-spaces-can-have-arbitrary-dimension-in-a-complex-semisimple-lie-algebra.md

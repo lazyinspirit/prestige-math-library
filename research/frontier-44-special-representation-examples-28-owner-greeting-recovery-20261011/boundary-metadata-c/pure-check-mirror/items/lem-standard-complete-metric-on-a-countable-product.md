@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-standard-complete-metric-on-a-countable-product.md

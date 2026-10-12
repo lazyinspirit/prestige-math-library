@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-nine-lemma-verified-on-a-diagram-of-cyclic-groups.md

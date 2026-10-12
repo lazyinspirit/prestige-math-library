@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nullhomotopy-persists-under-a-compact-transverse-deformation.md

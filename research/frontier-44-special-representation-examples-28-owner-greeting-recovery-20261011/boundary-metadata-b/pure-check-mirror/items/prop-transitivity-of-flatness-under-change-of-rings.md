@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-transitivity-of-flatness-under-change-of-rings.md

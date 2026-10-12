@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-invariants-functor-for-n-sends-injectives-to-q-acyclic-modules.md

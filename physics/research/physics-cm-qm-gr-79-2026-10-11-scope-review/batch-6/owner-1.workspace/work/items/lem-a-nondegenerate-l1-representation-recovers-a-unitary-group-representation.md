@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-nondegenerate-l1-representation-recovers-a-unitary-group-representation.md

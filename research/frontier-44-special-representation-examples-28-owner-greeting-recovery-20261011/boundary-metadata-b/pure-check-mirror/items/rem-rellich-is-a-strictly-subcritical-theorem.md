@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-rellich-is-a-strictly-subcritical-theorem.md

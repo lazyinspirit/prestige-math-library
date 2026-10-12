@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-vietas-formulas-for-a-split-monic-polynomial.md

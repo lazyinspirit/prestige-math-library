@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-natural-higher-diagonal-approximations-on-singular-chains.md

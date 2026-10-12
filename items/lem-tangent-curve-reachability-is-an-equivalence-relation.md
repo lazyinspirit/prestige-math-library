@@ -41,13 +41,10 @@ is an equivalence relation on $M$.
 
 **Proof technique:** direct.
 
-1.1 Reflexivity holds because the constant curve at any point is piecewise [given]
-smooth and has derivative $0 \in \mathcal D$. [given]
+1.1 Reflexivity holds because the constant curve at any point is piecewise [given] smooth and has derivative $0 \in \mathcal D$. [given]
 
-1.2 Symmetry holds because reversing a tangent piecewise smooth curve negates [given]
-its derivative but keeps it inside the same linear subspaces. [given]
+1.2 Symmetry holds because reversing a tangent piecewise smooth curve negates [given] its derivative but keeps it inside the same linear subspaces. [given]
 
-1.3 Transitivity holds because concatenating two tangent piecewise smooth curves [given]
-produces another piecewise smooth curve with the same tangency property. [given, construct]
+1.3 Transitivity holds because concatenating two tangent piecewise smooth curves [given] produces another piecewise smooth curve with the same tangency property. [given, construct]
 
-2.1 Therefore $\sim_{\mathcal D}$ is an equivalence relation. [given] ∎ [given]
+2.1 Therefore $\sim_{\mathcal D}$ is an equivalence relation. [given] ∎ [given] 

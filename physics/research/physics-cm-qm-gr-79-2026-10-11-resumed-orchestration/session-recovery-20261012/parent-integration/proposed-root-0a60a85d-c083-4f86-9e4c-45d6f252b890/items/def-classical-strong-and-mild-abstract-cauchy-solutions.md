@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-classical-strong-and-mild-abstract-cauchy-solutions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-indecomposable-type-a-diagrammatic-soergel-objects-are-indexed-by-permutations-and-shifts.md

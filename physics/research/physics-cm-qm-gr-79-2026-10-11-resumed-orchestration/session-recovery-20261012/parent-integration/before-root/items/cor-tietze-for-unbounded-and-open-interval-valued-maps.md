@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-tietze-for-unbounded-and-open-interval-valued-maps.md

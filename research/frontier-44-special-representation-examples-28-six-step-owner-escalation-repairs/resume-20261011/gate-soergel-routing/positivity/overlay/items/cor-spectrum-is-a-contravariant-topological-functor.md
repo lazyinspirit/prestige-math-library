@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-spectrum-is-a-contravariant-topological-functor.md

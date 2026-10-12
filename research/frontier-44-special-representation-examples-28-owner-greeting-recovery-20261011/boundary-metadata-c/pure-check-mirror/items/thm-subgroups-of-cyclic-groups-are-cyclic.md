@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-subgroups-of-cyclic-groups-are-cyclic.md

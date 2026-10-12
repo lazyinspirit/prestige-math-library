@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-integral-surface-cup-pairing-from-the-oriented-polygon.md

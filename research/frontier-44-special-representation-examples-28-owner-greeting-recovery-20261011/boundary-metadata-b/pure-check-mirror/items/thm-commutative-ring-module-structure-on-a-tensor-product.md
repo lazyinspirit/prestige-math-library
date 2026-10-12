@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-commutative-ring-module-structure-on-a-tensor-product.md

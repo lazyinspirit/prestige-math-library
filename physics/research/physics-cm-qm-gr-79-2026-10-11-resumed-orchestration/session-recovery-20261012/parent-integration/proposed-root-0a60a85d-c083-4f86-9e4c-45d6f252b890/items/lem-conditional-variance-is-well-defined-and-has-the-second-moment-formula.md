@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula.md

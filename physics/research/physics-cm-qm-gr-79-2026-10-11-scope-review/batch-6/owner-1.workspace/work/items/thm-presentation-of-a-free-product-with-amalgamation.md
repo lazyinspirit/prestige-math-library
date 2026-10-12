@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-presentation-of-a-free-product-with-amalgamation.md

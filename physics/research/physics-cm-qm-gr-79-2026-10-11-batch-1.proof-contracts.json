@@ -1,0 +1,2307 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-1",
+  "scope": [
+    "lem-cm-stroboscopic-iterate-identity",
+    "lem-cm-mass-metric-positivity",
+    "lem-cm-adapted-coordinates-exist-and-are-unique",
+    "lem-cm-adapted-charts-and-galilean-transformations",
+    "lem-cm-so3-is-a-matrix-group",
+    "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold",
+    "lem-cm-moving-frame-acceleration-identity",
+    "lem-cm-rigid-labeling-stabilizer",
+    "ex-cm-galilean-boost-coordinate-change",
+    "ex-cm-rotating-frame-identity",
+    "ex-cm-mass-metric-on-a-sphere",
+    "cex-cm-collinear-labeling-admits-a-nontrivial-rotation",
+    "ex-cm-closed-one-form-radial-primitive",
+    "ex-cm-stroboscopic-map-of-the-plane-oscillator"
+  ],
+  "contracts": {
+    "lem-cm-stroboscopic-iterate-identity": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Let $x:I\\to\\mathbb R^n$ and $y:J\\to\\mathbb R^n$ solve the same IVP. The solution $y$ is an **extension** of $x$ when $I\\subseteq J$ and $y|_I=x$. It is a proper extension when $I\\subsetneq J$.\n\nA solution is **maximal** when it has no proper extension. Its domain is its **maximal interval of existence**. A solution is **global** when its domain is the entire time projection allowed by the ODE domain; for a vector field on $\\mathbb R\\times\\mathbb R^n$, this means domain $\\mathbb R$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-cm-stroboscopic-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $P>0$, and let $F:\\mathbb R\\times U\\to\\mathbb R^n$ be a map that is continuous and locally Lipschitz in the state variable, in the sense of the hypotheses of [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], and that is **$P$-periodic**:\n\n$$F(t+P,z)=F(t,z)\\qquad(t\\in\\mathbb R,\\ z\\in U).$$\n\nConsider the first-order system $x'(t)=F(t,x(t))$ of [[def-first-order-ode-initial-value-problem-and-solution]] on the open domain $\\mathbb R\\times U$. For $z\\in U$ let\n\n$$x_z:J_z\\longrightarrow U$$\n\nbe the unique maximal solution of the initial value problem $x'(t)=F(t,x(t))$, $x(0)=z$; here $J_z$ is the open maximal interval of existence containing $0$, and by [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] every solution of this initial value problem is a restriction of $x_z$ ([[def-maximal-ode-solution]], [[def-interval]]).\n\nThe **domain of the stroboscopic map** is\n\n$$D_P:=\\{\\,z\\in U:[0,P]\\subseteq J_z\\,\\},$$\n\nthe set of initial states whose solution exists over one full period. The **stroboscopic map** (or **time-$P$ map**) of the system is the function\n\n$$\\theta_P:D_P\\longrightarrow U,\\qquad \\theta_P(z):=x_z(P).$$\n\nThis is a well-defined function: for $z\\in D_P$ the interval $J_z$ contains $P$, so $x_z(P)$ is a point of $U$, and by the uniqueness clause of the maximal-solution theorem the value $x_z(P)$ does not depend on any choice, since $x_z$ is the only maximal solution through $(0,z)$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-locally-unique-ode-solutions-agree-and-glue-on-overlaps",
+          "source_section": "Statement",
+          "quote": "Locally unique solutions through the same data agree on every overlap. If two such solutions are defined on adjacent intervals, agree at their common endpoint, and solve the same continuous ODE there, their piecewise union is a solution on the union interval.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cm-stroboscopic-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $P>0$, and let $F:\\mathbb R\\times U\\to\\mathbb R^n$ be a map that is continuous and locally Lipschitz in the state variable, in the sense of the hypotheses of [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], and that is **$P$-periodic**:\n\n$$F(t+P,z)=F(t,z)\\qquad(t\\in\\mathbb R,\\ z\\in U).$$\n\nConsider the first-order system $x'(t)=F(t,x(t))$ of [[def-first-order-ode-initial-value-problem-and-solution]] on the open domain $\\mathbb R\\times U$. For $z\\in U$ let\n\n$$x_z:J_z\\longrightarrow U$$\n\nbe the unique maximal solution of the initial value problem $x'(t)=F(t,x(t))$, $x(0)=z$; here $J_z$ is the open maximal interval of existence containing $0$, and by [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] every solution of this initial value problem is a restriction of $x_z$ ([[def-maximal-ode-solution]], [[def-interval]]).\n\nThe **domain of the stroboscopic map** is\n\n$$D_P:=\\{\\,z\\in U:[0,P]\\subseteq J_z\\,\\},$$\n\nthe set of initial states whose solution exists over one full period. The **stroboscopic map** (or **time-$P$ map**) of the system is the function\n\n$$\\theta_P:D_P\\longrightarrow U,\\qquad \\theta_P(z):=x_z(P).$$\n\nThis is a well-defined function: for $z\\in D_P$ the interval $J_z$ contains $P$, so $x_z(P)$ is a point of $U$, and by the uniqueness clause of the maximal-solution theorem the value $x_z(P)$ does not depend on any choice, since $x_z$ is the only maximal solution through $(0,z)$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Put $w:=\\theta_P(z)=x_z(P)$, a point of $D_P$ by hypothesis, and let $x_w:J_w\\to U$ be the maximal solution of $x'=F(t,x)$, $x(0)=w$; by [F2] the interval $J_w$ contains $[0,P]$. Define $y:[0,2P]\\to U$ by $y(t):=x_z(t)$ for $t\\in[0,P]$ and $y(t):=x_w(t-P)$ for $t\\in[P,2P]$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The curve $y$ is well defined and continuous: on $[0,P]$ and on $[P,2P]$ it is the restriction of a solution, and at the common point $P$ both formulas give $y(P)=x_z(P)=w=x_w(0)$. It is differentiable on $[0,P]$ and on $[P,2P]$ with $y'(t)=F(t,y(t))$ there, and at $t=P$ the one-sided derivatives are $y'(P^-)=F(P,x_z(P))=F(P,w)$ and $y'(P^+)=F(0,x_w(0))=F(0,w)$, which are equal by [F4]; hence $y'(P)=F(P,y(P))$ and $y$ is a solution of the system on the whole interval $[0,2P]$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The curve $y$ satisfies $y(0)=x_z(0)=z$, so $y$ is a solution of the initial value problem with data $(0,z)$ on $[0,2P]$. By the uniqueness clause of [F1] every solution through $(0,z)$ is a restriction of the maximal solution $x_z$, so $[0,2P]\\subseteq J_z$ and $y=x_z|_{[0,2P]}$. In particular $x_z(2P)=y(2P)=x_w(P)=\\theta_P(w)=\\theta_P(\\theta_P(z))$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For clause 2, the constant curve $c(t):=z_*$ is a solution of the system on $\\mathbb R$ because $c'(t)=0=F(t,c(t))$; it satisfies $c(0)=z_*$, so by the uniqueness clause of [F1] it is a restriction of $x_{z_*}$. Hence $[0,P]\\subseteq J_{z_*}$, that is $z_*\\in D_P$, and $\\theta_P(z_*)=x_{z_*}(P)=c(P)=z_*$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty case is excluded: U is nonempty because it contains the initial state z; evidence: statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero-length period P=0 is excluded by P>0; evidence: statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "One iteration is the case k=1, which is vacuous for the identity; the induction starts at k=1; evidence: statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case where theta_P(z) is not in D_P is exactly the excluded case: the identity fails to be defined; evidence: statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint t=P of the gluing interval is treated by the one-sided derivative computation in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The intermediate point is w=theta_P(z) in step 1.1, fixed by the given z; gluing in step 2.1 and maximal uniqueness in step 3.1 require no selection from a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Clause 1 is the identity theta(theta(z)) = x_z(2P) and is proved in steps 1.1-3.1; its converse is not asserted (the identity is conditional on theta_P(z) in D_P)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No reverse implication is asserted: clause 1 of the statement is conditional on theta_P(z) in D_P, and the conditional proof is steps 1.1 through 3.1."
+        }
+      ]
+    },
+    "lem-cm-mass-metric-positivity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-constrained-configuration-and-mass-metric",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$; the ambient dimension is $3N$. Identify $\\mathbb R^{3N}$ with the $N$-fold product $(\\mathbb R^3)^N$ and write a point as $x=(x_1,\\dots,x_N)$ with $x_i\\in\\mathbb R^3$; the Euclidean inner product on $\\mathbb R^{3N}$ is\n\n$$\\langle x,y\\rangle_{3N}=\\sum_{i=1}^{N}\\langle x_i,y_i\\rangle_2,$$\n\nwith $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle_2$ the inner product of [[def-euclidean-inner-product]].\n\nLet $d\\ge0$ and let $Q$ be a smooth $d$-dimensional manifold ([[def-smooth-manifold]]) and let\n\n$$X:Q\\longrightarrow\\mathbb R^{3N}$$\n\nbe a smooth map. The manifold $Q$ is the **configuration space** and $X$ is the **configuration map**; the pair $(Q,X)$ is called a **particle configuration** when $Q$ is an embedded submanifold of $\\mathbb R^{3N}$ and $X$ is the inclusion ([[def-embedded-submanifold-and-slice-chart]]), and a **parametrized configuration** otherwise. For $q\\in Q$ the differential $dX_q:T_qQ\\to\\mathbb R^{3N}$ is the differential of [[def-differential-of-a-smooth-map]] ([[def-derivation-at-a-point-and-tangent-space]] for the tangent space).\n\nLet $m_1,\\dots,m_N>0$ be **masses**. The **mass matrix** is the linear map $M:\\mathbb R^{3N}\\to\\mathbb R^{3N}$ acting on each block by $M(x_1,\\dots,x_N)=(m_1x_1,\\dots,m_Nx_N)$; its matrix in the standard basis is block diagonal with blocks $m_iI_3$ ([[def-matrix-product-and-identity-matrix]]).\n\nThe **mass metric** of $(Q,X,m_1,\\dots,m_N)$ is the family of maps\n\n$$G_q:T_qQ\\times T_qQ\\longrightarrow\\mathbb R,\\qquad G_q(u,v):=\\langle dX_q(u),\\,M\\,dX_q(v)\\rangle_{3N},$$\n\nfor $q\\in Q$ and $u,v\\in T_qQ$. The **kinetic energy** of a tangent vector $v\\in T_qQ$ is\n\n$$T_q(v):=\\tfrac12\\,G_q(v,v).$$\n\nEach $G_q$ is a symmetric bilinear form on the real vector space $T_qQ$ in the sense of [[def-bilinear-symmetric-skew-and-alternating-forms]]; that the family depends smoothly on $q$ means that in every smooth local chart of $Q$ the coefficient functions $q\\mapsto G_q(\\partial_i,\\partial_j)$ are smooth, and is stated in the smoothness remark below.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "source_section": "Definition",
+          "quote": "Let $B$ be a symmetric bilinear form on a finite-dimensional real vector space, and write $q(v):=B(v,v)$. The form is **positive definite** when $q(v)>0$ for every $v\\ne0$, and **negative definite** when $q(v)<0$ for every $v\\ne0$. The same terminology applies to the associated quadratic form.\n\nSuppose a basis gives a diagonal matrix with $p$ positive diagonal entries, $q$ negative diagonal entries, and $r$ zero entries. Its **inertia** is the triple $(p,q,r)$, its **rank** is $p+q$, and its **signature** is $p-q$. Sylvester's law of inertia proves that this triple is independent of the diagonalizing basis, and therefore justifies the notation.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Bilinearity of $G_q$ follows from linearity of $dX_q$ and of $M$ together with bilinearity of the inner product [L1, L2]: for reals $\\alpha,\\beta$ and $u,u',v\\in T_qQ$, $G_q(\\alpha u+\\beta u',v)=\\alpha G_q(u,v)+\\beta G_q(u',v)$ and similarly in the second argument. Symmetry follows from symmetry of $M$: since $M$ acts by $x\\mapsto(m_1x_1,\\dots,m_Nx_N)$, $\\langle a,Mb\\rangle_{3N}=\\sum_im_i\\langle a_i,b_i\\rangle_2=\\langle Ma,b\\rangle_{3N}$, so $G_q(u,v)=G_q(v,u)$. This proves clause 1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $u\\in T_qQ$ write $dX_q(u)=(w_1,\\dots,w_N)$ with $w_i\\in\\mathbb R^3$; then [L1] and [L2] give $G_q(u,u)=\\langle dX_q(u),MdX_q(u)\\rangle_{3N}=\\sum_{i=1}^Nm_i\\langle w_i,w_i\\rangle_2=\\sum_{i=1}^Nm_i\\|w_i\\|_2^2\\ge0$. This proves clause 2.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $dX_q$ is injective and $u\\ne0$; then $dX_q(u)\\ne0$, so some $w_i\\ne0$, so $\\|w_i\\|_2^2>0$ by [L2], and since $m_i>0$ the sum in step 1.2 is strictly positive. Hence $G_q(u,u)>0$ for every $u\\ne0$. Conversely, if $dX_q$ is not injective, choose $u\\ne0$ with $dX_q(u)=0$; then every $w_i=0$, the sum in step 1.2 vanishes, and $G_q$ is not positive definite by [L3]. This proves clause 3 for the injectivity criterion; if $X$ is an immersion, $dX_q$ is injective at every $q$ by definition, so $G_q$ is positive definite.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L3",
+            "algebra",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "In the basis $b_1,\\dots,b_n$ the matrix of $G_q$ has entries $G_q(b_j,b_k)=\\langle dX_q(b_j),MdX_q(b_k)\\rangle_{3N}$. If $A$ is the matrix whose $j$-th column is the coordinate vector of $dX_q(b_j)$, then $M(dX_q(b_k))$ has coordinate vector $MAe_k$, and the inner product of coordinate vectors is the Euclidean product, so $G_q(b_j,b_k)=(A^{\\mathsf T}MA)_{jk}$. This proves clause 4.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty particle list is excluded by N >= 1 in the statement; evidence: statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is the unique vector with G_q(u,u)=0 under positive definiteness, and this is exactly clause 3; evidence: step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-particle case N=1 is included in the general proof; evidence: step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is dX_q not injective, handled explicitly in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or boundary limit occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "In step 2.1 a single nonzero kernel vector witnesses noninjectivity; the ordered tangent basis in step 3.1 is supplied as data. These finite witnesses require no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The equivalence (positive definite iff differential injective) is proved in two directions in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction (non-injectivity gives a nonzero null vector) is the second half of step 2.1."
+        }
+      ]
+    },
+    "lem-cm-adapted-coordinates-exist-and-are-unique": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-affine-time-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put\n\n$$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$\n\nthe kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$.\n\nLet $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$.\n\nLet $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)\n\nAn **adapted chart** for the data $(V,\\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of\n\n1. an origin $o\\in A$;\n2. a vector $u\\in V$ with $\\tau(u)=1$;\n3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nThe **adapted coordinates** of a point $p\\in A$ in this chart are the pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ determined by\n\n$$p=o+tu+\\sum_{i=1}^{3}x_ie_i,$$\n\nwhen such a pair exists (existence and uniqueness are [[lem-cm-adapted-coordinates-exist-and-are-unique]], so that the notation is defined for every $p$). The number $t$ is the **time coordinate** and $x=(x_1,x_2,x_3)$ the **spatial coordinate vector** of $p$ in the chart. When $K$ is identified with $\\mathbb R^3$ through the coordinates in $(e_1,e_2,e_3)$, the assignment $p\\mapsto(t,x)$ is a bijection $A\\to\\mathbb R\\times\\mathbb R^3$.\n\n**Simultaneous slices.** For $t\\in\\mathbb R$ set\n\n$$A_t:=\\{p\\in A:\\tau(p-o)=t\\}.$$\n\nThe family $\\{A_t\\}_{t\\in\\mathbb R}$ is the family of **simultaneous slices** of the chart. Each $A_t$ is an affine space modelled on $K$; the derivation is immediate from the affine identities and linearity of $\\tau$ and is recorded in [[lem-cm-adapted-coordinates-exist-and-are-unique]]. The **slice distance** of two points $p,q$ in a common slice $A_t$ is\n\n$$d_g(p,q):=\\sqrt{g(p-q,\\,p-q)},$$\n\nthe square root taken in $\\mathbb R$; this is defined because $p-q\\in K$ for points of a common slice. In adapted coordinates $d_g(p,q)=\\|x(p)-x(q)\\|_2$, with $\\|\\cdot\\|_2$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-affine-time-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put\n\n$$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$\n\nthe kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$.\n\nLet $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$.\n\nLet $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)\n\nAn **adapted chart** for the data $(V,\\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of\n\n1. an origin $o\\in A$;\n2. a vector $u\\in V$ with $\\tau(u)=1$;\n3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nThe **adapted coordinates** of a point $p\\in A$ in this chart are the pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ determined by\n\n$$p=o+tu+\\sum_{i=1}^{3}x_ie_i,$$\n\nwhen such a pair exists (existence and uniqueness are [[lem-cm-adapted-coordinates-exist-and-are-unique]], so that the notation is defined for every $p$). The number $t$ is the **time coordinate** and $x=(x_1,x_2,x_3)$ the **spatial coordinate vector** of $p$ in the chart. When $K$ is identified with $\\mathbb R^3$ through the coordinates in $(e_1,e_2,e_3)$, the assignment $p\\mapsto(t,x)$ is a bijection $A\\to\\mathbb R\\times\\mathbb R^3$.\n\n**Simultaneous slices.** For $t\\in\\mathbb R$ set\n\n$$A_t:=\\{p\\in A:\\tau(p-o)=t\\}.$$\n\nThe family $\\{A_t\\}_{t\\in\\mathbb R}$ is the family of **simultaneous slices** of the chart. Each $A_t$ is an affine space modelled on $K$; the derivation is immediate from the affine identities and linearity of $\\tau$ and is recorded in [[lem-cm-adapted-coordinates-exist-and-are-unique]]. The **slice distance** of two points $p,q$ in a common slice $A_t$ is\n\n$$d_g(p,q):=\\sqrt{g(p-q,\\,p-q)},$$\n\nthe square root taken in $\\mathbb R$; this is defined because $p-q\\in K$ for points of a common slice. In adapted coordinates $d_g(p,q)=\\|x(p)-x(q)\\|_2$, with $\\|\\cdot\\|_2$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-kernel-and-image-of-a-linear-map",
+          "source_section": "Definition",
+          "quote": "For a linear map $T:V\\to W$, its **kernel** and **image** are respectively\n\n$$\\ker T:=\\{v\\in V:T(v)=0_W\\},\\qquad \\operatorname{im}T:=\\{T(v):v\\in V\\}.$$\n\nThat both sets are linear subspaces, and that a trivial kernel characterises\ninjectivity, is proved in [[thm-linear-kernel-image-and-injectivity]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$. Two subspaces are orthogonal if every vector in one is orthogonal to every vector in the other.\n\nA list or set of vectors is **orthogonal** if every two distinct members are orthogonal. It is **orthonormal** if it is orthogonal and every member has induced norm ([[def-inner-product-norm]]) equal to $1$. An **orthonormal basis** is an ordered basis ([[def-linear-basis]]) that is an orthonormal list.\n\nThe empty list is orthonormal and is the orthonormal basis of the zero space. A one-element list is orthogonal; it is orthonormal exactly when its vector has norm $1$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-affine-time-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put\n\n$$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$\n\nthe kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$.\n\nLet $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$.\n\nLet $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)\n\nAn **adapted chart** for the data $(V,\\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of\n\n1. an origin $o\\in A$;\n2. a vector $u\\in V$ with $\\tau(u)=1$;\n3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nThe **adapted coordinates** of a point $p\\in A$ in this chart are the pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ determined by\n\n$$p=o+tu+\\sum_{i=1}^{3}x_ie_i,$$\n\nwhen such a pair exists (existence and uniqueness are [[lem-cm-adapted-coordinates-exist-and-are-unique]], so that the notation is defined for every $p$). The number $t$ is the **time coordinate** and $x=(x_1,x_2,x_3)$ the **spatial coordinate vector** of $p$ in the chart. When $K$ is identified with $\\mathbb R^3$ through the coordinates in $(e_1,e_2,e_3)$, the assignment $p\\mapsto(t,x)$ is a bijection $A\\to\\mathbb R\\times\\mathbb R^3$.\n\n**Simultaneous slices.** For $t\\in\\mathbb R$ set\n\n$$A_t:=\\{p\\in A:\\tau(p-o)=t\\}.$$\n\nThe family $\\{A_t\\}_{t\\in\\mathbb R}$ is the family of **simultaneous slices** of the chart. Each $A_t$ is an affine space modelled on $K$; the derivation is immediate from the affine identities and linearity of $\\tau$ and is recorded in [[lem-cm-adapted-coordinates-exist-and-are-unique]]. The **slice distance** of two points $p,q$ in a common slice $A_t$ is\n\n$$d_g(p,q):=\\sqrt{g(p-q,\\,p-q)},$$\n\nthe square root taken in $\\mathbb R$; this is defined because $p-q\\in K$ for points of a common slice. In adapted coordinates $d_g(p,q)=\\|x(p)-x(q)\\|_2$, with $\\|\\cdot\\|_2$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $v\\in V$ the vector $v-\\tau(v)u$ lies in $K$, because $\\tau(v-\\tau(v)u)=\\tau(v)-\\tau(v)\\tau(u)=\\tau(v)-\\tau(v)=0$ by linearity [L2]. Hence $v=\\tau(v)u+k$ with $k:=v-\\tau(v)u\\in K$, so $V=\\mathbb Ru+K$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Suppose $v=tu+k=t'u+k'$ with $t,t'\\in\\mathbb R$ and $k,k'\\in K$. Applying $\\tau$ gives $t=t'$ since $\\tau(u)=1$ and $\\tau(k)=\\tau(k')=0$; then $k=v-tu=k'$. Hence every $v$ has exactly one decomposition $v=tu+k$, and $t=\\tau(v)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Fix $t\\in\\mathbb R$. For $k\\in K$ and $p\\in A_t$ one has $\\tau((p+k)-o)=\\tau(p-o)+\\tau(k)=t$, so $p+k\\in A_t$; the action of $K$ on $A_t$ so defined is associative, and it is free and transitive because displacements in $A_t$ are displacements in $A$ and lie in $K$: if $p,q\\in A_t$ then $\\tau(q-p)=\\tau(q-o)-\\tau(p-o)=0$, so $q-p\\in K$ and $p+(q-p)=q$ with the displacement unique in $V$ and hence in $K$ [L1, L2]. Thus $A_t$ is an affine space modelled on $K$.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $p\\in A$ and put $v:=p-o$, the unique displacement vector of [L1]. By steps 1.1 and 2.1 there are unique $t\\in\\mathbb R$ and $k\\in K$ with $v=tu+k$; by [L3] there is a unique $x\\in\\mathbb R^3$ with $k=\\sum_ix_ie_i$. Hence $(t,x)$ is the unique pair with $p=o+tu+\\sum_ix_ie_i$, and the map $\\iota$ is well defined. The assignment $(t,x)\\mapsto o+tu+\\sum_ix_ie_i$ is a left and right inverse of $\\iota$ by the defining property of the action [L1]; hence $\\iota$ is a bijection onto $\\mathbb R\\times\\mathbb R^3$. This proves clause 1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $p,q\\in A_t$ the coordinate expressions $p-o=t_pu+\\sum_ix_i(p)e_i$ and $q-o=t_qu+\\sum_ix_i(q)e_i$ have $t_p=t_q=t$ by definition of $A_t$, so subtracting the two displays and using [L1] gives $p-q=\\sum_i(x_i(p)-x_i(q))e_i$. By [L3], $g(p-q,p-q)=\\sum_i(x_i(p)-x_i(q))^2$, so $d_g(p,q)=\\|x(p)-x(q)\\|_2$. This proves clause 2.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "step 2.2",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty case is excluded: A is nonempty by definition of an affine space; evidence: statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector t=0 and the origin o are covered: v=0 has decomposition t=0, k=0; evidence: step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The one-dimensional time decomposition is the case K={0}; the argument reduces to t=tau(v) and is covered by step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case u not in tau^{-1}(1) is excluded by the adapted-chart hypothesis tau(u)=1; evidence: statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The claim is algebraic and not about limits at endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Steps 1.1 and 3.1 compute t=tau(p-o) and k=p-o-tu; the given ordered basis uniquely determines x. No family of independent representatives is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The existence and uniqueness halves are proved in step 3.1 (existence) and step 2.1 (uniqueness of the vector decomposition)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Uniqueness of the spatial coordinates is step 3.1 and bijectivity of the coordinate map is the inverse of the same step."
+        }
+      ]
+    },
+    "lem-cm-adapted-charts-and-galilean-transformations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-affine-time-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put\n\n$$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$\n\nthe kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$.\n\nLet $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$.\n\nLet $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)\n\nAn **adapted chart** for the data $(V,\\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of\n\n1. an origin $o\\in A$;\n2. a vector $u\\in V$ with $\\tau(u)=1$;\n3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nThe **adapted coordinates** of a point $p\\in A$ in this chart are the pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ determined by\n\n$$p=o+tu+\\sum_{i=1}^{3}x_ie_i,$$\n\nwhen such a pair exists (existence and uniqueness are [[lem-cm-adapted-coordinates-exist-and-are-unique]], so that the notation is defined for every $p$). The number $t$ is the **time coordinate** and $x=(x_1,x_2,x_3)$ the **spatial coordinate vector** of $p$ in the chart. When $K$ is identified with $\\mathbb R^3$ through the coordinates in $(e_1,e_2,e_3)$, the assignment $p\\mapsto(t,x)$ is a bijection $A\\to\\mathbb R\\times\\mathbb R^3$.\n\n**Simultaneous slices.** For $t\\in\\mathbb R$ set\n\n$$A_t:=\\{p\\in A:\\tau(p-o)=t\\}.$$\n\nThe family $\\{A_t\\}_{t\\in\\mathbb R}$ is the family of **simultaneous slices** of the chart. Each $A_t$ is an affine space modelled on $K$; the derivation is immediate from the affine identities and linearity of $\\tau$ and is recorded in [[lem-cm-adapted-coordinates-exist-and-are-unique]]. The **slice distance** of two points $p,q$ in a common slice $A_t$ is\n\n$$d_g(p,q):=\\sqrt{g(p-q,\\,p-q)},$$\n\nthe square root taken in $\\mathbb R$; this is defined because $p-q\\in K$ for points of a common slice. In adapted coordinates $d_g(p,q)=\\|x(p)-x(q)\\|_2$, with $\\|\\cdot\\|_2$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-affine-time-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $\\tau:V\\to\\mathbb R$ be a surjective linear map ([[def-linear-map]]). Put\n\n$$K:=\\ker\\tau=\\{v\\in V:\\tau(v)=0\\},$$\n\nthe kernel of $\\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\\tau$ is surjective and $\\dim V=4$, the quotient $V/K\\cong\\mathbb R$ is one-dimensional and $\\dim K=3$.\n\nLet $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\\mathbb R$-bilinear form $g:K\\times K\\to\\mathbb R$.\n\nLet $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\\in A$ and $v,w\\in V$, and for all $p,q\\in A$ there is exactly one $v\\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)\n\nAn **adapted chart** for the data $(V,\\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of\n\n1. an origin $o\\in A$;\n2. a vector $u\\in V$ with $\\tau(u)=1$;\n3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).\n\nThe **adapted coordinates** of a point $p\\in A$ in this chart are the pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ determined by\n\n$$p=o+tu+\\sum_{i=1}^{3}x_ie_i,$$\n\nwhen such a pair exists (existence and uniqueness are [[lem-cm-adapted-coordinates-exist-and-are-unique]], so that the notation is defined for every $p$). The number $t$ is the **time coordinate** and $x=(x_1,x_2,x_3)$ the **spatial coordinate vector** of $p$ in the chart. When $K$ is identified with $\\mathbb R^3$ through the coordinates in $(e_1,e_2,e_3)$, the assignment $p\\mapsto(t,x)$ is a bijection $A\\to\\mathbb R\\times\\mathbb R^3$.\n\n**Simultaneous slices.** For $t\\in\\mathbb R$ set\n\n$$A_t:=\\{p\\in A:\\tau(p-o)=t\\}.$$\n\nThe family $\\{A_t\\}_{t\\in\\mathbb R}$ is the family of **simultaneous slices** of the chart. Each $A_t$ is an affine space modelled on $K$; the derivation is immediate from the affine identities and linearity of $\\tau$ and is recorded in [[lem-cm-adapted-coordinates-exist-and-are-unique]]. The **slice distance** of two points $p,q$ in a common slice $A_t$ is\n\n$$d_g(p,q):=\\sqrt{g(p-q,\\,p-q)},$$\n\nthe square root taken in $\\mathbb R$; this is defined because $p-q\\in K$ for points of a common slice. In adapted coordinates $d_g(p,q)=\\|x(p)-x(q)\\|_2$, with $\\|\\cdot\\|_2$ the Euclidean norm of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\tau,g,A)$ and an adapted chart $(o,u,(e_1,e_2,e_3))$ be as in [[def-cm-affine-time-space]].\n\n1. Every $p\\in A$ has exactly one pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ with\n\n$$p=o+tu+\\sum_{i=1}^3x_ie_i,$$\n\nso the adapted-coordinate map $\\iota:A\\to\\mathbb R\\times\\mathbb R^3$ of that definition is well defined, and it is a bijection.\n\n2. For every $t\\in\\mathbb R$ the simultaneous slice $A_t=\\{p:\\tau(p-o)=t\\}$ is an affine space modelled on $K=\\ker\\tau$, and for $p,q\\in A_t$ one has $p-q\\in K$ with $p-q=\\sum_i(x_i(p)-x_i(q))e_i$ and\n\n$$d_g(p,q)=\\|x(p)-x(q)\\|_2.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-orientation-of-a-finite-dimensional-real-vector-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional real vector space ([[def-dimension]]). Two ordered bases $\\mathcal B,\\mathcal B'$ of $V$ ([[def-linear-basis]]) are declared **equivalent** when the determinant of the unique change-of-basis linear isomorphism $P:V\\to V$ carrying $\\mathcal B$ to $\\mathcal B'$ satisfies $\\det P>0$, where the determinant is [[def-determinant-of-a-linear-operator]] and positivity is the order of the real field [[thm-reals-ordered-field]].\n\n**This is an equivalence relation.** The identity change of basis has determinant $1>0$. If $\\mathcal B\\sim\\mathcal B'$ through $P$, then $\\mathcal B'\\sim\\mathcal B$ through $P^{-1}$, and $\\det(P^{-1})=(\\det P)^{-1}>0$. If $\\mathcal B\\sim\\mathcal B'\\sim\\mathcal B''$ through $P,Q$, then $\\det(Q\\circ P)=\\det Q\\det P>0$ by [[thm-determinant-multiplicative]].\n\nAn **orientation** of $V$ is an equivalence class of ordered bases under this relation; a basis in the chosen class is **positively oriented** for that orientation. When $\\dim V\\ge1$ there are exactly two orientations: fixing one ordered basis $\\mathcal B_0$, every other basis $\\mathcal B$ has $\\det P>0$ or $\\det P<0$ by the trichotomy of [[thm-reals-ordered-field]]. If $\\dim V=1$, replacing the sole basis vector of $\\mathcal B_0$ by its negative produces a basis with determinant $-1$; if $\\dim V\\ge2$, interchanging two entries of $\\mathcal B_0$ does the same. Thus both classes occur. When $\\dim V=0$ the only ordered basis is the empty one and there is exactly one orientation.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "source_section": "Definition",
+          "quote": "Vectors $u,v$ in an inner product space ([[def-inner-product-space]]) are **orthogonal**, written $u\\perp v$, if $\\langle u,v\\rangle=0$. Two subspaces are orthogonal if every vector in one is orthogonal to every vector in the other.\n\nA list or set of vectors is **orthogonal** if every two distinct members are orthogonal. It is **orthonormal** if it is orthogonal and every member has induced norm ([[def-inner-product-norm]]) equal to $1$. An **orthonormal basis** is an ordered basis ([[def-linear-basis]]) that is an orthonormal list.\n\nThe empty list is orthonormal and is the orthonormal basis of the zero space. A one-element list is orthogonal; it is orthonormal exactly when its vector has norm $1$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].\n\nThe **orthogonal group** and the **special orthogonal group** are the subsets\n\n$$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$\n\nEquivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "4.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By the slice formula of [L3] applied at $p$ and at $o$, $t'(p)-t(p)=\\tau(p-o')-\\tau(p-o)=\\tau(o-o')$, which does not depend on $p$; put $b:=\\tau(o-o')$. This proves the first display of clause 1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Let $k:=p-o-tu=\\sum_ix_i(p)e_i\\in K$ and $k':=p-o'-t'u'=\\sum_ix_i'(p)e_i'\\in K$. Subtracting the second expansion from the first and using [L1], $k'=k+(o-o')+(t-t')u+t'(u-u')$. Here $(o-o')+(t-t')u\\in K$ because its $\\tau$-value is $b-b=0$ by step 1.1 and [L2], and $t'(u-u')\\in K$ by [L2]; hence the displayed equality is an identity in $K$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Let $c\\in\\mathbb R^3$ be the coordinate vector in the unprimed basis of the constant vector $(o-o')+(t-t')u\\in K$, and let $d\\in\\mathbb R^3$ be the coordinate vector of $u-u'\\in K$; by step 2.1 and [L3], the coordinate vector of $k'$ in the unprimed basis is $x(p)+c+t'(p)d$. Since the coordinate vector of $k'$ in the primed basis is $x'(p)$ and changes of coordinates are given by [L4], $x'(p)=M\\bigl(x(p)+c+t'(p)d\\bigr)=Mx(p)+(Md)t'(p)+Mc$. Using $t'=t+b$ from step 1.1 and setting $R:=M$, $v:=Md$, $a:=Mc+bv$, this reads $x'(p)=Rx(p)+vt(p)+a$, the second display of clause 1.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By [L4], $M^{\\mathsf T}M=I_3$, so $R=M\\in O(3)$; and if both bases are positively oriented then $\\det M>0$, which with $\\det M=\\pm1$ gives $\\det M=1$ and $R\\in SO(3)$. This completes clause 1.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "For the curve $\\gamma$ with $t(\\gamma(s))=s$, clause 1 gives $y(s)=x'(\\gamma(s))=Rx(\\gamma(s))+vs+a=Rx(s)+vs+a$, and the chain rule [L5] applied to the components gives $y'(s)=Rx'(s)+v$; applying it again gives $y''(s)=Rx''(s)$. This proves clause 2, the displayed equivalences following from $dt'/ds=1$ because $t'(\\gamma(s))=s+b$.",
+          "step": "4.2",
+          "inputs": [
+            "step 3.1",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "If $x''=0$ on the interval then $y''=Rx''=0$ by step 4.2; conversely if $y''=0$ then $0=R^{\\mathsf T}y''=R^{\\mathsf T}Rx''=x''$ because $R^{\\mathsf T}R=I_3$ by [L4]. This proves clause 3.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.2",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty curve case is excluded by the nondegenerate interval hypothesis in clause 2; evidence: statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case of zero relative velocity v=0 and zero shift a=0 is the chart-identity case and is included in steps 1.1-4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A single space dimension is the case dim K=1 with the same proof; evidence: steps 1.1-4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate adapted charts (tau(u) != 1, non-orthonormal basis) are excluded by the adapted-chart hypotheses; evidence: statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Differentiation is interior; no endpoint derivative is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 3.1 defines R=M, v=Md and a=Mc+bv from the two given chart bases and displacement coordinates; the Galilean coefficients are explicit, not chosen from arbitrary families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The two directions of clause 3 are proved in steps 4.2 and 5.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction (vanishing y'' implies vanishing x'') is the second half of step 4.2."
+        }
+      ]
+    },
+    "lem-cm-so3-is-a-matrix-group": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "thm-matrix-multiplication-laws",
+          "source_section": "Statement",
+          "quote": "Matrix multiplication over a field is associative and unital, distributes over\nentrywise addition on both sides, and is compatible with scalar multiplication.\nPrecisely, whenever the displayed products have compatible shapes,\n\n$$A(BC)=(AB)C,\\qquad I_mA=A=AI_n,$$\n\n$$(A+A')B=AB+A'B,\\qquad A(B+B')=AB+AB',$$\n\n$$0B=0=A0,\\qquad (\\lambda A)B=\\lambda(AB)=A(\\lambda B).$$\n\nThese identities include every zero-sized shape.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-determinant-of-a-square-matrix",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a commutative ring, let $n\\ge1$, and let $A=(a_{ij})\\in M_n(R)$. Its **determinant** is\n$$\\det(A):=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}a_{\\sigma(i),i}.$$\nThe sum is finite because $S_n$ has $n!$ elements. The product is taken in $R$, so the signs $1$ and $-1$ act through the ring identities. The formula uses columns indexed by $i<n$ and rows indexed by $\\sigma(i)$.\n\nWhen $A$ is real, $|\\det A|$ means the ordinary real absolute value of its real determinant. It is not alternate notation for the determinant itself.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$\nsuch that\n\n$$AB=I_n=BA.$$\n\nSuch a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is\n\n$$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is invertible}\\}.$$\n\nIt is the set of units of the ring $M_n(F)$. The fact that it is a group under\nmatrix multiplication is [[cor-general-linear-group-is-a-group]]. For $n=0$,\nthe unique empty matrix is $I_0$ and is its own inverse.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-general-linear-group-is-a-group",
+          "source_section": "Statement",
+          "quote": "For every field $F$ and natural $n$, $\\operatorname{GL}_n(F)$ is a group under\nmatrix multiplication. For $n=0$, it is the trivial group containing the unique\nempty matrix.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-real-square-matrix-invertible-iff-determinant-nonzero",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge1$ and every real matrix $A\\in M_n(\\mathbb R)$,\n$$A\\text{ is invertible}\\quad\\Longleftrightarrow\\quad\\det(A)\\ne0.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Since $(I_3)^{\\mathsf T}I_3=I_3I_3=I_3$ and $\\det I_3=1$ by [L1] and [L3], the identity matrix lies in $SO(3)$.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For the product, $(RS)^{\\mathsf T}(RS)=S^{\\mathsf T}R^{\\mathsf T}RS=S^{\\mathsf T}(R^{\\mathsf T}R)S=S^{\\mathsf T}I_3S=S^{\\mathsf T}S=I_3$ by [L1], [L2] and the defining relations for $R,S$; and $\\det(RS)=\\det R\\det S=1$ by [L3]. Hence $RS\\in SO(3)$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $R\\in SO(3)$ the relation $R^{\\mathsf T}R=I_3$ exhibits $R^{\\mathsf T}$ as a left inverse of $R$. Since $\\det R=1\\ne0$, the matrix $R$ is invertible by [L4]; multiplying the relation $R^{\\mathsf T}R=I_3$ on the right by the two-sided inverse $R^{-1}$ and using [L1] gives $R^{\\mathsf T}=R^{-1}$; hence also $RR^{\\mathsf T}=RR^{-1}=I_3$. Moreover $R^{\\mathsf T}\\in SO(3)$: $(R^{\\mathsf T})^{\\mathsf T}R^{\\mathsf T}=RR^{\\mathsf T}=I_3$ by [L2], and $\\det R^{\\mathsf T}=1$ because $\\det R^{\\mathsf T}\\det R=\\det(R^{\\mathsf T}R)=\\det I_3=1$ by [L2], [L3] and $\\det R=1$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.2",
+            "L1",
+            "L2",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By steps 1.1, 1.2 and 2.1 the set $SO(3)$ contains $I_3$ and is closed under multiplication and inversion; since it is a subset of $GL_3(\\mathbb R)$ by step 2.1 and $GL_3(\\mathbb R)$ is a group under multiplication by [L4], $SO(3)$ is a subgroup of $GL_3(\\mathbb R)$. This proves clause 2.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "L4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty case is vacuous; SO(3) contains I_3 by step 1.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero matrix is not in SO(3) because det 0 = 0 != 1; evidence: step 1.1 and definition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The identity matrix is the unit case, handled in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate (non-invertible) case is excluded by det R = 1; evidence: step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.2 multiplies the given matrices and step 2.1 identifies the inverse with the transpose. The subgroup test uses these specified operations, without a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The subgroup criterion is verified in both closure directions (products and inverses) in steps 2.1-3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction is not a separate implication: the statement is a conjunction of closure properties."
+        }
+      ]
+    },
+    "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth, let $q\\in N$ be a regular value, and assume\n$F^{-1}(q)$ is nonempty. Then $F^{-1}(q)$ is an embedded submanifold of\ncodimension $n$. Equivalently, it has dimension $m-n$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-tangent-space-of-a-regular-level-set-is-the-kernel",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be smooth, let $q$ be a regular value, and let $p\\in F^{-1}(q)$.\nThen\n\n$$T_p\\bigl(F^{-1}(q)\\bigr)=\\ker dF_p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "source_section": "Statement",
+          "quote": "Let $k\\in\\mathbb N$. Finite componentwise sums and products of $C^k$ Euclidean maps are $C^k$, and a composite of composable $C^k$ Euclidean maps is $C^k$. Scalar multiples are included among the finite componentwise operations. The assertions remain valid on an empty open domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-ck-euclidean-maps-and-diffeomorphisms",
+          "source_section": "Definition",
+          "quote": "Let $k\\in\\mathbb N$, let $m,q\\ge1$, let $U\\subseteq\\mathbb R^m$ be open, and let $f:U\\to\\mathbb R^q$. A map $f:U\\to\\mathbb R^q$ is of class $C^k$ when each component is of class $C^k$. Each scalar component uses the word-derivative convention of [[def-ck-and-multi-index-notation-in-several-variables]], whose source dimension is positive. The map is **smooth**, or $C^\\infty$, when it is $C^k$ for every $k\\in\\mathbb N$.\n\nLet $n\\ge1$ and let $U,V\\subseteq\\mathbb R^n$ be open. A bijection $f:U\\to V$ is a **$C^k$ diffeomorphism** when both $f$ and $f^{-1}$ are $C^k$. For $k\\ge1$, a **local $C^k$ diffeomorphism at $a\\in U$** is a restriction $f|_P:P\\to Q$ between open neighbourhoods of $a$ and $f(a)$ that is a $C^k$ diffeomorphism. At $k=1$ this agrees with [[def-c-one-map-and-local-inverse]]: continuous first partial derivatives give the required total derivative by [[thm-continuous-partial-derivatives-imply-total-differentiability]], while continuity of the total derivative gives continuity of its matrix entries and hence of the first partial derivatives.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "source_section": "Statement",
+          "quote": "If $f:U\\to\\mathbb R^n$ is totally differentiable at $a$, then $D_vf(a)$ exists for every $v\\in\\mathbb R^m$ and equals $Df(a)v$. In particular $\\partial_jf(a)=Df(a)e_j$, and the matrix of $Df(a)$ is $Jf(a)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metric-continuity-characterisations",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let\n$f : X \\to Y$ be a function, with images and preimages written $f[\\,\\cdot\\,]$\nand $f^{-1}[\\,\\cdot\\,]$ ([[def-injection-surjection-bijection]]). Conditions\n(a), (b), (c), and (e) below are equivalent without choice, and each implies\n(d). Assuming Countable Choice ([[def-countable-choice]]), all five are\nequivalent. The authorized Axiom of Choice ([[def-axiom-of-choice]]) suffices;\nonly its countable instance is used for the converse from (d).\n\n- **(a)** $f$ is continuous at every point of $X$ in the $\\varepsilon$-$\\delta$\n  sense ([[def-metric-continuity]]).\n- **(b)** $f^{-1}[V]$ is open in $X$ for every open $V \\subseteq Y$\n  ([[def-metric-topology]]).\n- **(c)** $f^{-1}[G]$ is closed in $X$ for every closed $G \\subseteq Y$.\n- **(d)** $f$ is **sequentially continuous**: whenever $x_k \\to x$ in $(X,d_X)$,\n  also $f(x_k) \\to f(x)$ in $(Y,d_Y)$ ([[def-metric-convergence]]).\n- **(e)** $f[\\overline{A}] \\subseteq \\overline{f[A]}$ for every $A \\subseteq X$\n  ([[def-metric-interior-closure-boundary]]).\n\n**Where choice is used.** Only the implication (d) $\\Rightarrow$ (e) uses a\nchoice principle, and it uses it only through\n[[thm-metric-sequential-closure]], whose forward direction spends the Axiom of\nCountable Choice ([[def-countable-choice]]). The cycle\n(a) $\\Rightarrow$ (b) $\\Rightarrow$ (c) $\\Rightarrow$ (e) $\\Rightarrow$ (a) and\nthe implication (a) $\\Rightarrow$ (d) are choice free.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metric-hausdorff-separation",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $p, q \\in X$ with\n$p \\ne q$. Put $r := d(p,q)/2$. Then $r > 0$ and\n\n$$B(p,r) \\cap B(q,r) = \\emptyset .$$\n\nBoth sets are open ([[thm-metric-open-set-algebra]]) and contain $p$\nrespectively $q$ ([[def-metric-ball]]), so every metric space is **Hausdorff**:\ndistinct points are separated by disjoint open sets\n([[def-metric-topology]]).",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-t1-iff-singletons-are-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$\\mathcal{T}_{\\mathrm{cof}}$ be the cofinite topology on the set $X$\n([[def-standard-topologies]]). The following four conditions are equivalent.\n\n- **(a)** $X$ is $T_1$ ([[def-t0-and-t1-spaces]]).\n- **(b)** $\\{x\\}$ is closed for every $x \\in X$.\n- **(c)** $F$ is closed for every finite $F \\subseteq X$ ([[def-countable]]).\n- **(d)** $\\mathcal{T}_{\\mathrm{cof}} \\subseteq \\mathcal{T}$, that is, the\n  topology of $X$ is finer than the cofinite topology on the same set.\n\nCondition (d) says that the cofinite topology is the **coarsest** $T_1$ topology\non any set: it is $T_1$ by the equivalence, and every $T_1$ topology on that set\ncontains it.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-determinant-is-a-polynomial-in-the-matrix-entries",
+          "source_section": "Statement",
+          "quote": "For each fixed $n\\ge1$, the function $\\det:M_n(\\mathbb R)\\to\\mathbb R$ is evaluation of the polynomial\n$$P_n:=\\sum_{\\sigma\\in S_n}\\operatorname{sgn}(\\sigma)\\prod_{i<n}x_{\\sigma(i),i}$$\nin the $n^2$ commuting variables $x_{ri}$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "source_section": "Statement",
+          "quote": "Let $(M,\\mathcal S)$ be a smooth $n$-manifold and let $U\\subseteq M$ be open,\ncarrying the subspace topology. Then $U$ is a topological $n$-manifold. For\nevery smooth atlas $\\mathcal A$ with $[\\mathcal A]=\\mathcal S$, the family of\nrestricted charts\n\n$$\\mathcal A|_U:=\\bigl\\{\\,\\bigl(V\\cap U,\\ \\varphi|_{V\\cap U}\\bigr):(V,\\varphi)\\in\\mathcal A\\,\\bigr\\}.$$\n\nis a smooth atlas on $U$, and the maximal atlas it generates is independent of\nthe presenting atlas $\\mathcal A$: it depends only on the structure\n$\\mathcal S$. This maximal atlas is the **restricted smooth structure** of $U$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-compactness",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open sets as in\n[[def-metric-topology]] and balls as in [[def-metric-ball]].\n\n- An **open cover** of $(X,d)$ is a family $\\mathcal{U}$ of open subsets of $X$\n  with $X = \\bigcup \\mathcal{U}$, where\n  $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily\n  $\\mathcal{V} \\subseteq \\mathcal{U}$ that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\emptyset$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,d)$ is **compact** when every open cover of it has a finite subcover: for\n  every open cover $\\mathcal{U}$, either $X = \\emptyset$ and the empty subfamily\n  covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the metric\n  subspace $(A, d_A)$ is a compact metric space, $d_A$ being the restriction of\n  $d$ to $A \\times A$ ([[def-isometry-and-metric-embedding]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A,d_A)$ and its own open sets, not\nabout families of open subsets of the ambient $X$. The two readings do agree,\nbut that is a theorem and not a convention: it is\n[[lem-compactness-is-intrinsic]], and no item of this library may use the\nambient reading without citing it. Taking the intrinsic reading as the\ndefinition is what makes \"compact\" a property of the metric space $(A,d_A)$\nalone, so that a set compact in one ambient space is compact in every other one\ncontaining it isometrically.\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. The\none-point space is compact too, and so is every space listed as\n$\\{x_0, \\dots, x_n\\}$: given a cover, each $x_i$ lies in some member, and\nfinitely many members chosen in this way already cover.\n\n**The finiteness convention, and how it is used both ways.** \"Finite\" above is\nthe listing form, matching the finite lists of\n[[def-finite-intersection-property]]. It agrees with the definition of\nfiniteness by equinumerosity with a natural number ([[def-countable]]), and\nboth directions of the agreement are available and are used below:\n\n- A nonempty finite set $F$ in the sense of [[def-countable]] satisfies\n  $F \\approx m$ for some $m \\ge 1$, and a bijection $m \\to F$ is exactly a\n  listing $F = \\{a_0, \\dots, a_{m-1}\\}$.\n- Conversely a set listed as $A = \\{a_0, \\dots, a_n\\}$, that is the image of a\n  function $a$ with domain $\\sigma(n)$, is finite in the sense of\n  [[def-countable]]: the map sending $x \\in A$ to the least $i \\le n$ with\n  $a_i = x$ is an injection of $A$ into $\\sigma(n)$, so $A$ is equinumerous with\n  a subset of $\\mathbb{N}$ bounded above, and such a subset is finite\n  ([[lem-subset-of-countable]]).\n\nNeither direction uses a choice principle: the second selects nothing, taking a\nleast index instead.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $f:M_3(\\mathbb R)\\to M_3(\\mathbb R)$ by $f(A):=A^{\\mathsf T}A$, whose image lies in the linear subspace $\\operatorname{Sym}_3(\\mathbb R)$ of symmetric matrices. The components are $f_{ij}(A)=\\sum_{k<3}a_{ki}a_{kj}$, finite sums of products of the coordinate functions $A\\mapsto a_{ki}$, and each coordinate function is a linear, hence $C^k$ for every $k$, Euclidean map; by [F2] the map $f$ is $C^k$ for every $k$, hence $C^\\infty$. The symmetric matrices form a linear subspace of dimension $6$: the six entries in the positions $(i,j)$ with $i\\le j$ give a linear isomorphism onto $\\mathbb R^6$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $A,H\\in M_3(\\mathbb R)$ and real $t$, $f(A+tH)=(A^{\\mathsf T}+tH^{\\mathsf T})(A+tH)=A^{\\mathsf T}A+t(A^{\\mathsf T}H+H^{\\mathsf T}A)+t^2H^{\\mathsf T}H$, so $(f(A+tH)-f(A))/t$ tends to $A^{\\mathsf T}H+H^{\\mathsf T}A$ as $t\\to0$; since $f$ is smooth, it is totally differentiable, and by [F3] $Df(A)H=A^{\\mathsf T}H+H^{\\mathsf T}A$. If $A\\in O(3)$ then $A^{\\mathsf T}A=I_3$ and the derivative is surjective onto $\\operatorname{Sym}_3(\\mathbb R)$: for symmetric $S$ take $H:=AS/2$, so that $A^{\\mathsf T}H+H^{\\mathsf T}A=A^{\\mathsf T}AS/2+S^{\\mathsf T}A^{\\mathsf T}A/2=S/2+S/2=S$. Hence $I_3$ is a regular value, and by [F1] the fibre $O(3)=f^{-1}(I_3)$ is an embedded submanifold of $M_3(\\mathbb R)$ of dimension $9-6=3$ with $T_AO(3)=\\ker Df(A)$ for $A\\in O(3)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $A\\in O(3)$ the kernel is $\\{AK:K^{\\mathsf T}=-K\\}$: if $K$ is skew then $Df(A)(AK)=A^{\\mathsf T}AK+(AK)^{\\mathsf T}A=K+K^{\\mathsf T}=0$; conversely, if $A^{\\mathsf T}H+H^{\\mathsf T}A=0$, put $K:=A^{\\mathsf T}H$, so that $K^{\\mathsf T}=H^{\\mathsf T}A=-A^{\\mathsf T}H=-K$ and $H=AK$ because $A$ is invertible with $AA^{\\mathsf T}=I_3$. Combining with step 2.1, $T_AO(3)=\\{AK:K^{\\mathsf T}=-K\\}$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "If $A\\in O(3)$ then $(\\det A)^2=\\det(A^{\\mathsf T})\\det A=\\det(A^{\\mathsf T}A)=\\det I_3=1$, so on $O(3)$ the two conditions $\\det A>0$ and $\\det A=1$ define the same subset, and $SO(3)=O(3)\\cap\\det^{-1}((0,\\infty))=O(3)\\cap\\det^{-1}(\\{1\\})$. By [F4] the determinant is continuous, $(0,\\infty)$ is open and $\\{1\\}$ is closed, so both preimages are open respectively closed; hence $SO(3)$ is open and closed in $O(3)$. By [F5] it is an embedded submanifold of $M_3(\\mathbb R)$ of dimension $3$, and its tangent space at $R\\in SO(3)$ is $T_RO(3)=\\{R\\Omega:\\Omega^{\\mathsf T}=-\\Omega\\}$ by step 3.1. This proves clauses 1 and 2.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "$SO(3)$ is closed in $M_3(\\mathbb R)$ as the intersection of the closed sets $O(3)=f^{-1}(\\{I_3\\})$ and $\\det^{-1}(\\{1\\})$, using continuity of $f$ and of the determinant and closedness of singletons from [F4]. It is bounded: if $A\\in SO(3)$ then the relation $A^{\\mathsf T}A=I_3$ says that the columns of $A$ are unit vectors, so $|a_{ij}|\\le1$ for all $i,j$ and the Frobenius norm obeys $\\|A\\|_F^2=\\sum_{i,j}a_{ij}^2\\le9$. By [F6] a closed and bounded subset of $\\mathbb R^9$ is compact, so $SO(3)$ is compact. This proves clause 3.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "SO(3) is nonempty since I_3 is in it; evidence: step 1.1 and the matrix-group lemma."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero matrix case is excluded: Omega = 0 corresponds to the identity tangent direction and is included in the subspace; evidence: step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The n=1 analogue SO(1)={1} is a boundary case of the cited orthogonal-group example and is not used; evidence: statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate cases det R = -1 (reflections) are excluded by the determinant-one condition; evidence: step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The manifold and compactness claims are open-cover statements with no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable choice is not used: the argument cites Heine-Borel for R^n, which the cited theorem records as choice-free; evidence: step 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The iff in clause 2 is the pair of inclusions in steps 1.1-2.1: the containment T_RSO(3) subset {R Omega} follows from openness in O(3) and equality from the published O(3) tangent computation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse inclusion is the equality of tangent spaces in step 2.1."
+        }
+      ]
+    },
+    "lem-cm-moving-frame-acceleration-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].\n\nThe **orthogonal group** and the **special orthogonal group** are the subsets\n\n$$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$\n\nEquivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiate the identity $R^{\\mathsf T}R=I_3$ of [L1] componentwise using [L2]: $0=(R^{\\mathsf T}R)'=R'^{\\mathsf T}R+R^{\\mathsf T}R'$, so $R^{\\mathsf T}R'=-R'^{\\mathsf T}R$. Transposing this last identity with [L2] gives $\\Omega^{\\mathsf T}=(R^{\\mathsf T}R')^{\\mathsf T}=R'^{\\mathsf T}(R^{\\mathsf T})^{\\mathsf T}=R'^{\\mathsf T}R=-\\Omega$. This proves clause 1.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Differentiate $x=Ry+c$ twice using [L2]: $x'=R'y+Ry'+c'$ and $x''=R''y+2R'y'+Ry''+c''$. Multiplying on the left by $R^{\\mathsf T}$ gives $R^{\\mathsf T}x''=R^{\\mathsf T}R''y+2R^{\\mathsf T}R'y'+y''+R^{\\mathsf T}c''$.",
+          "step": "1.2",
+          "inputs": [
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Write the entries of the skew matrix $\\Omega(t)$ as $\\Omega_{ij}$; by step 1.1, $\\Omega_{ji}=-\\Omega_{ij}$ and $\\Omega_{ii}=0$, so $\\Omega$ is determined by the three entries $\\Omega_{12},\\Omega_{13},\\Omega_{23}$. Define $\\omega:=(\\omega_1,\\omega_2,\\omega_3)$ by $\\omega_1:=-\\Omega_{23}$, $\\omega_2:=\\Omega_{13}$, $\\omega_3:=-\\Omega_{12}$, and substitute into the defining formula of [L3]: for every $z$, the $i$-th component of $\\Omega z$ and of $\\omega\\times z$ agree by the displayed finite computation of the cross product, so $\\Omega z=\\omega\\times z$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If also $\\omega'\\in\\mathbb R^3$ satisfies $\\Omega z=\\omega'\\times z$ for every $z$, then $(\\omega-\\omega')\\times z=0$ for every $z$; taking $z$ the standard basis vectors and using bilinearity of the cross product [L3] shows that all components of $\\omega-\\omega'$ vanish, so $\\omega=\\omega'$. This proves clause 2.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By definition of $\\Omega$ and [L2], $\\Omega'=(R^{\\mathsf T}R')'=R'^{\\mathsf T}R'+R^{\\mathsf T}R''$, hence $R^{\\mathsf T}R''=\\Omega'-R'^{\\mathsf T}R'=\\Omega'+\\Omega^2$, where the last equality uses $R'=R\\Omega$, which follows from $R^{\\mathsf T}R'=\\Omega$ after multiplying on the left by $R$ and using $RR^{\\mathsf T}=I_3$; indeed $R'^{\\mathsf T}R'=(R\\Omega)^{\\mathsf T}(R\\Omega)=\\Omega^{\\mathsf T}R^{\\mathsf T}R\\Omega=\\Omega^{\\mathsf T}\\Omega=-\\Omega^2$ by clause 1. Also $R^{\\mathsf T}R'=\\Omega$. Substituting into step 3.1, $R^{\\mathsf T}x''=(\\Omega'+\\Omega^2)y+2\\Omega y'+y''+R^{\\mathsf T}c''$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Applying step 2.1 to the vectors $y,y'$, $\\Omega'y=\\omega'\\times y$, $\\Omega^2y=\\Omega(\\omega\\times y)=\\omega\\times(\\omega\\times y)$ and $\\Omega y'=\\omega\\times y'$. Substituting these into step 4.1 gives the displayed identity of clause 3.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "For $z\\in\\mathbb R^3$, $\\|Rz\\|_2^2=(Rz)^{\\mathsf T}(Rz)=z^{\\mathsf T}R^{\\mathsf T}Rz=z^{\\mathsf T}z=\\|z\\|_2^2$ by [L1], [L2] and [L4]; taking square roots proves clause 4.",
+          "step": "6.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The moving-frame data R,c,y are curves on a nondegenerate interval I; no variable-cardinality collection is present in the acceleration identity."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Putting Omega=0 in steps 1.2 and 4.1 removes every rotational term; putting y=0 retains precisely the translational acceleration c second derivative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "Space is fixed as R^3 and R takes values in SO(3); the identity asserts no dimension-one variant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Constant R is permitted: step 1.1 gives Omega=0 and steps 4.1\u20135.1 then give R transpose(x second derivative-c second derivative)=y second derivative."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Derivatives of R,c,y are interpreted on their given interval; no initial or terminal value condition for a motion is asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 reads the angular-velocity vector from the three independent entries of the given skew matrix, and step 3.1 proves uniqueness using coordinate vectors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clauses 1\u20133 establish skewness, a unique angular vector and an acceleration formula; none asserts an equivalence of conditions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The acceleration formula in step 5.1 follows from differentiation; the statement does not ask to reconstruct a frame from that formula."
+        }
+      ]
+    },
+    "lem-cm-rigid-labeling-stabilizer": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].\n\nThe **orthogonal group** and the **special orthogonal group** are the subsets\n\n$$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$\n\nEquivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and $v$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]), let\n$n \\in \\mathbb{N}$ and let $v : n \\to V$ be a finite list\n([[def-linear-combination-and-span]]).\n\n1. **The span of the image of a list.** Whether or not $v$ is injective,\n   $$\\operatorname{span}(v[n]) \\;=\\; \\Bigl\\{\\, \\sum_{i<n}\\lambda_i v_i \\;:\\; \\lambda : n \\to F \\,\\Bigr\\} .$$\n2. **Coordinates.** $v$ is an ordered basis of $V$ ([[def-linear-basis]]) **if and\n   only if** for every $x \\in V$ there is **exactly one** $\\lambda : n \\to F$ with\n   $x = \\sum_{i<n}\\lambda_i v_i$. When that holds, this $\\lambda$ is called the\n   **coordinate list of $x$ with respect to the ordered basis $v$**, and\n   $\\lambda_i$ its **$i$-th coordinate**.\n\nThe coordinate list is attached to the **ordered** basis and not to the basis as\na set: reordering the list permutes the coordinates of every vector, as the\ncompanion page shows on a worked example in $\\mathbb{R}^{2}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "source_section": "Statement",
+          "quote": "For $u,v\\in\\mathbb R^3$, $\\|u\\times v\\|_2^2=\\det G(u,v)$, and this value is positive exactly when $u$ and $v$ are linearly independent.\n\nEquivalently,\n$$\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle u,v\\rangle^2.$$",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The vector $u\\times v$ is nonzero by [L6], since $u,v$ are linearly independent. By [L2] $u\\times v$ is orthogonal to $u$ and to $v$, so $u\\times v\\notin\\operatorname{span}\\{u,v\\}$ and $(u,v,u\\times v)$ is an ordered basis of $\\mathbb R^3$.",
+          "step": "1.1",
+          "inputs": [
+            "L2",
+            "L6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For all $a,b\\in\\mathbb R^3$, $\\langle Ra,Rb\\rangle_2=(Ra)^{\\mathsf T}(Rb)=a^{\\mathsf T}R^{\\mathsf T}Rb=a^{\\mathsf T}b=\\langle a,b\\rangle_2$, by [L1] and the product and transpose rules of [L3]: the matrix product identity $(Ra)^{\\mathsf T}=a^{\\mathsf T}R^{\\mathsf T}$ reads componentwise. Hence for every $w\\in\\mathbb R^3$, $\\langle R(u\\times v),Rw\\rangle_2=\\langle u\\times v,w\\rangle_2=\\det[u\\ v\\ w]$ by [L2], while $\\langle(Ru)\\times(Rv),Rw\\rangle_2=\\det[Ru\\ Rv\\ Rw]=\\det\\!\\bigl(R[u\\ v\\ w]\\bigr)=\\det R\\det[u\\ v\\ w]=\\det[u\\ v\\ w]$ by [L2] and [L3]. Subtracting gives $\\langle R(u\\times v)-(Ru)\\times(Rv),Rw\\rangle_2=0$ for every $w$; the map $w\\mapsto Rw$ is surjective because $R$ is invertible, so [L5] gives $R(u\\times v)=(Ru)\\times(Rv)$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By the defining property of $R$, $Ru=u$ and $Rv=v$; substituting into step 2.1 gives $R(u\\times v)=u\\times v$. Thus $R$ fixes each vector of the basis $(u,v,u\\times v)$ of step 1.1.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Let $x\\in\\mathbb R^3$; by [L4] write $x=c_1u+c_2v+c_3(u\\times v)$ with unique real coefficients. By linearity of $R$ and step 3.1, $Rx=c_1Ru+c_2Rv+c_3R(u\\times v)=c_1u+c_2v+c_3(u\\times v)=x$. Since $x$ was arbitrary, $R=I_3$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 3.1",
+            "L4",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty labeling is excluded by the nonempty hypothesis; indeed an empty labeling has all of SO(3) as stabilizer; evidence: statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero vector is allowed in S but is fixed by every rotation; the argument uses only the two independent vectors; evidence: step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-vector labeling is the collinear case, which fails and is exhibited in the companion counterexample; evidence: remark."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate case is linear dependence of u and v, which is excluded by hypothesis; evidence: step 1.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint arises."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two independent label vectors u,v are hypotheses. Step 1.1 constructs u cross v and step 4.1 expands an arbitrary vector in that finite basis; no additional labels are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The statement is one-directional (sufficient condition for trivial stabilizer); its converse is refuted by the companion counterexample."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The companion counterexample cex-cm-collinear-labeling-admits-a-nontrivial-rotation supplies the failure of the converse."
+        }
+      ]
+    },
+    "ex-cm-galilean-boost-coordinate-change": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\tau,g,A)$ and an adapted chart $(o,u,(e_1,e_2,e_3))$ be as in [[def-cm-affine-time-space]].\n\n1. Every $p\\in A$ has exactly one pair $(t,x)\\in\\mathbb R\\times\\mathbb R^3$ with\n\n$$p=o+tu+\\sum_{i=1}^3x_ie_i,$$\n\nso the adapted-coordinate map $\\iota:A\\to\\mathbb R\\times\\mathbb R^3$ of that definition is well defined, and it is a bijection.\n\n2. For every $t\\in\\mathbb R$ the simultaneous slice $A_t=\\{p:\\tau(p-o)=t\\}$ is an affine space modelled on $K=\\ker\\tau$, and for $p,q\\in A_t$ one has $p-q\\in K$ with $p-q=\\sum_i(x_i(p)-x_i(q))e_i$ and\n\n$$d_g(p,q)=\\|x(p)-x(q)\\|_2.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-adapted-charts-and-galilean-transformations",
+          "source_section": "Statement",
+          "quote": "Let $(V,\\tau,g,A)$ be as in [[def-cm-affine-time-space]] and let $(o,u,(e_1,e_2,e_3))$ and $(o',u',(e_1',e_2',e_3'))$ be two adapted charts, with coordinate functions $(t,x)$ and $(t',x')$ of [[lem-cm-adapted-coordinates-exist-and-are-unique]].\n\n1. There are $b\\in\\mathbb R$, $a,v\\in\\mathbb R^3$ and a matrix $R\\in O(3)$ such that for every $p\\in A$\n\n$$t'(p)=t(p)+b,\\qquad x'(p)=R\\,x(p)+v\\,t(p)+a.$$\n\nIf $(e_1,e_2,e_3)$ and $(e_1',e_2',e_3')$ are both positively oriented for the fixed orientation of $K$, then $R\\in SO(3)$ ([[def-cm-special-orthogonal-group]]).\n\n2. Let $I\\subseteq\\mathbb R$ be a nondegenerate interval and let $\\gamma:I\\to A$ be a curve whose parameter is the first chart's time coordinate, $t(\\gamma(s))=s$ for all $s\\in I$. Write $x(s):=x(\\gamma(s))$ and $y(s):=x'(\\gamma(s))$. If $\\gamma$ is continuously differentiable then $y$ is continuously differentiable with\n\n$$y'(s)=R\\,x'(s)+v\\qquad(s\\in I),$$\n\nand if $\\gamma$ is twice continuously differentiable then $y''(s)=R\\,x''(s)$ for all $s\\in I$. Equivalently, in the differentiated variables of the two charts, $dx'/dt'=R\\,dx/dt+v$ and $d^2x'/dt'^2=R\\,d^2x/dt^2$.\n\n3. Consequently $x''=0$ on $I$ if and only if $y''=0$ on $I$: the two charts agree on which time-parametrized curves have zero coordinate acceleration.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].\n\nThe **orthogonal group** and the **special orthogonal group** are the subsets\n\n$$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$\n\nEquivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The matrix $R$ has rows $(0,1,0)$, $(-1,0,0)$, $(0,0,1)$, so $R^{\\mathsf T}R$ has entries: first diagonal $0^2+(-1)^2+0^2=1$, second diagonal $1^2+0^2+0^2=1$, third diagonal $1$, and off-diagonal entries $0\\cdot1+(-1)\\cdot0+0\\cdot0=0$, $0\\cdot0+(-1)\\cdot0+0\\cdot1=0$, $1\\cdot0+0\\cdot0+0\\cdot1=0$; hence $R^{\\mathsf T}R=I_3$, and $\\det R=0\\cdot(0\\cdot1-0\\cdot0)-1\\cdot((-1)\\cdot1-0\\cdot0)+0=1$, so $R\\in SO(3)$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For the point $p$ with first coordinates $(t,x_1,x_2,x_3)$ the direct substitution $p=o'+t'u'+\\sum_ix_i'e_i'$ reads $(t,x_1,x_2,x_3)=(t',\\,t'-x_2',\\,1+x_1',\\,x_3')$, whose unique solution is $t'=t$, $x_1'=x_2-1$, $x_2'=t-x_1$, $x_3'=x_3$; comparison with $x'=Rx+vt+a$ gives $Rx+vt+a=(x_2,-x_1,0)+(0,t,0)+(-1,0,0)=(x_2-1,\\,t-x_1,\\,x_3)$, so the transformation law of the lemma holds in this chart pair with the displayed $b,v,a,R$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For the curve $\\gamma(s)=(s,s,2s,0)$, with first coordinate representative $x(s)=(s,2s,0)$, the second representative is $y(s)=(2s-1,\\,s-s,\\,0)=(2s-1,0,0)$ by step 2.1, so $y'(s)=(2,0,0)$ and $Rx'(s)+v=R(1,2,0)+(0,1,0)=(2,-1,0)+(0,1,0)=(2,0,0)$; also $x''=0$ and $y''=0$, and $R\\cdot0=0$. This verifies $y'=Rx'+v$ and $y''=Rx''$ in the worked case.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The two explicitly displayed adapted bases and the curve (s,s,2s,0) live in the fixed affine space R^4; no empty indexed data are admitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 substitutes zero coordinates without division and gives x prime=(-1,0,0) at the origin; the zero third component of the displayed curve is retained in step 3.1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "This boost example uses three spatial basis vectors and four spacetime coordinates, not a variable-dimensional family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The stated R has determinant one and step 1.1 gives R transpose R=I; no singular change of basis occurs in the example."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Step 3.1 verifies the transformed linear curve for every real s, without restricting an initial or final endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 2.1 solves the given affine coordinate equations directly: x prime_1=x_2-1, x prime_2=t-x_1 and x prime_3=x_3."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The displayed transform and velocity of one explicit curve are computations rather than a biconditional assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No characterization of all adapted charts from these numerical boost coefficients is claimed."
+        }
+      ]
+    },
+    "ex-cm-rotating-frame-identity": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-moving-frame-acceleration-identity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nondegenerate interval, let $R:I\\to SO(3)$ and $c:I\\to\\mathbb R^3$ be twice continuously differentiable in the sense that all entries of $R$ and all components of $c$ have continuous second derivatives, and put\n\n$$\\Omega(t):=R(t)^{\\mathsf T}R'(t)\\qquad(t\\in I).$$\n\n1. $\\Omega(t)$ is skew-symmetric for every $t\\in I$, that is $\\Omega(t)^{\\mathsf T}=-\\Omega(t)$.\n2. For every $t\\in I$ there is exactly one vector $\\omega(t)\\in\\mathbb R^3$ such that\n\n$$\\Omega(t)z=\\omega(t)\\times z\\qquad(z\\in\\mathbb R^3),$$\n\nthe cross product being that of [[def-cross-product-in-r3]]. Its components in the standard basis are read off the three entries of $\\Omega(t)$ above the diagonal.\n3. If $y:I\\to\\mathbb R^3$ is twice continuously differentiable and\n\n$$x(t):=R(t)y(t)+c(t)\\qquad(t\\in I),$$\n\nthen for every $t\\in I$\n\n$$R(t)^{\\mathsf T}x''(t)=y''(t)+2\\,\\omega(t)\\times y'(t)+\\omega'(t)\\times y(t)+\\omega(t)\\times\\bigl(\\omega(t)\\times y(t)\\bigr)+R(t)^{\\mathsf T}c''(t).$$\n\n4. For every $t\\in I$ and $z\\in\\mathbb R^3$, $\\|R(t)z\\|_2=\\|z\\|_2$: the rotation part of the change of coordinates preserves Euclidean norms ([[def-euclidean-inner-product]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$.\n\nThis is the right-handed **cross product**. The displayed coordinates are those of the standard basis ([[lem-standard-basis-of-f-n]]), and inner products and norms are those of [[def-euclidean-inner-product]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "By [L1], $R'=\\omega\\begin{pmatrix}-s_t&-c_t&0\\\\ c_t&-s_t&0\\\\0&0&0\\end{pmatrix}$, and the product $R^{\\mathsf T}R'$ equals $\\omega\\begin{pmatrix}c_t&s_t&0\\\\-s_t&c_t&0\\\\0&0&1\\end{pmatrix}\\begin{pmatrix}-s_t&-c_t&0\\\\ c_t&-s_t&0\\\\0&0&0\\end{pmatrix}=\\omega\\begin{pmatrix}-c_ts_t+s_tc_t&-c_t^2-s_t^2&0\\\\ s_t^2+c_t^2&s_tc_t-c_ts_t&0\\\\0&0&0\\end{pmatrix}=\\omega\\begin{pmatrix}0&-1&0\\\\1&0&0\\\\0&0&0\\end{pmatrix}$, using $c_t^2+s_t^2=1$; hence $\\Omega$ is the displayed skew matrix, and reading off its entries as in clause 2 of [L2] gives $\\omega(t)=(0,0,\\omega)$, so that $\\Omega z=\\omega\\times z$ for every $z$. Also $R^{\\mathsf T}R=I_3$ with $\\det R=1$ by the same identity, so $R(t)\\in SO(3)$ for every $t$, and all entries are twice differentiable.",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "given",
+            "algebra",
+            "L2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Take $y(t)=e_1$, so $y'=y''=0$, $x(t)=R(t)e_1=(c_t,s_t,0)$ and $x''=-\\omega^2(c_t,s_t,0)$ by [L1]. Then $R^{\\mathsf T}x''=-\\omega^2R^{\\mathsf T}(c_t,s_t,0)=-\\omega^2e_1$; and the right-hand side is $0+0+\\omega\\times(\\omega\\times e_1)=(0,0,\\omega)\\times(0,\\omega,0)=(-\\omega^2,0,0)$ by [L3] and step 1.1. The two sides agree.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Take $y(t)=te_1$, so $y'=e_1$, $y''=0$, $x(t)=t(c_t,s_t,0)$ and $x''=(-2\\omega s_t-t\\omega^2c_t,\\ 2\\omega c_t-t\\omega^2s_t,\\ 0)$ by [L1]. Multiplying by $R^{\\mathsf T}$ gives $R^{\\mathsf T}x''=(-t\\omega^2,\\,2\\omega,\\,0)$; and the right-hand side is $2(0,\\omega,0)+t(-\\omega^2,0,0)=(-t\\omega^2,2\\omega,0)$ by [L3] and step 1.1, using $2\\,\\omega\\times e_1=2(0,\\omega,0)$ and $\\omega\\times(\\omega\\times te_1)=t(\\omega\\times(\\omega\\times e_1))=t(-\\omega^2,0,0)$. The two sides agree, exhibiting the Coriolis-type term $2\\omega\\times y'$ and the centrifugal-type term $\\omega\\times(\\omega\\times y)$ separately.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L1",
+            "L2",
+            "L3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sine/cosine rotation is a specified 3 by 3 curve with c=0; there is no index set whose empty specialization changes the example."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1\u20133.1 explicitly set y second derivative=0 and c=0; the centripetal and Coriolis terms still reproduce the computed x second derivative."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example concerns rotation about the third axis of R^3; no one-dimensional rotation case is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The frequency is omega>0 and step 1.1 verifies an orthogonal matrix for all t; a zero-frequency parameter specialization is outside the displayed data."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0, step 1.1 gives R=I and the same constant angular vector (0,0,omega); both test curves in steps 2.1\u20133.1 satisfy the identity there."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The angular vector is explicitly (0,0,omega), and the two tests use y=e_1 and y=t e_1; no witnesses are selected nonconstructively."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The rotating-frame example verifies the acceleration identity on two given curves and states no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not infer a unique rotation curve from the computed accelerations; the rotation R is input."
+        }
+      ]
+    },
+    "ex-cm-mass-metric-on-a-sphere": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-constrained-configuration-and-mass-metric",
+          "source_section": "Definition",
+          "quote": "Let $N\\ge1$; the ambient dimension is $3N$. Identify $\\mathbb R^{3N}$ with the $N$-fold product $(\\mathbb R^3)^N$ and write a point as $x=(x_1,\\dots,x_N)$ with $x_i\\in\\mathbb R^3$; the Euclidean inner product on $\\mathbb R^{3N}$ is\n\n$$\\langle x,y\\rangle_{3N}=\\sum_{i=1}^{N}\\langle x_i,y_i\\rangle_2,$$\n\nwith $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle_2$ the inner product of [[def-euclidean-inner-product]].\n\nLet $d\\ge0$ and let $Q$ be a smooth $d$-dimensional manifold ([[def-smooth-manifold]]) and let\n\n$$X:Q\\longrightarrow\\mathbb R^{3N}$$\n\nbe a smooth map. The manifold $Q$ is the **configuration space** and $X$ is the **configuration map**; the pair $(Q,X)$ is called a **particle configuration** when $Q$ is an embedded submanifold of $\\mathbb R^{3N}$ and $X$ is the inclusion ([[def-embedded-submanifold-and-slice-chart]]), and a **parametrized configuration** otherwise. For $q\\in Q$ the differential $dX_q:T_qQ\\to\\mathbb R^{3N}$ is the differential of [[def-differential-of-a-smooth-map]] ([[def-derivation-at-a-point-and-tangent-space]] for the tangent space).\n\nLet $m_1,\\dots,m_N>0$ be **masses**. The **mass matrix** is the linear map $M:\\mathbb R^{3N}\\to\\mathbb R^{3N}$ acting on each block by $M(x_1,\\dots,x_N)=(m_1x_1,\\dots,m_Nx_N)$; its matrix in the standard basis is block diagonal with blocks $m_iI_3$ ([[def-matrix-product-and-identity-matrix]]).\n\nThe **mass metric** of $(Q,X,m_1,\\dots,m_N)$ is the family of maps\n\n$$G_q:T_qQ\\times T_qQ\\longrightarrow\\mathbb R,\\qquad G_q(u,v):=\\langle dX_q(u),\\,M\\,dX_q(v)\\rangle_{3N},$$\n\nfor $q\\in Q$ and $u,v\\in T_qQ$. The **kinetic energy** of a tangent vector $v\\in T_qQ$ is\n\n$$T_q(v):=\\tfrac12\\,G_q(v,v).$$\n\nEach $G_q$ is a symmetric bilinear form on the real vector space $T_qQ$ in the sense of [[def-bilinear-symmetric-skew-and-alternating-forms]]; that the family depends smoothly on $q$ means that in every smooth local chart of $Q$ the coefficient functions $q\\mapsto G_q(\\partial_i,\\partial_j)$ are smooth, and is stated in the smoothness remark below.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-cm-mass-metric-positivity",
+          "source_section": "Statement",
+          "quote": "Let $N\\ge1$, let $Q$ be a smooth manifold, let $X:Q\\to\\mathbb R^{3N}$ be smooth, let $m_1,\\dots,m_N>0$ and let $G_q$ be the mass metric of [[def-cm-constrained-configuration-and-mass-metric]].\n\n1. For every $q\\in Q$ the map $G_q$ is a symmetric bilinear form on $T_qQ$.\n2. $G_q(u,u)=\\sum_{i=1}^N m_i\\|dX_q(u)_i\\|_2^2\\ge 0$ for every $u\\in T_qQ$, so $G_q$ is positive semidefinite.\n3. $G_q$ is positive definite ([[def-definiteness-inertia-and-signature-data-over-the-reals]]) if and only if $dX_q$ is injective. In particular, if $X$ is an immersion ([[def-immersion-submersion-and-constant-rank-map]]) then $G_q$ is positive definite for every $q$.\n4. If $b_1,\\dots,b_n$ is an ordered basis of $T_qQ$ and $A$ is the matrix whose $j$-th column is the coordinate vector of $dX_q(b_j)$ in the standard basis of $\\mathbb R^{3N}$, then the matrix of the bilinear form $G_q$ in this basis is $A^{\\mathsf T}MA$, with $M$ the mass matrix.",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-immersion-submersion-and-constant-rank-map",
+          "source_section": "Definition",
+          "quote": "Let $F:M^m\\to N^n$ be a smooth map.\n\n- $F$ is an **immersion at $p\\in M$** when $dF_p$ is injective.\n- $F$ is a **submersion at $p\\in M$** when $dF_p$ is surjective.\n- $F$ has **constant rank $r$ on $A\\subseteq M$** when\n  $\\operatorname{rank}_pF=r$ for every $p\\in A$\n  ([[def-rank-of-a-smooth-map-at-a-point]]).\n\nThe map is an **immersion** or **submersion** without qualification when the\ncorresponding pointwise condition holds at every point of $M$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set,\nand $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]],\n[[lem-nat-order-is-membership]]), so\n\n$$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n \\to \\mathbb{R} \\,\\}$$\n\nis the function space of [[def-function-space]] at $F = \\mathbb{R}$ and $X = n$,\na vector space over $\\mathbb{R}$ under the pointwise operations\n([[def-vector-space]]). We write $x_k := x(k)$ for $k < n$, and two elements of\n$\\mathbb{R}^{n}$ are equal exactly when they agree at every $k < n$. This is the\nsame set that [[lem-metrics-on-rn]] calls $\\mathbb{R}^{n}$.\n\nThe **Euclidean inner product** of $x, y \\in \\mathbb{R}^{n}$ is the real number\n\n$$\\langle x, y\\rangle \\;:=\\; \\sum_{k<n} x_k\\,y_k ,$$\n\nthe finite sum of [[def-finite-sum]] applied to the list $k \\mapsto x_k y_k$\n(extended by $0$ beyond $n$, as every finite list in this library is). The\n**Euclidean norm** of $x$ is\n\n$$\\lVert x\\rVert_2 \\;:=\\; \\sqrt{\\langle x, x\\rangle},$$\n\nwhich is defined because $\\langle x,x\\rangle = \\sum_{k<n} x_k^{2} \\ge 0$ (a sum\nof nonnegative terms, [[lem-finite-sum-laws]] clause 4 and\n[[lem-of-square-positive]], the case $x_k = 0$ giving $x_k^2 = 0$ by\n[[def-integer-power]]) and every nonnegative real has a unique nonnegative square\nroot ([[thm-of-square-roots]]).\n\n### Both are defined for every $n$, including $n = 0$\n\nAt $n = 0$ the set $\\mathbb{R}^{0}$ has exactly one element, the empty function,\nand it is the zero vector space ([[lem-standard-basis-of-f-n]] clause 5); the sum\nabove is the empty sum, so $\\langle x,y\\rangle = 0$ and $\\lVert x\\rVert_2 = 0$.\n**This is the first place on this page where the two index regimes diverge, and\nthe divergence is deliberate.** The published metrics $d_1$, $d_2$, $d_\\infty$ of\n[[lem-metrics-on-rn]] are defined only for $n \\ge 1$, because $d_\\infty$ would\notherwise be a maximum over the empty index set; the algebra above needs no such\nrestriction. The boundary in this page runs between the algebra and the metric,\nnot where a reader would guess, and [[rem-rn-conventions-and-scope]] lists\nexactly which items inherit $n \\ge 1$.\n\n### The algebra of the inner product\n\nFor all $x, y, z \\in \\mathbb{R}^{n}$ and $\\lambda \\in \\mathbb{R}$:\n\n1. **Symmetry.** $\\langle x,y\\rangle = \\langle y,x\\rangle$, since $x_ky_k = y_kx_k$\n   termwise.\n2. **Additivity in the first argument.**\n   $\\langle x + y, z\\rangle = \\langle x,z\\rangle + \\langle y,z\\rangle$: the list\n   $k \\mapsto (x_k+y_k)z_k$ is the termwise sum of $k \\mapsto x_kz_k$ and\n   $k \\mapsto y_kz_k$, so [[lem-finite-sum-laws]] clause 1 applies.\n3. **Homogeneity in the first argument.**\n   $\\langle \\lambda x, y\\rangle = \\lambda\\langle x,y\\rangle$, by\n   [[lem-finite-sum-laws]] clause 2.\n4. **Bilinearity.** Clauses 2 and 3 together with symmetry give the same two laws\n   in the second argument.\n5. **Positive definiteness.** $\\langle x,x\\rangle \\ge 0$, and\n   $\\langle x,x\\rangle = 0$ if and only if $x = 0$. Indeed a vanishing sum of\n   nonnegative terms has every term $0$ ([[lem-finite-sum-laws]] clause 4), so\n   $x_k^{2} = 0$ for every $k < n$, and a nonzero real has a positive square\n   ([[lem-of-square-positive]]), whence $x_k = 0$ for every $k < n$ and $x = 0$.\n6. **Agreement with the published Euclidean metric.** For $n \\ge 1$ and\n   $x, y \\in \\mathbb{R}^{n}$,\n   $\\lVert x - y\\rVert_2 = \\sqrt{\\sum_{k<n}(x_k-y_k)^{2}} = d_2(x,y)$, the two\n   sides being the same expression ([[lem-metrics-on-rn]]). In particular\n   $\\lVert x\\rVert_2 = d_2(x, 0)$.\n\nThat $\\lVert\\cdot\\rVert_2$ is a norm in the sense of [[def-norm-and-normed-space]]\nis proved in [[thm-cauchy-schwarz-and-the-euclidean-norm]], where the triangle\ninequality is obtained from the Cauchy-Schwarz inequality; it is not assumed\nhere.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$,\n$$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$\nConsequently $|\\sin x|\\le1$ and $|\\cos x|\\le1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-a-regular-level-set-is-an-embedded-submanifold",
+          "source_section": "Statement",
+          "quote": "Let $F:M^m\\to N^n$ be smooth, let $q\\in N$ be a regular value, and assume\n$F^{-1}(q)$ is nonempty. Then $F^{-1}(q)$ is an embedded submanifold of\ncodimension $n$. Equivalently, it has dimension $m-n$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "prop-smoothness-into-an-embedded-submanifold-is-an-initial-property",
+          "source_section": "Statement",
+          "quote": "Let $S\\subseteq M$ be an embedded submanifold with inclusion $i:S\\hookrightarrow\nM$, and let $G:N\\to S$ be a map from a smooth manifold $N$. Then $G$ is smooth\nif and only if $i\\circ G:N\\to M$ is smooth.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-smooth-inverse-function-theorem-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Let $F:M\\to N$ be a smooth map and let $p\\in M$. If $dF_p:T_pM\\to T_{F(p)}N$ is\nan isomorphism, then there are open neighbourhoods $U$ of $p$ and $V$ of\n$F(p)$ such that $F|_U:U\\to V$ is a diffeomorphism.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "source_section": "Statement",
+          "quote": "Sine is strictly increasing on each interval $[-\\pi/2+2m\\pi,\\pi/2+2m\\pi]$ and strictly decreasing on each interval $[\\pi/2+2m\\pi,3\\pi/2+2m\\pi]$. Cosine is strictly decreasing on $[2m\\pi,(2m+1)\\pi]$ and strictly increasing on $[(2m+1)\\pi,(2m+2)\\pi]$. Both functions have range $[-1,1]$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "source_section": "Statement",
+          "quote": "The map $t\\mapsto(\\cos t,\\sin t)$ is a bijection from $[0,2\\pi)$ onto $S^1=\\{(x,y)\\in\\mathbb R^2:x^2+y^2=1\\}$. The conventions and prerequisite facts used below are recorded in [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-pi-via-first-positive-cosine-zero]].",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The polynomial $F:\\mathbb R^3\\to\\mathbb R$, $F(x)=\\langle x,x\\rangle_2$, is smooth and has $DF_x(v)=2\\langle x,v\\rangle_2$. At every $x\\in F^{-1}(1)$, the vector $v=x/2$ has $DF_x(v)=1$, so this differential is surjective. The fibre is nonempty since $e_3\\in F^{-1}(1)$; [L4] therefore makes $S^2=F^{-1}(1)$ a smooth embedded submanifold of dimension $3-1=2$. Its inclusion is smooth with injective differential (in slice coordinates it appends a zero coordinate), so [L1] applies and gives $G_q(u,v)=m\\langle u,v\\rangle_2$ and positive definiteness at every point of the sphere.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The partial derivatives of $\\Psi$ are $\\partial_\\theta\\Psi=(\\cos\\theta\\cos\\varphi,\\cos\\theta\\sin\\varphi,-\\sin\\theta)$ and $\\partial_\\varphi\\Psi=(-\\sin\\theta\\sin\\varphi,\\sin\\theta\\cos\\varphi,0)$. For $0<\\theta<\\pi$ these are linearly independent: a linear combination $\\alpha\\partial_\\theta\\Psi+\\beta\\partial_\\varphi\\Psi=0$ has third component $-\\alpha\\sin\\theta$ and first two components combining as $\\cos\\theta(\\alpha\\cos\\varphi,\\alpha\\sin\\varphi)+\\beta(-\\sin\\theta\\sin\\varphi,\\sin\\theta\\cos\\varphi)=0$; the first relation gives $\\alpha=0$ because $\\sin\\theta\\ne0$, and then $\\beta=0$ because $\\sin\\theta\\ne0$. Hence $\\Psi$ is an immersion on the chart domain.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "L2",
+            "L3",
+            "L5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The image of $\\Psi$ lies in $S^2$ by [L3]. For $x\\in U$, the exclusion of the poles gives $-1<x_3<1$, so [L5] gives a unique $\\theta\\in(0,\\pi)$ with $\\cos\\theta=x_3$ and $\\sin\\theta=\\sqrt{1-x_3^2}>0$. The pair $(x_1,x_2)/\\sin\\theta$ lies on the unit circle and is not $(1,0)$; hence [L5] gives a unique $\\varphi\\in(0,2\\pi)$ producing $x$. Conversely an angle in that interval cannot give $(1,0)$ by the same circle bijection. Thus $\\Psi:D\\to U$ is bijective. The removed meridian is relatively closed, so $U$ is open in $S^2$. Smoothness follows from [L3] and the embedded-target criterion [L4]. Its differential is an isomorphism between two-dimensional tangent spaces by steps 1.1 and 2.1, so [L4] supplies smooth local inverses everywhere; bijectivity makes these restrictions of its single global inverse. Thus $\\Psi$ is a diffeomorphism onto $U$, and $(U,\\Psi^{-1})$ is a smooth chart.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "L3",
+            "L4",
+            "L5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The three inner products of the coordinate vector fields are $\\langle\\partial_\\theta\\Psi,\\partial_\\theta\\Psi\\rangle_2=\\cos^2\\theta\\cos^2\\varphi+\\cos^2\\theta\\sin^2\\varphi+\\sin^2\\theta=1$, $\\langle\\partial_\\theta\\Psi,\\partial_\\varphi\\Psi\\rangle_2=-\\cos\\theta\\sin\\theta\\cos\\varphi\\sin\\varphi+\\cos\\theta\\sin\\theta\\sin\\varphi\\cos\\varphi=0$ and $\\langle\\partial_\\varphi\\Psi,\\partial_\\varphi\\Psi\\rangle_2=\\sin^2\\theta\\sin^2\\varphi+\\sin^2\\theta\\cos^2\\varphi=\\sin^2\\theta$, using $\\cos^2+\\sin^2=1$ for each angle.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Since $\\Psi$ is the parametrization of the inclusion chart, the mass metric in these coordinates is $G_{ij}=m\\langle\\partial_i\\Psi,\\partial_j\\Psi\\rangle_2$; by step 3.2 its matrix is $m\\begin{pmatrix}1&0\\\\0&\\sin^2\\theta\\end{pmatrix}$, so for a coordinate velocity $(\\dot\\theta,\\dot\\varphi)$ the kinetic energy is $T=\\tfrac12 m(\\dot\\theta^2+\\sin^2\\theta\\,\\dot\\varphi^2)$, and the metric is positive definite on the chart domain because $\\sin\\theta\\ne0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 3.2",
+            "L1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The sphere is the fixed nonempty set S^2 and the chart uses theta in (0,pi), phi in (0,2pi); there is no empty particle ensemble."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 gives G(u,u)=m times the Euclidean squared norm, hence G(0,0)=0; positive definiteness concerns nonzero tangent vectors."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The mass matrix is m I_3 for N=1, exactly the single-particle case specified in the Example and used in step 4.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Mass m is strictly positive, and sin(theta)>0 on the chart. The coordinate singularities at the poles are excluded from this chart, not treated as a degenerate metric."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The open chart excludes both poles and the longitude seam; no extension across these boundaries is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Step 1.1 supplies the explicit fibre point e3; step 3.1 uses uniquely determined angles and smooth local inverses, with no arbitrary-family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The metric matrix diag(m,m sin(theta)^2) is an explicit calculation, not a characterization by an if-and-only-if condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example draws positive definiteness from the known immersion of the sphere; it asserts no converse construction of an immersion."
+        }
+      ]
+    },
+    "cex-cm-collinear-labeling-admits-a-nontrivial-rotation": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in [[def-transpose-of-a-matrix]], and determinant $\\det R$ as in [[def-determinant-of-a-square-matrix]].\n\nThe **orthogonal group** and the **special orthogonal group** are the subsets\n\n$$O(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\},\\qquad SO(3):=\\{R\\in M_3(\\mathbb R):R^{\\mathsf T}R=I_3\\ \\text{and}\\ \\det R=1\\}.$$\n\nEquivalently $SO(3)=O(3)\\cap\\{R:\\det R=1\\}$. Elements of $SO(3)$ are called **rotations**. The identification of $M_3(\\mathbb R)$ with the function space $\\mathbb R^{3\\times3}$ and hence with $\\mathbb R^9$ is the one of [[def-matrix-space]]; when $M_3(\\mathbb R)$ is regarded as a metric or topological space, this is always the Euclidean metric of that identification.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let\n$A=(a_{ij})\\in M_{m\\times n}(F)$ and\n$B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix\n$AB\\in M_{m\\times p}(F)$ whose entries are\n\n$$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$\n\nThe sum is the finite sum in the additive commutative monoid of $F$. If $n=0$,\nit is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$.\n\nThe **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$\nwhen $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "prop-transpose-laws",
+          "source_section": "Statement",
+          "quote": "For matrices of the appropriate shapes and a scalar $\\lambda$,\n\n$$(A+B)^{\\mathsf T}=A^{\\mathsf T}+B^{\\mathsf T},\\qquad (\\lambda A)^{\\mathsf T}=\\lambda A^{\\mathsf T},\\qquad (A^{\\mathsf T})^{\\mathsf T}=A,$$\n\nand\n\n$$(AB)^{\\mathsf T}=B^{\\mathsf T}A^{\\mathsf T}.$$\n\nThus transpose is linear and involutive and reverses products.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-determinant-multiplicative",
+          "source_section": "Statement",
+          "quote": "For $n\\ge1$ and $A,B\\in M_n(R)$ over a commutative ring,\n$$\\det(AB)=\\det(A)\\det(B).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Take $S=\\{0,e_3\\}\\subseteq\\mathbb R^3$ and $R=\\begin{pmatrix}-1&0&0\\\\0&-1&0\\\\0&0&1\\end{pmatrix}$. Then $Re_3=e_3$ and $R0=0$, while $R\\ne I_3$ because $Re_1=-e_1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The matrix $R$ lies in $SO(3)$: its transpose equals itself, so $R^{\\mathsf T}R=R^2=\\operatorname{diag}(1,1,1)=I_3$, and $\\det R=(-1)\\cdot(-1)\\cdot1=1$ by multiplicativity of the determinant on diagonal matrices.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness labeling is the explicit nonempty pair {0,e_3}; the refuted assertion also assumes a nonempty labeling."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 includes the origin in S, and the diagonal matrix fixes 0 by linearity as well as fixing e_3."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The counterexample uses a two-point labeling in R^3; its purpose does not require a singleton special case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The two labels lie on one line and the matrix diag(-1,-1,1) is nonidentity, so step 2.1 exhibits precisely the failure without two independent labels."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No time interval or limiting parameter is part of this static labeling counterexample."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The matrix diag(-1,-1,1) and S={0,e_3} are written explicitly in step 1.1, providing the complete finite witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement refuted is an implication from fixing all labels to being the identity; it is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Refuting that implication requires one nonidentity stabilizer, which step 2.1 supplies, without a converse obligation."
+        }
+      ]
+    },
+    "ex-cm-closed-one-form-radial-primitive": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-star-shaped-open-subset-of-rn",
+          "source_section": "Definition",
+          "quote": "A nonempty open set $U\\subseteq\\mathbb R^n$ is **star-shaped with respect to** $a\\in U$ when\n\n$$a+t(x-a)\\in U\\qquad\\text{for every }x\\in U\\text{ and }0\\le t\\le1.$$\n\nThe point $a$ is a **star centre**. Every convex open set of [[def-convex-subset-of-euclidean-space]] is star-shaped with respect to each of its points. The nonemptiness and the chosen centre are part of the definition.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-closed-and-exact-c1-vector-fields",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and let $F=(F_0,\\ldots,F_{n-1}):U\\to\\mathbb R^n$ be $C^1$. Coordinates and partial derivatives are indexed from $0$ throughout, as in [[lem-standard-basis-of-f-n]] and [[def-jacobian-matrix-and-gradient]]. It is **exact** when $F=\\nabla\\phi$ for some $C^2$ scalar function $\\phi:U\\to\\mathbb R$, using the gradient of [[def-jacobian-matrix-and-gradient]]. It is **closed** when\n\n$$\\partial_jF_i=\\partial_iF_j\\qquad(i,j<n),$$\n\nwhere the partial derivatives are those of [[def-directional-and-partial-derivatives]]. The $C^2$ requirement in exactness makes all mixed second partials of the potential available and continuous.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-poincare-lemma-for-star-shaped-domains",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb R^n$ be open and star-shaped with respect to $a\\in U$. Every closed $C^1$ field $F:U\\to\\mathbb R^n$ is exact. A $C^2$ potential is\n\n$$\\phi(x):=\\int_0^1\\left\\langle F(a+t(x-a)),x-a\\right\\rangle\\,dt.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-newton-leibniz-with-interior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $a<b$. Suppose $G:[a,b]\\to\\mathbb R$ is continuous on $[a,b]$ and differentiable on $(a,b)$. If $f:[a,b]\\to\\mathbb R$ is Riemann integrable and\n\n$$f(x)=G'(x)\\qquad(a<x<b),$$\n\nthen\n\n$$\\int_a^b f=G(b)-G(a).$$\n\nNo derivative of $G$ at either endpoint is assumed, and the two endpoint values assigned to the integrable extension $f$ do not enter the conclusion.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-derivative-of-a-power",
+          "source_section": "Statement",
+          "quote": "Powers are those of [[def-integer-power]], and $\\iota : \\mathbb{N} \\to\n\\mathbb{R}$ is the canonical natural of [[def-canonical-natural]], so that\n$\\iota(0) = 0$ and $\\iota(m+1) = \\iota(m) + 1$. Let $n \\in \\mathbb{N}$.\n\n1. The function $p_0 : \\mathbb{R} \\to \\mathbb{R}$, $p_0(x) = x^{0}$, is the\n   constant function $1$, and it is differentiable at every $c \\in \\mathbb{R}$\n   with $p_0'(c) = 0$ ([[def-derivative]]).\n2. For $n \\ge 1$ the function $p_n : \\mathbb{R} \\to \\mathbb{R}$,\n   $p_n(x) = x^{n}$, is differentiable at every $c \\in \\mathbb{R}$, and\n   $$p_n'(c) \\;=\\; \\iota(n)\\,c^{\\,n-1} .$$\n3. For $n \\ge 1$ put $A_0 := \\{\\, x \\in \\mathbb{R} : x \\ne 0 \\,\\}$. The function\n   $m_n : A_0 \\to \\mathbb{R}$, $m_n(x) = x^{-n}$, is differentiable at every\n   $c \\in A_0$ as a function on $A_0$, and\n   $$m_n'(c) \\;=\\; -\\,\\iota(n)\\,c^{\\,-n-1} .$$\n4. Let $a : \\mathbb{N} \\to \\mathbb{R}$ with $a_j = 0$ for $j \\ge n$, and let\n   $P : \\mathbb{R} \\to \\mathbb{R}$ be the polynomial function\n   $P(x) = \\sum_{j<n} a_j x^{j}$ ([[def-finite-sum]]). Then $P$ is\n   differentiable at every $c \\in \\mathbb{R}$, and, defining $e : \\mathbb{N}\n   \\to \\mathbb{R}$ by $e_0 := 0$ and $e_j := \\iota(j)\\,a_j\\,c^{\\,j-1}$ for\n   $j \\ge 1$,\n   $$P'(c) \\;=\\; \\sum_{j<n} e_j .$$\n\n**Claim 2 is stated for $n \\ge 1$ and not for $n \\ge 0$, and that is not\ntimidity.** At $n = 0$ its right-hand side reads $\\iota(0)\\,c^{-1}$, and\n$c^{-1}$ is not defined at $c = 0$ ([[def-integer-power]]), so the formula is\nnot a statement about the whole line. Claim 1 is what covers $n = 0$, and it\nsays the derivative is $0$ there, which is what the informal reading\n\"$0 \\cdot c^{-1}$\" is reaching for. The same shift is why the term $e_0$ of\nclaim 4 is defined to be $0$ outright rather than by the formula.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The component functions $F_1(x,y)=2xy$ and $F_2(x,y)=x^2$ are $C^1$, with $\\partial_2F_1=2x=\\partial_1F_2$; hence $F$ is closed by [L2].",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The function $\\phi(x,y)=x^2y$ is $C^2$ with $\\partial_1\\phi=2xy=F_1$ and $\\partial_2\\phi=x^2=F_2$, so $\\nabla\\phi=F$ and $F$ is exact with potential $\\phi$ by [L2].",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For $a=0$ the radial formula of [L3] reads $\\phi_{\\rm rad}(x,y)=\\int_0^1\\langle F(tx,ty),(x,y)\\rangle_2\\,dt=\\int_0^1\\bigl(2t^2x^2y+t^2x^2y\\bigr)dt=\\int_0^13x^2yt^2\\,dt$. By [L4] applied to $G(t):=x^2yt^3$, whose derivative is $3x^2yt^2$, the integral equals $G(1)-G(0)=x^2y$, so $\\phi_{\\rm rad}=\\phi$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L1",
+            "L3",
+            "L4",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The domain is the entire specified plane R^2, containing the origin; the field has exactly two component functions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At x=y=0 the field, potential and radial integrand all vanish. Step 3.1 gives the same identity x squared y=0 on either coordinate axis."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example is a two-component field on R^2; it does not quantify over a spatial dimension parameter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Vanishing x or y is allowed in the polynomial computations of steps 1.1\u20133.1; no denominator or inverse of either coordinate is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The integral in step 3.1 runs on [0,1] and its integrand is the polynomial 3x squared y t squared, defined at both endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The primitive phi=x squared y and its radial construction are explicit polynomial formulas, so no selection of primitives from a family is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes a primitive for this one field; it does not formulate a closedness/exactness biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Gradient and radial-integral agreement are checked in steps 2.1\u20133.1, with no asserted converse for arbitrary fields."
+        }
+      ]
+    },
+    "ex-cm-stroboscopic-map-of-the-plane-oscillator": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm-stroboscopic-map",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $P>0$, and let $F:\\mathbb R\\times U\\to\\mathbb R^n$ be a map that is continuous and locally Lipschitz in the state variable, in the sense of the hypotheses of [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], and that is **$P$-periodic**:\n\n$$F(t+P,z)=F(t,z)\\qquad(t\\in\\mathbb R,\\ z\\in U).$$\n\nConsider the first-order system $x'(t)=F(t,x(t))$ of [[def-first-order-ode-initial-value-problem-and-solution]] on the open domain $\\mathbb R\\times U$. For $z\\in U$ let\n\n$$x_z:J_z\\longrightarrow U$$\n\nbe the unique maximal solution of the initial value problem $x'(t)=F(t,x(t))$, $x(0)=z$; here $J_z$ is the open maximal interval of existence containing $0$, and by [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] every solution of this initial value problem is a restriction of $x_z$ ([[def-maximal-ode-solution]], [[def-interval]]).\n\nThe **domain of the stroboscopic map** is\n\n$$D_P:=\\{\\,z\\in U:[0,P]\\subseteq J_z\\,\\},$$\n\nthe set of initial states whose solution exists over one full period. The **stroboscopic map** (or **time-$P$ map**) of the system is the function\n\n$$\\theta_P:D_P\\longrightarrow U,\\qquad \\theta_P(z):=x_z(P).$$\n\nThis is a well-defined function: for $z\\in D_P$ the interval $J_z$ contains $P$, so $x_z(P)$ is a point of $U$, and by the uniqueness clause of the maximal-solution theorem the value $x_z(P)$ does not depend on any choice, since $x_z$ is the only maximal solution through $(0,z)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define\n$$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$\n\nThese are real power series in the sense of [[def-real-power-series-and-radius-of-convergence]]. Their convergence for every real argument is discharged by [[lem-sine-and-cosine-series-converge-everywhere]].",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with\n$$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$\nAlso $\\sin0=0$ and $\\cos0=1$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-vector-valued-derivative-and-integral",
+          "source_section": "Definition",
+          "quote": "Throughout, $m \\in \\mathbb{N}$ with $m \\ge 1$, and vector-valued functions, their\ncomponents and their limits are as in\n[[def-vector-valued-functions-limits-and-continuity]].\n\n### The derivative\n\nLet $A \\subseteq \\mathbb{R}$, let $f : A \\to \\mathbb{R}^{m}$ and let $c \\in A$ be\na **limit point of $A$** ([[def-limit-point-r]]). The **difference quotient of\n$f$ at $c$** is the vector-valued function\n\n$$q_{f,c} : A \\setminus \\{c\\} \\to \\mathbb{R}^{m}, \\qquad q_{f,c}(x) \\;:=\\; \\frac{1}{x - c}\\,\\bigl(f(x) - f(c)\\bigr),$$\n\nthe scalar multiple being that of the vector space $\\mathbb{R}^{m}$\n([[def-function-space]]); the division is legitimate because $x \\ne c$ gives\n$x - c \\ne 0$. As in [[def-derivative]], $c$ is a limit point of\n$A \\setminus \\{c\\}$ as well, since a punctured neighbourhood of $c$ omits $c$.\n\n$f$ is **differentiable at $c$** when $\\lim_{x \\to c} q_{f,c}(x)$ exists in\n$\\mathbb{R}^{m}$, and then the **derivative** is\n\n$$f'(c) \\;:=\\; \\lim_{x\\to c} q_{f,c}(x) \\;\\in\\; \\mathbb{R}^{m}.$$\n\n**The notation denotes a single vector.** At most one $L \\in \\mathbb{R}^{m}$\nsatisfies the limit condition, as proved in\n[[def-vector-valued-functions-limits-and-continuity]]; this is the vector-valued\nform of the obligation [[lem-function-limit-unique]] discharges for real-valued\nfunctions and [[lem-metric-limits-unique]] for sequences.\n\n**The intrinsic form is the definition; the componentwise form is a theorem.**\nFor $i < m$ the $i$-th component of $q_{f,c}(x)$ is\n$\\bigl(f_i(x)-f_i(c)\\bigr)/(x-c)$, which is the real difference quotient of\n$f_i$ at $c$ ([[def-derivative]]). So by\n[[thm-componentwise-limits-and-continuity]] clause 2:\n\n> $f$ is differentiable at $c$ **if and only if** every $f_i$ is differentiable\n> at $c$, and then $f'(c)_i = f_i'(c)$ for every $i<m$.\n\nNothing below reverses this order of presentation: the intrinsic limit is what is\ndefined, and the coordinates are read off it.\n\n**Algebra of derivatives.** If $f, g : A \\to \\mathbb{R}^{m}$ are differentiable at\n$c$ and $\\lambda \\in \\mathbb{R}$, then $f + g$ and $\\lambda f$ are differentiable\nat $c$ with $(f+g)'(c) = f'(c)+g'(c)$ and $(\\lambda f)'(c) = \\lambda f'(c)$: read\ncomponentwise through the displayed equivalence, these are clauses 1 and 2 of the\npublished [[thm-algebra-of-derivatives]].\n\n### The integral\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}^{m}$\n([[def-interval]]). $f$ is **integrable on $[a,b]$** when every component\n$f_i : [a,b] \\to \\mathbb{R}$ is bounded ([[def-bounded-set]]) and Darboux\nintegrable in the sense of [[def-darboux-integral]], and then\n\n$$\\int_a^b f \\;:=\\; \\text{the function } m \\to \\mathbb{R} \\text{ sending } i \\mapsto \\int_a^b f_i .$$\n\n**That really is an element of $\\mathbb{R}^{m}$.** In this library\n$\\mathbb{R}^{m}$ is the set of functions $m \\to \\mathbb{R}$\n([[def-function-space]]), not a set of tuples, so the displayed assignment is\nliterally an element of it; each value $\\int_a^b f_i$ is a single real by\n[[def-darboux-integral]]. In the standard basis\n([[lem-standard-basis-of-f-n]]) the same object is\n$\\int_a^b f = \\sum_{i<m}\\bigl(\\int_a^b f_i\\bigr)e_i$.\n\n**Oriented limits.** Following [[def-oriented-integral]] componentwise, set\n\n$$\\int_a^a f \\;:=\\; 0 \\in \\mathbb{R}^{m}, \\qquad \\int_b^a f \\;:=\\; -\\int_a^b f \\quad (a < b),$$\n\nso that $\\int_u^v f = -\\int_v^u f$ for all $u,v$ in an interval on which $f$ is\nintegrable. The clauses do not overlap with the case $a<b$, so nothing has to be\nchecked for consistency, exactly as in [[def-oriented-integral]].\n\n**Linearity.** If $f, g : [a,b] \\to \\mathbb{R}^{m}$ are integrable and\n$\\lambda,\\mu \\in \\mathbb{R}$ then $\\lambda f + \\mu g$ is integrable with\n\n$$\\int_a^b (\\lambda f + \\mu g) \\;=\\; \\lambda\\int_a^b f + \\mu\\int_a^b g ,$$\n\nsince each side has $i$-th coordinate $\\int_a^b(\\lambda f_i + \\mu g_i)$ and\n$\\lambda\\int_a^b f_i + \\mu\\int_a^b g_i$ respectively, and those agree by\n[[thm-linearity-of-the-integral]].\n\n**Restriction and splitting.** If $f$ is integrable on $[a,b]$ then it is\nintegrable on every nondegenerate closed subinterval $[c,d]$ with\n$a\\le c<d\\le b$, and for $a<c<b$,\n$\\int_a^b f = \\int_a^c f + \\int_c^b f$; both are the componentwise readings of\n[[lem-integrability-on-a-subinterval]] and\n[[thm-additivity-over-subintervals]], applied to each $f_i$ and reassembled\ncoordinate by coordinate.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its restriction.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that\n\n$$\\lim_{h\\to0}\\frac{\\|f(a+h)-f(a)-Lh\\|_2}{\\|h\\|_2}=0,$$\n\nwhere the quotient is considered for $h\\ne0$ with $a+h\\in U$. The map $L$, when it exists, is denoted $Df(a)$ and called the **total derivative**. Equivalently, $f(a+h)=f(a)+Df(a)h+r(h)$ with $\\|r(h)\\|_2/\\|h\\|_2\\to0$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Differentiating the two components of the displayed $x_z$ with respect to $t$ using [L2] gives $x_z'(t)=(-\\omega z_1\\sin\\omega t+z_2\\cos\\omega t,\\ -\\omega^2z_1\\cos\\omega t-\\omega z_2\\sin\\omega t)$, whose first component is the second component of $x_z$ and whose second component is $-\\omega^2$ times the first component of $x_z$; hence $x_z'=F(t,x_z)$ on all of $\\mathbb R$, and $x_z(0)=(z_1,z_2)=z$ because $\\sin0=0$ and $\\cos0=1$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "L2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The curve of step 1.1 is a solution on all of $\\mathbb R$; by [L1] and [L3], every solution of the initial value problem with data $(0,z)$ is a restriction of the unique maximal solution $x_z$, whose domain is an open interval. Since a solution with domain $\\mathbb R$ exists, that maximal domain is all of $\\mathbb R$; hence $[0,P]\\subseteq J_z$ for every $P$ and $D_P=\\mathbb R^2$. Substituting $t=P$ in step 1.1 gives the displayed formula for $\\theta_P(z)$ for every $P>0$.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "L1",
+            "L3"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If $P=2\\pi/\\omega$ then $\\cos\\omega P=1$ and $\\sin\\omega P=0$, so $\\theta_P(z)=(z_1,z_2)=z$ for every $z$; if $P=\\pi/\\omega$ then $\\cos\\omega P=-1$ and $\\sin\\omega P=0$, so $\\theta_P(z)=(-z_1,-z_2)=-z$, which equals $z$ only for $z=0$. This proves the two special cases.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "L2",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The flow domain D_P is shown in step 2.1 to equal R^2, using a globally defined explicit curve for every initial vector."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "At z=0, both components in step 1.1 remain zero, and theta_P(0)=0 for every permitted positive period P."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The oscillator state has two components, and P is positive; no dimension-one state-space variant is asserted."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The angular frequency omega>0 excludes the denominator omega=0, while P>0 excludes a zero stroboscopic period."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "At t=0, the formula in step 1.1 returns z; at t=P, step 2.1 returns theta_P(z); step 3.1 includes P=2pi/omega exactly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The curve x_z is given by sine/cosine formulas for all z, so maximal uniqueness identifies it without choosing solutions from arbitrary families."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves theta_P=identity at P=2pi/omega, without asserting this is the only period producing identity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of identity stroboscopic maps or their periods is claimed by the plane-oscillator Example."
+        }
+      ]
+    }
+  }
+}

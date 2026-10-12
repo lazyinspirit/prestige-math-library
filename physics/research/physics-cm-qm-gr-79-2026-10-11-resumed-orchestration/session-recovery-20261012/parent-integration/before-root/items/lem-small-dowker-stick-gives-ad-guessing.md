@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-small-dowker-stick-gives-ad-guessing.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-diagonal-self-intersection-is-the-euler-number-of-tm.md

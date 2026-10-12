@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-bijective-smooth-map-is-a-diffeomorphism.md

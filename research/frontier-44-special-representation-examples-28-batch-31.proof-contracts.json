@@ -1,0 +1,1336 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-formal-adjoints-of-differential-operators-exist-and-are-unique",
+    "def-e-valued-dolbeault-operators-and-ltwo-structure",
+    "thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity",
+    "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition",
+    "thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology",
+    "ex-compact-flat-torus-hodge-kernel-from-energy-and-coordinates"
+  ],
+  "contracts": {
+    "lem-formal-adjoints-of-differential-operators-exist-and-are-unique": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-euclidean-stokes-for-a-compactly-supported-form",
+          "source_section": "Statement",
+          "quote": "For $n\\geq1$ and $\\eta\\in\\Omega_c^{n-1}(\\mathbb R^n)$, with the standard orientation, $\\int_{\\mathbb R^n}d\\eta=0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$\n([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$\n([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then:\n\n1. $f + g$ is differentiable at $c$ and $(f+g)'(c) = f'(c) + g'(c)$;\n2. $\\alpha f$ is differentiable at $c$ and $(\\alpha f)'(c) = \\alpha f'(c)$;\n3. $fg$ is differentiable at $c$ and $(fg)'(c) = f'(c)g(c) + f(c)g'(c)$;\n4. if $g(c) \\ne 0$ then, writing $A_0 := \\{\\, x \\in A : g(x) \\ne 0 \\,\\}$, the\n   point $c$ lies in $A_0$ and is a limit point of $A_0$, the quotient\n   $(f/g)|_{A_0} : A_0 \\to \\mathbb{R}$, $x \\mapsto f(x)/g(x)$, is differentiable\n   at $c$ as a function on $A_0$, and\n   $$\\bigl((f/g)|_{A_0}\\bigr)'(c) \\;=\\; \\frac{f'(c)\\,g(c) - f(c)\\,g'(c)}{g(c)^{2}} .$$\n\nEach claim asserts two things: that the derivative on the left exists, and that\nit has the stated value. Both are proved.\n\n**Why claim 4 is stated on $A_0$.** The function $f/g$ is not defined where $g$\nvanishes, and $g$ may vanish at points of $A$ far from $c$; restricting to $A_0$\nis forced. That the restriction still has $c$ as a limit point, so that a\nderivative there means anything at all, is not free either, and it is the last\nclaim of [[lem-sign-preservation-near-a-limit]] applied to $g$. The hypothesis\nis $g(c) \\ne 0$, not \"$g$ vanishes nowhere\".\n\n**Everything is proved through\n[[thm-caratheodory-characterisation]].** No difference quotient is estimated and\nno limit theorem beyond continuity is used, so no choice principle is spent.\nThe four identities are four algebraic rearrangements of an increment, each\nfollowed by a reading of [[thm-algebra-of-continuous-functions]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-density-bundle-and-smooth-density",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M^n$, with boundary allowed, the **density bundle** is $DM=\\coprod_{p\\in M}D(T_pM)$. In coordinates $x$, let $|dx|=|dx^1\\cdots dx^n|$ be the density taking value one on the coordinate frame. On overlaps,\n$$|dy|=|\\det D_x y|\\,|dx|.$$\nA smooth density is a section with smooth real coefficient in these frames. Its support is the closure of its nonzero locus. The absolute determinants are positive smooth transition functions and satisfy the cocycle identities by the chain rule. A countable atlas and [[thm-vector-bundle-construction-from-a-smooth-cocycle]] therefore give a smooth line bundle. For boundary charts the same gluing proof uses half-space product charts; smoothness of transitions follows from their local extensions, and Hausdorffness and second countability follow as for the supplied cocycle construction. The fibers are lines by [[prop-one-densities-form-a-one-dimensional-vector-space]]. When $n=0$ the empty frame trivializes $DM=M\\times\\mathbb R$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-compactly-supported-smooth-density",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $\\delta$ be a compactly supported smooth density on $M^n$, with boundary allowed. Choose a chart partition $(\\rho_i)$ and write $\\rho_i\\delta=f_i|dx_i|$. For $n\\geq1$ define\n$$\\int_M\\delta=\\sum_i\\int_{\\mathbb R^n}\\widetilde f_i(x_i)\\,dx_i.$$\nThe zero extensions are Riemann integrable, including at genuine faces, by [[lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions]]. The compact-support/local-finiteness argument of [[lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form]] applies to density supports as closed sets, so the sum is finite. For $n=0$ sum the scalar density values over the finite support, without orientation signs. Empty support gives zero. Choice independence is discharged by [[thm-density-integration-is-defined-without-an-orientation]].",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-smooth-bundle-metric",
+          "source_section": "Definition",
+          "quote": "Let $E\\to M$ be a smooth vector bundle. A **smooth bundle metric** on $E$ is a\nchoice of inner product $\\langle\\cdot,\\cdot\\rangle_p$ on each fibre $E_p$ such\nthat, for every pair of smooth local sections $s,t$, the function\n\n$$p\\mapsto\\langle s(p),t(p)\\rangle_p$$\n\nis smooth on the common domain of $s$ and $t$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-manifold-bump-for-a-compact-set-inside-an-open-set",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a smooth manifold, let $K\\subseteq M$ be compact, and let $W\\subseteq M$ be open with $K\\subseteq W$. Then there exists a smooth function $\\rho:M\\to [0,1]$ that equals $1$ on an open neighbourhood of $K$ and satisfies $\\operatorname{supp}(\\rho)\\subseteq W$.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-second-order-laplace-type-operators-on-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a Hausdorff second-countable smooth manifold without boundary of\ndimension $n\\ge2$ ([[def-smooth-manifold]]), let $\\mu$ be a smooth positive\ndensity on $M$ ([[def-density-bundle-and-smooth-density]]), and let $E\\to M$ be\na finite-rank smooth vector bundle\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]) over\n$\\mathbb K=\\mathbb R$ or $\\mathbb C$ carrying a smooth bundle metric\n$\\langle\\cdot,\\cdot\\rangle$ ([[def-smooth-bundle-metric]]), Euclidean in the\nreal case and Hermitian, linear in the first variable, in the complex case; in\nthe complex case the fibres are complex vector spaces through a smooth complex\nstructure on $E$\n([[def-complex-linear-and-compatible-bundle-connections]]). Write $\\Gamma(E)$\nfor the smooth sections ([[def-smooth-section-local-section-and-support]]).\n\nA $\\mathbb K$-linear map $P:\\Gamma(E)\\to\\Gamma(E)$ is a **linear differential\noperator of order at most two** on $E$ when, on every chart domain $\\Omega$ of\n$M$ with coordinates $x=(x^1,\\ldots,x^n)$ and in every local frame of $E$ over\n$\\Omega$ in which a section is written $s\\leftrightarrow u=(u^1,\\ldots,u^r)$\nand its image as $Ps\\leftrightarrow((Ps)_1,\\ldots,(Ps)_r)$,\n$$(Ps)_\\lambda=-\\sum_{i,j=1}^na^{ij}_{\\lambda\\mu}(x)\\,\\partial_i\\partial_ju^\\mu(x)+\\sum_{j=1}^nb^j_{\\lambda\\mu}(x)\\,\\partial_ju^\\mu(x)+c_{\\lambda\\mu}(x)u^\\mu(x),\\qquad1\\le\\lambda\\le r,$$\nwith smooth coefficient functions on $\\Omega$ and summation over the repeated\nindex $\\mu$ (and over $i,j$). Such an operator is **Laplace type** when in\naddition, in every such chart and frame, its second-order coefficients are\nscalar multiples of the identity, $a^{ij}_{\\lambda\\mu}=a^{ij}\\delta_{\\lambda\\mu}$,\nwith $a^{ij}$ smooth real functions for which the matrix $(a^{ij}(x))$ is\nsymmetric and positive definite at every $x\\in\\Omega$. Its **principal symbol**\nis the smooth section $\\sigma_2(P)$ of $\\mathrm{Sym}^2T^*M$\n([[def-smooth-tensor-field]]) given on such a chart by\n$\\sigma_2(P)(x,\\xi)=a^{ij}(x)\\xi_i\\xi_j$ for $\\xi\\in T_x^*M$; equivalently\n$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)\\,\\mathrm{id}_{E_x}$ for a smooth field of\npositive-definite quadratic forms $a_x$ on $T_x^*M$, so that\n$\\sigma_2(P)(x,\\xi)>0$ whenever $\\xi\\ne0$.\n\n$P$ is **formally symmetric** for $(\\mu,\\langle\\cdot,\\cdot\\rangle)$ when\n$$\\int_M\\langle Ps,t\\rangle\\,d\\mu=\\int_M\\langle s,Pt\\rangle\\,d\\mu$$\nfor all compactly supported smooth sections $s,t\\in\\Gamma_c(E)$\n([[def-integral-of-a-compactly-supported-smooth-density]]).\n\n**Well-definedness.** The definition is local. On a fixed chart and frame the\ndisplayed assignment is a $\\mathbb K$-linear map on components with smooth\ncoefficients, and the chain rule ([[thm-chain-rule-for-total-derivatives]])\ncomputes the transition to another chart and frame on the overlap: the\nsecond-order coefficients transform by the symmetric tensor rule\n$a'^{kl}=a^{ij}\\frac{\\partial x'^k}{\\partial x^i}\\frac{\\partial x'^l}{\\partial x^j}$\ntogether with conjugation by the frame-change matrix, while the terms produced\nby the second derivatives of the coordinate change are absorbed into the\nfirst-order coefficients. Hence a single operator that admits a local\nexpression on one cover admits a local expression on every chart and frame, and\nthe two hypotheses placed on the leading coefficient are invariant: scalar-ness\nis preserved by frame conjugation and by the coordinate rule for a field of\nsymmetric matrices, and symmetric positive definiteness is preserved by both.\nThe principal symbol is therefore independent of the chart and frame, since two\nlocal expressions of the same operator differ by an operator of order at most\none; it is smooth in $(x,\\xi)$ because the $a^{ij}$ are smooth, and it is\npositive on nonzero covectors exactly when $(a^{ij})$ is positive definite.\nFormal symmetry is an identity between integrals of compactly supported smooth\nsections and therefore depends only on the operator, the density and the\nmetric.",
+          "uses": [
+            "2.1",
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We first record the scalar one-derivative identity on an open set of $\\mathbb R^n$. Let $a,b$ be compactly supported smooth functions and let $h$ be a smooth function, all on $\\mathbb R^n$. Applying [F1] to the compactly supported $(n-1)$-form $\\eta=(-1)^{i-1}abh\\,dx^1\\wedge\\cdots\\wedge\\widehat{dx^i}\\wedge\\cdots\\wedge dx^n$ gives $\\int_{\\mathbb R^n}\\partial_i(abh)\\,dx=0$; the product rule [F2] splits this into $\\int(\\partial_ia)\\,bh\\,dx+\\int a\\,\\partial_i(bh)\\,dx=0$. Taking $h=\\gamma$ and rearranging, integration against the density $\\gamma\\,dx$ transposes $\\partial_i$ to the operator $b\\mapsto-\\gamma^{-1}\\partial_i(\\gamma b)$, because $\\partial_i(\\overline b\\gamma)=\\gamma\\,\\overline{\\gamma^{-1}\\partial_i(\\gamma b)}$:\n$$\\int_{\\mathbb R^n}(\\partial_ia)\\,\\overline{b}\\,\\gamma\\,dx=\\int_{\\mathbb R^n}a\\,\\overline{\\bigl(-\\gamma^{-1}\\partial_i(\\gamma b)\\bigr)}\\,\\gamma\\,dx,$$\nand in the real case the same identity without conjugations. The opposite signs in the two boundary-free terms are the only content.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Iterating step 1.1 and inserting the matrix coefficients gives the local formula of the Statement, so $P^\\star$ exists locally. For a multi-index $\\alpha$ and a matrix coefficient $a=a(x)$, the transpose of $aD^\\alpha$ against the fibre pairing is the operator $v\\mapsto(-1)^{|\\alpha|}\\gamma^{-1}D^\\alpha(\\gamma a^*v)$: each single derivative contributes the factor $-\\gamma^{-1}\\circ\\partial_i\\circ\\gamma$, the matrix acts by the fibre adjoint $a^*$, and [F2] expands $D^\\alpha(\\gamma a^*v)$ with top term $\\gamma\\,a^*D^\\alpha v$ and lower-order terms, exactly as in the displayed formula. Summing over $|\\alpha|\\le2$ gives a smooth operator of order at most two on the chart.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F3",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Vanishing on a chart. Let $Q$ be a smooth operator on a chart domain with $\\int\\langle u,Qv\\rangle\\,d\\mu=0$ for all compactly supported smooth $u,v$ there, and fix $v$. If $Qv$ did not vanish at a point $p$, then in an orthonormal frame of [F4] some component $(Qv)_\\lambda$ would be nonzero at $p$; choose a nonnegative smooth cutoff $\\chi$ supported in the open set where $(Qv)_\\lambda\\ne0$ and equal to $1$ at $p$, and set $u=\\chi\\,\\overline{(Qv)_\\lambda}\\,e_\\lambda$ in that frame, a compactly supported smooth section. Then $\\langle u,Qv\\rangle=\\chi\\lvert(Qv)_\\lambda\\rvert^2$ is nonnegative and positive near $p$, so its density integral is nonzero by [F3], contradicting the vanishing hypothesis. Hence $Qv=0$ for every $v$, so $Q=0$. In particular two local operators satisfying the local adjoint identity against $P$ on a common chart domain coincide, since their difference is annihilated against every pair of compactly supported tests there.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Leading coefficients. In a chart with orthonormal frames, write the local coefficients of $P$ as $a_\\alpha$, $|\\alpha|\\le2$. By [F2] the coefficient of $D^\\alpha v$ in $\\gamma^{-1}D^\\alpha(\\gamma a_\\alpha^*v)$ is $a_\\alpha^*$, and all other terms contributed by $\\gamma^{-1}D^\\alpha(\\gamma\\,\\cdot\\,)$ have order at most $|\\alpha|-1$; terms with $|\\alpha|<2$ have order at most one. Hence the order-$\\delta$ leading coefficients of $P^\\star$ are $(-1)^\\delta a_\\alpha^*$.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Gluing. The local operators of step 2.1 on the members of a chart cover whose frames are orthonormal by [F4] agree on every overlap by step 3.1, so they patch to one global smooth linear operator $P^\\star:\\Gamma(F)\\to\\Gamma(E)$ of order at most two; on a chart, $P^\\star$ is the local construction there.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Global adjoint identity. Let $u,v\\in\\Gamma_c$ be compactly supported smooth sections. Cover the compact set $\\operatorname{supp}u$ by finitely many chart domains $U_1,\\ldots,U_N$ carrying orthonormal frames. For each $i$ choose by [F5] a nonnegative smooth $\\rho_i$ equal to $1$ near a compact subset $K_i\\subseteq U_i$, with the $K_i$ chosen inside the respective charts so that $\\bigcup_iK_i\\supseteq\\operatorname{supp}u$, and with $\\operatorname{supp}\\rho_i\\subseteq U_i$; replacing $\\rho_i$ by $\\rho_i(\\rho_1+\\cdots+\\rho_N)^{-1}$ makes $\\sum_i\\rho_i=1$ on a neighbourhood of $\\operatorname{supp}u$. Then $u=\\sum_i\\rho_iu$, so linearity of $P$ gives $\\int\\langle Pu,v\\rangle\\,d\\mu=\\sum_i\\int\\langle P(\\rho_iu),v\\rangle\\,d\\mu$. Fix $i$: the section $\\rho_iu$ is compactly supported in $U_i$, so by [F5] again choose a bump $\\theta_i$ supported in $U_i$ and equal to $1$ near $\\operatorname{supp}(\\rho_iu)\\cap\\operatorname{supp}v$. Since $P$ and $P^\\star$ are differential operators with the local expressions of step 2.1 and step 4.1, the pointwise identities $\\langle P(\\rho_iu),v\\rangle=\\langle P(\\rho_iu),\\theta_iv\\rangle$ and $\\langle\\rho_iu,P^\\star(\\theta_iv)\\rangle=\\langle\\rho_iu,P^\\star v\\rangle$ hold: the two sides differ only by products of a section with a section whose jet vanishes wherever the other factor is nonzero. Therefore the local adjoint identity of step 2.1 on the chart $U_i$ yields $\\int\\langle P(\\rho_iu),v\\rangle\\,d\\mu=\\int\\langle\\rho_iu,P^\\star v\\rangle\\,d\\mu$, and summing over $i$ gives the global identity $\\int\\langle Pu,v\\rangle\\,d\\mu=\\int\\langle u,P^\\star v\\rangle\\,d\\mu$.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Uniqueness. If a smooth operator $Q$ also satisfied the global adjoint identity, then $\\int\\langle u,(P^\\star-Q)v\\rangle\\,d\\mu=0$ for all compactly supported smooth $u,v$, so step 3.1 applied to $P^\\star-Q$ on any chart gives $P^\\star-Q=0$. Thus $P^\\star$ is the unique such operator.",
+          "step": "6.1",
+          "inputs": [
+            "step 3.1",
+            "step 5.1"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Consequences. For a Laplace-type $P$ the order-two coefficients are $a_{(i,j)}=-a^{ij}\\delta_{\\lambda\\mu}$ with $(a^{ij})$ smooth symmetric positive definite, so those of $P^\\star$ are $(-1)^2a_{(i,j)}^*=-a^{ij}\\delta_{\\lambda\\mu}$, the same matrix; hence $P^\\star$ is Laplace type and $\\sigma_2(P^\\star)=\\sigma_2(P)$. Applying the defining identity twice and using step 6.1, $(P^\\star)^\\star=P$. Finally, with $E=F$, the difference of the defining identities for $P$ and $P^\\star$ shows that $P$ is formally symmetric exactly when $\\int\\langle s,(P-P^\\star)t\\rangle\\,d\\mu=0$ for all compactly supported smooth $s,t$, which by step 3.1 holds exactly when $P=P^\\star$. All three assertions follow.",
+          "step": "7.1",
+          "inputs": [
+            "step 5.1",
+            "step 6.1",
+            "step 3.2",
+            "F6",
+            "algebra",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The identification is vacuous for the zero section and the empty test set; the uniqueness argument of step 6.1 covers it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero operator all coefficients vanish and the formula gives P^star=0; step 2.1 includes Qv=0 for every v."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No counting or dimension-one parameter occurs; rank-one bundles and order-one operators are ordinary cases of the local formula of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Operators of order below two and vanishing leading coefficients are included: step 3.2 shows the adjoint has order at most that of P."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The manifold is boundaryless and all tests are compactly supported, so no boundary endpoint enters; step 1.1 records the boundary-free integration by parts."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The construction is choice-free: finite chart data, local integration by parts and uniqueness in step 3.1 require no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Item 3 forward direction: P=P^star inserted in the defining identity gives formal symmetry; step 7.1 states this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Item 3 reverse direction: formal symmetry gives the vanishing of the pairing against (P-P^star), hence P=P^star by step 7.1 and step 3.1."
+        }
+      ]
+    },
+    "def-e-valued-dolbeault-operators-and-ltwo-structure": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bigraded-complex-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C^n$ be open. Write $\\Omega^k(U;\\mathbb C)$ for smooth\ncomplex-valued $k$-forms. For increasing multi-indices\n$I=(i_1<\\cdots<i_p)$ and $J=(j_1<\\cdots<j_q)$, write\n$dz^I=dz_{i_1}\\wedge\\cdots\\wedge dz_{i_p}$ and\n$d\\bar z^J=d\\bar z_{j_1}\\wedge\\cdots\\wedge d\\bar z_{j_q}$. The invertible\nchange of cotangent basis\n$dz_j=dx_j+i\\,dy_j$, $d\\bar z_j=dx_j-i\\,dy_j$ gives the direct sum\ndecomposition\n\n$$\\Omega^k(U;\\mathbb C)=\\bigoplus_{p+q=k}\\Omega^{p,q}(U),\\qquad \\Omega^{p,q}(U)=\\left\\{\\sum_{I,J}a_{I,J}(z)\\,dz^I\\wedge d\\bar z^J:a_{I,J}\\in C^\\infty(U;\\mathbb C)\\right\\},$$\n\nwhere $0\\le p,q\\le n$ and every sum is finite. On a $(p,q)$ form\n$\\eta=\\sum_{I,J}a_{I,J}dz^I\\wedge d\\bar z^J$, define\n\n$$\\partial\\eta=\\sum_{I,J,j}(\\partial_{z_j}a_{I,J})\\,dz_j\\wedge dz^I\\wedge d\\bar z^J,\\qquad \\bar\\partial\\eta=\\sum_{I,J,j}(\\partial_{\\bar z_j}a_{I,J})\\,d\\bar z_j\\wedge dz^I\\wedge d\\bar z^J.$$\n\nRepeated differentials vanish by alternation; components outside the range\n$0\\le p,q\\le n$ are zero. These operators are the components of $d$ of\nbidegrees $(p+1,q)$ and $(p,q+1)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-d-dbar-decomposition-and-identities",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C^n$ be open and let all forms below be smooth and\ncomplex-valued. Then\n$$d=\\partial+\\bar\\partial,\\qquad \\partial^2=0,\\qquad \\bar\\partial^2=0,\\qquad \\partial\\bar\\partial+\\bar\\partial\\partial=0.$$\nFor $\\eta\\in\\Omega^{p,q}(U)$ and $\\theta\\in\\Omega^{r,s}(U)$,\n$$\\partial(\\eta\\wedge\\theta)=\\partial\\eta\\wedge\\theta+(-1)^{p+q}\\eta\\wedge\\partial\\theta,\\qquad \\bar\\partial(\\eta\\wedge\\theta)=\\bar\\partial\\eta\\wedge\\theta+(-1)^{p+q}\\eta\\wedge\\bar\\partial\\theta.$$\nThe identities hold at bidegree endpoints as well, with components outside\n$0\\le p,q\\le n$ interpreted as zero.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-holomorphic-map-and-complex-jacobian",
+          "source_section": "Definition",
+          "quote": "Fix $m,n\\ge1$, read $\\mathbb C^m$ and $\\mathbb C^n$ through\n[[rem-complex-euclidean-space-dictionary]], and let $U\\subseteq\\mathbb C^m$ be\nopen with $a\\in U$. A map $L:\\mathbb C^m\\to\\mathbb C^n$ is **$\\mathbb C$-linear**\nwhen $L(u+v)=L(u)+L(v)$ and $L(\\lambda u)=\\lambda L(u)$ for all\n$u,v\\in\\mathbb C^m$ and all $\\lambda\\in\\mathbb C$, the operations being those of\nthe $\\mathbb C$-vector spaces $\\mathbb C^m$ and $\\mathbb C^n$\n([[def-vector-space]], [[thm-complex-numbers-form-a-field]]); requiring the\nsecond clause only for real $\\lambda$ gives the weaker notion of an\n$\\mathbb R$-linear map ([[def-euclidean-linear-map]]).\n\nA map $F:U\\to\\mathbb C^n$ is **holomorphic at $a$** when there is a\n$\\mathbb C$-linear $L:\\mathbb C^m\\to\\mathbb C^n$ with\n\n$$F(a+h)=F(a)+L(h)+r(h),\\qquad \\frac{\\lVert r(h)\\rVert}{\\lVert h\\rVert}\\longrightarrow0\\ \\text{ as }h\\to0,$$\n\nthe norms being those of the dictionary\n([[def-norm-and-normed-space]]) and the quotient considered for $h\\ne0$ with\n$a+h\\in U$. It is **holomorphic on $U$** when it is holomorphic at every point.\n\n**Such an $L$ is unique.** If $L_1,L_2$ both work, then $T=L_1-L_2$ is\n$\\mathbb C$-linear with $\\lVert T(h)\\rVert/\\lVert h\\rVert\\to0$; fixing $h\\ne0$\nand replacing $h$ by $th$ for small real $t>0$ gives\n$\\lVert T(h)\\rVert/\\lVert h\\rVert=\\lVert T(th)\\rVert/\\lVert th\\rVert\\to0$, so\n$T(h)=0$. Write $DF(a):=L$.\n\nThe **complex Jacobian** $J_{\\mathbb C}F(a)$ is the matrix of $DF(a)$ relative to\nthe standard ordered bases of $\\mathbb C^m$ and $\\mathbb C^n$\n([[lem-standard-basis-of-f-n]], [[def-coordinate-column-and-matrix-of-a-linear-map]]),\nan $n\\times m$ matrix over the field $\\mathbb C$\n([[def-matrices-over-a-commutative-ring]]); its $(j,k)$ entry is the $j$th\ncoordinate of $DF(a)e_k$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-wirtinger-operators-in-several-complex-variables",
+          "source_section": "Definition",
+          "quote": "Fix $m\\ge1$, let $U\\subseteq\\mathbb C^m$ be open and let $f:U\\to\\mathbb C$. Read\n$\\mathbb C^m$ as $\\mathbb R^{2m}$ through\n[[rem-complex-euclidean-space-dictionary]], with real coordinates $x_k,y_k$ for\n$k<m$ given by $z_k=x_k+iy_k$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), and let\n$\\partial_{x_k}f$ and $\\partial_{y_k}f$ be the partial derivatives of\n[[def-directional-and-partial-derivatives]] applied to the two real components of\n$f$ and recombined.\n\nAt a point where all $2m$ of these partial derivatives exist, define the\n**Wirtinger operators**\n\n$$\\partial_{z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f-i\\,\\partial_{y_k}f\\bigr), \\qquad \\partial_{\\bar z_k}f:=\\tfrac12\\bigl(\\partial_{x_k}f+i\\,\\partial_{y_k}f\\bigr) \\qquad(k<m).$$\n\n**The differential identity.** Suppose in addition that $f$ is real totally\ndifferentiable at a point $a\\in U$, so that $Df(a)$ is the $\\mathbb R$-linear\nmap with\n$Df(a)h=\\sum_{k<m}\\Bigl(\\bigl(\\partial_{x_k}f(a)\\bigr)\\xi_k+\\bigl(\\partial_{y_k}f(a)\\bigr)\\eta_k\\Bigr)$\nfor $h_k=\\xi_k+i\\eta_k$, by\n[[thm-total-derivative-computes-directional-and-partial-derivatives]] read in the standard basis\n([[lem-standard-basis-of-f-n]]). Substituting\n$\\xi_k=\\tfrac12(h_k+\\overline{h_k})$ and\n$\\eta_k=\\tfrac1{2i}(h_k-\\overline{h_k})$ and collecting the coefficients of\n$h_k$ and $\\overline{h_k}$ using finite sums in the additive commutative monoid\nof $\\mathbb C$ ([[def-finite-sum-in-a-commutative-monoid]]) and distributivity\nin the complex field ([[thm-complex-numbers-form-a-field]]) gives\n\n$$Df(a)h=\\sum_{k<m}\\Bigl(\\bigl(\\partial_{z_k}f(a)\\bigr)h_k +\\bigl(\\partial_{\\bar z_k}f(a)\\bigr)\\overline{h_k}\\Bigr).$$\n\nIndeed the coefficient of $h_k$ is\n$\\tfrac12\\partial_{x_k}f(a)+\\tfrac1{2i}\\partial_{y_k}f(a)\n=\\tfrac12(\\partial_{x_k}f(a)-i\\partial_{y_k}f(a))$, and the coefficient of\n$\\overline{h_k}$ is\n$\\tfrac12\\partial_{x_k}f(a)-\\tfrac1{2i}\\partial_{y_k}f(a)\n=\\tfrac12(\\partial_{x_k}f(a)+i\\partial_{y_k}f(a))$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles",
+          "source_section": "Statement",
+          "quote": "A Riemannian metric induces smooth metrics on dual, tensor and exterior bundles. On decomposable covectors, $\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle=\\det(\\langle\\alpha_i,\\beta_j\\rangle)$; increasing orthonormal wedge monomials have norm one.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complex-manifolds-and-holomorphic-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$. A **chart** on a topological space $X$ is a homeomorphism\n$\\varphi:U\\to\\varphi(U)$ from an open set $U\\subseteq X$ onto an open subset of\n$\\mathbb C^m$ with its usual topology ([[def-homeomorphism-and-open-maps]]);\ntwo charts $\\varphi,\\psi$ are **holomorphically compatible** when the\ntransition maps $\\psi\\circ\\varphi^{-1}$ and $\\varphi\\circ\\psi^{-1}$ are\nholomorphic on the open sets where they are defined\n([[def-holomorphic-function-in-several-complex-variables]]). A **holomorphic\natlas** is a family of pairwise compatible charts whose domains cover $X$. A\n**complex manifold of dimension $m$** is a nonempty Hausdorff\n([[def-hausdorff-space]]) second-countable ([[def-second-countable-space]])\ntopological space carrying a holomorphic atlas; the same maximal-atlas argument\nas for [[def-riemann-surface-and-holomorphic-atlas]] applies verbatim with\n$\\mathbb C^m$ in place of $\\mathbb C$: the union of a holomorphic atlas with all\ncharts compatible with it is again a holomorphic atlas, so one passes to the\nunique maximal atlas and calls its members holomorphic charts. Each chart is a\nhomeomorphism onto an open subset of $\\mathbb C^m\\cong\\mathbb R^{2m}$, so $X$ is\na topological manifold without boundary of real dimension $2m$\n([[def-topological-manifold-without-boundary]]), and for connected $X$ the case\n$m=1$ recovers Riemann surfaces ([[def-riemann-surface-and-holomorphic-atlas]]).\n\nA **holomorphic map** $f:X\\to Y$ between complex manifolds is a continuous map\nwhose expression in every pair of holomorphic charts is holomorphic\n([[def-holomorphic-map-and-complex-jacobian]]); equivalently, composition with\n$f$ preserves holomorphic functions.\n\n**Induced smooth structure and complex structure.** Holomorphic functions on\nopen subsets of $\\mathbb C^m$ are smooth\n([[cor-holomorphic-functions-in-several-variables-are-smooth]]), so every\nholomorphic atlas is a smooth atlas ([[def-smooth-atlas]]) and $X$ is a smooth\nmanifold of real dimension $2m$ ([[def-smooth-manifold]]) whose smooth charts\ninclude the holomorphic ones. In holomorphic coordinates\n$z_k=x_k+iy_k$ the **complex structure** is the endomorphism field $J$ of the\ntangent bundle determined by $J\\partial_{x_k}=\\partial_{y_k}$ and\n$J\\partial_{y_k}=-\\partial_{x_k}$; it satisfies $J^2=-\\mathrm{id}$ and is\nindependent of the holomorphic chart, because a holomorphic transition map has\ncomplex-linear differential ([[def-holomorphic-map-and-complex-jacobian]],\n[[thm-chain-rule-for-holomorphic-maps-in-several-variables]]) and complex-linear\nmaps intertwine the two coordinate definitions of multiplication by $i$. A\n**Hermitian metric** on $X$ is a Riemannian metric $g$\n([[def-riemannian-metric-and-riemannian-manifold]]) satisfying\n$g(Jv,Jw)=g(v,w)$ for all tangent vectors $v,w$; its Riemannian volume density\nis written $\\mu_g$ ([[def-riemannian-volume-density]]). The complex structure\nmakes each tangent space a complex vector space, so the tangent bundle is a\nsmooth complex vector bundle in the sense of\n[[def-complex-linear-and-compatible-bundle-connections]].\n\n**Holomorphic vector bundles and Hermitian bundle metrics.** A **holomorphic\nvector bundle of rank $r$** on $X$ is a smooth complex vector bundle\n$\\pi:E\\to X$ of rank $r$\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]],\n[[def-complex-linear-and-compatible-bundle-connections]]) together with an open\ncover $(V_\\alpha)$ of $X$ and smooth local trivializations\n$\\theta_\\alpha:E|_{V_\\alpha}\\to V_\\alpha\\times\\mathbb C^r$ whose transition\nmatrices $g_{\\alpha\\beta}:V_\\alpha\\cap V_\\beta\\to\\mathrm{GL}_r(\\mathbb C)$,\ndefined by $\\theta_\\alpha\\theta_\\beta^{-1}(p,v)=(p,g_{\\alpha\\beta}(p)v)$, are\nholomorphic. A **holomorphic frame** over an open set $V$ is such a\ntrivialization. Changing holomorphic frame multiplies a local section by a\nholomorphic matrix, hence a smooth local section is **holomorphic** exactly when\nits representatives in holomorphic frames are holomorphic functions. A\n**Hermitian metric** $h$ on $E$ is a smooth bundle metric\n([[def-smooth-bundle-metric]]) whose fibre pairings are positive definite\nHermitian forms, linear in the first variable and conjugate-linear in the\nsecond; the condition is frame-independent because the gauge freedom is\nconjugation by a pointwise invertible matrix. Smooth sections are\n$\\Gamma(E)$ ([[def-smooth-section-local-section-and-support]]).",
+          "uses": [
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-complex-l-two-inner-product",
+          "source_section": "Definition",
+          "quote": "For $[f],[g]\\in L^2(\\mu;\\mathbb C)$, the proposed pairing is\n$$\\langle[f],[g]\\rangle:=\\int_X f\\overline g\\,d\\mu.$$\nThe integral is computed from measurable representatives. By [[thm-complex-holder-minkowski-and-the-quotient-norm]], $\\overline g\\in L^2$ and $\\int|f\\overline g|\\le\\|f\\|_2\\|g\\|_2<\\infty$, so this representative expression is defined. The measurable and integration conventions are those of [[def-complex-lp-and-euclidean-test-function-conventions]]. This fixes the **first-variable-linear** convention. The following theorem, named in `justified_by`, establishes class invariance and the inner-product axioms; the present definition does not assume that obligation.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-formal-adjoints-of-differential-operators-exist-and-are-unique",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a Hausdorff second-countable smooth manifold without boundary,\n$\\mu$ a smooth positive density on $M$, and $E,F\\to M$ finite-rank smooth vector\nbundles over $\\mathbb K=\\mathbb R$ or $\\mathbb C$ with smooth bundle metrics,\nHermitian (first-variable-linear) in the complex case, with the conventions of\n[[def-second-order-laplace-type-operators-on-vector-bundles]]. Let\n$P:\\Gamma(E)\\to\\Gamma(F)$ be a linear differential operator of order at most two\n(the target-$F$ version of the local description in\n[[def-second-order-laplace-type-operators-on-vector-bundles]]).\n\nThen there is a unique linear differential operator $P^\\star:\\Gamma(F)\\to\\Gamma(E)$\nof order at most two such that\n$$\\int_M\\langle Pu,v\\rangle_F\\,d\\mu=\\int_M\\langle u,P^\\star v\\rangle_E\\,d\\mu$$\nfor all compactly supported smooth sections $u\\in\\Gamma_c(E)$ and\n$v\\in\\Gamma_c(F)$; it is the **formal adjoint** of $P$. It is given locally as\nfollows: in a chart with coordinates $x$, with density coefficient $\\gamma>0$\ndefined by $\\mu=\\gamma\\,|dx^1\\cdots dx^n|$\n([[def-density-bundle-and-smooth-density]]), with frames of $E$ and $F$\northonormal for the metrics (equivalently unitary in the complex case; such\nframes exist locally by applying Gram–Schmidt to any local frame,\n[[thm-gram-schmidt-orthonormalisation]]), and with local coefficients\n$Pu=\\sum_{|\\alpha|\\le2}a_\\alpha D^\\alpha u$,\n$$P^\\star v=\\sum_{|\\alpha|\\le2}(-1)^{|\\alpha|}\\gamma^{-1}D^\\alpha\\bigl(\\gamma\\,a_\\alpha^*v\\bigr),$$\nwhere $a_\\alpha^*$ is the fibre adjoint. Consequently:\n1. if the leading coefficients of $P$ of order $\\delta\\in\\{0,1,2\\}$ are the\n   matrices $a_\\alpha$, $|\\alpha|=\\delta$, then those of $P^\\star$ are\n   $(-1)^\\delta a_\\alpha^*$, computed in the same orthonormal frames; in\n   particular the formal adjoint of a Laplace-type operator is again Laplace\n   type and its principal symbol is unchanged,\n   $\\sigma_2(P^\\star)=\\sigma_2(P)$;\n2. $(P^\\star)^\\star=P$;\n3. if $E=F$, then $P$ is formally symmetric in the sense of\n   [[def-second-order-laplace-type-operators-on-vector-bundles]] exactly when\n   $P=P^\\star$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-second-order-laplace-type-operators-on-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a Hausdorff second-countable smooth manifold without boundary of\ndimension $n\\ge2$ ([[def-smooth-manifold]]), let $\\mu$ be a smooth positive\ndensity on $M$ ([[def-density-bundle-and-smooth-density]]), and let $E\\to M$ be\na finite-rank smooth vector bundle\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]) over\n$\\mathbb K=\\mathbb R$ or $\\mathbb C$ carrying a smooth bundle metric\n$\\langle\\cdot,\\cdot\\rangle$ ([[def-smooth-bundle-metric]]), Euclidean in the\nreal case and Hermitian, linear in the first variable, in the complex case; in\nthe complex case the fibres are complex vector spaces through a smooth complex\nstructure on $E$\n([[def-complex-linear-and-compatible-bundle-connections]]). Write $\\Gamma(E)$\nfor the smooth sections ([[def-smooth-section-local-section-and-support]]).\n\nA $\\mathbb K$-linear map $P:\\Gamma(E)\\to\\Gamma(E)$ is a **linear differential\noperator of order at most two** on $E$ when, on every chart domain $\\Omega$ of\n$M$ with coordinates $x=(x^1,\\ldots,x^n)$ and in every local frame of $E$ over\n$\\Omega$ in which a section is written $s\\leftrightarrow u=(u^1,\\ldots,u^r)$\nand its image as $Ps\\leftrightarrow((Ps)_1,\\ldots,(Ps)_r)$,\n$$(Ps)_\\lambda=-\\sum_{i,j=1}^na^{ij}_{\\lambda\\mu}(x)\\,\\partial_i\\partial_ju^\\mu(x)+\\sum_{j=1}^nb^j_{\\lambda\\mu}(x)\\,\\partial_ju^\\mu(x)+c_{\\lambda\\mu}(x)u^\\mu(x),\\qquad1\\le\\lambda\\le r,$$\nwith smooth coefficient functions on $\\Omega$ and summation over the repeated\nindex $\\mu$ (and over $i,j$). Such an operator is **Laplace type** when in\naddition, in every such chart and frame, its second-order coefficients are\nscalar multiples of the identity, $a^{ij}_{\\lambda\\mu}=a^{ij}\\delta_{\\lambda\\mu}$,\nwith $a^{ij}$ smooth real functions for which the matrix $(a^{ij}(x))$ is\nsymmetric and positive definite at every $x\\in\\Omega$. Its **principal symbol**\nis the smooth section $\\sigma_2(P)$ of $\\mathrm{Sym}^2T^*M$\n([[def-smooth-tensor-field]]) given on such a chart by\n$\\sigma_2(P)(x,\\xi)=a^{ij}(x)\\xi_i\\xi_j$ for $\\xi\\in T_x^*M$; equivalently\n$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)\\,\\mathrm{id}_{E_x}$ for a smooth field of\npositive-definite quadratic forms $a_x$ on $T_x^*M$, so that\n$\\sigma_2(P)(x,\\xi)>0$ whenever $\\xi\\ne0$.\n\n$P$ is **formally symmetric** for $(\\mu,\\langle\\cdot,\\cdot\\rangle)$ when\n$$\\int_M\\langle Ps,t\\rangle\\,d\\mu=\\int_M\\langle s,Pt\\rangle\\,d\\mu$$\nfor all compactly supported smooth sections $s,t\\in\\Gamma_c(E)$\n([[def-integral-of-a-compactly-supported-smooth-density]]).\n\n**Well-definedness.** The definition is local. On a fixed chart and frame the\ndisplayed assignment is a $\\mathbb K$-linear map on components with smooth\ncoefficients, and the chain rule ([[thm-chain-rule-for-total-derivatives]])\ncomputes the transition to another chart and frame on the overlap: the\nsecond-order coefficients transform by the symmetric tensor rule\n$a'^{kl}=a^{ij}\\frac{\\partial x'^k}{\\partial x^i}\\frac{\\partial x'^l}{\\partial x^j}$\ntogether with conjugation by the frame-change matrix, while the terms produced\nby the second derivatives of the coordinate change are absorbed into the\nfirst-order coefficients. Hence a single operator that admits a local\nexpression on one cover admits a local expression on every chart and frame, and\nthe two hypotheses placed on the leading coefficient are invariant: scalar-ness\nis preserved by frame conjugation and by the coordinate rule for a field of\nsymmetric matrices, and symmetric positive definiteness is preserved by both.\nThe principal symbol is therefore independent of the chart and frame, since two\nlocal expressions of the same operator differ by an operator of order at most\none; it is smooth in $(x,\\xi)$ because the $a^{ij}$ are smooth, and it is\npositive on nonzero covectors exactly when $(a^{ij})$ is positive definite.\nFormal symmetry is an identity between integrals of compactly supported smooth\nsections and therefore depends only on the operator, the density and the\nmetric.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Gluing of $\\bar\\partial_E$. First let $\\theta_\\alpha,\\theta_\\beta$ be holomorphic frames of $E$ with transition matrix $T$, a holomorphic function with values in $\\mathrm{GL}_r(\\mathbb C)$ ([[def-complex-manifolds-and-holomorphic-vector-bundles]]). For a local section $u$, the Leibniz rule for $\\bar\\partial$ ([F1]) and $\\bar\\partial T=0$ give $\\bar\\partial(Tu)=\\bar\\partial T\\wedge u+T\\,\\bar\\partial u=T\\,\\bar\\partial u$, so the local $(p,q+1)$-forms computed in two frames agree. Next let $\\varphi$ be a holomorphic transition between two holomorphic charts and write $g=f\\circ\\varphi$ for a coefficient function. Because $\\varphi$ is holomorphic, $\\bar\\partial_{z'_k}\\varphi_j=0$ and $\\bar\\partial_{z'_k}\\bar\\varphi_j=\\overline{\\partial_{z'_k}\\varphi_j}$ ([F1], [F2]); the chain rule [F2] therefore gives $\\bar\\partial_{z'_k}g=\\sum_j\\overline{\\partial_{z'_k}\\varphi_j}\\,(\\partial_{\\bar z_j}f)(\\varphi)$. Since $\\varphi^*(d\\bar z_j)=\\sum_k\\overline{\\partial z_j/\\partial z'_k}\\,d\\bar z'_k$, multiplying by $d\\bar z'_k$ and summing reproduces the pullback of $\\sum_j(\\partial_{\\bar z_j}f)\\,d\\bar z_j$; the holomorphic factors $dz^I$ pull back to $dz'^I$-combinations, so bidegrees are preserved and $\\varphi^*\\bar\\partial=\\bar\\partial\\varphi^*$. Hence the local operators agree on overlaps and glue to a global smooth first-order operator $\\bar\\partial_E$ that is independent of the atlas and frames.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Vanishing of the square and bidegree action. In each holomorphic chart $\\bar\\partial^2=0$ coefficientwise by [F1], and the gluing of step 1.1 identifies these local squares with $\\bar\\partial_E^2$; hence $\\bar\\partial_E^2=0$ globally. By construction $\\bar\\partial_E$ raises the second bidegree by one and preserves the first; when $p>m$ or $q>m$ the bundles and hence both sides vanish by the degree convention.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Formal adjoint and its bidegree. The operator $\\bar\\partial_E$ is a smooth first-order linear differential operator between the finite-rank Hermitian bundles $\\Lambda^{p,q}T^*X\\otimes E$ and $\\Lambda^{p,q+1}T^*X\\otimes E$ over $X$, whose density $\\mu_g$ is smooth and positive, so [F5] supplies a unique smooth first-order formal adjoint $\\bar\\partial_E^*$, characterized by the displayed pairing identity. It lowers the second bidegree by one: for a compactly supported smooth form $t$ of bidegree $(p,q+1)$ and $s$ of bidegree $(p',q')$, the pairing $\\langle\\bar\\partial_Es,t\\rangle_{L^2}$ is zero unless $(p',q'+1)=(p,q+1)$ by step 2.1 and orthogonality of distinct bidegrees, so $\\bar\\partial_E^*t$ has no component in any bidegree other than $(p,q)$.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Formal symmetry and energy. Let $s,t$ be compactly supported smooth $E$-valued forms. Using the defining adjoint identities of step 3.1, $$\\langle\\Delta_{\\bar\\partial_E}s,t\\rangle_{L^2}=\\langle\\bar\\partial_E\\bar\\partial_E^*s,t\\rangle_{L^2}+\\langle\\bar\\partial_E^*\\bar\\partial_Es,t\\rangle_{L^2}=\\langle\\bar\\partial_E^*s,\\bar\\partial_E^*t\\rangle_{L^2}+\\langle\\bar\\partial_Es,\\bar\\partial_Et\\rangle_{L^2}.$$ Applying the pairing property of [F4] to each summand shows the right side is conjugate-symmetric in $s,t$, so $\\langle\\Delta_{\\bar\\partial_E}s,t\\rangle_{L^2}=\\overline{\\langle\\Delta_{\\bar\\partial_E}t,s\\rangle_{L^2}}$; taking $s=t$ gives $\\langle\\Delta_{\\bar\\partial_E}s,s\\rangle_{L^2}=\\|\\bar\\partial_Es\\|_2^2+\\|\\bar\\partial_E^*s\\|_2^2\\ge0$. Thus $\\Delta_{\\bar\\partial_E}$ is formally symmetric and nonnegative in the sense of [F6], and by step 3.1 it preserves every bidegree $(p,q)$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Principal symbol and Laplace type. Fix a point and compute in a chart and a unitary basis ([F7]); write $\\xi^{0,1}$ for the $(0,1)$-part of a real covector $\\xi$. In real coordinates the coefficient vectors of $\\bar\\partial_E$ multiply to $\\varepsilon(\\xi^{0,1})$, and those of $\\bar\\partial_E^*$ to $-\\varepsilon(\\xi^{0,1})^*$, where $\\varepsilon$ is exterior multiplication and $*$ the metric adjoint; the metric adjoint of $\\varepsilon(\\eta)$ deletes each factor of a wedge monomial pairing with $\\eta$, with alternating signs, so the deletion check on unitary wedge monomials gives $\\varepsilon(\\eta)\\varepsilon(\\eta)^*+\\varepsilon(\\eta)^*\\varepsilon(\\eta)=|\\eta|^2\\mathrm{id}$, including the holomorphic $p$-factors and the bundle factor. Therefore the second-order coefficient of $\\Delta_{\\bar\\partial_E}$ is the scalar $|\\xi^{0,1}|_g^2$, that is, $-\\sum a^{ij}\\partial_i\\partial_j$ with $a^{ij}\\xi_i\\xi_j=|\\xi^{0,1}|_g^2$; this form is smooth in $x$ and positive definite on nonzero real $\\xi$, since $\\xi^{0,1}=0$ forces the conjugate $(1,0)$-part $\\xi^{1,0}=0$ and hence $\\xi=0$. By [F6] the operator $\\Delta_{\\bar\\partial_E}$ is therefore Laplace type with the displayed principal symbol, and all assertions of the Definition are established.",
+          "step": "5.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Empty wedge sums and the zero form are carried through steps 1.1 and 5.1; the empty case of the unitary basis is used in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section has zero derivative and zero energy; step 4.1 gives Delta 0=0 and step 5.1 applies to it."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No counting or normalisation parameter occurs; the rank-one bundle and the m=1 case are ordinary instances of the definitions and of step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The vanishing of the square of the operator is the degenerate case driving formal symmetry; step 4.1 verifies the energy identity for it."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Bidegree endpoints p=0, q=0 and the out-of-range cases p>m or q>m are treated by the degree convention in step 2.1 and by step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Countable Choice is declared exactly for the L2 completion in [F4]; the local constructions in steps 1.1 and 2.1 use no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states definitions and properties, not an if-and-only-if claim; no forward case exists."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states definitions and properties, not an if-and-only-if claim; no reverse case exists."
+        }
+      ]
+    },
+    "thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-smooth-partitions-of-unity-exist-on-manifolds",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Every open cover of a smooth manifold admits a smooth partition of unity subordinate to it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-cutoff-difference-quotient-commutator-estimate",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $1\\le p\\le\\infty$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, $u\\in W^{1,p}(\\Omega;\\mathbb K)$ and\n$\\eta\\in C_c^\\infty(\\mathbb R^n;\\mathbb R)$ with\n$M_\\eta:=\\|D\\eta\\|_{L^\\infty(\\mathbb R^n)}$ and compact support; the case\n$\\eta\\in C_c^\\infty(\\Omega;\\mathbb R)$ is read by extending $\\eta$ by zero.\nThen for every $i\\in\\{1,\\dots,n\\}$ and every $h\\ne0$, on the shrunken set\n$\\Omega_{i,h}=\\{x\\in\\Omega:x+he_i\\in\\Omega\\}$ of\n[[def-first-difference-quotient]] one has the exact identity\n$$\\delta_h^i(\\eta u)-\\eta\\,\\delta_h^iu=(\\delta_h^i\\eta)\\,(\\tau_{-he_i}u)\\qquad\\text{a.e. on }\\Omega_{i,h},$$\nwhere $\\tau$ is the published translation $\\tau_hu(x)=u(x-h)$ of\n[[def-translation-of-a-function-on-rn]], so that\n$(\\tau_{-he_i}u)(x)=u(x+he_i)$. Consequently\n$$\\|\\delta_h^i(\\eta u)-\\eta\\,\\delta_h^iu\\|_{L^p(\\Omega_{i,h})}\\le M_\\eta\\,\\|\\tau_{-he_i}u\\|_{L^p(\\Omega_{i,h})}\\le M_\\eta\\,\\|u\\|_{L^p(\\Omega)},$$\nand more generally, on the domain where both sides are defined,\n$$\\delta_h^i\\big(\\eta^2\\delta_h^iu\\big)=\\eta^2\\delta_h^i\\delta_h^iu+(\\delta_h^i\\eta^2)\\,(\\tau_{-he_i}\\delta_h^iu).$$\nThe statement is quantitative in $\\|D\\eta\\|_{L^\\infty}$ and does not assume\nany regularity of $u$ beyond $W^{1,p}$.\n\n**Sobolev multiplier and support facts used below.** For every integer\n$m\\ge0$, $q\\in W^{m,\\infty}(U)$ and $z\\in H^m(U)$ on an open set $U$,\n$qz\\in H^m(U)$ and\n$$D^\\alpha(qz)=\\sum_{\\beta\\le\\alpha}{\\alpha\\choose\\beta}(D^\\beta q)D^{\\alpha-\\beta}z,\\qquad |\\alpha|\\le m,$$\nwith $\\|qz\\|_{H^m(U)}\\le C(n,m)\\|q\\|_{W^{m,\\infty}(U)}\\|z\\|_{H^m(U)}$.\nAlso, every compactly supported $z\\in H^m(U)$ lies in $H^m_0(U)$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $n\\ge1$, $k\\in\\mathbb N_0$, $1\\le p<\\infty$ and\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Then the compactly supported smooth\nfunctions $C_c^\\infty(\\mathbb R^n;\\mathbb K)$ are dense in\n$W^{k,p}(\\mathbb R^n;\\mathbb K)$: for every\n$u\\in W^{k,p}(\\mathbb R^n;\\mathbb K)$ and every $\\delta>0$ there is\n$\\varphi\\in C_c^\\infty(\\mathbb R^n;\\mathbb K)$ with\n$$\\|\\varphi-u\\|_{W^{k,p}(\\mathbb R^n)}<\\delta.$$\nNo such norm-density assertion is made for $p=\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-interior-h-two-regularity-for-divergence-form-equations",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open,\n$n\\ge1$, $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, let $L,a$ be as in\n[[def-uniformly-elliptic-divergence-form-operator]] with constants\n$\\theta,M_a,M_b,M_c$ and with $a^{ij}\\in W^{1,\\infty}(\\Omega)$ satisfying\n$\\|Da^{ij}\\|_\\infty\\le M_1$, and let $f\\in L^2_{\\mathrm{loc}}(\\Omega)$. If\n$u\\in H^1(\\Omega)$ is a local weak solution of $Lu=f$ on $\\Omega$\n([[def-local-weak-solution-for-a-divergence-form-operator]]), then\n$u\\in H^2_{\\mathrm{loc}}(\\Omega)$, and for all open sets\n$\\Omega'\\Subset\\Omega''\\Subset\\Omega$ there is\n$C=C(n,\\theta,M_a,M_b,M_c,M_1,\\Omega',\\Omega'')$ with\n$$\\|u\\|_{H^2(\\Omega')}\\le C\\big(\\|f\\|_{L^2(\\Omega'')}+\\|u\\|_{L^2(\\Omega'')}\\big).$$\nConsequently the equation $Lu=f$ holds pointwise almost everywhere with\n$D_i(a^{ij}D_ju)$ understood through the a.e. defined product\n$(D_ia^{ij})D_ju+a^{ij}D_iD_ju$, and the same estimate holds for complex-valued $u$ by taking real parts in the coercive energy bounds; no splitting of complex coefficients into real and imaginary equations is used.\nThe scaffold wrote $\\|f\\|_{L^2(\\Omega)}+\\|u\\|_{L^2(\\Omega)}$ on the\nright-hand side, which is ill-posed for a datum known only to lie in\n$L^2_{\\mathrm{loc}}(\\Omega)$ (for instance $f=1/x$ on $\\Omega=(0,1)$ is\nlocally but not globally square-integrable); the nested formulation above is\nthe well-posed local statement, and the quantitative content is otherwise\nunchanged.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$,\n$\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$, and let $m\\ge1$. For every\n$\\varepsilon>0$ there is $C=C(n,m,\\varepsilon)$ such that every\n$u\\in H^{m+1}_0(\\Omega;\\mathbb K)$ satisfies\n$$\\|D^mu\\|_{L^2(\\Omega)}\\le\\varepsilon\\,\\|D^{m+1}u\\|_{L^2(\\Omega)}+C\\,\\|D^{m-1}u\\|_{L^2(\\Omega)},$$\nand the same estimate holds for every $u\\in H^{m+1}(\\Omega;\\mathbb K)$ whose\nclass vanishes almost everywhere outside a compact subset of $\\Omega$. In\nboth displays\n$$\\|D^ju\\|_{L^2(\\Omega)}^2:=\\sum_{\\alpha\\in\\mathbb N_0^n,\\,|\\alpha|=j}\\|D^\\alpha u\\|_{L^2(\\Omega)}^2 .$$\nIn particular, for $u\\in H^2_0(\\Omega;\\mathbb K)$,\n$$\\|Du\\|_{L^2(\\Omega)}\\le\\varepsilon\\|D^2u\\|_{L^2(\\Omega)}+C_\\varepsilon\\|u\\|_{L^2(\\Omega)} .$$\nThe constants are not asserted sharp, and the estimate is the tool that\nabsorbs commutator terms linear in the highest derivatives.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be a\nbounded $W^{1,p}$-extension domain\n([[def-sobolev-extension-domain-and-extension-operator]]) and let\n$1\\le p<\\infty$. Then $W^{1,p}(\\Omega)$ is compactly embedded in\n$L^p(\\Omega)$: every sequence bounded in $W^{1,p}(\\Omega)$ has a subsequence\nconverging in $L^p(\\Omega)$. Every bounded $C^1$ domain is an example.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-higher-order-sobolev-embedding",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $n\\ge2$, let $\\Omega$ be a bounded $W^{k,p}$-extension domain, $k\\ge1$ and $1\\le p<\\infty$. Let $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$ and $u\\in W^{k,p}(\\Omega;\\mathbb K)$. Then:\n\n1. if $kp<n$, $\\|u\\|_{L^q(\\Omega)}\\le C\\|u\\|_{W^{k,p}(\\Omega)}$ for every $q$ with $\\frac1q\\ge\\frac1p-\\frac kn$ (equivalently $1\\le q\\le\\frac{np}{n-kp}$);\n2. if $kp=n$, $\\|u\\|_{L^q(\\Omega)}\\le C(q)\\|u\\|_{W^{k,p}(\\Omega)}$ for every finite $q$;\n3. if $kp>n$, then for every integer $m\\ge0$ and every $0<\\alpha<1$ with $m+\\alpha<k-\\frac np$ there is a representative in $C^{m,\\alpha}(\\overline\\Omega)$ with $\\|u\\|_{C^{m,\\alpha}(\\overline\\Omega)}\\le C\\|u\\|_{W^{k,p}(\\Omega)}$; when $k-\\frac np\\notin\\mathbb Z$ one may take $m=\\lfloor k-\\frac np\\rfloor$ and $\\alpha=k-\\frac np-m$.\n\nHere $C^{m,\\alpha}(\\overline\\Omega)$ uses the continuous derivatives of the constructed representative on an ambient neighbourhood of $\\overline\\Omega$, with norm\n$$\\|g\\|_{C^{m,\\alpha}(\\overline\\Omega)}:=\\sum_{|\\beta|\\le m}\\sup_{\\overline\\Omega}|D^\\beta g|+\\sum_{|\\beta|=m}\\sup_{\\substack{x,y\\in\\overline\\Omega\\\\x\\ne y}}\\frac{|D^\\beta g(x)-D^\\beta g(y)|}{|x-y|^\\alpha}.$$\nFor $\\Omega=\\varnothing$ set these norm values to $0$. The proof supplies such an ambient representative, so no boundary differentiability or regularity of $\\partial\\Omega$ is assumed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-w-one-two-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice. Let $\\Omega\\subseteq\\mathbb R^n$ be open, $n\\ge1$, and $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. On $H^1(\\Omega)=W^{1,2}(\\Omega;\\mathbb K)$ ([[def-sobolev-space-wkp-and-its-norm]], [[def-hk-and-hk-zero-notation]]) define $$(u,v)_{H^1}:=(u,v)_{L^2}+\\sum_{i=1}^n(D_iu,D_iv)_{L^2},$$ with the $L^2$ inner product of [[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]. Then $(\\cdot,\\cdot)_{H^1}$ is an inner product on the Sobolev classes whose induced norm is the $W^{1,2}$ norm of [[def-sobolev-space-wkp-and-its-norm]], and $H^1(\\Omega)$ is a Hilbert space for it. The zero-boundary space $H^1_0(\\Omega)$ is a closed subspace of $H^1(\\Omega)$ ([[def-wkp-zero-as-a-sobolev-closure]]) and hence a Hilbert space for the restricted inner product. The pairing is linear in the first argument and conjugate-linear in the second, in the convention of [[def-real-and-complex-inner-product-space]].",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lax-milgram",
+          "source_section": "Statement",
+          "quote": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a real or complex Hilbert space, let $a$ be a bounded coercive sesquilinear form on $H$ with constants $M,\\alpha$ ([[def-bounded-coercive-and-symmetric-sesquilinear-forms]]), and let $F:H\\to\\mathbb K$ be a bounded conjugate-linear functional with norm $\\|F\\|=\\sup_{\\|v\\|\\le1}|F(v)|$. Then there is a unique $u\\in H$ with $$a(u,v)=F(v)\\qquad\\text{for every }v\\in H,$$ and it satisfies $\\alpha\\|u\\|\\le\\|F\\|$, that is $\\|u\\|\\le\\|F\\|/\\alpha$. The real bilinear case is the same statement with $a$ symmetric or not, $F$ a bounded linear functional, and the conjugation read as the identity.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and\n\n$$D(g\\circ f)(a)=Dg(f(a))\\circ Df(a).$$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-c-one-change-of-variables-for-l-one-functions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $U,V \\subseteq \\mathbb R^n$ be open and let $T : U \\to V$ be a\n$C^1$ diffeomorphism. If $f : V \\to \\mathbb C$ belongs to $L^1(\\lambda_n)$,\nthen\n$$ \\int_V f(y)\\,d\\lambda_n(y) = \\int_U f(T(x))\\,|\\det DT(x)|\\,d\\lambda_n(x). $$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-young-inequality-real-exponents",
+          "source_section": "Statement",
+          "quote": "Let $p,q>1$ satisfy $1/p+1/q=1$. For $u,v\\ge0$,\n$$uv\\le\\frac{u^p}{p}+\\frac{v^q}{q}.$$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Choose finitely many relatively compact bundle charts and subordinate smooth functions $\\rho_i$ with sum one and supports strictly inside the charts. Each coefficient transformation on a compact overlap is multiplication by a smooth matrix followed by a smooth coordinate diffeomorphism with bounded derivatives and inverse derivatives at every fixed order. For a smooth coefficient function, the repeated chain rule expresses each derivative of the transformed function of order at most $k$ as a finite sum of bounded coefficients times derivatives of the original function of order at most $k$; change of variables bounds the integrals because the Jacobian and its inverse are bounded there. Approximate compactly supported Sobolev coefficients by [F1] smooth functions and pass these bounds and the weak derivative identities to the limit. Thus the same bounds hold on Sobolev classes. Multiplication by transition matrices is bounded by [F1]. Insert $u=\\sum_i\\rho_i u$ to compare any two finite-chart norms; the finite sum yields bounds in both directions. The metric and density are bounded above and below on these compact supports, giving $H^0=L^2$ and equivalent norms.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Completeness is checked on the finitely many coefficient functions and derivatives: a Cauchy sequence has $L^2$ limits for every derivative of order at most $k$; passing the test-function identities to the limit identifies these as derivatives of the zeroth-order limit. The transition identities pass in $L^2$ by the bounds of step 1.1, so these local limits are one global section. This proves completeness for the sum-of-integral-derivatives inner product. To obtain smooth density, use cutoffs equal to one near each $\\operatorname{supp}\\rho_i$, mollify the zero-extended coefficient functions, multiply again by these cutoffs, extend the resulting sections by zero and sum; [F1] makes the sum converge in $H^k$. For a bounded $H^{k+1}$ sequence, all derivatives of the finitely many localized coefficients of order at most $k$ are bounded in $H^1$ on a fixed Euclidean ball. Apply [F3] successively to these finitely many families and retain a common subsequence converging in $L^2$ for every derivative. It is Cauchy in $H^k$, hence convergent. Apply the embedding of [F3] on the same balls and step 1.1 to get the $C^r$ bound when $k>r+n/2$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "In a precompact chart each component of $Pu=f$ can be written $-\\partial_i(a^{ij}\\partial_j u_\\alpha)=f_\\alpha-\\widetilde B^j_{\\alpha\\beta}\\partial_j u_\\beta-C_{\\alpha\\beta}u_\\beta.$ The adjusted matrices $\\widetilde B$ include the derivatives of $a$. If $u\\in H^1$, the right side is locally $L^2$ and bounded by $C(\\|f\\|_2+\\|u\\|_{H^1})$ on an outer patch. The weak scalar equation follows by testing the original distributional equation against a compactly supported test in the single component and integrating its principal part once. [F2] therefore gives all components in $H^2$ on an inner patch, with the same bound. Cover $M$ by finitely many inner patches, each with a larger precompact outer patch, to get $\\|u\\|_{H^2}\\le C(\\|f\\|_{L^2}+\\|u\\|_{H^1}).$ The lower matrices have been moved to the source; no coupled principal system or Dirichlet theorem is imported.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "After step 2.2, interpolation [F2] on the finitely many zero-extended localized coefficients gives $\\|u\\|_{H^1}\\le\\varepsilon\\|u\\|_{H^2}+C_\\varepsilon\\|u\\|_2$; cutoff derivatives add only lower-order terms, absorbed by choosing their interpolation tolerances small. Choose $C\\varepsilon<1/2$ to obtain the stated $k=0$ estimate. For induction, suppose $f\\in H^k$ and $u\\in H^{k+1}$, $k\\ge1$. On nested patches differentiate the scalar principal equation $k$ times. For $|\\alpha|=k$, $w=\\partial^\\alpha u_\\beta\\in H^1$ satisfies the same scalar second-order equation with source $\\partial^\\alpha f_\\beta$ plus terms involving at most $k+1$ derivatives of $u$: in the commutator with the principal term at least one derivative hits $a$, and the lower terms have order at most one. All these terms are $L^2$, with bound $C_k(\\|f\\|_{H^k}+\\|u\\|_{H^{k+1}})$. Apply [F2] to $w$ on successively smaller patches and sum to get $\\|u\\|_{H^{k+2}}\\le C_k(\\|f\\|_{H^k}+\\|u\\|_{H^{k+1}})$. Repeated use of the interpolation inequality of [F2] gives $\\|u\\|_{H^{k+1}}\\le\\varepsilon\\|u\\|_{H^{k+2}}+C_{k,\\varepsilon}\\|u\\|_2$; absorb again. Starting with step 2.2 and using $f\\in H^k\\subset H^{k-1}$ proves the required membership before this absorption. The embedding of step 2.1 then proves smoothness for smooth $f$.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "Let $a(u,v)$ be the form obtained from $(Pu,v)_{L^2}$ by integrating the second-order principal term once, initially for smooth sections. It is bounded on $H^1\\times H^1$: its integrands have at most one derivative in either factor and bounded coefficients. Formal symmetry and smooth density give $a(u,v)=\\overline{a(v,u)}$. To prove a global lower bound, choose real smooth cutoffs $\\chi_i$ supported in the charts with $\\sum_i\\chi_i^2=1$ (normalize a finite family of bumps by the positive smooth square root of their sum of squares). For smooth $u$, the principal integral of $a(\\chi_i u,\\chi_i u)$ is bounded below by $c_i\\|\\partial(\\chi_i u)\\|_2^2$: positive definiteness of the scalar coefficient and the positive bundle metric give this bound uniformly on its support. Every remaining term is bounded by $C\\|\\chi_i u\\|_2\\|\\chi_i u\\|_{H^1}+C\\|\\chi_i u\\|_2^2$ and Young's inequality absorbs half the leading gradient. In the sum over $i$, $a(u,u)-\\sum_i a(\\chi_i u,\\chi_i u)$ contains only terms with a derivative on a cutoff; second derivatives on $u$ cancel by $\\sum_i\\chi_i^2=1$, and these remaining terms are bounded by $C\\|u\\|_2\\|u\\|_{H^1}+C\\|u\\|_2^2$. Absorb once more. Norm equivalence yields constants $c>0,C$ with $a(u,u)\\ge c\\|u\\|_{H^1}^2-C\\|u\\|_2^2.$ Density extends this real inequality and the bounded form to all $H^1$.",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F6",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Fix $\\lambda>C+1$. Then $a_\\lambda=a+\\lambda(\\cdot,\\cdot)_2$ is coercive on $H^1$, so [F4] gives for every $f\\in L^2$ a unique $u=Bf\\in H^1$ with $a_\\lambda(u,v)=(f,v)_2$ for every $v\\in H^1$, with $\\|u\\|_{H^1}\\le C'\\|f\\|_2$. Testing smoothly gives $Pu=f-\\lambda u$ distributionally; step 3.1 gives $u\\in H^2$ and $\\|u\\|_{H^2}\\le C''\\|f\\|_2$. Conversely any $u\\in H^2$ has $Pu\\in L^2$ and integration by parts, passed by smooth approximation, gives the same weak identity with $f=(P+\\lambda)u$. Uniqueness shows both inverse identities and $\\operatorname{ran}B=H^2$. Symmetry gives $(Bf,g)_2=a_\\lambda(Bf,Bg)=(f,Bg)_2$, so $B$ is bounded selfadjoint. Its range contains all smooth sections and is therefore dense; $Bf=0$ implies $(f,v)_2=0$ for every smooth $v$, hence $f=0$. Compactness follows from its bounded $H^2$ range and step 2.1.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Selfadjointness of the unbounded domain is proved directly. Put $A=P+\\lambda$ with domain $H^2=\\operatorname{ran}B$. It is densely defined and symmetric. If $y$ belongs to $\\operatorname{dom}A^*$ with $A^*y=z$, then $(Au,y)_2=(u,z)_2$ for every $u\\in H^2$. Set $u=Bf$ for arbitrary $f\\in L^2$ and use symmetry of $B$ to obtain $(f,y)_2=(Bf,z)_2=(f,Bz)_2$; thus $y=Bz\\in H^2$ and $Ay=z$. Conversely symmetry puts every $H^2$ element in $\\operatorname{dom}A^*$. Hence $A=A^*$, and subtracting the bounded real scalar $\\lambda$ gives $P=P^*$ on exactly $H^2$. Higher regularity step 3.1, with $Pu=f-\\lambda u$, inductively yields $B:H^k\\to H^{k+2}$ bounded (use $\\|Bf\\|_2\\le C\\|f\\|_2$ and the already obtained lower-order bounds), and gives smooth preservation.",
+          "step": "5.1",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The inverse identities in step 4.1 give $PB=I-\\lambda B$ on $L^2$ and $BP=I-\\lambda B$ on $H^2$. On $L^2$ the error is compact by step 4.1; on $H^2$ the restriction $B:H^2\\to H^4$ is bounded by step 5.1 and $H^4\\hookrightarrow H^2$ compact by two uses of step 2.1. Thus both are parametrices modulo compact operators on their respective spaces. All four conclusions, including the explicitly proved selfadjoint domain, follow.",
+          "step": "6.1",
+          "inputs": [
+            "step 2.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The finite chart and partition data of step 3.1 and remark are empty exactly when the section is zero or the manifold has no points; the estimates and steps 4.1, 6.1 remain valid with zero data."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section and zero source are covered: B is linear and B 0=0 by step 4.1; the parametrix identities of step 6.1 hold at f=0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No counting or unit parameter occurs; rank one and dimension two are ordinary cases of steps 1.1 through 6.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Lower-order operators and operators with vanishing lower coefficients are ordinary cases: step 2.2 rewrites the principal part and step 3.2 absorbs the lower terms."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The induction endpoints k=0 and the unbounded high-order case are the base step 2.2 and the induction step 3.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Full AC is used exactly for the countable selections of partitions, subsequences, approximants and test data in steps 1.1, 2.1, 3.1 and 4.1; the supplier interface is [F5]."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem lists assertions, not an if-and-only-if claim; no forward case exists."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The theorem lists assertions, not an if-and-only-if claim; no reverse case exists."
+        }
+      ]
+    },
+    "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact smooth manifold without boundary of real dimension $n\\ge2$, equipped with a smooth positive density, and $E\\to M$ a finite-rank real Euclidean or complex Hermitian smooth vector bundle. Let $P$ be a smooth-coefficient second-order differential operator on $E$, formally symmetric for the density and metric, whose positive-frequency principal symbol is\n$$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)I_{E_x},$$\nwhere $a$ is a smooth positive-definite real quadratic form on cotangent vectors. Thus in any local frame $P=-a^{ij}\\partial_i\\partial_j+B^j\\partial_j+C$, with scalar real positive-definite $a^{ij}$ and matrix-valued lower coefficients. Nonnegativity of $P$ is not needed here.\n\nFor nonnegative integers $k$, define $H^k(M,E)$ by requiring the coefficients of each member of a finite smooth partition of unity times the section, in precompact bundle charts and extended by zero, to lie in $H^k(\\mathbb R^n)$; the norm is the square root of the sum of these component Sobolev norms squared. Different such choices give equivalent norms. The following hold.\n\n1. These are Hilbert spaces, smooth sections are dense, $H^0=L^2$ with equivalent norms, $H^{k+1}\\hookrightarrow H^k$ is compact, and $H^k\\hookrightarrow C^r$ continuously whenever $k>r+n/2$.\n2. If $u\\in H^1$ and $Pu=f\\in H^k$ distributionally, then $u\\in H^{k+2}$ and\n$$\\|u\\|_{H^{k+2}}\\le C_k(\\|f\\|_{H^k}+\\|u\\|_{L^2}).$$\nIn particular smooth data give smooth weak solutions. The same estimate holds for all $u\\in H^{k+2}$.\n3. For sufficiently large real $\\lambda>0$, $P+\\lambda:H^2\\to L^2$ is a bounded bijection with bounded inverse $B:L^2\\to H^2$. As an operator on $L^2$, $B$ is compact, injective and selfadjoint, has dense range $H^2$, and the unbounded operator $P$ with domain exactly $H^2$ is selfadjoint. The map $B:H^k\\to H^{k+2}$ is bounded for every nonnegative integer $k$ and preserves smooth sections.\n4. It supplies two-sided parametrices **modulo compact operators**:\n$$PB=I-\\lambda B\\quad\\hbox{on }L^2,\\qquad BP=I-\\lambda B\\quad\\hbox{on }H^2.$$\nHere on the second space $B$ denotes its restriction after inclusion $H^2\\hookrightarrow L^2$; it is compact on $H^2$. No assertion concerning arbitrary-order elliptic operators, or pseudodifferential symbol classes, is part of this theorem.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orthogonal-decomposition-by-a-closed-subspace",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $M$ be a closed linear subspace of a real or complex Hilbert space $H$. Then every $x\\in H$ has a unique decomposition\n\n$$x=m+n,\\qquad m\\in M,\\quad n\\in M^\\perp ,$$\n\nso that $H=M\\oplus M^\\perp$ as a direct sum of the subspace $M$ and its orthogonal complement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Every $h\\in\\mathcal H$ belongs to $H^2\\subset H^1$ and satisfies $Ph=0$; [F1] applied at all integer orders gives a smooth representative and $\\|h\\|_{H^2}\\le C\\|h\\|_2$. The kernel is closed in $L^2$: if $h_j\\to h$ there, the same estimate for $h_j-h_i$ makes it Cauchy in $H^2$; its $H^2$ limit is $h$ and continuity $P:H^2\\to L^2$ gives $Ph=0$. If this closed Hilbert subspace were infinite dimensional, AC permits successively choosing unit vectors orthogonal to the span of earlier choices, producing an orthonormal sequence. The sequence is bounded in $H^2$, so [F1] gives an $L^2$ convergent subsequence, contradicting the distance $\\sqrt2$ between distinct members. Hence $\\mathcal H$ is finite dimensional.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There is $c>0$ such that $\\|u\\|_2\\le c\\|Pu\\|_2$ for every $u\\in H^2\\cap\\mathcal H^\\perp$. Otherwise select $u_j$ in that subspace with $\\|u_j\\|_2=1$ and $\\|Pu_j\\|_2<1/j$. The elliptic estimate bounds it in $H^2$, so compactness gives an $L^2$ convergent subsequence. Applying the elliptic estimate to differences shows this subsequence is Cauchy in $H^2$, since both it and its images under $P$ converge in $L^2$. Its $H^2$ limit $u$ has $Pu=0$, $u\\perp\\mathcal H$, and $\\|u\\|_2=1$, a contradiction. Combining the obtained bound with [F1] yields $\\|u\\|_{H^2}\\le C'\\|Pu\\|_2$ on that complement.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Suppose $Pu_j\\to f$ in $L^2$. Subtract the orthogonal projection of each $u_j$ onto the finite smooth space $\\mathcal H$; its image under $P$ does not change. Step 2.1 makes the resulting sequence Cauchy in $H^2$, so it has a limit $u$ there with $Pu=f$. Thus the range is closed. A vector $y\\in L^2$ is orthogonal to the range exactly when $(Pu,y)_2=0$ for every $u\\in\\operatorname{dom}P$, which by the definition of unbounded adjoint says $y\\in\\operatorname{dom}P^*$ and $P^*y=0$. Selfadjointness in [F1] identifies this with $y\\in\\mathcal H$. [F2] applied to the closed range therefore gives $\\operatorname{ran}P=\\mathcal H^\\perp$ and the claimed $L^2$ decomposition.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For $f\\in\\mathcal H^\\perp$, step 3.1 gives a preimage in $H^2$; subtracting its harmonic projection gives a preimage in $H^2\\cap\\mathcal H^\\perp$, unique because the difference of two lies in $\\mathcal H\\cap\\mathcal H^\\perp$. Define $Gf$ to be this preimage and define $G=0$ on $\\mathcal H$. Uniqueness gives linearity. Step 2.1 gives its $L^2\\to H^2$ bound. The construction proves both inverse identities and $G\\Pi=\\Pi G=0$. Compactness on $L^2$ follows from [F1]. For $f,g\\in\\mathcal H^\\perp$, symmetry of $P$ gives $(Gf,g)_2=(Gf,PGg)_2=(PGf,Gg)_2=(f,Gg)_2$; harmonic cross terms vanish, so $G$ is selfadjoint on all $L^2$.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Choose a finite $L^2$ orthonormal basis $e_1,\\ldots,e_N$ of $\\mathcal H$. Each is smooth, and $\\Pi f=\\sum_j(f,e_j)_2e_j$. Cauchy–Schwarz gives $\\|\\Pi f\\|_{C^r}\\le\\sum_j\\|f\\|_2\\|e_j\\|_2\\|e_j\\|_{C^r}$, including the empty-basis case. Thus $\\Pi$ is smoothing and bounded from $L^2$ to every $H^k$. If $f\\in H^k$, the equation $PGf=f-\\Pi f$ and [F1] give $Gf\\in H^{k+2}$ with $\\|Gf\\|_{H^{k+2}}\\le C_k(\\|f-\\Pi f\\|_{H^k}+\\|Gf\\|_2)\\le C'_k\\|f\\|_{H^k}$. All integer orders give smooth preservation. The Green identities express every $H^k$ section as $\\Pi f+PGf$ and identify the image summand with $H^k\\cap\\mathcal H^\\perp$. This summand is closed, and both projections are bounded; the smooth version follows and is continuous in every smooth seminorm from the same bounds and Sobolev embedding.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $P$ is formally nonnegative on smooth sections, density in $H^2$ and continuity of the pairing extend $(Pu,u)_2\\ge0$ to all $u\\in H^2$. For $f\\in L^2$, put $u=Gf$; then $(Gf,f)_2=(u,Pu)_2\\ge0$, since $u\\perp\\Pi f$. This proves the optional positivity claim. The inverse identities of step 4.1 and the smoothing projection of step 5.1 prove the final parametrix assertion.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty kernel case is included: step 1.1 handles the possibly zero-dimensional harmonic space and step 5.1 writes Pi f with an empty orthonormal basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section and zero source are covered; G 0=0 and Pi 0=0 by step 5.1 and the identities of step 4.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-dimensional kernel is the ordinary size-one orthonormal basis of step 5.1; no other unit parameter occurs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case of no harmonic sections is included in step 5.1 through the empty basis, and step 3.1 covers the case where the range is all of L2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoints k=0 of the decompositions and r=0 of the smoothing estimate are covered by step 5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC is used through [F1] and the orthogonal choices in steps 1.1 and 2.1; no further selection occurs in steps 3.1 through 6.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states assertions and a bicontinuous decomposition, not an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The item states assertions and a bicontinuous decomposition, not an if-and-only-if claim."
+        }
+      ]
+    },
+    "thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology": {
+      "risk": "high",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M,E,P$ have exactly the compact, boundaryless, scalar-positive-symbol and formal symmetry hypotheses of [[thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity]], with $\\operatorname{dom}P=H^2(M,E)$. Write $\\mathcal H=\\ker P$.\n\nThen $\\mathcal H$ is finite dimensional and consists of smooth sections, $\\operatorname{ran}P=\\mathcal H^\\perp$ is closed in $L^2$, and\n$$L^2(M,E)=\\mathcal H\\mathbin{\\oplus^\\perp}\\operatorname{ran}P.$$\nLet $\\Pi$ be the orthogonal projection onto $\\mathcal H$. There is a unique linear operator $G:L^2\\to H^2\\cap\\mathcal H^\\perp$ with\n$$PG=I-\\Pi\\quad\\hbox{on }L^2,\\qquad GP=I-\\Pi\\quad\\hbox{on }H^2,\\qquad G\\Pi=\\Pi G=0.$$\nIt is bounded from $H^k$ to $H^{k+2}$ for every integer $k\\ge0$, compact and selfadjoint on $L^2$, and preserves smooth sections. For all such $k$,\n$$H^k=\\mathcal H\\oplus P(H^{k+2}),\\qquad C^\\infty(M,E)=\\mathcal H\\oplus P(C^\\infty(M,E)),$$\nwhere the second summands are the corresponding intersections with $\\mathcal H^\\perp$, and the decompositions are topological. The projection is smoothing: for every integer $r\\ge0$, $\\|\\Pi f\\|_{C^r}\\le C_r\\|f\\|_2$. Consequently $G$ is a two-sided parametrix with finite-rank smoothing remainders. If additionally $(Pu,u)_2\\ge0$ for smooth $u$, then $P$ and $G$ are nonnegative on their respective domains.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-local-coordinate-formula-for-the-exterior-derivative",
+          "source_section": "Statement",
+          "quote": "Let $(U,x^1,\\ldots,x^n)$ be a smooth chart on a smooth manifold and\n$\\omega$ a smooth $k$-form on $U$, with $k\\ge0$. Summing over increasing\n$k$-tuples $I$, and writing $dx^I=dx^{i_1}\\wedge\\cdots\\wedge dx^{i_k}$, if $\\omega=\\sum_I\\omega_I\\,dx^I$, then $$d\\omega=\\sum_I d\\omega_I\\wedge dx^I.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-exterior-derivative-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "For every differential form $\\omega$, $d(d\\omega)=0$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-de-rham-cohomology",
+          "source_section": "Definition",
+          "quote": "The real **de Rham cohomology** is $H^k_{\\mathrm{dR}}(M)=Z^k(M)/B^k(M)$, with $Z^k,B^k$ as in [[def-closed-and-exact-differential-forms]].\n\nThis is [[def-cohomology-object-of-a-cochain-complex]] in real vector spaces. Only a closed form $\\omega$ represents a class $[\\omega]$. For closed forms $\\omega,\\omega\\prime$, equality $[\\omega]=[\\omega\\prime]$ means precisely $\\omega\\prime-\\omega=d\\eta$ for some $(k-1)$-form $\\eta$. Addition and real scalar multiplication are induced by those of forms. All groups on the empty manifold are zero.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-bigraded-complex-differential-forms",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb C^n$ be open. Write $\\Omega^k(U;\\mathbb C)$ for smooth\ncomplex-valued $k$-forms. For increasing multi-indices\n$I=(i_1<\\cdots<i_p)$ and $J=(j_1<\\cdots<j_q)$, write\n$dz^I=dz_{i_1}\\wedge\\cdots\\wedge dz_{i_p}$ and\n$d\\bar z^J=d\\bar z_{j_1}\\wedge\\cdots\\wedge d\\bar z_{j_q}$. The invertible\nchange of cotangent basis\n$dz_j=dx_j+i\\,dy_j$, $d\\bar z_j=dx_j-i\\,dy_j$ gives the direct sum\ndecomposition\n\n$$\\Omega^k(U;\\mathbb C)=\\bigoplus_{p+q=k}\\Omega^{p,q}(U),\\qquad \\Omega^{p,q}(U)=\\left\\{\\sum_{I,J}a_{I,J}(z)\\,dz^I\\wedge d\\bar z^J:a_{I,J}\\in C^\\infty(U;\\mathbb C)\\right\\},$$\n\nwhere $0\\le p,q\\le n$ and every sum is finite. On a $(p,q)$ form\n$\\eta=\\sum_{I,J}a_{I,J}dz^I\\wedge d\\bar z^J$, define\n\n$$\\partial\\eta=\\sum_{I,J,j}(\\partial_{z_j}a_{I,J})\\,dz_j\\wedge dz^I\\wedge d\\bar z^J,\\qquad \\bar\\partial\\eta=\\sum_{I,J,j}(\\partial_{\\bar z_j}a_{I,J})\\,d\\bar z_j\\wedge dz^I\\wedge d\\bar z^J.$$\n\nRepeated differentials vanish by alternation; components outside the range\n$0\\le p,q\\le n$ are zero. These operators are the components of $d$ of\nbidegrees $(p+1,q)$ and $(p,q+1)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-d-dbar-decomposition-and-identities",
+          "source_section": "Statement",
+          "quote": "Let $U\\subseteq\\mathbb C^n$ be open and let all forms below be smooth and\ncomplex-valued. Then\n$$d=\\partial+\\bar\\partial,\\qquad \\partial^2=0,\\qquad \\bar\\partial^2=0,\\qquad \\partial\\bar\\partial+\\bar\\partial\\partial=0.$$\nFor $\\eta\\in\\Omega^{p,q}(U)$ and $\\theta\\in\\Omega^{r,s}(U)$,\n$$\\partial(\\eta\\wedge\\theta)=\\partial\\eta\\wedge\\theta+(-1)^{p+q}\\eta\\wedge\\partial\\theta,\\qquad \\bar\\partial(\\eta\\wedge\\theta)=\\bar\\partial\\eta\\wedge\\theta+(-1)^{p+q}\\eta\\wedge\\bar\\partial\\theta.$$\nThe identities hold at bidegree endpoints as well, with components outside\n$0\\le p,q\\le n$ interpreted as zero.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-e-valued-dolbeault-operators-and-ltwo-structure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a complex manifold of dimension $m\\ge1$\n([[def-complex-manifolds-and-holomorphic-vector-bundles]]) with a Hermitian\nmetric $g$, and let $E\\to X$ be a holomorphic vector bundle of rank $r$ with a\nHermitian metric $h$ ([[def-complex-manifolds-and-holomorphic-vector-bundles]]).\nFix integers $p,q\\ge0$. In a holomorphic chart with coordinates\n$z=(z_1,\\ldots,z_m)$ and a holomorphic frame of $E$, an **$E$-valued\n$(p,q)$-form** is an expression\n$$s=\\sum_{|I|=p}\\sum_{|J|=q}s_{IJ}\\otimes dz^I\\wedge d\\bar z^J,$$\nwith $s_{IJ}$ smooth local sections of $E$ and increasing multi-indices $I,J$\n([[def-bigraded-complex-differential-forms]]); such expressions agree on\noverlaps because holomorphic changes of coordinates preserve bidegree and\nholomorphic frame changes are complex-linear. The resulting smooth global\nsections of the bundle $\\Lambda^{p,q}T^*X\\otimes E$ are denoted\n$\\mathcal A^{p,q}(X,E)$; the bundle is zero, and so is\n$\\mathcal A^{p,q}(X,E)$, when $p>m$ or $q>m$.\n\nThe **Dolbeault operator** is the first-order operator\n$$\\bar\\partial_E:\\mathcal A^{p,q}(X,E)\\to\\mathcal A^{p,q+1}(X,E),\\qquad \\bar\\partial_E s=\\sum_{I,J}\\sum_{k=1}^m \\bar\\partial_{z_k}s_{IJ}\\otimes d\\bar z_k\\wedge dz^I\\wedge d\\bar z^J,$$\nwith the Wirtinger operators $\\bar\\partial_{z_k}$\n([[def-wirtinger-operators-in-several-complex-variables]],\n[[def-bigraded-complex-differential-forms]]) acting componentwise on the local\nsections $s_{IJ}$. It is independent of the holomorphic chart and frame, and\n$\\bar\\partial_E^2=0$\n([[thm-d-dbar-decomposition-and-identities]]); both assertions are proved\nbelow.\n\nEquip $\\Lambda^{p,q}T^*X\\otimes E$ with the Hermitian metric induced by $g$ and\n$h$ ([[prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles]]\nand [[def-complex-manifolds-and-holomorphic-vector-bundles]]). For compactly\nsupported smooth $s,t\\in\\mathcal A^{p,q}(X,E)$ the **$L^2$ pairing**\n$$\\langle s,t\\rangle_{L^2}=\\int_X\\langle s,t\\rangle\\,d\\mu_g$$\nuses the Riemannian volume density $\\mu_g$\n([[def-riemannian-volume-density]],\n[[def-integral-of-a-compactly-supported-smooth-density]]) and is a complex\ninner product in the first-variable-linear convention\n([[def-complex-l-two-inner-product]]); its completion\n$L^2(X,\\Lambda^{p,q}T^*X\\otimes E)$ is a complex Hilbert space\n([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]],\n[[thm-complex-holder-minkowski-and-the-quotient-norm]]). By\n[[lem-formal-adjoints-of-differential-operators-exist-and-are-unique]] the\noperator $\\bar\\partial_E$ has a **formal adjoint**\n$\\bar\\partial_E^*:\\mathcal A^{p,q+1}(X,E)\\to\\mathcal A^{p,q}(X,E)$, the unique\nsmooth first-order operator with\n$$\\langle\\bar\\partial_Es,t\\rangle_{L^2}=\\langle s,\\bar\\partial_E^*t\\rangle_{L^2}$$\nfor all compactly supported smooth forms.\n\nThe **Dolbeault Laplacian**\n$\\Delta_{\\bar\\partial_E}=\\bar\\partial_E\\bar\\partial_E^*+\\bar\\partial_E^*\\bar\\partial_E$\nis a formally symmetric Laplace-type second-order operator\n([[def-second-order-laplace-type-operators-on-vector-bundles]]) preserving each\nbidegree $(p,q)$, with\n$$\\langle\\Delta_{\\bar\\partial_E}s,s\\rangle_{L^2}=\\|\\bar\\partial_Es\\|_2^2+\\|\\bar\\partial_E^*s\\|_2^2\\ge0$$\nfor compactly supported smooth $s$. Its principal symbol is\n$\\sigma_2(\\Delta_{\\bar\\partial_E})(x,\\xi)=|\\xi^{0,1}|_g^2\\,\\mathrm{id}$, where\n$\\xi^{0,1}$ is the $(0,1)$-part of $\\xi\\in T_x^*X$; in particular the principal\nform is smooth, and it is positive definite on nonzero real covectors.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-formal-adjoints-of-differential-operators-exist-and-are-unique",
+          "source_section": "Statement",
+          "quote": "Let $M$ be a Hausdorff second-countable smooth manifold without boundary,\n$\\mu$ a smooth positive density on $M$, and $E,F\\to M$ finite-rank smooth vector\nbundles over $\\mathbb K=\\mathbb R$ or $\\mathbb C$ with smooth bundle metrics,\nHermitian (first-variable-linear) in the complex case, with the conventions of\n[[def-second-order-laplace-type-operators-on-vector-bundles]]. Let\n$P:\\Gamma(E)\\to\\Gamma(F)$ be a linear differential operator of order at most two\n(the target-$F$ version of the local description in\n[[def-second-order-laplace-type-operators-on-vector-bundles]]).\n\nThen there is a unique linear differential operator $P^\\star:\\Gamma(F)\\to\\Gamma(E)$\nof order at most two such that\n$$\\int_M\\langle Pu,v\\rangle_F\\,d\\mu=\\int_M\\langle u,P^\\star v\\rangle_E\\,d\\mu$$\nfor all compactly supported smooth sections $u\\in\\Gamma_c(E)$ and\n$v\\in\\Gamma_c(F)$; it is the **formal adjoint** of $P$. It is given locally as\nfollows: in a chart with coordinates $x$, with density coefficient $\\gamma>0$\ndefined by $\\mu=\\gamma\\,|dx^1\\cdots dx^n|$\n([[def-density-bundle-and-smooth-density]]), with frames of $E$ and $F$\northonormal for the metrics (equivalently unitary in the complex case; such\nframes exist locally by applying Gram–Schmidt to any local frame,\n[[thm-gram-schmidt-orthonormalisation]]), and with local coefficients\n$Pu=\\sum_{|\\alpha|\\le2}a_\\alpha D^\\alpha u$,\n$$P^\\star v=\\sum_{|\\alpha|\\le2}(-1)^{|\\alpha|}\\gamma^{-1}D^\\alpha\\bigl(\\gamma\\,a_\\alpha^*v\\bigr),$$\nwhere $a_\\alpha^*$ is the fibre adjoint. Consequently:\n1. if the leading coefficients of $P$ of order $\\delta\\in\\{0,1,2\\}$ are the\n   matrices $a_\\alpha$, $|\\alpha|=\\delta$, then those of $P^\\star$ are\n   $(-1)^\\delta a_\\alpha^*$, computed in the same orthonormal frames; in\n   particular the formal adjoint of a Laplace-type operator is again Laplace\n   type and its principal symbol is unchanged,\n   $\\sigma_2(P^\\star)=\\sigma_2(P)$;\n2. $(P^\\star)^\\star=P$;\n3. if $E=F$, then $P$ is formally symmetric in the sense of\n   [[def-second-order-laplace-type-operators-on-vector-bundles]] exactly when\n   $P=P^\\star$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-second-order-laplace-type-operators-on-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a Hausdorff second-countable smooth manifold without boundary of\ndimension $n\\ge2$ ([[def-smooth-manifold]]), let $\\mu$ be a smooth positive\ndensity on $M$ ([[def-density-bundle-and-smooth-density]]), and let $E\\to M$ be\na finite-rank smooth vector bundle\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]]) over\n$\\mathbb K=\\mathbb R$ or $\\mathbb C$ carrying a smooth bundle metric\n$\\langle\\cdot,\\cdot\\rangle$ ([[def-smooth-bundle-metric]]), Euclidean in the\nreal case and Hermitian, linear in the first variable, in the complex case; in\nthe complex case the fibres are complex vector spaces through a smooth complex\nstructure on $E$\n([[def-complex-linear-and-compatible-bundle-connections]]). Write $\\Gamma(E)$\nfor the smooth sections ([[def-smooth-section-local-section-and-support]]).\n\nA $\\mathbb K$-linear map $P:\\Gamma(E)\\to\\Gamma(E)$ is a **linear differential\noperator of order at most two** on $E$ when, on every chart domain $\\Omega$ of\n$M$ with coordinates $x=(x^1,\\ldots,x^n)$ and in every local frame of $E$ over\n$\\Omega$ in which a section is written $s\\leftrightarrow u=(u^1,\\ldots,u^r)$\nand its image as $Ps\\leftrightarrow((Ps)_1,\\ldots,(Ps)_r)$,\n$$(Ps)_\\lambda=-\\sum_{i,j=1}^na^{ij}_{\\lambda\\mu}(x)\\,\\partial_i\\partial_ju^\\mu(x)+\\sum_{j=1}^nb^j_{\\lambda\\mu}(x)\\,\\partial_ju^\\mu(x)+c_{\\lambda\\mu}(x)u^\\mu(x),\\qquad1\\le\\lambda\\le r,$$\nwith smooth coefficient functions on $\\Omega$ and summation over the repeated\nindex $\\mu$ (and over $i,j$). Such an operator is **Laplace type** when in\naddition, in every such chart and frame, its second-order coefficients are\nscalar multiples of the identity, $a^{ij}_{\\lambda\\mu}=a^{ij}\\delta_{\\lambda\\mu}$,\nwith $a^{ij}$ smooth real functions for which the matrix $(a^{ij}(x))$ is\nsymmetric and positive definite at every $x\\in\\Omega$. Its **principal symbol**\nis the smooth section $\\sigma_2(P)$ of $\\mathrm{Sym}^2T^*M$\n([[def-smooth-tensor-field]]) given on such a chart by\n$\\sigma_2(P)(x,\\xi)=a^{ij}(x)\\xi_i\\xi_j$ for $\\xi\\in T_x^*M$; equivalently\n$\\sigma_2(P)(x,\\xi)=a_x(\\xi,\\xi)\\,\\mathrm{id}_{E_x}$ for a smooth field of\npositive-definite quadratic forms $a_x$ on $T_x^*M$, so that\n$\\sigma_2(P)(x,\\xi)>0$ whenever $\\xi\\ne0$.\n\n$P$ is **formally symmetric** for $(\\mu,\\langle\\cdot,\\cdot\\rangle)$ when\n$$\\int_M\\langle Ps,t\\rangle\\,d\\mu=\\int_M\\langle s,Pt\\rangle\\,d\\mu$$\nfor all compactly supported smooth sections $s,t\\in\\Gamma_c(E)$\n([[def-integral-of-a-compactly-supported-smooth-density]]).\n\n**Well-definedness.** The definition is local. On a fixed chart and frame the\ndisplayed assignment is a $\\mathbb K$-linear map on components with smooth\ncoefficients, and the chain rule ([[thm-chain-rule-for-total-derivatives]])\ncomputes the transition to another chart and frame on the overlap: the\nsecond-order coefficients transform by the symmetric tensor rule\n$a'^{kl}=a^{ij}\\frac{\\partial x'^k}{\\partial x^i}\\frac{\\partial x'^l}{\\partial x^j}$\ntogether with conjugation by the frame-change matrix, while the terms produced\nby the second derivatives of the coordinate change are absorbed into the\nfirst-order coefficients. Hence a single operator that admits a local\nexpression on one cover admits a local expression on every chart and frame, and\nthe two hypotheses placed on the leading coefficient are invariant: scalar-ness\nis preserved by frame conjugation and by the coordinate rule for a field of\nsymmetric matrices, and symmetric positive definiteness is preserved by both.\nThe principal symbol is therefore independent of the chart and frame, since two\nlocal expressions of the same operator differ by an operator of order at most\none; it is smooth in $(x,\\xi)$ because the $a^{ij}$ are smooth, and it is\npositive on nonzero covectors exactly when $(a^{ij})$ is positive definite.\nFormal symmetry is an identity between integrals of compactly supported smooth\nsections and therefore depends only on the operator, the density and the\nmetric.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles",
+          "source_section": "Statement",
+          "quote": "A Riemannian metric induces smooth metrics on dual, tensor and exterior bundles. On decomposable covectors, $\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle=\\det(\\langle\\alpha_i,\\beta_j\\rangle)$; increasing orthonormal wedge monomials have norm one.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-riemannian-volume-density",
+          "source_section": "Definition",
+          "quote": "The **Riemannian volume density** is $\\mu_g=\\sqrt{\\det G_x}\\,|dx^1\\cdots dx^n|$ in coordinates.\n\nThe matrix is that of [[prop-coordinate-criterion-for-a-riemannian-metric]], so its determinant is positive and smooth. The density frames and their absolute-Jacobian law are [[def-density-bundle-and-smooth-density]]. In dimension zero take the empty determinant to be one, giving weight one at every point, independently of orientation. The compatibility of these local formulas is proved in [[lem-the-riemannian-volume-density-is-coordinate-independent]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-density-bundle-and-smooth-density",
+          "source_section": "Definition",
+          "quote": "For a smooth manifold $M^n$, with boundary allowed, the **density bundle** is $DM=\\coprod_{p\\in M}D(T_pM)$. In coordinates $x$, let $|dx|=|dx^1\\cdots dx^n|$ be the density taking value one on the coordinate frame. On overlaps,\n$$|dy|=|\\det D_x y|\\,|dx|.$$\nA smooth density is a section with smooth real coefficient in these frames. Its support is the closure of its nonzero locus. The absolute determinants are positive smooth transition functions and satisfy the cocycle identities by the chain rule. A countable atlas and [[thm-vector-bundle-construction-from-a-smooth-cocycle]] therefore give a smooth line bundle. For boundary charts the same gluing proof uses half-space product charts; smoothness of transitions follows from their local extensions, and Hausdorffness and second countability follow as for the supplied cocycle construction. The fibers are lines by [[prop-one-densities-form-a-one-dimensional-vector-space]]. When $n=0$ the empty frame trivializes $DM=M\\times\\mathbb R$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-compactly-supported-smooth-density",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $\\delta$ be a compactly supported smooth density on $M^n$, with boundary allowed. Choose a chart partition $(\\rho_i)$ and write $\\rho_i\\delta=f_i|dx_i|$. For $n\\geq1$ define\n$$\\int_M\\delta=\\sum_i\\int_{\\mathbb R^n}\\widetilde f_i(x_i)\\,dx_i.$$\nThe zero extensions are Riemann integrable, including at genuine faces, by [[lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions]]. The compact-support/local-finiteness argument of [[lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form]] applies to density supports as closed sets, so the sum is finite. For $n=0$ sum the scalar density values over the finite support, without orientation signs. Empty support gives zero. Choice independence is discharged by [[thm-density-integration-is-defined-without-an-orientation]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-complex-manifolds-and-holomorphic-vector-bundles",
+          "source_section": "Definition",
+          "quote": "Let $m\\ge1$. A **chart** on a topological space $X$ is a homeomorphism\n$\\varphi:U\\to\\varphi(U)$ from an open set $U\\subseteq X$ onto an open subset of\n$\\mathbb C^m$ with its usual topology ([[def-homeomorphism-and-open-maps]]);\ntwo charts $\\varphi,\\psi$ are **holomorphically compatible** when the\ntransition maps $\\psi\\circ\\varphi^{-1}$ and $\\varphi\\circ\\psi^{-1}$ are\nholomorphic on the open sets where they are defined\n([[def-holomorphic-function-in-several-complex-variables]]). A **holomorphic\natlas** is a family of pairwise compatible charts whose domains cover $X$. A\n**complex manifold of dimension $m$** is a nonempty Hausdorff\n([[def-hausdorff-space]]) second-countable ([[def-second-countable-space]])\ntopological space carrying a holomorphic atlas; the same maximal-atlas argument\nas for [[def-riemann-surface-and-holomorphic-atlas]] applies verbatim with\n$\\mathbb C^m$ in place of $\\mathbb C$: the union of a holomorphic atlas with all\ncharts compatible with it is again a holomorphic atlas, so one passes to the\nunique maximal atlas and calls its members holomorphic charts. Each chart is a\nhomeomorphism onto an open subset of $\\mathbb C^m\\cong\\mathbb R^{2m}$, so $X$ is\na topological manifold without boundary of real dimension $2m$\n([[def-topological-manifold-without-boundary]]), and for connected $X$ the case\n$m=1$ recovers Riemann surfaces ([[def-riemann-surface-and-holomorphic-atlas]]).\n\nA **holomorphic map** $f:X\\to Y$ between complex manifolds is a continuous map\nwhose expression in every pair of holomorphic charts is holomorphic\n([[def-holomorphic-map-and-complex-jacobian]]); equivalently, composition with\n$f$ preserves holomorphic functions.\n\n**Induced smooth structure and complex structure.** Holomorphic functions on\nopen subsets of $\\mathbb C^m$ are smooth\n([[cor-holomorphic-functions-in-several-variables-are-smooth]]), so every\nholomorphic atlas is a smooth atlas ([[def-smooth-atlas]]) and $X$ is a smooth\nmanifold of real dimension $2m$ ([[def-smooth-manifold]]) whose smooth charts\ninclude the holomorphic ones. In holomorphic coordinates\n$z_k=x_k+iy_k$ the **complex structure** is the endomorphism field $J$ of the\ntangent bundle determined by $J\\partial_{x_k}=\\partial_{y_k}$ and\n$J\\partial_{y_k}=-\\partial_{x_k}$; it satisfies $J^2=-\\mathrm{id}$ and is\nindependent of the holomorphic chart, because a holomorphic transition map has\ncomplex-linear differential ([[def-holomorphic-map-and-complex-jacobian]],\n[[thm-chain-rule-for-holomorphic-maps-in-several-variables]]) and complex-linear\nmaps intertwine the two coordinate definitions of multiplication by $i$. A\n**Hermitian metric** on $X$ is a Riemannian metric $g$\n([[def-riemannian-metric-and-riemannian-manifold]]) satisfying\n$g(Jv,Jw)=g(v,w)$ for all tangent vectors $v,w$; its Riemannian volume density\nis written $\\mu_g$ ([[def-riemannian-volume-density]]). The complex structure\nmakes each tangent space a complex vector space, so the tangent bundle is a\nsmooth complex vector bundle in the sense of\n[[def-complex-linear-and-compatible-bundle-connections]].\n\n**Holomorphic vector bundles and Hermitian bundle metrics.** A **holomorphic\nvector bundle of rank $r$** on $X$ is a smooth complex vector bundle\n$\\pi:E\\to X$ of rank $r$\n([[def-smooth-vector-bundle-rank-fibre-and-trivial-bundle]],\n[[def-complex-linear-and-compatible-bundle-connections]]) together with an open\ncover $(V_\\alpha)$ of $X$ and smooth local trivializations\n$\\theta_\\alpha:E|_{V_\\alpha}\\to V_\\alpha\\times\\mathbb C^r$ whose transition\nmatrices $g_{\\alpha\\beta}:V_\\alpha\\cap V_\\beta\\to\\mathrm{GL}_r(\\mathbb C)$,\ndefined by $\\theta_\\alpha\\theta_\\beta^{-1}(p,v)=(p,g_{\\alpha\\beta}(p)v)$, are\nholomorphic. A **holomorphic frame** over an open set $V$ is such a\ntrivialization. Changing holomorphic frame multiplies a local section by a\nholomorphic matrix, hence a smooth local section is **holomorphic** exactly when\nits representatives in holomorphic frames are holomorphic functions. A\n**Hermitian metric** $h$ on $E$ is a smooth bundle metric\n([[def-smooth-bundle-metric]]) whose fibre pairings are positive definite\nHermitian forms, linear in the first variable and conjugate-linear in the\nsecond; the condition is frame-independent because the gauge freedom is\nconjugation by a pointwise invertible matrix. Smooth sections are\n$\\Gamma(E)$ ([[def-smooth-section-local-section-and-support]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$(X,\\mathcal A,\\mu)$ be a measure space and let\n$L^2(\\mu)$ be the quotient of $\\mathcal L^2(\\mu)$ by the almost-everywhere zero\nfunctions ([[def-l-p-space-as-a-quotient-by-null-functions]]), with the quotient\nnorm $\\|\\cdot\\|_2$ ([[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]]).\n\n1. On **real** $L^2(\\mu)$ the formula\n   $$\\langle f,g\\rangle:=\\int fg\\,d\\mu$$is a well-defined inner product, linear in both variables, positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu)$ is a real Hilbert space ([[def-hilbert-space]]). 2. On **complex** $L^2(\\mu;\\mathbb C)$ the formula$$\\langle f,g\\rangle:=\\int f\\overline g\\,d\\mu$$\n   is a well-defined inner product, linear in the first variable and\n   conjugate-linear in the second, positive definite, with\n   $\\langle f,f\\rangle=\\|f\\|_2^2$; with it $L^2(\\mu;\\mathbb C)$ is a complex\n   Hilbert space ([[def-complex-lp-and-euclidean-test-function-conventions]]).\n\nIn both cases the inner product induces exactly the established quotient\n$L^2$ norm.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-gram-schmidt-orthonormalisation",
+          "source_section": "Statement",
+          "quote": "Let $(v_0,\\ldots,v_{r-1})$ be a finite linearly independent list in a real or complex inner product space. There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$,\n\n$$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$\n\nIt is obtained recursively from\n\n$$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$\n\nFor $r=0$, both lists are empty.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles",
+          "source_section": "Statement",
+          "quote": "A Riemannian metric induces smooth metrics on dual, tensor and exterior bundles. On decomposable covectors, $\\langle\\alpha_1\\wedge\\cdots\\wedge\\alpha_k,\\beta_1\\wedge\\cdots\\wedge\\beta_k\\rangle=\\det(\\langle\\alpha_i,\\beta_j\\rangle)$; increasing orthonormal wedge monomials have norm one.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The de Rham Laplacian satisfies the hypotheses of [F1]. Let $D=d$ on real forms, or on their complexification, and $P=DD^*+D^*D$. The coordinate formula [F2] exhibits $D$ as a smooth first-order differential operator, so [F4] supplies its unique smooth first-order formal adjoint $D^*$. In an orthonormal basis of the cotangent space at a point ([F7]), the leading coefficient matrices of $D$ multiply, on a covector $\\xi$, to exterior multiplication $\\varepsilon(\\xi)$, and those of $D^*$ are $(-1)^1$ times the metric adjoints, so they multiply to $-\\varepsilon(\\xi)^*$. The coefficient of $\\partial_i\\partial_j$ in $DD^*$ is therefore $\\varepsilon(\\xi)\\bigl(-\\varepsilon(\\xi)^*\\bigr)$ and in $D^*D$ it is $\\bigl(-\\varepsilon(\\xi)^*\\bigr)\\varepsilon(\\xi)$; by [F5] the second-order coefficient matrix of $P$ is $-(\\varepsilon(\\xi)\\varepsilon(\\xi)^*+\\varepsilon(\\xi)^*\\varepsilon(\\xi))$. The metric adjoint of $\\varepsilon(\\xi)$ is the contraction that deletes each factor of a wedge monomial pairing with $\\xi$, with alternating signs, and deleting and reinserting the same factor on both sides gives the identity $\\varepsilon(\\xi)\\varepsilon(\\xi)^*+\\varepsilon(\\xi)^*\\varepsilon(\\xi)=|\\xi|^2\\mathrm{id}$; hence the second-order coefficient of $P$ is $-|\\xi|^2\\mathrm{id}$ and its principal symbol in the sense of [F5] is $\\sigma_2(P)(x,\\xi)=|\\xi|^2\\mathrm{id}$, a smooth positive definite scalar form. Finally, for compactly supported smooth forms, $(Pu,v)_{L^2}=(D^*u,D^*v)_{L^2}+(Du,Dv)_{L^2}$ by [F4], which is conjugate-symmetric in $u,v$ and equals $\\|Du\\|_2^2+\\|D^*u\\|_2^2\\ge0$ when $u=v$; so $P$ is formally symmetric and nonnegative. Thus [F1] applies to $P$ with domain $H^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6",
+            "F7",
+            "given",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The Dolbeault Laplacian satisfies the hypotheses of [F1]. Fix $p$ and let $D=\\bar\\partial_E$ on the sum over $q$, $P=DD^*+D^*D$, with the operator and its adjoint as in [F3]; by that item $D$ is a smooth first-order operator and the Dolbeault Laplacian is the formally symmetric Laplace-type operator with $\\sigma_2(P)(x,\\xi)=|\\xi^{0,1}|^2\\mathrm{id}$, notation as in [F5]. The same computation as in step 1.1, now with $\\eta=\\xi^{0,1}$ and unitary frames ([F7]), gives the deletion identity $\\varepsilon(\\eta)\\varepsilon(\\eta)^*+\\varepsilon(\\eta)^*\\varepsilon(\\eta)=|\\eta|^2\\mathrm{id}$ including the holomorphic $p$-factors and the bundle factor, so the second-order coefficient is $-|\\eta|^2\\mathrm{id}$ and the principal symbol is $|\\xi^{0,1}|^2\\mathrm{id}$; for a nonzero real covector the $(0,1)$-part is nonzero, so the form is positive definite. The energy identity and formal symmetry are those established in [F3], and no K\\\"ahler hypothesis is used. Hence [F1] applies to this $P$ as well.",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F7",
+            "step 1.1",
+            "given",
+            "algebra",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consequences of $D^2=0$. Squaring $D^2=0$ and transposing the adjoint identity gives $(D^*)^2=0$, and expanding the two products gives $PD=DP$ and $PD^*=D^*P$. On smooth forms the energy identity of steps 1.1 and 2.1 shows $Pu=0$ exactly when $Du=0$ and $D^*u=0$; [F1] makes every $L^2$-harmonic element smooth, so this describes $\\ker P$ on $H^2$ as well. Harmonic forms are orthogonal to the images of $D$ and $D^*$: for harmonic $h$, $(Dv,h)_{L^2}=(v,D^*h)_{L^2}=0$ and $(D^*v,h)_{L^2}=(v,Dh)_{L^2}=0$. Since $D$ raises the degree by one in the de Rham grading and the second bidegree by one in the Dolbeault bigrading, while $D^*$ lowers it, the operator $P$ preserves degrees, and the unique orthogonal solution defining $G$ in [F1] preserves degree: its other degree components solve the homogeneous equation and lie in the orthogonal complement of the kernel, hence vanish; the harmonic projection preserves degree as well.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Commutation identities. For smooth $u$, $P(DGu)=D(PGu)=D(u-\\Pi u)=Du$ by step 3.1 and [F1]. The section $DGu$ is smooth and orthogonal to $\\ker P$ by step 3.1, and $Du$ is orthogonal to $\\ker P$ as well; by the uniqueness of the orthogonal solution in [F1], $DGu=GDu$. The same reasoning applied to $D^*$ gives $D^*G=GD^*$. Since $\\Pi$ projects onto $\\ker P$ and the images of $D$ and $D^*$ are orthogonal to it, $D\\Pi=D^*\\Pi=0$; taking adjoints and using that $\\Pi$ is an orthogonal projection gives $\\Pi D=\\Pi D^*=0$. All identities are asserted on smooth forms, so no composition of unbounded Hilbert-space domains has been formed.",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Decomposition and harmonic representatives. For smooth $u$, [F1] gives $u=\\Pi u+(I-\\Pi)u=\\Pi u+DD^*Gu+D^*DGu$, and the three summands are pairwise orthogonal: the harmonic summand is orthogonal to both images by step 3.1, and $(Da,D^*b)_{L^2}=(D^2a,b)_{L^2}=0$ since $D^2=0$. Conversely a harmonic form or a form in the image of $D$ or $D^*$ lies in the displayed ambient degree, so this is the orthogonal smooth decomposition. If $u$ is closed, $Du=0$, then step 4.1 gives $DGu=GDu=0$ and the coexact term vanishes: $u=\\Pi u+D(D^*Gu)$, a harmonic representative of the class. If a harmonic $h$ is exact, $h=Dv$, then $\\|h\\|_2^2=(Dv,h)_{L^2}=(v,D^*h)_{L^2}=0$ because $D^*h=0$ by step 3.1, so $h=0$; hence $h\\mapsto[h]$ is injective, and the preceding formula makes it surjective. It is linear as the composition of a linear projection with a linear quotient map, and its domain is finite dimensional by [F1]; the same argument applies over $\\mathbb R$ or $\\mathbb C$.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Conclusion and endpoints. Steps 1.1 and 2.1 verified the exact scalar-positive-symbol, formal-symmetry and nonnegativity hypotheses for the de Rham and Dolbeault Laplacians, so [F1] gives genuine nonnegative selfadjoint realizations with domain $H^2$, finite smooth kernels, smoothing projections and smooth Green inverses; steps 3.1 through 5.1 proved the degree, commutation, orthogonal-decomposition and harmonic-representative assertions for both complexes. At the endpoint degrees the operators mapping outside the displayed range are zero by the degree convention of [F3], so the identities hold there as well. The trivial line bundle case gives the usual Dolbeault cohomology of complex-valued forms, and no sheaf comparison has been used or asserted.",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty harmonic space makes Pi=0 and G the inverse of P; step 5.1 gives the decomposition with the empty summand."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero class is represented by the zero harmonic form: step 5.1 uniqueness proves that an exact harmonic form vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Degree zero forms and the trivial line bundle are ordinary cases of step 6.1; the unit constant is handled in step 5.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A vanishing cohomology group is handled by the empty kernel in step 5.1; the degenerate operator case is excluded by the positive symbol checked in steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Endpoint degrees and bidegrees, where the out-of-range operators vanish, are treated by the degree convention of step 6.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "AC enters through [F1] and the projection machinery in steps 3.1 through 5.1; steps 1.1 and 2.1 make no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The representative map is injective on harmonic forms: step 5.1 proves an exact harmonic form must vanish."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The representative map is surjective: step 5.1 writes every closed smooth form as Pi u plus an exact form."
+        }
+      ]
+    },
+    "ex-compact-flat-torus-hodge-kernel-from-energy-and-coordinates": {
+      "risk": "medium",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $M$ be a compact smooth Riemannian manifold without boundary, of real dimension at least two. Its metric defines the $L^2$ pairing on forms by the Riemannian density; orientation is unnecessary. Let $d^*$ denote the formal adjoint of $d$, and $\\Delta=dd^*+d^*d$ on total real forms, or on their complexification. With domain $H^2$ the operator is nonnegative and selfadjoint. Its degreewise smooth kernels $\\mathcal H^k$ are finite dimensional, and there is an orthogonal smooth decomposition\n$$\\Omega^k(M)=\\mathcal H^k\\mathbin{\\oplus^\\perp}d\\Omega^{k-1}(M)\\mathbin{\\oplus^\\perp}d^*\\Omega^{k+1}(M).$$\nThe map $h\\mapsto[h]$ is an isomorphism $\\mathcal H^k\\to H^k_{\\mathrm{dR}}(M)$, over $\\mathbb R$ or $\\mathbb C$ as appropriate.\n\nMore generally let $X$ be a compact complex manifold of complex dimension $m\\ge1$ with a smooth Hermitian metric. Let $E$ be a holomorphic bundle of finite rank with a smooth Hermitian metric (meaning its local frames have holomorphic invertible transition matrices). On $E$-valued $(p,q)$ forms, define $\\bar\\partial_E$ by the coefficientwise Dolbeault operator in holomorphic bundle charts and let $\\bar\\partial_E^*$ be its formal adjoint. For each fixed $p$, $\\Delta_{\\bar\\partial_E}=\\bar\\partial_E\\bar\\partial_E^*+\\bar\\partial_E^*\\bar\\partial_E$ on the sum over $q$ is nonnegative and selfadjoint on $H^2$; its smooth harmonic spaces $\\mathcal H_E^{p,q}$ are finite dimensional and\n$$\\Omega^{p,q}(X,E)=\\mathcal H_E^{p,q}\\mathbin{\\oplus^\\perp}\\bar\\partial_E\\Omega^{p,q-1}(X,E)\\mathbin{\\oplus^\\perp}\\bar\\partial_E^*\\Omega^{p,q+1}(X,E).$$\nIn particular harmonic forms represent the smooth Dolbeault quotient\n$$H_{\\bar\\partial}^{p,q}(X,E):=\\ker\\bar\\partial_E/\\operatorname{im}\\bar\\partial_E$$\nuniquely. Terms outside the degree range are zero. This asserts smooth Dolbeault cohomology; an identification with sheaf cohomology requires a separate Dolbeault-resolution comparison theorem.\n\nFor either complex write $D=d$ or $D=\\bar\\partial_E$, $P=DD^*+D^*D$, and let $\\Pi,G$ be the preceding Green projection and inverse. They preserve degree, $G$ preserves smooth forms, and on smooth forms\n$$DG=GD,\\qquad D^*G=GD^*,\\qquad D\\Pi=\\Pi D=D^*\\Pi=\\Pi D^*=0.$$\nEvery closed smooth $u$ satisfies $u=\\Pi u+D(D^*Gu)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-flat-torus-model-geometry",
+          "source_section": "Statement",
+          "quote": "Assume the inherited Axiom of Countable Choice $\\mathrm{AC}_\\omega$. Let\n$n\\ge1$, let $\\mathbb Z^n\\subseteq\\mathbb R^n$ be the integer lattice acting\non $\\mathbb R^n$ by translations, and let $T^n=\\mathbb R^n/\\mathbb Z^n$ carry\nthe quotient topology with quotient map $q:\\mathbb R^n\\to T^n$. Then:\n\n1. there is a Riemannian metric $g$ on $T^n$, unique, with\n   $q^*g=\\sum_{i=1}^n dx^i\\otimes dx^i$; with this metric $T^n$ is a\n   connected boundaryless smooth $n$-manifold and $q$ is a surjective local\n   isometry;\n2. $(T^n,g)$ is geodesically and metrically complete, and for $n\\ge2$ it has\n   vanishing sectional curvature: $K=0$ on every tangent two-plane;\n3. the quotient charts of the proof identify $T_{[x]}T^n$ with $\\mathbb R^n$,\n   and under that identification the maximal geodesic with initial datum\n   $v\\in\\mathbb R^n$ is\n   $$t\\mapsto[x+tv],\\qquad t\\in\\mathbb R,$$\n   so that the exponential map is defined on all of $T_{[x]}T^n$ and\n   $\\exp_{[x]}(v)=[x+v]$; in particular $\\exp_{[x]}$ is not injective, since\n   $\\exp_{[x]}(0)=\\exp_{[x]}(e_1)=[x]$ for the nonzero lattice vector\n   $e_1\\in\\mathbb Z^n$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-smooth-differential-k-form",
+          "source_section": "Definition",
+          "quote": "Let $M$ be a smooth manifold and $k\\ge 0$. A **smooth differential $k$-form**\non $M$ is a smooth section of $\\bigwedge^kT^*M\\to M$. The space of such forms\nis denoted $\\Omega^k(M)$, and $\\Omega^0(M)=C^\\infty(M)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-interior-product-of-a-form-by-a-vector-field",
+          "source_section": "Definition",
+          "quote": "Let $X:M\\to TM$ be a smooth section of the tangent bundle, that is, a smooth\nvector field on $M$, and let $\\omega\\in\\Omega^k(M)$. The **interior product**\n$\\iota_X\\omega\\in\\Omega^{k-1}(M)$ is defined pointwise by\n\n$$ (\\iota_X\\omega)_p:=\\iota_{X_p}\\omega_p. $$\n\nFor $k=0$, adopt the formal convention $\\Omega^{-1}(M):=\\{0\\}$ and set\n$\\iota_X\\omega:=0$.\n\nThis pointwise field is smooth. Indeed, in local coordinates write\n$X=\\sum_jX^j\\partial_j$ and expand $\\omega$ in the smooth frame $dx^I$ as in\n[[prop-local-coordinate-expression-for-a-differential-form]]. The coefficients\nof $\\iota_X\\omega$ are signed finite sums of products $X^j\\omega_I$, and are\ntherefore smooth.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Write a smooth form uniquely as $u=\\sum_Iu_I dx^I$ with periodic smooth coefficients on $\\mathbb R^n$, using the global coframe and the descent along $q$ of [F2]. The constant metric gives $d=\\sum_j\\varepsilon(dx^j)\\partial_j$ and $d^*=-\\sum_j\\iota_{\\partial_j}\\partial_j$; the wedge/contraction anticommutator recorded in [F1], applied in the orthonormal coframe, cancels the mixed terms, giving $\\Delta u=-\\sum_I\\sum_j\\partial_j^2u_I dx^I$. Integration over the unit cube, with opposite-face terms canceled by periodicity, yields $(\\Delta u,u)_2=\\sum_{I,j}\\int_{[0,1]^n}|\\partial_j u_I|^2$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If $u$ is harmonic, the sum of nonnegative integrals in step 1.1 is zero. Each derivative is continuous, so a nonzero value would give a neighbourhood with positive integral; hence every $\\partial_j u_I$ vanishes everywhere. Integration along line segments in $\\mathbb R^n$ gives constant coefficients. Conversely constant coefficients give $\\Delta u=0$ by step 1.1. The increasing wedge basis has $\\binom nk$ members, and [F1] identifies this harmonic space with de Rham cohomology, proving the asserted representative and dimension claims.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For k>n the wedge basis is empty and H^k=0; step 2.1 counts the possibly empty increasing basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For k=0 the harmonic space is the constants and step 2.1 gives the one-dimensional count C(n,0)=1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case k=1 is the ordinary one-degree computation of step 2.1; the binomial count includes one element in the endpoint cases."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The flat metric is positive definite by [F2] and no direction is degenerate; the zero form case is included in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The endpoint degrees k=0 and k=n are given by the same constant-coefficient argument in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Full AC is inherited from the Hodge theorem [F1]; steps 1.1 and 2.1 make no additional selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example proves basis, representative and dimension assertions rather than an if-and-only-if claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example proves basis, representative and dimension assertions rather than an if-and-only-if claim."
+        }
+      ]
+    }
+  }
+}

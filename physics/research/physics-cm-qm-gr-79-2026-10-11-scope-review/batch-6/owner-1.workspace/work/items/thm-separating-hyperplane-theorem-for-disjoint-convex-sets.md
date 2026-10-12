@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-separating-hyperplane-theorem-for-disjoint-convex-sets.md

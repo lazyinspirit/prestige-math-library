@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-uniform-boundedness-fails-on-an-incomplete-domain.md

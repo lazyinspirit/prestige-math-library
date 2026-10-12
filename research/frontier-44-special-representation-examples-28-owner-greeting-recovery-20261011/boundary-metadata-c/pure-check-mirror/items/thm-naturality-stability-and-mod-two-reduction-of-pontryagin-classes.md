@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-naturality-stability-and-mod-two-reduction-of-pontryagin-classes.md

@@ -53,23 +53,16 @@ $\overline{\mathcal F}$-free graph $G$, at least one of the following holds:
 
 **Proof technique:** if outcomes 2-4 fail, verify the hypotheses of the iterative restricted-sparsification lemma with $b_1=\tfrac{11}{10}$, $b_2=3(c_4+2)$, and $b_3=\tfrac{3(c_4+2)}{10}$.
 
+ 1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [[lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph]], and set $$ b_1:=11/10,\qquad b_2:=3(c_4+2),\qquad b_3:=3(c_4+2)/10. $$ [L1, choose]
 
-1.1 Let $c_1,c_2,c_3>0$, $c_4,c_5\ge 4$, and $c:=2^{-4c_5}$ be the constants from [[lem-a-large-y-ten-thirds-restricted-induced-subgraph-forces-a-y-eleven-thirds-restricted-induced-subgraph]], and set $$ b_1:=11/10,\qquad b_2:=3(c_4+2),\qquad b_3:=3(c_4+2)/10. $$ [L1, choose]
+ 1.2 Suppose outcomes 2, 3, and 4 all fail. We will show that outcome 1 then holds. [given, assume-contra]
 
+ 2.1 Hypothesis 1 of [L2] is immediate: the graph $G$ itself is $c^{10}$-restricted and has size $|G|\ge (c^{10})^{b_2}|G|$ because $b_2>0$ and $c^{10}<1$. [step 1.1, L2, given, algebra]
 
-1.2 Suppose outcomes 2, 3, and 4 all fail. We will show that outcome 1 then holds. [given, assume-contra]
+ 2.2 Let $\lambda\in[x^{10/3},c^{10}]$ and let $F$ be a $\lambda$-restricted induced subgraph of $G$ with $|F|\ge \lambda^{b_2}|G|$. Write $\lambda=y^{10/3}$, so $y=\lambda^{3/10}\in[x,c^3]$. Then $|F|\ge y^{10(c_4+2)}|G|$. Since outcomes 2-4 fail globally, [L1] applied with this $y$ gives a $y^{11/3}=\lambda^{11/10}$-restricted induced subgraph of $F$ with at least $y^{c_4+2}|F|=\lambda^{b_3}|F|$ vertices. [step 1.1, step 1.2, L1, L2, algebra]
 
+ 2.3 The exponent condition for [L2] holds because $$ b_1b_2=\frac{11}{10}\cdot 3(c_4+2)=\frac{33(c_4+2)}{10} \ge \frac{30(c_4+2)}{10}=b_2+b_3. $$ [step 1.1, L2, algebra]
 
-2.1 Hypothesis 1 of [L2] is immediate: the graph $G$ itself is $c^{10}$-restricted and has size $|G|\ge (c^{10})^{b_2}|G|$ because $b_2>0$ and $c^{10}<1$. [step 1.1, L2, given, algebra]
+ 3.1 Therefore [L2] yields an $x^{10/3}$-restricted induced subgraph $S\subseteq G$ with at least $$ (x^{10/3})^{b_1b_2}|G|=x^{11(c_4+2)}|G| $$ vertices. Since $c_4\ge 4$, the exponent satisfies $11(c_4+2)\le 22c_4$, so $|S|\ge x^{22c_4}|G|$. By [L3], the subgraph $S$ is $x$-restricted. Hence outcome 1 holds. [step 2.1, step 2.2, step 2.3, L2, L3, algebra]
 
-
-2.2 Let $\lambda\in[x^{10/3},c^{10}]$ and let $F$ be a $\lambda$-restricted induced subgraph of $G$ with $|F|\ge \lambda^{b_2}|G|$. Write $\lambda=y^{10/3}$, so $y=\lambda^{3/10}\in[x,c^3]$. Then $|F|\ge y^{10(c_4+2)}|G|$. Since outcomes 2-4 fail globally, [L1] applied with this $y$ gives a $y^{11/3}=\lambda^{11/10}$-restricted induced subgraph of $F$ with at least $y^{c_4+2}|F|=\lambda^{b_3}|F|$ vertices. [step 1.1, step 1.2, L1, L2, algebra]
-
-
-2.3 The exponent condition for [L2] holds because $$ b_1b_2=\frac{11}{10}\cdot 3(c_4+2)=\frac{33(c_4+2)}{10} \ge \frac{30(c_4+2)}{10}=b_2+b_3. $$ [step 1.1, L2, algebra]
-
-
-3.1 Therefore [L2] yields an $x^{10/3}$-restricted induced subgraph $S\subseteq G$ with at least $$ (x^{10/3})^{b_1b_2}|G|=x^{11(c_4+2)}|G| $$ vertices. Since $c_4\ge 4$, the exponent satisfies $11(c_4+2)\le 22c_4$, so $|S|\ge x^{22c_4}|G|$. By [L3], the subgraph $S$ is $x$-restricted. Hence outcome 1 holds. [step 2.1, step 2.2, step 2.3, L2, L3, algebra]
-
-
-4.1 Outcome 1 follows whenever outcomes 2-4 fail. Hence at least one of the four stated outcomes always holds. [step 1.2, step 3.1, discharge-contradiction] ∎
+ 4.1 Outcome 1 follows whenever outcomes 2-4 fail. Hence at least one of the four stated outcomes always holds. [step 1.2, step 3.1, discharge-contradiction] ∎ 

@@ -80,16 +80,17 @@ parts:
 
 ## counting
 
-Every count in this category is assembled from the sum rule and the product rule, applied
-to finite sets whose cardinality is a natural number rather than a symbol. Factorials and
-binomial coefficients follow, and then the two principles that do the work when a direct
-count is unavailable: inclusion-exclusion, which corrects an overcount, and the pigeonhole
-principle, which produces an object without exhibiting it. Additive characters of a finite
-abelian group, valued in $\mathbb C^\times$, add the orthogonality relations, proved from
-representation orthogonality: the normalized average of one character against the conjugate
-of another is $1$ on equal characters and $0$ otherwise, and nontrivial characters sum to
-zero. That interface also records the dictionary with one-dimensional complex
-representations, choice-free.
+Every count in this category is assembled from the sum rule and the product rule
+on finite sets, giving factorials and binomial coefficients, then
+inclusion-exclusion for overcounts and the pigeonhole principle for forced
+coincidences. Additive characters of a finite abelian group, valued in
+$\mathbb C^\times$, satisfy normalized orthogonality — $1$ on equal characters
+and $0$ otherwise, with nontrivial characters summing to zero — proved from
+representation orthogonality, with a choice-free dictionary to one-dimensional
+complex representations. Designs extend counting to incidence structures:
+two-designs and Steiner systems are defined, and Skolem's construction produces
+a Steiner triple system of every order $6m+1$, $m\ge1$, from a half-idempotent
+quasigroup, its block families checked for exact pair coverage.
 
 ## generating-functions
 

@@ -42,8 +42,7 @@ its codomain, then $g \circ f$ is measurable.
 
 **Proof technique:** direct.
 
-1.1 Let $C \in \mathcal{C}$. Since $g$ is measurable, [L1] gives [given, L1]
-$g^{-1}(C) \in \mathcal{B}$. [given, L1]
+1.1 Let $C \in \mathcal{C}$. Since $g$ is measurable, [L1] gives [given, L1] $g^{-1}(C) \in \mathcal{B}$. [given, L1]
 
 2.1 Since $f$ is measurable, [L1] applied again gives [step 1.1, L1]
 

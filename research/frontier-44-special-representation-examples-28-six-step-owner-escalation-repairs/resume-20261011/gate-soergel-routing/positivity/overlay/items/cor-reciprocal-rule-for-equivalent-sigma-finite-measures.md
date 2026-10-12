@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-reciprocal-rule-for-equivalent-sigma-finite-measures.md

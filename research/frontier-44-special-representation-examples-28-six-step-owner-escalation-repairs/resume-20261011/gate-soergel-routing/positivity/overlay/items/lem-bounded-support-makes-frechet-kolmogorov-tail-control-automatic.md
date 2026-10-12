@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bounded-support-makes-frechet-kolmogorov-tail-control-automatic.md

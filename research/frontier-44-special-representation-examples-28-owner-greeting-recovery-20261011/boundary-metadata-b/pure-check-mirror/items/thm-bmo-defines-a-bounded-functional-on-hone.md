@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bmo-defines-a-bounded-functional-on-hone.md

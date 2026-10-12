@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-nodal-projective-curve-has-a-weight-zero-cohomology-class.md

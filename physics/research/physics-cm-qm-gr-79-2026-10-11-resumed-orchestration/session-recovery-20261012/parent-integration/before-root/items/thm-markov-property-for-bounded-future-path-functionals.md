@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-markov-property-for-bounded-future-path-functionals.md

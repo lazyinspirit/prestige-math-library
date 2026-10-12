@@ -1,0 +1,1686 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-56",
+  "scope": [
+    "lem-nrqm-bell-singlet-pairings",
+    "prop-nrqm-bell-local-representations-are-no-signalling",
+    "thm-nrqm-bell-local-representations-satisfy-chsh",
+    "lem-nrqm-bell-setting-independent-selection-closure",
+    "texp-nrqm-bell-singlet-arrangement-contrast",
+    "pthm-nrqm-bell-tsirelson-bound-for-arrangements",
+    "ex-nrqm-bell-worked-angles-and-product-mixture",
+    "texp-nrqm-bell-finite-sample-chsh"
+  ],
+  "contracts": {
+    "prop-nrqm-bell-local-representations-are-no-signalling": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-local-response-representation",
+          "source_section": "Definition",
+          "quote": "**(a) Local-response representation.** A **local-response representation** of $\\mu$ is a tuple consisting of a probability space $(\\Lambda,\\Sigma_{\\Lambda}, \\mathbb P)$ ([[def-measure-space]], [[def-probability-measure]]) and two families of **response laws** ",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-bell-local-response-representation",
+          "source_section": "Definition",
+          "quote": "$$\\sum_{\\varepsilon\\in\\Sigma}\\alpha_{i}(\\lambda,\\varepsilon)=1\\quad(\\lambda\\in\\Lambda), \\qquad \\lambda\\mapsto\\alpha_{i}(\\lambda,+1)\\ \\text{is measurable}$$ ([[def-measurable-function-between-measurable-spaces]]), and the family $(\\beta_{j})_{j\\in J}$ has the s",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then $$\\mathbb E[X]\\le\\mathbb E[Y].$$ 3.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-real-",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Marginal of the first station] Fix $i\\in I$, $j\\in J$ and $\\varepsilon\\in\\Sigma$. By [F1] and the definition of the marginal, $\\mu^{A}_{ij}(\\varepsilon)=\\sum_{\\delta\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta)=\\sum_{\\delta\\in\\Sigma}\\mathbb E_{\\mathbb P}[\\alpha_{i}(\\cdot,\\varepsilon)\\beta_{j}(\\cdot,\\delta)]=\\mathbb E_{\\mathbb P}\\bigl[\\sum_{\\delta\\in\\Sigma}\\alpha_{i}(\\cdot,\\varepsilon)\\beta_{j}(\\cdot,\\delta)\\bigr]=\\mathbb E_{\\mathbb P}\\bigl[\\alpha_{i}(\\cdot,\\varepsilon)\\sum_{\\delta\\in\\Sigma}\\beta_{j}(\\cdot,\\delta)\\bigr]=\\mathbb E_{\\mathbb P}[\\alpha_{i}(\\cdot,\\varepsilon)]$, where the second equality is the representation identity, the third is the finite linearity of [F3], and the last is the normalization of [F2]. The resulting expression involves $i$ and $\\varepsilon$ only, so $\\mu^{A}_{ij}(\\varepsilon)=\\mu^{A}_{ij'}(\\varepsilon)$ for every $j'\\in J$; as $(\\varepsilon,i,j)$ were arbitrary this is the first-station half of (a). [given, F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Marginal of the second station] The same computation with the roles of the two stations exchanged, summing this time over $\\varepsilon\\in\\Sigma$ and using the normalization $\\sum_{\\varepsilon}\\alpha_{i}(\\lambda,\\varepsilon)=1$ of [F2], gives $\\mu^{B}_{ij}(\\delta)=\\sum_{\\varepsilon}\\mu_{ij}(\\varepsilon,\\delta)=\\mathbb E_{\\mathbb P}[\\beta_{j}(\\cdot,\\delta)]$ for every $\\delta\\in\\Sigma$, an expression free of $i$; hence $\\mu^{B}_{ij}=\\mu^{B}_{i'j}$ for all $i,i'\\in I$, the second-station half of (a). [given, F1, F2, F3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F1",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Assembly and contrapositive] Steps 1.1 and 1.2 give the two setting-independence identities, which by [F1] is exactly no-signalling of $\\mu$; this is (a). For (b), if a model admits a local-response representation then (a) makes it no-signalling, so a model that is not no-signalling admits none. [step 1.1, step 1.2, F1] ∎",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "I and J are finite nonempty setting sets by clause (a) of the definition of a binary correlation model; no empty setting family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 use only the normalization of the response laws, so response laws assigning probability 0 to +1 are covered."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 make no use of the cardinality of I or J, so the case |I|=|J|=1 is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A point-mass table has a representation with Dirac response laws and satisfies the conclusion; steps 1.1 and 1.2 do not assume nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The proposition involves no interval endpoints or boundary parameters."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used; the statement quantifies over given data and the proof uses only them (steps 1.1 and 2.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clause (b) is the contrapositive of clause (a), not a biconditional; the single direction is covered by steps 1.1, 1.2 and 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The proposition contains no reverse implication; representability implies no-signalling only."
+        }
+      ]
+    },
+    "thm-nrqm-bell-local-representations-satisfy-chsh": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-local-response-representation",
+          "source_section": "Definition",
+          "quote": "**(a) Local-response representation.** A **local-response representation** of $\\mu$ is a tuple consisting of a probability space $(\\Lambda,\\Sigma_{\\Lambda}, \\mathbb P)$ ([[def-measure-space]], [[def-probability-measure]]) and two families of **response laws** ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-bell-local-response-representation",
+          "source_section": "Definition",
+          "quote": "$$\\sum_{\\varepsilon\\in\\Sigma}\\alpha_{i}(\\lambda,\\varepsilon)=1\\quad(\\lambda\\in\\Lambda), \\qquad \\lambda\\mapsto\\alpha_{i}(\\lambda,+1)\\ \\text{is measurable}$$ ([[def-measurable-function-between-measurable-spaces]]), and the family $(\\beta_{j})_{j\\in J}$ has the s",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measurable-function-between-measurable-spaces",
+          "source_section": "Definition",
+          "quote": "A function $f : X \\to Y$ is **measurable** when $$f^{-1}(B) \\in \\mathcal{A} \\qquad \\text{for every } B \\in \\mathcal{B}.$$ Equivalently, the family $$\\mathcal{C}_f := \\{\\, B \\subseteq Y : f^{-1}(B) \\in \\mathcal{A} \\,\\}$$ is a sigma-algebra on $Y$ containing $\\m",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then $$\\mathbb E[X]\\le\\mathbb E[Y].$$ 3.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-real-",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Correlations through local means] Fix $(i,j)\\in\\{0,1\\}^{2}$. By [F1] and [F3], $E_{ij}(\\mu)=\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma}\\varepsilon\\delta\\,\\mathbb E_{\\mathbb P}[\\alpha_{i}(\\cdot,\\varepsilon)\\beta_{j}(\\cdot,\\delta)]=\\mathbb E_{\\mathbb P}\\bigl[\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma}\\varepsilon\\delta\\,\\alpha_{i}(\\cdot,\\varepsilon)\\beta_{j}(\\cdot,\\delta)\\bigr]=\\mathbb E_{\\mathbb P}\\bigl[\\bigl(\\sum_{\\varepsilon\\in\\Sigma}\\varepsilon\\,\\alpha_{i}(\\cdot,\\varepsilon)\\bigr)\\bigl(\\sum_{\\delta\\in\\Sigma}\\delta\\,\\beta_{j}(\\cdot,\\delta)\\bigr)\\bigr]=\\mathbb E_{\\mathbb P}[a_{i}b_{j}]$ with the local means of [F2], the inner factorizations being the distributive law in $\\mathbb R$ for the two-term sums over $\\Sigma$. [given, F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Pointwise bound] Let $u,v,s,t\\in[-1,1]$. Then $|s(u+v)+t(u-v)|\\le|u+v|+|u-v|$ by the triangle inequality and $|s|,|t|\\le1$. For real $u,v$ one has $|u+v|+|u-v|=2\\max(|u|,|v|)$: if $|v|\\le|u|$ then both $u+v$ and $u-v$ have the sign of $u$ (for $|v|\\le|u|$ neither crosses $0$), so the sum is $|2u|=2\\max(|u|,|v|)$, and the case $|v|>|u|$ is symmetric with the roles of $u$ and $v$ exchanged. Hence $|u+v|+|u-v|\\le2$, and the bound is $|s(u+v)+t(u-v)|\\le2$. [given, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[CHSH bound] By [F1], [F2] and step 1.1, $S(\\mu)=\\mathbb E_{\\mathbb P}[a_{0}b_{0}]+\\mathbb E_{\\mathbb P}[a_{0}b_{1}]+\\mathbb E_{\\mathbb P}[a_{1}b_{0}]-\\mathbb E_{\\mathbb P}[a_{1}b_{1}]=\\mathbb E_{\\mathbb P}\\bigl[a_{0}(b_{0}+b_{1})+a_{1}(b_{0}-b_{1})\\bigr]$, the second equality by the linearity of [F3]; the four local means take values in $[-1,1]$ by [F2], so the pointwise bound of step 1.2 gives $\\bigl|a_{0}(\\lambda)(b_{0}(\\lambda)+b_{1}(\\lambda))+a_{1}(\\lambda)(b_{0}(\\lambda)-b_{1}(\\lambda))\\bigr|\\le2$ for every $\\lambda\\in\\Lambda$. The modulus bound and monotonicity of [F3] applied to this pointwise bound yield $|S(\\mu)|\\le\\mathbb E_{\\mathbb P}[2]=2$. [step 1.1, step 1.2, F1, F2, F3, algebra] ∎",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "F3",
+            "1.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The setting sets are I=J={0,1}; the statement has no empty index family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 covers correlations E_ij=0, and step 1.2 allows any local mean in [-1,1], including 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The degenerate table with all outcomes +1 has S=2 and is covered by steps 1.1 and 2.1; the bound is stated with equality allowed."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Point-mass response laws give local means of modulus 1, the endpoint case of step 1.2, and are covered by steps 1.1 and 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 treats the endpoint values u,v,s,t of the closed interval [-1,1], where the identity |u+v|+|u-v|=2max(|u|,|v|) is at its maximum."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used; the statement and the proof (steps 1.1 and 2.1) work with the given representation data only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a one-directional bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse (representability from the bound) is asserted or proved."
+        }
+      ]
+    },
+    "lem-nrqm-bell-setting-independent-selection-closure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-local-response-representation",
+          "source_section": "Definition",
+          "quote": "**(a) Local-response representation.** A **local-response representation** of $\\mu$ is a tuple consisting of a probability space $(\\Lambda,\\Sigma_{\\Lambda}, \\mathbb P)$ ([[def-measure-space]], [[def-probability-measure]]) and two families of **response laws** ",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "3.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "A **measure** on $(X,\\mathcal A)$ is a function $$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$ such that: 1. $\\mu(\\varnothing)=0$; 2.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-probability-measure",
+          "source_section": "Definition",
+          "quote": "A **probability measure** on a measurable space $(X,\\mathcal A)$ is a measure $\\mathbb P$ with $\\mathbb P(X)=1$ ([[def-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-of-an-indicator-is-probability",
+          "source_section": "Statement",
+          "quote": "Then the indicator $\\mathbf 1_A$ satisfies $$\\mathbb E[\\mathbf 1_A]=\\mathbb P(A).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "source_section": "Statement",
+          "quote": "is measurable as a map $X \\to \\mathbb{R}$ if and only if $E \\in \\mathcal{A}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-real-",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then $$\\mathbb E[X]\\le\\mathbb E[Y].$$ 3.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "**Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]).",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "source_section": "Statement",
+          "quote": "Then each $s_k$ is a simple measurable function, $$0 \\le s_k \\le s_{k+1} \\le f,$$ and $s_k(x) \\to f(x)$ for every $x \\in X$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$ for every $x$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Its **simple integral** is $$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$ where $\\mu$ is the given measure ([[def-measure]]) and the convention $0\\cdot(+\\infty)=0$ is fixed once and for all.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "source_section": "Statement",
+          "quote": "Then $$\\bigl|S(\\mu)\\bigr|\\le 2 .$$ The statement is a theorem about the tables and their representation; it asserts no measurement, no dynamics, no spatial or causal structure, and it contains no physics.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[$\\mathbb P_{D}$ is a probability measure] Since $\\mathbb P(D)>0$, the definition of $\\mathbb P_{D}$ is meaningful; it is nonnegative and $\\mathbb P_{D}(\\Lambda)=\\mathbb P(\\Lambda\\cap D)/\\mathbb P(D)=1$. For pairwise disjoint $A_{n}\\in\\Sigma_{\\Lambda}$ with union $A$, the sets $A_{n}\\cap D$ are pairwise disjoint with union $A\\cap D$, so countable additivity of $\\mathbb P$ [F2] gives $\\mathbb P_{D}(A)=\\mathbb P(A\\cap D)/\\mathbb P(D)=\\sum_{n}\\mathbb P(A_{n}\\cap D)/\\mathbb P(D)=\\sum_{n}\\mathbb P_{D}(A_{n})$; hence $\\mathbb P_{D}$ is a probability measure on $(\\Lambda,\\Sigma_{\\Lambda})$. [given, F2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Indicators] Let $A\\in\\Sigma_{\\Lambda}$. Then $\\mathbf 1_{D}\\mathbf 1_{A}=\\mathbf 1_{A\\cap D}$, and [F3] applied to the probability space $(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P)$ gives $\\int\\mathbf 1_{D}\\mathbf 1_{A}\\,d\\mathbb P=\\mathbb E[\\mathbf 1_{A\\cap D}]=\\mathbb P(A\\cap D)$, while [F3] applied to $(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P_{D})$ gives $\\int\\mathbf 1_{A}\\,d\\mathbb P_{D}=\\mathbb E_{\\mathbb P_{D}}[\\mathbf 1_{A}]=\\mathbb P_{D}(A)=\\mathbb P(A\\cap D)/\\mathbb P(D)$; hence $\\int_{\\Lambda}\\mathbf 1_{A}\\,d\\mathbb P_{D}=\\mathbb P(D)^{-1}\\int_{\\Lambda}\\mathbf 1_{D}\\mathbf 1_{A}\\,d\\mathbb P$. [given, F3, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Nonnegative simple functions] By [F4] and the definition of the integral of a nonnegative simple function, both sides of the identity of step 2.1 are linear in the integrand over finite nonnegative combinations; hence for every nonnegative simple function $s$ on $(\\Lambda,\\Sigma_{\\Lambda})$ one has $\\int_{\\Lambda}s\\,d\\mathbb P_{D}=\\mathbb P(D)^{-1}\\int_{\\Lambda}\\mathbf 1_{D}s\\,d\\mathbb P$. [step 2.1, F4, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "[Normalization] By [F1] and [F4], $\\sum_{\\varepsilon,\\delta}\\mu^{D}_{ij}(\\varepsilon,\\delta)=\\mathbb P(D)^{-1}\\int\\mathbf 1_{D}\\bigl(\\sum_{\\varepsilon}\\alpha_{i}(\\cdot,\\varepsilon)\\bigr)\\bigl(\\sum_{\\delta}\\beta_{j}(\\cdot,\\delta)\\bigr)d\\mathbb P=\\mathbb P(D)^{-1}\\int\\mathbf 1_{D}\\,d\\mathbb P=\\mathbb P(D)/\\mathbb P(D)=1$, the last equality by the indicator identity of step 2.1 with $A=\\Lambda$, and each $\\mu^{D}_{ij}(\\varepsilon,\\delta)\\ge0$ by nonnegativity of the integrand; hence $\\mu^{D}$ is a binary correlation model on $(I,J)$. Together with step 1.1 this is (a). [step 1.1, step 2.1, F1, F4, algebra]",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F4",
+            "2.1",
+            "1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Bounded measurable functions] Let $f\\ge0$ be measurable and bounded, say $0\\le f\\le M<+\\infty$. By [F5] choose an increasing sequence $(s_{k})$ of nonnegative simple functions with $s_{k}\\uparrow f$; then $\\mathbf 1_{D}s_{k}\\uparrow\\mathbf 1_{D}f$, and monotone convergence [F5] applied to the measures $\\mathbb P_{D}$ and $\\mathbb P$ gives $\\int s_{k}\\,d\\mathbb P_{D}\\uparrow\\int f\\,d\\mathbb P_{D}$ and $\\int\\mathbf 1_{D}s_{k}\\,d\\mathbb P\\uparrow\\int\\mathbf 1_{D}f\\,d\\mathbb P$. Passing to the limit in the identity of step 3.1, valid for every $k$, yields $\\int_{\\Lambda}f\\,d\\mathbb P_{D}=\\mathbb P(D)^{-1}\\int_{\\Lambda}\\mathbf 1_{D}f\\,d\\mathbb P$. [step 3.1, F5, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F5",
+            "3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "[Representation over $\\mathbb P_{D}$] Fix $i,j,\\varepsilon,\\delta$ and put $f:=\\alpha_{i}(\\cdot,\\varepsilon)\\beta_{j}(\\cdot,\\delta)$. By [F1] $f$ is a product of two measurable $[0,1]$-valued functions, hence measurable and bounded with $0\\le f\\le1$. Step 4.1 gives $\\int f\\,d\\mathbb P_{D}=\\mathbb P(D)^{-1}\\int\\mathbf 1_{D}f\\,d\\mathbb P=\\mu^{D}_{ij}(\\varepsilon,\\delta)$ by the definition of the $D$-conditional tables; this is (b). [given, F1, step 4.1, algebra]",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "4.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "[Bound and assembly] Step 5.1 exhibits a local-response representation of $\\mu^{D}$ with the same response laws over the probability space $(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P_{D})$; hence [F6] applies to $\\mu^{D}$ and gives $|S(\\mu^{D})|\\le2$ when $I=J=\\{0,1\\}$, which is (c). Steps 1.1 and 3.2 prove (a) and step 5.1 proves (b). [step 1.1, step 3.2, step 5.1, F6] ∎",
+          "step": "6.1",
+          "inputs": [
+            "5.1",
+            "F6",
+            "1.1",
+            "3.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 with A the empty set gives both integrals 0 by [F2] and [F3], covering the empty event."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero function is bounded and step 4.1 applies, both sides vanishing; step 1.1 covers P_D of the empty set."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case D=Lambda gives P_D=P and mu^D=mu; steps 1.1, 3.2 and 5.1 apply with the same laws."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The statement assumes P(D)>0; the degenerate selection with P(D)=0 is excluded by hypothesis, and step 1.1 records where positivity is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints or boundary parameters occur in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used; the statement fixes the representation and D and the conditional measure is defined explicitly (steps 1.1, 3.2 and 5.1)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts preservation in one direction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse (a representation of the conditional tables forcing one of the full tables) is asserted."
+        }
+      ]
+    },
+    "lem-nrqm-bell-singlet-pairings": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "source_section": "Statement",
+          "quote": "Let $s\\in\\frac12\\mathbb N=\\{0,\\tfrac12,1,\\tfrac32,\\dots\\}$, put $N:=2s\\in\\mathbb N$ and let $V_s:=\\mathbb C^{N+1}$ carry the standard inner product $\\langle z,w\\rangle=\\sum_{k=0}^{N}z_k\\overline{w_k}$, linear in the first argument ([[def-inner-product-space]]). Write $(e_m)_{-s\\le m\\le s}$ for the standard basis, indexed so that $e_m$ is the vector with entry $1$ in position $k=s-m$ and entry $0$ elsewhere; thus $\\langle e_m,e_n\\rangle=1$ if $m=n$ and $\\langle e_m,e_n\\rangle=0$ otherwise. Define $\\mathbb C$-linear maps $J_z,J_+,J_-\\in\\operatorname{End}_{\\mathbb C}(V_s)$ by their values on this basis ([[def-linear-map]]): $$J_ze_m:=m\\,e_m,\\qquad J_+e_m:=\\sqrt{(s-m)(s+m+1)}\\,e_{m+1},\\qquad J_-e_m:=\\sqrt{(s+m)(s-m+1)}\\,e_{m-1},$$ where $e_{s+1}:=0$ and $e_{-s-1}:=0$, and put $$J_x:=\\tfrac12(J_++J_-),\\qquad J_y:=\\tfrac1{2i}(J_+-J_-),\\qquad J^2:=J_x^2+J_y^2+J_z^2 .$$ Then: (a) $J_z$, $J_x$ and $J_y$ are self-adjoint endomorphisms of $V_s$ ([[def-self-adjoint-and-normal-endomorphism]]), and $J_+^*=J_-$, $J_-^*=J_+$ ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]); (b) on $V_s$ the commutators are $$[J_z,J_+]=J_+,\\qquad [J_z,J_-]=-J_-,\\qquad [J_+,J_-]=2J_z,\\qquad [J_x,J_y]=iJ_z,\\qquad [J_y,J_z]=iJ_x,\\qquad [J_z,J_x]=iJ_y ;$$ (c) $J^2=J_-J_++J_z^2+J_z=J_+J_-+J_z^2-J_z=s(s+1)I$, and $[J^2,J_z]=[J^2,J_\\pm]=0$; (d) the matrix elements of the raising operator are $\\|J_+e_m\\|^2=(s-m)(s+m+1)$ and $\\|J_-e_m\\|^2=(s+m)(s-m+1)$, and $\\langle J_+e_m,e_{m+1}\\rangle=\\sqrt{(s-m)(s+m+1)}$, which is nonzero exactly when $m<s$; (e) for $s=\\tfrac12$, identify $V_{\\frac12}=\\mathbb C^2$ with the basis ordered as $(e_{\\frac12},e_{-\\frac12})$ and let $$\\sigma_x:=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y:=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\qquad \\sigma_z:=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$ be the Pauli matrices. Then $J_i=\\tfrac12\\sigma_i$ for $i=x,y,z$, $\\sigma_x^2=\\sigma_y^2=\\sigma_z^2=I$, $\\sigma_x\\sigma_y=i\\sigma_z$, $\\sigma_y\\sigma_z=i\\sigma_x$, $\\sigma_z\\sigma_x=i\\sigma_y$, and consequently $\\sigma_i\\sigma_j+\\sigma_j\\sigma_i=2\\delta_{ij}I$ and $\\sigma_i\\sigma_j=\\delta_{ij}I+i\\sum_k\\varepsilon_{ijk}\\sigma_k$ for all $i,j$, where $\\delta_{ij}=1$ if $i=j$ and $0$ otherwise, and $\\varepsilon_{ijk}$ denotes the sign of the permutation $(x,y,z)\\mapsto(i,j,k)$. All statements are finite-dimensional linear algebra: no physical interpretation of $J_x,J_y,J_z$ as angular momentum, and no measurement postulate, is asserted here.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in n}a_{ij}b_{jk}.$$ The sum is the finite sum in the additive commutative monoid of $F$. If $n=0$, it is the empty sum, so $AB$ is the zero matrix of shape $m$ by $p$. The **identity matrix** $I_n\\in M_n(F)$ has entry $1$ when $i=j$ and entry $0$ when $i\\ne j$. In particular, $I_0$ is the unique empty matrix in $M_0(F)$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "source_section": "Statement",
+          "quote": "Let $s\\in\\frac12\\mathbb N=\\{0,\\tfrac12,1,\\tfrac32,\\dots\\}$, put $N:=2s\\in\\mathbb N$ and let $V_s:=\\mathbb C^{N+1}$ carry the standard inner product $\\langle z,w\\rangle=\\sum_{k=0}^{N}z_k\\overline{w_k}$, linear in the first argument ([[def-inner-product-space]]). Write $(e_m)_{-s\\le m\\le s}$ for the standard basis, indexed so that $e_m$ is the vector with entry $1$ in position $k=s-m$ and entry $0$ elsewhere; thus $\\langle e_m,e_n\\rangle=1$ if $m=n$ and $\\langle e_m,e_n\\rangle=0$ otherwise. Define $\\mathbb C$-linear maps $J_z,J_+,J_-\\in\\operatorname{End}_{\\mathbb C}(V_s)$ by their values on this basis ([[def-linear-map]]): $$J_ze_m:=m\\,e_m,\\qquad J_+e_m:=\\sqrt{(s-m)(s+m+1)}\\,e_{m+1},\\qquad J_-e_m:=\\sqrt{(s+m)(s-m+1)}\\,e_{m-1},$$ where $e_{s+1}:=0$ and $e_{-s-1}:=0$, and put $$J_x:=\\tfrac12(J_++J_-),\\qquad J_y:=\\tfrac1{2i}(J_+-J_-),\\qquad J^2:=J_x^2+J_y^2+J_z^2 .$$ Then: (a) $J_z$, $J_x$ and $J_y$ are self-adjoint endomorphisms of $V_s$ ([[def-self-adjoint-and-normal-endomorphism]]), and $J_+^*=J_-$, $J_-^*=J_+$ ([[def-adjoint-of-a-linear-map-between-inner-product-spaces]]); (b) on $V_s$ the commutators are $$[J_z,J_+]=J_+,\\qquad [J_z,J_-]=-J_-,\\qquad [J_+,J_-]=2J_z,\\qquad [J_x,J_y]=iJ_z,\\qquad [J_y,J_z]=iJ_x,\\qquad [J_z,J_x]=iJ_y ;$$ (c) $J^2=J_-J_++J_z^2+J_z=J_+J_-+J_z^2-J_z=s(s+1)I$, and $[J^2,J_z]=[J^2,J_\\pm]=0$; (d) the matrix elements of the raising operator are $\\|J_+e_m\\|^2=(s-m)(s+m+1)$ and $\\|J_-e_m\\|^2=(s+m)(s-m+1)$, and $\\langle J_+e_m,e_{m+1}\\rangle=\\sqrt{(s-m)(s+m+1)}$, which is nonzero exactly when $m<s$; (e) for $s=\\tfrac12$, identify $V_{\\frac12}=\\mathbb C^2$ with the basis ordered as $(e_{\\frac12},e_{-\\frac12})$ and let $$\\sigma_x:=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y:=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\qquad \\sigma_z:=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$ be the Pauli matrices. Then $J_i=\\tfrac12\\sigma_i$ for $i=x,y,z$, $\\sigma_x^2=\\sigma_y^2=\\sigma_z^2=I$, $\\sigma_x\\sigma_y=i\\sigma_z$, $\\sigma_y\\sigma_z=i\\sigma_x$, $\\sigma_z\\sigma_x=i\\sigma_y$, and consequently $\\sigma_i\\sigma_j+\\sigma_j\\sigma_i=2\\delta_{ij}I$ and $\\sigma_i\\sigma_j=\\delta_{ij}I+i\\sum_k\\varepsilon_{ijk}\\sigma_k$ for all $i,j$, where $\\delta_{ij}=1$ if $i=j$ and $0$ otherwise, and $\\varepsilon_{ijk}$ denotes the sign of the permutation $(x,y,z)\\mapsto(i,j,k)$. All statements are finite-dimensional linear algebra: no physical interpretation of $J_x,J_y,J_z$ as angular momentum, and no measurement postulate, is asserted here.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function $T:V\\to W$ is **linear** when $$T(au+bv)=aT(u)+bT(v)$$ for all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or **linear transformation**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-composites-hilbert-tensor-construction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H,K$ be complex Hilbert spaces with the pairing linear in the first argument ([[def-real-and-complex-inner-product-space]], [[def-hilbert-space]]). Write $H\\odot K$ for the complex vector space of [[def-tensor-product-of-modules-by-generators-and-relations]] applied to $R=\\mathbb C$ and the $\\mathbb C$-modules $H,K$: its underlying abelian group is the quotient $F/H_0$ of that definition, the class of $e_{(u,v)}$ is written $u\\otimes v$, every element of $H\\odot K$ is a finite sum of elementary tensors $u\\otimes v$, and the defining relations make $(u,v)\\mapsto u\\otimes v$ $\\mathbb C$-bilinear. Define, for finite sums, $$\\Bigl\\langle\\sum_i u_i\\otimes v_i,\\ \\sum_j u'_j\\otimes v'_j\\Bigr\\rangle:=\\sum_{i,j}\\langle u_i,u'_j\\rangle_H\\,\\langle v_i,v'_j\\rangle_K .$$ Then: (a) *well-definedness and sesquilinearity*: the displayed value is independent of the representatives of its two arguments and defines a Hermitian sesquilinear form on $H\\odot K$, linear in the first argument and conjugate-linear in the second; (b) *positive definiteness and orthonormal coordinates*: $\\langle z,z\\rangle\\ge0$ for every $z\\in H\\odot K$, with $\\langle z,z\\rangle=0$ exactly for $z=0$; more precisely, if $U_0\\subseteq H$ and $V_0\\subseteq K$ are finite-dimensional subspaces with orthonormal bases $e_1,\\dots,e_p$ and $f_1,\\dots,f_q$, then every $z$ in the span of the elementary tensors from $U_0\\times V_0$ has a unique expansion $z=\\sum_{a,b}c_{ab}\\,e_a\\otimes f_b$ and $\\langle z,z\\rangle=\\sum_{a,b}|c_{ab}|^2$; in particular the assignment is an inner product on $H\\odot K$; (c) *completion*: the norm completion $(\\widehat{H\\odot K},\\kappa)$ of $H\\odot K$ ([[def-completion-of-a-normed-space]]) exists and, with the unique inner product extending the given one, is a complex Hilbert space; $\\kappa$ is a linear isometry with dense image, $\\|\\kappa(u\\otimes v)\\|=\\|u\\|\\,\\|v\\|$, and any two completions of $H\\odot K$ are identified by a unique surjective linear isometry fixing $H\\odot K$ pointwise; (d) *product bases*: if $(e_a)_{a\\in A}$ and $(f_b)_{b\\in B}$ are orthonormal families in $H$ and $K$ whose closed linear spans are $H$ and $K$, then $(\\kappa(e_a\\otimes f_b))_{(a,b)\\in A\\times B}$ is an orthonormal family in $\\widehat{H\\odot K}$ whose closed linear span is $\\widehat{H\\odot K}$; if $A$ and $B$ are countable then $\\widehat{H\\odot K}$ is separable. The notation $H\\widehat{\\otimes}K:=\\widehat{H\\odot K}$ is used in the rest of this pair. No assertion is made about unbounded operators or algebraic sums of non-completed tensor products.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$: 1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$; 2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$; 3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$. The first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$ the identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or **complex inner-product space** is an $\\mathbb F$-vector space $V$ together with an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense of [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$, $$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$ **Conjugate-linearity in the second argument.** Conjugate symmetry together with linearity in the first argument gives, for all $w\\in V$, $$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$ **Induced length.** The **induced length**, or inner-product norm, of $v$ is $$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$ which is exactly the published [[def-inner-product-norm]]: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$. **The convention on this page.** Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length. In the real case conjugation is the identity and $|z|$ is the absolute value of $\\mathbb R$; in the complex case they are complex conjugation and the complex modulus. All statements below are therefore written once and read in either scalar field.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-hilbert-space",
+          "source_section": "Definition",
+          "quote": "A **real Hilbert space** is a real inner-product space $H$ ([[def-real-and-complex-inner-product-space]]) whose induced-length metric is complete in the sense of [[def-complete-metric-space]]: every Cauchy sequence in $H$ for the norm $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$ ([[cor-inner-product-induces-a-norm]]) converges to a point of $H$. A **complex Hilbert space** is a complex inner-product space with the same completeness property, so that a Hilbert space is exactly a real or complex inner-product space that is a Banach space for its induced norm ([[def-banach-space]]). **The completion convention is the Cauchy-sequence one.** [[def-banach-space]] defines completeness by convergence of Cauchy sequences, and this page keeps that convention throughout. It is weaker than $\\sigma$-completeness — the assertion that every decreasing sequence of nonempty closed subsets with diameters tending to zero has a nonempty intersection. The two agree in ZFC, but Blackadar, Farah and Karagila note that the closest-point theorem on a $\\sigma$-complete inner-product space is provable in ZF, whereas the Cauchy-complete form used below consumes the Axiom of Countable Choice; nothing here silently imports the stronger notion.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[rem-real-and-complex-normed-space-convention]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqm-composites-bounded-tensor-maps",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H,H',K,K'$ be complex Hilbert spaces and let $S\\in\\mathcal B(H,H')$, $T\\in\\mathcal B(K,K')$ be bounded linear operators ([[def-bounded-linear-operator]]). Write $H\\widehat\\otimes K$ for the completion of the algebraic tensor product constructed in [[lem-nrqm-composites-hilbert-tensor-construction]], with inclusion $\\kappa$. (a) There is a unique bounded linear operator $S\\otimes T: H\\widehat\\otimes K\\to H'\\widehat\\otimes K'$ with $(S\\otimes T)\\kappa(u\\otimes v)=\\kappa'(Su\\otimes Tv)$ for all $u\\in H$, $v\\in K$, and it satisfies $\\|S\\otimes T\\|\\le\\|S\\|\\,\\|T\\|$ ([[def-operator-norm]]). (b) For Hilbert spaces $H'',K''$ and bounded $S':H''\\to H$, $T':K''\\to K$, one has $(S\\otimes T)(S'\\otimes T')=(SS')\\otimes(TT')$. In particular, for endomorphisms $S:H\\to H$, $T:K\\to K$, the endomorphisms $S\\otimes I_K$ and $I_H\\otimes T$ commute and their composite is $S\\otimes T$. (c) The Hilbert adjoint ([[def-hilbert-space-adjoint]]) is $(S\\otimes T)^*=S^*\\otimes T^*$. (d) If $S,T$ are unitary, then so is $S\\otimes T$. No extension of unbounded maps, and no algebraic manipulation of domains of unbounded operators, is asserted.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "source_section": "Statement",
+          "quote": "For vectors $u,v$ in a real or complex inner product space, $$|\\langle u,v\\rangle|\\le\\lVert u\\rVert\\lVert v\\rVert.$$ Equality holds if and only if $u$ and $v$ are linearly dependent, including the case in which either vector is zero.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-inner-product-induces-a-norm",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a real or complex inner-product space with induced length $\\|v\\|=\\sqrt{\\langle v,v\\rangle}$. Then $\\|v\\|\\ge0$ with $\\|v\\|=0$ exactly for $v=0$, $\\|\\lambda v\\|=|\\lambda|\\,\\|v\\|$ for every scalar $\\lambda$, and $\\|u+v\\|\\le\\|u\\|+\\|v\\|$; hence $\\|\\cdot\\|$ is a norm on $V$, read over $\\mathbb R$ by [[def-norm-and-normed-space]] and over $\\mathbb C$ by [[rem-real-and-complex-normed-space-convention]].",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-real-and-complex-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb F$ be $\\mathbb R$ or $\\mathbb C$, with **conjugation** $z\\mapsto\\overline z$ the identity on $\\mathbb R$ and complex conjugation on $\\mathbb C$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]]). A **real** or **complex inner-product space** is an $\\mathbb F$-vector space $V$ together with an inner product $\\langle\\cdot,\\cdot\\rangle:V\\times V\\to\\mathbb F$ in the sense of [[def-inner-product-space]]: for all $u,v,w\\in V$ and $a,b\\in\\mathbb F$, $$\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle,\\qquad \\langle u,v\\rangle=\\overline{\\langle v,u\\rangle},\\qquad \\langle v,v\\rangle\\ge0,\\quad \\langle v,v\\rangle=0\\iff v=0 .$$ **Conjugate-linearity in the second argument.** Conjugate symmetry together with linearity in the first argument gives, for all $w\\in V$, $$\\langle w,au+bv\\rangle=\\overline{\\langle au+bv,w\\rangle}=\\overline{a\\langle u,w\\rangle+b\\langle v,w\\rangle}=\\overline a\\,\\langle w,u\\rangle+\\overline b\\,\\langle w,v\\rangle .$$ **Induced length.** The **induced length**, or inner-product norm, of $v$ is $$\\|v\\|:=\\sqrt{\\langle v,v\\rangle},$$ which is exactly the published [[def-inner-product-norm]]: positive definiteness makes $\\langle v,v\\rangle$ a nonnegative real with a unique nonnegative square root, so that $\\|v\\|\\ge0$, $\\|v\\|=0$ exactly for $v=0$, and $\\langle v,v\\rangle=\\|v\\|^2$. **The convention on this page.** Every inner-product space below is real or complex in this sense, the pairing is linear in the first argument and conjugate-linear in the second, and $\\|v\\|$ always denotes the induced length. In the real case conjugation is the identity and $|z|$ is the absolute value of $\\mathbb R$; in the complex case they are complex conjugation and the complex modulus. All statements below are therefore written once and read in either scalar field.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "[Projections] Fix a unit $a$ and $\\varepsilon\\in\\Sigma$. By [F2], $P_{a,\\varepsilon}^{*}=\\tfrac12(I+\\varepsilon\\sigma_{a}^{*})=\\tfrac12(I+\\varepsilon\\sigma_{a})=P_{a,\\varepsilon}$ and $P_{a,\\varepsilon}^{2}=\\tfrac14(I+2\\varepsilon\\sigma_{a}+\\varepsilon^{2}\\sigma_{a}^{2})=\\tfrac14(2I+2\\varepsilon\\sigma_{a})=\\tfrac12(I+\\varepsilon\\sigma_{a})=P_{a,\\varepsilon}$ using $\\varepsilon^{2}=1$ and $\\sigma_{a}^{2}=I$; hence $P_{a,\\varepsilon}$ is an orthogonal projection. Moreover $P_{a,+}+P_{a,-}=I$ and $P_{a,+}P_{a,-}=\\tfrac14(I-\\sigma_{a}^{2})=0$, which is (a). [given, F2, algebra]",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "[Orthonormal basis] By [F3], $\\|\\Psi\\|^{2}=\\tfrac12(\\|e_{+}\\otimes e_{-}\\|^{2}+\\|e_{-}\\otimes e_{+}\\|^{2})=1$ and $\\|q\\|^{2}=1$, and the inner products pair the four displayed vectors as $0$ or $1$: for instance $\\langle\\Psi,q\\rangle=\\tfrac12(1-1)=0$ and $\\langle\\Psi,\\kappa(e_{+}\\otimes e_{+})\\rangle=\\tfrac1{\\sqrt2}\\bigl(\\langle e_{+},e_{+}\\rangle\\langle e_{-},e_{+}\\rangle-\\langle e_{-},e_{+}\\rangle\\langle e_{+},e_{+}\\rangle\\bigr)=0$ by the product formula of [F3]. Since the four elementary tensors already form an orthonormal basis of the four-dimensional space $V\\widehat\\otimes V$, so do the four mutually orthogonal unit vectors $\\Psi,q,\\kappa(e_{+}\\otimes e_{+}),\\kappa(e_{-}\\otimes e_{-})$; this is (b). [given, F3, F5, algebra]",
+          "inputs": [
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "[Local Pauli operators on $\\Psi$] Using [F1] and [F4] term by term, $(\\sigma_{z}\\otimes I)\\Psi=\\tfrac1{\\sqrt2}\\bigl(\\kappa(e_{+}\\otimes e_{-})+\\kappa(e_{-}\\otimes e_{+})\\bigr)=q$ and $(I\\otimes\\sigma_{z})\\Psi=\\tfrac1{\\sqrt2}\\bigl(-\\kappa(e_{+}\\otimes e_{-})-\\kappa(e_{-}\\otimes e_{+})\\bigr)=-q$; further $(\\sigma_{x}\\otimes I)\\Psi=\\tfrac1{\\sqrt2}\\bigl(\\kappa(e_{-}\\otimes e_{-})-\\kappa(e_{+}\\otimes e_{+})\\bigr)$, $(I\\otimes\\sigma_{x})\\Psi=\\tfrac1{\\sqrt2}\\bigl(\\kappa(e_{+}\\otimes e_{+})-\\kappa(e_{-}\\otimes e_{-})\\bigr)$, $(\\sigma_{y}\\otimes I)\\Psi=\\tfrac{i}{\\sqrt2}\\bigl(\\kappa(e_{+}\\otimes e_{+})+\\kappa(e_{-}\\otimes e_{-})\\bigr)$ and $(I\\otimes\\sigma_{y})\\Psi=\\tfrac{-i}{\\sqrt2}\\bigl(\\kappa(e_{+}\\otimes e_{+})+\\kappa(e_{-}\\otimes e_{-})\\bigr)$, all of which are linear combinations of the three basis vectors $q,\\kappa(e_{+}\\otimes e_{+}),\\kappa(e_{-}\\otimes e_{-})$ orthogonal to $\\Psi$ by step 1.2; hence $\\langle(\\sigma_{i}\\otimes I)\\Psi,\\Psi\\rangle=0=\\langle(I\\otimes\\sigma_{i})\\Psi,\\Psi\\rangle$ for $i=x,y,z$, and by the linearity of [F4] in the first tensor argument, $\\langle(\\sigma_{a}\\otimes I)\\Psi,\\Psi\\rangle=0=\\langle(I\\otimes\\sigma_{b})\\Psi,\\Psi\\rangle$ for all $a,b$. [given, F1, F4, step 1.2, algebra]",
+          "inputs": [
+            "1.2",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "2.2",
+          "step": "2.2",
+          "claim": "[Product Pauli operators on $\\Psi$] Term-by-term application of [F1] and [F4] gives $(\\sigma_x\\otimes\\sigma_x)\\Psi=(\\sigma_y\\otimes\\sigma_y)\\Psi=(\\sigma_z\\otimes\\sigma_z)\\Psi=-\\Psi$. Put $r_+:=(\\kappa(e_+\\otimes e_+)+\\kappa(e_-\\otimes e_-))/\\sqrt2$ and $r_-:=(\\kappa(e_+\\otimes e_+)-\\kappa(e_-\\otimes e_-))/\\sqrt2$. The six mixed products are $(\\sigma_x\\otimes\\sigma_y)\\Psi=-iq$, $(\\sigma_y\\otimes\\sigma_x)\\Psi=iq$, $(\\sigma_x\\otimes\\sigma_z)\\Psi=-r_+$, $(\\sigma_z\\otimes\\sigma_x)\\Psi=r_+$, $(\\sigma_y\\otimes\\sigma_z)\\Psi=ir_-$ and $(\\sigma_z\\otimes\\sigma_y)\\Psi=-ir_-$. Each is orthogonal to $\\Psi$ by step 1.2. Thus $\\langle(\\sigma_i\\otimes\\sigma_j)\\Psi,\\Psi\\rangle=-\\delta_{ij}$ for all $i,j\\in\\{x,y,z\\}$. [given, F1, F4, step 1.2, algebra]",
+          "inputs": [
+            "1.2",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "[Directional correlation] By the linearity of [F4], $(\\sigma_{a}\\otimes\\sigma_{b})\\Psi=\\sum_{i,j}a_{i}b_{j}(\\sigma_{i}\\otimes\\sigma_{j})\\Psi$, so the final identity of step 2.2 and the conjugate-linearity of the inner product in its second argument give $\\langle(\\sigma_{a}\\otimes\\sigma_{b})\\Psi,\\Psi\\rangle=\\sum_{i,j}a_{i}b_{j}(-\\delta_{ij})=-a\\cdot b$, with real $a,b$. [step 2.2, F4, algebra]",
+          "inputs": [
+            "2.2",
+            "F4"
+          ]
+        },
+        {
+          "id": "4.1",
+          "step": "4.1",
+          "claim": "[Joint numbers] Let $a,b$ be unit vectors and $\\varepsilon,\\delta\\in\\Sigma$. By step 1.1, $P_{a,\\varepsilon}=\\tfrac12(I+\\varepsilon\\sigma_{a})$ and $P_{b,\\delta}=\\tfrac12(I+\\delta\\sigma_{b})$, so multilinearity of the tensor product [F4] and the bilinearity of the inner product give $\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle=\\tfrac14\\bigl(\\langle\\Psi,\\Psi\\rangle+\\varepsilon\\langle(\\sigma_{a}\\otimes I)\\Psi,\\Psi\\rangle+\\delta\\langle(I\\otimes\\sigma_{b})\\Psi,\\Psi\\rangle+\\varepsilon\\delta\\langle(\\sigma_{a}\\otimes\\sigma_{b})\\Psi,\\Psi\\rangle\\bigr)=\\tfrac14(1-\\varepsilon\\delta\\,a\\cdot b)$ by steps 1.2, 2.1 and 3.1; this is (c). [step 1.1, step 1.2, step 2.1, step 3.1, F4, algebra]",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "5.1",
+          "step": "5.1",
+          "claim": "[Marginals and correlation] Summing the formula of step 4.1 over the distant label and using $\\sum_{\\delta\\in\\Sigma}\\delta=0$ gives $\\sum_{\\delta}\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle=\\tfrac14(2-\\varepsilon a\\cdot b\\cdot0)=\\tfrac12$, and symmetrically for the other marginal; the correlation is $\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta\\,\\tfrac14(1-\\varepsilon\\delta a\\cdot b)=\\tfrac14\\bigl((\\sum_{\\varepsilon}\\varepsilon)(\\sum_{\\delta}\\delta)-a\\cdot b\\sum_{\\varepsilon,\\delta}(\\varepsilon\\delta)^{2}\\bigr)=\\tfrac14(0-4\\,a\\cdot b)=-a\\cdot b$; this is (d). [step 4.1, algebra]",
+          "inputs": [
+            "4.1"
+          ]
+        },
+        {
+          "id": "6.1",
+          "step": "6.1",
+          "claim": "[Assembly] Step 1.1 is (a), step 1.2 is (b), step 4.1 is (c) and step 5.1 is (d); only the finite-dimensional tensor calculus of [F1]-[F4] and real arithmetic were used, and no physical interpretation is asserted. [step 1.1, step 1.2, step 4.1, step 5.1] ∎",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "4.1",
+            "5.1",
+            "F1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All sums run over the two-element set Sigma or over the finite index set {x,y,z}; no empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 covers orthogonal directions a.b=0, giving correlation 0, and step 5.1 covers the vanishing cross terms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case a=b (correlation -1) is included by steps 1.1, 3.1 and 5.1, which are uniform in the unit directions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 covers every unit direction; the degenerate direction a=0 is excluded by the unit hypothesis, which is exactly what makes P_{a,eps} a projection."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur; directions range over the unit sphere without parametrisation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Countable Choice is declared in the statement and enters only through the completed tensor product cited in [F3]; steps 1.1 to 5.1 are finite-dimensional algebra."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma is a list of computations, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is asserted."
+        }
+      ]
+    },
+    "texp-nrqm-bell-singlet-arrangement-contrast": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-declared-spin-arrangement",
+          "source_section": "Definition",
+          "quote": "Its **outcome law** in the declared preparation $\\rho$ is $$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta):=\\operatorname{tr}\\bigl(\\rho\\,E_{ij}(\\varepsilon,\\delta)\\bigr), \\qquad (\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma,$$ read from clause (b) of [[def-nrqm-measurement-f",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-bell-singlet-pairings",
+          "source_section": "Statement",
+          "quote": "(c) for all unit $a,b\\in\\mathbb R^{3}$ and all $\\varepsilon,\\delta\\in\\Sigma$, $$\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle =\\tfrac14\\bigl(1-\\varepsilon\\delta\\,a\\cdot b\\bigr);$$ (d) the marginals of the four numbers in (c) are $$\\s",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-composites-rank-one-operator-calculus",
+          "source_section": "Statement",
+          "quote": "(b) $T_{u,v}$ is trace class ([[def-trace-class-operator]]) with $\\|T_{u,v}\\|_1=\\|u\\|\\,\\|v\\|$ and $\\operatorname{tr}(T_{u,v})=\\langle u,v\\rangle$; (c) $T_{u,v}^*=T_{v,u}$ ([[def-hilbert-space-adjoint]]); $T_{x,x}\\ge0$ with $\\operatorname{tr}(T_{x,x})=\\|x\\|^2$ ",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "source_section": "Statement",
+          "quote": "(a) A **density operator** on $H$ is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$ ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-bell-singlet-pairings",
+          "source_section": "Statement",
+          "quote": "(b) $\\|\\Psi\\|=1$ and the four vectors $\\Psi,q,\\kappa(e_{+}\\otimes e_{+}), \\kappa(e_{-}\\otimes e_{-})$ are mutually orthogonal, so $(\\Psi,q,\\kappa(e_{+}\\otimes e_{+}),\\kappa(e_{-}\\otimes e_{-}))$ is an orthonormal basis of $V\\widehat\\otimes V$; (c) for all unit",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "source_section": "Statement",
+          "quote": "Then $$\\bigl|S(\\mu)\\bigr|\\le 2 .$$ The statement is a theorem about the tables and their representation; it asserts no measurement, no dynamics, no spatial or causal structure, and it contains no physics.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "pthm-nrqm-composites-local-instruments-and-no-signalling",
+          "source_section": "Statement",
+          "quote": "**(b) No-signalling.** The discarded-outcome state $\\Phi(\\rho):=\\sum_{a,r}(I_{H}\\otimes M_{a,r})\\,\\rho\\,(I_{H}\\otimes M_{a,r})^{*}$ is a preparation of the composite, its reduced preparation on $A$ is unchanged, $$\\operatorname{Tr}_{K}\\Phi(\\rho)=\\operatorname{",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Outcome laws] For every $(i,j)$ and $(\\varepsilon,\\delta)$ the measurement reading [F1] and the trace identity [F3] give $\\nu^{\\rho_{\\Psi}}_{ij}(\\varepsilon,\\delta)=\\operatorname{tr}(T_{\\Psi,\\Psi}(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta}))=\\langle(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta})\\Psi,\\Psi\\rangle=\\tfrac14(1-\\varepsilon\\delta\\,a_{i}\\cdot b_{j})$ by [F2]; this is (a). [given, F1, F2, F3, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Correlations and CHSH combination] By [F1], [F2] and step 1.1, $E_{ij}(\\nu^{\\rho_{\\Psi}})=\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta\\,\\nu^{\\rho_{\\Psi}}_{ij}(\\varepsilon,\\delta)=-a_{i}\\cdot b_{j}$, so $S(\\nu^{\\rho_{\\Psi}})=E_{00}+E_{01}+E_{10}-E_{11}=-[a_{0}\\cdot b_{0}+a_{0}\\cdot b_{1}+a_{1}\\cdot b_{0}-a_{1}\\cdot b_{1}]=-[a_{0}\\cdot(b_{0}+b_{1})+a_{1}\\cdot(b_{0}-b_{1})]$, the last equality by bilinearity of the Euclidean pairing. [given, F1, F2, step 1.1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "[Marginals and no-signalling] Summing the formula of step 1.1 with [F2] gives $\\nu^{\\rho_{\\Psi},A}_{ij}(\\varepsilon)=\\tfrac14(1-\\varepsilon a_{i}\\cdot b_{j})+\\tfrac14(1+\\varepsilon a_{i}\\cdot b_{j})=\\tfrac12$ for both values of $\\varepsilon$, independent of $j$, and symmetrically $\\nu^{\\rho_{\\Psi},B}_{ij}(\\delta)=\\tfrac12$ independent of $i$; hence the table is no-signalling. The discarded-instrument statement is [F5]. This is (d). [step 1.1, F2, F5, algebra]",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Specified directions] For $a_{0}=(0,0,1)$, $a_{1}=(1,0,0)$, $b_{0}=(1,0,1)/\\sqrt2$, $b_{1}=(-1,0,1)/\\sqrt2$ one has $a_{0}\\cdot b_{0}=a_{0}\\cdot b_{1}=a_{1}\\cdot b_{0}=1/\\sqrt2$ and $a_{1}\\cdot b_{1}=-1/\\sqrt2$; substituting into step 2.1 gives $S(\\nu^{\\rho_{\\Psi}})=-[1/\\sqrt2+1/\\sqrt2+1/\\sqrt2+1/\\sqrt2]=-4/\\sqrt2=-2\\sqrt2$, so $|S(\\nu^{\\rho_{\\Psi}})|=2\\sqrt2>2$. This is the second part of (b). [given, step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[No local-response model] If the four tables $\\nu^{\\rho_{\\Psi}}$ at the specified directions admitted a local-response representation, then [F4] would give $|S(\\nu^{\\rho_{\\Psi}})|\\le2$, contradicting step 3.1; hence no such representation exists, which is (c) at those directions. [step 3.1, F4, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "[Assembly and scope] Step 1.1 is (a), steps 2.1 and 3.1 are (b), step 4.1 is (c) and step 2.2 is (d). Only the declared arrangement, the singlet pairings, the rank-one trace identity and the CHSH bound for representable models were used; no measurement, apparatus, spatial separation or recorded data entered, and the exclusion is only of the declared local-response class of these four tables. [step 1.1, step 2.1, step 2.2, step 3.1, step 4.1] ∎",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "2.2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The setting sets are {0,1} and the sums run over Sigma; no empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 cover the case a_i.b_j=0 with correlation 0 and both marginals 1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 are uniform in the directions, so the basis case a_i=b_j is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case b_0=b_1 (or a_0=a_1) is allowed and handled by step 2.1, which assumes only unit directions."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoints occur in the statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Countable Choice and the Axiom of Choice are declared in the statement; step 1.1 uses the rank-one trace identity and the suppliers that carry them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item computes values and derives one no-go direction, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse (representability at non-violating settings) is asserted."
+        }
+      ]
+    },
+    "pthm-nrqm-bell-tsirelson-bound-for-arrangements": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-declared-spin-arrangement",
+          "source_section": "Definition",
+          "quote": "Its **outcome law** in the declared preparation $\\rho$ is $$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta):=\\operatorname{tr}\\bigl(\\rho\\,E_{ij}(\\varepsilon,\\delta)\\bigr), \\qquad (\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma,$$ read from clause (b) of [[def-nrqm-measurement-f",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "source_section": "Statement",
+          "quote": "(e) for $s=\\tfrac12$, identify $V_{\\frac12}=\\mathbb C^2$ with the basis ordered as $(e_{\\frac12},e_{-\\frac12})$ and let $$\\sigma_x:=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y:=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\qquad \\sigma_z:=\\begin{pmatrix}1&0",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-nrqm-bell-declared-spin-arrangement",
+          "source_section": "Definition",
+          "quote": "and the label $\\varepsilon$ attached to the projection $P_{n,\\varepsilon}$ is the **sign label** of the outcome; the outcome coordinate is $\\varepsilon\\hbar/2$, read in the unit $\\mathrm{J\\,s}$, while the sign label itself is dimensionless.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-nrqm-composites-bounded-tensor-maps",
+          "source_section": "Statement",
+          "quote": "(a) There is a unique bounded linear operator $S\\otimes T: H\\widehat\\otimes K\\to H'\\widehat\\otimes K'$ with $(S\\otimes T)\\kappa(u\\otimes v)=\\kappa'(Su\\otimes Tv)$ for all $u\\in H$, $v\\in K$, and it satisfies $\\|S\\otimes T\\|\\le\\|S\\|\\,\\|T\\|$ ([[def-operator-norm",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "source_section": "Statement",
+          "quote": "(a) A **density operator** on $H$ is a self-adjoint positive trace-class operator $\\rho$ with $\\operatorname{tr}\\rho=1$ ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-trace-class-operator",
+          "source_section": "Definition",
+          "quote": "The operator $T$ is **trace class** when $$\\sum_{n\\ge1}s_n(T):=\\sum_{m\\in\\mathbb N}s_{m+1}(T)<+\\infty .$$ Thus the series in the zero-based convention of [[def-series-and-absolute-convergence-in-a-normed-space]] is formed from the explicit sequence $(s_{m+1}(T",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "source_section": "Statement",
+          "quote": "2. if $T\\in\\mathcal S_1(H,K)$ and $A\\in\\mathcal B(K,L)$, $B\\in\\mathcal B(H_0,H)$ are bounded linear operators on Hilbert spaces $H_0,L$, then $ATB\\in\\mathcal S_1(H_0,L)$ and $$\\|ATB\\|_1\\le\\|A\\|\\,\\|T\\|_1\\,\\|B\\| ;$$ 3.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "source_section": "Statement",
+          "quote": "1. for every **nuclear representation** $Tx=\\sum_j\\langle x,u_j\\rangle v_j$ of $T$ (operator-norm convergence of the partial sums, $\\sum_j\\|u_j\\|\\|v_j\\|<+\\infty$), the scalar series $\\sum_j\\langle v_j,u_j\\rangle$ converges absolutely and $$\\Bigl|\\sum_j\\langle ",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nrqm-orbital-and-spin-tsirelson-bound",
+          "source_section": "Statement",
+          "quote": "(b) $\\|C^2\\|\\le8$ and $\\|C\\|\\le2\\sqrt2$ in the operator norm ([[def-operator-norm]], [[thm-hilbert-adjoint-properties]]); (c) for all $\\psi,\\psi'\\in H\\widehat\\otimes K$, $|\\langle C\\psi,\\psi'\\rangle|\\le2\\sqrt2\\,\\|\\psi\\|\\,\\|\\psi'\\|$ (this is the Tsirelson bound",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "texp-nrqm-bell-singlet-arrangement-contrast",
+          "source_section": "Statement",
+          "quote": "one has $S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2$, so $\\bigl|S(\\nu^{\\rho_{\\Psi}})\\bigr|=2\\sqrt2>2$; (c) consequently the correlation table $\\nu^{\\rho_{\\Psi}}$ of the arrangement at those directions admits no local-response model in the sense of clause (e) of [[def-nrqm-",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[CHSH functional as an operator trace] Put $C:=\\sigma_{a_{0}}\\otimes(\\sigma_{b_{0}}+\\sigma_{b_{1}})+\\sigma_{a_{1}}\\otimes(\\sigma_{b_{0}}-\\sigma_{b_{1}})$, a bounded operator on $V\\widehat\\otimes V$ by [F3]. For each $(i,j)$, [F2] gives $\\sigma_{a_{i}}\\otimes\\sigma_{b_{j}}=(P_{a_{i},+}-P_{a_{i},-})\\otimes(P_{b_{j},+}-P_{b_{j},-})=\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta\\,P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta}$, a finite sum, so by [F1], the linearity of the finite sum and the linearity of the trace [F5], $E_{ij}(\\nu^{\\rho})=\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta\\operatorname{tr}(\\rho(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta}))=\\operatorname{tr}\\bigl(\\rho\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta})\\bigr)=\\operatorname{tr}(\\rho(\\sigma_{a_{i}}\\otimes\\sigma_{b_{j}}))$. Summing the four terms with the CHSH signs and using [F3] and the linearity of the trace gives $S(\\nu^{\\rho})=\\operatorname{tr}(\\rho\\,C)$. [given, F1, F2, F3, F5, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F2",
+            "F1",
+            "F5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Operator norm bound] By [F2] the matrices $\\sigma_{a_{i}},\\sigma_{b_{j}}$ are self-adjoint involutions, so [F6] applies and gives $\\|C\\|\\le2\\sqrt2$. [given, F2, F6]",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F6",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Trace bound] By [F4] $\\rho$ is trace class with $\\|\\rho\\|_{1}=1$, so [F5] makes $\\rho C$ trace class with $\\|\\rho C\\|_{1}\\le\\|\\rho\\|_{1}\\|C\\|=\\|C\\|$, and the trace bound of [F5] gives $|\\operatorname{tr}(\\rho C)|\\le\\|\\rho C\\|_{1}\\le\\|C\\|\\le2\\sqrt2$. With step 1.1 this is $\\bigl|S(\\nu^{\\rho})\\bigr|\\le2\\sqrt2$, which is (a). [step 1.1, step 1.2, F4, F5, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "1.1",
+            "1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Attainment] Clause (b) is exactly [F7] for the singlet preparation and the displayed directions, and step 2.1 shows that no value larger than $2\\sqrt2$ occurs. [F7, step 2.1] ∎",
+          "step": "3.1",
+          "inputs": [
+            "F7",
+            "2.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "No empty index family occurs; C is a sum of four tensor products over the setting sets {0,1}."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 is an inequality, so S=0 and rho with zero off-diagonal parts are covered; step 1.1 is linear."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The degenerate involutions A_i=I_H, B_j=I_K are allowed by [F6] and step 1.2; the bound |S|<=2sqrt2 holds there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "If the directions make the expectation of C vanish the bound is trivial; steps 1.1 and 2.1 do not assume nondegeneracy."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 shows the endpoint value 2sqrt2 of the stated range is attained by the singlet, so the bound is sharp."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Countable Choice is declared in the statement and is used through the completed tensor product of [F3] and the operator bound of [F6] in steps 1.1 and 1.2."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem states a one-sided bound, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: the bound does not characterise the attainable tables."
+        }
+      ]
+    },
+    "ex-nrqm-bell-worked-angles-and-product-mixture": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-nrqm-bell-declared-spin-arrangement",
+          "source_section": "Definition",
+          "quote": "Its **outcome law** in the declared preparation $\\rho$ is $$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta):=\\operatorname{tr}\\bigl(\\rho\\,E_{ij}(\\varepsilon,\\delta)\\bigr), \\qquad (\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma,$$ read from clause (b) of [[def-nrqm-measurement-f",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-nrqm-bell-singlet-pairings",
+          "source_section": "Statement",
+          "quote": "(c) for all unit $a,b\\in\\mathbb R^{3}$ and all $\\varepsilon,\\delta\\in\\Sigma$, $$\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle =\\tfrac14\\bigl(1-\\varepsilon\\delta\\,a\\cdot b\\bigr);$$ (d) the marginals of the four numbers in (c) are $$\\s",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "texp-nrqm-bell-singlet-arrangement-contrast",
+          "source_section": "Statement",
+          "quote": "one has $S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2$, so $\\bigl|S(\\nu^{\\rho_{\\Psi}})\\bigr|=2\\sqrt2>2$; (c) consequently the correlation table $\\nu^{\\rho_{\\Psi}}$ of the arrangement at those directions admits no local-response model in the sense of clause (e) of [[def-nrqm-",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations",
+          "source_section": "Statement",
+          "quote": "**(a) Product preparations factorize.** If $\\Psi=\\kappa(u\\otimes v)$ with $\\|u\\|=\\|v\\|=1$, then for every bounded effect $F$ on $H$ and every bounded effect $F'$ on $K$ $$\\operatorname{tr}\\bigl(\\rho\\,(F\\otimes F')\\bigr)=\\operatorname{tr}(\\rho_{A}F)\\;\\operatorn",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-nrqm-composites-rank-one-operator-calculus",
+          "source_section": "Statement",
+          "quote": "(b) $T_{u,v}$ is trace class ([[def-trace-class-operator]]) with $\\|T_{u,v}\\|_1=\\|u\\|\\,\\|v\\|$ and $\\operatorname{tr}(T_{u,v})=\\langle u,v\\rangle$; (c) $T_{u,v}^*=T_{v,u}$ ([[def-hilbert-space-adjoint]]); $T_{x,x}\\ge0$ with $\\operatorname{tr}(T_{x,x})=\\|x\\|^2$ ",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws",
+          "source_section": "Statement",
+          "quote": "(c) for $s=\\tfrac12$, every unit $n$ and every unit $\\psi\\in H_{1/2}$ one has $$P_{n,\\pm}=\\tfrac12\\bigl(I\\pm n\\cdot\\sigma\\bigr),\\qquad \\mu^{S_{n}}_{\\psi}\\Bigl(\\Bigl\\{\\pm\\tfrac{\\hbar}{2}\\Bigr\\}\\Bigr) =\\frac{1}{2}\\Bigl(1\\pm\\langle(n\\cdot\\sigma)\\psi,\\psi\\rangle\\B",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "source_section": "Statement",
+          "quote": "(e) for $s=\\tfrac12$, identify $V_{\\frac12}=\\mathbb C^2$ with the basis ordered as $(e_{\\frac12},e_{-\\frac12})$ and let $$\\sigma_x:=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_y:=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\qquad \\sigma_z:=\\begin{pmatrix}1&0",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-nrqm-composites-separable-partial-trace",
+          "source_section": "Statement",
+          "quote": "(c) On rank-one operators, $\\operatorname{Tr}_KT_{u\\otimes v,u'\\otimes v'}=\\langle v,v'\\rangle_K\\,T_{u,u'}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-nrqm-composites-rank-one-operator-calculus",
+          "source_section": "Statement",
+          "quote": "(b) $T_{u,v}$ is trace class ([[def-trace-class-operator]]) with $\\|T_{u,v}\\|_1=\\|u\\|\\,\\|v\\|$ and $\\operatorname{tr}(T_{u,v})=\\langle u,v\\rangle$; (c) $T_{u,v}^*=T_{v,u}$ ([[def-hilbert-space-adjoint]]); $T_{x,x}\\ge0$ with $\\operatorname{tr}(T_{x,x})=\\|x\\|^2$ ",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "source_section": "Statement",
+          "quote": "Then $$\\bigl|S(\\mu)\\bigr|\\le 2 .$$ The statement is a theorem about the tables and their representation; it asserts no measurement, no dynamics, no spatial or causal structure, and it contains no physics.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "[Directions and singlet values] The four directions are unit vectors with $a_{0}\\cdot b_{0}=a_{0}\\cdot b_{1}=a_{1}\\cdot b_{0}=1/\\sqrt2$ and $a_{1}\\cdot b_{1}=-1/\\sqrt2$. By [L1] and [L2], $E_{ij}(\\nu^{\\rho_{\\Psi}})=-a_{i}\\cdot b_{j}$, so $E_{00}=E_{01}=E_{10}=-1/\\sqrt2$, $E_{11}=+1/\\sqrt2$ and $S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2$; this is (a). [given, L1, L2, algebra]",
+          "step": "1.1",
+          "inputs": [
+            "L1",
+            "L2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "[Product-state tables] Write $u_{+}:=e_{+}$, $u_{-}:=e_{-}$. By [L3], for the product preparation $T_{u_{\\tau}\\otimes u_{-\\tau},u_{\\tau}\\otimes u_{-\\tau}}$ (with $\\tau=+$ or $-$) the joint sign law at $(i,j)$ is $\\tfrac12(1+\\varepsilon\\tau(a_{i})_{3})\\cdot\\tfrac12(1-\\delta\\tau(b_{j})_{3})$. [given, L3, algebra]",
+          "step": "1.2",
+          "inputs": [
+            "L3",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "[Mixture tables] By [L1] the outcome law of a convex mixture is the corresponding convex combination of the laws, so the two product tables of step 1.2 average to $\\nu^{M}_{ij}(\\varepsilon,\\delta)=\\tfrac14\\bigl[\\tfrac12(1+\\varepsilon(a_{i})_{3})(1-\\delta(b_{j})_{3})+\\tfrac12(1-\\varepsilon(a_{i})_{3})(1+\\delta(b_{j})_{3})\\bigr]=\\tfrac14(1-\\varepsilon\\delta(a_{i})_{3}(b_{j})_{3})$; this is the table formula of (b). [step 1.2, L1, algebra]",
+          "step": "2.1",
+          "inputs": [
+            "L1",
+            "1.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "[Mixture correlations and CHSH value] Summing the table of step 2.1 with the product signs gives $E_{ij}(\\nu^{M})=-(a_{i})_{3}(b_{j})_{3}$; substituting $(a_{0})_{3}=1$, $(a_{1})_{3}=0$, $(b_{0})_{3}=(b_{1})_{3}=1/\\sqrt2$ gives $E_{00}=E_{01}=-1/\\sqrt2$ and $E_{10}=E_{11}=0$, hence $S(\\nu^{M})=-1/\\sqrt2-1/\\sqrt2-0+0=-\\sqrt2$; this completes (b). [step 2.1, algebra]",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "[Explicit representation] Choose a two-point specification space $\\Lambda=\\{1,2\\}$ with weights $\\mathbb P(\\{1\\})=\\mathbb P(\\{2\\})=\\tfrac12$ and define the response laws by the display of (c). Then for each $(i,j,\\varepsilon,\\delta)$ one has $\\int_{\\Lambda}\\alpha_{i}(\\lambda,\\varepsilon)\\beta_{j}(\\lambda,\\delta)\\,d\\mathbb P(\\lambda)=\\tfrac12\\cdot\\tfrac12(1+\\varepsilon(a_{i})_{3})\\cdot\\tfrac12(1-\\delta(b_{j})_{3})+\\tfrac12\\cdot\\tfrac12(1-\\varepsilon(a_{i})_{3})\\cdot\\tfrac12(1+\\delta(b_{j})_{3})=\\tfrac14\\bigl(1-\\varepsilon\\delta(a_{i})_{3}(b_{j})_{3}\\bigr)=\\nu^{M}_{ij}(\\varepsilon,\\delta)$ by step 2.1, so $(\\alpha,\\beta,\\mathbb P)$ is a local-response representation of $\\nu^{M}$; the bound $|S(\\nu^{M})|\\le2$ then follows from [L5] and is consistent with the value $-\\sqrt2$ of (b), since $\\sqrt2\\le2$. This is (c). [step 2.1, L5, algebra]",
+          "step": "3.2",
+          "inputs": [
+            "2.1",
+            "L5",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "[Common marginals and comparison] Summing the mixture table of step 2.1 over the distant label gives $\\tfrac12$ for each local label, and the singlet's marginals are $\\tfrac12$ by [L2]; the reduced preparations are $\\operatorname{Tr}_{B}M=\\tfrac12T_{e_{+},e_{+}}+\\tfrac12T_{e_{-},e_{-}}=\\tfrac12I$ and, expanding $T_{\\Psi,\\Psi}$ in the product basis and applying [L4] linearly, $\\operatorname{Tr}_{B}\\rho_{\\Psi}=\\tfrac12(T_{e_{+},e_{+}}+T_{e_{-},e_{-}})=\\tfrac12I$, so both arrangements share every single-station statistic while their CHSH functionals are $2\\sqrt2$ and $\\sqrt2$ in absolute value. This is (d). [step 1.1, step 2.1, step 3.1, L2, L4, algebra]",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "L2",
+            "L4",
+            "1.1",
+            "3.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "[Assembly and scope] Steps 1.1, 2.1, 3.1, 3.2 and 4.1 prove (a)-(d); only the declared arrangements, the singlet pairings, the product-factorization theorem, the spin-half outcome laws, the partial trace and the CHSH bound for representable models were used, and no measured correlation is asserted. [step 1.1, step 2.1, step 3.1, step 3.2, step 4.1] ∎",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes four directions and four setting pairs; no empty family occurs."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 includes the vanishing mixture correlations E_10=E_11=0, and step 3.2 covers zero response probabilities at the endpoints of [0,1]."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.2 uses a two-point specification space with unit total weight; the case of a single-run trial is not part of the example, which is a single-trial table."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats the case (a_1)_3=0, i.e. a direction orthogonal to the mixture axis, where two correlations vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes all four dot products, including the endpoint values +-1/sqrt2 that produce S=-2sqrt2 and S=-sqrt2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used; the example is finite-dimensional and the representation is exhibited explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example compares two computations and asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is made."
+        }
+      ]
+    },
+    "texp-nrqm-bell-finite-sample-chsh": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-declared-spin-arrangement",
+          "source_section": "Definition",
+          "quote": "Adopt the state and composition postulate P1, the observable and probability postulate P2, the ideal conditional-measurement postulate P3, the internal-factor assignment of the identical-particle and spin postulate P6 and the preparation and apparatus discipline P7 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-ideal-conditional-measurement]], [[post-nrqm-framework-identical-particles-and-spin]], [[post-nrqm-framework-preparation-and-apparatus]]), together with the composite, observable and measurement readings of [[def-nrqm-composites-framework-composite-systems-and-local-readouts]], [[def-nrqm-observables-framework-observable-and-outcome-law]] and [[def-nrqm-measurement-framework-declared-measurements-and-instruments]], the angular momentum readings of [[def-nrqm-angular-momentum-framework-angular-momentum-observables]] and the units of [[def-nrqm-framework-quantities-and-units]]. Assume the Axiom of Countable Choice and the Axiom of Choice, the hypotheses of the cited mathematical suppliers. The following vocabulary is used by this page. **(a) Declared spin-half factors.** A **declared spin-half factor** is the internal factor $V=\\mathbb C^{2}$ of the spin-$s$ model [[def-nrqm-kinematics-framework-massive-spin-s-model]] with spin label $s=\\tfrac12$, with its orthonormal basis $(e_{+},e_{-})$, the self-adjoint matrices $J_{i}=\\tfrac12\\sigma_{i}$ of [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e) and the spin observables $S_{i}:=\\hbar J_{i}$, read as assigned sharp observables with unit $\\mathrm{J\\,s}$ by clause (c) of [[def-nrqm-angular-momentum-framework-angular-momentum-observables]] and P6 clause (ii). For a unit direction $n\\in\\mathbb R^{3}$ put $S_{n}:=\\sum_{i}n_{i}S_{i}$. By [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] clause (c) the observable $S_{n}$ has the two eigenvalues $\\pm\\tfrac{\\hbar}{2}$ with spectral projections $$P_{n,\\varepsilon}:=\\tfrac12\\bigl(I+\\varepsilon\\,n\\cdot\\sigma\\bigr), \\qquad \\varepsilon\\in\\Sigma=\\{-1,+1\\},$$ and the label $\\varepsilon$ attached to the projection $P_{n,\\varepsilon}$ is the **sign label** of the outcome; the outcome coordinate is $\\varepsilon\\hbar/2$, read in the unit $\\mathrm{J\\,s}$, while the sign label itself is dimensionless. **(b) Declared arrangement.** A **declared spin correlation arrangement** consists of: the declared composite $V\\widehat\\otimes V$ of two declared spin-half factors, with inclusion $\\kappa$, in the sense of clause (a) of [[def-nrqm-composites-framework-composite-systems-and-local-readouts]] (a declared pair of distinguishable subsystems whose assigned spaces are the two internal factors); a **declared preparation** $\\rho\\in D(V\\widehat\\otimes V)$, the set of density operators on the composite ([[def-nrqm-state-geometry-framework-state-space]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]); and two unit **setting directions** $a_{0},a_{1}\\in\\mathbb R^{3}$ for the first station and $b_{0},b_{1}\\in\\mathbb R^{3}$ for the second station. The setting labels are $I=J=\\{0,1\\}$. **(c) Declared local sign measurements.** For the first station and setting $i\\in I$, the **declared local sign measurement** is the declared ideal sharp measurement whose outcome structure is the pair $(P_{a_{i},+}\\otimes I,\\;P_{a_{i},-}\\otimes I)$ with the sign labels $\\pm1$: these are the spectral projections of the local readout of the assigned observable $(S_{a_{i}},\\mathrm{J\\,s})$ on the declared composite, the local readout being constructed through the spectral measure by clause (c) of [[def-nrqm-composites-framework-composite-systems-and-local-readouts]] and [[lem-nrqm-composites-local-pvm-tensor-extension]]. The second station's declared local sign measurement for setting $j$ is $(I\\otimes P_{b_{j},+},\\;I\\otimes P_{b_{j},-})$, defined symmetrically. **(d) Declared joint sign measurement and tables.** For $(i,j)\\in I\\times J$ the **declared joint sign measurement** of the setting pair is the declared ideal sharp measurement of the composite whose outcome structure is $$E_{ij}:=\\bigl(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta}\\bigr)_{(\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma}, \\qquad E_{ij}(\\varepsilon,\\delta)=P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta},$$ with the pair of sign labels as its labels: by clause (c) of [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] each factor is an orthogonal projection, and the tensor calculus of [[lem-nrqm-composites-bounded-tensor-maps]] gives $E_{ij}(\\varepsilon,\\delta)E_{ij}(\\varepsilon',\\delta')= \\delta_{\\varepsilon\\varepsilon'}\\delta_{\\delta\\delta'}E_{ij}(\\varepsilon,\\delta)$ and $\\sum_{\\varepsilon,\\delta}E_{ij}(\\varepsilon,\\delta)=I$, so this is a finite family of mutually orthogonal projections resolving the identity, as required by clause (a) of [[def-nrqm-measurement-framework-declared-measurements-and-instruments]]. Its **outcome law** in the declared preparation $\\rho$ is $$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta):=\\operatorname{tr}\\bigl(\\rho\\,E_{ij}(\\varepsilon,\\delta)\\bigr), \\qquad (\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma,$$ read from clause (b) of [[def-nrqm-measurement-framework-declared-measurements-and-instruments]] (compare P2 clause (ii), [[post-nrqm-framework-observable-and-probability]]). The **correlation table of the arrangement** is the family $\\nu^{\\rho}=(\\nu^{\\rho}_{ij})_{(i,j)\\in I\\times J}$, which is a binary correlation model on $(I,J)$ in the sense of [[def-nrqm-bell-binary-correlation-models]] clause (a); its correlations $E_{ij}(\\nu^{\\rho})$, its marginals and its CHSH functional $S(\\nu^{\\rho})$ are the ones of clauses (b) and (d) of that definition, and are written $S(\\rho;a_{0},a_{1};b_{0},b_{1})$ when the arrangement data are displayed. **(e) Declared local-response models of the arrangement.** A **declared local-response model of the arrangement** is a local-response representation, in the sense of [[def-nrqm-bell-local-response-representation]], of the correlation table $\\nu^{\\rho}$. It is a model of the same four tables: it consists of a probability space of **specifications** and of per-station response laws, subject to the representation identity, and it need not be a model of the framework's state space. The arrangement **admits a local-response model** when such a representation exists. **(f) Scope.** Clauses (a)-(e) fix model vocabulary. They assign no spatial position, worldline, spatial separation or temporal order to the two factors; they assert no dynamics, no interaction, no apparatus, no detection procedure and no measured correlation; they do not assert that the composite is prepared by any particular laboratory procedure. Whether a laboratory arrangement realizes the declared preparation, the declared directions and the declared sign measurements is a tested identification with uncertainty under P7 ([[post-nrqm-framework-preparation-and-apparatus]]), not a consequence of this definition; the model's assignments of states to preparations and of spectral projections to quantities are the readings of P1, P2 and P3 fixed on the earlier pages.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-nrqm-bell-binary-correlation-models",
+          "source_section": "Definition",
+          "quote": "This item fixes finite combinatorial vocabulary for outcome laws of a two-station comparison. No physical interpretation, measurement model, dynamics or locality assertion is made here; the physical readings are fixed on the page of this pair. No choice principle is used. **(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the **setting labels** of the two stations, and put $\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**. A **binary correlation model** on $(I,J)$ is a family $$\\mu=(\\mu_{ij})_{(i,j)\\in I\\times J},\\qquad \\mu_{ij}:\\Sigma\\times\\Sigma\\to[0,1],$$ of functions with the normalization $$\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta)=1 \\qquad\\text{for every }(i,j)\\in I\\times J$$ ([[def-finite-sum]]). Each $\\mu_{ij}$ is the **joint law** of the setting pair $(i,j)$: it is the outcome-weight function of a finite probability space on the four outcomes $\\Sigma\\times\\Sigma$ in the sense of [[def-finite-probability-space-and-event]], and sums over $\\Sigma\\times\\Sigma$ are finite sums. **(b) Marginals.** For $(i,j)\\in I\\times J$ the **marginal law of the first station** and the **marginal law of the second station** are $$\\mu^{A}_{ij}(\\varepsilon):=\\sum_{\\delta\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta), \\qquad \\mu^{B}_{ij}(\\delta):=\\sum_{\\varepsilon\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta), \\qquad \\varepsilon,\\delta\\in\\Sigma .$$ **(c) No-signalling.** The model $\\mu$ is **no-signalling** when the marginal law of the first station does not depend on the distant setting, $\\mu^{A}_{ij}=\\mu^{A}_{ij'}$ for all $i\\in I$ and all $j,j'\\in J$, and the marginal law of the second station does not depend on the distant setting, $\\mu^{B}_{ij}=\\mu^{B}_{i'j}$ for all $j\\in J$ and all $i,i'\\in I$. The word is used as a name for this pair of identities about the tables; no spatial or causal claim is attached to it. **(d) Correlations and the CHSH functional.** Assume $I=J=\\{0,1\\}$. The **correlation** of the setting pair $(i,j)$ and the **CHSH functional** of the model are the real numbers $$E_{ij}(\\mu):=\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma} \\varepsilon\\,\\delta\\,\\mu_{ij}(\\varepsilon,\\delta), \\qquad S(\\mu):=E_{00}(\\mu)+E_{01}(\\mu)+E_{10}(\\mu)-E_{11}(\\mu).$$ **(e) Status.** Clauses (a)-(d) introduce finite tables, their marginals, the no-signalling identities and one linear functional of four correlations. They assert no physical assumption, no dynamics, no measurement, no probability law for a real apparatus and no statement about nature; the identification of a laboratory arrangement with a model $\\mu$ is a separate physical matter.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "post-nrqm-framework-preparation-and-apparatus",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following discipline for comparing the model with recorded data. **(i) Declared model of each comparison.** A comparison of a model prediction with an experiment of the framework requires, in addition to the state and dynamics assumptions P1-P5, the following declared items: a **preparation model**, that is, a specification of the state or preparation assigned to the system together with the physical procedure that realizes it; an **isolation model**, that is, the energy operator used and a statement of the interactions neglected in the approximation; a **detection model**, that is, the response of the apparatus, including efficiency, resolution, background and any binning; and **sampling assumptions**, that is, the statistical model under which repetitions of the preparation and detection are combined. None of these items is supplied by the mathematical framework alone. **(ii) Repetitions.** The treatment of repeated trials as independent and identically distributed draws from the model's outcome law is an additional statistical model of the apparatus and the procedure. It is not a consequence of the state postulate and is not guaranteed by the mathematics; where it is assumed it is stated, and where it fails (correlated trials, drifting preparation, dead time, selection) the statistical analysis must model the departure or record the limitation. **(iii) Identification with uncertainty.** The claim \"this apparatus realizes the preparation $\\rho$ and the dynamics $H_{\\mathrm{op}}$\" and the claim \"this detector realizes the effect $F$\" are physical identifications: they are tested against recorded behaviour of the apparatus, carry uncertainty and can fail. They are not derived from the framework, and a model prediction obtained under them inherits their qualifications. Calibration procedures, control experiments and their limitations are recorded with the comparison. **(iv) Empirical premises.** Where a measured value enters a deduction - a mass, a charge, a field strength, a detector efficiency - it enters as a qualified empirical premise with its uncertainty, conditions of measurement and source, and the conclusion of the deduction carries those qualifications. A deduction that uses a measured input is not an exact statement about nature. **(v) Status.** Clauses (i)-(iv) are adopted as the framework's conditions for comparing model with data. They make no claim that the framework or the apparatus description is exact; agreement of a prediction with a dataset is evidence about the combined model and apparatus assumptions, not a proof of the framework and not a statement about nature deduced from the mathematics.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-independence-of-finite-random-variables",
+          "source_section": "Definition",
+          "quote": "A finite family of finite-valued random variables $(X_i)_{i\\in I}$ is **mutually independent** when for every nonempty $J\\subseteq I$ and every selection $x_j\\in X_j(\\Omega)$, $$\\mathbb P(X_j=x_j\\text{ for every }j\\in J)=\\prod_{j\\in J}\\mathbb P(X_j=x_j).$$ It is **pairwise independent** when this identity is required only for two distinct indices. The empty family is mutually independent vacuously, and a one-member family is mutually independent.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-nrqm-composites-chsh-and-finite-sampling-law",
+          "source_section": "Statement",
+          "quote": "No choice principle is used. Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space ([[def-probability-measure]]). (a) *CHSH bound.* Let $A_0,A_1,B_0,B_1:\\Omega\\to\\{-1,1\\}$ be random variables with values in $\\{-1,1\\}$ ([[def-random-element-and-real-random-variable]]). Then the four expectations exist and $$\\bigl|\\mathbb E[A_0B_0]+\\mathbb E[A_0B_1]+\\mathbb E[A_1B_0]-\\mathbb E[A_1B_1]\\bigr|\\le2 .$$ (b) *Positive-probability sequences.* Let $N\\ge1$, $m\\ge1$, $p_1,\\dots,p_m\\ge0$ with $\\sum_{j=1}^mp_j=1$, and let $X_1,\\dots,X_N:\\Omega\\to\\{1,\\dots,m\\}$ be mutually independent with $\\mathbb P(X_k=j)=p_j$ for all $k,j$ ([[def-independence-of-finite-random-variables]]). Then for every sequence $(j_1,\\dots,j_N)\\in\\{1,\\dots,m\\}^N$ with $p_{j_k}>0$ for every $k$, $$\\mathbb P\\bigl(X_k=j_k\\text{ for every }k\\bigr)=\\prod_{k=1}^Np_{j_k}>0 .$$ Consequently every event disjoint from this outcome has probability at most $1-\\prod_kp_{j_k}<1$: any criterion that rejects at least one such sequence has positive failure probability under this sampling model. (c) *Binomial frequency.* Let $S$ be binomial$(N,p)$ with $N\\ge1$ and $p\\in[0,1]$ ([[def-bernoulli-and-binomial-random-variables]]). Then the frequency $S/N$ satisfies $\\mathbb E[S/N]=p$, $\\operatorname{Var}(S/N)=p(1-p)/N$, and for every $\\varepsilon>0$ $$\\mathbb P\\bigl(|S/N-p|\\ge\\varepsilon\\bigr)\\le\\frac{p(1-p)}{N\\varepsilon^2}.$$ (d) *Multinomial count law.* The number of sequences $(j_1,\\dots,j_N)$ with prescribed fibre sizes $n_j:=\\#\\{k:j_k=j\\}$ is the multinomial coefficient $\\binom{N}{n_1,\\dots,n_m}$ ([[def-multinomial-coefficient]]), and each such sequence has probability $\\prod_{j=1}^mp_j^{n_j}$; hence the probability that the count vector equals $(n_1,\\dots,n_m)$ is $\\binom{N}{n_1,\\dots,n_m}\\prod_jp_j^{n_j}$. No statistical inference, empirical claim or measured frequency is asserted; the lemma only computes probabilities of an explicitly specified independent sampling model.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "source_section": "Statement",
+          "quote": "Let $X,Y$ be integrable real or complex random variables on one probability space. 1. For scalars $a,b$, $$\\mathbb E[aX+bY]=a\\,\\mathbb E[X]+b\\,\\mathbb E[Y].$$ 2. If $X$ and $Y$ are real-valued and $X\\le Y$ almost surely, then $$\\mathbb E[X]\\le\\mathbb E[Y].$$ 3. $$|\\mathbb E[X]|\\le\\mathbb E[|X|].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "source_section": "Definition",
+          "quote": "Let $(\\Omega,\\mathcal F,\\mathbb P)$ be a probability space. - If $X:\\Omega\\to[0,+\\infty]$ is measurable, its **expectation** is the extended-valued integral $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P\\in[0,+\\infty].$$ - If $X:\\Omega\\to\\mathbb R$ or $X:\\Omega\\to\\mathbb C$ is integrable in the sense of [[def-integrable-real-and-complex-functions-and-their-integrals]], its **expectation** is again $$\\mathbb E[X]:=\\int_\\Omega X\\,d\\mathbb P,$$ now a finite real or complex number. For an integrable real random variable, $$\\mathbb E[X]=\\mathbb E[X^+]-\\mathbb E[X^-],$$ where $X^+$ and $X^-$ are its positive and negative parts.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]]), in particular an ordered field ([[def-ordered-field]]) and a field ([[def-field]]), and $\\mathbb{N}$ is the set of natural numbers ([[def-natural-numbers]]) with successor $\\sigma(n) = n + 1$ ([[def-nat-addition]]). Let $a : \\mathbb{N} \\to \\mathbb{R}$ be a sequence of reals, written $a_k$ for $a(k)$. **Finite sums and finite products of $a$ are defined by recursion on the upper index**, which is legitimate because of the recursion theorem ([[thm-recursion]]). That theorem produces a function of one variable, so the running index has to be carried along inside the value: applying it to the set $A = \\mathbb{N} \\times \\mathbb{R}$, the starting element $(0, 0)$ and the function $f(n, s) = (\\sigma(n),\\, s + a_n)$ gives a unique $g : \\mathbb{N} \\to \\mathbb{N} \\times \\mathbb{R}$ with $$g(0) = (0, 0), \\qquad g(\\sigma(n)) = f(g(n)) \\quad (n \\in \\mathbb{N}).$$ Write $g(n) = \\big(\\pi_1(g(n)),\\, \\Sigma_n\\big)$ for its two coordinates. **The first coordinate is the index itself, and that is a small induction, not an observation** ([[thm-induction-principle]]). Indeed $\\pi_1(g(0)) = 0$; and if $\\pi_1(g(n)) = n$, then $g(\\sigma(n)) = f\\big(\\pi_1(g(n)), \\Sigma_n\\big) = \\big(\\sigma(\\pi_1(g(n))),\\, \\Sigma_n + a_{\\pi_1(g(n))}\\big) = \\big(\\sigma(n),\\, \\Sigma_n + a_n\\big)$, so $\\pi_1(g(\\sigma(n))) = \\sigma(n)$. By induction $\\pi_1(g(n)) = n$ for every $n \\in \\mathbb{N}$. Only now may the second coordinate of the two displayed clauses be read off, and doing so gives $$\\Sigma_0 = 0, \\qquad \\Sigma_{\\sigma(n)} = \\Sigma_n + a_n .$$ $\\Sigma$ is moreover the **unique** function $\\mathbb{N} \\to \\mathbb{R}$ with those two properties: if $\\Sigma'$ also has them then $n \\mapsto (n, \\Sigma'_n)$ satisfies the two clauses defining $g$, hence equals $g$ by the uniqueness clause of [[thm-recursion]], so $\\Sigma' = \\Sigma$. We write $\\sum_{k < n} a_k := \\Sigma_n$. The same construction with starting element $(0, 1)$ and $f(n, p) = (\\sigma(n),\\, p \\cdot a_n)$, with the same induction on the first coordinate and the same uniqueness argument, gives the unique $\\Pi : \\mathbb{N} \\to \\mathbb{R}$ with $$\\Pi_0 = 1, \\qquad \\Pi_{\\sigma(n)} = \\Pi_n \\cdot a_n ,$$ and we write $\\prod_{k < n} a_k := \\Pi_n$. **Notation.** For $m, n \\in \\mathbb{N}$ we abbreviate $$\\sum_{k=0}^{n} a_k := \\sum_{k < n+1} a_k, \\qquad \\prod_{k=0}^{n} a_k := \\prod_{k < n+1} a_k,$$ and, for a general lower index $m$ with $m \\le n + 1$, writing $d = n + 1 - m$ for the number of terms, $$\\sum_{k=m}^{n} a_k := \\sum_{j < d} a_{m+j}, \\qquad \\prod_{k=m}^{n} a_k := \\prod_{j < d} a_{m+j} .$$ When $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while the empty product has value $1$. In the same spirit $\\sum_{k=0}^{-1} a_k$ is notation for the empty sum $\\Sigma_0 = 0$ and $\\prod_{k=0}^{-1} a_k$ for the empty product $\\Pi_0 = 1$; the index $-1$ never occurs as an element of $\\mathbb{N}$ and is only a way of writing \"no terms\". Only finitely many values of $a$ enter $\\sum_{k<n} a_k$, so the notation $\\sum_{k<n} a_k$ and $\\prod_{k<n} a_k$ is also used for a list $a_0, \\dots, a_{n-1}$ of reals given without reference to any extension of the list to all of $\\mathbb{N}$: extend the list by $a_k = 0$ (respectively $a_k = 1$) for $k \\ge n$ and apply the definition above.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-moments-variance-and-covariance",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real random variable on a probability space. - For $p>0$, the **$p$th absolute moment** of $X$ exists when $|X|^p$ is integrable, and is then $$\\mathbb E[|X|^p].$$ - If $X$ is integrable, its **mean** is $\\mathbb E[X]$. - If $X$ is square-integrable, its **variance** is $$\\operatorname{Var}(X):=\\mathbb E[(X-\\mathbb E[X])^2].$$ If $X$ and $Y$ are square-integrable real random variables on the same probability space, their **covariance** is $$\\operatorname{Cov}(X,Y):=\\mathbb E[(X-\\mathbb E[X])(Y-\\mathbb E[Y])].$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-variance-adds-for-pairwise-independent-random-variables",
+          "source_section": "Statement",
+          "quote": "If $(X_i)_{i\\in I}$ is a finite pairwise-independent family, then $$\\operatorname{Var}\\!\\left(\\sum_{i\\in I}X_i\\right)=\\sum_{i\\in I}\\operatorname{Var}(X_i).$$ Pairwise independence, rather than mutual independence, is sufficient.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-chebyshev-inequality-for-random-variables",
+          "source_section": "Statement",
+          "quote": "If $X$ is a square-integrable real random variable and $a>0$, then $$\\mathbb P(|X-\\mathbb E[X]|\\ge a)\\le\\frac{\\operatorname{Var}(X)}{a^2}.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "1.1",
+          "step": "1.1",
+          "claim": "[Mean and variance of one sample correlation] Fix $(i,j)$ and put $X_{k}:=\\Sigma_{ijk}\\mathrm T_{ijk}$ for $k=1,\\dots,n$. Each $X_{k}$ takes values in $\\{-1,+1\\}$, so $\\mathbb E[X_{k}]=\\sum_{\\varepsilon,\\delta}\\varepsilon\\delta\\nu^{\\rho}_{ij}(\\varepsilon,\\delta)=E_{ij}$ by [F1] and [F3], and $X_{k}^{2}=1$ identically, so $\\operatorname{Var}(X_{k})=\\mathbb E[X_{k}^{2}]-\\mathbb E[X_{k}]^{2}=1-E_{ij}^{2}\\le1$ by [F4]; the $X_{k}$ are mutually independent because the corresponding pairs are, and $\\widehat E_{ij}=\\frac1n\\sum_{k}X_{k}$. Hence $\\mathbb E[\\widehat E_{ij}]=\\frac1n\\sum_{k}\\mathbb E[X_{k}]=E_{ij}$ by [F3], and $\\operatorname{Var}(\\widehat E_{ij})=\\frac{1}{n^{2}}\\operatorname{Var}(\\sum_{k}X_{k})=\\frac{1}{n^{2}}\\sum_{k}\\operatorname{Var}(X_{k})\\le\\frac{n}{n^{2}}=\\frac1n$ by [F4]; this is (a). [given, F1, F3, F4, algebra]",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "1.2",
+          "step": "1.2",
+          "claim": "[Positive failure probability] Let $(x_{ijk})$ be a sequence of outcomes with $p:=\\prod_{i,j,k}\\nu^{\\rho}_{ij}(x_{ijk})>0$. By mutual independence [F2] the event that the sample equals this sequence has probability exactly $p>0$; if the criterion $C$ rejects this sequence, that is $(x_{ijk})\\notin C$, then the singleton event $\\{(\\Sigma_{ijk},\\mathrm T_{ijk})=(x_{ijk})\\}$ is contained in the failure event $\\{(\\Sigma_{ijk},\\mathrm T_{ijk})\\notin C\\}$, so the failure probability is at least $p>0$. [given, F1, F2, algebra]",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "2.1",
+          "step": "2.1",
+          "claim": "[CHSH estimator moments and concentration] The four families $\\{X_{k}\\}_{k}$ for the four setting pairs involve disjoint groups of the $4n$ mutually independent random elements, so the four estimators $\\widehat E_{ij}$ are mutually independent; by [F3] and [F4], $\\mathbb E[\\widehat S]=E_{00}+E_{01}+E_{10}-E_{11}=S$ and $\\operatorname{Var}(\\widehat S)=\\sum_{i,j}\\operatorname{Var}(\\widehat E_{ij})\\le4\\cdot\\frac1n=\\frac4n$ by step 1.1. Chebyshev [F5] applied to $\\widehat S$ gives $\\mathbb P(|\\widehat S-S|\\ge\\varepsilon)\\le\\operatorname{Var}(\\widehat S)/\\varepsilon^{2}\\le4/(n\\varepsilon^{2})$ for every $\\varepsilon>0$; this is (b). [step 1.1, F1, F3, F4, F5, algebra]",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "3.1",
+          "step": "3.1",
+          "claim": "[Threshold events] If $S\\le2-\\varepsilon$ then $\\{\\widehat S>2\\}\\subseteq\\{|\\widehat S-S|\\ge\\varepsilon\\}$, so its probability is at most $4/(n\\varepsilon^{2})$ by step 2.1. For the singlet arrangement $S=-2\\sqrt2$, so $-\\!S=2\\sqrt2$ and $\\{\\widehat S\\ge-2\\}\\subseteq\\{|\\widehat S-S|\\ge2\\sqrt2-2\\}$, giving the second bound. [step 2.1, F1, algebra]",
+          "inputs": [
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "4.1",
+          "step": "4.1",
+          "claim": "[Assembly and scope] Steps 1.1 and 2.1 prove (a) and (b), step 1.2 and step 3.1 prove the two parts of (c), and (d) records that the sampling model is the declared assumption of P7 clause (ii) and that no measured count, p-value, error rate, power, sample size or empirical conclusion is asserted. [step 1.1, step 1.2, step 2.1, step 3.1, F1] ∎",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 covers the empty acceptance criterion C=empty: the failure event is the whole space and the positive-probability bound holds trivially."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 allows p=nu(a)=0 or 1, where the variance bound is 0; the estimates remain valid."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The case n=1 is allowed in every display; step 2.1 gives the bound 4/eps^2 for n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "A degenerate law with all mass on one sequence has p=1 and is covered by step 1.2: a criterion rejecting that sequence fails with probability 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval endpoints; the trial count n ranges over the positive integers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice principle is used; the statement declares the sampling model and its random elements, and steps 1.1 to 3.1 are finite computations."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item states moment and concentration identities and inequalities, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse (concentration forcing a model) is asserted."
+        }
+      ]
+    }
+  }
+}

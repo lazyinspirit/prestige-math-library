@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions.md

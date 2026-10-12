@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-residue-evaluates-int-one-over-one-plus-x-fourth.md

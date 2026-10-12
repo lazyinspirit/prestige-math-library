@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-closed-ball-is-an-elementary-solid-region-with-the-octant-presentation.md

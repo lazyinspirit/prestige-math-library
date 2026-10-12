@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-continuous-functional-calculus-cannot-produce-every-spectral-projection.md

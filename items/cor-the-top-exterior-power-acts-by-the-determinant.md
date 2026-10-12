@@ -41,8 +41,7 @@ For $n=0$, $\Lambda^0T=\operatorname{id}_F=\det(T)\cdot\operatorname{id}_F$ by c
 
 **Proof technique:** direct.
 
-
-1.1 By [L1] with $k=n$, the wedge basis of $\Lambda^nV$ is the single vector $e_1\wedge\cdots\wedge e_n$, so $\Lambda^nV$ is one-dimensional and the matrix of $\Lambda^nT$ is the $1\times1$ matrix with entry $\det A$. [L1]
+ 1.1 By [L1] with $k=n$, the wedge basis of $\Lambda^nV$ is the single vector $e_1\wedge\cdots\wedge e_n$, so $\Lambda^nV$ is one-dimensional and the matrix of $\Lambda^nT$ is the $1\times1$ matrix with entry $\det A$. [L1]
 
 1.2 By [L2], that entry is $\det(T)$. [L2]
 
@@ -54,4 +53,4 @@ $$\Lambda^nT(v_1\wedge\cdots\wedge v_n)=c\,\Lambda^nT(e_1\wedge\cdots\wedge e_n)
 
 [step 1.1, step 2.1, algebra]
 
-4.1 Steps 2.1 and 3.1 establish the claimed scalar action in positive dimension, and the conventions cover $n=0$. [step 2.1, step 3.1] ∎
+4.1 Steps 2.1 and 3.1 establish the claimed scalar action in positive dimension, and the conventions cover $n=0$. [step 2.1, step 3.1] ∎ 

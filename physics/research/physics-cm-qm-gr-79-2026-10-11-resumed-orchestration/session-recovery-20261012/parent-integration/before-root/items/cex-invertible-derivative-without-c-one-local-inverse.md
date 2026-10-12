@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-invertible-derivative-without-c-one-local-inverse.md

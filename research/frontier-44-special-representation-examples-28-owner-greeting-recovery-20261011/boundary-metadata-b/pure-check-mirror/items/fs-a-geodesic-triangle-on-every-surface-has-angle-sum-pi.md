@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-geodesic-triangle-on-every-surface-has-angle-sum-pi.md

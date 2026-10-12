@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-rn-is-locally-compact-and-sigma-compact.md

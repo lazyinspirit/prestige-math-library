@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-modular-specht-module-need-not-be-simple-or-have-nonzero-form-head.md

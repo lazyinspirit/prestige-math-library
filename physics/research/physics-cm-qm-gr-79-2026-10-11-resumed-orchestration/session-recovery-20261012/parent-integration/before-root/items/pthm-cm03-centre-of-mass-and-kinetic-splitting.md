@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-cm03-centre-of-mass-and-kinetic-splitting.md

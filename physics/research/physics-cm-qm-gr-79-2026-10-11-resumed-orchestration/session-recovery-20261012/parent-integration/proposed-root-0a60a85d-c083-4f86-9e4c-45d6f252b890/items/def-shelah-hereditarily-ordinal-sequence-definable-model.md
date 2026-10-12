@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-shelah-hereditarily-ordinal-sequence-definable-model.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-weighted-limit-in-set-is-the-set-of-natural-transformations-from-the-weight.md

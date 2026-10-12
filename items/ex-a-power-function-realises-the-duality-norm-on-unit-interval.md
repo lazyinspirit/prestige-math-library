@@ -49,5 +49,5 @@ So this explicit power pair realizes the norm of the duality functional.
 
 2.1 The chosen function $f$ satisfies $$|f(x)|^p=(1-aq)x^{-aq}.$$ Step 1.1 therefore gives $$\|[f]\|_p^p=(1-aq)\int_0^1 x^{-aq}\,dx=1,$$ so $\|[f]\|_p=1$. [step 1.1, given, algebra]
 
-2.2 Also $$f(x)g(x)=(1-aq)^{1/p}x^{-aq},$$ so another use of step 1.1 gives $$\int_0^1 f(x)g(x)\,dx=(1-aq)^{1/p}\int_0^1 x^{-aq}\,dx=(1-aq)^{1/p-1}=(1-aq)^{-1/q}.$$ By step 1.1 and [L1], this equals $\|g\|_q=\|\Lambda_g\|$. [L1, step 1.1, given, algebra]
-∎
+3.1 Also $$f(x)g(x)=(1-aq)^{1/p}x^{-aq},$$ so another use of step 1.1 gives $$\int_0^1 f(x)g(x)\,dx=(1-aq)^{1/p}\int_0^1 x^{-aq}\,dx=(1-aq)^{1/p-1}=(1-aq)^{-1/q}.$$ By step 1.1 and [L1], this equals $\|g\|_q=\|\Lambda_g\|$. [L1, step 1.1, given, algebra] ∎
+

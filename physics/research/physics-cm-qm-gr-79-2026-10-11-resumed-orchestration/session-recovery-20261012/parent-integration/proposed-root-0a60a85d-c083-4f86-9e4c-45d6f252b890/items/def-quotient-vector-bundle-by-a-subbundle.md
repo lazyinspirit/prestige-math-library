@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quotient-vector-bundle-by-a-subbundle.md

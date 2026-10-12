@@ -36,11 +36,8 @@ $L^2(\mathbb{R})$.
 
 **Proof technique:** direct.
 
-1.1 Since [given, algebra]
-$$ \int_{\mathbb{R}} (1+|x|)^{-3/2}\,dx < \infty, $$ the functions $f$ and $g$ lie in $L^2(\mathbb{R})$. [given, algebra]
+1.1 Since [given, algebra] $$ \int_{\mathbb{R}} (1+|x|)^{-3/2}\,dx < \infty, $$ the functions $f$ and $g$ lie in $L^2(\mathbb{R})$. [given, algebra]
 
-2.1 For each fixed $x$, the convolution integral is finite: on a bounded $y$-interval its continuous integrand is bounded, while for $|y|>2|x|+2$ one has $1+|x-y|\ge(1+|y|)/2$, so the integrand is at most $2^{3/4}(1+|y|)^{-3/2}$, an integrable tail. For $x>2$, [step 1.1, algebra]
-$$ (f*g)(x) = \int_{\mathbb{R}} (1+|x-y|)^{-3/4}(1+|y|)^{-3/4}\,dy \ge \int_1^{x-1} x^{-3/4}x^{-3/4}\,dy = \frac{x-2}{x^{3/2}}. $$ So for large $x$, $$ (f*g)(x) \ge c\,x^{-1/2} $$ for some $c>0$. [step 1.1, algebra]
+2.1 For each fixed $x$, the convolution integral is finite: on a bounded $y$-interval its continuous integrand is bounded, while for $|y|>2|x|+2$ one has $1+|x-y|\ge(1+|y|)/2$, so the integrand is at most $2^{3/4}(1+|y|)^{-3/2}$, an integrable tail. For $x>2$, [step 1.1, algebra] $$ (f*g)(x) = \int_{\mathbb{R}} (1+|x-y|)^{-3/4}(1+|y|)^{-3/4}\,dy \ge \int_1^{x-1} x^{-3/4}x^{-3/4}\,dy = \frac{x-2}{x^{3/2}}. $$ So for large $x$, $$ (f*g)(x) \ge c\,x^{-1/2} $$ for some $c>0$. [step 1.1, algebra]
 
-3.1 But [step 2.1, algebra]
-$$ \int_2^\infty x^{-1}\,dx = \infty, $$ so the lower bound from step 2.1 shows $f*g \notin L^2(\mathbb{R})$. Hence the statement refuted above is false. [step 2.1, algebra] ∎
+3.1 But [step 2.1, algebra] $$ \int_2^\infty x^{-1}\,dx = \infty, $$ so the lower bound from step 2.1 shows $f*g \notin L^2(\mathbb{R})$. Hence the statement refuted above is false. [step 2.1, algebra] ∎

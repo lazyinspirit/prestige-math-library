@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-separable-extension-has-finitely-many-intermediate-fields.md

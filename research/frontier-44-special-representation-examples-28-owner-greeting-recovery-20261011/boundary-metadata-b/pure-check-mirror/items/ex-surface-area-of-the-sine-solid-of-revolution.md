@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-surface-area-of-the-sine-solid-of-revolution.md

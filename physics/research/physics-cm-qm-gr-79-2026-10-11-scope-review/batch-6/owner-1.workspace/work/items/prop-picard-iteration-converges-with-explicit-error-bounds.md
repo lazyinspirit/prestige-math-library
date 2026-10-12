@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-picard-iteration-converges-with-explicit-error-bounds.md

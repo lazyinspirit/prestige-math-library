@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-determinant-differential-at-an-invertible-and-a-singular-matrix.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-complex-k-theory-is-a-two-periodic-generalized-cohomology-theory.md

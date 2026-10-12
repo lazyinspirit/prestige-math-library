@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weak-maximum-principle-for-coercive-divergence-form-equations.md

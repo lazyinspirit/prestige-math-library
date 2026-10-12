@@ -79,5 +79,4 @@ $k(x,t):=\mathbf 1_{\{0\le t\le x\}}$ on $[0,1]^2$. Then:
 
 3.1 **The spectrum is $\{0\}$.** By step 1.1, $V$ is compact on the complex Hilbert, hence Banach, space $L^2[0,1]$. Thus every nonzero spectral value would be an eigenvalue by [A4], ruled out by step 2.1. To prove $0\in\sigma(V)$ directly, for $0<\delta\le1$ put $f_\delta=\mathbf1_{[0,\delta]}/\sqrt\delta$. Then $\|f_\delta\|_2=1$ and $|Vf_\delta(x)|=\min(x,\delta)/\sqrt\delta\le\sqrt\delta$, so $\|Vf_\delta\|_2\le\sqrt\delta$. A bounded inverse with norm $C$ would give $1\le C\sqrt\delta$ for all such $\delta$; taking $\delta=1/(j+1)^2$ and using [A5] contradicts this. By the resolvent definition in [A4], $0$ lies in the spectrum. Therefore $\sigma(V)=\{0\}$. [step 1.1, step 2.1, A1, A3, A4, A5]
 
-
-4.1 **Conclusion.** Claims 1–4 are [step 1.1], [step 1.2], [step 2.1] and [step 3.1], and [step 1.3] proves the final non-self-adjointness assertion directly. [step 1.1, step 1.2, step 2.1, step 3.1, step 1.3] ∎
+ 4.1 **Conclusion.** Claims 1–4 are [step 1.1], [step 1.2], [step 2.1] and [step 3.1], and [step 1.3] proves the final non-self-adjointness assertion directly. [step 1.1, step 1.2, step 2.1, step 3.1, step 1.3] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-spherical-principal-series-is-the-flag-permutation-module.md

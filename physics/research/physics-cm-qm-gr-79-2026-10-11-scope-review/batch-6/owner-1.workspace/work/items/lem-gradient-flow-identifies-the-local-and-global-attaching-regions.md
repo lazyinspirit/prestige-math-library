@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gradient-flow-identifies-the-local-and-global-attaching-regions.md

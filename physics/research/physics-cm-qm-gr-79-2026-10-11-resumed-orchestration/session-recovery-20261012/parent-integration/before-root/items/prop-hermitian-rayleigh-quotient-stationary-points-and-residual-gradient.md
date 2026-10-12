@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hermitian-rayleigh-quotient-stationary-points-and-residual-gradient.md

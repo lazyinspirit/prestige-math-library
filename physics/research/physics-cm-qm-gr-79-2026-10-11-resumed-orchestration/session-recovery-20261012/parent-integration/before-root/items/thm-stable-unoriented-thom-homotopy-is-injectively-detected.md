@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stable-unoriented-thom-homotopy-is-injectively-detected.md

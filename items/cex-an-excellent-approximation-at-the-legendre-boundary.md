@@ -46,11 +46,8 @@ implies that $r/s$ is a convergent of $\alpha$.
 
 **Proof technique:** direct.
 
-1.1 The first few convergents of $[1;\overline2]=\sqrt2$ are. [given, algebra]
-$$1,\qquad \frac32,\qquad \frac75,\qquad \frac{17}{12},$$ so $10/7$ is not a convergent of $\sqrt2$. [given, algebra]
+1.1 The first few convergents of $[1;\overline2]=\sqrt2$ are. [given, algebra] $$1,\qquad \frac32,\qquad \frac75,\qquad \frac{17}{12},$$ so $10/7$ is not a convergent of $\sqrt2$. [given, algebra]
 
-1.2 Nevertheless. [given, algebra]
-$$\frac{10}{7}-\sqrt2 = \frac{100-98}{7(10+7\sqrt2)} = \frac{2}{7(10+7\sqrt2)} < \frac{3}{4\cdot 7^2}.$$ Thus $10/7$ satisfies the displayed $3/(4s^2)$ bound. [given, algebra]
+1.2 Nevertheless. [given, algebra] $$\frac{10}{7}-\sqrt2 = \frac{100-98}{7(10+7\sqrt2)} = \frac{2}{7(10+7\sqrt2)} < \frac{3}{4\cdot 7^2}.$$ Thus $10/7$ satisfies the displayed $3/(4s^2)$ bound. [given, algebra]
 
-2.1 Step 1.1 and step 1.2 together refute the statement. In the light of [F1],. [F1, F2, step 1.1, step 1.2]
-this shows that the sharp constant $1/2$ in Legendre's criterion cannot simply be replaced by the larger constant $3/4$. [F1, F2, step 1.1, step 1.2] ∎
+2.1 Step 1.1 and step 1.2 together refute the statement. In the light of [F1],. [F1, F2, step 1.1, step 1.2] this shows that the sharp constant $1/2$ in Legendre's criterion cannot simply be replaced by the larger constant $3/4$. [F1, F2, step 1.1, step 1.2] ∎ 

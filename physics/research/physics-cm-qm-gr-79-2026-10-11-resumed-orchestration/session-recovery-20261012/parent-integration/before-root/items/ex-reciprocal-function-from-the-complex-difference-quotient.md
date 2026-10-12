@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reciprocal-function-from-the-complex-difference-quotient.md

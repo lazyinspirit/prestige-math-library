@@ -1,0 +1,2101 @@
+{
+ "version": 1,
+ "scope": [
+  "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+  "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences",
+  "lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap",
+  "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+  "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom",
+  "thm-constructible-six-functors-proper-base-change-and-verdier-duality",
+  "lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative",
+  "thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+  "thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars",
+  "ex-equivariant-constructible-ext-on-a-point-is-degreewise-finite-not-total-finite"
+ ],
+ "contracts": {
+  "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties": {
+   "citations": [],
+   "derivations": [],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The Definition is formulated for an arbitrary separated finite-type complex variety and an arbitrary algebraic action; for the empty variety the nerve, the simplicial sheaf category and the three defining clauses are vacuous, and no clause requires a nonzero object to exist."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero complex satisfies all three clauses of the Definition: it is bounded, has Cartesian cohomology and has zero constructible degree-zero restriction, so it is the zero object of the defined category."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The Definition fixes no count; for a one-point variety with the trivial action the nerve is constant and the definition reduces to the ordinary bounded constructible category, which the Definition covers through its degree-zero restriction clause."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The Definition also covers the degenerate group case of the empty product of general linear groups (the trivial group): then each Z_p is X, Cartesian cohomology is a condition on a constant simplicial sheaf, and the category is the ordinary bounded constructible category."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "The Definition contains no interval, limiting parameter or asymptotic boundary; boundedness is expressed by two integers and the shift convention is global."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The Definition assumes AC explicitly and records in its well-formedness paragraph that AC is inherited exactly from the injective-model suppliers, with no further choice introduced; the statement also points to the justified_by lemma for the choices of injective resolutions."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The item is a definition of a category and its conventions; it asserts no biconditional theorem and owes no forward implication."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse direction belongs to a definition of terminology."
+    }
+   ]
+  },
+  "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+     "source_section": "Statement",
+     "quote": "For a local product projection $\\operatorname{pr}:V\\times F\\to V$ with supplied finite deleted-boundary models, there is a natural local comparison $R\\operatorname{pr}_*\\operatorname{pr}^*B\\simeq B\\otimes_k C^*(F;k)$, taking the unit to $B\\otimes(k\\to C^*(F;k))$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+     "source_section": "Statement",
+     "quote": "On any separated finite-type complex variety, bounded algebraically constructible objects have bounded finite ordinary and compact-support cohomology, ordinary derived Hom and bounded constructible internal Hom, with coefficient-extension compatibility, by these models locally and finite affine-open descent globally.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions",
+     "source_section": "Statement",
+     "quote": "Inverse image of sheaves of $k$-vector spaces ([[def-sheaf-on-topological-space]], [[def-inverse-image-presheaf-and-sheaf]]) is exact and $f^*\\dashv Rf_*$, where $Rf_*$ is computed on bounded-below $k$-linear injective replacements ([[lem-bounded-below-complexes-admit-injective-replacements]], [[thm-injective-complexes-model-the-bounded-below-derived-category]]).",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "lem-field-module-sheaves-have-injective-derived-models",
+     "source_section": "Statement",
+     "quote": "These resolutions are bounded-below injective replacements, so with the dependent choice supplied by AC ([[thm-choice-implies-dependent-implies-countable-choice]]) the bounded-below injective complexes model the bounded derived category:",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-canonical-t-structure-on-a-derived-category",
+     "source_section": "Definition",
+     "quote": "For a triangulated category $T$ with shift $[1]$, a **t-structure** is a pair of strictly full subcategories $(T^{\\leq0},T^{\\geq0})$ such that $T^{\\leq0}[1]\\subseteq T^{\\leq0}$, $T^{\\geq0}[-1]\\subseteq T^{\\geq0}$, $\\operatorname{Hom}_T(T^{\\leq0},T^{\\geq1})=0$, and every $X$ has a distinguished triangle $A\\to X\\to B\\to A[1]$ with $A\\in T^{\\leq0}$ and $B\\in T^{\\geq1}$.",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-derived-category-of-an-abelian-category",
+     "source_section": "Definition",
+     "quote": "Thus $H^n(X[k])=H^{n+k}(X)$.",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "def-canonical-truncation-of-a-complex",
+     "source_section": "Definition",
+     "quote": "For a cochain complex $X$, define the **canonical truncations** by $$ (\\tau^{\\leq n}X)^i=\\begin{cases}X^i&i<n,\\\\\\ker d_X^n&i=n,\\\\0&i>n,\\end{cases}\\qquad (\\tau^{\\geq n}X)^i=\\begin{cases}0&i<n,\\\\\\operatorname{coker}d_X^{n-1}&i=n,\\\\X^i&i>n.\\end{cases} $$ The differential into $\\ker d_X^n$ is the factorization of $d_X^{n-1}$; the differential out of $\\operatorname{coker}d_X^{n-1}$ is induced by $d_X^n$.",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-canonical-truncations-fit-a-distinguished-triangle",
+     "source_section": "Statement",
+     "quote": "In particular, for every integer $n$ there are canonical distinguished triangles $$\\tau^{\\leq n}X\\to X\\to\\tau^{\\geq n+1}X\\to(\\tau^{\\leq n}X)[1],$$ $$\\tau^{\\leq n}X\\to\\tau^{\\leq n+1}X\\to H^{n+1}(X)[-n-1]\\to(\\tau^{\\leq n}X)[1],$$ $$H^n(X)[-n]\\to\\tau^{\\geq n}X\\to\\tau^{\\geq n+1}X\\to H^n(X)[-n+1].$$",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+     "source_section": "Statement",
+     "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated.",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "lem-localized-cone-triangles-satisfy-tr-one-through-tr-three",
+     "source_section": "Statement",
+     "quote": "The cochain shift descends and these triangles satisfy TR1, signed TR2, and TR3.",
+     "uses": [
+      "3.1",
+      "3.2",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+     "source_section": "Definition",
+     "quote": "$A$ is **algebraically constructible**: there exists a finite smooth algebraic stratification with the frontier condition $\\mathfrak S$ of $X$ ([[def-analytic-topology-and-finite-smooth-algebraic-stratifications]]) such that for every stratum $S\\in\\mathfrak S$ and every integer $j$ the restriction $H^j(A)|_S$ is locally constant of finite rank ([[def-locally-constant-sheaf-of-finite-rank]]).",
+     "uses": [
+      "2.1",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-locally-constant-sheaf-of-finite-rank",
+     "source_section": "Definition",
+     "quote": "Then $\\mathcal F$ is **locally constant of finite rank** if every point $x\\in S$ has an open neighbourhood $U\\subseteq S$ for which there are an integer $n\\ge0$ and an isomorphism of sheaves on $U$ $$\\mathcal F|_U\\;\\cong\\;k_U^{\\,n},$$ where $k_U$ is the constant sheaf on $U$ with value $k$ and $\\mathcal F|_U$ is the restriction of $\\mathcal F$ to the open subspace $U$ ([[def-restriction-sheaf-open-subspace]], [[def-morphism-of-presheaves]], [[lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions]]).",
+     "uses": [
+      "2.1",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "lem-field-module-sheaves-have-injective-derived-models",
+     "source_section": "Statement",
+     "quote": "These resolutions are bounded-below injective replacements, so with the dependent choice supplied by AC ([[thm-choice-implies-dependent-implies-countable-choice]]) the bounded-below injective complexes model the bounded derived category:",
+     "uses": [
+      "2.1",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+     "source_section": "Statement",
+     "quote": "Then $\\varphi$ is an isomorphism if and only if, for every $x\\in X$, the induced map on stalks $$\\varphi_x:\\mathcal F_x\\longrightarrow\\mathcal G_x$$ is a bijection.",
+     "uses": [
+      "2.1",
+      "4.1",
+      "4.3"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "cor-kunneth-over-a-field",
+     "source_section": "Statement",
+     "quote": "For complexes of vector spaces over a field $k$ with finite diagonals, cross product is a natural isomorphism $\\bigoplus_{p+q=n}H_pC\\otimes_kH_qD\\cong H_n(C\\otimes_kD)$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "thm-inverse-direct-image-adjunction",
+     "source_section": "Statement",
+     "quote": "Then there is a natural bijection $$\\operatorname{Hom}_X(f^{-1}\\mathcal G,\\mathcal F) \\cong \\operatorname{Hom}_Y(\\mathcal G,f_*\\mathcal F).$$",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "def-inverse-image-presheaf-and-sheaf",
+     "source_section": "Definition",
+     "quote": "The **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification of this presheaf:",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "def-direct-image-sheaf",
+     "source_section": "Definition",
+     "quote": "The **direct image presheaf** $$f_*\\mathcal F$$ on $Y$ is defined on an open set $V \\subseteq Y$ by $$ (f_*\\mathcal F)(V):=\\mathcal F(f^{-1}(V)).",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "5.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The local comparison and the fiber model.** Let $V\\subseteq S$ be a product chart with trivialization $Y|_V\\cong V\\times F$ and projection $\\operatorname{pr}:V\\times F\\to V$. By [F1] there is a natural comparison $R\\operatorname{pr}_*\\operatorname{pr}^*B_V\\simeq B_V\\otimes_kC^*(F;k)$ for bounded $B_V\\in D_c^b(V;k)$, compatible with restriction to smaller charts and carrying the adjunction unit to $B_V\\otimes(k\\to C^*(F;k))$. By [F2] the chart and the fiber carry finite deleted-boundary models, so $C^*(F;k)$ is a",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F2",
+      "F3",
+      "F8"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**The cone bound.** Let $\\tilde C:=\\operatorname{Cone}(k\\to C^*(F;k))$, a bounded complex of finite-dimensional vector spaces with $H^0(\\tilde C)=0$ and $H^j(\\tilde C)=H^j(C^*(F;k))=0$ for $1\\le j\\le r$; hence $H^j(\\tilde C)=0$ for all $j\\le r$. Now let $B\\in D_c^{\\ge b}(S;k)$, so $H^p(B)=0$ for $p<b$. By [F7] the cohomology of $B_V\\otimes_k\\tilde C$ is the direct sum of the terms $H^p(B_V)\\otimes_kH^q(\\tilde C)$ with $p+q=n$, and a nonzero such term needs $p\\ge b$ and $q\\ge r+1$, hence $n\\ge b+r+1$; therefore",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F7",
+      "step 1.1",
+      "F6",
+      "F1",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**The Hom comparison.** Let $B\\to Rf_*f^*B\\to C\\to B[1]$ be the distinguished triangle of the unit, with $C\\in D^{\\ge b+r+1}$ by step 2.1, and let $A\\in D_c^{\\le a}(S;k)$ and $m\\le b+r-a$. By [F5], $C[m]\\in D^{\\ge b+r+1-m}$ and $C[m-1]\\in D^{\\ge b+r+2-m}$; since $m\\le b+r-a$ gives $b+r+1-m>a$ and $b+r+2-m>a$, orthogonality $\\operatorname{Hom}(D^{\\le a},D^{\\ge a+1})=0$ gives $\\operatorname{Hom}(A,C[m])=0=\\operatorname{Hom}(A,C[m-1])$. The long exact Hom sequence of [F4] applied to the triangle, shifted by $[m]$,",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "step 2.1",
+      "F5",
+      "F4",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-3-2",
+     "claim": "**The image criterion.** Assume $a-b\\le r$ and put $\\Phi=f^*:D_c^{[b,a]}(S;k)\\to D_c^{[b,a]}(Y;k)$ and $\\Psi=\\tau^{\\le a}\\circ Rf_*$. For $B\\in D_c^{[b,a]}(S;k)$ the cone of the unit $B\\to Rf_*f^*B$ lies in $D^{\\ge b+r+1}\\subseteq D^{\\ge a+1}$ by step 2.1 and $b+r+1>a$, so the truncated unit $\\tau^{\\le a}Rf_*f^*B\\to\\tau^{\\le a}B=B$ is an isomorphism; equivalently $\\Psi\\Phi\\cong\\operatorname{id}$. Now let $C\\in D_c^{[b,a]}(Y;k)$. Since $C\\in D^{\\ge b}$ and $Rf_*$ preserves lower bounds (a bounded-below complex can",
+     "step": "3.2",
+     "inputs": [
+      "given",
+      "step 2.1",
+      "F4",
+      "F3",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**Full faithfulness.** If $a-b\\le r$, then $0\\le b+r-a$, so claim 2 with $m=0$ gives that $\\operatorname{Hom}(A,B)\\to\\operatorname{Hom}(f^*A,f^*B)$ is a bijection for all objects $A,B$ of $D_c^{[b,a]}(S;k)$. Inverse image is exact and preserves the canonical t-structure and algebraic constructibility by [F3] and [F6], so $f^*$ maps $D_c^{[b,a]}(S;k)$ into $D_c^{[b,a]}(Y;k)$; a functor between categories that is bijective on all Hom sets is fully faithful, so claim 3 follows.",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "F3",
+      "F6",
+      "F5",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-4-2",
+     "claim": "**Retracts.** Let $C\\in D_c^{[b,a]}(Y;k)$ be a direct summand of $\\Phi B=f^*B$ for some $B\\in D_c^{[b,a]}(S;k)$, with maps $i:C\\to\\Phi B$ and $p:\\Phi B\\to C$ satisfying $pi=\\operatorname{id}_C$. The counit $\\gamma$ is a natural transformation $\\Phi\\Psi\\to\\operatorname{id}$; naturality in the form $u\\circ\\gamma_X=\\gamma_Y\\circ\\Phi\\Psi(u)$ for $u:X\\to Y$, applied to $u=i$ and $u=p$, gives $p\\circ\\gamma_{\\Phi B}\\circ\\Phi\\Psi(i)=p\\circ i\\circ\\gamma_C=\\gamma_C$ and $\\gamma_C\\circ\\Phi\\Psi(p)=p\\circ\\gamma_{\\Phi B}$. By",
+     "step": "4.2",
+     "inputs": [
+      "given",
+      "step 3.2"
+     ]
+    },
+    {
+     "id": "step-4-3",
+     "claim": "**Extensions under the strict bound.** Assume $r\\ge a-b+1$ and let $C'\\to C\\to C''\\to C'[1]$ be a distinguished triangle in $D_c^{[b,a]}(Y;k)$ whose outer objects lie in the image: $C'=f^*B'$ and $C''=f^*B''$ with $B',B''\\in D_c^{[b,a]}(S;k)$. Let $\\varphi:C''\\to C'[1]$ be its connecting morphism. Because $1\\le b+r-a$ by the strict bound, claim 2 applies with $A=B''\\in D_c^{\\le a}(S;k)$, $B=B'\\in D_c^{\\ge b}(S;k)$ and $m=1$; the isomorphism $\\operatorname{Hom}(B'',B'[1])\\cong\\operatorname{Hom}(f^*B'',f^*B'[1])$",
+     "step": "4.3",
+     "inputs": [
+      "given",
+      "F5",
+      "F6",
+      "F3",
+      "F4",
+      "step 3.2"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "**Conclusion and the local nature of the comparison.** Step 2.1 proves the cone claim 1; step 3.1 proves the Hom comparison claim 2, step 4.1 full faithfulness claim 3, and steps 3.2, 4.2 and 4.3 the image criterion and the closure properties of claim 4. The comparison used in step 2.1 is the local product comparison on product charts, not a global splitting: no isomorphism $Rf_*f^*B\\simeq B\\otimes R\\Gamma(F;k)$ is asserted, and the argument uses only the cone of the unit and the degreewise vanishing of the fiber",
+     "step": "5.1",
+     "inputs": [
+      "given",
+      "step 2.1",
+      "step 3.1",
+      "step 4.1",
+      "step 3.2",
+      "step 4.2",
+      "step 4.3",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "The Statement assumes the fiber is nonempty and connected; for an empty base S the chart cover of step 2.1 is empty, the cone bound is vacuous chartwise, and all Hom groups compared in step 3.1 vanish."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The degenerate acyclicity r=0 is covered explicitly: step 1.1 identifies the fiber model with vanishing reduced cohomology only in degree zero, steps 3.1 and 3.2 with r=0 give the degree-zero comparison and the image criterion at width zero, and step 4.3 records that extension closure fails at the boundary r=a-b."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The unit component is isolated in step 1.1 and used in step 2.1: the structure map k to C^*(F;k) identifies k with H^0 and the cone has vanishing cohomology through degree r; this is exactly the hypothesis H^0(F;k)=k of the Statement."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The trivial bundle case is the local model of step 1.1 with S=V and Y=V x F; the chart comparison there is the identity comparison of the Statement, and step 2.1 applies it on every chart without extra hypotheses."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The two critical endpoints are the degree bound m=b+r-a of claim 2, proved in step 3.1, and the width endpoint a-b=r of claim 4, where step 4.3 proves retract closure and image characterization but deliberately does not prove extension closure."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 5.1 closes the argument by recording that the only choice-theoretic inputs are those of [A1]: the injective replacements and the AC-assumed suppliers [F1] and [F2]; the cone, truncation, gluing and Hom arguments are choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The forward direction of the image criterion in claim 4 is proved in step 3.2: if C lies in the image of f^* then the counit gamma_C is an isomorphism, by the triangle identity for C=f^*B."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The reverse direction of the image criterion is proved in step 3.2: if gamma_C is an isomorphism then C is canonically isomorphic to Phi(Psi C) with Psi C in D_c^{[b,a]}(S;k), so C lies in the image."
+    }
+   ]
+  },
+  "lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-stiefel-space-grassmannian-and-tautological-bundle",
+     "source_section": "Definition",
+     "quote": "The **Stiefel space** $$V_n(\\mathbb F^N)=\\{(v_1,\\ldots,v_n):\\langle v_i,v_j\\rangle=\\delta_{ij}\\}$$ has the subspace topology from $(\\mathbb F^N)^n$.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "thm-gram-schmidt-orthonormalisation",
+     "source_section": "Statement",
+     "quote": "There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$, $$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$ It is obtained recursively from $$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$ For $r=0$, both lists are empty.",
+     "uses": [
+      "1.1",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-immersion-submersion-and-constant-rank-map",
+     "source_section": "Definition",
+     "quote": "Let $F:M^m\\to N^n$ be a smooth map. - $F$ is an **immersion at $p\\in M$** when $dF_p$ is injective. - $F$ is a **submersion at $p\\in M$** when $dF_p$ is surjective. - $F$ has **constant rank $r$ on $A\\subseteq M$** when $\\operatorname{rank}_pF=r$ for every $p\\in A$ ([[def-rank-of-a-smooth-map-at-a-point]]).",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "cor-regular-level-set-local-graph-theorem",
+     "source_section": "Statement",
+     "quote": "Near each point, a regular level set is a $C^k$ graph over $\\ker Df(a)$ of dimension $m-n$.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-smooth-manifold",
+     "source_section": "Definition",
+     "quote": "A **smooth $n$-manifold** is a pair $(M,\\mathcal S)$ in which $M$ is a topological $n$-manifold ([[def-topological-manifold-without-boundary]]) and $\\mathcal S$ is a **smooth structure** on $M$: a maximal smooth atlas ([[thm-each-smooth-atlas-is-contained-in-a-unique-maximal-smooth-atlas]]).",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "cor-euclidean-compactness-equivalence-chart",
+     "source_section": "Statement",
+     "quote": "If $n\\ge1$ and $A\\subseteq\\mathbb{R}^n$ is nonempty, then the following conditions are equivalent: compactness; closedness and boundedness; pseudocompactness; attainment of a maximum and minimum by every continuous $A\\to\\mathbb{R}$; countable compactness; sequential compactness; limit point compactness; and completeness together with total boundedness.",
+     "uses": [
+      "1.2",
+      "3.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations",
+     "source_section": "Statement",
+     "quote": "Then $M$ has a finite corner-adapted whole-star smooth triangulation.",
+     "uses": [
+      "1.2",
+      "3.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-geometric-realization-of-an-abstract-simplicial-complex",
+     "source_section": "Definition",
+     "quote": "Its **geometric realization** $|K|$ is the set of functions $\\alpha:V \\to [0,1]$ such that: 1.",
+     "uses": [
+      "1.2",
+      "3.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-cw-complex-with-closure-finiteness-and-weak-topology",
+     "source_section": "Definition",
+     "quote": "A **CW complex** is a Hausdorff space $X$ with a filtration $$\\varnothing=X^{-1}\\subseteq X^0\\subseteq X^1\\subseteq\\cdots,\\qquad X=\\bigcup_{n\\geq0}X^n,$$ where $X^0$ is discrete and $X^n$ is obtained from $X^{n-1}$ by attaching a (possibly infinite) family of $n$-disks along maps $S^{n-1}\\to X^{n-1}$ as in [[def-cell-attachment-by-a-characteristic-map]].",
+     "uses": [
+      "1.2",
+      "3.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "def-locally-trivial-fiber-bundle",
+     "source_section": "Definition",
+     "quote": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms $$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$ Here bundle charts, including those used later for principal and associated bundles, are charts in ordinary topological spaces with ordinary product and subspace topologies.",
+     "uses": [
+      "2.1",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "prop-compact-spaces-are-paracompact",
+     "source_section": "Statement",
+     "quote": "Every compact topological space is paracompact.",
+     "uses": [
+      "2.1",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "cor-compact-hausdorff-partitions-of-unity",
+     "source_section": "Statement",
+     "quote": "Every open cover of a compact Hausdorff space admits a finite partition of unity subordinate to that cover.",
+     "uses": [
+      "2.1",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+     "source_section": "Statement",
+     "quote": "Every numerable fiber bundle, with its supplied ordinary local product charts and support-subordinate locally finite partition of unity, is a Hurewicz fibration in all ordinary spaces.",
+     "uses": [
+      "2.1",
+      "4.1",
+      "5.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-cohomological-serre-spectral-sequence",
+     "source_section": "Statement",
+     "quote": "The decreasing skeletal filtration gives a natural first-quadrant cohomological spectral sequence $$E_2^{a,b}\\cong H^a\\bigl(B;\\mathcal H^b(p;R)\\bigr),\\qquad d_r:E_r^{a,b}\\longrightarrow E_r^{a+r,b-r+1},$$ strongly converging to $H^{a+b}(E;R)$ with the finite image filtration $$F^aH^n(E;R)=\\operatorname{im}\\bigl(H^n(E,E_{a-1};R)\\to H^n(E;R)\\bigr),\\qquad H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0.$$ Its stable terms have the specified natural identifications $$E_\\infty^{a,n-a}\\cong F^aH^n(E;R)/F^{a+1}H^n(E;R).$$ For a square of fibrations over a cellular map $f:B\\to B'$ with total map $u:E\\to E'$, naturality is contravariant:",
+     "uses": [
+      "4.1",
+      "5.1",
+      "6.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "cor-homology-of-spheres",
+     "source_section": "Statement",
+     "quote": "For $n\\ge1$, $\\widetilde H_k(S^n;G)$ is $G$ for $k=n$ and $0$ otherwise.",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "thm-universal-coefficient-theorem-for-cohomology-over-a-pid",
+     "source_section": "Statement",
+     "quote": "Then naturally $$0\\to\\operatorname{Ext}^1_R(H_{n-1}C,G)\\to H^n\\operatorname{Hom}_R(C,G)\\xrightarrow{\\operatorname{ev}_n}\\operatorname{Hom}_R(H_nC,G)\\to0$$ is exact.",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "cor-euclidean-spheres-are-path-connected",
+     "source_section": "Statement",
+     "quote": "For $n\\ge2$, the unit sphere $S^{n-1}\\subseteq\\mathbb R^n$ is path-connected and connected.",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-path-connected",
+     "source_section": "Definition",
+     "quote": "$X$ is **path-connected** when for every pair $x, y \\in X$ there is a path in $X$ from $x$ to $y$.",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "def-connected-space",
+     "source_section": "Definition",
+     "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). - A **separation** of $X$ is an ordered pair $(U, V)$ of **open**, **nonempty**, **disjoint** subsets of $X$ with $U \\cup V = X$. - $X$ is **disconnected** when a separation of $X$ exists, and **connected** when none does. - A subset $A \\subseteq X$ is a **connected subset** of $X$ when the space $(A, \\mathcal{T}_A)$ is connected, $\\mathcal{T}_A$ being the subspace topology ([[def-subspace-topology-top]]).",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F8",
+     "source": "def-locally-trivial-fiber-bundle",
+     "source_section": "Definition",
+     "quote": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms $$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$ Here bundle charts, including those used later for principal and associated bundles, are charts in ordinary topological spaces with ordinary product and subspace topologies.",
+     "uses": [
+      "3.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "6.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The frame retraction.** Fix $n\\le N$ and let $A\\in\\operatorname{Inj}(\\mathbb C^n,\\mathbb C^N)$ have columns $v_0,\\dots,v_{n-1}$, a linearly independent list. Applying the Gram-Schmidt recursion of [F1] to $(v_0,\\dots,v_{n-1})$ gives an orthonormal list $(e_0,\\dots,e_{n-1})$ with $\\operatorname{span}(e_0,\\dots,e_{k-1})=\\operatorname{span}(v_0,\\dots,v_{k-1})$ for every $k$, so the upper triangular matrix $R$ with $R_{jk}=\\langle v_k,e_j\\rangle$ for $j<k$, $R_{kk}=\\lVert u_k\\rVert>0$ and $R_{jk}=0$ for $j>k$",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "**$V_n(\\mathbb C^N)$ is a compact smooth manifold.** Identify $\\mathbb C^{N\\times n}$ with $\\mathbb R^{2Nn}$ and let $\\operatorname{Herm}(n)$ be the real vector space of Hermitian $n\\times n$ matrices, of dimension $n^2$. The map $f(A)=A^*A-I_n$ is smooth, and at a full-rank $A$ its differential $dA\\mapsto A^*dA+dA^*A$ is surjective onto $\\operatorname{Herm}(n)$: for Hermitian $B$ the matrix $dA=\\tfrac12A(A^*A)^{-1}B$ satisfies $A^*dA+dA^*A=B+B^*=2B$. Hence $I_n$ is a regular value of $f$ on the full-rank locus,",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "F2",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**The forgetting map is a numerable Serre fibration.** Fix a frame $w\\in V_{n-1}(\\mathbb C^N)$ and let $U$ be the open neighbourhood of $w$ consisting of frames for which the orthogonal projection onto the orthogonal complement of $\\operatorname{span}(w)$ restricts to an isomorphism; Gram-Schmidt on the projected last vector identifies the part of $V_n(\\mathbb C^N)$ over $U$ with $U\\times S^{2(N-n)+1}$ over $U$, continuously and with continuous inverse. Hence forgetting the last column is a locally trivial fiber",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "step 1.2",
+      "F4",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Finite CW model and path-connectedness.** By the triangulation theorem of [F3] applied to the compact smooth manifold $V_n(\\mathbb C^N)$, there is a finite simplicial complex $K_n$ and a homeomorphism $|K_n|\\to V_n(\\mathbb C^N)$. A finite simplicial complex is a finite CW complex: its cells are the open simplices, the characteristic maps are the inclusions of the closed simplices, closure finiteness holds because there are finitely many simplices, and the weak topology agrees with the topology of the realization",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "F3",
+      "step 2.1",
+      "F6",
+      "F8"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**The cohomology gap for one factor.** Fix $n\\le N$ and set $d=2(N-n)+1$. We prove by induction on $n$ that $H^0(V_n(\\mathbb C^N);k)\\cong k$ and $H^j(V_n(\\mathbb C^N);k)=0$ for $1\\le j\\le d-1=2(N-n)$. The case $n=0$ is the point. For $n\\ge1$, transfer the bundle of step 2.1 along the homeomorphism $|K_{n-1}|\\to V_{n-1}(\\mathbb C^N)$ of step 3.1: the pullback is a numerable fiber bundle over the finite CW complex $|K_{n-1}|$ with fiber $S^d$, hence a Serre fibration by [F4], and its total space is homeomorphic to",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "step 2.1",
+      "step 3.1",
+      "F4",
+      "F5",
+      "F6"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "**The product.** By step 1.1 it suffices to compute the cohomology of $\\prod_{i=1}^sV_{n_i}(\\mathbb C^{N_i})$, and we induct on $s$. For $s=0$ the product is a point. For $s\\ge1$ let $P=\\prod_{i<s}V_{n_i}(\\mathbb C^{N_i})$ and consider the projection $P\\times V_{n_s}(\\mathbb C^{N_s})\\to P$, a trivial bundle with fiber $V_{n_s}(\\mathbb C^{N_s})$, hence numerable and a Serre fibration by [F4]. By step 3.1 each factor and, inductively, $P$ is homeomorphic to a finite CW complex, and a finite product of finite CW",
+     "step": "5.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "F4",
+      "step 3.1",
+      "F5",
+      "step 4.1"
+     ]
+    },
+    {
+     "id": "step-6-1",
+     "claim": "**Conclusion.** Steps 1.1 and 5.1 give claims 1 and 3; steps 1.2, 2.1 and 3.1 give claim 2. AC is consumed only through the named compactness, triangulation, partition-of-unity and spectral-sequence suppliers [F3]-[F5], as recorded in [A1].",
+     "step": "6.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 5.1",
+      "step 1.2",
+      "step 2.1",
+      "step 3.1",
+      "F3",
+      "F5",
+      "A1",
+      "step 4.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The Statement fixes s at least 1 and every n_i at least 1, so neither the product U_N nor any Stiefel space in the claim can be empty."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero-dimensional base case n=0, where V_0 is a point with H^0=k and no positive-degree vanishing obligation, is the induction base in step 4.1 and is also used in the path-connectedness induction of step 3.1."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The one-factor, one-column case n=1, s=1 is included in the induction of step 4.1, and the smallest resolution parameter N=n+1 started there is carried through the product induction of step 5.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate end N_i=n_i+1 of the allowed range is covered by step 2.1 and step 4.1: the sphere fiber S^{2(N-n)+1} still has dimension at least 3 and the gap bound r_N=2 is positive, so no vanishing statement degenerates."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The Statement asserts vanishing only up to the endpoint r_N and explicitly makes no claim above it, while step 5.1 proves exactly the endpoint degree j=r_N and stops; the endpoint of the induction d-1=2(N-n) is handled in step 4.1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 6.1 records the complete AC audit of [A1]: AC is consumed only through the compactness, triangulation, partition-of-unity and spectral-sequence suppliers [F3]-[F5], while the Gram-Schmidt and degree bookkeeping arguments are choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The Statement is a list of existence and vanishing assertions for the frame spaces; no biconditional is asserted and no forward implication is owed."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse direction occurs: the claim makes no characterization statement that would have a reverse implication."
+    }
+   ]
+  },
+  "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "def-stiefel-space-grassmannian-and-tautological-bundle",
+     "source_section": "Definition",
+     "quote": "They locally trivialize $V_n(\\mathbb F^N)\\to\\operatorname{Gr}_n(\\mathbb F^N)$ as a principal $K_n$-bundle.",
+     "uses": [
+      "1.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "thm-gram-schmidt-orthonormalisation",
+     "source_section": "Statement",
+     "quote": "There is an orthonormal list $(e_0,\\ldots,e_{r-1})$ such that, for every $k\\le r$, $$\\operatorname{span}(e_0,\\ldots,e_{k-1})=\\operatorname{span}(v_0,\\ldots,v_{k-1}).$$ It is obtained recursively from $$u_k=v_k-\\sum_{j<k}\\langle v_k,e_j\\rangle e_j,\\qquad e_k=\\frac{u_k}{\\lVert u_k\\rVert}.$$ For $r=0$, both lists are empty.",
+     "uses": [
+      "1.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "def-free-group-action",
+     "source_section": "Definition",
+     "quote": "A left action of a group $G$ on a set $X$ ([[def-group-action]]) is **free** when $$g\\cdot x=x\\quad\\Longrightarrow\\quad g=e$$ for every $g\\in G$ and $x\\in X$.",
+     "uses": [
+      "1.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "def-principal-g-bundle-and-associated-fiber-bundle",
+     "source_section": "Definition",
+     "quote": "A **right principal $G$-bundle** is a continuous map $\\pi:P\\to B$ with a continuous right action $(p,g)\\mapsto pg$, satisfying $p1=p$, $(pg)h=p(gh)$ and $\\pi(pg)=\\pi(p)$, together with equivariant bundle charts $\\theta_i:\\pi^{-1}(U_i)\\cong U_i\\times G$ over an open cover.",
+     "uses": [
+      "1.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap",
+     "source_section": "Statement",
+     "quote": "$H^0(U_N;k)\\cong k$ and $H^j(U_N;k)=0$ for $1\\le j\\le r_N$.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences",
+     "source_section": "Statement",
+     "quote": "Then, for bounded algebraically constructible complexes of $k$-sheaves: 1. for $B\\in D_c^{\\ge b}(S;k)$ the cone of the unit $B\\to Rf_*f^*B$ belongs to $D^{\\ge b+r+1}$; 2. pullback induces an isomorphism $\\operatorname{Hom}(A,B[m])\\cong\\operatorname{Hom}(f^*A,f^*B[m])$ whenever $A\\in D_c^{\\le a}(S;k)$, $B\\in D_c^{\\ge b}(S;k)$ and $m\\le b+r-a$; 3. if $a-b\\le r$, then $f^*$ is fully faithful on the full subcategory $D_c^{[b,a]}(S;k)$; 4. if $a-b\\le r$, then an object $C\\in D_c^{[b,a]}(Y;k)$ lies in the image of $f^*:D_c^{[b,a]}(S;k)\\to D_c^{[b,a]}(Y;k)$ if and only if the counit $f^*\\tau^{\\le a}Rf_*C\\to C$ is an isomorphism; the image is closed under direct summands, and it is closed under extensions when the stronger bound $r\\ge a-b+1$ holds; 5. no global tensor splitting $Rf_*f^*B\\simeq B\\otimes R\\Gamma(F;k)$ is asserted: the comparison is local and genuine characteristic-class transgressions are preserved.",
+     "uses": [
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+     "source_section": "Statement",
+     "quote": "Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "lem-complex-algebraic-stratifications-have-finite-conical-cochain-models",
+     "source_section": "Statement",
+     "quote": "On any separated finite-type complex variety, bounded algebraically constructible objects have bounded finite ordinary and compact-support cohomology, ordinary derived Hom and bounded constructible internal Hom, with coefficient-extension compatibility, by these models locally and finite affine-open descent globally.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+     "source_section": "Statement",
+     "quote": "For a strict augmented simplicial space $Z_\\bullet\\to S$, its category of simplicial analytic $k$-sheaves has explicit coinduced injective resolutions.",
+     "uses": [
+      "1.1",
+      "3.1",
+      "4.1",
+      "5.1",
+      "6.1",
+      "7.1"
+     ]
+    },
+    {
+     "fact": "F6",
+     "source": "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+     "source_section": "Definition",
+     "quote": "**Definition.** The **equivariant constructible derived category** $D^b_{G,c}(X;k)$ is the full subcategory of $D^b(\\operatorname{Sh}_k(Z_\\bullet))$ consisting of the complexes $A$ satisfying: 1.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "def-canonical-t-structure-on-a-derived-category",
+     "source_section": "Definition",
+     "quote": "For the triangulation of [[thm-the-derived-category-inherits-a-triangulated-structure]], the canonical candidate is $D^{\\leq0}=\\{X:H^i(X)=0\\text{ for }i>0\\}$ and $D^{\\geq0}=\\{X:H^i(X)=0\\text{ for }i<0\\}$, using [[prop-cohomology-factors-through-the-derived-category]].",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F7",
+     "source": "thm-the-derived-category-inherits-a-triangulated-structure",
+     "source_section": "Statement",
+     "quote": "The derived category, with shift $[1]$ and distinguished triangles the isomorphic images of cone triangles, is triangulated.",
+     "uses": [
+      "4.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "8.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The frame bundle and its nerve.** By [F1] the map $U_N\\to B_N$ is a locally trivial principal $G$-bundle with algebraic graph-chart sections, the action on $U_N$ is free, and $X_N=(U_N\\times X)/G$ is the associated bundle with local charts $V\\times X$; the quotient map $q_N:P_N=U_N\\times X\\to X_N$ is the associated bundle projection. The nerve $G^\\bullet\\times P_N$ is the Čech nerve of $q_N$, so [F5] applies to it. The simplicial map $p_N:G^\\bullet\\times P_N\\to G^\\bullet\\times X$ is",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F5",
+      "F6"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**The fiber is $r_N$-acyclic with finite models.** By [F2], $H^0(U_N;k)\\cong k$ and $H^j(U_N;k)=0$ for $1\\le j\\le r_N$, and the product of Stiefel models supplies the bounded finite cochain model of the fiber with coefficient-field compatibility. By [F4] the base $G^m\\times X$ carries the finite conical cochain models, so each levelwise projection of step 1.1 is a locally trivial bundle in the finite constructible local-product setting with $r_N$-acyclic fiber.",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F2",
+      "F4",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**The levelwise cone bound.** Fix $m$ and put $p_{N,m}=p_N$ in degree $m$. For $B_m\\in D_c^{\\ge b}(G^m\\times X;k)$ the cone of the unit $B_m\\to Rp_{N,m*}p_{N,m}^*B_m$ lies in $D^{\\ge b+r_N+1}$ by [F3] applied in the setting of step 2.1. Because $Rp_{N,m*}$ is computed levelwise and cohomological bounds of complexes of simplicial sheaves are decided levelwise, the cone of the unit $B\\to Rp_{N*}p_N^*B$ in the simplicial derived category lies in $D^{\\ge b+r_N+1}$ as well.",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "F3",
+      "step 2.1",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**The simplicial Hom comparison.** The simplicial category has the exact levelwise inverse image $p_N^*$ left adjoint to the levelwise direct image $Rp_{N*}$ and carries the canonical t-structure of [F7], whose aisles are defined cohomology-objectwise and hence are the levelwise aisles. With the cone bound of step 3.1 in place, the argument of [F3] — its Hom comparison, image criterion, full faithfulness and its retract and extension clauses — applies verbatim inside the simplicial bounded derived category: for",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "F7",
+      "step 3.1",
+      "F3",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "**Descent and the functor $Q_N$.** Restricting the conclusion of step 4.1 to the full subcategory of Cartesian objects identified with $D_c^b(X_N;k)$ by [F5], the functor $p_N^*$ followed by descent is $Q_N$: for $F\\in D^b_{G,c}(X;k)$ the object $p_N^*F$ has Cartesian cohomology because $p_N$ is a simplicial map and the structure squares of $p_N^*$ are Cartesian by naturality of inverse image; descent produces $Q_N(F)\\in D_c^b(X_N;k)$, and $q_N^*Q_N(F)\\cong p_N^*F$ canonically. Hence, for $A\\le a$, $B\\ge b$ and",
+     "step": "5.1",
+     "inputs": [
+      "given",
+      "step 4.1",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-6-1",
+     "claim": "**The image.** Let $H\\in D_c^{[b,a]}(X_N;k)$ with $a-b\\le r_N$. By the characterization of step 4.1 applied to $C=q_N^*H$, the object $q_N^*H$ lies in the image of $p_N^*$ on $D_c^{[b,a]}(G^\\bullet\\times X;k)$ if and only if $p_N^*\\tau^{\\le a}Rp_{N*}q_N^*H\\to q_N^*H$ is an isomorphism, and this is an isomorphism exactly on the objects glued from $X$ by descent; equivalently $H$ lies in the image of $Q_N$ precisely when $q_N^*H$ is the pullback of an object of $D_c^{[b,a]}(X;k)$, which is the resolution-triple",
+     "step": "6.1",
+     "inputs": [
+      "given",
+      "step 4.1",
+      "F5",
+      "step 5.1"
+     ]
+    },
+    {
+     "id": "step-7-1",
+     "claim": "**Coherence and the trivial group.** For resolutions $N$ and $M$ the block-sum map gives a canonical homeomorphism $U_N\\times U_M\\cong U_{N+M}$ compatible with the $G$-actions, since a pair of injective frames in $\\mathbb C^{N_i}$ and $\\mathbb C^{M_i}$ is exactly an injective frame in $\\mathbb C^{N_i+M_i}$. The three projections of $U_N\\times U_M\\times U_L$ exhibit each $Q_N$ as the composition of $Q_{N+M+L}$ with the corresponding projection, so the comparison isomorphisms between $Q_N,Q_M,Q_L$ on intervals of",
+     "step": "7.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F5",
+      "step 5.1",
+      "step 6.1"
+     ]
+    },
+    {
+     "id": "step-8-1",
+     "claim": "**Conclusion.** Steps 3.1 to 5.1 prove claims 1 and 2, step 6.1 claim 3, and step 7.1 claims 4 and 5. The comparison is used only on the nerve and through the finite local models: no global splitting of $Ra_{N*}a_N^*B$ is asserted, so genuine characteristic-class transgressions are preserved. AC enters only through [A1].",
+     "step": "8.1",
+     "inputs": [
+      "given",
+      "step 3.1",
+      "step 5.1",
+      "step 6.1",
+      "step 7.1",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For empty X the associated variety X_N is empty, all equivariant and ordinary Hom groups in claims 1 and 2 vanish, and the assertions of steps 4.1 and 5.1 hold trivially; no nonempty hypothesis is used."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The case m=0 of claim 1 is the degree-zero ring comparison, obtained in step 4.1 and used in step 5.1; the zero interval width a=b is the smallest case of claims 2 and 3 and is included in the width bound a-b at most r_N."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The trivial-group case is claim 5, proved in step 7.1: then U_N and B_N are a point, X_N is X, r_N is infinite and Q_N is the identity of D_c^b(X;k)."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate resolution N_i=n_i+1 at the boundary of the allowed range is covered by step 2.1: the fiber U_N still carries the finite cohomology-gap model with parameter r_N at least 2, so the comparison ranges are nonempty."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The two endpoint regimes are separated: step 4.1 proves the Hom comparison exactly up to m=b+r_N-a and full faithfulness for width a-b at most r_N, while step 6.1 asserts extension closure only for the strict endpoint r_N at least a-b+1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 8.1 records the AC audit: choice enters only through the injective replacements, finite models and Serre-spectral-sequence supplier of [A1]; the frame charts, descent geometry and image argument are otherwise choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The forward direction of the image description in claim 3 is proved in step 6.1: if H is in the image of Q_N then q_N^*H is the pullback of an object of D_c^{[b,a]}(X;k), i.e. a resolution triple whose frame pullback comes from X."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The reverse direction is proved in step 6.1 through the truncated-counit characterization of step 4.1: if q_N^*H comes from X, the counit is an isomorphism and descent produces an equivariant object mapping to H."
+    }
+   ]
+  },
+  "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent",
+     "source_section": "Statement",
+     "quote": "If $Z_\\bullet$ is the Čech nerve of a map $P\\to S$ admitting local sections, inverse image gives an equivalence from $D^b(\\operatorname{Sh}_k(S))$ to the full derived subcategory with Cartesian cohomology.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1",
+      "2.2",
+      "2.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+     "source_section": "Definition",
+     "quote": "**Definition.** The **equivariant constructible derived category** $D^b_{G,c}(X;k)$ is the full subcategory of $D^b(\\operatorname{Sh}_k(Z_\\bullet))$ consisting of the complexes $A$ satisfying: 1.",
+     "uses": [
+      "1.2",
+      "2.1",
+      "2.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-algebraically-constructible-complex-of-analytic-field-sheaves",
+     "source_section": "Definition",
+     "quote": "Constructibility is a condition on the cohomology sheaves of a complex, and it is quantified existentially over finite smooth algebraic frontier stratifications: no stratification is fixed, and no existence or common-refinement theorem for stratifications is asserted by this definition.",
+     "uses": [
+      "1.2",
+      "2.1",
+      "2.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-field-module-sheaves-have-injective-derived-models",
+     "source_section": "Statement",
+     "quote": "Let $D^b_{\\mathfrak S}(X;k)$ be the full subcategory of $D^b(\\operatorname{Sh}_k(X))$ of complexes whose cohomology sheaves are bounded and constructible with respect to $\\mathfrak S$ ([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]).",
+     "uses": [
+      "1.2",
+      "2.1",
+      "2.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "def-derived-category-of-an-abelian-category",
+     "source_section": "Definition",
+     "quote": "We use cochains as in [[def-cochain-complex-in-an-abelian-category]], with $X[k]^n=X^{n+k}$ and $d_{X[k]}^n=(-1)^kd_X^{n+k}$.",
+     "uses": [
+      "1.2",
+      "2.1",
+      "2.3",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+     "source_section": "Statement",
+     "quote": "Then, for bounded algebraically constructible $A,B$ in $D^b_{G,c}(X;k)$: 1. **Hom comparison.** If $A\\in D_c^{\\le a}$ and $B\\in D_c^{\\ge b}$, then pullback induces an isomorphism $\\operatorname{Hom}_G(A,B[m])\\cong\\operatorname{Hom}_{X_N}(Q_N(A),Q_N(B)[m])$ whenever $m\\le b+r_N-a$; 2. **full faithfulness.** On an ordinary cohomological interval $D_c^{[b,a]}$ of width $a-b\\le r_N$, the functor $Q_N$ is fully faithful; 3. **image.** On such an interval the image of $Q_N$ consists exactly of the objects $H$ whose principal-bundle pullback $q_N^*H$ lies in the image of $\\operatorname{pr}_X^*:D_c^{[",
+     "uses": [
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The ambient category and its Hom groups.** By [F1] the category $\\operatorname{Sh}_k(Z_\\bullet)$ is abelian with levelwise exactness, has enough injectives under AC via the coinduced objects $N_pI$, and its bounded derived category is actual with set-sized Hom groups computed by bounded-below injective replacements. This is the ambient category of the definition, with the ordinary shift and cone triangles of [[def-derived-category-of-an-abelian-category]].",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "**Closure under the triangulated operations.** Shifts and isomorphisms preserve Cartesian cohomology and the constructibility of the degree-zero restriction because the structure maps of a shifted or isomorphic complex are the shifts or conjugates of the original structure maps. For a cone $C(f)$ of a morphism $f:A\\to B$ of $D^b_{G,c}(X;k)$, the structure maps of $C(f)$ are the cones of the levelwise structure maps, and exactness of the simplicial structure inverse images identifies $H^j(C(f))$ with the cone of",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "F2",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**Conservative restriction.** Let $A\\in D^b_{G,c}(X;k)$ with $A_0\\cong0$ in $D^b(\\operatorname{Sh}_k(X))$. All cohomology sheaves of $A_0$ vanish, and by Cartesianity the structure morphism of $H^j(A)$ along the projection $d_0^p:Z_p\\to Z_0=X$ identifies $H^j(A)_p$ with the pullback of $H^j(A_0)$ for every $p$, so every cohomology simplicial sheaf of $A$ vanishes. An object of the bounded derived category with vanishing cohomology objects is zero by [F2], so $A\\cong0$. Restriction to $X$ is thus conservative.",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F2",
+      "F1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "**The finite resolution triples.** Apply [F3] to the frame resolution of $G$: the simplicial map $p_N:G^\\bullet\\times P_N\\to G^\\bullet\\times X$ is levelwise a locally trivial bundle with $r_N$-acyclic fiber, its induced pullback is compatible with the simplicial structure, and the locally split Čech descent of [F1] for the principal bundle $P_N\\to X_N$ identifies the Cartesian-cohomology derived category of the nerve of $P_N$ with $D_c^b(X_N;k)$. Composing with $Q_N$ gives the identification of $D^b_{G,c}(X;k)$",
+     "step": "2.2",
+     "inputs": [
+      "given",
+      "F3",
+      "F1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-2-3",
+     "claim": "**Idempotent completeness.** Let $e:K\\to K$ be an idempotent endomorphism of a bounded object $K\\in D^b_{G,c}(X;k)$. Form the telescope in the bounded-below derived category of all simplicial sheaves: let $S=\\bigoplus_{j\\ge0}K$ be the countable sum with the shift map $1-\\operatorname{shift}(e):S\\to S$ sending the $j$-th summand to the $j$-th summand by $e$ and to the $(j+1)$-st by $-\\mathrm{id}$, and let $T=\\operatorname{Cone}(1-\\operatorname{shift}(e))$. Countable coproducts in $\\operatorname{Sh}_k(Z_\\bullet)$",
+     "step": "2.3",
+     "inputs": [
+      "given",
+      "F2",
+      "F1",
+      "step 1.2"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Triangulated, locally small, conservative.** Steps 1.1, 1.2 and 2.1 exhibit the ambient category and its Hom groups, the triangulated structure of $D^b_{G,c}(X;k)$, and conservativity of restriction; step 2.2 gives the finite resolution identification and the degree-zero ring and retract comparisons. No derived full faithfulness of restriction to $X$ is asserted or used.",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 1.2",
+      "step 2.1",
+      "step 2.2",
+      "F1",
+      "F2",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**Conclusion.** Steps 1.1, 1.2, 2.1 and 2.2 give the triangulated, locally small model with conservative restriction and the finite resolution comparisons; step 2.3 gives idempotent completeness. AC is consumed exactly as recorded in [A1].",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 1.2",
+      "step 2.1",
+      "step 2.2",
+      "step 2.3",
+      "A1",
+      "step 3.1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For X empty the nerve is empty, D^b_{G,c}(X;k) is the zero category, and the claims of steps 2.1 to 2.3 hold vacuously: restriction is conservative on the zero category and idempotents split trivially."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero object and zero morphism are covered: step 1.2 includes the zero complex in the triangulated structure, and step 2.1's conservativity statement applies to A=0 with A_0=0."
+    },
+    {
+     "case": "one",
+     "status": "not_applicable",
+     "reason": "No singleton, rank-one or coefficient-one hypothesis occurs; the claims concern the whole category and do not branch on a count."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate idempotents e=0 and e=1 are included in step 2.3: the telescope construction splits them to the zero object and to K respectively, and the empty family of idempotents is not asserted to split anything."
+    },
+    {
+     "case": "endpoints",
+     "status": "not_applicable",
+     "reason": "No degree interval or limiting parameter occurs in this item: the quantitative bounds are supplied by the consumed Stiefel-resolution lemma, and this item quantifies only over the category."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "Step 2.3 and the closing step record the AC audit of [A1]: choice is used exactly for the injective replacements and finite models, and the telescope uses exact countable coproducts in the ambient category, which exist there by [F1]; nothing further is chosen."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The item asserts existence and structural properties of the model, not a biconditional; no forward implication is owed."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse direction is asserted: idempotent completeness is a splitting existence statement, not an if-and-only-if."
+    }
+   ]
+  },
+  "thm-constructible-six-functors-proper-base-change-and-verdier-duality": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-analytic-constructible-sheaves-admit-coherent-six-operations",
+     "source_section": "Statement",
+     "quote": "On separated finite-type complex varieties, the ordinary analytic sheaf operations restrict to bounded algebraically constructible complexes $D_c^b(-;k)$ ([[def-algebraically-constructible-complex-of-analytic-field-sheaves]]): $f^*\\dashv Rf_*$, $Rf_!\\dashv f^!$, the tensor/internal-Hom adjunction, coherent composition, support localization, ordinary and extraordinary proper base change, the projection formula and trace.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace",
+     "source_section": "Statement",
+     "quote": "For analytic algebraic maps on its proved constructible subcategory, the six operations $f^*,Rf_*,Rf_!,f^!,\\otimes_k^L,R\\mathcal Hom$ have their three adjunctions, composition and identity comparisons, ordinary proper and extraordinary proper base change, projection formula, support localization, dualizing transitivity and trace.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-verdier-duality-on-oriented-stratified-complex-varieties",
+     "source_section": "Statement",
+     "quote": "Then $\\omega_X=a_X^!k$ and $D_X=R\\mathcal Hom(-,\\omega_X)$ preserve bounded constructible objects and the natural evaluation $A\\to D_XD_XA$ is an isomorphism.",
+     "uses": [
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom",
+     "source_section": "Statement",
+     "quote": "The definition [[def-equivariant-constructible-derived-category-for-complex-algebraic-varieties]] gives a locally small triangulated category $D^b_{G,c}(X;k)$ with conservative restriction to $X$ and the stated ordinary shift, and its morphism groups are computed by the coinduced simplicial injectives of [[lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent]].",
+     "uses": [
+      "1.1",
+      "2.1",
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+     "source_section": "Definition",
+     "quote": "**Definition.** The **equivariant constructible derived category** $D^b_{G,c}(X;k)$ is the full subcategory of $D^b(\\operatorname{Sh}_k(Z_\\bullet))$ consisting of the complexes $A$ satisfying: 1.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**Definition of the operations.** Let $f:X\\to Y$ be an equivariant algebraic map of separated finite-type complex varieties with algebraic $G$-actions and let $N=(N_i)$ be a frame resolution with $N_i$ larger than all $n_i$. By [F3] the objects of $D^b_{G,c}(X;k)$ and $D^b_{G,c}(Y;k)$ in a given bounded interval are identified with resolution triples on $X_N$ and $Y_N$, and $f$ induces an algebraic map $f_N:X_N\\to Y_N$ on the associated varieties, compatible with the frame resolutions through the naturality of the",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F3",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**Coherence.** Composition of maps, identity comparisons, support localization, the projection formula, trace and Cartesian pasting are equations between morphisms built from unit and counit maps of the ordinary adjunctions. By [F1] these equations hold at the level of the resolution varieties, and naturality of the resolution comparisons plus their full faithfulness on the intervals means that an equation holding after transport to $X_N,Y_N$ holds in $D^b_{G,c}$; more precisely, the comparison functors are",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "**Normalization.** For a frame resolution $P_N=U_N\\times X\\to X_N$ with base $B_N$ and maps $a_{X_N}:X_N\\to B_N$, $q_N:P_N\\to X_N$ and $\\operatorname{pr}_X:P_N\\to X$, put $u_N=\\dim_{\\mathbb C}U_N$, $g=\\dim_{\\mathbb C}G$ and $s_N=\\dim_{\\mathbb C}B_N=u_N-g$, and define the normalized dualizing object $\\omega^G_{X_N}:=\\omega_{X_N}\\otimes_k a_{X_N}^*\\omega_{B_N}^{-1}$, the inverse taken in the tensor category of bounded constructible sheaves on $B_N$; here $B_N$ is a smooth complex $s_N$-fold, so by [F2] its dualizing",
+     "step": "2.2",
+     "inputs": [
+      "given",
+      "F2",
+      "F3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Dual exchange and pasting.** Verdier duality on the resolution varieties exchanges $Rf_*$ with $Rf_!$ and computes $f^!$ by [F2], and the ordinary coherent exchange identities of [F1] dualize into the extraordinary dual exchange $u^!Rf_*\\simeq Rf'_*v^!$; transporting through the normalized comparison of step 2.2 and the fully faithful resolution comparisons gives the equivariant exchange, and pasting follows from the pasting clause of [F1] because both sides are canonically determined by the ordinary pasting",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "F2",
+      "F1",
+      "step 2.2",
+      "F3",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**Conclusion.** Steps 1.1, 2.1, 2.2 and 3.1 prove claims 1 to 3. Every comparison is induced by the ordinary coherent structure of [F1] and the normalization of step 2.2; no unnormalized dualizing shift and no unproved base-change identity is introduced. AC enters as recorded in [A1].",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 2.1",
+      "step 2.2",
+      "step 3.1",
+      "F1",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For an equivariant map out of or into the empty variety, the resolution varieties are empty and the operations of step 1.1 are the zero functors; the adjunctions, coherence equations and normalization restrict to the zero category, so step 2.1 applies verbatim."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero case of the normalization is d=0 in step 2.2: a smooth complex zero-fold has omega_X=k_X, and no extra shift survives after the base normalization; the zero object is included in every operation."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The tensor unit and its internal-Hom adjunction are part of claim 1 and are transferred from the ordinary adjunction in step 1.1; the identity comparison is the base of the composition coherence of step 2.1."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate group case of the trivial product is covered because the resolution-comparison transport of steps 1.1 and 2.1 does not use any nontriviality of G; all equations hold in the ordinary category already."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The normalization endpoint d=0 and general d are both covered in step 2.2, and the proper-support endpoint of the exchange identities is covered in step 3.1 where proper maps satisfy Rf_! equal to Rf_* and the dual mate is derived."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The concluding step 4.1 records the AC audit of [A1]: choice enters through the injective replacements, the ordinary six-operation and duality suppliers and the finite resolutions, while the pasting and normalization comparisons below are canonical."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "The Statement is a conjunction of contract clauses (definitions, adjunctions, comparisons and normalization), not a biconditional; no forward implication is owed beyond the stated equations."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No characterization with a converse is asserted; proper base change and duality are stated as isomorphisms, not as if-and-only-if conditions."
+    }
+   ]
+  },
+  "lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-smooth-complex-pullback-is-exact-for-the-middle-perverse-t-structure",
+     "source_section": "Statement",
+     "quote": "Then $a^*[d]$ is exact for the ordinary middle-perverse t structures of [[thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes]] on $D_c^b(-;k)$, and it commutes with their truncation and cohomology functors.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1",
+      "4.2"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+     "source_section": "Statement",
+     "quote": "The heart is abelian and of finite length, and its simple objects are the intersection complexes $j_{!*}L[\\dim_{\\mathbb C}Z]$ of simple finite-rank local systems $L$ ([[def-locally-constant-sheaf-of-finite-rank]]) on dense smooth opens of irreducible supports $Z$.",
+     "uses": [
+      "3.1",
+      "4.1",
+      "4.2"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom",
+     "source_section": "Statement",
+     "quote": "The definition [[def-equivariant-constructible-derived-category-for-complex-algebraic-varieties]] gives a locally small triangulated category $D^b_{G,c}(X;k)$ with conservative restriction to $X$ and the stated ordinary shift, and its morphism groups are computed by the coinduced simplicial injectives of [[lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent]].",
+     "uses": [
+      "1.1",
+      "2.1",
+      "3.1",
+      "4.1",
+      "4.2"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "5.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The dimension correction.** The projections $\\operatorname{pr}_X:P_N\\to X$ and $q_N:P_N\\to X_N$ are smooth algebraic maps of pure relative complex dimensions $u_N$ and $g$ by [F3] and the frame-bundle construction, and $\\operatorname{pr}_X^*A_X\\cong q_N^*Q_N(A)$ for every $A\\in D^b_{G,c}(X;k)$. Since $s_N=u_N-g$, the composite identity $q_N^*\\bigl(Q_N(A)[s_N]\\bigr)\\cong\\operatorname{pr}_X^*A_X[s_N]$ rewrites as $\\operatorname{pr}_X^*\\bigl(A_X[u_N]\\bigr)=\\operatorname{pr}_X^*A_X[s_N+g]$, so the perverse",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F3",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**Detection via restriction to $X$.** By [F1] the shifted pullbacks $\\operatorname{pr}_X^*[u_N]$ and $q_N^*[g]$ are exact for the ordinary middle-perverse t-structures and commute with truncation; hence, for every $a$, $q_N^*\\bigl(Q_N(A)[s_N]\\bigr)[g]=\\operatorname{pr}_X^*(A_X[u_N])$ lies in the perverse aisle ${}^pD^{\\le a}$ of $P_N$ if and only if $A_X[u_N]$ lies in ${}^pD^{\\le a}$ of $X$, and by exactness of $q_N^*[g]$ this is equivalent to $Q_N(A)[s_N]\\in{}^pD^{\\le a}(X_N)$. The same computation for the dual",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F3",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Perverse exactness and conservativity.** Truncation in the equivariant category is transported through the equivalence of claim 1: the perverse truncation triangles of [F2] on $X$ and on $X_N$ correspond under the smooth pullbacks of [F1] because those commute with truncation and cohomology, and since pullback is a functor the correspondence preserves composition of morphisms. Hence $A\\mapsto Q_N(A)[s_N]$ carries the perverse t-structure of $D^b_{G,c}$ detected in claim 1 to the ordinary perverse t-structure of",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "F2",
+      "F1",
+      "F3",
+      "step 2.1"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**Truncation lifting.** Let $A\\in D^b_{G,c}(X;k)$ have ordinary amplitude in $[b,a]$ and choose $N$ with $r_N$ at least the width of the ordinary amplitudes of $A$, its ordinary perverse truncations and their finitely many iterated perverse cohomology objects; the amplitude bookkeeping is finite because the ordinary perverse t-structure is bounded and the truncations of a fixed bounded object involve finitely many cohomological degrees. Put $T={}^p\\tau^{\\le a}\\bigl(Q_N(A)[s_N]\\bigr)$ in $D_c^b(X_N;k)$, an ordinary",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "F3",
+      "F1",
+      "F2",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-4-2",
+     "claim": "**Projectors, concentration and simplicity.** Let $K\\in D^b_{G,c}(X;k)$ have ordinary cohomology in $[b,a]$ with $a-b\\le r_N$, so that the degree-zero ring comparison $\\operatorname{End}_G(K)\\cong\\operatorname{End}_{X_N}(Q_NK)$ of [F3] is an isomorphism. A finite family of mutually orthogonal idempotents in $\\operatorname{End}_{X_N}(Q_NK)$ summing to the identity pulls back to a finite family in $\\operatorname{End}_G(K)$ with the same relations, and the idempotent splitting of [F3] splits each of them; the",
+     "step": "4.2",
+     "inputs": [
+      "given",
+      "F3",
+      "F1",
+      "F2",
+      "step 2.1",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "**Conclusion.** Steps 1.1, 2.1 and 3.1 prove claims 1 and 2, step 4.1 claim 3, and step 4.2 claim 4. The dimension shift is $s_N=u_N-g=\\dim_{\\mathbb C}B_N$, not $u_N$ and not $g$; no arbitrary perverse object on $X_N$ is asserted to descend, and no derived full faithfulness of restriction to $X$ is used. AC enters as recorded in [A1].",
+     "step": "5.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 2.1",
+      "step 3.1",
+      "step 4.1",
+      "step 4.2",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For empty X both D^b_{G,c}(X;k) and D_c^b(X_N;k) are trivial, Q_N is the zero functor, and the detections and conservativity of steps 2.1 and 3.1 hold on the zero category."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero interval width and zero object are covered: step 2.1 handles any a and in particular the degenerate a=b, and step 3.1 proves conservativity using the m=0 endomorphism comparison, where Q_N(A)=0 forces the identity of A to vanish."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The rank-one local-system and single-truncation case is included in step 4.1, whose finite bookkeeping covers a fixed bounded object, its finitely many truncations and their iterated perverse cohomology objects."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate cases K=0 and the empty family of orthogonal idempotents are handled in step 4.2: the ring comparison and the splitting argument are vacuous, and no nondegeneracy of K or of the family is assumed."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The stabilization endpoint r_N=a-b is exactly where claim 4 is asserted in steps 4.2; the strict extension-closure endpoint is not claimed here, and the shift bookkeeping endpoint s_N=u_N-g is verified in steps 1.1 and 5.1."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The concluding step 5.1 records the AC audit of [A1]: choice enters only through the ordinary perverse suppliers [F1] and [F2] and the resolution model [F3], while the transport and uniqueness arguments below are canonical."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The forward directions of the detection equivalences in claim 1 are proved in step 2.1 through exactness of the shifted smooth pullbacks: an aisle membership on X implies the corresponding membership of Q_N(A)[s_N] on X_N."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The reverse directions are proved in the same step 2.1: exactness of q_N^*[g] makes membership of Q_N(A)[s_N] in the aisle equivalent to membership on X and on P_N, so the equivalences hold in both directions."
+    }
+   ]
+  },
+  "thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative",
+     "source_section": "Statement",
+     "quote": "Then: 1. the middle-perverse t-structure on $D^b_{G,c}(X;k)$ is detected by restriction to $X$: for every sufficiently large $N$ and every $a$, $A\\in{}^pD_G^{\\le a}$ holds if and only if the restriction of $A$ to $X$ lies in ${}^pD^{\\le a}(X;k)$, if and only if $Q_N(A)[s_N]$ lies in ${}^pD^{\\le a}(X_N;k)$, and independently of the sufficiently large $N$; 2. the functor $A\\mapsto Q_N(A)[s_N]$ is exact for these middle-perverse t-structures and conservative in the sense that $Q_N(A)=0$ if and only if $A=0$; 3. perverse truncations lift: for $A\\in D^b_{G,c}(X;k)$ and all sufficiently large $N$ there is an equivariant perverse truncation ${}^p\\tau_G^{\\le a}A$ with $Q_N({}^p\\tau_G^{\\le a}A)[s_N]\\cong{}^p\\tau^{\\le a}\\bigl(Q_N(A)[s_N]\\bigr)$, canonical up to unique isomorphism, and the family is independent of $N$; 4. at the degree-zero Hom stabilization bound $r_N\\ge a-b$ for objects concentrated in ordinary degrees $[b,a]$, the ring comparison $\\operatorname{End}_G(K)\\cong\\operatorname{End}_{X_N}(Q_NK)$ lifts finite families of orthogonal idempotents, and after the common shift $s_N$ the normalized functor preserves and reflects perverse concentration and simplicity.",
+     "uses": [
+      "1.1",
+      "2.2",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "thm-constructible-six-functors-proper-base-change-and-verdier-duality",
+     "source_section": "Statement",
+     "quote": "For equivariant algebraic maps between such varieties, the coherent ordinary six-operation contract holds in the equivariant bounded constructible category $D^b_{G,c}$: 1. the functors $f^*,Rf_*,Rf_!,f^!$ are defined on $D^b_{G,c}$, with $f^*\\dashv Rf_*$, $Rf_!\\dashv f^!$, and the tensor and internal-Hom adjunction $\\otimes_k^L\\dashv R\\mathcal Hom$; 2. composition and identity comparisons, support localization, the projection formula and the trace hold, and for a Cartesian square with $f:X\\to Y$, $u:Y'\\to Y$, $v:X'\\to X$ and $f':X'\\to Y'$ the exchange $u^*Rf_!\\simeq Rf'_!v^*$ and its dual mate $u^!Rf_*\\simeq Rf'_*v^!$ obey Cartesian pasting; proper $f$ satisfies $Rf_!=Rf_*$; 3. the normalized dualizing object $\\omega^G$ restricts to the ordinary $\\omega_X$ of [[thm-verdier-duality-on-oriented-stratified-complex-varieties]], and for a smooth complex $d$-dimensional $X$ one has $\\omega_X^G\\simeq k_X[2d]$; this is not the unnormalized quotient-stack dualizing shift.",
+     "uses": [
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+     "source_section": "Statement",
+     "quote": "The heart is abelian and of finite length, and its simple objects are the intersection complexes $j_{!*}L[\\dim_{\\mathbb C}Z]$ of simple finite-rank local systems $L$ ([[def-locally-constant-sheaf-of-finite-rank]]) on dense smooth opens of irreducible supports $Z$.",
+     "uses": [
+      "1.1",
+      "2.1",
+      "2.2",
+      "3.1",
+      "4.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "5.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**The equivariant t-structure.** For $A\\in D^b_{G,c}(X;k)$ define $A\\in{}^pD_G^{\\le a}$ if and only if the restriction $A_X$ lies in the ordinary aisle ${}^pD^{\\le a}(X;k)$, and ${}^pD_G^{\\ge a}$ dually. By [F1] this is equivalent to $Q_N(A)[s_N]\\in{}^pD^{\\le a}(X_N;k)$ for every sufficiently large $N$, so the definition is independent of the resolution. The pair $({}^pD_G^{\\le0},{}^pD_G^{\\ge0})$ satisfies the t-structure axioms because the defining conditions are those of a t-structure pointwise: closure under",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**Gluing and independence of refinement.** The inequalities of the Statement are checked stratumwise and are therefore independent of compatible refinement by the ordinary clause of [F3]; gluing across an algebraic open/closed decomposition uses the localization triangles of [F2] and the ordinary gluing theorem: for an open immersion $j$ and closed complement $i$, the Čech-style recollement conditions $j^*i_*=0$, the triangles $j_!j^*\\to\\mathrm{id}\\to i_*i^*$ and $i_*i^!\\to\\mathrm{id}\\to j_*j^*$ hold in",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F3",
+      "F2",
+      "step 1.1"
+     ]
+    },
+    {
+     "id": "step-2-2",
+     "claim": "**Heart and finite length.** Kernel and cokernel of a morphism of the heart are the perverse cohomology objects in degrees $-1$ and $0$ of its cone, computed by the truncation functors of step 1.1; hence the heart is abelian. Restriction to $X$ is perverse exact and conservative on the heart by [F1], so a strictly increasing or decreasing chain of subobjects in the equivariant heart gives a strictly increasing or decreasing chain in the ordinary heart; the ordinary heart has finite length by [F3], so the",
+     "step": "2.2",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "F1",
+      "F3"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Simple objects and intersection complexes.** For an irreducible support $Z$ with dense smooth open $j:U\\hookrightarrow Z$ and a simple finite-rank local system $L$ on $U$ made equivariant, the localization triangles of [F2] give the adjunctions $j_!\\dashv j^*\\dashv j_*$ and the intermediate extension $j_{!*}L:=\\operatorname{im}\\bigl({}^pH^0j_!L\\to{}^pH^0j_*L\\bigr)$ by the truncation functors of step 1.1. The ordinary no-subobject and no-quotient characterization of [F3] applied through the exact conservative",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "F2",
+      "step 1.1",
+      "F3",
+      "F1",
+      "step 2.2"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "**Endomorphism rings.** Let $S$ be a simple heart object and $f:S\\to S$ a nonzero endomorphism. Its kernel is a subobject of $S$ and hence zero, and its image is a nonzero subobject and hence all of $S$; thus $f$ is invertible. Therefore $\\operatorname{End}(S)$ is a division $k$-algebra, and it is not asserted to equal $k$. This completes the proof.",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "F3",
+      "step 2.2",
+      "step 3.1"
+     ]
+    },
+    {
+     "id": "step-5-1",
+     "claim": "**Conclusion.** Steps 1.1 and 2.1 give the t-structure, its independence of refinement and gluing; steps 2.2, 3.1 and 4.1 give the heart, its finite length, the negative-Hom vanishing and the intersection-complex classification with division endomorphism rings. AC enters as recorded in [A1], and no semisimplicity or characteristic restriction beyond characteristic zero is used.",
+     "step": "5.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 2.1",
+      "step 2.2",
+      "step 3.1",
+      "step 4.1",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "On the empty variety the equivariant and ordinary hearts are the zero categories, the t-structure axioms of step 1.1 are vacuous, and the classification of step 3.1 has no supports to consider."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The zero object lies in the heart and the negative-Hom vanishing of step 2.2 includes it; the zero-dimensional support case in step 3.1 gives the skyscraper intermediate extension of a simple local system on a point."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The case of a simple object is covered in step 4.1: a nonzero endomorphism of a simple heart object has zero kernel and full image, hence is invertible, and its endomorphism ring is a division k-algebra containing the identity."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate local system cases are disposed of in step 3.1: L is required simple, so L=0 is excluded, and the smallest support case is the point stratum, where the intermediate extension is the shifted local system itself."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The perverse-degree endpoints are handled by the truncation functors of step 1.1 and the intermediate-extension construction of step 3.1, which uses the degree-zero perverse cohomology of j_! and j_*; no unproved endpoint is invoked."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The concluding step 5.1 records the AC audit of [A1]: choice enters only through the ordinary perverse core and the equivariant six-operation and normalization suppliers, while the recollement and intermediate-extension arguments below are otherwise choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The forward direction of the simple-object classification is proved in step 3.1: a simple heart object has a nonzero restriction to a suitable open stratum whose restriction is simple, and the no-boundary characterization identifies it with the intermediate extension."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The reverse direction is proved in the same step 3.1: a subobject of j_{!*}L restricts to a subobject of the simple local system L on the dense open, so the intermediate extension of a simple local system is simple in the heart."
+    }
+   ]
+  },
+  "thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+     "source_section": "Statement",
+     "quote": "Then, for bounded algebraically constructible $A,B$ in $D^b_{G,c}(X;k)$: 1. **Hom comparison.** If $A\\in D_c^{\\le a}$ and $B\\in D_c^{\\ge b}$, then pullback induces an isomorphism $\\operatorname{Hom}_G(A,B[m])\\cong\\operatorname{Hom}_{X_N}(Q_N(A),Q_N(B)[m])$ whenever $m\\le b+r_N-a$; 2. **full faithfulness.** On an ordinary cohomological interval $D_c^{[b,a]}$ of width $a-b\\le r_N$, the functor $Q_N$ is fully faithful; 3. **image.** On such an interval the image of $Q_N$ consists exactly of the objects $H$ whose principal-bundle pullback $q_N^*H$ lies in the image of $\\operatorname{pr}_X^*:D_c^{[",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap",
+     "source_section": "Statement",
+     "quote": "$H^0(U_N;k)\\cong k$ and $H^j(U_N;k)=0$ for $1\\le j\\le r_N$.",
+     "uses": [
+      "1.1",
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model",
+     "source_section": "Statement",
+     "quote": "Ordinary and compact-support cohomology, ordinary Hom and internal derived Hom have bounded finite cochain models and commute with every coefficient field extension.",
+     "uses": [
+      "1.1",
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-constructible-six-functors-proper-base-change-and-verdier-duality",
+     "source_section": "Statement",
+     "quote": "For equivariant algebraic maps between such varieties, the coherent ordinary six-operation contract holds in the equivariant bounded constructible category $D^b_{G,c}$: 1. the functors $f^*,Rf_*,Rf_!,f^!$ are defined on $D^b_{G,c}$, with $f^*\\dashv Rf_*$, $Rf_!\\dashv f^!$, and the tensor and internal-Hom adjunction $\\otimes_k^L\\dashv R\\mathcal Hom$; 2. composition and identity comparisons, support localization, the projection formula and the trace hold, and for a Cartesian square with $f:X\\to Y$, $u:Y'\\to Y$, $v:X'\\to X$ and $f':X'\\to Y'$ the exchange $u^*Rf_!\\simeq Rf'_!v^*$ and its dual mate $u^!Rf_*\\simeq Rf'_*v^!$ obey Cartesian pasting; proper $f$ satisfies $Rf_!=Rf_*$; 3. the normalized dualizing object $\\omega^G$ restricts to the ordinary $\\omega_X$ of [[thm-verdier-duality-on-oriented-stratified-complex-varieties]], and for a smooth complex $d$-dimensional $X$ one has $\\omega_X^G\\simeq k_X[2d]$; this is not the unnormalized quotient-stack dualizing shift.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes",
+     "source_section": "Statement",
+     "quote": "Its heart is abelian of finite length, and its simple objects are the intermediate extensions $\\operatorname{IC}_Z(L)=j_{!*}L[\\dim_{\\mathbb C}Z]$ of simple finite-rank local systems $L$ on dense smooth opens of irreducible supports $Z$, with equivariant data in the equivariant category.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative",
+     "source_section": "Statement",
+     "quote": "Then: 1. the middle-perverse t-structure on $D^b_{G,c}(X;k)$ is detected by restriction to $X$: for every sufficiently large $N$ and every $a$, $A\\in{}^pD_G^{\\le a}$ holds if and only if the restriction of $A$ to $X$ lies in ${}^pD^{\\le a}(X;k)$, if and only if $Q_N(A)[s_N]$ lies in ${}^pD^{\\le a}(X_N;k)$, and independently of the sufficiently large $N$; 2. the functor $A\\mapsto Q_N(A)[s_N]$ is exact for these middle-perverse t-structures and conservative in the sense that $Q_N(A)=0$ if and only if $A=0$; 3. perverse truncations lift: for $A\\in D^b_{G,c}(X;k)$ and all sufficiently large $N$ there is an equivariant perverse truncation ${}^p\\tau_G^{\\le a}A$ with $Q_N({}^p\\tau_G^{\\le a}A)[s_N]\\cong{}^p\\tau^{\\le a}\\bigl(Q_N(A)[s_N]\\bigr)$, canonical up to unique isomorphism, and the family is independent of $N$; 4. at the degree-zero Hom stabilization bound $r_N\\ge a-b$ for objects concentrated in ordinary degrees $[b,a]$, the ring comparison $\\operatorname{End}_G(K)\\cong\\operatorname{End}_{X_N}(Q_NK)$ lifts finite families of orthogonal idempotents, and after the common shift $s_N$ the normalized functor preserves and reflects perverse concentration and simplicity.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "def-sheaf-tensor-product",
+     "source_section": "Definition",
+     "quote": "The **tensor-product sheaf** is the sheafification of this presheaf: $$\\mathcal F\\otimes_{\\mathcal O_X}\\mathcal G := a(\\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G).$$",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "3.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "**Finiteness and vanishing.** Let $A,B$ be bounded constructible with $A\\le a$ and $B\\ge b$, fix $m$, and let $I$ be an ordinary cohomological interval containing the amplitudes of $A$ and of $B[m]$. Choose $N_i\\ge n_i+1$ with $r_N\\ge\\operatorname{length}(I)$; such a choice is possible because $r_N=2\\min_i(N_i-n_i)$ grows without bound with the $N_i$. By [F1] there is a natural isomorphism $\\operatorname{Ext}_G^m(A,B)\\cong\\operatorname{Hom}_{X_N}(Q_N(A),Q_N(B)[m])$, and by [F2] the right-hand side is computed by a",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1",
+      "F2"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "**Scalar extension.** Coefficient extension on the simplicial category is termwise tensor with $K$, hence exact by [F4], and it commutes with inverse image and with the free-quotient descent used to define $Q_N$ because those constructions are given locally by exact inverse image along algebraic sections together with gluing. Therefore $Q_N(A_K)\\cong(Q_N(A))_K$ and $Q_N(B_K)\\cong(Q_N(B))_K$, and the same $N$ works over $k$ and over $K$: the fiber-gap vanishing of [F1] is field-independent and the finite models of",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "F4",
+      "F1",
+      "F2"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "**Commutation with the operations and the perverse structure.** The ordinary coherent six operations and normalized Verdier duality are determined on the finite constructible models of [F2], and termwise exact coefficient extension commutes with finite inverse image, finite cochain pushforward, tensor, internal Hom and the finite-dimensional duality comparisons of [F3]; transporting through the finite-resolution comparisons as in step 1.2 gives the commutation with the equivariant operations and with normalized",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F2",
+      "F3",
+      "step 1.2",
+      "F4"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "**Conclusion.** Steps 1.1, 1.2 and 2.1 prove claims 1 to 3. The proof is finite-stage: one sufficiently large resolution handles a fixed bounded object and its finitely many shifted targets, and no infinite-dimensional total Ext space is used. The total Ext space is not claimed to be finite, and simplicity is not claimed to be preserved. AC enters as recorded in [A1].",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "step 1.1",
+      "step 1.2",
+      "step 2.1",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "checked",
+     "evidence": "For empty X every bounded constructible object is zero, all Ext groups vanish and are finite-dimensional, and the finite-stage argument of step 1.1 applies with the interval bookkeeping of the zero object."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The degree m=0 case is included in step 1.1: Ext_G^0 is a finite-dimensional Hom space by the finite model, and the vanishing statement is about sufficiently negative m, with no claim that degree zero vanishes."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The trivial coefficient extension K=k is the identity case of claim 2 in step 1.2: the canonical map Ext tensor k to Ext is the identity isomorphism, natural in A and B."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The degenerate cases A=0 or B=0 are included in step 1.1: the comparison range is vacuous or both sides vanish, so the finite-dimensionality and vanishing conclusions hold trivially and no nondegeneracy is assumed."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The endpoint of the vanishing assertion is the sufficiently negative degree threshold b-a determined in step 1.1; the theorem deliberately makes no finiteness claim about the total direct sum, as recalled in the concluding step and realized by the companion example."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The concluding step 3.1 records the AC audit of [A1]: choice enters through the finite-resolution comparison [F1] and the constructible models [F2], while the finite-dimensional Hom, tensor and truncation comparisons themselves are choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "not_applicable",
+     "reason": "Claim 2 asserts that the canonical scalar-extension map is an isomorphism, and claim 3 asserts commutation equations; neither is stated as a biconditional, so no forward implication is owed."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "not_applicable",
+     "reason": "No converse direction is asserted; in particular simplicity under coefficient extension is deliberately not claimed, as the statement and concluding step record."
+    }
+   ]
+  },
+  "ex-equivariant-constructible-ext-on-a-point-is-degreewise-finite-not-total-finite": {
+   "citations": [
+    {
+     "fact": "F1",
+     "source": "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+     "source_section": "Statement",
+     "quote": "Let $p_N:G^\\bullet\\times P_N\\to G^\\bullet\\times X$, with $P_N=U_N\\times X$ and $p_N=(\\mathrm{id},\\operatorname{pr}_X)$, be the simplicial map of the two action nerves ([[def-equivariant-constructible-derived-category-for-complex-algebraic-varieties]]), and let $Q_N:D^b_{G,c}(X;k)\\to D_c^b(X_N;k)$ be the composite of $p_N^*$ with the locally split Čech descent equivalence for the principal bundle $P_N\\to X_N$ ([[lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent]]).",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F1",
+     "source": "def-equivariant-constructible-derived-category-for-complex-algebraic-varieties",
+     "source_section": "Definition",
+     "quote": "**Definition.** The **equivariant constructible derived category** $D^b_{G,c}(X;k)$ is the full subcategory of $D^b(\\operatorname{Sh}_k(Z_\\bullet))$ consisting of the complexes $A$ satisfying: 1.",
+     "uses": [
+      "1.1"
+     ]
+    },
+    {
+     "fact": "F2",
+     "source": "lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom",
+     "source_section": "Statement",
+     "quote": "**Hom comparison.** If $A\\in D_c^{\\le a}$ and $B\\in D_c^{\\ge b}$, then pullback induces an isomorphism $\\operatorname{Hom}_G(A,B[m])\\cong\\operatorname{Hom}_{X_N}(Q_N(A),Q_N(B)[m])$ whenever $m\\le b+r_N-a$; 2.",
+     "uses": [
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-stiefel-space-grassmannian-and-tautological-bundle",
+     "source_section": "Definition",
+     "quote": "The **Grassmannian** $\\operatorname{Gr}_n(\\mathbb F^N)=V_n(\\mathbb F^N)/K_n$ is the space of $n$-planes with this quotient topology.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-complex-projective-space-and-holomorphic-charts",
+     "source_section": "Definition",
+     "quote": "For an integer $n\\ge1$, **complex projective space** is the set of complex lines in $\\mathbb C^{n+1}$ with the quotient topology $$\\mathbb P^n(\\mathbb C):=(\\mathbb C^{n+1}\\setminus\\{0\\})/\\mathbb C^\\times,\\qquad [z_0:\\cdots:z_n]:=\\mathbb C^\\times(z_0,\\ldots,z_n).$$ The quotient projection is continuous and surjective.",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F3",
+     "source": "def-cw-complex-with-closure-finiteness-and-weak-topology",
+     "source_section": "Definition",
+     "quote": "A **CW complex** is a Hausdorff space $X$ with a filtration $$\\varnothing=X^{-1}\\subseteq X^0\\subseteq X^1\\subseteq\\cdots,\\qquad X=\\bigcup_{n\\geq0}X^n,$$ where $X^0$ is discrete and $X^n$ is obtained from $X^{n-1}$ by attaching a (possibly infinite) family of $n$-disks along maps $S^{n-1}\\to X^{n-1}$ as in [[def-cell-attachment-by-a-characteristic-map]].",
+     "uses": [
+      "1.2"
+     ]
+    },
+    {
+     "fact": "F4",
+     "source": "thm-cellular-cochains-compute-cohomology-with-local-coefficients",
+     "source_section": "Statement",
+     "quote": "For a CW pair $(X,A)$ and local system $\\mathcal L$, the cellular cochain complex obtained from the skeletal filtration computes singular cohomology with local coefficients: $$H^n\\bigl(C^*_{\\mathrm{cell}}(X,A;\\mathcal L)\\bigr)\\cong H^n(X,A;\\mathcal L).$$ For a connected pair, it is the equivariant-Hom complex on cellular chains after the published right chain action is converted to the left action $g\\cdot c=c\\cdot g^{-1}$; equivalently its cochains satisfy $\\varphi(c\\cdot g)=g^{-1}\\varphi(c)$.",
+     "uses": [
+      "1.2",
+      "2.1"
+     ]
+    },
+    {
+     "fact": "F5",
+     "source": "thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars",
+     "source_section": "Statement",
+     "quote": "For bounded algebraically constructible $A,B$ in the equivariant category $D^b_{G,c}(X;k)$ of [[def-equivariant-constructible-derived-category-for-complex-algebraic-varieties]]: 1. every $\\operatorname{Ext}_G^m(A,B)=\\operatorname{Hom}(A,B[m])$ is finite-dimensional over $k$ and vanishes for all sufficiently negative $m$; 2. for every field extension $k\\to K$ of characteristic-zero fields, the canonical map $\\operatorname{Ext}_G^m(A,B)\\otimes_kK\\to\\operatorname{Ext}_G^m(A_K,B_K)$ is an isomorphism, natural in $A$ and $B$ and compatible with shifts and with Yoneda composition; 3. coefficient extension commutes with the coherent six operations, normalized Verdier duality, perverse truncation and intermediate extension on these bounded constructible objects.",
+     "uses": [
+      "2.1",
+      "3.1"
+     ]
+    },
+    {
+     "fact": "A1",
+     "source": "def-axiom-of-choice",
+     "source_section": "Definition",
+     "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]).",
+     "uses": [
+      "4.1"
+     ]
+    }
+   ],
+   "derivations": [
+    {
+     "id": "step-1-1",
+     "claim": "The group $\\mathbb C^\\times$ acts trivially on $\\operatorname{pt}$, and the frame space is $U_N=\\mathbb C^N\\setminus\\{0\\}$; the quotient $U_N/\\mathbb C^\\times$ is the space of complex lines in $\\mathbb C^N$, i.e. $\\mathbb P^{N-1}$. Under the resolution triple, the constant equivariant object $k$ corresponds to the pair $(k,\\ k_{\\mathbb P^{N-1}})$ because the pullback of $k$ along $U_N\\to\\operatorname{pt}$ is the constant sheaf $k_{U_N}$, which descends along the $\\mathbb C^\\times$-bundle to $k_{\\mathbb P^{N-1}}$.",
+     "step": "1.1",
+     "inputs": [
+      "given",
+      "F1"
+     ]
+    },
+    {
+     "id": "step-1-2",
+     "claim": "By [F3] the Schubert cells of $\\operatorname{Gr}_1(\\mathbb C^N)$ are indexed by the pivot symbols $a\\in\\{1,\\dots,N\\}$, of complex dimension $a-1$, so the space is a finite CW complex with one cell in each even real dimension $0,2,\\dots,2(N-1)$ and no odd cells; the cellular cochain complex therefore has zero differential and [F4] gives $H^m(\\mathbb P^{N-1};k)\\cong k$ for even $m\\le 2(N-1)$ and $H^m=0$ otherwise.",
+     "step": "1.2",
+     "inputs": [
+      "given",
+      "F3",
+      "F4"
+     ]
+    },
+    {
+     "id": "step-2-1",
+     "claim": "Fix $m\\ge0$. Choose $N$ with $r_N=2(N-1)\\ge m$, so that the comparison range of [F2] applies; then $\\operatorname{Ext}_G^m(k,k)\\cong\\operatorname{Hom}_{\\mathbb P^{N-1}}(k,k[m])\\cong H^m(\\mathbb P^{N-1};k)$ by step 1.2, which is $k$ for even $m$ and $0$ for odd $m$. For $m<0$ choose any $N$ with $2(N-1)\\ge|m|$; the same comparison applies and $H^m(\\mathbb P^{N-1};k)=0$ because a CW complex has no negative cohomology. Hence $\\operatorname{Ext}_G^m(k,k)\\cong k$ for even $m\\ge0$ and vanishes otherwise, which is the",
+     "step": "2.1",
+     "inputs": [
+      "given",
+      "F2",
+      "step 1.2",
+      "F4",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-3-1",
+     "claim": "The computation of step 2.1 is degreewise finite: each group is either $k$ or $0$. Infinitely many even degrees are nonzero, namely all $m=2j$ with $j\\ge0$, so the total direct sum $\\bigoplus_m\\operatorname{Ext}_G^m(k,k)$ contains a copy of $k$ in infinitely many degrees and is infinite-dimensional.",
+     "step": "3.1",
+     "inputs": [
+      "given",
+      "step 2.1",
+      "F5"
+     ]
+    },
+    {
+     "id": "step-4-1",
+     "claim": "On the ordinary point, [F6] gives $\\operatorname{Hom}_{D^b(\\operatorname{pt})}(k,k[2])=0$, while the equivariant group $\\operatorname{Ext}_G^2(k,k)$ is $k$ by step 2.1. The restriction functor to the ordinary point would have to induce the comparison map $\\operatorname{Ext}_G^2(k,k)\\to\\operatorname{Hom}_{\\operatorname{pt}}(k,k[2])$ on these Hom groups, and this map cannot be injective because its target is zero and its source is nonzero; hence restriction is not derived fully faithful. This proves all three",
+     "step": "4.1",
+     "inputs": [
+      "given",
+      "F6",
+      "step 2.1",
+      "A1"
+     ]
+    }
+   ],
+   "routine_steps": [],
+   "boundaries": [
+    {
+     "case": "empty",
+     "status": "not_applicable",
+     "reason": "The Example is set on the one-point space with the trivial C^*-action; no empty space or empty resolution occurs, and the finite Stiefel approximations are nonempty for every N."
+    },
+    {
+     "case": "zero",
+     "status": "checked",
+     "evidence": "The degree-zero case m=0 is covered by step 2.1: Ext_G^0(k,k) is k, the first nonzero group in the displayed even-degree pattern, and negative degrees m<0 are disposed of there as well by the vanishing of negative cohomology of the projective space."
+    },
+    {
+     "case": "one",
+     "status": "checked",
+     "evidence": "The smallest resolution N=1 is covered in steps 1.1 and 1.2: then X_N is P^0, a point, with H^0=k and no higher cohomology; the general computation of step 2.1 chooses the N adapted to the degree m."
+    },
+    {
+     "case": "degenerate",
+     "status": "checked",
+     "evidence": "The Example is itself the fully degenerate case: the action of C^* on the point is trivial, no orbit stratification is used, and step 1.1 identifies the quotient U_N/C^* with projective space directly through the principal bundle."
+    },
+    {
+     "case": "endpoints",
+     "status": "checked",
+     "evidence": "The stable-range endpoints are handled in step 2.1: the even degree m=2(N-1) at the top of H^*(P^{N-1};k) is k, the next even degree m=2(N-1)+2 is chosen with a larger N, and the odd endpoint m=1 vanishes there as everywhere odd."
+    },
+    {
+     "case": "nonempty-choice",
+     "status": "checked",
+     "evidence": "The concluding step 4.1 records the audit of [A1]: choice is present only because the consumed suppliers [F1], [F2] and [F5] assume it, while the projective-space cell computation is finite and choice-free."
+    },
+    {
+     "case": "iff-forward",
+     "status": "checked",
+     "evidence": "The even-degree forward case of the displayed formula is proved in step 2.1: for even m at least 0 the comparison identifies Ext_G^m(k,k) with H^m(P^{N-1};k), which is k in the stable range."
+    },
+    {
+     "case": "iff-reverse",
+     "status": "checked",
+     "evidence": "The odd and negative cases are proved in the same step 2.1: for odd m the projective-space cohomology vanishes, and for m<0 the comparison applies with a large N and negative cohomology vanishes, so the formula holds in both directions."
+    }
+   ]
+  }
+ }
+}

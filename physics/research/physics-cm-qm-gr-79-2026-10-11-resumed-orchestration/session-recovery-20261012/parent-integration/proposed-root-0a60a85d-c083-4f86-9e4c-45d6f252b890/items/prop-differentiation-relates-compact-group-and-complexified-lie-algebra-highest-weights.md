@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-standard-schauder-bases-of-c0-and-ell-p.md

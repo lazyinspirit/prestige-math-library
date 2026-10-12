@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-homology-of-a-closed-smooth-manifold-is-finite-dimensional.md

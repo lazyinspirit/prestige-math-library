@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-framework-autonomous-dynamics.md

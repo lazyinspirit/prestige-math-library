@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-restricted-root-systems-may-be-nonreduced.md

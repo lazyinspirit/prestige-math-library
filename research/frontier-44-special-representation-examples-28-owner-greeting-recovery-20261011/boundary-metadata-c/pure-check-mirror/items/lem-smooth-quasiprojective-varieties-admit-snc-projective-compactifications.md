@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-quasiprojective-varieties-admit-snc-projective-compactifications.md

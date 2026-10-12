@@ -1,0 +1,249 @@
+{
+  "schema_version": 1,
+  "batch": "independent-numerical-prerequisites-P-NUM-ODE-01-02-P-NUM-SDE-01-02",
+  "status": "audited_designs_with_explicit_source_and_future-proof_gaps",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_sha256_at_checkpoint": "2cc7d51e85eba32bdff18b0506ca03eb80ee7e4003ffbe77ef52734857e88d81",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "source_recovery_notes": [
+    "Downloaded the Caltech Authors Library author copy for Higham–Mao–Stuart (2002); complete PDF/text hashes are bound above. The strong-rate theorem and proof ranges were read directly.",
+    "Downloaded the SIAM Review Higham (2001) author-copy text for §§4–5; its weak-order exposition does not prove the C4 weak theorem adopted as a local design.",
+    "Read Särkkä–Solin §8.3 printed pp. 137–139; it is context for weak-order definitions, not a complete proof. The local backward-Kolmogorov argument and its C^(2,4) regularity requirement are recorded explicitly."
+  ],
+  "pairs": [
+    {
+      "id": "P-NUM-ODE-01",
+      "assessment": "audited_local_euler_defect_and_stability_design_with_external_source_gap_explicit",
+      "plan_section_sha256": "32e4ccc9b1cc77ddda187b9d15a879b25f8ffba5cad8f215e349deee17edec31",
+      "findings": [
+        "The pair defines a uniform order-p local defect O(h^(p+1)) and a one-step stability factor 1+Lh on a fixed interval and compact solution tube; these hypotheses are the exact inputs needed by the following global theorem.",
+        "The Euler example derives local O(h^2) defect and 1+Lh stability from bounded first derivatives in time/state on the tube; higher-order Runge–Kutta claims require their order conditions and derivative bounds.",
+        "The consulted Chen and Papamakarios texts discuss numerical solvers but do not prove a general local-to-global numerical ODE theorem. The pair remains a local Taylor/remainder proof obligation; it must not claim order from a method label alone."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Chen et al., Neural Ordinary Differential Equations, Appendix B/C and numerical issues, cached PDF pp. 13–16.",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/neural-ode-chen2018.pdf",
+          "pdf_sha256": "435299cc42b75f9ad43d9aa246c96d3d7bdcc3297aa57f419bdc571b9c25137c",
+          "read_status": "Relevant pages 13–16 read; source discusses numerical issues but does not prove the local-error theorem.",
+          "role": "context_only"
+        },
+        {
+          "citation": "Papamakarios et al., Normalizing Flows for Probabilistic Modeling and Inference, continuous-flow section, cached PDF pp. 31–33.",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.pdf",
+          "pdf_sha256": "dbb01097a6585608cd8344e695240b4d1bb9f21f1c769be1c60ff5b3cc14d76f",
+          "read_status": "Selected theory sections including pp. 31–33 read; this section discusses solver use, not a proof of the local-error theorem.",
+          "role": "context_only"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "status": "published",
+          "contract": "Local existence and uniqueness under continuity in time and local Lipschitz dependence on state, on a maximal interval; it does not assert numerical convergence."
+        },
+        {
+          "id": "thm-chain-rule-for-total-derivatives",
+          "status": "published",
+          "contract": "Euclidean total derivative chain rule at a point; used for differentiating exact flow expansions, not as a Taylor remainder theorem."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A uniform Taylor remainder estimate on the compact tube; the method-specific one-step stability estimate."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive Euler local defect/stability directly and state the compact tube and uniform derivative bounds.",
+        "For each higher-order integrator, prove or cite the exact order conditions and derivative assumptions.",
+        "Do not present Chen/Papamakarios as a convergence-theorem supplier."
+      ]
+    },
+    {
+      "id": "P-NUM-ODE-02",
+      "assessment": "audited_global_discrete_gronwall_design_and_repaired_augmented_field_smoothness",
+      "plan_section_sha256": "e5fbff60e25fa799cb57d0e8bcc105a2ce6c78c181abcba277a978d197803877",
+      "findings": [
+        "The global estimate follows from the displayed recurrence e_(n+1) <= (1+Lh)e_n + C h^(p+1) on a fixed finite interval, yielding O(h^p).",
+        "Repaired a smoothness overclaim: C^2 regularity can support the Euler augmented log-density field when its relevant derivatives are bounded on the tube, but does not establish an arbitrary order-p integrator bound for the augmented state.",
+        "Trajectory, log-density quadrature and adjoint-gradient errors remain separate quantities; a state error alone does not bound the latter two."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Chen et al., Neural Ordinary Differential Equations, Appendix B/C and numerical issues, cached PDF pp. 13–16.",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/neural-ode-chen2018.pdf",
+          "pdf_sha256": "435299cc42b75f9ad43d9aa246c96d3d7bdcc3297aa57f419bdc571b9c25137c",
+          "read_status": "Relevant pages read; numerical limitations discussed, no global solver-error theorem proved.",
+          "role": "context_only"
+        },
+        {
+          "citation": "Papamakarios et al., Normalizing Flows for Probabilistic Modeling and Inference, continuous-flow section, cached PDF pp. 31–33.",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.pdf",
+          "pdf_sha256": "dbb01097a6585608cd8344e695240b4d1bb9f21f1c769be1c60ff5b3cc14d76f",
+          "read_status": "Selected theory sections read; no global integration-error proof is claimed.",
+          "role": "context_only"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "status": "published",
+          "contract": "Provides exact-solution existence/uniqueness under its ODE hypotheses only."
+        },
+        {
+          "id": "cor-globally-lipschitz-odes-have-global-solutions",
+          "status": "published",
+          "contract": "A globally Lipschitz vector field has a global exact solution; this is not a numerical-method convergence theorem."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "P-NUM-ODE-01 uniform defect/stability assumptions.",
+        "A local proof of discrete Gronwall if no exact item is used.",
+        "For density integration, the method-specific augmented-field/quadrature defect and stability bound."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove the recurrence iteration with constants uniform over N=T/h.",
+        "For Euler CNF density integration, justify Lipschitzness of the augmented vector field on the tube.",
+        "For p>1, carry derivative/order assumptions for the augmented field or a separate quadrature error proof.",
+        "Keep solver, quadrature and sensitivity/adjoint errors separate."
+      ]
+    },
+    {
+      "id": "P-NUM-SDE-01",
+      "assessment": "audited_euler_maruyama_definition_and_moment_contract_with_existing_ito_reuse",
+      "plan_section_sha256": "aa2ac69181159ef117d457c90aca3d26e97237e1d4145fc57627a9b282d728a2",
+      "findings": [
+        "The recursion uses Brownian increments with the exact adapted filtration and an initial condition independent of future Brownian increments; global Lipschitz/linear-growth hypotheses are kept distinct from density regularity.",
+        "The existing scalar predictable Ito integral and isometry can be reused coordinatewise for vector/matrix coefficients; no new Ito definition is needed.",
+        "Higham’s complete 2001 exposition defines the Euler–Maruyama scheme, but it is an algorithmic introduction and does not prove a general moment theorem; the finite-moment derivation remains local."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Higham, An Algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations, §§4–5, SIAM Review 43(3), printed pp. 532–538 (PDF pp. 8–14); complete PDF/text archived under learning/source-recovery.",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-2001-stochastic-simulation.pdf",
+          "pdf_sha256": "e02942bc821a5eb63c6b7909aacb87b0e95048f0950e796460878390609566f1",
+          "full_text": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-2001-stochastic-simulation.txt",
+          "full_text_sha256": "656ba03c1c662defae510e5444695fb85c7eca417d900938c8e87f9134c3bd6e",
+          "read_status": "Complete 22-page PDF extracted; §§4–5 and their definitions/illustrations read. Source introduces the recursion and empirical error notions, not a matching moment/convergence proof.",
+          "role": "definition_and_context"
+        },
+        {
+          "citation": "Higham, Mao, and Stuart, Strong Convergence of Euler-Type Methods for Nonlinear Stochastic Differential Equations, §2, continuous EM interpolation and Assumption 2.1, printed pp. 1042–1043.",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-mao-stuart-2002-strong-euler.pdf",
+          "pdf_sha256": "27d372e331e4c519b0d3b592c230f224c81b4585c21e083f80facd14f39fa0ba",
+          "full_text": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-mao-stuart-2002-strong-euler.txt",
+          "full_text_sha256": "36a6c22af8a1ffe0949ad041c7c7a1be6707fbd7e7bd8a8e0d832b4b947bc69c",
+          "read_status": "The Euler recursion and both continuous interpolations are read; the source moment premises are used explicitly by P-NUM-SDE-02.",
+          "role": "load_bearing_for_em_contract"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-d-dimensional-brownian-motion",
+          "status": "published",
+          "contract": "Finite-dimensional Brownian motion with independent Gaussian increments and continuous paths; the definition does not itself specify the filtration."
+        },
+        {
+          "id": "def-ito-integral-for-square-integrable-predictable-processes",
+          "status": "published",
+          "contract": "Scalar predictable finite-energy integrands are defined by L2 limits of elementary integrals."
+        },
+        {
+          "id": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "status": "published",
+          "contract": "Scalar predictable L2 Ito map is linear and isometric; extend vector/matrix integrals by finite coordinate sums."
+        },
+        {
+          "id": "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "status": "published",
+          "contract": "C^(1,2) Ito formula with covariance correction (sigma sigma^T)/2 under its stated integrability assumptions."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "A filtered probability space on which the Brownian motion is Brownian; predictable coefficient composition.",
+        "Global-Lipschitz/linear-growth moment recursion, proved locally for every requested finite moment."
+      ],
+      "future_proof_authoring_obligations": [
+        "Give the continuous interpolation definition and verify predictability and moment integrability.",
+        "Prove finite moments by conditional Gaussian increments, the Ito isometry or coordinatewise Ito formula, and Gronwall; do not infer density regularity."
+      ]
+    },
+    {
+      "id": "P-NUM-SDE-02",
+      "assessment": "audited_strong_rate_source_exact_contract_weak_rate_source_gap_explicit",
+      "plan_section_sha256": "22ef9a328f9d5d0e41d6ccfe268f977053de10fa8e793c16689ad64f7411ff72",
+      "findings": [
+        "The plan now gives the exact Higham–Mao–Stuart strong-rate assumptions and conclusion: C1 coefficients, one-sided Lipschitz drift, globally Lipschitz diffusion, polynomial local-Lipschitz drift, and uniform finite moments of all orders for the exact solution and both Euler interpolations imply mean-square uniform error O(h).",
+        "The theorem’s proof uses localization/moment truncation, interpolation defect estimates, Ito formula, BDG, and Gronwall; no unjustified all-purpose L2 assumption is left.",
+        "Särkkä–Solin §8.3 defines weak error and gives the Euler weak-order statement under sufficient regularity, but does not prove it. The scaffold therefore uses a local backward-Kolmogorov proof design with a stated C^(2,4) polynomial-growth solution class and moment premises, plus a separate obligation deriving that class from coefficient/test assumptions.",
+        "The coupled-level MLMC correction claim is conditional on shared Brownian increments and a globally Lipschitz payoff; the O(h) variance follows from the strong O(h) mean-square fine/coarse coupling, and per-sample work O(h^-1) is explicit.",
+        "The weak-rate design now states a checkable conservative moment condition: if the backward solution derivatives grow at most C(1+||x||^q), assume uniform exact/Euler moments of order p≥2q+8 on fixed [0,T], obtainable from finite pth initial moment under global Lipschitz/linear-growth coefficients; no undefined “enough moments” remains."
+      ],
+      "source_evidence": [
+        {
+          "citation": "Higham, Mao, and Stuart, Strong Convergence of Euler-Type Methods for Nonlinear Stochastic Differential Equations, §2 Assumption 2.1/Theorem 2.2 and complete proof, printed pp. 1042–1046; §4 Assumptions 3.1/4.1/4.2, Lemma 4.3, Theorem 4.4 and proof, printed pp. 1054–1056.",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-mao-stuart-2002-strong-euler.pdf",
+          "pdf_sha256": "27d372e331e4c519b0d3b592c230f224c81b4585c21e083f80facd14f39fa0ba",
+          "full_text": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-mao-stuart-2002-strong-euler.txt",
+          "full_text_sha256": "36a6c22af8a1ffe0949ad041c7c7a1be6707fbd7e7bd8a8e0d832b4b947bc69c",
+          "read_status": "Full paper text was read where needed; exact assumptions and complete proof for Theorem 4.4 were consulted. Other unrelated sections were not used.",
+          "role": "load_bearing_strong_convergence"
+        },
+        {
+          "citation": "Higham, An Algorithmic Introduction to Numerical Simulation of Stochastic Differential Equations, §5, printed pp. 534–538 (PDF pp. 11–14).",
+          "cached_pdf": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-2001-stochastic-simulation.pdf",
+          "pdf_sha256": "e02942bc821a5eb63c6b7909aacb87b0e95048f0950e796460878390609566f1",
+          "full_text": "research/statistics-ml-scaffold-audit-2026-10-12/learning/source-recovery/higham-2001-stochastic-simulation.txt",
+          "full_text_sha256": "656ba03c1c662defae510e5444695fb85c7eca417d900938c8e87f9134c3bd6e",
+          "read_status": "Complete article text read; strong/weak error definitions and stated order claims inspected. Weak-order conditions are left as “appropriate” and the section reports numerical experiments, so it does not discharge the weak proof.",
+          "role": "context_only_for_weak_rate"
+        },
+        {
+          "citation": "Särkkä and Solin, Applied Stochastic Differential Equations, §8.3, printed pp. 137–139.",
+          "cached_pdf": "scratchpad/statistics-ml-scaffold-audit-2026-10-12/sources/sarkka-solin-applied-sdes.pdf",
+          "pdf_sha256": "279156f8f4382faaa253c27697fcb5ff8d75ace5d940d944553b5f3465ea9435",
+          "full_text": "scratchpad/statistics-ml-scaffold-audit-2026-10-12/sources/sarkka-solin-applied-sdes.txt",
+          "full_text_sha256": "b749ba838f0660032b9f92d7b224d5b2687d9172a89b6210f24bfbbfe7e078cf",
+          "read_status": "Complete §8.3 read in full text. It defines weak order, states the Euler weak-order-one claim under sufficient regularity, and cites Kloeden–Platen; no full weak-order proof or exact regularity implication is supplied.",
+          "role": "context_only_for_weak_order"
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "P-NUM-SDE-01",
+          "status": "independent_prerequisite_design_not_library_item",
+          "contract": "Supplies the EM recursion, interpolation and coefficient/moment setup only."
+        },
+        {
+          "id": "P-SDE-01",
+          "status": "independent_prerequisite_design_not_library_item",
+          "contract": "Supplies exact strong-solution and Ito moment premises; its density-regularity clause is not used for numerical convergence."
+        },
+        {
+          "id": "thm-ito-isometry-and-linearity-in-predictable-l2",
+          "status": "published",
+          "contract": "Scalar Ito isometry/linearity; vector use is finite coordinate expansion."
+        }
+      ],
+      "cross_category_interface": {
+        "supplier": "BCS-55",
+        "status": "Category 3 source-audited conditional MLMC design",
+        "contract": "Under globally Lipschitz payoff and shared increments, the strong rate gives correction variance O(h), coupled cost O(h^-1), hence alpha=1/2, beta=1; weak order alpha=1 is conditional on the separate smooth payoff theorem."
+      },
+      "new_pair_prerequisites": [
+        "Ito formula and coordinatewise Ito integrals; finite-moment bounds; BDG; Gronwall.",
+        "For weak order: a local weak Itô–Taylor/semigroup expansion with all coefficient/test-function derivatives specified."
+      ],
+      "future_proof_authoring_obligations": [
+        "Reproduce H-M-S Theorem 4.4 proof or import the full theorem with the precise stated assumptions.",
+        "For the global-Lipschitz specialization, show the all-moment premises from initial moments and linear growth.",
+        "Prove weak order under the stated backward-Kolmogorov C^(2,4) polynomial-growth and moment premises: one-step Gaussian Taylor cancellation gives O(h^2)(1+||x||^q), then telescope over T/h steps.",
+        "Add/prove a separate stochastic-flow or Kolmogorov regularity result if deriving the required u-class from concrete coefficient and test-function assumptions; do not treat Higham or Särkkä–Solin as a proof of that implication.",
+        "Keep learned drift/score/model bias separate from time-discretization error."
+      ]
+    }
+  ]
+}

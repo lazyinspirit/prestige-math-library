@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-characteristic-hypersurface-is-independent-of-defining-function.md

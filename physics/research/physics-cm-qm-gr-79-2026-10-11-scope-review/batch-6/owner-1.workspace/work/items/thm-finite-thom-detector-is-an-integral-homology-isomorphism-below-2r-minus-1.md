@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-thom-detector-is-an-integral-homology-isomorphism-below-2r-minus-1.md

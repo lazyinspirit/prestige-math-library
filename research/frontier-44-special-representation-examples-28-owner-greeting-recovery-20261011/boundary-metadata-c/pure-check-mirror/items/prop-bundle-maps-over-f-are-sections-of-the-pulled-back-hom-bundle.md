@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-bundle-maps-over-f-are-sections-of-the-pulled-back-hom-bundle.md

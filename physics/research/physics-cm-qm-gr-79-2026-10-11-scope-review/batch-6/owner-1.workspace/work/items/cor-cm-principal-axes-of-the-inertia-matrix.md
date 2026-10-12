@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cm-principal-axes-of-the-inertia-matrix.md

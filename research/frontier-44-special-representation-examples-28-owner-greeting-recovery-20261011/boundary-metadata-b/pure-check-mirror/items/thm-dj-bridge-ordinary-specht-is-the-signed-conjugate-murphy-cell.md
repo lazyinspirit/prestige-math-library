@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dj-bridge-ordinary-specht-is-the-signed-conjugate-murphy-cell.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-jacobi-trudi-and-dual-jacobi-trudi-identities.md

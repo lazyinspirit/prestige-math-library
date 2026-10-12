@@ -38,5 +38,4 @@ space.
 
 1.1 The functions from [L1] violate the triangle inequality required by [L2]. [L1, L2]
 
-2.1 Therefore $L^{1/2}(\mu)$ with $\|\,\cdot\,\|_{1/2}$ is not a normed space. [step 1.1]
-∎
+2.1 Therefore $L^{1/2}(\mu)$ with $\|\,\cdot\,\|_{1/2}$ is not a normed space. [step 1.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-currying-and-uncurrying-are-mutually-inverse.md

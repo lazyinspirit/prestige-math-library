@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-spatial-derivative-estimates-for-heat-flow.md

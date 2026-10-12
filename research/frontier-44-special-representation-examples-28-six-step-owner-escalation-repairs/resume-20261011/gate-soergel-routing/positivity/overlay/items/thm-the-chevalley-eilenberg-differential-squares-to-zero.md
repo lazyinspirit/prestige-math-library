@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-chevalley-eilenberg-differential-squares-to-zero.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-e-to-n-z-converges-chordally-to-infinity-on-the-right-half-plane.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lindeberg-array-with-no-identically-distributed-row.md

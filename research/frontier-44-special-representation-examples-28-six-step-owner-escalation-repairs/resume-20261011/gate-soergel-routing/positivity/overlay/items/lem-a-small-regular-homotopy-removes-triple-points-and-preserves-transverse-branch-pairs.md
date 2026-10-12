@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-small-regular-homotopy-removes-triple-points-and-preserves-transverse-branch-pairs.md

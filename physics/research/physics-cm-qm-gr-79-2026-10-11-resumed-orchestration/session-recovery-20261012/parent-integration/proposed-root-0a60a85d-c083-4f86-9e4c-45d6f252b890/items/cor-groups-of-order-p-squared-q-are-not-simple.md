@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-groups-of-order-p-squared-q-are-not-simple.md

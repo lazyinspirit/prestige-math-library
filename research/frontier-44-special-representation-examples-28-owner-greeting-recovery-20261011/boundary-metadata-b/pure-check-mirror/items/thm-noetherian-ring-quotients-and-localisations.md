@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-noetherian-ring-quotients-and-localisations.md

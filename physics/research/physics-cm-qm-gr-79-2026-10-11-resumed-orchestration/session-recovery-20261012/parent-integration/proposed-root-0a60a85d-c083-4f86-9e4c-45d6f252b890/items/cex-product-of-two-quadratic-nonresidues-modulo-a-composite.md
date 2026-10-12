@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-product-of-two-quadratic-nonresidues-modulo-a-composite.md

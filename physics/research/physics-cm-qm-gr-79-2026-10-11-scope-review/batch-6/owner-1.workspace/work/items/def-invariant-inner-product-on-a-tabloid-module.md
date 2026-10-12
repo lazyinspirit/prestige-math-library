@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-invariant-inner-product-on-a-tabloid-module.md

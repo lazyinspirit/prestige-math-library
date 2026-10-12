@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-contragredient-lie-algebra-before-the-maximal-ideal-quotient.md

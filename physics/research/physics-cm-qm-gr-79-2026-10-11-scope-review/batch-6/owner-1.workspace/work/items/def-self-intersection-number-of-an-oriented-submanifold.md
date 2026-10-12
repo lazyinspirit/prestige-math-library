@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-self-intersection-number-of-an-oriented-submanifold.md

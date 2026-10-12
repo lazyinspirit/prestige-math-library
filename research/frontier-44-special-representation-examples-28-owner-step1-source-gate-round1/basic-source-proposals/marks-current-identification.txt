@@ -1,0 +1,1027 @@
+Set Theory
+
+ Andrew Marks
+
+Updated January 31, 2026
+
+These notes cover introductory set theory. They were hastily written for a class that 
+I taught during the pandemic in 2020 and 2021, and are full of typos and errors. Better 
+resources for this topic are the books of Jech (2003), Kunen (2011), and Schindler (2014).
+
+Starred sections below are optional. They discuss interesting mathematics connected to 
+concepts covered in the course. Thanks to Gabe Goldberg, Cecelia Higgins, Jacob Manaker, 
+Forte Shinko, Marlon Trifunovic, Spencer Unger, and Eric Wang, for corrections and helpful 
+conversations about the material in the notes.
+
+Contents
+
+1
+Introduction
+4
+1.1
+Independence in modern set theory* . . . . . . . . . . . . . . . . . . . . . . .
+6
+
+2
+The axioms of ZFC
+10
+2.1
+Classes and von Neumann-Bernays-Gödel set theory*
+. . . . . . . . . . . . .
+13
+
+3
+Wellorderings
+15
+
+4
+Ordinals
+18
+
+5
+Transfinite induction and recursion on ordinals
+23
+5.1
+Goodstein’s theorem*
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+27
+
+6
+Induction and recursion on wellfounded relations
+30
+
+7
+The cumulative hierarchy Vα
+34
+
+8
+The axiom of choice
+36
+8.1
+Fragments of the axiom of choice*
+. . . . . . . . . . . . . . . . . . . . . . . .
+37
+
+9
+Cardinality in ZF
+39
+9.1
+Cardinality in models of the axiom of determinacy* . . . . . . . . . . . . . . .
+42
+9.2
+Resurrecting Tarski’s theory of cardinal algebras* . . . . . . . . . . . . . . . .
+42
+
+10 Cofinality
+44
+
+1
+
+
+11 Cardinal arithmetic in ZFC
+47
+11.1 Some equivalents of CH
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+50
+11.2 The singular cardinals hypothesis* . . . . . . . . . . . . . . . . . . . . . . . .
+51
+
+12 Filters and ultrafilters
+53
+12.1 Measurable cardinals* . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+55
+
+13 Ultraproducts
+57
+13.1 Ultraproducts of metric spaces and asymptotic cones* . . . . . . . . . . . . .
+59
+13.2 The Ax-Grothendieck theorem* . . . . . . . . . . . . . . . . . . . . . . . . . .
+60
+
+14 Clubs and stationary sets
+61
+
+15 Applications of Fodor: ∆-systems and Silver’s theorem
+65
+
+16 Trees
+68
+16.1 Compactness and incompactness in set theory* . . . . . . . . . . . . . . . . .
+70
+
+17 Suslin trees and ♦
+72
+
+18 Models of set theory and absoluteness
+75
+
+19 The reflection theorem
+82
+
+20 Gödel’s constructible universe L
+86
+20.1 Gödel operations and fine structure* . . . . . . . . . . . . . . . . . . . . . . .
+88
+
+21 Condensation in L and GCH
+90
+
+22 V = L implies ♦
+92
+
+23 L and large cardinals
+94
+23.1 Finding the right universe of set theory* . . . . . . . . . . . . . . . . . . . . .
+96
+
+24 The basics of forcing
+97
+
+25 Forcing = Truth
+100
+
+26 The consistency of ¬CH
+104
+
+2
+
+
+Later generations will regard set theory as a disease from which one has recovered.
+
+–Henri Poincaré (apocryphal)
+
+3
+
+
+3 Wellorderings
+
+Wellfounded relations and wellorderings are central to the study of set theory. They are 
+important in defining what sets are: the axiom of foundation says that the ∈ relation on 
+every set is wellfounded. They also naturally lead to the definition of the ordinals, which 
+are an essential part of set theory used to index steps in transfinite constructions and to 
+create notions of rank. Cantor was originally led to develop the theory of the ordinals to 
+prove that given any two sets X and Y , either |X| ≤|Y | or |Y | ≤|X|.
+
+A strict partial order is a pair (P, <P ) where P is a set and <P  is a binary relation 
+on P that is irreflexive and transitive, so that a ≮P a and a <P b ∧b <P c →a <P c for all 
+a, b, c ∈P. We say that (P, <P ) is linear if for all a, b ∈P such that a ̸= b, either a <P b
+or b <P a. We write a ≤P b to mean a <P b or a = b.
+
+A strict partial order (P, <P ) is wellfounded if every nonempty subset X ⊆P contains 
+an element that is <P -minimal inside X. That is, for every nonempty X ⊆P there is 
+some a ∈X so that b ≮P a for all b ∈X. A linear wellfounded strict partial order is called 
+a wellordering.
+
+Exercise 3.1. Suppose (P, <P ) is a wellfounded strict partial order, and suppose (Q, <Q)
+is a strict partial order that is a subordering of P, so Q ⊆P and for all a, b ∈Q, a <Q b →
+a <P b. Then prove that (Q, <Q) is wellfounded.
+
+Suppose (P, <P ) and (Q, <Q) are strict partial orders. Then we say a function f : P →Q
+is order-preserving if for all a, b ∈P a <P b implies f(a) <Q f(b).
+
+Lemma 3.2. If (P, <P ) is a wellfounded strict partial order and f : P →P is an order- 
+preserving function from (P, <P ) to (P, <P ), then f(a) ≮P a for all a ∈P.
+
+Proof. 
+Let X = {a ∈P : f(a) <P a} be the set of points which are moved “downward”. 
+Assume for a contradiction that X is nonempty. Then by definition of wellfoundedness, X
+must have a <P -minimal element a. By definition of X, f(a) <P a. Since a is minimal in 
+X, and f(a) <P a, we must have f(a) /∈X. Now since f is order-preserving, and f(a) <P a, 
+we must have f(f(a)) <P f(a). But then f(a) ∈X by definition of X. Contradiction!
+∎
+
+We say that a bijection f from P to Q is an isomorphism from (P, <P ) to (Q, <Q) if 
+for all a, b ∈P, a <P b ↔f(a) <Q f(b). Hence, both f and f −1 are order-preserving.
+
+Lemma 3.3. If (P, <P ) is a wellordering and f : P →P is an isomorphism from (P, <P )
+to (P, <P ), then f is the identity.
+
+Proof. 
+By the previous lemma, f(a) ≥P a for all a ∈P. Since f −1 is also an isomorphism 
+from (P, <P ) to (P, <P ), for all b ∈P, f −1(b) ≥P b, so letting b = f(a), we see a ≥P f(a)
+for all a ∈P. Hence, f is the identity.
+∎
+
+Corollary 3.4. If (P, <P ) and (Q, <Q) are isomorphic wellorderings, then there is a unique 
+isomorphism between them.
+
+Proof. 
+If f, g were two isomorphisms that were not equal, then f −1 ◦g would be an 
+isomorphism from (P, <P ) to (P, <P ) that is not the identity. This contradicts Lemma 3.3.
+
+∎
+
+15
+
+
+If (P, <P ) is a wellordering and x ∈P, then the initial segment of (P, <P ) below x, 
+denoted (P, <P ) ↾x is the wellordering (Q, <P ∩(Q×Q)), where Q = {a ∈P : a <P x}. An 
+initial segment of (P, <P ) is an ordering (P, <P ) ↾x for some x ∈P. Note for example 
+that an initial segment of a wellordering is always a wellordering.
+
+Lemma 3.5. No wellordering (P, <P ) is isomorphic to an initial segment of itself.
+
+Proof. 
+Suppose x ∈P, and (P, <P ) is isomorphic to (P, <P ) ↾x for some x ∈P via 
+the function f, which is therefore an order- preserving function from P to itself. Then 
+f(x) <P x, contradicting Lemma 3.2.
+∎
+
+Lemma 3.6. Suppose (P, <P ) and (Q, <Q) are wellorderings. Then exactly one of the 
+following holds:
+
+• (P, <P ) is isomorphic to (Q, <Q).
+
+• (P, <P ) is isomorphic to an initial segment of (Q, <Q).
+
+• An initial segment of (P, <P ) is isomorphic to (Q, <Q).
+
+Furthermore, this isomorphism is unique.
+
+Proof. 
+Consider the set of pairs
+
+F = {(x, y): there exists an isomorphism from (P, <P ) ↾x to (Q, <Q) ↾y}.
+
+We claim that F is the function witnessing that this lemma is true.
+
+Suppose x ∈P, and y, y′ ∈Q are such that y <Q y′. Then we cannot have (x, y) ∈F and 
+(x, y′) ∈F since composing one isomorphism and the inverse of the other would contradict 
+Lemma 3.5. So F is a function.
+
+Similarly, if (x, y), (x′, y′) ∈F and x <P x′, then we claim y <Q y′. Otherwise, suppose 
+f is the isomorphism from (P, <P ) ↾x to (Q, <Q) ↾y, and f ′ is the isomorphism from 
+(P, <P ) ↾x′ to (Q, <Q) ↾y′. If y′ ≤Q y, then f −1 ◦f ′ is an order-preserving function on 
+(P, <P ) ↾x′, and f −1(f ′(x)) <P x, which is a contradiction. So F is an order-preserving 
+partial function from P to Q.
+
+We claim that both dom(F) and ran(F) are closed downwards. That is, if y <Q y′ and 
+y′ ∈ran(F), then y ∈ran(F). This is since if f is an isomorphism from (P, <P ) ↾x to 
+(Q, <Q) ↾y′, then restricting f to the initial segment given by f −1(y) gives an isomorphism 
+from (P, <P ) ↾f −1(y) to (Q, <Q) ↾y. Similarly, if x <P x′ and x′ ∈dom(F), then 
+x ∈dom(F).
+
+We finally claim P \ dom(F) and Q \ ran(F) cannot both be nonempty. If so, let x be 
+the <P -minimum element of P \ dom(F) and y be the <Q-minimum element of Q \ ran(F). 
+But then F ↾{x′ ∈P : x′ < x} is an isomorphism from (P, <P ) ↾x to (Q, <Q) ↾y. 
+Contradiction.
+
+Uniqueness follows from Corollary 3.4.
+∎
+
+The significance of Lemma 3.6 is that it shows the relation “(P, <P ) is isomorphic to an 
+initial segment of (Q, <Q)” is a linear ordering of the isomorphism classes of wellorderings. 
+Lemma 3.5 already proves this is an irreflexive ordering. It is a good exercise to check this 
+is a wellfounded ordering.
+
+To simplify this global order of wellorderings and proofs about it, we introduce the 
+ordinals. Isomorphism classes of wellorders are proper classes which are awkward to deal 
+with. Instead, ordinals will give us a unique representative of each isomorphism class of 
+wellorderings.
+
+16
+
+
+Remark 3.7. All the results of this section apply more generally to setlike wellorderings 
+of classes. That is, classes X equipped with a linear order <X so that for every a ∈X, 
+{b ∈X : b <X a} is a set. We will more generally discuss induction and recursion on setlike 
+wellfounded relations on classes in Section 6.
+
+17
+
+
+4 Ordinals
+
+In this section, we’ll introduce ordinals and show that they are canonical representatives 
+of each isomorphism class of wellorderings. This will make it much easier to deal with the 
+global structure we found in Section 3 on all wellorderings under the relation “(P, <P ) is 
+isomorphic to an initial segment of (Q, <Q)”.
+
+Our definition of ordinal will use the notion of a transitive set. We call a set x transitive 
+if for every a ∈x, if b ∈a, then b ∈x. Careful: the ∈ relation on a transitive set need not 
+be transitive. For example, the set {∅, {∅}, {{∅}}} is transitive, but the ∈ relation on this 
+set {∅, {∅}, {{∅}}} is not transitive since ∅∈{∅} and {∅} ∈{{∅}}, but ∅/∈{{∅}}.
+
+Exercise 4.1. x is transitive iff for every y ∈x, y ⊆x.
+
+Exercise 4.2 (Unions and intersections of transitive sets are transitive). If X is a set and 
+every x ∈X is transitive, then ⋃︁X and ⋂︁X are transitive.
+
+Definition 4.3. An ordinal is a transitive set x so that the ∈ relation on x is a wellordering. 
+We let ORD denote the class of all ordinals. If α, β are ordinals, we define α < β iff α ∈β. 
+We will use lowercase Greek letters α, β, γ, λ, . . . for ordinals.
+
+For example, it is easy to check that the sets ∅, {∅}, and {∅, {∅}} are ordinals. We will 
+see eventually that these are the first three ordinals which we’ll call 0, 1, and 2.
+
+An important technical detail in this section is that we will not use the axiom of foun-
+dation. This is because we’ll want to use the ordinals later to prove that the axiom of 
+foundation is equivalent to ∀x(x ∈V ). Note for example that if α is an ordinal, α /∈α just 
+by the definition of ordinal: if α ∈α, this would imply that ∈ is not an irreflexive relation on 
+α, and hence not a strict partial order. So we don’t need to use the axiom of foundation and 
+Proposition 2.1 to show that α /∈α. More generally, we could use the axiom of foundation 
+to easily prove that the ∈ ordering on any ordinal is wellfounded, but we will want to prove 
+the wellfoundedness of ordinals without using the axiom of foundation for the purpose we 
+described above.
+
+Our first goal is to prove that the order < on the ordinals is a wellordering.
+
+Lemma 4.4. If α ̸= β are ordinals, and α ⊊β, then α ∈β.
+
+Proof. 
+Let γ be the ∈-least element of the set β \ α. We claim that α = γ, and hence 
+α ∈β.
+
+First, γ ⊆α. If ξ ∈γ, then ξ ∈β. Since γ is the ∈-least element of β \ α, we cannot 
+have ξ ∈β \ α, so ξ ∈α.
+
+Conversely, α ⊆γ. Fix ξ ∈α. Then ξ ∈β since α ⊆β. Since ξ ̸= γ (as γ /∈α), and 
+β is linearly ordered by ∈, either ξ ∈γ or γ ∈ξ. But γ ∈ξ would imply γ ∈α since α is 
+transitive, contradiction. Hence ξ ∈γ.
+
+Therefore α = γ, so α ∈β.
+∎
+
+Lemma 4.5. If α is an ordinal and β ∈α, then β is an ordinal, and β is an initial segment 
+of α under <.
+
+Proof. 
+First we show that β is transitive. Suppose b ∈a ∈β. Then a ∈α and b ∈α
+since α is transitive. Since α is linearly ordered by ∈ we must have that either b ∈β, b = β, 
+or β ∈b. If b = β or β ∈b, then the set {b, a, β} (which exists by Pairing) would have no 
+∈-minimal element contradicting that ∈ is a wellordering of α. So we must have b ∈β.
+
+18
+
+
+Next, β = {γ : γ ∈β} = {γ ∈α: γ ∈β} = {γ ∈α: γ < β} since every element of β is 
+an element of α by transitivity.
+
+Finally, ∈ is a wellordering of β, since β is an initial segment of α.
+∎
+
+It follows from this lemma that each ordinal is equal to the set of ordinals that are less 
+than it.
+
+α = {β : β ∈α} = {β ∈ORD: β ∈α} = {β ∈ORD: β < α}.
+
+Now we’re ready to prove the trichotomy property for the ordering < on ORD.
+
+Lemma 4.6. If α, β are ordinals and α ̸= β, then either α ⊆β or β ⊆α.
+
+Proof. 
+Let γ = α ∩β. Now γ is an ordinal since it is transitive (the intersection of two 
+transitive sets is transitive), and any subset of a wellordering is a wellordering.
+
+Suppose γ is not equal to α or β. Then γ ∈α and γ ∈β by Lemma 4.4. So γ ∈γ, which 
+contradicts the definition of an ordinal.
+∎
+
+Applying Lemma 4.4 gives the following corollary:
+
+Corollary 4.7. If α ̸= β are ordinals, then α < β or β < α. So < is a linear ordering of 
+the class of ordinals.
+
+Next, we show that < is a wellordering of ORD, which we’ve already shown is linear.
+
+Lemma 4.8. < is a wellfounded ordering of the class of ordinals.
+
+Proof. 
+Suppose A ⊆ORD is a nonempty class of ordinals, and α ∈A. If α is not the 
+least element of A, then A ∩α is a nonempty subset of α. Hence, it has a least element. 
+Therefore A has a least element.
+∎
+
+Definition 4.9. If A is a nonempty class of ordinals, we let inf(A) denote its least element.
+
+We can similarly define sup(A) for any set of ordinals. First, we show that any set of 
+ordinals has an upper bound:
+
+Lemma 4.10. If X is any set of ordinals, then there is an ordinal β such that β ≥α for 
+every α ∈X.
+
+Proof. 
+Consider the set β = ⋃︁X. β is transitive since it is a union of transitive sets. It 
+is a set of ordinals, and so it is linearly ordered by ∈ by Corollary 4.7 and every subset of 
+β has a minimal element by Lemma 4.8. Finally, if α ∈X, then α ⊆β, and so α ≤β.
+∎
+
+Definition 4.11. If X is a set of ordinals, we let sup X = inf({β : (∀α ∈X)[β ≥α]})
+denote the least upper bound of X.
+
+Exercise 4.12. 
+
+1. For each α, α = {β ∈ORD: β < α}.
+
+2. If C is a nonempty class of ordinals, then ⋂︁C is an ordinal, ⋂︁C ∈C, and ⋂︁C =
+inf C.
+
+3. If X is a nonempty set of ordinals, then ⋃︁X is an ordinal. If X has no maximal 
+element, then ⋃︁X = sup X.
+
+19
+
+
+5 Transfinite induction and recursion on ordinals
+
+We can now formulate the principles of transfinite induction and recursion. Transfinite 
+induction is a proof technique we use to prove statements about all ordinals, analogously to 
+how we use ordinary induction to prove statements about all natural numbers. Similarly, 
+transfinite recursion lets us recursively define functions on the ordinals, analogously to how 
+ordinary recursion lets us recursively define functions on ω.
+
+Theorem 5.1 (Transfinite induction). Suppose C is a class of ordinals such that
+
+• 0 ∈C,
+
+• For all α, α ∈C →α + 1 ∈C,
+
+• If λ is a nonzero limit ordinal (∀α < λ)(α ∈C) →λ ∈C.
+
+Then C = ORD.
+
+Proof. 
+Suppose λ is the least ordinal such that λ /∈C. Then apply one of the three 
+conditions above.
+∎
+
+Sometimes transfinite induction is phrased just as a single condition instead of breaking 
+into three cases of the zero ordinal, base case, and limit cases.
+
+Exercise 5.2 (Alternate statement of transfinite induction). Suppose C is a class of ordinals 
+such that for all α, if β ∈C for all β < α, then α ∈C. Then show C = ORD.
+
+If X and Y  are classes (perhaps proper classes), then a class function F from X to 
+Y  is a class that is a subclass of X × Y = {(x, y): x ∈X ∧y ∈Y }, such that for every 
+x ∈X, there is a unique y ∈Y  such that (x, y) ∈F. We let V  stand for the class of all sets 
+V = {x: x = x}.
+
+Theorem 5.3 (Transfinite recursion). Let G: V →V  be a class function on all sets. Then 
+there is a unique class function F such that for all α ∈ORD,
+
+F(α) = G(F ↾α)
+(*)
+
+Note that F ↾α = F ↾{β : β < α}.
+
+Proof. 
+First we prove uniqueness. Suppose f, f ′ are two class functions on ORD satisfying 
+(*) for all α ∈dom(f) ∩dom(f ′). Then we claim f = f ′ on dom(f) ∩dom(f ′). Suppose 
+not, and let α be the least ordinal such that f(α) ̸= f ′(α). This is a contradiction, since by 
+choice of α, f ′ ↾α = f ↾α. So since (*) is true on dom(f) and dom(f ′),
+
+f(α) = G(f ↾α) = G(f ′ ↾α) = f ′(α).
+
+Now we define F. Let F be the class of pairs (β, y) such that there exists an f such that 
+dom(f) ∈ORD, and f(α) = G(f ↾α) for all α ∈dom(f), β ∈dom(f), and f(β) = y.
+
+F is a function by the uniqueness we’ve proved above. We claim dom(F) = ORD. If not, 
+let β be the least element not in dom(F). Then by minimality of β, let f = F ↾β. Now (*) 
+is true on dom(f) = β. Now let f ′ = f ∪{(β, G(f))}. Then f ′ also satisfies (*), and has 
+domain β + 1. Contradiction!
+∎
+
+23
+
+
+We give some examples of transfinite induction and recursion. We will start with some 
+operations on ordinals.
+
+Definition 5.4 (Ordinal addition). For each fixed ordinal α, define the function β ↦→α+β
+by transfinite recursion as follows:
+
+• α + 0 = α.
+
+• α + (β + 1) = (α + β) + 1
+
+• α + λ = sup{α + β : β < λ}.
+
+There is a different way to conceive of ordinal addition rather than this recursive defi-
+nition of “iterated successor”. The ordertype of α + β is the same as the ordertype of the 
+order of α followed by β.
+
+Lemma 5.5. For all ordinals α, β, the ordertype of α + β is the same as the ordertype of 
+the set α ⊔β = {0} × α ∪{1} × β equipped with the ordering ≺ where (m, γ) ≺(n, δ) if 
+m < n, or m = n and γ < δ.
+
+Proof. 
+We prove this for each α by transfinite induction on β. Our base case is that α
+is isomorphic to α ⊔∅, and if α + β is isomorphic to α ⊔β, then if we add one more point 
+to each order, α + (β + 1) is isomorphic to α ⊔β + 1. Finally, given any two isomorphic 
+wellorders, there is a unique isomorphism between them. So if α + β is isomorphic to α ⊔β
+for each β < λ via the isomorphism fβ, then ⋃︁
+
+β<λ fβ is an isomorphism between α + λ and 
+α ⊔λ.
+∎
+
+We note that ordinal addition is strictly increasing in the second coordinate, but not the 
+first.
+
+Exercise 5.6.  Prove that for all ordinals α, β, γ, we have:
+
+1. β ≤γ implies α + β ≤α + γ.
+
+2. α + γ < α + β iff γ < β.
+
+Exercise 5.7. 
+
+1. Prove that for all ordinals α, β, γ, we have α ≤β implies α + γ ≤β + γ.
+
+2. Give examples of ordinals α, β, γ such that α < β, but α + γ = β + γ.
+
+Next, we define ordinal multiplication by recursion.
+
+Definition 5.8 (Ordinal multiplication). For each ordinal α, define the function β ↦→α · β
+by:
+
+• α · 0 = 0.
+
+• α · (β + 1) = (α · β) + α
+
+• α · λ = sup{α · β : β < λ} for limit λ.
+
+24
+
+
+Exercise 7.6. If x is a set and y ⊇x is transitive, then y ⊇TC(x). That is, TC(x) is the 
+smallest transitive set containing x as a subset.
+
+Proposition 7.7. Assume ZF −Foundation. Then the following are equivalent:
+
+• The axiom of foundation
+
+• ∀x(x ∈V ).
+
+Proof. 
+Note that we didn’t use the axiom of foundation in our development of the ordinals 
+or V . For example, we defined an ordinal to be a transitive set α so ∈ is a strict wellorder 
+of α. So the fact that α /∈α follows by definition (otherwise the ∈ ordering would not be 
+strict), and not by foundation.
+
+First, let’s prove that ∀x(x ∈V ), assuming the axiom of foundation. Let x be an 
+arbitrary set. We claim that for all y ∈TC(x), there is an α such that y ∈Vα. Then setting 
+ξ = sup{rank(y) + 1: y ∈TC(x)} (which is a set by the axiom of replacement since it is the 
+range of the function y ↦→rank(y) + 1 on the set TC(x)), x ⊆TC(x) ⊆Vξ, so x ∈Vξ+1. To 
+prove the claim, suppose y is an ∈-minimal element of TC(x) such that y /∈V . But then 
+every element of y is in Vα for some α, hence if β = sup{rank(z) + 1: z ∈y}, then y ⊆Vβ, 
+hence y ∈Vβ+1, contradiction.
+
+Conversely, assume ∀x(x ∈V ) and suppose x is a nonempty set. We want to show x
+has an ∈-minimal element. Let α be the least element of {rank(y): y ∈x} and let y ∈x
+be such that rank(y) = α. Since rank(y) = sup({rank(z) + 1: z ∈y}), it must be that no 
+element of y is in x, otherwise α would not be the minimal rank of an element of x.
+∎
+
+One way of using ranks is that it allows us to select set-sized subsets of proper classes 
+in a canonical way. Suppose C is a nonempty proper class. Then let ˆC = {x ∈C : ∀y ∈
+C rank(x) ≤rank(y)} Then ˆC is always a nonempty subset of C. This idea is known 
+sometimes as Scott’s trick and allows us to do things like formalize ultrapowers of proper 
+class inner models in a coherent way.
+
+We can use the above trick to show that the axiom of Replacement is equivalent to 
+Separation and Collection. Recall that the only difference between replacement and collec-
+tion is that replacement says that there is a unique y such that ϕ(x, y, w1, . . . , wn) whereas 
+collection allows there to be a proper class of such y. However, we can use replacement to 
+prove collection by taking the elements of minimal rank satisfying the formula.
+
+Exercise 7.8. Assume ZF −Separation −Replacement. Show the following are equivalent:
+
+1. Separation + Collection
+
+2. The axiom schema of replacement: for each formula ϕ:
+
+∀X∀w1, . . . , wn[((∀x ∈X)(∃!y)ϕ(x, y, w1, . . . , wn)) →
+
+∃Z∀y(y ∈Z ↔(∃x ∈X)ϕ(x, y, w1, . . . , wn))]
+
+Exercise 7.9. TC(x) is the smallest transitive set containing x. That is, for all sets x, if 
+y is any transitive set containing x, then TC(x) ⊆y.
+
+Exercise 7.10. Suppose κ is a strongly inaccessible cardinal (i.e. κ is regular, and λ < κ
+implies 2λ < κ).
+
+1. Show that for all α < κ, |Vα| < κ.
+
+2. Show that |Vκ| = κ.
+
+35
+
+
+8 The axiom of choice
+
+Recall that the axiom of choice says that if X is a set whose elements are nonempty and 
+pairwise disjoint, then there is a choice set C so C contains exactly one element from each 
+set in X. There are a few special cases of the axiom of choice which are true in ZF. For 
+example, ZF proves the axiom of choice is true
+
+1. When X is finite (by induction).
+
+2. Sets such that there is a linear ordering of ⋃︁X and every x ∈X is finite (pick the 
+least element in each x ∈X).
+
+3. Sets such that there is a wellordering of ⋃︁X (pick the least element in each x ∈X).
+
+However, ZF without choice cannot prove the following:
+
+1. There is a choice set for {{x + r: r ∈Q}: x ∈R}.
+
+2. There is a choice set for {{y ∈P(N): x△y is finite}: x ∈P(N)}.
+
+3. There is a wellordering of R.
+
+In this section, we’ll prove some basic consequences of the axiom of choice.
+
+Definition 8.1. Suppose (P, <P ) is a partial ordering. We say that a subset X ⊆P is a 
+chain if for all x, y ∈X, either x ≤P y or y ≤P x. We say that X ⊆P is an antichain 
+if for all x, y ∈X, x ≮P y and y ≮P x. If X ⊆P, then we say that a ∈P is an upper 
+bound for X if for all b ∈X, b ≤P a. We say an element a ∈P is maximal in P if there 
+is no b ∈P such that a <P b.
+
+Lemma 8.2 (Zorn). Suppose (P, <P ) is a nonempty partial ordering so that for all nonempty 
+chains X, there is an upper bound for X in P. Then P has a maximal element.
+
+Proof. 
+By assumption, given any chain X ⊆P, there exists an upper bound a for X. 
+Note that if a, a′ are both upper bounds for X and both a, a′ ∈X, then a = a′ since a ≤P a′
+
+and a′ ≤P a. Hence, if there is no upper bound for X that is not in X, there is exactly one 
+upper bound for X, and it is maximal in P. Hence, for each chain X, the set
+
+{(X, a): a is an upper bound for X and (a /∈X or a is maximal in P)}
+
+is nonempty. So consider the set of such sets:
+
+Y = {{(X, a): a is an upper bound for X and a /∈X or a is maximal in P}: X is a chain}
+
+These sets are nonempty, and any two elements of this set are disjoint; they are sets of 
+ordered pairs with different first coordinates. Hence, by the axiom of choice, there is a 
+choice set G for this set Y . Now G is a function and dom(G) = {X ⊆P : X is a chain}. 
+For each chain X, G(X) is an upper bound for X so that G(X) /∈X, or G(X) is maximal 
+in P.
+
+Now by transfinite recursion, consider the unique function F such that F(α) = G(ran(F ↾
+α)). Hence, F is a class function from ORD to P. We claim that for each α, ran(F ↾α) =
+{F(β): β < α} is a chain. This is true by transfinite induction. It is true for α = 0 since ∅
+is a chain. It is true at limit α since a union of chains is a chain. Finally, if it is true at α, 
+
+36
+
+
+it is true at α + 1, since F(α) is a upper bound for the chain {F(β): β < α}, and the union 
+of a chain and an upper bound for it is also a chain.
+
+Now F cannot be an injection, since ORD is a proper class, and there cannot be an 
+injective class function from a proper class to a set (apply the axiom of replacement to its 
+inverse to get a contradiction). So there exists ξ < α such that F(ξ) = F(α). Then the 
+chain X = {F(β): β < α} includes F(ξ) = F(α). Hence, by the definition of G, since F(α)
+is an upper bound for X that is contained in X, we must have that F(α) is maximal in 
+P.
+∎
+
+The following is a special case of Zorn’s lemma for the ⊆ relation on subsets of P(X):
+
+Corollary 8.3 (The Hausdorff Maximality principle). Suppose X ̸= ∅ and A ⊆P(X) is 
+nonempty. Suppose that for all B ⊆A, if ∀x, y ∈B, x ⊆y or y ⊆x, then there is some 
+z ∈A so that x ⊆z for all x ∈B. Then there exists some a ∈A so that there is no b ∈A
+so that a ⊊b.
+
+Let’s prove that every set can be wellordered, assuming AC.
+
+Theorem 8.4 (Zermelo’s wellordering theorem). There is a wellordering of every set X.
+
+Proof. 
+It suffices to find a bijection from some ordinal to X.
+Let y be such that y /∈X. Let G: P(X) →X ∪{y} be such that G(A) ∈A for all 
+nonempty A ⊆X, and G(∅) = y. Such a function G exists by the axiom of choice applied 
+to the set {{(A, a): a ∈A ∨(A = ∅∧a = y)}: A ∈P(X)}. Then by transfinite recursion, 
+we can find a function F : ORD →X ∪{y} so that F(α) = G(X \ ran(F ↾α)).
+
+We claim that if α < β and F(α) ∈X, then F(β) ̸= F(α). This is true by definition of 
+F(α), and since G(A) ∈A unless A = ∅, in which case G(∅) = y /∈X.
+
+Since ORD is a proper class, there cannot be an injection from ORD to the set X ∪{y}. 
+Thus, there must be α < β so that F(α) = F(β). By the above claim, we must have that 
+F(α) = y. Let γ be the least ordinal such that F(γ) = y, and hence ran(F ↾γ) = X. Then 
+F ↾γ is a bijection from γ to X.
+∎
+
+One could also prove the wellordering theorem from the Hausdorff maximality principle 
+by taking a maximal injection from an ordinal to a subset of X. The class of injections from 
+ordinals to X is a set by Hartog’s theorem in the next section.
+
+The following is one of the oldest open problems in set theory:
+
+Open Problem 8.5. Assume ZF. Are the following equivalent:
+
+• (The partition principle) for all sets X and Y , if there is a surjection from X to Y , 
+then there is an injection from Y  to X.
+
+• The axiom of choice.
+
+8.1 Fragments of the axiom of choice*
+
+There are small fragments of the axiom of choice which are still not provable in ZF. For 
+example, the axiom of countable choice ACω says that if X is a countable set whose 
+elements are nonempty and pairwise disjoint, then there is a choice set C for X. The axiom 
+of dependent choice says that if R is a binary relation on X and for all a ∈X there exists 
+
+37
+
+
+b ∈X such that a R b (i.e. R is entire), then there is a sequence ⟨xn : n ∈ω⟩ such that for 
+all n ∈ω, xn R xn+1.
+
+It is easy to see that in ZF, AC implies DC which implies ACω. To prove DC assuming 
+AC, let G be a function on X so that for all a ∈X, a R G(a), which exists by AC. Then 
+use recursion to find some F so that F(0) ∈X and F(n + 1) = G(F(n)).
+
+To prove ACω from DC, let X be a countable set of nonempty sets and fix a bijection 
+f : ω →X. Let G be the set of all functions g such that dom(g) = n for some n ∈ω and 
+g(i) ∈f(i) for all i < n. Define a relation R on G by g R g′ iff g′ = g ∪{(n, a)} for some 
+a ∈f(n), where n = dom(g). Then R is entire, so by DC there is a sequence ⟨gn : n ∈ω⟩
+such that gn R gn+1 for all n. Then ⋃︁
+
+n gn is a choice function on all but finitely many 
+elements of X, and we can extend it to a choice function on all of X using the finite case 
+of the axiom of choice which is provable in ZF. None of the implications AC →DC →ACω
+can be reversed.
+
+ZF by itself is a pretty dismal theory. For example ZF does not prove that a countable 
+union of countable sets is countable. Indeed, ZF cannot even prove that R is not a countable 
+union of countable sets. A recent theorem of Gitik is that assuming certain large cardinal 
+axioms, there is a model of ZF where there are no uncountable regular cardinals.
+
+But these are scary bedtime stories; mathematicians almost always work in ZF + DC, 
+even when they are being careful about the use of the axiom of choice. DC is absolutely 
+essential for developing lots of basic mathematics (e.g. all of analysis), and DC does not 
+have any of the “pathological” consequences of AC. For example, DC does not imply the 
+Banach-Tarski paradox, or existence of a nonmeasurable subset of R, or a wellordering of 
+the real numbers. 
+
+38
+
+
+9 Cardinality in ZF
+
+We’ll begin our discussion of cardinality in ZF without assuming the axiom of choice. We 
+will sometimes emphasize that a theorem is true just in ZF by writing it in the assumptions, 
+but all the definitions and theorems in the section are true without assuming the axiom of 
+choice.
+
+Definition 9.1. If X and Y  are sets, say that X and Y  have the same cardinality and 
+write |X| = |Y | if there is a bijection from X to Y . Formally, cardinality is an equivalence 
+relation, and |X| denotes the equivalence class under this equivalence relation15. Say that 
+X has cardinality less than or equal to Y  and write |X| ≤|Y | if there is an injection from 
+X to Y .
+
+Assuming ZF, if X is nonempty and |X| ≤|Y |, then there is a surjection from Y  to X
+(but the converse does not hold). If we also assume the axiom of choice, then |X| ≤|Y | if 
+and only if there is a surjection from Y  to X.
+
+Exercise 9.2. Suppose X and Y  are nonempty sets
+
+1. (ZF) If |X| ≤|Y |, then there is a surjection from Y  to X.
+
+2. (ZFC) |X| ≤|Y | if and only if there is a surjection from Y  to X.
+
+Theorem 9.3 (ZF, Cantor-Schröder-Bernstein). Assume X and Y  are sets, |X| ≤|Y | and 
+|Y | ≤|X|. Then |X| = |Y |.
+
+Proof. 
+Let f : X →Y  and g: Y →X be injections. We define sequences of sets ⟨An : n ∈
+ω⟩ and ⟨Bn : n ∈ω⟩ simultaneously by induction. Let A0 = X, Bn = Y \ f(An), and 
+An+1 = X \ g(Bn). Then it is easy to see that the An are decreasing and Bn are increasing.
+
+Let A = ⋂︁
+
+n An, and B = ⋃︁
+
+n Bn. Now define a function h: X →Y  by h = f ↾A∪g−1 ↾
+g(B). To see h is a bijection note that f(A) = f(⋂︁
+
+n An) = ⋂︁
+
+n(Y \Bn) = Y \⋃︁
+
+n Bn = Y \B. 
+So since f(A) and B are disjoint h is one-to-one, and since f(A)∪B = Y , we see h is onto.
+∎
+
+In ZF without assuming choice, there can be many incomparable cardinalities. For 
+example, it is possible that |R| ≰|ω1| and |ω1| ≰|R|. An important class of cardinalities 
+are those that come from the sizes of ordinals.
+
+Definition 9.4. Say that an ordinal α is a cardinal if |α| ̸= |β| for all β < α. We will 
+use Greek letters κ, λ, . . . for cardinals. By transfinite recursion, let ωα be the αth infinite 
+ordinal which is a cardinal. That is, ωα is the least ordinal whose cardinality is greater than 
+ωβ for all β < α. Let ℵα denote the cardinality of ωα.
+
+So for example, ω0 = ω, and ω1 is the least uncountable ordinal.
+
+Exercise 9.5. Show that if α is a limit ordinal, then ωα = supβ<α ωβ.
+
+We have the following theorem relating the cardinality of arbitrary sets to ordinals.
+
+Theorem 9.6 (ZF, Hartog’s theorem). For each set X there is an ordinal which cannot be 
+injected into X.
+
+15When it is convenient to have a set representing this cardinality, we can use Scott’s trick and take all 
+elements of minimal rank that have a given cardinality
+
+39
+
+
+Proof. 
+Consider κ = {α: there is an injection from α to X}. This is equal to {α:  there 
+is a wellordering of a subset of X of ordertype α}, which is a set by the axiom of replacement. 
+It is closed downward, and is hence an ordinal. Since κ is not an element of itself, it does 
+not inject into X.
+∎
+
+The least ordinal that cannot be injected into X is called the Hartog’s number of X, 
+and is denoted h(X). It is always a cardinal.
+
+Note that for all ordinals α, there is an ordinal λ of greater cardinality than α: it is 
+{β : |β| ≤|α|} = h(α). We have special notation for this:
+
+Definition 9.7. If κ is a cardinal, we let κ+ denote the least ordinal of cardinality greater 
+than κ.
+
+We’ve already proved:
+
+Theorem 9.8 (Cantor, ZF). For every set X, |X| < | P(X)|.
+
+So for every cardinality, there is a strictly larger cardinality. A different way to map a 
+set to a set of larger cardinality is the map X ↦→X ∪h(X). In ZFC for infinite cardinals κ
+this is just the map κ ↦→κ+.
+
+We have the following operations that we define on cardinalities:
+
+Definition 9.9. Suppose X and Y  are sets. Then |X| + |Y | is defined to be the cardinality 
+of X ⊔Y , the disjoint union of X and Y 16. |X| · |Y | is defined to be the cardinality of the 
+product X × Y . |Y ||X| is defined to be the cardinality of the set of functions from X to Y .
+
+Exercise 9.10. 
+
+1. The operations +, ·, exp are well defined on cardinals. If X, Y  are sets and |X| = |X′|
+
+and |Y | = |Y ′|, then |X|+|Y | = |X′|+|Y ′|, |X|·|Y | = |X′|·|Y ′|, and |X||Y | = |X′||Y ′|.
+
+2. The operations are nondecreasing in every coordinate. Suppose X, X′, Y  are sets, and 
+
+|X| ≤|X′|. Then |X| + |Y | ≤|X′| + |Y |, |X| · |Y | ≤|X′| · |Y |, |X||Y | ≤|X′||Y |, and 
+|Y ||X| ≤|Y ||X′|.
+
+3. The operations + and · on cardinalities are commutative and associative.
+
+Our next goal is to show that the operations of addition and multiplication of cardinality 
+of infinite ordinals are trivial, and ℵα + ℵβ = ℵα · ℵβ = max(ℵα, ℵβ). We begin with some 
+easy facts about how cardinality behaves on ordinals:
+
+Exercise 9.11. For all infinite ordinals α, |α| = |α + 1|.
+
+We have the following:
+
+Lemma 9.12. (ZF) If α is an infinite ordinal, then |α × α| = |α|.
+
+Proof. 
+We prove |α×α| = |α| by transfinite induction on α. For our base case, |ω ×ω| =
+|ω| (e.g. via the pairing function f((n, m)) = 1
+
+2(n + m)(n + m + 1) + m).
+Now suppose that for all infinite β < α we have |β × β| = |β|.
+Case 1: α has the same cardinality as β for some β < α. Then |α|·|α| = |β|·|β| = |β| = |α|
+by our induction hypothesis.
+
+Case 2: suppose α is a cardinal. Then we claim that the following ordering ≺ on α × α
+is a wellordering of ordertype α. Define (β, γ) ≺(β′, γ′) iff
+
+16Recall X ⊔Y = {0} × X ∪{1} × Y
+
+40
+
+
+• max(β, γ) < max(β′, γ′), or
+
+• max(β, γ) = max(β′, γ′) and β < β′, or
+
+• max(β, γ) = max(β′, γ′), β = β′ and γ < γ′.
+
+It is easy to check this is a wellordering.
+
+Suppose (β, γ) ∈α × α. It suffices to show that the initial segment {(β′, γ′): (β′, γ′) ≺
+(β, γ)} of ≺ on α × α has ordertype less than α. Hence, the ordertype map sending each 
+(β, γ) ∈α × α to the ordertype of this initial segment is an injection from α × α to α.
+
+Let λ = max(β, γ) + 1, so λ < α. Since (β′, γ′) ≺(β, γ) implies β′, γ′ < λ, the initial 
+segment given by (β, γ) has cardinality ≤|λ · λ| = |λ| < α by our induction hypothesis, so 
+this initial segment of the wellordering ≺ on α × α must have ordertype less than α. Hence, 
+every element of α × α is mapped to an ordinal less than α, so |α| · |α| ≤|α|, and hence 
+|α| · |α| = |α|.
+∎
+
+Exercise 9.13. (ZF) Suppose X and Y  are infinite sets. Then |X| + |Y | ≤|X| · |Y |.
+
+Corollary 9.14. (ZF) ℵα + ℵβ = ℵα · ℵβ = ℵmax(α,β).
+
+Proof. 
+Without loss of generality, assume α ≤β. Then
+
+ℵβ ≤ℵα + ℵβ ≤ℵα · ℵβ ≤ℵβ · ℵβ = ℵβ.
+
+where the last equality is by the above Lemma, since ℵβ is an infinite ordinal.
+∎
+
+Cardinal addition and multiplication on nonwellorderable sets in ZF can be quite inter-
+esting. Indeed, if cardinal addition and multiplication are too simple on infinite sets, then 
+the axiom of choice must be true.
+
+Theorem 9.15 (ZF). Suppose that for all infinite sets X and Y , |X| + |Y | = |X| · |Y |. 
+Then the axiom of choice is true.
+
+Proof. 
+Suppose that for all infinite sets X and Y , |X| + |Y | = |X| · |Y |. It suffices to 
+show that every infinite set can be wellordered. Assume X is infinite, and f is an injection 
+from X × h(X) to X ⊔h(X).
+
+Case 1: there is some x ∈X so that for all α ∈h(X), f(x, α) ∈X. Then α ↦→f(x, α)
+is an injection from h(X) to X, which is a contradiction.
+
+Case 2: For all x ∈X, there is some α ∈h(X) such that f(x, α) ∈h(X). In this case, 
+let g(x) = f(x, α), where α is least such that f(x, α) ∈h(X). Then g is an injection from 
+X to h(X), and hence X is wellorderable.
+∎
+
+Using similar tricks with Hartog’s number, one can prove the following:
+
+Exercise 9.16 (ZF). The GCH in ZF is the statement that for all sets X, if Y  is such that 
+|X| ≤|Y | ≤2|X|, then |Y | = |X| or |Y | = 2|X|. Show that in ZF, if GCH is true, then AC
+is true.
+
+41
+
+
+9.1 Cardinality in models of the axiom of determinacy*
+
+The axiom of determinacy is an axiom that contradicts the axiom of choice, and paints a 
+much different picture of the universe of sets. It is an important topic of study in modern 
+set theory. Models of ZF + DC + AD in some sense contain only well behaved definable sets, 
+have very regular behavior and no pathologies. They are compatible with large cardinals. 
+We briefly discuss what cardinality is like in these models: they are beautiful examples of 
+models of ZF without choice.
+
+We’ve already seen two completely different proofs of the existence of uncountable sets: 
+R is uncountable by Cantor’s diagonal argument. ω1 is uncountable since it is the set of all 
+countable ordinals, and cannot be an element of itself.
+
+In natural models of the axiom of determinacy, R cannot be wellordered and the car-
+dinalities |R| and |ω1| are incomparable; neither injects into the other. However, all other 
+sets are uncountable by virtue of containing a copy of one of these two sets. Thus, in some 
+sense, these two proofs for R and ω1 are the only proofs that there exists an uncountable 
+set.
+
+Theorem 9.17 (Woodin, see [CK] and [H]). In “natural” models of AD (such that L(R) or 
+L(P(R)) assuming large cardinals), if X is an uncountable set, then |R| ≤|X| or |ω1| ≤|X|.
+
+Note that assuming the axiom of choice, for nonempty X, |X| ≤|Y | iff there is a 
+surjection from Y  to X. However, this is not true in ZF. If we have a surjection from Y
+to X, we need the axiom of choice to choose one element from each preimage to construct 
+an injection from X to Y . Indeed, it is possible that if X is a set, and E is an equivalence 
+relation on X, for |X| < |X/E|! Taking quotients can increase the cardinality of sets! In 
+these models of AD, important cardinalities arise from equivalence relations E on the real 
+numbers such that |R| < |R/E|.
+
+9.2 Resurrecting Tarski’s theory of cardinal algebras*
+
+In the 1930s, Tarski investigated the theory of cardinal addition in ZF from an algebraic 
+viewpoint. He created an axiomatic framework for investigating the addition operation on 
+cardinalities in set theory without the full axiom of choice (which makes cardinal addition 
+trivial).17
+
+There are a few surprising and nontrivial theorems in this setting. One of the most 
+famous is the following:
+
+Theorem 9.18 (Lindenbaum and Tarski). Suppose X and Y  are sets and |n×X| = |n×Y |, 
+then |X| = |Y |.
+
+Even the case n = 3 in this theorem is not at all straightforward, and John Conway and 
+Peter Doyle published a famous paper about this theorem called “Division by three” [CD].
+
+17Precisely, a cardinal algebra is a triple (A, +, ∑︁) where
+
+• A is a set
+
+• + is a binary function on A, and
+
+• ∑︁: Aω →A is a function
+
+satisfying a short list of axioms (for example, one of the axioms is ∑︁∞
+n=0 an = a0 + ∑︁∞
+n=0 an+1 for every 
+sequence ⟨an : n ∈ω⟩). Here we think of A as a set of cardinalities, and + and ∑︁ as addition of two and 
+countably many cardinalities.
+
+42
+
+

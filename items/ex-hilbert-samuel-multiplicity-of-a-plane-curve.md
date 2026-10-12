@@ -53,14 +53,10 @@ $$ e_{\mathfrak m}(R)=2. $$
 
 **Proof technique:** direct.
 
+ 1.1 The initial form of $y^2-x^3$ has degree $2$, namely $Y^2$, so $ \operatorname{gr}_{\mathfrak m}(R)\cong k[X,Y]/(Y^2). $ Thus the degree-$0$ piece has dimension $1$, and every degree-$n\ge1$ piece has basis $X^n,X^{n-1}Y$. [L1, given, algebra]
 
-1.1 The initial form of $y^2-x^3$ has degree $2$, namely $Y^2$, so $ \operatorname{gr}_{\mathfrak m}(R)\cong k[X,Y]/(Y^2). $ Thus the degree-$0$ piece has dimension $1$, and every degree-$n\ge1$ piece has basis $X^n,X^{n-1}Y$. [L1, given, algebra]
+ 1.2 Therefore $\ell_R(\mathfrak m^0/\mathfrak m)=1$ and $ \ell_R(\mathfrak m^n/\mathfrak m^{n+1})=2\qquad(n\ge1). $ Summing these lengths as in [L1] gives $ \chi_{\mathfrak m,R}(n)=2n+1 $ for $n\ge1$. [L1, algebra]
 
+ 1.3 The eventual polynomial is $2n+1$, so its degree is $1$ and the leading coefficient is $2$. Hence [L2] gives $e_{\mathfrak m}(R)=2$. [L2]
 
-1.2 Therefore $\ell_R(\mathfrak m^0/\mathfrak m)=1$ and $ \ell_R(\mathfrak m^n/\mathfrak m^{n+1})=2\qquad(n\ge1). $ Summing these lengths as in [L1] gives $ \chi_{\mathfrak m,R}(n)=2n+1 $ for $n\ge1$. [L1, algebra]
-
-
-1.3 The eventual polynomial is $2n+1$, so its degree is $1$ and the leading coefficient is $2$. Hence [L2] gives $e_{\mathfrak m}(R)=2$. [L2]
-
-
-2.1 Thus the multiplicity of the cusp is read directly from its tangent-cone graded ring. [algebra] ∎
+ 2.1 Thus the multiplicity of the cusp is read directly from its tangent-cone graded ring. [algebra] ∎ 

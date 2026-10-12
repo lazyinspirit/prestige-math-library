@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-comparison-maps-between-two-resolutions-of-a-cyclic-group.md

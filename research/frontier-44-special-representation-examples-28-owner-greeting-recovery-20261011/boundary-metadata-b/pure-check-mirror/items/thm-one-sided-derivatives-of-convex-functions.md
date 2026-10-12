@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-one-sided-derivatives-of-convex-functions.md

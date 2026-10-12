@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-element-of-a-disconnected-compact-lie-group-lies-in-the-identity-components-maximal-torus.md

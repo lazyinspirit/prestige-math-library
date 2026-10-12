@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reduced-harmonic-oscillator-flow-on-projective-space.md

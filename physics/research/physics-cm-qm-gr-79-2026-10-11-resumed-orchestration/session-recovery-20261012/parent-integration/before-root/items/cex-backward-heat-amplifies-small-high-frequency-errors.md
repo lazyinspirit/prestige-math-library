@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-backward-heat-amplifies-small-high-frequency-errors.md

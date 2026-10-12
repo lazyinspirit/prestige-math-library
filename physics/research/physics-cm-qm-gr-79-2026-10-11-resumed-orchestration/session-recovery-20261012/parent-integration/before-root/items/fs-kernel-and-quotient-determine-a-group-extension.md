@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-kernel-and-quotient-determine-a-group-extension.md

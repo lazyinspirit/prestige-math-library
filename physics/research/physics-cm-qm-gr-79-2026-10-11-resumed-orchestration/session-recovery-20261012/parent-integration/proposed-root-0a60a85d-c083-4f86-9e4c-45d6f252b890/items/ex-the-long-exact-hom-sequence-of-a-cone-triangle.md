@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-long-exact-hom-sequence-of-a-cone-triangle.md

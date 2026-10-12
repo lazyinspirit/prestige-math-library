@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-multiplicative-type-coordinate-hopf-algebra.md

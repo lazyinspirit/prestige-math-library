@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-energy-uniqueness-for-the-homogeneous-heat-equation.md

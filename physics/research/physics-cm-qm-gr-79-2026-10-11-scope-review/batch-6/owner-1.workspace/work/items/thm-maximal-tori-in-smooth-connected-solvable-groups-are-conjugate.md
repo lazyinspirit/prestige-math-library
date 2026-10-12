@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-tori-in-smooth-connected-solvable-groups-are-conjugate.md

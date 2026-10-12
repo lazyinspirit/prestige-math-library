@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-normal-subgroups-of-a-primitive-action-are-transitive-or-kernel-contained.md

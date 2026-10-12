@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-boundaries-of-the-standard-one-and-two-simplices.md

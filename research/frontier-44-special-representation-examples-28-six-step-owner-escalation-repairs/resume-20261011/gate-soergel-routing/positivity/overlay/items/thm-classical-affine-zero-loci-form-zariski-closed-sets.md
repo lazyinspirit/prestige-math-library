@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-classical-affine-zero-loci-form-zariski-closed-sets.md

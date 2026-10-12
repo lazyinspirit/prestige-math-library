@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-critical-hessian-agrees-with-the-levi-civita-hessian.md

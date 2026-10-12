@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finitely-generated-pro-p-homomorphisms-are-surjective-iff-surjective-mod-frattini.md

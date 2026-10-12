@@ -54,6 +54,7 @@ cell count ([[def-euler-characteristic-of-a-finite-cw-complex]]).
 1.1 Apply [L1]. In the sphere case define $g=0$; its paired digon gives $\chi(S)=2-1+1=2=2-2g$ by [L2]. In the remaining orientable case [L1] supplies the $g$-fold torus word, with $g\geq1$, one vertex, $2g$ paired edges and one face. Hence $\chi(S)=1-2g+1=2-2g$ by [L2]. [L1,L2]
 
 2.1 The formula gives $g=(2-\chi(S))/2$. Thus no second nonnegative integer can be the genus of the same surface; this agrees with the uniqueness in [L1]. Because $g\geq0$ is integral, $\chi(S)$ is even and at most $2$. The AC assumption enters only through [L1], not through this arithmetic. [L1,step 1.1] ∎
+
 ## Remarks
 
 The empty reduced word is only notation for the genus-zero terminal case;

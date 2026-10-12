@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient.md

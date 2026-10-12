@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-closed-and-right-closed-monoidal-category.md

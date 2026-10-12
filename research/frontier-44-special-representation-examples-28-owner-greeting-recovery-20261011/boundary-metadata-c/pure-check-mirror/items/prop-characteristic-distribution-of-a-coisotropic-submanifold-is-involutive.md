@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-characteristic-distribution-of-a-coisotropic-submanifold-is-involutive.md

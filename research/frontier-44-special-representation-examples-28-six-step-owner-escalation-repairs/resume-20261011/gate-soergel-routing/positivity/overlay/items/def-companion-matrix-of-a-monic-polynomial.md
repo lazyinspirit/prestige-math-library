@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-companion-matrix-of-a-monic-polynomial.md

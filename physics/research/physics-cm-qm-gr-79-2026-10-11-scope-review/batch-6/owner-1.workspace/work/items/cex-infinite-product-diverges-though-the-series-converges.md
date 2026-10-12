@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-infinite-product-diverges-though-the-series-converges.md

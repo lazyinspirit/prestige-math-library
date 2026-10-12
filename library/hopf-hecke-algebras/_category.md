@@ -25,6 +25,8 @@ proof authoring and review. Existing application homes are retained:
 [[principal-series-representations-of-gl-n-over-a-finite-field]],
 [[affine-group-schemes-hopf-algebras-and-rational-representations]], and
 [[type-a-soergel-bimodules-and-hecke-categorification]]. Braid Groups remains
-an independent category, and Special Topics in Representation Theory retains
-its specialized representation tracks. Source evidence and exact prerequisite
+an independent category. Specialized representation applications belong to
+Symmetric Groups and Symmetric Functions, Quantum Groups and Crystal Bases,
+Hecke Algebras and Categorification, and Category O and Geometric
+Representation Theory. Source evidence and exact prerequisite
 contracts live in `research/plan-hopf-hecke-algebras-track.md`.

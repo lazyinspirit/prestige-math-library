@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-two-block-pure-blockade-has-additive-kappa.md

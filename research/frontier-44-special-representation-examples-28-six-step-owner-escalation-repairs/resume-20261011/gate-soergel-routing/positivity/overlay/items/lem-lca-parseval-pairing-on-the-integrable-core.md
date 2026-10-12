@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-lca-parseval-pairing-on-the-integrable-core.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-compact-group-direct-integrals-are-atomic.md

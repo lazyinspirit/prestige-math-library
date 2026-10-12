@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hermite-leading-terms-for-normalized-shifted-characters.md

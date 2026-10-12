@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-divisor-pivot-for-pid-submodules.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup.md

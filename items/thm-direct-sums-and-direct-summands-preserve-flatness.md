@@ -41,11 +41,8 @@ Let $R$ be a commutative ring.
 
 **Proof technique:** direct.
 
+ 1.1 Let $\{M_i\}_{i\in I}$ be flat and put $M=\bigoplus_{i\in I}M_i$. For any exact sequence $A\to B\to C$, [L2] gives $ (A\otimes_R M)\to (B\otimes_R M)\to (C\otimes_R M) $ as the direct sum over $i$ of the exact sequences obtained by tensoring with $M_i$. Therefore the displayed sequence is exact, so $M$ is flat by [L1]. [L1, L2, given, algebra]
 
-1.1 Let $\{M_i\}_{i\in I}$ be flat and put $M=\bigoplus_{i\in I}M_i$. For any exact sequence $A\to B\to C$, [L2] gives $ (A\otimes_R M)\to (B\otimes_R M)\to (C\otimes_R M) $ as the direct sum over $i$ of the exact sequences obtained by tensoring with $M_i$. Therefore the displayed sequence is exact, so $M$ is flat by [L1]. [L1, L2, given, algebra]
+ 1.2 Suppose $F\cong N\oplus N'$ is flat. For any exact sequence $A\to B\to C$, tensoring with $F$ gives $ (A\otimes_R N)\oplus(A\otimes_R N')\to (B\otimes_R N)\oplus(B\otimes_R N')\to (C\otimes_R N)\oplus(C\otimes_R N'). $ If an element of $B\otimes_R N$ maps to zero in $C\otimes_R N$, then the same element viewed in the direct sum lies in the image of $A\otimes_R F$ because $F$ is flat. Projecting back to the first summand shows exactness for tensoring with $N$. Thus $N$ is flat. [L1, algebra]
 
-
-1.2 Suppose $F\cong N\oplus N'$ is flat. For any exact sequence $A\to B\to C$, tensoring with $F$ gives $ (A\otimes_R N)\oplus(A\otimes_R N')\to (B\otimes_R N)\oplus(B\otimes_R N')\to (C\otimes_R N)\oplus(C\otimes_R N'). $ If an element of $B\otimes_R N$ maps to zero in $C\otimes_R N$, then the same element viewed in the direct sum lies in the image of $A\otimes_R F$ because $F$ is flat. Projecting back to the first summand shows exactness for tensoring with $N$. Thus $N$ is flat. [L1, algebra]
-
-
-2.1 Steps 1.1 and 1.2 prove the two claims. [algebra] ∎
+ 2.1 Steps 1.1 and 1.2 prove the two claims. [algebra] ∎ 

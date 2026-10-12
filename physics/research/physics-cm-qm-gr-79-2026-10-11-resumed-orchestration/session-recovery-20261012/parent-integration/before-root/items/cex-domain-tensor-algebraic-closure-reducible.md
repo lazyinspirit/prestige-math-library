@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-domain-tensor-algebraic-closure-reducible.md

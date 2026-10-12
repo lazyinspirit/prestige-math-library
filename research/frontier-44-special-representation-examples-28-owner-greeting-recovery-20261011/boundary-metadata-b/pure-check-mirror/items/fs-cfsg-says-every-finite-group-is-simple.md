@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-cfsg-says-every-finite-group-is-simple.md

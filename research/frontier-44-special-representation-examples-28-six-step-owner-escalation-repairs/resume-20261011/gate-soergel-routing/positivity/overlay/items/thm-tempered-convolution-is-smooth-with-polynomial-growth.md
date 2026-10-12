@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-tempered-convolution-is-smooth-with-polynomial-growth.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-invertible-ideals-and-rank-one-projective-modules.md

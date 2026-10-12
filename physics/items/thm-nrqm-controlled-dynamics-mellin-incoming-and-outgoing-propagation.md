@@ -1,0 +1,68 @@
+---
+id: thm-nrqm-controlled-dynamics-mellin-incoming-and-outgoing-propagation
+aliases: [nrqm-controlled-dynamics-mellin-incoming-and-outgoing-propagation]
+kind: theorem
+domain: mathematics
+title: "Mellin incoming and outgoing propagation"
+status: draft
+origin: pipeline
+dependency_level: 0
+deps: [thm-plancherel, def-projection-valued-measure, def-schwartz-space-and-its-seminorms, def-hilbert-space, def-countable-choice]
+dependency_roles:
+  thm-plancherel: mathematical-premise
+  def-projection-valued-measure: mathematical-premise
+  def-schwartz-space-and-its-seminorms: mathematical-premise
+  def-hilbert-space: mathematical-premise
+  def-countable-choice: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics (scattering-theory context; local Mellin estimates proved here)"
+      url: "https://www.math.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 12 pp. 245-256 (scattering theory and asymptotic estimates)"
+      url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+---
+
+## Statement
+
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H_0=-\Delta$ on $L^2(\mathbb R^3;\mathbb C)$, with domain $H^2(\mathbb R^3)$, and let
+$$U(s)\psi(x):=e^{-3s/2}\psi(e^{-s}x)\qquad(s\in\mathbb R)$$
+be the unitary dilation group. Use the convention $U(s)=e^{-isD}$. Then:
+
+(a) $U$ is strongly continuous and its self-adjoint generator $D$ has $D\psi=-i(x\cdot\nabla+3/2)\psi$ on the core $C_c^\infty(\mathbb R^3)$. The unitary position-log map $T_x\psi(\rho,\omega)=e^{3\rho/2}\psi(e^\rho\omega)$ takes $D$ to $-i\partial_\rho$ on $L^2(\mathbb R\times S^2,d\rho\,d\sigma)$, with domain consisting of functions whose weak $\rho$ derivative belongs to $L^2$. The unitary transform $\mathcal G u(\eta,\omega)=(2\pi)^{-1/2}\int_{\mathbb R}e^{-i\eta\rho}u(\rho,\omega)\,d\rho$ takes this operator to multiplication by $\eta$. In momentum-log coordinates the sign reverses: if $\mathcal F_p\psi(p)=(2\pi)^{-3/2}\int e^{-ip\cdot x}\psi(x)\,dx$ and $W=\mathcal G T_p\mathcal F_p$, with $T_p$ given by the same polar-log formula, then $WDW^*=M_{-\eta}$, on $\{h:\eta h\in L^2\}$.
+
+(b) With $P_\pm:=\mathbf 1_{(0,\infty)}(\pm D)$ ([[def-projection-valued-measure]]) one has $P_++P_-=I$. In the $W$ representation these are multiplication by $\mathbf 1_{\eta<0}$ and $\mathbf 1_{\eta>0}$, respectively; the spectral projection of $D$ at $0$ vanishes.
+
+(c) For every $f\in C_c^\infty((0,\infty))$ with $\operatorname{supp}f\subseteq(a^2,b^2)$, $0<a<b$, and every nonnegative integer $N$, there is $C_N$ such that
+$$\bigl\|\mathbf 1_{\{|x|<2at\}}e^{-itH_0}f(H_0)P_+\bigr\|\le C_Nt(1+t)^{-N}\qquad(t\ge1),$$
+$$\bigl\|\mathbf 1_{\{|x|<2a|t|\}}e^{-itH_0}f(H_0)P_-\bigr\|\le C_N|t|(1+|t|)^{-N}\qquad(t\le-1).$$
+Consequently $P_+f(H_0)e^{-itH_0}\to0$ strongly as $t\to-\infty$ and $P_-f(H_0)e^{-itH_0}\to0$ strongly as $t\to+\infty$. The bounds also hold for any integer $N<0$ after enlarging its constant.
+
+## Facts & Assumptions
+
+**Given:** Countable choice; $H_0=-\Delta$ on $H^2(\mathbb R^3)$; the dilation maps $U(s)$; a complex-valued smooth cutoff $f$ compactly supported in $(a^2,b^2)$, $0<a<b$. The measure $d\sigma$ is ordinary surface area on $S^2$, and all operator norms are on complex $L^2$.
+
+[F1] Plancherel is a unitary transformation for both the three-dimensional momentum Fourier convention $\mathcal F_p$ and the one-dimensional convention $\mathcal G$ above (obtained from the $2\pi$ convention by unitary rescaling). Fourier transformation takes $-\Delta$ to multiplication by $|p|^2$, so $e^{-itH_0}f(H_0)=\mathcal F_p^*M_{e^{-it|p|^2}f(|p|^2)}\mathcal F_p$. The multiplier's norm is at most $\|f\|_\infty$ ([[thm-plancherel]], [[def-schwartz-space-and-its-seminorms]]).
+
+[F2] The spectral PVM of a real multiplication operator acts by indicator multiplication: $E(B)h=\mathbf 1_{\eta\in B}h$ for Borel $B$. These countably additive projections and their multiplier integrals are explicit, so no general spectral-existence or Stone theorem is invoked ([[def-projection-valued-measure]]).
+
+## Proof
+
+1.1 The change of variables $y=e^{-s}x$ gives $\|U(s)\psi\|_2=\|\psi\|_2$, and $U(s)U(r)=U(s+r)$, $U(s)^{-1}=U(-s)$. Polar coordinates give $dx=e^{3\rho}d\rho\,d\sigma(\omega)$, hence $T_x$ and $T_p$ are unitary, with inverse $u\mapsto[\psi(r\omega)=r^{-3/2}u(\log r,\omega)]$ for $r>0$; the omitted origin has measure zero. Direct substitution gives $T_xU(s)T_x^*u(\rho,\omega)=u(\rho-s,\omega)$ and $\mathcal G T_xU(s)T_x^*\mathcal G^*h=e^{-is\eta}h$. Dominated convergence for $|(e^{-is\eta}-1)h|^2\le4|h|^2$ proves strong continuity. Multiplication by the real coordinate $\eta$ is self-adjoint on $\{h:\eta h\in L^2\}$: if $h$ belongs to its adjoint domain with adjoint value $k$, testing against arbitrary $L^2$ functions supported where $|\eta|\le m$ gives $k=\eta h$ there, and exhaustion over integers $m$ gives the exact multiplier domain. For $\eta h\in L^2$, dominated convergence using $|(e^{-is\eta}-1)/s|\le|\eta|$ gives the derivative $-i\eta h$ at zero. Conversely, if the difference quotients converge in $L^2$, their norms are bounded; Fatou applied to their pointwise limit $-i\eta h$ gives $\eta h\in L^2$, so this is the exact generator domain. Thus $D=T_x^*\mathcal G^*M_\eta\mathcal G T_x$ is the generator in the declared convention. Fourier differentiation identifies its log domain with $\{u:\partial_\rho u\in L^2\}$ and its action with $-i\partial_\rho$, where the derivative is weak. [given, F1, F2, algebra]
+
+2.1 Smooth functions compactly supported in $\rho$, with smooth angular dependence, are dense for the norm $\|u\|_2+\|\partial_\rho u\|_2$: first multiply by $\chi(\rho/m)$ for a fixed smooth cutoff $\chi=1$ near zero; the derivative error from the cutoff is bounded by $\|\chi'\|_\infty\|u\|_2/m$, and the two tail errors tend to zero. Next convolve in $\rho$ with a compactly supported smooth approximate identity, which converges in $L^2$ for both $u$ and its weak derivative; finally smooth the angular variable in a finite smooth coordinate cover of the sphere with a partition of unity. This angular smoothing converges in both norms because it acts only in $\omega$ and commutes with $\partial_\rho$. Each resulting inverse $T_x$ image belongs to $C_c^\infty(\mathbb R^3\setminus\{0\})$. These images therefore form a graph core. Every $\psi\in C_c^\infty(\mathbb R^3)$ also has $T_x\psi$ and $\partial_\rho T_x\psi$ in $L^2$, by the polar change of variables, and differentiation gives $T_x^*(-i\partial_\rho)T_x\psi=-i(x\cdot\nabla+3/2)\psi$. The larger space $C_c^\infty(\mathbb R^3)$ is consequently a core as well. Countable approximation sequences suffice for these density arguments. [step 1.1, F1, algebra]
+
+3.1 Changing variables in the momentum Fourier integral gives $\mathcal F_pU(s)\mathcal F_p^*\phi(p)=e^{3s/2}\phi(e^sp)$. Its momentum-log action is $u(\rho,\omega)\mapsto u(\rho+s,\omega)$, so $WU(s)W^*=M_{e^{is\eta}}$ and $WDW^*=M_{-\eta}$, with the multiplier domain stated in (a). Equivalently Fourier conjugation gives $+i(p\cdot\nabla_p+3/2)$ on smooth vectors, while the position action in step 2.1 has the opposite sign. By the multiplication PVM, $WP_+W^*=M_{\mathbf 1_{\eta<0}}$ and $WP_-W^*=M_{\mathbf 1_{\eta>0}}$. The set $\{0\}\times S^2$ has product measure zero, so the zero projection vanishes and $P_++P_-=I$. [step 1.1, step 2.1, F1, F2, algebra]
+
+4.1 For $t\ge1$ set $\chi_t=\mathbf 1_{\{|x|<2at\}}$. On the dense set of $h(\eta,\omega)$ smooth in both variables and compactly supported in $\eta$, substitute $\mathcal G^*h$ into $T_p^*$ and then into the inverse momentum Fourier integral. The polar Jacobian $e^{3\rho}$ combines with $e^{-3\rho/2}$ from $T_p^*$ to give the amplitude $A(\rho)=f(e^{2\rho})e^{3\rho/2}$. All integrals are absolutely convergent on this dense set because $A$ is compactly supported and the input has compact $\eta$ support. Thus $\chi_t e^{-itH_0}f(H_0)P_+W^*$ has the kernel $K_t(x;\eta,\omega)=\frac{\chi_t(x)\mathbf 1_{\eta<0}}{(2\pi)^2}\int_{\mathbb R}e^{i\Phi_t(\rho;x,\eta,\omega)}A(\rho)\,d\rho,\qquad \Phi_t=e^\rho\omega\cdot x-te^{2\rho}+\eta\rho.$ The factor $(2\pi)^{-2}$ is exactly $(2\pi)^{-3/2}(2\pi)^{-1/2}$. There is no input-dependent amplitude in this kernel. [step 3.1, F1, algebra]
+
+5.1 If $f=0$ every remaining claim is immediate; otherwise choose a compact interval $J$ containing $\operatorname{supp}A$ in its interior with $e^\rho\in[r_0,r_1]\subset(a,b)$ throughout $J$. For $|x|<2at$ and $\eta<0$, $\partial_\rho\Phi_t=e^\rho\omega\cdot x-2te^{2\rho}+\eta\le-2tr_0(r_0-a)-|\eta|.$ Writing $q=t+|\eta|$, this implies $|\partial_\rho\Phi_t|\ge c q$ with $c=\min\{2r_0(r_0-a),1\}>0$. For every $j\ge1$, $|\partial_\rho^{j+1}\Phi_t|\le C_jt\le C_jq$ on $J$, uniformly in $x,\omega,\eta,t$ in this region. Repeated quotient differentiation therefore gives $|\partial_\rho^j(1/\partial_\rho\Phi_t)|\le C'_jq^{-1}$, including $j=0$: each term is a product of higher phase derivatives divided by a power of the first derivative, with one more denominator factor than numerator factors. [step 4.1, algebra]
+
+6.1 Define $B_0=A$ and $B_{m+1}=-\partial_\rho(B_m/(i\partial_\rho\Phi_t))$. Induction using step 5.1 and the product rule shows, for every fixed $m,j$, $\sup_J|\partial_\rho^jB_m|\le C_{m,j}q^{-m}$. Each $B_m$ is supported in the same fixed compact subset of the interior of $J$. Since $e^{i\Phi_t}=(i\partial_\rho\Phi_t)^{-1}\partial_\rho e^{i\Phi_t}$, integrating by parts $m$ times has no boundary terms and yields $\int_J e^{i\Phi_t}A=\int_J e^{i\Phi_t}B_m$. Hence $|K_t(x;\eta,\omega)|\le C_m\chi_t(x)\mathbf 1_{\eta<0}(t+|\eta|)^{-m}$. For $m\ge1$ its squared integral is at most $C_m t^3\int_{-\infty}^0(t+|\eta|)^{-2m}\,d\eta=C'_m t^{4-2m},$ where the finite area of $S^2$ and volume of the radius-$2at$ ball have been included in the constant. Cauchy–Schwarz in $(\eta,\omega)$ bounds the operator norm by the square root of this integral, $C''_mt^{2-m}$; the resulting bounded integral operator agrees on the dense set of step 4.1 and hence everywhere with the original localized operator. Choose $m=N+1$ to obtain $C''_mt^{1-N}\le2^NC''_mt(1+t)^{-N}$ for $t\ge1$. This proves the entire outgoing norm estimate. [step 4.1, step 5.1, algebra]
+
+7.1 For $t=-s\le-1$ the same kernel construction with $P_-$ has $\eta>0$ and phase $e^\rho\omega\cdot x+se^{2\rho}+\eta\rho$. In $|x|<2as$ its first derivative is at least $2sr_0(r_0-a)+\eta$, and its higher derivatives are bounded by $C_js$. The recursion and squared integral of steps 5.1–6.1, with $q=s+\eta$, give $\|\chi_s e^{isH_0}f(H_0)P_-\|\le C_Ns(1+s)^{-N}$. Taking the larger of the outgoing and incoming constants supplies the common $C_N$ in (c). If $N<0$, boundedness by $\|f\|_\infty$ suffices because $s(1+s)^{-N}\ge1$. [step 4.1, step 5.1, step 6.1, algebra]
+
+8.1 Apply step 6.1 to the cutoff $\overline f$, and take adjoints, to obtain $\|P_+f(H_0)e^{isH_0}\chi_s\|\to0$ as $s\to+\infty$; here $\overline f(H_0)^*=f(H_0)$, and the free group commutes with its spectral cutoff. For a fixed $\psi\in L^2$, $\|P_+f(H_0)e^{isH_0}\psi\|\le\|P_+f(H_0)e^{isH_0}\chi_s\|\|\psi\|+\|f\|_\infty\|(1-\chi_s)\psi\|\longrightarrow0.$ The first term vanishes by the norm estimate with, for example, $N=3$, and the second by integrability of $|\psi|^2$ on the expanding balls. Similarly, the adjoint of step 7.1 with cutoff $\overline f$ gives $\|P_-f(H_0)e^{-isH_0}\chi_s\|\to0$ and the same tail split proves the incoming strong limit. Setting $t=-s$ in the first limit gives exactly the opposite-time limits stated in (c). This completes (a)–(c). [step 6.1, step 7.1, algebra] ∎

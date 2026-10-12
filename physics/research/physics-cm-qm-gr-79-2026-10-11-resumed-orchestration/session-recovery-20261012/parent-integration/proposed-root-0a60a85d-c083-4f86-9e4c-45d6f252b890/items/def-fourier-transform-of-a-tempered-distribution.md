@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-fourier-transform-of-a-tempered-distribution.md

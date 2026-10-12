@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-s-four-conjugacy-classes-and-class-equation.md

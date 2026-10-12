@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-equal-characteristic-and-minimal-polynomials-imply-similarity.md

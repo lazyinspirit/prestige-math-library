@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-binary-quadratic-form-substitution-is-a-right-action.md

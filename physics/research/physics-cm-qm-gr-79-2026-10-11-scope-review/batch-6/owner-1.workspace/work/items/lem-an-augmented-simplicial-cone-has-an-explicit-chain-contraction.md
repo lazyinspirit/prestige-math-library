@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction.md

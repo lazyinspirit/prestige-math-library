@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects.md

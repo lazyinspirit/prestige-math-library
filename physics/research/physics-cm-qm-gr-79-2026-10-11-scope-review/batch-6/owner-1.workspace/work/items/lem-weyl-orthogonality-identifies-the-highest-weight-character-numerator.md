@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weyl-orthogonality-identifies-the-highest-weight-character-numerator.md

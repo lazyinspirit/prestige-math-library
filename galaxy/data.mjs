@@ -108,7 +108,7 @@ export async function loadGraph(root = REPO, publishedIds = null, cache = null) 
   for (const id of used) {
     if (!categories.some(c => c.id === id)) categories.push({ id, title: id === 'pde' ? 'Partial Differential Equations' : id.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ') });
   }
-  categories.sort((a, b) => a.id === 'foundations' ? -1 : b.id === 'foundations' ? 1 : a.title.localeCompare(b.title));
+  categories.sort((a, b) => a.id === 'set-theory' ? -1 : b.id === 'set-theory' ? 1 : a.title.localeCompare(b.title));
   if (cache) for (const path of cache.keys()) if (!seen.has(path)) cache.delete(path);
   return { nodes, edges, categories: categories.filter(c => used.has(c.id)), unresolved,
     contentVersion: createHash('sha256').update(hashes.sort().join('\n')).digest('hex') };

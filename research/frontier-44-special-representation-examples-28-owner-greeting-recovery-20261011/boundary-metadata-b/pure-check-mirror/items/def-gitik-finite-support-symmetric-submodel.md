@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-gitik-finite-support-symmetric-submodel.md

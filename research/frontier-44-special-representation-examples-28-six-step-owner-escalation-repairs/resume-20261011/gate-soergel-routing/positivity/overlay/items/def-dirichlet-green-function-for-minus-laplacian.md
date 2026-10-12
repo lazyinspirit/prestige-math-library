@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-dirichlet-green-function-for-minus-laplacian.md

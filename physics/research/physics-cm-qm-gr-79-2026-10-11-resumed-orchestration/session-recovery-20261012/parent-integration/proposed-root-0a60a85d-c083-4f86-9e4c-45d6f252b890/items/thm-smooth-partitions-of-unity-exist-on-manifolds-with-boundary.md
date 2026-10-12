@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary.md

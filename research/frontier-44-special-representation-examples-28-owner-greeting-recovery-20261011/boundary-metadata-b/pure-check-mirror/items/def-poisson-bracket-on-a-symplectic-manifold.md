@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-poisson-bracket-on-a-symplectic-manifold.md

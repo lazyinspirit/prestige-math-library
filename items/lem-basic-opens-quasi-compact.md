@@ -38,5 +38,4 @@ $D(f)\subseteq\operatorname{Spec}A$ is quasi-compact.
 
 1.2 The latter is compact by [F2], including when $A_f$ is the zero ring. [F2]
 
-2.1 Compactness transfers across the homeomorphism. [step 1.1, step 1.2] ∎
- 
+2.1 Compactness transfers across the homeomorphism. [step 1.1, step 1.2] ∎  

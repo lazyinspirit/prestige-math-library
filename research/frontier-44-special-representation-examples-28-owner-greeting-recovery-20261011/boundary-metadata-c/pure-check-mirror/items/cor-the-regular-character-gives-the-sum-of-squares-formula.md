@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-regular-character-gives-the-sum-of-squares-formula.md

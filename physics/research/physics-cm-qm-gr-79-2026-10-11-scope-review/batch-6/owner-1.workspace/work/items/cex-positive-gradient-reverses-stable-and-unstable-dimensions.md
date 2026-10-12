@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-positive-gradient-reverses-stable-and-unstable-dimensions.md

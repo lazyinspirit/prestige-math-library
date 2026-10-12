@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-barycentric-subdivision-realizes-homeomorphically.md

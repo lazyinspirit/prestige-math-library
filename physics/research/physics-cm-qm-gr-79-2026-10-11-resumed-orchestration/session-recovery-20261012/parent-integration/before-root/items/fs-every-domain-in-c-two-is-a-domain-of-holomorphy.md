@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-domain-in-c-two-is-a-domain-of-holomorphy.md

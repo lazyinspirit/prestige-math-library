@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-dimension-shift-for-a-cohomological-delta-functor-effaced-in-the-middle.md

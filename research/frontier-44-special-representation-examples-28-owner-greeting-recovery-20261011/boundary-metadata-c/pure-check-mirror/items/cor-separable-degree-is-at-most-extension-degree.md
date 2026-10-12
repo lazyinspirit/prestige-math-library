@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-separable-degree-is-at-most-extension-degree.md

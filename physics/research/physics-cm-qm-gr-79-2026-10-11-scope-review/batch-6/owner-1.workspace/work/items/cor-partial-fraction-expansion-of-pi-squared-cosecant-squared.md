@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-partial-fraction-expansion-of-pi-squared-cosecant-squared.md

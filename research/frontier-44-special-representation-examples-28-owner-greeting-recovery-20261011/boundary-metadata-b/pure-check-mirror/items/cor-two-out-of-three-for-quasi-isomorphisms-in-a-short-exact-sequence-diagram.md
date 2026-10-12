@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-two-out-of-three-for-quasi-isomorphisms-in-a-short-exact-sequence-diagram.md

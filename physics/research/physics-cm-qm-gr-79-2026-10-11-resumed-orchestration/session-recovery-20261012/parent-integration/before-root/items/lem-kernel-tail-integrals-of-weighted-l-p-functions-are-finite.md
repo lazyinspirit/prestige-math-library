@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kernel-tail-integrals-of-weighted-l-p-functions-are-finite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity.md

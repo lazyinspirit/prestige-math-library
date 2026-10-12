@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complex-analytic-hypersurface-germ-and-reduced-equation.md

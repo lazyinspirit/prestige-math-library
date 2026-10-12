@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-projective-simple-cartan-pairing-in-a-small-cyclotomic-block.md

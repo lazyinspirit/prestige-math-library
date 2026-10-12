@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-extension-is-separable-iff-separable-degree-is-full.md

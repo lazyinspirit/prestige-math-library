@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-lax-milgram-solvability-for-coercive-divergence-form-equations.md

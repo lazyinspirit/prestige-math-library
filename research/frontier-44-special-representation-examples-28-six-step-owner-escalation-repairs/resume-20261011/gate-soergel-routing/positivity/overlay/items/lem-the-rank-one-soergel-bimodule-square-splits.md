@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-rank-one-soergel-bimodule-square-splits.md

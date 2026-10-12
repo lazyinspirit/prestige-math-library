@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization.md

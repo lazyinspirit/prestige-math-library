@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-base-field-embeddings-carry-elements-to-conjugates.md

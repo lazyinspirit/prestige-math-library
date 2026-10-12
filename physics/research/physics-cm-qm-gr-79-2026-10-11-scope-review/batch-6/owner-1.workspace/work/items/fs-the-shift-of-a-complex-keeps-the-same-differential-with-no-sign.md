@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-shift-of-a-complex-keeps-the-same-differential-with-no-sign.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-degree-two-g-minus-one-not-always-basepoint-free.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-birkhoff-representation-finite-distributive-lattices.md

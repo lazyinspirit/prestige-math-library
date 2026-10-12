@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bohr-mollerup-characterisation-of-the-real-gamma-function.md

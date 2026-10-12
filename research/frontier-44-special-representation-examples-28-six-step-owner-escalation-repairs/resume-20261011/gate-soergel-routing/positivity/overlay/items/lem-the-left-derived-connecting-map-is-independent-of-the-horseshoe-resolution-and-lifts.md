@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts.md

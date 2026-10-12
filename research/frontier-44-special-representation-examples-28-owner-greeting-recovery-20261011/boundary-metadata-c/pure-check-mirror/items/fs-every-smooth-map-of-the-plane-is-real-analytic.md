@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-smooth-map-of-the-plane-is-real-analytic.md

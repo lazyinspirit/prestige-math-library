@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-equivalence-can-be-made-an-adjoint-equivalence.md

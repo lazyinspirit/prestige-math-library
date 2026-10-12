@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inner-automorphisms-normal-in-automorphism-group.md

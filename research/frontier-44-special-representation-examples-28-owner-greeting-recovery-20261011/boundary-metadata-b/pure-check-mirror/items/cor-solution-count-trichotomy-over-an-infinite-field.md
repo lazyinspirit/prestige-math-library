@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-solution-count-trichotomy-over-an-infinite-field.md

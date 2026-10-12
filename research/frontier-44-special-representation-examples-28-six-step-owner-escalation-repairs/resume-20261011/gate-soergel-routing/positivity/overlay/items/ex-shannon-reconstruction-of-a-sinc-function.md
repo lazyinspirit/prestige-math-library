@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-shannon-reconstruction-of-a-sinc-function.md

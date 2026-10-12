@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-integral-group-ring-module-and-trivial-module-convention.md

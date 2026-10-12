@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-analytic-chart-triangulation-compact-riemann-surface.md

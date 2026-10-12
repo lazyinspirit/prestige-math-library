@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-riemannian-metric-has-a-unique-levi-civita-connection-on-the-cotangent-bundle.md

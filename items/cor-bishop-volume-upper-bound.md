@@ -74,23 +74,9 @@ $r>0$ (for $k>0$ by saturation at $\pi/\sqrt k$).
 limit one at the origin, using monotonicity along a sequence of radii
 decreasing to zero.
 
-1.1 The ratio is at most one. [F1, given]
-Fix $r>0$. By the monotonicity in [F1], $0<s<r$ implies
-$R_p(r)\le R_p(s)$. Choosing any sequence $s_j\downarrow0$ and using
-$\lim_{s\downarrow0}R_p(s)=1$ from [F1],
-$$R_p(r)\le\lim_{s\downarrow0}R_p(s)=1 .$$
-[F1, given]
+1.1 The ratio is at most one. [F1, given] Fix $r>0$. By the monotonicity in [F1], $0<s<r$ implies $R_p(r)\le R_p(s)$. Choosing any sequence $s_j\downarrow0$ and using $\lim_{s\downarrow0}R_p(s)=1$ from [F1], $$R_p(r)\le\lim_{s\downarrow0}R_p(s)=1 .$$ [F1, given]
 
-2.1 Conclusion. [F2, step 1.1]
-Multiplying the inequality of step 1.1 by the positive number
-$V^\star_k(r)$ [F2] gives
-$$\operatorname{vol}_g\bigl(B(p,r)\bigr)=R_p(r)\,V^\star_k(r)\le V^\star_k(r),$$
-which is the asserted bound. The value $r=0$ is excluded, where
-$B(p,0)=\varnothing$ and $V^\star_k(0)=0$; for $k>0$ the bound is constant
-from the model pole onward, and for $k\le0$ it is the genuine model volume.
-No step selects a direction, a sequence of directions, or a family of balls
-beyond the single radius sequence already carried by the limit in [F1], so no
-choice beyond [A1] is used. [F2, step 1.1] ∎
+2.1 Conclusion. [F2, step 1.1] Multiplying the inequality of step 1.1 by the positive number $V^\star_k(r)$ [F2] gives $$\operatorname{vol}_g\bigl(B(p,r)\bigr)=R_p(r)\,V^\star_k(r)\le V^\star_k(r),$$ which is the asserted bound. The value $r=0$ is excluded, where $B(p,0)=\varnothing$ and $V^\star_k(0)=0$; for $k>0$ the bound is constant from the model pole onward, and for $k\le0$ it is the genuine model volume. No step selects a direction, a sequence of directions, or a family of balls beyond the single radius sequence already carried by the limit in [F1], so no choice beyond [A1] is used. [F2, step 1.1] ∎
 
 ## Source locator
 

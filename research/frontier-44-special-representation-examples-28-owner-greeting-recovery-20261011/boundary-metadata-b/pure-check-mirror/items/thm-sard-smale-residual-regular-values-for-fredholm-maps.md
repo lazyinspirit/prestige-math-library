@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sard-smale-residual-regular-values-for-fredholm-maps.md

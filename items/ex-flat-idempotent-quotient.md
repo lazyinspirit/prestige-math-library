@@ -41,11 +41,8 @@ is a flat $R$-module.
 
 **Proof technique:** direct.
 
+ 1.1 The element $e=(1,0)\in A\times B$ satisfies $e^2=e$, and $I=Re$. [given, algebra]
 
-1.1 The element $e=(1,0)\in A\times B$ satisfies $e^2=e$, and $I=Re$. [given, algebra]
+ 1.2 Therefore [L1] applies and shows that $R/I$ is flat. Concretely, $R/I\cong B$ as the second factor. [L1]
 
-
-1.2 Therefore [L1] applies and shows that $R/I$ is flat. Concretely, $R/I\cong B$ as the second factor. [L1]
-
-
-2.1 This is the standard idempotent-quotient example. [algebra] ∎
+ 2.1 This is the standard idempotent-quotient example. [algebra] ∎ 

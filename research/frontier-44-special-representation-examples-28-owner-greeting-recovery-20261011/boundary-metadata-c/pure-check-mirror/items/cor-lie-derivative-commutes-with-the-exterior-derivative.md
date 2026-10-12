@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-lie-derivative-commutes-with-the-exterior-derivative.md

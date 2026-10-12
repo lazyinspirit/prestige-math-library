@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-vector-bundle-map-section-subbundle-and-isomorphism.md

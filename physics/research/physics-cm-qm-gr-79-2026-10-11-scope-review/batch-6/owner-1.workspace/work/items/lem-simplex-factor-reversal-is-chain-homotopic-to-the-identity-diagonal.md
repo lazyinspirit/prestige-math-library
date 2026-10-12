@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal.md

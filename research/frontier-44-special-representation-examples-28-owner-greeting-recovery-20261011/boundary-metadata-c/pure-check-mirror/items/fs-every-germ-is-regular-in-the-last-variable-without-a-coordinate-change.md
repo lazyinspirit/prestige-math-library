@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-germ-is-regular-in-the-last-variable-without-a-coordinate-change.md

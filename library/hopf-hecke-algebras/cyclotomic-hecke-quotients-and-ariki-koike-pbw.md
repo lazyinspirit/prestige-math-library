@@ -1,31 +1,82 @@
 ---
 page: cyclotomic-hecke-quotients-and-ariki-koike-pbw
 title: "Cyclotomic Hecke Quotients and Ariki–Koike PBW"
-status: published
-items: []
+status: draft
+items:
+  - def-hh-multiplicative-cyclotomic-hecke-algebra
+  - lem-hh-cyclotomic-commuting-jucys-murphy-generators
+  - def-hh-multipartitions-standard-tableaux-and-generic-contents
+  - lem-hh-cyclotomic-straightening-spanning
+  - thm-hh-generic-cyclotomic-seminormal-models
+  - lem-hh-colored-permutation-rsk-and-tableau-square-count
+  - thm-hh-ariki-koike-basis-and-generic-splitness
 examples: []
 ---
 
-Cyclotomic Hecke algebras quotient the affine algebra by a polynomial in X1. The polynomial alone provides neither a basis nor a dimension formula. The page proves integral spanning and then independence using explicitly constructed generic modules and a combinatorial dimension count, before transporting the basis to any specialization.
+The multiplicative Ariki–Koike algebra is obtained from the affine type-A Hecke algebra by imposing one cyclotomic polynomial on the first commuting generator. That single relation does not give the same polynomial relation on every Jucys–Murphy generator, and it does not by itself prove a basis theorem. This page develops integral spanning by explicit normal words, then proves independence through generic tableau representations and a colored insertion count.
 
-This is a prose scaffold for future item authoring. The constructions and results below are explicit proof obligations; an empty item list does not certify that they have been proved in the library. The source-grounded contracts and prerequisite audit are recorded in `research/plan-hopf-hecke-algebras-track.md`.
+## Presentation and transport
 
-## Construction and proof obligations
+Fix positive integers $r,n$, set
 
-**def-hh-multiplicative-cyclotomic-hecke-algebra.** Fix r≥1 and R=Z[Q^±1,u_1^±1,…,u_r^±1]; quotient the type-A affine algebra by ∏(X1−u_a). Unit parameters make X1 invertible in the quotient via the constant coefficient; this is the traditional multiplicative Ariki–Koike convention, not the additive degenerate presentation.
+$$R=\mathbb Z[Q^{\pm1},u_1^{\pm1},\ldots,u_r^{\pm1}],\qquad p(X)=\prod_{a=1}^r(X-u_a),$$
 
-**lem-hh-cyclotomic-commuting-jucys-murphy-generators.** Define Li=Q^(1−i)Ti−1⋯T1 X1 T1⋯Ti−1, identify them with Xi by affine relations, and prove commutation. Do not claim each Li satisfies the same cyclotomic polynomial; give the actual transport identities needed for straightening.
+and use generators $T_1,\ldots,T_{n-1}$ and commuting invertible $X_1,\ldots,X_n$ with
 
-**lem-hh-cyclotomic-straightening-spanning.** Prove integral spanning by the explicit normal-word supplier below, not by asserting identical cyclotomic polynomials for L_i. Extend coefficients to the finite free faithful ring R′=R[v,w]/(v²−Q,w^r−(−1)^(r+1)∏u_a); v,w are units. Put s_j=v^−1T_(j−1), z=w^−1X_1. Reproduce Neaime §6 Lemmas6.2–6.15 with a=v−v^−1 and the expanded cyclotomic coefficients, correcting z s_j commutation to j≥3 and retaining all quadratic coefficients. The span of Λ_1⋯Λ_n is closed under every generator by the rank-two reductions and the nine final-letter cases; it contains 1. Each Λ_n word has nonnegative total X-degree k<r. HH-15 Bernstein rewriting preserves nonnegative exponents and this total degree; finite Hecke parabolic factorization then puts it in Σ_(0≤a<r,d∈D) H_(n−1)X_n^aT_d. Induction gives the promised bounded PBW span over R′. Prove faithful-free descent locally: tensor a cokernel with a free module containing the basis element 1; if that tensor is zero, the cokernel was zero. Negative powers are polynomial expressions because the cyclotomic constant and each Hecke generator are units. Exact reduction contracts and source corrections appear in §8 below.
+$$ (T_i-Q)(T_i+1)=0,\qquad T_iX_iT_i=QX_{i+1},\qquad T_iX_j=X_jT_i\quad(j\notin\{i,i+1\}). $$
 
-**def-hh-multipartitions-standard-tableaux-and-generic-contents.** Define r-multipartitions, standard multitableaux and res_t(i)=u_component Q^(column−row). Finite tableaux, their row/column orders and addable boxes are defined explicitly. Generic parameter separation and all denominators are checked in the universal fraction field. Prove the elementary finite-poset facts used later: connect two linear extensions by moving the first differing minimal available element left across incomparable neighbors; make a cover pair consecutive by contracting that cover before choosing an extension. Standard tableaux are linear extensions of row/column box order. Distinct addable boxes of a component have distinct diagonal contents. For equal-content boxes on one diagonal, the right and lower intermediary boxes are both required between their labels; therefore endpoints of three consecutive labels cannot have equal contents. These proofs justify admissible-swap connectivity and all three-content denominators.
+The algebra $H_{r,n}$ is the universal quotient by $p(X_1)=0$; see [[def-hh-multiplicative-cyclotomic-hecke-algebra]]. The constant coefficient makes $X_1$ a unit already represented by a polynomial in $X_1$, while the affine recursion transports invertibility to every $X_i$. The quadratic relation makes every $T_i$ a unit.
 
-**thm-hh-generic-cyclotomic-seminormal-models.** For a=res_t(i), b=res_t(i+1), set T_i v_t=((Q−1)b/(b−a))v_t+((Qb−a)/(b−a))v_(s_i t), where a nonstandard tableau is interpreted as zero. Prove consecutive contents differ. Diagonal Li acts by res_t(i). For same-row and same-column consecutive entries the diagonal coefficient is Q or −1 respectively. Verify quadratic, affine and cyclotomic equations; for braid, enumerate all six reorderings of the three consecutive entries subject to their row/column partial order, include every nonstandard term, and clear the three pairwise-content denominators. Prove that endpoints of three consecutive entries cannot have equal contents. This finite local calculation must be written, not replaced by an exercise citation. Prove irreducibility using connected adjacent swaps and joint spectral projectors.
+The normalized elements
 
-**lem-hh-colored-permutation-rsk-and-tableau-square-count.** Prove a bijection between r-colored permutations and pairs of standard multitableaux of one shape by componentwise insertion with an explicit reverse algorithm. Deduce Σλ fλ²=r^n n!. The ordinary RSK theorem is proved here if no proved earlier supplier is used.
+$$L_1=X_1,\qquad L_i=Q^{1-i}T_{i-1}\cdots T_1X_1T_1\cdots T_{i-1}$$
 
-**thm-hh-ariki-koike-basis-and-generic-splitness.** The spanning bound is r^n n!. Proved generic models and the square count give at least that dimension using a proved finite-algebra density lemma/matrix units constructed from joint-eigenvalue projectors and swaps. Hence spanning monomials are independent over the fraction field and over universal R. Base-change the resulting free-basis isomorphism for all fields/rings with unit parameters.
+are exactly $X_i$. They commute and satisfy the actual affine transport rules, including the Bernstein divided-difference formula; these are proved in [[lem-hh-cyclotomic-commuting-jucys-murphy-generators]]. For $r=1,n=2$, $L_2-u_1=(Q-1)u_1Q^{-1}T_1\ne0$. Thus $p(L_1)=0$ does not license replacing the initial relation by $p(L_i)=0$ for all $i$.
 
-## Reading and applications
+## Integral spanning
 
-Prerequisite pages: [[tensor-coherence-and-algebraic-descent]], [[generic-coxeter-hecke-algebras-and-the-standard-basis]], [[type-a-affine-hecke-algebras-and-bernstein-pbw]]. The companion [[cyclotomic-hecke-quotients-and-ariki-koike-pbw-examples]] develops the calculations and failures needed to test these constructions.
+The bounded family is
+
+$$\mathcal B_{r,n}=\{X_1^{a_1}\cdots X_n^{a_n}T_w:0\le a_j<r,\ w\in\mathfrak S_n\}.$$
+
+The proof of spanning in [[lem-hh-cyclotomic-straightening-spanning]] works over the universal coefficient ring. For $r\ge2$, pass to the explicitly free extension
+
+$$R'=R[v,w]/(v^2-Q,\ w^r-(-1)^{r+1}u_1\cdots u_r),$$
+
+with basis $v^iw^j$, $0\le i<2$, $0\le j<r$. Set $s_j=v^{-1}T_{j-1}$, $z=w^{-1}X_1$, and $a=v-v^{-1}$. Then
+
+$$s_j^2=as_j+1,\qquad zs_j=s_jz\ (j\ge3),\qquad zs_2zs_2=s_2zs_2z,$$
+
+and the monic relation for $z$ has constant term $1$. The proof constructs the finite sets $\Lambda_1,\ldots,\Lambda_n$, proves the rank-two power and sandwich reductions, and checks closure under each generator by all nine final-factor cases. The corrected commutation range is $j\ge3$, and the quadratic coefficients are retained throughout.
+
+Each last-stage normal word has nonnegative $X$-degree below $r$. The polynomial Bernstein formula preserves both nonnegative exponents and total degree, so finite parabolic factorization bounds the rank-$n$ span by the rank-$(n-1)$ span times $X_n^aT_d$, $0\le a<r$. Induction gives spanning over $R'$. Tensoring the cokernel of the proposed $R$-span with the free module $R'$, whose basis contains $1$, proves that the same family spans over $R$. The $r=1$ case reduces directly to the finite type-A Hecke algebra.
+
+## Generic tableau modules
+
+An $r$-multipartition is a tuple of Young diagrams. A standard multitableau is a linear extension of their row-and-column box order, with content
+
+$$\operatorname{res}_t(i)=u_cQ^{b-a}\quad\text{when }i\text{ occupies box }(c,a,b).$$
+
+The finite-poset moves, addable-content separation, distinctness of full content sequences, and denominator facts are proved in [[def-hh-multipartitions-standard-tableaux-and-generic-contents]]. In particular, two equal-content diagonal boxes have two required boxes between them; endpoints of three consecutive labels therefore cannot have equal contents.
+
+Over $K=\mathbb Q(Q,u_1,\ldots,u_r)$, define $L_jv_t=\operatorname{res}_t(j)v_t$. If $a=\operatorname{res}_t(i)$ and $b=\operatorname{res}_t(i+1)$, use
+
+$$T_iv_t=\frac{(Q-1)b}{b-a}v_t+\frac{Qb-a}{b-a}v_{s_it},$$
+
+with the swapped term zero when the tableau is nonstandard. [[thm-hh-generic-cyclotomic-seminormal-models]] checks the quadratic and affine relations on two-state orbits, writes the six three-label braid coefficients and compares all six reorderings, then passes to the standard row-and-column states by the zero boundary coefficients. Joint spectral projectors and connected adjacent swaps prove irreducibility and separate the shapes.
+
+## Dimension and basis
+
+Componentwise row insertion gives a bijection between permutations with one of $r$ colors on each position and pairs of standard multitableaux of a common shape. The inverse scans recording labels in descending order, deletes the unique component corner, and reverse-row-deletes its insertion box. This local algorithm and its count are in [[lem-hh-colored-permutation-rsk-and-tableau-square-count]], yielding
+
+$$\sum_{\lambda\in\mathcal P_r(n)} (f^\lambda)^2=r^n n!,$$
+
+where $f^\lambda=|\operatorname{Std}(\lambda)|$.
+
+On the direct sum of the generic tableau modules, interpolation in the commuting $L_j$ gives a projector for every tableau content sequence. For each admissible adjacent swap, composing its source and target projectors with $T_i$ gives a nonzero scalar multiple of the corresponding matrix unit. Connectedness within each shape and the separation of shapes produce every matrix unit. Hence the generic algebra maps onto
+
+$$H_{r,n}\otimes_RK\longrightarrow\prod_{\lambda\in\mathcal P_r(n)}\operatorname{Mat}_{f^\lambda}(K).$$
+
+The target dimension is $r^n n!$, while the integral spanning family has that same cardinality. The surjection and the spanning bound force equality; the proposed family is independent over $K$, hence over the domain $R$. [[thm-hh-ariki-koike-basis-and-generic-splitness]] proves the resulting $R$-basis and the displayed generic split decomposition. Tensoring that free basis proves that for every commutative $R$-algebra $S$, including nonfields and nonsemisimple specializations, the same images form an $S$-basis. Generic splitness is asserted only over $K$; specializations need not be semisimple.
+
+The construction uses the traditional multiplicative parameters and does not identify this presentation with the additive degenerate cyclotomic algebra at a singular parameter value. All seven linked items remain drafts until the page receives publication authorization.

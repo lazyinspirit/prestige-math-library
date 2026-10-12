@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-finite-index-transfer-on-normalized-bar-chains.md

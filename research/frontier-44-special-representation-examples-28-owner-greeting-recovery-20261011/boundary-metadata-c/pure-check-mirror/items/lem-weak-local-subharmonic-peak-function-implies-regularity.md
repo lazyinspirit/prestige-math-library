@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weak-local-subharmonic-peak-function-implies-regularity.md

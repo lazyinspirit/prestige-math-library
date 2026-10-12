@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-parallel-transport-along-a-piecewise-smooth-curve.md

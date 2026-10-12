@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-union-of-a-chain-of-dominated-extensions.md

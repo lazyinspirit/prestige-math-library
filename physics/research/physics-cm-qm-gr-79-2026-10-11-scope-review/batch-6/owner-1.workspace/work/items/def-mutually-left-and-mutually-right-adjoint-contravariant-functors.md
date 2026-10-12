@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-mutually-left-and-mutually-right-adjoint-contravariant-functors.md

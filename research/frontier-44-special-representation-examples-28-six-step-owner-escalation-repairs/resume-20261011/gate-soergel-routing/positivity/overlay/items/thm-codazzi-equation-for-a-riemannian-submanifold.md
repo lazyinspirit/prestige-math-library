@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-codazzi-equation-for-a-riemannian-submanifold.md

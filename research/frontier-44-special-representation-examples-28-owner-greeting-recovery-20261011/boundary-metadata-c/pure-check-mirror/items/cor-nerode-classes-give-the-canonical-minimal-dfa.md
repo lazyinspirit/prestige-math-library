@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-nerode-classes-give-the-canonical-minimal-dfa.md

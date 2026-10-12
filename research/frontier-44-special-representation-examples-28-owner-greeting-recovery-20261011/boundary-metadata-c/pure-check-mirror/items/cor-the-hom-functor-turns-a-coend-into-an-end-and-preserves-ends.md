@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-hom-functor-turns-a-coend-into-an-end-and-preserves-ends.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lagrange-multiplier-is-unique-when-constraint-gradients-are-independent.md

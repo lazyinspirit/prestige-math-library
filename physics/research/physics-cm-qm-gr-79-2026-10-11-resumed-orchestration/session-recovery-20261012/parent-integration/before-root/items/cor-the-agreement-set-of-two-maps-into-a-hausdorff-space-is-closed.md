@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-agreement-set-of-two-maps-into-a-hausdorff-space-is-closed.md

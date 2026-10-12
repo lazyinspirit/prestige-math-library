@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-primitive-ideals-have-standard-borel-quotient-norm-codings.md

@@ -1,0 +1,4036 @@
+arXiv:1609.03890v1  [math.AP]  13 Sep 2016
+Euclidean, Metric, and Wasserstein	 Gradient Flows:
+an overview
+Filippo Santambrogio∗
+Abstract
+This is an expository paper on the theory of gradient ﬂows, and in particular of those PDEs which
+can be interpreted as gradient ﬂows for the Wasserstein metric on the space of probability measures
+(a distance induced by optimal transport). The starting point is the Euclidean theory, and then its
+generalization to metric spaces, according to the work of Ambrosio, Gigli and Savar´e. Then comes
+an independent exposition of the Wasserstein theory, with a short introduction to the optimal transport
+tools that are needed and to the notion of geodesic convexity, followed by a precise desciption of the
+Jordan-Kinderleher-Otto scheme, with proof of convergence in the easiest case: the linear Fokker-
+Planck equation. A discussion of other gradient ﬂows PDEs and of numerical methods based on
+these ideas is also provided. The paper ends with a new, theoretical, development, due to Ambrosio,
+Gigli, Savar´e, Kuwada and Ohta: the study of the heat ﬂow in metric measure spaces.
+AMS Subject Classiﬁcation (2010): 00-02, 34G25, 35K05, 49J45, 49Q20, 49M29, 54E35
+Keywords: Cauchy problem, Subdiﬀerential, Analysis in metric spaces, Optimal transport, Wasserstein
+distances, Heat ﬂow, Fokker-Planck equation, Numerical methods, Contractivity, Metric measure spaces
+Contents
+1
+Introduction
+2
+2
+From Euclidean to Metric
+4
+2.1
+Gradient ﬂows in the Euclidean space
+. . . . . . . . . . . . . . . . . . . . . . . . . . .
+4
+2.2
+An introduction to the metric setting . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+9
+3
+The general theory in metric spaces
+13
+3.1
+Preliminaries
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+13
+3.2
+Existence of a gradient ﬂow . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+14
+3.3
+Uniqueness and contractivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+17
+∗Laboratoire de Math´ematiques d’Orsay,
+Univ.
+Paris-Sud,
+CNRS, Universit´e Paris-Saclay,
+91405 Orsay Cedex,
+France,
+filippo.santambrogio@math.u-psud.fr, http://www.math.u-psud.fr/∼santambr
+1
+
+4
+Gradient ﬂows in the Wasserstein space
+19
+4.1
+Preliminaries on Optimal Transport
+. . . . . . . . . . . . . . . . . . . . . . . . . . . .
+19
+4.2
+The Wasserstein distances
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+24
+4.3
+Minimizing movement schemes in the Wasserstein space and evolution PDEs . . . . . .
+29
+4.4
+Geodesic convexity in W2
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+32
+4.5
+Analysis of the Fokker-Planck equation as a gradient ﬂow in W2 . . . . . . . . . . . . .
+37
+4.6
+Other gradient-ﬂow PDEs . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+42
+4.7
+Dirichlet boundary conditions
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+49
+4.8
+Numerical methods from the JKO scheme . . . . . . . . . . . . . . . . . . . . . . . . .
+51
+5
+The heat ﬂow in metric measure spaces
+56
+5.1
+Dirichlet and Cheeger energies in metric measure spaces
+. . . . . . . . . . . . . . . . .
+57
+5.2
+A well-posed gradient ﬂow for the entropy . . . . . . . . . . . . . . . . . . . . . . . . .
+58
+5.3
+Gradient ﬂows comparison . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+59
+Bibliography
+60
+1
+Introduction
+Gradient ﬂows, or steepest descent curves, are a very classical topic in evolution equations: take a
+functional F deﬁned on a vector space X, and, instead of looking at points x minizing F (which is related
+to the statical equation ∇F(x) = 0), we look, given an initial point x0, for a curve starting at x0 and trying
+to minimize F as fast as possible (in this case, we will solve equations of the form x′(t) = −∇F(x(t))).
+As we speak of gradients (which are element of X, and not of X′ as the diﬀerential of F should be), it
+is natural to impose that X is an Hilbert space (so as to identify it with its dual and produce a gradient
+vector). In the ﬁnite-dimensional case, the above equation is very easy to deal with, but also the inﬁnite-
+dimensional case is not so exotic. Indeed, just think at the evolution equation ∂tu = ∆u, which is the
+evolution variant of the statical Laplace equation −∆u = 0. In this way, the Heat equation is the gradient
+ﬂow, in the L2 Hilbert space, of the Dirichlet energy F(u) = 1
+2
+R
+|∇u|2, of which −∆u is the gradient in
+the appropriate sense (more generally, one could consider equations of the form ∂tu = δF/δu, where this
+notation stands for the ﬁrst variation of F).
+But this is somehow classical. . . The renovated interest for the notion of gradient ﬂow arrived be-
+tween the end of the 20th century and the beginning of the 21st, with the work of Jordan, Kinderleherer
+and Otto ([55]) and then of Otto [76], who saw a gradient ﬂow structure in some equations of the form
+∂t̺ −∇· (̺v) = 0, where the vector ﬁeld v is given by v = ∇[δF/δ̺]. This requires to use the space of
+probabilities ̺ on a given domain, and to endow it with a non-linear metric structure, derived from the
+theory of optimal transport. This theory, initiated by Monge in the 18th century ([75]), then developed
+by Kantorovich in the ’40s ([56]), is now well-established (many texts present it, such as [89, 90, 84])
+and is intimately connected with PDEs of the form of the continuity equation ∂t̺ −∇· (̺v) = 0.
+The turning point for the theory of gradient ﬂows and for the interest that researchers in PDEs de-
+veloped for it was for sure the publication of [6]. This celebrated book established a whole theory on
+the notion of gradient ﬂow in metric spaces, which requires careful deﬁnitions because in the equation
+x′(t) = −∇F(x(t)), neither the term x′ nor ∇F make any sense in this framework. For existence and -
+mainly - uniqueness results, the notion of geodesic convexity (convexity of a functional F deﬁned on a
+2
+
+metric space X, when restricted to the geodesic curves of X) plays an important role. Then the theory is
+particularized in the second half of [6] to the case of the metric space of probability measures endowed
+with the so-called Wasserstein distance coming from optimal transport, whose diﬀerential structure is
+widely studied in the book. In this framework, the geodesic convexity results that McCann obtained in
+[69] are crucial to make a bridge from the general to the particular theory.
+It is interesting to observe that, ﬁnally, the heat equation turns out to be a gradient ﬂow in two diﬀerent
+senses: it is the gradient ﬂow of the Dirichlet energy in the L2 space, but also of the entropy
+R
+̺ log(̺)
+in the Wasserstein space. Both frameworks can be adapted from the particular case of probabilities on
+a domain Ω⊂Rd to the more general case of metric measure spaces, and the question whether the two
+ﬂows coincide, or under which assumptions they do, is natural. It has been recently studied by Ambrosio,
+Gigli, Savar´e and new collaborators (Kuwada and Ohta) in a series of papers ([49, 51, 9]), and has been
+the starting point of recent researches on the diﬀerential structure of metric measure spaces.
+The present survey, which is an extended, updated, and English version of a Bourbaki seminar given
+by the author in 2013 ([83]; the reader will also remark that most of the extensions are essentially taken
+from [84]), aims at giving an overview of the whole theory. In particular, among the goals, there is at
+the same time to introduce the tools for studying metric gradient ﬂows, but also to see how to deal with
+Wasserstein gradient ﬂows without such a theory. This could be of interest for applied mathematicians,
+who could be more involved in the speciﬁc PDEs that have this gradient ﬂow form, without a desire
+for full generality; for the same audience, a section has been added about numerical methods inspired
+from the so-called JKO (Jordan-Kinderleherer-Otto) scheme, and one on a list of equations which fall
+into these framework. De facto, more than half of the survey is devoted to the theory in the Wasserstein
+spaces and full proofs are given in the easiest case.
+The paper is organized as follows: after this introduction, Section 2 exposes the theory in the Eu-
+clidean case, and presents which are the good deﬁnitions which can be translated into a metric setting;
+Section 3 is devoted to the general metric setting, as in the ﬁrst half of [6], and is quite expository (only
+the key ingredients to obtain the proofs are sketched); Section 4 is the longest one and develops the
+Wasserstein setting: after an introduction to optimal transport and to the Wasserstein distances, there
+in an informal presentation of the equations that can be obtained as gradient ﬂows, a discussion of the
+functionals which have geodesic convexity properties, a quite precise proof of convergence in the linear
+case of the Fokker-Planck equation, a discussion about the other equations and functionals which ﬁt the
+framework and about boundary conditions, and ﬁnally a short section about numerics. Last but not least,
+Section 5 gives a very short presentation of the fascinating topic of heat ﬂows in arbitraty metric measure
+spaces, with reference to the interesting implications that this has in the diﬀerential structure of these
+spaces.
+This survey is meant to be suitable for readers with diﬀerent backgrounds and interests. In particular,
+the reader who is mainly interested gradient ﬂows in the Wasserstein space and in PDE applications can
+decide to skip sections 3, 4.4 and 5, which deal on the contrary with key objects for the - very lively at
+the moment - subject of analysis on metric measure spaces.
+3
+
+2
+From Euclidean to Metric
+2.1
+Gradient ﬂows in the Euclidean space
+Before dealing with gradient ﬂows in general metric spaces, the best way to clarify the situation is to
+start from the easiest case, i.e. what happens in the Euclidean space Rn. Most of what we will say stays
+true in an arbitrary Hilbert space, but we will stick to the ﬁnite-dimensional case for simplicity.
+Here, given a function F : Rn →R, smooth enough, and a point x0 ∈Rn, a gradient ﬂow is just
+deﬁned as a curve x(t), with starting point at t = 0 given by x0, which moves by choosing at each instant
+of time the direction which makes the function F decrease as much as possible. More precisely, we
+consider the solution of the Cauchy Problem
+
+x′(t) = −∇F(x(t))
+for t > 0,
+x(0) = x0.
+(2.1)
+This is a standard Cauchy problem which has a unique solution if ∇F is Lipschitz continuous, i.e. if
+F ∈C1,1. We will see that existence and uniqueness can also hold without this strong assumption, thanks
+to the variational structure of the equation.
+A ﬁrst interesting property is the following, concerning uniqueness and estimates. We will present
+it in the case where F is convex, which means that it could be non-diﬀerentiable, but we can replace
+the gradient with the subdiﬀerential. More precisely, we can consider instead of (2.1), the following
+diﬀerential inclusion: we look for an absolutely continuous curve x : [0, T] →Rn such that
+
+x′(t) ∈−∂F(x(t))
+for a.e. t > 0,
+x(0) = x0,
+(2.2)
+where ∂F(x) = {p ∈Rn : F(y) ≥F(x) + p · (y −x) for all y ∈Rn}. We refer to [80] for all the
+deﬁnitions and notions from convex analysis that could be needed in the following, and we recall that, if
+F is diﬀerentiable at x, we have ∂F(x) = {∇F(x)} and that F is diﬀerentiable at x if and only if ∂F is a
+singleton. Also note that ∂F(x) is always a convex set, and is not empty whenever F is real-valued (or x
+is in the interior of {x : F(x) < +∞}), and we denote by ∂◦F(x) its element of minimal norm.
+Proposition 2.1. Suppose that F is convex and let x1 and x2 be two solutions of (2.2). Then we have
+|x1(t)−x2(t)| ≤|x1(0)−x2(0)| for every t. In particular this gives uniqueness of the solution of the Cauchy
+problem.
+Proof. Let us consider g(t) = 1
+2|x1(t) −x2(t)|2 and diﬀerentiate it. We have
+g′(t) = (x1(t) −x2(t)) · (x′
+1(t) −x′
+2(t)).
+Here we use a basic property of gradient of convex functions, i.e. that for every x1, x2, p1, p2 with
+pi ∈∂F(xi), we have
+(x1 −x2) · (p1 −p2) ≥0.
+From these considerations, we obtain g′(t) ≤0 and g(t) ≤g(0). This gives the ﬁrst part of the claim.
+Then, if we take two diﬀerent solutions of the same Cauchy problem, we have x1(0) = x2(0), and
+this implies x1(t) = x2(t) for any t > 0.
+□
+4
+
+We can also stuy the case where F is semi-convex. We recall that F semi-convex means that it is
+λ-convex for some λ ∈R i.e. x 7→F(x) −λ
+2|x|2 is convex. For λ > 0 this is stronger than convexity, and
+for λ < 0 this is weaker. Roughly speaking, λ-convexity corresponds to D2F ≥λI. Functions which are
+λ-convex for some λ are called semi-convex. The reason of the interest towards semi-convex functions
+lies in the fact that on the one hand, as the reader will see throughout the exposition, the general theory
+of gradient ﬂows applies very well to this class of functions and that, on the other hand, they are general
+enough to cover many interesting cases. In particular, on a bounded set, all smooth (C2 is enough)
+functions are λ-convex for a suitable λ < 0.
+For λ-convex functions, we can deﬁne their subdiﬀerential as follows
+∂F(x) =
+
+p ∈Rn : F(y) ≥F(x) + p · (y −x) + λ
+2|y −x|2 for all y ∈Rn
+.
+This deﬁnition is consistent with the above one whenever λ ≥0 (and guarantees ∂F(x) , ∅for λ < 0).
+Also, one can check that, setting ˜F(x) = F(x) −λ
+2|x|2, this deﬁnition coincides with {p ∈Rn : p −λx ∈
+∂˜F(x)}. Again, we deﬁne ∂◦F the element of minimal norm of ∂F.
+Remark 2.1. From the same proof of Proposition 2.1, one can also deduce uniqueness and stability
+estimates in the case where F is λ-convex. Indeed, in this case we obtain |x1(t)−x2(t)| ≤|x1(0)−x2(0)|e−λt,
+which also proves, if λ > 0, exponential convergence to the unique minimizer of F. The key point is that,
+if F is λ-convex it is easy to prove that x1, x2, p1, p2 with pi ∈∂F(xi) provides
+(x1 −x2) · (p1 −p2) ≥λ|x1 −x2|2.
+This implies g′(t) ≤−2λg(t) and allows to conclude, by Gronwall’s lemma, g(t) ≤g(0)e−2λt. For the
+exponential convergence, if λ > 0 then F is coercive and admits a minimizer, which is unique by strict
+convexity. Let us call it ¯x. Take a solution x(t) and compare it to the constant curve ¯x, which is a solution
+since 0 ∈∂F(¯x). Then we get |x1(t) −¯x| ≤e−λt|x1(0) −¯x|.
+Another well-known fact about the λ-convex case is the fact that the diﬀerential inclusion x′(t) ∈
+−∂F(x(t)) actually becomes, a.e., an equality: x′(t) = −∂◦F(t). More precisely, we have the following.
+Proposition 2.2. Suppose that F is λ-convex and let x be a solutions of (2.2). Then, for all the times
+t0 such that both t 7→x(t) and t 7→F(x(t)) are diﬀerentiable at t = t0, the subdiﬀerential ∂F(x(t0)) is
+contained in a hyperplane orthogonal to x′(t0). In particular, we have x′(t) = −∂◦F(x(t)) for a.e. t.
+Proof. Let t0 be as in the statement, and p ∈∂F(x(t0)). From the deﬁnition of subdiﬀerential, for every t
+we have
+F(x(t)) ≥F(x(t0)) + p · (x(t) −x(t0)) + λ
+2|x(t) −x(t0)|2,
+but this inequality becomes an equality for t = t0. Hence, the quantity
+F(x(t)) −F(x(t0)) −p · (x(t) −x(t0)) −λ
+2|x(t) −x(t0)|2
+is minimal for t = t0 and, diﬀerentiating in t (which is possible by assumption), we get
+d
+dt F(x(t))|t=t0 = p · x′(t0).
+5
+
+Since this is true for every p ∈∂F(x(t0)), this shows that ∂F(x(t0)) is contained in a hyperplane of the
+form {p : p · x′(t0) = const}.
+Whenever x′(t0) belongs to ∂F(x(t0)) (which is true for a.e. t0), this shows that x′(t0) is the orthog-
+onal projection of 0 onto ∂F(x(t0)) and onto the hyperplane which contains it, and hence its element of
+minimal norm. This provides x′(t0) = −∂◦F(x(t0)) for a.e. t0, as the diﬀerentiability of x and of F ◦x are
+also true a.e., since x is supposed to be absolutely continuous and F is locally Lipschitz.
+□
+Another interesting feature of those particular Cauchy problems which are gradient ﬂows is their
+discretization in time. Actually, one can ﬁx a small time step parameter τ > 0 and look for a sequence of
+points (xτ
+k)k deﬁned through the iterated scheme, called Minimizing Movement Scheme,
+xτ
+k+1 ∈argminx F(x) +
+|x −xτ
+k|2
+2τ
+.
+(2.3)
+We can forget now the convexity assumption on F, which are not necessary for this part of the analysis.
+Indeed, very mild assumptions on F (l.s.c. and some lower bounds, for instance F(x) ≥C1 −C2|x|2) are
+suﬃcient to guarantee that these problems admit a solution for small τ. The case where F is λ-convex is
+covered by these assumptions, and also provides uniqueness of the minimizers. This is evident if λ > 0
+since we have strict convexity for every τ, and if λ is negative the sum will be strictly convex for small τ.
+We can interpret this sequence of points as the values of the curve x(t) at times t = 0, τ, 2τ, . . . , kτ, . . . .
+It happens that the optimality conditions of the recursive minimization exactly give a connection between
+these minimization problems and the equation, since we have
+xτ
+k+1 ∈argmin F(x) +
+|x −xτ
+k|2
+2τ
+⇒
+∇F(xτ
+k+1) +
+xτ
+k+1 −xτ
+k
+τ
+= 0,
+i.e.
+xτ
+k+1 −xτ
+k
+τ
+= −∇F(xτ
+k+1).
+This expression is exactly the discrete-time implicit Euler scheme for x′ = −∇F(x)! (note that in the
+convex non-smooth case this becomes
+xτ
+k+1−xτ
+k
+τ
+∈−∂F(xτ
+k+1)).
+We recall that, given an ODE x′(t) = v(x(t)) (that we take autonomous for simplicity), with given
+initial datum x(0) = x0, Euler schemes are time-discretization where derivatives are replaced by ﬁnite
+diﬀerences. We ﬁx a time step τ > 0 and deﬁne a sequence xτ
+k. The explicit scheme is given by
+xτ
+k+1 = xτ
+k + τv(xτ
+k),
+xτ
+0 = x0,
+while the implicit scheme is given by
+xτ
+k+1 = xτ
+k + τv(xτ
+k+1),
+xτ
+0 = x0.
+This means that xτ
+k+1 is selected as a solution of an equation involving xτ
+k, instead of being explicitly
+computable from xτ
+k. The explicit scheme is obviously easier to implement, but enjoys less stability and
+qualitative properties than the implicit one. Suppose for instance v = −∇F: then the quantity F(x(t))
+decreases in t in the continuous solution, which is also the case for the implicit scheme, but not for the
+explicit one (which represents the iteration of the gradient method for the minimization of F). Note that
+6
+
+the same can be done for evolution PDEs, and that solving the Heat equation ∂t̺ = ∆̺t by an explicit
+scheme is very dangerous: at every step, ̺τ
+k+1 would have two degrees of regularity less than ̺τ
+k, since it
+would be obtained through ̺τ
+k+1 = ̺τ
+k −τ∆̺τ
+k.
+It is possible to prove that, for τ →0, the sequence we found, suitably interpolated, converges to the
+solution of Problem (2.2). We give here below the details of this argument, as it will be the basis of the
+argument that we will use in Section 4.
+First, we deﬁne two diﬀerent interpolations of the points xτ
+k. Let us deﬁne two curves xτ, ˜xτ : [0, T] →
+Rn as follows: ﬁrst we deﬁne
+vτ
+k+1 :=
+xτ
+k+1 −xτ
+k
+τ
+,
+then we set
+xτ(t) = xτ
+k+1
+˜xτ(t) = xτ
+k + (t −kτ)vτ
+k+1 for t ∈]kτ, (k + 1)τ].
+Also set
+vτ(t) = vτ
+k+1 for t ∈]kτ, (k + 1)τ].
+It is easy to see that ˜xτ is a continuous curve, piecewise aﬃne (hence absolutely continuous), satisfying
+(˜xτ)′ = vτ. On the contrary, xτ is not continuous, but satisﬁes by construction vτ(t) ∈−∂F(xτ(t)).
+The iterated minimization scheme deﬁning xτ
+k+1 provides the estimate
+F(xτ
+k+1) +
+|xτ
+k+1 −xτ
+k|2
+2τ
+≤F(xτ
+k),
+(2.4)
+obtained comparing the optimal point xτ
+k+1 to the previous one. If F(x0) < +∞and inf F > −∞, summing
+over k we get
+ℓ
+X
+k=0
+|xτ
+k+1 −xτ
+k|2
+2τ
+≤
+
+F(xτ
+0) −F(xτ
+ℓ+1)
+
+≤C.
+(2.5)
+This is valid for every ℓ, and we can arrive up to ℓ= ⌊T/τ⌋. Now, note that
+|xτ
+k+1 −xτ
+k|2
+2τ
+= τ
+ |xτ
+k+1 −xτ
+k|
+2τ
+!2
+= τ|vτ
+k|2 =
+Z (k+1)τ
+kτ
+|(˜xτ)′(t)|2dt.
+This means that we have
+Z T
+0
+1
+2|(˜xτ)′(t)|2dt ≤C
+(2.6)
+and hence ˜xτ is bounded in H1 and vτ in L2. The injection H1 ⊂C0,1/2 provides an equicontinuity bound
+on ˜xτ of the form
+|˜xτ(t) −˜xτ(s)| ≤C|t −s|1/2.
+(2.7)
+This also implies
+|˜xτ(t) −xτ(t)| ≤Cτ1/2,
+(2.8)
+since xτ(t) = ˜xτ(s) for a certain s = kτ with |s −t| ≤τ.
+This provides the necessary compactness to prove the following.
+7
+
+Proposition 2.3. Let ˜xτ, xτ and vτ be constructed as above using the minimizing movement scheme.
+Suppose F(x0) < +∞and inf F > −∞. Then, up to a subsequence τj →0 (still denoted by τ), both ˜xτ
+and xτ converge uniformly to a same curve x ∈H1, and vτ weakly converges in L2 to a vector function
+v, such that x′ = v and
+1. if F is λ-convex, we have v(t) ∈−∂F(x(t)) for a.e. t, i.e. x is a solution of (2.2);
+2. if F is C1, we have v(t) = −∇F(x(t)) for all t, i.e. x is a solution of (2.1).
+Proof. Thanks to the estimates (2.6) and (2.7) and the fact that the initial point ˜xτ(0) is ﬁxed, we can
+apply Ascoli-Arzel`a’s theorem to ˜xτ and get a uniformly converging subsequence. The estimate(2.8)
+implies that, on the same subsequence, xτ also converges uniformly to the same limit, that we will call
+x = [0, T] →Rn. Then, vτ = (˜xτ)′ and (2.6) allow to guarantee, up to an extra subsequence extraction, the
+weak convergence vτ ⇀v in L2. The condition x′ = v is automatical as a consequence of distributional
+convergence.
+To prove 1), we will ﬁx a point y ∈Rn and write
+F(y) ≥F(xτ(t)) + vτ(t) · (y −xτ(t)) + λ
+2|y −xτ(t)|2.
+We then multiply by a positive measurable function a : [0, T] →R+ and integrate:
+Z T
+0
+a(t)
+
+F(y) −F(xτ(t)) −vτ(t) · (y −xτ(t)) + λ
+2|y −xτ(t)|2
+dt ≥0.
+We can pass to the limit as τ →0, using the uniform (hence L2 strong) convergence xτ →x and the
+weak convergence vτ ⇀v. In terms of F, we just need its lower semi-continuity. This provides
+Z T
+0
+a(t)
+
+F(y) −F(x(t)) −v(t) · (y −x(t)) + λ
+2|y −x(t)|2
+dt ≥0.
+From the arbitrariness of a, the inequality
+F(y) ≥F(x(t)) + v(t) · (y −x(t)) −λ
+2|y −x(t)|2
+is true for a.e. t (for ﬁxed y). Using y in a dense countable set in the interior of {F < +∞} (where F is
+continuous), we get v(t) ∈∂F(x(t)).
+To prove 2), the situation is easier. Indeed we have
+−∇F(xτ(t)) = vτ(t) = (˜xτ)′(t).
+The ﬁrst term in the equality uniformly converges, as a function of t, (since ∇F is continuous and xτ lives
+in a compact set) to −∇F(x), the second weakly converges to v and the third to x′. This proves the claim,
+and the equality is now true for every t as the function t 7→−∇F(x(t)) is uniformly continuous.
+□
+In the above result, we only proved convergence of the curves xτ to the limit curve x, solution of
+x′ = −∇F(x) (or −x′ ∈∂F(x)), but we gave no quantitative order of convergence, and we will not study
+such an issue in the rest of the survey neither. On the contrary, the book [6] which will be the basis for
+8
+
+the metric case, also provides explicit estimates; these estimates are usually of order τ. An interesting
+observation, in the Euclidean case, is that if the sequence xτ
+k is deﬁned by
+xτ
+k+1 ∈argminx
+2F
+ x + xτ
+k
+2
+!
++
+|x −xτ
+k|2
+2τ
+,
+then we have
+xτ
+k+1 −xτ
+k
+τ
+= −∇F
+ x + xτ
+k
+2
+!
+,
+and the convergence is of order τ2. This has been used in the Wasserstein case1 (see Section 4 and in
+particular Section 4.8) in [61].
+2.2
+An introduction to the metric setting
+The iterated minimization scheme that we introduced above has another interesting feature: it even
+suggests how to deﬁne solutions for functions F which are only l.s.c., with no gradient at all!
+Even more, a huge advantage of this discretized formulation is also that it can easily be adapted to
+metric spaces. Actually, if one has a metric space (X, d) and a l.s.c. function F : X →R ∪{+∞} (under
+suitable compactness assumptions to guarantee existence of the minimum), one can deﬁne
+xτ
+k+1 ∈argminx F(x) +
+d(x, xτ
+k)2
+2τ
+(2.9)
+and study the limit as τ →0. Then, we use the piecewise constant interpolation
+xτ(t) := xτ
+k
+for every t ∈](k −1)τ, kτ]
+(2.10)
+and study the limit of xτ as τ →0.
+De Giorgi, in [38], deﬁned what he called Generalized Minimizing Movements2:
+Deﬁnition 2.1. A curve x : [0, T] →X is called Generalized Minimizing Movements (GMM) if there
+exists a sequence of time steps τj →0 such that the sequence of curves xτj deﬁned in (2.10) using the
+iterated solutions of (2.9) uniformly converges to x in [0, T].
+The compactness results in the space of curves guaranteeing the existence of GMM are also a conse-
+quence of an H¨older estimate that we already saw in the Euclidean case. Yet, in the general case, some
+arrangements are needed, as we cannot use the piecewise aﬃne interpolation. We will see later that, in
+case the segments may be replaced by geodesics, a similar estimate can be obtained. Yet, we can also
+obtain a H¨older-like estimate from the piecewise constant interpolation.
+We start from
+F(xτ
+k+1) +
+d(xτ
+k+1, xτ
+k)2
+2τ
+≤F(xτ
+k),
+(2.11)
+1The attentive reader can observe that, setting y := (x+ xτ
+k)/2, this minimization problem becomes miny 2F(y)+ 2|y−xτ
+k|2/τ.
+Yet, when acting on a metric space, or simply on a manifold or a bounded domain, there is an extra constraint on y: the point
+y must be the middle point of a geodesic between xτ
+k and a point x (on a sphere, for instance, this means that if xτ
+k is the North
+Pole, then y must lie in the northern emisphere).
+2We prefer not to make any distinction here between Generalized Minimizing Movements and Minimizing Movements.
+9
+
+and
+lX
+k=0
+d(xτ
+k+1, xτ
+k)2 ≤2τ
+
+F(xτ
+0) −F(xτ
+l+1)
+
+≤Cτ.
+The Cauchy-Schwartz inequality gives, for t < s, t ∈[kτ, (k + 1)τ[ and s ∈[lτ, (l + 1)τ[ (which implies
+|l −k| ≤|t−s|
+τ
++ 1),
+d(xτ(t), xτ(s)) ≤
+lX
+k=0
+d(xτ
+k+1, xτ
+k) ≤
+
+lX
+k=0
+d(xτ
+k+1, xτ
+k)2
+
+1/2 |t −s|
+τ
++1
+!1/2
+≤C
+
+|t −s|1/2+ √τ
+
+.
+This means that the curves xτ - if we forget that they are discontinuous - are morally equi-h¨older con-
+tinuous with exponent 1/2 (up to a negligible error of order √τ), and allows to extract a converging
+subsequence.
+Anyway, if we add some structure to the metric space (X, d), a more similar analysis to the Euclidean
+case can be performed. This is what happens when we suppose that (X, d) is a geodesic space. This
+requires a short discussion about curves and geodesics in metric spaces.
+Curves and geodesics in metric spaces. We recall that a curve ω is a continuous function deﬁned
+on a interval, say [0, 1] and valued in a metric space (X, d). As it is a map between metric spaces, it is
+meaningful to say whether it is Lipschitz or not, but its speed ω′(t) has no meaning, unless X is a vector
+space. Surprisingly, it is possible to give a meaning to the modulus of the velocity, |ω′|(t).
+Deﬁnition 2.2. If ω : [0, 1] →X is a curve valued in the metric space (X, d) we deﬁne the metric
+derivative of ω at time t, denoted by |ω′|(t) through
+|ω′|(t) := lim
+h→0
+d(ω(t + h), ω(t))
+|h|
+,
+provided this limit exists.
+In the spirit of Rademacher Theorem, it is possible to prove (see [12]) that, if ω : [0, 1] →X is
+Lipschitz continuous, then the metric derivative |ω′|(t) exists for a.e. t. Moreover we have, for t0 < t1,
+d(ω(t0), ω(t1)) ≤
+Z t1
+t0
+|ω′|(s) ds.
+The same is also true for more general curves, not only Lipschitz continuous.
+Deﬁnition 2.3. A curve ω : [0, 1] →X is said to be absolutely continuous whenever there exists g ∈
+L1([0, 1]) such that d(ω(t0), ω(t1)) ≤
+R t1
+t0 g(s)ds for every t0 < t1. The set of absolutely continuous curves
+deﬁned on [0, 1] and valued in X is denoted by AC(X).
+It is well-known that every absolutely continuous curve can be reparametrized in time (through a
+monotone-increasing reparametrization) and become Lipschitz continuous, and the existence of the met-
+ric derivative for a.e. t is also true for ω ∈AC(X), via this reparametrization.
+Given a continuous curve, we can also deﬁne its length, and the notion of geodesic curves.
+10
+
+Deﬁnition 2.4. For a curve ω : [0, 1] →X, let us deﬁne
+Length(ω) := sup
+
+n−1
+X
+k=0
+d(ω(tk), ω(tk+1)) : n ≥1, 0 = t0 < t1 < · · · < tn = 1
+.
+It is easy to see that all curves ω ∈AC(X) satisfy Length(ω) ≤
+R 1
+0 g(t)dt < +∞. Also, we can prove
+that, for any curve ω ∈AC(X), we have
+Length(ω) =
+Z 1
+0
+|ω′|(t)dt.
+We collect now some more deﬁnitions.
+Deﬁnition 2.5. A curve ω : [0, 1] →X is said to be a geodesic between x0 and x1 ∈X if ω(0) = x0,
+ω(1) = x1 and Length(ω) = min{Length( ˜ω) : ˜ω(0) = x0, ˜ω(1) = x1}.
+A space (X, d) is said to be a length space if for every x and y we have
+d(x, y) = inf{Length(ω) : ω ∈AC(X), ω(0) = x, ω(1) = y}.
+A space (X, d) is said to be a geodesic space if for every x and y we have
+d(x, y) = min{Length(ω) : ω ∈AC(X), ω(0) = x, ω(1) = y},
+i.e. if it is a length space and there exist geodesics between arbitrary points.
+In a length space, a curve ω : [t0, t1] →X is said to be a constant-speed geodesic between ω(0) and
+ω(1) ∈X if it satisﬁes
+d(ω(t), ω(s)) = |t −s|
+t1 −t0
+d(ω(t0), ω(t1))
+for all t, s ∈[t0, t1].
+It is easy to check that a curve with this property is automatically a geodesic, and that the following three
+facts are equivalent (for arbitrary p > 1)
+1. ω is a constant-speed geodesic deﬁned on [t0, t1] and joining x0 and x1,
+2. ω ∈AC(X) and |ω′|(t) = d(ω(t0),ω(t1))
+t1−t0
+a.e.,
+3. ω solves min
+nR t1
+t0 |ω′|(t)pdt : ω(t0) = x0, ω(t1) = x1
+o
+.
+We can now come back to the interpolation of the points obained through the Minimizing Movement
+scheme (2.9) and note that, if (X, d) is a geodesic space, then the piecewise aﬃne interpolation that
+we used in the Euclidean space may be helpfully replaced via a piecewise geodesic interpolation. This
+means deﬁning a curve xτ : [0, T] →X such that xτ(kτ) = xτ
+k and such that xτ restricted to any interval
+[kτ, (k+1)τ] is a constant-speed geodesic with speed equal to d(xτ
+k, xτ
+k+1)/τ. Then, the same computations
+as in the Euclidean case allow to prove an H1 bound on the curves xτ (i.e. an L2 bound on the metric
+derivatives |(xτ)′|) and prove equicontinuity.
+11
+
+The next question is how to characterize the limit curve obtained when τ →0, and in particular how
+to express the fact that it is a gradient ﬂow of the function F. Of course, one cannot try to prove the
+equality x′ = −∇F(x), just because neither the left-hand side nor the right-hand side have a meaning in a
+metric space!
+If the space X, the distance d, and the functional F are explicitly known, in some cases it is possible
+to pass to the limit the optimality conditions of each optimization problem in the discretized scheme, and
+characterize the limit curves (or the limit curve) x(t). It will be possible to do so in the framework of
+probability measures, as it will be discussed in Section 4, but not in general. Indeed, without a little bit of
+(diﬀerential) structure on the space X, it is essentially impossible to do so. Hence, if we want to develop
+a general theory for gradient ﬂows in metric spaces, ﬁner tools are needed. In particular, we need to
+characterize the solutions of x′ = −∇F(x) (or x′ ∈−∂F(x)) by only using metric quantities (in particular,
+avoiding derivatives, gradients, and more generally vectors). The book by Ambrosio-Gigli-Savar´e [6],
+and in particular its ﬁrst part (the second being devoted to the space of probability measures) exactly
+aims at doing so.
+Hence, what we do here is to present alternative characterizations of gradient ﬂows in the smooth
+Euclidean case, which can be used as a deﬁnition of gradient ﬂow in the metric case, since all the
+quantities which are involved have their metric counterpart.
+The ﬁrst observation is the following: thanks to the Cauchy-Schwartz inequality, for every curve we
+have
+F(x(s)) −F(x(t)) =
+Z t
+s
+−∇F(x(r)) · x′(r) dr
+≤
+Z t
+s
+|∇F(x(r))||x′(r)| dr
+≤
+Z t
+s
+ 1
+2|x′(r)|2 + 1
+2|∇F(x(r))|2
+!
+dr.
+Here, the ﬁrst inequality is an equality if and only if x′(r) and ∇F(x(r)) are vectors with opposite direc-
+tions for a.e. r, and the second is an equality if and only if their norms are equal. Hence, the condition,
+called EDE (Energy Dissipation Equality)
+F(x(s)) −F(x(t)) =
+Z t
+s
+ 1
+2|x′(r)|2 + 1
+2|∇F(x(r))|2
+!
+dr,
+for all s < t
+(or even the simple inequality F(x(s)) −F(x(t)) ≥
+R t
+s
+ 1
+2|x′(r)|2 + 1
+2|∇F(x(r))|2
+dr) is equivalent to x′ =
+−∇F(x) a.e., and could be taken as a deﬁnition of gradient ﬂow.
+In the general theory of Gradient Flows ([6]) in metric spaces, another characterization, diﬀerent
+from the EDE, is proposed in order to cope with uniqueness and stability results. It is based on the
+following observation: if F : Rd →R is convex, then the inequality
+F(y) ≥F(x) + p · (y −x)
+for all y ∈Rd
+characterizes (by deﬁnition) the vectors p ∈∂F(x) and, if F ∈C1, it is only satisﬁed for p = ∇F(x).
+Analogously, if F is λ-convex, the inequality that characterizes the gradient is
+F(y) ≥F(x) + λ
+2|x −y|2 + p · (y −x)
+for all y ∈Rd.
+12
+
+We can pick a curve x(t) and a point y and compute
+d
+dt
+1
+2|x(t) −y|2 = (y −x(t)) · (−x′(t)).
+Consequently, imposing
+d
+dt
+1
+2|x(t) −y|2 ≤F(y) −F(x(t)) −λ
+2|x(t) −y|2,
+for all y, will be equivalent to −x′(t) ∈−∂F(x(t)). This will provide a second characterization (called
+EVI, Evolution Variational Inequality) of gradient ﬂows in a metric environment. Indeed, all the terms
+appearing in the above inequality have a metric counterpart (only squared distances and derivatives w.r.t.
+time appear). Even if we often forget the dependance on λ, it should be noted that the condition EVI
+should actually be written as EVIλ, since it involves a parameter λ, which is a priori arbitrary. Actually, λ-
+convexity of F is not necessary to deﬁne the EVIλ property, but it will be necessary in order to guarantee
+the existence of curves which satisfy such a condition. The notion of λ-convexity will hence be crucial
+also in metric spaces, where it will be rather “λ-geodesic-convexity”.
+The role of the EVI condition in the uniqueness and stability of gradient ﬂows is quite easy to guess.
+Take two curves, that we call x(t) and y(s), and compute
+d
+dt
+1
+2d(x(t), y(s))2 ≤F(y(s)) −F(x(t)) −λ
+2d(x(t), y(s))2,
+(2.12)
+d
+ds
+1
+2d(x(t), y(s))2 ≤F(x(t)) −F(y(s)) −λ
+2d(x(t), y(s))2.
+(2.13)
+If one wants to estimate E(t) = 1
+2d(x(t), y(t))2, summing up the two above inequalities, after a chain-rule
+argument for the composition of the function of two variables (t, s) 7→1
+2d(x(t), y(s))2 and of the curve
+t 7→(t, t), gives
+d
+dt E(t) ≤−2λE(t).
+By Gronwall Lemma, this provides uniqueness (when x(0) = y(0)) and stability.
+3
+The general theory in metric spaces
+3.1
+Preliminaries
+In order to sketch the general theory in metric spaces, ﬁrst we need to give (or recall) general deﬁnitions
+for the three main objects that we need in the EDE and EVI properties, characterizing gradient ﬂows: the
+notion of speed of a curve, that of slope of a function (somehow the modulus of its gradient) and that of
+(geodesic) convexity.
+Metric derivative. We already introduced in the previous section the notion of metric derivative:
+given a curve x : [0, T] →X valued in a metric space, we can deﬁne, instead of the velocity x′(t) as a
+vector (i.e, with its direction, as we would do in a vector space), the speed (i.e. the modulus, or norm, of
+x′(t)) as follows:
+|x′|(t) := lim
+h→0
+d(x(t), x(t + h))
+|h|
+,
+13
+
+provided the limit exists.This is the notion of speed that we will use in metric spaces.
+Slope and modulus of the gradient. Many deﬁnitions of the modulus of the gradient of a function
+F deﬁned over a metric space are possible. First, we call upper gradient every function g : X →R such
+that, for every Lipschitz curve x, we have
+|F(x(0)) −F(x(1))| ≤
+Z 1
+0
+g(x(t))|x′|(t)dt.
+If F is Lipschitz continuous, a possible choice is the local Lipschitz constant
+|∇F|(x) := lim sup
+y→x
+|F(x) −F(y)|
+d(x, y)
+;
+(3.1)
+another is the descending slope (we will often say just slope), which is a notion more adapted to the
+minimization of a function than to its maximization, and hence reasonable for lower semi-continuous
+functions:
+|∇−F|(x) := lim sup
+y→x
+[F(x) −F(y)]+
+d(x, y)
+(note that the slope vanishes at every local minimum point). In general, it is not true that the slope is an
+upper gradient, but we will give conditions to guarantee that it is. Later on (Section 5) we will see how
+to deﬁne a Sobolev space H1 on a (measure) metric space, by using suitable relaxations of the modulus
+of the gradient of F.
+Geodesic convexity. The third notion to be dealt with is that of convexity. This can only be done in
+a geodesic metric space. On such a space, we can say that a function is geodesically convex whenever
+it is convex along geodesics. More precisely, we require that for every pair (x(0), x(1)) there exists3 a
+geodesic x with constant speed connecting these two points and such that
+F(x(t)) ≤(1 −t)F(x(0)) + tF(x(1)).
+We can also deﬁne λ-convex functions as those which satisfy a modiﬁed version of the above inequality:
+F(x(t)) ≤(1 −t)F(x(0)) + tF(x(1)) −λt(1 −t)
+2
+d2(x(0), x(1)).
+(3.2)
+3.2
+Existence of a gradient ﬂow
+Once ﬁxed these basic ingredients, we can now move on to the notion of gradient ﬂow. A starting
+approach is, again, the sequential minimization along a discrete scheme, for a ﬁxed time step τ > 0,
+and then pass to the limit. First, we would like to see in which framework this procedure is well-posed.
+Let us suppose that the space X and the function F are such that every sub-level set {F ≤c} is compact
+in X, either for the topology induced by the distance d, or for a weaker topology, such that d is lower
+semi-continuous w.r.t. it; F is required to be l.s.c. in the same topology. This is the minimal framework
+to guarantee existence of the minimizers at each step, and to get estimates as in (2.11) providing the
+3Warning: this deﬁnition is not equivalent to true convexity along the geodesic, since we only compare intermediate instants
+t to 0 and 1, and not to other interemediate instants; however, in case of uniqueness of goedesics, or if we required the same
+condition to be true for all geodesics, then we would recover the same condition. Also, let us note that we will only need the
+existence of geodesics connecting pairs of points where F < +∞.
+14
+
+existence of a limit curve. It is by the way a quite general situation, as we can see in the case where X is
+a reﬂexive Banach space and the distance d is the one induced by the norm: in this case there is no need
+to restrict to the (very severe) assumption that F is strongly l.s.c., but the weak topology allows to deal
+with a much wider situation.
+We can easily understand that, even if the estimate (2.11) is enough to provide compactness, and thus
+the existence of a GMM, it will never be enough to characterize the limit curve (indeed, it is satisﬁed by
+any discrete evolution where xτ
+k+1 gives a better value than xτ
+k, without any need for optimality). Hence,
+we will never obtain either of the two formulations - EDE or EVI - of metric gradient ﬂows.
+In order to improve the result, we should exploit how much xτ
+k+1 is better than xτ
+k. An idea due to
+De Giorgi allows to obtain the desired result, via a “variational interpolation” between the points xτ
+k and
+xτ
+k+1. In order to do so, once we ﬁx xτ
+k, for every θ ∈]0, 1], we consider the problem
+min
+x
+F(x) +
+d2(x, xτ
+k)
+2θτ
+and call x(θ) any minimizer for this problem, and ϕ(θ) the minimal value. It’s clear that, for θ →0+,
+we have x(θ) →xτ
+k and ϕ(θ) →F(xτ
+k), and that, for θ = 1, we get back to the original problem with
+minimizer xτ
+k+1. Moreover, the function ϕ is non-increasing and hence a.e. diﬀerentiable (actually, we
+can even prove that it is locally semiconcave). Its derivative ϕ′(θ) is given by the derivative of the
+function θ 7→F(x) +
+d2(x,xτ
+k)
+2θτ , computed at the optimal point x = x(θ) (the existence of ϕ′(θ) implies that
+this derivative is the same at every minimal point x(θ)). Hence we have
+ϕ′(θ) = −
+d2(x(θ), xτ
+k)
+2θ2τ
+,
+which means, by the way, that d(x(θ), xτ
+k)2 does not depend on the minimizer x(θ) for all θ such that ϕ′(θ)
+exists. Moreover, the optimality condition for the minimization problem with θ > 0 easily show that
+|∇−F|(x(θ)) ≤
+d(x(θ), xτ
+k)
+θτ
+.
+This can be seen if we consider the minimization of an arbitrary function x 7→F(x) + cd2(x, ¯x), for ﬁxed
+c > 0 and ¯x, and we consider a competitor y. If x is optimal we have F(y) + cd2(y, ¯x) ≥F(x) + cd2(x, ¯x),
+which implies
+F(x)−F(y) ≤c
+
+d2(y, ¯x) −d2(x, ¯x)
+
+= c (d(y, ¯x) + d(x, ¯x)) (d(y, ¯x) −d(x, ¯x)) ≤c (d(y, ¯x) + d(x, ¯x)) d(y, x).
+We divide by d(y, x), take the positive part and then the lim sup as y →x, and we get |∇−F|(x) ≤2cd(x, ¯x).
+We now come back to the function ϕ and use
+ϕ(0) −ϕ(1) ≥−
+Z 1
+0
+ϕ′(θ) dθ
+(the inequality is due to the possible singular part of the derivative for monotone functions; actually, we
+can prove that it is an equality by using the local semiconcave behavior, but this is not needed in the
+following), together with the inequality
+−ϕ′(θ) =
+d(x(θ), xτ
+k)2
+2θ2τ
+≥τ
+2|∇−F(x(θ))|2
+15
+
+that we just proved. Hence, we get an improved version of (2.11):
+F(xτ
+k+1) +
+d(xτ
+k+1, xτ
+k)2
+2τ
+≤F(xτ
+k) −τ
+2
+Z 1
+0
+|∇−F(x(θ))|2dθ.
+If we sum up for k = 0, 1, 2, . . . and then take the limit τ →0, we can prove, for every GMM x, the
+inequality
+F(x(t)) + 1
+2
+Z t
+0
+|x′|(r)2dr + 1
+2
+Z t
+0
+|∇−F(x(r))|2dr ≤F(x(0)),
+(3.3)
+under some suitable assumptions that we must select. In particular, we need lower-semicontinuity of F
+in order to handle the term F(xτ
+k+1) (which will become F(x(t)) at the limit), but we also need lower-
+semicontinuity of the slope |∇−F| in order to handle the corresponding term.
+This inequality does not exactly correspond to EDE: on the one hand we have an inequality, and
+on the other we just compare instants t and 0 instead of t and s. If we want equality for every pair
+(t, s), we need to require the slope to be an upper gradient. Indeed, in this case, we have the inequality
+F(x(0)) −F(x(t)) ≤
+R t
+0 |∇−F(x(r))||x′|(r)dr and, starting from the usual inequalities, we ﬁnd that (3.3) is
+actually an equality. This allows to subtract the equalities for s and t, and get, for s < t:
+F(x(t)) + 1
+2
+Z t
+s
+|x′|(r)2dr + 1
+2
+Z t
+s
+|∇−F(x(r))|2dr = F(x(s)).
+Magically, it happens that the assumption that F is λ-geodesically convex simpliﬁes everything.
+Indeed, we have two good points: the slope is automatically l.s.c., and it is automatically an upper
+gradient. These results are proven in [6, 5]. We just give here the main idea to prove both. This idea
+is based on a pointwise representation of the slope as a sup instead of a lim sup: if F is λ-geodesically
+convex, then we have
+|∇−F|(x) = sup
+y,x
+"F(x) −F(y)
+d(x, y)
++ λ
+2d(x, y)
+#
++
+.
+(3.4)
+In order to check this, we just need to add a term λ
+2d(x, y) inside the positive part of the deﬁnition of
+|∇−F|(x), which does not aﬀect the limit as y →x and shows that |∇−F|(x) is smaller than this sup.
+The opposite inequality is proven by ﬁxing a point y, connecting it to x through a geodesic x(t), and
+computing the limit along this curve.
+This representation as a sup allows to prove semicontinuity of the slope 4. It is also possible (see [5],
+for instance) to prove that the slope is an upper gradient.
+Let us insist anyway on the fact that the λ-convexity assumption is not natural nor crucial to prove the
+existence of a gradient ﬂow. On the one hand, functions smooth enough could satisfy the assumptions
+on the semi-continuity of F and of |∇−F| and the fact that |∇−F| is an upper gradient independently of
+convexity; on the other hand the discrete scheme already provides a method, well-posed under much
+weaker assumptions, to ﬁnd a limit curve. If the space and the functional allow for it (as it will be the
+case in the next section), we can hope to characterize this limit curve as the solution of an equation (it
+will be a PDE in Section 4), without passing through the general theory and the EDE condition.
+4Warning: we get here semi-continuity w.r.t. the topology induced by the distance d, which only allows to handle the case
+where the set {F ≤c} are d-compacts.
+16
+
+3.3
+Uniqueness and contractivity
+On the contrary, if we think at the uniqueness proof that we gave in the Euclidean case, it seems that
+some sort of convexity should be the good assumption in order to prove uniqueness. Here we will only
+give the main lines of the uniqueness theory in the metric framework: the key point is to use the EVI
+condition instead of the EDE.
+The situation concerning these two diﬀerent notions of gradient ﬂows (EVI and EDE) in abstract
+metric spaces has been clariﬁed by Savar´e (in an unpublished note, but the proof can also be found in
+[5]), who showed that
+• All curves which are gradient ﬂows in the EVI sense also satisfy the EDE condition.
+• The EDE condition is not in general enough to guarantee uniqueness of the gradient ﬂow. A simple
+example: take X = R2 with the ℓ∞distance
+d((x1, x2), (y1, y2)) = |x1 −y1| ∨|x2 −y2|,
+and take F(x1, x2) = x1; we can check that any curve (x1(t), x2(t)) with x′
+1(t) = −1 and |x′
+2(t)| ≤1
+satisﬁes EDE.
+• On the other hand, existence of a gradient ﬂow in the EDE sense is quite easy to get, and provable
+under very mild assumption, as we sketched in Section 3.2.
+• The EVI condition is in general too strong in order to get existence (in the example above of the
+ℓ∞norm, no EVI gradient ﬂow would exist), but always guarantees uniqueness and stability (w.r.t.
+initial data).
+Also, the existence of EVI gradient ﬂows is itself very restricting on the function F: indeed, it is
+proven in [37] that, if F is such that from every starting point x0 there exists an EVIλ gradient ﬂow, then
+F is necessarily λ-geodesically-convex.
+We provide here an idea of the proof of the contractivity (and hence of the uniqueness) of the EVI
+gradient ﬂows.
+Proposition 3.1. If two curves x, y : [0, T] →X satisfy the EVI condition, then we have
+d
+dtd(x(t), y(t))2 ≤−2λd(x(t), y(t))2
+and d(x(t), y(t)) ≤e−λtd(x(0), y(0)).
+The second part of the statement is an easy consequence of the ﬁrst one, by Gronwall Lemma. The
+ﬁrst is (formally) obtained by diﬀerentiating t 7→d(x(t), y(t0))2 at t = t0, then s 7→d(x(t0), y(s))2 at
+s = t0.The EVI condition allows to write
+d
+dtd(x(t), y(t0))2
+|t=t0 ≤−λd(x(t0), y(t0))2 + 2F(y(t0)) −2F(x(t0))
+d
+dsd(x(t0), y(s))2
+|s=t0 ≤−λd(x(t0), y(t0))2 + 2F(x(t0)) −2F(y(t0))
+17
+
+and hence, summing up, and playing with the chain rule for derivatives, we get
+d
+dtd(x(t), y(t))2 ≤−2λd(x(t), y(t))2.
+If we want a satisfying theory for gradient ﬂows which includes uniqueness, we just need to prove the
+existence of curves which satisfy the EVI condition, accepting that this will probably require additional
+assumptions. This can still be done via the discrete scheme, adding a compatibility hypothesis between
+the function F and the distance d, a condition which involves some sort of convexity. We do not enter the
+details of the proof, for which we refer to [6], where the convergence to an EVI gradient ﬂow is proven,
+with explicit error estimates. These a priori estimates allow to prove that we have a Cauchy sequence,
+and then allow to get rid of the compactness part of the proof (by the way, we could even avoid using
+compactness so as to prove existence of a minimizer at every time step, using almost-minimizers and the
+in the Ekeland’s variational principle [41]). Here, we will just present this extra convexity assumption,
+needed for the existence of EVI gradient ﬂows developed in [6].
+This assumption, that we will call C2G2 (Compatible Convexity along Generalized Geodesics) is the
+following: suppose that, for every pair (x0, x1) and every y ∈X, there is a curve x(t) connecting x(0) = x0
+to x(1) = x1, such that
+F(x(t)) ≤(1 −t)F(x0) + tF(x1) −λt(1 −t)
+2
+d2(x0, x1),
+d2(x(t), y) ≤(1 −t)d2(x0, y) + td2(x1, y) −t(1 −t)d2(x0, x1).
+In other words, we require λ-convexity of the function F, but also the 2-convexity of the function x 7→
+d2(x, y), along a same curve which is not necessarily the geodesic. This second condition is automatically
+satisﬁed, by using the geodesic itself, in the Euclidean space (and in every Hilbert space), since the
+function x 7→|x −y|2 is quadratic, and its Hessian matrix is 2I at every point. We can also see that it is
+satisﬁed in a normed space if and only if the norm is induced by a scalar product. It has been recently
+pointed out by Gigli that the sharp condition on the space X in order to guarantee existence of EVI
+gradient ﬂows is that X should be inﬁnitesimally Hilbertian (this will be made precise in Section 5).
+Here, we just observe that C2G2 implies (λ + 1
+τ)-convexity, along those curves, sometimes called
+generalized geodesics (consider that these curves also depend on a third point, sort of a base point,
+typically diﬀerent from the two points that should be connected), of the functional that we minimize at
+each time step in the minimizing movement scheme. This provides uniqueness of the minimizer as soon
+as τ is small enough, and allows to perform the desired estimates.
+Also, the choice of this C2G2 condition, which is a technical condition whose role is only to prove
+existence of an EVI gradient ﬂow, has been done in view of the applications to the case of the Wasserstein
+spaces, that wil be the object of the next section. Indeed, in these spaces the squared distance is not in
+general 2-convex along geodesics, but we can ﬁnd some adapted curves on which it is 2-convex, and
+many functionals F stay convex on these curves.
+We ﬁnish this section by mentioning a recent extension to some non-λ-convex functionals. The
+starting point is the fact that the very use of Gronwall’s lemma to prove uniqueness can be modiﬁed
+by allowing for a weaker condition. Indeed, it is well-known that, whenever a function ω satisﬁes an
+Osgood condition
+R 1
+0
+1
+ω(s)ds = +∞, then E′ ≤ω(E) together with E(0) = 0 implies E(t) = 0 for t > 0.
+This suggests that one could deﬁne a variant of the EVI deﬁnition for functions which are not λ−convex,
+18
+
+but almost, and this is the theory developed in [36]. Such a paper studies the case where F satisﬁes some
+sort of ω-convexity for a “modulus of convexity” ω. More precisely, this means
+F(xt) ≤(1 −t)F(0) + tF(x1) −|λ|
+2 [(1 −t)ω(t2d(x0, x1)2) + tω((1 −t)2d(x0, x1)2)],
+on generalized geodesics xt (note that in the case ω(s) = s we come back to (3.2)). The function ω is
+required to satisfy an Osgood condition (and some other technical conditions). Then, the EVI condition
+is replaced by
+d
+dt
+1
+2d(x(t), y)2 ≤F(y) −F(x(t)) + |λ|
+2 ω(d(x(t), y)2),
+and this allows to produce a theory with existence and uniqueness results (via a variant of Proposition
+3.1). In the Wasserstein spaces (see next section), a typical case of functionals which can ﬁt this theory
+are functionals involving singular interaction kernels (or solutions to elliptic PDEs, as in the Keller-Segel
+case) under L∞constraints on the density (using the fact that the gradient ∇u of the solution of −∆u = ̺
+is not Lipschitz when ̺ ∈L∞, but is at least log-lipschitz).
+4
+Gradient ﬂows in the Wasserstein space
+One of the most exciting applications (and maybe the only one5, in what concerns applied mathematics)
+of the theory of gradient ﬂows in metric spaces is for sure that of evolution PDEs in the space of measures.
+This topic is inspired from the work by Jordan, Kinderlehrer and Otto ([55]), who had the intuition that
+the Heat and the Fokker-Planck equations have a common variational structure in terms of a particular
+distance on the probability measures, the so-called Wasserstein distance. Yet, the theory has only become
+formal and general with the work by Ambrosio, Gigli and Savar´e (which does not mean that proofs in
+[55] were not rigorous, but the intutition on the general structure still needed to be better understood).
+The main idea is to endow the space P(Ω) of probability measures on a domain Ω⊂Rd with a
+distance, and then deal with gradient ﬂows of suitable functionals on such a metric space. Such a distance
+arises from optimal transport theory. More details about optimal transport can be found in the books by
+C. Villani ([89, 90]) and in the book on gradient ﬂows by Ambrosio, Gigli and Savar´e [6]6; a recent book
+by the author of this survey is also available [84].
+4.1
+Preliminaries on Optimal Transport
+The motivation for the whole subject is the following problem proposed by Monge in 1781 ([75]): given
+two densities of mass f, g ≥0 on Rd, with
+R
+f =
+R
+g = 1, ﬁnd a map T : Rd →Rd pushing the ﬁrst one
+onto the other, i.e. such that
+Z
+A
+g(x)dx =
+Z
+T −1(A)
+f(y)dy
+for any Borel subset A ⊂Rd
+(4.1)
+5This is for sure exaggerated, as we could think for instance at the theory of geometrical evolutions of shapes and sets, even
+if it seems that this metric approach has not yet been generalized in this framework.
+6Lighter versions exist, such as [11], or the recent User’s Guide to Optimal Transport ([5]), which is a good reference for
+many topics in this survey, as it deals for one half with optimal transport (even if the title suggests that this is the only topic
+of the guide), then for one sixth with the general theory of gradient ﬂows (as in our Section 3), and ﬁnally for one third with
+metric spaces with curvature bounds (that we will brieﬂy sketch in Section 5).
+19
+
+and minimizing the quantity
+Z
+Rd |T(x) −x| f(x) dx
+among all the maps satisfying this condition. This means that we have a collection of particles, distributed
+with density f on Rd, that have to be moved, so that they arrange according to a new distribution,
+whose density is prescribed and is g. The movement has to be chosen so as to minimize the average
+displacement. The map T describes the movement, and T(x) represents the destination of the particle
+originally located at x. The constraint on T precisely accounts for the fact that we need to reconstruct
+the density g. In the sequel, we will always deﬁne, similarly to (4.1), the image measure of a measure µ
+on X (measures will indeed replace the densities f and g in the most general formulation of the problem)
+through a measurable map T : X →Y: it is the measure denoted by T#µ on Y and characterized by
+(T#µ)(A) = µ(T −1(A))
+for every measurable set A,
+or
+Z
+Y
+φ d (T#µ) =
+Z
+X
+φ ◦T dµ
+for every measurable function φ.
+The problem of Monge has stayed with no solution (does a minimizer exist? how to characterize it?. . . )
+till the progress made in the 1940s with the work by Kantorovich ([56]). In the Kantorovich’s framework,
+the problem has been widely generalized, with very general cost functions c(x, y) instead of the Euclidean
+distance |x −y| and more general measures and spaces.
+Let us start from the general picture. Consider a metric space X, that we suppose compact for
+simplicity7 and a cost function c : X × X →[0, +∞]. For simplicity of the exposition, we will suppose
+that c is continuous and symmetric: c(x, y) = c(y, x) (in particular, the target and source space will be the
+same space X).
+The formulation proposed by Kantorovich of the problem raised by Monge is the following: given
+two probability measures µ, ν ∈P(X), consider the problem
+(KP)
+min
+(Z
+X×X
+c dγ : γ ∈Π(µ, ν)
+)
+,
+(4.2)
+where Π(µ, ν) is the set of the so-called transport plans, i.e.
+Π(µ, ν) = {γ ∈P(X × X) : (π0)#γ = µ, (π1)#γ = ν, }
+where π0 and π1 are the two projections of X × X onto its factors. These probability measures over
+X × X are an alternative way to describe the displacement of the particles of µ: instead of saying, for
+each x, which is the destination T(x) of the particle originally located at x, we say for each pair (x, y)
+how many particles go from x to y. It is clear that this description allows for more general movements,
+since from a single point x particles can a priori move to diﬀerent destinations y. If multiple destinations
+really occur, then this movement cannot be described through a map T. It can be easily checked that
+if (id, T)#µ belongs to Π(µ, ν) then T pushes µ onto ν (i.e. T#µ = ν) and the functional takes the form
+R
+c(x, T(x))dµ(x), thus generalizing Monge’s problem.
+7Most of the results that we present stay true without this assumptions, anyway, and we refer in particular to [6] or [89] for
+details, since a large part of the analysis of [84] is performed under this simplfying assumption.
+20
+
+The minimizers for this problem are called optimal transport plans between µ and ν. Should γ be of
+the form (id, T)#µ for a measurable map T : X →X (i.e. when no splitting of the mass occurs), the map
+T would be called optimal transport map from µ to ν.
+This generalized problem by Kantorovich is much easier to handle than the original one proposed
+by Monge: for instance in the Monge case we would need existence of at least a map T satisfying the
+constraints. This is not veriﬁed when µ = δ0, if ν is not a single Dirac mass. On the contrary, there always
+exists at least a transport plan in Π(µ, ν) (for instance we always have µ ⊗ν ∈Π(µ, ν)). Moreover, one
+can state that (KP) is the relaxation of the original problem by Monge: if one considers the problem in
+the same setting, where the competitors are transport plans, but sets the functional at +∞on all the plans
+that are not of the form (id, T)#µ, then one has a functional on Π(µ, ν) whose relaxation (in the sense of
+the largest lower-semicontinuous functional smaller than the given one) is the functional in (KP) (see for
+instance Section 1.5 in [84]).
+Anyway, it is important to note that an easy use of the Direct Method of Calculus of Variations
+(i.e. taking a minimizing sequence, saying that it is compact in some topology - here it is the weak
+convergence of probability measures - ﬁnding a limit, and proving semicontinuity, or continuity, of the
+functional we minimize, so that the limit is a minimizer) proves that a minimum does exist. As a con-
+sequence, if one is interested in the problem of Monge, the question may become“does this minimizer
+come from a transport map T?” (note, on the contrary, that directly attacking by compactness and semi-
+continuity Monge’s formulation is out of reach, because of the non-linearity of the constraint T#µ = ν,
+which is not closed under weak convergence).
+Since the problem (KP) is a linear optimization under linear constraints, an important tool will be
+duality theory, which is typically used for convex problems. We will ﬁnd a dual problem (DP) for (KP)
+and exploit the relations between dual and primal.
+The ﬁrst thing we will do is ﬁnding a formal dual problem, by means of an inf-sup exchange.
+First express the constraint γ ∈Π(µ, ν) in the following way : notice that, if γ is a non-negative
+measure on X × X, then we have
+sup
+φ, ψ
+Z
+φ dµ +
+Z
+ψ dν −
+Z
+(φ(x) + ψ(y)) dγ =
+
+0
+if γ ∈Π(µ, ν)
++∞
+otherwise
+.
+Hence, one can remove the constraints on γ by adding the previous sup, since if they are satisﬁed
+nothing has been added and if they are not one gets +∞and this will be avoided by the minimization.
+We may look at the problem we get and interchange the inf in γ and the sup in φ, ψ:
+min
+γ≥0
+Z
+c dγ + sup
+φ,ψ
+ Z
+φ dµ +
+Z
+ψ dν −
+Z
+(φ(x) + ψ(y)) dγ
+!
+becomes
+sup
+φ,ψ
+Z
+φ dµ +
+Z
+ψ dν + inf
+γ≥0
+Z
+(c(x, y) −(φ(x) + ψ(y))) dγ.
+Obviously it is not always possible to exchange inf and sup, and the main tools to do this come from
+convex analysis. We refer to [84], Section 1.6.3 for a simple proof of this fact, or to [89], where the proof
+is based on Flenchel-Rockafellar duality (see, for instance, [43]). Anyway, we insist that in this case it is
+true that inf sup = sup inf.
+Afterwards, one can re-write the inf in γ as a constraint on φ and ψ, since one has
+21
+
+inf
+γ≥0
+Z
+(c(x, y) −(φ(x) + ψ(y))) dγ =
+
+0
+if φ(x) + ψ(y) ≤c(x, y) for all (x, y) ∈X × X
+−∞
+otherwise
+.
+This leads to the following dual optimization problem: given the two probabilities µ and ν and the
+cost function c : X × X →[0, +∞] we consider the problem
+(DP)
+max
+(Z
+X
+φ dµ +
+Z
+X
+ψ dν : φ, ψ ∈C(X), φ(x)+ψ(y) ≤c(x, y) for all (x, y) ∈X × X
+)
+.
+(4.3)
+This problem does not admit a straightforward existence result, since the class of admissible func-
+tions lacks compactness. Yet, we can better understand this problem and ﬁnd existence once we have
+introduced the notion of c−transform (a kind of generalization of the well-known Legendre transform).
+Deﬁnition 4.1. Given a function χ : X →R we deﬁne its c−transform (or c−conjugate function) by
+χc(y) = inf
+x∈X c(x, y) −χ(x).
+Moreover, we say that a function ψ is c−concave if there exists χ such that ψ = χc and we denote by
+Ψc(X) the set of c−concave functions.
+It is quite easy to realize that, given a pair (φ, ψ) in the maximization problem (DP), one can al-
+ways replace it with (φ, φc), and then with (φcc, φc), and the constraints are preserved and the integrals
+increased. Actually one could go on but it is possible to prove that φccc = φc for any function φ. This is
+the same as saying that ψcc = ψ for any c−concave function ψ, and this perfectly recalls what happens
+for the Legendre transform of convex funtions (which corresponds to the particular case c(x, y) = −x · y).
+A consequence of these considerations is the following well-known result:
+Proposition 4.1. We have
+min (KP) = max
+φ∈Ψc(X)
+Z
+X
+φ dµ +
+Z
+X
+φc dν,
+(4.4)
+where the max on the right hand side is realized. In particular the minimum value of (KP) is a convex
+function of (µ, ν), as it is a supremum of linear functionals.
+Deﬁnition 4.2. The functions φ realizing the maximum in (4.4) are called Kantorovich potentials for the
+transport from µ to ν (and will be often denoted by the symbol ϕ instead of φ).
+Notice that any c−concave function shares the same modulus of continuity of the cost c. Hence, if c
+is uniformly continuous (which is always the case whenever c is continuous and X is compact), one can
+get a uniform modulus of continuity for the functions in Ψc(X). This is the reason why one can prove
+existence for (DP) (which is the same of the right hand side problem in Proposition 4.1), by applying
+Ascoli-Arzel`a’s Theorem.
+We look at two interesting cases. When c(x, y) is equal to the distance d(x, y) on the metric space X,
+then we can easily see that
+φ ∈Ψc(X) ⇐⇒φ is a 1-Lipschitz function
+(4.5)
+22
+
+and
+φ ∈Ψc(X) ⇒φc = −φ.
+(4.6)
+Another interesting case is the case where X = Ω⊂Rd and c(x, y) = 1
+2|x −y|2. In this case we have
+φ ∈Ψc(X) =⇒x 7→x2
+2 −φ(x) is a convex function.
+Moreover, if X = Rd this is an equivalence.
+A consequence of (4.5) and (4.6) is that, in the case where c = d, Formula 4.4 may be re-written as
+min (KP) = max (DP) = max
+φ∈Lip1
+Z
+X
+φ d(µ −ν).
+(4.7)
+We now concentrate on the quadratic case when X is a domain Ω⊂Rd, and look at the existence of
+optimal transport maps T. From now on, we will use the word domain to denote the closure of a bounded
+and connected open set.
+The main tool is the duality result. If we have equality between the minimum of (KP) and the
+maximum of (DP) and both extremal values are realized, one can consider an optimal transport plan γ
+and a Kantorovich potential ϕ and write
+ϕ(x) + ϕc(y) ≤c(x, y) on X × X and ϕ(x) + ϕc(y) = c(x, y) on sptγ.
+The equality on sptγ is a consequence of the inequality which is valid everywhere and of
+Z
+c dγ =
+Z
+ϕ dµ +
+Z
+ϕc dν =
+Z
+(ϕ(x) + ϕc(y)) dγ,
+which implies equality γ−a.e. These functions being continuous, the equality passes to the support of
+the measure. Once we have that, let us ﬁx a point (x0, y0) ∈sptγ. One may deduce from the previous
+computations that
+x 7→ϕ(x) −1
+2|x −y0|2
+is maximal at x = x0
+and, if ϕ is diﬀerentiable at x0, one gets ∇ϕ(x0) = x0 −y0, i.e. y0 = x0 −∇ϕ(x0). This shows that only
+one unique point y0 can be such that (x0, y0) ∈sptγ, which means that γ is concentrated on a graph. The
+map T providing this graph is of the form x 7→x −∇ϕ(x) = ∇u(x) (where u(x) := x2
+2 −ϕ(x) is a convex
+function). This shows the following well-known theorem, due to Brenier ([23, 24]). Note that this also
+gives uniqueness of the optimal transport plan and of the gradient of the Kantorovich potential. The
+only technical point to let this strategy work is the µ-a.e. diﬀerentiability of the potential ϕ. Since ϕ has
+the same regularity of a convex function, and convex function are locally Lipschitz, it is diﬀerentiable
+Lebesgue-a.e., which allows to prove the following:
+Theorem 4.2. Given µ and ν probability measures on a domain Ω⊂Rd there exists an optimal transport
+plan γ for the quadratic cost 1
+2|x −y|2. It is unique and of the form (id, T)#µ, provided µ is absolutely
+continuous. Moreover there exists also at least a Kantorovich potential ϕ, and the gradient ∇ϕ is uniquely
+determined µ−a.e. (in particular ϕ is unique up to additive constants if the density of µ is positive a.e.
+on Ω). The optimal transport map T and the potential ϕ are linked by T(x) = x −∇ϕ(x). Moreover, the
+optimal map T is equal a.e. to the gradient of a convex function u, given by u(x) := x2
+2 −ϕ(x).
+23
+
+Actually, the existence of an optimal transport map is true under weaker assumptions: we can replace
+the condition of being absolutely continuous with the condition “µ(A) = 0 for any A ⊂Rd such that
+Hd−1(A) < +∞” or with any condition which ensures that the non-diﬀerentiability set of ϕ is negligible
+(and convex function are more regular than locally Lipschitz functions).
+In Theorem 4.2 only the part concerning the optimal map T is not symmetric in µ and ν: hence the
+uniqueness of the Kantorovich potential is true even if it ν (and not µ) has positive density a.e. (since one
+can retrieve ϕ from ϕc and viceversa).
+We stress that Theorem 4.2 admits a converse implication and that any gradient of a convex function
+is indeed optimal between µ and its image measure. Moreover, Theorem 4.2 can be translated in very
+easy terms in the one-dimensional case d = 1: given a non-atomic measure µ and another measure ν,
+both in P(R), there exists a unique monotone increasing transport map T such that T#µ = ν, and it is
+optimal for the quadratic cost.
+Finally, the same kind of arguments could be adapted to prove existence and uniqueness of an optimal
+map for other costs, in particular to costs of the form c(x, y) = h(x −y) for a stricty convex function
+h : Rd →R, which includes all the costs of the form c(x, y) = |x −y|p with p > 1. In the one-dimensional
+case it even happens that the same monotone increasing map is optimal for every p ≥1 (and it is the
+unique optimal map for p > 1)!
+4.2
+The Wasserstein distances
+Starting from the values of the problem (KP) in (4.2) we can deﬁne a set of distances over P(X).
+We mainly consider costs of the form c(x, y) = |x −y|p in X = Ω⊂Rd, but the analysis can be
+adapted to a power of the distance in a more general metric space X. The exponent p will always be
+taken in [1, +∞[ (we will not discuss the case p = ∞) in order to take advantage of the properties of the
+Lp norms. When Ωis unbounded we need to restrict our analysis to the following set of probabilities
+Pp(Ω) :=
+(
+µ ∈P(Ω) :
+Z
+Ω
+|x|p dµ(x) < +∞
+)
+.
+In a metric space, we ﬁx an arbitrary point x0 ∈X, and set
+Pp(X) :=
+(
+µ ∈P(X) :
+Z
+X
+d(x, x0)p dµ(x) < +∞
+)
+(the ﬁniteness of this integral does not depend on the choice of x0).
+The distances that we want to consider are deﬁned in the following way: for any p ∈[1, +∞[ set
+Wp(µ, ν) =   min (KP) with c(x, y) = |x −y|p1/p.
+The quantities that we obtain in this way are called Wasserstein distances8. They are very important
+in many ﬁelds of applications and they seem a natural way to describe distances between equal amounts
+of mass distributed on a same space.
+8They are named after L. Vaserstein (whose name is sometimes spelled Wasserstein), but this choice is highly debated, in
+particular in Russia, as the role he played in these distances is very marginal. However, this is now the standard name used
+in Western countries, probably due to the terminology used in [55, 76], even if other names have been suggested, such as
+Monge-Kantorovich distances, Kantorovich-Rubinstein. . . and we will stick to this terminology.
+24
+
+f(x)
+f(x)
+g(x)
+g(x)
+x
+T(x)
+x
+T(x)
+f
+g
+Figure 1: “Vertical” vs “horizontal” distances (the transport T is computed in the picture on the right
+using 1D considerations, imposing equality between the blue and red areas under the graphs of f and g).
+It is interesting to compare these distances to Lp distances between densities (a comparison which
+is meaningful when we consider absolutely continous measures on Rd, for instance). A ﬁrst observation
+is the very diﬀerent behavior of these two classes of distances. We could say that, if Lp distances can
+be considered “vertical”, Wasserstein distances are instead “horizontal”. This consideration is very in-
+formal, but is quite natural if one associates with every absolutely continuous measure the graph of its
+density. To compute || f −g||Lp we need to look, for every point x, at the distance between f(x) and g(x),
+which corresponds to a vertical displacement between the two graphs, and then integrate this quantity.
+On the contrary, to compute Wp( f, g) we need to consider the distance between a point x and a point T(x)
+(i.e. an horizontal displacement on the graph) and then to integrate this, for a particular pairing between
+x and T(x) which makes a coupling between f and g.
+A ﬁrst example where we can see the very diﬀerent behavior of these two ways of computing dis-
+tances is the following: take two densities f and g supported on [0, 1], and deﬁne gh as gh(x) = g(x −h).
+As soon as |h| > 1, the Lp distance between f and gh equals (|| f||p
+Lp + ||g||p
+Lp)1/p, and does not depend on
+the “spatial” information consisting in |h|. On the contrary, the Wp distance between f and gh is of the
+order of |h| (for h →∞) and depends much more on the displacement than on the shapes of f and g.
+We now analyze some properties of these distances. Most proofs can be found in [84], chapter 5, or
+in [89] or [6].
+First we underline that, as a consequence of H¨older (or Jensen) inequalities, the Wasserstein distances
+are always ordered, i.e. Wp1 ≤Wp2 if p1 ≤p2. Reversed inequalities are possible only if Ωis bounded,
+and in this case we have, if set D = diam(Ω), for p1 ≤p2,
+Wp1 ≤Wp2 ≤D1−p1/p2W p1/p2
+p1
+.
+This automatically guarantees that, if the quantities Wp are distances, then they induce the same
+topology, at least when Ωis bounded. But ﬁrst we should check that they are distances. . .
+Proposition 4.3. The quantity Wp deﬁned above is a distance over Pp(Ω).
+Proof. First, let us note that Wp ≥0. Then, we also remark that Wp(µ, ν) = 0 implies that there exists
+γ ∈Π(µ, ν) such that
+R
+|x −y|p dγ = 0. Such a γ ∈Π(µ, ν) is concentrated on {x = y}. This implies µ = ν
+since, for any test function φ, we have
+Z
+φ dµ =
+Z
+φ(x) dγ =
+Z
+φ(y) dγ =
+Z
+φ dν.
+25
+
+We need now to prove the triangle inequality. We only give a proof in the case p > 1, with absolutely
+continuous measures.
+Take three measures µ, ̺ and ν, and suppose that µ and ̺ are absolutely continuous. Let T be the
+optimal transport from µ to ̺ and S the optimal one from ̺ to ν. Then S ◦T is an admissible transport
+from µ to ν, since (S ◦T)#µ = S #(T#µ) = S #̺ = ν. We have
+Wp(µ, ν) ≤
+ Z
+|S (T(x)) −x|p dµ(x)
+! 1
+p
+=
+||S ◦T −id||Lp(µ)
+≤
+||S ◦T −T||Lp(µ) + ||T −id||Lp(µ).
+Moreover,
+||S ◦T −T||Lp(µ) =
+ Z
+|S (T(x)) −T(x)|p dµ(x)
+! 1
+p
+=
+ Z
+|S (y) −y|pd̺(y)
+! 1
+p
+and this last quantity equals Wp(̺, ν). Moreover, ||T −id||Lp(µ) = Wp(µ, ̺), whence
+Wp(µ, ν) ≤Wp(µ, ̺) + Wp(̺, ν).
+This gives the proof when µ, ̺ ≪Ld and p > 1. For the general case, an approximation is needed (but
+other arguments can also apply, see, for instance, [84], Section 5.1).
+□
+We now give, without proofs, two results on the topology induced by Wp on a general metric space
+X.
+Theorem 4.4. If X is compact, for any p ≥1 the function Wp is a distance over P(X) and the convergence
+with respect to this distance is equivalent to the weak convergence of probability measures.
+To prove that the convergence according to Wp is equivalent to weak convergence one ﬁrst establish
+this result for p = 1, through the use of the duality formula in the form (4.7). Then it is possible to use
+the inequalities between the distances Wp (see above) to extend the result to a general p.
+The case of a noncompact space X is a little more diﬃcult. As we said, the distance is only deﬁned
+on a subset of the whole space of probability measures, to avoid inﬁnite values. Set, for a ﬁxed reference
+point x0 which can be chosen to be 0 in the Euclidean space,
+mp(µ) :=
+Z
+X
+d(x, x0)pdµ(x).
+In this case, the distance Wp is only deﬁned on Pp(X) :=
+n
+µ ∈P(X) : mp(µ) < +∞
+o
+. We have
+Theorem 4.5. For any p ≥1 the function Wp is a distance over Pp(X) and, given a measure µ and a
+sequence (µn)n in Wp(X), the following are equivalent:
+• µn →µ according to Wp;
+• µn ⇀µ and mp(µn) →mp(µ);
+•
+R
+X φ dµn →
+R
+X φ dµ for any φ ∈C0(X) whose growth is at most of order p (i.e. there exist constants
+A and B depending on φ such that |φ(x)| ≤A + Bd(x, x0)p for any x).
+26
+
+After this short introduction to the metric space Wp := (Pp(X), Wp) and its topology, we will focus
+on the Euclidean case, i.e. where the metric space X is a domain Ω⊂Rd, and study the curves valued in
+Wp(Ω) in connections with PDEs.
+The main point is to identify the absolutely continuous curves in the space Wp(Ω) with solutions of
+the continuity equation ∂tµt + ∇· (vtµt) = 0 with Lp vector ﬁelds vt. Moreover, we want to connect the
+Lp norm of vt with the metric derivative |µ′|(t).
+We recall that standard considerations from ﬂuid mechanics tell us that the continuity equation above
+may be interpreted as the equation ruling the evolution of the density µt of a family of particles initially
+distributed according to µ0 and each of which follows the ﬂow
+
+y′
+x(t) = vt(yx(t))
+yx(0) = x.
+The main theorem in this setting (originally proven in [6]) relates absolutely continuous curves in Wp
+with solutions of the continuity equation:
+Theorem 4.6. Let (µt)t∈[0,1] be an absolutely continuous curve in Wp(Ω) (for p > 1 and Ω⊂Rd an open
+domain). Then for a.e. t ∈[0, 1] there exists a vector ﬁeld vt ∈Lp(µt; Rd) such that
+• the continuity equation ∂tµt + ∇· (vtµt) = 0 is satisﬁed in the sense of distributions,
+• for a.e. t we have ||vt||Lp(µt) ≤|µ′|(t) (where |µ′|(t) denotes the metric derivative at time t of the
+curve t 7→µt, w.r.t. the distance Wp);
+Conversely, if (µt)t∈[0,1] is a family of measures in Pp(Ω) and for each t we have a vector ﬁeld
+vt ∈Lp(µt; Rd) with
+R 1
+0 ||vt||Lp(µt) dt < +∞solving ∂tµt + ∇· (vtµt) = 0, then (µt)t is absolutely continuous
+in Wp(Ω) and for a.e. t we have |µ′|(t) ≤||vt||Lp(µt).
+Note that, as a consequence of the second part of the statement, the vector ﬁeld vt introduced in the
+ﬁrst part must a posteriori satisfy ||vt||Lp(µt) = |µ′|(t).
+We will not give the proof of this theorem, which is quite involved. The main reference is [6] (but
+the reader can also ﬁnd alternative proofs in Chapter 5 of [84], in the case where Ωis compact). Yet,
+if the reader wants an idea of the reason for this theorem to be true, it is possible to start from the
+case of two time steps: there are two measures µt and µt+h and there are several ways for moving the
+particles so as to reconstruct the latter from the former. It is exactly as when we look for a transport.
+One of these transports is optimal in the sense that it minimizes
+R
+|T(x) −x|pdµt(x) and the value of this
+integral equals W p
+p(µt, µt+h). If we call vt(x) the “discrete velocity of the particle located at x at time t,
+i.e. vt(x) = (T(x) −x)/h, one has ||vt||Lp(µt) = 1
+hWp(µt, µt+h). We can easily guess that, at least formally,
+the result of the previous theorem can be obtained as a limit as h →0.
+Once we know about curves in their generality, it is interesting to think about geodesics. The follow-
+ing result is a characterization of geodesics in Wp(Ω) when Ωis a convex domain in Rd. This procedure
+is also known as McCann’s displacement interpolation.
+Theorem 4.7. If Ω⊂Rd is convex, then all the spaces Wp(Ω) are length spaces and if µ and ν belong to
+Wp(Ω), and γ is an optimal transport plan from µ to ν for the cost cp(x, y) = |x −y|p, then the curve
+µγ(t) = (πt)#γ
+27
+
+where πt : Ω× Ω→Ωis given by πt(x, y) = (1 −t)x + ty, is a constant-speed geodesic from µ to ν. In
+the case p > 1 all the constant-speed geodesics are of this form, and, if µ is absolutely continuous, then
+there is only one geodesic and it has the form
+µt = [Tt]#µ,
+where Tt := (1 −t)id + tT
+where T is the optimal transport map from µ to ν. In this case, the velocity ﬁeld vt of the geodesic µt is
+given by vt = (T −id) ◦(Tt)−1. In particular, for t = 0 we have v0 = −∇ϕ and for t = 1 we have v1 = ∇ψ,
+where ϕ is the Kantorovich potential in the transport from µ to ν and ψ = ϕc.
+The above theorem may be adapted to the case where the Euclidean domain Ωis replaced by a Rie-
+mannian manifold, and in this case the map Tt must be deﬁned by using geodesics instead of segments:
+the point Tt(x) will be the value at time t of a constant-speed geodesic, parametrized on the interval [0, 1],
+connecting x to T(x). For the theory of optimal transport on manifolds, we refer to [71].
+Using the characterization of constant-speed geodesics as minimizers of a strictly convex kinetic
+energy, we can also infer the following interesting information.
+• Looking for an optimal transport for the cost c(x, y) = |x−y|p is equivalent to looking for constant-
+speed geodesic in Wp because from optimal plans we can reconstruct geodesics and from geodesics
+(via their velocity ﬁeld) it is possible to reconstruct the optimal transport;
+• constant-speed geodesics may be found by minimizing
+R 1
+0 |µ′|(t)pdt ;
+• in the case of the Wasserstein spaces, we have |µ′|(t)p =
+R
+Ω|vt|p dµt, where v is a velocity ﬁeld
+solving the continuity equation together with µ (this ﬁeld is not unique, but the metric derivative
+|µ′|(t) equals the minimal value of the Lp norm of all possible ﬁelds).
+As a consequence of these last considerations, for p > 1, solving the kinetic energy minimization
+problem
+min
+(Z 1
+0
+Z
+Ω
+|vt|pd̺t dt : ∂t̺t + ∇· (vt̺t) = 0, ̺0 = µ, ̺1 = ν
+)
+selects constant-speed geodesics connecting µ to ν, and hence allows to ﬁnd the optimal transport be-
+tween these two measures. This is what is usually called Benamou-Brenier formula ([14]).
+On the other hand, this minimization problem in the variables (̺t, vt) has non-linear constraints (due
+to the product vt̺t) and the functional is non-convex (since (t, x) 7→t|x|p is not convex). Yet, it is possible
+to transform it into a convex problem. For this, it is suﬃcient to switch variables, from (̺t, vt) into (̺t, Et)
+where Et = vt̺t, thus obtaining the following minimization problem
+min
+
+Z 1
+0
+Z
+Ω
+|Et|p
+̺p−1
+t
+dxdt : ∂t̺t + ∇· Et = 0, ̺0 = µ, ̺1 = ν
+.
+(4.8)
+We need to use the properties of the function fp : R × Rd →R ∪{+∞}, deﬁned through
+fp(t, x) :=
+sup
+(a,b)∈Kq
+(at + b · x) =
+
+1
+p
+|x|p
+tp−1
+if t > 0,
+0
+if t = 0, x = 0
++∞
+if t = 0, x , 0, or t < 0,
+28
+
+where Kq := {(a, b) ∈R × Rd : a + 1
+q|b|q ≤0} and q = p/(p −1) is the conjugate exponent of p. In
+particular, fp is convex, which makes the above minimization problem convex, and also allows to write
+what we formally wrote as
+R 1
+0
+R
+Ω
+|Et|p
+̺p−1
+t
+dxdt (an expression which implicitly assumes ̺t, Et ≪Ld) into the
+form
+Bp(̺, E) := sup
+(Z
+a d̺ +
+Z
+b · dE : (a, b) ∈C(Ω× [0, 1]; Kq)
+)
+.
+Both the convexity and this last expression will be useful for numerical methods (as it was ﬁrst done in
+[14]).
+4.3
+Minimizing movement schemes in the Wasserstein space and evolution PDEs
+Thanks to all the theory which has been described so far, it is natural to study gradient ﬂows in the space
+W2(Ω) (the reason for choosing the exponent p = 2 will be clear in a while) and to connect them to
+PDEs of the form of a continuity equation. The most convenient way to study this is to start from the
+time-discretized problem, i.e. to consider a sequence of iterated minimization problems:
+̺τ
+k+1 ∈argmin̺ F(̺) +
+W2
+2(̺, ̺τ
+k)
+2τ
+.
+(4.9)
+Note that we denote now the measures on Ωby the letter ̺ instead of µ or ν because we expect them to be
+absolutely continuous measures with nice (smooth) densities, and we want to study the PDE they solve.
+The reason to focus on the case p = 2 can also be easily understood. Indeed, from the very beginning,
+i.e. from Section 2, we saw that the equation x′ = −∇F(x) corresponds to a sequence of minimization
+problems with the squared distance |x −xτ
+k|2 (if we change the exponent here we can consider
+min
+x
+F(x) + 1
+p ·
+|x −xτ
+k|p
+τp−1
+,
+but this gives raise to the equation x′ = −|∇F(x)|q−2∇F(x), where q = p/(p−1) is the conjugate exponent
+of p), and in the Wasserstein space Wp the distance is deﬁned as the power 1/p of a transport cost; only
+in the case p = 2 the exponent goes away and we are lead to a minimization problem involving F(̺) and
+a transport cost of the form
+Tc(̺, ν) := min
+(Z
+c(x, y) dγ : γ ∈Π(̺, ν)
+)
+,
+for ν = ̺τ
+k.
+In the particular case of the space W2(Ω), which has some additional structure, if compared to ar-
+bitrary metric spaces, we would like to give a PDE description of the curves that we obtain as gradient
+ﬂows, and this will pass through the optimality conditions of the minimization problem (4.9). In order to
+study these optimality conditions, we introduce the notion of ﬁrst variation of a functional. This will be
+done in a very sketchy and formal way (we refer to Chapter 7 in [84] for more details).
+Given a functional G : P(Ω) →R we call δG
+δ̺ (̺), if it exists, the unique (up to additive constants)
+function such that d
+dεG(̺+εχ)|ε=0 =
+R δG
+δ̺ (̺)dχ for every perturbation χ such that, at least for ε ∈[0, ε0],
+29
+
+the measure ̺ + εχ belongs to P(Ω). The function δG
+δ̺ (̺) is called ﬁrst variation of the functional G at ̺.
+In order to understand this notion, the easiest possibility is to analyze some examples.
+The three main classes of examples are the following functionals9
+F (̺) =
+Z
+f(̺(x))dx,
+V(̺) =
+Z
+V(x)d̺,
+W(̺) = 1
+2
+Z Z
+W(x −y)d̺(x)d̺(y),
+where f : R →R is a convex superlinear function (and the functional F is set to +∞if ̺ is not absolutely
+continuous w.r.t. the Lebesgue measure) and V : Ω→R and W : Rd →R are regular enough (and W is
+taken symmetric, i.e. W(z) = W(−z), for simplicity). In this case it is quite easy to realize that we have
+δF
+δ̺ (̺) = f ′(̺),
+δV
+δ̺ (̺) = V,
+δW
+δ̺ (̺) = W∗̺.
+It is clear that the ﬁrst variation of a functional is a crucial tool to write optimality conditions for vari-
+ational problems involving such a functional. In order to study the problem (4.9), we need to complete
+the picture by undestanding the ﬁrst variation of functionals of the form ̺ 7→Tc(̺, ν). The result is the
+following:
+Proposition 4.8. Let c : Ω× Ω→R be a continuous cost function. Then the functional ̺ 7→Tc(̺, ν)
+is convex, and its subdiﬀerential at ̺0 coincides with the set of Kantorovich potentials {ϕ ∈C0(Ω) :
+R
+ϕ d̺0 +
+R
+ϕc dν = Tc(̺, ν)}. Moreover, if there is a unique c-concave Kantorovich potential ϕ from ̺0
+to ν up to additive constants, then we also have δTc(·,ν)
+δ̺
+(̺0) = ϕ.
+Even if a complete proof of the above proposition is not totally trivial (and Chapter 7 in [84] only
+provides it in the case where Ωis compact), one can guess why this is true from the following consider-
+ations. Start from Propositon 4.1, which provides
+Tc(̺, ν) = max
+φ∈Ψc(X)
+Z
+Ω
+φ d̺ +
+Z
+Ω
+φc dν.
+This expresses Tc as a supremum of linear functionals in ̺ and shows convexity. Standard considerations
+from convex analysis allow to identify the subdiﬀerential as the set of functions ϕ attaining the maximum.
+An alternative point of view is to consider the functional ̺ 7→
+R
+φ d̺ +
+R
+φc dν for ﬁxed φ, in which case
+the ﬁrst variation is of course φ; then it is easy to see that the ﬁrst variation of the supremum may be
+obtained (in case of uniqueness) just by selecting the optimal φ.
+Once we know how to compute ﬁrst variations, we come back to the optimality conditions for the
+minimization problem (4.9). Which are these optimality conditions? roughly speaking, we should have
+δF
+δ̺ (̺τ
+k+1) + ϕ
+τ = const
+(where the reasons for having a constant instead of 0 is the fact that, in the space of probability measures,
+only zero-mean densities are considered as admissible perturbations, and the ﬁrst variations are always
+deﬁned up to additive constants). Note that here ϕ is the Kantorovich potential associated with the
+transport from ̺τ
+k+1 to ̺τ
+k (and not viceversa).
+9Note that in some cases the functionals that we use are actually valued in R ∪{+∞}, and we restrict to a suitable class of
+perturbations χ which make the corresponding functional ﬁnite.
+30
+
+More precise statements and proofs of this optimality conditions will be presented in the next section.
+Here we look at the consequences we can get. Actually, if we combine the fact that the above sum is
+constant, and that we have T(x) = x −∇ϕ(x) for the optimal T, we get
+−v(x) := T(x) −x
+τ
+= −∇ϕ(x)
+τ
+= ∇ δF
+δ̺ (̺)(x).
+(4.10)
+We will denote by −v the ratio T(x)−x
+τ
+. Why? because, as a ratio between a displacement and a time step,
+it has the meaning of a velocity, but since it is the displacement associated to the transport from ̺τ
+k+1 to
+̺τ
+k, it is better to view it rather as a backward velocity (which justiﬁes the minus sign).
+Since here we have v = −∇ δF
+δ̺ (̺)), this suggests that at the limit τ →0 we will ﬁnd a solution of
+∂t̺ −∇·
+ 
+̺ ∇
+ δF
+δ̺ (̺)
+!!
+= 0.
+(4.11)
+This is a PDE where the velocity ﬁeld in the continuity equation depends on the density ̺ itself. An
+interesting example is the case where we use F(̺) =
+R
+f(̺(x))dx, with f(t) = t log t. In such a case we
+have f ′(t) = log t + 1 and ∇( f ′(̺)) = ∇̺
+̺ : this means that the gradient ﬂow equation associated to the
+functional F would be the Heat Equation ∂̺ −∆̺ = 0. Using F(̺) =
+R
+f(̺(x))dx +
+R
+V(x)d̺(x), we
+would have the Fokker-Planck Equation ∂̺−∆̺−∇·(̺∇V) = 0. We will see later which other interesting
+PDEs can be obtained in this way.
+Many possible proofs can be built for the convergence of the above iterated minimization scheme.
+In particular, one could follow the general theory developed in [6], i.e. checking all the assumptions to
+prove existence and uniqueness of an EVI gradient ﬂow for the functional F in the space W2(Ω), and
+then characterizing the velocity ﬁeld that Theorem 4.6 associates with the curve obtained as a gradient
+ﬂow. In [6], it is proven, under suitable conditions, that such a vector ﬁeld vt must belong to what is
+deﬁned as the Wasserstein sub-diﬀerential of the functional F, provided in particular that F is λ-convex.
+Then, the Wasserstein sub-diﬀerential is proven to be of the desired form (i.e. composed only of the
+gradient of the ﬁrst variation of F, when F admits a ﬁrst variation).
+This approach has the advantage to use a general theory and to adapt it to the scopes of this particular
+setting. On the other hand, some considerations seem necessary:
+• the important point when studying these PDEs is that the curves (̺t)t obtained as a limit are true
+weak solutions of the continuity equations; from this point of view, the notions of EDE and EVI
+solutions and the formalism developed in the ﬁrst part of the book [6] (devoted to the general
+metric case) are not necessary; if the second part of [6] is exactly concerned with Wasserstein
+spaces and with the caracterization of the limit as τ →0 as the solution of a PDE, we can say that
+the whole formalism is sometimes too heavy.
+• after using optimal transport thery to select a suitable distance in the discrete scheme above and a
+suitable interpolation, the passage to the limit can be done by classical compactness techniques in
+the space of measures and in functional analysis; on the other hand, there are often some diﬃculties
+in handling some non-linear terms, which are not always seen when using the theory of [6] (which
+is an advantage of this general theory).
+31
+
+• the λ-convexity assumption is in general not crucial in what concerns existence (but the general
+theory in [6] has been built under this assumption, as we saw in Section 3).
+• as far as uniqueness of the solution is concerned, the natural point of view in the applications
+would be to prove uniqueness of the weak solution of the equation (or, possibly, to deﬁne a more
+restrictive notion of solution of the PDE for which one can prove uniqueness), and this is a priori
+very diﬀerent from the EDE or EVI notions. To this aim, the use of the Wasserstein distance can
+be very useful, as one can often prove uniqueness by diﬀerentiating in time the distance between
+two solutions, and maybe apply a Gronwall lemma (and this can be done independently of the
+EVI notion; see for instance the end of section 4.4). On the other hand, uniqueness results are
+almost never possible without some kind of λ-convexity (or weaker versions of it, as in [36]) of
+the functional.
+For the reader who wants an idea of how to prove convergence of the scheme to a solution of the
+PDE independently of the EDE/EVI theory, here are some sketchy ideas. Everything will be developed
+in details in Section 4.5 in a particular case.
+The main point lies in the interpolation of the sequence ̺τ
+k (and of the corresponding velocities vτ
+k).
+Indeed, two possible interpolations turn out to be useful: on the one hand, we can deﬁne an interpolation
+(̺τ, vτ) which is piecewise constant, as in (2.10) (to deﬁne vτ we use ∇ϕ/τ); on the other hand, we can
+connect each measure ̺τ
+k to ̺τ
+k+1 by using a piecewise geodesic curve ˜̺τ, where geodesics are chosen
+according to the Wasserstein metric, using Theorem (4.7) to get an explicit expression. This second
+interpolation is a Lipschitz curve in W2(Ω), and has an explicit velocity ﬁeld, that we know thanks to
+Theorem (4.7): we call it ˜vτ and it is related to vτ. The advantage of the second interpolation is that
+(˜̺τ, ˜vτ) satisﬁes the continuity equation. On the contrary, the ﬁrst interpolation is not continuous, the
+continuity equation is not satisﬁed, but the optimality conditions at each time step provide a connection
+between vτ and ̺τ (vτ = −∇ δF
+δ̺ (̺τ))),which is not satisﬁed with ˜̺τ and ˜vτ. It is possible to prove that
+the two interpolations converge to the same limit as τ →0, and that the limit will satisfy a continuity
+equation with a velocity vector ﬁeld v = −∇  δF
+δ̺ (̺)), which allows to conclude.
+4.4
+Geodesic convexity in W2
+Even if we insisted on the fact that the most natural approach to gradient ﬂows in W2 relies on the notion
+of weak solutions to some PDEs and not on the EDE/EVI formulations, for sure it could be interesting to
+check whether the general theory of Section 3 could be applied to some model functionals on the space
+of probabilities, such as F , V or W. This requires to discuss their λ-convexity, which is also useful
+because it can provide uniqueness results. As we now know the geodesics in the Wasserstein space, the
+question of which functionals are geodesically convex is easy to tackle. The notion of geodesic convexity
+in the W2 space, aslo called displacement convexity, has ﬁrst been introduced by McCann in [69].
+Displacement convexity of F , V and W.
+It is not diﬃcult to check that the convexity of V is enough
+to guarantee geodesic convexity of V, since
+V(µt) =
+Z
+V d (1 −t)id + tT
+#µ =
+Z
+V (1 −t)x + tT(x)dµ,
+32
+
+as well as the convexity of W guarantees that of W:
+W(µt)
+=
+Z
+W(x −y) d
+ (1 −t)id + tT
+#µ ⊗  (1 −t)id + tT
+#µ
+
+(x, y)
+=
+Z
+W (1 −t)x + tT(x), (1 −t)y + tT(y)d(µ ⊗µ).
+Similarly, if V or W are λ-convex we get λ-geodesical convexity. Note that in the case of V it is easy to
+see that the λ-convexity of V is also necessary for the λ-geodesical convexity of V, while the same is not
+true for W and W.
+The most interesting displacement convexity result is the one for functionals depending on the den-
+sity. To consider these functionals, we need some technical facts.
+The starting point is the computation of the density of an image measure, via standard change-of-
+variable techniques: if T : Ω→Ωis a map smooth enough10 and injective, and det(DT(x)) , 0 for a.e.
+x ∈Ω, if we set ̺T := T#̺, then ̺T is absolutely continuous with density given by
+̺T =
+̺
+det(DT) ◦T −1.
+Then, we underline an interesting computation, which can be proven as an exercice.
+Lemma 4.9. Let A be a d × d matrix such that its eigenvalues λi are all real and larger than −1 (for
+instance this is the case when A is symmetric and I + A ≥0). Then [0, 1] ∋t 7→g(t) := det(I + tA)1/d is
+concave.
+We can now state the main theorem.
+Theorem 4.10. Suppose that f(0) = 0 and that s 7→sd f(s−d) is convex and decreasing. Suppose that Ω
+is convex and take 1 < p < ∞. Then F is geodesically convex in W2.
+Proof. Let us consider two measures µ0, µ1 with F (µ0), F (µ1) < +∞. They are absolutely continuous
+and hence there is a unique constant-speed geodesic µt between them, which has the form µt = (Tt)#µ0,
+where Tt = id + t(T −id). Note that we have Tt(x) = x −t∇ϕ(x), where ϕ is such that x2
+2 −ϕ is
+convex. This implies that D2ϕ ≤I and Tt is, for t < 1, the gradient of a strictly convex function, hence
+it is injective. Moreover ∇ϕ is countably Lipschitz, and so is Tt. From the formula for the density
+of the image measure, we know that µt is absolutely continuous and we can write its density ̺t as
+̺t(y) = ̺(T −1
+t (y))/ det(I + tA(T −1
+t (y))), where A = −D2ϕ and ̺ is the density of µ, and hence
+F (µt) =
+Z
+f
+ 
+̺(T −1
+t (y)))
+det(I + tA(T −1
+t (y)))
+!
+dy =
+Z
+f
+ 
+̺(x)
+det(I + tA(x)
+!
+det(I + tA(x)) dx,
+where we used the change of variables y = Tt(x) and dy = det DTt(x) dx = det(I + tA(x)) dx.
+From Lemma 4.9 we know that det(I + tA(x)) = g(t, x)d for a function g : [0, 1] × Ωwhich is concave
+in t. It is a general fact that the composition of a convex and decreasing function with a concave one
+gives a convex function. This implies that
+t 7→f
+ ̺(x)
+g(t, x)d
+!
+g(t, x)d
+10We need at least T to be countably Lipschitz, i.e. Ωmay be written as a countable union of measurable sets (Ωi)i≥0 with
+Ω0 negligible and T
+Ωi Lipschitz continuous for every i ≥1.
+33
+
+is convex (if ̺(x) , 0 this uses the assumption on f and the fact that t 7→g(t, x)/̺(x)
+1
+d is concave; if
+̺(x) = 0 then this function is simply zero). Finally, we proved convexity of t 7→F (µt).
+□
+Remark 4.1. Note that the assumption that s 7→sd f(s−d) is convex and decreasing implies that f itself is
+convex (the reader can check it as an exercise), a property which can be useful to establish, for instance,
+lower semicontinuity of F .
+Let us see some easy examples of convex functions satisfying the assumptions of Theorem 4.10:
+• for any q > 1, the function f(t) = tq satisﬁes these assumptions, since sd f(s−d) = s−d(q−1) is
+convex and decreasing;
+• the entropy function f(t) = t log t also satisﬁes the assumptions since sd f(s−d) = −d log s is convex
+and decreasing;
+• if 1 −1
+d ≤m < 1 the function f(t) = −tm is convex, and if we compute sd f(s−d) = −tm(1−d) we get
+a convex and decreasing function since m(1 −d) < 1. Note that in this case f is not superlinear,
+which requires some attention for the semicontinuity of F .
+Convexity on generalized geodesics.
+It is quite disappointing to note that the functional µ 7→W2
+2(µ, ν)
+is not, in general, displacement convex. This seems contrary to the intuition because usually squared
+distances are nice convex functions11. However, we can see that this fails from the following easy
+example. Take ν = 1
+2δ(1,0) + 1
+2δ(−1,0) and µt = 1
+2δ(t,a) + 1
+2δ(−t,−a). If a > 1, the curve µt is the geodesic
+between µ−1 and µ1 (because the optimal transport between these measures sends (a, −1) to (a, 1) and
+(−a, 1) to (−a, −1). Yet, if we compute W2
+2(µt, ν) we have
+W2
+2(µt, ν) = a2 + min{(1 −t)2, (1 + t)2}.
+But this function is not convex! (see Figure 2)
+•ν
+•ν
+•µ1
+•
+µ1
+•
+µ−1
+•µ−1
+•µt
+•µt
+−1
+1 t
+a2 + min{(t −1)2, (t + 1)2}
+Figure 2: The value of W2
+2(µt, ν).
+11Actually, this is true in normed spaces, but not even true in Riemannian manifolds, as it depends on curvature properties.
+34
+
+The lack of geodesic convexity of this easy functional12 is a problem for many issues, and in partic-
+ular for the C2G2 condition, and an alternate notion has been proposed, namely that of convexity along
+generalized geodesics.
+Deﬁnition 4.3. If we ﬁx an absolutely continuous probability ̺ ∈P(Ω), for every pair µ0, µ1 ∈P(Ω) we
+call generalized geodesic between µ0 and µ1 with base ̺ in W2(Ω) the curve µt = ((1 −t)T0 + tT1)#̺,
+where T0 is the optimal transport map (for the cost |x −y|2) from ̺ to µ0, and T1 from ̺ to µ1.
+It is clear that t 7→W2
+2(µt, ̺) satisﬁes
+W2
+2(µt, ̺)
+≤
+Z
+|((1 −t)T0(x) + tT1(x)) −x|2d̺(x)
+≤
+(1 −t)
+Z
+|T0(x) −x|2d̺(x) + t
+Z
+|T1(x) −x|2d̺(x) = (1 −t)W2
+2(µ0, ̺) + tW2
+2(µ1, ̺)
+and hence we have the desired convexity along this curve. Moreover, similar considerations to those we
+developed in this section show that all the functionals that we proved to be geodesically convex are also
+convex along generalized geodesics. For the case of functionals V and W this is easy, while for the case
+of the functional F , Lemma 4.9 has to be changed into “t 7→det((1 −t)A + tB)1/d is concave, whenever
+A and B are symmetric and positive-deﬁnite” (the proof is similar). We do not develop these proofs here,
+and we refer to [6] or Chapter 7 in [84] for more details.
+Of course, we could wonder whether the assumption C2G2 is satisﬁed in the Wasserstein space
+W2(Ω) for these functionals F , V and W: actually, if one looks closer at this questions, it is possible to
+see that the very deﬁnition of C2G2 has been given on purpose in order to face the case of Wasserstein
+spaces. Indeed, if we ﬁx ν ∈P(Ω) and take µ0, µ1 two other probabilities, with T0, T1 the optimal
+transports from ν to µ0 and µ1, respectively, then the curve
+µt := ((1 −t)T0 + tT1)#ν
+(4.12)
+connects µ0 to µ1 and can be used in C2G2.
+Displacement convexity and curvature conditions.
+In the proof of the geodesic convexity of the
+functional F we strongly used the Euclidean structure of the geodesics in the Wasserstein space. The
+key point was form of the intermediate map Tt: a linear interpolation between the identity map id and
+the optimal map T, together with the convexity properties of t 7→det(I + tA)1/d. On a Riemannian
+manifold, this would completely change as the geodesic curves between x and T(x), which are no more
+segments, could concentrate more or less than what happens in the Euclidean case, depending on the
+curvature of the manifold (think at the geodesics on a sphere connecting points close to the North Pole
+to points close to the South Pole: they are much farther from each other at their middle points than at
+their endpoints). It has been found (see [79]) that the condition of λ-geodesic convexity of the Entropy
+functional ̺ 7→
+R
+̺ log(̺)dVol (where ̺ is absolutely continuous w.r.t. the volume meaure Vol and
+densities are computed accordingly) on a manifold characterizes a lower bound on its Ricci curvature:
+12By the way, this functional can even be proven to be somehow geodetically concave, as it is shown in [6], Theorem 7.3.2.
+35
+
+Proposition 4.11. Let M be a compact manifold of dimension d and Vol its volume measure. Let E be
+the entropy functional deﬁned via E(̺) =
+R
+̺ log ̺ dVol for all measures ̺ ≪Vol (set to +∞on non-
+absolutely continuous measures). Then E is λ-geodesically convex in the Wasserstein space W2(M) if
+and only if the Ricci curvature RicM satisﬁes RicM ≥λ. In the case λ = 0, the same equivalence is true
+if one replaces the entropy function f(t) = t log t with the function fN(t) = −t1−1/N with N ≥d.
+This fact will be the basis (we will see it in Section 5) of a deﬁnition based on optimal transport of
+the notion of Ricci curvature bounds in more abstract spaces, a deﬁnition independently proposed in two
+celebrated papers by Sturm, [87] and Lott and Villani, [63].
+Remark 4.2. The reader who followed the ﬁrst proofs of this section has for sure observed that it is easy,
+in the space W2(Ω), to produce λ-geodesically convex functionals which are not geodesically convex
+(with λ < 0, of course), of the form V (just take a λ-convex function V which is not convex), but
+that Theorem 4.10 only provides geodesic convexity (never provides λ-convexity without convexity) for
+functionals of the form F : this is indeed speciﬁc to the Euclidean case, where the optimal transport
+has the form T(x) = x −∇ϕ(x); in Riemannian manifolds or other metric measure spaces, this can be
+diﬀerent!
+Geodesic convexity and uniqueness of gradient ﬂows.
+The fact that λ-convexity is a crucial tool to
+establish uniqueness and stability results in gradient ﬂows is not only true in the abstract theory of Section
+3, where we saw that the EVI condition (intimately linked to λ-convexity) provides stability. Indeed, it
+can also be observed in the concrete case of gradient ﬂows in W2(Ω), which take the form of the PDE
+(4.11). We will see this fact via some formal considerations, starting from an interesting lemma:
+Lemma 4.12. Suppose that F : W2(Ω) →R ∪{+∞} is λ-geodesically convex. Then, for every ̺0, ̺1 ∈
+P(Ω) for which the integrals below are well-deﬁned, we have
+Z
+∇ϕ · ∇
+ δF
+δ̺ (̺0)
+!
+d̺0 +
+Z
+∇ψ · ∇
+ δF
+δ̺ (̺1)
+!
+d̺1 ≥λW2
+2(̺0, ̺1),
+where ϕ is the Kantorovich potential in the transport from ̺0 to ̺1 and ψ = ϕc is the Kantorovich
+potential from ̺1 to ̺0.
+Proof. Let ̺t be the the geodesic curve in W2(Ω) connecting ̺0 to ̺1 and g(t) := F(̺t). The assumption
+of λ-convexity means (see the deﬁnition in (3.2))
+g(t) ≤(1 −t)g(0) + tg(1) −λ
+2t(1 −t)W2
+2(̺0, ̺1).
+Since the above inequality is an equality for t = 0, 1, we can diﬀerentiate it at these two points thus
+obtaining
+g′(0) ≤g(1) −g(0) −λ
+2W2
+2(̺0, ̺1),
+g′(1) ≥g(1) −g(0) + λ
+2W2
+2(̺0, ̺1),
+which implies
+g′(0) −g′(1) ≤−λW2
+2(̺0, ̺1).
+Then, we compute the derivative of g, formally obtaining
+g′(t) =
+Z δF
+δ̺ (̺t)∂t̺t = −
+Z δF
+δ̺ (̺t)∇· (vt̺t) =
+Z
+∇
+ δF
+δ̺ (̺t)
+!
+· vt d̺t,
+36
+
+and, using v0 = −∇ϕ and v1 = ∇ψ, we obtain the claim.
+□
+With the above lemma in mind, we consider two curves ̺0
+t and ̺1
+t , with
+∂t̺i
+t + ∇· (̺i
+tvi
+t) = 0
+for i = 0, 1,
+where the vector ﬁelds vi
+t are their respective velocty ﬁelds provided by Theorem 4.6. Setting d(t) :=
+1
+2W2
+2(̺0
+t , ̺1
+t ), it is natural to guess that we have
+d′(t) =
+Z
+∇ϕ · v0
+t d̺0
+t +
+Z
+∇ψ · v1
+t d̺1
+t ,
+where ϕ is the Kantorovich potential in the transport from ̺0
+t to ̺1
+t and ψ = ϕc. Indeed, a rigorous proof
+is provided in [6] or in Section 5.3.5 of [84], but one can guess it from the duality formula
+d(t) = max
+(Z
+φ d̺0
+t +
+Z
+ψ d̺1
+t : φ(x)+ψ(y) ≤1
+2|x −y|2)
+)
+.
+As usual, diﬀerentiating an expression written as a max involves the optimal functions φ, ψ in such a
+max, and the terms ∂t̺i
+t have been replaced by −∇· (̺i
+tvi
+t) as in the proof Lemma 4.12.
+When the two curves ̺0
+t and ̺1
+t are solutions of (4.11) we have vi
+t = −∇
+ δF
+δ̺ (̺i
+t)
+
+, and Lemma 4.12
+allows to obtain the following:
+Proposition 4.13. Suppose that F : W2(Ω) →R∪{+∞} is λ-geodesically convex and that the two curves
+̺0
+t and ̺1
+t are solutions of (4.11). Then, setting d(t) := 1
+2W2
+2(̺0
+t , ̺1
+t ), we have
+d′(t) ≤−λd(t).
+This implies uniqueness of the solution of (4.11) for ﬁxed initial datum, stability, and exponential con-
+vergence as t →+∞if λ > 0.
+4.5
+Analysis of the Fokker-Planck equation as a gradient ﬂow in W2
+This section will be a technical parenthesis providing proof details in a particular case study, that of the
+Fokker-Planck equation, which is the gradient ﬂow of the functional
+J(̺) =
+Z
+Ω
+̺ log ̺ +
+Z
+Ω
+Vd̺,
+where V is a C1 function13 on a domain Ω, that we will choose compact for simplicity. The initial
+measure ̺0 ∈P(Ω) is taken such that J(̺0) < +∞.
+We stress that the ﬁrst term of the functional is deﬁned as
+E(̺) :=
+
+R
+Ω̺(x) log ̺(x) dx
+if ̺ ≪Ld,
++∞
+otherwise,
+where we identify the measure ̺ with its density, when it is absolutely continuous. This functional is l.s.c.
+for the weak topology of measures (for general references on the semicontinuity of convex functionals
+on the space of measures we refer to Chapter 7 in [84] or to [27]), which is equivalent, on the compact
+domain Ω, to the W2 convergence. Semi-continuity allows to establish the following:
+13The equation would also be meaningful for V only Lipschitz continuous, but we prefer to stick to the C1 case for simplicity.
+37
+
+Proposition 4.14. The functional J has a unique minimum over P(Ω). In particular J is bounded from
+below. Moreover, for each τ > 0 the following sequence of optimization problems recursively deﬁned is
+well-posed
+̺τ
+(k+1) ∈argmin̺
+J(̺) +
+W2
+2(̺, ̺τ
+(k))
+2τ
+,
+(4.13)
+which means that there is a minimizer at every step, and this minimizer is unique.
+Proof. Just apply the direct method, noting that P(Ω) is compact for the weak convergence, which is the
+same as the convergence for the W2 distance (again, because Ωis compact), and for this convergence F
+is l.s.c. and the other terms are continuous. This gives at the same time the existence of a minimizer for
+J and of a solution to each of the above minimization problems (4.13). Uniqueness comes from the fact
+that all the functionals are convex (in the usual sense) and F is strictly convex.
+□
+Optimality conditions at each time step.
+A ﬁrst preliminary result we need is the following :
+Lemma 4.15. Any minimizer b̺ in (4.13) must satisfy b̺ > 0 a.e.
+Proof. Consider the measure e̺ with constant positive density c in Ω(i.e. c = |Ω|−1). Let us deﬁne ̺ε as
+(1 −ε)b̺ + εe̺ and compare b̺ to ̺ε.
+By optimality of b̺, we may write
+E(b̺) −E(̺ε) ≤
+Z
+Ω
+Vd̺ε −
+Z
+Ω
+Vdb̺ +
+W2
+2(̺ε, ̺τ
+(k))
+2τ
+−
+W2
+2(b̺, ̺τ
+(k))
+2τ
+.
+(4.14)
+The two diﬀerences in the right hand side may be easily estimated (by convexity, for instance) so that we
+get (for a constant C depending on τ, of course):
+Z
+Ω
+f(b̺) −f(̺ε) ≤Cε
+where f(t) = t log t (set to 0 in t = 0). Write
+A = {x ∈Ω: b̺(x) > 0},
+B = {x ∈Ω: b̺(x) = 0}.
+Since f is convex we write, for x ∈A, f(b̺(x)) −f(̺ε(x)) ≥(b̺(x) −̺ε(x)) f ′(̺ε(x)) = ε(b̺(x) −e̺(x))(1 +
+log ̺ε(x)). For x ∈B we simply write f(b̺(x)) −f(̺ε(x)) = −εc log(εc). This allows to write
+−εc log(εc)|B| + ε
+Z
+A
+(b̺(x) −c)(1 + log ̺ε(x)) dx ≤Cε
+and, dividing by ε,
+−c log(εc)|B| +
+Z
+A
+(b̺(x) −c)(1 + log ̺ε(x)) dx ≤C
+(4.15)
+Note that the always have
+(b̺(x) −c)(1 + log ̺ε(x)) ≥(b̺(x) −c)(1 + log c)
+(just distinguish between the case b̺(x) ≥c and b̺(x) ≤c). Thus, we may write
+−c log(εc)|B| +
+Z
+A
+(b̺(x) −c)(1 + log c) dx ≤C.
+Letting ε →0 provides a contradiction, unless |B| = 0.
+□
+38
+
+Remark 4.3. If, after proving |B| = 0, we go on with the computations (as it is actually done in Chapter
+8 in [84]), we can also obtain logb̺ ∈L1, which is a stronger condition than just b̺ > 0 a.e.
+We can now compute the ﬁrst variation and give optimality conditions on the optimal ̺τ
+(k+1).
+Proposition 4.16. The optimal measure ̺τ
+(k+1) in (4.13) satisﬁes
+log(̺τ
+(k+1)) + V + ϕ
+τ = const. a.e.
+(4.16)
+where ϕ is the (unique) Kantorovich potential from ̺τ
+(k+1) to ̺τ
+(k). In particular, log ̺τ
+(k+1) is Lipschitz
+continuous. If T τ
+k is the optimal transport from ̺τ
+(k+1) to ̺τ
+(k), then it satisﬁes
+vτ
+(k) :=
+id −T τ
+k
+τ
+= −∇
+
+log(̺τ
+(k+1)) + V
+
+a.e.
+(4.17)
+Proof. Take the optimal measure b̺ := ̺τ
+(k+1). We can check that all the functionals involved in the
+minimization admit a ﬁrst variation at b̺. For the linear term it is straightforward, and for the Wasserstein
+term we can apply Proposition 4.8. The uniqueness of the Kantorovich potential is guaranteed by the fact
+that b̺ is strictly positive a.e. on the domain Ω(Lemma 4.15). For the entropy term, the integrability of
+logb̺ provided in the previous remark allows (computations are left to the reader) to diﬀerentiate under
+the integral sign for smooth perturbations.
+The ﬁrst variation of J is hence
+δJ
+δ̺ = f ′(̺) + V = log(̺) + 1 + V.
+Using carefully (details are in Chapter 8 of [84]) the optimality conditions, we obtain Equation (4.16),
+which is valid a.e. since b̺ > 0. In particular, this implies that ̺τ
+(k+1) is Lipschitz continuous, since we
+have
+̺τ
+(k+1)(x) = exp
+ 
+C −V(x) −ϕ(x)
+τ
+!
+.
+Then, one diﬀerentiates and gets the equality
+∇ϕ =
+id −T τ
+k
+τ
+= −∇
+
+log(̺τ
+(k+1)) + V
+
+a.e.
+and this allows to conclude.
+□
+Interpolation between time steps and uniform estimates
+Let us collect some other tools
+Proposition 4.17. For any τ > 0, the sequence of minimizers satisﬁes
+X
+k
+W2
+2(̺τ
+(k+1), ̺τ
+(k))
+τ
+≤C := 2(J(̺0) −inf J).
+Proof. This is just the standard estimate in the minimizing movement scheme, corresponding to what we
+presented in (2.5) in the Euclidean case.
+□
+39
+
+Let us deﬁne two interpolations between the measures ̺τ
+(k).
+With this time-discretized method, we have obtained, for each τ > 0, a sequence (̺τ
+(k))k. We can use
+it to build at least two interesting curves in the space of measures:
+• ﬁrst we can deﬁne some piecewise constant curves, i.e. ̺τ
+t := ̺τ
+(k+1) for t ∈]kτ, (k + 1)τ]; associated
+to this curve we also deﬁne the velocities vτ
+t = vτ
+(k+1) for t ∈]kτ, (k + 1)τ], where vτ
+(k) is deﬁned as
+in (4.17): vτ
+(k) = (id −T τ
+k)/τ, taking as T τ
+k the optimal transport from ̺τ
+(k+1) to ̺τ
+(k); we also deﬁne
+the momentum variable Eτ = ̺τvτ;
+• then, we can also consider the densitiese̺τ
+t that interpolate the discrete values (̺τ
+(k))k along geodesics:
+e̺τ
+t =
+ kτ −t
+τ
+vτ
+(k) + id
+!
+#
+̺τ
+(k), for t ∈](k −1)τ, kτ[;
+(4.18)
+the velocities evτ
+t are deﬁned so that (e̺τ,evτ) satisfy the continuity equation and ||evτ
+t ||L2(e̺τ
+t ) = |(e̺τ)′|(t).
+To do so, we take
+evτ
+t = vτ
+t ◦
+
+(kτ −t)vτ
+(k) + id
+−1 ;
+as before, we deﬁne a momentum variable: eEτ = e̺τevτ.
+After these deﬁnitions we consider some a priori bounds on the curves and the velocities that we
+deﬁned. We start from some estimates which are standard in the framework of Minimizing Movements.
+Note that the velocity (i.e. metric derivative) of e̺τ is constant on each interval ]kτ, (k+1)τ[ and equal
+to
+W2(̺τ
+(k+1), ̺τ
+(k))
+τ
+= 1
+τ
+ Z
+|id −T τ
+k|2d̺τ
+(k+1)
+!1/2
+= ||vτ
+k+1||L2(̺τ
+(k+1)),
+which gives
+||evτ
+t ||L2(e̺τ
+t ) = |(e̺τ)′|(t) =
+W2(̺τ
+(k+1), ̺τ
+(k))
+τ
+= ||vτ
+t ||L2(̺τ
+t ),
+where we used the fact that the velocity ﬁeld evτ has been chosen so that its L2 norm equals the metric
+derivative of the curve e̺τ.
+In particular we can obtain
+|Eτ|([0, T] × Ω)
+=
+Z T
+0
+dt
+Z
+Ω
+|vτ
+t |d̺τ
+t =
+Z T
+0
+||vτ
+t ||L1(̺τ
+t )dt ≤
+Z T
+0
+||vτ
+t ||L2(̺τ
+t )dt
+≤
+T 1/2
+Z T
+0
+||vτ
+t ||2
+L2(̺τ
+t )dt = T 1/2 X
+k
+τ
+
+W2(̺τ
+(k+1), ̺τ
+(k))
+τ
+
+2
+≤C.
+The estimate on eEτ is completely analogous
+|eEτ|([0, T] × Ω) =
+Z T
+0
+dt
+Z
+Ω
+|evτ
+t |de̺τ
+t ≤T 1/2
+Z T
+0
+||evτ
+t ||2
+L2(e̺τ
+t )dt = T 1/2 X
+k
+τ
+
+W2(̺τ
+(k+1), ̺τ
+(k))
+τ
+
+2
+≤C.
+40
+
+This gives compactness of Eτ and eEτ in the space of vector measures on space-time, for the weak con-
+vergence. As far as e̺τ is concerned, we can obtain more than that. Consider the following estimate, for
+s < t
+W2(e̺τ
+t ,e̺τ
+s) ≤
+Z t
+s
+|(e̺τ)′|(r)dr ≤(t −s)1/2
+ Z t
+s
+|(e̺τ)′|(r)2dr
+!1/2
+.
+From the previous computations, we have again
+Z T
+0
+|(e̺τ)′|(r)2dr =
+X
+k
+τ
+
+W2(̺τ
+(k+1), ̺τ
+(k))
+τ
+
+2
+≤C,
+and this implies
+W2(e̺τ
+t ,e̺τ
+s) ≤C(t −s)1/2,
+(4.19)
+which means that the curves e̺τ are uniformly H¨older continuous. Since they are deﬁned on [0, T] and
+valued in W2(Ω) which is compact, we can apply the Ascoli Arzel`a Theorem. This implies that, up to
+subsequences, we have
+Eτ ⇀E in Md([0, T] × Ω), eEτ ⇀eE in Md([0, T] × Ω);
+e̺τ →̺ uniformly for the W2 distance.
+The limit curve ̺, from the uniform bounds one̺τ, is both 1
+2-H¨older continuous and absolutely continuous
+in W2. As far as the curves ̺τ are concerned, they also converge uniformly to the same curve ̺, since
+W2(̺τ
+t ,e̺τ
+t ) ≤C √τ (a consequence of (4.19), of the fact that e̺τ = ̺τ on the points of the form kτ and of
+the fact that ̺τ is constant on each interval ]kτ, (k + 1)τ]).
+Let us now prove that eE = E.
+Lemma 4.18. Suppose that we have two families of vector measures Eτ and eEτ such that
+• eEτ = e̺τevτ; Eτ = ̺τvτ;
+• evτ
+t = vτ
+t ◦
+
+(kτ −t)vτ
+(k) + id
+−1; e̺τ =
+
+(kτ −t)vτ
+(k) + id
+
+# ̺τ;
+•
+RR
+|vτ|2d̺τ ≤C (with C independent of τ);
+• Eτ ⇀E and eEτ ⇀eE as τ →0
+Then eE = E.
+Proof. It is suﬃcient to ﬁx a Lipschitz function f : [0, T] × Ω→Rd and to prove
+R
+f · dE =
+R
+f · deE.
+To do that, we write
+Z
+f · deEτ =
+Z T
+0
+dt
+Z
+Ω
+f ·evτ
+t de̺τ =
+Z T
+0
+dt
+Z
+Ω
+f ◦ (kτ −t)vτ + id · vτ
+t d̺τ,
+which implies
+
+Z
+f · deEτ −
+Z
+f · dEτ
+ ≤
+Z T
+0
+dt
+Z
+Ω
+ f ◦ (kτ −t)vτ+id −f
+ |vτ
+t |d̺τ ≤Lip( f)τ
+Z T
+0
+Z
+Ω
+|vτ
+t |2d̺τ ≤Cτ.
+This estimate proves that the limit of
+R
+f · deEτ and
+R
+f · dEτ is the same, i.e. E = eE.
+□
+41
+
+Relation between ̺ and E
+We can obtain the following:
+Proposition 4.19. The pair (̺, E) satisﬁes, in distributional sense
+∂t̺ + ∇· E = 0,
+E = −∇̺ −̺∇V,
+with no-ﬂux boundary conditions on ∂Ω. In particular we have found a solution to
+
+∂t̺ −∆̺ −∇· (̺∇V) = 0,
+(∇̺ + ̺∇V) · n = 0,
+̺(0) = ̺0,
+where the initial datum is to be intended in the following sense: the curve t 7→̺t is (absolutely) continu-
+ous in W2, and its initial value is ̺0.
+Proof. First, consider the weak convergence (e̺τ, eEτ) ⇀(̺, E) (which is a consequence of eE = E). The
+continuity equation ∂te̺τ + ∇· eEτ = 0 is satisﬁed by construction in the sense of distributions, and this
+passes to the limit. Hence, ∂t̺ + ∇· E = 0. The continuity in W2 and the initial datum pass to the limit
+because of the uniform C0,1/2 bound in (4.19).
+Then, use the convergence (̺τ, Eτ) ⇀(̺, E). Actually, using the optimality conditions of Proposition
+4.16 and the deﬁnition of Eτ = vτ̺τ, we have, for each τ > 0, Eτ = −∇̺τ −̺τ∇V (note that ̺τ
+is Lipschitz continuous for ﬁxed τ > 0, which allows to write this equality, exploiting in particular
+∇̺τ = ̺τ∇(log(̺τ)), which would have no meaning for less regular measures; this regularity could be,
+of course, lost in the limit τ →0). It is not diﬃcult to pass this condition to the limit either (but now ∇̺
+will have to be intended in the sense of distributions). Take f ∈C1
+c(]0, T[×Ω; Rd) and test:
+Z
+f · dEτ = −
+Z
+f · ∇̺τ −
+Z
+f · ∇V̺τ =
+Z
+∇· fd̺τ −
+Z
+f · ∇V̺τ.
+These terms pass to the limit as ̺τ ⇀̺, using the assumption V ∈C1, since all the test functions above
+are continuous. This gives
+R
+f · dE =
+R
+(∇· f)d̺ −
+R
+f · ∇V d̺, which implies E = −∇̺ −̺∇V.
+□
+4.6
+Other gradient-ﬂow PDEs
+We saw in the previous section the example, and a detailed analysis, of the Fokker-Planck equation. The
+main reason to choose such example is its simplicity, because it is a linear equation. This allows easily
+to pass to the limit all the terms in the relation between E and ̺. Yet, many other important equations
+can be obtained as gradient ﬂows in W2, choosing other functionals. We will see some of them here,
+without entering into details of the proof. We stress that handling non-linear terms is often diﬃcult and
+requires ad-hoc estimates. We will discuss some of the ideas that one should apply. Note on the other
+hand that, if one uses the abstract theory of [6], there is no need to produce these ad-hoc estimates: after
+developing a general (and hard) theory for general metric spaces, the second part of [6] explains which
+are the curves that one ﬁnds as gradient ﬂows in W2, with the relation between the velocity ﬁeld v and
+the derivatives (with an ad-hoc notion of subdiﬀerential in the Wasserstein space) of the functional F.
+This automatically gives the desired result as a part of a larger theory.
+We will discuss ﬁve classes of PDEs in this section: the porous media equation, the Keller-Segel
+equation, more general diﬀusion, advection and aggregation equations, a model for crowd motion with
+density constraints, and the ﬂow of the squared sliced Wasserstein distance SW2
+2.
+42
+
+Porous Media Equation
+This equation models the diﬀusion of a substance into a material whose
+properties are diﬀerent than the void, and which slows down the diﬀusion. If one considers the case of
+particles which are advected by a potential and subject to this kind of diﬀusion, the PDE reads
+∂t̺ −∆(̺m) −∇· (̺∇V) = 0,
+for an exponent m > 1. One can formally check that this is the equation of the gradient ﬂow of the energy
+F(̺) =
+1
+m −1
+Z
+̺m(x) dx +
+Z
+V(x)̺(x) dx
+(set to +∞for ̺ < Lm). Indeed, the ﬁrst variation of the ﬁrst part of the functional is
+m
+m−1̺m−1, and
+̺∇
+ m
+m−1̺m−1
+= m̺ · ̺m−2∇̺ = ∇(̺m).
+Note that, in the discrete step min̺ F(̺) +
+W2
+2(̺,̺0)
+2τ
+, the solution ̺ satisﬁes
+
+m
+m−1̺m−1 + V + ϕ
+τ = C
+̺ −a.e.
+m
+m−1̺m−1 + V + ϕ
+τ ≥C
+on {̺ = 0}.
+This allows to express ̺m−1 = m−1
+m (C −V −ϕ/τ)+ and implies that ̺ is compactly supported if ̺0 is
+compactly supported, as soon as V has some growth conditions. This fact contradicts the usual inﬁnite
+propagation speed that one ﬁnds in linear diﬀusion models (Heat and Fokker-Planck equation).
+The above analysis works in the case m > 1: the fact that the usual Fokker-Planck equation can
+be obtained for m →1 can be seen in the following way: nothing changes if we deﬁne F via F(̺) =
+1
+m−1
+R
+(̺m(x) −̺(x)) dx +
+R
+V(x)̺(x) dx, since the mass
+R
+̺(x) dx = 1 is a given constant. Yet, then it is
+is easy to guess the limit, since
+lim
+m→1
+̺m −̺
+m −1 = ̺ log ̺,
+which provides the entropy that we already used for the Heat equation.
+It is also interesting to consider the case m < 1: the function ̺m −̺ is no longer convex, but it
+is concave and the negative coeﬃcient 1/(m −1) makes it a convex function. Unfortunately, it is not
+superlinear at inﬁnity, which makes it more diﬃcult to handle. But for m ≥1 −1/d the functional F is
+still displacement convex. The PDE that we get as a gradient ﬂow is called Fast diﬀusion equation, and
+it has diﬀerent (and opposite) properties in terms of diﬀusion rate than the porous media one.
+From a technical point of view, proving compactness of the minimizing movement scheme for these
+equations is not very easy, since one needs to pass to the limit the non-linear term ∆(̺m), which means
+proving strong convergence on ̺ instead of weak convergence. The main ingredient is a sort of H1 bound
+in space, which comes from the fact that we have
+Z T
+0
+Z
+Ω
+|∇(̺m−1/2)|2 dxdt ≈
+Z T
+0
+Z
+Ω
+̺|∇ϕ|2
+τ2
+dxdt =
+Z T
+0
+|̺′|(t)2dt ≤C
+(4.20)
+(but one has to deal with the fact that this is not a full H1 bound, and the behavior in time has to be
+controlled, via some variants of the classical Aubin-Lions Lemma, [13]).
+43
+
+Diﬀusion, advection and aggregation
+Consider a more general case where the movement is advected
+by a potential determined by the superposition of many potentials, each created by one particle. For
+instance, given a function W : Rd →R, the particle located at x produces a potential W(· −x) and,
+globally, the potential is given by V(y) =
+R
+W(y −x)d̺(x), i.e. V = W ∗̺. The equation, if every particle
+follows −∇V is
+∂t̺ −∇· (̺ ((∇W) ∗̺)) = 0,
+where we used ∇(W ∗̺) = (∇W) ∗̺. If W is even (i.e. the interaction between x and y is the same as
+between y and x), then this is the gradient ﬂow of the functional
+F(̺) = 1
+2
+Z Z
+W(x −y)d̺(x)d̺(y).
+When W is convex, for instance in the quadratic case
+RR
+|x−y|2d̺(x)d̺(y), this gives raise to a general
+aggregation behavior of the particles, and as t →∞one expects ̺t ⇀δx0 (the point x0 depending on the
+initial datum ̺0: in the quadratic example above it is the barycenter of ̺0). If W is not smooth enough,
+the aggregation into a unique point can also occur in ﬁnite time, see [30].
+Note that these equations are both non-linear (the term in the divergence is quadratic in ̺) and non-
+local. It is rare to see these non-local aggregation terms alone in the equation, as they are often coupled
+with diﬀusion or other terms. This is why we do not provide speciﬁc references except [30]. We also note
+that from the technical point of view this kind of nonlinearity is much more compact than the previous
+ones, since the convolution operator transforms weak convergence into strong one, provided W is regular
+enough.
+Most often, the above aggregation energy is studied together with an internal energy and a conﬁning
+potential energy, using the functional
+F(̺) =
+Z
+f(̺(x)) dx +
+Z
+V(x) d̺(x) + 1
+2
+Z Z
+W(x −y)d̺(x)d̺(y).
+This gives the equation
+∂t̺ −∇·  ̺ ∇( f ′(̺)) + ∇V + (∇W) ∗̺ = 0.
+Among the mathematical interest for this family of equations, we stress that they are those where more
+results (in termes of stability, and convergence to equilibrium) can be proven, due to the fact that condi-
+tions to guarantee that F is displacement convex are well-known (Section 4.4). See in particular [31, 32]
+for physical considerations and convergence results on this equation.
+Keller-Segel
+An interesting model in mathematical biology (see [57, 58] for the original modeling)
+is the following: a population ̺ of bacteria evolves in time, following diﬀusion and advection by a
+potential. The potential is given by the concentration u of a chemo-attractant nutrient substance, produced
+by the bacteria themselves. This kind of phenomenon is also known under the name of chemotaxis.
+More precisely, bacteria move (with diﬀusion) in the direction where they ﬁnd more nutrient, i.e. in the
+direction of ∇u, where the distribution of u depends on their density ̺. The easiest model uses linear
+diﬀusion and supposes that the distribution of u is related to ̺ by the condition −∆u = ̺, with Dirichlet
+44
+
+boundary conditions u = 0 on ∂Ω. This gives the system
+
+∂t̺ + α∇· (̺∇u) −∆̺ = 0,
+−∆u = ̺,
+u = 0 on ∂Ω, ̺(0, ·) = ̺0, ∂n̺ −̺∂nu = 0 on ∂Ω.
+The parameter α stands for the attraction intensity of bacteria towards the chemo-attractant. By scaling,
+instead of using probability measures ̺ ∈P(Ω) one can set α = 1 and play on the mass of ̺ (indeed, the
+non-linearity is only in the term ̺∇u, which is quadratic in ̺).
+Alternative equations can be considered for u, such as −∆u + u = ̺ with Neumann boundary condi-
+tions. On the contrary, the boundary conditions on ̺ must be of no-ﬂux type, to guarantee conservation
+of the mass. This system can also be set in the whole space, with suitable decay conditions at inﬁnity.
+Note also that often the PDE condition deﬁning u as the solution of a Poisson equation is replaced, when
+Ω= R2, by the explicit formula
+u(x) = −1
+2π
+Z
+R2 log(|x −y|)̺(y) dy.
+(4.21)
+There is some confusion in higher dimension, as the very same formula does not hold for the Poisson
+equation (the logarithmic kernel should indeed be replaced by the corresponding Green function), and
+there two alternatives: either keep the fact that u solves −∆u = ̺, or the fact that it derives from ̺ through
+(4.21).
+One can see that this equation is the gradient ﬂow of the functional
+F(̺) =
+Z
+Ω
+̺ log ̺ −1
+2
+Z
+Ω
+|∇u̺|2,
+where u̺ ∈H1
+0(Ω) solves −∆u̺ = ̺.
+Indeed, the only non-standard computation is that of the ﬁrst variation of the Dirichlet term −1
+2
+R
+|∇u̺|2.
+Suppose ̺ε = ̺ + εχ and set u̺+εχ = u̺ + εuχ. Then
+d
+dε
+ 
+−1
+2
+Z
+|∇u̺+εχ|2
+!
+|ε=0
+= −
+Z
+∇u̺ · ∇uχ =
+Z
+u̺∆uχ = −
+Z
+u̺χ.
+It is interesting to note that this Dirichlet term is indeed (up to the coeﬃcient −1/2) the square of the H−1
+norm of ̺, since ||u||H1
+0 = ||∇u||L2 = ||̺||H−1. We will call it the H−1 term.
+It is also possible to replace linear diﬀusion with non-linear diﬀusion of porous media type, replacing
+the entropy
+R
+̺ log ̺ with a power-like energy
+R
+̺m.
+Note that the variational problem min F(̺) +
+W2
+2(̺,̺0)
+2τ
+requires some assumption to admit existence
+of minimizers, as unfortunately the Dirichlet term has the wrong sign. In particular, it would be possible
+that the inﬁmum is −∞, or that the energy is not l.s.c. because of the negative sign.
+When we use non-linear diﬀusion with m > 2 the existence of a solution is quite easy. Sophisticated
+functional inequalities allow to handle smaller exponents, and even the linear diﬀusion case in dimension
+2, provided α ≤8π. We refer to [18] and to the references therein for details on the analysis of this
+equation. Some of the technical diﬃculties are similar to those of the porous media equation, when
+passing to the limit non-linear terms. In [18], the H−1 term is treated in terms of its logarithmic kernel,
+45
+
+and ad-hoc variables symmetrization tricks are used. Note however that the nonlinear diﬀusion case is
+easier, as Lm bounds on ̺ translate into W2,m bounds on u, and hence strong compactness for ∇u.
+We also remark that the above model, coupling a parabolic equation on ̺ and an elliptic one on
+u, implicitly assumes that the conﬁguration of the chemo-attractant instantaneously follows that of ̺.
+More sophisticated models can be expressed in terms of the so-called parabolic-parabolic Keller-Segel
+equation, in the form
+
+∂t̺ + α∇· (̺∇u) −∆̺ = 0,
+∂tu −∆u = ̺,
+u = 0 on ∂Ω, ̺(0, ·) = ̺0, ∂n̺ −̺∂nu = 0 on ∂Ω.
+or other variants with diﬀerent boundary conditions. This equation can also be studied as a gradient ﬂow
+in two variables, using the distance W2 on ̺ and the L2 distance on u; see [19].
+Crowd motion
+The theory of Wasserstein gradient ﬂows has interestingly been applied to the study of
+a continuous model of crowd movement under density constraints.
+Let us explain the modeling, starting from the discrete case. Suppose that we have a population
+of particles such that each of them, if alone, would follow its own velocity u (which could a priori
+depend on time, position, on the particle itself. . . ). Yet, these particles are modeled by rigid disks that
+cannot overlap, hence, the actual velocity cannot always be u, in particular if u tends to concentrate the
+masses. We will call v the actual velocity of each particle, and the main assumption of the model is that
+v = Padm(q)(u), where q is the particle conﬁguration, adm(q) is the set of velocities that do not induce
+(for an inﬁnitesimal time) overlapping starting from the conﬁguration q, and Padm(q) is the projection on
+this set.
+The simplest example is the one where every particle is a disk with the same radius R and center
+located at qi. In this case we deﬁne the admissible set of conﬁgurations K through
+K := {q = (qi)i ∈ΩN : |qi −qj| ≥2R for all i , j}.
+In this way the set of admissible velocities is easily seen to be
+adm(q) = {v = (vi)i : (vi −vj) · (qi −qj) ≥0 for all (i, j) with |qi −qj| = 2R}.
+The evolution equation which has to be solved to follow the motion of q is then
+q′(t) = Padm(q(t))u(t)
+(4.22)
+(with q(0) given). Equation (4.22), not easy from a mathematical point of view, was studied by Maury
+and Venel in [66, 67].
+We are now interested in the simplest continuous counterpart of this microscopic model (without
+pretending that it is any kind of homogenized limit of the discrete case, but only an easy re-formulation
+in a density setting). In this case the particles population will be described by a probability density
+̺ ∈P(Ω), the constraint becomes a density constraint ̺ ≤1 (we deﬁne the set K = {̺ ∈P(Ω) : ̺ ≤1}),
+the set of admissible velocities will be described by the sign of the divergence on the saturated region
+{̺ = 1}: adm(̺) = v : Ω→Rd : ∇· v ≥0 on {̺ = 1}	; we will consider a projection P, which will be
+46
+
+either the projection in L2(Ld) or in L2(̺) (this will turn out to be the same, since the only relevant zone
+is {̺ = 1}). Finally, we solve the equation
+∂t̺t + ∇·  ̺t
+ Padm(̺t)ut
+ = 0.
+(4.23)
+The main diﬃculty is the fact that the vector ﬁeld v = Padm(̺t)ut is neither regular (since it is obtained
+as an L2 projection, and may only be expected to be L2 a priori), nor it depends regularly on ̺ (it is very
+sensitive to small changes in the values of ̺: passing from a density 1 to a density 1 −ε completely
+modiﬁes the saturated zone, and hence the admissible set of velocities and the projection onto it).
+In [64] these diﬃculties have been overpassed in the case u = −∇D (where D : Ω→R is a given
+Lipschitz function) and the existence of a solution (with numerical simulations) is proven via a gradient
+ﬂow method. Indeed, (4.23) turns out to be the gradient ﬂow in W2 of the energy
+F(̺) =
+
+R
+D d̺
+if ̺ ∈K;
++∞
+if ̺ < K.
+We do not enter into the details of the study of this equation, but we just make a little bit more
+precise the deﬁnitions above. Actually, instead of considering the divergence of vector ﬁelds which are
+only supposed to be L2, it is more convenient to give a better description of adm(̺) by duality:
+adm(̺) =
+(
+v ∈L2(̺) :
+Z
+v · ∇p ≤0
+∀p ∈H1(Ω) : p ≥0, p(1 −̺) = 0
+)
+.
+In this way we characterize v = Padm(̺)(u) through
+u = v + ∇p,
+v ∈adm(̺),
+Z
+v · ∇p = 0,
+p ∈press(̺) := {p ∈H1(Ω), p ≥0, p(1 −̺) = 0},
+where press(̺) is the space of functions p used as test functions in the dual deﬁnition of adm(̺), which
+play the role of a pressure aﬀecting the movement. The two cones ∇press(̺) (deﬁned as the set of
+gradients of elements of press(̺)) and adm(̺) are in duality for the L2 scalar product (i.e. one is deﬁned
+as the set of vectors which make a negative scalar product with all the elements of the other). This allows
+for an orthogonal decomposition ut = vt + ∇pt, and gives the alternative expression of Equation (4.23),
+i.e.
+
+∂t̺t + ∇·  ̺t(ut −∇pt) = 0,
+0 ≤̺ ≤1, p ≥0, p(1 −̺) = 0.
+(4.24)
+More details can be found in [64, 81, 65]. In particular, in [64] it is explained how to handle the
+nonlinearities when passing to the limit. Two sources of nonlinearity are observed: the term ̺∇p is easy
+to consider, since it is actually equal to ∇p (as we have p = 0 on {̺ , 1}); on the other hand, we need to
+deal with the equality p(1 −̺) = 0 and pass it to the limit. This is done by obtaining strong compactness
+on p, from a bound on
+R T
+0
+R
+Ω|∇p|2, similarly to (4.20). It is important to observe that transforming ̺∇p
+into ∇p is only possible in the case of one only phase ̺, while the multi-phasic case presents extra-
+diﬃculties (see, for instance [29]). These diﬃculties can be overpassed in the presence of diﬀusion,
+which provides extra H1 bounds and hence strong convergence for ̺ (for crowd motion with diﬀusion,
+47
+
+see [74]). Finally, the uniqueness question is a tricky one: if the potential D is λ-convex then this is
+easy, but considerations from the DiPerna-Lions theory ([40, 4]) suggest that uniqueness should be true
+under weaker assumptions; nevertheless this is not really proven. On the other hand, in [39] uniqueness
+is proven under very mild assumptions on the drift (or, equivalently, on the potential), provided some
+diﬀusion is added.
+Sliced Wasserstein distance
+Inspired by a construction proposed in [77] for image impainting, M.
+Bernot proposed around 2008 an interesting scheme to build a transport map between two given measures
+which, if not optimal, at least had some monotoncity properties obtained in an isotropic way.
+Consider two measures µ, ν ∈P(Rd) and project them onto any one-dimensional direction. For every
+e ∈Sd−1 (the unit sphere of Rd), we take the map πe : Rd →R given by πe(x) = x·e and look at the image
+measures (πe)#µ and (πe)#ν. They are measures on the real line, and we call Te : R →R the monotone
+(optimal) transport between them. The idea is that, as far as the direction e is concerned, every point x of
+Rd should be displaced of a vector ve(x) := (Te(πe(x)) −πe(x))e. To do a global displacement, consider
+v(x) =
+>
+Sd−1 ve(x) dHd−1(e), where Hd−1 is the uniform Hausdorﬀmeasure on the sphere.
+There is no reason to think that id + v is a transport map from µ to ν, and indeed in general it is not.
+But if one ﬁxes a small time step τ > 0 and uses a displacement τv getting a measure µ1 = (id + τv)#µ,
+then it is possible to iterate the construction. One expects to build in this way a sequence of measures µn
+that converges to ν, but this has not yet been rigorously proven. From the empirical point of view, the
+transport maps that are obtained in this way are quite satisfactory, and have been tested in particular in the
+discrete case (a ﬁnite number of Dirac masses with equal mass, i.e. the so-called assignment problem).
+For the above construction, discrete in time and used for applications to images, there are not many
+references (essentially, the only one is [78], see also [20] for a wider discussion). A natural continuous
+counterpart exists: simply consider, for every absolutely continuous measure ̺ ∈P(Rd), the vector ﬁeld
+v = v(̺) that we deﬁned above as a velocity ﬁeld depending on ̺ (absolute continuity is just required to
+avoid atoms in the projections). Then, we solve the equation
+∂t̺t + ∇· (̺tv(̺t)) = 0.
+(4.25)
+It happens that this equation has a gradient ﬂow structure: it is indeed the gradient ﬂow in W2 of a
+functional related to a new distance on probability measures, induced by this construction.
+This distance can be deﬁned as follows (see [78]): given two measures µ, ν ∈P2(Rd), we deﬁne
+SW2(µ, ν) :=
+ ?
+Sd−1 W2
+2((πe)#µ, (πe)#ν) dHd−1(e)
+!1/2
+.
+This quantity could have been called “projected Wasserstein distance” (as it is based on the behavior
+through projections), but since in [78] it is rather called “sliced Wasserstein distance”, we prefer to keep
+the same terminology.
+The fact that SW2 is a distance comes from W2 being a distance. The triangle inequality may be
+proven using the triangle inequality for W2 (see Section 5.1) and for the L2 norm. Positivity and symmetry
+are evident. The equality SW2(µ, ν) = 0 implies W2
+2((πe)#µ, (πe)#ν) for all e ∈Sd−1. This means (πe)#µ =
+(πe)#ν) for all e and it suﬃces to prove µ = ν.
+It is evident from its deﬁnition, and from the fact that the maps πe are 1-Lipschitz (which implies
+W2
+2((πe)#µ, (πe)#ν) ≤W2
+2(µ, ν)) that we have SW2(µ, ν) ≤W2(µ, ν). Moreover, the two distances also
+48
+
+induce the same topology, at least on compact sets. Indeed, the identity map from W2 to (P(Ω), SW2)
+is continuous (because of SW2 ≤W2) and bijective. Since the space where it is deﬁned is compact, it
+is also a homeomorphism. One can also prove more, i.e. an inequality of the form W2 ≤CSWβ
+2 for a
+suitable exponent β ∈]0, 1[. Chapter 5 in [20] proves this inequality with β = (2(d + 1))−1.
+The interest in the use of this distance is the fact that one has a distance on P(Ω) with very similar
+qualitative properties as W2, but much easier to compute, since it only depends on one-dimensional
+computations (obviously, the integral over e ∈Sd−1 is discretized in practice, and becomes an average
+over a large number of directions). We remark anyway an important diﬀerence between W2 and SW2:
+the latter is not a geodesic distance. On the contrary, the geodesic distance associated to SW2 (i.e. the
+minimal lenght to connect two measures) is exactly W2.
+If we come back to gradient ﬂows, it is not diﬃcult to see that the equation (4.25) is the gradient
+ﬂow of F(̺) := 1
+2SW2
+2(̺, ν) and can be studied as such. Existence and estimates on the solution of this
+equation are proven in [20], and the nonlinearity of v(̺) is quite easy to deal with. On the other hand,
+many, natural and useful, questions are still open: is it true that ̺t ⇀ν as t →∞? Can we deﬁne (at least
+under regularity assumptions on the initial data) the ﬂow of the vector ﬁeld v(̺t), and what is the limit of
+this ﬂow as t →∞? The idea is that it should be a transport map between ̺0 and ν and, if not the optimal
+transport map, at least a “good” one, but most of the related questions are open.
+4.7
+Dirichlet boundary conditions
+For sure, the attentive reader has already noted that all the equations that have been identiﬁed as gradient
+ﬂows for the distance W2 on a bounded domain Ωare always accompanied by Neumann boundary
+conditions. This should not be surprising. Wasserstein distances express the movement of masses when
+passing from a conﬁguration to another, and the equation represents the conservation of mass. It means
+that we are describing the movement of a collection ̺ of particles, bound to stay inside a given domain Ω,
+and selecting their individual velocity v in way which is linked to the global value of a certain functional
+F(̺). It is natural in this case to have boundary conditions which write down the fact that particles do
+not exit the domain, and the pointwise value of the density ̺ on ∂Ωis not particularly relevant in this
+analysis. Note that “do not exit” does not mean “those on the boundary stay on the boundary”, which
+is what happens when solutions are smooth and the velocity ﬁeld v satisﬁes v · n = 0. Yet, the correct
+Neumann condition here is rather ̺v · n = 0 a.e., which means that particles could enter from ∂Ωinto
+the interior, but immediately after it happens there will be (locally) no mass on the boundary, and the
+condition is not violated, hence. On the contrary, should some mass go from the interior to outside Ω,
+then we would have a violation of the Neumann condition, since there would be (intuitively) some mass
+̺ > 0 on the boundary with velocity directed outwards.
+Anyway, we see that Dirichlet conditions do not ﬁnd their translation into W2 gradient ﬂows!
+To cope with Dirichlet boundary conditions, Figalli and Gigli deﬁned in [44] a sort of modiﬁed
+Wasserstein distance, with a special role played by the boundary ∂Ω, in order to study the Heat equation
+∂t̺ = ∆̺ with Dirichlet b.c. ̺ = 1 on ∂Ω. Their deﬁnition is as follows: given two ﬁnite positive
+measures µ, ν ∈M+(
+◦
+Ω) (not necessarily probabilities, not necessarily with the same mass), we deﬁne
+Πb(µ, ν) = {γ ∈M+(Ω× Ω) : (πx)#γ
+◦
+Ω= µ, (πy)#γ
+◦
+Ω= ν}.
+49
+
+Then, we set
+Wb2(µ, ν) :=
+s
+inf
+(Z
+Ω×Ω
+|x −y|2 dγ, γ ∈Πb(µ, ν)
+)
+.
+The index b stands for the special role played by the boundary. Informally, this means that the transport
+from µ to ν may be done usually (with a part of γ concentrated on
+◦
+Ω×
+◦
+Ω), or by moving some mass
+from µ to ∂Ω(using γ (
+◦
+Ω× ∂Ω)), then moving from one point of the boundary to another point of the
+boundary (this should be done by using γ (∂Ω× ∂Ω), but since this part of γ does not appear in the
+constraints, then we can forget about it, and the transport is ﬁnally free on ∂Ω), and ﬁnally from ∂Ωto ν
+(using γ (∂Ω×
+◦
+Ω)).
+In [44] the authors prove that Wb2 is a distance, that the space M+(
+◦
+Ω) is always a geodesic space,
+independently of convexity or connectedness properties of Ω(diﬀerently from what happens with Ω,
+since here the transport is allowed to “teleport” from one part of the boundary to another, either to pass
+from one connected component to another or to follow a shorter path going out of Ω), and they study the
+gradient ﬂow, for this distance, of the functional F(̺) =
+R
+(̺ log ̺ −̺) dx. Note that in the usual study
+of the entropy on P(Ω) one can decide to forget the term −
+R
+̺, which is anyway a constant because the
+total mass is ﬁxed. Here this term becomes important (if the function f(t) = t log t−t is usually preferred
+to t log t, it is because its derivative is simpler, f ′(t) = log t, without changing its main properties).
+With this choice of the functional and of the distance, the gradient ﬂow that Figalli and Gigli obtain
+is the Heat equation with the particular boundary condition ̺ = 1 on ∂Ω. One could wonder where the
+constant 1 comes from, and a reasonable explanation is the following: if the transport on the boundary
+is free of charge, then automatically the solution selects the value which is the most performant for the
+functional, i.e. the constant t which minimizes f(t) = t log t −t. In this way, changing the linear part
+and using F(̺) =
+R
+(̺ log ̺ −c̺) dx could change the constant on the boundary, but the constant 0 is
+forbidden for the moment. It would be interesting to see how far one could go with this approach and
+which Dirichlet conditions and which equations could be studied in this way, but this does not seem to
+be done at the moment.
+Moreover, the authors explain that, due to the lack of geodesic convexity of the entropy w.r.t. Wb2, the
+standard abstract theory of gradient ﬂows is not able to provide uniqueness results (the lack of convexity
+is due in some sense to the possible concentration of mass on the boundary, in a way similar to what
+happened in [64] when dealing with the door on ∂Ω). On the other hand, standard Hilbertian results on
+the Heat equation can provide uniqueness for this equation, as the authors smartly remark in [44].
+We observe that this kind of distances with free transport on the boundary were already present in
+[22, 21], but in the case of the Wasserstein distance W1, and the analysis in those papers was not made
+for applications to gradient ﬂows, which are less natural to study with p = 1. We can also point out a
+nice duality formula:
+Wb1(µ, ν) := min
+(Z
+|x −y| dγ : γ ∈Πb(µ, ν)
+)
+= sup
+(Z
+u d(µ −ν) : u ∈Lip1(Ω), u = 0 on ∂Ω
+)
+.
+In the special case p = 1 and µ(
+◦
+Ω) = ν(
+◦
+Ω), we also obtain
+Wb1(µ, ν) = Tc(µ, ν),
+for c(x, y) = min{|x −y|, d(x, ∂Ω) + d(y, ∂Ω)}.
+50
+
+The cost c is a pseudo-distance on Ωwhere moving on the boundary is free. This kind of distance has
+also been used in [28] (inspired by [21]) to model free transport costs on other lower dimensional sets,
+and not only the boundary (with the goal to model, for instance, transportation networks, and optimize
+their shape). It is interesting to see the same kind of ideas appear for so diﬀerent goals.
+4.8
+Numerical methods from the JKO scheme
+We present in this section two diﬀerent numerical methods which have been recently proposed to tackle
+evolution PDEs which have the form of a gradient ﬂow in W2(Ω) via their variational JKO scheme. We
+will only be concerned with discretization methods allowing the numerical treatment of one step of the
+JKO scheme, i.e. solving problems of the form
+min
+(
+F(̺) + 1
+2W2
+2(̺, ν) : ̺ ∈P(Ω)
+)
+,
+for suitable ν (to be taken equal to ̺τ
+k) and suitable F (including the τ factor). We will not consider the
+convergence as τ →0 of the iterations to solutions of the evolution equation.
+We will present two methods. One, essentially taken from [16], is based on the Benamou-Brenier
+formula ﬁrst introduced in [14] as a numerical tool for optimal transport. This method is well-suited
+for the case where the energy F(̺) used in the gradient ﬂow is a convex function of ̺. For instance,
+it works for functionals of the form F(̺) =
+R
+f(̺(x))dx +
+R
+Vd̺ and can be used for Fokker-Planck
+and porous medium equations. The second method is based on methods from semi-discrete optimal
+transport, essentially developed by Q. M´erigot using computational geometry (see [72, 60] and [62]
+for 3D implementation) and translates the problem into an optimization problem in the class of convex
+functions; it is well suited for the case where F is geodesically convex, which means that the term
+R
+f(̺(x)) dx is ony admissible if f satisﬁes McCann’s condition, the term
+R
+Vd̺ needs V to be convex,
+but interaction terms such as
+R R
+W(x −y) d̺(x) d̺(y) are also allowed, if W is convex.
+Augmented Lagrangian methods
+Let us recall the basis of the Benamou-Brenier method.
+This
+amounts to solve the variational problem (4.8) which reads, in the quadratic case, as
+min
+sup
+(a,b)∈K2
+Z Z
+ad̺ +
+Z Z
+b · dE : ∂t̺t + ∇· Et = 0, ̺0 = µ, ̺1 = ν
+where K2 = {(a, b) ∈R×Rd : a+ 1
+2|b|2 ≤0}. We then use the fact that the continuity equation constraint
+can also be written as a sup penalization, by adding to the functional
+sup
+φ∈C1([0,1]×Ω)
+−
+Z Z
+∂tφd̺ −
+Z Z
+∇φ · dE +
+Z
+φ1dν −
+Z
+φ0dµ,
+which is 0 in case the constraint is satisﬁed, and +∞if not.
+It is more convenient to express everything in the space-time formalism, i.e. by writing ∇t,xφ for
+(∂tφ, ∇φ) and using the variable m for (̺, E) and A for (a, b). We also set G(φ) :=
+R
+φ1dν −
+R
+φ0dµ. Then
+the problem becomes
+min
+m sup
+A,φ
+m · (A −∇t,xφ) −IK2(A) + G(φ),
+51
+
+where the scalar product is here an L2 scalar product, but becomes a standard Euclidean scalar product
+as soon as one discretizes (in time-space). The function IK2 denotes the indicator function in the sense of
+convex analysis, i.e. +∞if the condition A ∈K2 is not satisﬁed, and 0 otherwise.
+The problem can now be seen as the search for a saddle-point of the Lagrangian
+L(m, (A, φ)) := m · (A −∇t,xφ) −IK2(A) + G(φ),
+which means that we look for a pair (m, (A, φ)) (actually, a triple, but A and φ play together the role
+of the second variable) where m minimizes for ﬁxed (A, φ) and (A, φ) maximizes for ﬁxed m. This ﬁts
+the following framework, where the variables are X and Y and the Lagrangian has the form L(X, Y) :=
+X · ΛY −H(Y). In this case one can use a very smart trick, based on the fact that the saddle points of this
+Lagrangan are the same of the augmented Lagrangian ˜L deﬁned as ˜L(X, Y) := X · ΛY −H(Y) −r
+2|ΛY|2,
+whatever the value of the parameter r > 0 is. Indeed, the saddle-point of L are characterized by (we
+assume all the functions we minimize are convex and all the functions we maximize are concave)
+
+ΛY = 0
+(optimality of X),
+ΛtX −∇H(Y) = 0
+(optimality of Y),
+while those of ˜L are characterized by
+
+ΛY = 0
+(optimality of X),
+ΛtX −∇H(Y) −rΛtΛY = 0
+(optimality of Y),
+which is the same since the ﬁrst equation implies that the extra term in the second vanishes.
+In this case, we obtain a saddle point problem of the form
+min
+m max
+A,φ
+m · (A −∇t,xφ) −IK2(A) + G(φ) −r
+2||A −∇t,xφ||2
+(where the squared norm in the last term is an L2 norm in time and space), which is then solved by
+iteratively repeating three steps: for ﬁxed A and m, ﬁnding the optimal φ (which amounts to minimizing
+a quadratic functional in calculus of variations, i.e. solving a Poisson equation in the space-time [0, 1]×Ω,
+with Neumann boundary conditions, homogeneous on ∂Ωand non-homogeneous on t = 0 and t = 1, due
+to the term G); then for ﬁxed φ and m ﬁnd the optimal A (which amounts to a pointwise minimization
+problem, in this case a projection on the convex set K2); ﬁnally update m by going in the direction of the
+gradient descent, i.e. replacing m with m −r(A −∇t,xφ) (it is convenient to choose the parameter of the
+gradient descent to be equal to that the Augmented Lagrangian).
+This is what is done in the case where the initial and ﬁnal measures are ﬁxed. At every JKO step,
+one is ﬁxed (say, µ), but the other is not, and a penalization on the ﬁnal ̺1 is added, of the form τF(̺1).
+Inspired from the considerations above, the saddle point below allows to treat the problem
+min
+̺1
+1
+2W2
+2(̺1, µ) +
+Z
+f(̺1(x))dx +
+Z
+Vd̺1
+by formulating it as
+min
+m,̺1 max
+A,φ,λ
+Z Z
+m · (A −∇t,xφ) +
+Z
+̺1 · (φ1 + λ + V) −
+Z Z
+IK2(A) −
+Z
+φ0dµ −
+Z
+f ∗(λ(x))dx
+−r
+2
+Z Z
+|A −∇t,xφ|2 −r
+2
+Z
+|φ1 + λ + V|2,
+52
+
+where we re-inserted the integration signs to underline the diﬀerence between integrals in space-time
+(with m, A and φ) and in space only (with φ0, φ1, ̺1, V and λ). The role of the variable λ is to be dual to
+̺1, which allows to express f(̺1) as supλ ̺1λ −f ∗(λ).
+To ﬁnd a solution to this saddle-point problem, an iterative procedure is also used, as above. The last
+two steps are the update via a gradient descent of m and ̺1, and do not require further explications. The
+ﬁrst three steps consist in the optimization of φ (which requires the solution of a Poisson problem) and in
+two pointwise minimization problems in order to ﬁnd A (which requires a projection on K2) and λ (the
+minimization of f ∗(λ) + r
+2|φ1(x) + λ + V(x)|2 −̺1(x)λ, for ﬁxed x).
+For the applications to gradient ﬂows, a small time-step τ > 0 has to be ﬁxed, and this scheme has
+to be done for each k, using µ = ̺τ
+k and setting ̺τ
+k+1 equal to the optimizer ̺1 and the functions f and V
+must include the scale factor τ. The time-space [0, 1] × Ωhas to be discretized but the evolution in time
+is inﬁnitesimal (due to the small time scale τ), which allows to choose a very rough time discretization.
+In practice, the interval [0, 1] is only discretized using less than 10 time steps for each k. . .
+The interested reader can consult [16] for more details, examples and simulations.
+Optimization among convex functions
+It is clear that the optimization problem
+min
+̺
+1
+2W2
+2(̺, µ) + F(̺)
+can be formulated in terms of transport maps as
+min
+T:Ω→Ω
+1
+2
+Z
+Ω
+|T(x) −x|2dµ(x) + F(T#µ).
+Also, it is possible to take advantage of Brenier’s theorem which characterizes optimal transport maps as
+gradient of convex functions, and recast it as
+min
+u convex : ∇u∈Ω
+1
+2
+Z
+Ω
+|∇u(x) −x|2dµ(x) + F((∇u)#µ).
+It is useful to note that in the last formulation the convexity of u is not necessary to be imposed, as
+it would anyway come up as an optimality condition. On the other hand, very often the functional F
+involves explicity the density of the image measure (∇u)#µ (as it is the case for the typical example F ),
+and in this case convexity of u helps in computing this image measure. Indeed, whenever u is convex we
+can say that the density of ̺ := (∇u)#µ (if µ itself is absolutely continuous, with a density that we will
+denote by ̺0) is given by14
+̺ =
+̺0
+det(D2u) ◦(∇u)−1.
+Hence, we are facing a calculus of variations problem in the class of convex functions. A great
+diﬃculty to attack this class of problems is how to discretize the space of convex functions. The ﬁrst
+natural approach would be to approximate them by piecewise linear functions over a ﬁxed mesh. In this
+case, imposing convexity becomes a local feature, and the number of linear constraints for convexity is
+proportional to the size of the mesh. Yet, Chon´e and Le Meur showed in [35] that we cannot approximate
+14This same formula takes into account the possibility that ∇u could be non-injective, i.e. u non-strictly convex, in which
+case the value of the density could be +∞due to the determinant at the denominator which would vanish.
+53
+
+in this way all convex functions, but only those satisfying some extra constraints on their Hessian (for
+instance, those which also have a positive mixed second derivative ∂2u/∂xi∂xj). Because of this diﬃculty,
+a diﬀerent approach is needed. For instance, Ekeland and Moreno- Bromberg used the representation of
+a convex function as a maximum of aﬃne functions [42], but this needed many more linear constraints;
+Oudet and M´erigot [73] decided to test convexity on a grid diﬀerent (and less reﬁned) than that where
+the functions are deﬁned. . . These methods give somehow satisfactory answers for functionals involving
+u and ∇u, but are not able to handle terms involving the Monge-Amp`ere operator det(D2u).
+The method proposed in [17], that we will roughly present here, does not really use a prescribed
+mesh. The idea is the following: suppose that µ is a discrete measure of atomic type, i.e. of the form
+P
+j ajδxj. A convex deﬁned on its support S := {xj} j will be a function u : S →R such that at each point
+x ∈S the subdiﬀerential
+∂u(x) := {p ∈Rd : u(x) + p · (y −x) ≤u(y) for all y ∈S }
+is non-empty. Also, the Monge-Amp`ere operator will be deﬁned by using the sub-diﬀerential, and more
+precisely the equality
+Z
+B
+det(D2u(x))dx = |∂u(B)|
+which is valid for smooth convex functions u and arbitrary open sets B. An important point is the fact that
+whenever f is superlinear, functionals of the form
+R
+f(̺(x))dx impose, for their ﬁniteness, the positiviy
+of det(D2u), which will in turn impose that the sub-diﬀerential has positive volume, i.e. it is non-empty,
+and hence convexity. . .
+More precisely, we will minimize over the set of pairs (u, P) : S →R × Rd where P(x) ∈∂u(x) for
+every x ∈S . For every such pair (u, P) we weed to deﬁne G(u, P) which is meant to be (∇u)#µ, and
+deﬁne F(G(u, P)) whenever F has the form F = F + V + W. We will simply deﬁne
+V(G(u, P)) :=
+X
+j
+ajV(P(xj))
+and W(G(u, P)) :=
+X
+j, j′
+ajaj′W(P(xj) −P(xj′)),
+which means that we just use P#µ instead of (∇u)#µ. Unfortunately, this choice is not adapted for the
+functional F , which requires absolutely continuous measures, and P#µ is atomic. In this case, instead
+of concentrating all the mass aj contained in the point xj ∈S on the unique point P(xj), we need to
+spread it, and we will spread it uniformly on the whole subdiﬀerential ∂u(xj). This means that we also
+deﬁne a new surrogate of the image measure (∇u)#µ, called Gac(u, P) (where the superscript ac stands
+for absolutely continuous), given by
+Gac(u, P) :=
+X
+j
+aj
+|A j|Ld
+A j,
+where A j := ∂u(xj) ∩Ω(the intersection with Ωis done in order to take care of the constraint ∇u ∈Ω).
+Computing F (Gac(u, P)) gives hence
+F (Gac(u, P)) =
+X
+j
+|A j| f
+ aj
+|A j|
+!
+.
+It is clear that the discretization of V and W in terms of G(u, P) are convex functions of (u, P) (actually,
+of P, and the constraint relating P and u is convex) whenever V and W are convex; concerning F , it is
+54
+
+possible to prove, thanks to the concavity properties of the determinant or, equivalently, to the Brunn-
+Minkowski inequality (see for instance [86]) that F (Gac(u, P)) is convex in u as soon as f satisﬁes
+McCann’s condition. Globally, it is not surprising to see that we face a convex variational problem
+in terms of u (or of ∇u) as soon as F is displacement convex in ̺ (actually, convexity on generalized
+geodesics based at µ should be the correct notion).
+Then we are lead to study the variational problem
+min
+u,P
+1
+2
+X
+j
+aj|P(xj) −xj|2 + V(G(u, P)) + W(G(u, P)) + F (Gac(u, P))
+(4.26)
+under the constraints P(xj) ∈A j := ∂u(xj) ∩Ω. Note that we should incorporate the scale factor τ in
+the functional F which means that, for practical purposes, convexity in P is guaranteed as soon as V
+and W have second derivatives which are bounded from below (they are semi-convex) and τ is small
+(the quadratic term coming from W2
+2 will always overwhelm possible concavity of the other terms). The
+delicate point is how to compute the subdiﬀerentials ∂u(xj), and optimize them (i.e. compute derivatives
+of the relevant quantity w.r.t. u).
+This is now possible, and in a very eﬃcient way, thanks to tools from computational geometry.
+Indeed, in this context, subdiﬀerentials are exactly a particular case of what are called Laguerre cells,
+which in turn are very similar to Voronoi cells. We remind that, given some points (xj)j, their Voronoi
+cells V j are deﬁned by
+V j :=
+(
+x ∈Ω: 1
+2|x −xj|2 ≤1
+2|x −xj′|2 for all j′
+)
+(of course the squares of the distances could be replaced by the distances themselves, but in this way
+it is evident that the cells V j are given by a ﬁnite number of linear inequalities, and are thus convex
+polyhedra; the factors 1
+2 are also present only for cosmetic reasons). Hence, Voronoi cells are the cells
+of points which are closer to one given point xj ∈S than to the others.
+In optimal transport a variant of these cells is more useful: given a set of values ψj, we look for the
+cells (called Laguerre cells)
+W j :=
+(
+x ∈Ω: 1
+2|x −xj|2 + ψj ≤1
+2|x −xj′|2 + ψj′ for all j′
+)
+.
+This means that we look at points which are closer to xj than to the other points xj′, up to a correction15
+given by the values ψj. It is not diﬃcult to see that also in this case cells are convex polyhedra. And
+it is also easy to see that, if ̺ is an absolutely continuous measure on Ωand µ = P
+j ajδxj, then ﬁnding
+an optimal transport map from ̺ to µ is equivalent to ﬁnding values ψj such that ̺(W j) = aj for every
+j (indeed, in this case, the map sending every point of W j to xj is optimal, and −ψj is the value of the
+corresponding Kantorovich potential at the point xj). Finally, it can be easily seen that the Laguerre cells
+corresponding to ψj := u(xj) −1
+2|xj|2 are nothing but the subdiﬀerentials of u (possibly intersected with
+Ω).
+15If the points xj are the locations of some ice-cream sellers, we can think that ψj is the price of an ice-cream at xj, and the
+cells Wj will represent the regions where customers will decide to go to the seller j, keeping into account both the price and the
+distance.
+55
+
+Handling Laguerre cells from the computer point of view has for long been diﬃcult, but it is now
+state-of-the-art in computational geometry, and it is possible to compute very easily their volumes (in-
+cidentally, also ﬁnd some points P belonging to them, which is useful so as to satisfy the constraints
+of Problem (4.26)), as well as the derivatives of their volumes (which depend on the measures of each
+faces) w.r.t. the values ψj. For the applications to semi-discrete16 optimal transport problems, the results
+are now very fast (with discretizations with up to 106 points in some minutes, in 3D; the reader can
+have a look at [72, 60, 62] but also to Section 6.4.2 in [84]), and the same tools have been used for the
+applications to the JKO scheme that we just described.
+In order to perform an iterated minimization, it is enough to discretize ̺0 with a ﬁnite number of Dirac
+masses located at points xj, to ﬁx τ > 0 small, then to solve (4.26) with µ = ̺τ
+k and set ̺τ
+k+1 := G(u, P)
+for the optimal (u, P). Results, proofs of convergence and simulations are in [17].
+5
+The heat ﬂow in metric measure spaces
+In this last section we will give a very sketchy overview of an interesting research topic developed by
+Ambrosio, Gigli, Savar´e and their collaborators, which is in some sense a bridge between
+• the theory of gradient ﬂows in W2, seen from an abstract metric space point of view (which is not
+the point of view that we underlined the most in the previous section),
+• and the current research topic of analysis and diﬀerential calculus in metric measure spaces.
+This part of their work is very ambitious, and really aims at studying analytical and geometrical properties
+of metric measure spaces; what we will see here is only a starting point.
+The topic that we will brieﬂy develop here is concerned with the heat ﬂow, and the main observation
+is the following: in the Euclidean space Rd (or in a domain Ω⊂Rd), the heat ﬂow ∂t̺ = ∆̺ may be seen
+as a gradient ﬂow in two diﬀerent ways:
+• ﬁrst, it is the gradient ﬂow in the Hilbert space L2(Ω), endowed with the standard L2 norm, of
+the functional consisting in the Dirichlet energy D(̺) =
+R
+|∇̺|2dx (a functional which is set to
++∞if ̺ < H1(Ω)); in this setting, the initial datum ̺0 could be any function in L2(Ω), but well-
+known properties of the heat equation guarantee ̺0 ≥0 ⇒̺t ≥0 and, if Ωis the whole space, or
+boundary conditions are Neumann, then
+R
+̺0dx = 1 ⇒
+R
+̺tdx = 1; it is thus possible to restrict to
+probability densities (i.e. positive densities with mass one);
+• then, if we use the functional E of the previous section (the entropy deﬁned with f(t) = t log t), the
+heat ﬂow is also a gradient ﬂow in the space W2(Ω).
+A natural question arises: is the fact that these two ﬂows coincide a general fact? How to analyze
+this question in a general metric space? In the Euclidean space this is easy: we just write the PDEs
+corresponding to each of these ﬂows and, as they are the same PDE, for which we know uniqueness
+results, then the two ﬂows are the same.
+First, we realize that the question is not well-posed if the only structure that we consider on the
+underlining space is that of a metric space. Indeed, we also need a reference measure (a role played by
+16One measure being absolutely continuous, the other atomic.
+56
+
+the Lebesgue measure in the Euclidean space). Such a measure is needed in order to deﬁne the integral
+R
+|∇̺|2dx, and also the entropy
+R
+̺ log ̺ dx. Roughly speaking, we need to deﬁne “dx”.
+Hence, we need to consider metric measure spaces, (X, d, m), where m ≥0 is a reference measure
+(usually ﬁnite) on the Borel tribe of X. The unexperienced reader should not be surprised: metric measure
+spaces are currently the new frontier of some branches of geometric analysis, as a natural generalization
+of Riemannian manifolds. In order not to overburden the reference list, we just refer to the following
+papers, already present in the bibliography of this survey for other reasons:[5, 9, 10, 7, 34, 49, 51, 52,
+53, 54, 63, 85, 87].
+5.1
+Dirichlet and Cheeger energies in metric measure spaces
+In order to attack our question about the comparison of the two ﬂows, we ﬁrst need to deﬁne and study
+the ﬂow of the Dirichlet energy, and in particular to give a suitable deﬁnition of such an energy. This
+more or less means deﬁning the space H1(X) whenever X is a metric measure space (MMS). This is not
+new, and many authors studied it: we cite in particular [52, 53, 34, 85]). Moreover, the recent works by
+Ambrosio, Gigli and Savar´e ([9, 7]) presented some results in this direction, useful for the analysis of
+the most general case (consider that most of the previous results require a doubling assumption and the
+existence of a Poincar´e inequality, see also[54], and this assumption on (X, d, m) is not required in their
+papers). One of the ﬁrst deﬁnition of Sobolev spaces on a MMS had been given by Haiłasz, who used
+the following deﬁnition
+f ∈H1(X, d, m) if there is g ∈L2(X, m) such that | f(x) −f(y)| ≤d(x, y)(g(x) + g(y)).
+This property characterizes Sobolev spaces in Rd by choosing
+g = const · M |∇f| ,
+where M[u] denotes the maximal function of u: M[u](x) := supr>0
+>
+B(x,r) u (the important point here is
+the classical result in harmonic analysis guaranteeing ||M[u]||L2 ≤C(d)||u||L2) and c is a suitable constant
+only depending on the dimension d. As this deﬁnition is not local, amost all the recent investigations
+on these topics are rather based on some other ideas, due to Cheeger ([34]), using the relaxation starting
+from Lipschitz functions, or to Shanmuganlingam ([85]), based on the inequality
+| f(x(0)) −f(x(1))| ≤
+Z 1
+0
+|∇f(x(t)||x′(t)| dt
+required to hold on almost all curves, in a suitable sense. The recent paper [7] resents a classiﬁcation
+of the various weak notions of modulus of the gradient in a MMS and analyzes their equivalence. On
+the contrary, here we will only choose one unique deﬁnition for
+R
+|∇f|2dm, the one which seems the
+simplest.
+For every Lipschitz function f on X, let us take its local Lipschitz constant |∇f|, deﬁned in (3.1), and
+set D( f) :=
+R
+|∇f|2(x)dm. Then, by relaxation, we deﬁne the Cheeger Energy17 C( f):
+C( f) := inf
+
+lim inf
+n
+D( fn) : fn →f in L2(X, m), fn ∈Lip(X)
+
+.
+17The name has been chosen because Cheeger also gave a deﬁnition by relaxation; moreover, the authors did not wish to call
+it Dirichlet energy, as generally this name is used fro quadratic forms.
+57
+
+We then deﬁne the Sobolev space H1(X, d, m) as the space of functions such that C( f) < +∞. This
+space will be a Banach space, endowed with the norm f 7→
+p
+C( f) and the function f 7→C( f) will
+be convex. We can also deﬁne −∆f as the element of minimal norm of the subdiﬀerential ∂C( f) (an
+element belonging to the dual of H1(X, d, m)). Beware that, in general, the map f 7→−∆f will not be
+linear (which corresponds to the fact that the norm
+p
+C( f) is in general not Hilbertian, i.e. it does not
+come from a scalar product).
+Deﬁnining the ﬂow of C in the Hilbert space L2(X, m) is now easy, and ﬁts well the classical case
+of convex functionals on Hilbert spaces or, more generally, of monotone maximal operators (see [25]).
+This brings very general existence and uniqueness results.
+5.2
+A well-posed gradient ﬂow for the entropy
+A second step (ﬁrst developed in [49] and then generalized in [9]) consists in providing existence and
+uniqueness conditions for the gradient ﬂow of the entropy, w.r.t. the Wasserstein distance W2. To do so,
+we consider the funcitonal E, deﬁned on the set of densities f such that ̺ := f ·m is a probability measure
+via E( f) :=
+R
+f log f dm and we look at its gradient ﬂow in W2 in the EDE sense. In order to apply the
+general theory of Section 3, as we cannot use the notion of weak solutions of the continuity equation, it
+will be natural to suppose that this functional E is λ-geodesically convex for some λ ∈R. This means, in
+the sense of Sturm and Lott-Villani, that the space (X, d, m) is a MMS with Ricci curvature bounded from
+below. We recall here the corresponding deﬁnition, based on the characteristic property already evoked
+in the Section 4.4, which was indeed a theorem (Proposition 4.11) in the smooth case.
+Deﬁnition 5.1. A metric measure space (X, d, m) is said to have a Ricci curvature bounded from below
+by a constant K ∈R in the sense of Sturm and Lott-Villani if the entropy functional E : P(X) →R∪{+∞}
+deﬁned through
+E(̺) =
+
+R
+f log fdm
+if ̺ = f · m
++∞
+if ̺ is not absolutely continuous w.r.t. m
+is K-geodesically convex in the space W2(X). In this case we say that (X, d, m) satisﬁes the condition18
+CD(K, ∞).
+Note that the EVI formulation is not available in this case, as we do not have the geodesic convexity
+of the squared Wasserstein. Moreover, on a general metric space, the use of generalized geodesics is not
+always possible. This is the reason why we will deﬁne the gradient ﬂow of E by the EDE condition and
+not the EVI, but this requires to prove via other methods the uniqueness of such a gradient ﬂow. To do
+so, Gigli introduced in [49] an interesting strategy to prove uniqueness for EDE ﬂows, which is based on
+the following proposition.
+Proposition 5.1. If F : P(X) →R∪{+∞} is a strictly convex functional (w.r.t. usual convex combinations
+µs := (1−s)µ0 + sµ1, which is meaningful in the set of probability measures), such that |∇−F| is an upper
+gradient for F and such that |∇−F|2 is convex, then for every initial measure ¯µ there exists at most one
+gradient ﬂow µ(t) in the EDE sense for the functional F satisfying µ(0) = ¯µ.
+18The general notation CD(K, N) is used to say that a space has curvature bounded from below by K and dimension bounded
+from above by N (CD stands for “curvature-dimension”).
+58
+
+In particular, this applies to the functional E: the strict convexity is straightforward, and the squared
+slope can be proven to be convex with the help of the formula (3.4) (it is interesting to observe that, in
+the Euclidean case, an explicit formula for the slope is known:
+|∇−E|2(̺) =
+Z |∇f|2
+f
+dx,
+(5.1)
+whenever ̺ = f · Ld).
+5.3
+Gradient ﬂows comparison
+The last point to study (and it is not trivial at all) is the fact that every gradient ﬂow of C (w.r.t. the L2
+distance) is also an EDE gradient ﬂow of E for the W2 distance. This one (i.e. (C, L2) ⇒(E, W2)) is
+the simplest direction to consider in this framework, as computations are easier. This is a consequence
+of the fact that the structure of gradient ﬂows of convex functionals in Hilbert spaces is much more well
+understood. In order to do so, it is useful to compute and estimates
+d
+dtE( ft),
+where ft is a gradient ﬂow of C in L2(X, m).
+This computation is based on a strategy essentially developed in [51] and on a lemma by Kuwada. The
+initial proof, contained in [51], is valid for Alexandroﬀspaces19. The generalization of the same result
+to arbitrary MMS satisfying CD(K, ∞) is done in [9].
+Proposition 5.2. If ft is a gradient ﬂow of C in L2(X, Hd), then we have the following equality with the
+Fischer information:
+−d
+dtE( ft) = C(2
+p
+ft).
+Moreover, for every ̺ = f · Hd ∈P(X) we have
+C(2
+p
+f) ≥|∇−E|2(̺)
+(where the slope of E is computed for the W2 distance20). Also, if we consider the curve ̺t = ft · Hd, it
+happens that ̺t in an AC curve in the space W2(X) and
+|̺′|(t)2 ≤C(2
+p
+ft).
+these three estimates imply that ̺t is a gradient ﬂow of E w.r.t. W2.
+Once this equivalence is established, we can wonder about the properties of this gradient ﬂow. The
+L2 distance being Hilbertian, it is easy to see that the C2G2 property is satisﬁed, and hence this ﬂow also
+satisﬁes EVI. On the contrary, it is not evident that the same is true when we consider the same ﬂow as
+the gradient ﬂow of E for the distance W2. Indeed, we can check that the following three conditions are
+equivalent (all true or false depending on the space (X, d, m), which is supposed to satisfy CD(K, ∞); see
+[10] for the proofs):
+19These spaces, see [26], are metric spaces where triangles are at least as fat as the triangles of a model comparison manifold
+with constant curvature equal to K, the comparison being done in terms of the distances from a vertex of a triangle to the points
+of a geodesic connecting the two other vertices. These spaces can be proven to have always an integer dimension d ∈N ∪{∞},
+and can be consideres as MMS whenever d < ∞, by endowing them with their Hausdorﬀmeasure Hd. Note anyway that the
+comparison manifold with constant curvature can be, anyway, taken of dimension 2, as only triangles appear in the deﬁnition.
+20As in (5.1).
+59
+
+• the unique EDE gradient ﬂow of E for W2 also satisﬁes EVI;
+• the heat ﬂow (which is at the same time the gradient ﬂow of E for W2 and of C for L2) depends
+linearly on the initial datum;
+• (if we suppose that (X, d, m) is a Finsler manifold endowed with its natural distance and its volume
+measure), X is a Riemannian manifold.
+As a consequence, Ambrosio, Gigli and Savar´e proposed in [10] a deﬁnition of MMS having a
+Riemanniann ricci curvature bounded from below by requiring both to satisfy the CD(K, ∞) condition,
+and the linearity of the heat ﬂow (this double condition is usually written RCD(K, ∞)). This is the notion
+of inﬁnitesimally Hilbertian space that we mentioned at the end of Section 3.
+It is important to observe (but we will not develop this here) that these notions of Ricci bounds (either
+Riemannian or not) are stable via measured Gromov-Hausdorﬀconvergence (a notion of convergence
+similar to the Gromov-Hausdorﬀconvergence of metric spaces, but considering the minimal Wasserstein
+distance between the images of two spaces via isometric embeddings into a same space). This can be
+surprising at a ﬁrst sight (curvature bounds are second-order objects, and we are claiming that they are
+stable via a convergence which essentially sounds like a uniform convergence of the spaces, with a weak
+convergence of the measures), but not after a simple observation: also the class of convex, or λ-convex,
+functions is stable under uniform (or even weak) convergence! but, of course, proving this stability is not
+a trivial fact.
+References
+[1] M. Agueh and M. Bowles, One-dimensional numerical algorithms for gradient ﬂows in the p-
+Wasserstein spaces, Acta applicandae mathematicae 125 (2013), no. 1, 121–134.
+[2] L. Ambrosio, Movimenti minimizzanti, Rend. Accad. Naz. Sci. XL Mem. Mat. Sci. Fis. Natur. 113,
+191–246, 1995.
+[3] L. Ambrosio, Lecture Notes on Optimal Transport Problems, Mathematical Aspects of Evolving
+Interfaces, Springer Verlag, Lecture Notes in Mathematics (1812), 1–52, 2003.
+[4] L. Ambrosio, Transport equation and Cauchy problem for BV vector ﬁelds, Inventiones Mathe-
+maticae, 158 (2004), 227–260.
+[5] L. Ambrosio and N. Gigli A user’s guide to optimal transport, in Modelling and Optimisation of
+Flows on Networks Lecture Notes in Mathematics, 1–155, 2013.
+[6] L. Ambrosio, N. Gigli and G. Savar´e, Gradient ﬂows in metric spaces and in the spaces of proba-
+bility measures. Lectures in Mathematics, ETH Zurich, Birkh¨auser, 2005.
+[7] L. Ambrosio, N. Gigli and G. Savar´e, Density of Lipschitz functions and equivalence of weak
+gradients in metric measure spaces, Rev. Mat. Iberoamericana 29 (2013) 969-986.
+[8] L. Ambrosio, N. Gigli and G. Savar´e, Heat ﬂow and calculus on metric measure spaces with
+Ricci curvature bounded below - the compact case, Analysis and Numerics of Partial Diﬀerential
+60
+
+Equations, Brezzi F., Colli Franzone P., Gianazza U.P., Gilardi G. (ed.) Vol. 4, “INDAM”, Springer
+(2013) 63-116
+[9] L. Ambrosio, N. Gigli and G. Savar´e, Calculus and heat ﬂow in metric measure spaces and appli-
+cations to spaces with Ricci bounds from below, Inv. Math. 195 (2), 289–391, 2014.
+[10] L. Ambrosio, N. Gigli and G. Savar´e, Metric measure spaces with Riemannian Ricci curvature
+bounded from below, Duke Math. J. 163 (2014) 1405–1490
+[11] L. Ambrosio and G. Savar´e, Gradient ﬂows of probability measures, Handbook of diﬀerential
+equations, Evolutionary equations 3, ed. by C.M. Dafermos and E. Feireisl (Elsevier, 2007).
+[12] L. Ambrosio and P. Tilli, Topics on analysis in metric spaces. Oxford Lecture Series in Mathe-
+matics and its Applications (25). Oxford University Press, Oxford, 2004.
+[13] J.-P. Aubin, Un th´eor`eme de compacit´e. (French). C. R. Acad. Sci. Paris 256. pp. 5042–5044
+[14] J.-D. Benamou and Y. Brenier, A computational ﬂuid mechanics solution to the Monge-
+Kantorovich mass transfer problem, Numer. Math., 84 (2000), 375–393.
+[15] J.-D. Benamou and G. Carlier, Augmented Lagrangian Methods for Transport Optimization,
+Mean Field Games and Degenerate Elliptic Equations, J. Opt. Theor. Appl., (2015), to appear.
+[16] J.-D. Benamou, G. Carlier and M. Laborde An augmented Lagrangian approach to Wasserstein
+gradient ﬂows and applications, preprint.
+[17] J.-D. Benamou, G. Carlier, Q. M´erigot and ´E. Oudet Discretization of functionals involving the
+Monge-Amp`ere operator, Numerische Mathematik, to appear.
+[18] A. Blanchet, V. Calvez and J.A. Carrillo, Convergence of the mass-transport steepest descent
+scheme for the subcritical Patlak-Keller-Segel model, SIAM J. Numer. Anal. 46 (2), 691–721,
+2008.
+[19] A. Blanchet, J.-A. Carrillo, D. Kinderlehrer, M. Kowalczyk, P. Laurenc¸ot and S. Lisini, A
+Hybrid Variational Principle for the Keller-Segel System in R2, ESAIM M2AN, Vol. 49, no 6,
+1553–1576, 2015.
+[20] N. Bonnotte Unidimensional and Evolution Methods for Optimal Transportation, PhD Thesis,
+Universit´e Paris-Sud, 2013
+[21] G. Bouchitt´e and G. Buttazzo, Characterization of optimal shapes and masses through Monge-
+Kantorovich equation J. Eur. Math. Soc. 3 (2), 139–168, 2001.
+[22] G. Bouchitt´e, G. Buttazzo and P. Seppecher, Shape optimization solutions via Monge-
+Kantorovich equation. C. R. Acad. Sci. Paris S´er. I Math. 324 (10), 1185–1191, 1997.
+[23] Y. Brenier, D´ecomposition polaire et r´earrangement monotone des champs de vecteurs. (French)
+C. R. Acad. Sci. Paris S´er. I Math. 305 (19), 805–808, 1987.
+61
+
+[24] Y. Brenier, Polar factorization and monotone rearrangement of vector-valued functions, Commu-
+nications on Pure and Applied Mathematics 44, 375–417, 1991.
+[25] H. Brezis Op´erateurs maximaux monotones et semi-groupes de contractions dans les spaces de
+Hilbert, North-Holland mathematics studies, 1973.
+[26] Yu. Burago, M. Gromov and G. Perelman A. D. Alexandrov spaces with curvatures bounded
+below (Russian), Uspekhi Mat. Nauk 47 (1992), 3–51; English translation: Russian Math. Surveys
+47 (1992), 1–58.
+[27] G. Buttazzo, Semicontinuity, relaxation, and integral representation in the calculus of variations
+Longman Scientiﬁc and Technical, 1989.
+[28] G. Buttazzo, ´E. Oudet and E. Stepanov. Optimal transportation problems with free Dirichlet re-
+gions. In Variational methods for discontinuous structures, 41–65, vol 51 of PNLDE, Birkh¨auser,
+Basel, 2002.
+[29] C. Canc`es, T. Gallou¨et and L. Monsaingeon Incompressible immiscible multiphase ﬂows in
+porous media: a variational approach, preprint, 2016.
+[30] J.-A. Carrillo, M. Di Francesco, A. Figalli, T. Laurent and D. Slepˇcev, Global-in-time weak
+measure solutions and ﬁnite-time aggregation for nonlocal interaction equations Duke Math. J.
+156 (2), 229–271, 2011.
+[31] J.-A. Carrillo, R.J. McCann and C. Villani, Kinetic equilibration rates for granular media and
+related equations: entropy dissipation and mass transportation estimates, Revista Matem´atica
+Iberoamericana 19, 1–48, 2003.
+[32] J.-A. Carrillo, R.J. McCann and C. Villani, Contractions in the 2-Wasserstein length space and
+thermalization of granular media, Arch. Rat. Mech. An. 179, 217–263, 2006.
+[33] J.-A. Carrillo and D. Slepˇcev Example of a displacement convex functional of ﬁrst order Calcu-
+lus of Variations and Partial Diﬀerential Equations 36 (4), 547–564, 2009.
+[34] J. Cheeger Diﬀerentiability of Lipschitz functions on metric measure spaces, Geom. Funct. Anal.
+9 (1999), 428–517.
+[35] P. Chon´e and H. Le Meur, Non-convergence result for conformal approximation of variational
+problems subject to a convexity constraint, Numer. Funct. Anal. Optim. 5-6 (2001), no. 22, 529–
+547.
+[36] K. Craig Nonconvex gradient ﬂow in the Wasserstein metric and applications to constrained non-
+local interactions, preprint available at http://arxiv.org/abs/1512.07255
+[37] S. Daneri and G. Savar´e, Eulerian Calculus for the Displacement Convexity in the Wasserstein
+Distance. SIAM J. Math. An. 40, 1104-1122, 2008.
+[38] E. De Giorgi, New problems on minimizing movements, Boundary Value Problems for PDE and
+Applications, C. Baiocchi and J. L. Lions eds. (Masson, 1993) 81–98.
+62
+
+[39] S. Di Marino and A. R. M´esz´aros Uniqueness issues for evolution equations with density con-
+straints, Math. Models Methods Appl. Sci., to appear (2016)
+[40] R. J. DiPerna and P. L. Lions, Ordinary diﬀerential equations, transport theory and Sobolev spaces,
+Inventiones mathematicae 98.3 (1989): 511–548.
+[41] I. Ekeland, On the variational principle, J. Math. Anal. Appl., vol. 47, no 2,1974, p. 324–353.
+[42] I. Ekeland and S. Moreno-Bromberg, An algorithm for computing solutions of variational prob-
+lems with global convexity constraints, Numerische Mathematik 115 (2010), no. 1, 45–69.
+[43] I. Ekeland and R. Temam, Convex Analysis and Variational Problems, Classics in Mathematics,
+Society for Industrial and Applied Mathematics (1999).
+[44] A. Figalli and N. Gigli, A new transportation distance between non-negative measures, with
+applications to gradients ﬂows with Dirichlet boundary conditions, J. Math. Pures et Appl., 94
+(2), 107–130, 2010.
+[45] M. Fortin and R. Glowinski, Augmented Lagrangian methods, Applications to the Numerical
+Solution of Boundary-Value Problems, North-Holland (1983).
+[46] W. Gangbo, An elementary proof of the polar factorization of vector-valued functions, Arch. Ra-
+tional Mech. Anal., 128, 381–399, 1994.
+[47] W. Gangbo, The Monge mass transfer problem and its applications, Contemp. Math., 226, 79–104,
+1999.
+[48] W. Gangbo and R. McCann, The geometry of optimal transportation, Acta Math., 177, 113–161,
+1996.
+[49] N. Gigli On the Heat ﬂow on metric measure spaces: existence, uniqueness and stability, Calc.
+Var. Part. Diﬀ. Eq. 39 (2010), 101–120.
+[50] N. Gigli Propri´et´es g´eom´etriques et analytiques de certaines structures non lisses, M´emoire HDR,
+Univ. Nice-Sophia-Antipolis, 2011.
+[51] N. Gigli, K. Kuwada and S. I. Ohta, Heat ﬂow on Alexandrov spaces, Comm. Pure Appl. Math.
+Vol. LXVI, 307–331 (2013).
+[52] P. Hajłasz, Sobolev spaces on an arbitrary metric space, Potential Analysis 5 (1996), 403–415.
+[53] P. Hajłasz, Sobolev spaces on metric-measure spaces, Contemp. Math. 338 (2003), 173–218.
+[54] P. Hajłasz and P. Koskela Sobolev met Poincar´e, Mem. Amer. Math. Soc. 688 (2000), 1–101.
+[55] R. Jordan, D. Kinderlehrer and F. Otto, The variational formulation of the Fokker-Planck equa-
+tion, SIAM J. Math. Anal. 29 (1), 1–17, 1998.
+[56] L. Kantorovich, On the transfer of masses. Dokl. Acad. Nauk. USSR, 37, 7–8, 1942.
+63
+
+[57] E. F. Keller and L. A. Segel, Initiation of slide mold aggregation viewed as an instability, J.
+Theor. Biol., 26, 399–415, 1970.
+[58] E. F. Keller and L. A. Segel, Model for chemotaxis, J. Theor. Biol., 30, 225–234, 1971.
+[59] D. Kinderlehrer and N. J Walkington, Approximation of parabolic equations using the Wasser-
+stein metric, ESAIM: Mathematical Modelling and Numerical Analysis 33 (1999), no. 04, 837–
+852.
+[60] J. Kitagawa, Q. M´erigot and B. Thibert, Convergence of a Newton algorithm for semi-discrete
+optimal transport, preprint, 2016
+[61] G. Legendre and G. Turinici, Second order in time schemes for gradient ﬂows in Wasserstein and
+geodesic metric spaces, preprint, 2016.
+[62] B. L´evy A numerical algorithm for L2 semi-discrete optimal transport in 3D ESAIM: Mathemati-
+cal Modelling and Numerical Analysis 49 (6), 1693–1715, 2015
+[63] J. Lott and C. Villani Ricci curvature for metric-measure spaces via optimal transport Ann. of
+Math. 169, 903–991, 2009.
+[64] B. Maury, A. Roudneff-Chupin and F. Santambrogio A macroscopic crowd motion model of gra-
+dient ﬂow type, Math. Models and Methods in Appl. Sciences 20 (10), 1787–1821, 2010.
+[65] B. Maury, A. Roudneff-Chupin, F. Santambrogio and J. Venel, Handling congestion in crowd
+motion modeling, Net. Het. Media 6 (3), 485–519, 2011.
+[66] B. Maury and J. Venel, A mathematical framework for a crowd motion model, C. R. Acad. Sci.
+Paris, Ser. I 346 (2008), 1245–1250.
+[67] B. Maury and J. Venel, A discrete contact model for crowd motion ESAIM: M2AN 45 (1), 145–
+168, 2011.
+[68] R. J. McCann, Existence and uniqueness of monotone measure preserving maps, Duke Math. J.,
+80, 309–323, 1995.
+[69] R. J. McCann A convexity principle for interacting gases. Adv. Math. 128 (1), 153–159, 1997.
+[70] R. J. McCann Exact solutions to the transportation problem on the line. Proc. Royal Soc. London
+Ser. A 455, 1341–1380, 1999.
+[71] R. J. McCann Polar factorization of maps on Riemannian manifolds. Geom. Funct. Anal., 11 (3),
+589–608, 2001.
+[72] Q. M´erigot A multiscale approach to optimal transport. Computer Graphics Forum 30 (5) 1583–
+1592, 2011.
+[73] Q. M´erigot and ´E. Oudet Handling convexity-like constraints in variational problems SIAM Jour-
+nal on Numerical Analysis, 52 (5), 2466–2487, 2014
+64
+
+[74] A. R. M´esz´aros and F. Santambrogio Advection-diﬀusion equations with density constraints,
+Analysis & PDE 9-3 (2016), 615–644.
+[75] G. Monge, M´emoire sur la th´eorie des d´eblais et des remblais, Histoire de l’Acad´emie Royale des
+Sciences de Paris, 666–704, 1781.
+[76] F. Otto, The geometry of dissipative evolution equations: The porous medium equation, Comm.
+Partial Diﬀerential Equations, 26, 101–174, 2011.
+[77] F. Piti´e, A. C. Kokaram and R. Dahyot. Automated colour grading using colour distribution trans-
+fer. Comp. Vis. Image Understanding, 107 (1–2), 123–137, 2007.
+[78] J. Rabin, G. Peyr´e, J. Delon and M. Bernot. Wasserstein Barycenter and Its Application to Texture
+Mixing. In Scale Space and Variational Methods in Computer Vision, edited by A. M. Bruckstein,
+B. M. Haar Romeny, A.M. Bronstein, and M. M. Bronstein, Lecture Notes in Computer Science,
+vol. 6667, 435–446, Springer Berlin Heidelberg, 2012.
+[79] M.-K. von Renesse and K.-T. Sturm, Entropic measure and Wasserstein diﬀusion, Ann. Probab.
+37 (2009), 1114–1191.
+[80] R. T. Rockafellar, Convex Analysis, Princeton University Press, 1970.
+[81] A.
+Roudneff-Chupin,
+Mod´elisation
+macroscopique
+de
+mouvements
+de
+foule,
+PhD
+Thesis,
+Universit´e
+Paris-Sud,
+2011,
+available
+at
+www.math.u-psud.fr/∼roudneff/Images/these roudneff.pdf
+[82] F. Santambrogio Gradient ﬂows in Wasserstein spaces and applications to crowd movement,
+S´eminaire Laurent Schwartz no 27, ´Ecole Polytechnique, 2010.
+[83] F. Santambrogio, Flots de gradient dans les espaces m´etriques et leurs applications (d’apr`es
+Ambrosio-Gigli-Savar´e), proceedings of the Bourbaki Seminar, 2013 (in French).
+[84] F. Santambrogio Optimal Transport for Applied Mathematicians, Progress in Nonlinear Diﬀeren-
+tial Equations and Their Applications no 87, Birkh¨auser Basel (2015).
+[85] N. Shanmugalingam Newtonian spaces: an extension of Sobolev spaces to metric measure spaces,
+Rev. Mat. Iberoamericana 16 (2000), 243–279.
+[86] Schneider, Convex bodies: the Brunn-Minkowski theory, vol. 44, Cambridge Univ. Press, 1993.
+[87] K.-T. Sturm On the geometry of metric measure spaces. I. Acta Math. 196, 65–131, 2006.
+[88] K.-T. Sturm On the geometry of metric measure spaces. II. Acta Math. 196, 133–177, 2006.
+[89] C. Villani Topics in Optimal Transportation. Graduate Studies in Mathematics, AMS, 2003.
+[90] C. Villani, Optimal transport: Old and New, Springer Verlag, 2008.
+65

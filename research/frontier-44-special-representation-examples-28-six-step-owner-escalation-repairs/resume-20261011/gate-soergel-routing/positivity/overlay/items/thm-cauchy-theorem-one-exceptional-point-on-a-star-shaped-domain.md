@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cauchy-theorem-one-exceptional-point-on-a-star-shaped-domain.md

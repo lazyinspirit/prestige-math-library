@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors.md

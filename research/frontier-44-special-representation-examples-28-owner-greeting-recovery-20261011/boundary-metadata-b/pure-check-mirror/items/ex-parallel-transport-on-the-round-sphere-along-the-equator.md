@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-parallel-transport-on-the-round-sphere-along-the-equator.md

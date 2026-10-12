@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-pullback-computed-as-a-kernel-of-a-difference.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-internal-power-set-can-miss-an-external-subset.md

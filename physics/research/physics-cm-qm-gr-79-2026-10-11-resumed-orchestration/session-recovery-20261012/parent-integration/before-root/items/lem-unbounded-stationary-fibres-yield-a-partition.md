@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unbounded-stationary-fibres-yield-a-partition.md

@@ -1,0 +1,1350 @@
+{
+  "version": 1,
+  "scope": [
+    "def-symmetric-group-level-one-residue-and-partition-label-convention",
+    "lem-level-one-node-order-and-conjugation-dictionary",
+    "prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators",
+    "thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention",
+    "def-level-one-global-basis-transition-polynomials-in-the-symmetric-group-convention",
+    "ex-fock-e-and-f-actions-on-shape-two-one-at-e-three",
+    "ex-level-one-charge-zero-crystal-through-rank-four-at-e-three",
+    "cex-the-full-fock-space-is-not-automatically-the-irreducible-basic-module"
+  ],
+  "contracts": {
+    "def-symmetric-group-level-one-residue-and-partition-label-convention": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite weakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive integers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of $\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is the **empty partition** $\\varnothing$, the empty sequence with $k=0$; for $n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and $k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite sequence of nonnegative integers ending in $0$ is not a partition, so the number of parts of $\\lambda$ is determined by $\\lambda$ and $(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from $(\\lambda_1,\\dots,\\lambda_k,0)$. **English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is $$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$ where $i$ numbers the **rows** downward and $j$ numbers the **columns** rightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row $i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries $$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$ nodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly decreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row $i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$ and $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram. **Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is $$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$ the sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$ for the empty partition. This is again a partition of $n$, and $[\\lambda']$ is the transpose of $[\\lambda]$: for $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$, $$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$ Outside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty. Conjugation is an involution, $\\lambda''=\\lambda$, because $\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of height at least $i$, that is, the columns $j$ with at least $i$ rows of length $\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus $\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging the number of parts with the largest part for nonempty partitions. **Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is $S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every $n\\ge 0$, and we fix $$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$ the trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group acts trivially on every size-zero object below. This is the convention used whenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-removable-and-addable-nodes-of-a-partition",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda\\vdash n$ with Young diagram $[\\lambda]$, and let $\\mu\\vdash n-1$ and $\\nu\\vdash n+1$ denote partitions of the neighbouring sizes ([[def-partition-young-diagram-and-conjugate-partition]]). A node $x\\in[\\lambda]$ is **removable** if deleting it leaves a Young diagram, that is, if there is a partition $\\mu\\vdash n-1$ with $$[\\mu]=[\\lambda]\\setminus\\{x\\};$$ such a $\\mu$ is unique because a partition is determined by its diagram. A point $y\\notin[\\lambda]$ is **addable** for $\\lambda$ if inserting it leaves a Young diagram, that is, if there is a partition $\\nu\\vdash n+1$ with $$[\\nu]=[\\lambda]\\cup\\{y\\};$$ again $\\nu$ is unique. We write $\\operatorname{Rem}(\\lambda)$ and $\\operatorname{Add}(\\lambda)$ for the sets of removable and of addable nodes of $\\lambda$. Since $[\\lambda]=\\{(i,j):1\\le i\\le k,\\ 1\\le j\\le\\lambda_i\\}$ is determined by the inequalities $1\\le j\\le\\lambda_i$, the two conditions have the following row form. Write $\\lambda_{k+1}:=0$ for a partition $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$. A node $(i,\\lambda_i)$ is removable if and only if $\\lambda_i>\\lambda_{i+1}$: deleting the last node of row $i$ keeps the row lengths weakly decreasing exactly when row $i+1$ is strictly shorter, and no node $(i,j)$ with $j<\\lambda_i$ can be deleted, since the node $(i,j+1)$ would then have no node to its left. Similarly a node $(i,\\lambda_i+1)$ with $1\\le i\\le k$ is addable if and only if $i=1$ or $\\lambda_{i-1}>\\lambda_i$, the node $(k+1,1)$ opening a new row is always addable, and these are all the addable nodes. In particular a row endpoint of $[\\lambda]$ is removable only if no node of $[\\lambda]$ lies immediately below it. For the empty partition the diagram is empty, so $\\operatorname{Rem}(\\varnothing)=\\emptyset$, while $\\operatorname{Add}(\\varnothing)=\\{(1,1)\\}$ is a single node, whose insertion produces the partition $(1)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.3",
+            "2.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-p-regular-and-p-restricted-partitions",
+          "source_section": "Definition",
+          "quote": "Let $p$ be a prime and let $\\lambda\\vdash n$ be a partition of $n\\ge0$ with parts $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge1$ and conjugate partition $\\lambda'$, whose $j$-th part is the number $\\lambda'_j=\\#\\{i:\\lambda_i\\ge j\\}$ of nodes of $[\\lambda]$ in column $j$ ([[def-partition-young-diagram-and-conjugate-partition]]). For $j\\ge1$ let $$z_j(\\lambda):=\\#\\{\\,i:\\lambda_i=j\\,\\}$$ be the multiplicity with which the positive integer $j$ occurs as a part of $\\lambda$; only finitely many $z_j$ are nonzero. - $\\lambda$ is **$p$-regular** when every positive part of $\\lambda$ occurs fewer than $p$ times, that is, when $z_j(\\lambda)<p$ for every $j\\ge1$. - $\\lambda$ is **$p$-restricted** when $\\lambda_i-\\lambda_{i+1}<p$ for every $i\\ge1$, where the sequence is padded by the trailing zeros $\\lambda_i:=0$ for $i>k$. Both conditions are finite families of inequalities. For $i>k$ one has $\\lambda_i-\\lambda_{i+1}=0<p$, so the restrictedness condition is the finite list for $1\\le i\\le k$. The empty partition $\\varnothing\\vdash0$ has no parts and $k=0$, so $z_j(\\varnothing)=0<p$ and $0-0=0<p$ for every $j,i\\ge1$: it is simultaneously $p$-regular and $p$-restricted for every prime $p$. The two conditions are exchanged by conjugation: **$\\lambda$ is $p$-restricted if and only if $\\lambda'$ is $p$-regular.** The number of columns of $[\\lambda]$ of height exactly $i$ is the difference $\\lambda_i-\\lambda_{i+1}$ of consecutive parts, and these heights are precisely the parts of $\\lambda'$, so the multiplicity of the part $i$ in $\\lambda'$ is $\\lambda_i-\\lambda_{i+1}$; the stated equivalence compares the same integers with $p$. The names record two genuinely different label conventions used later on this page: James's modular simple modules $D^\\lambda$ are labelled by **$p$-regular** $\\lambda$. Dual Specht modules themselves are defined for every partition; their simple heads give the **$p$-restricted** labelling of simple modules, related to the first convention by transposition and a sign twist. Neither class of partitions contains the other in general.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-level-one-partition-fock-space-and-node-residues",
+          "source_section": "Definition",
+          "quote": "Let $F:=\\bigoplus_{\\lambda}\\mathbb Q(q)|\\lambda\\rangle$ be the charge-$0$ part of the Fock space of [[lem-semi-infinite-wedges-are-indexed-by-partitions-and-give-node-action-formulas]], with basis indexed by all partitions and with the node operators $F_i,E_i$ defined by the stable finite-prefix action. Assign to $|\\lambda\\rangle$ the **level-one weight** $$\\mathrm{wt}(|\\lambda\\rangle):=\\Lambda_0-\\sum_{i\\in I}m_i(\\lambda)\\,\\alpha_i, \\qquad m_i(\\lambda):=\\#\\{\\text{cells of }\\lambda\\text{ of residue }i\\},$$ where the **residue** of a cell in row $r$ and column $c$ is $c-r\\bmod e$, and the **size** $|\\lambda|$ is the separate grading. The vacuum is the empty partition $\\varnothing$; $F_i$ adds and $E_i$ removes a node by the explicit finite node formulas of the same item. The toral action is $K_i|\\lambda\\rangle=q^{N_i(\\lambda)}|\\lambda\\rangle$ with $N_i$ the addable-minus-removable count, proved to be the Cartan pairing in [[lem-the-node-count-is-the-level-one-cartan-pairing]], and $K_d|\\lambda\\rangle=q^{-m_0(\\lambda)}|\\lambda\\rangle$. A partition is **$e$-regular** if each positive part occurs with multiplicity $<e$, and **$e$-restricted** if $\\lambda_r-\\lambda_{r+1}<e$ for every $r\\ge1$ (with $\\lambda_{r}=0$ beyond the length). These operators are declared linear endomorphisms here; the affine relations proved later establish the actual module structure, so nothing about $F$ is silently assumed in this Definition.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-p-regular-and-p-restricted-partitions",
+          "source_section": "Definition",
+          "quote": "Let $p$ be a prime and let $\\lambda\\vdash n$ be a partition of $n\\ge0$ with parts $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge1$ and conjugate partition $\\lambda'$, whose $j$-th part is the number $\\lambda'_j=\\#\\{i:\\lambda_i\\ge j\\}$ of nodes of $[\\lambda]$ in column $j$ ([[def-partition-young-diagram-and-conjugate-partition]]). For $j\\ge1$ let $$z_j(\\lambda):=\\#\\{\\,i:\\lambda_i=j\\,\\}$$ be the multiplicity with which the positive integer $j$ occurs as a part of $\\lambda$; only finitely many $z_j$ are nonzero. - $\\lambda$ is **$p$-regular** when every positive part of $\\lambda$ occurs fewer than $p$ times, that is, when $z_j(\\lambda)<p$ for every $j\\ge1$. - $\\lambda$ is **$p$-restricted** when $\\lambda_i-\\lambda_{i+1}<p$ for every $i\\ge1$, where the sequence is padded by the trailing zeros $\\lambda_i:=0$ for $i>k$. Both conditions are finite families of inequalities. For $i>k$ one has $\\lambda_i-\\lambda_{i+1}=0<p$, so the restrictedness condition is the finite list for $1\\le i\\le k$. The empty partition $\\varnothing\\vdash0$ has no parts and $k=0$, so $z_j(\\varnothing)=0<p$ and $0-0=0<p$ for every $j,i\\ge1$: it is simultaneously $p$-regular and $p$-restricted for every prime $p$. The two conditions are exchanged by conjugation: **$\\lambda$ is $p$-restricted if and only if $\\lambda'$ is $p$-regular.** The number of columns of $[\\lambda]$ of height exactly $i$ is the difference $\\lambda_i-\\lambda_{i+1}$ of consecutive parts, and these heights are precisely the parts of $\\lambda'$, so the multiplicity of the part $i$ in $\\lambda'$ is $\\lambda_i-\\lambda_{i+1}$; the stated equivalence compares the same integers with $p$. The names record two genuinely different label conventions used later on this page: James's modular simple modules $D^\\lambda$ are labelled by **$p$-regular** $\\lambda$. Dual Specht modules themselves are defined for every partition; their simple heads give the **$p$-restricted** labelling of simple modules, related to the first convention by transposition and a sign twist. Neither class of partitions contains the other in general.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "source_section": "Definition",
+          "quote": "Let $p>0$ and let $\\mu$ be a $p$-restricted partition, so that\n$\\mu_i-\\mu_{i+1}<p$ for all $i\\ge1$\n([[def-p-regular-and-p-restricted-partitions]],\n[[def-partition-young-diagram-and-conjugate-partition]]). A node $(r,c)$ of\nthe Young diagram $[\\mu]$ is an **$i$-node** if its residue\n$$\\operatorname{res}(r,c):=c-r\\bmod p$$\nequals $i\\in\\mathbb Z/p$; the $i$-nodes of $\\mu$ are its addable and removable\nnodes of residue $i$\n([[def-removable-and-addable-nodes-of-a-partition]]).\n\n**The reduced $i$-signature.** Fix $i\\in\\mathbb Z/p$ and list the $i$-nodes\nof $\\mu$ as $A_1,\\dots,A_n$ from top to bottom, that is, in increasing row\nindex and, for equal row index, in increasing column index. Form the word\n$\\sigma=(\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m=+$ if $A_m$ is addable and\n$\\sigma_m=-$ if $A_m$ is removable. Whenever $r<s$, $\\sigma_r=-$,\n$\\sigma_s=+$ and $\\sigma_{r+1}=\\dots=\\sigma_{s-1}=0$, replace $\\sigma_r$ and\n$\\sigma_s$ by $0$; repeat until no $-$ lies to the left of a $+$. The\nresulting **reduced $i$-signature** has the form $+\\cdots+- \\cdots-$ with the\nzeros deleted, and the nodes attached to its signs are:\n\n- the **normal $i$-nodes** of $\\mu$ are the removable nodes corresponding to\n  the $-$ signs of the reduced signature;\n- the **good $i$-node** is the topmost (first listed) of the normal $i$-nodes;\n- the **conormal $i$-nodes** of $\\mu$ are the addable nodes corresponding to\n  the $+$ signs of the reduced signature;\n- the **cogood $i$-node** is the bottommost (last listed) of the conormal\n  $i$-nodes.\n\nWrite $\\varepsilon_i(\\mu)$ and $\\varphi_i(\\mu)$ for the numbers of normal and\nof conormal $i$-nodes of $\\mu$; the good $i$-node exists exactly when\n$\\varepsilon_i(\\mu)>0$, and the cogood $i$-node exactly when\n$\\varphi_i(\\mu)>0$. At most one good and at most one cogood $i$-node occur,\nfor each residue.\n\n**Well-definedness.** Each reduction step deletes two nonzero entries, so any\nsequence of steps terminates after at most $\\lfloor n/2\\rfloor$ steps, and in\nthe resulting word no $-$ lies to the left of a $+$: otherwise, take two\nnonzero entries that are consecutive among the nonzero entries of the current\nword and are ordered $-$, $+$; all entries strictly between them are $0$ by\nthe choice, so the pair would still be reducible. Hence, after deleting the zero entries, a terminal word is\n$+^a-^b$ for some $a,b\\ge0$; cancelled positions remain in their original\nplaces and need not form a contiguous block. The terminal word does not depend on the\norder in which reducible pairs are chosen: two reducible pairs cannot overlap\npartially, because an endpoint of one pair lying strictly inside the other\nwould be a nonzero entry in a position that the other pair requires to be\n$0$, and pairs sharing exactly one endpoint would similarly place a nonzero\nentry strictly inside the other pair; so any two reducible pairs are either\ndisjoint (and the corresponding steps commute) or equal, there are no\ncritical pairs, and the rewriting relation is locally confluent. Uniqueness follows\nby induction on the number of nonzero entries. A terminal word admits no\nstep. Otherwise, two distinct first steps commute and reach a common word\nafter one further step each. All these successor words have fewer nonzero\nentries, so the induction hypothesis identifies their terminal words. Thus\nany two reduction sequences have the same terminal word; in it the first surviving $-$ and the last surviving\n$+$ are unique positions whenever they exist. Thus the reduced signature,\nthe sets of normal and conormal nodes, and the good and cogood nodes are well\ndefined. The empty partition has the unique addable node $(1,1)$, of residue $0$,\nand no removable nodes. Its $0$-signature is $(+)$ and its other signatures\nare empty. Thus $\\varepsilon_i(\\varnothing)=0$ for every $i$,\n$\\varphi_0(\\varnothing)=1$, and $\\varphi_i(\\varnothing)=0$ for $i\\ne0$.\nIt has no good node and its cogood $0$-node is $(1,1)$.\n\n**Convention warning.** The residue $c-r$ used here is the negative of\nBrundan's $\\ell$-residue $r-c$, and a removable node of $\\mu$ is normal here\nexactly when its transposed node is normal in Brundan's sense for the\ntranspose partition $\\mu'$; lists of addable and removable nodes, and the\nsigns of the residues, must never be silently mixed between the two\nconventions\n([[def-removable-and-addable-nodes-of-a-partition]],\n[[def-partition-young-diagram-and-conjugate-partition]]).",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "For every $a \\ge 1$ the multiplicity of the part $a$ in $\\lambda'$ equals $\\lambda_a - \\lambda_{a+1}$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "Transposition of nodes:",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.3",
+          "claim": "Distinct corners of a partition have distinct contents.",
+          "step": "1.3",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Consequently $\\lambda$ is $e$-restricted, i.e.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Step 1.2 also gives the weight bookkeeping:",
+          "step": "2.2",
+          "inputs": [
+            "1.2",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-2.3",
+          "claim": "The transported operators act by node moves with reflected colors.",
+          "step": "2.3",
+          "inputs": [
+            "1.2",
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-2.4",
+          "claim": "At quantum characteristic $e = 0$ the colors form the set $I = \\mathbb{Z}$ and, by [F2] and step 1.3, each residue class contains at most one node of $\\lambda$:",
+          "step": "2.4",
+          "inputs": [
+            "1.3",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The conjugation $C(\\lambda) = \\lambda'$ is a bijection from the $e$-restricted partition class onto the $e$-regular class by step 2.1, and it is not an involution of the $e$-restricted class:",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty partition is handled in step 2.1: all lambda_a = 0 give the empty family of inequalities, so the empty partition is both e-restricted and e-regular, m_i(empty) = 0, and J fixes M_empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Charge 0 is an ordinary index of the root lattice and step 2.4 records the separate source convention for quantum characteristic e = 0; no zero denominator or zero-quantity convention is hidden."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The vacuum's single addable node (1,1) and the level-1 weights Lambda_i are covered by step 2.3, and the hypothesis e >= 2 excludes e = 1 where residues would coincide."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate affine case e = 2 with its double edge is inside the standing hypothesis e >= 2; step 1.2 uses e >= 2 only through the divisibility e | 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first surviving - and last surviving + are the endpoint selections of the reduced signature; the Definition fixes them and step 2.3 uses them in the node-move form of the transported operators."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "J is an explicit basis relabelling and every transported operator is defined by a conjugation formula; steps 1.1-1.3 make no selection from a family of sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the forward direction: lambda e-restricted implies lambda-prime e-regular, through the column-multiplicity identity of step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the converse direction by the same identity read the other way, and step 3.1 uses the full equivalence."
+        }
+      ]
+    },
+    "lem-level-one-node-order-and-conjugation-dictionary": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-removable-and-addable-nodes-of-a-partition",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda\\vdash n$ with Young diagram $[\\lambda]$, and let $\\mu\\vdash n-1$ and $\\nu\\vdash n+1$ denote partitions of the neighbouring sizes ([[def-partition-young-diagram-and-conjugate-partition]]). A node $x\\in[\\lambda]$ is **removable** if deleting it leaves a Young diagram, that is, if there is a partition $\\mu\\vdash n-1$ with $$[\\mu]=[\\lambda]\\setminus\\{x\\};$$ such a $\\mu$ is unique because a partition is determined by its diagram. A point $y\\notin[\\lambda]$ is **addable** for $\\lambda$ if inserting it leaves a Young diagram, that is, if there is a partition $\\nu\\vdash n+1$ with $$[\\nu]=[\\lambda]\\cup\\{y\\};$$ again $\\nu$ is unique. We write $\\operatorname{Rem}(\\lambda)$ and $\\operatorname{Add}(\\lambda)$ for the sets of removable and of addable nodes of $\\lambda$. Since $[\\lambda]=\\{(i,j):1\\le i\\le k,\\ 1\\le j\\le\\lambda_i\\}$ is determined by the inequalities $1\\le j\\le\\lambda_i$, the two conditions have the following row form. Write $\\lambda_{k+1}:=0$ for a partition $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$. A node $(i,\\lambda_i)$ is removable if and only if $\\lambda_i>\\lambda_{i+1}$: deleting the last node of row $i$ keeps the row lengths weakly decreasing exactly when row $i+1$ is strictly shorter, and no node $(i,j)$ with $j<\\lambda_i$ can be deleted, since the node $(i,j+1)$ would then have no node to its left. Similarly a node $(i,\\lambda_i+1)$ with $1\\le i\\le k$ is addable if and only if $i=1$ or $\\lambda_{i-1}>\\lambda_i$, the node $(k+1,1)$ opening a new row is always addable, and these are all the addable nodes. In particular a row endpoint of $[\\lambda]$ is removable only if no node of $[\\lambda]$ lies immediately below it. For the empty partition the diagram is empty, so $\\operatorname{Rem}(\\varnothing)=\\emptyset$, while $\\operatorname{Add}(\\varnothing)=\\{(1,1)\\}$ is a single node, whose insertion produces the partition $(1)$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-the-node-order-and-n-i-exponents-for-fock-space",
+          "source_section": "Definition",
+          "quote": "For a fixed residue $i$ list the addable and removable $i$-nodes of a partition **by increasing content** $c-r$; larger content is read as further right or higher. For an addable $i$-node $\\gamma$ of $\\lambda$ (so that $\\mu=\\lambda+\\gamma$) define $$N_i^r(\\lambda,\\gamma):=\\#\\{\\text{addable }i\\text{-nodes of }\\lambda\\text{ with content}>\\text{content}(\\gamma)\\}-\\#\\{\\text{removable }i\\text{-nodes of }\\lambda\\text{ with content}>\\text{content}(\\gamma)\\},$$ and for a removable $i$-node $\\gamma$ of $\\mu$ (so that $\\lambda=\\mu-\\gamma$) define $N_i^l(\\lambda,\\mu)$ by the same formula inside the smaller diagram $\\lambda=\\mu-\\gamma$ with $>$ replaced by $<$, always excluding $\\gamma$ itself. The node formulas are then $$F_i|\\lambda\\rangle=\\sum_{\\gamma}q^{N_i^r(\\lambda,\\gamma)}|\\lambda+\\gamma\\rangle,\\qquad E_i|\\mu\\rangle=\\sum_{\\gamma}q^{-N_i^l(\\mu-\\gamma,\\mu)}|\\mu-\\gamma\\rangle,$$ over the addable respectively removable $i$-nodes. The **node order** is the content order just fixed, and it is used to define the finite signature selection: a Chevalley coefficient minimiser is not in general a Kashiwara arrow, and even a nonzero single Chevalley term can have zero crystal arrow.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite weakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive integers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of $\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is the **empty partition** $\\varnothing$, the empty sequence with $k=0$; for $n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and $k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite sequence of nonnegative integers ending in $0$ is not a partition, so the number of parts of $\\lambda$ is determined by $\\lambda$ and $(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from $(\\lambda_1,\\dots,\\lambda_k,0)$. **English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is $$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$ where $i$ numbers the **rows** downward and $j$ numbers the **columns** rightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row $i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries $$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$ nodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly decreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row $i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$ and $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram. **Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is $$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$ the sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$ for the empty partition. This is again a partition of $n$, and $[\\lambda']$ is the transpose of $[\\lambda]$: for $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$, $$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$ Outside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty. Conjugation is an involution, $\\lambda''=\\lambda$, because $\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of height at least $i$, that is, the columns $j$ with at least $i$ rows of length $\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus $\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging the number of parts with the largest part for nonempty partitions. **Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is $S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every $n\\ge 0$, and we fix $$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$ the trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group acts trivially on every size-zero object below. This is the convention used whenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "We prove the order claim by a case distinction on the two types.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The reduction of [F2] is independent of the order of its replacements.",
+          "step": "1.2",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Two distinct $i$-nodes of $\\lambda$ share neither a row nor a column.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Conjugation reverses the reading order and preserves the signs.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "By step 2.2 the two words being reduced are identical:",
+          "step": "3.1",
+          "inputs": [
+            "1.2",
+            "2.2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Reversing a word exchanges the two descriptions.",
+          "step": "4.1",
+          "inputs": [
+            "3.1",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "No hypothesis on $\\lambda$ beyond the corner combinatorics was used:",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A partition with no corners has an empty i-node list for every i, so the reductions of steps 1.2 and 2.1 have no entries and select nothing; the conventions are still fixed for this vacuous input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zeros are the cancelled positions of a +-word; step 1.2's scan skips them and step 4.1 reverses them without change."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A length-one word is its own reduction: step 1.2's scan keeps a single sign and step 4.1's reversal acts trivially."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At e = 2 the only way two same-residue corners share a column is the adjacent-row mixed configuration, and step 2.1 isolates and excludes exactly that case via e | 1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first surviving - and the last surviving + are the endpoints of the reduced word, and steps 3.1 and 4.1 track them through conjugation and reversal."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Every selection in steps 1.1-1.2 is forced by the row order and the deterministic reduction; no choice function occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma proves an order and selection dictionary rather than a biconditional claim, so there is no forward direction of an equivalence to discharge; the one implication it does state, smaller row implies larger column, is proved in step 1.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse of the row-order implication is asserted, and the dictionary of step 3.1 is an identity of two reduction procedures rather than a two-way implication."
+        }
+      ]
+    },
+    "prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-level-one-node-order-and-conjugation-dictionary",
+          "source_section": "Statement",
+          "quote": "Fix a finite integer $e \\ge 2$, a partition $\\lambda$ and $i \\in I = \\mathbb{Z}/e\\mathbb{Z}$, and work in the residue, node and signature conventions of [[def-symmetric-group-level-one-residue-and-partition-label-convention]]. 1. **Order.** Let $x = (r,c)$ and $y = (s,d)$ be distinct addable or removable nodes of $\\lambda$ of the same residue $i$. If $r < s$ then $c > d$ and the contents satisfy $c - r > d - s$. Consequently, on the $i$-node list, top to bottom (increasing row index) is the same as decreasing content and the same as decreasing column, while bottom to top is increasing content and increasing column; moreover two distinct $i$-nodes never share a row and never share a column. 2. **Conjugation.** Transposition of diagrams, $\\lambda \\mapsto \\lambda'$, sends the $i$-nodes of $\\lambda$ bijectively onto the $(-i)$-nodes of $\\lambda'$, preserving the addable/removable type of every node, and sends the top-to-bottom $i$-node list of $\\lambda$ to the bottom-to-top, that is increasing-content, $(-i)$-node list of $\\lambda'$, with the same sign word. 3. **Dictionary.** Consequently the modular reduction of the top-to-bottom $i$-signature of $\\lambda$, with its good $=$ first surviving $-$ deletion and cogood $=$ last surviving $+$ addition, selects exactly the transposed nodes of the reduction of the increasing-content $(-i)$-signature of $\\lambda'$, with the same cancellation rule $-+$ and the same first surviving $-$ and last surviving $+$; reversing the latter list turns this into the decreasing-content rule $+-$ with good $=$ last surviving $-$ and cogood $=$ first surviving $+$. Both descriptions select the same actual nodes of $\\lambda'$. The dictionary is purely combinatorial and applies to every partition as a signature computation; no restriction on $\\lambda$ is used, and the restriction of the modular and Fock crystals to their basic label sets is imposed separately.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-good-node-and-cogood-node-crystal-operators",
+          "source_section": "Definition",
+          "quote": "On the set of $p$-restricted partitions ([[def-p-regular-and-p-restricted-partitions]]) define partial operators $\\tilde e_i,\\tilde f_i$ for $i\\in\\mathbb Z/p$ by $$\\tilde e_i\\mu:=\\mu\\setminus A\\quad\\text{if }\\varepsilon_i(\\mu)>0,$$ where $A$ is the good $i$-node of $\\mu$ ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]), the operator being undefined on $\\mu$ when $\\varepsilon_i(\\mu)=0$; and $$\\tilde f_i\\mu:=\\mu\\cup B\\quad\\text{if }\\varphi_i(\\mu)>0,$$ where $B$ is the cogood $i$-node of $\\mu$, the operator being undefined on $\\mu$ when $\\varphi_i(\\mu)=0$. Then $$\\mu=\\tilde f_i\\nu\\qquad\\Longleftrightarrow\\qquad\\nu=\\tilde e_i\\mu$$ for all $p$-restricted $\\mu,\\nu$; in particular $\\tilde e_i$ and $\\tilde f_i$ are mutual inverses on their domains, each $\\tilde e_i$ lowers the rank by one and each $\\tilde f_i$ raises the rank by one, and at most one good and at most one cogood node exist in each residue. No module-theoretic statement is made here: this item is pure combinatorics, and the identification of these operators with the crystal operators of the level-one Fock space is a theorem of the later Fock-space page, not an input here.",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-residue-signature-normal-good-conormal-and-cogood-nodes",
+          "source_section": "Definition",
+          "quote": "Let $p>0$ and let $\\mu$ be a $p$-restricted partition, so that\n$\\mu_i-\\mu_{i+1}<p$ for all $i\\ge1$\n([[def-p-regular-and-p-restricted-partitions]],\n[[def-partition-young-diagram-and-conjugate-partition]]). A node $(r,c)$ of\nthe Young diagram $[\\mu]$ is an **$i$-node** if its residue\n$$\\operatorname{res}(r,c):=c-r\\bmod p$$\nequals $i\\in\\mathbb Z/p$; the $i$-nodes of $\\mu$ are its addable and removable\nnodes of residue $i$\n([[def-removable-and-addable-nodes-of-a-partition]]).\n\n**The reduced $i$-signature.** Fix $i\\in\\mathbb Z/p$ and list the $i$-nodes\nof $\\mu$ as $A_1,\\dots,A_n$ from top to bottom, that is, in increasing row\nindex and, for equal row index, in increasing column index. Form the word\n$\\sigma=(\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m=+$ if $A_m$ is addable and\n$\\sigma_m=-$ if $A_m$ is removable. Whenever $r<s$, $\\sigma_r=-$,\n$\\sigma_s=+$ and $\\sigma_{r+1}=\\dots=\\sigma_{s-1}=0$, replace $\\sigma_r$ and\n$\\sigma_s$ by $0$; repeat until no $-$ lies to the left of a $+$. The\nresulting **reduced $i$-signature** has the form $+\\cdots+- \\cdots-$ with the\nzeros deleted, and the nodes attached to its signs are:\n\n- the **normal $i$-nodes** of $\\mu$ are the removable nodes corresponding to\n  the $-$ signs of the reduced signature;\n- the **good $i$-node** is the topmost (first listed) of the normal $i$-nodes;\n- the **conormal $i$-nodes** of $\\mu$ are the addable nodes corresponding to\n  the $+$ signs of the reduced signature;\n- the **cogood $i$-node** is the bottommost (last listed) of the conormal\n  $i$-nodes.\n\nWrite $\\varepsilon_i(\\mu)$ and $\\varphi_i(\\mu)$ for the numbers of normal and\nof conormal $i$-nodes of $\\mu$; the good $i$-node exists exactly when\n$\\varepsilon_i(\\mu)>0$, and the cogood $i$-node exactly when\n$\\varphi_i(\\mu)>0$. At most one good and at most one cogood $i$-node occur,\nfor each residue.\n\n**Well-definedness.** Each reduction step deletes two nonzero entries, so any\nsequence of steps terminates after at most $\\lfloor n/2\\rfloor$ steps, and in\nthe resulting word no $-$ lies to the left of a $+$: otherwise, take two\nnonzero entries that are consecutive among the nonzero entries of the current\nword and are ordered $-$, $+$; all entries strictly between them are $0$ by\nthe choice, so the pair would still be reducible. Hence, after deleting the zero entries, a terminal word is\n$+^a-^b$ for some $a,b\\ge0$; cancelled positions remain in their original\nplaces and need not form a contiguous block. The terminal word does not depend on the\norder in which reducible pairs are chosen: two reducible pairs cannot overlap\npartially, because an endpoint of one pair lying strictly inside the other\nwould be a nonzero entry in a position that the other pair requires to be\n$0$, and pairs sharing exactly one endpoint would similarly place a nonzero\nentry strictly inside the other pair; so any two reducible pairs are either\ndisjoint (and the corresponding steps commute) or equal, there are no\ncritical pairs, and the rewriting relation is locally confluent. Uniqueness follows\nby induction on the number of nonzero entries. A terminal word admits no\nstep. Otherwise, two distinct first steps commute and reach a common word\nafter one further step each. All these successor words have fewer nonzero\nentries, so the induction hypothesis identifies their terminal words. Thus\nany two reduction sequences have the same terminal word; in it the first surviving $-$ and the last surviving\n$+$ are unique positions whenever they exist. Thus the reduced signature,\nthe sets of normal and conormal nodes, and the good and cogood nodes are well\ndefined. The empty partition has the unique addable node $(1,1)$, of residue $0$,\nand no removable nodes. Its $0$-signature is $(+)$ and its other signatures\nare empty. Thus $\\varepsilon_i(\\varnothing)=0$ for every $i$,\n$\\varphi_0(\\varnothing)=1$, and $\\varphi_i(\\varnothing)=0$ for $i\\ne0$.\nIt has no good node and its cogood $0$-node is $(1,1)$.\n\n**Convention warning.** The residue $c-r$ used here is the negative of\nBrundan's $\\ell$-residue $r-c$, and a removable node of $\\mu$ is normal here\nexactly when its transposed node is normal in Brundan's sense for the\ntranspose partition $\\mu'$; lists of addable and removable nodes, and the\nsigns of the residues, must never be silently mixed between the two\nconventions\n([[def-removable-and-addable-nodes-of-a-partition]],\n[[def-partition-young-diagram-and-conjugate-partition]]).",
+          "uses": [
+            "1.2",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-good-and-cogood-nodes-by-residue-signature-reduction",
+          "source_section": "Definition",
+          "quote": "Fix a residue $i$ and a partition $\\lambda$, and write the **signature** of $\\lambda$ at $i$ as the word in the symbols $+$ (addable $i$-node) and $-$ (removable $i$-node) whose letters are the addable and removable $i$-nodes of $\\lambda$ read in the fixed increasing-content order of [[def-the-node-order-and-n-i-exponents-for-fock-space]]. Reduce the word by cancelling adjacent pairs $-+$ as long as such a pair remains. The surviving minus letters are called **normal removable** $i$-nodes, and the first surviving minus is the **good node** of $\\lambda$ for $e_i$; the surviving plus letters are called **conormal addable** $i$-nodes, and the last surviving plus is the **cogood node** for $f_i$. If no sign of the required type survives, the corresponding operator is $0$ on $|\\lambda\\rangle$. Equivalently, reading the signature in decreasing content with the reversed symbols, one cancels $+-$ and takes the good node as the last surviving $-$ and the cogood node as the first surviving $+$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-crystal-of-level-one-fock-space-is-the-good-node-partition-graph",
+          "source_section": "Statement",
+          "quote": "The whole level-one Fock module has the crystal basis $(F_0,B_F)$ with $F_0=\\bigoplus_{\\lambda}\\mathbb Z[q]|\\lambda\\rangle$ and $B_F=\\{|\\lambda\\rangle+qF_0:\\lambda\\text{ a partition}\\}$. The normalized Kashiwara operators remove the good normal $i$-node and add the cogood conormal $i$-node of the corrected signature of [[def-good-and-cogood-nodes-by-residue-signature-reduction]], and $\\varepsilon_i,\\varphi_i$ are the surviving minus/plus counts. The graph is a graph on all partitions, not only regular ones; its empty connected component is precisely the set of $e$-regular partitions, while the $e$-restricted labels belong to the transposed model. A pole or a unique Chevalley term does not determine a crystal arrow.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "For every partition $\\mu$ and every color $i$, the selection operations of the two readings correspond under transposition.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "There is no naming-polarity swap between the two conventions:",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The transported normalized operators on $F_{\\mathrm{sym}}$ are given on all partitions by the modular signature rule.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Weights transform by the reflection.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-3.2",
+          "claim": "Restricted case.",
+          "step": "3.2",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "F1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Finally, the arrows are not read off from ordinary Chevalley coefficients.",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "At the vacuum both readings have the single node (1,1) of residue 0, which step 1.1 maps to the unique node on the transposed side, so the arrow tables agree at the empty partition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Zero values are covered by the count agreement of step 1.1: epsilon_i(mu) = 0 exactly when epsilon_{-i}(mu-prime) = 0, so both sides of the arrow identity vanish together."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Single surviving signs are selected by the first- and last-surviving rules, whose coincidence under conjugation is the position-by-position identification of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "At e = 2 the color reflection is the identity on Z/2, so the dictionary reduces to step 1.2's color-fixed comparison without a separate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The first surviving - and last surviving + are the endpoint selections compared in step 2.1, and the reversal of step 3.2 exchanges exactly these endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "No choice occurs: step 2.1 reconstructs the transported normalized operators from the explicit conjugation by J, and the selections are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "One direction of the stated zero equivalence is step 1.1's count identity: epsilon_i(mu) = 0 forces epsilon_{-i}(mu-prime) = 0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse direction is step 1.1 read in the other direction, since the count identity is symmetric between mu and mu-prime."
+        }
+      ]
+    },
+    "thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators",
+          "source_section": "Statement",
+          "quote": "Consider the modular reading on the one hand (the top-to-bottom residue signature with good $=$ first surviving $-$ and cogood $=$ last surviving $+$ of [[def-symmetric-group-level-one-residue-and-partition-label-convention]], whose operators delete the good node and add the cogood node on $e$-restricted labels) and the level-one Fock crystal $\\tilde e^{\\mathrm{QG}}_i$, $\\tilde f^{\\mathrm{QG}}_i$ on the other. Conjugation $C(\\lambda) = \\lambda'$ sends the modular operators on $e$-restricted partitions onto the normalized operators of the **empty connected component** of the QG full partition Fock crystal, with the colors negated: $$C\\,\\tilde e_i\\lambda = \\tilde e^{\\mathrm{QG}}_{-i}C\\lambda, \\qquad C\\,\\tilde f_i\\lambda = \\tilde f^{\\mathrm{QG}}_{-i}C\\lambda \\qquad (\\lambda\\ e\\text{-restricted}),$$ including the zero values: the left side is zero exactly when the right side is. The survivor counts are the same on both sides, $\\varepsilon_i(\\lambda) = \\varepsilon_{-i}(\\lambda')$ and $\\varphi_i(\\lambda) = \\varphi_{-i}(\\lambda')$, and the weight transforms by the diagram reflection, $\\operatorname{wt}(\\lambda') = \\tau(\\operatorname{wt}(\\lambda))$. With the transported full module $F_{\\mathrm{sym}}$ of [[def-symmetric-group-level-one-residue-and-partition-label-convention]], the modular signatures likewise give its normalized operators on **all** partitions (the transported operators $J^{-1}\\tilde e^{\\mathrm{QG}}_{-i}J$, $J^{-1}\\tilde f^{\\mathrm{QG}}_{-i}J$), and the restricted subset of that full crystal is its basic component. In both conventions good means removable (deletion, $\\tilde e$) and cogood means addable (addition, $\\tilde f$): there is no opposite naming-polarity dictionary exchanging deletion with addition. Ordinary Chevalley coefficients, especially negative powers such as $q^{-1}$, do not define these arrows.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement. > Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for all $S \\in \\mathcal{F}$. An equivalent formulation is that a product of nonempty sets is nonempty: if $X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$. Here $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that $f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by itself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero",
+          "source_section": "Statement",
+          "quote": "With the declared use of the Axiom of Choice in the general integrable-module decomposition, the empty connected component of the full partition crystal of [[thm-the-crystal-of-level-one-fock-space-is-the-good-node-partition-graph]] is the canonical highest weight crystal $B(\\Lambda_0)$, with exactly the $e$-regular labels. Its module is $M=U_q(\\mathfrak g)|\\varnothing\\rangle$ and its lower $A_0$-lattice is $M\\cap F_0$; it occurs once. More precisely $$F=\\bigoplus_{k\\ge0}V(\\Lambda_0-k\\delta)^{\\oplus p(k)},$$ a locally weight-finite indexed direct sum in which $p(k)$ is the number of ordinary partitions of $k$; consequently $\\mathrm{ch}\\,F=\\mathrm{ch}\\,V(\\Lambda_0)\\prod_{r\\ge1}(1-e^{-r\\delta})^{-1}$. A highest **crystal** label need not be a highest **field** standard vector, and the ambient canonical basis need not split these summands.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-every-p-restricted-partition-is-reached-by-cogood-node-additions",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic $p>0$. Every $p$-restricted partition $\\mu$ of $d$ is obtained from the empty partition by $d$ successive cogood additions: there are residues $i_1,\\dots,i_d$ with $$\\mu=\\tilde f_{i_d}\\cdots\\tilde f_{i_1}\\varnothing;$$ equivalently, every $p$-restricted $\\mu\\ne\\varnothing$ has at least one good node, and successive good deletions carry $\\mu$ to $\\varnothing$ ([[def-good-node-and-cogood-node-crystal-operators]], [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]). Hence, in the graph whose vertices are the $p$-restricted partitions and whose edges join $\\nu$ to $\\tilde f_i\\nu$ for every $i$ for which the operator is defined, the empty partition is the unique vertex of rank $0$ and every vertex is reached from it; dually every vertex reaches the empty partition by successive good deletions. The argument is choice-free.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-generalized-jm-primary-idempotents-and-residue-summand-functors",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field of characteristic $p>0$ and let $L_1,\\dots,L_n\\in kS_n$\nbe the Jucys-Murphy elements $L_r=\\sum_{s<r}(s,r)$ of the symmetric group\nalgebra ([[def-jucys-murphy-elements-of-the-symmetric-group-algebra]]). Recall\nthat they commute pairwise\n([[cor-jucys-murphy-elements-commute-pairwise]]), and for $r\\le n$ the\nelement $L_r$ lies in the subalgebra $kS_r\\subseteq kS_n$ and therefore\ncommutes with $S_{r-1}$.\n\n**(i) Primary idempotents.** In the commutative subalgebra\n$k[L_1,\\dots,L_n]\\subseteq kS_n$ the minimal polynomial of each $L_r$ on the\nregular module splits into linear factors $X-a$ with $a$ in the prime field\n$\\mathbb F_p\\subseteq k$, and the commuting family admits the following\nsimultaneous primary decomposition. There are pairwise orthogonal idempotents\n$P_{r,a}\\in k[L_r]\\subseteq k[L_1,\\dots,L_n]$, indexed by $r\\in\\{1,\\dots,n\\}$\nand $a\\in\\mathbb F_p$, with\n$$\\sum_{a\\in\\mathbb F_p}P_{r,a}=1,\\qquad P_{r,a}P_{r,b}=\\delta_{a,b}P_{r,a},$$\nsuch that for every finite-dimensional $kS_n$-module $M$ the action of\n$P_{r,a}$ on $M$ is the projection onto the generalized eigenspace\n$M_{r,a}=\\{m\\in M:(L_r-a)^Nm=0\\text{ for }N\\gg0\\}$. The $P_{r,a}$ for\ndifferent $r$ commute, and for each sequence $\\mathbf i=(i_1,\\dots,i_n)$\nwith entries in $\\mathbb F_p$ the products\n$$e(\\mathbf i):=\\prod_{r=1}^nP_{r,i_r}\\ \\in\\ k[L_1,\\dots,L_n]$$\nare pairwise orthogonal idempotents with $\\sum_{\\mathbf i}e(\\mathbf i)=1$ and\n$e(\\mathbf i)M=M_{\\mathbf i}$, the simultaneous generalized weight space\n$M_{\\mathbf i}=\\{m:(L_r-i_r)^Nm=0\\ \\forall r,\\ N\\gg0\\}$. Every $P_{r,a}$ and\nevery $e(\\mathbf i)$ is fixed by the antipode $g\\mapsto g^{-1}$ of $kS_n$.\n\n**(ii) Content sums and blocks.** The symmetric group $S_n$ permutes the\ncoordinates of sequences, and two sequences are called *equivalent* when they\ndiffer by a permutation, i.e. when they have the same content (the same\nmultiset of entries of $\\mathbb F_p$). Write $\\mathcal C_n=(\\mathbb F_p)^n/S_n$ for the set of content classes\n(equivalently, multisets of $n$ residues). For $\\alpha\\in\\mathcal C_n$ let\n$I_\\alpha$ be the set of sequences representing $\\alpha$, and put\n$$e_\\alpha:=\\sum_{\\mathbf i\\in I_\\alpha}e(\\mathbf i)\\ \\in\\ kS_n .$$\nEach $e_\\alpha$ is a central idempotent of $kS_n$, and distinct $e_\\alpha$\nare orthogonal; the nonzero $e_\\alpha$ are exactly the primitive central\nidempotents, that is the block idempotents of $kS_n$\n([[def-p-blocks-by-primitive-central-idempotents]]), and every block\nidempotent of $kS_n$ is of the form $e_\\alpha$: this last identification of\nthe content sums with the blocks is the block theorem of Lyle-Mathas and\nBrundan recorded as (2.41) in Kleshchev's survey (printed p. 11), with the\ncontent of the block being the content of any of its partitions. The present\nitem proves the centrality, idempotency and orthogonality of the sums\n$e_\\alpha$ and then uses only those properties; primitivity and\nexhaustiveness are recorded from the cited block theorem, not re-proved here.\n\n**(iii) Residue-summand functors.** For a finite-dimensional $kS_n$-module\n$M$, a residue $i\\in\\mathbb Z/p$ and a content class\n$\\alpha\\in\\mathcal C_{n-1}$, put\n$$e_{\\alpha,\\alpha_i}:=\\sum_{\\mathbf j\\in I_\\alpha}e((\\mathbf j,i)) \\ =\\ e_\\alpha^{(n-1)}\\,P_{n,i},$$\nwhere $(\\mathbf j,i)$ denotes concatenation, $e_\\alpha^{(n-1)}=\\sum_{\\mathbf\nj\\in I_\\alpha}e(\\mathbf j)$ is the content sum computed in $kS_{n-1}$ and\nregarded in $kS_n$ through the inclusion $kS_{n-1}\\subseteq kS_n$, and\n$P_{n,i}\\in k[L_n]$. Each $e_{\\alpha,\\alpha_i}$ is an idempotent of $kS_n$\ncommuting with $kS_{n-1}$, the family\n$\\{e_{\\alpha,\\alpha_i}\\}_{i\\in\\mathbb F_p,\\alpha\\in\\mathcal C_{n-1}}$ is a family of pairwise orthogonal\nidempotents with $\\sum_{i,\\alpha}e_{\\alpha,\\alpha_i}=1$, and\n$$E_iM:=\\sum_{\\alpha\\in\\mathcal C_{n-1}}e_{\\alpha,\\alpha_i}M =\\bigoplus_{\\alpha}e_{\\alpha,\\alpha_i}M$$\nis a $kS_{n-1}$-submodule of the restricted module with\n$$\\operatorname{Res}^{S_n}_{S_{n-1}}M=\\bigoplus_{i\\in\\mathbb Z/p}E_iM .$$\nDually, for a finite-dimensional $kS_d$-module $M$ of content\n$\\alpha\\in\\mathcal C_d$, i.e. $M=e_\\alpha^{(d)}M$, put\n$$F_iM:=kS_{d+1}\\,e_{\\alpha,\\alpha_i}\\otimes_{kS_d}M \\qquad(i\\in\\mathbb Z/p),$$\nwith $e_{\\alpha,\\alpha_i}=e_\\alpha^{(d)}P_{d+1,i}\\in kS_{d+1}$; for a\ngeneral finite-dimensional $M$, with the sum indexed by $\\alpha\\in\\mathcal C_d$, put\n$F_iM:=\\bigoplus_\\alpha kS_{d+1}e_{\\alpha,\\alpha_i}\\otimes_{kS_d}e_\\alpha M$.\nThen $\\operatorname{Ind}^{S_{d+1}}_{S_d}M=\\bigoplus_{i\\in\\mathbb Z/p}F_iM$,\nand all the functors $E_i,F_i$ are additive and exact, preserve\nfinite-dimensionality, and commute with contragredient duality, because the\nprojectors are fixed by the antipode. All statements hold at $p=2$; the\nconstruction is choice-free.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field of characteristic $p>0$, $\\mu$ a $p$-restricted partition of $d$ and $i\\in\\mathbb Z/p$ with $\\varepsilon_i(\\mu)>0$; let $A$ be the good $i$-node and $\\nu=\\mu\\setminus A$ ([[def-residue-signature-normal-good-conormal-and-cogood-nodes]]). For the residue-summand functor $E_i$ of [[def-generalized-jm-primary-idempotents-and-residue-summand-functors]] the module $E_iD(\\mu)$ has simple socle and simple head, both isomorphic to $D(\\nu)$, and the total (ungraded) multiplicity of $D(\\nu)$ in $E_iD(\\mu)$ is $\\varepsilon_i(\\mu)$. Thus the Loewy endpoints are simple even though the formal character of $E_iD(\\mu)$ may contain the additional normal-node factors of [[thm-normal-node-composition-multiplicities-under-residue-restriction]].",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality",
+          "source_section": "Statement",
+          "quote": "Let $p$ be a prime, let $n\\ge0$, and let $(K,\\mathcal O,k)$ be a splitting $p$-modular system for $S_n$, so that $k$ is a splitting field of characteristic $p$ for $S_n$ ([[def-splitting-p-modular-system-for-a-finite-group]]). For $\\mu\\vdash n$ write $S^\\mu_k=k\\otimes_{\\mathbb Z}S^\\mu_{\\mathbb Z}$ for the field-valued Specht module, $D^\\mu=S^\\mu_k/R^\\mu$ for its modular form quotient ([[def-modular-specht-form-and-radical-quotient]]), and let $$S(\\mu):=(S^\\mu_k)^*=\\operatorname{Hom}_k(S^\\mu_k,k),\\qquad (\\sigma\\cdot f)(x):=f(\\sigma^{-1}x)$$ be the **dual Specht module**, with $$D(\\mu):=\\operatorname{hd}\\bigl(S(\\mu)\\bigr) =S(\\mu)/\\operatorname{rad}\\bigl(S(\\mu)\\bigr)$$ its head ([[def-module-radical-socle-head-and-loewy-series]]). Let $\\mu'$ be the conjugate partition, and let $S^{\\mu'}_k\\otimes\\operatorname{sgn}$ be the tensor product of $k[S_n]$-modules with the diagonal action $\\sigma\\cdot(x\\otimes w)=(\\sigma\\cdot x)\\otimes(\\sigma\\cdot w)$, where $\\operatorname{sgn}$ is the one-dimensional sign representation ([[def-sign-representation-and-restriction-of-a-representation]], [[def-tensor-product-of-modules-by-generators-and-relations]]). 1. **Dual Specht versus sign-twisted conjugate.** If $\\mu$ is $p$-restricted (equivalently, by [[def-p-regular-and-p-restricted-partitions]], $\\mu'$ is $p$-regular), then $S(\\mu)\\cong S^{\\mu'}_k\\otimes\\operatorname{sgn}$; consequently $S(\\mu)$ is nonzero with simple head $$D(\\mu)\\cong D^{\\mu'}\\otimes\\operatorname{sgn},$$ a nonzero simple $k[S_n]$-module that is self-dual and absolutely irreducible. 2. **Equivalent form for $p$-regular labels.** If $\\lambda\\vdash n$ is $p$-regular, then $\\lambda'$ is $p$-restricted and $$D^\\lambda\\cong D(\\lambda')\\otimes\\operatorname{sgn}.$$ 3. **The two labellings.** The map $\\mu\\mapsto D(\\mu)$ is a bijection from the set of $p$-restricted partitions of $n$ to the set of isomorphism classes of simple $k[S_n]$-modules; that is, every simple $k[S_n]$-module is isomorphic to $D(\\mu)$ for exactly one $p$-restricted $\\mu\\vdash n$. In characteristic $2$ the sign representation is the trivial representation, so the formulas read $D(\\mu)\\cong D^{\\mu'}$ and $D^\\lambda\\cong D(\\lambda')$; the transposition is still required, and the two labellings coincide only for self-conjugate partitions. No step divides by a group order or uses averaging, and $n=0$ is included.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-jucys-murphy-elements-of-the-symmetric-group-algebra",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$ and let $R$ be a commutative ring. In the group ring $R[S_n]$ of the symmetric group on $\\{1,\\dots,n\\}$ ([[def-partition-young-diagram-and-conjugate-partition]], [[def-symmetric-group]], [[def-group-ring]]), where $(j\\ k)$ denotes the transposition of the distinct entries $j,k\\in\\{1,\\dots,n\\}$ ([[def-symmetric-group]]), the **Jucys-Murphy elements** are $$X_1:=0,\\qquad X_k:=\\sum_{j=1}^{k-1}(j\\ k)\\in R[S_n]\\qquad(2\\le k\\le n).$$ Each $X_k$ is a finite sum of group elements with coefficient $1$, so the formula already defines an element of the integral group ring $\\mathbb Z[S_n]$, and its image under the base change $\\mathbb Z[S_n]\\to R[S_n]$ is the displayed element ([[def-restriction-and-extension-of-scalars]]); for $1\\le k\\le m\\le n$ the element $X_k$ of $R[S_m]$, computed in the subgroup $S_m=\\operatorname{Sym}(\\{1,\\dots,m\\})\\subseteq S_n$ of permutations fixing $m+1,\\dots,n$, maps to $X_k$ under the inclusion $S_m\\hookrightarrow S_n$. Equivalently $X_k=T_k-T_{k-1}$, where $T_k=\\sum_{1\\le i<j\\le k}(i\\ j)$ is the sum of all transpositions in $S_k$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sign-representation-and-restriction-of-a-representation",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field. For the symmetric group $S_n$ ([[def-symmetric-group]]), the **sign representation** over $k$ is the one-dimensional representation on $k$ in which $$\\sigma \\cdot a:=\\operatorname{sgn}(\\sigma)a.$$ This is a representation because $\\operatorname{sgn}:S_n \\to \\{\\pm 1\\}$ is a group homomorphism ([[thm-sign-is-a-homomorphism]]). Now let $\\rho:G \\to \\operatorname{GL}(V)$ be a representation of a group $G$ over $k$, and let $H \\le G$ be a subgroup ([[def-subgroup]]). The **restriction** of $\\rho$ to $H$ is the representation $$\\operatorname{Res}^G_H(V):=\\rho|_H:H \\longrightarrow \\operatorname{GL}(V),\\qquad h \\longmapsto \\rho(h).$$ It has the same underlying vector space $V$ and only forgets the action of the elements outside $H$.",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-module-radical-socle-head-and-loewy-series",
+          "source_section": "Definition",
+          "quote": "Let $A$ be a finite-dimensional algebra and $M$ a finite-dimensional left $A$-module. - Its **radical** is $$ \\operatorname{rad}(M)=J(A)M, $$ equivalently the intersection of the maximal submodules, by [[thm-module-radical-is-jacobson-radical-times-the-module]]. - Its **socle** $\\operatorname{Soc}(M)$ is the sum of all simple submodules, as in [[def-socle-of-a-module]]. - Its **head** or **top** is the quotient $$ \\operatorname{hd}(M):=M/\\operatorname{rad}(M), $$ formed using [[def-quotient-module]]. - Its **Loewy series** is the descending radical filtration $$ M\\supseteq \\operatorname{rad}(M)\\supseteq \\operatorname{rad}^2(M)\\supseteq\\cdots $$ together with the corresponding semisimple layers $\\operatorname{rad}^i(M)/\\operatorname{rad}^{i+1}(M)$. The simple subquotients appearing in the Loewy layers are simple in the sense of [[def-simple-module]].",
+          "uses": [
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The conjugation dictionary identifies the vertex sets of the two components.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The transported component is connected and generated from the vacuum.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "The weight function is the transported one.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "This proves part 1 of the Statement:",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "For part 2, the full $F_{\\mathrm{sym}}$ has all partitions as vertices and its module is the transport of the modules of [F3], so its field decomposition is $F_{\\mathrm{sym}} \\cong \\bigoplus_{k\\ge0} V",
+          "step": "4.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-4.2",
+          "claim": "Part 3, the James labels and the socle formula.",
+          "step": "4.2",
+          "inputs": [
+            "3.1",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "Part 4, the boundary and the naming caveats.",
+          "step": "5.1",
+          "inputs": [
+            "3.1",
+            "4.2",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty partition is the highest vertex of the component, reached by zero cogood additions, and step 1.1 identifies it as the J-image of the vacuum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The quantum-characteristic boundary e = 0 is disposed of separately in step 5.1 and is excluded from the finite affine claims of steps 1.1-4.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The level-one constants appear as p(0) = p(1) = 1 in step 4.1's decomposition, and the one-dimensional top weight space is the start of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The prime case includes p = 2, where the sign representation is trivial and -i = i over Z/2, and step 4.2's sign-twist argument covers it without change."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The component's lowest vertex is the vacuum and its full vertex set is identified in step 3.1; every restricted shape is an endpoint of some cogood-addition chain by step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The axiom of choice is consumed exactly through the decomposition theorem recorded in step 4.1; steps 1.1-3.1 are choice-free transports."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "One direction of the component identification is step 1.1: every vertex of the empty component transposes to an e-restricted shape."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse is step 2.1: every e-restricted shape is generated from the empty partition by cogood additions and hence lies in the component."
+        }
+      ]
+    },
+    "def-level-one-global-basis-transition-polynomials-in-the-symmetric-group-convention": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-the-basic-representation-global-basis-is-unitriangular-in-the-partition-basis",
+          "source_section": "Statement",
+          "quote": "There is an explicit semi-infinite wedge bar $\\psi$ with the vacuum fixed,\ncoefficient bar $q\\mapsto q^{-1}$ and $U_q$/bar compatibility, whose restriction\nto $M=V(\\Lambda_0)$ is the normalized highest module bar. On **all** partitions\nits integral triangular correction is\n\n$$G(\\lambda)=|\\lambda\\rangle+\\sum_{\\mu\\ \\text{strictly dominated by}\\ \\lambda}d_{\\mu,\\lambda}(q)|\\mu\\rangle, \\qquad d_{\\mu,\\lambda}\\in q\\mathbb Z[q],$$\n\nwith diagonal $1$ and same $e$-core support; the family $\\{G(\\lambda)\\}$ is an\n$A$-basis of $F_A$ and an $A_0$-basis of $F_0$, with the actual infinity chart\nand balanced $\\mathbb Z$-intersection. Exactly the $e$-regular $G(\\lambda)$ form\nthe lower global basis of $M$, identified by the two lower-global-basis\nsuppliers. The ambient basis is not automatically compatible with the other\nfield irreducible summands. The transpose equality\n$d_{\\lambda,\\mu}=d_{\\mu',\\lambda'}$ is **false** in general; the source symmetry\nconcerns the bar matrix, not $D$. Ambient natural-form dual coefficients use\n$(D^{-1})^{\\mathsf T}$, and basic upper coefficients require the restricted Gram\ninverse and need not be Laurent polynomials.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention",
+          "source_section": "Statement",
+          "quote": "Fix a finite integer $e \\ge 2$. In the symmetric-group convention of\n[[def-symmetric-group-level-one-residue-and-partition-label-convention]]:\n\n1. The empty component of the transported full Fock crystal $F_{\\mathrm{sym}}$\n   is **exactly the set of $e$-restricted partitions**, its operators are the\n   modular good-node deletions and cogood-node additions, its weight function is\n   $\\operatorname{wt}(\\lambda) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, the\n   counts $\\varepsilon_i$, $\\varphi_i$ are the numbers of normal and of\n   conormal $i$-nodes, and the component is $B(\\Lambda_0)$: every $e$-restricted\n   shape is reached from the empty partition by successive cogood additions.\n2. The full $F_{\\mathrm{sym}}$ has all partitions as vertices and is reducible;\n   its transported field decomposition is\n   $F_{\\mathrm{sym}} \\cong \\bigoplus_{k \\ge 0} V(\\Lambda_0 - k\\delta)^{\\oplus p(k)}$\n   with $p(k)$ the number of partitions of $k$, so its other vertices are\n   exactly the non-restricted shapes.\n3. In the symmetric-group regime (algebraically closed field $k$ of\n   characteristic $p > 0$, Hecke parameter $\\xi = 1$, so $e = p$ is prime) the\n   $e$-restricted labels $\\lambda$ are the simple $kS_d$-modules in the\n   dual-Specht convention, and for every $i$ with $\\varepsilon_i(\\lambda) > 0$\n   $$\\operatorname{soc}\\bigl(E_{-i}D^{\\lambda'}\\bigr) = D^{(\\tilde e_i\\lambda)'},$$\n   where $D^{\\lambda'}$ is the James-labelled simple, $E_{-i}$ the\n   residue-summand functor after the sign twist, and $D^{(\\tilde e_i\\lambda)'}$\n   the James label of the deleted shape. That is, the standard $E_{-i}$ is the\n   residue functor twisted by the sign representation.\n4. At quantum characteristic $e = 0$ (colors $\\mathbb{Z}$) every level-one\n   partition is a label of the empty $\\mathfrak{sl}_\\infty$ crystal, there are\n   no same-content corner cancellations, and no finite affine datum, weight\n   formula or Hecke module statement is made.\n\nGeneral finite-$e$ Hecke crystal labels remain valid, but they are not called\nsymmetric-group modules of \"characteristic $e$\". The axiom of choice is used\nexactly as declared in the contract, through the highest-weight decomposition of\nthe full Fock module; the component identification of part 1 is choice-free.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-upper-and-lower-global-bases-are-dual-and-crystal-compatible",
+          "source_section": "Statement",
+          "quote": "Let $M$ be $U^-$ or $V(\\lambda)$ with the balanced triple and lower global basis of [[def-lower-global-basis-of-a-quantum-highest-weight-module]], and let $M_A^\\vee$, $L_0^\\vee$, $L_\\infty^\\vee$, $G^{\\mathrm{up}}$, $\\psi^\\vee$ and the upper Kashiwara operators be as in [[def-upper-global-basis-by-the-contravariant-form]]. Then, for every finite root or label component:\n\n(i) the restricted graded integral dual $M_A^\\vee$ has the actual $A$-basis $\\{G^{\\mathrm{up}}(b)\\}$ dual to $\\{G(b)\\}$, and $B:(M_A^\\vee)_\\mu\\times(M_A)_\\mu\\to A$ is perfect; globally the bases form direct sums, which is restricted graded perfectness and not an identification with the full product $\\operatorname{Hom}_A(M_A,A)$;\n\n(ii) the dual charts are $L_0^\\vee=\\bigoplus_bA_0G^{\\mathrm{up}}(b)$ and $L_\\infty^\\vee=\\bigoplus_bA_\\infty G^{\\mathrm{up}}(b)$, and their balanced $\\mathbb Z$-intersection is $\\bigoplus_b\\mathbb ZG^{\\mathrm{up}}(b)$, so the dual triple is integrally balanced; at $0$ one has $L_0^\\vee=L_0$ and the residue of $G^{\\mathrm{up}}(b)$ is $b$, while at infinity its residue is the dual of the lower infinity-chart class in the dual infinity chart;\n\n(iii) the upper bar $\\psi^\\vee$ fixes each $G^{\\mathrm{up}}(b)$;\n\n(iv) the upper operators satisfy the exact mixed adjunctions $B(\\tilde f_i^{\\mathrm{low}}u,v)=B(u,\\tilde e_i^{\\mathrm{up}}v)$ and $B(\\tilde e_i^{\\mathrm{low}}u,v)=B(u,\\tilde f_i^{\\mathrm{up}}v)$; their reductions at $0$ equal the lower crystal operators and give the same crystal set $\\mathcal B$;\n\n(v) for a divided module string $F_i^{(n)}v$ of top rank-one weight $a$, with $d_{a,n}=q_i^{n(a-n)}\\binom{a}{n}_i$, the upper operator $\\tilde e_i^{\\mathrm{up}}$ at position $n\\ge1$ multiplies the preceding divided position by $d_{a,n}/d_{a,n-1}=q_i^{a-2n+1}[a-n+1]_i/[n]_i$, and $\\tilde f_i^{\\mathrm{up}}$ at position $n<a$ multiplies the next by the reciprocal $d_{a,n}/d_{a,n+1}$; for a half string with $e_i'v=0$, with $d_n=q_i^{-n(n-1)/2}/[n]_i!=1/[n]_{q_i^2}!$, the ratios are $1/[n]_{q_i^2}$ and $[n+1]_{q_i^2}$. All admissible ratios are units congruent to $1$ in $A_0$, so unweighted lower adjunction holds modulo $q$ but generally not exactly over $\\mathbb Q(q)$. No equality of upper and lower integral bases, even in symmetric type, is implied.",
+          "uses": [
+            "4.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine\nCartan datum, its lattices and its diagram reflection $\\tau$ fixed as in\n[[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple\nroots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and\n$\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and\nthe *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is\nthe level-one, charge-$0$ specialization of the residue used in\n[[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the\nEnglish convention (rows increase downwards) and the node language of\n[[def-removable-and-addable-nodes-of-a-partition]] and\n[[def-partition-young-diagram-and-conjugate-partition]].\n\nA partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a\npart of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if\n$\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded\nby trailing zeros; these are the prime-case notions of\n[[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime\n$p$. A column of height $e$ is allowed in an $e$-restricted partition. The two\nclasses are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if\nits conjugate $\\lambda'$ is $e$-regular (step 2.1 below).\n\n**The modular (restricted) signature.** Let $\\lambda$ be a partition and\n$i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of\nresidue $i$; list them *top to bottom*, that is by increasing row index and then\nincreasing column index, obtaining $A_1,\\dots,A_n$, and form the word\n$\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and\n$\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$,\n$\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace\n$\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors\nare the *normal* removable and *conormal* addable $i$-nodes; write\n$\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If\n$\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node\nbelonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with\nthat node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the\naddable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is\n$\\lambda$ with that node added (otherwise the respective partial operator is\nundefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level\none, with good $=$ top normal and cogood $=$ bottom conormal. **This is the\nreading used for the restricted (symmetric-group) model**, in which the labels\nof the level-one basic module are the $e$-restricted shapes; Fayers' equivalent\nformulation reads the same list with the opposite cancellation and extracts the\nlast surviving $- $ and first surviving $+$, and his increasing-column model of\nthe $e$-restricted labels is the basic crystal $B(\\Lambda_0)$.\n\n**The linear (symmetric-group) model and the transport $J$.** Let\n$$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$\nbe the charge-$0$ level-one partition Fock space with\n$\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$,\nwhere $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and\nwith the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge\nbar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the\noperators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$\nis the same $\\mathbb{Q}(q)$-vector space with the basis relabelled\n$M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$\nis the $\\mathbb{Q}(q)$-linear isomorphism\n$$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$\nwith the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the\nstructure along $J$:\n$$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$\nand give $M_\\lambda$ the weight\n$\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The\ntransported operators are defined on the ambient basis of *all* partitions.\nWith $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring\n$A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the\n**standard chart** of the symmetric-group model is\n$$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$\nthe full ambient model is indexed by all partitions, while its basic component\nin this convention is carried by the $e$-restricted shapes (the comparison with\nthe QG model is made by the results of this page).\n\n**Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$\nexchanges the $e$-restricted and the $e$-regular partitions, preserves the\naddable/removable *type* of each node and negates residues; it is a comparison\nmap *between* the restricted and the regular models, not an involution of one\nlabel set, and it is not the same-model sign (Mullineux) involution of\nKleshchev's Theorem 11.8, which fixes the restricted label set and negates\nresidues along a good-node path. In the symmetric-group regime (ground field of\ncharacteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the\n$e$-restricted partitions are the labels of the simple modules in the\ndual-Specht convention and the $e$-regular partitions those of James, the two\ndictionaries being related by\n$D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently\n$D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$\n([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]);\nfor a general Hecke parameter the finite integer $e \\ge 2$ is its quantum\ncharacteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$)\nand need not be prime, so the general finite-$e$ crystal labels are not called\nsymmetric-group modules of \"characteristic $e$\". At quantum characteristic\n$e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine\ndatum is present: every level-one partition is a crystal label, and no weight\nformula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Transport of the lower basis and the coefficient identity. By [F1] the QG lower basis satisfies $G_{\\mathrm{QG}}(\\lambda') = |\\lambda'\\rangle + \\sum_{\\nu} D_{\\mathrm{QG}}(\\nu,\\lambda')|\\nu\\rangle$ with $D_{\\mathrm{QG}}(\\nu,\\lambda')$ the coefficient of $|\\nu\\rangle$, and $D_{\\mathrm{QG}}(\\nu,\\lambda') = d_{\\nu\\lambda'}(q)$; applying $J^{-1}$ and using $J^{-1}|\\nu\\rangle = M_{\\nu'}$ gives $G_{\\mathrm{sym}}(\\lambda) = M_\\lambda + \\sum_{\\nu} d_{\\nu\\lambda'}(q) M_{\\nu'} = \\sum_\\mu d_{(\\lambda,\\mu)}(q) M_\\mu$ with $d_{(\\lambda,\\mu)}(q) = D_{\\mathrm{QG}}(\\mu',\\lambda')$, the sum being weightwise finite by [F5], and the congruence $G_{\\mathrm{sym}}(\\lambda) \\equiv M_\\lambda \\bmod q(F_0)_{\\mathrm{sym}}$ follows from $G_{\\mathrm{QG}}(\\lambda') \\equiv |\\lambda'\\rangle \\bmod qF_0$.",
+          "step": "1.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Finite weight spaces and the ambient form. By [F5] each $V_w$ is finite-dimensional, and $B$ restricts to a nondegenerate symmetric bilinear form on it with the standard basis orthonormal. The restricted labels $\\lambda$ of weight $w$ are finitely many by [F5], so $D_{\\mathrm{rect}}$ has finitely many columns, and the corresponding $G_{\\mathrm{sym}}(\\lambda)$ are linearly independent because they are distinct elements of the lower global basis of $M_{\\mathrm{sym}}$ from [F2] (respectively the defining family of [F1] transported).",
+          "step": "1.2",
+          "inputs": [
+            "given",
+            "F2",
+            "F5",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Support of the transition polynomials. By [F1] the QG coefficients are $1$ on the diagonal, lie in $q\\mathbb{Z}[q]$ off it, and vanish unless $\\nu$ is strictly dominated by $\\lambda'$ and has the same $e$-core; transporting, $d_{(\\lambda,\\lambda)} = 1$, the off-diagonal $d_{(\\lambda,\\mu)}$ lie in $q\\mathbb{Z}[q]$, and they vanish unless $\\mu'$ is strictly dominated by $\\lambda'$, equivalently $\\mu$ strictly dominates $\\lambda$, and $\\mu$ shares the $e$-core of $\\lambda$. For the remaining weight condition: the bar of [F1] reverses the wedge word and multiplies by a scalar read off the residue multiset, hence maps each Fock weight space to itself up to the $q$-semilinear coefficient; the triangular correction recursion producing $G_{\\mathrm{QG}}(\\lambda')$ from $\\psi(|\\lambda'\\rangle)$ therefore runs inside the weight space of $|\\lambda'\\rangle$, so every standard vector $|\\nu\\rangle$ occurring in $G_{\\mathrm{QG}}(\\lambda')$ has the same residue multiset as $\\lambda'$; transported, $d_{(\\lambda,\\mu)} \\ne 0$ forces $m_j(\\mu') = m_j(\\lambda')$ for all $j$, that is, the full reflected residue weight of $\\mu$ equals that of $\\lambda$.",
+          "step": "2.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The ambient upper coordinates. Let $D:=D_{\\mathrm{rect}}$, with $D_{\\mu\\lambda}=d_{(\\lambda,\\mu)}$. The matrix $H=D^{\\mathsf t}D$ is the Gram matrix of the basic lower vectors under the ambient orthonormal form. Since $D(0)$ has distinct coordinate columns, $H(0)=I$ by [F5], proving $\\det H\\ne0$. The columns of $DH^{-1}$ lie in the column space of $D$, namely $(M_{\\mathrm{sym}})_w$, and $(DH^{-1})^{\\mathsf t}D=H^{-1}H=I$, so they pair as the dual family. Nondegeneracy of $H$ makes this family unique inside the basic subspace. In the whole ambient space the pairing equations determine a coset modulo the orthogonal complement of the basic subspace. The coefficients $e_{(\\lambda,\\mu)}=(DH^{-1})_{\\mu\\lambda}$ are in $\\mathbb Q(q)$.",
+          "step": "2.2",
+          "inputs": [
+            "given",
+            "F5",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The worked instance at $e = 2$. The weight space of $M_{1,1}$ consists of the standard shapes $(2)$ and $(1,1)$ and of the restricted labels $(1,1)$ only, since $(2)$ is not $2$-restricted. By [F4] the QG lower basis has $G(2) = |2\\rangle + q|11\\rangle$; transposition gives $2' = (1,1)$ and $(1,1)' = 2$, so $G_{\\mathrm{sym}}(1,1) = J^{-1}G(2) = M_{1,1} + qM_2$, whence $D_{\\mathrm{rect}} = \\binom{q}{1}$ with rows $(2),(1,1)$, $H = D^{\\mathsf{t}}D = 1 + q^2$, and $G_{\\mathrm{sym}}^*(1,1) = \\frac{qM_2^* + M_{1,1}^*}{1+q^2}$; the coefficient $\\frac{1}{1+q^2}$ is not in $A = \\mathbb{Z}[q,q^{-1}]$, since a Laurent polynomial has no pole at a root of $1+q^2$, so the ambient coordinates are genuinely rational, while the leading term and the integrality of $d$ are as in steps 1.1 and 2.1.",
+          "step": "3.1",
+          "inputs": [
+            "given",
+            "F4",
+            "step 1.1",
+            "step 2.2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The full ambient dual matrix. On the whole Fock space, $D_{\\mathrm{full}}$ is unitriangular by [F1] with off-diagonal entries in $q\\mathbb{Z}[q]$; its dual basis with respect to the ambient form $B$ has coefficient matrix the transpose inverse $D_{\\mathrm{full}}^{-\\mathsf{t}}$, by the same computation as step 2.2 applied to the square unitriangular matrix (here the standard basis of the whole space is orthonormal and the family $\\{G(\\mu)\\}$ is a basis). We claim $D_{\\mathrm{full}}^{-1}$ has entries in $\\mathbb{Z}[q]$: in every finite truncation the strictly triangular part $N$ of $D_{\\mathrm{full}} = 1 + N$ satisfies $N^{m} = 0$ for large $m$, so $(1+N)^{-1} = 1 - N + N^2 - \\dots$ is a finite sum with entries in $\\mathbb{Z}[q]$; hence $D_{\\mathrm{full}}^{-\\mathsf{t}}$ is Laurent integral, in contrast with the non-integral ambient coordinates of step 3.1.",
+          "step": "4.1",
+          "inputs": [
+            "given",
+            "F1",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "The exact integral upper basis and the form identification. On the QG standard frame the ambient form is orthonormal. For an addition $\\mu=\\nu+\\gamma$ of residue $i$, the node coefficient of $F_i$ is $q^{N_i^r}$, while that of $q^{-1}K_iE_i$ on the reverse edge is $q^{N_i(\\nu)-1-N_i^l}$. The splitting identity $N_i^r+N_i^l=N_i(\\nu)-1$ makes them equal ([[def-the-node-order-and-n-i-exponents-for-fock-space]], [[thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations]]). The diagonal toral operators are self-adjoint, and symmetry supplies the reverse $E_i$ identity; thus the ambient form is contravariant for $\\sigma(F_i)=q^{-1}K_iE_i$ and $\\sigma(E_i)=qF_iK_i^{-1}$. Its restriction to the vacuum basic module is normalized by $B(\\varnothing,\\varnothing)=1$, and uniqueness of the normalized highest-weight contravariant form identifies it with the QG form ([[def-contravariant-form-on-an-integrable-quantum-highest-weight-module]]). The linear relabelling $J$ permutes the orthonormal standard frame and transports the action, so the same identification holds on $M_{\\mathrm{sym}}$. Consequently [F3] makes the vectors of step 2.2 the transported upper global basis, free over $A$ in the restricted integral dual lattice and perfectly paired with the lower $A$-span. Their standard-frame coefficients can be rational as in step 3.1; this does not contradict integrality in the upper basis and implies no lower-$A$ selfduality or $A$-unit Gram matrix.",
+          "step": "4.2",
+          "inputs": [
+            "given",
+            "F3",
+            "step 2.2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "Upper bar and charts. By [F3] the upper bar $\\psi^\\vee$ fixes each upper basis element, the upper basis comes with its own dual zero and infinity charts whose balanced $\\mathbb{Z}$-intersection is the upper lattice, and the upper operators satisfy the exact mixed adjunction with the lower operators, with reductions at $0$ equal to the lower crystal operators; transporting these statements along $J^{-1}$ gives the corresponding upper bar, charts and operators in the symmetric-group convention, distinct from the ordinary lower bar of [F1].",
+          "step": "5.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "Distinctions and boundary. The construction of steps 1.1 and 2.1 is a **linear** relabelling: $J$ fixes $q$ and only transposes labels, whereas the semilinear involution $|\\mu\\rangle \\mapsto |\\mu'\\rangle$ of [F4] is the one appearing in adjoint-bar statements, of which LT's symmetry $G^\\dagger(\\lambda)' = G^-(\\lambda')$ is the instance; in particular it does not identify the lower coefficient matrix with its transpose, and by [F1] the equality $d_{\\lambda\\mu} = d_{\\mu'\\lambda'}$ for all lower coefficients is false. Finally, the polynomials $d_{(\\lambda,\\mu)}$ are Fock-space transition coefficients between the standard and lower global bases; identifying them with decomposition numbers of Hecke algebras requires the separate graded/Ariki comparison and the correct Hecke parameter dictionary, which is not asserted here, and every application on this page uses them only as the stated transition data.",
+          "step": "6.1",
+          "inputs": [
+            "given",
+            "F1",
+            "F3",
+            "F4",
+            "step 4.2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty partition has G_sym(empty) = M_empty and d_{(empty,empty)} = 1, the diagonal instance of step 1.1 with no off-diagonal support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the q-zero congruence, while step 2.2 records H(0)=I; step 3.1 displays the rational coefficient 1/(1+q^2), regular at q=0 but not Laurent integral."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The diagonal coefficient 1 is proved in step 1.1, and step 3.1 exhibits the weight space of (1,1) with its single restricted column."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate affine case e = 2 is exactly the worked instance of step 3.1, where the denominator 1 + q^2 is not a unit of Z[q,q^-1]."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Each expansion is finite weightwise by step 1.2, with leading term M_lambda by step 1.1, and the global endpoint statement is the unitriangular dual matrix of step 4.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition declares inherited Choice through the basic-label/global-basis suppliers; the finite weightwise Gram inversion is step 2.2 and introduces no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "One direction of the support statement, nonvanishing d forces equal reflected weight, is the bar weight-homogeneity argument of step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse of the support condition is claimed: equality of weight, dominance and core is necessary but not sufficient, and step 3.1 exhibits a weight space where additional support information is needed."
+        }
+      ]
+    },
+    "ex-fock-e-and-f-actions-on-shape-two-one-at-e-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-the-node-order-and-n-i-exponents-for-fock-space",
+          "source_section": "Definition",
+          "quote": "For a fixed residue $i$ list the addable and removable $i$-nodes of a partition **by increasing content** $c-r$; larger content is read as further right or higher. For an addable $i$-node $\\gamma$ of $\\lambda$ (so that $\\mu=\\lambda+\\gamma$) define $$N_i^r(\\lambda,\\gamma):=\\#\\{\\text{addable }i\\text{-nodes of }\\lambda\\text{ with content}>\\text{content}(\\gamma)\\}-\\#\\{\\text{removable }i\\text{-nodes of }\\lambda\\text{ with content}>\\text{content}(\\gamma)\\},$$ and for a removable $i$-node $\\gamma$ of $\\mu$ (so that $\\lambda=\\mu-\\gamma$) define $N_i^l(\\lambda,\\mu)$ by the same formula inside the smaller diagram $\\lambda=\\mu-\\gamma$ with $>$ replaced by $<$, always excluding $\\gamma$ itself. The node formulas are then $$F_i|\\lambda\\rangle=\\sum_{\\gamma}q^{N_i^r(\\lambda,\\gamma)}|\\lambda+\\gamma\\rangle,\\qquad E_i|\\mu\\rangle=\\sum_{\\gamma}q^{-N_i^l(\\mu-\\gamma,\\mu)}|\\mu-\\gamma\\rangle,$$ over the addable respectively removable $i$-nodes. The **node order** is the content order just fixed, and it is used to define the finite signature selection: a Chevalley coefficient minimiser is not in general a Kashiwara arrow, and even a nonzero single Chevalley term can have zero crystal arrow.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations",
+          "source_section": "Statement",
+          "quote": "The constructed node operators on **all** partition vectors make the charge-$0$ partition Fock space $F$ into a $P$-graded integrable module for $U_q(\\widehat{\\mathfrak{sl}}_e)$ with the fixed coproduct and the cyclic Cartan datum: all toral commutation rules and mixed commutators $[E_i,F_j]=\\delta_{ij}(K_i-K_i^{-1})/(q-q^{-1})$ hold, and both quantum Serre sums vanish, including the cubic $e=2$ case with $a_{01}=a_{10}=-2$ and $[3]=q^2+1+q^{-2}$. Each color acts on finite Boolean cubes, and $F_i,E_i$ change the $P$-weight by $\\mp\\alpha_i$. Ordinary standard coefficients may have $q^{-1}$ poles; normalized Kashiwara lattice stability is a separate statement.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators",
+          "source_section": "Statement",
+          "quote": "Consider the modular reading on the one hand (the top-to-bottom residue signature with good $=$ first surviving $-$ and cogood $=$ last surviving $+$ of [[def-symmetric-group-level-one-residue-and-partition-label-convention]], whose operators delete the good node and add the cogood node on $e$-restricted labels) and the level-one Fock crystal $\\tilde e^{\\mathrm{QG}}_i$, $\\tilde f^{\\mathrm{QG}}_i$ on the other. Conjugation $C(\\lambda) = \\lambda'$ sends the modular operators on $e$-restricted partitions onto the normalized operators of the **empty connected component** of the QG full partition Fock crystal, with the colors negated: $$C\\,\\tilde e_i\\lambda = \\tilde e^{\\mathrm{QG}}_{-i}C\\lambda, \\qquad C\\,\\tilde f_i\\lambda = \\tilde f^{\\mathrm{QG}}_{-i}C\\lambda \\qquad (\\lambda\\ e\\text{-restricted}),$$ including the zero values: the left side is zero exactly when the right side is. The survivor counts are the same on both sides, $\\varepsilon_i(\\lambda) = \\varepsilon_{-i}(\\lambda')$ and $\\varphi_i(\\lambda) = \\varphi_{-i}(\\lambda')$, and the weight transforms by the diagram reflection, $\\operatorname{wt}(\\lambda') = \\tau(\\operatorname{wt}(\\lambda))$. With the transported full module $F_{\\mathrm{sym}}$ of [[def-symmetric-group-level-one-residue-and-partition-label-convention]], the modular signatures likewise give its normalized operators on **all** partitions (the transported operators $J^{-1}\\tilde e^{\\mathrm{QG}}_{-i}J$, $J^{-1}\\tilde f^{\\mathrm{QG}}_{-i}J$), and the restricted subset of that full crystal is its basic component. In both conventions good means removable (deletion, $\\tilde e$) and cogood means addable (addition, $\\tilde f$): there is no opposite naming-polarity dictionary exchanging deletion with addition. Ordinary Chevalley coefficients, especially negative powers such as $q^{-1}$, do not define these arrows.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "Compute the quantum-group Chevalley action at $|2,1\\rangle$ from [F1] and [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "Transport along $J$ with reflected colors.",
+          "step": "2.1",
+          "inputs": [
+            "1.1"
+          ]
+        },
+        {
+          "id": "d-2.2",
+          "claim": "Normalized crystal arrows.",
+          "step": "2.2",
+          "inputs": [
+            "1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "Raw vectors versus coefficients.",
+          "step": "3.1",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "F3",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example computes a single self-conjugate shape (2,1) at e = 3, and the empty partition is neither an input nor an output of the finite tables in steps 1.1-3.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero arrows are the vanishing entries: E_0|2,1> = 0 in step 1.1 and f_2 = e_2 = 0 in the quantum-group reading together with f_1 = e_1 = 0 in the restricted reading, both in step 2.2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Coefficients equal to 1 are the leading entries F_0, F_2, E_2 of step 1.1 and their transports F_0^sym, F_1^sym, E_1^sym in step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No degenerate parameter occurs: e = 3 is regular and (2,1) is self-conjugate, so step 2.1's transport acts as the identity on the label and exhibits the color reflection on the coefficients."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The top-right and bottom additions are the endpoint selections of step 2.2's signature reductions for colors 1 and 2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1 are finite enumerations of nodes and coefficients, and step 2.2 applies deterministic reductions; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example states equalities and arrow tables rather than a biconditional, so no forward direction of an equivalence is owed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is claimed; the Chevalley-versus-normalized contrast of step 3.1 is a strict non-implication, not an equivalence."
+        }
+      ]
+    },
+    "ex-level-one-charge-zero-crystal-through-rank-four-at-e-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention",
+          "source_section": "Statement",
+          "quote": "Fix a finite integer $e \\ge 2$. In the symmetric-group convention of [[def-symmetric-group-level-one-residue-and-partition-label-convention]]: 1. The empty component of the transported full Fock crystal $F_{\\mathrm{sym}}$ is **exactly the set of $e$-restricted partitions**, its operators are the modular good-node deletions and cogood-node additions, its weight function is $\\operatorname{wt}(\\lambda) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, the counts $\\varepsilon_i$, $\\varphi_i$ are the numbers of normal and of conormal $i$-nodes, and the component is $B(\\Lambda_0)$: every $e$-restricted shape is reached from the empty partition by successive cogood additions. 2. The full $F_{\\mathrm{sym}}$ has all partitions as vertices and is reducible; its transported field decomposition is $F_{\\mathrm{sym}} \\cong \\bigoplus_{k \\ge 0} V(\\Lambda_0 - k\\delta)^{\\oplus p(k)}$ with $p(k)$ the number of partitions of $k$, so its other vertices are exactly the non-restricted shapes. 3. In the symmetric-group regime (algebraically closed field $k$ of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so $e = p$ is prime) the $e$-restricted labels $\\lambda$ are the simple $kS_d$-modules in the dual-Specht convention, and for every $i$ with $\\varepsilon_i(\\lambda) > 0$ $$\\operatorname{soc}\\bigl(E_{-i}D^{\\lambda'}\\bigr) = D^{(\\tilde e_i\\lambda)'},$$ where $D^{\\lambda'}$ is the James-labelled simple, $E_{-i}$ the residue-summand functor after the sign twist, and $D^{(\\tilde e_i\\lambda)'}$ the James label of the deleted shape. That is, the standard $E_{-i}$ is the residue functor twisted by the sign representation. 4. At quantum characteristic $e = 0$ (colors $\\mathbb{Z}$) every level-one partition is a label of the empty $\\mathfrak{sl}_\\infty$ crystal, there are no same-content corner cancellations, and no finite affine datum, weight formula or Hecke module statement is made. General finite-$e$ Hecke crystal labels remain valid, but they are not called symmetric-group modules of \"characteristic $e$\". The axiom of choice is used exactly as declared in the contract, through the highest-weight decomposition of the full Fock module; the component identification of part 1 is choice-free.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The vertex list is the list of $3$-restricted partitions by rank.",
+          "step": "1.1",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "d-1.2",
+          "claim": "The additions from ranks $0$-$2$.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "The additions from rank $3$ and the vanishing claims.",
+          "step": "2.1",
+          "inputs": [
+            "1.2",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The deletions from rank $4$ and the boundary.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Rank 0 is the empty partition itself; step 1.1 lists it and step 1.2 computes its unique arrow f_0(empty) = (1)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero arrows are the vanishing additions tabulated in steps 1.2 and 2.1, in particular the residue-1 arrows at (2,1)."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Ranks 0 and 1 carry a single vertex each, listed in step 1.1, and their single arrows are computed in step 1.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "e = 3 is regular, and step 1.1 verifies that no listed shape has a repeated part or a column of the critical height, so no degenerate configuration enters the window."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The window endpoints are ranks 0 and 4; step 3.1 explicitly omits rank-4 outgoing additions rather than declaring them zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The verification is a finite signature computation at each listed vertex in steps 1.1-3.1; no choices are made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example tabulates vertex lists and arrows rather than a biconditional theorem, so there is no forward direction of an equivalence to check."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement is made; completeness and zero claims are confined to ranks 0-3 as step 3.1 records."
+        }
+      ]
+    },
+    "cex-the-full-fock-space-is-not-automatically-the-irreducible-basic-module": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention",
+          "source_section": "Statement",
+          "quote": "Fix a finite integer $e \\ge 2$. In the symmetric-group convention of [[def-symmetric-group-level-one-residue-and-partition-label-convention]]: 1. The empty component of the transported full Fock crystal $F_{\\mathrm{sym}}$ is **exactly the set of $e$-restricted partitions**, its operators are the modular good-node deletions and cogood-node additions, its weight function is $\\operatorname{wt}(\\lambda) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, the counts $\\varepsilon_i$, $\\varphi_i$ are the numbers of normal and of conormal $i$-nodes, and the component is $B(\\Lambda_0)$: every $e$-restricted shape is reached from the empty partition by successive cogood additions. 2. The full $F_{\\mathrm{sym}}$ has all partitions as vertices and is reducible; its transported field decomposition is $F_{\\mathrm{sym}} \\cong \\bigoplus_{k \\ge 0} V(\\Lambda_0 - k\\delta)^{\\oplus p(k)}$ with $p(k)$ the number of partitions of $k$, so its other vertices are exactly the non-restricted shapes. 3. In the symmetric-group regime (algebraically closed field $k$ of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so $e = p$ is prime) the $e$-restricted labels $\\lambda$ are the simple $kS_d$-modules in the dual-Specht convention, and for every $i$ with $\\varepsilon_i(\\lambda) > 0$ $$\\operatorname{soc}\\bigl(E_{-i}D^{\\lambda'}\\bigr) = D^{(\\tilde e_i\\lambda)'},$$ where $D^{\\lambda'}$ is the James-labelled simple, $E_{-i}$ the residue-summand functor after the sign twist, and $D^{(\\tilde e_i\\lambda)'}$ the James label of the deleted shape. That is, the standard $E_{-i}$ is the residue functor twisted by the sign representation. 4. At quantum characteristic $e = 0$ (colors $\\mathbb{Z}$) every level-one partition is a label of the empty $\\mathfrak{sl}_\\infty$ crystal, there are no same-content corner cancellations, and no finite affine datum, weight formula or Hecke module statement is made. General finite-$e$ Hecke crystal labels remain valid, but they are not called symmetric-group modules of \"characteristic $e$\". The axiom of choice is used exactly as declared in the contract, through the highest-weight decomposition of the full Fock module; the component identification of part 1 is choice-free.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-symmetric-group-level-one-residue-and-partition-label-convention",
+          "source_section": "Definition",
+          "quote": "Fix a finite integer $e \\ge 2$ and charge $0$, with the independent-root affine Cartan datum, its lattices and its diagram reflection $\\tau$ fixed as in [[def-cyclic-affine-type-a-cartan-datum]]: $I = \\mathbb{Z}/e\\mathbb{Z}$, simple roots $\\alpha_i$, fundamental weights $\\Lambda_i$, $\\delta$, and $\\tau(i) = -i$. A *node* is a pair $(r,c) \\in \\mathbb{N} \\times \\mathbb{N}$, and the *residue* of a node is $\\operatorname{res}(r,c) := c - r \\bmod e$; this is the level-one, charge-$0$ specialization of the residue used in [[def-residue-signature-normal-good-conormal-and-cogood-nodes]]. We use the English convention (rows increase downwards) and the node language of [[def-removable-and-addable-nodes-of-a-partition]] and [[def-partition-young-diagram-and-conjugate-partition]]. A partition $\\lambda$ is **$e$-regular** if every positive integer occurs as a part of $\\lambda$ fewer than $e$ times, and **$e$-restricted** if $\\lambda_a - \\lambda_{a+1} < e$ for every $a \\ge 1$, the sequence being padded by trailing zeros; these are the prime-case notions of [[def-p-regular-and-p-restricted-partitions]] with $e$ in place of the prime $p$. A column of height $e$ is allowed in an $e$-restricted partition. The two classes are exchanged by conjugation: $\\lambda$ is $e$-restricted if and only if its conjugate $\\lambda'$ is $e$-regular (step 2.1 below). **The modular (restricted) signature.** Let $\\lambda$ be a partition and $i \\in I$. The $i$-nodes of $\\lambda$ are its addable and removable nodes of residue $i$; list them *top to bottom*, that is by increasing row index and then increasing column index, obtaining $A_1,\\dots,A_n$, and form the word $\\sigma = (\\sigma_1,\\dots,\\sigma_n)$ with $\\sigma_m = +$ if $A_m$ is addable and $\\sigma_m = -$ if $A_m$ is removable. Whenever $r < s$ with $\\sigma_r = -$, $\\sigma_s = +$ and $\\sigma_{r+1} = \\dots = \\sigma_{s-1} = 0$, replace $\\sigma_r,\\sigma_s$ by $0$; repeat until no $-$ lies above a $+$. The survivors are the *normal* removable and *conormal* addable $i$-nodes; write $\\varepsilon_i(\\lambda)$ and $\\varphi_i(\\lambda)$ for their numbers. If $\\varepsilon_i(\\lambda) > 0$, the *good* $i$-node is the removable node belonging to the first surviving $-$, and $\\tilde e_i\\lambda := \\lambda$ with that node deleted; if $\\varphi_i(\\lambda) > 0$, the *cogood* $i$-node is the addable node belonging to the last surviving $+$, and $\\tilde f_i\\lambda$ is $\\lambda$ with that node added (otherwise the respective partial operator is undefined). This is Kleshchev's reduced $i$-signature at charge $0$ and level one, with good $=$ top normal and cogood $=$ bottom conormal. **This is the reading used for the restricted (symmetric-group) model**, in which the labels of the level-one basic module are the $e$-restricted shapes; Fayers' equivalent formulation reads the same list with the opposite cancellation and extracts the last surviving $- $ and first surviving $+$, and his increasing-column model of the $e$-restricted labels is the basic crystal $B(\\Lambda_0)$. **The linear (symmetric-group) model and the transport $J$.** Let $$F_{\\mathrm{QG}} = \\bigoplus_{\\lambda} \\mathbb{Q}(q)\\,|\\lambda\\rangle$$ be the charge-$0$ level-one partition Fock space with $\\operatorname{wt}(|\\lambda\\rangle) = \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$, where $m_i(\\lambda)$ is the number of nodes of $[\\lambda]$ of residue $i$, and with the declared finite node operators $F_i$, $E_i$, $K_h$, $K_d$ and the wedge bar $\\psi$ of [[def-level-one-partition-fock-space-and-node-residues]] (the operators act on *all* partitions). The **symmetric-group model** $F_{\\mathrm{sym}}$ is the same $\\mathbb{Q}(q)$-vector space with the basis relabelled $M_\\lambda := |\\lambda'\\rangle$; equivalently, $J : F_{\\mathrm{sym}} \\to F_{\\mathrm{QG}}$ is the $\\mathbb{Q}(q)$-linear isomorphism $$J M_\\lambda = |\\lambda'\\rangle \\qquad (\\lambda \\text{ a partition}),$$ with the field map $q \\mapsto q$ (not $q \\mapsto q^{-1}$). Transport the structure along $J$: $$E_i^{\\mathrm{sym}} := J^{-1} E_{-i}^{\\mathrm{QG}} J, \\qquad F_i^{\\mathrm{sym}} := J^{-1} F_{-i}^{\\mathrm{QG}} J, \\qquad K_h^{\\mathrm{sym}} := J^{-1} K_{\\tau h}^{\\mathrm{QG}} J \\quad (h \\in P^\\vee), \\qquad \\psi_{\\mathrm{sym}} := J^{-1} \\psi J,$$ and give $M_\\lambda$ the weight $\\operatorname{wt}(M_\\lambda) := \\Lambda_0 - \\sum_i m_i(\\lambda)\\alpha_i$. The transported operators are defined on the ambient basis of *all* partitions. With $A := \\mathbb{Z}[q,q^{-1}]$ and the local ring $A_0 := \\{\\, f \\in \\mathbb{Q}(q) : f \\text{ is regular at } q = 0 \\,\\}$, the **standard chart** of the symmetric-group model is $$(F_0)_{\\mathrm{sym}} := \\bigoplus_{\\lambda} A_0\\, M_\\lambda ;$$ the full ambient model is indexed by all partitions, while its basic component in this convention is carried by the $e$-restricted shapes (the comparison with the QG model is made by the results of this page). **Label dictionaries and boundaries.** The conjugation map $C : \\lambda \\mapsto \\lambda'$ exchanges the $e$-restricted and the $e$-regular partitions, preserves the addable/removable *type* of each node and negates residues; it is a comparison map *between* the restricted and the regular models, not an involution of one label set, and it is not the same-model sign (Mullineux) involution of Kleshchev's Theorem 11.8, which fixes the restricted label set and negates residues along a good-node path. In the symmetric-group regime (ground field of characteristic $p > 0$, Hecke parameter $\\xi = 1$, so that $e = p$ is prime) the $e$-restricted partitions are the labels of the simple modules in the dual-Specht convention and the $e$-regular partitions those of James, the two dictionaries being related by $D(\\lambda) \\cong D^{\\lambda'} \\otimes \\operatorname{sgn}$, equivalently $D^\\mu \\cong D(\\mu') \\otimes \\operatorname{sgn}$ for $e$-regular $\\mu$ ([[prop-p-regular-and-p-restricted-simple-labels-are-related-by-conjugate-sign-duality]]); for a general Hecke parameter the finite integer $e \\ge 2$ is its quantum characteristic (the smallest positive $e$ with $1 + \\xi + \\dots + \\xi^{e-1} = 0$) and need not be prime, so the general finite-$e$ crystal labels are not called symmetric-group modules of \"characteristic $e$\". At quantum characteristic $e = 0$ (no such positive integer exists, colors $\\mathbb{Z}$) no finite affine datum is present: every level-one partition is a crystal label, and no weight formula or finite affine statement is made in this boundary.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero",
+          "source_section": "Statement",
+          "quote": "With the declared use of the Axiom of Choice in the general integrable-module decomposition, the empty connected component of the full partition crystal of [[thm-the-crystal-of-level-one-fock-space-is-the-good-node-partition-graph]] is the canonical highest weight crystal $B(\\Lambda_0)$, with exactly the $e$-regular labels. Its module is $M=U_q(\\mathfrak g)|\\varnothing\\rangle$ and its lower $A_0$-lattice is $M\\cap F_0$; it occurs once. More precisely $$F=\\bigoplus_{k\\ge0}V(\\Lambda_0-k\\delta)^{\\oplus p(k)},$$ a locally weight-finite indexed direct sum in which $p(k)$ is the number of ordinary partitions of $k$; consequently $\\mathrm{ch}\\,F=\\mathrm{ch}\\,V(\\Lambda_0)\\prod_{r\\ge1}(1-e^{-r\\delta})^{-1}$. A highest **crystal** label need not be a highest **field** standard vector, and the ambient canonical basis need not split these summands.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals",
+          "source_section": "Statement",
+          "quote": "**Assume the axiom of choice** ([[def-axiom-of-choice]]). Let $M$ be a chosen $P$-graded type-one quantum weight module that is integrable, has finite-dimensional label-weight spaces and weight set contained in a finite union of cones $\\lambda-Q_+$ ([[def-quantum-weight-module-and-integrability]]), and let $(L,B)$ be a crystal basis of $M$ ([[def-crystal-lattice-and-crystal-basis]]).\n\n(i) **Splitting along the top isotypic part.** Let $\\lambda$ be a maximal weight of $M$, put $N_0:=U_q(\\mathfrak g)M_\\lambda$ and let $N_1$ be the sum of the remaining simple constituents, so that $M=N_0\\oplus N_1$ and $N_0\\cong V(\\lambda)^{\\oplus m}$ with $m=\\dim M_\\lambda$. Then $L=(L\\cap N_0)\\oplus(L\\cap N_1)$, $B=\\bigl(B\\cap(L\\cap N_0)/q(L\\cap N_0)\\bigr)\\sqcup\\bigl(B\\cap(L\\cap N_1)/q(L\\cap N_1)\\bigr)$, and both pairs are crystal bases of $N_0$ and $N_1$.\n\n(ii) **Uniqueness.** There is a locally weight-finite indexed family $(\\lambda_j)_{j\\in J}$ in $P^+$ and an isomorphism of $U_q(\\mathfrak g)$-modules $\\Phi:M\\xrightarrow{\\ \\sim\\ }\\bigoplus_{j\\in J}V(\\lambda_j)$ with $\\Phi(L)=\\bigoplus_j\\mathcal L(\\lambda_j)$ and $\\Phi$ inducing a bijection $B\\to\\bigsqcup_j\\mathcal B(\\lambda_j)$ of crystals. The multiset $\\{\\lambda_j:j\\in J\\}$ is the multiset of highest weights of the simple integrable constituents of $M$: the number of $j$ with $\\lambda_j=\\lambda$ equals the multiplicity $[M:V(\\lambda)]$.\n\n(iii) **Components.** Through $\\Phi$ the connected components of the crystal $B$ are exactly the canonical highest weight crystals $\\mathcal B(\\lambda_j)$; each component has a unique highest weight element $b$, of dominant weight $\\lambda$, and equals the lowering-generated subcrystal $F(b)$ of [[def-highest-weight-element-and-connected-highest-weight-crystal]]. In particular the crystal graph of any crystal basis of $M$ is determined up to isomorphism by $M$, and no other highest weight elements occur.\n\n**Choice.** The axiom of choice is declared in [[def-axiom-of-choice]] and used to obtain the decomposition of $M$ into simple integrable highest weight modules from [[prop-integrable-quantum-highest-weight-modules-are-semisimple]], which selects a maximal independent family of simple submodules simultaneously. It also permits simultaneous choices of lifts of the finite residue bases in the possibly infinite family of top spaces. After those choices, each lattice and crystal argument is finite and choice-free. No incompatible-axiom branch is used, and no global $\\mathbb Z[q,q^{-1}]$-freeness is assumed. The index set $J$ need not be finite in affine or indefinite type; local weight finiteness means only finitely many summands contribute to any fixed label-weight space.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-basic-representation-global-basis-is-unitriangular-in-the-partition-basis",
+          "source_section": "Statement",
+          "quote": "There is an explicit semi-infinite wedge bar $\\psi$ with the vacuum fixed, coefficient bar $q\\mapsto q^{-1}$ and $U_q$/bar compatibility, whose restriction to $M=V(\\Lambda_0)$ is the normalized highest module bar. On **all** partitions its integral triangular correction is $$G(\\lambda)=|\\lambda\\rangle+\\sum_{\\mu\\ \\text{strictly dominated by}\\ \\lambda}d_{\\mu,\\lambda}(q)|\\mu\\rangle, \\qquad d_{\\mu,\\lambda}\\in q\\mathbb Z[q],$$ with diagonal $1$ and same $e$-core support; the family $\\{G(\\lambda)\\}$ is an $A$-basis of $F_A$ and an $A_0$-basis of $F_0$, with the actual infinity chart and balanced $\\mathbb Z$-intersection. Exactly the $e$-regular $G(\\lambda)$ form the lower global basis of $M$, identified by the two lower-global-basis suppliers. The ambient basis is not automatically compatible with the other field irreducible summands. The transpose equality $d_{\\lambda,\\mu}=d_{\\mu',\\lambda'}$ is **false** in general; the source symmetry concerns the bar matrix, not $D$. Ambient natural-form dual coefficients use $(D^{-1})^{\\mathsf T}$, and basic upper coefficients require the restricted Gram inverse and need not be Laurent polynomials.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d-1.1",
+          "claim": "The two finite checks.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "d-2.1",
+          "claim": "$|1111\\rangle$ lies outside the field basic module.",
+          "step": "2.1",
+          "inputs": [
+            "1.1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-3.1",
+          "claim": "The ambient lower lift is excluded as well.",
+          "step": "3.1",
+          "inputs": [
+            "2.1",
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "d-4.1",
+          "claim": "Transport to the symmetric-group convention.",
+          "step": "4.1",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "d-5.1",
+          "claim": "The full signature remains meaningful on these shapes.",
+          "step": "5.1",
+          "inputs": [
+            "1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The vacuum is the one-dimensional top weight space used at the start of step 2.1, where M is generated by the empty partition and the top is spanned by |empty>."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The residue class of |1111> is nonzero by the independence statement of step 2.1, so the exclusion argument is not vacuous."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The multiplicity-one top weight space is the input of the isotypic splitting quoted at the start of step 2.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The shape (3) reached by the edge of step 5.1 is the degenerate non-restricted image of the good deletion and is explicitly excluded from the basic component."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The rank endpoint at the top weight Lambda_0 is where the splitting is applied in step 2.1, and step 5.1 treats the other endpoint, the edge e_0(4) = (3) inside another component."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The choice assumption is inherited through the component identification and the splitting recorded in steps 2.1 and 4.1; the exclusion computations of steps 1.1 and 5.1 are finite and choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refutation proves a non-containment, not a biconditional claim, so there is no forward direction of an equivalence to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: a single witness refutes the false statement, and no equivalence between the remaining conditions is claimed."
+        }
+      ]
+    }
+  }
+}

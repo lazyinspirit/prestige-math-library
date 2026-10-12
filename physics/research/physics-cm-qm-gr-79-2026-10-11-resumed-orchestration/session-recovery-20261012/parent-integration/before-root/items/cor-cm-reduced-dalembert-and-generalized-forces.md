@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-cm-reduced-dalembert-and-generalized-forces.md

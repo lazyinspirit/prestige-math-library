@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-ergodicity-forces-only-empty-and-full-invariant-sets.md

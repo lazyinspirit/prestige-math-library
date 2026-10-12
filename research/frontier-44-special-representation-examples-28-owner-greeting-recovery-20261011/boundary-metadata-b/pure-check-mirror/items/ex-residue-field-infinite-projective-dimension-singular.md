@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-residue-field-infinite-projective-dimension-singular.md

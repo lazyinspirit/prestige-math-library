@@ -1,0 +1,11 @@
+# Durable first-pass findings
+
+Read handoff.json and handoff.md together. This is the same unapplied first pass; three transport failures consume no mathematical repair cycle.
+
+Additional supplier findings: the canonical splitting Statement(b) falsely asserts that the same I splits both F and conjugate F. Remove that clause; preserve W and F partial sums, projection and functoriality. Proof3.2 also contains reversed inequalities and filtration containments. A correct injectivity argument is: for nonzero x in I^{p,q} of highest weight r<m, set J=m-r-1>=0. Write x=y+sum_j g_j from the defining formula. The terms with j>J lie in W_{r-1}. The combined high group y+sum_{1<=j<=J}g_j belongs to W_r (subtract the low group from x) and to conjugate F^{q-J} (each high group term belongs to this decreasing filtration). Thus the nonzero top class of x lies in F^p Gr^W_r intersect conjugate F^{q-J} Gr^W_r, but p+q-J=r+1>r, contradiction. This proves injection without assuming an incorrect conjugate splitting.
+
+Strictness uses only functorial W,F splitting to prove W/F strictness. For rational descent, if rational subspaces A,B have equal complexifications, compare their images in the rational quotient H/B: extension of scalars to C preserves injectivity, so A subset B, and reverse. For kernel/image/cokernel, W strictness identifies weight graded objects with the kernel/image/cokernel of graded f; F strictness, including restrictions to W levels, identifies their induced graded Hodge filtrations. Graded f preserves pure Hodge types by rational conjugation, hence those graded kernels/images/cokernels are pure. No barF partial-sum formula on the mixed vector space is needed.
+
+The definition's final equivalence sentence is also mathematically false as written: vanishing above n alone allows pure components with type sum below n, while spanning alone allows sums above n. The CONJUNCTION is equivalent to opposition. This requires surgical Definition correction and same-reviewer actual direct consumer checks; no scope reset or narrowed target statement.
+
+Source evidence is exact cached fulltext matching historical retrieval hashes; no new fetch and no claim of full article reading. The source proof/statement snippets were actually read through terminal output. Final source reconstruction and candidate checks remain owed.

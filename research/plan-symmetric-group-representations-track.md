@@ -1,8 +1,8 @@
 # Representation theory of symmetric groups
 
-Library supplier scope (owner-authorized 2026-10-07): this Special Topics in Representation Theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
+Library supplier scope (owner-authorized 2026-10-07): this representation-theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
 
-Category reconciliation (2026-10-07): All SYMR pages and the inherited RG-8–RG-11 pairs now belong to `special-topics-in-representation-theory`, titled **Special Topics in Representation Theory**. The current canonical plan and `symmetric-group-planning/pages.json` reflect this split. Braid Groups remains independent.
+Category reconciliation (owner-authorized 2026-10-12): The inherited RG-8–RG-11 pairs and ordinary, modular, stable and asymptotic SYMR pages belong to `symmetric-groups-and-symmetric-functions`. SYMR-10 belongs to `quantum-groups-and-crystal-bases`; SYMR-7, SYMR-11 and SYMR-12 belong to `hecke-algebras-and-categorification`. Canonical plan categories and `symmetric-group-planning/pages.json` agree with the four-category split recorded in `representation-category-split-2026-10-12.json`. Page identities and mathematical ownership remain unchanged.
 
 Status: research-backed prose scaffold complete, 2026-09-07. This file
 proposes future pages and item identities; it does not claim that a page with an

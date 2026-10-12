@@ -33,8 +33,6 @@ even on an incomplete measure space.
 
 **Proof technique:** direct.
 
-1.1 Let $f=0$ and $g=\mathbf{1}_E$. The set $C$ is Borel null, so $g=f$ on [L1]
-$\mathbb{R} \setminus C$ and hence $g=f$ almost everywhere. [L1]
+1.1 Let $f=0$ and $g=\mathbf{1}_E$. The set $C$ is Borel null, so $g=f$ on [L1] $\mathbb{R} \setminus C$ and hence $g=f$ almost everywhere. [L1]
 
-2.1 But [step 1.1, L1]
-$g^{-1}((1/2,\infty))=E$, and [L1] says $E$ is not Borel. Thus $g$ is not measurable for the Borel sigma-algebra, even though it agrees almost everywhere with the measurable function $f$. [step 1.1, L1] ∎
+2.1 But [step 1.1, L1] $g^{-1}((1/2,\infty))=E$, and [L1] says $E$ is not Borel. Thus $g$ is not measurable for the Borel sigma-algebra, even though it agrees almost everywhere with the measurable function $f$. [step 1.1, L1] ∎ 

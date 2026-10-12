@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nearest-point-in-a-nonempty-closed-convex-set.md

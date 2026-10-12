@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-normal-coordinates-on-the-round-sphere.md

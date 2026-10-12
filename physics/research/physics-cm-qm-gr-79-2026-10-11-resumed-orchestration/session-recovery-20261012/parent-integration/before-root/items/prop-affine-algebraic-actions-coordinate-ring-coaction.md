@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-affine-algebraic-actions-coordinate-ring-coaction.md

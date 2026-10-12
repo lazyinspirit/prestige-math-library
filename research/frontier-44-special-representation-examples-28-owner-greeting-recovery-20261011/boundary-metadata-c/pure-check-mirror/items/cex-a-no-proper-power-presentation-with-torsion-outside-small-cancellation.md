@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation.md

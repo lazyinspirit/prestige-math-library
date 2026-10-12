@@ -38,5 +38,5 @@ $L_g(f)=\int_{\mathbb R^n}fg\,d\lambda$ is a positive linear functional on $C_c(
 
 1.1 If $f\in C_c$ has support $K$, then $\int|fg|\,d\lambda\le\|f\|_\infty\int_Kg\,d\lambda<\infty$. Hence $L_g$ is well defined and linear; it is positive because $g\ge0$. [given]
 
-1.2 The density construction makes [given]
-$\mu_g(E)=\int_Eg\,d\lambda$ a Borel measure. Every compact set is contained in a ball, so local integrability makes $\mu_g$ finite on compact sets. Moreover, $\mathbb R^n$ is LCH, and its rational open boxes form a countable basis. The second-countable regularity theorem therefore makes $\mu_g$ regular, hence Radon. Its defining integral gives $L_g(f)=\int f\,d\mu_g$, so $\mu_g$ is a Radon measure representing $L_g$. [given] ∎
+2.1 The density construction makes $\mu_g(E)=\int_Eg\,d\lambda$ a Borel measure. Every compact set is contained in a ball, so local integrability makes $\mu_g$ finite on compact sets. Moreover, $\mathbb R^n$ is LCH, and its rational open boxes form a countable basis. The second-countable regularity theorem therefore makes $\mu_g$ regular, hence Radon. Its defining integral gives $L_g(f)=\int f\,d\mu_g$, so $\mu_g$ is a Radon measure representing $L_g$. [given] ∎
+

@@ -46,10 +46,8 @@ $$x^2 + y^2 + z = c.$$
 
 **Proof technique:** direct.
 
-1.1 Because the third partial derivative of $F$ is $1$, the map is a [given]
-submersion everywhere. [given]
+1.1 Because the third partial derivative of $F$ is $1$, the map is a [given] submersion everywhere. [given]
 
-1.2 The kernel distribution is therefore integrable, and its maximal connected [given]
-integral manifolds are the connected components of the level sets of $F$. Each level set here is a connected paraboloid. [given]
+1.2 The kernel distribution is therefore integrable, and its maximal connected [given] integral manifolds are the connected components of the level sets of $F$. Each level set here is a connected paraboloid. [given]
 
-2.1 Thus $\ker dF$ is an explicit integrable distribution. [given] ∎ [given]
+2.1 Thus $\ker dF$ is an explicit integrable distribution. [given] ∎ [given] 

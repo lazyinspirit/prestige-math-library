@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-algebraic-extensions-of-perfect-fields-are-separable.md

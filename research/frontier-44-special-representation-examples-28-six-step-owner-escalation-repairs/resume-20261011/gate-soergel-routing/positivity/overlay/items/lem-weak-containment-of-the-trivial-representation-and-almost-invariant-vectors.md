@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-weak-containment-of-the-trivial-representation-and-almost-invariant-vectors.md

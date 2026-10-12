@@ -1,0 +1,1115 @@
+[
+  {
+    "order": 165,
+    "id": "qm-framework-and-quantities",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Framework And Quantities",
+    "companion": "qm-framework-and-quantities-examples",
+    "requires": [
+      "qm-math-magnetic-and-detection",
+      "cm-math-geometry",
+      "qm-math-composites",
+      "qm-math-orbital-and-spin"
+    ],
+    "items": [
+      {
+        "id": "def-nrqm-framework-newtonian-spacetime",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The Newtonian spacetime arena of the framework",
+        "statement": "**The arena.** The non-relativistic quantum framework of this category uses as its spacetime the affine time space of [[def-cm-affine-time-space]]: a quadruple $(V,\\tau,g,A)$ consisting of a four-dimensional real vector space $V$, a surjective linear map $\\tau:V\\to\\mathbb R$ (the **absolute-time covector**), the three-dimensional kernel $K=\\ker\\tau$ (the **spatial displacement space**), a symmetric positive definite bilinear form $g:K\\times K\\to\\mathbb R$ (the **spatial metric**), and an affine space $A$ modelled on $V$ whose elements are called **events**. When the framework speaks of \"a particle at position $x$ at time $t$\", of \"the time interval between two events\" or of \"the distance between two simultaneous events\", these are read in this structure.\n\n**Absolute time and slices.** The absolute time of a displacement $w\\in V$ is $\\tau(w)$; two events $p,q\\in A$ are **simultaneous** when $\\tau(q-p)=0$, and simultaneity is an equivalence relation whose classes are the **simultaneous slices**. For a fixed adapted chart and its coordinates $(t,x)$ of [[lem-cm-adapted-coordinates-exist-and-are-unique]], the slices are the level sets of $t$ and the number $t(p)$ is the **time coordinate** of the event $p$. The pair of events of one slice carries the slice distance $d_{g}(p,q)=\\sqrt{g(p-q,p-q)}$; no distance is defined between events of different slices by this structure.\n\n**Smooth structure.** $A$ is read with the affine smooth structure determined by adapted coordinates: a curve $\\gamma:I\\to A$ is of class $C^{k}$ when its coordinate representation $s\\mapsto(t(\\gamma(s)),x(\\gamma(s)))$ in one adapted chart is of class $C^{k}$; the transition law between adapted charts of [[lem-cm-adapted-charts-and-galilean-transformations]] makes this reading independent of the chart. Regularity of curves, of potential functions and of apparatus descriptions of the framework is stated with respect to this smooth structure.\n\n**What the arena does not contain.** The data contain no inner product on $V$, no Lorentzian metric, no light cone, no causal classification, no universal speed and no curvature; they contain no distinguished event, no distinguished time vector and no distinguished spatial basis. In particular the arena alone does not select a frame: the inertial frames of the model and the transformations between them are fixed by the separate definition of the frames on this page and the accompanying postulate.\n\n**Status.** These clauses define the spacetime objects of the model and their elementary readings. They are not a physical postulate that nature is such an arena and not a mathematical theorem; the corresponding adoption is made by the kinematics postulate of this page. No dynamics, force law, potential or matter model is fixed here, and no empirical measurement is recorded.",
+        "strategy": "Definition of the Newtonian arena used by the framework: the affine time space with its Euclidean slices, absolute time and smooth structure, and the list of what the structure excludes.",
+        "deps": [
+          "def-cm-affine-time-space",
+          "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "lem-cm-adapted-charts-and-galilean-transformations"
+        ],
+        "dependency_roles": {
+          "def-cm-affine-time-space": "mathematical-premise",
+          "lem-cm-adapted-coordinates-exist-and-are-unique": "mathematical-premise",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 3,
+        "physical_scope": "The spacetime arena used by the non-relativistic quantum framework: the affine time space with a surjective absolute-time covector, Euclidean simultaneous slices and their affine smooth structure. The definition fixes the objects and their readings in the model; it asserts no dynamics, no equation of motion and no claim that nature is exactly such an arena, and it excludes Lorentzian structure, light cones and any spacetime curvature.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed pages 5-7 (PDF pages 11-13): inertial frames, Galilean relativity and absolute time t' = t + t_0",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): a particle in R^3 described by a wave function, with the probability interpretation and observable operators",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-framework-galilei-transformations",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The Galilean transformations of the coordinate space",
+        "statement": "**Coordinate space.** Let $C:=\\mathbb R\\times\\mathbb R^{3}$, whose elements are written $(t,x)$ with $t\\in\\mathbb R$ and $x=(x_{1},x_{2},x_{3})\\in\\mathbb R^{3}$. The Euclidean inner product and norm on the second factor are those of [[def-euclidean-inner-product]]; addition and scalar multiplication on $C$ are componentwise, and $I_{3}$ is the identity matrix of [[def-matrix-product-and-identity-matrix]].\n\n**The transformations.** For a quadruple $\\theta=(b,a,v,R)\\in\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}\\times SO(3)$ ([[def-cm-special-orthogonal-group]]) define the map $g_{\\theta}:C\\to C$ by\n\n$$g_{(b,a,v,R)}(t,x):=\\bigl(t+b,\\ Rx+v\\,t+a\\bigr),$$\n\nwhere $Rx$ and $vt$ are the usual matrix–vector products with $R=(R_{ij})$ and with the column vectors $x,v,a$. The four components of $\\theta$ are called the **time shift** $b$, the **spatial translation** $a$, the **boost velocity** $v$ and the **rotation** $R$, and $\\theta$ is called the **parameter quadruple** of $g_{\\theta}$. Write\n\n$$G:=\\bigl\\{g_{(b,a,v,R)}:(b,a,v,R)\\in\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}\\times SO(3)\\bigr\\}$$\n\nfor the set of all these maps and $\\Theta:=\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}\\times SO(3)$ for the parameter set. The elements of $G$ are the **Galilean transformations of the coordinate space**, and the assignment $\\theta\\mapsto g_{\\theta}$ is the **parameter map**.\n\n**Elementary readings.** For $R=I_{3}$ and $v=0$ the map $g_{(b,a,0,I_{3})}$ is the pure time-and-space translation $(t,x)\\mapsto(t+b,x+a)$; for $b=0$, $a=0$ and $R=I_{3}$ it is the pure boost $(t,x)\\mapsto(t,x+vt)$; and for $b=0$, $a=0$, $v=0$ it is the rotation $(t,x)\\mapsto(t,Rx)$ acting only on the spatial factor. The time coordinate of $g_{\\theta}(t,x)$ depends only on $t$ and $b$, in accordance with the absolute-time convention of the model that consumes this definition.\n\n**What is and is not asserted.** This definition introduces the maps and names their parameters. It asserts no property of the parameter map (such as injectivity), no closure of $G$ under composition or inversion, no continuity, smoothness or differentiability of the maps, and no physical interpretation: whether these maps describe changes between inertial frames of a physical model is a separate, explicitly adopted assumption of the physics items that consume this definition. The group structure of $G$ is proved in the group lemma of this page, and the units in which the parameters are read are fixed by the model's unit conventions, not here.",
+        "strategy": "Definition of the Galilean transformation class of the coordinate space: the maps, their parameters and the elementary cases, with no group or smoothness claim asserted here.",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "def-matrix-product-and-identity-matrix",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed pages 5-7 (PDF pages 11-13): the Galilean group generated by translations, rotations and boosts, and the absolute-time shift t' = t + t_0",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds (2003), Example 8.35, printed page 196: the special orthogonal group SO(3) of rotations",
+              "url": "https://math.mit.edu/~hrm/palestine/lee-smooth-manifolds.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-framework-galilei-transformations-form-a-group",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The Galilean transformations form a group of bijections of the coordinate space",
+        "statement": "In the notation of [[def-nrqm-framework-galilei-transformations]], with $C=\\mathbb R\\times\\mathbb R^{3}$, $G$ the set of Galilean transformations and $\\theta=(b,a,v,R)$ the parameters of $g_{\\theta}$:\n\n1. The parameter map $\\theta\\mapsto g_{\\theta}$ is injective: if $g_{(b,a,v,R)}=g_{(b',a',v',R')}$ then $b=b'$, $a=a'$, $v=v'$ and $R=R'$.\n2. Each $g_{(b,a,v,R)}$ is a bijection of $C$, with inverse\n$$g_{(b,a,v,R)}^{-1}=g_{(-b,\\,-R^{\\mathsf T}(a-vb),\\,-R^{\\mathsf T}v,\\,R^{\\mathsf T})}.$$\n3. Composition of Galilean transformations is Galilean, with\n$$g_{(b_{2},a_{2},v_{2},R_{2})}\\circ g_{(b_{1},a_{1},v_{1},R_{1})}=g_{(b_{1}+b_{2},\\,R_{2}a_{1}+v_{2}b_{1}+a_{2},\\,R_{2}v_{1}+v_{2},\\,R_{2}R_{1})},$$\nand $g_{(0,0,0,I_{3})}$ is the identity map of $C$.\n4. Consequently $G$ is a subgroup of the group of all bijections of $C$ under composition.",
+        "strategy": "Direct computation: injectivity of the parameter map, the composition and inverse formulas of the transformation class, and the subgroup conclusion.",
+        "deps": [
+          "def-nrqm-framework-galilei-transformations",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-galilei-transformations": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed pages 5-7 (PDF pages 11-13): the Galilean group of translations, rotations and boosts and the absolute-time shift",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the ten transformations relating inertial frames, comprising rotations, translations, boosts and time translation",
+              "url": "https://davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-framework-inertial-frames",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Inertial frames of the framework and the class of frame changes",
+        "statement": "**Inertial frames.** Fix the arena $(V,\\tau,g,A)$ of [[def-nrqm-framework-newtonian-spacetime]]. An **inertial frame** of the framework is an adapted chart\n\n$$F=\\bigl(o,u,(e_{1},e_{2},e_{3})\\bigr)$$\n\nof that arena in the sense of [[def-cm-affine-time-space]]: an event $o\\in A$ (the **spatial and time origin** of the frame), a vector $u\\in V$ with $\\tau(u)=1$ (the frame's **time vector**), and an ordered $g$-orthonormal positively oriented basis $(e_{1},e_{2},e_{3})$ of $K$ (the frame's **spatial triad**). The associated **frame coordinates** are the functions $(t,x):A\\to\\mathbb R\\times\\mathbb R^{3}$ of [[lem-cm-adapted-coordinates-exist-and-are-unique]], defined by $p=o+t(p)u+\\sum_{i}x_{i}(p)e_{i}$.\n\n**What kind of object a frame is.** A frame is a coordinate chart of $A$: a bijection of $A$ with $\\mathbb R\\times\\mathbb R^{3}$ carrying the affine structure, and in particular a global chart, not a local one. It is deliberately not an observer congruence (no family of curves indexed by spatial position, no four-velocity field) and not a time-varying orthonormal basis field: the triad $(e_{1},e_{2},e_{3})$ is a fixed basis of $K$ and the time vector $u$ is fixed once the frame is chosen. A time-dependent family of bases or a congruence of observers is a different geometric object, and statements about them are not statements about frames unless a separate construction relates them.\n\n**Allowed changes of frame.** Let $F$ and $F'$ be two inertial frames with coordinates $(t,x)$ and $(t',x')$. The **change of frame** from $F$ to $F'$ is the bijection of $\\mathbb R\\times\\mathbb R^{3}$ that sends the $F$-coordinates of an event to its $F'$-coordinates. By clause 1 of [[lem-cm-adapted-charts-and-galilean-transformations]] there are $b\\in\\mathbb R$, $a,v\\in\\mathbb R^{3}$ and $R\\in SO(3)$ ([[def-cm-special-orthogonal-group]]) with\n\n$$t'=t+b,\\qquad x'=Rx+vt+a;$$\n\nthat is, the change of frame is the Galilean transformation $g_{(b,a,v,R)}$ of [[def-nrqm-framework-galilei-transformations]] applied to the coordinates. The class of transformations between inertial frames is therefore the set $G$ of the Galilean transformations, which by [[lem-nrqm-framework-galilei-transformations-form-a-group]] is a group of bijections of the coordinate space: the composite of two frame changes is again a frame change, and the inverse of a frame change is a frame change. The parameters are the time shift $b$, the spatial translation $a$, the boost velocity $v$ and the rotation $R$ of the two frames.\n\n**Conventions.** The spatial triad of every frame is positively oriented for the fixed orientation of $K$ used in the definition of adapted charts, so all frame changes have $R\\in SO(3)$ rather than $R\\in O(3)$ with negative determinant. The reading of the coordinates in seconds and metres, and the physical meaning of the parameters as measured quantities, are fixed by the unit conventions recorded on this page; no measured value of any parameter is asserted here.\n\n**Status.** This definition fixes the frames and the class of frame changes of the model. It asserts no property of forces or of the motion of any body, selects no distinguished frame, and makes no empirical claim. The adoption of these frames as the frames of the physical model, together with the reading of apparatus motion as classical, is part of the kinematics postulate of this page.",
+        "strategy": "Definition of the inertial frames as adapted charts with a time origin, spatial origin and positively oriented orthonormal triad, and of the Galilean class of frame changes, with the chart-versus-congruence distinction made explicit.",
+        "deps": [
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-galilei-transformations",
+          "lem-nrqm-framework-galilei-transformations-form-a-group",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "def-cm-affine-time-space",
+          "lem-cm-adapted-coordinates-exist-and-are-unique",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-galilei-transformations": "formulation-prerequisite",
+          "lem-nrqm-framework-galilei-transformations-form-a-group": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "def-cm-affine-time-space": "mathematical-premise",
+          "lem-cm-adapted-coordinates-exist-and-are-unique": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 5,
+        "physical_scope": "The frames of the non-relativistic quantum framework: inertial frames are adapted coordinate charts of the Newtonian arena, determined by a time origin, a spatial origin and a positively oriented orthonormal spatial triad, and the allowed changes between them are the Galilean transformations. The definition fixes these objects; it makes no claim about forces, about the motion of apparatus and no empirical claim, and it deliberately excludes observer congruences and time-varying basis fields.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2 and 1.2.1, printed pages 4-7 (PDF pages 10-13): inertial frames defined by the failure of Newton's first law, and the Galilean transformations t' = t + t_0, x' = Rx - vt + a between them",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the class of transformations between inertial frames generated by rotations, translations, boosts and time shifts",
+              "url": "https://davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-framework-classical-apparatus-trajectories",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Classical apparatus and preparation trajectories of the framework",
+        "statement": "**Classical trajectories.** Fix the arena of [[def-nrqm-framework-newtonian-spacetime]] and an inertial frame $F$ of [[def-nrqm-framework-inertial-frames]] with coordinates $(t,x)$. A **classical trajectory** (also called a **worldline** of the model) is a pair $(I,\\gamma)$ consisting of a nondegenerate open interval $I\\subseteq\\mathbb R$ and a map $\\gamma:I\\to A$ such that:\n\n1. **Parameter condition.** The parameter of the curve is the frame time: $t(\\gamma(s))=s$ for every $s\\in I$. In the coordinates of the frame this reads $\\gamma(s)=(s,x(s))$ with $x:I\\to\\mathbb R^{3}$.\n2. **Regularity.** The coordinate map $x:I\\to\\mathbb R^{3}$ is of class $C^{2}$, so that the coordinate velocity $w(s):=x'(s)$ and the coordinate acceleration $a(s):=x''(s)$ exist as continuous curves; derivatives are those of [[def-vector-valued-derivative-and-integral]] and the chain rule used to differentiate compositions is [[thm-chain-rule-for-total-derivatives]].\n\n**Apparatus and preparation constituents.** The macroscopic parts of a laboratory arrangement - sources, slits and collimators, shutters, field-generating coils and magnets, screens and detector housings - are described in the model by classical trajectories: to each such constituent and each inertial frame there is assigned a trajectory in the above sense, with the same event of the arena carrying its position at the frame time. A **preparation device** is such a constituent together with the classical trajectory assigned to it.\n\n**Quantum particles.** A trajectory in the above sense is not assigned to a quantum particle of the model: the state of a particle between preparations and detections is given by a state in the sense of the state postulate of this page, and the model asserts no definite trajectory of a particle between measurements. A detected particle event is a localized detection record; its distribution is computed with the model's measurement assumptions, not by reading off a worldline.\n\n**Status.** This definition fixes the mathematical object used for apparatus descriptions and its regularity, and records the two restrictions above: apparatus motion is described classically, and no worldline is assigned to an unmeasured quantum particle. It adopts no force law determining the apparatus trajectories, no interaction between apparatus and particle other than those specified on the pages that state a measurement model, and no empirical claim. The identification of a particular laboratory device with a trajectory of the model is a physical assumption with uncertainty, in the sense of the preparation and apparatus postulate of this page.",
+        "strategy": "Definition of the classical trajectories of apparatus and preparation constituents, the parameter condition and regularity, and the exclusion of a definite worldline for an unmeasured quantum particle.",
+        "deps": [
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-inertial-frames",
+          "def-vector-valued-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-inertial-frames": "formulation-prerequisite",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "physical_scope": "The classical trajectories used for apparatus constituents and preparation devices of the framework: twice continuously differentiable curves in the Newtonian arena whose parameter is the frame time. The definition records that these objects describe macroscopic apparatus, that a quantum particle is not assigned a definite worldline between measurements, and that no force law for the apparatus is adopted here; it makes no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2, printed pages 4-5 (PDF pages 10-11): the trajectory of a particle as a curve of positions as a function of time, and inertial frames",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture notes), Section 1.1, printed pages 3-5 (PDF pages 6-8): the wave-function description and the definite tracks of detected particles",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-framework-quantities-and-units",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Dimensions, SI unit conventions and quantity types of the framework",
+        "statement": "**(a) Dimensions.** Write $\\ell$, $\\tau$, $\\mu$, $\\vartheta$ for the four independent dimension symbols of length, duration, mass and electric charge. A **dimension** is an element of $\\mathbb Z^{4}$, written $\\ell^{a}\\tau^{b}\\mu^{c}\\vartheta^{d}$; products and inverses of dimensions are componentwise addition and negation, and the dimensionless dimension $\\ell^{0}\\tau^{0}\\mu^{0}\\vartheta^{0}$ is abbreviated $1$. The conventions assign to each quantity of the framework a dimension $[X]$, subject to $[XY]=[X][Y]$, $[X/Y]=[X][Y]^{-1}$ and $[dX/du]=[X][u]^{-1}$, with sums meaningful only between quantities of equal dimension, in which case the sum carries that dimension. These are consistency requirements on the conventions, not laws of nature.\n\n**(b) Reference units.** The **metre** (m), **second** (s), **kilogram** (kg) and **coulomb** (C) are the reference units of length, duration, mass and charge; a quantity of dimension $\\ell^{a}\\tau^{b}\\mu^{c}\\vartheta^{d}$ is expressed in the unit $\\mathrm m^{a}\\mathrm s^{b}\\mathrm kg^{c}\\mathrm C^{d}$. Coordinates of an inertial frame are read with the time coordinate $t$ in seconds, $[t]=\\tau$, and the spatial coordinates $x_{i}$ in metres, $[x_{i}]=\\ell$; slice distances of the arena are read in metres.\n\n**(c) Defining constants of the current SI.** The framework keeps $\\hbar$ explicit. In the current SI the constants $h$, $c$ and $e$ are exact defining constants, with the values $h=6{,}626\\,070\\,15\\times10^{-34}$ J s, $c=2{,}99792458\\times10^{8}$ m s$^{-1}$ and $e=1{,}602\\,176\\,634\\times10^{-19}$ C, and $\\hbar:=h/(2\\pi)$; the vacuum permeability $\\mu_{0}$ is experimentally determined and $\\varepsilon_{0}:=(\\mu_{0}c^{2})^{-1}$. These are unit-convention statements of the SI, not measurements reported by this framework; $c$ enters the framework only through the separate radiation assumptions adopted on their own pages, not in the nonrelativistic spacetime of [[def-nrqm-framework-newtonian-spacetime]].\n\n**(d) Dimensions and types of the framework's quantities.** The dimension map is fixed on the following quantities.\n\n1. State quantities: a position wave function of a system with $d$ spatial dimensions and $r$ internal components is an almost-everywhere equivalence class in $L^{2}(\\mathbb R^{d};\\mathbb C^{r})$ with dimension $\\ell^{-d/2}$, its norm $\\|\\psi\\|$ is dimensionless, and an abstract normalized state and the density operators of the state postulate are dimensionless.\n2. Probability: the outcome probability $\\mu(B)$ of the observable postulate is a dimensionless number; a position density $|\\psi|^{2}$ has dimension $\\ell^{-d}$; a momentum wave function normalized against $\\mathrm d^{d}p$ has dimension $(\\mu\\ell\\tau^{-1})^{-d/2}$; an amplitude for a finite outcome is a dimensionless complex number, while an amplitude read against a detector coordinate carries the square-root of the inverse of the detector measure.\n3. Frame parameters ([[def-nrqm-framework-galilei-transformations]]): $[b]=\\tau$, $[a_{i}]=\\ell$, $[v_{i}]=\\ell\\tau^{-1}$ and $[R_{ij}]=1$.\n4. Mechanical quantities: action $[\\hbar]=\\mu\\ell^{2}\\tau^{-1}$; energy and the Hamiltonian eigenvalues $\\mu\\ell^{2}\\tau^{-2}$; momentum $\\mu\\ell\\tau^{-1}$; position components $\\ell$; angular momentum and spin $\\mu\\ell^{2}\\tau^{-1}$; mass $\\mu$; velocity of a free spinless model $\\ell\\tau^{-1}$; force $\\mu\\ell\\tau^{-2}$; a real potential energy $\\mu\\ell^{2}\\tau^{-2}$.\n5. Probability current: $j$ has dimension $\\ell^{1-d}\\tau^{-1}$; it is a probability flux, not a charge flux.\n6. Electric quantities of the model parameters: charge has dimension $\\vartheta$; a magnetic moment has dimension $\\ell^{2}\\vartheta\\tau^{-1}$, equivalently $\\mathrm A\\,\\mathrm m^{2}=\\mathrm J\\,\\mathrm T^{-1}$, and a gyromagnetic parameter $\\gamma$ in the relation $\\boldsymbol\\mu=\\gamma\\mathbf S$ has dimension $\\mu^{-1}\\vartheta$, equivalently $\\mathrm s^{-1}\\mathrm T^{-1}$; these quantities appear only in the model assumptions that introduce them.\n7. Statistical quantities: a mean has the dimension of its outcome coordinate, a variance the square of it and a standard deviation it; a mean, variance or higher moment exists only when the corresponding moment of the outcome probability is finite, so a symbolic average is not a number unless that integrability is established. Angles and phases are dimensionless under the radian convention.\n8. Quantities of later extension assumptions - radiation frequencies and energies, electric dipole moments, cross sections, temperatures and entropies - are declared with their dimensions and units by the items that introduce those assumptions, under the rules fixed here; they are not part of the present list.\n\n**(e) Conventions only.** No numerical value of any model parameter is fixed by this item: no mass, charge, spin label, potential or measured constant is asserted, and natural-unit shorthand (for example setting $\\hbar=1$ or $c=1$) is read as an abbreviation for the corresponding SI-dimensioned statement with the constant restored.",
+        "strategy": "Conventions fixing the dimension group, the SI reference units, the exact defining constants of the current SI and the dimensions and types of the framework quantities, with no measured value asserted.",
+        "deps": [
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-galilei-transformations"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-galilei-transformations": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 4,
+        "physical_scope": "Conventions fixing how the quantities of the framework are read with dimensions and SI reference units: the dimension group on length, duration, mass and charge, the metre, second, kilogram and coulomb, the exact defining constants of the current SI and the dimensions and mathematical types of the framework's quantities. The item fixes conventions only: it asserts no measured constant value, adopts no law and makes no claim about any system.",
+        "sources": {
+          "references": [
+            {
+              "title": "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25 and Table 2: the SI base and derived units, and the exact defining constants h, c and e",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): probability interpretation of the wave function and observable operators",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-framework-ccr-on-the-schwartz-core",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Canonical commutation relations of position and momentum on the Schwartz core",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $d\\ge1$ and $\\hbar>0$, let $Q_{j},P_{k}$ be the position and momentum operators on $L^{2}(\\mathbb R^{d};\\mathbb C)$ of [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], and let\n\n$$\\mathcal S:=\\mathcal S(\\mathbb R^{d};\\mathbb C)$$\n\nbe the Schwartz space of [[def-schwartz-space-and-its-seminorms]]. Then:\n\nIn this operator statement, $\\mathcal S$ denotes the image in $L^2(\\mathbb R^d;\\mathbb C)$ of the actual Schwartz functions under the quotient map by almost-everywhere equality ([[def-l-p-space-as-a-quotient-by-null-functions]]); the smooth representatives are used in the pointwise derivative calculations.\n\n(a) $\\mathcal S\\subseteq D(Q_{j})\\cap D(P_{k})$ for all $j,k$, and $Q_{j}f\\in\\mathcal S$ and $P_{k}f\\in\\mathcal S$ for every $f\\in\\mathcal S$.\n(b) for every $f\\in\\mathcal S$ the products $Q_{j}P_{k}$ and $P_{k}Q_{j}$ are defined at $f$ and\n$$(Q_{j}P_{k}-P_{k}Q_{j})f=i\\hbar\\,\\delta_{jk}f,\\qquad \\delta_{jk}=\\begin{cases}1,&j=k,\\\\0,&j\\ne k;\\end{cases}$$\nthat is, the canonical commutation relation holds on the common core $\\mathcal S$.\n\nNo statement is made about products of $Q_{j}$ and $P_{k}$ outside $\\mathcal S$: the relation is asserted on the Schwartz core only, not as an identity of unbounded products on all of $L^{2}$.",
+        "strategy": "Direct computation: membership of Schwartz classes in the operator domains, the two products evaluated with the weak product rule, and the commutator on the Schwartz core.",
+        "deps": [
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-schwartz-space-and-its-seminorms",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "thm-dominated-convergence",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step": "mathematical-premise",
+          "def-mollifier-family-generated-by-a-unit-mass-smooth-bump": "mathematical-premise",
+          "lem-complex-translation-and-approximate-identity-interfaces": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-57 (PDF pages 67-69): position and momentum operators and the canonical commutation relation",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 3 'Linear Algebra: Vector Spaces and Operators', printed pages 5-8 (PDF pages 6-9): linear operators and the commutator [X,Y]=XY-YX",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/04b0570b349e84d74129eef504498472_MIT8_05F13_Chap_03.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-state-and-composition",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "State and composition postulate P1: Hilbert spaces, preparations and composite systems",
+        "statement": "Adopt as physical assumptions of the framework, for systems in the declared massive-matter sector, the following statements about states and their composition. Assume throughout the Axiom of Countable Choice ([[def-countable-choice]]), which is the choice hypothesis of the mathematical suppliers cited below.\n\n**(i) State space.** To each physical system of the sector the model assigns a complex Hilbert space $H$ that is nonzero and separable: a complex Hilbert space in the sense of [[def-hilbert-space]] which admits a sequence whose range is dense in $H$, so that the hypothesis of [[thm-separable-hilbert-space-has-a-countable-orthonormal-basis]] holds and $H$ has a finite or countable orthonormal basis. The assignment of a Hilbert space to a physical system is a model assumption; the linear structure used to combine descriptions mathematically is not an empirical claim. The physical system to which $H$ is assigned, and the sector in which the assignment is made, are declared with it.\n\n**(ii) Pure preparations.** A **pure preparation** of the system is a unit ray $[\\psi]=\\{z\\psi:z\\in\\mathbb C\\setminus\\{0\\}\\}$ of a vector $\\psi\\in H$ with $\\|\\psi\\|=1$; that is, two nonzero vectors describe the same pure preparation exactly when they differ by a nonzero complex factor. The zero vector is not a state and no preparation is assigned to it: the normalization $\\|\\psi\\|=1$ is part of the assignment. The ray allows arbitrary nonzero rescaling; between unit representatives the factor has modulus one and is a **global phase**, which has no observable consequence (P2). The rank-one operator $T_{\\psi,\\psi}$ of [[lem-nrqm-composites-rank-one-operator-calculus]] is the density operator associated with the ray of $\\psi$.\n\n**(iii) General preparations and mixing.** A general preparation of the system is a **density operator**: a self-adjoint positive trace-class operator $\\rho$ on $H$ with $\\operatorname{tr}\\rho=1$ ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]], [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)). Pure preparations are the special case $\\rho=T_{\\psi,\\psi}$ with $\\|\\psi\\|=1$. A **statistical mixture** of preparations $\\rho_{n}$ with weights $w_{n}\\ge0$, $\\sum_{n}w_{n}=1$, is the trace-norm convergent sum $\\rho=\\sum_{n}w_{n}\\rho_{n}$ as follows directly in the trace-class Banach space ([[thm-trace-class-is-a-two-sided-banach-operator-ideal]]): each density has trace norm one, so $\\sum_n\\|w_n\\rho_n\\|_1=1$ gives trace-norm convergence. Every partial sum is positive; operator-norm convergence preserves its nonnegative quadratic forms, and continuity of trace gives $\\operatorname{tr}\\rho=\\sum_nw_n=1$ ([[thm-trace-is-absolutely-convergent-and-basis-independent]]). Thus the limit is again a density operator, without requiring the components to be orthogonal pure states. The weights are a classical preparation uncertainty and are not amplitudes. Distinct weighted ensembles of pure states may define the same $\\rho$.\n\n**(iv) Composition.** Two independent distinguishable subsystems with state spaces $H_{A}$ and $H_{B}$ are composed by the completed Hilbert tensor product $H_{A}\\widehat\\otimes H_{B}$ of [[lem-nrqm-composites-hilbert-tensor-construction]]. Product preparations $\\psi_{A}\\otimes\\psi_{B}$ are the special case of preparations in which each subsystem has its own specified preparation; general composite preparations are linear combinations and mixtures and need not factor. A quantity of subsystem $A$ alone is represented on the composite by an operator of the form $A\\otimes I_{B}$ and a quantity of $B$ alone by $I_{A}\\otimes B$, in the sense of [[lem-nrqm-composites-bounded-tensor-maps]] (bounded case; unbounded local operators are treated where they occur). The existence of the completed tensor product is mathematics; the assignment of that product to a composite physical system is the physical assumption here.\n\n**(v) Restrictions that are separate assumptions.** Restrictions of the state space by superselection rules, identical-particle symmetry sectors, and the replacement of the tensor product by more general algebraic structures are not consequences of the clauses above: where such a restriction is used it is adopted separately, and the identical-species sectors are the subject of the postulate P6 of this page.\n\n**(vi) Status.** Clauses (i)-(v) are adopted assumptions of the model within its declared sector. They are not derived from experiment, and they do not assert that a physical system is exactly described by such a Hilbert space; no numerical measurement is recorded. The compatibility of the framework with observation is a question about fully specified models and reported data, in the sense of P7.",
+        "strategy": "A postulate, not a theorem: it adopts the state space, the unit rays and density operators, statistical mixing and the completed tensor composition, and separates superselection and identical-particle sectors from its content.",
+        "deps": [
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "def-hilbert-space",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "def-countable-choice",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 5,
+        "physical_scope": "The state and composition assumptions of the nonrelativistic quantum framework: assignment of a nonzero separable complex Hilbert space to each system of a declared sector, identification of pure preparations with unit rays and of general preparations with density operators, statistical mixing, and composition of independent distinguishable subsystems by the completed Hilbert tensor product. Adoption is a model assumption, not a derived or empirical result; the item excludes superselection rules, identical-particle sectors and any relativistic or field-theoretic structure, which are separate assumptions.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2, printed pages 3-10 (PDF pages 6-13): the wave function, the Born probability, normalization and global phase equivalence of states",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.3, printed pages 7-15 (PDF pages 15-23): amplitudes, kets and the vector-space description of quantum states",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 1.4, printed pages 45-47 (PDF pages 57-59): the tensor product of Hilbert spaces for composite systems",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-observable-and-probability",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Observable and probability postulate P2: self-adjoint observables, spectral probability and finite unsharp outcomes",
+        "statement": "Adopt as physical assumptions of the framework the following statements about sharp and unsharp real-valued quantities. Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). The latter is the explicit hypothesis used to obtain the spectral PVM of a general self-adjoint operator from [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]] in clause (ii); consumers invoking this construction inherit it.\n\n**(i) Sharp observables.** An **ideal sharp real-valued quantity** (observable) of a system with state space $H$ is a densely defined self-adjoint operator $A:D(A)\\subset H\\to H$ ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]), together with a declared unit in which its real spectral coordinate is read; the unit is part of the assignment, and no numerical value of the coordinate is asserted by the assignment. Symmetry of $A$ on a small domain is not sufficient for self-adjointness, and the domain is a declared part of the observable.\n\n**(ii) Spectral probability.** Let $E_{A}$ be the spectral projection-valued measure of the self-adjoint operator $A$ on the Borel $\\sigma$-algebra of $\\mathbb R$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]], [[def-borel-sigma-algebra]]). For a preparation $\\rho$ and a Borel set $B\\subseteq\\mathbb R$ the **probability of the outcome in $B$** is\n$$\\mu^{A}_{\\rho}(B):=\\operatorname{tr}\\bigl(\\rho\\,E_{A}(B)\\bigr),\\qquad\\text{and for a pure preparation }[\\psi]\\text{ it is }\\mu^{A}_{\\psi}(B)=\\|E_{A}(B)\\psi\\|^{2}.$$\nBy clause (b) of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] the assignment $B\\mapsto\\mu^{A}_{\\rho}(B)$ is a probability measure on the Borel sets ([[def-probability-measure]], [[lem-scalar-and-complex-measures-from-a-pvm]]). It is the general form of the Born rule adopted here.\n\n**(iii) Nature of the outcome law.** The probability law is a measure, not necessarily a density with respect to Lebesgue measure and not necessarily a finite or countable sum of point masses: a self-adjoint operator with continuous spectrum ordinarily has no normalizable eigenvector at a point of its continuous spectrum, so an \"exact value\" of a continuum quantity is not represented by a normalized state. An ideal point value is an idealization; a real detector reports a finite-resolution outcome, that is, the probability of a declared Borel set $B$ such as a bin, and the recorded-event probability is that of (ii) for the bin, not the value of a density at a point.\n\n**(iv) Unsharp finite outcomes.** Outcomes of a finite-resolution apparatus with finitely many channels are described, when the idealization uses bounded effects, by a finite family $(F_{a})_{a=1}^{p}$ of bounded operators with $0\\le F_{a}\\le I$ in the quadratic-form order and $\\sum_{a}F_{a}=I$ ([[def-non-negative-and-positive-operator]]), the **outcome probabilities** being $p_{a}=\\operatorname{tr}(\\rho F_{a})$. They are normalized for every state space assigned by P1, as shown by the preceding general-H calculation. This unsharp extension is an operational description tied to an apparatus model; it is not obtained from the sharp observable by mathematical manipulation alone, and the effects alone do not determine what happens to the state after the outcome (P3).\n\n**(v) Moments are a separate matter.** Statements about the mean, variance or higher moments of the outcome law require the corresponding integrability of $t\\mapsto t^{n}$ against $\\mu^{A}_{\\rho}$ and are not part of this postulate; where they are used they are stated with their hypotheses. In particular the existence of $\\operatorname{tr}(\\rho A)$ for an unbounded $A$ is not asserted.\n\n**(vi) Status.** Clauses (i)-(v) are adopted assumptions of the model. They assert nothing about which quantities of a concrete apparatus are sharp, about the physical mechanism producing an outcome or about the completeness of the description; a laboratory record is a classical event whose relation to the model is a tested identification with uncertainty, in the sense of P7.",
+        "strategy": "A postulate, not a theorem: it adopts self-adjoint observables with declared units, the spectral outcome law, the reading of finite-resolution bins and the finite unsharp outcome family, and defers moments to their own integrability hypotheses.",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-hilbert-space",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-projection-valued-measure",
+          "def-borel-sigma-algebra",
+          "def-probability-measure",
+          "lem-scalar-and-complex-measures-from-a-pvm",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "def-non-negative-and-positive-operator",
+          "def-countable-choice",
+          "post-nrqm-framework-state-and-composition",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "lem-scalar-and-complex-measures-from-a-pvm": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "physical_scope": "The observable and probability assumptions of the framework: sharp real-valued quantities are self-adjoint operators with a declared unit, their spectral projection-valued measures assign outcome probabilities to preparations, and finite families of bounded effects describe unsharp finite outcomes. Adoption is a model assumption, not a derived result; the item excludes any claim that every laboratory dial is such an observable, makes no statement about joint measurements or moments, and is silent on which quantities of a given system are sharp.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): observables as self-adjoint operators, expectation values and the spectrum",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 3.2-3.3, printed pages 67-80 (PDF pages 70-83): Hermitian operators, eigenfunctions of operators with continuous spectrum, and the measurement postulate with its limitations",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed pages 15-18 (PDF pages 23-26): ideal measurement and the amplitudes for possible outcomes",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-ideal-conditional-measurement",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Ideal conditional measurement postulate P3: the projective Lueders update and discarded outcomes",
+        "statement": "Adopt as physical assumptions of the framework the following conditional-update rule for declared ideal measurements. Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\n**(i) Declared measurement.** A **declared ideal sharp measurement** of a system with state space $H$ consists of a finite or countably infinite family $(P_{a})_{a\\in A}$ of bounded orthogonal projections on $H$ ([[def-hilbert-orthogonal-projection]], [[def-orthogonal-projection]]) which are mutually orthogonal, $P_{a}P_{b}=0$ for $a\\ne b$, and whose strong sum is the identity: the finite or norm-convergent countable sum $\\sum_{a}P_{a}x=x$ for every $x\\in H$ ([[def-projection-valued-measure]] clause 4). The family is part of the apparatus description; the model does not claim that every laboratory device is a declared measurement of this form.\n\n**(ii) Outcome probabilities.** For a preparation $\\rho$ the **probability of the outcome $a$** is $p_{a}:=\\operatorname{tr}(\\rho P_{a})\\ge0$, with $\\sum_{a}p_{a}=1$; equivalently $p_{a}=\\|P_{a}\\psi\\|^{2}$ for a pure preparation $[\\psi]$, as in the probability postulate P2. This is the Born law of the declared measurement.\n\n**(iii) Conditional update.** If the outcome $a$ has been recorded and $p_{a}>0$, the preparation posterior to the measurement is\n$$\\rho_{a}:=\\frac{P_{a}\\,\\rho\\,P_{a}}{p_{a}},$$\nthe **Lueders update**. It is a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a), [[lem-nrqm-composites-rank-one-operator-calculus]]): $P_{a}\\rho P_{a}$ is positive, trace class with trace $p_{a}$ by the rank-one series expansion of $\\rho$ and the trace formulas, and $\\rho_{a}$ is self-adjoint, positive, trace class with trace $1$. The update preserves coherence inside the range of a degenerate $P_{a}$: a superposition of orthogonal vectors within that range is updated to the same relative superposition, and repetition of the same declared measurement on $\\rho_{a}$ returns $a$ with probability $1$ (repeatability of the declared projective measurement).\n\n**(iv) Discarded outcomes.** If the outcomes are recorded but not selected, the posterior ensemble is\n$$\\rho'=\\sum_{a}P_{a}\\,\\rho\\,P_{a},$$\nwhich converges in trace norm and is a density operator: for an eigen-expansion $\\rho=\\sum_{n}w_{n}T_{u_{n},u_{n}}$ as in the rank-one calculus, the series $\\sum_{a}P_{a}\\rho P_{a}=\\sum_{a}\\sum_{n}w_{n}T_{P_{a}u_{n},P_{a}u_{n}}$ is nuclear with trace $\\sum_{a}\\sum_{n}w_{n}\\|P_{a}u_{n}\\|^{2}=\\sum_{n}w_{n}=1$ by the nuclear-series characterization of the trace norm and the absolute convergence of the trace ([[lem-nuclear-series-characterizes-trace-norm]], [[thm-trace-is-absolutely-convergent-and-basis-independent]]); its normalized form $\\rho'$ has the operator dependence recorded by clause (iii) for each branch.\n\n**(v) Limits of the rule.** The rule is an assumption of the model for the declared ideal measurement; it is not derived from the Born law of P2, and it is not asserted for every apparatus. In particular: a measurement of an exact eigenvalue of an operator with continuous spectrum is not represented by normalizing a delta distribution; a photon-absorption detector need not leave an outgoing one-photon preparation of the same form; and a unitary system-apparatus model that produces conditional correlations does not by itself select a unique recorded outcome or resolve which branch occurred. Apparatuses outside the declared class require their own models with their own stated assumptions. The example in [[lem-nrqm-composites-finite-effects-and-instruments]] that equal finite outcome effects can have different updates is proved there only for finite-dimensional $H$; that example is not a representation result for instruments on infinite-dimensional $H$.\n\n**(vi) Status.** Clauses (i)-(v) are adopted assumptions. They record how the model updates preparations in the declared ideal case and what it deliberately does not claim about arbitrary apparatuses and about the uniqueness of recorded outcomes.",
+        "strategy": "A postulate, not a theorem: it adopts the declared projective measurement, its Born probabilities, the Lueders update and the discarded-outcome ensemble, and states the limits of the rule for general apparatus.",
+        "deps": [
+          "def-hilbert-space",
+          "def-projection-valued-measure",
+          "def-hilbert-orthogonal-projection",
+          "def-orthogonal-projection",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-finite-effects-and-instruments",
+          "lem-nuclear-series-characterizes-trace-norm",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "def-countable-choice",
+          "post-nrqm-framework-observable-and-probability"
+        ],
+        "dependency_roles": {
+          "def-hilbert-space": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-orthogonal-projection": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-finite-effects-and-instruments": "mathematical-premise",
+          "lem-nuclear-series-characterizes-trace-norm": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 7,
+        "physical_scope": "The ideal conditional-measurement assumption of the framework: a declared repeatable sharp measurement with a finite or countable family of mutually orthogonal projections resolves the identity, outcomes occur with the Born probabilities, a selected outcome updates the preparation by the Lueders rule and discarding outcomes gives the trace-norm convergent sum. Adoption is a model assumption for declared ideal apparatus; it is not asserted for every laboratory detector, makes no claim about outcome uniqueness, and excludes exact continuum eigenvalues and nonprojective absorption processes, which require their own models.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4, printed pages 15-18 (PDF pages 23-26): ideal measurement, repeatability and the amplitudes after a measurement",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3, printed pages 76-80 (PDF pages 79-83): projection operators, degeneracy and the measurement postulate",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 3.3, printed pages 92-95 (PDF pages 104-107): probabilities from projection-valued measures and the spectral interpretation",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-autonomous-dynamics",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Autonomous dynamics postulate P4: self-adjoint generators and unitary evolution",
+        "statement": "Adopt as physical assumptions of the framework the following statement of isolated autonomous dynamics. Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), which are the choice hypotheses of the cited spectral and group suppliers.\n\n**(i) Energy operator.** An **isolated autonomous system** of the sector has a declared **energy operator** $H_{\\mathrm{op}}:D(H_{\\mathrm{op}})\\subset H\\to H$ that is self-adjoint ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]) and a declared energy unit in which its spectral coordinate is read. The energy operator is part of the model specification of the system; for a massive particle it is fixed by the kinematics postulate P5, and singular or unbounded model Hamiltonians require their own self-adjointness statements.\n\n**(ii) Evolution.** The time evolution of the model is the strongly continuous one-parameter unitary group\n$$U(t):=\\exp\\!\\Bigl(-\\frac{i}{\\hbar}tH_{\\mathrm{op}}\\Bigr)\\qquad(t\\in\\mathbb R),\\qquad U(t+s)=U(t)U(s),\\quad U(t)^{*}=U(t)^{-1},$$\ndefined by the spectral calculus of the self-adjoint generator ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-unbounded-integral-against-a-pvm]], [[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]], [[def-strongly-continuous-one-parameter-unitary-group]]). The energy unit enters the argument of the exponential so that $H_{\\mathrm{op}}t/\\hbar$ acts in the dimensionless spectral variable.\n\n**(iii) State evolution.** A vector state evolves continuously, $\\psi(t):=U(t)\\psi(0)$ for every $\\psi(0)\\in H$, and the Schroedinger equation\n$$i\\hbar\\,\\frac{d}{dt}\\psi(t)=H_{\\mathrm{op}}\\psi(t)$$\nholds in the norm-differentiable sense exactly for initial vectors $\\psi(0)\\in D(H_{\\mathrm{op}})$, where the derivative is the norm limit of the difference quotients; for other vectors the equation is not asserted, although the evolution remains continuous. A density-operator preparation evolves as $\\rho(t)=U(t)\\rho(0)U(t)^{*}$, which is a density operator for every $t$ and satisfies $\\operatorname{tr}\\rho(t)=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]).\n\n**(iv) Time-dependent families.** A prescribed time-dependent family $t\\mapsto H(t)$ of self-adjoint operators is a different model assumption: a norm-continuous finite-dimensional Hermitian family is used only through the unitary two-time propagator that its family defines, and the exponential of the integral of $H(t)$ is not identified with that propagator unless the family commutes with itself at different times. The general unbounded time-dependent case requires a separate existence and domain theorem of its own and is not adopted by this postulate; the driven-dynamics page states its own assumptions for the models it treats.\n\n**(v) Open systems.** A non-unitary evolution of the reduced description of a system coupled to an environment is an extension obtained from an explicitly chosen environment model and a declared reduction, not a replacement for clause (ii); no environment model is adopted by this postulate.\n\n**(vi) Status.** Clauses (i)-(v) are adopted assumptions of the isolated-system idealization. They assert nothing about the origin of the energy operator of a concrete system, about the accuracy of the idealization for a laboratory preparation, or about which laboratory interactions realize an isolated evolution; those are tested identifications in the sense of P7.",
+        "strategy": "A postulate, not a theorem: it adopts the self-adjoint energy operator, the unitary evolution it generates, the Schroedinger equation on the operator domain, and the separation of driven and open-system evolution.",
+        "deps": [
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-strongly-continuous-one-parameter-unitary-group",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-unbounded-integral-against-a-pvm",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "post-nrqm-framework-state-and-composition",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-strongly-continuous-one-parameter-unitary-group": "mathematical-premise",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-unbounded-integral-against-a-pvm": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "physical_scope": "The autonomous-dynamics assumption of the framework: an isolated system's energy is a self-adjoint operator with a declared energy unit, the state of a vector or density operator evolves by the unitary group it generates, and the Schroedinger equation holds on the operator domain. Adoption is a model assumption of the isolated-system idealization; driven and open systems are excluded and require their own assumptions, and no claim is made that any laboratory system is exactly isolated.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70) and Theorem 5.1-5.2 pp. 123-125: the unitary group generated by a self-adjoint operator and the Schroedinger equation",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum Dynamics', Section 2.1, printed pages 10-16: unitary time evolution and the Schroedinger equation",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/79a8091ef4f18d8e3ff76a097e8db33c_MIT8_05F13_Chap_06.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.2, printed pages 9-14 (PDF pages 12-17): the Schroedinger equation and the probability current",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Kinematics and massive-particle model postulate P5: Newtonian frames and one-particle operators",
+        "statement": "Adopt as physical assumptions of the framework the following kinematics and one-particle model. Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), which are the choice hypotheses of the cited operator suppliers.\n\n**(i) Spacetime and frames.** The model reads its events and frames in the Newtonian arena of [[def-nrqm-framework-newtonian-spacetime]], with inertial frames and frame changes as in [[def-nrqm-framework-inertial-frames]]: the frame changes are the Galilean transformations of [[def-nrqm-framework-galilei-transformations]], and their composition is governed by the group law of [[lem-nrqm-framework-galilei-transformations-form-a-group]]. These frames are global coordinate charts, not observer congruences and not time-varying basis fields. The parameters of a frame change are read in the units fixed by [[def-nrqm-framework-quantities-and-units]].\n\n**(ii) Apparatus motion.** The macroscopic constituents of preparations and apparatus are described by the classical trajectories of [[def-nrqm-framework-classical-apparatus-trajectories]]; a quantum particle of the model is not assigned a worldline between preparations and detections.\n\n**(iii) One-particle state space.** For one particle of spin label $s\\in\\{0,\\tfrac12,1,\\tfrac32,\\dots\\}$ and mass parameter $m>0$, the model uses the state space\n$$H_{s}:=L^{2}(\\mathbb R^{3};\\mathbb C)\\widehat\\otimes\\,\\mathbb C^{2s+1}\\cong L^{2}\\bigl(\\mathbb R^{3};\\mathbb C^{2s+1}\\bigr),$$\nwhose second factor carries the spin representation assigned in the postulate P6, and $\\hbar>0$ is the action constant of the adopted unit system. Position and momentum act on $H_s$ componentwise: for $\\psi=(\\psi_1,\\dots,\\psi_{2s+1})$ the $j$-th position acts by $(Q_j\\psi)_l(x):=x_j\\psi_l(x)$ on the classes with $x_j\\psi_l\\in L^2$, and the $k$-th momentum by $(P_k\\psi)_l:=-i\\hbar D_k\\psi_l$ on the classes whose componentwise weak derivative lies in $L^2$; for one component these are the operators of [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], whose self-adjointness, domains and Fourier representation are supplied by [[lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint]]. On the componentwise Schwartz space defined in the preceding mathematical realization, the canonical commutation relation $(Q_jP_k-P_kQ_j)\\psi=i\\hbar\\delta_{jk}\\psi$ holds componentwise by [[lem-nrqm-framework-ccr-on-the-schwartz-core]] ([[def-schwartz-space-and-its-seminorms]]).\n\n**(iv) Baseline Hamiltonian.** For a real bounded measurable potential $V:\\mathbb R^{3}\\to\\mathbb R$ the model uses the scalar Hamiltonian\n$$H_{\\mathrm{op}}:=-\\frac{\\hbar^{2}}{2m}\\Delta+V(Q),\\qquad D(H_{\\mathrm{op}})=W^{2,2}(\\mathbb R^{3};\\mathbb C)\\ \\text{(componentwise)},$$\nwith the free part $-\\hbar^{2}\\Delta/2m$ and the bounded multiplier $V(Q)$ as in [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clauses (b) and (c) ([[def-sobolev-space-wkp-and-its-norm]]); that theorem supplies the self-adjointness of each component operator on the displayed domain and the strongly continuous unitary group it generates, which the dynamics postulate P4 then reads as the evolution. The assignment of the operator $H_{\\mathrm{op}}$ to a particle of mass $m$ and spin $s$ is the physical content of this clause; the mathematical properties are those of the cited theorem.\n\n**(v) What is separate.** The model does not follow from P1-P4: the choice of the Newtonian arena, of the frame class, of the tensor factor $\\mathbb C^{2s+1}$, of the operators $Q_{j},P_{k}$ as position and momentum and of the Hamiltonian of clause (iv) are all adopted. Singular or unbounded model potentials (Coulomb-type, oscillator-type, boundary and point-interaction realizations) are separate model choices with their own domains and self-adjointness statements, established before use; relativistic matter, massless particles and radiation modes are not supplied by this massive-model assignment; they are adopted separately on their own pages, without a limiting construction here. No empirical identification of a particular particle species with a value of $s$ or $m$ is made or recorded here; the species parameters are empirical inputs in the sense of P6 and P7.\n\n**(vi) Status.** Clauses (i)-(v) are adopted assumptions of the framework. They assert that the model is used in the nonrelativistic regime and make no claim that any physical system is exactly described by it; no numerical measurement is recorded.",
+        "strategy": "A postulate, not a theorem: it adopts the Newtonian arena and frame class, the apparatus trajectories, the one-particle state space with the position and momentum acts, and the bounded-potential Hamiltonian, and records what is separate.",
+        "deps": [
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-inertial-frames",
+          "def-nrqm-framework-classical-apparatus-trajectories",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-framework-galilei-transformations",
+          "lem-nrqm-framework-galilei-transformations-form-a-group",
+          "lem-nrqm-framework-ccr-on-the-schwartz-core",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-schwartz-space-and-its-seminorms",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-identical-particles-and-spin"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-inertial-frames": "formulation-prerequisite",
+          "def-nrqm-framework-classical-apparatus-trajectories": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-framework-galilei-transformations": "formulation-prerequisite",
+          "lem-nrqm-framework-galilei-transformations-form-a-group": "mathematical-premise",
+          "lem-nrqm-framework-ccr-on-the-schwartz-core": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 7,
+        "physical_scope": "The nonrelativistic kinematics and massive-particle model assumption of the framework: the Newtonian spacetime arena and its inertial frames with Galilean frame changes, classical apparatus trajectories, and the one-particle model of a spin-s particle of mass m with position and momentum operators and the bounded-potential Schroedinger Hamiltonian. Adoption is a model assumption; the item excludes relativistic matter, radiation, massless particles, singular potentials and boundary realizations, which are separate model assumptions, and asserts no empirical identification of any particular particle.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 1.2-1.2.1, printed pages 4-7 (PDF pages 10-13): inertial frames and their Galilean transformations",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2, printed pages 3-14 (PDF pages 6-17): the wave function, its normalization and phase equivalence, the Schroedinger Hamiltonian -hbar^2 Delta/2m + V and the probability current",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Sections 1-2, printed pages 1-8: the Schroedinger equation and stationary states for a particle in a potential",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-identical-particles-and-spin",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Identical-particle and spin assignments P6: permutation sectors and finite-spin representations",
+        "statement": "Adopt as physical assumptions of the framework the following assignments for identical species and for spin. Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\n**(i) Labels and sectors.** For $n$ particles of one species the model forms the $n$-fold completed tensor power $H^{\\otimes n}$ of the one-particle space ([[lem-nrqm-composites-hilbert-tensor-construction]]), whose tensor position factors are mathematical labels and not observable particle identities. For a declared **bosonic species** the model uses the symmetric sector $S^{n}H$, the range of the symmetrizing projection $P_{n}^{+}$, and for a declared **fermionic species** the antisymmetric sector $\\Lambda^{n}H$, the range of the alternating projection, both as constructed in [[lem-nrqm-composites-permutation-sector-projections]]. The sector is part of the declared species assignment; the permutation invariance of states in the sector and the resulting exclusion statement for fermions are conditional consequences read off that projection, not assumptions added to it, A bounded quantity $A$ on $H^{\\otimes n}$ is restricted to an adopted sector only when it preserves that sector; in particular, $AU_\\pi=U_\\pi A$ for every permutation implies $AP_n^{\\pm}=P_n^{\\pm}A$ by the finite projection sums. Bounded tensor maps construct ambient operators; an operator on a single labelled factor need not preserve either sector.\n\n**(ii) Spin.** For a declared **spin label** $s\\in\\{0,\\tfrac12,1,\\tfrac32,\\dots\\}$ the model assigns the internal factor $V_s=\\mathbb C^{2s+1}$ with the standard inner product and basis $(e_m)_{m=-s,-s+1,\\ldots,s}$. Here $SU(2)=\\{W\\in M_2(\\mathbb C):W^*W=I_2,\\det W=1\\}$ with its matrix topology. For $s>0$ put $n=2s\\ge1$ and let $F_s:\\mathcal S_n\\to V_s$ be the unitary identification $F_sv_k=e_{s-k}$ of [[thm-nrqm-orbital-and-spin-symmetric-power-su2-representation]]. The assigned strongly continuous unitary representation is $D_s(W)=F_sU_n(W)F_s^{-1}$. For $s=0$ put $D_0(W)=I_{\\mathbb C}$ for every $W$, the trivial one-dimensional representation with zero generators. The spin operators are $S_i=\\hbar J_i$ with the self-adjoint endomorphisms of [[prop-nrqm-orbital-and-spin-finite-spin-matrices]], satisfying\n$$[S_i,S_j]=i\\hbar\\sum_k\\epsilon_{ijk}S_k,\\qquad S^2=S_x^2+S_y^2+S_z^2=\\hbar^2s(s+1)I.$$\nFor $A_i(t)=\\cos(t/2)I_2-i\\sin(t/2)\\sigma_i$, the curve $D_s(A_i(t))$ has infinitesimal generator $-iJ_i$, including $s=0$. This specifies the internal $SU(2)$ action. If a spatial Hilbert factor $H_{\\mathrm{sp}}$ is separately assigned a strongly continuous unitary $SU(2)$ representation $R_{\\mathrm{sp}}$, the combined action is explicitly $W\\mapsto R_{\\mathrm{sp}}(W)\\otimes D_s(W)$ on $H_{\\mathrm{sp}}\\widehat\\otimes V_s$: its representation law follows from bounded tensor composition, and continuity follows on elementary tensors and then by density and the unitary norm bound. The existence and physical interpretation of that spatial action require the separate assignment. The spin label and representation are species model assignments; the internal factor is not a rotating body or a spatial coordinate.\n\n**(iii) Species parameters.** The mass, charge, spin label, statistics and any magnetic coupling constant of a species are empirical model parameters: they enter the model as declared values with uncertainty, and no value is derived from the Hilbert-space formalism. The assignment of a sector (symmetric or antisymmetric) to a species is likewise a model assignment, tested through the consequences computed with it.\n\n**(iv) What is not asserted.** The relativistic spin-statistics theorem is not a theorem of this postulate set: the connection between spin and permutation sector adopted here is a nonrelativistic model assignment, and any relativistic statement about it belongs to a framework that adopts relativistic assumptions. Similarly, the postulate asserts nothing about the internal structure, compositeness or interactions of a species beyond the declared parameters.\n\n**(v) Status.** Clauses (i)-(iv) are adopted assumptions of the framework for declared species. They record the sectors and the spin representations used by the model and the empirical status of the species parameters; they make no claim that the model assignment is exact for any species and record no measurement.",
+        "strategy": "A postulate, not a theorem: it adopts the permutation sector of a declared species and the finite-spin representation, with species parameters as empirical inputs and no relativistic spin-statistics claim.",
+        "deps": [
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-permutation-sector-projections",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+          "def-countable-choice",
+          "post-nrqm-framework-state-and-composition",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-permutation-sector-projections": "mathematical-premise",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 6,
+        "physical_scope": "The identical-particle and spin assignments of the framework: labels as tensor factor labels, adoption of the symmetric or antisymmetric permutation sector for a declared species, and assignment of a finite-spin SU(2) representation with spin operators. Adoption is a model assumption; exclusion and permutation invariance are conditional on the adopted sector, the relativistic spin-statistics theorem is not asserted, and no species assignment is claimed to be derived.",
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 10, Section 10.1, printed pages 226-230 (PDF pages 234-238): identical particles, symmetric and antisymmetric states and the exclusion rule",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-Half, Bras, Kets, and Operators', Sections 2-3, printed pages 7-16: spin one-half states, Pauli matrices and their algebra",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "post-nrqm-framework-preparation-and-apparatus",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Preparation and apparatus postulate P7: declared preparations, isolation and sampling assumptions",
+        "statement": "Adopt as physical assumptions of the framework the following discipline for comparing the model with recorded data.\n\n**(i) Declared model of each comparison.** A comparison of a model prediction with an experiment of the framework requires, in addition to the state and dynamics assumptions P1-P5, the following declared items: a **preparation model**, that is, a specification of the state or preparation assigned to the system together with the physical procedure that realizes it; an **isolation model**, that is, the energy operator used and a statement of the interactions neglected in the approximation; a **detection model**, that is, the response of the apparatus, including efficiency, resolution, background and any binning; and **sampling assumptions**, that is, the statistical model under which repetitions of the preparation and detection are combined. None of these items is supplied by the mathematical framework alone.\n\n**(ii) Repetitions.** The treatment of repeated trials as independent and identically distributed draws from the model's outcome law is an additional statistical model of the apparatus and the procedure. It is not a consequence of the state postulate and is not guaranteed by the mathematics; where it is assumed it is stated, and where it fails (correlated trials, drifting preparation, dead time, selection) the statistical analysis must model the departure or record the limitation.\n\n**(iii) Identification with uncertainty.** The claim \"this apparatus realizes the preparation $\\rho$ and the dynamics $H_{\\mathrm{op}}$\" and the claim \"this detector realizes the effect $F$\" are physical identifications: they are tested against recorded behaviour of the apparatus, carry uncertainty and can fail. They are not derived from the framework, and a model prediction obtained under them inherits their qualifications. Calibration procedures, control experiments and their limitations are recorded with the comparison.\n\n**(iv) Empirical premises.** Where a measured value enters a deduction - a mass, a charge, a field strength, a detector efficiency - it enters as a qualified empirical premise with its uncertainty, conditions of measurement and source, and the conclusion of the deduction carries those qualifications. A deduction that uses a measured input is not an exact statement about nature.\n\n**(v) Status.** Clauses (i)-(iv) are adopted as the framework's conditions for comparing model with data. They make no claim that the framework or the apparatus description is exact; agreement of a prediction with a dataset is evidence about the combined model and apparatus assumptions, not a proof of the framework and not a statement about nature deduced from the mathematics.",
+        "strategy": "A postulate, not a theorem: it adopts the declared preparation, isolation, detection and sampling models required for a comparison with data, and the qualified status of apparatus identifications and measured inputs.",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 8,
+        "physical_scope": "The preparation and apparatus assumptions of the framework: a comparison with data requires declared preparation, isolation, detection and sampling models, repetitions are an additional statistical model, and the claim that an apparatus realizes a preparation and a dynamics is a physically tested identification with uncertainty. The item asserts no measured result, adopts no sampling distribution as a quantum law, and excludes inferred certainty about identification or about the model.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-Half, Bras, Kets, and Operators', Section 1, printed pages 1-7: the Stern-Gerlach preparation and the idealization of the measurement arrangement",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2, printed pages 3-14 (PDF pages 6-17): detection records, probabilities and the probability current of the wave function",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-nrqm-framework-assumption-classes-and-scope",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Assumption classes and scope of the framework: P1-P7, the extension postulates and what is excluded",
+        "statement": "",
+        "strategy": "Status audit: the seven core postulates adopted here, the extension postulates adopted only on their own pages, and the exclusion list of the framework; it proves nothing and asserts no result.",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-inertial-frames",
+          "def-nrqm-framework-classical-apparatus-trajectories"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-inertial-frames": "formulation-prerequisite",
+          "def-nrqm-framework-classical-apparatus-trajectories": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 9,
+        "physical_scope": "A scoped audit of the framework's assumption classes: the seven core postulates adopted on this page, the further model postulates adopted only on the pages that name them, and the exclusion list of the framework. The remark records status and scope; it proves nothing, asserts no empirical result, and claims no completeness beyond its stated list.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 1, printed pages 1-4: the postulates of wave mechanics and their status as assumptions",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): the physical axioms of quantum mechanics stated explicitly before their mathematical development",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-nrqm-framework-primitive-and-derived-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Primitive, adopted and derived quantities of the framework",
+        "statement": "",
+        "strategy": "Status audit: which quantities are primitive or adopted inputs, which are derived within the stated hypotheses, and the empirical status of the measured parameters.",
+        "deps": [
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "thm-nrqm-magnetic-and-detection-smooth-local-continuity-calculation"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+          "thm-nrqm-magnetic-and-detection-smooth-local-continuity-calculation": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 9,
+        "physical_scope": "An audit of which quantities of the framework are primitive model inputs, which are adopted structures and which are derived within the stated assumptions, together with the empirical status of the measured parameters. The remark records status; it derives no new result and asserts no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25: base and derived units and the exact defining constants",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.2, printed pages 9-14 (PDF pages 12-17): the Hamiltonian, the action constant and the probability current of the wave function",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 166,
+    "id": "qm-framework-and-quantities-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Framework And Quantities — Examples",
+    "companion": "qm-framework-and-quantities",
+    "requires": [
+      "qm-framework-and-quantities",
+      "qm-math-magnetic-and-detection",
+      "qm-math-composites",
+      "qm-math-orbital-and-spin",
+      "cm-math-geometry",
+      "qm-math-fock-and-equilibrium"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-framework-dimension-bookkeeping",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Dimension bookkeeping for the quantities and laws of the framework",
+        "statement": "Apply the dimension conventions of [[def-nrqm-framework-quantities-and-units]] to the quantities of the framework: the time and space coordinates of an inertial frame of [[def-nrqm-framework-inertial-frames]], a position wave function of the one-particle model, the position and momentum operators and their canonical commutator of [[lem-nrqm-framework-ccr-on-the-schwartz-core]], the kinetic and potential terms of the Hamiltonian and the Schroedinger equation of [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]] and [[post-nrqm-framework-autonomous-dynamics]], the probability density and current of the continuity calculation, and the candidate phase exponent $mv\\cdot x/\\hbar$ if used in a separately specified boost model.",
+        "strategy": "Direct finite computation: evaluate the dimension conventions on the coordinates, wave function, operators, commutator, Hamiltonian terms, Schroedinger equation, current and boost phase.",
+        "deps": [
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-inertial-frames",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "lem-nrqm-framework-ccr-on-the-schwartz-core",
+          "thm-nrqm-magnetic-and-detection-smooth-local-continuity-calculation"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-inertial-frames": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+          "lem-nrqm-framework-ccr-on-the-schwartz-core": "mathematical-premise",
+          "thm-nrqm-magnetic-and-detection-smooth-local-continuity-calculation": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "physical_scope": "A worked application of the dimension and unit conventions of the framework to the quantities and displayed laws of this page: coordinates, wave function, position and momentum operators, the canonical commutator, the kinetic and potential terms of the Hamiltonian, the Schroedinger equation, the probability current and the candidate dimensionless exponent that could be used as a boost phase in a separately specified model. The item checks conventions only, asserts no frame-transformation law, and makes no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25 and Table 2: the SI base and derived units",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.2 and 1.2.1, printed pages 9-14 (PDF pages 12-17): the Hamiltonian, the probability density and the probability current of the wave function",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-nrqm-framework-quantity-type-checks",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Type checks: rays, density operators, mixtures, local quantities and outcome laws",
+        "statement": "Check the mathematical types of the objects introduced by the postulates of\nthis page on explicit finite-dimensional data: the two-dimensional complex\nHilbert space $H=\\mathbb C^{2}$ with its standard inner product and the\northonormal basis $(e_{+},e_{-})$, the spin operators $S_{i}=\\hbar J_{i}$ of\n[[prop-nrqm-orbital-and-spin-finite-spin-matrices]] for $s=\\tfrac12$, and the\ncomposite $H\\widehat\\otimes H$ with the product vectors and local operators of\n[[lem-nrqm-composites-bounded-tensor-maps]].",
+        "strategy": "Direct computation on finite-dimensional data: a unit ray and its rank-one density operator, a mixture of orthogonal pure preparations, a local operator on a product state, and a finite-spectrum outcome law as a probability measure.",
+        "deps": [
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "physical_scope": "Worked type checks on the smallest nontrivial instances of the framework's state and observable assumptions: a pure spin-one-half preparation as a unit ray and as a rank-one density operator, a statistical mixture of two orthogonal pure preparations, the action of a local observable on a product state of two spin factors, and the outcome law of a finite-spectrum observable as a probability measure. The item verifies the mathematical types of the adopted objects and makes no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-Half, Bras, Kets, and Operators', Sections 1-3, printed pages 1-16 (PDF pages 2-17): Stern-Gerlach preparations, spin one-half states, and Pauli-matrix algebra",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 3.3, printed pages 92-95 (PDF files pages 104-107): probabilities from a projection-valued measure and interference of amplitudes",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "The massive free-particle family has no strong zero-mass limit on Schwartz states",
+        "statement": "In the one-particle model of [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]] with potential $V=0$, the free kinetic operators\n$$K_{m}:=-\\frac{\\hbar^{2}}{2m}\\Delta,\\qquad D(K_{m})=W^{2,2}(\\mathbb R^{3};\\mathbb C),\\qquad m>0,$$\nhave a massless member: there exist a self-adjoint operator $K_{0}\\ge0$ on $L^{2}(\\mathbb R^{3};\\mathbb C)$ and, for every $f$ in the Schwartz class $\\mathcal S(\\mathbb R^{3};\\mathbb C)$, the convergence $K_{m}f\\to K_{0}f$ in $L^{2}$ as $m\\downarrow0$, and the free model defined by $K_{0}$ has a finite frequency law $\\omega(k)$ for every nonzero wave vector $k\\in\\mathbb R^{3}$ with $[k]=\\ell^{-1}$ and $[\\omega]=\\tau^{-1}$ under [[def-nrqm-framework-quantities-and-units]].",
+        "strategy": "Direct refutation: compute the kinetic values, the energy expectation and the free frequencies on explicit smooth data and exhibit the divergence of each as the mass tends to zero.",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-schwartz-space-and-its-seminorms",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-exponential-beats-every-polynomial",
+          "thm-plancherel",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-exponential-beats-every-polynomial": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "physical_scope": "A refutation, in the spin-zero massive free-particle model, of the specific limit asserted below: convergence K_m f to K_0 f in L^2 for every Schwartz vector to a self-adjoint K_0, together with a finite free-frequency limit at each fixed nonzero wave number. One explicit Schwartz vector has divergent kinetic-operator norm; for every fixed normalized operator-domain state with nonzero momentum second moment the kinetic expectation diverges as m tends to zero. For each m>0, this class has finite nonzero model root-mean-square speed v_rms,m=m^{-1}(sum_j ||P_j psi||^2)^{1/2}; that speed is not held fixed as m varies. The formal free frequency at each fixed nonzero wave number also diverges. The item excludes that specified limit, not other mathematical notions of convergence or independently specified massless quantum models, and asserts no empirical claim. The radiation extension is a separate adopted model.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.2, printed pages 9-14 (PDF pages 12-17): the free Hamiltonian, plane-wave solutions and the dispersion of the Schroedinger equation",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 7, Theorem 7.8 and Section 7.3, printed pages 168-171 (PDF pages 180-183): the free Schroedinger operator is self-adjoint with spectrum [0,infinity) and its time evolution is the free propagator",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-nrqm-framework-quadratic-shear-is-not-galilean",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A smooth time-dependent translation chart need not be an inertial frame",
+        "statement": "Fix the spacetime arena of [[def-nrqm-framework-newtonian-spacetime]] together with an inertial frame $F$ of [[def-nrqm-framework-inertial-frames]] with coordinates $(t,x)$. Every smooth chart of the arena of the form\n$$G_{w}:\\mathbb R\\times\\mathbb R^{3}\\to\\mathbb R\\times\\mathbb R^{3},\\qquad G_{w}(t,x)=\\bigl(t,\\,x+w(t)\\bigr),$$\nwith $w:\\mathbb R\\to\\mathbb R^{3}$ of class $C^{\\infty}$ and $[w_i]=\\ell$ for every component, is an inertial frame of the model; that is, the map $G_{w}$ belongs to the Galilean transformation class $G$ of [[def-nrqm-framework-galilei-transformations]] for every such $w$.",
+        "strategy": "Direct refutation: exhibit a smooth time-dependent translation chart of the arena, show that it is not a Galilean transformation, and compute the coordinate acceleration it assigns to a curve of zero coordinate acceleration.",
+        "deps": [
+          "def-nrqm-framework-galilei-transformations",
+          "def-nrqm-framework-newtonian-spacetime",
+          "def-nrqm-framework-inertial-frames",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "def-cm-special-orthogonal-group",
+          "def-matrix-product-and-identity-matrix",
+          "def-vector-valued-derivative-and-integral",
+          "def-nrqm-framework-quantities-and-units"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-galilei-transformations": "formulation-prerequisite",
+          "def-nrqm-framework-newtonian-spacetime": "formulation-prerequisite",
+          "def-nrqm-framework-inertial-frames": "formulation-prerequisite",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 6,
+        "physical_scope": "A refutation, on explicit data of the model, of the claim that every chart of the Newtonian arena obtained by a smooth time-dependent spatial translation is an inertial frame of the framework. It exhibits a smooth chart that is a bijection of the coordinate space but not a Galilean transformation, and shows that a parametrized curve of zero coordinate acceleration in the standard chart has nonzero coordinate acceleration in that chart. The item refutes the stated frame-class claim; it adopts no force law and makes no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed pages 5-7 (PDF pages 11-13): the Galilean transformations between inertial frames and the preservation of zero coordinate acceleration",
+              "url": "https://davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.2.1, printed pages 14-15 (PDF pages 20-21): the rotating coordinate system example and the fictitious forces of a non-inertial frame",
+              "url": "https://davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-nrqm-framework-mean-position-can-fail-to-exist",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "The mean position of a normalized state need not exist",
+        "statement": "Specialize P1 to a one-dimensional system with state space $H=L^{2}(\\mathbb R;\\mathbb C)$ and specialize P2 to the position observable $Q\\psi=x\\psi$, with outcome coordinate measured in metres. Its spectral projection for a Borel set $B\\subseteq\\mathbb R$ is multiplication by $\\mathbf 1_B$, so a pure preparation $[\\psi]$ has position law $\\mu_{\\psi}^{Q}(B)=\\int_B|\\psi(x)|^{2}\\,dx$. Define its mean position to be the Lebesgue expectation $\\mathbb E_{\\mu_{\\psi}^{Q}}[X]=\\int_{\\mathbb R}x\\,d\\mu_{\\psi}^{Q}(x)$ when it is a finite real number; this is so exactly when $x\\in L^{1}(\\mu_{\\psi}^{Q})$, equivalently $\\int_{\\mathbb R}|x|\\,|\\psi(x)|^{2}\\,dx<\\infty$. The refuted claim is that every normalized $\\psi\\in L^{2}(\\mathbb R;\\mathbb C)$ has such a finite mean.",
+        "strategy": "Direct refutation: exhibit a normalized state and compute its divergent first absolute moment and second moment with the rational p-test on the half line.",
+        "deps": [
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-improper-integral-at-infinity",
+          "thm-improper-p-test-rational",
+          "cor-primitives-of-a-continuous-function",
+          "lem-derivative-of-a-power",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure": "mathematical-premise",
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-improper-integral-at-infinity": "mathematical-premise",
+          "thm-improper-p-test-rational": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 7,
+        "physical_scope": "A refutation, on an explicit normalized state in the one-dimensional specialization of the P1 state assignment and P2 position-probability rule, of the claim that every normalized preparation has a finite position mean. The displayed state has unit norm but neither a finite second moment nor a finite first absolute moment. The item defines the mean as the Lebesgue expectation and states its absolute-integrability condition; it asserts no measured value and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): the probability interpretation, expectation values and the moment conditions for position",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 1, printed pages 1-4: normalization of wave functions and the probability density",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-nrqm-framework-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the example and counterexample checks of this companion page establish",
+        "statement": "",
+        "strategy": "Scope audit of the companion page: what each check establishes, which specific statements the counterexamples refute, and the empirical neutrality of all of them.",
+        "deps": [
+          "ex-nrqm-framework-dimension-bookkeeping",
+          "ex-nrqm-framework-quantity-type-checks",
+          "cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit",
+          "cex-nrqm-framework-quadratic-shear-is-not-galilean",
+          "cex-nrqm-framework-mean-position-can-fail-to-exist"
+        ],
+        "dependency_roles": {
+          "ex-nrqm-framework-dimension-bookkeeping": "operational-prerequisite",
+          "ex-nrqm-framework-quantity-type-checks": "operational-prerequisite",
+          "cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit": "operational-prerequisite",
+          "cex-nrqm-framework-quadratic-shear-is-not-galilean": "operational-prerequisite",
+          "cex-nrqm-framework-mean-position-can-fail-to-exist": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 9,
+        "physical_scope": "A scope audit of the worked checks of this companion page: what the dimension and type checks establish, which specific statements the counterexamples refute, and the empirical neutrality of all of them. The remark records status only, proves nothing new and asserts no observation.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 3.3, printed pages 92-95 (PDF pages 104-107): probabilities from a projection-valued measure, for comparison with the type checks of this page",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25: the unit conventions used in the dimension checks",
+              "url": "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

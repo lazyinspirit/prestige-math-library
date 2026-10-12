@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-product-for-zeros-at-the-squares.md

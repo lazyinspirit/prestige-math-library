@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-compact-does-not-imply-hilbert-schmidt.md

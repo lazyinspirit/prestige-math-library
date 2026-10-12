@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-homogeneous-space-for-smooth-affine-group.md

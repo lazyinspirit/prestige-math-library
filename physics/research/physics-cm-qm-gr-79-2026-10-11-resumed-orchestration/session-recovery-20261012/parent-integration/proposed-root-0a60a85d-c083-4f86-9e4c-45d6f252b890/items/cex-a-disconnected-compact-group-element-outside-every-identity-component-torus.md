@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-disconnected-compact-group-element-outside-every-identity-component-torus.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-pivot-columns-form-a-basis-of-the-column-space.md

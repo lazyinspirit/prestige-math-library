@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-euclidean-closed-ball-and-sphere-through-the-compactness-chart.md

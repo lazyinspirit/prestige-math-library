@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-symmetric-group-splits-over-the-alternating-group.md

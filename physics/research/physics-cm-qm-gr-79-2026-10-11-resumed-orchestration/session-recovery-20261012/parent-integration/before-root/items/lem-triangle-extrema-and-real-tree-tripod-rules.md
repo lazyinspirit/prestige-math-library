@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-triangle-extrema-and-real-tree-tripod-rules.md

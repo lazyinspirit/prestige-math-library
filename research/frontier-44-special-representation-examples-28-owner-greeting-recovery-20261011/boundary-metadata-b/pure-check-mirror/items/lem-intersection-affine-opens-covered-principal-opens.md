@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-intersection-affine-opens-covered-principal-opens.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-cartesian-swap-braiding-is-a-symmetry.md

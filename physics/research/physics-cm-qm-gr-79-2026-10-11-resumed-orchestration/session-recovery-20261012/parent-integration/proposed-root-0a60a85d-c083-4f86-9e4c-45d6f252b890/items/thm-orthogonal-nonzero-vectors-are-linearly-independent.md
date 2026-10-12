@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-orthogonal-nonzero-vectors-are-linearly-independent.md

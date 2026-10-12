@@ -55,16 +55,12 @@ $O(1)$ term is $o\bigl(T(r,f)\bigr)$.
 
 1.2 Since $T$ is nondecreasing by [F3], the limit $L:=\lim_{r\to\infty}T(r,f)$ exists in $(0,+\infty]$. If $L<\infty$, then $T(r,f)=O(1)=O(\log r)$, so [F2] would make $f$ rational, contrary to transcendence; hence $L=+\infty$, that is, $T(r,f)\to\infty$. [F2, F3, algebra]
 
-2.1 (Convexity chord bound) Put $x_0:=1$. By convexity of $u$ from step 1.1, for all $x_0\le x\le y$,
-$$ u(x)\le u(x_0)+\frac{x-x_0}{y-x_0}\bigl(u(y)-u(x_0)\bigr). $$
-[step 1.1, algebra]
+2.1 (Convexity chord bound) Put $x_0:=1$. By convexity of $u$ from step 1.1, for all $x_0\le x\le y$, $$ u(x)\le u(x_0)+\frac{x-x_0}{y-x_0}\bigl(u(y)-u(x_0)\bigr). $$ [step 1.1, algebra]
 
-3.1 Assume for contradiction that $\liminf_{r\to\infty}T(r,f)/\log r<\infty$. Then there are a constant $C<\infty$ and a sequence $x_n\to+\infty$ with $u(x_n)\le C x_n$ for every $n$. Discard finitely many terms so that $x_n\ge2x_0$ for all $n$; applying the chord bound of step 2.1 with $y=x_n$ to each $x\in[x_0,x_n]$ gives
-$$ u(x)\le u(x_0)+C x_n\frac{x-x_0}{x_n-x_0}\le u(x_0)+2C(x-x_0), $$
-because $x_n\ge2x_0$ gives $x_n/(x_n-x_0)\le2$. Thus $T(e^x,f)=u(x)\le C'x$ for all $x\ge1$, i.e. $T(r,f)=O(\log r)$. [step 1.1, step 2.1, algebra]
+3.1 Assume for contradiction that $\liminf_{r\to\infty}T(r,f)/\log r<\infty$. Then there are a constant $C<\infty$ and a sequence $x_n\to+\infty$ with $u(x_n)\le C x_n$ for every $n$. Discard finitely many terms so that $x_n\ge2x_0$ for all $n$; applying the chord bound of step 2.1 with $y=x_n$ to each $x\in[x_0,x_n]$ gives $$ u(x)\le u(x_0)+C x_n\frac{x-x_0}{x_n-x_0}\le u(x_0)+2C(x-x_0), $$ because $x_n\ge2x_0$ gives $x_n/(x_n-x_0)\le2$. Thus $T(e^x,f)=u(x)\le C'x$ for all $x\ge1$, i.e. $T(r,f)=O(\log r)$. [step 1.1, step 2.1, algebra]
 
 4.1 By [F2] the bound $T(r,f)=O(\log r)$ makes $f$ rational, contradicting the hypothesis. Therefore $\liminf_{r\to\infty}T(r,f)/\log r=+\infty$, which for a nonnegative function is the assertion $T(r,f)/\log r\to+\infty$. [F2, step 3.1, discharge-contradiction]
 
 5.1 By step 1.2, $T(r,f)\to\infty$, so $\log^+T(r,f)=o(T(r,f))$; by step 4.1, $\log r=o(T(r,f))$. Hence $\log^+T(r,f)+\log r=o(T(r,f))$: for every $\varepsilon>0$ the inequality $C(\log^+T(r,f)+\log r)\le\varepsilon T(r,f)$ holds for all sufficiently large $r$. In particular this applies to the right-hand side of any occurrence of $S(r,f)$ at every nonexceptional large radius. [step 1.2, step 4.1, algebra]
 
-6.1 If $f$ is rational of degree $d\ge1$, then [F2] gives $T(r,f)=d\log r+O(1)\ge\frac d2\log r$ for all large $r$, so $T(r,f)\to\infty$ and $O(1)=o(T(r,f))$. [F2, algebra] ∎
+6.1 If $f$ is rational of degree $d\ge1$, then [F2] gives $T(r,f)=d\log r+O(1)\ge\frac d2\log r$ for all large $r$, so $T(r,f)\to\infty$ and $O(1)=o(T(r,f))$. [F2, algebra] ∎ 

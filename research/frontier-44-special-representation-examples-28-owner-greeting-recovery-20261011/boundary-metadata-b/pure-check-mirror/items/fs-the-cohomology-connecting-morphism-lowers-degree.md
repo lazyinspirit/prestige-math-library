@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-cohomology-connecting-morphism-lowers-degree.md

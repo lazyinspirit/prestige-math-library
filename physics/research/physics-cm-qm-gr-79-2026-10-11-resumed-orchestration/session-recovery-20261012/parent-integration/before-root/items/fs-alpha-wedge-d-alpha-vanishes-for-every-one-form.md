@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-alpha-wedge-d-alpha-vanishes-for-every-one-form.md

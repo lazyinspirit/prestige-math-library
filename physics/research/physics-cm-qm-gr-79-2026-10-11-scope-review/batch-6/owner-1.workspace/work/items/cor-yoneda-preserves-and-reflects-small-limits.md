@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-yoneda-preserves-and-reflects-small-limits.md

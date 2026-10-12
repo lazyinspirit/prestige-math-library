@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-co-e-free-complete-nonedge-pairs-are-pure-to-induced-h-five-graphs.md

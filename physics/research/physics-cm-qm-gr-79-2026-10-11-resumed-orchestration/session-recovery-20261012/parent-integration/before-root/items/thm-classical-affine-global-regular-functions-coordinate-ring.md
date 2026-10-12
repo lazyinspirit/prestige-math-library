@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-affine-global-regular-functions-coordinate-ring.md

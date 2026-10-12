@@ -38,5 +38,8 @@ $f_n \to g$ in measure, then $f=g$ $\mu$-almost everywhere.
 **Proof technique:** direct.
 
 1.1 For $m \ge 1$ put $E_m:=\{|f-g|>1/m\}$, and for $n \in \mathbb N$ put $A_{n,m}:=\{|f_n-f|>1/(2m)\}$ and $B_{n,m}:=\{|f_n-g|>1/(2m)\}$. If $x \in E_m$ and $x \notin A_{n,m}\cup B_{n,m}$, then $|f(x)-g(x)|\le |f(x)-f_n(x)|+|f_n(x)-g(x)|\le 1/m$, a contradiction. So $E_m \subseteq A_{n,m}\cup B_{n,m}$ for every $n,m$. [given, L1, algebra]
+
 2.1 Fix $m \ge 1$ and let $\eta>0$. By [L1] choose $n$ so large that $\mu(A_{n,m})<\eta/2$ and $\mu(B_{n,m})<\eta/2$. Then step 1.1 and [L3] give $\mu(E_m)\le\mu(A_{n,m})+\mu(B_{n,m})<\eta$. Since $\eta$ was arbitrary, $\mu(E_m)=0$. [step 1.1, L1, L3]
+
 3.1 If $f(x)\ne g(x)$, then $|f(x)-g(x)|>1/m$ for some $m \ge 1$, so $\{f\ne g\}=\bigcup_{m=1}^\infty E_m$. Step 2.1 makes every $E_m$ null, hence [L3] gives $\mu(\{f\ne g\})=0$. By [L2], $f=g$ $\mu$-almost everywhere. ∎ [step 2.1, L2, L3]
+

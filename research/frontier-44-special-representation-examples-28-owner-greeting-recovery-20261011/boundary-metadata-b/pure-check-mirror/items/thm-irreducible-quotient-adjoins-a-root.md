@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-irreducible-quotient-adjoins-a-root.md

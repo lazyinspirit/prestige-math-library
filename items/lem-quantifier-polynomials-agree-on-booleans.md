@@ -53,8 +53,6 @@ where Boolean truth values are embedded in $F$ as $0$ and $1$.
 
 1.2 Let $b$ denote $0$ or $1$. By [L1] the value $P|_{X=b}(a)=P_\varphi(b,a)$ is the Boolean value of the formula $\varphi(b,a)$ at the assignment $a$, hence an element of $\{0,1\}\subset F$. This includes the case $m=0$, where $a$ is the empty assignment and $\varphi$ has no free variable besides $x$, and the case in which $\varphi$ is a constant formula. [L1, given]
 
-2.1 Put $u:=P|_{X=0}(a)$ and $v:=P|_{X=1}(a)$. By step 1.2 both are bits. Hence by [L2]
-$$(A_XP)(a)=uv,\qquad (E_XP)(a)=u+v-uv.$$
-By step 1.1 the first value is $1$ exactly when both $\varphi(0,a)$ and $\varphi(1,a)$ are true, which is the truth value of $\forall x\,\varphi(x,a)$, and the second is $1$ exactly when at least one of the two is true, which is the truth value of $\exists x\,\varphi(x,a)$. Both operator values are therefore themselves bits. [step 1.1, step 1.2, L2, algebra]
+2.1 Put $u:=P|_{X=0}(a)$ and $v:=P|_{X=1}(a)$. By step 1.2 both are bits. Hence by [L2] $$(A_XP)(a)=uv,\qquad (E_XP)(a)=u+v-uv.$$ By step 1.1 the first value is $1$ exactly when both $\varphi(0,a)$ and $\varphi(1,a)$ are true, which is the truth value of $\forall x\,\varphi(x,a)$, and the second is $1$ exactly when at least one of the two is true, which is the truth value of $\exists x\,\varphi(x,a)$. Both operator values are therefore themselves bits. [step 1.1, step 1.2, L2, algebra]
 
-3.1 Consequently $A_X$ and $E_X$, evaluated at any Boolean assignment to the remaining variables, return the truth values of the corresponding quantifications of the arithmetized subformula. [step 2.1] ∎
+3.1 Consequently $A_X$ and $E_X$, evaluated at any Boolean assignment to the remaining variables, return the truth values of the corresponding quantifications of the arithmetized subformula. [step 2.1] ∎ 

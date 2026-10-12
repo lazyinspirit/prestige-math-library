@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-vandermonde-conditioning-improves-after-centering-and-scaling.md

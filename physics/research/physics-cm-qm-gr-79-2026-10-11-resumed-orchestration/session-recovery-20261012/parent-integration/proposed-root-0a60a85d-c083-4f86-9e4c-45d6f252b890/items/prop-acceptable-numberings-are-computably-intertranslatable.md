@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-acceptable-numberings-are-computably-intertranslatable.md

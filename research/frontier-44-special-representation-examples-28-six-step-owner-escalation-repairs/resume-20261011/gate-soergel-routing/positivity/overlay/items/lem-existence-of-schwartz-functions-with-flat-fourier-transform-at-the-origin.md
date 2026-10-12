@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-existence-of-schwartz-functions-with-flat-fourier-transform-at-the-origin.md

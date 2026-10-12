@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-schottky-bound-for-a-map-with-center-value-one-half.md

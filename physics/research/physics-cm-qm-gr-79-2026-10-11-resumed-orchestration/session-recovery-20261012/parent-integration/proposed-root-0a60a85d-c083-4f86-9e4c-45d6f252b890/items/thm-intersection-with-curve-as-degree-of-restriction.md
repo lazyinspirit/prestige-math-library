@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-intersection-with-curve-as-degree-of-restriction.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-perron-solution-on-an-annulus-with-radial-data.md

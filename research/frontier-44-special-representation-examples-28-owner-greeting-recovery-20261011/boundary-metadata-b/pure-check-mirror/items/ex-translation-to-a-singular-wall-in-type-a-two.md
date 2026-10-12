@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-translation-to-a-singular-wall-in-type-a-two.md

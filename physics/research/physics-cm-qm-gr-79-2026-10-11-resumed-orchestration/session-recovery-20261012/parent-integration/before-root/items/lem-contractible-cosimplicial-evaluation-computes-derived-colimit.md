@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-contractible-cosimplicial-evaluation-computes-derived-colimit.md

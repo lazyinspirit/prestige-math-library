@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-exterior-disc-and-exterior-cone-points-are-regular.md

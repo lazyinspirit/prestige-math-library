@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-bmo-classes-are-determined-by-their-atom-pairings.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-outside-a-null-set-every-point-is-a-transverse-zero-after-translation.md

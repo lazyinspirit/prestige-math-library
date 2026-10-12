@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-left-and-right-duals-of-an-object-are-isomorphic.md

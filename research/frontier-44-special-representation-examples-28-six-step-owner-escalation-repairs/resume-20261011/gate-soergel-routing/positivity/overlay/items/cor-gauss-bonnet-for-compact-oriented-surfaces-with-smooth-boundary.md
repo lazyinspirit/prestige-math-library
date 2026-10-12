@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-gauss-bonnet-for-compact-oriented-surfaces-with-smooth-boundary.md

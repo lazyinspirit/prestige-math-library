@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "9",
+  "round": 0,
+  "input_sha256": "b48e73f13b3c8fa300e18c4ee05824b280bbb7c5e0d580a8ba2e3359debf53bb",
+  "reviewed_items": [
+    "def-cm-mass-distribution-and-inertia-matrix",
+    "lem-cm-mass-moments-are-finite",
+    "lem-cm-inertia-matrix-properties",
+    "lem-cm-matrix-curve-derivative-rules",
+    "lem-cm-skew-matrix-cross-product-correspondence",
+    "cor-cm-principal-axes-of-the-inertia-matrix",
+    "def-cm-rigid-placement-and-body-angular-velocity",
+    "lem-cm-coordinate-rotation-matrices",
+    "def-cm-euler-angle-parametrization-and-heavy-top-system",
+    "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+    "ex-cm-inertia-tensors-of-point-masses",
+    "lem-cm-euler-angle-angular-velocity",
+    "thm-cm-euler-equations-and-torque-free-invariants",
+    "thm-cm-heavy-top-reduction",
+    "thm-cm-stability-of-extreme-principal-axes",
+    "thm-cm-instability-of-the-intermediate-axis",
+    "thm-cm-linearized-torque-free-euler-equations",
+    "ex-cm-euler-angle-and-heavy-top-checks",
+    "ex-cm-torque-free-spin-checks"
+  ],
+  "reviewed_pages": [
+    "cm-math-rigid",
+    "cm-math-rigid-examples"
+  ],
+  "decision": "escalate",
+  "reason": "Two stability proofs rely on compact invariant spheres without a Heine-Borel prerequisite; the affected consumer cones and repairable local defects are identified below.",
+  "findings": [
+    {
+      "id": "thm-cm-stability-of-extreme-principal-axes",
+      "type": "prerequisite",
+      "reason": "Steps 1.2/2.1 require compactness of the invariant sphere for global existence; add published thm-heine-borel-rn. Affected cone: ex-cm-torque-free-spin-checks, pthm-cm11-nonlinear-spin-stability and its consumers ex-cm11-free-top-checks, ex-cm11-intermediate-axis-escape, pthm-cm11-linearized-spin, cex-cm11-invariants-do-not-force-uniform-rotation."
+    },
+    {
+      "id": "thm-cm-instability-of-the-intermediate-axis",
+      "type": "prerequisite",
+      "reason": "Step 3.1 requires compactness of the invariant sphere to extend the maximal escape solution for all forward times; add published thm-heine-borel-rn. Affected cone: ex-cm-torque-free-spin-checks, pthm-cm11-nonlinear-spin-stability and its consumers ex-cm11-free-top-checks, ex-cm11-intermediate-axis-escape, pthm-cm11-linearized-spin, cex-cm11-invariants-do-not-force-uniform-rotation."
+    },
+    {
+      "id": "lem-cm-mass-moments-are-finite",
+      "type": "local",
+      "reason": "Steps 2.1 and 4.1 invoke pointwise monotonicity although the bounds hold only off the null support-exception N; justify the almost-everywhere comparison, for example by splitting off N using the null-set integral result."
+    },
+    {
+      "id": "lem-cm-coordinate-rotation-matrices",
+      "type": "local",
+      "reason": "Step 1.5 misstates entries of a'R_z(a)[e_3]_x: (1,2) is -a' cos(a) and (1,1) is -a' sin(a); correct that comparison while retaining the valid final derivative identity."
+    },
+    {
+      "id": "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+      "type": "local",
+      "reason": "The Statement uses I for both the time interval and the inertia matrix; distinguish the interval (for example, J) so its domain and the I omega products are unambiguous."
+    },
+    {
+      "id": "thm-cm-euler-equations-and-torque-free-invariants",
+      "type": "local",
+      "reason": "The Statement uses I for both the time interval and the inertia map in l := I omega : I -> R^3; rename one so the domain and linear map are distinct."
+    },
+    {
+      "id": "lem-cm-euler-angle-angular-velocity",
+      "type": "local",
+      "reason": "The Statement uses I for both the parameter interval and a linear inertia map I:R^3->R^3; use distinct symbols so the differentiability domain and quadratic form are unambiguous."
+    }
+  ],
+  "consumer_checks": []
+}

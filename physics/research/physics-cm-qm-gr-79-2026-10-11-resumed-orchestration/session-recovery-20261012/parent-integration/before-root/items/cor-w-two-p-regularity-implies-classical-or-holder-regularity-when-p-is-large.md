@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large.md

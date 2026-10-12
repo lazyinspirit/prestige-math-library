@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-total-variation-always-equals-the-absolute-value-of-the-set-value.md

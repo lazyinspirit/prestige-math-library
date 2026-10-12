@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-equivalence-of-euler-lagrange-and-hamilton-equations-for-hyperregular-lagrangians.md

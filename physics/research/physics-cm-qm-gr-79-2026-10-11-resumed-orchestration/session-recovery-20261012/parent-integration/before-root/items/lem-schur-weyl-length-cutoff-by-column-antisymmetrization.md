@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-schur-weyl-length-cutoff-by-column-antisymmetrization.md

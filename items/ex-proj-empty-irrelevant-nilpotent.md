@@ -56,5 +56,4 @@ irrelevant ideal.
 
 3.1 The spectrum is nonempty. In $k[\varepsilon]/(\varepsilon^2)$ the element $\varepsilon$ is nilpotent but nonzero, so the ideal $(\varepsilon)$ is proper; every prime contains the nilpotent $\varepsilon$, so $(\varepsilon)$ is the unique prime ideal and $\operatorname{Spec}S=\{(\varepsilon)\}\neq\varnothing$, in contrast with step 2.1. [F1, F3, algebra]
 
-4.1 Conclusion. Steps 1.1 and 2.1 show that the nilpotent irrelevant ideal produces empty Proj, while step 3.1 shows that the underlying ring still has a point; the two conclusions are consistent because Proj discards exactly the primes containing all of $S_+$. [F1, F2, step 2.1, step 3.1]
-\qed
+4.1 Conclusion. Steps 1.1 and 2.1 show that the nilpotent irrelevant ideal produces empty Proj, while step 3.1 shows that the underlying ring still has a point; the two conclusions are consistent because Proj discards exactly the primes containing all of $S_+$. [F1, F2, step 2.1, step 3.1] \qed 

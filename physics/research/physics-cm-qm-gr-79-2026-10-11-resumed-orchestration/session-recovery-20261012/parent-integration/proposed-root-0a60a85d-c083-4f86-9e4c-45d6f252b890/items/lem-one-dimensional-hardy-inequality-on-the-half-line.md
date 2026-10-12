@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-one-dimensional-hardy-inequality-on-the-half-line.md

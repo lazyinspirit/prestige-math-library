@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-discontinuous-right-hand-side-with-no-local-solution.md

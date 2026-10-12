@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-geometric-series-invertibility-in-the-completed-character-ring.md

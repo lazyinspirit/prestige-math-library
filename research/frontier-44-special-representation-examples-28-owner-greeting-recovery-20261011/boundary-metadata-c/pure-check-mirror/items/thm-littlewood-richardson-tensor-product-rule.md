@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-littlewood-richardson-tensor-product-rule.md

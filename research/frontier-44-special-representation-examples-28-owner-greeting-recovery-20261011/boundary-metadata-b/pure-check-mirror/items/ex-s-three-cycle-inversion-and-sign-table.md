@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-s-three-cycle-inversion-and-sign-table.md

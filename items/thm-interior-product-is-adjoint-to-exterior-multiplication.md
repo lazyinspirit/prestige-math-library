@@ -47,8 +47,7 @@ where $\widehat{v_r}$ means $v_r$ is omitted. Equivalently, $\iota_v$ is the uni
 
 **Proof technique:** direct.
 
-
-1.1 The map $m_v:\Lambda^{k-1}V\to\Lambda^kV$ is linear by [L2], so [L3] supplies its unique adjoint; by [L1] that adjoint is $\iota_v$ with $\langle\iota_v\alpha,\beta\rangle=\langle\alpha,v\wedge\beta\rangle$. [L1, L2, L3]
+ 1.1 The map $m_v:\Lambda^{k-1}V\to\Lambda^kV$ is linear by [L2], so [L3] supplies its unique adjoint; by [L1] that adjoint is $\iota_v$ with $\langle\iota_v\alpha,\beta\rangle=\langle\alpha,v\wedge\beta\rangle$. [L1, L2, L3]
 
 1.2 Choose an orthonormal basis $(e_1,\ldots,e_n)$ by [L4], write $v=\sum_jv_je_j$, and let $I=\{i_1<\cdots<i_k\}$. Then $\langle\iota_ve_I,e_J\rangle=\langle e_I,v\wedge e_J\rangle=\sum_jv_j\langle e_I,e_j\wedge e_J\rangle$, and the pairing is nonzero only when $J=I\setminus\{i_r\}$ for some $r$ and $j=i_r$, in which case $e_j\wedge e_J=(-1)^{r-1}e_I$. [L2, L4, algebra]
 
@@ -56,4 +55,4 @@ where $\widehat{v_r}$ means $v_r$ is omitted. Equivalently, $\iota_v$ is the uni
 
 3.1 The assignment $\Phi_v(v_1,\ldots,v_k):=\sum_{r=1}^k(-1)^{r-1}\langle v,v_r\rangle\,v_1\wedge\cdots\wedge\widehat{v_r}\wedge\cdots\wedge v_k$ is multilinear (each term is multilinear) and alternating (when $v_a=v_b$, the two terms $r=a$ and $r=b$ cancel by the block sign of [L2], and the remaining terms have a repeated entry), so by [L5] there is a unique linear map agreeing with $\Phi_v$ on decomposables; on the basis wedge $e_I$ it equals step 2.1, hence it is $\iota_v$. [L2, L5, step 2.1]
 
-4.1 Steps 1.1 and 3.1 prove the adjoint description and the displayed contraction formula; evaluating at $k=0,1$ gives $\iota_v(1)=0$ and $\iota_v(w)=\langle v,w\rangle$, the two boundary clauses of the characterization. [step 1.1, step 3.1] ∎
+4.1 Steps 1.1 and 3.1 prove the adjoint description and the displayed contraction formula; evaluating at $k=0,1$ gives $\iota_v(1)=0$ and $\iota_v(w)=\langle v,w\rangle$, the two boundary clauses of the characterization. [step 1.1, step 3.1] ∎ 

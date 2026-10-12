@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-canonical-bidual-map-is-an-isometry.md

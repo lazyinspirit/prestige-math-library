@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-two-transitive-groups-have-affine-or-almost-simple-socle-type.md

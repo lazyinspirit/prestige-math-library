@@ -11,8 +11,8 @@ worker prompts, supporting tools, content and run state.
 |---|---|---|
 | 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
 | 2 | Review, one local repair and owner escalation | Luna-max reviewers/local repairers; at most two reviews and one repair; owner/orchestrator resolves escalations and runs gates |
-| 3 | Independent review | Batch readers, refuters and adjudicators, followed by cross-batch review and closure |
-| 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
+| 3 | Independent review | GPT-6 Luna/max readers and refuters; GPT-6.1 Sol/medium batch adjudicators; cross-batch review and closure |
+| 4 | Batch review and judging | GPT-6.1 Sol/medium read-only batch readers plus GPT-6 Luna/max judges |
 | 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
 | 6 | Closeout | Contracts, pathways, stamps, readiness, evidence, owner report and local closeout commit |
 
@@ -23,6 +23,13 @@ mechanical join, followed by the post-authoring snapshot. Neither operation has
 its own agent or workflow stage. The pre-authoring snapshot runs before Step 1
 construction. Initial item and page authoring happens entirely in Step 1;
 later stages retain their substantive review, repair and finalization duties.
+
+The Step-1 manifest policy join uses `content-policy --manifest-only --authored`:
+before canonical plan transcription, an existing local item may be reused only
+at its unique authored page home, matching the manifest's page and category.
+Canonical plan ownership conflicts, batch capacity, duplicate inventory and
+dependency ordering remain errors. Ordinary pre-authoring manifest checks retain
+their minting rules; this option is incompatible with audit mode.
 
 ## Construction and escalation
 
@@ -124,6 +131,9 @@ work.
 Step 3 keeps the existing independent batch review, routed adjudication and
 unfinished cross-review continuation. A partial process handoff is not completed
 artifact coverage; continuations require actual completed-obligation progress.
+Step-3 readers and refuters use GPT-6 Luna/max; batch adjudicators use GPT-6.1
+Sol/medium. Step-4 read-only batch readers use GPT-6.1 Sol/medium, and the
+per-item judge sweep uses GPT-6 Luna/max.
 Source and empirical qualifications survive regeneration. Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.

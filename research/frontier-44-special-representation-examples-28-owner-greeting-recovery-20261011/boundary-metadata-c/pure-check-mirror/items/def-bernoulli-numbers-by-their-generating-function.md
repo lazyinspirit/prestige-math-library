@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-bernoulli-numbers-by-their-generating-function.md

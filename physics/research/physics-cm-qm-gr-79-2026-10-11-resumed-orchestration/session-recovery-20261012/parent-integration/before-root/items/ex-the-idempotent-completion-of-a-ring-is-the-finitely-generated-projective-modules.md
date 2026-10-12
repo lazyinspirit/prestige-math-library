@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-idempotent-completion-of-a-ring-is-the-finitely-generated-projective-modules.md

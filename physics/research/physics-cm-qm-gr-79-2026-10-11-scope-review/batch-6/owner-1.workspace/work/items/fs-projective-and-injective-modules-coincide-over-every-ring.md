@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-projective-and-injective-modules-coincide-over-every-ring.md

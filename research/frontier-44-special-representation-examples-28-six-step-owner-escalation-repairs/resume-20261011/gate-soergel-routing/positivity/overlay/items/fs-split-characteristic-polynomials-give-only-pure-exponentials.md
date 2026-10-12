@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-split-characteristic-polynomials-give-only-pure-exponentials.md

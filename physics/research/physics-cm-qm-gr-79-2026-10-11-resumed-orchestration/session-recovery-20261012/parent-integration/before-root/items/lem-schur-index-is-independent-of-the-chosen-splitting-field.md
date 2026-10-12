@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-schur-index-is-independent-of-the-chosen-splitting-field.md

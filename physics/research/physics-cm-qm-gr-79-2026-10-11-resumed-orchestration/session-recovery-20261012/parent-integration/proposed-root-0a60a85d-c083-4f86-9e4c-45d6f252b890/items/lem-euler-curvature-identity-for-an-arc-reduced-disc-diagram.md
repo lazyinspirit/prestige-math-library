@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram.md

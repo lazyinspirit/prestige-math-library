@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-lone-fourier-series-can-diverge-almost-everywhere.md

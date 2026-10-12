@@ -48,8 +48,6 @@ $$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$
 
 **Proof technique:** direct.
 
-1.1 Repeatedly substituting the identities of [F1] yields. [given, F1, algebra]
-$$\alpha = [a_0; a_1,\ldots,a_n,\alpha_{n+1}]$$ whenever $\alpha_{n+1}$ is defined. [given, F1, algebra]
+1.1 Repeatedly substituting the identities of [F1] yields. [given, F1, algebra] $$\alpha = [a_0; a_1,\ldots,a_n,\alpha_{n+1}]$$ whenever $\alpha_{n+1}$ is defined. [given, F1, algebra]
 
-2.1 Since every complete quotient after the first is $>1$, in particular $\alpha_{n+1}>0$. [step 1.1, F1, F2]
-So step 1.1 and [F2] give $$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$ [step 1.1, F1, F2] ∎
+2.1 Since every complete quotient after the first is $>1$, in particular $\alpha_{n+1}>0$. [step 1.1, F1, F2] So step 1.1 and [F2] give $$\alpha = \frac{\alpha_{n+1}p_n + p_{n-1}}{\alpha_{n+1}q_n + q_{n-1}}.$$ [step 1.1, F1, F2] ∎ 

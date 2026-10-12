@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-sum-of-the-irreducible-degrees-equals-the-group-order.md

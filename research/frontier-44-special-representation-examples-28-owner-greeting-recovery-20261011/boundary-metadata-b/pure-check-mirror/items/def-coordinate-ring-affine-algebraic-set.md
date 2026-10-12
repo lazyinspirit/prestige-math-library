@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-coordinate-ring-affine-algebraic-set.md

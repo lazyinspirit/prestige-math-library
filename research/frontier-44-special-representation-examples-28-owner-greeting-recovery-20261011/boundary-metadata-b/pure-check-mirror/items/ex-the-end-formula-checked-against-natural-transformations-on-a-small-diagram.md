@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-end-formula-checked-against-natural-transformations-on-a-small-diagram.md

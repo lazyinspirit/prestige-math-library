@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-standard-quadratic-form-of-each-morse-index.md

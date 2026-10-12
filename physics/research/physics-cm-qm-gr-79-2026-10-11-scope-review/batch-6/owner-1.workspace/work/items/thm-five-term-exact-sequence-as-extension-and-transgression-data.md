@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-five-term-exact-sequence-as-extension-and-transgression-data.md

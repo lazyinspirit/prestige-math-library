@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weyl-equidistribution-for-irrational-rotations.md

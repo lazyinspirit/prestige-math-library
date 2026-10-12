@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-modular-block-central-characters-correspond-to-blocks.md

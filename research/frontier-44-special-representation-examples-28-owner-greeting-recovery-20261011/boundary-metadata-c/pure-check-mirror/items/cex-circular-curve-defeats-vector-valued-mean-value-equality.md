@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-circular-curve-defeats-vector-valued-mean-value-equality.md

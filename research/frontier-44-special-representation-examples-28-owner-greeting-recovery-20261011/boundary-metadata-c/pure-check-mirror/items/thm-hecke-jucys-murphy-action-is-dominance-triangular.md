@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hecke-jucys-murphy-action-is-dominance-triangular.md

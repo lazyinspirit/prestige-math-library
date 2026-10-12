@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compactly-supported-distributions-have-global-finite-order.md

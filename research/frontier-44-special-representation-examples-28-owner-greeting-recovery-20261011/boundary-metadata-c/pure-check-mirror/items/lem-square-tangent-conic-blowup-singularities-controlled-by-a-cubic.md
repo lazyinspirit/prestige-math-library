@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-square-tangent-conic-blowup-singularities-controlled-by-a-cubic.md

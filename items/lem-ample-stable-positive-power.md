@@ -52,5 +52,4 @@ sides.
 
 3.2 Power ample implies ample. Assume $L^m$ ample and let $x\in X$. By [F2] applied to the invertible sheaf $L^m$ there are $n\ge1$ and $t\in\Gamma(X,(L^m)^n)$ with $x\in X_t$ and $X_t$ affine. Interpreting $t$ as a section of $L^{mn}=(L^m)^n$ by the identification of step 1.1, the nonvanishing locus computed in the line bundle $L^{mn}$ is the same set $X_t$, affine and containing $x$; since $mn\ge1$, this witnesses ampleness of $L$ by [F2]. [F2, step 1.1, step 2.1]
 
-4.1 Boundaries and conclusion. If $X=\varnothing$ both conditions hold vacuously by [F2]. If $m=1$ the two conditions coincide, and steps 3.1 and 3.2 prove the two implications for arbitrary $m\ge1$. [F2, step 3.1, step 3.2]
-\qed
+4.1 Boundaries and conclusion. If $X=\varnothing$ both conditions hold vacuously by [F2]. If $m=1$ the two conditions coincide, and steps 3.1 and 3.2 prove the two implications for arbitrary $m\ge1$. [F2, step 3.1, step 3.2] \qed 

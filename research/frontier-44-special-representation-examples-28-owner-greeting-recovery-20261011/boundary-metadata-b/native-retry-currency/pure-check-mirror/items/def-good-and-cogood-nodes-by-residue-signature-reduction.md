@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-good-and-cogood-nodes-by-residue-signature-reduction.md

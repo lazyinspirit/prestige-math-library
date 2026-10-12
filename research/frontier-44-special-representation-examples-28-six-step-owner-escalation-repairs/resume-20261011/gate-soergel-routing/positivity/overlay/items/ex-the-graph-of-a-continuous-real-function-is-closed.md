@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-graph-of-a-continuous-real-function-is-closed.md

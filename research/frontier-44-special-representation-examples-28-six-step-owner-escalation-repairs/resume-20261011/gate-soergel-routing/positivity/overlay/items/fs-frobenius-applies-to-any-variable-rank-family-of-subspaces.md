@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-frobenius-applies-to-any-variable-rank-family-of-subspaces.md

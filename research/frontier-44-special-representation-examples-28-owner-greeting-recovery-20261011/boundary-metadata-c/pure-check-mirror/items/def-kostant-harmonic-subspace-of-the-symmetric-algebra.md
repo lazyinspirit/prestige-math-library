@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-kostant-harmonic-subspace-of-the-symmetric-algebra.md

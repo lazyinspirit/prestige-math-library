@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-basic-laws-for-field-norm-and-trace.md

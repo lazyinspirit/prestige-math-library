@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-linear-group-invariant-polynomials-separate-orbits.md

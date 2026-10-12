@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit.md

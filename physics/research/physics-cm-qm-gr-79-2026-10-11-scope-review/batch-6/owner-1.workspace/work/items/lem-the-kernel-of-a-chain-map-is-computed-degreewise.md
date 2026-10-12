@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-kernel-of-a-chain-map-is-computed-degreewise.md

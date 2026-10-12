@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-covering-criterion-and-the-member-calculus-are-the-same-tool.md

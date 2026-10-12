@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-monodromy-acts-by-bijections-and-detects-components.md

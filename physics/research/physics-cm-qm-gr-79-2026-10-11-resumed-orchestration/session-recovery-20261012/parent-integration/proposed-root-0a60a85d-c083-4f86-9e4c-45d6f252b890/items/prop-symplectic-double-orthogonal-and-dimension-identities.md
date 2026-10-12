@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-symplectic-double-orthogonal-and-dimension-identities.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-green-restriction-summand-with-the-same-vertex.md

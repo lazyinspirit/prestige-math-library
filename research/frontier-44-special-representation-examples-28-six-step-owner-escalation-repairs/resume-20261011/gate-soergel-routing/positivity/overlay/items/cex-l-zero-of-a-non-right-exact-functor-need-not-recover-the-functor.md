@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-l-zero-of-a-non-right-exact-functor-need-not-recover-the-functor.md

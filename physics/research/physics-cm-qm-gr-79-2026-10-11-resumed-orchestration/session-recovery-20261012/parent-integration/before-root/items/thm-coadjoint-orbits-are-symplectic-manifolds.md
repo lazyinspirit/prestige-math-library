@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coadjoint-orbits-are-symplectic-manifolds.md

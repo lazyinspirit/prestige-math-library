@@ -45,7 +45,7 @@ $$ap>1.$$
 
 **Proof technique:** Apply the real $p$-series test to the series $\sum k^{-ap}$ and read off the threshold $ap>1$.
 
-1.1 By [L1], the sequence $(a_k)$ lies in $\ell^p$ exactly when [L1, given]
-$$\sum_{k=0}^\infty |a_k|^p=\sum_{k=1}^\infty k^{-ap}$$ converges.
+1.1 By [L1], the sequence $(a_k)$ lies in $\ell^p$ exactly when [L1, given] $$\sum_{k=0}^\infty |a_k|^p=\sum_{k=1}^\infty k^{-ap}$$ converges. [L1, given]
 
 2.1 By [L2], that series converges exactly when $ap>1$. [L2, step 1.1] ∎
+

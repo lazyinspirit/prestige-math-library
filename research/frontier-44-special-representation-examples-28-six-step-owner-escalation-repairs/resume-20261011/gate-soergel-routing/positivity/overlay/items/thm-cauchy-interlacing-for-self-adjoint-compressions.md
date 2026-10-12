@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cauchy-interlacing-for-self-adjoint-compressions.md

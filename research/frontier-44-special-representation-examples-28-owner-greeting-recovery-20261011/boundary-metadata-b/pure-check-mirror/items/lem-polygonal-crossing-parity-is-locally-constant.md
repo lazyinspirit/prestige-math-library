@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-polygonal-crossing-parity-is-locally-constant.md

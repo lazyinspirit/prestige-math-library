@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-random-mapping-representation-for-a-finite-transition-matrix.md

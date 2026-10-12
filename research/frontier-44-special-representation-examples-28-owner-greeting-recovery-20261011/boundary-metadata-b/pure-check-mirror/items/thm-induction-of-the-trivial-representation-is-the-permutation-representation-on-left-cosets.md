@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-induction-of-the-trivial-representation-is-the-permutation-representation-on-left-cosets.md

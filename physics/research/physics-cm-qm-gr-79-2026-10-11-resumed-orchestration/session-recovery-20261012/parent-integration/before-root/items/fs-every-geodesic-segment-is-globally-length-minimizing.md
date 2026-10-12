@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-geodesic-segment-is-globally-length-minimizing.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bmo-functions-pair-uniformly-with-hone-atoms.md

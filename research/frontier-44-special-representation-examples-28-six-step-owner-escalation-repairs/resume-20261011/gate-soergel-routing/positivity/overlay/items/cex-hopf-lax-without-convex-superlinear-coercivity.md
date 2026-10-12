@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-hopf-lax-without-convex-superlinear-coercivity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-morse-smale-residuality-does-not-assert-simultaneous-genericity-for-all-data.md

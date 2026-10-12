@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hardy-critical-and-subcritical-gaussian-regimes.md

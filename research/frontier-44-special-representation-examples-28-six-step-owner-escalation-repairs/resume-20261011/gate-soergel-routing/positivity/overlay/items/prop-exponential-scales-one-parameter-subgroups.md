@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-exponential-scales-one-parameter-subgroups.md

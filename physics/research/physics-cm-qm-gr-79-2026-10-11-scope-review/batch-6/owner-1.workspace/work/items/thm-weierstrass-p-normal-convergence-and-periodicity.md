@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weierstrass-p-normal-convergence-and-periodicity.md

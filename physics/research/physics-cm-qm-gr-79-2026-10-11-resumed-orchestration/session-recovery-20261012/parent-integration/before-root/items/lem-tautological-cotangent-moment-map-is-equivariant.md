@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tautological-cotangent-moment-map-is-equivariant.md

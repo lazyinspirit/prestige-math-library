@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-exterior-square-has-the-alternating-universal-property.md

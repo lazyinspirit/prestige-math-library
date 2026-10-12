@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-fredholm-determinant-properties-for-trace-class-operators.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bounded-operators-form-a-noncommutative-banach-algebra.md

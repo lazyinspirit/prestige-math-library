@@ -1,0 +1,118 @@
+---
+id: ex-cm10-parallel-axis-shift-check
+kind: example
+title: "Parallel-axis check for the equilateral-triangle model: inertia tensor about a vertex computed two ways"
+status: draft
+origin: session
+domain: physics
+dependency_level: 11
+deps: [post-cm10-rigid-material, def-cm10-rigid-body-configuration, def-cm10-inertia-tensor, pthm-cm10-principal-axes, ex-cm10-equilateral-triangle-rotational-inertia, def-cm-mass-distribution-and-inertia-matrix, lem-cm-mass-moments-are-finite, lem-cm-inertia-tensor-about-a-point-is-finite, def-cm-inertia-tensor-about-a-point, thm-cm-parallel-axis-theorem, def-countable-choice, def-cm-special-orthogonal-group, def-euclidean-inner-product, def-cross-product-in-r3, def-matrix-space, def-matrix-product-and-identity-matrix, lem-finite-sum-laws, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-addition-formulas, cor-trigonometric-parity-and-pythagorean-identity]
+dependency_roles:
+  post-cm10-rigid-material: physical-assumption
+  def-cm10-rigid-body-configuration: formulation-prerequisite
+  def-cm10-inertia-tensor: formulation-prerequisite
+  pthm-cm10-principal-axes: physical-result
+  ex-cm10-equilateral-triangle-rotational-inertia: formulation-prerequisite
+  def-cm-mass-distribution-and-inertia-matrix: mathematical-premise
+  lem-cm-mass-moments-are-finite: mathematical-premise
+  lem-cm-inertia-tensor-about-a-point-is-finite: mathematical-premise
+  def-cm-inertia-tensor-about-a-point: mathematical-premise
+  thm-cm-parallel-axis-theorem: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-cm-special-orthogonal-group: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  def-matrix-space: mathematical-premise
+  def-matrix-product-and-identity-matrix: mathematical-premise
+  lem-finite-sum-laws: mathematical-premise
+  def-sine-and-cosine-by-power-series: mathematical-premise
+  thm-sine-and-cosine-addition-formulas: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+provenance:
+  statement: ai-generated
+  proof: ai-generated
+generation:
+  role: example
+proof_strategy: direct
+physical_scope: "A worked instance of the parallel-axis theorem in the rigid-material model branch of [[post-cm10-rigid-material]]: for the equilateral-triangle model of the companion example, the inertia tensor of the model about a vertex is computed from the supplier's shifted-point formula and independently from the finite sum defining it, and the two agree; the axis moment about the vertex axis is compared with the central axis moment. The item asserts no measured inertia and no concrete physical body."
+sources:
+  references:
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2.1, Eqs. (3.25)-(3.26), printed pages 52-53 (PDF pages 58-59): the inertia tensor about a displaced point and the parallel-axis relation"
+      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.2, Eqs. (4.27)-(4.29), chapter pages 6-7 (PDF pages 60-61): the axis-shift theorem and its use in computed examples"
+      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Section 2.3, printed pages 37-41 (PDF pages 40-44): the parallel-axis derivation for the inertia tensor"
+      url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+verification:
+  precheck: pass
+---
+
+## Example
+
+Adopt the equilateral-triangle rigid-material model of
+[[ex-cm10-equilateral-triangle-rotational-inertia]]: three equal point masses
+$m_0>0$ at $x_k=a(\cos\frac{2\pi k}{3},\sin\frac{2\pi k}{3},0)$, $k=0,1,2$, with
+total mass $m=3m_0$, body inertia matrix
+$I=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{3m_0a^{2}}{2},3m_0a^{2})$ and
+reference coordinates centred at the origin. Then:
+
+1. for every motion of the model and every spatial point $p$, the inertia
+   tensor of the model about $p$ satisfies the **spatial parallel-axis form**
+   $$I(t,p)=I(t)+m\Bigl(\lVert p-c(t)\rVert_2^{2}I_3-(p-c(t))(p-c(t))^{\mathsf T}\Bigr);$$
+2. in the reference placement $(c,R)=(0,I_3)$, the inertia tensor about the
+   vertex $p=ae_1$ is
+   $$I(0,ae_1)=\mathrm{diag}\Bigl(\frac{3m_0a^{2}}{2},\ \frac{9m_0a^{2}}{2},\ 6m_0a^{2}\Bigr);$$
+3. the same matrix is obtained by the direct finite sum over the three
+   material points, confirming the identity of clause 1 on this data;
+4. the moment of inertia about the axis through the vertex $ae_1$ in
+   direction $e_3$ equals $6m_0a^{2}$, while the moment about the parallel
+   central axis is $3m_0a^{2}$; their difference is $ma^{2}$, in agreement
+   with the axis-shift form of the theorem.
+
+## Facts & Assumptions
+**Given:** The model of [[ex-cm10-equilateral-triangle-rotational-inertia]], its reference mass distribution $\nu$, its total mass $m=3m_0$, its body inertia matrix $I$, a motion $x(t,\rho)=c(t)+R(t)\rho$ of the model, a spatial point $p$, and the notation of [[def-cm10-inertia-tensor]] and [[def-cm-inertia-tensor-about-a-point]].
+
+[L1] The companion-model data ([[ex-cm10-equilateral-triangle-rotational-inertia]]): $\nu=m_0\sum_k\delta_{x_k}$ is a centred mass distribution of total mass $m=3m_0$, its body inertia matrix is $I=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{3m_0a^{2}}{2},3m_0a^{2})$ and the finite-atomic formula $\int f\,d\nu=m_0\sum_kf(x_k)$ holds for $\nu$-integrable $f$.
+
+[L2] Mathematical supplier, parallel axis ([[thm-cm-parallel-axis-theorem]], [[def-cm-inertia-tensor-about-a-point]], [[lem-cm-inertia-tensor-about-a-point-is-finite]], [[def-cm-mass-distribution-and-inertia-matrix]], [[def-countable-choice]]): under $\mathrm{AC}_\omega$, for a centred mass distribution with total mass $m$ and inertia matrix $I$, and for every $a\in\mathbb R^3$, the inertia tensor of the distribution about $a$ satisfies $I_\nu(a)=I+m(\lVert a\rVert_2^{2}I_3-aa^{\mathsf T})$.
+
+[L3] The model's shifted tensor ([[def-cm10-inertia-tensor]] clause (c)): for a spatial point $p$, $I(t,p)=R(t)I_\nu(a(t,p))R(t)^{\mathsf T}$ with $a(t,p)=R(t)^{\mathsf T}(p-c(t))$.
+
+[L4] Rotation and matrix algebra ([[def-cm-special-orthogonal-group]], [[def-euclidean-inner-product]], [[def-matrix-space]], [[def-matrix-product-and-identity-matrix]]): $R\in SO(3)$ preserves the Euclidean inner product and norm; for the product $Ra(t,p)=p-c(t)$ one has $\lVert a(t,p)\rVert_2=\lVert p-c(t)\rVert_2$ and $R(aa^{\mathsf T})R^{\mathsf T}=(Ra)(Ra)^{\mathsf T}$.
+
+[L5] Finite sums and trigonometric values ([[lem-finite-sum-laws]], [[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]]): $\cos(0)=1$, $\cos(\pm\frac{2\pi}{3})=-\frac12$ and $\sin(\pm\frac{2\pi}{3})=\pm\frac{\sqrt3}{2}$; finite sums are additive and distribute over scalar multiples.
+
+## Verification
+
+**Proof technique:** direct; conjugate the supplier's shifted-point formula into the spatial frame, then evaluate both sides of the identity on the triangle data.
+
+1.1 Spatial parallel-axis form: by [L3] and [L2], $$I(t,p)=R(t)\Bigl[I+m\bigl(\lVert a(t,p)\rVert_2^{2}I_3-a(t,p)a(t,p)^{\mathsf T}\bigr)\Bigr]R(t)^{\mathsf T}=I(t)+m\bigl(\lVert a\rVert_2^{2}I_3-Ra(Ra)^{\mathsf T}\bigr),$$ distributing the conjugation and using [L4]; substituting $Ra=p-c(t)$ and $\lVert a\rVert_2=\lVert p-c(t)\rVert_2$ [L4] gives the displayed form of clause 1. [given, L2, L3, L4, algebra]
+
+2.1 Constructor notation is consistent: $I(t,c(t))=I(t)$, because $a(t,c(t))=0$ and $I_\nu(0)=I$ by [L2] with $a=0$; this is the statement of [[def-cm10-inertia-tensor]] clause (c) that the tensor about the centre of mass is the spatial tensor. [step 1.1, L2, L3, algebra]
+
+2.2 Vertex evaluation from the supplier: take the reference placement $c=0$, $R=I_3$, so $I(0)=I$ and $a(0,ae_1)=ae_1$ by [L3]; then step 1.1 gives $$I(0,ae_1)=I+m\bigl(a^{2}I_3-a^{2}e_1e_1^{\mathsf T}\bigr)=I+3m_0a^{2}\bigl(I_3-e_1e_1^{\mathsf T}\bigr),$$ and adding the diagonal contributions gives $\mathrm{diag}(\frac{3m_0a^{2}}{2}+0,\frac{3m_0a^{2}}{2}+\frac{6m_0a^{2}}{2},3m_0a^{2}+3m_0a^{2})$, which is the matrix of clause 2. [step 1.1, L1, L2, L3, algebra]
+
+3.1 Direct finite-sum check: by the definition of the shifted tensor [L2] and the finite-atomic formula [L1], $$I(0,ae_1)=\int\bigl(\lVert\rho-ae_1\rVert_2^{2}I_3-(\rho-ae_1)(\rho-ae_1)^{\mathsf T}\bigr)d\nu(\rho)=m_0\sum_k\bigl(\lVert x_k-ae_1\rVert_2^{2}I_3-(x_k-ae_1)(x_k-ae_1)^{\mathsf T}\bigr).$$ The contribution of $k=0$ vanishes because $x_0=ae_1$. For $k=1,2$, the displacement vectors are $d_k:=x_k-ae_1=(-\frac{3a}{2},\pm\frac{\sqrt3a}{2},0)$ with $\lVert d_k\rVert_2^{2}=3a^{2}$, and $d_1d_1^{\mathsf T}+d_2d_2^{\mathsf T}=\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)$ because the off-diagonal products cancel by [L5]. Hence $I(0,ae_1)=m_0\bigl(2\cdot3a^{2}I_3-\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)\bigr)=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{9m_0a^{2}}{2},6m_0a^{2})$, in agreement with step 2.2. This is clause 3. [step 2.2, L1, L5, algebra]
+
+4.1 Axis moments: by clause (c) of [[pthm-cm10-principal-axes]] the moment about a spatial axis through $p$ with unit direction $n$ is $n^{\mathsf T}I(t,p)n$; for the axis through the vertex $ae_1$ in direction $e_3$ this is the $(3,3)$ entry of the matrix of clause 2, namely $6m_0a^{2}$; for the parallel axis through the centre of mass the moment is $e_3^{\mathsf T}Ie_3=3m_0a^{2}$ by the companion example [L1]. Directly, the squared distance of the three material points from the vertex axis is $0,3a^{2},3a^{2}$ (using [L5] for the coordinates of $d_1,d_2$), giving $2m_0\cdot3a^{2}=6m_0a^{2}$. The difference $6m_0a^{2}-3m_0a^{2}=3m_0a^{2}=ma^{2}$ is the product of the total mass and the squared distance between the parallel axes, as the axis-shift form of [L2] predicts. This is clause 4. [step 2.2, step 3.1, L1, L2, L5, algebra]
+
+5.1 Interpretation: the spatial parallel-axis form of clause 1 is the model's reading of the mathematical supplier [L2], and the two independent computations of clauses 2-3 agree on the triangle data. The computation exercises the shifted tensor about a point of the body that is not the centre of mass; the entries are model quantities computed from $m_0$ and $a$, and no measured inertia or concrete body is asserted. [step 1.1, step 2.2, step 3.1, step 4.1] ∎
+
+## Remarks
+
+- **The theorem behind the shift.** The relation between the tensors about
+  the centre of mass and about a displaced point is the mathematical theorem
+  [[thm-cm-parallel-axis-theorem]]; the example only instantiates it in the
+  model's notation and checks both sides on explicit data. Its hypotheses are
+  the centred reference shape of [[post-cm10-rigid-material]] and the
+  countably-choice-founded finiteness of the integrals, both inherited by the
+  model's definition [[def-cm10-inertia-tensor]].
+
+- **Why a vertex.** The shifted tensor about a point of the body is used
+  whenever a rotation axis is not through the centre of mass — for example a
+  body pivoting about a corner. The example shows the bookkeeping: the shift
+  enters only through the centre-of-mass displacement $p-c(t)$ in the spatial
+  form of clause 1.
+
+- **No measured value.** The parameters $m_0$ and $a$ are model data; the
+  example asserts no measured moment of inertia.

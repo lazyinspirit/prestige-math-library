@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-semisimple-lie-algebras-decompose-as-direct-sums-of-simple-ideals.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-a2-bgg-resolution-with-six-verma-summands.md

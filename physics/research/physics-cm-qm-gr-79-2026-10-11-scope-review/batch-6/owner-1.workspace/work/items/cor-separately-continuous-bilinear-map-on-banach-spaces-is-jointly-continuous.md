@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-separately-continuous-bilinear-map-on-banach-spaces-is-jointly-continuous.md

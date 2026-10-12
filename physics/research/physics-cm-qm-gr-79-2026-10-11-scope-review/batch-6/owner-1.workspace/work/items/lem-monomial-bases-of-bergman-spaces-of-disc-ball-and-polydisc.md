@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-monomial-bases-of-bergman-spaces-of-disc-ball-and-polydisc.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-collapsing-recursion-has-no-solution-on-the-integers.md

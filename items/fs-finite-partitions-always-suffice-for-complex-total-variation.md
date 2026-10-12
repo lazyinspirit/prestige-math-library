@@ -35,8 +35,7 @@ each measurable set attains the total variation.
 
 **Proof technique:** direct.
 
-1.1 Let $E_1,\dots,E_m$ be any finite measurable partition of $[0,2\pi]$. [L1, A1]
-Applying [A1] on each positive-measure piece and summing gives $$\sum_{j=1}^m |\nu(E_j)|<\sum_{j=1}^m \lambda(E_j)=2\pi.$$
+1.1 Let $E_1,\dots,E_m$ be any finite measurable partition of $[0,2\pi]$. [L1, A1] Applying [A1] on each positive-measure piece and summing gives $$\sum_{j=1}^m |\nu(E_j)|<\sum_{j=1}^m \lambda(E_j)=2\pi.$$ [L1, A1]
 
-2.1 By [L1], the total variation of the whole interval is exactly $2\pi$, so [L1, step 1.1] ∎
-step 1.1 shows that no finite partition attains it. Therefore the claim is false.
+2.1 By [L1], the total variation of the whole interval is exactly $2\pi$, so [L1, step 1.1] ∎ step 1.1 shows that no finite partition attains it. Therefore the claim is false. [L1, step 1.1]
+

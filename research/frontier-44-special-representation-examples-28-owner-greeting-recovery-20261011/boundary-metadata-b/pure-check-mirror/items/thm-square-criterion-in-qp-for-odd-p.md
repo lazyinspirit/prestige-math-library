@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-square-criterion-in-qp-for-odd-p.md

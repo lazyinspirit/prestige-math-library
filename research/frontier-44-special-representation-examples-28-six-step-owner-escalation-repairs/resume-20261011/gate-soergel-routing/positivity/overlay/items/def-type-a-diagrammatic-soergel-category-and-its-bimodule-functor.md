@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-type-a-diagrammatic-soergel-category-and-its-bimodule-functor.md

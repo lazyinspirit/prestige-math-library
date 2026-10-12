@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-numerable-vector-bundles-admit-bundle-metrics.md

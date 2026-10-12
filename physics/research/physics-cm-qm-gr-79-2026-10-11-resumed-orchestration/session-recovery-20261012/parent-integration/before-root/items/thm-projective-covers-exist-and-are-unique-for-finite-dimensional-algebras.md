@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-covers-exist-and-are-unique-for-finite-dimensional-algebras.md

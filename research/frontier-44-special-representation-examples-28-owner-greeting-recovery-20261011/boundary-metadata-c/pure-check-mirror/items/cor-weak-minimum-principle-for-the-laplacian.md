@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-weak-minimum-principle-for-the-laplacian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complete-exhaustive-filtered-complex-convergence-criterion.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-multilinear-alternating-normalized-and-antisymmetric-matrix-functions.md

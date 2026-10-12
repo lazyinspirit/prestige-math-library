@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-spectral-projection-of-an-isolated-eigenvalue-agrees-with-the-riesz-projection.md

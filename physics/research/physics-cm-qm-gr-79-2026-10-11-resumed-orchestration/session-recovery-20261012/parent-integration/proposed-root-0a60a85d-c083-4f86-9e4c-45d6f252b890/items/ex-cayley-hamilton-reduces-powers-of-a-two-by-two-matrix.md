@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cayley-hamilton-reduces-powers-of-a-two-by-two-matrix.md

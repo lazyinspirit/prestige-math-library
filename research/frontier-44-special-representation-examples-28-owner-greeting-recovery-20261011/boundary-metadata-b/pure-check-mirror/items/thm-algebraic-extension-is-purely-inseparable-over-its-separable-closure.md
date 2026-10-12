@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-algebraic-extension-is-purely-inseparable-over-its-separable-closure.md

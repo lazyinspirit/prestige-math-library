@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-metrizable-cech-complete-spaces-are-completely-metrizable.md

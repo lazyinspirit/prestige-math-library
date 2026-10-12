@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-tensor-product-of-multilinear-tensors-is-associative-and-bilinear.md

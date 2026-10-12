@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-monoid-object-in-the-endofunctor-category-is-exactly-a-monad.md

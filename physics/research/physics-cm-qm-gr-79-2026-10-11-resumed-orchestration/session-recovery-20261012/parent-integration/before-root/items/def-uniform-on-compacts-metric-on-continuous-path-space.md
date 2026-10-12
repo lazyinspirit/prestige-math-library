@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-uniform-on-compacts-metric-on-continuous-path-space.md

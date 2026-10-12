@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-large-radius-polynomial-circle-loop-has-degree.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-derivatives-of-piecewise-smooth-functions-include-jump-deltas.md

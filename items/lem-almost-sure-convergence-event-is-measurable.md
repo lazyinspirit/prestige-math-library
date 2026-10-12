@@ -37,7 +37,6 @@ $\{\omega:X_n(\omega)\to X(\omega)\}$ is an event.
 
 **Proof technique:** direct.
 
-1.1 By [L1], the convergence set has the following countable description. [L1]
-$$\bigcap_{r\in\mathbb Q_{>0}}\ \bigcup_{N=0}^\infty\ \bigcap_{n\ge N}\{|X_n-X|<r\}.$$ [L1]
+1.1 By [L1], the convergence set has the following countable description. [L1] $$\bigcap_{r\in\mathbb Q_{>0}}\ \bigcup_{N=0}^\infty\ \bigcap_{n\ge N}\{|X_n-X|<r\}.$$ [L1]
 
-2.1 Each set $\{|X_n-X|<r\}$ in the display is measurable because $X_n-X$ is a real random variable and the interval $(-r,r)$ is Borel. Countable unions and intersections preserve measurability. Thus the displayed set, and hence the convergence event, is measurable. [step 1.1] ∎
+2.1 Each set $\{|X_n-X|<r\}$ in the display is measurable because $X_n-X$ is a real random variable and the interval $(-r,r)$ is Borel. Countable unions and intersections preserve measurability. Thus the displayed set, and hence the convergence event, is measurable. [step 1.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-nilpotent-lie-algebras-are-solvable.md

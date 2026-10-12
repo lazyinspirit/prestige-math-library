@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-nearly-covered-sparse-pair-at-small-parameters.md

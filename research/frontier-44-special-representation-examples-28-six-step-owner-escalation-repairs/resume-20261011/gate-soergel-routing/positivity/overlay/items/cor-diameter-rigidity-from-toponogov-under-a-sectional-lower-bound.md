@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-diameter-rigidity-from-toponogov-under-a-sectional-lower-bound.md

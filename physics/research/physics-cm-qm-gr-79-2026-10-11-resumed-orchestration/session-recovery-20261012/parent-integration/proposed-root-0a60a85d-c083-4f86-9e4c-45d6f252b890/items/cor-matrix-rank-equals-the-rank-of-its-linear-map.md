@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-matrix-rank-equals-the-rank-of-its-linear-map.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-closed-family-irreducible-equal-dimensional-fibres.md

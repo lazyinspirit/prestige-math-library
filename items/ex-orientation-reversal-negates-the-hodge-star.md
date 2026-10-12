@@ -45,8 +45,7 @@ Fix the standard inner product on $\mathbb R^3$ and compare the two orientations
 
 **Proof technique:** direct.
 
-
-1.1 The change of basis from $(e_1,e_2,e_3)$ to $(e_2,e_1,e_3)$ is a transposition with determinant $-1$, so by [L1] the two bases represent the two opposite orientation classes. [L1, algebra]
+ 1.1 The change of basis from $(e_1,e_2,e_3)$ to $(e_2,e_1,e_3)$ is a transposition with determinant $-1$, so by [L1] the two bases represent the two opposite orientation classes. [L1, algebra]
 
 1.2 By [L4], the unit volume forms are $\omega_+=e_1\wedge e_2\wedge e_3$ and $\omega_-=e_2\wedge e_1\wedge e_3=-\omega_+$. [L4, algebra]
 
@@ -54,4 +53,4 @@ Fix the standard inner product on $\mathbb R^3$ and compare the two orientations
 
 3.1 In particular $\star_+(e_1\wedge e_2)=e_3$ by [L2], and step 2.1 gives $\star_-(e_1\wedge e_2)=-e_3$; the metric used in both computations is the same standard inner product, and [L3] records that each star is an isometry for it. [L2, L3, step 2.1]
 
-4.1 Steps 1.1 through 3.1 show that reversing the orientation negates the Hodge star while the metric stays fixed. [step 1.1, step 2.1, step 3.1] ∎
+4.1 Steps 1.1 through 3.1 show that reversing the orientation negates the Hodge star while the metric stays fixed. [step 1.1, step 2.1, step 3.1] ∎ 

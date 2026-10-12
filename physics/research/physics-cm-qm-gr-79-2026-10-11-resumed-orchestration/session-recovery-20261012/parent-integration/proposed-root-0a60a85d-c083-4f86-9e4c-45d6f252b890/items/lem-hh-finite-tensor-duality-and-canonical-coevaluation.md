@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hh-finite-tensor-duality-and-canonical-coevaluation.md

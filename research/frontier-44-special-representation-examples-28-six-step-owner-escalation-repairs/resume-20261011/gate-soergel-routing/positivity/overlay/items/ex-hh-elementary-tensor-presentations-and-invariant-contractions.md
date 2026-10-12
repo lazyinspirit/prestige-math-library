@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-hh-elementary-tensor-presentations-and-invariant-contractions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pseudoinversion-is-involutive-adjoint-compatible-and-unitarily-equivariant.md

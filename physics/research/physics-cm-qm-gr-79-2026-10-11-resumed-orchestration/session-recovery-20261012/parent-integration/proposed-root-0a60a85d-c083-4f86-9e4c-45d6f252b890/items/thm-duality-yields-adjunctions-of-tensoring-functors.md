@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-duality-yields-adjunctions-of-tensoring-functors.md

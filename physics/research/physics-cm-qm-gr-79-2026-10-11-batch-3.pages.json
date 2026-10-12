@@ -1,0 +1,1590 @@
+[
+  {
+    "order": 85,
+    "id": "cm-math-dynamics",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Dynamics",
+    "companion": "cm-math-dynamics-examples",
+    "requires": [
+      "cm-math-balances",
+      "cm-math-geometry",
+      "mixed-partials-taylor-and-extrema",
+      "modules-over-a-pid-and-canonical-forms",
+      "the-complex-exponential-and-eulers-formula",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "complexification-realification-and-real-structures",
+      "diagonalisation-and-the-minimal-polynomial",
+      "continuity-ivt-evt-and-uniform-continuity",
+      "euclidean-ordinary-differential-equations-with-smooth-dependence",
+      "finite-dimensional-normed-spaces-and-riesz-lemma",
+      "hamiltonian-mechanics-and-completely-integrable-systems",
+      "improper-integrals",
+      "inverse-and-implicit-function-theorems",
+      "limits-of-real-functions",
+      "measure-preserving-transformations-and-poincare-recurrence",
+      "monoids-groups-and-subgroups",
+      "norming-and-separation-under-hahn-banach",
+      "polynomial-rings-and-roots",
+      "sard-theorem-and-transversality",
+      "sequences-and-limits",
+      "series-and-nonnegative-tests",
+      "sine-cosine-and-the-definition-of-pi",
+      "strongly-continuous-semigroups-and-hille-yosida",
+      "suprema-and-infima",
+      "the-determinant-of-a-linear-operator",
+      "the-logarithm-and-general-powers",
+      "topological-spaces-and-continuity"
+    ],
+    "items": [
+      {
+        "id": "def-cm-local-flow-of-an-autonomous-system",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The local flow of an autonomous first-order system",
+        "reference": "expansion-proofs.md#d1",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-maximal-ode-solution",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-locally-lipschitz-in-the-state-variable"
+        ],
+        "dependency_roles": {
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, and let $F:U\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]. Read the autonomous system\n\n$$x'(t)=F(x(t))$$\n\nas the first-order system of [[def-first-order-ode-initial-value-problem-and-solution]] with domain $D=\\mathbb R\\times U\\subseteq\\mathbb R\\times\\mathbb R^n$ and right-hand side $(t,x)\\mapsto F(x)$. Its initial value problems satisfy the Picard-Lindelöf hypotheses, so by [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] every $a\\in U$ has a unique maximal solution.\n\nFor $a\\in U$ denote by\n\n$$x(\\,\\cdot\\,;a):I_a\\longrightarrow U$$\n\nthe unique maximal solution with $x(0;a)=a$, where $I_a\\subseteq\\mathbb R$ is its maximal interval of existence ([[def-maximal-ode-solution]]); $I_a$ is an open interval containing $0$, and every solution of $x'=F(x)$ through $(0,a)$ is a restriction of $x(\\,\\cdot\\,;a)$.\n\nThe **flow domain** of $F$ is the set\n\n$$\\Omega:=\\{\\,(t,a)\\in\\mathbb R\\times U\\;:\\;t\\in I_a\\,\\},$$\n\nand the **local flow** (also **phase flow**) of $F$ is the map\n\n$$\\Phi:\\Omega\\longrightarrow U,\\qquad \\Phi(t,a):=x(t;a).$$\n\nFor $t\\in\\mathbb R$ the **time-$t$ map** is the partial map\n\n$$\\Phi_t:\\Omega_t\\longrightarrow U,\\qquad \\Omega_t:=\\{\\,a\\in U:(t,a)\\in\\Omega\\,\\},\\qquad \\Phi_t(a):=\\Phi(t,a).$$\n\nThus $\\Phi_0(a)=a$ whenever it is defined, and $(t,a)\\in\\Omega$ exactly when the maximal solution of $x'=F(x)$ through $a$ is defined at time $t$.",
+        "strategy": "Define the flow as the solution family of the autonomous field, with all domain conditions explicit; no uniqueness or completeness statement is smuggled into the definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.1 (autonomous systems) and Section 6.1 (the flow of a dynamical system), printed pages 17-19 and 190-192",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.3 (maximal solutions) and Section 1.4 (continuous dependence), printed pages 22-30",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-local-flow-composition-law",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The local flow is a partial one-parameter group: identity, composition and inverse-time laws",
+        "reference": "expansion-proofs.md#e2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-maximal-ode-solution",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable ([[def-locally-lipschitz-in-the-state-variable]]), and let $\\Phi:\\Omega\\to U$ be the local flow of $x'=F(x)$ as in [[def-cm-local-flow-of-an-autonomous-system]], with maximal solutions $x(\\,\\cdot\\,;a):I_a\\to U$ and flow domain $\\Omega=\\{(t,a):t\\in I_a\\}$. Then:\n\n1. $(0,a)\\in\\Omega$ and $\\Phi(0,a)=a$ for every $a\\in U$;\n2. if $(s,a)\\in\\Omega$ and $(t,\\Phi(s,a))\\in\\Omega$, then $(s+t,a)\\in\\Omega$ and $\\Phi(s+t,a)=\\Phi\\bigl(t,\\Phi(s,a)\\bigr)$;\n3. if $(t,a)\\in\\Omega$, then $(-t,\\Phi(t,a))\\in\\Omega$ and $\\Phi\\bigl(-t,\\Phi(t,a)\\bigr)=a$.",
+        "strategy": "Glue translates of the maximal solution through a using uniqueness and maximality of solutions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.1 (properties of the flow phi(t, x); the cocycle identity), printed pages 190-192",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.3 (gluing of solutions on overlapping intervals), printed pages 22-28",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-continuous-dependence-on-initial-data",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Continuous and Lipschitz dependence on the initial condition on a Picard-Lindelof cylinder",
+        "reference": "expansion-proofs.md#e2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-gronwall-integral-inequality",
+          "def-vector-valued-derivative-and-integral",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-additivity-over-subintervals",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-interval",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable ([[def-locally-lipschitz-in-the-state-variable]]). Let $a_0\\in U$, let $h>0$ and $R>0$ satisfy $\\overline B(a_0,R)\\subseteq U$ ([[def-metric-ball]]), put\n\n$$M:=\\sup_{x\\in\\overline B(a_0,R)}\\|F(x)\\|_2,\\qquad L:=\\text{a state-Lipschitz constant of }F\\text{ on }\\overline B(a_0,R),$$\n\nso that $\\|F(x)-F(y)\\|_2\\le L\\|x-y\\|_2$ for all $x,y\\in\\overline B(a_0,R)$ ([[def-euclidean-inner-product]]), and let $0\\le\\rho<R$ satisfy\n\n$$hM\\le R-\\rho,\\qquad Lh<1 .$$\n\nThen for every $a\\in\\overline B(a_0,\\rho)$ the initial value problem\n\n$$x'(t)=F(x(t)),\\qquad x(0)=a$$\n\nhas exactly one solution $x(\\,\\cdot\\,;a)$ on $[-h,h]$ whose graph lies in $[-h,h]\\times\\overline B(a_0,R)$, and for all $a,b\\in\\overline B(a_0,\\rho)$ and all $s,t\\in[-h,h]$:\n\n1. $\\|x(t;a)-x(t;b)\\|_2\\le e^{L|t|}\\|a-b\\|_2$;\n2. $\\|x(t;a)-x(s;a)\\|_2\\le M\\,|t-s|$;\n3. $\\|x(t;a)-x(s;b)\\|_2\\le e^{Lh}\\|a-b\\|_2+M\\,|t-s|$; in particular the map $(t,a)\\mapsto x(t;a)$ is Lipschitz, hence continuous, on the compact set $[-h,h]\\times\\overline B(a_0,\\rho)$.",
+        "strategy": "Construct the solutions on a common Picard-Lindelof cylinder and apply the Gronwall inequality to the Volterra integral equation solved by the difference of two solutions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Lemma 2.7 (generalized Gronwall inequality) and Theorem 2.8 with estimate (2.43), printed pages 42-44",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.4 (continuous dependence on the initial data), printed pages 32-36, and Appendix A.7 (Gronwall)",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-smooth-dependence-and-the-variational-equation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Smooth dependence of an autonomous flow on the initial condition, and the variational equation",
+        "reference": "expansion-proofs.md#e2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-variational-equation-along-an-ode-solution",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-gronwall-integral-inequality",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-monotonicity-of-the-integral",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-interval",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), let $a_0\\in U$, and let $T>0$, $R>0$ with $\\overline B(a_0,R)\\subseteq U$ ([[def-metric-ball]]). Put $M:=\\sup_{\\overline B(a_0,R)}\\|F\\|_2$ and $L:=\\sup_{\\overline B(a_0,R)}\\|DF\\|$, where $DF(x)$ is the total derivative of $F$ at $x$ with its operator norm ([[def-jacobian-matrix-and-gradient]]); both are finite. Let $0<\\rho<R-MT$, so that in particular $MT<R$. Let $\\Phi$ be the local flow of $x'=F(x)$ ([[def-cm-local-flow-of-an-autonomous-system]]).\n\nThen:\n\n1. For every $a\\in\\overline B(a_0,\\rho)$ the maximal solution $x(\\,\\cdot\\,;a)$ is defined on $[0,T]$ and satisfies $\\|x(t;a)-a_0\\|_2\\le\\rho+Mt<R$ for $t\\in[0,T]$; moreover\n\n$$\\|x(t;a)-x(t;b)\\|_2\\le e^{Lt}\\|a-b\\|_2\\qquad(a,b\\in\\overline B(a_0,\\rho),\\ t\\in[0,T]),$$\n\nand $(t,a)\\mapsto x(t;a)$ is continuous on the compact set $[0,T]\\times\\overline B(a_0,\\rho)$.\n\n2. For every $a\\in B(a_0,\\rho)$ the variational equation along $x(\\,\\cdot\\,;a)$,\n\n$$Y'(t)=DF\\bigl(x(t;a)\\bigr)Y(t),\\qquad Y(0)=I_n,$$\n\nhas a unique solution $Y_a:[0,T]\\to M_n(\\mathbb R)$ ([[def-variational-equation-along-an-ode-solution]]), and for every $t\\in[0,T]$ the map $a\\mapsto x(t;a)$ is differentiable on the open ball $B(a_0,\\rho)$, with\n\n$$D_a x(t;a)h=Y_a(t)h\\qquad(h\\in\\mathbb R^n).$$\n\n3. The map $(t,a)\\mapsto Y_a(t)$ is continuous on $[0,T]\\times B(a_0,\\rho)$, and consequently $(t,a)\\mapsto x(t;a)$ is $C^1$ there with\n\n$$\\partial_t x(t;a)=F\\bigl(x(t;a)\\bigr),\\qquad D_a x(t;a)=Y_a(t).$$",
+        "strategy": "Trap the solutions in a compact ball and extend them by compact continuation, estimate differences with Gronwall, then compare the difference quotients with the solution of the variational equation using the uniform derivative remainder on the compact ball.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.4: Theorem 2.10 (the solution is C^k in the initial condition and satisfies the first variational equation), printed pages 45-48",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.4 (continuous dependence and the variational equation), printed pages 32-40",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-cm-flow-domain-open-and-flow-is-c1",
+        "kind": "corollary",
+        "domain": "mathematics",
+        "title": "The flow domain of a C¹ autonomous field is open and the flow is C¹ on it",
+        "reference": "expansion-proofs.md#e2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-smooth-dependence-and-the-variational-equation",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "lem-cm-local-flow-composition-law",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "thm-extreme-value-metric",
+          "thm-heine-borel-rn",
+          "thm-compact-subset-is-closed-and-bounded",
+          "def-metric-ball",
+          "def-metric-topology",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "thm-cm-smooth-dependence-and-the-variational-equation": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "lem-cm-local-flow-composition-law": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "lem-relative-compact-closed-sets-have-a-positive-distance-gap": "mathematical-premise",
+          "thm-continuous-image-of-a-compact-space-is-compact": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-compact-subset-is-closed-and-bounded": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $\\Phi:\\Omega\\to U$ be the local flow of $x'=F(x)$ with maximal solutions $x(\\,\\cdot\\,;a):I_a\\to U$ ([[def-cm-local-flow-of-an-autonomous-system]]). Then $\\Omega$ is open in $\\mathbb R\\times U$ ([[def-metric-topology]]), and $\\Phi$ is of class $C^1$ on $\\Omega$, with\n\n$$\\partial_t\\Phi(t,a)=F\\bigl(\\Phi(t,a)\\bigr)\\qquad((t,a)\\in\\Omega).$$",
+        "strategy": "Cover the reference trajectory by finitely many Picard-Lindelof steps with radially shrinking balls, invoke the smooth-dependence theorem on each step, and assemble the C^1 pieces by the composition law.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.4 (Theorem 2.10: the solution map is C^k in the initial condition) and Section 6.1 (the flow domain), printed pages 45-48 and 190-192",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.4 and Section 2.3 (dependence on initial data and differentiability), printed pages 32-40 and 76-82",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-first-return-map-is-a-local-c1-diffeomorphism",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "A transversal return of a C¹ flow yields a local C¹ Poincaré map, with inverse given by the reversed crossing",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "cor-cm-flow-domain-open-and-flow-is-c1",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "lem-cm-local-flow-composition-law",
+          "thm-euclidean-implicit-function-theorem",
+          "def-subspace-topology-top",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-total-derivative-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-interior-closure-boundary-top",
+          "thm-heine-borel-rn",
+          "thm-continuous-image-of-a-compact-space-is-compact",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_roles": {
+          "cor-cm-flow-domain-open-and-flow-is-c1": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "lem-cm-local-flow-composition-law": "mathematical-premise",
+          "thm-euclidean-implicit-function-theorem": "mathematical-premise",
+          "def-subspace-topology-top": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-interior-closure-boundary-top": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-continuous-image-of-a-compact-space-is-compact": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $\\Phi:\\Omega\\to U$ be the local flow of $x'=F(x)$ ([[def-cm-local-flow-of-an-autonomous-system]]). Let $x_0\\in U$ and $t_0>0$ satisfy $(t_0,x_0)\\in\\Omega$, and put $x_1:=\\Phi(t_0,x_0)$. Let $W\\subseteq\\mathbb R^n$ be open with $x_0,x_1\\in W$, and let $h:W\\to\\mathbb R$ be $C^1$ with\n\n$$h(x_0)=h(x_1)=0,\\qquad Dh(x_0)F(x_0)\\ne0,\\qquad Dh(x_1)F(x_1)\\ne0 ;$$\n\nthus the reference orbit meets the level set $\\Sigma:=h^{-1}(0)\\cap W$ transversally at $x_0$ (time $0$) and again at $x_1$ (time $t_0$). Then there are open sets $A\\subseteq W$ with $x_0\\in A$ and $B\\subseteq W$ with $x_1\\in B$, and $C^1$ functions\n\n$$\\tau:A\\to\\mathbb R,\\qquad \\sigma:B\\to\\mathbb R,\\qquad \\tau(x_0)=\\sigma(x_1)=t_0,$$\n\nsuch that:\n\n1. $h\\bigl(\\Phi(\\tau(x),x)\\bigr)=0$ for every $x\\in A$, and there is an open interval $J\\ni t_0$ with $A\\subseteq W$ such that\n\n$$h\\bigl(\\Phi(t,x)\\bigr)=0,\\ (t,x)\\in J\\times A\\quad\\Longleftrightarrow\\quad t=\\tau(x);$$\n\n2. $h\\bigl(\\Phi(-\\sigma(y),y)\\bigr)=0$ for every $y\\in B$, and the map\n\n$$P:A\\longrightarrow\\Sigma,\\qquad P(x):=\\Phi\\bigl(\\tau(x),x\\bigr),$$\n\nis $C^1$ with $P(A\\cap\\Sigma)\\subseteq B$, while\n\n$$Q:B\\longrightarrow\\Sigma,\\qquad Q(y):=\\Phi\\bigl(-\\sigma(y),y\\bigr),$$\n\nis $C^1$ with $Q(B\\cap\\Sigma)\\subseteq A$, $Q(P(x))=x$ for all $x\\in A\\cap\\Sigma$, and $P(Q(y))=y$ for all $y\\in B\\cap\\Sigma\\cap Q^{-1}(A)$;\n\n3. $P(A\\cap\\Sigma)=B\\cap\\Sigma\\cap Q^{-1}(A)$ is open in the relative topology of $\\Sigma$ ([[def-subspace-topology-top]]), and $P:A\\cap\\Sigma\\to P(A\\cap\\Sigma)$ is a $C^1$ diffeomorphism with inverse $Q|_{P(A\\cap\\Sigma)}$. The map $P$ is the **local Poincaré return map** associated with the crossing at $t_0$. Here the portions of $\\Sigma$ in $A$ and $B$ have the embedded $C^1$ section charts supplied below; no regularity of $\\Sigma$ away from these neighbourhoods is required.\n\n4. If, in addition, $\\Phi(s,x_0)\\notin\\overline\\Sigma^{\\,U}$ for every $0<s<t_0$, where the bar denotes closure in $U$ ([[def-interior-closure-boundary-top]]), then $A,B$ can be chosen so that $\\tau(x)>0$ and $\\Phi(s,x)\\notin\\Sigma$ for $x\\in A\\cap\\Sigma$ and $0<s<\\tau(x)$. In this case $P$ is the **local first-return map** to $\\Sigma$: $\\tau(x)$ is its least positive hitting time. This explicit exclusion condition supplies persistence even when $\\Sigma$ is not closed in $U$.",
+        "strategy": "Apply the implicit function theorem to (t,x)->h(Phi(t,x)) at the forward crossing and to (t,y)->h(Phi(-t,y)) at the reversed crossing, shrink the two neighbourhoods so that the compositions are defined, and verify the inverse identities by uniqueness of the crossing time.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.4, Lemma 6.9 and the Poincare map (6.25), printed pages 197-198",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.4 and Chapter 2 (flow differentiability and section maps), printed pages 32-40 and 76-90",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Finite-time tangent growth rates and Lyapunov exponents of a C¹ flow",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "cor-cm-flow-domain-open-and-flow-is-c1",
+          "lem-cm-local-flow-composition-law",
+          "def-euclidean-inner-product",
+          "def-natural-logarithm",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "cor-cm-flow-domain-open-and-flow-is-c1": "mathematical-premise",
+          "lem-cm-local-flow-composition-law": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open, let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $\\Phi:\\Omega\\to U$ be the local flow of $x'=F(x)$ ([[def-cm-local-flow-of-an-autonomous-system]]); recall that $\\Omega$ is open and $\\Phi$ is $C^1$ on $\\Omega$ ([[cor-cm-flow-domain-open-and-flow-is-c1]]).\n\nLet $x\\in U$ and $t>0$ with $(t,x)\\in\\Omega$, and let $u\\in\\mathbb R^n\\setminus\\{0\\}$ be such that $D_x\\Phi_t(x)u\\ne0$, where $D_x\\Phi_t(x)$ is the derivative of the map $y\\mapsto\\Phi(t,y)$ at $x$ ([[def-cm-local-flow-of-an-autonomous-system]], [[def-ck-euclidean-maps-and-diffeomorphisms]]). The **finite-time tangent growth rate** of $(x,u)$ over the time $t$ is\n\n$$r(t,x,u):=\\frac{1}{t}\\log\\!\\left(\\frac{\\|D_x\\Phi_t(x)u\\|_2}{\\|u\\|_2}\\right)\\in\\mathbb R,$$\n\nthe Euclidean norms being those of [[def-euclidean-inner-product]] and $\\log$ the natural logarithm ([[def-natural-logarithm]]). The expression is a real number because $\\|u\\|_2>0$ and $\\|D_x\\Phi_t(x)u\\|_2>0$.\n\nFor the infinite-time notion require the forward lifetime $I_x=\\{t:(t,x)\\in\\Omega\\}$ to be unbounded above. Since $I_x$ is an interval containing $0$, this means that $(t,x)\\in\\Omega$ for every $t\\ge0$. Under this additional condition, if the limit\n\n$$\\lambda(x,u):=\\lim_{\\substack{t\\to\\infty\\\\(t,x)\\in\\Omega}} r(t,x,u)$$\n\nexists in $\\mathbb R$, it is called the **Lyapunov exponent of $(x,u)$**. If the forward lifetime is bounded above or the limit does not exist, no Lyapunov exponent is assigned; in particular no value $+\\infty$ or $-\\infty$ is named by this definition.",
+        "strategy": "Define the rate and the exponent from the derivative of the time-t map, with the existence of the limit an explicit clause and no spectral or ergodic interpretation attached.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 9.1, formulas (9.3)-(9.6): exponential rates for the linearisation of a flow along a hyperbolic orbit",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics, Section 2.3 (rates of divergence and sensitivity)",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-bilateral-shift-space-and-cylinders",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The bilateral two-symbol shift space, its metric, its shift map and its cylinder sets",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-function-space",
+          "def-series",
+          "thm-geometric-series",
+          "def-integer-power",
+          "def-abs-value"
+        ],
+        "dependency_roles": {
+          "def-function-space": "mathematical-premise",
+          "def-series": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-integer-power": "mathematical-premise",
+          "def-abs-value": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let\n\n$$X:=\\{0,1\\}^{\\mathbb Z}=\\{\\,s\\;:\\;s\\text{ is a function }\\mathbb Z\\to\\{0,1\\}\\,\\}$$\n\nbe the set of bi-infinite binary sequences, with the function-set convention of [[def-function-space]]; for $s\\in X$ write $s_k:=s(k)$ for the value at the integer $k$. Define\n\n$$d(s,t):=\\sum_{k=0}^{\\infty}2^{-k}\\,|s_k-t_k|\\;+\\;\\sum_{k=1}^{\\infty}2^{-k}\\,|s_{-k}-t_{-k}|\\qquad(s,t\\in X).$$\n\nBoth series converge by comparison with the geometric series $\\sum_{k\\ge0}2^{-k}=2$ ([[def-series]], [[thm-geometric-series]], [[def-integer-power]], [[def-abs-value]]), since $|s_j-t_j|\\in\\{0,1\\}$ for every $j\\in\\mathbb Z$; hence $d(s,t)$ is a well-defined real number. That $d$ is a metric on $X$ is proved in the companion lemma [[lem-cm-bilateral-shift-metric-and-sequential-compactness]] and is not part of this definition.\n\nThe **(bilateral) shift** is the map\n\n$$\\sigma:X\\longrightarrow X,\\qquad \\sigma(s)_k:=s_{k+1}\\qquad(k\\in\\mathbb Z,\\ s\\in X).$$\n\nFor $n\\ge1$ the $n$-fold iterate is written $\\sigma^n$, defined by $\\sigma^1:=\\sigma$ and $\\sigma^{n+1}:=\\sigma\\circ\\sigma^n$; a point $s\\in X$ is **periodic** when $\\sigma^n(s)=s$ for some $n\\ge1$.\n\nA **cylinder** is a set of the form\n\n$$[w]_{p,q}:=\\{\\,s\\in X\\;:\\;s_k=w_k\\text{ for }p\\le k\\le q\\,\\},$$\n\nwhere $p\\le q$ are integers and $w=(w_p,\\dots,w_q)\\in\\{0,1\\}^{\\{p,\\dots,q\\}}$ is a finite binary word; the integers $p,q$ and the word $w$ are part of the data. When $p=q$ this is the set of sequences with prescribed value at the single coordinate $p$.",
+        "strategy": "Define the symbol space, its metric expression, the shift and the cylinders; the metric axioms are proved in the companion lemma and are not part of the definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics (University of Bristol/Manchester), Section 2.6: the full bi-sided shift space Sigma_N, and Section 2.7: the metric d_rho and cylinders C_{-m,n}(a_{-m},...,a_n)",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-cm-bilateral-shift-metric-and-sequential-compactness"
+        ]
+      },
+      {
+        "id": "lem-cm-bilateral-shift-metric-and-sequential-compactness",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The bilateral shift metric is a metric, cylinders are its basic balls, and the shift space is sequentially compact",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-bilateral-shift-space-and-cylinders",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-dense-top",
+          "def-metric-compactness",
+          "def-metric-compactness-variants",
+          "thm-metric-compactness-equivalences",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-sequence",
+          "def-metric-convergence",
+          "def-series",
+          "lem-series-linearity",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-geometric-series",
+          "def-bounded-set"
+        ],
+        "dependency_roles": {
+          "def-cm-bilateral-shift-space-and-cylinders": "mathematical-premise",
+          "def-metric-space": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-dense-top": "mathematical-premise",
+          "def-metric-compactness": "mathematical-premise",
+          "def-metric-compactness-variants": "mathematical-premise",
+          "thm-metric-compactness-equivalences": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-sequence": "mathematical-premise",
+          "def-metric-convergence": "mathematical-premise",
+          "def-series": "mathematical-premise",
+          "lem-series-linearity": "mathematical-premise",
+          "thm-nonnegative-series-bounded-partial-sums": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "def-bounded-set": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X=\\{0,1\\}^{\\mathbb Z}$, let $d$ and $\\sigma$ be the metric expression and the shift map of [[def-cm-bilateral-shift-space-and-cylinders]], and for $m\\ge0$ let $F_m:=\\{-m,\\dots,m\\}$ and $[s]_{F_m}:=\\{t\\in X:t_k=s_k\\text{ for }k\\in F_m\\}$ be the cylinder determined by $s$ on $F_m$. Then:\n\n1. $d$ is a metric on $X$ ([[def-metric-space]]);\n2. for every $s\\in X$ and every $m\\ge0$,\n\n$$B(s,2^{-m})\\subseteq [s]_{F_m}\\subseteq \\overline B(s,2^{1-m});$$\n\nconsequently every cylinder is open in the metric topology ([[def-metric-topology]]) and every nonempty open subset of $X$ contains a cylinder;\n3. $X$ is sequentially compact ([[def-metric-compactness-variants]]): every sequence in $X$ has a subsequence converging in $d$ ([[def-metric-convergence]]), and the construction of that subsequence uses no choice principle;\n4. granting the Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Dependent Choice ([[def-dependent-choice]]), $(X,d)$ is compact ([[def-metric-compactness]]).",
+        "strategy": "Verify the metric axioms termwise, identify cylinders with balls up to a factor two, diagonalise a sequence of binary sequences by stabilising coordinate restrictions, and convert sequential compactness into compactness under the stated choice axioms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics, Section 2.7: the metrics d_rho on Sigma_N, Lemmas 2.7.1-2.7.2 identifying cylinders with balls, and Lemma 2.7.3 (every open set contains a cylinder)",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            },
+            {
+              "title": "E. Glasner and B. Weiss, Sensitive dependence on initial conditions (Nonlinearity 6, 1993; updated author version), Section 2: subshifts of the two-symbol shift and their compactness",
+              "url": "https://www.math.tau.ac.il/~glasner/papers/sensi.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Topological mixing, dense periodic points, sensitive dependence, and the stated chaos list",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-metric-space",
+          "def-metric-topology",
+          "def-dense-top",
+          "def-metric-ball",
+          "def-metric-continuity"
+        ],
+        "dependency_roles": {
+          "def-metric-space": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-dense-top": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-continuity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $(X,d)$ be a metric space ([[def-metric-space]]) with its metric topology ([[def-metric-topology]]) and let $f:X\\to X$ be a map. For $n\\ge1$ write $f^n$ for the $n$-fold iterate, $f^1:=f$ and $f^{n+1}:=f\\circ f^n$.\n\n1. $f$ is **topologically mixing** when for all nonempty open sets $U,V\\subseteq X$ there is an integer $N$ such that\n\n$$f^n(U)\\cap V\\ne\\emptyset\\qquad\\text{for every }n\\ge N .$$\n\n2. A point $x\\in X$ is a **periodic point** of $f$ when $f^n(x)=x$ for some $n\\ge1$. The set of periodic points of $f$ is written $\\operatorname{Per}(f)$. The periodic points are **dense** in $X$ when $\\operatorname{Per}(f)$ is dense in $X$, that is ([[def-dense-top]]) when every nonempty open subset of $X$ meets $\\operatorname{Per}(f)$.\n\n3. $f$ has **sensitive dependence on initial conditions** when there is a real number $\\delta>0$ such that for every $x\\in X$ and every $\\varepsilon>0$ there are $y\\in X$ and $n\\ge1$ with\n\n$$d(x,y)<\\varepsilon\\qquad\\text{and}\\qquad d\\bigl(f^n(x),f^n(y)\\bigr)\\ge\\delta .$$\n\nSuch a number $\\delta$ is called a **sensitivity constant** for $f$.\n\nFinally, say that $f$ is **chaotic in the stated sense** when $f$ is continuous ([[def-metric-continuity]]), topologically mixing, has dense periodic points, and has sensitive dependence on initial conditions.",
+        "strategy": "Record the three-property chaos package as a definition of the chosen list, with the uniform quantifiers explicit; no entropy or measure-theoretic mixing is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics, Definitions 2.2.2-2.2.4 and 2.3.4 (topological transitivity, minimality, mixing and sensitive dependence)",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            },
+            {
+              "title": "E. Glasner and B. Weiss, Sensitive dependence on initial conditions (Nonlinearity 6, 1993, 1067-1075; updated author version), Section 0: the three properties (transitivity, dense periodic points, sensitivity) used in one standard definition of a chaotic system",
+              "url": "https://www.math.tau.ac.il/~glasner/papers/sensi.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The bilateral two-symbol shift is continuous, topologically mixing, has dense periodic points and is sensitive; it is chaotic in the stated sense",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-bilateral-shift-space-and-cylinders",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "lem-cm-bilateral-shift-metric-and-sequential-compactness",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "def-metric-continuity",
+          "def-dense-top",
+          "def-series",
+          "thm-geometric-series",
+          "thm-nonnegative-series-bounded-partial-sums"
+        ],
+        "dependency_roles": {
+          "def-cm-bilateral-shift-space-and-cylinders": "mathematical-premise",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "lem-cm-bilateral-shift-metric-and-sequential-compactness": "mathematical-premise",
+          "def-metric-space": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-metric-continuity": "mathematical-premise",
+          "def-dense-top": "mathematical-premise",
+          "def-series": "mathematical-premise",
+          "thm-geometric-series": "mathematical-premise",
+          "thm-nonnegative-series-bounded-partial-sums": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X=\\{0,1\\}^{\\mathbb Z}$, let $d$ be the metric of [[lem-cm-bilateral-shift-metric-and-sequential-compactness]] and let $\\sigma:X\\to X$, $\\sigma(s)_k=s_{k+1}$, be the bilateral shift of [[def-cm-bilateral-shift-space-and-cylinders]]. Then:\n\n1. $\\sigma$ is continuous ([[def-metric-continuity]]);\n2. $\\sigma$ is topologically mixing;\n3. the periodic points of $\\sigma$ are dense in $X$;\n4. $\\sigma$ has sensitive dependence on initial conditions with sensitivity constant $\\delta=1$;\n\nconsequently $\\sigma$ is chaotic in the stated sense ([[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]]).",
+        "strategy": "Use cylinders as a basis: continuity from the metric estimate, mixing by prescribing the two blocks at disjoint index sets for all large n, periodic points by repeating a finite block, and sensitivity by flipping a coordinate in the future tail.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics, Section 2.6 (periodic points of Sigma_A: Corollary 2.6.1) and Section 2.7, Theorem 2.7.1 (topological Markov chains: aperiodic transition matrices give topologically mixing shifts)",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            },
+            {
+              "title": "E. Glasner and B. Weiss, Sensitive dependence on initial conditions (Nonlinearity 6, 1993; updated author version), Section 0 (sensitivity) and Section 2 (sensitivity of subshifts)",
+              "url": "https://www.math.tau.ac.il/~glasner/papers/sensi.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-cm-recurrence-scope-for-mechanical-systems",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope of Poincaré recurrence for mechanical systems: finite invariant volume and complete return maps",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-scope-remark; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-poincare-recurrence-for-finite-measure-preserving-systems",
+          "cor-topological-poincare-recurrence-on-second-countable-spaces",
+          "cor-poincare-recurrence-for-finite-volume-hamiltonian-invariant-regions",
+          "def-measure-preserving-transformation-and-system",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive"
+        ],
+        "dependency_roles": {
+          "thm-poincare-recurrence-for-finite-measure-preserving-systems": "mathematical-premise",
+          "cor-topological-poincare-recurrence-on-second-countable-spaces": "mathematical-premise",
+          "cor-poincare-recurrence-for-finite-volume-hamiltonian-invariant-regions": "mathematical-premise",
+          "def-measure-preserving-transformation-and-system": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The recurrence content attached to this page is supplied by published items and is subject to their stated hypotheses.\n\n1. In a measure-preserving system $(X,\\mathcal A,\\mu,T)$ with $\\mu(X)<\\infty$, for every $E\\in\\mathcal A$ almost every point of $E$ returns to $E$ under $T^n$ for infinitely many positive integers $n$ ([[thm-poincare-recurrence-for-finite-measure-preserving-systems]], [[def-measure-preserving-transformation-and-system]]). If $X$ is second countable with a countable basis in $\\mathcal A$, then outside one null set every neighbourhood of every point is revisited infinitely often, and in the metrizable case there is a strictly increasing sequence $n_j$ with $T^{n_j}x\\to x$ ([[cor-topological-poincare-recurrence-on-second-countable-spaces]]). For a Hamiltonian flow, a measurable invariant region of finite symplectic volume on which a nonzero time map and all of its iterates are defined satisfies the same recurrence conclusion for that time map ([[cor-poincare-recurrence-for-finite-volume-hamiltonian-invariant-regions]]).\n\n2. The following qualifications are part of the statement and are not removable.\n\n- **Finiteness of measure is a hypothesis.** The conclusion fails in general for infinite measure: for $T(x)=x+1$ on $\\mathbb R$ with Lebesgue measure, the set $E=(0,1/2)$ has positive measure and no point of $E$ returns to $E$ at any positive integer time, so the analogue of clause 1 is false without $\\mu(X)<\\infty$. For a concrete mechanical contrast take the free-particle Hamiltonian $H(q,p)=p^2/(2m)$ on $X=\\mathbb R_q\\times\\mathbb R_p$ with $m>0$, phase volume $dq\\,dp$, and complete flow $\\phi_t(q,p)=(q+tp/m,p)$. Its time-one map preserves this infinite volume (each fixed-$p$ slice is a translation in $q$). In $E_{\\mathrm{free}}=(0,1/2)\\times(m,2m)$ every positive integer iterate has $q_n=q+np/m>1$, so no point returns to this positive-volume set. Thus complete, volume-preserving mechanical motion on the full unconfined phase space need not be recurrent; the finite-invariant-volume hypothesis is essential.\n- **The return map must be defined for all iterates.** The time-$\\tau$ map of a Hamiltonian flow is a measure-preserving map only where it is defined: the invariant region must be contained in the domain of $\\phi_\\tau$ and of every iterate $\\phi_{n\\tau}$. For a local flow in the sense of [[def-cm-local-flow-of-an-autonomous-system]] this is an additional hypothesis on the region, not a consequence of the flow being locally defined; on a compact energy level of a complete bounded system it must be verified from the model.\n- **Recurrence is an almost-everywhere statement about a measure, not about every trajectory.** The null exceptional set depends on the measurable set being revisited; a specified trajectory, or a finite-time observation, is not claimed to return. The topological corollary supplies a single null set only after a countable basis is fixed and one grants its countable-choice hypotheses.\n- **No identification with the shift example.** The bilateral shift of [[thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive]] is a topological example on the symbol space; no claim is made here that it arises as the return map of a smooth mechanical system, and no claim about any physical system is made by this remark.",
+        "strategy": "Collect the published recurrence statements with their hypotheses and the explicit counterexample to the infinite-measure analogue; assert no identification of the symbolic example with a mechanical system.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "M. Einsiedler and T. Ward, Ergodic Theory with a view towards Number Theory, first four chapters with appendices (LMS-EPSRC Summer School 2010), Chapter 2 (Poincare recurrence, Theorem 2.11 and Exercise 2.2.3, printed pages 21-23)",
+              "url": "https://webspace.maths.qmul.ac.uk/f.vivaldi/teaching/ETAD/NotesI.pdf"
+            },
+            {
+              "title": "A. Cannas da Silva, Lectures on Symplectic Geometry, Lecture 18 (Hamiltonian flow invariance of symplectic volume), p. 105",
+              "url": "https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Exponential dichotomy for a hyperbolic endomorphism: invariant stable and unstable subspaces with exponential estimates",
+        "reference": "expansion-proofs.md#e16",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "lem-exponential-series-of-a-bounded-operator",
+          "def-complexification-of-a-real-vector-space",
+          "def-complexification-of-a-real-linear-map",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism",
+          "thm-characteristic-and-minimal-polynomials-survive-complexification",
+          "thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors",
+          "cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial",
+          "thm-jordan-canonical-form-from-pid-module-structure",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "thm-bezout-identity-for-polynomials",
+          "def-series-of-vectors-and-rearrangement",
+          "thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent",
+          "def-equivalent-norms"
+        ],
+        "dependency_roles": {
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "def-complexification-of-a-real-vector-space": "mathematical-premise",
+          "def-complexification-of-a-real-linear-map": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism": "mathematical-premise",
+          "thm-characteristic-and-minimal-polynomials-survive-complexification": "mathematical-premise",
+          "thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors": "mathematical-premise",
+          "cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial": "mathematical-premise",
+          "thm-jordan-canonical-form-from-pid-module-structure": "mathematical-premise",
+          "thm-fundamental-theorem-of-algebra-minimum-modulus-proof": "mathematical-premise",
+          "thm-bezout-identity-for-polynomials": "mathematical-premise",
+          "def-series-of-vectors-and-rearrangement": "mathematical-premise",
+          "thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent": "mathematical-premise",
+          "def-equivalent-norms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $V$ be a finite-dimensional real inner product space with dimension $n\\ge1$ and norm $\\|\\cdot\\|_2$, let $T:V\\to V$ be an endomorphism, let $V_{\\mathbb C}$ be its complexification with the complex-linear extension $T_{\\mathbb C}$ ([[def-complexification-of-a-real-vector-space]], [[def-complexification-of-a-real-linear-map]]), and let $e^{tT}$ and $e^{tT_{\\mathbb C}}$ be the exponential series of the bounded operators $T$ and $T_{\\mathbb C}$ ([[lem-exponential-series-of-a-bounded-operator]]). Suppose that no eigenvalue of $T_{\\mathbb C}$ in the sense of [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]] has real part $0$.\n\nThen there exist $T$-invariant linear subspaces $E_s,E_u\\subseteq V$ and real constants $C\\ge1$, $c>0$ such that $V=E_s\\oplus E_u$ and, for every $t\\in\\mathbb R$:\n\n1. $\\|e^{tT}v\\|_2\\le Ce^{-ct}\\|v\\|_2$ for $v\\in E_s$ and $t\\ge0$;\n2. $\\|e^{tT}v\\|_2\\le Ce^{ct}\\|v\\|_2$ for $v\\in E_u$ and $t\\le0$;\n3. $\\|e^{tT}v\\|_2\\ge C^{-1}e^{ct}\\|v\\|_2$ for $v\\in E_u$ and $t\\ge0$;\n4. $E_s=\\{v\\in V:e^{tT}v\\to0\\ (t\\to+\\infty)\\}$ and $E_u=\\{v\\in V:e^{tT}v\\to0\\ (t\\to-\\infty)\\}$.",
+        "strategy": "Split the spectrum into the open left and right half-planes, build real invariant subspaces from coprime factors of the minimal polynomial via a Bezout identity, estimate each Jordan block by its exponential series with the polynomial factor, and characterise the subspaces by the exponential estimates.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 9.1, Theorems 9.1 and 9.2 and formulas (9.2), (9.4), (9.6), printed pages 253-254",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "F. Ramponi, Notes on Lyapunov's theorem, Section 3 (the Lyapunov equation and the exponential estimate P = integral of e^{A^T t} Q e^{A t})",
+              "url": "https://federico-ramponi.unibs.it/docs/lyapunov.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-exponential-stability-by-a-lyapunov-quadratic-form",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "An equilibrium whose linearisation has all eigenvalues in the open left half-plane is locally exponentially stable",
+        "reference": "expansion-proofs.md#e16",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+          "lem-exponential-series-of-a-bounded-operator",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ftc-second-part",
+          "def-improper-integral-at-infinity",
+          "cor-limit-comparison-test-for-improper-integrals",
+          "thm-extreme-value-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "def-improper-integral-at-infinity": "mathematical-premise",
+          "cor-limit-comparison-test-for-improper-integrals": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open with $0\\in U$, and let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $F(0)=0$. Put $A:=DF(0)$ ([[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]]) and suppose that every complex eigenvalue of $A$ ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) has negative real part.\n\nThen $0$ is a locally exponentially stable equilibrium of $z'=F(z)$ ([[def-cm-equilibrium-and-lyapunov-stability]]): there are real numbers $\\delta>0$, $\\beta\\ge1$ and $\\gamma>0$ such that every maximal solution $z$ of $z'=F(z)$ with $\\|z(0)\\|_2<\\delta$ is defined for all $t\\ge0$ and satisfies\n\n$$\\|z(t)\\|_2\\le\\beta e^{-\\gamma t}\\|z(0)\\|_2\\qquad(t\\ge0).$$\n\nIn particular $0$ is Lyapunov stable and asymptotically stable in the sense of [[def-cm-equilibrium-and-lyapunov-stability]].",
+        "strategy": "Build the positive definite Lyapunov matrix Q from the integral of e^{tA^T}e^{tA}, verify A^TQ+QA=-I by differentiating the integrand, and show that V=z^TQz decreases exponentially on a small compact sublevel set that traps every nearby solution by compact continuation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ramponi, Notes on Lyapunov's theorem, Sections 2-4: the Lyapunov function V = x^T P x with P = integral of e^{A^T t} Q e^{A t}, and stability via linearisation",
+              "url": "https://federico-ramponi.unibs.it/docs/lyapunov.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.6 (Liapunov's method) and Section 9.1, Theorem 9.1, printed pages 205-209 and 253-254",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-instability-of-a-hyperbolic-saddle",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A hyperbolic equilibrium whose linearisation has an eigenvalue with positive real part is unstable",
+        "reference": "expansion-proofs.md#e16",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+          "lem-exponential-series-of-a-bounded-operator",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "thm-cm-exponential-stability-by-a-lyapunov-quadratic-form",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-improper-integral-at-infinity",
+          "cor-limit-comparison-test-for-improper-integrals",
+          "thm-extreme-value-metric",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "thm-cm-exponential-stability-by-a-lyapunov-quadratic-form": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-improper-integral-at-infinity": "mathematical-premise",
+          "cor-limit-comparison-test-for-improper-integrals": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open with $0\\in U$, and let $F:U\\to\\mathbb R^n$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $F(0)=0$. Put $A:=DF(0)$ ([[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]]) and suppose that\n\n- no complex eigenvalue of $A$ ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) has real part $0$, and\n- at least one eigenvalue of $A$ has positive real part.\n\nThen the equilibrium $0$ is not Lyapunov stable ([[def-cm-equilibrium-and-lyapunov-stability]]): there is a real number $\\varepsilon_0>0$ such that for every $\\delta>0$ there exist $z_0\\in U$ with $\\|z_0\\|_2<\\delta$ and a time $t_1>0$ such that the maximal solution $z$ of $z'=F(z)$, $z(0)=z_0$ is defined on $[0,t_1]$ and satisfies\n\n$$\\|z(t_1)\\|_2=\\varepsilon_0 .$$",
+        "strategy": "Use the indefinite form built from the unstable and stable Lyapunov matrices; it grows exponentially on a small ball along unstable data, and compact continuation forces arbitrarily small data to leave a fixed neighbourhood in finite time.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ramponi, Notes on Lyapunov's theorem, Section 4 (instability when the linearisation has an eigenvalue with positive real part) and the counterexamples x' = -x^2, x' = x^2",
+              "url": "https://federico-ramponi.unibs.it/docs/lyapunov.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 9.2 (stable and unstable manifolds of a hyperbolic fixed point), printed pages 255-262",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The mechanical first-order field, Lagrangian and energy of a configuration-dependent kinetic metric in a chart",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-self-adjoint-and-normal-endomorphism"
+        ],
+        "dependency_roles": {
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $M(q)$ symmetric and positive definite for every $q\\in\\Omega$, that is $v^{\\mathsf T}M(q)v>0$ for every nonzero $v\\in\\mathbb R^n$, and let $U:\\Omega\\to\\mathbb R$ be of class $C^2$. The matrix field $M$ is the **kinetic metric field** and $U$ the **potential** of the data in the chart $\\Omega$.\n\nDefine, for $(q,v)\\in\\Omega\\times\\mathbb R^n$, the **kinetic energy**, **Lagrangian** and **energy**\n\n$$T(q,v):=\\tfrac12v^{\\mathsf T}M(q)v,\\qquad L(q,v):=T(q,v)-U(q),\\qquad E(q,v):=T(q,v)+U(q),$$\n\nand, for $q\\in\\Omega$ and $v\\in\\mathbb R^n$, the matrix\n\n$$D_qM(q)[v]:=\\sum_{k=1}^nv_k\\,\\partial_kM(q),\\qquad\\bigl(\\partial_kM(q)\\bigr)_{ij}=\\partial_kM_{ij}(q).$$\n\nThe **mechanical vector field** of the data is the map\n\n$$G:\\Omega\\times\\mathbb R^n\\longrightarrow\\mathbb R^n\\times\\mathbb R^n,\\qquad G(q,v)=\\Bigl(v,\\ M(q)^{-1}\\bigl(\\tfrac12\\nabla_q(v^{\\mathsf T}M(q)v)-\\bigl(D_qM(q)[v]\\bigr)v-\\nabla U(q)\\bigr)\\Bigr),$$\n\nwhere $\\nabla_q$ and $\\nabla U$ are Euclidean gradients ([[def-jacobian-matrix-and-gradient]]) and $M(q)^{-1}$ is the inverse of the positive definite matrix $M(q)$ ([[def-invertible-matrix-and-general-linear-group]], [[def-matrix-product-and-identity-matrix]]). The **mechanical system** in the chart is the first-order system\n\n$$q'(t)=v(t),\\qquad v'(t)=M(q(t))^{-1}\\Bigl(\\tfrac12\\nabla_qf\\bigl(q(t),v(t)\\bigr)-\\bigl(D_qM(q(t))[v(t)]\\bigr)v(t)-\\nabla U(q(t))\\Bigr),\\qquad f(q,v):=v^{\\mathsf T}M(q)v .$$\n\nA point $q_* \\in\\Omega$ is a **mechanical equilibrium** when $\\nabla U(q_*)=0$.",
+        "strategy": "Define the chart model, its Lagrangian, energy and first-order field, with the inverse of the positive definite kinetic metric understood as a matrix inverse; record the equilibrium convention and nothing physical.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.78): the harmonic oscillator with mass matrix M and stiffness W and the decoupled system after the substitution (P,Q)=(VM^{1/2}p, VM^{-1/2}q)",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (small oscillations and the normal-mode equations), printed pages 37-45",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-energy-conservation-for-the-mechanical-system",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Energy is conserved along solutions of the mechanical system with a configuration-dependent kinetic metric",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "thm-chain-rule-for-total-derivatives",
+          "def-vector-valued-derivative-and-integral",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "lem-finite-sum-laws",
+          "thm-algebra-of-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, and let $E(q,v)=\\tfrac12v^{\\mathsf T}M(q)v+U(q)$ be the energy of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. If $q:I\\to\\Omega$ is a $C^2$ solution of the mechanical system $M(q)q''=\\tfrac12\\nabla_q(q'^{\\mathsf T}M(q)q')-(D_qM(q)[q'])q'-\\nabla U(q)$ on the interval $I$, then\n\n$$\\frac{d}{dt}E\\bigl(q(t),q'(t)\\bigr)=0\\qquad(t\\in I);$$\n\nthat is, the energy is constant along every solution.",
+        "strategy": "Differentiate the kinetic energy using the product rule and the derivative of the matrix field along the curve, substitute the equation of motion, and cancel the two configuration-dependence terms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.7, formula (6.47) and Theorem 6.16: the energy E = (1/2)v^T M v + U(q) as a constant of the motion",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 1.2.3 (energy conservation), printed pages 4-5",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-positive-definite-matrix-square-roots",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Positive definite symmetric matrices have positive definite square roots, and the congruence M^{-1/2} K M^{-1/2} preserves symmetry and positivity",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-non-negative-and-positive-operator",
+          "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+          "thm-non-negative-square-root-exists-and-is-unique",
+          "thm-non-negative-operator-characterisations",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-matrix-product-and-identity-matrix",
+          "def-invertible-matrix-and-general-linear-group",
+          "def-euclidean-inner-product",
+          "lem-inverse-unique"
+        ],
+        "dependency_roles": {
+          "def-non-negative-and-positive-operator": "mathematical-premise",
+          "prop-operator-positivity-agrees-with-form-positivity-over-the-reals": "mathematical-premise",
+          "thm-non-negative-square-root-exists-and-is-unique": "mathematical-premise",
+          "thm-non-negative-operator-characterisations": "mathematical-premise",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-inverse-unique": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$ and let $M\\in M_n(\\mathbb R)$ be symmetric and positive definite, that is $v^{\\mathsf T}Mv>0$ for every nonzero $v\\in\\mathbb R^n$; identify $\\mathbb R^n$ with its standard real inner product space ([[def-euclidean-inner-product]]). Then:\n\n1. $M$ is invertible and $M^{-1}$ is symmetric and positive definite;\n2. there is a unique symmetric positive definite matrix $M^{1/2}$ with $(M^{1/2})^2=M$;\n3. $M^{-1/2}:=(M^{1/2})^{-1}$ is symmetric and positive definite, satisfies $(M^{-1/2})^2=M^{-1}$, and $M^{-1/2}MM^{-1/2}=I_n$;\n4. for every symmetric matrix $K$ that is non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v$, the matrix $S:=M^{-1/2}KM^{-1/2}$ is symmetric and non-negative, and $S$ is positive definite if and only if $K$ is.",
+        "strategy": "Transfer positivity to the associated operators, use the unique non-negative square root, verify the inverse and congruence identities by matrix algebra, and transport definiteness through the congruence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formula (8.77): the matrices M^{1/2}, M^{-1/2} and the symmetric matrix M^{-1/2}WM^{-1/2}",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "Sheldon Axler, Linear Algebra Done Right, fourth edition, Chapter 7 (positive operators and their square roots)",
+              "url": "https://linear.axler.net/LADR4e.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-strict-minimum-has-positive-semidefinite-hessian",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "A C² local minimum has vanishing gradient and positive semidefinite Hessian",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "cor-second-order-taylor-expansion-with-the-hessian",
+          "cor-hessian-is-symmetric",
+          "def-hessian-and-euclidean-critical-point",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-euclidean-inner-product",
+          "thm-fermat-for-euclidean-local-extrema",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-function-limit"
+        ],
+        "dependency_roles": {
+          "cor-second-order-taylor-expansion-with-the-hessian": "mathematical-premise",
+          "cor-hessian-is-symmetric": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-fermat-for-euclidean-local-extrema": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-function-limit": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $U:\\Omega\\to\\mathbb R$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), and let $q_0\\in\\Omega$ be a local minimum of $U$: there is $\\rho>0$ with $\\overline B(q_0,\\rho)\\subseteq\\Omega$ and $U(q)\\ge U(q_0)$ for every $q\\in\\overline B(q_0,\\rho)$. Then\n\n$$\\nabla U(q_0)=0,\\qquad h^{\\mathsf T}D^2U(q_0)h\\ge0\\quad\\text{for every }h\\in\\mathbb R^n,$$\n\nwhere $D^2U(q_0)$ is the Hessian matrix, which is symmetric ([[cor-hessian-is-symmetric]], [[def-hessian-and-euclidean-critical-point]]).",
+        "strategy": "Apply Fermat's theorem along the lines t->q_0+th for the vanishing gradient, and the second-order Taylor expansion with the Peano remainder for the semidefiniteness; no strictness is assumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.7 (fixed points correspond to extremal points of the potential U), printed page 204",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (equilibria and the second-order Taylor expansion of the potential), printed pages 37-40",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-quadratic-mode-decomposition",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Decoupling of the constant-coefficient quadratic system $Mq''+Kq=0$ into normal modes, with the zero-mode and energy identities",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "lem-cm-positive-definite-matrix-square-roots",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-self-adjoint-and-normal-endomorphism",
+          "thm-sine-and-cosine-derivatives",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "lem-cm-positive-definite-matrix-square-roots": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $M\\in M_n(\\mathbb R)$ be symmetric positive definite and let $K\\in M_n(\\mathbb R)$ be symmetric and non-negative, that is $v^{\\mathsf T}Kv\\ge0$ for all $v\\in\\mathbb R^n$. Let $M^{1/2}$, $M^{-1/2}$ be the square roots of [[lem-cm-positive-definite-matrix-square-roots]] and let\n\n$$S:=M^{-1/2}KM^{-1/2}.$$\n\nBy the real spectral theorem choose an orthogonal matrix $O$ and a diagonal matrix $\\Lambda=\\operatorname{diag}(\\lambda_1,\\dots,\\lambda_n)$ with $S=O\\Lambda O^{\\mathsf T}$ and $\\lambda_i\\ge0$ for all $i$.\n\nFor a $C^2$ curve $q:I\\to\\mathbb R^n$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $0\\in I$, put $z:=O^{\\mathsf T}M^{1/2}q$. Then:\n\n1. $q$ satisfies the quadratic system $Mq''+Kq=0$ on $I$ if and only if $z$ satisfies the decoupled system\n\n$$z_i''+\\lambda_iz_i=0\\qquad(1\\le i\\le n)$$\n\non $I$;\n2. for every $i$ the solutions of the scalar equation in clause 1 on an interval containing $0$, with prescribed initial data, are exactly as follows:\n\n$$z_i(t)=a_i\\cos(\\omega_it)+b_i\\sin(\\omega_it)\\quad\\text{with }\\omega_i:=\\sqrt{\\lambda_i}>0\\ \\text{when }\\lambda_i>0,$$\n\nequivalently $z_i(t)=\\operatorname{Re}(C_ie^{i\\omega_it})$ with $C_i=a_i-ib_i\\in\\mathbb C$, and\n\n$$z_i(t)=a_i+b_it\\qquad\\text{when }\\lambda_i=0;$$\n\nthe coefficients are $a_i=z_i(0)$, $b_i=z_i'(0)/\\omega_i$ for $\\lambda_i>0$ and $b_i=z_i'(0)$ for $\\lambda_i=0$, so the displayed families cover every initial datum and are the complete solution sets for the first-order system $\\bigl(z_i,z_i'\\bigr)'=(z_i',-\\lambda_iz_i)$;\n3. consequently every solution of $Mq''+Kq=0$ is $q=M^{-1/2}Oz$ for a unique choice of the modal solutions of clause 2, and the correspondence between initial data $(q(0),q'(0))\\in\\mathbb R^{2n}$ and the coefficient tuples $(a_i,b_i)$ is a bijection;\n4. for every solution the modal energies $E_i:=\\tfrac12\\bigl(z_i'^2+\\lambda_iz_i^2\\bigr)$ are constant on $I$, and so are\n\n$$\\tfrac12\\dot q^{\\mathsf T}M\\dot q+\\tfrac12q^{\\mathsf T}Kq=\\tfrac12|z'|_2^2+\\tfrac12\\sum_{i=1}^n\\lambda_iz_i^2=\\sum_{i=1}^nE_i .$$",
+        "strategy": "Transform the system by M^{-1/2} and the orthogonal diagonalisation of S, solve the decoupled scalar equations with a uniqueness argument, and verify the modal-energy identities by direct differentiation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.79): decoupling M q'' + W q = 0 by V M^{-1/2} W M^{-1/2} and the mode energies",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes and the mode frequencies), printed pages 40-45",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-energy-stability-of-a-strict-minimum",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "A strict local minimum of the potential gives a Lyapunov stable equilibrium of the mechanical system, by energy conservation",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "lem-cm-energy-conservation-for-the-mechanical-system",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "def-locally-lipschitz-in-the-state-variable",
+          "lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "def-metric-ball",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-additivity-over-subintervals",
+          "def-euclidean-inner-product",
+          "thm-intermediate-value"
+        ],
+        "dependency_roles": {
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "lem-cm-energy-conservation-for-the-mechanical-system": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "cor-inverse-matrix-by-adjugate": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, let $q_0\\in\\Omega$ with $\\nabla U(q_0)=0$, and suppose $q_0$ is a **strict local minimum** of $U$: there is $r_0>0$ with $\\overline B(q_0,r_0)\\subseteq\\Omega$ and\n\n$$U(q)>U(q_0)\\qquad(0<\\|q-q_0\\|_2<r_0).$$\n\nLet $G$ be the mechanical vector field of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]] on $\\Omega\\times\\mathbb R^n$, with energy $E(q,v)=\\tfrac12v^{\\mathsf T}M(q)v+U(q)$. Then $(q_0,0)$ is a Lyapunov stable equilibrium of $(q',v')=G(q,v)$ in the sense of [[def-cm-equilibrium-and-lyapunov-stability]]: for every $\\varepsilon>0$ with $\\overline B((q_0,0),\\varepsilon)\\subseteq\\Omega\\times\\mathbb R^n$ there is $\\delta>0$ such that every maximal solution $(q,v)$ with $\\|(q(0),v(0))-(q_0,0)\\|_2<\\delta$ is defined for all $t\\ge0$ and satisfies\n\n$$\\|(q(t),v(t))-(q_0,0)\\|_2<\\varepsilon\\qquad(t\\ge0).$$\n\nNo asymptotic stability is asserted.",
+        "strategy": "Use exact energy conservation: E-E_0 has a positive minimum on the sphere of radius epsilon, continuity of E gives a delta, and the energy barrier forbids a first exit; compact continuation then gives forward existence for all time.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.7, Theorem 6.16: a fixed point of Newton's equation is stable if the potential has a local minimum there",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (stability of equilibria from the potential), printed pages 37-39",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Linearisation of the mechanical system at an equilibrium: M(q_0) xi'' + D²U(q_0) xi = 0, and the small-oscillation quadratic model",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "lem-cm-strict-minimum-has-positive-semidefinite-hessian",
+          "thm-cm-quadratic-mode-decomposition",
+          "cor-hessian-is-symmetric",
+          "def-hessian-and-euclidean-critical-point",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "cor-inverse-matrix-by-adjugate",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "lem-cm-strict-minimum-has-positive-semidefinite-hessian": "mathematical-premise",
+          "thm-cm-quadratic-mode-decomposition": "mathematical-premise",
+          "cor-hessian-is-symmetric": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "cor-inverse-matrix-by-adjugate": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let $M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite matrices, let $U:\\Omega\\to\\mathbb R$ be $C^2$, and let $q_0\\in\\Omega$ be a mechanical equilibrium, that is $\\nabla U(q_0)=0$ ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]). Let $G$ be the mechanical vector field on $\\Omega\\times\\mathbb R^n$. Then:\n\n1. $G$ is totally differentiable at $(q_0,0)$ ([[def-total-derivative-in-euclidean-space]]) and, writing $D^2U(q_0)$ for the Hessian matrix ([[def-hessian-and-euclidean-critical-point]]),\n\n$$DG(q_0,0)(\\delta q,\\delta v)=\\Bigl(\\delta v,\\ -M(q_0)^{-1}D^2U(q_0)\\,\\delta q\\Bigr)\\qquad(\\delta q,\\delta v\\in\\mathbb R^n);$$\n\n2. consequently the linearised equation at the equilibrium is\n\n$$\\xi''=-M(q_0)^{-1}D^2U(q_0)\\,\\xi,\\qquad\\text{equivalently}\\qquad M(q_0)\\xi''+D^2U(q_0)\\,\\xi=0,$$\n\na constant-coefficient system whose mass matrix $M(q_0)$ is symmetric positive definite and whose stiffness matrix $D^2U(q_0)$ is symmetric ([[cor-hessian-is-symmetric]]);\n3. if in addition $q_0$ is a strict local minimum of $U$, then $K:=D^2U(q_0)$ is non-negative, so the hypotheses of [[thm-cm-quadratic-mode-decomposition]] are satisfied by $M(q_0)$ and $K$, and the linearised system is exactly the constant-coefficient quadratic system of that theorem with mass matrix $M(q_0)$ and stiffness $K$; its modes are the normal modes of the linearisation.",
+        "strategy": "Differentiate the explicit components of the field at the equilibrium, using that the v-dependent terms are quadratic in v and that the gradient of U vanishes, and identify the Hessian of U as the stiffness; restrict the quadratic-mode theorem to the strict-minimum case.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.77): linearisation of the potential at a critical point, M q'' + W q = 0 with W the Hessian",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6, equations (2.113)-(2.116): expansion of the equation of motion about an equilibrium",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-cm-scope-of-energy-stability-and-quadratic-modes",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope of the quadratic-mode and energy-stability results: exact quadratic model versus linearisation approximation",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-scope-remark; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-quadratic-mode-decomposition",
+          "thm-cm-energy-stability-of-a-strict-minimum",
+          "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart"
+        ],
+        "dependency_roles": {
+          "thm-cm-quadratic-mode-decomposition": "mathematical-premise",
+          "thm-cm-energy-stability-of-a-strict-minimum": "mathematical-premise",
+          "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "The three results of this group establish different, and differently qualified, statements.\n\n1. [[thm-cm-quadratic-mode-decomposition]] is an exact theorem about the constant-coefficient linear system $Mq''+Kq=0$ with $M$ symmetric positive definite and $K$ symmetric non-negative: it diagonalises the system, gives all solutions and the modal energies. It is not an approximation statement, and it makes no claim about nonlinear systems or about configuration-dependent kinetic metrics.\n\n2. [[prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium]] computes the derivative of the nonlinear mechanical field at an equilibrium. Its linearised equation is the exact first-order Taylor model at that point; replacing the nonlinear system by it is an approximation whose error over a time interval is not estimated by the proposition. A zero eigenvalue $\\lambda_i=0$ of $M(q_0)^{-1/2}D^2U(q_0)M(q_0)^{-1/2}$ corresponds to an affine mode of the linearisation, not to an oscillation, and a negative eigenvalue corresponds to exponential growth of the linearisation.\n\n3. [[thm-cm-energy-stability-of-a-strict-minimum]] is an exact Lyapunov-stability theorem for the nonlinear system at a strict minimum of the potential. It is a statement about the nonlinear field of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]], uses exact energy conservation, and therefore proves stability but not attraction: the theorem does not assert that solutions converge to the equilibrium, and in a conservative model with no dissipation they do not in general. It also does not assert that the linearisation determines the nonlinear stability in non-hyperbolic cases, and it does not require the Hessian to be positive definite.",
+        "strategy": "Separate the exact quadratic model, the linearisation approximation and the nonlinear stability theorem, and state explicitly which conclusions are and are not drawn in each case.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (the small-oscillation approximation and its higher-order terms), printed pages 37-45",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.7 (stability and non-asymptotic character of conservative equilibria), printed pages 203-205",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 90,
+    "id": "cm-math-dynamics-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Dynamics — Examples",
+    "companion": "cm-math-dynamics",
+    "requires": [
+      "cm-math-dynamics",
+      "finite-probability-and-the-probabilistic-method",
+      "the-exponential-function",
+      "the-derivative-and-mean-value-theorems",
+      "cm-math-geometry"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-flow-of-a-linear-system-is-the-matrix-exponential",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The flow and variational equation of a linear system: Phi(t,a)=e^{tA}a",
+        "reference": "expansion-proofs.md#e2",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "lem-cm-local-flow-composition-law",
+          "thm-cm-smooth-dependence-and-the-variational-equation",
+          "def-variational-equation-along-an-ode-solution",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-matrix-product-and-identity-matrix"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "lem-cm-local-flow-composition-law": "mathematical-premise",
+          "thm-cm-smooth-dependence-and-the-variational-equation": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$ and let $A\\in M_n(\\mathbb R)$. Consider the linear autonomous field $F:\\mathbb R^n\\to\\mathbb R^n$, $F(x)=Ax$, with local flow $\\Phi:\\Omega\\to\\mathbb R^n$ ([[def-cm-local-flow-of-an-autonomous-system]]) and exponential series $e^{tA}=\\sum_{m\\ge0}\\frac{t^m}{m!}A^m$ ([[lem-exponential-series-of-a-bounded-operator]]). Then\n\n$$\\Omega=\\mathbb R\\times\\mathbb R^n,\\qquad \\Phi(t,a)=e^{tA}a,$$\n\nthe exponential family satisfies the composition law $e^{(s+t)A}=e^{sA}e^{tA}$, and for every $a$ the derivative of $b\\mapsto\\Phi(t,b)$ at $a$ is $D_a\\Phi(t,a)=e^{tA}$; the variational equation along $t\\mapsto e^{tA}a$,\n\n$$Y'=AY,\\qquad Y(0)=I_n,$$\n\nhas the unique solution $Y(t)=e^{tA}$ on every compact interval ([[def-variational-equation-along-an-ode-solution]], [[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]]).",
+        "strategy": "Verify the explicit exponential solution, its maximality, the flow identities and the variational equation directly from the exponential-series calculus.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 3.2 (the matrix exponential and linear systems), printed pages 62-67, and Section 2.4 (variational equation), printed pages 45-47",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "J. Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.4 (the variational equation for a linear system), printed pages 32-40",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cm-coupled-oscillator-modes",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Two coupled equal masses: mode frequencies sqrt(k/m) and sqrt((k+2c)/m), and the free zero mode when k=0",
+        "reference": "mathematical-prerequisites.md#m7",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-quadratic-mode-decomposition",
+          "lem-cm-positive-definite-matrix-square-roots",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-matrix-product-and-identity-matrix",
+          "thm-sine-and-cosine-derivatives",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "thm-cm-quadratic-mode-decomposition": "mathematical-premise",
+          "lem-cm-positive-definite-matrix-square-roots": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $m>0$, $k\\ge0$ and $c\\ge0$, and consider the constant-coefficient system $Mq''+Kq=0$ on $\\mathbb R^2$ with\n\n$$M=\\begin{pmatrix}m&0\\\\0&m\\end{pmatrix},\\qquad K=\\begin{pmatrix}k+c&-c\\\\-c&k+c\\end{pmatrix}.$$\n\nThen $K$ is symmetric and non-negative, $S=M^{-1/2}KM^{-1/2}=K/m$ has eigenvalues $\\lambda_1=k/m$ with eigenvector $\\frac1{\\sqrt2}(1,1)$ and $\\lambda_2=(k+2c)/m$ with eigenvector $\\frac1{\\sqrt2}(1,-1)$, and the general solution is the sum of the modal solutions of [[thm-cm-quadratic-mode-decomposition]]:\n\n- if $k>0$ the first mode oscillates with angular frequency $\\omega_1=\\sqrt{k/m}$, while if $k=0$ it is the free affine mode $a_1+b_1t$ along $\\frac1{\\sqrt2}(1,1)$;\n- the second mode oscillates with angular frequency $\\omega_2=\\sqrt{(k+2c)/m}$ whenever $k+2c>0$, and if $k=c=0$ it is also a free affine mode $a_2+b_2t$ along $\\frac1{\\sqrt2}(1,-1)$.\n\nIn particular a zero eigenvalue is not an oscillator but a free mode.",
+        "strategy": "Multiply the explicit matrices, read off the orthonormal eigenvectors, and specialise the quadratic-mode theorem to each sign case of the eigenvalues.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.77)-(8.81): the spring-chain harmonic example and its modes",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes of coupled oscillators), printed pages 40-45",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-planar-harmonic-oscillator-return-map",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The Poincaré return map of the planar isotropic oscillator on the line y=0 is the reflection x->-x",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-metric-ball"
+        ],
+        "dependency_roles": {
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\omega>0$ and let $F(x,y)=(y,-\\omega^2x)$ be the isotropic planar oscillator field on $\\mathbb R^2$, with local flow $\\Phi$ ([[def-cm-local-flow-of-an-autonomous-system]]). Its solutions are\n\n$$\\Phi\\bigl(t,(x,y)\\bigr)=\\Bigl(x\\cos\\omega t+\\frac{y}{\\omega}\\sin\\omega t,\\ -\\omega x\\sin\\omega t+y\\cos\\omega t\\Bigr),$$\n\ndefined for all real $t$. Take the section $\\Sigma=\\{y=0\\}$, the reference point $x_0=(1,0)$ with $h(x,y):=y$, and $t_0:=\\pi/\\omega$, so that $x_1=\\Phi(t_0,x_0)=(-1,0)$. Then $h(x_0)=h(x_1)=0$ and\n\n$$Dh(x_0)F(x_0)=-\\omega^2\\ne0,\\qquad Dh(x_1)F(x_1)=\\omega^2\\ne0,$$\n\nand $\\Phi(s,x_0)$ has second coordinate $-\\omega\\sin(\\omega s)\\ne0$ for $0<s<\\pi/\\omega$, so it avoids the closed section on that interval. Thus the first-return clause of [[prop-cm-first-return-map-is-a-local-c1-diffeomorphism]] applies and produces a local $C^1$ Poincaré map near $x_0$. On the section itself the map and its inverse can be computed exactly: for $(x,0)$ with $x$ near $1$, the return time is $\\tau(x,0)=\\pi/\\omega$ and the return map is\n\n$$P(x,0)=(-x,0),$$\n\nthe reflection in the origin restricted to the section, with inverse $Q(y,0)=(-y,0)$; this is a $C^1$ diffeomorphism between neighbourhoods of $(1,0)$ and $(-1,0)$ in $\\Sigma$.",
+        "strategy": "Write the explicit solution of the oscillator, identify the crossings of the section, and realise the local return map computed by the proposition on the section.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 6.4, Problem 6.14: the Poincare map of the vector field f(x,y)=(-y,x) for the section x>0, y=0",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 4.1 (the harmonic oscillator in phase space), printed pages 75-79",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-bilateral-shift-finite-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Explicit mixing, periodic and sensitivity checks in the bilateral shift",
+        "reference": "expansion-proofs.md#e12",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive",
+          "lem-cm-bilateral-shift-metric-and-sequential-compactness",
+          "def-cm-bilateral-shift-space-and-cylinders",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "def-metric-ball",
+          "def-metric-topology"
+        ],
+        "dependency_roles": {
+          "thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive": "mathematical-premise",
+          "lem-cm-bilateral-shift-metric-and-sequential-compactness": "mathematical-premise",
+          "def-cm-bilateral-shift-space-and-cylinders": "mathematical-premise",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X=\\{0,1\\}^{\\mathbb Z}$ with the metric $d$ and the shift $\\sigma$ of [[def-cm-bilateral-shift-space-and-cylinders]], and let cylinders be written $[w]_{p,q}$.\n\n1. **A metric computation.** Let $x\\in X$ be arbitrary and let $y$ agree with $x$ on the coordinates $-2,\\dots,2$ and differ at coordinate $3$ only. Then $y\\in[x]_{-2,2}$ and $d(x,y)=2^{-3}=1/8$, which is at most $2^{1-2}=1/2$, in accordance with $[x]_{F_m}\\subseteq\\overline B(x,2^{1-m})$.\n2. **A periodic point in a prescribed cylinder.** The word $(1,0,1)$ on the coordinates $-1,0,1$ extends to the $3$-periodic sequence $s$ with $s_{-1}=1$, $s_0=0$, $s_1=1$ and $s_{k+3}=s_k$ for all $k$. Then $s\\in[1,0,1]_{-1,1}$ and $\\sigma^3(s)=s$.\n3. **A sensitivity witness.** For every $x\\in X$ and every $k\\ge1$, let $y$ agree with $x$ except at coordinate $k$, where $y_k=1-x_k$. Then $d(x,y)=2^{-k}$ and $d(\\sigma^k(x),\\sigma^k(y))\\ge1$.\n4. **A mixing computation.** For the cylinders $U=[1,0]_{0,1}$ and $V=[0]_{-1,-1}$, one has $\\sigma^n(U)\\cap V\\ne\\emptyset$ for every $n\\ge2$.",
+        "strategy": "Evaluate the definitions on explicitly displayed sequences and compute the cylinder intersections for the two blocks.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. Ulcigrai, MATH36206/MATHM6206 Topological and Symbolic Dynamics, Sections 2.6-2.7: cylinders, periodic sequences obtained by repeating blocks, and Theorem 2.7.1",
+              "url": "https://m-artigiani.github.io/files/SisDin-Part2.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-jordan-block-dichotomy-computed",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Computed dichotomy constants for a Jordan block and for a diagonal sink-source",
+        "reference": "expansion-proofs.md#e16",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "thm-monotonicity-from-the-derivative",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+          "lem-exponential-series-of-a-bounded-operator",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-exponential-addition-formula",
+          "cor-exponential-reciprocal-and-positivity",
+          "lem-exponential-dominates-one-plus-x",
+          "thm-exponential-limits-and-range",
+          "thm-derivative-of-exponential"
+        ],
+        "dependency_roles": {
+          "thm-monotonicity-from-the-derivative": "mathematical-premise",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism": "mathematical-premise",
+          "lem-exponential-series-of-a-bounded-operator": "mathematical-premise",
+          "lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "thm-exponential-addition-formula": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "lem-exponential-dominates-one-plus-x": "mathematical-premise",
+          "thm-exponential-limits-and-range": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "1. **A non-diagonalisable Jordan block.** For\n\n$$A=\\begin{pmatrix}-1&1\\\\0&-1\\end{pmatrix}$$\n\nthe exponential series gives $e^{tA}=e^{-t}\\begin{pmatrix}1&t\\\\0&1\\end{pmatrix}$; the only eigenvalue is $-1$, so the dichotomy theorem has $E_s=\\mathbb R^2$, $E_u=\\{0\\}$, and the constants $C=1$, $c=1/2$ are admissible: for every $v\\in\\mathbb R^2$ and $t\\ge0$,\n\n$$\\|e^{tA}v\\|_2\\le e^{-t/2}\\|v\\|_2 .$$\n\n2. **A diagonal sink-source.** For $B=\\operatorname{diag}(1/2,-3/2)$ the vectors $e_1,e_2$ are eigenvectors with eigenvalues $1/2$ and $-3/2$, which have nonzero real part, and the dichotomy theorem gives $E_u=\\mathbb R e_1$, $E_s=\\mathbb R e_2$ with admissible constants $C=1$, $c=1/4$: for $t\\ge0$ one has $\\|e^{tB}e_2\\|_2=e^{-3t/2}\\le e^{-t/4}$ and $\\|e^{tB}e_1\\|_2=e^{t/2}\\ge e^{t/4}$, and for $t\\le0$ one has $\\|e^{tB}e_1\\|_2=e^{t/2}\\le e^{t/4}$.",
+        "strategy": "Solve the two linear matrix initial value problems explicitly, identify the spectra and invariant subspaces, and verify the dichotomy estimates with elementary exponential inequalities.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 9.1, Theorem 9.2 and formula (9.4): exponential dichotomy estimates with the polynomial factor for a Jordan block",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "F. Ramponi, Notes on Lyapunov's theorem, Section 3 (the Lyapunov equation solved by the integral of e^{A^T t} e^{A t})",
+              "url": "https://federico-ramponi.unibs.it/docs/lyapunov.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-cm-nonhyperbolic-equilibria-defeat-exponential-conclusions",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A non-hyperbolic equilibrium with no positive eigenvalue can still be unstable: x'=x^3",
+        "reference": "expansion-proofs.md#e16",
+        "design_state": "completed-local-counterexample; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-chain-rule-for-total-derivatives",
+          "def-derivative",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "If $F:\\mathbb R\\to\\mathbb R$ is $C^1$ with $F(0)=0$ and no eigenvalue of $A=DF(0)$ has positive real part, then $0$ is a Lyapunov stable equilibrium of $x'=F(x)$.",
+        "strategy": "Exhibit the explicit blowing-up solution through every small positive initial value and refute the stability clause for every delta.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "F. Ramponi, Notes on Lyapunov's theorem, final page: the counterexamples x' = -x^2 and x' = x^2 with linearisation zero, showing that stability cannot be decided from the linearisation when eigenvalues have zero real part",
+              "url": "https://federico-ramponi.unibs.it/docs/lyapunov.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Problem 6.16 and Section 6.5 (stability and instability of fixed points), printed pages 198-200",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

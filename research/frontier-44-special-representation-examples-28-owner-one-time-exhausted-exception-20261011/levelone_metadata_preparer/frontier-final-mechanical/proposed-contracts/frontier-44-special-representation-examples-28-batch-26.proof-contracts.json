@@ -1,0 +1,1933 @@
+{
+  "version": 1,
+  "scope": [
+    "def-first-row-padding-of-a-partition",
+    "def-kronecker-coefficient-and-internal-tensor-product",
+    "lem-complex-specht-modules-are-self-dual",
+    "def-internal-product-on-symmetric-functions",
+    "def-padded-kronecker-coefficient-sequence",
+    "prop-kronecker-coefficient-is-a-three-character-inner-product",
+    "cex-first-row-padding-before-the-partition-threshold-is-undefined",
+    "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+    "lem-littlewood-internal-product-outer-compatibility",
+    "prop-power-sums-diagonalize-the-internal-product",
+    "lem-kronecker-reduction-lemma",
+    "ex-kronecker-products-for-s3",
+    "thm-row-gap-reduction-and-conditional-k-stability",
+    "rem-no-general-positive-combinatorial-rule-for-kronecker-coefficients-is-known",
+    "cex-row-padding-does-not-preserve-a-kronecker-coefficient-before-stability"
+  ],
+  "contracts": {
+    "def-first-row-padding-of-a-partition": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: for $\\alpha=\\varnothing$ the displayed sequence is $(n)$, a partition of $n$ for every $n\\ge1$, and the convention $\\varnothing[0]:=\\varnothing$ covers $n=0$; the empty case is inside the stated range."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the threshold $|\\alpha|+\\alpha_1$ and the case $n=0$ are both displayed; for nonempty $\\alpha$ the leading entry $n-|\\alpha|$ may be $0$, and then the sequence is declared undefined, which is exactly the below-threshold clause."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: for the singleton $\\alpha=(1)$ the threshold is $2$, so $(1)[2]=(1,1)$ is the first padding; the singleton case is covered by the displayed above-threshold paragraph."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: at $n=|\\alpha|+\\alpha_1$ the padding equals $(\\alpha_1,\\alpha_1,\\alpha_2,\\dots)$, with a repeated first part when $\\alpha$ is nonempty; this degenerate boundary is recorded in the above-threshold paragraph."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the threshold is exact, as the above-threshold and below-threshold paragraphs jointly state, so the endpoint value $n=|\\alpha|+\\alpha_1$ is disposed of explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: $\\alpha[n]$ is a displayed formula in the parts of $\\alpha$; no selection, limit or choice principle occurs, and the item asserts nothing beyond the notation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: above the threshold the displayed sequence is shown to be a partition of $n$ with nonnegative integer entries, which is the forward direction from the size condition to definedness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: below the threshold the sequence is shown to have a negative or nonpositive leading entry, or to fail weak decrease, so $\\alpha[n]$ is undefined; this is the reverse direction of the exact-threshold equivalence."
+        }
+      ]
+    },
+    "def-kronecker-coefficient-and-internal-tensor-product": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: for $n=0$ the only partition is $\\varnothing$, the tensor product is one-dimensional, and the displayed multiplicity formula gives $g(\\varnothing,\\varnothing,\\varnothing)=1$; the empty case is covered by the well-definedness paragraph."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: $g(\\lambda,\\mu,\\nu)=m_\\nu$ is allowed to be any nonnegative integer, and the well-definedness paragraph records that multiplicities may vanish; no positivity is asserted."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the multiplicity-one case is the generic isotypic component, and the well-definedness paragraph computes $\\dim(S^\\lambda\\otimes S^\\mu)_{(S^\\nu)}=m_\\nu\\dim S^\\nu$, which includes $m_\\nu=1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the case of a one-dimensional $S^\\nu$ is included in the same multiplicity formula; no separate treatment is required because the definition is by an isotypic component."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: no interval or limiting parameter occurs; $n$ is an arbitrary nonnegative integer and all three partitions range over the partitions of $n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the well-definedness paragraph uses complex Maschke, the Specht classification and isotypic decomposition, all finite-dimensional representation theory of a finite group, and the item states that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: no biconditional is stated; the display defines $g$ as a multiplicity and the prose only records that the value is independent of the chosen decomposition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No converse direction is stated: the definition does not claim that every nonnegative integer arises as such a multiplicity."
+        }
+      ]
+    },
+    "lem-complex-specht-modules-are-self-dual": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-column-antisymmetrizer-polytabloid-and-specht-module",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 0$, let $\\lambda\\vdash n$, and let $t$ be a $\\lambda$-tableau\n([[def-partition-young-diagram-and-conjugate-partition]],\n[[def-young-tableau-standard-tableau-and-shape]]). Use the left action of\n$S_n$ on tableaux, tabloids, and $M^\\lambda$\n([[def-young-subgroup-tabloid-and-permutation-module]]). For each\n$\\gamma\\in C_t$, let $\\operatorname{sgn}(\\gamma)$ be its inversion sign in\n$S_n$. The order-preserving relabelling\n$\\iota_n:\\{1,\\ldots,n\\}\\to\\{0,\\ldots,n-1\\}$, $i\\mapsto i-1$, carries each\ninversion pair $(i,j)$ bijectively to $(i-1,j-1)$; thus this sign is exactly\nthe published inversion sign on the finite ordinal\n([[def-inversions-inversion-number-and-sign]]). For $n=0$, both groups are\ntrivial and the sign is $1$.\n\nThe **column antisymmetrizer**, **polytabloid**, and **Specht space** are\n$$\\kappa_t:=\\sum_{\\gamma\\in C_t}\\operatorname{sgn}(\\gamma)\\gamma\\quad\\in\\mathbb C[S_n],\\qquad e_t:=\\kappa_t\\cdot\\{t\\}\\quad\\in M^\\lambda,\\qquad S^\\lambda:=\\operatorname{span}_{\\mathbb C}\\{e_s:s\\text{ is a }\\lambda\\text{-tableau}\\}.$$\nThe elements of the sum are in the finite subgroup $C_t$, and each acts by the\ndeclared left action on the tabloid basis, so these are well-defined finite\nexpressions.\n\nFor every tableau, $C_t\\cap R_t=\\{1\\}$: a permutation in both stabilizers\npreserves the row and column of each entry, and each row-column intersection\ncontains at most one node. Thus $\\gamma\\{t\\}$ are distinct as $\\gamma$ ranges\nover $C_t$, and the coefficient of $\\{t\\}$ in $e_t$ is $1$. In particular,\n$e_t\\ne0$. When $n=0$, the empty tableau has $C_t=\\{1\\}$, so\n$\\kappa_t=1$, $e_t=\\{\\varnothing\\}$, and $S^\\varnothing=\\mathbb C$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-young-subgroup-tabloid-and-permutation-module",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 0$ and let $\\lambda=(\\lambda_1,\\dots,\\lambda_k)\\vdash n$ be a partition\nwith Young diagram $[\\lambda]$\n([[def-partition-young-diagram-and-conjugate-partition]]). Throughout, $S_n$\ndenotes the symmetric group of $\\{1,\\dots,n\\}$, with $S_0=\\{1\\}$.\n\n**Standard Young subgroups.** For $1\\le i\\le k$ let\n$$B_i:=\\{\\lambda_1+\\cdots+\\lambda_{i-1}+1,\\ \\lambda_1+\\cdots+\\lambda_{i-1}+2,\\ \\dots,\\ \\lambda_1+\\cdots+\\lambda_i\\}$$\nbe the $i$-th **block** of $\\lambda$. The blocks are consecutive intervals of\nintegers, they are pairwise disjoint, each has $|B_i|=\\lambda_i$, and together\nthey partition $\\{1,\\dots,n\\}$. The **standard Young subgroup** of type\n$\\lambda$ is\n$$S_\\lambda:=\\{\\,\\sigma\\in S_n:\\sigma(B_i)=B_i\\text{ for every }1\\le i\\le k\\,\\}.$$\nThis is a subgroup of $S_n$, namely the direct product\n$S(B_1)\\times\\cdots\\times S(B_k)$ of the symmetric groups of the individual\nblocks, each acting on its block and fixing the remaining entries pointwise;\nas in [[def-row-and-column-stabilizers-of-a-tableau]], the product\ndecomposition is unique because the blocks are pairwise disjoint and cover\n$\\{1,\\dots,n\\}$, so $|S_\\lambda|=\\lambda_1!\\cdots\\lambda_k!$. A **Young\nsubgroup of type $\\lambda$** is a subgroup of $S_n$ conjugate to\n$S_\\lambda$. For $k=0$, that is for $\\lambda=\\varnothing$ and $n=0$, there are\nno blocks and $S_\\varnothing=S_0=\\{1\\}$.\n\n**Row equivalence and tabloids.** Let $t$ and $u$ be $\\lambda$-tableaux\n([[def-young-tableau-standard-tableau-and-shape]]). We say that $t$ and $u$\nare **row equivalent**, and write $t\\sim u$, when they have the same row sets:\nfor every row $i$,\n$$\\{\\,t(i,j):1\\le j\\le\\lambda_i\\,\\}=\\{\\,u(i,j):1\\le j\\le\\lambda_i\\,\\}.$$\nEquivalently, $t\\sim u$ if and only if $u=\\rho\\cdot t$ for some $\\rho\\in R_t$:\nif $u=\\rho\\cdot t$ then $\\rho$ merely permutes the entries inside each row of\n$t$, and conversely, if the row sets agree, then\n$\\rho(t(i,j)):=u(i,j)$ defines a permutation $\\rho$ of $\\{1,\\dots,n\\}$ that\npreserves each row set of $t$, so $\\rho\\in R_t$ and $\\rho\\cdot t=u$. Hence\n$\\sim$ is an equivalence relation on the $\\lambda$-tableaux, and the\nequivalence class\n$$\\{t\\}:=\\{\\,u:u\\sim t\\,\\}=\\{\\,\\rho\\cdot t:\\rho\\in R_t\\,\\}$$\nis the **tabloid** of $t$. We draw $\\{t\\}$ as the diagram $[\\lambda]$ filled\nwith the entries of $t$ and bars between the rows, recording that the order of\nthe entries inside a row is forgotten. A tabloid is **standard** when it\ncontains a standard tableau.\n\n**The permutation module.** Let $\\Omega_\\lambda$ be the finite set of\n$\\lambda$-tabloids. For $\\sigma\\in S_n$ and a tabloid $\\{t\\}$ define\n$$\\sigma\\cdot\\{t\\}:=\\{\\sigma\\cdot t\\}.$$\nThis is well defined: if $t,u$ are $\\lambda$-tableaux with $t\\sim u$, then the\nrow sets of $\\sigma\\cdot u$ are the $\\sigma$-images of the row sets of $u$,\nwhich are the $\\sigma$-images of the row sets of $t$, and these are exactly\nthe row sets of $\\sigma\\cdot t$\n([[def-young-tableau-standard-tableau-and-shape]]); so\n$\\sigma\\cdot u\\sim\\sigma\\cdot t$ and the tabloids $\\{\\sigma\\cdot u\\}$ and\n$\\{\\sigma\\cdot t\\}$ coincide. Because the action on tableaux is a left action,\nthe induced rule on tabloids satisfies $\\mathrm{id}\\cdot\\{t\\}=\\{t\\}$ and\n$\\sigma\\cdot(\\tau\\cdot\\{t\\})=(\\sigma\\tau)\\cdot\\{t\\}$, so $S_n$ acts on\n$\\Omega_\\lambda$ from the left. The **Young permutation module** attached to\n$\\lambda$ is the complex vector space\n$$M^\\lambda:=\\mathbb C^{(\\Omega_\\lambda)}$$\nwith the tabloids as basis, again written $\\{t\\}$ for the basis vector of the\ntabloid $\\{t\\}$, equipped with the linear extension of the action above:\n$$\\sigma\\cdot\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{t\\}:=\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{\\sigma\\cdot t\\}.$$\nThis is the permutation representation of $S_n$ on the finite set\n$\\Omega_\\lambda$ ([[def-trivial-regular-and-permutation-representations]]),\nso $M^\\lambda$ is a finite-dimensional complex representation of $S_n$.\n\n**The stabilizer of a tabloid.** For every $\\lambda$-tableau $t$ one has\n$$\\sigma\\cdot\\{t\\}=\\{t\\}\\iff \\sigma\\cdot t\\sim t\\iff \\sigma\\in R_t,$$\nso the stabilizer in $S_n$ of the tabloid $\\{t\\}$ is exactly the row\nstabilizer $R_t$ ([[def-row-and-column-stabilizers-of-a-tableau]]). The action\non $\\Omega_\\lambda$ is transitive: given tabloids $\\{t\\}$ and $\\{s\\}$, the\npermutation $\\sigma$ determined by $\\sigma(t(i,j)):=s(i,j)$ satisfies\n$\\sigma\\cdot t=s$, hence $\\sigma\\cdot\\{t\\}=\\{s\\}$. In particular, for the\n**standard row-filled $\\lambda$-tableau** $t_0$, whose row $i$ carries the\nentries of $B_i$ in increasing order, the row sets of $t_0$ are precisely the\nblocks $B_1,\\dots,B_k$, so $R_{t_0}=S_\\lambda$ and the stabilizer of the\ntabloid $\\{t_0\\}$ is the standard Young subgroup $S_\\lambda$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-invariant-inner-product-on-a-tabloid-module",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda\\vdash n$ and write vectors in the finite tabloid basis of\n$M^\\lambda$ as $x=\\sum_T a_TT$ and $y=\\sum_T b_TT$, where $T$ ranges over the\n$\\lambda$-tabloids\n([[def-young-subgroup-tabloid-and-permutation-module]]). Give this complex\npermutation space the Hermitian product\n$$\\langle x,y\\rangle:=\\sum_T\\overline{a_T}b_T,$$\nconjugate-linear in the first argument and linear in the second. This is the\nHermitian version of the tabloid-basis form: Chan defines the symmetric\nbilinear version on a permutation basis (Chapter 9, Definition 9.1 and\nRemark 9.2, printed pp. 31–32), while the complex Hermitian form used here is\nspecified explicitly.\n\nThe tabloid basis is orthonormal. Also\n$\\langle x,x\\rangle=\\sum_T|a_T|^2$, which is positive for every nonzero\n$x$, so the form is positive definite. Each $\\sigma\\in S_n$ permutes the\ntabloid basis, hence\n$\\langle\\sigma x,\\sigma y\\rangle=\\langle x,y\\rangle$. Thus the action is\nunitary and its adjoint is $\\sigma^{-1}$. Extend the group-algebra adjoint\nconjugate-linearly; since $\\operatorname{sgn}(\\gamma)\\in\\{1,-1\\}$ and\n$\\gamma\\mapsto\\gamma^{-1}$ permutes $C_t$,\n$$\\kappa_t^*=\\sum_{\\gamma\\in C_t}\\operatorname{sgn}(\\gamma)\\gamma^{-1}=\\kappa_t.$$\nEvery column antisymmetrizer is therefore self-adjoint.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-specht-module-has-nondegenerate-self-pairing-in-characteristic-zero",
+          "source_section": "Statement",
+          "quote": "For every $\\lambda\\vdash n$, $S^\\lambda$ is nonzero and\n$S^\\lambda\\cap(S^\\lambda)^\\perp=\\{0\\}$ for the positive definite\ninvariant Hermitian tabloid product.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dual-complex-representation",
+          "source_section": "Definition",
+          "quote": "Let $\\rho:G\\to\\operatorname{GL}(V)$ be a finite-dimensional complex\nrepresentation of a group $G$\n([[def-finite-dimensional-representation-of-a-group-over-a-field]]). Its\n**dual** or **contragredient** representation is the representation $\\rho^{*}$\nof $G$ on the algebraic dual space $V^{*}$\n([[def-algebraic-dual-and-linear-functional]]) defined by\n\n$$\\bigl(g\\cdot f\\bigr)(v):=f\\bigl(g^{-1}\\cdot v\\bigr)\\qquad(g\\in G,\\ f\\in V^{*},\\ v\\in V),$$\n\nequivalently $g\\cdot f=f\\circ\\rho(g^{-1})$.\n\nEach operator $\\rho^{*}(g)$ is $\\mathbb C$-linear because $f$ and\n$\\rho(g^{-1})$ are. The inverse appears so that composition is\norder-preserving: writing $g\\cdot f=f\\circ\\rho(g^{-1})$,\n\n$$(gh)\\cdot f=f\\circ\\rho\\bigl((gh)^{-1}\\bigr)=f\\circ\\rho(h^{-1})\\circ\\rho(g^{-1})=g\\cdot(h\\cdot f),$$\n\nand $1\\cdot f=f\\circ\\operatorname{id}_V=f$. Hence $\\rho^{*}$ is a group\nhomomorphism $G\\to\\operatorname{GL}(V^{*})$, a representation of the same\ndegree as $\\rho$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $V$ and $W$ be finite-dimensional complex\nrepresentations of $G$. Then, for every $g\\in G$:\n\n1. $\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$;\n2. $\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$;\n3. $\\chi_{V^{*}}(g)=\\overline{\\chi_V(g)}$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-basic-value-properties-of-a-complex-character",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group, let $V$ be a finite-dimensional complex\nrepresentation of $G$, and let $\\chi=\\chi_V$ be its character. Then, for all\n$g,h\\in G$:\n\n1. $\\chi(1)=\\dim V$;\n2. $\\chi(ghg^{-1})=\\chi(h)$, so $\\chi$ is a class function;\n3. $\\chi(g)$ is a sum of $\\dim V$ roots of unity, namely the eigenvalues of\n   $\\rho(g)$ counted with multiplicity;\n4. $|\\chi(g)|\\le\\chi(1)$, with equality if and only if $\\rho(g)$ is a scalar\n   operator;\n5. $\\chi(g^{-1})=\\overline{\\chi(g)}$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Define $b(x,y)=\\sum_Tx_Ty_T$ for $x=\\sum_Tx_TT$ and $y=\\sum_Ty_TT$ in $M^\\lambda$. The expression is a finite sum of products of two complex numbers, so $b$ is a symmetric bilinear form; writing $\\overline{x}=\\sum_T\\overline{x_T}T$ for the coefficientwise conjugate, $b(x,y)=\\sum_Tx_Ty_T=\\sum_T\\overline{\\overline{x_T}}y_T=\\langle\\overline{x},y\\rangle$ by [F2]. If $\\sigma\\in S_n$ permutes the tabloid basis, then the coefficient of $T$ in $\\sigma x$ is $x_{\\sigma^{-1}T}$, so $b(\\sigma x,\\sigma y)=\\sum_Tx_{\\sigma^{-1}T}y_{\\sigma^{-1}T}=\\sum_Tx_Ty_T=b(x,y)$ after reindexing the finite basis. Hence $b$ is $S_n$-invariant.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The Specht module is stable under coefficientwise conjugation: $\\overline{S^\\lambda}=S^\\lambda$. Each polytabloid is a finite integer combination of tabloid basis vectors, since $\\kappa_s$ permutes the tabloid basis with signs $\\pm1$, so $\\overline{e_s}=e_s$ by [F1]. For $x=\\sum_sc_se_s\\in S^\\lambda$ one has $\\overline{x}=\\sum_s\\overline{c_s}e_s\\in S^\\lambda$; the conjugation map is an involution of the complex vector space $M^\\lambda$, so applying it twice gives equality.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The form $b$ is nondegenerate on $S^\\lambda$. Let $x\\in S^\\lambda$ with $b(x,y)=0$ for all $y\\in S^\\lambda$. By step 1.1 this says $\\langle\\overline{x},y\\rangle=0$ for all $y\\in S^\\lambda$, so $\\overline{x}\\in(S^\\lambda)^\\perp$. Since $\\overline{x}\\in S^\\lambda$ by step 1.2, [F3] forces $\\overline{x}=0$, hence $x=0$. Conversely, if $x\\ne0$ then $\\overline{x}\\ne0$ and the same identity exhibits some $y\\in S^\\lambda$ with $b(x,y)\\ne0$, because $\\overline{x}\\notin(S^\\lambda)^\\perp$ by [F3] and the orthogonal complement is defined by the vanishing of $\\langle-,y\\rangle$ over $y\\in S^\\lambda$ ([[def-invariant-inner-product-on-a-tabloid-module]]).",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "The map $\\Phi:S^\\lambda\\to(S^\\lambda)^*$, $\\Phi(v)=b(v,-)$, is $\\mathbb C$-linear and $S_n$-equivariant for the dual action of [F4]: for $w\\in S^\\lambda$, $\\Phi(\\sigma v)(w)=b(\\sigma v,w)=b(v,\\sigma^{-1}w)=\\Phi(v)(\\sigma^{-1}w)=(\\sigma\\cdot\\Phi(v))(w)$ by $S_n$-invariance of $b$ from step 1.1. By nondegeneracy from step 2.1 and finite-dimensionality of $S^\\lambda$, $\\Phi$ is injective; since $\\dim_{\\mathbb C}(S^\\lambda)^*=\\dim_{\\mathbb C}S^\\lambda$, it is an isomorphism. Thus $S^\\lambda\\cong(S^\\lambda)^*$ as $\\mathbb C S_n$-modules.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "By step 3.1 the character of $S^\\lambda$ equals the character of its dual, so for every $g\\in S_n$ the dual-character formula [F4] gives $\\chi^\\lambda(g)=\\chi_{(S^\\lambda)^*}(g)=\\overline{\\chi^\\lambda(g)}$; hence $\\chi^\\lambda(g)$ is real. Combining with [F5] gives $\\chi^\\lambda(g^{-1})=\\overline{\\chi^\\lambda(g)}=\\chi^\\lambda(g)$ for every $g\\in S_n$. Every irreducible complex character of $S_n$ is a Specht character $\\chi^\\lambda$ by [[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]], so all of them are real-valued. [F4, F5, step 3.1, algebra] ∎\n\nNo form of the Axiom of Choice is used: the tabloid form, coefficientwise conjugation and the character comparison are finite-dimensional over $\\mathbb C$.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F4",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: the lemma is stated for every $n\\ge0$ and $\\lambda\\vdash n$, so $\\lambda=\\varnothing$ at $n=0$ is inside the quantified claim; there $S^\\varnothing$ is one-dimensional and the conclusion is immediate."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: an element $x$ with $b(x,-)=0$ is proved to satisfy $x=0$, which is precisely the zero case of nondegeneracy of the form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: at $g=1$ the conclusion is the identity case $\\chi^\\lambda(1)=\\overline{\\chi^\\lambda(1)}$, and $\\chi^\\lambda(1)=\\dim S^\\lambda$ is a positive integer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the possibly degenerate case $S^\\lambda\\cap(S^\\lambda)^\\perp\\ne\\{0\\}$ is excluded by $S^\\lambda\\cap(S^\\lambda)^\\perp=\\{0\\}$ from [F3], so the form is nondegenerate on $S^\\lambda$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: no interval or limiting parameter occurs; the argument is finite-dimensional for each fixed $n$ and uses no specialization."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-4.1: the form and the isomorphism $S^\\lambda\\to(S^\\lambda)^*$ are constructed explicitly from finite sums, and the item states that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the item proves the existence of the invariant form and the resulting isomorphism; it states no biconditional to be split into directions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is claimed: self-duality is proved, not characterized."
+        }
+      ]
+    },
+    "def-internal-product-on-symmetric-functions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: in degree $0$ the isomorphism $\\operatorname{ch}:R(S_0)\\to\\Lambda^0$ has the trivial character as unit, so $f*g$ is defined for $f,g\\in\\Lambda^0$ and equals their ordinary product there."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: for $m\\ne n$ the product is set to $0$ by the displayed case distinction, so products of unequal degree are disposed of by definition rather than left undefined."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the degreewise unit is $h_n=s_{(n)}$ in every degree $n$, and the item proves explicitly that $\\Lambda$ has no global unit for $*$; the unit case is recorded together with that failure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the case of a class function that is identically zero is included, since the pointwise product of class functions is computed bilinearly and lands in the integral span of characters."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the product is degree-preserving and no interval endpoint occurs; the degreewise convention covers all degrees $m,n\\ge0$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the transport goes through the choice-free Frobenius characteristic isomorphism and finite-dimensional representation theory of finite groups, as the closing sentence states."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: the product is introduced by a case display for $m=n$ and $m\\ne n$; no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "No converse direction belongs to the definition of the product."
+        }
+      ]
+    },
+    "def-padded-kronecker-coefficient-sequence": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: when $\\alpha=\\beta=\\gamma=\\varnothing$ the thresholds are $0$ and $g_0(\\varnothing,\\varnothing,\\varnothing)=g(\\varnothing,\\varnothing,\\varnothing)=1$; the empty partitions lie in the common domain from $n=0$ on."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: the first part of the empty partition is read as $0$ in the threshold maximum, and for $n$ below the maximum the expression is left undefined rather than assigned zero; the item says so explicitly."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: if two of the three partitions are empty and the third is $(1)$, the threshold is $1$ and $g_1$ is the ordinary coefficient $g((1),(1),(1))=1$; the singleton case is inside the domain."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: the domain starts exactly at $n_0$, the maximum of the three thresholds; at that boundary the padded families may have repeated first parts, which the definition admits without further claim."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: the domain is the closed range $n\\ge n_0$, and the definition explicitly records that for $n<n_0$ the expression is undefined; the endpoint $n_0$ is included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: the sequence is evaluated by the already defined Kronecker coefficient on displayed padded partitions; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: for $n\\ge n_0$ all three padded sequences are shown to be partitions of $n$, which is the forward direction from the domain condition to definedness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: for $n<n_0$ at least one padded sequence is shown not to be a partition, so the expression is left undefined; this is the reverse direction of the exact-domain statement."
+        }
+      ]
+    },
+    "prop-kronecker-coefficient-is-a-three-character-inner-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kronecker-coefficient-and-internal-tensor-product",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and work over $\\mathbb C$. Let $\\lambda,\\mu\\vdash n$ be\npartitions of $n$\n([[def-partition-young-diagram-and-conjugate-partition]]), and let\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ be the tensor product of their complex\nSpecht modules, a finite-dimensional complex $S_n$-module\n([[def-tensor-product-of-complex-representations]],\n[[def-column-antisymmetrizer-polytabloid-and-specht-module]]). The\n**Kronecker coefficient** $g(\\lambda,\\mu,\\nu)$ of a third partition\n$\\nu\\vdash n$ is the multiplicity of $S^\\nu$ in this tensor product:\n\n$$g(\\lambda,\\mu,\\nu):=\\frac{\\dim_{\\mathbb C}\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}}{\\dim_{\\mathbb C}S^\\nu},$$\n\nwhere $\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}$ is the isotypic\ncomponent of type $S^\\nu$\n([[def-isotypic-component-of-a-completely-reducible-representation]]).\n\n**Well-definedness.** The module $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is\nfinite-dimensional, and $\\operatorname{char}\\mathbb C=0$ does not divide the\norder of the finite group $S_n$, so complex Maschke's theorem gives complete\nreducibility\n([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]],\n[[cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]],\n[[def-completely-reducible-representation]]). The complex Specht modules\n$S^\\nu$, $\\nu\\vdash n$, are a complete list of pairwise inequivalent\nirreducible $S_n$-modules\n([[thm-complex-specht-modules-are-irreducible]],\n[[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]],\n[[cor-distinct-specht-modules-are-inequivalent]]). Consequently a decomposition\ninto irreducibles has the form\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\cong\\bigoplus_{\\nu\\vdash n}m_\\nu S^\\nu$\nwith nonnegative integer multiplicities $m_\\nu$, and the isotypic component of\ntype $S^\\nu$ is the direct sum of exactly the $m_\\nu$ copies of $S^\\nu$\nappearing in any such decomposition; in particular\n$\\dim_{\\mathbb C}(S^\\lambda\\otimes_{\\mathbb C}S^\\mu)_{(S^\\nu)}=m_\\nu\\dim_{\\mathbb C}S^\\nu$\nand $\\dim_{\\mathbb C}S^\\nu>0$ because $S^\\nu$ is irreducible. Hence\n$g(\\lambda,\\mu,\\nu)=m_\\nu$ is a nonnegative integer, independent of the chosen\ndecomposition, and $g(\\lambda,\\mu,\\nu)$ is by definition the multiplicity of\n$S^\\nu$ in $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$.\n\n**The internal product.** For partitions $\\lambda,\\mu\\vdash n$ call\n$$(\\lambda,\\mu)\\longmapsto S^\\lambda\\otimes_{\\mathbb C}S^\\mu$$\nthe **internal (Kronecker) product** of the $S_n$-representations $S^\\lambda$\nand $S^\\mu$. Unlike the outer induction product\n$\\operatorname{Ind}_{S_a\\times S_b}^{S_{a+b}}(S^\\alpha\\boxtimes S^\\beta)$ of\n[[thm-outer-littlewood-richardson-rule]], which takes a pair of modules of\ndegrees $a$ and $b$ to a module of degree $a+b$, the internal product keeps the\nrank: both inputs and the output are $S_n$-modules of the same degree $n$. The\ntwo operations are different constructions on different data; the outer product\nis mentioned here only for contrast and is not used in this definition.\n\nNo form of the Axiom of Choice is used: the tensor product, Maschke's theorem,\nthe Specht classification and the isotypic decomposition are finite-dimensional\ncomplex representation theory of a finite group.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $V$ and $W$ be finite-dimensional complex\nrepresentations of $G$. Then, for every $g\\in G$:\n\n1. $\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$;\n2. $\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$;\n3. $\\chi_{V^{*}}(g)=\\overline{\\chi_V(g)}$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group, let $V$ be a finite-dimensional complex\nrepresentation of $G$. Choose representatives $V_1,\\dots,V_r$ of the\nirreducible representations, write $\\chi_j:=\\chi_{V_j}$, and write\n$V\\cong\\bigoplus_{j=1}^{r}m_jV_j$. Then the multiplicity of $V_i$ in $V$ is\n\n$$m_i=\\langle\\chi_V,\\chi_i\\rangle.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-standard-inner-product-on-complex-class-functions",
+          "source_section": "Definition",
+          "quote": "For two class functions $\\varphi,\\psi\\in\\mathrm{cf}(G)$\n([[def-class-function-and-the-space-of-complex-class-functions]]), define\n\n$$\\langle\\varphi,\\psi\\rangle:=\\frac{1}{|G|}\\sum_{g\\in G}\\varphi(g)\\,\\overline{\\psi(g)},$$\n\nthe finite sum being that of\n([[def-finite-sum-in-a-commutative-monoid]]) for the additive commutative\nmonoid of $\\mathbb C$. This is the standard Hermitian form on\nthe complex vector space of class functions.\n\nThis assignment is an inner product in the exact sense of the published\ndefinition ([[def-inner-product-space]]), with the inner product linear in the\nfirst argument. Linearity in the first slot is immediate from the pointwise\nvector-space structure of $\\mathrm{cf}(G)$ and linearity of the finite sum. The\nconjugate-symmetry clause holds because conjugation\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]) is an involution:\n$\\langle\\psi,\\varphi\\rangle=\\frac1{|G|}\\sum_g\\psi(g)\\overline{\\varphi(g)}\n=\\overline{\\frac1{|G|}\\sum_g\\varphi(g)\\overline{\\psi(g)}}\n=\\overline{\\langle\\varphi,\\psi\\rangle}$. For definiteness,\n$\\langle\\varphi,\\varphi\\rangle=\\frac1{|G|}\\sum_g|\\varphi(g)|^2$ is a sum of\nnonnegative real numbers, hence nonnegative real; it is $0$ exactly when every\nterm $|\\varphi(g)|^2$ is $0$, and since $|z|=0$ holds only for $z=0$ in\n$\\mathbb C$, that says exactly $\\varphi=0$ as a function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-specht-modules-are-self-dual",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$ and $\\lambda\\vdash n$ the complex Specht module $S^\\lambda$\ncarries a nondegenerate symmetric $S_n$-invariant bilinear form\n$$b(x,y)=\\sum_T x_Ty_T$$\ngiven by the coefficientwise product in the tabloid basis, so\n$v\\mapsto b(v,-)$ is an isomorphism of $\\mathbb C S_n$-modules\n$S^\\lambda\\to(S^\\lambda)^*$; equivalently $S^\\lambda$ is self-dual.\nConsequently $\\chi^\\lambda(g^{-1})=\\chi^\\lambda(g)$ for every $g\\in S_n$, that\nis, every irreducible character of $S_n$ is real-valued.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For every $\\sigma\\in S_n$ the tensor-product character is $\\chi_{S^\\lambda\\otimes_{\\mathbb C}S^\\mu}(\\sigma)=\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)$ by [F2], so the character of $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is the pointwise product $\\chi^\\lambda\\chi^\\mu$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "By [F1] the module $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is completely reducible with irreducible decomposition $\\bigoplus_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)S^\\nu$; applying [F3] to this decomposition and using step 1.1 gives $g(\\lambda,\\mu,\\nu)=\\langle\\chi^\\lambda\\chi^\\mu,\\chi^\\nu\\rangle$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By definition [F4] the inner product is $\\langle\\chi^\\lambda\\chi^\\mu,\\chi^\\nu\\rangle=\\frac1{n!}\\sum_{\\sigma\\in S_n}\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\overline{\\chi^\\nu(\\sigma)}$; by real-valuedness [F5] the factor $\\overline{\\chi^\\nu(\\sigma)}$ equals $\\chi^\\nu(\\sigma)$, so the average of the plain triple product is displayed. Combining with step 2.1 gives $g(\\lambda,\\mu,\\nu)=\\frac1{n!}\\sum_{\\sigma\\in S_n}\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma)$. [F4, F5, step 2.1, algebra] ∎\n\nNo form of the Axiom of Choice is used: this is finite-dimensional complex character theory of a finite group.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1: for $n=0$ and $\\lambda=\\mu=\\nu=\\varnothing$ the average is $\\frac1{0!}\\chi^\\varnothing(1)^3=1$, matching $g(\\varnothing,\\varnothing,\\varnothing)=1$; the empty case is covered by the same computation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the identity is an equality of multiplicities and holds also when $g(\\lambda,\\mu,\\nu)=0$, since [F1] gives the multiplicity and [F3] the inner product with no positivity assumption."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 at $\\sigma=1$: $\\chi_{S^\\lambda\\otimes S^\\mu}(1)=\\chi^\\lambda(1)\\chi^\\mu(1)$, the identity case of the tensor-product character formula."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement: the formula is an identity for every triple of partitions of a common $n$, including repeated arguments; no nondegeneracy hypothesis is needed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: no interval or limiting parameter occurs; the average is a finite sum over $S_n$ for an arbitrary nonnegative integer $n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-3.1: the proof uses the finite character average and the finite-dimensional multiplicity formula, and the closing sentence states that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the displayed statement is an equality of a coefficient with an inner product; no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is claimed; the proposition evaluates $g$, it does not characterize the values $g$ can take."
+        }
+      ]
+    },
+    "cex-first-row-padding-before-the-partition-threshold-is-undefined": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-first-row-padding-of-a-partition",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha=(\\alpha_1,\\dots,\\alpha_k)$ be a partition with $|\\alpha|=\\alpha_1+\\cdots+\\alpha_k$\n([[def-partition-young-diagram-and-conjugate-partition]]), and let $n\\ge0$ be\nan integer. Whenever\n\n$$n\\;\\ge\\;|\\alpha|+\\alpha_1,$$\n\ndefine the **first-row padding** of $\\alpha$ to size $n$ to be\n$$\\alpha[n]:=\\bigl(n-|\\alpha|,\\ \\alpha_1,\\ \\alpha_2,\\ \\dots,\\ \\alpha_k\\bigr).$$\n\nThe threshold is exact.\n\n**Above the threshold.** Suppose $n\\ge|\\alpha|+\\alpha_1$. Then\n$n-|\\alpha|\\ge\\alpha_1\\ge0$, so every entry of the displayed sequence is a\nnonnegative integer, the entries sum to $(n-|\\alpha|)+|\\alpha|=n$, and the\nsequence is weakly decreasing because $n-|\\alpha|\\ge\\alpha_1$ and $\\alpha$ is\nweakly decreasing ([[def-partition-young-diagram-and-conjugate-partition]]).\nIf $\\alpha$ is nonempty then $\\alpha_1\\ge1$, hence $n-|\\alpha|\\ge1$ and the\ndisplayed sequence is a partition of $n$ with positive parts. If\n$\\alpha=\\varnothing$ then the displayed sequence is $(n)$; this is a partition\nof $n$ for every $n\\ge1$, while for $n=0$ one takes $\\varnothing[0]:=\\varnothing$,\nthe unique partition of $0$. Thus the padding is defined and is a partition of\n$n$ on the whole displayed range.\n\n**Below the threshold.** If $\\alpha$ is nonempty and $n<|\\alpha|+\\alpha_1$,\nthen $n-|\\alpha|<\\alpha_1$; if also $n\\ge|\\alpha|$ the leading entry is\nnonnegative but smaller than the second entry $\\alpha_1$, and if $n<|\\alpha|$\nit is negative. In both cases the displayed sequence is not a partition, so\n$\\alpha[n]$ is left undefined. The threshold $|\\alpha|+\\alpha_1$ is therefore\nthe exact size at which the padded family begins: at\n$n=|\\alpha|+\\alpha_1$ the padding equals $(\\alpha_1,\\alpha_1,\\alpha_2,\\dots)$,\nwhich is a partition with a repeated first part when $\\alpha$ is nonempty.\n\n**Neutrality of the notation.** This definition records a family of partitions;\nit asserts no constancy of any quantity along the family and no stability\nproperty. The same notation is used by the FI-module and\nrepresentation-stability developments, where the padding threshold reappears as\nthe generation degree of the family under consideration.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $n=3$ the displayed sequence is $(3-3,2,1)=(0,2,1)$. Its leading entry $0$ is not a positive integer and $0<2$ shows that the sequence is not weakly decreasing, so by [F2] it is not a partition of $3$, although $3=|\\alpha|$ and hence $n\\ge|\\alpha|$ holds.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For $n=4$ the displayed sequence is $(4-3,2,1)=(1,2,1)$. Its entries are positive and sum to $4$, but $1<2$, so it is not weakly decreasing and by [F2] it is not a partition of $4$, although $4\\ge|\\alpha|$ holds.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "For $n=5$, which is the threshold $|\\alpha|+\\alpha_1$ computed in [F3], the displayed sequence is $(5-3,2,1)=(2,2,1)$: the entries are positive, weakly decreasing and sum to $5$, so it is a partition of $5$. By [F1] the padding $\\alpha[5]=(2,2,1)$ is defined, and by step 1.1 and step 1.2 it is the first member of the family; the threshold is therefore exact.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Consequently the refuted claim fails at $n=3$ and $n=4$: the size condition $n\\ge|\\alpha|$ is not enough, and the padded family of $\\alpha=(2,1)$ is a family of partitions only from $n=5$ on. Any padded Kronecker coefficient $g_n(\\alpha,\\beta,\\gamma)$ with $\\alpha=(2,1)$ and $n<5$ is likewise undefined, because one of its three entries is not a partition.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the witness is the nonempty partition $(2,1)$ and the sizes $n=3,4,5$; the empty partition is not part of the refutation, so no empty case arises."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: the leading entry $0$ of $\\alpha[3]=(0,2,1)$ is the zero case that makes the displayed sequence fail to be a partition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: the values around the threshold are evaluated, including $n=4$ with leading entry $1$ (failing weak decrease) and $n=5$ with $\\alpha[5]=(2,2,1)$; the unit-size boundary is covered."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: at the threshold the padding has a repeated first part, $\\alpha[5]=(2,2,1)$, the degenerate boundary of first-row padding."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: the threshold is shown to be exact, with $n=4$ failing and $n=5$ succeeding; this is exactly the endpoint claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-3.1: finitely many displayed sequences are checked; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement refuted: the universally quantified forward implication size condition $\\Rightarrow$ definedness is refuted by the explicit witnesses $n=3$ and $n=4$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is at issue: the item exhibits two failures of the claimed implication and does not characterize when padding is defined beyond the displayed threshold."
+        }
+      ]
+    },
+    "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kronecker-coefficient-and-internal-tensor-product",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and work over $\\mathbb C$. Let $\\lambda,\\mu\\vdash n$ be\npartitions of $n$\n([[def-partition-young-diagram-and-conjugate-partition]]), and let\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ be the tensor product of their complex\nSpecht modules, a finite-dimensional complex $S_n$-module\n([[def-tensor-product-of-complex-representations]],\n[[def-column-antisymmetrizer-polytabloid-and-specht-module]]). The\n**Kronecker coefficient** $g(\\lambda,\\mu,\\nu)$ of a third partition\n$\\nu\\vdash n$ is the multiplicity of $S^\\nu$ in this tensor product:\n\n$$g(\\lambda,\\mu,\\nu):=\\frac{\\dim_{\\mathbb C}\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}}{\\dim_{\\mathbb C}S^\\nu},$$\n\nwhere $\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}$ is the isotypic\ncomponent of type $S^\\nu$\n([[def-isotypic-component-of-a-completely-reducible-representation]]).\n\n**Well-definedness.** The module $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is\nfinite-dimensional, and $\\operatorname{char}\\mathbb C=0$ does not divide the\norder of the finite group $S_n$, so complex Maschke's theorem gives complete\nreducibility\n([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]],\n[[cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]],\n[[def-completely-reducible-representation]]). The complex Specht modules\n$S^\\nu$, $\\nu\\vdash n$, are a complete list of pairwise inequivalent\nirreducible $S_n$-modules\n([[thm-complex-specht-modules-are-irreducible]],\n[[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]],\n[[cor-distinct-specht-modules-are-inequivalent]]). Consequently a decomposition\ninto irreducibles has the form\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\cong\\bigoplus_{\\nu\\vdash n}m_\\nu S^\\nu$\nwith nonnegative integer multiplicities $m_\\nu$, and the isotypic component of\ntype $S^\\nu$ is the direct sum of exactly the $m_\\nu$ copies of $S^\\nu$\nappearing in any such decomposition; in particular\n$\\dim_{\\mathbb C}(S^\\lambda\\otimes_{\\mathbb C}S^\\mu)_{(S^\\nu)}=m_\\nu\\dim_{\\mathbb C}S^\\nu$\nand $\\dim_{\\mathbb C}S^\\nu>0$ because $S^\\nu$ is irreducible. Hence\n$g(\\lambda,\\mu,\\nu)=m_\\nu$ is a nonnegative integer, independent of the chosen\ndecomposition, and $g(\\lambda,\\mu,\\nu)$ is by definition the multiplicity of\n$S^\\nu$ in $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$.\n\n**The internal product.** For partitions $\\lambda,\\mu\\vdash n$ call\n$$(\\lambda,\\mu)\\longmapsto S^\\lambda\\otimes_{\\mathbb C}S^\\mu$$\nthe **internal (Kronecker) product** of the $S_n$-representations $S^\\lambda$\nand $S^\\mu$. Unlike the outer induction product\n$\\operatorname{Ind}_{S_a\\times S_b}^{S_{a+b}}(S^\\alpha\\boxtimes S^\\beta)$ of\n[[thm-outer-littlewood-richardson-rule]], which takes a pair of modules of\ndegrees $a$ and $b$ to a module of degree $a+b$, the internal product keeps the\nrank: both inputs and the output are $S_n$-modules of the same degree $n$. The\ntwo operations are different constructions on different data; the outer product\nis mentioned here only for contrast and is not used in this definition.\n\nNo form of the Axiom of Choice is used: the tensor product, Maschke's theorem,\nthe Specht classification and the isotypic decomposition are finite-dimensional\ncomplex representation theory of a finite group.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda,\\mu,\\nu\\vdash n$,\n$$g(\\lambda,\\mu,\\nu)=\\bigl\\langle\\chi^\\lambda\\chi^\\mu,\\chi^\\nu\\bigr\\rangle=\\frac1{n!}\\sum_{\\sigma\\in S_n}\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma),$$\nwhere $\\chi^\\lambda\\chi^\\mu$ is the pointwise product of class functions and the\nsum uses the real-valuedness of the irreducible characters, so that no\nconjugation appears on the third factor.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-sign-twist-corresponds-to-the-omega-involution",
+          "source_section": "Statement",
+          "quote": "Let $\\operatorname{sgn}$ be the sign representation of $S_n$ and let $V$ be a\nfinite-dimensional complex representation of $S_n$ with character $\\chi_V$ and\ncharacteristic $F=\\operatorname{ch}(\\chi_V)$. Then\n\n$$\\operatorname{ch}(\\chi_{V\\otimes\\operatorname{sgn}})=\\omega(F),$$\n\nwhere $\\omega$ is the involutive algebra endomorphism of $\\Lambda$ with\n$\\omega(e_r)=h_r$, extended to $\\Lambda_{\\mathbb C}$ by complex linearity. In\nparticular, for every $\\lambda\\vdash n$,\n\n$$\\operatorname{ch}\\bigl(\\chi_{S^\\lambda\\otimes\\operatorname{sgn}}\\bigr)=\\omega(s_\\lambda)=s_{\\lambda'},$$\n\nso $S^\\lambda\\otimes\\operatorname{sgn}\\cong S^{\\lambda'}$ and\n$\\chi^{\\lambda'}(w)=(-1)^{n-\\ell(\\rho)}\\chi^\\lambda(w)$ on elements of cycle\ntype $\\rho$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Claim (a): by [F1], $g(\\lambda,\\mu,\\nu)$ is the multiplicity of an irreducible summand in a completely reducible finite-dimensional module, so it is a nonnegative integer.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Claim (b): by [F2], $g(\\lambda,\\mu,\\nu)$ is the average over $\\sigma\\in S_n$ of the product $\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma)$. Permuting the three arguments permutes the three factors of each summand, and complex multiplication is commutative, so every summand and hence the average is unchanged; this gives all six orderings.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Claim (c): by [F3], $\\chi^{\\lambda'}(\\sigma)=\\operatorname{sgn}(\\sigma)\\chi^\\lambda(\\sigma)$, $\\chi^{\\mu'}(\\sigma)=\\operatorname{sgn}(\\sigma)\\chi^\\mu(\\sigma)$ and $\\chi^{\\nu'}(\\sigma)=\\operatorname{sgn}(\\sigma)\\chi^\\nu(\\sigma)$ for every $\\sigma\\in S_n$. Substituting the first two of these into the formula [F2] for $g(\\lambda',\\mu',\\nu)$ gives $\\frac1{n!}\\sum_\\sigma\\operatorname{sgn}(\\sigma)^2\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma)=\\frac1{n!}\\sum_\\sigma\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma)=g(\\lambda,\\mu,\\nu)$, since $\\operatorname{sgn}(\\sigma)^2=1$ for every $\\sigma$. The same computation with exactly two of the three substitutions gives $g(\\lambda',\\mu,\\nu')=g(\\lambda,\\mu',\\nu')=g(\\lambda,\\mu,\\nu)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1: for $n=0$ and $\\lambda=\\mu=\\nu=\\varnothing$ all conjugates equal $\\varnothing$, claim (a) gives $g=1\\ge0$, and claims (b), (c) hold; the empty case is inside the quantified statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1: claim (a) says nonnegative integer, so the value $0$ is allowed and no positivity is claimed; the average in step 1.2 may vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 at $\\sigma=1$: $\\operatorname{sgn}(1)^2=1$ and the substitution reduces to the same coefficient, the identity case of the conjugation identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 1.2: repeated arguments and the case $\\lambda=\\mu=\\nu$ are included in the $S_3$ symmetry claim; no distinctness hypothesis is imposed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: no interval or limiting parameter occurs; the symmetries are identities for every triple of partitions of a fixed $n$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1: the proof is a finite character average and a sign computation; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: claims (a)-(c) are properties of $g$ (nonnegativity, symmetry, two-factor conjugation), not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is asserted: the corollary does not claim that $S_3$ and conjugation symmetry force a triple to be the Kronecker data of a fixed product."
+        }
+      ]
+    },
+    "lem-littlewood-internal-product-outer-compatibility": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-outer-littlewood-richardson-rule",
+          "source_section": "Statement",
+          "quote": "Let $\\mu\\vdash m$, $\\nu\\vdash n$, and let $S^\\mu$, $S^\\nu$ be the complex Specht modules ([[def-column-antisymmetrizer-polytabloid-and-specht-module]], [[thm-complex-specht-modules-are-irreducible]]); let $S^\\mu\\boxtimes S^\\nu$ be their external tensor product, a complex $S_m\\times S_n$-module ([[def-tensor-product-of-complex-representations]]). Then, as complex $S_{m+n}$-modules,\n\n$$\\operatorname{Ind}_{S_m\\times S_n}^{S_{m+n}}\\bigl(S^\\mu\\boxtimes S^\\nu\\bigr)\\cong\\bigoplus_{\\lambda\\vdash m+n}\\bigl(S^\\lambda\\bigr)^{\\oplus c^\\lambda_{\\mu\\nu}},$$\n\nwhere $c^\\lambda_{\\mu\\nu}$ is the Littlewood–Richardson coefficient, the number of Littlewood–Richardson tableaux of shape $\\lambda/\\mu$ and content $\\nu$ ([[def-littlewood-richardson-tableau-and-coefficient]]); equivalently, the character $\\chi^\\mu\\circ\\chi^\\nu$ of the induced module satisfies\n\n$$\\operatorname{ch}(\\chi^\\mu\\circ\\chi^\\nu)=s_\\mu s_\\nu=\\sum_{\\lambda\\vdash m+n}c^\\lambda_{\\mu\\nu}s_\\lambda.$$\n\nThe multiplicity of $S^\\lambda$ in the induced module is exactly $c^\\lambda_{\\mu\\nu}$. This is the outer induction product, not the same-rank tensor (Kronecker) product. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-littlewood-richardson-tableau-and-coefficient",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda,\\nu$ be partitions with $[\\lambda]\\subseteq[\\nu]$, and let $\\mu$ be a partition with $|\\nu|=|\\lambda|+|\\mu|$. Use the conventions of [[def-skew-diagram-and-semistandard-skew-tableau]] for the skew diagram $\\nu/\\lambda$ and for semistandard skew tableaux of shape $\\nu/\\lambda$, and those of [[def-semistandard-tableau-and-kostka-number]] for the content of a tableau; recall that entries of a semistandard skew tableau weakly increase along rows and strictly increase down columns ([[def-partition-young-diagram-and-conjugate-partition]] fixes the English row and column coordinates).\n\nThe **reading word** $w(T)$ of a semistandard skew tableau $T$ of shape $\\nu/\\lambda$ is the word obtained by reading the rows of $T$ from right to left, beginning with the top row and proceeding to the bottom row. The word $w(T)=a_1a_2\\cdots a_N$ is a **lattice word** (a lattice permutation) if in every prefix $a_1\\cdots a_p$ and for every $i\\ge1$ the number of letters $i$ in the prefix is at least the number of letters $i+1$; the empty word is a lattice word vacuously.\n\nA **Littlewood--Richardson tableau** (LR tableau) of shape $\\nu/\\lambda$ and content $\\mu$ is a semistandard skew tableau of shape $\\nu/\\lambda$ and content $\\mu$ whose reading word is a lattice word. The **Littlewood--Richardson coefficient** $c^\\nu_{\\lambda\\mu}\\in\\mathbb Z_{\\ge0}$ is the number of LR tableaux of shape $\\nu/\\lambda$ and content $\\mu$; it is $0$ when $[\\lambda]\\not\\subseteq[\\nu]$, when $|\\nu|\\ne|\\lambda|+|\\mu|$, or when no such tableau exists. For $\\mu=\\varnothing$ and $\\nu=\\lambda$ the empty skew tableau is the unique tableau of content $\\varnothing$, its reading word is empty, and hence $c^\\lambda_{\\lambda\\varnothing}=1$; more generally $c^\\lambda_{\\lambda\\mu}=0$ unless $\\mu=\\varnothing$, and $c^\\nu_{\\lambda\\mu}=0$ unless $\\lambda\\subseteq\\nu$ and $|\\nu|=|\\lambda|+|\\mu|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-outer-induction-product-for-symmetric-group-characters",
+          "source_section": "Definition",
+          "quote": "For $m,n\\ge0$, $S_m$ is the symmetric group of $\\{1,\\dots,m\\}$,\nwith $S_0=\\{1\\}$\n([[def-young-subgroup-tabloid-and-permutation-module]]). Identify\n$S_m\\times S_n$ ([[def-external-direct-product-of-groups]]) with the subgroup\nof $S_{m+n}$ preserving each of the two blocks: the first factor acts on\n$\\{1,\\dots,m\\}$ and the second on $\\{m+1,\\dots,m+n\\}$, so that\n$(\\sigma,\\tau)$ acts as $\\sigma$ on the first block and as $\\tau$ on the\nsecond after shifting its labels by $m$. Either block may be empty; its\nsymmetric group is trivial. These actions give an injective homomorphism,\nand every permutation preserving the blocks has a unique pair of restrictions,\nso its image is exactly the stated subgroup. For honest characters $\\chi$ of $S_m$ and $\\psi$ of $S_n$, let\n$\\chi\\boxtimes\\psi$ be the character of $S_m\\times S_n$ on the tensor product\n$V\\otimes_{\\mathbb C}W$ of representations affording $\\chi$ and $\\psi$, with\n$(\\sigma,\\tau)\\cdot(v\\otimes w):=\\sigma v\\otimes\\tau w$, so that\n\n$$(\\chi\\boxtimes\\psi)(\\sigma,\\tau)=\\chi(\\sigma)\\psi(\\tau)$$\n\n([[def-tensor-product-of-complex-representations]],\n[[thm-characters-of-direct-sums-tensor-products-and-duals]]).\n\nEvery virtual character $f\\in R(S_m)$ is an integral combination\n$f=\\sum_ia_i\\chi_i$ of the irreducible characters $\\chi_i$ of $S_m$\n([[def-virtual-character-and-character-ring-of-a-finite-group]]), and the\ncoefficients $a_i$ are unique because the irreducible characters of a finite\ngroup are orthonormal, hence $\\mathbb Z$-linearly independent, in\n$\\mathrm{cf}(S_m)$\n([[thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions]]).\nSo for $f=\\sum_ia_i\\chi_i$ and $g=\\sum_jb_j\\psi_j$ we may set\n\n$$f\\boxtimes g:=\\sum_{i,j}a_ib_j\\,(\\chi_i\\boxtimes\\psi_j)\\in R(S_m\\times S_n),$$\n\nan integral combination of honest characters of $S_m\\times S_n$. Its value at\n$(\\sigma,\\tau)$ is $f(\\sigma)g(\\tau)$ by the displayed character formula,\nand uniqueness of the coefficients makes $f\\boxtimes g$ well defined. The assignment\nis $\\mathbb Z$-bilinear in $(f,g)$. The **outer induction product** is\n\n$$f\\circ g:=\\sum_{i,j}a_ib_j\\,\\operatorname{Ind}_{S_m\\times S_n}^{S_{m+n}}\\bigl(\\chi_i\\boxtimes\\psi_j\\bigr)\\in R(S_{m+n}),$$\n\nthe induction of honest characters in the sense of\n[[def-induced-character-of-a-complex-representation]]. The trivial character\nof $S_0$ is the unit of degree zero. This is the outer product, defined across\ndifferent symmetric groups; the same-rank tensor product $f\\cdot g$ on a single\n$R(S_n)$ is a different operation, and the two are never conflated. No choice\nprinciple is used.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-induced-character-of-a-complex-representation",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group, let $H\\le G$, and let $W$ be a finite-dimensional\ncomplex representation of $H$ with character $\\chi_W$\n([[def-character-of-a-complex-representation]]).\n\nThe **induced character** of $\\chi_W$ is the character of the induced\nrepresentation:\n\n$$ \\operatorname{Ind}_H^G\\chi_W := \\chi_{\\operatorname{Ind}_H^G W}. $$\n\nWhen the representation affording $\\chi_W$ is denoted simply by $W$, one also\nwrites $\\chi_{\\operatorname{Ind}_H^G W}$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-frobenius-reciprocity-for-complex-characters",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group, let $H\\le G$, let $\\chi$ be a complex character of\n$H$, and let $\\psi$ be a complex character of $G$. Then\n\n$$\\langle \\operatorname{Ind}_H^G\\chi,\\psi\\rangle_G = \\langle \\chi,\\operatorname{Res}_H^G\\psi\\rangle_H.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-frobenius-formula-for-induced-characters",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group, let $H\\le G$, and let $\\chi$ be the character of a\nfinite-dimensional complex representation of $H$. Then for every $g\\in G$,\n\n$$ \\operatorname{Ind}_H^G\\chi(g) = \\frac1{|H|} \\sum_{\\substack{x\\in G\\\\x^{-1}gx\\in H}} \\chi(x^{-1}gx). $$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-character-ring-of-a-direct-product-is-the-tensor-product",
+          "source_section": "Statement",
+          "quote": "Let $G,H$ be finite groups. For finite-dimensional complex representations $V$ of $G$ and $W$ of $H$, their **external tensor product** is the representation of $G\\times H$ on $V\\otimes_{\\mathbb C}W$ with\n\n$$\n(g,h)\\cdot(v\\otimes w):=(gv)\\otimes(hw).\n$$\n\nIts character satisfies $\\chi_{V\\boxtimes W}(g,h)=\\chi_V(g)\\chi_W(h)$. Extend this operation $\\mathbb Z$-bilinearly from irreducible characters to $R(G)\\times R(H)$, using the irreducible-character bases. Then:\n\n(i) the induced map $R(G)\\otimes_{\\mathbb Z}R(H)\\to R(G\\times H)$, $\\chi\\otimes\\psi\\mapsto\\chi\\boxtimes\\psi$, is an isomorphism of rings, carries $1\\otimes1$ to the trivial character, and satisfies\n\n$$\n(\\chi\\boxtimes\\psi)(\\chi'\\boxtimes\\psi')=(\\chi\\chi')\\boxtimes(\\psi\\psi')\n$$\n\nfor all $\\chi,\\chi'\\in R(G)$ and $\\psi,\\psi'\\in R(H)$; and\n\n(ii) as $\\chi$ and $\\psi$ range over the irreducible characters, the elements $\\chi\\boxtimes\\psi$ are pairwise distinct and form an orthonormal $\\mathbb Z$-basis of $R(G\\times H)$. In particular, every honest character of $G\\times H$ is a nonnegative integral combination of these external products. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group, let $V$ be a finite-dimensional complex\nrepresentation of $G$. Choose representatives $V_1,\\dots,V_r$ of the\nirreducible representations, write $\\chi_j:=\\chi_{V_j}$, and write\n$V\\cong\\bigoplus_{j=1}^{r}m_jV_j$. Then the multiplicity of $V_i$ in $V$ is\n\n$$m_i=\\langle\\chi_V,\\chi_i\\rangle.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-internal-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "Let $\\operatorname{ch}:R_S\\to\\Lambda$ be the Frobenius characteristic restricted\nto the graded ordinary representation ring of the symmetric groups\n([[def-frobenius-characteristic-map]],\n[[def-graded-ordinary-representation-ring-of-symmetric-groups]]). By\n[[thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism]] it is a\ndegree-preserving $\\mathbb Z$-module isomorphism onto the stable symmetric\nfunction ring $\\Lambda=\\bigoplus_{m\\ge0}\\Lambda^m$, so its restriction\n$\\operatorname{ch}:R(S_m)\\to\\Lambda^m$ is an isomorphism for every $m\\ge0$.\n\nFor $f\\in\\Lambda^m$ and $g\\in\\Lambda^n$ define\n$$f*g:=\\begin{cases}\\operatorname{ch}\\bigl(\\operatorname{ch}^{-1}(f)\\cdot\\operatorname{ch}^{-1}(g)\\bigr),&m=n,\\\\[2pt]0,&m\\ne n,\\end{cases}$$\nwhere $\\cdot$ is the pointwise (internal tensor) product of class functions on\n$S_m$; extend $*$ bilinearly to all of $\\Lambda$. Call $*$ the\n**internal (Kronecker) product** of symmetric functions.\n\n**Well-definedness.** For $m=n$ the class functions $\\operatorname{ch}^{-1}(f)$\nand $\\operatorname{ch}^{-1}(g)$ lie in $R(S_m)$, the integral span of the\nirreducible characters of $S_m$\n([[def-graded-ordinary-representation-ring-of-symmetric-groups]]). The\npointwise product of two honest characters of $S_m$ is again an honest\ncharacter, namely the character of the tensor product of the underlying\nrepresentations ([[thm-characters-of-direct-sums-tensor-products-and-duals]]),\nand products of $\\mathbb Z$-combinations of characters are computed\nbilinearly; hence the pointwise product of two elements of $R(S_m)$ lies in\n$R(S_m)$, and applying the isomorphism $\\operatorname{ch}$ lands in $\\Lambda^m$.\nThe product is therefore well defined and takes $\\Lambda^m\\times\\Lambda^m$ to\n$\\Lambda^m$.\n\n**Basic properties.** The product is bilinear by construction and inherits\ncommutativity and associativity from the pointwise product of class functions.\nIt preserves degrees, in the sense that $\\Lambda^m*\\Lambda^n\\subseteq\\Lambda^m$\nfor $m=n$ and is $0$ for $m\\ne n$. On $\\Lambda^n$ the unit is\n$h_n=s_{(n)}=\\operatorname{ch}(\\text{trivial character of }S_n)$, because the\ntrivial character is the unit for pointwise multiplication on $R(S_n)$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]]\nidentifies $\\operatorname{ch}(\\chi^{(n)})=s_{(n)}=h_n$). The graded direct sum\n$\\Lambda$ has **no global unit** for $*$: if $e\\in\\Lambda$ had finite degree\nsupport and $n$ were a degree with $e_n=0$ while $\\Lambda^n\\ne0$, then\n$(e*h_n)_n=e_n*h_n=0\\ne h_n$, so $e*h_n\\ne h_n$; a global unit would require\n$e_n$ to be a unit of $(\\Lambda^n,*)$ for every $n$. In particular the ordinary\nproduct unit $1\\in\\Lambda^0$ is not a unit for $*$ on the positive degrees.\n\n**Schur expansion.** For partitions $\\lambda,\\mu\\vdash n$, the definition and\nthe Specht character dictionary $\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]])\ngive\n$$s_\\lambda*s_\\mu=\\operatorname{ch}\\bigl(\\chi^\\lambda\\cdot\\chi^\\mu\\bigr)=\\operatorname{ch}\\Bigl(\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\chi^\\nu\\Bigr)=\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\,s_\\nu,$$\nbecause $\\chi^\\lambda\\chi^\\mu$ is the character of\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ and its decomposition has multiplicities\n$g(\\lambda,\\mu,\\nu)$\n([[def-kronecker-coefficient-and-internal-tensor-product]]).\n\nNo form of the Axiom of Choice is used: the transport goes through the\nchoice-free Frobenius characteristic isomorphism and finite-dimensional\nrepresentation theory of finite groups.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$ and every $\\lambda\\vdash n$, let $S^\\lambda$ be the complex\nSpecht module of shape $\\lambda$\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $\\chi^\\lambda$\nits character, an irreducible character of $S_n$\n([[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]]). Then\n\n$$\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n,$$\n\nthe stable Schur function of shape $\\lambda$\n([[def-stable-schur-function-by-bialternants]]). In particular $\\operatorname{ch}$\nmaps the $\\mathbb Z$-basis $\\{\\chi^\\lambda:\\lambda\\vdash n\\}$ of $R(S_n)$ to the\n$\\mathbb Z$-basis $\\{s_\\lambda:\\lambda\\vdash n\\}$ of $\\Lambda^n$, and all values\n$\\chi^\\lambda(\\rho)$ are integers.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-frobenius-characteristic-preserves-outer-products",
+          "source_section": "Statement",
+          "quote": "For all $m,n\\ge0$ and all $f\\in R(S_m)$, $g\\in R(S_n)$,\n\n$$\\operatorname{ch}(f\\circ g)=\\operatorname{ch}(f)\\,\\operatorname{ch}(g)\\qquad\\text{in }\\Lambda_{\\mathbb C}^{m+n},$$\n\nwhere $\\circ$ is the outer induction product of\n[[def-outer-induction-product-for-symmetric-group-characters]] and the\nright-hand side is the algebra product in $\\Lambda_{\\mathbb C}$. If $f$ and\n$g$ are rational-valued, the identity holds in $\\Lambda_{\\mathbb Q}^{m+n}$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-frobenius-characteristic-is-an-isometry",
+          "source_section": "Statement",
+          "quote": "Extend the Hall form on $\\Lambda$ $\\mathbb Q$-bilinearly to\n$\\Lambda_{\\mathbb Q}$ and then sesquilinearly to\n$\\Lambda_{\\mathbb C}=\\mathbb C\\otimes_{\\mathbb Q}\\Lambda_{\\mathbb Q}$, linear\nin the first argument and conjugate-linear in the second, so that\n$\\langle p_\\rho,p_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}z_\\rho$ for all\npartitions $\\rho,\\sigma$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]],\n[[def-hall-inner-product-on-symmetric-functions]]). For all\n$f,g\\in\\mathrm{cf}(S_n)$,\n\n$$\\langle\\operatorname{ch}(f),\\operatorname{ch}(g)\\rangle_H=\\langle f,g\\rangle_{S_n}=\\frac1{n!}\\sum_{w\\in S_n}f(w)\\overline{g(w)}.$$\n\nConsequently $\\operatorname{ch}$ is injective on $\\mathrm{cf}(S_n)$, and\n$\\langle f,f\\rangle_{S_n}=\\sum_{\\rho\\vdash n}|f(\\rho)|^2/z_\\rho\\ge0$ with\nequality if and only if $f=0$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and let $\\mathrm{cf}(S_n)$ be the complex vector space of class\nfunctions on $S_n$\n([[def-class-function-and-the-space-of-complex-class-functions]]). For\n$f\\in\\mathrm{cf}(S_n)$ and a partition $\\rho\\vdash n$ let $f(\\rho)$ denote the\ncommon value of $f$ on permutations of cycle type $\\rho$, which is well defined\nbecause cycle type determines the conjugacy class\n([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]). Let\n\n$$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\n\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$; this is the\norder of the centralizer of an element of cycle type $\\rho$\n([[thm-centralizer-cardinality-from-cycle-type]]), so $z_\\rho$ is a positive\ninteger. The **Frobenius characteristic** of $f$ is\n\n$$\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\in\\Lambda_{\\mathbb C}^n,\\qquad \\Lambda_{\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}\\Lambda .$$\n\nThe sum is finite and well defined because $\\{p_\\rho:\\rho\\vdash n\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^n$\n([[prop-power-sums-form-a-rational-not-integral-stable-basis]]); equivalently\nthe family $\\{p_\\rho/z_\\rho:\\rho\\vdash n\\}$ is a $\\mathbb Q$-basis of\n$\\Lambda_{\\mathbb Q}^n$ and is orthogonal for the Hall form, with\n$\\langle p_\\rho/z_\\rho,p_\\sigma/z_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}/z_\\rho$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]). The codomain is\n$\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class\nfunction the coefficients $f(\\rho)/z_\\rho$ are complex. If all values of $f$\nlie in $\\mathbb Q$, then $\\operatorname{ch}(f)\\in\\Lambda_{\\mathbb Q}^n$; the\ndictionary theorems proved later on this page show that every virtual character\nof $S_n$ is rational-valued, and in fact integral-valued, so that its\ncharacteristic lies in the integral lattice $\\Lambda^n$.\n\nWriting $\\mathrm{cf}_S:=\\bigoplus_{n\\ge0}\\mathrm{cf}(S_n)$, the map\n$\\operatorname{ch}:\\mathrm{cf}_S\\to\\Lambda_{\\mathbb C}$ is defined degreewise by\nthe displayed formula on each $\\mathrm{cf}(S_n)$. It is $\\mathbb C$-linear on\neach summand, because evaluation $f\\mapsto f(\\rho)$ and scalar multiplication\nare linear. Its restriction to the character ring\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ is the Frobenius characteristic dictionary\nstudied in the remaining items of this page. No choice principle is used.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For fixed $\\alpha\\vdash r$, $\\beta\\vdash n-r$ write $\\varphi_{\\alpha\\beta}:=\\chi^\\alpha\\boxtimes\\chi^\\beta$ and $V_{\\alpha\\beta}:=\\operatorname{Ind}_H^{S_n}(S^\\alpha\\boxtimes S^\\beta)$, so that $\\chi_{V_{\\alpha\\beta}}=\\operatorname{Ind}_H^{S_n}\\varphi_{\\alpha\\beta}$ by [F2]. By [F1] the multiplicity of $S^\\lambda$ in $V_{\\alpha\\beta}$ is $c^\\lambda_{\\alpha\\beta}$. By [F5] the multiplicity of $\\varphi_{\\alpha\\beta}$ in $\\operatorname{Res}_H^{S_n}\\chi^\\lambda$ is $\\langle\\operatorname{Res}_H^{S_n}\\chi^\\lambda,\\varphi_{\\alpha\\beta}\\rangle_H$, which by Frobenius reciprocity [F3] equals $\\langle\\operatorname{Ind}_H^{S_n}\\varphi_{\\alpha\\beta},\\chi^\\lambda\\rangle_{S_n}$; by [F5] again this is the multiplicity of $S^\\lambda$ in $V_{\\alpha\\beta}$, namely $c^\\lambda_{\\alpha\\beta}$. Since the $\\varphi_{\\alpha\\beta}$ form a nonnegative integral basis of the honest characters of $H$ by [F5] and $\\operatorname{Res}_H^{S_n}\\chi^\\lambda$ is an honest character, the expansion $\\operatorname{Res}_H^{S_n}\\chi^\\lambda=\\sum_{\\alpha\\vdash r,\\ \\beta\\vdash n-r}c^\\lambda_{\\alpha\\beta}\\,\\varphi_{\\alpha\\beta}$ follows.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Put $\\xi:=\\varphi_{\\tau\\theta}=\\chi^\\tau\\boxtimes\\chi^\\theta$. Multiplying step 1.1 pointwise on $H$ by $\\xi$ and using the value formula [F2] for both factors gives $(\\chi^\\alpha\\boxtimes\\chi^\\beta)(\\sigma,\\rho)(\\chi^\\tau\\boxtimes\\chi^\\theta)(\\sigma,\\rho)=\\chi^\\alpha(\\sigma)\\chi^\\beta(\\rho)\\chi^\\tau(\\sigma)\\chi^\\theta(\\rho)=(\\chi^\\alpha\\chi^\\tau)(\\sigma)(\\chi^\\beta\\chi^\\theta)(\\rho)$, so the product of the two external products is the external product $(\\chi^\\alpha\\chi^\\tau)\\boxtimes(\\chi^\\beta\\chi^\\theta)$; hence $\\operatorname{Res}_H^{S_n}(\\chi^\\lambda)\\cdot\\xi=\\sum_{\\alpha,\\beta}c^\\lambda_{\\alpha\\beta}\\,(\\chi^\\alpha\\chi^\\tau)\\boxtimes(\\chi^\\beta\\chi^\\theta)$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Projection formula: for every $g\\in S_n$, $\\operatorname{Ind}_H^{S_n}(\\operatorname{Res}_H^{S_n}(\\chi^\\lambda)\\cdot\\xi)(g)=\\chi^\\lambda(g)\\,\\operatorname{Ind}_H^{S_n}\\xi(g)$. Indeed, by [F4] the left side is $\\frac1{|H|}\\sum_{x\\in S_n:\\,x^{-1}gx\\in H}\\chi^\\lambda(x^{-1}gx)\\xi(x^{-1}gx)$; the character $\\chi^\\lambda$ is constant on conjugacy classes, so $\\chi^\\lambda(x^{-1}gx)=\\chi^\\lambda(g)$ for every term, and the sum factors as $\\chi^\\lambda(g)\\cdot\\frac1{|H|}\\sum_{x:\\,x^{-1}gx\\in H}\\xi(x^{-1}gx)=\\chi^\\lambda(g)\\,\\operatorname{Ind}_H^{S_n}\\xi(g)$ by [F4] again. Applying the $\\mathbb C$-linear induction operator of [F2] to step 2.1 and using this identity for the left factor gives, as class functions on $S_n$, $\\chi^\\lambda\\cdot(\\chi^\\tau\\circ\\chi^\\theta)=\\sum_{\\alpha,\\beta}c^\\lambda_{\\alpha\\beta}\\,(\\chi^\\alpha\\chi^\\tau)\\circ(\\chi^\\beta\\chi^\\theta)$, since $\\operatorname{Ind}_H^{S_n}\\xi=\\chi^\\tau\\circ\\chi^\\theta$ and $\\operatorname{Ind}_H^{S_n}\\bigl((\\chi^\\alpha\\chi^\\tau)\\boxtimes(\\chi^\\beta\\chi^\\theta)\\bigr)=(\\chi^\\alpha\\chi^\\tau)\\circ(\\chi^\\beta\\chi^\\theta)$ by [F2].",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Translate step 3.1 through $\\operatorname{ch}$. By [F7] and [F6], $\\operatorname{ch}(\\chi^\\tau\\circ\\chi^\\theta)=s_\\tau s_\\theta$, so $\\operatorname{ch}^{-1}(s_\\tau s_\\theta)=\\chi^\\tau\\circ\\chi^\\theta$; by the definition [F6] of the internal product, $\\operatorname{ch}^{-1}(s_\\lambda*(s_\\tau s_\\theta))=\\chi^\\lambda\\cdot\\operatorname{ch}^{-1}(s_\\tau s_\\theta)=\\chi^\\lambda\\cdot(\\chi^\\tau\\circ\\chi^\\theta)$. Likewise $\\operatorname{ch}^{-1}(s_\\alpha*s_\\tau)=\\chi^\\alpha\\chi^\\tau$ and $\\operatorname{ch}^{-1}(s_\\beta*s_\\theta)=\\chi^\\beta\\chi^\\theta$ by [F6], and [F7] gives $\\operatorname{ch}^{-1}\\bigl((s_\\alpha*s_\\tau)(s_\\beta*s_\\theta)\\bigr)=(\\chi^\\alpha\\chi^\\tau)\\circ(\\chi^\\beta\\chi^\\theta)$. Step 3.1 therefore says that $\\operatorname{ch}^{-1}$ of the two sides of the claimed identity are equal; since $\\operatorname{ch}$ is injective [F8], the claimed identity holds in $\\Lambda^n$. [F6, F7, F8, step 3.1] ∎\n\nNo form of the Axiom of Choice is used: induction, Frobenius reciprocity and the outer Littlewood–Richardson rule are finite-group constructions.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "F7",
+            "F6",
+            "F8"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1: when $r=0$ (so $\\tau=\\varnothing$), the expansion of $\\operatorname{Res}_H^{S_n}\\chi^\\lambda$ has the single term $\\alpha=\\varnothing$, $\\beta\\vdash n$ with $c^\\lambda_{\\varnothing\\beta}=\\delta_{\\lambda\\beta}$, and the claimed identity reduces to $s_\\lambda*s_\\theta$ on both sides."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1: the identity is proved through injectivity of $\\operatorname{ch}$, so a vanishing side forces the other to vanish; the case of a zero coefficient range is included without a separate argument."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1: the Littlewood-Richardson multiplicities include the coefficient-one cases $c^\\lambda_{\\alpha\\beta}=1$; the restriction expansion is carried by the orthonormal basis [F5] and requires no larger coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: the projection formula is applied to the honest class function $\\operatorname{Res}_H^{S_n}(\\chi^\\lambda)\\cdot\\xi$; the degenerate case $\\xi=0$ makes both sides vanish and is included."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1: the endpoint degrees $r=0$ and $r=n$ of the two-block subgroup are included, with $\\tau=\\varnothing$ or $\\theta=\\varnothing$ and $S_0$ the trivial group."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-4.1: induction, Frobenius reciprocity and the outer Littlewood-Richardson rule are finite-group constructions, and the closing sentence records that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the displayed identity is an equality in $\\Lambda^n$; no biconditional is stated."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is claimed; the lemma rewrites one internal product, it does not characterize which symmetric functions are internal products."
+        }
+      ]
+    },
+    "prop-power-sums-diagonalize-the-internal-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and let $\\mathrm{cf}(S_n)$ be the complex vector space of class\nfunctions on $S_n$\n([[def-class-function-and-the-space-of-complex-class-functions]]). For\n$f\\in\\mathrm{cf}(S_n)$ and a partition $\\rho\\vdash n$ let $f(\\rho)$ denote the\ncommon value of $f$ on permutations of cycle type $\\rho$, which is well defined\nbecause cycle type determines the conjugacy class\n([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]). Let\n\n$$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\n\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$; this is the\norder of the centralizer of an element of cycle type $\\rho$\n([[thm-centralizer-cardinality-from-cycle-type]]), so $z_\\rho$ is a positive\ninteger. The **Frobenius characteristic** of $f$ is\n\n$$\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\in\\Lambda_{\\mathbb C}^n,\\qquad \\Lambda_{\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}\\Lambda .$$\n\nThe sum is finite and well defined because $\\{p_\\rho:\\rho\\vdash n\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^n$\n([[prop-power-sums-form-a-rational-not-integral-stable-basis]]); equivalently\nthe family $\\{p_\\rho/z_\\rho:\\rho\\vdash n\\}$ is a $\\mathbb Q$-basis of\n$\\Lambda_{\\mathbb Q}^n$ and is orthogonal for the Hall form, with\n$\\langle p_\\rho/z_\\rho,p_\\sigma/z_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}/z_\\rho$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]). The codomain is\n$\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class\nfunction the coefficients $f(\\rho)/z_\\rho$ are complex. If all values of $f$\nlie in $\\mathbb Q$, then $\\operatorname{ch}(f)\\in\\Lambda_{\\mathbb Q}^n$; the\ndictionary theorems proved later on this page show that every virtual character\nof $S_n$ is rational-valued, and in fact integral-valued, so that its\ncharacteristic lies in the integral lattice $\\Lambda^n$.\n\nWriting $\\mathrm{cf}_S:=\\bigoplus_{n\\ge0}\\mathrm{cf}(S_n)$, the map\n$\\operatorname{ch}:\\mathrm{cf}_S\\to\\Lambda_{\\mathbb C}$ is defined degreewise by\nthe displayed formula on each $\\mathrm{cf}(S_n)$. It is $\\mathbb C$-linear on\neach summand, because evaluation $f\\mapsto f(\\rho)$ and scalar multiplication\nare linear. Its restriction to the character ring\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ is the Frobenius characteristic dictionary\nstudied in the remaining items of this page. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-class-function-and-the-space-of-complex-class-functions",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group. A function $f:G\\to\\mathbb C$ is a **class function**\nwhen it is constant on every conjugacy class\n([[def-conjugacy-class-and-centralizer]]):\n\n$$f(gxg^{-1})=f(x)\\qquad\\text{for all }g,x\\in G.$$\n\nThe set of all class functions is written\n\n$$\\mathrm{cf}(G):=\\bigl\\{\\,f:G\\to\\mathbb C\\;:\\;f(gxg^{-1})=f(x)\\text{ for all }g,x\\in G\\,\\bigr\\}.$$\n\nWith pointwise addition $(f+h)(g):=f(g)+h(g)$ and pointwise scalar\nmultiplication $(\\lambda f)(g):=\\lambda f(g)$, the set $\\mathrm{cf}(G)$ is a\ncomplex vector space ([[def-vector-space]]): the axioms (V1)–(V5) are inherited\nfrom the field $\\mathbb C$ at every argument $g\\in G$. Because $G$ is finite,\nthe evaluation functions $f\\mapsto f(x)$ are complex-linear, and a class\nfunction is determined by its values on one representative of each conjugacy\nclass.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and let $\\mathrm{cf}(S_n)$ be the complex vector space of class\nfunctions on $S_n$\n([[def-class-function-and-the-space-of-complex-class-functions]]). For\n$f\\in\\mathrm{cf}(S_n)$ and a partition $\\rho\\vdash n$ let $f(\\rho)$ denote the\ncommon value of $f$ on permutations of cycle type $\\rho$, which is well defined\nbecause cycle type determines the conjugacy class\n([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]). Let\n\n$$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\n\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$; this is the\norder of the centralizer of an element of cycle type $\\rho$\n([[thm-centralizer-cardinality-from-cycle-type]]), so $z_\\rho$ is a positive\ninteger. The **Frobenius characteristic** of $f$ is\n\n$$\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\in\\Lambda_{\\mathbb C}^n,\\qquad \\Lambda_{\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}\\Lambda .$$\n\nThe sum is finite and well defined because $\\{p_\\rho:\\rho\\vdash n\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^n$\n([[prop-power-sums-form-a-rational-not-integral-stable-basis]]); equivalently\nthe family $\\{p_\\rho/z_\\rho:\\rho\\vdash n\\}$ is a $\\mathbb Q$-basis of\n$\\Lambda_{\\mathbb Q}^n$ and is orthogonal for the Hall form, with\n$\\langle p_\\rho/z_\\rho,p_\\sigma/z_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}/z_\\rho$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]). The codomain is\n$\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class\nfunction the coefficients $f(\\rho)/z_\\rho$ are complex. If all values of $f$\nlie in $\\mathbb Q$, then $\\operatorname{ch}(f)\\in\\Lambda_{\\mathbb Q}^n$; the\ndictionary theorems proved later on this page show that every virtual character\nof $S_n$ is rational-valued, and in fact integral-valued, so that its\ncharacteristic lies in the integral lattice $\\Lambda^n$.\n\nWriting $\\mathrm{cf}_S:=\\bigoplus_{n\\ge0}\\mathrm{cf}(S_n)$, the map\n$\\operatorname{ch}:\\mathrm{cf}_S\\to\\Lambda_{\\mathbb C}$ is defined degreewise by\nthe displayed formula on each $\\mathrm{cf}(S_n)$. It is $\\mathbb C$-linear on\neach summand, because evaluation $f\\mapsto f(\\rho)$ and scalar multiplication\nare linear. Its restriction to the character ring\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ is the Frobenius characteristic dictionary\nstudied in the remaining items of this page. No choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-internal-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "Let $\\operatorname{ch}:R_S\\to\\Lambda$ be the Frobenius characteristic restricted\nto the graded ordinary representation ring of the symmetric groups\n([[def-frobenius-characteristic-map]],\n[[def-graded-ordinary-representation-ring-of-symmetric-groups]]). By\n[[thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism]] it is a\ndegree-preserving $\\mathbb Z$-module isomorphism onto the stable symmetric\nfunction ring $\\Lambda=\\bigoplus_{m\\ge0}\\Lambda^m$, so its restriction\n$\\operatorname{ch}:R(S_m)\\to\\Lambda^m$ is an isomorphism for every $m\\ge0$.\n\nFor $f\\in\\Lambda^m$ and $g\\in\\Lambda^n$ define\n$$f*g:=\\begin{cases}\\operatorname{ch}\\bigl(\\operatorname{ch}^{-1}(f)\\cdot\\operatorname{ch}^{-1}(g)\\bigr),&m=n,\\\\[2pt]0,&m\\ne n,\\end{cases}$$\nwhere $\\cdot$ is the pointwise (internal tensor) product of class functions on\n$S_m$; extend $*$ bilinearly to all of $\\Lambda$. Call $*$ the\n**internal (Kronecker) product** of symmetric functions.\n\n**Well-definedness.** For $m=n$ the class functions $\\operatorname{ch}^{-1}(f)$\nand $\\operatorname{ch}^{-1}(g)$ lie in $R(S_m)$, the integral span of the\nirreducible characters of $S_m$\n([[def-graded-ordinary-representation-ring-of-symmetric-groups]]). The\npointwise product of two honest characters of $S_m$ is again an honest\ncharacter, namely the character of the tensor product of the underlying\nrepresentations ([[thm-characters-of-direct-sums-tensor-products-and-duals]]),\nand products of $\\mathbb Z$-combinations of characters are computed\nbilinearly; hence the pointwise product of two elements of $R(S_m)$ lies in\n$R(S_m)$, and applying the isomorphism $\\operatorname{ch}$ lands in $\\Lambda^m$.\nThe product is therefore well defined and takes $\\Lambda^m\\times\\Lambda^m$ to\n$\\Lambda^m$.\n\n**Basic properties.** The product is bilinear by construction and inherits\ncommutativity and associativity from the pointwise product of class functions.\nIt preserves degrees, in the sense that $\\Lambda^m*\\Lambda^n\\subseteq\\Lambda^m$\nfor $m=n$ and is $0$ for $m\\ne n$. On $\\Lambda^n$ the unit is\n$h_n=s_{(n)}=\\operatorname{ch}(\\text{trivial character of }S_n)$, because the\ntrivial character is the unit for pointwise multiplication on $R(S_n)$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]]\nidentifies $\\operatorname{ch}(\\chi^{(n)})=s_{(n)}=h_n$). The graded direct sum\n$\\Lambda$ has **no global unit** for $*$: if $e\\in\\Lambda$ had finite degree\nsupport and $n$ were a degree with $e_n=0$ while $\\Lambda^n\\ne0$, then\n$(e*h_n)_n=e_n*h_n=0\\ne h_n$, so $e*h_n\\ne h_n$; a global unit would require\n$e_n$ to be a unit of $(\\Lambda^n,*)$ for every $n$. In particular the ordinary\nproduct unit $1\\in\\Lambda^0$ is not a unit for $*$ on the positive degrees.\n\n**Schur expansion.** For partitions $\\lambda,\\mu\\vdash n$, the definition and\nthe Specht character dictionary $\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]])\ngive\n$$s_\\lambda*s_\\mu=\\operatorname{ch}\\bigl(\\chi^\\lambda\\cdot\\chi^\\mu\\bigr)=\\operatorname{ch}\\Bigl(\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\chi^\\nu\\Bigr)=\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\,s_\\nu,$$\nbecause $\\chi^\\lambda\\chi^\\mu$ is the character of\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ and its decomposition has multiplicities\n$g(\\lambda,\\mu,\\nu)$\n([[def-kronecker-coefficient-and-internal-tensor-product]]).\n\nNo form of the Axiom of Choice is used: the transport goes through the\nchoice-free Frobenius characteristic isomorphism and finite-dimensional\nrepresentation theory of finite groups.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$ and every $\\lambda\\vdash n$, let $S^\\lambda$ be the complex\nSpecht module of shape $\\lambda$\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $\\chi^\\lambda$\nits character, an irreducible character of $S_n$\n([[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]]). Then\n\n$$\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n,$$\n\nthe stable Schur function of shape $\\lambda$\n([[def-stable-schur-function-by-bialternants]]). In particular $\\operatorname{ch}$\nmaps the $\\mathbb Z$-basis $\\{\\chi^\\lambda:\\lambda\\vdash n\\}$ of $R(S_n)$ to the\n$\\mathbb Z$-basis $\\{s_\\lambda:\\lambda\\vdash n\\}$ of $\\Lambda^n$, and all values\n$\\chi^\\lambda(\\rho)$ are integers.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-kronecker-coefficient-and-internal-tensor-product",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and work over $\\mathbb C$. Let $\\lambda,\\mu\\vdash n$ be\npartitions of $n$\n([[def-partition-young-diagram-and-conjugate-partition]]), and let\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ be the tensor product of their complex\nSpecht modules, a finite-dimensional complex $S_n$-module\n([[def-tensor-product-of-complex-representations]],\n[[def-column-antisymmetrizer-polytabloid-and-specht-module]]). The\n**Kronecker coefficient** $g(\\lambda,\\mu,\\nu)$ of a third partition\n$\\nu\\vdash n$ is the multiplicity of $S^\\nu$ in this tensor product:\n\n$$g(\\lambda,\\mu,\\nu):=\\frac{\\dim_{\\mathbb C}\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}}{\\dim_{\\mathbb C}S^\\nu},$$\n\nwhere $\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}$ is the isotypic\ncomponent of type $S^\\nu$\n([[def-isotypic-component-of-a-completely-reducible-representation]]).\n\n**Well-definedness.** The module $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is\nfinite-dimensional, and $\\operatorname{char}\\mathbb C=0$ does not divide the\norder of the finite group $S_n$, so complex Maschke's theorem gives complete\nreducibility\n([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]],\n[[cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]],\n[[def-completely-reducible-representation]]). The complex Specht modules\n$S^\\nu$, $\\nu\\vdash n$, are a complete list of pairwise inequivalent\nirreducible $S_n$-modules\n([[thm-complex-specht-modules-are-irreducible]],\n[[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]],\n[[cor-distinct-specht-modules-are-inequivalent]]). Consequently a decomposition\ninto irreducibles has the form\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\cong\\bigoplus_{\\nu\\vdash n}m_\\nu S^\\nu$\nwith nonnegative integer multiplicities $m_\\nu$, and the isotypic component of\ntype $S^\\nu$ is the direct sum of exactly the $m_\\nu$ copies of $S^\\nu$\nappearing in any such decomposition; in particular\n$\\dim_{\\mathbb C}(S^\\lambda\\otimes_{\\mathbb C}S^\\mu)_{(S^\\nu)}=m_\\nu\\dim_{\\mathbb C}S^\\nu$\nand $\\dim_{\\mathbb C}S^\\nu>0$ because $S^\\nu$ is irreducible. Hence\n$g(\\lambda,\\mu,\\nu)=m_\\nu$ is a nonnegative integer, independent of the chosen\ndecomposition, and $g(\\lambda,\\mu,\\nu)$ is by definition the multiplicity of\n$S^\\nu$ in $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$.\n\n**The internal product.** For partitions $\\lambda,\\mu\\vdash n$ call\n$$(\\lambda,\\mu)\\longmapsto S^\\lambda\\otimes_{\\mathbb C}S^\\mu$$\nthe **internal (Kronecker) product** of the $S_n$-representations $S^\\lambda$\nand $S^\\mu$. Unlike the outer induction product\n$\\operatorname{Ind}_{S_a\\times S_b}^{S_{a+b}}(S^\\alpha\\boxtimes S^\\beta)$ of\n[[thm-outer-littlewood-richardson-rule]], which takes a pair of modules of\ndegrees $a$ and $b$ to a module of degree $a+b$, the internal product keeps the\nrank: both inputs and the output are $S_n$-modules of the same degree $n$. The\ntwo operations are different constructions on different data; the outer product\nis mentioned here only for contrast and is not used in this definition.\n\nNo form of the Axiom of Choice is used: the tensor product, Maschke's theorem,\nthe Specht classification and the isotypic decomposition are finite-dimensional\ncomplex representation theory of a finite group.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The characteristic of the class-function indicator is $\\operatorname{ch}(1_\\rho)=\\sum_{\\tau\\vdash n}1_\\rho(\\tau)p_\\tau/z_\\tau=p_\\rho/z_\\rho$ by [F2], since $1_\\rho$ vanishes off the class of cycle type $\\rho$ and $1_\\rho(\\rho)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The pointwise product of the two indicators is $1_\\rho\\cdot1_\\sigma=\\delta_{\\rho,\\sigma}1_\\rho$: both are $0$-$1$ valued on the partition of $S_n$ into conjugacy classes, they have disjoint supports when $\\rho\\ne\\sigma$, and their product on the class $\\rho$ is $1$.",
+          "step": "1.2",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Applying the internal product [F3] to the two characteristics of step 1.1\nand using step 1.2 gives\n$$(p_\\rho/z_\\rho)*(p_\\sigma/z_\\sigma)=\\operatorname{ch}\\bigl(1_\\rho\\cdot1_\\sigma\\bigr)=\\delta_{\\rho,\\sigma}\\operatorname{ch}(1_\\rho)=\\delta_{\\rho,\\sigma}\\,p_\\rho/z_\\rho.$$",
+          "step": "2.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "By bilinearity of $*$ from [F3], multiplying the identity of step 2.1 by $z_\\rho z_\\sigma$ gives $p_\\rho*p_\\sigma=\\delta_{\\rho,\\sigma}z_\\rho z_\\sigma p_\\rho/z_\\rho=\\delta_{\\rho,\\sigma}z_\\rho p_\\rho$, since $\\delta_{\\rho,\\sigma}z_\\sigma=\\delta_{\\rho,\\sigma}z_\\rho$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The Schur-basis form is the defining expansion $s_\\lambda*s_\\mu=\\sum_\\nu g(\\lambda,\\mu,\\nu)s_\\nu$ quoted in [F3], which is consistent with the definition through $\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda$ and $\\operatorname{ch}(\\chi^\\mu)=s_\\mu$ from [F4]; the structure constants $g(\\lambda,\\mu,\\nu)$ are nonnegative integers by [F5]. This proves the stated Schur expansion. [F3, F4, F5, step 3.1] ∎\n\nNo form of the Axiom of Choice is used.",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1-2.1: for $n=0$ the indicator $1_\\varnothing$ is the constant function $1$, $\\operatorname{ch}(1_\\varnothing)=p_\\varnothing/z_\\varnothing=1$ with $z_\\varnothing=1$, and $p_\\varnothing*p_\\varnothing=p_\\varnothing$; the empty case is covered by the same computation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: for $\\rho\\ne\\sigma$ the product $1_\\rho\\cdot1_\\sigma$ is $0$ and the internal product is $0$; the zero value is asserted by the Kronecker delta."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1: in degree $1$, $p_{(1)}*p_{(1)}=z_{(1)}p_{(1)}=p_{(1)}$ because $z_{(1)}=1$; the unit case $n=1$ is included."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 at $\\rho=\\sigma$: the coincident-class case gives $\\delta_{\\rho\\rho}=1$ and the diagonal scalar $z_\\rho$, which is the diagonalized degenerate case of the product."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: the statement is a finite identity for partitions of a fixed $n$, including $n=0$; no interval endpoint or limit occurs."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the indicators $1_\\rho$ from the finite partition of $S_n$ into conjugacy classes, and the closing sentence records that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the displayed identities are equalities and a diagonalization statement; no biconditional is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse direction is claimed; diagonalization does not assert that the power sums are the only diagonalizing family."
+        }
+      ]
+    },
+    "lem-kronecker-reduction-lemma": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-internal-product-on-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "Let $\\operatorname{ch}:R_S\\to\\Lambda$ be the Frobenius characteristic restricted\nto the graded ordinary representation ring of the symmetric groups\n([[def-frobenius-characteristic-map]],\n[[def-graded-ordinary-representation-ring-of-symmetric-groups]]). By\n[[thm-frobenius-characteristic-is-an-isometric-graded-ring-isomorphism]] it is a\ndegree-preserving $\\mathbb Z$-module isomorphism onto the stable symmetric\nfunction ring $\\Lambda=\\bigoplus_{m\\ge0}\\Lambda^m$, so its restriction\n$\\operatorname{ch}:R(S_m)\\to\\Lambda^m$ is an isomorphism for every $m\\ge0$.\n\nFor $f\\in\\Lambda^m$ and $g\\in\\Lambda^n$ define\n$$f*g:=\\begin{cases}\\operatorname{ch}\\bigl(\\operatorname{ch}^{-1}(f)\\cdot\\operatorname{ch}^{-1}(g)\\bigr),&m=n,\\\\[2pt]0,&m\\ne n,\\end{cases}$$\nwhere $\\cdot$ is the pointwise (internal tensor) product of class functions on\n$S_m$; extend $*$ bilinearly to all of $\\Lambda$. Call $*$ the\n**internal (Kronecker) product** of symmetric functions.\n\n**Well-definedness.** For $m=n$ the class functions $\\operatorname{ch}^{-1}(f)$\nand $\\operatorname{ch}^{-1}(g)$ lie in $R(S_m)$, the integral span of the\nirreducible characters of $S_m$\n([[def-graded-ordinary-representation-ring-of-symmetric-groups]]). The\npointwise product of two honest characters of $S_m$ is again an honest\ncharacter, namely the character of the tensor product of the underlying\nrepresentations ([[thm-characters-of-direct-sums-tensor-products-and-duals]]),\nand products of $\\mathbb Z$-combinations of characters are computed\nbilinearly; hence the pointwise product of two elements of $R(S_m)$ lies in\n$R(S_m)$, and applying the isomorphism $\\operatorname{ch}$ lands in $\\Lambda^m$.\nThe product is therefore well defined and takes $\\Lambda^m\\times\\Lambda^m$ to\n$\\Lambda^m$.\n\n**Basic properties.** The product is bilinear by construction and inherits\ncommutativity and associativity from the pointwise product of class functions.\nIt preserves degrees, in the sense that $\\Lambda^m*\\Lambda^n\\subseteq\\Lambda^m$\nfor $m=n$ and is $0$ for $m\\ne n$. On $\\Lambda^n$ the unit is\n$h_n=s_{(n)}=\\operatorname{ch}(\\text{trivial character of }S_n)$, because the\ntrivial character is the unit for pointwise multiplication on $R(S_n)$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]]\nidentifies $\\operatorname{ch}(\\chi^{(n)})=s_{(n)}=h_n$). The graded direct sum\n$\\Lambda$ has **no global unit** for $*$: if $e\\in\\Lambda$ had finite degree\nsupport and $n$ were a degree with $e_n=0$ while $\\Lambda^n\\ne0$, then\n$(e*h_n)_n=e_n*h_n=0\\ne h_n$, so $e*h_n\\ne h_n$; a global unit would require\n$e_n$ to be a unit of $(\\Lambda^n,*)$ for every $n$. In particular the ordinary\nproduct unit $1\\in\\Lambda^0$ is not a unit for $*$ on the positive degrees.\n\n**Schur expansion.** For partitions $\\lambda,\\mu\\vdash n$, the definition and\nthe Specht character dictionary $\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda$\n([[thm-frobenius-characteristic-sends-specht-characters-to-schur-functions]])\ngive\n$$s_\\lambda*s_\\mu=\\operatorname{ch}\\bigl(\\chi^\\lambda\\cdot\\chi^\\mu\\bigr)=\\operatorname{ch}\\Bigl(\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\chi^\\nu\\Bigr)=\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\,s_\\nu,$$\nbecause $\\chi^\\lambda\\chi^\\mu$ is the character of\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ and its decomposition has multiplicities\n$g(\\lambda,\\mu,\\nu)$\n([[def-kronecker-coefficient-and-internal-tensor-product]]).\n\nNo form of the Axiom of Choice is used: the transport goes through the\nchoice-free Frobenius characteristic isomorphism and finite-dimensional\nrepresentation theory of finite groups.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "prop-power-sums-diagonalize-the-internal-product",
+          "source_section": "Statement",
+          "quote": "For partitions $\\rho,\\sigma\\vdash n$ one has\n$$p_\\rho*p_\\sigma=\\delta_{\\rho,\\sigma}\\,z_\\rho\\,p_\\rho,\\qquad z_\\rho=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$. Consequently\n$$s_\\lambda*s_\\mu=\\sum_{\\nu\\vdash n}g(\\lambda,\\mu,\\nu)\\,s_\\nu$$\nfor all $\\lambda,\\mu\\vdash n$. The internal product on $\\Lambda^n$ is therefore\ndiagonal in the power-sum basis, with $z_\\rho$ the diagonal scalars, and it has\nthe integer structure constants $g(\\lambda,\\mu,\\nu)$ in the Schur basis.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-kronecker-coefficient-and-internal-tensor-product",
+          "source_section": "Definition",
+          "quote": "Fix an integer $n\\ge0$ and work over $\\mathbb C$. Let $\\lambda,\\mu\\vdash n$ be\npartitions of $n$\n([[def-partition-young-diagram-and-conjugate-partition]]), and let\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ be the tensor product of their complex\nSpecht modules, a finite-dimensional complex $S_n$-module\n([[def-tensor-product-of-complex-representations]],\n[[def-column-antisymmetrizer-polytabloid-and-specht-module]]). The\n**Kronecker coefficient** $g(\\lambda,\\mu,\\nu)$ of a third partition\n$\\nu\\vdash n$ is the multiplicity of $S^\\nu$ in this tensor product:\n\n$$g(\\lambda,\\mu,\\nu):=\\frac{\\dim_{\\mathbb C}\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}}{\\dim_{\\mathbb C}S^\\nu},$$\n\nwhere $\\bigl(S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\bigr)_{(S^\\nu)}$ is the isotypic\ncomponent of type $S^\\nu$\n([[def-isotypic-component-of-a-completely-reducible-representation]]).\n\n**Well-definedness.** The module $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$ is\nfinite-dimensional, and $\\operatorname{char}\\mathbb C=0$ does not divide the\norder of the finite group $S_n$, so complex Maschke's theorem gives complete\nreducibility\n([[thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order]],\n[[cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order]],\n[[def-completely-reducible-representation]]). The complex Specht modules\n$S^\\nu$, $\\nu\\vdash n$, are a complete list of pairwise inequivalent\nirreducible $S_n$-modules\n([[thm-complex-specht-modules-are-irreducible]],\n[[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]],\n[[cor-distinct-specht-modules-are-inequivalent]]). Consequently a decomposition\ninto irreducibles has the form\n$S^\\lambda\\otimes_{\\mathbb C}S^\\mu\\cong\\bigoplus_{\\nu\\vdash n}m_\\nu S^\\nu$\nwith nonnegative integer multiplicities $m_\\nu$, and the isotypic component of\ntype $S^\\nu$ is the direct sum of exactly the $m_\\nu$ copies of $S^\\nu$\nappearing in any such decomposition; in particular\n$\\dim_{\\mathbb C}(S^\\lambda\\otimes_{\\mathbb C}S^\\mu)_{(S^\\nu)}=m_\\nu\\dim_{\\mathbb C}S^\\nu$\nand $\\dim_{\\mathbb C}S^\\nu>0$ because $S^\\nu$ is irreducible. Hence\n$g(\\lambda,\\mu,\\nu)=m_\\nu$ is a nonnegative integer, independent of the chosen\ndecomposition, and $g(\\lambda,\\mu,\\nu)$ is by definition the multiplicity of\n$S^\\nu$ in $S^\\lambda\\otimes_{\\mathbb C}S^\\mu$.\n\n**The internal product.** For partitions $\\lambda,\\mu\\vdash n$ call\n$$(\\lambda,\\mu)\\longmapsto S^\\lambda\\otimes_{\\mathbb C}S^\\mu$$\nthe **internal (Kronecker) product** of the $S_n$-representations $S^\\lambda$\nand $S^\\mu$. Unlike the outer induction product\n$\\operatorname{Ind}_{S_a\\times S_b}^{S_{a+b}}(S^\\alpha\\boxtimes S^\\beta)$ of\n[[thm-outer-littlewood-richardson-rule]], which takes a pair of modules of\ndegrees $a$ and $b$ to a module of degree $a+b$, the internal product keeps the\nrank: both inputs and the output are $S_n$-modules of the same degree $n$. The\ntwo operations are different constructions on different data; the outer product\nis mentioned here only for contrast and is not used in this definition.\n\nNo form of the Axiom of Choice is used: the tensor product, Maschke's theorem,\nthe Specht classification and the isotypic decomposition are finite-dimensional\ncomplex representation theory of a finite group.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda,\\mu,\\nu\\vdash n$:\n\n(a) $g(\\lambda,\\mu,\\nu)$ is a nonnegative integer;\n\n(b) $g$ is invariant under every permutation of the three arguments, that is\n$g(\\lambda,\\mu,\\nu)=g(\\mu,\\lambda,\\nu)=g(\\lambda,\\nu,\\mu)=\\cdots$ for all six\norderings;\n\n(c) conjugating exactly two of the three partitions preserves the coefficient:\n$$g(\\lambda,\\mu,\\nu)=g(\\lambda',\\mu',\\nu)=g(\\lambda',\\mu,\\nu')=g(\\lambda,\\mu',\\nu'),$$\nwhere $\\lambda'$ denotes the conjugate partition.\n\nNo positive combinatorial rule for the coefficients is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-littlewood-internal-product-outer-compatibility",
+          "source_section": "Statement",
+          "quote": "Let $\\lambda\\vdash n$, $\\tau\\vdash r$ and $\\theta\\vdash n-r$. Then, in\n$\\Lambda^n$,\n$$s_\\lambda*(s_\\tau s_\\theta)=\\sum_{\\alpha\\vdash r,\\ \\beta\\vdash n-r}c^\\lambda_{\\alpha\\beta}\\,(s_\\alpha*s_\\tau)(s_\\beta*s_\\theta),$$\nwhere $c^\\lambda_{\\alpha\\beta}$ is the Littlewood–Richardson coefficient. Both\nsides have degree $n$ and the sum is finite.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-littlewood-richardson-schur-product-expansion",
+          "source_section": "Statement",
+          "quote": "Let $c^\\lambda_{\\mu\\nu}$ be the Littlewood–Richardson coefficient of the inherited definition, the number of Littlewood–Richardson tableaux of shape $\\lambda/\\mu$ and content $\\nu$ ([[def-littlewood-richardson-tableau-and-coefficient]], [[def-skew-diagram-and-semistandard-skew-tableau]], [[def-semistandard-tableau-and-kostka-number]], [[def-partition-young-diagram-and-conjugate-partition]]). Then for all partitions $\\mu,\\nu$,\n$$s_\\mu s_\\nu=\\sum_{\\lambda\\,\\supseteq\\,\\mu,\\ |\\lambda|=|\\mu|+|\\nu|}c^\\lambda_{\\mu\\nu}s_\\lambda\\qquad\\text{in }\\Lambda,$$\nwhere the sum is finite and zero terms may be omitted; equivalently, for every $\\lambda\\supseteq\\mu$,\n$$s_{\\lambda/\\mu}=\\sum_{\\nu}c^\\lambda_{\\mu\\nu}s_\\nu.$$\nNo choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-littlewood-richardson-tableau-and-coefficient",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda,\\nu$ be partitions with $[\\lambda]\\subseteq[\\nu]$, and let $\\mu$ be a partition with $|\\nu|=|\\lambda|+|\\mu|$. Use the conventions of [[def-skew-diagram-and-semistandard-skew-tableau]] for the skew diagram $\\nu/\\lambda$ and for semistandard skew tableaux of shape $\\nu/\\lambda$, and those of [[def-semistandard-tableau-and-kostka-number]] for the content of a tableau; recall that entries of a semistandard skew tableau weakly increase along rows and strictly increase down columns ([[def-partition-young-diagram-and-conjugate-partition]] fixes the English row and column coordinates).\n\nThe **reading word** $w(T)$ of a semistandard skew tableau $T$ of shape $\\nu/\\lambda$ is the word obtained by reading the rows of $T$ from right to left, beginning with the top row and proceeding to the bottom row. The word $w(T)=a_1a_2\\cdots a_N$ is a **lattice word** (a lattice permutation) if in every prefix $a_1\\cdots a_p$ and for every $i\\ge1$ the number of letters $i$ in the prefix is at least the number of letters $i+1$; the empty word is a lattice word vacuously.\n\nA **Littlewood--Richardson tableau** (LR tableau) of shape $\\nu/\\lambda$ and content $\\mu$ is a semistandard skew tableau of shape $\\nu/\\lambda$ and content $\\mu$ whose reading word is a lattice word. The **Littlewood--Richardson coefficient** $c^\\nu_{\\lambda\\mu}\\in\\mathbb Z_{\\ge0}$ is the number of LR tableaux of shape $\\nu/\\lambda$ and content $\\mu$; it is $0$ when $[\\lambda]\\not\\subseteq[\\nu]$, when $|\\nu|\\ne|\\lambda|+|\\mu|$, or when no such tableau exists. For $\\mu=\\varnothing$ and $\\nu=\\lambda$ the empty skew tableau is the unique tableau of content $\\varnothing$, its reading word is empty, and hence $c^\\lambda_{\\lambda\\varnothing}=1$; more generally $c^\\lambda_{\\lambda\\mu}=0$ unless $\\mu=\\varnothing$, and $c^\\nu_{\\lambda\\mu}=0$ unless $\\lambda\\subseteq\\nu$ and $|\\nu|=|\\lambda|+|\\mu|$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "source_section": "Statement",
+          "quote": "For every partition $\\lambda$, let $s_\\lambda\\in\\Lambda$ be the stable Schur\nfunction defined by bialternants\n([[def-stable-schur-function-by-bialternants]]). For any integers\n$r\\ge\\ell(\\lambda)$ and $c\\ge\\ell(\\lambda')$, pad $\\lambda$ and $\\lambda'$\nwith zero parts to lengths $r$ and $c$, respectively. Then\n$$s_\\lambda=\\det\\bigl(h_{\\lambda_i-i+j}\\bigr)_{1\\le i,j\\le r}=\\det\\bigl(e_{\\lambda'_i-i+j}\\bigr)_{1\\le i,j\\le c},$$\nwhere $h_k,e_k\\in\\Lambda$ are the stable complete and elementary functions\n([[thm-elementary-and-complete-families-freely-generate-the-stable-ring]],\n[[def-elementary-symmetric-polynomials]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]). In these\ndeterminants use $h_0=e_0=1$, set $h_k=e_k=0$ for $k<0$, and take the empty\ndeterminant to be $1$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "source_section": "Statement",
+          "quote": "For every $d\\ge0$, the stable Schur functions $\\{s_\\lambda:\\lambda\\vdash d\\}$\nform a $\\mathbb Z$-basis of $\\Lambda^d$ and are orthonormal for the Hall form:\n$$\\langle s_\\lambda,s_\\mu\\rangle_H=\\delta_{\\lambda\\mu}$$\nfor all partitions $\\lambda,\\mu$.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-stable-graded-ring-of-symmetric-functions",
+          "source_section": "Definition",
+          "quote": "For integers $N,d\\ge0$, let $A_N^d$ be the degree-$d$ homogeneous part of\n$\\mathbb Z[x_1,\\ldots,x_N]^{S_N}$, using\n[[def-symmetric-polynomial]] and the convention $A_0^0=\\mathbb Z$ and\n$A_0^d=0$ for $d>0$. For $M\\ge N$, the transition\n$\\pi_{M,N}:A_M^d\\to A_N^d$ sets $x_{N+1},\\ldots,x_M$ equal to zero.\nThese maps compose, so define\n$$\\Lambda^d:=\\varprojlim_{N\\ge0}A_N^d,\\qquad \\Lambda:=\\bigoplus_{d\\ge0}\\Lambda^d.$$\n\nAn element of $\\Lambda^d$ is a compatible sequence of homogeneous\ndegree-$d$ symmetric polynomials, one in each rank. Multiplication of a\ndegree-$a$ sequence and a degree-$b$ sequence is coordinatewise polynomial\nmultiplication and lies in $\\Lambda^{a+b}$; compatibility follows because\neach $\\pi_{M,N}$ is a ring homomorphism. Extend this product distributively\nto $\\Lambda$. The unit is the compatible constant sequence $1$, and each\nelement of $\\Lambda$ has only finitely many nonzero homogeneous components.\n\nThis direct sum is not the ungraded inverse limit of the rings\n$\\mathbb Z[x_1,\\ldots,x_N]^{S_N}$. For example, the compatible sequence\n$\\prod_{i=1}^N(1+x_i)$ belongs to that ungraded inverse limit and has nonzero\nhomogeneous components in every degree, so it is not an element of the direct\nsum $\\Lambda$. The partition notation and empty partition follow\n[[def-partition-young-diagram-and-conjugate-partition]].",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "For $0\\le q\\le n$ and $\\eta\\vdash q$, apply [F2] to $h_{n-q}s_\\eta$ and use the unit in [F1], then extract $[s_\\mu]$ using [F3]. This gives the finite coefficient identity $K_n(q,\\eta):=[s_\\mu](s_\\lambda*(h_{n-q}s_\\eta))=\\sum_{\\alpha\\vdash n-q,\\ \\beta,\\gamma\\vdash q}c^\\lambda_{\\alpha\\beta}c^\\mu_{\\alpha\\gamma}g(\\beta,\\eta,\\gamma)$. Every nonzero summand has $\\alpha\\subseteq\\rho$; writing $e_i:=\\rho_i-\\alpha_i$ gives $\\sum_i e_i=q-g_0$, so $0\\le e_i\\le q-g_0\\le q$. If $\\ell=0$, then $n=s=r=0$, all three partitions are empty, and the degree-zero unit gives $g(\\varnothing,\\varnothing,\\varnothing)=1$, proving the claim; hence assume $\\ell\\ge1$ for the rest of the proof.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "For part (ii) only, and put $D_{\\ell+1}=0$, $\\rho_{\\ell+1}=0$. One has $\\delta_i\\le\\rho_i-\\rho_{i+1}$. If $D_j>0$, let $b\\ge j$ be the last index with $\\delta_b>0$; telescoping gives $D_j\\le\\rho_j-\\rho_b+\\delta_b\\le\\rho_j-2s$. Hence $\\varphi(\\theta)_j\\ge s$ when $D_j>0$, and when $D_j=0$ its value is $\\theta_j\\ge0$. If $\\delta_j=0$, consecutive parts of $\\varphi(\\theta)$ have the same difference as those of $\\theta$. If $\\delta_j>0$ and $j<\\ell$, then $\\varphi(\\theta)_j-\\varphi(\\omega)_{j+1}=\\theta_j-\\omega_{j+1}-\\delta_j=\\theta_j-\\rho_j+2s\\ge s\\ge0$. Since $\\theta\\subseteq\\omega$, this proves weak decrease at every remaining boundary. Thus $\\varphi$ maps the stated domain to partitions, is injective, and satisfies $|\\varphi(\\theta)|=|\\theta|-\\sum_jD_j$.",
+          "step": "1.2",
+          "inputs": [
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Independently of case (ii), expand the Jacobi–Trudi determinant for $\\nu=(n-s,\\nu_2,\\ldots)$ along the first row. Its $j$th cofactor $B_j$, indexed by $0\\le j\\le\\ell-1$, depends only on $(\\nu_2,\\ldots,\\nu_\\ell)$ and is homogeneous of degree $s-j$, since every product in that minor has that degree. Thus $s_\\nu=\\sum_{j=0}^{\\ell-1}(-1)^j h_{n-s+j}B_j$, with $B_j=0$ when $j>s$; for $j\\le s$, expand $B_j$ in the Schur basis of degree $q=s-j$. By symmetry [F1], $g(\\lambda,\\mu,\\nu)=[s_\\mu](s_\\lambda*s_\\nu)$ is therefore a signed sum of $K_n(q,\\eta)$ with $0\\le q\\le s$. If $|\\lambda_i-\\mu_i|>s$ for some $i$, then $g_0\\ge|\\lambda_i-\\mu_i|>s$: the sums of the positive row differences in either direction agree because $|\\lambda|=|\\mu|$. Step 1.1 then has no contributing $\\alpha$ for any $q\\le s$. Every term vanishes, proving part (i).",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Return to case (ii) and put $r:=|\\varphi(\\lambda)|=|\\varphi(\\mu)|$. If any $\\delta_i>0$, step 1.2 gives $\\rho_1-D_1\\ge2s$ and therefore $r\\ge2s$, so $r-s\\ge s\\ge\\nu_2$. If every $\\delta_i=0$, then $r=n$ and $r-s=\\nu_1\\ge\\nu_2$. Thus $\\varphi(\\nu)$ is a partition. To bound $r$, use $\\delta_i\\ge\\rho_i-\\omega_{i+1}-2s$ and telescope to obtain $\\lambda_j-D_j\\le2s(\\ell-j+1)+\\sum_{i=j}^{\\ell}(\\lambda_i-\\rho_i)+\\sum_{i=j+1}^{\\ell}(\\omega_i-\\lambda_i)\\le3s(\\ell-j+1)$; the last two sums together equal $(\\lambda_j-\\rho_j)+\\sum_{i=j+1}^{\\ell}(\\omega_i-\\rho_i)\\le s(\\ell-j+1)$. Therefore $r\\le3s\\ell(\\ell+1)/2\\le2s\\ell^2$ for $\\ell\\ge3$. If $\\ell=2$, equal total sizes imply $\\omega_2=\\rho_2+a$ and $n=\\rho_1+\\rho_2+a$, where $a=|\\lambda_1-\\mu_1|=|\\lambda_2-\\mu_2|\\le s$; then $r=n-\\delta_1-2\\delta_2\\le(\\rho_1+\\rho_2+a)-(\\rho_1-\\rho_2-a-2s)-2(\\rho_2-2s)=6s+2a\\le8s$. If $\\ell=1$, then $s=0$, $\\lambda=\\mu=\\nu=(n)$ and $\\delta_1=n$, giving $r=0$.",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-3",
+          "claim": "Fix $q\\le s$. The map $\\alpha\\mapsto\\varphi(\\alpha)$ is a bijection from partitions $\\alpha\\subseteq\\rho$ of size $n-q$ to partitions $\\theta\\subseteq\\varphi(\\rho)$ of size $r-q$. If either set is nonempty, its total deficit from $\\rho$ or $\\varphi(\\rho)$ is $q-g_0\\le s$. For the forward direction this proves $\\alpha_j\\ge\\rho_j-s$, so step 1.2 applies. Conversely, given $\\theta$ in the second set, set $\\alpha_j:=\\theta_j+D_j$. These parts are nonnegative and have consecutive differences $(\\theta_j-\\theta_{j+1})+\\delta_j\\ge0$. They satisfy $\\alpha\\subseteq\\rho$, $|\\alpha|=n-q$, and $\\rho_j-\\alpha_j=\\varphi(\\rho)_j-\\theta_j\\le q-g_0\\le s$. This is the inverse. Empty index sets, including $q<g_0$, correspond as well.",
+          "step": "2.3",
+          "inputs": [
+            "step 1.1",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "For such an $\\alpha$, shift every cell $(j,c)$ of $\\lambda/\\alpha$ to $(j,c-D_j)$. Its image is $\\varphi(\\lambda)/\\varphi(\\alpha)$, with each row order and the whole reading word preserved. Within runs of rows with $\\delta_j=0$, consecutive rows share columns in exactly the same way. At a cut $\\delta_j>0$, the original rows have no common skew column across the cut, since $\\alpha_j\\ge\\rho_j-s>\\omega_{j+1}\\ge\\lambda_{j+1}$. The shifted rows likewise have no common skew column across it, because $\\varphi(\\alpha)_j-\\varphi(\\omega)_{j+1}=\\alpha_j-\\rho_j+2s\\ge s\\ge0$. The partition inequalities imply the same separation for every row above and below the cut. Thus all column comparisons, weak row inequalities, content and lattice-word conditions are preserved in both directions. Consequently $c^\\lambda_{\\alpha\\beta}=c^{\\varphi(\\lambda)}_{\\varphi(\\alpha),\\beta}$ for every $\\beta\\vdash q$, and the identical argument gives $c^\\mu_{\\alpha\\gamma}=c^{\\varphi(\\mu)}_{\\varphi(\\alpha),\\gamma}$.",
+          "step": "3.1",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 1.2",
+            "step 2.3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Apply step 1.1 to the reduced outer partitions of size $r$. Because intersection commutes with subtracting the same row vector, their intersection is $\\varphi(\\rho)$. Steps 2.3 and 3.1 identify the two finite sums term by term, with the same $\\beta,\\gamma,\\eta$ and unchanged $g(\\beta,\\eta,\\gamma)$, so $K_n(q,\\eta)=[s_{\\varphi(\\mu)}](s_{\\varphi(\\lambda)}*(h_{r-q}s_\\eta))$ for every $q\\le s$. All degrees are nonnegative: if a reduction occurs then $r\\ge2s$ by step 2.2, and otherwise $r=n\\ge s$.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 2.2",
+            "step 2.3",
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The first-row Jacobi–Trudi expansion for $\\varphi(\\nu)=(r-s,\\nu_2,\\ldots)$ has exactly the cofactors $B_j$ of step 2.1, since its tail is unchanged. Replacing each $K_n(q,\\eta)$ by its equal reduced coefficient from step 4.1 in that finite signed expansion gives $g(\\lambda,\\mu,\\nu)=g(\\varphi(\\lambda),\\varphi(\\mu),\\varphi(\\nu))$. Step 2.2 gives the asserted size bound, completing part (ii).",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats ell=0, which forces n=s=r=0 and gives g(empty,empty,empty)=1 from the degree-zero unit; for padded empty inputs at ell>=1, steps 1.2 and 2.2 give zero row shear and valid empty output partitions."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove part(i): a row difference greater than s implies g0>s, so every common-index sum for q<=s is empty and the coefficient vanishes; no Pieri or nonnegative-sum argument is invoked."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the degreewise unit h_(n-q) explicitly, including q=0 and empty eta; the one-row length case ell=1 has s=0 and r=0 by step 2.2."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 separately handles D_j=0 and D_j>0, and unchanged boundaries delta_j=0; steps 2.3 and 3.1 prove the inverse-index and tableau correspondence also at a shortened last cut and at separation equality, without a granted boundary."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats all cofactors j=0,...,ell-1 and the vanishing j>s terms; step 2.2 proves the size bound separately for ell=1, ell=2 and ell>=3; steps 2.3 and 4.1 cover all q<=s, including q=0 and q=s."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1, 2.3 and 3.1 use finite sums, finite determinants, the explicit inverse theta+D and deterministic cell translations; no arbitrary choice or choice-dependent hypothesis enters the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the row-difference vanishing implication and step 5.1 proves unconditional bounded reduction in the complementary row-difference case, with the corrected map and the bound from step 2.2; no weak-decrease or open-obligation premise remains."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not a biconditional and asserts neither a converse to the vanishing criterion nor uniqueness of a reduced triple."
+        }
+      ]
+    },
+    "ex-kronecker-products-for-s3": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$ and every $\\lambda\\vdash n$, let $S^\\lambda$ be the complex\nSpecht module of shape $\\lambda$\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]) and $\\chi^\\lambda$\nits character, an irreducible character of $S_n$\n([[thm-complex-irreducibles-of-symmetric-groups-are-specht-modules]]). Then\n\n$$\\operatorname{ch}(\\chi^\\lambda)=s_\\lambda\\in\\Lambda^n,$$\n\nthe stable Schur function of shape $\\lambda$\n([[def-stable-schur-function-by-bialternants]]). In particular $\\operatorname{ch}$\nmaps the $\\mathbb Z$-basis $\\{\\chi^\\lambda:\\lambda\\vdash n\\}$ of $R(S_n)$ to the\n$\\mathbb Z$-basis $\\{s_\\lambda:\\lambda\\vdash n\\}$ of $\\Lambda^n$, and all values\n$\\chi^\\lambda(\\rho)$ are integers.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-frobenius-characteristic-map",
+          "source_section": "Definition",
+          "quote": "Fix $n\\ge0$ and let $\\mathrm{cf}(S_n)$ be the complex vector space of class\nfunctions on $S_n$\n([[def-class-function-and-the-space-of-complex-class-functions]]). For\n$f\\in\\mathrm{cf}(S_n)$ and a partition $\\rho\\vdash n$ let $f(\\rho)$ denote the\ncommon value of $f$ on permutations of cycle type $\\rho$, which is well defined\nbecause cycle type determines the conjugacy class\n([[cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types]]). Let\n\n$$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!,$$\n\nwhere $m_i(\\rho)$ is the number of parts of $\\rho$ equal to $i$; this is the\norder of the centralizer of an element of cycle type $\\rho$\n([[thm-centralizer-cardinality-from-cycle-type]]), so $z_\\rho$ is a positive\ninteger. The **Frobenius characteristic** of $f$ is\n\n$$\\operatorname{ch}(f):=\\sum_{\\rho\\vdash n}f(\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\in\\Lambda_{\\mathbb C}^n,\\qquad \\Lambda_{\\mathbb C}:=\\mathbb C\\otimes_{\\mathbb Z}\\Lambda .$$\n\nThe sum is finite and well defined because $\\{p_\\rho:\\rho\\vdash n\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^n$\n([[prop-power-sums-form-a-rational-not-integral-stable-basis]]); equivalently\nthe family $\\{p_\\rho/z_\\rho:\\rho\\vdash n\\}$ is a $\\mathbb Q$-basis of\n$\\Lambda_{\\mathbb Q}^n$ and is orthogonal for the Hall form, with\n$\\langle p_\\rho/z_\\rho,p_\\sigma/z_\\sigma\\rangle_H=\\delta_{\\rho\\sigma}/z_\\rho$\n([[cor-power-sums-are-orthogonal-for-the-hall-inner-product]]). The codomain is\n$\\Lambda_{\\mathbb C}$, not $\\Lambda_{\\mathbb Q}$: for an arbitrary complex class\nfunction the coefficients $f(\\rho)/z_\\rho$ are complex. If all values of $f$\nlie in $\\mathbb Q$, then $\\operatorname{ch}(f)\\in\\Lambda_{\\mathbb Q}^n$; the\ndictionary theorems proved later on this page show that every virtual character\nof $S_n$ is rational-valued, and in fact integral-valued, so that its\ncharacteristic lies in the integral lattice $\\Lambda^n$.\n\nWriting $\\mathrm{cf}_S:=\\bigoplus_{n\\ge0}\\mathrm{cf}(S_n)$, the map\n$\\operatorname{ch}:\\mathrm{cf}_S\\to\\Lambda_{\\mathbb C}$ is defined degreewise by\nthe displayed formula on each $\\mathrm{cf}(S_n)$. It is $\\mathbb C$-linear on\neach summand, because evaluation $f\\mapsto f(\\rho)$ and scalar multiplication\nare linear. Its restriction to the character ring\n$R_S=\\bigoplus_{n\\ge0}R(S_n)$ is the Frobenius characteristic dictionary\nstudied in the remaining items of this page. No choice principle is used.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complete-homogeneous-expansion-in-power-sums",
+          "source_section": "Statement",
+          "quote": "Work in $\\Lambda_{\\mathbb Q}=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda$. For a\npartition $\\rho$ write\n$m_i(\\rho):=\\#\\{j:\\rho_j=i\\}$ and\n$z_\\rho:=\\prod_{i\\ge1}i^{m_i(\\rho)}m_i(\\rho)!$\n([[def-partition-young-diagram-and-conjugate-partition]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]).\n\nFor partitions $\\lambda$ and $\\rho$ of the same integer, let $N(\\lambda,\\rho)$\nbe the number of ways to distribute the cycles of a permutation $w$ of cycle\ntype $\\rho$ among the $\\ell(\\lambda)$ rows, labelled $1,\\dots,\\ell(\\lambda)$,\nso that row $j$ receives cycles whose lengths sum to $\\lambda_j$. Cycles of\nequal length count as **distinct** here, because they are distinct cycles of\n$w$; equivalently,\n\n$$N(\\lambda,\\rho)=\\sum_{(m_i^{(j)})}\\ \\prod_{i\\ge1}\\frac{m_i(\\rho)!}{\\prod_j m_i^{(j)}!},$$\n\nthe sum over all matrices $(m_i^{(j)})$ of nonnegative integers with\n$\\sum_j m_i^{(j)}=m_i(\\rho)$ for every $i$ and\n$\\sum_i i\\,m_i^{(j)}=\\lambda_j$ for every $j$; each summand is the product\nover $i$ of the number of ways to assign the $m_i(\\rho)$ labelled cycles of\nlength $i$ to rows with the prescribed multiplicities $m_i^{(j)}$, so\n$N(\\lambda,\\rho)$ is a nonnegative integer. Then\n\n$$h_\\lambda=\\sum_{\\rho\\vdash|\\lambda|}N(\\lambda,\\rho)\\,\\frac{p_\\rho}{z_\\rho}\\qquad\\text{in }\\Lambda_{\\mathbb Q}.$$\n\nIn particular $h_d=\\sum_{\\rho\\vdash d}p_\\rho/z_\\rho$ for every $d\\ge0$.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-power-sums-form-a-rational-not-integral-stable-basis",
+          "source_section": "Statement",
+          "quote": "For $r\\ge1$, let $p_r\\in\\Lambda^r$ be the compatible sequence of finite\npower-sum polynomials $p_r(x_1,\\ldots,x_N)=\\sum_{i=1}^N x_i^r$\n([[def-stable-graded-ring-of-symmetric-functions]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]). For a\npartition $\\lambda$, set $p_\\lambda:=\\prod_i p_{\\lambda_i}$\n([[def-partition-young-diagram-and-conjugate-partition]]). Write\n$\\Lambda_{\\mathbb Q}:=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda$ and\n$\\Lambda_{\\mathbb Q}^d:=\\mathbb Q\\otimes_{\\mathbb Z}\\Lambda^d$. Then\n$$\\Lambda_{\\mathbb Q}=\\mathbb Q[p_1,p_2,\\ldots],$$\nand for every $d\\ge0$, the family $\\{p_\\lambda:\\lambda\\vdash d\\}$ is a\n$\\mathbb Q$-basis of $\\Lambda_{\\mathbb Q}^d$. These families are not in\ngeneral $\\mathbb Z$-bases of $\\Lambda^d$: in degree two,\n$h_2=\\tfrac12(p_{(1,1)}+p_{(2)})$ has nonintegral coordinates in the power-sum\nbasis.",
+          "uses": [
+            "1.1",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda,\\mu,\\nu\\vdash n$,\n$$g(\\lambda,\\mu,\\nu)=\\bigl\\langle\\chi^\\lambda\\chi^\\mu,\\chi^\\nu\\bigr\\rangle=\\frac1{n!}\\sum_{\\sigma\\in S_n}\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma),$$\nwhere $\\chi^\\lambda\\chi^\\mu$ is the pointwise product of class functions and the\nsum uses the real-valuedness of the irreducible characters, so that no\nconjugation appears on the third factor.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda,\\mu,\\nu\\vdash n$:\n\n(a) $g(\\lambda,\\mu,\\nu)$ is a nonnegative integer;\n\n(b) $g$ is invariant under every permutation of the three arguments, that is\n$g(\\lambda,\\mu,\\nu)=g(\\mu,\\lambda,\\nu)=g(\\lambda,\\nu,\\mu)=\\cdots$ for all six\norderings;\n\n(c) conjugating exactly two of the three partitions preserves the coefficient:\n$$g(\\lambda,\\mu,\\nu)=g(\\lambda',\\mu',\\nu)=g(\\lambda',\\mu,\\nu')=g(\\lambda,\\mu',\\nu'),$$\nwhere $\\lambda'$ denotes the conjugate partition.\n\nNo positive combinatorial rule for the coefficients is asserted.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-young-subgroup-tabloid-and-permutation-module",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 0$ and let $\\lambda=(\\lambda_1,\\dots,\\lambda_k)\\vdash n$ be a partition\nwith Young diagram $[\\lambda]$\n([[def-partition-young-diagram-and-conjugate-partition]]). Throughout, $S_n$\ndenotes the symmetric group of $\\{1,\\dots,n\\}$, with $S_0=\\{1\\}$.\n\n**Standard Young subgroups.** For $1\\le i\\le k$ let\n$$B_i:=\\{\\lambda_1+\\cdots+\\lambda_{i-1}+1,\\ \\lambda_1+\\cdots+\\lambda_{i-1}+2,\\ \\dots,\\ \\lambda_1+\\cdots+\\lambda_i\\}$$\nbe the $i$-th **block** of $\\lambda$. The blocks are consecutive intervals of\nintegers, they are pairwise disjoint, each has $|B_i|=\\lambda_i$, and together\nthey partition $\\{1,\\dots,n\\}$. The **standard Young subgroup** of type\n$\\lambda$ is\n$$S_\\lambda:=\\{\\,\\sigma\\in S_n:\\sigma(B_i)=B_i\\text{ for every }1\\le i\\le k\\,\\}.$$\nThis is a subgroup of $S_n$, namely the direct product\n$S(B_1)\\times\\cdots\\times S(B_k)$ of the symmetric groups of the individual\nblocks, each acting on its block and fixing the remaining entries pointwise;\nas in [[def-row-and-column-stabilizers-of-a-tableau]], the product\ndecomposition is unique because the blocks are pairwise disjoint and cover\n$\\{1,\\dots,n\\}$, so $|S_\\lambda|=\\lambda_1!\\cdots\\lambda_k!$. A **Young\nsubgroup of type $\\lambda$** is a subgroup of $S_n$ conjugate to\n$S_\\lambda$. For $k=0$, that is for $\\lambda=\\varnothing$ and $n=0$, there are\nno blocks and $S_\\varnothing=S_0=\\{1\\}$.\n\n**Row equivalence and tabloids.** Let $t$ and $u$ be $\\lambda$-tableaux\n([[def-young-tableau-standard-tableau-and-shape]]). We say that $t$ and $u$\nare **row equivalent**, and write $t\\sim u$, when they have the same row sets:\nfor every row $i$,\n$$\\{\\,t(i,j):1\\le j\\le\\lambda_i\\,\\}=\\{\\,u(i,j):1\\le j\\le\\lambda_i\\,\\}.$$\nEquivalently, $t\\sim u$ if and only if $u=\\rho\\cdot t$ for some $\\rho\\in R_t$:\nif $u=\\rho\\cdot t$ then $\\rho$ merely permutes the entries inside each row of\n$t$, and conversely, if the row sets agree, then\n$\\rho(t(i,j)):=u(i,j)$ defines a permutation $\\rho$ of $\\{1,\\dots,n\\}$ that\npreserves each row set of $t$, so $\\rho\\in R_t$ and $\\rho\\cdot t=u$. Hence\n$\\sim$ is an equivalence relation on the $\\lambda$-tableaux, and the\nequivalence class\n$$\\{t\\}:=\\{\\,u:u\\sim t\\,\\}=\\{\\,\\rho\\cdot t:\\rho\\in R_t\\,\\}$$\nis the **tabloid** of $t$. We draw $\\{t\\}$ as the diagram $[\\lambda]$ filled\nwith the entries of $t$ and bars between the rows, recording that the order of\nthe entries inside a row is forgotten. A tabloid is **standard** when it\ncontains a standard tableau.\n\n**The permutation module.** Let $\\Omega_\\lambda$ be the finite set of\n$\\lambda$-tabloids. For $\\sigma\\in S_n$ and a tabloid $\\{t\\}$ define\n$$\\sigma\\cdot\\{t\\}:=\\{\\sigma\\cdot t\\}.$$\nThis is well defined: if $t,u$ are $\\lambda$-tableaux with $t\\sim u$, then the\nrow sets of $\\sigma\\cdot u$ are the $\\sigma$-images of the row sets of $u$,\nwhich are the $\\sigma$-images of the row sets of $t$, and these are exactly\nthe row sets of $\\sigma\\cdot t$\n([[def-young-tableau-standard-tableau-and-shape]]); so\n$\\sigma\\cdot u\\sim\\sigma\\cdot t$ and the tabloids $\\{\\sigma\\cdot u\\}$ and\n$\\{\\sigma\\cdot t\\}$ coincide. Because the action on tableaux is a left action,\nthe induced rule on tabloids satisfies $\\mathrm{id}\\cdot\\{t\\}=\\{t\\}$ and\n$\\sigma\\cdot(\\tau\\cdot\\{t\\})=(\\sigma\\tau)\\cdot\\{t\\}$, so $S_n$ acts on\n$\\Omega_\\lambda$ from the left. The **Young permutation module** attached to\n$\\lambda$ is the complex vector space\n$$M^\\lambda:=\\mathbb C^{(\\Omega_\\lambda)}$$\nwith the tabloids as basis, again written $\\{t\\}$ for the basis vector of the\ntabloid $\\{t\\}$, equipped with the linear extension of the action above:\n$$\\sigma\\cdot\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{t\\}:=\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{\\sigma\\cdot t\\}.$$\nThis is the permutation representation of $S_n$ on the finite set\n$\\Omega_\\lambda$ ([[def-trivial-regular-and-permutation-representations]]),\nso $M^\\lambda$ is a finite-dimensional complex representation of $S_n$.\n\n**The stabilizer of a tabloid.** For every $\\lambda$-tableau $t$ one has\n$$\\sigma\\cdot\\{t\\}=\\{t\\}\\iff \\sigma\\cdot t\\sim t\\iff \\sigma\\in R_t,$$\nso the stabilizer in $S_n$ of the tabloid $\\{t\\}$ is exactly the row\nstabilizer $R_t$ ([[def-row-and-column-stabilizers-of-a-tableau]]). The action\non $\\Omega_\\lambda$ is transitive: given tabloids $\\{t\\}$ and $\\{s\\}$, the\npermutation $\\sigma$ determined by $\\sigma(t(i,j)):=s(i,j)$ satisfies\n$\\sigma\\cdot t=s$, hence $\\sigma\\cdot\\{t\\}=\\{s\\}$. In particular, for the\n**standard row-filled $\\lambda$-tableau** $t_0$, whose row $i$ carries the\nentries of $B_i$ in increasing order, the row sets of $t_0$ are precisely the\nblocks $B_1,\\dots,B_k$, so $R_{t_0}=S_\\lambda$ and the stabilizer of the\ntabloid $\\{t_0\\}$ is the standard Young subgroup $S_\\lambda$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-youngs-rule-for-permutation-modules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $\\lambda,\\mu\\vdash n$, let $M^\\mu$ be the complex Young\npermutation module of shape $\\mu$ with its tabloid basis\n([[def-young-subgroup-tabloid-and-permutation-module]]), and let\n$S^\\lambda\\subseteq M^\\lambda$ be the complex Specht module\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]). Write\n$K_{\\lambda,\\mu}$ for the Kostka number\n([[def-semistandard-tableau-and-kostka-number]]) and, for an integer $r\\ge0$,\nlet $(S^\\lambda)^{\\oplus r}$ denote a direct sum of $r$ copies of\n$S^\\lambda$, the zero module when $r=0$. Then:\n\n1. **(Isomorphism type.)** $M^\\mu$ is completely reducible and there is an\n   isomorphism of $\\mathbb C S_n$-modules\n   $$M^\\mu\\cong\\bigoplus_{\\lambda\\vdash n}(S^\\lambda)^{\\oplus K_{\\lambda,\\mu}},$$\n   the sum being over the finitely many partitions of $n$.\n2. **(Multiplicity.)** In every decomposition of $M^\\mu$ as a direct sum of\n   irreducible subrepresentations the number of summands isomorphic to\n   $S^\\lambda$ equals $K_{\\lambda,\\mu}$; that is, the multiplicity\n   $[M^\\mu:S^\\lambda]$ is well defined and equal to the Kostka number\n   $K_{\\lambda,\\mu}$, independently of the decomposition.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $V$ and $W$ be finite-dimensional complex\nrepresentations of $G$. Then, for every $g\\in G$:\n\n1. $\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$;\n2. $\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$;\n3. $\\chi_{V^{*}}(g)=\\overline{\\chi_V(g)}$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-characteristic-of-a-young-permutation-character-is-complete",
+          "source_section": "Statement",
+          "quote": "For every $n\\ge0$ and $\\lambda\\vdash n$, let $\\varphi^\\lambda$ be the character\nof the Young permutation module $M^\\lambda$, the permutation module on\n$\\lambda$-tabloids, so that $M^\\lambda\\cong\\operatorname{Ind}_{S_\\lambda}^{S_n}\\mathbf 1$\n([[lem-young-permutation-module-is-induced-from-the-trivial-character]],\n[[def-young-subgroup-tabloid-and-permutation-module]]). Then\n\n$$\\operatorname{ch}(\\varphi^\\lambda)=h_\\lambda\\in\\Lambda^n,$$\n\nthe product of the complete homogeneous symmetric functions of the parts of\n$\\lambda$.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "source_section": "Statement",
+          "quote": "For every partition $\\lambda$, let $s_\\lambda\\in\\Lambda$ be the stable Schur\nfunction defined by bialternants\n([[def-stable-schur-function-by-bialternants]]). For any integers\n$r\\ge\\ell(\\lambda)$ and $c\\ge\\ell(\\lambda')$, pad $\\lambda$ and $\\lambda'$\nwith zero parts to lengths $r$ and $c$, respectively. Then\n$$s_\\lambda=\\det\\bigl(h_{\\lambda_i-i+j}\\bigr)_{1\\le i,j\\le r}=\\det\\bigl(e_{\\lambda'_i-i+j}\\bigr)_{1\\le i,j\\le c},$$\nwhere $h_k,e_k\\in\\Lambda$ are the stable complete and elementary functions\n([[thm-elementary-and-complete-families-freely-generate-the-stable-ring]],\n[[def-elementary-symmetric-polynomials]],\n[[def-power-sum-and-complete-homogeneous-symmetric-polynomials]]). In these\ndeterminants use $h_0=e_0=1$, set $h_k=e_k=0$ for $k<0$, and take the empty\ndeterminant to be $1$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-sign-representation-and-restriction-of-a-representation",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field.\n\nFor the symmetric group $S_n$ ([[def-symmetric-group]]), the **sign\nrepresentation** over $k$ is the one-dimensional representation on $k$ in which\n$$\\sigma \\cdot a:=\\operatorname{sgn}(\\sigma)a.$$\nThis is a representation because $\\operatorname{sgn}:S_n \\to \\{\\pm 1\\}$ is a\ngroup homomorphism ([[thm-sign-is-a-homomorphism]]).\n\nNow let $\\rho:G \\to \\operatorname{GL}(V)$ be a representation of a group $G$\nover $k$, and let $H \\le G$ be a subgroup ([[def-subgroup]]). The\n**restriction** of $\\rho$ to $H$ is the representation\n$$\\operatorname{Res}^G_H(V):=\\rho|_H:H \\longrightarrow \\operatorname{GL}(V),\\qquad h \\longmapsto \\rho(h).$$\nIt has the same underlying vector space $V$ and only forgets the action of the\nelements outside $H$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-sign-from-disjoint-cycle-structure",
+          "source_section": "Statement",
+          "quote": "A cycle of length $k$ has sign $(-1)^{k-1}$. If $\\sigma\\in S_n$ and\n$c(\\sigma)$ is the number of cycles after every fixed point is included as a\none-cycle, then\n\n$$\\operatorname{sgn}(\\sigma)=(-1)^{n-c(\\sigma)}.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Character of $S^{(3)}$: by [F7] $s_{(3)}=h_3$, and [F2] expands $h_3=\\tfrac16p_1^3+\\tfrac12p_1p_2+\\tfrac13p_3$ in the basis $\\{p_\\rho/z_\\rho\\}$. By [F1] the coefficient of $p_\\rho/z_\\rho$ in $s_{(3)}=\\operatorname{ch}(\\chi^{(3)})$ is $\\chi^{(3)}(\\rho)$, so uniqueness [F3] gives the values $\\chi^{(3)}(1^3)=1$, $\\chi^{(3)}(2,1)=1$, $\\chi^{(3)}(3)=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Character of $S^{(1,1,1)}$: by [F8] the sign character has values $1,-1,1$ on $(1^3),(2,1),(3)$, so its characteristic is $\\operatorname{ch}(\\chi^{(1,1,1)})=\\tfrac16p_1^3-\\tfrac12p_1p_2+\\tfrac13p_3$ by [F1]; this is consistent with $\\operatorname{ch}(\\chi^{(1,1,1)})=s_{(1,1,1)}=e_3$ from [F1].",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Character of $S^{(2,1)}$: the Young permutation character of the tabloid module $M^{(2,1)}$ has characteristic $\\operatorname{ch}(\\varphi^{(2,1)})=h_2h_1$ by [F6], and $\\varphi^{(2,1)}=\\chi^{(3)}+\\chi^{(2,1)}$ by Young's rule [F5]. Applying [F1] therefore gives $\\operatorname{ch}(\\chi^{(2,1)})=h_2h_1-h_3$; by the expansions [F2], $h_2h_1-h_3=\\bigl(\\tfrac12p_1^2+\\tfrac12p_2\\bigr)p_1-\\bigl(\\tfrac16p_1^3+\\tfrac12p_1p_2+\\tfrac13p_3\\bigr)=\\tfrac13p_1^3-\\tfrac13p_3$. By [F1] and uniqueness [F3], the values are $\\chi^{(2,1)}(1^3)=6\\cdot\\tfrac13=2$, $\\chi^{(2,1)}(2,1)=0$ and $\\chi^{(2,1)}(3)=3\\cdot(-\\tfrac13)=-1$.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Triple products. Write $(a_\\lambda,b_\\lambda,c_\\lambda)$ for the values of $\\chi^\\lambda$ on $(1^3),(2,1),(3)$. The class sizes are $1,3,2$, so [F4] gives $g(\\lambda,\\mu,\\nu)=\\frac16\\bigl(a_\\lambda a_\\mu a_\\nu+3b_\\lambda b_\\mu b_\\nu+2c_\\lambda c_\\mu c_\\nu\\bigr)$. From steps 1.1-1.3, $(a,b,c)$ equals $(1,1,1)$ for $\\lambda=(3)$, $(2,0,-1)$ for $\\lambda=(2,1)$ and $(1,-1,1)$ for $\\lambda=(1^3)$. Substituting these into the formula, the nonzero values are $g((2,1),(2,1),(2,1))=\\frac16(8+0-2)=1$, $g((2,1),(2,1),(3))=\\frac16(4+0+2)=1$, $g((2,1),(2,1),(1^3))=\\frac16(4+0+2)=1$, $g((3),(3),(3))=\\frac16(1+3+2)=1$, $g((3),(3),(1^3))=\\frac16(1+3+2)=1$, $g((1^3),(1^3),(1^3))=\\frac16(1+3+2)=1$ and $g((1^3),(1^3),(3))=\\frac16(1+3+2)=1$; the remaining values vanish, for instance $g((2,1),(1^3),(1^3))=\\frac16(2+0-2)=0$, $g((2,1),(1^3),(3))=\\frac16(2+0-2)=0$ and $g((3),(3),(2,1))=\\frac16(2+0-2)=0$, and every other triple is a permutation of one of these by [F4].",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Since the multiplicity of $S^\\nu$ in $S^\\lambda\\otimes S^\\mu$ is $g(\\lambda,\\mu,\\nu)$, step 2.1 gives exactly the displayed table: $S^{(2,1)}\\otimes S^{(2,1)}\\cong S^{(3)}\\oplus S^{(2,1)}\\oplus S^{(1,1,1)}$, $S^{(2,1)}\\otimes S^{(1,1,1)}\\cong S^{(2,1)}$, $S^{(1,1,1)}\\otimes S^{(1,1,1)}\\cong S^{(3)}$ and $S^{(3)}\\otimes X\\cong X$ for every irreducible $X$. All coefficients are $0$ or $1$, and the table equals each of its permutations by [F4].",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example computes the complete table in degree $3$; no object of the example is empty, and the general coefficient statements used in steps 1.1-3.1 carry the $n=0$ case in their own items."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: the evaluations include the vanishing coefficients, e.g. $g((2,1),(1^3),(1^3))=\\frac16(2+0-2)=0$, computed from the character values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1: every nonzero entry equals $1$, including the unit cases $g((3),(3),(3))=g((3),(3),(1^3))=1$; all coefficients are $0$ or $1$."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: the degenerate case of a repeated argument, $g((2,1),(2,1),(2,1))=\\frac16(8+0-2)=1$, is computed explicitly."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-3.1: no threshold or interval endpoint occurs; the computation is the complete table in the single degree $n=3$."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-3.1: finite character sums over the three classes of $S_3$; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement and steps 1.1-3.1: the example computes values and displays a table; it asserts no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is claimed: the table records all coefficients in degree $3$, not a characterization of vanishing outside it."
+        }
+      ]
+    },
+    "thm-row-gap-reduction-and-conditional-k-stability": {
+      "citations": [
+        {
+          "fact": "F2",
+          "source": "lem-kronecker-reduction-lemma",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$ and $\\ell\\ge0$, and let $\\lambda,\\mu,\\nu\\vdash n$ have lengths at most $\\ell$. Read missing parts as zero and put $s:=n-\\nu_1$, with $\\nu_1=0$ for the empty partition.\n\n**(i)** If $|\\lambda_i-\\mu_i|>s$ for some $i\\le\\ell$, then $g(\\lambda,\\mu,\\nu)=0$.\n\n**(ii)** Otherwise put $\\rho:=\\lambda\\cap\\mu$, $\\omega:=\\lambda\\cup\\mu$, $\\omega_{\\ell+1}:=0$, and define\n$$\\delta_i:=\\max\\{0,\\rho_i-\\omega_{i+1}-2s\\},\\qquad D_j:=\\sum_{i=j}^{\\ell}\\delta_i,\\qquad \\varphi(\\theta)_j:=\\theta_j-D_j\\quad(1\\le j\\le\\ell).$$\nFor every partition $\\theta$ with at most $\\ell$ parts satisfying $\\rho_j-s\\le\\theta_j\\le\\omega_j$ for each $j$, the image $\\varphi(\\theta)$ is a partition after deletion of zero parts. In particular $\\varphi(\\lambda)$ and $\\varphi(\\mu)$ have a common size $r$, and $\\varphi(\\nu):=(r-s,\\nu_2,\\nu_3,\\ldots)$ is a partition of $r$. Then\n$$g(\\lambda,\\mu,\\nu)=g(\\varphi(\\lambda),\\varphi(\\mu),\\varphi(\\nu)),\\qquad r\\le2s\\ell^2.$$\n\nThis is a corrected reduction map for the bounded-reduction conclusion of Pak–Panova. It retains their Littlewood–Richardson/Jacobi–Trudi proof route and the same size bound; the map is not the block formula printed in their papers.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-littlewood-richardson-tableau-and-coefficient",
+          "source_section": "Definition",
+          "quote": "Let $\\lambda,\\nu$ be partitions with $[\\lambda]\\subseteq[\\nu]$, and let $\\mu$ be a partition with $|\\nu|=|\\lambda|+|\\mu|$. Use the conventions of [[def-skew-diagram-and-semistandard-skew-tableau]] for the skew diagram $\\nu/\\lambda$ and for semistandard skew tableaux of shape $\\nu/\\lambda$, and those of [[def-semistandard-tableau-and-kostka-number]] for the content of a tableau; recall that entries of a semistandard skew tableau weakly increase along rows and strictly increase down columns ([[def-partition-young-diagram-and-conjugate-partition]] fixes the English row and column coordinates).\n\nThe **reading word** $w(T)$ of a semistandard skew tableau $T$ of shape $\\nu/\\lambda$ is the word obtained by reading the rows of $T$ from right to left, beginning with the top row and proceeding to the bottom row. The word $w(T)=a_1a_2\\cdots a_N$ is a **lattice word** (a lattice permutation) if in every prefix $a_1\\cdots a_p$ and for every $i\\ge1$ the number of letters $i$ in the prefix is at least the number of letters $i+1$; the empty word is a lattice word vacuously.\n\nA **Littlewood--Richardson tableau** (LR tableau) of shape $\\nu/\\lambda$ and content $\\mu$ is a semistandard skew tableau of shape $\\nu/\\lambda$ and content $\\mu$ whose reading word is a lattice word. The **Littlewood--Richardson coefficient** $c^\\nu_{\\lambda\\mu}\\in\\mathbb Z_{\\ge0}$ is the number of LR tableaux of shape $\\nu/\\lambda$ and content $\\mu$; it is $0$ when $[\\lambda]\\not\\subseteq[\\nu]$, when $|\\nu|\\ne|\\lambda|+|\\mu|$, or when no such tableau exists. For $\\mu=\\varnothing$ and $\\nu=\\lambda$ the empty skew tableau is the unique tableau of content $\\varnothing$, its reading word is empty, and hence $c^\\lambda_{\\lambda\\varnothing}=1$; more generally $c^\\lambda_{\\lambda\\mu}=0$ unless $\\mu=\\varnothing$, and $c^\\nu_{\\lambda\\mu}=0$ unless $\\lambda\\subseteq\\nu$ and $|\\nu|=|\\lambda|+|\\mu|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-littlewood-richardson-schur-product-expansion",
+          "source_section": "Statement",
+          "quote": "Let $c^\\lambda_{\\mu\\nu}$ be the Littlewood–Richardson coefficient of the inherited definition, the number of Littlewood–Richardson tableaux of shape $\\lambda/\\mu$ and content $\\nu$ ([[def-littlewood-richardson-tableau-and-coefficient]], [[def-skew-diagram-and-semistandard-skew-tableau]], [[def-semistandard-tableau-and-kostka-number]], [[def-partition-young-diagram-and-conjugate-partition]]). Then for all partitions $\\mu,\\nu$,\n$$s_\\mu s_\\nu=\\sum_{\\lambda\\,\\supseteq\\,\\mu,\\ |\\lambda|=|\\mu|+|\\nu|}c^\\lambda_{\\mu\\nu}s_\\lambda\\qquad\\text{in }\\Lambda,$$\nwhere the sum is finite and zero terms may be omitted; equivalently, for every $\\lambda\\supseteq\\mu$,\n$$s_{\\lambda/\\mu}=\\sum_{\\nu}c^\\lambda_{\\mu\\nu}s_\\nu.$$\nNo choice principle is used.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-partition-young-diagram-and-conjugate-partition",
+          "source_section": "Definition",
+          "quote": "**Partitions.** Let $n\\ge 0$ be an integer. A **partition of $n$** is a finite\nweakly decreasing sequence $\\lambda=(\\lambda_1,\\dots,\\lambda_k)$ of positive\nintegers with $\\lambda_1+\\cdots+\\lambda_k=n$. Its entries are the **parts** of\n$\\lambda$ and $k$ is the **number of parts**. For $n=0$ the only partition is\nthe **empty partition** $\\varnothing$, the empty sequence with $k=0$; for\n$n\\ge 1$ one has $\\lambda_1\\ge\\lambda_2\\ge\\cdots\\ge\\lambda_k\\ge 1$ and\n$k\\le n$. We write $\\lambda\\vdash n$. Trailing zeros are not parts: a finite\nsequence of nonnegative integers ending in $0$ is not a partition, so the\nnumber of parts of $\\lambda$ is determined by $\\lambda$ and\n$(\\lambda_1,\\dots,\\lambda_k)$ is a different data type from\n$(\\lambda_1,\\dots,\\lambda_k,0)$.\n\n**English Young diagrams.** The **(English) Young diagram** of a nonempty $\\lambda$ is\n$$[\\lambda]:=\\{\\,(i,j)\\;:\\;1\\le i\\le k,\\ 1\\le j\\le \\lambda_i\\,\\}\\subseteq\\mathbb N\\times\\mathbb N,$$\nwhere $i$ numbers the **rows** downward and $j$ numbers the **columns**\nrightward. An element of $[\\lambda]$ is a **node**, or box, of the diagram. Row\n$i$ of $[\\lambda]$ carries $\\lambda_i$ nodes, and column $j$ carries\n$$\\lambda'_j:=\\#\\{\\,i: \\lambda_i\\ge j\\,\\}$$\nnodes, a quantity that is $0$ beyond the last column (and for every $j\\ge1$ when $\\lambda=\\varnothing$). Since a partition is weakly\ndecreasing, $[\\lambda]$ determines $\\lambda$: if $[\\mu]=[\\lambda]$, then row\n$i$ of $[\\lambda]$ is row $i$ of $[\\mu]$, so $\\mu_i=\\lambda_i$ for every $i$\nand $\\mu=\\lambda$. In particular $[\\varnothing]=\\emptyset$, the empty diagram.\n\n**Conjugation.** The **conjugate partition** of a nonempty $\\lambda$ is\n$$\\lambda':=(\\lambda'_1,\\lambda'_2,\\dots,\\lambda'_{\\lambda_1}),$$\nthe sequence of column heights of $[\\lambda]$, with $\\varnothing':=\\varnothing$\nfor the empty partition. This is again a partition of $n$, and\n$[\\lambda']$ is the transpose of $[\\lambda]$:\nfor $1\\le i\\le\\lambda_1$ and $1\\le j\\le k$,\n$$(i,j)\\in[\\lambda']\\iff j\\le\\lambda'_i\\iff \\lambda_j\\ge i\\iff (j,i)\\in[\\lambda].$$\nOutside these bounds neither diagram contains the corresponding node; for the empty partition both diagrams are empty.\nConjugation is an involution, $\\lambda''=\\lambda$, because\n$\\lambda''_i=\\#\\{j:\\lambda'_j\\ge i\\}$ counts the columns of $[\\lambda]$ of\nheight at least $i$, that is, the columns $j$ with at least $i$ rows of length\n$\\ge j$, which by weak decrease is exactly the set of $j\\le\\lambda_i$. Thus\n$\\lambda\\mapsto\\lambda'$ is a bijection on the partitions of $n$, exchanging\nthe number of parts with the largest part for nonempty partitions.\n\n**Size zero.** The symmetric group of $\\{1,\\dots,n\\}$ is\n$S_n:=\\operatorname{Sym}(\\{1,\\dots,n\\})$ ([[def-symmetric-group]]) for every\n$n\\ge 0$, and we fix\n$$S_0:=\\operatorname{Sym}(\\emptyset)=\\{1\\},$$\nthe trivial group; for $n=0$ the set $\\{1,\\dots,n\\}$ is empty and the group\nacts trivially on every size-zero object below. This is the convention used\nwhenever the constructions of this page are read at $n=0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Assume the row-gap inequality $\\rho_k\\ge\\omega_{k+1}+s$; first-part ordering will not be used. The shifted parameter is $n_t-(\\nu_1+tk)=s$, and the shifted tail is unchanged. Fix $q\\le s$. The map $\\alpha\\mapsto\\alpha_t:=\\alpha+(t^k)$ is a bijection from partitions $\\alpha\\subseteq\\rho$ of size $n-q$ to partitions $\\theta\\subseteq\\rho_t$ of size $n_t-q$. In the forward direction the shift preserves the partition order. Conversely a partition $\\theta$ in the second set has total deficit $|\\rho_t|-|\\theta|=q-g_0\\le s$, so $\\theta_k\\ge\\rho_k+t-s\\ge\\omega_{k+1}+t\\ge\\theta_{k+1}+t$. Consequently subtracting $t$ in its first $k$ rows produces a partition $\\alpha\\subseteq\\rho$ of size $n-q$, with nonnegative $k$th part since $\\theta_k-t\\ge\\omega_{k+1}\\ge0$. All other boundary and row inequalities are preserved. If $q<g_0$, both sets are empty.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Shift each cell in the first $k$ rows of $\\lambda/\\alpha$ horizontally by $t$, leaving lower rows fixed. The image is $\\lambda_t/\\alpha_t$. There are no shared skew columns across the cut in either shape: originally $\\alpha_k\\ge\\rho_k-s\\ge\\omega_{k+1}\\ge\\lambda_{k+1}$, and after shifting $\\alpha_{t,k}=\\alpha_k+t\\ge\\lambda_{t,k+1}$. Partition inequalities give the same separation for all rows on either side. Within each side, every horizontal shift is the same, so shared columns and their strict inequalities are preserved. Row order, content and the right-to-left, top-to-bottom reading word are unchanged. This is a bijection of LR tableaux, so $c^\\lambda_{\\alpha\\beta}=c^{\\lambda_t}_{\\alpha_t,\\beta}$ for every $\\beta\\vdash q$, and the same proof gives $c^\\mu_{\\alpha\\gamma}=c^{\\mu_t}_{\\alpha_t,\\gamma}$ for every $\\gamma\\vdash q$.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Use the bijection of step 1.1 and the LR equalities of step 2.1 in the finite coefficient sum [F2]. The small partitions $\\beta,\\gamma,\\eta$ and their Kronecker coefficient are unchanged, so $K_n(q,\\eta)=K_{n_t}(q,\\eta)$ for every $q\\le s$. The first-row expansions [F2] for $\\nu$ and $\\nu_t$ use the same cofactors because they have the same tail. Their signed sums are therefore equal, giving $g(\\lambda_t,\\mu_t,\\nu_t)=g(\\lambda,\\mu,\\nu)$ for every $t\\ge0$. This proves part (i) and also proves that the equality holds under the row-gap inequality without the first-part ordering.",
+          "step": "3.1",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "For an arbitrary triple, $\\min\\{\\lambda_{t,k},\\mu_{t,k}\\}=\\min\\{\\lambda_k,\\mu_k\\}+t$ and $\\max\\{\\lambda_{t,k+1},\\mu_{t,k+1}\\}=\\max\\{\\lambda_{k+1},\\mu_{k+1}\\}$. Thus the row-gap inequality with parameter $s$ holds at $t=t_0$ and for every larger $t$. Apply the ordering-free identity established in step 3.1 to the triple at $t_0$ with further shift $u\\ge0$. It gives $G_k(t_0+u)=G_k(t_0)$ for every $u\\ge0$, proving part (ii) with the stated threshold for all $k\\ge1$.",
+          "step": "4.1",
+          "inputs": [
+            "F4",
+            "step 3.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 permits the empty original triple, with n=s=0 and q=0; its shifted partitions remain defined by zero padding. Steps 3.1 and 4.1 give the same coefficient and the threshold t0=0 in this case."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles empty common-index sets when q<g0, and step 3.1 compares the same empty sums in both triples; this includes g0>s, when all small-q coefficients and therefore both full coefficients vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the inverse shift for every k>=1 and step 2.1 proves tableau preservation, including k=1; the Statement identifies this case with ordinary first-row padding."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows equality rho_k=omega_(k+1)+s; steps 3.1 and 4.1 explicitly do not require first-part ordering, so k=1 with nu_1 smaller than another first part is covered without relabeling the family."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 through 3.1 include t=0; step 4.1 proves constancy for every t>=t0 by applying the proved identity at t0 with further shift u>=0, including u=0."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use a specified row shift and its explicit inverse, and step 3.1 compares finite coefficient sums and determinant expansions; no choice principle or unproved supplier obligation is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement gives sufficient separation conditions; steps 1.1, 2.1 and 3.1 prove their forward preservation implication, and step 4.1 proves the eventual-constancy conclusion for arbitrary triples."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted: failure of separation is not claimed to force a coefficient change for every triple."
+        }
+      ]
+    },
+    "rem-no-general-positive-combinatorial-rule-for-kronecker-coefficients-is-known": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The remark records the status of an open problem and evaluates no coefficient; no empty object or edge case enters its statement."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement: the remark contains no computation and asserts no numerical value, so no zero case arises; the coefficients themselves are allowed to vanish, as recorded on the companion page."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Statement: no unit case is claimed in the remark; it records the absence of a general rule and makes no numerical assertion."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "No degenerate parameter or limiting case occurs in a statement about the absence of a general combinatorial rule."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement: no interval endpoint or limiting process occurs; the remark concerns the status of a problem, not a family of values."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement and Remarks: this is a literature-status record and cites no choice-dependent construction; the closing sentence states that no form of the Axiom of Choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the remark records the absence of a general rule; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is claimed: the remark does not assert that no rule can exist, and it records the problem as open."
+        }
+      ]
+    },
+    "cex-row-padding-does-not-preserve-a-kronecker-coefficient-before-stability": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-kronecker-coefficient-is-a-three-character-inner-product",
+          "source_section": "Statement",
+          "quote": "For all partitions $\\lambda,\\mu,\\nu\\vdash n$,\n$$g(\\lambda,\\mu,\\nu)=\\bigl\\langle\\chi^\\lambda\\chi^\\mu,\\chi^\\nu\\bigr\\rangle=\\frac1{n!}\\sum_{\\sigma\\in S_n}\\chi^\\lambda(\\sigma)\\chi^\\mu(\\sigma)\\chi^\\nu(\\sigma),$$\nwhere $\\chi^\\lambda\\chi^\\mu$ is the pointwise product of class functions and the\nsum uses the real-valuedness of the irreducible characters, so that no\nconjugation appears on the third factor.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types",
+          "source_section": "Statement",
+          "quote": "The conjugacy classes of $S_n$ are in bijection with the tuples of\nnonnegative integers $(c_1,\\ldots,c_n)$ satisfying\n$$\\sum_{k=1}^n kc_k=n.$$\nFor $n=0$, the unique empty tuple indexes the identity class of $S_0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-centralizer-cardinality-from-cycle-type",
+          "source_section": "Statement",
+          "quote": "If $\\sigma\\in S_n$ has $c_k$ cycles of length $k$, including fixed points when\n$k=1$, then\n$$|C_{S_n}(\\sigma)|=\\prod_{k=1}^n k^{c_k}c_k!.$$\nThe formula uses the empty product $1$ when $n=0$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-young-subgroup-tabloid-and-permutation-module",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge 0$ and let $\\lambda=(\\lambda_1,\\dots,\\lambda_k)\\vdash n$ be a partition\nwith Young diagram $[\\lambda]$\n([[def-partition-young-diagram-and-conjugate-partition]]). Throughout, $S_n$\ndenotes the symmetric group of $\\{1,\\dots,n\\}$, with $S_0=\\{1\\}$.\n\n**Standard Young subgroups.** For $1\\le i\\le k$ let\n$$B_i:=\\{\\lambda_1+\\cdots+\\lambda_{i-1}+1,\\ \\lambda_1+\\cdots+\\lambda_{i-1}+2,\\ \\dots,\\ \\lambda_1+\\cdots+\\lambda_i\\}$$\nbe the $i$-th **block** of $\\lambda$. The blocks are consecutive intervals of\nintegers, they are pairwise disjoint, each has $|B_i|=\\lambda_i$, and together\nthey partition $\\{1,\\dots,n\\}$. The **standard Young subgroup** of type\n$\\lambda$ is\n$$S_\\lambda:=\\{\\,\\sigma\\in S_n:\\sigma(B_i)=B_i\\text{ for every }1\\le i\\le k\\,\\}.$$\nThis is a subgroup of $S_n$, namely the direct product\n$S(B_1)\\times\\cdots\\times S(B_k)$ of the symmetric groups of the individual\nblocks, each acting on its block and fixing the remaining entries pointwise;\nas in [[def-row-and-column-stabilizers-of-a-tableau]], the product\ndecomposition is unique because the blocks are pairwise disjoint and cover\n$\\{1,\\dots,n\\}$, so $|S_\\lambda|=\\lambda_1!\\cdots\\lambda_k!$. A **Young\nsubgroup of type $\\lambda$** is a subgroup of $S_n$ conjugate to\n$S_\\lambda$. For $k=0$, that is for $\\lambda=\\varnothing$ and $n=0$, there are\nno blocks and $S_\\varnothing=S_0=\\{1\\}$.\n\n**Row equivalence and tabloids.** Let $t$ and $u$ be $\\lambda$-tableaux\n([[def-young-tableau-standard-tableau-and-shape]]). We say that $t$ and $u$\nare **row equivalent**, and write $t\\sim u$, when they have the same row sets:\nfor every row $i$,\n$$\\{\\,t(i,j):1\\le j\\le\\lambda_i\\,\\}=\\{\\,u(i,j):1\\le j\\le\\lambda_i\\,\\}.$$\nEquivalently, $t\\sim u$ if and only if $u=\\rho\\cdot t$ for some $\\rho\\in R_t$:\nif $u=\\rho\\cdot t$ then $\\rho$ merely permutes the entries inside each row of\n$t$, and conversely, if the row sets agree, then\n$\\rho(t(i,j)):=u(i,j)$ defines a permutation $\\rho$ of $\\{1,\\dots,n\\}$ that\npreserves each row set of $t$, so $\\rho\\in R_t$ and $\\rho\\cdot t=u$. Hence\n$\\sim$ is an equivalence relation on the $\\lambda$-tableaux, and the\nequivalence class\n$$\\{t\\}:=\\{\\,u:u\\sim t\\,\\}=\\{\\,\\rho\\cdot t:\\rho\\in R_t\\,\\}$$\nis the **tabloid** of $t$. We draw $\\{t\\}$ as the diagram $[\\lambda]$ filled\nwith the entries of $t$ and bars between the rows, recording that the order of\nthe entries inside a row is forgotten. A tabloid is **standard** when it\ncontains a standard tableau.\n\n**The permutation module.** Let $\\Omega_\\lambda$ be the finite set of\n$\\lambda$-tabloids. For $\\sigma\\in S_n$ and a tabloid $\\{t\\}$ define\n$$\\sigma\\cdot\\{t\\}:=\\{\\sigma\\cdot t\\}.$$\nThis is well defined: if $t,u$ are $\\lambda$-tableaux with $t\\sim u$, then the\nrow sets of $\\sigma\\cdot u$ are the $\\sigma$-images of the row sets of $u$,\nwhich are the $\\sigma$-images of the row sets of $t$, and these are exactly\nthe row sets of $\\sigma\\cdot t$\n([[def-young-tableau-standard-tableau-and-shape]]); so\n$\\sigma\\cdot u\\sim\\sigma\\cdot t$ and the tabloids $\\{\\sigma\\cdot u\\}$ and\n$\\{\\sigma\\cdot t\\}$ coincide. Because the action on tableaux is a left action,\nthe induced rule on tabloids satisfies $\\mathrm{id}\\cdot\\{t\\}=\\{t\\}$ and\n$\\sigma\\cdot(\\tau\\cdot\\{t\\})=(\\sigma\\tau)\\cdot\\{t\\}$, so $S_n$ acts on\n$\\Omega_\\lambda$ from the left. The **Young permutation module** attached to\n$\\lambda$ is the complex vector space\n$$M^\\lambda:=\\mathbb C^{(\\Omega_\\lambda)}$$\nwith the tabloids as basis, again written $\\{t\\}$ for the basis vector of the\ntabloid $\\{t\\}$, equipped with the linear extension of the action above:\n$$\\sigma\\cdot\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{t\\}:=\\sum_{\\{t\\}\\in\\Omega_\\lambda}a_{\\{t\\}}\\,\\{\\sigma\\cdot t\\}.$$\nThis is the permutation representation of $S_n$ on the finite set\n$\\Omega_\\lambda$ ([[def-trivial-regular-and-permutation-representations]]),\nso $M^\\lambda$ is a finite-dimensional complex representation of $S_n$.\n\n**The stabilizer of a tabloid.** For every $\\lambda$-tableau $t$ one has\n$$\\sigma\\cdot\\{t\\}=\\{t\\}\\iff \\sigma\\cdot t\\sim t\\iff \\sigma\\in R_t,$$\nso the stabilizer in $S_n$ of the tabloid $\\{t\\}$ is exactly the row\nstabilizer $R_t$ ([[def-row-and-column-stabilizers-of-a-tableau]]). The action\non $\\Omega_\\lambda$ is transitive: given tabloids $\\{t\\}$ and $\\{s\\}$, the\npermutation $\\sigma$ determined by $\\sigma(t(i,j)):=s(i,j)$ satisfies\n$\\sigma\\cdot t=s$, hence $\\sigma\\cdot\\{t\\}=\\{s\\}$. In particular, for the\n**standard row-filled $\\lambda$-tableau** $t_0$, whose row $i$ carries the\nentries of $B_i$ in increasing order, the row sets of $t_0$ are precisely the\nblocks $B_1,\\dots,B_k$, so $R_{t_0}=S_\\lambda$ and the stabilizer of the\ntabloid $\\{t_0\\}$ is the standard Young subgroup $S_\\lambda$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-youngs-rule-for-permutation-modules",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge0$, let $\\lambda,\\mu\\vdash n$, let $M^\\mu$ be the complex Young\npermutation module of shape $\\mu$ with its tabloid basis\n([[def-young-subgroup-tabloid-and-permutation-module]]), and let\n$S^\\lambda\\subseteq M^\\lambda$ be the complex Specht module\n([[def-column-antisymmetrizer-polytabloid-and-specht-module]]). Write\n$K_{\\lambda,\\mu}$ for the Kostka number\n([[def-semistandard-tableau-and-kostka-number]]) and, for an integer $r\\ge0$,\nlet $(S^\\lambda)^{\\oplus r}$ denote a direct sum of $r$ copies of\n$S^\\lambda$, the zero module when $r=0$. Then:\n\n1. **(Isomorphism type.)** $M^\\mu$ is completely reducible and there is an\n   isomorphism of $\\mathbb C S_n$-modules\n   $$M^\\mu\\cong\\bigoplus_{\\lambda\\vdash n}(S^\\lambda)^{\\oplus K_{\\lambda,\\mu}},$$\n   the sum being over the finitely many partitions of $n$.\n2. **(Multiplicity.)** In every decomposition of $M^\\mu$ as a direct sum of\n   irreducible subrepresentations the number of summands isomorphic to\n   $S^\\lambda$ equals $K_{\\lambda,\\mu}$; that is, the multiplicity\n   $[M^\\mu:S^\\lambda]$ is well defined and equal to the Kostka number\n   $K_{\\lambda,\\mu}$, independently of the decomposition.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-characters-of-direct-sums-tensor-products-and-duals",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a finite group and let $V$ and $W$ be finite-dimensional complex\nrepresentations of $G$. Then, for every $g\\in G$:\n\n1. $\\chi_{V\\oplus W}(g)=\\chi_V(g)+\\chi_W(g)$;\n2. $\\chi_{V\\otimes W}(g)=\\chi_V(g)\\,\\chi_W(g)$;\n3. $\\chi_{V^{*}}(g)=\\overline{\\chi_V(g)}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-row-gap-reduction-and-conditional-k-stability",
+          "source_section": "Statement",
+          "quote": "Fix $\\lambda,\\mu,\\nu\\vdash n$ and an integer $k\\ge1$. Write $(t^k)$ for $k$ parts equal to $t$ and $(tk)$ for the one-part partition of size $tk$, and read missing parts as zero. Put $s:=n-\\nu_1$, with $\\nu_1=0$ if $n=0$.\n\n**(i)** Suppose $\\lambda_1\\le\\mu_1\\le\\nu_1$ and\n$$\\min\\{\\lambda_k,\\mu_k\\}\\ge\\max\\{\\lambda_{k+1},\\mu_{k+1}\\}+s.$$\nThen for every integer $t\\ge0$,\n$$g(\\lambda+(t^k),\\mu+(t^k),\\nu+(tk))=g(\\lambda,\\mu,\\nu).$$\nAll shifted arguments are partitions of $n+tk$. For $k=1$, this is the first-row padding of the three tails to size $n+t$ ([[def-first-row-padding-of-a-partition]]).\n\n**(ii)** For arbitrary $\\lambda,\\mu,\\nu\\vdash n$ and $k\\ge1$, the sequence $G_k(t):=g(\\lambda+(t^k),\\mu+(t^k),\\nu+(tk))$ is eventually constant. More precisely, it is constant for every integer $t\\ge t_0$, where\n$$t_0:=\\max\\{0,\\ s+\\max\\{\\lambda_{k+1},\\mu_{k+1}\\}-\\min\\{\\lambda_k,\\mu_k\\}\\}.$$\nThe proof of the row-gap identity does not require first-part ordering, so the threshold also covers $k=1$ when $\\nu_1<\\max\\{\\lambda_1,\\mu_1\\}$. No monotonicity is asserted.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "($S_4$ characters.) For $\\rho=(3,1)$ the tabloids are the ordered $(3,1)$-set pairs of $[4]$, equivalently the $3$-subsets, and a $3$-subset is fixed by $\\upsilon$ exactly when its complementary point is fixed; hence $\\chi_{M^{(3,1)}}=(4,2,0,1,0)$ on the five classes in the order of the Given. Subtracting the trivial character and using [F3] gives $\\chi^{(3,1)}=(3,1,-1,0,-1)$, whose norm $\\frac1{24}[9+6+3+0+6]=1$ confirms it is the standard character. For $\\rho=(2,2)$ the tabloids are the ordered pairs $(A,A^c)$ of $2$-subsets, so $\\chi_{M^{(2,2)}}(\\upsilon)=\\#\\{A:|A|=2,\\ \\upsilon A=A\\}$, giving $(6,2,2,0,0)$; by [F3] $\\chi^{(2,2)}=\\chi_{M^{(2,2)}}-\\chi^{(4)}-\\chi^{(3,1)}=(2,0,2,-1,0)$, with norm $\\frac1{24}[4+0+12+8+0]=1$.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "($S_5$ characters.) The tabloids of shape $(3,2)$ are the $3$-subsets of $[5]$, and a $3$-subset is invariant precisely when it is a union of cycles; counting over the seven classes gives $\\chi_{M^{(3,2)}}=(10,4,2,1,1,0,0)$. The tabloids of shape $(4,1)$ are the $4$-subsets, whose complements are points, so $\\chi_{M^{(4,1)}}(\\upsilon)=\\#\\mathrm{fix}(\\upsilon)=(5,3,1,2,0,1,0)$ and $\\chi^{(4,1)}=(4,2,0,1,-1,0,-1)$. Subtracting the two characters already found from $\\chi_{M^{(3,2)}}$ by [F3] gives $\\chi^{(3,2)}=(10,4,2,1,1,0,0)-(1,1,1,1,1,1,1)-(4,2,0,1,-1,0,-1)=(5,1,1,-1,1,-1,0)$, of norm $\\frac1{120}[25+10+15+20+20+30+0]=1$.",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "($t=0$.) Applying [F1] with $m=4$ and the class sizes of [F2] gives $g((2,2),(2,2),(3,1))=\\frac1{24}\\bigl(1\\cdot2^2\\cdot3+6\\cdot0^2\\cdot1+3\\cdot2^2\\cdot(-1)+8\\cdot(-1)^2\\cdot0+6\\cdot0^2\\cdot(-1)\\bigr)=\\frac{12-12}{24}=0$.",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "($t=1$.) Applying [F1] with $m=5$ and the class sizes of [F2] gives $g((3,2),(3,2),(4,1))=\\frac1{120}\\bigl(1\\cdot5^2\\cdot4+10\\cdot1^2\\cdot2+15\\cdot1^2\\cdot0+20\\cdot1^2\\cdot1+20\\cdot1^2\\cdot(-1)+30\\cdot(-1)^2\\cdot0+24\\cdot0^2\\cdot(-1)\\bigr)=\\frac{100+20+20-20}{120}=\\frac{120}{120}=1$.",
+          "step": "2.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "(All $t\\ge1$.) The triple $((3,2),(3,2),(4,1))$ satisfies the hypotheses of [F4] with $k=1$: $3=\\lambda_1\\le\\mu_1=3\\le\\nu_1=4$ and $\\min\\{3,3\\}=3\\ge\\max\\{2,2\\}+(5-4)=3$. Hence $g((3+u,2),(3+u,2),(4+u,1))=g((3,2),(3,2),(4,1))=1$ for every $u\\ge0$, and substituting $u=t-1$ gives $g((2+t,2),(2+t,2),(3+t,1))=1$ for every $t\\ge1$.",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Consequently $t\\mapsto g((2+t,2),(2+t,2),(3+t,1))$ takes the value $0$ at $t=0$ and the value $1$ for every $t\\ge1$: the padded family is not constant from $t=0$ on, and the separation hypothesis of [F4] is exactly what fails at $t=0$.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "3.1",
+            "F4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement: the witness triple $((2,2),(2,2),(3,1))$ and its shifted family are nonempty partitions; the empty case is not part of the refutation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1: the value $g((2,2),(2,2),(3,1))=0$ at $t=0$ is computed from the character sum and is the zero case driving the conclusion."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2: the value $g((3,2),(3,2),(4,1))=\\frac{120}{120}=1$ is computed, and step 3.1 propagates it to every $t\\ge1$; the unit case is used explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1: at $t=1$ the separation hypothesis of [F4] holds with equality, $\\min\\{3,3\\}=3$, so the theorem is applied at its boundary and the failure is exactly at $t=0$."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1: the two endpoint regimes $t=0$ and $t\\ge1$ are separated and compared, which is the whole claim."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1-4.1: finite character tables and finite sums over class representatives; no choice principle is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Statement: the refuted claim is a universally quantified preservation assertion, and its forward direction is refuted by the witnesses at $t=0,1$."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Statement: No converse is at issue: the item exhibits the jump and does not characterize all triples for which padding fails to preserve the coefficient."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint.md

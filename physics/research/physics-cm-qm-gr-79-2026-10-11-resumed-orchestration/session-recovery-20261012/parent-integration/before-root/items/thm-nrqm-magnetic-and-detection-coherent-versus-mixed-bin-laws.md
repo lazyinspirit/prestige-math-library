@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-magnetic-and-detection-coherent-versus-mixed-bin-laws.md

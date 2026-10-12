@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-intersection-multiplicity-at-least-product-multiplicities.md

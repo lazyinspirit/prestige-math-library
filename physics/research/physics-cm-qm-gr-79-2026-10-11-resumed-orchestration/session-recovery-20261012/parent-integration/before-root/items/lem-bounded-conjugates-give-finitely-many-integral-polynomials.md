@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-conjugates-give-finitely-many-integral-polynomials.md

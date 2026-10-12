@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-monoid-object-and-comonoid-object-in-a-monoidal-category.md

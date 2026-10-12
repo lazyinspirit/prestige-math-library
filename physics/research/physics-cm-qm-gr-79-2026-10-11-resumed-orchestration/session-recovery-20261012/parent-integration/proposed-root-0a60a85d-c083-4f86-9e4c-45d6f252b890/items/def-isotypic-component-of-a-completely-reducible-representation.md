@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-isotypic-component-of-a-completely-reducible-representation.md

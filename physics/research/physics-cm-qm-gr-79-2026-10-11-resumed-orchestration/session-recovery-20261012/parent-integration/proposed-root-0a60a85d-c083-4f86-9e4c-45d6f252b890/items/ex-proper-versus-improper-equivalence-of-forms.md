@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-proper-versus-improper-equivalence-of-forms.md

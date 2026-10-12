@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-little-groups-for-a-finite-dihedral-group.md

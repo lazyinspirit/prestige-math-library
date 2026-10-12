@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reynolds-operator-and-invariant-subring-properties.md

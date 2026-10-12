@@ -1,0 +1,9 @@
+from pathlib import Path
+import json,subprocess,datetime
+b=Path(__file__).parent
+items=['items/def-cm-constrained-configuration-and-mass-metric.md','items/def-cm-traction-and-stress.md','items/lem-cm-so3-is-a-matrix-group.md','items/ex-cm-mass-metric-on-a-sphere.md','items/def-cm17-traction-and-stress.md']
+checks={'precheck':['node','tools/tsx-run.mjs','tools/physics-support/precheck.mts',*items,'--json'],'rendercheck':['node','tools/physics-support/rendercheck.mjs',*items,'library/non-relativistic-classical-mechanics-mathematics/cm-math-geometry.md','library/non-relativistic-classical-mechanics-mathematics/cm-math-geometry-examples.md','--json'],'proof-contract1':['node','tools/physics-support/proof-contract.mjs','research/physics-cm-qm-gr-79-2026-10-11-batch-1.proof-contracts.json','--items','lem-cm-so3-is-a-matrix-group,ex-cm-mass-metric-on-a-sphere,lem-cm-mass-metric-positivity','--strict','--json'],'proof-contract17':['node','tools/physics-support/proof-contract.mjs','research/physics-cm-qm-gr-79-2026-10-11-batch-17.proof-contracts.json','--items','ex-cm01-two-particle-rigid-rod-configuration','--strict','--json'],'manifest-deps':['node','tools/physics-support/manifest-deps.mjs','research/physics-cm-qm-gr-79-2026-10-11-batch-1.pages.json'],'content-policy':['node','tools/physics-support/content-policy.mjs','research/physics-cm-qm-gr-79-2026-10-11-batch-1.pages.json','--json'],'proof-layout':['node','tools/physics-support/proof-layout.mjs',*items]}
+records=[]
+for name,argv in checks.items():
+ p=subprocess.run(argv,text=True,capture_output=True);rec={'check':name,'argv':argv,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr,'checked_at':datetime.datetime.now(datetime.timezone.utc).isoformat()};(b/(name+'.json')).write_text(json.dumps(rec,indent=2)+'\n');records.append(rec);print(name,p.returncode,p.stdout[:650].replace('\n',' '))
+(b/'checks.json').write_text(json.dumps(records,indent=2)+'\n')

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed.md

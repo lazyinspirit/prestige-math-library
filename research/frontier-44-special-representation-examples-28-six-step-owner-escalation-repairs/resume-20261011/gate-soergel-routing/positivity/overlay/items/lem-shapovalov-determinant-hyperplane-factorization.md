@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-shapovalov-determinant-hyperplane-factorization.md

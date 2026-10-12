@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-schanuel-lemma-for-two-presentations-of-a-module.md

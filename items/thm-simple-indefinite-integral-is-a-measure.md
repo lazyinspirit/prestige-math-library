@@ -51,8 +51,6 @@ Then $\nu_s$ is a measure on $(X,\mathcal A)$.
 
 1.1 By [L4], choose a finite measurable partition $X=\bigsqcup_{j=0}^m E_j$ on which $s=c_j\ge0$, including its zero-valued complement. For every measurable $A$, the sets $A\cap E_j$ partition $A$, so [L1] and [L2] give $\nu_s(A)=\sum_{j=0}^m c_j\mu(A\cap E_j)$. A term with $c_j=0$ is defined to be zero even when $\mu(A\cap E_j)=+\infty$. [L1, L2, L4, given, algebra]
 
+ 2.1 Step 1.1 gives $\nu_s(\varnothing)=0$. If $(A_n)$ is pairwise disjoint, then for each fixed $j$, the sets $(A_n\cap E_j)$ are pairwise disjoint. Countable additivity of $\mu$ and interchange of one finite sum with a nonnegative series give $\nu_s(\bigcup_n A_n)=\sum_{j=0}^m c_j\sum_n\mu(A_n\cap E_j)=\sum_n\sum_{j=0}^m c_j\mu(A_n\cap E_j)=\sum_n\nu_s(A_n)$. Zero-coefficient terms remain zero by the simple-integral convention. [step 1.1, L2, L3, algebra]
 
-2.1 Step 1.1 gives $\nu_s(\varnothing)=0$. If $(A_n)$ is pairwise disjoint, then for each fixed $j$, the sets $(A_n\cap E_j)$ are pairwise disjoint. Countable additivity of $\mu$ and interchange of one finite sum with a nonnegative series give $\nu_s(\bigcup_n A_n)=\sum_{j=0}^m c_j\sum_n\mu(A_n\cap E_j)=\sum_n\sum_{j=0}^m c_j\mu(A_n\cap E_j)=\sum_n\nu_s(A_n)$. Zero-coefficient terms remain zero by the simple-integral convention. [step 1.1, L2, L3, algebra]
-
-
-3.1 Therefore $\nu_s$ satisfies the two conditions in [L3], so it is a measure. [step 2.1, L3] ∎
+ 3.1 Therefore $\nu_s$ satisfies the two conditions in [L3], so it is a measure. [step 2.1, L3] ∎ 

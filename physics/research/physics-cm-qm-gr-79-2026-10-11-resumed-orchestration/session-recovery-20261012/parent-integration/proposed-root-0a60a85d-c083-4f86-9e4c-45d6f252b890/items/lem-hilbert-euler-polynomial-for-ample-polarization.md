@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hilbert-euler-polynomial-for-ample-polarization.md

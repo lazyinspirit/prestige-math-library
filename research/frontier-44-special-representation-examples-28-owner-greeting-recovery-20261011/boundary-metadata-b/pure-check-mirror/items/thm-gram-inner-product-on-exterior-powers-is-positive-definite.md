@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-gram-inner-product-on-exterior-powers-is-positive-definite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-products-of-cofinite-spaces-compact-iff-bpi.md

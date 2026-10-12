@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-matrix-with-one-zero-off-diagonal-is-not-a-gcm.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-linear-maps-with-finite-dimensional-domain-are-bounded.md

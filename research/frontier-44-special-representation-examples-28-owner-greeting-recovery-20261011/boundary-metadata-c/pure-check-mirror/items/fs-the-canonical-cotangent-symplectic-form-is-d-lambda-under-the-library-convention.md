@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-canonical-cotangent-symplectic-form-is-d-lambda-under-the-library-convention.md

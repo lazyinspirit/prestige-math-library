@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-splitting-p-modular-system-for-a-finite-group.md

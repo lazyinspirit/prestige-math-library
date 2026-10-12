@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-nullhomotopic-closed-transversal-yields-a-vanishing-cycle.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gauss-reduction-step-improves-a-positive-definite-form.md

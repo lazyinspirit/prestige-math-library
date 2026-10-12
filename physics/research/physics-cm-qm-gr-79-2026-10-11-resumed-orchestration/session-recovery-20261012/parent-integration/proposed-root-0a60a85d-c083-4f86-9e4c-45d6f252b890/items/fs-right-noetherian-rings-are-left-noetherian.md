@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-right-noetherian-rings-are-left-noetherian.md

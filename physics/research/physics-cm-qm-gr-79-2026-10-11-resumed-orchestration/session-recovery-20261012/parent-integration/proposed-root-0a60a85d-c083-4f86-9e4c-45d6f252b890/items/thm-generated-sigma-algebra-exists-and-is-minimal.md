@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-generated-sigma-algebra-exists-and-is-minimal.md

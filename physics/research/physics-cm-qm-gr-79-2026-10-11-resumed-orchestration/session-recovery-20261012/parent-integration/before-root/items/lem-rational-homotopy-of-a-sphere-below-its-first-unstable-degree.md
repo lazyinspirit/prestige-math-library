@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-homotopy-of-a-sphere-below-its-first-unstable-degree.md

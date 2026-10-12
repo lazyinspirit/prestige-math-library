@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-lambda-ring-specializations-and-the-sigma-series.md

@@ -33,8 +33,6 @@ $f$ measurable.
 
 **Proof technique:** direct.
 
-1.1 Every level set of $f$ is empty, a singleton, or a two-point set, so every [given]
-level set is measurable. [given]
+1.1 Every level set of $f$ is empty, a singleton, or a two-point set, so every [given] level set is measurable. [given]
 
-2.1 Yet $f^{-1}([2,3])=V$, and [L1] says that $V$ is not measurable. Therefore [step 1.1, L1]
-$f$ is not measurable. [step 1.1, L1] ∎
+2.1 Yet $f^{-1}([2,3])=V$, and [L1] says that $V$ is not measurable. Therefore [step 1.1, L1] $f$ is not measurable. [step 1.1, L1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-polynomial-calculus-on-restrictions-and-quotients.md

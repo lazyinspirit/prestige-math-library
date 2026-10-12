@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-lp-trace-operator-on-a-bounded-c-one-domain.md

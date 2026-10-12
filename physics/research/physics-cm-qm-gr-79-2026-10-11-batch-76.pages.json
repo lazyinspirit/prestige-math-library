@@ -1,0 +1,312 @@
+[
+  {
+    "order": 255,
+    "id": "gr-experimental-interface",
+    "kind": "A",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Experimental Interface",
+    "companion": "gr-experimental-interface-examples",
+    "requires": [
+      "gr-homogeneous-cosmology",
+      "gr-linearized-waves",
+      "gr-spherical-vacuum-model",
+      "further-trigonometric-identities-and-inverses",
+      "gr-framework-and-geometry",
+      "gr-connections-and-free-fall",
+      "gr-tensors-and-observers"
+    ],
+    "items": [
+      {
+        "id": "def-gr-observation-and-analysis-architecture",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Model configurations, interface readouts, operational models, data records and the analysis vocabulary of the experiment interface",
+        "statement": "Adopt the unit conventions of [[def-gr-si-unit-and-coordinate-conventions]], the\nspacetime postulate of [[post-gr-spacetime-and-classical-domain]] and the\nclock, free-fall and light-ray postulates of\n[[post-gr-ideal-clocks-and-free-fall]]. This definition fixes the vocabulary in\nwhich the framework's empirical layer is stated: it names model\nconfigurations, the readouts assigned to them, operational models, data\nrecords, calibration declarations and declared uncertainty bounds. It selects\nno experiment, records no value and asserts no comparison.\n\n**(a) Model configurations.** Let $(M,g,N)$ be a time-oriented smooth\nLorentzian four-manifold with metric-selected connection $\\nabla$\n([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]],\n[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]). A **model\nconfiguration** is a finite tuple $D=(d_1,\\dots,d_r)$ whose entries are objects\nof the following kinds, each carrying the domain, parametrization and\nregularity required by the cited item:\n\n- a *worldline entry*: a $C^1$ future timelike worldline $h:I\\to M$ on an\n  interval $I$ with nonempty interior, parametrized by proper time, so that its\n  four-velocity $U:=h'$ satisfies $g(U,U)=-c^2$\n  ([[def-gr-timelike-worldline-and-proper-time]],\n  [[lem-gr-proper-time-reparametrization-and-four-velocity]]), or the\n  restriction of such a worldline to a subinterval;\n- an *observer entry*: an observer at a point, that is a future unit timelike\n  vector $n$ with $g(n,n)=-1$, or a smooth observer congruence\n  ([[def-gr-observer-and-rest-space]],\n  [[def-gr-observer-congruence-and-adapted-charts]]);\n- a *ray entry*: a smooth curve $\\eta:J\\to M$, where $J\\subseteq\\mathbb R$ is\n  an interval with nonempty interior, that is a future-directed null geodesic\n  of $\\nabla$; thus it is affinely parametrized and satisfies\n  $\\nabla_{\\eta'}\\eta'=0$, $g(\\eta',\\eta')=0$ and $\\eta'$ is future-directed,\n  with the one-sided convention at included endpoints\n  ([[def-geodesic-of-an-affine-connection]],\n  [[def-causal-classification-of-lorentz-vectors]],\n  [[post-gr-ideal-clocks-and-free-fall]] clause (iii));\n- a *chart entry*: a smooth chart $(U,x)$ of $M$ ([[def-smooth-manifold]]);\n- a *detector entry*: the data of the ideal two-body detector of the\n  linearized-wave regime, namely a TT linearized-wave datum, a reference point\n  $x_0$, a separation vector $\\delta\\ne0$ with $\\delta^0=0$, the arm direction\n  $e_\\delta$, and a parameter value $s$, as in\n  [[def-gr-linearized-wave-regime-and-detector-coupling]] clauses (a)-(c);\n- a *parameter entry*: a finite tuple of real numbers in a declared subset of\n  $\\mathbb R^m$, each component with declared units;\n- an *annotation entry*: a finite string recording declared conditions of the\n  configuration and, where a datum is taken from a report, the bibliographic\n  identification of that report.\n\nA model configuration is a description of a hypothetical model situation. The\ntuple asserts nothing about any apparatus and nothing about nature, and no\nclause of this definition asserts that a configuration with prescribed entries\nexists: existence claims belong to the items that construct the entries.\n\n**(b) Readouts.** Let $D$ be a model configuration. The following **readouts**\nare defined whenever $D$ contains the entries named in the clause together with\nthe stated incidence conditions; each is a real number or a finite tuple of\nreal numbers determined by the entries of $D$.\n\n1. *Frequency ratio and redshift.* Suppose $D$ contains a ray entry\n   $\\eta:J\\to M$ with tangent $W:=\\eta'$, worldline entries $h_E:I_E\\to M$ and\n   $h_R:I_R\\to M$ with four-velocities $U_E,U_R$, and parameter values\n   $s_E<s_R$ in $J$, $t_E\\in I_E$, $t_R\\in I_R$ with $\\eta(s_E)=h_E(t_E)$ and\n   $\\eta(s_R)=h_R(t_R)$. The **observer energies** of the ray at the two events\n   relative to the unit observers $U_E/c$ and $U_R/c$ are\n\n   $$E_E:=-c\\,g_{\\eta(s_E)}\\bigl(W(s_E),U_E(t_E)/c\\bigr),\\qquad E_R:=-c\\,g_{\\eta(s_R)}\\bigl(W(s_R),U_R(t_R)/c\\bigr),$$\n\n   the values of clause (a) of\n   [[def-gr-observer-relative-energy-and-momentum]] for those observers; both\n   are strictly positive by claim 1 of\n   [[lem-gr-observer-pairing-with-future-causal-vectors]], because $W$ is\n   nonzero future null and $U_E/c$, $U_R/c$ are future unit timelike. The\n   **frequency-ratio readout** and the **redshift readout** are\n\n   $$\\mathcal F:=\\frac{E_R}{E_E}=\\frac{g_{\\eta(s_R)}\\bigl(W(s_R),U_R(t_R)\\bigr)}{g_{\\eta(s_E)}\\bigl(W(s_E),U_E(t_E)\\bigr)},\\qquad z:=\\frac{E_E}{E_R}-1=\\frac1{\\mathcal F}-1 .$$\n\n2. *Radar round-trip proper time.* Suppose $D$ contains worldline entries\n   $h_R:I_R\\to M$ (the receiver) and $h_C:I_C\\to M$ (the reflector), parameter\n   values $t_1<t_2$ in $I_R$ and $s_C\\in I_C$, and ray entries $\\eta_1,\\eta_2$\n   whose parameter intervals contain values exhibiting\n   $\\eta_1(s_1)=h_R(t_1)$, $\\eta_1(s_1')=h_C(s_C)$ with $s_1<s_1'$, and\n   $\\eta_2(s_2)=h_C(s_C)$, $\\eta_2(s_2')=h_R(t_2)$ with $s_2<s_2'$. The\n   **radar readout** is the receiver proper-time increment\n   $\\Delta\\tau:=t_2-t_1$ between emission and reception. It is independent of\n   the affine parametrizations of $\\eta_1,\\eta_2$, which enter only through the\n   incidence statements ([[def-gr-timelike-worldline-and-proper-time]] clause\n   (d), [[lem-gr-proper-time-reparametrization-and-four-velocity]]).\n\n3. *Deflection angle.* Suppose $D$ contains a ray entry $\\eta:J\\to M$ with\n   tangent $W$, parameter values $s_1<s_2$ in $J$, observer entries $n_1,n_2$ at\n   $p_1:=\\eta(s_1)$ and $p_2:=\\eta(s_2)$, and an isometric identification\n   $\\Phi:T_{p_1}M\\to T_{p_2}M$, by which is meant a linear isomorphism with\n   $g_{p_2}(\\Phi v,\\Phi w)=g_{p_1}(v,w)$ for all $v,w\\in T_{p_1}M$ and\n   $\\Phi(n_1)=n_2$. Put $q_i:=h_{n_i}(W(s_i))$, the spatial projection of\n   clause (b) of [[def-gr-observer-and-rest-space]], and suppose $q_1,q_2\\ne0$.\n   Then $|q_i|_{n_i}:=\\sqrt{g_{p_i}(q_i,q_i)}>0$, because $g_{p_i}$ is positive\n   definite on the rest space ([[lem-gr-observer-projection-decomposition]]),\n   and $\\Phi(q_1)$ lies in $n_2^{\\perp}$ with\n   $g_{p_2}(\\Phi q_1,\\Phi q_1)=g_{p_1}(q_1,q_1)$. The **deflection cosine**\n   and **deflection readout** are\n\n   $$\\kappa:=\\frac{g_{p_2}\\bigl(\\Phi(q_1),q_2\\bigr)}{|q_1|_{n_1}\\,|q_2|_{n_2}}\\in[-1,1],\\qquad \\Theta:=\\arccos\\kappa,$$\n\n   where the bound is the Cauchy-Schwarz inequality in the real inner product\n   space $(n_2^{\\perp},g_{p_2})$\n   ([[def-inner-product-space]],\n   [[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]) and\n   $\\arccos$ is the principal inverse cosine of\n   [[def-principal-inverse-sine-and-cosine]].\n\n4. *Azimuthal increment and perihelion advance.* Suppose $D$ contains a\n   worldline entry $h:I\\to M$, a chart entry $(U,x)$ and an annotation entry\n   designating the coordinate $x^2$ as the azimuth and declaring two parameter\n   values $t_1<t_2$ in $I$ with $h(t_1),h(t_2)\\in U$ to be successive passages\n   of the worldline through the minimum of the coordinate $x^1$ within $U$. Then\n   the **azimuthal-increment readout** and the **perihelion-advance readout**\n   are\n\n   $$\\Delta\\varphi:=x^2\\bigl(h(t_2)\\bigr)-x^2\\bigl(h(t_1)\\bigr),\\qquad A:=\\Delta\\varphi-2\\pi .$$\n\n   The designation of the two passages is a declared condition carried by the\n   annotation, not a consequence of the other entries, and the readout is a\n   chart datum: it is not asserted to be invariant under changes of chart.\n\n5. *Arrival times.* Suppose $D$ contains worldline entries $h_E,h_R$, a finite\n   family of ray entries $\\eta_1,\\dots,\\eta_N$ and parameter values such that\n   $\\eta_k$ joins an event of $h_E$ to $h_R(t_k)$, with $t_1<\\cdots<t_N$ in\n   $I_R$. The **arrival-time readout** is the tuple $(t_1,\\dots,t_N)$ of\n   receiver proper-time values.\n\n6. *Strain.* Suppose $D$ contains a detector entry of (a) and a parameter\n   value at which the quantity under the square root of clause (c) of\n   [[def-gr-linearized-wave-regime-and-detector-coupling]] is positive. The\n   **strain readout** is the value $S_\\delta(s)$ of the strain function of that\n   clause.\n\n**(c) Operational models.** An **operational model** is a tuple\n$M=(S,\\Theta,\\theta,D,F)$ in which $S$ is a nonempty set, the *preparation\nindex set*; $\\Theta\\subseteq\\mathbb R^m$ is a nonempty *parameter set* whose\ncoordinates carry declared units; $\\theta:S\\to\\Theta$ is a surjection, the\n*parameter map*; $D$ assigns to each $s\\in S$ a model configuration $D(s)$ of\n(a); and for some integer $d\\ge1$ a map $F:\\Theta\\to\\mathbb R^d$ is a\n**prediction map** for $D$, subject to the declared interpretation $(*)$: for\nevery $s\\in S$, each component of $F(\\theta(s))$ is a value that the\nframework's definitions, postulates and proved consequences assign to a\nreadout of (b) of the configuration $D(s)$, with every intermediate quantity,\nevent, frame, sign and unit declared. In particular, a component asserted to be\na frequency ratio, redshift, radar, deflection, azimuthal, advance,\narrival-time or strain value must be the corresponding readout of (b) for\nentries that the configuration contains, and a component read from a cited\nprediction theorem must be a value that theorem assigns to entries of $D(s)$\nsatisfying its hypotheses. Condition $(*)$ is a declared interpretation that\nreviewers check when the model is used; it is not a consequence of the tuple\nstructure, and no clause of this definition asserts that any apparatus realizes\n$M$ or that any component of $F$ is measured.\n\n**(d) Data records.** A **data record** is a tuple $R=(N,z,\\varepsilon,a)$ with\nan integer $N\\ge1$; $z=(z_1,\\dots,z_N)$ with $z_k\\in\\mathbb R^d$;\n$\\varepsilon=(\\varepsilon_1,\\dots,\\varepsilon_N)$ with\n$\\varepsilon_k\\in[0,\\infty)^d$; and $a=(a_1,\\dots,a_N)$ a finite tuple of\n*condition annotations* as in (a). The record declares: for each $k$, the value\nof the readout under the condition annotated by $a_k$ lies in the closed box\n$\\prod_{j=1}^d[z_{k,j}-\\varepsilon_{k,j},\\,z_{k,j}+\\varepsilon_{k,j}]$, in the\ndeclared units. A data record contains no probability space, random variable,\ndistribution, sampling law, independence assumption, likelihood or coverage\nstatement; it declares nothing about how the values $z_k$ were produced and\nnothing about the correctness of any calibration.\n\n**(e) Calibration declarations.** Let $Z$ be a nonempty set of declared\n*instrument-output values*. A **calibration declaration** is a tuple\n$C=(Z,c,\\delta,h)$ with $c:Z\\to\\mathbb R^d$, $\\delta:Z\\to[0,\\infty)^d$ and $h$\na condition annotation as in (a); it declares that for every $z\\in Z$ obtained\nunder the condition annotated by $h$, the value of the declared readout lies in\nthe closed box\n$\\prod_{j=1}^d[c_j(z)-\\delta_j(z),\\,c_j(z)+\\delta_j(z)]$ in the declared units.\nA **calibration record** is a data record of (d) whose declared readout is the\nvalue of the calibration map's output. The declaration asserts no accuracy\nbeyond the bound $\\delta$ and no statistical property of $c$ or $\\delta$.\n\n**(f) Uncertainty vocabulary.** For a data record of (d), the **declared\nuncertainty** of the $k$-th datum is the vector $\\varepsilon_k$; a **source\nlabel** is an element of the finite declared set\n$\\{\\text{calibration},\\ \\text{systematic},\\ \\text{sampling-variability},\\\n\\text{rounding},\\ \\text{other}\\}$ attached to a bound; and a **total declared\nbound** for a value computed from finitely many recorded values by a declared\nfinite arithmetic expression is any $B\\in[0,\\infty)$ for which the declaration\nstates: whenever each recorded value lies in its declared closed box, the\ncomputed value lies in $[\\hat y-B,\\hat y+B]$ for the declared number $\\hat y$\n(for instance, for a sum of recorded scalars the sum of the recorded bounds is\nsuch a bound). Every uncertainty entry is a declared constraint of the form in\n(d) and (e); no probability law, coverage probability, confidence level,\np-value or posterior is defined by this vocabulary.\n\n**(g) Comparison claims are separate.** A claim that a data record $R$ and an\noperational model $M$ are consistent, or that $R$ supports, refutes or fails to\ndistinguish $M$, is not part of (a)-(f): it requires its own statement, an\nexplicitly declared comparison rule, and adequate primary-report and analysis\nprerequisites. A declared rule of the form \"$t\\in\\Theta$ is consistent with the\none-point hard-bound record $R$ exactly when $F(t)$ lies in the record's closed\nbox\", together with the resulting consistency set\n$C(R,M):=\\{t\\in\\Theta:F(t)\\in\\prod_{j}[z_{1,j}-\\varepsilon_{1,j},\\,z_{1,j}+\\varepsilon_{1,j}]\\}$,\nis a comparison rule in this sense; it is conditional on the record's declared\nbounds and on the interpretation $(*)$, and it establishes neither the truth of\na postulate nor the correctness of any apparatus. The source design's research\nprerequisite labelled M20, the primary-report and analysis layer, is not\nsupplied by the items of this page: no reported measurement and no experiment\nitem occurs here. The framework's model-side prediction content for the\nreadouts of (b) currently consists of the restricted redshift theorems\n`pthm-gr-schwarzschild-stationary-redshift` (static observers in the\nSchwarzschild exterior model) and `pthm-gr-flrw-cosmological-redshift`\n(comoving observers in a homogeneous cosmological model) for readout 1, and of\nthe ideal-detector definition `def-gr-linearized-wave-regime-and-detector-coupling`\nwith the response theorem `pthm-gr-plane-wave-tidal-detector-response` for\nreadout 6; the propagation-delay, deflection, perihelion-advance and\narrival-time readouts of 2-5 have no in-framework prediction theorem yet and\nare recorded as report destinations in\n`rem-gr-primary-report-research-queue`. These item names are nonlogical\nstatus pointers; they add no premise to this definition.\n\n**(h) Well-definedness and scope.** All components of (a)-(g) are finite tuples\nof sets, maps, curves and real numbers with declared domains and units. The\nconstructions use no choice principle beyond those already assumed by the cited\nsuppliers: [[def-gr-smooth-lorentzian-objects]] uses countable choice\n([[def-countable-choice]]) for the canonical smooth structures of tangent\nbundles, and nothing here uses any further choice. No measurability,\nintegrability, completeness, differentiability or convergence beyond the cited\nitems is used. Clause (c) evaluates a prediction only at parameter values for\nwhich the cited items supply its ingredients, and each readout of (b) is\ndefined only for configurations carrying the stated entries and incidence\nconditions, so this definition asserts no existence of worldlines, rays,\ncharts, detectors or configurations. The vocabulary asserts no measurement, no\napparatus behaviour, no empirical support or refutation, no value of the\nconstant $c$ or of any other physical parameter, and no statistical inference.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "post-gr-spacetime-and-classical-domain",
+          "def-gr-si-unit-and-coordinate-conventions",
+          "def-gr-metric-selected-connection",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative",
+          "def-gr-timelike-worldline-and-proper-time",
+          "lem-gr-proper-time-reparametrization-and-four-velocity",
+          "def-gr-observer-and-rest-space",
+          "def-gr-observer-congruence-and-adapted-charts",
+          "def-gr-observer-relative-energy-and-momentum",
+          "lem-gr-observer-projection-decomposition",
+          "lem-gr-observer-pairing-with-future-causal-vectors",
+          "post-gr-ideal-clocks-and-free-fall",
+          "def-geodesic-of-an-affine-connection",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-smooth-manifold",
+          "def-inner-product-space",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-principal-inverse-sine-and-cosine",
+          "def-countable-choice",
+          "def-gr-linearized-wave-regime-and-detector-coupling"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "post-gr-spacetime-and-classical-domain": "formulation-prerequisite",
+          "def-gr-si-unit-and-coordinate-conventions": "formulation-prerequisite",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "thm-gr-nondegenerate-levi-civita-and-tensor-derivative": "mathematical-premise",
+          "def-gr-timelike-worldline-and-proper-time": "mathematical-premise",
+          "lem-gr-proper-time-reparametrization-and-four-velocity": "mathematical-premise",
+          "def-gr-observer-and-rest-space": "mathematical-premise",
+          "def-gr-observer-congruence-and-adapted-charts": "mathematical-premise",
+          "def-gr-observer-relative-energy-and-momentum": "mathematical-premise",
+          "lem-gr-observer-projection-decomposition": "mathematical-premise",
+          "lem-gr-observer-pairing-with-future-causal-vectors": "mathematical-premise",
+          "post-gr-ideal-clocks-and-free-fall": "formulation-prerequisite",
+          "def-geodesic-of-an-affine-connection": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-smooth-manifold": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise",
+          "def-principal-inverse-sine-and-cosine": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-gr-linearized-wave-regime-and-detector-coupling": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. M. Will, The Confrontation between General Relativity and Experiment, Living Rev. Relativity 17 (2014) 4, arXiv:1403.7377v1: section 2.1.3 printed pp. 12-16 (gravitational redshift as a comparison of frequency standards), section 4.1.1 printed pp. 40-43 (light deflection by optical astrometry and radio interferometry, with least-squares fitting of the deflection coefficient), section 4.1.2 printed pp. 43-44 (light-time delay from differential round-trip travel times and ephemeris determination), section 4.2 printed pp. 45-46 (perihelion advance after subtraction of planetary perturbations and equinox precession), section 6.1 printed pp. 67-71 (binary pulsars analysed through pulse arrival times), section 7.1 printed pp. 77-78 (laser-interferometric observatories, strain sensitivity and pulsar timing arrays)",
+              "url": "https://arxiv.org/pdf/1403.7377"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 6 (6.58)-(6.66) on the geodesic deviation of slowly moving test particles in a plane wave, printed pp. 152-153 (PDF pp. 159-160); Ch. 7 (7.56)-(7.62) on the perihelion precession and the exact Schwarzschild frequency ratio between fixed observers, printed pp. 179-181 (PDF pp. 186-188), with the deflection and time-delay discussion on printed p. 181 (PDF p. 188)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 1.2.5 printed pp. 25-26 (gravitational redshift and the Pound-Rebka frequency-standard comparison), sections 5.2.2-5.2.3 printed pp. 212-215 (the bobbing of neighbouring geodesics and the interferometer arm response)",
+              "url": "https://davidtong.org/pdfs/teaching/general-relativity/gr.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "n/a"
+        },
+        "physical_scope": "Formulation vocabulary inside the classical gravitational framework: it names model configurations built from the framework's own objects (Lorentzian four-manifolds, metric-selected connections, worldlines with proper time, observers and congruences, future null geodesics, charts, ideal two-body detectors and declared parameters), the readouts assigned to those configurations (frequency ratio and redshift, radar round-trip proper time, deflection angle, azimuthal increment and perihelion advance, arrival times, strain), operational models with a declared interpretation obligation, hard-bound data records, calibration declarations and declared uncertainty bounds, and the separation of comparison claims from all of these. It asserts no measurement, no apparatus behaviour, no sampling law, no statistical inference, no value of any physical constant, and no in-framework prediction for the propagation-delay, deflection, perihelion-advance or arrival-time slots, which are recorded as future-report destinations.",
+        "dependency_level": 16
+      },
+      {
+        "id": "lem-gr-reciprocal-ratio-window",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The reciprocal ratio map $a\\mapsto a_*/a$: strict decrease, inverse, and the exact preimages of points and closed intervals",
+        "statement": "Let $a_*>0$ be a real number and define\n\n$$F:(0,\\infty)\\to(0,\\infty),\\qquad F(a):=\\frac{a_*}{a}=a_*\\,a^{-1}.$$\n\n1. **Strict decrease.** For reals $0<a_1<a_2$ one has $F(a_1)>F(a_2)$; so $F$ is\n   strictly decreasing.\n2. **Inverse.** $F$ is a bijection of $(0,\\infty)$ onto $(0,\\infty)$ with\n   inverse $F^{-1}(u)=a_*/u$: that is, $F(F^{-1}(u))=u$ and\n   $F^{-1}(F(a))=a$ for all $a,u>0$.\n3. **Point preimages.** For every $u>0$, $F^{-1}(\\{u\\})=\\{a_*/u\\}$, and\n   $F(a)=u$ holds if and only if $a=a_*/u$.\n4. **Interval windows.** For reals $0<u_1\\le u_2$ the preimage of the closed\n   interval is\n\n   $$F^{-1}\\bigl([u_1,u_2]\\bigr)=\\left[\\frac{a_*}{u_2},\\ \\frac{a_*}{u_1}\\right],$$\n\n   a nonempty closed interval contained in $(0,\\infty)$, of length\n\n   $$\\frac{a_*}{u_1}-\\frac{a_*}{u_2}=\\frac{a_*(u_2-u_1)}{u_1u_2};$$\n\n   the length is $0$ exactly when $u_1=u_2$ and strictly positive exactly when\n   $u_1<u_2$.",
+        "strategy": "direct",
+        "deps": [
+          "def-ordered-field",
+          "lem-of-sign-rules",
+          "lem-of-inverse-positive"
+        ],
+        "dependency_roles": {
+          "def-ordered-field": "mathematical-premise",
+          "lem-of-sign-rules": "mathematical-premise",
+          "lem-of-inverse-positive": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "J. Lebl, Basic Analysis I, Chapter 1 on the real numbers as an ordered field: positivity of products, order reversal under multiplication by a negative, and uniqueness of multiplicative inverses",
+              "url": "https://www.jirka.org/ra/realanal.pdf"
+            },
+            {
+              "title": "University of Illinois Chicago, Math 215 notes: Ordered field axioms (closure of the positive cone under multiplication, trichotomy and the order axioms)",
+              "url": "https://homepages.math.uic.edu/~jbaldwin/math215/fieldax.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "rem-gr-primary-report-research-queue",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Primary-report research queue for the gravitational framework: redshift, propagation delay, light deflection, perihelion advance, binary timing and interferometric strain",
+        "statement": "Scope-and-queue record for the empirical layer of the classical gravitational\nframework, stated in the vocabulary of\n[[def-gr-observation-and-analysis-architecture]].\n\n(i) **Status of the empirical layer.** The source design of the experimental\ninterface reserves a definition of the observation and analysis architecture\n(delivered by [[def-gr-observation-and-analysis-architecture]]) and this\nprimary-report research queue. No experiment item is authored in this batch and\nno measured value is recorded anywhere in it. The research label M20 of the\nsource design, the primary-report and analysis layer, remains unsupplied:\nbefore any experiment item can be authored on a destination, the actual primary\nreport must be retrieved and read in full, and the record must carry the\napparatus and preparation, the operational definitions of the measured\nquantities, the calibration model, the sampling and error model, the treatment\nof systematic effects, the measured values with their reported uncertainties,\nand the source's own limitations. Secondary surveys and lecture notes describe\nthese report families and their analysis structure; they are not substitutes\nfor the primary reports and no number attributed to any of them is asserted\nhere.\n\n(ii) **Report families.** The source design names six *primary-report search\ndestinations*, that is, families of published reports to retrieve and read in\nfull; no destination is evidence for any postulate. For each family the\nin-framework model-side content that a comparison would consume is named by its\nitem, and the missing predictions are recorded as future obligations rather\nthan assumed.\n\n1. *Redshift and clock comparisons.* Comparisons of identical frequency\n   standards or clocks at rest at different locations in a gravitational field,\n   including transported-clock comparisons (Will section 2.1.3; Carroll\n   (7.61)-(7.62); Tong section 1.2.5). Model-side content available: the\n   frequency-ratio and redshift readouts of\n   [[def-gr-observation-and-analysis-architecture]] clause (b), realized for\n   static observers by `pthm-gr-schwarzschild-stationary-redshift` and for\n   comoving observers by `pthm-gr-flrw-cosmological-redshift`. What is still\n   missing for a comparison: the apparatus, calibration, line-shape and\n   statistical analysis of an actual report, as in (i).\n\n2. *Light-propagation delay.* Measurements of the variation of round-trip\n   travel times of signals passing near a massive body, analysed differentially\n   against an ephemeris (Will section 4.1.2; Carroll printed p. 181). The\n   interface readout is the radar readout of clause (b)2 of\n   [[def-gr-observation-and-analysis-architecture]]. Model-side content: no\n   in-framework prediction theorem for the round-trip delay exists in the\n   library; a restricted prediction for a specified ray family and reflector\n   worldline would have to be authored before any comparison.\n\n3. *Light deflection.* Measurements of the change in angular separation of\n   sources whose lines of sight pass near a massive body, by optical astrometry\n   or radio interferometry, with a fitted deflection coefficient (Will section\n   4.1.1; Carroll printed p. 181). The interface readout is the deflection\n   readout of clause (b)3. Model-side content: no in-framework prediction\n   theorem for the deflection angle of a specified ray exists; it is a future\n   obligation.\n\n4. *Perihelion advance.* Measurements of the residual precession of an\n   almost-elliptical planetary orbit after the perturbations of the other\n   bodies and the precession of the equinoxes have been modelled and removed,\n   analysed over long astrometric baselines (Will section 4.2; Carroll\n   (7.56)-(7.57)). The interface readout is the perihelion-advance readout of\n   clause (b)4. Model-side content: the restricted Schwarzschild page supplies\n   circular-orbit and photon-sphere predictions only\n   (`pthm-gr-schwarzschild-circular-orbit-predictions`); a prediction of the\n   advance of an eccentric orbit is a future obligation.\n\n5. *Binary-system timing.* Analyses of pulse arrival-time series of\n   relativistic binary pulsars, in which orbital and relativistic parameters\n   are fitted to a timing model (Will section 6.1). The interface readout is\n   the arrival-time readout of clause (b)5. Model-side content: the framework\n   contains no binary dynamics, no gravitational-wave source model and no\n   timing-model theorem; these are future obligations in a different module.\n\n6. *Interferometric strain.* Measurements of strain by laser-interferometric\n   observatories and proposals for pulsar timing arrays (Will section 7.1;\n   Carroll Ch. 6; Tong sections 5.2-5.3). The interface readout is the strain\n   readout of clause (b)6. Model-side content: the ideal two-body detector of\n   `def-gr-linearized-wave-regime-and-detector-coupling` clause (c) and the\n   response theorem `pthm-gr-plane-wave-tidal-detector-response`. What is still\n   missing: a source model producing the waveform, the propagation of light in\n   the instrument, readout and noise models, calibration, and a statistical\n   analysis; without them no comparison is instantiable.\n\n(iii) **Analysis obligations for every future comparison.** Each comparison\nwill require a declared comparison rule of clause (g) of\n[[def-gr-observation-and-analysis-architecture]], an operational model whose\nprediction map satisfies condition $(*)$, a data record with declared closed\nbounds or separately defined source-reported estimates and scales, a declared\ntreatment of calibration and of the dominant systematic effects, and, for\nreported data, the primary report's own sampling and error model. Agreement of\na prediction with a record tests the combined model, apparatus and analysis\nassumptions; it is evidence, not a deductive proof of the model or of any\npostulate.\n\n(iv) **Qualifications any future comparison must carry.** The following are\npart of the interface contract and must appear in any consuming item: (a) model\npredictions are conditional on the adopted postulates and on the explicit\nhypotheses of the prediction theorem; (b) observations are reported under the\nsource's conditions and limitations; (c) finite-sample agreement does not\nestablish a postulate or a model, and a finite hard-bound record does not by\nitself determine a unique parameter; (d) a p-value would not be the probability\nthat a theory is false and a confidence level would not be a posterior\nprobability; (e) reported standard uncertainties are not hard bounds and carry\nno coverage guarantee; (f) every conclusion inherits the calibration\ndependence, systematic limitations and selection assumptions of the source.\n\n(v) **Pointer.** The primary observations, when they are eventually recorded,\nbelong in experiment items with their own empirical contracts; the comparison\narithmetic belongs in a separate proved item. This remark is a queue and status\npointer only: it supplies no independent empirical conclusion and no certainty.",
+        "deps": [
+          "def-gr-observation-and-analysis-architecture"
+        ],
+        "dependency_roles": {
+          "def-gr-observation-and-analysis-architecture": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "C. M. Will, The Confrontation between General Relativity and Experiment, Living Rev. Relativity 17 (2014) 4, arXiv:1403.7377v1: section 2.1.3 printed pp. 12-16 (gravitational redshift measurements comparing frequency standards at different locations), section 4.1.1 printed pp. 40-43 (deflection measurements by optical astrometry and by radio interferometry, with fitted deflection coefficients), section 4.1.2 printed pp. 43-44 (radar round-trip time-delay measurements, their ephemeris modelling and their least-squares analysis), section 4.2 printed pp. 45-46 (the perihelion advance of Mercury after subtraction of planetary perturbations and equinox precession), section 6.1 printed pp. 67-71 (binary pulsars analysed from pulse arrival times), section 7.1 printed pp. 77-78 (laser-interferometric observatories, strain sensitivity and pulsar timing arrays)",
+              "url": "https://arxiv.org/pdf/1403.7377"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 6 printed pp. 142-163 (gravitational waves and their sources), Ch. 7 printed pp. 164-200: the classic tests discussion on printed p. 181 (PDF p. 188), with the deflection and Shapiro time-delay narrative, and (7.56)-(7.62) on perihelion precession and the exact Schwarzschild frequency ratio, printed pp. 179-181 (PDF pp. 186-188)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 1.2.5 printed pp. 25-26 (the Pound-Rebka frequency-standard comparison as the first earthbound precision test), sections 5.2-5.3 printed pp. 209-230 (gravitational waves and their sources with the detector-response discussion)",
+              "url": "https://davidtong.org/pdfs/teaching/general-relativity/gr.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "n/a"
+        },
+        "physical_scope": "Scope-and-queue record for the empirical layer of the classical gravitational framework, stated in the vocabulary of the experiment interface. It names six families of published primary reports to retrieve and read, together with the in-framework prediction content each comparison would still require, and it records that the primary-report and analysis layer (research label M20) is unsupplied and that no experiment item and no measured value occurs in this batch. It asserts no measurement, no dataset, no uncertainty value, no comparison result, no deviation, no empirical support for any postulate and no precision of any physical constant.",
+        "dependency_level": 17
+      }
+    ]
+  },
+  {
+    "order": 256,
+    "id": "gr-experimental-interface-examples",
+    "kind": "B",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Experimental Interface — Examples",
+    "companion": "gr-experimental-interface",
+    "requires": [
+      "gr-experimental-interface",
+      "gr-homogeneous-cosmology",
+      "gr-framework-and-geometry",
+      "gr-tensors-and-observers",
+      "gr-connections-and-free-fall"
+    ],
+    "items": [
+      {
+        "id": "ex-gr-cosmological-redshift-interface-record-window",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Worked instance of the interface vocabulary on the cosmological redshift slot: an explicit de Sitter ray family, an operational model and the exact window of an illustrative bounded record",
+        "statement": "Fix real constants $c>0$, $A>0$, $H>0$, $t_0\\in\\mathbb R$, $r_0\\in\\mathbb R$ and\nuse the FLRW unit convention of [[def-gr-flrw-model-data]]: $c$ is measured in\n$\\mathrm{m\\,s^{-1}}$, $A$ and $a(t)$ in metres, $H$ in $\\mathrm{s^{-1}}$,\n$t,t_0$ in seconds, and the standard Euclidean spatial coordinates and $r_0$\nare dimensionless. Choose the affine parameter $s$ in seconds. Scale-factor\nvalues such as $a_E$ and $a_R$ are in metres, while the redshift values are\ndimensionless. Thus\n$H(t-t_0)$ and $Hs$ are dimensionless, and $c/(AH^2s)$ is dimensionless; in\nparticular $a_E/(AH)$ has units of seconds and the logarithm below has a\npositive dimensionless argument. Adopt the homogeneous cosmological model of\n[[post-gr-flrw-homogeneous-cosmological-model]] in its vacuum sector, with the\nFLRW model datum $(I,\\Sigma,\\gamma,k,a)$ given by $I=\\mathbb R$, the standard\nEuclidean $\\mathbb R^3$ in its standard coordinates, $k=0$ and\n$a(t):=A\\exp\\bigl(H(t-t_0)\\bigr)$ ([[def-gr-flrw-model-data]]). Let $g$ be the\nmetric, $\\nabla$ its metric-selected connection, $n=c^{-1}\\partial_t$ the\ncomoving congruence and $\\gamma_x(t):=(t,x)$ the comoving worldline through\n$x\\in\\mathbb R^3$ ([[lem-gr-flrw-metric-and-comoving-data]],\n[[def-gr-metric-selected-connection]]). The point of the example is the\ninterface arithmetic of\n[[def-gr-observation-and-analysis-architecture]], not the datum.\n\n**(a) An explicit ray family.** For $s\\in(0,\\infty)$ define\n\n$$\\eta(s):=\\Bigl(t_0+\\frac1H\\log(Hs),\\ \\Bigl(r_0+\\frac{c}{AH^2s},\\,0,\\,0\\Bigr)\\Bigr).$$\n\nThen $\\eta$ is a smooth curve in $M=\\mathbb R\\times\\mathbb R^3$; its tangent\n$W=\\eta'$ has components\n\n$$W^t(s)=\\frac{1}{Hs}>0,\\qquad W^1(s)=-\\frac{c}{AH^2s^2},\\qquad W^2(s)=W^3(s)=0,$$\n\nand $W$ is future-directed and null; moreover $\\eta$ is a geodesic with affine\nparameter $s$, and along it\n\n$$a\\bigl(t(s)\\bigr)=AHs .$$\n\nBy clause (iii) of [[post-gr-ideal-clocks-and-free-fall]] the model assigns\n$\\eta$ to an ideal light ray.\n\n**(b) The operational model.** Let $s_R>0$ and put $t_R:=t(s_R)$,\n$p_R:=\\eta(s_R)$, $a_R:=a(t_R)=AHs_R$. For each $a_E\\in(0,a_R)$ put\n$s_E:=a_E/(AH)$, $t_E:=t(s_E)$ and $p_E:=\\eta(s_E)$. Define\n$S:=\\Theta:=(0,a_R)$, $\\theta:=\\mathrm{id}$, and let $D(a_E)$ be the model\nconfiguration of clause (a) of [[def-gr-observation-and-analysis-architecture]]\nwhose entries are: the comoving congruence $n$; the comoving receiver worldline\nthrough $p_R$ and the comoving emitter worldline through $p_E$, each\nparametrized by cosmic time; the ray $\\eta$ with the parameter values\n$s_E<s_R$ and the events $p_E=\\eta(s_E)$, $p_R=\\eta(s_R)$; and the annotation\ndeclaring that the readout to be computed is the redshift readout of clause\n(b)1; the ambient datum, metric and connection are those of the Example. Let\n$F:\\Theta\\to(0,\\infty)$ be that redshift readout itself, $F(a_E):=z(a_E)$. Then\n$M_{\\mathrm{op}}:=(S,\\Theta,\\theta,D,F)$ is an operational model for the\nredshift readout $z$ in the sense of clause (c) of\n[[def-gr-observation-and-analysis-architecture]] with the prediction\n\n$$F(a_E)=\\frac{a_R}{a_E}-1=\\frac{s_R}{s_E}-1,$$\n\nand $F$ is a strictly decreasing bijection of $(0,a_R)$ onto $(0,\\infty)$.\n\n**(c) An illustrative record and its exact window.** Declare the one-point data\nrecord $R$ of clause (d) of [[def-gr-observation-and-analysis-architecture]]\nwith $N=1$, $d=1$, $z_1=5/8$ and $\\varepsilon_1=1/8$, and with condition\nannotation \"cosmological redshift readout of the de Sitter configuration with\nfixed $a_R$\", so that the record's declared closed box is\n$[z_1-\\varepsilon_1,z_1+\\varepsilon_1]=[1/2,3/4]$;\nthese are *declared illustrative values*, not a measurement, and the condition\nannotation identifies them as such. Declare the comparison rule of clause (g)\nof [[def-gr-observation-and-analysis-architecture]] that a parameter\n$a_E\\in\\Theta$ is *consistent* with $R$ exactly when $z(a_E)=F(a_E)$ lies in\nthe record's closed box $[1/2,3/4]$, equivalently when\n$1+z(a_E)=a_R/a_E\\in[3/2,7/4]$. Then the consistency set is\n\n$$C(R,M_{\\mathrm{op}})=\\Bigl[\\frac{a_R}{7/4},\\ \\frac{a_R}{3/2}\\Bigr]=\\Bigl[\\frac47a_R,\\ \\frac23a_R\\Bigr],$$\n\na nonempty closed interval of exact length $\\frac{2}{21}a_R$; its endpoints\nsatisfy $F(4a_R/7)=7/4-1=3/4$ and $F(2a_R/3)=3/2-1=1/2$, and both lie strictly\ninside $(0,a_R)$. For the declared illustrative normalisation $a_R=1$ in the\nlength unit of the datum the window is $[4/7,2/3]$ with length $2/21$ in that\nunit.\n\n**(d) Scope.** Every number in (c) is a declared illustrative value supplied to\ninstantiate the vocabulary; the example asserts no apparatus, no calibration\ncorrectness, no measurement, no sampling model, no statistical inference and no\nempirical support or refutation of the cosmological redshift theorem or of any\npostulate. The model of (b) is hypothetical: no claim is made that $H$ and the\nvacuum sector satisfy the field law for any particular cosmological parameter,\nand no observation or reported dataset enters.",
+        "strategy": "direct",
+        "deps": [
+          "def-gr-observation-and-analysis-architecture",
+          "pthm-gr-flrw-cosmological-redshift",
+          "post-gr-flrw-homogeneous-cosmological-model",
+          "def-gr-flrw-model-data",
+          "lem-gr-flrw-metric-and-comoving-data",
+          "lem-gr-flrw-christoffel-symbols",
+          "def-gr-metric-selected-connection",
+          "def-geodesic-of-an-affine-connection",
+          "prop-coordinate-geodesic-equation",
+          "def-gr-observer-relative-energy-and-momentum",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-timelike-worldline-and-proper-time",
+          "lem-gr-proper-time-reparametrization-and-four-velocity",
+          "post-gr-ideal-clocks-and-free-fall",
+          "lem-gr-reciprocal-ratio-window",
+          "def-real-exponential-function-and-e",
+          "thm-derivative-of-exponential",
+          "def-natural-logarithm",
+          "thm-logarithm-derivative-and-integral",
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule"
+        ],
+        "dependency_roles": {
+          "def-gr-observation-and-analysis-architecture": "formulation-prerequisite",
+          "pthm-gr-flrw-cosmological-redshift": "physical-result",
+          "post-gr-flrw-homogeneous-cosmological-model": "physical-assumption",
+          "def-gr-flrw-model-data": "mathematical-premise",
+          "lem-gr-flrw-metric-and-comoving-data": "mathematical-premise",
+          "lem-gr-flrw-christoffel-symbols": "mathematical-premise",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "def-geodesic-of-an-affine-connection": "mathematical-premise",
+          "prop-coordinate-geodesic-equation": "mathematical-premise",
+          "def-gr-observer-relative-energy-and-momentum": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-timelike-worldline-and-proper-time": "mathematical-premise",
+          "lem-gr-proper-time-reparametrization-and-four-velocity": "mathematical-premise",
+          "post-gr-ideal-clocks-and-free-fall": "physical-assumption",
+          "lem-gr-reciprocal-ratio-window": "mathematical-premise",
+          "def-real-exponential-function-and-e": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 8 (8.61)-(8.67): the conserved quantity along null geodesics, the frequency ratio omega_0/omega_1 = a_1/a_0 and the redshift definition z = a_0/a_1 - 1, printed pp. 228-229 (PDF pp. 235-236); Ch. 8 (8.1)-(8.7) on the FLRW metric and the comoving family, printed pp. 217-219 (PDF pp. 224-226)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.6.2: the geodesic motion of light in the FRW metric with the conserved product and the redshift statement, printed pp. 203-204 (PDF pp. 210-211); section 4.6.1 on the FRW metric and comoving observers, printed pp. 198-202 (PDF pp. 205-209)",
+              "url": "https://davidtong.org/pdfs/teaching/general-relativity/gr.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Worked instance inside the classical gravitational framework: it instantiates the model-configuration, readout and operational-model clauses of the experiment interface on the framework's own cosmological redshift prediction for an exponentially expanding flat FLRW datum, using the explicit future null geodesic family of the example's verification and an explicitly illustrative one-point record. It asserts no measurement, no apparatus, no calibration correctness, no sampling model, no statistical inference and no empirical support or refutation of the model or of any postulate; every numerical value in it is a declared illustrative value, and the model is adopted only as a hypothetical configuration satisfying the framework's postulates.",
+        "dependency_level": 17
+      },
+      {
+        "id": "cex-gr-bounded-redshift-record-does-not-identify-the-parameter",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Counterexample: a bounded one-point record of the cosmological redshift slot does not determine the emitter scale factor",
+        "statement": "In the operational model $M_{\\mathrm{op}}$ of\n[[ex-gr-cosmological-redshift-interface-record-window]] clause (b), with the\ndeclared comparison rule of clause (c) of that example and its declared\none-point record with positive declared uncertainty, the parameter is\ndetermined uniquely: if two parameters $a_E,a_E'\\in(0,a_R)$ of\n$M_{\\mathrm{op}}$ are consistent with the record, then $a_E=a_E'$.",
+        "strategy": "direct",
+        "deps": [
+          "def-gr-observation-and-analysis-architecture",
+          "ex-gr-cosmological-redshift-interface-record-window",
+          "lem-gr-reciprocal-ratio-window"
+        ],
+        "dependency_roles": {
+          "def-gr-observation-and-analysis-architecture": "formulation-prerequisite",
+          "ex-gr-cosmological-redshift-interface-record-window": "formulation-prerequisite",
+          "lem-gr-reciprocal-ratio-window": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 8 (8.61)-(8.67): the frequency ratio as the inverse scale-factor ratio and the redshift definition z = a_0/a_1 - 1, printed pp. 228-229 (PDF pp. 235-236)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.6.2: the redshift of light in the FRW metric as a ratio of scale factors, printed pp. 203-204 (PDF pp. 210-211)",
+              "url": "https://davidtong.org/pdfs/teaching/general-relativity/gr.pdf"
+            }
+          ]
+        },
+        "verification": {
+          "precheck": "pass"
+        },
+        "physical_scope": "Conceptual counterexample inside the classical gravitational framework: it shows that a declared one-point record with positive declared uncertainty for the cosmological redshift readout of the worked interface instance is consistent with two distinct parameters of the same operational model, so such a record does not determine the parameter uniquely. The numbers are declared illustrative values of the worked instance; the item asserts no measurement, no apparatus, no sampling model, no statistical inference and no empirical conclusion about any model or postulate.",
+        "dependency_level": 18
+      }
+    ]
+  }
+]

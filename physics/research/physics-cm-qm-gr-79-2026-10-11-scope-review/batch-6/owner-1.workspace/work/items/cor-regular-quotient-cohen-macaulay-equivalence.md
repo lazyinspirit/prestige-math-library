@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-quotient-cohen-macaulay-equivalence.md

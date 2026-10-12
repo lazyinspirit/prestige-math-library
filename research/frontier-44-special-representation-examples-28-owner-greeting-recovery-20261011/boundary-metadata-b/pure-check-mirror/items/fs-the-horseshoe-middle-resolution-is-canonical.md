@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-horseshoe-middle-resolution-is-canonical.md

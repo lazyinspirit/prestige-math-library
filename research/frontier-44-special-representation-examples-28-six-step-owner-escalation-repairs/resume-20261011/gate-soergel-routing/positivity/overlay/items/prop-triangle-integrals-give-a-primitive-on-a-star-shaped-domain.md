@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-triangle-integrals-give-a-primitive-on-a-star-shaped-domain.md

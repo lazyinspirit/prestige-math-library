@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-similar-euclidean-simplices-from-shared-facet-normal-gram.md

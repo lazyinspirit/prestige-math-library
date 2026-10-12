@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-ordinal-multiplication-is-right-distributive.md

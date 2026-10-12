@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uniform-laurent-approximation-through-bundle-automorphisms.md

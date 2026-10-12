@@ -56,12 +56,10 @@ $$\ker(\iota^*\omega)_p=T_p(G_\alpha\cdot p).$$
 
 1.2 For $\xi,\eta\in\mathfrak g$ the value of the orbit restriction is $\omega_p(\xi_M(p),\eta_M(p))=\{\mu^\xi,\mu^\eta\}(p)$: this follows from $X_{\mu^\xi}=-\xi_M$, $X_{\mu^\eta}=-\eta_M$ by [F3] and the definition of the Poisson bracket, or equivalently from $\omega_p(\xi_M,\eta_M)=-d\mu^\xi_p(\eta_M(p))$. [F3, given]
 
-2.1 Let $\xi\in\mathfrak g$. By step 1.2 and the bracket identity [F5],
-$$\omega_p(\xi_M(p),\eta_M(p))=\{\mu^\xi,\mu^\eta\}(p)=\langle\alpha,[\xi,\eta]\rangle$$
-for every $\eta\in\mathfrak g$. [step 1.2, F5]
+2.1 Let $\xi\in\mathfrak g$. By step 1.2 and the bracket identity [F5], $$\omega_p(\xi_M(p),\eta_M(p))=\{\mu^\xi,\mu^\eta\}(p)=\langle\alpha,[\xi,\eta]\rangle$$ for every $\eta\in\mathfrak g$. [step 1.2, F5]
 
 3.1 Consequently $\xi_M(p)$ is in the radical of the orbit restriction if and only if $\alpha([\xi,\cdot])=0$, equivalently if and only if $\xi\in\mathfrak g_\alpha$ by [F6]. [step 2.1, F6]
 
 4.1 Therefore the radical of the restriction of $\omega$ to $T_p(G\cdot p)$ equals the image of $\mathfrak g_\alpha$ under the infinitesimal orbit map, namely $T_p(G_\alpha\cdot p)$ by [F6]. [step 3.1, F6]
 
-5.1 By step 1.1 the kernel of the restricted form is precisely that radical, so $\ker(\iota^*\omega)_p=T_p(G_\alpha\cdot p)$. [step 1.1, step 4.1, A1] ∎
+5.1 By step 1.1 the kernel of the restricted form is precisely that radical, so $\ker(\iota^*\omega)_p=T_p(G_\alpha\cdot p)$. [step 1.1, step 4.1, A1] ∎ 

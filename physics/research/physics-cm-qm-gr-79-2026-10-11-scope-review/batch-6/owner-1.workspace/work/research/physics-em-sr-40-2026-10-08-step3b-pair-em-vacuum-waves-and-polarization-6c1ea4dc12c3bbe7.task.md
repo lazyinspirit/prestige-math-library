@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-vacuum-waves-and-polarization-6c1ea4dc12c3bbe7.task.md

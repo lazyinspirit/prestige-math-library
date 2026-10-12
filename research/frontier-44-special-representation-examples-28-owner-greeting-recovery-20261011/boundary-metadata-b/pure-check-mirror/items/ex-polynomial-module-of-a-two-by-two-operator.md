@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-polynomial-module-of-a-two-by-two-operator.md

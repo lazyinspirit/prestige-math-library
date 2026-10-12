@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-connected-finite-graph-is-a-dynkin-diagram.md

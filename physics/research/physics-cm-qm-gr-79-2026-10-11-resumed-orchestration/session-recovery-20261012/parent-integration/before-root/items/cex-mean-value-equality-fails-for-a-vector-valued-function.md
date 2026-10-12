@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mean-value-equality-fails-for-a-vector-valued-function.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-degree-is-invariant-under-proper-smooth-homotopy.md

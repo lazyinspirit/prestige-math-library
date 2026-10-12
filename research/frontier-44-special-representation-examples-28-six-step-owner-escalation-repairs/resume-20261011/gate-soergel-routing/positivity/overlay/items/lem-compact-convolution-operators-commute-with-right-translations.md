@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-convolution-operators-commute-with-right-translations.md

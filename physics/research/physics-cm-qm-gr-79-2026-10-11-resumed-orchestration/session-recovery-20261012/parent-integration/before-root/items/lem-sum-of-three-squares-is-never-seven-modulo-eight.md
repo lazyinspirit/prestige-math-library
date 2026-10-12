@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sum-of-three-squares-is-never-seven-modulo-eight.md

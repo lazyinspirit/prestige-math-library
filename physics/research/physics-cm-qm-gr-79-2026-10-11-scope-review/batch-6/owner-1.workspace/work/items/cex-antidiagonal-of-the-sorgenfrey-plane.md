@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-antidiagonal-of-the-sorgenfrey-plane.md

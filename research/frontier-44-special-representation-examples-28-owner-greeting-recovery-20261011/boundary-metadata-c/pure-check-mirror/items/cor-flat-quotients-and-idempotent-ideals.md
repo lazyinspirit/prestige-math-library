@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-flat-quotients-and-idempotent-ideals.md

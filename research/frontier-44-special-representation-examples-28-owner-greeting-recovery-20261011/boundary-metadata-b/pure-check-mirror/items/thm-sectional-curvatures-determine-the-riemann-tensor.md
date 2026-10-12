@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-sectional-curvatures-determine-the-riemann-tensor.md

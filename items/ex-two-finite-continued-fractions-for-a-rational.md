@@ -48,8 +48,6 @@ and the normalized one is $[1;1,1,2]$ because its last digit is at least $2$.
 
 **Proof technique:** direct.
 
-1.1 Direct calculation gives. [given, algebra]
-$$[1;1,1,2] = 1+\frac{1}{1+\frac{1}{1+\frac12}} = 1+\frac{1}{1+\frac23} = 1+\frac35 = \frac85.$$ [given, algebra]
+1.1 Direct calculation gives. [given, algebra] $$[1;1,1,2] = 1+\frac{1}{1+\frac{1}{1+\frac12}} = 1+\frac{1}{1+\frac23} = 1+\frac35 = \frac85.$$ [given, algebra]
 
-2.1 Likewise. [F1, step 1.1, algebra]
-$$[1;1,1,1,1] = 1+\frac{1}{1+\frac{1}{1+\frac{1}{1+\frac11}}} = 1+\frac35 = \frac85,$$ so the same rational has two finite expansions. The last digit of $[1;1,1,2]$ is $2$, so [F1] identifies it as the normalized one and shows there are no further finite expansions. [F1, step 1.1, algebra] ∎
+2.1 Likewise. [F1, step 1.1, algebra] $$[1;1,1,1,1] = 1+\frac{1}{1+\frac{1}{1+\frac{1}{1+\frac11}}} = 1+\frac35 = \frac85,$$ so the same rational has two finite expansions. The last digit of $[1;1,1,2]$ is $2$, so [F1] identifies it as the normalized one and shows there are no further finite expansions. [F1, step 1.1, algebra] ∎ 

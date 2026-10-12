@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-base-change-freeness-and-specialization-in-the-deformed-family.md

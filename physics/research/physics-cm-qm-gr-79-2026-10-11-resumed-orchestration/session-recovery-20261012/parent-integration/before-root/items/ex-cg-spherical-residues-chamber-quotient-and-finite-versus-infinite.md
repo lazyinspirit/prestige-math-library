@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-spherical-residues-chamber-quotient-and-finite-versus-infinite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-smooth-proper-complete-dvr-geometric-generic-connectedness.md

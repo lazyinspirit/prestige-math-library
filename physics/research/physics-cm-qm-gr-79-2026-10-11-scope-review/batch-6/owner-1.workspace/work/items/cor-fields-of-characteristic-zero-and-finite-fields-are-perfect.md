@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-fields-of-characteristic-zero-and-finite-fields-are-perfect.md

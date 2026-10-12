@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-value-of-a-state-at-a-self-adjoint-element-lies-between-the-spectral-bounds.md

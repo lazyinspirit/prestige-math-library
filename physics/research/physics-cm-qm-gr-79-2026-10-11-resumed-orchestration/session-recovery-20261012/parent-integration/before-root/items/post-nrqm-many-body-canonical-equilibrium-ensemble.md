@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-many-body-canonical-equilibrium-ensemble.md

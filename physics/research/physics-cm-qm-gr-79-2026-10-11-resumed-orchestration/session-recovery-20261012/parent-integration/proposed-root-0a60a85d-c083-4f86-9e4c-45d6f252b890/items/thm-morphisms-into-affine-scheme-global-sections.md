@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-morphisms-into-affine-scheme-global-sections.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-continuous-functions-on-a-compact-metric-space-have-a-countable-dense-family.md

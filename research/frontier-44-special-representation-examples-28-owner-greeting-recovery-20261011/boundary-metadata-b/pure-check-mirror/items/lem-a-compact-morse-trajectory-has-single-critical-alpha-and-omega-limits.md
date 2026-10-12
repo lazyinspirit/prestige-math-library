@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compact-morse-trajectory-has-single-critical-alpha-and-omega-limits.md

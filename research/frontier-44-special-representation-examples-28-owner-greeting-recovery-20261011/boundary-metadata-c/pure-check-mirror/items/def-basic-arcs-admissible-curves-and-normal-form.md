@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-basic-arcs-admissible-curves-and-normal-form.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-trace-class-is-a-two-sided-banach-operator-ideal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-serre-duality-smooth-projective-variety-locally-free-sheaves.md

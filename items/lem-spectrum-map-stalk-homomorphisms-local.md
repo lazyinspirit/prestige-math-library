@@ -39,5 +39,4 @@ $A_{\mathfrak p}\to B_{\mathfrak q}$ is local.
 
 1.2 This image lies in $\mathfrak qB_{\mathfrak q}$ exactly when $\varphi(a)\in\mathfrak q$, because its denominator is outside the prime ideal. [given, algebra]
 
-2.1 Thus [F2] identifies the inverse image of $\mathfrak qB_{\mathfrak q}$ with $\mathfrak pA_{\mathfrak p}$, so the map is local. [F2, step 1.2] ∎
- 
+2.1 Thus [F2] identifies the inverse image of $\mathfrak qB_{\mathfrak q}$ with $\mathfrak pA_{\mathfrak p}$, so the map is local. [F2, step 1.2] ∎  

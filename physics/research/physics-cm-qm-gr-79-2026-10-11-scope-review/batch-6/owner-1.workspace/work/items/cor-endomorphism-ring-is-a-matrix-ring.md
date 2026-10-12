@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-endomorphism-ring-is-a-matrix-ring.md

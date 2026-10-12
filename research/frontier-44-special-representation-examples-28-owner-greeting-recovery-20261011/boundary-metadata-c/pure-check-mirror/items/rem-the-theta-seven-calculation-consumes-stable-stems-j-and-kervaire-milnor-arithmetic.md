@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/rem-the-theta-seven-calculation-consumes-stable-stems-j-and-kervaire-milnor-arithmetic.md

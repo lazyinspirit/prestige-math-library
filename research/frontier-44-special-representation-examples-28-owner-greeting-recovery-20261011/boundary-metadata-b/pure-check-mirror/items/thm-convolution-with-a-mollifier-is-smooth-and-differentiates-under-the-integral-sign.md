@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign.md

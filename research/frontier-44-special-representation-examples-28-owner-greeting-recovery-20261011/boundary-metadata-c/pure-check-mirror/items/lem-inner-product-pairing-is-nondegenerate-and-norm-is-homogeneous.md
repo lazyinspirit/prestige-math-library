@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-inner-product-pairing-is-nondegenerate-and-norm-is-homogeneous.md

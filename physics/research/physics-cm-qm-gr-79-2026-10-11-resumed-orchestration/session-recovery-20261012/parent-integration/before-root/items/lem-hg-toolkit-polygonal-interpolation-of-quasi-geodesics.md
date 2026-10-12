@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hg-toolkit-polygonal-interpolation-of-quasi-geodesics.md

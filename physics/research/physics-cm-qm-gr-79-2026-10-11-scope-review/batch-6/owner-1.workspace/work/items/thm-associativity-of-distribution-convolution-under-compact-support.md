@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-associativity-of-distribution-convolution-under-compact-support.md

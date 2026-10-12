@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-prime-ideals-and-dimension-of-a-dvr.md

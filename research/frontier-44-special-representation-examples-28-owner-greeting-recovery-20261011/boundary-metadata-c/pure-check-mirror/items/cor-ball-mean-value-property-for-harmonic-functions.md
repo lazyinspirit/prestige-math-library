@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-ball-mean-value-property-for-harmonic-functions.md

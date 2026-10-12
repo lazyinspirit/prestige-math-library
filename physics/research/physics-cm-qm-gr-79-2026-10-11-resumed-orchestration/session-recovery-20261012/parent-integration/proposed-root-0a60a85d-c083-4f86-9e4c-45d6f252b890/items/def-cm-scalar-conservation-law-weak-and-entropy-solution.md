@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-scalar-conservation-law-weak-and-entropy-solution.md

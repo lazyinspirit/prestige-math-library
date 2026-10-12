@@ -110,49 +110,13 @@ Ricci tensor is traced from the constant-curvature tensor identity, and the
 diameter is read off from the cut locus, where the antipode lies at distance
 $\pi R$.
 
-1.1 The round sphere has $K=k$. [F1, given]
-By [F1] the sectional curvature is everywhere $1/R^2$, and $R=1/\sqrt k$ gives
-$1/R^2=k$; in particular $K=k>0$ and the space is a space form in the sense of
-[F1]. [F1, given]
+1.1 The round sphere has $K=k$. [F1, given] By [F1] the sectional curvature is everywhere $1/R^2$, and $R=1/\sqrt k$ gives $1/R^2=k$; in particular $K=k>0$ and the space is a space form in the sense of [F1]. [F1, given]
 
-2.1 The Ricci curvature is $\operatorname{Ric}=(n-1)k\,g$. [F2, step 1.1]
-Let $p\in S_R^n$ and let $(e_1,\dots,e_n)$ be an orthonormal basis of $T_pS_R^n$.
-By step 1.1 the manifold has constant sectional curvature $k$, so [F2] gives
-$R(A,B)C=k(g(B,C)A-g(A,C)B)$ for all tangent vectors. Substituting into the
-orthonormal-basis formula of [F2],
-$$\operatorname{Ric}(X,Y)=\sum_{i=1}^n\operatorname{Rm}(e_i,X,Y,e_i) =\sum_{i=1}^n k\bigl(g(X,Y)g(e_i,e_i)-g(e_i,Y)g(X,e_i)\bigr) =k\bigl(n\,g(X,Y)-g(X,Y)\bigr)=(n-1)k\,g(X,Y).$$
-Hence $\operatorname{Ric}=(n-1)k\,g$, and in particular the Bonnet–Myers
-lower bound holds with equality at every point and every tangent vector.
-[F2, step 1.1]
+2.1 The Ricci curvature is $\operatorname{Ric}=(n-1)k\,g$. [F2, step 1.1] Let $p\in S_R^n$ and let $(e_1,\dots,e_n)$ be an orthonormal basis of $T_pS_R^n$. By step 1.1 the manifold has constant sectional curvature $k$, so [F2] gives $R(A,B)C=k(g(B,C)A-g(A,C)B)$ for all tangent vectors. Substituting into the orthonormal-basis formula of [F2], $$\operatorname{Ric}(X,Y)=\sum_{i=1}^n\operatorname{Rm}(e_i,X,Y,e_i) =\sum_{i=1}^n k\bigl(g(X,Y)g(e_i,e_i)-g(e_i,Y)g(X,e_i)\bigr) =k\bigl(n\,g(X,Y)-g(X,Y)\bigr)=(n-1)k\,g(X,Y).$$ Hence $\operatorname{Ric}=(n-1)k\,g$, and in particular the Bonnet–Myers lower bound holds with equality at every point and every tangent vector. [F2, step 1.1]
 
-3.1 The sphere is complete and its diameter is $\pi/\sqrt k$. [F3, F4, given, step 2.1]
-The sphere $S_R^n$ is a closed and bounded subset of $\mathbb R^{n+1}$, hence
-compact. It is connected and boundaryless by the round-sphere geometry of [F3],
-so [F4] makes it complete. Diameter: fix $p\in S_R^n$. Every point
-$q\in S_R^n$ either is the antipode $q=-p$ or lies outside the cut locus
-$\{-p\}$ of [F3]. In the second case the distance formula of
-[[prop-round-sphere-model-geometry]] gives $d_g(p,q)<\pi R$, including
-$q=p$ with distance zero; in the first case the radial geodesic in
-the direction of $v$ with $\exp_p(\pi R\,v)=-p$ has length $\pi R$ and is
-minimizing, because the cut time is exactly $\pi R$, so $d_g(p,-p)=\pi R$.
-Therefore $\sup_qd_g(p,q)=\pi R$, and since $p$ was arbitrary,
-$$\operatorname{diam}(S_R^n,g)=\pi R=\frac{\pi}{\sqrt k}$$
-by the definition of the diameter in [F5]. [F3, F4, given, step 2.1]
+3.1 The sphere is complete and its diameter is $\pi/\sqrt k$. [F3, F4, given, step 2.1] The sphere $S_R^n$ is a closed and bounded subset of $\mathbb R^{n+1}$, hence compact. It is connected and boundaryless by the round-sphere geometry of [F3], so [F4] makes it complete. Diameter: fix $p\in S_R^n$. Every point $q\in S_R^n$ either is the antipode $q=-p$ or lies outside the cut locus $\{-p\}$ of [F3]. In the second case the distance formula of [[prop-round-sphere-model-geometry]] gives $d_g(p,q)<\pi R$, including $q=p$ with distance zero; in the first case the radial geodesic in the direction of $v$ with $\exp_p(\pi R\,v)=-p$ has length $\pi R$ and is minimizing, because the cut time is exactly $\pi R$, so $d_g(p,-p)=\pi R$. Therefore $\sup_qd_g(p,q)=\pi R$, and since $p$ was arbitrary, $$\operatorname{diam}(S_R^n,g)=\pi R=\frac{\pi}{\sqrt k}$$ by the definition of the diameter in [F5]. [F3, F4, given, step 2.1]
 
-4.1 Equality in Bonnet–Myers, and the boundary cases. [F5, step 2.1, step 3.1]
-By step 2.1 the sphere satisfies $\operatorname{Ric}\ge(n-1)k\,g$ with
-equality everywhere, and it is complete, connected, boundaryless and of
-dimension $n\ge2$; [F5] gives $\operatorname{diam}\le\pi/\sqrt k$, and step 3.1
-gives $\operatorname{diam}=\pi/\sqrt k$: the diameter bound is attained, so the
-example is an equality case of Bonnet–Myers. The case $n=2$ is included and is
-the minimal dimension for which the statement and Bonnet–Myers are formulated;
-the parameter $k>0$ is essential, since for $k=0$ the Euclidean space has
-unbounded pairwise distances and Ricci curvature $0$; its diameter is
-undefined under [[def-metric-bounded-diameter]]. The radius is normalized to
-$R=1/\sqrt k$ so that the curvature is exactly $k$; for a general radius $r$
-the same computation gives $K=1/r^2$ and diameter $\pi r$. No choice beyond the
-inherited [A1] is used: the sphere, its antipodal point and the great circles
-are explicit. [F5, step 2.1, step 3.1] ∎
+4.1 Equality in Bonnet–Myers, and the boundary cases. [F5, step 2.1, step 3.1] By step 2.1 the sphere satisfies $\operatorname{Ric}\ge(n-1)k\,g$ with equality everywhere, and it is complete, connected, boundaryless and of dimension $n\ge2$; [F5] gives $\operatorname{diam}\le\pi/\sqrt k$, and step 3.1 gives $\operatorname{diam}=\pi/\sqrt k$: the diameter bound is attained, so the example is an equality case of Bonnet–Myers. The case $n=2$ is included and is the minimal dimension for which the statement and Bonnet–Myers are formulated; the parameter $k>0$ is essential, since for $k=0$ the Euclidean space has unbounded pairwise distances and Ricci curvature $0$; its diameter is undefined under [[def-metric-bounded-diameter]]. The radius is normalized to $R=1/\sqrt k$ so that the curvature is exactly $k$; for a general radius $r$ the same computation gives $K=1/r^2$ and diameter $\pi r$. No choice beyond the inherited [A1] is used: the sphere, its antipodal point and the great circles are explicit. [F5, step 2.1, step 3.1] ∎
 
 ## Source locator
 

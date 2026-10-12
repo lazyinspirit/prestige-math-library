@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-jordan-chevalley-parts-agree-under-adjoint-representation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-on-a-biproduct-the-injections-and-projections-satisfy-the-identity-sum-relation.md

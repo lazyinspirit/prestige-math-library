@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-canonical-check-names-are-hereditarily-symmetric.md

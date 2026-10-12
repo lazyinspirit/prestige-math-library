@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-classical-affine-closed-points-are-maximal-ideals.md

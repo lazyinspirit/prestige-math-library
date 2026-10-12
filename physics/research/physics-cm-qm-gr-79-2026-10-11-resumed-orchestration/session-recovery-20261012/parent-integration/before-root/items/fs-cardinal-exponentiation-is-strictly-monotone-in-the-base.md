@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cardinal-exponentiation-is-strictly-monotone-in-the-base.md

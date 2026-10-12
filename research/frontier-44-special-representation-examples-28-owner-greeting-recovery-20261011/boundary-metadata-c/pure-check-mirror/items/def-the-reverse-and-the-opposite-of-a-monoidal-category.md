@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-the-reverse-and-the-opposite-of-a-monoidal-category.md

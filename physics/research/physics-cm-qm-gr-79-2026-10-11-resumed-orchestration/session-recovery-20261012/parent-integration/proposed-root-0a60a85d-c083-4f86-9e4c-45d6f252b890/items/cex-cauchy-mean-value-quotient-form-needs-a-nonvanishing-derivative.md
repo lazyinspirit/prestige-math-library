@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cauchy-mean-value-quotient-form-needs-a-nonvanishing-derivative.md

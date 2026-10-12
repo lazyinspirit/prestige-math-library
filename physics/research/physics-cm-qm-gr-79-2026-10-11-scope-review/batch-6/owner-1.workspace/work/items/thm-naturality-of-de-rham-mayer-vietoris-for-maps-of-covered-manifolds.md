@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-naturality-of-de-rham-mayer-vietoris-for-maps-of-covered-manifolds.md

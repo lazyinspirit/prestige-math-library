@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-degree-zero-line-bundle-section-trivial.md

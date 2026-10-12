@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-associated-primes-of-cohen-macaulay-module-have-full-dimension.md

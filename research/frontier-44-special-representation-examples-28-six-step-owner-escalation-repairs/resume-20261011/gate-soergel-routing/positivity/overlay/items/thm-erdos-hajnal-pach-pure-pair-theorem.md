@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-erdos-hajnal-pach-pure-pair-theorem.md

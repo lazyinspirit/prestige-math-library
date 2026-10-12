@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-integration-over-an-oriented-embedded-submanifold.md

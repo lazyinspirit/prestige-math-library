@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-qualitative-compact-support-uncertainty-principle.md

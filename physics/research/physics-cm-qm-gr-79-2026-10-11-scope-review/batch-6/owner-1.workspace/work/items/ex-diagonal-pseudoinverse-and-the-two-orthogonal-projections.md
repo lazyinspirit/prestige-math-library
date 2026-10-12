@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-diagonal-pseudoinverse-and-the-two-orthogonal-projections.md

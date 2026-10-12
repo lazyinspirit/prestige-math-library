@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invariant-horizontal-form-on-a-free-proper-quotient-descends-uniquely.md

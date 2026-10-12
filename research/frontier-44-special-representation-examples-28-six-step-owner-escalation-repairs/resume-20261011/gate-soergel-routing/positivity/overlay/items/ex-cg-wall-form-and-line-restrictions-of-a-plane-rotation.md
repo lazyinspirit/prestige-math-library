@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-wall-form-and-line-restrictions-of-a-plane-rotation.md

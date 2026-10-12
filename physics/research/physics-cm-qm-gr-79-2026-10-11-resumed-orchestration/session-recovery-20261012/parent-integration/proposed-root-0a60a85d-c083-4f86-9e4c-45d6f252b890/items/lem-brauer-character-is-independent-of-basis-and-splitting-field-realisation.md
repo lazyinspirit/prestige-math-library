@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brauer-character-is-independent-of-basis-and-splitting-field-realisation.md

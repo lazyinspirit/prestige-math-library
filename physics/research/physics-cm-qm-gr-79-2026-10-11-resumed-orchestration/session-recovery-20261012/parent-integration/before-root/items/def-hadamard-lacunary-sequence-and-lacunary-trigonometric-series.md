@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hadamard-lacunary-sequence-and-lacunary-trigonometric-series.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hilbert-and-riesz-transforms-are-bounded-on-weighted-lp.md

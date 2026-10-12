@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-vector-field-tangent-to-an-embedded-submanifold-restricts-to-a-vector-field.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-ferrers-young-diagram-conjugate-partition-and-durfee-square.md

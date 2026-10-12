@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetric-chain-decomposition-of-the-boolean-lattice.md

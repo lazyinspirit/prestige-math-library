@@ -44,8 +44,6 @@ resulting blockade is pure with width $w/\ell^2$.
 
 **Proof technique:** direct.
 
+ 1.1 Applying [L1] with $\ell=4$ yields a pure blockade whose width is $$ \frac{w}{\ell^2}=\frac{w}{16}. $$ [L1, algebra]
 
-1.1 Applying [L1] with $\ell=4$ yields a pure blockade whose width is $$ \frac{w}{\ell^2}=\frac{w}{16}. $$ [L1, algebra]
-
-
-2.1 Since [L1] names the blockade pure rather than complete or anticomplete, this branch keeps exactly the distinction used later on the A page: every pair of blocks is pure, but no stronger global uniformity is asserted. [step 1.1, L1] ∎
+ 2.1 Since [L1] names the blockade pure rather than complete or anticomplete, this branch keeps exactly the distinction used later on the A page: every pair of blocks is pure, but no stronger global uniformity is asserted. [step 1.1, L1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-rational-cohomology-scalar-comparison-for-compact-smooth-manifolds.md

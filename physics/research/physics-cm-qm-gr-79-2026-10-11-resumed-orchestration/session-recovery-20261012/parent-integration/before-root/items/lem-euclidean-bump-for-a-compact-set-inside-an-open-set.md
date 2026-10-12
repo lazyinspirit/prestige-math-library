@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euclidean-bump-for-a-compact-set-inside-an-open-set.md

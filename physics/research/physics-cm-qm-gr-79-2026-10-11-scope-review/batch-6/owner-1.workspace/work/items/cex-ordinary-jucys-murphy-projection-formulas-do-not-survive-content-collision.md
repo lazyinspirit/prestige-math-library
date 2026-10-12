@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ordinary-jucys-murphy-projection-formulas-do-not-survive-content-collision.md

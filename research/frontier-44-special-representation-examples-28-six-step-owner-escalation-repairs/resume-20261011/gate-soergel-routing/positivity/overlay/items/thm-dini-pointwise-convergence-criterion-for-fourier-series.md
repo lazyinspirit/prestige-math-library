@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-dini-pointwise-convergence-criterion-for-fourier-series.md

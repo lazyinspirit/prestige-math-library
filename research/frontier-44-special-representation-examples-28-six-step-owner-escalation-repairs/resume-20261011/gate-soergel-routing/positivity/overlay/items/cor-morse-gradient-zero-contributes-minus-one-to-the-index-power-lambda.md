@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-morse-gradient-zero-contributes-minus-one-to-the-index-power-lambda.md

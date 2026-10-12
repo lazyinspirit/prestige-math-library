@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-coordinate-functionals-on-classical-sequence-spaces.md

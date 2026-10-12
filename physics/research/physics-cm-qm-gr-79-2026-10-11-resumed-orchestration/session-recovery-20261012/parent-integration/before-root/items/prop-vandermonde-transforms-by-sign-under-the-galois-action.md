@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-vandermonde-transforms-by-sign-under-the-galois-action.md

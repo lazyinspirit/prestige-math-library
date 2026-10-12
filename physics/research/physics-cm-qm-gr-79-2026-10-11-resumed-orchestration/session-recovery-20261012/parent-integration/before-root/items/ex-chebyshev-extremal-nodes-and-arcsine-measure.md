@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-chebyshev-extremal-nodes-and-arcsine-measure.md

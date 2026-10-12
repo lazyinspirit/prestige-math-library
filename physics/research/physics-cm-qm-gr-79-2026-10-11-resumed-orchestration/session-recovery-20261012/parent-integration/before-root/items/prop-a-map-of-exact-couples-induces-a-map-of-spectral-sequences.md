@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences.md

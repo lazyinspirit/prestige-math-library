@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-l-p-norms-converge-to-the-essential-supremum-for-essentially-bounded-l-r-functions.md

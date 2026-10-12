@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tietze-extension-from-a-closed-interval-of-the-line.md

@@ -43,11 +43,8 @@ and choose vertices $v_i\in B_i$ for $i=1,2,3,4$.
 
 **Proof technique:** direct.
 
+ 1.1 Because each block of a blockade is nonempty, the four choices $v_i\in B_i$ are legitimate. [given, choose]
 
-1.1 Because each block of a blockade is nonempty, the four choices $v_i\in B_i$ are legitimate. [given, choose]
+ 2.1 If $i\ne j$, then $B_i$ is complete to $B_j$ by [L1], so the chosen vertices $v_i$ and $v_j$ are adjacent. [step 1.1, L1]
 
-
-2.1 If $i\ne j$, then $B_i$ is complete to $B_j$ by [L1], so the chosen vertices $v_i$ and $v_j$ are adjacent. [step 1.1, L1]
-
-
-3.1 Therefore every pair among $v_1,v_2,v_3,v_4$ is adjacent, so these four vertices form a clique. [step 2.1] ∎
+ 3.1 Therefore every pair among $v_1,v_2,v_3,v_4$ is adjacent, so these four vertices form a clique. [step 2.1] ∎ 

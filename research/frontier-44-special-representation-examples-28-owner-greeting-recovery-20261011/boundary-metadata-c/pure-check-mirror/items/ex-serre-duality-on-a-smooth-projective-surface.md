@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-serre-duality-on-a-smooth-projective-surface.md

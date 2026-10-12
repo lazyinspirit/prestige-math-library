@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generalized-niceness-yields-four-reduction-outcomes.md

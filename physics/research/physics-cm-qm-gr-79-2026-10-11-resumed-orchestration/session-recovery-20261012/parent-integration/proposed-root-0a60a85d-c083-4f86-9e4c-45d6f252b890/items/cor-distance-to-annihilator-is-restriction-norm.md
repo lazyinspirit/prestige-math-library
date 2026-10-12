@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-distance-to-annihilator-is-restriction-norm.md

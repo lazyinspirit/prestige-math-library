@@ -155,8 +155,7 @@ absolutely finite. ([[def-newtonian-potential]]).
 
 4.1 Since $f$ vanishes outside $B_R(0)$, $f(y)\Phi(x-y)=\Phi(x)f(y)+f(y)h_x(y)$ for every $y$. Integrability from step 3.1 and [F10] give $Nf(x)=M\Phi(x)+\int f(y)h_x(y)\,dy$. By [F11], then the pointwise bound of step 3.1 and [F9], $|Nf(x)-M\Phi(x)|\le\int|f(y)h_x(y)|\,dy\le C_nR\|f\|_1r^{1-n}$. Substituting the profiles [F2] yields the stated two estimates, with constants independent of the direction of $x$. [F2, F9, F10, F11, step 3.1]
 
-5.1 If $M=0$, the leading term in step 4.1 vanishes, giving the two improved orders; if $f=0$, then $M=Nf=0$ and both bounds hold with equality. The assumptions $n\ge2$ and $r>2R$ exclude dimensions zero and one and the endpoint $r=2R$. Countable Choice is used only through the kernel and potential conventions [F2], [F16] and the Borel-to-Lebesgue interface [F7]; no full Axiom of Choice is invoked. [A1, F2, F7, F16, step 4.1, cases] ∎
-## Source notes
+5.1 If $M=0$, the leading term in step 4.1 vanishes, giving the two improved orders; if $f=0$, then $M=Nf=0$ and both bounds hold with equality. The assumptions $n\ge2$ and $r>2R$ exclude dimensions zero and one and the endpoint $r=2R$. Countable Choice is used only through the kernel and potential conventions [F2], [F16] and the Borel-to-Lebesgue interface [F7]; no full Axiom of Choice is invoked. [A1, F2, F7, F16, step 4.1, cases] ∎ ## Source notes
 
 Hunter, §2.7 equation (2.24) and the following exterior-asymptotic passage,
 printed pp.36–37, defines the Newtonian potential and, for $n\ge3$, rewrites

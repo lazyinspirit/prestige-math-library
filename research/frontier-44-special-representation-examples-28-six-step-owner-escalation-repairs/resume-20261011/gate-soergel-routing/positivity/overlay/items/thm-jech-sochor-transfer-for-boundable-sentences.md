@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-jech-sochor-transfer-for-boundable-sentences.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-entire-harmonic-functions-with-bounded-gradient-are-affine.md

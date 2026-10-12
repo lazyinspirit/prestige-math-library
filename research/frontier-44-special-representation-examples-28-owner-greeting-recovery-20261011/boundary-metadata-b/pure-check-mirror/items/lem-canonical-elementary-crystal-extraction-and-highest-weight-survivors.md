@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-canonical-elementary-crystal-extraction-and-highest-weight-survivors.md

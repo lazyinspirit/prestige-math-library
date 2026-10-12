@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-elliptic-and-hyperbolic-automorphisms.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra.md

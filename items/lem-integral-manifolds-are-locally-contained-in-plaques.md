@@ -48,11 +48,9 @@ into a single plaque of $U$.
 
 **Proof technique:** direct.
 
-1.1 The transverse coordinate map $y \circ i:C \to \mathbb R^{n-k}$ has zero [given]
-differential. Indeed, the tangent image of $i$ is $\mathcal D$, and in a flat chart the distribution is exactly the kernel of $dy$. [given]
+1.1 The transverse coordinate map $y \circ i:C \to \mathbb R^{n-k}$ has zero [given] differential. Indeed, the tangent image of $i$ is $\mathcal D$, and in a flat chart the distribution is exactly the kernel of $dy$. [given]
 
-1.2 A smooth map with zero differential is locally constant, hence constant on [given]
-each connected component of its domain. Therefore $y \circ i$ is constant on $C$. [given]
+1.2 A smooth map with zero differential is locally constant, hence constant on [given] each connected component of its domain. Therefore $y \circ i$ is constant on $C$. [given]
 
-1.3 The image $i(C)$ is therefore contained in the slice with that fixed [given]
-transverse coordinate, namely in a single plaque of the flat chart. [given] ∎
+2.1 The image $i(C)$ is therefore contained in the slice with that fixed [given] transverse coordinate, namely in a single plaque of the flat chart. [given] ∎
+

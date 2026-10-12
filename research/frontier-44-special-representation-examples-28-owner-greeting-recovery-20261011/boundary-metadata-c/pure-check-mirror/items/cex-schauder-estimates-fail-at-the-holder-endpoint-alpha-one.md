@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-schauder-estimates-fail-at-the-holder-endpoint-alpha-one.md

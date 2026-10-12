@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cover-small-inclusion-is-a-chain-homotopy-equivalence.md

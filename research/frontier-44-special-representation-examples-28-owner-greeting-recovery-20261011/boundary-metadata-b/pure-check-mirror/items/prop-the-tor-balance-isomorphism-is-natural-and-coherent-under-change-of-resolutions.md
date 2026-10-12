@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions.md

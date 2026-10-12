@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-orthogonal-decomposition-by-a-closed-subspace.md

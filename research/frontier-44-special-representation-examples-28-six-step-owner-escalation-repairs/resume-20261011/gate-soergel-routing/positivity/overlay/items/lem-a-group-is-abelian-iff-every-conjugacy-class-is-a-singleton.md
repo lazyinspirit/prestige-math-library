@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton.md

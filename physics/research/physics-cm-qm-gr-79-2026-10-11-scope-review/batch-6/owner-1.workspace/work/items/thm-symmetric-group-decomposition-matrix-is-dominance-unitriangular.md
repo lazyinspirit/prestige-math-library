@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symmetric-group-decomposition-matrix-is-dominance-unitriangular.md

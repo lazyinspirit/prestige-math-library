@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-column-collision-causes-antisymmetrizer-cancellation.md

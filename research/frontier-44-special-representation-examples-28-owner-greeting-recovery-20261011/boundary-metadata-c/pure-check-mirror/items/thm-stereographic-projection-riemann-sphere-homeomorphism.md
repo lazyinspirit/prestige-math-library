@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stereographic-projection-riemann-sphere-homeomorphism.md

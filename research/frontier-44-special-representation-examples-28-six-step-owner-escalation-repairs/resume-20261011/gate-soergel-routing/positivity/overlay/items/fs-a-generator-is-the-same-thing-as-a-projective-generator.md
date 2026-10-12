@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-generator-is-the-same-thing-as-a-projective-generator.md

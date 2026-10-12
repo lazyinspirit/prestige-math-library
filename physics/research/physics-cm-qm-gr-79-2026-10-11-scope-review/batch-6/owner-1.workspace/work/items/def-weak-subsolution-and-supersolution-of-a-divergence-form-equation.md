@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weak-subsolution-and-supersolution-of-a-divergence-form-equation.md

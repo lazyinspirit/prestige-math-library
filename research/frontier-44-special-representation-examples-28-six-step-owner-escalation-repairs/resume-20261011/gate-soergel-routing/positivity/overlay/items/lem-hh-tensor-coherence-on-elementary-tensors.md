@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hh-tensor-coherence-on-elementary-tensors.md

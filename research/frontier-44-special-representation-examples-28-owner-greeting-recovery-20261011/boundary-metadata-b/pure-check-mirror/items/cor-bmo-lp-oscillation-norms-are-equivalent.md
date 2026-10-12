@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-bmo-lp-oscillation-norms-are-equivalent.md

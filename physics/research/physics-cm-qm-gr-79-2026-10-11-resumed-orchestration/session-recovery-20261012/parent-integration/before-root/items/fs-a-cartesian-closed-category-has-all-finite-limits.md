@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-cartesian-closed-category-has-all-finite-limits.md

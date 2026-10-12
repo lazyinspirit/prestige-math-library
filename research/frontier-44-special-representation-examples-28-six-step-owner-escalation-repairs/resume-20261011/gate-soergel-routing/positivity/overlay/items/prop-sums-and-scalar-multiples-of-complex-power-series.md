@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-sums-and-scalar-multiples-of-complex-power-series.md

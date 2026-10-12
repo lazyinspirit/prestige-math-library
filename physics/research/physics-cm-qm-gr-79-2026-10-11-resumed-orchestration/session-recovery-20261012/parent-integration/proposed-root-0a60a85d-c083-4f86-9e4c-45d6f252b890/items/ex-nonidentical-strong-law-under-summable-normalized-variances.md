@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonidentical-strong-law-under-summable-normalized-variances.md

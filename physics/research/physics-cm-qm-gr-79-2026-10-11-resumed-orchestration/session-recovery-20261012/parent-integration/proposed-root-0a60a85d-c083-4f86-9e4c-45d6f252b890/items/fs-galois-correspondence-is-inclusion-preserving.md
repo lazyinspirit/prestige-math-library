@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-galois-correspondence-is-inclusion-preserving.md

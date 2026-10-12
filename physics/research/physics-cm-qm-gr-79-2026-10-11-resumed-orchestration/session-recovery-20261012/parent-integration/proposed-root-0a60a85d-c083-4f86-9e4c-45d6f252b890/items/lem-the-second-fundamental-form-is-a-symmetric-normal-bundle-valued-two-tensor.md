@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-second-fundamental-form-is-a-symmetric-normal-bundle-valued-two-tensor.md

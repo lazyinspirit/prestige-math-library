@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-dominant-and-strictly-dominant-weights.md

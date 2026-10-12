@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-square-integrable-kernel-finite-rank-truncations.md

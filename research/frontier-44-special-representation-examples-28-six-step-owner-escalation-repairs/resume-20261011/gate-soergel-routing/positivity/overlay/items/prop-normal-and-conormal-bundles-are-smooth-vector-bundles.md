@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-normal-and-conormal-bundles-are-smooth-vector-bundles.md

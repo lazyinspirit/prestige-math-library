@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-schauder-basis-and-coordinate-functionals.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-unique-reduced-path-characterisation-of-simplicial-trees.md

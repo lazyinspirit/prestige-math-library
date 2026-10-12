@@ -1,0 +1,1398 @@
+[
+  {
+    "order": 145,
+    "id": "cm17-classical-continua-with-explicit-constitutive-assumptions",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Classical continua with explicit constitutive assumptions",
+    "companion": "cm17-classical-continua-with-explicit-constitutive-assumptions-examples",
+    "requires": [
+      "cm-math-fluid",
+      "cm07-stationary-action-and-lagrangian-dynamics"
+    ],
+    "items": [
+      {
+        "id": "def-cm17-continuum-body-and-units",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Continuum body data, the fixed inertial frame and the dimensions of the fields",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 8,
+        "deps": [
+          "def-cm-material-region-and-density",
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "post-cm01-spacetime",
+          "def-cm01-units",
+          "def-interval",
+          "def-cm-affine-time-space",
+          "pthm-cm01-galilean-kinematics"
+        ],
+        "dependency_roles": {
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "post-cm01-frames": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "post-cm01-spacetime": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-interval": "mathematical-premise",
+          "def-cm-affine-time-space": "formulation-prerequisite",
+          "pthm-cm01-galilean-kinematics": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The kinematic and dimensional framework of the continuum branch: one fixed inertial frame, a reference material region with a reference chart domain, a time window, and the dimensions of the density, velocity, acceleration, body-force, traction, stress, displacement, elastic, viscous, pressure and wave-speed fields. The definition fixes conventions only; it asserts no motion, no balance law, no constitutive relation and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 1.2-1.6 (continuous bodies, reference and current configurations) and Section 3.1 (motion and velocity)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.1 (the continuum approximation and deformations) and Section 8.3 (the velocity field of a continuum)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "**(a) Framework and frame.** The framework is the non-relativistic classical\nmechanics of [[post-cm01-spacetime]] with the inertial frames, stationary\nobservers and allowed changes of frame of [[post-cm01-frames]]; the particle\nworldline conventions of [[post-cm01-worldlines]] are used for the labeled\npoints of a body, and dimensions and reference units (metre, second, kilogram)\nare read by [[def-cm01-units]]. Throughout this page one inertial frame $F$\nwith adapted coordinates $(t,x)$ of the affine time space\n[[def-cm-affine-time-space]] is fixed, and each simultaneous spatial slice is\nidentified with $\\mathbb R^3$ carrying its standard Euclidean structure. The\ntime coordinate $t$ is the model's time in seconds, $[t]=\\tau$, and the\nspatial components $x_i$ are positions in metres, $[x_i]=\\ell$. All fields\nbelow are read in this one frame.\n\n**(b) Body data.** A **continuum body data set** in $F$ is a triple $(B,O,I)$\nconsisting of\n\n1. a material region $B\\subseteq\\mathbb R^3$: a nonempty, bounded, open set\n   ([[def-cm-material-region-and-density]]);\n2. an open set $O\\subseteq\\mathbb R^3$ with $\\overline B\\subseteq O$, the\n   **reference chart domain**;\n3. a nonempty open interval $I\\subseteq\\mathbb R$, the **time window**\n   ([[def-interval]]).\n\nThe points $X\\in B$ are the **material labels** of the body and $B$ is its\n**reference placement**. The reference placement is bookkeeping for the\nlabels and not an observable: it is used only to name the points of the body,\nand all physical statements of this page concern spatial fields on the\ncurrent regions and their transformat",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "post-cm17-continuum-kinematic-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted continuum kinematic model: body data, smooth motions as families of label worldlines, the continuum idealization and frame covariance",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 9,
+        "deps": [
+          "def-cm17-continuum-body-and-units",
+          "def-cm-continuum-motion",
+          "post-cm01-worldlines",
+          "post-cm01-frames",
+          "def-cm01-velocity-acceleration",
+          "def-cm-euclidean-spatial-calculus",
+          "pthm-cm01-galilean-kinematics"
+        ],
+        "dependency_roles": {
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "pthm-cm01-galilean-kinematics": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the kinematic branch of the continuum framework: every model is carried by body data in a fixed inertial frame; the body's motion is a C^2 family of orientation-preserving injective configurations whose labels follow worldlines and whose velocity field carries the model's spatial velocity and material acceleration; the continuum hypothesis, the smoothness idealization and the frame-covariance requirement are stated. The postulate excludes fracture, interpenetration, phase boundaries, shocks, diffusion, chemical reactions and thermal or electromagnetic coupling, and asserts no dynamics, no constitutive relation and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 1.2-1.6 (continuous bodies and motions) and 3.1-3.3 (velocity, velocity gradient)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 7.1 and 8.3 (continuum description, particle displacement and velocity field)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 6.1 (the continuum description of a chain and the displacement field)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt as physical assumptions of the continuum branch the following statements,\nin the framework, frame and body data of [[def-cm17-continuum-body-and-units]].\n\n**(i) Model data.** A model of the branch is carried by a continuum body data\nset $(B,O,I)$ of [[def-cm17-continuum-body-and-units]] in the fixed inertial\nframe $F$: a material region $B$, a reference chart domain $O$ with\n$\\overline B\\subseteq O$, and a time window $I$. The labels $X\\in B$ are the\nmaterial points of the body.\n\n**(ii) Motion.** A **motion** of the model is a map\n\n$$\\chi:I\\times O\\longrightarrow\\mathbb R^3$$\n\nwhich is a motion of the material region $B$ on $I$ in the sense of\n[[def-cm-continuum-motion]]: $\\chi$ is of class $C^2$; for every $t\\in I$ the\nmap $\\chi_t:O\\to\\mathbb R^3$ is of class $C^1$, injective and has invertible\ntotal derivative at every point of $O$; and the Jacobian\n$J(t,X)=\\det\\bigl(D_X\\chi_t(X)\\bigr)$ satisfies $J>0$ on $I\\times B$. The\ncurrent region is $\\Omega_t:=\\chi_t(B)$, and the model's **spatial velocity\nfield** $u$ and **material acceleration** $a=D_tu$ are those of\n[[def-cm-continuum-motion]] and [[def-cm-euclidean-spatial-calculus]].\n\n**(iii) Worldlines of labels.** For every label $X\\in B$ the curve\n$\\gamma_X:I\\to A$, $\\gamma_X(t):=(t,\\chi(t,X))$, is a worldline of the model in\nthe sense of clauses (i)-(iv) of [[post-cm01-worldlines]]: it is of class\n$C^2$ in the adapted coordinates of $F$, its parameter is the frame time\n($\\tau(\\gamma_X(t)-o)=t$), its description in another inertial frame is the\nreparametrized curve induced by the frame change, and its coordinate veloc",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "def-cm17-density-and-mass",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The density field of the continuum model and the mass of a material subregion",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 10,
+        "deps": [
+          "def-cm17-continuum-body-and-units",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm-material-region-and-density",
+          "def-cm-continuum-motion",
+          "def-cm01-units",
+          "def-integral-over-a-measurable-set",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The density field of a continuum model, its dimensions (mass per unit volume), and the model's mass of a material subregion at a given time, computed as the Lebesgue integral of the density over the current image of the subregion. The definition distinguishes the model field and its integral from any measured mass; it asserts no conservation, no positivity law of nature and no empirical value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 1.8 (extensive properties and their densities) and 4.2 (mass and its conservation)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 7.1 and 8.3 (continuous medium, density and velocity fields)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Fix body data $(B,O,I)$ and a motion $\\chi$ of the model on $I$ in the sense\nof [[post-cm17-continuum-kinematic-model]]; write $\\Omega_t=\\chi_t(B)$ for the\ncurrent regions and, for an open interval $J_0$ with $\\overline{J_0}\\subseteq\nI$, let $\\Sigma=\\{(t,x):t\\in\\overline{J_0},\\ x\\in\\chi_t(\\overline B)\\}$ be the\nswept region ([[def-cm-continuum-motion]]).\n\nA **density field of the model** is a function\n\n$$\\rho:U\\longrightarrow(0,\\infty)$$\n\non an open set $U\\subseteq\\mathbb R\\times\\mathbb R^3$ containing $\\Sigma$,\nwhose physical reading is mass per unit volume: its dimension is\n$[\\rho]=\\mu\\ell^{-3}$ ([[def-cm01-units]], [[def-cm17-continuum-body-and-units]]).\nThe **standing regularity** of the balance items of this page is that $\\rho$\nis of class $C^1$ on $U$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]);\nwhere a weaker regularity is used it is stated in the item that uses it.\nStrict positivity and $C^1$ regularity are part of the field class of this\nbranch; the mathematical material-region notion that underlies it admits any\nnonnegative integrable density ([[def-cm-material-region-and-density]]) and is\nused here only to define the mass integral.\n\nA **material subregion** at the level of labels is a nonempty bounded open\n$B'\\subseteq B$ with $\\overline{B'}\\subseteq B$\n([[def-cm-material-region-and-density]]); the same $\\chi$ is a motion of\n$B'$. For $t\\in I$ the **model mass of $B'$ at time $t$** is the Lebesgue\nintegral\n\n$$m(t,B'):=\\int_{\\chi_t(B')}\\rho(t,x)\\,dx$$\n\n([[def-integral-over-a-measurable-set]]). Its dimension is $\\mu$ and it is a\nnumber computed from the model f",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "post-cm17-mass-balance",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted mass balance: the mass of every material subregion is constant in time",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 11,
+        "deps": [
+          "post-cm17-continuum-kinematic-model",
+          "def-cm17-density-and-mass",
+          "def-cm-material-region-and-density",
+          "def-cm-continuum-motion",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm-material-region-and-density": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of mass conservation for a closed continuum model: for every material subregion and every time in the window, the model mass integral over the current image of the subregion is constant. The postulate excludes open systems, diffusion or exchange of material between labels, chemical reactions, phase change and mass sources; it asserts no empirical law and no measured value, and the local continuity equation is a theorem conditional on it.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.2 (the principle of conservation of mass and its local form)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.3 (continuity equation of a continuum)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the following assumption for every model of the continuum kinematic\nbranch of [[post-cm17-continuum-kinematic-model]] with density field of\n[[def-cm17-density-and-mass]].\n\n**(i) Mass balance.** Let $\\chi$ be a motion of the model on the time window\n$I$, let $J_0\\subseteq I$ be an open interval with $\\overline{J_0}\\subseteq I$,\nand let $B'\\subseteq B$ be a material subregion (nonempty bounded open with\n$\\overline{B'}\\subseteq B$). Then the model mass of $B'$,\n\n$$m(t,B')=\\int_{\\chi_t(B')}\\rho(t,x)\\,dx\\qquad(t\\in J_0),$$\n\nis constant in $t$:\n\n$$\\frac{d}{dt}\\int_{\\chi_t(B')}\\rho(t,x)\\,dx=0\\qquad(t\\in J_0). \\tag{CM}$$\n\nThe assumption is imposed for **every** material subregion and every time in\nthe window; the family of subregions is not restricted to a selected finite\nlist.\n\n**(ii) Reading and exclusions.** The assumption says that a label carries its\nmatter permanently: the material of the body is a closed mechanical system\nduring the motion. It is **not** adopted, and no statement of this page\ncovers: open systems in which material is added to or removed from the body;\ndiffusion, mixing or relative transport of distinct constituents between\nlabels; chemical reactions, phase change or mass exchange between\nconstituents; mass sources or sinks distributed in the body; and relativistic\nmass-energy conversion. In such situations the balance above can fail and a\ndifferent balance with source terms is required.\n\n**(iii) Empirical status.** The assumption is the classical conservation of\nmass, adopted here as model structure. Comparisons of predictions with\nobserved masses of p",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "pthm-cm17-transport-and-material-derivative",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The transport identity and the material derivative along label worldlines for the adopted continuum model",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 10,
+        "deps": [
+          "post-cm17-continuum-kinematic-model",
+          "def-cm17-continuum-body-and-units",
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-cm-transport-theorem",
+          "def-countable-choice",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm17-continuum-kinematic-model": "physical-assumption",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-cm-transport-theorem": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted continuum kinematic model (smooth motion with positive Jacobian) and on the Axiom of Countable Choice used by the cited change-of-variables theorem: for a C^1 spatial field on a neighbourhood of the swept region of a body over a compactly contained time interval, the rate of change of the field's integral over the current image of the body equals the integral of the local time derivative plus the flux term div(fu); and along the worldline of a label the ordinary time derivative of the material field equals the material derivative D_tf = partial_t f + grad f . u. The theorem asserts no balance law and no empirical value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 3.7 (transport equations) and 1.4-1.6 (material and spatial descriptions, material derivative)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.2.3, Theorem 1.1 (the transport theorem) and Section 1.1 (the advective derivative)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), as used by the transport theorem cited below. Let\n$(B,O,I)$ be body data of [[def-cm17-continuum-body-and-units]], let $\\chi$ be\na motion of the model on $I$ with spatial velocity $u$ and material\nacceleration $a=D_tu$ ([[post-cm17-continuum-kinematic-model]],\n[[def-cm-continuum-motion]]). Let $J_0\\subseteq I$ be an open interval with\n$\\overline{J_0}\\subseteq I$, put $\\Sigma:=\\{(t,x):t\\in\\overline{J_0},\\\nx\\in\\chi_t(\\overline B)\\}$, and let $f:U\\to\\mathbb R$ be of class $C^1$ on an\nopen set $U\\subseteq\\mathbb R\\times\\mathbb R^3$ containing $\\Sigma$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]). Then:\n\n**(i) Transport identity.** The function $F(t):=\\int_{\\chi_t(B)}f(t,x)\\,dx$ is\ndefined and differentiable on $J_0$, and for every $t\\in J_0$\n\n$$F'(t)=\\int_{\\chi_t(B)}\\bigl(\\partial_tf+\\operatorname{div}(fu)\\bigr)(t,x)\\,dx .$$\n\nThe identity holds componentwise for a $C^1$ vector field $f$.\n\n**(ii) Material derivative along worldlines.** If $f$ is the spatial\ndescription of a material field $F_{\\mathrm m}(t,X):=f(t,\\chi(t,X))$, then for\nevery $X\\in B$ the function $t\\mapsto F_{\\mathrm m}(t,X)$ is differentiable on\n$J_0$ and\n\n$$\\frac{d}{dt}F_{\\mathrm m}(t,X)=D_tf\\bigl(t,\\chi(t,X)\\bigr)=\\Bigl(\\partial_tf+\\nabla f\\cdot u\\Bigr)\\bigl(t,\\chi(t,X)\\bigr),$$\n\nwith $D_t$ and the gradient of [[def-cm-euclidean-spatial-calculus]]. Writing\n$\\operatorname{div}(fu)=\\nabla f\\cdot u+f\\operatorname{div}u$, the integrand\nof (i) is $D_tf+f\\operatorname{div}u$ at the corresponding current point.\n\nThe statement is ",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-cm17-continuity-equation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The continuity equation of the continuum model: local form of mass balance, the material form, and the incompressibility reading",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 12,
+        "deps": [
+          "post-cm17-mass-balance",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm17-continuum-body-and-units",
+          "def-cm17-density-and-mass",
+          "pthm-cm17-transport-and-material-derivative",
+          "thm-cm-local-mass-balance",
+          "def-countable-choice",
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "lem-cm-determinant-derivative-along-a-matrix-curve",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm17-mass-balance": "physical-assumption",
+          "post-cm17-continuum-kinematic-model": "physical-assumption",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "pthm-cm17-transport-and-material-derivative": "physical-result",
+          "thm-cm-local-mass-balance": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "lem-cm-determinant-derivative-along-a-matrix-curve": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted mass-balance postulate, the smooth kinematic model and the Axiom of Countable Choice used by the transport machinery: conservation of the model mass of every material subregion is equivalent to the partial differential equation partial_t rho + div(rho u) = 0 on the current regions; equivalently the material derivative satisfies D_t rho = -rho div u, the product rho times the Jacobian is constant along each label worldline, the relative volume rate is div u, and the incompressibility condition div u = 0 is equivalent to the density being constant along each worldline in this branch. The theorem is a conditional model deduction and asserts no empirical value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.2 (conservation of mass, local forms and the volumetric interpretation)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.1 (integral and differential forms of the continuity equation)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.3 (continuity equation and incompressibility of a continuum)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let $(B,O,I)$ be body data\n([[def-cm17-continuum-body-and-units]]), let $\\chi$ be a motion of the model\nwith spatial velocity $u$ ([[post-cm17-continuum-kinematic-model]],\n[[def-cm-continuum-motion]]), let $J_0\\subseteq I$ be an open interval with\n$\\overline{J_0}\\subseteq I$, let $\\Sigma$ be the swept region over\n$\\overline{J_0}$, and let $\\rho:U\\to(0,\\infty)$ be a density field of class\n$C^1$ on an open set $U$ containing $\\Sigma$\n([[def-cm17-density-and-mass]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).\nAssume the mass-balance postulate (CM) of [[post-cm17-mass-balance]] for every\nmaterial subregion and every $t\\in J_0$. Then:\n\n**(i) Local form.** For every $(t,x)\\in J_0\\times\\chi_t(B)$,\n\n$$\\partial_t\\rho(t,x)+\\operatorname{div}\\bigl(\\rho u\\bigr)(t,x)=0 . \\tag{C}$$\n\nConversely, if (C) holds on an open neighbourhood of $\\Sigma$, then (CM)\nholds for every material subregion and every $t\\in J_0$.\n\n**(ii) Material form.** On $J_0\\times\\chi_t(B)$ the material derivative of the\ndensity satisfies\n\n$$D_t\\rho=-\\rho\\operatorname{div}u ,$$\n\nand writing $J(t,X)=\\det D_X\\chi_t(X)$ along the motion, the product\n$\\rho\\bigl(t,\\chi(t,X)\\bigr)J(t,X)$ is constant in $t$ for every label\n$X\\in B$.\n\n**(iii) Volume rate.** For every $X\\in B$ and $t\\in J_0$ one has\n$\\partial_tJ(t,X)=J(t,X)\\operatorname{div}u(t,\\chi(t,X))$: the relative rate of\nchange of an infinitesimal material volume is $\\operatorname{div}u$, and the\nidentity of (ii) is the statement that density times volume is conserved\nalong a label. ",
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm17-traction-and-stress",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Traction fields and stress matrices of the continuum model, with units and sign conventions",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 10,
+        "deps": [
+          "def-cm17-continuum-body-and-units",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm-traction-and-stress",
+          "def-cm01-units",
+          "def-cm-continuum-motion"
+        ],
+        "dependency_roles": {
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-continuum-motion": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The model's contact-force quantity: a traction field assigning to each point and unit normal the force per unit area exerted across a surface, its dimensions, and the stress matrix representing it when one exists; the sign convention identifying compressive normal traction with negative scalar stress, the component reading, and the distinction from body-force densities. Existence of a representing stress matrix, its continuity and its symmetry are not asserted here; they are conditional conclusions of the balance items of this page. No measured force is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.3 (force, Cauchy's hypothesis for contact forces, traction and the stress tensor)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (the stress tensor and the force on a surface element)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Fix body data $(B,O,I)$ and a motion $\\chi$ of the model with current regions\n$\\Omega_t=\\chi_t(B)$, and let $U\\subseteq\\mathbb R\\times\\mathbb R^3$ be an open\nset containing the swept region over a compactly contained interval\n([[post-cm17-continuum-kinematic-model]], [[def-cm-continuum-motion]]). Let\n$S^2=\\{n\\in\\mathbb R^3:\\|n\\|_2=1\\}$ be the unit sphere.\n\nA **traction field of the model** is a map\n\n$$t:U\\times S^2\\longrightarrow\\mathbb R^3,$$\n\nread with the convention of [[def-cm-traction-and-stress]]: $t(s,x,n)$ is the\nforce per unit area exerted **by the material on the side towards which $n$\npoints upon the material on the other side**, at the point $x$ of a surface\nwhose unit normal is $n$, at time $s$. Its dimension is that of force per\narea, $[t]=\\mu\\ell^{-1}\\tau^{-2}$, read in $\\mathrm{N\\,m^{-2}}$\n([[def-cm01-units]]).\n\nA $C^1$ field of matrices $\\sigma:U\\to M_3(\\mathbb R)$ **represents** the\ntraction field when\n\n$$t(s,x,n)=\\sigma(s,x)\\,n\\qquad\\text{for every }(s,x,n)\\in U\\times S^2 ,$$\n\nthe product being matrix-vector multiplication. The existence of such a\n$\\sigma$ for a given traction field is **not asserted here**: it is a\nconditional conclusion of the balance items of this page. When it exists,\n$\\sigma(s,x)$ is the **stress matrix** of the model at that event, and its\nentries read $\\sigma_{ij}=\\bigl(t(s,x,e_j)\\bigr)_i$: the $i$-th component of\nthe traction across the surface with normal $e_j$.\n\nThe isotropic matrix $-\\lambda I_3$ with $\\lambda\\in\\mathbb R$ represents the\n**normal** traction $t(n)=-\\lambda n$: under the convention above, positive\n$\\lambda$ is a ",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "post-cm17-contact-force-model",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted force model of the continuum branch: continuous body forces and Cauchy contact tractions",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 11,
+        "deps": [
+          "def-cm17-traction-and-stress",
+          "def-cm17-continuum-body-and-units",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm01-units",
+          "def-cm-continuum-motion",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the force description of the continuum branch: a continuous body-force field per unit mass on the swept region and a continuous traction field, force per unit area, depending on a contact surface only through its unit normal at the point (Cauchy's hypothesis). The postulate excludes couple stresses, nonlocal contact interactions, curvature-dependent contact forces, and electromagnetic, thermal or chemical forces; it asserts no balance law, no constitutive relation and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.3 (body forces, contact forces and Cauchy's hypothesis), Section 4.4 (the traction on a surface)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (bulk and surface forces and the stress tensor)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt for every model of the continuum kinematic branch\n([[post-cm17-continuum-kinematic-model]]) the following description of the\nforces acting on the body, read in the fixed inertial frame and with the\ndimensions of [[def-cm17-continuum-body-and-units]].\n\n**(i) Body forces.** There is a continuous field\n$b:U\\to\\mathbb R^3$ on an open set $U$ containing the swept region of the\nmotion over its time window, the **body force per unit mass**, of dimension\n$[b]=\\ell\\tau^{-2}$ ([[def-cm01-units]]). The body force exerted on an\nadmissible region $D$ is $\\int_D\\rho b\\,dx$, of dimension $\\mu\\ell\\tau^{-2}$\n(force).\n\n**(ii) Contact forces and Cauchy's hypothesis.** There is a traction field\n$t:U\\times S^2\\to\\mathbb R^3$ of class $C^1$, hence continuous, in the sense of\n[[def-cm17-traction-and-stress]], force per unit area, with dimension\n$[t]=\\mu\\ell^{-1}\\tau^{-2}$. The definition of a traction field already\nencodes **Cauchy's hypothesis**: the contact force exerted across a surface at\na point depends on the surface only through the value of its unit normal at\nthat point, so two surfaces through the same point with the same unit normal\nexperience the same traction. The contact force exerted across the boundary of\nan admissible region $D$ is $\\int_{\\partial D}t(y,\\nu_D(y))\\,dS(y)$, with the\noutward unit normal $\\nu_D$ and the surface integral of the current-region\nclass. No dependence of $t$ on the curvature of the surface, on higher\nderivatives of the surface, or on the distant shape of the body is introduced;\nno surface couples, no traction singularities and no contact forces on cur",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "post-cm17-momentum-balance",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted balance principles of the continuum model: force and couple-free torque balance on every admissible region",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 12,
+        "deps": [
+          "post-cm17-contact-force-model",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm17-density-and-mass",
+          "def-cm17-traction-and-stress",
+          "def-cm17-continuum-body-and-units",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-cm-euclidean-spatial-calculus",
+          "def-cm-continuum-motion",
+          "def-cm01-units",
+          "def-cross-product-in-r3"
+        ],
+        "dependency_roles": {
+          "post-cm17-contact-force-model": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-bounded-piecewise-c-one-euclidean-domain": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cross-product-in-r3": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the balance principles of the continuum branch in force form: on every admissible bounded piecewise C-one region inside the current region, the surface traction resultant balances minus the volume integral of the body force minus the inertial term rho a, and the corresponding torque about any fixed origin balances likewise with no body or surface couples. The postulate excludes couple stresses, electromagnetic momentum exchange, mass sources and non-inertial frames; it asserts no constitutive law, no existence of a stress matrix and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 4.4-4.6 (balance of linear and angular momentum and the field equations)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (Eq. (7.25) and the bulk-plus-surface force balance of a continuum element)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt for every model of the continuum branch, together with the force\ndescription of [[post-cm17-contact-force-model]] and the fields of\n[[def-cm17-density-and-mass]] and [[def-cm17-traction-and-stress]], the\nfollowing balance principles.\n\n**(i) Setting.** Let $U\\subseteq\\mathbb R\\times\\mathbb R^3$ be an open set\ncontaining the swept region of the motion over its time window. The density\n$\\rho$, the spatial velocity $u$ and the material acceleration $a=D_tu$ are\ncontinuous on $U$ ([[def-cm-euclidean-spatial-calculus]],\n[[def-cm-continuum-motion]]), and $b$ and $t$ are the body-force and traction\nfields of [[post-cm17-contact-force-model]]. For $s$ in the time window the\ncurrent region is $\\Omega_s=\\chi_s(B)$.\n\n**(ii) Admissible regions.** An **admissible region at time $s$** is a\nbounded piecewise $C^1$ Euclidean domain with a specified finite presentation\nwhose closure lies in the open domain of the fields at time $s$\n([[def-bounded-piecewise-c-one-euclidean-domain]]), with outward unit normal\n$\\nu_D$ off its edge set and boundary term the sum of the surface integrals\nover its faces ([[def-surface-integral-on-a-compact-c-one-hypersurface]]).\n\n**(iii) Balance of forces.** For every time $s$ and every admissible region\n$D$ at time $s$,\n\n$$\\int_{\\partial D}t\\bigl(s,y,\\nu_D(y)\\bigr)\\,dS(y)+\\int_D\\bigl(\\rho b-\\rho a\\bigr)(s,y)\\,dy=0 . \\tag{F}$$\n\nRead as a momentum balance, (F) says that the resultant contact force on $D$\nequals $\\int_D\\rho b\\,dy-\\int_D\\rho a\\,dy$, i.e. the total applied force\nequals the mass times acceleration of the region, with the inertial term\nwritten as a",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "pthm-cm17-stress-matrix-and-symmetry",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Existence, uniqueness and symmetry of the stress matrix from the adopted balance principles",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 13,
+        "deps": [
+          "post-cm17-momentum-balance",
+          "post-cm17-contact-force-model",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm17-traction-and-stress",
+          "def-cm17-density-and-mass",
+          "def-cm17-continuum-body-and-units",
+          "thm-cm-traction-is-given-by-a-stress-matrix",
+          "thm-cm-stress-matrix-is-symmetric",
+          "def-cm-euclidean-spatial-calculus",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-cm-continuum-motion",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "post-cm17-momentum-balance": "physical-assumption",
+          "post-cm17-contact-force-model": "physical-assumption",
+          "post-cm17-continuum-kinematic-model": "physical-assumption",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "thm-cm-traction-is-given-by-a-stress-matrix": "mathematical-premise",
+          "thm-cm-stress-matrix-is-symmetric": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-bounded-piecewise-c-one-euclidean-domain": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted force model and balance principles: on every bounded spatial region inside the current configuration the continuous traction field is represented by a unique continuous stress matrix, the reversed-normal identity t(-n) = -t(n) holds, and the couple-free torque balance forces the stress matrix to be symmetric. The result is a conditional deduction from the adopted balance principles and the cited mathematical Cauchy-tetrahedron and angular-balance theorems; it asserts no positivity, no constitutive relation and no measured stress.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 4.3-4.5 (Cauchy's tetrahedron, existence of the stress tensor and symmetry from angular momentum)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (the stress tensor, its symmetry from the torque balance, Eq. (7.25))",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), as used by the surface and divergence machinery of\nthe cited theorems. Let the model and its fields be as in\n[[post-cm17-momentum-balance]]: a motion $\\chi$ with current regions\n$\\Omega_s$, a continuous density field $\\rho$, spatial velocity $u$ and\nmaterial acceleration $a=D_tu$, a continuous body-force field $b$ and a\ncontinuous traction field $t$, with the balance principles (F) and (T) of\nthat postulate holding for every admissible region at every time $s$.\n\nThen for every time $s$ and every bounded open set $W\\subseteq\\Omega_s$ with\n$\\overline W$ contained in the open domain of the fields at time $s$ there is\na unique continuous matrix field\n\n$$\\sigma(s,\\cdot):W\\longrightarrow M_3(\\mathbb R)$$\n\nsuch that\n\n$$t(s,y,n)=\\sigma(s,y)\\,n\\qquad\\text{for every }(y,n)\\in W\\times S^2 ,$$\n\nand necessarily\n\n$$t(s,y,-n)=-t(s,y,n)\\qquad\\bigl((y,n)\\in W\\times S^2\\bigr),\\qquad \\sigma(s,y)^{\\mathsf T}=\\sigma(s,y)\\qquad(y\\in W).$$\n\nThe stress matrix is continuous and unique per time; positivity of its\nisotropic part, a constitutive relation and any measured stress are **not**\nasserted.",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-cm17-momentum-equation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The momentum equation of the continuum model: local form rho D_t u = rho b + div sigma",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 14,
+        "deps": [
+          "post-cm17-momentum-balance",
+          "post-cm17-mass-balance",
+          "post-cm17-contact-force-model",
+          "pthm-cm17-continuity-equation",
+          "pthm-cm17-stress-matrix-and-symmetry",
+          "pthm-cm17-transport-and-material-derivative",
+          "thm-cm-local-momentum-balance",
+          "def-cm17-density-and-mass",
+          "def-cm17-traction-and-stress",
+          "def-cm17-continuum-body-and-units",
+          "def-cm-euclidean-spatial-calculus",
+          "def-cm-continuum-motion",
+          "def-countable-choice",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-algebra-of-derivatives",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm17-momentum-balance": "physical-assumption",
+          "post-cm17-mass-balance": "physical-assumption",
+          "post-cm17-contact-force-model": "physical-assumption",
+          "pthm-cm17-continuity-equation": "physical-result",
+          "pthm-cm17-stress-matrix-and-symmetry": "physical-result",
+          "pthm-cm17-transport-and-material-derivative": "physical-result",
+          "thm-cm-local-momentum-balance": "mathematical-premise",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal": "mathematical-premise",
+          "def-surface-integral-on-a-compact-c-one-hypersurface": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted mass-balance and momentum-balance postulates and on the Axiom of Countable Choice used by the transport and divergence machinery: the force-form balance on every admissible region, together with the continuity equation and the transport identity, is equivalent to the local momentum equation rho D_t u = rho b + div sigma on the current regions, where sigma is the stress matrix produced by the balance principles. The result is a conditional model deduction; it asserts no existence of solutions, no constitutive relation and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 4.4-4.6 (balance of momentum and the local field equations)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.2 (the key equation of continuum dynamics, Eq. (7.25))",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Let the model of [[post-cm17-momentum-balance]] be\ngiven with the mass-balance postulate of [[post-cm17-mass-balance]]: a motion\n$\\chi$ with spatial velocity $u$ and material acceleration $a=D_tu$\n([[def-cm-continuum-motion]], [[def-cm-euclidean-spatial-calculus]]), a $C^1$\npositive density field $\\rho$ ([[def-cm17-density-and-mass]]), continuous\nbody forces and $C^1$ tractions ([[post-cm17-contact-force-model]]), and the\nbalance principles (F) and (T). Let $J_0\\subseteq I$ have compact closure in\nthe time window. Suppose in addition that for every material subregion\n$B'$ and every $t\\in J_0$ the current image $\\chi_t(B')$ is a bounded $C^1$\ndomain ([[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]) with\nclosure in the open domain of the fields, with boundary surface integral as\nin [[def-surface-integral-on-a-compact-c-one-hypersurface]].\n\nLet $\\sigma$ be the stress matrix of\n[[pthm-cm17-stress-matrix-and-symmetry]] on the current regions (whose\nexistence and symmetry follow from the same balance principles), and define\nthe row divergence\n\n$$g_i:=\\sum_{j=1}^{3}\\partial_j\\sigma_{ij}\\qquad(i=1,2,3).$$\n\nThen for every $(t,x)\\in J_0\\times\\chi_t(B)$,\n\n$$\\rho(t,x)\\,D_tu(t,x)=\\rho(t,x)\\,b(t,x)+g(t,x), \\tag{M}$$\n\nand for a symmetric $\\sigma$ the row divergence $g$ coincides with the column\ndivergence, so (M) may be written $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$.\nThe statement is a conditional deduction from the adopted balances; it\nasserts no solution existence, no boundary cond",
+        "strategy": "direct"
+      },
+      {
+        "id": "post-cm17-linear-elastic-constitutive",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted isotropic linear elastic constitutive model with its small-strain regime and strain energy",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 11,
+        "deps": [
+          "def-cm-linear-elastic-constitutive-law",
+          "lem-cm-isotropic-elastic-strain-energy-positivity",
+          "def-cm17-continuum-body-and-units",
+          "def-cm17-traction-and-stress",
+          "post-cm17-continuum-kinematic-model",
+          "def-cm01-units",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm-euclidean-spatial-calculus"
+        ],
+        "dependency_roles": {
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "lem-cm-isotropic-elastic-strain-energy-positivity": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the small-strain isotropic linear elastic constitutive branch: displacement field, linear strain, stress matrix lambda (tr e) I + 2 mu_s e with positive-definite moduli, and the elastic strain-energy density with its positivity. The postulate states the small-strain kinematic idealization, the constancy of the reference density and the validity limits (small strains relative to a stress-free reference state, isothermal, no plasticity, viscosity, damage or coupling); it asserts no measured modulus, no boundary condition and no dynamical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 and Problem 11.5 (linearized elasticity, isotropic stress-strain relations and the positive definite strain energy)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.3 (Hooke's law and the two elastic moduli of an isotropic medium)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the following constitutive model for the small-displacement elastic\nbranch of the continuum framework\n([[post-cm17-continuum-kinematic-model]],\n[[def-cm17-continuum-body-and-units]]).\n\n**(i) Small-displacement description.** There is a reference placement in\nwhich the body is stress free and homogeneous, and the motion of the model is\ndescribed by a **displacement field** $\\xi:I\\times O\\to\\mathbb R^3$ of class\n$C^2$ through $x(t,X)=X+\\xi(t,X)$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]).\nThe model retains only the first-order term in the displacement gradient in\nits strain measure: the **linear strain** is\n$e=\\tfrac12(D\\xi+D\\xi^{\\mathsf T})$, equivalently\n$e_{ij}=\\tfrac12(\\partial_j\\xi_i+\\partial_i\\xi_j)$\n([[def-cm-linear-elastic-constitutive-law]]). The displacement gradients are\nassumed small in the sense of the model: the linear constitutive relation\nbelow is used as the first-order approximation of the material response about\nthe stress-free reference state, and no quantitative strain threshold is\nasserted by this postulate.\n\n**(ii) Constitutive law.** The stress matrix of the branch is\n\n$$\\sigma=\\lambda\\,(\\operatorname{tr}e)\\,I_3+2\\mu_s\\,e ,$$\n\nwith **Lamé parameters** $\\lambda,\\mu_s\\in\\mathbb R$ satisfying the positivity\nhypotheses $\\mu_s>0$ and $\\lambda+\\tfrac{2\\mu_s}{3}>0$\n([[def-cm-linear-elastic-constitutive-law]]). Both parameters are constant in\nspace and time in this branch. Their dimension is that of stress,\n$[\\lambda]=[\\mu_s]=\\mu\\ell^{-1}\\tau^{-2}$ ([[def-cm01-units]]); in SI they are\nmeasured in $\\mathrm{N\\,m^{-2}}$.\n\n**(iii) Strain energy.** The *",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "pthm-cm17-linear-elastic-equation-of-motion",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The displacement equation of the linear elastic branch: rho_0 partial_t^2 xi = rho_0 b + mu_s Laplacian xi + (lambda + mu_s) grad div xi",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 15,
+        "deps": [
+          "post-cm17-linear-elastic-constitutive",
+          "post-cm17-momentum-balance",
+          "pthm-cm17-momentum-equation",
+          "pthm-cm17-stress-matrix-and-symmetry",
+          "def-cm-linear-elastic-constitutive-law",
+          "lem-cm-isotropic-elastic-strain-energy-positivity",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-clairaut-schwarz-mixed-partials",
+          "thm-algebra-of-derivatives",
+          "def-trace-of-a-square-matrix",
+          "def-matrix-product-and-identity-matrix",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-countable-choice",
+          "def-cm17-density-and-mass",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "post-cm17-linear-elastic-constitutive": "physical-assumption",
+          "post-cm17-momentum-balance": "formulation-prerequisite",
+          "pthm-cm17-momentum-equation": "physical-result",
+          "pthm-cm17-stress-matrix-and-symmetry": "physical-result",
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "lem-cm-isotropic-elastic-strain-energy-positivity": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-trace-of-a-square-matrix": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted mass and momentum balances and on the adopted small-strain isotropic linear elastic constitutive branch: in the material description of a small displacement field xi, the model's momentum equation is exactly rho_0 partial_t^2 xi = rho_0 b + mu_s Laplacian xi + (lambda + mu_s) grad div xi, with the second spatial derivatives of xi continuous and the material and spatial variables identified to first order as part of the branch's small-displacement idealization. The theorem is a conditional identity of the model; it asserts no solution existence, no error bound for the small-displacement replacement and no measured modulus.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 (the Navier equations of linearized elasticity)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 7.3 and 7.7 (Hooke's law and the 3D elastic wave equation)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]) and the model of [[pthm-cm17-momentum-equation]]:\nmass balance and the balance principles (F) and (T) of\n[[post-cm17-momentum-balance]], with the stress matrix of\n[[pthm-cm17-stress-matrix-and-symmetry]], so that the momentum equation\n\n$$\\rho\\,D_tu=\\rho\\,b+\\operatorname{div}\\sigma \\tag{M}$$\n\nholds on the current regions. Suppose the model lies in the small-displacement\nisotropic linear elastic branch of\n[[post-cm17-linear-elastic-constitutive]]: the stress is\n$\\sigma=\\lambda(\\operatorname{tr}e)I_3+2\\mu_s e$ with\n$e=\\tfrac12(D\\xi+D\\xi^{\\mathsf T})$, the density is the constant reference\ndensity $\\rho_0>0$, the spatial velocity is $u=\\partial_t\\xi$ and the material\nacceleration is $D_tu=\\partial_t^2\\xi$, where $\\xi:I\\times O\\to\\mathbb R^3$ is\nof class $C^2$ with continuous second spatial derivatives and the material and\nspatial variables are identified to first order as stated in that postulate.\nLet $b$ be the body-force field of that model.\n\nThen, with all derivatives taken in the spatial variables identified with the\nmaterial labels, the momentum equation (M) of the branch is equivalent to the\n**displacement equation**\n\n$$\\rho_0\\,\\partial_t^2\\xi=\\rho_0\\,b+\\mu_s\\,\\Delta\\xi+(\\lambda+\\mu_s)\\,\\nabla(\\operatorname{div}\\xi), \\tag{E}$$\n\nequivalently componentwise\n$\\rho_0\\partial_t^2\\xi_i=\\rho_0b_i+\\mu_s\\Delta\\xi_i+(\\lambda+\\mu_s)\\partial_i(\\operatorname{div}\\xi)$\nfor $i=1,2,3$, where $\\Delta=\\sum_j\\partial_j^2$ and\n$\\operatorname{div}\\xi=\\sum_j\\partial_j\\xi_j$\n([[def-cm-euclidean-spatial-calculus]",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-cm17-elastic-plane-wave-speeds",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Plane elastic waves in the adopted model: the dispersion condition and the longitudinal and transverse speeds",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 16,
+        "deps": [
+          "pthm-cm17-linear-elastic-equation-of-motion",
+          "post-cm17-linear-elastic-constitutive",
+          "thm-cm-plane-elastic-waves",
+          "def-cm-linear-elastic-constitutive-law",
+          "def-euclidean-inner-product",
+          "def-cm17-continuum-body-and-units",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-linear-elastic-equation-of-motion": "physical-result",
+          "post-cm17-linear-elastic-constitutive": "physical-assumption",
+          "thm-cm-plane-elastic-waves": "mathematical-premise",
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the small-strain isotropic linear elastic branch: a plane displacement wave a cos(<k,x> - omega t) satisfies the model's displacement equation with zero body force on all of space-time if and only if the dispersion relation rho_0 omega^2 a = mu_s |k|^2 a + (lambda + mu_s) <k,a> k holds; parallel amplitudes give the longitudinal speed root((lambda+2mu_s)/rho_0) and orthogonal amplitudes give the transverse speed root(mu_s/rho_0), both real and positive under the branch's positivity hypotheses. The theorem asserts no completeness of plane waves, no measured modulus and no empirical value.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.7 (plane longitudinal and transverse elastic waves and their speeds)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 (the isotropic linearized elastic field equations)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the small-displacement isotropic linear elastic branch of\n[[post-cm17-linear-elastic-constitutive]] with reference density $\\rho_0>0$\nand Lamé parameters $\\lambda,\\mu_s$ satisfying $\\mu_s>0$ and\n$\\lambda+\\tfrac{2\\mu_s}{3}>0$, and let (E) be the displacement equation of\n[[pthm-cm17-linear-elastic-equation-of-motion]] with body force\n$b\\equiv0$. Let $k,a\\in\\mathbb R^3$ and $\\omega\\in\\mathbb R\\setminus\\{0\\}$,\nand define the **plane displacement wave**\n\n$$\\xi(t,x):=a\\cos\\bigl(\\langle k,x\\rangle_2-\\omega t\\bigr),$$\n\nwith the Euclidean inner product $\\langle\\cdot,\\cdot\\rangle_2$\n([[def-euclidean-inner-product]]). Then $\\xi$ satisfies (E) on all of\n$\\mathbb R\\times\\mathbb R^3$ if and only if\n\n$$\\rho_0\\omega^2a=\\mu_s|k|_2^2\\,a+(\\lambda+\\mu_s)\\,\\langle k,a\\rangle_2\\,k. \\tag{D}$$\n\nConsequently, for $a\\ne0$: if $a$ is parallel to $k$ (**longitudinal**), then\n$\\rho_0\\omega^2=(\\lambda+2\\mu_s)|k|_2^2$, and the squared speed\n$c_L^2:=(\\lambda+2\\mu_s)/\\rho_0$ is real and positive; if $a$ is orthogonal to\n$k$ (**transverse**), then $\\rho_0\\omega^2=\\mu_s|k|_2^2$, and\n$c_T^2:=\\mu_s/\\rho_0$ is real and positive. Both $c_L$ and $c_T$ have the\ndimension of velocity, $[c_L]=[c_T]=\\ell\\tau^{-1}$\n([[def-cm17-continuum-body-and-units]], [[def-cm01-units]]). No assertion is\nmade that every solution of (E) is a superposition of plane waves, and no\nmeasured modulus or speed is claimed.",
+        "strategy": "direct"
+      },
+      {
+        "id": "post-cm17-fluid-constitutive",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted fluid constitutive branches: incompressible Newtonian, barotropic inviscid, and the periodic-cell idealization",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 13,
+        "deps": [
+          "def-cm-fluid-constitutive-models",
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "def-cm17-continuum-body-and-units",
+          "def-cm17-traction-and-stress",
+          "post-cm17-continuum-kinematic-model",
+          "post-cm17-mass-balance",
+          "def-cm01-units",
+          "def-cm-euclidean-spatial-calculus",
+          "pthm-cm17-continuity-equation"
+        ],
+        "dependency_roles": {
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "post-cm17-continuum-kinematic-model": "formulation-prerequisite",
+          "post-cm17-mass-balance": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "pthm-cm17-continuity-equation": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the fluid constitutive branches of the continuum framework: an incompressible Newtonian model with constant density, divergence-free velocity, pressure and positive dynamic viscosity; a barotropic inviscid model with a pressure law, conservative body force and enthalpy; and the periodic-cell idealization on the three-torus used by the local well-posedness theorem. The postulate excludes compressible viscosity with thermal coupling, non-Newtonian and turbulent-closure models, surface tension and multiphase flow, and asserts no measured viscosity, pressure law or boundary condition.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 12.1-12.3 (inviscid and incompressible viscous fluid models, with the Newtonian example)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 8.4-8.5 (ideal and viscous incompressible fluid models)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the following constitutive branches for models of the continuum\nframework ([[post-cm17-continuum-kinematic-model]],\n[[def-cm17-continuum-body-and-units]]), with the stress conventions of\n[[def-cm17-traction-and-stress]].\n\n**(a) Incompressible Newtonian fluid.** Model data are a constant density\n$\\rho>0$, a **dynamic viscosity** $\\eta>0$ (constant, dimension\n$\\mu\\ell^{-1}\\tau^{-1}$, in SI measured in $\\mathrm{Pa\\,s}$,\n[[def-cm01-units]]) and a pressure field $p$ of class $C^1$. The branch\nconsists of the **incompressibility constraint**\n\n$$\\operatorname{div}u=0$$\n\non the current regions ([[def-cm-euclidean-spatial-calculus]]) together with\nthe **Newtonian stress field**\n\n$$\\sigma=-p\\,I_3+\\eta\\bigl(Du+Du^{\\mathsf T}\\bigr),$$\n\nthe second term being symmetric. By the continuity equation of the model\n([[pthm-cm17-continuity-equation]]) the constraint $\\operatorname{div}u=0$ is\nequivalent, in this branch, to the density being constant along every label\nworldline, so the constant-density reading is consistent with the adopted mass\nbalance.\n\n**(b) Barotropic inviscid fluid.** Model data are a $C^1$ **pressure law**\n$p:(0,\\infty)\\to\\mathbb R$ and a $C^1$ potential $V$ with the conservative\nbody force $b=-\\nabla V$. The branch's stress field is\n$\\sigma=-p(\\rho)I_3$, where $\\rho$ is the model density field of\n[[def-cm17-density-and-mass]]. Its **enthalpy** is the function\n$h(\\rho_0)=\\int_1^{\\rho_0}p'(s)s^{-1}\\,ds$, characterised by\n$h'(\\rho)=p'(\\rho)/\\rho$\n([[def-cm-fluid-constitutive-models]]).\n\n**(c) Periodic-cell idealization.** For the local well-posedness theorem of\nthis pa",
+        "strategy": "not-applicable"
+      },
+      {
+        "id": "pthm-cm17-incompressible-periodic-local-evolution",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local existence, uniqueness and pressure reconstruction for the incompressible fluid model on the periodic cell",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 15,
+        "deps": [
+          "post-cm17-fluid-constitutive",
+          "pthm-cm17-momentum-equation",
+          "pthm-cm17-continuity-equation",
+          "def-cm-fluid-constitutive-models",
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "thm-local-smooth-periodic-euler-viscous-solution",
+          "thm-fluid-uniqueness-and-continuous-dependence",
+          "lem-fourier-lattice-sobolev-embedding",
+          "def-countable-choice",
+          "def-cm-euclidean-spatial-calculus",
+          "def-cm17-density-and-mass",
+          "def-cm17-traction-and-stress",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "post-cm17-fluid-constitutive": "physical-assumption",
+          "pthm-cm17-momentum-equation": "physical-result",
+          "pthm-cm17-continuity-equation": "physical-result",
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "thm-local-smooth-periodic-euler-viscous-solution": "mathematical-premise",
+          "thm-fluid-uniqueness-and-continuous-dependence": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm17-traction-and-stress": "formulation-prerequisite",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted incompressible Newtonian (or inviscid Euler) fluid branch and its periodic-cell idealization, and on the Axiom of Countable Choice used by the Fourier machinery: for smooth divergence-free periodic initial velocity data of finite H^s norm (integer s at least 4) there is a local time T depending only on that norm, and a smooth periodic velocity and a unique smooth mean-zero pressure satisfying the model's field equations exactly; the velocity is unique on the interval among smooth divergence-free solutions, depends continuously on initial data in H^{s-1}, and no all-time bound or global regularity conclusion is claimed. The theorem concerns the Eulerian field equations and does not construct the material label map; no measured viscosity or pressure is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 12.2-12.3 (the incompressible viscous fluid equations and the inviscid limit)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 8.4-8.5 (ideal and viscous incompressible fluid dynamics, with the Navier-Stokes equation and its exact channel solutions)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]). Adopt the incompressible Newtonian fluid branch\nand the periodic-cell idealization of [[post-cm17-fluid-constitutive]]\n(clauses (a) and (c)) with constant density $\\rho>0$, dynamic viscosity\n$\\eta>0$ and the stress field $\\sigma=-pI_3+\\eta(Du+Du^{\\mathsf T})$\n([[def-cm-fluid-constitutive-models]]), and let $\\nu:=\\eta/\\rho$. Let $s\\ge4$\nbe an integer and let $u_0$ be a smooth $\\mathbb T^3$-periodic divergence-free\nvelocity field with $Y_0:=\\|u_0\\|_{H^s}<+\\infty$ in the conventions of\n[[def-periodic-vector-sobolev-space-and-leray-projection]], and let\n$T>0$ be the time of [[thm-local-smooth-periodic-euler-viscous-solution]],\n$T=(2C_sY_0)^{-1}$ if $Y_0>0$ and $T=1$ if $Y_0=0$. Then:\n\n**(i) Reduction.** With the body force absent ($b\\equiv0$), the field\nequations of the branch — the continuity equation (C) of\n[[pthm-cm17-continuity-equation]] with $\\rho$ constant,\n$\\operatorname{div}u=0$, and the momentum equation (M) of\n[[pthm-cm17-momentum-equation]] with this stress field — are equivalent, for\nsmooth periodic fields with mean-zero pressure, to the projected equation\n\n$$\\partial_tu+P\\bigl((u\\cdot\\nabla)u\\bigr)=\\nu\\,\\Delta u , \\tag{PE}$$\n\ntogether with $\\operatorname{div}u=0$ and the determination of the pressure\nfrom $u$; explicitly, a smooth periodic field $u$ with $\\operatorname{div}u=0$\nsolves the model's equations with some smooth mean-zero pressure if and only\nif it solves (PE).\n\n**(ii) Existence and pressure.** Let $u$ be the smooth field of\n[[thm-local-smooth-periodic-euler-viscous-so",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-cm17-chain-limit-of-the-string-model",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The continuum string model as the proved limit of the mass-spring chain, with explicit convergence and dispersion error",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 9,
+        "deps": [
+          "def-cm-cyclic-spring-chain",
+          "thm-cm-spring-chain-continuum-limit",
+          "thm-cm-spring-chain-dispersion-relation",
+          "lem-cm-second-difference-remainder-bound",
+          "def-cm17-continuum-body-and-units",
+          "def-cm01-units",
+          "def-cm-euclidean-spatial-calculus"
+        ],
+        "dependency_roles": {
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "thm-cm-spring-chain-continuum-limit": "mathematical-premise",
+          "thm-cm-spring-chain-dispersion-relation": "mathematical-premise",
+          "lem-cm-second-difference-remainder-bound": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted mass-spring chain with the stated mass and stiffness scaling: for every smooth periodic solution of the one-dimensional wave equation with speed c = square root of tension over linear density, the chain with node mass density-times-spacing and spring constant tension-over-spacing reproduces the sampled continuum motion with explicit uniform O(a^{3/2}) nodal error and O(a^2) interpolation error, and the chain's exact dispersion relation reduces to the continuum one with a fourth-order error in the spacing. The theorem justifies the string model as an approximation of the discrete mechanical model in this regime; it asserts no claim that the string model is exact for any material, and no measured constant.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 6.1 (the chain of masses and springs, its Lagrangian and the continuum limit)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 6.2-6.5 (coupled oscillators, the discrete chain and its continuum/standing-wave limits)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Let $L>0$, let $\\rho_\\ell>0$ be a linear mass density and let $\\tau_s>0$ be a\ntension scale, both in the units of [[def-cm01-units]], and put\n$c:=\\sqrt{\\tau_s/\\rho_\\ell}$, of dimension $[c]=\\ell\\tau^{-1}$\n([[def-cm17-continuum-body-and-units]]). For an integer $N\\ge2$ put\n$a:=L/N$ and consider the cyclic spring chain of\n[[def-cm-cyclic-spring-chain]] with parameter $c$ and spacing $a$,\nequivalently the chain of $N$ nodes of mass $m=\\rho_\\ell a$ and spring\nconstant $k_s=\\tau_s/a$; the two descriptions agree because\n$c^2/a^2=k_s/m$. Let $[0,T_{\\max}]$ be a compact time interval and let\n$u:[0,T_{\\max}]\\times\\mathbb R\\to\\mathbb R$ be $C^2$ in $t$ and $C^4$ in $x$,\n$L$-periodic in $x$, and satisfy\n\n$$u_{tt}=c^2u_{xx}\\qquad\\text{on }[0,T_{\\max}]\\times\\mathbb R ,$$\n\nwith $M:=\\sup|\\partial_x^4u|<+\\infty$ and $M_2:=\\sup|\\partial_x^2u|<+\\infty$.\nLet $q$ be the chain solution with the sampled initial data\n$q_j(0)=u(0,ja)$, $q_j'(0)=u_t(0,ja)$, put $e_j(t):=q_j(t)-u(t,ja)$ and\n$C:=c^2\\sqrt L\\,M/12$. Then:\n\n**(i)** $q$ exists and is unique on $[0,T_{\\max}]$, and for every\n$t\\in[0,T_{\\max}]$\n\n$$\\|e(t)\\|_a\\le\\frac{Ca^2t^2}{2},\\qquad\\|e'(t)\\|_a\\le Ca^2t,\\qquad \\max_j|e_j(t)|\\le\\frac{Ca^{3/2}t^2}{2},$$\n\nin the discrete norm of [[def-cm-cyclic-spring-chain]]; consequently the\nnodal displacements converge to the sampled continuum motion uniformly on\n$[0,T_{\\max}]$ as $a\\to0$ with $L,T_{\\max}$ fixed.\n\n**(ii)** With $I_aq$ the piecewise-linear interpolation of the chain data on\nthe circle of circumference $L$,\n\n$$\\sup_{x\\in[0,L]}|I_aq(t,x)-u(t,x)|\\le\\max_j|e_j(t)|+\\frac{M_2a^2}{8}\\qquad(0\\le t\\",
+        "strategy": "direct"
+      },
+      {
+        "id": "pthm-cm17-string-wave-solutions",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The string model: d'Alembert solutions, fixed-end modes and uniqueness for the adopted one-dimensional continuum",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 10,
+        "deps": [
+          "pthm-cm17-chain-limit-of-the-string-model",
+          "thm-cm-dalembert-formula-and-string-solutions",
+          "thm-cm-smooth-string-fourier-series-solution",
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm17-continuum-body-and-units",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-chain-limit-of-the-string-model": "physical-result",
+          "thm-cm-dalembert-formula-and-string-solutions": "mathematical-premise",
+          "thm-cm-smooth-string-fourier-series-solution": "mathematical-premise",
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional on the adopted one-dimensional string model with tension and linear density (wave speed c = square root of tension over linear density, justified by the chain limit) and on the small transverse displacement idealization: the d'Alembert formula gives the unique C^2 solution of the Cauchy problem on the line for C^2 initial displacement and C^1 initial velocity, and for smooth odd periodic data the fixed-end sine-series solution exists, is unique among C^2 solutions and carries an explicit tail bound. The theorem asserts no measured tension or density, no nonlinear or bending corrections and no validity of the string model for any particular material.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of a fixed-end string and the wave equation)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 6.1 (continuum limit of the chain and the wave equation)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the one-dimensional string model: a uniform string of length $L>0$\n(fixed ends) or of infinite extent, with linear mass density $\\rho_\\ell>0$\nand tension $\\tau_s>0$, whose small transverse displacement\n$u:I\\times J\\to\\mathbb R$ (with $J=\\mathbb R$ or $J=[0,L]$) satisfies\n\n$$u_{tt}=c^2u_{xx},\\qquad c:=\\sqrt{\\tau_s/\\rho_\\ell},$$\n\nwhere the identification of $c$ with the chain limit is that of\n[[pthm-cm17-chain-limit-of-the-string-model]] and the dimensions are those of\n[[def-cm17-continuum-body-and-units]], [[def-cm01-units]]. Then:\n\n**(i) Cauchy problem on the line.** For $f\\in C^2(\\mathbb R)$ and\n$g\\in C^1(\\mathbb R)$ the function\n\n$$u(t,x):=\\frac{f(x-ct)+f(x+ct)}{2}+\\frac{1}{2c}\\int_{x-ct}^{x+ct}g(s)\\,ds$$\n\nis of class $C^2$ on $\\mathbb R^2$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]), satisfies $u_{tt}=c^2u_{xx}$\nwith $u(0,\\cdot)=f$ and $u_t(0,\\cdot)=g$, and is the unique $C^2$ field on\n$\\mathbb R^2$ with those data.\n\n**(ii) Fixed ends.** Let $F$ be odd and $2L$-periodic of class $C^5$ and let\n$G$ be odd and $2L$-periodic of class $C^4$\n([[def-cm-sine-coefficients-of-periodic-functions]]) with finite\n$M_5=\\sup|F^{(5)}|$, $M_4=\\sup|G^{(4)}|$. Then the sine series $u$ of the\nsmooth string theorem exists with absolutely and uniformly convergent\ntermwise derivatives up to second order, satisfies $u_{tt}=c^2u_{xx}$,\n$u(t,0)=u(t,L)=0$, $u(0,\\cdot)=F|_{[0,L]}$, $u_t(0,\\cdot)=G|_{[0,L]}$, is the\nunique $C^2$ solution on $[0,T]\\times[0,L]$ of that boundary-value problem,\nand for every $N\\ge1$ satisfies the tail bound\n$|u-S_Nu|\\le C(N+1)^{-4}$ with $C=2\\bigl(2L^5M_5/\\pi^5",
+        "strategy": "direct"
+      },
+      {
+        "id": "rem-cm17-boundary-regularity-and-scope",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Boundary data, regularity limits and open scopes of the continuum page, and the model-versus-nature reading",
+        "reference": "batch-33 A page; design research/plan-non-relativistic-classical-mechanics-track.md L919",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 16,
+        "deps": [
+          "pthm-cm17-incompressible-periodic-local-evolution",
+          "pthm-cm17-linear-elastic-equation-of-motion",
+          "pthm-cm17-string-wave-solutions",
+          "pthm-cm17-momentum-equation",
+          "post-cm17-fluid-constitutive",
+          "post-cm17-linear-elastic-constitutive",
+          "post-cm17-momentum-balance",
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution",
+          "rem-local-versus-known-open-global-fluid-scope"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-incompressible-periodic-local-evolution": "physical-result",
+          "pthm-cm17-linear-elastic-equation-of-motion": "physical-result",
+          "pthm-cm17-string-wave-solutions": "physical-result",
+          "pthm-cm17-momentum-equation": "physical-result",
+          "post-cm17-fluid-constitutive": "formulation-prerequisite",
+          "post-cm17-linear-elastic-constitutive": "formulation-prerequisite",
+          "post-cm17-momentum-balance": "formulation-prerequisite",
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution": "mathematical-premise",
+          "rem-local-versus-known-open-global-fluid-scope": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Scope audit of the continuum page: the ideal boundary data used by its theorems (periodic cell, fixed ends, whole line, and the no-slip condition of the channel example), the smoothness and positive-Jacobian hypotheses that exclude shocks, interfaces and corners, the validity regimes of the three constitutive branches, the open specialist scopes deliberately not claimed (general compressible entropy systems, rough walls and boundary layers, nonlinear constitutive PDEs, turbulence closure, all-time three-dimensional regularity), and the model-versus-nature status of every result on the page. The remark asserts no new physical claim, no measurement and no theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 12.1-12.3 (fluid boundary conditions and the limits of the inviscid and viscous models)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 7.1, 7.3 and 8.5 (idealizations of the continuum description, elastic moduli and viscous channel flows with their conditions)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "",
+        "strategy": "not-applicable"
+      }
+    ]
+  },
+  {
+    "order": 146,
+    "id": "cm17-classical-continua-with-explicit-constitutive-assumptions-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Classical continua with explicit constitutive assumptions — Examples",
+    "companion": "cm17-classical-continua-with-explicit-constitutive-assumptions",
+    "requires": [
+      "cm17-classical-continua-with-explicit-constitutive-assumptions"
+    ],
+    "items": [
+      {
+        "id": "ex-cm17-uniform-expansion-transport-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Worked check of the transport identity and the continuity equation on a uniform expansion",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 13,
+        "deps": [
+          "pthm-cm17-transport-and-material-derivative",
+          "pthm-cm17-continuity-equation",
+          "post-cm17-continuum-kinematic-model",
+          "post-cm17-mass-balance",
+          "def-cm17-density-and-mass",
+          "def-cm-continuum-motion",
+          "def-cm-euclidean-spatial-calculus",
+          "def-integral-over-a-measurable-set",
+          "def-cm17-continuum-body-and-units",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-transport-and-material-derivative": "physical-result",
+          "pthm-cm17-continuity-equation": "physical-result",
+          "post-cm17-continuum-kinematic-model": "physical-assumption",
+          "post-cm17-mass-balance": "physical-assumption",
+          "def-cm17-density-and-mass": "formulation-prerequisite",
+          "def-cm-continuum-motion": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked verification of the model's transport identity and continuity equation on the explicit uniform expansion of a unit cube at constant density: the model velocity, divergence, density field and mass are computed exactly, the integral mass balance holds identically, the continuity equation holds identically, and both sides of the transport identity are evaluated for a nonconstant field. The example is an exact conditional check within the adopted model; it reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Section 1.1 (the continuity equation) and Section 1.2.3 (the transport theorem)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 3.7 and 4.2 (transport equations and conservation of mass with worked examples of the local form)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "statement": "Let $B=(0,1)^3\\subseteq\\mathbb R^3$, $I=(-1,\\infty)$ and define the uniform\nexpansion\n\n$$\\chi(t,X):=\\bigl((1+t)X_1,(1+t)X_2,(1+t)X_3\\bigr)\\qquad\\bigl((t,X)\\in I\\times\\mathbb R^3\\bigr).$$\n\nThen $\\chi$ is a motion of $B$ on $I$ in the sense of\n[[def-cm-continuum-motion]] (with $O=\\mathbb R^3$): it is $C^\\infty$, each\n$\\chi_t$ is a diffeomorphism with $D_X\\chi_t=(1+t)I_3$ and\n$J(t,X)=(1+t)^3>0$ on $I\\times B$. Adopt the model of\n[[post-cm17-continuum-kinematic-model]] with these data and the\nconstant-reference-density field\n\n$$\\rho(t,x):=\\frac{\\rho_0}{(1+t)^3}\\qquad(\\rho_0>0)$$\n\non the swept region. Then:\n\n1. the spatial velocity is $u(t,x)=x/(1+t)$ and\n   $\\operatorname{div}u(t,x)=3/(1+t)$\n   ([[def-cm-euclidean-spatial-calculus]]);\n2. the model mass of $B$ at time $t$ is\n   $\\int_{\\chi_t(B)}\\rho\\,dx=\\rho_0$ for every $t\\in I$: the mass-balance\n   assumption of [[post-cm17-mass-balance]] holds, and the continuity\n   equation $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$ of\n   [[pthm-cm17-continuity-equation]] holds identically on $I\\times\\mathbb R^3$;\n3. for the field $f(t,x):=x_1^2$ the transport identity of\n   [[pthm-cm17-transport-and-material-derivative]] is verified exactly:\n   with $F(t)=\\int_{\\chi_t(B)}f(t,x)\\,dx$ one has $F(t)=(1+t)^5/3$ and\n   $F'(t)=5(1+t)^4/3=\\int_{\\chi_t(B)}(\\partial_tf+\\operatorname{div}(fu))\\,dx$\n   for every $t\\in I$;\n4. along each label the density satisfies\n   $\\rho(t,\\chi(t,X))(1+t)^3=\\rho_0$, the constant-product form of density\n   times volume of part (ii) of the continuity theorem, and the material\n   derivative is\n   $D_t\\rho(t,\\chi(t,X)",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-elastic-plane-wave-and-energy-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A longitudinal plane wave in the linear elastic branch: stress, equation of motion and strain energy computed",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 17,
+        "deps": [
+          "pthm-cm17-elastic-plane-wave-speeds",
+          "pthm-cm17-linear-elastic-equation-of-motion",
+          "post-cm17-linear-elastic-constitutive",
+          "def-cm-linear-elastic-constitutive-law",
+          "lem-cm-isotropic-elastic-strain-energy-positivity",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-elastic-plane-wave-speeds": "physical-result",
+          "pthm-cm17-linear-elastic-equation-of-motion": "physical-result",
+          "post-cm17-linear-elastic-constitutive": "physical-assumption",
+          "def-cm-linear-elastic-constitutive-law": "mathematical-premise",
+          "lem-cm-isotropic-elastic-strain-energy-positivity": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked longitudinal plane wave of the adopted linear elastic branch: explicit strain, stress, verification of the displacement equation at the longitudinal speed root((lambda+2mu_s)/rho_0) and the positive strain-energy density of the wave. The computation is exact within the branch and asserts no measurement and no completeness of plane waves.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 7.7 (the longitudinal plane elastic wave and its speed, and the elastic energy density)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 and Problem 11.5 (isotropic linear elasticity and the positive definite strain energy)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the isotropic linear elastic branch of\n[[post-cm17-linear-elastic-constitutive]] with reference density\n$\\rho_0>0$ and moduli $\\lambda,\\mu_s$ with $\\mu_s>0$ and\n$\\lambda+\\tfrac{2\\mu_s}{3}>0$, and let\n\n$$c_L:=\\sqrt{\\frac{\\lambda+2\\mu_s}{\\rho_0}},\\qquad \\xi(t,x):=A\\cos\\bigl(\\kappa x_1-\\omega t\\bigr)\\,e_1,\\qquad \\omega:=\\kappa c_L,$$\n\nwith $A\\ne0$, $\\kappa\\ne0$ and $e_1$ the first standard basis vector: a\nlongitudinal plane wave travelling along $e_1$. Then:\n\n1. the linear strain is $e_{11}(t,x)=-A\\kappa\\sin(\\kappa x_1-\\omega t)$ with\n   all other entries zero, so $\\operatorname{tr}e=e_{11}$ and\n   $e_0=e-\\tfrac13(\\operatorname{tr}e)I_3$ has Frobenius squared norm\n   $\\tfrac23e_{11}^2$;\n2. the stress matrix is\n   $$\\sigma(t,x)=(\\lambda+2\\mu_s)e_{11}(t,x)\\,e_1e_1^{\\mathsf T}+\\lambda e_{11}(t,x)\\,(e_2e_2^{\\mathsf T}+e_3e_3^{\\mathsf T});$$\n3. the displacement equation (E) of\n   [[pthm-cm17-linear-elastic-equation-of-motion]] with $b\\equiv0$ holds\n   exactly: $\\rho_0\\partial_t^2\\xi_1=(\\lambda+2\\mu_s)\\partial_1^2\\xi_1$;\n4. the strain-energy density is\n   $W(e)=(\\tfrac\\lambda2+\\mu_s)e_{11}^2=\\mu_s\\tfrac23e_{11}^2\n   +(\\tfrac\\lambda2+\\tfrac{\\mu_s}3)e_{11}^2\\ge0$, with equality only where\n   $e_{11}=0$; both coefficients in the decomposition are positive under the\n   branch's hypotheses, and the squared speed\n   $c_L^2=(\\lambda+2\\mu_s)/\\rho_0$ is positive with $[c_L]=\\ell\\tau^{-1}$.",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-string-modes-and-tail-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Two-mode fixed-end string: exact solution, d'Alembert cross-check and the O(N^{-4}) tail bound at N=1",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 11,
+        "deps": [
+          "pthm-cm17-string-wave-solutions",
+          "thm-cm-smooth-string-fourier-series-solution",
+          "thm-cm-dalembert-formula-and-string-solutions",
+          "def-cm-sine-coefficients-of-periodic-functions",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-string-wave-solutions": "physical-result",
+          "thm-cm-smooth-string-fourier-series-solution": "mathematical-premise",
+          "thm-cm-dalembert-formula-and-string-solutions": "mathematical-premise",
+          "def-cm-sine-coefficients-of-periodic-functions": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked fixed-end string problem of the adopted model: an initial displacement with two sine modes and zero initial velocity, its exact two-mode solution, agreement with the d'Alembert formula, mode frequencies and a finite check of the O(N^{-4}) tail bound at N=1. The example is an exact conditional computation within the linear string model and reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 6.5 (standing waves of the fixed-end string and the mode frequencies)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapters 1-2 (Fourier coefficients, uniqueness and summability of the sine series)",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            }
+          ]
+        },
+        "statement": "Let $L>0$, $c>0$ and $\\beta\\in\\mathbb R\\setminus\\{0\\}$, and consider the\nfixed-end string model of [[pthm-cm17-string-wave-solutions]] with initial\ndisplacement and velocity\n\n$$F(x):=\\sin\\Bigl(\\frac{\\pi x}{L}\\Bigr)+\\beta\\sin\\Bigl(\\frac{3\\pi x}{L}\\Bigr),\\qquad G(x):=0 .$$\n\nThen $F$ is odd and $2L$-periodic of class $C^\\infty$ and $G$ is odd and\n$2L$-periodic of class $C^4$, with\n$M_4=\\sup|G^{(4)}|=0$ and\n$M_5=\\sup|F^{(5)}|=(\\pi/L)^5(1+243|\\beta|)$\n([[def-cm-sine-coefficients-of-periodic-functions]]). Put\n$\\omega_n:=n\\pi c/L$ and\n\n$$u(t,x):=\\cos(\\omega_1t)\\sin\\Bigl(\\frac{\\pi x}{L}\\Bigr) +\\beta\\cos(\\omega_3t)\\sin\\Bigl(\\frac{3\\pi x}{L}\\Bigr).$$\n\nThen:\n\n1. the sine coefficients of $F$ are $b_1(F)=1$, $b_3(F)=\\beta$ and $b_n(F)=0$\n   otherwise, and the coefficients of $G$ all vanish; hence the series\n   solution of [[thm-cm-smooth-string-fourier-series-solution]] is exactly\n   the displayed finite sum $u$;\n2. $u$ is $C^\\infty$ on $\\mathbb R^2$, satisfies $u_{tt}=c^2u_{xx}$,\n   vanishes at $x=0$ and $x=L$ for every $t$, and has\n   $u(0,\\cdot)=F$, $u_t(0,\\cdot)=0$; by the uniqueness clause of the theorem\n   it is the unique $C^2$ fixed-end solution with these data;\n3. the d'Alembert formula of [[thm-cm-dalembert-formula-and-string-solutions]]\n   with data $(F,0)$ gives the same field:\n   $\\tfrac12[F(x-ct)+F(x+ct)]=u(t,x)$ by the product-to-sum identity\n   ([[cor-trigonometric-parity-and-pythagorean-identity]]);\n4. the tail bound at $N=1$ is verified: with\n   $S_1u=\\cos(\\omega_1t)\\sin(\\pi x/L)$ one has\n   $|u-S_1u|=|\\beta||\\cos(\\omega_3t)||\\sin(3\\pi x/L)|\\le|\\beta|$, while the\n   th",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-spring-chain-limit-numbers",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Chain versus string on a standing wave: exact discrete error, the O(a^{3/2}) bound at N=100, and the dispersion error",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 10,
+        "deps": [
+          "pthm-cm17-chain-limit-of-the-string-model",
+          "thm-cm-spring-chain-continuum-limit",
+          "thm-cm-spring-chain-dispersion-relation",
+          "def-cm-cyclic-spring-chain",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-and-cosine-derivatives",
+          "def-sine-and-cosine-by-power-series",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-chain-limit-of-the-string-model": "physical-result",
+          "thm-cm-spring-chain-continuum-limit": "mathematical-premise",
+          "thm-cm-spring-chain-dispersion-relation": "mathematical-premise",
+          "def-cm-cyclic-spring-chain": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked comparison of the cyclic mass-spring chain and the continuum string on the standing wave sin(x)cos(t) with circumference two pi: exact chain solution and frequency, exact nodal error, evaluation of the theorem's O(a^{3/2}) nodal and O(a^2) interpolation bounds at N=100, and the dispersion-relation error a^2/12. The numbers are evaluations of model bounds, not measurements.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 6.1 (the chain-to-continuum limit with the standing-wave comparison)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 6.2-6.5 (the discrete chain, its dispersion and its continuum limit)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Take the periodic string model of [[pthm-cm17-chain-limit-of-the-string-model]]\nwith circumference $L=2\\pi$ and speed $c=1$ (that is, linear density\n$\\rho_\\ell>0$ and tension $\\tau_s=\\rho_\\ell$ in the units of\n[[def-cm17-continuum-body-and-units]]), and the exact travelling-standing\nsolution\n\n$$u(t,x):=A\\sin x\\cos t\\qquad(A>0),$$\n\nwhich is $2\\pi$-periodic and solves $u_{tt}=u_{xx}$. For $N\\ge2$ put\n$a=2\\pi/N$ and consider the cyclic spring chain of\n[[def-cm-cyclic-spring-chain]] with parameter $c=1$ and spacing $a$, i.e.\nnode mass $m=\\rho_\\ell a$ and spring constant $k_s=\\tau_s/a$. Then:\n\n1. $M=\\sup|\\partial_x^4u|=A$, $M_2=\\sup|\\partial_x^2u|=A$ and the theorem's\n   constant is $C=\\sqrt{2\\pi}A/12\\approx0.20889A$;\n2. the exact chain solution with the sampled data is\n   $q_j(t)=A\\sin(ja)\\cos(\\omega_at)$ with\n   $\\omega_a=2\\sin(a/2)/a$ (positive for $0<a<\\pi$), the exact nodal error is\n   $e_j(t)=A\\sin(ja)[\\cos(\\omega_at)-\\cos t]$, and the theorem's bounds read\n   $\\|e(t)\\|_a\\le Ca^2t^2/2$,\n   $\\max_j|e_j(t)|\\le \\tfrac12Ca^{3/2}t^2$ and\n   $\\sup_x|I_aq-u|\\le\\max_j|e_j|+Aa^2/8$;\n3. at $N=100$ (so $a=2\\pi/100\\approx0.062832$) and $t=1$ the evaluated bounds\n   are $\\|e(1)\\|_a\\le0.0004124A$,\n   $\\max_j|e_j(1)|\\le0.001645A$ and\n   $\\sup|I_aq-u|\\le0.002139A$, while the exact error satisfies\n   $|e_j(1)|\\le A|\\omega_a-1|\\approx0.00016447A$, so the theoretical bound is\n   verified and visibly conservative;\n4. the exact dispersion relation is\n   $\\omega_a^2=(4/a^2)\\sin^2(a/2)$, and the theorem's bound\n   $|\\omega_a^2-1|\\le a^2/12$ gives $\\le0.00032899$ at $N=100$, while the\n   exact va",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-riemann-shock-and-rarefaction-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A Riemann shock and a rarefaction of the scalar model: explicit weak solutions, entropy coefficients and initial trace",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 9,
+        "deps": [
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution",
+          "thm-cm-burgers-riemann-shock-and-rarefaction",
+          "def-integral-over-a-measurable-set",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-cm17-continuum-body-and-units",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm-scalar-conservation-law-weak-and-entropy-solution": "mathematical-premise",
+          "thm-cm-burgers-riemann-shock-and-rarefaction": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked scalar-model example of shock and rarefaction weak solutions: the Riemann data 2 and 1 with the entropy coefficients of the shock computed on the interval (1,2), and the rarefaction fan of the data 1 and 2 checked for continuity, the classical equation inside the fan and convergence of the initial trace. The scalar conservation law u_t + (u^2/2)_x = 0 is read as an idealized one-dimensional transport/compressible model; the example asserts no derivation of it from three-dimensional fluid mechanics and reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics (lecture notes, TUM, Winter term 2021/22), Chapters 2-5 (weak solutions, entropy conditions, Rankine-Hugoniot conditions and the scalar Riemann problem)",
+              "url": "https://user.math.uzh.ch/barsukow/exercises2122/conservationlaws.pdf"
+            },
+            {
+              "title": "L. C. Evans, Entropy and Partial Differential Equations (UC Berkeley lecture notes, 2001), Chapter V (conservation laws: weak solutions, entropy conditions and the Rankine-Hugoniot condition for scalar laws)",
+              "url": "https://math.berkeley.edu/~evans/entropy.and.PDE.pdf"
+            }
+          ]
+        },
+        "statement": "Let $F(u)=\\tfrac12u^2$ and use the weak and entropy formulations of\n[[def-cm-scalar-conservation-law-weak-and-entropy-solution]], with the scalar\nfield $u$ read as the idealized one-dimensional model variable (a rescaled\ndensity or transport quantity of the scalar model; see the remarks). Then:\n\n1. **(Shock.)** For the Riemann data $u_L=2$, $u_R=1$ the piecewise constant\n   field $u(t,x)=2$ for $x<\\tfrac32t$ and $u(t,x)=1$ for $x>\\tfrac32t$\n   $(t>0)$ is a weak solution of $u_t+(F(u))_x=0$: its interface residual is\n   $-s[u]+[F(u)]=-\\tfrac32\\cdot(1-2)+\\tfrac12(1^2-2^2)=\\tfrac32-\\tfrac32=0$\n   with $s=\\tfrac32$, so the weak identity (W) is satisfied for every test\n   function by the split integration over the two half-planes.\n2. **(Entropy of the shock.)** For every $k\\in(1,2)$ the interface\n   coefficient of the pair $(\\eta_k,q_k)=(\\lvert u-k\\rvert,\n   \\operatorname{sign}(u-k)(u^2-k^2)/2)$ is\n   $s[\\eta_k]-[q_k]=-(k-2)(k-1)=(2-k)(k-1)>0$, so the shock satisfies the\n   entropy inequality strictly on this range of $k$; for $k\\notin[1,2]$ the\n   coefficient vanishes and the inequality holds with equality.\n3. **(Rarefaction.)** For the Riemann data $u_L=1$, $u_R=2$ the field\n   $u(t,x)=1$ for $x\\le t$, $u(t,x)=x/t$ for $t<x<2t$ and $u(t,x)=2$ for\n   $x\\ge2t$ $(t>0)$ is continuous on $(0,\\infty)\\times\\mathbb R$, satisfies\n   $u_t+(F(u))_x=0$ classically inside the fan, and has initial trace $f$:\n   $\\int_{\\mathbb R}\\lvert u(t,x)-f(x)\\rvert\\,dx\\le\\tfrac32t\\to0$ as\n   $t\\downarrow0$.\n4. **(Weak kinks are unavoidable here.)** The shock profile is discontinuous\n   across $x=\\tfrac3",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-channel-flow-and-no-slip-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Poiseuille and Couette channel flows of the viscous branch: explicit profiles, flux and wall data",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 15,
+        "deps": [
+          "post-cm17-fluid-constitutive",
+          "pthm-cm17-momentum-equation",
+          "pthm-cm17-continuity-equation",
+          "thm-cm-plane-couette-and-poiseuille-flows",
+          "def-cm-fluid-constitutive-models",
+          "def-cm-euclidean-spatial-calculus",
+          "def-cm17-continuum-body-and-units",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm17-fluid-constitutive": "physical-assumption",
+          "pthm-cm17-momentum-equation": "physical-result",
+          "pthm-cm17-continuity-equation": "physical-result",
+          "thm-cm-plane-couette-and-poiseuille-flows": "mathematical-premise",
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked steady plane channel problem of the adopted incompressible Newtonian branch: the Poiseuille profile with pressure gradient 6, height 2 and viscosity 3 is verified against the model's momentum equation with zero body force, its flux per unit width 4/3 and centre speed 1 are computed, the Couette profile is verified with its nonzero curl, and the no-slip wall conditions are recorded as adopted ideal boundary data. The example reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Section 8.5 (Couette and Poiseuille flows with no-slip conditions)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Problems 12.9 and 12.14 (channel flows of the incompressible viscous model)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            }
+          ]
+        },
+        "statement": "Adopt the incompressible Newtonian branch of [[post-cm17-fluid-constitutive]]\nwith constant density $\\rho>0$, dynamic viscosity $\\eta=3$ and the\ntwo-dimensional channel $O=\\mathbb R\\times(0,2)\\times\\mathbb R$ with\ncoordinates $(x,y,z)$, in the steady description and with no body force, so\nthat by [[pthm-cm17-momentum-equation]] the branch's momentum equation reads\n$\\rho(u\\cdot\\nabla)u=-\\nabla p+\\eta\\Delta u$ together with\n$\\operatorname{div}u=0$ ([[def-cm-fluid-constitutive-models]]). Then:\n\n1. **(Poiseuille.)** With pressure gradient $G=6$, i.e.\n   $p(x)=p_0-6x$, the profile\n   $u=(v(y),0,0)$, $v(y)=y(2-y)$ (the value $Gh^3/(12\\eta)$ of the general\n   formula with $h=2,\\eta=3$) satisfies $\\operatorname{div}u=0$ and\n   $\\eta v''(y)=-6=-G$, hence the steady momentum equation with no body\n   force; it satisfies the no-slip data $v(0)=v(2)=0$; its flux per unit\n   width is $\\int_0^2v(y)\\,dy=4/3$ and its centre speed is $v(1)=1$.\n2. **(Couette.)** With constant pressure and $V=2$, the profile\n   $v(y)=Vy/2=y$ satisfies the same equations with zero body force and the\n   boundary data $v(0)=0$, $v(2)=2$; its velocity gradient\n   $D u=\\begin{pmatrix}0&1&0\\\\0&0&0\\\\0&0&0\\end{pmatrix}$ is not symmetric, so\n   the flow is not irrotational: $\\operatorname{curl}u=(0,0,-V/h)=(0,0,-1)$.\n3. **(Uniqueness in the ansatz.)** Within the ansatz\n   $u=(v(y),0,0)$, $p=p_0-Gx$, the difference of two profiles with the same\n   $G$ and the same no-slip data satisfies $w''=0$ with $w(0)=w(2)=0$, hence\n   $w\\equiv0$: the Poiseuille profile is the unique steady solution in this\n   class with those data.",
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm17-periodic-shear-exact-solution-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Periodic shear fields: an exact steady Euler solution, failure for the viscous branch, and the classification of steady periodic shears",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 16,
+        "deps": [
+          "pthm-cm17-incompressible-periodic-local-evolution",
+          "post-cm17-fluid-constitutive",
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "def-cm-fluid-constitutive-models",
+          "def-cm-euclidean-spatial-calculus",
+          "thm-sine-and-cosine-derivatives",
+          "thm-ftc-first-part",
+          "thm-clairaut-schwarz-mixed-partials",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm17-continuum-body-and-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm17-incompressible-periodic-local-evolution": "physical-result",
+          "post-cm17-fluid-constitutive": "physical-assumption",
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "def-cm-fluid-constitutive-models": "mathematical-premise",
+          "def-cm-euclidean-spatial-calculus": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-ftc-first-part": "mathematical-premise",
+          "thm-clairaut-schwarz-mixed-partials": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm17-continuum-body-and-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Worked checks on the periodic cell of the adopted fluid branch: the sinusoidal shear is verified to be an exact steady solution of the inviscid (Euler) branch with zero pressure and to fail the local existence theorem's projected equation for the viscous branch, and the steady periodic shear fields of the viscous branch with no body force are classified: only constants survive. The example uses the periodic-cell idealization and reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 12.3 (incompressible inviscid fluid and simple exact solutions)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics, Classical Mechanics (September 1, 2026 complete volume), Sections 8.4-8.5 (ideal fluid solutions and viscous shear flows)",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "statement": "Work on the periodic cell $\\mathbb T^3=(\\mathbb R/\\mathbb Z)^3$ of\n[[post-cm17-fluid-constitutive]] clause (c), with constant density $\\rho>0$,\nno body force and the stress of the branch. Let $A>0$, $\\varphi\\in\\mathbb R$\nand\n\n$$u(t,x):=\\bigl(A\\sin(2\\pi x_2+\\varphi),0,0\\bigr).$$\n\nThen:\n\n1. $\\operatorname{div}u=0$ and $(u\\cdot\\nabla)u=0$, so with $p\\equiv0$ the\n   field is an exact steady solution of the **Euler** branch ($\\nu=0$) of the\n   model on the periodic cell: $\\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u$\n   holds as $0=0$, and the primitive equation\n   $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla p+\\nu\\Delta u$ holds with $p\\equiv0$;\n2. the field satisfies the hypotheses of\n   [[pthm-cm17-incompressible-periodic-local-evolution]]: it is smooth,\n   divergence-free, periodic and has finite $H^s$ norm ($s\\ge4$), and the\n   displayed global solution is consistent with the local\n   existence-uniqueness statement;\n3. for the **viscous** branch ($\\nu>0$) the field is **not** a solution:\n   $\\Delta u=(2\\pi)^2u\\ne0$ and $P\\Delta u=\\Delta u$ because $u$ is\n   divergence-free, so the projected equation would require\n   $\\nu\\cdot(2\\pi)^2u=0$, which fails for $A>0$;\n4. more generally, every steady periodic shear $u=(v(x_2),0,0)$ of the\n   viscous branch with no body force and constant density is **constant**:\n   the model's equations force $\\nabla p=\\eta(v''(x_2),0,0)$, and periodicity\n   of $p$ in $x_1$ together with periodicity of $v$ in $x_2$ forces\n   $v''\\equiv0$ and then $v\\equiv\\mathrm{const}$.",
+        "strategy": "direct"
+      },
+      {
+        "id": "cex-cm17-traction-symmetry-without-stress-matrix",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "FALSE: the reversed-normal convention alone makes a continuous traction field a stress matrix. The field t(n)=|n_1|n refutes it",
+        "reference": "batch-33 B page; constructed from the A-page statements",
+        "design_state": "authored; step-1 readiness recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-traction-and-stress",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-euclidean-spheres-and-closed-balls",
+          "def-euclidean-inner-product",
+          "def-continuity-real",
+          "thm-algebra-of-limits",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric"
+        ],
+        "dependency_roles": {
+          "def-cm-traction-and-stress": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-euclidean-spheres-and-closed-balls": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-algebra-of-limits": "mathematical-premise",
+          "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 4.3 (Cauchy's hypothesis and the need for force balance in the tetrahedron argument)",
+              "url": "https://web.mit.edu/abeyaratne/Volumes/RCA_Vol_II.pdf"
+            },
+            {
+              "title": "MIT OpenCourseWare 12.005, Applications of Continuum Mechanics, Lecture 3 (Cauchy tetrahedron and Cauchy's formula t = sigma n)",
+              "url": "https://ocw.mit.edu/courses/12-005-applications-of-continuum-mechanics-to-earth-atmospheric-and-planetary-sciences-spring-2006/5005ac6aec16d031bffbd361c792ca70_lec3.pdf"
+            }
+          ]
+        },
+        "statement": "The false statement is: *every continuous traction field\n$t:S^2\\to\\mathbb R^3$ satisfying the reversed-normal convention\n$t(-n)=-t(n)$ for every $n\\in S^2$ is represented by a matrix\n$\\sigma\\in M_3(\\mathbb R)$ with $t(n)=\\sigma n$ for every $n$.*\n\nThe field constructed below is continuous and satisfies the convention, and\ninherits Cauchy's hypothesis (it depends on the surface only through the unit\nnormal), but no matrix represents it. The refutation shows that the balance\nhypothesis of the Cauchy-tetrahedron theorem is essential: symmetry of the\ntraction in the normal alone is not enough.",
+        "strategy": "direct"
+      }
+    ]
+  }
+]

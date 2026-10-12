@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-vector-bundle-transition-functions-satisfy-the-cocycle-identities.md

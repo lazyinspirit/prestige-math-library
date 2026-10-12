@@ -44,11 +44,8 @@ $$ \mathfrak q_1\cap R=\mathfrak p_1. $$
 
 **Proof technique:** direct.
 
+ 1.1 Localize at $\mathfrak p_2$ and then at $\mathfrak q_2$. We obtain a flat local homomorphism $ R_{\mathfrak p_2}\to S_{\mathfrak q_2} $ by [L1]. [L1, given]
 
-1.1 Localize at $\mathfrak p_2$ and then at $\mathfrak q_2$. We obtain a flat local homomorphism $ R_{\mathfrak p_2}\to S_{\mathfrak q_2} $ by [L1]. [L1, given]
+ 1.2 Because this localized map is local and flat, [L2] makes it faithfully flat. Applying the spectral characterization of faithful flatness to the prime ideal $\mathfrak p_1R_{\mathfrak p_2}$ of the source produces a prime $ \mathfrak q_1S_{\mathfrak q_2}\subseteq S_{\mathfrak q_2} $ lying over it. Contracting back to $S$ gives a prime $\mathfrak q_1\subseteq\mathfrak q_2$ with $ \mathfrak q_1\cap R=\mathfrak p_1. $ [L2, algebra]
 
-
-1.2 Because this localized map is local and flat, [L2] makes it faithfully flat. Applying the spectral characterization of faithful flatness to the prime ideal $\mathfrak p_1R_{\mathfrak p_2}$ of the source produces a prime $ \mathfrak q_1S_{\mathfrak q_2}\subseteq S_{\mathfrak q_2} $ lying over it. Contracting back to $S$ gives a prime $\mathfrak q_1\subseteq\mathfrak q_2$ with $ \mathfrak q_1\cap R=\mathfrak p_1. $ [L2, algebra]
-
-
-2.1 Therefore flat ring maps satisfy going down. [algebra] ∎
+ 2.1 Therefore flat ring maps satisfy going down. [algebra] ∎ 

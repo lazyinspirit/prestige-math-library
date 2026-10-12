@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-deterministic-integral-construction-of-a-gaussian-process.md

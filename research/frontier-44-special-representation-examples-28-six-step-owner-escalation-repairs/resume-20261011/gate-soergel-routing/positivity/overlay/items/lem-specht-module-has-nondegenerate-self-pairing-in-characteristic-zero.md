@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-specht-module-has-nondegenerate-self-pairing-in-characteristic-zero.md

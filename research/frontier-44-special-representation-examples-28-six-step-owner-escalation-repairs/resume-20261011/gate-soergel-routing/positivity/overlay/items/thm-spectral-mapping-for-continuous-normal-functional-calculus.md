@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-mapping-for-continuous-normal-functional-calculus.md

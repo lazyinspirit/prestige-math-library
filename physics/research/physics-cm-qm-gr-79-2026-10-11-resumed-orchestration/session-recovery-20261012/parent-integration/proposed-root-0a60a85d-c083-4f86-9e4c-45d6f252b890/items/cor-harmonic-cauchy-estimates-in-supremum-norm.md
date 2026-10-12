@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-harmonic-cauchy-estimates-in-supremum-norm.md

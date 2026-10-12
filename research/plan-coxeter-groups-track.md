@@ -4,7 +4,7 @@ Owner-authorized 2026-10-07. The category preserves its three published symmetri
 
 ## Scope and foundation reuse
 
-The owner subsequently explicitly authorized reuse of both DRAFT and PUBLISHED library content. Actual status is retained; an authored draft proof is inspected on its merits, while an empty planned scaffold supplies no proof. Searches of the existing item corpus found no CAT comparison, angular polyhedral metric, Wall-form, noncrossing/Cambrian or metric-flag theorem carriers before this expansion; these specific missing suppliers are newly planned. Finite rank is assumed throughout the geometric and scalar-growth branches; W itself may be finite, affine or infinite. The programme develops real canonical roots and faithful reflection geometry, Tits cones, parabolics, weak and Bruhat orders, complete finite classification including H3/H4/I2(m), noncrystallographic invariants, crystallographic lattice and affine alcove interfaces, descents/growth, heaps, absolute/noncrossing order, sortable/Cambrian quotients and the general Davis CAT(0) theorem. Braid Groups, Lie Theory, Hopf Algebras & Hecke Algebras and Special Topics in Representation Theory retain their distinct proof homes.
+The owner subsequently explicitly authorized reuse of both DRAFT and PUBLISHED library content. Actual status is retained; an authored draft proof is inspected on its merits, while an empty planned scaffold supplies no proof. Searches of the existing item corpus found no CAT comparison, angular polyhedral metric, Wall-form, noncrossing/Cambrian or metric-flag theorem carriers before this expansion; these specific missing suppliers are newly planned. Finite rank is assumed throughout the geometric and scalar-growth branches; W itself may be finite, affine or infinite. The programme develops real canonical roots and faithful reflection geometry, Tits cones, parabolics, weak and Bruhat orders, complete finite classification including H3/H4/I2(m), noncrystallographic invariants, crystallographic lattice and affine alcove interfaces, descents/growth, heaps, absolute/noncrossing order, sortable/Cambrian quotients and the general Davis CAT(0) theorem. Braid Groups, Lie Theory, Hopf Algebras & Hecke Algebras and the four specialized representation-theory categories retain their distinct proof homes.
 
 Generic posets, metric spaces, topology, homotopy, coverings, simplicial realization/stars/links/subdivision, compactness, finite convex triangulations, CW approximation and metric-target Ascoli are reused from published items. New foundation content is restricted to verified missing Coxeter lattice projections, abstract isometric polyhedral metrics, arbitrary-metric path length, angular cones/links, CAT comparison/globalization and large spherical metric flags. Existing discrete tree vertex metrics are never substituted for interval-realized geodesic metrics.
 
@@ -196,7 +196,7 @@ The independent signed-reflection exchange proof route specified by HH-11 is ind
 
 ## CG-05 — Spherical Simplex Metrics, Angular Links, and Cones
 
-**Requires:** `coxeter-polyhedral-gluings-and-intrinsic-metrics`, `real-forms-and-reflection-geometry`, `direct-matrix-factorisations-lu-cholesky-and-qr`, `simplicial-complexes-and-simplicial-homology`.
+**Requires:** `coxeter-polyhedral-gluings-and-intrinsic-metrics`, `real-forms-and-reflection-geometry`, `direct-matrix-factorisations-lu-cholesky-and-qr`, `simplicial-complexes-and-simplicial-homology`, `further-trigonometric-identities-and-inverses`, `hilbert-space-geometry-and-riesz-representation`.
 
 Combinatorial links already exist in the library. Here they receive angular metrics, and tangent neighborhoods become cones over those links. Their spherical geometry must be proved before a link criterion can be used.
 
@@ -241,7 +241,7 @@ Coset factorization is the algebraic form of moving to a face of a chamber. Uniq
 
 ## CG-08 — CAT Comparison, Link Criteria, and Local Globalization
 
-**Requires:** `spherical-simplex-metrics-angular-links-and-cones`, `homotopy-and-homotopy-equivalence`, `covering-spaces-and-lifting`.
+**Requires:** `spherical-simplex-metrics-angular-links-and-cones`, `homotopy-and-homotopy-equivalence`, `covering-spaces-and-lifting`, `further-trigonometric-identities-and-inverses`, `hilbert-space-geometry-and-riesz-representation`.
 
 Riemannian Hadamard theorems do not cover singular Coxeter polyhedra. This page supplies CAT comparison, angular-link equivalence and the precise complete simply connected local-to-global theorem using local-geodesic path spaces.
 
@@ -291,18 +291,18 @@ Finiteness is equivalent to positive definiteness of the canonical form. Classif
 
 ## CG-11 — Coxeter, Artin, and Hecke Interfaces
 
-**Requires:** `generic-coxeter-hecke-algebras-and-the-standard-basis`, `coxeter-presentations-exchange-and-reduced-word-theorems`, `canonical-roots-signs-and-faithful-reflections`, `parabolic-subgroups-and-double-coset-geometry`, `group-homomorphisms-and-the-isomorphism-theorems`.
+**Requires:** `generic-coxeter-hecke-algebras-and-the-standard-basis`, `coxeter-presentations-exchange-and-reduced-word-theorems`, `canonical-roots-signs-and-faithful-reflections`, `parabolic-subgroups-and-double-coset-geometry`, `group-homomorphisms-and-the-isomorphism-theorems`, `garside-structure-normal-forms-and-the-center`, `braids-as-fundamental-groups-of-configuration-spaces`, `artin-presentation-completeness-and-braid-combing`.
 
 Coxeter word control supplies positive lifts and the indexing needed for Hecke bases. Braid topology, Hecke algebra proofs, Kazhdan–Lusztig theory and Lie representation theory retain their established categories and proof homes.
 
 | Local supplier contract | Content and proof route |
 |---|---|
 | `def-cg-artin-monoid-and-group-presentations` | Construct the monoid of words modulo the congruence generated by finite alternating braid relations, with concatenation descends. Construct the group using free-group relator quotient without s²=1. The monoid-to-group map exists by its universal property; no injectivity, Ore localization or K(pi,1) assertion is part of this definition. |
-| `lem-cg-artin-presentation-universal-properties-and-coxeter-surjection` | Prove both quotient universal properties and surjectivity Artin group→W by sending each generator to s; quotienting by squares recovers W. For type A identify the already published braid category as an application only after its independent topological presentation theorem is available. |
+| `lem-cg-artin-presentation-universal-properties-and-coxeter-surjection` | Prove both quotient universal properties and surjectivity Artin group→W by sending each generator to s; quotienting by squares recovers W. For the standard type-A_{n-1} system, under AC identify the presentation-defined Artin group with the published geometric braid group only by consuming its independent topological presentation-completeness theorem; do not reprove that theorem here. |
 | `thm-cg-reduced-positive-section-and-length-additive-products` | Matsumoto proves positive Artin monoid lift b_w independent of reduced expression, with projection b_w↦w and injective set-section. Show b_ub_v=b_uv when ℓ(uv)=ℓ(u)+ℓ(v); exhibit the failure as a general group homomorphism. No monoid embedding in its group is needed for these claims. |
 | `lem-cg-hecke-and-lie-seam-contract-compatibility` | State the exact interface: general Hecke basis uses HH-11 exchange/Matsumoto and HH-12 locally proved coefficient-compatible basis; finite roots/coroots adapt to published Lie root suppliers; Kazhdan–Lusztig bar construction requires the actual Hecke basis, involution and normalization conversion, not just this page. For Soergel applications distinguish a faithful canonical representation from the required reflection-faithful augmented realization (affine degeneracy is a counterexample). These are dependency/normalization checks, not duplicated application theorems. |
 
-**B companion:** Construct the type-A Artin-to-Sn map and a reduced positive lift; show concatenating reduced lifts need not be a homomorphism when length decreases. Compare quadratic Hecke conventions S=qT,Q=q² and identify where degeneracy obstructs a claimed Soergel realization.
+**B companion:** Identify the positive type-A Artin monoid with the positive braid monoid by the exact presentation match, construct the type-A Artin-to-Sn map and a reduced positive lift, and show concatenating reduced lifts need not be a homomorphism when length decreases. Compare quadratic Hecke conventions S=qT,Q=q² and identify where degeneracy obstructs a claimed Soergel realization.
 
 ## CG-12 — Short Loop Polygons and Quantitative Energy Decrease
 

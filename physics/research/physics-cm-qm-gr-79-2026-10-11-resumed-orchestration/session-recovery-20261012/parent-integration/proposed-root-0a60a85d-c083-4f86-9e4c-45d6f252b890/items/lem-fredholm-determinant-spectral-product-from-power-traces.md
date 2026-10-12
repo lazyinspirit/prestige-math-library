@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fredholm-determinant-spectral-product-from-power-traces.md

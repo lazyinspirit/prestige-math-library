@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-lagrange-multiplier-rule-for-one-regular-constraint.md

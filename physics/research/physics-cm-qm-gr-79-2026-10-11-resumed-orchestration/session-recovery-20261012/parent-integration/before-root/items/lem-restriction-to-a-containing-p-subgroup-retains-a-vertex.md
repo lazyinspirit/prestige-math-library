@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-restriction-to-a-containing-p-subgroup-retains-a-vertex.md

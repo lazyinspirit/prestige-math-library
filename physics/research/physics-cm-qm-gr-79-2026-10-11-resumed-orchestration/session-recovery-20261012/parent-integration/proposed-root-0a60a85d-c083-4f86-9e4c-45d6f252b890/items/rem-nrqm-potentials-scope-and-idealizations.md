@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nrqm-potentials-scope-and-idealizations.md

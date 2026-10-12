@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-principal-series-endomorphisms-as-the-chi-idempotent-corner.md

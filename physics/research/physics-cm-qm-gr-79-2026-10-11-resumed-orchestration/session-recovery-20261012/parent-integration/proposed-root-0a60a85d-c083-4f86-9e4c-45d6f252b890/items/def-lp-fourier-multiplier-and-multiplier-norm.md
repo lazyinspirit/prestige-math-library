@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lp-fourier-multiplier-and-multiplier-norm.md

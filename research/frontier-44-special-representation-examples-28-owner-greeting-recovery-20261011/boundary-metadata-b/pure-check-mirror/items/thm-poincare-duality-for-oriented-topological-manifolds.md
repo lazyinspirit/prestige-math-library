@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-poincare-duality-for-oriented-topological-manifolds.md

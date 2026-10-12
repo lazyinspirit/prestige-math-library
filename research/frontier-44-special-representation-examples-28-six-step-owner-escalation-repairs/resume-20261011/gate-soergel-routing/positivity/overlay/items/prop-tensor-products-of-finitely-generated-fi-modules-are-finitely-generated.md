@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-tensor-products-of-finitely-generated-fi-modules-are-finitely-generated.md

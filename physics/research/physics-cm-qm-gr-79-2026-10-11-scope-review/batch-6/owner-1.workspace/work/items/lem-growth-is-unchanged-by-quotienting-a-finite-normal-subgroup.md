@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-growth-is-unchanged-by-quotienting-a-finite-normal-subgroup.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-cotangent-bundle-uses-the-same-transition-matrices-as-the-tangent-bundle.md

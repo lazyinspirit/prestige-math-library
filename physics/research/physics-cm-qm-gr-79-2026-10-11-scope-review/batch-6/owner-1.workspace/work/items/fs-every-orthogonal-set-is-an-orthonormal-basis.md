@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-orthogonal-set-is-an-orthonormal-basis.md

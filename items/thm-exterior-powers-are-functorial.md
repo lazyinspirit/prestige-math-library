@@ -45,9 +45,8 @@ Thus $V\mapsto\Lambda^kV$, $T\mapsto\Lambda^kT$ is a functor from $F$-vector spa
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], $\Lambda^k(\operatorname{id}_V)(v_1\wedge\cdots\wedge v_k)=v_1\wedge\cdots\wedge v_k$, so it agrees with $\operatorname{id}_{\Lambda^kV}$ on decomposables; [L2] then gives equality everywhere. [L1, L2]
+ 1.1 By [L1], $\Lambda^k(\operatorname{id}_V)(v_1\wedge\cdots\wedge v_k)=v_1\wedge\cdots\wedge v_k$, so it agrees with $\operatorname{id}_{\Lambda^kV}$ on decomposables; [L2] then gives equality everywhere. [L1, L2]
 
 1.2 By [L1] applied to $S\circ T$ and to each factor, $\Lambda^k(S\circ T)(v_1\wedge\cdots\wedge v_k)=S(T(v_1))\wedge\cdots\wedge S(T(v_k))=\Lambda^kS(T(v_1)\wedge\cdots\wedge T(v_k))=(\Lambda^kS\circ\Lambda^kT)(v_1\wedge\cdots\wedge v_k)$; [L2] extends the equality from decomposables to all of $\Lambda^kV$. [L1, L2]
 
-2.1 Steps 1.1 and 1.2 are the identity and composition laws of a functor, with the $k=0$ and $k=1$ cases the conventions of [L1]. [step 1.1, step 1.2, L1] ∎
+2.1 Steps 1.1 and 1.2 are the identity and composition laws of a functor, with the $k=0$ and $k=1$ cases the conventions of [L1]. [step 1.1, step 1.2, L1] ∎ 

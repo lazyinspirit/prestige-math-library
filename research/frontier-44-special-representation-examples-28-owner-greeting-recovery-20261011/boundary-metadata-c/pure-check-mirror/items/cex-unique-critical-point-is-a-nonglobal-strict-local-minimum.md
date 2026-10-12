@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-unique-critical-point-is-a-nonglobal-strict-local-minimum.md

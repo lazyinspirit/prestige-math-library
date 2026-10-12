@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-discrete-and-indiscrete-topologies-form-an-adjoint-triple-over-set.md

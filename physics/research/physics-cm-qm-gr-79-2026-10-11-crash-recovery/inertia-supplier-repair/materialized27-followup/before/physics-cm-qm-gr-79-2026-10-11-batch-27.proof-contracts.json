@@ -1,0 +1,2861 @@
+{
+  "version": 1,
+  "level": "physics-cm-qm-gr-79-2026-10-11-batch-27",
+  "scope": [
+    "post-cm11-torque-balance",
+    "pthm-cm11-euler-equations",
+    "pthm-cm11-torque-free-invariants",
+    "pthm-cm11-principal-rotations",
+    "pthm-cm11-linearized-spin",
+    "pthm-cm11-nonlinear-spin-stability",
+    "post-cm11-heavy-top",
+    "pthm-cm11-top-reduction",
+    "ex-cm11-free-top-checks",
+    "cex-cm11-invariants-do-not-force-uniform-rotation",
+    "ex-cm11-intermediate-axis-escape",
+    "ex-cm11-heavy-top-steady-precession"
+  ],
+  "contracts": {
+    "post-cm11-torque-balance": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(viii) state the setting (model data, time window, inertial frame, C^2 motion with body angular velocity and body inertia matrix), the declared continuous external torque datum tau with dimension mu l^2 tau^-2 and its reading as the total external torque about the centre of mass, the adopted balance L_c'=tau, the torque-free case, the relation to the particle balance, the absence of any momentum or energy balance, the transformation law of a datum under a change of inertial frame, and the scope and exclusions."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope states that no force law producing tau, no momentum balance for the centre of mass, no conservation law and no measured torque is asserted; it excludes deformable bodies, variable mass, impacts and contact or sliding laws, requires friction, contact and drive torques to be declared inside tau with their own models, and carries AC_omega only for the finiteness of the defining integrals of the model's angular momentum."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics, Section 3.3 (printed pages 53-55, PDF pages 59-61) presents the angular-momentum rate and Euler's equations with an applied torque; Likharev, Essential Graduate Physics CM, Chapter 4 Section 4.4, Eq. (4.66) (chapter pages 9-10) states Euler's equations with torque components; Sussman-Wisdom, SICM 2nd ed., Section 2.9, Eqs. (2.80)-(2.83) treats angular-momentum evolution under an applied torque. All three treat the torque as an input datum, not as derived from the mass distribution."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof section; provenance.proof is not-applicable; clause (v) states explicitly that no claim that the balance follows from the particle balance or any other item is made or proved on the page, and clauses (iv) and (viii) record that no measured value and no concrete body is asserted."
+        }
+      }
+    },
+    "pthm-cm11-euler-equations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals below finite. Adopt the model and notation of [[post-cm10-rigid-material]]: a reference mass distribution $\\nu$ with",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of [[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and let a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of class $C^2$ on the time window $I_0$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-cm-inertia-matrix-properties",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only in [L1], through [[lem-cm-mass-moments-are-finite]], to make the entries of $I$ finite real numbers. Let $\\nu$ be a mass distribution on",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "post-cm11-torque-balance",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **external-torque branch** of the rigid-material model, in the setting of [[post-cm10-rigid-material]]. **(i) Setting.** A model of the branch carries the data of",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-matrix-curve-derivative-rules",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cm-derivative-of-pairings-of-curves",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "pthm-cm10-frame-covariance",
+          "source_section": "Statement",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]] and notation of [[def-cm10-rigid-body-configuration]], [[def-cm10-angular-velocity]] and [[def-cm10-inertia-tensor]]: a reference mass distribution $\\nu$ with total mass $m$ and centred",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ",
+          "uses": [
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-invertible-matrix-and-general-linear-group",
+          "source_section": "Definition",
+          "quote": "A matrix $A\\in M_n(F)$ is **invertible** when there is a matrix $B\\in M_n(F)$ such that $$AB=I_n=BA.$$ Such a $B$ is unique and is denoted $A^{-1}$. The **general linear set** is $$\\operatorname{GL}_n(F):=\\{A\\in M_n(F):A\\text{ is",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L8",
+          "source": "def-matrix-product-and-identity-matrix",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field, let $m,n,p\\in\\mathbb N$, and let $A=(a_{ij})\\in M_{m\\times n}(F)$ and $B=(b_{jk})\\in M_{n\\times p}(F)$. Their **matrix product** is the matrix $AB\\in M_{m\\times p}(F)$ whose entries are $$(AB)_{ik}:=\\sum_{j\\in",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [L1] and [L3] the product $Rl$ is differentiable on $I_0$ with $(Rl)'=R'l+Rl'=R\\bigl([\\omega]_\\times l+l'\\bigr)=R\\bigl(\\omega\\times l+l'\\bigr)$, and by [L2] this equals $\\tau$. Multiplying by $R^{\\mathsf T}$ and using $R^{\\mathsf T}R=I_{3}$ gives $\\omega\\times l+l'=R^{\\mathsf T}\\tau$.",
+          "inputs": [
+            "L1",
+            "L3",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Let $t'=t+b$ and use [L7]: $\\tilde\\omega(t')=\\omega(t'-b)$ and $\\tilde L_c(t')=QL_c(t'-b)$; differentiating the second identity in $t'$ by the chain rule [L7] gives $\\tilde L_c'(t')=Q L_c'(t'-b)=Q\\tau(t'-b)=\\tilde\\tau(t')$, so the adopted balance holds in the second frame.",
+          "inputs": [
+            "L7",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Since $l=I\\omega$ and $I$ is a constant matrix, $l'=I\\omega'$; substituting $l=I\\omega$ into step 1.1 gives $I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau$, which is clause 1 (and the alternative form $l'=R^{\\mathsf T}\\tau-\\omega\\times I\\omega$).",
+          "inputs": [
+            "1.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Assume $\\tau\\equiv0$ and nondegeneracy. From step 1.1, $l'=-\\omega\\times l=(I\\omega)\\times\\omega=l\\times(I^{-1}l)$, the middle equality by antisymmetry [L4] and the last by $I^{-1}l=\\omega$ from [L8]; similarly $\\omega'=I^{-1}(-\\omega\\times I\\omega)=F(\\omega)$, which is clause 4.",
+          "inputs": [
+            "1.1",
+            "L4",
+            "L8",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the principal basis of [L5], $I\\omega=\\sum_{j}I_{j}\\omega_{j}e_{j}$ and the first component of $\\omega\\times I\\omega$ is $\\omega_{2}I_{3}\\omega_{3}-\\omega_{3}I_{2}\\omega_{2}=(I_{3}-I_{2})\\omega_{2}\\omega_{3}$, with the cyclic analogues; writing $R^{\\mathsf T}\\tau=\\sum_{j}\\tau_{j}e_{j}$, clause 1 reads $I_{1}\\omega_{1}'=(I_{2}-I_{3})\\omega_{2}\\omega_{3}+\\tau_{1}$ and cyclically, which is clause 2.",
+          "inputs": [
+            "L5",
+            "2.1",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "Differentiating $K_{\\mathrm{rot}}=\\tfrac12\\langle\\omega,I\\omega\\rangle$ with [L6] and using the symmetry of $I$ from [L1] gives $K_{\\mathrm{rot}}'=\\langle\\omega',I\\omega\\rangle=\\langle\\omega,I\\omega'\\rangle$; substituting $I\\omega'=R^{\\mathsf T}\\tau-\\omega\\times I\\omega$ from step 2.1 and using $\\langle\\omega,\\omega\\times I\\omega\\rangle=0$ by [L4] gives $K_{\\mathrm{rot}}'=\\langle\\omega,R^{\\mathsf T}\\tau\\rangle$, which is clause 3; when $\\tau\\equiv0$ this derivative vanishes identically and [L6] makes $K_{\\mathrm{rot}}$ constant on $I_0$. The identification with the kinetic splitting is clause 3 of [[pthm-cm10-kinetic-splitting]].",
+          "inputs": [
+            "L6",
+            "L1",
+            "2.1",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Applying step 2.1 in the second frame (whose configuration path is $(\\tilde c,\\tilde R)$ of class $C^{2}$ by [L7]) gives $I\\tilde\\omega'+\\tilde\\omega\\times I\\tilde\\omega=\\tilde R^{\\mathsf T}\\tilde\\tau$ on $I_0-b$; and $\\tilde R(t')^{\\mathsf T}\\tilde\\tau(t')=R(t'-b)^{\\mathsf T}Q^{\\mathsf T}Q\\tau(t'-b)=R(t'-b)^{\\mathsf T}\\tau(t'-b)$ because $Q^{\\mathsf T}Q=I_{3}$ [L3], so the body-frame torque is unchanged; this is clause 5.",
+          "inputs": [
+            "2.1",
+            "L7",
+            "L3",
+            "1.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The statement is vacuous only if no model of the branch exists; the reference placement (c,R)=(0,I_3) with the zero datum satisfies all hypotheses, and the proof's steps 1.1-4.1 never assume a nonempty set beyond the given model of the statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The torque-free case tau=0 is treated in step 2.2, which derives l'=l x (I^{-1} l), and in step 3.2, where the vanishing of omega . (omega x I omega) makes the rotational kinetic energy constant."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The case of one axis or one time is not needed: step 4.1 works on the whole interval I_0, and the principal components of step 3.1 cover each of the three axes j=1,2,3."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degenerate models are allowed in clauses 1-3 and 5: only step 2.2 assumes nondegeneracy, and the remark 'Where the nondegeneracy is used' records that clause 4 alone requires invertibility of I."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoints of the time window I_0 are handled by working on the open interval: derivatives are taken at interior points in steps 1.1-3.2, and no boundary value is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The countable-choice assumption AC_omega is declared in the statement and used only through the finiteness of the integrals of pthm-cm10-kinetic-splitting in clause 1; no other choice principle is used in the proof."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Clause 1 is an equality, not an equivalence: the forward direction is step 2.1 and no converse is claimed, so the iff-forward case is the trivial one-sided reading."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted anywhere in the statement; therefore there is no reverse implication to check."
+        }
+      ]
+    },
+    "pthm-cm11-torque-free-invariants": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm10-rigid-material",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **rigid-material model** branch, in the spacetime and frames of [[post-cm01-spacetime]] and [[post-cm01-frames]]. **(i) Reference mass distribution.** A rigid-material model",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm-mass-distribution-and-inertia-matrix",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$ ([[def-borel-sigma-algebra]]) and let $\\nu$ be a measure on the measurable space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]])",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "lem-cm-mass-moments-are-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be a measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-cm-mass-distribution-and-inertia-matrix]]) that is finite and bounded:",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals below finite. Adopt the model and notation of [[post-cm10-rigid-material]]: a reference mass distribution $\\nu$ with",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-euler-equations-and-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a centred mass distribution on $\\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "post-cm11-torque-balance",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **external-torque branch** of the rigid-material model, in the setting of [[post-cm10-rigid-material]]. **(i) Setting.** A model of the branch carries the data of",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals below finite. Adopt the model and notation of [[post-cm10-rigid-material]]: a reference mass distribution $\\nu$ with",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "source_section": "Statement",
+          "quote": "For $u,v\\in\\mathbb R^3$, $\\|u\\times v\\|_2^2=\\det G(u,v)$, and this value is positive exactly when $u$ and $v$ are linearly independent. Equivalently, $$\\|u\\times v\\|_2^2=\\|u\\|_2^2\\|v\\|_2^2-\\langle",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-first-order-ode-initial-value-problem-and-solution",
+          "source_section": "Definition",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$, and let $n\\ge1$. The equation $$x'(t)=F(t,x(t))$$ is a **first-order system**. An **initial value problem** consists of this equation and data $(t_0,x_0)\\in D$,",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-locally-lipschitz-in-the-state-variable",
+          "source_section": "Definition",
+          "quote": "Let $n\\in\\mathbb N$ with $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$. The map $F$ is **locally Lipschitz in the state variable, locally uniformly in time**, if every compact time-state cylinder",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-picard-lindelof-local-existence-and-uniqueness",
+          "source_section": "Statement",
+          "quote": "Let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $(t_0,x_0)\\in D$. Then a unique local solution of the IVP exists on some interval around the",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-maximal-ode-solution",
+          "source_section": "Definition",
+          "quote": "Let $x:I\\to\\mathbb R^n$ and $y:J\\to\\mathbb R^n$ solve the same IVP. The solution $y$ is an **extension** of $x$ when $I\\subseteq J$ and $y|_I=x$. It is a proper extension when $I\\subsetneq J$. A solution is **maximal** when it has no",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "source_section": "Statement",
+          "quote": "Every initial value problem satisfying the Picard-Lindelof hypotheses has a unique maximal solution. Its domain is an open interval containing the initial time, and every other solution through the same data is its",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "cor-cm-finite-time-breakdown-requires-escape",
+          "source_section": "Statement",
+          "quote": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]. Let $t_0<b$ be reals,",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let $r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define $$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\},",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The hypotheses of [L2] are met: $\\nu$ is a centred mass distribution with finite second moment by [L1] and is not supported on any line through the origin by the nondegeneracy hypothesis; $I_0$ has at least two points; $c$ is differentiable and $R$ twice differentiable because the configuration path is of class $C^{2}$; and the balance hypothesis $(Rl)'=\\tau$ holds with $\\tau\\equiv0$ because $Rl=L_c$ by [L1] and $L_c'=0$ by [L3]. Hence clause 2 of [L2] gives $l'=l\\times(I^{-1}l)$ and the constancy of $C$ and $E$, and clause 3 of [L2] gives their principal-basis expressions and the component equations.",
+          "inputs": [
+            "L2",
+            "L1",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [L3] the continuous function $L_c$ has zero derivative on $I_0$, so it is constant on $I_0$; hence $\\lVert L_c\\rVert_2$ is constant, and $\\lVert L_c(t)\\rVert_2^{2}=\\langle l(t),l(t)\\rangle=C$ by [L1]. This is clause 1.",
+          "inputs": [
+            "L3",
+            "L1",
+            "L2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "The field $F(l)=l\\times(I^{-1}l)$ is locally Lipschitz in the state variable: by bilinearity and additivity of the cross product [L6], for all $x,y\\in\\mathbb R^{3}$ one has $F(x)-F(y)=(x-y)\\times(I^{-1}x)+y\\times(I^{-1}(x-y))$, so with the bound $\\lVert I^{-1}z\\rVert_2\\le\\lVert z\\rVert_2/I_{\\min}$ valid in the principal basis [L4] and the norm bound of [L6], $\\lVert F(x)-F(y)\\rVert_2\\le\\lVert x-y\\rVert_2\\lVert I^{-1}x\\rVert_2+\\lVert y\\rVert_2\\lVert I^{-1}(x-y)\\rVert_2\\le\\bigl(\\lVert x\\rVert_2+\\lVert y\\rVert_2\\bigr)\\lVert x-y\\rVert_2/I_{\\min}$; on the ball $\\lVert z\\rVert_2\\le r$ this is at most $2r\\lVert x-y\\rVert_2/I_{\\min}$, a finite state-Lipschitz constant on every compact cylinder.",
+          "inputs": [
+            "L6",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Writing $\\omega=\\sum_{j}\\omega_{j}e_{j}$ in the principal basis of [L4], one has $\\omega^{\\mathsf T}I\\omega=\\sum_{j}I_{j}\\omega_{j}^{2}\\ge I_{\\min}\\sum_{j}\\omega_{j}^{2}=I_{\\min}\\lVert\\omega\\rVert_2^{2}$, so $\\lVert\\omega(t)\\rVert_2^{2}\\le2E/I_{\\min}$ with $E=\\tfrac12\\omega^{\\mathsf T}I\\omega$ constant by step 1.1 and $I_{\\min}>0$ by [L4]; together with $l=I\\omega$ this bounds $\\lVert l\\rVert_2^{2}=C$ on $I_0$. The identification of $E$ with the rotational term of the kinetic energy is clause 3 of [L5]. This is clause 3.",
+          "inputs": [
+            "L4",
+            "1.1",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Every solution of $l'=F(l)$ is defined on all of $\\mathbb R$: by [L7] and step 1.3 a unique maximal solution exists through every datum, with open domain $(a,b)$; along it $\\frac{d}{dt}\\lVert l(t)\\rVert_2^{2}=2\\langle l'(t),l(t)\\rangle=2\\langle l(t)\\times(I^{-1}l(t)),l(t)\\rangle=0$ because the cross product is orthogonal to each factor [L6], so $\\lVert l(t)\\rVert_2^{2}\\equiv\\lVert l(0)\\rVert_2^{2}$ and its graph over $(a,b)$ lies in the compact sphere $\\{z:\\lVert z\\rVert_2=\\lVert l(0)\\rVert_2\\}\\subseteq\\mathbb R^{3}$. If $b<+\\infty$, then near $b$ the solution stays in that compact subset of the state domain, and clause 2 of [L7] extends it past $b$, contradicting maximality; hence $b=+\\infty$, and the time-reversed solution $s\\mapsto l(-s)$, which solves the same autonomous equation, gives $a=-\\infty$.",
+          "inputs": [
+            "L7",
+            "1.3",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The $l$-path of a torque-free motion is a solution of $l'=F(l)$ on $I_0$ by step 1.1, hence by step 2.2 it is the restriction of a solution defined on all of $\\mathbb R$ (uniqueness), it satisfies $\\lVert l(t)\\rVert_2=\\lVert l(0)\\rVert_2$ for every $t$, and it takes values in $\\Lambda(C,E)$, which is compact as the intersection of the closed sphere and the closed level set $\\{z:\\langle z,I^{-1}z\\rangle=2E\\}$ and nonempty because it contains $l(0)$. This is clause 4.",
+          "inputs": [
+            "1.1",
+            "2.2",
+            "L4",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses are satisfiable: the reference placement with any nonzero datum l(0) satisfies the model data, and step 1.1 only uses the given nondegenerate model and zero-torque balance."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero case is included and treated: the statement covers l(0)=0 (a constant equilibrium path), and step 2.1 uses the local Lipschitz bound with r=0 legitimately; the escape and stability statements never assume l(0) nonzero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single motion or a single time is enough: steps 1.1-1.3 and 2.1-2.2 give identities valid at every t in I_0, and step 3.1 concerns the single l-path of the motion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy is excluded by hypothesis: the statement assumes the model nondegenerate so that I^{-1} exists, and step 2.1 uses the bound ||I^{-1}z|| <= ||z||/I_min which requires I_min>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time window endpoints: the constancy statements are on the interval I_0 and the global existence of step 2.2 is a statement about the open maximal interval, with the continuation argument applied at interior finite endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC_omega is declared and used only through the finiteness of the defining integrals in [L1]-[L2]; the global-existence argument of steps 2.1-2.2 is choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the constancy and global-existence conclusion, proved in steps 1.1-3.1; the statement also contains the converse-type clause 'the l-path is the restriction of a global solution', which is discharged by uniqueness in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse reading (from constancy to the equations) is not claimed: the statement never asserts that prescribed constant values of C and E determine a solution, and the remark records that no periodicity or elliptic-function computation is claimed."
+        }
+      ]
+    },
+    "pthm-cm11-principal-rotations": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals below finite. Adopt the model and notation of [[post-cm10-rigid-material]]: a reference mass distribution $\\nu$ with",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm11-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]. Adopt a model of the rigid-material branch [[post-cm10-rigid-material]] that is",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nondegenerate open interval, let $\\omega:I\\to\\mathbb R^3$ be continuous, and consider on $\\mathbb H\\cong\\mathbb R^4$ the initial value problem $$q'(t)=\\tfrac12\\,q(t)\\,\\varphi\\bigl(\\omega(t)\\bigr),\\qquad",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-quaternion-rotation-map-and-cover",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb H$ be the quaternion algebra with its product, its conjugate $x\\mapsto\\bar x$, its norm $N(x):=x\\bar x$, and the inverse $x^{-1}=\\bar x/N(x)$ of every nonzero element, in the notation of [[def-quaternions]]. Thus",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of [[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and let a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of class $C^2$ on the time window $I_0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-matrix-curve-derivative-rules",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "pthm-cm11-euler-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]; the theorems below neither use nor imply any other choice principle. Adopt a model of",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [L2] the covering map $\\rho$ is surjective; choose $q_{0}\\in S^{3}$ with $\\rho(q_{0})=R_{0}$, and let $\\omega:I\\to\\mathbb R^{3}$ be the constant curve $\\omega(t):=\\Omega e_{j}$, which is continuous. Clause 2 of [L2] supplies a $C^{1}$ curve $q:I\\to S^{3}$ with $q(t_{0})=q_{0}$ and $q'=\\tfrac12q\\varphi(\\omega)$, and clause 1 of [L2] shows that $R:=\\rho\\circ q:I\\to SO(3)$ is $C^{1}$ with $R(t_{0})=R_{0}$ and $R'(t)=R(t)\\Omega_{\\omega(t)}$; by [L3] this is $R^{\\mathsf T}R'=[\\Omega e_{j}]_\\times$, so the body angular velocity of $R$ is the constant map $\\Omega e_{j}$ by the uniqueness in [L3]. This is clause 1.",
+          "inputs": [
+            "L2",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let $R$ be a path as in clause 1 and let $c:I\\to\\mathbb R^{3}$ be of class $C^{2}$. Its body angular velocity is the constant $\\omega\\equiv\\Omega e_{j}$ by step 1.1, so $l=I\\omega=\\Omega I_{j}e_{j}$ is constant, and by [L1] $L_c=Rl$; with [L4], $(Rl)'=R'l+Rl'=R[\\omega]_\\times l+0=R(\\omega\\times l)=R(\\Omega^{2}I_{j}\\,e_{j}\\times e_{j})=0$ by [L5]. Moreover $R'=R[\\omega]_\\times$ is of class $C^{1}$ because $R$ is and $[\\omega]_\\times$ is constant, so $R$ is of class $C^{2}$ by definition of second differentiability and $(c,R)$ is a configuration path of class $C^{2}$; hence $x(t,\\rho)=c(t)+R(t)\\rho$ is a motion of the model. Since $L_c$ is constant, the zero-torque balance $L_c'=0$ holds and the motion belongs to the torque-free branch; this is clause 2.",
+          "inputs": [
+            "1.1",
+            "L1",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "In the motions of step 2.1, $l=\\Omega I_{j}e_{j}$ and by [L1] and [L5] $C=\\langle l,l\\rangle=\\Omega^{2}I_{j}^{2}$ and $E=\\tfrac12\\langle l,I^{-1}l\\rangle=\\tfrac12\\Omega^{2}I_{j}$. If $\\Omega\\neq0$, then $\\Omega I_{j}\\neq0$ and the identity $L_c=\\Omega I_{j}R(t)e_{j}$ of step 2.1 gives $R(t)e_{j}=L_c/(\\Omega I_{j})$ with $L_c$ constant, so the material axis $R(t)e_{j}$ is fixed in the inertial frame and the motion is the uniform rotation about that direction; if $\\Omega=0$, then $R'=R[\\omega]_\\times=R[0]=0$, so $R$ is constant by [L4]. This is clause 3.",
+          "inputs": [
+            "2.1",
+            "L1",
+            "L5",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "For the converse, let a torque-free motion have constant body angular velocity $\\omega\\equiv\\omega_{0}$. By [L6] its body angular velocity satisfies $I\\omega'+\\omega\\times I\\omega=0$; with $\\omega'=0$ this reads $\\omega_{0}\\times I\\omega_{0}=0$, so $I\\omega_{0}$ is a real multiple of $\\omega_{0}$ by alternation [L5]: if $\\omega_{0}\\neq0$ there is $\\lambda\\in\\mathbb R$ with $I\\omega_{0}=\\lambda\\omega_{0}$, so $\\omega_{0}$ is an eigenvector of $I$ and lies along a principal axis of the basis of [pthm-cm10-principal-axes] clause (a), say $\\omega_{0}=\\Omega e_{j}$ with $\\Omega\\neq0$; if $\\omega_{0}=0$, then $R'=R[0]=0$ and $R$ is constant by [L4]. In the nonzero case the path satisfies the identity of clause 1 with rate $\\Omega$, so clauses 2 and 3 apply to it. This is clause 4.",
+          "inputs": [
+            "L6",
+            "L5",
+            "L4",
+            "2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The class is nonempty: steps 1.1 and 2.1 construct a path and a motion for every principal axis and every rate, so the existence clause is witnessed concretely."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero-rate case Omega=0 is treated in step 3.1: l=0, R'=R[0]=0, and R is constant by the zero-derivative lemma; the case omega_0=0 in the converse is also treated there."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single axis and a single orientation are enough: the construction of step 1.1 takes one fixed j, one rate and one initial orientation, and the statements quantify over them."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy is excluded by the nondegeneracy hypothesis, used in step 1.1 (surjectivity of the quaternion cover needs no invertibility) and in the converse step 4.1 through the identification I omega_0 = lambda omega_0, which needs only the eigenvalue statement, not invertibility; the nondegeneracy is used to exclude a zero principal moment for the principal-axis identification."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The interval endpoints: the lift of step 1.1 is constructed on the whole open interval I and the constancy conclusions hold there; no boundary value is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC_omega is declared and used only in step 1.1 to select the initial unit quaternion q_0 with rho(q_0)=R_0 through the surjectivity of the double cover."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is clauses 1-3, constructed in steps 1.1-3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction is clause 4, proved in step 4.1 from the Euler equations: a constant body angular velocity forces omega_0 x I omega_0 = 0 and hence a principal-axis direction."
+        }
+      ]
+    },
+    "pthm-cm11-linearized-spin": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm11-euler-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]; the theorems below neither use nor imply any other choice principle. Adopt a model of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of [[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and let a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of class $C^2$ on the time window $I_0$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-linearized-torque-free-euler-equations",
+          "source_section": "Statement",
+          "quote": "Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let $$F(\\omega):=-I^{-1}\\bigl(\\omega\\times I\\omega\\bigr),\\qquad \\omega\\in\\mathbb R^3,$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-total-derivative-in-euclidean-space",
+          "source_section": "Definition",
+          "quote": "Let $U\\subseteq\\mathbb R^m$ be open, let $a\\in U$, and let $f:U\\to\\mathbb R^n$. The map $f$ is **totally differentiable at $a$** when there is a linear map $L:\\mathbb R^m\\to\\mathbb R^n$ ([[def-euclidean-linear-map]]) such that",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]). A subset $I \\subseteq \\mathbb{R}$ is **order-convex** when $$x, y \\in I \\text{ and } x \\le",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-orbital-and-linear-stability",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map; retain the convention of [[def-cm-equilibrium-and-lyapunov-stability]] that a solution means a solution of $z'(t)=F(z(t))$, read as a system of",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "pthm-cm11-principal-rotations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to select the initial unit quaternion of [[def-cm-quaternion-rotation-map-and-cover]] through the surjectivity of the double cover (its second",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The spin $\\Omega e_{j}$ is a solution of $\\omega'=F(\\omega)$ on every interval with at least two points, because it is the constant body angular velocity of the torque-free motion of [L4] and [L1] is the same equation; with $l=I\\omega=\\Omega I_{j}e_{j}$ and $I^{-1}l=\\Omega e_{j}$ the right-hand side $F(\\Omega e_{j})=-I^{-1}(\\Omega e_{j}\\times\\Omega I_{j}e_{j})=0$ vanishes.",
+          "inputs": [
+            "L4",
+            "L1",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "Identify $\\mathbb R^{3}$ with the supplier's $\\mathbb R^{3}$ of [L2] by the orthogonal map carrying its standard basis to $(e_{a},e_{b},e_{j})$; then the supplier's diagonal map with entries $(I_{a},I_{b},I_{j})$ is the model's inertia operator $I$ expressed in the principal basis [L5], and the fields $F(\\omega)=-I^{-1}(\\omega\\times I\\omega)$ correspond. Clause 1 of [L2] applied at the spin about the third basis vector gives the total differentiability of $F$ at $\\Omega e_{j}$ and the derivative $A_{j}$ of clause 1, with the remainder bound and explicit constant, and clauses 2-3 of [L2] give the transverse formulas, the criterion for the sign of $\\lambda_{j}=\\Omega^{2}(I_{a}-I_{j})(I_{j}-I_{b})/(I_{a}I_{b})$ and the bounded/unbounded alternatives. This is clause 1 and the case analysis of clause 2 up to the sign criterion.",
+          "inputs": [
+            "L2",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The product $(I_{a}-I_{j})(I_{j}-I_{b})$ is positive exactly when $I_{j}$ lies strictly between $I_{a}$ and $I_{b}$ and negative exactly when $I_{j}$ is larger than both or smaller than both; since $\\Omega^{2}/(I_{a}I_{b})>0$, the criterion of clause 3 of [L2] reads: $\\lambda_{j}<0$ (oscillatory, bounded, the displayed $\\cos,\\sin$ formulas with $\\kappa_{j}=\\sqrt{-\\lambda_{j}}$) exactly for the extreme axes, and $\\lambda_{j}>0$ (the $\\cosh,\\sinh$ formulas with $\\kappa_{j}=\\sqrt{\\lambda_{j}}$, unbounded solutions, the stated growth criterion) exactly for the intermediate axis. This completes clause 2.",
+          "inputs": [
+            "L2",
+            "1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [L3] the boundedness of every solution of the linearized system on $[0,\\infty)$ in the extreme case is exactly linear stability of the spin, and the existence of an unbounded solution in the intermediate case is the failure of linear stability, since a solution that is unbounded on $[0,\\infty)$ is not bounded there.",
+          "inputs": [
+            "L3",
+            "1.2",
+            "2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses are satisfiable: any nondegenerate model with three distinct positive principal moments and any Omega != 0 gives the data of the statement; step 1.1 exhibits the spin solution explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero case of the perturbation is included: delta=0 gives the spin itself, and the remainder bound of step 1.2 is trivial there; the statement also covers the zero solutions of the linearized system in the boundedness claims."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One axis at a time: steps 1.1-2.1 fix a single j and Omega, and the statement quantifies over them; the case analysis uses the two other axes only through the product (I_a - I_j)(I_j - I_b)."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Repeated principal moments are excluded by the pairwise-distinctness hypothesis, which the supplier requires and which step 2.1 uses in forming the nonzero lambda_j; the remark records that the case of repeated moments is not covered."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The interval endpoints: the linearized system is autonomous and the solutions of step 2.1 are defined for all real t, so endpoint behaviour is discharged by the global formulas."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used or needed in this item; AC_omega appears nowhere in its hypotheses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the dichotomy as stated: extreme axis gives bounded oscillatory solutions (step 2.1) and intermediate axis gives exponential growth (step 2.1), with linear stability read off in step 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction is the 'only if' reading of the same criterion: lambda_j < 0 occurs exactly for extreme axes, proved in step 2.1 by the sign of the product of the two differences."
+        }
+      ]
+    },
+    "pthm-cm11-nonlinear-spin-stability": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm11-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]. Adopt a model of the rigid-material branch [[post-cm10-rigid-material]] that is",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm11-euler-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]; the theorems below neither use nor imply any other choice principle. Adopt a model of",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-cm-stability-of-extreme-principal-axes",
+          "source_section": "Statement",
+          "quote": "Let $I_1<I_2<I_3$ be positive reals and let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$. Consider the autonomous first-order system",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-equilibrium-and-lyapunov-stability",
+          "source_section": "Definition",
+          "quote": "Let $n\\ge1$, let $U\\subseteq\\mathbb R^n$ be open and let $F:U\\to\\mathbb R^n$ be a map. Consider the autonomous first-order system $$z'(t)=F(z(t)),$$ read as the first-order system of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cm-instability-of-the-intermediate-axis",
+          "source_section": "Statement",
+          "quote": "Let $I_1<I_2<I_3$ be positive reals, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and consider the torque-free Euler system $l'=F(l)$, $F(l)=l\\times(I^{-1}l)$, on $U=\\mathbb R^3$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nondegenerate open interval, let $\\omega:I\\to\\mathbb R^3$ be continuous, and consider on $\\mathbb H\\cong\\mathbb R^4$ the initial value problem $$q'(t)=\\tfrac12\\,q(t)\\,\\varphi\\bigl(\\omega(t)\\bigr),\\qquad",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm-quaternion-rotation-map-and-cover",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb H$ be the quaternion algebra with its product, its conjugate $x\\mapsto\\bar x$, its norm $N(x):=x\\bar x$, and the inverse $x^{-1}=\\bar x/N(x)$ of every nonzero element, in the notation of [[def-quaternions]]. Thus",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-matrix-curve-derivative-rules",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cm10-rigid-body-configuration",
+          "source_section": "Definition",
+          "quote": "Adopt the model data, the time window $I_0$, the inertial frame and the notation of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$ with total mass $m$ and centred reference coordinates, and a motion",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "post-cm10-rigid-material",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **rigid-material model** branch, in the spacetime and frames of [[post-cm01-spacetime]] and [[post-cm01-frames]]. **(i) Reference mass distribution.** A rigid-material model",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "pthm-cm11-principal-rotations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to select the initial unit quaternion of [[def-cm-quaternion-rotation-map-and-cover]] through the surjectivity of the double cover (its second",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-cm-quaternion-rotation-map-and-cover",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb H$ be the quaternion algebra with its product, its conjugate $x\\mapsto\\bar x$, its norm $N(x):=x\\bar x$, and the inverse $x^{-1}=\\bar x/N(x)$ of every nonzero element, in the notation of [[def-quaternions]]. Thus",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L7",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "Clause 1 of [L2] gives for $j=1$ and $j=3$ and every $\\varepsilon>0$ a $\\delta\\in(0,\\varepsilon]$ such that every maximal solution with $\\lVert l(0)-Le_{j}\\rVert_2<\\delta$ is defined for all $t\\ge0$ and satisfies $\\lVert l(t)-Le_{j}\\rVert_2<\\varepsilon$; by [L1] a maximal solution is a solution defined on $\\mathbb R$, so this is exactly the Lyapunov stability of $Le_{j}$ for the $l$-system, and the equilibrium property $F(Le_{j})=0$ holds by the alternation of the cross product in [L5].",
+          "inputs": [
+            "L2",
+            "L1",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "The functions $D_{1}$ and $D_{3}$ of clause 2 are nonnegative, since in the principal basis with $l=\\sum_{k}l_{k}e_{k}$ one has $D_{1}(l)=\\tfrac12\\sum_{k}(1/I_{1}-1/I_{k})l_{k}^{2}$ and $D_{3}(l)=\\tfrac12\\sum_{k}(1/I_{k}-1/I_{3})l_{k}^{2}$ with all coefficients nonnegative by $I_{1}<I_{2}<I_{3}$; and $2D_{1}(l)\\ge(1/I_{1}-1/I_{2})(l_{2}^{2}+l_{3}^{2})$ and $2D_{3}(l)\\ge(1/I_{2}-1/I_{3})(l_{1}^{2}+l_{2}^{2})$ because the remaining coefficients are at least these. By [L1] the two combinations $\\langle l,l\\rangle$ and $\\langle l,I^{-1}l\\rangle$ are constant along every solution, so $D_{1}$ and $D_{3}$ are constant along solutions and the two displayed inequalities of clause 2 follow.",
+          "inputs": [
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "Clause 1 of [L3] gives that $Le_{2}$ is an equilibrium of the $l$-system which is not Lyapunov stable, together with the constants $a$, $c_{0}$, $\\delta_{0}$, $\\varepsilon_{0}$ and the escape-time bound from the datum $l^{\\eta}$ of the statement: for every $\\delta>0$ and every $0<\\eta<\\min\\{\\delta_{0},\\delta\\}$ the solution with $l(0)=l^{\\eta}$ has $\\lVert l(0)-Le_{2}\\rVert_2<\\delta$ and reaches $\\lVert l(t)-Le_{2}\\rVert_2\\ge\\varepsilon_{0}$ at some $t\\le c_{0}^{-1}\\log(\\delta_{0}/\\eta)$.",
+          "inputs": [
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Let a torque-free motion have time window containing $[0,\\infty)$ and datum with $\\lVert l(0)-Le_{j}\\rVert_2<\\delta$, $j\\in\\{1,3\\}$, for the $\\delta$ of step 1.1. Its $l$-path is a solution of the $l$-system by [L1], so $\\lVert l(t)-Le_{j}\\rVert_2<\\varepsilon$ for all $t\\ge0$; and since $l=I\\omega$ with $I$ diagonal with entries $I_{1},I_{2},I_{3}$, the difference $l(t)-Le_{j}=I(\\omega(t)-\\Omega e_{j})$ with $\\Omega=L/I_{j}$ gives $\\lVert\\omega(t)-\\Omega e_{j}\\rVert_2\\le\\lVert l(t)-Le_{j}\\rVert_2/I_{\\min}<\\varepsilon/I_{\\min}$ by [L1]. This completes clause 1.",
+          "inputs": [
+            "1.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "Realise the escaping $l$-path of step 1.3 as a motion. Let $l:\\mathbb R\\to\\mathbb R^{3}$ be the global solution of the $l$-system with datum $l(0)=l^{\\eta}$ (global by [L1]), and put $\\omega:=I^{-1}l$, which is continuous and of class $C^{1}$ because $l$ solves a locally Lipschitz equation; by [L4] there is a $C^{2}$ rotation path $R:\\mathbb R\\to SO(3)$ with body angular velocity $\\omega$, and for any unit quaternion $q_{0}$ with $\\rho(q_{0})=R(0)$ such a path can be normalised to start at $R(0)$. Define $x(t,\\rho):=c(t)+R(t)\\rho$ with $c\\equiv0$, which is a motion of the model by [L5]. Its body angular velocity is $\\omega$, so its $l$-data are $l$, and its zero-torque balance holds: with [L5], $(Rl)'=R'l+Rl'=R[\\omega]_\\times l+Rl'=R(\\omega\\times l+l')=0$ because $l'=l\\times(I^{-1}l)=l\\times\\omega=-\\omega\\times l$. Hence the motion is a torque-free motion of the branch with $l(0)=l^{\\eta}$, $\\lVert l(0)-Le_{2}\\rVert_2<\\delta$, and $\\lVert l(t)-Le_{2}\\rVert_2\\ge\\varepsilon_{0}$ at the escape time $t\\le c_{0}^{-1}\\log(\\delta_{0}/\\eta)$ of step 1.3. This is clause 3.",
+          "inputs": [
+            "1.3",
+            "L1",
+            "L4",
+            "L5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "For clause 4, put $\\omega\\equiv\\Omega e_{j}$ and let $r:=\\varphi(e_{j})\\in S^{3}$, so that $r\\,\\varphi(\\omega)=\\varphi(\\omega)\\,r$ by [L7] and $N(r)=1$. By [L4] choose $q_{0}\\in S^{3}$ with $\\rho(q_{0})=R_{0}$ for a fixed $R_{0}\\in SO(3)$, let $q:\\mathbb R\\to S^{3}$ be the lift of $\\omega$ with $q(t_{0})=q_{0}$, and put $q_{2}(t):=q(t)r$; then $q_{2}$ is $C^{1}$, takes values in $S^{3}$ because $N$ is multiplicative, and solves $q_{2}'=q'r=\\tfrac12q\\varphi(\\omega)r=\\tfrac12q_{2}\\varphi(\\omega)$ by the commutation in [L7], with $q_{2}(t_{0})=q_{0}r$. Let $R_{1}:=\\rho\\circ q$ and $R_{2}:=\\rho\\circ q_{2}$; by the homomorphism property in [L4], $R_{2}(t)=\\rho(q(t))\\rho(r)=R_{1}(t)S$ with $S:=\\rho(r)\\in SO(3)$, and $S\\neq I_{3}$ because $\\rho(r)$ acts as the half-turn about the axis $e_{j}$: $Se_{j}=e_{j}$ and $Se_{a}=-e_{a}$ for $a\\neq j$ by the conjugation formula and $\\varphi(e_{j})^{2}=-1$ in [L7]. Both $R_{1}$ and $R_{2}$ have body angular velocity $\\Omega e_{j}$ by [L4] and so, with $c\\equiv0$, are torque-free motions by clause 2 of [[pthm-cm11-principal-rotations]]; their orientations differ by the fixed rotation $S\\neq I_{3}$ at every time, which is clause 4.",
+          "inputs": [
+            "L7",
+            "L4",
+            "2.1",
+            "L6",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses are satisfiable: the identity orientation and datum l(0)=Le_j give the spin motions of clause 1, and step 1.1 quotes the supplier whose hypotheses are met."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero cases are treated: step 1.2 includes D_1(0)=D_3(0)=0 at the exact spins, and the converse-type orientation clause 4 uses Omega != 0; the case Omega = 0 is not part of clause 4 and is covered by the general observation of step 3.1 that R is constant when omega is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One axis at a time: clause 1 treats j=1 and j=3 with the two deviations D_1 and D_3 of step 1.2, and clause 3 fixes the single intermediate axis j=2."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy of the inertia data is excluded by the nondegeneracy hypothesis; the distinctness of the moments is used by the suppliers in steps 1.1 and 1.3, and the intermediate-axis datum l^eta of step 1.3 requires I_1 < I_2 < I_3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time interval: clause 3 quantifies over motions whose time window contains [0,infinity), and step 2.2 realises the escaping path as a C^2 rotation path defined on all of R by the global existence quoted in [L1]."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC_omega is declared and used only to select the initial unit quaternion in step 2.2 (and step 2.3); the stability and instability computations are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction comprises the Lyapunov-stability certificate of clause 1 (steps 1.1-2.1) and the explicit deviation bound of clause 2 (step 1.2)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction is the instability statement of clause 3: the escaping motion is constructed in step 2.2, and the orientation caveat of clause 4 in step 2.3 exhibits two motions with equal body angular velocity and different orientations."
+        }
+      ]
+    },
+    "post-cm11-heavy-top": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [],
+      "physics_review": {
+        "formulation": {
+          "verdict": "pass",
+          "evidence": "Clauses (i)-(vii) state the model data, the axisymmetry of the body inertia matrix with A_c>0 and C_c>0 and the declared symmetry axis, the pivot distance d and field strength g with dimensions, the pivot material point and the constraint c(t)+R(t)rho_p=0 with its consequence c=dRe_3, the ideal pivot reaction (a single force at the pivot contributing no torque, in the framework's sense of a frictionless hinge), the uniform gravitational field -g e_3 acting on every material point, the adopted balance of angular momentum about the pivot, and the scope and relations to the other balances."
+        },
+        "scope": {
+          "verdict": "pass",
+          "evidence": "physical_scope excludes non-axisymmetric bodies, non-uniform fields, friction and driving torques at the pivot, rolling and sliding contacts, impacts, deformable bodies and variable mass, and asserts no force law for the pivot reaction, no conservation law and no measured value of A_c, C_c, m, d or g."
+        },
+        "sources": {
+          "verdict": "pass",
+          "evidence": "Tong, Classical Dynamics, Sections 3.5-3.6, Eqs. (3.54)-(3.70) (printed pages 62-70, PDF pages 68-76) constructs the Euler angles and the symmetric heavy top with its cyclic momenta; Likharev, CM, Chapter 4 Sections 4.5-4.6, Eqs. (4.72)-(4.92) (chapter pages 15-22) gives the exact reduced effective potential and the moving-frame relation; Sussman-Wisdom, SICM 2nd ed., Section 2.10, Eqs. (2.84)-(2.91) treats the axisymmetric top with a fixed point; Stewart, Advanced Classical Mechanics, Chapter 2 Section 2.5 (printed pages 48-51) reduces the symmetric top about a fixed point."
+        },
+        "non_derivation": {
+          "verdict": "pass",
+          "evidence": "No Proof section; provenance.proof is not-applicable; clauses (iii) and (v) state that the idealisation and the pivot balance are adopted, clause (vii) records that the balance is not claimed to follow from the centre-of-mass balance or any particle balance, and clause (vi) records that no measured value is asserted."
+        }
+      }
+    },
+    "pthm-cm11-top-reduction": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "post-cm11-heavy-top",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **heavy symmetric top branch** of the rigid-material model, in the setting of [[post-cm10-rigid-material]]. **(i) Setting.** A model of the branch carries the data of",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-rigid-body-configuration",
+          "source_section": "Definition",
+          "quote": "Adopt the model data, the time window $I_0$, the inertial frame and the notation of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$ with total mass $m$ and centred reference coordinates, and a motion",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-cm10-angular-velocity",
+          "source_section": "Definition",
+          "quote": "Adopt the model, inertial frame and notation of [[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and let a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of class $C^2$ on the time window $I_0$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm10-kinetic-splitting",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals below finite. Adopt the model and notation of [[post-cm10-rigid-material]]: a reference mass distribution $\\nu$ with",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is complex-linear on it: $$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-mass-moments-are-finite",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be a measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-cm-mass-distribution-and-inertia-matrix]]) that is finite and bounded:",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "def-cm-mass-distribution-and-inertia-matrix",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$ ([[def-borel-sigma-algebra]]) and let $\\nu$ be a measure on the measurable space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]])",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "post-cm11-heavy-top",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **heavy symmetric top branch** of the rigid-material model, in the setting of [[post-cm10-rigid-material]]. **(i) Setting.** A model of the branch carries the data of",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-euler-angle-angular-velocity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $\\varphi,\\theta,\\psi:I\\to\\mathbb R$ be differentiable with $\\theta(I)\\subseteq(0,\\pi)$, and put",
+          "uses": [
+            "1.2",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-coordinate-rotation-matrices",
+          "source_section": "Statement",
+          "quote": "For $a\\in\\mathbb R$ define, in the standard basis of $\\mathbb R^3$, $$R_z(a):=\\begin{pmatrix}\\cos a&-\\sin a&0\\\\ \\sin a&\\cos a&0\\\\ 0&0&1\\end{pmatrix},\\qquad R_y(a):=\\begin{pmatrix}\\cos a&0&\\sin a\\\\ 0&1&0\\\\ -\\sin a&0&\\cos a\\end{pmatrix}\\in",
+          "uses": [
+            "1.2",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$ These are real power series in the sense of",
+          "uses": [
+            "1.2",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.2",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "source_section": "Definition",
+          "quote": "**Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map $$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "thm-cm-heavy-top-reduction",
+          "source_section": "Statement",
+          "quote": "Fix the parameters $A>0$, $C>0$, $m>0$, $d>0$, $g>0$ and let $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ be a heavy-top trajectory of [[def-cm-euler-angle-parametrization-and-heavy-top-system]] on an interval $I$",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cm-matrix-curve-derivative-rules",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cm-skew-matrix-cross-product-correspondence",
+          "source_section": "Statement",
+          "quote": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-cm-special-orthogonal-group",
+          "source_section": "Definition",
+          "quote": "Let $M_3(\\mathbb R)$ be the set of $3\\times3$ matrices over $\\mathbb R$ ([[def-matrix-space]]), with identity $I_3$ and product as in [[def-matrix-product-and-identity-matrix]], transpose $R^{\\mathsf T}$ as in",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then: 1. $f + g$ is differentiable at",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]]), neighbourhoods are those of [[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]]. Let $A \\subseteq \\mathbb{R}$, let $f : A \\to",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]). A subset $I \\subseteq \\mathbb{R}$ is **order-convex** when $$x, y \\in I \\text{ and } x \\le",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-zero-derivative-implies-constant",
+          "source_section": "Statement",
+          "quote": "Let $I \\subseteq \\mathbb{R}$ be order-convex ([[def-interval]]) and let $f : I \\to \\mathbb{R}$ be continuous on $I$ ([[def-continuity-real]]) and differentiable at every point of $I$ that is interior to $I$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "6.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [L1] the constraint gives $c(t)=dR(t)e_{3}$, and since $R$ is $C^{1}$ with $R'=R[\\omega]_{\\times}$ by [L6] one has $c'=dR'e_{3}=dR[\\omega]_{\\times}e_{3}=dR(\\omega\\times e_{3})$.",
+          "inputs": [
+            "L1",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "By [L4], reading the columns of the three factors and using $\\theta(I_0)\\subseteq(0,\\pi)$, the vector $\\gamma=R^{\\mathsf T}e_{3}=R_{z}(\\psi)^{\\mathsf T}R_{y}(\\theta)^{\\mathsf T}R_{z}(\\varphi)^{\\mathsf T}e_{3}=R_{z}(-\\psi)R_{y}(-\\theta)e_{3}$ equals $R_{z}(-\\psi)\\bigl(-\\sin\\theta\\,e_{1}+\\cos\\theta\\,e_{3}\\bigr)=\\bigl(-\\sin\\theta\\cos\\psi,\\ \\sin\\theta\\sin\\psi,\\ \\cos\\theta\\bigr)$, and $\\omega_{3}=\\psi'+\\varphi'\\cos\\theta$.",
+          "inputs": [
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [L1] the gravitational force system of the branch acts as the total force $-mge_{3}$ applied at the centre of mass, whose torque about the origin is $\\tau_{p}=mc\\times(-ge_{3})$; with $c=dRe_{3}$ from step 1.1 this is $\\tau_{p}=-mgd(Re_{3})\\times e_{3}$, and $\\tau_{p}\\cdot e_{3}=0$ because the cross product is orthogonal to its factors by [L6].",
+          "inputs": [
+            "L1",
+            "1.1",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "By [L2] one has $J_{p}=L_{c}+c\\times P=RI\\omega+mc\\times c'$. Substituting $c=dRe_{3}$ and $c'=dR(\\omega\\times e_{3})$ from step 1.1 and using $I e_{3}=C e_{3}$, $Ie_{1}=A_{c}e_{1}$, $Ie_{2}=A_{c}e_{2}$ from [L3] gives $mc\\times c'=md^{2}\\,(Re_{3})\\times R(\\omega\\times e_{3})=md^{2}R\\bigl(e_{3}\\times(\\omega\\times e_{3})\\bigr)=md^{2}R(\\omega-\\omega_{3}e_{3})$ by [L6] and the vector triple product with $\\lVert e_{3}\\rVert_2=1$, so $J_{p}=R\\bigl(I\\omega+md^{2}(\\omega-\\omega_{3}e_{3})\\bigr)=R\\tilde I\\omega$ with $\\tilde I=\\mathrm{diag}(A,A,C)$ and $A=A_{c}+md^{2}$, $C=C_{c}$. Hence the balance of [L1] reads $J_{p}'=\\tau_{p}$ with $\\tau_{p}$ as in step 2.1, completing clause 1.",
+          "inputs": [
+            "L2",
+            "1.1",
+            "L3",
+            "L6",
+            "L1",
+            "2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "Since $R$ is $C^{1}$ and $\\omega$ is $C^{1}$, the product $\\tilde I\\omega$ is $C^{1}$ and $J_{p}=R\\tilde I\\omega$ from step 3.1 gives $R(\\tilde I\\omega'+\\omega\\times\\tilde I\\omega)=J_{p}'$ by [L6]; with the balance $J_{p}'=\\tau_{p}$ of step 3.1 and $R^{\\mathsf T}R=I_{3}$ one gets $\\tilde I\\omega'+\\omega\\times\\tilde I\\omega=R^{\\mathsf T}\\tau_{p}$. By step 2.1 and [L6], $R^{\\mathsf T}\\bigl((Re_{3})\\times e_{3}\\bigr)=e_{3}\\times(R^{\\mathsf T}e_{3})=e_{3}\\times\\gamma$ with $\\gamma$ of step 1.2, so $\\tilde I\\omega'+\\omega\\times\\tilde I\\omega=-mgd(e_{3}\\times\\gamma)$. Componentwise, $(e_{3}\\times\\gamma)_{1}=-\\gamma_{2}$, $(e_{3}\\times\\gamma)_{2}=\\gamma_{1}$, $(e_{3}\\times\\gamma)_{3}=0$ and $(\\omega\\times\\tilde I\\omega)_{1}=(C-A)\\omega_{2}\\omega_{3}$, $(\\omega\\times\\tilde I\\omega)_{2}=(A-C)\\omega_{1}\\omega_{3}$, $(\\omega\\times\\tilde I\\omega)_{3}=0$, giving the three displayed equations of clause 2.",
+          "inputs": [
+            "3.1",
+            "L6",
+            "2.1",
+            "1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "step": "5.1",
+          "claim": "The third of the equations of step 4.1 gives $C\\omega_{3}'=0$, and $C>0$, so $\\omega_{3}$ is constant on the interval $I_0$ by [L6]; by step 1.2, $b=C(\\psi'+\\varphi'\\cos\\theta)=C\\omega_{3}$ is constant on $I_0$.",
+          "inputs": [
+            "4.1",
+            "L6",
+            "1.2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "step": "6.1",
+          "claim": "By step 3.1 and [L6], $\\frac{d}{dt}(J_{p}\\cdot e_{3})=J_{p}'\\cdot e_{3}=\\tau_{p}\\cdot e_{3}=0$ by step 2.1, so $J_{p}\\cdot e_{3}$ is constant on $I_0$; and by steps 3.1 and 1.2, $J_{p}\\cdot e_{3}=(R\\tilde I\\omega)\\cdot e_{3}=\\tilde I\\omega\\cdot\\gamma=A(\\omega_{1}\\gamma_{1}+\\omega_{2}\\gamma_{2})+C\\omega_{3}\\gamma_{3}$. Substituting the components of [L4] and step 1.2 and using $\\sin^{2}\\psi+\\cos^{2}\\psi=1$ from [L4] gives $\\omega_{1}\\gamma_{1}+\\omega_{2}\\gamma_{2}=\\varphi'\\sin^{2}\\theta$ and $\\omega_{3}\\gamma_{3}=(\\psi'+\\varphi'\\cos\\theta)\\cos\\theta$, so $J_{p}\\cdot e_{3}=A\\varphi'\\sin^{2}\\theta+b\\cos\\theta=a$ is constant on $I_0$.",
+          "inputs": [
+            "3.1",
+            "L6",
+            "2.1",
+            "1.2",
+            "L4",
+            "5.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-6-2",
+          "step": "6.2",
+          "claim": "Put $n:=\\sin\\psi\\,e_{1}+\\cos\\psi\\,e_{2}$, so that $n$ has $\\lVert n\\rVert_2=1$ and, by [L4] and $R'=R[\\omega]_{\\times}$, the identity $\\theta'=\\omega\\cdot n$ holds. Differentiating $\\theta'$ with [L6] gives $A\\theta''=A(\\omega'\\cdot n)+A(\\omega\\cdot n')$, where $n'=\\psi'(\\cos\\psi\\,e_{1}-\\sin\\psi\\,e_{2})$; using the first two equations of step 4.1, the components of [L4] and the values $\\omega_{1}\\cos\\psi-\\omega_{2}\\sin\\psi=-\\varphi'\\sin\\theta$, $\\omega_{2}\\sin\\psi-\\omega_{1}\\cos\\psi=\\varphi'\\sin\\theta$ and $\\gamma_{2}\\sin\\psi-\\gamma_{1}\\cos\\psi=\\sin\\theta$ of step 1.2, one computes $A(\\omega'\\cdot n)=(A-C)\\omega_{3}\\,\\varphi'\\sin\\theta+mgd\\,\\sin\\theta$ and $A(\\omega\\cdot n')=-A\\varphi'\\psi'\\sin\\theta$, hence $A\\theta''=(A-C)\\omega_{3}\\varphi'\\sin\\theta+mgd\\sin\\theta-A\\varphi'\\psi'\\sin\\theta=A\\varphi'^{2}\\sin\\theta\\cos\\theta-b\\varphi'\\sin\\theta+mgd\\sin\\theta$, the last equality by $\\omega_{3}-\\psi'=\\varphi'\\cos\\theta$ from step 1.2 and $b=C\\omega_{3}$ from step 5.1.",
+          "inputs": [
+            "L4",
+            "L6",
+            "4.1",
+            "1.2",
+            "5.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "step": "7.1",
+          "claim": "The three equations of the definition of [L5] hold: the first is $\\frac{d}{dt}\\bigl(A\\varphi'\\sin^{2}\\theta+C\\cos\\theta(\\psi'+\\varphi'\\cos\\theta)\\bigr)=a'=0$ by step 6.1, the third is $\\frac{d}{dt}\\bigl(C(\\psi'+\\varphi'\\cos\\theta)\\bigr)=b'=0$ by step 5.1, and the second is $A\\theta''=A\\varphi'^{2}\\sin\\theta\\cos\\theta-C(\\psi'+\\varphi'\\cos\\theta)\\varphi'\\sin\\theta+mgd\\sin\\theta$ by step 6.2 with $C(\\psi'+\\varphi'\\cos\\theta)=b$. Therefore $(\\varphi,\\theta,\\psi)$ is a heavy-top trajectory of [L5] with parameters $(A,C,m,d,g)$, and clauses 1-4 of [[thm-cm-heavy-top-reduction]] apply: $a$ and $b$ are constant, $\\varphi'$ and $\\psi'$ are given by the displayed formulas, the reduced energy $E$ is constant, and $A\\theta''=-U'(\\theta)$. This proves clauses 3 and 4.",
+          "inputs": [
+            "L5",
+            "6.1",
+            "5.1",
+            "6.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The hypotheses are satisfiable: any axisymmetric mass distribution with positive moments, any d>0 and any g>0 gives a model of the branch, and the chart description is a hypothesis on the interval; step 7.1 concludes the system for the given data."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero cases: Omega=0 is not part of this statement (there is no spin-rate parameter here); the torque-free case tau=0 is not the present branch, and the statement covers the zero angular velocity only through the equations of steps 4.1-5.1 which hold independently of the size of omega. The zero of the field is used in step 2.1 (tau_p . e_3 = 0)."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One interval and one description: the statement fixes one motion and one Euler-angle description on I_0, and steps 1.1-7.1 use only that data; the chart caveat records that on a subinterval the conclusions hold there."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The pole case theta in {0,pi} is excluded by the hypothesis theta(I_0) in (0,pi), and the statement and remark state explicitly that the sleeping-top and hanging configurations are not covered; degenerate inertia data are excluded by A_c>0 and C_c>0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The time-window endpoints: all constancy statements are on the open interval I_0; steps 5.1, 6.1 and 7.1 apply the zero-derivative lemma on intervals, and no boundary value is used."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "AC_omega is declared and used only for the finiteness of the defining integrals in [L2] via pthm-cm10-kinetic-splitting; the reduction identities are choice-free."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the reduction from the branch to the heavy-top system (steps 1.1-7.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction - that every heavy-top trajectory arises from a motion of the branch - is not asserted; the example on the companion page verifies the pivot balance directly on its explicit data, and no general converse is claimed."
+        }
+      ]
+    },
+    "ex-cm11-free-top-checks": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm11-principal-rotations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to select the initial unit quaternion of [[def-cm-quaternion-rotation-map-and-cover]] through the surjectivity of the double cover (its second",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm11-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]. Adopt a model of the rigid-material branch [[post-cm10-rigid-material]] that is",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm11-euler-equations",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]; the theorems below neither use nor imply any other choice principle. Adopt a model of",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be a nondegenerate open interval, let $\\omega:I\\to\\mathbb R^3$ be continuous, and consider on $\\mathbb H\\cong\\mathbb R^4$ the initial value problem $$q'(t)=\\tfrac12\\,q(t)\\,\\varphi\\bigl(\\omega(t)\\bigr),\\qquad",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm-quaternion-rotation-map-and-cover",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb H$ be the quaternion algebra with its product, its conjugate $x\\mapsto\\bar x$, its norm $N(x):=x\\bar x$, and the inverse $x^{-1}=\\bar x/N(x)$ of every nonzero element, in the notation of [[def-quaternions]]. Thus",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L5",
+          "source": "pthm-cm11-linearized-spin",
+          "source_section": "Statement",
+          "quote": "Adopt a **nondegenerate** model of the rigid-material branch [[post-cm10-rigid-material]] with **pairwise distinct** principal moments in a principal basis $(e_{1},e_{2},e_{3})$, $Ie_{j}=I_{j}e_{j}$ with $I_{j}>0$",
+          "uses": [
+            "1.3",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-sine-and-cosine-addition-formulas",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\sin(x+y)=\\sin x\\cos y+\\cos x\\sin y,$$ $$\\cos(x+y)=\\cos x\\cos y-\\sin x\\sin",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-hyperbolic-functions",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\sinh x:=\\frac{\\exp x-\\exp(-x)}2,\\qquad\\cosh x:=\\frac{\\exp x+\\exp(-x)}2,$$ $$\\tanh x:=\\frac{\\sinh x}{\\cosh x},\\qquad\\operatorname{sech}x:=\\frac1{\\cosh x}.$$ For $x\\ne0$, define $$\\coth x:=\\frac{\\cosh x}{\\sinh",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-hyperbolic-identities-and-derivatives",
+          "source_section": "Statement",
+          "quote": "For all real $x,y$, $$\\sinh(x+y)=\\sinh x\\cosh y+\\cosh x\\sinh y,\\qquad\\cosh(x+y)=\\cosh x\\cosh y+\\sinh x\\sinh y,$$ $$\\cosh^2x-\\sinh^2x=1,\\qquad(\\sinh x)'=\\cosh x,\\qquad(\\cosh x)'=\\sinh x.$$ Moreover $\\sinh:\\mathbb R\\to\\mathbb R$ is odd,",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then: 1. $f + g$ is differentiable at",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "thm-chain-rule-for-total-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $f:U\\to V\\subseteq\\mathbb R^n$ be totally differentiable at $a\\in U$ and let $g:V\\to\\mathbb R^p$ be totally differentiable at $f(a)$. Then $g\\circ f$ is totally differentiable at $a$ and $$D(g\\circ f)(a)=Dg(f(a))\\circ",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-derivative",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]]), neighbourhoods are those of [[def-neighbourhood-r]] and limit points those of [[def-limit-point-r]]. Let $A \\subseteq \\mathbb{R}$, let $f : A \\to",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "source_section": "Statement",
+          "quote": "For all $u,v,w\\in\\mathbb R^3$, the cross product is bilinear and alternating, $\\langle u\\times v,w\\rangle=\\det[u\\ v\\ w]$, and $u\\times v$ is orthogonal to both $u$ and",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L6",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [L2] applied to each model, each $j$ and each $\\Omega$ there is a torque-free motion with constant body angular velocity $\\Omega e_{j}$, and $l=\\Omega I_{j}e_{j}$, $C=\\Omega^{2}I_{j}^{2}$, $E=\\tfrac12\\Omega^{2}I_{j}$ along it; for Model S with $I_{3}=2$, $j=3$, $\\Omega=2$ this gives $l=4e_{3}$, $C=(2\\cdot2)^{2}=16$, $E=\\tfrac12\\cdot4\\cdot2=4$, and for Model A with $I_{1}=1$, $j=1$, $\\Omega=1$ it gives $l=e_{1}$, $C=1$, $E=\\tfrac12$, which is claim 1.",
+          "inputs": [
+            "L2",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "step": "1.2",
+          "claim": "For the path $\\omega$ of claim 2 in Model S, $l=I\\omega=(\\tfrac12\\cos t,\\tfrac12\\sin t,2)$ by [L1], so $l'=(-\\tfrac12\\sin t,\\tfrac12\\cos t,0)$ by [L6], while $l\\times(I^{-1}l)=l\\times(\\tfrac12\\cos t,\\tfrac12\\sin t,1)$ has components $(\\tfrac12\\sin t\\cdot1-2\\cdot\\tfrac12\\sin t,\\ -( \\tfrac12\\cos t\\cdot1-2\\cdot\\tfrac12\\cos t),\\ \\tfrac12\\cos t\\cdot\\tfrac12\\sin t-\\tfrac12\\sin t\\cdot\\tfrac12\\cos t)=(-\\tfrac12\\sin t,\\tfrac12\\cos t,0)$ by the coordinate formula for the cross product in [L6]; hence $l'=l\\times(I^{-1}l)$, so $l$ solves the torque-free equations and $\\omega$ satisfies the Euler equations by [L3].",
+          "inputs": [
+            "L1",
+            "L6",
+            "L3",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "step": "1.3",
+          "claim": "For claim 3, [L5] gives $\\lambda_{j}=\\Omega^{2}(I_{a}-I_{j})(I_{j}-I_{b})/(I_{a}I_{b})$; for Model A and $j=1$, with $a=2$, $b=3$: $\\lambda_{1}=\\tfrac{(2-1)(1-3)}{2\\cdot3}=-\\tfrac13$ and $\\kappa_{1}=1/\\sqrt3$; for $j=2$, with $a=1$, $b=3$: $\\lambda_{2}=\\tfrac{(1-2)(2-3)}{1\\cdot3}=\\tfrac13$ and $\\kappa_{2}=1/\\sqrt3$; for $j=3$, with $a=1$, $b=2$: $\\lambda_{3}=\\tfrac{(1-3)(3-2)}{1\\cdot2}=-1$ and $\\kappa_{3}=1$. In the first case the linearized field of [L5] satisfies $Ae_{2}=e_{3}$ and $Ae_{3}=-\\tfrac13e_{2}$, and the pair $\\delta_{2}(t)=\\cos(t/\\sqrt3)$, $\\delta_{3}(t)=-\\tfrac1{\\sqrt3}\\sin(t/\\sqrt3)$ satisfies $\\delta_{2}'=\\delta_{3}$ and $\\delta_{3}'=-\\tfrac13\\delta_{2}$ by [L6], so it solves the transverse linearized equations.",
+          "inputs": [
+            "L5",
+            "L6",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "The quantities of claim 2: $\\lVert\\omega(t)\\rVert_2^{2}=\\tfrac14\\cos^{2}t+\\tfrac14\\sin^{2}t+1=\\tfrac14+1=\\tfrac54$ and $C=\\langle l,l\\rangle=\\tfrac14\\cos^{2}t+\\tfrac14\\sin^{2}t+4=\\tfrac{17}4$ by the Pythagorean identity in [L6]; and $E=\\tfrac12\\omega^{\\mathsf T}I\\omega=\\tfrac12(\\tfrac14\\cos^{2}t+\\tfrac14\\sin^{2}t+2\\cdot1)=\\tfrac12(\\tfrac14+2)=\\tfrac98$. The difference $\\omega(\\tfrac\\pi2)-\\omega(0)=(-\\tfrac12,\\tfrac12,0)\\neq0$ has norm $\\tfrac{\\sqrt2}2$, so $\\omega$ is not constant.",
+          "inputs": [
+            "L6",
+            "1.2",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Since $\\omega$ is $C^{\\infty}$, hence $C^{1}$, [L4] supplies a $C^{1}$ rotation path $R:\\mathbb R\\to SO(3)$ with body angular velocity $\\omega$ and any prescribed initial orientation; then $R'=R[\\omega]_\\times$ is $C^{1}$, so $R$ is of class $C^{2}$, and $x(t,\\rho):=R(t)\\rho$ (that is, $c\\equiv0$) is a motion of Model S with body angular velocity $\\omega$ and $l$ as in step 1.2. Its balance holds: $L_c=Rl$ by [L3], so $(Rl)'=R'l+Rl'=R(\\omega\\times l+l')=0$ because $l'=l\\times(I^{-1}l)=l\\times\\omega=-\\omega\\times l$ from step 1.2 and the alternation of the cross product in [L6]; hence the motion is torque-free and realizes claim 2.",
+          "inputs": [
+            "L4",
+            "1.2",
+            "L3",
+            "L6",
+            "2.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "In the intermediate case $j=2$, the same formulas give $Ae_{1}=e_{3}$ and $Ae_{3}=\\tfrac13e_{1}$, so the transverse system is $\\delta_{1}'=\\delta_{3}$, $\\delta_{3}'=\\tfrac13\\delta_{1}$; with $\\delta_{1}(0)=1$, $\\delta_{3}(0)=0$ the $\\cosh,\\sinh$ solution of [L5] is $\\delta_{1}(t)=\\cosh(t/\\sqrt3)$, $\\delta_{3}(t)=\\tfrac1{\\sqrt3}\\sinh(t/\\sqrt3)$, and $\\delta_{1}$ is unbounded on $[0,\\infty)$ by [L6]; hence the linearized system at the intermediate spin of Model A has an unbounded solution, which is claim 3.",
+          "inputs": [
+            "L5",
+            "L6",
+            "1.3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The declared data are satisfiable: both matrices are symmetric positive definite and the models exist; step 1.1 instantiates the principal-axis claims on them."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero cases: Omega=0 is included in claim 1 and gives the zero angular velocity with C=E=0; the constant m and the zero of the cross product are used in step 1.2."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One axis and one model at a time: each claim fixes a single model and axis, and steps 1.1-3.2 treat each case separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy: the symmetric model has I_1=I_2, which is why claim 3 is checked on the asymmetric model with distinct moments; the two coincident moments of model S are used only through the explicit solution of steps 1.2-2.1 and never through the linearization theorem."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The interval is all of R in every claim, so the endpoints play no role; the sine and cosine functions used in steps 1.2-1.3 are global."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is needed for the arithmetic; AC_omega enters only in step 2.1 through the quaternion lift that realises the path as a motion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the verification of the displayed values and equations, carried out in steps 1.1-3.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse reading (that the displayed data are the only ones with those invariants) is not claimed and is false in general; no converse appears in the statement."
+        }
+      ]
+    },
+    "cex-cm11-invariants-do-not-force-uniform-rotation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "post-cm10-rigid-material",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **rigid-material model** branch, in the spacetime and frames of [[post-cm01-spacetime]] and [[post-cm01-frames]]. **(i) Reference mass distribution.** A rigid-material model",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "ex-cm11-free-top-checks",
+          "source_section": "Example",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the quaternion constructions below. Consider two **declared** models of the rigid-material branch [[post-cm10-rigid-material]], each",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "pthm-cm11-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]. Adopt a model of the rigid-material branch [[post-cm10-rigid-material]] that is",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-cm11-free-top-checks",
+          "source_section": "Example",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the quaternion constructions below. Consider two **declared** models of the rigid-material branch [[post-cm10-rigid-material]], each",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$ These are real power series in the sense of",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "The motion of [F2] is a torque-free motion of model S on $\\mathbb R$, its angular momentum about the centre of mass is constant (with $\\lVert L_c\\rVert_2^{2}=\\tfrac{17}4$), and its rotational kinetic energy is constantly $\\tfrac98$; hence all hypotheses of the refuted statement are satisfied.",
+          "inputs": [
+            "F2",
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "By [F3], $\\omega(\\tfrac\\pi2)-\\omega(0)=(-\\tfrac12,\\tfrac12,0)$, whose Euclidean norm is $\\tfrac{\\sqrt2}2\\neq0$; hence $\\omega(\\tfrac\\pi2)\\neq\\omega(0)$, so the body angular velocity of the motion is not constant in time.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The hypotheses of the refuted statement hold along the motion by step 1.1, while its asserted conclusion fails by step 2.1; therefore the statement is false.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The counterexample is nonempty: the model and motion of the companion example exist, and step 1.1 verifies that they meet the hypotheses of the refuted statement."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The zero case of the difference used to refute the conclusion is treated in step 2.1: the displayed two times give a nonzero difference, so the negation is witnessed by a nonzero value."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One motion and one model suffice to refute a universally quantified statement, and step 1.1 fixes exactly one model and one motion."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy of the inertia data is immaterial here: the model diag(1,1,2) has repeated transverse moments but is nondegenerate, and the refutation uses only the explicit solution."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The endpoints of the time interval are not used: the motion is defined on all of R and the two times 0 and pi/2 are interior points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used in the refutation itself; the realisability of the path as a motion is quoted from the companion example under its declared hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the verification that the hypotheses of the refuted statement hold (step 1.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction is the exhibition of the failure of its conclusion (steps 2.1 and 3.1), which is what makes the statement false."
+        }
+      ]
+    },
+    "ex-cm11-intermediate-axis-escape": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "def-cm10-inertia-tensor",
+          "source_section": "Definition",
+          "quote": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass distribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred reference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable Choice",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "pthm-cm10-principal-axes",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to make the integrals finite. Adopt the model of [[post-cm10-rigid-material]] and its inertia data ([[def-cm10-inertia-tensor]]): the reference",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm10-rigid-material",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **rigid-material model** branch, in the spacetime and frames of [[post-cm01-spacetime]] and [[post-cm01-frames]]. **(i) Reference mass distribution.** A rigid-material model",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "ex-cm11-free-top-checks",
+          "source_section": "Example",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the quaternion constructions below. Consider two **declared** models of the rigid-material branch [[post-cm10-rigid-material]], each",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm11-nonlinear-spin-stability",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only to select initial unit quaternions through the double cover of [[def-cm-quaternion-rotation-map-and-cover]]. Adopt a **nondegenerate** model of",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "pthm-cm11-torque-free-invariants",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the integrals of [[pthm-cm10-kinetic-splitting]]. Adopt a model of the rigid-material branch [[post-cm10-rigid-material]] that is",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-of-square-roots",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]). Then every $a \\in F$ with $a \\ge 0$ has a **unique** $s \\in F$ with $s \\ge 0$ and $s^2 = a$; we write $s = \\sqrt{a}$. Consequently the positive elements of $F$ are",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-interval",
+          "source_section": "Definition",
+          "quote": "Throughout, $\\mathbb{R}$ is the complete ordered field ([[def-complete-ordered-field]], [[def-ordered-field]]) with its order ([[def-real-order]]). A subset $I \\subseteq \\mathbb{R}$ is **order-convex** when $$x, y \\in I \\text{ and } x \\le",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cm01-units",
+          "source_section": "Definition",
+          "quote": "**(a) Dimensions.** Write $\\ell$, $\\tau$, $\\mu$ for the three independent *dimension symbols* of length, duration and mass. A **dimension** is an element of the free abelian group generated by $\\ell,\\tau,\\mu$, that is, a triple",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "With $I_{1}=1$, $I_{2}=2$, $I_{3}=3$ and $L=1$: $1/I_{1}-1/I_{2}=\\tfrac12$, $1/I_{2}-1/I_{3}=\\tfrac16$, so $a^{2}=\\tfrac{1/2}{1/6}=3$ and $a=\\sqrt3>0$ by [L4]; then $c_{0}=a\\,(1/I_{2}-1/I_{3})\\,\\tfrac{\\sqrt3}{2}\\lvert L\\rvert=\\sqrt3\\cdot\\tfrac16\\cdot\\tfrac{\\sqrt3}{2}=\\tfrac{3}{12}=\\tfrac14$ by [L4]. Further $1+a^{2}=1+3=4$, so $\\delta_{0}=\\tfrac{\\lvert L\\rvert}{2\\sqrt{1+a^{2}}}=\\tfrac1{2\\cdot2}=\\tfrac14$ by [L4] and $\\varepsilon_{0}=\\tfrac{\\lvert L\\rvert}{2}=\\tfrac12$, which is claim 1.",
+          "inputs": [
+            "L4",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Writing $s=\\sqrt{1-4q^{2}}$, one has $s^{2}=1-4q^{2}$; hence $C(l^{q})=q^{2}+s^{2}+3q^{2}=4q^{2}+1-4q^{2}=1$ and $E(l^{q})=\\tfrac12\\bigl(q^{2}+\\tfrac{s^{2}}{2}+\\tfrac{3q^{2}}{3}\\bigr)=\\tfrac12\\bigl(q^{2}+\\tfrac{1-4q^{2}}{2}+q^{2}\\bigr)=\\tfrac12\\cdot\\tfrac12=\\tfrac14$ by [L4]. For $l_{0}=e_{2}$: $C(l_{0})=1$ and $E(l_{0})=\\tfrac12\\langle e_{2},I^{-1}e_{2}\\rangle=\\tfrac12\\cdot\\tfrac12=\\tfrac14$. This is claim 2, and by [L3] the perturbed datum and the spin datum lie on the same invariant level.",
+          "inputs": [
+            "L4",
+            "L3",
+            "1.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "For the proximity bound: $\\lVert l^{q}-l_{0}\\rVert_2^{2}=q^{2}+(s-1)^{2}+3q^{2}=4q^{2}+(1-s)^{2}$, and $1-s=\\tfrac{1-s^{2}}{1+s}=\\tfrac{4q^{2}}{1+s}\\le4q^{2}$ because $s\\ge0$; with $q=\\tfrac1{400}$, $4q^{2}=\\tfrac{4}{160000}=\\tfrac1{40000}$ and $(1-s)^{2}\\le(4q^{2})^{2}=\\tfrac{16}{400^{4}}=\\tfrac{1}{16\\cdot10^{8}}<\\tfrac{1}{10^{9}}$, so $\\lVert l^{q}-l_{0}\\rVert_2^{2}\\le\\tfrac1{40000}+\\tfrac1{10^{9}}<\\tfrac1{10000}$, whence $\\lVert l^{q}-l_{0}\\rVert_2<\\tfrac1{100}$ by [L4] applied to the nonnegative squares. Moreover $q=\\tfrac1{400}<\\tfrac1{100}=\\min\\{\\delta_{0},\\tfrac1{100}\\}$ by step 1.1. This is claim 3.",
+          "inputs": [
+            "L4",
+            "1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "Apply clause 3 of [[pthm-cm11-nonlinear-spin-stability]] with $\\delta=\\tfrac1{100}$ and $q=\\tfrac1{400}$, which is admissible by step 2.2 and [L2]: there is a torque-free motion of model A with $\\lVert l(0)-e_{2}\\rVert_2<\\tfrac1{100}$ and a time $0\\le t\\le c_{0}^{-1}\\log(\\delta_{0}/q)$ with $\\lVert l(t)-e_{2}\\rVert_2\\ge\\varepsilon_{0}$. With the constants of step 1.1, $c_{0}^{-1}\\log(\\delta_{0}/q)=4\\log\\bigl(\\tfrac{1/4}{1/400}\\bigr)=4\\log100$ and $\\varepsilon_{0}=\\tfrac12$, so the escape-time bound and escape radius of claim 4 follow; by [L3] the motion's $l$-path is defined for all times, so the escape time is finite as displayed.",
+          "inputs": [
+            "2.2",
+            "L2",
+            "1.1",
+            "L3",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The declared data are satisfiable: the matrix diag(1,2,3) is positive definite and the perturbed datum l^q is a well-defined element of R^3; step 1.2 checks the invariants explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero cases: q>0 is fixed, and the unperturbed case q=0 is the spin datum l_0 itself, treated as the reference point in step 1.2; no quantity is used at a zero where it would be undefined."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "A single model, axis and perturbation are used, exactly as required for an explicit instance; steps 1.1-3.1 fix them once."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy is excluded by I_1<I_2<I_3; the strict ordering is used in step 1.1 to make a and c_0 positive and in the supplier quoted in step 1.3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The escape time bound is a finite-time statement with no boundary value; the trajectory of step 3.1 is defined for all real times by the global existence of the supplier."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is needed for the arithmetic; the realisability clause quoted from the supplier carries its own countable-choice hypothesis for the quaternion construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the verification of the constants, the invariant level and the proximity bound in steps 1.1-2.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction is the escape conclusion: the motion escapes the ball of radius one half by the quoted supplier statement instantiated in step 3.1."
+        }
+      ]
+    },
+    "ex-cm11-heavy-top-steady-precession": {
+      "citations": [
+        {
+          "fact": "L1",
+          "source": "pthm-cm11-top-reduction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only for the finiteness of the defining integrals of the model's inertial quantities. Adopt the heavy symmetric top branch [[post-cm11-heavy-top]]",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L1",
+          "source": "post-cm11-heavy-top",
+          "source_section": "Postulate",
+          "quote": "Adopt as physical assumptions of the framework the following **heavy symmetric top branch** of the rigid-material model, in the setting of [[post-cm10-rigid-material]]. **(i) Setting.** A model of the branch carries the data of",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-euler-angle-angular-velocity",
+          "source_section": "Statement",
+          "quote": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $\\varphi,\\theta,\\psi:I\\to\\mathbb R$ be differentiable with $\\theta(I)\\subseteq(0,\\pi)$, and put",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "pthm-cm11-top-reduction",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only for the finiteness of the defining integrals of the model's inertial quantities. Adopt the heavy symmetric top branch [[post-cm11-heavy-top]]",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L2",
+          "source": "lem-cm-coordinate-rotation-matrices",
+          "source_section": "Statement",
+          "quote": "For $a\\in\\mathbb R$ define, in the standard basis of $\\mathbb R^3$, $$R_z(a):=\\begin{pmatrix}\\cos a&-\\sin a&0\\\\ \\sin a&\\cos a&0\\\\ 0&0&1\\end{pmatrix},\\qquad R_y(a):=\\begin{pmatrix}\\cos a&0&\\sin a\\\\ 0&1&0\\\\ -\\sin a&0&\\cos a\\end{pmatrix}\\in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "source_section": "Definition",
+          "quote": "**Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map $$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L3",
+          "source": "thm-cm-heavy-top-reduction",
+          "source_section": "Statement",
+          "quote": "Fix the parameters $A>0$, $C>0$, $m>0$, $d>0$, $g>0$ and let $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ be a heavy-top trajectory of [[def-cm-euler-angle-parametrization-and-heavy-top-system]] on an interval $I$",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-sine-and-cosine-derivatives",
+          "source_section": "Statement",
+          "quote": "The functions $\\sin$ and $\\cos$ are differentiable on $\\mathbb R$, with $$(\\sin x)'=\\cos x,\\qquad(\\cos x)'=-\\sin x.$$ Also $\\sin0=0$ and",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-sine-and-cosine-by-power-series",
+          "source_section": "Definition",
+          "quote": "For $x\\in\\mathbb R$, define $$\\sin x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n+1}}{(2n+1)!},\\qquad\\cos x:=\\sum_{n=0}^{\\infty}\\frac{(-1)^nx^{2n}}{(2n)!}.$$ These are real power series in the sense of",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "cor-trigonometric-parity-and-pythagorean-identity",
+          "source_section": "Statement",
+          "quote": "For every real $x$, $$\\sin(-x)=-\\sin x,\\qquad\\cos(-x)=\\cos x,\\qquad\\sin^2x+\\cos^2x=1.$$ Consequently $|\\sin x|\\le1$ and $|\\cos",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "thm-algebra-of-derivatives",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\mathbb{R}$, let $c \\in A$ be a limit point of $A$ ([[def-limit-point-r]]), let $f, g : A \\to \\mathbb{R}$ be differentiable at $c$ ([[def-derivative]]) and let $\\alpha \\in \\mathbb{R}$. Then: 1. $f + g$ is differentiable at",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-cross-product-in-r3",
+          "source_section": "Definition",
+          "quote": "For $u=(u_x,u_y,u_z)$ and $v=(v_x,v_y,v_z)$ in $\\mathbb R^3$, define $u\\times v=(u_yv_z-u_zv_y,\\,u_zv_x-u_xv_z,\\,u_xv_y-u_yv_x)$. This is the right-handed **cross product**. The displayed coordinates are those of the standard basis",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "L4",
+          "source": "def-euclidean-inner-product",
+          "source_section": "Definition",
+          "quote": "Let $n \\in \\mathbb{N}$. A natural number is a von Neumann natural, that is a set, and $n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]], [[lem-nat-order-is-membership]]), so $$\\mathbb{R}^{n} \\;=\\; \\{\\, x \\;:\\; x \\text{ is a function } n",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "step": "1.1",
+          "claim": "By [L2] with $\\varphi'=1$, $\\theta'=0$, $\\psi'=2$, $\\theta_{0}=\\pi/3$ and $\\psi(t)=2t$: $\\omega(t)=\\bigl(-\\sin\\theta_{0}\\cos(2t),\\ \\sin\\theta_{0}\\sin(2t),\\ 2+\\cos\\theta_{0}\\bigr)=\\bigl(-\\tfrac{\\sqrt3}2\\cos(2t),\\ \\tfrac{\\sqrt3}2\\sin(2t),\\ \\tfrac52\\bigr)$ and $\\gamma(t)=\\bigl(-\\tfrac{\\sqrt3}2\\cos(2t),\\ \\tfrac{\\sqrt3}2\\sin(2t),\\ \\tfrac12\\bigr)$ by [L4].",
+          "inputs": [
+            "L2",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "step": "2.1",
+          "claim": "Compute both sides of the balance with $\\tilde I=\\mathrm{diag}(3,3,1)$: by [L4], $\\omega'=\\bigl(\\sqrt3\\sin(2t),\\ \\sqrt3\\cos(2t),\\ 0\\bigr)$, so $\\tilde I\\omega'=\\bigl(3\\sqrt3\\sin(2t),\\ 3\\sqrt3\\cos(2t),\\ 0\\bigr)$, and with $\\tilde I\\omega=\\bigl(-\\tfrac{3\\sqrt3}2\\cos(2t),\\ \\tfrac{3\\sqrt3}2\\sin(2t),\\ \\tfrac52\\bigr)$, the coordinate formula for the cross product gives $(\\omega\\times\\tilde I\\omega)_{1}=\\tfrac{5\\sqrt3}4\\sin(2t)-\\tfrac{15\\sqrt3}4\\sin(2t)=-\\tfrac{5\\sqrt3}2\\sin(2t)$, $(\\omega\\times\\tilde I\\omega)_{2}=-\\tfrac{15\\sqrt3}4\\cos(2t)+\\tfrac{5\\sqrt3}4\\cos(2t)=-\\tfrac{5\\sqrt3}2\\cos(2t)$ and $(\\omega\\times\\tilde I\\omega)_{3}=0$. Hence the left side is $\\bigl(\\tfrac{\\sqrt3}2\\sin(2t),\\ \\tfrac{\\sqrt3}2\\cos(2t),\\ 0\\bigr)$. On the right, $e_{3}\\times\\gamma=(-\\gamma_{2},\\gamma_{1},0)=\\bigl(-\\tfrac{\\sqrt3}2\\sin(2t),\\ -\\tfrac{\\sqrt3}2\\cos(2t),\\ 0\\bigr)$ and $mgd=1$, so the right side is the same vector; the balance holds for every $t$.",
+          "inputs": [
+            "L4",
+            "1.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "step": "2.2",
+          "claim": "With $\\varphi'=1$, $\\theta'=0$, $\\psi'=2$, $\\sin^{2}\\theta_{0}=\\tfrac34$ and $\\cos\\theta_{0}=\\tfrac12$ by [L4]: $b=C(\\psi'+\\varphi'\\cos\\theta_{0})=1\\cdot(2+\\tfrac12)=\\tfrac52$ and $a=A\\varphi'\\sin^{2}\\theta_{0}+b\\cos\\theta_{0}=3\\cdot\\tfrac34+\\tfrac52\\cdot\\tfrac12=\\tfrac94+\\tfrac54=\\tfrac72$.",
+          "inputs": [
+            "L4",
+            "1.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "step": "3.1",
+          "claim": "The constraint $c(t)+R(t)(-de_{3})=dR(t)e_{3}-dR(t)e_{3}=0$ holds by the definition of $c$; hence with step 2.1 the data constitute a motion of the branch satisfying the adopted pivot balance, and clauses 1-2 of [[pthm-cm11-top-reduction]] apply.",
+          "inputs": [
+            "2.1",
+            "L1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "step": "3.2",
+          "claim": "The reduced energy: $E=\\tfrac12A\\theta'^{2}+\\tfrac{(a-b\\cos\\theta_{0})^{2}}{2A\\sin^{2}\\theta_{0}}+\\tfrac{b^{2}}{2C}+mgd\\cos\\theta_{0}=\\tfrac{(9/4)^{2}}{2\\cdot3\\cdot(3/4)}+\\tfrac{25/4}{2}+\\tfrac12=\\tfrac{9}{8}+\\tfrac{25}{8}+\\tfrac48=\\tfrac{38}{8}=\\tfrac{19}{4}$, where $a-b\\cos\\theta_{0}=\\tfrac72-\\tfrac54=\\tfrac94$ by step 2.2.",
+          "inputs": [
+            "2.2",
+            "L3",
+            "L4",
+            "given"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "step": "4.1",
+          "claim": "The three equations of the heavy-top system of [L3] hold for the triple: the first and third are the statements that $a$ and $b$ of step 2.2 are constant, and the second is $0=A\\varphi'^{2}\\sin\\theta_{0}\\cos\\theta_{0}-C(\\psi'+\\varphi'\\cos\\theta_{0})\\varphi'\\sin\\theta_{0}+mgd\\sin\\theta_{0}=3\\cdot\\tfrac{\\sqrt3}4-\\tfrac{5\\sqrt3}4+\\tfrac{2\\sqrt3}4$ with $\\varphi'=1$, which vanishes by [L4]. Hence $(\\varphi,\\theta,\\psi)$ is a heavy-top trajectory with parameters $(A,C,m,d,g)=(3,1,1,1,1)$, and $A\\theta''=-U'(\\theta_{0})=0$; the conservation of $a$ and $b$ and the formulas $\\varphi'=(a-b\\cos\\theta_{0})/(A\\sin^{2}\\theta_{0})=\\tfrac{9/4}{9/4}=1$ and $\\psi'=b/C-(a-b\\cos\\theta_{0})\\cos\\theta_{0}/(A\\sin^{2}\\theta_{0})=\\tfrac52-\\tfrac{9/4\\cdot1/2}{9/4}=\\tfrac52-\\tfrac12=2$ of [L3] are consistent with the data, so the motion is a steady precession with constant nutation angle $\\pi/3$.",
+          "inputs": [
+            "L3",
+            "2.2",
+            "L4",
+            "3.1",
+            "3.2",
+            "given"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The declared branch data are satisfiable: A_c=2, C_c=1, m=d=g=1 give a model of the branch, and the angles define a C^infinity path; step 1.3 verifies the pivot constraint."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero cases: theta'=0 identically, and the zero of the reduced derivative U'(theta_0)=0 in step 4.1; the zero of mgd is not assumed since m d g=1."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "One motion is exhibited, as required; steps 1.1-4.1 fix the single path and its data."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Degeneracy: the moments A=3 and C=1 are distinct, so the top is not a spherical top, and no step relies on equal moments; the pole theta=0 is excluded by theta_0=pi/3."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The interval is all of R and the identities hold identically in t, so the endpoints play no role; step 4.1 concludes the system on R."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "No choice principle is used in this example; the quaternion constructions are not invoked, since the orientation path is given explicitly by the Euler-angle formula."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The forward direction is the verification that the displayed motion satisfies the branch balance (steps 1.1-2.1) and the heavy-top system (steps 3.1-4.1)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse direction (constructing the motion from the system alone) is not needed: the motion is displayed, and the example verifies the balance directly rather than by a converse theorem."
+        }
+      ]
+    }
+  }
+}

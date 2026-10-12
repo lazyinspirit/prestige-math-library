@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-noncompact-embedded-curve-with-no-uniform-tubular-radius.md

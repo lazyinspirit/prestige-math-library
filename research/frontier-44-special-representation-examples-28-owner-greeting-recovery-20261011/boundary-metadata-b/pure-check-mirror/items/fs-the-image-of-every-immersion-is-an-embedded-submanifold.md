@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-image-of-every-immersion-is-an-embedded-submanifold.md

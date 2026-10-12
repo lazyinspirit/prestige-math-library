@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-zeta-minus-two-vanishes-by-the-sine-factor.md

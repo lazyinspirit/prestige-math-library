@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-de-rham-map-is-a-cochain-map-without-stokes-on-simplices.md

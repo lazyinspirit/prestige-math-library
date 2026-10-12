@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-thom-euler-class-of-an-oriented-vector-bundle.md

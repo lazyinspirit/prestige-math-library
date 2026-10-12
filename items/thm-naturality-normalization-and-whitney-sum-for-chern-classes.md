@@ -69,13 +69,7 @@ $H^*(X,U)\to H^*(X)$ with the kernel of restriction to $U$
 
 1.2 Rank conventions: by [F1] one has $c_0=1$, $c_i=0$ above the rank, $c(0_B)=1$, and on a line $c_1(L)=e(L_{\mathbb R})$ with $c_i(L)=0$ for $i\geq2$; this is assertion 2 and the first part of assertion 4. [F1]
 
-1.3 If $m=0$ or $n=0$, the Whitney formula follows immediately from
-$c(0_B)=1$; hence assume $m,n\geq1$. Let $X=P(E\oplus F)$ and put
-$U_1=X\setminus P(E)$, $U_2=X\setminus P(F)$; the subsets
-$P(E),P(F)\subseteq X$ are disjoint and $U_1\cup U_2=X$. The map that sends a
-point of $U_2$, a line not contained in $F$, to the line spanned by its
-$E$-component is a deformation retraction of $U_2$ onto $P(E)$, and
-symmetrically $U_1$ deformation retracts onto $P(F)$. [F1, F8, given]
+1.3 If $m=0$ or $n=0$, the Whitney formula follows immediately from $c(0_B)=1$; hence assume $m,n\geq1$. Let $X=P(E\oplus F)$ and put $U_1=X\setminus P(E)$, $U_2=X\setminus P(F)$; the subsets $P(E),P(F)\subseteq X$ are disjoint and $U_1\cup U_2=X$. The map that sends a point of $U_2$, a line not contained in $F$, to the line spanned by its $E$-component is a deformation retraction of $U_2$ onto $P(E)$, and symmetrically $U_1$ deformation retracts onto $P(F)$. [F1, F8, given]
 
 2.1 Applying $f^*$ to the defining relation of $E$ and using step 1.1 expresses $x_{f^*E}^m$ as a monic relation with coefficients $f^*c_i(E)$; by uniqueness in [F2] these are the coefficients of $f^*E$, so $c_i(f^*E)=f^*c_i(E)$ for all $i$, which is assertion 1. [F2, step 1.1]
 

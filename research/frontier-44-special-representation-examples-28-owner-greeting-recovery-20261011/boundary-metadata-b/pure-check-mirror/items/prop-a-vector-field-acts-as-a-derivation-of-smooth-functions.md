@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-vector-field-acts-as-a-derivation-of-smooth-functions.md

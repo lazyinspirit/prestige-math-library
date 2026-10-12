@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-quotient-of-an-abelian-group-is-abelian.md

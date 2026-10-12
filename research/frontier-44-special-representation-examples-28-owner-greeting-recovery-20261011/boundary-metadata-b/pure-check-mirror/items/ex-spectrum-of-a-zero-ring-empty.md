@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-spectrum-of-a-zero-ring-empty.md

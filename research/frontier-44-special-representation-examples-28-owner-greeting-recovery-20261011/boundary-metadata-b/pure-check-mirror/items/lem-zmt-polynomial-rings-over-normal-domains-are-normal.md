@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-zmt-polynomial-rings-over-normal-domains-are-normal.md

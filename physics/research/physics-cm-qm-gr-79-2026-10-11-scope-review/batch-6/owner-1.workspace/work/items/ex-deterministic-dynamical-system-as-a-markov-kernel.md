@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-deterministic-dynamical-system-as-a-markov-kernel.md

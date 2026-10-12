@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group.md

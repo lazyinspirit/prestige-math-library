@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pcf-has-no-holes-for-progressive-intervals.md

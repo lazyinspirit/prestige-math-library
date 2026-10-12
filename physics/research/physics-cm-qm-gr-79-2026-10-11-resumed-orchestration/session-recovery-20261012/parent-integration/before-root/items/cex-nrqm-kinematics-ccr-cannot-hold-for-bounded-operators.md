@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-kinematics-ccr-cannot-hold-for-bounded-operators.md

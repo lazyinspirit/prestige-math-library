@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-lie-algebra-does-not-detect-nonsmooth-group-scheme.md

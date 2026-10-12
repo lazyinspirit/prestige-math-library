@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-boundary-point-whose-complementary-component-contains-another-point-is-regular.md

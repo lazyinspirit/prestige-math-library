@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-ideals-and-quotients-of-semisimple-lie-algebras.md

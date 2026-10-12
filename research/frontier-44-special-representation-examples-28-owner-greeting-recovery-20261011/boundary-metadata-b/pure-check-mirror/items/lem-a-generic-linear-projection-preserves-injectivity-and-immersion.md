@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-generic-linear-projection-preserves-injectivity-and-immersion.md

@@ -35,7 +35,7 @@ Original reservation (read together with the full required sources above):
 
 A page `gr-tensors-and-observers`; B companion `gr-tensors-and-observers-examples`. Category `general-relativity`; library `physics`.
 Order 235. Exact source inventory: `research/first-principles-2026-10-03/relativity/scaffold/proposed-inventory-and-checks.json`.
-Declared earlier prerequisites: `gr-framework-and-geometry`.
+Declared earlier prerequisites: `gr-framework-and-geometry`, `distributions-integral-manifolds-and-the-frobenius-theorem`, `roots-and-rational-powers`, and `the-exterior-derivative-and-cartan-calculus`. The latter three supplier pages were adopted in the approved 2026-10-10 closure recorded in `research/physics-cm-qm-gr-79-2026-10-11-supplier-page-closure/batch66-author-requires-adoption.json`; the Original reservation below remains historical.
 
 Original reservation (read together with the full required sources above):
 

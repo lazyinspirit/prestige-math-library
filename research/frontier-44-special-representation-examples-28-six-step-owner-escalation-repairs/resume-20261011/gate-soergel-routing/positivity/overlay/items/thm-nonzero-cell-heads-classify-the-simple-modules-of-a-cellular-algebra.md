@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra.md

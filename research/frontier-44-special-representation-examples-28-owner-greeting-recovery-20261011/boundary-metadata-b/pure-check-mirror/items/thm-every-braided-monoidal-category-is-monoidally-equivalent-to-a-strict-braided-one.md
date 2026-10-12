@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-braided-monoidal-category-is-monoidally-equivalent-to-a-strict-braided-one.md

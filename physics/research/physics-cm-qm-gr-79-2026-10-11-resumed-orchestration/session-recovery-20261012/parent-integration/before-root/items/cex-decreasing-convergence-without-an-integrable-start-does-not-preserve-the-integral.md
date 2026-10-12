@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-decreasing-convergence-without-an-integrable-start-does-not-preserve-the-integral.md

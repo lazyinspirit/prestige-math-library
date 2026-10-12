@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-c-one-bijection-has-a-c-one-inverse.md

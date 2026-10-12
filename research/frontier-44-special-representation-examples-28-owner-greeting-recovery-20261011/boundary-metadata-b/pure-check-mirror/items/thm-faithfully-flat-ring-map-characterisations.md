@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-faithfully-flat-ring-map-characterisations.md

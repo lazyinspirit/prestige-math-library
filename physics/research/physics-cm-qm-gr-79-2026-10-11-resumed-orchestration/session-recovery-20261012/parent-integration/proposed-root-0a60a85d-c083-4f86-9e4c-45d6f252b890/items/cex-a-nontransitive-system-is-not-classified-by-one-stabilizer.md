@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-nontransitive-system-is-not-classified-by-one-stabilizer.md

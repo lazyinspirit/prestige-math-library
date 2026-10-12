@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-radical-and-unipotent-radical-of-an-algebraic-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-picard-operator-preserves-a-closed-curve-ball.md

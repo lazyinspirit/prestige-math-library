@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-spectrum-with-structure-sheaf-locally-ringed.md

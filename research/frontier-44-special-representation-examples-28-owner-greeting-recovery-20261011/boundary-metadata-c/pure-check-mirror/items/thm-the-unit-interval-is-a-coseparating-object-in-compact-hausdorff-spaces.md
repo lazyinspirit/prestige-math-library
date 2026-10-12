@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-unit-interval-is-a-coseparating-object-in-compact-hausdorff-spaces.md

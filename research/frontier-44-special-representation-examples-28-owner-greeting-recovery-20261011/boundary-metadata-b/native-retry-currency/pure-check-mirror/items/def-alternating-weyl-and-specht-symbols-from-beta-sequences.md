@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-alternating-weyl-and-specht-symbols-from-beta-sequences.md

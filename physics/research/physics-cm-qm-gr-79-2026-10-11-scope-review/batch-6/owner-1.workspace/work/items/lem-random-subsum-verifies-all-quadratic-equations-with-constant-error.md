@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-random-subsum-verifies-all-quadratic-equations-with-constant-error.md

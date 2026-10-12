@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-sign-cancellation-in-an-a2-bruhat-diamond.md

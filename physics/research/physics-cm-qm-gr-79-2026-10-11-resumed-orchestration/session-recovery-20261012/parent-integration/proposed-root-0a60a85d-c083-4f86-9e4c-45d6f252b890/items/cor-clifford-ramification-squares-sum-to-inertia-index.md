@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-clifford-ramification-squares-sum-to-inertia-index.md

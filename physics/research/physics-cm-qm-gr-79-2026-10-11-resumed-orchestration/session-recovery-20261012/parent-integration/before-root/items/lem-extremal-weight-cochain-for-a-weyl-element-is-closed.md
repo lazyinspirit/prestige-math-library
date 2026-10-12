@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-extremal-weight-cochain-for-a-weyl-element-is-closed.md

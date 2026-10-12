@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-symmetries-prescribed-external-coupling.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gauss-bonnet-expression-is-independent-of-the-metric.md

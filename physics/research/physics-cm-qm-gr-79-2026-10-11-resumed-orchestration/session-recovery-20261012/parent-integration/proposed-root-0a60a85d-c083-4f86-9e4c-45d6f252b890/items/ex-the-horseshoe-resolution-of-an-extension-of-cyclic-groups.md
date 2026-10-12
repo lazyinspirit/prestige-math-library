@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-horseshoe-resolution-of-an-extension-of-cyclic-groups.md

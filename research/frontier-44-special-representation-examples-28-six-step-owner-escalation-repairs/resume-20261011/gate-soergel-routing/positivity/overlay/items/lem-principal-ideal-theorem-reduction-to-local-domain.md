@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-principal-ideal-theorem-reduction-to-local-domain.md

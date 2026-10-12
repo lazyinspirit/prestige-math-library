@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-ordinary-barycentric-subdivision-cannot-fix-a-nonconstant-simplicial-edge.md

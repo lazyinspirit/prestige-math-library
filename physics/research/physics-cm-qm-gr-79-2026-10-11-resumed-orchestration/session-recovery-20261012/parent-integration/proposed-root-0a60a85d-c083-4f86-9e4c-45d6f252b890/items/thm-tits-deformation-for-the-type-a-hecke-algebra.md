@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tits-deformation-for-the-type-a-hecke-algebra.md

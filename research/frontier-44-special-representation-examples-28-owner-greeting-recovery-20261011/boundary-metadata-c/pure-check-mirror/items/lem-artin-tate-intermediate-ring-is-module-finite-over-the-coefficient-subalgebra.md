@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-artin-tate-intermediate-ring-is-module-finite-over-the-coefficient-subalgebra.md

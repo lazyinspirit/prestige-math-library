@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-oriented-atlases-and-continuous-tangent-space-orientations-are-equivalent-in-positive-dimension.md

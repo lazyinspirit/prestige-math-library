@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chebyshev-weak-law-for-uncorrelated-arrays.md

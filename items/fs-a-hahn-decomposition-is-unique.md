@@ -36,8 +36,7 @@ sources:
 
 **Proof technique:** direct.
 
-1.1 Every measurable subset of $X$ is both positive and negative for the zero [L1]
-measure, so both $$\varnothing\sqcup X\qquad\text{and}\qquad \{0\}\sqcup\{1\}$$ are Hahn decompositions.
+1.1 Every measurable subset of $X$ is both positive and negative for the zero [L1] measure, so both $$\varnothing\sqcup X\qquad\text{and}\qquad \{0\}\sqcup\{1\}$$ are Hahn decompositions. [L1]
 
-2.1 These decompositions are different, so exact uniqueness fails. This is [L1, step 1.1] ∎
-compatible with [L1] because the differing set is null.
+2.1 These decompositions are different, so exact uniqueness fails. This is [L1, step 1.1] ∎ compatible with [L1] because the differing set is null. [L1, step 1.1]
+

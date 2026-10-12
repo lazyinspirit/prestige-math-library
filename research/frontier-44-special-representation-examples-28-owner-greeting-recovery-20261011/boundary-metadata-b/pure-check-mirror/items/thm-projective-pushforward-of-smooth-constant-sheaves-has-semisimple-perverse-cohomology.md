@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-projective-pushforward-of-smooth-constant-sheaves-has-semisimple-perverse-cohomology.md

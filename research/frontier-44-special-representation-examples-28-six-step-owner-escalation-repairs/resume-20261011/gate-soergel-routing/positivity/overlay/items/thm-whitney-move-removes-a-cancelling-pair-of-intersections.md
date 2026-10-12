@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-whitney-move-removes-a-cancelling-pair-of-intersections.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a2-regular-dominant-verma-embedding-poset.md

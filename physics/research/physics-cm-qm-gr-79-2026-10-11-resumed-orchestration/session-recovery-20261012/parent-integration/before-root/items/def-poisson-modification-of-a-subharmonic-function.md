@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-poisson-modification-of-a-subharmonic-function.md

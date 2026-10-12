@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-controlled-dynamics-continuum-contribution-in-perturbation.md

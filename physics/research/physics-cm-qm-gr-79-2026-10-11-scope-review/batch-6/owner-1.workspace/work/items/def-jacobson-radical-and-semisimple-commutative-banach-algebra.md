@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-jacobson-radical-and-semisimple-commutative-banach-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-the-cone-criterion-from-the-general-long-exact-sequence.md

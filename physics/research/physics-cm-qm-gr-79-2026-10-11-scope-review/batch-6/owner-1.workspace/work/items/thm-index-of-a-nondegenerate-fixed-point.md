@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-index-of-a-nondegenerate-fixed-point.md

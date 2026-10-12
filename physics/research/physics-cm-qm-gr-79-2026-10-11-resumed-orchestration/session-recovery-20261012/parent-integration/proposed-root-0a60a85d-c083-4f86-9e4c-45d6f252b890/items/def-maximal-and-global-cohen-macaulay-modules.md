@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-maximal-and-global-cohen-macaulay-modules.md

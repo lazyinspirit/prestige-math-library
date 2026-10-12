@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducibility-criteria-and-open-subspaces.md

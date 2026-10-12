@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-unshifted-qr-converges-under-separated-moduli-and-leading-minor-hypotheses.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-minimal-derivative-is-symmetric-not-self-adjoint.md

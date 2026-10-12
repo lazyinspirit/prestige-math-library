@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-map-vacuously-transverse-to-a-submanifold-it-avoids.md

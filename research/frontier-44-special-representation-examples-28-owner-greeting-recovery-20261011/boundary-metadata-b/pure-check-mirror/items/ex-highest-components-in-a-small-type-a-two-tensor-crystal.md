@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-highest-components-in-a-small-type-a-two-tensor-crystal.md

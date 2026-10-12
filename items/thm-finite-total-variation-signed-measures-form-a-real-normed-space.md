@@ -43,14 +43,11 @@ defines a norm on it.
 
 **Proof technique:** direct.
 
-1.1 If $\nu,\mu\in\mathcal M(X,\mathcal A)$ and $a\in\mathbb R$, then the [L1, L2, L4]
-pointwise set functions $\nu+\mu$ and $a\nu$ are again signed measures because their values are finite on every measurable set and countable additivity is preserved termwise. Also [L2] gives $$|\nu+\mu|(X)\le |\nu|(X)+|\mu|(X),\qquad |a\nu|(X)=|a|\,|\nu|(X),$$ so $\nu+\mu$ and $a\nu$ remain in $\mathcal M(X,\mathcal A)$. Thus $\mathcal M(X,\mathcal A)$ is closed under the pointwise operations, and the vector-space axioms are inherited from the real-valued function space on $\mathcal A$.
+1.1 If $\nu,\mu\in\mathcal M(X,\mathcal A)$ and $a\in\mathbb R$, then the [L1, L2, L4] pointwise set functions $\nu+\mu$ and $a\nu$ are again signed measures because their values are finite on every measurable set and countable additivity is preserved termwise. Also [L2] gives $$|\nu+\mu|(X)\le |\nu|(X)+|\mu|(X),\qquad |a\nu|(X)=|a|\,|\nu|(X),$$ so $\nu+\mu$ and $a\nu$ remain in $\mathcal M(X,\mathcal A)$. Thus $\mathcal M(X,\mathcal A)$ is closed under the pointwise operations, and the vector-space axioms are inherited from the real-valued function space on $\mathcal A$. [L1, L2, L4]
 
-1.2 The formula $\|\nu\|=|\nu|(X)$ is nonnegative by definition. If $\|\nu\|=0$, [L1, L3, L4]
-then [L3] makes $X$ null for $\nu$, so every measurable set has $\nu$-value $0$ and therefore $\nu$ is the zero measure. Conversely the zero measure has variation $0$. Thus the separation axiom of [L4] holds.
+1.2 The formula $\|\nu\|=|\nu|(X)$ is nonnegative by definition. If $\|\nu\|=0$, [L1, L3, L4] then [L3] makes $X$ null for $\nu$, so every measurable set has $\nu$-value $0$ and therefore $\nu$ is the zero measure. Conversely the zero measure has variation $0$. Thus the separation axiom of [L4] holds. [L1, L3, L4]
 
-2.1 Step 1.1 already proved absolute homogeneity and the triangle inequality: [L2, L4, step 1.1]
-$$\|a\nu\|=|a|\,\|\nu\|,\qquad \|\nu+\mu\|\le \|\nu\|+\|\mu\|.$$ Hence [L4] shows that $\|\cdot\|$ is a norm.
+2.1 Step 1.1 already proved absolute homogeneity and the triangle inequality: [L2, L4, step 1.1] $$\|a\nu\|=|a|\,\|\nu\|,\qquad \|\nu+\mu\|\le \|\nu\|+\|\mu\|.$$ Hence [L4] shows that $\|\cdot\|$ is a norm. [L2, L4, step 1.1]
 
-3.1 Steps 1.1 through 2.1 prove that $\mathcal M(X,\mathcal A)$ is a real [step 1.1, step 1.2, step 2.1] ∎
-normed space.
+3.1 Steps 1.1 through 2.1 prove that $\mathcal M(X,\mathcal A)$ is a real [step 1.1, step 1.2, step 2.1] ∎ normed space. [step 1.1, step 1.2, step 2.1]
+

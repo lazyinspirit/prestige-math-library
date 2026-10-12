@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-fibrewise-linear-continuous-bundle-map-is-automatically-smooth.md

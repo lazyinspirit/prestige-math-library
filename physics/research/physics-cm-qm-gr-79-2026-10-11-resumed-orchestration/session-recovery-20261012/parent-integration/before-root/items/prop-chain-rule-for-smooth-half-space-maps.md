@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-chain-rule-for-smooth-half-space-maps.md

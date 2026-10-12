@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-completely-normal-iff-hereditarily-normal.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-kernel-row-failure-for-multiplication-by-two-computed.md

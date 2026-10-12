@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-integral-of-a-form-is-the-sum-over-an-arbitrary-atlas-without-a-partition.md

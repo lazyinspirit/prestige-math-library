@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-few-induced-copies-force-a-linearly-large-induced-subgraph-with-bounded-maximum-degree.md

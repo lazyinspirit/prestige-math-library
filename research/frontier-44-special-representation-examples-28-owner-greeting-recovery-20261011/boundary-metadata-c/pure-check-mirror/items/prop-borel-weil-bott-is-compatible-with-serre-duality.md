@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-borel-weil-bott-is-compatible-with-serre-duality.md

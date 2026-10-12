@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely.md

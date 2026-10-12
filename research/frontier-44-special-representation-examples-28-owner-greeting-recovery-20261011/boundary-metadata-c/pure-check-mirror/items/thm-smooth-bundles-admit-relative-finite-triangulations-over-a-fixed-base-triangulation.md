@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-bundles-admit-relative-finite-triangulations-over-a-fixed-base-triangulation.md

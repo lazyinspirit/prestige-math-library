@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-alexander-polynomial-from-the-first-elementary-ideal.md

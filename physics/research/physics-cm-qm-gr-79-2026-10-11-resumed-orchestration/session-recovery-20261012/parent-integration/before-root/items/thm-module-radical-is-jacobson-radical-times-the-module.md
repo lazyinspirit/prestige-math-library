@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-module-radical-is-jacobson-radical-times-the-module.md

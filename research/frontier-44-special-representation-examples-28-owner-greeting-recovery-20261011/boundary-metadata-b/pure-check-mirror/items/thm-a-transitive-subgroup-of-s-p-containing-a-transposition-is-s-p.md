@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-transitive-subgroup-of-s-p-containing-a-transposition-is-s-p.md

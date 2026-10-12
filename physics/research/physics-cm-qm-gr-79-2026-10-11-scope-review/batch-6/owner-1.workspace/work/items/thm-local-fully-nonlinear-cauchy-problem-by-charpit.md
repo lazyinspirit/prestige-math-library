@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-local-fully-nonlinear-cauchy-problem-by-charpit.md

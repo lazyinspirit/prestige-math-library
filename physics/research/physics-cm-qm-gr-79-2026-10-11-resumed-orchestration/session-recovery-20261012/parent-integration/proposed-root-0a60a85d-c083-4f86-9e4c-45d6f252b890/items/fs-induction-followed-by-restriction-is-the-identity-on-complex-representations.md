@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-induction-followed-by-restriction-is-the-identity-on-complex-representations.md

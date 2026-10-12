@@ -39,7 +39,7 @@ everywhere.
 
 1.1 The sequence from [L1] converges in $L^1$, hence is Cauchy in $L^1$. [L1, given]
 
-2.1 The same source records representatives that fail to converge almost [L1, step 1.1]
-everywhere. So representatives of a Cauchy sequence in $L^p$ need not converge pointwise almost everywhere.
+2.1 The same source records representatives that fail to converge almost [L1, step 1.1] everywhere. So representatives of a Cauchy sequence in $L^p$ need not converge pointwise almost everywhere. [L1, step 1.1]
 
 3.1 Therefore the universal claim is false. [step 2.1] ∎
+

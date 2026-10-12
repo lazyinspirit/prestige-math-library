@@ -38,5 +38,4 @@ ring, residue field, and ring of global functions are all canonically $k$.
 
 1.2 By [F1], its local ring is $k_{(0)}=k$, whose residue field is $k$. [F1, algebra]
 
-2.1 By [F2], its global sections are $k$. [F2, step 1.1, step 1.2] ∎
- 
+2.1 By [F2], its global sections are $k$. [F2, step 1.1, step 1.2] ∎  

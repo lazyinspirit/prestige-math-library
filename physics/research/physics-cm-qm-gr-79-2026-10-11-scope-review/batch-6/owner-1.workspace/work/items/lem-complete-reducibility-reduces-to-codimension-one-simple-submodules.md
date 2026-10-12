@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complete-reducibility-reduces-to-codimension-one-simple-submodules.md

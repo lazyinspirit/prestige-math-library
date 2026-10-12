@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-blowing-up-a-regular-point-is-a-contraction.md

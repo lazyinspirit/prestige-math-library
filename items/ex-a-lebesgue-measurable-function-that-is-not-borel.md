@@ -36,8 +36,7 @@ measurable.
 
 **Proof technique:** direct.
 
-1.1 Let $f:=\mathbf{1}_E$. Because $E$ is Lebesgue measurable, [L2] makes $f$ [L1, L2]
-Lebesgue measurable. [L1, L2]
+1.1 Let $f:=\mathbf{1}_E$. Because $E$ is Lebesgue measurable, [L2] makes $f$ [L1, L2] Lebesgue measurable. [L1, L2]
 
 2.1 But [step 1.1, L1]
 

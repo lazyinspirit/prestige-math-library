@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-coequalizer-not-preserved-by-a-forgetful-functor.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-discriminant-root-formula-and-repeated-root-criterion.md

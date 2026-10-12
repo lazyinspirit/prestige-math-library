@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-jucys-murphy-elements-commute-pairwise.md

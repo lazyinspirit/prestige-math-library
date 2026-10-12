@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength.md

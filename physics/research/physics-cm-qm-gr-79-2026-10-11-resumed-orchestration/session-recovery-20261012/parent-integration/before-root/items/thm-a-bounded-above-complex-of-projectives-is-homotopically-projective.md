@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-bounded-above-complex-of-projectives-is-homotopically-projective.md

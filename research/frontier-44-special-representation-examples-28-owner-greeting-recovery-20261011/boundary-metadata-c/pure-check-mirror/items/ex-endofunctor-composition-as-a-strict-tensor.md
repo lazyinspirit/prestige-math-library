@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-endofunctor-composition-as-a-strict-tensor.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schauder-basis-implies-bounded-approximation-property.md

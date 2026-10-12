@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-closed-graph-criterion-over-a-compact-hausdorff-codomain.md

@@ -43,7 +43,7 @@ but its two one-sided improper integrals do not converge.
 
 **Proof technique:** computation.
 
-1.1 Substitution $x=-t$ gives [L1]
-$$\int_{-1}^{-\varepsilon}\frac{dx}{x}=-\int_\varepsilon^1\frac{dt}{t}.$$ Thus the symmetric sum is exactly zero for every $\varepsilon>0$, and [L1] gives principal value zero.
+1.1 Substitution $x=-t$ gives [L1] $$\int_{-1}^{-\varepsilon}\frac{dx}{x}=-\int_\varepsilon^1\frac{dt}{t}.$$ Thus the symmetric sum is exactly zero for every $\varepsilon>0$, and [L1] gives principal value zero. [L1]
 
-2.1 By [L2], the right-hand integral diverges to $+\infty$; the identity in step 1.1 makes the left-hand one diverge to $-\infty$. Hence separate improper convergence fails, showing that the converse of the principal-value theorem is false. [L2, step 1.1] ∎
+2.1 By [L2], the right-hand integral diverges to $+\infty$; the identity in step 1.1 makes the left-hand one diverge to $-\infty$. Hence separate improper convergence fails, showing that the converse of the principal-value theorem is false. [L2, step 1.1]. [L2, step 1.1] ∎
+

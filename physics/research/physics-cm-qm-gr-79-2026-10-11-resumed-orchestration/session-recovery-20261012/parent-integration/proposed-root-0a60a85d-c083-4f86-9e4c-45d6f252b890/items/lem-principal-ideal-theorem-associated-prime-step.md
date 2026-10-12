@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-principal-ideal-theorem-associated-prime-step.md

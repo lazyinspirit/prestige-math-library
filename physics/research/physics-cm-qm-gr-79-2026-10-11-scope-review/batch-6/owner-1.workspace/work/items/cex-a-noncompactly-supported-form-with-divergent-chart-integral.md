@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-noncompactly-supported-form-with-divergent-chart-integral.md

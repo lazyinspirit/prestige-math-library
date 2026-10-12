@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-isotypic-projections-are-mutually-orthogonal-equivariant-projections.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact.md

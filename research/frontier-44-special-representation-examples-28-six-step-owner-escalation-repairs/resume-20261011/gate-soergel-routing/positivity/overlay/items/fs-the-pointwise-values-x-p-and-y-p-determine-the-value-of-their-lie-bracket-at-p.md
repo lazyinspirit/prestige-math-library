@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-pointwise-values-x-p-and-y-p-determine-the-value-of-their-lie-bracket-at-p.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic.md

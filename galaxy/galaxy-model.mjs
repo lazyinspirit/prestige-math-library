@@ -40,7 +40,7 @@ export function layoutItems(nodes, categories, consumers) {
   const vertices = new Float32Array(nodes.length * 8);
   nodes.forEach((node, i) => {
     const rng = random(hashString(node.id ?? String(i)));
-    const core = node.categories.includes('foundations');
+    const core = node.categories.includes('set-theory');
     const category = hashString(node.categories[0] ?? 'unassigned') % (bands * 4);
     const radius = core ? .19 * Math.pow(rng(), .65)
       : .13 + 1.12 * Math.pow((Math.floor(category / 4) + rng()) / bands, .86);

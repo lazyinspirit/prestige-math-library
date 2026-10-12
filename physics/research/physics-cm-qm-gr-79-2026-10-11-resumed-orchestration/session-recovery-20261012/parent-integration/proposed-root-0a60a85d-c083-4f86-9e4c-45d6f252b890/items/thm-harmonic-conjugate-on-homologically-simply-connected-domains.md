@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-harmonic-conjugate-on-homologically-simply-connected-domains.md

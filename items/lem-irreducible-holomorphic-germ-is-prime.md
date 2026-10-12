@@ -73,10 +73,8 @@ $\mathcal O_{\mathbb C^n,0}$.
 
 4.1 By [F2] factor the nonzero nonunits $a,b,c$ of steps 2.1, 2.2 and 3.1 into irreducibles, say $a=u\,a_1\cdots a_r$, $b=v\,b_1\cdots b_s$ and $c=w\,c_1\cdots c_t$ with $u,v,w$ units and all displayed factors irreducible. Then $ab=uv\,a_1\cdots a_r b_1\cdots b_s$ and $qc=qw\,c_1\cdots c_t$ are equal, so the products of irreducibles $a_1\cdots a_r b_1\cdots b_s$ and $q c_1\cdots c_t$ differ by the unit $(uv)^{-1}w$. [step 2.1, step 3.1, F2]
 
-5.1 Setting $q':=(uv)^{-1}wq$, the germ $q'$ is associate to $q$, hence irreducible, and step 4.1 gives the equality of products of irreducibles
-$$a_1\cdots a_r b_1\cdots b_s=q' c_1\cdots c_t .$$
-[step 4.1, F1, F3]
+5.1 Setting $q':=(uv)^{-1}wq$, the germ $q'$ is associate to $q$, hence irreducible, and step 4.1 gives the equality of products of irreducibles $$a_1\cdots a_r b_1\cdots b_s=q' c_1\cdots c_t .$$ [step 4.1, F1, F3]
 
 6.1 By the uniqueness clause of [F2] applied to the two products of step 5.1, the irreducible $q'$ is associate to one of the irreducibles $a_1,\dots,a_r,b_1,\dots,b_s$. [step 5.1, F2]
 
-7.1 If $q'$ is associate to some $a_i$, then $q'\mid a_i$ and $a_i\mid a$ because $a_i$ is one of the factors of $a$, hence $q'\mid a$; since $q'$ is associate to $q$, also $q\mid a$, contradicting step 1.1. The same argument with some $b_j$ gives $q\mid b$, again contradicting step 1.1. Hence the supposition of step 1.1 is impossible, so $q\mid a$ or $q\mid b$; this proves that the irreducible germ $q$ is prime. [step 6.1, step 1.1, F1, discharge-contradiction] ∎
+7.1 If $q'$ is associate to some $a_i$, then $q'\mid a_i$ and $a_i\mid a$ because $a_i$ is one of the factors of $a$, hence $q'\mid a$; since $q'$ is associate to $q$, also $q\mid a$, contradicting step 1.1. The same argument with some $b_j$ gives $q\mid b$, again contradicting step 1.1. Hence the supposition of step 1.1 is impossible, so $q\mid a$ or $q\mid b$; this proves that the irreducible germ $q$ is prime. [step 6.1, step 1.1, F1, discharge-contradiction] ∎ 

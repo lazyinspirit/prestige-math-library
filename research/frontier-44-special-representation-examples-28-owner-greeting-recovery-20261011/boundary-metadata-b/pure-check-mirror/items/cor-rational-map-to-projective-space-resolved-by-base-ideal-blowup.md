@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-rational-map-to-projective-space-resolved-by-base-ideal-blowup.md

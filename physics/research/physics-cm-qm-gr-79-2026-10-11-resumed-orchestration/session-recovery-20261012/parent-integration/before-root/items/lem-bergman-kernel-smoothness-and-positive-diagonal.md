@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bergman-kernel-smoothness-and-positive-diagonal.md

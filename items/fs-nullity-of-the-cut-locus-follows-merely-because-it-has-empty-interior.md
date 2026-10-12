@@ -88,49 +88,13 @@ $S_n=\bigcup_{j<N_n}[e^{(n)}_j,e^{(n)}_j+\lambda_n]$ of its construction
 
 **Proof technique:** direct.
 
-1.1 The witness has empty interior. [F1, F3, F7]
-By [F1] the set $S$ is closed and nowhere dense, so [F3] applies to the closed
-set $S$ and gives that $S$ has empty interior. Thus the antecedent of the
-refuted claim holds for $S$.
+1.1 The witness has empty interior. [F1, F3, F7] By [F1] the set $S$ is closed and nowhere dense, so [F3] applies to the closed set $S$ and gives that $S$ has empty interior. Thus the antecedent of the refuted claim holds for $S$. [F1, F3, F7]
 
-1.2 The witness is not null. [F2, F4]
-By [F2] the set $S$ does not have measure zero, and by [F4] having measure zero
-is exactly being null; hence $S$ is not null. The consequent of the refuted
-claim therefore fails for $S$.
+1.2 The witness is not null. [F2, F4] By [F2] the set $S$ does not have measure zero, and by [F4] having measure zero is exactly being null; hence $S$ is not null. The consequent of the refuted claim therefore fails for $S$. [F2, F4]
 
-2.1 The implication fails, with an explicit witness. [step 1.1, step 1.2]
-The set $S$ has empty interior (step 1.1) and is not null (step 1.2), a
-closed, compact and perfect set. Hence "empty interior implies measure zero"
-is false; no topological smallness of that kind forces nullity.
+2.1 The implication fails, with an explicit witness. [step 1.1, step 1.2] The set $S$ has empty interior (step 1.1) and is not null (step 1.2), a closed, compact and perfect set. Hence "empty interior implies measure zero" is false; no topological smallness of that kind forces nullity. [step 1.1, step 1.2]
 
-3.1 Consequence for the cut locus, and boundary audit. [A1, F5, F6, step 2.1]
-By [F5] the cut locus $\operatorname{Cut}(p)$ is the radial image of the
-finite cut-time endpoints, and by [F6], under the inherited [A1] and on the
-complete connected boundaryless manifold, it has zero Riemannian volume,
-proved in this library through the radial-graph measure argument. Step 2.1
-shows that the emptiness of the interior of a closed set cannot replace such
-an argument, so the nullity of $\operatorname{Cut}(p)$ does not follow merely
-because its interior is empty; the measure-theoretic input of [F6] is
-required. Boundary cases: the empty set has empty interior and is null, so it
-is not a witness; the exhibited witness $S$ is not null, hence nonempty, and
-the refutation never relies on the empty set. Zero-length intervals add
-nothing to the total length of a cover in [F4], although singleton intervals
-can cover nonempty countable sets. They do not evade [F2]: its lower bound
-applies to every countable interval cover of $S$, including covers with
-degenerate intervals. The witness is one-dimensional, in
-$\mathbb R$; no higher-dimensional or vector-space object is involved, and no
-distinguished "zero" element is used. Degenerate and endpoint conventions
-match: [F4] uses closed intervals $[a_k,b_k]$ with $a_k\le b_k$, endpoints
-included, exactly as [F2] does, so the quantitative lower bound of [F2]
-applies to every cover the definition of nullity allows. No choice is made in
-this refutation: the witness $S$ is a single set given by [F7]; the
-assumption [A1] is inherited from the cut-locus interface and is spent only
-through [F6]. The refuted claim is a universal implication and contains no
-biconditional, so there is no converse direction to check; the failing
-instance is the pair of steps 1.1 and 1.2, antecedent true and consequent
-false.
-
-$\square$
+3.1 Consequence for the cut locus, and boundary audit. [A1, F5, F6, step 2.1] By [F5] the cut locus $\operatorname{Cut}(p)$ is the radial image of the finite cut-time endpoints, and by [F6], under the inherited [A1] and on the complete connected boundaryless manifold, it has zero Riemannian volume, proved in this library through the radial-graph measure argument. Step 2.1 shows that the emptiness of the interior of a closed set cannot replace such an argument, so the nullity of $\operatorname{Cut}(p)$ does not follow merely because its interior is empty; the measure-theoretic input of [F6] is required. Boundary cases: the empty set has empty interior and is null, so it is not a witness; the exhibited witness $S$ is not null, hence nonempty, and the refutation never relies on the empty set. Zero-length intervals add nothing to the total length of a cover in [F4], although singleton intervals can cover nonempty countable sets. They do not evade [F2]: its lower bound applies to every countable interval cover of $S$, including covers with degenerate intervals. The witness is one-dimensional, in $\mathbb R$; no higher-dimensional or vector-space object is involved, and no distinguished "zero" element is used. Degenerate and endpoint conventions match: [F4] uses closed intervals $[a_k,b_k]$ with $a_k\le b_k$, endpoints included, exactly as [F2] does, so the quantitative lower bound of [F2] applies to every cover the definition of nullity allows. No choice is made in this refutation: the witness $S$ is a single set given by [F7]; the assumption [A1] is inherited from the cut-locus interface and is spent only through [F6]. The refuted claim is a universal implication and contains no biconditional, so there is no converse direction to check; the failing instance is the pair of steps 1.1 and 1.2, antecedent true and consequent false. [A1, F5, F6, step 2.1, F4, F2, F7] ∎
 
 ## Source locator
 

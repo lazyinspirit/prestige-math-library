@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-local-surface-radical-multiple-of-a-principal-divisor.md

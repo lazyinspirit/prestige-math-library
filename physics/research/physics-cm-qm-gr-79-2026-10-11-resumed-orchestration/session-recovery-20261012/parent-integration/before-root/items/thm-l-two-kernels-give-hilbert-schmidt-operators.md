@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-two-kernels-give-hilbert-schmidt-operators.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-no-function-is-continuous-exactly-on-q.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-volume-of-the-sine-solid-of-revolution.md

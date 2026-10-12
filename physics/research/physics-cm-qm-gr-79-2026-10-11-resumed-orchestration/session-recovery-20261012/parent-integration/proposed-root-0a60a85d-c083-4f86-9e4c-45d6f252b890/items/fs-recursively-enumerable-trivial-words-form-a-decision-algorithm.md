@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-recursively-enumerable-trivial-words-form-a-decision-algorithm.md

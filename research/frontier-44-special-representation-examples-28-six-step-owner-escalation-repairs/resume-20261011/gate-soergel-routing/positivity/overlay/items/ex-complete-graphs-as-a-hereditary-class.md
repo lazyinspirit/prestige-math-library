@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-complete-graphs-as-a-hereditary-class.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-closed-form-for-a-linear-recurrence-over-a-splitting-field.md

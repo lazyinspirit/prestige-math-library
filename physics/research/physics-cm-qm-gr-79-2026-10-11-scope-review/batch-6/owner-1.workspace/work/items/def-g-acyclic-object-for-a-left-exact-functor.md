@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-g-acyclic-object-for-a-left-exact-functor.md

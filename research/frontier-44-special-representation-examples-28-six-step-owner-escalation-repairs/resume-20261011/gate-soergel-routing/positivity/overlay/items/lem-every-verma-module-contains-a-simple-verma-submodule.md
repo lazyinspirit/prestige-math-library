@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-every-verma-module-contains-a-simple-verma-submodule.md

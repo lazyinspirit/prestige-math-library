@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality.md

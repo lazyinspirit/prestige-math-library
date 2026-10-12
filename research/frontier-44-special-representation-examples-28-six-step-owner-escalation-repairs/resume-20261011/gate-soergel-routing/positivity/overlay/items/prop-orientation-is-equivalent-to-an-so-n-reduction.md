@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-orientation-is-equivalent-to-an-so-n-reduction.md

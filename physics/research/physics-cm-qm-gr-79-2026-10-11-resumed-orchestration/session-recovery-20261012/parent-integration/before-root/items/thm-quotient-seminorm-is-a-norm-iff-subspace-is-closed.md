@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quotient-seminorm-is-a-norm-iff-subspace-is-closed.md

@@ -1,8 +1,8 @@
 # Kazhdan--Lusztig theory, Soergel Hodge theory, and category O
 
-Library supplier scope (owner-authorized 2026-10-07): this Special Topics in Representation Theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
+Library supplier scope (owner-authorized 2026-10-07): this representation-theory scaffold may build on any published or draft content in the library. Record each supplier’s actual status and exact claim/proof; draft status alone is not grounds for duplicating a prerequisite. Unauthored planned inventories are design obligations rather than completed proofs.
 
-Category reconciliation (2026-10-07): KL-1–KL-8 now form the Kazhdan–Lusztig Theory track within `special-topics-in-representation-theory`. Canonical categories and `kazhdan-lusztig-planning/pages.json` reflect this change. Braid Groups remains separate and retains its Soergel/Rouquier application pages.
+Category reconciliation (owner-authorized 2026-10-12): KL-1–KL-7 belong to `category-o-and-geometric-representation-theory`; KL-8 belongs to `hecke-algebras-and-categorification`. Canonical plan categories and `kazhdan-lusztig-planning/pages.json` agree with `representation-category-split-2026-10-12.json`. Braid Groups remains separate and retains its Soergel/Rouquier application pages. Mathematical ownership and page identities remain unchanged.
 
 Prose scaffold, owner-authorised 2026-09-07. This future block supplies the
 Kazhdan--Lusztig and parabolic category-O dependencies exposed by the
@@ -112,21 +112,38 @@ Hodge induction.
 **Requires:** KL-2, `category-o-finiteness-duality-and-blocks`,
 `projectives-standard-filtrations-and-bgg-reciprocity`,
 `finite-weyl-invariants-bruhat-and-kostant-harmonics`,
-`symmetric-polynomials`, and `graded-bimodules-and-tensor-functors`.
+`symmetric-polynomials`, `graded-bimodules-and-tensor-functors`,
+`lie-algebras-and-infinitesimal-group-schemes`,
+`unipotent-solvable-groups-and-borel-fixed-points`, and
+`weyl-character-and-multiplicity-formulas`.
 
 | proposed item | exact content and proof joint |
 |---|---|
 | `def-the-coinvariant-algebra-of-a-finite-weyl-group` | Quotient `S(h)` by positive-degree invariants and retain the grading. |
 | `thm-the-weyl-coinvariant-algebra-is-the-graded-regular-representation` | Consume the Phase-2 Lie suppliers `thm-chevalley-shephard-todd-for-finite-weyl-groups` and `lem-weyl-coinvariant-hilbert-series-has-order-w-dimension`; prove the remaining harmonic-complement comparison identifying the type-A coinvariant algebra with the regular Weyl-group module and record its graded Hilbert series. Do not duplicate Chevalley--Shephard--Todd here. |
-| `def-projective-functors-on-a-regular-integral-category-o-block` | Consume the published `prop-tensoring-with-a-finite-dimensional-module-preserves-category-o` and RL-5's planned `thm-category-o-has-enough-projectives`; define direct summands of finite-dimensional tensoring followed by block projection. |
+| `def-regular-integral-category-o-block-and-its-antidominant-weight` | Fix dot-dominant and antidominant conventions; generic nonintegral fibers and closed regular integral fibers have different block behavior. |
+| `lem-the-basic-weyl-invariant-degree-sum-is-the-number-of-positive-roots` | Prove the invariant-degree sum needed for the principal-sl2 slice Jacobian. |
+| `lem-kostant-adjoint-isotypic-multiplicities-have-zero-weight-rank` | Prove harmonic adjoint multiplicity `dim E_0` from weighted freeness and the explicit root-lattice coefficient limit. |
+| `lem-the-coinvariant-algebra-is-a-gorenstein-algebra-with-one-dimensional-socle` | Prove the coinvariant Frobenius/socle interface by the regular-sequence Koszul computation. |
+| `lem-the-harmonic-complement-of-the-coinvariant-algebra` | Provide the harmonic complement and graded character comparison. |
+| `def-the-deformed-category-o-family-and-its-specializations` | Define the universal tensor family and its selected central components precisely. |
+| `lem-the-nilpotent-central-fiber-is-a-reduced-integral-domain` | Prove the principal-sl2 slice Jacobian, nilpotent-orbit density and complete-intersection reducedness/domain argument with the actual Borel/commutative-algebra suppliers. |
+| `thm-duflo-joseph-g-finite-endomorphisms-of-verma-modules` | Prove the field action isomorphism using PBW growth, the dual Shapovalov pairing, nilpotent-fiber domain and harmonic isotypic rank. |
+| `prop-base-change-freeness-and-specialization-in-the-deformed-family` | Retain the full all-T universal claim: finite highest-weight raising matrices have constant rank on every closed fiber, hence locally split kernels and arbitrary base change; harmonic action is a fiberwise isomorphism. Tensor adjunction and summands give the full Hom interface. |
+| `thm-lifting-of-indecomposable-projectives-to-the-deformed-family` | Independently construct local-R projectives by finite central CRT, canonical flag peeling and lifted higher-projective removal. Prove uniqueness and Hom base change; ordinary wall-word object generation gives tensor-family membership without the later classifier. |
+| `lem-the-central-action-on-the-deformed-antidominant-projective` | Identify the root-local congruence order and its height-one intersection; shifted Harish-Chandra jet interpolation uses the sum divided by stabilizer order. Retain the stated singular invariant interface. |
+| `def-projective-functors-on-a-regular-integral-category-o-block` | Consume the published tensor, block and enough-projectives suppliers; define summands of finite tensoring followed by block projection. Distinguish the full tensor family from one selected central component; singular targets retain their true coset labels. |
 | `def-wall-crossing-functor-and-unit-counit` | Consume RL-5's `def-translation-functor-between-o-blocks` and `prop-translation-functors-are-exact-and-biadjoint-across-a-wall`; define translation through a simple wall with its biadjunction maps. |
-| `thm-projective-functors-are-generated-by-wall-crossing` | Use RL-5's `thm-translation-to-and-from-a-wall-on-standard-modules`, translation to/from walls and indecomposable summands; state indexing by Weyl-group elements. |
-| `def-the-antidominant-projective-and-soergel-functor` | Set `V=Hom(P_antidominant,-)` with its endomorphism-ring action. |
-| `thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra` | Establish the center/endomorphism map and prove the ungraded algebra isomorphism. The grading belongs to the coinvariant target and its transported Soergel modules; no graded lift of category O is asserted. |
-| `thm-soergels-struktursatz-full-faithfulness-on-projectives` | Prove `V` is fully faithful on projectives via standard filtrations, adjunction and translation induction. |
+| `lem-wall-crossing-functors-act-on-standard-modules-by-the-two-step-extension` | Prove the two-standard wall flag from exact translations and biadjunction. |
+| `lem-wall-crossing-functors-act-on-the-grothendieck-group-by-right-multiplication-by-one-plus-s` | Freeze right multiplication and composition order. |
+| `lem-wall-crossing-compositions-produce-the-projective-with-the-top-standard-label` | Start with the dominant Verma projective; BGG triangularity and the top coefficient one give each projective as a wall-word summand, before any functor classification. |
+| `thm-indecomposable-projective-functors-are-indexed-by-the-weyl-group` | Prove surjectivity of natural-map evaluation on the dominant Verma, its nilpotent kernel on a projective generator, and idempotent/isomorphism lifting. Classification concerns isomorphism classes; evaluation is not asserted faithful. |
+| `def-the-antidominant-projective-and-the-soergel-functor` | Construct the antidominant projective-injective by translation from the most singular block; set `V=Hom(P_antidominant,-)` with its endomorphism-ring action. |
+| `thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra` | Use the local projective/Hom base-change interface and the height-one central congruence order to prove the center/endomorphism isomorphism (and the invariant subalgebra in the stated singular case). The grading belongs to the coinvariant target and its transported Soergel modules; no graded lift of category O is asserted. |
+| `thm-soergels-struktursatz-full-faithfulness-on-projectives` | Prove projective full faithfulness from projective-injectivity, the coinvariant Frobenius algebra, quotient adjunction and wall-word generation; the deformed comparison uses explicit root-local Hom tables and height-one intersection. |
 | `thm-wall-crossing-under-the-soergel-functor-is-tensoring-with-the-coinvariant-soergel-bimodule` | Construct the ungraded natural isomorphism with `C tensor_{C^s} C`, identify it after choosing the auxiliary Soergel grading as the right-coinvariant specialization of the polynomial Soergel bimodule, and verify that auxiliary shift. |
-| `thm-indecomposable-projectives-correspond-to-indecomposable-soergel-modules` | Identify labels and the unique auxiliary grading normalization by induction from the antidominant projective, then state explicitly that the category-O projective is recovered after forgetting this grading. |
-| `prop-verma-flag-multiplicities-are-standard-filtration-ranks-under-v` | Consume RL-5's `def-verma-flag-and-its-multiplicities` and `thm-projectives-in-category-o-have-verma-flags`; match a Verma-flag multiplicity with the total graded Bruhat-support rank, i.e. evaluation at `v=1`. The polynomial grading is auxiliary Soergel data, not an Ext grading on category O. |
+| `thm-indecomposable-projectives-correspond-to-indecomposable-soergel-modules` | Identify `P_w` with the reduced module labelled `w^-1`; prove reduction-of-Hom and indecomposability, use KL-2's actual form/descent clauses, and prove uniqueness of the centered auxiliary grading. Forgetting that grading recovers the category-O projective. |
+| `prop-verma-flag-multiplicities-are-standard-filtration-ranks-under-v` | Consume RL-5's `def-verma-flag-and-its-multiplicities` and `thm-projectives-in-category-o-have-verma-flags`; match a Verma-flag multiplicity with the polynomial/deformed standard-filtration rank at label `y^-1`, evaluated at `v=1`, before origin reduction collapses the graph supports. The polynomial grading is auxiliary Soergel data, not an Ext grading on category O. |
 
 **B companion:** `projective-functors-and-the-soergel-functor-in-category-o-examples`.
 
@@ -140,30 +157,38 @@ Hodge induction.
 | `lem-projective-verma-multiplicities-equal-soergel-standard-ranks` | Combine KL-3's Verma-flag/support-rank comparison, Struktursatz and the wall-crossing dictionary. |
 | `thm-projective-verma-multiplicities-are-kazhdan-lusztig-values-at-one` | Apply KL-2's character theorem with the exact shift-to-q conversion and then forget the auxiliary grading: ordinary Verma multiplicities are `P_{y,w}(1)`, not individual polynomial coefficients. |
 | `thm-simple-verma-composition-multiplicities-are-kazhdan-lusztig-values` | Consume RL-5's `thm-bgg-reciprocity` and use duality; state the correct pair/order. |
-| `thm-the-kazhdan-lusztig-character-formula-in-regular-integral-category-o` | Invert the triangular multiplicity matrix and write the signed inverse-KL Verma-character sum evaluated at `q=1`. |
+| `thm-the-kazhdan-lusztig-character-formula-in-regular-integral-category-o` | Invert the weighted incidence matrix `P_{y,w}(1)` and write its inverse Verma-character sum. Ordinary Bruhat Möbius coefficients apply only when those KL values are all one; the S4 endpoint value two gives inverse coefficient minus two, not minus one. |
 | `rem-the-full-ext-version-requires-the-koszul-grading-of-category-o` | Record that ordinary Soergel-character grading proves the multiplicity theorem but not the full Ext-algebra/Koszul theorem. Reserve that stronger result for the Koszul-duality frontier instead of smuggling it into KL-4. |
-| `prop-translation-identifies-regular-integral-blocks` | Transport the theorem between regular integral central characters with conventions preserved. |
+| `prop-translation-identifies-regular-integral-blocks` | Construct exact inverse regular-to-regular translations by finite tensoring and block projection. Norm-distance exclusion and extremal multiplicity one identify corresponding Vermas; biadjoint unit/counit are isomorphisms on Vermas, then on flags, projectives and finite presentations. Preserve standard, simple and projective labels and transport the theorem through this categorical equivalence. |
 
 **B companion:** `the-kazhdan-lusztig-character-and-multiplicity-theorem-examples`.
 
 ## KL-5 — Singular and parabolic Kazhdan--Lusztig theory
 
 **Requires:** KL-4, `root-systems-dynkin-diagrams-and-cartan-killing-classification`, and
-`projectives-standard-filtrations-and-bgg-reciprocity`.
+`projectives-standard-filtrations-and-bgg-reciprocity`, and
+`parabolic-subgroups-and-double-coset-geometry` (which reaches the Coxeter prerequisite).
+
+Generic definitions, translation and highest-weight structure retain their stated
+complex semisimple/arbitrary-integral scope. Numerical KL formulas consume KL-4's
+regular type-A theorem; singular and genuine parabolic matrices remain distinct.
 
 | proposed item | exact content and proof joint |
 |---|---|
-| `def-parabolic-hecke-module-and-antispherical-standard-basis` | Induce the sign module from `H_J`; specify left/right module convention and minimal coset representatives. |
-| `def-parabolic-kazhdan-lusztig-basis-and-polynomials` | Bar-invariant triangular basis with exact Deodhar normalization. |
-| `thm-parabolic-kazhdan-lusztig-polynomials-are-alternating-sums-of-ordinary-ones` | Prove by the induced-module quotient and uniqueness. |
+| `def-parabolic-hecke-module-and-antispherical-standard-basis` | Define sign (antispherical) and trivial (spherical) induction from `H_J`, with shortest LEFT representatives and separate standard bases/actions. |
+| `lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars` | Prove coset bases, boundary actions and triangular compatible bars separately for sign and trivial induction. |
+| `thm-existence-and-uniqueness-of-the-parabolic-kazhdan-lusztig-basis` | Construct both canonical bases by triangular bar induction and identify their ordinary-KL coefficients. |
+| `lem-facet-tensor-weight-exclusion` | Prove the norm-distance/extremal-weight exclusion used by the exact singular translations. |
+| `def-parabolic-kazhdan-lusztig-basis-and-polynomials` | Define the proved bar-invariant triangular bases and their polynomial coefficients with exact sign/trivial normalization. |
+| `thm-parabolic-kazhdan-lusztig-polynomials-are-alternating-sums-of-ordinary-ones` | Project ordinary KL elements to sign induction: the coefficient is the alternating sum over LEFT `W_J` translates. Trivial induction instead uses the longest-parabolic eigenvector and gives spherical coefficients. |
 | `def-singular-integral-category-o-block-and-stabilizer` | Label simples by minimal coset representatives for the dot stabilizer. |
-| `thm-translation-to-the-wall-on-verma-simple-and-projective-objects` | Give zero/nonzero cases, flags and projective multiplicities. |
-| `thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials` | Translate regular projectives to the wall and compare with the antispherical basis. |
-| `def-standard-parabolic-and-levi-subalgebras-from-simple-roots` | Construct the standard parabolic and its Levi/nilradical decomposition from a subset of simple roots before using parabolic local finiteness. |
-| `def-parabolic-category-o-for-a-standard-parabolic` | Modules locally finite for the parabolic, with generalized Verma standards. |
-| `thm-parabolic-category-o-is-a-highest-weight-category` | Prove finite ideals have projective covers, standard filtrations, duality and BGG reciprocity. |
-| `thm-parabolic-category-o-multiplicities-are-parabolic-kl-polynomials` | Relate the Serre quotient/subcategory to singular translation and state the exact longest-coset shifts. |
-| `thm-parabolic-kazhdan-lusztig-character-formula` | Invert the parabolic matrix to express simple characters in generalized Verma characters. |
+| `thm-translation-to-the-wall-on-verma-simple-and-projective-objects` | Prove standard/costandard translation, simple survival on shortest RIGHT coset representatives and projective flags by exactness and biadjunction. The big antidominant projective has each distinct standard once; arbitrary projectives need not. |
+| `thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials` | For the type-A singular antidominant convention, prove spherical multiplicities `m_{k(y),k(w)}(1)` with `k(w)=w_J w^-1 w_0`, using actual translation survival and the ordinary KL matrix. Do not replace this by an antispherical formula. |
+| `def-standard-parabolic-and-levi-subalgebras-from-simple-roots` | Use finite Cartan invertibility, root/sl2 and Killing identities to construct the reductive Levi, its semisimple derived algebra and center, and the outside-root nilradical. |
+| `def-parabolic-category-o-for-a-standard-parabolic` | Define genuine parabolic local finiteness; finite PBW degree slices prove generalized Vermas lie in it. Prove Serre closure and restricted duality. The maximal locally finite quotient uses the finite-length INTERSECTION of quotient kernels, not their sum. |
+| `thm-parabolic-category-o-is-a-highest-weight-category` | For arbitrary integral blocks construct finite truncated induced projectives representing exact Levi Hom, with the central-block weight cutoff explicit. Canonical maximal-standard traces preserve flags under idempotents; prove generalized-standard/costandard Hom and Ext1, then covers, duality and BGG. The canonical standard-to-costandard map has simple image, not an asserted injection. |
+| `thm-parabolic-category-o-multiplicities-are-parabolic-kl-polynomials` | In a regular type-A ambient block, finite Levi Weyl characters and outside-root PBW denominators give the signed ordinary-Verma character sum. Ordinary KL multiplicities therefore give genuine ANTISPHERICAL `n_{y,x}(1)` for dominant shortest LEFT labels. Antidominant labels reindex by `iota(y)=w_J y w_0`; no singular/parabolic equivalence or Koszul duality is imported. |
+| `thm-parabolic-kazhdan-lusztig-character-formula` | Invert the weighted antispherical multiplicity matrix, using character injectivity and Grothendieck bases, to express simple characters in generalized Verma characters with the stated order support. |
 
 **B companion:** `singular-and-parabolic-kazhdan-lusztig-theory-examples`.
 
@@ -173,57 +198,125 @@ Hodge induction.
 `grothendieck-groups-and-graded-cartan-pairings`, and
 `young-diagrams-tableaux-and-permutation-modules`.
 
+All original claims, IDs and the A/B pair are retained. The current scaffold has22A+4B:
+the native convention dictionary and four necessary within-pair local suppliers are
+included below in dependency order. Quantum finite-Cartan arguments use double cuts
+and prove their full semi-infinite limits locally. Genuine category-O structure retains
+all admitted integral type-A tableau blocks; numerical matrices use KL5's actual
+spherical singular ordinary coefficients inside signed finite-Levi cancellation.
+
 | proposed item | exact content and proof joint |
 |---|---|
-| `def-higher-level-wedge-tensor-fock-module` | Fix finite type-A tensor factors, column-strict tableaux, charge, and the standard monomial basis. |
-| `thm-higher-level-wedge-tensor-fock-module-has-the-column-monomial-basis` | Construct each finite wedge quotient and, in the unbounded case, the stabilized direct limit; prove the normally ordered wedges and their column tensor products are a basis and that the quantum-group action is well defined weightwise. |
-| `thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations` | Consume QG-5's `thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules`: its scope is finite tensor products of based integrable finite-weight-space type-A modules, with weightwise finite quasi-R action, involutive compatible bar, integral-lattice preservation, parenthesization independence, and locally finite dominance triangularity. Prove here that the column monomials meet those hypotheses and that the truncation embeddings commute with bar, so the unbounded direct limit carries a well-defined compatible bar. QG-5 does not supply this semi-infinite/direct-limit step. |
-| `def-dual-canonical-canonical-and-quasi-canonical-fock-bases` | Define all four through one fixed pairing/bar convention; none are synonyms. |
-| `thm-parabolic-kl-polynomials-give-the-dual-canonical-transition-matrix` | Match tableau permutations and Deodhar polynomials exactly. |
-| `thm-standard-tableau-monomials-form-a-basis-of-the-highest-weight-fock-submodule` | Project the column monomial basis to the highest-weight constituent, prove the straightening/standard-monomial theorem in bounded type A, and pass through the truncation direct limit. This may not be inferred from the dimension of the category-O Grothendieck group. |
-| `def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality` | Specify `gl_N`, standard parabolic/Levi, integral block, and its tableau labels. |
-| `def-residue-translation-functors-on-the-sum-of-parabolic-o-blocks` | Split tensoring with the natural and dual modules by generalized central character, and specify the residue/weight indexing and adjunction shifts. |
-| `thm-residue-translation-functors-give-the-integrable-fock-space-action` | Verify the Chevalley and Serre relations on Grothendieck groups from their action on generalized Verma flags, then prove integrability and identify the highest vector. An action on labels alone is insufficient. |
-| `thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module` | Standards map to monomials; functor action matches Chevalley operators. |
-| `def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category` | Define tiltings by simultaneous standard and costandard filtrations, with the highest-weight-poset support conditions needed for uniqueness. |
-| `thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o` | Construct the unique indecomposable tilting of each highest weight by successive universal extensions and duality; prove every tilting splits as their sum. |
-| `def-the-ringel-dual-of-a-finite-highest-weight-ideal` | Take the opposite endomorphism algebra of a full tilting generator and prove the reversed-poset highest-weight structure before using Ringel duality. |
-| `thm-type-a-parabolic-category-o-ringel-duality-via-the-opposite-parabolic` | Use Arkhipov's longest-element twisting functor to identify standard-filtered objects in the opposite parabolic category with costandard-filtered objects in the original one, send opposite projectives to tiltings, and pass compatibly through finite block ideals. This is the supplier for the canonical/quasi-canonical exchange. |
-| `thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases` | Use KL-5, BGG reciprocity and the preceding proved Ringel self-duality to map simples to dual-canonical, projectives to quasi-canonical, and tiltings to canonical. |
-| `lem-the-fock-pairing-matches-projective-simple-and-standard-costandard-pairings` | Track all dual and bar normalizations. |
-| `thm-the-highest-weight-fock-submodule-has-the-qg-global-bases` | Compare the KL-defined bases to QG-5 by bar invariance, triangularity and pairing uniqueness. |
+| `def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules` | Fix source s, library t=s^-1, unchanged divided E/F and K_h→D_-h, including the full coordinate torus. Fundamental factors have their own normalized bars and crystal charts. |
+| `def-higher-level-wedge-tensor-fock-module` | Keep the original nonincreasing charges, strict columns, standard rows, prefix Bruhat order and finite/semi-infinite ground-tail conventions. Infinite weight sums mean a ground weight plus finite changes. |
+| `thm-higher-level-wedge-tensor-fock-module-has-the-column-monomial-basis` | Prove the integral sorting basis, primitive antisymmetrizer embedding and compatible double-cut limits. Primitivity does not assert lower-chart basedness inside raw tensor powers; generators shift weights by finite box moves. |
+| `thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations` | Use QG-5 only on finite ordered products of independently based fundamental factors. Prove new upper/lower boundary quasi-R terms vanish, yielding the full integral triangular bar and compatible semi-infinite limits. |
+| `def-dual-canonical-canonical-and-quasi-canonical-fock-bases` | Keep monomial M, source-positive L, source-negative T and quasi-canonical P distinct. Both L/T are ordinary-bar fixed; P is generally not. The two pairings include psi in the second argument and reverse factors, with raw Gram B_psi^-1. |
+| `lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map` | Construct the outside-nilradical semiregular bimodule for reductive degree-zero Levi; prove commuting actions, corrected left-PBW filtration and restricted free/cofree adjunction. The exact standard-flag contravariant Psi and covariant D Psi have the computed reverse-column offset shift, matching labels and central characters. |
+| `def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category` | Use generic finite highest-weight central summands before connectedness. Prove standard/costandard Ext criteria by maximal heredity removal and Tor detection, summand closure and maximal-support tilting normalization. |
+| `lem-type-a-tableau-central-summands-are-single-linkage-blocks` | Before the connected Definition, construct X=Psi Pbar using the generic criterion. Mixed KL/Levi cancellation identifies its coefficients with canonical T; actual CWZ two-column positive-pair coefficients and complete fixed-margin binary switches connect original and opposite summands. Only original sorted heights are used; no future cyclotomic-centre theorem enters. |
+| `def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality` | Distinguish classical gl_n (finite box count) from the Fock gl_{I+}. Use lambda_j=a_j+j-1 and the published half-sum rho_j=(n+1-2j)/2, so HC coordinates are a_j+(n-1)/2. Retain all admitted integral/repeated-entry blocks, actual generalized standards and the proved single-linkage-block labels. |
+| `thm-parabolic-kl-polynomials-give-the-dual-canonical-transition-matrix` | Fix sorting w_A shortest RIGHT for the entry stabilizer K and d(A)=w_A^-1 shortest LEFT. Prove the full sign/antispherical p_AB(s)=s^(ell(wB)-ell(wA)) sum_z(-1)^ell(z)P_(wAz,wB)(s^-2). At1 the composition matrix is the signed COLUMN-Levi sum of KL5 spherical singular ordinary coefficients P_(d(C)w0,d(A)w0)(1); K and the column Levi J differ. |
+| `thm-standard-tableau-monomials-form-a-basis-of-the-highest-weight-fock-submodule` | Prove the based reverse highest inclusion and C-adjoint projection with explicit signature/rectification labels. The kernel is the saturated integral span of L_offStd; projected monomials need not vanish there. Standard S and D bases give explicit straightening, integral upper/costandard image lattice and compatible full limits. |
+| `def-residue-translation-functors-on-the-sum-of-parabolic-o-blocks` | Define natural/dual tensor block projections with actual general biadjunction. Casimir eigenvalues are i and -n-i; preserve exactness, restricted duality, projectives and injectives, with the distinct classical/Fock weight indices. |
+| `lem-residue-casimir-operators-give-local-affine-hecke-actions` | Prove matrix-unit Casimir/place-swap affine-Hecke relations, eigenvalue shifts and multiplicity-free generalized-standard flags. Supply the full positive integrable K0 sl2/Chevalley/Serre action before the head/socle argument, avoiding a forward cycle to KL7/KL8. |
+| `lem-the-local-affine-hecke-socle-argument-for-residue-translations` | Prove the completed matrix algebra and partial-idempotent restriction. The centre C[c_1,...,c_i]/(h_(r-i+1),...,h_r) is a finite complete intersection with unique socle, by actual CM/Koszul suppliers. Expand CR extremal/string-height and Kashiwara source-upper leading coefficients to prove the full simple head/socle crystal labels. |
+| `thm-residue-translation-functors-give-the-integrable-fock-space-action` | Collect the preceding proved flag/K0 relations, integrability and actual simple-head/socle clauses. All standard classes give the full tensor Fock action; the ground class generates only the highest constituent. |
+| `thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module` | Map generalized standards to monomials, with the exact residue action and projective/simple Hom pairing. This is the full ungraded integral K0 module, not a presumed Koszul lift. |
+| `thm-the-highest-weight-fock-submodule-has-the-qg-global-bases` | Compare actual QG-5 lower and form-adjoint upper bases through B8=s^-a C0, a=(2Lambda-alpha,alpha)/2. Lower is T_(Aup)=s^-a P_A; upper is s^a D_A with its form-adjoint bar and dual charts. Source D is ordinary-bar fixed; its rescaled library upper vector need not be. |
+| `thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o` | Apply the proved semiregular equivalence to opposite projectives and the finite Ext criterion. Prove maximal-label uniqueness, selfduality, direct-sum classification and unchanged partial-ideal tiltings. Retain the full inline Std/prinjective/selfdual/simple-standard-socle criterion and P(A)=T(Aup), with local standard embeddings, residue words, projection-kernel positivity and Cartan duality. |
+| `def-the-ringel-dual-of-a-finite-highest-weight-ideal` | Prove characteristic-tilting Ext orthogonality and finite projective dimension. Hom(T,-) identifies costandard flags with Ringel-STANDARD flags and gives the reversed-poset highest-weight category. |
+| `thm-type-a-parabolic-category-o-ringel-duality-via-the-opposite-parabolic` | Use the genuine parabolic outside-nilradical semiregular transport, not unchanged ordinary full-longest Borel twisting. Send opposite standards to costandards and opposite projectives to tiltings with exact labels. A proper target lower Serre ideal pairs with the opposite highest-weight SERRE QUOTIENT by complementary labels, via the projective corner. |
+| `thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases` | At1 map simples to L, projectives to P and tiltings to T. Tilting standard coefficients are the opposite/reverse-column composition matrix from actual Ringel reciprocity, not the inverse-transpose of the original matrix. |
+| `lem-the-fock-pairing-matches-projective-simple-and-standard-costandard-pairings` | Prove typed sesquilinear/reverse-factor dualities, projective-simple Hom at1 and genuine generalized-standard/costandard Hom. Track the half-sum/Casimir and source/library form rescalings without conflating ordinary and form-adjoint bars. |
 
-**B companion:** `parabolic-category-o-and-fock-space-bases-examples`.
+**B companion:** `parabolic-category-o-and-fock-space-bases-examples`. Keep all four
+native IDs: the two-factor example computes every pairing/global-family matrix at
+I={0}, the residue example gives actual flag operators and simple heads/socles, the
+opposite-parabolic example computes a genuine two-label lower-ideal/opposite-quotient
+Ringel dictionary, and the counterexample distinguishes full canonical/quasi-canonical
+families even where rectified highest vectors agree at1.
+
+**Source audit.** Actual Soergel author English PostScript §§1–2/5–7 supplies the
+reductive-Levi semiregular construction, with its left-PBW degree-zero shortcut repaired
+locally; later English additions and the retrieved-only German version are not assumed.
+The actual BK/Brundan tensor and pairing proofs are read with their ordinary-bar
+arguments and reciprocal parameters. CR0407205 §§3.2–3.3/4.3/5.1–5.4, Kashiwara1993
+printed462–474, BK0508003 §§4.2–4.4 and CWZ0409016 §§2.1–2.2/4.3–4.4 provide the
+expanded local socle/crystal and two-wedge coefficient routes. No super duality,
+unchanged ordinary longest twisting, nominal Irving criterion, quantum flag algebra,
+or future Schur/cyclotomic-centre theorem substitutes for these proofs. Current proof
+and source review is scaffold evidence, not an independent authored-item audit;
+native22 decisions (19ready/3escalated) remain historical in their preserved archives.
+All26 current subjects have genuine current readiness after the guarded pass and root
+independent post-verification; this remains scaffold evidence, not authored-item audit.
 
 ## KL-7 — Arakawa--Suzuki functors and higher-level Schur--Weyl duality
 
 **Requires:** KL-6, `tensor-products-of-modules`, and
 `graded-bimodules-and-tensor-functors`.
 
+The current pair retains all29 native identities and adds exactly two necessary
+normality/covariant suppliers, giving26A+5B at1790/1791. Preserve the full true
+approved scope. Raw tensor mutual centralizers hold for every complex origin;
+ground-category Morita and the central-block corner require admissible origins
+(c_i−c_j integral implies c_i=c_j). Arbitrary Hecke root multisets still have
+explicit admissible stable charged-pyramid realizations.
+
 | proposed item | exact content and proof joint |
 |---|---|
-| `def-degenerate-affine-hecke-algebra` | Give symmetric-group and commuting polynomial generators with all cross relations. |
-| `def-degenerate-cyclotomic-hecke-algebra` | Quotient by the exact level/charge polynomial relation on the first Jucys--Murphy generator. |
-| `def-arakawa-suzuki-casimir-operators-on-tensor-functors` | Construct simple transpositions and tensor Casimir operators on `M tensor V^tensor d`. |
-| `thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations` | Verify braid, commuting-polynomial and cross relations directly. |
-| `lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient` | Compute the cyclotomic polynomial on the highest-weight filtration. |
-| `def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character` | From the level composition construct the nilpotent `e`, good grading, Premet subalgebra `m`, and character `chi`; prove the character vanishes on commutators. |
-| `def-the-type-a-finite-w-algebra-and-whittaker-category` | Define `U(g,e)` as Whittaker invariants and the Whittaker-module category on which `x-chi(x)` acts locally nilpotently. |
-| `lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading` | Adapt Gan--Ginzburg §§2, 4--6 from the Dynkin grading to the chosen type-A pyramid good grading, as Brundan--Kleshchev explicitly permit: choose the Lagrangian in `g(-1)`, prove the contracting-action decomposition and `gr_K Q ~= C[N] tensor gr_K U(g,e)`, identify the Lie-cohomology complex with the algebraic de Rham complex of the affine unipotent group, deduce higher-cohomology vanishing by the filtered spectral sequence, and prove that zero Whittaker vectors force a locally nilpotent module to vanish. Pass from `sl_N` to `gl_N` by splitting off the reductive centre. None of this follows from the loop PBW theorem. |
-| `thm-skryabins-equivalence-for-the-type-a-whittaker-pair` | Use the preceding cohomology vanishing to prove that tensoring with the generalized Gelfand--Graev `(U(g),U(g,e))` bimodule and taking Whittaker vectors are quasi-inverse between finitely generated left `U(g,e)`-modules and finitely generated `U(g)`-modules in the stated locally nilpotent Whittaker category; prove exactness of Whittaker vectors from the same vanishing. This is a separate theorem from every PBW statement. |
-| `thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e` | Using the explicit type-A shifted-Yangian generators and their ordered-monomial PBW theorem, prove `gr_loop U(g,e) ~= U(g^e)`. Do not call this the Kazhdan filtration: the latter has commutative Slodowy-slice associated graded and is not used by the double-centralizer argument. |
-| `def-deformed-tensor-space-for-the-type-a-finite-w-algebra` | Construct the loop-filtered tensor space and commuting finite-W/degenerate-Hecke actions whose associated graded object is Vust tensor space. |
-| `thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer` | Lift Vust's graded double centralizer through the separated filtration, proving both centralizers and faithfulness in the stable range. |
-| `def-the-whittaker-functor-from-the-relevant-parabolic-o-summand` | Define Whittaker coinvariants/completion with the exact block truncation and its natural compatibility with tensoring. |
-| `thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives` | Prove exactness, identify its projective images, and establish the Hom isomorphism on the additive generator. This is the bridge from the finite-W centralizer to category O. |
-| `def-the-higher-level-schur-weyl-projective-generator-and-schur-functor` | Define `T^Lambda_alpha` and `Hom_g(T,-)` with the correct opposite endomorphism action. |
-| `def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality` | State when the Hecke action is faithful, when only its image occurs, and the central idempotent/corner required outside the stable range. |
-| `thm-higher-level-schur-weyl-endomorphism-isomorphism` | Prove `End_g(T)^op` is the relevant degenerate cyclotomic Hecke block or declared idempotent corner, including surjectivity and dimension/injectivity. |
-| `thm-higher-level-schur-weyl-double-centralizer` | Prove the second centralizer and full faithfulness on projectives, using the preceding Whittaker and stable-range statements rather than asserting it from the Hecke action. |
-| `thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects` | Standards become the chosen Specht modules; simples become the labelled simple or zero; projectives become covers; give the tilting/Young image. |
-| `thm-category-o-translation-intertwines-residue-induction-and-restriction` | Construct the natural isomorphisms and preserve adjunction/grading conventions. |
+| `def-degenerate-affine-hecke-algebra` | Prove the rational-operator PBW basis and all affine relations. Polynomial degree is a filtration; level-one x_j are shifted Jucys–Murphy operators. |
+| `lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties` | Prove chain complete intersection, graded-string dimension/codimension estimates, reduced irreducible normal domain and the actual invariant quotient for every nilpotent type. |
+| `def-arakawa-suzuki-casimir-operators-on-tensor-functors` | Fix trace-gl_N x and source-sl_N y with the explicit central/scalar shift, universal Casimir and place permutations. |
+| `lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize` | Prove codimension-two extension, finite rational-GL lifting and Schur–Weyl polarization into trace-cycle tensor covariants. |
+| `def-a-type-a-nilpotent-pyramid-good-grading-and-whittaker-character` | Use left-moving e, explicit J/K centralizer indices and the doubled good grading for GG; character vanishing follows from degrees. |
+| `thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations` | Check polynomial commutation, all Coxeter and affine cross relations by the matrix-unit infinitesimal braid identity. |
+| `def-the-type-a-finite-w-algebra-and-whittaker-category` | Define the tail-shift reduction and its bimodule/right action; distinguish the loop and Kazhdan filtrations. |
+| `thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer` | Prove both centralizers for every nilpotent type and tensor degree using Newton identities and the local normality/covariant suppliers; retain longest-string stable faithfulness. |
+| `def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra` | Derive the path/Gauss presentation, D1-only truncation and original T=FDE coefficient ranges; keep auxiliary paths distinct and correct the mirrored E/F source typo. |
+| `lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading` | Prove the polynomial conjugation decomposition by positive weights, de Rham/CE homotopy and nonzero-invariant detection; degree minus one is zero in the doubled grading. |
+| `thm-ordered-monomial-pbw-basis-for-the-shifted-yangian` | Prove RTT/current finite-jet PBW, shifted embedding and finite Gauss Jacobian independence; match the GG slice degrees without importing a PBW theorem. |
+| `thm-skryabins-equivalence-for-the-type-a-whittaker-pair` | Prove unit/counit equivalence for all modules using free PBW, CE vanishing and invariant detection; verify coherent ordinary tensor comparison via Taylor/path matrices. |
+| `thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e` | Use the original coefficient indices and one-factor path symbols to prove gr_loop W=U(g^e); distinguish the commutative Kazhdan symbols. |
+| `def-degenerate-cyclotomic-hecke-algebra` | Prove bounded PBW, full dimension and symmetric top trace for arbitrary complex root multisets via an admissible stable realization; distinguish integer-coset indexing. |
+| `lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient` | Prove the exact x1 minimal polynomial using the column flag and leading longest string, including repeated roots; do not assign the same root set to every x_j. |
+| `def-deformed-tensor-space-for-the-type-a-finite-w-algebra` | Construct the raw tensor action with its c_col+q_col−n diagonal and cross-column correction; prove both chi-equations, Casimir/flip compatibility and actual associated-graded action. |
+| `def-the-whittaker-functor-from-the-relevant-parabolic-o-summand` | Use genuine row-torus duality/continuous coinvariants and local Rees–Baer exactness. Construct typed HC/Ore/coset comparison; Cauchy and the actual16 highest projection determine the offStd kernel. |
+| `thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer` | Lift both graded centralizers for every origin. Morita additionally uses admissible origins and the genuine Wh quotient; keep the explicit nonadmissible nonprojective witness. |
+| `thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives` | Prove ALL-projective faithfulness via explicit ZA two-term prinjective copresentations. Projective images are asserted on add(T), separately from faithfulness. |
+| `def-the-higher-level-schur-weyl-projective-generator-and-schur-functor` | T is the admissible-ground prinjective detector. The exact Hecke quotient has a right-exact left adjoint; recovery holds on add(T). Preserve all ambient O labels. |
+| `def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality` | Stable range is q_l≥d. Outside it, admissible origins give a whole central-block corner through stable enlargement and contractible labels; sequence projectors are not central. |
+| `def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks` | Derive exact biadjoint residue functors from quotient tensor adjunction, with ordinary duality and actual last-eigenvalue projectors; no arbitrary corner equality or unspecified grading. |
+| `thm-higher-level-schur-weyl-endomorphism-isomorphism` | Wh faithfulness on detector endomorphisms and the raw Hecke image give End_g(T)^op=B; identify each central component and the precise stable/corner cases. |
+| `thm-higher-level-schur-weyl-double-centralizer` | Collect raw centralizers, admissible Morita/Serre quotient, full-projective and tilting faithfulness and the precise right-exact adjoint; mutual centralizers alone do not imply Morita. |
+| `thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects` | Prove intrinsic Specht images by the regular-vector row corner and canonical colour fibre. Std gives simple labels and prinjective covers; multiplicities require the simple label in Std. |
+| `thm-category-o-translation-intertwines-residue-induction-and-restriction` | Construct the natural residue tensor-Hom isomorphisms, projectors, units/counits and ordinary duality; all stated Grothendieck comparisons are ungraded at parameter one. |
 
 **B companion:** `arakawa-suzuki-functors-and-higher-level-schur-weyl-duality-examples`.
+Keep all five native examples. They check universal two-factor relations, the
+correctly numbered level-two polynomial, failure of arbitrary tensor double
+centralizers, one-column e=0 Vust dimensions and the genuine level-one central
+corner outside stable range.
+
+**Source and consumer review.** The authentic Kraft–Procesi original §§1–6 was
+read, including rendered §6. Local chain normality, codimension-two extension,
+finite rational-GL lifting and polarized Schur–Weyl supply the full Vust proof.
+GG is adapted to the doubled good grading; Rees–Baer supplies Wh exactness.
+Explicit HC/Ore/coset label comparison, path/PBW/tensor checks, classical Cauchy,
+ZA copresentations and the regular-vector Specht corner close the stated routes.
+The shifted T series is FDE with its original coefficient indices; the source's
+mirrored E/F error is corrected from its preceding formulas. No nominal BG,
+Skryabin, finite-W simple classification or KSX import replaces these proofs.
+
+Root completed the bounded two-round scaffold review and retired the current
+original-reading escalation, retaining authentic native29 decisions/history.
+All31 subjects now have genuine current readiness after the guarded pass and
+root independent post-verification at02:58:16–23 UTC. The same supplier owner
+checked all affected17 consumers. The later populated KL-8 consumer obligation
+is discharged at scaffold-strategy level by the same supplier owner in the
+batch18 focused review; this does not claim an authored-item audit. Evidence: owner-category-o-batch17-review.json,
+its eight local proof notes and root-final-approval.json. This is scaffold
+strategy evidence, not an independent authored-item audit or gate result.
 
 ## KL-8 — The degenerate Ariki categorification theorem
 
@@ -231,15 +324,17 @@ Hodge induction.
 
 | proposed item | exact content and proof joint |
 |---|---|
-| `def-degenerate-cyclotomic-hecke-tower-and-residue-functors` | Direct sum over ranks/blocks with exact induction and restriction summands. |
-| `thm-the-degenerate-cyclotomic-hecke-g-zero-is-the-dual-highest-weight-module` | Transfer the category-O action across Schur--Weyl and prove generation. |
-| `thm-the-degenerate-cyclotomic-hecke-projective-k-zero-is-the-highest-weight-module` | Use projective/simple perfect pairing and adjunction. |
-| `thm-degenerate-ariki-categorification` | Under the bounded-below charge hypotheses, simples map to dual-canonical basis and indecomposable projectives to canonical/quasi-canonical basis in the source's precise normalization. |
-| `thm-degenerate-specht-decomposition-numbers-are-canonical-basis-coefficients-at-one` | Use the exact Schur image of standards and the transition matrix. |
-| `prop-sign-duality-and-ringel-duality-match-fock-space-involutions` | State the charge reversal, conjugation and basis involution exactly. |
-| `rem-degenerate-and-nondegenerate-ariki-theorems-have-distinct-parameter-ranges` | Point to QG-8 plus the cyclotomic Hecke--KLR isomorphism for the nondegenerate theorem; assert no implication between parameter regimes. |
+| `def-degenerate-cyclotomic-hecke-tower-and-residue-functors` | Use the supported central cut, arbitrary-dimensional spectral projectors and actual single-block centre proof via a full O generator and all-projective faithfulness. Preserve exact residue functors and level-zero convention. |
+| `thm-the-degenerate-cyclotomic-hecke-g-zero-is-the-dual-highest-weight-module` | Identify the entire integral projected costandard lattice. Retain rational ground cyclicity and categorical simple reachability; integral costandard ground cyclicity fails by the index-two rank-one witness. |
+| `thm-the-degenerate-cyclotomic-hecke-projective-k-zero-is-the-highest-weight-module` | Identify the integral standard divided-power lattice and its inclusion into the costandard lattice, with projected-simple Hom/Shapovalov duality. Use the right-exact Schur adjoint only on projectives. |
+| `thm-degenerate-ariki-categorification` | Keep the full simultaneous basis/action/head-socle theorem and arbitrary-consecutive-I extension. Every finite cut contains all charges and required supports; contract common ground tails and absent top entries. |
+| `thm-degenerate-specht-decomposition-numbers-are-canonical-basis-coefficients-at-one` | Use d=p(-s)^-1, with full Col Specht columns and Std simple rows. Keep shortest-right/inverse-left and distinct entry/column stabilizers; diagonal multiplicity applies only to Std. |
+| `prop-sign-duality-and-ringel-duality-match-fock-space-involutions` | Keep global charge/content reversal and projected Std/Rev rectification. Full Young and signed generators range over ALL Col; use actual reversed-Levi F and the opposite Serre quotient for a proper ideal. |
+| `rem-degenerate-and-nondegenerate-ariki-theorems-have-distinct-parameter-ranges` | Retain the sourced generic xi bridge with Q_j=xi^m_j and its parameter restriction; the level-one xi=-1 radical witness refutes universal root-parameter transport. No new local Hecke-KLR bridge proof is claimed. |
 
 **B companion:** `the-degenerate-ariki-categorification-theorem-examples`.
+
+Current native inventory remains7A+4B, orders1792/1793 and unchanged page requires. The examples retain the full height-two three-block model, projected half-sum dual basis, index-two lattice distinction and all eight ambient labels with genuine Std/Rev sign rectification. Same original supplier reviewers completed the eight recorded consumer-defect repairs in ROUND1; root read the affected contracts and focused proof notes and serially integrated the three example proposals. All actual affected uses are mapped; no outside18 or published literal-ID consumer was found. This is scaffold-strategy repair evidence, not an independent authored-proof audit. All11 subjects have genuine current readiness after the guarded pass and root independent raw/semantic post-verification at04:42:03–08 UTC. The completed guard window is preserved as history; no gate or authored-proof audit is implied.
 
 ## 2. B-companion item inventory
 
@@ -320,8 +415,27 @@ Primary complete texts currently inspected by root:
 | Gan--Ginzburg, *Quantization of Slodowy Slices*, [arXiv:math/0105225](https://arxiv.org/abs/math/0105225) | complete 13-page published article inspected through the arXiv full text | §§2 and 4--5 for the contracting decomposition, Kazhdan filtration and cohomology vanishing; §6, especially Theorem 6.1 and its alternative proof, for Skryabin equivalence over a complex semisimple Lie algebra |
 | Brundan--Kleshchev, *Schur--Weyl Duality for Higher Levels*, [arXiv:math/0605217](https://arxiv.org/abs/math/0605217) | complete 50-page article; SHA-256 `30c44793414f4b103d3de733d1c904b2f56f9fd5de1fe3e3d3ebaabdab861878` | §§2--3 filtered Vust/finite-W double centralizer and cyclotomic quotient; §4 parabolic O/projectives; §5 Whittaker functor and Theorems 5.10, 5.13; §6 idempotent truncation, Schur equivalence and standard/Specht/simple images |
 
-The primary Soergel preprint now supplies Endomorphismensatz, Struktursatz and
-translation compatibility for KL-3 through KL-5. The complete higher-level
+For KL-3, Soergel's complete preprint is source context, not a substitute for
+its imported universal-family endomorphism theorem. The current local proof
+suppliers retain that all-T claim: MIT 18.757 §§13, 17 and 18 were inspected for
+harmonic rank, the nilpotent central fiber and Duflo--Joseph; the slice/Jacobian,
+PBW-growth and finite raising-matrix/base-change steps are expanded locally.
+The separate local-R projective construction supports the central order,
+Endomorphismensatz, Struktursatz and the polynomial/deformed multiplicity dictionary.
+KL-4 proves actual inverse regular-block translations through unit/counit and
+finite presentations, and uses the weighted inverse-KL matrix for characters.
+KL-5 uses finite Levi Weyl-character cancellation (the inspected Moreau
+§§13.1–13.3 and actual published Weyl supplier) for genuine regular parabolic
+antispherical multiplicities, while singular multiplicities use the spherical
+matrix with the explicit `k` label map. The inspected Mazorchuk--Stroppel
+projectively parabolic-presentable, properly stratified category is not identified
+with genuine parabolic O; the Ko--Mazorchuk--Mrđen duality route is not imported.
+Constructive projectives, maximal traces, Hom/Ext1 and BGG preserve the generic
+structural claims without Koszul duality. Owner scaffold readiness is current
+29/29, 11/11 and 18/18 for these pairs; these reviews are not independent audits
+of authored items.
+
+The complete higher-level
 Schur--Weyl paper supplies the filtered Vust/finite-W, Whittaker, idempotent-corner
 and parabolic-O chain for KL-7. Its imported finite-W PBW and Skryabin inputs are
 now explicit proposed items rather than hidden citations. The cached 40-page

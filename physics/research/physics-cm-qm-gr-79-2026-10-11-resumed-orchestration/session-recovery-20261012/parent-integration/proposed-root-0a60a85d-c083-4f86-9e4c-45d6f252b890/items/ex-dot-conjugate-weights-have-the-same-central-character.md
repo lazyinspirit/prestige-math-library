@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dot-conjugate-weights-have-the-same-central-character.md

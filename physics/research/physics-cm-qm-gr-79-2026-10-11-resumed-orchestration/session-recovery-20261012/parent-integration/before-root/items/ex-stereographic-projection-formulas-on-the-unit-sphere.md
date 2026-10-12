@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-stereographic-projection-formulas-on-the-unit-sphere.md

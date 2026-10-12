@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-projective-nakayama-pairing-and-symmetric-algebra-specialization.md

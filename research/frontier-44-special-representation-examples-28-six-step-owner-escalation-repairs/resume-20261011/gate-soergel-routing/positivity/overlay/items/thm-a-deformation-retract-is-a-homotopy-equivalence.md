@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-deformation-retract-is-a-homotopy-equivalence.md

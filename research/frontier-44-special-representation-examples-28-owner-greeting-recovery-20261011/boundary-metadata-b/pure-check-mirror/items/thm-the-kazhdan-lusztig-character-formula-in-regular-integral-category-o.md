@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-kazhdan-lusztig-character-formula-in-regular-integral-category-o.md

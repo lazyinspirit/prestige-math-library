@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-strictly-decreasing-gaps-no-limit.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules.md

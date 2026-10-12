@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-change-of-variables-on-bounded-open-jordan-sets.md

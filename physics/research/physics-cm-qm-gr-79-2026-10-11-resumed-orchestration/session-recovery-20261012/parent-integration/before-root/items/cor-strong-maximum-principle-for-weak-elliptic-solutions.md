@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-strong-maximum-principle-for-weak-elliptic-solutions.md

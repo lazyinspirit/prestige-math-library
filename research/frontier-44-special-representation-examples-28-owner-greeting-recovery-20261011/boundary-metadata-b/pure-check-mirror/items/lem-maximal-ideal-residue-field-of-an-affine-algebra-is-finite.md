@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-product-of-two-distributions-is-not-canonically-defined.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-fully-faithful-functors-reflect-isomorphisms.md

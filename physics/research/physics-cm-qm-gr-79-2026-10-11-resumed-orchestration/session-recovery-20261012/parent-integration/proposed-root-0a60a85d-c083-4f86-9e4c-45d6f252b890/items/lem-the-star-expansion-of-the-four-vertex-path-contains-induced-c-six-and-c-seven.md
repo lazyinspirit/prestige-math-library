@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-star-expansion-of-the-four-vertex-path-contains-induced-c-six-and-c-seven.md

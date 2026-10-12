@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-trace-vanishes-on-a-purely-inseparable-extension.md

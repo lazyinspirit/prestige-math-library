@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-logarithmic-capacity-equals-transfinite-diameter.md

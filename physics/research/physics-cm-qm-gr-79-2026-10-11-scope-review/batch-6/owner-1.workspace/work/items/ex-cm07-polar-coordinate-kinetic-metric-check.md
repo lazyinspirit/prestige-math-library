@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cm07-polar-coordinate-kinetic-metric-check.md

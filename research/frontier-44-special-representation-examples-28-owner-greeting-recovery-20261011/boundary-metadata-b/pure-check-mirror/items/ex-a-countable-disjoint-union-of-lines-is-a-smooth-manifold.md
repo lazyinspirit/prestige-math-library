@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-countable-disjoint-union-of-lines-is-a-smooth-manifold.md

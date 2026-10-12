@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-omitting-the-rho-shift-breaks-kostants-formula.md

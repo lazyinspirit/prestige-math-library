@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cohen-macaulay-associated-primes-unmixed.md

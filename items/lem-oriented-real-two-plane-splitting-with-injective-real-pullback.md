@@ -254,242 +254,39 @@ metric ([[thm-every-smooth-vector-bundle-admits-a-smooth-bundle-metric]]).
 
 ## Proof
 
+
 **Proof technique:** construct one oriented Grassmann tower, calculate its
 fiber basis, and prove injectivity at each stage.
 
-1.1 Fix $n\geq3$ and write $G_n=\operatorname{Gr}_2^+(\mathbb R^n)$, with [F2, F13]
-tautological oriented plane $L$ and oriented orthogonal complement $Q$. The
-quotient definition gives a continuous bijection from the compact Stiefel
-quotient to the set of unit simple bivectors in $\Lambda^2\mathbb R^n$;
-the bivector records both the plane and its orientation. A continuous bijection
-from a compact space to a Hausdorff space is a homeomorphism here: a closed
-subset of the compact source is compact, and its image is closed in the
-Hausdorff target by [F13]. The graph charts make $G_n$ a smooth manifold of
-dimension $2n-4$; the finite coordinate-plane chart cover makes it
-second-countable. The group $\operatorname{SO}(n)$
-acts transitively on oriented two-planes, and is path-connected: successive
-plane rotations reduce any special orthogonal matrix to the identity. Hence
-$G_n$ is path-connected. [F2, F13, linear algebra]
+1.1 Fix $n\geq3$ and write $G_n=\operatorname{Gr}_2^+(\mathbb R^n)$, with F2, F13 tautological oriented plane $L$ and oriented orthogonal complement $Q$. The quotient definition gives a continuous bijection from the compact Stiefel quotient to the set of unit simple bivectors in $\Lambda^2\mathbb R^n$; the bivector records both the plane and its orientation. A continuous bijection from a compact space to a Hausdorff space is a homeomorphism here: a closed subset of the compact source is compact, and its image is closed in the Hausdorff target by F13. The graph charts make $G_n$ a smooth manifold of dimension $2n-4$; the finite coordinate-plane chart cover makes it second-countable. The group $\operatorname{SO}(n)$ acts transitively on oriented two-planes, and is path-connected: successive plane rotations reduce any special orthogonal matrix to the identity. Hence $G_n$ is path-connected. [F2, F13, algebra]
 
-1.2 Let $W_n=\mathbb{CP}^{n-1}\setminus\mathbb{RP}^{n-1}$. Write a point as [F2]
-$[z]=[x-iy]$ with $x,y\in\mathbb R^n$ linearly independent. The ordered pair
-$(x,y)$ orients its real span; multiplying $z$ by a nonzero complex scalar
-changes $(x,y)$ by a positive-determinant similarity, so this defines a map
-$W_n\to G_n$. Conversely, in a local oriented orthonormal frame of a plane,
-the point of $W_n$ is an invertible $2\times2$ real matrix modulo positive
-similarities. Polar decomposition writes it uniquely as a positive scalar,
-an element of $\operatorname{SO}(2)$, and a positive symmetric determinant-one
-matrix. Thus $W_n$ is the associated bundle over $G_n$ with fiber the positive
-symmetric determinant-one matrices. The homotopy $A\mapsto A^{1-t}$ contracts
-that fiber to the identity; it is equivariant under orthogonal conjugation,
-so it descends through the frame changes and gives a deformation retraction
-$W_n\simeq G_n$. The real-part map on each complex tautological line sends
-$z=x-iy$ and $iz=y+ix$ to the positively oriented basis $(x,y)$, identifying
-the pulled-back oriented plane with the underlying real complex tautological
-line. [F2, linear algebra, step 1.1]
+2.1 Let $W_n=\mathbb{CP}^{n-1}\setminus\mathbb{RP}^{n-1}$. Write a point as F2 $[z]=[x-iy]$ with $x,y\in\mathbb R^n$ linearly independent. The ordered pair $(x,y)$ orients its real span; multiplying $z$ by a nonzero complex scalar changes $(x,y)$ by a positive-determinant similarity, so this defines a map $W_n\to G_n$. Conversely, in a local oriented orthonormal frame of a plane, the point of $W_n$ is an invertible $2\times2$ real matrix modulo positive similarities. Polar decomposition writes it uniquely as a positive scalar, an element of $\operatorname{SO}(2)$, and a positive symmetric determinant-one matrix. Thus $W_n$ is the associated bundle over $G_n$ with fiber the positive symmetric determinant-one matrices. The homotopy $A\mapsto A^{1-t}$ contracts that fiber to the identity; it is equivariant under orthogonal conjugation, so it descends through the frame changes and gives a deformation retraction $W_n\simeq G_n$. The real-part map on each complex tautological line sends $z=x-iy$ and $iz=y+ix$ to the positively oriented basis $(x,y)$, identifying the pulled-back oriented plane with the underlying real complex tautological line. [F2, step 1.1, construct]
 
-1.3 Put $X=\mathbb{CP}^{n-1}$, $A=\mathbb{RP}^{n-1}$, and $d=2n-2$. [F6, F7, F14]
-The quotient maps from $S^{2n-1}$ to $X$ and from $S^{n-1}$ to $A$ show that
-both are compact. By [F7], $A$ is a closed smooth embedded submanifold.
-The tubular-neighborhood theorem [F7] gives a tubular diffeomorphism from an
-open neighborhood of the zero section of the normal bundle onto a neighborhood
-of $A$. By [F14], give the normal bundle a smooth metric. Around each point of
-the compact zero section, a bundle chart contains a product neighborhood lying
-inside the tubular domain; finitely many such base patches cover $A$, and the
-minimum of their positive fiber radii gives a uniform disk neighborhood.
-Every smaller-radius disk neighborhood deformation retracts radially to $A$.
-Their images $U$ are nested tubular neighborhoods. Their
-complements $K=X\setminus U$ are compact subsets of $W_n$ and are cofinal
-among compact subsets of $W_n$: for compact $C\subset W_n$, the open set
-$X\setminus C$ contains the compact zero section, so compactness gives a
-sufficiently small uniform disk neighborhood lying in $X\setminus C$. By
-[F7] and excision,
-$H_c^q(W_n;\mathbb R)\cong\operatorname*{colim}_U H^q(X,U;\mathbb R)$.
-The inclusion $A\hookrightarrow U$ is a homotopy equivalence; the natural
-pair long exact sequences and five lemma identify every $H^q(X,U;\mathbb R)$
-with $H^q(X,A;\mathbb R)$. Consequently $H_c^q(W_n;\mathbb R)\cong
-H^q(X,A;\mathbb R)$, and the map forgetting support is the relative-to-absolute
-map $\epsilon:H^q(X,A;\mathbb R)\to H^q(X;\mathbb R)$. [A1, F7, F6, F14, topology, step 1.2]
+2.2 For each oriented smooth Euclidean bundle $V\to B$ of rank $n\ge3$, F1, F2, F3, F5 form its oriented Grassmann bundle $\pi:G_2^+(V)\to B$. Local positive orthonormal frames and the graph charts of F2 give smooth local product charts with fiber $G_n$. Transition maps act smoothly by $\operatorname{SO}(n)$; their formulas remain smooth on half-space charts by F5 when $B$ has boundary. Thus the total is a finite-dimensional smooth manifold, with boundary exactly over the boundary of $B$. It is Hausdorff: points over different base points separate by inverse images of base neighborhoods, and points in one fiber separate in a bundle chart. It is second-countable: the trivializing cover has a countable subcover by Lindelöfness; each product chart has a countable basis, and their countable union is a basis. The pulled-back bundle splits orthogonally as $\pi^*V=L_V\oplus Q_V$, with both summands oriented as in F2. [F1, F2, F3, step 1.1]
 
-1.4 Apply the natural UCT to the integral homology in [F6]. For $G=\mathbb Z$, [F6, F7]
-$\operatorname{Hom}(G,\mathbb R)=\mathbb R$ and
-$\operatorname{Ext}^1(G,\mathbb R)=0$. For $G=\mathbb Z/2$ both terms vanish:
-the Hom group is zero because $\mathbb R$ has no 2-torsion, and the free
-resolution $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$
-computes $\operatorname{Ext}^1(\mathbb Z/2,\mathbb R)=\mathbb R/2\mathbb R=0$.
-Thus $H^q(X;\mathbb R)=\mathbb R$ in even degrees $0,2,\ldots,d$ and zero
-otherwise. For $A$, it is $\mathbb R$ in degree zero, and also in degree
-$n-1$ when $n$ is even; all its other positive-degree groups vanish. The
-pair long exact sequence now gives $H_c^0(W_n;\mathbb R)=0$; for positive
-even $q\le d$ it gives $H_c^q(W_n;\mathbb R)=\mathbb R$ except that
-$H_c^n(W_n;\mathbb R)=\mathbb R^2$ when $n$ is even; all odd groups and
-groups outside $[0,d]$ vanish. [A1, F6, F7, UCT calculation, step 1.3]
+3.1 Put $X=\mathbb{CP}^{n-1}$, $A=\mathbb{RP}^{n-1}$, and $d=2n-2$. F6, F7, F14 The quotient maps from $S^{2n-1}$ to $X$ and from $S^{n-1}$ to $A$ show that both are compact. By F7, $A$ is a closed smooth embedded submanifold. The tubular-neighborhood theorem F7 gives a tubular diffeomorphism from an open neighborhood of the zero section of the normal bundle onto a neighborhood of $A$. By F14, give the normal bundle a smooth metric. Around each point of the compact zero section, a bundle chart contains a product neighborhood lying inside the tubular domain; finitely many such base patches cover $A$, and the minimum of their positive fiber radii gives a uniform disk neighborhood. Every smaller-radius disk neighborhood deformation retracts radially to $A$. Their images $U$ are nested tubular neighborhoods. Their complements $K=X\setminus U$ are compact subsets of $W_n$ and are cofinal among compact subsets of $W_n$: for compact $C\subset W_n$, the open set $X\setminus C$ contains the compact zero section, so compactness gives a sufficiently small uniform disk neighborhood lying in $X\setminus C$. By F7 and excision, $H_c^q(W_n;\mathbb R)\cong\operatorname*{colim}_U H^q(X,U;\mathbb R)$. The inclusion $A\hookrightarrow U$ is a homotopy equivalence; the natural pair long exact sequences and five lemma identify every $H^q(X,U;\mathbb R)$ with $H^q(X,A;\mathbb R)$. Consequently $H_c^q(W_n;\mathbb R)\cong H^q(X,A;\mathbb R)$, and the map forgetting support is the relative-to-absolute map $\epsilon:H^q(X,A;\mathbb R)\to H^q(X;\mathbb R)$. [A1, F7, F6, F14, step 2.1]
 
-1.5 The complex orientation of $X$ restricts to an orientation of the open [F6, F8, F9]
-manifold $W_n$. Poincaré duality and the deformation retraction in step 1.2
-therefore compute $H^*(G_n;\mathbb R)$: it is $\mathbb R$ in degrees
-$0,2,\ldots,2n-4$, zero in odd degrees, and has dimension two in degree
-$n-2$ when $n$ is even. Let $a=e(\gamma_{\mathbb C,\mathbb R})\in H^2(X;\mathbb Z)$
-be the generator from [F6], let $i:W_n\hookrightarrow X$, and let
-$x=e(L)\in H^2(G_n;\mathbb Z)$, with integral classes mapped to real
-coefficients as needed. By [F6] and [F8], the image of each $a^j$ is a nonzero
-generator of $H^{2j}(X;\mathbb R)$. For positive even $q\le d$ except $q=n$ when $n$ is
-even, the pair sequence shows $\epsilon$ of step 1.3 is an isomorphism. PD
-identifies it with $i_*:H_{d-q}(W_n;\mathbb R)\to H_{d-q}(X;\mathbb R)$.
-By the natural UCT pairing, the dual restriction
-$i^*:H^{d-q}(X;\mathbb R)\to H^{d-q}(W_n;\mathbb R)$ is therefore an
-isomorphism. Step 1.2 identifies the pullback of $x$ with $i^*a$; since
-$a^j$ generates $H^{2j}(X;\mathbb Z)$, it follows that $x^j\ne0$ for every
-$0\le j\le n-2$ except possibly $j=(n-2)/2$ when $n$ is even. In that
-exceptional case $x^j\ne0$ follows below from the nonzero square
-$x^{n-2}$. [A1, F6, F8, F9, step 1.2, step 1.3, step 1.4]
+3.2 Each $\pi$ is proper. Let $K\subset B$ be compact. F13 Around each point of $K$, choose a relatively open coordinate ball or half-ball $U$ whose compact closure lies inside a bundle-trivializing chart. Heine–Borel makes each closure compact. Finitely many such $U_i$ cover $K$. Each $K\cap\overline{U_i}$ is a closed subset of compact $K$, hence compact; in the trivialization, $\pi^{-1}(K\cap\overline{U_i})$ is homeomorphic to $(K\cap\overline{U_i})\times G_n$, compact by F13. Their finite union is $\pi^{-1}(K)$, so it is compact. [F3, F13, step 2.2]
 
-1.6 Suppose $n=2k\ge4$. The ordered sum $L\oplus Q$ is the trivial oriented [F9, F10]
-rank-$2k$ bundle. By [F9], $x e(Q)=e(L)e(Q)=e(L\oplus Q)=0$, since the
-trivial positive-rank bundle has a nowhere-zero section. To calculate the
-square, take a homotopy equivalence $h:Y\to G_n$ from a path-connected CW
-complex. Since $G_n$ is a finite-dimensional second-countable smooth
-manifold, [F4] makes $Q$ numerable; pulling its numeration back makes
-$Q_Y=h^*Q$ numerable on $Y$. Hatcher's CW paracompactness proof, recorded in [F4],
-gives that $Y$ is paracompact and Hausdorff, so the Pontryagin suppliers apply.
-Set $L_Y=h^*L$ and $x_Y=h^*x$. Euler naturality identifies their Euler
-classes with pullbacks of those on $G_n$. The top
-Pontryagin theorem gives $p_1(L_Y)=x_Y^2$, and the rank cutoff gives
-$p(L_Y)=1+x_Y^2$. Pontryagin multiplicativity over $\mathbb R$ and stability
-under a trivial summand yield $p(L_Y)p(Q_Y)=p(L_Y\oplus Q_Y)=1$. Comparing
-successive homogeneous degrees in this equation gives
-$p_j(Q_Y)=(-1)^j x_Y^{2j}$ for $0\le j\le k-1$. The top Pontryagin theorem
-for $Q_Y$ then gives $e(Q_Y)^2=p_{k-1}(Q_Y)=(-1)^{k-1}x_Y^{n-2}$.
-Since $h^*$ is an isomorphism and Euler classes are natural, this descends to
-$e(Q)^2=(-1)^{k-1}x^{n-2}$ on $G_n$. Step 1.5 established
-$x^{n-2}\ne0$; hence $x^{(n-2)/2}$ and $e(Q)$ are linearly independent:
-multiplying a relation $\alpha x^{(n-2)/2}+\beta e(Q)=0$ by $x$ and using
-$xe(Q)=0$ gives $\alpha x^{n/2}=0$, while step 1.5 gives $x^{n/2}\ne0$;
-then $\alpha=0$, and $e(Q)^2\ne0$ forces $\beta=0$. These two classes
-therefore form a basis of the two-dimensional middle cohomology. For odd $n$,
-the nonzero powers in step 1.5 already form a basis by their distinct
-degrees. Thus the full fiber basis is $1,x,\ldots,x^{n-2}$ when $n$ is odd,
-and $1,x,\ldots,x^{n-2},e(Q)$ when $n$ is even. [A1, F4, F9, F10, step 1.5]
+3.3 Every stage projection is numerable. On its smooth base, apply the F3, F4 boundaryless or boundary partition theorem in F3 to its bundle-trivializing cover; the supplied partition satisfies the support and local-finiteness conditions in the definition of numerable fiber bundle. Its total is again a second-countable smooth manifold, so F4 makes every stage paracompact Hausdorff and of CW homotopy type and makes its smooth finite-rank vector bundles numerable. [A1, F3, F4, step 2.2]
 
-1.7 For each oriented smooth Euclidean bundle $V\to B$ of rank $n\ge3$, [F1, F2, F3, F5]
-form its oriented Grassmann bundle $\pi:G_2^+(V)\to B$. Local positive
-orthonormal frames and the graph charts of [F2] give smooth local product
-charts with fiber $G_n$. Transition maps act smoothly by $\operatorname{SO}(n)$;
-their formulas remain smooth on half-space charts by [F5] when $B$ has
-boundary. Thus the total is a finite-dimensional smooth manifold, with boundary exactly over
-the boundary of $B$. It is Hausdorff: points over different base points
-separate by inverse images of base neighborhoods, and points in one fiber
-separate in a bundle chart. It is second-countable: the trivializing cover
-has a countable subcover by Lindelöfness; each product chart has a countable
-basis, and their countable union is a basis. The pulled-back bundle splits
-orthogonally as $\pi^*V=L_V\oplus Q_V$, with both summands oriented as in [F2].
-[F1, F2, F3, step 1.1]
+4.1 Apply the natural UCT to the integral homology in F6. For $G=\mathbb Z$, F6, F7 $\operatorname{Hom}(G,\mathbb R)=\mathbb R$ and $\operatorname{Ext}^1(G,\mathbb R)=0$. For $G=\mathbb Z/2$ both terms vanish: the Hom group is zero because $\mathbb R$ has no 2-torsion, and the free resolution $0\to\mathbb Z\xrightarrow{2}\mathbb Z\to\mathbb Z/2\to0$ computes $\operatorname{Ext}^1(\mathbb Z/2,\mathbb R)=\mathbb R/2\mathbb R=0$. Thus $H^q(X;\mathbb R)=\mathbb R$ in even degrees $0,2,\ldots,d$ and zero otherwise. For $A$, it is $\mathbb R$ in degree zero, and also in degree $n-1$ when $n$ is even; all its other positive-degree groups vanish. The pair long exact sequence now gives $H_c^0(W_n;\mathbb R)=0$; for positive even $q\le d$ it gives $H_c^q(W_n;\mathbb R)=\mathbb R$ except that $H_c^n(W_n;\mathbb R)=\mathbb R^2$ when $n$ is even; all odd groups and groups outside $[0,d]$ vanish. [A1, F6, F7, step 3.1]
 
-1.8 Each $\pi$ is proper. Let $K\subset B$ be compact. [F13]
-Around each point of $K$, choose a relatively open coordinate ball or half-ball $U$ whose compact
-closure lies inside a bundle-trivializing chart. Heine–Borel makes each
-closure compact. Finitely many such $U_i$ cover $K$. Each $K\cap\overline{U_i}$
-is a closed subset of compact $K$, hence compact; in the trivialization,
-$\pi^{-1}(K\cap\overline{U_i})$ is homeomorphic to
-$(K\cap\overline{U_i})\times G_n$, compact by [F13]. Their finite union is
-$\pi^{-1}(K)$, so it is compact. [F3, F13, local charts, step 1.7]
+4.2 We prove real-cohomology injectivity for $\pi:G_2^+(V)\to B$ componentwise. F4, F11 The fiber $G_n$ is path-connected. Since a smooth manifold is locally path connected, its connected components are path components; the local bundle charts and path lifting show that the total-space components are exactly the preimages of base components. Fix one such component $C$ and a path-connected CW complex $Y$ with a homotopy equivalence $h:Y\to C$, available by F4. Pull back $\pi$ to $\widetilde G\to Y$. The pulled-back bundle is numerable because its partition is the pullback of the partition in step 3.3. By F11 both projections are Hurewicz, hence Serre, fibrations. [A1, F4, F11, step 3.3]
 
-1.9 Every stage projection is numerable. On its smooth base, apply the [F3, F4]
-boundaryless or boundary partition theorem in [F3] to its bundle-trivializing
-cover; the supplied partition satisfies the support and local-finiteness
-conditions in the definition of numerable fiber bundle. Its total is again
-a second-countable smooth manifold, so [F4] makes every stage paracompact
-Hausdorff and of CW homotopy type and makes its smooth finite-rank vector
-bundles numerable. [A1, F3, F4, step 1.7]
+5.1 The complex orientation of $X$ restricts to an orientation of the open F6, F8, F9 manifold $W_n$. Poincaré duality and the deformation retraction in step 2.1 therefore compute $H^*(G_n;\mathbb R)$: it is $\mathbb R$ in degrees $0,2,\ldots,2n-4$, zero in odd degrees, and has dimension two in degree $n-2$ when $n$ is even. Let $a=e(\gamma_{\mathbb C,\mathbb R})\in H^2(X;\mathbb Z)$ be the generator from F6, let $i:W_n\hookrightarrow X$, and let $x=e(L)\in H^2(G_n;\mathbb Z)$, with integral classes mapped to real coefficients as needed. By F6 and F8, the image of each $a^j$ is a nonzero generator of $H^{2j}(X;\mathbb R)$. For positive even $q\le d$ except $q=n$ when $n$ is even, the pair sequence shows $\epsilon$ of step 3.1 is an isomorphism. PD identifies it with $i_*:H_{d-q}(W_n;\mathbb R)\to H_{d-q}(X;\mathbb R)$. By the natural UCT pairing, the dual restriction $i^*:H^{d-q}(X;\mathbb R)\to H^{d-q}(W_n;\mathbb R)$ is therefore an isomorphism. Step 2.1 identifies the pullback of $x$ with $i^*a$; since $a^j$ generates $H^{2j}(X;\mathbb Z)$, it follows that $x^j\ne0$ for every $0\le j\le n-2$ except possibly $j=(n-2)/2$ when $n$ is even. In that exceptional case $x^j\ne0$ follows below from the nonzero square $x^{n-2}$. [A1, F6, F8, F9, step 2.1, step 3.1, step 4.1]
 
-1.10 We prove real-cohomology injectivity for $\pi:G_2^+(V)\to B$ componentwise. [F4, F11]
-The fiber $G_n$ is path-connected. Since a smooth manifold is locally path
-connected, its connected components are path components; the local bundle
-charts and path lifting show that the total-space components are exactly the
-preimages of base components. Fix one such component $C$ and a path-connected
-CW complex $Y$ with a homotopy equivalence $h:Y\to C$, available by [F4].
-Pull back $\pi$ to $\widetilde G\to Y$. The pulled-back bundle is numerable
-because its partition is the pullback of the partition in step 1.9. By [F11]
-both projections are Hurewicz, hence Serre, fibrations. [A1, F4, F11, step 1.9]
+5.2 The pullback map $\widetilde h:\widetilde G\to\pi^{-1}(C)$ induces a F11 weak homotopy equivalence. On fibers it is the identity, and on bases it is the homotopy equivalence $h$. The natural long exact sequences F11 give isomorphisms on all higher homotopy groups. For $m\ge3$, the terms in the five-term segment around $\pi_m$ are abelian, so the module five lemma applies. In degree two, if $z\in\pi_2(\widetilde G)$ maps to zero, its base class is zero because $h_*:\pi_2(Y)\to\pi_2(C)$ is injective; hence $z$ comes from $\pi_2(G_n)$. Its fiber class is a boundary from $\pi_3(C)$, which lifts through the surjection $h_*:\pi_3(Y)\to\pi_3(C)$, so exactness makes $z=0$. Conversely, for $z\in\pi_2(\pi^{-1}(C))$, its base class lifts to $\pi_2(Y)$; naturality and the identity fiber map make the lifted class have zero boundary in $\pi_1(G_n)$, so exactness lifts it to $\pi_2(\widetilde G)$. The difference from $z$ lies in the image of $\pi_2(G_n)$ and can be corrected there. For $\pi_1$ use the group sequence $\pi_2(C)\to\pi_1(G_n)\to\pi_1(\pi^{-1}C)\to\pi_1(C)\to\pi_0(G_n)$: injectivity lifts a boundary witness through $\pi_2(Y)\to\pi_2(C)$, and surjectivity first lifts the base loop through $h_*$ and then corrects by a loop in the common fiber. Since the fiber and both bases are path-connected, the total spaces are path-connected too, so $\widetilde h$ is also a bijection on components. [F11, step 4.2]
 
-1.11 The global classes $1,e(L_V),e(L_V)^2,\ldots,e(L_V)^{n-2}$, [F9, F12]
-together with $e(Q_V)$ when $n$ is even, restrict to the full fiber basis
-of step 1.6 by naturality of Euler classes and cup products. Pull these
-classes back to $\widetilde G$; on each fiber their restrictions are the
-same basis. Applying Leray–Hirsch
-[F12] to $\widetilde G\to Y$ shows that
-$\widetilde\pi^*:H^*(Y;\mathbb R)\to H^*(\widetilde G;\mathbb R)$ is
-injective: in the module isomorphism, pullback is exactly the coefficient of
-the basis element $1$. [A1, F9, F12, step 1.6, step 1.10]
+6.1 Suppose $n=2k\ge4$. The ordered sum $L\oplus Q$ is the trivial oriented F9, F10 rank-$2k$ bundle. By F9, $x e(Q)=e(L)e(Q)=e(L\oplus Q)=0$, since the trivial positive-rank bundle has a nowhere-zero section. To calculate the square, take a homotopy equivalence $h:Y\to G_n$ from a path-connected CW complex. Since $G_n$ is a finite-dimensional second-countable smooth manifold, F4 makes $Q$ numerable; pulling its numeration back makes $Q_Y=h^*Q$ numerable on $Y$. Hatcher's CW paracompactness proof, recorded in F4, gives that $Y$ is paracompact and Hausdorff, so the Pontryagin suppliers apply. Set $L_Y=h^*L$ and $x_Y=h^*x$. Euler naturality identifies their Euler classes with pullbacks of those on $G_n$. The top Pontryagin theorem gives $p_1(L_Y)=x_Y^2$, and the rank cutoff gives $p(L_Y)=1+x_Y^2$. Pontryagin multiplicativity over $\mathbb R$ and stability under a trivial summand yield $p(L_Y)p(Q_Y)=p(L_Y\oplus Q_Y)=1$. Comparing successive homogeneous degrees in this equation gives $p_j(Q_Y)=(-1)^j x_Y^{2j}$ for $0\le j\le k-1$. The top Pontryagin theorem for $Q_Y$ then gives $e(Q_Y)^2=p_{k-1}(Q_Y)=(-1)^{k-1}x_Y^{n-2}$. Since $h^*$ is an isomorphism and Euler classes are natural, this descends to $e(Q)^2=(-1)^{k-1}x^{n-2}$ on $G_n$. Step 5.1 established $x^{n-2}\ne0$; hence $x^{(n-2)/2}$ and $e(Q)$ are linearly independent: multiplying a relation $\alpha x^{(n-2)/2}+\beta e(Q)=0$ by $x$ and using $xe(Q)=0$ gives $\alpha x^{n/2}=0$, while step 5.1 gives $x^{n/2}\ne0$; then $\alpha=0$, and $e(Q)^2\ne0$ forces $\beta=0$. These two classes therefore form a basis of the two-dimensional middle cohomology. For odd $n$, the nonzero powers in step 5.1 already form a basis by their distinct degrees. Thus the full fiber basis is $1,x,\ldots,x^{n-2}$ when $n$ is odd, and $1,x,\ldots,x^{n-2},e(Q)$ when $n$ is even. [A1, F4, F9, F10, step 5.1]
 
-1.12 The pullback map $\widetilde h:\widetilde G\to\pi^{-1}(C)$ induces a [F11]
-weak homotopy equivalence. On fibers it is the identity, and on bases it is
-the homotopy equivalence $h$. The natural long exact sequences [F11] give
-isomorphisms on all higher homotopy groups. For $m\ge3$, the terms in the
-five-term segment around $\pi_m$ are abelian, so the module five lemma
-applies. In degree two, if $z\in\pi_2(\widetilde G)$ maps to zero, its base
-class is zero because $h_*:\pi_2(Y)\to\pi_2(C)$ is injective; hence $z$
-comes from $\pi_2(G_n)$. Its fiber class is a boundary from $\pi_3(C)$,
-which lifts through the surjection $h_*:\pi_3(Y)\to\pi_3(C)$, so exactness
-makes $z=0$. Conversely, for $z\in\pi_2(\pi^{-1}(C))$, its base class lifts
-to $\pi_2(Y)$; naturality and the identity fiber map make the lifted class
-have zero boundary in $\pi_1(G_n)$, so exactness lifts it to
-$\pi_2(\widetilde G)$. The difference from $z$ lies in the image of
-$\pi_2(G_n)$ and can be corrected there. For $\pi_1$ use the group sequence
-$\pi_2(C)\to\pi_1(G_n)\to\pi_1(\pi^{-1}C)\to\pi_1(C)\to\pi_0(G_n)$:
-injectivity lifts a boundary witness through $\pi_2(Y)\to\pi_2(C)$, and
-surjectivity first lifts the base loop through $h_*$ and then corrects by a
-loop in the common fiber. Since the fiber and both bases are path-connected,
-the total spaces are path-connected too, so $\widetilde h$ is also a
-bijection on components. [F11, exactness, step 1.10]
+7.1 The global classes $1,e(L_V),e(L_V)^2,\ldots,e(L_V)^{n-2}$, F9, F12 together with $e(Q_V)$ when $n$ is even, restrict to the full fiber basis of step 6.1 by naturality of Euler classes and cup products. Pull these classes back to $\widetilde G$; on each fiber their restrictions are the same basis. Applying Leray–Hirsch F12 to $\widetilde G\to Y$ shows that $\widetilde\pi^*:H^*(Y;\mathbb R)\to H^*(\widetilde G;\mathbb R)$ is injective: in the module isomorphism, pullback is exactly the coefficient of the basis element $1$. [A1, F9, F12, step 6.1, step 4.2]
 
-1.13 By [F11], $\widetilde h$ induces an isomorphism on integral homology. [F8, F11]
-Apply the natural UCT sequence to the free singular chain complexes with
-coefficient group $\mathbb R$. The induced maps on the Hom and Ext terms are
-isomorphisms because the integral homology maps are; the five lemma therefore
-makes $\widetilde h^*:H^*(\pi^{-1}C;\mathbb R)\to
-H^*(\widetilde G;\mathbb R)$ an isomorphism. Also $h^*:H^*(C;\mathbb R)\to
-H^*(Y;\mathbb R)$ is an isomorphism by [F8]. The square
-$\widetilde h^*\pi^*=\widetilde\pi^*h^*$ commutes by functoriality. If
-$\pi^*a=0$, then
-$\widetilde\pi^*h^*a=0$; step 1.11 gives $h^*a=0$, hence $a=0$. Thus
-$\pi^*$ is injective on every component. Singular cochains on a disjoint
-union are the product of component cochains; full AC makes the product of
-component coboundary preimages surjective, so cohomology is the product of
-component cohomologies. Therefore $\pi^*$ is injective globally. [A1, F8,
-F11, step 1.11, step 1.12]
+8.1 By F11, $\widetilde h$ induces an isomorphism on integral homology. F8, F11 Apply the natural UCT sequence to the free singular chain complexes with coefficient group $\mathbb R$. The induced maps on the Hom and Ext terms are isomorphisms because the integral homology maps are; the five lemma therefore makes $\widetilde h^*:H^*(\pi^{-1}C;\mathbb R)\to H^*(\widetilde G;\mathbb R)$ an isomorphism. Also $h^*:H^*(C;\mathbb R)\to H^*(Y;\mathbb R)$ is an isomorphism by F8. The square $\widetilde h^*\pi^*=\widetilde\pi^*h^*$ commutes by functoriality. If $\pi^*a=0$, then $\widetilde\pi^*h^*a=0$; step 7.1 gives $h^*a=0$, hence $a=0$. Thus $\pi^*$ is injective on every component. Singular cochains on a disjoint union are the product of component cochains; full AC makes the product of component coboundary preimages surjective, so cohomology is the product of component cohomologies. Therefore $\pi^*$ is injective globally. [A1, F8, F11, step 7.1, step 5.2]
 
-1.14 Start with $B_0=M$ and $V_0=E$. Whenever the current oriented complement [F1]
-$V_j$ has rank $n_j\ge3$, set $B_{j+1}=G_2^+(V_j)$, pull $V_j$ back, and
-replace it by its oriented orthogonal complement $V_{j+1}$. Step 1.7 keeps
-each stage smooth, Hausdorff and second-countable; steps 1.8–1.9 make every
-projection proper and numerable; step 1.13 proves every cohomology pullback
-injective. The rank drops by two at each stage, so the process stops after
-finitely many stages with rank zero, one, or two. A rank-one oriented
-Euclidean bundle has the unique positive unit section and is the oriented
-trivial line; a rank-two terminal complement is itself the final oriented
-two-plane. The composite $q:F(E)=B_s\to M$ is proper by finite composition of
-proper maps; its cohomology pullback is the composition of the stagewise
-injections. The tautological planes and terminal rank-two plane, or final
-line when rank one, give the required ordered orthogonal decomposition.
-[F1, step 1.7, step 1.8, step 1.9, step 1.13, finite induction]
+9.1 Start with $B_0=M$ and $V_0=E$. Whenever the current oriented complement F1 $V_j$ has rank $n_j\ge3$, set $B_{j+1}=G_2^+(V_j)$, pull $V_j$ back, and replace it by its oriented orthogonal complement $V_{j+1}$. Step 2.2 keeps each stage smooth, Hausdorff and second-countable; steps 3.2–1.9 make every projection proper and numerable; step 8.1 proves every cohomology pullback injective. The rank drops by two at each stage, so the process stops after finitely many stages with rank zero, one, or two. A rank-one oriented Euclidean bundle has the unique positive unit section and is the oriented trivial line; a rank-two terminal complement is itself the final oriented two-plane. The composite $q:F(E)=B_s\to M$ is proper by finite composition of proper maps; its cohomology pullback is the composition of the stagewise injections. The tautological planes and terminal rank-two plane, or final line when rank one, give the required ordered orthogonal decomposition. [F1, step 2.2, step 3.2, step 3.3, step 8.1]
 
-1.15 If $M=\varnothing$, its tower is empty and all cohomology groups are [A1, F1, F3]
-zero. If $r=0$, take $q=\operatorname{id}_M$ and the empty sum. If $r=1$,
-take the identity and the unique positive unit section. If $r=2$, no Grassmann stage is needed: take the identity and the single
-oriented plane $E$. These identity maps are proper and induce identity maps in cohomology.
-At every positive-rank stage the complement is oriented by the rule that
-$L_j\oplus V_j$ has the pulled-back orientation, so no orientation choice is
-hidden. The boundary case is included by the half-space chart and partition
-arguments of steps 1.7–1.9; the fiber calculation uses only closed
-boundaryless manifolds. The item is a one-way existence statement, so neither
-direction of an iff is applicable. AC is used only in the supplier and
-component-product uses recorded in [A1]. Full AC lets us choose cocycle
-representatives for any family of component cohomology classes and choose
-coboundary preimages for any family of component boundaries; hence the canonical
-map from cohomology of the disjoint union to the product of component
-cohomologies is an isomorphism. [A1, F1, F3, step 1.7, step 1.9, step 1.13,
-step 1.14] ∎
+10.1 If $M=\varnothing$, its tower is empty and all cohomology groups are A1, F1, F3 zero. If $r=0$, take $q=\operatorname{id}_M$ and the empty sum. If $r=1$, take the identity and the unique positive unit section. If $r=2$, no Grassmann stage is needed: take the identity and the single oriented plane $E$. These identity maps are proper and induce identity maps in cohomology. At every positive-rank stage the complement is oriented by the rule that $L_j\oplus V_j$ has the pulled-back orientation, so no orientation choice is hidden. The boundary case is included by the half-space chart and partition arguments of steps 2.2–1.9; the fiber calculation uses only closed boundaryless manifolds. The item is a one-way existence statement, so neither direction of an iff is applicable. AC is used only in the supplier and component-product uses recorded in A1. Full AC lets us choose cocycle representatives for any family of component cohomology classes and choose coboundary preimages for any family of component boundaries; hence the canonical map from cohomology of the disjoint union to the product of component cohomologies is an isomorphism. [A1, F1, F3, step 2.2, step 3.3, step 8.1, step 9.1] ∎
 
 ## Source notes
 

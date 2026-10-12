@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-harmonic-taylor-series-on-a-ball.md

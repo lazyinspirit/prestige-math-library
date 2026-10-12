@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-smooth-variety-classical-scheme-conventions-agree.md

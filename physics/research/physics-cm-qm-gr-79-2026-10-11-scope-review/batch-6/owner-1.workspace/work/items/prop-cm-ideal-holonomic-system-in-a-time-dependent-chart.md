@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-ideal-holonomic-system-in-a-time-dependent-chart.md

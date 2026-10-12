@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-modular-representations-are-determined-by-ordinary-characters.md

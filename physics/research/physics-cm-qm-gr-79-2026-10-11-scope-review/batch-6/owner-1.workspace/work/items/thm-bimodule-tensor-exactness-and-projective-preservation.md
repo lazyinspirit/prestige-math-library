@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bimodule-tensor-exactness-and-projective-preservation.md

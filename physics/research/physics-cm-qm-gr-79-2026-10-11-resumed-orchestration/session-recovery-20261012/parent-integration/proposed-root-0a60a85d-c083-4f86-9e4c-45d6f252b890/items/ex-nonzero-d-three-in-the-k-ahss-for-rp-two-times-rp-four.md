@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nonzero-d-three-in-the-k-ahss-for-rp-two-times-rp-four.md

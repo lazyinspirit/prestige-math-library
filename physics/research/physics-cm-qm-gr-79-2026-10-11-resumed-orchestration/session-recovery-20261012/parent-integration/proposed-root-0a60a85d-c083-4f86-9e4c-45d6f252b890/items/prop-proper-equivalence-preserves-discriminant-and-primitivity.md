@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-proper-equivalence-preserves-discriminant-and-primitivity.md

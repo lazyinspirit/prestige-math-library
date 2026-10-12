@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-regular-root-hyperplane-arrangement-in-a-cartan-subalgebra.md

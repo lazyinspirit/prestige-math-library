@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-frobenius-restriction-for-p-five-q-three.md

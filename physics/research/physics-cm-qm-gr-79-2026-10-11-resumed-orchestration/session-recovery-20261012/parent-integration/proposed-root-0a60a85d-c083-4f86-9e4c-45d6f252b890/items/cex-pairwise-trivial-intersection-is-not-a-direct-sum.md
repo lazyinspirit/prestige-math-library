@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-pairwise-trivial-intersection-is-not-a-direct-sum.md

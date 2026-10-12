@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "27",
+  "round": 0,
+  "input_sha256": "7e17ecc47a223cd07cec3779bb5975ffccdc8d522493dbb948c23ab0a4647250",
+  "reviewed_items": [
+    "post-cm11-torque-balance",
+    "pthm-cm11-euler-equations",
+    "pthm-cm11-torque-free-invariants",
+    "pthm-cm11-principal-rotations",
+    "pthm-cm11-linearized-spin",
+    "pthm-cm11-nonlinear-spin-stability",
+    "post-cm11-heavy-top",
+    "pthm-cm11-top-reduction",
+    "ex-cm11-free-top-checks",
+    "cex-cm11-invariants-do-not-force-uniform-rotation",
+    "ex-cm11-intermediate-axis-escape",
+    "ex-cm11-heavy-top-steady-precession"
+  ],
+  "reviewed_pages": [
+    "cm11-rigid-body-dynamics-and-stability",
+    "cm11-rigid-body-dynamics-and-stability-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full batch scope is present, but core torque-free stability and heavy-top deductions rely on draft mathematical proofs missing a zero-derivative-to-constant prerequisite, which requires owner resolution.",
+  "findings": [
+    {
+      "id": "pthm-cm11-torque-free-invariants",
+      "type": "prerequisite",
+      "reason": "Facts L2 and Proof 1.1 consume draft supplier thm-cm-euler-equations-and-torque-free-invariants, whose Proof 4.1 infers the norm and energy invariants are constant from zero derivatives without cor-zero-derivative-implies-constant; this outside-batch prerequisite requires owner resolution."
+    },
+    {
+      "id": "pthm-cm11-nonlinear-spin-stability",
+      "type": "prerequisite",
+      "reason": "Facts L2-L3 and Proof 1.1/2.1 consume thm-cm-stability-of-extreme-principal-axes and thm-cm-instability-of-the-intermediate-axis, whose invariant arguments infer constancy from zero derivatives without cor-zero-derivative-implies-constant; owner review of these outside-batch suppliers is required."
+    },
+    {
+      "id": "pthm-cm11-top-reduction",
+      "type": "prerequisite",
+      "reason": "Proof 7.1 consumes thm-cm-heavy-top-reduction clause 3, whose Proof 1.2 concludes energy constancy from E'=0 without cor-zero-derivative-implies-constant; owner resolution of this outside-batch prerequisite is required."
+    },
+    {
+      "id": "pthm-cm11-torque-free-invariants",
+      "type": "local",
+      "reason": "Proof 2.2 concludes norm constancy from a zero derivative but omits its already available cor-zero-derivative-implies-constant Fact L3 in the justification tags; cite the existing prerequisite."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-cm11-principal-rotations",
+      "decision": "accept",
+      "reason": "Its current converse uses the expanded repeated-eigenspace classification and its Euler use respects the corrected shifted time window."
+    },
+    {
+      "id": "pthm-cm11-torque-free-invariants",
+      "decision": "accept",
+      "reason": "Its use of the revised Euler statement is compatible; its separate draft-supplier proof gap is reported as a prerequisite finding."
+    },
+    {
+      "id": "pthm-cm11-linearized-spin",
+      "decision": "accept",
+      "reason": "Its distinct, positively oriented principal basis and Euler field remain within the revised suppliers' stated scope."
+    },
+    {
+      "id": "pthm-cm11-nonlinear-spin-stability",
+      "decision": "accept",
+      "reason": "Its use of the revised Euler and principal-rotation interfaces is compatible; separate mathematical-supplier proof gaps are escalated in findings."
+    },
+    {
+      "id": "ex-cm11-free-top-checks",
+      "decision": "accept",
+      "reason": "Its explicit symmetric and asymmetric spin checks match the revised axis classification and Euler signs."
+    },
+    {
+      "id": "cex-cm11-invariants-do-not-force-uniform-rotation",
+      "decision": "accept",
+      "reason": "Its declared symmetric-top motion remains compatible with the revised upstream statements."
+    },
+    {
+      "id": "ex-cm11-intermediate-axis-escape",
+      "decision": "accept",
+      "reason": "Its declared diag(1,2,3) escape example remains within the revised principal-rotation and Euler interfaces."
+    }
+  ]
+}

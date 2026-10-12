@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-coordinate-parabolics-for-ordered-partitions.md

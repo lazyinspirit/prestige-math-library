@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-special-linear-as-a-closed-lie-subgroup-of-general-linear.md

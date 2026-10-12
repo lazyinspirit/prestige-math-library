@@ -1,0 +1,62 @@
+---
+id: def-cm-calibration-rule
+kind: definition
+title: "Calibration data and calibration rules"
+status: draft
+origin: pipeline
+domain: mathematics
+deps: [def-cm-measurement-model, def-random-element-and-real-random-variable]
+dependency_roles:
+  def-cm-measurement-model: mathematical-premise
+  def-random-element-and-real-random-variable: mathematical-premise
+dependency_level: 1
+provenance:
+  statement: ai-altered
+  proof: not-applicable
+sources:
+  references:
+    - title: "JCGM 200:2012, International Vocabulary of Metrology — Basic and General Concepts and Associated Terms (VIM), definition 2.39 'calibration' and Note 1"
+      url: "https://www.bipm.org/documents/20126/2071204/JCGM_200_2012.pdf"
+    - title: "JCGM 100:2008, Evaluation of measurement data — Guide to the expression of uncertainty in measurement (BIPM), clause 4.1.3 and Annex B.2.13–B.2.14"
+      url: "https://www.bipm.org/documents/20126/2071204/JCGM_100_2008_E.pdf"
+verification:
+  precheck: n/a
+---
+
+## Definition
+
+Let $(\Omega,\mathfrak F,\mathbb P)$ be a probability space. A **calibration
+family** is a family
+$$\bigl(h_c\bigr)_{c\in C},\qquad h_c:\Theta\longrightarrow\mathbb R^d,$$
+of prediction maps on a nonempty parameter set $\Theta$, indexed by a
+nonempty set $C$ of **apparatus settings** ([[def-cm-measurement-model]]).
+
+A **calibration datum** for this family consists of
+
+1. a finite family $(\theta^{(r)})_{r<n}$, $n\ge1$, of **reference inputs**
+   $\theta^{(r)}\in\Theta$, values supplied by a reference standard under
+   stated conditions;
+2. a set $Y\subseteq(\mathbb R^d)^n$ of admissible **reference observations**
+   and the observed vector $y=(y_1,\dots,y_n)\in Y$;
+3. a **calibration rule**, that is, a map
+   $$\Gamma:Y\longrightarrow C,\qquad y\longmapsto c;$$
+4. either a stated bound $|\theta^{(r)}-\theta^{(r)}_{\mathrm{ref}}|\le\delta_r$
+   for the deviation of each reference input from its nominal value, or a
+   random element $\eta:\Omega\to\Theta^n$ of deviations with a stated law, so
+   that the reference inputs are the random values
+   $\theta^{(r)}_{\mathrm{ref}}+\eta_r$.
+
+Given the datum, the **calibrated setting** is $c:=\Gamma(y)$ and the
+**calibrated prediction map** is $h_c$.
+
+### Well-definedness and conventions
+
+The rule $\Gamma$ and the sets $C$, $\Theta$, $Y$ are data: nothing in the
+definition requires $\Gamma$ to be injective, continuous, measurable, or to
+return an apparatus setting for which the calibrated prediction is accurate.
+The reference inputs are values of a physical standard; their uncertainty is
+recorded in clause 4 and must be carried into any quantitative conclusion
+about $h_c$ by the argument that uses it. The definition states the structure
+of a calibration only; properties such as consistency, unbiasedness or
+attainment of a stated accuracy require separate hypotheses and proofs, and
+no such property is asserted here.

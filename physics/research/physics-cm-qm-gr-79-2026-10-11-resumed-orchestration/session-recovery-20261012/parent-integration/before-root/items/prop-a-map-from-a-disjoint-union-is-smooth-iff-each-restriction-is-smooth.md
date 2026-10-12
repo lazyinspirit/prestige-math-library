@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-map-from-a-disjoint-union-is-smooth-iff-each-restriction-is-smooth.md

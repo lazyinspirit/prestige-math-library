@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-relative-morse-smale-perturbation-of-a-gradient-like-field.md

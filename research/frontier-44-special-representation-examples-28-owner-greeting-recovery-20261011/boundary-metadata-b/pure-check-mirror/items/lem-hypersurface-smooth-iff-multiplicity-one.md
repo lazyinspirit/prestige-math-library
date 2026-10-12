@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-hypersurface-smooth-iff-multiplicity-one.md

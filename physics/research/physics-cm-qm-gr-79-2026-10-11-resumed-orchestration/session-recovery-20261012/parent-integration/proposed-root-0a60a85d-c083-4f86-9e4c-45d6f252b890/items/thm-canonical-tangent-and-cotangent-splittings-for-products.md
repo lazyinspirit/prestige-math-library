@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-canonical-tangent-and-cotangent-splittings-for-products.md

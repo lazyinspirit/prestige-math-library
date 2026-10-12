@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noetherian-open-subsets-are-quasi-compact.md

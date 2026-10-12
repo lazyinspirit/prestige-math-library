@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-dense-nonclosed-copy-of-a-group-in-its-completion.md

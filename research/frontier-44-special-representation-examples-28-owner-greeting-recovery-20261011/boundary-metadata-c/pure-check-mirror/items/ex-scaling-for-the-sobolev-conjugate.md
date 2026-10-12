@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-scaling-for-the-sobolev-conjugate.md

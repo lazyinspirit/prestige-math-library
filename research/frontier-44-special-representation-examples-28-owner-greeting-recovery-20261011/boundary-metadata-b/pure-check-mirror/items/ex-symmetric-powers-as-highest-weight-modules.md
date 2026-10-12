@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-symmetric-powers-as-highest-weight-modules.md

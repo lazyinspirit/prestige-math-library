@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-cocontinuous-additive-module-functors-admit-right-adjoints.md

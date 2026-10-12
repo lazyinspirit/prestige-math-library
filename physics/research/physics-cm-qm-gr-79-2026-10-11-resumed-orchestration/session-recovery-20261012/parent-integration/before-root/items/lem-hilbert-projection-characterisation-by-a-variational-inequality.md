@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hilbert-projection-characterisation-by-a-variational-inequality.md

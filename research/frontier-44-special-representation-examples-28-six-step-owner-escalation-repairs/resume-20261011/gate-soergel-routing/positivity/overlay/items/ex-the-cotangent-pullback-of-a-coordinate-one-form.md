@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-cotangent-pullback-of-a-coordinate-one-form.md

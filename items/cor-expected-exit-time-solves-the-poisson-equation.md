@@ -67,15 +67,11 @@ where $P$ and the finite drift $L$ are as in [[def-nonnegative-discrete-drift-fo
 
 1.1 On each path, $\sum_{m\ge0}\mathbf 1_{\{m<T\}}=T$: if $T=t\in\mathbb N_0$, exactly the indices $m=0,\ldots,t-1$ contribute, while if $T=\infty$, every index contributes and both sides are $+\infty$. The sum is empty when $T=0$. Thus the path cost in [[thm-first-step-equations-for-nonnegative-exit-costs]] with boundary payoff $f=0$ and running cost $c=1$ equals $T$, including nonexit paths. [F1, F4, given]
 
-2.1 The first-step theorem with $f=0$ and $c=1$ has expected cost $v$ by step 1.1 and [F3], so it gives $v=0$ on $D^c$ and $v(x)=1+Pv(x)$ for $x\in D$. [A1, F3, F4, step 1.1, given]
-The constant functions are bounded and nonnegative, so the theorem applies; its relation on $D$ is in extended nonnegative arithmetic:
-$$v(x)=1+Pv(x)\quad(x\in D)$$
+2.1 The first-step theorem with $f=0$ and $c=1$ has expected cost $v$ by step 1.1 and [F3], so it gives $v=0$ on $D^c$ and $v(x)=1+Pv(x)$ for $x\in D$. [A1, F3, F4, step 1.1, given] The constant functions are bounded and nonnegative, so the theorem applies; its relation on $D$ is in extended nonnegative arithmetic: $$v(x)=1+Pv(x)\quad(x\in D)$$ [F3, A1, F4, step 1.1, given]
 
-3.1 If $v$ is finite at every state, then for each $x\in D$ the first-step relation forces $Pv(x)<\infty$ and hence $Lv(x)=-1$. [F5, F6, step 2.1, given]
-Indeed, step 2.1 gives $v(x)=1+Pv(x)<\infty$, so $Pv(x)<\infty$. Since $v$ is finite-valued, [F6] defines $Lv(x)$, and the finite-real equation gives
-$$Lv(x)=Pv(x)-v(x)=(v(x)-1)-v(x)=-1.$$
-Thus the Poisson equation is well-defined at every state of $D$.
+3.1 If $v$ is finite at every state, then for each $x\in D$ the first-step relation forces $Pv(x)<\infty$ and hence $Lv(x)=-1$. [F5, F6, step 2.1, given] Indeed, step 2.1 gives $v(x)=1+Pv(x)<\infty$, so $Pv(x)<\infty$. Since $v$ is finite-valued, [F6] defines $Lv(x)$, and the finite-real equation gives $$Lv(x)=Pv(x)-v(x)=(v(x)-1)-v(x)=-1.$$ Thus the Poisson equation is well-defined at every state of $D$. [F5, F6, step 2.1, given]
 
 4.1 If $E$ is finite, $p$ is irreducible, and $D\subsetneq E$, then $A=D^c$ is nonempty. Thus [F7] holds with this target, and [F8] gives $\mathbb E_xT_A<\infty$ for every $x\in E$. Steps 2.1 and 3.1 give the asserted boundary values and equation. The nonempty-target condition matters: for $D=E$ in a nonempty state space, $T_{\varnothing}=\infty$, so the global finite-mean premise fails. [A1, F1, F2, F7, F8, step 2.1, step 3.1, given]
 
 5.1 If $E=\varnothing$, the initial-distribution definition supplies no probability law of an $E$-valued chain; there are no states to check. If $D=\varnothing$, then $T=0$ from every state, so $v=0$ and the equation on $D$ is vacuous. For a one-state chain $E=\{x\}$, this is the finite irreducible proper-domain case; if instead $D=E$, then $T=\infty$ and the finite-mean premise fails. As a deterministic-row check, on a finite deterministic cycle and a proper $D$, the nonempty target is reached within at most $|E|-1$ steps; at an interior state $x$ with successor $\sigma(x)$, the first-step identity reads $v(x)=1+v(\sigma(x))$, hence $Lv(x)=-1$. The endpoint $T=0$ is counted by the empty path sum, and for $x\in D$ one has $T\ge1$, so the unit cost counts precisely the steps strictly before exit. AC is used through the cited first-step and finite hitting-time results; no further choice is made here. This corollary states implications, not an iff. [A1, F1, F2, F3, F4, F5, F6, F7, F8, step 1.1, step 2.1, step 3.1, given] ∎
+

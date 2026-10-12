@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-killing-form-orthogonality-of-root-spaces.md

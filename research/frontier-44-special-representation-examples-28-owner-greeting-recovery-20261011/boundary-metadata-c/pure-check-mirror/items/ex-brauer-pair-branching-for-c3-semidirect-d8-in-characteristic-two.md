@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-brauer-pair-branching-for-c3-semidirect-d8-in-characteristic-two.md

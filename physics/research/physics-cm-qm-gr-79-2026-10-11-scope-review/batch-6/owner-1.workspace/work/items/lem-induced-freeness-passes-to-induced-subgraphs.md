@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induced-freeness-passes-to-induced-subgraphs.md

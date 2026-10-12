@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-simplicial-homology-of-the-tetrahedron-boundary.md

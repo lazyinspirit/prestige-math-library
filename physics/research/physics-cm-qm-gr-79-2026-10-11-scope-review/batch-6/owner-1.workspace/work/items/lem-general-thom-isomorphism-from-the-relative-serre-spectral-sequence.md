@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-general-thom-isomorphism-from-the-relative-serre-spectral-sequence.md

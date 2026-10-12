@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-zero-dimensional-rings-cohen-macaulay.md

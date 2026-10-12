@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-smith-normal-form-algorithm-over-a-euclidean-domain.md

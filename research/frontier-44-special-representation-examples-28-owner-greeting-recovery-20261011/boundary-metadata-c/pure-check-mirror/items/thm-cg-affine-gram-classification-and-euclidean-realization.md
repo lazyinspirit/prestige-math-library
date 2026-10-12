@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cg-affine-gram-classification-and-euclidean-realization.md

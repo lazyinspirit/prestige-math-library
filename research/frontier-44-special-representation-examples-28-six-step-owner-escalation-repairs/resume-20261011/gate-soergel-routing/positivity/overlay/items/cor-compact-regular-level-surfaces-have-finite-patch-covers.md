@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-regular-level-surfaces-have-finite-patch-covers.md

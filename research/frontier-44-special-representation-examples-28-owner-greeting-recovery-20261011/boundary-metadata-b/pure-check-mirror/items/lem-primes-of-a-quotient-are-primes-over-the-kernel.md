@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-primes-of-a-quotient-are-primes-over-the-kernel.md

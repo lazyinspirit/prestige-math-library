@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sylow-subgroups-of-a-normal-subgroup-are-intersections.md

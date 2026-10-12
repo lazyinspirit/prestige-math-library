@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-real-analytic-inverse-and-implicit-function-theorems.md

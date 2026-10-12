@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-deligne-products-exist-by-tensor-product-algebras.md

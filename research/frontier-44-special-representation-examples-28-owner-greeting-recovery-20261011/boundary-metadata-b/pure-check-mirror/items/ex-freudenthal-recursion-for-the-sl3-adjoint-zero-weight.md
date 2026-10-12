@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-freudenthal-recursion-for-the-sl3-adjoint-zero-weight.md

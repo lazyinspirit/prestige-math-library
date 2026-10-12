@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-ritz-values-and-ritz-vectors-from-arnoldi.md

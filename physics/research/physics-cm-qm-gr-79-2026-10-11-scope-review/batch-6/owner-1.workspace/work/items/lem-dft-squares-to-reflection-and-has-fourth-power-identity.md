@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dft-squares-to-reflection-and-has-fourth-power-identity.md

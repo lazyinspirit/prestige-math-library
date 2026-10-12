@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-de-rham-theorem-as-built-here-is-an-isomorphism-of-rings.md

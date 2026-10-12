@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-adapted-outward-boundary-presentation-of-a-simple-solid-region.md

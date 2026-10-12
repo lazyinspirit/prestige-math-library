@@ -45,14 +45,10 @@ $$\frac{p_n}{q_n} - \frac{p_{n-1}}{q_{n-1}} = \frac{(-1)^{n-1}}{q_n q_{n-1}}.$$
 
 **Proof technique:** direct.
 
-1.1 At $n=0$ one has. [given, F1, base, algebra]
-$$p_0q_{-1}-p_{-1}q_0 = a_0\cdot 0 - 1 \cdot 1 = -1 = (-1)^{-1}.$$ [given, F1, base, algebra]
+1.1 At $n=0$ one has. [given, F1, base, algebra] $$p_0q_{-1}-p_{-1}q_0 = a_0\cdot 0 - 1 \cdot 1 = -1 = (-1)^{-1}.$$ [given, F1, base, algebra]
 
-1.2 If $D_n:=p_nq_{n-1}-p_{n-1}q_n$, then the recurrences of [F1] give. [F1, induction, algebra]
-$$D_{n+1} = (a_{n+1}p_n+p_{n-1})q_n - p_n(a_{n+1}q_n+q_{n-1}) = -D_n.$$ So the sign flips at each successor step. [F1, induction, algebra]
+1.2 If $D_n:=p_nq_{n-1}-p_{n-1}q_n$, then the recurrences of [F1] give. [F1, induction, algebra] $$D_{n+1} = (a_{n+1}p_n+p_{n-1})q_n - p_n(a_{n+1}q_n+q_{n-1}) = -D_n.$$ So the sign flips at each successor step. [F1, induction, algebra]
 
-2.1 Steps 1.1 and 1.2 imply by induction that. [F2, step 1.1, step 1.2, discharge-induction]
-$$D_n = (-1)^{n-1}$$ for every $n \ge 0$. [F2, step 1.1, step 1.2, discharge-induction]
+2.1 Steps 1.1 and 1.2 imply by induction that. [F2, step 1.1, step 1.2, discharge-induction] $$D_n = (-1)^{n-1}$$ for every $n \ge 0$. [F2, step 1.1, step 1.2, discharge-induction]
 
-3.1 For $n \ge 1$. [step 2.1, algebra]
-$$\frac{p_n}{q_n}-\frac{p_{n-1}}{q_{n-1}} = \frac{p_nq_{n-1}-p_{n-1}q_n}{q_nq_{n-1}} = \frac{(-1)^{n-1}}{q_nq_{n-1}}$$ by step 2.1. [step 2.1, algebra] ∎
+3.1 For $n \ge 1$. [step 2.1, algebra] $$\frac{p_n}{q_n}-\frac{p_{n-1}}{q_{n-1}} = \frac{p_nq_{n-1}-p_{n-1}q_n}{q_nq_{n-1}} = \frac{(-1)^{n-1}}{q_nq_{n-1}}$$ by step 2.1. [step 2.1, algebra] ∎ 

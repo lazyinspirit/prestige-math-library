@@ -88,8 +88,7 @@ so $|N_{K/\mathbb Q}(\alpha)|=\prod_i|\sigma_i(\alpha)|\prod_j|\tau_j(\alpha)|^2
 
 4.1 Since $\sigma(\alpha)\in X_t$, the product bound of [F2] reads $\prod_i|\sigma_i(\alpha)|\prod_j|\tau_j(\alpha)|^2\le(t/n)^n$, and by [F4] the left side is $|N_{K/\mathbb Q}(\alpha)|$. [F2, F4, step 3.1]
 
-5.1 Therefore $|N_{K/\mathbb Q}(\alpha)|\le(t/n)^n=\frac{n!(4/\pi)^{r_2}\sqrt{|d_K|}N\mathfrak a}{n^n}=\bigl(\frac4\pi\bigr)^{r_2}\frac{n!}{n^n}\sqrt{|d_K|}\,N\mathfrak a$, and $0\ne\alpha\in\mathfrak a$. [step 1.1, step 4.1, algebra] ∎
-## Remarks
+5.1 Therefore $|N_{K/\mathbb Q}(\alpha)|\le(t/n)^n=\frac{n!(4/\pi)^{r_2}\sqrt{|d_K|}N\mathfrak a}{n^n}=\bigl(\frac4\pi\bigr)^{r_2}\frac{n!}{n^n}\sqrt{|d_K|}\,N\mathfrak a$, and $0\ne\alpha\in\mathfrak a$. [step 1.1, step 4.1, algebra] ∎ ## Remarks
 
 The choice of $t$ makes the volume of $X_t$ exactly $2^n$ times the covolume,
 which is why the equality form of Minkowski's theorem is needed and produces

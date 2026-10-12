@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-solid-of-revolution-about-a-coordinate-axis.md

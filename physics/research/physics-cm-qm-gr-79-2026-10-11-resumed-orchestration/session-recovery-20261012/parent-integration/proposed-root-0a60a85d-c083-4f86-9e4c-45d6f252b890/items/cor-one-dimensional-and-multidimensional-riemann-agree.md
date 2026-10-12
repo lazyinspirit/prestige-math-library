@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-one-dimensional-and-multidimensional-riemann-agree.md

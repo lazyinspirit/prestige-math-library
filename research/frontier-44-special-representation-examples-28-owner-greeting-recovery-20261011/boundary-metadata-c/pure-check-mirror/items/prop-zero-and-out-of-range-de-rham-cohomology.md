@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-zero-and-out-of-range-de-rham-cohomology.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-averaged-hermitian-form-for-a-compact-group.md

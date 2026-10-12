@@ -1,35 +1,828 @@
 # Quantum Field Theory including QED
 
-Draft first-principles research, 2026-10-04. This category separates constructed mathematical models and their conditional physical uses from coefficient-level formal perturbation and unconstructed prospective continuum theories. A field symbol in a Lagrangian is not a proof that a corresponding interacting Hilbert representation, continuum limit or scattering operator exists. Canonical contracts, argument maps and closure records identify exactly what has been constructed and proved.
+Audit-repaired research scaffold, 2026-10-12. This is the authoritative full prose for the future QFT track and supersedes the 2026-10-04 prose draft. It remains a proposed research design: no production item, proof acceptance, independent review, or engine readiness is implied.
 
-## Objects and model boundaries
+Use this scaffold together with the current exact supplier bindings in
+research/scaffold-audit-2026-10-12/qft/supplier-map.json and the proposed edge
+repairs in research/scaffold-audit-2026-10-12/qft/revised-inventory.json.
+The 2026-10-04 inventory and supplier-map hashes preserved in
+research/plan-quantum-field-theory-track.md are historical snapshots. They do
+not govern a future build where this audit records a different current edge or
+supplier byte. In particular, QFT-IR04 now binds
+lem-qft-test-frechet-uniform-scaling-order to the published theorem
+thm-choice-implies-dependent-implies-countable-choice; the original reservation
+omitted the theorem needed to pass from its AC hypothesis to the DC hypothesis
+of the Baire theorem. No library item or import snapshot is edited by this
+repair.
 
-The principal relativistic background is oriented/time-oriented Minkowski spacetime, signature −+++, with length time x0=ct. Reference frames mean specified inertial affine charts or local observer/tetrad data; worldlines and causal separation use the exact earlier SR/GR definitions. The metric is prescribed in free/test-field models. An exact conformally curved massless scalar model on g=Ω²η is constructed separately with curvature coupling1/6, not silently identified with an interacting gravity or generic curved-vacuum theory.
+The historical QFT-MX04 reservation also names a covariance-weighted estimator
+lemma that depended on unbuilt mathematical-statistics suppliers. Under the
+current owner scope that clause is excluded, and its old ID is not a supplier
+or prerequisite in the repaired inventory. The deterministic ratio/Taylor
+result is retained under the local pure-analysis interface; its second-order
+bound is proved by an exact rational remainder identity on an explicit
+positive-denominator rectangle, with a displayed finite constant and no
+calculus-supplier edge. B08 consumes the local interface
+`lem-qft-example-deterministic-ratio-error`.
+EXP01 depends only on its observable definition and ideal calibration identity
+for the apparatus-model description. It reports Fan et al.'s stated value and
+uncertainty as source data and has no estimator, covariance, or inference
+theorem edge. The exact current records are in the revised inventory and
+supplier map.
 
-A scalar quantum field is a complex-linear map from an explicit Schwartz or compact test space into operators on a common invariant dense Hilbert domain, whose matrix elements are distributions. A Dirac field has spinor/cospinor test spaces, a precise Clifford action, graded locality and common CAR domains. A photon observable is a gauge-invariant smeared field-strength or actual bounded physical operator; auxiliary covariant components and Coulomb potentials have different positivity/locality status. A point field φ(x), or a coincident product φ(x)², is not an ordinary everywhere-defined operator merely because an integral notation is convenient. Operator closure, symmetry, essential self-adjointness, spectral measure and locality are separate assertions.
+The 31 proposed A/B pairs remain the promised local scope. “Exact” below means
+that the stated local argument proves the stated mathematical contract under
+its displayed hypotheses; it does not mean that a research interface has been
+accepted as a production item. “Adopted” means a physical model assumption,
+not a mathematical consequence or experimental fact. “Formal” means
+coefficientwise algebra, not convergence. “Extension obligation” means a
+defined neighboring framework for which this dossier does not supply a
+theorem or a logical premise.
 
-State data can be actual vectors/density operators in a constructed Hilbert model or positive normalized functionals on an explicitly defined star algebra. The complete local GNS theorem gives a cyclic Hilbert representation of a given positive state, including null-ideal and operator domains. It does not create a positive convergent interacting state from formal diagrams. Moment data give weak tempered fields and transfer covariance/locality only under the precise positivity/continuity/support hypotheses. An explicit nonregular Weyl state demonstrates why bounded algebra positivity alone does not yield field generators. Physical observables and measurement laws require actual bounded operators or self-adjoint/PVM suppliers; a merely symmetric distributional field does not automatically define a measuring instrument.
+All 177 QFT entries in the referenced inventory are proposed research
+interfaces, not authored library item pages; their local arguments remain
+unaccepted even where this audit finds them mathematically sufficient for the
+stated local claim. This status is distinct from existing draft library pages
+such as the special-relativity and electromagnetism sources used for the
+geometry, unit, and field-convention bridges, and from NRQM research-prerequisite
+modules, which are local research prose rather than library draft items.
 
-## Conventions, quantities and physical assumptions
+## Background, units, and spaces
 
-Common scalar/Dirac normalization uses inverse-length mass µ=mc/ℏ, on-shell frequency ω(k)=sqrt(|k|²+µ²), physical energy ℏcω and momentum ℏk. The free-field construction uses the second-variable-linear pairing, related to the root/NR-QM first-linear pairing by ⟨f,g⟩FF=(g,f)root; no sign change is hidden. The on-shell scalar map is Kf(k)=∫f(x)exp[i(ωx0−k·x)]d⁴x with mass-shell measure d³k/((2π)³2ω). Φ(f)=a(Kbar f)+a†(Kf); real-test commutation uses −iΔ for the explicitly defined sine kernel. Covariance translations have U(a)=exp[i p∘a], so Heisenberg time action is positive and Schrödinger state evolution its inverse. These are separate uses of one unitary group.
+The flat geometric base is an oriented and time-oriented affine Minkowski space
+M=(A,V,η,C+). Concretely for the local QFT constructions take
+A=V=R⁴ with translation action a·v=a+v. In the abstract notation, an affine
+space modeled on V is a nonempty set A with a free transitive V-action; for
+each p,q∈A there is a unique displacement q−p∈V satisfying p·(q−p)=q.
+Orientation is a choice of orientation of V. The form η is a
+nondegenerate symmetric bilinear form of signature (−,+,+,+), and C+ is one
+chosen closed future causal cone, including its vertex 0. Its nonzero timelike
+vectors form the chosen timelike component, and its nonzero null vectors form
+the boundary away from 0. The geometric cone $C^+\subset V$ is distinct from
+the momentum-space spectrum cone $\bar V_+\subset\mathbb R^4_p$ defined
+below. An inertial chart is an affine isometry from A to R4 whose linear
+part preserves orientation and C+. In an SI chart x⁰=ct, all four coordinates
+have units of metres; c is the positive SI speed of light. The mathematical
+Lorentz group used here is the proper orthochronous group SO+(1,3), and the
+Poincaré group is its semidirect product with translations of A.
 
-Dirac matrices use β=diag(I,−I), αi built from Pauli blocks, γ0=β,γi=βαi. Thus {γa,γb}=−2ηab, γ0 Hermitian and spatial γi anti-Hermitian; (iγa∂a−µ)ψ=0 gives (□η−µ²)ψ=0. Textbook trace formulas in +−−− conventions must be translated with effective Clifford metric −η, rather than combining incompatible signs. Spinor adjoint is ψbar=ψ†β. Free bosonic and fermionic particle/antiparticle identifications are adopted physical model readings of actual Fock constructions; a general spin–statistics or interacting reconstruction theorem is not presumed from terminology.
+The draft special-relativity page
+library/special-relativity/sr-spacetime-primitives.md defines the affine model,
+inertial chart, and x⁰=ct convention. Its six Lorentz-vector definitions and
+lemmas are carried through the audit-local proof
+research/scaffold-audit-2026-10-12/relativistic-particle-mechanics/definitions/lorentz-foundations.md,
+which uses published vector-space, symmetric-form, inertia, Euclidean-inner-
+product, and finite Cauchy–Schwarz results. The matching five canonical
+physics originals are absent, so their imported snapshots are not certified
+as canonical suppliers. The SR draft's geometry is used here only with that
+explicit local closure. The accompanying special-relativity postulates for
+inertial covariance and ideal clocks/light apply to the stated classical model
+and explicitly exclude quantum effects. They are therefore not premises of
+QFT covariance or a derivation of a quantum field equation. The free-field
+covariance claims below are proved for the selected Fock models.
 
-For natural photon normalization put a=A_SI/sqrt(µ0ℏc), f=F_SI/sqrt(µ0ℏc), so the Maxwell action divided by ℏ has density −f²/4 and a/f components have m−1/m−2. Natural charge q=q_SI sqrt(µ0c/ℏ); electron charge is −e with e>0 and e²=4πα. D=∂−iqa gives the inherited positive-q action coupling; for electrons D=∂+iea gives −e ψbar γa a_aψ. These normalizations are not a claim that bare, renormalized and measured charges coincide at every scale. Classical F0i=−Ei/c and Maxwell ∇aFab=−µ0jb remain the actual earlier EM convention, while quantum currents/composites need their own smearing/regulated/formal definition. A nonlinear point-current equation is not imposed on undefined operator products.
+For classical electromagnetic notation retain the draft EM definitions
+E_i,B_i, F_0i=−E_i/c, F_ij=ε_ijk B_k and A_lower=(−φ/c,A), when a classical
+field is actually being identified. The EM SI definitions fix c,e,μ0,ε0 and
+their units; they do not supply a quantum state or a quantum current. The EM
+Minkowski-Maxwell and Lorentz-coupling postulates describe classical fields and
+test-charge/matter models and exclude quantum effects. The QFT action and its
+current variation below are separate QFT model statements. Their use of the EM
+definitions is only a sign, units, and field-identification bridge.
 
-The quantities document gives every branch's SI/natural conversions and primitive/derived roles. Geometry, chosen mass/coupling/renormalization/regulator scales, actual Hamiltonian/state or positive functional and measurement model are inputs. Spectra, field-strengths, occupation, correlation distributions, currents where defined and specified cross-section coefficients are derived. ℏ and c are not dropped silently; modern-SI h,e_SI,c are defining constants, whereas µ0 and dimensionless α involve empirical calibration. No source-free Maxwell or classical Einstein–Maxwell theorem is reused as a quantum construction.
+Write ℏ for the reduced Planck constant, m for a rest mass, and μ=mc/ℏ for
+inverse-length mass. With x⁰=ct, the free on-shell frequency is
+ω(k)=sqrt(|k|²+μ²); physical energy is ℏcω and momentum is ℏk. Natural
+normalizations in the QED branch are defined explicitly in
+quantities-and-postulates.md#framework-units. For the photon field set
+a=A_SI/sqrt(μ0ℏc), f=F_SI/sqrt(μ0ℏc), and q=q_SI sqrt(μ0c/ℏ). Then a has
+dimension length⁻¹, f has dimension length⁻², q is dimensionless, and the
+Maxwell action divided by ℏ has density −f_ab f^ab/4. For electron charge
+−e, e>0, D_a=∂_a+iea_a. This convention is tied to the explicit QFT gauge
+transformation below; it does not identify bare, renormalized, and measured
+charges at all scales.
 
-## Supplier-first exact and formal developments
+For an open set U⊂Rⁿ and compact K⊂U, D_K(U) is the vector space of smooth
+complex functions supported in K, with seminorms
+p_{K,m}(f)=max_{|α|≤m} sup_{x∈K}|∂^α f(x)|, m=0,1,2,... . The test space
+D(U)=C_c^∞(U) is the locally convex inductive limit of D_K(U) over compact
+K⊂U; equivalently, a linear functional on D(U) is a distribution exactly
+when its restriction to every D_K(U) is continuous for these seminorms. The
+Schwartz space S(Rⁿ) consists of smooth complex functions for which
+sup_x |x^α ∂^β f(x)| is finite for every pair of multi-indices α,β; these
+quantities are its defining seminorms. A distribution in D'(U) is a continuous
+complex-linear functional on D(U); its pairing with a test is bilinear, with
+no complex conjugation. A tempered distribution is a continuous linear
+functional on S(Rⁿ). A distribution is not a pointwise function merely
+because it is written φ(x).
 
-Begin with Hilbert tensors/completions, unbounded domains, Fourier/test distributions, algebraic positivity and Fock CCR/CAR. Exact free scalar/Dirac constructions prove their tested equations, mass-shell dynamics, spectrum, covariance and causal/graded locality under explicit domains. Their positive vacuum correlations can realize the stated axiomatic class. Free physical photons are constructed in positive transverse Fock space, with covariant Lorenz auxiliary quotient separately defined; gauge-invariant field strengths have their actual locality proof, while Coulomb-gauge potential components are generally nonlocal.
+Smearing a distribution φ by f means the distributional pairing φ(f). In a
+Hilbert representation, a field is an operator-valued distribution on a
+specified common invariant dense domain D if, for each f in its test space,
+φ(f):D→D is linear and every matrix coefficient
+(φ(f)v,u) is a continuous linear functional of f for u,v∈D. This uses the
+first-variable-linear Hilbert pairing fixed below; (u,φ(f)v) would be
+conjugate-linear in f and is not the distribution convention used here. This weak
+matrix-coefficient definition is the contract used here. It does not define
+φ(x), an everywhere-defined operator, a self-adjoint closure, or a measurement
+at a spacetime point.
 
-Interacting coverage includes fully constructed finite-spatial-cutoff/lattice bosonic polynomial Hamiltonians, exact self-adjoint domains, compact/resolvent/ground/Gibbs statements and unitary evolution. Finite-dimensional Euclidean interacting measures, asymptotic coefficients and an explicit divergent perturbation example are mathematically justified. Compact U(1) rotor-plus-fermion lattice models have an exact Hilbert space, self-adjoint Hamiltonian, Gauss projection, nonempty physical sector and unitary physical evolution. Their regulator breaks or changes continuum symmetries unless a separate restoration theorem is proved. Exact finite-regulator construction does not itself establish removal of volume/UV/IR regulators.
+A Hilbert space is a complete complex inner-product space; this dossier uses
+the first-variable-linear pairing for the mathematical GNS and imported
+library arguments. The free-field supplier translates its second-variable-linear
+Fock pairing by ⟨f,g⟩FF=(g,f)root. A dense domain is a linear subspace whose
+norm closure is the whole Hilbert space. An operator is symmetric when its
+domain is contained in the domain of its adjoint and its action agrees there
+with the adjoint; it is self-adjoint when the domains and actions agree.
+Essential self-adjointness means that the graph closure of a symmetric
+operator is self-adjoint. A closable operator has a graph closure that is an
+operator. These conditions are distinct. Every unbounded field claim below
+names its domain and does not infer essential self-adjointness from symmetry.
 
-Formal perturbation is defined as coefficientwise algebra, with exact Wick contractions, star products, compatible regular-functional temporal factorization and explicit scope for local singular extensions. Scaling-degree extension and finite delta-jet ambiguity require complete local analytic proofs. Power counting, logarithmic anomalies and scale changes are exact statements at their declared regulated/formal level. They are not convergence, positivity of an interacting vacuum or nonperturbative continuum existence. Classical/regulated/formal gauge identities, Ward contact terms and algebraic Grassmann determinants retain their hypotheses. An infrared coherent-norm logarithm demonstrates a specified Fock-limit obstruction without asserting a complete charged infraparticle theory.
+## Algebraic states, GNS, and moment reconstruction
 
-Worked models distinguish exact free/regulated transitions and probabilities, formal scattering/decay coefficients and measured outcomes. Spin traces, phase space, flux, approximations and unit conversions are supplied before a tree cross section is interpreted. Formal optical-theorem identities are tied to proved coefficientwise unitarity; no exact continuum scattering operator is fabricated. Residual or truncated-series bounds are only claimed where the actual finite model and bounds exist. No literal exponential decay law follows from a finite unitary Hamiltonian, and Γ−1 is not an exponential half-life.
+A unital complex star algebra A is a complex vector space with an associative
+bilinear product, a multiplicative unit 1, and a conjugate-linear involution
+a↦a* satisfying (ab)*=b*a*. No norm, C*-completion, or operator realization is
+part of this definition. A state on A is a complex-linear functional
+ω:A→C with ω(1)=1 and ω(a*a)≥0 for every a, where ≥0 means a real
+nonnegative number. Positivity implies the sesquilinear form
+(a,b)ω=ω(b*a) is Hermitian and satisfies Cauchy–Schwarz, including when one
+squared seminorm is zero. Its null space N={a:ω(a*a)=0} is a left ideal, not
+in general a right ideal.
 
-The actual electron-moment report is a finite, corrected experimental estimate with its reported apparatus/fit/calibration and uncertainty budget. It is kept separate from formal QED coefficients, with missing raw trials/covariance details disclosed. Statistical agreement tests specified theory/preparation/apparatus/inference assumptions; it neither proves all of QED nor constructs a continuum theory. All empirical qualifications travel into any consuming conditional physical claim.
+The GNS construction is the quotient D=A/N with
+([a],[b])=ω(b*a), completed to a Hilbert space Hω. Left multiplication gives
+π(a)[b]=[ab] on the common invariant dense domain D. The class Ω=[1] has
+norm one and is cyclic because π(A)Ω=D. The exact local argument proves that
+each π(a) is closable and that π(a)* restricted to D equals π(a*); a
+self-adjoint a gives only a symmetric π(a) on D, not automatic essential
+self-adjointness. It proves uniqueness up to a unitary that intertwines two
+cyclic representations of the same state. It does not identify
+representations of different states. The completion supplier
+thm-completion-of-an-inner-product-space-is-hilbert carries its stated
+Countable Choice premise, so QFT-MC01 records that premise rather than hiding
+it.
 
-The proposed A/B pages are homogeneous, supplier first and capped at 100 items per side, with B leaves. Every asserted theorem points to a sufficient full local argument or exact inspected supplier. Four-dimensional nonperturbative continuum QED, unrestricted interacting relativistic existence, generic regulator removal, gauge/infrared charged sectors and full causal local renormalization/scattering results beyond the proved branches remain honestly prospective. No absent mathematics is renamed a physical postulate.
+For R4, put S=S(R4;C). Its algebraic tensor algebra is
+T(S)=⊕_{n≥0} S^⊗alg n, with finite sums, concatenation product, unit in degree
+zero, and involution that reverses tensor order and conjugates every test.
+Write X(f) for the degree-one element, so X(f)*=X(bar f). A positive tempered
+moment input is a specified family W_n∈S'(R^{4n}), W_0=1, whose finite
+linear extension ω on T(S) satisfies ω(a*a)≥0 for every a∈T(S). Positivity
+is an actual hypothesis on the supplied distributions; a formal perturbation
+series is not a positive functional.
+
+The local QFT-MC02 reconstruction argument applies the preceding GNS
+construction to such already-positive moments. It proves that Φ(f)=π(X(f))
+is a weak operator-valued tempered distribution on the common domain D and
+that (Φ(f₁)…Φ(fₙ)Ω,Ω)=Wₙ(f₁⊗…⊗fₙ), with the first-variable-linear
+pairing and the tensor evaluation fixed above. If the moments
+are invariant under the specified proper-orthochronous Poincaré pullback, the
+argument constructs the corresponding strongly continuous implementing
+unitaries. If the displayed polynomial moment pairings vanish for spacelike
+separated compact tests, it proves the corresponding commutator vanishes on D.
+For translations z=(z⁰,z⃗), write p·z=p⁰z⁰−p⃗·z⃗ and define
+D_{b,a}(z)=ω(b*α_z(a))=(π(α_z(a))Ω,π(b)Ω). Use the Fourier convention
+D̂_{b,a}(p)=∫_{R⁴}exp(−ip·z)D_{b,a}(z)d⁴z, extended to tempered
+distributions by transposition. The spectrum condition in this scaffold is
+supp D̂_{b,a}⊆V̄₊={p∈R⁴:p⁰≥|p⃗|} for every a,b∈T(S). When a joint
+translation-generator representation exists, its convention is
+U(z)=exp(i(P⁰z⁰−P⃗·z⃗)), so this Fourier support is the forward-energy cone.
+The matrix-coefficient support condition itself does not assert joint
+self-adjoint generators or a joint spectral measure. If the translation
+matrix-coefficient distributions have this Fourier support, the condition
+transfers to the reconstructed representation. These are conditional
+conclusions from positive continuous data and the stated extra moment
+identities. The theorem does not construct an unspecified positive interacting
+functional, infer joint self-adjoint energy-momentum generators, or turn
+formal coefficients into W_n.
+
+The sign is checked against the actual free scalar carrier, not selected by
+notation: FF3 has Kf(p)=∫f(x)e^{+ip·x}d⁴x, Kf_z=e^{+ip·z}Kf for
+f_z(x)=f(x−z), and W₂(x−y)=∫e^{−ip·(x−y)}dν(p). In
+ω(b*α_z(a)) the translated field is the right Wightman argument, so its
+matrix coefficient carries e^{+ip·z}; the displayed e^{−ip·z} transform
+therefore has support at p∈V̄₊. This checks the convention on the actual
+mass-shell kernel and ordering.
+
+A bounded finite measurement interface is also mathematical before it is
+physical. For a finite-dimensional Hilbert space, an effect is a Hermitian
+matrix F with 0≤F≤I; a finite POVM is a list F_a with sum_a F_a=I. A finite
+instrument is an explicitly listed family M_{a,r} with
+F_a=sum_r M*_{a,r}M_{a,r}; its nonselective normalization is
+sum_{a,r}M*_{a,r}M_{a,r}=I. For a density matrix ρ, p_a=tr(ρF_a) is
+nonnegative and the probabilities sum to one; when p_a>0 the associated
+specified update is
+sum_r M_{a,r}ρM*_{a,r}/p_a. The QFT-MC03 argument proves these finite
+identities and the local QFT-C5 extension consumes the stated NRQM trace
+interfaces for its separable trace-class case. It does not classify all
+instruments or supply a PVM for a merely symmetric unbounded field.
+
+## Wightman data, Euclidean data, and observable nets
+
+Write the proper-orthochronous Poincaré group as
+P=SO⁺(1,3)⋉R⁴, acting by g x=Λx+a. Its spin cover is
+P̃=SL(2,C)⋉R⁴. To define its Lorentz projection, write
+X=x⁰I+∑ᵢxⁱσᵢ for the Hermitian 2×2 matrix corresponding to x∈R⁴, where
+σ₁=[[0,1],[1,0]], σ₂=[[0,−i],[i,0]], and σ₃=diag(1,−1). Then
+det X=(x⁰)²−|x⃗|²=−η(x,x), and S∈SL(2,C) acts by X↦SXS†. This preserves
+the determinant and the future timelike cone (positive-definite X), hence
+defines Λ(S) in the time-orientation-preserving Lorentz group. To establish
+the spatial orientation as well, use the polar decomposition S=UP, where
+U∈SU(2) and P=(S†S)^{1/2} is positive Hermitian of determinant one.
+The group SU(2) is the unit 3-sphere and is path connected; also P=exp(H)
+for a Hermitian traceless H, so t↦exp(tH) joins I to P within positive
+determinant-one matrices. These paths show SL(2,C) is path connected.
+Since Λ is continuous and detΛ takes values in {−1,+1}, its image has
+determinant +1, so Λ(S)∈SO⁺(1,3). The spinor-cover construction in FF6
+factors each proper-orthochronous Lorentz transformation into a boost and
+rotation in this image. If SXS†=X for all Hermitian X, X=I first gives SS†=I; then S commutes
+with every Pauli matrix, so S is scalar, and det S=1 gives S=±I. Thus
+(S,a)↦(Λ(S),a) is a two-to-one homomorphism P̃→P with kernel
+{(I,0),(−I,0)}. A spin-half Dirac field transforms under
+P̃; its 2π rotation acts by −I, so it does not descend to an ordinary
+representation of P. Integer-spin tensor representations on which −I acts
+trivially descend to P.
+For scalar tests the active pullback is
+(T_g f)(x)=f(g⁻¹x)=f(Λ⁻¹(x−a)); it is defined on D or S and preserves the
+respective space. The actual Dirac test action used by FF6 is stated below,
+including its complex-conjugation convention.
+
+Scalar Wightman data in this scaffold mean a tuple (H,D,Ω,U,φ): H is a
+complex Hilbert space; D⊂H is a common invariant dense linear domain; Ω∈D is
+a unit vector; U is a strongly continuous unitary representation of P fixing
+Ω; and φ:D(R⁴)→End(D) is a complex-linear operator-valued distribution in
+the weak matrix-coefficient sense defined above. Its covariance condition is
+U(g)φ(f)U(g)⁻¹=φ(T_g f) on D. Vacuum cyclicity means the span of finite
+products of smeared fields applied to Ω is dense in H. For the Dirac field
+the representation is instead of P̃, and the actual antilinear smeared field
+Ψ(F) obeys the FF6 covariance law
+U(ĝ)Ψ(F)U(ĝ)⁻¹=Ψ(τ_ĝF), where for a lift ĝ=(S(Λ),a),
+(τ_ĝF)(x)=(S(Λ)⁻¹)†F(Λ⁻¹(x−a)); this is the exact active test action used
+in FF6, whose particle and antiparticle positive-kernel identities prove the
+covariance. Because FF5 smears the spinor field
+antilinearly in F through the sesquilinear pairing $\int F^\dagger\Psi$,
+the same operator-valued distribution can equivalently be written as the
+complex-linear map $G\mapsto\Psi(\bar G)$ on the conjugate test space; the
+displayed covariance equation retains FF6's original antilinear convention.
+No finite-component covariance law beyond these explicitly specified scalar
+and Dirac conventions is used here.
+
+Two compact supports K,L⊂M are spacelike separated when
+η(y−x,y−x)>0 for every x∈K and y∈L; this is a strict point-pairwise
+condition on the support difference L−K. Locality means commutators vanish
+on D for bosonic fields, and the graded relation AB=(−1)^{|A||B|}BA holds
+for homogeneous fermionic field polynomials at spacelike separated supports.
+The forward-cone translation spectrum condition is the Fourier-support
+condition defined above for every dense-domain matrix coefficient. Each
+condition is a separate hypothesis or proof target. These definitions do
+not include scattering completeness unless that additional condition is
+explicitly added.
+
+The local MC02 argument is a conditional moment-to-field theorem for several
+of these structures, and the free scalar and free Dirac suppliers construct
+specific positive examples with their own domains, covariance, spectra and
+locality identities. The dossier does not assert that arbitrary Wightman data
+exist for an interacting four-dimensional model, nor that every useful QFT is
+covered by one axiomatic package. This is why the exact free model contracts
+below are stated separately.
+
+For Euclidean spacetime R⁴_E write x=(τ,x⃗) and θ(τ,x⃗)=(-τ,x⃗). A scalar
+Schwinger hierarchy is a sequence S=(S_n)_{n≥0} of continuous linear
+functionals on S(R^{4n}), with S_0=1. Let
+$\mathscr D_+=\bigoplus_{n=0}^{N}\mathscr D((R^4_+)^n)$ range over all
+finite sequences of compact smooth tests supported where every time coordinate
+is positive. For f=(f_n), define
+$(\Theta f)_n(x_1,\ldots,x_n)=\overline{f_n(\theta x_1,\ldots,\theta x_n)}$.
+Reflection positivity is the exact inequality
+$$ Q_S(f):=\sum_{m,n\geq0} S_{m+n}((\Theta f_m)\otimes f_n)\geq0\quad (f\in\mathscr D_+), $$
+where the sum is finite and each distribution acts on the displayed tensor
+test. This defines a positive semidefinite sesquilinear form after
+polarization; its null quotient is the candidate reconstructed state space.
+
+For a scalar hierarchy, the original OS-I conditions E0–E4 are: each S_n is
+tempered; simultaneous translations and proper rotations in
+E⁺(4)=SO(4)⋉R⁴ preserve S_n; Q_S(f)≥0; S_n is symmetric under permutations;
+and separated groups of arguments factorize at large spatial separation. For
+tests f on R^{4n} and g on R^{4m}, define
+$(T_{(0,a)}g)(y_1,\ldots,y_m)=g(y_1-(0,\mathbf a),\ldots,y_m-(0,\mathbf a))$.
+The last clause is
+$S_{n+m}(f\otimes T_{(0,a)}g)\to S_n(f)S_m(g)$ as |a⃗|→∞. The 1973
+Euclidean-to-Wightman theorem needs an important correction: the 1975 OS-II
+paper supplies stronger regularity alternatives, including a uniform-in-order
+growth bound on the full hierarchy (commonly E0′/E0″), in addition to
+Euclidean invariance, reflection positivity, permutation symmetry and
+clustering. Put $\mathcal S_0(\mathbb R^{4n})$ for the subspace of Schwartz
+tests whose derivatives of every order vanish on each pairwise coincidence
+diagonal $x_i=x_j$. For an integer N≥0 define
+$$ p_N(f)=\max_{|\alpha|\leq N}\sup_{x\in\mathbb R^{4n}} (1+|x|)^N|\partial^\alpha f(x)|. $$
+One standard E0′ form bounds each S_n on $\mathcal S_0$ by
+$|S_n(f)|\leq\sigma_n p_{sn}(f)$, with a fixed integer s≥1 and
+constants $\sigma_n\leq A(n!)^B$, A,B independent of n. The exact test
+space and seminorm are theorem data; per-order temperedness alone is not this
+uniform condition.
+
+The corrected OS reconstruction contract sends a complete scalar hierarchy
+satisfying one of the corrected regularity conditions and the other stated
+OS hypotheses to a unique Wightman hierarchy with temperedness, Poincaré
+covariance, positivity, local commutativity, clustering and forward spectrum,
+unique up to a vacuum-preserving unitary equivalence. The original OS-I
+E0–E4 sufficiency statement is not used without the OS-II correction. This
+audit read the OS-I theorem statement and construction overview and the OS-II
+abstract/regularity correction, but did not read the full OS-II proof; no
+reconstruction proof is supplied or bound as a QFT item here. QFT-IR02
+constructs finite-dimensional Euclidean polynomial measures and moments, not
+a continuum family S_n satisfying these hypotheses. Its finite measures are
+not a hidden OS supplier.
+
+An algebraic observable net on Minkowski space assigns a unital star algebra
+A(O) to each open bounded causally convex region O. Its axioms used here are
+isotony A(O₁)⊆A(O₂) for O₁⊆O₂, Einstein causality
+[A(O₁),A(O₂)]=0 for causally separated regions, and Poincaré covariance by
+star automorphisms α_g with α_g(A(O))=A(gO). Causally separated means every
+point pair is spacelike separated under the metric condition already given.
+A C*-net adds a norm on each algebra for which multiplication and involution
+are continuous, every element has $\|a^*a\|=\|a\|^2$, and each local
+algebra is complete; it also requires specified isometric inclusions into a
+global inductive-limit algebra. A state on such an algebra is a positive
+normalized linear functional, and its Hilbert representation is the GNS
+construction already defined. Additivity, Haag duality, split inclusions,
+local von Neumann factor type and classification of sectors are additional
+properties, not consequences of the three net axioms. These are the net
+properties used here. For the
+real free scalar, the tested local Weyl construction proves the stated
+isotony, spacelike commutativity, and covariance for the algebra generated by
+W(f) with compact real tests supported in O and the locally proved
+symplectic commutator. It further proves norm continuity of Weyl products in
+the specified free Fock representation, so the corresponding concrete
+norm-closed local algebras are defined. It does not construct or classify a
+general C*-inductive limit, prove Haag duality, or classify local von Neumann
+algebras.
+
+For the free Dirac field the field generators at spacelike separation
+anticommute. The $\mathbb Z_2$ grading assigns degree 0 to even field
+polynomials and degree 1 to odd ones; graded locality is
+$AB=(-1)^{|A||B|}BA$ for homogeneous separated elements. The observable
+algebra is the even subalgebra, whose separated elements commute. Scalar
+fields use the symmetric tensor/Fock construction; Dirac fields use the
+alternating tensor/Fock construction. QFT-MF01/FF1 proves the CCR/CAR and
+QFT-MF02/FF4 and MF03/FF5–FF6 prove the chosen local/graded-local free-field
+identities. These are model-specific results.
+
+The separate four-dimensional spin-statistics theorem concerns a nonzero
+finite-component Wightman field multiplet with a representation of the spin
+cover, positive Hilbert metric, invariant cyclic vacuum, forward translation
+spectrum, tempered field distributions and spacelike locality. Its conclusion
+is that the central 2$\pi$-rotation $-I\in SL(2,\mathbb C)$ acts on the
+field with the same parity as its locality grading: integer-spin sectors are
+bosonic and half-integer-spin sectors fermionic; a nontrivial wrong-parity
+sector is incompatible with those hypotheses. The nonzero-field and
+positive-metric hypotheses matter: auxiliary indefinite-metric gauge
+potentials are outside this statement. The dossier defines these objects and
+states the theorem contract for comparison, but includes no full proof or
+logical supplier for the theorem. It does not derive the species assignment
+from the free Fock examples.
+
+C, P and T denote charge conjugation (exchange a field multiplet with its
+charge-conjugate multiplet), spatial parity $(x^0,\mathbf x)\mapsto
+(x^0,-\mathbf x)$, and time reversal $(x^0,\mathbf x)\mapsto
+(-x^0,\mathbf x)$, with time reversal anti-linear on complex state
+amplitudes. A CPT theorem contract is an antiunitary $\Theta$ on the
+positive-metric state space with a representation-dependent matrix relation
+$\Theta\phi_a(x)\Theta^{-1}=\sum_b C_{ab}\phi_b^\dagger(-x)$, under the
+full Wightman covariance, spectrum, locality, vacuum and field-regularity
+hypotheses. The scalar OS-I article's read theorem statement identifies the
+corresponding Euclidean PCT symmetry from Euclidean invariance and permutation
+symmetry; the corrected OS reconstruction proof is not supplied here. The
+free examples construct only the discrete transformations named in their
+local modules. Neither general theorem has a consumer in the proposed 31
+pairs.
+
+## Hilbert space free fields
+
+Let μ≥0 and ω(k)=sqrt(|k|²+μ²). On the future mass shell use
+dν(k)=d³k/((2π)³2ω(k)), with the massless apex ignored as a null set, and
+Kf(k)=∫_{R4} f(x) exp(i(ω(k)x⁰−k·x)) d⁴x for compact or Schwartz tests in
+the stated domains. The one-particle space is the corresponding L² mass-shell
+space. Boson Fock space is
+Γ_s(H)=⊕_{n≥0} H^⊗_s n, the Hilbert direct sum of symmetric tensor powers;
+fermion Fock space is Γ_a(H)=⊕_{n≥0} H^⊗_a n using alternating powers. The
+finite-particle vectors form the specified dense domain D_fin. Creation and
+annihilation operators act on their exact particle-number domains; the
+bosonic CCR and fermionic CAR are proved with the sector norms and adjoint
+domains in QFT-MF01. For fermions the CAR operators are bounded on the full
+Fock space. For a bosonic one-particle vector h, the Segal field is the
+specified real-linear combination a(h)+a*(h); the QFT-MF01/MF02 arguments
+give the corresponding domain and Weyl unitaries. They do not promote every
+distribution-valued field to a globally bounded operator.
+
+The real free scalar field is
+Φ(f)=a(K bar(f))+a*(Kf)
+on the supplied common domain, with its complex-linear smearing convention.
+The local free-field proof establishes the Klein–Gordon equation in tested
+form, positive vacuum Gaussian/Wick moments, vacuum cyclicity, proper
+Poincaré covariance, forward mass-shell spectrum, and the scalar causal
+commutator. For the adopted sine kernel the convention is
+[Φ(f),Φ(g)]=−iΔ(f,g)I; the support of Δ is causal, so spacelike separated
+compact smears commute. The result is a complete free field in this
+representation, not an interacting vacuum. Its time-ordered two-point kernel
+is supplied as a tempered distribution; the separately proved jump and
+partial-Fourier statements are exact for that free kernel.
+
+For translations a=(a⁰,a⃗) in length coordinates, the one-particle
+implementer is (U(a)h)(k)=exp(i(ω(k)a⁰−k·a⃗))h(k), and its Fock lift gives
+the Heisenberg covariance U(a)Φ(f)U(a)⁻¹=Φ(f_a), f_a(x)=f(x−a). This fixes
+the positive phase convention used by K. For physical time t=a⁰/c,
+U(a)=exp(+iHt/ℏ); Schrödinger state evolution is exp(−iHt/ℏ). The spectral
+support convention is the Fourier transform exp(−i(p⁰z⁰−p⃗·z⃗)) specified
+above, so a matrix coefficient of U(z) has support on the forward shell.
+
+For the Dirac model set η=diag(−1,1,1,1), β=diag(I,−I), γ⁰=β,
+γⁱ=βαⁱ in the fixed Pauli-block convention, and require
+{γᵃ,γᵇ}=−2ηᵃᵇI. Thus γ⁰ is Hermitian and the spatial γⁱ are
+anti-Hermitian; ψ-bar=ψ*β. The tested equation
+(iγᵃ∂_a−μ)ψ=0 squares to (□_η−μ²)ψ=0 in these conventions. The free
+Dirac construction uses its specified positive/negative-energy projections,
+particle and antiparticle one-particle spaces, and CAR Fock representation.
+It proves the tested free equation, covariance, translation spectrum, and
+graded locality on its named domains. Formulas from a (+−−−) source must be
+translated with the declared effective Clifford metric −η; signs are not
+combined by visual analogy.
+
+The free photon branch starts with the two transverse polarizations at each
+nonzero null momentum and builds a positive one-particle Hilbert space and
+bosonic Fock space. The transverse field and its Weyl observables have the
+proved covariance and positive spectrum. The Lorenz subsidiary construction
+separates an auxiliary covariant potential from the positive physical
+quotient: null vectors are removed by the stated null-subspace quotient, and
+only the quotient is a physical Hilbert space. The field-strength smears have
+the proved local commutator; Coulomb-gauge potential components need not be
+local. No indefinite auxiliary space is treated as a probability space, and
+the two-polarization count is a property of this selected free model.
+
+The conformally curved scalar branch is a mathematical construction on the
+same R4 with a prescribed smooth positive Ω and g=Ω²η. Its exact operator is
+P_g=□_g−R_g/6, with the curvature coupling 1/6. The supplied conformal
+identity is P_g(Ω⁻¹u)=Ω⁻³□_ηu. For a compact test f the curved smearing is
+defined by Φ_g(f)=Φ₀(Ω³f) relative to the curved volume Ω⁴d⁴x; the chosen
+state is the pullback of the already constructed massless Minkowski vacuum.
+The imported EMG conformal-curvature proof and the local C7 derivation
+establish this particular massless conformally coupled external-background
+model. They do not assert minimal coupling, mass, generic curved-spacetime
+Hadamard existence, a unique curved vacuum, stress-tensor renormalization,
+backreaction, or curved interacting QED.
+
+## Gauge fields, QED, and physical state spaces
+
+A classical U(1) gauge datum in the local mathematical QED definitions consists
+of a potential one-form a, its curvature f=da, a charge q, and a complex
+charged field ψ, with covariant derivative D_a=∂_a−iqa_a. For a smooth real
+function χ the gauge transformation is
+a↦a+dχ,  ψ↦exp(iqχ)ψ.
+It leaves f invariant and transforms Dψ covariantly. For an electron q=−e this
+is D=∂+iea and ψ↦exp(−ieχ)ψ. This is a local definition and convention; it
+does not imply that a quantum operator-valued potential exists pointwise or
+that its local products are defined.
+
+The free photon and Dirac suppliers are separate constructions. The QED
+coupling postulate adopts a particular local Dirac-Maxwell action and charge
+assignment. Under smooth fields and compactly supported variations, the local
+Q1 calculation varies that action, derives the Dirac current with its stated
+gauge transformation and derives the conditional classical sourced field
+equation. Its hypotheses include the actual smooth local model; it does not
+define an unregulated operator product ψ-bar γᵃ ψ at a point, solve a global
+PDE, construct a positive interacting vacuum, or establish continuum QED.
+The separate Coulomb-constraint calculation is the explicitly periodic,
+neutral smooth branch and does not deduce CAR from a classical constraint.
+
+The finite compact-lattice model is also exact in its own scope. Let G be a
+finite oriented graph with edge set E and vertex set V. The link configuration
+space is U(1)^E, represented on L²(U(1)^E) with normalized Haar measure;
+the finite fermion sector is the specified finite CAR Fock space.
+The local construction defines the link electric operators, link multiplication
+operators, vertex gauge transformations and Gauss constraints. Averaging the
+finite-dimensional compact gauge group U(1)^V with normalized Haar measure
+gives the orthogonal projection P_G onto the invariant subspace
+H_phys=P_G H_kin. Under the named positive electric coefficient and bounded
+potential/matter data, the QFT-MG02/QFT-G02 local arguments prove that the
+physical sector is nonempty, the selected Hamiltonian has the stated
+self-adjoint form realization and the restricted evolution is unitary. The
+finite-regulator Ward and contact identities are proved by the stated gauge
+change of variables and finite sums. The construction is for a finite spatial
+graph and compact link variables; it gives no infinite-volume, continuum,
+ultraviolet, infrared, or scattering limit.
+
+BRST is a distinct gauge-fixing framework and is not the Gauss projection just
+defined. A BRST complex is a Z-graded algebra of fields and ghost variables
+with an odd differential s of degree +1 satisfying s²=0 and a graded
+Leibniz rule. In a state-space formulation, a BRST charge Q with Q²=0 would
+define physical classes Ker(Q)/Im(Q) at the selected ghost number, with a
+separately proved positive inner product and compatibility with dynamics.
+No Q, ghost complex, cohomology, positivity theorem, or correspondence with the
+lattice Gauss-invariant space is constructed in this dossier. The QED Ward
+identities below are not called BRST proofs.
+
+## Finite, regulated, and formal interacting models
+
+A finite-mode or finite-lattice regulator fixes a finite number of spatial
+degrees of freedom; it is not a continuum approximation until a limit is
+proved. The QFT-IR01 argument begins with the exact form-realization
+hypotheses recorded in its supplier map. Its central case is a finite number
+of real coordinates q∈R^r and a polynomial potential V with the stated
+reality, lower bound V(q)≥c|q|²−C₀ for c>0, and any additional
+coercivity/domain assumptions in the item statement. The quadratic form
+defines a closed lower-bounded form and hence its selected self-adjoint
+operator. The local estimates prove compact form inclusion and compact
+resolvent for the stated confining class, existence of a ground eigenvector,
+the declared energy bound, and trace-class Gibbs operator at the temperatures
+covered by the theorem. This is an exact finite-regulator quantum-mechanical
+model with unitary evolution. It is not essential self-adjointness on every
+initial smooth core and is not a cutoff-removal theorem.
+
+The finite Euclidean branch defines a probability measure on R^N by
+dμ_V(q)=Z_V⁻¹ exp(−V(q))dq for the exact finite-dimensional polynomial and
+integrability conditions in QFT-IR02; Z_V is the positive finite normalizing
+integral. The supplied Gaussian and interacting finite-dimensional
+calculations prove the stated moments and the designated asymptotic
+coefficients. The explicit zero-dimensional factorial example proves that a
+formal perturbation series can have radius of convergence zero. These finite
+measures are not measures on distributions on R4, and their positivity alone
+is not Osterwalder–Schrader reflection positivity for a Euclidean spacetime
+field.
+
+The formal algebra uses a declared coefficient ring, polynomial functionals,
+and finite Wick contractions. A formal series Σ_n a_n g^n is defined by its
+sequence of coefficients; addition and multiplication are coefficientwise
+and each product coefficient is a finite sum. Equality of formal series means
+equality of every coefficient. This definition does not assign a numerical
+value at g≠0 or imply a nonzero radius of convergence. The QFT-IR03 proof
+establishes the stated associativity and normal-order isomorphism for regular
+polynomial functionals, coefficientwise formal time ordering and causal
+factorization under its compact-support hypotheses. The separate Dyson theorem
+covers bounded norm-continuous interactions on a compact time interval, with
+a norm-convergent series and factorial remainder. It does not apply to an
+unbounded quartic field interaction by naming it a Dyson series.
+
+For a distribution t on R⁴\{0}, define its dilation by
+⟨t_ρ,f⟩=ρ⁻⁴⟨t,f(·/ρ)⟩ for ρ>0. Its scaling degree at the origin is
+sd(t)=inf{δ∈R: ρ^δ t_ρ→0 in D' as ρ↓0}, with the test topology and
+limit specified in QFT-IR04. A local extension is a distribution on R⁴
+whose restriction to R⁴\{0} equals t. QFT-IR04 proves the extension and
+finite delta-jet ambiguity contracts only for the stated punctured
+distributions with finite scaling degree; the unique subcritical case is
+sd(t)<4. The four-dimensional logarithmic scale-change identity is proved
+for the same stated class. This is not a theorem that every product of
+interacting fields has finite scaling degree, nor an extension theorem for
+all overlapping Lorentzian graph diagonals.
+
+The uniform test-space estimate in that extension proof is where the audited
+choice edge matters. The proof takes the complete metric Frechet space of
+tests supported on a fixed compact annulus away from zero, proves pointwise
+boundedness of the rescaled functionals, and applies Baire to obtain one
+uniform seminorm bound. The exact published Baire theorem used here assumes
+Dependent Choice (DC). The existing mathematical premise is the Axiom of
+Choice (AC). The published theorem
+thm-choice-implies-dependent-implies-countable-choice proves AC⇒DC in ZF;
+the revised QFT-IR04 dependency now records that premise explicitly. This
+repairs the proof chain without asserting that the category proof itself
+manufactures any physical interaction.
+
+QFT-IR05 defines finite quartic graphs and engineering dilation. For a
+connected four-dimensional scalar φ⁴ graph with V quartic vertices, I internal
+edges and E external half-edges, the incidence relation 4V=2I+E and loop
+count L=I−V+1 give superficial degree
+δ(Γ)=4L−2I=4−E. This is a combinatorial/power-counting identity for the
+declared graph class. The field engineering dimension [φ]=1 and coupling
+dimension zero are the corresponding formal dilation convention in four
+spacetime dimensions. Neither formula estimates a renormalized amplitude,
+sums graphs, constructs a beta function, or proves a convergent expansion.
+
+Renormalization has several meanings, which this scaffold keeps separate:
+(1) extending a specified singular distribution to a diagonal, as in QFT-IR04;
+(2) the finite regulator constructions and formal coefficient identities just
+stated; and
+(3) a renormalization-group flow of couplings or operators as a cutoff or
+scale changes. For (3), a flow would be a specified family R_s acting on a
+declared space of actions/couplings, with generator β_i(g)=d g_i(s)/ds and
+the observable/control statement stated separately. No such general
+Wilsonian flow, all-order beta function, or continuum error estimate is
+supplied here.
+
+An effective field theory at a scale Λ is, for this glossary, a local action
+density expanded as Σ_i c_i O_i/Λ^{d_i−4}, where each O_i is a specified
+local operator of engineering dimension d_i and each coefficient c_i is
+specified at the chosen scale. A useful EFT theorem must state a regime
+E/Λ≪1, a truncation order, and an error bound for the chosen observables.
+QFT-IR05 provides graph power counting and engineering dimensions only; it
+does not supply a Wilsonian integration, running coefficients, matching
+conditions, or an EFT truncation error estimate. Those are optional extensions
+rather than hidden prerequisites of the finite-regulator/formal claims.
+
+Causal renormalization is another, more structured use of local extension.
+For n spacetime variables let
+$\mathrm{Conf}_n=M^n\setminus\bigcup_{i<j}\{x_i=x_j\}$ be the
+configuration space away from pairwise diagonals. A time-ordered product
+$T_n$ is a distribution-valued multilinear map on n compactly supported
+local field inputs, initially defined on $\mathrm{Conf}_n$. Causal
+factorization requires that, when every point in the support of one input is
+strictly later than every point in the support of another, the larger
+time-ordered product factors into the two ordered products (with the stated
+graded signs for fermionic inputs). A causal renormalization step extends
+these distributions across the diagonals while imposing permutation symmetry,
+Poincaré covariance, unitarity and the required causal factorization. Choices
+between two extensions are local distributions supported on the relevant
+diagonals. Gauge Ward identities require additional normalization conditions
+compatible with the gauge differential; they do not follow from extension
+existence alone. QFT-IR03 supplies coefficientwise causal factorization for
+regular polynomial functionals and bounded-regulator Dyson factorization;
+QFT-IR04 handles a single stated finite-scaling-degree point singularity.
+Neither module extends arbitrary overlapping Lorentzian graph diagonals or
+proves all-order QED gauge-compatible normalization. QFT-Q7's finite matrix
+and tree Ward identities and QFT-G02's declared finite-regulator/contact
+identities remain exact within their own models.
+
+Constructive existence means producing actual limiting mathematical objects,
+not merely a list of regulators. In a Euclidean route one specifies regulated
+Schwinger distributions $S_n^{(L,\Lambda)}$, test spaces, and a joint
+volume/ultraviolet limit; for every n and allowed test f, the pairings must
+converge to a continuous distribution $S_n(f)$, with estimates uniform
+enough in L, Λ and n to pass positivity, Euclidean invariance, symmetry,
+clustering and the corrected OS regularity condition to the limit. Only then
+can the corrected OS theorem reconstruct a positive-energy Wightman theory.
+A Hamiltonian route instead needs a specified Hilbert-space limit, a
+self-adjoint dynamics and its vacuum/spectrum/locality contracts. QFT-IR01
+constructs one fixed finite-mode self-adjoint model and trace-class Gibbs
+operator; QFT-IR02 constructs finite-dimensional Euclidean measures. QFT-G02
+uses a finite spatial lattice for exact identities and separately formal
+QED coefficients. None proves either continuum route or a cutoff-removal
+limit.
+
+## Ward identities, infrared behavior, and QED perturbation
+
+The QED formal branch fixes the free Dirac line, photon line, charge, vertex,
+matrix conventions and coefficient ring before calculating. A Ward identity
+is an algebraic relation between a contracted current/vertex insertion and
+the corresponding difference of inverse free propagators, including the
+stated contact terms. QFT-Q7 proves the finite matrix and tree Ward identities
+in its formal ring. QFT-Q6 proves the declared finite-regulator/contact
+identities under its chosen regulator and current localization hypotheses.
+QFT-G02 adopts those exact branches. Neither result is an all-orders theorem
+for a renormalized four-dimensional continuum model.
+
+The soft-current example defines a conserved current j^a and its angular
+factor on the specified finite-energy/mass-shell support. Its coherent
+displacement has norm with the calculated logarithmic infrared term. The
+result demonstrates the stated failure of that coherent family to converge
+in the selected photon Fock norm while retaining the declared finite-energy
+property. It does not construct a charged infraparticle representation, prove
+an all-observable infrared-finite scattering theory, or assert a universal
+Fock obstruction for every charged state.
+
+The QED examples calculate exact finite-dimensional spin traces, polarization
+sums and two-body phase-space Jacobians under their displayed mass-shell and
+normalization conventions. They give the formal tree coefficient for
+e⁺e⁻→μ⁺μ⁻ and the listed scalar coefficients. “Tree coefficient” means the
+fixed lowest-order formal coefficient from the stated diagram rules; it is not
+an exact interacting cross section. The finite-time golden-kernel calculation
+uses a specified bounded time integral and its actual bound, not a squared
+Dirac delta. The oscillator Plemelj calculation is a distributional boundary
+limit under its exact hypotheses. The Dirac magnetic benchmark squares the
+displayed minimally coupled Dirac operator and yields the formal g_s=2
+coefficient for that model. None of these computations supplies a one-loop
+Pauli form factor or a precision Standard Model prediction.
+
+## Scattering, LSZ, and Haag's theorem
+
+For a specified pair of self-adjoint Hamiltonians H₀ and H on a common
+Hilbert space, an incoming wave operator, when the strong limit exists, is
+Ω₋=s−lim_{t→−∞} exp(iHt)exp(−iH₀t)P₀; the outgoing operator is defined by the
+corresponding t→+∞ limit on the chosen free scattering subspace P₀H. If both
+exist with the needed range properties, the scattering operator is
+S=Ω₊*Ω₋ on that subspace. Existence of these limits, their isometry, and
+asymptotic completeness are separate theorems; asymptotic completeness means
+the incoming and outgoing ranges equal the target state space. A formal
+coefficient in a polynomial interaction does not define these strong limits.
+
+LSZ reduction has a concrete input object: Fourier-transformed time-ordered
+n-point distributions for fields with stable one-particle states. A stable
+mass-m particle requires an isolated one-particle mass-shell contribution,
+nonzero field-to-state matrix element (the pole residue), and asymptotic
+incoming/outgoing wave packets. In the length-momentum convention here the
+positive shell is $p^0=\omega_\mu(\mathbf p)
+=\sqrt{|\mathbf p|^2+\mu^2}$. The pole hypothesis means that after a
+specified analytic continuation the two-point function has a simple pole at
+this energy with finite nonzero residue Z; for each external leg the declared
+limit $\lim_{p^0\to\omega_\mu}(p^0-\omega_\mu)\widehat G$ exists in the
+stated boundary-value sense. The LSZ reduction theorem takes the corresponding
+simultaneous external-leg residues of the time-ordered n-point distributions,
+multiplies by the specified $Z^{-1/2}$ factors, and identifies the
+resulting coefficient (including its stated momentum-conservation
+distribution and phase convention) with a scattering matrix element once the
+asymptotic fields have been constructed. This is a conditional theorem
+contract, not a rule that every formal propagator has a particle pole. No
+interacting pole, asymptotic state,
+renormalized residue limit or LSZ proof is supplied here. The QFT-X02 formal
+scattering/decay coefficient and the QFT-MX02 tree coefficient are not LSZ
+suppliers. Tong's pedagogical QFT text calls its initial free asymptotic-state
+assumption “shaky” and presents the amputated external-line formula formally;
+this audit read the cited discussion, not a complete constructive LSZ proof.
+
+An interaction-picture identification would require two covariant field
+families $\phi_0(t,f)$ and $\phi(t,f)$ on a common Hilbert space, a unitary
+V relating their equal-time fields on a common invariant domain, and their
+respective Poincaré representations, positive spectra and vacuum states. A
+Haag-type theorem says that, under the full relativistic representation and
+vacuum hypotheses, such an exact equal-time unitary identification forces the
+interacting vacuum correlations to agree with the free-field theory; a
+nontrivial interaction cannot be asserted by that identification. The exact
+theorem variants impose additional domain, regularity and covariance
+conditions. The cited AQFT introduction summarizes the obstruction, but this
+audit did not read a complete theorem proof or verify one exact variant, so no
+Haag theorem is a supplier or a proved result here. The exact finite-mode
+evolution remains valid on its own model; the scaffold makes no continuum
+interaction-picture claim.
+
+## Probabilities, experiment, and physical applicability
+
+A state or positive functional is mathematical input. A physical measurement
+postulate assigns outcome probabilities to the actual effects or projections
+in a specified constructed model. In the finite-instrument branch the
+probability law is p_a=tr(ρF_a) with the exact normalized instrument already
+defined. The physics item
+post-qft-constructed-model-and-measurement adopts this Born interpretation
+only when an actual Hilbert model, state, self-adjoint or bounded observable,
+instrument, and dynamics are present. It supplies no missing representation,
+operator domain, detector response, or continuum limit.
+
+The QFT-X01 physical type definitions distinguish state, probability law,
+observable coefficient, and empirical datum. Its regulated transition
+estimate is the exact finite-dimensional unitary/Born calculation with the
+displayed norm remainder; it is not a sample-based inference theorem. QFT-X03
+separates the exact idealized Penning-frequency algebra from the reported
+experiment. Fan et al.'s 2022 paper reports the corrected
+g_s/2=1.00115965218059(13) estimate and its reported 1σ uncertainty. This
+dossier records the paper's value and qualifications as a source-reported
+empirical result; it does not independently reconstruct the fitted weighted
+average, covariance, uncertainty budget, or likelihood. The datum is not a
+proof premise for QED and is not a rederived Standard Model prediction.
+
+The deterministic ratio-error bound and Taylor remainder in the historical
+QX11 proof use only exact quotient algebra, direct difference quotients and a
+finite explicit square bound. The separate covariance,
+variance, and minimum-variance weighted-estimator clauses are excluded under
+the current owner scope because the mathematical-statistics supplier pages are
+unbuilt. The MX04 current binding retains a local pure-analysis lemma for the
+deterministic part only; B08 is rebound to that lemma. EXP01 remains a report
+of what the paper states and has no estimator-theorem prerequisite or local
+statistical-reproduction claim. The excluded clause is a scope restriction,
+not a claim that the mathematical result is open.
+
+## Exact scope of the 31 proposed pairs
+
+The following list preserves the assigned pair scope and states what its
+supplier actually establishes. Local proof modules are research arguments,
+not accepted item proofs.
+
+| Pair | Exact scope carried by this scaffold |
+|---|---|
+| QFT-MC01 | Unital star algebra, positive state, full positive-state Cauchy–Schwarz including the zero case, left-radical GNS quotient, closable common-domain representation, and a nonregular Weyl-state counterexample. |
+| QFT-MC02 | Positive continuous tempered moments imply a weak operator-valued field on a common domain; covariance, tested locality, field equations, and matrix-coefficient spectrum are conditional on the separately displayed moment identities. |
+| QFT-MC03 | Finite bounded instruments normalize probabilities and updates; formal factorial coefficients are not numerical convergence. |
+| QFT-MF01 | Hilbert tensor completion, bosonic CCR and fermionic CAR Fock domains, Segal-field essential self-adjointness in its proved core, Weyl unitaries, and the stated second-quantized spectrum. |
+| QFT-MF02 | Future mass-shell map, exact smeared free scalar, causal commutator, algebraic local Weyl net, and the spacelike vacuum-correlation example. |
+| QFT-MC04 | The exact massless scalar with curvature coupling 1/6 on the prescribed smooth conformally flat external metric, using the selected Minkowski Fock state. |
+| QFT-C01 | SI/natural unit dictionary plus the model-conditional physical measurement adoption; two-level example only. |
+| QFT-MX01 | Bounded finite-time Dyson unitarity with remainder, finite golden kernel, oscillator boundary prescription, and stated energy/domain examples. |
+| QFT-MF03 | Dirac energy projections, CAR locality, covariance and spectrum for the fixed free spinor conventions. |
+| QFT-MF04 | Free time-ordered tempered kernel, tested free-action equations, observable domains and the jump example. |
+| QFT-MG01 | Pure QED gauge data, positive transverse photon space, current and Coulomb constraints, subsidiary null quotient, covariance/spectrum, smeared potentials, local field strengths and local Weyl observables. |
+| QFT-MG03 | Coefficientwise formal QED ring, matrix/tree Ward identities, Grassmann determinant identity, conserved current and the specified coherent infrared obstruction. |
+| QFT-MX02 | Exact finite spin traces, two-body phase space, the named formal tree annihilation coefficient, scalar tree coefficients and the Dirac magnetic benchmark. |
+| QFT-MX03 | The stated soft-current angular/coherent calculation and cutoff-integral/asymptotic-series estimates. |
+| QFT-MX04 | Ideal Penning-frequency matrix invariant and the deterministic ratio-error/Taylor remainder bound. The covariance-weighted estimator clause is excluded by the owner scope constraint and has no consumers in the repaired binding. |
+| QFT-X01 | Observable-type definitions and the finite regulated probability-control theorem with its hypotheses. |
+| QFT-MG02 | Finite compact U(1) rotor-plus-CAR model, Gauss projection, physical Hamiltonian/evolution, local flux and the declared finite Ward/contact identities. |
+| QFT-F01 | Adopted physical reading of the constructed free scalar and Dirac Fock models; particle/statistics assignments are model choices. |
+| QFT-G01 | Adopted positive free photon model, local QED coupling, and the conditional smooth classical-coupling/physical-photon conclusions. |
+| QFT-G02 | Adopted finite lattice gauge regulator and formal QED coefficients with the exact finite/formal Ward contracts. |
+| QFT-X02 | Adopted formal observable map, formal scattering/decay coefficient, and the stated Dirac magnetic benchmark; no S operator is constructed. |
+| QFT-X03 | Soft coherent number probabilities for the prepared free state, the source-reported Fan electron-moment result, and its explicitly conditional affine anomaly subtraction. No estimator result is used to reconstruct the reported value or uncertainty. |
+| QFT-F02 | Adopted exact free scalar model, its tested field properties and vacuum moments. |
+| QFT-F03 | Adopted exact free Dirac model and its stated free-field properties and discrete-symmetry examples. |
+| QFT-F04 | Free observable-domain limits and the stated classical/free-quantum comparison, with a point-field counterexample. |
+| QFT-IR01 | The selected finite-regulator bosonic polynomial Hamiltonian: exact form realization, self-adjointness, compact-resolvent/ground/Gibbs conclusions and unitary evolution under the inventory hypotheses. |
+| QFT-IR02 | Finite Euclidean polynomial measures, Gaussian/Wick moments and the declared finite asymptotic expansion; no continuum Euclidean field measure. |
+| QFT-IR03 | Regular polynomial Wick/star algebra, normal-ordering isomorphism, formal time ordering/causal factorization, and bounded-regulator Dyson factorization. |
+| QFT-IR04 | Finite-scaling-degree extension, point-supported finite counterterm jets, subcritical uniqueness and the four-dimensional logarithmic scaling statement, after the explicit AC⇒DC closure repair. |
+| QFT-IR05 | Finite quartic graph power counting and engineering-dilation identity only; no renormalized amplitude or RG flow. |
+| QFT-PIR01 | Physical adoption and conditional predictions for the fixed finite-regulator polynomial model and its selected Gibbs state. |
+
+The optional framework extensions defined above—full OS reconstruction, general
+AQFT net axioms, spin-statistics/CPT, LSZ scattering, Haag's theorem proof,
+Wilsonian RG/EFT flow, BRST cohomology, and a continuum QED construction—are
+not premises of these exact local claims and have no logical consumers in the
+current proposed inventory. They remain visible extension obligations rather
+than silently deleted subject matter. The open Yang–Mills existence/mass-gap
+problem is recorded separately under its dated op-ID; no proof stamp or
+consumer edge is attached to that record.

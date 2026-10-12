@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-complex-symmetric-matrices-are-unitarily-diagonalizable.md

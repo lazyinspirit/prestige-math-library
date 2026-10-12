@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-composition-of-coverings-with-finite-sheeted-outer-map-is-a-covering.md

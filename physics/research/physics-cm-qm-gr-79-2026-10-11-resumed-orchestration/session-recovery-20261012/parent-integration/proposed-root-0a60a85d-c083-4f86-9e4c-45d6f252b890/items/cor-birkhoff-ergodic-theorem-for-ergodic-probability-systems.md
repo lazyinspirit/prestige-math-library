@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-birkhoff-ergodic-theorem-for-ergodic-probability-systems.md

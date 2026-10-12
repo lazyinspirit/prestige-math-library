@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-vertex-mixed-on-a-quotient-block-yields-opposite-adjacency-on-two-member-blocks.md

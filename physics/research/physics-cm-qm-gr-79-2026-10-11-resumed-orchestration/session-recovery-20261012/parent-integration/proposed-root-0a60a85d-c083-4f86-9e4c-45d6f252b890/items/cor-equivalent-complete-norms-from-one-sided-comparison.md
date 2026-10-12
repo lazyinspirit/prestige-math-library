@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-equivalent-complete-norms-from-one-sided-comparison.md

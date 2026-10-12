@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quasi-isometry-is-an-equivalence-relation-on-metric-spaces.md

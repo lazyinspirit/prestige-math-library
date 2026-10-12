@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence.md

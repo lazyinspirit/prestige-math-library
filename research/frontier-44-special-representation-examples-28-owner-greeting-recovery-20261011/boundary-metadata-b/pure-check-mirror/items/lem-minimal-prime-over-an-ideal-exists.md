@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-minimal-prime-over-an-ideal-exists.md

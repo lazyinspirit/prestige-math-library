@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-doubling-integers-has-nonunit-determinant.md

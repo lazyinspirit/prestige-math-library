@@ -1,0 +1,107 @@
+{
+  "run": "frontier-44-special-representation-examples-28",
+  "batch": "26",
+  "inventory_unchanged": true,
+  "dependency_levels_unchanged": true,
+  "page_prerequisites_unchanged": true,
+  "changes": [
+    {
+      "id": "lem-kronecker-reduction-lemma",
+      "page": "kronecker-coefficients-and-internal-products",
+      "fields": {
+        "deps": {
+          "before": [
+            "def-kronecker-coefficient-and-internal-tensor-product",
+            "def-internal-product-on-symmetric-functions",
+            "prop-power-sums-diagonalize-the-internal-product",
+            "lem-littlewood-internal-product-outer-compatibility",
+            "thm-littlewood-richardson-schur-product-expansion",
+            "def-littlewood-richardson-tableau-and-coefficient",
+            "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+            "thm-schur-functions-form-an-orthonormal-integral-basis",
+            "def-stable-graded-ring-of-symmetric-functions",
+            "def-partition-young-diagram-and-conjugate-partition"
+          ],
+          "after": [
+            "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric",
+            "def-kronecker-coefficient-and-internal-tensor-product",
+            "def-internal-product-on-symmetric-functions",
+            "prop-power-sums-diagonalize-the-internal-product",
+            "lem-littlewood-internal-product-outer-compatibility",
+            "thm-littlewood-richardson-schur-product-expansion",
+            "def-littlewood-richardson-tableau-and-coefficient",
+            "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+            "thm-schur-functions-form-an-orthonormal-integral-basis",
+            "def-stable-graded-ring-of-symmetric-functions",
+            "def-partition-young-diagram-and-conjugate-partition"
+          ]
+        },
+        "provenance": {
+          "before": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "after": {
+            "statement": "ai-altered",
+            "proof": "ai-altered"
+          }
+        },
+        "statement": {
+          "before": "Let lambda,mu,nu |- n with lengths at most l and put s := n - nu_1 (missing parts, including nu_1 for the empty partition, are zero). (i) If |lambda_i - mu_i| > s for some i <= l, then g(lambda,mu,nu) = 0. (ii) If |lambda_i - mu_i| <= s for all i <= l, then g(lambda,mu,nu) = g(phi(lambda),phi(mu),phi(nu)) for the explicit reduction map phi: with rho := lambda cap mu, omega := lambda cup mu, I := {i : rho_i >= omega_{i+1} + s, 1 <= i <= l} union {l+1} (rho_{l+1} = omega_{l+1} := 0), i_j := min{i in I : i >= j}, and ind_I(i) := #{i' in I : l >= i' >= i} for i <= l, with ind_I(l+1) := 1, set phi(theta)_j := theta_j - rho_{i_j} + s(l-i_j+ind_I(i_j)) for 1 <= j <= l and phi(nu) := (r - s, nu_2, nu_3, ...), where r := |phi(lambda)| = |phi(mu)| = |phi(nu)| <= 2 s l^2. All of phi(lambda), phi(mu), phi(nu) are partitions of r.",
+          "after": "Let $n\\ge0$ and $\\ell\\ge0$, and let $\\lambda,\\mu,\\nu\\vdash n$ have lengths at most $\\ell$. Read missing parts as zero and put $s:=n-\\nu_1$, with $\\nu_1=0$ for the empty partition.\n\n**(i)** If $|\\lambda_i-\\mu_i|>s$ for some $i\\le\\ell$, then $g(\\lambda,\\mu,\\nu)=0$.\n\n**(ii)** Otherwise put $\\rho:=\\lambda\\cap\\mu$, $\\omega:=\\lambda\\cup\\mu$, $\\omega_{\\ell+1}:=0$, and define\n$$\\delta_i:=\\max\\{0,\\rho_i-\\omega_{i+1}-2s\\},\\qquad D_j:=\\sum_{i=j}^{\\ell}\\delta_i,\\qquad \\varphi(\\theta)_j:=\\theta_j-D_j\\quad(1\\le j\\le\\ell).$$\nFor every partition $\\theta$ with at most $\\ell$ parts satisfying $\\rho_j-s\\le\\theta_j\\le\\omega_j$ for each $j$, the image $\\varphi(\\theta)$ is a partition after deletion of zero parts. In particular $\\varphi(\\lambda)$ and $\\varphi(\\mu)$ have a common size $r$, and $\\varphi(\\nu):=(r-s,\\nu_2,\\nu_3,\\ldots)$ is a partition of $r$. Then\n$$g(\\lambda,\\mu,\\nu)=g(\\varphi(\\lambda),\\varphi(\\mu),\\varphi(\\nu)),\\qquad r\\le2s\\ell^2.$$\n\nThis is a corrected reduction map for the bounded-reduction conclusion of Pak\u2013Panova. It retains their Littlewood\u2013Richardson/Jacobi\u2013Trudi proof route and the same size bound; the map is not the block formula printed in their papers."
+        },
+        "strategy": {
+          "before": "Part (i): Suppose |lambda_i - mu_i| > s for some i, say lambda_i > mu_i. Then |lambda cap mu| <= sum_{j != i} lambda_j + mu_i < n - s, so there are no partitions alpha |- n - s, beta |- s with c^lambda_{alpha,beta} != 0 and c^mu_{alpha,beta} != 0, since a nonzero LR coefficient forces alpha to be contained in both lambda and mu. With pi := (nu_2,nu_3,...), so nu = (n-s,pi), Littlewood's identity and s_alpha * s_{n-s} = s_alpha give [s_mu](s_lambda*(s_{n-s}s_pi)) = sum c^lambda_{alpha,beta} c^mu_{alpha,gamma} g(beta,pi,gamma) = 0. The horizontal Pieri expansion s_{n-s}s_pi = s_nu + sum_{eta} s_eta (eta obtained from pi by adding a horizontal strip of length n-s, eta != nu), itself a consequence of the LR product expansion and the LR-tableau description of content-(n-s) tableaux, converts this into 0 = g(lambda,mu,nu) + sum_eta g(lambda,mu,eta); all terms are nonnegative, so g(lambda,mu,nu) = 0. Part (ii): Use the corrected map of PP3 Lemma 5.1, including the sentinel l+1 and the block-rank term ind_I; the older Bounds display omits these. Put d_j := rho_{i_j} - s(l-i_j+ind_I(i_j)), so phi(theta) = theta - d. On each block with constant i_j this is a horizontal translation; the defining gap inequalities give weak decrease at block boundaries for the near-rho partitions used below. The inverse translation theta -> theta + d is used only for the nonzero LR terms of the compared sums, not asserted to map every partition to a partition. For the nonzero terms of the sum above one has alpha contained in rho and rho contained in alpha + (s^l), so phi(alpha) is defined; the explicit row inequality phi(alpha)_{i_j} - phi(lambda)_{i_j+1} >= 0 shows that phi preserves the connected components of the skew shapes, hence c^lambda_{alpha,beta} = c^{phi(lambda)}_{phi(alpha),beta} and the same for mu, and dually for the inverse. For each tail degree q with 0 <= q <= s, a nonzero term has alpha subset rho and |rho|-|alpha| <= q, hence rho subset alpha+(s^l). The translations preserve the LR tableaux within every connected skew component. Conversely, a nonzero reduced term has theta subset phi(lambda) cap phi(mu) = phi(rho) and |phi(rho)|-|theta| <= q <= s, so the inverse translations preserve the same components and recover precisely the original terms. This gives the equality of the two coefficient sums (PP3 identity (6)) for every q <= s. Expanding s_nu with the Jacobi-Trudi identity as a finite signed combination of products s_{n-s+j}s_eta of complete functions and Schur functions, applying identity (6) term by term, and collecting s_{r-s+j}s_eta back into s_{(r-s,pi)} = s_{phi(nu)} yields g(lambda,mu,nu) = g(phi(lambda),phi(mu),phi(nu)). For the size bound, inside a block ending at k=i_j <= l each non-gap row satisfies omega_a < rho_{a+1}+s and omega_a-rho_a <= s; telescoping gives lambda_j-rho_k <= 2s(k-j)+s. Adding s(l-k+ind_I(k)), with ind_I(k) <= l-k+1, bounds each reduced part by 2sl. In the sentinel block the same telescoping to rho_{l+1}=0 gives that bound. Thus r <= 2sl^2. For s=0 the premise forces lambda=mu and nu=(n); the map reduces all three to the empty partition, with coefficient 1.",
+          "after": "Use Littlewood internal/outer compatibility to obtain the finite LR coefficient identity, expand the third Schur function along the first Jacobi\u2013Trudi row, and prove small-skew LR and inverse-index invariance under Phi(theta)=theta-D with delta_i=max(0,rho_i-omega_(i+1)-2s); prove output partitions and the original r<=2s ell^2 bound separately for ell=1, ell=2 and ell>=3. The printed block map is refuted by a coefficient-changing triple even when all its images are partitions."
+        }
+      }
+    },
+    {
+      "id": "thm-row-gap-reduction-and-conditional-k-stability",
+      "page": "kronecker-coefficients-and-internal-products",
+      "fields": {
+        "deps": {
+          "before": [
+            "def-kronecker-coefficient-and-internal-tensor-product",
+            "lem-kronecker-reduction-lemma",
+            "def-first-row-padding-of-a-partition",
+            "def-partition-young-diagram-and-conjugate-partition",
+            "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric"
+          ],
+          "after": [
+            "def-littlewood-richardson-tableau-and-coefficient",
+            "thm-littlewood-richardson-schur-product-expansion",
+            "def-kronecker-coefficient-and-internal-tensor-product",
+            "lem-kronecker-reduction-lemma",
+            "def-first-row-padding-of-a-partition",
+            "def-partition-young-diagram-and-conjugate-partition",
+            "cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric"
+          ]
+        },
+        "provenance": {
+          "before": {
+            "statement": "literature-derived",
+            "proof": "ai-altered"
+          },
+          "after": {
+            "statement": "ai-altered",
+            "proof": "ai-altered"
+          }
+        },
+        "statement": {
+          "before": "Fix lambda,mu,nu |- n and k >= 1. Write (t^k) for the partition (t,...,t) with k parts and (tk) for the one-part partition of size t k, and read every missing part of lambda, mu and nu as zero. Part (i): If lambda_1 <= mu_1 <= nu_1, put s := n - nu_1, and suppose min{lambda_k,mu_k} >= max{lambda_{k+1},mu_{k+1}} + s. Then for every t >= 0, g(lambda + (t^k), mu + (t^k), nu + (tk)) = g(lambda,mu,nu). (The added partitions all have size t k, so all three Kronecker arguments are partitions of n + t k; for k = 1 this is nu + (t) = (nu_2,nu_3,...)[n+t] in first-row-padding notation.) Part (ii): For arbitrary lambda,mu,nu |- n and k >= 1 the sequence G_k(t) := g(lambda + (t^k), mu + (t^k), nu + (tk)), t >= 0, is eventually constant: it is constant for all t at which min{lambda_k,mu_k} + t >= max{lambda_{k+1},mu_{k+1}} + (n - nu_1) and the first parts are ordered lambda_1 + t <= mu_1 + t <= nu_1 + t k (after exchanging lambda and mu, which leaves G_k unchanged; for k = 1 one may also relabel all three arguments, by S_3 symmetry, so that nu_1 is the largest first part). No monotonicity of G_k is asserted here.",
+          "after": "Fix $\\lambda,\\mu,\\nu\\vdash n$ and an integer $k\\ge1$. Write $(t^k)$ for $k$ parts equal to $t$ and $(tk)$ for the one-part partition of size $tk$, and read missing parts as zero. Put $s:=n-\\nu_1$, with $\\nu_1=0$ if $n=0$.\n\n**(i)** Suppose $\\lambda_1\\le\\mu_1\\le\\nu_1$ and\n$$\\min\\{\\lambda_k,\\mu_k\\}\\ge\\max\\{\\lambda_{k+1},\\mu_{k+1}\\}+s.$$\nThen for every integer $t\\ge0$,\n$$g(\\lambda+(t^k),\\mu+(t^k),\\nu+(tk))=g(\\lambda,\\mu,\\nu).$$\nAll shifted arguments are partitions of $n+tk$. For $k=1$, this is the first-row padding of the three tails to size $n+t$ ([[def-first-row-padding-of-a-partition]]).\n\n**(ii)** For arbitrary $\\lambda,\\mu,\\nu\\vdash n$ and $k\\ge1$, the sequence $G_k(t):=g(\\lambda+(t^k),\\mu+(t^k),\\nu+(tk))$ is eventually constant. More precisely, it is constant for every integer $t\\ge t_0$, where\n$$t_0:=\\max\\{0,\\ s+\\max\\{\\lambda_{k+1},\\mu_{k+1}\\}-\\min\\{\\lambda_k,\\mu_k\\}\\}.$$\nThe proof of the row-gap identity does not require first-part ordering, so the threshold also covers $k=1$ when $\\nu_1<\\max\\{\\lambda_1,\\mu_1\\}$. No monotonicity is asserted."
+        },
+        "strategy": {
+          "before": "Part (i): Choose a common row bound l at least k and the lengths of all original and shifted partitions, padding absent parts by zero. Apply the Reduction Lemma to the triple (lambda,mu,nu) with parameter s = n - nu_1 and to the shifted triple (alpha,beta,gamma) := (lambda + (t^k), mu + (t^k), nu + (tk)) with parameter (n + tk) - gamma_1 = n - nu_1 = s. Because alpha_i - beta_i = lambda_i - mu_i for all i, the two triples lie in the same case of the Reduction Lemma: condition (*) gives rho_k = min{lambda_k,mu_k} >= max{lambda_{k+1},mu_{k+1}} + s = omega_{k+1} + s, so k lies in the index set I of the original triple and also in that of the shifted triple, and the two index sets agree (the defining inequalities coincide for i < k and for i > k, and both contain k); note also that rho' = alpha cap beta = rho + (t^k) and omega' = omega + (t^k). The common index set gives the same i_j and ind_I(i_j). If j <= k then i_j <= k because k is in I, so both the j-th part and rho_{i_j} increase by t and cancel in the corrected reduction formula; if j > k neither changes. Thus the two triple-dependent reduction maps have phi_shifted(alpha) = phi_original(lambda) and phi_shifted(beta) = phi_original(mu), while phi(gamma) = (r - s, nu_2, nu_3, ...) = phi(nu) because gamma and nu share all parts from the second on. The Reduction Lemma gives g(alpha,beta,gamma) = g(phi(alpha),phi(beta),phi(gamma)) = g(phi(lambda),phi(mu),phi(nu)) = g(lambda,mu,nu). Part (ii): Exchange lambda and mu if necessary so that lambda_1 <= mu_1; the family is unchanged. Choose t large enough that mu_1 <= nu_1 + t(k-1) (automatic when k >= 2 for t >= (mu_1 - nu_1)/(k-1), and for k = 1 relabel all three arguments using S_3 symmetry of g so that nu_1 = max{lambda_1,mu_1,nu_1}) and min{lambda_k,mu_k} + t >= max{lambda_{k+1},mu_{k+1}} + (n - nu_1). For such t the shifted triple satisfies the hypotheses of part (i) with its own parameter (n + tk) - (nu_1 + tk) = n - nu_1, so part (i) applied to the shifted triple with shifts (u^k, u^k, uk) gives G_k(t+u) = G_k(t) for every u >= 0. Hence G_k is eventually constant at the value G_k(t) for all larger t. No monotonicity is used or claimed.",
+          "after": "Use the locally proved finite LR coefficient identity and first-row Jacobi\u2013Trudi expansion of the reduction lemma directly at the k-row cut. Map alpha to alpha+(t^k), prove the inverse partition and both LR tableau bijections using the sharp s-gap, and compare unchanged small coefficients and tail cofactors. Apply the ordering-free proved identity at t0=max(0,s+max(next rows)-min(kth rows)) to obtain eventual constancy for all k including k=1."
+        }
+      }
+    }
+  ],
+  "pending_native_artifacts": [
+    "Regenerate or surgically synchronize batch-26 proof contracts with current facts and renumbered steps after root integration",
+    "Update batch-26 notes to remove granted boundary and false weak-decrease remedy",
+    "Record current Step3 owner decisions in dependency order after drain; same reviewer bind actual integrated consumers"
+  ]
+}

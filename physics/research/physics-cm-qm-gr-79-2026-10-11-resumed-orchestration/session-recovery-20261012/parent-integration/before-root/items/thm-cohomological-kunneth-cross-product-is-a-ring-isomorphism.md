@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism.md

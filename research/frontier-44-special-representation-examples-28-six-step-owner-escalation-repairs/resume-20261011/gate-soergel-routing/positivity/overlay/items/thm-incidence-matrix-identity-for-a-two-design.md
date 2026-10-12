@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-incidence-matrix-identity-for-a-two-design.md

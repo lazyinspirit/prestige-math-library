@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-van-der-corput-oscillatory-integral-estimate.md

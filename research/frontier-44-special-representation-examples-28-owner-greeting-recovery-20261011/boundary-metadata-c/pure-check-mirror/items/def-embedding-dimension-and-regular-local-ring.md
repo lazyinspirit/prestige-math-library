@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-embedding-dimension-and-regular-local-ring.md

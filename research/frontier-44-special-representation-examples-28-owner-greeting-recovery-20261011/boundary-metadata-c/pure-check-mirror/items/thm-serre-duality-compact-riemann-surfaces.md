@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-serre-duality-compact-riemann-surfaces.md

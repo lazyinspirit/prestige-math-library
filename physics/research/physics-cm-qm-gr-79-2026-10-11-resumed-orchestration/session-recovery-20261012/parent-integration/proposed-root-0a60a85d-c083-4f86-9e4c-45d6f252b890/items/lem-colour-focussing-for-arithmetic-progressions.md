@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-colour-focussing-for-arithmetic-progressions.md

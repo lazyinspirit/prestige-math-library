@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-euler-product-numerically-approximates-zeta-at-two.md

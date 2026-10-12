@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-compact-semialgebraic-families-admit-compatible-finite-triangulations.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-distinct-characteristic-roots-imply-diagonalisability.md

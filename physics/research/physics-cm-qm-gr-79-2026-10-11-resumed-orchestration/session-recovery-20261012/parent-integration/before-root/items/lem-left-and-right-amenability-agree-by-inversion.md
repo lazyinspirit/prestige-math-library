@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-left-and-right-amenability-agree-by-inversion.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-anagrams-by-the-multinomial-coefficient.md

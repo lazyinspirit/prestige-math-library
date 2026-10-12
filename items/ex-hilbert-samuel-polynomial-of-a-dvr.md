@@ -49,11 +49,8 @@ $$ e_{(\pi)}(V)=1. $$
 
 **Proof technique:** direct.
 
+ 1.1 By [L1], the Hilbert-Samuel function is $ \chi_{(\pi),V}(n)=\ell_V(V/(\pi^{n+1}))=n+1 $ for every $n\ge0$. [L1, given]
 
-1.1 By [L1], the Hilbert-Samuel function is $ \chi_{(\pi),V}(n)=\ell_V(V/(\pi^{n+1}))=n+1 $ for every $n\ge0$. [L1, given]
+ 1.2 Therefore the eventual polynomial is already exactly $P(n)=n+1$. Its degree is $1$ and its leading coefficient is $1$, so [L2] gives $ e_{(\pi)}(V)=1!\cdot1=1. $ [L2]
 
-
-1.2 Therefore the eventual polynomial is already exactly $P(n)=n+1$. Its degree is $1$ and its leading coefficient is $1$, so [L2] gives $ e_{(\pi)}(V)=1!\cdot1=1. $ [L2]
-
-
-2.1 This computes both the Hilbert-Samuel polynomial and the multiplicity of a DVR. [algebra] ∎
+ 2.1 This computes both the Hilbert-Samuel polynomial and the multiplicity of a DVR. [algebra] ∎ 

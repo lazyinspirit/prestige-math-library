@@ -1,0 +1,2658 @@
+STRONG CONVERGENCE OF EULER-TYPE METHODS FOR
+NONLINEAR STOCHASTIC DIFFERENTIAL EQUATIONS∗
+
+DESMOND J. HIGHAM†, XUERONG MAO‡, AND ANDREW M. STUART§
+
+SIAM J. NUMER. ANAL.
+c
+⃝2002 Society for Industrial and Applied Mathematics
+Vol. 40, No. 3, pp. 1041–1063
+
+Abstract. Traditional finite-time convergence theory for numerical methods applied to stochas-
+tic differential equations (SDEs) requires a global Lipschitz assumption on the drift and diffusion
+coefficients. In practice, many important SDE models satisfy only a local Lipschitz property and,
+since Brownian paths can make arbitrarily large excursions, the global Lipschitz-based theory is not
+directly relevant. In this work we prove strong convergence results under less restrictive conditions.
+First, we give a convergence result for Euler–Maruyama requiring only that the SDE is locally Lips-
+chitz and that the pth moments of the exact and numerical solution are bounded for some p > 2. As
+an application of this general theory we show that an implicit variant of Euler–Maruyama converges
+if the diffusion coefficient is globally Lipschitz, but the drift coefficient satisfies only a one-sided
+Lipschitz condition; this is achieved by showing that the implicit method has bounded moments and
+may be viewed as an Euler–Maruyama approximation to a perturbed SDE of the same form. Second,
+we show that the optimal rate of convergence can be recovered if the drift coefficient is also assumed
+to behave like a polynomial.
+
+Key words.
+backward Euler, Euler–Maruyama, finite-time convergence, implicit, moment
+bounds, nonlinearity, one-sided Lipschitz condition, split-step
+
+AMS subject classifications. 65C30, 65C20, 65L20
+
+PII. S0036142901389530
+
+1. Introduction. In this paper we study the numerical solution of the stochastic
+differential equation (SDE)
+
+dy(t) = f(y(t))dt + g(y(t))dW(t),
+0 ≤t ≤T,
+y(0) = y0.
+(1.1)
+
+Here y(t) ∈Rm for each t, and W(t) is a d-dimensional Brownian motion. Thus
+f : Rm →Rm and g : Rm →Rm×d. We assume that the initial condition is chosen
+independently of the Wiener measure driving the equation and that all pth moments
+of y0, p > 0, are finite. Our primary objective is to study strong convergence questions
+for numerical approximations in the case where f and g are not necessarily globally
+Lipschitz functions. Most of the existing convergence theory for numerical methods
+requires f and g to be globally Lipschitz; see [12, 14], for example. Recent work has
+studied convergence in probability [6, 8] and almost sure convergence [7], under more
+relaxed conditions on f and g. We focus here on strong mean square convergence,
+in the sense of [12, Theorem 10.6.3], which implies convergence in probability. The
+main result of [11] is directly related to our work; we summarize the connections at
+the end of this section. We also note that the work of Schurz [16] contains a number
+
+∗Received by the editors May 18, 2001; accepted for publication (in revised form) March 1, 2002;
+published electronically August 28, 2002.
+http://www.siam.org/journals/sinum/40-3/38953.html
+†Department of Mathematics, University of Strathclyde, Glasgow G1 1XH, UK (djh@maths.
+strath.ac.uk).
+‡Department of Statistics and Modelling Science, University of Strathclyde, Glasgow G1 1XH,
+UK (xuerong@stams.strath.ac.uk). The research of this author was supported by the Biotechnology
+and Biological Sciences Research Council of the UK under grant 78/MMI09712.
+§Mathematics Institute, University of Warwick, Coventry CV4 7AL, UK (stuart@maths.warwick.
+ac.uk). The research of this author was supported by the Engineering and Physical Sciences Research
+Council of the UK under grant GR/N00340.
+
+1041
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1042
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+of a priori bounds on the numerical solutions of SDEs from a nonlinear stability
+perspective, under structural assumptions similar to those we employ here.
+In section 2, we prove that the Euler–Maruyama method converges strongly if
+f and g are locally Lipschitz (e.g., for f, g ∈C1) and the exact and numerical so-
+lution have a bounded pth moment for some p > 2 (Theorem 2.2). The bounded
+moment assumption will not, of course, hold, in general, as solutions to the SDE may
+explode in a finite time. In section 3 we therefore impose further assumptions on f
+and g to ensure that y(t) has bounded moments: we assume that g is globally Lip-
+schitz and that f satisfies a one-sided Lipschitz condition. The one-sided Lipschitz
+condition has proved effective in the analysis of numerical methods for determinis-
+tic problems and occurs naturally in a variety of applications [1, 3, 4, 5, 17]. For
+a suitably constructed “split-step” implicit variant of Euler–Maruyama we establish
+strong convergence (Theorem 3.3) by (a) showing that the method corresponds to
+Euler–Maruyama on a perturbed SDE and (b) showing that all moments of the nu-
+merical solution are bounded. We are unable to establish moment bounds for the
+forward Euler method and, indeed, it may not be possible to do so; the work of [7] is
+of importance for nonimplicit methods since, being an almost sure convergence study,
+it does not require moment bounds.
+In section 4 we turn our attention to establishing an optimal rate of convergence
+for the split-step implicit method. We show that if f satisfies a one-sided Lipschitz
+condition and behaves polynomially, then Euler–Maruyama converges strongly at the
+optimal rate (Theorem 4.4), provided moment bounds hold. We use this to study the
+split-step implicit method, for which moment bounds can be found (Theorem 4.7),
+again by showing that the method corresponds to Euler–Maruyama on a perturbed
+SDE. In section 5 this result is extended to a more widely used implicit variant of
+Euler–Maruyama by relating the two implicit methods (Theorem 5.3). A summary is
+given in section 6.
+It is worth mentioning at this point how our work compares with that of Hu [11].
+Theorem 2.4 of [11] is a very important contribution to numerical SDE theory, being,
+to our knowledge, the first strong convergence result without global Lipschitz assump-
+tions. Hu considered only the backward Euler method and derived a result with the
+optimal rate of convergence, and hence his work may be compared with Theorem 5.3
+below. Both results assume C1 coefficients in the SDE, a one-sided Lipschitz condition
+for the drift, and a global Lipschitz condition for the diffusion. Theorem 5.3 below
+imposes polynomial-type growth on the drift (Assumption 4.1), whereas Hu allows for
+a more general exponential growth. On the other hand, Theorem 5.3 and all the other
+results in our work deal with a very strong error measure, E
+�
+sup0≤t≤T |Z(t) −y(t)|2�
+,
+
+whereas [11] uses the less stringent measure
+�T
+0 E|Z(t) −y(t)|2 dt. We also note that
+[11] uses a different continuous-time extension. Overall, Hu’s result for backward Eu-
+ler applies to a wider class of SDEs but controls a weaker measure of the error. The
+techniques of analysis are significantly different, although both hinge on establishing
+moment bounds for the exact and numerical solutions.
+
+2. General result for Euler–Maruyama. Given a stepsize ∆t > 0, the Euler–
+Maruyama (EM) method applied to (1.1) computes approximations Xk ≈y(tk), where
+tk = k∆t, by setting X0 = y0 and forming
+
+Xk+1 = Xk + ∆tf(Xk) + g(Xk)∆Wk,
+(2.1)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1043
+
+where ∆Wk = W(tk+1) −W(tk). We find it convenient to use continuous-time ap-
+proximations, and hence we define X(t) by
+
+X(t) := Xk + (t −tk)f(Xk) + g(Xk)(W(t) −W(tk))
+for t ∈[tk, tk+1).
+
+In our analysis it will be more natural to work with the equivalent definition
+
+X(t) := X0 +
+�t
+
+0
+f(X(s))ds +
+�t
+
+0
+g(X(s))dW(s),
+(2.2)
+
+where X(t) is defined by
+
+X(t) := Xk
+for t ∈[tk, tk+1).
+(2.3)
+
+Note that X(tk) = X(tk) = Xk; that is, X(t) and X(t) coincide with the discrete
+solution at the gridpoints. We refer to X(t) and X(t) as continuous-time extensions
+of the discrete approximation {Xk}. We will study the error in X(t) in the supremum
+norm; this will, of course, give an immediate bound for the error in the discrete
+approximation.
+Our first result makes the following assumption on the SDE (1.1) and the exact
+and numerical solutions. Here, and throughout the paper, | · | is used to denote both
+the Euclidean vector norm and the Frobenius (or trace) matrix norm.
+Assumption 2.1. For each R > 0 there exists a constant CR, depending only on
+R, such that
+
+|f(a) −f(b)|2 ∨|g(a) −g(b)|2 ≤CR|a −b|2 ∀a, b ∈Rm with |a| ∨|b| ≤R.
+(2.4)
+
+For some p > 2 there is a constant A such that
+
+E
+�
+sup
+0≤t≤T
+|X(t)|p
+�
+∨E
+�
+sup
+0≤t≤T
+|y(t)|p
+�
+≤A.
+(2.5)
+
+Inequality (2.4) is a local Lipschitz assumption. From the mean value theorem,
+any f and g in C1 will satisfy (2.4). The inequality (2.5) states that the pth moments
+of the exact and numerical solution are bounded for some p > 2. We now prove that
+Assumption 2.1 is sufficient to ensure strong convergence of EM.
+Theorem 2.2. Under Assumption 2.1, the EM solution (2.1) with continuous-
+time extension (2.2) satisfies
+
+lim
+∆t→0 E
+�
+sup
+0≤t≤T
+|X(t) −y(t)|2
+�
+= 0.
+(2.6)
+
+Proof. First, we define
+
+τR := inf{t ≥0 : |X(t)| ≥R},
+ρR := inf{t ≥0 : |y(t)| ≥R},
+θR := τR ∧ρR
+
+and
+
+e(t) := X(t) −y(t).
+
+Recall the Young inequality: for r−1 + q−1 = 1
+
+ab ≤δ
+
+rar +
+1
+qδq/r bq
+∀a, b, δ > 0.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1044
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+We thus have for any δ > 0
+
+E
+�
+sup
+0≤t≤T
+|e(t)|2
+�
+= E
+�
+sup
+0≤t≤T
+|e(t)|21{τR>T,ρR>T }
+
+�
++ E
+�
+sup
+0≤t≤T
+|e(t)|21{τR≤T or ρR≤T }
+
+�
+
+≤E
+�
+sup
+0≤t≤T
+|e(t ∧θR)|21{θR>T }
+
+�
++ 2δ
+
+p E
+�
+sup
+0≤t≤T
+|e(t)|p
+�
+
++
+1 −2
+
+p
+δ2/(p−2) P
+�
+τR ≤T or ρR ≤T
+�
+.
+(2.7)
+
+Now
+
+P (τR ≤T) = E
+�
+1{τR≤T }
+|X(τR)|p
+
+Rp
+
+�
+≤1
+
+Rp E
+�
+sup
+0≤t≤T
+|X(t)|p
+�
+≤A
+
+Rp ,
+
+using (2.5). A similar result can be derived for ρR so that
+
+P
+�
+τR ≤T or ρR ≤T
+�
+≤P
+�
+τR ≤T
+�
++ P
+�
+ρR ≤T
+�
+≤2A
+
+Rp .
+
+Using these bounds along with
+
+E
+�
+sup
+0≤t≤T
+|e(t)|p
+�
+≤2p−1E
+�
+sup
+0≤t≤T
+
+�
+|X(t)|p + |y(t)|p��
+≤2pA
+
+in (2.7) gives
+
+E
+�
+sup
+0≤t≤T
+|e(t)|2
+�
+≤E
+�
+sup
+0≤t≤T
+|X(t ∧θR) −y(t ∧θR)|2
+�
+
++ 2p+1δA
+
+p
++ (p −2)2A
+
+pδ2/(p−2)Rp .
+(2.8)
+
+Now we bound the first term on the right-hand side of (2.8) using an approach similar
+to a finite-time convergence proof for the globally Lipschitz case. Using
+
+y(t ∧θR) := y0 +
+�t∧θR
+
+0
+f(y(s))ds +
+�t∧θR
+
+0
+g(y(s))dW(s),
+
+(2.2), and Cauchy–Schwarz, we have
+
+|X(t ∧θR) −y(t ∧θR)|2 =
+
+�����
+
+�t∧θR
+
+0
+f(X(s)) −f(y(s))ds
+
++
+�t∧θR
+
+0
+g(X(s)) −g(y(s))dW(s)
+
+�����
+
+2
+
+≤2
+
+�
+
+T
+�t∧θR
+
+0
+|f(X(s)) −f(y(s))|2ds
+
++
+
+�����
+
+�t∧θR
+
+0
+g(X(s)) −g(y(s))dW(s)
+
+�����
+
+2
+
+.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1045
+
+So, from the local Lipschitz condition (2.4) and Doob’s martingale inequality [14] we
+have for any τ ≤T
+
+E
+�
+sup
+0≤t≤τ
+|X(t ∧θR) −y(t ∧θR)|2
+�
+
+≤2CR(T + 4)E
+�τ∧θR
+
+0
+|X(s) −y(s)|2ds
+
+≤4CR(T + 4)E
+�τ∧θR
+
+0
+
+�
+|X(s) −X(s)|2 + |X(s) −y(s)|2�
+ds
+
+≤4CR(T + 4)
+
+�
+
+E
+�τ∧θR
+
+0
+|X(s) −X(s)|2ds + E
+�τ
+
+0
+|X(s ∧θR) −y(s ∧θR)|2ds
+
+�
+
+≤4CR(T + 4)
+
+�
+
+E
+�τ∧θR
+
+0
+|X(s) −X(s)|2ds +
+�τ
+
+0
+E sup
+0≤r≤s
+|X(r ∧θR) −y(r ∧θR)|2ds
+
+�
+
+.
+
+(2.9)
+
+To bound the first term in the parentheses on the right-hand side of (2.9), given
+s ∈[0, T ∧θR), let ks be the integer for which s ∈[tks, tks+1). Then
+
+X(s) −X(s) = Xks −
+
+�
+
+Xks +
+�s
+
+tks
+f(X(s))ds +
+�s
+
+tks
+g(X(s))dW(s)
+
+�
+
+= −f(Xks)(s −tks) −g(Xks) (W(s) −W(tks)) .
+
+Hence,
+
+|X(s) −X(s)|2 ≤2
+�
+|f(Xks)|2∆t2 + |g(Xks)|2|W(s) −W(tks)|2�
+.
+(2.10)
+
+Now, from the local Lipschitz condition (2.4), for |y| ≤R we have
+
+|f(y)|2 ≤2
+�
+|f(y) −f(0)|2 + |f(0)|2�
+≤2
+�
+CR|y|2 + |f(0)|2�
+,
+
+and, similarly,
+
+|g(y)|2 ≤2
+�
+CR|y|2 + |g(0)|2�
+.
+
+Hence, in (2.10),
+
+|X(s) −X(s)|2 ≤4(CR|Xks|2 + |f(0)|2 ∨|g(0)|2)(∆t2 + |W(s) −W(tks)|2).
+
+Thus, using (2.5) and the Lyapunov inequality [12]
+
+E
+�τ∧θR
+
+0
+|X(s) −X(s)|2ds
+
+≤E
+�τ∧θR
+
+0
+4(CR|Xks|2 + |f(0)|2 ∨|g(0)|2)(∆t2 + |W(s) −W(tks)|2)ds
+
+≤
+�τ
+
+0
+4E
+�
+CR|Xks|2 + |f(0)|2 ∨|g(0)|2)(∆t2 + |W(s) −W(tks)|2�
+ds
+
+≤
+�T
+
+0
+4(CRE[|Xks|2] + |f(0)|2 ∨|g(0)|2)(∆t2 + m∆t)ds
+
+≤4T(CRA2/p + |f(0)|2 ∨|g(0)|2)∆t(∆t + m).
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1046
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+In (2.9) we then have
+
+E
+�
+sup
+0≤t≤τ
+
+��X(t ∧θR) −y(t ∧θR)
+��2�
+
+≤16CR(T + 4)T∆t(∆t + m)(CRA2/p + |f(0)|2 ∨|g(0)|2)
+
++ 4CR(T + 4)
+�τ
+
+0
+E sup
+0≤r≤s
+
+���X(r ∧θR) −y(r ∧θR)
+��2�
+ds.
+
+Applying the Gronwall inequality [14] we obtain
+
+E
+�
+sup
+0≤t≤T
+
+��X(t ∧θR) −y(t ∧θR)
+��2�
+≤C∆t(C2
+R + 1)e4CR(T +4),
+
+where here, and in the following, C is a universal constant independent of ∆t, R, and
+δ. Inserting this into (2.8) gives
+
+E
+�
+sup
+0≤t≤T
+|e(t)|2
+�
+≤C∆t(C2
+R + 1)e4CR(T +4) + 2p+1δA
+
+p
++
+(1 −2
+
+p)2A
+
+δ2/(p−2)Rp .
+(2.11)
+
+Given any ϵ > 0, we can choose δ so that (2p+1δA)/p < ϵ/3, then choose R so that
+
+(1 −2
+
+p)2A
+
+δ2/(p−2)Rp < ϵ
+
+3,
+
+and then choose ∆t sufficiently small for
+
+C∆t(C2
+R + 1)e4CR(T +4) < ϵ
+
+3
+
+so that, in (2.11), E[sup0≤t≤T |e(t)|2] < ϵ, as required.
+
+We remark that the proof of Theorem 2.2 is optimal in the sense that in the
+globally Lipschitz case (CR ≤C for all R) we may take δ = ∆t and R = ∆t−1/(p−2)
+
+in (2.11) to recover the classical finite-time convergence result
+
+E
+�
+sup
+0≤t≤T
+|e(t)|2
+�
+= O(∆t),
+
+found, for example, in [12, 14].
+
+3. Convergence with a one-sided Lipschitz condition.
+
+3.1. The one-sided Lipschitz condition. In this section we impose further
+assumptions on the SDE. In section 3.2 we show that these assumptions guarantee
+moment bounds for y(t). Theorem 2.2 requires bounds on the pth moment of the
+exact and numerical solution—a condition that is difficult to verify in practice for the
+method (2.1) and indeed may fail to hold. In section 3.3 we introduce an implicit
+version of the EM method for which moment bounds, and hence a convergence result,
+can be obtained.
+We make the following assumptions on the SDE.
+Assumption 3.1. The functions f and g in (1.1) are C1, and there exist con-
+stants µ, c > 0 such that
+
+⟨a −b, f(a) −f(b)⟩≤µ|a −b|2
+∀a, b ∈Rm,
+(3.1)
+
+|g(a) −g(b)|2 ≤c|a −b|2
+∀a, b ∈Rm.
+(3.2)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1047
+
+Note that we work with the case µ > 0. In the deterministic setting there is a lot of
+attention paid to the contractive case µ < 0. This case is of less interest here because,
+for most diffusion coefficients g, contractivity is destroyed. Hence µ > 0 is a natural
+assumption.
+It follows from Assumption 3.1 that
+
+⟨f(a), a⟩= ⟨f(a) −f(0), a⟩+ ⟨f(0), a⟩≤µ|a|2 + |f(0)||a| ≤1
+
+2|f(0)|2 + (µ + 1
+
+2)|a|2
+
+and
+
+|g(a)|2 ≤2|g(0)|2 + 2|g(a) −g(0)|2 ≤2|g(0)|2 + 2c|a|2.
+
+This gives
+
+⟨f(a), a⟩∨|g(a)|2 ≤α + β|a|2
+∀a ∈Rm,
+(3.3)
+
+where
+
+α := 1
+
+2|f(0)|2 ∨2|g(0)|2
+and
+β := (µ + 1
+
+2) ∨2c.
+(3.4)
+
+The inequality (3.3) will prove very useful in what follows.
+We note that from
+[14, Theorem 2.3.5] f, g ∈C1 and (3.3) ensure the existence of a unique solution
+to the SDE (1.1).
+The inequality (3.1) in Assumption 3.1, which is known as a one-sided Lipschitz
+condition, has been exploited successfully in the deterministic numerical analysis lit-
+erature [1, 3, 4, 5, 17] and in the case of SDEs has been used in [11, 15, 16]. The
+condition (3.3) is closely related to the monotone condition in [14, section 2.4]. Any
+f of the form f(y) = −yp + y, where the integer p ≥3 is odd, satisfies (3.1), and
+further examples can be found in [17].
+
+3.2. Moment bounds for the SDE. We now show that under Assumption 3.1
+the SDE solution has a bounded pth moment for each p > 2.
+Lemma 3.2. Under Assumption 3.1, for each p > 2 there is C = C(p, T) > 0
+such that
+
+E
+�
+sup
+0≤t≤T
+|y(t)|p
+�
+≤C(1 + E|y0|p).
+(3.5)
+
+Proof. Theorem 2.4.1 of [14] shows that, for p ≥2, there is C = C(p, T) such that
+
+E|y(t)|p ≤C[1 + E|y0|p]
+∀t ∈[0, T].
+(3.6)
+
+By the Itˆo formula
+
+|y(t)|2 = |y0|2 + 2
+�t
+
+0
+⟨f(y(s)), y(s)⟩ds +
+�t
+
+0
+|g(y(s))|2ds + 2
+�t
+
+0
+⟨y(s), g(y(s))dB(s)⟩.
+
+By (3.3) we have that, for some K = K(p) and t1 ∈[0, T],
+
+sup
+0≤t≤t1
+|y(t)|p ≤K
+
+�
+
+|y0|p +
+��t1
+
+0
+[α + β|y(s)|2]ds
+�p/2
+
++
+sup
+0≤t≤t1
+
+����
+
+�t
+
+0
+⟨y(s), g(y(s))dB(s)⟩
+����
+
+p/2�
+
+.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1048
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+By property (3.6) we can take expectations to give, for a possibly different K =
+K(p, T),
+
+E
+�
+sup
+0≤t≤t1
+|y(t)|p
+�
+≤K
+�
+1 + E|y0|p +
+�t1
+
+0
+E|y(s)|pds
+
++ E
+
+�
+
+sup
+0≤t≤t1
+
+����
+
+�t
+
+0
+⟨y(s), g(y(s))dB(s)⟩
+����
+
+p/2��
+
+.
+
+By the Burkholder–Davis–Gundy inequality [14], we compute that, again for redefined
+K = K(p, T),
+
+E
+�
+sup
+0≤t≤t1
+|y(t)|p
+�
+≤K
+�
+1 + E|y0|p +
+�t1
+
+0
+E|y(s)|pds
+
++ E
+��t1
+
+0
+|y(s)|2|g(y(s))|2ds
+�p/4�
+
+.
+(3.7)
+
+Next, note that, by Cauchy–Schwarz,
+
+E
+��t1
+
+0
+|y(s)|2|g(y(s))|2ds
+�p/4
+≤E
+
+�
+
+sup
+0≤s≤t1
+|y(s)|p/2
+��t1
+
+0
+|g(y(s))|2ds
+�p/4�
+
+≤
+1
+2K E
+�
+sup
+0≤s≤t1
+|y(s)|p
+�
++ K
+
+2 E
+��t1
+
+0
+|g(y(s))|2ds
+�p/2
+
+≤
+1
+2K E
+�
+sup
+0≤s≤t1
+|y(s)|p
+�
+
++ K
+
+2 T (p−2)/2E
+�t1
+
+0
+(α + β|y(s)|2)p/2ds.
+
+Substituting this into (3.7) yields, again for a possibly different K = K(p, T),
+
+E
+�
+sup
+0≤t≤t1
+|y(t)|p
+�
+≤K
+�
+1 + E|y0|p +
+�t1
+
+0
+E|y(s)|pds
+�
+.
+
+The required assertion now follows from property (3.6).
+
+3.3. Split-step backward Euler. We now consider the split-step backward
+Euler (SSBE) method, which is defined by taking Y0 = y0 and, generally,
+
+Y ⋆
+k = Yk + ∆tf(Y ⋆
+k ),
+(3.8)
+
+Yk+1 = Y ⋆
+k + g(Y ⋆
+k )∆Wk.
+(3.9)
+
+We state our convergence theorem here and then give a sequence of results that lead
+to a proof.
+Theorem 3.3. Consider the SSBE (3.8)–(3.9) applied to the SDE (1.1) under
+Assumption 3.1. There exists a continuous-time extension Y (t) of the numerical so-
+lution (so that Y (tk) = Yk) for which
+
+lim
+∆t→0 E
+�
+sup
+0≤t≤T
+|Y (t) −y(t)|2
+�
+= 0.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1049
+
+Proof. See the end of this subsection.
+Note that (3.8) is an implicit equation that must be solved in order to obtain
+the intermediate approximation Y ⋆
+k .
+Having obtained Y ⋆
+k , adding the appropriate
+stochastic increment g(Y ⋆
+k )∆Wk produces the next approximation Yk+1 in (3.9). The
+SSBE method reduces to the deterministic backward Euler method [5, 9] when g ≡0
+and y0 is nonrandom. The method is also studied in [15], where it is effective for
+inheriting ergodicity; for related reasons it is effective here in enabling the derivation
+of moment bounds. Another stochastic extension of the deterministic backward Euler
+method is considered in section 5.
+Our proof of Theorem 3.3 relies on showing that SSBE has two key properties
+under Assumption 3.1: (a) it may be regarded as EM applied to a modified SDE of
+a similar form, and (b) it produces solutions with all moments bounded. The first
+property is established in the next lemma and corollary.
+Lemma 3.4. Let Assumption 3.1 hold and suppose ∆t ∈(0, ∆tc), ∆tc < 1/(2β),
+where β is defined in (3.4). Given d ∈Rm the implicit equation
+
+c = d + ∆tf(c)
+(3.10)
+
+has a unique solution c. If we define the functions F∆t(·), f∆t(·) and g∆t(·) by
+
+F∆t(d) = c,
+f∆t(d) = f(F∆t(d)),
+and
+g∆t(d) = g(F∆t(d)),
+(3.11)
+
+then F∆t, f∆t, g∆t ∈C1, g∆t(·) →g(·) and f∆t(·) →f(·) as ∆t →0 in C1 uniformly
+on compact sets and, for any a, b ∈Rm,
+
+|f∆t(a)| ≤
+|f(a)|
+1 −∆tµ,
+(3.12)
+
+|F∆t(d) −F∆t(e)|2 ≤
+1
+1 −2∆tµ|d −e|2,
+(3.13)
+
+⟨a −b, f∆t(a) −f∆t(b)⟩≤
+µ
+1 −2µ∆t|a −b|2.
+(3.14)
+
+Further, g∆t is globally Lipschitz, and there exist α′, β′ > 0 such that
+
+⟨f∆t(a), a⟩∨|g∆t(a)|2 ≤α′ + β′|a|2
+∀a ∈Rm.
+(3.15)
+
+Proof. See Appendix A.
+Corollary 3.5.
+Let Assumption 3.1 hold and suppose ∆t ∈(0, ∆tc), ∆tc <
+1/(2β), where β is defined in (3.4). Then SSBE applied to (1.1) is equivalent to EM
+applied to the modified SDE
+
+dy∆t(t) = f∆t(y∆t(t))dt + g∆t(y∆t(t))dW(t),
+0 ≤t ≤T, y∆t(0) = y0,
+(3.16)
+
+where f∆t, g∆t are defined in Lemma 3.4.
+Proof. Lemma 3.4 allows us to express the SSBE method (3.8)–(3.9) in the form
+
+Yk+1 = Yk + ∆tf∆t(Yk) + g∆t(Yk)∆Wk,
+(3.17)
+
+and the result is then immediate.
+
+Next, we show that the solution of the modified SDE (3.16) has bounded moments
+and converges strongly to y(t).
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1050
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+Lemma 3.6. Under Assumption 3.1, for each p > 2, there is C = C(p, T) > 0
+such that
+
+E
+�
+sup
+0≤t≤T
+|y∆t(t)|p
+�
+≤C(1 + E|y0|p),
+(3.18)
+
+provided ∆t is sufficiently small. In addition,
+
+lim
+∆t→0 E
+�
+sup
+0≤t≤T
+|y(t) −y∆t(t)|2
+�
+= 0.
+(3.19)
+
+Proof. It follows from Lemma 3.4 that for sufficiently small ∆t the functions f∆t
+and g∆t satisfy (3.3) with α and β replaced by 2α and 2β. Following through the
+proof of Lemma 3.2, which is based entirely on (3.3), we obtain (3.18).
+Now to prove (3.19) we note from Lemma 3.4 that given R > 0 there is a function
+KR : (0, ∞) →(0, ∞) such that KR(∆t) →0 as ∆t →0 and
+
+|f∆t(u) −f(u)|2 ∨|g∆t(u) −g(u)|2 ≤KR(∆t)
+∀u ∈Rm, |u| ≤R,
+(3.20)
+
+provided ∆t is sufficiently small. Also, since f, g ∈C1, there is a constant HR such
+that
+
+|f(u) −f(v)|2 ∨|g(u) −g(v)|2 ≤HR|u −v|2
+∀u, v ∈Rm, |u| ∨|v| ≤R.
+(3.21)
+
+From Lemma 3.2 and (3.18) we have
+
+E
+�
+sup
+0≤t≤T
+|y(t)|p
+�
+∨E
+�
+sup
+0≤t≤T
+|y∆t(t)|p
+�
+≤K := C(1 + E|y0|p).
+(3.22)
+
+The remainder of the proof follows in a similar manner to that of Theorem 2.2.
+Define
+
+τR = inf{t ≥0 : |y(t)| ≥R},
+ρR = inf{t ≥0 : |y∆t(t)| ≥R},
+θR = τR ∧ρR.
+
+For any δ > 0, in the same way that (2.8) was obtained, we have
+
+E
+�
+sup
+0≤t≤T
+|y(t) −y∆t(t)|2
+�
+≤E
+�
+sup
+0≤t≤T
+|y(t ∧θR) −y∆t(t ∧θR)|2
+�
+
++ 2p+1δK
+
+p
++ (p −2)2K
+
+pδ2/(p−2)Rp .
+(3.23)
+
+To bound the first term on the right-hand side of (3.23), we observe that
+
+y(t ∧θR) −y∆t(t ∧θR)
+
+=
+�t∧θR
+
+0
+[f(y(s)) −f(y∆t(s)) + f(y∆t(s)) −f∆t(y∆t(s))]ds
+
++
+�t∧θR
+
+0
+[g(y(s)) −g(y∆t(s)) + g(y∆t(s)) −g∆t(y∆t(s))]dW(s).
+
+Using (3.20), (3.21), Cauchy–Schwarz, and the Doob martingale inequality, we have
+that, for any τ ≤T,
+
+E
+�
+sup
+0≤t≤τ
+|y(t ∧θR) −y∆t(t ∧θR)|2
+�
+
+≤4HR(T + 4)
+�τ
+
+0
+E
+�
+sup
+0≤t≤s
+|y(t ∧θR) −y∆t(t ∧θR)|2
+�
+ds
+
++ 4T(T + 4)KR(∆t).
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1051
+
+So the Gronwall inequality yields
+
+E
+�
+sup
+0≤t≤T
+|y(t ∧θR) −y∆t(t ∧θR)|2
+�
+≤4T(T + 4)KR(∆t)e4HR(T +4)T .
+
+Inserting this into (3.23) gives
+
+E
+�
+sup
+0≤t≤T
+|y(t) −y∆t(t)|2
+�
+≤4T(T + 4)KR(∆t)e4HR(T +4)T
+
++ 2p+1δK
+
+p
++ (p −2)2K
+
+pδ2/(p−2)Rp .
+(3.24)
+
+The final step of the proof follows that of Theorem 2.2.
+
+Now we show that the special structure of SSBE makes it possible for us to bound
+all moments of the numerical solution, under Assumption 3.1. We deal first with the
+discrete approximation and then with a continuous-time extension.
+Lemma 3.7. Suppose Assumption 3.1 holds and let ∆t ≤∆tc < 1/(2β), where β
+is defined in (3.4). Then for each p ≥2 there exists a C = C(p, T) > 0 (independent
+of ∆t) such that for the SSBE method (3.8)–(3.9)
+
+E
+sup
+n∆t∈[0,T ]
+|Yn|2p ≤C.
+
+Proof. In the following we assume that N and M are positive integers such that
+N∆t ≤M∆t ≤T. From (3.3) and (3.8) we have
+
+|Y ⋆
+n |2 = ⟨Yn, Y ⋆
+n ⟩+ ∆t⟨f(Y ⋆
+n ), Y ⋆
+n ⟩
+
+≤1
+
+2|Yn|2 + 1
+
+2|Y ⋆
+n |2 + ∆t(α + β|Y ⋆
+n |2).
+
+Thus
+
+|Y ⋆
+n |2 ≤|Yn|2 + 2α∆t
+
+1 −2β∆t
+.
+(3.25)
+
+From (3.9) and (3.25) we have
+
+|Yn+1|2 ≤|Yn|2 +
+2β∆t
+1 −2β∆t|Yn|2 +
+2α∆t
+1 −2β∆t
++ 2⟨Y ⋆
+n , g(Y ⋆
+n )∆Wn⟩+ |g(Y ⋆
+n )∆Wn|2.
+
+Summing, and using the notation K = (1 −2β∆t)−1, we obtain
+
+|YN|2 ≤|Y0|2 + 2β∆tK
+
+N−1
+�
+
+j=0
+|Yj|2 + 2α∆tNK
+
++ 2
+
+N−1
+�
+
+j=0
+⟨Y ⋆
+j , g(Y ⋆
+j )∆Wj⟩+
+
+N−1
+�
+
+j=0
+|g(Y ⋆
+j )∆Wj|2.
+
+Raising both sides to the power p we have
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1052
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+1
+5p−1 |YN|2p ≤|Y0|2p + (2β∆tK)p
+
+
+
+
+N−1
+�
+
+j=0
+|Yj|2
+
+
+
+
+
+p
+
++ (2αTK)p
+
++ 2p
+
+������
+
+N−1
+�
+
+j=0
+⟨Y ⋆
+j , g(Y ⋆
+j )∆Wj⟩
+
+������
+
+p
+
++
+
+
+
+
+N−1
+�
+
+j=0
+|g(Y ⋆
+j )∆Wj|2
+
+
+
+
+
+p
+
+≤|Y0|2p + (2βK)pT p−1∆t
+
+N−1
+�
+
+j=0
+|Yj|2p + (2αTK)p
+
++ 2p
+
+������
+
+N−1
+�
+
+j=0
+⟨Y ⋆
+j , g(Y ⋆
+j )∆Wj⟩
+
+������
+
+p
+
++ N p−1
+N−1
+�
+
+j=0
+|g(Y ⋆
+j )∆Wj|2p.
+(3.26)
+
+Now
+
+E
+
+
+
+
+sup
+0≤N≤M
+
+N−1
+�
+
+j=0
+|Yj|2p
+
+
+
+=
+
+M−1
+�
+
+j=0
+E|Yj|2p.
+(3.27)
+
+Also, letting C = C(p, T) be a constant that may change line by line,
+
+E
+
+
+
+
+sup
+0≤N≤M
+
+N−1
+�
+
+j=0
+|g(Y ⋆
+j )∆Wj|2p
+
+
+
+= E
+
+M−1
+�
+
+j=0
+|g(Y ⋆
+j )∆Wj|2p
+
+≤
+
+M−1
+�
+
+j=0
+E|g(Y ⋆
+j )|2pE|∆Wj|2p
+
+≤C∆tp
+M−1
+�
+
+j=0
+E[α + β|Y ⋆
+j |2]p
+
+≤C∆tp
+M−1
+�
+
+j=0
+E[αp + βp|Y ⋆
+j |2p]
+
+≤C∆tp−1 + C∆tp
+M−1
+�
+
+j=0
+E[|Yj|2 + 2α∆t|]p
+
+≤C∆tp−1 + C∆tp
+M−1
+�
+
+j=0
+E|Yj|2p,
+(3.28)
+
+where we have used (3.3) and (3.25). Finally, using the Burkholder–Davis–Gundy
+inequality [14],
+
+E
+
+
+
+
+sup
+0≤N≤M
+
+������
+
+N−1
+�
+
+j=0
+⟨Y ⋆
+j , g(Y ⋆
+j )∆Wj⟩
+
+������
+
+p
+
+≤CE
+
+
+
+
+M−1
+�
+
+j=0
+|Y ⋆
+j |2|g(Y ⋆
+j )|2∆t
+
+
+
+
+
+p/2
+
+≤C(∆t)p/2M p/2−1E
+
+M−1
+�
+
+j=0
+|Y ⋆
+j |p(α + β|Y ⋆
+j |2)p/2
+
+≤C∆t
+
+M−1
+�
+
+j=0
+[1 + E|Y ⋆
+j |2p]
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1053
+
+≤C∆t
+
+M−1
+�
+
+j=0
+[1 + E(2α∆t + |Yj|2)p]
+
+≤C + C∆t
+
+M−1
+�
+
+j=0
+E|Yj|2p.
+(3.29)
+
+Combining (3.26)–(3.29) we obtain
+
+E
+�
+sup
+0≤N≤M
+|YN|2p
+�
+≤C + C∆t
+
+M−1
+�
+
+j=0
+E|Yj|2p ≤C + C∆t
+
+M−1
+�
+
+j=0
+E
+�
+sup
+0≤N≤j
+E|YN|2p
+�
+.
+
+Using the discrete-type Gronwall inequality (see, for example, [13]) and noting that
+M∆t ≤T, we obtain
+
+E
+�
+sup
+0≤N≤M
+|YN|2p
+�
+≤CeC∆tM ≤CeCT ,
+
+and the desired result follows.
+
+Corollary 3.8.
+Suppose Assumption 3.1 holds and let ∆t ∈(0, ∆tc), ∆tc <
+1/(2β), where β is defined in (3.4).
+Let p ≥2.
+Then there exists a continuous-
+time extension Y (t) of the SSBE solution {Yk} and a constant C = C(p, T) > 0
+(independent of ∆t) such that
+
+E sup
+0≤t≤T
+|Y (t)|2p ≤C.
+
+Proof. We know that SSBE can be regarded as EM applied to the modified SDE
+(3.16). Hence, we may define Y (t) using (2.2)–(2.3) with f, g replaced by f∆t, g∆t
+and X, X, Xk replaced by Y , Y , Yk. By definition we have, for tn = n∆t,
+
+Y (tn + s) = Yn + sf∆t(Yn) + g∆t(Yn)∆Wn(s),
+s ∈[0, ∆t),
+
+where
+
+∆Wn(s) := W(tn + s) −W(tn).
+
+However, Y ⋆
+n = Yn + ∆tf∆t(Yn) and so, for a = s/∆t, we have
+
+Y (tn + s) = aY ⋆
+n + (1 −a)Yn + g∆t(Yn)∆Wn(s),
+s ∈[0, ∆t).
+
+Since ∆t ≤∆tc < 1/(2β), it follows from (3.25) that
+
+|Y (tn + s)|2 ≤C[1 + |Yn|2 + |g∆t(Yn)∆Wn(s)|2].
+
+Thus
+
+sup
+0≤t≤T
+|Y (t)|2p ≤
+sup
+0≤n∆t≤T
+sup
+0≤s≤∆t
+|Y (tn + s)|2p
+
+≤
+sup
+0≤n∆t≤T
+sup
+0≤s≤∆t
+C[1 + |Yn|2p + |g∆t(Yn)∆Wn(s)|2p]
+
+≤C[1 +
+sup
+0≤n∆t≤T
+|Yn|2p +
+sup
+0≤s≤∆t
+
+N
+�
+
+j=0
+|g∆t(Yj)∆Wj(s)|2p],
+(3.30)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1054
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+where 0 ≤N∆t ≤T. Now, using Doob’s martingale inequality [14] and (3.15)
+
+E
+sup
+0≤s≤∆t
+|g∆t(Yj)∆Wj(s)|2p ≤CE|g∆t(Yj)∆Wj(∆t)|2p
+
+≤CE|g∆t(Yj)|2pE|∆Wj(∆t)|2p
+
+≤C∆tp[1 + E|Yj|2p]
+
+≤C∆t,
+(3.31)
+
+where C is a universal constant, independent of ∆t.
+Since N∆t ≤T, combining
+Lemma 3.7, (3.30), and (3.31) gives the desired result.
+
+Proof of Theorem 3.3. The proof now follows from an application of the triangle
+inequality: the SSBE method has a solution close to the solution of an SDE with
+modified vector fields, and the solution of this SDE in turn is close to that of the
+original SDE. More precisely, we may use Corollary 3.8 to define Y (t) and bound
+E sup0≤t≤T |Y (t)|p and Lemma 3.6 to bound E sup0≤t≤T |y∆t(t)|p. We also know from
+Lemma 3.4 that f∆t and g∆t are uniformly locally Lipschitz for small ∆t. Hence, we
+may follow the proof of Theorem 2.2 to give
+
+lim
+∆t→0 E
+�
+sup
+0≤t≤T
+|Y (t) −y∆t(t)|2
+�
+= 0.
+
+Combining this with (3.19) in Lemma 3.6 via the triangle inequality gives the
+result.
+
+4. Convergence rates. In this section we show that by augmenting Assump-
+tion 3.1 with the condition that f behaves polynomially, it is possible to establish a
+rate of convergence. The rate is optimal, agreeing with the standard theory for the
+explicit EM scheme in the globally Lipschitz case. The work of [7] also yields optimal
+rates of almost sure convergence for the EM scheme, under conditions on the vector
+fields similar to ours.
+Assumption 4.1. There exist constants D ∈R+ and q ∈Z+ such that for all
+a, b ∈Rm,
+
+|f(a) −f(b)|2 ≤D (1 + |a|q + |b|q) |a −b|2.
+(4.1)
+
+To obtain a convergence rate for EM we require the following moment bound
+assumption.
+Assumption 4.2. The SDE and EM solutions satisfy
+
+E sup
+0≤t≤T
+|y(t)|p,
+E sup
+0≤t≤T
+|X(t)|p,
+E sup
+0≤t≤T
+|X(t)|p < ∞
+∀p ≥1.
+
+Throughout the following analysis, K and u denote generic positive real and
+integer constants whose values may change between occurrences. Before obtaining a
+convergence rate for EM, we give the following lemma.
+Lemma 4.3. Under Assumptions 3.1, 4.1, and 4.2, for any even integer r ≥2,
+there exists a constant E = E(r) such that
+
+sup
+0≤t≤T
+E|X(t) −X(t)|r ≤E∆tr/2.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1055
+
+Proof. Let t ∈[k∆t, (k + 1)∆t). Then
+
+|X(t) −X(t)|r = |(t −tk)f(Xk) + g(Xk)(W(t) −W(tk))|r
+
+≤2r (∆tr|f(Xk)|r + |g(Xk)|r|W(t) −W(tk)|r) .
+
+Hence, for some E = E(r),
+
+E|X(t)−X(t)|r ≤E
+�
+∆tr
+�
+1 + E sup
+0≤t≤T
+|X(t)|u
+�
++
+�
+1 + E sup
+0≤t≤T
+|X(t)|u
+�
+(t −tk)r/2
+�
+.
+
+Since t −tk ≤∆t, the result follows by redefinition of E.
+
+Theorem 4.4. Under Assumptions 3.1, 4.1, and 4.2 the EM solution (2.1) with
+continuous-time extension (2.2) satisfies
+
+E
+�
+sup
+0≤t≤T
+|X(t) −y(t)|2
+�
+= O(∆t).
+
+Proof. Using (2.2) and
+
+y(t) = y0 +
+�t
+
+0
+f(y(s))ds +
+�t
+
+0
+g(y(s))dW(s),
+(4.2)
+
+and letting e(t) := y(t) −X(t), the Itˆo formula gives
+
+|e(t)|2 =
+�t
+
+0
+2⟨f(y(s)) −f(X(s)), e(s)⟩ds +
+�t
+
+0
+|g(y(s)) −g(X(s))|2ds
+
++ M(t)
+
+≤
+�t
+
+0
+
+�
+2⟨f(y(s)) −f(X(s)), e(s)⟩+ c|y(s) −X(s)|2�
+ds
+
++
+�t
+
+0
+2⟨f(X(s)) −f(X(s)), e(s)⟩ds
+
++ M(t)
+
+≤
+�t
+
+0
+2µ|e(s)|2 + 2c|e(s)|2 + 2c|X(s) −X(s)|2ds
+
++
+�t
+
+0
+|f(X(s)) −f(X(s))|2 + |e(s)|2ds
+
++ M(t)
+
+≤(1 + 2(µ + c))
+�t
+
+0
+|e(s)|2ds +
+�t
+
+0
+K
+�
+1 + |X(s)|q + |X(s)|q�
+|X(s) −X(s)|2ds
+
++ M(t),
+
+where
+
+M(t) =
+�t
+
+0
+2⟨e(s), (g(y(s)) −g(X(s)))dW(s)⟩.
+
+Using Cauchy–Schwarz and Lemma 4.3 with r = 4
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1056
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
+≤(1 + 2(µ + c))
+�t
+
+0
+E|e(s)|2ds
+
++
+�t
+
+0
+K
+�
+E
+�
+1 + |X(s)|q + |X(s)|q�2 E|X(s) −X(s)|4�1/2
+ds + m(t)
+
+≤(1 + 2(µ + c))
+�t
+
+0
+E|e(s)|2ds + K∆t
+�t
+
+0
+E
+�
+1 + |X(s)|2q + |X(s)|2q�
+ds
+
++ m(t)
+
+≤(1 + 2(µ + c))
+�t
+
+0
+E|e(s)|2ds + K∆t + m(t),
+(4.3)
+
+where
+
+m(t) = E
+�
+sup
+0≤s≤t
+|M(s)|
+�
+.
+
+From the Burkholder–Davis–Gundy inequality,
+
+m(t) ≤16E
+��t
+
+0
+|e(s)|2|g(y(s)) −g(X(s))|2ds
+�1/2
+
+≤16E
+�
+sup
+0≤s≤t
+|e(s)|2
+�t
+
+0
+c|y(s) −X(s)|2ds
+�1/2
+
+≤1
+
+2E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
++ 128cE
+�t
+
+0
+|y(s) −X(s)|2ds
+
+≤1
+
+2E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
++ 256c
+�t
+
+0
+[E|e(s)|2 + E|X(s) −X(s)|2]ds
+
+≤1
+
+2E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
++ 256c
+�t
+
+0
+E|e(s)|2ds + K∆t.
+
+Hence, in (4.3),
+
+E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
+≤2(1 + 2(µ + c) + 256c)
+�t
+
+0
+E|e(s)|2ds + K∆t
+
+≤2(1 + 2(µ + c) + 256c)
+�t
+
+0
+E
+�
+sup
+0≤r≤s
+|e(r)|2
+�
+ds + K∆t.
+
+The result follows from the Gronwall inequality.
+
+Note that Theorem 4.4 requires moment bounds on the numerical solution (As-
+sumption 4.2). We know that SSBE has bounded moments under Assumption 3.1,
+and hence we would expect to get an analogous convergence result for this method
+without requiring Assumption 4.2. To obtain such a result we first establish further
+properties of f∆t and g∆t under Assumptions 3.1 and 4.1.
+Lemma 4.5. Under Assumptions 3.1 and 4.1, for ∆t ≤∆tc < 1/(2β), where β
+is defined in (3.4), there exist constants c′, D′ ∈R+ and q′ ∈Z+ such that for all
+a, b ∈Rm
+
+|f∆t(a) −f∆t(b)|2 ≤D′ (1 + |a|q + |b|q) |a −b|2,
+(4.4)
+
+|f(a) −f∆t(a)|2 ≤c′ �
+1 + |a|q′�
+∆t2,
+(4.5)
+
+|g(a) −g∆t(a)|2 ≤c′ �
+1 + |a|q′�
+∆t2.
+(4.6)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1057
+
+Proof. See Appendix A.
+Lemma 4.6. Under Assumptions 3.1 and 4.1 the solution y∆t(t) of the modified
+SDE (3.16) satisfies
+
+E
+�
+sup
+0≤t≤T
+|y∆t(t) −y(t)|2
+�
+= O(∆t2).
+
+Proof. Using
+
+y∆t(t) = y0 +
+�t
+
+0
+f∆t(y∆t(s))ds +
+�t
+
+0
+g∆t(y∆t(s))dW(s),
+
+and (4.2), and letting e(t) := y(t) −y∆t(t), the Itˆo formula gives
+
+|e(t)|2 =
+�t
+
+0
+2⟨f(y(s)) −f∆t(y∆t(s)), e(s)⟩ds +
+�t
+
+0
+|g(y(s)) −g∆t(y∆t(s))|2ds
+
++ M(t)
+
+=
+�t
+
+0
+2⟨f(y(s)) −f(y∆t(s)) + f(y∆t(s)) −f∆t(y∆t(s)), e(s)⟩ds
+
++
+�t
+
+0
+|g(y(s)) −g∆t(y∆t(s))|2ds
+
++ M(t)
+
+≤
+�t
+
+0
+[2µ|e(s)|2 + |f(y∆t(s)) −f∆t(y∆t(s))|2 + |e(s)|2]ds
+
++ 2
+�t
+
+0
+|g(y(s)) −g(y∆t(s))|2 + |g(y∆t(s)) −g∆t(y∆t(s))|2ds
+
++ M(t)
+
+≤K
+�t
+
+0
+|e(s)|2 ds + K∆t2
+�t
+
+0
+
+�
+1 + |y∆t(s)|q′�
+ds
+
++ M(t),
+
+where we used Lemma 4.5 and
+
+M(t) =
+�t
+
+0
+2⟨e(s), (g(y(s)) −g∆t(y∆t(s)))dW(s)⟩.
+
+Hence,
+
+E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
+≤K
+�t
+
+0
+E|e(s)|2 ds + K∆t2
+�t
+
+0
+E
+�
+1 + |y∆t(s)|q′�
+ds + m(t),
+
+where
+
+m(t) = E
+�
+sup
+0≤s≤t
+|M(s)|
+�
+.
+
+Since y∆t(s) has bounded moments, we have
+
+E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
+≤K
+�t
+
+0
+E|e(s)|2 ds + K∆t2 + m(t).
+(4.7)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1058
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+However, in the same way as in the proof of Theorem 4.4, we can show
+
+m(t) ≤1
+
+2E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
++ 128E
+�t
+
+0
+|g(y(s)) −g∆t(y∆t(s))|2ds,
+
+while
+
+E
+�t
+
+0
+|g(y(s)) −g∆t(y∆t(s))|2ds ≤2E
+�t
+
+0
+|g(y(s)) −g(y∆t(s))|2
+
++ |g(y∆t(s)) −g∆t(y∆t(s))|2ds
+
+≤K
+�t
+
+0
+E|e(s)|2 ds + K∆t2.
+
+In (4.7) we therefore have
+
+E
+�
+sup
+0≤s≤t
+|e(s)|2
+�
+≤K
+�t
+
+0
+E|e(s)|2 ds + K∆t2
+
+≤K
+�t
+
+0
+E
+�
+sup
+0≤r≤s
+|e(r)|2
+�
+ds + K∆t2.
+
+The result follows from the Gronwall inequality.
+
+We may now prove a convergence result for SSBE.
+Theorem 4.7. Consider the SSBE method (3.8)–(3.9) applied to the SDE (1.1)
+under Assumptions 3.1 and 4.1. There exists a continuous-time extension Y (t) of the
+numerical solution (so that Y (tk) = Yk) for which
+
+E
+�
+sup
+0≤t≤T
+|Y (t) −y(t)|2
+�
+= O(∆t).
+
+Proof. We know that SSBE can be regarded as EM applied to the modified SDE
+(3.16). Lemmas 3.6 and 3.7 and Corollary 3.8 show that y∆t(t), Y (t), and Y (t) have
+bounded moments. Hence, copying the proof of Theorem 4.4 we may conclude that
+
+E
+�
+sup
+0≤t≤T
+|Y (t) −y∆t(t)|2
+�
+= O(∆t).
+
+Combining this with Lemma 4.6 via the triangle inequality gives the required
+result.
+
+5. Backward Euler. The SSBE method (3.8)–(3.9) is a stochastic extension of
+the deterministic backward Euler method. Another, perhaps more natural, extension
+of backward Euler is given by Z0 = y0 and
+
+Zk+1 = Zk + ∆tf(Zk+1) + g(Zk)∆Wk.
+(5.1)
+
+Indeed, this implicit method has appeared frequently in the literature—it is a member
+of the family of implicit Euler schemes [12, section 12.2] or the stochastic theta method
+class [10] and is sometimes called the semi-implicit Euler method [2]. We will refer to
+the method (5.1) as simply the backward Euler (BE) method for (1.1). As mentioned
+at the end of section 1, our convergence result, Theorem 5.3 below, is closely related
+to that of [11, Theorem 2.4].
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1059
+
+The BE method (5.1) requires an implicit equation to be solved. Under Assump-
+tion 3.1, the homotopy argument in the proof of Lemma 3.4 shows that for 2µ∆t < 1
+a unique solution exists with probability one. The next lemma points out a useful
+connection between BE and SSBE.
+Lemma 5.1. Let {Yk} and {Zk} denote the SSBE and BE solutions, given by
+(3.8)–(3.9) and (5.1), respectively. Under Assumption 3.1, if Y0 = Z0 −∆tf(Z0), then
+
+Zk = Yk + ∆tf∆t(Yk)
+∀k ≥0.
+(5.2)
+
+Proof. Let Q⋆
+k = Zk and Qk = Zk −∆tf(Zk), where {Zk} is the BE solution
+(5.1). Then
+
+Q⋆
+k = Qk + ∆tf(Q⋆
+k)
+
+and, using (5.1),
+
+Qk+1 = Zk+1 −∆tf(Zk+1) = Q⋆
+k + g(Q⋆
+k)∆Wk.
+
+Hence, {Qk} is precisely the SSBE solution. This gives Yk = Zk −∆tf(Zk). The
+relation (5.2) then follows immediately from Lemma 3.4.
+
+Lemma 5.1 shows that the BE solution can be regarded as an O(∆t) perturbation
+of the SSBE solution. We may use this relation between BE and SSBE in order to ob-
+tain a convergence result for BE via Theorem 3.3. We first deal with the perturbation
+to the initial data.
+Lemma 5.2. Under Assumptions 3.1 and 4.1, if y(t) and z(t) are solutions of the
+SDE (1.1) with initial conditions such that
+
+E|y(0)|p, E|z(0)|p ≤∞
+∀p ≥1,
+
+then, for some constant M,
+
+E
+�
+sup
+0≤t≤T
+|y(t) −z(t)|2
+�
+≤ME|y(0) −z(0)|2.
+
+Proof. Letting e(t) := y(t) −z(t) and applying the Itˆo formula to |e(t)|2, the
+inequality can be obtained by following the process used in the proofs of Theorem 4.4
+and Lemma 4.6.
+
+Theorem 5.3. Consider the BE method (5.1) applied to the SDE (1.1) under As-
+sumptions 3.1 and 4.1. There exists a continuous-time extension Z(t) of the numerical
+solution (so that Z(tk) = Zk) for which
+
+E
+�
+sup
+0≤t≤T
+|Z(t) −y(t)|2
+�
+= O(∆t).
+
+Proof. Let Y (t) denote the continuous-time extension to SSBE defined in Theo-
+rem 3.3, with initial data Y (0) = y0 −∆tf(y0). Also, let Z(t) = Y (t) + ∆tf∆t(Y (t)),
+so that, from Lemma 5.1, Z(t) is a continuous-time extension to the BE solution with
+Z(0) = y0. We let �y∆t(t) denote the solution to (1.1), with initial data y∆t(0) =
+y0 −∆tf(y0).
+From Lemma 5.2 we have
+
+E
+�
+sup
+0≤t≤T
+|y(t) −�y∆t(t)|2
+�
+≤M∆t2E|f(y0)|2 = O(∆t2).
+(5.3)
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1060
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+Also, the SSBE convergence result in Theorem 4.7 shows that
+
+E
+�
+sup
+0≤t≤T
+|�y∆t(t) −Y (t)|2
+�
+= O(∆t).
+(5.4)
+
+Further,
+
+E
+�
+sup
+0≤t≤T
+|Y (t) −Z(t)|2
+�
+≤∆t2E
+�
+sup
+0≤t≤T
+|f∆t(Y (t))|2
+�
+= O(∆t2),
+(5.5)
+
+because, by Lemma 4.5, f∆t is polynomially bounded. Combining (5.3)–(5.5) com-
+pletes the proof.
+
+6. Summary. Our aim in this work was to extend strong mean square conver-
+gence theory for numerical SDE simulations beyond the realm of globally Lipschitz
+problems. The only previous published work in this area that we are aware of is [11].
+We gave a strong convergence theorem for EM in the case where the vector fields are
+locally Lipschitz (e.g., C1) and moment bounds are available. This style of analysis is
+useful whenever moment bounds can be established, both for the EM method and for
+other methods that can be shown to be “close” to EM. In general, it is not clear when
+such moment bounds can be expected to hold for explicit methods with f, g ∈C1.
+However, for an implicit variant of EM, we obtained bounds on all moments in the
+case where the diffusion coefficient is globally Lipschitz but the drift coefficient satis-
+fies only a one-sided Lipschitz condition. Then, by interpreting the implicit method
+as EM applied to a modified SDE we were able to get a strong convergence result. We
+then considered the case where it is further assumed that f behaves like a polynomial.
+If all moments are bounded, then EM can be shown to converge strongly at the op-
+timal rate, again assuming moment bounds. Moment bounds can be established for
+two different implicit variants of EM, allowing us to show that these implicit methods
+converge at the optimal rate. One of these convergence results is comparable to the
+main result in [11]—we use a stronger error measure but require a more restrictive
+assumption on the growth of the drift coefficient.
+The methods of analysis could be extended to other implicit methods, such as the
+stochastic theta method with θ ∈[1/2, 1]. Such schemes, especially their split-step
+variants, may be of practical interest for Hamiltonian problems perturbed by damping
+and/or noise in the case θ = 1/2.
+
+Appendix A. Proofs of Lemmas 3.4 and 4.5.
+Proof of Lemma 3.4. Existence and uniqueness for (3.10) can be proved via a
+contraction mapping theorem, which also establishes the C1 smoothness of f∆t and
+F∆t and the convergence property of f∆t; see [5, 17]. The smoothness and convergence
+properties of g∆t follow from g∆t(·) = g(F∆t(·)).
+An alternative proof of uniqueness for (3.10) via a homotopy argument is given
+in [9, Theorem 14.2]. We repeat the homotopy construction here, as it will be used
+to obtain the bound (3.12).
+Suppose h = h(τ) satisfies
+
+h = d + ∆tf(h) + (τ −1)∆tf(d),
+(A.1)
+
+where τ is our homotopy parameter. For τ = 1, h solves (3.10). For τ = 0 we have
+
+h −d = ∆t (f(h) −f(d))
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1061
+
+and so, using Assumption 3.1,
+
+|h −d|2 = ∆t⟨h −d, f(h) −f(d)⟩≤∆tµ|h −d|2.
+
+Note that β > µ so that 2∆tµ < 1. It follows that h = d is the unique solution to
+(A.1) when τ = 0. Differentiating (A.1) with respect to τ gives
+
+˙h = ∆t∂f
+
+∂y (h)˙h + ∆tf(d).
+
+So
+
+|˙h|2 −∆t
+�
+˙h, ∂f
+
+∂y (h)˙h
+�
+= ∆t⟨˙h, f(d)⟩.
+(A.2)
+
+Setting a −b = ϵu in (3.1) and letting ϵ →0, we see that
+
+�
+u, ∂f
+
+∂y (b)u
+�
+≤µ|u|2
+for any u, b ∈Rm.
+
+Hence, in (A.2),
+
+|˙h|2 −∆tµ|˙h|2 ≤∆t|˙h| |f(d)|.
+
+So
+
+|˙h| ≤∆t |f(d)|
+
+1 −∆tµ.
+
+It follows that h(τ) exists uniquely for all τ > 0 and
+
+|h(1) −d| =
+����
+
+�1
+
+0
+˙h(s) ds
+����≤∆t |f(d)|
+
+1 −∆tµ,
+
+which establishes (3.12).
+To obtain (3.13) we note that if c(1) = d(1) +∆tf(c(1)) and c(2) = d(2) +∆tf(c(2)),
+then
+
+|c(1) −c(2)|2 −∆t⟨f(c(1)) −f(c(2)), c(1) −c(2)⟩= ⟨d(1) −d(2), c(2) −c(2)⟩
+
+and so, using Assumption 3.1,
+
+(1 −∆tµ)|c(1) −c(2)|2 ≤1
+
+2|d(1) −d(2)|2 + 1
+
+2|c(1) −c(2)|2,
+
+which gives (3.13).
+Next, note from the implicit definition (3.11) that f∆t(a) is equivalent to f(a +
+∆tf∆t(a)). Using (3.1) we thus have
+
+⟨f∆t(a) −f∆t(b), a + ∆tf∆t(a) −b −∆tf∆t(b)⟩≤µ|a + ∆tf∆t(a) −b −∆tf∆t(b)|2.
+
+Hence,
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+1062
+DESMOND J. HIGHAM, XUERONG MAO, AND ANDREW M. STUART
+
+⟨f∆t(a) −f∆t(b), a −b⟩+ ∆t|f∆t(a) −f∆t(b)|2 ≤µ|a −b|2 + 2µ⟨a −b, f∆t(a) −f∆t(b)⟩∆t
+
++ µ∆t2|f∆t(a) −f∆t(b)|2,
+
+and (3.14) follows.
+The global Lipschitz property of g∆t follows from (3.13).
+Finally, we use f∆t(a) = f(a + ∆tf∆t(a)) and (3.3) to give
+
+⟨f∆t(a), a + ∆tf∆t(a)⟩≤α + β|a + ∆tf∆t(a)|2.
+
+Hence
+
+(1 −2β∆t)⟨f∆t(a), a⟩≤α + β|a|2 + [β∆t2 −∆t]|f∆t(a)|2 ≤α + β|a|2.
+
+Since g∆t is globally Lipschitz, the inequality (3.15) follows.
+
+Proof of Lemma 4.5. Recall from Lemma 3.4 that f∆t(a) := f(F∆t(a)), where
+F∆t is globally Lipschitz. Hence,
+
+|f∆t(a) −f∆t(b)|2 = |f(F∆t(a)) −f(F∆t(b))|2
+
+≤D (1 + |F∆t(a)|q + |F∆t(b)|q) |F∆t(a) −F∆t(b)|2
+
+≤D′ (1 + |a|q + |b|q) |a −b|2.
+
+Next, it follows from the equivalence of f∆t(a) in (3.11) and f(a + ∆tf∆t(a)) that
+
+|f(a) −f∆t(a)|2 ≤D (1 + |a|q + |a + ∆tf∆t(a)|q) ∆t2|f∆t(a)|2.
+
+From (3.12), |f∆t(a)| ≤2|f(a)|, and hence we obtain (4.5). A similar argument gives
+(4.6).
+
+REFERENCES
+
+[1] K. Burrage and J. C. Butcher, Stability criteria for implicit Runge–Kutta methods, SIAM
+J. Numer. Anal., 16 (1979), pp. 46–57.
+[2] K. Burrage and T. Tian, A note on the stability properties of the Euler methods for solving
+stochastic differential equations, New Zealand J. Math., 29 (2000), pp. 115–127.
+[3] J. C. Butcher, A stability property of implicit Runge–Kutta methods, BIT, 15 (1975), pp. 358–
+361.
+[4] G. Dahlquist, Error analysis for a class of methods for stiff non-linear initial value problems,
+in Numerical Analysis, Lecture Notes in Math. 506, G. A. Watson, ed., Springer-Verlag,
+Berlin, 1976, pp. 60–72.
+[5] K. Dekker and J. G. Verwer, Stability of Runge–Kutta Methods for Stiff Nonlinear Equa-
+tions, North-Holland, Amsterdam, 1984.
+[6] G. Fleury and P. Bernard, Convergence of numerical schemes for stochastic differential
+equations, Monte Carlo Methods Appl., 7 (2001), pp. 35–44.
+[7] I. Gy¨ongy, A note on Euler’s approximations, Potential Anal., 8 (1998), pp. 205–216.
+[8] I. Gy¨ongy and N. Krylov, Existence of strong solutions for Itˆo’s stochastic equations via
+approximations, Probab. Theory Related Fields, 105 (1996), pp. 143–158.
+[9] E. Hairer and G. Wanner, Solving Ordinary Differential Equations II, Stiff and Differential-
+Algebraic Problems, 2nd ed., Springer-Verlag, Berlin, 1996.
+[10] D. J. Higham, Mean-square and asymptotic stability of the stochastic theta method, SIAM J.
+Numer. Anal., 38 (2000), pp. 753–769.
+[11] Y. Hu, Semi-implicit Euler-Maruyama scheme for stiff stochastic equations, in Stochastic
+Analysis and Related Topics V: The Silvri Workshop, Progr. Probab. 38, H. Koerezlioglu,
+ed., Birkhauser, Boston, 1996, pp. 183–202.
+[12] P. E. Kloeden and E. Platen, Numerical Solution of Stochastic Differential Equations,
+Springer-Verlag, Berlin, 1999.
+[13] X. Mao, Stability of Stochastic Differential Equations with Respect to Semimartingales, Pitman
+Res. Notes Math. Ser. 251, Longman Scientific and Technical, Harlow, UK, 1991.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+
+STRONG CONVERGENCE FOR NONLINEAR SDES
+1063
+
+[14] X. Mao, Stochastic Differential Equations and Applications, Horwood, Chichester, UK, 1997.
+[15] J. Mattingly, A. M. Stuart, and D. J. Higham, Ergodicity for SDEs and Approximations:
+Locally Lipschitz Vector Fields and Degenerate Noise, Tech. Rep. 7, University of Strath-
+clyde, Department of Mathematics, Glasgow, UK, 2001.
+[16] H. Schurz, Stability, Stationarity, and Boundedness of some Implicit Numerical Methods for
+Stochastic Differential Equations and Applications, Logos Verlag, Berlin, 1997.
+[17] A. M. Stuart and A. R. Humphries, Dynamical Systems and Numerical Analysis, Cambridge
+University Press, Cambridge, UK, 1996.
+
+Downloaded 06/09/17 to 131.215.225.185. Redistribution subject to SIAM license or copyright; see http://www.siam.org/journals/ojsa.php
+
+

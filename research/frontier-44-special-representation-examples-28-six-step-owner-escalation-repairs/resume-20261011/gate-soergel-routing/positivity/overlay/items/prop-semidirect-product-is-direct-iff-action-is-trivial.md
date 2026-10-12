@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-semidirect-product-is-direct-iff-action-is-trivial.md

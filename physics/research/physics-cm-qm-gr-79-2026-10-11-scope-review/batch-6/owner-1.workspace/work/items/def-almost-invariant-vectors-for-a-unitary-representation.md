@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-almost-invariant-vectors-for-a-unitary-representation.md

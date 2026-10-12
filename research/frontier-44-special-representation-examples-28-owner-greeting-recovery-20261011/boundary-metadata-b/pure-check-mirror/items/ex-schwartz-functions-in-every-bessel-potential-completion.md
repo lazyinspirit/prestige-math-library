@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-schwartz-functions-in-every-bessel-potential-completion.md

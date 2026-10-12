@@ -41,11 +41,10 @@ For instance, if $T=\operatorname{diag}(2,3,5)$ on $\mathbb R^3$, then $\Lambda^
 
 **Proof technique:** direct.
 
-
-1.1 The matrix $A$ of $T$ in the standard basis is diagonal. [given]
+ 1.1 The matrix $A$ of $T$ in the standard basis is diagonal. [given]
 
 2.1 By [L2], the entry of $\Lambda^kT$ at $(J,I)$ is the determinant of the $k\times k$ submatrix with rows $J$ and columns $I$; for the diagonal matrix of step 1.1 this is $0$ when $J\ne I$ and $\lambda_I$ when $J=I$. [L2, step 1.1, algebra]
 
 3.1 By [L1], the values of $\Lambda^kT$ on the wedge basis $e_I$ determine the whole map, so $\Lambda^kT(e_I)=\lambda_Ie_I$ and the map is diagonal with the displayed entries; the $n=3$ case reads $\operatorname{diag}(6,10,15)$ on $\Lambda^2\mathbb R^3$. [L1, step 2.1]
 
-4.1 Steps 2.1 and 3.1 verify the diagonal form of every exterior power and the concrete example. [step 2.1, step 3.1] ∎
+4.1 Steps 2.1 and 3.1 verify the diagonal form of every exterior power and the concrete example. [step 2.1, step 3.1] ∎ 

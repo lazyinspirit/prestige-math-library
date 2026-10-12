@@ -53,18 +53,14 @@ $$\mu_c([0,1]) = F_c(1) - F_c(0^-) = 1 - 0 = 1.$$
 
 Likewise, for every $n \ge 1$, $\mu_c((1,n]) = F_c(n) - F_c(1) = 0$ and $\mu_c((-n,0)) = F_c(0^-) - F_c(-n) = 0$. So all mass lies in $[0,1]$, and $\mu_c$ is a probability measure. [L1, L2]
 
-2.1 If $x \in (0,1]$, then [L1] makes $F_c(x^-) = F_c(x)$, so [L2] gives [step 1.1, L1, L2]
-$\mu_c(\{x\}) = 0$. The same holds for $x < 0$ and $x > 1$ because $F_c$ is constant on $(-\infty,0)$ and on $(1,\infty)$, and it holds at $x=0$ because $F_c(0)=F_c(0^-)=0$. Hence $\mu_c$ is atomless. [step 1.1, L1, L2]
+2.1 If $x \in (0,1]$, then [L1] makes $F_c(x^-) = F_c(x)$, so [L2] gives [step 1.1, L1, L2] $\mu_c(\{x\}) = 0$. The same holds for $x < 0$ and $x > 1$ because $F_c$ is constant on $(-\infty,0)$ and on $(1,\infty)$, and it holds at $x=0$ because $F_c(0)=F_c(0^-)=0$. Hence $\mu_c$ is atomless. [step 1.1, L1, L2]
 
-3.1 Every point of $[0,1] \setminus C$ lies in a complementary gap $(u,v)$ of [step 2.1, L1, L2, L4, algebra]
-$C$, and [L1] makes $c$ constant on $[u,v]$. Therefore [L2] gives
+3.1 Every point of $[0,1] \setminus C$ lies in a complementary gap $(u,v)$ of [step 2.1, L1, L2, L4, algebra] $C$, and [L1] makes $c$ constant on $[u,v]$. Therefore [L2] gives
 
 $$\mu_c((u,v)) = F_c(v^-) - F_c(u) = c(v) - c(u) = 0.$$
 
 Because $[0,1] \setminus C$ is the countable union of those disjoint gaps, countable additivity gives $\mu_c([0,1] \setminus C) = 0$. Together with step 1.1 this yields $\mu_c(\mathbb{R} \setminus C)=0$. [step 2.1, L1, L2, L4, algebra]
 
-4.1 By [L3], $\lambda(C)=0$, while step 3.1 shows that $\mu_c$ is concentrated [step 1.1, step 2.1, step 3.1, L3]
-on $C$. That is exactly the statement that $\mu_c$ is singular with respect to Lebesgue measure. [step 1.1, step 2.1, step 3.1, L3]
+4.1 By [L3], $\lambda(C)=0$, while step 3.1 shows that $\mu_c$ is concentrated [step 1.1, step 2.1, step 3.1, L3] on $C$. That is exactly the statement that $\mu_c$ is singular with respect to Lebesgue measure. [step 1.1, step 2.1, step 3.1, L3]
 
-5.1 Steps 1.1 through 4.1 prove the probability, atomless, concentration, and [step 1.1, step 2.1, step 3.1, step 4.1]
-singularity claims. [step 1.1, step 2.1, step 3.1, step 4.1] ∎
+5.1 Steps 1.1 through 4.1 prove the probability, atomless, concentration, and [step 1.1, step 2.1, step 3.1, step 4.1] singularity claims. [step 1.1, step 2.1, step 3.1, step 4.1] ∎ 

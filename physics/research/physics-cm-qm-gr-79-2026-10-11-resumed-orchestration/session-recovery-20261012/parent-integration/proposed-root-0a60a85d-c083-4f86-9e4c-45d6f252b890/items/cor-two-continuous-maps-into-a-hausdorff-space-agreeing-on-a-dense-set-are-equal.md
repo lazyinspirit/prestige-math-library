@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-two-continuous-maps-into-a-hausdorff-space-agreeing-on-a-dense-set-are-equal.md

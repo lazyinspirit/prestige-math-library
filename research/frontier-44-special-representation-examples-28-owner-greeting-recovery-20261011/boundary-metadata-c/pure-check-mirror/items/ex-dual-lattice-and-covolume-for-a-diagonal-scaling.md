@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dual-lattice-and-covolume-for-a-diagonal-scaling.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-equivalent-characterizations-of-semisimple-rings.md

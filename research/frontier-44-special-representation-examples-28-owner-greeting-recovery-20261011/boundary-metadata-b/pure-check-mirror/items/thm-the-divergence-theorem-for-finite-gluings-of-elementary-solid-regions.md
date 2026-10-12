@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-divergence-theorem-for-finite-gluings-of-elementary-solid-regions.md

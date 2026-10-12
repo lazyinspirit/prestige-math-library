@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-positively-curved-closed-oriented-surface-has-positive-euler-characteristic.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-diagonal-cartan-subalgebra-and-roots-of-sl-n.md

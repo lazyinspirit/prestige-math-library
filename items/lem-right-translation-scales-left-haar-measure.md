@@ -65,9 +65,7 @@ $c(g)\int_G f\,d\mu$ on $C_c(G)$.
 
 3.1 Since $\mu$ and $\nu_g$ are both left Haar measures, [F5] (whose choice hypothesis is discharged by [A1]) provides a scalar $c(g)>0$ with $\nu_g(E)=c(g)\mu(E)$ for every Borel set $E$. The scalar is unique: if also $c'\mu=\nu_g$ then $(c-c')\mu(E)=0$ for every Borel $E$, and some Borel set $E$ has $0<\mu(E)<\infty$, since $\mu\ne0$ together with outer and inner regularity of $\mu$ produces a compact set of positive finite measure by [F1]. [A1, F1, F5, step 2.2]
 
-4.1 Consequently, for every $f\in C_c(G)$, the representation in step 2.1 and the proportionality in step 3.1 give
-$$\int_G f(xg)\,d\mu(x)=N_g(f)=\int_G f\,d\nu_g=c(g)\int_G f\,d\mu ,$$
-which is the asserted identity; the case $f=ix$ with $i$ the imaginary unit is handled by applying the real identity to $\operatorname{Re}f$ and $\operatorname{Im}f$. The scalar $c(g)$ is positive and unique by step 3.1, and $c(e)=1$ because $\nu_e=\mu$. [step 2.1, step 3.1] ∎
+4.1 Consequently, for every $f\in C_c(G)$, the representation in step 2.1 and the proportionality in step 3.1 give $$\int_G f(xg)\,d\mu(x)=N_g(f)=\int_G f\,d\nu_g=c(g)\int_G f\,d\mu ,$$ which is the asserted identity; the case $f=ix$ with $i$ the imaginary unit is handled by applying the real identity to $\operatorname{Re}f$ and $\operatorname{Im}f$. The scalar $c(g)$ is positive and unique by step 3.1, and $c(e)=1$ because $\nu_e=\mu$. [step 2.1, step 3.1] ∎
 
 ## Remarks
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-bijective-quasi-isometry-between-finitely-generated-groups-is-a-bilipschitz-equivalence.md

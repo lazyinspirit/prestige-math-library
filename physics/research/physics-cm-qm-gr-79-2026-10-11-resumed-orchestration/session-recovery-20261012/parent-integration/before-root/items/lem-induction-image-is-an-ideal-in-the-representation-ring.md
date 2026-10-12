@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induction-image-is-an-ideal-in-the-representation-ring.md

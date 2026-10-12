@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weakly-convergent-sequences-are-norm-bounded.md

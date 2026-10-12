@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-all-complex-vector-bundles-over-the-circle-are-trivial.md

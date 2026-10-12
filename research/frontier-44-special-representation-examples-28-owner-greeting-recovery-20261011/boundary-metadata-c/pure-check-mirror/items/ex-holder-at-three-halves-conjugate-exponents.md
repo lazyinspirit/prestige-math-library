@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-holder-at-three-halves-conjugate-exponents.md

@@ -118,9 +118,7 @@ built from a multiplication $E\wedge E\to E$. A pairing of spectral sequences is
 
 3.2 The filtration is multiplicative. Let $u\in F^ph^m(X)$ and $v\in F^rh^n(X)$. By [F1] choose relative lifts $\tilde u\in W_p^m$ and $\tilde v\in W_r^n$. By step 2.2 the image of $\mu_W(\tilde u,\tilde v)\in W_{p+r}^{m+n}$ in $h^{m+n}(X)$ is $u\cdot v$, because both are obtained by pulling the external product back along $\Delta$. Hence $u\cdot v\in F^{p+r}h^{m+n}(X)$. [F1, step 2.2, given]
 
-4.1 By step 3.1 the construction is a pairing of the relative skeletal towers and their cofiber terms. The pairing-of-spectral-sequences result in [F3] therefore applies from the first page, and compatibility with the first differential is precisely
-$$d_1\bigl(\mu_1(x,y)\bigr)=\mu_1(d_1x,y)+(-1)^{p+q}\mu_1(x,d_1y).$$
-The sign uses the total cohomological degree $p+q$ of $x$, as required by the connecting-map Leibniz identity. [F3, step 3.1, given]
+4.1 By step 3.1 the construction is a pairing of the relative skeletal towers and their cofiber terms. The pairing-of-spectral-sequences result in [F3] therefore applies from the first page, and compatibility with the first differential is precisely $$d_1\bigl(\mu_1(x,y)\bigr)=\mu_1(d_1x,y)+(-1)^{p+q}\mu_1(x,d_1y).$$ The sign uses the total cohomological degree $p+q$ of $x$, as required by the connecting-map Leibniz identity. [F3, step 3.1, given]
 
 4.2 The stable product is the associated-graded product. For the classes of step 3.2 the image of $\mu_W(\tilde u,\tilde v)$ in the quotient $F^{p+r}h^{m+n}(X)/F^{p+r+1}h^{m+n}(X)$ is exactly the class of $u\cdot v$. Under the identification $E_\infty^{p,q}\cong F^ph^{p+q}(X)/F^{p+1}h^{p+q}(X)$ of [F1], the pairing of the stable classes is therefore the associated-graded product of $h^*(X)$. [F1, step 3.2]
 

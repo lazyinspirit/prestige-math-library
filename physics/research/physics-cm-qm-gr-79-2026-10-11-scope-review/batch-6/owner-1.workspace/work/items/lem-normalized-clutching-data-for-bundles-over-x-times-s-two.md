@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-clutching-data-for-bundles-over-x-times-s-two.md

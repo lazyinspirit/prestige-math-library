@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-trivial-action-of-z-two-is-not-faithful.md

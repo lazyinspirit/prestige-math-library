@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-smooth-does-not-imply-real-analytic-for-general-pde.md

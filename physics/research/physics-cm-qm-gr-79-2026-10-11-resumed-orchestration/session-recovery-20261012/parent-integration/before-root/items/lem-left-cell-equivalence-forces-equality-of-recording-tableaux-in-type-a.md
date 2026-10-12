@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-left-cell-equivalence-forces-equality-of-recording-tableaux-in-type-a.md

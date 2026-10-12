@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-affine-domain-maximal-ideal-height-equals-dimension.md

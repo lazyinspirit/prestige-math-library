@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-sectional-curvature-is-independent-of-the-basis-of-the-plane.md

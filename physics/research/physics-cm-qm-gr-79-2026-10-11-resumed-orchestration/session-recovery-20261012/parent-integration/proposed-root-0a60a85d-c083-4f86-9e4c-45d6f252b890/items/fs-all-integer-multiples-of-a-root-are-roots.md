@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-all-integer-multiples-of-a-root-are-roots.md

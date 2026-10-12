@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-hessian-does-not-classify-a-critical-point.md

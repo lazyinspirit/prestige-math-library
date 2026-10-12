@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime.md

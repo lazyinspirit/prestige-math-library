@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-componentwise-convergence-and-a-vector-valued-integral-computed.md

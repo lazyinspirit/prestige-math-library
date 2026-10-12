@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-gauss-bonnet-for-a-geodesic-triangle.md

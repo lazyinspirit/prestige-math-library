@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric.md

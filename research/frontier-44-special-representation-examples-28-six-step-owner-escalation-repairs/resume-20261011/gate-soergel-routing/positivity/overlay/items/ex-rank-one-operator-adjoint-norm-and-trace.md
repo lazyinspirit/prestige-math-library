@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-rank-one-operator-adjoint-norm-and-trace.md

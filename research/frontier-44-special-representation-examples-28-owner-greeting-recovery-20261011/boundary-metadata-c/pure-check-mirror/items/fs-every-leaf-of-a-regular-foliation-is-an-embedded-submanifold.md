@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-leaf-of-a-regular-foliation-is-an-embedded-submanifold.md

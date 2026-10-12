@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-nonconstant-meromorphic-function-on-the-plane-omits-at-most-one-sphere-value.md

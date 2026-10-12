@@ -41,10 +41,8 @@ connected integral manifolds form a partition of $M$.
 
 **Proof technique:** direct.
 
-1.1 Every point of $M$ lies in its own equivalence class, so the union of the [given]
-maximal leaves is all of $M$. [given]
+1.1 Every point of $M$ lies in its own equivalence class, so the union of the [given] maximal leaves is all of $M$. [given]
 
-1.2 Distinct equivalence classes are disjoint. Therefore distinct maximal [given]
-connected integral manifolds are disjoint. [given]
+1.2 Distinct equivalence classes are disjoint. Therefore distinct maximal [given] connected integral manifolds are disjoint. [given]
 
-2.1 Hence the maximal connected integral manifolds partition $M$. [given] ∎ [given]
+2.1 Hence the maximal connected integral manifolds partition $M$. [given] ∎ [given] 

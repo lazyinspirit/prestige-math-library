@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-conditional-probability-multiplication-and-chain-rules.md

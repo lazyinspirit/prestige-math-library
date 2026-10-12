@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-lp-is-uniformly-convex-for-one-less-p-less-infinity.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-norm-is-always-the-product-of-the-embeddings.md

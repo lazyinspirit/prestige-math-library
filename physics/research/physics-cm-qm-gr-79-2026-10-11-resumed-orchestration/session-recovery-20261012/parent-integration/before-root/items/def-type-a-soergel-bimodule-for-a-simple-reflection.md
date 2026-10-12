@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-type-a-soergel-bimodule-for-a-simple-reflection.md

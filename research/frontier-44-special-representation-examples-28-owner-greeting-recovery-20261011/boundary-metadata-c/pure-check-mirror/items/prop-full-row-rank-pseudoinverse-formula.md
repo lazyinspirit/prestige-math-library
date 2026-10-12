@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-full-row-rank-pseudoinverse-formula.md

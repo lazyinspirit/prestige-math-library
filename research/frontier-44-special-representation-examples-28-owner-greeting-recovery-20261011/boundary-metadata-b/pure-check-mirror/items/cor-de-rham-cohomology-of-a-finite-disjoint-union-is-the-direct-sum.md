@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-de-rham-cohomology-of-a-finite-disjoint-union-is-the-direct-sum.md

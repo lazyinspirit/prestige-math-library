@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-resolvent-power-estimates-for-semigroup-generators.md

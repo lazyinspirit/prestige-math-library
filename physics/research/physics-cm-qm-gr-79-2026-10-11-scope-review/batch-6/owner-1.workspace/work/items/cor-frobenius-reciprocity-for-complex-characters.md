@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-frobenius-reciprocity-for-complex-characters.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-completion-commutes-with-finite-quotients-and-submodules.md

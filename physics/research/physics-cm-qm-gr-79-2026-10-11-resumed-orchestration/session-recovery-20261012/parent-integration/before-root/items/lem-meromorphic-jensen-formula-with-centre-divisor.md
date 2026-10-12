@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-meromorphic-jensen-formula-with-centre-divisor.md

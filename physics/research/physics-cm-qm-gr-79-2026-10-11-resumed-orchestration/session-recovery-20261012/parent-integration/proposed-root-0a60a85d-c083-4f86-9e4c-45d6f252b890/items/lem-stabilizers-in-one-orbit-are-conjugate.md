@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stabilizers-in-one-orbit-are-conjugate.md

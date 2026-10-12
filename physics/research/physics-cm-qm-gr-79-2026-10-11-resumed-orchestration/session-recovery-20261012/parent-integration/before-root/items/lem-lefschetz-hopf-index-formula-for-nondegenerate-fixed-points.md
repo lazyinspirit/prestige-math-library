@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lefschetz-hopf-index-formula-for-nondegenerate-fixed-points.md

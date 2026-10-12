@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-dimension-of-a-quotient-as-chains-above-an-ideal.md

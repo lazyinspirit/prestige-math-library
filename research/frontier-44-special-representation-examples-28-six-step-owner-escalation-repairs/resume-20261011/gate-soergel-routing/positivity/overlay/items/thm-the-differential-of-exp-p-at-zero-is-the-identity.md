@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-differential-of-exp-p-at-zero-is-the-identity.md

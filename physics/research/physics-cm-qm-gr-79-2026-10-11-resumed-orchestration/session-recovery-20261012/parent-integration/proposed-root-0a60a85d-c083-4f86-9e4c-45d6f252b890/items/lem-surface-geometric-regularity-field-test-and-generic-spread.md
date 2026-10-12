@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-surface-geometric-regularity-field-test-and-generic-spread.md

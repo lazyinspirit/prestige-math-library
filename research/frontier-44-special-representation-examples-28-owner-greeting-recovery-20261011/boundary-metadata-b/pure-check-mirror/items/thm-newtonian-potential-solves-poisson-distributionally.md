@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-newtonian-potential-solves-poisson-distributionally.md

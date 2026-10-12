@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-erdos-rado-pattern-closure-and-end-homogeneity.md

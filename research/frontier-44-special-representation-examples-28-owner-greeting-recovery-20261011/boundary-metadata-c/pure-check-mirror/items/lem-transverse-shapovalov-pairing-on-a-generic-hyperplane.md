@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-transverse-shapovalov-pairing-on-a-generic-hyperplane.md

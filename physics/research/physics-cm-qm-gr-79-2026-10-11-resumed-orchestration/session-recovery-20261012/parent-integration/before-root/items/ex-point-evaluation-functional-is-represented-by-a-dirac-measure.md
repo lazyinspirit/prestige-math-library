@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-point-evaluation-functional-is-represented-by-a-dirac-measure.md

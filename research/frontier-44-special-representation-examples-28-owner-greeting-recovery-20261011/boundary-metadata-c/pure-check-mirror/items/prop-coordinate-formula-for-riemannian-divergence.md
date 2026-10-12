@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-coordinate-formula-for-riemannian-divergence.md

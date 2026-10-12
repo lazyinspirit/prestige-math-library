@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-complex-k-ring-of-complex-projective-space.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-finite-point-motions-extend-to-boundary-fixed-disk-isotopies.md

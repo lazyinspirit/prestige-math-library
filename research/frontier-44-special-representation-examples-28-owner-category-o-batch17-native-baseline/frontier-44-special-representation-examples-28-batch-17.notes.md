@@ -1,0 +1,160 @@
+# Batch 17 — `arakawa-suzuki-functors-and-higher-level-schur-weyl-duality` (KL-7)
+
+Run `frontier-44-special-representation-examples-28`, role beta, one A/B pair at orders 1790/1791,
+category `special-topics-in-representation-theory`, `requires` unchanged
+(`parabolic-category-o-and-fock-space-bases`, `tensor-products-of-modules`,
+`graded-bimodules-and-tensor-functors`). Owner authoring direction
+(`research/frontier-44-special-representation-examples-28-owner-authoring-direction.md`) was read
+first; it preserves the approved scope of this pair and authorizes only the selected pairs.
+
+Scaffold written: **24 A items + 5 B items = 29**, 28 recorded `ready` and **one escalated** (see
+"Source escalation" below). No page split was needed; both pages are far below the 100-item cap.
+No item file, published content, shared plan, engine state, verdict or foreign batch artifact was
+edited. Only this batch's manifest, coverage, notes, cross-batch dependency input and Step-1
+readiness records were written.
+
+## Design, plan and owner direction
+
+- Design: `research/plan-kazhdan-lusztig-track.md` KL-7 (L198). The design's 20-item inventory enters
+  the manifest with its exact IDs and its stated proof route (Arakawa–Suzuki functors and the Casimir
+  operators; cyclotomic truncation; type-A pyramid good grading, Premet subalgebra and Whittaker
+  character; finite W-algebra and Whittaker category; Gan–Ginzburg/Skryabin inputs; Skryabin
+  equivalence; loop filtration; deformed tensor space; filtered double centralizer; Whittaker functor
+  and its exactness/full faithfulness; higher-level Schur–Weyl generator, stable range, endomorphism
+  and double centralizer theorems; Schur images; translation intertwiners).
+- Plan comparison (`research/plan-spec.json`): **no page-level conflict.** The plan carries this pair
+  at orders 1790/1791 with empty `items[]` (item inventories land during authoring), the same title,
+  category, companion and the same three `requires`, matching the batch task and the drift review
+  verdict `drift-reordered` (1552→1790, 1553→1791) of the serial Category-O order correction. The
+  design's KL-7 wording is preserved; nothing in the current plan contradicts it.
+- Owner direction: the binding sections on the quantum, parabolic/O and KLR interfaces do not
+  change this pair's scope. The direction's Category-O prerequisite/order reconciliation and the
+  owner supplier graph are used for the in-run interfaces; no conflict needs owner adjudication.
+- Dependency lists in the design's proposed inventory were extended, where the proof requires it,
+  to the actual suppliers: the batch-16 block/residue/tilting/three-bases items, the batch-15
+  parabolic-category items, and the published tensor, Lie-theory, cohomology and category-O items
+  named in the manifest. Every addition is load-bearing and is tied to a named source result.
+- Normalization dictionary recorded in the contracts (important, source-derived): [BKHL] and [AS]
+  use different Casimir/Hecke normalizations; the contracts fix the [BKHL] `H_d` presentation
+  (`s_ix_{i+1}=x_is_i+1`) and record the [AS, Section 2.2] `y_i` presentation together with the
+  identification `x_i ↔ y_i`, `s_i ↔ s_{i,i+1}`, so both treatments can be consumed without
+  silently changing conventions. The [AS] `Omega` is the `sl_n`-normalized Casimir; the contracts
+  use the `gl_N` trace-form `Omega=sum e_ij⊗e_ji`, whose action on `V⊗V` is the flip.
+
+## New local suppliers (same A page, dependency-ordered before consumers)
+
+1. `def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra` — the shifted
+   Yangian `Y_n(sigma)`, its generators and the quotient presentation of `W(lambda)`
+   ([BK3, Chapter 2 and Section 3.4]).
+2. `thm-ordered-monomial-pbw-basis-for-the-shifted-yangian` — the ordered-monomial PBW basis and
+   the graded freeness ([BK3, Section 2.2], [BK3, Theorem 3.5, Lemma 3.6]) used by the loop
+   filtration theorem.
+3. `thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer` — Vust's graded double
+   centralizer for `(U(g^e), C_l[x_1,…,x_d]⋊C[S_d])` on `V^⊗d` ([BKHL, Theorem 2.4], quoting
+   [KP, Section 6]). **This is the one escalated item** (see below).
+4. `def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks` — the Hecke
+   `f_i/e_i` functors, biadjunction, duality and Cartan-pairing adjointness
+   ([BKAR, (3.16)–(3.20)]), needed by the translation-intertwining theorem.
+
+No claim of the design was weakened, and no item was added outside the pair's selected scope.
+
+## Sources
+
+Read in full or in the exact cited ranges (text extraction inspected; complete relevant arguments,
+not snippets): [BKHL] arXiv:math/0605217 (50pp), [BKAR] arXiv:0901.0057 (44pp), [BK3]
+arXiv:math/0508003 (109-page memoir), [AS] arXiv:q-alg/9710037 (16pp), [CR] arXiv:math/0407205
+(45pp), [GG] arXiv:math/0105225 (10pp), [BGK] arXiv:0801.1337 (38pp), plus the Moreau lecture
+notes (42pp) inspected at title/contents/Part 1 and used only as a corroborating cross-reference
+for the finite-W route (its Theorems 10.3 and 11.2 are the announced Gan–Ginzburg and Skryabin
+statements). Every harvested heading received a disposition in
+`frontier-44-special-representation-examples-28-batch-17.coverage.json` (41 results, 13 sources,
+0 errors). Full-text fetchability of every coverage URL was verified with
+`node tools/source-fetch-check.mjs --coverage … --stamp` (13/13 newly stamped; re-check 13/13
+resolved, 0 documented drops).
+
+### Source escalation (owner action required)
+
+`thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer` is **escalated** with an
+owner-escalation record on the item (`source_resolution`): the original [KP, Section 6] full text
+could not be read here — the Springer/DOI page is abstract-level HTML and the Göttingen GDZ scan of
+Inventiones 53 (LOG_0017, 23pp, confirmed the right article by page count) is image-only with no OCR
+in this environment. The theorem's statement and exact use are fully verified in the retrieved full
+text of [BKHL, Theorem 2.4] and its role in the proof route is recorded; only the reading of the
+original proof is missing. Attempts, search records and the exact uncertainty are stored on the item.
+No source-drop confidence is claimed. Consumers of this item in the same page are recorded `ready`
+with the conditional dependency disclosed in their readiness reasons: the owner must resolve the
+source (or authorize the alternative route) before Step-3 authoring of the double-centralizer chain.
+
+### Source caveats recorded (not library defects)
+
+- The published [AS] J. Algebra version is titled "Duality between sl_n(C) and the degenerate affine
+  Hecke algebra"; the retrieved full text is the 16-page arXiv preprint under its original title.
+  Both titles are recorded.
+- [BKHL, Remark 2.5] states the graded double centralizer over arbitrary commutative rings using
+  Donkin's positive-characteristic result; the scaffold uses only the complex case.
+- The KLR/quantum interfaces of the owner direction are *not* imported here; this pair consumes
+  only the classical `q=1` structures named in the manifest.
+
+## Cross-batch dependencies
+
+`research/frontier-44-special-representation-examples-28-batch-17.cross-batch-dependencies.json`
+carries 18 rows (17 item + 1 page), all `open` for ordinary supplier-before-consumer authoring and
+review: batch-16 items (integral parabolic block, residue translation functors and their Casimir
+action, integrable Fock action, tilting/prinjectivity, three Fock bases and the Schur dictionary),
+batch-15 items (standard parabolic and genuine parabolic category O) and the page edge to
+`parabolic-category-o-and-fock-space-bases`. The rows record the exact scaffold interface use only;
+they are not an authored-item audit or a readiness decision for the suppliers. The unified ledger
+was refreshed with `node tools/frontier-dependency-ledger.mjs refresh --run …`.
+
+## Checks (actual results)
+
+- `node tools/item-dependency-levels.mjs check --run frontier-44-special-representation-examples-28`
+  — **no errors for any batch-17 item** (0 label mismatches, 0 cycles, 0 malformed deps); the only
+  output is `empty scaffold inventory` for sibling pages whose batches are not yet scaffolded
+  (KL-8 and the KLR/cyclotomic pairs). Batch-17 levels: 0…34, recomputed after the final dependency
+  edits.
+- `node tools/manifest-deps.mjs research/…-batch-*.pages.json` (whole run) —
+  `manifest-deps: 569 item(s), 0 normalized, 0 error(s)`.
+- `node tools/content-policy.mjs --manifest-only research/…-batch-*.pages.json` (whole run) —
+  `content-policy: 569 scoped item(s), 0 error(s), 0 warning(s)`. (An earlier single-batch run
+  reported cross-batch dependencies as missing because the other batches were not passed; the
+  whole-run invocation is the correct scope.)
+- `node tools/coverage-checklist.mjs research/…-batch-17.coverage.json --require-destination` —
+  `2 page(s), 41 harvested result(s), 0 error(s), 0 warning(s)`.
+- `node tools/source-fetch-check.mjs --coverage research/…-batch-17.coverage.json --stamp` —
+  `13/13 source(s) fetch-verified (13 newly stamped)`; check mode `13/13 resolved`.
+- `node tools/frontier-item-gate.mjs --run … --tool validate-plan` — final result **OK**: "declared
+  page order is acyclic and consistent; no item-level cycles, forward references, B-page
+  dependencies, or unresolved ids among the 48 page(s) with item lists". One first-run B-leaf
+  finding was repaired in the batch (the example `ex-a-block-idempotent-corner-outside-the-stable-range`
+  had depended on the published examples-page item
+  `ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c`, which would make a B page
+  depend on a B page; the dependency was replaced by the published A-page theorem
+  `thm-complex-irreducibles-of-symmetric-groups-are-specht-modules`, and the item's readiness record
+  was refreshed). Two non-blocking `[redundant-prereq]` advisories remain and are preserved because
+  the plan and design declare the full `requires` sets: this A page requires
+  `graded-bimodules-and-tensor-functors` directly although it is already reached through
+  `parabolic-category-o-and-fock-space-bases`, and KL-8 reaches
+  `grothendieck-groups-and-graded-cartan-pairings` through this A page. Recorded for the Step-4
+  reconciler; no plan or design text was edited.
+- `node tools/step1-decisions.mjs check --run …` — 569 run items, 567 ready, not closed; the only
+  batch-17 row in the work list is the escalated
+  `thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer`, i.e. all other 28 batch-17
+  records are current and no other batch-17 finding is open.
+- `extcheck`/`fwdcheck` in item mode remain at the documented Step-1 boundary
+  (`[focus-item-unknown]` for manifest-only IDs, since item files are deliberately absent); no
+  `forward_refs`, `proved_here`, `external_refs` or `external_dependency` field is declared in this
+  batch, so no external-reference or retirement-policy finding is hidden here.
+- `node tools/frontier-dependency-ledger.mjs refresh --run …` — `refreshed and deduplicated`; the
+  18 batch-17 rows are recorded in the unified ledger with the other batches' rows untouched.
+- Label audit: a full-run recomputation after the final dependency edits gives 569/569 exact
+  `dependency_level` labels, 0 mismatches, 0 cycles; batch-17 levels run 0…34.
+
+## Step-1 decisions
+
+28 items were recorded `ready` one at a time in prerequisite order (examined dependency IDs and
+evidence in each record under `research/frontier-44-special-representation-examples-28-step1-*.json`);
+`thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer` was recorded `escalated` with the
+exact source uncertainty. No escalation was overwritten. Owner/operator reconciliation and the
+engine's Step-1 gate follow; neither a worker exit nor a readiness record is independent
+mathematical approval (Step 3 provides that review).

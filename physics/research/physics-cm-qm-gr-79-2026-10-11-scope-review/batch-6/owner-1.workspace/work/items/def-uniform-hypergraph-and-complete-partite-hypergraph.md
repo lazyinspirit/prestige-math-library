@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-uniform-hypergraph-and-complete-partite-hypergraph.md

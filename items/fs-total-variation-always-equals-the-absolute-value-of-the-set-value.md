@@ -39,7 +39,7 @@ measurable set $E$, one has $|\nu|(E)=|\nu(E)|$.
 
 **Proof technique:** direct.
 
-1.1 By [L1], one has $\nu(E)=0$, so $|\nu(E)|=0$. [L1]
+1.1 By [L1], one has $\nu(E)=0$, so $|\nu(E)|=0$. [L1]. [L1]
 
-2.1 The partition $E=\{1\}\sqcup\{-1\}$ gives partition sum [L1, L2, step 1.1] ∎
-$|\nu(\{1\})|+|\nu(\{-1\})|=2$, so [L2] yields $|\nu|(E)\ge2$. Hence $|\nu|(E)\neq|\nu(E)|$.
+2.1 The partition $E=\{1\}\sqcup\{-1\}$ gives partition sum [L1, L2, step 1.1] $|\nu(\{1\})|+|\nu(\{-1\})|=2$, so [L2] yields $|\nu|(E)\ge2$. Hence $|\nu|(E)\neq|\nu(E)|$. [L1, L2, step 1.1] ∎
+

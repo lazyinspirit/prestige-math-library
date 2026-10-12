@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "batch": "ML-81–ML-83",
+  "status": "complete_with_exact_source_contracts_and_local_proof_boundaries",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "d4c4afd15cacd99f38f1c04213d0814f834a1d1bdc52e11a90e2e4f881aa4633",
+  "plan_sha256_at_checkpoint": "3059a1d45c9ed6527ab8ab76ba18a5854e2b803070a3e5812e1fb1fb94ec9be5",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "plan_section_hash_method": "SHA-256 of exact raw pair chunk from ### heading through final paragraph, excluding trailing newline bytes and stopping before the next ### or ## heading.",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-06/sources.json",
+  "source_manifest_sha256": "33bb1cf20f39b8d4ab3c269eb3b8d3ca0d9f8d1e0a446c4ec972dcc27a16348b",
+  "pairs": [
+    {
+      "id": "ML-81",
+      "assessment": "audited_DAgger_reduction_with_cost_to_go_and_sampling_conditions",
+      "plan_section_sha256": "bff25ba0129532fee1320e4d10e4e55aa0bb50216bb5517ec4f78e9da7de4e3e",
+      "findings": [
+        "The full DAgger article states the one-step cost-to-go difference premise and its conversion from a surrogate that upper-bounds action disagreement. This is necessary to convert online surrogate loss into task cost; low supervised loss alone is insufficient.",
+        "The infinite-sample guarantee uses bounded strongly convex losses/no-regret and expert labeling on interaction policies; its exponentially decaying beta schedule ensures the averaged expert-use term vanishes. The plan now states Theorem 3.2’s epsilon_N and uT cost term.",
+        "Theorem 3.3 is a separate finite-sample statement: N=O(T^2 log(1/delta)), m=O(1), Azuma, and an induced-policy surrogate-loss deviation O(1/T). It is not the same as the task-cost guarantee."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S06",
+          "citation": "A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning — Stéphane Ross, Geoffrey J. Gordon, and J. Andrew Bagnell (2011)",
+          "url": "https://proceedings.mlr.press/v15/ross11a/ross11a.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/ross_gordon_bagnell_dagger_2011.pdf",
+          "pdf_sha256": "17bdd6e049e64f09010b322f9e2d4fb5c744c33ff7ac99b4c4561e39bd9082a7",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/ross_gordon_bagnell_dagger_2011.txt",
+          "full_text_sha256": "06d9b3b234c1c92682ae31186fcb4b96db7055c424dd564cb6607a45a6d6d233",
+          "read_status": "Full cached source was available; only the cited ranges are used for this pair. Source-dossier read coverage and proof gaps are retained.",
+          "role": "complete DAgger article, algorithms, source theorems and reduction proof",
+          "pair_audited_ranges": "Task-cost reduction and one-step cost-to-go condition, PDF pp. 2–3 (printed pp. 628–629); DAgger algorithm/expert mixing and Theorems 3.1–3.4, pp. 4–6 (printed pp. 630–632); online no-regret proof, pp. 6–8 (printed pp. 632–634)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-azuma-hoeffding-inequality",
+          "status": "published",
+          "contract": "Controls the finite-sample trajectory deviation only when the sampled increments are adapted and bounded with the source-matched widths; it does not supply the no-regret/task-cost reduction."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite horizon T; bounded strongly convex surrogate losses over the policy class; a no-regret online learner.",
+        "Expert labels are queried on states generated under the learner/expert-mixed policies; carry the source’s beta schedule.",
+        "One-step cost-to-go change is bounded by u and the surrogate dominates expert action disagreement for task-cost conversion."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the hybrid-policy telescoping identity and apply the cost-to-go/surrogate comparison at every state and time.",
+        "Show average expert mixing vanishes under beta_i<= (1-alpha)^(i-1), then combine with the online-regret guarantee.",
+        "For Theorem 3.3, prove the Azuma deviations with the exact number of sampled trajectories and bounded-loss range."
+      ]
+    },
+    {
+      "id": "ML-82",
+      "assessment": "audited_CPO_average_divergence_statement_and_missing_supplement_proof",
+      "plan_section_sha256": "507aae16ac07302b2dfc6b377d773c11266da514420e3b293d79f8acfbf4c8f8",
+      "findings": [
+        "Achiam et al.’s main paper displays Theorem 1’s residual, surrogate return-difference and average-TV correction, plus the TV-to-KL trust-region connection and Proposition 1.",
+        "Theorem 1’s proof is explicitly sent to the supplement and is absent from the cached main-paper PDF; neither source authority nor the statement alone discharges that proof. The plan retains it as a local proof/acquisition obligation.",
+        "The guarantee concerns expected discounted return/cost under an idealized update. The actual CPO implementation uses sampled linearization, conjugate gradient and line search; it is not pathwise safety or guaranteed safe exploration.",
+        "No published Pinsker interface was found in the assigned library scan; the finite-action TV/KL and Jensen step must be locally proved or separately supplied."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S07",
+          "citation": "Constrained Policy Optimization — Joshua Achiam, David Held, Aviv Tamar, and Pieter Abbeel (2017)",
+          "url": "https://proceedings.mlr.press/v70/achiam17a/achiam17a.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/achiam_cpo_2017.pdf",
+          "pdf_sha256": "738ba84a6cf3d6f947f91a467b13a3c888d908c050a0b9b58d097da22959a08f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/achiam_cpo_2017.txt",
+          "full_text_sha256": "d1b35f2f2fa0eff9364a9f8f7e43e2852c0862385e24a2db299abc3d01399c51",
+          "read_status": "The cached author/main-conference PDF is complete for the published 10-page paper. It does not contain the cited supplementary proof; no external supplement was silently assumed.",
+          "role": "complete CPO main paper; theorem statement, trust-region consequence and practical algorithm",
+          "pair_audited_ranges": "Theorem 1 average-divergence statement/definitions, PDF pp. 3–4; TV-to-KL/Pinsker comparison and trust-region Proposition 1, pp. 4–5; constrained update and practical sampled approximation, pp. 5–8. Full main paper PDF pp. 1–10 consulted; supplement not in cache and not audited."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-measure-kernel-and-probability-kernel",
+          "status": "published",
+          "contract": "Supplies finite transition/reward probability-kernel semantics for the CMDP."
+        },
+        {
+          "id": "thm-measurability-of-integration-against-a-kernel",
+          "status": "published",
+          "contract": "Supplies measurability of the finite kernel expectations used in the return and residual definitions."
+        },
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Supplies conditional expectation vocabulary; it does not prove the distribution-shift performance theorem."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite state/action sets; bounded rewards and costs; discount gamma in [0,1); normalized discounted occupancy from the fixed initial law.",
+        "For Theorem 1, policies pi/pi-prime and f with finite residual envelope epsilon_f; for the cost version apply the same statement to each cost return."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive the discounted performance-difference identity and state/distribution occupancy change estimate; the main-paper supplement proof is unavailable in the audited source.",
+        "Prove finite-action Pinsker TV<=sqrt(KL/2) and the Jensen averaging step, or later add a source-matched independent supplier.",
+        "Carry sampling and trust-region approximation errors before stating implementation consequences; no pathwise guarantee."
+      ]
+    },
+    {
+      "id": "ML-83",
+      "assessment": "audited_scalar_empirical_Bernstein_sequence_with_observed_predictable_forecast_errors",
+      "plan_section_sha256": "98dc3e87208461330d41816fb84be293af3fb67d6f196f3b12b9dbb29b2ffcff",
+      "findings": [
+        "Howard et al. Theorem 4 requires adapted observations in [a,b] and predictable forecasts in [a,b]. Its variance clock is observed V_t=sum_i(X_i-hatX_i)^2, not predictable conditional variance; its estimand mu_t is the average conditional mean and no common conditional mean is needed.",
+        "For a valid one-sided sub-exponential uniform boundary crossing alpha at scale b-a, the source’s two-sided all-times statement is P(for all t, |barX_t-mu_t|<u(V_t)/t)>=1-2alpha. Set alpha=delta/2 for nominal 1-delta.",
+        "Appendix A.8 constructs the scalar exponential supermartingale using the Fan inequality for residuals bounded below by -1. The source proof and theorem are inspected; the boundary may be supplied by upstream mixture/stitching only under product-measurability hypotheses.",
+        "Matrix results are excluded because the cited matrix supermartingale facts are not in this source."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S08",
+          "citation": "Time-uniform, nonparametric, nonasymptotic confidence sequences — Steven R. Howard, Aaditya Ramdas, Jon McAuliffe, and Jasjeet Sekhon (2022-08-09; arXiv:1810.08240v9)",
+          "url": "https://arxiv.org/pdf/1810.08240v9",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/howard_confidence_sequences_2018.pdf",
+          "pdf_sha256": "eb3efd547349adfbff25514ae0854c142cd29b96b398be38c9000d69a2f64ca8",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/howard_confidence_sequences_2018.txt",
+          "full_text_sha256": "ab97682241d37c4bb91ebaf8011a14867f661dac2fc050a1ed0937e7cab42239",
+          "read_status": "Full cached source was available; only the cited ranges are used for this pair. Source-dossier read coverage and proof gaps are retained.",
+          "role": "complete Howard et al. paper; scalar empirical-Bernstein theorem and full A.8 proof",
+          "pair_audited_ranges": "Theorem 4 and prediction/estimand definitions, PDF p. 14; complete scalar self-normalization proof, Appendix A.8, PDF p. 35. Full paper pp. 1–48 cached and consulted; theorem glyphs/formula bars checked against PDF page image in root integration source review."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-filtration-and-filtered-probability-space",
+          "status": "published",
+          "contract": "Provides the increasing sigma-algebra sequence F_t used for observation adaptedness and predictor measurability."
+        },
+        {
+          "id": "def-adapted-and-integrable-stochastic-process",
+          "status": "published",
+          "contract": "Provides adaptedness/integrability vocabulary for X_t and the exponential process; local proof must verify exponential integrability."
+        },
+        {
+          "id": "def-predictable-discrete-time-process",
+          "status": "published",
+          "contract": "A predictable scalar forecast at t is F_{t-1}-measurable, matching the source’s forecast premise."
+        },
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Supplies E[X_t|F_{t-1}] as an almost-sure class; it is the source estimand and Fan-supermartingale conditioning input."
+        },
+        {
+          "id": "thm-tower-property-of-conditional-expectation",
+          "status": "published",
+          "contract": "Allows iterated conditional expectation under its integrability hypotheses."
+        },
+        {
+          "id": "def-martingale-submartingale-and-supermartingale",
+          "status": "published",
+          "contract": "Supplies the integrable adapted conditional-inequality definition; the local exponential process must meet it at every step."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Adapted X_t in [a,b]; predictable forecast hatX_t in [a,b]; filtration and integrability for conditional centering.",
+        "A valid scalar sub-exponential uniform boundary with crossing alpha at scale c=b-a; upstream mixture requires product measurability and its supermartingale conditions.",
+        "If interpreting mu_t as one fixed common mean, additionally E[X_i|F_{i-1}]=mu for all i; this is not required for the source’s conditional-mean average."
+      ],
+      "future_proof_authoring_obligations": [
+        "Verify bounded residual X_t-hatX_t and the Fan inequality for xi>=-1, lambda in [0,1).",
+        "Derive the exponential supermartingale for each sign, then use the selected valid boundary and union bound to obtain the two-sided 1-2alpha statement.",
+        "Keep the observed squared forecast-error clock distinct from predictable conditional variance and exclude uninspected matrix results."
+      ],
+      "category3_supplier_contracts": [
+        {
+          "id": "MSF-34",
+          "status": "planned_category3_interface_not_published",
+          "contract": "Scalar test-supermartingale definition, Ville crossing inequality, mixture closure under product measurability/conditional Fubini, confidence-sequence definition and inversion."
+        },
+        {
+          "id": "SME-58",
+          "status": "planned_category3_interface_not_published",
+          "contract": "Discrete-time nonnegative test supermartingale and Ville boundary for null-uniform anytime validity."
+        },
+        {
+          "id": "SME-60",
+          "status": "planned_category3_interface_not_published",
+          "contract": "Sub-Gaussian mixture confidence sequence from a conditional MGF process; supplies mixture example/boundary, not the empirical-Bernstein self-normalization theorem."
+        }
+      ]
+    }
+  ],
+  "cross_category_constraints": [
+    "ML-83 consumes only planned independent Category 3 scalar Ville/mixture interfaces; it is not a supplier to any Category 3 work.",
+    "CPO (ML-82) remains Category 4; its missing proof is local/supplemental, not a prerequisite to Category 3."
+  ]
+}

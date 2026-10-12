@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-e-overlap-quotient-iteration-terminates-at-a-pure-blockade.md

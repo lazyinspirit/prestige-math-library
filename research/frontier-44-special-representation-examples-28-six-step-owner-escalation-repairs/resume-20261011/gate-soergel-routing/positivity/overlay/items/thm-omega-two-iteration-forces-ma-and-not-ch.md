@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-omega-two-iteration-forces-ma-and-not-ch.md

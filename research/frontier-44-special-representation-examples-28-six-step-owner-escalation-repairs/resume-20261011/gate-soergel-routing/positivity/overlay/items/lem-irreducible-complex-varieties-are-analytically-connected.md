@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-irreducible-complex-varieties-are-analytically-connected.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-pullback-is-a-homomorphism-of-de-rham-cohomology-algebras.md

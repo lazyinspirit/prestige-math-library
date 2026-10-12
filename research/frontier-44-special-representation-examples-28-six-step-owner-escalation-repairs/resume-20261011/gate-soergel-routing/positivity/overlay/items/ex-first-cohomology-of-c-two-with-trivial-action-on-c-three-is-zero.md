@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-first-cohomology-of-c-two-with-trivial-action-on-c-three-is-zero.md

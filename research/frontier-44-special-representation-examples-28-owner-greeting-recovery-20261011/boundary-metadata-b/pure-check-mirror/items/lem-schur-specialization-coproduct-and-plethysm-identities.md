@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-schur-specialization-coproduct-and-plethysm-identities.md

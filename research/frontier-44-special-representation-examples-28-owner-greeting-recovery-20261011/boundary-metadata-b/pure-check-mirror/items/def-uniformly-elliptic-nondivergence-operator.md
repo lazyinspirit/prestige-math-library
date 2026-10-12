@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-uniformly-elliptic-nondivergence-operator.md

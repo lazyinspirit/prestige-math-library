@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure.md

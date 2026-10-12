@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riesz-thorin-bound-on-the-finite-simple-core.md

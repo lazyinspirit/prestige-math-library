@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-invariant-hamiltonians-descend-to-reduced-hamiltonians.md

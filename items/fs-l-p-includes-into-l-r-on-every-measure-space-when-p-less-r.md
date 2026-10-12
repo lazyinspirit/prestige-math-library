@@ -42,8 +42,7 @@ $L^p\subseteq L^r$.
 
 1.1 Taking $p=1$ and $r=2$, [L1] already contradicts the claim. [L1]
 
-1.2 The reverse failure [L2] shows why the line supports neither global [L2]
-inclusion.
+1.2 The reverse failure [L2] shows why the line supports neither global [L2] inclusion. [L2]
 
-2.1 Hence the displayed universal inclusion statement is false. [step 1.1, step 1.2]
-∎
+2.1 Hence the displayed universal inclusion statement is false. [step 1.1, step 1.2] ∎
+

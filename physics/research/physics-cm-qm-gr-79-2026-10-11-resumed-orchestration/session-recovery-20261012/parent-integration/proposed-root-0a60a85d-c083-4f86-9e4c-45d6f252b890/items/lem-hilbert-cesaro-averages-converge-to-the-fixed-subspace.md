@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace.md

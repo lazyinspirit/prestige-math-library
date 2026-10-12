@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-compact-domain-maps-are-uniformly-continuous.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-semisimple-groups-are-perfect-and-have-no-nontrivial-characters.md

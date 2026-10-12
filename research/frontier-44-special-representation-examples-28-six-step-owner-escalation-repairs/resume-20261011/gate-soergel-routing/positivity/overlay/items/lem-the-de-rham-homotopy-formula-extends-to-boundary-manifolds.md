@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-de-rham-homotopy-formula-extends-to-boundary-manifolds.md

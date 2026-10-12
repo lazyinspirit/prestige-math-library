@@ -42,11 +42,8 @@ summand of a free abelian group is divisible, whereas $\mathbb Q$ is divisible.
 
 **Proof technique:** direct.
 
+ 1.1 Since $\mathbb Q$ is the localization of $\mathbb Z$ at the nonzero integers, [L1] gives that $\mathbb Q$ is flat over $\mathbb Z$. [L1, given]
 
-1.1 Since $\mathbb Q$ is the localization of $\mathbb Z$ at the nonzero integers, [L1] gives that $\mathbb Q$ is flat over $\mathbb Z$. [L1, given]
+ 1.2 Assume the Axiom of Choice. If $\mathbb Q$ were projective, [L3] would make it a direct summand of a free abelian group. Every direct summand of a free abelian group is reduced, while $\mathbb Q$ is nonzero and divisible. Hence $\mathbb Q$ is not projective. [L3, algebra]
 
-
-1.2 Assume the Axiom of Choice. If $\mathbb Q$ were projective, [L3] would make it a direct summand of a free abelian group. Every direct summand of a free abelian group is reduced, while $\mathbb Q$ is nonzero and divisible. Hence $\mathbb Q$ is not projective. [L3, algebra]
-
-
-2.1 Thus a fraction field can be flat without being projective. [algebra] ∎
+ 2.1 Thus a fraction field can be flat without being projective. [algebra] ∎ 

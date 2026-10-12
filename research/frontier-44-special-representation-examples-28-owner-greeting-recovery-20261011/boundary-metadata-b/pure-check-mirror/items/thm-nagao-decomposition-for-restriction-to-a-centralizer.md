@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nagao-decomposition-for-restriction-to-a-centralizer.md

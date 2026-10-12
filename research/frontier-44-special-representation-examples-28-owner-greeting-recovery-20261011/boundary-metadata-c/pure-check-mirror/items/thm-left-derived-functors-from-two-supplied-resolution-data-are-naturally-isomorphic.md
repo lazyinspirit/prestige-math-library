@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-left-derived-functors-from-two-supplied-resolution-data-are-naturally-isomorphic.md

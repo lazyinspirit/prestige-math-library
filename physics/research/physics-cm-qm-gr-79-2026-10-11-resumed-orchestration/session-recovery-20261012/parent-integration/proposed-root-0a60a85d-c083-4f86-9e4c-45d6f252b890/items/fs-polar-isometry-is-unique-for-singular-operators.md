@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-polar-isometry-is-unique-for-singular-operators.md

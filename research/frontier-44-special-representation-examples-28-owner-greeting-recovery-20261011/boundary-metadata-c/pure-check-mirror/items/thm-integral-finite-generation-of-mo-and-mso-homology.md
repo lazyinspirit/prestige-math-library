@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-integral-finite-generation-of-mo-and-mso-homology.md

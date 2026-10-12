@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-a-tilde-2-radical-vector-and-affine-slice.md

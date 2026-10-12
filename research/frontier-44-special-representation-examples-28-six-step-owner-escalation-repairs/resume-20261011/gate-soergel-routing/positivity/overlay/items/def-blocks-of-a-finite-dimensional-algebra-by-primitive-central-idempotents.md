@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents.md

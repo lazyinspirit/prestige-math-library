@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication.md

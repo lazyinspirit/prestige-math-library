@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-direct-sums-and-direct-summands-preserve-flatness.md

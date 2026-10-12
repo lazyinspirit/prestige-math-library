@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-class-group-of-q-sqrt-minus-five.md

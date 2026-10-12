@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-algebraic-symmetries-of-the-riemann-tensor.md

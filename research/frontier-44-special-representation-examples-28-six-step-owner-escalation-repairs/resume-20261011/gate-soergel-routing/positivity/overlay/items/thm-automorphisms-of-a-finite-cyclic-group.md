@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-automorphisms-of-a-finite-cyclic-group.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-image-of-a-smooth-embedding-is-an-embedded-submanifold.md

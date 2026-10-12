@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-ideal-divisibility-reverses-inclusion-dedekind.md

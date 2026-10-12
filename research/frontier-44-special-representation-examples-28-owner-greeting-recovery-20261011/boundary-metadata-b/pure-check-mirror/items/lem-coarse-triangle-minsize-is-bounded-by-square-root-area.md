@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-coarse-triangle-minsize-is-bounded-by-square-root-area.md

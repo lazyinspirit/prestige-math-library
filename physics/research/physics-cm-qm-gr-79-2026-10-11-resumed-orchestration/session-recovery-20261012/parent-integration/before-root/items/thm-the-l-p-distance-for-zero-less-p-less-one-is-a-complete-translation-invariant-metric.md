@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric.md

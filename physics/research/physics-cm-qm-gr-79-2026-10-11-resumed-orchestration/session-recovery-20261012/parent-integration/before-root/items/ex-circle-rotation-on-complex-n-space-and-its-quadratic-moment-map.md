@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map.md

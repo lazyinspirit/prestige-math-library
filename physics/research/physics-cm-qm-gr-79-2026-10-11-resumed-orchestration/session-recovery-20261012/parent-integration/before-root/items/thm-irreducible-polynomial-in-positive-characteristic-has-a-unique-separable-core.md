@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-irreducible-polynomial-in-positive-characteristic-has-a-unique-separable-core.md

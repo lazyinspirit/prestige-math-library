@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-partitions-with-at-most-k-parts-equal-parts-at-most-k.md

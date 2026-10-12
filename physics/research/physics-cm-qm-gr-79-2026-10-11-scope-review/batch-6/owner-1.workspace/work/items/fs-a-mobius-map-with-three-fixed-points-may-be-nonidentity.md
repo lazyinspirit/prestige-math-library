@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-mobius-map-with-three-fixed-points-may-be-nonidentity.md

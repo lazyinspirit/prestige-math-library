@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-pointwise-assignment-of-a-tangent-vector-is-a-smooth-vector-field.md

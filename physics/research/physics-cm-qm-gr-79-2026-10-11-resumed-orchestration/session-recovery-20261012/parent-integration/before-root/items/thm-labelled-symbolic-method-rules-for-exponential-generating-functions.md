@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-labelled-symbolic-method-rules-for-exponential-generating-functions.md

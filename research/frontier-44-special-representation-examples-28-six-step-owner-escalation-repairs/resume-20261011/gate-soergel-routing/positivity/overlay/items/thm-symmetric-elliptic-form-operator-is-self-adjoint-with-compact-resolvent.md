@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent.md

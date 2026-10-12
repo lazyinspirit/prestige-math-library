@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-morse-smale-height-function-on-a-tilted-torus.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-commuting-symmetric-and-linear-actions-on-tensor-power.md

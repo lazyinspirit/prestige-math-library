@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectral-theorem-for-compact-self-adjoint-operators.md

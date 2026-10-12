@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-invariant-and-stationary-distribution-for-a-markov-kernel.md

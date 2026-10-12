@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-clairaut-for-c2-potentials-by-rectangular-differences.md

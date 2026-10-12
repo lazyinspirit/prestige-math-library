@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-schwarzschild-static-congruence-and-clock-rates.md

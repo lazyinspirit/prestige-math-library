@@ -103,60 +103,12 @@ convex; on a closed subinterval its values lie below the chord
 
 ## Proof
 
-1.1 The energy identity. [F1, F6, given]
-Put $\varphi(t):=g_{\gamma(t)}(J(t),J(t))=|J(t)|^2$, a smooth nonnegative
-function on $I$. Differentiating twice along $\gamma$ and using [F1] gives
-$$\varphi'=2g(D_tJ,J),\qquad \varphi''=2g(D_t^2J,J)+2|D_tJ|^2=2|D_tJ|^2-2g(R(J,T)T,J).$$
-At an included endpoint the identity is read with one-sided derivatives, which
-is exactly the convention fixed by [F1]. [F1, F6, given]
+1.1 The energy identity. [F1, F6, given] Put $\varphi(t):=g_{\gamma(t)}(J(t),J(t))=|J(t)|^2$, a smooth nonnegative function on $I$. Differentiating twice along $\gamma$ and using [F1] gives $$\varphi'=2g(D_tJ,J),\qquad \varphi''=2g(D_t^2J,J)+2|D_tJ|^2=2|D_tJ|^2-2g(R(J,T)T,J).$$ At an included endpoint the identity is read with one-sided derivatives, which is exactly the convention fixed by [F1]. [F1, F6, given]
 
-2.1 The curvature term is nonpositive. [A1, F2, F5, F6, step 1.1]
-Write $f:=g(J,T)$ and split $J=fT+J^\perp$ with $g(J^\perp,T)=0$; this is an
-orthogonal decomposition of the tangent space at each point because $|T|=1$ by
-[F6]. Linearity of $R$ in its first slot and [F5] give
-$R(J,T)T=R(J^\perp,T)T+fR(T,T)T=R(J^\perp,T)T$. Moreover [F5] gives
-$g(R(J^\perp,T)T,T)=0$, so
-$$g(R(J,T)T,J)=g(R(J^\perp,T)T,J^\perp)+f\,g(R(J^\perp,T)T,T)=g(R(J^\perp,T)T,J^\perp).$$
-At a time $t$ with $J^\perp(t)=0$ both sides vanish. At a time with
-$J^\perp(t)\neq0$, the vectors $J^\perp(t)$ and $T(t)$ are orthogonal and
-nonzero, so $\sigma_t:=\operatorname{span}(J^\perp(t),T(t))$ is a tangent
-two-plane, and [F2] applied with $X=J^\perp(t)$ gives
-$$g(R(J^\perp,T)T,J^\perp)=\operatorname{Rm}(J^\perp,T,T,J^\perp)=K(\sigma_t)\,|J^\perp(t)|^2\le0.$$
-Thus $g(R(J,T)T,J)\le0$ at every $t\in I$, and step 1.1 yields
-$\varphi''\ge2|D_tJ|^2\ge0$. [A1, F2, F5, F6, step 1.1]
+2.1 The curvature term is nonpositive. [A1, F2, F5, F6, step 1.1] Write $f:=g(J,T)$ and split $J=fT+J^\perp$ with $g(J^\perp,T)=0$; this is an orthogonal decomposition of the tangent space at each point because $|T|=1$ by [F6]. Linearity of $R$ in its first slot and [F5] give $R(J,T)T=R(J^\perp,T)T+fR(T,T)T=R(J^\perp,T)T$. Moreover [F5] gives $g(R(J^\perp,T)T,T)=0$, so $$g(R(J,T)T,J)=g(R(J^\perp,T)T,J^\perp)+f\,g(R(J^\perp,T)T,T)=g(R(J^\perp,T)T,J^\perp).$$ At a time $t$ with $J^\perp(t)=0$ both sides vanish. At a time with $J^\perp(t)\neq0$, the vectors $J^\perp(t)$ and $T(t)$ are orthogonal and nonzero, so $\sigma_t:=\operatorname{span}(J^\perp(t),T(t))$ is a tangent two-plane, and [F2] applied with $X=J^\perp(t)$ gives $$g(R(J^\perp,T)T,J^\perp)=\operatorname{Rm}(J^\perp,T,T,J^\perp)=K(\sigma_t)\,|J^\perp(t)|^2\le0.$$ Thus $g(R(J,T)T,J)\le0$ at every $t\in I$, and step 1.1 yields $\varphi''\ge2|D_tJ|^2\ge0$. [A1, F2, F5, F6, step 1.1]
 
-3.1 $\varphi$ is convex. [F7, step 2.1]
-By step 2.1 the second derivative of the $C^2$ function $\varphi$ is
-nonnegative on the interior of $I$; at included endpoints the one-sided
-second derivatives exist and are nonnegative as well. Hence by [F7] the
-function $\varphi$ is convex on $I$: for $s<t<u$ in $I$,
-$$\varphi(t)\le\frac{u-t}{u-s}\,\varphi(s)+\frac{t-s}{u-s}\,\varphi(u).$$
-[F7, step 2.1]
+3.1 $\varphi$ is convex. [F7, step 2.1] By step 2.1 the second derivative of the $C^2$ function $\varphi$ is nonnegative on the interior of $I$; at included endpoints the one-sided second derivatives exist and are nonnegative as well. Hence by [F7] the function $\varphi$ is convex on $I$: for $s<t<u$ in $I$, $$\varphi(t)\le\frac{u-t}{u-s}\,\varphi(s)+\frac{t-s}{u-s}\,\varphi(u).$$ [F7, step 2.1]
 
-4.1 Vanishing at two times forces $J\equiv0$. [F4, F7, step 3.1, given]
-Assume $J(0)=0$ and $J(t_1)=0$ with $t_1>0$. Then
-$\varphi(0)=\varphi(t_1)=0$, and $\varphi\ge0$ because it is a squared norm.
-Applying the convexity inequality of step 3.1 with $s=0$, $u=t_1$ gives
-$\varphi(t)\le0$, hence $\varphi(t)=0$ and $J(t)=0$, for every $t\in[0,t_1]$;
-so $J$ vanishes identically on $[0,t_1]$. Choose $t_0\in(0,t_1)$. Then
-$J(t_0)=0$, and since $J$ is identically zero on an interval around $t_0$, also
-$D_tJ(t_0)=0$. By the uniqueness statement of [F4] the zero field is the only
-Jacobi field with these initial data, so $J\equiv0$ on all of $I$. [F4, F7, step 3.1, given]
+4.1 Vanishing at two times forces $J\equiv0$. [F4, F7, step 3.1, given] Assume $J(0)=0$ and $J(t_1)=0$ with $t_1>0$. Then $\varphi(0)=\varphi(t_1)=0$, and $\varphi\ge0$ because it is a squared norm. Applying the convexity inequality of step 3.1 with $s=0$, $u=t_1$ gives $\varphi(t)\le0$, hence $\varphi(t)=0$ and $J(t)=0$, for every $t\in[0,t_1]$; so $J$ vanishes identically on $[0,t_1]$. Choose $t_0\in(0,t_1)$. Then $J(t_0)=0$, and since $J$ is identically zero on an interval around $t_0$, also $D_tJ(t_0)=0$. By the uniqueness statement of [F4] the zero field is the only Jacobi field with these initial data, so $J\equiv0$ on all of $I$. [F4, F7, step 3.1, given]
 
-5.1 Consequences and boundary cases. [F3, F4, step 4.1]
-A nonzero Jacobi field with $J(0)=0$ therefore has no positive zero in $I$.
-For a general conjugate pair $t_1<t_2$ in $I$, the shifted curve
-$\tilde\gamma(s):=\gamma(t_1+s)$ is again a unit-speed geodesic, the shifted
-field $\tilde J(s):=J(t_1+s)$ is again Jacobi, and $\tilde J(0)=0$; if a
-nonzero Jacobi field vanished at both $t_1$ and $t_2$ then step 4.1 would force
-it to vanish identically, contradicting [F3]. So no two distinct points of $I$
-are conjugate along $\gamma$, and by the same shift argument with $\gamma$
-reversed the conclusion is symmetric in the two endpoints. If $\gamma$ is
-constant, [F3] already gives the conclusion and $J$ is affine in the fixed tangent space, so
-the claim holds. If $M$ has dimension $0$ the only field is $0$. If $M$ has
-dimension $1$, then $J^\perp\equiv0$ and step 2.1 reduces to
-$\varphi''=2|D_tJ|^2\ge0$, so the same convexity argument applies without any
-two-plane. If $0$ or $t_1$ is an included endpoint of $I$, the second
-derivative in step 1.1 is one-sided and is nonnegative by step 2.1, and the
-convexity inequality of [F7] is applied on the closed interval $[0,t_1]$;
-nothing changes. [F3, F4, step 4.1] ∎
+5.1 Consequences and boundary cases. [F3, F4, step 4.1] A nonzero Jacobi field with $J(0)=0$ therefore has no positive zero in $I$. For a general conjugate pair $t_1<t_2$ in $I$, the shifted curve $\tilde\gamma(s):=\gamma(t_1+s)$ is again a unit-speed geodesic, the shifted field $\tilde J(s):=J(t_1+s)$ is again Jacobi, and $\tilde J(0)=0$; if a nonzero Jacobi field vanished at both $t_1$ and $t_2$ then step 4.1 would force it to vanish identically, contradicting [F3]. So no two distinct points of $I$ are conjugate along $\gamma$, and by the same shift argument with $\gamma$ reversed the conclusion is symmetric in the two endpoints. If $\gamma$ is constant, [F3] already gives the conclusion and $J$ is affine in the fixed tangent space, so the claim holds. If $M$ has dimension $0$ the only field is $0$. If $M$ has dimension $1$, then $J^\perp\equiv0$ and step 2.1 reduces to $\varphi''=2|D_tJ|^2\ge0$, so the same convexity argument applies without any two-plane. If $0$ or $t_1$ is an included endpoint of $I$, the second derivative in step 1.1 is one-sided and is nonnegative by step 2.1, and the convexity inequality of [F7] is applied on the closed interval $[0,t_1]$; nothing changes. [F3, F4, step 4.1] ∎ 

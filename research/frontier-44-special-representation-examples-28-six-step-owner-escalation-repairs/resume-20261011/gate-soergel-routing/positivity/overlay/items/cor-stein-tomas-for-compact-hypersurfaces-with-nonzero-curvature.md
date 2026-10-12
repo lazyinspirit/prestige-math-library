@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-stein-tomas-for-compact-hypersurfaces-with-nonzero-curvature.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-generated-ideal-description-in-a-commutative-ring.md

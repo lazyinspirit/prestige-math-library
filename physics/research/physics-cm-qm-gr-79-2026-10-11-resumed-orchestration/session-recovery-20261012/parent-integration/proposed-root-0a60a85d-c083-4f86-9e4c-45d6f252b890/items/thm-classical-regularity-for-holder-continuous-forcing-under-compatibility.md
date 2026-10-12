@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-regularity-for-holder-continuous-forcing-under-compatibility.md

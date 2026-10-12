@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-closed-subspaces-of-paracompact-spaces.md

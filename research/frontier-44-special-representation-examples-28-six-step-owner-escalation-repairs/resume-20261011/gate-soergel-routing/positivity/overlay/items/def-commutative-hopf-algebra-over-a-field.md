@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-commutative-hopf-algebra-over-a-field.md

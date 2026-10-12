@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-complete-manifold-with-zero-global-injectivity-radius.md

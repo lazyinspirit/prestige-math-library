@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-convex-functions-on-open-convex-sets-are-locally-lipschitz.md

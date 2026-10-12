@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-young-permutation-characteristic-for-shape-two-one.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-pontryagin-square-equals-mixed-evaluation.md

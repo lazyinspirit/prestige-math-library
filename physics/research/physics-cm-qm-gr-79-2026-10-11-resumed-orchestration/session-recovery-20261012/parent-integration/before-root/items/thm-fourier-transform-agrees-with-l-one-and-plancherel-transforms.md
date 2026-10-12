@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-transform-agrees-with-l-one-and-plancherel-transforms.md

@@ -1,0 +1,18 @@
+import {readFileSync,writeFileSync,existsSync,mkdirSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadStep3} from '../tools/step3-decisions.mjs';
+import {recordStep1} from '../tools/step1-decisions.mjs';
+const run='frontier-44-special-representation-examples-28',root=process.cwd(),dir=`research/${run}-owner-current-holds-20261010`;
+if(existsSync(dir))throw Error('Existing hold receipt: inspect rather than repeat');mkdirSync(dir);
+const sha=b=>createHash('sha256').update(b).digest('hex');
+const source25=`research/${run}-owner-native24-cyclotomic-consumer-review/native25-consumer-review/confirmed-supplier-use-findings-first-pass.json`;
+const source20=`research/${run}-owner-cell-head-classification-repair/source20-round2-final-guarded-candidate.json`;
+const f25=JSON.parse(readFileSync(source25)),f20=JSON.parse(readFileSync(source20));
+const snapshot=loadStep3(root,run), jobs=new Map();
+for(const f of f25.confirmed_findings)jobs.set(f.id,{scope:'native25-ariki-cyclotomic-actual-consumer-contract-defects',round:1,evidence:source25,reason:f.defect});
+for(const id of ['lem-standard-fock-vectors-expand-in-the-upper-global-basis','cor-graded-specht-classes-form-a-basis-of-the-module-grothendieck-group'])jobs.set(id,{scope:'native25-ariki-cyclotomic-actual-consumer-contract-defects',round:1,evidence:`research/${run}-owner-native24-cyclotomic-consumer-review/root-quantum25-consumer-review/typed-handoff.json`,reason:'Projection and upper dual lattice require explicit typed comparison in current first repair.'});
+for(const p of f20.patches)jobs.set(p.id,{scope:f20.stable_scope,round:2,evidence:source20,reason:'Final source20 candidate explicitly HOLD pending ordinary DJ/polytabloid bridge and actual consumer sufficiency.'});
+for(const id of jobs.keys())if(!snapshot.items.has(id))throw Error(`Missing actual subject ${id}`);
+const guards=[source20,source25,...[20,25].map(n=>`research/${run}-batch-${n}.pages.json`)].map(path=>({path,sha256:sha(readFileSync(path))}));
+const verify=()=>{for(const g of guards)if(sha(readFileSync(g.path))!==g.sha256)throw Error(`Guard changed ${g.path}`)};
+const rows=[];for(const [id,j] of jobs){verify();const path=`research/${run}-step1-${id}.json`;if(existsSync(path))writeFileSync(`${dir}/${id}.before.json`,readFileSync(path),{flag:'wx'});const deps=snapshot.items.get(id).item.deps??[];const row=recordStep1(root,{run,item:id,decision:'escalated',owner:true,dependencies:deps,reason:`Stable ${j.scope}, repair${j.round}/max2; ${j.reason} Evidence: ${j.evidence}`});rows.push({id,...j,row});console.log(`Held ${rows.length}/${jobs.size}: ${id}`)}verify();writeFileSync(`${dir}/registration.json`,JSON.stringify({run,at:new Date().toISOString(),guards,rows,gate_attempt:false,math_item_changes:false},null,2)+'\n',{flag:'wx'});

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-ascending-hnn-extension-from-doubling-the-integers.md

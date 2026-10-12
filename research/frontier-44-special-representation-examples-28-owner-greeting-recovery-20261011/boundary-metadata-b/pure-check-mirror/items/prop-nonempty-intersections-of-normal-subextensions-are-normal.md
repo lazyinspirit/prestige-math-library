@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-nonempty-intersections-of-normal-subextensions-are-normal.md

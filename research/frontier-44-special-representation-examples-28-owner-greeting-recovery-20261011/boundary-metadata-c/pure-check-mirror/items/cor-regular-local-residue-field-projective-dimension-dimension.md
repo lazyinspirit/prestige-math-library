@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-regular-local-residue-field-projective-dimension-dimension.md

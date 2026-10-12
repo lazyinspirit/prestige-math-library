@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "at": "2026-10-12T02:19:53.987371+00:00",
+  "outside_review_repair_cycle": 1,
+  "maximum_cycles": 2,
+  "commit": "a3a54e255",
+  "defects": [
+    {
+      "id": "scope-cli-symlink-noop",
+      "confirmed_defect": "Main guard compared a symlink argv path against real import URL, so documented physics scope check/owner-resolve commands exited without executing",
+      "affected_consumers": [
+        "2-scope-review batch-scope-review gate",
+        "native owner hold resolution CLI"
+      ],
+      "smallest_missing_prerequisite": "Real-path CLI entrypoint comparison",
+      "repair": "Resolve argv[1] with realpathSync before main URL comparison"
+    },
+    {
+      "id": "scope-repairer-preflight-job",
+      "confirmed_defect": "Native scope-repairer plan declared unrecognized cognitive job repair and dispatch preflight refused it before any process attempt",
+      "affected_consumers": [
+        "scope-repair-35-1",
+        "all native Step2 scope repairer plans"
+      ],
+      "smallest_missing_prerequisite": "Existing supported cognitive job declaration",
+      "repair": "Use existing authoring job; retain native role, scope, profile and bounded history"
+    }
+  ],
+  "tests": {
+    "command": [
+      "node",
+      "tools/tsx-run.mjs",
+      "--test",
+      "tools/physics-autopilot/test/construction-scope-workflow.test.mts"
+    ],
+    "tests": 24,
+    "pass": 24,
+    "fail": 0,
+    "exit_code": 0
+  },
+  "typecheck": {
+    "full_command": [
+      "npm",
+      "--prefix",
+      "tools/physics-autopilot",
+      "run",
+      "typecheck"
+    ],
+    "full_exit_code": 2,
+    "preexisting_untracked_failure": "test/content-policy-authored.test.mts:60 TS2345 readonly fixture manifests incompatible with mutable any[]",
+    "tracked_engine_exit_code": 0,
+    "tracked_engine_scope": "Original tsconfig with only existing untracked content-policy-authored.test.mts excluded; temporary config deleted after compilation"
+  },
+  "scope": "Physics-private code and regression tests/docs only; mathematics engine unchanged; all imported content read-only",
+  "activation": "Same-state restart at authenticated no-native/adopted-writer boundary; new detached controller254808",
+  "native_history_reset": false,
+  "gates_skipped": false,
+  "published_or_pushed": false
+}

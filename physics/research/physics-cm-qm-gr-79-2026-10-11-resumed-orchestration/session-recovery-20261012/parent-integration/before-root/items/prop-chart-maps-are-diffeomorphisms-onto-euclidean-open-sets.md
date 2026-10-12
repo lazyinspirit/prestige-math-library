@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets.md

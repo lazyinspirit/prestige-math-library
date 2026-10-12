@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-git-quotient-from-invariant-section-ring.md

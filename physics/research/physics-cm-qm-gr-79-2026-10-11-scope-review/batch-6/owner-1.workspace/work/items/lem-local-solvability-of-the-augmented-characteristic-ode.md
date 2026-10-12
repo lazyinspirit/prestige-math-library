@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-solvability-of-the-augmented-characteristic-ode.md

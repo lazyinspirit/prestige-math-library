@@ -1,0 +1,1138 @@
+[
+  {
+    "order": 143,
+    "id": "cm16-stability-perturbations-and-chaos",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Stability, perturbations and chaos",
+    "companion": "cm16-stability-perturbations-and-chaos-examples",
+    "requires": [
+      "cm-math-chaos",
+      "cm-math-kam",
+      "cm09-coupled-oscillations-and-approximation",
+      "cm14-hamilton-jacobi-and-integrability",
+      "cm02-forces-initial-data-and-newtonian-flow",
+      "cm-math-dynamics",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-geometry",
+      "cm-math-approximation",
+      "cm13-symplectic-geometry-and-canonical-methods"
+    ],
+    "items": [
+      {
+        "id": "def-cm16-flow-equilibria-and-invariant-sets",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The model vocabulary of stability and chaos: the associated flow of a declared force model, equilibria, periodic and homoclinic orbits, and invariant sets",
+        "statement": "This item fixes the vocabulary in which the stability, perturbation and chaos\nstatements of this page are phrased. All objects below are model data; nothing\nhere is a measured value, and no clause asserts that a particular model has an\nequilibrium, a periodic orbit or an invariant set.\n\n**(i) The model class.** A **stability model** is a force model of\n[[post-cm02-force-superposition]] with $N\\ge1$ labels, fixed masses\n$m_1,\\dots,m_N>0$ ([[post-cm01-worldlines]] clause (v)), a time window\n$I_0\\subseteq\\mathbb R$ with nonempty interior and an open configuration\ndomain $Q\\subseteq\\mathbb R^{3N}$ ([[def-cm01-configuration]]). Its full force\nmap $F_0$ has domain\n$D_0:=I_0\\times Q\\times\\mathbb R^{3N}$, exactly as in clause (iii) of\n[[post-cm02-force-superposition]]. The page may specify an open restriction\ndomain $D\\subseteq D_0$ and then uses $F:=F_0|_D$; every force evaluation in\nthe statements below is on this restriction. This is still a restriction of\nthe supplier's full force map, not a force map with a different domain. The\n**motions** are the $C^2$ curves $x:J\\to Q$ of [[def-cm02-newtonian-flow]]\nfor which $(t,x(t),x'(t))\\in D$ and\n$m_ix_i''(t)=F_i(t,x(t),x'(t))$. For a proper restriction $D$, call such a\nmotion **$D$-maximal** when it has no extension to a strictly larger interval\nwhose state curve remains in $D$; this is the maximal-solution notion for the\nfirst-order ODE $z'=Z(t,z)$ on the open domain $D$\n([[def-first-order-ode-initial-value-problem-and-solution]],\n[[def-maximal-ode-solution]]). A $D$-maximal motion is a restriction of a\nsupplier motion of the full force model, but its maximal interval need not be\nmaximal for the full domain $D_0$. The model is **autonomous** when\n$I_0=\\mathbb R$, $D=\\mathbb R\\times S_0$ for an open **state domain**\n$S_0\\subseteq Q\\times\\mathbb R^{3N}$, and $F$ is independent of $t$. It is\n**$P$-periodic**, for $P>0$, when $I_0=\\mathbb R$, $D$ is invariant under\n$(t,x,v)\\mapsto(t+P,x,v)$ in both directions, and\n$F(t+P,x,v)=F(t,x,v)$ on $D$. Thus every integer shift by $P$ preserves the\ntime and state domain used by the model. All time intervals use the frame-time\nparameter fixed by [[def-cm01-velocity-acceleration]] with $[t]=\\tau$\n([[def-cm01-units]]).\n\n**(ii) Associated field and flow.** Write $n:=3N$,\n$\\mathsf M:=\\operatorname{diag}(m_1I_3,\\dots,m_NI_3)$, and let\n$$Z(t,x,v):=\\bigl(v,\\ \\mathsf M^{-1}F(t,x,v)\\bigr)$$\nbe the **associated first-order field** of the model, on the same domain $D$;\nthe state curve $z:=(x,x')$ of a motion is a solution of $z'=Z(t,z)$ and\nconversely ([[def-cm02-newtonian-flow]] clause (c)). For an autonomous model\nwrite $G:S_0\\to\\mathbb R^{6N}$, $G(x,v):=(v,\\mathsf M^{-1}F(x,v))$; by the\nstanding regularity of $F$, the field $G$ is continuous and locally Lipschitz\nin the state, so it has a **local flow**\n$$\\Phi:\\Omega\\longrightarrow S_0,\\qquad \\Phi(t,z_0):=z(t;z_0),$$\nwith maximal solutions $z(\\,\\cdot\\,;z_0):I_{z_0}\\to S_0$ and flow domain\n$\\Omega=\\{(t,z_0):t\\in I_{z_0}\\}$, in the sense of\n[[def-cm-local-flow-of-an-autonomous-system]]. The model's motions with state\ncurve through $z_0$ at time $0$ are exactly the curves $t\\mapsto\\Phi(t,z_0)$\nrestricted to their maximal intervals, and\n$\\Phi(s+t,z_0)=\\Phi(t,\\Phi(s,z_0))$ wherever both sides are defined\n([[lem-cm-local-flow-composition-law]]). If in addition $F$ is of class $C^1$\nin the state, then $\\Omega$ is open and $\\Phi$ is $C^1$ on it\n([[cor-cm-flow-domain-open-and-flow-is-c1]]). No completeness of $\\Phi$ is\nasserted: the maximal interval $I_{z_0}$ may be bounded\n([[def-cm02-newtonian-flow]]).\n\n**(iii) Equilibria and periodic orbits.** A state $z_*=(x_*,v_*)\\in S_0$ is an\n**equilibrium state** of the autonomous model when $G(z_*)=0$, that is\n$v_*=0$ and $F(x_*,0)=0$; under that condition the constant curve\n$x(t)=x_*$ is a motion. A **periodic motion** of the model is a nonconstant\nmotion $x:\\mathbb R\\to Q$ satisfying $x(t+T)=x(t)$ for every\n$t\\in\\mathbb R$ and some $T>0$; the least such positive $T$ is its **least\nperiod**. Its state curve is $z(t):=(x(t),x'(t))$, and its **state orbit** is\n$\\Gamma_z:=\\{z(t):t\\in\\mathbb R\\}\\subseteq S_0$. A **periodic orbit** or\n**closed orbit** means this state orbit. A **limit cycle** is an isolated\nperiodic orbit: there is an open set $U\\subseteq S_0$ with\n$\\Gamma_z\\subseteq U$ such that every periodic orbit $\\Gamma_{\\widetilde z}$\nof this model satisfying $\\Gamma_{\\widetilde z}\\subseteq U$ equals\n$\\Gamma_z$. Thus $U$ contains no other periodic orbit as a whole; an orbit\nthat merely passes through $U$ is not excluded. A limit cycle's attraction is\na separate property and is not part of this definition.\n\n**(iv) Invariant sets.** A set $S\\subseteq S_0$ is **invariant** for the\nautonomous model when $(t,z)\\in\\Omega$ for every $z\\in S$ and every\n$t\\in\\mathbb R$, and $\\Phi_t(S)=S$ for all $t\\in\\mathbb R$, where\n$\\Phi_t(z):=\\Phi(t,z)$; it is **forward invariant** when $(t,z)\\in\\Omega$ for\nevery $z\\in S$, $t\\ge0$, and $\\Phi_t(S)\\subseteq S$ for every $t\\ge0$. The\n**orbital distance** from a state $z$ to a nonempty set $S$ is\n$$d(z,S):=\\inf_{s\\in S}\\lVert z-s\\rVert_2,$$\nwith the Euclidean norm of [[def-euclidean-inner-product]] on the state\nchart.\n\n**(v) Homoclinic and heteroclinic orbits.** A nonconstant motion with state\ncurve $z$ is **homoclinic to** an equilibrium state $z_*$ when $z(t)\\to z_*$ as\n$t\\to+\\infty$ and as $t\\to-\\infty$, and is **heteroclinic from $z_-$ to\n$z_+$** for distinct equilibrium states $z_-,z_+$ when $z(t)\\to z_-$ as\n$t\\to-\\infty$ and $z(t)\\to z_+$ as $t\\to+\\infty$. Both are limit relations\nof the model's motions, not intersections of separately constructed geometric\nobjects; the differentiability of the associated stable and unstable sets is\nnot asserted here.\n\n**(vi) Reading conventions.** (a) The vocabulary is attached to the declared\nmodel class; equilibria, periodic orbits, invariant sets and homoclinic orbits\nare model objects, and no clause asserts that a physical system is exactly a\nstability model or realises any of these objects. (b) The state space is\nwritten in a Cartesian chart. If a $C^2$ chart transition $h$ changes an\nautonomous field from $G$ to $\\widetilde G(h(z))=Dh(z)G(z)$, then at an\nequilibrium $z_*$ its derivative satisfies\n$D\\widetilde G(h(z_*))=Dh(z_*)DG(z_*)Dh(z_*)^{-1}$: the term differentiating\n$Dh$ vanishes because $G(z_*)=0$. Thus the linearization spectrum at an\nequilibrium is chart-invariant. Norms, matrix entries and quantitative growth\nbounds can still depend on the chart; the underlying motions, equilibria,\nperiodic orbits, invariant sets and their asymptotic properties do not change\nunder a valid coordinate description.",
+        "strategy": "A vocabulary item: the model class, its associated field and local flow with maximal solutions, equilibrium states, periodic orbits and limit cycles, invariant sets and orbital distance, and homoclinic and heteroclinic orbits.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-maximal-ode-solution",
+          "lem-cm-local-flow-composition-law",
+          "cor-cm-flow-domain-open-and-flow-is-c1",
+          "def-cm01-units",
+          "def-cm01-configuration",
+          "post-cm01-worldlines",
+          "def-cm01-velocity-acceleration",
+          "def-euclidean-inner-product",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "lem-cm-local-flow-composition-law": "mathematical-premise",
+          "cor-cm-flow-domain-open-and-flow-is-c1": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The model vocabulary of the page's stability, perturbation and chaos statements: force models of the framework with an open configuration domain, fixed positive masses and continuous state-locally-Lipschitz force maps, including explicitly stated open restrictions of the full force-map domain; their associated first-order fields and local flows with maximal solutions; equilibrium states (vanishing force at rest); periodic orbits and limit cycles; invariant and forward-invariant sets; orbital distance; and nonconstant homoclinic and heteroclinic motions. Periodic restriction domains are invariant under shifts by the forcing period. All objects are declared model data; the item asserts no measurement, no existence of any particular equilibrium or periodic orbit, and no stability of any listed object.",
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.2 equilibrium and stability discussion and Chapter 9 'Chaos', including the phase-plane and periodic-orbit notions",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 (perturbations) and Chapter 7 (stability and chaos), including the equilibrium, fixed-point and flow notions",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 (return maps, stable and unstable sets, tangles) and §6.3 (flows and formal series)",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "def-cm16-stability-and-hyperbolicity-concepts",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Stability vocabulary of the model: Lyapunov, asymptotic and orbital stability, linear stability of equilibria and periodic orbits, and hyperbolicity of equilibria and fixed points",
+        "statement": "This item attaches stability predicates to two explicitly stated model\nclasses. **(a) Framework force models:** an autonomous model of\n[[def-cm16-flow-equilibria-and-invariant-sets]] clauses (i)-(ii), with open\nstate domain $S_0\\subseteq\\mathbb R^{6N}$, associated field\n$G:S_0\\to\\mathbb R^{6N}$ and its maximal-solution local flow\n$\\Phi:\\Omega\\to S_0$ ([[def-cm-local-flow-of-an-autonomous-system]]).\n**(b) Mechanical chart models:** the data $(\\Omega,M,U)$ of\n[[def-cm-mechanical-vector-field-and-energy-in-a-chart]], where\n$\\Omega\\subseteq\\mathbb R^n$ is open, $M$ is a $C^2$ positive-definite\nmatrix field, and $U$ is $C^2$; here the state domain is\n$S_0:=\\Omega\\times\\mathbb R^n$, the state dimension is $m:=2n$, and the\nassociated mechanical field is $G:S_0\\to\\mathbb R^m$. It is $C^1$, hence\ncontinuous and locally Lipschitz, and has the local flow and maximal solutions\nof [[def-cm-local-flow-of-an-autonomous-system]]. For class (a) only the\nstanding continuous, state-locally-Lipschitz regularity is required for\nclauses (i)-(ii); clauses (iii)-(iv) add $C^1$ regularity explicitly. In each\napplication the predicates concern the declared model objects and quantify\nover its maximal solutions; the two model classes are not being identified.\n\n**(i) Lyapunov and asymptotic stability.** Let $z_*\\in S_0$ be an equilibrium\nstate. The state $z_*$ is **Lyapunov stable** when for every Euclidean ball\n$B_\\varepsilon(z_*)$ with $\\overline{B_\\varepsilon(z_*)}\\subseteq S_0$\n([[def-metric-ball]]) there is $\\delta\\in(0,\\varepsilon]$ such that every\nmaximal solution $z$ with $\\lVert z(0)-z_*\\rVert_2<\\delta$ is defined for all\n$t\\ge0$ and satisfies $\\lVert z(t)-z_*\\rVert_2<\\varepsilon$ for all $t\\ge0$.\nIt is **asymptotically stable** when it is Lyapunov stable and there is\n$\\delta_0>0$ such that every maximal solution with\n$\\lVert z(0)-z_*\\rVert_2<\\delta_0$ is defined for all $t\\ge0$ and converges to\n$z_*$ as $t\\to\\infty$. This is the definition of\n[[def-cm-equilibrium-and-lyapunov-stability]] clauses 1-2, applied to the\nautonomous field $G$ on $S_0$; it is recorded here to fix the exact\nquantifier order and the requirement that the solutions are defined for all\n$t\\ge0$. A state that is not Lyapunov stable is **unstable**.\n\n**(ii) Orbital stability of an invariant set.** Let $S\\subseteq S_0$ be a\nnonempty compact set invariant under the selected model's local flow $\\Phi$;\nthat is, $(t,z)\\in\\Omega$ for every $z\\in S$ and $t\\in\\mathbb R$, and\n$\\Phi_t(S)=S$ for every $t\\in\\mathbb R$. For the framework force-model\nclass this is clause (iv) of\n[[def-cm16-flow-equilibria-and-invariant-sets]]. The Euclidean orbital\ndistance is $d(z,S):=\\inf_{s\\in S}\\lVert z-s\\rVert_2$. Then $S$ is\n**orbitally stable** when for every open set\n$U\\supseteq S$ there is an open set $V$ with $S\\subseteq V\\subseteq U$ such\nthat every maximal solution $z$ with $z(0)\\in V$ is defined for all $t\\ge0$\nand satisfies $z(t)\\in U$ for all $t\\ge0$. Orbital stability is a statement\nabout the set, not about one motion, and it does not assert attraction.\n\n**(iii) Linear stability of an equilibrium.** Suppose the field $G$ of the\nchosen model is of class $C^1$ on its state domain $S_0$, so that its local\nflow is $C^1$ and $DG(z_*)$ exists. Write $m:=\\dim S_0$. For each initial\ndeviation $u\\in\\mathbb R^m$, let $\\eta_u:[0,\\infty)\\to\\mathbb R^m$ be the unique\nsolution of the constant-coefficient variational equation\n$$\\eta_u'(t)=DG(z_*)\\eta_u(t),\\qquad \\eta_u(0)=u$$\n([[def-variational-equation-along-an-ode-solution]], with the constant\nsolution $z(t)=z_*$ as the reference motion). The equilibrium $z_*$ is\n**linearly stable** when\n$\\sup_{t\\ge0}\\lVert\\eta_u(t)\\rVert_2<\\infty$ for every $u$; it is\n**linearly unstable** if this norm is unbounded as $t\\to\\infty$ for some\n$u$. This is a statement about the linear variational equation and is distinct\nfrom the nonlinear Lyapunov and asymptotic predicates in clause (i).\n\n**(iv) Hyperbolicity of an equilibrium.** Let $z_*$ be an equilibrium state\nof the chosen autonomous model whose associated field $G$ is $C^1$ on $S_0$,\nand let $DG(z_*)$ be its derivative. Then $z_*$ is\n**hyperbolic** when no complex eigenvalue of $DG(z_*)$\n([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) has real part $0$;\nthe eigenvalues are those of the matrix of $DG(z_*)$ in the state chart. The\nharmonic oscillator equilibrium of a one-dimensional model with a positive\nstiffness has the purely imaginary eigenvalues $\\pm i\\omega$ and is therefore\nnot hyperbolic; the saddle of a repulsive linear model has the real\neigenvalues $\\pm\\mu$, $\\mu>0$, and is hyperbolic.\n\n**(v) Linear stability and hyperbolicity of a map.** Let $X,Y\\subseteq\\mathbb R^m$\nbe open and let $\\Psi:X\\to Y$ be of class $C^1$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]). A **fixed point** of this\nlocal map is a point $a\\in X$ with $\\Psi(a)=a\\in Y$. The fixed point is\n**linearly stable** when $\\sup_{n\\ge0}\\lVert D\\Psi(a)^nu\\rVert_2<\\infty$ for\nevery $u\\in\\mathbb R^m$, and **hyperbolic** when no complex eigenvalue of\n$D\\Psi(a)$ has modulus $1$. These predicates require only the local map near\nthe fixed point; they concern its derivative, not its nonlinear iterates on\neverywhere-defined state domains.\n\n**(vi) Distinctions.** (a) The predicates in clauses (i)-(v) have different\ndefinitions and are not interchangeable. In particular, Lyapunov stability\ndoes not by definition include attraction, and orbital stability is a\nproperty of a set rather than of one of its points. Hyperbolicity alone does\nnot imply linear instability: if all eigenvalues of $DG(z_*)$ have negative\nreal part, the stable estimate of\n[[thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism]] makes every\nsolution of the variational equation decay and hence remain bounded. If a\nhyperbolic equilibrium has an eigenvalue with positive real part, the same\ndichotomy supplies an unbounded forward solution and the equilibrium is\nlinearly unstable. (b) At\nan equilibrium the spectrum of $DG(z_*)$ is invariant under a $C^2$ chart\ntransition, by the similarity formula in\n[[def-cm16-flow-equilibria-and-invariant-sets]] clause (vi)(b); norms and\nfinite-time growth bounds can depend on the chart. (c) For the\nmechanical chart data $(M,U)$ of\n[[def-cm-mechanical-vector-field-and-energy-in-a-chart]], at a mechanical\nequilibrium $(q_0,0)$ the derivative of the field is\n$DG(q_0,0)(\\delta q,\\delta v)=(\\delta v,-M(q_0)^{-1}D^2U(q_0)\\delta q)$; the\nstability consequences of that computation are proved later on the page.",
+        "strategy": "A vocabulary item: Lyapunov and asymptotic stability with exact quantifiers, orbital stability of a compact invariant set, linear stability of equilibria and of map fixed points, and hyperbolicity of equilibria and fixed points, with the chart and distinction caveats.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "def-metric-space",
+          "def-metric-ball",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-variational-equation-along-an-ode-solution",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "def-metric-space": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The stability predicates for two explicitly distinguished model classes used on the page: autonomous framework force models with state domain S0 in R^(6N), and mechanical chart models with state domain Omega x R^n and the C2 positive-definite kinetic metric and C2 potential of the mechanical-field definition. For either class the item defines Lyapunov and asymptotic stability, orbital stability, linear stability and hyperbolicity with their exact quantifiers and hypotheses; it also defines the corresponding linear stability and hyperbolicity predicates for C1 map branches at fixed points. The classes are not identified with one another, and no stability, instability or attraction of a particular model is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.2 on equilibrium types and Chapter 5 on small oscillations, whose informal stability wording is replaced here by the exact quantifiers",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103, perturbation theory and linearised stability",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 on fixed points, stable and unstable sets and the warning that calling these sets manifolds needs a theorem",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "pthm-cm16-energy-stability-and-instability",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Energy stability and instability of the mechanical model at an equilibrium: the strict minimum is Lyapunov stable, a negative Hessian eigenvalue gives linear instability, a strictly concave potential gives nonlinear instability, and exact energy conservation rules out attraction",
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let\n$M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite\nmatrices, and let $U:\\Omega\\to\\mathbb R$ be of class $C^2$; let $G$ be the\nmechanical vector field and $E(q,v)=\\tfrac12v^{\\mathsf T}M(q)v+U(q)$ the\nenergy of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. Let\n$q_0\\in\\Omega$ be a mechanical equilibrium, $\\nabla U(q_0)=0$, and put\n$K:=D^2U(q_0)$ ([[def-hessian-and-euclidean-critical-point]],\n[[cor-hessian-is-symmetric]]). Then:\n\n1. **(Strict minimum.)** If $q_0$ is a strict local minimum of $U$, then\n   $(q_0,0)$ is a Lyapunov stable equilibrium of $G$\n   ([[def-cm-equilibrium-and-lyapunov-stability]],\n   [[def-cm16-stability-and-hyperbolicity-concepts]] clause (i)).\n2. **(Linear instability from a negative eigenvalue.)** If $K$ has a negative\n   eigenvalue ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]), then\n   there are $\\mu>0$ and $w\\ne0$ in $\\mathbb R^n$ such that\n   $t\\mapsto e^{\\mu t}(w,\\mu w)$ is a solution of the variational equation\n   $Y'=DG(q_0,0)Y$ along the constant solution $z\\equiv(q_0,0)$\n   ([[def-variational-equation-along-an-ode-solution]]); in particular\n   $(q_0,0)$ is linearly unstable in the sense of\n   [[def-cm16-stability-and-hyperbolicity-concepts]] clause (iii).\n3. **(Nonlinear instability from a strictly concave potential.)** If $K$ is\n   negative definite, then every complex eigenvalue of $DG(q_0,0)$ is real\n   and nonzero, at least one is positive, and $(q_0,0)$ is unstable: it is\n   not Lyapunov stable.\n4. **(No attraction under exact energy conservation.)** The energy $E$ is\n   constant along every maximal solution of $G$. If there are states\n   $z=(q,v)$ with $\\lVert z-(q_0,0)\\rVert_2$ arbitrarily small and\n   $E(z)\\ne E(q_0,0)$, then $(q_0,0)$ is not asymptotically stable. In\n   particular, if $q_0$ is a strict local minimum of $U$, then $(q_0,0)$ is\n   Lyapunov stable but not asymptotically stable.\n5. **(Scope.)** No statement is made about a degenerate Hessian $K$ (some\n   eigenvalue $0$), and clause 2 gives no nonlinear conclusion when $K$ has\n   both a negative and a positive eigenvalue: the linearisation then also has\n   purely imaginary eigenvalues and is not hyperbolic, so the instability\n   theorem used in clause 3 does not apply. No global stability, no basin of\n   attraction and no statement about the size of any neighbourhood is\n   claimed.",
+        "strategy": "Direct deduction from the energy-stability, linearisation, quadratic-form and instability suppliers: strict minimum gives Lyapunov stability; negative Hessian eigenvalue gives linear instability; negative definite Hessian gives nonlinear instability; exact energy conservation rules out attraction.",
+        "deps": [
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "thm-cm-energy-stability-of-a-strict-minimum",
+          "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium",
+          "thm-cm-instability-of-a-hyperbolic-saddle",
+          "lem-cm-energy-conservation-for-the-mechanical-system",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-metric-ball",
+          "def-euclidean-inner-product",
+          "def-hessian-and-euclidean-critical-point",
+          "cor-hessian-is-symmetric",
+          "lem-cm-positive-definite-matrix-square-roots",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-variational-equation-along-an-ode-solution",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "thm-cm-energy-stability-of-a-strict-minimum": "mathematical-premise",
+          "prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium": "mathematical-premise",
+          "thm-cm-instability-of-a-hyperbolic-saddle": "mathematical-premise",
+          "lem-cm-energy-conservation-for-the-mechanical-system": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "cor-hessian-is-symmetric": "mathematical-premise",
+          "lem-cm-positive-definite-matrix-square-roots": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The stability consequences of the mechanical chart data at a mechanical equilibrium q0: a strict local minimum of the potential gives a Lyapunov stable equilibrium; a negative Hessian eigenvalue gives an unbounded solution of the linearised variational equation (linear instability, with no nonlinear conclusion); a negative definite Hessian (strict local maximum) makes the equilibrium unstable in the nonlinear sense through the hyperbolic instability theorem; and exact energy conservation along the model's motions prevents asymptotic stability whenever states of different energy accumulate at the equilibrium, so a strict minimum is stable but not attracting. No global stability, no asymptotic stability and no statement about degenerate (zero-eigenvalue) Hessians is claimed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103 and §7.3 pp. 164-172: linearised stability about an equilibrium, the corrected epsilon-delta definitions, and the energy argument for a strict minimum",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §§3.2 and 5.6: equilibrium types and the warning that precise Lyapunov, asymptotic and linear notions are distinct",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: fixed points, stable and unstable sets, and the warning that a saddle Hessian requires a nonlinear theorem before an instability claim",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "pthm-cm16-variational-equation-and-linearization",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Linearisation along a motion of the mechanical model: the flow derivative solves the variational equation, with Lipschitz dependence, the constant-metric second-order form, and the conditional finite-time error bound of the linear approximation",
+        "statement": "Let $n\\ge1$, let $\\Omega\\subseteq\\mathbb R^n$ be open, let\n$M:\\Omega\\to M_n(\\mathbb R)$ be a $C^2$ field of symmetric positive definite\nmatrices, let $U:\\Omega\\to\\mathbb R$ be of class $C^2$, and let $G$ be the\nmechanical vector field on the state domain $S_0:=\\Omega\\times\\mathbb R^n$\n([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]). This field is\n$C^1$, hence locally Lipschitz; let $\\Phi$ be its local flow as defined in\n[[def-cm-local-flow-of-an-autonomous-system]], and write $z(t;a)$ for the\nmaximal solution through $a\\in S_0$. Fix a state $z_0=(q_0,v_0)\\in S_0$, a time\n$T>0$ and a radius $R>0$ such that $\\overline B(z_0,R)\\subseteq S_0$, put\n$$M_R:=\\sup_{\\overline B(z_0,R)}\\lVert G\\rVert_2,\\qquad L_R:=\\sup_{\\overline B(z_0,R)}\\lVert DG\\rVert,$$\nand let $0<\\rho<R-M_RT$ ([[def-metric-ball]],\n[[def-jacobian-matrix-and-gradient]]). Then:\n\n1. **(Flow derivative and variational equation.)** For every $a\\in\\overline\n   B(z_0,\\rho)$ the maximal solution $z(\\,\\cdot\\,;a)$ is defined on $[0,T]$\n   and stays in $B(z_0,R)$; the map $a\\mapsto z(t;a)$ is differentiable at\n   every $a\\in B(z_0,\\rho)$ for $t\\in[0,T]$, and for every\n   $u\\in\\mathbb R^{2n}$\n   $$D_az(t;a)u=Y_a(t)u,$$\n   where $Y_a:[0,T]\\to M_{2n}(\\mathbb R)$ is the unique solution of the variational equation along the\n   reference motion $z(\\,\\cdot\\,;a)$,\n   $$Y'(t)=DG\\bigl(z(t;a)\\bigr)Y(t),\\qquad Y(0)=I_{2n},$$\n   in the sense of [[def-variational-equation-along-an-ode-solution]];\n   moreover $\\lVert z(t;a)-z(t;b)\\rVert_2\\le e^{L_Rt}\\lVert a-b\\rVert_2$ for\n   all $a,b\\in\\overline B(z_0,\\rho)$ and $t\\in[0,T]$.\n2. **(Constant-metric second-order form.)** Suppose in addition that $M$ is\n   constant on $\\Omega$, say $M(q)\\equiv M$ with $M$ symmetric positive\n   definite. Then, for any $a\\in B(z_0,\\rho)$, let $q:[0,T]\\to\\Omega$ be\n   the position component of its motion $z(t;a)=(q(t),q'(t))$, and write the\n   matrix solution of clause 1 in block form\n   $Y_a(t)=\\begin{pmatrix}Y_{a,q}(t)\\\\Y_{a,v}(t)\\end{pmatrix}$, where each\n   block has $n$ rows and $2n$ columns, and put $\\eta(t):=Y_{a,q}(t)$. The\n   variational equation is equivalent, column by column, to the\n   second-order equation\n   $$M\\,\\eta''(t)=-D^2U\\bigl(q(t)\\bigr)\\eta(t)\\qquad(0\\le t\\le T),$$\n   with $D^2U$ the Hessian of $U$\n   ([[def-hessian-and-euclidean-critical-point]]).\n3. **(Conditional finite-time error bound.)** Suppose in addition that\n   $z_0$ is an equilibrium, $G(z_0)=0$, and write $A:=DG(z_0)$; suppose there\n   are constants $C\\ge0$, $L\\ge0$ and $r>0$ with\n   $\\overline B(z_0,r)\\subseteq S_0$ and\n   $$\\lVert G(z)-A(z-z_0)\\rVert_2\\le C\\lVert z-z_0\\rVert_2^2,\\qquad \\lVert G(z)\\rVert_2\\le L\\lVert z-z_0\\rVert_2\\qquad(\\lVert z-z_0\\rVert_2\\le r).$$\n   Let $T>0$ and $\\delta:=\\lVert a-z_0\\rVert_2>0$ with $\\delta e^{LT}<r$, let\n   $z(\\,\\cdot\\,;a)$ be the model's motion through $a$, and let $y$ solve the\n   linearised equation $y'=Ay$, $y(0)=a-z_0$. Then\n   $$\\lVert z(t;a)-z_0-y(t)\\rVert_2\\le C\\delta^2\\int_0^t e^{\\lVert A\\rVert(t-s)}e^{2Ls}\\,\\mathrm ds \\le C\\delta^2\\,t\\,e^{(\\lVert A\\rVert+2L)t}\\qquad(0\\le t\\le T).$$\n   under the supplier's interval, where $\\lVert A\\rVert$ is the operator norm\n   ([[def-operator-norm]]).\n4. **(Scope.)** The linearised equation approximates the model's motion only\n   for finite times and initial states inside the declared ball with the\n   declared quantitative bounds; the constants $M_R,L_R,C,L,r$ are model-data\n   bounds, not measured quantities. Clause 1 gives no rate of separation\n   beyond the exponential bound, no conclusion when the reference motion\n   leaves $B(z_0,R)$ before time $T$, and no statement about the size of the\n   time interval on which a linearisation is a good approximation; clause 3's\n   hypotheses must be verified for the particular data.",
+        "strategy": "Direct transfer of the smooth-dependence and finite-time linearisation suppliers to the mechanical chart model, with the constant-metric second-order form and the conditional quadratic-remainder bound.",
+        "deps": [
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "thm-cm-smooth-dependence-and-the-variational-equation",
+          "thm-cm-finite-time-linearization-error-bound",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "def-variational-equation-along-an-ode-solution",
+          "def-total-derivative-in-euclidean-space",
+          "def-jacobian-matrix-and-gradient",
+          "def-hessian-and-euclidean-critical-point",
+          "def-metric-ball",
+          "def-operator-norm",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "thm-cm-smooth-dependence-and-the-variational-equation": "mathematical-premise",
+          "thm-cm-finite-time-linearization-error-bound": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-hessian-and-euclidean-critical-point": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The linearisation of the mechanical chart model along a declared motion: the derivative of the model's local flow with respect to the initial state solves the variational equation along the motion; nearby initial states separate at most exponentially with the Lipschitz constant of the field; for a constant kinetic metric the second-order linearisation is M eta'' = -D^2 U(x(t)) eta; and whenever the quantitative quadratic remainder and linear growth bounds are declared on a ball, the finite-time difference between the nonlinear motion and the solution of the linearised equation obeys the supplier's explicit bound. The constants C and L are declared model-data bounds; no measured value, no long-time approximation and no global statement is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103: perturbation theory and the linearisation of a mechanical system about a reference motion",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §§5.1-5.3: linearisation of oscillations about an equilibrium and the scope of the small-oscillation approximation",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., Chapter 5 and §7.2: perturbation of exact flows, series truncation and the warning that finite truncations need separate error estimates",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "def-cm16-finite-time-growth-rates",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Finite-time tangent growth rates and Lyapunov exponents of the model's flow: the rate per unit time of a transported deviation, with its existence convention and its limits",
+        "statement": "Let an autonomous stability model be fixed with force map of class $C^1$ in the\nstate ([[def-cm16-flow-equilibria-and-invariant-sets]] clauses (i)-(ii)), so\nthat the associated field $G$ is $C^1$ on the state domain $S_0$ and its local\nflow $\\Phi:\\Omega\\to S_0$ is $C^1$ on the open flow domain $\\Omega$\n([[cor-cm-flow-domain-open-and-flow-is-c1]]).\n\n**(i) The finite-time rate.** Let $z\\in S_0$, let $t>0$ with $(t,z)\\in\\Omega$,\nand let $u\\in\\mathbb R^{6N}\\setminus\\{0\\}$ satisfy\n$D_z\\Phi_t(z)u\\ne0$, where $\\Phi_t:=\\Phi(t,\\cdot)$ and $D_z\\Phi_t(z)$ is its\ntotal derivative ([[def-cm16-flow-equilibria-and-invariant-sets]] clause (ii),\n[[cor-cm-flow-domain-open-and-flow-is-c1]]). The\n**finite-time tangent growth rate of $(z,u)$ over the time $t$** is\n$$r(t,z,u):=\\frac1t\\log\\!\\left(\\frac{\\lVert D_z\\Phi_t(z)u\\rVert_2}{\\lVert u\\rVert_2}\\right)\\in\\mathbb R,$$\nwith the Euclidean norm of [[def-euclidean-inner-product]] and the natural\nlogarithm of [[def-natural-logarithm]]; this is the definition of\n[[def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent]] applied to\nthe model's field $G$. The rate has the dimension of inverse time,\n$[r]=\\tau^{-1}$ ([[def-cm01-units]]): it is a logarithm per unit of the frame\ntime.\n\n**(ii) The Lyapunov exponent.** Require the maximal forward lifetime of the reference state $z$ to be unbounded above, equivalently $(t,z)\\in\\Omega$ for every $t\\ge0$. Under this condition, if the limit\n$$\\lambda(z,u):=\\lim_{\\substack{t\\to\\infty\\\\(t,z)\\in\\Omega}}r(t,z,u)$$\nexists in $\\mathbb R$, it is the **Lyapunov exponent of $(z,u)$**; if the\nforward lifetime is bounded above or the limit does not exist, **no exponent is assigned** and no value $+\\infty$ or\n$-\\infty$ is named. In particular the definition does not assert that the\nlimit exists, and it does not average over an invariant measure or over\ninitial data.\n\n**(iii) Reading and chart dependence.** (a) A positive rate at time $t$ says\nthat the deviation $u$ has grown by a factor $e^{r(t,z,u)t}$ in the Euclidean\nstate norm on $[0,t]$; a negative rate says it has shrunk. (b) The rate\ndepends on the norm and on the state chart: scaling the state coordinates by\npositive constants multiplies distances by a bounded factor and changes\n$r(t,z,u)$ by at most $t^{-1}\\log(\\text{scale ratio})$, so the large-time\nexponent is unchanged by fixed rescaling but need not be preserved by an\nunbounded chart change\n([[def-cm16-stability-and-hyperbolicity-concepts]] clause (vi)(b)). (c) The\nrate is attached to a state and a tangent vector and requires the reference\nstate to remain in the flow domain for the whole time $t$; if the maximal\nsolution through $z$ is not defined on $[0,t]$, no rate is assigned at\n$(z,t)$.\n\n**(iv) What the rate does not assert.** A positive finite-time rate is not a\ndefinition of chaos, not a claim that the model's flow has a chaotic invariant\nset, and not an instability statement about the reference motion; it is a\nproperty of the linearised flow over the stated time. In particular, a\nhyperbolic equilibrium of the linear models used in the page's checks has\npositive rates along its unstable directions while its compact invariant sets\nneed not be chaotic (see the page's counterexample on the repulsive linear\nmodel). No probabilistic, almost-everywhere or empirical claim is made by this\ndefinition.",
+        "strategy": "A vocabulary item: the finite-time tangent growth rate and the Lyapunov exponent, their dimensions, chart dependence and the exact limits of what a positive rate asserts.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent",
+          "def-natural-logarithm",
+          "def-euclidean-inner-product",
+          "cor-cm-flow-domain-open-and-flow-is-c1",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "cor-cm-flow-domain-open-and-flow-is-c1": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The finite-time tangent growth rate and, when the limit exists, the Lyapunov exponent of a declared autonomy model whose force map is of class C1 in the state: the rate is the logarithm per unit time of the Euclidean norm of a nonzero transported deviation vector, and the exponent is assigned only for a forward-unbounded reference lifetime and an existing finite large-time limit. The item fixes the definition, its dependence on the chart and norm, and the boundaries of what the rate does and does not assert (positive finite-time growth is not chaos, not instability of a trajectory and not an invariant of a change of coordinates).",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: Lyapunov exponents, finite-time growth and the warning that numerical divergence is not a proof of chaos",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Chapter 9 'Chaos': Lyapunov exponents, their numeric status and the limits of the discussion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 and §7.2: linear growth of infinitesimal deviations versus finite separation, and the warning that an unbounded coordinate change can alter exponents",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "def-cm16-stroboscopic-and-poincare-maps",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The stroboscopic map of a periodic model and the Poincare return map of a transversal section: domains, iterates, fixed points and the local C1 diffeomorphism property",
+        "statement": "**(i) The stroboscopic map.** Let a $P$-periodic stability model be fixed\n($P>0$; [[def-cm16-flow-equilibria-and-invariant-sets]] clause (i)). Its\nrestriction domain $D\\subseteq\\mathbb R\\times Q\\times\\mathbb R^{3N}$ is\ninvariant under time shifts by $P$. Define its time-zero state slice\n$$S_P:=\\{z_0\\in Q\\times\\mathbb R^{3N}:(0,z_0)\\in D\\};$$\nperiodicity gives the same admissible slice at every integer multiple of $P$.\nLet $z(t;z_0)=(x(t;z_0),x'(t;z_0))$ be the maximal state curve of the motion\nthrough $z_0\\in S_P$ at time $0$, with maximal interval $I_{z_0}$. The\n**stroboscopic map at period $P$** is the partial map\n$$\\Psi:\\Sigma\\longrightarrow S_P,\\qquad \\Sigma:=\\{z_0\\in S_P:[0,P]\\subseteq I_{z_0}\\},\\qquad \\Psi(z_0):=z(P;z_0),$$\nwith domain $\\Sigma$ the set of states whose maximal motion exists over\n$[0,P]$; its endpoint belongs to $S_P$ because the restriction domain is\npreserved by the shift from $P$ to $0$. Its **iterates** are defined\nrecursively by $\\Psi^1:=\\Psi$ and, where\n$\\Psi^n(z_0)\\in\\Sigma$, $\\Psi^{n+1}(z_0):=\\Psi(\\Psi^n(z_0))$; the domain of\n$\\Psi^n$ is therefore the set of states whose maximal motion exists over\n$[0,nP]$, and it may be strictly smaller than $\\Sigma$. A state\n$z_*\\in\\Sigma$ with $\\Psi(z_*)=z_*$ is a **fixed point** of $\\Psi$. It is a\n**$P$-periodic state** in the full-time sense: the motion through $z_*$ extends\nto a motion on $\\mathbb R$ satisfying $z(t+P)=z(t)$ for every $t\\in\\mathbb R$.\nIndeed, write the state curve on $[0,P]$ as $z_*(t)$; for $k\\in\\mathbb Z$ and\n$s\\in[0,P]$ set $\\widetilde z(kP+s):=z_*(s)$. The endpoint states agree\nbecause $z_*(P)=z_*(0)$, and the vector field agrees at the seams by its\n$P$-periodicity. The restriction domain is preserved by those time shifts, so\nthe translated segments solve the same equation; uniqueness glues them to a\nglobal motion. No completeness of $\\Psi$ is asserted: $\\Sigma$ need not be all\nof $S_P$, and iterates can leave the domain.\n\n**(ii) Autonomous special case.** If the model is autonomous, then its\nstroboscopic map at any period $P>0$ is the time-$P$ map $\\Phi_P$ of its local\nflow restricted to $\\Omega_P=\\{(P,z):(P,z)\\in\\Omega\\}$\n([[def-cm16-flow-equilibria-and-invariant-sets]] clause (ii)); this is the\nreading used for the isotropic-oscillator check on the page.\n\n**(iii) The Poincare return map.** Let an autonomous model with force map of\nclass $C^1$ in the state be fixed, with associated $C^1$ field $G$ on $S_0$\nand local flow $\\Phi:\\Omega\\to S_0$\n([[cor-cm-flow-domain-open-and-flow-is-c1]]). Let $z_0\\in S_0$, $t_0>0$ with\n$(t_0,z_0)\\in\\Omega$, put $z_1:=\\Phi(t_0,z_0)$, let $W\\subseteq S_0$ be open\nwith $z_0,z_1\\in W$, and let $h:W\\to\\mathbb R$ be of class $C^1$ with\n$h(z_0)=h(z_1)=0$ and $Dh(z_0)G(z_0)\\ne0$, $Dh(z_1)G(z_1)\\ne0$. The\n**section** is $\\Sigma_h:=\\{z\\in W:h(z)=0\\}$, and the reference orbit meets it\ntransversally at $z_0$ and again at $z_1$. Then\n[[prop-cm-first-return-map-is-a-local-c1-diffeomorphism]] supplies open sets\n$A\\ni z_0$, $B\\ni z_1$ and $C^1$ functions $\\tau:A\\to\\mathbb R$,\n$\\sigma:B\\to\\mathbb R$ with $\\tau(z_0)=\\sigma(z_1)=t_0$ such that\n$$P:A\\cap\\Sigma_h\\longrightarrow\\Sigma_h,\\qquad P(z):=\\Phi\\bigl(\\tau(z),z\\bigr)$$\nis a $C^1$ diffeomorphism onto $P(A\\cap\\Sigma_h)$, which is open in the\nsubspace topology of $\\Sigma_h$ ([[def-subspace-topology-top]]), with inverse\n$Q(z)=\\Phi(-\\sigma(z),z)$; moreover $h(\\Phi(t,z))=0$ for $(t,z)\\in J\\times A$\nholds exactly for $t=\\tau(z)$, so $P$ is the **local return map** at the reference crossing. The section near the two crossings has the embedded $C^1$ charts established by the proposition. If the open reference segment satisfies $\\Phi(s,z_0)\\notin\\overline{\\Sigma_h}^{\\,S_0}$ for every $0<s<t_0$ (closure in the state domain), clause 4 of the proposition supplies persistence of the absence of earlier hits: for $z\\in A\\cap\\Sigma_h$ the return time $\\tau(z)>0$ is the least positive hitting time. Under this explicit additional hypothesis $P$ is the **local first-return map**. Transversality alone gives the return branch near $t_0$, and permits earlier hits. A state $z_*\\in A\\cap\\Sigma_h$ with\n$P(z_*)=z_*$ is a **fixed point of the return map**, and the motion through\n$z_*$ is periodic with period $\\tau(z_*)$.\n\n**(iv) Conventions and scope.** (a) Both maps are attached to the declared\nmodel and its flow; the stroboscopic map depends on the chosen period $P$ and\nthe return map on the chosen section and reference crossing, and different\nchoices give different (conjugate only under the stated conditions) maps.\n(b) The return time $\\tau$ is a $C^1$ function on the domain, not a constant;\nthe reference crossing time $t_0$ is only one value of it. (c) Neither map is\nasserted to be defined on all of phase space, and no statement here asserts\nthat a fixed point, a periodic orbit or a return exists for any particular\nmodel. (d) Periods and return times are measured in the frame time\n$[t]=\\tau$ ([[def-cm01-units]]); a return time must be positive for the\nperiodicity reading of clause (iii) to apply.",
+        "strategy": "A vocabulary item: the stroboscopic map with its recursive forward domain, the autonomous special case, and the local Poincare return map with its C1 diffeomorphism property supplied by the first-return theorem.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism",
+          "cor-cm-flow-domain-open-and-flow-is-c1",
+          "def-cm02-newtonian-flow",
+          "def-subspace-topology-top",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism": "mathematical-premise",
+          "cor-cm-flow-domain-open-and-flow-is-c1": "mathematical-premise",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "def-subspace-topology-top": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The two maps used to reduce the model's dynamics to discrete time: the stroboscopic map at the period of a P-periodic force model, defined only on states whose motion exists over the full period, with iterates recursively defined and fixed points in bijection with P-periodic motions; and the local Poincare return map of a transversal section of an autonomous model, whose existence, C1 regularity and local invertibility are supplied from the return mapping theorem; its first-return interpretation additionally requires the stated persistent exclusion of earlier section hits. The item asserts no completeness, no global return and no all-time existence of iterates.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.2 pp. 157-172: stroboscopic maps of periodically driven systems, Poincare sections and the requirement of an actual return domain",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: return maps, fixed points and the tangle narrative",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.3 and Chapter 9: phase-plane analysis, stroboscopic and Poincare sections",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "def-cm16-chaos-list-for-model-maps",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Chaos in the stated sense for maps of the model: topological mixing, dense periodic points and sensitive dependence, as one precise list among several",
+        "statement": "Let $(X,d)$ be a nonempty metric space ([[def-metric-space]]) and let\n$f:X\\to X$ be a map. Say that $f$ is **chaotic in the stated sense** when all\nfour of the following hold; this is the definition of\n[[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]], quoted here\nto fix the exact content used on this page:\n\n1. $f$ is **continuous** with respect to the metric topology\n   ([[def-metric-continuity]]);\n2. $f$ is **topologically mixing**: for all nonempty open sets $U,V\\subseteq X$\n   there is an integer $N$ with $f^n(U)\\cap V\\ne\\emptyset$ for every $n\\ge N$;\n3. the periodic points of $f$ are **dense** in $X$: every nonempty open subset\n   of $X$ meets $\\{x\\in X:f^n(x)=x\\text{ for some }n\\ge1\\}$\n   ([[def-dense-top]]);\n4. $f$ has **sensitive dependence on initial conditions**: there is\n   $\\delta>0$ (a sensitivity constant) such that for every $x\\in X$ and every\n   $\\varepsilon>0$ there are $y\\in X$ and $n\\ge1$ with $d(x,y)<\\varepsilon$\n   and $d(f^n(x),f^n(y))\\ge\\delta$.\n\nThe predicate is applied on this page to the following model maps: (a) the\nstroboscopic map $\\Psi$ of a periodic model, restricted to a subset\n$X\\subseteq\\Sigma$ with $\\Psi(X)\\subseteq X$; (b) the local return map $P$ of\na transversal section restricted to an invariant subset of its domain\n([[def-cm16-stroboscopic-and-poincare-maps]] clauses (i) and (iii)); and (c)\nfor an autonomous model with local flow $\\Phi$\n([[def-cm-local-flow-of-an-autonomous-system]]), its time-one map\n$f:=\\Phi_1|_X:X\\to X$ when every point of $X$ has a forward solution through\ntime $1$ and $\\Phi_1(X)\\subseteq X$. Here time $1$ is the unit value of the\nmodel's stated time parameter. In every case $d$ is the Euclidean\ndistance of the declared state chart restricted to $X$. The properties\nare relative to that set and that metric, so changing the invariant set may\nchange whether the list holds. An invertible linear change of coordinates is\na bi-Lipschitz conjugacy for Euclidean state norms: it preserves continuity,\ntopological mixing and density of periodic points, and preserves sensitivity\nwith a possibly rescaled positive sensitivity constant. Thus a fixed\ncoordinate rescaling cannot change whether the map satisfies the four clauses.\n\n**Conventions and scope.** (a) This is one precise list among several\ninequivalent usages of the word \"chaos\" in the literature; the page asserts\nnone of the other usages, and no item of the page claims that a model is\n\"chaotic\" without exhibiting the four properties for a stated map, set and\nmetric. (b) This item makes no pairwise-independence claim about the four\nproperties. The examples show that dense periodic points alone do not imply\nmixing and that positive growth at an equilibrium alone does not give the\nassociated time-one map a chaotic invariant set in this sense. (c) The list is purely topological: it asserts no invariant\nmeasure, no positivity of an entropy, no fractal dimension, no statistical\nstability and no property of any physical system. (d) A numerical trajectory,\na histogram or a plotted section is not evidence that the four properties\nhold; they are established by proof for a stated model.",
+        "strategy": "A vocabulary item fixing one precise chaos list for the model maps (continuity, mixing, dense periodic points, sensitivity) with the independence, topological and non-numerical caveats.",
+        "deps": [
+          "def-cm16-stroboscopic-and-poincare-maps",
+          "def-cm-local-flow-of-an-autonomous-system",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "def-metric-space",
+          "def-metric-continuity",
+          "def-dense-top"
+        ],
+        "dependency_roles": {
+          "def-cm16-stroboscopic-and-poincare-maps": "formulation-prerequisite",
+          "def-cm-local-flow-of-an-autonomous-system": "mathematical-premise",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "def-metric-space": "mathematical-premise",
+          "def-metric-continuity": "mathematical-premise",
+          "def-dense-top": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The chaos vocabulary of the page, applied to stroboscopic maps of periodic models, Poincare return maps, and time-one maps of autonomous models when restricted to invariant domains: a continuous map of a metric space is chaotic in the stated sense when it is topologically mixing, has dense periodic points and has sensitive dependence on initial conditions with a positive constant, with all four clauses stated exactly. The item fixes one precise list among several used in the literature, requires an invariant set and a metric relative to which the properties are stated, and records that an invertible linear coordinate rescaling preserves the list. It asserts no measure-theoretic property, no entropy or dimension and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 and §7.4: sensitivity, mixing and the explicit warning that plots and numerical portraits are not proofs of chaos",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: the requirement of a chosen precise definition of chaos and the distinctness of sensitivity, mixing and positive exponents",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Chapter 9 'Chaos': qualitative chaos discussion retained here only as motivation for the precise list",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "pthm-cm16-hyperbolic-linearization",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Hyperbolic linearisation of an equilibrium of the model: exponential dichotomy of the linearised flow, local exponential asymptotic stability in the stable case, and instability in the saddle case",
+        "statement": "Let an autonomous stability model be fixed whose force map is of class $C^1$\nin the state, with state domain $S_0\\subseteq\\mathbb R^{6N}$, associated\n$C^1$ field $G$ and local flow\n$\\Phi:\\Omega\\to S_0$ ([[def-cm16-flow-equilibria-and-invariant-sets]] clauses\n(i)-(ii)); all differentiability is that of\n[[def-ck-euclidean-maps-and-diffeomorphisms]]. Let $z_*\\in S_0$ be an\nequilibrium state, $G(z_*)=0$, and let\n$A:=DG(z_*)$ ([[def-total-derivative-in-euclidean-space]]). Then:\n\n1. **(Exponential dichotomy.)** If no complex eigenvalue of $A$\n   ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) has real part\n   $0$ --- that is, if $z_*$ is hyperbolic in the sense of\n   [[def-cm16-stability-and-hyperbolicity-concepts]] clause (iv) --- then\n   there are $A$-invariant subspaces $E_s,E_u\\subseteq\\mathbb R^{6N}$ with\n   $\\mathbb R^{6N}=E_s\\oplus E_u$ and real constants $C\\ge1$, $c>0$ such\n   that, with the Euclidean norm of [[def-euclidean-inner-product]] and the\n   exponential series $e^{tA}$:\n   $$\\lVert e^{tA}v\\rVert_2\\le Ce^{-ct}\\lVert v\\rVert_2\\ (v\\in E_s,\\ t\\ge0), \\qquad \\lVert e^{tA}v\\rVert_2\\ge C^{-1}e^{ct}\\lVert v\\rVert_2\\ (v\\in E_u,\\ t\\ge0),$$\n   $$\\lVert e^{tA}v\\rVert_2\\le Ce^{ct}\\lVert v\\rVert_2\\ (v\\in E_u,\\ t\\le0),$$\n   and $E_s=\\{v:e^{tA}v\\to0\\ (t\\to+\\infty)\\}$,\n   $E_u=\\{v:e^{tA}v\\to0\\ (t\\to-\\infty)\\}$. The spaces $E_s,E_u$ are the\n   **stable and unstable subspaces** of the linearised flow.\n2. **(Stable case.)** If every complex eigenvalue of $A$ has negative real\n   part, then $z_*$ is locally exponentially asymptotically stable: there are\n   $\\delta>0$, $\\beta\\ge1$, $\\gamma>0$ such that every maximal solution $z$\n   of the model with $\\lVert z(0)-z_*\\rVert_2<\\delta$ is defined for all\n   $t\\ge0$ and satisfies\n   $$\\lVert z(t)-z_*\\rVert_2\\le\\beta e^{-\\gamma t}\\lVert z(0)-z_*\\rVert_2\\qquad(t\\ge0).$$\n   In particular $z_*$ is Lyapunov stable and asymptotically stable\n   ([[def-cm-equilibrium-and-lyapunov-stability]]).\n3. **(Saddle case.)** If no complex eigenvalue of $A$ has real part $0$ and\n   at least one has positive real part, then $z_*$ is unstable: there is\n   $\\varepsilon_0>0$ such that for every $\\delta>0$ there are a state $z_0$\n   with $\\lVert z_0-z_*\\rVert_2<\\delta$ and a time $t_1>0$ such that the\n   maximal solution through $z_0$ is defined on $[0,t_1]$ and\n   $\\lVert z(t_1)-z_*\\rVert_2=\\varepsilon_0$.\n4. **(Rates, charts and scope.)** The constants $C,c,\\beta,\\gamma$ and the\n   coordinate descriptions of the subspaces depend on the chosen chart and\n   norm; the rates $c,\\gamma$ have dimension $\\tau^{-1}$. Under a smooth\n   change of chart the derivative matrices at the equilibrium are similar, so\n   their eigenvalue spectrum is invariant, while the Euclidean estimates may\n   change as recorded in [[def-cm16-stability-and-hyperbolicity-concepts]]\n   clause (vi)(b). No conclusion is asserted when some eigenvalue has zero real part\n   (the centre case), and no statement is made about the size of the stable\n   set, the basin of attraction, uniformity in a family of models or any\n   empirical realization.",
+        "strategy": "Direct transfer of the exponential dichotomy, Lyapunov stability and instability suppliers to an equilibrium of the model field, with the chart and centre-case qualifications.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism",
+          "thm-cm-exponential-stability-by-a-lyapunov-quadratic-form",
+          "thm-cm-instability-of-a-hyperbolic-saddle",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "def-variational-equation-along-an-ode-solution",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-total-derivative-in-euclidean-space",
+          "def-operator-norm",
+          "def-euclidean-inner-product",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism": "mathematical-premise",
+          "thm-cm-exponential-stability-by-a-lyapunov-quadratic-form": "mathematical-premise",
+          "thm-cm-instability-of-a-hyperbolic-saddle": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "def-variational-equation-along-an-ode-solution": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The consequences of the hyperbolic linearisation of an equilibrium state of an autonomous model whose force map is of class C1 in the state: invariant stable and unstable subspaces of the linearised flow with exponential estimates and exponential separation from the equilibrium; local exponential asymptotic stability of the equilibrium when the whole spectrum lies in the open left half-plane; and instability when no eigenvalue lies on the imaginary axis and one lies in the open right half-plane. The rates and constants belong to the linearised flow in the declared state chart; no centre-case, global, parameter-uniform or empirical statement is made.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.3 pp. 164-172 with the corrected epsilon-delta definitions: linearisation at an equilibrium, stability in the stable case and instability from a positive real eigenvalue",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §§3.2, 5.6: the source's linearised-stability discussion with its omitted hypotheses, replaced here by the complete supplier statements",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: stable and unstable sets and the warning that the exponential dichotomy must be proved rather than read off a picture",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "pthm-cm16-two-rotor-kam",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The two-rotor model: a positive-measure family of invariant Lagrangian tori with Diophantine frequencies for sufficiently small coupling, with the explicit units and the stated scope",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), inherited from the analytic KAM suppliers. Adopt the **two-rotor model**: two ideal rotors with fixed axes, equal moments\nof inertia $\\mathcal I>0$, angular coordinates $\\theta_1,\\theta_2$ in\n$\\mathbb R/2\\pi\\mathbb Z$ (radians, dimensionless), conjugate angular momenta\n$\\Pi_1,\\Pi_2$, the physical Hamiltonian\n$$H_{\\mathrm{phys}}(\\theta,\\Pi)=\\frac{\\Pi_1^2}{2\\mathcal I}+\\frac{\\Pi_2^2}{2\\mathcal I} +E_0\\varepsilon\\cos\\theta_1\\cos\\theta_2$$\non the phase domain $(\\mathbb R/2\\pi\\mathbb Z)^2\\times\\mathbb R^2$, with the\ncanonical two-form $d\\theta_1\\wedge d\\Pi_1+d\\theta_2\\wedge d\\Pi_2$ and\nHamilton equations $\\theta'=\\partial_\\Pi H_{\\mathrm{phys}}$,\n$\\Pi'=-\\partial_\\theta H_{\\mathrm{phys}}$; here $E_0>0$ is an energy scale\nand $\\varepsilon\\ge0$ a dimensionless coupling. All quantities are model data;\n$[H_{\\mathrm{phys}}]=\\mu\\ell^2\\tau^{-2}$, $[\\Pi_i]=\\mu\\ell^2\\tau^{-1}$,\n$[\\mathcal I]=\\mu\\ell^2$ ([[def-cm01-units]]). Put\n$$J_0:=\\sqrt{\\mathcal I E_0},\\qquad t_0:=\\frac{J_0}{E_0}=\\sqrt{\\frac{\\mathcal I}{E_0}},\\qquad \\omega_0:=\\frac1{t_0}=\\sqrt{\\frac{E_0}{\\mathcal I}},$$\nand read the **dimensionless model** through $I_i:=\\Pi_i/J_0$ and the\ndimensionless time $s:=t/t_0$,\n$$H(I,\\vartheta)=\\tfrac12\\bigl(I_1^2+I_2^2\\bigr)+\\varepsilon\\cos\\vartheta_1\\cos\\vartheta_2.$$\nLet $C^*:=\\{\\nu\\in\\mathbb R^2:\\lvert\\nu\\rvert_\\infty\\le\\tfrac1{16}\\}$ be the\ndeclared frequency cube and, for $\\tau>1$ and $\\alpha>0$, let\n$$\\Omega_{\\alpha,\\tau}:=\\Bigl\\{\\nu\\in C^*:\\lvert k\\cdot\\nu\\rvert\\ge\\alpha\\lvert k\\rvert_1^{-\\tau} \\ \\text{for all }k\\in\\mathbb Z^2\\setminus\\{0\\}\\Bigr\\}$$\nbe its $(\\alpha,\\tau)$-Diophantine subset\n([[def-holomorphic-kam-domain-and-diophantine-labels]]). Then for every\n$\\tau>1$ there is a constant $c>0$, depending only on the fixed\ndimensionless analytic data (the action cube, the strip width $s_0$, the\nexponent $\\tau$, $M_2=2$, and the normalized perturbation profile\n$g(\\vartheta)=\\cos\\vartheta_1\\cos\\vartheta_2$ with strip bound\n$\\lvert g\\rvert\\le\\cosh^2(s_0)$), and uniform in $\\alpha$ and the amplitude\n$\\varepsilon$, such that for every $0<\\alpha<c$ and every $\\varepsilon>0$ with\n$\\varepsilon\\le c\\,\\alpha^2$:\n\n1. **(Positive measure of frequencies.)** The Diophantine set has positive\n   Lebesgue measure, with\n   $$\\lvert\\Omega_{\\alpha,\\tau}\\rvert\\ge\\lvert C^*\\rvert-C_{2,\\tau}\\, (\\operatorname{diam}C^*)\\,\\alpha=\\frac1{64}-\\frac{C_{2,\\tau}}{8}\\,\\alpha,$$\n   where $C_{2,\\tau}$ is the lattice constant of\n   [[lem-diophantine-resonance-slab-measure]].\n2. **(Invariant Lagrangian tori.)** For every $\\nu\\in\\Omega_{\\alpha,\\tau}$\n   there is a $C^1$ embedding\n   $\\widehat\\Psi_\\nu:\\mathbb T^2\\to(\\mathbb R^2)\\times\\mathbb T^2$ (a\n   $C^1$ injective immersion that is a homeomorphism onto its image), and it\n   is Lagrangian\n   ($\\widehat\\Psi_\\nu^*\\omega=0$ for the two-form $\\omega$ of the\n   dimensionless model), and satisfies\n   $$X_H\\bigl(\\widehat\\Psi_\\nu(\\vartheta)\\bigr)=\\sum_{j=1}^2\\nu_j\\, \\partial_{\\vartheta_j}\\widehat\\Psi_\\nu(\\vartheta);$$\n   consequently a torus parameter phase follows $\\varphi(s)=\\varphi_0+\\nu s$,\n   and its dimensionless phase-space trajectory is $\\widehat\\Psi_\\nu(\\varphi_0+\\nu s)$.\n   At physical time $t$ it is the scaled image of\n   $\\widehat\\Psi_\\nu(\\varphi_0+\\omega_0\\nu t)$: the physical angle is the\n   angular component of this embedding, not generally the linear parameter phase.\n   Thus the torus carries quasi-periodic motion with fundamental angular\n   frequencies $\\omega_0\\nu_1,\\omega_0\\nu_2$. The\n   parametrisation is close to the unperturbed one and Lipschitz in $\\nu$ with\n   the bounds of [[thm-positive-measure-analytic-kam-family]] clause 3.\n3. **(Scope.)** Nothing is asserted about the complement of\n   $\\Omega_{\\alpha,\\tau}$ (resonant or non-Diophantine labels), about tori\n   surviving outside the smallness threshold, about all initial data, about\n   diffusive or chaotic behaviour of the complement, or about any laboratory\n   rotor: the smallness condition $\\varepsilon\\le c\\alpha^2$ is a model-data\n   condition, the constant $c$ is not computed numerically here, and no\n   measured value of $\\mathcal I$, $E_0$ or $\\varepsilon$ is used or implied.",
+        "strategy": "Verification of the analytic KAM hypotheses for the declared two-rotor potential and unit restoration, concluding positive-measure Diophantine tori and quasi-periodic motions with angular frequencies omega0 nu.",
+        "deps": [
+          "def-countable-choice",
+          "thm-positive-measure-analytic-kam-family",
+          "lem-kam-composed-map-and-derivative-convergence",
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "lem-diophantine-resonance-slab-measure",
+          "def-cm01-units",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "thm-positive-measure-analytic-kam-family": "mathematical-premise",
+          "lem-kam-composed-map-and-derivative-convergence": "mathematical-premise",
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "lem-diophantine-resonance-slab-measure": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The conditional KAM statement for the adopted two-rotor model: two ideal fixed-axis rotors of equal positive moment of inertia with the smooth interaction potential E0 epsilon cos theta1 cos theta2. For every Diophantine exponent tau>1 there is a constant c>0 determined by the declared dimensionless data such that for 0<alpha<c and 0<epsilon<=c alpha^2 the set of frequencies satisfying the Diophantine bound has positive Lebesgue measure in the declared action cube, and for every such frequency the model has a C1 invariant Lagrangian embedding whose image carries quasi-periodic motion with angular frequencies omega0 nu_i. The item asserts nothing about the complement of that frequency set (resonant or non-Diophantine labels), nothing about all initial data, no chaos or diffusion statement, no measured value of any parameter and no empirical realization; epsilon<=c alpha^2 is a model-data smallness condition.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem (version 1.3, 2009; arXiv:0908.2234), §§1-5 and Appendices A-B: the analytic KAM theorem, its nondegeneracy, Diophantine and smallness hypotheses and the positive-measure persistence statement",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (expanded version of the Seattle 1999 lectures; complete text), §3.3 pp. 32-36 and §6.1 pp. 92-100: Diophantine sets and the measure of the resonant slabs",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.6: the explicit statement that SICM does not prove KAM and the requirement of regularity, twist and smallness hypotheses",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "pthm-cm16-separatrix-splitting-and-horseshoe",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "A smooth periodically forced one-label Cartesian model with a transverse homoclinic horseshoe: the physical stroboscopic map has a compact invariant set conjugate to the shift, chaotic in the stated sense",
+        "statement": "Grant the Axioms of Countable and Dependent Choice\n([[def-countable-choice]], [[def-dependent-choice]]), inherited from the\nsupplier theorem below.\n\n**(i) The model.** Fix a length scale $\\ell_0>0$, a mass $m>0$, a frequency\nscale $\\omega_0>0$, a dimensionless amplitude $a\\ge100$, and a pulse width\n$\\delta>0$. Let $w$ be the normalized smooth bump and $\\beta_\\delta$ the\nsmooth $P$-periodic pulse of [[def-smooth-periodic-oscillator-pulse-model]]\nwith $P:=\\pi/2+\\delta$, $\\beta_\\delta=0$ on $[0,\\pi/2]$ and\n$\\beta_\\delta(t)=\\delta^{-1}w((t-\\pi/2)/\\delta)$ on $[\\pi/2,P]$. Use full\nCartesian position $\\mathbf r=(Q,Y,Z)\\in Q_{\\mathrm{conf}}:=\\mathbb R^3$\nand velocity $\\mathbf v=\\dot{\\mathbf r}\\in\\mathbb R^3$ for one label of mass\n$m$. The adopted force map on\n$\\mathbb R\\times Q_{\\mathrm{conf}}\\times\\mathbb R^3$ is\n$$\\mathbf F(T,\\mathbf r,\\mathbf v):=-m\\omega_0^2\\Bigl(Q+\\ell_0\\beta_\\delta(\\omega_0T)\\Bigl(a-\\frac{Q^2}{\\ell_0^2}\\Bigr),\\ -Y,\\ -Z\\Bigr),\\qquad T_p:=\\frac{P}{\\omega_0}.$$\nIt is smooth, defined on the full product domain and $T_p$-periodic, so it is\na force model of [[post-cm02-force-superposition]] with fixed mass $m$; its\nmotions are the $C^2$ curves of [[def-cm02-newtonian-flow]]. The phase plane\n$$\\mathcal P:=\\{(\\mathbf r,\\mathbf v):Y=Z=v_Y=v_Z=0\\}$$\nis invariant. Define canonical momenta $\\boldsymbol\\Pi:=m\\mathbf v=\n(\\Pi_Q,\\Pi_Y,\\Pi_Z)$, with axial component $\\Pi:=\\Pi_Q$. The restricted equation is\n$$m\\ddot Q=-m\\omega_0^2\\Bigl[Q+\\ell_0\\beta_\\delta(\\omega_0T)\\Bigl(a-\\frac{Q^2}{\\ell_0^2}\\Bigr)\\Bigr].$$\nWith $q=Q/\\ell_0$, $s=\\omega_0T$ and $p=\\dot Q/(\\ell_0\\omega_0)$ this is\nexactly the dimensionless equation of the mathematical supplier. On the axis\n$\\Pi=m\\dot Q$; the full stroboscopic map\nat period $T_p$ is $\\Psi_\\delta$ of\n[[def-cm16-stroboscopic-and-poincare-maps]] clause (i).\n\n**(ii) The horseshoe.** There is $\\delta_0>0$, depending only on $a$ and the\nbump $w$, such that for every $0<\\delta<\\delta_0$ there is a homeomorphism\n$H_\\delta$ of the two-sign shift space $(X_\\pm,D_\\pm)$ of\n[[def-bilateral-symbol-and-bounded-sequence-space]] onto a compact subset\n$\\Lambda_\\delta^{\\mathrm{phys}}\\subset\\mathcal P$ such that\n$$\\Psi_\\delta\\circ H_\\delta=H_\\delta\\circ S_\\pm.$$\nThus $\\Lambda_\\delta^{\\mathrm{phys}}$ is compact and $\\Psi_\\delta$-invariant,\nand the restriction $\\Psi_\\delta|_{\\Lambda_\\delta^{\\mathrm{phys}}}$ is\nconjugate to the shift; with the Euclidean metric inherited from the full\nphase chart it is chaotic in the stated sense of\n[[def-cm16-chaos-list-for-model-maps]]: continuous, topologically mixing, with\ndense periodic points and sensitive dependence with a positive constant.\n\nFor each such $\\delta$, the full stroboscopic map has open neighborhoods\n$\\mathcal U_\\delta,\\mathcal V_\\delta\\subseteq\\mathbb R^6$ with\n$\\Lambda_\\delta^{\\mathrm{phys}}\\subseteq\\mathcal U_\\delta\\cap\\mathcal V_\\delta$\nsuch that $\\Psi_\\delta|_{\\mathcal U_\\delta}:\\mathcal U_\\delta\\to\\mathcal V_\\delta$\nis a $C^1$ diffeomorphism. Use this branch and its inverse in clause (iii).\n\n**(iii) Hyperbolic points and transverse homoclinic points.** The two constant\ncodes give hyperbolic fixed points of the full map $\\Psi_\\delta$, one of each\nsign, with hyperbolicity as defined in\n[[def-cm16-stability-and-hyperbolicity-concepts]] clause (v); write\n$z_{\\bar u}:=H_\\delta(\\bar u)$ for the fixed point coded by the constant\nsequence $\\bar u$. Define the\nstable and unstable sets for the stated branch by\n$$W^s(z_*):=\\{z\\in\\mathcal U_\\delta:\\Psi_\\delta^n(z)\\in\\mathcal U_\\delta\\text{ for every }n\\ge0\\text{ and }\\Psi_\\delta^n(z)\\to z_*\\},$$\n$$W^u(z_*):=\\{z\\in\\mathcal V_\\delta:\\Psi_\\delta^{-n}(z)\\in\\mathcal V_\\delta\\text{ for every }n\\ge0\\text{ and }\\Psi_\\delta^{-n}(z)\\to z_*\\},$$\nwhere forward powers are recursively defined using the restriction\n$\\Psi_\\delta|_{\\mathcal U_\\delta}$, backward powers use its inverse\n$\\Psi_\\delta^{-1}:\\mathcal V_\\delta\\to\\mathcal U_\\delta$, and convergence\nuses the Euclidean metric of the phase chart. ODE uniqueness ensures that\ninverse values from overlapping local flow neighborhoods agree. A transverse\nhomoclinic point here means a point $z_*\\ne z_{\\bar u}$ in both sets for which\nthere are injective $C^1$ maps of open neighborhoods of $0$ in $\\mathbb R^3$\ninto $W^s(z_{\\bar u})$ and $W^u(z_{\\bar u})$, respectively, each with\nrank-$3$ differential and a continuous inverse on its image. Their images\npass through $z_*$, and their three-dimensional tangent spaces sum to\n$\\mathbb R^6$. The planar stable and unstable curves used in this\nproduct construction are supplied by\n[[def-stable-unstable-cones-and-line-slopes]].\n\nFor every nonconstant code $\\sigma\\in X_\\pm$ for which there are a sign $u$\nand $N\\ge0$ with $\\sigma_n=u$ whenever $|n|\\ge N$, the point\n$H_\\delta(\\sigma)$ is a transverse homoclinic point of the corresponding\nfixed point for the full map; distinct such codes give distinct points.\n\n**(iv) Explicit bounds.** Write $R:=\\sqrt a+3$. Every state in\n$\\Lambda_\\delta^{\\mathrm{phys}}$ has $\\mathbf r=(Q,0,0)$ and\n$\\boldsymbol\\Pi=(\\Pi,0,0)$, with\n$$\\lvert Q\\rvert\\le R\\,\\ell_0,\\qquad \\lvert\\Pi\\rvert\\le m\\ell_0\\omega_0R.$$\nEvery coded trajectory exists for all times and remains in these bounds at\nthe stroboscopic times. For $a=100$ the bounds are $\\lvert Q\\rvert\\le13\\,\\ell_0$\nand $\\lvert\\Pi\\rvert\\le13\\,m\\ell_0\\omega_0$.\n\n**(v) Scope.** The pulsed axial and transverse inverted-oscillator forces are\nadopted model assumptions, not a reported drive or apparatus; no measurement,\ncalibration or uncertainty is involved. The result is about this one full\nthree-dimensional model: it does not assert chaos for every driven pendulum,\nfor separatrix splitting in gravitational or vortex models, for Hénon-Heiles\nenergies, or for any numerical portrait, and it does not validate a first-order\nMelnikov calculation by analogy\n([[def-cm16-chaos-list-for-model-maps]] clause (d)).",
+        "strategy": "Model construction and scaling transfer: the smooth pulsed one-coordinate Newtonian model is a force model of the framework, and the supplier conjugacy transports to its physical stroboscopic map with explicit coded-state bounds.",
+        "deps": [
+          "thm-smooth-fixed-mass-mechanical-horseshoe",
+          "lem-rescaled-pulse-map-is-c-one-close-to-kick",
+          "def-smooth-periodic-oscillator-pulse-model",
+          "def-cm16-stroboscopic-and-poincare-maps",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "def-cm16-chaos-list-for-model-maps",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "def-cm01-units",
+          "def-bilateral-symbol-and-bounded-sequence-space",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "def-stable-unstable-cones-and-line-slopes",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-explicit-perturbed-horseshoe-and-transversality",
+          "lem-close-map-first-component-has-uniform-inverse"
+        ],
+        "dependency_roles": {
+          "thm-smooth-fixed-mass-mechanical-horseshoe": "mathematical-premise",
+          "lem-rescaled-pulse-map-is-c-one-close-to-kick": "mathematical-premise",
+          "def-smooth-periodic-oscillator-pulse-model": "mathematical-premise",
+          "def-cm16-stroboscopic-and-poincare-maps": "formulation-prerequisite",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "def-cm16-chaos-list-for-model-maps": "formulation-prerequisite",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-bilateral-symbol-and-bounded-sequence-space": "mathematical-premise",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "def-stable-unstable-cones-and-line-slopes": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dependent-choice": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-explicit-perturbed-horseshoe-and-transversality": "mathematical-premise",
+          "lem-close-map-first-component-has-uniform-inverse": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The conditional chaos theorem for one declared smooth mechanical model: a single label on full Cartesian configuration space R^3 with fixed positive mass, a pulsed polynomial force in one coordinate and inverted harmonic forces in the other two. The axis with zero transverse coordinates and velocities is invariant, and its pulse dynamics is the one-coordinate pulsed oscillator of the mathematical supplier. For every pulse width below a threshold depending only on the dimensionless amplitude a>=100 and the bump, the physical stroboscopic map has a compact invariant set on that axis conjugate to the two-sign shift and chaotic in the stated sense; its two fixed points are hyperbolic for the full six-dimensional map, and its nonconstant finite-deviation codes give transverse homoclinic points in the full phase space. The coded states satisfy |Q|<=(sqrt(a)+3) l0 and |Pi|<=m l0 w0 (sqrt(a)+3). The transverse force terms are adopted model assumptions, not an observed drive or apparatus; no measurements, empirical chaos claim or claim about other driven or nearly integrable models are made.",
+        "sources": {
+          "references": [
+            {
+              "title": "P. Cvitanovic, R. Artuso, R. Mainieri, G. Tanner, G. Vattay, Chaos: Classical and Quantum (ChaosBook.org, edition 17.6.8), Chapter 14 Section 14.6 and Chapter 15 Sections 15.1-15.3: symbolic dynamics, the Henon horseshoe and homoclinic tangles as concrete constructions rather than pictures",
+              "url": "https://chaosbook.org/chapters/ChaosBook.pdf"
+            },
+            {
+              "title": "R. Devaney and Z. Nitecki, Shift automorphisms in the Henon mapping, Communications in Mathematical Physics 67 (1979) 137-146: the shift structure of a quadratic horseshoe and the stable/unstable sectors",
+              "url": "https://projecteuclid.org/journals/communications-in-mathematical-physics/volume-67/issue-2/Shift-automorphisms-in-the-H%C3%A9non-mapping/cmp/1103905161.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: the tangle narrative and the explicit warning that a pictured crossing does not prove chaos",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "pthm-cm16-recurrence-for-finite-volume-models",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Poincare recurrence for the model's Hamiltonian flow on a bounded invariant set of finite phase volume: almost every state of any Borel subset returns to it infinitely often",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), inherited from the phase-volume preservation\ntheorem [[pthm-cm13-liouville]] (its measure-preservation clause uses the\nchange-of-variables theorem under that assumption). Adopt the force model with\npotential presentation and the Hamiltonian data of [[pthm-cm13-liouville]]:\ntime-independent potential $U:Q\\to\\mathbb R$ with residual forces\n$d\\equiv0$, Cartesian phase domain $W=Q\\times\\mathbb R^{3N}$\n([[def-cm13-two-form]]), Hamiltonian\n$$H:I_0\\times W\\to\\mathbb R,\\qquad H(t,x,p)=\\tfrac12p\\cdot\\mathsf M^{-1}p+U(x),$$\nphase-volume form $\\Omega=\\omega^{\\wedge3N}/(3N)!$. Let $A\\subseteq W$ be a\nbounded Borel set ([[def-borel-sigma-algebra]]) whose closure is contained in\nthe open phase domain $W$. Let $\\Phi_t$ denote the potential-branch flow on\nits maximal time-slice domain, and suppose it is defined at every point of $A$\nfor all real times and maps $A$ onto itself:\n$$\\Phi_t(A)=A\\qquad(t\\in\\mathbb R),$$\nso that $A$ is invariant in the sense of\n[[def-cm16-flow-equilibria-and-invariant-sets]] clause (iv). Then\n$\\lambda_{6N}(A)<\\infty$, and the flow preserves $\\lambda_{6N}$ on every\nBorel subset of $A$, by the finite-cover and time-subdivision argument in the\nproof below. For every Borel set $E\\subseteq A$ almost every\n$x\\in E$ with respect to the Lebesgue measure $\\lambda_{6N}$ of the chart\n([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]) has\n$$\\Phi_n(x)\\in E\\qquad\\text{for infinitely many }n\\ge1.$$\nThe time unit is the frame time $[t]=\\tau$ ([[def-cm01-units]]), so\n\"infinitely many $n$\" means infinitely many returns at unit time steps.",
+        "strategy": "Composition of the phase-volume preservation theorem with the finite-measure recurrence theorem: a bounded invariant Borel set of finite phase volume has almost-everywhere infinite returns at unit time steps, under countable choice.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "pthm-cm13-liouville",
+          "pthm-cm13-flow-preservation",
+          "thm-poincare-recurrence-for-finite-measure-preserving-systems",
+          "def-cm13-two-form",
+          "thm-cm-smooth-dependence-and-the-variational-equation",
+          "def-countable-choice",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-borel-sigma-algebra",
+          "thm-heine-borel-rn",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "pthm-cm13-liouville": "physical-result",
+          "pthm-cm13-flow-preservation": "physical-result",
+          "thm-poincare-recurrence-for-finite-measure-preserving-systems": "mathematical-premise",
+          "def-cm13-two-form": "formulation-prerequisite",
+          "thm-cm-smooth-dependence-and-the-variational-equation": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Poincare recurrence for the Hamiltonian flow of a declared autonomous potential presentation: if a bounded Borel set of phase space with compact closure in the phase domain is invariant under a complete flow on that set, then the flow preserves phase volume on its Borel subsets by a finite local-cover and time-subdivision argument, and almost every state of each such subset returns to it infinitely often at integer multiples of the time unit. The statement assumes the Axiom of Countable Choice inherited from the local phase-volume theorem and asserts nothing about return times, which individual states return, infinite phase volume or incomplete flows outside the invariant set, and nothing empirical.",
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), §4.2.3 pp. 92-93: recurrence and the warning that positivity of energy alone does not make the accessible volume finite",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., Chapter 4: integrable and return-map discussions with the finite-phase-space qualifications",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7: dynamical-systems scope warnings on recurrence, invariant measures and numerical portraits",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 23
+      },
+      {
+        "id": "rem-cm16-scope-of-stability-and-chaos",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope of the stability, perturbation and chaos statements: conditional model deductions, the limits of finite-time and numerical evidence, and the empirical qualifications",
+        "statement": "This remark records what the page's statements do and do not establish. It adds\nno new claim of its own.\n\n**1. Model deductions only.** Every theorem of the page is a conditional\ndeduction about the declared model class of\n[[def-cm16-flow-equilibria-and-invariant-sets]]: a force model with stated\nmasses, configuration domain, regularity and — where relevant — periodicity.\nThe conclusions about equilibria, tori, horseshoes and recurrence are\nproperties of those models. None of them asserts that a physical system is\nexactly such a model, and none carries a measured value: the constants\nappearing in the statements (couplings, energy scales, pulse parameters, the\nsmallness thresholds $c$ and $\\delta_0$) are model data, and no measurement,\ncalibration, sampling or uncertainty budget occurs anywhere on the page.\n\n**2. Stability is not attraction, and one notion is not another.**\n[[pthm-cm16-energy-stability-and-instability]] establishes Lyapunov stability\nof a strict minimum, linear instability from a negative Hessian eigenvalue,\nnonlinear instability from a strictly concave potential, and the absence of\nasymptotic stability under exact energy conservation. The degenerate case (a\nzero Hessian eigenvalue) and the mixed saddle case (a negative eigenvalue\ntogether with oscillatory directions) are deliberately left open: only the\nlinear statement is made there. The harmonic-oscillator counterexample shows\nthat the page's stability vocabulary cannot be collapsed.\n\n**3. Linearisation is finite-time and local.**\n[[pthm-cm16-variational-equation-and-linearization]] and\n[[pthm-cm16-hyperbolic-linearization]] are finite-time statements on declared\nballs with declared quantitative bounds. A finite-time growth rate computed\nfrom them is a number attached to a state, a tangent vector and an interval\n([[def-cm16-finite-time-growth-rates]]); a positive rate is not a definition\nof chaos, and a positive real eigenvalue of a linearisation proves instability\nof the equilibrium, not chaos of the flow. Eigenvalues and rates are\nchart-dependent unless the state coordinates are scaled with fixed factors.\n\n**4. Chaos is a proved property of a stated map and set.**\n[[pthm-cm16-separatrix-splitting-and-horseshoe]] proves the four properties of\n[[def-cm16-chaos-list-for-model-maps]] for the stroboscopic map of one smooth\nperiodically pulsed oscillator, restricted to an explicitly constructed\ncompact invariant set, by transferring the supplied conjugacy to the shift\nthrough a linear scaling. It is existence for that model under its small-pulse\ncondition; it is not a claim about all driven oscillators, about every\nseparatrix, about Hénon-Heiles energies or about any numerical portrait.\nQuantified numerical trajectories and plotted sections are computations under\nchosen parameters; they are neither experiments nor proofs. The page contains\nno experiment item and reports no observed data.\n\n**5. KAM persistence is a positive-measure conditional statement.**\n[[pthm-cm16-two-rotor-kam]] gives, for the adopted two-rotor potential and\nsufficiently small coupling, a positive-measure set of Diophantine frequencies\nwhose tori persist, with quasi-periodic motions on them and explicit unit\nrestoration. It says nothing about the complement of that set, about resonant\ngaps, about all initial data, about chaotic diffusion, or about a laboratory\nrotor. The threshold $\\varepsilon\\le c\\alpha^2$ is a model-data condition; the\nconstant $c$ is not computed numerically and no empirical smallness is\nasserted.\n\n**6. Recurrence needs finite volume and invariance.**\n[[pthm-cm16-recurrence-for-finite-volume-models]] assumes a bounded\nflow-invariant Borel set of finite phase volume; its conclusion is\nalmost-everywhere with respect to phase volume and gives no return time, no\nrate and no individual-state statement. Free and unconfined models fail the\nhypothesis, and the theorem says nothing about them or about thermodynamic\nirreversibility.\n\n**7. Choice conventions.** The horseshoe theorem assumes the Axioms of\nCountable and Dependent Choice, inherited from its supplier, and the\nrecurrence theorem assumes Countable Choice, inherited from\n[[pthm-cm13-liouville]]. The KAM theorem also assumes Countable Choice, inherited from its analytic and measure-theoretic suppliers. The other statements of the page are choice-free:\ntheir suppliers use finite-dimensional linear algebra, explicit\nconstructions and finite estimates. No item reaches a recorded or unproved\nset-theoretic item.\n\n**8. Relation to the sources.** The four complete works consulted for this\npage (Tong, Likharev, SICM and Stewart) supply the model formulations,\nworked examples and caveats; their informal stability and chaos discussions\nare replaced by the exact supplier statements, and their numerical portraits\nare treated as illustrations, never as evidence. The empirical status of any\nmodel on this page would require a separately specified apparatus, sampling\nmodel and statistical analysis, which this page does not provide.",
+        "strategy": "A scope remark separating model deductions from empirical claims, listing the hypotheses and gaps of every page statement and the choice conventions.",
+        "deps": [
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "def-cm16-finite-time-growth-rates",
+          "def-cm16-stroboscopic-and-poincare-maps",
+          "def-cm16-chaos-list-for-model-maps",
+          "pthm-cm16-energy-stability-and-instability",
+          "pthm-cm16-variational-equation-and-linearization",
+          "pthm-cm16-hyperbolic-linearization",
+          "pthm-cm16-two-rotor-kam",
+          "pthm-cm16-separatrix-splitting-and-horseshoe",
+          "pthm-cm16-recurrence-for-finite-volume-models",
+          "pthm-cm13-liouville"
+        ],
+        "dependency_roles": {
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "def-cm16-finite-time-growth-rates": "formulation-prerequisite",
+          "def-cm16-stroboscopic-and-poincare-maps": "formulation-prerequisite",
+          "def-cm16-chaos-list-for-model-maps": "formulation-prerequisite",
+          "pthm-cm16-energy-stability-and-instability": "physical-result",
+          "pthm-cm16-variational-equation-and-linearization": "physical-result",
+          "pthm-cm16-hyperbolic-linearization": "physical-result",
+          "pthm-cm16-two-rotor-kam": "physical-result",
+          "pthm-cm16-separatrix-splitting-and-horseshoe": "physical-result",
+          "pthm-cm16-recurrence-for-finite-volume-models": "physical-result",
+          "pthm-cm13-liouville": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The scope of the page's conditional model deductions: what each stability, linearisation, hyperbolicity, KAM, horseshoe and recurrence statement assumes, what it concludes, which chart and choice conventions it uses, and why numerical trajectories, plotted sections and finite-time growth rates are neither proofs of chaos nor experimental evidence. The remark makes no new mathematical or empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Chapter 9 'Chaos': the informal chaos discussion whose claims are here restricted to the proved model statements",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapters 5 and 7: perturbation and chaos discussions with the corrected hypotheses and the warning that numerical divergence is not a proof",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3, §6.3, §7.2 and §7.4: tangle narratives, formal-series qualifications, truncation warnings and the resonance-overlap heuristic",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), §§4.2.3, 4.5-4.6 pp. 92-118: recurrence, integrability and adiabatic-invariance scope warnings",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 24
+      }
+    ]
+  },
+  {
+    "order": 144,
+    "id": "cm16-stability-perturbations-and-chaos-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Stability, perturbations and chaos — Examples",
+    "companion": "cm16-stability-perturbations-and-chaos",
+    "requires": [
+      "cm16-stability-perturbations-and-chaos",
+      "cm-math-dynamics",
+      "cm01-framework-quantities-and-geometry",
+      "cm02-forces-initial-data-and-newtonian-flow",
+      "cm-math-chaos",
+      "cm04-one-dimensional-conservative-and-dissipative-models",
+      "cm-math-balances",
+      "cm-math-kam"
+    ],
+    "items": [
+      {
+        "id": "ex-cm16-pendulum-equilibrium-checks",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The ideal pendulum on declared data: strict minimum and Lyapunov stability at the downward equilibrium, negative Hessian and instability at the upward equilibrium, the exact linearisation frequencies, and failure of attraction",
+        "statement": "**Declared model data.** Take one label on the real line as the angle chart of\nthe ideal planar pendulum: the chart domain is $\\Omega:=\\mathbb R$, the\nconfiguration coordinate is the angle $q$ (radians, identified modulo $2\\pi$\nat the end), the kinetic metric is the constant matrix\n$M:=m\\ell^2$ with $m:=1\\ \\mathrm{kg}$, $\\ell:=1\\ \\mathrm m$, and the potential\nis\n$$U(q):=mg\\ell\\,(1-\\cos q),\\qquad g:=9.81\\ \\mathrm{m\\,s^{-2}},\\qquad mg\\ell=9.81\\ \\mathrm J .$$\nThis is the mechanical chart datum of\n[[def-cm-mechanical-vector-field-and-energy-in-a-chart]] with\n$\\Omega=\\mathbb R$, $M$ constant and $U$ of class $C^\\infty$. Its equations\nare $m\\ell^2\\ddot q=-mg\\ell\\sin q$, equivalently\n$\\ddot q=-(g/\\ell)\\sin q$.\n\n**Assertions to check.** (i) $q=0$ and $q=\\pi$ are mechanical equilibria;\n(ii) at $q=0$ the potential is a strict local minimum and\n[[pthm-cm16-energy-stability-and-instability]] clause 1 makes $(0,0)$\nLyapunov stable, while the linearised frequencies are\n$\\pm i\\sqrt{g/\\ell}=\\pm i\\,3\\sqrt{109}/10\\ \\mathrm{s^{-1}}$ and the\nequilibrium is not asymptotically stable; (iii) at $q=\\pi$ the Hessian is\n$-mg\\ell<0$ and clause 3 makes $(\\pi,0)$ unstable, with linearised rates\n$\\pm 3\\sqrt{109}/10\\ \\mathrm{s^{-1}}$.",
+        "strategy": "Declared-data check of the energy-stability theorem on the ideal pendulum: strict minimum and stability with imaginary frequencies; negative Hessian and instability with real rates; failure of attraction.",
+        "deps": [
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "pthm-cm16-energy-stability-and-instability",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "thm-sine-and-cosine-derivatives",
+          "thm-derivative-of-exponential",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "pthm-cm16-energy-stability-and-instability": "physical-result",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the page's energy-stability theorem on the ideal planar pendulum: with mass 1 kg, length 1 m and g=9.81 m s^-2 in the angle chart, the downward equilibrium is a strict minimum, hence Lyapunov stable but not attracting, with purely imaginary linearisation frequencies; the upward equilibrium has a strictly negative Hessian, hence is unstable, with the real linearisation rates. All data are declared model data; no measurement and no empirical comparison is made.",
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.2 and §3.3: pendulum equilibrium types and the phase-plane discussion, with the linearised-stability caveats",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), §2.1 pp. 10-13: the pendulum Lagrangian and its equilibria",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.3 pp. 164-172: the corrected stability definitions and the small-oscillation frequency about a stable equilibrium",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm16-linearization-and-growth-checks",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Two declared linear models worked through: the harmonic flow has zero finite-time growth in every direction, while the repulsive linear model has exact rates $\\pm1$ and the positive Lyapunov exponent $1$ at its equilibrium",
+        "statement": "**Declared model data.** Take one label with configuration domain\n$Q:=\\mathbb R^3$, mass $m:=1$ in dimensionless units and force maps\n$F_i:\\mathbb R\\times Q\\times\\mathbb R^3\\to\\mathbb R^3$ given by\n$F_1(T,\\mathbf q,\\mathbf v):=-\\mathbf q$ and\n$F_2(T,\\mathbf q,\\mathbf v):=\\mathbf q$. These are continuous, globally\nstate-Lipschitz force maps of [[post-cm02-force-superposition]]. Equivalently,\nin the constant-metric chart $\\Omega:=\\mathbb R^3$ with $M:=I_3$, they have\nthe potentials $U_1(\\mathbf q):=\\tfrac12\\lVert\\mathbf q\\rVert_2^2$ and\n$U_2(\\mathbf q):=-\\tfrac12\\lVert\\mathbf q\\rVert_2^2$ of\n[[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. The associated fields\nand complete motion maps are listed below; $\\mathbf e_1,\\mathbf e_2,\\mathbf\ne_3$ denote the standard coordinate basis of $\\mathbb R^3$.\n\n1. The **harmonic model** has field\n   $G_1(\\mathbf q,\\mathbf v)=(\\mathbf v,-\\mathbf q)$ and motion map\n   $$\\Phi_t^1(\\mathbf q_0,\\mathbf v_0)=\\bigl(\\mathbf q_0\\cos t+\\mathbf v_0\\sin t,\\,-\\mathbf q_0\\sin t+\\mathbf v_0\\cos t\\bigr).$$\n2. The **repulsive linear model** has field\n   $G_2(\\mathbf q,\\mathbf v)=(\\mathbf v,\\mathbf q)$ and motion map\n   $$\\Phi_t^2(\\mathbf q_0,\\mathbf v_0)=\\bigl(\\tfrac12(\\mathbf q_0+\\mathbf v_0)e^{t}+\\tfrac12(\\mathbf q_0-\\mathbf v_0)e^{-t},\\,\\tfrac12(\\mathbf q_0+\\mathbf v_0)e^{t}-\\tfrac12(\\mathbf q_0-\\mathbf v_0)e^{-t}\\bigr).$$\n\nFor a state $a$ and a nonzero tangent vector $u$ with\n$D_a\\Phi_t(a)u\\ne0$, the **finite-time tangent growth rate** is\n$t^{-1}\\log(\\lVert D_a\\Phi_t(a)u\\rVert_2/\\lVert u\\rVert_2)$; when the\nforward lifetime is unbounded and its finite limit as $t\\to\\infty$ exists,\nthat limit is the **Lyapunov exponent** ([[def-cm16-finite-time-growth-rates]]\nclauses (i)-(ii)). Both displayed flows are complete, so this lifetime\ncondition holds for each state.\n\n**Assertions to check.** (i) Both displayed maps are the local flows of their\nfields; (ii) for the harmonic model\n$D_{a}\\Phi_t^1(a)$ is the orthogonal block rotation\n$$\\begin{pmatrix}\\cos t\\,I_3&\\sin t\\,I_3\\\\-\\sin t\\,I_3&\\cos t\\,I_3\\end{pmatrix},$$\nso every finite-time tangent growth rate vanishes and every existing\nLyapunov exponent is $0$; (iii) for the repulsive model the rates along the directions\n$(\\mathbf e_1,-\\mathbf e_1)$ and $(\\mathbf e_1,\\mathbf e_1)$ are $-1$ and\n$+1$, so the Lyapunov exponent of the equilibrium along the unstable\neigenvector is $1$.",
+        "strategy": "Declared-data check of the variational equation and the growth-rate definition on two linear models: zero rates for the harmonic flow, exact rates plus and minus one for the repulsive flow.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm16-finite-time-growth-rates",
+          "pthm-cm16-variational-equation-and-linearization",
+          "pthm-cm02-ivp",
+          "def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "def-euclidean-inner-product",
+          "def-natural-logarithm",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm16-finite-time-growth-rates": "formulation-prerequisite",
+          "pthm-cm16-variational-equation-and-linearization": "physical-result",
+          "pthm-cm02-ivp": "physical-result",
+          "def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-natural-logarithm": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the page's finite-time growth definition and of the variational-equation supplier on two dimensionless one-label Cartesian force models in R^3: the harmonic model with mass matrix M=I_3, potential U_1(q)=||q||^2/2 and force F_1(q)=-q has the rotation flow, whose derivative is orthogonal, so every finite-time tangent growth rate vanishes identically and every Lyapunov exponent that exists is zero; the repulsive linear model with potential U_2(q)=-||q||^2/2 and force F_2(q)=q has the hyperbolic flow, with exact rates +1 and -1 along the eigenvectors of the linearisation and Lyapunov exponent 1 at the equilibrium along each unstable coordinate direction. The check is model-data substitution, not a measurement and not a statement about chaotic behaviour.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103: the linearisation of a mechanical system and the growth of infinitesimal deviations",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: Lyapunov exponents and the warning that a positive exponent at a hyperbolic point is not chaos",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §5.2: small oscillations with M=K=1, the harmonic phase rotation and the repulsive case",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm16-isotropic-oscillator-return-map-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The three-dimensional isotropic oscillator: the stroboscopic map at half period is minus the identity, every state is periodic, the periodic points are dense, and the map is neither mixing nor sensitive",
+        "statement": "**Declared model data.** Take one label with configuration domain\n$Q:=\\mathbb R^3$, mass $m:=1$ in dimensionless units, and force map\n$F:\\mathbb R\\times Q\\times\\mathbb R^3\\to\\mathbb R^3$ given by\n$F(T,\\mathbf q,\\mathbf v):=-\\mathbf q$. This is a smooth force map of\n[[post-cm02-force-superposition]]. Equivalently, in the chart\n$\\Omega:=\\mathbb R^3$ the constant kinetic metric is $M:=I_3$ and the\npotential is $U(\\mathbf q):=\\tfrac12\\lVert\\mathbf q\\rVert_2^2$ of\n[[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. The field and\nmotion through $(\\mathbf q_0,\\mathbf v_0)$ are\n$$G(\\mathbf q,\\mathbf v)=(\\mathbf v,-\\mathbf q),\\qquad \\mathbf q(t)=\\mathbf q_0\\cos t+\\mathbf v_0\\sin t,\\qquad \\mathbf v(t)=-\\mathbf q_0\\sin t+\\mathbf v_0\\cos t.$$\nRegard the autonomous force model as $P$-periodic for any $P>0$, and let\n$\\Psi_P$ be its stroboscopic map of\n[[def-cm16-stroboscopic-and-poincare-maps]] clause (ii). The complete flow\nmakes each $\\Psi_P$ defined on all of $\\mathbb R^6$. Use the section\n$\\Sigma_+:=\\{(\\mathbf q,\\mathbf v):q_y=0,\\ v_y>0\\}$; its first-return map\nsends each section state to the state at its least positive return time, with\nthe local $C^1$ construction supplied by\n[[def-cm16-stroboscopic-and-poincare-maps]] clause (iii).\n\n**Assertions to check.** (i) The displayed curves are the model's motions;\n(ii) $\\Psi_\\pi=-\\mathrm{id}$ and $\\Psi_{2\\pi}=\\mathrm{id}$, so every state of\nthe model is periodic under the flow with period $2\\pi$ and every point is a\nperiodic point of $\\Psi_\\pi$ with period dividing $2$; (iii) the first-return\nmap of $\\Sigma_+$ is the identity; (iv) with the Euclidean metric of the\nphase chart, $\\Psi_\\pi$ on $X:=\\mathbb R^6$ is continuous and has dense\nperiodic points, but is not topologically mixing and has no sensitivity\nconstant, hence is not chaotic in the stated sense of\n[[def-cm16-chaos-list-for-model-maps]].",
+        "strategy": "Declared-data check of the discrete-time vocabulary: the half-period stroboscopic map is minus the identity, so periodic points are dense but mixing and sensitivity fail.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm16-stroboscopic-and-poincare-maps",
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism",
+          "def-cm16-chaos-list-for-model-maps",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "pthm-cm02-ivp",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm16-stroboscopic-and-poincare-maps": "formulation-prerequisite",
+          "prop-cm-first-return-map-is-a-local-c1-diffeomorphism": "mathematical-premise",
+          "def-cm16-chaos-list-for-model-maps": "formulation-prerequisite",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "pthm-cm02-ivp": "physical-result",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the page's discrete-time vocabulary on a one-label three-dimensional Cartesian force model with mass 1 and isotropic harmonic potential U(r)=||r||^2/2 in dimensionless units: the flow is an explicit rotation of each coordinate plane, the stroboscopic map at period pi is minus the identity, at period 2pi it is the identity, the Poincare first-return map to the section q_y=0, v_y>0 is the identity, every state is periodic, periodic points are dense in the six-dimensional phase space, and the map fails topological mixing and sensitivity, so it is not chaotic in the stated sense. The check is model-data substitution; it reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.2 pp. 157-172: stroboscopic maps and the warning that dense periodic points alone do not make a map chaotic",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.3: the isotropic two-dimensional harmonic oscillator and its closed phase-plane orbits",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: return maps and the explicit distinction between periodic behaviour and chaos",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm16-pulse-horseshoe-data-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The pulsed horseshoe on declared data: $a=100$, the radicand box $[74,126]$, the contraction factor $1/\\sqrt{74}$, the fixed points $1\\pm\\sqrt{101}$, and the physical bounds of the coded states at $\\ell_0=1\\,\\mathrm m$, $m=1\\,\\mathrm{kg}$, $\\omega_0=2\\pi\\,\\mathrm{s^{-1}}$",
+        "statement": "**Declared model data.** Take the full physical pulsed oscillator model of\n[[pthm-cm16-separatrix-splitting-and-horseshoe]] clause (i), and restrict its\ncoded states to the invariant axis, where transverse coordinates and momenta\nvanish. Use the declared data\n$$a:=100,\\qquad \\ell_0:=1\\ \\mathrm m,\\qquad m:=1\\ \\mathrm{kg},\\qquad \\omega_0:=2\\pi\\ \\mathrm{s^{-1}},$$\nand a pulse width $0<\\delta<\\delta_0$ with $\\delta_0$ the supplier threshold\n(not evaluated numerically here). Let $R:=\\sqrt a+3$, $L:=\\sqrt{a-2R}$ and let\n$r_\\pm$ be the fixed points of the limiting quadratic map.\n\n**Assertions to check.** (i) $R=13$ and the coding radicands\n$a+x_{n-1}+x_{n+1}$ lie in $[74,126]=[a-2R,a+2R]$, with\n$\\sqrt{126}<13=R$; (ii) the contraction factor of the coding map is\n$1/L=1/\\sqrt{74}$ and $r_\\pm=1\\pm\\sqrt{101}$; (iii) for the limiting pulse,\n$K\\circ R_0=F$ with $R_0(q,p)=(p,-q)$, $K(q,p)=(q,p+q^2-a)$ and\n$F(x,y)=(y,y^2-a-x)$; (iv) every coded state satisfies\n$\\lvert Q\\rvert\\le13\\ \\mathrm m$ and $\\lvert\\Pi\\rvert\\le26\\pi\\\n\\mathrm{kg\\,m\\,s^{-1}}$, and the forcing period is\n$T_p=(\\pi/2+\\delta)/(2\\pi)\\ \\mathrm s$.",
+        "strategy": "Declared-data evaluation of the pulsed-horseshoe constants at a=100: coding box, radicand interval, contraction factor, fixed points, kick composition and physical bounds.",
+        "deps": [
+          "pthm-cm16-separatrix-splitting-and-horseshoe",
+          "def-cm16-stroboscopic-and-poincare-maps",
+          "def-smooth-periodic-oscillator-pulse-model",
+          "lem-coded-quadratic-recurrence-is-a-contraction",
+          "lem-rescaled-pulse-map-is-c-one-close-to-kick",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm16-separatrix-splitting-and-horseshoe": "physical-result",
+          "def-cm16-stroboscopic-and-poincare-maps": "formulation-prerequisite",
+          "def-smooth-periodic-oscillator-pulse-model": "mathematical-premise",
+          "lem-coded-quadratic-recurrence-is-a-contraction": "mathematical-premise",
+          "lem-rescaled-pulse-map-is-c-one-close-to-kick": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the constants and bounds in the page's pulsed-horseshoe theorem: at amplitude a=100 the coding box is R=13, the radicands lie in [74,126], the contraction factor is 1/sqrt(74), the fixed points are 1 plus or minus sqrt(101), the limiting kick satisfies K composed with the rotation = F, and with length scale 1 m, mass 1 kg and frequency scale 2 pi per second the coded states on the invariant axis are bounded by 13 m in axial position and 26 pi kg m per second in axial momentum, with period (pi/2+delta)/(2 pi) seconds. All quantities are declared model data; the pulse-width threshold is not numerically evaluated and no measurement is involved.",
+        "sources": {
+          "references": [
+            {
+              "title": "P. Cvitanovic, R. Artuso, R. Mainieri, G. Tanner, G. Vattay, Chaos: Classical and Quantum (ChaosBook.org, edition 17.6.8), Chapter 15 Sections 15.2-15.3: fixed points and itinerary constants of the quadratic horseshoe",
+              "url": "https://chaosbook.org/chapters/ChaosBook.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems, AMS Graduate Studies in Mathematics 140 (author's complete preliminary version), Section 13.1: quadratic horseshoe values and their invariant sets",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: return-map tangle constructions for the forced oscillator",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "cex-cm16-positive-growth-is-not-chaos",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A positive Lyapunov exponent at a hyperbolic equilibrium does not produce a chaotic invariant set of the time-one map: the three-dimensional repulsive model has rate $1$ and no compact invariant set with more than one point",
+        "statement": "**False statement.** *Let $G:S_0\\to\\mathbb R^{6N}$ be the $C^1$ associated\nfield of a complete autonomous stability model in the sense of\n[[def-cm16-flow-equilibria-and-invariant-sets]], with flow\n$\\Phi:\\mathbb R\\times S_0\\to S_0$. If an equilibrium has a positive real\neigenvalue $\\lambda$ of $DG$ and Lyapunov exponent $\\lambda$ along a\ncorresponding eigenvector, then the time-one map $f:=\\Phi_1:S_0\\to S_0$\npossesses a compact invariant set with more than one point on\nwhich its restriction is chaotic in the stated sense of\n[[def-cm16-chaos-list-for-model-maps]] (continuous, topologically mixing,\ndense periodic points, sensitive dependence).*",
+        "strategy": "Counterexample by classification of compact invariant sets: the repulsive linear model has a positive exponent at its equilibrium yet every compact invariant set is a single point that fails sensitivity.",
+        "deps": [
+          "def-cm16-finite-time-growth-rates",
+          "def-cm16-chaos-list-for-model-maps",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps",
+          "pthm-cm16-hyperbolic-linearization",
+          "ex-cm16-linearization-and-growth-checks",
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "def-euclidean-inner-product",
+          "def-metric-ball",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-cm16-finite-time-growth-rates": "formulation-prerequisite",
+          "def-cm16-chaos-list-for-model-maps": "formulation-prerequisite",
+          "def-cm-topologically-mixing-dense-periodic-and-sensitive-maps": "mathematical-premise",
+          "pthm-cm16-hyperbolic-linearization": "physical-result",
+          "ex-cm16-linearization-and-growth-checks": "operational-prerequisite",
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-model counterexample in the one-label three-dimensional force branch, refuting the implication from a positive Lyapunov exponent at an equilibrium to a chaotic compact invariant set of the time-one map: the dimensionless repulsive model with potential U(q)=-||q||^2/2 has a complete flow, exponent 1 at its equilibrium along each unstable direction, and a nonlinearly unstable equilibrium, yet every nonempty compact invariant set of its time-one map is {0}; this singleton fails the sensitivity clause of the page's chaos list. The counterexample is a model computation; it reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: the warning that a positive exponent at a hyperbolic equilibrium is not a definition or proof of chaos",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 and §7.2: the distinction between exponential divergence of nearby trajectories and chaos, with the explicit warning that a picture is not a proof",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Chapter 9: the qualitative chaos discussion whose equivalence claims are refuted by this model",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 14
+      },
+      {
+        "id": "cex-cm16-stability-does-not-imply-attraction",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Lyapunov stability does not imply attraction: the harmonic model is stable at its equilibrium while every nonzero datum keeps its distance and never converges",
+        "statement": "**False statement.** *Every Lyapunov stable equilibrium of a one-dimensional\nmechanical chart model attracts every sufficiently close initial state;\nequivalently, Lyapunov stability implies asymptotic stability.*",
+        "strategy": "Counterexample on the harmonic model: the equilibrium is Lyapunov stable while every nonzero datum keeps its distance, in agreement with the no-attraction clause of the energy theorem.",
+        "deps": [
+          "pthm-cm16-energy-stability-and-instability",
+          "def-cm16-stability-and-hyperbolicity-concepts",
+          "pthm-cm04-harmonic-motion",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm16-energy-stability-and-instability": "physical-result",
+          "def-cm16-stability-and-hyperbolicity-concepts": "formulation-prerequisite",
+          "pthm-cm04-harmonic-motion": "physical-result",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-model counterexample refuting the implication from Lyapunov stability to asymptotic stability for the page's mechanical models: the one-dimensional harmonic model with unit mass and unit stiffness has the equilibrium 0, which is Lyapunov stable by the strict-minimum theorem, while the datum (delta,0) has the periodic motion delta cos(t) whose distance from the equilibrium returns to delta at every period, so it never converges. The counterexample is a model computation; it reports no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.3 pp. 164-172: the corrected definitions of Lyapunov stability and asymptotic stability and the warning that centres are stable without being attracting",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.2: equilibrium types, including the stable-without-attraction centre",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), §2.1 pp. 10-13: the harmonic oscillator's periodic motions and conserved energy",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 17
+      },
+      {
+        "id": "ex-cm16-recurrence-volume-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A trapped one-label model: the compact energy sublevel of the radial quartic potential is invariant with finite phase volume, so the recurrence theorem applies, while the free model's energy sublevels are unbounded and the hypothesis fails",
+        "statement": "**Declared model data.** Take one label in the flat Cartesian presentation of\n[[pthm-cm16-recurrence-for-finite-volume-models]] with $N=1$: the configuration\ndomain is $Q:=\\mathbb R^3$, the mass is $m:=1$ so that $\\mathsf M=I_3$ and\n$W=Q\\times\\mathbb R^3$ with coordinates $(x,v)$, and the **radial quartic\npotential** is\n$$U(x):=\\tfrac14\\lVert x\\rVert_2^4,$$\na $C^\\infty$ datum of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]]\nwith field $G(x,v)=(v,-\\lVert x\\rVert_2^2x)$ and energy\n$E(x,v)=\\tfrac12\\lVert v\\rVert_2^2+\\tfrac14\\lVert x\\rVert_2^4$. For $E_1>0$ put\n$$A_{E_1}:=\\{(x,v)\\in W:E(x,v)\\le E_1\\}.$$\n\n**Assertions to check.** (i) $A_{E_1}$ is a nonempty compact Borel subset of\n$W$ with\n$\\lambda_6(A_{E_1})\\le\\bigl(2(4E_1)^{1/4}\\bigr)^3\\bigl(2\\sqrt{2E_1}\\bigr)^3=512\\,E_1^{9/4}<\\infty$;\n(ii) the flow of the model maps $A_{E_1}$ onto itself for every real time, so\nthe hypotheses of [[pthm-cm16-recurrence-for-finite-volume-models]] are met\nand for every Borel $E\\subseteq A_{E_1}$ almost every state of $E$ returns to\n$E$ infinitely often; (iii) for the flat model $U\\equiv0$ the energy sublevels\nare unbounded, the phase measure of $W$ is infinite, and each nonzero-velocity\nfree motion eventually exits every bounded set (hence visits a fixed bounded\nset at only finitely many integer times), so the finite-volume hypothesis is\nnot automatic.",
+        "strategy": "Declared-data realization of the recurrence hypotheses on the trapped quartic model and the failure of the finite-volume hypothesis for the free model.",
+        "deps": [
+          "pthm-cm16-recurrence-for-finite-volume-models",
+          "def-cm16-flow-equilibria-and-invariant-sets",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart",
+          "lem-cm-energy-conservation-for-the-mechanical-system",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-borel-sigma-algebra",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "pthm-cm16-recurrence-for-finite-volume-models": "physical-result",
+          "def-cm16-flow-equilibria-and-invariant-sets": "formulation-prerequisite",
+          "def-cm-mechanical-vector-field-and-energy-in-a-chart": "mathematical-premise",
+          "lem-cm-energy-conservation-for-the-mechanical-system": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the page's recurrence theorem on a trapped one-label, three-dimensional Cartesian model: for the unit-mass radial quartic potential U(x)=||x||^4/4 the six-dimensional phase-space energy sublevel {E<=E1}, E1>0, is compact with finite volume bounded by 512 E1^(9/4), invariant under the flow by energy conservation and compact continuation, so the recurrence theorem gives almost-everywhere infinite returns; in contrast the free model U=0 has unbounded energy sublevels and each nonzero-velocity trajectory eventually exits every bounded set, showing the finite-volume hypothesis is not automatic. The check uses no measurement.",
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), §4.2.3 pp. 92-93: recurrence, the finite-measure requirement and the warning that positivity of energy alone does not bound the accessible volume",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.3 and Chapter 9: phase-plane energy curves and the bounded-motion discussion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.1 pp. 143-157: continuation, trapping in compact invariant sets and the limits of numerical phase portraits",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 24
+      },
+      {
+        "id": "ex-cm16-two-rotor-kam-units-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Unit restoration and calibration of the two-rotor KAM statement: the scaling identities at $\\mathcal I=E_0=1$, the physical angular frequencies, the exclusion of rational frequency labels, and the equal-rescaling invariance",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), as in the cited two-rotor KAM theorem.\n\n**Declared model data.** Take the two-rotor model of\n[[pthm-cm16-two-rotor-kam]] with\n$$\\mathcal I:=1\\ \\mathrm{kg\\,m^2},\\qquad E_0:=1\\ \\mathrm J,\\qquad \\varepsilon\\ \\text{dimensionless},$$\nso that $J_0=\\sqrt{\\mathcal I E_0}=1\\ \\mathrm{kg\\,m^2\\,s^{-1}}$,\n$t_0=J_0/E_0=1\\ \\mathrm s$ and $\\omega_0=\\sqrt{E_0/\\mathcal I}=1\\ \\mathrm{s^{-1}}$.\n\n**Assertions to check.** (i) The dimensions $[H_{\\mathrm{phys}}]=\\mathrm J$,\n$[\\Pi_i]=\\mathrm{kg\\,m^2\\,s^{-1}}$, $[\\mathcal I]=\\mathrm{kg\\,m^2}$,\n$[\\varepsilon]=1$ and $[\\omega_0]=\\mathrm{s^{-1}}$ ([[def-cm01-units]]).\n(ii) With $I_i=\\Pi_i/J_0$, $s=t/t_0$ the physical Hamilton equations\n$\\dot\\theta_i=\\Pi_i/\\mathcal I$, $\\dot\\Pi_i=E_0\\varepsilon\\sin\\theta_i\\cos\\theta_{3-i}$\nare equivalent to $\\theta_i'=I_i$,\n$I_i'=\\varepsilon\\sin\\vartheta_i\\cos\\vartheta_{3-i}$.\n(iii) A surviving torus with dimensionless label $\\nu$ carries the physical\nangular frequencies $\\omega_0\\nu_i$, here $\\nu_i\\ \\mathrm{s^{-1}}$.\n(iv) Every rational label in the cube $C^*$ is excluded from\n$\\Omega_{\\alpha,\\tau}$ for every $\\alpha>0$ and $\\tau>1$.\n(v) Replacing $(\\mathcal I,E_0)$ by $(\\lambda\\mathcal I,\\lambda E_0)$ with\n$\\lambda>0$ leaves $\\omega_0$, the dimensionless model and the smallness\ncondition unchanged, while rescaling $J_0$ by $\\lambda$.",
+        "strategy": "Unit restoration and label checks for the two-rotor KAM statement at declared inertia and energy scales, including exclusion of rational labels and equal-rescaling invariance.",
+        "deps": [
+          "def-countable-choice",
+          "pthm-cm16-two-rotor-kam",
+          "def-holomorphic-kam-domain-and-diophantine-labels",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "pthm-cm16-two-rotor-kam": "physical-result",
+          "def-holomorphic-kam-domain-and-diophantine-labels": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A declared-data check of the units and labels in the page's two-rotor KAM theorem: with moment of inertia 1 kg m^2 and energy scale 1 J the scaling constants are J0=1 kg m^2 s^-1, t0=1 s and omega0=1 s^-1; the physical and dimensionless Hamilton equations correspond exactly; a surviving torus with dimensionless label nu carries physical angular frequencies omega0 nu_i; every rational label of the frequency cube is excluded from the Diophantine set; and equal rescaling of inertia and energy leaves the dimensionless model and the threshold unchanged. The constant c in the smallness condition is not numerically evaluated and no measured value is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "Jürgen Pöschel, A Lecture on the Classical KAM Theorem (version 1.3, 2009; arXiv:0908.2234), §1: the action-angle formulation, the twist condition and the Diophantine frequency condition of the analytic KAM theorem",
+              "url": "https://arxiv.org/pdf/0908.2234"
+            },
+            {
+              "title": "Rafael de la Llave, A Tutorial on KAM Theory (expanded version of the Seattle 1999 lectures; complete text), §3.3 and §6.1: Diophantine frequency sets, resonant slabs and the standard examples of non-Diophantine labels",
+              "url": "https://www.johndcook.com/KAM.pdf"
+            },
+            {
+              "title": "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §1.5 and §4.6: dimensions of action-angle data and the requirement of a precise KAM statement",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 13
+      }
+    ]
+  }
+]

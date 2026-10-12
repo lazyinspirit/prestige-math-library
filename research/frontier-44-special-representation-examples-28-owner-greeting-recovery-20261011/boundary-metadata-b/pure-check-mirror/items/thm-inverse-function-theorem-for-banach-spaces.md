@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-inverse-function-theorem-for-banach-spaces.md

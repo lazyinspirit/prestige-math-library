@@ -39,5 +39,4 @@ $\operatorname{Spec}A$.
 
 1.2 On $D(g)\subseteq D(f)$ the relevant section rings are $(A_f)_{g/1}$ and $A_g$, canonically isomorphic and compatible with restrictions. [F2, algebra]
 
-2.1 The basic opens cover $D(f)$, so the preceding identifications give an isomorphism of locally ringed spaces. [step 1.1, step 1.2] ∎
- 
+2.1 The basic opens cover $D(f)$, so the preceding identifications give an isomorphism of locally ringed spaces. [step 1.1, step 1.2] ∎  

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-nonempty-hereditary-class-contains-the-null-graph.md

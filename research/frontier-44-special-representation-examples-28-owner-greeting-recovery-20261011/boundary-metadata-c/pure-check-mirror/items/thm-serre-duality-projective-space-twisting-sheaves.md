@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-serre-duality-projective-space-twisting-sheaves.md

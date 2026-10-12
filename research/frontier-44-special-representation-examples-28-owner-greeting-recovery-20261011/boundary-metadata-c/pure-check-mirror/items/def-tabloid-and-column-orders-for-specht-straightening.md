@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-tabloid-and-column-orders-for-specht-straightening.md

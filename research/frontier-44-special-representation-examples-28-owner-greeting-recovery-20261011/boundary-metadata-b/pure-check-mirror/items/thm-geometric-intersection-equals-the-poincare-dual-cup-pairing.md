@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-geometric-intersection-equals-the-poincare-dual-cup-pairing.md

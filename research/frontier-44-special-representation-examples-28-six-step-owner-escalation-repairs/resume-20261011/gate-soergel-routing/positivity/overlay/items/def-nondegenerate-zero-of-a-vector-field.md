@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-nondegenerate-zero-of-a-vector-field.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-affine-point-stabilizers-and-vertex-residues.md

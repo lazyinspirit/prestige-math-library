@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-connecting-morphism-vanishes-for-a-chain-split-short-exact-sequence.md

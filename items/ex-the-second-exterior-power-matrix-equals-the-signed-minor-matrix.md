@@ -47,9 +47,8 @@ whose entry in row $J$ and column $I$ is exactly the signed $2\times2$ minor of 
 
 **Proof technique:** direct.
 
-
-1.1 Direct computation of the images of the three basis wedges gives $\Lambda^2T(e_1\wedge e_2)=(e_1+2e_3)\wedge(2e_1+e_2)=e_1\wedge e_2-4e_1\wedge e_3-2e_2\wedge e_3$, $\Lambda^2T(e_1\wedge e_3)=(e_1+2e_3)\wedge(3e_2+e_3)=3e_1\wedge e_2+e_1\wedge e_3-6e_2\wedge e_3$, and $\Lambda^2T(e_2\wedge e_3)=(2e_1+e_2)\wedge(3e_2+e_3)=6e_1\wedge e_2+2e_1\wedge e_3+e_2\wedge e_3$, so the columns of the matrix are $(1,-4,-2)$, $(3,1,-6)$, $(6,2,1)$. [algebra]
+ 1.1 Direct computation of the images of the three basis wedges gives $\Lambda^2T(e_1\wedge e_2)=(e_1+2e_3)\wedge(2e_1+e_2)=e_1\wedge e_2-4e_1\wedge e_3-2e_2\wedge e_3$, $\Lambda^2T(e_1\wedge e_3)=(e_1+2e_3)\wedge(3e_2+e_3)=3e_1\wedge e_2+e_1\wedge e_3-6e_2\wedge e_3$, and $\Lambda^2T(e_2\wedge e_3)=(2e_1+e_2)\wedge(3e_2+e_3)=6e_1\wedge e_2+2e_1\wedge e_3+e_2\wedge e_3$, so the columns of the matrix are $(1,-4,-2)$, $(3,1,-6)$, $(6,2,1)$. [algebra]
 
 1.2 By [L1], the expected entries are the nine $2\times2$ minors: $\det A_{12,12}=1$, $\det A_{13,12}=-4$, $\det A_{23,12}=-2$, $\det A_{12,13}=3$, $\det A_{13,13}=1$, $\det A_{23,13}=-6$, $\det A_{12,23}=6$, $\det A_{13,23}=2$, $\det A_{23,23}=1$. [L1, algebra]
 
-2.1 The nine coordinates of step 1.1 coincide entry by entry with the nine minors of step 1.2, so the displayed matrix equals the signed minor matrix. [step 1.1, step 1.2] ∎
+2.1 The nine coordinates of step 1.1 coincide entry by entry with the nine minors of step 1.2, so the displayed matrix equals the signed minor matrix. [step 1.1, step 1.2] ∎ 

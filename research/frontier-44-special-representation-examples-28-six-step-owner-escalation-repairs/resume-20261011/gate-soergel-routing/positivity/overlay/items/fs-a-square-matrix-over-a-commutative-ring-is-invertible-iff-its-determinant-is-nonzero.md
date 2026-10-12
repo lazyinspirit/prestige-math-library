@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero.md

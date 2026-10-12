@@ -45,8 +45,7 @@ that $f=g$ almost everywhere on $[a,b]$.
 
 **Proof technique:** direct.
 
-1.1 By [L1], choose bounded Borel functions $\varphi,\psi$ with [L1, L2]
-$\varphi\le f\le\psi$ and $$\int_{[a,b]}(\psi-\varphi)\,d\lambda_1=0.$$ Since $\psi-\varphi\ge0$, [L2] gives $\psi=\varphi$ almost everywhere on $[a,b]$.
+1.1 By [L1], choose bounded Borel functions $\varphi,\psi$ with [L1, L2] $\varphi\le f\le\psi$ and $$\int_{[a,b]}(\psi-\varphi)\,d\lambda_1=0.$$ Since $\psi-\varphi\ge0$, [L2] gives $\psi=\varphi$ almost everywhere on $[a,b]$. [L1, L2]
 
-2.1 On the same full-measure set one has [step 1.1, L1]
-$\varphi\le f\le\psi=\varphi$, so $f=\varphi$ almost everywhere. Taking $g:=\varphi$ proves the claim, and $g$ is Borel by step 1.1. ∎
+2.1 On the same full-measure set one has [step 1.1, L1] $\varphi\le f\le\psi=\varphi$, so $f=\varphi$ almost everywhere. Taking $g:=\varphi$ proves the claim, and $g$ is Borel by step 1.1. [step 1.1, L1] ∎
+

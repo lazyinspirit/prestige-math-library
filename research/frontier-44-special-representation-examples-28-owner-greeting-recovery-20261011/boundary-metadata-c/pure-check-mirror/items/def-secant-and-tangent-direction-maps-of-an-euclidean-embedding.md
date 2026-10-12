@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-secant-and-tangent-direction-maps-of-an-euclidean-embedding.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-endpoint-monodromy-of-a-configuration-loop.md

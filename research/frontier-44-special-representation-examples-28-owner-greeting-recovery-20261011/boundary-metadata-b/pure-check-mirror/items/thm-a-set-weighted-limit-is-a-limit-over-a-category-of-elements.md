@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-set-weighted-limit-is-a-limit-over-a-category-of-elements.md

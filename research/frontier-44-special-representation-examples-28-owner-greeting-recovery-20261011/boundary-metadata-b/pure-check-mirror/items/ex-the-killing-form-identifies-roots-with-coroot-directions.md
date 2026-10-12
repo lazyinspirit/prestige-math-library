@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-the-killing-form-identifies-roots-with-coroot-directions.md

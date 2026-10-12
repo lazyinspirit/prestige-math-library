@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-reduced-qr-formulas-for-full-rank-pseudoinverses.md

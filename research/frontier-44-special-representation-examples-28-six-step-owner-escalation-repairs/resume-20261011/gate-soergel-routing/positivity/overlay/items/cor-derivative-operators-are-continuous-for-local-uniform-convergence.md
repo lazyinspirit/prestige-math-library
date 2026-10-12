@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-derivative-operators-are-continuous-for-local-uniform-convergence.md

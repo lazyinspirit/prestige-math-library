@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-distributional-harmonicity-removes-an-apparent-corner.md

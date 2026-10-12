@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-endomorphism-has-a-commuting-diagonal-plus-nilpotent-decomposition.md

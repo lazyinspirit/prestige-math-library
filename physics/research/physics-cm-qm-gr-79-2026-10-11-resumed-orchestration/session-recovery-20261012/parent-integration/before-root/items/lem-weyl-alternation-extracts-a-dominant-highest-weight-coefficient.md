@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weyl-alternation-extracts-a-dominant-highest-weight-coefficient.md

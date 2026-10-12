@@ -7,9 +7,11 @@ import { holdStep3 } from './step3-hold.mts';
 import { prepareStep3AdjudicationOrder } from '../../physics-support/step3-adjudication-order.mjs';
 import { batchAdjudicator, step3Adjudicators } from '../../physics-support/step3-adjudicators.mjs';
 
-// Step-3 readers, refuters and adjudicators use Sol 6.1/high.
+// Step-3 readers and refuters use GPT-6 Luna max;
+// batch adjudicators use Sol 6.1/medium.
 // The live engine can reload this module while retaining an older models.mjs import.
-const SOL61_HIGH = MODEL_PROFILE_NAMES.sol61High ?? 'gpt-6.1-sol-high';
+const SOL61_MEDIUM = MODEL_PROFILE_NAMES.sol61Medium;
+const LUNA_MAX = MODEL_PROFILE_NAMES.lunaMax;
 
 /** Build Step 3 with the canonical gate helpers from mathlib.mts. */
 export function step3Stages(d: any) {
@@ -51,7 +53,7 @@ export function step3Stages(d: any) {
     {
       id: '3a-read',
       label: 'independent readers over authored content',
-      modelProfile: (plan: any) => plan.role === 'reader' ? SOL61_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'reader' ? LUNA_MAX : undefined,
       pipeline: 'read',
       role: 'reader',
       units: batches,
@@ -97,7 +99,7 @@ export function step3Stages(d: any) {
     {
       id: '3a-refute',
       label: 'read-only refuters over untouched, high-risk and page carriers',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? SOL61_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'refuter' ? LUNA_MAX : undefined,
       pipeline: 'read',
       role: 'refuter',
       units: batches,
@@ -139,7 +141,7 @@ export function step3Stages(d: any) {
     {
       id: '3a-adjudicate',
       label: 'batch Alpha adjudication of reader repairs, refuter findings and pages',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_HIGH : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? SOL61_MEDIUM : undefined,
       pipeline: 'read',
       role: 'alpha',
       units: batches,

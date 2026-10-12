@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-bounded-left-inverse-iff-range-is-complemented.md

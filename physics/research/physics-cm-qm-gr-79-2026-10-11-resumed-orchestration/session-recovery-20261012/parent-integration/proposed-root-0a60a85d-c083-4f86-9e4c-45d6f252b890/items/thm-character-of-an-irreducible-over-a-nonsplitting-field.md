@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-character-of-an-irreducible-over-a-nonsplitting-field.md

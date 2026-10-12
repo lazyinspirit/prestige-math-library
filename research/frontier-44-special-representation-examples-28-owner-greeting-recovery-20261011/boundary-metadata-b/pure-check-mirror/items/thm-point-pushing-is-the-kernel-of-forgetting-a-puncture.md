@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-point-pushing-is-the-kernel-of-forgetting-a-puncture.md

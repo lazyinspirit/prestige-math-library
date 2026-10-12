@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-nakayama-block-classification-for-symmetric-groups.md

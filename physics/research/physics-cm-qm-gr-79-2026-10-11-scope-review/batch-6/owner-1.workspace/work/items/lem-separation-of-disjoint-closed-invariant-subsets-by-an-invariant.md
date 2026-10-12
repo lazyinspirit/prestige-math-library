@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-separation-of-disjoint-closed-invariant-subsets-by-an-invariant.md

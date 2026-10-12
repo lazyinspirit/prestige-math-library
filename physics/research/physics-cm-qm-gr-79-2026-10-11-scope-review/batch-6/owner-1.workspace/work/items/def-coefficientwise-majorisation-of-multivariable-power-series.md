@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coefficientwise-majorisation-of-multivariable-power-series.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-simple-solid-region-in-a-coordinate-direction.md

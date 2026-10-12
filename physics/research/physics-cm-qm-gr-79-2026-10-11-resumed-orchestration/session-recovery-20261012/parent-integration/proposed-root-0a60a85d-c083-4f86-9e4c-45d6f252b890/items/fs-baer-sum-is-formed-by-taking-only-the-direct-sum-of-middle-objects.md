@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-baer-sum-is-formed-by-taking-only-the-direct-sum-of-middle-objects.md

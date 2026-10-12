@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bmo-seminorm-and-quotient-by-constants.md

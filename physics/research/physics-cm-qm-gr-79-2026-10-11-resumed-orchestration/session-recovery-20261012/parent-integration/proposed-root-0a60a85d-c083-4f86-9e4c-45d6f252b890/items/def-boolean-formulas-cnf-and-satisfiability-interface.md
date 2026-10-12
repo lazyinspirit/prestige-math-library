@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-boolean-formulas-cnf-and-satisfiability-interface.md

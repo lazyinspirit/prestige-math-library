@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-negative-half-bilinear-form-is-symmetric-nondegenerate-and-integral.md

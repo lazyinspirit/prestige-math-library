@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cfg-emptiness-and-finiteness-are-decidable.md

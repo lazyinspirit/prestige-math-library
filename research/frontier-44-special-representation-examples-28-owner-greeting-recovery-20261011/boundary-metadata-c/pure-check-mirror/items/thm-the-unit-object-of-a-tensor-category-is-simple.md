@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-unit-object-of-a-tensor-category-is-simple.md

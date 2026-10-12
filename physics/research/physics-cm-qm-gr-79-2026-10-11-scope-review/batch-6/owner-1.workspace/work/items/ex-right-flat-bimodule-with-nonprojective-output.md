@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-right-flat-bimodule-with-nonprojective-output.md

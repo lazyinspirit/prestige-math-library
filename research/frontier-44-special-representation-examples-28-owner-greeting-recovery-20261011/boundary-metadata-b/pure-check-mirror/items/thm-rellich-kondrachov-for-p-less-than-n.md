@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-rellich-kondrachov-for-p-less-than-n.md

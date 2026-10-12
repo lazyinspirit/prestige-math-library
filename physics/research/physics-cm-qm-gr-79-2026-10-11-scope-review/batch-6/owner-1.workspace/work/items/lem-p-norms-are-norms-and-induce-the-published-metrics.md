@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-p-norms-are-norms-and-induce-the-published-metrics.md

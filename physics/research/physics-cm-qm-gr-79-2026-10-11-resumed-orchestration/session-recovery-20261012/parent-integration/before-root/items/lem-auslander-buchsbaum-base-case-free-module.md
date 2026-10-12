@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-auslander-buchsbaum-base-case-free-module.md

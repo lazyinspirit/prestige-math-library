@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-trivial-holonomy-gives-a-product-foliated-neighbourhood.md

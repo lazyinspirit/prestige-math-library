@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-cobordism-is-an-equivalence-relation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-extending-a-published-prefix-automaton-to-a-factor-avoidance-dfa.md

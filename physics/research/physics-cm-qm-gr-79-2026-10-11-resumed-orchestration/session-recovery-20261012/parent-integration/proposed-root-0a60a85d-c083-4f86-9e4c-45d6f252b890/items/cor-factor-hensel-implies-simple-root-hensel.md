@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-factor-hensel-implies-simple-root-hensel.md

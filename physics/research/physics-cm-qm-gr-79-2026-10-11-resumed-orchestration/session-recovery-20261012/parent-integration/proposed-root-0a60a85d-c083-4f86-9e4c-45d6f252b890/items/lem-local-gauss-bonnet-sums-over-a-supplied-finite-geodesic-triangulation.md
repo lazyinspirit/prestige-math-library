@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-gauss-bonnet-sums-over-a-supplied-finite-geodesic-triangulation.md

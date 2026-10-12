@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pointwise-orientation-sign-of-a-local-diffeomorphism.md

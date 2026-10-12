@@ -136,9 +136,9 @@ test('page planning alone opts into empty item arrays without relaxing reader de
 
 test('focused extcheck retains transitive Foundations boundary paths through outside suppliers', t => {
   const f = fixture(t);
-  mkdirSync(join(f.repo, 'library/foundations'), { recursive: true });
+  mkdirSync(join(f.repo, 'library/set-theory'), { recursive: true });
   mkdirSync(join(f.repo, 'library/not-proved-here'), { recursive: true });
-  f.write('library/foundations/consumer.md', '---\npage: consumer\nitems: [thm-selected]\n---\n');
+  f.write('library/set-theory/consumer.md', '---\npage: consumer\nitems: [thm-selected]\n---\n');
   f.write('library/not-proved-here/deferred-set-theory-beyond-choice.md', '---\npage: deferred-set-theory-beyond-choice\nitems: [rem-deferred]\n---\n');
   f.write('items/rem-deferred.md', '---\nid: rem-deferred\nkind: remark\nproved_here: false\ndeps: []\nverification:\n  precheck: n/a\nsources:\n  references:\n    - title: Source\n---\n');
   f.write('items/thm-selected.md', f.item('thm-selected', '[thm-supplier]'));

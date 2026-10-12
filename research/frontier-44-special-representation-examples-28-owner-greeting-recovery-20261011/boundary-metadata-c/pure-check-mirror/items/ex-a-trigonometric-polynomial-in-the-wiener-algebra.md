@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-trigonometric-polynomial-in-the-wiener-algebra.md

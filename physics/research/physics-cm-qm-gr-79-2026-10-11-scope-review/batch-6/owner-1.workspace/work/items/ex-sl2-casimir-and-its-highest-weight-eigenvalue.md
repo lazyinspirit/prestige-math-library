@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sl2-casimir-and-its-highest-weight-eigenvalue.md

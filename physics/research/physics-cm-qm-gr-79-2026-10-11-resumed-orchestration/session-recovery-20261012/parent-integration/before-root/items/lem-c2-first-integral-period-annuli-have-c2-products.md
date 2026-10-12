@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c2-first-integral-period-annuli-have-c2-products.md

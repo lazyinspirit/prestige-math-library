@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-kunneth-as-a-two-column-spectral-sequence-over-a-pid.md

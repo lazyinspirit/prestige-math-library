@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-jacobi-symbol-one-does-not-imply-a-square.md

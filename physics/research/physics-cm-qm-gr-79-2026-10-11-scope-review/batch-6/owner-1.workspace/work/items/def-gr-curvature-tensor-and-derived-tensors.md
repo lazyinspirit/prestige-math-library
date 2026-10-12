@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-curvature-tensor-and-derived-tensors.md

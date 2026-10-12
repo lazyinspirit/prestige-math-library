@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-nrqm-driven-dynamics-linear-drive-rotating-wave-error.md

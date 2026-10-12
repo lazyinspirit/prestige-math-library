@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-expectation-agrees-with-the-finite-weighted-sum.md

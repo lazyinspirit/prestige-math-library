@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-total-derivative-computes-directional-and-partial-derivatives.md

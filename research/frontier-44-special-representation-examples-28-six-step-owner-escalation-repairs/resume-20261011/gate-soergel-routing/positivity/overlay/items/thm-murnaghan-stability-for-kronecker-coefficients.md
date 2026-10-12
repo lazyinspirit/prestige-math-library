@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-murnaghan-stability-for-kronecker-coefficients.md

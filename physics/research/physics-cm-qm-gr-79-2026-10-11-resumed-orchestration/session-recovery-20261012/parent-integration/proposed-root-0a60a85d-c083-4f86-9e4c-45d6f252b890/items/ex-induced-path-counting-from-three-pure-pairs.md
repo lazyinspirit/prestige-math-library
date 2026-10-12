@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-induced-path-counting-from-three-pure-pairs.md

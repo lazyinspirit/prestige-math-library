@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-expansion-shock-is-weak-but-not-entropic.md

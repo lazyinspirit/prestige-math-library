@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-type-a-parabolic-category-o-ringel-duality-via-the-opposite-parabolic.md

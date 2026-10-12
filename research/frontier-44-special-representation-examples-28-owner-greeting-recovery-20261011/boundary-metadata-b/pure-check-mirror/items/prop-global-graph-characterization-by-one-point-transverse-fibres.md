@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-global-graph-characterization-by-one-point-transverse-fibres.md

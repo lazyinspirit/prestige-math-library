@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-affine-deformations-obstruction-and-torsor.md

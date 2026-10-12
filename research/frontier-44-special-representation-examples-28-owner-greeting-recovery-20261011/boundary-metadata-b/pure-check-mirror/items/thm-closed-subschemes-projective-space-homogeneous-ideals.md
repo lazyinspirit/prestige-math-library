@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-closed-subschemes-projective-space-homogeneous-ideals.md

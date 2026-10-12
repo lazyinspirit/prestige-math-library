@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-extremal-word-characters-detect-normalized-cyclotomic-simple-labels.md

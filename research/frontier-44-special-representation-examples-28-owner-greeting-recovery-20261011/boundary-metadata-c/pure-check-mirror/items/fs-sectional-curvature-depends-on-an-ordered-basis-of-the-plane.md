@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-sectional-curvature-depends-on-an-ordered-basis-of-the-plane.md

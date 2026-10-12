@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-pullback-of-a-covariant-tensor-by-a-linear-map.md

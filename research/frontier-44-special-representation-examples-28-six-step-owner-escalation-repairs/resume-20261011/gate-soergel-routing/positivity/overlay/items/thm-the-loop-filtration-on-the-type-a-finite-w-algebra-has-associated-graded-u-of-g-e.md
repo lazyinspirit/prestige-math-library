@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e.md

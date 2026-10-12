@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-integral-triangular-decomposition-for-the-lusztig-form.md

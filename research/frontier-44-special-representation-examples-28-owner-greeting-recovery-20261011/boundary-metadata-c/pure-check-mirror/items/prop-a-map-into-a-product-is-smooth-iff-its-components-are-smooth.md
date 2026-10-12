@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-a-map-into-a-product-is-smooth-iff-its-components-are-smooth.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-kunneth-for-two-cyclic-two-term-complexes.md

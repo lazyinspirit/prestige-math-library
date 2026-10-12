@@ -1,0 +1,42 @@
+---
+id: thm-proper-cohomology-has-functorial-mixed-hodge-weights-at-most-degree
+kind: theorem
+title: "Proper cohomology and functorial mixed Hodge weights"
+status: draft
+origin: pipeline
+pipeline_run: frontier-44-special-representation-examples-28
+provenance:
+  statement: literature-derived
+  proof: ai-altered
+deps: [thm-proper-varieties-admit-smooth-projective-hyperresolutions, thm-proper-hypercovers-compute-constructible-derived-cohomology, lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights, thm-compact-kahler-hodge-decomposition-via-elliptic-harmonic-forms, thm-logarithmic-complex-constructs-smooth-open-mixed-hodge-structures, lem-morphisms-of-mixed-hodge-structures-are-strict, thm-poincare-duality-for-oriented-topological-manifolds, cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, prop-cap-product-naturality-and-projection-formula, lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology, thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology, lem-finite-simplicial-open-stars-have-explicit-conical-product-charts, def-axiom-of-choice]
+proof_strategy: direct
+sources:
+  references:
+    - title: "Pierre Deligne, Theorie de Hodge II"
+      url: "https://www.numdam.org/item/PMIHES_1971__40__5_0/"
+    - title: "Pierre Deligne, Theorie de Hodge III"
+      url: "https://www.numdam.org/item/PMIHES_1974__44__5_0/"
+---
+
+## Statement
+
+Assume AC. The rational cohomology $H^n(Y,\mathbb Q)$ of every proper complex algebraic variety has a functorial mixed Hodge structure with weights at most $n$. For a morphism $g:Y\to U$ with $Y$ proper and $U$ smooth quasiprojective, its pullback $H^n(U)\to H^n(Y)$ is a mixed Hodge morphism for the logarithmic structure on $U$. If $Y\to X$ is proper with $X$ smooth projective of dimension $d$, the proper homological class map
+$$H_i^{\mathrm{BM}}(Y,\mathbb Q)=H_i(Y,\mathbb Q)\longrightarrow H^{2d-i}(X,\mathbb Q)(d)$$
+is a mixed Hodge morphism after the indicated Tate twist. Its image, and consequently the untwisted image in $H^{2d-i}(X)$, is a pure Hodge substructure. No smoothness of $Y$ is assumed.
+
+## Facts & Assumptions
+
+**Given:** Proper varieties with AC [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field, prop-cap-product-naturality-and-projection-formula, lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology, thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology, lem-finite-simplicial-open-stars-have-explicit-conical-product-charts, def-axiom-of-choice]]. Smooth projective hyperresolutions and common refinements are [[thm-proper-varieties-admit-smooth-projective-hyperresolutions]]. Their ordinary constant-sheaf cohomological descent is [[thm-proper-hypercovers-compute-constructible-derived-cohomology]]; the coefficient is the bounded-below constant rational complex in degree zero. Compact pure Hodge complexes are supplied by [[thm-compact-kahler-hodge-decomposition-via-elliptic-harmonic-forms]], with rational singular comparison and functorial pullbacks. Mixed-complex cohomology/totalization is [[lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights]], and strictness is [[lem-morphisms-of-mixed-hodge-structures-are-strict]]. Smooth-open structures are [[thm-logarithmic-complex-constructs-smooth-open-mixed-hodge-structures]]. Ordinary Poincaré duality is [[thm-poincare-duality-for-oriented-topological-manifolds]].
+
+## Proof
+
+1.1 Choose $Y_\bullet\to Y$. Resolve the constant rational sheaves and the holomorphic de Rham complexes functorially on this simplicial scheme, so derived global sections form a cosimplicial rational/complex comparison. Every term is a pure weight-zero Hodge complex: its degree-$q$ cohomology is smooth projective cohomology, pure of weight $q$, and its Hodge filtration is strict by compact Kähler $E_1$ degeneration. The simplicial weight lemma thus puts a mixed Hodge structure on the simple complex's cohomology, with $E_1^{p,q}=H^q(Y_p,\mathbb Q),\qquad \operatorname{Gr}^W_qH^n(sR\Gamma(Y_\bullet))=E_2^{n-q,q}.$ Descent identifies this cohomology with derived constant-sheaf cohomology on $Y$. Its identification with ordinary singular $H^n(Y,\mathbb Q)$ uses [[lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology]] and [[thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology]] with [[lem-finite-simplicial-open-stars-have-explicit-conical-product-charts]] for the singular algebraic analytic space $Y$. The geometric finite-triangulation existence theorem remains an open construction; its exact missing primitive is `lem-compact-semialgebraic-families-admit-compatible-finite-triangulations`. Thus this identification is a declared conditional supplier use, not an assertion that the missing topology has been proved. As $p=n-q\ge0$, all its weights are at most $n$. There are finitely many terms on each relevant diagonal and they have finite-dimensional cohomology. [given, construct, algebra]
+
+2.1 Common refinement induces filtered comparison maps on the simple complexes. By descent the induced ordinary cohomology map is the identity of $H^n(Y)$. It is a mixed Hodge morphism by the mixed-complex theorem and therefore an isomorphism by strictness. This makes the structure independent of its hyperresolution. The relative construction lifts a morphism of proper varieties to hypercovers and gives a filtered pullback; independence makes its induced cohomology map the canonical one. Thus proper pullbacks are mixed Hodge morphisms. [step 1.1, given, construct, algebra]
+
+3.1 Let $g:Y\to U$ and take an SNC smooth projective compactification $U\hookrightarrow\overline U$. Every $Y_p$ maps into the open $U$. Pullback therefore sends logarithmic forms on $\overline U$ to regular forms on $Y_p$: locally all boundary equations pull back to nonvanishing holomorphic functions. Pullback preserves $F$ and sends every nonnegative pole-count weight into the weight-zero ordinary de Rham complex; negative pole-count terms are zero. Choose functorial resolutions so pullbacks along equal composites agree as chain maps. The degree-zero simplicial component is the pullback to $Y_0$, and its alternating face differential vanishes because the two composites $Y_1\to Y_0\to U$ agree. Thus this component defines a chain map from the logarithmic complex into the simplicial simple complex, supported in simplicial degree zero. It preserves weight: the source has only nonnegative pole-count weights, while the target simplicial $W_a$ contains degree zero for every $a\ge0$. This is consequently a morphism of mixed Hodge complexes, without appealing to an unproved general theorem about totalizing cosimplicial mixed complexes. It agrees with rational pullback under the singular comparisons, so it induces the actual map $g^*$ as a mixed Hodge morphism. [step 1.1, step 2.1, given, construct]
+
+4.1 For proper $Y$, ordinary and Borel–Moore homology coincide, and [[cor-cohomology-over-a-field-is-dual-to-homology-over-that-field]] and finite-dimensionality from the finite-diagonal hypercover computation identify $H_i(Y,\mathbb Q)$ with the dual of $H^i(Y,\mathbb Q)$. Give it that dual mixed Hodge structure. The homological pushforward to $X$ is dual to cohomological pullback, hence is a mixed Hodge morphism by step 2.1. Poincaré duality on smooth projective $X$ identifies $H_i(X)$ with $H^{2d-i}(X)(d)$ as pure Hodge structures: cup product pairs complementary $(p,q)$ types and the integral trace has type $(d,d)$, so the Tate twist removes it. The target is pure of weight $-i$, and the image of a mixed Hodge morphism is a Hodge substructure, hence is pure of that weight. Untwisting gives a pure Hodge substructure in $H^{2d-i}(X)$. [step 1.1, step 2.1, given, algebra] ∎
+## Remarks
+
+The new proper-hypercover descent theorem is authored in the disjoint descent lane, and the compact Kähler rational/filtered comparison is authored in the absolute Hodge lane. This theorem supplies the singular proper weight construction once those actual proofs are integrated; it does not replace them by references. The field-dual comparison is an actual published supplier; Poincaré Hodge compatibility follows locally from cup-product type and the top-degree trace on the compact Kähler pure structure, as proved in step 4.1.

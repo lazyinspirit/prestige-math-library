@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "id": "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+  "status": "research-only-gibbs-equality-candidate",
+  "live_source": "physics/items/pthm-nrqm-many-body-thermal-equilibrium-characterization.md",
+  "live_source_raw_sha256": "8b34b23b31cd1a8269ef6abf948381f9a2446bbe9c0a4f8c865cc04b33897a9b",
+  "candidate_raw_sha256": "7e24960d30e3fcd08e190a37af04bcd3d9ae99c9e4f9a487e79333c18071e52e",
+  "statement_preserved_verbatim": true,
+  "statement_raw_sha256": "f9fa9838d42d1b3b7a35e1cea84d3042152b803147809da532f4f3ed5d31b9e7",
+  "recorded_at": "2026-10-11T14:29:03.593697+00:00",
+  "allowed_density_weights": "all wi>=0, sum wi=1; no full-rank restriction",
+  "added_deps": [
+    "cor-mean-value-theorem",
+    "thm-natural-logarithm-laws"
+  ],
+  "removed_deps": [
+    "thm-finite-jensen-inequality"
+  ],
+  "extra_choice_assumption": false,
+  "changes": [
+    {
+      "location": "deps, exact scalar suppliers",
+      "before": "thm-finite-jensen-inequality, thm-logarithm-derivative-and-integral",
+      "after": "cor-mean-value-theorem, thm-natural-logarithm-laws, thm-logarithm-derivative-and-integral"
+    },
+    {
+      "location": "dependency_roles, scalar suppliers",
+      "before": "  thm-finite-jensen-inequality: mathematical-premise",
+      "after": "  cor-mean-value-theorem: mathematical-premise\n  thm-natural-logarithm-laws: mathematical-premise"
+    },
+    {
+      "location": "F3, actual log and MVT clauses",
+      "before": "[F3] **Logarithm and Jensen.** $\\log:(0,\\infty)\\to\\mathbb R$ is strictly increasing and concave and satisfies the scalar inequality $x\\log x-xy\\ge x-e^{y}$ for all $x>0$, $y\\in\\mathbb R$, with equality exactly for $x=e^{y}$ ([[def-natural-logarithm]], [[thm-logarithm-derivative-and-integral]], [[thm-finite-jensen-inequality]]); for the probability vector $r_i=\\sum_jp_{ij}q_j>0$ one has $\\sum_ip_{ij}\\log q_j\\le\\log r_i$, and $\\sum_iw_i\\log(w_i/r_i)\\ge\\sum_i(w_i-r_i)=0$ with equality exactly when $w_i=r_i$ for every $i$ with $w_i>0$.",
+      "after": "[F3] **Exact scalar logarithm suppliers.** For $x>0$, $\\log'(x)=1/x$ and $\\log x=\\int_1^xdt/t$ ([[thm-logarithm-derivative-and-integral]]); $\\log$ is continuous, $\\log1=0$ and $\\log(x/y)=\\log x-\\log y$ for $x,y>0$ ([[thm-natural-logarithm-laws]]). For a continuous real function on $[a,b]$ differentiable on $(a,b)$, $a<b$, there is $\\xi\\in(a,b)$ with $f(b)-f(a)=f'(\\xi)(b-a)$ ([[cor-mean-value-theorem]]). The strict tangent bound and its equality case are derived below from these statements, rather than assumed from a strict Jensen theorem."
+    },
+    {
+      "location": "Proof technique",
+      "before": "**Proof technique:** direct; compare the free-energy functional with its value at the Gibbs operator by an eigenvalue computation over the two orthonormal bases, using the scalar logarithm inequality and Jensen's inequality.",
+      "after": "**Proof technique:** direct; express the free-energy difference as a sum of nonnegative scalar defects over the two orthonormal bases, with the zero-weight convention made explicit; the strict logarithm tangent bound determines the equality case, including degenerate Gibbs eigenspaces."
+    },
+    {
+      "location": "Proof1.2, all-weight scalar and tangent defects",
+      "before": "1.2 [The free-energy difference] Let $\\rho=\\sum_iw_iT_{u_i,u_i}$ be a declared sector preparation as in [F2], and write $p_{ij}=|\\langle u_i,v_j\\rangle|^2$, $r_i=\\sum_jp_{ij}q_j>0$. Computing in the eigenbasis of $H_N^\\sigma$ gives $\\operatorname{tr}(\\rho H_N^\\sigma)=\\sum_{i,j}w_ip_{ij}E_j$ and $s(\\rho)=-\\sum_iw_i\\log w_i$; since $q_j=e^{-\\beta E_j}/Z_N$ gives $\\beta E_j=-\\log q_j-\\log Z_N$, one has $\\beta\\bigl(F(\\rho)-F_{\\mathrm{eq}}\\bigr)=\\beta\\operatorname{tr}(\\rho H_N^\\sigma)-s(\\rho)+\\log Z_N=\\sum_iw_i\\sum_jp_{ij}\\bigl(\\log w_i-\\log q_j\\bigr)$, where the terms involving $\\log Z_N$ cancel by [F2] and $\\sum_iw_i=1$. By [F3] the inner sum is at least $\\log w_i-\\log r_i$, so $\\beta(F(\\rho)-F_{\\mathrm{eq}})\\ge\\sum_iw_i\\log(w_i/r_i)\\ge0$, and $F(\\rho)\\ge F_{\\mathrm{eq}}$; since $\\beta>0$ this proves (b). [F1, F2, F3, algebra]",
+      "after": "1.2 [Strict scalar defects, including zero weights] By [F3] and the mean value theorem applied to $\\log$ between $1$ and $t>0$, $t\\ne1$, one has $\\log t=(t-1)/\\xi$ with $\\xi$ strictly between $1$ and $t$; for $t>1$ this is less than $t-1$, and for $0<t<1$ it is also less than $t-1$ because the numerator is negative and $\\xi<1$. Thus $\\log t\\le t-1$, with equality exactly at $t=1$. For $w\\ge0$, $r>0$ define $b(w,r):=w\\log(w/r)$ when $w>0$ and $b(0,r):=0$, and $d(w,r):=b(w,r)-w+r$. If $w>0$, apply the bound to $t=r/w$ and the quotient law to get $d(w,r)\\ge0$, with equality exactly at $w=r$; if $w=0$, $d(0,r)=r>0$. Likewise $h(q,r):=\\log r+(q-r)/r-\\log q\\ge0$ for $q,r>0$, with equality exactly at $q=r$, by applying the bound to $t=q/r$. [F3, algebra]"
+    },
+    {
+      "location": "Proof1.3, nonnegative decomposition",
+      "before": "1.2 [Strict scalar defects, including zero weights] By [F3] and the mean value theorem applied to $\\log$ between $1$ and $t>0$, $t\\ne1$, one has $\\log t=(t-1)/\\xi$ with $\\xi$ strictly between $1$ and $t$; for $t>1$ this is less than $t-1$, and for $0<t<1$ it is also less than $t-1$ because the numerator is negative and $\\xi<1$. Thus $\\log t\\le t-1$, with equality exactly at $t=1$. For $w\\ge0$, $r>0$ define $b(w,r):=w\\log(w/r)$ when $w>0$ and $b(0,r):=0$, and $d(w,r):=b(w,r)-w+r$. If $w>0$, apply the bound to $t=r/w$ and the quotient law to get $d(w,r)\\ge0$, with equality exactly at $w=r$; if $w=0$, $d(0,r)=r>0$. Likewise $h(q,r):=\\log r+(q-r)/r-\\log q\\ge0$ for $q,r>0$, with equality exactly at $q=r$, by applying the bound to $t=q/r$. [F3, algebra]",
+      "after": "1.2 [Strict scalar defects, including zero weights] By [F3] and the mean value theorem applied to $\\log$ between $1$ and $t>0$, $t\\ne1$, one has $\\log t=(t-1)/\\xi$ with $\\xi$ strictly between $1$ and $t$; for $t>1$ this is less than $t-1$, and for $0<t<1$ it is also less than $t-1$ because the numerator is negative and $\\xi<1$. Thus $\\log t\\le t-1$, with equality exactly at $t=1$. For $w\\ge0$, $r>0$ define $b(w,r):=w\\log(w/r)$ when $w>0$ and $b(0,r):=0$, and $d(w,r):=b(w,r)-w+r$. If $w>0$, apply the bound to $t=r/w$ and the quotient law to get $d(w,r)\\ge0$, with equality exactly at $w=r$; if $w=0$, $d(0,r)=r>0$. Likewise $h(q,r):=\\log r+(q-r)/r-\\log q\\ge0$ for $q,r>0$, with equality exactly at $q=r$, by applying the bound to $t=q/r$. [F3, algebra]\n\n1.3 [The free-energy difference for every mixed preparation] Let $\\rho=\\sum_iw_iT_{u_i,u_i}$ be as in [F2] and put $p_{ij}=|\\langle u_i,v_j\\rangle|^2$, $r_i=\\sum_jp_{ij}q_j$. Each $r_i>0$ and $\\sum_ir_i=\\sum_jq_j\\sum_ip_{ij}=1$. Use the entropy convention $\\eta(w)=w\\log w$ for $w>0$ and $\\eta(0)=0$ (the notation $0\\log0=0$ does not define $\\log0$). The trace pairing and the entropy definition give $\\operatorname{tr}(\\rho H_N^\\sigma)=\\sum_{i,j}w_ip_{ij}E_j$ and $s(\\rho)=-\\sum_i\\eta(w_i)$. Since $\\beta E_j=-\\log q_j-\\log Z_N$, $\\Delta:=\\beta(F(\\rho)-F_{\\mathrm{eq}})=\\sum_i\\bigl(\\eta(w_i)-w_i\\sum_jp_{ij}\\log q_j\\bigr)$. Define $a_i:=\\log r_i-\\sum_jp_{ij}\\log q_j=\\sum_jp_{ij}h(q_j,r_i)$, the last equality using $\\sum_jp_{ij}=1$ and $\\sum_jp_{ij}(q_j-r_i)=0$. Step 1.2 gives $a_i\\ge0$, with equality exactly when $q_j=r_i$ for every $j$ with $p_{ij}>0$. By the quotient law for positive $w_i$ and by the explicit zero convention otherwise, $\\Delta=\\sum_i b(w_i,r_i)+\\sum_iw_i a_i=\\sum_i d(w_i,r_i)+\\sum_iw_i a_i$, because $\\sum_i(w_i-r_i)=0$. All summands are nonnegative, so $F(\\rho)\\ge F_{\\mathrm{eq}}$, proving (b) for every density operator, including those with zero eigenvalues. [F1, F2, F3, step 1.2, algebra]"
+    },
+    {
+      "location": "Degenerate step renumbered",
+      "before": "1.3 [The degenerate case] If $H_N^\\sigma=c\\,\\mathrm{id}$ then $E_j=c$ for all $j$ and [F1] gives $Z_N=De^{-\\beta c}$, $q_j=D^{-1}$, $\\rho_\\beta=D^{-1}\\mathrm{id}$; by [F1] $s(\\rho_\\beta)=\\log D$ and $F_{\\mathrm{eq}}=-k_BT\\log(De^{-\\beta c})=c-k_BT\\log D$. This proves (d). [F1, algebra]",
+      "after": "1.4 [The degenerate case] If $H_N^\\sigma=c\\,\\mathrm{id}$ then $E_j=c$ for all $j$ and [F1] gives $Z_N=De^{-\\beta c}$, $q_j=D^{-1}$, $\\rho_\\beta=D^{-1}\\mathrm{id}$; by [F1] $s(\\rho_\\beta)=\\log D$ and $F_{\\mathrm{eq}}=-k_BT\\log(De^{-\\beta c})=c-k_BT\\log D$. This proves (d). [F1, algebra]"
+    },
+    {
+      "location": "Proof2.1, strict equality for full mixed-density scope",
+      "before": "2.1 [Equality forces the canonical preparation] If $F(\\rho)=F_{\\mathrm{eq}}$, then both inequalities of step 1.2 are equalities. Equality in $\\sum_iw_i\\log(w_i/r_i)\\ge0$ forces $w_i=r_i$ for every $i$ with $w_i>0$ by [F3]; equality in the Jensen step forces $q_j=r_i$ for every $j$ with $p_{ij}>0$, again by [F3]. Hence whenever $p_{ij}>0$ one has $q_j=w_i$, so $u_i$ is orthogonal to every eigenspace of $\\rho_\\beta$ whose eigenvalue differs from $w_i$: writing $P_\\lambda$ for the spectral projection of $\\rho_\\beta$ at $\\lambda$, $\\|(I-P_{w_i})u_i\\|^2=\\sum_{j:\\,q_j\\ne w_i}p_{ij}=0$. Therefore each $u_i$ lies in the eigenspace $\\operatorname{ran}P_{w_i}$ of $\\rho_\\beta$, and $\\rho=\\sum_iw_iT_{u_i,u_i}=\\sum_\\lambda\\lambda P_\\lambda=\\rho_\\beta$, since the $u_i$ with weight $w_i=\\lambda$ form an orthonormal basis of that eigenspace. Conversely $\\rho=\\rho_\\beta$ gives equality by [F1]. Together with step 1.2 this proves (c). [F1, F2, F3, step 1.2, algebra]",
+      "after": "2.1 [Equality, strict zero-weight exclusion and degeneracies] If $F(\\rho)=F_{\\mathrm{eq}}$, the finite sum of nonnegative defects in step 1.3 vanishes. Hence $d(w_i,r_i)=0$ for every $i$; step 1.2 gives $w_i=r_i>0$, since $d(0,r_i)=r_i>0$ excludes every zero weight. Thus $w_i a_i=0$ forces $a_i=0$ for every row, and step 1.3 gives $q_j=r_i=w_i$ whenever $p_{ij}>0$. In the expansion of $u_i$ in the orthonormal basis $(v_j)$, the coefficients at all $q_j\\ne w_i$ therefore vanish, so $\\rho_\\beta u_i=w_i u_i$. Since also $\\rho u_i=w_i u_i$ and $(u_i)$ is a basis, the two operators agree: $\\rho=\\rho_\\beta$. This argument allows arbitrary changes of basis within any repeated-eigenvalue Gibbs eigenspace. Conversely $\\rho=\\rho_\\beta$ gives equality by [F1]. Together with step 1.3, this proves (c) with no full-rank assumption on the competing preparation. [F1, F2, step 1.2, step 1.3, algebra]"
+    },
+    {
+      "location": "Proof3.1, assembly references",
+      "before": "3.1 [Conclusion and scope] Step 1.1 proves (a), steps 1.2-2.1 prove (b) and (c), and step 1.3 proves (d). The argument is an optimisation inside the declared finite-dimensional sector at the adopted ensemble parameters; no equilibration, rate, thermodynamic limit or measured thermal quantity entered, which is (e). [step 1.1, step 1.2, step 1.3, step 2.1] ∎",
+      "after": "3.1 [Conclusion and scope] Step 1.1 proves (a), steps 1.2, 1.3 and 2.1 prove (b) and (c), and step 1.4 proves (d). The argument is an optimisation inside the declared finite-dimensional sector at the adopted ensemble parameters; no equilibration, rate, thermodynamic limit or measured thermal quantity entered, which is (e). [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎"
+    }
+  ],
+  "actual_supplier_bindings": [
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "actual_source": "physics/items/thm-logarithm-derivative-and-integral.md",
+      "raw_sha256": "63c8f1d3f5928a812fa5a7acc9610725c05b9cd6ccb7f93a3750a24bf2461c81",
+      "exact_use": "Statement: log differentiable on (0,infinity), derivative 1/x; applied to closed positive intervals for the mean value bound.",
+      "actual_interface_quote": "## Statement\n\nFor $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$\n\n",
+      "guard_sha256": "8861372f0b47f18d1dd5c9d1dbd58b318e1d4e3e77d47963665d9696068224ad",
+      "root_original": "items/thm-logarithm-derivative-and-integral.md",
+      "root_raw_sha256": "63c8f1d3f5928a812fa5a7acc9610725c05b9cd6ccb7f93a3750a24bf2461c81",
+      "root_matches_physics_import": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "actual_source": "physics/items/cor-mean-value-theorem.md",
+      "raw_sha256": "dc6c6f5c91dca7c44a594a0b6d6b1be6f3ab67661f57487383b215731fc6a596",
+      "exact_use": "Statement: continuous on [a,b], differentiable on (a,b), c strictly between endpoints; strict endpoints yield log t<t-1 for t!=1.",
+      "actual_interface_quote": "## Statement\n\nLet $a, b \\in \\mathbb{R}$ with $a < b$ and let $f : [a,b] \\to \\mathbb{R}$ be\ncontinuous on $[a,b]$ ([[def-continuity-real]], [[def-interval]]) and\ndifferentiable at every point of $(a,b)$ as a function on $[a,b]$\n([[def-derivative]]). Then there is $c \\in (a,b)$ with\n\n$$f(b) - f(a) \\;=\\; f'(c)\\,(b - a) .$$\n\nEquivalently, since $b - a \\ne 0$, there is $c \\in (a,b)$ at which\n$f'(c) = \\bigl(f(b)-f(a)\\bigr)/(b-a)$: the derivative somewhere inside equals\nthe average rate of change across the whole interval.\n\n**Continuity on the closed interval cannot be dropped.** Differentiability at\nevery point of $(a,b)$ alone does not suffice: a function on $[0,1]$,\ndifferentiable at every point of $(0,1)$ with derivative constantly $1$, for\nwhich no $c$ works, is exhibited later on this page as a false statement, and\nthe companion page works the same witness out in full.\n\n",
+      "guard_sha256": "5269b48e8621ea95a3018fd3ee7a632e67d183689c3c17773f72dba603965ac5",
+      "root_original": "items/cor-mean-value-theorem.md",
+      "root_raw_sha256": "dc6c6f5c91dca7c44a594a0b6d6b1be6f3ab67661f57487383b215731fc6a596",
+      "root_matches_physics_import": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "actual_source": "physics/items/thm-natural-logarithm-laws.md",
+      "raw_sha256": "1ed9090c067d692276c30502c1d5a2ffbd4413e6fd3e18c0aef93f631581b5f8",
+      "exact_use": "Statement: log continuous; log(x/y)=logx-logy; log1=0.",
+      "actual_interface_quote": "## Statement\n\nThe function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.\n\n",
+      "guard_sha256": "72d91d55d5b1b67696542fe27a02111567d6daaf6894fc01ee57101b00e0e309",
+      "root_original": "items/thm-natural-logarithm-laws.md",
+      "root_raw_sha256": "1ed9090c067d692276c30502c1d5a2ffbd4413e6fd3e18c0aef93f631581b5f8",
+      "root_matches_physics_import": true
+    },
+    {
+      "id": "thm-finite-jensen-inequality",
+      "actual_source": "physics/items/thm-finite-jensen-inequality.md",
+      "raw_sha256": "590943e42af6d28edfd46fdef4ebb8e6c998ff4138e8c168316230cf9b6d48f2",
+      "exact_use": "Inspected only: Statement provides weak convex inequality, no strict-equality clause. Removed from candidate deps because the weighted strict bound is derived directly.",
+      "actual_interface_quote": "## Statement\n\nLet $f:I\\to\\mathbb R$ be convex. If $N\\ge1$, $x_1,\\ldots,x_N\\in I$, and $\\lambda_1,\\ldots,\\lambda_N\\ge0$ satisfy $\\sum_{i=1}^N\\lambda_i=1$, then\n\n$$f\\left(\\sum_{i=1}^N\\lambda_i x_i\\right)\\le\\sum_{i=1}^N\\lambda_i f(x_i).$$\n\n",
+      "guard_sha256": "03b19a209e552637e813403c93b8ef41e2ba18b9b644b8bddf5915fbfe2303be",
+      "root_original": "items/thm-finite-jensen-inequality.md",
+      "root_raw_sha256": "590943e42af6d28edfd46fdef4ebb8e6c998ff4138e8c168316230cf9b6d48f2",
+      "root_matches_physics_import": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum",
+      "actual_source": "physics/items/thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum.md",
+      "raw_sha256": "d07abc92f968a3187e8abdd1fe1240cf9b158281b98ee435136c716d5e9c6c2c",
+      "exact_use": "Existing F1 Gibbs data and value at canonical preparation, especially Statement(a); no supplier edits or new supplier review.",
+      "actual_interface_quote": "## Statement\n\nAssume the Axiom of Countable Choice ([[def-countable-choice]]). Let\n$\\mathfrak H$ be a finite-dimensional complex Hilbert space of dimension\n$d\\ge1$ with inner product linear in the first argument\n([[def-hilbert-space]]), let $H:\\mathfrak H\\to\\mathfrak H$ be a self-adjoint\nlinear operator with real eigenvalues $E_1,\\dots,E_d$ (repeated according to\nmultiplicity) and orthonormal eigenbasis $(v_1,\\dots,v_d)$, and let $\\beta>0$.\nWrite\n$$Z:=\\sum_{j=1}^d e^{-\\beta E_j}\\in(0,\\infty),\\qquad \\rho_\\beta:=\\frac1Z\\sum_{j=1}^d e^{-\\beta E_j}T_{v_j,v_j},$$\nwhere $T_{u,v}x=\\langle x,v\\rangle u$\n([[lem-nrqm-composites-density-and-scalar-spectral-probability]]). Let\n$\\mathcal D$ be the set of density operators on $\\mathfrak H$, i.e. positive\nself-adjoint trace-class operators $\\rho$ with $\\operatorname{tr}\\rho=1$\n([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]]), and\nfor $\\rho\\in\\mathcal D$ with eigenvalues $w_1,\\dots,w_d\\ge0$ (counted with\nmultiplicity and in any order) define the entropy\n$$s(\\rho):=-\\sum_{i:\\,w_i>0}w_i\\log w_i\\in[0,\\log d]$$\n([[def-natural-logarithm]]). Then:\n\n(a) $\\rho_\\beta\\in\\mathcal D$, $\\operatorname{tr}(\\rho_\\beta H)=\\frac1Z\\sum_je^{-\\beta E_j}E_j$,\nand\n$$\\operatorname{tr}(\\rho_\\beta H)-\\beta^{-1}s(\\rho_\\beta)=-\\beta^{-1}\\log Z ;$$\n\n(b) for every $\\rho\\in\\mathcal D$,\n$$\\operatorname{tr}(\\rho H)-\\beta^{-1}s(\\rho)\\ \\ge\\ -\\beta^{-1}\\log Z ;$$\n\n(c) for every $\\rho\\in\\mathcal D$, $s(\\rho)\\le\\log d$, with $s(\\rho)=\\log d$ if\nand only if $\\rho=d^{-1}\\,\\mathrm{id}$; when $H=0$ one has $Z=d$,\n$\\rho_\\beta=d^{-1}\\mathrm{id}$ and the bound in (b) is attained there.\n\nThe combination $\\operatorname{tr}(\\rho H)-\\beta^{-1}s(\\rho)$ is a purely\nmathematical functional of $(\\rho,H,\\beta)$; identifying $\\beta$ with an\ninverse physical temperature and $\\rho_\\beta$ with a thermal equilibrium state\nare additional physical assumptions not asserted here.\n\n",
+      "guard_sha256": "c61366e070445120c7326c369d0fc05c3925909588ef08cd1e938a8d686fe5ec"
+    },
+    {
+      "id": "def-nrqm-many-body-framework-entropy-and-free-energy",
+      "actual_source": "physics/items/def-nrqm-many-body-framework-entropy-and-free-energy.md",
+      "raw_sha256": "40ed3aafe045991896bc427e983f68cf2ca830c3ce42b9fc2e1ccc17fec2e80e",
+      "exact_use": "Definition(b) sums only positive wi; Definition(c),(e): beta=1/(kBT) and finite free-energy functional.",
+      "actual_interface_quote": "## Definition\n\n**(a) Adopted readings and restricted sector class.** Adopt the observable and\nprobability postulate [[post-nrqm-framework-observable-and-probability]] (P2)\nand the autonomous-dynamics postulate\n[[post-nrqm-framework-autonomous-dynamics]] (P4), in the readings of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] and\n[[def-nrqm-autonomous-dynamics-framework-evolution]], for the declared\nfixed-$N$ model of\n[[def-nrqm-many-body-framework-declared-fixed-n-model]]. This definition\napplies to the class of declared models whose sector space\n$\\mathfrak H_N^\\sigma$ is **finite-dimensional**, in particular to every\nfinite-mode realization\n([[def-nrqm-identical-particles-framework-orbital-occupation-model]]), where\n$D:=\\dim\\mathfrak H_N^\\sigma$ is finite by\n[[thm-nrqm-identical-particles-finite-mode-occupation-counts]] clauses (a),\n(b). Write $\\mathcal D(\\mathfrak H_N^\\sigma)$ for the set of declared sector\npreparations, that is, the density operators on $\\mathfrak H_N^\\sigma$\n([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)).\nAssume the Axiom of Countable Choice ([[def-countable-choice]]).\n\n**(b) Dimensionless entropy.** For $\\rho\\in\\mathcal D(\\mathfrak H_N^\\sigma)$\nwith eigenvalues $w_1,\\dots,w_D\\ge0$ (counted with multiplicity, in any\norder), the **entropy** of $\\rho$ is\n$$s(\\rho):=-\\sum_{i:\\,w_i>0}w_i\\log w_i\\in[0,\\log D],$$\nthe quantity of [[thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum]]\nclause (a) with $\\log$ the natural logarithm\n([[def-natural-logarithm]]). It is dimensionless, is a function of the\neigenvalue multiset of $\\rho$ alone, and equals zero exactly for pure\npreparations; by clause (c) of the cited theorem $s(\\rho)=\\log D$ holds\nexactly when $\\rho=D^{-1}\\mathrm{id}$.\n\n**(c) Boltzmann constant, temperature and inverse temperature.** The model\nassigns a positive **Boltzmann constant** $k_B$ and a positive **temperature**\n$T$; in the SI conventions of\n[[def-nrqm-framework-quantities-and-units]] the unit of $k_B$ is\n$\\mathrm J\\,\\mathrm K^{-1}$, the unit of $T$ is the kelvin, and\n$$k_B=1.380\\,649\\times10^{-23}\\ \\mathrm J\\,\\mathrm K^{-1}$$\nfixed exactly by the BIPM SI definition. The model declares the **inverse\ntemperature** $\\beta:=1/(k_BT)$, a positive real number in $\\mathrm J^{-1}$.\nThe value and exactness of $k_B$ are unit-convention facts; the assignment of\nthe parameter $T$ to a physical sample, and the identification of\n$\\beta=1/(k_BT)$ with an inverse thermodynamic temperature, are adopted\nassumptions of the ensemble model of this pair, not consequences of P1-P4,\nand are tested identifications with uncertainty under the preparation and\napparatus postulate P7.\n\n**(d) Physical entropy.** The **physical entropy** of $\\rho$ is\n$$S(\\rho):=k_B\\,s(\\rho),$$\nread in $\\mathrm J\\,\\mathrm K^{-1}$. It is nonnegative, is at most\n$k_B\\log D$, and vanishes exactly for pure preparations.\n\n**(e) Free-energy functional.** For $\\rho\\in\\mathcal D(\\mathfrak H_N^\\sigma)$,\nlet $\\operatorname{tr}(\\rho H_N^\\sigma)\\in\\mathbb R$ be the mean of the\ndeclared energy observable in $\\rho$ (finite because $D<\\infty$, in the\nmoment reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] clause (e)).\nThe **Helmholtz free-energy reading** of $\\rho$ is\n$$F(\\rho):=\\operatorname{tr}(\\rho H_N^\\sigma)-k_BT\\,s(\\rho),$$\nread in joules; it is the quantity\n$\\operatorname{tr}(\\rho H)-\\beta^{-1}s(\\rho)$ of\n[[thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum]] clause (a)\nat the identified $\\beta$. For the canonical operator\n$\\rho_\\beta:=e^{-\\beta H_N^\\sigma}/Z_N$ and\n$Z_N:=\\operatorname{tr}e^{-\\beta H_N^\\sigma}\\in(0,\\infty)$ (finite sum in the\nfinite-dimensional sector), the number $F_{\\mathrm{eq}}:=-\\beta^{-1}\\log Z_N$\nis called the **equilibrium free energy**; it is the value of the functional\nat $\\rho_\\beta$ by the cited theorem.\n\n**(f) Scope.** This definition covers only declared models with\nfinite-dimensional sector space and preparations in\n$\\mathcal D(\\mathfrak H_N^\\sigma)$. For a declared spatial realization, whose\nsector space is infinite-dimensional, the operator $\\rho\\log\\rho$ need not be\ntrace class; no entropy, physical entropy or free energy is defined here for\nthat case, and a separate trace-class statement would be required. The\ndefinition asserts no increase of entropy in time, no equilibration to\n$\\rho_\\beta$, no thermodynamic limit, no pressure or volume variable, and no\nmeasured temperature, entropy or free energy.\n\n## Remarks\n\n- **Why the finite case first.** In the finite-dimensional sector the entropy\n  is an ordinary finite sum over $D$ eigenvalues, and the comparison theorem\n  of [[thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum]] is\n  available without any trace-class convergence hypothesis on\n  $\\rho\\log\\rho$. The infinite-dimensional questions are deferred rather than\n  assumed.\n- **Units of $\\beta$.** $\\beta=1/(k_BT)$ has the unit\n  $\\mathrm J^{-1}\\mathrm K\\,\\mathrm K^{-1}=\\mathrm J^{-1}$, so the exponent\n  $\\beta H_N^\\sigma$ is dimensionless, as the spectral calculus requires.\n",
+      "guard_sha256": "b4bca5d72f1b063f25f2cda0451f9ebcff76d30ec285b60b942f2703d2623d72"
+    }
+  ],
+  "notes_raw_sha256": "a8ea906bcb01dc4c9f7a4c456ff7118a91109d3e478b599b676c7ae69a14d213",
+  "lead_owns_integration_and_all_consumers": true,
+  "repair_round_spent": false,
+  "limitations": [
+    "Research candidate only",
+    "No independent whole-item audit",
+    "No source41 reopen or edits",
+    "No live readiness/controller/history writes",
+    "Lead must integrate final bytes and own any necessary propagation"
+  ],
+  "candidate_guard_sha256": "0c4f172f29820b45c2f4b6a732e51b5ba5d85f5e27afb580000c1f359adb4bd0",
+  "live_source_guard_sha256": "68ee21c4fd7d1b7ce166a70d1c4ac8f2be62fd1a2113b8fa55dbbd780cc5117b",
+  "live_source_still_matches": true,
+  "local_checks": {
+    "proof_layout": {
+      "command": "node tools/physics-support/proof-layout.mjs research/physics-cm-qm-gr-79-2026-10-11-resumed-orchestration/quantum-recovery/batch62-research/gibbs-equality-draft/candidate.md",
+      "exit_code": 0,
+      "output": "proof-layout: 1 items, 6 steps, 0 defects",
+      "candidate_raw_sha256": "7e24960d30e3fcd08e190a37af04bcd3d9ae99c9e4f9a487e79333c18071e52e"
+    }
+  }
+}

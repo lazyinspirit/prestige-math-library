@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-retract-of-a-noetherian-ring-is-noetherian.md

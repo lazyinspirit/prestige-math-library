@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-banach-implicit-function-theorem-for-a-split-surjective-derivative.md

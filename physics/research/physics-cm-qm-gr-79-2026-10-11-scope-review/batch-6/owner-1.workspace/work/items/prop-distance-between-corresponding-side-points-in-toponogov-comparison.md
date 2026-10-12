@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-distance-between-corresponding-side-points-in-toponogov-comparison.md

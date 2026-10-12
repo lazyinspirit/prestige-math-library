@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-first-chern-class-of-tensor-dual-and-conjugate-lines.md

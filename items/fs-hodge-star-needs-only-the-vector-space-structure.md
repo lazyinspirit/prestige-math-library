@@ -39,11 +39,10 @@ The Hodge star is determined by the underlying real vector-space structure alone
 
 **Proof technique:** direct.
 
-
-1.1 By [L1], the definition of the Hodge star consumes a metric and an orientation as input, so the star is data attached to the pair, not to the bare vector space. [L1]
+ 1.1 By [L1], the definition of the Hodge star consumes a metric and an orientation as input, so the star is data attached to the pair, not to the bare vector space. [L1]
 
 1.2 By [L3], the same underlying real vector space $\mathbb R^3$ with the same metric but the two opposite orientations has two different stars, $\star_+=-\star_-$. [L3]
 
 2.1 By the uniqueness clause of [L2], the operator is genuinely tied to the chosen data: the characterizing relation forces the sign change of step 1.2, so no single star is attached to the vector-space structure alone. [L2, step 1.2]
 
-3.1 Steps 1.1 through 2.1 refute the claimed sufficiency of the vector-space structure. [step 1.1, step 1.2, step 2.1] ∎
+3.1 Steps 1.1 through 2.1 refute the claimed sufficiency of the vector-space structure. [step 1.1, step 1.2, step 2.1] ∎ 

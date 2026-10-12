@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-functor-categories-inherit-completeness-and-cocompleteness.md

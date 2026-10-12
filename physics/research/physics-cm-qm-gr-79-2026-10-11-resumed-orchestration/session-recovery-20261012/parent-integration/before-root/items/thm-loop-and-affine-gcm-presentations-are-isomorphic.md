@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-loop-and-affine-gcm-presentations-are-isomorphic.md

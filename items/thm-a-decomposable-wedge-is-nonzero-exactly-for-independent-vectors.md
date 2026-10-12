@@ -41,9 +41,8 @@ $$v_1\wedge\cdots\wedge v_k\ne0\qquad\Longleftrightarrow\qquad v_1,\ldots,v_k\te
 
 **Proof technique:** direct.
 
-
-1.1 If $v_1,\ldots,v_k$ are dependent, choose by [L1] an entry $v_j=\sum_{i\ne j}c_iv_i$. Expanding the wedge by the multilinearity of the wedge map gives $v_1\wedge\cdots\wedge v_k=\sum_{i\ne j}c_i\,(v_1\wedge\cdots\wedge v_i\wedge\cdots\wedge v_k)$ with $v_i$ in the $j$th slot, and every summand has the repeated entry $v_i$, so alternation kills it; hence the wedge is zero. [L1, algebra]
+ 1.1 If $v_1,\ldots,v_k$ are dependent, choose by [L1] an entry $v_j=\sum_{i\ne j}c_iv_i$. Expanding the wedge by the multilinearity of the wedge map gives $v_1\wedge\cdots\wedge v_k=\sum_{i\ne j}c_i\,(v_1\wedge\cdots\wedge v_i\wedge\cdots\wedge v_k)$ with $v_i$ in the $j$th slot, and every summand has the repeated entry $v_i$, so alternation kills it; hence the wedge is zero. [L1, algebra]
 
 1.2 If $v_1,\ldots,v_k$ are independent, [L3] places the subset $\{v_1,\ldots,v_k\}$ inside a basis of $V$; ordering the remaining basis vectors after $v_1,\ldots,v_k$ gives a basis $(v_1,\ldots,v_k,u_{k+1},\ldots,u_n)$ of $V$. Then $v_1\wedge\cdots\wedge v_k$ is the basis wedge attached to the first $k$ indices, so by [L2] it is a basis vector and in particular nonzero. [L2, L3]
 
-2.1 Steps 1.1 and 1.2 prove the two directions of the equivalence. [step 1.1, step 1.2] ∎
+2.1 Steps 1.1 and 1.2 prove the two directions of the equivalence. [step 1.1, step 1.2] ∎ 

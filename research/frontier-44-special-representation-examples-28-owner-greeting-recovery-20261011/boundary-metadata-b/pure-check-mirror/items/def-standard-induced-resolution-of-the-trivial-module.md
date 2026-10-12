@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-standard-induced-resolution-of-the-trivial-module.md

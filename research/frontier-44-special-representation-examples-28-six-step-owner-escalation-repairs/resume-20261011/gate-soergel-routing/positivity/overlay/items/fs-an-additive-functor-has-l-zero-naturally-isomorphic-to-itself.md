@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-an-additive-functor-has-l-zero-naturally-isomorphic-to-itself.md

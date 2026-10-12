@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-jordan-schoenflies-extension-for-plane-curves.md

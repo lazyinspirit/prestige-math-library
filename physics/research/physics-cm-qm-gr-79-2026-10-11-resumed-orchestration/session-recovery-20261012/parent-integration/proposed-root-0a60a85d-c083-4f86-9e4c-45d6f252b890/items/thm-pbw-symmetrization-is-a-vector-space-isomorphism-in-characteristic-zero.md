@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pbw-symmetrization-is-a-vector-space-isomorphism-in-characteristic-zero.md

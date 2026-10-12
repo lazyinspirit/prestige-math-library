@@ -45,8 +45,6 @@ The only negative digit is the initial one; every later digit is positive.
 
 **Proof technique:** direct.
 
-1.1 Since $-2<-\sqrt2<-1$, the first digit is $a_0=-2$. Then. [F1, given, algebra]
-$$\alpha_1=\frac1{-\sqrt2+2}=\frac{2+\sqrt2}{2},\qquad \alpha_2=\frac1{\alpha_1-1}=\sqrt2,$$ so $a_1=1$ and $a_2=1$. [F1, given, algebra]
+1.1 Since $-2<-\sqrt2<-1$, the first digit is $a_0=-2$. Then. [F1, given, algebra] $$\alpha_1=\frac1{-\sqrt2+2}=\frac{2+\sqrt2}{2},\qquad \alpha_2=\frac1{\alpha_1-1}=\sqrt2,$$ so $a_1=1$ and $a_2=1$. [F1, given, algebra]
 
-2.1 One more step gives. [F1, F2, step 1.1, algebra]
-$$\alpha_3=\frac1{\sqrt2-1}=\sqrt2+1,$$ so every later digit is $2$. Hence the digit string is $$[-2;1,1,\overline2],$$ and [F2] identifies its value with $-\sqrt2$. In particular the negative sign is absorbed entirely into the first digit, while every later digit stays positive as required by [F1]. [F1, F2, step 1.1, algebra] ∎
+2.1 One more step gives. [F1, F2, step 1.1, algebra] $$\alpha_3=\frac1{\sqrt2-1}=\sqrt2+1,$$ so every later digit is $2$. Hence the digit string is $$[-2;1,1,\overline2],$$ and [F2] identifies its value with $-\sqrt2$. In particular the negative sign is absorbed entirely into the first digit, while every later digit stays positive as required by [F1]. [F1, F2, step 1.1, algebra] ∎ 

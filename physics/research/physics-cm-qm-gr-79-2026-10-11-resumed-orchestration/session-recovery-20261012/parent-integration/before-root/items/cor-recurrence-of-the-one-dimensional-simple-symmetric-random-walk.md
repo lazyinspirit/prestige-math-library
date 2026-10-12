@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-recurrence-of-the-one-dimensional-simple-symmetric-random-walk.md

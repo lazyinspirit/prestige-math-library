@@ -1,0 +1,801 @@
+[
+  {
+    "order": 115,
+    "id": "cm02-forces-initial-data-and-newtonian-flow",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Forces, initial data and Newtonian flow",
+    "companion": "cm02-forces-initial-data-and-newtonian-flow-examples",
+    "requires": [
+      "cm-math-approximation",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-balances"
+    ],
+    "items": [
+      {
+        "id": "post-cm02-force-superposition",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted force model: force maps, the equation of motion, additive composition of force contributions and frame covariance",
+        "statement": "Adopt as physical assumptions of the framework the following statements about\nforces and motion, in the spacetime, frames and worldlines of\n[[post-cm01-spacetime]], [[post-cm01-frames]] and [[post-cm01-worldlines]].\n\n**(i) Setting and configuration domain.** A model of the framework has\n$N\\ge1$ particle labels with fixed positive masses $m_{1},\\dots,m_{N}$\n([[post-cm01-worldlines]], clause (v)) and a configuration domain $Q$ in one\nfixed inertial frame, in the unconstrained branch of\n[[def-cm01-configuration]] clause (a): $Q\\subseteq\\mathbb R^{3N}$ is open,\npossibly with the collision set $\\Delta$ removed when the force law of the\nmodel is singular at coincident positions. The constrained branch of that\ndefinition, with its reaction forces, is **not** covered by this postulate; the\ndynamics of constrained systems is a separate development with its own\nassumptions. A **state** of the model is a pair $z=(x,v)\\in Q\\times\\mathbb\nR^{3N}$ of positions and coordinate velocities of the labels in the chosen\nframe ([[def-cm01-velocity-acceleration]]).\n\n**(ii) Time window.** A model carries a nondegenerate open interval\n$I_{0}\\subseteq\\mathbb R$, its **time window**, read in seconds\n([[def-cm01-units]]).\n\n**(iii) Force map and standing regularity.** A **force map** on this data is a\nmap\n\n$$F:I_{0}\\times Q\\times(\\mathbb R^{3})^{N}\\longrightarrow(\\mathbb R^{3})^{N},\\qquad (t,x,v)\\longmapsto F(t,x,v)=\\bigl(F_{1}(t,x,v),\\dots,F_{N}(t,x,v)\\bigr),$$\n\nwith components of dimension $\\mu\\ell\\tau^{-2}$, read in newtons\n([[def-cm01-units]]). The standing hypotheses of this branch, which every\nforce map of a model is required to satisfy, are:\n\n1. **Continuity.** $F$ is continuous on its domain\n   $D:=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$.\n2. **State-local Lipschitz regularity, locally uniform in time.** $F$ is\n   locally Lipschitz in the state variable $z=(x,v)$, locally uniformly in\n   time, in the sense of [[def-locally-lipschitz-in-the-state-variable]]: every\n   compact cylinder $C\\subseteq D$ carries a finite $L\\ge0$ with\n   $\\lVert F(t,z)-F(t,z')\\rVert_{2}\\le L\\lVert z-z'\\rVert_{2}$ whenever\n   $(t,z),(t,z')\\in C$ share their time coordinate.\n\nA map that fails clause 1 or clause 2 is **not** a force map of this branch,\nwhatever its other merits. When a later statement differentiates the force map\n(for instance in a linearization or a smooth-dependence claim), it adds the\nrequired differentiability hypothesis of the state variable explicitly; clause\n2 alone licenses only the existence, uniqueness and continuation statements\nproved on this page.\n\n**(iv) Equation of motion.** Adopt: the motion of the labels of a model with\nforce map $F$ in an inertial frame is governed by\n\n$$m_{i}\\,\\ddot x_{i}(t)=F_{i}\\bigl(t,x(t),\\dot x(t)\\bigr)\\qquad(i=1,\\dots,N),$$\n\nimposed along families of $C^{2}$ coordinate curves of the labels\n$x=(x_{1},\\dots,x_{N}):J\\to Q$, where $J\\subseteq I_{0}$ is an interval with\nnonempty interior and the derivatives are those of\n[[def-cm01-velocity-acceleration]]. The precise notion of a motion of the\nmodel, its associated first-order system and its maximal motions is\n[[def-cm02-newtonian-flow]]. The force map is **primitive data** of the model:\nthe equations above are the model's law, not an operational definition of $F$\nfrom a measured acceleration, and $F$ is not an extra observable measured\nindependently of the motion. The mass $m_{i}$ in (iv) is the fixed inertial\nmass of clause (v) of [[post-cm01-worldlines]]; no other mass occurs in this\nclause.\n\n**(v) Additive composition of force contributions.** When a model presents its\nforce map as composed of contributions, the composition is the pointwise sum:\nfor force maps $F^{(1)},\\dots,F^{(k)}$ on a common domain satisfying (iii),\n\n$$F(t,z)=\\sum_{a=1}^{k}F^{(a)}(t,z),$$\n\nand the sum again satisfies (iii), because a finite sum of continuous maps is\ncontinuous and a finite sum of maps that are locally Lipschitz in the state\nvariable is locally Lipschitz with a locally uniform constant. This\n**superposition of forces** is an adopted modelling rule, not a theorem about\nnature: it says how the model's total force is composed from the contributions\nit declares. Two decompositions with the same sum define the same force map\nand the same model; the framework does not measure an individual contribution\nin isolation, and no observation of motions alone determines a decomposition.\nNor does (v) assert that sums of motions are motions: if $F$ is not affine in\nthe state, the sum of two solutions of (iv) generally does not satisfy (iv),\nand superposing solutions is a separate question from superposing forces.\n\n**(vi) Description in another inertial frame.** Let $F_{*}=\\bigl(o',u',\n(e_{1}',e_{2}',e_{3}')\\bigr)$ be a second inertial frame related to the frame\nof (i) by the Galilean transformation\n\n$$t'=t+b,\\qquad x'=Rx+vt+a_{0}$$\n\nwith $b\\in\\mathbb R$, $a_{0},v\\in\\mathbb R^{3}$ and $R\\in SO(3)$\n([[pthm-cm01-galilean-kinematics]] clause 1;\n[[def-cm-special-orthogonal-group]]). If $x:J\\to Q$ is a family of motions of\nthe labels in the first frame and $\\eta(t'):=R\\,x(t'-b)+v\\,(t'-b)+a_{0}$ is\nthe description of the same worldlines in the second frame, then by clause 2\nof that theorem $\\eta$ is of class $C^{2}$ on $J+b$ and\n$\\eta_{i}''(t')=R\\,\\ddot x_{i}(t'-b)$, so along the motion (iv) becomes\n\n$$m_{i}\\,\\eta_{i}''(t')=\\bigl(R\\,F\\bigl(t'-b,\\ x(t'-b),\\ \\dot x(t'-b)\\bigr)\\bigr)_{i}.$$\n\nAdopt: the same interaction, read in the second frame, is represented on the\ntransferred data by the map\n\n$$F_{*}(t',y,w):=R\\,F\\Bigl(t'-b,\\ R^{\\mathsf T}\\bigl(y-v(t'-b)-a_{0}\\bigr),\\ R^{\\mathsf T}(w-v)\\Bigr),$$\n\nwhose domain is the image of $D$ under the affine bijection\n$(t',y,w)\\mapsto\\bigl(t'-b,\\,R^{\\mathsf T}(y-v(t'-b)-a_{0}),\\,R^{\\mathsf T}(w-v)\\bigr)$;\nthat domain is open, and $F_{*}$ is continuous and locally Lipschitz in its\nstate variable because $F$ is and the transfer is an affine bijection with\nbounded inverse on compacta. The framework formulates the equation of motion\nin every inertial frame; a rule that does not transform by this law is a\ndescription tied to the frame in which it was written, and the framework\nattaches no kinematic covariance to it. When $Q=\\mathbb R^{3N}$ — the case of\nthe models of the companion page — the transferred domain is again a product\n$I_{0}'\\times\\mathbb R^{3N}\\times\\mathbb R^{3N}$ with $I_{0}'=I_{0}+b$, and\n$F_{*}$ is a force map in the sense of (iii); for a bounded $Q$ the\ntransferred admissible position set may depend on $t'$, and the equation is\nthen read on that transferred set.\n\n**(vii) What this branch excludes.** Impulsive forcing (a finite momentum\ntransfer at an instant is not a force map); Coulomb sliding friction, whose\nexpression contains the factor $v/\\lvert v\\rvert$ and is undefined at $v=0$;\nstatic friction, which requires an inequality or a set-valued reaction model;\nstochastic forcing; and forces that exist only as distributions. Each of these\nrequires its own stated model and solution notion, and none is covered by\n(iii)–(iv). A singular force law is admissible on a configuration domain with\nthe singular configurations removed — for instance an inverse-square law on\nthe collision-excluded $Q$ of clause (i) — and what the removal of those\nconfigurations implies for existence in time is stated by the continuation\ntheorem of this page.\n\n**(viii) Status.** Clause (iii) states the hypotheses under which the theorems\nof this page are proved; clause (iv) is the adopted law of motion; clauses (v)\nand (vi) are the adopted composition and frame rules. Nothing here is deduced\nfrom experiment, from a symmetry principle or from the uniqueness theory of\ndifferential equations, and nothing here asserts that any physical\ninteraction is exactly of this form: the theorems of this page are conditional\nconsequences of the adopted model. The empirical significance of a concrete\nmodel lies in fully specified model parameters and reported observations\ncompared with its predictions, and this postulate supplies neither.",
+        "strategy": "A postulate, not a theorem: it adopts the force-map data with their continuity and state-local-Lipschitz hypotheses, the equation of motion in every inertial frame, additive composition of declared contributions and the transformation rule under frame changes, and records what the branch excludes and does not claim.",
+        "deps": [
+          "post-cm01-spacetime",
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "def-cm01-configuration",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-locally-lipschitz-in-the-state-variable",
+          "pthm-cm01-galilean-kinematics"
+        ],
+        "dependency_roles": {
+          "post-cm01-spacetime": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "pthm-cm01-galilean-kinematics": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the framework's force branch: force maps as continuous, state-locally-Lipschitz vector-valued maps on a time window, an open configuration domain and velocity space, the equation of motion $m_i\\ddot x_i=F_i(t,x,\\dot x)$ in every inertial frame, pointwise additivity of declared force contributions, and the transformation rule that a force law must satisfy under a change of inertial frame. The postulate excludes impacts, dry and static friction, stochastic and distributional forcing, and constraint reactions; it asserts no measured value, no conservation law and no claim that any physical interaction is exactly of this form.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2 'Newtonian Mechanics: A Single Particle', printed pages 2-5 (PDF pages 8-11): the equation of motion F = dp/dt = m a in an inertial frame, with F a function of the position and velocity (and possibly time)",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the force defined through the momentum derivative (Eq. 1.13), the explicit separate assumption that forces superpose as vectors, and the gravity law (1.15) introduced as an additional law",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.2, printed pages 1-2 (PDF pages 4-5): Newton's second law in its two equivalent forms, as N second-order equations F_i = d(m_i rdot_i)/dt with data r_i(0) and rdot_i(0), and as 2N first-order equations",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1 'Galilean Relativity', printed page 5 (PDF page 11): the boost x' = x + v t maps inertial frames to inertial frames and preserves d^2x/dt^2 = 0, so accelerations transform as spatial vectors and F = m rddot is the same law in both frames",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "post-cm02-interactions",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Restricted interaction models: pair decompositions, antisymmetry and centrality options, potential forces and the gravitational branch",
+        "statement": "Adopt, whenever a model of the force branch [[post-cm02-force-superposition]]\ninvokes them, the following **restricted interaction assumptions**. Throughout,\nthe data $I_{0}$, $Q$, $m_{1},\\dots,m_{N}$ and the force map $F$ are those of\n[[post-cm02-force-superposition]], and a state writes $z=(x,v)$ with\n$x=(x_{1},\\dots,x_{N})\\in Q$ and $v=(v_{1},\\dots,v_{N})\\in\\mathbb R^{3N}$.\n\n**(i) External-plus-pair decomposition.** The model's force map is presented as\n\n$$F_{i}(t,z)=F_{i}^{\\mathrm{ext}}(t,x_{i},v_{i})+\\sum_{j\\ne i}F_{ij}(t,x_{i},x_{j},v_{i},v_{j}) \\qquad(i=1,\\dots,N),$$\n\nwhere each $F_{i}^{\\mathrm{ext}}$ is a single-label **external** force map and\neach $F_{ij}$ (for $i\\ne j$, an ordered pair) is a **pair** force map, all\ndefined on their stated open domains and satisfying the standing continuity\nand state-local-Lipschitz hypotheses of clause (iii) of\n[[post-cm02-force-superposition]] with respect to the arguments they actually\ndepend on. This is a restriction of the model class: an arbitrary force map\n$F$ of [[post-cm02-force-superposition]] need not admit such a decomposition,\nand the decomposition is part of the model's declaration, not a theorem. It is\nrelative to the declared set of labels: for a subsystem, a pair force to a\nlabel outside the declared set appears as an external force, and no\nantisymmetry or pairing property of the full system restricts that external\nforce.\n\n**(ii) Optional pair assumptions.** In addition, a model may adopt, separately\nor together, the following assumptions about a pair force $F_{ij}$:\n\n1. **Antisymmetry (strong form of the third law).**\n   $F_{ij}(t,x_{i},x_{j},v_{i},v_{j})=-F_{ji}(t,x_{j},x_{i},v_{j},v_{i})$ for\n   all arguments in the domain.\n2. **Centrality.** $F_{ij}(t,x_{i},x_{j},v_{i},v_{j})$ is parallel to\n   $x_{i}-x_{j}$, i.e. lies in the real line spanned by $x_{i}-x_{j}$,\n   whenever $x_{i}\\ne x_{j}$.\n\nEach assumption is a further restriction of the model class and is adopted\nonly where invoked. Both are *sufficient* hypotheses used by later balance\nstatements, and neither is a consequence of the equation of motion: a\nvelocity-dependent pair force, or an interaction mediated by a field omitted\nfrom the declared labels, need satisfy neither.\n\n**(iii) Potential model.** A model may present its force map through a scalar\n**potential** $U:I_{0}\\times Q\\to\\mathbb R$ of class $C^{2}$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]), of dimension\n$\\mu\\ell^{2}\\tau^{-2}$, read in joules ([[def-cm01-units]]), through the rule\n\n$$F_{i}(t,z)=-\\nabla_{x_{i}}U(t,x)\\qquad(i=1,\\dots,N),$$\n\nthe gradient being the Euclidean gradient in the position variable of each\nlabel ([[def-jacobian-matrix-and-gradient]],\n[[def-euclidean-inner-product]]). This is a restriction of the force class:\nonly force maps that are the negative gradient of such a potential belong to\nit. The same force map arises from every potential of the form\n$U(t,x)+c(t)$ with a differentiable function $c$ of $t$ alone whenever\nthe declared $C^{2}$ regularity is retained. More generally, for each connected\ncomponent $C$ of $Q$ (a maximal connected subset), two $C^{2}$ potentials\nfor the same force differ by an independently chosen $C^{2}$ function\n$c_C(t)$ on $I_0\\times C$. A single time function suffices when $Q$ is\nconnected; openness alone does not require the constants on different\ncomponents to agree. The chosen normalization is part of any later energy\nstatement and is recorded with it, and no energy statement is made on this page.\n\n**(iv) Pair and external potentials are examples, not the general form.**\nWhen $U$ has the form\n\n$$U(t,x)=\\sum_{i}u_{i}(t,x_{i})+\\sum_{i<j}u_{ij}(t,x_{i},x_{j})$$\n\nwith $C^{2}$ scalar functions $u_{i}$, $u_{ij}$, the decomposition (i) holds\nwith $F_{i}^{\\mathrm{ext}}=-\\nabla_{x_{i}}u_{i}$ and\n$F_{ij}=-\\nabla_{x_{i}}u_{ij}$. Potentials of the still more special form\n$u_{ij}=u_{ij}(t,\\lvert x_{i}-x_{j}\\rvert)$ are the **central pair\npotentials**; these are examples, and no generality is claimed for any of\nthese subclasses. Velocity-dependent forces such as the drag model\n[[post-cm02-drag]] lie outside every potential model of this clause.\n\n**(v) Newtonian gravitational branch.** The model may adopt the pair potential\n\n$$U_{ij}(x_{i},x_{j})=-\\frac{G_{\\mathrm N}\\,m_{i}^{g}m_{j}^{g}}{\\lvert x_{i}-x_{j}\\rvert}$$\n\non the collision-excluded configuration domain ($x_{i}\\ne x_{j}$ for all\n$i\\ne j$), where $G_{\\mathrm N}>0$ is a constant of dimension\n$\\ell^{3}\\mu^{-1}\\tau^{-2}$ ([[def-cm01-units]]) and the numbers\n$m_{1}^{g},\\dots,m_{N}^{g}>0$ are **gravitational coupling parameters** of the\nlabels, primitive model data distinct from the inertial masses $m_{i}$ of the\nequation of motion. By clause (iii) this potential supplies the attractive\ninverse-square pair force\n$F_{ij}=-G_{\\mathrm N}m_{i}^{g}m_{j}^{g}\\,(x_{i}-x_{j})/\\lvert x_{i}-x_{j}\\rvert^{3}$,\nthe content of the elementary differentiation\n$\\nabla_{x}\\bigl(1/\\lvert x-y\\rvert\\bigr)=-(x-y)/\\lvert x-y\\rvert^{3}$; a\nconcrete instance of that differentiation is verified on the companion page.\nThe adopted model satisfies the antisymmetry and centrality options of (ii)\nwhere they are invoked.\n\n**(vi) The mass identification is an empirical assumption.** The\nidentification\n\n$$m_{i}^{g}=m_{i}\\qquad(i=1,\\dots,N)$$\n\nof gravitational couplings with inertial masses is **not** part of clauses\n(i)–(v) and is not a consequence of the equation of motion. It is an\nadditional empirical assumption, adopted only when a model states it, and it\nis the subject of the weak equivalence principle; the sources record its\nempirical support and its historical status, and this page records no\nmeasurement. Likewise, the inverse-square form in (v) is an adopted law, not a\nconsequence of the force branch [[post-cm02-force-superposition]].\n\n**(vii) Status.** Clauses (i)–(v) are adopted modelling assumptions that\nrestrict the force maps of [[post-cm02-force-superposition]]; they add no\ndynamics beyond that postulate, and every theorem of this page remains\nconditional on these adopted hypotheses. The balances of momentum, angular\nmomentum and energy, when asserted later, are theorems with their own\nhypotheses on this structure and are not made here.",
+        "strategy": "A postulate, not a theorem: it adopts the restricted interaction models (external-plus-pair decomposition, optional antisymmetry and centrality, potential forces, the gravitational pair potential with couplings distinct from inertial masses) and records the mass identification as a further empirical assumption.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm01-worldlines",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of restricted interaction models inside the force branch of [[post-cm02-force-superposition]]: a decomposition of the total force into external single-label forces and pair forces, the optional pair assumptions of antisymmetry and centrality, the branch of force maps that come from a scalar potential with the Euclidean gradient, and the optional Newtonian gravitational pair-potential model with gravitational coupling parameters distinct from the inertial masses. The item asserts no law of nature, no measured value and no conservation law; the identification of gravitational and inertial mass is recorded as a further empirical assumption, not adopted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3 'Newtonian Mechanics: Many Particles', printed pages 5-9 (PDF pages 11-15): F_i = sum_j F_ij + F_i^ext, the weak and strong forms of Newton's third law, the caution that momentum exchange with an omitted field is not covered, and the centre-of-mass consequences",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): vector superposition of forces assumed separately (Eq. 1.13), and the gravity law (1.15) introduced as an additional law with the weak-equivalence footnote 11 recording the empirical support for identifying gravitational and inertial mass",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.3, chapter pages 5-8 (PDF pages 9-12): the internal forces assumed central for the total-torque statement, with the pairwise central form and its restricted character",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.3, printed pages 12-15 (PDF pages 15-18): the total momentum balance with internal forces obeying Newton's third law F_i-to-j = -F_j-to-i and no total external force, and the centre-of-mass reduction",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "def-cm02-newtonian-flow",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The associated first-order system, motions, maximal motions and the Newtonian flow of a force model",
+        "statement": "Let a force model of [[post-cm02-force-superposition]] be given: time window\n$I_{0}\\subseteq\\mathbb R$ nondegenerate and open, configuration domain\n$Q\\subseteq\\mathbb R^{3N}$ open ([[def-cm01-configuration]] clause (a)),\nfixed masses $m_{1},\\dots,m_{N}>0$ ([[post-cm01-worldlines]] clause (v)), and a\nforce map $F$ with the standing continuity and state-local-Lipschitz\nhypotheses of clause (iii) of that postulate.\n\n**(a) State domain and inverse-mass operator.** The **state domain** of the\nmodel is\n\n$$D:=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}\\subseteq\\mathbb R\\times\\mathbb R^{3N}\\times\\mathbb R^{3N},$$\n\nan open subset of $\\mathbb R\\times\\mathbb R^{6N}$; a point $(t,x,v)\\in D$ is a\ntime together with the **state** $z=(x,v)$ of positions $x\\in Q$ and coordinate\nvelocities $v\\in(\\mathbb R^{3})^{N}$ of the labels ([[def-cm01-velocity-acceleration]],\n[[def-cm01-units]]). The **inverse-mass operator** is the linear map\n\n$$\\mathsf M^{-1}:\\mathbb R^{3N}\\to\\mathbb R^{3N},\\qquad \\mathsf M^{-1}(u_{1},\\dots,u_{N}):=\\Bigl(\\frac{u_{1}}{m_{1}},\\dots,\\frac{u_{N}}{m_{N}}\\Bigr),$$\n\nthe inverse of the mass operator $\\mathsf M$ of clause (d) of\n[[def-cm01-configuration]].\n\n**(b) Associated first-order system.** The **associated first-order field** of\nthe model is\n\n$$\\mathcal F:D\\longrightarrow\\mathbb R^{3N}\\times\\mathbb R^{3N},\\qquad \\mathcal F(t,x,v):=\\Bigl(v,\\ \\mathsf M^{-1}F(t,x,v)\\Bigr),$$\n\nand the **associated first-order system** is $z'=\\mathcal F(t,z)$ on the open\ndomain $D$, in the sense of\n[[def-first-order-ode-initial-value-problem-and-solution]]; here\n$z=(x,v)\\in\\mathbb R^{6N}$. The map $\\mathcal F$ satisfies the\nPicard–Lindelöf hypotheses of\n[[thm-picard-lindelof-local-existence-and-uniqueness]]: it is continuous on\n$D$, and it is locally Lipschitz in the state variable $z$ locally uniformly\nin time, because its first component $z\\mapsto v$ is linear and its second is\nthe composition of the force map $F$ — which is locally Lipschitz in $(x,v)$\nlocally uniformly in time by [[post-cm02-force-superposition]] clause (iii) —\nwith the linear map $\\mathsf M^{-1}$.\n\n**(c) Motions.** Let $J\\subseteq\\mathbb R$ be an interval with nonempty\ninterior, endpoints read with one-sided derivatives as in\n[[def-first-order-ode-initial-value-problem-and-solution]]. A **motion** of\nthe model on $J$ is a curve $x:J\\to Q$ of class $C^{2}$ such that\n$t\\in I_{0}$ for every $t\\in J$ and\n\n$$m_{i}\\,\\ddot x_{i}(t)=F_{i}\\bigl(t,x(t),\\dot x(t)\\bigr)\\qquad(i=1,\\dots,N,\\ t\\in J).$$\n\nEquivalently: the state curve $z=(x,\\dot x):J\\to D$ is a solution of the\nassociated first-order system on $J$. Indeed, if $x$ is a motion then\n$z=(x,x')$ is $C^{1}$ with\n$z'=(x',x'')=(x',\\mathsf M^{-1}F(t,x,x'))=\\mathcal F(t,z)$ and $z(t)\\in D$;\nconversely, if $z=(x,v)$ is a solution with $z(t)\\in D$ for all $t$, then\n$x'=v$ and $v'=\\mathsf M^{-1}F(t,x,v)$, so $v$ is $C^{1}$, $x$ is $C^{2}$, and\nmultiplying the second equation by the masses returns the displayed\nsecond-order equation. Motions of the labels of the model are exactly these\ncurves by [[post-cm02-force-superposition]] clause (iv).\n\n**(d) Initial data and maximal motion.** An **initial datum** of the model is\na triple $(t_{0},x_{0},v_{0})$ with $t_{0}\\in I_{0}$, $x_{0}\\in Q$ and\n$v_{0}\\in(\\mathbb R^{3})^{N}$; write $z_{0}:=(x_{0},v_{0})$. A **maximal\nmotion** with this datum is a motion $x:J_{\\max}\\to Q$ with $x(t_{0})=x_{0}$\nand $\\dot x(t_{0})=v_{0}$ that has no extension to a motion of the model on a\nstrictly larger interval. By the Picard–Lindelöf hypotheses verified in (b)\nand the maximal-solution theorem\n[[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] (with\n[[def-maximal-ode-solution]]): every initial datum has exactly one maximal\nmotion, its **maximal interval** $J_{\\max}$ is an open interval containing\n$t_{0}$ and contained in $I_{0}$, and every motion with the same datum is the\nrestriction of the maximal one. The restriction statement transfers from the\nassociated first-order system to motions through the equivalence in (c).\n\n**(e) Newtonian flow.** The **Newtonian flow** of the model is the map\n\n$$\\Phi:\\Omega\\longrightarrow Q\\times\\mathbb R^{3N},\\qquad \\Omega:=\\bigl\\{(t,t_{0},z_{0}):t_{0}\\in I_{0},\\ z_{0}\\in Q\\times\\mathbb R^{3N},\\ t\\in J_{\\max}(t_{0},z_{0})\\bigr\\},$$\n\ndefined by $\\Phi(t;t_{0},z_{0}):=z(t)$, where $t\\mapsto z(t)=(x(t),\\dot x(t))$\nis the state curve of the maximal motion with datum $(t_{0},z_{0})$. By (d) the\nassignment is well defined: the maximal motion is unique, so $\\Phi$ is a\nfunction on $\\Omega$ and not merely a relation. For fixed $t_{0}$ and $z_{0}$\nthe curve $t\\mapsto\\Phi(t;t_{0},z_{0})$ is defined exactly on the maximal\ninterval $J_{\\max}(t_{0},z_{0})$.",
+        "strategy": "A definition: it fixes the state domain, the inverse-mass operator, the associated first-order field and system, motions and their equivalence with the second-order equation, initial data, the maximal motion and its maximal interval (existence by the cited maximal-solution theorem), and the Newtonian flow map; regularity of the flow is left to separate results.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm01-worldlines",
+          "def-cm01-configuration",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-maximal-ode-solution",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Vocabulary of the force branch: the state space of positions and velocities, the inverse-mass operator, the associated first-order system of the second-order equation of motion, motions as its solutions, initial data, the maximal motion and its maximal interval, and the Newtonian flow map. The item defines objects only; it asserts no force law beyond the cited postulate, no regularity of the flow beyond what the cited existence theorems provide, and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.1 and Corollary 2.15: first-order systems, unique maximal solutions and their domains, used here through the cited mathematical items",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 7.1.1, printed page 143 (PDF page 146): Newtonian dynamics recast as a first-order system with the local existence and uniqueness theorem stated",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the second-order Newtonian system in an inertial frame",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "pthm-cm02-ivp",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Local existence and uniqueness for the Newtonian initial-value problem, with the quantitative Picard-Lindelöf cylinder",
+        "statement": "Adopt the force model of [[post-cm02-force-superposition]]: time window\n$I_{0}$, open configuration domain $Q\\subseteq\\mathbb R^{3N}$, masses\n$m_{1},\\dots,m_{N}>0$, and a force map $F$ continuous and locally Lipschitz in\nthe state variable, locally uniformly in time, on\n$D=I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$. Let\n$\\mathcal F(t,x,v)=\\bigl(v,\\mathsf M^{-1}F(t,x,v)\\bigr)$ be the associated\nfirst-order field and let motions and maximal motions be as in\n[[def-cm02-newtonian-flow]]. Fix an initial datum\n$(t_{0},x_{0},v_{0})\\in I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$ and write\n$z_{0}=(x_{0},v_{0})$.\n\n1. **Local existence.** There is $h>0$ and there is a motion $x$ of the model\n   on $[t_{0}-h,t_{0}+h]$ with $x(t_{0})=x_{0}$ and $\\dot x(t_{0})=v_{0}$;\n   moreover such a motion is exactly one of class $C^{2}$ satisfying\n   $m_{i}\\ddot x_{i}(t)=F_{i}(t,x(t),\\dot x(t))$ for all $i$ and all\n   $t\\in[t_{0}-h,t_{0}+h]$.\n2. **Uniqueness.** If $x:J\\to Q$ and $\\tilde x:\\tilde J\\to Q$ are motions of\n   the model with the same initial datum,\n   $x(t_{0})=\\tilde x(t_{0})=x_{0}$ and $\\dot x(t_{0})=\\dot{\\tilde x}(t_{0})=v_{0}$,\n   then $x=\\tilde x$ on $J\\cap\\tilde J$.\n3. **Quantitative cylinder.** Let $h,r>0$ satisfy\n   $C:=[t_{0}-h,t_{0}+h]\\times\\overline B(z_{0},r)\\subseteq D$, put\n   $M:=\\sup\\{\\lVert\\mathcal F(t,z)\\rVert_{2}:(t,z)\\in C\\}$ and let $\\Lambda$\n   be a state-Lipschitz constant of $\\mathcal F$ on $C$. If $hM\\le r$ and\n   $\\Lambda h<1$, then there is exactly one motion on $[t_{0}-h,t_{0}+h]$\n   through the datum whose state graph $(t,(x(t),\\dot x(t)))$ lies in $C$, and\n   every motion through the datum agrees with it on the intersection of its\n   interval with $[t_{0}-h,t_{0}+h]$.\n4. **Maximal motion.** There is exactly one maximal motion with the datum:\n   its maximal interval $J_{\\max}$ is an open interval containing $t_{0}$ and\n   contained in $I_{0}$, and every motion with the datum is its restriction.\n\nThe statement is conditional on the adopted force model: clause 1 locates a\nsolution only near $t_{0}$ and bounds no interval length in terms of the data,\nclause 4 asserts no completeness of $J_{\\max}$ in $I_{0}$, and no empirical\ncontent is claimed.",
+        "strategy": "A conditional deduction: verify that the associated first-order field is continuous and locally Lipschitz on the open state domain, apply Picard-Lindelof in its quantitative cylinder form, translate the solution back to the second-order motion, prove uniqueness on common intervals, and obtain the unique maximal motion by the maximal-solution theorem.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "def-cm01-configuration",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-maximal-ode-solution",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-extreme-value-metric"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The local existence, uniqueness and maximal-extension statement for the adopted Newtonian force model of [[post-cm02-force-superposition]] on an open configuration domain: every initial datum with a configuration in the domain and an arbitrary coordinate velocity admits a unique motion through it, locally in time, and there is a unique maximal motion of which every motion with that datum is a restriction. The result is a conditional deduction from the adopted force postulate and the cited mathematical ODE theorems; it gives no global existence, no bound on the interval, no empirical statement and no claim that any physical system realizes the model.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 7.1.1, printed page 143 (PDF page 146): the first-order form of the equations of motion and the local existence and uniqueness theorem stated for continuously differentiable right-hand sides, with deterministic evolution from it",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.1 and Theorem 2.2: the Picard-Lindelöf local existence and uniqueness theorem and the maximal domain of solutions",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the second-order Newtonian equation of motion in an inertial frame",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "pthm-cm02-continuation",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Maximal Newtonian motions and the compact-continuation criterion: finite-time breakdown requires escape from every compact subset of the state domain",
+        "statement": "Adopt the force model of [[post-cm02-force-superposition]] with time window\n$I_{0}$, open configuration domain $Q\\subseteq\\mathbb R^{3N}$, masses\n$m_{1},\\dots,m_{N}>0$ and force map $F$ continuous and locally Lipschitz in the\nstate variable, locally uniformly in time; let $D=I_{0}\\times Q\\times(\\mathbb\nR^{3})^{N}$, $\\mathcal F(t,x,v)=\\bigl(v,\\mathsf M^{-1}F(t,x,v)\\bigr)$,\n$U:=Q\\times\\mathbb R^{3N}$, and let motions, maximal motions and the state\ncurve $z=(x,\\dot x)$ be as in [[def-cm02-newtonian-flow]]. Fix an initial datum\n$(t_{0},x_{0},v_{0})\\in I_{0}\\times Q\\times(\\mathbb R^{3})^{N}$, write\n$z_{0}=(x_{0},v_{0})$, and let $x_{\\max}:J_{\\max}\\to Q$ be the maximal motion\nwith this datum, with state curve $z=(x_{\\max},\\dot x_{\\max}):J_{\\max}\\to U$\nand $J_{\\max}=(a,b)$ its maximal interval, $-\\infty\\le a<b\\le+\\infty$.\n\n1. **Existence and uniqueness of the maximal motion.** $J_{\\max}$ is an open\n   interval containing $t_{0}$ and contained in $I_{0}$, and every motion with\n   the datum is a restriction of $x_{\\max}$.\n2. **Breakdown criterion.** If $b<+\\infty$, then for every compact\n   $K\\subseteq D$ and every $\\eta>0$ with $(b-\\eta,b)\\cap J_{\\max}\\neq\\varnothing$\n   there is $t\\in(b-\\eta,b)\\cap J_{\\max}$ with $(t,z(t))\\notin K$. Equivalently:\n   if there are a compact $K\\subseteq D$ and $\\delta>0$ with\n   $(t,z(t))\\in K$ for all $t\\in(b-\\delta,b)\\cap J_{\\max}$, then\n   $x_{\\max}$ extends to a motion of the model on a strictly larger interval\n   than $J_{\\max}$ — so $J_{\\max}$ cannot have right endpoint $b$.\n3. **Autonomous case.** Suppose $F$ does not depend on its time argument:\n   $F(t,x,v)=F_{0}(x,v)$ for a map $F_{0}:U\\to(\\mathbb R^{3})^{N}$ satisfying\n   the standing regularity of [[post-cm02-force-superposition]] clause (iii).\n   Then the associated field is autonomous,\n   $\\mathcal F(t,x,v)=(v,\\mathsf M^{-1}F_{0}(x,v))$, the equations do not use\n   the time coordinate, and **the model is read on the extended time window\n   $\\mathbb R$** (the standing hypotheses are unchanged by the extension).\n   For this clause, take the same autonomous force law as a model on the\n   extended time window $I_{0}=\\mathbb R$, and let $J_{\\max}=(a,b)$ be the\n   maximal interval for that extended-time model. If $b<+\\infty$ and there\n   are a compact $K_{0}\\subseteq U$ and $\\delta>0$ with $z(t)\\in K_{0}$ for\n   all $t\\in(b-\\delta,b)\\cap J_{\\max}$, then the state curve extends past\n   $b$ as a solution of the same model, contradicting maximality; thus no\n   finite maximal endpoint has such a terminal compact trap. In particular,\n   if one compact $K_{0}\\subseteq U$ contains $z(t)$ for every\n   $t\\in J_{\\max}\\cap[t_{0},+\\infty)$, then $b=+\\infty$ and the motion is\n   defined for all forward times $t\\ge t_{0}$.\n4. **Reading.** Suppose the time window is all of $\\mathbb R$ (the\n   time-dependent case included) and $b<+\\infty$. Then for every compact\n   $K_{0}\\subseteq U$ and every $\\delta>0$ there is $t\\in(b-\\delta,b)$ with\n   $z(t)\\notin K_{0}$: near a finite breakdown the state leaves every compact\n   subset of the open state domain $U=Q\\times\\mathbb R^{3N}$. Consequently a\n   finite-time breakdown is caused either by unboundedness of the state or by\n   approach of the positions to the complement of $Q$ (the configurations\n   excluded from the model); the mere finiteness of $F$ at every point of $Q$\n   prevents neither.",
+        "strategy": "A conditional deduction from the compact-continuation and escape theorems applied to the associated first-order system: a maximal motion with a finite endpoint leaves every compact subset of the open state domain, the autonomous case extends past a trapped endpoint, and the reading clause records the unbounded-state or excluded-configuration alternatives.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "def-cm01-configuration",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-maximal-ode-solution",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "cor-cm-finite-time-breakdown-requires-escape",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "cor-cm-finite-time-breakdown-requires-escape": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The continuation and breakdown criterion for the adopted Newtonian force model: the maximal motion of an initial datum is unique; at a finite right endpoint of its maximal interval its state graph leaves every compact subset of the open state domain, so a finite-time breakdown is caused by escape of the state (unbounded positions or velocities, or positions approaching the excluded configurations of the domain) or by the declared end of a finite time window; an autonomous force whose state is trapped in a compact subset of the state domain extends past the putative endpoint. The result is a conditional deduction from the adopted force postulate and the cited mathematical continuation theorems; it asserts no global existence for particular force laws, no empirical statement and no claim that any physical system realizes the model.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.6 'Extensibility of solutions', Corollary 2.15 (compact continuation) and Corollary 2.16 (escape of every compact set), printed pages 50-53",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "Julien Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), Section 1.3 'Continuation of solutions', Lemma 1.3.1, Theorem 1.3.3 and Corollary 1.3.4, printed pages 24-28: a maximal solution whose right endpoint is finite approaches the boundary of the domain",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 7.1.1, printed page 143 (PDF page 146): deterministic evolution from the local existence and uniqueness theorem, with no global-existence claim",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "ex-cm02-uniform-field",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The uniform-force model: explicit global motion of a label under a constant declared field, with uniqueness, dimensions and frame covariance",
+        "statement": "Work in the force model of [[post-cm02-force-superposition]] with $N$ labels,\ntime window $I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R^{3N}$, fixed\nmasses $m_{1},\\dots,m_{N}>0$, and fix a vector\n$\\mathbf g\\in\\mathbb R^{3}$ with dimension $[\\mathbf g]=\\ell\\tau^{-2}$,\nread in metres per second squared ([[def-cm01-units]]); $\\mathbf g$ is a\n**declared parameter** of the model, not a measured value. The **uniform-force\nmodel** is the force map\n\n$$F_{i}(t,x,v):=m_{i}\\,\\mathbf g\\qquad(i=1,\\dots,N),$$\n\nconstant in the state, so that every label has the same coordinate\nacceleration $\\mathbf g$ independently of its mass, position and velocity\n([[def-cm02-newtonian-flow]]). Verify the following:\n\n1. $F$ satisfies the standing continuity and state-local-Lipschitz hypotheses\n   of clause (iii) of [[post-cm02-force-superposition]], with state-Lipschitz\n   constant $0$ on every cylinder.\n2. For the initial datum $x(0)=x_{0}$, $\\dot x(0)=v_{0}$ the explicit curve\n\n   $$x(t)=x_{0}+v_{0}t+\\tfrac12\\mathbf g\\,t^{2}$$\n\n   is a motion of the model on $[0,\\infty)$ and hence on the whole time\n   window, and it is the unique maximal motion with this datum.\n3. The dimension bookkeeping of the terms is consistent: the parameter has\n   dimension length per time squared, the force components have dimension\n   $\\mu\\ell\\tau^{-2}$, and the quadratic term has dimension length.\n4. Under a change of inertial frame the model is covariant: in the second\n   frame the same interaction is again a uniform-force model with parameter\n   $\\mathbf g'=R\\mathbf g$, $R\\in SO(3)$.",
+        "strategy": "A worked verification: check the constant force map against the standing hypotheses with Lipschitz constant 0, verify the explicit quadratic motion and its initial data by differentiation, conclude uniqueness and global maximality from the initial-value theorem, and compute the dimension and frame-covariance statements.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "pthm-cm02-continuation",
+          "post-cm01-worldlines",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "pthm-cm01-galilean-kinematics"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "pthm-cm02-continuation": "physical-result",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "pthm-cm01-galilean-kinematics": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked verification inside the framework: for one labeled particle of the model, the force map that assigns to every state the same vector $m\\mathbf g$ (a declared constant field parameter of dimension length per time squared) satisfies the standing hypotheses of the force postulate; the explicit quadratic motion solves the initial-value problem, exists on the whole time window, is the unique maximal motion, and the model is covariant under changes of inertial frame with the parameter transforming as a spatial vector. The item is a computation inside the model: it asserts no measured value of any field strength, no property of the Earth's gravitational field and no empirical law, and the constant-field idealization is recorded as an approximation.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.2, printed pages 1-2 (PDF pages 4-5): Newton's second law F_i = d(m_i rdot_i)/dt with initial data r_i(0) and rdot_i(0)",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 4.5, printed pages 79-83: constant near-Earth gravity as the potential mgz with constant g, an approximation and not a globally uniform planetary field",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 4 (PDF page 8): the gravity law (1.15) as an additional law beyond the equation of motion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed page 5 (PDF page 11): under the boost x' = x + v t the acceleration transforms as a spatial vector, a' = R a",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "post-cm02-drag",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "The linear drag model: a phenomenological velocity-proportional resistance with a declared coefficient",
+        "statement": "**(i) Setting.** Work in the force branch of\n[[post-cm02-force-superposition]] with one labeled particle of fixed mass\n$m>0$ ([[post-cm01-worldlines]] clause (v)) in a fixed inertial frame, with\ntime window $\\mathbb R$ and configuration domain $Q=\\mathbb R^{3}$, and with\nthe particle's coordinate position $x$ and coordinate velocity\n$v=\\dot x$ ([[def-cm01-velocity-acceleration]]). The particle moves through a\n**medium** that fills the region of the motion and is at rest in the chosen\nframe. The medium is not one of the model's particle labels, so its effect on\nthe label is an **external force** of the model in the sense of clause (i) of\n[[post-cm02-interactions]]: the decomposition into the label's own dynamics\nand the medium's effect is part of the model's declaration.\n\n**(ii) The model.** Adopt as a **constitutive model** of the medium's net\nforce the **linear drag model** with a declared coefficient\n$c\\ge0$ of dimension $\\mu\\tau^{-1}$, read in kilograms per second\n([[def-cm01-units]]):\n\n$$F^{\\mathrm{drag}}(v):=-c\\,v,$$\n\noptionally combined, through the additive composition of clause (v) of\n[[post-cm02-force-superposition]], with a declared constant applied force\n$m\\mathbf g$, where $\\mathbf g\\in\\mathbb R^{3}$ is a constant parameter of\ndimension $\\ell\\tau^{-2}$ ([[def-cm01-units]]). The resulting force map of the\nmodel is\n\n$$F(t,x,v)=m\\mathbf g-c\\,v,\\qquad\\text{that is,}\\qquad m\\,\\ddot x=m\\mathbf g-c\\,\\dot x,$$\n\nthe equation of a label whose only interactions are the constant applied field\nand the linear resistance of the medium. The model is defined for all\n$(t,x,v)\\in\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}$.\n\n**(iii) Regularity.** The force map is affine in the state: it is continuous;\nand for two states $z=(x,v)$, $z'=(x,v')$ sharing a position,\n$\\lVert F(t,z)-F(t,z')\\rVert_{2}=c\\,\\lVert v-v'\\rVert_{2}\\le c\\,\\lVert z-z'\\rVert_{2}$,\nso it is locally Lipschitz in the state variable with the global constant $c$,\nuniformly in time ([[def-locally-lipschitz-in-the-state-variable]]). It is\ntherefore a force map of the branch [[post-cm02-force-superposition]] clause\n(iii), and the existence, uniqueness and continuation theorems of this page\napply to it; the regularity check is recorded with the model checks on the\ncompanion page.\n\n**(iv) Physical status and regime.** This is a **phenomenological**\nconstitutive model, adopted rather than derived: it represents the net effect\nof a medium whose microscopic state is not modelled, and the coefficient $c$\nis a model parameter that depends on the body and the medium. The linear form\nis a restricted regime — slow motion through a viscous medium, of which the\nStokes force on a sphere, $c=6\\pi\\eta a$ for dynamic viscosity $\\eta$ and\nradius $a$, is the recorded example — and other regimes are **different\nmodels**: a force growing quadratically in the speed at higher speeds, or\nCoulomb sliding friction, whose expression contains the factor\n$v/\\lvert v\\rvert$ and is undefined at $v=0$, and which is outside clause\n(iii) of [[post-cm02-force-superposition]] altogether. The model also neglects\nthe random component of the environment's force. The cited fluctuation\nqualification is specifically Likharev's damped harmonic oscillator model\n$m\\ddot q+\\gamma\\dot q+\\kappa q=0$, with $m,\\kappa>0$ and damping coefficient\n$\\gamma>0$ (denoted $\\eta$ in the source), oscillator energy\n$E:=\\tfrac12m\\dot q^{2}+\\tfrac12\\kappa q^{2}$, and natural angular frequency\n$\\omega_{0}:=\\sqrt{\\kappa/m}$: footnote 4 says\nthat neglecting its random-force component is admissible only when, at thermal\nequilibrium, $E$ is much greater than $\\max(k_{\\mathrm B}T,\\hbar\\omega_{0}/2)$,\nwhere $T$ is temperature, $k_{\\mathrm B}$ is Boltzmann's constant and $\\hbar$\nis the reduced Planck constant. The free-particle model stated here has no\nrestoring term and defines no corresponding $E$, $T$ or $\\omega_{0}$, so the\noscillator condition is not an additional admissibility condition on this\nmodel. Applying the idealization to a concrete medium requires a separate\nmodel of its fluctuations.\nNo value of $c$, of $m$, or of $\\mathbf g$ is asserted by this item, and using\nmeasured values for them is an empirical premise with its own conditions and\nuncertainty.\n\n**(v) Status.** Adopted assumption of the framework when a model invokes it;\nit selects no law of nature on its own and proves nothing about the actual\nmotion of any body in any medium. Its consequences within the model are the\nsubject of the companion example on terminal-velocity approach.",
+        "strategy": "A postulate, not a theorem: it adopts the linear drag force with a declared coefficient as a phenomenological model of a medium, records its regularity, its regime restrictions (linear/Stokes regime, quadratic and Coulomb friction as different models), the neglected environment fluctuations and the empirical status of its parameters.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm02-interactions",
+          "post-cm01-worldlines",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "post-cm02-interactions": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of a constitutive force model for the interaction of a labeled particle with a medium: a linear drag force $-c\\dot x$ with a declared coefficient $c\\ge0$, optionally combined with a constant applied force. The model is phenomenological and restricted: it is adopted for a stated regime (slow motion in a viscous medium, the range in which the linear/Stokes form is used), its coefficient is a model parameter depending on body and medium, and the model neglects the random component of the environment's force. The item asserts no measured value, no derivation of the coefficient from the equation of motion, and no claim that the model applies to a given real motion.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 5.1, chapter pages 1-3 (PDF pages 87-89), Eqs. (5.1)-(5.9) and footnote 4: linear drag in a damped one-dimensional harmonic oscillator; the random-force omission condition is stated for that oscillator, whose energy and natural frequency are defined in the section",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.4, printed pages 20-21 (PDF pages 23-24): friction as a nonconservative force example, with fluid friction at low velocity F = -b v, the distinct static/sliding/rolling friction models, and the worked Stokes-sphere equation m' yddot + m' g' = -6 pi eta a ydot",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 6.8, printed pages 134-138 (PDF pages 137-141): Stokes drag on a sphere in steady, incompressible viscous flow at small Reynolds number, with the inertial flow term neglected and drag magnitude 6 pi eta a u",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): force as a function of position and velocity in the equation of motion, with velocity-dependent forces treated as model input",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-cm02-open-system-warning",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Status audit and model boundaries of the force page: open systems, frame selection, breakdown and empirical scope",
+        "statement": "This remark records the status of the notions of the force page. It is\nbookkeeping: it asserts no law and no empirical claim, and every mathematical\nstatement it repeats is proved in the item cited.\n\n**Adopted assumptions.** The force branch is the postulate\n[[post-cm02-force-superposition]]: the force map with its standing continuity\nand state-local-Lipschitz hypotheses, the equation of motion\n$m_{i}\\ddot x_{i}=F_{i}(t,x,\\dot x)$, the additive composition of declared\nforce contributions, and the transformation rule under a change of inertial\nframe. The restricted interaction models — external-plus-pair decompositions,\nthe optional antisymmetry and centrality assumptions, potential forces and the\ngravitational pair-potential branch with its coupling parameters — are the\npostulate [[post-cm02-interactions]]. The linear drag model, with its declared\ncoefficient and its regime and fluctuation qualifications, is the postulate\n[[post-cm02-drag]].\n\n**Defined objects.** The associated first-order system, motions, initial data,\nmaximal motions and the Newtonian flow are the definition\n[[def-cm02-newtonian-flow]]; the configuration domain, the mass operator and\nthe collision exclusion are [[def-cm01-configuration]], and the units and\ndimensions read throughout are [[def-cm01-units]].\n\n**Conditional deductions.** Local existence, uniqueness and the existence of\nthe maximal motion are [[pthm-cm02-ivp]]; the maximal-extension and breakdown\ncriterion, including the autonomous trapping statement, is\n[[pthm-cm02-continuation]]. Both are conditional on the adopted force branch\nand the cited mathematical ODE theorems; neither asserts that any physical\nsystem realizes the model.\n\n**Computed examples.** The uniform-force model with its explicit quadratic\nmotion, its uniqueness and its frame covariance is\n[[ex-cm02-uniform-field]]. The companion page carries the worked model checks,\nthe projectile computation, the terminal-velocity computation and the two\ncounterexamples (nonuniqueness under a merely continuous force, and a singular\ncollision with finite breakdown time).\n\n**Deliberately not claimed on this page.** No conservation law (momentum,\nangular momentum, energy) is asserted: such statements require their own\nhypotheses on the interaction structure and belong to later pages. No\nconstraint reactions and no constrained dynamics are adopted. No global\nexistence theorem for all force maps is claimed; the maximal interval may end\nat a finite time. No measured value of any mass, field strength, drag\ncoefficient or gravitational coupling is asserted, and no comparison with\nreported data is performed.",
+        "strategy": "A scope remark: it audits the page status (adopted postulates, defined flow, proved theorems, computed example), states the open-system boundary between declared labels and environment, notes frame selection by external fields and apparatus, and records the regularity, breakdown and empirical scope cautions of the page.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm02-interactions",
+          "post-cm02-drag",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "pthm-cm02-continuation",
+          "ex-cm02-uniform-field",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "post-cm01-frames"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "physical-assumption",
+          "post-cm02-interactions": "physical-assumption",
+          "post-cm02-drag": "physical-assumption",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "pthm-cm02-continuation": "physical-result",
+          "ex-cm02-uniform-field": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "A scope and status audit of the force page: which objects are adopted model data, which statements are conditional deductions, which computations are examples, and which claims are deliberately not made; the boundary between the declared particle labels and their environment in an open-system description; the frame-selection content of external fields and apparatus; the empirical status of force-law parameters, drag regimes and model comparisons. Bookkeeping and scope only; it asserts no law, no measurement and no claim about nature beyond the items it cites.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the force law and its parameters as model input, with gravity an additional law and the weak-equivalence identification an empirical footnote; Section 5.1, chapter pages 1-3 (PDF pages 87-89), Eqs. (5.1)-(5.9) and footnote 4: the fluctuation condition for the damped harmonic oscillator",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, printed pages 5-9 (PDF pages 11-15): external force decomposition, the weak and strong forms of the third law, and the warning that momentum exchange with an omitted field is not covered by the particle system's pair structure",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.4 'Looking Forwards: The Validity of Newtonian Mechanics', printed page 9 (PDF page 15): the domain limitations of the Newtonian description",
+              "url": "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      }
+    ]
+  },
+  {
+    "order": 116,
+    "id": "cm02-forces-initial-data-and-newtonian-flow-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Forces, initial data and Newtonian flow — Examples",
+    "companion": "cm02-forces-initial-data-and-newtonian-flow",
+    "requires": [
+      "cm02-forces-initial-data-and-newtonian-flow",
+      "fundamental-trigonometric-identities",
+      "finite-probability-and-the-probabilistic-method",
+      "monotone-functions-and-discontinuities",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-approximation"
+    ],
+    "items": [
+      {
+        "id": "ex-cm02-force-model-regularity-checks",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Standing regularity of the page's force models checked: uniform field, linear drag and the inverse-square model on its collision-excluded domain",
+        "statement": "Consider three force maps for a single label of mass $m>0$ in a fixed inertial\nframe, each on the state domain indicated, with the standing hypotheses of\nclause (iii) of [[post-cm02-force-superposition]] in view\n([[def-locally-lipschitz-in-the-state-variable]]):\n\n1. **Uniform field.** $Q=\\mathbb R^{3}$, $F(t,x,v)=m\\mathbf g$ for a declared\n   constant $\\mathbf g\\in\\mathbb R^{3}$ of dimension $\\ell\\tau^{-2}$\n   ([[def-cm01-units]]).\n2. **Linear drag with constant applied force.** $Q=\\mathbb R^{3}$,\n   $F(t,x,v)=m\\mathbf g-c\\,v$ with $c\\ge0$ of dimension $\\mu\\tau^{-1}$\n   ([[post-cm02-drag]]).\n3. **Inverse-square external model.** $Q=\\mathbb R^{3}\\setminus\\{0\\}$,\n   $F(x)=-k\\,x/\\lvert x\\rvert^{3}$ with $k>0$ of dimension\n   $\\mu\\ell^{3}\\tau^{-2}$, the force supplied by the external potential\n   $U(x)=-k/\\lvert x\\rvert$ of the potential branch\n   [[post-cm02-interactions]].\n\nVerify: each map is continuous on its domain and locally Lipschitz in the\nstate variable, locally uniformly in time, with the explicit constants\n$L=0$ for model 1, $L=c$ for model 2 and, on each annulus\n$r\\le\\lvert x\\rvert\\le R$ inside $\\mathbb R^{3}\\setminus\\{0\\}$,\n$L=k\\bigl(r^{-3}+3R^{3}r^{-6}\\bigr)$ for model 3; and the inverse-square map\nhas no continuous extension to the excluded point $0$. Consequently the local\nexistence and uniqueness theorem [[pthm-cm02-ivp]] and the continuation\ntheorem [[pthm-cm02-continuation]] apply to each of the three models on its\nstated domain.",
+        "strategy": "A worked verification: check continuity and exhibit explicit state-Lipschitz constants for the uniform-field (0), linear drag (c) and inverse-square models, prove the local Lipschitz bound on collision-free annuli by an elementary norm estimate, show the inverse-square map has no continuous extension to the excluded center, and conclude that the ivp and continuation theorems apply to each model.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm02-interactions",
+          "post-cm02-drag",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "pthm-cm02-continuation",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-continuity-real",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "thm-algebra-of-continuous-functions"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "post-cm02-interactions": "formulation-prerequisite",
+          "post-cm02-drag": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "pthm-cm02-continuation": "physical-result",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "lem-reverse-triangle-inequality-in-a-normed-space": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked model check inside the framework: verification that three force maps of this page satisfy the standing continuity and state-local-Lipschitz hypotheses of the force postulate, with explicit constants where available; the uniform-force model has constant 0, the linear drag model has constant c, and the inverse-square external model is locally Lipschitz on each collision-free annulus with the stated constant and has no continuous extension to the excluded center. The item is a finite verification inside the adopted models; it asserts no motion, no measurement and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): force as a function of the state with the continuity and differentiability assumptions used when the equation of motion is analysed",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 7.1.1, printed page 143 (PDF page 146): the local existence and uniqueness theorem requires the right-hand side and its first derivatives to be continuous on the domain",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 4 (PDF page 8): the inverse-square gravity law as an additional adopted model, defined away from coincident positions",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 12
+      },
+      {
+        "id": "ex-cm02-constant-field-projectile",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Projectile motion in the constant-field model: planar parabolic trajectory, flight time and level range for stated model data",
+        "statement": "Work in the constant-field model of [[ex-cm02-uniform-field]] with one label\nof mass $m>0$, time window $\\mathbb R$, configuration domain\n$Q=\\mathbb R^{3}$, and declared field parameter\n\n$$\\mathbf g=-g\\,e_{3},\\qquad g>0,\\qquad [g]=\\ell\\tau^{-2}$$\n\n([[def-cm01-units]]), so that the force map is $F(t,x,v)=m\\mathbf g$ and the\nequation of motion is $\\ddot x(t)=-g\\,e_{3}$. Fix an oriented orthonormal\nbasis $e_{1},e_{2},e_{3}$ of the frame's spatial space and the initial datum\n\n$$x(0)=0,\\qquad \\dot x(0)=v_{0}\\bigl(\\cos\\alpha\\,e_{1}+\\sin\\alpha\\,e_{3}\\bigr), \\qquad v_{0}>0,\\qquad 0<\\alpha<\\pi/2 .$$\n\nVerify: the unique maximal motion through the datum is\n\n$$x(t)=\\bigl(v_{0}\\cos\\alpha\\bigr)t\\,e_{1} +\\Bigl(v_{0}\\sin\\alpha\\,t-\\tfrac12g\\,t^{2}\\Bigr)e_{3},$$\n\nits trajectory lies in the plane $\\operatorname{span}(e_{1},e_{3})$, and for\nthis model the return-to-launch-height time and the level range are\n\n$$T_{\\mathrm f}=\\frac{2v_{0}\\sin\\alpha}{g},\\qquad R_{\\mathrm{range}}=\\frac{v_{0}^{2}\\sin(2\\alpha)}{g}.$$\n\nThe level range and flight time are model quantities computed from the\ndeclared parameters: no measured value of $g$, $v_{0}$ or $\\alpha$ is\nasserted, no medium and no drag are included, and the constant-field\ndescription of a realistic field is an approximation recorded with the model.",
+        "strategy": "A worked computation: specialize the uniform-force model to a stated launch datum, verify the parabolic motion by differentiation, compute planarity, return-to-launch-height time and level range, check dimensions, and record the model qualifications (no drag, declared parameters, constant-field approximation).",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "ex-cm02-uniform-field",
+          "post-cm02-drag",
+          "post-cm01-worldlines",
+          "def-cm01-velocity-acceleration",
+          "def-cm01-units",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives",
+          "thm-double-angle-and-power-reduction-identities"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "ex-cm02-uniform-field": "formulation-prerequisite",
+          "post-cm02-drag": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-velocity-acceleration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-double-angle-and-power-reduction-identities": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked computation inside the constant-field model of [[ex-cm02-uniform-field]]: for a stated initial position, speed and launch angle and a declared constant field parameter, the trajectory is planar and parabolic, the return-to-launch-height time and the level range are computed from the model, and the motion is the unique maximal motion through the datum. The item asserts no measured value of any field strength or launch parameter, models no medium and no drag, and records that the constant-field description of a realistic field is an approximation.",
+        "sources": {
+          "references": [
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.2, printed pages 1-2 (PDF pages 4-5): the equation of motion with initial position and velocity data",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 4.5, printed pages 79-83: constant near-Earth gravity as the approximate potential mgz with a declared constant g",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 4 (PDF page 8): the gravity law as additional adopted model input",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      },
+      {
+        "id": "ex-cm02-drag-terminal-velocity",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Motion under linear drag and a constant applied force: explicit global solution and approach to the terminal velocity",
+        "statement": "Work in the linear drag model of [[post-cm02-drag]] with one label of mass\n$m>0$, coefficient $c>0$, time window $\\mathbb R$, configuration domain\n$Q=\\mathbb R^{3}$, and a declared constant vector\n$\\mathbf g\\in\\mathbb R^{3}$ of dimension $\\ell\\tau^{-2}$, so that the force\nmap is $F(t,x,v)=m\\mathbf g-c\\,v$ and the equation of motion is\n\n$$m\\,\\ddot x(t)=m\\,\\mathbf g-c\\,\\dot x(t).$$\n\nDefine the **terminal velocity**\n\n$$v_{\\infty}:=\\frac{m}{c}\\,\\mathbf g,\\qquad [v_{\\infty}]=\\ell\\tau^{-1},$$\n\nand fix the initial datum $x(0)=x_{0}$, $\\dot x(0)=v_{0}$. Verify:\n\n1. the explicit curve\n\n   $$x(t)=x_{0}+v_{\\infty}t+\\frac{m}{c}\\bigl(v_{0}-v_{\\infty}\\bigr) \\bigl(1-e^{-ct/m}\\bigr)$$\n\n   is a motion of the model on $\\mathbb R$ with the stated datum, and by\n   uniqueness it is the maximal motion;\n2. its velocity satisfies\n   $\\dot x(t)=v_{\\infty}+\\bigl(v_{0}-v_{\\infty}\\bigr)e^{-ct/m}$ for all $t$,\n   so that\n   $\\lvert\\dot x(t)-v_{\\infty}\\rvert_{2}\\le\\lvert v_{0}-v_{\\infty}\\rvert_{2}\\,e^{-ct/m}$\n   and $\\dot x(t)\\to v_{\\infty}$ as $t\\to+\\infty$: the velocity approaches the\n   terminal velocity exponentially in time.",
+        "strategy": "A worked computation: reduce the vector drag equation to scalar damped-oscillator equations with k=0, verify the explicit global solution by differentiation, conclude uniqueness and maximality, and estimate the exponential approach of the velocity to the terminal velocity with a direct epsilon argument.",
+        "deps": [
+          "post-cm02-drag",
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "def-cm01-units",
+          "def-cm-oscillator-model-and-phase-system",
+          "thm-cm-forced-oscillator-variation-of-constants",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases",
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-limits-at-infinity",
+          "lem-exponential-dominates-one-plus-x",
+          "lem-of-inverse-positive",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "dependency_roles": {
+          "post-cm02-drag": "physical-assumption",
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-oscillator-model-and-phase-system": "mathematical-premise",
+          "thm-cm-forced-oscillator-variation-of-constants": "mathematical-premise",
+          "prop-cm-oscillator-degenerate-and-repulsive-cases": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-limits-at-infinity": "mathematical-premise",
+          "lem-exponential-dominates-one-plus-x": "mathematical-premise",
+          "lem-of-inverse-positive": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked computation inside the linear drag model of [[post-cm02-drag]] with a constant applied force: for a stated initial position and velocity the explicit motion is verified, it is the unique maximal motion and exists for all real times, and its velocity converges to the terminal velocity $(m/c)\\mathbf g$ with an explicit exponential bound. The item is a conditional computation inside the model; the coefficient and field parameters are declared model data, no measured value is asserted, and the phenomenological and regime qualifications of the drag postulate are preserved.",
+        "sources": {
+          "references": [
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 5.1, chapter pages 1-3 (PDF pages 87-89), Eqs. (5.1)-(5.9) and footnote 4: the damped harmonic oscillator's linear drag model and solution; the fluctuation qualification is specific to that oscillator",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.4, printed pages 20-21 (PDF pages 23-24): the low-velocity fluid friction force -b v, its phenomenological character, and the worked Stokes-sphere equation with its particular and homogeneous solution",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the equation of motion with velocity-dependent force terms",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "cex-cm02-nonunique-flow-for-a-continuous-force",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "Continuity of the force map alone does not give unique motions: two distinct Newtonian motions through one datum for $F=m\\sqrt{|x_1|}\\,e_1$",
+        "statement": "Consider the framework's equation of motion with one label of unit mass\n($m=1$, [[post-cm01-worldlines]] clause (v)), time window\n$I_{0}=\\mathbb R$, configuration domain $Q=\\mathbb R^{3}$, and a force map\n$F:\\mathbb R\\times\\mathbb R^{3}\\times\\mathbb R^{3}\\to\\mathbb R^{3}$ that is\n**merely continuous** — that is, the standing hypotheses of clause (iii) of\n[[post-cm02-force-superposition]] with the state-local-Lipschitz requirement\ndropped. Then for every initial datum $(t_{0},x_{0},v_{0})$ there is at most\none motion of the model through that datum, on every interval containing\n$t_{0}$.",
+        "strategy": "A direct refutation: exhibit the continuous unit-mass force map F(x)=m sqrt(|x_1|) e_1 and two distinct C^2 motions through the rest datum (zero and a quartic-profile motion), verify the equation by differentiation, and record that the map fails exactly the state-local-Lipschitz clause, so the framework uniqueness theorem is unaffected.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "post-cm01-worldlines",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-derivative",
+          "def-continuity-real",
+          "def-abs-value",
+          "def-interval",
+          "def-euclidean-inner-product",
+          "thm-algebra-of-continuous-functions",
+          "thm-composition-of-continuous-functions",
+          "thm-continuous-inverse",
+          "lem-derivative-of-a-power",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-abs-value": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "thm-composition-of-continuous-functions": "mathematical-premise",
+          "thm-continuous-inverse": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A refutation, inside the framework's equation of motion, of the claim that a merely continuous force map suffices for uniqueness of the motion through an initial datum: the unit-mass model in three dimensions with force $F(x)=m\\sqrt{|x_1|}e_1$ is continuous but not state-locally-Lipschitz at the origin, and exhibits two distinct $C^2$ motions through the rest datum. The item refutes only the weakened variant of the force postulate in which continuity replaces the local-Lipschitz clause; it asserts no motion of any physical body, no measurement and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.2, printed pages 25-32: the role of the Lipschitz hypothesis in the Picard iteration and standard examples of nonunique solutions of continuous right-hand sides",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 7.1.1, printed page 143 (PDF page 146): the existence and uniqueness statement assumes continuous first derivatives of the right-hand side, not mere continuity",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the force map as model input whose regularity is part of the formulation",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      },
+      {
+        "id": "cex-cm02-singular-collision-finite-time",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A singular collision in finite time: the inverse-square external model has a motion whose maximal interval is bounded above",
+        "statement": "Let $m>0$ and $k>0$. Consider the force model of\n[[post-cm02-force-superposition]] for one label with time window\n$I_{0}=\\mathbb R$, collision-excluded configuration domain\n$Q=\\mathbb R^{3}\\setminus\\{0\\}$ ([[def-cm01-configuration]] clause (a)), mass\n$m$, and the external potential\n\n$$U(x)=-\\frac{k}{\\lvert x\\rvert},\\qquad U:Q\\to\\mathbb R,$$\n\nof the potential branch of [[post-cm02-interactions]] clause (iii), so that the\nforce map is $F(x)=-\\nabla U(x)=-k\\,x/\\lvert x\\rvert^{3}$ and the equation of\nmotion is\n\n$$m\\,\\ddot x(t)=-\\frac{k\\,x(t)}{\\lvert x(t)\\rvert^{3}}\\qquad(t\\in\\mathbb R,\\ x(t)\\neq0).$$\n\nThen every motion of this model is defined for all real times; equivalently,\nthe maximal interval of every motion is all of $\\mathbb R$.",
+        "strategy": "A direct refutation: construct the explicit radial motion r(t)=r_0(1-t/T)^{2/3} for the inverse-square external potential, verify the equation and the stated initial data by differentiation, and show no extension past the finite collision time T exists because a motion would have to pass through the excluded center; the escape alternative of the continuation theorem is exhibited.",
+        "deps": [
+          "post-cm02-force-superposition",
+          "post-cm02-interactions",
+          "def-cm02-newtonian-flow",
+          "pthm-cm02-ivp",
+          "pthm-cm02-continuation",
+          "ex-cm02-force-model-regularity-checks",
+          "def-cm01-configuration",
+          "def-cm01-units",
+          "def-derivative",
+          "lem-derivative-of-a-power",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "post-cm02-force-superposition": "formulation-prerequisite",
+          "post-cm02-interactions": "formulation-prerequisite",
+          "def-cm02-newtonian-flow": "formulation-prerequisite",
+          "pthm-cm02-ivp": "physical-result",
+          "pthm-cm02-continuation": "physical-result",
+          "ex-cm02-force-model-regularity-checks": "formulation-prerequisite",
+          "def-cm01-configuration": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-derivative": "mathematical-premise",
+          "lem-derivative-of-a-power": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A refutation, inside the model, of the claim that every motion of the inverse-square external-potential model exists for all real times: for one label of mass $m>0$ in the external potential $U(x)=-k/|x|$ on the collision-excluded domain, an explicit radial motion with the stated initial data solves the model on $(-\\infty,T)$ and has no extension past the finite time $T$, at which the position reaches the excluded center and the speed is unbounded. The item refutes only the all-time-existence claim for this model, illustrates the escape alternative of the breakdown criterion, and asserts no motion of any physical body, no measurement and no empirical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2, printed pages 2-5 (PDF pages 8-11): the equation of motion and the role of the force law's domain; the two-body reduction with the attractive potential -kappa/|r| discussed in Section 2.3-2.4",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 4 (PDF page 8), and Section 3.4: the inverse-square gravity law on the collision-free domain and its radial consequences, including the singularity of the potential at the center",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.6, printed pages 50-53: a maximal solution with finite right endpoint leaves every compact subset of its domain",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            }
+          ]
+        },
+        "dependency_level": 13
+      }
+    ]
+  }
+]

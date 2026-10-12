@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-ext-dimension-shifting-in-the-second-variable.md

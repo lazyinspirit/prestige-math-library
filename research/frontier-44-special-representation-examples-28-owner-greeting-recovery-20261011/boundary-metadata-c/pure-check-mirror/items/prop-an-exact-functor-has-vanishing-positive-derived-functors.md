@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-an-exact-functor-has-vanishing-positive-derived-functors.md

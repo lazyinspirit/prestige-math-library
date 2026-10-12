@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-weightwise-quasi-r-intertwiner-exists-and-is-unique.md

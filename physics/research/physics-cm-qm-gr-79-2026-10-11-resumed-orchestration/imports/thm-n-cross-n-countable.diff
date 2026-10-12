@@ -1,0 +1,39 @@
+--- items/thm-n-cross-n-countable.md
++++ /home/lazyinspirit/Projects/prestige-math-library/items/thm-n-cross-n-countable.md
+@@ -7,7 +7,7 @@
+ provenance:
+   statement: ai-altered
+   proof: ai-altered
+-deps: [def-countable, def-equinumerous, def-injection-surjection-bijection, lem-nat-no-zero-divisors, thm-strong-induction, thm-recursion, thm-induction-principle, thm-omega-is-peano-system, lem-nat-nonzero-is-successor, def-nat-addition, def-nat-multiplication, def-nat-order, def-natural-numbers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-cancellative, lem-nat-add-identity, lem-nat-add-successor-left, lem-nat-mult-commutative, lem-nat-mult-associative, lem-nat-mult-distributive, lem-nat-mult-identity, lem-nat-mult-cancellative, lem-nat-order-add-compatible, lem-nat-trichotomy, thm-nat-linear-order, lem-nat-discrete]
++deps: [def-countable, def-equinumerous, def-injection-surjection-bijection, lem-nat-no-zero-divisors, thm-strong-induction, thm-recursion, thm-induction-principle, thm-omega-is-peano-system, lem-nat-nonzero-is-successor, def-nat-addition, def-nat-multiplication, def-nat-order, def-natural-numbers, lem-nat-add-commutative, lem-nat-add-associative, lem-nat-add-cancellative, lem-nat-add-identity, lem-nat-add-successor-left, lem-nat-mult-commutative, lem-nat-mult-associative, lem-nat-mult-distributive, lem-nat-mult-identity, lem-nat-mult-cancellative, lem-nat-order-add-compatible, lem-nat-trichotomy, thm-nat-linear-order, lem-nat-discrete, thm-well-ordering-principle]
+ justified_by: []
+ aliases: [pairing-bijection]
+ landmark: false
+@@ -15,16 +15,7 @@
+ proof_strategy: direct
+ verification:
+   precheck: pass
+-  verified:
+-    model: claude-opus-5
+-    verdict: certify
+-    date: 2026-07-26
+-    scope: page
+-    delegated_by: owner
+-  judge:
+-    model: z-ai/glm-5.2
+-    verdict: pass
+-    date: 2026-07-25
++  repair: research/frontier-44-special-representation-examples-28-six-step-published-owner-repairs/batch-2/receipts/thm-n-cross-n-countable.json
+ sources:
+   scraped: []
+   references:
+@@ -105,4 +96,8 @@
+ 
+ - The proof is a proof of unique factorisation into a power of two times an odd number: step 4.2 is existence and step 4.1 is uniqueness. Nothing weaker would do, and no appeal to a picture of the diagonal enumeration is made anywhere. Nothing here uses any choice principle.
+ 
+-- The Cantor pairing polynomial $(m,n) \mapsto \tfrac{(m+n)(m+n+1)}{2} + n$ is an alternative bijection. It is not used because halving is not available in $\mathbb{N}$ without first developing division with remainder, whereas doubling, which is all $2^m$ needs, is immediate from addition.
++- The Cantor pairing polynomial $(m,n) \mapsto \tfrac{(m+n)(m+n+1)}{2} + n$ is also a bijection, with a choice-free inverse. Here the half is a uniquely determined natural, as the following argument shows; no division-with-remainder theorem is needed.
++
++Define triangular numbers by $T_0=0$ and $T_{s+1}=T_s+(s+1)$ using recursion on the state $(s,T_s)$ ([[thm-recursion]]). Induction using the arithmetic laws in [L3] gives $T_s+T_s=s(s+1)$: the base is zero, and doubling the recurrence gives $s(s+1)+2(s+1)=(s+1)(s+2)$. Uniqueness of a natural half follows from the strict increase of doubling, proved in step 4.1. Also $T_{s+1}>T_s$, and induction gives $T_s\ge s$ (the increment $s+1$ is at least one), so these numbers are cofinal in $\mathbb N$.
++
++For $k\in\mathbb N$, take the least $r$ with $k<T_r$ ([[thm-well-ordering-principle]]); such $r$ exists since $T_{k+1}\ge k+1>k$. Since $T_0=0\le k$, write $r=s+1$. Minimality gives $T_s\le k<T_{s+1}$. Strict increase makes this block unique: two different blocks are disjoint by transitivity. There is a unique natural $n$ with $k=T_s+n$, by the definition of $\le$ and additive cancellation in [L4]. The inequality $k<T_s+(s+1)$ gives $n<s+1$, hence $n\le s$, so there is a unique natural $m$ with $m+n=s$. This yields the unique pair with $k=T_{m+n}+n$. Conversely, every pair $(m,n)$ has $n\le m+n$, hence its value lies in that block and is recovered by this construction. Thus the polynomial is a bijection. All arithmetic and induction used here are the declared facts [L3], [L4] and [L6].

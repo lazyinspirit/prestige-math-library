@@ -1,0 +1,560 @@
+[
+  {
+    "order": 1586,
+    "id": "murnaghan-stability-via-fi-modules",
+    "kind": "A",
+    "category": "special-topics-in-representation-theory",
+    "title": "Murnaghan Stability via FI-Modules",
+    "companion": "murnaghan-stability-via-fi-modules-examples",
+    "requires": [
+      "kronecker-coefficients-and-internal-products",
+      "character-polynomials-fi-modules-and-representation-stability"
+    ],
+    "items": [
+      {
+        "id": "def-lambda-ring-specializations-and-the-sigma-series",
+        "kind": "definition",
+        "title": "Lambda-ring specializations of symmetric functions and the series sigma",
+        "deps": [
+          "def-hall-inner-product-on-symmetric-functions",
+          "def-power-sum-and-complete-homogeneous-symmetric-polynomials",
+          "def-stable-graded-ring-of-symmetric-functions",
+          "prop-power-sums-form-a-rational-not-integral-stable-basis"
+        ],
+        "dependency_level": 0,
+        "statement": "Work in the algebra of symmetric functions over Q in an alphabet X, in which the power sums p_1,p_2,... are algebraically independent generators. A specialization is an algebra homomorphism f |-> f[A] to a commutative Q-algebra; it is determined by the sequence (p_k[A])_{k>=1}, and conversely every sequence of values gives one. For specializations A,B define p_k[A+B]:=p_k[A]+p_k[B], p_k[-A]:=-p_k[A] and p_k[AB]:=p_k[A]p_k[B]. For a coefficient multiplicity c write c dot A with p_k[c dot A]:=c p_k[A]. Distinguish this from a one-letter alphabet t, for which p_k[t]:=t^k and therefore p_k[tA]=t^k p_k[A]; all occurrences of tX, t^{-1} and sigma[t] below use this one-letter convention. The symbol 1 is the one-letter alphabet with p_k[1]=1, and -1 is its plethystic negative, with p_k[-1]=-1 (not the ordinary one-letter alphabet whose letter is minus one). Write f[A+B], f[-A], f[AB] and f[c dot A] for the corresponding specializations. Define X^perp to be the specialization with f[X^perp]:=f^perp for all f, where f^perp denotes the adjoint of multiplication by f with respect to the Hall inner product. Define the series sigma[X]:=sum_{n>=0} h_n[X]. Sigma is interpreted in the graded completion, or with a formal degree variable; every use of Hall pairing with a polynomial means its finite degree truncation. No convergence of a scalar infinite sum is asserted.",
+        "strategy": "Existence and uniqueness of a specialization with prescribed p_k-values is the universal property of the polynomial ring Q[p_1,p_2,...]: the p_k are algebraically independent, so a homomorphism is specified by arbitrary images of the p_k and such a homomorphism exists. The operations on specializations are defined on the p_k and extended multiplicatively, again by the universal property. The adjoint f^perp of multiplication by f exists and is unique because the Hall form is nondegenerate and each graded piece of the symmetric function ring is finite dimensional (the Schur functions are an orthonormal basis). No choice is used. The adjoints of commuting multiplication operators commute: (fg)^perp=g^perp f^perp=f^perp g^perp. Thus the commuting algebra they generate is the target for the specialization X^perp; a noncommutative ambient endomorphism algebra is not being used as the coefficient algebra.",
+        "axiom_use": "None: algebraic independence of the power sums over Q and finite-dimensional nondegenerate bilinear algebra.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-iterated-schur-coefficients",
+        "kind": "definition",
+        "title": "Threefold Schur coefficients",
+        "deps": [
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-stable-schur-function-by-bialternants"
+        ],
+        "dependency_level": 0,
+        "statement": "For partitions delta,a,b,c with |delta|=|a|+|b|+|c| define the threefold Schur coefficient c^delta_{a,b,c}:=[s_delta] s_a s_b s_c, the coefficient of s_delta in the ordinary product of the three Schur functions. These are nonnegative integers, they are symmetric in a,b,c, and they satisfy the iterated Littlewood-Richardson identity c^delta_{a,b,c}=sum_phi c^phi_{a,b} c^delta_{phi,c}=sum_psi c^psi_{a,c}c^delta_{psi,b}, the sums over partitions phi (respectively psi) of |a|+|b| (respectively |a|+|c|). Equivalently c^delta_{a,b,c}=<s_a s_b s_c | s_delta>.",
+        "strategy": "Nonnegativity follows from the iterated LR expansion below, and symmetry in a,b,c follows from commutativity of the product. The iterated identity is the associativity of the Schur product: s_as_bs_c = (s_as_b)s_c = sum_phi c^phi_{a,b}s_phi s_c = sum_{phi,delta}c^phi_{a,b}c^delta_{phi,c}s_delta, compared with the definition. The inner-product form is orthonormality of the Schur basis.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-first-row-padding-completion-and-the-stabilization-operator",
+        "kind": "definition",
+        "title": "The padded sequence completion, the operators U_n and V, and stab(alpha,beta)",
+        "deps": [
+          "def-padded-kronecker-coefficient-sequence",
+          "def-first-row-padding-of-a-partition",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "def-stable-schur-function-by-bialternants",
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "def-internal-product-on-symmetric-functions"
+        ],
+        "dependency_level": 2,
+        "statement": "Let alpha=(alpha_1,...,alpha_k) be a partition and n>=0; the padded sequence is alpha[n]:=(n-|alpha|,alpha_1,...,alpha_k). For an arbitrary finite sequence of integers mu=(mu_1,...,mu_m) define s_mu by the Jacobi-Trudi determinant det(h_{mu_j+i-j})_{1<=i,j<=m} with h_k=0 for k<0, as in the source; every such determinant is either 0 or +-1 times a Schur function. Define Z-linear endomorphisms of the ring of symmetric functions by U_n(s_lambda):=s_{lambda[n]} and V(s_lambda):=s_{lambda+(1)} on the Schur basis, extended linearly. Finally, for partitions alpha,beta define stab(alpha,beta) to be the least n_0>=0 such that s_{alpha[n_0+k]}*s_{beta[n_0+k]}=V^k(s_{alpha[n_0]}*s_{beta[n_0]}) as elements of the symmetric function ring for all k>0, where * is the internal product; stab(alpha,beta) is not shown to exist by this definition alone (its existence and value are the sharp global threshold theorem).",
+        "strategy": "U_n and V are well-defined by linear extension from the Schur basis, which is a Z-basis. The Jacobi-Trudi completion is well-defined by the published Jacobi-Trudi identities with the convention h_k=0 for k<0, and the sign statement is the standard column-permutation computation. The definition of stab(alpha,beta) only records the source's convention; no existence statement is claimed here. For the straightening assertion, take q_i=mu_i+m-i. If two q_i coincide, the corresponding Jacobi-Trudi rows (or columns in the transposed convention) coincide and the determinant is zero. Otherwise sort q decreasing; the sorting sign multiplies the determinant, and the new index sequence q_sorted_i-(m-i) is weakly decreasing. If its last part is negative, its final row has only negative h-indices and is zero; otherwise it is a partition after discarding zeros. This proves the claimed zero-or-signed-Schur rule, including invalid initial padding.",
+        "axiom_use": "None: the Jacobi-Trudi completion and the linear extensions are Z-linear algebra on the free abelian group on partitions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-schur-specialization-coproduct-and-plethysm-identities",
+        "kind": "lemma",
+        "title": "Schur functions on sums and products of alphabets",
+        "deps": [
+          "def-lambda-ring-specializations-and-the-sigma-series",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-littlewood-richardson-tableau-and-coefficient",
+          "def-kronecker-coefficient-and-internal-tensor-product",
+          "thm-cauchy-kernel-has-power-complete-and-schur-expansions",
+          "prop-power-sums-diagonalize-the-internal-product",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product"
+        ],
+        "dependency_level": 3,
+        "statement": "For all partitions lambda,mu,nu and all specializations A,B: (a) s_lambda[A+B] = sum_{mu,nu} c^lambda_{mu,nu} s_mu[A] s_nu[B], the sum over pairs with |mu|+|nu|=|lambda|; (b) s_lambda[AB] = sum_{mu,nu} g^lambda_{mu,nu} s_mu[A] s_nu[B], the sum over pairs with |mu|=|nu|=|lambda|, where g^lambda_{mu,nu} is the ordinary Kronecker coefficient. Both sums are finite.",
+        "strategy": "(a) Use the published Schur Cauchy kernel: sigma[(A+B)Z]=sigma[AZ]sigma[BZ]. The left is sum_lambda s_lambda[A+B]s_lambda[Z]; expand the right as sum_{mu,nu}s_mu[A]s_nu[B]s_mu[Z]s_nu[Z], then use the proved LR Schur-product expansion in Z. Comparing the s_lambda[Z] coefficient gives exactly (a). (b) Use the same Cauchy theorem on sigma[ABZ]=sum_rho p_rho[A]p_rho[B]p_rho[Z]/z_rho. For fixed ordinary Schur functions f[A]=s_mu[A],g[B]=s_nu[B], their Hall pairing with this kernel is f*g in Z: in power coordinates f=sum a_rho p_rho and g=sum b_rho p_rho, the pairing is sum a_rho b_rho z_rho p_rho[Z], exactly the actual local internal-product normalization. The Schur expansion f*g=sum_lambda g^lambda_{mu,nu}s_lambda[Z] therefore gives the s_mu[A]s_nu[B]s_lambda[Z] coefficients of the kernel. Its Schur Cauchy expansion sum_lambda s_lambda[AB]s_lambda[Z] gives the other side of (b), so comparing coefficients proves (b). Every fixed Z-degree involves only finitely many partitions; these polynomial identities can then be evaluated at arbitrary specializations A,B. No multiplicativity/bilinearity of s_lambda in the alphabet variables or unproved Schur-functor decomposition is assumed.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities",
+        "kind": "lemma",
+        "title": "The sigma series: Cauchy identity, adjunction and reproducing kernel",
+        "deps": [
+          "def-lambda-ring-specializations-and-the-sigma-series",
+          "lem-schur-specialization-coproduct-and-plethysm-identities",
+          "def-hall-inner-product-on-symmetric-functions",
+          "def-stable-schur-function-by-bialternants",
+          "thm-schur-functions-form-an-orthonormal-integral-basis",
+          "thm-cauchy-kernel-has-power-complete-and-schur-expansions"
+        ],
+        "dependency_level": 4,
+        "statement": "Let sigma[X]=sum_{n>=0}h_n[X]. (1) sigma[X]=prod_{x in X}(1-x)^{-1} and sigma[-X]=prod_{x in X}(1-x); in particular sigma[t]=(1-t)^{-1} and sigma[-t]=1-t for a scalar t. (2) sigma[A+B]=sigma[A]sigma[B] and, for the one-letter alphabet t, sigma[tA]=sum_{n>=0}t^n h_n[A]. (3) Cauchy identity: sigma[XY]=sum_lambda s_lambda[X]s_lambda[Y]. (4) For every specialization A the operator sigma[AX^perp] is the adjoint of multiplication by sigma[AX]: sigma[AX^perp]f[X]=f[X+A] for all f. (5) Reproducing kernel: <sigma[AX] | f[X]>_X = f[A] for all f.",
+        "strategy": "(1) is the elementary product formula for the generating function of complete homogeneous functions, together with p_k[-A]=-p_k[A]; (2) is immediate from (1) and the multiplicativity p_k[AB]=p_k[A]p_k[B]. (3) is the exact Schur expansion of the locally proved thm-cauchy-kernel-has-power-complete-and-schur-expansions; its power expansion also supplies the kernel normalization used by the compatibility lemma. For (4) and (5): by Cauchy, sigma[AX]=sum_rho s_rho[A]s_rho[X], so multiplication by sigma[AX] is the operator sum_rho s_rho[A](multiplication by s_rho); for f=s_lambda and any g, <sigma[AX^perp]s_lambda,g>=<s_lambda,sigma[AX]g>=sum_rho s_rho[A]<s_lambda,s_rho g>=sum_rho s_rho[A] c^lambda_{rho,mu}=[s_mu]s_lambda[X+A] using the coproduct identity (a) of the previous lemma and orthonormality of the Schur basis. Taking g=s_mu shows (4); (5) is its equivalent dual form (evaluate on f=s_lambda and expand). The one-letter scaling uses p_k[t]=t^k, whereas coefficient multiplicity c dot A uses p_k[c dot A]=c p_k[A]; these operations are not conflated. The adjoint formula for arbitrary polynomial f involves only finitely many degree-lowering terms. Formal series and kernels are paired degree by degree; specializing a naked divergent scalar sigma[1] is never required.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-vertex-operator-series-for-padded-schur-functions",
+        "kind": "lemma",
+        "title": "Vertex-operator generating series for the padded Schur functions",
+        "deps": [
+          "def-lambda-ring-specializations-and-the-sigma-series",
+          "lem-schur-specialization-coproduct-and-plethysm-identities",
+          "lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities",
+          "def-first-row-padding-of-a-partition",
+          "def-first-row-padding-completion-and-the-stabilization-operator",
+          "thm-skew-jacobi-trudi-and-tableau-expansion",
+          "def-skew-schur-function-by-hall-adjointness"
+        ],
+        "dependency_level": 5,
+        "statement": "Let alpha be a partition and t a formal variable. With the Jacobi-Trudi convention of the first definition item for the integer sequences alpha[n]=(n-|alpha|,alpha_1,alpha_2,...), one has the identity of formal Laurent series with coefficients in the symmetric function ring: sum_{n in Z} s_{alpha[n]}[X] t^n = sigma[tX] . s_alpha[tX - 1] = t^{|alpha|} . sigma[tX] . s_alpha[X - t^{-1}], where s_alpha[tX-1] is evaluated through the specialization p_k |-> t^k p_k[X] - 1 and s_alpha[X-t^{-1}] through p_k |-> p_k[X]-t^{-k}. Equivalently, sum_{n in Z} s_{alpha[n]}[X]t^n = sigma[tX] sum_{mu: alpha/mu a vertical strip} (-1)^{|alpha|-|mu|} t^{|mu|} s_mu[X]. (This is the growth paper's identity (6) p. 7, displayed there as t^{|alpha|}Gamma(t|X)s_alpha[X] = sigma[tX]s_alpha[tX-1].)",
+        "strategy": "Apply the Schur coproduct to the negative one-letter alphabet: s_alpha[tX-1]=sum_{i=0}^{ell(alpha)}(-1)^i t^{|alpha|-i} s_{alpha/(1^i)}[X], because s_nu[-1]=(-1)^{|nu|} for a column nu=(1^i) and is zero otherwise. The skew functions are the Hall adjoints e_i^perp s_alpha by def-skew-schur-function-by-hall-adjointness, and their determinants are supplied by thm-skew-jacobi-trudi-and-tableau-expansion. On the right, the coefficient of t^n in sigma[tX]s_alpha[tX-1] is sum_i(-1)^i h_{n-|alpha|+i}s_{alpha/(1^i)}. In the ordinary (non-transposed) Jacobi-Trudi matrix for (n-|alpha|,alpha), expand along the first row: its i+1-st entry is h_{n-|alpha|+i}, and deleting that column leaves exactly the skew Jacobi-Trudi matrix for alpha/(1^i), with sign (-1)^i. Equivalently expand the first column in the transposed convention printed in the Definition. Thus the coefficient equals s_{alpha[n]} for every integer n. Negative total degree gives zero: every nonzero determinant monomial would have that negative degree, impossible with h_k=0 for k<0. Homogeneity with the one-letter alphabet t gives s_alpha[tX-1]=t^{|alpha|}s_alpha[X-t^{-1}], so both generating formulas hold. All coefficient sums are finite; no scalar-divergent sigma[1] is evaluated.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-padding-completion-is-compatible-with-the-internal-product",
+        "kind": "lemma",
+        "title": "Padding completion is compatible with the internal product",
+        "deps": [
+          "def-first-row-padding-completion-and-the-stabilization-operator",
+          "lem-vertex-operator-series-for-padded-schur-functions",
+          "lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities",
+          "prop-power-sums-diagonalize-the-internal-product",
+          "cor-power-sums-are-orthogonal-for-the-hall-inner-product",
+          "thm-cauchy-kernel-has-power-complete-and-schur-expansions"
+        ],
+        "dependency_level": 6,
+        "statement": "For partitions alpha,beta with a=|alpha|, b=|beta|, define R_{alpha,beta}[Z]=<s_alpha[A]s_beta[B] | sigma[ZAB+ZA+ZB+AB]>_{A,B}. This is a finite symmetric-function polynomial of Z-degree at most a+b. For every n>=0, (U_n s_alpha)*(U_n s_beta)=U_n R_{alpha,beta}, where U_n uses Jacobi-Trudi completion, including when the padded sequences are not partitions. Equivalently sum_{n>=0}(U_n s_alpha)*(U_n s_beta)t^n=sigma[tX]R_{alpha,beta}[tX-1], with t a one-letter formal alphabet. The same polynomial is the finite Littlewood expression R=sum_{delta,epsilon,tau} ((s_delta s_tau)^perp s_alpha) ((s_epsilon s_tau)^perp s_beta) (s_delta*s_epsilon), all factors evaluated in Z.",
+        "strategy": "First establish the internal-product kernel from the actual published normalization p_rho*p_tau=delta_{rho,tau} z_rho p_rho and <p_rho,p_tau>=delta_{rho,tau} z_rho: for homogeneous f,g of the same degree, <f[A]g[B] | sigma[XAB]>_{A,B}=f*g in X, by the power expansion sigma[XAB]=sum_rho p_rho[X]p_rho[A]p_rho[B]/z_rho; unequal degrees pair to zero. Write f=s_alpha, g=s_beta. The padded vertex series has A-degree-n component U_n f in sigma[A]f[A-1] and B-degree-n component U_n g in sigma[B]g[B-1]. Therefore F(t):=sum_n(U_n f)*(U_n g)t^n=<sigma[A]f[A-1] sigma[B]g[B-1] | sigma[tXAB]>_{A,B}. Move multiplication by sigma[A] and sigma[B] to the kernel by Hall adjunction: translate A and B each by the one-letter 1, obtaining <f[A-1]g[B-1] | sigma[tX(A+1)(B+1)]>. Moving the two negative translations on f,g to the kernel multiplies it by sigma[-A]sigma[-B]. Factor out sigma[tX], and multiplicativity of sigma gives F(t)=sigma[tX]<f[A]g[B] | sigma[tXAB+tXA+tXB-A-B]>. On setting Z=tX-1 in ZAB+ZA+ZB+AB, the negative AB term from ZAB cancels the positive AB, leaving exactly tXAB+tXA+tXB-A-B. Hence F(t)=sigma[tX]R[tX-1]. Finiteness of R: in the factorization sigma[ZAB]sigma[ZA]sigma[ZB]sigma[AB], terms with degrees i,j,k,l satisfy i+j+l=a and i+k+l=b; Z-degree i+j+k=a+b-i-2l<=a+b. Only finitely many indices and partitions contribute. The vertex formula applied linearly to this finite R identifies the coefficient of t^n as U_nR. Every manipulation is degree-by-degree: for fixed t^n the first kernel has A/B-degree n, and the shifted kernel has A/B-degree at most n; polynomial f,g or the fixed-degree components bound the remaining pairings. No scalar sum sigma[1] or analytic convergence is evaluated, and no unproved Littlewood identity or current-rank injectivity is assumed. To identify the classical Littlewood expression, expand sigma[AB]=sum_tau s_tau[A]s_tau[B], sigma[ZA]=sum_theta s_theta[Z]s_theta[A] and sigma[ZB]=sum_pi s_pi[Z]s_pi[B], and use the proved triple internal-product kernel on sigma[ZAB]. The Hall coefficients in A and B are <s_alpha,s_delta s_tau s_theta> and <s_beta,s_epsilon s_tau s_pi>. Reproducing in Z identifies their sums over theta and pi with (s_delta s_tau)^perp s_alpha and (s_epsilon s_tau)^perp s_beta, while the remaining Z-factor is s_delta*s_epsilon. This gives exactly the finite Littlewood sum printed in BOR (9), with its compatibility now proved rather than cited.",
+        "axiom_use": "None: rational finite-degree power-sum/Hall algebra and formal coefficient extraction; no infinite choice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-murnaghan-stability-for-kronecker-coefficients",
+        "kind": "theorem",
+        "title": "Murnaghan stability for Kronecker coefficients",
+        "deps": [
+          "def-padded-kronecker-coefficient-sequence",
+          "prop-fi-module-realizing-one-padded-irreducible-family",
+          "prop-tensor-products-of-finitely-generated-fi-modules-are-finitely-generated",
+          "thm-finite-generation-is-equivalent-to-uniform-representation-stability"
+        ],
+        "dependency_level": 8,
+        "statement": "Fix partitions alpha, beta, gamma. Put m(gamma):=max{|alpha|+alpha_1, |beta|+beta_1, |gamma|+gamma_1} and, for n >= m(gamma), let g_n(alpha,beta,gamma):=g^{gamma[n]}_{alpha[n],beta[n]} be the multiplicity of the Specht module V_{gamma[n]} in V_{alpha[n]} (x) V_{beta[n]}; set g_n(alpha,beta,gamma):=0 for n<m(gamma). Then the sequence n |-> g_n(alpha,beta,gamma) is eventually constant. More precisely there is a finite set S(alpha,beta) of partitions and nonnegative integers bar-g^gamma_{alpha,beta} for gamma in S(alpha,beta), with bar-g^gamma_{alpha,beta}:=0 for gamma not in S(alpha,beta), such that g_n(alpha,beta,gamma)=bar-g^gamma_{alpha,beta} for all sufficiently large n and every partition gamma. No explicit bound on the stable rank is asserted here (the sharp global bound is a separate claim).",
+        "strategy": "FI-module route of Church-Ellenberg-Farb. By CEF Proposition 3.4.1 the assignments V(alpha)_n:=V_{alpha[n]} for n>=|alpha|+alpha_1 and V(alpha)_n:=0 below define a finitely generated FI-module. By CEF Proposition 2.3.6 the tensor product V(alpha)(x)V(beta) is finitely generated and its value in rank n is V_{alpha[n]} (x) V_{beta[n]}. CEF Theorem 1.13 states that a finitely generated FI-module over a field of characteristic 0 is uniformly representation stable: there is a finite set of partitions nu and fixed multiplicities c_nu such that the rank-n value is the direct sum of c_nu copies of V(nu)_n for all n in a stable range. Restricting to the single irreducible family nu=gamma and reading off multiplicities gives the eventual constancy of n |-> g_n(alpha,beta,gamma); the finiteness of the support is the finiteness of the constituent list. All inputs are the in-run suppliers named in deps; the argument is choice-free. The corrected batch27 rational-model weight Definition, finite-orbit restriction proof and padded-family supplier retain the exact finite-dimensional complex Specht interfaces used here. Tensor rank n is the product of the two distinct families alpha and beta. The finite constituent support and uniform fixed multiplicities come from the finite-generation/stability equivalence, without using the later all-rank identity or sharp threshold.",
+        "axiom_use": "None: the proof is finite-dimensional representation theory over a characteristic-zero field plus the choice-free FI-module finite-generation machinery of the cited suppliers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, FI-modules and stability for representations of symmetric groups, arXiv:1204.4533v4 (2014), published in Duke Math. J. 164 (2015) 1833-1910; Definitions 2.2.1-2.2.6 and Proposition 2.3.6 pp. 13-15, Theorem 1.13 and Proposition 3.3.3 pp. 6 and 23-25, Proposition 3.4.1 and Theorem 3.4.2 pp. 23-24",
+              "url": "https://arxiv.org/pdf/1204.4533"
+            },
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-reduced-kronecker-coefficient",
+        "kind": "definition",
+        "title": "The reduced (stable) Kronecker coefficient",
+        "deps": [
+          "thm-murnaghan-stability-for-kronecker-coefficients",
+          "def-padded-kronecker-coefficient-sequence",
+          "def-kronecker-coefficient-and-internal-tensor-product"
+        ],
+        "dependency_level": 9,
+        "statement": "For partitions alpha, beta, gamma define the reduced (stable) Kronecker coefficient bar-g^gamma_{alpha,beta} to be the eventual value of the padded sequence n |-> g_n(alpha,beta,gamma) furnished by the Murnaghan stability theorem; equivalently bar-g^gamma_{alpha,beta} := lim_{n to infinity} g^{gamma[n]}_{alpha[n],beta[n]}, where the sequence is defined for n>=max{|alpha|+alpha_1,|beta|+beta_1,|gamma|+gamma_1} and set to 0 below. Well-definedness is exactly the Murnaghan stability theorem. Two immediate conventions: bar-g^gamma_{alpha,beta}=bar-g^gamma_{beta,alpha} (commutativity of the tensor product), and for fixed alpha,beta only finitely many gamma have bar-g^gamma_{alpha,beta} nonzero. Values used later and verified in the source's introduction for alpha=beta=(2): bar-g^{(2)}_{(2),(2)}=2 and bar-g^{(4)}_{(2),(2)}=1.",
+        "strategy": "Well-definedness is the preceding theorem: the eventual constant of an eventually constant sequence of nonnegative integers is a unique nonnegative integer, no choice is involved. The symmetry in alpha,beta is the commutativity of the tensor product of representations. The two displayed values are read from the source's introduction's product table and are not used as logical inputs.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-brion-formula-for-reduced-kronecker-coefficients",
+        "kind": "theorem",
+        "title": "Brion's formula and the symmetric Cauchy-type identity for reduced Kronecker coefficients",
+        "deps": [
+          "def-reduced-kronecker-coefficient",
+          "lem-vertex-operator-series-for-padded-schur-functions",
+          "lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities",
+          "def-padded-kronecker-coefficient-sequence",
+          "lem-padding-completion-is-compatible-with-the-internal-product"
+        ],
+        "dependency_level": 10,
+        "statement": "For all partitions alpha,beta,gamma: bar-g^gamma_{alpha,beta} = < s_alpha[X] s_beta[Y] | sigma[XY] s_gamma[XY+X+Y] >_{X,Y}, the inner product being the extension of the Hall inner product to symmetric functions in two alphabets X,Y. Equivalently, introducing a third alphabet Z, sum_{alpha,beta,gamma} bar-g^gamma_{alpha,beta} s_alpha[X]s_beta[Y]s_gamma[Z] = sigma[XYZ+XY+XZ+YZ], the symmetric Cauchy-type identity of the source.",
+        "strategy": "Define R_{alpha,beta}[Z]=<s_alpha[A]s_beta[B] | sigma[ZAB+ZA+ZB+AB]>_{A,B}, the finite polynomial of the padding/internal-product compatibility lemma. That lemma proves the complete all-n identity (U_n s_alpha)*(U_n s_beta)=U_n R without using reduced coefficients. Expand R=sum_gamma r_gamma s_gamma with finite support of degree at most |alpha|+|beta|. Choose n sufficiently large that alpha[n], beta[n] and every gamma[n] in both this finite support and the FI-stable finite support are partitions. Distinct gamma have distinct tails, hence distinct padded Schur labels. Comparing the compatibility identity with the FI-stable expansion identifies r_gamma with bar-g^gamma_{alpha,beta}; this uses injectivity only at sufficiently large n, not at every admissible n. To compute r_gamma, factor the kernel as sigma[AB] sigma[Z(AB+A+B)] and apply Cauchy in Z: the coefficient of s_gamma[Z] is sigma[AB]s_gamma[AB+A+B]. Pairing with s_alpha[A]s_beta[B] gives exactly the claimed Brion formula. Reproducing in the three alphabets yields the symmetric sigma[XYZ+XY+XZ+YZ] identity. No Littlewood identity, geometric result or unproved vertex compatibility is imported.",
+        "axiom_use": "None: the proof uses the lambda-ring calculus, Cauchy's identity and formal power series in one variable over a characteristic-zero algebra.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-bor-nonnegative-expansion-for-reduced-kronecker-coefficients",
+        "kind": "lemma",
+        "title": "Nonnegative expansion of a reduced Kronecker coefficient",
+        "deps": [
+          "def-reduced-kronecker-coefficient",
+          "def-iterated-schur-coefficients",
+          "thm-brion-formula-for-reduced-kronecker-coefficients",
+          "lem-schur-specialization-coproduct-and-plethysm-identities"
+        ],
+        "dependency_level": 11,
+        "statement": "For all partitions alpha,beta,gamma one has the finite nonnegative expansion bar-g^gamma_{alpha,beta} = sum_{mu,lambda,eta,rho,theta,pi} c^gamma_{mu,theta,pi} c^alpha_{rho,lambda,theta} c^beta_{rho,eta,pi} g^mu_{lambda,eta}, the sum over all six-tuples of partitions (only finitely many summands are nonzero), where the c's are threefold Schur coefficients and the g's are ordinary Kronecker coefficients. Consequences: (i) bar-g^gamma_{alpha,beta}>0 if and only if there exist partitions mu,lambda,eta,rho,theta,pi with c^gamma_{mu,theta,pi}, c^alpha_{rho,lambda,theta}, c^beta_{rho,eta,pi} and g^mu_{lambda,eta} all positive; (ii) for every nonzero summand the degree equations |alpha|=|rho|+|lambda|+|theta|, |beta|=|rho|+|eta|+|pi|, |gamma|=|mu|+|theta|+|pi| and |mu|=|lambda|=|eta| hold; (iii) for fixed alpha,beta the index set is finite because rho,lambda,theta are contained in alpha, rho,eta,pi in beta, and |mu|=|lambda|. All summands are nonnegative integers, so no cancellation occurs.",
+        "strategy": "Expand Brion's formula in the two alphabets X,Y: sigma[XY] = sum_rho s_rho[X]s_rho[Y] by Cauchy, and s_gamma[XY+X+Y] = sum_{mu,nu} c^gamma_{mu,nu} s_mu[XY] s_nu[X+Y] by the coproduct identity, then s_mu[XY] = sum_{lambda,eta} g^mu_{lambda,eta} s_lambda[X]s_eta[Y] and s_nu[X+Y] = sum_{theta,pi} c^nu_{theta,pi}s_theta[X]s_pi[Y] by the coproduct and plethysm identities. The right-hand side becomes sum c^gamma_{mu,nu} c^nu_{theta,pi} g^mu_{lambda,eta} s_rho s_lambda s_theta[X] s_rho s_eta s_pi[Y]; the coefficient of s_alpha[X]s_beta[Y] is sum over rho,lambda,theta of c^alpha_{rho,lambda,theta} (respectively rho,eta,pi) times the rest. Using the iterated identity sum_nu c^gamma_{mu,nu}c^nu_{theta,pi}=c^gamma_{mu,theta,pi} gives the displayed formula. Consequences (i),(ii) are the positivity and degree bookkeeping of the individual summands (the supports of threefold coefficients and of g are governed by containment and total degree). This proves the source's Lemma 2.1 in the derived index pattern; the source's displayed equality (8) prints a third-factor index set that is a typographical variant of the same K_4 index pattern (the version proved here is the one used by the source's proof and by their if-and-only-if statement).",
+        "axiom_use": "None: the expansion is an elementary computation in the lambda-ring with Cauchy's identity and the coproduct/plethysm identities; all coefficients are nonnegative integers.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-murnaghan-expansion-for-all-admissible-ranks",
+        "kind": "theorem",
+        "title": "The Murnaghan expansion in the Jacobi-Trudi extension for all admissible ranks",
+        "deps": [
+          "def-reduced-kronecker-coefficient",
+          "lem-vertex-operator-series-for-padded-schur-functions",
+          "thm-brion-formula-for-reduced-kronecker-coefficients",
+          "def-first-row-padding-completion-and-the-stabilization-operator",
+          "lem-padding-completion-is-compatible-with-the-internal-product"
+        ],
+        "dependency_level": 11,
+        "statement": "For all partitions alpha,beta and every n >= max{|alpha|+alpha_1, |beta|+beta_1}: s_{alpha[n]} * s_{beta[n]} = sum_gamma bar-g^gamma_{alpha,beta} s_{gamma[n]}, an identity in the symmetric function ring, where s_{gamma[n]} is the Jacobi-Trudi determinant attached to the integer sequence gamma[n] (zero or +-1 times a Schur function). For an ordinary partition delta of n, the coefficient is g^{delta}_{alpha[n],beta[n]}=sum_gamma bar-g^gamma_{alpha,beta}<s_{gamma[n]},s_delta>, where each Hall factor is zero or a sign from Jacobi-Trudi straightening. At small admissible ranks the signed terms can cancel or coalesce; individual coefficients need not yet equal their reduced values. The range displayed is precisely the set of n for which alpha[n] and beta[n] are partitions.",
+        "strategy": "The local padding/internal-product compatibility lemma proves (U_n s_alpha)*(U_n s_beta)=U_n R_{alpha,beta} coefficient by coefficient for every n>=0, with R finite. Brion identifies R=sum_gamma bar-g^gamma_{alpha,beta}s_gamma by comparison only at sufficiently large n where every finite-support gamma[n] is an ordinary partition and labels are distinct. Apply the same linear U_n at the present n, without requiring injectivity: its definition gives U_n R=sum_gamma bar-g^gamma_{alpha,beta}s_{gamma[n]}. In the admissible range the left inputs are ordinary Schur functions, so this is the promised full all-rank identity. Pair with each ordinary s_delta for the exact signed coefficient formula. For example alpha=beta=gamma=(2), n=4 gives ordinary coefficient 1 although the reduced coefficient is 2; straightening s_(1,3)=-s_(2,2) supplies the missing cancellation in the complete expansion. No coefficientwise stability is asserted before the actual stable range.",
+        "axiom_use": "None: finite Hall coefficient extraction, proved vertex/Hall compatibility and linear Jacobi-Trudi completion suffice.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "Emmanuel Briand, Amarpreeet Rattan and Mercedes Rosas, On the growth of the Kronecker coefficients, arXiv:1607.02887v1 (2016); Lemmas 2.1 (sigma-series) and the lambda-ring formalism section 2.3 pp. 5-6, vertex operators (4)-(6) section 2.4 p. 7, Murnaghan's inequalities Lemma 3.1 p. 9, Brion's formula Proposition 3.2 and its complete proof pp. 9-10, symmetric Cauchy-type identity (10) p. 10, one-row generating series p. 11, bound (7) p. 9",
+              "url": "https://arxiv.org/pdf/1607.02887"
+            },
+            {
+              "title": "Thomas Church, Jordan S. Ellenberg and Benson Farb, FI-modules and stability for representations of symmetric groups, arXiv:1204.4533v4 (2014), published in Duke Math. J. 164 (2015) 1833-1910; Definitions 2.2.1-2.2.6 and Proposition 2.3.6 pp. 13-15, Theorem 1.13 and Proposition 3.3.3 pp. 6 and 23-25, Proposition 3.4.1 and Theorem 3.4.2 pp. 23-24",
+              "url": "https://arxiv.org/pdf/1204.4533"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-murnaghan-littlewood-top-degree-reduced-coefficients-are-lr-coefficients",
+        "kind": "lemma",
+        "title": "Murnaghan-Littlewood: top-degree reduced coefficients are Littlewood-Richardson coefficients",
+        "deps": [
+          "lem-bor-nonnegative-expansion-for-reduced-kronecker-coefficients",
+          "thm-littlewood-richardson-schur-product-expansion",
+          "def-littlewood-richardson-tableau-and-coefficient"
+        ],
+        "dependency_level": 12,
+        "statement": "Let alpha,beta,gamma be partitions with |gamma|=|alpha|+|beta|. Then bar-g^gamma_{alpha,beta}=c^gamma_{alpha,beta}, the Littlewood-Richardson coefficient. In particular bar-g^{alpha+beta}_{alpha,beta}=c^{alpha+beta}_{alpha,beta}=1.",
+        "strategy": "Apply the nonnegative expansion of the preceding lemma. For every nonzero summand the degree equations give |alpha|+|beta|-|gamma| = (|rho|+|lambda|+|theta|)+(|rho|+|eta|+|pi|)-(|mu|+|theta|+|pi|) = 2|rho|+|lambda|+|eta|-|mu| = 2|rho|+|mu|, using |lambda|=|eta|=|mu|. If |gamma|=|alpha|+|beta| then 2|rho|+|mu|=0, so rho=mu=empty; then |lambda|=|eta|=0, so lambda=eta=empty; hence c^alpha_{rho,lambda,theta}=c^alpha_{empty,empty,theta}=delta_{alpha,theta} and c^beta_{empty,empty,pi}=delta_{beta,pi}, and the six-fold sum collapses to the single summand g^empty_{empty,empty} c^gamma_{alpha,beta} = c^gamma_{alpha,beta}. For gamma=alpha+beta the LR coefficient equals 1: the Pieri/LR rule gives the unique Littlewood-Richardson tableau of shape (alpha+beta)/alpha whose row i is filled with i's. The row-i filling is lattice because beta is weakly decreasing. Any LR tableau has only 1s in its first skew row, which has beta_1 boxes and exhausts that content; inductively each successive row exhausts the next content, so the filling is unique. Empty rows/partitions use zero content and the unique empty tableau.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            },
+            {
+              "title": "I. G. Macdonald, Symmetric Functions and Hall Polynomials, 2nd ed., Oxford University Press 1995; Chapter I sections 3 (Schur functions), 5 (Pieri rules, Bernstein's operators Example 29) and 7 (the Hall inner product, the internal/Kronecker product)",
+              "url": "https://math.berkeley.edu/~corteel/MATH249/macdonald.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-reduced-kronecker-support-satisfies-size-triangle-inequalities",
+        "kind": "proposition",
+        "title": "The support of the reduced Kronecker coefficients satisfies the size triangle inequalities",
+        "deps": [
+          "lem-bor-nonnegative-expansion-for-reduced-kronecker-coefficients"
+        ],
+        "dependency_level": 12,
+        "statement": "If bar-g^gamma_{alpha,beta}>0 then |alpha| <= |beta|+|gamma|, |beta| <= |alpha|+|gamma| and |gamma| <= |alpha|+|beta| (Murnaghan's inequalities). Hence the support Supp(alpha,beta) of the nonzero reduced coefficients with fixed alpha,beta lies in the triangle region of the weight lattice.",
+        "strategy": "Take a nonzero summand of the nonnegative expansion and use its degree equations |alpha|=|rho|+|lambda|+|theta|, |beta|=|rho|+|eta|+|pi|, |gamma|=|mu|+|theta|+|pi| with |lambda|=|eta|=|mu|. Subtracting pairwise: |alpha|+|beta|-|gamma| = 2|rho|+|mu| >= 0; |alpha|+|gamma|-|beta| = |lambda|+2|theta|+|mu|-|eta| = 2|theta|+|mu| >= 0; |beta|+|gamma|-|alpha| = 2|pi|+|mu| >= 0. Each difference is a sum of nonnegative integers, giving the three inequalities for that summand, hence for their positive sum.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-exact-global-stabilization-threshold-for-a-fixed-kronecker-product",
+        "kind": "theorem",
+        "title": "The exact global stabilization threshold for a fixed Kronecker product",
+        "deps": [
+          "def-first-row-padding-completion-and-the-stabilization-operator",
+          "def-reduced-kronecker-coefficient",
+          "lem-murnaghan-littlewood-top-degree-reduced-coefficients-are-lr-coefficients",
+          "prop-reduced-kronecker-support-satisfies-size-triangle-inequalities",
+          "thm-murnaghan-expansion-for-all-admissible-ranks"
+        ],
+        "dependency_level": 13,
+        "statement": "For all partitions alpha,beta, with missing parts zero: stab(alpha,beta)=N:=|alpha|+|beta|+alpha_1+beta_1. At every n>=N all support labels gamma[n] are ordinary partitions, and the full product has the fixed nonnegative Schur expansion sum_gamma bar-g^gamma_{alpha,beta}s_{gamma[n]}; the family is V-stable from N onward. If both alpha and beta are nonempty, N-1 is admissible and the product at N is not V of the product at N-1: the coefficient of s_{(alpha+beta)[N]} is 1, its first two parts are equal, and no such Schur basis vector lies in the image of V. If exactly one input is empty, N is already the least ordinary input rank; the same image obstruction at N excludes any earlier stabilization index in the Jacobi-Trudi convention of the Definition. If both inputs are empty, N=0, s_(n)*s_(n)=s_(n) (including s_(0)=1) and V^n(1)=s_(n), so stabilization begins at zero and no negative-rank product is invoked. No sharpness for an individual coefficient is claimed.",
+        "strategy": "Source route: Briand-Orellana-Rosas Lemma 3.1 and Theorem 3.2, pp. 8-9. (i) Support maximum: every nonzero summand of the nonnegative expansion satisfies |gamma|+gamma_1 <= |alpha|+|beta|+alpha_1+beta_1 - the chain is |gamma|+gamma_1 <= |mu|+mu_1+|theta|+theta_1+|pi|+pi_1 <= 2|mu|+|theta|+theta_1+|pi|+pi_1 = |lambda|+|theta|+theta_1+|eta|+|pi|+pi_1 <= |alpha|+alpha_1+|beta|+beta_1, using the threefold containment theta subset alpha, pi subset beta, the row bound gamma_1 <= mu_1+theta_1+pi_1 from the LR rule, mu_1 <= |mu|, |mu|=|lambda|=|eta| and |lambda|+|theta| <= |alpha|, |eta|+|pi| <= |beta|; combined with the top-degree lemma, which shows that gamma=alpha+beta attains the value |alpha|+|beta|+alpha_1+beta_1, this identifies max{|gamma|+gamma_1 : bar-g^gamma_{alpha,beta}>0} = |alpha|+|beta|+alpha_1+beta_1. (ii) Put N equal to the support maximum established in (i). For n>=N all gamma[n] in the finite positive support are partitions, so the proved all-rank identity is now an ordinary nonnegative Schur expansion; U_{n+k}s_gamma=V^k(U_n s_gamma) there. Thus the whole product is V-stable from N. When N>0, gamma*=alpha+beta is nonempty, its reduced coefficient is 1 by the top-degree lemma and the unique LR tableau, and gamma*[N] has equal positive first two parts. Distinct support tails give distinct Schur labels, so this coefficient does not cancel. Every V(s_mu)=s_{mu+(1)} has first part strictly larger than the second, hence the product at N is not in the image of V. Any putative stabilization index n_0<N would make the product at N equal V^{N-n_0} of its rank-n_0 Jacobi-Trudi-completed product, a contradiction. For both inputs nonempty, N-1 is an ordinary admissible rank; for exactly one empty, N is the minimum ordinary input rank, and no ordinary product below that domain is invoked. If N=0 both inputs are empty: the degreewise internal-product unit h_n=s_(n) gives h_n*h_n=h_n and V^n(1)=h_n, proving threshold zero directly. The two-factor LR first-row inequality used in (i) is explicit: every entry of a nonempty first skew row is 1, since the LR reading word begins at its rightmost (largest) entry and must be lattice; hence the added first-row boxes number at most the 1-content beta_1. Thus lambda_1<=alpha_1+beta_1 for positive c^lambda_{alpha,beta}. Iterating the positive intermediate LR coefficients gives the threefold row inequality. At gamma*=alpha+beta the row-i filling by i is lattice because beta is weakly decreasing; the first row exhausts all beta_1 ones, then the next row exhausts all beta_2 twos, and induction proves uniqueness and coefficient 1.",
+        "axiom_use": "None: the proved finite all-rank expansion, LR row bounds/unique top tableau and the Schur-basis image of V suffice; empty cases are explicit.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 1587,
+    "id": "murnaghan-stability-via-fi-modules-examples",
+    "kind": "B",
+    "category": "special-topics-in-representation-theory",
+    "title": "Murnaghan Stability via FI-Modules — Examples",
+    "companion": "murnaghan-stability-via-fi-modules",
+    "requires": [
+      "murnaghan-stability-via-fi-modules"
+    ],
+    "items": [
+      {
+        "id": "ex-murnaghan-stability-for-alpha-beta-two",
+        "kind": "example",
+        "title": "Murnaghan stability for alpha = beta = (2), ranks 4 to 9",
+        "deps": [
+          "def-reduced-kronecker-coefficient",
+          "thm-murnaghan-stability-for-kronecker-coefficients",
+          "def-first-row-padding-of-a-partition",
+          "def-padded-kronecker-coefficient-sequence",
+          "thm-exact-global-stabilization-threshold-for-a-fixed-kronecker-product",
+          "thm-youngs-rule-for-permutation-modules",
+          "thm-frobenius-characteristic-sends-specht-characters-to-schur-functions",
+          "thm-jacobi-trudi-and-dual-jacobi-trudi-identities",
+          "lem-complete-homogeneous-expansion-in-power-sums",
+          "prop-kronecker-coefficient-is-a-three-character-inner-product"
+        ],
+        "dependency_level": 14,
+        "statement": "For alpha=beta=(2) the source's introduction displays s_{2,2}*s_{2,2}=s_4+s_{1,1,1,1}+s_{2,2}; s_{3,2}*s_{3,2}=s_5+s_{2,1,1,1}+s_{3,2}+s_{4,1}+s_{3,1,1}+s_{2,2,1}; s_{4,2}*s_{4,2}=s_6+s_{3,1,1,1}+2s_{4,2}+s_{5,1}+s_{4,1,1}+2s_{3,2,1}+s_{2,2,2}; s_{5,2}*s_{5,2}=s_7+s_{4,1,1,1}+2s_{5,2}+s_{6,1}+s_{5,1,1}+2s_{4,2,1}+s_{3,2,2}+s_{4,3}+s_{3,3,1}; s_{6,2}*s_{6,2}=s_8+s_{5,1,1,1}+2s_{6,2}+s_{7,1}+s_{6,1,1}+2s_{5,2,1}+s_{4,2,2}+s_{5,3}+s_{4,3,1}+s_{4,4}; s_{7,2}*s_{7,2}=s_9+s_{6,1,1,1}+2s_{7,2}+s_{8,1}+s_{7,1,1}+2s_{6,2,1}+s_{5,2,2}+s_{6,3}+s_{5,3,1}+s_{5,4}; and the stable row s_{bullet,2}*s_{bullet,2}=s_bullet+s_{bullet,1,1,1}+2s_{bullet,2}+s_{bullet,1}+s_{bullet,1,1}+2s_{bullet,2,1}+s_{bullet,2,2}+s_{bullet,3}+s_{bullet,3,1}+s_{bullet,4}. Consequently the reduced coefficients for the pair ((2),(2)) are bar-g^gamma_{(2),(2)} = 1,1,2,1,1,2,1,1,1,1 for gamma = empty, (1,1,1), (2), (1), (1,1), (2,1), (2,2), (3), (3,1), (4) respectively, and bar-g^gamma=0 for all other gamma; in particular bar-g^{(2)}_{(2),(2)}=2 and bar-g^{(4)}_{(2),(2)}=1. The displayed data also verify directly, for this pair, that the whole product is V-stable at rank 8 and not at rank 7: applying V (adding a box to the first row of every Schur function) to the rank-8 expansion s_{6,2}*s_{6,2} reproduces the rank-9 expansion s_{7,2}*s_{7,2} term by term, whereas applying V to the rank-7 expansion s_{5,2}*s_{5,2} misses the single term s_{4,4} of s_{6,2}*s_{6,2}, the other nine terms matching term by term (the rank-7 product does contain s_{4,3} and s_{3,3,1}, whose V-images s_{5,3} and s_{4,3,1} are present at rank 8). The proved threshold theorem establishes V-stability for every rank from 8 onward, with exact least global index 8=|(2)|+|(2)|+2+2; the displayed finite data independently verify the six listed products and the failure of the preceding step.",
+        "strategy": "For every n=4,...,9 compute the actual characters and every Schur coefficient, not merely dimensions. Youngs rule gives M^(n-2,2)=S^(n)+S^(n-1,1)+S^(n-2,2), while the point-permutation module is S^(n)+S^(n-1,1). Hence chi^(n-2,2)=binom(X_1,2)+X_2-X_1, by counting fixed two-element subsets and fixed points. For every partition delta of n, expand s_delta by Jacobi-Trudi and each h_k in power sums; the Frobenius dictionary gives chi^delta(rho)=z_rho[p_rho]s_delta. The tensor multiplicity is sum_{rho partition n}(chi^(n-2,2)(rho))^2 chi^delta(rho)/z_rho, a finite rational sum. Evaluating these finitely many sums gives exactly each displayed product (and zero for unlisted delta). Evaluating these character identities at the identity permutation provides a supplementary dimension check, not the proof of the products. At rank 8 the coefficient of s_(4,4) is 1 and cannot be in the V-image; the other nine shifted rank-7 terms agree with rank 8. General V-stability from 8 and its exact minimality follow from the now-proved threshold theorem, and comparing rank 8 with rank 9 checks the first stable step. The stable reduced list follows from that theorem and the rank-8 decomposition.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-global-product-threshold-is-not-a-per-triple-sharpness-claim",
+        "kind": "counterexample",
+        "title": "A global product threshold is not a per-coefficient sharpness claim",
+        "deps": [
+          "def-reduced-kronecker-coefficient",
+          "ex-murnaghan-stability-for-alpha-beta-two"
+        ],
+        "dependency_level": 15,
+        "statement": "For alpha=beta=(2) the individual coefficient bar-g^{(2)}_{(2),(2)}=2 is already attained at rank 6: the rank-6 product s_{4,2}*s_{4,2} contains 2s_{4,2}, i.e. g^{(4,2)}_{(4,2),(4,2)}=2, which is the stable value bar-g^{(2)}_{(2),(2)}=2 read off from the stable row. Thus this single coefficient stops growing strictly before the whole product stabilizes: the rank-7 and rank-8 products still contain 2s_{5,2} and 2s_{6,2} respectively, matching the stable value, while the whole product is not even V-stable at rank 7 (applying V to s_{5,2}*s_{5,2} misses the term s_{4,4} occurring in s_{6,2}*s_{6,2}) and only becomes V-stable at rank 8. Therefore the exact global product threshold (the least rank from which the whole product is V-stable) is not a per-coefficient sharpness statement: single coefficients may stabilize earlier, and no claim that a coefficient first becomes stable at the global threshold is valid.",
+        "strategy": "Verification from the source's displayed products: read the coefficient of s_{4,2} in s_{4,2}*s_{4,2} (equal to 2), the coefficients of s_{5,2} and s_{6,2} in the ranks 7 and 8 products (2 in both cases), and the stable coefficient 2s_{bullet,2} in the stable row; compare the ranks 6,7,8 products under the operator V (V of the rank-7 product equals the rank-8 product minus the single term s_{4,4}). This shows the stabilization rank of the single coefficient (2) is at most 6, strictly below the global V-stability rank 8. The counterexample does not use the general threshold theorem; it is a finite boundary witness warning against quantifying the global threshold as a sharp per-coefficient bound. To justify constancy for every later rank, use the proved threshold through the example: all ranks n>=8 have the stable coefficient 2, and the explicit ranks 6 and7 already have that value. The rank 5 value is1 by the verified product table. Thus this coefficient has stabilization rank 6, strictly below the whole-product threshold 8; it is not inferred solely from matching adjacent products.",
+        "axiom_use": "None.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Emmanuel Briand, Rosa Orellana and Mercedes Rosas, The stability of the Kronecker product of Schur functions, arXiv:0907.4652v2 (2009), published in J. Algebra 331 (2011) 11-27; Murnaghan theorem and Murnaghan-Littlewood theorem p. 4, Example 1 p. 4, Theorem 1.1 pp. 4-5, reduction to stab(alpha,beta) p. 5, Definition of stab(alpha,beta) p. 5, Lemma 2.1 and equation (8) pp. 7-8, Littlewood's identity (9) pp. 7-8, Lemma 3.1 and Theorem 3.2 pp. 8-9, introduction's product table for alpha=beta=(2) p. 2",
+              "url": "https://arxiv.org/pdf/0907.4652"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

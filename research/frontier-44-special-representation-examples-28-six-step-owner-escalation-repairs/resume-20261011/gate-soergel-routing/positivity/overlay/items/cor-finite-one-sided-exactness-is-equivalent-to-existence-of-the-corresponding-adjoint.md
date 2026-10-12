@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-one-sided-exactness-is-equivalent-to-existence-of-the-corresponding-adjoint.md

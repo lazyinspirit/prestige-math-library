@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reduced-prepared-polynomial-has-nonzero-discriminant.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-cone-intersection-versus-moved-space-meet-in-a3.md

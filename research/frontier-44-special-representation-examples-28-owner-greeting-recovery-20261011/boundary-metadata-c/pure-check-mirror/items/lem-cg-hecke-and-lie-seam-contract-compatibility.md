@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-cg-hecke-and-lie-seam-contract-compatibility.md

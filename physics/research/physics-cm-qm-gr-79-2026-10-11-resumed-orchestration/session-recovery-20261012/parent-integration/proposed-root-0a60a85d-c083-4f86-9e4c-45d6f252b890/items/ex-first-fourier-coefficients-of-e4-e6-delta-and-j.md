@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-fourier-coefficients-of-e4-e6-delta-and-j.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-in-a-poset-adjunction-the-triangle-identities-are-automatic.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-self-adjoint-nonpositive-operators-generate-bounded-analytic-semigroups.md

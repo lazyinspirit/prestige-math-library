@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-aperiodicity-is-needed-for-ordinary-time-convergence-not-ergodic-averages.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-proper-smooth-maps-pull-back-compactly-supported-forms.md

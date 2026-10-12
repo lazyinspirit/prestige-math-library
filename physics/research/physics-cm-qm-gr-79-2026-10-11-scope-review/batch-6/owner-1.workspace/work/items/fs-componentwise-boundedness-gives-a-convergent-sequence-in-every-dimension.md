@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-componentwise-boundedness-gives-a-convergent-sequence-in-every-dimension.md

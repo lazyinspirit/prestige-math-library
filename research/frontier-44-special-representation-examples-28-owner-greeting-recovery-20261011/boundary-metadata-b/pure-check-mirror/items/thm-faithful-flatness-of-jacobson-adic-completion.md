@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-faithful-flatness-of-jacobson-adic-completion.md

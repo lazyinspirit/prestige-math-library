@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-minimal-generating-set-of-an-arbitrary-finite-group-has-the-same-size.md

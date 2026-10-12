@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-ariki-canonical-basis-theorem-in-characteristic-zero.md

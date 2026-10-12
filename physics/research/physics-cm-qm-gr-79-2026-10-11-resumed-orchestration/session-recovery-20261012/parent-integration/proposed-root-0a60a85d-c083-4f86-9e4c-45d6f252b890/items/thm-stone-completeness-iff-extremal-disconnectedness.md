@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stone-completeness-iff-extremal-disconnectedness.md

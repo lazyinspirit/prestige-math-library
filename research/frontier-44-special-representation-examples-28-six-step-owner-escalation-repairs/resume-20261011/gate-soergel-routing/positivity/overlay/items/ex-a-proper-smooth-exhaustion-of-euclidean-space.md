@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-proper-smooth-exhaustion-of-euclidean-space.md

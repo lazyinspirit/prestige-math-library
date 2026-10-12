@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-borel-polynomial-base-from-a-transgressive-simple-fiber-system.md

@@ -41,8 +41,7 @@ With the standard orientation and inner product on each space: in $\mathbb R^2$,
 
 **Proof technique:** direct.
 
-
-1.1 In $\mathbb R^2$, the complementary basis and permutation signs of [L1] give $\star1=e_1\wedge e_2$, $\star e_1=e_2$, $\star e_2=-e_1$, and $\star(e_1\wedge e_2)=1$. [L1, algebra]
+ 1.1 In $\mathbb R^2$, the complementary basis and permutation signs of [L1] give $\star1=e_1\wedge e_2$, $\star e_1=e_2$, $\star e_2=-e_1$, and $\star(e_1\wedge e_2)=1$. [L1, algebra]
 
 1.2 In $\mathbb R^3$, the same formula gives the displayed list: for example $\star e_2=e_3\wedge e_1$ because the permutation $(2,3,1)\mapsto(1,2,3)$ has sign $+1$, and $\star(e_1\wedge e_2)=e_3$ because $(1,2,3)$ is already ordered. [L1, algebra]
 
@@ -52,4 +51,4 @@ With the standard orientation and inner product on each space: in $\mathbb R^2$,
 
 2.2 In each dimension, $\star$ permutes the orthonormal wedge basis up to sign, so it preserves the Gram norm, as [L2] states. [L2, step 1.1, step 1.2, step 1.3]
 
-3.1 Steps 1.1 through 2.2 verify the displayed stars, the square signs, and the isometry in all three dimensions. [step 1.1, step 1.2, step 1.3, step 2.1, step 2.2] ∎
+3.1 Steps 1.1 through 2.2 verify the displayed stars, the square signs, and the isometry in all three dimensions. [step 1.1, step 1.2, step 1.3, step 2.1, step 2.2] ∎ 

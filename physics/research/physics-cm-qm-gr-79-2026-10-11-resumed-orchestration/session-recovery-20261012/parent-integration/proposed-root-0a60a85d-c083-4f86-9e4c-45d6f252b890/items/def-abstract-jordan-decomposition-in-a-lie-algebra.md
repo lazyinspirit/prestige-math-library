@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-abstract-jordan-decomposition-in-a-lie-algebra.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-pbw-linear-independence-by-the-regular-representation-on-the-symmetric-algebra.md

@@ -75,8 +75,7 @@ $d=1$, where $G$ is trivial.
 
 4.1 Every subgroup $H\le G$ has this form for exactly one positive divisor of $n$: $H$ is a subset of the finite set $G$, so $d:=|H|$ is defined and divides $n$ by [L3] and [A1], and step 3.1 gives $H=\langle g^{n/d}\rangle$; the divisor is determined by $H$, being its order. [step 2.1, step 3.1, A1, L3]
 
-
-5.1 Conversely, if $\langle g^{n/d}\rangle\subseteq\langle g^{n/e}\rangle$ then $d\mid e$, since by step 2.1 the two subgroups have orders $d$ and $e$ and [L3] applied to the subgroup $\langle g^{n/d}\rangle$ of $\langle g^{n/e}\rangle$ makes $d$ divide $e$. Together with steps 2.1, 3.1, 4.1 and 2.3 this proves every clause of the lemma. [step 2.1, step 3.1, step 2.3, step 4.1, L3] ∎
+ 5.1 Conversely, if $\langle g^{n/d}\rangle\subseteq\langle g^{n/e}\rangle$ then $d\mid e$, since by step 2.1 the two subgroups have orders $d$ and $e$ and [L3] applied to the subgroup $\langle g^{n/d}\rangle$ of $\langle g^{n/e}\rangle$ makes $d$ divide $e$. Together with steps 2.1, 3.1, 4.1 and 2.3 this proves every clause of the lemma. [step 2.1, step 3.1, step 2.3, step 4.1, L3] ∎
 
 ## Remarks
 

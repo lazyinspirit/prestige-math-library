@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-distinguished-open-finite-subcover-from-unit-expression.md

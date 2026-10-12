@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-energy-of-trivial-and-discrete-partitions.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-equicharacteristic-local-ring-and-coefficient-field.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-integrally-closed-minimal-polynomial-coefficients.md

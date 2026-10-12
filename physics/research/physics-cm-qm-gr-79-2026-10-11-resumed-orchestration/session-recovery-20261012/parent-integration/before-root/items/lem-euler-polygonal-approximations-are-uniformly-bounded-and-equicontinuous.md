@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euler-polygonal-approximations-are-uniformly-bounded-and-equicontinuous.md

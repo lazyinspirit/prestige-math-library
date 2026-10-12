@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-entire-polynomial-growth-is-polynomial.md

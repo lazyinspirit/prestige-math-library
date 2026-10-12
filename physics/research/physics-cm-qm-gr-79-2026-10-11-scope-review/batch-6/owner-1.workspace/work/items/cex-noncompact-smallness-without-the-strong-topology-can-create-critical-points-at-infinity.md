@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-noncompact-smallness-without-the-strong-topology-can-create-critical-points-at-infinity.md

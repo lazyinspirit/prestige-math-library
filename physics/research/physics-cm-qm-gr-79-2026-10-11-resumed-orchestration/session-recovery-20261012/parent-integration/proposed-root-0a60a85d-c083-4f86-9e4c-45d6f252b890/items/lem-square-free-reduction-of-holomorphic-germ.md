@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-square-free-reduction-of-holomorphic-germ.md

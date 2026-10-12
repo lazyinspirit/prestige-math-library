@@ -1,0 +1,863 @@
+[
+ {
+  "order": 181,
+  "id": "qm-one-dimensional-potentials",
+  "kind": "A",
+  "category": "non-relativistic-quantum-mechanics",
+  "library": "physics",
+  "title": "Qm One Dimensional Potentials",
+  "companion": "qm-one-dimensional-potentials-examples",
+  "requires": [
+   "qm-interference-and-local-detection"
+  ],
+  "items": [
+   {
+    "id": "lem-nrqm-potentials-one-dimensional-flux-identity",
+    "kind": "lemma",
+    "domain": "mathematics",
+    "title": "The one-dimensional continuity identity and the constant flux of stationary solutions",
+    "statement": "\n## Statement\n\nAssume Countable Choice ([[def-countable-choice]]). Let $m,\\hbar>0$, let\n$\\Omega\\subseteq\\mathbb R$ and $I\\subseteq\\mathbb R$ be nonempty open intervals\n([[def-interval]]), and let $V:\\Omega\\to\\mathbb R$ be a function. Let\n$u,v:\\Omega\\times I\\to\\mathbb R$ be functions whose partial derivatives\n$\\partial_tu,\\partial_tv,\\partial_xu,\\partial_xv,\\partial_x^2u,\\partial_x^2v$\nexist and are continuous on $\\Omega\\times I$\n([[def-continuity-real]], [[def-derivative]]) and satisfy the pair of\nequations\n$$\\hbar\\,\\partial_tu=-\\frac{\\hbar^2}{2m}\\partial_x^2v+Vv,\\qquad -\\hbar\\,\\partial_tv=-\\frac{\\hbar^2}{2m}\\partial_x^2u+Vu$$\npointwise on $\\Omega\\times I$. Write $\\psi:=u+iv$ for the corresponding\n$\\mathbb C$-valued function with component functions $u$ and $v$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), so that the two\ndisplayed equations are the componentwise reading of\n$i\\hbar\\,\\partial_t\\psi=-\\frac{\\hbar^2}{2m}\\partial_x^2\\psi+V\\psi$. Put\n$$n(x,t):=|\\psi(x,t)|^2=u(x,t)^2+v(x,t)^2,\\qquad j(x,t):=\\frac{\\hbar}{m}\\operatorname{Im}\\!\\bigl(\\overline{\\psi(x,t)}\\,\\partial_x\\psi(x,t)\\bigr) =\\frac{\\hbar}{m}\\bigl(u\\,\\partial_xv-(\\partial_xu)\\,v\\bigr)(x,t).$$\nThen:\n\n(a) *Continuity identity.* $\\partial_tn(x,t)+\\partial_xj(x,t)=0$ for every\n$(x,t)\\in\\Omega\\times I$.\n\n(b) *Constant flux of stationary solutions.* If in addition $u,v:\\Omega\\to\n\\mathbb R$ have continuous second derivatives and there are a real $E$ and a\nreal-valued $V$ with\n$-\\frac{\\hbar^2}{2m}u''+Vu=Eu$ and $-\\frac{\\hbar^2}{2m}v''+Vv=Ev$ pointwise on\n$\\Omega$, then the function $x\\mapsto j(x):=\\frac{\\hbar}{m}(uv'-u'v)(x)$ is\nconstant on $\\Omega$.\n\nThe assertion is an identity for the declared differentiable functions and\nthe declared real pair $V$; it constructs no probability law, no state and no\nphysical interpretation.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-complex-conjugate-real-imaginary-part-and-modulus",
+     "thm-complex-numbers-are-the-real-coordinate-plane",
+     "thm-algebra-of-derivatives",
+     "thm-algebra-of-continuous-functions",
+     "cor-zero-derivative-implies-constant",
+     "def-derivative",
+     "def-continuity-real",
+     "def-interval",
+     "def-countable-choice"
+    ],
+    "dependency_roles": {
+     "def-complex-conjugate-real-imaginary-part-and-modulus": "mathematical-premise",
+     "thm-complex-numbers-are-the-real-coordinate-plane": "mathematical-premise",
+     "thm-algebra-of-derivatives": "mathematical-premise",
+     "thm-algebra-of-continuous-functions": "mathematical-premise",
+     "cor-zero-derivative-implies-constant": "mathematical-premise",
+     "def-derivative": "mathematical-premise",
+     "def-continuity-real": "mathematical-premise",
+     "def-interval": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 0,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.2.2, printed pages 11-13 (PDF pages 14-16): conservation of probability and the probability current for the one-dimensional Schroedinger equation",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 2.3, printed pages 32-33 (PDF pages 40-41): the probability current and the continuity equation in the position representation",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    }
+   },
+   {
+    "id": "lem-nrqm-potentials-free-operator-differential-identification",
+    "kind": "lemma",
+    "domain": "mathematics",
+    "title": "The one-dimensional free Schr\"odinger operator as the weak second-derivative operator",
+    "statement": "\n## Statement\n\nAssume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Let $m,\\hbar>0$, put\n$c:=2\\pi^2\\hbar^2/m$, and let $H_0$ be the free one-dimensional operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (b) with $d=1$, this $c$ and $b=0$:\n$$H_0:=\\mathcal F_2^{*}M_{c|\\xi|^2}\\mathcal F_2,\\qquad D(H_0):=\\bigl\\{f\\in L^2(\\mathbb R;\\mathbb C):|\\xi|^2\\mathcal F_2f\\in L^2(\\mathbb R;\\mathbb C)\\bigr\\},$$\nwhere $\\mathcal F_2$ is the unitary Plancherel transform of that theorem and\n$M_{c|\\xi|^2}$ is multiplication by the function $\\xi\\mapsto c|\\xi|^2$. Let\n$D^2$ denote the second weak derivative, defined componentwise on the\nlocally integrable classes of $\\mathbb R$\n([[def-weak-derivative-of-a-locally-integrable-function]]), and let\n$W^{2,2}(\\mathbb R;\\mathbb C)$ be the Sobolev space\n([[def-sobolev-space-wkp-and-its-norm]]). Then:\n\n(a) $D(H_0)=W^{2,2}(\\mathbb R;\\mathbb C)$ as sets and\n$$H_0f=-\\frac{\\hbar^2}{2m}\\,D^2f\\qquad\\text{for every }f\\in D(H_0);$$\nequivalently, $\\mathcal F_2(H_0f)(\\xi)=c|\\xi|^2\\mathcal F_2f(\\xi)$ and\n$\\mathcal F_2\\bigl(-\\tfrac{\\hbar^2}{2m}D^2f\\bigr)(\\xi)=c|\\xi|^2\\mathcal F_2f(\\xi)$\nfor almost every $\\xi$, and the two $L^2$ classes agree.\n\n(b) For every real bounded measurable $V:\\mathbb R\\to\\mathbb R$, the operator\n$H_0+M_V$ of clause (c) of the cited theorem, with domain $D(H_0)$, coincides\nwith the operator $f\\mapsto-\\frac{\\hbar^2}{2m}D^2f+Vf$ on the same domain; in\nparticular, for $E\\in\\mathbb R$ and $\\psi\\in W^{2,2}(\\mathbb R;\\mathbb C)$ the\neigenvalue equation $(H_0+M_V)\\psi=E\\psi$ is equivalent to the weak equation\n$-\\frac{\\hbar^2}{2m}D^2\\psi+V\\psi=E\\psi$ elementwise in $L^2(\\mathbb R;\\mathbb C)$.\n\nThe statement identifies operators on the same domain; it asserts neither\nsmoothness of the classes in $W^{2,2}$ nor any physical interpretation.\n",
+    "strategy": "direct",
+    "deps": [
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+     "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+     "def-sobolev-space-wkp-and-its-norm",
+     "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+     "thm-plancherel",
+     "def-weak-derivative-of-a-locally-integrable-function",
+     "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+     "def-adjoint-of-a-densely-defined-unbounded-operator",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+     "lem-weak-derivatives-are-polynomial-fourier-multipliers": "mathematical-premise",
+     "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+     "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces": "mathematical-premise",
+     "thm-plancherel": "mathematical-premise",
+     "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+     "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+     "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 1,
+    "sources": {
+     "references": [
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 7.2 printed pages 167-169 (PDF pages 179-181): the free Schroedinger operator and its domain; Section 9.1 printed pages 181-187 (PDF pages 193-199): one-dimensional Sturm-Liouville operators",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      },
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.1, printed pages 20-27 (PDF pages 23-30): the one-dimensional free Schroedinger equation and its kinetic operator",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      }
+     ]
+    }
+   },
+   {
+    "id": "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+    "kind": "lemma",
+    "domain": "mathematics",
+    "title": "Positive scalar multiples of self-adjoint operators: domains, resolvents, spectra and eigenbases",
+    "statement": "\n## Statement\n\nAssume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H\\ne\\{0\\}$ be a\ncomplex Hilbert space ([[def-hilbert-space]]), let $A:D(A)\\subset H\\to H$ be a\ndensely defined self-adjoint operator\n([[def-symmetric-self-adjoint-and-essentially-self-adjoint]],\n[[def-adjoint-of-a-densely-defined-unbounded-operator]]), and let $c>0$ be\nreal. Write $cA$ for the operator with domain $D(cA):=D(A)$ and\n$(cA)x:=c\\,(Ax)$. Then:\n\n(a) $cA$ is self-adjoint.\n\n(b) For every $z\\in\\mathbb C$ one has $z\\in\\rho(cA)$ if and only if\n$z/c\\in\\rho(A)$, and then\n$(cA-z)^{-1}=c^{-1}(A-z/c)^{-1}$; consequently\n$\\rho(cA)=c\\,\\rho(A)$ and $\\sigma(cA)=c\\,\\sigma(A)$.\n\n(c) If some, hence every, resolvent of $A$ is compact\n([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]],\n[[def-compact-linear-operator]]), then every resolvent of $cA$ is compact,\nthere is a complete orthonormal family $(e_n)_{n\\in\\mathbb N}$ of eigenvectors\nof $A$, the same family consists of eigenvectors of $cA$ with eigenvalues\n$c\\,\\mu_n$, where $\\mu_n$ is the eigenvalue of $e_n$ for $A$, and\n$\\sigma(cA)=\\{c\\,\\mu_n:n\\in\\mathbb N\\}$ with no other spectral points\n([[lem-nrqm-intervals-compact-resolvent-eigenbasis]] clauses (b), (c)).\n\n(d) Eigenvectors correspond exactly: for $\\lambda\\in\\mathbb R$ and $x\\in H$,\n$x\\ne0$, one has $x\\in D(A)$ and $Ax=\\lambda x$ if and only if\n$x\\in D(cA)$ and $(cA)x=(c\\lambda)x$; and every eigenvalue of $cA$ has the same\neigenspace as the corresponding eigenvalue of $A$.\n\n(e) If $A\\ge\\gamma$ in the quadratic-form sense, meaning that\n$\\langle Ax,x\\rangle\\ge\\gamma\\|x\\|^2$ for every $x\\in D(A)$, then\n$cA\\ge c\\gamma$ in the same sense.\n\nOnly the scaling of the given operator is asserted; no domain, spectrum or\neigenvector is claimed for any other rescaling, and no physical\ninterpretation is attached.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-adjoint-of-a-densely-defined-unbounded-operator",
+     "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+     "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+     "def-compact-linear-operator",
+     "def-bounded-linear-operator",
+     "def-hilbert-space",
+     "lem-nrqm-intervals-compact-resolvent-eigenbasis",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+     "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+     "def-resolvent-and-spectrum-of-a-closed-unbounded-operator": "mathematical-premise",
+     "def-compact-linear-operator": "mathematical-premise",
+     "def-bounded-linear-operator": "mathematical-premise",
+     "def-hilbert-space": "mathematical-premise",
+     "lem-nrqm-intervals-compact-resolvent-eigenbasis": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 3,
+    "sources": {
+     "references": [
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.2 printed pages 58-67 (PDF pages 70-79): self-adjoint operators, adjoints and the spectrum under scaling",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      },
+      {
+       "title": "M. Reed and B. Simon, Methods of Modern Mathematical Physics I: Functional Analysis, revised edition, Section VIII.1 (closed, symmetric and self-adjoint operators; scaling and resolvents)",
+       "url": "https://www.sciencedirect.com/bookseries/methods-of-modern-mathematical-physics/vol/1/suppl/C"
+      }
+     ]
+    }
+   },
+   {
+    "id": "def-nrqm-potentials-one-dimensional-line-model",
+    "kind": "definition",
+    "domain": "physics",
+    "title": "The declared one-dimensional line model: state space, Hamiltonian, bound states and generalized stationary solutions",
+    "statement": "\n## Definition\n\n**(a) Framework data.** Adopt the state and composition postulate P1, the\nobservable and probability postulate P2, the autonomous-dynamics postulate P4,\nthe kinematics and massive-particle model postulate P5, the identical-particle\nand spin postulate P6, and the preparation and apparatus discipline P7\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[post-nrqm-framework-identical-particles-and-spin]],\n[[post-nrqm-framework-preparation-and-apparatus]]). Fix a mass parameter\n$m>0$ and a spin label $s=0$, so that the framework's one-particle model\n[[def-nrqm-kinematics-framework-massive-spin-s-model]] reads its state space as\n$H_{0}=L^{2}(\\mathbb R^{3};\\mathbb C)$ with the pairing linear in the first\nargument, its componentwise position family $Q_{1},Q_{2},Q_{3}$, its\ncomponentwise momentum family $P_{1},P_{2},P_{3}$ and the action constant\n$\\hbar>0$; the spin-zero internal factor carries the trivial representation of\nP6. Units are those of [[def-nrqm-framework-quantities-and-units]]: position is\nread in metres, momentum in $\\mathrm{kg\\,m\\,s^{-1}}$, energy and potential\nenergy in joules, and $\\hbar$ in $\\mathrm{J\\,s}$. Assume the Axiom of Countable\nChoice and the Axiom of Choice as the choice hypotheses of the cited\nmathematical suppliers ([[def-countable-choice]], [[def-axiom-of-choice]]).\n\n**(b) The declared effective one-dimensional model.** As an additional model\nassumption of the pair, adopt the **line model**. Its declared state space is\n$$H_{\\mathrm{lin}}:=L^{2}(\\mathbb R;\\mathbb C) =\\Bigl\\{f:\\mathbb R\\to\\mathbb C\\ \\text{measurable}: \\int_{\\mathbb R}|f(x)|^{2}\\,dx<\\infty\\Bigr\\}\\Big/\\!\\sim,$$\nthe complex Hilbert space of almost-everywhere classes with the pairing\n$\\langle f,g\\rangle=\\int_{\\mathbb R}f\\overline g\\,dx$ linear in the first\nargument ([[def-l-p-space-as-a-quotient-by-null-functions]]). Its declared\n**position assignment** is the multiplication assignment $Q$, defined on the\nclasses with $xf\\in H_{\\mathrm{lin}}$, with the declared outcome law\n$$\\mu^{Q}_{\\psi}(B):=\\int_{B}|\\psi(x)|^{2}\\,dx\\qquad(B\\subseteq\\mathbb R \\text{ Borel})$$\nfor a unit class $\\psi$, the one-dimensional reading of the framework's Born\nposition law of [[pthm-nrqm-kinematics-spin-s-outcome-laws]] clause (a)\nadopted here as part of the model; its declared **momentum assignment** is\n$P:=-i\\hbar D$ on the classes whose weak derivative $D\\psi$ lies in\n$H_{\\mathrm{lin}}$ ([[def-weak-derivative-of-a-locally-integrable-function]]).\nThe pair asserts no derivation of $H_{\\mathrm{lin}}$, $Q$ or $P$ from the\nthree-dimensional model $H_{0}$ of P5: the reduction to one spatial dimension,\nfor instance by an idealized strong transverse confinement or by a declared\none-dimensional sector, is an assumption of the model. An assignment of a\nconcrete material system to the line model is an identification in the sense\nof clause (iii) of P7 and carries the corresponding uncertainty.\n\n**(c) The assigned energy operator.** Let $V:\\mathbb R\\to\\mathbb R$ be real,\nbounded and measurable; write $\\|V\\|_{\\infty}:=\\sup_{x\\in\\mathbb R}|V(x)|$.\nThe **assigned energy operator** of the line model with potential $V$ is\n$$H_{V}:=H_{0}^{\\mathrm{lin}}+M_{V},\\qquad H_{0}^{\\mathrm{lin}}:=\\mathcal F_{2}^{*}M_{c|\\xi|^{2}}\\mathcal F_{2},\\qquad c:=\\frac{2\\pi^{2}\\hbar^{2}}{m},$$\nwith $M_{V}$ the multiplication operator of\n[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (a), on the common domain\n$D(H_{V}):=D(H_{0}^{\\mathrm{lin}})\n=\\{f\\in H_{\\mathrm{lin}}:|\\xi|^{2}\\mathcal F_{2}f\\in H_{\\mathrm{lin}}\\}$,\nwhere $\\mathcal F_{2}$ is the unitary Plancherel transform of that theorem\n([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclauses (a)-(c)). The declared energy unit is the joule. By\n[[lem-nrqm-potentials-free-operator-differential-identification]] the domain\n$D(H_{V})$ is the Sobolev space $W^{2,2}(\\mathbb R;\\mathbb C)$ and\n$$H_{V}f=-\\frac{\\hbar^{2}}{2m}\\,D^{2}f+Vf\\qquad(f\\in D(H_{V})),$$\n$D^{2}$ the second weak derivative, so the model's time-independent equation\ninside any open interval on which $V$ is (say) constant is the ordinary\ndifferential equation $-\\frac{\\hbar^{2}}{2m}\\psi''+V\\psi=E\\psi$. The model\nadopts $(H_{V},\\mathrm J)$ as its assigned energy observable in the sense of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a); its\nself-adjointness is established by the line-model energy theorem of this page\nand is not presupposed here. A declared potential is **compactly supported** when $V$\nvanishes almost everywhere outside some bounded interval.\n\n**(d) Bound states and stationary vocabulary.** A **stationary solution** of\nthe model with potential $V$ and energy $E\\in\\mathbb R$ is a nonzero class\n$\\psi\\in D(H_{V})$ with $H_{V}\\psi=E\\psi$; the pair $(\\psi,E)$ is an\n**eigenpair** of the model. A **bound state** of the model is a stationary\nsolution with energy $E<0$ whose representative is normalized, $\\|\\psi\\|=1$;\nits eigenvalue $E$ is its **binding energy**, read in joules, and in this model\nthe value $0$ is called the **continuum threshold**. The model reads the\nenergy outcome law of the pure preparation of a unit eigenstate $\\psi$ with\neigenvalue $E$ through clause (a) of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] as the point\nmass $\\delta_{E}$ at $E$, so that outcome in $\\{E\\}$ has probability one; and\nthe position density of the preparation is $|\\psi|^{2}$ by clause (b). These\nreadings are declarations of the model under P2 and construct no sample,\ndetector or measured value.\n\n**(e) Declared generalized stationary solutions.** Let\n$-\\infty=x_{0}<x_{1}<\\dots<x_{n}=\\infty$ be a finite partition of\n$\\mathbb R$, and let $\\psi:\\mathbb R\\to\\mathbb C$ be bounded and classically\n$C^{1}$ on $\\mathbb R$ with a continuous derivative, and twice continuously\ndifferentiable on each open interval $(x_{j},x_{j+1})$ restricted to which\n$V$ is continuous, satisfying\n$-\\frac{\\hbar^{2}}{2m}\\psi''(x)+V(x)\\psi(x)=E\\psi(x)$ there. Such a $\\psi$ is\na **declared generalized stationary solution** of the model at energy $E$. It\nis generally not an element of $H_{\\mathrm{lin}}$ (a bounded oscillatory\nsolution has $|\\psi|^{2}$ not integrable), so it is not a preparation of the\nmodel and clause (d) does not apply to it; it is used only through the\ndeclared flux quantities computed from it, and every such use states the\nidealization. The pair's scattering reading assigns to $\\psi$ the\n**probability current** $j(x)=\\frac{\\hbar}{m}\\operatorname{Im}\\bigl(\\overline{\\psi(x)}\\psi'(x)\\bigr)$,\nread in $\\mathrm{s^{-1}}$ by clause (d)5 of\n[[def-nrqm-framework-quantities-and-units]], and reads a ratio of currents at\ninfinity as a *transmitted or reflected fraction* of the incident current,\nconditional on the declared solution and on the asymptotics displayed in each\nstatement; no such fraction is ascribed to a single particle and no count is\npredicted.\n\n**(f) Status and scope.** Clauses (a)-(e) fix the data of the pair: a declared\neffective line model with a declared potential, energy operator, bound-state\nvocabulary and generalized-solution vocabulary. They introduce no assumption\nbeyond P1, P2, P4, P5, P6, P7 and the cited mathematics; in particular the\nline model, its state space and its position and momentum assignments are\ndeclarations of the pair and are not consequences of the three-dimensional\nmodel. No numerical value of $m$, $V$ or $\\hbar$ and no measured quantity is\nasserted.\n",
+    "strategy": "n/a",
+    "deps": [
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "post-nrqm-framework-identical-particles-and-spin",
+     "post-nrqm-framework-preparation-and-apparatus",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-kinematics-framework-massive-spin-s-model",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "pthm-nrqm-kinematics-spin-s-outcome-laws",
+     "lem-nrqm-potentials-free-operator-differential-identification",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+     "def-l-p-space-as-a-quotient-by-null-functions",
+     "def-weak-derivative-of-a-locally-integrable-function",
+     "def-schwartz-space-and-its-seminorms",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+     "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+     "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+     "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+     "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+     "lem-nrqm-potentials-free-operator-differential-identification": "mathematical-premise",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+     "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+     "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+     "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "not-applicable"
+    },
+    "dependency_level": 9,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Chapter 2, printed pages 19-27 (PDF pages 22-30): a quantum particle in one dimension, the free particle, the infinite potential well and the Gaussian wavepacket; Sections 2.3-2.4, printed pages 41-63 (PDF pages 44-66): bound states in one-dimensional potentials and scattering",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 5, printed pages 75-103 (PDF pages 83-111): motion in step potentials, square potential wells, scattering of free particles and tunnelling through a potential barrier",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1 printed pages 181-187 (PDF pages 193-199): one-dimensional Sturm-Liouville operators on the line and on intervals",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The pair's declared effective one-dimensional model for a spinless massive particle: its state space, position and momentum assignments, its assigned energy operator for a real bounded measurable potential, its bound-state and stationary vocabulary, and its declared generalized stationary solutions used for the scattering reading. The model is an additional assumption of the pair, not a derivation from the three-dimensional massive-particle model P5, and no identification of a concrete apparatus or material system with the model is asserted; such an identification would be a tested identification with uncertainty in the sense of P7. No experiment and no empirical value appear."
+   },
+   {
+    "id": "def-nrqm-potentials-interval-and-delta-models",
+    "kind": "definition",
+    "domain": "physics",
+    "title": "The declared interval models with Dirichlet and Robin boundary conditions, and the declared zero-range (delta) model",
+    "statement": "\n## Definition\n\n**(a) Framework data.** Adopt the framework postulates and units of clause (a)\nof [[def-nrqm-potentials-one-dimensional-line-model]], and the vocabulary of\nits clauses (b)-(f): the effective one-dimensional state space, the position\nand momentum assignments, the assigned energy operator $H_{V}=H_{0}^{\\mathrm{lin}}+M_{V}$\nfor a real bounded measurable potential, bound states, stationary solutions\nand declared generalized stationary solutions. Fix $m>0$, $\\hbar>0$ and the\nunits of [[def-nrqm-framework-quantities-and-units]].\n\n**(b) Dirichlet interval model.** Fix $0<L<\\infty$ and a real $V\\in\nC([0,L];\\mathbb R)$, read as a potential energy in joules, and put\n$\\tilde V:=(2m/\\hbar^{2})V$, a real continuous function on $[0,L]$ with the\ndimension of an inverse square length under the conventions of the framework;\nthe factor $2m/\\hbar^{2}$ has unit $\\mathrm{J^{-1}\\,m^{-2}}$, so the products\nin clause (c) of the next item are dimensionally consistent. The **Dirichlet\ninterval model** declares the state space $L^{2}(0,L;\\mathbb C)$ of\nalmost-everywhere classes with the pairing linear in the first argument\n([[def-nrqm-intervals-hilbert-sobolev-spaces]]) and the assigned energy\noperator\n$$H_{D,V}:=-\\frac{\\hbar^{2}}{2m}D^{2}+M_{V},\\qquad D(H_{D,V}):=\\{u\\in H^{2}(0,L):u^{*}(0)=u^{*}(L)=0\\},$$\nwhere $D^{2}$ is the second weak derivative and $u^{*}$ the continuous\nrepresentative of [[lem-nrqm-intervals-weak-derivative-ac-representative]]; in\nthe notation of [[thm-nrqm-intervals-dirichlet-diagonal-domain-identification]]\nthis operator is $(\\hbar^{2}/2m)(A_{D}+M_{\\tilde V})$ with\n$D(A_{D})=\\{u\\in H^{2}(0,L):u^{*}(0)=u^{*}(L)=0\\}$, and for $V=0$ its\ndeclared free eigenpairs are the pairs\n$\\bigl(\\frac{\\hbar^{2}}{2m}(\\frac{n\\pi}{L})^{2},\\,e_{n}\\bigr)$ with\n$e_{n}(x)=\\sqrt{2/L}\\,\\sin(n\\pi x/L)$, $n\\ge1$, read from\n[[thm-nrqm-intervals-dirichlet-diagonal-domain-identification]] and\n[[thm-nrqm-intervals-sine-on-completeness]]. The vanishing endpoint condition\nis a declared idealization of an infinitely high wall at each endpoint; the\npair does not derive it from the line model, and no reflection coefficient or\nwall model of a material system is asserted.\n\n**(c) Robin interval model.** Fix $0<L<\\infty$, real $\\alpha,\\beta$, read as\n**declared boundary parameters** in $\\mathrm{m^{-1}}$, a real $V\\in\nC([0,L];\\mathbb R)$ and $\\tilde V:=(2m/\\hbar^{2})V$ as in (b). The **Robin\ninterval model** declares the state space $L^{2}(0,L;\\mathbb C)$ and the\nassigned energy operator\n$$H_{\\alpha\\beta,V}:=-\\frac{\\hbar^{2}}{2m}D^{2}+M_{V},\\qquad D(H_{\\alpha\\beta,V}):=\\{u\\in H^{2}(0,L):u'^{*}(0)=\\alpha u^{*}(0),\\ u'^{*}(L)=\\beta u^{*}(L)\\},$$\nthe operator $(\\hbar^{2}/2m)\\,A$ of\n[[thm-nrqm-intervals-separated-robin-green-resolvent]] with potential\n$\\tilde V$; the boundary parameters are declared model parameters, not derived\nquantities, and no physical interpretation of a particular value of $\\alpha$\nor $\\beta$ is asserted. The Dirichlet model of (b) is not the limit\n$\\alpha,\\beta\\to\\infty$ in this definition; the Dirichlet condition is a\nseparate declared boundary condition.\n\n**(d) Zero-range (delta) interface model.** Fix a real **coupling** $g$, read\nin joule metres, and put $\\alpha_{g}:=2mg/\\hbar^{2}$, a real number in\n$\\mathrm{m^{-1}}$. Let $A_{\\alpha_{g}}$ be the delta interface operator of\n[[thm-nrqm-intervals-delta-interface-operator]] on\n$L^{2}(\\mathbb R;\\mathbb C)$,\n$$D(A_{\\alpha_{g}})=\\{u\\in H^{1}(\\mathbb R):u|_{(0,\\infty)},u|_{(-\\infty,0)}\\in H^{2},\\ u'^{*}(0+)-u'^{*}(0-)=\\alpha_{g}u^{*}(0)\\},\\qquad A_{\\alpha_{g}}u=-D^{2}u,$$\nand declare the **zero-range model** with coupling $g$ to be the model whose\nassigned energy operator is\n$$H_{g}:=\\frac{\\hbar^{2}}{2m}\\,A_{\\alpha_{g}},\\qquad D(H_{g}):=D(A_{\\alpha_{g}}).$$\nThe interface condition $u'^{*}(0+)-u'^{*}(0-)=(2mg/\\hbar^{2})u^{*}(0)$ is the\ndeclared realization of a zero-range interaction at the origin: the pair reads\nit as the model counterpart of a formally written term $g\\,\\delta(x)$ in the\nenergy expression, while recording that $\\delta$ is not a function and that\nthe model is defined by the interface condition and not by an $L^{2}$\npotential. The scaling of the operator is $(\\hbar^{2}/2m)$ times the\nmathematical operator, by the conventions of clause (c) of\n[[def-nrqm-potentials-one-dimensional-line-model]]. No identification of a\nconcrete impurity or material with the model is asserted.\n\n**(e) Units, scope and status.** All three assignments are declared energy\noperators with the joule as declared unit; the self-adjointness, spectra and\neigenbases of $H_{D,V}$, $H_{\\alpha\\beta,V}$ and $H_{g}$ are established by\nthe interval-spectra theorem and the zero-range bound-state theorem of this\npage, and are not presupposed here. The boundary conditions, boundary parameters and coupling\nare declared assumptions of the pair; nothing in this definition asserts that\na laboratory system realizes them, and no count, rate or measured value is\nrecorded.\n",
+    "strategy": "n/a",
+    "deps": [
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "post-nrqm-framework-identical-particles-and-spin",
+     "post-nrqm-framework-preparation-and-apparatus",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-intervals-hilbert-sobolev-spaces",
+     "lem-nrqm-intervals-weak-derivative-ac-representative",
+     "thm-nrqm-intervals-dirichlet-diagonal-domain-identification",
+     "thm-nrqm-intervals-sine-on-completeness",
+     "thm-nrqm-intervals-separated-robin-green-resolvent",
+     "thm-nrqm-intervals-delta-interface-operator",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+     "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+     "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "formulation-prerequisite",
+     "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+     "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+     "lem-nrqm-intervals-weak-derivative-ac-representative": "mathematical-premise",
+     "thm-nrqm-intervals-dirichlet-diagonal-domain-identification": "mathematical-premise",
+     "thm-nrqm-intervals-sine-on-completeness": "mathematical-premise",
+     "thm-nrqm-intervals-separated-robin-green-resolvent": "mathematical-premise",
+     "thm-nrqm-intervals-delta-interface-operator": "mathematical-premise",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "not-applicable"
+    },
+    "dependency_level": 10,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.1.2 printed pages 24-27 (PDF pages 27-30): the infinite potential well, its boundary conditions and its spectrum; Section 2.3.2 printed pages 48-49 (PDF pages 51-52): the delta-function potential, its matching condition and its bound state",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1 printed pages 75-79 (PDF pages 83-87): the square potential well with matching conditions and bound-state spectrum",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 9.1-9.2, printed pages 181-195 (PDF pages 193-207): Sturm-Liouville operators on intervals and separated self-adjoint boundary conditions (Theorem 9.6), with the Dirichlet condition as the case alpha=0 (eqs. (9.22)-(9.25)); PDF page = printed page + 12",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The pair's declared confined and point-interaction models of the effective one-dimensional massive particle: the interval model with Dirichlet endpoint conditions, the interval model with separated Robin endpoint conditions with declared real boundary parameters, and the zero-range (delta) interface model with a declared real coupling. The boundary conditions, boundary parameters and coupling are additional model assumptions of the pair; they are not derived from the line model, from P5 or from any material system, and no experiment, count or measured value is asserted. The operator assignments are well defined as mathematical operators on their displayed domains; their self-adjointness and spectra are established by the pair's theorems and are not presupposed here."
+   },
+   {
+    "id": "pthm-nrqm-potentials-line-model-energy-and-stationary-states",
+    "kind": "physics-theorem",
+    "domain": "physics",
+    "title": "The line model's energy observable, flow and stationary states",
+    "statement": "\n## Statement\n\nAdopt the state and composition postulate P1, the observable and probability\npostulate P2, the autonomous-dynamics postulate P4 and the kinematics and\nmassive-particle model postulate P5\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), all\nread through the declared effective one-dimensional line model\n[[def-nrqm-potentials-one-dimensional-line-model]] with mass parameter $m>0$\nand spin label $s=0$. Assume the Axiom of Countable Choice and the Axiom of\nChoice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $V:\\mathbb\nR\\to\\mathbb R$ be real, bounded and measurable, let $\\|V\\|_\\infty=\\sup|V|$,\nand let $H_{V}$ be the assigned energy operator of clause (c) of the model,\nwith flow $U(t):=\\exp(-itH_{V}/\\hbar)$ and evolved preparations\n$\\rho(t):=U(t)\\rho(0)U(t)^{*}$ as in\n[[def-nrqm-autonomous-dynamics-framework-evolution]]. Then:\n\n(a) $(H_{V},\\mathrm J)$ is an assigned sharp observable of the model in the\nsense of clause (a) of\n[[def-nrqm-observables-framework-observable-and-outcome-law]]: $H_{V}$ is\ndensely defined and self-adjoint on\n$D(H_{V})=W^{2,2}(\\mathbb R;\\mathbb C)$, bounded below by $-\\|V\\|_\\infty$, and\n$H_{V}f=-\\frac{\\hbar^{2}}{2m}D^{2}f+Vf$ for every $f\\in D(H_{V})$.\n\n(b) *Flow.* The family $t\\mapsto U(t)$ is the model's strongly continuous\none-parameter unitary group of the assigned energy observable; the\nSchroedinger equation $i\\hbar\\frac{d}{dt}\\psi(t)=H_{V}\\psi(t)$ holds in the\nnorm-differentiable sense exactly for initial vectors $\\psi(0)\\in D(H_{V})$,\nand for other vectors the evolution is continuous but the equation is not\nasserted; density preparations evolve as $\\rho(t)=U(t)\\rho(0)U(t)^{*}$ with\n$\\rho(t)$ a density operator for every $t$.\n\n(c) *Stationary states.* For $\\psi\\in H_{\\mathrm{lin}}$, $\\psi\\ne0$, the pure\npreparation $[\\psi]$ is stationary, $[\\psi(t)]=[\\psi(0)]$ for all $t$, if and\nonly if $\\psi$ is an eigenvector of $H_{V}$; in that case, with eigenvalue\n$E$, one has $\\psi(t)=e^{-itE/\\hbar}\\psi(0)$, the energy outcome law is\ntime-independent, and if $\\|\\psi\\|=1$ the law assigns probability one to the\nsingleton $\\{E\\}$, so the energy mean exists and equals $E$, with second\nmoment $E^{2}$. Moreover every bounded assigned sharp observable compatible\nwith the energy has a time-independent outcome law in every preparation.\n\n(d) *Position reading.* In a unit pure preparation $\\psi$ the declared\nposition assignment of the model has outcome law\n$\\mu^{Q}_{\\psi}(B)=\\int_{B}|\\psi|^{2}dx$ for every Borel $B\\subseteq\\mathbb R$;\nand if $\\psi$ is a unit eigenvector with eigenvalue $E$, the position density\n$|\\psi|^{2}$ and the energy point mass at $E$ coexist as readings of the same\npreparation, of the action of the declared observables, without any joint\nmeasurement claim.\n\n(e) *Scope.* The statement is conditional on P1, P2, P4, P5 and the declared\nline model; it asserts no discrete spectrum or eigenbasis for a general\nbounded measurable $V$, no completeness or scattering statement, no\nidentification of $H_{V}$ with any laboratory Hamiltonian beyond the tested\nidentification allowed by P7, and no empirical result.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+     "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+     "lem-nrqm-potentials-free-operator-differential-identification",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "post-nrqm-framework-state-and-composition": "physical-assumption",
+     "post-nrqm-framework-observable-and-probability": "physical-assumption",
+     "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation": "physical-result",
+     "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+     "lem-nrqm-potentials-free-operator-differential-identification": "mathematical-premise",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 10,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 2.1 and 3.2, printed pages 20-30 and 66-75 (PDF pages 23-33 and 69-78): the time-independent Schroedinger equation, eigenfunctions and their energies",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1 printed pages 55-58 (PDF pages 67-70): the Schroedinger operator as a self-adjoint operator and the domain-qualified equation; Section 5.1 printed pages 123-126 (PDF pages 135-138): Stone's theorem and the time evolution",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The line model of the pair for a spinless massive particle with a real bounded measurable potential: the fact that its declared energy operator is an assigned sharp observable, generates the model's unitary flow, and that its stationary preparations are exactly the eigenrays with a point-mass energy law. The statement is conditional on P1, P2, P4, P5, the declared effective one-dimensional model and the cited mathematics. It asserts no measured energy, no apparatus, no discrete-spectrum claim for a general bounded potential, no completeness of eigenfunctions and no empirical result."
+   },
+   {
+    "id": "pthm-nrqm-potentials-barrier-flux-and-transmission",
+    "kind": "physics-theorem",
+    "domain": "physics",
+    "title": "Rectangular barrier: scattering solution, flux balance and transmission",
+    "statement": "\n## Statement\n\nAdopt the postulates P1, P2, P4, P5 and the declared line model\n[[def-nrqm-potentials-one-dimensional-line-model]], with $m>0$, $\\hbar>0$ and\nenergy, potential and position read in the units of\n[[def-nrqm-framework-quantities-and-units]]. Assume the Axiom of Countable\nChoice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Fix $a>0$, $U>E>0$ and let\n$$V(x):=\\begin{cases}U,&0<x<a,\\\\ 0&\\text{otherwise},\\end{cases}$$\nlet $k:=\\sqrt{2mE}/\\hbar$, $\\kappa:=\\sqrt{2m(U-E)}/\\hbar$, and consider the\ndeclared generalized stationary solutions of the model at energy $E$ (clause\n(e) of the model) that are bounded, classically $C^{1}$ on $\\mathbb R$ and\n$C^{2}$ on each of $(-\\infty,0),(0,a),(a,\\infty)$. Then:\n\n(a) *Scattering solution.* There is exactly one such $\\psi$ with the\n*transmission asymptotics*: $\\psi(x)=e^{ikx}+re^{-ikx}$ for $x<0$ and\n$\\psi(x)=te^{ikx}$ for $x>a$, with uniquely determined $r,t\\in\\mathbb C$; with\n$D:=2\\cosh(\\kappa a)+i\\bigl(\\frac{\\kappa}{k}-\\frac{k}{\\kappa}\\bigr)\\sinh(\\kappa a)$\none has $t=2e^{-ika}/D$, and\n$$T:=|t|^{2}=\\Bigl[1+\\frac{U^{2}\\sinh^{2}(\\kappa a)}{4E(U-E)}\\Bigr]^{-1},\\qquad R:=|r|^{2}=1-T .$$\n\n(b) *Conserved current and flux balance.* The declared probability current\n$j(x):=\\frac{\\hbar}{m}\\operatorname{Im}\\bigl(\\overline{\\psi(x)}\\psi'(x)\\bigr)$\nof the scattering solution is constant on $\\mathbb R$, equal to\n$\\frac{\\hbar k}{m}(1-|r|^{2})=\\frac{\\hbar k}{m}|t|^{2}$. With the **reference\ncurrent** $j_{\\mathrm{in}}:=\\frac{\\hbar k}{m}$ of the unit-amplitude incoming\nterm $x\\mapsto e^{ikx}$, the transmitted right-going current equals\n$T\\,j_{\\mathrm{in}}$, the reflected left-going current has magnitude\n$R\\,j_{\\mathrm{in}}$, and\n$$T+R=1 .$$\nThe pair reads $T$ and $R$ as the transmitted and reflected fractions of the\nreference current of the declared scattering solution; this reading is part of\nthe model and is not a measurement.\n\n(c) *Thick-barrier form and error.* With $q:=e^{-2\\kappa a}$ and\n$C:=U^{2}/\\bigl(4E(U-E)\\bigr)$ one has\n$$T=\\frac{(4/C)\\,q}{1+\\bigl(\\tfrac4C-2\\bigr)q+q^{2}};$$\nconsequently, whenever $\\delta:=\\bigl(\\tfrac4C-2\\bigr)q+q^{2}$ satisfies\n$|\\delta|\\le\\frac12$,\n$$\\Bigl|T-\\frac{16E(U-E)}{U^{2}}\\,q\\Bigr|\\le\\frac{32E(U-E)}{U^{2}}\\,q\\,|\\delta| .$$\n\n(d) *Scope.* The scattering solution $\\psi$ is a declared generalized\nstationary solution, not an element of $L^{2}(\\mathbb R;\\mathbb C)$; it is not\na preparation of the model, and no Born probability is read from it. The\nnumbers $T,R$ are exact model quantities of the declared solution, read as\nratios of currents under the model's scattering reading; the statement\ncontains no wave-packet construction, no time-dependent limit, no detector\nresponse and no measured count, and it asserts neither that a particle passes\nthrough the barrier nor that it is reflected.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "lem-nrqm-potentials-one-dimensional-flux-identity",
+     "thm-nrqm-intervals-barrier-transfer-and-thick-limit-error",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "post-nrqm-framework-state-and-composition": "physical-assumption",
+     "post-nrqm-framework-observable-and-probability": "physical-assumption",
+     "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "lem-nrqm-potentials-one-dimensional-flux-identity": "mathematical-premise",
+     "thm-nrqm-intervals-barrier-transfer-and-thick-limit-error": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 10,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.4.2, printed pages 60-63 (PDF pages 63-66): tunnelling through a finite potential barrier, the matching calculation and the transmission probability",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.3, printed pages 84-89 (PDF pages 92-97): scattering of free particles, incoming and outgoing amplitudes, reflection and transmission, and tunnelling through a potential barrier",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 9.6-9.7, printed pages 209-220 (PDF pages 221-232): spectral transformations and the spectra of one-dimensional Schroedinger operators; PDF page = printed page + 12",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The line model of the pair with the declared rectangular barrier of height U and width a, in the scattering reading of the model: the unique bounded piecewise-classical stationary solution with prescribed asymptotics, its conserved probability current, the exact transmission and reflection coefficients with the flux balance T+R=1, the identification of T and R with ratios of the transmitted and reflected currents to the reference current of the unit-amplitude incoming term, and the thick-barrier error bound. The scattering solution is a declared generalized stationary solution and not an element of the model state space; the statement is conditional on P1, P2, P4, P5, the declared barrier data and the cited mathematics, and asserts no wave-packet dynamics, no detector, no count and no empirical result."
+   },
+   {
+    "id": "pthm-nrqm-potentials-finite-well-bound-states",
+    "kind": "physics-theorem",
+    "domain": "physics",
+    "title": "Finite square well: bound-state conditions, simplicity and count",
+    "statement": "\n## Statement\n\nAdopt the postulates P1, P2, P4, P5 and the declared line model\n[[def-nrqm-potentials-one-dimensional-line-model]] with mass parameter $m>0$\nand spin label $s=0$, and assume the Axiom of Countable Choice and the Axiom\nof Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Fix $a>0$,\n$U>0$ and let\n$$V(x):=\\begin{cases}-U,&|x|<a,\\\\ 0,&|x|>a,\\end{cases}$$\nread in joules, with $U$ in joules and $a$ in metres; let $H_{\\mathrm w}$ be\nthe assigned energy operator of the line model with this potential, so that by\n[[lem-nrqm-potentials-free-operator-differential-identification]]\n$D(H_{\\mathrm w})=H^{2}(\\mathbb R;\\mathbb C)$ and\n$H_{\\mathrm w}\\psi=-\\frac{\\hbar^{2}}{2m}\\psi''+V\\psi$; finally put\n$K:=\\sqrt{2mU}/\\hbar$. Then:\n\n(a) $(H_{\\mathrm w},\\mathrm J)$ is an assigned sharp observable; $H_{\\mathrm\nw}$ is self-adjoint on $H^{2}(\\mathbb R;\\mathbb C)$ and bounded below.\n\n(b) *Bound-state conditions.* For $E<0$ with $-U<E<0$ write\n$\\varepsilon:=-E$, $\\kappa:=\\sqrt{2m\\varepsilon}/\\hbar>0$ and\n$k:=\\sqrt{2m(U-\\varepsilon)}/\\hbar>0$, so that $k^{2}+\\kappa^{2}=K^{2}$. Then\n$E$ is an eigenvalue of $H_{\\mathrm w}$ if and only if\n$$k\\tan(ka)=\\kappa\\qquad\\text{(even case)}\\qquad\\text{or}\\qquad -k\\cot(ka)=\\kappa\\qquad\\text{(odd case)} .$$\nEvery such eigenvalue is simple; its eigenfunction is, up to a nonzero scalar,\n$x\\mapsto\\cos(kx)$ on $(-a,a)$ continued by $ce^{-\\kappa|x|}$ outside in the\neven case, and $x\\mapsto\\sin(kx)$ on $(-a,a)$ continued by\n$c\\,\\operatorname{sgn}(x)e^{-\\kappa|x|}$ outside in the odd case. No $E\\le-U$\nand no $E\\ge0$ is an eigenvalue, so every eigenvalue of $H_{\\mathrm w}$ lies in\n$(-U,0)$; the bound-state energies of the model are exactly these eigenvalues,\nand each bound state is stationary with energy equal to its eigenvalue.\n\n(c) *Count.* The number of negative eigenvalues of $H_{\\mathrm w}$ equals\n$\\bigl\\lceil 2aK/\\pi\\bigr\\rceil$; more precisely, the equations of (b) have\nexactly one solution $k$ in each interval\n$\\bigl(\\frac{n\\pi}{2a},\\frac{(n+1)\\pi}{2a}\\bigr)$, $n\\ge0$, whose left\nendpoint satisfies $\\frac{n\\pi}{2a}<K$, and no solution in $(0,K)$ elsewhere,\nand the solutions are alternatively of even type ($n$ even) and odd type\n($n$ odd). In particular $H_{\\mathrm w}$ has at least one bound state for all\n$a,U>0$.\n\n(d) *Scope.* The statement is conditional on P1, P2, P4, P5, the declared well\ndata $a,U$ and the cited mathematics; the energies are read in joules when\n$a$ is in metres, $U$ in joules and $\\hbar$ in $\\mathrm{J\\,s}$. No material\nwell, impurity or measured spectrum is identified with the model, and no\nempirical result is asserted.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states",
+     "lem-nrqm-potentials-free-operator-differential-identification",
+     "thm-nrqm-intervals-finite-well-root-conditions-and-bound-count",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "post-nrqm-framework-state-and-composition": "physical-assumption",
+     "post-nrqm-framework-observable-and-probability": "physical-assumption",
+     "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states": "physical-result",
+     "lem-nrqm-potentials-free-operator-differential-identification": "mathematical-premise",
+     "thm-nrqm-intervals-finite-well-root-conditions-and-bound-count": "mathematical-premise",
+     "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 11,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.3.1, printed pages 42-48 (PDF pages 45-51): the finite potential well, matching conditions, parity, the even and odd root conditions and the finite number of bound states",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1, printed pages 75-79 (PDF pages 83-87): the square potential well, its parity decomposition, the condition k tan(ka)=K and the bound-state count",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.7, printed pages 214-220 (PDF pages 226-232): the spectra of one-dimensional Schroedinger operators, the essential spectrum [0,infinity) for decaying potentials (Lemma 9.35) and the Sturm nodal count below the essential spectrum (Theorem 9.40); PDF page = printed page + 12",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The line model of the pair with the declared finite square well potential of depth U and half-width a: self-adjointness and boundedness of the assigned energy operator, the exact root conditions for its negative eigenvalues, the absence of eigenvalues outside the interval (-U,0), the simplicity and parity of the bound states, the bound-state count, and the stationary-state reading of the eigenpairs. The statement is conditional on P1, P2, P4, P5, the declared potential data and the cited mathematics; it asserts no measured spectrum, no material well and no empirical result."
+   },
+   {
+    "id": "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes",
+    "kind": "physics-theorem",
+    "domain": "physics",
+    "title": "Interval models: discrete spectra, complete eigenbases, min-max bounds and nodal counts",
+    "statement": "\n## Statement\n\nAdopt the state and composition postulate P1, the observable and probability\npostulate P2, the autonomous-dynamics postulate P4 and the kinematics and\nmassive-particle model postulate P5\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), read\nthrough the declared interval models\n[[def-nrqm-potentials-interval-and-delta-models]] with $0<L<\\infty$,\n$m>0$, $\\hbar>0$, and assume the Axiom of Countable Choice and the Axiom of\nChoice ([[def-countable-choice]], [[def-axiom-of-choice]]). For a real\n$V\\in C([0,L];\\mathbb R)$ put $\\tilde V:=(2m/\\hbar^{2})V$, so that the assigned\nenergy operators of the definition satisfy\n$H_{D,V}=(\\hbar^{2}/2m)(A_{D}+M_{\\tilde V})$ and\n$H_{\\alpha\\beta,V}=(\\hbar^{2}/2m)A_{\\alpha\\beta,\\tilde V}$. Then:\n\n(a) *Dirichlet interval model.* $(H_{D,V},\\mathrm J)$ is an assigned sharp\nobservable; $H_{D,V}$ is self-adjoint with compact resolvent and has a complete\northonormal family $(\\psi_{n})_{n\\ge1}$ of eigenvectors. Its eigenvalues,\nlisted with multiplicity, form a sequence\n$\\mathcal E_{1}\\le\\mathcal E_{2}\\le\\cdots$ with\n$\\mathcal E_{n}\\to\\infty$ and\n$\\sigma(H_{D,V})=\\{\\mathcal E_{n}:n\\ge1\\}$, and no other spectral points; each\neigenspace is one-dimensional, so the list is strict,\n$\\mathcal E_{1}<\\mathcal E_{2}<\\cdots$, and the eigenvector belonging to\n$\\mathcal E_{n}$ has exactly $n-1$ zeros in $(0,L)$. The min-max comparison\n$$\\Bigl|\\mathcal E_{n}-\\frac{\\hbar^{2}\\pi^{2}n^{2}}{2mL^{2}}\\Bigr| \\le\\|V\\|_{\\infty}\\qquad(n\\ge1)$$\nholds. If $V=0$, the eigenpairs of $H_{D,0}$ are exactly the pairs\n$\\bigl(\\frac{\\hbar^{2}\\pi^{2}n^{2}}{2mL^{2}},\\,e_{n}\\bigr)$ with\n$e_{n}(x)=\\sqrt{2/L}\\,\\sin(n\\pi x/L)$, $n\\ge1$, a complete orthonormal family of\n$L^{2}(0,L;\\mathbb C)$.\n\n(b) *Robin interval model.* For real $\\alpha,\\beta$ (the declared boundary\nparameters in $\\mathrm{m^{-1}}$), $(H_{\\alpha\\beta,V},\\mathrm J)$ is an\nassigned sharp observable; $H_{\\alpha\\beta,V}$ is self-adjoint with compact\nresolvent; it has a complete orthonormal eigenfamily, every eigenspace is\none-dimensional, its spectrum consists exactly of its eigenvalues, which can\nbe listed strictly increasingly as $\\mathcal E_{1}<\\mathcal E_{2}<\\cdots$ with\n$\\mathcal E_{n}\\to\\infty$, and its essential spectrum is empty. With\n$\\lambda_{n}:=2m\\mathcal E_{n}/\\hbar^{2}$ and $u_{a}(\\cdot,\\lambda)$ the unique\n$C^{2}$ solution of $-u''+\\tilde Vu=\\lambda u$ with $u(0)=1$, $u'(0)=\\alpha$,\none has $u_{a}(L,\\lambda_{n})\\ne0$ and\n$$\\beta=\\frac{u_{a}'(L,\\lambda_{n})}{u_{a}(L,\\lambda_{n})}\\qquad(n\\ge1).$$\n\n(c) *Scope.* The statement is conditional on P1, P2, P4, P5, on the declared\nboundary conditions and on the cited mathematics. The boundary conditions and\nparameters are declared model assumptions; the eigenvalues are read in joules\nwhen $V$ and $\\hbar$ enter in the units of\n[[def-nrqm-framework-quantities-and-units]]. No laboratory wall, box or\nsurface is identified with the boundary conditions, no measured spectrum is\nasserted, and no completeness of any continuum or scattering object is\nclaimed.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-nrqm-potentials-interval-and-delta-models",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+     "def-nrqm-intervals-hilbert-sobolev-spaces",
+     "thm-nrqm-intervals-bounded-interval-perturbation-compact-resolvent",
+     "thm-nrqm-intervals-dirichlet-diagonal-domain-identification",
+     "thm-nrqm-intervals-dirichlet-nodal-theorem",
+     "thm-nrqm-intervals-robin-simple-complete-spectrum",
+     "thm-nrqm-intervals-separated-robin-green-resolvent",
+     "thm-nrqm-intervals-sine-on-completeness",
+     "lem-nrqm-intervals-compact-resolvent-eigenbasis",
+     "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-nrqm-potentials-interval-and-delta-models": "formulation-prerequisite",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "post-nrqm-framework-state-and-composition": "physical-assumption",
+     "post-nrqm-framework-observable-and-probability": "physical-assumption",
+     "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+     "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+     "thm-nrqm-intervals-bounded-interval-perturbation-compact-resolvent": "mathematical-premise",
+     "thm-nrqm-intervals-dirichlet-diagonal-domain-identification": "mathematical-premise",
+     "thm-nrqm-intervals-dirichlet-nodal-theorem": "mathematical-premise",
+     "thm-nrqm-intervals-robin-simple-complete-spectrum": "mathematical-premise",
+     "thm-nrqm-intervals-separated-robin-green-resolvent": "mathematical-premise",
+     "thm-nrqm-intervals-sine-on-completeness": "mathematical-premise",
+     "lem-nrqm-intervals-compact-resolvent-eigenbasis": "mathematical-premise",
+     "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 11,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.1.2, printed pages 24-27 (PDF pages 27-30): the infinite potential well, its boundary conditions, eigenfunctions and quantized energies",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 9.1, 9.2 and 9.7, printed pages 181-195 and 214-220 (PDF pages 193-207 and 226-232): Sturm-Liouville operators, separated self-adjoint boundary conditions (Theorem 9.6) and Sturm oscillation with the nodal count (Theorems 9.39-9.40); PDF page = printed page + 12",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1, printed pages 75-79 (PDF pages 83-87): the square potential well, its parity decomposition and its discrete bound states",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The declared confined interval models of the pair with Dirichlet and separated Robin boundary conditions and a real continuous potential on the interval: self-adjointness of the assigned energy operators, discrete spectra with complete orthonormal eigenbases, the min-max comparison of the Dirichlet energies with the free box energies, simplicity of the eigenvalues, the nodal counts of the Dirichlet eigenfunctions, and the Robin eigenvalue condition. The statement is conditional on P1, P2, P4, P5, the declared boundary conditions and the cited mathematics; it asserts no laboratory realisation of a box or wall, no measured spectrum and no empirical result."
+   },
+   {
+    "id": "pthm-nrqm-potentials-delta-point-interaction-bound-state",
+    "kind": "physics-theorem",
+    "domain": "physics",
+    "title": "The zero-range (delta) model: self-adjointness and its unique bound state",
+    "statement": "\n## Statement\n\nAdopt the postulates P1, P2, P4, P5, the declared line model\n[[def-nrqm-potentials-one-dimensional-line-model]] and the declared zero-range\nmodel of [[def-nrqm-potentials-interval-and-delta-models]] clause (d) with\nmass parameter $m>0$, spin label $s=0$, coupling $g\\in\\mathbb R$ (in joule\nmetres) and $\\alpha_{g}=2mg/\\hbar^{2}$. Let\n$H_{g}=(\\hbar^{2}/2m)A_{\\alpha_{g}}$ be the assigned energy operator of the\nzero-range model on the domain $D(H_{g})=D(A_{\\alpha_{g}})$ of the interface\noperator. Assume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Then:\n\n(a) $D(H_{g})$ consists exactly of the classes $u\\in H^{1}(\\mathbb R)$ whose\nrestrictions to $(0,\\infty)$ and $(-\\infty,0)$ are of class $H^{2}$, subject to\nthe interface condition\n$$u'^{*}(0+)-u'^{*}(0-)=\\frac{2mg}{\\hbar^{2}}\\,u^{*}(0),$$\nand $H_{g}u=-\\frac{\\hbar^{2}}{2m}D^{2}u$ on that domain. $(H_{g},\\mathrm J)$ is\nan assigned sharp observable: $H_{g}$ is densely defined and self-adjoint on\n$D(H_{g})$.\n\n(b) *Repulsive and free couplings.* If $g\\ge0$, then $H_{g}$ has no negative\neigenvalue, and for every $g\\in\\mathbb R$ the value $0$ is not an eigenvalue of\n$H_{g}$.\n\n(c) *Attractive coupling.* If $g<0$, then $H_{g}$ has exactly one negative\neigenvalue, namely\n$$E_{g}=-\\frac{mg^{2}}{2\\hbar^{2}}<0,$$\nand its eigenspace is one-dimensional, spanned by the unit class\n$$\\psi_{g}(x)=\\sqrt{\\frac{m|g|}{\\hbar^{2}}}\\;\\exp\\!\\Bigl(-\\frac{m|g|}{\\hbar^{2}}|x|\\Bigr).$$\nThis eigenpair is the unique bound state of the zero-range model: every\neigenvector of $H_{g}$ with negative eigenvalue is a nonzero multiple of\n$\\psi_{g}$, the preparation $[\\psi_{g}]$ is stationary with energy $E_{g}$, and\nthe energy outcome law assigns probability one to $\\{E_{g}\\}$.\n\n(d) *Scope.* The statement is conditional on P1, P2, P4, P5, the declared\ninterface realization and the cited mathematics; the coupling $g$ is a\ndeclared model parameter, not a measured quantity. No scattering coefficient,\nno transmission or reflection statement, no material impurity and no measured\nspectrum is asserted; the formal writing $g\\,\\delta(x)$ is not used as a\nfunction and no potential in $L^{2}$ is involved.\n",
+    "strategy": "direct",
+    "deps": [
+     "def-nrqm-potentials-interval-and-delta-models",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "post-nrqm-framework-state-and-composition",
+     "post-nrqm-framework-observable-and-probability",
+     "post-nrqm-framework-autonomous-dynamics",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+     "def-nrqm-framework-quantities-and-units",
+     "def-nrqm-observables-framework-observable-and-outcome-law",
+     "def-nrqm-autonomous-dynamics-framework-evolution",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+     "thm-nrqm-intervals-delta-interface-operator",
+     "thm-nrqm-intervals-delta-unique-bound-state",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "def-nrqm-potentials-interval-and-delta-models": "formulation-prerequisite",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "post-nrqm-framework-state-and-composition": "physical-assumption",
+     "post-nrqm-framework-observable-and-probability": "physical-assumption",
+     "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+     "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+     "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states": "physical-result",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+     "thm-nrqm-intervals-delta-interface-operator": "mathematical-premise",
+     "thm-nrqm-intervals-delta-unique-bound-state": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 11,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.3.2, printed pages 48-49 (PDF pages 51-52): the delta-function potential, the derivative jump condition, the single bound state and its energy",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1, printed pages 78-79 (PDF pages 86-87): the infinitely narrow well limit of a square well and its single bound state",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "The pair's declared zero-range model of the effective one-dimensional massive particle with coupling g: the domain and self-adjointness of the assigned energy operator defined by the interface condition, the absence of negative eigenvalues for non-attractive coupling, and the unique normalized bound state with its exact energy and eigenfunction for attractive coupling. The statement is conditional on P1, P2, P4, P5, the declared interface model and the cited mathematics; it asserts no scattering coefficient, no material impurity, no measured spectrum and no empirical result."
+   },
+   {
+    "id": "rem-nrqm-potentials-scope-and-idealizations",
+    "kind": "remark",
+    "domain": "physics",
+    "title": "What the one-dimensional potentials page establishes, assumes and defers",
+    "statement": "\n## Scope of the page\n\n**What is established.** The page fixes a declared effective one-dimensional\nmodel of a spinless massive particle\n([[def-nrqm-potentials-one-dimensional-line-model]]) and proves, as\nconditional consequences of P1, P2, P4, P5 and the cited mathematics, the\nfollowing statements. The mathematical lemmas\n[[lem-nrqm-potentials-free-operator-differential-identification]] and\n[[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] identify the\nfree operator with the weak second-derivative operator and transfer\nself-adjointness, resolvents, spectra and eigenfamilies along positive\nscaling; [[lem-nrqm-potentials-one-dimensional-flux-identity]] proves the\none-dimensional continuity identity and the constancy of the current of a\nstationary solution.\n[[pthm-nrqm-potentials-line-model-energy-and-stationary-states]] establishes\nthat the declared energy operator of the line model with a real bounded\nmeasurable potential is an assigned sharp observable, generates the unitary\nflow of the model, and that its stationary preparations are exactly the\neigenrays with point-mass energy law.\n[[pthm-nrqm-potentials-interval-spectra-completeness-and-nodes]] establishes,\nfor the declared Dirichlet and separated Robin interval models with continuous\nreal potentials, self-adjointness with compact resolvent, complete\northonormal eigenbases, discreteness and simplicity of the spectra, the\nmin-max comparison of the Dirichlet energies with the free box energies and\nthe nodal counts, together with the Robin eigenvalue condition.\n[[pthm-nrqm-potentials-finite-well-bound-states]] gives the exact root\nconditions, simplicity, parity and count of the bound states of the finite\nsquare well, and\n[[pthm-nrqm-potentials-delta-point-interaction-bound-state]] gives the\nself-adjointness of the declared zero-range interface operator and its unique\nbound state for attractive coupling with the exact energy\n$-mg^{2}/(2\\hbar^{2})$. [[pthm-nrqm-potentials-barrier-flux-and-transmission]]\ngives the unique scattering solution of the rectangular barrier, its conserved\ncurrent, the exact coefficients $T$ and $R$, the flux balance $T+R=1$, the\nreading of $T$ and $R$ as fractions of the reference current, and the\nthick-barrier error bound.\n\n**What is assumed, not derived.** The page's model data are declared, not\nderived: the reduction of the three-dimensional massive-particle model to one\nspatial dimension, the position and momentum assignments of the line model,\nthe Dirichlet and Robin boundary conditions with their boundary parameters,\nthe zero-range interface condition with its coupling, and the scattering\nreading of the current ratios. Each is an assumption of the pair in the sense\nof the preparation and apparatus discipline P7; an identification of a\nconcrete material system with any of them is a tested identification with\nuncertainty and is not produced by these items. The operators rest on the\nmathematical supplier [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nand on the interval and contact mathematics of\n[[def-nrqm-intervals-hilbert-sobolev-spaces]] and the items of the intervals\npair, whose Axiom of Choice and Countable Choice hypotheses are inherited by\nevery consumer above.\n\n**What is not addressed.** No wave-packet or time-dependent scattering limit\nis computed; no arrival-time, detector-response, efficiency or background\nmodel is declared; no count, rate, cross-section or measured spectrum appears.\nThe scattering solution of the barrier item is not an element of the model\nstate space, so no Born probability is read from it. Potentials with\nunbounded or singular growth, the harmonic oscillator, the Coulomb problem,\nhigher-dimensional scattering, resonant and above-barrier behaviour, and the\nAiry/WKB connection problem for smooth barriers belong to other pages of the\ncategory and are not consumed or anticipated here. The example page of the\npair carries exact finite checks of the barrier and well formulas; those are\nmodel computations, not measurements.\n\n**Evidence status.** The page is a conditional model development. It contains\nno experiment, no reported observation, no uncertainty statement and no\nstatistical inference; agreement of any of its formulas with data would be\nevidence about the combined model, apparatus and analysis assumptions and\nwould not prove the model.\n",
+    "strategy": "n/a",
+    "deps": [
+     "lem-nrqm-potentials-one-dimensional-flux-identity",
+     "lem-nrqm-potentials-free-operator-differential-identification",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "def-nrqm-potentials-interval-and-delta-models",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states",
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes",
+     "pthm-nrqm-potentials-finite-well-bound-states",
+     "pthm-nrqm-potentials-delta-point-interaction-bound-state",
+     "pthm-nrqm-potentials-barrier-flux-and-transmission"
+    ],
+    "dependency_roles": {
+     "lem-nrqm-potentials-one-dimensional-flux-identity": "mathematical-premise",
+     "lem-nrqm-potentials-free-operator-differential-identification": "mathematical-premise",
+     "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators": "mathematical-premise",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "def-nrqm-potentials-interval-and-delta-models": "formulation-prerequisite",
+     "pthm-nrqm-potentials-line-model-energy-and-stationary-states": "physical-result",
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes": "physical-result",
+     "pthm-nrqm-potentials-finite-well-bound-states": "physical-result",
+     "pthm-nrqm-potentials-delta-point-interaction-bound-state": "physical-result",
+     "pthm-nrqm-potentials-barrier-flux-and-transmission": "physical-result"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "not-applicable"
+    },
+    "dependency_level": 12,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Chapter 2, printed pages 19-63 (PDF pages 22-66): one-dimensional potentials, bound states, scattering and tunnelling",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 5, printed pages 75-103 (PDF pages 83-111): motion in step potentials, wells, barriers and scattering",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "Scope of the one-dimensional potentials page: the declared effective line model, its operator construction, the interval and zero-range models, the finite-well and barrier results, the flux reading and the empirical status of the page. The remark asserts no new physical result, records no measurement, and makes no claim about nature."
+   }
+  ]
+ },
+ {
+  "order": 182,
+  "id": "qm-one-dimensional-potentials-examples",
+  "kind": "B",
+  "category": "non-relativistic-quantum-mechanics",
+  "library": "physics",
+  "title": "Qm One Dimensional Potentials — Examples",
+  "companion": "qm-one-dimensional-potentials",
+  "requires": [
+   "qm-one-dimensional-potentials"
+  ],
+  "items": [
+   {
+    "id": "ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit",
+    "kind": "example",
+    "domain": "physics",
+    "title": "Tunnelling through a rectangular barrier: an exactly solvable scaling and its thick-barrier comparison",
+    "statement": "\n## Example\n\nWork in the declared line model\n[[def-nrqm-potentials-one-dimensional-line-model]] with mass parameter $m>0$,\naction constant $\\hbar>0$, and lengths, energies and currents read in the\nunits of [[def-nrqm-framework-quantities-and-units]]. Declare the incident\nenergy $E>0$ and the barrier height $U:=2E$, so that\n$\\kappa:=\\sqrt{2m(U-E)}/\\hbar=\\sqrt{2mE}/\\hbar=:k$; declare further the barrier\nwidth $a:=\\ln(10)/\\kappa>0$, so that $\\kappa a=\\ln 10$ and\n$e^{\\kappa a}=10$. Consider the scattering solution of\n[[pthm-nrqm-potentials-barrier-flux-and-transmission]] for this barrier and\nset $q:=e^{-2\\kappa a}$. Then, as exact identities in the model:\n\n(i) $C:=U^{2}/(4E(U-E))=1$, $q=1/100$, and\n$$T=\\frac{400}{10201},\\qquad R=1-T=\\frac{9801}{10201};$$\n\n(ii) with rational brackets,\n$$\\frac{3921}{100000}<T<\\frac{3922}{100000},\\qquad \\frac{96078}{100000}<R<\\frac{96079}{100000};$$\n\n(iii) the thick-barrier approximation value is\n$\\frac{16E(U-E)}{U^{2}}q=\\frac{1}{25}$, the exact difference is\n$$T-\\frac{1}{25}=-\\frac{201}{255025},$$\nwhich lies between $-0.000789$ and $-0.000788$, and the error bound of the\ntheorem reads\n$$\\Bigl|T-\\frac1{25}\\Bigr|\\le\\frac{201}{125000}=0.001608 ;$$\n\n(iv) since $q=1/100>0$, the transmission $T$ is positive although the\nbarrier is classically forbidden at this energy; and by clause (b) of the\nbarrier theorem the number $T$ is the transmitted fraction of the reference\ncurrent $j_{\\mathrm{in}}=\\hbar k/m$ of the declared scattering solution, while\n$R$ is the reflected fraction.\n\nThe example is an exact computation in the declared barrier model with\ndeclared data $U,E,a,m,\\hbar$ related as above; it records no measurement and\nno apparatus value.\n",
+    "strategy": "direct",
+    "deps": [
+     "pthm-nrqm-potentials-barrier-flux-and-transmission",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "def-nrqm-framework-quantities-and-units",
+     "def-natural-logarithm",
+     "thm-exponential-addition-formula",
+     "cor-exponential-reciprocal-and-positivity",
+     "def-hyperbolic-functions",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "pthm-nrqm-potentials-barrier-flux-and-transmission": "physical-result",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "def-natural-logarithm": "mathematical-premise",
+     "thm-exponential-addition-formula": "mathematical-premise",
+     "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+     "def-hyperbolic-functions": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 11,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.4.2, printed pages 60-63 (PDF pages 63-66): the barrier matching calculation, the transmission probability and the thick-barrier exponential suppression",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.3, printed pages 87-89 (PDF pages 95-97): tunnelling through a potential barrier",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "A finite check in the declared line model of the pair: the rectangular barrier with height twice the incident energy and a width scaling chosen so that the barrier exponent is the natural logarithm of ten. The example computes the exact transmission and reflection coefficients as rational numbers, brackets them by rationals, compares the exact value with the thick-barrier approximation and verifies the theorem's error bound. It is a computation in the model, not a measurement; it reports no count, no apparatus and no empirical value, and it makes no claim about nature."
+   },
+   {
+    "id": "ex-nrqm-potentials-finite-well-exact-root-and-count",
+    "kind": "example",
+    "domain": "physics",
+    "title": "Finite square well: an exactly solvable bound state and exact bound-state counts",
+    "statement": "\n## Example\n\nWork in the declared line model\n[[def-nrqm-potentials-one-dimensional-line-model]] with mass parameter $m>0$\nand action constant $\\hbar>0$, energies, lengths and the depth $U$ read in the\nunits of [[def-nrqm-framework-quantities-and-units]], and consider the finite\nsquare well $V(x)=-U$ for $|x|<a$, $V(x)=0$ for $|x|>a$ of\n[[pthm-nrqm-potentials-finite-well-bound-states]] with half-width $a>0$ and\ndepth $U>0$.\n\n(i) *Exact boundary case of the first branch.* Declare\n$$U:=\\frac{\\hbar^{2}\\pi^{2}}{16ma^{2}} .$$\nThen $K=\\sqrt{2mU}/\\hbar=\\pi\\sqrt2/(4a)$, the count parameter is\n$2aK/\\pi=\\sqrt2/2$, there is exactly one bound state, it is an even\n(cosine-type) state, and its binding energy is exactly\n$$E=-\\frac{U}{2}=-\\frac{\\hbar^{2}\\pi^{2}}{32ma^{2}} .$$\nFor this declared depth the root of the even condition is exactly\n$k=\\kappa=\\pi/(4a)$.\n\n(ii) *Exact counts at declared depths.* With\n$$U:=\\frac{25\\hbar^{2}\\pi^{2}}{32ma^{2}}$$\none has $K=5\\pi/(4a)$ and $2aK/\\pi=5/2$, so there are exactly three bound\nstates, with types even, odd and even in order of increasing energy. With\n$U:=\\hbar^{2}\\pi^{2}/(8ma^{2})$ one has $K=\\pi/(2a)$ and exactly one bound\nstate; with $U:=\\hbar^{2}\\pi^{2}/(2ma^{2})$ one has $K=\\pi/a$ and exactly two\nbound states. For every declared depth $U>0$ there is at least one bound\nstate.\n\n(iii) *Rational bracket of the first case.*\n$$\\frac{707}{1000}<\\frac{2aK}{\\pi}=\\frac{\\sqrt2}{2}<\\frac{708}{1000},$$\nso the count $\\lceil 2aK/\\pi\\rceil$ equals one in case (i).\n\nThe example is a conditional computation in the declared well model and\nasserts no measured binding energy; the identities in (i) and (ii) are exact in\nthe model at the displayed declared data.\n",
+    "strategy": "direct",
+    "deps": [
+     "pthm-nrqm-potentials-finite-well-bound-states",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "def-nrqm-framework-quantities-and-units",
+     "thm-quarter-turn-values-and-shift-formulas",
+     "thm-half-angle-identities-with-sign-conditions",
+     "thm-cofunction-supplementary-and-reflection-identities",
+     "cor-pi-is-the-first-positive-sine-zero",
+     "def-tangent-cotangent-secant-cosecant",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "pthm-nrqm-potentials-finite-well-bound-states": "physical-result",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+     "thm-half-angle-identities-with-sign-conditions": "mathematical-premise",
+     "thm-cofunction-supplementary-and-reflection-identities": "mathematical-premise",
+     "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+     "def-tangent-cotangent-secant-cosecant": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 12,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.3.1, printed pages 42-48 (PDF pages 45-51): the finite well, the even and odd root conditions and the graphical solution count",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1, printed pages 75-79 (PDF pages 83-87): the square well, the condition k tan(ka)=K, the always-present ground state and the count thresholds",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "Finite checks in the declared line model of the pair for the finite square well: an exactly solvable depth at which the unique bound state has energy minus one half of the depth, and exact bound-state counts and branch parities for declared depths. The example is a conditional computation in the model; it reports no measurement, no material well and no empirical value, and asserts no conclusion about nature."
+   },
+   {
+    "id": "ex-nrqm-potentials-box-spectrum-and-nodes",
+    "kind": "example",
+    "domain": "physics",
+    "title": "The Dirichlet box: exact spectrum, nodes, constant shift and gaps",
+    "statement": "\n## Example\n\nWork in the declared Dirichlet interval model\n[[def-nrqm-potentials-interval-and-delta-models]] clause (b) with\n$0<L<\\infty$, mass $m>0$, action constant $\\hbar>0$, and energies in joules\nunder [[def-nrqm-framework-quantities-and-units]]. Then, as exact identities\nin the model:\n\n(i) *Free box.* For $V=0$ the eigenpairs of the assigned energy operator\n$H_{D,0}$ are exactly\n$$\\Bigl(\\mathcal E_{n},\\,e_{n}\\Bigr),\\qquad \\mathcal E_{n}=\\frac{\\hbar^{2}\\pi^{2}n^{2}}{2mL^{2}},\\qquad e_{n}(x)=\\sqrt{\\frac2L}\\,\\sin\\!\\Bigl(\\frac{n\\pi x}{L}\\Bigr),\\quad n\\ge1,$$\nthe family $(e_{n})_{n\\ge1}$ is a complete orthonormal family of\n$L^{2}(0,L;\\mathbb C)$, each eigenvalue is simple, and $e_{n}$ has exactly\n$n-1$ zeros in $(0,L)$, namely the points $x_{k}=kL/n$, $k=1,\\dots,n-1$.\n\n(ii) *Constant shift.* If $V=c$ is the constant potential of value $c\\in\n\\mathbb R$ (joules), then $H_{D,c}$ has exactly the same eigenfunctions\n$e_{n}$ and the eigenvalues $\\mathcal E_{n}+c$; consequently the min-max\ncomplexity bound of the interval theorem is attained with equality,\n$|\\mathcal E_{n}+c-\\mathcal E_{n}|=|c|=\\|V\\|_{\\infty}$ for every $n$.\n\n(iii) *Gaps.* $\\mathcal E_{n+1}-\\mathcal E_{n}\n=\\frac{\\hbar^{2}\\pi^{2}(2n+1)}{2mL^{2}}>0$, so the spectrum is strictly\nincreasing.\n\nThe example is an exact conditional computation in the declared box model\nand asserts no measured transition energy.\n",
+    "strategy": "direct",
+    "deps": [
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes",
+     "def-nrqm-potentials-interval-and-delta-models",
+     "def-nrqm-potentials-one-dimensional-line-model",
+     "def-nrqm-framework-quantities-and-units",
+     "thm-nrqm-intervals-sine-on-completeness",
+     "def-nrqm-intervals-hilbert-sobolev-spaces",
+     "def-countable-choice",
+     "def-axiom-of-choice"
+    ],
+    "dependency_roles": {
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes": "physical-result",
+     "def-nrqm-potentials-interval-and-delta-models": "formulation-prerequisite",
+     "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+     "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+     "thm-nrqm-intervals-sine-on-completeness": "mathematical-premise",
+     "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+     "def-countable-choice": "mathematical-premise",
+     "def-axiom-of-choice": "mathematical-premise"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "ai-altered"
+    },
+    "dependency_level": 12,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.1.2, printed pages 24-27 (PDF pages 27-30): the infinite potential well, its sine eigenfunctions, nodal structure and quantized energies",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1, printed pages 181-187 (PDF pages 193-199): Sturm-Liouville problems on intervals, Dirichlet eigenvalues and nodal counts",
+       "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+      }
+     ]
+    },
+    "physical_scope": "Finite checks in the declared Dirichlet interval model of the pair: the free box eigenpairs, their explicit nodal points, the exact spectrum under a constant potential shift, the attainment of the min-max bound and the eigenvalue gaps. The example is an exact conditional computation in the declared confined model; it asserts no material wall, no measured spectrum and no empirical result."
+   },
+   {
+    "id": "rem-nrqm-potentials-examples-scope-limits",
+    "kind": "remark",
+    "domain": "physics",
+    "title": "What the one-dimensional potentials examples establish",
+    "statement": "\n## Scope of the examples page\n\n**The three computations.**\n[[ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit]] treats\nthe rectangular barrier of [[pthm-nrqm-potentials-barrier-flux-and-transmission]]\nat the exactly solvable scaling $U=2E$ with $\\kappa a=\\ln 10$: it obtains\n$T=400/10201$ and $R=9801/10201$ as exact rationals, brackets them by\n$3921/100000<T<3922/100000$, compares the exact value with the thick-barrier\nvalue $1/25$ (the difference is exactly $-201/255025$) and verifies the\ntheorem's error bound $201/125000=0.001608$; the computation is a finite check\nof the model formulas, including the positivity of transmission through a\nclassically forbidden barrier.\n[[ex-nrqm-potentials-finite-well-exact-root-and-count]] exhibits a declared\nwell depth at which the unique bound state is exactly solvable (even state,\n$k=\\kappa=\\pi/(4a)$, binding energy $E=-U/2=-\\hbar^{2}\\pi^{2}/(32ma^{2})$),\nverifies the even root condition with the special value $\\tan(\\pi/4)=1$, and\nverifies the count and branch criterion at declared depths: exactly three\nbound states with types even, odd, even when $2aK/\\pi=5/2$, exactly one when\n$2aK/\\pi=1$, exactly two when $2aK/\\pi=2$, and at least one for every\n$a,U>0$.\n[[ex-nrqm-potentials-box-spectrum-and-nodes]] records the exact free Dirichlet\nbox eigenpairs $\\mathcal E_{n}=\\hbar^{2}\\pi^{2}n^{2}/(2mL^{2})$ with sine\neigenfunctions, their explicit $n-1$ nodal points $kL/n$, the exact spectrum\n$\\mathcal E_{n}+c$ of a constant potential with the min-max bound attained,\nand the positive gaps $\\hbar^{2}\\pi^{2}(2n+1)/(2mL^{2})$.\n\n**What is and is not compared.** The comparisons are internal: the exact\nbarrier formula and its thick-barrier approximation, the exact well root\ncondition and the exact branch count, and the exact box spectrum with the\nmin-max bound. They verify the cited theorems at declared parameter points by\nexact rational and algebraic checks; they are not numerical approximations of\ngeneric transcendental roots, they contain no simulation presented as data,\nand they report no measured value, no uncertainty and no significance\nstatement. The only numerical decimals displayed are brackets of exact\nrationals proven in the verifications.\n\n**Evidence status.** All three items are conditional computations in the\ndeclared line, well and box models of the pair's A page, under the same P1,\nP2, P4, P5 assumptions and the same cited mathematics; the empirical\nqualifications of the A page carry over unchanged. Nothing on this page is an\nobservation, an apparatus model or a statistical inference, and agreement of\nthe displayed identities with any measurement would be evidence about the\ncombined model and apparatus assumptions rather than a proof of the model.\n",
+    "strategy": "n/a",
+    "deps": [
+     "ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit",
+     "ex-nrqm-potentials-finite-well-exact-root-and-count",
+     "ex-nrqm-potentials-box-spectrum-and-nodes",
+     "pthm-nrqm-potentials-barrier-flux-and-transmission",
+     "pthm-nrqm-potentials-finite-well-bound-states",
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes"
+    ],
+    "dependency_roles": {
+     "ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit": "formulation-prerequisite",
+     "ex-nrqm-potentials-finite-well-exact-root-and-count": "formulation-prerequisite",
+     "ex-nrqm-potentials-box-spectrum-and-nodes": "formulation-prerequisite",
+     "pthm-nrqm-potentials-barrier-flux-and-transmission": "physical-result",
+     "pthm-nrqm-potentials-finite-well-bound-states": "physical-result",
+     "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes": "physical-result"
+    },
+    "provenance": {
+     "statement": "ai-altered",
+     "proof": "not-applicable"
+    },
+    "dependency_level": 13,
+    "sources": {
+     "references": [
+      {
+       "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Chapter 2, printed pages 19-63 (PDF pages 22-66): one-dimensional potentials, wells, barriers and tunnelling",
+       "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      },
+      {
+       "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 5, printed pages 75-103 (PDF pages 83-111): square wells, scattering and tunnelling",
+       "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+      }
+     ]
+    },
+    "physical_scope": "Scope of the examples page of the one-dimensional potentials pair: exact finite checks of the barrier transmission, the finite-well root conditions and counts, and the Dirichlet box spectrum and nodes. The remark asserts no new physical result, records no measurement and makes no claim about nature."
+   }
+  ]
+ }
+]

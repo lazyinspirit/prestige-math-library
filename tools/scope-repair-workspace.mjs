@@ -27,6 +27,7 @@ export function prepareRepairWorkspace(root, run, batch, p) {
     const source=join(root,dir); if(!existsSync(source))continue;
     mkdirSync(join(work,dir),{recursive:true});
     for(const entry of readdirSync(source,{withFileTypes:true})) {
+      if(dir==='research'&&entry.name===`${run}-scope-review`)continue; // Exclude the workspace's own ancestor.
       const file=`${dir}/${entry.name}`, target=join(work,file);
       if(entry.isDirectory() && [...writable].some(path=>path.startsWith(file+'/'))){mkdirSync(target,{recursive:true});mirror(join(root,file),file);}
       else if(writable.has(file)){copyFileSync(join(root,file),target);before[file]=contents(readFileSync(join(root,file)));}

@@ -62,7 +62,7 @@ that classifies the normalized circle loop of $\gamma$.
 
 1.1 Because $\gamma(t)\ne0$ for every $t$, the normalized map $\alpha(t)=\gamma(t)/|\gamma(t)|$ is a continuous loop in the unit circle based at $1$. Using the homeomorphism of [L2], regard the same loop as a based loop $\beta:[0,1]\to\mathbb R/\mathbb Z$ at $[0]$. Let $\widetilde\beta:[0,1]\to\mathbb R$ be its lift with $\widetilde\beta(0)=0$, and define $\theta(t)=2\pi\widetilde\beta(t)$. [given, L2, L3, construct]
 
-2.1 By the definition of $h$ in [L2], the lift from step 1.1 supplies a continuous argument. [step 1.1, L1, L2, algebra]
-$$\alpha(t)=\cos\theta(t)+i\sin\theta(t)=e^{i\theta(t)}.$$ Hence $$\gamma(t)=|\gamma(t)|e^{i\theta(t)},$$ so $\theta$ is a continuous argument of $\gamma$ about $0$. Therefore [L1] gives $$n(\gamma,0)=\frac{\theta(1)-\theta(0)}{2\pi}=\widetilde\beta(1).$$
+2.1 By the definition of $h$ in [L2], the lift from step 1.1 supplies a continuous argument. [step 1.1, L1, L2, algebra] $$\alpha(t)=\cos\theta(t)+i\sin\theta(t)=e^{i\theta(t)}.$$ Hence $$\gamma(t)=|\gamma(t)|e^{i\theta(t)},$$ so $\theta$ is a continuous argument of $\gamma$ about $0$. Therefore [L1] gives $$n(\gamma,0)=\frac{\theta(1)-\theta(0)}{2\pi}=\widetilde\beta(1).$$ [L2, step 1.1, L1, algebra]
 
 3.1 Since $\widetilde\beta(1)$ is exactly the degree of $\beta$ by [L3], step 2.1 shows $n(\gamma,0)=\deg(\beta)$, which is the asserted degree of the normalized circle loop of $\gamma$. Fact [L4] records that this is the same integer that classifies the loop class in the usual $\pi_1(S^1)\cong\mathbb Z$ convention. [step 2.1, L3, L4] ∎
+

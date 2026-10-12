@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monoid-objects-in-a-braided-monoidal-category-form-a-monoidal-category.md

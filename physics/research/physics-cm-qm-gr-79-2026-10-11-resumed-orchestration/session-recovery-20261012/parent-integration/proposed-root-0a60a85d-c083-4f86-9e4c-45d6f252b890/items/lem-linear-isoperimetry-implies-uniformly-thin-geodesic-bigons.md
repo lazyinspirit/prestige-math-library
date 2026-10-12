@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-linear-isoperimetry-implies-uniformly-thin-geodesic-bigons.md

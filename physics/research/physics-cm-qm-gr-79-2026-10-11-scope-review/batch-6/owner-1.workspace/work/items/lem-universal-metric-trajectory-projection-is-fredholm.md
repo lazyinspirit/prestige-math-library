@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-metric-trajectory-projection-is-fredholm.md

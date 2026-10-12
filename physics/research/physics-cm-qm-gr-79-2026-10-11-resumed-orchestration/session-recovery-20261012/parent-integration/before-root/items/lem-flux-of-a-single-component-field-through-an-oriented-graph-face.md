@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-flux-of-a-single-component-field-through-an-oriented-graph-face.md

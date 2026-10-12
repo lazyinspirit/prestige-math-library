@@ -1,6 +1,6 @@
 # Group theory track: finite, combinatorial, geometric, profinite, and cohomological group theory
 
-Category reconciliation (2026-10-07): The existing Group Theory pairs retain their category and status. Coxeter Groups is a separate category with the two published symmetric-group foundations from Abstract Algebra, the published permutation-statistics pair from Combinatorics, and the new draft general-Coxeter foundations pair commissioned with Hopf/Hecke. Symmetric-group representation applications remain in Special Topics in Representation Theory.
+Category reconciliation (2026-10-07): The existing Group Theory pairs retain their category and status. Coxeter Groups is a separate category with the two published symmetric-group foundations from Abstract Algebra, the published permutation-statistics pair from Combinatorics, and the new draft general-Coxeter foundations pair commissioned with Hopf/Hecke. Symmetric-group representation applications belong to Symmetric Groups and Symmetric Functions; their Hecke and categorical extensions belong to Hecke Algebras and Categorification.
 
 ## Binding UC34 repair reconciliation — 2026-09-09
 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-riemannian-distance-on-a-connected-manifold.md

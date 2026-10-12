@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-schurs-lemma-over-an-arbitrary-field-still-forces-scalars.md

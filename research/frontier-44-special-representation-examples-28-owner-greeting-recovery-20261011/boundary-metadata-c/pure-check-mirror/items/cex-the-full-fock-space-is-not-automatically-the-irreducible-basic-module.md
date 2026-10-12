@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-the-full-fock-space-is-not-automatically-the-irreducible-basic-module.md

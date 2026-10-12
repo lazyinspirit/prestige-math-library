@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-transversality-to-a-point-is-the-regular-value-condition.md

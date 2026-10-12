@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-boundary-submanifolds-of-a-boundaryless-manifold-have-half-slice-charts.md

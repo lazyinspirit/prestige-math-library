@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tensor-product-of-algebras-over-a-commutative-ring.md

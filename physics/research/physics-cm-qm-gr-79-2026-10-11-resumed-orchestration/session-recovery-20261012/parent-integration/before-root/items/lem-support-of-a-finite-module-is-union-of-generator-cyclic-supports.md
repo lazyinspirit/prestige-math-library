@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-support-of-a-finite-module-is-union-of-generator-cyclic-supports.md

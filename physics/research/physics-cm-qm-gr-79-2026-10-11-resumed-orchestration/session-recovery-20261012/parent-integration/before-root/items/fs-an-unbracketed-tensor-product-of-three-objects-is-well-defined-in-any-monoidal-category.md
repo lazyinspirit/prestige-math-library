@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-unbracketed-tensor-product-of-three-objects-is-well-defined-in-any-monoidal-category.md

@@ -39,7 +39,7 @@ total-variation supremum.
 
 **Proof technique:** direct.
 
-1.1 Let $E_1,\dots,E_m$ be a finite measurable partition of $[0,2\pi]$. Every [L1, A1] piece of positive measure satisfies the strict inequality from [A1], and the null pieces contribute $0$. Therefore $$\sum_{j=1}^m |\nu(E_j)|<\sum_{j=1}^m \lambda(E_j)=2\pi.$$ So no finite partition attains the total variation value $2\pi$. [L1, A1]
+1.1 Let $E_1,\dots,E_m$ be a finite measurable partition of $[0,2\pi]$. Every [L1, A1] piece of positive measure satisfies the strict inequality from [A1], and the null pieces contribute $0$. Therefore $$\sum_{j=1}^m |\nu(E_j)|<\sum_{j=1}^m \lambda(E_j)=2\pi.$$ So no finite partition attains the total variation value $2\pi$. [L1, A1]. [L1, A1]
 
-2.1 By [A2], countable partitions can produce sums arbitrarily close to $2\pi$. [L1, A2, step 1.1]
-Combining this with step 1.1 and [L1] shows that the total-variation value $2\pi$ is not attained by any finite partition. ∎
+2.1 By [A2], countable partitions can produce sums arbitrarily close to $2\pi$. [L1, A2, step 1.1] Combining this with step 1.1 and [L1] shows that the total-variation value $2\pi$ is not attained by any finite partition. [A2, L1, step 1.1] ∎
+

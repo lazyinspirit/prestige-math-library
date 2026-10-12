@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-quasicomponents-equal-components-in-a-compact-hausdorff-space.md

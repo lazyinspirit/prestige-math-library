@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-normal-operator-need-not-have-any-eigenvectors.md

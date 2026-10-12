@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-power-series-reexpansion-at-an-interior-point.md

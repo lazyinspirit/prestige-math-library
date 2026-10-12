@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums.md

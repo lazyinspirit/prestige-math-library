@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-hereditary-rings-have-global-dimension-at-most-one.md

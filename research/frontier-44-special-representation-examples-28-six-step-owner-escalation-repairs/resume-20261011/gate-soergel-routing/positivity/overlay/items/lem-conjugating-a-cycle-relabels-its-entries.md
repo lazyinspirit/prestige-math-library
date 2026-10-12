@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-conjugating-a-cycle-relabels-its-entries.md

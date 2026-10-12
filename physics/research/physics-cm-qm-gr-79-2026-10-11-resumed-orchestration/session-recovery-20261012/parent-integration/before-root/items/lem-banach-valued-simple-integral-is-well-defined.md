@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-banach-valued-simple-integral-is-well-defined.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-regular-local-ambient-cover-minimal-dimension.md

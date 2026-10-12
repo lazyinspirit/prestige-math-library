@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-degree-two-g-line-bundle-basepoint-free.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-induced-connections-commute-with-contraction-and-permutation.md

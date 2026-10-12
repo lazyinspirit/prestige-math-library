@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-coordinate-formula-for-a-bundle-connection.md

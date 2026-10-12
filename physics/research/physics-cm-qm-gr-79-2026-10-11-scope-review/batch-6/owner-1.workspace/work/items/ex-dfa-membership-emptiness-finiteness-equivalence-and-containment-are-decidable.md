@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dfa-membership-emptiness-finiteness-equivalence-and-containment-are-decidable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-global-energy-identity-needs-integrability-or-decay.md

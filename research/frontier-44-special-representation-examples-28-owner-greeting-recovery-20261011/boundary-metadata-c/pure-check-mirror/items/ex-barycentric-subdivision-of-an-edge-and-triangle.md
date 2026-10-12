@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-barycentric-subdivision-of-an-edge-and-triangle.md

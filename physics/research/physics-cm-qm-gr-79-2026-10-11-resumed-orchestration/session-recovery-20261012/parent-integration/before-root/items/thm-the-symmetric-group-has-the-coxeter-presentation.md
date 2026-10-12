@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-symmetric-group-has-the-coxeter-presentation.md

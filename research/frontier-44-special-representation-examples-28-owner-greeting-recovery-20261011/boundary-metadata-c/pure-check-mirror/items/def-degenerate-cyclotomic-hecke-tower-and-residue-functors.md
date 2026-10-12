@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-degenerate-cyclotomic-hecke-tower-and-residue-functors.md

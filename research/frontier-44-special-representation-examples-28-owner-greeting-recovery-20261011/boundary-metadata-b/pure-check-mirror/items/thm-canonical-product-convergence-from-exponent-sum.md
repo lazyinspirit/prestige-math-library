@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-canonical-product-convergence-from-exponent-sum.md

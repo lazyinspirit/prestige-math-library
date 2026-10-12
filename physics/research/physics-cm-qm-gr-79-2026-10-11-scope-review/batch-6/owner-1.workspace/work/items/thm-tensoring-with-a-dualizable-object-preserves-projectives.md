@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tensoring-with-a-dualizable-object-preserves-projectives.md

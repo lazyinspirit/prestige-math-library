@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-discriminant-as-a-resultant-with-the-derivative.md

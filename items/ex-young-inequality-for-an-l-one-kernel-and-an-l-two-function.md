@@ -41,11 +41,8 @@ $$ \|f*g\|_2 = \left(\int_0^1 x^2\,dx + \int_1^2 (2-x)^2\,dx\right)^{1/2} = \sqr
 
 **Proof technique:** direct.
 
-1.1 For each $x$, the convolution integral is the length of $[0,1]\cap[x-1,x]$; direct interval overlap gives [given, algebra]
-$$ (f*g)(x)= \begin{cases} x,& 0 \le x \le 1,\\ 2-x,& 1 \le x \le 2,\\ 0,& \text{otherwise}. \end{cases} $$ [given, algebra]
+1.1 For each $x$, the convolution integral is the length of $[0,1]\cap[x-1,x]$; direct interval overlap gives [given, algebra] $$ (f*g)(x)= \begin{cases} x,& 0 \le x \le 1,\\ 2-x,& 1 \le x \le 2,\\ 0,& \text{otherwise}. \end{cases} $$ [given, algebra]
 
-2.1 Therefore [step 1.1, algebra]
-$$ \|f*g\|_2^2 = \int_0^1 x^2\,dx + \int_1^2 (2-x)^2\,dx = \frac13 + \frac13 = \frac23. $$ [step 1.1, algebra]
+2.1 Therefore [step 1.1, algebra] $$ \|f*g\|_2^2 = \int_0^1 x^2\,dx + \int_1^2 (2-x)^2\,dx = \frac13 + \frac13 = \frac23. $$ [step 1.1, algebra]
 
-3.1 Since $\|f\|_1=1$ and $\|g\|_2=1$, this gives [step 2.1]
-$\|f*g\|_2=\sqrt{2/3} \le 1 = \|f\|_1\|g\|_2$. [step 2.1] ∎
+3.1 Since $\|f\|_1=1$ and $\|g\|_2=1$, this gives [step 2.1] $\|f*g\|_2=\sqrt{2/3} \le 1 = \|f\|_1\|g\|_2$. [step 2.1] ∎

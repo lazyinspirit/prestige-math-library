@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-hamilton-equations-in-canonical-cotangent-coordinates.md

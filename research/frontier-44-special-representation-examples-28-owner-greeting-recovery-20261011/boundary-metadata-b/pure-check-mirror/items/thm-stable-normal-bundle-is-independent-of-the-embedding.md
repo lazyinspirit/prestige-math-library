@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-stable-normal-bundle-is-independent-of-the-embedding.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-generated-monotone-class-exists-and-is-minimal.md

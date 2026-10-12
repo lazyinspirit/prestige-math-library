@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-hereditary-class-has-a-finite-forbidden-basis.md

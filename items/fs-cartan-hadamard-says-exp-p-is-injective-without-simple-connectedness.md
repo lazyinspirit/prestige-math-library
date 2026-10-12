@@ -98,44 +98,10 @@ lemma which already assumes a covering.
 
 ## Refutation
 
-1.1 The flat two-torus is complete with $K\le0$. [F1, F2]
-By [F1] with $n=2$ the torus $(T^2,g_{\mathrm{flat}})$ is a connected
-boundaryless Riemannian surface with $q^*g=dx^2+dy^2$, and it is geodesically
-and metrically complete with vanishing sectional curvature: $K(\sigma)=0$ for
-every tangent two-plane, in particular $K\le0$. By [F2] with $n=2$ the
-exponential of $T^2$ at every point has domain all of the tangent space. The flatness also follows directly from the constant-coefficient charts by
-[F4], and metric completeness from geodesic completeness by [F3]. Thus
-$(T^2,g_{\mathrm{flat}})$ is a complete, connected, boundaryless Riemannian
-surface with $K\le0$. [F1, F2, F3, F4]
+1.1 The flat two-torus is complete with $K\le0$. [F1, F2] By [F1] with $n=2$ the torus $(T^2,g_{\mathrm{flat}})$ is a connected boundaryless Riemannian surface with $q^*g=dx^2+dy^2$, and it is geodesically and metrically complete with vanishing sectional curvature: $K(\sigma)=0$ for every tangent two-plane, in particular $K\le0$. By [F2] with $n=2$ the exponential of $T^2$ at every point has domain all of the tangent space. The flatness also follows directly from the constant-coefficient charts by [F4], and metric completeness from geodesic completeness by [F3]. Thus $(T^2,g_{\mathrm{flat}})$ is a complete, connected, boundaryless Riemannian surface with $K\le0$. [F1, F2, F3, F4]
 
-1.2 Its exponential is not injective. [F1, F2]
-Identify $T_{([0],[0])}T^2$ with $\mathbb R^2$. By [F2] with
-$\Lambda=\mathbb Z^2$,
-$$\exp_{([0],[0])}(v)=[v]\qquad\text{for every }v\in\mathbb R^2.$$
-The vectors $v=0$ and $w=(1,0)$ are distinct, but
-$[w]=[(1,0)]=[(0,0)]$ because $(1,0)\in\mathbb Z^2$ acts trivially on the
-quotient, so $\exp_{([0],[0])}(v)=\exp_{([0],[0])}(w)$. Hence the exponential
-is not injective. [F1, F2]
+1.2 Its exponential is not injective. [F1, F2] Identify $T_{([0],[0])}T^2$ with $\mathbb R^2$. By [F2] with $\Lambda=\mathbb Z^2$, $$\exp_{([0],[0])}(v)=[v]\qquad\text{for every }v\in\mathbb R^2.$$ The vectors $v=0$ and $w=(1,0)$ are distinct, but $[w]=[(1,0)]=[(0,0)]$ because $(1,0)\in\mathbb Z^2$ acts trivially on the quotient, so $\exp_{([0],[0])}(v)=\exp_{([0],[0])}(w)$. Hence the exponential is not injective. [F1, F2]
 
-2.1 The false claim fails, and simple connectedness is the missing hypothesis. [F5, F6, step 1.1, step 1.2]
-Steps 1.1 and 1.2 exhibit a complete, connected, boundaryless Riemannian
-manifold with $K\le0$ whose exponential is not injective, so the claim of the
-Statement is false. The general conclusion of [F5] is that
-$\exp_p:(T_pM,\exp_p^*g)\to(M,g)$ is a universal covering map with complete
-source. The diffeomorphism conclusion additionally assumes simple
-connectedness of $M$. Consistently,
-$T^2$ is not simply connected by [F6], and $\exp_{([0],[0])}$ is the
-nontrivial covering $\mathbb R^2\to T^2$ rather than a diffeomorphism. The
-flat torus therefore refutes the claim while remaining fully consistent with
-Cartan–Hadamard, which correctly asserts a diffeomorphism only in the simply
-connected case. [F5, F6, step 1.1, step 1.2]
+2.1 The false claim fails, and simple connectedness is the missing hypothesis. [F5, F6, step 1.1, step 1.2] Steps 1.1 and 1.2 exhibit a complete, connected, boundaryless Riemannian manifold with $K\le0$ whose exponential is not injective, so the claim of the Statement is false. The general conclusion of [F5] is that $\exp_p:(T_pM,\exp_p^*g)\to(M,g)$ is a universal covering map with complete source. The diffeomorphism conclusion additionally assumes simple connectedness of $M$. Consistently, $T^2$ is not simply connected by [F6], and $\exp_{([0],[0])}$ is the nontrivial covering $\mathbb R^2\to T^2$ rather than a diffeomorphism. The flat torus therefore refutes the claim while remaining fully consistent with Cartan–Hadamard, which correctly asserts a diffeomorphism only in the simply connected case. [F5, F6, step 1.1, step 1.2]
 
-3.1 Dimension and degeneracy conventions. [step 2.1]
-The witness is two-dimensional; the same computation applies to
-$\mathbb R^n/\mathbb Z^n$ for every $n\ge2$, where the noninjectivity is
-produced by any nonzero lattice vector. In dimension one the circle
-$\mathbb R/\mathbb Z$ is likewise complete and flat with noninjective
-exponential, but it is not needed here. The zero-dimensional case has
-$T_pM=\{0\}$ and plays no role. The claim was asserted for all complete
-$K\le0$ manifolds, so one counterexample suffices, and no choice beyond the
-inherited [A1] enters the explicit construction. [step 2.1] ∎
+3.1 Dimension and degeneracy conventions. [step 2.1] The witness is two-dimensional; the same computation applies to $\mathbb R^n/\mathbb Z^n$ for every $n\ge2$, where the noninjectivity is produced by any nonzero lattice vector. In dimension one the circle $\mathbb R/\mathbb Z$ is likewise complete and flat with noninjective exponential, but it is not needed here. The zero-dimensional case has $T_pM=\{0\}$ and plays no role. The claim was asserted for all complete $K\le0$ manifolds, so one counterexample suffices, and no choice beyond the inherited [A1] enters the explicit construction. [step 2.1] ∎ 

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-two-quantifier-qbf-arithmetization-transcript.md

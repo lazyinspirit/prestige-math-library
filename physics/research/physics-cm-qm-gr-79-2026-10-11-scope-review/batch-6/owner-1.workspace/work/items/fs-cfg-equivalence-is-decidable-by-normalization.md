@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cfg-equivalence-is-decidable-by-normalization.md

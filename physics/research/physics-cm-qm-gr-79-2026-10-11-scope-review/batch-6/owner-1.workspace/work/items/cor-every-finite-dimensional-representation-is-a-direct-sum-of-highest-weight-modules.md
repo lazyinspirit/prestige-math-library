@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ell-p-includes-into-ell-r-for-p-less-r.md

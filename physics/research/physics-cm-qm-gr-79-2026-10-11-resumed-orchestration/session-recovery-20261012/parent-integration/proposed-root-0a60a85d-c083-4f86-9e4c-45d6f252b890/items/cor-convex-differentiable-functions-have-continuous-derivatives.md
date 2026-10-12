@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-convex-differentiable-functions-have-continuous-derivatives.md

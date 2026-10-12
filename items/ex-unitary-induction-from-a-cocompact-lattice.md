@@ -57,6 +57,7 @@ Assume AC. If $\Gamma$ is a closed discrete cocompact subgroup of locally compac
 2.1 Let $\mu_\rho$ be its quotient measure. Since $G/\Gamma$ is compact, $0<\mu_\rho(G/\Gamma)<\infty$: finiteness is Radon compact-finiteness and positivity follows from full support. The pushforward $g_*\mu_\rho$ has the same total mass as $\mu_\rho$, while [F2] gives $g_*\mu_\rho=\Delta_G(g)\mu_\rho$. Therefore $\Delta_G(g)=1$ for every $g$, and $G$ is unimodular. [A1, F2, step 1.1]
 
 3.1 Now $\Delta_G|_\Gamma=\Delta_\Gamma=1$, so [F3] gives a nonzero invariant Radon measure on $G/\Gamma$; compactness makes it finite. For $\rho=1$ its cocycle is identically one. Scalar covariance says $F(x\gamma)=F(x)$, so sections are exactly functions on $G/\Gamma$, and the action is $F(q)\mapsto F(g^{-1}q)$ with the quotient $L^2$ norm. This is the quasi-regular representation, as claimed by [F4]. ∎ [A1, F1, F2, F3, F4, step 1.1, step 2.1]
+
 ## Sources
 
 Bekka–de la Harpe–Valette, *Kazhdan’s Property (T)*, Appendix B §B.1 and Appendix E §E.1, Proposition B.1.6 and Example E.1.8(ii), PDF pp. 355–356 and 414. Full relevant text was inspected.

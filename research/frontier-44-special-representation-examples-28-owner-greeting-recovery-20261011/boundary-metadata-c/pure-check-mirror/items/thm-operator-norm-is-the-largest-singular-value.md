@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-operator-norm-is-the-largest-singular-value.md

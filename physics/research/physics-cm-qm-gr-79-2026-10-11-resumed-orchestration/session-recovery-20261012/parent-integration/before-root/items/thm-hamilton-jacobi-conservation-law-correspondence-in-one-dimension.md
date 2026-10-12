@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-perron-solves-dirichlet-on-regular-plane-domains.md

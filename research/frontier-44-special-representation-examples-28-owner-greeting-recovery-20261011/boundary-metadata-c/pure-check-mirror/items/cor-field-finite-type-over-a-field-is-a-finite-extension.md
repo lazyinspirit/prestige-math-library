@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-field-finite-type-over-a-field-is-a-finite-extension.md

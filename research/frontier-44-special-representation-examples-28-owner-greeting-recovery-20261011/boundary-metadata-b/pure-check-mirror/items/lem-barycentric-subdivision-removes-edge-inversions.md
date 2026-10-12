@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-barycentric-subdivision-removes-edge-inversions.md

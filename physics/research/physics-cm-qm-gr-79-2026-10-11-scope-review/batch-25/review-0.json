@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "25",
+  "round": 0,
+  "input_sha256": "9e1582a338a1021fa6c4f5c36efdbd22291427fcff0ed117af997b7dc23e6c53",
+  "reviewed_items": [
+    "def-cm09-coupled-quadratic-model",
+    "pthm-cm09-averaging-for-weak-damping",
+    "pthm-cm09-free-modes-and-degeneracy",
+    "pthm-cm09-linearization-error-bound",
+    "pthm-cm09-forced-modal-response",
+    "pthm-cm09-linearization-at-a-strict-minimum",
+    "ex-cm09-cubic-potential-error-check",
+    "ex-cm09-double-pendulum-linear-modes",
+    "ex-cm09-triatomic-translation-zero-mode",
+    "ex-cm09-weak-damping-averaging-check",
+    "rem-cm09-zero-modes-degeneracy-and-scope",
+    "ex-cm09-two-mass-spring-modes",
+    "ex-cm09-unstable-quadratic-mode",
+    "ex-cm09-degenerate-oscillator-subspace",
+    "ex-cm09-forced-resonant-mode-check"
+  ],
+  "reviewed_pages": [
+    "cm09-coupled-oscillations-and-approximation",
+    "cm09-coupled-oscillations-and-approximation-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The full batch is covered, but the indefinite-mode prerequisite and unit-normalized modal and phase-space conventions leave approved claims unsupported.",
+  "findings": [
+    {
+      "id": "pthm-cm09-free-modes-and-degeneracy",
+      "type": "prerequisite",
+      "reason": "`def-cm09-coupled-quadratic-model` clause (e) and this theorem use modal decomposition for indefinite K, but `thm-cm-quadratic-mode-decomposition` assumes K≥0; the λ<0 claims in `ex-cm09-unstable-quadratic-mode` and `rem-cm09-zero-modes-degeneracy-and-scope` need the sign-unrestricted spectral result."
+    },
+    {
+      "id": "def-cm09-coupled-quadratic-model",
+      "type": "scope",
+      "reason": "The Definition allows q_i with distinct dimensions γ_i but gives no unit-normalized coordinate convention or dimensions for M^{1/2}, modal coordinates, modal vectors and modal coefficients, leaving its general modal vocabulary incompletely typed."
+    },
+    {
+      "id": "pthm-cm09-linearization-error-bound",
+      "type": "scope",
+      "reason": "The bound uses Euclidean norms on (δq,δv) without a common scale, and `ex-cm09-cubic-potential-error-check` sets L=max(1,(k+|λ|r/2)/m), comparing 1 with inverse-time-squared quantities; specify phase and time normalization and carry its constants."
+    },
+    {
+      "id": "pthm-cm09-averaging-for-weak-damping",
+      "type": "scope",
+      "reason": "The rotating amplitude has dimension [x]τ^{-1/2}, but the amplitude radii and K are untyped and horizon parameter A lacks time units; carry these units into `ex-cm09-weak-damping-averaging-check`."
+    },
+    {
+      "id": "ex-cm09-unstable-quadratic-mode",
+      "type": "local",
+      "reason": "In clause 2, b denotes both the sinh coefficient and initial velocity; differentiating the displayed family gives ξ′(0)=κb, so the stated initial datum requires coefficient b/κ."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "pthm-cm09-free-modes-and-degeneracy",
+      "decision": "repair",
+      "reason": "Its negative-mode classification needs the sign-unrestricted spectral result."
+    },
+    {
+      "id": "pthm-cm09-linearization-at-a-strict-minimum",
+      "decision": "repair",
+      "reason": "Recheck its modal statements under the unit-normalized modal convention."
+    },
+    {
+      "id": "pthm-cm09-linearization-error-bound",
+      "decision": "repair",
+      "reason": "Its phase-state error norm and constants need an explicit common scale."
+    },
+    {
+      "id": "pthm-cm09-forced-modal-response",
+      "decision": "repair",
+      "reason": "Recheck modal-force, coordinate and response units under the normalized modal convention."
+    },
+    {
+      "id": "rem-cm09-zero-modes-degeneracy-and-scope",
+      "decision": "repair",
+      "reason": "Recheck its modal and approximation discussion against the repaired scopes."
+    },
+    {
+      "id": "ex-cm09-two-mass-spring-modes",
+      "decision": "repair",
+      "reason": "State modal-vector and coefficient dimensions under the repaired normalization."
+    },
+    {
+      "id": "ex-cm09-triatomic-translation-zero-mode",
+      "decision": "repair",
+      "reason": "State modal-vector and coefficient dimensions under the repaired normalization."
+    },
+    {
+      "id": "ex-cm09-double-pendulum-linear-modes",
+      "decision": "repair",
+      "reason": "State modal-vector and coefficient dimensions under the repaired normalization."
+    },
+    {
+      "id": "ex-cm09-degenerate-oscillator-subspace",
+      "decision": "repair",
+      "reason": "State modal-vector and coefficient dimensions under the repaired normalization."
+    },
+    {
+      "id": "ex-cm09-unstable-quadratic-mode",
+      "decision": "repair",
+      "reason": "Recheck the negative-mode dependency and distinguish the initial-velocity symbol from the sinh coefficient."
+    },
+    {
+      "id": "ex-cm09-forced-resonant-mode-check",
+      "decision": "repair",
+      "reason": "State force-amplitude and modal-response dimensions under the repaired convention."
+    },
+    {
+      "id": "ex-cm09-cubic-potential-error-check",
+      "decision": "repair",
+      "reason": "Use normalized phase variables and re-evaluate L and the numerical error bound."
+    },
+    {
+      "id": "ex-cm09-weak-damping-averaging-check",
+      "decision": "repair",
+      "reason": "Carry amplitude-radius and horizon units from the averaging theorem into this calculation."
+    },
+    {
+      "id": "cm09-coupled-oscillations-and-approximation",
+      "decision": "repair",
+      "reason": "Recheck the page summary after the model and approximation conventions are repaired."
+    },
+    {
+      "id": "cm09-coupled-oscillations-and-approximation-examples",
+      "decision": "repair",
+      "reason": "Recheck its worked-example summaries against repaired item scopes and units."
+    },
+    {
+      "id": "cm16-stability-perturbations-and-chaos",
+      "decision": "accept",
+      "reason": "The plan lists this as a later page prerequisite, but its current page and item inventory are unbuilt and contain no consumer claim to revise."
+    }
+  ]
+}

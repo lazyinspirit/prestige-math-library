@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-irreducible-closed-subsets-and-prime-ideals.md

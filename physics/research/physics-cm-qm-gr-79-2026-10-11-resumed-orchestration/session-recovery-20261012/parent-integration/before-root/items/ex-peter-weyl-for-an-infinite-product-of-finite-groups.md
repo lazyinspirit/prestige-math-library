@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-peter-weyl-for-an-infinite-product-of-finite-groups.md

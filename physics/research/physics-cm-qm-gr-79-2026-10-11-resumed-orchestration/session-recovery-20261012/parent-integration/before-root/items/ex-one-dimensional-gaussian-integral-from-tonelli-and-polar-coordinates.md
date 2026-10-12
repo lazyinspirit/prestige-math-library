@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimensional-gaussian-integral-from-tonelli-and-polar-coordinates.md

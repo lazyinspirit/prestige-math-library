@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-regular-base-dualizing-traces-compose-on-rational-modifications.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-local-chevalley-restriction-for-kostant-freeness.md

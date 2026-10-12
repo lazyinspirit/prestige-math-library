@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism.md

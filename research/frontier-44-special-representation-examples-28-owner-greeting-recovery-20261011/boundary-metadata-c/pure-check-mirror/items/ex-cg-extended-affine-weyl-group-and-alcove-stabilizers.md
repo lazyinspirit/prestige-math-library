@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-extended-affine-weyl-group-and-alcove-stabilizers.md

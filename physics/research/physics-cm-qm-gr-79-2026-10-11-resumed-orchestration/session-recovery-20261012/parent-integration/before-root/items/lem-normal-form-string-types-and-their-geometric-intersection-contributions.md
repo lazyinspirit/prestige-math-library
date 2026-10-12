@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-form-string-types-and-their-geometric-intersection-contributions.md

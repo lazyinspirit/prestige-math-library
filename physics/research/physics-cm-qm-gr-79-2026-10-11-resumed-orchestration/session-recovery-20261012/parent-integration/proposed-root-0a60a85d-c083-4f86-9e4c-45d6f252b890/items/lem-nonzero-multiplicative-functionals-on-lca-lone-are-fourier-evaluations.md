@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonzero-multiplicative-functionals-on-lca-lone-are-fourier-evaluations.md

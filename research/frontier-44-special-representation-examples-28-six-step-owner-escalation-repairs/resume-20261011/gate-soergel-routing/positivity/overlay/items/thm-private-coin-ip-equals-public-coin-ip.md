@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-private-coin-ip-equals-public-coin-ip.md

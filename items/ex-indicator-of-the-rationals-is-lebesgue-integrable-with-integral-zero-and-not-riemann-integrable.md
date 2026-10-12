@@ -53,8 +53,7 @@ but $f$ is not Riemann integrable on $[0,1]$.
 
 **Proof technique:** direct.
 
-1.1 By [L1], the function $f$ is $1$ on $\mathbb Q\cap[0,1]$ and $0$ on its [L1, L2, L3, L4]
-complement. The set $\mathbb Q\cap[0,1]$ is countable, hence null by [L2], and [L3] makes it Lebesgue measurable. Therefore $f=0$ almost everywhere on $[0,1]$, so [L4] gives $$\int_{[0,1]} f\,d\lambda_1=0.$$
+1.1 By [L1], the function $f$ is $1$ on $\mathbb Q\cap[0,1]$ and $0$ on its [L1, L2, L3, L4] complement. The set $\mathbb Q\cap[0,1]$ is countable, hence null by [L2], and [L3] makes it Lebesgue measurable. Therefore $f=0$ almost everywhere on $[0,1]$, so [L4] gives $$\int_{[0,1]} f\,d\lambda_1=0.$$ [L1, L2, L3, L4]
 
-1.2 By [L5], every point of $[0,1]$ is a discontinuity of $f$. Thus the [L5, L6, L7]
-discontinuity set of $f$ is the whole interval $[0,1]$, whose Lebesgue measure is $1$ by [L7], not $0$. So [L6] shows that $f$ is not Riemann integrable. ∎
+2.1 By [L5], every point of $[0,1]$ is a discontinuity of $f$. Thus the [L5, L6, L7] discontinuity set of $f$ is the whole interval $[0,1]$, whose Lebesgue measure is $1$ by [L7], not $0$. So [L6] shows that $f$ is not Riemann integrable. [L5, L6, L7] ∎
+

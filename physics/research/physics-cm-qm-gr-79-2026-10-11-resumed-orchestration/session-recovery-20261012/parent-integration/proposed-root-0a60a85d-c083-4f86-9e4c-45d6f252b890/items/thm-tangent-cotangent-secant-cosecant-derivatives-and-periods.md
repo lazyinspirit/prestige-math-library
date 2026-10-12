@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tangent-cotangent-secant-cosecant-derivatives-and-periods.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-gauge-of-an-open-convex-zero-neighborhood.md

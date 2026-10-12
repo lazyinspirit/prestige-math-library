@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-degree-of-the-antipodal-map-on-the-sphere.md

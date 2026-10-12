@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-gitik-restriction-amalgamation-and-prikry-property.md

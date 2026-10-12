@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-quotient-dfa-is-well-defined-and-equivalent.md

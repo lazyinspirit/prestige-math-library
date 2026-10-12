@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-smooth-singular-mayer-vietoris-sequence.md

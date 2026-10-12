@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hopf-formula-is-independent-of-the-free-presentation.md

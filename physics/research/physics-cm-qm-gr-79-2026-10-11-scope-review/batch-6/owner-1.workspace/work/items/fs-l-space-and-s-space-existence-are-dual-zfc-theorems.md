@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-l-space-and-s-space-existence-are-dual-zfc-theorems.md

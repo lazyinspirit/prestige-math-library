@@ -34,8 +34,6 @@ If $X_n\to X$ almost surely, then $X_n\to X$ in probability.
 
 **Proof technique:** direct.
 
-1.1 Fix $\varepsilon>0$ and set $I_n=\mathbf1_{\{|X_n-X|>\varepsilon\}}$. [given, L1]
-By [L1] these are measurable; the hypothesis gives $I_n\to0$ almost surely, and $0\le I_n\le1$. [given, L1]
+1.1 Fix $\varepsilon>0$ and set $I_n=\mathbf1_{\{|X_n-X|>\varepsilon\}}$. [given, L1] By [L1] these are measurable; the hypothesis gives $I_n\to0$ almost surely, and $0\le I_n\le1$. [given, L1]
 
-2.1 Apply [L2] to the indicators from step 1.1 with majorant $1$. [step 1.1, L2]
-$\mathbb P(|X_n-X|>\varepsilon)=\mathbb E I_n\to0$, which is the required probability convergence. [step 1.1, L2] ∎
+2.1 Apply [L2] to the indicators from step 1.1 with majorant $1$. [step 1.1, L2] $\mathbb P(|X_n-X|>\varepsilon)=\mathbb E I_n\to0$, which is the required probability convergence. [step 1.1, L2] ∎ 

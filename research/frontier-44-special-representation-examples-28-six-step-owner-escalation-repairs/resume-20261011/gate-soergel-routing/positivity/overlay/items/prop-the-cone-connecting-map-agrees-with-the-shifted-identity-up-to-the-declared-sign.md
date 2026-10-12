@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign.md

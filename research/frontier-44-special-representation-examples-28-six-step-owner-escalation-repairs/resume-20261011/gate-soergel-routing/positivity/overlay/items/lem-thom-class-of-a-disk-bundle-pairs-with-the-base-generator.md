@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-thom-class-of-a-disk-bundle-pairs-with-the-base-generator.md

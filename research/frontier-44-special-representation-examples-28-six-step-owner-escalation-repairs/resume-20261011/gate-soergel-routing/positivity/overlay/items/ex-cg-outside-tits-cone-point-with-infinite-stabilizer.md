@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-outside-tits-cone-point-with-infinite-stabilizer.md

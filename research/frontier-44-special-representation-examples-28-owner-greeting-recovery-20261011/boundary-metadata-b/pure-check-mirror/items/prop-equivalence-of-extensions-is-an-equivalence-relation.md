@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-equivalence-of-extensions-is-an-equivalence-relation.md

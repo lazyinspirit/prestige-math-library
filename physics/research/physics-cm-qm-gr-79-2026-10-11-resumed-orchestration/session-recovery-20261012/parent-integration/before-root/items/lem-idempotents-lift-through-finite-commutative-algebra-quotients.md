@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-idempotents-lift-through-finite-commutative-algebra-quotients.md

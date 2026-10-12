@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset.md

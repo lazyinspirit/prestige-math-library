@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-a-galois-stable-character-need-not-have-schur-index-one.md

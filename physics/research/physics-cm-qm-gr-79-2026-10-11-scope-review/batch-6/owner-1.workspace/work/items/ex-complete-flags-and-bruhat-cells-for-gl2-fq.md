@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complete-flags-and-bruhat-cells-for-gl2-fq.md

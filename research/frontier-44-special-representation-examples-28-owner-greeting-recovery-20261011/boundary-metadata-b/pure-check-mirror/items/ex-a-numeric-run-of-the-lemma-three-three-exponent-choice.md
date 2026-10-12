@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-numeric-run-of-the-lemma-three-three-exponent-choice.md

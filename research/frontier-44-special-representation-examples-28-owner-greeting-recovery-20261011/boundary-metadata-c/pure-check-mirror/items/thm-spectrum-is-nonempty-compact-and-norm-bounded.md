@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-spectrum-is-nonempty-compact-and-norm-bounded.md

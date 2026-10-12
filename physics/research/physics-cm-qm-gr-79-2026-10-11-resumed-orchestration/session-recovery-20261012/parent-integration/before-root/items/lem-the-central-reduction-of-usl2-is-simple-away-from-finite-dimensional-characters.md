@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-central-reduction-of-usl2-is-simple-away-from-finite-dimensional-characters.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-area-as-a-line-integral-for-elementary-regions.md

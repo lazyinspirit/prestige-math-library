@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-opposite-of-an-abelian-category-is-abelian.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-quadratic-hecke-normalizations-s-equals-q-t.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integral-geometric-layers-for-fourteen-ordered-blocks.md

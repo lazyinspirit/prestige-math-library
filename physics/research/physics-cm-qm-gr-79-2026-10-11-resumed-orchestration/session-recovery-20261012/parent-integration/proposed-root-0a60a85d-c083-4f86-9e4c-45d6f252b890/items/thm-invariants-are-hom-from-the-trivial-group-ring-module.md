@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invariants-are-hom-from-the-trivial-group-ring-module.md

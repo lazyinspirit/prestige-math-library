@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-scalar-de-giorgi-theory-does-not-transfer-verbatim-to-systems.md

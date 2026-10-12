@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ordered-configurations-cover-unordered-configurations-regularly.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-continuous-functor-preserves-ends-and-a-cocontinuous-functor-preserves-coends.md

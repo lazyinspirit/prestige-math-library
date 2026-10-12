@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-convex-functions-are-locally-lipschitz-and-continuous.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-images-of-finitely-generated-and-finite-groups-are-finitely-generated-and-finite.md

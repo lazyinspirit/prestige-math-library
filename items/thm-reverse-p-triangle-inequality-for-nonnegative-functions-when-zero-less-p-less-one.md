@@ -50,8 +50,7 @@ $$\int (f+g)^p\,d\mu\le\int f^p\,d\mu+\int g^p\,d\mu.$$
 
 **Proof technique:** For nonnegative numbers $a,b$ and $0<p<1$ one has $(a+b)^p\le a^p+b^p$. Apply this pointwise to $f$ and $g$ and integrate.
 
-1.1 For nonnegative reals $a,b$ with $a+b>0$, set $s=a+b$, $u=a/s$ and $v=b/s$. Then $u,v\in[0,1]$, $u+v=1$, and [L1] gives $a^p+b^p=s^p(u^p+v^p)\ge s^p=(a+b)^p$; for $a+b=0$ equality is immediate. Apply this scalar inequality pointwise to $f,g$ to obtain [L1, given, algebra]
-$$(f+g)^p\le f^p+g^p.$$
+1.1 For nonnegative reals $a,b$ with $a+b>0$, set $s=a+b$, $u=a/s$ and $v=b/s$. Then $u,v\in[0,1]$, $u+v=1$, and [L1] gives $a^p+b^p=s^p(u^p+v^p)\ge s^p=(a+b)^p$; for $a+b=0$ equality is immediate. Apply this scalar inequality pointwise to $f,g$ to obtain [L1, given, algebra] $$(f+g)^p\le f^p+g^p.$$ [L1, given, algebra]
 
-2.1 Integrating and using monotonicity and additivity from [L2] yields [step 1.1, L2]
-$$\int (f+g)^p\,d\mu\le\int f^p\,d\mu+\int g^p\,d\mu.$$ This is exactly the displayed $\|\,\cdot\,\|_p^p$ inequality. ∎
+2.1 Integrating and using monotonicity and additivity from [L2] yields [step 1.1, L2] $$\int (f+g)^p\,d\mu\le\int f^p\,d\mu+\int g^p\,d\mu.$$ This is exactly the displayed $\|\,\cdot\,\|_p^p$ inequality. [L2, step 1.1] ∎
+

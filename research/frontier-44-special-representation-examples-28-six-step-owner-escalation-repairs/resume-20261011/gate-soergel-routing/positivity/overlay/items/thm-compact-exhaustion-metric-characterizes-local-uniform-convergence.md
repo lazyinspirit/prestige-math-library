@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-exhaustion-metric-characterizes-local-uniform-convergence.md

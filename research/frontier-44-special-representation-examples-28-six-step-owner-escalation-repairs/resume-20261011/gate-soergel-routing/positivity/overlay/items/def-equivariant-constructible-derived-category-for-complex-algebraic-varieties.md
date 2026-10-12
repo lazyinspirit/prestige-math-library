@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-equivariant-constructible-derived-category-for-complex-algebraic-varieties.md

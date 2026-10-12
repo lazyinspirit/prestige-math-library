@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-long-exact-tor-sequence-in-the-right-module-variable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-singular-values-are-absolute-values-of-the-eigenvalues.md

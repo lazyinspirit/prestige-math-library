@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-barycentric-subdivision-is-chain-homotopic-to-the-identity.md

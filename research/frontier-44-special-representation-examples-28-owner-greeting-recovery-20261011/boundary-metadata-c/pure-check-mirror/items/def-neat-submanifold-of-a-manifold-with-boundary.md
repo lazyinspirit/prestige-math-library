@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-neat-submanifold-of-a-manifold-with-boundary.md

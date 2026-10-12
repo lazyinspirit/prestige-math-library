@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-relative-transversality-preserves-a-map-on-a-closed-good-region.md

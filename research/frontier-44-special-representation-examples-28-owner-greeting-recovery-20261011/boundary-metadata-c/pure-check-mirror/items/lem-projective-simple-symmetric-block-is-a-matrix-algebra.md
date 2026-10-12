@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-projective-simple-symmetric-block-is-a-matrix-algebra.md

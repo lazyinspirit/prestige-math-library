@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smoothness-at-the-boundary-is-independent-of-charts-and-extensions.md

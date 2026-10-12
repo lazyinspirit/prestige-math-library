@@ -36,8 +36,7 @@ has planar Lebesgue measure $1/3$.
 
 **Proof technique:** direct.
 
-1.1 Applying [L1] to $f(x)=x^2$ gives [L1]
-$$\lambda_2(R)=\int_0^1 x^2\,dx.$$
+1.1 Applying [L1] to $f(x)=x^2$ gives [L1] $$\lambda_2(R)=\int_0^1 x^2\,dx.$$. [L1]
 
-2.1 Since $(x^3/3)'=x^2$, [L2] gives [L2, step 1.1]
-$$\lambda_2(R)=\int_0^1 x^2\,dx=\frac13.$$ ∎
+2.1 Since $(x^3/3)'=x^2$, [L2] gives [L2, step 1.1] $$\lambda_2(R)=\int_0^1 x^2\,dx=\frac13.$$. [L2, step 1.1] ∎
+

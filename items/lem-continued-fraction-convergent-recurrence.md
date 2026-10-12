@@ -49,14 +49,10 @@ appending the last tail $t$.
 
 **Proof technique:** direct.
 
-1.1 For $n=0$ one has. [given, F1, base, algebra]
-$$[a_0,t] = a_0 + \frac{1}{t} = \frac{ta_0+1}{t} = \frac{tp_0+p_{-1}}{tq_0+q_{-1}},$$ because $p_0=a_0$, $q_0=1$, $p_{-1}=1$, and $q_{-1}=0$ by [F1]. [given, F1, base, algebra]
+1.1 For $n=0$ one has. [given, F1, base, algebra] $$[a_0,t] = a_0 + \frac{1}{t} = \frac{ta_0+1}{t} = \frac{tp_0+p_{-1}}{tq_0+q_{-1}},$$ because $p_0=a_0$, $q_0=1$, $p_{-1}=1$, and $q_{-1}=0$ by [F1]. [given, F1, base, algebra]
 
-2.1 Assume the tail formula holds for a fixed length $n$. [step 1.1, F1, induction, algebra]
-Put $u:=a_{n+1}+1/t>0$. Then $$[a_0; a_1,\ldots,a_{n+1},t] = [a_0; a_1,\ldots,a_n,u] = \frac{u p_n + p_{n-1}}{u q_n + q_{n-1}}$$ by the induction hypothesis, and multiplying numerator and denominator by $t$ gives $$\frac{(a_{n+1}t+1)p_n+tp_{n-1}}{(a_{n+1}t+1)q_n+tq_{n-1}} = \frac{tp_{n+1}+p_n}{tq_{n+1}+q_n}$$ by the recurrences of [F1]. [step 1.1, F1, induction, algebra]
+2.1 Assume the tail formula holds for a fixed length $n$. [step 1.1, F1, induction, algebra] Put $u:=a_{n+1}+1/t>0$. Then $$[a_0; a_1,\ldots,a_{n+1},t] = [a_0; a_1,\ldots,a_n,u] = \frac{u p_n + p_{n-1}}{u q_n + q_{n-1}}$$ by the induction hypothesis, and multiplying numerator and denominator by $t$ gives $$\frac{(a_{n+1}t+1)p_n+tp_{n-1}}{(a_{n+1}t+1)q_n+tq_{n-1}} = \frac{tp_{n+1}+p_n}{tq_{n+1}+q_n}$$ by the recurrences of [F1]. [step 1.1, F1, induction, algebra]
 
-3.1 Steps 1.1 and 2.1 show, by induction on the length, that. [F2, step 1.1, step 2.1, discharge-induction]
-$$[a_0; a_1,\ldots,a_n,t] = \frac{t p_n + p_{n-1}}{t q_n + q_{n-1}}$$ for every $n \ge 0$ and every $t>0$. [F2, step 1.1, step 2.1, discharge-induction]
+3.1 Steps 1.1 and 2.1 show, by induction on the length, that. [F2, step 1.1, step 2.1, discharge-induction] $$[a_0; a_1,\ldots,a_n,t] = \frac{t p_n + p_{n-1}}{t q_n + q_{n-1}}$$ for every $n \ge 0$ and every $t>0$. [F2, step 1.1, step 2.1, discharge-induction]
 
-4.1 Setting $t=a_{n+1}$ in step 3.1 yields. [step 3.1, F1, algebra]
-$$[a_0; a_1,\ldots,a_{n+1}] = \frac{a_{n+1}p_n+p_{n-1}}{a_{n+1}q_n+q_{n-1}} = \frac{p_{n+1}}{q_{n+1}},$$ and renaming the index proves the finite-convergent formula. [step 3.1, F1, algebra] ∎
+4.1 Setting $t=a_{n+1}$ in step 3.1 yields. [step 3.1, F1, algebra] $$[a_0; a_1,\ldots,a_{n+1}] = \frac{a_{n+1}p_n+p_{n-1}}{a_{n+1}q_n+q_{n-1}} = \frac{p_{n+1}}{q_{n+1}},$$ and renaming the index proves the finite-convergent formula. [step 3.1, F1, algebra] ∎ 

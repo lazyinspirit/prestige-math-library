@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-module-duality-is-exact-with-commuting-bimodule-actions.md

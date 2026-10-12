@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-the-closure-of-a-path-connected-set-is-path-connected.md

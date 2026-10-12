@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-frattini-subgroup-commutes-with-surjective-inverse-limits.md

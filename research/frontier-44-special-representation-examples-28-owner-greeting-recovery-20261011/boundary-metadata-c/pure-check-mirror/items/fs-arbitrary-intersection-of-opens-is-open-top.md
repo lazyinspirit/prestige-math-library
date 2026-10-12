@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-arbitrary-intersection-of-opens-is-open-top.md

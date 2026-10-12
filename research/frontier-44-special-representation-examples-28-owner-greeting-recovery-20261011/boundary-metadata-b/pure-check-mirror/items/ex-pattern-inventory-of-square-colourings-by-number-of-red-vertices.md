@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-pattern-inventory-of-square-colourings-by-number-of-red-vertices.md

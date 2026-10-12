@@ -1,7 +1,7 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-/** One owner-readable report for a failed Step 3a or 3b gate battery.
+/** One owner-readable report for a failed Step 3a gate battery.
  *  Never launches a repair, review or judge round, and never waives a gate. */
 export function holdStep3({ ctx, stage, failure }: any) {
   const path = `research/${ctx.run}-step3-blockers.json`;

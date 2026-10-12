@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-vertex-is-a-vertex-of-the-cayley-graph.md

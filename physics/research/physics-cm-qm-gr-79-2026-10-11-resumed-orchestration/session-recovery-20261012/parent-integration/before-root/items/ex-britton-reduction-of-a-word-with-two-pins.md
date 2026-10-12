@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-britton-reduction-of-a-word-with-two-pins.md

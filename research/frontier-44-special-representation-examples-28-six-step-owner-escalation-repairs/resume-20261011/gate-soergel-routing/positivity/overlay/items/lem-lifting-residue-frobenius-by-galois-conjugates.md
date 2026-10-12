@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-lifting-residue-frobenius-by-galois-conjugates.md

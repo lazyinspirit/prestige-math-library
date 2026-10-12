@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-euler-class-of-zero-and-trivial-positive-rank-bundles.md

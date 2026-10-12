@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-coprime-polynomial-factorization-lifts-etale-locally.md

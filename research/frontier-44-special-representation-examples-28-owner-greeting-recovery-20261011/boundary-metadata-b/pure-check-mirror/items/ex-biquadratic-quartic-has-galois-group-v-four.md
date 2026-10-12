@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-biquadratic-quartic-has-galois-group-v-four.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-intersection-multiplicity-independent-equations-coordinates.md

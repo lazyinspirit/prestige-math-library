@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-self-regular-set-of-intermediate-density-carries-many-induced-copies.md

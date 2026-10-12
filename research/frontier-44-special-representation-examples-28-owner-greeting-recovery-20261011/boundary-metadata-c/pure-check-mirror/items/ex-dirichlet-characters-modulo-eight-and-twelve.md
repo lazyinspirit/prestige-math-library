@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-dirichlet-characters-modulo-eight-and-twelve.md

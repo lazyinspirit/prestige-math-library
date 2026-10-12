@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-finitely-generated-modules-over-domains-split-into-cyclic-modules.md

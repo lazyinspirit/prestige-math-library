@@ -53,9 +53,8 @@ $$|L(R)-L(P)|\le C_rK_fK_g(b-a)\lVert P\rVert^{r-1}.$$
 
 **Proof technique:** direct.
 
-1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is [given]
-$(f(v)-f(u))(g(w)-g(v))$ up to sign. Its absolute value is at most $K_fK_g(v-u)^p(w-v)^q$, hence at most $K_fK_g(w-u)^{p+q}$ by [L1].
+1.1 Insert a point $v$ between adjacent points $u<w$. The change from the old left-endpoint term to the two new terms is [given] $(f(v)-f(u))(g(w)-g(v))$ up to sign. Its absolute value is at most $K_fK_g(v-u)^p(w-v)^q$, hence at most $K_fK_g(w-u)^{p+q}$ by [L1].
 
 2.1 Passing from $D_m$ to $D_{m+1}$ inserts one midpoint in each of $2^m$ intervals of length $(b-a)2^{-m}$. Summing step 1.1 gives the first displayed bound. More generally, if a partition of an interval $I$ has $k\ge2$ subintervals, some interior point has two adjacent lengths whose sum is at most $2|I|/(k-1)$: the sum of all such two-interval lengths is at most $2|I|$. Removing that point therefore changes the left sum by at most $K_fK_g(2|I|/(k-1))^r$. [step 1.1, L1, L3]
 
-3.1 Remove the extra points of $R$ inside a fixed interval $I$ of $P$, one at a time, always using step 2.1. The total error is at most $2^rK_fK_g|I|^r\sum_{j\ge1}j^{-r}$. Grouping the positive integers into $[2^m,2^{m+1})$ bounds this series by $\sum_{m\ge0}2^{-m(r-1)}=(1-2^{1-r})^{-1}$ via [L2]. Thus the error on $I$ is at most $C_rK_fK_g|I|^r$. Summing over $I\in P$ and using $|I|^r\le\lVert P\rVert^{r-1}|I|$ proves the refinement estimate. If $K_fK_g=0$ or $a=b$, every error is zero. [step 2.1, L1, L2, L3] ∎
+3.1 Remove the extra points of $R$ inside a fixed interval $I$ of $P$, one at a time, always using step 2.1. The total error is at most $2^rK_fK_g|I|^r\sum_{j\ge1}j^{-r}$. Grouping the positive integers into $[2^m,2^{m+1})$ bounds this series by $\sum_{m\ge0}2^{-m(r-1)}=(1-2^{1-r})^{-1}$ via [L2]. Thus the error on $I$ is at most $C_rK_fK_g|I|^r$. Summing over $I\in P$ and using $|I|^r\le\lVert P\rVert^{r-1}|I|$ proves the refinement estimate. If $K_fK_g=0$ or $a=b$, every error is zero. [step 2.1, L1, L2, L3] ∎ 

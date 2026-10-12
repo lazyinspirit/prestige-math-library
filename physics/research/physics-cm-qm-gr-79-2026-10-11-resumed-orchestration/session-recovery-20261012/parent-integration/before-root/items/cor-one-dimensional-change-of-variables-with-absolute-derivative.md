@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-one-dimensional-change-of-variables-with-absolute-derivative.md

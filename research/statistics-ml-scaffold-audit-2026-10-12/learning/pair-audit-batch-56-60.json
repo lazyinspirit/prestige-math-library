@@ -1,0 +1,393 @@
+{
+  "schema_version": 1,
+  "batch": "ML-56–ML-60",
+  "status": "complete_with_explicit_local_and_independent_proof_obligations",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "faed895e05e4945d0e534b7bf2ee676b396d9e910ff2be004166441373c6b67c",
+  "plan_sha256_at_checkpoint": "991377c8b1db3394bb7351e3137714225c40af9124dda08a7b1cc9eef875a768",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "plan_section_hash_method": "SHA-256 of exact raw pair chunk from ### heading through final paragraph, excluding trailing newline bytes and stopping before the next ### or ## heading.",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-05/sources.json",
+  "source_manifest_sha256": "2b20aa2b8ed05f16dd39312a462bb0fa17848b81adc82fa02f2e917631a90d4f",
+  "pairs": [
+    {
+      "id": "ML-56",
+      "assessment": "audited_wgan_theory_with_independent_kr_suppliers_and_critic_limits",
+      "plan_section_sha256": "366273371f40bde69842a6804af7ab6b65d32001c8089d1a087cb748549ecc63",
+      "findings": [
+        "Arjovsky et al. define W1 on compact metric X and invoke, but do not prove, compact Kantorovich–Rubinstein duality; Cat4 now reuses P-KR-01/02 rather than proposing duplicate W1/KR items.",
+        "Theorem 1 gives continuity for continuous generator maps and local Lipschitz continuity/a.e. differentiability when g is locally Lipschitz with E[L(theta,Z)] finite. Theorem 3’s ideal-critic gradient additionally requires an attaining 1-Lipschitz critic and well-defined derivative/exchange conditions.",
+        "The neural WGAN algorithm is an approximation: weight clipping is explicitly called a poor Lipschitz enforcement method, and neither approximate critics nor saddle-point convergence/mode collapse are theorem consequences."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "wgan-arjovsky2017",
+          "citation": "Wasserstein Generative Adversarial Networks — Martin Arjovsky, Soumith Chintala, Léon Bottou (2017 (ICML; arXiv v3))",
+          "url": "https://arxiv.org/pdf/1701.07875",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/wgan-arjovsky2017.pdf",
+          "pdf_sha256": "dc103bd6dd154f9d84f97d833a3e51257daa21e1c8a8852d6e32f04474bcc6ee",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/wgan-arjovsky2017.txt",
+          "full_text_sha256": "035bea3965d06223e8c5de9dc9b902bcad47671422ce608e867ef88d4c5c83ee",
+          "read_status": "Theory and proof ranges read: cached PDF pp. 1–8 and 20–25. The remaining pp. 9–19 and 26–32 were not read and are not used for dossier claims.",
+          "manifest_anchors": [
+            "§2 W1 primal/dual motivation and continuity, pp. 2–4",
+            "§3 WGAN objective, assumptions and gradient, pp. 4–8",
+            "Appendix proof of continuity/differentiability results, pp. 20–25"
+          ],
+          "role": "load-bearing theorem statements and proof scope",
+          "pair_audited_ranges": "§§2–3, compact-X W1 definition, Theorems 1–3 and Assumption 1, PDF pp. 2–8; assumption and proofs, Appendix pp. 20–25. The critic gradient proof invokes compact KR duality and an envelope theorem but does not prove compact KR duality.",
+          "source_claims": "The paper uses W1 over a compact metric data space and its 1-Lipschitz dual; proves continuity and a.e. differentiability in generator parameters under its stated locally Lipschitz generator and expected local-Lipschitz assumptions; derives the generator gradient using an ideal optimal critic and parameter regularity.",
+          "hypotheses_and_proof_scope": "Compact data support; locally Lipschitz generator in latent and parameter variables with the paper’s integrable local-Lipschitz bound; latent coupling for continuity and bounded convergence; ideal 1-Lipschitz optimal critic for the gradient statement. The W1 duality is invoked rather than proved in full.",
+          "source_limits": "No general convergence theorem for the neural saddle-point algorithm, approximate critics, or mode collapse. The authors call weight clipping a poor Lipschitz enforcement method. Do not generalize the compact-space theorem to arbitrary P1 distributions without a separate proof."
+        },
+        {
+          "manifest_id": "optimal-transport-santambrogio2010",
+          "citation": "Introduction to Optimal Transport Theory — Filippo Santambrogio (2010 (arXiv lecture notes))",
+          "url": "https://arxiv.org/pdf/1009.3856",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/optimal-transport-santambrogio2010.pdf",
+          "pdf_sha256": "19e79f6ae0bd6223c886dea8a64c8b251305d4760e75e8312db60d5c884c8f82",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/optimal-transport-santambrogio2010.txt",
+          "full_text_sha256": "77f7a0761cecf1e0249fbe375513e3deffe1a8103210191d99b9822846d55981",
+          "read_status": "Cached PDF pp. 1–7 read. Remaining pp. 8–16 were not read or used.",
+          "manifest_anchors": [
+            "§1 Monge/Kantorovich formulations, pp. 1–3",
+            "§2 duality formula and W1 Lipschitz reduction, pp. 3–7"
+          ],
+          "role": "context; not a proof supplier",
+          "pair_audited_ranges": "§§1–2, PDF pp. 1–7: definitions and partial 1-Lipschitz c-transform reduction only; the finite-to-compact inf–sup exchange is not supplied.",
+          "source_claims": "Defines transport plans and cost; states the Kantorovich dual and reduces the W1 dual using the identity psi^c=-psi for a 1-Lipschitz potential. The 1-Lipschitz c-transform reduction is derived.",
+          "hypotheses_and_proof_scope": "For the cost |x-y|, a 1-Lipschitz potential satisfies the c-transform identity; the note presents the dual formula under its stated setup. It treats the infimum/supremum duality exchange formally and does not prove general Kantorovich duality.",
+          "source_limits": "Not a sufficient proof supplier for the full compact-metric KR duality needed by WGAN. Dossier calls for independent finite-LP plus compact approximation or complete compact OT duality proof. No unproved duality is attributed to this source."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "P-KR-01",
+          "status": "independent mathematics pair design; not published; local finite proof obligation remains",
+          "contract": "Finite metric probability vectors: compact nonempty coupling polytope; local closed-finitely-generated transport-cone and strict-separation proof yields attained single 1-Lipschitz potential duality."
+        },
+        {
+          "id": "P-KR-02",
+          "status": "independent mathematics pair design; not published; compact approximation proof obligation remains",
+          "contract": "Compact metric Borel probability measures: W1 equals the supremum over 1-Lipschitz functions after normalized finite-net quantization; depends on P-KR-01."
+        },
+        {
+          "id": "thm-strict-separation-of-a-point-from-a-closed-convex-set",
+          "status": "published",
+          "contract": "Strictly separates a point outside a nonempty closed convex set in finite-dimensional Euclidean space; P-KR-01 uses it only after locally proving its generated cone is closed."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "P-KR-01 and P-KR-02 are independent pre-Cat3 suppliers; no Category-3 result is required for W1/KR."
+      ],
+      "future_proof_authoring_obligations": [
+        "Finish P-KR-01/02 local proof designs before treating compact KR duality as available.",
+        "Prove the envelope/optimal-critic derivative step under an explicit compact critic class and differentiability hypotheses; Arjovsky et al. cite an envelope theorem without proving it.",
+        "Keep Theorem 1 continuity/a.e. differentiability distinct from the Theorem 3 gradient and from practical critic-training guarantees."
+      ]
+    },
+    {
+      "id": "ML-57",
+      "assessment": "audited_exact_flow_density_and_triangular_representation_hypotheses",
+      "plan_section_sha256": "729ccac79c8a09a81cd9ae9c1ccd6396ab8acb43a5aee8d3efe4c9909a4c010f",
+      "findings": [
+        "Papamakarios et al. use an equal-dimensional global diffeomorphism T:R^D→R^D with both T and T^{-1} differentiable; the density formula is exactly the C1 change-of-variables theorem with |det DT^{-1}|, and compositions multiply Jacobian determinants/add log determinants.",
+        "The triangular conditional-CDF construction requires a target density positive everywhere and differentiable conditional CDFs in current and preceding coordinates; positive conditional density makes each scalar CDF strictly increasing, and the base must satisfy the analogous regularity to map through the uniform cube.",
+        "The source states representational existence only; it does not establish finite neural approximation, optimization, or direct representation of discrete/singular-manifold laws."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "normalizing-flows-papamakarios2021",
+          "citation": "Normalizing Flows for Probabilistic Modeling and Inference — George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, Balaji Lakshminarayanan (2021 (JMLR 22))",
+          "url": "https://jmlr.org/papers/volume22/19-1028/19-1028.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.pdf",
+          "pdf_sha256": "dbb01097a6585608cd8344e695240b4d1bb9f21f1c769be1c60ff5b3cc14d76f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.txt",
+          "full_text_sha256": "828740d3644905d829db62069cdb4cfb9d04d48c747223b3ed93768012825cad",
+          "read_status": "Selected theory sections read: cached PDF pp. 1–6, 12–15, 31–33, 52–54. Other pages were not read and are not used.",
+          "manifest_anchors": [
+            "§2 change-of-variables flow formulation, pp. 3–6",
+            "§3 triangular/conditional-CDF universality construction, pp. 12–15",
+            "§4 continuous normalizing flow density ODE, pp. 31–33",
+            "§6 limitations/architecture tradeoffs, pp. 52–54"
+          ],
+          "role": "load-bearing density identity and representation scope",
+          "pair_audited_ranges": "§2, PDF pp. 3–6, global equal-dimensional diffeomorphism, change of variables, composition and target/base setup; §3.1 triangular/autoregressive conditional-CDF construction, pp. 12–15; selected limitations pp. 52–54.",
+          "source_claims": "Equal-dimensional global differentiable bijection with differentiable inverse gives transformed density using the absolute Jacobian determinant; composition adds log-Jacobian terms. A triangular conditional-CDF construction represents positive sufficiently smooth densities under its assumptions. For continuous flows, state-Lipschitz continuous-time vector fields yield unique trajectories and log-density evolves as minus the divergence integral.",
+          "hypotheses_and_proof_scope": "Density change is the ordinary Euclidean change-of-variables theorem for a global C1 diffeomorphism. Triangular representation requires everywhere positive target density and differentiable conditional CDFs. Continuous flow uses uniform state-Lipschitz regularity and continuous time dependence for unique solutions plus differentiability sufficient for the Jacobian formula.",
+          "source_limits": "Representational existence is not finite-network approximation or trainability. Full-dimensional smooth density models do not directly represent discrete or singular-manifold laws; continuous-flow numerical integration and adjoint gradients are approximations."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "status": "published",
+          "contract": "For open U,V⊂R^n and a C1 diffeomorphism T:U→V, the nonnegative Lebesgue-measurable change-of-variables identity holds; explicitly assumes Countable Choice."
+        },
+        {
+          "id": "def-jacobian-determinant-of-a-c-one-map",
+          "status": "published",
+          "contract": "For a square-dimensional C1 map, Jacobian determinant is det(DT); the change-of-variables volume factor is its absolute value."
+        },
+        {
+          "id": "thm-determinant-differential-and-jacobis-formula",
+          "status": "published",
+          "contract": "D det(A)[H]=tr(adj(A)H) for every square matrix; on invertible A, Jacobi’s formula is det(A)tr(A^{-1}H)."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "For triangular representation, retain the source’s everywhere-positive target/base density and conditional-CDF differentiability/surjectivity premises; the construction is local and is not a finite-network approximation theorem."
+      ],
+      "future_proof_authoring_obligations": [
+        "State the domain/codomain as open equal-dimensional Euclidean sets and prove global bijectivity plus C1 inverse before using change of variables.",
+        "Carry Countable Choice from the published nonnegative change-of-variables theorem.",
+        "Prove conditional factorization, strict monotonicity/inversion of each CDF, and differentiability of the triangular inverse under explicitly chosen hypotheses; do not assert neural universal approximation or trainability."
+      ]
+    },
+    {
+      "id": "ML-58",
+      "assessment": "audited_neural_ode_density_law_with_stronger_local_flow_hypotheses",
+      "plan_section_sha256": "092a0603bf0cc0224faf0ae5617d709a23ad6c6e0007dafd32c91d5061881e74",
+      "findings": [
+        "Chen et al. define the adjoint and instantaneous-change equations, but the Appendix A proof uses Taylor/Jacobian derivative exchanges from Lipschitz assumptions without a sufficient differentiability argument. The scaffold now replaces that step with a local C-infinity flow proof.",
+        "The local theorem assumes joint C-infinity dependence, uniform global state-Lipschitz and compact-parameter origin bounds on a finite interval; published global ODE and smooth-parameter-dependence results give a global diffeomorphic flow and C1 Jacobian.",
+        "The determinant ODE and density formula follow from the variational equation, Jacobi’s formula on invertible J, and the published nonnegative change-of-variables theorem. No consulted source supplies general numerical solver convergence or equality of continuous adjoints and finite-solver gradients."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "neural-ode-chen2018",
+          "citation": "Neural Ordinary Differential Equations — Ricky T. Q. Chen, Yulia Rubanova, Jesse Bettencourt, David Duvenaud (2018 (NeurIPS; cached arXiv v5))",
+          "url": "https://arxiv.org/pdf/1806.07366",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/neural-ode-chen2018.pdf",
+          "pdf_sha256": "435299cc42b75f9ad43d9aa246c96d3d7bdcc3297aa57f419bdc571b9c25137c",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/neural-ode-chen2018.txt",
+          "full_text_sha256": "91ff1fb3e6819dc0386d4ec9847785e60a92a9ec1e5eff54793e9b280f418442",
+          "read_status": "Cached PDF pp. 1–9 and 13–16 read; pp. 10–12 references and pp. 17–18 implementation supplement were not read and are not used.",
+          "manifest_anchors": [
+            "§2 neural ODE definition and adjoint method, pp. 2–4",
+            "§3 continuous normalizing flow and instantaneous change, pp. 4–8",
+            "appendix density-change proof and numerical issues, pp. 13–16"
+          ],
+          "role": "load-bearing equations and proof-gap audit",
+          "pair_audited_ranges": "§2 adjoint equations and algorithm, §§3–4 continuous normalizing flows and instantaneous-change statement, PDF pp. 2–9; Appendix A and B proofs, pp. 13–16. Appendix A’s stated Lipschitz hypothesis is weaker than the C-infinity Jacobian proof now designed locally.",
+          "source_claims": "For a unique differentiable ODE flow and a smooth state field, the infinitesimal change-of-variables formula yields d log p(z_t)/dt=-tr(∂f/∂z). Adjoint sensitivities provide a continuous gradient expression under regularity. The proof uses the local Jacobian determinant/Jacobi formula; actual ODESolve tolerances and backsolve gradients incur numerical error.",
+          "hypotheses_and_proof_scope": "Uniform state-Lipschitz field continuous in time for unique trajectories; differentiability in state and bounded path/exchange conditions for Jacobian/density derivation. Existing local library ODE theorem supplies existence/uniqueness only under matching assumptions.",
+          "source_limits": "No general numerical integrator convergence bound is supplied by this source. Reverse solve may have sensitivity/reconstruction errors; memory/runtime statements depend on implementation and solver choices."
+        },
+        {
+          "manifest_id": "normalizing-flows-papamakarios2021",
+          "citation": "Normalizing Flows for Probabilistic Modeling and Inference — George Papamakarios, Eric Nalisnick, Danilo Jimenez Rezende, Shakir Mohamed, Balaji Lakshminarayanan (2021 (JMLR 22))",
+          "url": "https://jmlr.org/papers/volume22/19-1028/19-1028.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.pdf",
+          "pdf_sha256": "dbb01097a6585608cd8344e695240b4d1bb9f21f1c769be1c60ff5b3cc14d76f",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/normalizing-flows-papamakarios2021.txt",
+          "full_text_sha256": "828740d3644905d829db62069cdb4cfb9d04d48c747223b3ed93768012825cad",
+          "read_status": "Selected theory sections read: cached PDF pp. 1–6, 12–15, 31–33, 52–54. Other pages were not read and are not used.",
+          "manifest_anchors": [
+            "§2 change-of-variables flow formulation, pp. 3–6",
+            "§3 triangular/conditional-CDF universality construction, pp. 12–15",
+            "§4 continuous normalizing flow density ODE, pp. 31–33",
+            "§6 limitations/architecture tradeoffs, pp. 52–54"
+          ],
+          "role": "corroborating continuous-flow formulation",
+          "pair_audited_ranges": "§4 continuous-time flows, uniform Lipschitz/continuous-time assumptions, density ODE and log-density integral, PDF pp. 31–33.",
+          "source_claims": "Equal-dimensional global differentiable bijection with differentiable inverse gives transformed density using the absolute Jacobian determinant; composition adds log-Jacobian terms. A triangular conditional-CDF construction represents positive sufficiently smooth densities under its assumptions. For continuous flows, state-Lipschitz continuous-time vector fields yield unique trajectories and log-density evolves as minus the divergence integral.",
+          "hypotheses_and_proof_scope": "Density change is the ordinary Euclidean change-of-variables theorem for a global C1 diffeomorphism. Triangular representation requires everywhere positive target density and differentiable conditional CDFs. Continuous flow uses uniform state-Lipschitz regularity and continuous time dependence for unique solutions plus differentiability sufficient for the Jacobian formula.",
+          "source_limits": "Representational existence is not finite-network approximation or trainability. Full-dimensional smooth density models do not directly represent discrete or singular-manifold laws; continuous-flow numerical integration and adjoint gradients are approximations."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "status": "published",
+          "contract": "Picard–Lindelöf initial-value problems have a unique maximal solution on an open interval."
+        },
+        {
+          "id": "cor-globally-lipschitz-odes-have-global-solutions",
+          "status": "published",
+          "contract": "Continuous vector field globally Lipschitz in state with a single uniform constant has a unique global solution for each initial state."
+        },
+        {
+          "id": "thm-smooth-dependence-of-ode-solutions-on-parameters",
+          "status": "published",
+          "contract": "Jointly C-infinity field on open time-state-parameter domain has a common compact local interval and smooth solution dependence in state and parameter."
+        },
+        {
+          "id": "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "status": "published",
+          "contract": "C1 diffeomorphism on open Euclidean sets; nonnegative change-of-variables formula under Countable Choice."
+        },
+        {
+          "id": "thm-determinant-differential-and-jacobis-formula",
+          "status": "published",
+          "contract": "Jacobi determinant derivative on invertible matrices: D det(A)[H]=det(A) tr(A^{-1}H)."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "For solver-error results only, P-NUM-ODE-01/02 remain independent and must be completed; they do not prove the exact density identity."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove the flow Jacobian variational equation and parameter differentiation under the exact C-infinity/common-interval hypotheses.",
+        "Show J_t remains invertible (e.g. solve the backward variational equation) before using log determinant and Jacobi’s formula.",
+        "Derive transported density from change of variables and integrate the instantaneous log-density equation.",
+        "Keep numerical solver convergence and finite-solver adjoint gradients separate; Chen et al. report tolerance effects but do not prove a general error bound."
+      ]
+    },
+    {
+      "id": "ML-59",
+      "assessment": "audited_finite_ddpm_gaussian_elbo_with_bcs03_bcs22_contracts",
+      "plan_section_sha256": "e68d6e70d130f1f720a9d6e6e798079f364a4b91cc2a7588071cbaac9b7ac931",
+      "findings": [
+        "Ho et al. give the finite forward Gaussian Markov chain, closed marginal q(x_t|x_0), posterior q(x_{t-1}|x_t,x_0), and variational decomposition into terminal KL, t>1 Gaussian KLs, and a separate learned decoder term at t=1.",
+        "With 0<beta_t<1, each forward noise variance is positive and the posterior variance tilde-beta_t is positive for t≥2. The degenerate conditioned q(x_0|x_1,x_0) is not treated as a Lebesgue density; t=1 uses a separately specified learned decoder with positive variance.",
+        "The exact ELBO/negative-log-likelihood identity consumes BCS-22 only with finite positive marginal normalizer, proper posterior, q≪posterior and finite absolute q-log integrability. Every Gaussian conditional consumer of BCS-03 retains PSD joint covariance and strictly positive-definite observed covariance; predictive/posterior covariance may be singular.",
+        "L_simple removes ELBO weights and is not maximum-likelihood training. Learned score accuracy, sample quality and finite-step convergence remain empirical."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "ddpm-ho2020",
+          "citation": "Denoising Diffusion Probabilistic Models — Jonathan Ho, Ajay Jain, Pieter Abbeel (2020 (NeurIPS; cached arXiv v2))",
+          "url": "https://arxiv.org/pdf/2006.11239",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/ddpm-ho2020.pdf",
+          "pdf_sha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/ddpm-ho2020.txt",
+          "full_text_sha256": "c3f42f0314bc88a37818ec148b20deb4c02ed1f5019079fe3a76789adf38f2ab",
+          "read_status": "Cached PDF pp. 1–9 and 13–16 read. References pp. 10–12 and extended remaining material pp. 17–25 were not read and are not used.",
+          "manifest_anchors": [
+            "§2 forward/reverse diffusion and exact Gaussian kernels, pp. 2–4",
+            "§3 variational bound and simplified objective, pp. 4–6",
+            "§4 experiments/limitations, pp. 6–9",
+            "appendix posterior and objective derivations, pp. 13–16"
+          ],
+          "role": "load-bearing finite-chain algebra and objective boundary",
+          "pair_audited_ranges": "§2 forward/reverse chain and Gaussian identities, §3 decomposition, posterior and epsilon parameterization, PDF pp. 2–4; §3.3–3.4 simple objective and experiments/limits, pp. 4–9; appendix posterior/objective derivations pp. 13–16. Unread pp. 10–12 and 17–25 are not used.",
+          "source_claims": "The fixed forward Gaussian chain has a closed-form q(x_t|x_0) and Gaussian posterior q(x_{t-1}|x_t,x_0). The variational objective decomposes into Gaussian KL terms. Noise prediction corresponds to a weighted ELBO term; L_simple drops weights and is not exact likelihood maximization.",
+          "hypotheses_and_proof_scope": "Finite discrete Markov Gaussian chain and the specified reverse model; Gaussian conditioning and the standard variational lower-bound identity yield the algebraic terms. Exact identities concern the model objective, not the learned score/network or sample quality.",
+          "source_limits": "Finite networks, chosen T, training and sampling are empirical. The paper reports likelihood limitations; no universal fidelity or sampler-convergence theorem."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "BCS-03: thm-multivariate-normal-conditional-law",
+          "status": "planned Category 3 interface; not published",
+          "contract": "For jointly Gaussian (X,Y) with PSD block covariance and observed block Cov(Y)=B≻0, conditional law is Gaussian with mean a+CB^{-1}(y-b) and PSD covariance A-CB^{-1}C^T. The prior/conditional covariance may be singular; no singular-observed-block pseudoinverse is supplied."
+        },
+        {
+          "id": "BCS-22: def-variational-family-and-elbo; thm-elbo-kl-decomposition",
+          "status": "planned Category 3 interface; not published",
+          "contract": "For nonnegative density gamma with Z=∫gamma dμ∈(0,∞), proper posterior pi=gamma/Z, probability q≪pi and ∫q(|log gamma|+|log q|)dμ<∞, log Z=ELBO(q)+KL(q||pi). One-way Category 3→4 interface."
+        },
+        {
+          "id": "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "status": "published",
+          "contract": "Expectation and integrability notation only; does not establish ELBO identity."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "BCS-03 and BCS-22 are one-way Category3→Category4 supplier designs, not published library items; preserve exact PSD/observed-SPD and ELBO integrability clauses."
+      ],
+      "future_proof_authoring_obligations": [
+        "Derive q(x_t|x_0) and q(x_{t-1}|x_t,x_0) by finite Gaussian conditioning/marginalization and keep every observed covariance SPD.",
+        "Prove posterior propriety and q≪posterior and finite absolute log integrability before invoking BCS-22.",
+        "Separate the t=1 decoder from the degenerate conditioned forward posterior; derive weighted epsilon terms and state why L_simple drops weights.",
+        "Do not infer score consistency, likelihood optimality from L_simple, or sampler convergence."
+      ]
+    },
+    {
+      "id": "ML-60",
+      "assessment": "audited_reverse_sde_scope_with_anderson_and_unbounded_density_kernel_contracts",
+      "plan_section_sha256": "8856231e21e416a03af9cda29199b0c396a03a5b28a959a89e7f95d40de9dbbc",
+      "findings": [
+        "Anderson pp. 4–5 explicitly assumes an almost-surely bounded initial state independent of the Brownian process, plus unique smooth forward and joint/conditional KFP densities. Positive-time epsilon truncation does not generally make X_epsilon bounded under Gaussian noising.",
+        "ML60 consumes P-SDE-02 for the exact bounded-start Anderson theorem and the separately specified general unbounded-start kernel/martingale design; it does not create a duplicate reverse-time theorem. The unbounded design explicitly names Bayes-reversed kernels, Chapman–Kolmogorov, generator on C_c^infinity, reverse martingale well-posedness/nonexplosion and Brownian reconstruction under uniformly nonsingular sigma.",
+        "Anderson’s state-dependent correction is -b+div(a)+a grad(log p); Song’s probability-flow equation requires exact score and regular density evolution, and common score-only formulas are restricted to state-independent scalar diffusion.",
+        "The reverse process starts at actual P_T. Finite integrated VP/OU noise generally leaves nonzero residual signal (bar-alpha_T>0); a standard Gaussian prior is an approximation unless matched. Singular t=0 endpoints require separate weak convergence; solver, score and divergence estimation errors remain separate."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "reverse-time-anderson1982",
+          "citation": "Reverse-time Diffusion Equation Models — Brian D. O. Anderson (1982 (Stochastic Processes and their Applications 12, 313–326))",
+          "url": "https://eva.fcien.udelar.edu.uy/pluginfile.php/166428/mod_resource/content/1/1982_andersonREVERSE-TIME%20DIFFUSION%20EQUATION%20MODELS.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/reverse-time-anderson1982.pdf",
+          "pdf_sha256": "dcf5cc9261871a586d41e234b390ac0e4c84235abc2d6fa3ea720266a097b87b",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/reverse-time-anderson1982.txt",
+          "full_text_sha256": "ea86eaf7b7db567db7d9927dff3033c6a86618cd0e0a2a2232d998fe6e9fba21",
+          "read_status": "Cached PDF pp. 1–9 read for theorem and complete proof. Remaining pp. 10–14 contain alternate derivations/examples/references and were not read or used.",
+          "manifest_anchors": [
+            "§1 model assumptions and reverse-time statement, pp. 1–3",
+            "forward and joint Fokker–Planck setup, pp. 3–6",
+            "reverse Brownian increment and drift proof, pp. 6–9"
+          ],
+          "role": "load-bearing bounded-start theorem; not source for unbounded-start extension",
+          "pair_audited_ranges": "§§1–4, PDF pp. 1–9, including bounded-start setup p. 4, theorem p. 5 and complete reverse-increment/KFP proof pp. 6–9. Anderson does not prove general coefficient-to-density/joint-KFP hypotheses.",
+          "source_claims": "For an Itô diffusion with coefficient conditions giving unique strong forward solution and smooth density solving the forward Kolmogorov equation, plus the paper’s smooth unique joint KFP solution, reverse increments yield a Brownian motion after drift adjustment; reverse drift includes density-divergence correction. For state-independent scalar g(t), it reduces to f-g(t)^2 grad log p_t with sign/time convention carefully stated.",
+          "hypotheses_and_proof_scope": "Smooth/growth coefficient conditions sufficient for forward strong uniqueness; density and joint KFP smoothness/uniqueness assumed or established by cited theory; reverse-time filtration and positive density where score is used. Proof compares joint forward/reverse KFP equations and establishes independent reversed increments and Brownian properties.",
+          "source_limits": "Does not prove general SDE existence or all density regularity assumptions. Modern score-SDE presentations commonly simplify to g(t); that simplification is not the general state-dependent diffusion formula."
+        },
+        {
+          "manifest_id": "score-sde-song2021",
+          "citation": "Score-Based Generative Modeling through Stochastic Differential Equations — Yang Song, Jascha Sohl-Dickstein, Diederik P. Kingma, Abhishek Kumar, Stefano Ermon, Ben Poole (2021 (ICLR))",
+          "url": "https://arxiv.org/pdf/2011.13456",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/score-sde-song2021.pdf",
+          "pdf_sha256": "b244b740e60628d01bc3d4b98d721c2343be1fb9b67ad22593c8555e66f4d4a6",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-05/score-sde-song2021.txt",
+          "full_text_sha256": "eb940a5a762b4ef8a87f71405e105102d61b7e5309985e5d72692a1775757722",
+          "read_status": "Cached PDF pp. 1–5, 13–15, 17–19, and 31–32 read. Other appendices and experimental pages were not read and are not relied on.",
+          "manifest_anchors": [
+            "§2 SDE framework and score objective, pp. 2–5",
+            "appendix reverse SDE/probability flow material, pp. 13–15",
+            "sampling and likelihood calculations, pp. 17–19",
+            "appendix derivation/trace-estimation detail, pp. 31–32"
+          ],
+          "role": "score-SDE application and state-independent simplification boundary",
+          "pair_audited_ranges": "§§2–4, PDF pp. 2–5; reverse/probability-flow appendices pp. 13–15; Fokker–Planck derivation, reverse/probability-flow formulas and numerical likelihood/sampling pp. 17–19; trace-estimation detail pp. 31–32. Other pages not used.",
+          "source_claims": "The score objective characterizes the marginal score at population optimum under sufficient model/data conditions. With exact score and suitable density evolution, the reverse SDE generates the reverse marginals; the probability-flow ODE has identical one-time marginals and a continuous change-of-density formula. Numerical RK and Hutchinson trace calculations used in experiments are approximations.",
+          "hypotheses_and_proof_scope": "Reverse-time SDE theorem is attributed to Anderson; its primary theorem/proof was separately read. Use state-independent scalar diffusion for the familiar score-only drift, or include the general divergence term. Probability-flow identity follows by matching Fokker–Planck and continuity equations under smooth density/vector-field conditions.",
+          "source_limits": "Score estimation error, finite prior time, discretization error, and approximate divergence/trace estimation are not controlled by the ideal equations. “Exact likelihood” refers to exact continuous equations, not numerical computation."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "P-SDE-01",
+          "status": "independent mathematics design; not published; density/PDE coefficient supplier remains open",
+          "contract": "Separates global-Lipschitz/linear-growth strong forward existence from positive smooth density and unique forward/joint KFP PDE hypotheses."
+        },
+        {
+          "id": "P-SDE-02: Anderson bounded-start reversal",
+          "status": "independent mathematics pair design; Anderson theorem/proof audited, coefficient-to-density hypotheses remain open",
+          "contract": "Requires a.s.-bounded initial state independent of forward Brownian motion, unique strong forward SDE, positive unique smooth forward density, unique smooth augmented joint and conditional joint KFP densities; yields reverse drift -b+div(a)+a∇log p."
+        },
+        {
+          "id": "P-SDE-02: unbounded-start positive-transition-density reversal",
+          "status": "independent local proof design; not source-verified or published",
+          "contract": "Finite interval, nonexplosive Markov diffusion, square uniformly nonsingular sigma, positive smooth transition/marginal densities, forward Chapman–Kolmogorov and semigroup regularity, sufficient decay/integrability, reverse kernels K_{u,v}(y,dx)=p_{T-v}(x)q(T-v,x;T-u,y)dx/p_{T-u}(y), generator p^{-1}(L^*(p phi)-phi L^*p) on C_c^infinity, and a well-posed nonexplosive reverse martingale problem; Brownian reconstruction by sigma^{-1} and Levy characterization."
+        },
+        {
+          "id": "def-d-dimensional-brownian-motion; def-ito-integral-for-square-integrable-predictable-processes; thm-multidimensional-ito-formula-for-brownian-driven-processes",
+          "status": "published",
+          "contract": "Brownian path, coordinatewise Ito-integral construction from scalar L2, and multidimensional Ito formula under their stated filtration/integrability hypotheses; these do not provide reversal or density regularity."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "The broadened unbounded-start contract is now owned by independent P-SDE-02, not by this Cat4 pair.",
+        "P-NUM-SDE-02 is required only for quantitative weak-order sampler error, not exact time reversal."
+      ],
+      "future_proof_authoring_obligations": [
+        "Complete P-SDE-01 density/joint-KFP hypotheses from a matching parabolic theorem.",
+        "For P-SDE-02 Anderson, preserve bounded-start and smooth unique density clauses; do not infer them from strong existence.",
+        "For P-SDE-02 unbounded route, prove reverse-kernel normalization/composition, generator differentiation, martingale problem, nonexplosion, and Brownian reconstruction with all regularity/integrability conditions.",
+        "Prove any epsilon→0 endpoint weak limit separately. Retain exact terminal law P_T; do not silently replace it by N(0,I)."
+      ]
+    }
+  ],
+  "cross_category_constraints": [
+    "ML-56 consumes independent P-KR-01/02 for all finite/compact W1/KR definitions and duality; no Cat4 duplicate is proposed and neither supplier depends on Cat3/4.",
+    "ML-59 consumes BCS-03 and BCS-22 only as one-way Category3→Category4 interfaces with PSD/observed-SPD conditioning and exact finite-integrability ELBO clauses.",
+    "ML-60 consumes independent P-SDE-01/02, including the separately scoped unbounded-start kernel route; no Category3 or Category4 theorem supplies time reversal. P-NUM-SDE-02 is optional only for numerical error claims."
+  ]
+}

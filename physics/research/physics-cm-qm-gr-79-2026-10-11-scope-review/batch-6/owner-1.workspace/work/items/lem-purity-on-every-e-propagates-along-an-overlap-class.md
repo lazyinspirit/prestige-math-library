@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-purity-on-every-e-propagates-along-an-overlap-class.md

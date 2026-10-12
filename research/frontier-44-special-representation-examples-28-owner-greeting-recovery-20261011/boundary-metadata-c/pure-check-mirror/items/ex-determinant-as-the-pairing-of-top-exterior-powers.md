@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-determinant-as-the-pairing-of-top-exterior-powers.md

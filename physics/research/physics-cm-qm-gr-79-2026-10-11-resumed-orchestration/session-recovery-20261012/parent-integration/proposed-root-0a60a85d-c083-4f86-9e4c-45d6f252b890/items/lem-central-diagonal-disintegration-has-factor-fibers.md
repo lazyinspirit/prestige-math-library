@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-central-diagonal-disintegration-has-factor-fibers.md

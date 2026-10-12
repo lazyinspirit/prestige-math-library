@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-betti-numbers-residue-field-regular-ring.md

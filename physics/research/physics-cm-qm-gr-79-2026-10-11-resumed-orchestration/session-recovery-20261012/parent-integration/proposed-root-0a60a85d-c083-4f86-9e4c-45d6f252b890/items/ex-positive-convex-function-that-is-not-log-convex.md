@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-positive-convex-function-that-is-not-log-convex.md

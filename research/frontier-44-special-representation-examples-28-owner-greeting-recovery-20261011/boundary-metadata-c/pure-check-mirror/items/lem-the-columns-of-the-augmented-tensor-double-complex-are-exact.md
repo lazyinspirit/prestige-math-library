@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-columns-of-the-augmented-tensor-double-complex-are-exact.md

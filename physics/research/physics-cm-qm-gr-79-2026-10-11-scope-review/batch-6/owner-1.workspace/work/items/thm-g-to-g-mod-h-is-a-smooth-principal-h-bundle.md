@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-g-to-g-mod-h-is-a-smooth-principal-h-bundle.md

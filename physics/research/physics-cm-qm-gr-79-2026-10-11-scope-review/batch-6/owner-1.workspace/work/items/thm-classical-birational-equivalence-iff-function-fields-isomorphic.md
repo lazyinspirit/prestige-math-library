@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-classical-birational-equivalence-iff-function-fields-isomorphic.md

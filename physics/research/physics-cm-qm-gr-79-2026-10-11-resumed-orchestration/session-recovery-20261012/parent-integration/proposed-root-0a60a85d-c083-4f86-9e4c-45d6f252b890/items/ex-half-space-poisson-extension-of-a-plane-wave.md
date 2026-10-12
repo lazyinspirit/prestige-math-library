@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-half-space-poisson-extension-of-a-plane-wave.md

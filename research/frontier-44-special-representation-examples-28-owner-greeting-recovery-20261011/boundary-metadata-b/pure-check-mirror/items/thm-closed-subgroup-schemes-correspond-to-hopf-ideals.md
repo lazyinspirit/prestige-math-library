@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-closed-subgroup-schemes-correspond-to-hopf-ideals.md

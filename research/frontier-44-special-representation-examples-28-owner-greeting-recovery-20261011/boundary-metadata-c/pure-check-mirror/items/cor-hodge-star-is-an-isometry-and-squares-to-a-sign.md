@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-hodge-star-is-an-isometry-and-squares-to-a-sign.md

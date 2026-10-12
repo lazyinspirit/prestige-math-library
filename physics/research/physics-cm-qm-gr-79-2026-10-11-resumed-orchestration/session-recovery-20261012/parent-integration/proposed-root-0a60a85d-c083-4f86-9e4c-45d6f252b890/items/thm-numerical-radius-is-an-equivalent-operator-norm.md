@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-numerical-radius-is-an-equivalent-operator-norm.md

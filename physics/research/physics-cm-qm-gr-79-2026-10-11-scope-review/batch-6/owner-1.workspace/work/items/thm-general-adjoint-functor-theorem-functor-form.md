@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-general-adjoint-functor-theorem-functor-form.md

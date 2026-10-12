@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-rank-and-nondegeneracy-are-congruence-invariants.md

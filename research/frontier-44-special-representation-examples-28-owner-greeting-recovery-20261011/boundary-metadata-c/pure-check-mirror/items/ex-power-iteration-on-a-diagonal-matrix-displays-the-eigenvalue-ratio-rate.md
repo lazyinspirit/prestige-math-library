@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-power-iteration-on-a-diagonal-matrix-displays-the-eigenvalue-ratio-rate.md

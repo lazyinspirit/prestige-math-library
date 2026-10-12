@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-primitive-vectors-from-standard-maximal-parabolics.md

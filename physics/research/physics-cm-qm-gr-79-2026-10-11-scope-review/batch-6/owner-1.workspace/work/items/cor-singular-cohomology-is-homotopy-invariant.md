@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-singular-cohomology-is-homotopy-invariant.md

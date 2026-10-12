@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-duals-of-finite-products-and-discrete-direct-sums.md

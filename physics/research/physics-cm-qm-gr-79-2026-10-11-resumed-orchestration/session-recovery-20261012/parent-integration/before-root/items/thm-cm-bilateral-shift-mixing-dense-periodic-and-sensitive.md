@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive.md

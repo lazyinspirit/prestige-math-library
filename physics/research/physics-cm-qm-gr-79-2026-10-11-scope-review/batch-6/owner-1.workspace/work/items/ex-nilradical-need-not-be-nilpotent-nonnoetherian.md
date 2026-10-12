@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nilradical-need-not-be-nilpotent-nonnoetherian.md

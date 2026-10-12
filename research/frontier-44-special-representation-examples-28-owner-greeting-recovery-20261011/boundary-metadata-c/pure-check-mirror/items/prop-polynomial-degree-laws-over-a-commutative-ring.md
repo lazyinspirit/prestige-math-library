@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-polynomial-degree-laws-over-a-commutative-ring.md

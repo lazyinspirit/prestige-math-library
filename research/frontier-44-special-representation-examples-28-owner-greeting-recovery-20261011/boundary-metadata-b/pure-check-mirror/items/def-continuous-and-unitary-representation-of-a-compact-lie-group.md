@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-continuous-and-unitary-representation-of-a-compact-lie-group.md

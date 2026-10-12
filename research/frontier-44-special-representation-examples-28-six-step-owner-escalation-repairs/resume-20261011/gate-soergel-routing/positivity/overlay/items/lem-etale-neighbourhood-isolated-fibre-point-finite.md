@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-etale-neighbourhood-isolated-fibre-point-finite.md

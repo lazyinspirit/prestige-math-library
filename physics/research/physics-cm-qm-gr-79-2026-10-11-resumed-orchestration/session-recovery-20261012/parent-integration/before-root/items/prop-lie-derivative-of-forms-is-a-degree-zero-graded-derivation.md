@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-lie-derivative-of-forms-is-a-degree-zero-graded-derivation.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-sequential-abelian-colimit-is-the-cokernel-of-one-minus-shift.md

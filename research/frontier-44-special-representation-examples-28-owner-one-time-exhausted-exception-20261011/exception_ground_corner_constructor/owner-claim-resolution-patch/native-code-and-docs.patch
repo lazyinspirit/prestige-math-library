@@ -1,0 +1,565 @@
+--- a/tools/step3-owner-creation.mjs
++++ b/tools/step3-owner-creation.mjs
+@@ -1,7 +1,7 @@
+ #!/usr/bin/env node
+ // Owner-spawned origin is distinct from native authoring and mathematical audit.
+ import { createHash } from 'node:crypto';
+-import { existsSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
++import { existsSync, readFileSync, readdirSync, realpathSync, writeFileSync } from 'node:fs';
+ import { join, resolve, sep } from 'node:path';
+ import { pathToFileURL } from 'node:url';
+ import { itemHash, loadStep3, isMinimalItemReceipt } from './step3-decisions.mjs';
+@@ -43,7 +43,7 @@
+   return { page: live.page.id, batch: String(live.page.batch), claim_sha256: hash(claim),
+     item_file_sha256: sha(text) };
+ }
+-function validate(root, run, id, receipt, s) {
++function validate(root, run, id, receipt, s, historicalClaim = null) {
+   const boundary = baselineFor(root, run), { baseline } = boundary;
+   const at = Date.parse(receipt?.attested_at), baselineAt = Date.parse(baseline.at);
+   const timeline = receipt?.author?.timeline;
+@@ -69,7 +69,7 @@
+     || baseline.items.some(row => row.id === id) || baseline.existing_item_files.includes(id)
+     || !isHash(receipt.claim_sha256) || !isHash(receipt.item_file_sha256) || !Array.isArray(receipt.sources))
+     throw Error(`${id}: invalid owner creation attestation or immutable baseline binding`);
+-  const claim = step3OwnerCreationClaim(s, id);
++  const claim = historicalClaim ?? step3OwnerCreationClaim(s, id);
+   if (claim.page !== receipt.page || claim.batch !== receipt.batch || claim.claim_sha256 !== receipt.claim_sha256)
+     throw Error(`${id}: stale owner creation claim identity`);
+   const texts = new Map();
+@@ -93,7 +93,18 @@
+ export function loadStep3OwnerCreation(root, run, id, s = loadStep3(root, run)) {
+   const path = step3OwnerCreationPath(root, run, id);
+   if (!existsSync(path)) return null;
+-  return validate(root, run, id, json(path), s);
++  const origin = json(path), current = step3OwnerCreationClaim(s, id);
++  if (current.page === origin.page && current.batch === origin.batch
++    && current.claim_sha256 === origin.claim_sha256) {
++    if (resolutionFiles(root, run, id).length)
++      throw Error(`${id}: claim reverted to the original after resolution; owner recovery required`);
++    return validate(root, run, id, origin, s);
++  }
++  const resolution = loadStep3OwnerClaimResolution(root, run, id, s);
++  if (!resolution) throw Error(`${id}: stale owner creation claim identity`);
++  // Resolution validates the archived original origin and a separate current
++  // owner-held claim repair. Never return a rewritten creation attestation.
++  return origin;
+ }
+ export function recordStep3OwnerCreation(root, run, id, evidence) {
+   safe(run); safe(id);
+@@ -134,12 +145,268 @@
+     && row.sha256 === itemHash(s, id, deps);
+ }
+ 
++// Proposed additions to tools/step3-owner-creation.mjs. Root integrates this
++// native guarded resolution; these functions never replace the origin.
++export const STEP3_OWNER_CLAIM_RESOLUTION_POLICY = 'owner-held-step3-creation-claim-resolution-v1';
++const RESOLUTION_EVIDENCE_POLICY = 'owner-held-step3-creation-claim-resolution-evidence-v1';
++const markerKeys = ['path', 'sha256'];
++const strictKeys = (value, keys, what) => {
++  if (!value || typeof value !== 'object' || Array.isArray(value)
++    || Object.keys(value).length !== keys.length || keys.some(key => !Object.hasOwn(value, key)))
++    throw Error(`Invalid ${what}`);
++};
++const readMarker = (root, marker) => {
++  strictKeys(marker, markerKeys, 'resolution source marker');
++  if (!isHash(marker.sha256)) throw Error('Invalid resolution source hash');
++  const file = researchFile(root, marker.path), bytes = readFileSync(file);
++  if (sha(bytes) !== marker.sha256) throw Error(`Stale resolution source: ${marker.path}`);
++  return { file, bytes };
++};
++const sourceClaim = text => text.split(/^## /m)
++  .filter(section => /^(Statement|Definition)\b/.test(section)).map(section => section.trim());
++function archiveClaim(root, id, page, batch, itemMarker, manifestMarker) {
++  const item = readMarker(root, itemMarker).bytes.toString();
++  const manifest = JSON.parse(readMarker(root, manifestMarker).bytes.toString());
++  let entry;
++  if (Array.isArray(manifest)) {
++    const pages = manifest.filter(row => row?.id === page);
++    const entries = pages.flatMap(row => row.items ?? []).filter(row => row?.id === id);
++    if (pages.length !== 1 || entries.length !== 1
++      || !manifestMarker.path.includes(`-batch-${batch}.`))
++      throw Error(`${id}: ambiguous original manifest/home/batch`);
++    entry = entries[0];
++  } else {
++    strictKeys(manifest, ['page', 'batch', 'item'], 'resolved claim archive');
++    if (manifest.page !== page || manifest.batch !== batch || manifest.item?.id !== id)
++      throw Error(`${id}: resolution archive changed item/home/batch`);
++    entry = manifest.item;
++  }
++  const claim = { ...Object.fromEntries(['id', 'kind', 'title', 'statement']
++    .map(key => [key, entry[key] ?? null])), source_claim: sourceClaim(item) };
++  return { page, batch, claim_sha256: hash(claim), item_file_sha256: sha(item), claim };
++}
++const resolutionStem = (run, id) => `${safe(run)}-step3-owner-claim-resolution-${safe(id)}-`;
++const resolutionFiles = (root, run, id) => readdirSync(join(root, 'research'))
++  .filter(file => file.startsWith(resolutionStem(run, id))
++    && /^[a-f0-9]{64}\.json$/.test(file.slice(resolutionStem(run, id).length)));
++const resolutionPath = (root, run, id, claimHash) => {
++  if (!isHash(claimHash)) throw Error('Invalid resolved claim hash');
++  return join(root, 'research', `${resolutionStem(run, id)}${claimHash}.json`);
++};
++const marker = (root, path) => ({ path: path.slice(root.length + 1), sha256: sha(readFileSync(path)) });
++function acceptedSubject(root, run, id, rawHash, reviewMarker) {
++  const review = JSON.parse(readMarker(root, reviewMarker).bytes.toString());
++  if (review.run !== run || !/^\/root\/[a-zA-Z0-9_/-]+$/.test(review.reviewer ?? ''))
++    throw Error(`${id}: missing actual mathematical lead review`);
++  const direct = review.current_subject_decisions?.filter(row => row.id === id) ?? [];
++  const retained = review.original_subjects?.filter(row => row.id === id) ?? [];
++  const expanded = review.expanded_current_whole_accepted_subjects?.filter(row => row.id === id) ?? [];
++  const rows = [...direct, ...retained, ...expanded];
++  // A current subject and the historical/current-preservation view may both
++  // occur in a real lead packet. Require one row per view and exact agreement;
++  // a conflicting hold, source hash or ineligible decision is never ignored.
++  if (!rows.length || [direct, retained, expanded].some(view => view.length > 1)
++    || rows.some(row => row.current_raw_sha256 !== rawHash || row.mathematical_hold === true
++      || row.decision_eligible === false))
++    throw Error(`${id}: review does not bind exact accepted current source`);
++  if (direct.length && (direct[0].verdict !== 'SUFFICIENT_WHOLE_ACTUAL_SUPPLIER_AND_CONSUMER'
++    || direct[0].decision_eligible !== true)) throw Error(`${id}: whole-current mathematical acceptance required`);
++  if (retained.length && (retained[0].preserved_disposition !== 'SUFFICIENT_WHOLE_ACTUAL_REVIEW_CURRENT_INPUTS_BOUND'
++    || retained[0].mathematical_hold !== false)) throw Error(`${id}: whole-current mathematical acceptance required`);
++  if (direct.length || retained.length) return;
++  const row = expanded[0];
++  if (row?.mathematical_hold === false && row.retained_whole_actual_review_packet) {
++    const prior = row.retained_whole_actual_review_packet;
++    strictKeys(prior, ['path', 'raw_sha256'], 'retained review marker');
++    return acceptedSubject(root, run, id, rawHash, { path: prior.path, sha256: prior.raw_sha256 });
++  }
++  throw Error(`${id}: whole-current mathematical acceptance required`);
++}
++function consumerGraph(root) {
++  const graph = new Map();
++  for (const file of readdirSync(join(root, 'items')).filter(name => name.endsWith('.md'))) {
++    const text = readFileSync(join(root, 'items', file), 'utf8');
++    const fm = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/.exec(text)?.[1] ?? '';
++    const targets = new Set(['deps', 'justified_by', 'forward_refs']
++      .flatMap(key => frontmatterList(fm, key)));
++    for (const link of text.matchAll(/\[\[([a-zA-Z0-9_-]+)(?:\|[^\]]*)?\]\]/g)) targets.add(link[1]);
++    graph.set(file.slice(0, -3), targets);
++  }
++  return graph;
++}
++function requireConsumers(root, id, rows) {
++  if (!Array.isArray(rows) || new Set(rows.map(row => row.id)).size !== rows.length)
++    throw Error(`${id}: invalid affected-consumer guards`);
++  const graph = consumerGraph(root), direct = [...graph].filter(([, targets]) => targets.has(id)).map(([key]) => key);
++  const reached = new Set(), queue = [...direct];
++  while (queue.length) {
++    const next = queue.pop(); if (reached.has(next)) continue; reached.add(next);
++    queue.push(...[...graph].filter(([, targets]) => targets.has(next)).map(([key]) => key));
++  }
++  if (direct.some(key => !rows.some(row => row.id === key)))
++    throw Error(`${id}: missing actual direct-consumer review`);
++  for (const row of rows) {
++    strictKeys(row, ['id', 'item_file_sha256', 'review'], 'affected consumer'); safe(row.id);
++    if (!reached.has(row.id) || row.id === id || !isHash(row.item_file_sha256)
++      || sha(readFileSync(join(root, 'items', `${row.id}.md`))) !== row.item_file_sha256)
++      throw Error(`${row.id}: unrelated or stale affected consumer`);
++  }
++}
++function validateResolutionEvidence(root, run, id, evidence, s, origin, { historical = false } = {}) {
++  strictKeys(evidence, ['version', 'policy', 'run', 'id', 'owner', 'owner_identity', 'authorization', 'reason',
++    'origin', 'original_item', 'original_manifest', 'current_claim_sha256', 'current_item_file_sha256',
++    'supplier_review', 'consumers', 'owner_decision', 'previous_resolution'], 'owner claim resolution evidence');
++  if (evidence.version !== 1 || evidence.policy !== RESOLUTION_EVIDENCE_POLICY || evidence.run !== run
++    || evidence.id !== id || evidence.owner !== true || evidence.owner_identity !== origin.owner_identity
++    || evidence.reason?.trim().length < 40) throw Error(`${id}: invalid owner-held claim resolution`);
++  const authority = JSON.parse(readMarker(root, evidence.authorization).bytes.toString());
++  if (authority.run !== run || authority.authorized_by !== 'owner' || !String(authority.authorization ?? '').trim())
++    throw Error(`${id}: explicit run owner authorization required`);
++  const originFile = step3OwnerCreationPath(root, run, id);
++  if (readMarker(root, evidence.origin).file !== resolve(originFile))
++    throw Error(`${id}: resolution detached from immutable origin`);
++  const original = archiveClaim(root, id, origin.page, origin.batch, evidence.original_item, evidence.original_manifest);
++  if (original.item_file_sha256 !== origin.item_file_sha256 || original.claim_sha256 !== origin.claim_sha256)
++    throw Error(`${id}: original authored claim reconstruction mismatch`);
++  validate(root, run, id, origin, s, original);
++  const current = step3OwnerCreationClaim(s, id);
++  if (!historical && (current.page !== origin.page || current.batch !== origin.batch
++    || current.claim_sha256 !== evidence.current_claim_sha256 || current.item_file_sha256 !== evidence.current_item_file_sha256
++    || current.claim_sha256 === origin.claim_sha256)) throw Error(`${id}: stale or unchanged resolved claim`);
++  if (!isHash(evidence.current_claim_sha256) || !isHash(evidence.current_item_file_sha256))
++    throw Error(`${id}: invalid accepted repair hashes`);
++  acceptedSubject(root, run, id, evidence.current_item_file_sha256, evidence.supplier_review);
++  const decision = JSON.parse(readMarker(root, evidence.owner_decision).bytes.toString());
++  if (!isMinimalItemReceipt(decision) || decision.run !== run || decision.target !== id
++    || !decision.owner || decision.decision !== 'repaired'
++    || (!historical && (decision.sha256 !== itemHash(s, id) || !currentStep3OwnerCreationDecision(s, id))))
++    throw Error(`${id}: ordinary current owner repaired receipt required`);
++  if (!historical) requireConsumers(root, id, evidence.consumers);
++  for (const row of evidence.consumers) acceptedSubject(root, run, row.id, row.item_file_sha256, row.review);
++  // Historical ordinary receipts and reviewer archives prove resolution history;
++  // their currency is not substituted for the separate current-owner check.
++  return { original, current };
++}
++function readResolution(root, run, id, origin, s, path, seen = new Set()) {
++  const relative = path.startsWith(resolve(root) + sep) ? path.slice(resolve(root).length + 1) : path;
++  const absolute = researchFile(root, relative);
++  if (seen.has(absolute)) throw Error(`${id}: cyclic owner claim resolution`); seen.add(absolute);
++  const record = json(absolute);
++  strictKeys(record, ['version', 'policy', 'run', 'id', 'recorded_at', 'evidence', 'current_item_archive',
++    'current_manifest_archive'], 'immutable owner claim resolution record');
++  if (record.version !== 1 || record.policy !== STEP3_OWNER_CLAIM_RESOLUTION_POLICY || record.run !== run
++    || record.id !== id || !Number.isFinite(Date.parse(record.recorded_at)))
++    throw Error(`${id}: invalid owner claim resolution record`);
++  const evidence = JSON.parse(readMarker(root, record.evidence).bytes.toString());
++  const bound = validateResolutionEvidence(root, run, id, evidence, s, origin, { historical: true });
++  const resolved = archiveClaim(root, id, origin.page, origin.batch, record.current_item_archive, record.current_manifest_archive);
++  if (resolved.claim_sha256 !== evidence.current_claim_sha256 || resolved.item_file_sha256 !== evidence.current_item_file_sha256
++    || resolved.claim.id !== bound.original.claim.id || resolved.claim.kind !== bound.original.claim.kind
++    || resolved.claim.title !== bound.original.claim.title
++    || absolute !== resolutionPath(root, run, id, resolved.claim_sha256))
++    throw Error(`${id}: claim resolution changed identity or archive`);
++  if (evidence.previous_resolution !== null) {
++    const previous = readMarker(root, evidence.previous_resolution);
++    const prior = readResolution(root, run, id, origin, s, previous.file, seen);
++    if (Date.parse(prior.recorded_at) > Date.parse(record.recorded_at)
++      || prior.resolved.claim_sha256 === resolved.claim_sha256)
++      throw Error(`${id}: invalid claim resolution predecessor`);
++  }
++  return { ...record, evidence_fields: evidence, resolved };
++}
++export function loadStep3OwnerClaimResolution(root, run, id, s = loadStep3(root, run)) {
++  const originFile = step3OwnerCreationPath(root, run, id);
++  if (!existsSync(originFile)) return null;
++  const origin = json(originFile), current = step3OwnerCreationClaim(s, id);
++  const path = resolutionPath(root, run, id, current.claim_sha256);
++  if (!existsSync(path)) return null;
++  const chain = new Set();
++  const result = readResolution(root, run, id, origin, s, path, chain);
++  if (resolutionFiles(root, run, id).some(file => !chain.has(join(root, 'research', file))))
++    throw Error(`${id}: current claim is not the complete immutable resolution-chain tip`);
++  if (current.page !== origin.page || current.batch !== origin.batch
++    || !currentStep3OwnerCreationDecision(s, id))
++    throw Error(`${id}: resolution requires unchanged home and ordinary current repaired bookkeeping`);
++  return result;
++}
++export function checkStep3OwnerClaimResolution(root, run, id, evidencePath) {
++  safe(run); safe(id);
++  const s = loadStep3(root, run), origin = json(step3OwnerCreationPath(root, run, id));
++  const evidence = json(researchFile(root, evidencePath));
++  const bound = validateResolutionEvidence(root, run, id, evidence, s, origin);
++  if (bound.current.page !== origin.page || bound.current.batch !== origin.batch
++    || s.items.get(id).item.kind !== bound.original.claim.kind
++    || s.items.get(id).item.title !== bound.original.claim.title)
++    throw Error(`${id}: owner claim resolution cannot change item kind/title/home`);
++  return { run, id, original_claim_sha256: bound.original.claim_sha256,
++    resolved_claim_sha256: bound.current.claim_sha256, current_item_file_sha256: bound.current.item_file_sha256,
++    affected_consumers: evidence.consumers.map(row => row.id), no_writes: true };
++}
++export function recordStep3OwnerClaimResolution(root, run, id, evidencePath) {
++  safe(run); safe(id);
++  const s = loadStep3(root, run), origin = json(step3OwnerCreationPath(root, run, id));
++  const input = researchFile(root, evidencePath), evidence = json(input);
++  const bound = validateResolutionEvidence(root, run, id, evidence, s, origin);
++  if (bound.current.page !== origin.page || bound.current.batch !== origin.batch
++    || s.items.get(id).item.kind !== bound.original.claim.kind
++    || s.items.get(id).item.title !== bound.original.claim.title)
++    throw Error(`${id}: owner claim resolution cannot change item kind/title/home`);
++  const path = resolutionPath(root, run, id, bound.current.claim_sha256);
++  const existing = resolutionFiles(root, run, id);
++  if (!existsSync(path) && existing.length) {
++    if (evidence.previous_resolution === null) throw Error(`${id}: previous immutable claim resolution required`);
++    readResolution(root, run, id, origin, s, readMarker(root, evidence.previous_resolution).file);
++    const linked = new Set(); let next = evidence.previous_resolution;
++    while (next) {
++      const prior = readResolution(root, run, id, origin, s, readMarker(root, next).file);
++      linked.add(resolve(root, next.path)); next = prior.evidence_fields.previous_resolution;
++    }
++    if (existing.some(file => !linked.has(join(root, 'research', file))))
++      throw Error(`${id}: refusing a claim resolution branch`);
++  } else if (!existing.length && evidence.previous_resolution !== null)
++    throw Error(`${id}: first resolution must preserve the original origin without a synthetic predecessor`);
++  const archive = (bytes, suffix) => {
++    const file = join(root, 'research', `${resolutionStem(run, id)}archive-${sha(bytes)}.${suffix}`);
++    if (existsSync(file)) { if (sha(readFileSync(file)) !== sha(bytes)) throw Error('Resolution archive collision'); }
++    else writeFileSync(file, bytes, { flag: 'wx', mode: 0o444 });
++    return marker(root, file);
++  };
++  // Freeze all current acceptance sources rather than making original history
++  // depend on later rewrites of shared reviewer or owner bookkeeping carriers.
++  const frozen = structuredClone(evidence);
++  frozen.authorization = archive(readMarker(root, evidence.authorization).bytes, 'json');
++  frozen.supplier_review = archive(readMarker(root, evidence.supplier_review).bytes, 'json');
++  frozen.owner_decision = archive(readMarker(root, evidence.owner_decision).bytes, 'json');
++  frozen.consumers = evidence.consumers.map(row => ({ ...row,
++    review: archive(readMarker(root, row.review).bytes, 'json') }));
++  const record = { version: 1, policy: STEP3_OWNER_CLAIM_RESOLUTION_POLICY, run, id,
++    recorded_at: new Date().toISOString(), evidence: archive(Buffer.from(JSON.stringify(frozen)), 'json'),
++    current_item_archive: archive(readFileSync(join(root, 'items', `${id}.md`)), 'md'),
++    current_manifest_archive: archive(Buffer.from(JSON.stringify({ page: bound.current.page,
++      batch: bound.current.batch, item: Object.fromEntries(['id', 'kind', 'title', 'statement']
++        .map(key => [key, s.items.get(id).item[key] ?? null])) })), 'json') };
++  if (existsSync(path)) {
++    const prior = readResolution(root, run, id, origin, s, path);
++    if (prior.evidence.sha256 !== record.evidence.sha256
++      || prior.current_item_archive.sha256 !== record.current_item_archive.sha256
++      || prior.current_manifest_archive.sha256 !== record.current_manifest_archive.sha256)
++      throw Error(`${id}: refusing to replace immutable owner claim resolution`);
++    return { path, reused: true };
++  }
++  // Recheck current own claim and input decision after archive writes.
++  const fresh = loadStep3(root, run);
++  validateResolutionEvidence(root, run, id, evidence, fresh, origin);
++  writeFileSync(path, `${JSON.stringify(record, null, 2)}\n`, { flag: 'wx', mode: 0o444 });
++  readResolution(root, run, id, origin, fresh, path);
++  return { path, reused: false };
++}
++
+ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+   try {
+     const args = process.argv.slice(2), get = flag => args[args.indexOf(flag) + 1];
+-    if (args[0] !== 'register' || !args.includes('--run') || !args.includes('--id') || !args.includes('--evidence'))
+-      throw Error('Usage: step3-owner-creation.mjs register --run RUN --id ITEM --evidence research/JSON');
+-    const result = recordStep3OwnerCreation(process.cwd(), get('--run'), get('--id'), get('--evidence'));
+-    console.log(`step3-owner-creation: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
++    if (!['register', 'resolve-claim', 'check-claim'].includes(args[0]) || !args.includes('--run') || !args.includes('--id') || !args.includes('--evidence'))
++      throw Error('Usage: step3-owner-creation.mjs register|resolve-claim|check-claim --run RUN --id ITEM --evidence research/JSON');
++    const result = (args[0] === 'check-claim' ? checkStep3OwnerClaimResolution : args[0] === 'resolve-claim' ? recordStep3OwnerClaimResolution : recordStep3OwnerCreation)(process.cwd(), get('--run'), get('--id'), get('--evidence'));
++    console.log(args[0] === 'check-claim' ? JSON.stringify(result) : `step3-owner-creation: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+   } catch (error) { console.error(error.message); process.exitCode = 1; }
+ }
+
+--- a/WORKFLOW.md
++++ b/WORKFLOW.md
+@@ -450,6 +450,75 @@
+ `checkStep3(fresh, 'final').closed`. Any midpass mutation requires a fresh complete
+ pass; a cached snapshot is never evidence that current on-disk inputs passed.
+ 
++### Owner-held correction of an owner-created Step-3 claim
++
++An accepted later Statement or Definition correction may resolve a stale
++owner-created claim without rewriting its creation origin. The native command
++records a separate immutable resolution:
++
++```bash
++node tools/step3-owner-creation.mjs check-claim --run RUN --id ITEM --evidence research/EVIDENCE.json
++node tools/step3-owner-creation.mjs resolve-claim --run RUN --id ITEM --evidence research/EVIDENCE.json
++```
++
++`check-claim` is read-only evidence validation, not a gate or mathematical audit.
++`resolve-claim` derives the actual recording time; it never replaces the
++original creation receipt, baseline, author identity or author timeline. The
++item's ID, kind, title, page and batch must remain unchanged. Changing those
++identities needs a separate owner recovery plan; this claim-correction command
++does not authorize rehoming or reclassification.
++
++The version-1 evidence has policy
++`owner-held-step3-creation-claim-resolution-evidence-v1`, matching `run` and
++`id`, `owner: true`, the original `owner_identity`, a concrete `reason` of at
++least 40 characters, and the following exact fields:
++
++- `authorization`: a `{path, sha256}` marker for explicit matching-run owner
++  authority with `authorized_by: "owner"` and a nonempty `authorization`.
++- `origin`: a marker for the unchanged native owner-creation receipt.
++- `original_item` and `original_manifest`: research archive markers from which
++  the original claim and authored-byte hashes are reconstructed by the native
++  claim algorithm. A manifest may be the full archived native batch file or a
++  `{page, batch, item}` claim projection. All original baseline exclusion,
++  timeline and assignment/authorship/escalation source guards still apply.
++- `current_claim_sha256` and `current_item_file_sha256`: exact current accepted
++  claim and full authored-file hashes, independently derived by the command.
++- `supplier_review`: a marker for the actual lead's exact whole-current
++  supplier/consumer acceptance. Supported typed review rows are an eligible
++  `SUFFICIENT_WHOLE_ACTUAL_SUPPLIER_AND_CONSUMER` in `current_subject_decisions`,
++  an unheld `SUFFICIENT_WHOLE_ACTUAL_REVIEW_CURRENT_INPUTS_BOUND` in
++  `original_subjects`, or an unheld `expanded_current_whole_accepted_subjects`
++  row bound to its retained whole-actual review packet. Each must identify this
++  exact subject and full current source hash; source citations and format
++  passes do not qualify.
++- `consumers`: unique `{id, item_file_sha256, review}` records. Every actual
++  direct dependency or citation consumer must occur with its current source
++  hash and actual whole-current review. Additional affected indirect consumers
++  must be reachable from the supplier and carry the same guards. This records
++  completed consumer maintenance; it cannot waive an unfinished cone.
++- `owner_decision`: a marker for an actual ordinary current version-2 owner
++  `repaired` bookkeeping receipt. Its current full proof-input hash must match
++  independently. Resolution is creation continuity, not mathematical acceptance.
++- `previous_resolution`: `null` for the first correction, otherwise a marker
++  linking the complete existing immutable resolution chain. Branches,
++  replacements, synthetic predecessors and cyclic links are refused. Loading
++  requires the complete chain tip; reverting to the original or an older
++  resolved claim cannot resurrect its old creation acceptance.
++
++The API freezes the current item, claim projection, owner bookkeeping,
++authorization and mathematical acceptance evidence under content-addressed
++research archives. Its resolution record is keyed by the corrected claim hash;
++identical registration reuses existing bytes and time. All origin and archive
++hashes remain checked on loading. Later proof-only repairs retain the separate
++ordinary current owner-decision requirement; another claim correction needs a
++new linked resolution. The certifier continues to return the original owner
++creation class and never grants native auditor-creation provenance.
++
++Drain writers and finish actual supplier and consumer review before recording.
++After resolution and final metadata synchronization, refresh ordinary current
++bookkeeping on a fresh stable context and run the normal complete gate battery.
++No scope, dispatch history, repair counter or gate stamp is reset.
++
+ Before `recordStep3` replaces an item-owner decision, it preserves the actual
+ current receipt bytes under
+ `research/RUN-step3b-owner-history-ITEM/JSON-DIGEST.json`. History is immutable and
+
+--- /dev/null
++++ b/tools/step3-owner-claim-resolution.test.mjs
+@@ -0,0 +1,160 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, existsSync } from 'node:fs';
++import { tmpdir } from 'node:os';
++import { join, resolve } from 'node:path';
++import { pathToFileURL } from 'node:url';
++import { createHash } from 'node:crypto';
++const moduleURL = process.env.STEP3_OWNER_CREATION_TEST_MODULE
++  ? pathToFileURL(resolve(process.env.STEP3_OWNER_CREATION_TEST_MODULE)).href
++  : new URL('./step3-owner-creation.mjs', import.meta.url).href;
++const { recordStep3OwnerCreation, recordStep3OwnerClaimResolution,
++  loadStep3OwnerCreation, loadStep3OwnerClaimResolution, step3OwnerCreationClaim } = await import(moduleURL);
++const decisionsURL = process.env.STEP3_OWNER_CREATION_TEST_MODULE
++  ? pathToFileURL(resolve('tools/step3-decisions.mjs')).href
++  : new URL('./step3-decisions.mjs', import.meta.url).href;
++const { loadStep3, itemHash } = await import(decisionsURL);
++const sha = bytes => createHash('sha256').update(bytes).digest('hex');
++const bytes = path => readFileSync(path);
++const json = path => JSON.parse(bytes(path));
++const write = (path, value) => writeFileSync(path, typeof value === 'string' ? value : JSON.stringify(value));
++function fixture(t) {
++  const root = mkdtempSync(join(tmpdir(), 'step3-owner-claim-resolution-'));
++  t.after(() => rmSync(root, { recursive: true, force: true }));
++  for (const dir of ['items', 'research']) mkdirSync(join(root, dir));
++  const run = 'fixture', id = 'def-owner-helper', consumer = 'def-helper-consumer';
++  const itemPath = join(root, 'items', `${id}.md`), consumerPath = join(root, 'items', `${consumer}.md`);
++  const manifestPath = join(root, 'research', `${run}-batch-1.pages.json`);
++  const itemText = statement => `---\nid: ${id}\nkind: definition\ntitle: Owner helper\ndeps: []\n---\n\n## Definition\n\n${statement}\n`;
++  const pages = [{ id: 'a-page', kind: 'A', companion: 'b-page', order: 1, requires: [],
++    items: [{ id, kind: 'definition', title: 'Owner helper', statement: 'Original claim', deps: [] },
++      { id: consumer, kind: 'definition', title: 'Consumer', statement: 'Uses helper', deps: [id] }] },
++  { id: 'b-page', kind: 'B', companion: 'a-page', order: 2, requires: [], items: [] }];
++  write(itemPath, itemText('Original claim'));
++  write(consumerPath, `---\nid: ${consumer}\nkind: definition\ndeps: [${id}]\n---\n\n## Definition\n\nUses [[${id}]].\n`);
++  write(manifestPath, pages); write(join(root, 'research', 'plan-spec.json'), { pages: [] });
++  const baseline = { version: 1, run, policy: 'auditor-authored-step3-bypass-v1', at: '2020-01-01T00:00:00Z',
++    items: [], existing_item_files: [], scopes: [] };
++  const baselinePath = join(root, 'research', `${run}-step3-auditor-baseline.json`); write(baselinePath, baseline);
++  const claim = step3OwnerCreationClaim(loadStep3(root, run), id);
++  const mark = path => ({ path: path.slice(root.length + 1), sha256: sha(bytes(path)) });
++  const research = (name, value) => { const path = join(root, 'research', name); write(path, value); return mark(path); };
++  const originalItem = research('original-item.md', bytes(itemPath).toString());
++  const originalManifest = research('fixture-batch-1.pages.json.archive', pages);
++  const actor = '/root/fixture_author', escalation = 'fixture-escalation';
++  const origin = { version: 1, policy: 'owner-spawned-step3-creation-v1', evidence_class: 'owner-spawned-creation',
++    run, step: 3, id, owner: true, owner_identity: '/root', author: { identity: actor,
++      timeline: { mode: 'known', started_at: '2020-01-02T00:00:00Z', ended_at: '2020-01-03T00:00:00Z' } },
++    attested_at: '2020-01-04T00:00:00Z', reason: 'Fixture creation origin', owner_held_escalation: escalation,
++    baseline_sha256: sha(JSON.stringify(baseline)), baseline_file_sha256: sha(bytes(baselinePath)), ...claim,
++    sources: [{ role: 'assignment', ...research('assignment.txt', `${run} ${id} /root ${actor}`) },
++      { role: 'authorship', ...research('authorship.txt', `${run} ${id} ${actor} ${claim.claim_sha256} ${claim.item_file_sha256}`) },
++      { role: 'escalation', ...research('escalation.txt', `${run} ${escalation}`) }] };
++  const originEvidence = research('creation-evidence.json', origin);
++  recordStep3OwnerCreation(root, run, id, originEvidence.path);
++  const originPath = join(root, 'research', `${run}-step3-owner-creation-${id}.json`);
++  const originalOriginBytes = bytes(originPath), originalBaselineBytes = bytes(baselinePath);
++  const authority = research('authority.json', { run, authorized_by: 'owner', authorization: 'Owner authorizes this fixture claim correction' });
++  function update(statement = 'Corrected claim') {
++    pages[0].items[0].statement = statement; write(itemPath, itemText(statement)); write(manifestPath, pages);
++    const s = loadStep3(root, run), nextClaim = step3OwnerCreationClaim(s, id);
++    const review = research('whole-review.json', { version: 1, run, reviewer: '/root/fixture_reviewer',
++      current_subject_decisions: [id, consumer].map(key => ({ id: key,
++        current_raw_sha256: sha(bytes(join(root, 'items', `${key}.md`))),
++        verdict: 'SUFFICIENT_WHOLE_ACTUAL_SUPPLIER_AND_CONSUMER', decision_eligible: true })) });
++    const ownerPath = join(root, 'research', `${run}-step3b-owner-${id}.json`);
++    write(ownerPath, { version: 2, run, phase: 'item', target: id, decision: 'repaired', owner: true,
++      sha256: itemHash(s, id), at: new Date().toISOString(), reason: 'Accepted fixture claim repair', defects: ['claim-correction'] });
++    return { version: 1, policy: 'owner-held-step3-creation-claim-resolution-evidence-v1', run, id,
++      owner: true, owner_identity: '/root', authorization: authority,
++      reason: 'Resolve the corrected fixture claim while retaining the actual immutable original author and baseline',
++      origin: mark(originPath), original_item: originalItem, original_manifest: originalManifest,
++      current_claim_sha256: nextClaim.claim_sha256, current_item_file_sha256: nextClaim.item_file_sha256,
++      supplier_review: review, consumers: [{ id: consumer, item_file_sha256: sha(bytes(consumerPath)), review }],
++      owner_decision: mark(ownerPath), previous_resolution: null };
++  }
++  const evidence = update();
++  const record = value => { const source = research('resolution-evidence.json', value); return recordStep3OwnerClaimResolution(root, run, id, source.path); };
++  return { root, run, id, consumer, itemPath, consumerPath, manifestPath, baselinePath, originPath,
++    originalOriginBytes, originalBaselineBytes, evidence, mark, research, record, update };
++}
++test('resolution retains actual original author/baseline and binds current repair; reuse is immutable', t => {
++  const f = fixture(t);
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /stale owner creation claim identity/);
++  const result = f.record(f.evidence); assert.equal(result.reused, false);
++  const before = bytes(result.path);
++  assert.deepEqual(loadStep3OwnerCreation(f.root, f.run, f.id), json(f.originPath));
++  assert.equal(loadStep3OwnerClaimResolution(f.root, f.run, f.id).resolved.claim_sha256, f.evidence.current_claim_sha256);
++  assert.deepEqual(bytes(f.originPath), f.originalOriginBytes); assert.deepEqual(bytes(f.baselinePath), f.originalBaselineBytes);
++  assert.equal(f.record(f.evidence).reused, true); assert.deepEqual(bytes(result.path), before);
++});
++test('later proof-only repair uses ordinary current bookkeeping and frozen historical review', t => {
++  const f = fixture(t); f.record(f.evidence);
++  write(f.itemPath, bytes(f.itemPath).toString() + '\n## Remarks\n\nLater proof-context annotation.\n');
++  const s = loadStep3(f.root, f.run), owner = json(resolve(f.root, f.evidence.owner_decision.path));
++  owner.sha256 = itemHash(s, f.id); owner.at = new Date().toISOString(); write(resolve(f.root, f.evidence.owner_decision.path), owner);
++  write(resolve(f.root, f.evidence.supplier_review.path), { rewritten: true });
++  assert.deepEqual(loadStep3OwnerCreation(f.root, f.run, f.id), json(f.originPath));
++  owner.decision = 'hold'; write(resolve(f.root, f.evidence.owner_decision.path), owner);
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /ordinary current repaired bookkeeping/);
++});
++test('subsequent claim changes require a linked immutable resolution and cannot branch', t => {
++  const f = fixture(t), first = f.record(f.evidence), firstBytes = bytes(first.path);
++  const next = f.update('Second corrected claim');
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /stale owner creation claim identity/);
++  assert.throws(() => f.record(next), /previous immutable claim resolution required/);
++  next.previous_resolution = f.mark(first.path); const second = f.record(next);
++  assert.notEqual(first.path, second.path); assert.deepEqual(bytes(first.path), firstBytes);
++  assert.deepEqual(loadStep3OwnerCreation(f.root, f.run, f.id), json(f.originPath));
++  const third = f.update('Third corrected claim'); third.previous_resolution = f.mark(first.path);
++  assert.throws(() => f.record(third), /refusing a claim resolution branch/);
++});
++test('an existing resolution cannot be replaced by different owner evidence for the same claim', t => {
++  const f = fixture(t), result = f.record(f.evidence), before = bytes(result.path);
++  f.evidence.reason = 'A different owner resolution explanation cannot overwrite the already recorded immutable claim history';
++  assert.throws(() => f.record(f.evidence), /refusing to replace immutable owner claim resolution/);
++  assert.deepEqual(bytes(result.path), before); assert.deepEqual(bytes(f.originPath), f.originalOriginBytes);
++});
++test('an unchanged original claim cannot obtain a redundant resolution', t => {
++  const f = fixture(t), unchanged = f.update('Original claim');
++  assert.throws(() => f.record(unchanged), /stale or unchanged resolved claim/);
++});
++test('matching current and preserved review views agree without inventing another audit', t => {
++  const f = fixture(t), review = json(resolve(f.root, f.evidence.supplier_review.path));
++  review.original_subjects = [{ id: f.id, current_raw_sha256: f.evidence.current_item_file_sha256,
++    preserved_disposition: 'SUFFICIENT_WHOLE_ACTUAL_REVIEW_CURRENT_INPUTS_BOUND', mathematical_hold: false }];
++  f.evidence.supplier_review = f.research('matching-review-views.json', review);
++  f.record(f.evidence); assert.deepEqual(loadStep3OwnerCreation(f.root, f.run, f.id), json(f.originPath));
++});
++test('changed original origin is rejected even after a valid current resolution', t => {
++  const f = fixture(t); f.record(f.evidence); const origin = json(f.originPath);
++  origin.author.timeline.started_at = '2020-01-02T01:00:00Z'; write(f.originPath, origin);
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /Stale resolution source/);
++});
++test('a later claim cannot silently roll back to original provenance or an older resolution', t => {
++  const f = fixture(t), first = f.record(f.evidence);
++  const second = f.update('Second corrected claim'); second.previous_resolution = f.mark(first.path); f.record(second);
++  f.update('Corrected claim');
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /complete immutable resolution-chain tip/);
++  f.update('Original claim');
++  assert.throws(() => loadStep3OwnerCreation(f.root, f.run, f.id), /claim reverted to the original/);
++});
++for (const [name, mutate, error] of [
++  ['missing owner authorization', f => { f.evidence.authorization = f.research('bad-authority.json', { run: 'foreign', authorized_by: 'owner', authorization: 'unrelated' }); }, /owner authorization/],
++  ['original authored source cannot be substituted', f => { f.evidence.original_item = f.research('wrong-original.md', 'different original'); }, /original authored claim reconstruction/],
++  ['original manifest claim cannot be substituted', f => { const pages = json(resolve(f.root, f.evidence.original_manifest.path)); pages[0].items[0].statement = 'invented origin'; f.evidence.original_manifest = f.research('fixture-batch-1.pages.json.fake', pages); }, /original authored claim reconstruction/],
++  ['whole supplier acceptance required', f => { const r = json(resolve(f.root, f.evidence.supplier_review.path)); r.current_subject_decisions[0].verdict = 'FORMAT_PASS'; f.evidence.supplier_review = f.research('bad-review.json', r); }, /whole-current mathematical acceptance/],
++  ['accepted current source must match', f => { f.evidence.current_item_file_sha256 = '0'.repeat(64); }, /stale or unchanged resolved claim/],
++  ['missing direct consumer rejects', f => { f.evidence.consumers = []; }, /missing actual direct-consumer review/],
++  ['stale consumer rejects', f => { f.evidence.consumers[0].item_file_sha256 = '0'.repeat(64); }, /unrelated or stale affected consumer/],
++  ['unrelated consumer rejects', f => { f.evidence.consumers.push({ id: f.id, item_file_sha256: f.evidence.current_item_file_sha256, review: f.evidence.supplier_review }); }, /unrelated or stale affected consumer/],
++  ['stale ordinary input receipt rejects', f => { const d = json(resolve(f.root, f.evidence.owner_decision.path)); d.sha256 = '0'.repeat(64); write(resolve(f.root, f.evidence.owner_decision.path), d); f.evidence.owner_decision = f.mark(resolve(f.root, f.evidence.owner_decision.path)); }, /ordinary current owner repaired receipt/],
++  ['home change rejects', f => { const pages = json(f.manifestPath); pages[0].id = 'different-page'; pages[1].companion = 'different-page'; write(f.manifestPath, pages); }, /stale or unchanged resolved claim/],
++  ['baseline rewrite rejects', f => { const b = json(f.baselinePath); b.existing_item_files.push(f.id); write(f.baselinePath, b); }, /immutable baseline binding/],
++  ['original authorship source tampering rejects', f => { const o = json(f.originPath); write(resolve(f.root, o.sources[1].path), 'invented later authorship'); }, /stale owner creation source/],
++  ['original creator cannot be relabelled', f => { const o = json(f.originPath); o.author.identity = '/root/invented_creator'; write(f.originPath, o); f.evidence.origin = f.mark(f.originPath); }, /incomplete owner creation assignment\/authorship\/escalation evidence/],
++  ['conflicting preserved review cannot shadow a current approval', f => { const r = json(resolve(f.root, f.evidence.supplier_review.path)); r.original_subjects = [{ id: f.id, current_raw_sha256: f.evidence.current_item_file_sha256, preserved_disposition: 'SUFFICIENT_WHOLE_ACTUAL_REVIEW_CURRENT_INPUTS_BOUND', mathematical_hold: true }]; f.evidence.supplier_review = f.research('conflicting-review.json', r); }, /review does not bind exact accepted current source/],
++]) test(name, t => {
++  const f = fixture(t); mutate(f); assert.throws(() => f.record(f.evidence), error);
++  assert.equal(existsSync(join(f.root, 'research', `${f.run}-step3-owner-claim-resolution-${f.id}-${f.evidence.current_claim_sha256}.json`)), false);
++});

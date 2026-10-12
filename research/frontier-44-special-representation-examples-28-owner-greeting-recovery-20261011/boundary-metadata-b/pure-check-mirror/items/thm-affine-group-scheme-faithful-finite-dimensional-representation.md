@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-affine-group-scheme-faithful-finite-dimensional-representation.md

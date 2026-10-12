@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-convergence-to-stationarity-for-irreducible-aperiodic-positive-recurrent-chains.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-three-closed-sets-covering-s2-contain-an-antipodal-pair.md

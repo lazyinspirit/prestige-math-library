@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-finite-type-algebra-over-noetherian-ring-is-noetherian.md

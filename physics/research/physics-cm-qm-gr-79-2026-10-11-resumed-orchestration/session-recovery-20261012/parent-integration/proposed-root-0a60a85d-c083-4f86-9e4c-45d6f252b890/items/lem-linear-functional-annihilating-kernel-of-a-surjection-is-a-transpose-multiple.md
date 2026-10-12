@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-hamiltonian-vector-fields-are-symplectic-and-symplectic-fields-are-locally-hamiltonian.md

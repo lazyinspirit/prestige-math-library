@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-lagrangian-neighborhood-germ-is-not-canonical.md

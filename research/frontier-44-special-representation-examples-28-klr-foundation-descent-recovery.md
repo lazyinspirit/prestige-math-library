@@ -1,0 +1,11 @@
+# Descent author recovery state
+
+Owner assigned exact new proper Čech and hypercover descent suppliers after the stable convolution packet. Do not edit the convolution packet. Current owned namespace is frontier-44-special-representation-examples-28-klr-foundation-descent-* and /tmp/klr-foundation-descent only; no canonical plan/item/engine/gate edits.
+
+Three authored draft bodies survived on disk: the two exact requested IDs and the necessary generic bicosimplicial double-total/diagonal lemma. Proper Čech proof is direct proper-base-change stalk-row contraction by inserting one point of a nonempty fiber; it explicitly does not assume any fiber acyclicity. Hypercover proof reconstructs the complete DHI bounded-height bisimplicial Čech/retract argument, then uses cosk_N agreement through total degree m+1 and N≥m−a+1. Acyclic-models lemma supplies the generic total/diagonal comparison by explicit representable simplex contractions, finite universal operator recursion and opposite cosimplicial identities.
+
+Actual DHI full43-page PDF and Stacks Hypercoverings full31-page PDF retrieved durably and relevant complete proofs actually read; hashes and scopes in -source-readings.json. SGA4-2 request returned403; no SGA reading claimed. Full Stacks Cohomology PDF retrieved only for search context, not theorem-proof reading. Additional Stacks Simplicial source retrieval being checked for general total/diagonal context.
+
+Final draft checks so far: precheck3/3 pass, proof-layout3items16steps0defects. No independent mathematical audit or analytic foundational construction closure is claimed. Inventory/proofcontracts include3A+2B exact arrays/dependencies and source SHA hashes. Consumer author actually inspected proper weights, hyperresolution geometry and nodal example; found the unsupported two-term square inference in the last and supplied actual normalization-Cech E2 replacement, which its owner applied and this author reread.
+
+Final durable hashes, consumer check, source ledger and checks JSON now complete; packet ready to root/native-plan assembler and monodromy/constructible owners. Exact analytic/simplicial resolution/proper-base-change construction remains upstream; no finite-dimensional-cohomology input is needed by descent itself.

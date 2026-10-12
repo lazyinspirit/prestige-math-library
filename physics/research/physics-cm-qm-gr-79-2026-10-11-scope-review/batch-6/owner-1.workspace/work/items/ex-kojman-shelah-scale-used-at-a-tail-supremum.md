@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kojman-shelah-scale-used-at-a-tail-supremum.md

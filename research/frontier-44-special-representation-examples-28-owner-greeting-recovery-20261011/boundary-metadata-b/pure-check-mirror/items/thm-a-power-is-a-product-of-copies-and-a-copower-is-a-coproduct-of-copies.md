@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-power-is-a-product-of-copies-and-a-copower-is-a-coproduct-of-copies.md

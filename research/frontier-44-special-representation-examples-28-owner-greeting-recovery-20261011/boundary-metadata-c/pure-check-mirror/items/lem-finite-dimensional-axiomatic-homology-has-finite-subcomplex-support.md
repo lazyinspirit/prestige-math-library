@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclotomic-hecke-central-content-sectors-are-zero-or-primitive-blocks.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-integral-cohomology-ring-of-complex-projective-space-by-splitting.md

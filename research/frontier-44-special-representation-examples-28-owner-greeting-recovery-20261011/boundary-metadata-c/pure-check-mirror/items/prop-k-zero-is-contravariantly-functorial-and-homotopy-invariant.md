@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-k-zero-is-contravariantly-functorial-and-homotopy-invariant.md

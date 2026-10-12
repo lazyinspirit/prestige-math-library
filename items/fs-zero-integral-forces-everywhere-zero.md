@@ -36,8 +36,7 @@ every $x$.
 
 **Proof technique:** direct.
 
-1.1 On $\mathbb R$ with Lebesgue measure, let $f:=\chi_{\{0\}}$. By [L2], the [L2, given, construct]
-set $\{0\}$ is null, so $\int f\,d\lambda=0$.
+1.1 On $\mathbb R$ with Lebesgue measure, let $f:=\chi_{\{0\}}$. By [L2], the [L2, given, construct] set $\{0\}$ is null, so $\int f\,d\lambda=0$. [L2, given, construct]
 
-1.2 But $f(0)=1$. Therefore the conclusion in the Statement is false, and [L1]
-shows that "almost everywhere" is the correct replacement. [step 1.1, L1] ∎
+2.1 But $f(0)=1$. Therefore the conclusion in the Statement is false, and [L1] shows that "almost everywhere" is the correct replacement. [step 1.1, L1] ∎
+

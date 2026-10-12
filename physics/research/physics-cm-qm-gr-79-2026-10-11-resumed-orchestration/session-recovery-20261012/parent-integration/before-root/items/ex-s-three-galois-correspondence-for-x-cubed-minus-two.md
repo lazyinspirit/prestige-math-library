@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-s-three-galois-correspondence-for-x-cubed-minus-two.md

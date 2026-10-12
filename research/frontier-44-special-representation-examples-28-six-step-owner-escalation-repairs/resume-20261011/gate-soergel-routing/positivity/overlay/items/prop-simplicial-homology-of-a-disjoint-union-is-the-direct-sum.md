@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-simplicial-homology-of-a-disjoint-union-is-the-direct-sum.md

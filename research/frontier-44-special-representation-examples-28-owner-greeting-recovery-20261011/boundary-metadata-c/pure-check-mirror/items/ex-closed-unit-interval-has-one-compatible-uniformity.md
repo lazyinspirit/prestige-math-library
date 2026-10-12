@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-closed-unit-interval-has-one-compatible-uniformity.md

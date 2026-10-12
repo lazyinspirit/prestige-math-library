@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "batch": "ML-77–ML-80",
+  "status": "complete_with_exact_source_contracts_and_local_proof_boundaries",
+  "plan_path": "research/plan-machine-learning-track.md",
+  "plan_before_sha256": "d4c4afd15cacd99f38f1c04213d0814f834a1d1bdc52e11a90e2e4f881aa4633",
+  "plan_sha256_at_checkpoint": "68fa7ccb0e116ae20fbf89d9d43c0424a14a0a379a2fcb69c26084cea89c843e",
+  "baseline_snapshot": "research/statistics-ml-scaffold-audit-2026-10-12/before/plan-machine-learning-track.md",
+  "inventory_counts": {
+    "ML_main_pairs": 83,
+    "independent_prerequisites": 12,
+    "total_pair_designs": 253
+  },
+  "plan_section_hash_method": "SHA-256 of exact raw pair chunk from ### heading through final paragraph, excluding trailing newline bytes and stopping before the next ### or ## heading.",
+  "source_manifest": "research/statistics-advanced-scaffolds-2026-10-11/learning-06/sources.json",
+  "source_manifest_sha256": "33bb1cf20f39b8d4ab3c269eb3b8d3ca0d9f8d1e0a446c4ec972dcc27a16348b",
+  "pairs": [
+    {
+      "id": "ML-77",
+      "assessment": "audited_off_policy_instability_and_bellman_error_unlearnability_examples",
+      "plan_section_sha256": "e3deea96e5266564e3d538926fc07fdbdf2f3e7a9ebbf27aea1be8c282f9a3f9",
+      "findings": [
+        "The complete source gives Baird’s seven-state/two-action example: gamma=.99, zero rewards, dashed/solid behavior probabilities 6/7 and 1/7, solid target policy, exact eight-dimensional state features, and initial vector (1,1,1,1,1,1,10,1). It says semi-gradient TD(0) diverges for every positive step size and includes the expected DP-update divergence plot; the scaffold carefully does not upgrade this to a sample-path almost-sure theorem.",
+        "Sutton–Barto §11.6 explicitly constructs two MRPs with the same observable feature/reward sequence distribution but different Bellman-error objective values and different minimizers. MRPs have no action-dependent policy, so this source example is now separated from ML-79’s offline unseen-action MDP impossibility.",
+        "The source examples do not establish universal divergence for all approximators or deep RL; the exact finite matrix calculation and local proof remain to be written."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 complete draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "Full cached source was available; this pair uses only the cited ranges. The source dossier records the full-text coverage and proof boundaries.",
+          "role": "authoritative source for Baird off-policy TD and Bellman-error learnability counterexamples",
+          "pair_audited_ranges": "Baird construction/feature model/expected-update caveat, PDF pp. 283–285 (printed pp. 263–265); §11.6 and Example 11.4 matched-observation MRP construction and objectives, pp. 296–298 (printed pp. 276–278)."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "status": "published",
+          "contract": "Defines eigenvalue, eigenvector, eigenspace and spectrum of an endomorphism. It supplies vocabulary only; it does not establish that the particular expected TD update has an unstable eigenvalue."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite seven-state/two-action reward-transition law; exact behavior and target policies; eight-dimensional feature vectors; stated gamma and initial vector.",
+        "For the Bellman-error example, both finite MRP state/transition/reward diagrams, feature map, weighting distribution and observed sequence law."
+      ],
+      "future_proof_authoring_obligations": [
+        "Write the expected semi-gradient TD(0)/DP update under the source convention and verify the unstable mode or iterate the stated update from the source’s initial vector.",
+        "Verify the two MRP observable laws agree and explicitly calculate both Bellman-error functions/minimizers; distinguish Bellman error from projected Bellman error and return error.",
+        "Do not claim stochastic almost-sure divergence or general deep-RL failure without a separate theorem."
+      ]
+    },
+    {
+      "id": "ML-78",
+      "assessment": "audited_model_based_algorithms_and_local_single_policy_error_contract",
+      "plan_section_sha256": "69e624127d2349e5d6aeae2b1e8c97037761e3efa5ba465689125bd7f5aa7716",
+      "findings": [
+        "Sutton’s Dyna-Q description uses a deterministic table model and samples only experienced state-action pairs; it is algorithmic context rather than a stochastic model-accuracy theorem.",
+        "Sutton’s almost-sure RTDP result is restricted to undiscounted episodic stochastic optimal-path tasks with absorbing zero-reward goals, a proper policy, strictly negative nonggoal rewards, admissible initial values, and its stated greedy/start-state conditions. The edited plan carries these premises.",
+        "A local finite-horizon bound is proposed only for one fixed policy, common initial law, rewards in [0,1], uniform reward error, and TV transition error over the union of reachable pairs. The bound’s proof is local; it does not control an optimizer selected in the learned model or unsupported states."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S03",
+          "citation": "Reinforcement Learning: An Introduction, second edition, complete draft — Richard S. Sutton and Andrew G. Barto (2018-03-22 complete draft)",
+          "url": "http://www.incompleteideas.net/book/bookdraft2018mar21.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.pdf",
+          "pdf_sha256": "34d2258211a48daf61769d2d429c19a6137d2da90dd0c981e6d03bbdfc0b507d",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/sutton_barto_rl_2e_2018official.txt",
+          "full_text_sha256": "e36cfb6e165e52baba58e94d605e5c670770ad96b173324ad9d3482656bf5aa9",
+          "read_status": "Full cached source was available; this pair uses only the cited ranges. The source dossier records the full-text coverage and proof boundaries.",
+          "role": "Dyna-Q, RTDP conditions, MCTS/search descriptions",
+          "pair_audited_ranges": "Chapter 8 Dyna-Q model assumptions and algorithm, PDF pp. 179–187 (printed pp. 159–167); RTDP algorithm/restricted theorem, pp. 197–199 (printed pp. 177–179); search/MCTS descriptions and limitations, pp. 203–213 (printed pp. 183–193)."
+        },
+        {
+          "manifest_id": "L06-S04",
+          "citation": "Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems — Sergey Levine, Aviral Kumar, George Tucker, and Justin Fu (2020; arXiv:2005.01643v3)",
+          "url": "https://arxiv.org/pdf/2005.01643",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/levine_offline_rl_2020.pdf",
+          "pdf_sha256": "3c5e18cbf6efeeb129e0b6fc6f2b076c4349291b7d34e5920913744df1411342",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/levine_offline_rl_2020.txt",
+          "full_text_sha256": "a0485a2a2cb4dde29dcf81203a7a584a139a7912aa69fa556972e92785cb6cdc",
+          "read_status": "Full cached source was available; this pair uses only the cited ranges. The source dossier records the full-text coverage and proof boundaries.",
+          "role": "offline learned-model distribution-shift and model-exploitation context, not a guarantee source",
+          "pair_audited_ranges": "Offline model-based RL and distribution shift, PDF §§2.1 and 5.1–5.3, pp. 3–5 and 26–28."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-measure-kernel-and-probability-kernel",
+          "status": "published",
+          "contract": "Supplies probability-kernel semantics for a finite transition/reward model; the local simulation bound still needs a finite-horizon comparison proof."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite known state/action sets for the local comparison; same policy and initial law in the model and true MDP.",
+        "Rewards in [0,1]; uniform reward absolute error epsilon_r and total-variation transition error epsilon_p over all state-action pairs reachable under either model during the horizon."
+      ],
+      "future_proof_authoring_obligations": [
+        "Prove the finite-horizon Bellman telescoping/coupling estimate H epsilon_r + H(H-1)epsilon_p/2 with TV defined as half the finite L1 distance.",
+        "Keep this fixed-policy bound distinct from model-optimized performance under distribution shift.",
+        "For RTDP’s source theorem, verify all absorbing-goal, proper-policy, strictly-negative-reward, initial-value, tie and start-state conditions."
+      ]
+    },
+    {
+      "id": "ML-79",
+      "assessment": "audited_offline_OPE_change_of_measure_and_coverage_scope",
+      "plan_section_sha256": "0e662d543865afa63e2e1816824b8185d2e5f87df22813b037ad7aff84544227",
+      "findings": [
+        "Levine et al. is a full tutorial/review, not a proof source for the proposed doubly robust estimator or local support-impossibility construction. It presents trajectory importance sampling, per-decision and weighted estimators, and doubly robust OPE while attributing formal details to cited papers.",
+        "The scoped unbiasedness argument now requires target trajectory-law absolute continuity, correct behavior ratios, finite-horizon integrability, and an explicit dataset sampling model. Doubly robust alternatives must be proved separately: correct propensities, or a correct finite-horizon value model including the terminal convention.",
+        "The observation-equivalent offline example uses two finite MDPs agreeing on the logged behavior support but differing on an unseen target action; it is distinct from ML-77’s action-free pair of MRPs."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S04",
+          "citation": "Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems — Sergey Levine, Aviral Kumar, George Tucker, and Justin Fu (2020; arXiv:2005.01643v3)",
+          "url": "https://arxiv.org/pdf/2005.01643",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/levine_offline_rl_2020.pdf",
+          "pdf_sha256": "3c5e18cbf6efeeb129e0b6fc6f2b076c4349291b7d34e5920913744df1411342",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/levine_offline_rl_2020.txt",
+          "full_text_sha256": "a0485a2a2cb4dde29dcf81203a7a584a139a7912aa69fa556972e92785cb6cdc",
+          "read_status": "Full cached source was available; this pair uses only the cited ranges. The source dossier records the full-text coverage and proof boundaries.",
+          "role": "complete offline RL tutorial/review; estimator and support/distribution-shift exposition",
+          "pair_audited_ranges": "Finite-horizon trajectory law and RL formulation, PDF pp. 3–5; importance sampling, per-decision/weighted estimators and doubly robust OPE, pp. 10–12; distribution shift and support/policy constraints, pp. 18–24; model exploitation, pp. 26–28; open-problem discussion, pp. 24–25 and 28–30."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-conditional-expectation-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Provides conditional expectation as an almost-sure class for the local residual-mean argument."
+        },
+        {
+          "id": "def-absolutely-continuous-with-respect-to-a-positive-measure",
+          "status": "published",
+          "contract": "Defines measure absolute continuity by null-set preservation; used for target trajectory law dominated by behavior law."
+        },
+        {
+          "id": "def-radon-nikodym-derivative",
+          "status": "published",
+          "contract": "Defines a chosen density representative only after an RN existence result and almost-everywhere convention are stated."
+        },
+        {
+          "id": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "status": "published",
+          "contract": "Under AC, sigma-finite positive reference measure, common finite exhaustion and absolute continuity, supplies an a.e.-unique real density; finite trajectory probability measures meet sigma-finiteness."
+        },
+        {
+          "id": "thm-integration-against-a-density",
+          "status": "published",
+          "contract": "For nonnegative measurable f,g, identifies integral against the density measure f dmu with integral of gf; extend signed integrands by positive/negative parts under integrability."
+        },
+        {
+          "id": "thm-chain-rule-for-radon-nikodym-derivatives",
+          "status": "published",
+          "contract": "Under AC, sigma-finite measures, common finite exhaustion and nu<<mu<<lambda, gives dnu/dlambda=(dnu/dmu)(dmu/dlambda) a.e.; explicitly assumes AC."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite horizon and a fixed behavior-policy data law; target trajectory measure absolutely continuous with respect to behavior trajectory law.",
+        "Known/correct behavior propensities and finite integrable return/weight products for ordinary unbiased importance sampling.",
+        "For the doubly robust model alternative, a correct conditional value at each horizon step and a matching terminal condition."
+      ],
+      "future_proof_authoring_obligations": [
+        "Write the trajectory density as the product of target/behavior policy ratios and verify the RN chain rule assumptions on the path space.",
+        "Prove the doubly robust residual expectation by conditioning in each validity branch rather than asserting a survey-derived guarantee.",
+        "Construct two MDPs with identical logged-data laws on behavior support and different unseen-action optimal values; preserve the support mismatch premise.",
+        "Carry the consumed RN/conditional-expectation Choice and integrability premises."
+      ]
+    },
+    {
+      "id": "ML-80",
+      "assessment": "audited_finite_known_model_belief_reduction_and_alpha_vector_contract",
+      "plan_section_sha256": "20d0eb38b625c627ad28f2624caf5a3219d4ab542427337fd5886254eadc5593",
+      "findings": [
+        "The full Brown report is the source for finite known-model POMDP semantics, belief update and sufficient-statistic reduction, finite policy trees, alpha-vector linear values, piecewise-linear convex finite-horizon values, and witness backups/pruning.",
+        "The finite Bayes formula requires positive observation probability for the realized observation; zero-probability observations are null under the model and need only a filler if the update is defined everywhere.",
+        "The report is not a model-learning result and notes policy-tree/witness growth; infinite-horizon discounted values may need infinitely many facets, so the finite-horizon statement is retained."
+      ],
+      "source_evidence": [
+        {
+          "manifest_id": "L06-S05",
+          "citation": "Planning and Acting in Partially Observable Stochastic Domains — Leslie Pack Kaelbling, Michael L. Littman, and Anthony R. Cassandra (1996-02; Brown University Technical Report CS-96-08)",
+          "url": "https://cs.brown.edu/research/pubs/techreports/reports/96/cs96-08.pdf",
+          "cached_pdf": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/kaelbling_littman_cassandra_pomdp_brown_1996.pdf",
+          "pdf_sha256": "5bef8536d5a79bdefdd928ff7ae251d33e7d32cbb1e9cbfe217cdb5fe20b718c",
+          "full_text": "scratchpad/statistics-advanced-scaffolds-2026-10-11/sources/learning-06/kaelbling_littman_cassandra_pomdp_brown_1996.txt",
+          "full_text_sha256": "7362d182dfae159a9f0bd23fb27c69e070234057320e0108bd3d0dc5f484d036",
+          "read_status": "Full cached source was available; this pair uses only the cited ranges. The source dossier records the full-text coverage and proof boundaries.",
+          "role": "complete finite POMDP report; mathematical symbols checked in cached PDF because the text extraction is lossy",
+          "pair_audited_ranges": "Full PDF pp. 1–29; body pp. 3–27 and p. 2 blank. Belief update/state-estimator reduction, PDF pp. 9–11; policy trees and linear value representation, pp. 12–16; finite-horizon piecewise-linear convex value and witness construction/pruning, pp. 16–19."
+        }
+      ],
+      "library_supplier_contracts": [
+        {
+          "id": "def-measure-kernel-and-probability-kernel",
+          "status": "published",
+          "contract": "Supplies the finite transition and observation probability kernels."
+        },
+        {
+          "id": "thm-measurability-of-integration-against-a-kernel",
+          "status": "published",
+          "contract": "Supplies measurability of kernel expectations used by the belief Bellman update."
+        },
+        {
+          "id": "def-conditional-probability-given-a-sigma-algebra",
+          "status": "published",
+          "contract": "Supplies conditional probability as an almost-sure class for the finite history."
+        },
+        {
+          "id": "thm-bayes-formula-for-dominated-kernels",
+          "status": "published",
+          "contract": "For a dominated kernel with jointly measurable likelihood and sigma-finite base measure, gives the posterior kernel with normalized density on finite-positive marginal fibres and a filler on zero/infinite fibres; the finite POMDP update uses its positive observation-probability case."
+        }
+      ],
+      "new_pair_prerequisites": [
+        "Finite state, action and observation sets; specified transition, reward and observation kernels; finite horizon.",
+        "On each Bayes update, the realized observation has positive probability under the current belief/action."
+      ],
+      "future_proof_authoring_obligations": [
+        "Verify the belief update normalization and its conditional-law identity from the joint finite kernel.",
+        "Prove history sufficiency and belief-MDP Markovity; induct over horizon to establish alpha-vector recursion and finite maximum.",
+        "State witness pruning as an algorithm and keep its exponential worst-case growth and finite-horizon scope explicit."
+      ]
+    }
+  ]
+}

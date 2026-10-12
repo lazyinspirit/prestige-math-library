@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters.md

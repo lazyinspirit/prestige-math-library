@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-transitive-does-not-force-minimal-normal-subgroups-transitive.md

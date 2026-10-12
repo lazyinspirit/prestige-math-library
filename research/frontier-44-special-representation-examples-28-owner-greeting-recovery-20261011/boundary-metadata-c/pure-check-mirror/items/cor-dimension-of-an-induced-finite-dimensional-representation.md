@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-dimension-of-an-induced-finite-dimensional-representation.md

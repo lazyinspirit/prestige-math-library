@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-etale-specialization-proper-geometric-finite-etale-invariance.md

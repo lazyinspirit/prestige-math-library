@@ -48,8 +48,6 @@ $$s = 2\,\mathbf{1}_{[0,1)} - \mathbf{1}_{[1,2)} + 0 \cdot \mathbf{1}_{\mathbb{R
 
 **Proof technique:** direct.
 
-1.1 The function $s$ takes only the three values $2$, $-1$, and $0$, and the [given]
-corresponding level sets are exactly the three Borel sets displayed above. Thus $s$ is measurable. [given]
+1.1 The function $s$ takes only the three values $2$, $-1$, and $0$, and the [given] corresponding level sets are exactly the three Borel sets displayed above. Thus $s$ is measurable. [given]
 
-2.1 Therefore [L1] identifies $s$ as a simple function and the displayed sum as [step 1.1, L1]
-its canonical representation. [step 1.1, L1] ∎
+2.1 Therefore [L1] identifies $s$ as a simple function and the displayed sum as [step 1.1, L1] its canonical representation. [step 1.1, L1] ∎ 

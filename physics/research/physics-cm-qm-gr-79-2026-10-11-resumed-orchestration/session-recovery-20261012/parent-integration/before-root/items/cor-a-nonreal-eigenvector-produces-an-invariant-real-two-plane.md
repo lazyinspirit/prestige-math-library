@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-nonreal-eigenvector-produces-an-invariant-real-two-plane.md

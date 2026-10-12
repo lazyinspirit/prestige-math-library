@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-zero-angular-momentum-level-with-nonfree-points-is-singular.md

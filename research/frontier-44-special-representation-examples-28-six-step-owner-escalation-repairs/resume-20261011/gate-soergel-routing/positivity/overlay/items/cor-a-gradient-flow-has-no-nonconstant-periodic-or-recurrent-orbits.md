@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-a-gradient-flow-has-no-nonconstant-periodic-or-recurrent-orbits.md

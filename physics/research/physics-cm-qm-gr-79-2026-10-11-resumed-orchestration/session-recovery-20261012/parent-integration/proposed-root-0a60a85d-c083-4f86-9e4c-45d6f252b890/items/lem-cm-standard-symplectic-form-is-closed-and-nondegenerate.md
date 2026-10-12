@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-standard-symplectic-form-is-closed-and-nondegenerate.md

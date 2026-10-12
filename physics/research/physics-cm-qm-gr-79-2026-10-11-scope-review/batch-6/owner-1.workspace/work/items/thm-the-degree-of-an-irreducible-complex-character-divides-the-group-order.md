@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order.md

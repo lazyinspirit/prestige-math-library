@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-skryabins-equivalence-for-the-type-a-whittaker-pair.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-adjoint-exists-and-is-unique-in-finite-dimension.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-degree-d-sphere-maps-act-by-multiplication-by-d-in-any-generalized-theory.md

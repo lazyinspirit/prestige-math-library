@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-infinitesimal-moment-map-is-automatically-equivariant.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-modulus-powers-of-holomorphic-functions-are-subharmonic.md

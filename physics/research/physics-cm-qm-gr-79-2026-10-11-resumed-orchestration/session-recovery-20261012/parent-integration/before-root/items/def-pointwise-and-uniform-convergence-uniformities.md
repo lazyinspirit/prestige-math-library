@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pointwise-and-uniform-convergence-uniformities.md

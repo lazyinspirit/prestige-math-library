@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-green-correspondence-for-a-trivial-intersection-subgroup.md

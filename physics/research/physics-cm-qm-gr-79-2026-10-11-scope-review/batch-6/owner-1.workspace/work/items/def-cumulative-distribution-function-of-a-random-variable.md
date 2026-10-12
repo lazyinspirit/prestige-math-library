@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cumulative-distribution-function-of-a-random-variable.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-coercivity-of-the-principal-dirichlet-form.md

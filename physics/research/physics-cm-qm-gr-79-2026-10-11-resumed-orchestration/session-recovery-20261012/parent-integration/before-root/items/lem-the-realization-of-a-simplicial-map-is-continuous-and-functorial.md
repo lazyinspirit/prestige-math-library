@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-realization-of-a-simplicial-map-is-continuous-and-functorial.md

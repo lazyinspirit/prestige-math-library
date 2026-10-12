@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-pointwise-norm-is-smooth-off-the-zero-vector.md

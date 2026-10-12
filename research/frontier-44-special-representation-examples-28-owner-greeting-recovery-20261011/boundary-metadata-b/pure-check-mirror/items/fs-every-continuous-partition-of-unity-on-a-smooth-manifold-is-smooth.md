@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-every-continuous-partition-of-unity-on-a-smooth-manifold-is-smooth.md

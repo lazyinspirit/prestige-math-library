@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-multiplicative-type-local-hopf-dictionary.md

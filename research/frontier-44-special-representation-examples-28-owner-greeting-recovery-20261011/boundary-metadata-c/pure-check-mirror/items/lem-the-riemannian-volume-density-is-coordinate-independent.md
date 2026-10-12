@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-the-riemannian-volume-density-is-coordinate-independent.md

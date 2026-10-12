@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-a-complex-is-exact-at-n-exactly-when-its-nth-homology-is-zero.md

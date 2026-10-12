@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-lacunary-fourier-sums-have-their-coefficient-ell-two-norm.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-finite-simple-groups-of-lie-type-as-named-families.md

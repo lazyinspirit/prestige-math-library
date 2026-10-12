@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-khinchin-weak-law-for-iid-integrable-variables.md

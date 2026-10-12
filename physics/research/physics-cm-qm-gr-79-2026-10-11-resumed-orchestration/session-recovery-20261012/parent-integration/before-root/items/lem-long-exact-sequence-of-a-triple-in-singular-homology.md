@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-long-exact-sequence-of-a-triple-in-singular-homology.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-young-inequality-for-an-l-one-kernel-and-an-l-two-function.md

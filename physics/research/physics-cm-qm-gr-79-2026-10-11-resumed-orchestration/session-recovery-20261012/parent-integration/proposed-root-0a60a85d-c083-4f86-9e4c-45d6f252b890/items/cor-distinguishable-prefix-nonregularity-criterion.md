@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-distinguishable-prefix-nonregularity-criterion.md

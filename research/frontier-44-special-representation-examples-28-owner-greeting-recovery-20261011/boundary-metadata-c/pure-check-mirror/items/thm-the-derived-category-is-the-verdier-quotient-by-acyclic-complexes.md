@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-derived-category-is-the-verdier-quotient-by-acyclic-complexes.md

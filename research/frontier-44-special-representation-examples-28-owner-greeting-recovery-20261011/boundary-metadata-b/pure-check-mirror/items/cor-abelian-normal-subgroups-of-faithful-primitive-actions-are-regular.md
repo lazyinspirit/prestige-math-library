@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-abelian-normal-subgroups-of-faithful-primitive-actions-are-regular.md

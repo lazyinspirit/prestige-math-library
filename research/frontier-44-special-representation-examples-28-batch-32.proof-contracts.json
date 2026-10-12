@@ -1,0 +1,3690 @@
+{
+  "version": 1,
+  "level": "frontier-44-special-representation-examples-28",
+  "scope": [
+    "def-support-of-a-sheaf-section",
+    "lem-compatible-refinement-for-tuple-indexed-coverings",
+    "lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology",
+    "lem-sections-near-a-compact-set-are-sections-on-that-set",
+    "def-c-soft-sheaf",
+    "def-compactly-supported-global-sections",
+    "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+    "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+    "ex-compact-support-and-softness-on-a-finite-discrete-space",
+    "lem-finite-polyhedral-covering-dimension-bounds-all-sheaf-cohomology",
+    "lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft",
+    "lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions"
+  ],
+  "contracts": {
+    "def-support-of-a-sheaf-section": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition applies to every open $U$, including $U=\\varnothing$ and the empty section: for $U=\\varnothing$ there is no point to test, so $\\operatorname{Supp}(s)=\\varnothing\\subseteq U$ vacuously, and clause 2 of the Definition identifies the empty support with the zero section."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section has empty support by clause 2 of the Definition, and its germ at every point is the zero germ, so the zero case is the reference point against which compact support is tested."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-point support is the smallest nonempty support: clause 1 of the Definition makes it closed in $U$ and clause 2 separates it from $\\operatorname{Supp}(s)=\\varnothing$, so no special convention is needed at this boundary."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition places no nonemptiness hypothesis on $U$, on the support or on $X$; the degenerate cases $U=\\varnothing$, $X=\\varnothing$ and $\\operatorname{Supp}(s)=\\varnothing$ are all covered by the displayed formula $\\operatorname{Supp}(s)=\\{\\,x\\in U: s_x\\neq 0\\,\\}$."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no ordered or indexed parameters, so it has no endpoint case: compactness of the support is a property of the set $\\operatorname{Supp}(s)$ itself and no boundary point of an index range is tested."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The support is separated from the set $U$ by the property $s_x\\neq 0$ in the Definition, and no family of nonempty sets is selected from anywhere in the item."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction of the biconditional in clause 2 of the Definition, $\\operatorname{Supp}(s)=\\varnothing$ implies $s=0$, is the locality argument displayed in that clause: it applies the sheaf locality axiom to the cover of $U$ by its open subsets through the cited [[lem-section-zero-if-all-germs-zero]]."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction of clause 2 of the Definition, $s=0$ implies $\\operatorname{Supp}(s)=\\varnothing$, is immediate because the zero section has zero germ at every point, and clause 3 records the restriction compatibility $(s|_V)_x=s_x$."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-compatible-refinement-for-tuple-indexed-coverings": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0 \\cup \\dots \\cup U_n .$$ - A subset $A \\subseteq X$ is a **compact subset** of $X$ when the subspace $(A, \\mathcal{T}_A)$ is a compact topological space",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "source_section": "Statement",
+          "quote": "$X$ is **normal** ([[def-normal-and-t4-spaces]]); 3. $X$ is $T_1$ ([[def-t0-and-t1-spaces]])",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-normal-and-t4-spaces",
+          "source_section": "Definition",
+          "quote": "- $X$ is **normal** when any two disjoint closed sets can be separated by disjoint open sets: for all closed $A, B \\subseteq X$ with $A \\cap B = \\varnothing$ there are $U, V \\in \\mathcal{T}$ with",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-topological-space",
+          "source_section": "Definition",
+          "quote": "**The closed sets, and the dual axiomatisation.** Put $\\mathcal{C} := \\{\\, X \\setminus U : U \\in \\mathcal{T} \\,\\}$, the family of closed sets. Then - **(C1)** $\\varnothing \\in \\mathcal{C}$ and $X \\in \\mathcal{C}$; - **(C2)** $\\bigcap \\mathcal{D} \\in \\mathcal{C}$ for every **nonempty** $\\mathcal{D} \\subseteq \\mathcal{C}$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-closure-characterisation-top",
+          "source_section": "Statement",
+          "quote": "$\\overline{A}$ is closed, contains $A$, and is contained in every closed $F \\subseteq X$ with $A \\subseteq F$",
+          "uses": [
+            "1.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "If $(X, \\mathcal{T})$ is compact and $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.",
+          "uses": [
+            "3.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Finite shrinking: every finite open cover of a normal space has an open shrinking whose closures remain in the original members.",
+          "step": "1.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Base case p = 0: a finite subcover of the family of all W_{i,k} is a compatible refinement.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "base"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Induction hypothesis for p-1 and construction of the meet covers indexed by p-tuples.",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "The intermediate refinement, shrunk so that closures of members lie in the corresponding U_{alpha(j)}.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "F2",
+            "ih"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Every tuple whose alpha-values have a repetition is already contained in a member of the required cover.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "The fix-up operation: splitting V_{j_0} into H and the B_k is again a cover, refines the U's, and preserves the closure property.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Definition and finiteness of the bad-tuple counts N(i), and the reduction to the case N(i) = 0 for all pairwise-distinct i.",
+          "step": "4.1",
+          "inputs": [
+            "step 3.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The operation removes the chosen bad tuple and creates no new bad tuple for the same value tuple.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-2",
+          "claim": "Via the map beta, no count N(i'') increases and tuples with repeated alpha-values stay compatible.",
+          "step": "5.2",
+          "inputs": [
+            "step 3.1",
+            "step 4.1",
+            "step 3.2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "The descent on the finitely many value tuples terminates with all counts zero.",
+          "step": "6.1",
+          "inputs": [
+            "step 5.1",
+            "step 5.2",
+            "step 3.2",
+            "discharge-induction"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Conclusion of the induction step and of the induction.",
+          "step": "7.1",
+          "inputs": [
+            "step 1.2",
+            "step 6.1",
+            "step 3.1",
+            "discharge-induction"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty cases are placed in the Statement and used in steps 1.1 and 1.2: an empty finite cover forces the space to be empty, and the empty subfamily covers it (the Definition cited as [F1]); for p = 0 the family of all W_{i,k} is a cover, so no case is omitted."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The case p = 0 is exactly the base case proved in step 1.2, and the zero element of each count N is the terminating state of the descent in step 6.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 also covers a one-member finite subcover, and step 5.1 covers a tuple containing exactly one new index, the cases (ii) and (iii) of that step."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate tuples, with repeated entries or repeated alpha-values, are handled by the meet covers of step 1.3 and by step 3.1, which shows they are automatically compatible; V_{j_0} itself may be empty of points outside C, in which case H = V_{j_0} in step 3.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The induction runs over p >= 0 with the base case at the endpoint p = 0 (step 1.2) and the step from p-1 to p for p >= 1 (steps 1.3 to 7.1); the indices of the cover are finite sets with no further order structure, so there is no other endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The proof selects members of finite subcovers and finitely many indices only; the Statement records that no choice principle is used, and the constructions of steps 1.1-3.2 choose from finitely many nonempty sets, so no instance of the Axiom of Choice arises."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is an existence assertion, not a biconditional, so it has no forward direction to discharge; the only implication-like reduction is the case split on N(i) = 0 in step 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Since no biconditional is asserted, no reverse direction is owed; the compatibility conclusion is one-way containment of tuple intersections in the members of the given covers."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-global-cech-cohomology-directed-limit",
+          "source_section": "Definition",
+          "quote": "is the filtered colimit $$\\check H^p(X,\\mathcal F):=\\varinjlim_{\\mathcal U\\in\\operatorname{Cov}(X)}\\check H^p(\\mathcal U,\\mathcal F),$$ taken in the category of abelian groups, of that functor ([[def-filtered-category-and-filtered-colimit]]",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cech-cohomology-open-cover",
+          "source_section": "Definition",
+          "quote": "Čech cohomology of the fixed cover $\\mathcal U$ with values in $\\mathcal F$** is $$\\check H^p(\\mathcal U,\\mathcal F) :=\\ker\\bigl(\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to C^{p+1}(\\mathcal U,\\mathcal F)\\bigr) \\Big/\\operatorname{im}\\bigl(\\delta^",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-cech-cochain-complex-open-cover",
+          "source_section": "Definition",
+          "quote": "group of ordered $p$-cochains of $\\mathcal U$ with values in $\\mathcal F$** by $$C^p(\\mathcal U,\\mathcal F):=\\prod_{i_0<\\cdots<i_p} \\mathcal F\\bigl(U_{i_0}\\cap\\cdots\\cap U_{i_p}\\bigr),$$ the product of the section groups over all increasing",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "2.1",
+            "3.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-cech-to-sheaf-cohomology-comparison",
+          "source_section": "Statement",
+          "quote": "is natural in $\\mathcal F$: for a morphism $\\phi:\\mathcal F\\to\\mathcal G$ of abelian sheaves the square $$\\begin{matrix}\\check H^p(\\mathcal U,\\mathcal F)&\\xrightarrow{\\ \\varphi^p_{\\mathcal U}(\\mathcal F)\\ }&H^p(X,\\mathcal F)\\\\ \\downarrow\\sc",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-refinement-map-independent-on-cohomology",
+          "source_section": "Statement",
+          "quote": "do not depend on the choice of the refinement function.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-cech-h0-global-sections",
+          "source_section": "Statement",
+          "quote": "is an isomorphism, and it is natural in $\\mathcal F$: for a morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian sheaves the square $$\\begin{matrix}\\Gamma(X,\\mathcal F)&\\longrightarrow&\\check H^0(\\mathcal U,\\mathcal F)\\\\ \\downarrow\\scripts",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-zero-sheaf-cohomology-global-sections",
+          "source_section": "Statement",
+          "quote": "canonical isomorphism $$H^0(X,\\mathcal F)\\xrightarrow{\\ \\sim\\ }\\Gamma(X,\\mathcal F),$$ natural in $\\mathcal F$; it identifies $H^0(X,\\mathcal F)$ with the kernel of $\\Gamma(X,I^0(\\mathcal F))\\to\\Gamma(X,I^1(\\mathcal F))$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-acyclic-rows-and-columns-of-cech-double-complex",
+          "source_section": "Statement",
+          "quote": "is a quasi-isomorphism, and if $\\mathcal U$ is $\\mathcal F$-acyclic then $w$ is a quasi-isomorphism as well ([[def-quasi-isomorphism]]).",
+          "uses": [
+            "1.6",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-acyclic-cover-for-sheaf",
+          "source_section": "Definition",
+          "quote": "Leray cover for $\\mathcal F$**, when for every nonempty finite set of indices $\\{i_0,\\dots,i_p\\}\\subseteq I$ the sheaf $\\mathcal F$ is $\\Gamma_W$-acyclic on the open subspace $W:=U_{i_0}\\cap\\cdots\\cap U_{i_p}$, that is, when $$H^q\\bigl(W,\\m",
+          "uses": [
+            "1.6",
+            "3.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-godement-resolution",
+          "source_section": "Definition",
+          "quote": "Godement resolution** of $\\mathcal F$ is the coaugmented complex $$0\\to\\mathcal F\\xrightarrow{\\ \\varepsilon_{\\mathcal F}\\ } C^0(\\mathcal F)\\xrightarrow{\\ d^0\\ }C^1(\\mathcal F)\\xrightarrow{\\ d^1\\ }\\cdots,$$ where $d^n:C^n(\\mathcal F)\\to C^{n",
+          "uses": [
+            "1.5",
+            "2.2",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-godement-resolution-flasque",
+          "source_section": "Statement",
+          "quote": "natural in $\\mathcal F$, where $H^q(X,-)$ is sheaf cohomology from the supplied functorial injective resolution datum on $\\mathrm{Ab}(X)$ ([[def-sheaf-cohomology-derived-global-sections]]). In particular the Godement complex is a $\\Gamma$-a",
+          "uses": [
+            "1.5",
+            "2.2",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-flasque-sheaf",
+          "source_section": "Definition",
+          "quote": "is **flasque**, also called **flabby**, when each of these restriction maps is surjective: for all open $U\\subseteq V\\subseteq X$ the map $\\rho^V_U$ is onto. Equivalently, $\\mathcal F$ is flasque when every section of $\\mathcal F$ over an o",
+          "uses": [
+            "1.5",
+            "2.2",
+            "3.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-long-exact-sequence-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "natural in the short exact sequence and independent of the choice of injective resolutions used to assemble it. The derived categories and right derived functor here are taken under the standing smallness or supplied cofinal-denominator hyp",
+          "uses": [
+            "1.6",
+            "2.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-flasque-sheaves-acyclic",
+          "source_section": "Statement",
+          "quote": "for every open subspace $U\\subseteq X$ and every integer $q>0$, $$H^q(U,\\mathcal F|_U)=0,$$ where $H^q(U,-)$ denotes sheaf cohomology on the space $U$ ([[def-sheaf-cohomology-derived-global-sections]]) computed with the global sections func",
+          "uses": [
+            "1.6",
+            "2.2",
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-cohomological-delta-functor",
+          "source_section": "Definition",
+          "quote": "cohomological delta functor** from $\\mathcal A$ to $\\mathcal B$ is a family of additive functors $$T^n:\\mathcal A\\to\\mathcal B,\\qquad n\\geq 0,$$ together with, for every short exact sequence $$0\\to A\\to B\\to C\\to0,$$ a family of morphisms $",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-universal-delta-functor",
+          "source_section": "Definition",
+          "quote": "is **universal** when for every homological delta functor $S=(S_n,\\partial^S)$ and every natural transformation $$u_0:S_0\\Rightarrow T_0,$$ there exists a unique morphism of homological delta functors $$u:S\\to T$$ whose degree-zero componen",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-effaceable-cohomological-delta-functors-are-universal",
+          "source_section": "Statement",
+          "quote": "effaceable in positive degrees by injectives, then $T$ is universal.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic",
+          "source_section": "Statement",
+          "quote": "unique isomorphism of cohomological delta functors $$S\\xrightarrow{\\sim}T$$ whose degree-zero part is $\\tau^{-1}\\sigma:S^0\\xrightarrow{\\sim}T^0$.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero",
+          "source_section": "Statement",
+          "quote": "are equal as soon as $u_0=v_0$. In the cohomological case, two morphisms $u,v:S\\to T$ are equal as soon as $u^0=v^0$.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-derived-functors-are-universal-delta-functors",
+          "source_section": "Statement",
+          "quote": "right derived delta functor $(R_I^nF)$ is universal.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "has enough injectives, every abelian sheaf on $X$ admits an injective resolution ([[def-injective-resolution-in-an-abelian-category]]), and the embeddings below supply one injective resolution datum ([[def-supplied-injective-resolution-datu",
+          "uses": [
+            "1.6",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-injective-sheaves-flasque",
+          "source_section": "Statement",
+          "quote": "is flasque ([[def-flasque-sheaf]]): for all open subsets $U\\subseteq V\\subseteq X$ the restriction map $\\mathcal I(V)\\to\\mathcal I(U)$ is surjective. No choice principle beyond the given data is used: the injective object $\\mathcal I$ is pa",
+          "uses": [
+            "1.6",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-snake-lemma-in-an-abelian-category",
+          "source_section": "Statement",
+          "quote": "there is an exact sequence $$0 \\to \\ker(f) \\to \\ker(g) \\to \\ker(h) \\xrightarrow{\\delta} \\operatorname{coker}(f) \\to \\operatorname{coker}(g) \\to \\operatorname{coker}(h) \\to 0,$$ where $\\delta$ is the connecting morphism of [[thm-the-connecti",
+          "uses": [
+            "1.5",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-the-long-exact-homology-sequence-is-natural",
+          "source_section": "Statement",
+          "quote": "induces a morphism between the associated long exact homology sequences.",
+          "uses": [
+            "1.5",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "if and only if, for every point $x\\in X$, the stalk sequence $$ \\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots $$ is exact.",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy $$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$ then $s=t$. **Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy $$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$ the",
+          "uses": [
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "lem-compatible-refinement-for-tuple-indexed-coverings",
+          "source_section": "Statement",
+          "quote": "Then there are a finite set $J$, a map $\\alpha:J\\to I$, and an open cover $(V_j)_{j\\in J}$ of $X$ such that $$V_j\\subseteq U_{\\alpha(j)}\\qquad\\text{for every }j\\in J,$$ and such that for every $(p+1)$-tuple $(j_0,\\dots,j_p)$ of elements of ",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for a",
+          "uses": [
+            "1.4",
+            "8.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Setup: the refinement-limit Čech groups T^p are the filtered colimit over covers, finite covers are cofinal, and both T^p and S^p vanish for p<0.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "The fixed-cover comparisons descend to a natural comparison map φ_X on the colimit.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "φ^0_X is the canonical identification of T^0 and S^0 with Γ.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Construction of ∂_T by local lifting on a compatible refinement; the cocycle δg lies in C^{p+1}(F').",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F10",
+            "F11",
+            "F9",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "The Godement construction is exact in the sheaf: 0→C^q(F')→C^q(F)→C^q(F'')→0 is exact for every q.",
+          "step": "1.5",
+          "inputs": [
+            "F4",
+            "F8",
+            "F9",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "Effaceability of T^• in positive degrees by injectives.",
+          "step": "1.6",
+          "inputs": [
+            "F3",
+            "F5",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "∂_T is well defined, additive and natural in the short exact sequence.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.4",
+            "F1",
+            "F2",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "The Γ(C^•(-))- and Tot D(-)-complexes of a short exact sequence are degreewise short exact.",
+          "step": "2.2",
+          "inputs": [
+            "step 1.5",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Exactness of the long sequences built from ∂_T.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.4",
+            "step 2.1",
+            "F1",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-2",
+          "claim": "u and w are morphisms of the short exact sequences of complexes, natural in the sheaf.",
+          "step": "3.2",
+          "inputs": [
+            "step 2.2",
+            "F3",
+            "F4",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-3-3",
+          "claim": "The Godement-model boundary is the connecting homomorphism of sheaf cohomology.",
+          "step": "3.3",
+          "inputs": [
+            "step 2.2",
+            "step 4.1",
+            "step 4.2",
+            "F4",
+            "F5",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "u commutes with the boundary maps.",
+          "step": "4.1",
+          "inputs": [
+            "step 2.2",
+            "step 3.2",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-4-2",
+          "claim": "w commutes with ∂_T via the snake-lift computation.",
+          "step": "4.2",
+          "inputs": [
+            "step 1.4",
+            "step 3.2",
+            "F3",
+            "F8",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "φ_X is a morphism of cohomological delta functors extending the identity in degree 0.",
+          "step": "5.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.4",
+            "step 1.6",
+            "step 3.1",
+            "step 3.3",
+            "step 4.1",
+            "step 4.2",
+            "F6",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "T^• and S^• are universal and φ_X is an isomorphism in every degree.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.3",
+            "step 1.6",
+            "step 3.1",
+            "step 5.1",
+            "F6",
+            "F7",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-7-1",
+          "claim": "Cofinal-family vanishing for Čech covers implies vanishing of sheaf cohomology above d.",
+          "step": "7.1",
+          "inputs": [
+            "step 6.1",
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-8-1",
+          "claim": "Conclusion and choice accounting.",
+          "step": "8.1",
+          "inputs": [
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 6.1",
+            "step 7.1",
+            "F11"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The empty-space and empty-cover conventions are part of the Statement and of the colimit of step 1.1: for X = ∅ every sheaf has zero cohomology and the empty cover computes it, and the Definition cited as [F1] includes the empty subcover convention."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The degree p = 0 is settled separately in step 1.3, where φ^0_X is exhibited as the canonical isomorphism with Γ; the groups in negative degrees are set to zero in step 1.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A one-member cover, or a single fixed cover, is a pair (U, α) in the colimit of step 1.1 and is handled by the same descent: a class on it is represented by that pair and the comparison of step 1.2 applies."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate covers with repeated or redundant members, and the degenerate short exact sequence with a zero sheaf, are covered because the colimit in step 1.1 is indexed by distinct-member covers and because the local-lift construction of step 1.4 is vacuous for tuples whose intersections are empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The two endpoints of the long exact sequences are covered in step 3.1: exactness at the last displayed term and the vanishing in negative degrees from step 1.1; the comparison is proved for every p >= 0 with no lower endpoint beyond zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Choice is genuinely used and tracked: the injective-resolution and colimit data, and the local lifting selections of step 1.4, invoke the Axiom of Choice, while the compatible refinement of [F10] selects only finitely; step 8.1 records the full accounting."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts an isomorphism, naturality and a one-way vanishing consequence, but contains no biconditional, so no forward direction of an equivalence is owed; the only implication is the cofinal-family consequence proved in step 7.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "With no biconditional in the Statement there is no reverse direction; in particular the proof never asserts that vanishing of H^p implies vanishing of the refinement-limit Čech groups."
+        }
+      ]
+    },
+    "lem-sections-near-a-compact-set-are-sections-on-that-set": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse-image presheaf** $$ f_{\\mathrm p}\\mathcal G $$ on $X$ is defined by $$ (f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V), $$ where $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by reverse",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Its **sheafification** is the sheaf $$a\\mathcal F:=\\mathcal F^{++}.$$ The canonical morphism $$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$ is the composite $$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-presheaf-plus-construction",
+          "source_section": "Definition",
+          "quote": "There is a canonical morphism of presheaves $$\\eta:\\mathcal F\\longrightarrow\\mathcal F^+$$ whose component on $U$ sends a section $s\\in\\mathcal F(U)$ to the class of the single-chart presentation",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-second-plus-construction-is-sheaf",
+          "source_section": "Statement",
+          "quote": "the double plus construction $\\mathcal F^{++}=(\\mathcal F^+)^+$ is a sheaf.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-set-has-all-small-colimits",
+          "source_section": "Statement",
+          "quote": "It is the quotient of the tagged union $S=\\{(j,x):x\\in D(j)\\}$ by the least equivalence relation containing $$(j,x)\\sim(k,D(u)(x))\\qquad(u:j\\to k).$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-equality-in-a-filtered-colimit-of-sets-is-eventual",
+          "source_section": "Statement",
+          "quote": "are equal if and only if there are arrows $a:j\\to\\ell$ and $b:k\\to\\ell$ such that $D(a)(x)=D(b)(y)$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-filtered-category-and-filtered-colimit",
+          "source_section": "Definition",
+          "quote": "is **filtered** when every finite diagram in $\\mathcal J$ admits a cocone. Equivalently: 1. $\\mathcal J$ is nonempty; 2. for every $j,k$ there are an object $\\ell$ and arrows $j\\to\\ell\\leftarrow k$; 3. for every parallel pair $f,g:j\\rightrightarrows",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Concretely, $\\mathcal F_x$ may be described as equivalence classes of pairs $(U,s)$ with $U$ an open neighbourhood of $x$ and $s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some smaller open neighbourhood of $x$. The next",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "is called the **germ of $s$ at $x$**, and it is denoted by $$s_x\\in\\mathcal F_x.$$ For every open set $U$ containing $x$, this gives a canonical map $$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$ If $V\\subseteq U$ is open and",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.6"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse-image presheaf** $$ f_{\\mathrm p}\\mathcal G $$ on $X$ is defined by $$ (f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V), $$ where $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by reverse",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Its **sheafification** is the sheaf $$a\\mathcal F:=\\mathcal F^{++}.$$ The canonical morphism $$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$ is the composite $$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-presheaf-plus-construction",
+          "source_section": "Definition",
+          "quote": "There is a canonical morphism of presheaves $$\\eta:\\mathcal F\\longrightarrow\\mathcal F^+$$ whose component on $U$ sends a section $s\\in\\mathcal F(U)$ to the class of the single-chart presentation",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-sheafification-preserves-stalks",
+          "source_section": "Statement",
+          "quote": "sheafification map induces a bijection $$\\eta_{\\mathcal F,x}:\\mathcal F_x\\xrightarrow{\\ \\cong\\ }(a\\mathcal F)_x.$$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-stalk-inverse-image-sheaf",
+          "source_section": "Statement",
+          "quote": "canonical isomorphism $$ (f^{-1}\\mathcal G)_x\\cong \\mathcal G_{f(x)}. $$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-germ-of-section",
+          "source_section": "Definition",
+          "quote": "is called the **germ of $s$ at $x$**, and it is denoted by $$s_x\\in\\mathcal F_x.$$ For every open set $U$ containing $x$, this gives a canonical map $$\\mathcal F(U)\\longrightarrow\\mathcal F_x,\\qquad s\\longmapsto s_x.$$ If $V\\subseteq U$ is open and",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "**sheaf** if for every open set $U \\subseteq X$ and every open cover $U=\\bigcup_{i\\in I}U_i$, including the empty cover of $\\varnothing$, the following two conditions hold. **Locality.** If $s,t\\in\\mathcal F(U)$ satisfy",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.6",
+            "1.7",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheafification",
+          "source_section": "Definition",
+          "quote": "Its **sheafification** is the sheaf $$a\\mathcal F:=\\mathcal F^{++}.$$ The canonical morphism $$\\eta_{\\mathcal F}:\\mathcal F\\longrightarrow a\\mathcal F$$ is the composite $$\\mathcal F\\xrightarrow{\\ \\eta\\ }\\mathcal F^+\\xrightarrow{\\ \\eta\\ }(\\mathcal",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.6",
+            "1.7",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-compactness-of-a-subspace-is-ambient",
+          "source_section": "Statement",
+          "quote": "and only if for every family $\\mathcal{U} \\subseteq \\mathcal{T}$ with $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$, or else $A = \\varnothing$. 2.",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "The **subspace topology** (also *relative topology*) on $S$ is $$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$ the family of **traces** on $S$ of the open sets of $X$. The pair $(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-t0-t1-and-hausdorff-are-hereditary",
+          "source_section": "Statement",
+          "quote": "are hereditary in the sense of [[def-hereditary-property]].",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "source_section": "Statement",
+          "quote": "is **regular** ([[def-regular-and-t3-spaces]]); 2. $X$ is **normal** ([[def-normal-and-t4-spaces]]); 3. $X$ is $T_1$ ([[def-t0-and-t1-spaces]]), and hence $X$ is $T_3$ and $T_4$. Following [[def-regular-and-t3-spaces]] and",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-normality-via-shrinking",
+          "source_section": "Statement",
+          "quote": "For every closed $A \\subseteq X$ and every open $U$ with $A \\subseteq U$ there is an open $V$ with $$A \\subseteq V \\subseteq \\overline{V} \\subseteq U .$$ In particular, in a normal space any two disjoint closed sets $A$ and $D$ admit an open $V",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-closure-characterisation-top",
+          "source_section": "Statement",
+          "quote": "smallest closed superset of $A$, and $A$ is closed if and only if $A = \\overline{A}$. 3. $\\overline{A} = A \\cup A'$. Claim 2 is recorded here for reference and is discharged in [[def-interior-closure-boundary-top]], where it is what makes the",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-interior-closure-boundary-top",
+          "source_section": "Definition",
+          "quote": "The **closure** of $A$ is $\\overline{A} := \\bigcap \\{\\, F \\subseteq X : F \\text{ closed and } A \\subseteq F \\,\\}$. - The **exterior** of $A$ is $\\operatorname{ext}(A) := \\operatorname{int}(X \\setminus A)$. - The **boundary** of $A$ is $\\partial A :=",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$ 3. **Compact implies closed.**",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "Finite unions.** If $n \\in \\mathbb{N}$ and $K_0, \\dots, K_n$ are compact subsets of $X$, then $K_0 \\cup \\dots \\cup K_n$ is a compact subset of $X$. The union of the empty list is $\\varnothing$, which is a compact subset of every space. Claim 1 needs",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "This is a theorem of ZF: its proof uses no form of the Axiom of Choice ([[def-axiom-of-choice]]). What is proved below is exactly the displayed statement, by induction on $n$. The natural number $n$ serves as the index set in the von Neumann sense,",
+          "uses": [
+            "1.3",
+            "1.5",
+            "1.6",
+            "1.7",
+            "2.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The source of the canonical map of the statement is the presheaf value P(K) and the map is the component eta_{P,K}, which is k-linear; bijectivity is therefore the only obligation.",
+          "step": "1.1",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "Descriptions of P(K) and its stalks: classes [V,a] with eventual equality, and identification of P_x with F_x with local agreement as equality of germs.",
+          "step": "1.2",
+          "inputs": [
+            "F2"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "Injectivity of eta_{P,K}: equality of images gives equal germs along K, a finite family of local agreement neighbourhoods covers K, and locality of F identifies the two classes in P(K).",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Every section sigma of i^{-1}F over K is locally represented by an ambient F-section over an open set whose zeta-image equals sigma; these open sets are cut out by a formula and cover K.",
+          "step": "1.4",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-5",
+          "claim": "Finitely many representing opens U_i with witnesses (V_i,a_i), shrunk inside the normal space K to compact cores C_i covering K with C_i contained in U_i.",
+          "step": "1.5",
+          "inputs": [
+            "F3",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-1-6",
+          "claim": "For each pair of indices an open neighbourhood W_ij of the compact intersection C_i cap C_j on which the representatives a_i and a_j agree.",
+          "step": "1.6",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-7",
+          "claim": "Fusion lemma: two compact pieces with sections agreeing on a neighbourhood of their intersection glue to one section over a neighbourhood of the union, agreeing with each piece on a neighbourhood of it.",
+          "step": "1.7",
+          "inputs": [
+            "F4",
+            "F5",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Iterated fusion: for every k there are an open neighbourhood of D_k and a section whose zeta-image agrees with sigma on an open neighbourhood of D_k; the induction step uses the pairwise agreement and the fusion lemma.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.5",
+            "step 1.6",
+            "step 1.7",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Surjectivity of eta_{P,K}: the final section agrees with sigma on a neighbourhood of K, hence on all germs, hence everywhere by locality.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Bijectivity of eta_{P,K} yields the isomorphism; the moreover clause follows by iterated fusion with vacuous agreement on disjoint compact sets, in particular with the zero section.",
+          "step": "4.1",
+          "inputs": [
+            "step 1.1",
+            "step 1.3",
+            "step 1.7",
+            "step 3.1",
+            "F5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For K=empty the compactness conventions of [F5] allow the empty finite subfamily in steps 1.3 and 1.5 and the empty shrinking recursion in step 1.5, and P(empty)=F(empty)=0=(i^{-1}F)(empty) by the empty-cover clauses of the sheaf axioms in [F4], so the canonical map in the statement is the zero map between zero groups; the moreover clause with m=0 is vacuous."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Both sides of the statement are k-vector spaces; the zero section over any open neighbourhood of K represents the zero class in P(K) by [F2](i) and maps to the zero section of i^{-1}F, and the k-linear maps of steps 1.1, 1.3 and 3.1 preserve zero; in particular step 4.1 prescribes the zero section on a compact set disjoint from K."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a single compact piece no fusion is needed: step 1.5 already produces the section near C_0 = K, and the moreover clause of step 4.1 for m=1 is the identity statement s_1 = s_1; for K a single point the source P(K) reduces to the stalk identification of [F2](ii) by step 1.4."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate configurations are covered by steps 1.5, 1.7 and 2.1: individual compact cores C_i may be empty, the agreement set W may be empty (as in step 4.1), K may equal X, and the fusion requires only C_k subset V_k and the agreement on a neighbourhood of C_1 cap C_2, all of which hold vacuously or by [F5] in these cases."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no ordered or interval-indexed parameter and no boundary point of an index range: K is an arbitrary compact subset and every family occurring in the proof is finite with the induction of step 2.1 indexed from k=0, whose base case is treated in step 1.5."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "All selections are from finitely many nonempty sets: the finite subfamilies of steps 1.3, 1.5 and 1.6, the finitely many witnesses (V_i,a_i) in step 1.5, and the separating opens G_1, G_2 of step 1.7, so only lem-finite-choice, a theorem of ZF recorded in [F5], is used and no infinite choice occurs; the families of candidates are cut out by formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional: the isomorphism is a single map claimed bijective, and the moreover clause is a one-directional existence statement, so there is no forward implication to discharge."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement contains no biconditional, so there is no reverse implication; injectivity and surjectivity of the canonical map are proved separately in steps 1.3 and 3.1."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-c-soft-sheaf": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For K=empty the target (i^{-1}F)(K) is the zero group by the empty-cover clauses of the sheaf axioms, so the restriction map of the Definition is surjective and imposes no condition; the empty compact set is one of the quantified instances."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Surjectivity in the Definition is a condition on the whole restriction map, and the zero section always lifts to the zero global section; clause 2 of the Definition exhibits the lift for flasque sheaves as an arbitrary preimage, with no special treatment of zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For a one-point compact set K={x} the target is the stalk F_x, so c-softness at K is exactly the statement that every germ at x of a section extends to a global section, which is the local form recorded in clause 1 of the Definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition places no nonemptiness or properness hypothesis on X or K: for X compact the instance K=X makes the restriction map the identity, and for X=empty there are no nonempty compact sets, so c-softness is vacuous by the empty case above."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition quantifies over all compact subsets of X and has no ordered or interval-indexed parameter, so no endpoint of an index range is ever tested."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition contains no selection from a family of nonempty sets; in clause 2 the global extension t is an existential witness of the flasque restriction map, used once per class, and no choice principle is invoked."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The forward direction of the equivalence in clause 1 of the Definition goes from c-softness to the neighbourhood formulation: it replaces the target by the colimit over open neighbourhoods of K using lem-sections-near-a-compact-set-are-sections-on-that-set."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The reverse direction of the equivalence in clause 1 of the Definition goes from the neighbourhood formulation to c-softness: every class in the colimit over open neighbourhoods of K is represented by a section over such a neighbourhood, which the formulation lifts to a global section."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "def-compactly-supported-global-sections": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The zero sheaf has Gamma_c(X,0)=0 by fact 1 of the Definition, since the only section is the zero section with empty support; for X=empty the same reading applies and no nonempty compact subset is tested."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero section has empty support, which is compact, so it lies in Gamma_c(X,F) for every F; the zero element of Gamma_c(X,F) is the zero section, and the functoriality of fact 1 of the Definition preserves it."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "A section supported at a single point is compactly supported, so a one-point support is one of the admissible instances of the Definition rather than a boundary needing special convention."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Degenerate instances are covered by fact 6 of the Definition: for X compact every global section is compactly supported, so Gamma_c(X,-)=Gamma(X,-) and H^q_c=H^q; the empty space and the zero sheaf are handled by the empty and zero cases, and no nonemptiness hypothesis is placed on X or on F."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The Definition has no ordered or interval-indexed parameter and no threshold to attain, so no endpoint of an index range or limiting case of a numerical parameter is tested."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The only choice principles used are the Axiom of Choice through the injective resolution datum of fact 4 of the Definition and the Axiom of Dependent Choice in facts 5 and 6, the latter derived from AC; fact 1 makes no selection from a family of nonempty sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Definition contains no biconditional between substantive claims; the only if-and-only-if reading is definitional, and fact 6 is the one-directional implication from compactness of X to Gamma_c=Gamma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no reverse implication to discharge, since the compact-support construction is a definition and the compact case is treated only in the forward direction in fact 6."
+        }
+      ],
+      "finite_smoke": []
+    },
+    "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$. For an open set $V \\subseteq X$, define $$(j_!\\mathcal F)(V) := \\left\\{ s\\in",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace. 1. For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of abelian groups $\\mathcal G$ on $X$, there is a natural",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$. The **direct image presheaf** $$f_*\\mathcal F$$ on $Y$ is defined on an open set $V \\subseteq Y$ by $$ (f_*\\mathcal",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-direct-image-is-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map. 1. If $\\mathcal F$ is a sheaf on $X$, then $f_*\\mathcal F$ is a sheaf on $Y$. 2. If $\\mathcal F$ is a sheaf of groups, rings, or modules on $X$, then $f_*\\mathcal",
+          "uses": [
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied injective resolution data on all objects of $\\mathcal A$, and let $F:\\mathcal",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]]),",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]);",
+          "uses": [
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]); every clause applies in",
+          "uses": [
+            "2.1",
+            "2.3",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-support-of-a-sheaf-section",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $\\mathcal F$ be a presheaf of $k$-vector spaces (or of abelian groups) on $X$ ([[def-presheaf-on-topological-space]]), let $U\\subseteq X$ be open and let",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$ 3. **Compact implies closed.**",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). Then: 1. **A neighbourhood base of compact sets.** If $X$ is locally compact ([[def-locally-compact-space]]) and Hausdorff",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "The **subspace topology** (also *relative topology*) on $S$ is $$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$ the family of **traces** on $S$ of the open sets of $X$. The pair $(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-compactness-of-a-subspace-is-ambient",
+          "source_section": "Statement",
+          "quote": "and only if for every family $\\mathcal{U} \\subseteq \\mathcal{T}$ with $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$, or else $A = \\varnothing$. 2.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-t0-t1-and-hausdorff-are-hereditary",
+          "source_section": "Statement",
+          "quote": "are hereditary in the sense of [[def-hereditary-property]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-sheaf-section-over-empty-set-terminal",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a sheaf of sets on a topological space $X$. Then $\\mathcal F(\\varnothing)$ is a singleton.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "if and only if, for every point $x\\in X$, the stalk sequence $$ \\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots $$ is exact.",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "has enough injectives, every abelian sheaf on $X$ admits an injective resolution ([[def-injective-resolution-in-an-abelian-category]]), and the embeddings below supply one injective resolution datum ([[def-supplied-injective-resolution-datu",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-a-morphism-has-a-comparison-extension-between-the-supplied-injective-resolutions",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $I$ be a supplied injective resolution datum on a class $\\mathcal D$ in an abelian category. For every morphism $u:A\\to B$ with $A,B\\in\\mathcal D$, there",
+          "uses": [
+            "1.2",
+            "2.2",
+            "3.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-acyclic-resolution-theorem-for-right-derived-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $I$ be a supplied injective resolution datum on a class $\\mathcal D$, let $F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor, and let $$0\\to A\\to",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-f-acyclic-resolution",
+          "source_section": "Definition",
+          "quote": "Let $F$ be an additive functor between abelian categories. 1. If $F$ is left exact and $I$ is a supplied injective resolution datum on a class $\\mathcal D$, an **$F$-acyclic resolution of $A$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-acyclic-object-for-a-left-exact-functor",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a supplied injective resolution datum on a class $\\mathcal D$, and let $F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor between abelian categories. An object $A\\in\\mathcal D$",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-a-natural-transformation-induces-natural-transformations-of-right-derived-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $I$ be a supplied injective resolution datum, let $F,G:\\mathcal A\\to\\mathcal B$ be additive functors, and let $\\alpha:F\\Rightarrow G$ be a natural",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-natural-transformations-of-base-functors-give-morphisms-of-derived-delta-functors",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $P$ be supplied projective resolution data, let $I$ be supplied injective resolution data, and let $\\alpha:F\\Rightarrow G$ be a natural transformation",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-effaceable-cohomological-delta-functors-are-universal",
+          "source_section": "Statement",
+          "quote": "effaceable in positive degrees by injectives, then $T$ is universal.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-universal-delta-functor",
+          "source_section": "Definition",
+          "quote": "is **universal** when for every homological delta functor $S=(S_n,\\partial^S)$ and every natural transformation $$u_0:S_0\\Rightarrow T_0,$$ there exists a unique morphism of homological delta functors $$u:S\\to T$$ whose degree-zero componen",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-universal-delta-functors-extending-the-same-degree-zero-functor-are-uniquely-isomorphic",
+          "source_section": "Statement",
+          "quote": "unique isomorphism of cohomological delta functors $$S\\xrightarrow{\\sim}T$$ whose degree-zero part is $\\tau^{-1}\\sigma:S^0\\xrightarrow{\\sim}T^0$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "cor-a-morphism-between-universal-delta-functors-is-determined-in-degree-zero",
+          "source_section": "Statement",
+          "quote": "are equal as soon as $u_0=v_0$. In the cohomological case, two morphisms $u,v:S\\to T$ are equal as soon as $u^0=v^0$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for a",
+          "uses": [
+            "7.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, $$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad",
+          "uses": [
+            "7.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "1.1 Clause (1), degree zero. By [F1], $(j_!\\mathcal A)(X)=\\{\\,s\\in\\mathcal A(U):\\operatorname{Supp}(s)\\ \\text{closed in }X\\,\\}$. For such $s$ the support of $s$ read as a globa",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "F6",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "1.2 Clause (2), degree zero and stalks of $i_*$. By [F2], $(i_*\\mathcal B)(X)=\\mathcal B(X\\cap Z)=\\mathcal B(Z)$. The stalks are computed as follows: for $z\\in Z$ the sets $V\\c",
+          "step": "1.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F7",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "2.1 Clause (1), c-softness. Let $\\mathcal A$ be c-soft on $U$, let $K\\subseteq X$ be compact and let $\\sigma$ be a section of $j_!\\mathcal A$ over $K$; by the neighbourhood for",
+          "step": "2.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "2.2 $i_*$ is exact. Let $0\\to\\mathcal B'\\to\\mathcal B\\to\\mathcal B''\\to0$ be an exact sequence of sheaves on $Z$ and apply $i_*$ degreewise; by [F7] it suffices to test exactne",
+          "step": "2.2",
+          "inputs": [
+            "F7",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D2.3",
+          "claim": "2.3 Clause (2), c-softness. Let $\\mathcal B$ be c-soft on $Z$, let $K\\subseteq X$ be compact and let $\\sigma$ be a section of $i_*\\mathcal B$ over $K$, represented by a section",
+          "step": "2.3",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "1.2",
+            "2.3"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "3.1 Clause (1), computing both derived functors by the same complex. Let $0\\to\\mathcal A\\to J^0\\to J^1\\to\\cdots$ be the injective resolution of $\\mathcal A$ supplied by the fix",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F4",
+            "F7",
+            "F8",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "4.1 Clause (1), the natural isomorphisms via universality. Put $G:=\\Gamma_c(U,-)$ on $\\mathrm{Ab}(U)$; the degree-zero identification of [step 1.1] is a natural isomorphism $\\z",
+          "step": "4.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "F8",
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "5.1 Clause (2), the derived isomorphisms. Let $0\\to\\mathcal B\\to J^0\\to J^1\\to\\cdots$ be the injective resolution of $\\mathcal B$ supplied by the fixed datum on $\\mathrm{Ab}(Z)",
+          "step": "5.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "1.2",
+            "2.2",
+            "2.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "6.1 Clause (3). Let $Z$ be compact. For every sheaf $\\mathcal B$ on $Z$ the support of a global section is closed in $Z$ [F5], hence a closed subset of the compact space $Z$, h",
+          "step": "6.1",
+          "inputs": [
+            "F3",
+            "F5",
+            "1.2",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "id": "D7.1",
+          "claim": "7.1 Conclusion. Clause (1) is [step 1.1], [step 2.1] and [step 4.1]; clause (2) is [step 1.2], [step 2.3] and [step 5.1]; clause (3) is [step 6.1]. The Axiom of Choice is used ",
+          "step": "7.1",
+          "inputs": [
+            "F7",
+            "F8",
+            "F9",
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.3",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The section group over the empty open set is zero by fact F7, so the identifications of steps 1.1 and 1.2 remain equalities of subgroups of the zero group, and the resolution complexes of steps 3.1 and 5.1 stay exact."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf is carried to zero under every functor in sight and the group isomorphisms of steps 1.1 and 1.2 send 0 to 0; the acyclic resolutions of steps 3.1 and 5.1 have zero complexes."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative-unit or cardinality-one hypothesis occurs anywhere in the statement; the claims concern arbitrary sheaves and all degrees q >= 0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 covers the extremal cases of clause (3) (Z compact, including Z=X and U empty), and steps 1.1 and 1.2 remain equalities when U or Z is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, order or endpoint structure; cohomological degrees are unbounded above and the degree-zero case is settled in steps 1.1 and 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is declared and used exactly through the injective resolution data and comparison theorems invoked in steps 3.1, 4.1 and 5.1, as recorded in fact F9."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The direct direction of clauses (1) and (2) is proved in steps 1.1, 2.1, 4.1, 1.2, 2.3 and 5.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse direction is clause (3) with its compactness specialization in step 6.1, together with the naturality assertions of steps 4.1 and 5.1; no other equivalence is claimed."
+        }
+      ]
+    },
+    "lem-c-soft-field-sheaves-are-compact-support-acyclic": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]);",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "has enough injectives, every abelian sheaf on $X$ admits an injective resolution ([[def-injective-resolution-in-an-abelian-category]]), and the embeddings below supply one injective resolution datum ([[def-supplied-injective-resolution-datu",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied injective resolution data on all objects of $\\mathcal A$, and let $F:\\mathcal",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-sheaf-cohomology-derived-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice. Fix a topological space $X$, let $$\\Gamma(X,-):\\mathrm{Ab}(X)\\to\\mathbf{Ab}$$ be the additive left exact global-sections functor ([[def-global-sections-functor-sheaves]]),",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-sections-near-a-compact-set-are-sections-on-that-set",
+          "source_section": "Statement",
+          "quote": "Let $K\\subseteq X$ be a compact subset ([[def-compact-space]]) of a locally compact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]), let $\\mathcal F$ be a sheaf of $k$-vector",
+          "uses": [
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). Then: 1. **A neighbourhood base of compact sets.** If $X$ is locally compact ([[def-locally-compact-space]]) and Hausdorff",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$ 3. **Compact implies closed.**",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-closed-subspace-of-a-compact-space-is-compact",
+          "source_section": "Statement",
+          "quote": "If $(X, \\mathcal{T})$ is compact and $F \\subseteq X$ is closed in $X$, then $F$ is a compact subset of $X$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-compactness-of-a-subspace-is-ambient",
+          "source_section": "Statement",
+          "quote": "and only if for every family $\\mathcal{U} \\subseteq \\mathcal{T}$ with $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$, or else $A = \\varnothing$. 2.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-compact-hausdorff-space-is-regular-and-normal",
+          "source_section": "Statement",
+          "quote": "$X$ is **normal** ([[def-normal-and-t4-spaces]]); 3. $X$ is $T_1$ ([[def-t0-and-t1-spaces]])",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy $$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$ then $s=t$. **Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy $$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$ the",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "if and only if, for every point $x\\in X$, the stalk sequence $$ \\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots $$ is exact.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-global-sections-left-exact",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space. If $$ 0\\to\\mathcal F'\\to\\mathcal F\\to\\mathcal F'' $$ is exact in sheaves of abelian groups on $X$, then $$ 0\\to\\Gamma(X,\\mathcal F')\\to\\Gamma(X,\\mathcal",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$. For an open set $V \\subseteq X$, define $$(j_!\\mathcal F)(V) := \\left\\{ s\\in",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-extension-by-zero-adjunction-exactness",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace. 1. For every sheaf of abelian groups $\\mathcal F$ on $U$ and every sheaf of abelian groups $\\mathcal G$ on $X$, there is a natural",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-extension-by-zero-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace ([[def-topological-space]]) with closed complement $Z=X\\setminus U$, let $i:Z\\hookrightarrow X$ be the inclusion of the subspace",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-morphisms-from-the-constant-sheaf-are-global-sections",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space ([[def-topological-space]]). Let $\\mathbb Z_{\\mathrm{pt}}$ be the constant presheaf with value $\\mathbb Z$, let $$\\mathbb Z_X:=a\\,\\mathbb Z_{\\mathrm{pt}}$$ be its",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-injective-object",
+          "source_section": "Definition",
+          "quote": "An object $I$ of an abelian category is **injective** when for every monomorphism $m:M\\rightarrowtail E$ and every morphism $f:M\\to I$, there exists a morphism $\\widetilde f:E\\to I$ with $$\\widetilde",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-flasque-sheaf",
+          "source_section": "Definition",
+          "quote": "is **flasque**, also called **flabby**, when each of these restriction maps is surjective: for all open $U\\subseteq V\\subseteq X$ the map $\\rho^V_U$ is onto. Equivalently, $\\mathcal F$ is flasque when every section of $\\mathcal F$ over an o",
+          "uses": [
+            "1.4",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-direct-sum-of-a-family-of-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a unital ring and $(M_i)_{i\\in I}$ a family of left $R$-modules ([[def-left-and-right-modules]]). Their **direct product** is the module $\\prod_{i\\in I}M_i$ with coordinatewise operations.",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-sheaf-tensor-product",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal O_X)$ be a ringed space, and let $\\mathcal F,\\mathcal G$ be $\\mathcal O_X$-modules. The **tensor-product presheaf** $$ \\mathcal F\\otimes_{p,\\mathcal O_X}\\mathcal G $$ is defined by",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a topological space $X$. Then $\\varphi$ is an isomorphism if and only if, for every $x\\in X$, the induced map on stalks",
+          "uses": [
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "This is a theorem of ZF: its proof uses no form of the Axiom of Choice ([[def-axiom-of-choice]]). What is proved below is exactly the displayed statement, by induction on $n$. The natural number $n$ serves as the index set in the von Neumann sense,",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "1.1 Let $C_1,C_2\\subseteq X$ be compact, let $V_1,V_2$ be open with $C_k\\subseteq V_k$, let $s_k\\in\\mathcal F(V_k)$, and suppose that $W\\subseteq V_1\\cap V_2$ is open with $C_1\\cap",
+          "step": "1.1",
+          "inputs": [
+            "F3",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "1.2 Let $C\\subseteq X$ be compact, $B\\subseteq X$ closed, $V\\subseteq X$ open with $C\\cup B\\subseteq V$, $s_C\\in\\mathcal F(V)$ and $s_B\\in\\mathcal F(V)$ with $s_C|_W=s_B|_W$ for an",
+          "step": "1.2",
+          "inputs": [
+            "F3",
+            "F4",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D1.3",
+          "claim": "1.3 Clause (1). Let $\\mathcal F$ be c-soft, let $K\\subseteq X$ be compact and let $W\\subseteq X$ be an open neighbourhood of $K$; let $\\sigma\\in\\Gamma(K,i^{-1}\\mathcal F)$ be r",
+          "step": "1.3",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "1.3"
+          ]
+        },
+        {
+          "id": "D1.4",
+          "claim": "1.4 Clause (2). Let $\\mathcal I$ be an injective abelian sheaf and let $U\\subseteq X$ be open. By [F5] the canonical map $j_!\\mathbb Z_U\\to\\mathbb Z_X$ is a monomorphism, so in",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F5",
+            "1.4"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "2.1 Lifting over a compact space. Let $Y$ be a compact Hausdorff space, let $0\\to\\mathcal A\\to\\mathcal B\\xrightarrow{\\gamma}\\mathcal C\\to0$ be a short exact sequence of abelian",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "2.2 Clause (4), the topological preservations. Let $\\mathcal F$ be c-soft. (i) For an open subspace $U\\subseteq X$: a compact subset of $U$ is compact in $X$ ([F3]) and a secti",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D2.3",
+          "claim": "2.3 Clause (4), finite direct sums. Let $\\mathcal F_1,\\dots,\\mathcal F_n$ be c-soft abelian sheaves and let $\\mathcal F:=\\bigoplus_{i=1}^n\\mathcal F_i$; over an open set $\\math",
+          "step": "2.3",
+          "inputs": [
+            "F6",
+            "1.3",
+            "2.3"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "3.1 Clause (5), local lifting. Let $\\mathcal F'$ be c-soft, let $K\\subseteq X$ be compact and let $\\sigma''\\in\\Gamma(K,i^{-1}\\mathcal F'')$ be represented by a section $s''\\in\\",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D3.2",
+          "claim": "3.2 Clause (5), compact-support exactness. Let $\\mathcal F'$ be c-soft; we show that $\\Gamma_c(\\beta):\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,\\mathcal F'')$ is surjective. Let $s''",
+          "step": "3.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "1.3",
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "4.1 Clause (5), quotient. Let $\\mathcal F'$ and $\\mathcal F$ be c-soft. Let $K\\subseteq X$ be compact and let $\\sigma''\\in\\Gamma(K,i^{-1}\\mathcal F'')$: by step 3.1 it is lifte",
+          "step": "4.1",
+          "inputs": [
+            "F1",
+            "1.3",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "5.1 Clause (3). Let $\\mathcal F$ be c-soft and resolve it by injectives, $0\\to\\mathcal F\\to I^0\\to I^1\\to\\cdots$, using the functorial datum of [F1]; each $I^j$ is c-soft by cl",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "1.4",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "id": "D6.1",
+          "claim": "6.1 Conclusion. Clause (1) is step 1.3, clause (2) is step 1.4, clause (3) is step 5.1, clause (4) is steps 2.2 and 2.3, and clause (5) is steps 3.1, 3.2 and 4.1. Every selecti",
+          "step": "6.1",
+          "inputs": [
+            "F1",
+            "F7",
+            "1.3",
+            "1.4",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "A section over the empty compact set is the zero section and extends trivially, so the extension assertions of steps 1.3, 3.1 and 3.2 are vacuous there, and step 4.1 applies to the zero class."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf is flasque and c-soft and its compactly supported sections vanish; steps 1.3, 3.1 and 5.1 apply verbatim with all sections equal to 0."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative-unit or singleton-index hypothesis is used; the direct-sum clause of step 2.3 is stated for an arbitrary finite family of c-soft sheaves."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3 treats the case of a section supported in a prescribed neighbourhood and step 1.4 the case of an injective sheaf; the degenerate case K=X of a compact space is covered because a neighbourhood of X is X in step 2.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval or ordered parameter; the vanishing statement of step 5.1 begins at q>0, the case q=0 being the definition of Gamma_c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice enters only through the injective resolution datum and derived-functor statements recorded in fact F1 and used in steps 2.1 and 5.1; all selections in steps 1.1-4.1 are finite by fact F7."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The direct implications (c-soft implies acyclicity and the preservation clauses) are steps 1.3, 2.1, 2.2, 2.3, 4.1 and 5.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The converse direction (acyclicity via injective resolutions and the quotient clause) is steps 3.1, 3.2, 5.1 and 4.1; the equivalence of the two c-softness formulations is recorded in the definition cited by fact F1."
+        }
+      ]
+    },
+    "ex-compact-support-and-softness-on-a-finite-discrete-space": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-sheaf-on-topological-space",
+          "source_section": "Definition",
+          "quote": "**Locality.** If $s,t\\in\\mathcal F(U)$ satisfy $$s|_{U_i}=t|_{U_i}\\qquad\\text{for all }i\\in I,$$ then $s=t$. **Gluing.** If sections $s_i\\in\\mathcal F(U_i)$ satisfy $$s_i|_{U_i\\cap U_j}=s_j|_{U_i\\cap U_j}\\qquad\\text{for all }i,j\\in I,$$ the",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-morphism-of-presheaves",
+          "source_section": "Definition",
+          "quote": "Let $\\mathcal F$ and $\\mathcal G$ be presheaves on a topological space $X$. A **morphism of presheaves** $$\\varphi:\\mathcal F\\longrightarrow\\mathcal G$$ is a natural transformation",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-standard-topologies",
+          "source_section": "Definition",
+          "quote": "Throughout, a topology is as in [[def-topological-space]], and *finite*, *at most countable* and *uncountable* are as in [[def-countable]], so that \"countable\" always means \"at most countable\" and",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-stalk-of-presheaf",
+          "source_section": "Definition",
+          "quote": "Concretely, $\\mathcal F_x$ may be described as equivalence classes of pairs $(U,s)$ with $U$ an open neighbourhood of $x$ and $s\\in\\mathcal F(U)$, where $(U,s)\\sim(V,t)$ when $s$ and $t$ agree on some smaller open neighbourhood of $x$. The next",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]);",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]); every clause applies in",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-support-of-a-sheaf-section",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $\\mathcal F$ be a presheaf of $k$-vector spaces (or of abelian groups) on $X$ ([[def-presheaf-on-topological-space]]), let $U\\subseteq X$ be open and let",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0 \\cup \\dots \\cup U_n .$$ - A subset $A \\subseteq X$ is a **compact subset** of $X$ when the subspace $(A, \\mathcal{T}_A)$ is a compact topological space",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-compactness-of-a-subspace-is-ambient",
+          "source_section": "Statement",
+          "quote": "and only if for every family $\\mathcal{U} \\subseteq \\mathcal{T}$ with $A \\subseteq \\bigcup \\mathcal{U}$ there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $A \\subseteq U_0 \\cup \\dots \\cup U_n$, or else $A = \\varnothing$. 2.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-standard-topologies",
+          "source_section": "Definition",
+          "quote": "Throughout, a topology is as in [[def-topological-space]], and *finite*, *at most countable* and *uncountable* are as in [[def-countable]], so that \"countable\" always means \"at most countable\" and",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-constant-sheaf-is-the-sheaf-of-locally-constant-functions",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a topological space ([[def-topological-space]]) and let $A$ be a set. A function $f:U\\to A$ on an open subset $U\\subseteq X$ is **locally constant** when every $x\\in U$ has an open",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-sheaf-morphism-isomorphism-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let $\\varphi:\\mathcal F\\to\\mathcal G$ be a morphism of sheaves of sets on a topological space $X$. Then $\\varphi$ is an isomorphism if and only if, for every $x\\in X$, the induced map on stalks",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-direct-sum-of-a-family-of-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a unital ring and $(M_i)_{i\\in I}$ a family of left $R$-modules ([[def-left-and-right-modules]]). Their **direct product** is the module $\\prod_{i\\in I}M_i$ with coordinatewise operations.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for a",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "This is a theorem of ZF: its proof uses no form of the Axiom of Choice ([[def-axiom-of-choice]]). What is proved below is exactly the displayed statement, by induction on $n$. The natural number $n$ serves as the index set in the von Neumann sense,",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "1.1 Sheaves on a discrete space are families. Let $\\mathcal V$ be a sheaf of $k$-vector spaces on $X$ and write $V_x:=\\mathcal V(\\{x\\})$, an open set by [F2]. For open $U\\subse",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "2.1 Every sheaf is c-soft. Let $K\\subseteq X$ be compact; by [F6] the set $K$ is finite, so a section of $\\mathcal V$ over $K$ is a family $(v_x)_{x\\in K}\\in\\prod_{x\\in K}V_x$ ",
+          "step": "2.1",
+          "inputs": [
+            "F4",
+            "F6",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "2.2 Compact support in degree zero. The finite set $X$ is compact: the singletons form an open cover of $X$ that is finite and admits no proper subcover [F2, F6]. Hence every g",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F5",
+            "F6",
+            "F8",
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "3.1 Vanishing in positive degrees and the adjunction. Every sheaf on $X$ is c-soft by [step 2.1], so the acyclicity lemma gives $H^q_c(X,\\mathcal V)=0$ for every $q>0$, and $R\\",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "F7",
+            "F8",
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "4.1 Conclusion. Clause (1) is [step 2.1], clause (2) is [step 2.2] together with [step 3.1], and clause (3) is [step 3.1]. The Axiom of Choice is inherited from the compact-sup",
+          "step": "4.1",
+          "inputs": [
+            "F9",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For X empty or U empty the product over the empty index set is the zero vector space by fact F8 and the identifications of step 1.1 give the zero section group; the computation of step 2.2 and the bijection of step 3.1 remain valid with all spaces zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf is c-soft in step 2.1 and has zero compactly supported sections in step 2.2; the bijection of step 3.1 sends the zero morphism to the zero map."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For X a single point, step 1.1 identifies sheaves with their stalk, step 2.1 gives c-softness trivially, step 2.2 gives the identity group and step 3.1 the usual identification of linear maps out of the stalk."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 covers K empty and K=X, the extension of step 2.1 being the zero extension and the given family respectively; step 3.1 covers W=0 with both sides zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The example has no interval, order or endpoint structure; the only parameters are the finite set X and the cohomological degree q."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is inherited from the acyclicity lemma used in step 3.1; all selections here are over the finite set X, as recorded in fact F9 and used in steps 2.1 and 3.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts no equivalence; the bijection of step 3.1 is constructed explicitly in both directions from the universal property of the direct sum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is claimed; the naturality statement of step 3.1 is a compatibility of the constructed bijections, not an iff."
+        }
+      ]
+    },
+    "lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-extension-by-zero-short-exact-sequence",
+          "source_section": "Statement",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace ([[def-topological-space]]) with closed complement $Z=X\\setminus U$, let $i:Z\\hookrightarrow X$ be the inclusion of the subspace",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$. For an open set $V \\subseteq X$, define $$(j_!\\mathcal F)(V) := \\left\\{ s\\in",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-direct-image-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal F$ be a presheaf on $X$. The **direct image presheaf** $$f_*\\mathcal F$$ on $Y$ is defined on an open set $V \\subseteq Y$ by $$ (f_*\\mathcal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-direct-image-is-sheaf",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to Y$ be a continuous map. 1. If $\\mathcal F$ is a sheaf on $X$, then $f_*\\mathcal F$ is a sheaf on $Y$. 2. If $\\mathcal F$ is a sheaf of groups, rings, or modules on $X$, then $f_*\\mathcal",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space, let $j:U\\hookrightarrow X$ be the inclusion of an open subspace with closed complement $Z=X\\setminus U$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice. Let $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied injective resolution data on all objects of $\\mathcal A$, and let $F:\\mathcal",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "has enough injectives, every abelian sheaf on $X$ admits an injective resolution ([[def-injective-resolution-in-an-abelian-category]]), and the embeddings below supply one injective resolution datum ([[def-supplied-injective-resolution-datu",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]], [[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]);",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]); every clause applies in",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$ 3. **Compact implies closed.**",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). Then: 1. **A neighbourhood base of compact sets.** If $X$ is locally compact ([[def-locally-compact-space]]) and Hausdorff",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "The **subspace topology** (also *relative topology*) on $S$ is $$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$ the family of **traces** on $S$ of the open sets of $X$. The pair $(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "The **inverse-image presheaf** $$ f_{\\mathrm p}\\mathcal G $$ on $X$ is defined by $$ (f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V), $$ where $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by reverse",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "is **compact** when every open cover of it has a finite subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and $U_0, \\dots, U_n \\in \\mathcal{U}$ with $$X = U_0 \\cup \\dots \\cup U_n .$$ - A subset $A \\subseteq X$ is a **compact subset** of $X$ when the subspace $(A, \\mathcal{T}_A)$ is a compact topological space",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for a",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, $$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "1.1 Setup. Let $K\\subseteq X$ be compact; by [F5] the set $K$ is closed, so $U:=X\\setminus K$ is open and the pair $(U,K)$ is the open/closed decomposition of [F1] with closed ",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "1.2 The converse. Suppose $\\mathcal E$ is c-soft. For every open $V\\subseteq X$ the restriction $\\mathcal E|_V$ is c-soft on $V$ by [F4], and c-soft sheaves are acyclic, so $H^",
+          "step": "1.2",
+          "inputs": [
+            "F4",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "2.1 The long exact sequence of the pair. Apply the delta-functor machinery of [F3] to the short exact sequence of [step 1.1]; the calculus of [F2] identifies its compactly supp",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "3.1 Conclusion of the direct direction. Since $\\Gamma_c(X,\\mathcal E)\\subseteq\\Gamma(X,\\mathcal E)$, the surjectivity of [step 2.1] shows that every section of $\\mathcal E$ ove",
+          "step": "3.1",
+          "inputs": [
+            "F4",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "4.1 The equivalence. The direct direction is [step 3.1], and it produces the sharper statement that sections extend with compact support; the converse direction is [step 1.2]. ",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "1.2",
+            "3.1",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "For K empty the restriction map of step 2.1 targets the zero group and is surjective; the converse of step 1.2 includes the open subspace V empty, where the cohomology vanishes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The zero sheaf satisfies the hypothesis and the acyclicity of step 1.2; the direct direction of step 3.1 applies to it with every section zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative-unit or cardinality-one hypothesis occurs; the lemma concerns arbitrary abelian sheaves and every open subspace."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "For K=X (X compact) the open piece U is empty and step 2.1 still yields surjectivity of Gamma_c(X,E) onto Gamma(X,E), which is the statement that every global section is compactly supported, matching step 1.2."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, order or endpoint structure; the cohomological degrees are unbounded and degree zero is fixed as Gamma_c."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is declared and dependent choice is used through the delta-functor theorem cited in fact F3, invoked in steps 2.1 and 4.1, as recorded in fact F6."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The direction from the vanishing hypothesis to c-softness is proved in steps 2.1 and 3.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The direction from c-softness to the vanishing of H^q_c on every open subspace is proved in step 1.2."
+        }
+      ]
+    },
+    "lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space\n([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in\n[[def-compact-space]]. Then:\n\n1. **A point and a disjoint compact set are separated.** If $K \\subseteq X$ is\n   compact and $x \\in X \\setminus K$, there are $U, V \\in \\mathcal{T}$ with\n   $$x \\in U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n2. **Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact\n   and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with\n   $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n3. **Compact implies closed.** Every compact subset of $X$ is closed in $X$.\n4. **In a compact Hausdorff space the two classes coincide.** If in addition\n   $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if\n   it is closed.\n\n**The proof is written choice-free, and that is not a stylistic preference.** The\ntextbook argument says \"for each $y \\in K$ choose disjoint open $U_y, V_y$\",\nwhich is a selection over an arbitrary index set and therefore an appeal to the\nfull Axiom of Choice. What is done below instead is to take the family of **all**\nopen $V$ that admit some open $U \\ni x$ disjoint from them — a family cut out by\na formula, with nothing selected — extract a finite subcover from it, and only\nthen make finitely many selections, which [[lem-finite-choice]] supplies as a\ntheorem of ZF.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "thm-locally-compact-hausdorff-basics",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]). Then:\n\n1. **A neighbourhood base of compact sets.** If $X$ is locally compact\n   ([[def-locally-compact-space]]) and Hausdorff ([[def-hausdorff-space]]), then\n   every neighbourhood $N$ of a point $x \\in X$ ([[def-neighbourhood-top]])\n   contains a compact neighbourhood of $x$; so the compact neighbourhoods of $x$\n   form a neighbourhood base at $x$.\n2. **Heredity along open and closed subspaces.** If $X$ is locally compact and\n   Hausdorff and $S \\subseteq X$ is open, then the subspace $S$ is locally\n   compact ([[def-subspace-topology-top]]). If $X$ is locally compact and\n   $F \\subseteq X$ is closed, then the subspace $F$ is locally compact; no\n   Hausdorff hypothesis is used for this half.\n3. **Shrinking inside an open set.** If $X$ is locally compact and Hausdorff,\n   $O \\subseteq X$ is open and $x \\in O$, there is an open $V$ with\n   $$x \\in V \\subseteq \\overline{V} \\subseteq O$$\n   and $\\overline{V}$ a compact subset of $X$.\n4. **Compact sets sit in open sets with compact closure.** If $X$ is locally\n   compact and Hausdorff and $K \\subseteq X$ is compact, there is an open\n   $V \\subseteq X$ with $K \\subseteq V$ and $\\overline{V}$ a compact subset of\n   $X$ ([[def-interior-closure-boundary-top]]).\n\n**No choice principle is used**; every cover produced below is defined by a\nformula and thinned by [[lem-compactness-of-a-subspace-is-ambient]], which returns\nmembers rather than indices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-t0-t1-and-hausdorff-are-hereditary",
+          "source_section": "Statement",
+          "quote": "The properties $T_0$, $T_1$, and Hausdorffness are hereditary in the sense of [[def-hereditary-property]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]) and let\n$S \\subseteq X$. The **subspace topology** (also *relative topology*) on $S$ is\n\n$$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$\n\nthe family of **traces** on $S$ of the open sets of $X$. The pair\n$(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of $S$ that lies in\n$\\mathcal{T}_S$ is said to be **open in $S$**, and *relatively open* where the\nambient space needs emphasis.\n\n**$\\mathcal{T}_S$ is a topology, and this is discharged here.** (T1):\n$\\varnothing = \\varnothing \\cap S$ and $S = X \\cap S$ are traces. (T2): if\n$\\mathcal{S}' \\subseteq \\mathcal{T}_S$, choose for each member a set of\n$\\mathcal{T}$ tracing to it — no choice principle is needed, since\n$U' := \\bigcup \\{\\, U \\in \\mathcal{T} : U \\cap S \\subseteq W \\,\\}$ is a canonical\nsuch set for $W \\in \\mathcal{T}_S$, being open by (T2) in $X$ and satisfying\n$U' \\cap S = W$ — and then\n$\\bigcup_i (U_i \\cap S) = (\\bigcup_i U_i) \\cap S \\in \\mathcal{T}_S$ by (T2) in\n$X$. (T3): $(U \\cap S) \\cap (V \\cap S) = (U \\cap V) \\cap S \\in \\mathcal{T}_S$ by\n(T3) in $X$.\n\n**Closed sets of a subspace are the traces of the closed sets.** A set\n$C \\subseteq S$ is closed in $S$ if and only if $C = F \\cap S$ for some closed\n$F \\subseteq X$. Indeed $S \\setminus (U \\cap S) = (X \\setminus U) \\cap S$ and\n$S \\setminus (F \\cap S) = (X \\setminus F) \\cap S$, so complementation inside $S$\nmatches complementation inside $X$ under tracing.\n\n**Bases and subbases trace as well.** If $\\mathcal{B}$ is a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]) then\n$\\mathcal{B}_S := \\{\\, B \\cap S : B \\in \\mathcal{B} \\,\\}$ is a basis for\n$\\mathcal{T}_S$: its members are open in $S$, and for $W = U \\cap S$ open in $S$\nand $x \\in W$ there is $B \\in \\mathcal{B}$ with $x \\in B \\subseteq U$, whence\n$x \\in B \\cap S \\subseteq W$. The same computation with a subbasis $\\mathcal{S}$\nshows that $\\{\\, S_0 \\cap S : S_0 \\in \\mathcal{S} \\,\\}$ is a subbasis for\n$\\mathcal{T}_S$, since tracing commutes with finite intersections and with\nunions.\n\n**The inclusion is continuous.** The inclusion map $\\iota : S \\to X$,\n$\\iota(s) = s$, satisfies $\\iota^{-1}[U] = U \\cap S$ for every $U \\subseteq X$,\nso preimages of open sets are open and $\\iota$ is continuous\n([[thm-continuity-characterisations-top]], clause (b)). Moreover\n$\\mathcal{T}_S$ is the **coarsest** topology on $S$ making $\\iota$ continuous: any\ntopology on $S$ for which $\\iota$ is continuous must contain every\n$\\iota^{-1}[U] = U \\cap S$, hence contain $\\mathcal{T}_S$.\n\n**Characteristic property of a map into a subspace.** Let $(Z, \\mathcal{T}_Z)$ be\na topological space and let $g : Z \\to S$ be a function. Then\n\n$$g \\text{ is continuous as a map } Z \\to (S,\\mathcal{T}_S) \\iff \\iota \\circ g \\text{ is continuous as a map } Z \\to (X,\\mathcal{T}) .$$\n\n*Proof.* For $U \\in \\mathcal{T}$ one has\n$(\\iota \\circ g)^{-1}[U] = g^{-1}[\\iota^{-1}[U]] = g^{-1}[U \\cap S]$. If $g$ is\ncontinuous then each $g^{-1}[U \\cap S]$ is open, so $\\iota \\circ g$ is continuous;\nconversely if $\\iota \\circ g$ is continuous then for any $W = U \\cap S$ open in\n$S$ the set $g^{-1}[W] = (\\iota \\circ g)^{-1}[U]$ is open, so $g$ is continuous.\nBoth directions use only clause (b) of [[thm-continuity-characterisations-top]].\n\n**Restriction of a continuous map.** If $f : X \\to Y$ is continuous and\n$S \\subseteq X$, then $f|_S : S \\to Y$ is continuous, since\n$(f|_S)^{-1}[V] = f^{-1}[V] \\cap S$ is open in $S$ for every open $V \\subseteq Y$\n([[def-continuous-map-top]], [[thm-continuity-characterisations-top]]).\n\n**When relative and ambient agree.** If $S$ is open in $X$ then a subset of $S$\nis open in $S$ if and only if it is open in $X$: a trace $U \\cap S$ is then an\nintersection of two open sets of $X$, and conversely an open subset of $X$\ncontained in $S$ is its own trace. The same statement with \"closed\" throughout\nholds when $S$ is closed in $X$. Both are used in the pasting lemma of the next\nitem, and both fail without the hypothesis: $S$ itself is always open and closed\nin $S$, and need be neither in $X$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space ([[def-topological-space]]).\n\n- An **open cover** of $(X,\\mathcal{T})$ is a family\n  $\\mathcal{U} \\subseteq \\mathcal{T}$ of open sets with $X = \\bigcup \\mathcal{U}$,\n  where $\\bigcup \\mathcal{U} = \\{\\, x \\in X : x \\in U \\text{ for some } U \\in \\mathcal{U} \\,\\}$.\n- A **subcover** of $\\mathcal{U}$ is a subfamily $\\mathcal{V} \\subseteq \\mathcal{U}$\n  that is itself an open cover.\n- A family $\\mathcal{V}$ of sets is **finite** when $\\mathcal{V} = \\varnothing$ or\n  there are $n \\in \\mathbb{N}$ and sets $V_0, \\dots, V_n$ with\n  $\\mathcal{V} = \\{V_0, \\dots, V_n\\}$; repetitions in the list are allowed and\n  harmless.\n- $(X,\\mathcal{T})$ is **compact** when every open cover of it has a finite\n  subcover: for every open cover $\\mathcal{U}$, either $X = \\varnothing$ and the\n  empty subfamily covers it, or there are $n \\in \\mathbb{N}$ and\n  $U_0, \\dots, U_n \\in \\mathcal{U}$ with\n  $$X = U_0 \\cup \\dots \\cup U_n .$$\n- A subset $A \\subseteq X$ is a **compact subset** of $X$ when the subspace\n  $(A, \\mathcal{T}_A)$ is a compact topological space, $\\mathcal{T}_A$ being the\n  subspace topology ([[def-subspace-topology-top]]).\n\n**Compactness of a subset is defined intrinsically, and only intrinsically.**\nThe last clause speaks about the subspace $(A, \\mathcal{T}_A)$ and its own open\nsets, not about families of open subsets of the ambient $X$. The two readings do\nagree, but that is a theorem and not a convention: it is\n[[lem-compactness-of-a-subspace-is-ambient]], and no item of this library may use\nthe ambient reading without citing it. Taking the intrinsic reading makes\ncompactness a property of the topological space $(A, \\mathcal{T}_A)$ alone.\nHence it is preserved when $A$ is embedded homeomorphically as a subspace, or\nwhen another ambient space induces the same topology on $A$; it need not be\npreserved if the induced topology changes. This is exactly the convention already fixed for\nmetric spaces by [[def-metric-compactness]], and the agreement of that\ndefinition with this one is [[thm-compactness-agrees-with-metric-compactness]].\n\n**The empty space is compact**, since the empty subfamily of any family covers\nit; this is the reason the clause above is written with the two cases. Every\nspace listed as $\\{x_0, \\dots, x_n\\}$ is compact too: given a cover, each $x_i$\nlies in some member, and finitely many members named in this way already cover.\nSo every finite space is compact, whatever its topology, and in particular the\ndiscrete topology on a finite set is compact while the discrete topology on an\ninfinite set is not ([[def-standard-topologies]]).\n\n**The finiteness convention.** \"Finite\" above is the listing form. It agrees with\nthe definition of finiteness by equinumerosity with a natural number\n([[def-countable]]), in both directions, and the agreement is the one already\ndischarged in [[def-metric-compactness]]: a nonempty set equinumerous with\n$m \\ge 1$ is listable, and a set listed as $\\{a_0, \\dots, a_n\\}$ injects into\n$\\sigma(n)$ by sending $x$ to the least $i \\le n$ with $a_i = x$. Neither\ndirection uses a choice principle; the second selects nothing, taking a least\nindex instead.\n\n**Quasicompact is not used here.** Some authors, following Bourbaki, reserve\n*compact* for a space that is both compact in the above sense and Hausdorff, and\ncall the open-cover condition alone *quasicompact*. This library follows the more\nwidely adopted convention: **compact** means the open-cover condition and nothing\nmore, and a Hausdorff hypothesis is always written out. The fork is recorded in\n[[rem-compactness-conventions-and-choice-ledger]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-c-soft-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a locally compact Hausdorff space ([[def-locally-compact-space]],\n[[def-hausdorff-space]]) and let $\\mathcal F$ be a sheaf of abelian groups on\n$X$ ([[def-sheaf-on-topological-space]]); this covers in particular every sheaf\nof $k$-vector spaces over a field $k$, which is the case used by the\ncompact-support calculus, and for such a sheaf the groups below are $k$-vector\nspaces and the maps $k$-linear. Global sections are written\n$\\Gamma(X,-)$ ([[def-global-sections-functor-sheaves]]). For a compact subset\n$K\\subseteq X$ ([[def-compact-space]]) let $i:K\\hookrightarrow X$ be the\ninclusion and consider the canonical restriction map\n$$\\Gamma(X,\\mathcal F)\\longrightarrow\\Gamma(K,i^{-1}\\mathcal F)=(i^{-1}\\mathcal F)(K),\\qquad s\\longmapsto s|_K,$$\nwhich sends a global section ([[def-section-restriction-and-global-section]]) to\nthe section of the inverse image sheaf ([[def-inverse-image-presheaf-and-sheaf]])\nthat it induces on $K$. Then $\\mathcal F$ is **c-soft**, also **soft for\ncompact supports**, when this map is surjective for every compact subset\n$K\\subseteq X$, that is: every section of $\\mathcal F$ over a compact subset of\n$X$ extends to a global section of $\\mathcal F$. For sheaves of abelian groups\n$\\Gamma_c$ and $H^q_c$ of\n[[def-compactly-supported-global-sections]] are the compactly supported\nanalogues of $\\Gamma$ and $H^q$.\n\nTwo consistency facts hold; both are immediate from the definitions and from\nthe extension lemma for sections on a compact set, and they are recorded here\nbecause the compact-support calculus uses the first constantly and the second\nfor injective sheaves.\n\n1. **Neighbourhood formulation.** By\n   [[lem-sections-near-a-compact-set-are-sections-on-that-set]], the source of\n   the restriction map may be replaced by the defining colimit of the\n   inverse-image presheaf,\n   $(i^{-1}\\mathcal F)(K)=\\varinjlim_{U\\supseteq K}\\mathcal F(U)$, so that\n   $\\mathcal F$ is c-soft if and only if for every compact $K$ and every open\n   neighbourhood $U$ of $K$, every section $s\\in\\mathcal F(U)$ agrees with a\n   global section of $\\mathcal F$ on some open neighbourhood of $K$. It\n   therefore suffices, for c-softness, to test the extended sections only\n   locally near $K$.\n2. **Flasque implies c-soft.** If $\\mathcal F$ is flasque\n   ([[def-flasque-sheaf]]) then $\\mathcal F$ is c-soft: a class in\n   $(i^{-1}\\mathcal F)(K)$ is represented by a section $s$ over an open\n   neighbourhood $U$ of $K$, and flasqueness extends $s$ to a global section\n   $t\\in\\mathcal F(X)$ with $t|_U=s$, so $t$ is a preimage of that class.\n\nC-softness is a property of the pair $(X,\\mathcal F)$ and not of the sheaf\nalone: the compact subsets of the base space are part of the test. Nothing is\nassumed about the support of the extended global sections, and c-softness is\nnot the same condition as flasqueness, only implied by it.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c-soft-field-sheaves-are-compact-support-acyclic",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space and\nlet $\\mathcal F$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces, and the tensor clause of (4) is stated only\nthere. Then:\n\n1. if $\\mathcal F$ is c-soft ([[def-c-soft-sheaf]]), every section of\n   $\\mathcal F$ over a compact subset $K\\subseteq X$ extends to a compactly\n   supported global section whose support is contained in any prescribed open\n   neighbourhood of $K$;\n2. every injective abelian sheaf on $X$ is c-soft;\n3. if $\\mathcal F$ is c-soft, then $H^q_c(X,\\mathcal F)=0$ for every $q>0$\n   ([[def-compactly-supported-global-sections]]); when $X$ is compact this is\n   the vanishing of the sheaf cohomology $H^q(X,\\mathcal F)$\n   ([[def-sheaf-cohomology-derived-global-sections]]);\n4. c-softness is preserved by restriction to open subsets, by restriction to\n   closed subsets, by extension by zero along an open inclusion, and by finite\n   direct sums of sheaves of abelian groups; for sheaves of $k$-vector spaces\n   it is also preserved by tensor product with a constant $k$-vector space;\n5. if $0\\to\\mathcal F'\\xrightarrow{\\alpha}\\mathcal F\\xrightarrow{\\beta}\\mathcal F''\\to0$\n   is a short exact sequence of sheaves of abelian groups and $\\mathcal F'$ is\n   c-soft, then every section of $\\mathcal F''$ over a compact subset lifts to\n   a section of $\\mathcal F$ over an open neighbourhood of it, and the induced\n   sequence\n   $0\\to\\Gamma_c(X,\\mathcal F')\\to\\Gamma_c(X,\\mathcal F)\\to\\Gamma_c(X,\\mathcal F'')\\to0$\n   is exact; if $\\mathcal F'$ and $\\mathcal F$ are c-soft then\n   $\\mathcal F''$ is c-soft.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-restriction-sheaf-open-subspace",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let\n$\\mathcal F$ be a sheaf on $X$. The **restriction of $\\mathcal F$ to $U$** is\nthe inverse image sheaf\n$$\n\\mathcal F|_U:=j^{-1}\\mathcal F.\n$$\n\nFor an open set $W \\subseteq U$, one may identify $(\\mathcal F|_U)(W)$ with\n$\\mathcal F(W)$: because $U$ is open in $X$, the set $W$ is also open in $X$,\nand in the neighbourhood-colimit defining $j^{-1}\\mathcal F$ the open set $W$\nitself is a neighbourhood of $j(W)=W$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-inverse-image-presheaf-and-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to Y$ be a continuous map, and let $\\mathcal G$ be a presheaf on $Y$.\nThe **inverse-image presheaf**\n$$\nf_{\\mathrm p}\\mathcal G\n$$\non $X$ is defined by\n$$\n(f_{\\mathrm p}\\mathcal G)(U):=\\varinjlim_{f(U)\\subseteq V}\\mathcal G(V),\n$$\nwhere $V$ runs over the open neighbourhoods of $f(U)$ in $Y$, ordered by\nreverse inclusion. If $U' \\subseteq U$, then every neighbourhood of $f(U)$ is a\nneighbourhood of $f(U')$, so there is a natural restriction map\n$(f_{\\mathrm p}\\mathcal G)(U)\\to(f_{\\mathrm p}\\mathcal G)(U')$.\n\nThe **inverse image sheaf** of a sheaf $\\mathcal G$ on $Y$ is the sheafification\nof this presheaf:\n$$\nf^{-1}\\mathcal G:=a(f_{\\mathrm p}\\mathcal G).\n$$\n\nWhen $U$ is open in $X$ and $V$ is an open set of $Y$ with $f(U)\\subseteq V$,\nthere is a canonical map\n$$\n\\mathcal G(V)\\longrightarrow(f_{\\mathrm p}\\mathcal G)(U)\n$$\ninto the colimit class represented by $V$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space\n([[def-locally-compact-space]], [[def-hausdorff-space]]) and let\n$\\mathcal E$ be a sheaf of abelian groups on $X$\n([[def-sheaf-on-topological-space]]); every clause applies in particular to\nsheaves of $k$-vector spaces. Suppose that\n$$H^1_c(V,\\mathcal E|_V)=0\\qquad\\text{for every open subspace }V\\subseteq X,$$\nwhere $\\mathcal E|_V$ is the restriction\n([[def-restriction-sheaf-open-subspace]]) and $H^1_c$ is the first\ncompactly supported cohomology ([[def-compactly-supported-global-sections]]).\nThen $\\mathcal E$ is c-soft ([[def-c-soft-sheaf]]); more precisely, every\nsection of $\\mathcal E$ over a compact subset $K\\subseteq X$ extends to a\ncompactly supported global section of $\\mathcal E$. Conversely, if\n$\\mathcal E$ is c-soft, then\n$H^q_c(V,\\mathcal E|_V)=0$ for every $q>0$ and every open subspace\n$V\\subseteq X$. Hence c-softness of $\\mathcal E$ is equivalent to\n$R\\Gamma_c(V,\\mathcal E|_V)$ being concentrated in degree $0$ for every open\nsubspace $V\\subseteq X$.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-ringed-space-module-sheaves-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $(X,\\mathcal O_X)$ be a ringed space. Then\nthe abelian category $\\mathrm{Mod}(\\mathcal O_X)$ of $\\mathcal O_X$-modules has\nenough injectives: every $\\mathcal O_X$-module embeds into an injective\n$\\mathcal O_X$-module, and the functorial injective embedding supplied by the\nGrothendieck injective-embedding theorem for Grothendieck categories supplies,\nby iteration of cokernels, one specific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots$$\nto each $\\mathcal O_X$-module $\\mathcal F$ with no further selection\n([[def-injective-resolution-in-an-abelian-category]]). The Axiom of Choice\nenters exactly through that embedding theorem applied to\n$\\mathrm{Mod}(\\mathcal O_X)$; the category-theoretic verification below is\nchoice-free.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $X$ be a topological space. Then\n$\\mathrm{Ab}(X)$ has enough injectives, every abelian sheaf on $X$ admits an\ninjective resolution ([[def-injective-resolution-in-an-abelian-category]]), and\nthe embeddings below supply one injective resolution datum\n([[def-supplied-injective-resolution-datum]]) on the whole category\n$\\mathrm{Ab}(X)$: for every abelian sheaf $\\mathcal F$ the datum assigns one\nspecific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots,$$\nbuilt functorially from $\\mathcal F$ with no further selection.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-right-derived-functors-form-a-cohomological-delta-functor",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Dependent Choice.\n\nLet $\\mathcal A$ and $\\mathcal B$ be abelian categories, let $I$ be supplied\ninjective resolution data on all objects of $\\mathcal A$, and let\n$F:\\mathcal A\\to\\mathcal B$ be an additive left exact functor. Then the additive functors\n$$R_I^nF:\\mathcal A\\to\\mathcal B,\\qquad n\\geq 0,$$\nadmit connecting maps that make them into a cohomological delta functor on\n$\\mathcal A$, and $R_I^0F$ is naturally isomorphic to $F$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally\ncompact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of\nabelian groups on $X$ ([[def-sheaf-on-topological-space]]) and let\n$$\\Gamma(X,-):\\mathrm{Ab}(X)\\longrightarrow\\mathbf{Ab}$$\nbe the additive left exact global-sections functor\n([[def-global-sections-functor-sheaves]],\n[[def-section-restriction-and-global-section]]). For a sheaf $\\mathcal F$ on\n$X$ define the **compactly supported global sections** of $\\mathcal F$ to be the\nsubgroup\n$$\\Gamma_c(X,\\mathcal F):=\\{\\,s\\in\\Gamma(X,\\mathcal F):\\operatorname{Supp}(s)\\ \\text{is a compact subset of }X\\,\\}\\subseteq\\Gamma(X,\\mathcal F),$$\nwhere the support of a section is the set of points at which its germ is\nnonzero ([[def-support-of-a-sheaf-section]], [[def-germ-of-section]],\n[[def-compact-space]]). A morphism $\\varphi:\\mathcal F\\to\\mathcal G$ of abelian\nsheaves induces a map $\\Gamma_c(X,\\varphi)$ by restriction of\n$\\Gamma(X,\\varphi)$, and this makes $\\Gamma_c(X,-)$ an additive functor\n$\\mathrm{Ab}(X)\\to\\mathbf{Ab}$ ([[def-additive-functor]],\n[[def-morphism-of-presheaves]]). Six consistency facts hold; all are immediate\nfrom the definitions, and they record the interface used by the compact-support\ncalculus.\n\n1. **Well-definedness of $\\Gamma_c(X,\\varphi)$.** If $x\\notin\n   \\operatorname{Supp}(s)$ then $s_x=0$ in the stalk $\\mathcal F_x$\n   ([[def-stalk-of-presheaf]]), and since the stalk maps of a morphism commute\n   with the germ maps, $\\varphi(s)_x=\\varphi_x(s_x)=0$, so\n   $\\operatorname{Supp}(\\varphi(s))\\subseteq\\operatorname{Supp}(s)$. A support\n   $\\operatorname{Supp}(t)$ is closed in $X$: if $x\\notin\n   \\operatorname{Supp}(t)$ then $t$ agrees with the zero section on some open\n   neighbourhood of $x$, by the description of equality of germs\n   ([[def-support-of-a-sheaf-section]]). Hence\n   $\\operatorname{Supp}(\\varphi(s))$ is a closed subset of $X$ contained in the\n   compact set $\\operatorname{Supp}(s)$; being closed in $X$ it is closed in the\n   subspace $\\operatorname{Supp}(s)$, so it is a compact subset of that compact\n   space ([[thm-closed-subspace-of-a-compact-space-is-compact]]) and therefore\n   a compact subset of $X$ ([[lem-compactness-of-a-subspace-is-ambient]]), and\n   $\\Gamma_c(X,\\varphi)$ maps $\\Gamma_c(X,\\mathcal F)$ into\n   $\\Gamma_c(X,\\mathcal G)$. Composites and identities are computed\n   componentwise, so $\\Gamma_c(X,-)$ is a functor; it is additive because\n   $\\Gamma(X,-)$ is.\n2. **Sheaves of $k$-vector spaces.** If $\\mathcal F$ is a sheaf of\n   $k$-vector spaces, then $\\Gamma_c(X,\\mathcal F)$ is a $k$-vector subspace of\n   $\\Gamma(X,\\mathcal F)$: the support of $c\\cdot s$ is\n   $\\operatorname{Supp}(s)$ for $c\\ne0$ and $\\varnothing$ for $c=0$, and the\n   zero section has empty support. For a morphism $\\varphi$ of sheaves of\n   $k$-vector spaces the map $\\Gamma_c(X,\\varphi)$ is $k$-linear, since\n   $\\Gamma(X,\\varphi)$ is. The higher derived functors below are computed from\n   an injective resolution datum on abelian sheaves, so they are abelian\n   groups; the degree-zero part is the $k$-vector space\n   $\\Gamma_c(X,\\mathcal F)$.\n3. **Left exactness.** For every short exact sequence\n   $0\\to\\mathcal F'\\xrightarrow{\\varphi'}\\mathcal F\\xrightarrow{\\varphi}\\mathcal F''\\to0$\n   of abelian sheaves the sequence\n   $$0\\to\\Gamma_c(X,\\mathcal F')\\xrightarrow{\\Gamma_c(\\varphi')}\\Gamma_c(X,\\mathcal F)\\xrightarrow{\\Gamma_c(\\varphi)}\\Gamma_c(X,\\mathcal F'')$$\n   is exact. Injectivity: a monomorphism of sheaves has injective stalk maps\n   ([[thm-exactness-of-sheaves-stalkwise]]), so\n   $\\operatorname{Supp}(\\varphi'(s'))=\\operatorname{Supp}(s')$ and a section\n   killed by $\\varphi'$ has all germs zero, hence is zero. Exactness at the\n   middle: the kernel of $\\Gamma(X,\\varphi)$ is the image of\n   $\\Gamma(X,\\varphi')$ by left exactness of global sections\n   ([[lem-global-sections-left-exact]]); if $s=\\varphi'(s')$ has compact\n   support, then $s'$ has the same support,\n   $\\operatorname{Supp}(s')=\\operatorname{Supp}(\\varphi'(s'))=\n   \\operatorname{Supp}(s)$, because $\\varphi'$ is stalk-injective, so $s'$ lies\n   in $\\Gamma_c(X,\\mathcal F')$, and the reverse inclusion is immediate from\n   $\\varphi\\circ\\varphi'=0$. Thus $\\Gamma_c(X,-)$ is an additive left exact\n   functor on $\\mathrm{Ab}(X)$ ([[def-left-exact-and-right-exact-functor]]).\n4. **The derived functors.** Abelian sheaves on $X$ have enough injectives, and\n   the embeddings of [[thm-abelian-sheaves-have-enough-injectives]] supply one\n   functorial injective resolution datum $\\mathcal F\\mapsto I^\\bullet(\\mathcal F)$\n   on the whole category $\\mathrm{Ab}(X)$, under the Axiom of Choice\n   ([[def-right-derived-object-relative-to-injective-resolution-data]]). The\n   **compactly supported cohomology** of $\\mathcal F$ is\n   $$H^q_c(X,\\mathcal F):=R^q\\Gamma_c(X,\\mathcal F):=H^q\\bigl(\\Gamma_c(X,I^\\bullet(\\mathcal F)_{\\mathrm{del}})\\bigr)\\qquad(q\\ge0),\\qquad H^q_c(X,\\mathcal F):=0\\quad(q<0),$$\n   the cohomology of the deleted resolution, as in the pattern of\n   [[def-sheaf-cohomology-derived-global-sections]]; for a morphism $\\varphi$ we\n   write $H^q_c(X,\\varphi):=R^q\\Gamma_c(X,\\varphi)$ for the induced map.\n5. **Independence of the datum.** If $J$ is another supplied injective\n   resolution datum on $\\mathrm{Ab}(X)$, then $R^q\\Gamma_c(X,-)$ computed from\n   $J$ is naturally isomorphic to $R^q\\Gamma_c(X,-)$ computed from $I$\n   ([[thm-right-derived-functors-from-two-supplied-injective-resolution-data-are-naturally-isomorphic]]);\n   the Axiom of Dependent Choice needed for that comparison follows from AC\n   ([[thm-choice-implies-dependent-implies-countable-choice]]). The notation\n   $H^q_c(X,\\mathcal F)$ therefore does not depend on the datum up to this\n   canonical natural isomorphism.\n6. **Delta functor and the compact case.** Since $\\Gamma_c(X,-)$ is additive\n   and left exact and the datum is defined on all of $\\mathrm{Ab}(X)$, the\n   functors $R^q\\Gamma_c(X,-)$, $q\\ge0$, carry connecting maps that make them a\n   cohomological delta functor with $R^0\\Gamma_c(X,-)\\cong\\Gamma_c(X,-)$, and\n   every short exact sequence of abelian sheaves has a long exact\n   compact-support cohomology sequence, natural in the sequence\n   ([[thm-right-derived-functors-form-a-cohomological-delta-functor]]). If $X$\n   is compact, then for every global section $s$ its support is closed in $X$ by\n   fact 1, hence a closed subset of the compact space $X$ and therefore\n   compact, so every global section is compactly supported; hence\n   $\\Gamma_c(X,-)=\\Gamma(X,-)$ and\n   $H^q_c(X,\\mathcal F)=H^q(X,\\mathcal F)$ for every $q$, where $H^q(X,-)$ is\n   the sheaf cohomology of [[def-sheaf-cohomology-derived-global-sections]]\n   computed from the same datum.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-exact-sequence-sheaves",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space. A sequence of sheaves of abelian groups on $X$\nis **exact** when it is exact in the abelian category of\n[[thm-abelian-sheaves-form-abelian-category]], equivalently in the sense of\n[[def-exact-sequence-and-short-exact-sequence-in-an-abelian-category]].\n\nThus a sequence\n$$\n\\cdots\\to \\mathcal F_{i-1}\\to \\mathcal F_i\\to \\mathcal F_{i+1}\\to\\cdots\n$$\nis exact at $\\mathcal F_i$ when the image sheaf of the first morphism equals\nthe kernel sheaf of the second.\n\nThe same language applies to $\\mathcal O_X$-modules on a ringed space.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-exactness-of-sheaves-stalkwise",
+          "source_section": "Statement",
+          "quote": "Let\n$$\n\\cdots\\longrightarrow \\mathcal F_{i-1}\\xrightarrow{d_{i-1}}\\mathcal F_i\\xrightarrow{d_i}\\mathcal F_{i+1}\\longrightarrow\\cdots\n$$\nbe a sequence of sheaves of abelian groups on a topological space $X$. Then the\nsequence is exact if and only if, for every point $x\\in X$, the stalk sequence\n$$\n\\cdots\\longrightarrow (\\mathcal F_{i-1})_x\\xrightarrow{(d_{i-1})_x}(\\mathcal F_i)_x\\xrightarrow{(d_i)_x}(\\mathcal F_{i+1})_x\\longrightarrow\\cdots\n$$\nis exact.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF,\n\n$$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad \\mathrm{AC}\\Longrightarrow\\mathrm{AC}_2.$$\n\nDC here includes a prescribed initial point.",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-ringed-space-module-sheaves-enough-injectives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice, and let $(X,\\mathcal O_X)$ be a ringed space. Then\nthe abelian category $\\mathrm{Mod}(\\mathcal O_X)$ of $\\mathcal O_X$-modules has\nenough injectives: every $\\mathcal O_X$-module embeds into an injective\n$\\mathcal O_X$-module, and the functorial injective embedding supplied by the\nGrothendieck injective-embedding theorem for Grothendieck categories supplies,\nby iteration of cokernels, one specific injective resolution\n$$0\\to\\mathcal F\\to I^0(\\mathcal F)\\to I^1(\\mathcal F)\\to\\cdots$$\nto each $\\mathcal O_X$-module $\\mathcal F$ with no further selection\n([[def-injective-resolution-in-an-abelian-category]]). The Axiom of Choice\nenters exactly through that embedding theorem applied to\n$\\mathrm{Mod}(\\mathcal O_X)$; the category-theoretic verification below is\nchoice-free.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "**Fibres are locally compact Hausdorff.** For $y\\in Y$ the fibre $F=f^{-1}(y)$ is closed in $X$ because $\\{y\\}$ is closed in the Hausdorff space $Y$ and $f$ is continuous [F1], so $F$ is a closed subspace of the locally compact space $X$ and is locally compact, and it is Hausdorff as a subspace of a Hausdorff space [F1]; the same holds for every open subspace $V\\subseteq F$ [F1]. Consequently, for every sheaf $\\mathcal G$ on $X$ that is c-soft on $X$, the restriction $\\mathcal G|_F$ is c-soft on $F$ and its further restriction $\\mathcal G|_V$ is c-soft on $V$, by the closed- and open-restriction clauses of [F2]; if $\\mathcal G$ is injective on $X$ it is c-soft on $X$ by the injectivity clause of [F2].",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "**The resolution and its terms.** Fix the supplied functorial injective resolution datum on $\\operatorname{Sh}_k(X)$ of [F4] (on $\\mathrm{Ab}(X)$ for the abelian case) and let $0\\to\\mathcal A\\to I^0\\to I^1\\to\\cdots$ be the injective resolution it assigns to $\\mathcal A$. Each $I^j$ is injective in the chosen sheaf category, hence flasque and c-soft on $X$ by [F2], hence restricts to a c-soft sheaf $I^j|_F$ on every fibre $F$ and to a c-soft sheaf $I^j|_V$ on every open $V$ of a fibre, by [step 1.1]; in particular each $I^j$ is fibrewise c-soft.",
+          "step": "2.1",
+          "inputs": [
+            "step 1.1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "**Dimension shifting on an open subspace of a fibre.** Let $V\\subseteq F$ be open in a fibre $F=f^{-1}(y)$ and define the syzygies $Z^0:=\\mathcal A$ and, for $j\\ge0$, $Z^{j+1}:=\\operatorname{coker}(Z^j\\to I^j)$, so that $0\\to Z^j\\to I^j\\to Z^{j+1}\\to0$ is a short exact sequence of sheaves on $X$. Restricting to the open subspace $V$ preserves exactness and cokernels, so $0\\to Z^j|_V\\to I^j|_V\\to Z^{j+1}|_V\\to0$ is a short exact sequence of sheaves on the locally compact Hausdorff space $V$ [F5] whose middle term is c-soft, hence acyclic [F2]; the long exact compactly supported cohomology sequence of [F5] therefore gives isomorphisms $H^p_c(V,Z^{j+1}|_V)\\xrightarrow{\\ \\sim\\ }H^{p+1}_c(V,Z^j|_V)$ for every $p\\ge1$, because the two adjacent groups of the c-soft sheaf $I^j|_V$ vanish in positive degrees. Iterating these isomorphisms for $j=0,1,\\dots,d-1$ with $p=1,2,\\dots,d$ gives $H^1_c(V,Z^d|_V)\\cong H^{d+1}_c(V,\\mathcal A|_V)=0$, the last group vanishing by the dimension hypothesis of the statement because $d+1>d$ and $V$ is an open subspace of a fibre.",
+          "step": "3.1",
+          "inputs": [
+            "step 2.1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "**The cokernel after $d$ steps is fibrewise c-soft.** Let $F=f^{-1}(y)$ be any fibre and let $V\\subseteq F$ be open; by [step 3.1] one has $H^1_c(V,Z^d|_V)=0$ for every such $V$, so the vanishing criterion [F3] applied to the locally compact Hausdorff space $Z=F$ and the sheaf $\\mathcal E=Z^d|_F$ shows that $Z^d|_F$ is c-soft on $F$. Since $y$ was arbitrary, $Z^d$ restricts to a c-soft sheaf on every fibre. Concatenating the short exact sequences $0\\to Z^j\\to I^j\\to Z^{j+1}\\to0$ for $j=0,\\dots,d-1$ gives the exact sequence $0\\to\\mathcal A\\to I^0\\to I^1\\to\\cdots\\to I^{d-1}\\to Z^d\\to0$, a bounded resolution of $\\mathcal A$ entirely by $k$-linear maps and $k$-sheaves (by abelian maps and sheaves in the abelian case), whose terms $I^0,\\dots,I^{d-1}$ are fibrewise c-soft by [step 2.1] and whose last term $Z^d$ is fibrewise c-soft by the preceding argument; when $d=0$ the construction stops at $Z^0=\\mathcal A$ and the isomorphism $H^1_c(V,\\mathcal A|_V)\\cong H^{d+1}_c(V,\\mathcal A|_V)=0$ of [step 3.1] with $d=0$ gives the c-softness of $\\mathcal A$ on every fibre directly by [F3].",
+          "step": "4.1",
+          "inputs": [
+            "step 2.1",
+            "step 3.1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "**Conclusion.** The displayed bounded resolution of the statement is [step 4.1], and taking $\\mathcal A=k_X$ gives the instance of the constant sheaf. The Axiom of Choice is used only through the injective resolution datum of [F4] and the delta-functor and comparison statements of [F5], whose connecting maps use dependent choice, a consequence of AC [F6]; the fibre-by-fibre dimension count of [step 3.1] is finite.",
+          "step": "5.1",
+          "inputs": [
+            "step 4.1",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "An empty fibre is a closed subspace to which step 1.1 and the vacuous c-softness conditions apply; for an empty open V the groups of steps 3.1 and 4.1 are zero and the vanishing criterion makes the zero sheaf c-soft."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero sheaf the construction of steps 2.1 to 4.1 gives the zero resolution with zero terms, which are c-soft on every fibre."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No multiplicative-unit or cardinality-one hypothesis occurs; the bound d is an arbitrary nonnegative integer."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The case d=0 is the final sentence of step 4.1, where the criterion yields that the sheaf itself is fibrewise c-soft; taking Y to a point exhibits the global dimension bound as the degenerate case."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, order or endpoint structure; d is a length bound and the resolution is truncated there, with no limiting endpoint case."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is declared and enters through the injective resolution datum and the delta-functor theorem of facts F4 and F5, invoked in steps 2.1, 3.1 and 5.1 as recorded in fact F6."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The proved direction is from the uniform dimension hypothesis to the bounded fibrewise-soft resolution, steps 2.1, 3.1 and 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse implication is asserted; the statement is one-directional and the case d=0 is a specialisation of the same direction, not a converse."
+        }
+      ]
+    },
+    "lem-finite-polyhedral-covering-dimension-bounds-all-sheaf-cohomology": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization",
+          "source_section": "Statement",
+          "quote": "If $K$ is a finite abstract simplicial complex, then its geometric realization $|K|$ is compact and Hausdorff.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology",
+          "source_section": "Statement",
+          "quote": "For finite $K$, the weak topology on $|K|$ equals the Euclidean subspace topology in $\\mathbb R^{V(K)}$; $|K|$ is compact, metrizable and Hausdorff. If $P$ is a finite subcomplex of any $K$, then",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-barycentric-subdivision-of-an-abstract-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "The **barycentric subdivision** of $K$ is $\\operatorname{sd}K=\\Delta F(K)$, using [[def-face-poset-and-order-complex]]. Thus its vertices are the nonempty faces $\\sigma$ of $K$, and its nonempty",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F1",
+          "source": "def-locally-finite-and-finite-dimensional-simplicial-complex",
+          "source_section": "Definition",
+          "quote": "Let $(V,K)$ be an abstract simplicial complex. The complex is **finite** if $K$ has only finitely many simplices. It is **locally finite** if each vertex $v \\in V$ lies in only finitely many",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-open-and-closed-stars-in-a-subdivision",
+          "source_section": "Definition",
+          "quote": "For a vertex $v$ of a complex $T$ define its **open star** by $\\operatorname{st}_T(v)=\\{x\\in|T|:x_v>0\\}$. Define its **closed star** to be the subcomplex $$\\operatorname{St}_T(v)=\\{\\tau\\in",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-canonical-barycentric-realization-map",
+          "source_section": "Definition",
+          "quote": "Write $e_v$ for the coordinate vertex of $|K|$. For each nonempty face $\\sigma$ put $b_\\sigma=\\frac1{\\#\\sigma}\\sum_{v\\in\\sigma}e_v$. The **canonical barycentric realization map** is",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero",
+          "source_section": "Statement",
+          "quote": "For a finite Euclidean simplicial complex $K$ define its simplex mesh $m(K)$ to be the maximum diameter of its nonempty simplices, with the separate convention $m(K)=0$ if there are none. If $\\dim",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-metric-bounded-diameter",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A, B \\subseteq X$. **Bounded subset.** $A$ is **bounded** if $A = \\emptyset$ or there are $x_0 \\in X$ and a real $r > 0$ with $A",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-number-lemma",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a compact metric space ([[def-metric-compactness]], [[def-metric-space]]) and let $\\mathcal{U}$ be an open cover of $X$. Then there is a real $\\delta > 0$, a **Lebesgue number** for",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cech-cochain-complex-open-cover",
+          "source_section": "Definition",
+          "quote": "group of ordered $p$-cochains of $\\mathcal U$ with values in $\\mathcal F$** by $$C^p(\\mathcal U,\\mathcal F):=\\prod_{i_0<\\cdots<i_p} \\mathcal F\\bigl(U_{i_0}\\cap\\cdots\\cap U_{i_p}\\bigr),$$ the product of the section groups over all increasing",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-cech-cohomology-open-cover",
+          "source_section": "Definition",
+          "quote": "Čech cohomology of the fixed cover $\\mathcal U$ with values in $\\mathcal F$** is $$\\check H^p(\\mathcal U,\\mathcal F) :=\\ker\\bigl(\\delta^p:C^p(\\mathcal U,\\mathcal F)\\to C^{p+1}(\\mathcal U,\\mathcal F)\\bigr) \\Big/\\operatorname{im}\\bigl(\\delta^",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-sheaf-section-over-empty-set-terminal",
+          "source_section": "Statement",
+          "quote": "Let $\\mathcal F$ be a sheaf of sets on a topological space $X$. Then $\\mathcal F(\\varnothing)$ is a singleton.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-refinement-open-cover",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a topological space, let $\\mathcal F$ be a sheaf of abelian groups on $X$ ([[def-sheaf-on-topological-space]]), and let $\\mathcal U=(U_i)_{i\\in I}$ and $\\mathcal V=(V_j)_{j\\in J}$ be open",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a compact ([[def-compact-space]]) Hausdorff ([[def-hausdorff-space]]) space. For every sheaf of abelian groups $\\mathcal F$ on $X$",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-global-cech-cohomology-directed-limit",
+          "source_section": "Definition",
+          "quote": "is the filtered colimit $$\\check H^p(X,\\mathcal F):=\\varinjlim_{\\mathcal U\\in\\operatorname{Cov}(X)}\\check H^p(\\mathcal U,\\mathcal F),$$ taken in the category of abelian groups, of that functor ([[def-filtered-category-and-filtered-colimit]]",
+          "uses": [
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $X$ be a locally compact Hausdorff space, let $j:U\\hookrightarrow X$ be the inclusion of an open subspace with closed complement $Z=X\\setminus U$",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-extension-by-zero-abelian-sheaf",
+          "source_section": "Definition",
+          "quote": "Let $j:U\\hookrightarrow X$ be the inclusion of an open subspace, and let $\\mathcal F$ be a sheaf of abelian groups on $U$. For an open set $V \\subseteq X$, define $$(j_!\\mathcal F)(V) := \\left\\{ s\\in",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-compactly-supported-global-sections",
+          "source_section": "Definition",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Let $X$ be a locally compact Hausdorff space, let $\\mathrm{Ab}(X)$ be the category of sheaves of abelian groups on $X$",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-abelian-sheaves-have-enough-injectives",
+          "source_section": "Statement",
+          "quote": "has enough injectives, every abelian sheaf on $X$ admits an injective resolution ([[def-injective-resolution-in-an-abelian-category]]), and the embeddings below supply one injective resolution datum ([[def-supplied-injective-resolution-datu",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology",
+          "source_section": "Statement",
+          "quote": "For finite $K$, the weak topology on $|K|$ equals the Euclidean subspace topology in $\\mathbb R^{V(K)}$; $|K|$ is compact, metrizable and Hausdorff. If $P$ is a finite subcomplex of any $K$, then",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "The **subspace topology** (also *relative topology*) on $S$ is $$\\mathcal{T}_S := \\{\\, U \\cap S : U \\in \\mathcal{T} \\,\\},$$ the family of **traces** on $S$ of the open sets of $X$. The pair $(S, \\mathcal{T}_S)$ is a **subspace** of $X$. A subset of",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function > ([[def-choice-function]]). Written out: for every set $\\mathcal{F}$ all of whose members are nonempty, there exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for a",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-choice-implies-dependent-implies-countable-choice",
+          "source_section": "Statement",
+          "quote": "In ZF, $$\\mathrm{AC}\\Longrightarrow\\mathrm{DC}\\Longrightarrow\\mathrm{AC}_\\omega\\Longrightarrow\\mathrm{AC}_{\\omega,\\mathrm{fin}}\\Longrightarrow\\mathrm{AC}_{\\omega,2},\\qquad",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "D1.1",
+          "claim": "1.1 The polyhedron. By [F1] the realization $P=|K|$ is a compact Hausdorff space whose weak topology is the Euclidean subspace topology of a finite-dimensional Euclidean space;",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "D1.2",
+          "claim": "1.2 The subcomplex clause. Let $L\\subseteq K$ be a subcomplex; $L$ is finite because $K$ is. By [F7] the inclusion $|L|\\hookrightarrow P$ is a closed embedding, so $|L|$ is clo",
+          "step": "1.2",
+          "inputs": [
+            "F7",
+            "1.2"
+          ]
+        },
+        {
+          "id": "D1.3",
+          "claim": "1.3 Čech cohomology vanishes above $d$ on a cover of order at most $d+1$. Let $\\mathcal V$ be a finite open cover of a space $X$ every point of which lies in at most $d+1$ memb",
+          "step": "1.3",
+          "inputs": [
+            "F4",
+            "1.3"
+          ]
+        },
+        {
+          "id": "D2.1",
+          "claim": "2.1 Star covers refine every cover with multiplicity at most $d+1$. Assume first that $P$ is nonempty, let $\\mathcal U$ be an open cover of $P$, and choose a Lebesgue number $\\",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "D2.2",
+          "claim": "2.2 Clause (3), the cohomological statement. Let $X$ be a compact Hausdorff space in which every open cover admits a finite open refinement of order at most $d+1$. The family o",
+          "step": "2.2",
+          "inputs": [
+            "F5",
+            "1.3",
+            "2.2"
+          ]
+        },
+        {
+          "id": "D3.1",
+          "claim": "3.1 Clause (1). The star covers produced in [step 2.1] form a family of open covers of $P$: for every open cover $\\mathcal U$ the construction produces a finite cover by open s",
+          "step": "3.1",
+          "inputs": [
+            "F5",
+            "1.1",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "D3.2",
+          "claim": "3.2 Clause (3), the compact-support statement. Let $X$ be as in [step 2.2], let $U\\subseteq X$ be open and let $\\mathcal E$ be a sheaf on $U$. A compact Hausdorff space is loca",
+          "step": "3.2",
+          "inputs": [
+            "F6",
+            "1.1",
+            "2.2",
+            "3.2"
+          ]
+        },
+        {
+          "id": "D4.1",
+          "claim": "4.1 Clause (2). Let $U\\subseteq P$ be open and let $\\mathcal E$ be a sheaf on $U$; write $j:U\\hookrightarrow P$ for the open inclusion. By [F6] there are natural isomorphisms $",
+          "step": "4.1",
+          "inputs": [
+            "F6",
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "D5.1",
+          "claim": "5.1 Conclusion. Clause (1) is [step 3.1], clause (2) is [step 4.1], and clause (3) is [step 2.2] together with [step 3.2]; the subcomplex statement is [step 1.2]. The isomorphi",
+          "step": "5.1",
+          "inputs": [
+            "F5",
+            "F6",
+            "F8",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "If K has no vertices then P is empty: the empty cover trivializes step 2.1's construction and makes the cohomology groups of steps 3.1 and 4.1 zero, while step 1.2 covers the subcomplex case L empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "For the zero sheaf every Cech group of steps 1.3 and 2.2 is zero and the vanishing conclusions of steps 3.1, 2.2 and 4.1 hold with zero groups."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "For d=0 the mesh is zero by fact F2 and step 2.1 still refines every cover, so steps 3.1 and 4.1 yield vanishing above degree 0; the single-vertex case is included in step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The degenerate cases U=P and L empty in the subcomplex clause are step 1.2; clause (3) with X=P is step 2.2 applied to the same family of covers."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The statement has no interval, order or endpoint structure; d is a dimension bound and the vanishing claims range over all q>d without an endpoint restriction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Axiom of Choice is declared and dependent choice enters through the comparison and transport theorems of facts F5 and F6, used in steps 3.1, 2.2, 3.2 and 4.1; the star-cover construction of step 2.1 selects only finitely many cover members."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The proved direction is from the covering dimension bound to the vanishing of sheaf and compactly supported cohomology, steps 1.3, 2.1, 3.1, 4.1 and their general-space variants 2.2, 3.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the finite-polyhedron clauses are specialisations of the intrinsic order-bounded statement, obtained in steps 3.1 and 4.1 from steps 2.1 and 1.3."
+        }
+      ]
+    }
+  }
+}

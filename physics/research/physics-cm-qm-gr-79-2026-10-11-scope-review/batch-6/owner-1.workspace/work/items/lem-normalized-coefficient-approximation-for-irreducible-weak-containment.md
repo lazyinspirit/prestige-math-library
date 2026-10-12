@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normalized-coefficient-approximation-for-irreducible-weak-containment.md

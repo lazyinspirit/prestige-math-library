@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-power-extension-over-a-normal-affine-domain.md

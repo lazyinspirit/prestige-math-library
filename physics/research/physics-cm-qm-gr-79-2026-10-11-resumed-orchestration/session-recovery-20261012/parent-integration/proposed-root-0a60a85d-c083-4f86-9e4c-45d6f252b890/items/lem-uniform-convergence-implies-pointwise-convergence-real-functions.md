@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uniform-convergence-implies-pointwise-convergence-real-functions.md

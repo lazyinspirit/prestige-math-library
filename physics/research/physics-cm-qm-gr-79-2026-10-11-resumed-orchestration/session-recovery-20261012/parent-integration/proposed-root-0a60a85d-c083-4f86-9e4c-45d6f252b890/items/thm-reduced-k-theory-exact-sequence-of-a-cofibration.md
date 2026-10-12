@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reduced-k-theory-exact-sequence-of-a-cofibration.md

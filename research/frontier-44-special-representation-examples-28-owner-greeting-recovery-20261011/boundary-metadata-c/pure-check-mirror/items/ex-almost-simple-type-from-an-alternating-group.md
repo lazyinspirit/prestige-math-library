@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-almost-simple-type-from-an-alternating-group.md

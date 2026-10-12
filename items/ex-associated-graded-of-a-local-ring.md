@@ -50,11 +50,8 @@ $$ \operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2). $$
 
 **Proof technique:** direct.
 
+ 1.1 In $R_1$, the classes of $x$ and $y$ in $\mathfrak m/\mathfrak m^2$ generate every graded piece: the images of the degree-$n$ monomials $x^{n-i}y^i$ form a basis of $\mathfrak m^n/\mathfrak m^{n+1}$. Therefore the map $k[X,Y]\to\operatorname{gr}_{\mathfrak m}(R_1)$ sending $X,Y$ to the initial classes of $x,y$ is a graded isomorphism. [L1, given, algebra]
 
-1.1 In $R_1$, the classes of $x$ and $y$ in $\mathfrak m/\mathfrak m^2$ generate every graded piece: the images of the degree-$n$ monomials $x^{n-i}y^i$ form a basis of $\mathfrak m^n/\mathfrak m^{n+1}$. Therefore the map $k[X,Y]\to\operatorname{gr}_{\mathfrak m}(R_1)$ sending $X,Y$ to the initial classes of $x,y$ is a graded isomorphism. [L1, given, algebra]
+ 1.2 In $R_2$, the relation $y^2-x^3$ lies in $\mathfrak m^2$ and its lowest-degree term is $y^2$. Hence the only initial relation in degree $2$ is $Y^2=0$. As in the remaining monomials $X^n$ and $X^{n-1}Y$ survive and span the graded pieces, so $ \operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2). $ [L1, algebra]
 
-
-1.2 In $R_2$, the relation $y^2-x^3$ lies in $\mathfrak m^2$ and its lowest-degree term is $y^2$. Hence the only initial relation in degree $2$ is $Y^2=0$. As in the remaining monomials $X^n$ and $X^{n-1}Y$ survive and span the graded pieces, so $ \operatorname{gr}_{\mathfrak m}(R_2)\cong k[X,Y]/(Y^2). $ [L1, algebra]
-
-
-2.1 These explicit computations exhibit the regular local and cusp cases. [algebra] ∎
+ 2.1 These explicit computations exhibit the regular local and cusp cases. [algebra] ∎ 

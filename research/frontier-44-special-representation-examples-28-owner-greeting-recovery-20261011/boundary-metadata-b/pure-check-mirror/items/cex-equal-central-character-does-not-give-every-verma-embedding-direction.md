@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-equal-central-character-does-not-give-every-verma-embedding-direction.md

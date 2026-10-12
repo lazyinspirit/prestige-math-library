@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-real-stone-weierstrass-for-compact-metric-spaces.md

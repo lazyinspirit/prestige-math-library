@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-trivial-words-in-a-recursively-presented-group-are-recursively-enumerable.md

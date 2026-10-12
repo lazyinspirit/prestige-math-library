@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes.md

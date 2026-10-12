@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fourier-partial-sums-are-uniformly-bounded-on-periodic-lp.md

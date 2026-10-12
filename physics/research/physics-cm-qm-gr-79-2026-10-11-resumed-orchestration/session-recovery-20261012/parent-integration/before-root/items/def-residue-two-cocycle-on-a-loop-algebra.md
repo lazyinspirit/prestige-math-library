@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-residue-two-cocycle-on-a-loop-algebra.md

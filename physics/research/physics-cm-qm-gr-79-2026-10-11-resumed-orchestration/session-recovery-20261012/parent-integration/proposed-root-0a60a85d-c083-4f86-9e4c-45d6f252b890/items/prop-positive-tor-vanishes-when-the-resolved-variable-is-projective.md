@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-positive-tor-vanishes-when-the-resolved-variable-is-projective.md

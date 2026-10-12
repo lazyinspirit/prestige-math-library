@@ -48,11 +48,8 @@ $$ P_{\mathfrak m,M}(n)=\ell_R(M). $$
 
 **Proof technique:** direct.
 
+ 1.1 In a zero-dimensional local ring every prime ideal is maximal, hence the only prime is $\mathfrak m$. Its nilradical is therefore $\mathfrak m$, and [L2] gives $\mathfrak m^N=0$ for some $N\ge1$. Hence for every $n\ge N-1$, $M/\mathfrak m^{n+1}M=M$. [L2, given, algebra]
 
-1.1 In a zero-dimensional local ring every prime ideal is maximal, hence the only prime is $\mathfrak m$. Its nilradical is therefore $\mathfrak m$, and [L2] gives $\mathfrak m^N=0$ for some $N\ge1$. Hence for every $n\ge N-1$, $M/\mathfrak m^{n+1}M=M$. [L2, given, algebra]
+ 2.1 The finite module $M$ has finite length over the zero-dimensional Noetherian local ring: the filtration by powers of the nilpotent maximal ideal has finitely many quotients, each a finite-dimensional vector space over $R/\mathfrak m$. Thus $\ell_R(M)$ is defined by [L1]. Step 1.1 shows that the Hilbert-Samuel function is eventually the constant polynomial $\ell_R(M)$, uniquely so because two polynomials agreeing at all large integers are equal. [L1, step 1.1, algebra]
 
-
-2.1 The finite module $M$ has finite length over the zero-dimensional Noetherian local ring: the filtration by powers of the nilpotent maximal ideal has finitely many quotients, each a finite-dimensional vector space over $R/\mathfrak m$. Thus $\ell_R(M)$ is defined by [L1]. Step 1.1 shows that the Hilbert-Samuel function is eventually the constant polynomial $\ell_R(M)$, uniquely so because two polynomials agreeing at all large integers are equal. [L1, step 1.1, algebra]
-
-
-3.1 This is exactly the zero-dimensional case. [step 2.1] ∎
+ 3.1 This is exactly the zero-dimensional case. [step 2.1] ∎ 

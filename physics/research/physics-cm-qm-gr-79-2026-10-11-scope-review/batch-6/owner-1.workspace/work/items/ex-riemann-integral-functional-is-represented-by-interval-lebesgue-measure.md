@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-riemann-integral-functional-is-represented-by-interval-lebesgue-measure.md

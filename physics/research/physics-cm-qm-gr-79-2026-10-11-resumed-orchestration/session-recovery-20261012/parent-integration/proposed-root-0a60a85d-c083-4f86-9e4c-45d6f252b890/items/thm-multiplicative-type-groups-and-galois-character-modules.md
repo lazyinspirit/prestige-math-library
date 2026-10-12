@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-multiplicative-type-groups-and-galois-character-modules.md

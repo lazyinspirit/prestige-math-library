@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-steep-polygonal-functions-are-dense-in-c01.md

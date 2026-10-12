@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trace-class-iff-product-of-two-hilbert-schmidt-operators.md

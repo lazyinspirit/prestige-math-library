@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-norm-attaining-functionals-on-a-hilbert-space.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-weyl-inequalities-for-self-adjoint-sums.md

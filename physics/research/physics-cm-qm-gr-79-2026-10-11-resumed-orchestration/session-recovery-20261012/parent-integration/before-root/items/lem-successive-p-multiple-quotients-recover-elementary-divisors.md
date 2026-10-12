@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-successive-p-multiple-quotients-recover-elementary-divisors.md

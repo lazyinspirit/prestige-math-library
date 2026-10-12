@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cauchy-riemann-on-an-open-set-without-regularity-implies-holomorphy.md

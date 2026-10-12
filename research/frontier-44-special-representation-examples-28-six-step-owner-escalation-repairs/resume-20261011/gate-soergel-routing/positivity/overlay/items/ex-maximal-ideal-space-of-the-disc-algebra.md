@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-maximal-ideal-space-of-the-disc-algebra.md

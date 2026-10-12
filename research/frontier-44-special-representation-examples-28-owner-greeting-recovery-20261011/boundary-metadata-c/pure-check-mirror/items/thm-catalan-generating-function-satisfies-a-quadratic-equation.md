@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-catalan-generating-function-satisfies-a-quadratic-equation.md

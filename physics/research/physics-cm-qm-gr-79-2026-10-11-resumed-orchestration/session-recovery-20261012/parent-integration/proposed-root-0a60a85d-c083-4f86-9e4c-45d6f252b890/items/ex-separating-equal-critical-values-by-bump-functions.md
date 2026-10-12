@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-separating-equal-critical-values-by-bump-functions.md

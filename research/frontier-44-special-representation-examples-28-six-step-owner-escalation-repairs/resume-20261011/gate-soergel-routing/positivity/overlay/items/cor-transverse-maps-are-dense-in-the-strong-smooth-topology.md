@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-transverse-maps-are-dense-in-the-strong-smooth-topology.md

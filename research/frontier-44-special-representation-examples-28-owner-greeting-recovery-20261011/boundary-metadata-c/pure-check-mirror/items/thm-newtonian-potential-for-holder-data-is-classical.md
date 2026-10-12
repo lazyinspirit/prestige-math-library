@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-newtonian-potential-for-holder-data-is-classical.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-tensoring-with-a-finite-dimensional-module-preserves-category-o.md

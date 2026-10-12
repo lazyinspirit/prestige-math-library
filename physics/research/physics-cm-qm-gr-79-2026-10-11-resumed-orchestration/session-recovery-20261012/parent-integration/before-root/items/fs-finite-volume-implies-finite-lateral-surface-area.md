@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-finite-volume-implies-finite-lateral-surface-area.md

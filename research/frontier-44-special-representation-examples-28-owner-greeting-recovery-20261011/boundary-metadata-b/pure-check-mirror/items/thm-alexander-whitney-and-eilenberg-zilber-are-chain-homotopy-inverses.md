@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses.md

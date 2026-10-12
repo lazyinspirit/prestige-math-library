@@ -37,9 +37,8 @@ Every bivector $\alpha\in\Lambda^2\mathbb R^4$ is decomposable, that is, of the 
 
 **Proof technique:** direct.
 
-
-1.1 If $\alpha=u\wedge v$ were decomposable, then by [L2], $\alpha\wedge\alpha=u\wedge v\wedge u\wedge v=-u\wedge u\wedge v\wedge v=0$. [L2, algebra]
+ 1.1 If $\alpha=u\wedge v$ were decomposable, then by [L2], $\alpha\wedge\alpha=u\wedge v\wedge u\wedge v=-u\wedge u\wedge v\wedge v=0$. [L2, algebra]
 
 1.2 For the displayed $\alpha$, compute $\alpha\wedge\alpha=e_1\wedge e_2\wedge e_3\wedge e_4+e_3\wedge e_4\wedge e_1\wedge e_2=2e_1\wedge e_2\wedge e_3\wedge e_4$, which is the nonzero basis vector of $\Lambda^4\mathbb R^4$ by [L1]. [L1, L2, algebra]
 
-2.1 Steps 1.1 and 1.2 contradict each other, so the bivector $\alpha$ is not decomposable. [step 1.1, step 1.2] ∎
+2.1 Steps 1.1 and 1.2 contradict each other, so the bivector $\alpha$ is not decomposable. [step 1.1, step 1.2] ∎ 

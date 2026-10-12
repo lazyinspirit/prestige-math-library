@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-inhomogeneous-group-cochain-differential-squares-to-zero.md

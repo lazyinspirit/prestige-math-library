@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-a-harmonic-conjugate-of-x-squared-minus-y-squared.md

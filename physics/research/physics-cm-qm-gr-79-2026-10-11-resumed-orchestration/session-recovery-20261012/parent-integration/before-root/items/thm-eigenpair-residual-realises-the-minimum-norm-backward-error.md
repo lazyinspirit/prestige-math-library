@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-eigenpair-residual-realises-the-minimum-norm-backward-error.md

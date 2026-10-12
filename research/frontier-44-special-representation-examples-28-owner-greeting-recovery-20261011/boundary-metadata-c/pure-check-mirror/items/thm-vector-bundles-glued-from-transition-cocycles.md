@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-vector-bundles-glued-from-transition-cocycles.md

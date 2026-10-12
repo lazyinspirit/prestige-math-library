@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-the-interior-is-an-open-smooth-n-manifold.md

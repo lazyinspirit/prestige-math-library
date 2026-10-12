@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zero-divisor-annihilator-contained-in-associated-prime.md

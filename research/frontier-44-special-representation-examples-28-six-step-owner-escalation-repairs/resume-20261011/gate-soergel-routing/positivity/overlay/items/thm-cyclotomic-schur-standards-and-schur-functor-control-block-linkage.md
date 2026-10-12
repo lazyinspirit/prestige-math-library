@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-cyclotomic-schur-standards-and-schur-functor-control-block-linkage.md

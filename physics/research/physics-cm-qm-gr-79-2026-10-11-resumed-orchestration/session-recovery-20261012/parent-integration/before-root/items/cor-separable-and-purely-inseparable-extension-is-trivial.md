@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-separable-and-purely-inseparable-extension-is-trivial.md

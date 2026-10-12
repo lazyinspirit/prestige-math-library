@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "batch": "51",
+  "round": 0,
+  "reviewed_items": [
+    "lem-nrqm-potentials-one-dimensional-flux-identity",
+    "lem-nrqm-potentials-free-operator-differential-identification",
+    "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+    "def-nrqm-potentials-one-dimensional-line-model",
+    "def-nrqm-potentials-interval-and-delta-models",
+    "pthm-nrqm-potentials-line-model-energy-and-stationary-states",
+    "pthm-nrqm-potentials-barrier-flux-and-transmission",
+    "pthm-nrqm-potentials-finite-well-bound-states",
+    "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes",
+    "pthm-nrqm-potentials-delta-point-interaction-bound-state",
+    "rem-nrqm-potentials-scope-and-idealizations",
+    "ex-nrqm-potentials-rectangular-barrier-tunnelling-and-thick-limit",
+    "ex-nrqm-potentials-finite-well-exact-root-and-count",
+    "ex-nrqm-potentials-box-spectrum-and-nodes",
+    "rem-nrqm-potentials-examples-scope-limits"
+  ],
+  "reviewed_pages": [
+    "qm-one-dimensional-potentials",
+    "qm-one-dimensional-potentials-examples"
+  ],
+  "decision": "escalate",
+  "reason": "The assigned inventory, both complete A/B pages, approved pair scope, and relevant supplier uses were reviewed. The interval and box claims rely on an upstream sine-completeness proof with an invalid change of variables. That supplier is outside this read-only batch, so owner resolution is required before accepting dependent claims. Local repairable defects are also recorded below.",
+  "findings": [
+    {
+      "id": "thm-nrqm-intervals-sine-on-completeness",
+      "type": "prerequisite",
+      "reason": "Proof step 3.1 defines G([t])=g(2Lt) for t in [0,1), but g is defined only on (-L,L), while 2Lt ranges over [0,2L). Thus G is undefined for t>=1/2, and the claimed transport of zero Fourier coefficients does not follow. The missing step is a valid transport of the odd extension to the torus, for example x=2Lt-L, with the resulting phase factor handled. This blocks the complete-basis claims through thm-nrqm-intervals-dirichlet-diagonal-domain-identification and the assigned interval and box consumers."
+    },
+    {
+      "id": "thm-nrqm-intervals-finite-well-root-conditions-and-bound-count",
+      "type": "outside-batch",
+      "reason": "Proof step 2.2 evaluates L_n(K)>0 when K may be the upper endpoint of branch B_n, where L_n has a pole and L_n(K) is undefined. Split the case: use the one-sided limit L_n(k)->+infinity at a pole, and use L_n(K)>0 only when K is interior. The even/odd matching setup is also treated in [Tong, §2.3.1](https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf); this local supplier proof still needs its endpoint case repaired."
+    },
+    {
+      "id": "lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators",
+      "type": "local",
+      "reason": "Statement clause (c) and proof step 2.2 invoke the infinite-dimensional compact-resolvent result to assert a basis indexed by N with eigenvalues tending in modulus to infinity, but the lemma assumes only H≠{0}. A finite-dimensional example such as A=0 on C contradicts that conclusion. Repair clause (c) with a finite-dimensional case or an infinite-dimensional hypothesis."
+    },
+    {
+      "id": "def-nrqm-potentials-interval-and-delta-models",
+      "type": "local",
+      "reason": "Clause (d) writes A_alpha u=-D^2u on the contact domain without stating that the mathematical supplier defines this action separately on each half-line. The line model defines D^2 as the global weak second derivative; for a function with a derivative jump, that global derivative includes a delta distribution and is not an L2 class. State explicitly that the contact operator uses the piecewise weak second derivatives, not the global derivative."
+    },
+    {
+      "id": "pthm-nrqm-potentials-barrier-flux-and-transmission",
+      "type": "local",
+      "reason": "Proof step 4.1 gives the reflected-only current with a spurious factor e^(-2ikx). Directly, conjugate(r e^(-ikx)) times the derivative -ik r e^(-ikx) equals -ik|r|^2. Correct this calculation; the preceding total-current calculation gives the stated flux balance."
+    },
+    {
+      "id": "pthm-nrqm-potentials-finite-well-bound-states",
+      "type": "local",
+      "reason": "Facts F1 asserts ||V||_infinity=U although the Statement leaves V(±a) unconstrained. The operator is unchanged by values at those points, but the asserted pointwise supremum need not equal U. In F1 identify the operator with that of the canonical representative V0=-U 1_(-a,a), or use its essential supremum; no Statement change is needed."
+    },
+    {
+      "id": "ex-nrqm-potentials-box-spectrum-and-nodes",
+      "type": "local",
+      "reason": "Facts F2 and proof step 2.1 use the exact zero set of sine, but the listed suppliers state completeness and define the interval space, not the sine zero set. Add thm-sine-cosine-zero-sets-and-fundamental-period to deps and cite it in F2."
+    }
+  ],
+  "consumer_checks": [
+    {
+      "id": "thm-nrqm-intervals-dirichlet-diagonal-domain-identification",
+      "decision": "escalate",
+      "reason": "Its Statement, Facts F1 and proof use the complete sine family; the current supplier proof does not establish completeness."
+    },
+    {
+      "id": "thm-nrqm-intervals-bounded-interval-perturbation-compact-resolvent",
+      "decision": "escalate",
+      "reason": "Its resolvent and spectral arguments use the affected Dirichlet diagonal-domain supplier, including proofs 1.2 and 3.1."
+    },
+    {
+      "id": "def-nrqm-potentials-interval-and-delta-models",
+      "decision": "escalate",
+      "reason": "Clause (b) imports the free Dirichlet eigenpairs and complete sine family from the affected suppliers."
+    },
+    {
+      "id": "pthm-nrqm-potentials-interval-spectra-completeness-and-nodes",
+      "decision": "escalate",
+      "reason": "Facts F1 and F3 and proof steps 1.1 and 3.1 rely on the Dirichlet basis and diagonal-domain chain."
+    },
+    {
+      "id": "ex-nrqm-potentials-box-spectrum-and-nodes",
+      "decision": "escalate",
+      "reason": "Its complete free eigenfamily claim inherits the affected interval theorem; it also needs the local sine-zero supplier finding repaired."
+    },
+    {
+      "id": "rem-nrqm-potentials-scope-and-idealizations",
+      "decision": "escalate",
+      "reason": "Its summary claims the interval completeness and spectrum results that depend on the affected prerequisite chain."
+    },
+    {
+      "id": "rem-nrqm-potentials-examples-scope-limits",
+      "decision": "escalate",
+      "reason": "Its box-spectrum summary depends on the affected free Dirichlet basis and interval theorem."
+    },
+    {
+      "id": "ex-nrqm-intervals-contacts-separated-box-degeneracy",
+      "decision": "escalate",
+      "reason": "Outside the assigned batch; its product-basis proof uses the complete one-dimensional sine family."
+    },
+    {
+      "id": "pthm-nrqm-potentials-finite-well-bound-states",
+      "decision": "escalate",
+      "reason": "Its Facts F1 and proof step 3.1 rely on the outside-batch finite-well count supplier's endpoint case."
+    },
+    {
+      "id": "ex-nrqm-potentials-finite-well-exact-root-and-count",
+      "decision": "escalate",
+      "reason": "Its Facts F1 and verification steps 1.2 and 2.2 rely on the same finite-well count supplier."
+    }
+  ]
+}

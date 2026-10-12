@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-splitting-principle-with-integral-injective-pullback.md

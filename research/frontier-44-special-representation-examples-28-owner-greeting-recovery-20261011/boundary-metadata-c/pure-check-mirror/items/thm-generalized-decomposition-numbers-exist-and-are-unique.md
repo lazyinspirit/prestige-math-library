@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-generalized-decomposition-numbers-exist-and-are-unique.md

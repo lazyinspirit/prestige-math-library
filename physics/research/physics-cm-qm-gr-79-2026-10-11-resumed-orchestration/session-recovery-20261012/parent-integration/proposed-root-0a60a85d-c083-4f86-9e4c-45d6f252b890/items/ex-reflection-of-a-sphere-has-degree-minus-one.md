@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reflection-of-a-sphere-has-degree-minus-one.md

@@ -40,8 +40,7 @@ $$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$
 
 **Proof technique:** Choose nonnegative functions with $|f|^p$ and $|g|^q$ proportional almost everywhere and invoke the equality theorem.
 
-1.1 The functions satisfy [given]
-$$|f|^p=a^p\chi_{[0,1]},\qquad |g|^q=b^q\chi_{[0,1]},$$ so $|f|^p=(a^p/b^q)|g|^q$ almost everywhere.
+1.1 The functions satisfy [given] $$|f|^p=a^p\chi_{[0,1]},\qquad |g|^q=b^q\chi_{[0,1]},$$ so $|f|^p=(a^p/b^q)|g|^q$ almost everywhere. [given]
 
-2.1 Applying [L1] gives equality in Holder: [L1, step 1.1]
-$$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$ ∎
+2.1 Applying [L1] gives equality in Holder: [L1, step 1.1] $$\int_0^1 |fg|\,d\lambda=\|f\|_p\|g\|_q.$$ [L1, step 1.1] ∎
+

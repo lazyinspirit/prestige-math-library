@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-reduced-and-unreduced-generalized-cohomology-theories-correspond.md

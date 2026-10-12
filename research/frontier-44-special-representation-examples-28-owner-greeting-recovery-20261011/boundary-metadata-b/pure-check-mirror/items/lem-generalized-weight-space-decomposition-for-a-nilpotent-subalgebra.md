@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-generalized-weight-space-decomposition-for-a-nilpotent-subalgebra.md

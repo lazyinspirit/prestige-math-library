@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-generation-degree-bounds-surjectivity-degree-and-weight.md

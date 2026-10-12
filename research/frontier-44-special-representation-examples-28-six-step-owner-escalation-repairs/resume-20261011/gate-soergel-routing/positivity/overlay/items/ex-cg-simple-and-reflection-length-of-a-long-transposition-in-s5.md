@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-cg-simple-and-reflection-length-of-a-long-transposition-in-s5.md

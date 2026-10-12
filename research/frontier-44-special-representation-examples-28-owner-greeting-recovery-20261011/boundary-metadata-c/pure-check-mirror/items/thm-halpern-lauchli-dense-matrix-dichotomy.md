@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-halpern-lauchli-dense-matrix-dichotomy.md

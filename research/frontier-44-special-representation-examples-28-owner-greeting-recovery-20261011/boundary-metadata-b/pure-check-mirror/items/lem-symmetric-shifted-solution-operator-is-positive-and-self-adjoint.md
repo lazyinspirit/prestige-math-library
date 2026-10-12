@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-symmetric-shifted-solution-operator-is-positive-and-self-adjoint.md

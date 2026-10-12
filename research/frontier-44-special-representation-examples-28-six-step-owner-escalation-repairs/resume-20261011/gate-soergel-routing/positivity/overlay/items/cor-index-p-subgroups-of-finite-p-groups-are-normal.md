@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-index-p-subgroups-of-finite-p-groups-are-normal.md

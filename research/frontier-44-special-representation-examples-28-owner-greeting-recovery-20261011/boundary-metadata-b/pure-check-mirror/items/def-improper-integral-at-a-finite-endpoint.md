@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-improper-integral-at-a-finite-endpoint.md

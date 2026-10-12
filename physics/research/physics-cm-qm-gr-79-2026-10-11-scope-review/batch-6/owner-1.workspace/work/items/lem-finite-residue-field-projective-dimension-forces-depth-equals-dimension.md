@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension.md

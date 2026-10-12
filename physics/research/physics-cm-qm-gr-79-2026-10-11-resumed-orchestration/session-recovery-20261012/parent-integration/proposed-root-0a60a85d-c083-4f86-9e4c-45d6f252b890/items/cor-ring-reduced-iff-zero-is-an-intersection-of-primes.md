@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ring-reduced-iff-zero-is-an-intersection-of-primes.md

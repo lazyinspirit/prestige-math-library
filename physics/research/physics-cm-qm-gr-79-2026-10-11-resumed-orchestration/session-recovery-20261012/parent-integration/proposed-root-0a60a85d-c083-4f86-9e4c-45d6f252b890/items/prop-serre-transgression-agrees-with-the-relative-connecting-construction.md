@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-serre-transgression-agrees-with-the-relative-connecting-construction.md

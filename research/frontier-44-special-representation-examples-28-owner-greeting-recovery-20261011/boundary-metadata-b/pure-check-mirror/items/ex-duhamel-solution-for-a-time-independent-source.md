@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-duhamel-solution-for-a-time-independent-source.md

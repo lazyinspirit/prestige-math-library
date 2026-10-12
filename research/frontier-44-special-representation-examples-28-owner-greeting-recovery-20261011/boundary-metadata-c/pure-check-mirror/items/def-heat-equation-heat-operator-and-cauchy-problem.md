@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-heat-equation-heat-operator-and-cauchy-problem.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-reduced-qr-least-squares-versus-normal-equations.md

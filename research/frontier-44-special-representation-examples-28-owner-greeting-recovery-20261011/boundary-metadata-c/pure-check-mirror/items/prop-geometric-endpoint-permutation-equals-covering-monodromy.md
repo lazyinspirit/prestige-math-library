@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-geometric-endpoint-permutation-equals-covering-monodromy.md

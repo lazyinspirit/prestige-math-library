@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-substitution-of-a-graph-for-a-vertex.md

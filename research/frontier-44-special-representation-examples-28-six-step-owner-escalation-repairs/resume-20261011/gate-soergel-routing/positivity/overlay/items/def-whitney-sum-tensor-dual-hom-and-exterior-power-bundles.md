@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-whitney-sum-tensor-dual-hom-and-exterior-power-bundles.md

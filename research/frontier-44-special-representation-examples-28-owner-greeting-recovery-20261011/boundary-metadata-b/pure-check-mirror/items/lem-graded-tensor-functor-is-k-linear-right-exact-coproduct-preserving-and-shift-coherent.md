@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-graded-tensor-functor-is-k-linear-right-exact-coproduct-preserving-and-shift-coherent.md

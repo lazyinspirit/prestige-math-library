@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-young-subgroup-tabloid-and-permutation-module.md

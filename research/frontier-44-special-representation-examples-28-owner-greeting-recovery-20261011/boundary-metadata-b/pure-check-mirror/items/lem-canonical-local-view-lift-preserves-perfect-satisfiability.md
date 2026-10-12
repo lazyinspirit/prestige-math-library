@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-canonical-local-view-lift-preserves-perfect-satisfiability.md

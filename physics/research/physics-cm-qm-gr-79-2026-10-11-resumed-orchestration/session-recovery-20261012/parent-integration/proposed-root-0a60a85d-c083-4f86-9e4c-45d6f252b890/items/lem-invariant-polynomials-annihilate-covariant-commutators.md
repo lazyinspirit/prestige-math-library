@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invariant-polynomials-annihilate-covariant-commutators.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-real-part-of-a-self-adjoint-complex-function-algebra.md

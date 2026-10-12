@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-auslander-buchsbaum-serre-regularity-criterion.md

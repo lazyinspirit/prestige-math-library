@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/fs-preserving-binary-products-and-equalizers-does-not-imply-continuity.md

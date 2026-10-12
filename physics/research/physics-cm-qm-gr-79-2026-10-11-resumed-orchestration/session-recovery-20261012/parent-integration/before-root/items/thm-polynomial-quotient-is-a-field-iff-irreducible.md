@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polynomial-quotient-is-a-field-iff-irreducible.md

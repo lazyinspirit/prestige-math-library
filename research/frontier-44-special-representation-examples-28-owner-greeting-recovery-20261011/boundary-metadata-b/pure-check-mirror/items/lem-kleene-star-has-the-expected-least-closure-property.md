@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-kleene-star-has-the-expected-least-closure-property.md

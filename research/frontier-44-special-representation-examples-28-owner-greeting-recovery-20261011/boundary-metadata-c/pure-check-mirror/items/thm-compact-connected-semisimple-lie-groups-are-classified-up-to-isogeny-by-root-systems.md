@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems.md

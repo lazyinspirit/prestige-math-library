@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-piecewise-polynomial-periodic-oscillator.md

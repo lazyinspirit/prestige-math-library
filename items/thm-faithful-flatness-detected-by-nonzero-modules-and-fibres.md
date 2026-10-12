@@ -48,17 +48,12 @@ are equivalent:
 
 **Proof technique:** direct.
 
+ 1.1 If $M$ is faithfully flat and $N\neq0$, then the map $0\to N$ is nonzero. If $N\otimes_R M$ were zero, tensoring would turn the nonzero map $0\to N$ into the zero map, contradicting exactness reflection in [L1]. Thus 1 implies 2. [L1, given]
 
-1.1 If $M$ is faithfully flat and $N\neq0$, then the map $0\to N$ is nonzero. If $N\otimes_R M$ were zero, tensoring would turn the nonzero map $0\to N$ into the zero map, contradicting exactness reflection in [L1]. Thus 1 implies 2. [L1, given]
+ 1.2 Condition 2 implies 3 by taking $N=\kappa(\mathfrak p)$, and 3 implies 4 by restricting to maximal primes. [given]
 
+ 1.3 Assume 4. Let $N\neq0$ and choose $0\neq x\in N$. The cyclic submodule $Rx\cong R/\operatorname{Ann}(x)$ injects into $N$. Choose a maximal ideal $\mathfrak m$ containing $\operatorname{Ann}(x)$. Then there is a surjection $ R/\operatorname{Ann}(x)\twoheadrightarrow R/\mathfrak m. $ Tensoring with $M$ preserves the injection by [L2], and the target tensor is nonzero by 4. Hence $ N\otimes_R M\neq0. $ So 4 implies 2. [L2, given, choose]
 
-1.2 Condition 2 implies 3 by taking $N=\kappa(\mathfrak p)$, and 3 implies 4 by restricting to maximal primes. [given]
+ 1.4 Assume 2 and let $ N_1\to N_2\to N_3 $ be a complex whose tensor with $M$ is exact. Since $M$ is flat, it is enough to prove exactness at $N_2$. If $x\in\ker(N_2\to N_3)$ is not in the image of $N_1\to N_2$, then it defines a nonzero element of the quotient $ Q:=\ker(N_2\to N_3)/\operatorname{im}(N_1\to N_2). $ But tensoring with $M$ kills $Q$, because the tensor complex is exact. This contradicts 2. Hence $Q=0$, and the original complex is exact. Therefore $M$ is faithfully flat. [L1, algebra]
 
-
-1.3 Assume 4. Let $N\neq0$ and choose $0\neq x\in N$. The cyclic submodule $Rx\cong R/\operatorname{Ann}(x)$ injects into $N$. Choose a maximal ideal $\mathfrak m$ containing $\operatorname{Ann}(x)$. Then there is a surjection $ R/\operatorname{Ann}(x)\twoheadrightarrow R/\mathfrak m. $ Tensoring with $M$ preserves the injection by [L2], and the target tensor is nonzero by 4. Hence $ N\otimes_R M\neq0. $ So 4 implies 2. [L2, given, choose]
-
-
-1.4 Assume 2 and let $ N_1\to N_2\to N_3 $ be a complex whose tensor with $M$ is exact. Since $M$ is flat, it is enough to prove exactness at $N_2$. If $x\in\ker(N_2\to N_3)$ is not in the image of $N_1\to N_2$, then it defines a nonzero element of the quotient $ Q:=\ker(N_2\to N_3)/\operatorname{im}(N_1\to N_2). $ But tensoring with $M$ kills $Q$, because the tensor complex is exact. This contradicts 2. Hence $Q=0$, and the original complex is exact. Therefore $M$ is faithfully flat. [L1, algebra]
-
-
-2.1 The four conditions are equivalent. [algebra] ∎
+ 2.1 The four conditions are equivalent. [algebra] ∎ 

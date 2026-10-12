@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poisson-extension-lp-contraction-and-norm-limit.md

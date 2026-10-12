@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-monomorphism-is-the-kernel-of-its-cokernel.md

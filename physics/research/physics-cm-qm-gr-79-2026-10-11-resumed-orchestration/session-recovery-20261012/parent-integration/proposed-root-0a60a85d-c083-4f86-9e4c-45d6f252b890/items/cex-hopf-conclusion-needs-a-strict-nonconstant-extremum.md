@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-hopf-conclusion-needs-a-strict-nonconstant-extremum.md

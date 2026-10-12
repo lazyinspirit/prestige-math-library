@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cex-intersection-of-shrinking-intervals-not-open.md

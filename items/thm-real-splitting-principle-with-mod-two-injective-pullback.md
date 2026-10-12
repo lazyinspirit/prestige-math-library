@@ -69,19 +69,7 @@ has the same properties
 
 1.2 The splitting over the flag bundle is [F1]'s second clause, $q^*E\cong L_1\oplus\cdots\oplus L_n$, with each $L_j$ a numerable line bundle over the admissible space $\operatorname{Fl}(E)$. For $n=0$, $\operatorname{Fl}(E)=B$ and the sum is empty, so $q=\operatorname{id}$ and the pullback is the identity, which is injective. [F1, F3]
 
-1.3 Finitely many bundles. Let $E_1,\ldots,E_m$ be numerable real bundles over $B$, of ranks $n_k\geq0$. Define $Y_0=B$ and recursively $$Y_k:=Y_{k-1}\times_B\operatorname{Fl}(E_k),\qquad r_k:Y_k\to Y_{k-1}.$$ We first verify the required base change. For a map $h:W\to Z$ and a positive-rank bundle $G\to Z$, there is a fiberwise map
-$$\Psi:P(h^*G)\longrightarrow W\times_ZP(G),\qquad (w,\ell\subseteq G_{h(w)})\longmapsto(w,\ell).$$
-Over a linear chart $G|_U\cong U\times\mathbb R^r$, both sides have the
-pulled-back projective chart
-$h^{-1}(U)\times\mathbb{RP}^{r-1}$ and $\Psi$ is the identity in these
-coordinates. Thus $\Psi$ is a homeomorphism over $W$, and the same coordinate
-description identifies $\gamma_{h^*G}$ with the pullback of $\gamma_G$.
-Choose at each flag stage the pullback of the metric used over $Z$.
-Fiberwise orthogonal complement then commutes with pullback, because both
-subbundles consist of the vectors orthogonal to the same pulled-back line.
-Induction through the projectivization stages of [F1] therefore gives
-$$\operatorname{Fl}(h^*E_k)\cong W\times_B\operatorname{Fl}(E_k),$$
-with its tautological lines identified with the pulled-back ones.
+1.3 Finitely many bundles. Let $E_1,\ldots,E_m$ be numerable real bundles over $B$, of ranks $n_k\geq0$. Define $Y_0=B$ and recursively $$Y_k:=Y_{k-1}\times_B\operatorname{Fl}(E_k),\qquad r_k:Y_k\to Y_{k-1}.$$ We first verify the required base change. For a map $h:W\to Z$ and a positive-rank bundle $G\to Z$, there is a fiberwise map $$\Psi:P(h^*G)\longrightarrow W\times_ZP(G),\qquad (w,\ell\subseteq G_{h(w)})\longmapsto(w,\ell).$$ Over a linear chart $G|_U\cong U\times\mathbb R^r$, both sides have the pulled-back projective chart $h^{-1}(U)\times\mathbb{RP}^{r-1}$ and $\Psi$ is the identity in these coordinates. Thus $\Psi$ is a homeomorphism over $W$, and the same coordinate description identifies $\gamma_{h^*G}$ with the pullback of $\gamma_G$. Choose at each flag stage the pullback of the metric used over $Z$. Fiberwise orthogonal complement then commutes with pullback, because both subbundles consist of the vectors orthogonal to the same pulled-back line. Induction through the projectivization stages of [F1] therefore gives $$\operatorname{Fl}(h^*E_k)\cong W\times_B\operatorname{Fl}(E_k),$$ with its tautological lines identified with the pulled-back ones.
 
 Apply this with $W=Y_{k-1}$ and $h:Y_{k-1}\to B$. It identifies $r_k:Y_k\to
 Y_{k-1}$ with the flag projection of $h^*E_k$, so step 1.1 over the admissible
@@ -96,4 +84,4 @@ $q_X^*E_k\cong q_k''^*q_k^*E_k\cong
 q_k''^*(L_1^{(k)}\oplus\cdots\oplus L_{n_k}^{(k)})$, which by [F4] is a
 direct sum of the line bundles $q_k''^*L_j^{(k)}$. [F1, F3, F4, step 1.1]
 
-2.1 Boundary cases. If some $n_k=0$ then $E_k$ is the zero bundle, its flag bundle is $B$ and $q_X^*E_k=0$ splits as an empty sum; the corresponding factor contributes no projection and does not affect injectivity. If $m=0$ then $X=B$, the empty family of bundles is split vacuously, and $q_X=\operatorname{id}$. If $B=\varnothing$ then all spaces are empty and the cohomology groups are zero, so injectivity is vacuous. AC is used through the metric choices of the flag construction and the projective bundle theorem, as recorded. [F1, F2, A1, step 1.1, step 1.3] ∎
+2.1 Boundary cases. If some $n_k=0$ then $E_k$ is the zero bundle, its flag bundle is $B$ and $q_X^*E_k=0$ splits as an empty sum; the corresponding factor contributes no projection and does not affect injectivity. If $m=0$ then $X=B$, the empty family of bundles is split vacuously, and $q_X=\operatorname{id}$. If $B=\varnothing$ then all spaces are empty and the cohomology groups are zero, so injectivity is vacuous. AC is used through the metric choices of the flag construction and the projective bundle theorem, as recorded. [F1, F2, A1, step 1.1, step 1.3] ∎ 

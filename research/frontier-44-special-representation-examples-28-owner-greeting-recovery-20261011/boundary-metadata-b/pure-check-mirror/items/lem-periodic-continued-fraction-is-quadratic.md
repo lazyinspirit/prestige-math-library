@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-periodic-continued-fraction-is-quadratic.md

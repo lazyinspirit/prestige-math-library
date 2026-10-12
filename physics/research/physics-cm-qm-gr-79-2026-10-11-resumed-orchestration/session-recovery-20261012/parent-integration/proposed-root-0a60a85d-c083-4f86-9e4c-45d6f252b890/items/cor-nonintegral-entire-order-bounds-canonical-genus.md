@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-nonintegral-entire-order-bounds-canonical-genus.md

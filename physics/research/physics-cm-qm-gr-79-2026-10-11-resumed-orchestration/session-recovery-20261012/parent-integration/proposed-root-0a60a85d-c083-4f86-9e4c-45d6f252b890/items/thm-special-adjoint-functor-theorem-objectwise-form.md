@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-special-adjoint-functor-theorem-objectwise-form.md

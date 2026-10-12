@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cartier-smoothness-for-affine-groups-in-characteristic-zero.md

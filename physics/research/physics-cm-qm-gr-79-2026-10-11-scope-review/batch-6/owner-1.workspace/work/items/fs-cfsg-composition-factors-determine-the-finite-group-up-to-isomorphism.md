@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cfsg-composition-factors-determine-the-finite-group-up-to-isomorphism.md

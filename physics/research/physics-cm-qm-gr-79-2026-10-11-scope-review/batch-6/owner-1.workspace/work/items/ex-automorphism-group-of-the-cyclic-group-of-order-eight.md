@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-automorphism-group-of-the-cyclic-group-of-order-eight.md

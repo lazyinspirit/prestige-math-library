@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-finite-simplicial-open-stars-have-explicit-conical-product-charts.md

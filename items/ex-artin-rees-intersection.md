@@ -41,11 +41,8 @@ So in this case one may take the Artin-Rees number to be $c=m$.
 
 **Proof technique:** direct.
 
+ 1.1 Here $I^nM=(x^n)$ and $N=(x^m)$. If $n\ge m$, then $(x^n)\subseteq(x^m)$, so $ I^nM\cap N=(x^n). $ [given, algebra]
 
-1.1 Here $I^nM=(x^n)$ and $N=(x^m)$. If $n\ge m$, then $(x^n)\subseteq(x^m)$, so $ I^nM\cap N=(x^n). $ [given, algebra]
+ 1.2 Also $I^mM\cap N=(x^m)$, and therefore for $n\ge m$, $ I^{n-m}(I^mM\cap N)=(x^{n-m})(x^m)=(x^n)=I^nM\cap N. $ [algebra]
 
-
-1.2 Also $I^mM\cap N=(x^m)$, and therefore for $n\ge m$, $ I^{n-m}(I^mM\cap N)=(x^{n-m})(x^m)=(x^n)=I^nM\cap N. $ [algebra]
-
-
-2.1 So $c=m$ works, exhibiting an explicit Artin-Rees bound compatible with the abstract existence statement [L1]. [L1] ∎
+ 2.1 So $c=m$ works, exhibiting an explicit Artin-Rees bound compatible with the abstract existence statement [L1]. [L1] ∎ 

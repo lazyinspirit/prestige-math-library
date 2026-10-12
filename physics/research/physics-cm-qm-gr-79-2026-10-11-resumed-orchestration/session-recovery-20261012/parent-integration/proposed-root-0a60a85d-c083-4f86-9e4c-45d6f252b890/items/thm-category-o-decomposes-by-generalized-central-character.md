@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-category-o-decomposes-by-generalized-central-character.md

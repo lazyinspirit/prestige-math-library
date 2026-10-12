@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-amenable-property-t-locally-compact-group-is-compact.md

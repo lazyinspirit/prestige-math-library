@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-external-evaluation-detects-tensor-square-operations.md

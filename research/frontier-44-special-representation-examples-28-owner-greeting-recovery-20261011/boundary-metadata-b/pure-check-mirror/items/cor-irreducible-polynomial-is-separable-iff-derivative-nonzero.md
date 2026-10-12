@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-irreducible-polynomial-is-separable-iff-derivative-nonzero.md

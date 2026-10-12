@@ -1,0 +1,33 @@
+import {readFileSync,writeFileSync,existsSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {loadStep3,itemHash,itemDecision,itemInputPaths} from '../../../tools/step3-decisions.mjs';
+const base='research/frontier-44-special-representation-examples-28-owner-one-time-exhausted-exception-20261011';
+const own=base+'/repair_klr_global_basis',run='frontier-44-special-representation-examples-28';
+const read=p=>JSON.parse(readFileSync(p,'utf8')),sha=p=>createHash('sha256').update(readFileSync(p)).digest('hex');
+const start=new Date().toISOString(),censusPath=own+'/final-exact-owned-duty-mathematical-hold-census.json',census=read(censusPath),subjects=new Map();
+function add(id,basis,kind,whole=true){let r=subjects.get(id);if(!r){r={id,owned:false,whole_closure_evidence:[],context_only_evidence:[]};subjects.set(id,r);}const row={path:basis,raw_sha256:sha(basis),kind};(whole?r.whole_closure_evidence:r.context_only_evidence).push(row);return r;}
+for(const r of census.original_subjects){const x=add(r.subject,censusPath,r.disposition);x.owned=true;(x.assignment_record_ids??=[]).push(r.id);x.history={repair_round:r.historical_repair_round,maximum_rounds:r.historical_maximum_rounds,remaining_rounds:r.remaining_rounds};}
+for(const r of census.expanded_current_whole_accepted_subjects){const x=add(r.id,r.actual_review_packet.path,'fresh_whole_actual_or_retained_unchanged_whole');x.owned=true;}
+const consumed=new Set(Object.keys(census.current_actual_supplier_guards).map(p=>p.split('/').at(-1).replace(/\.md$/,'')));
+const peer=[{p:base+'/repair_step3_level_one_fock_binding/final-actual-full-fock-supplier-consumer-sufficiency.json',key:'whole_claim_decision_recommendations'},{p:base+'/repair_cell_head_classification/classifier8-and-actual83-current-decision-scope-packet.json',key:'full_claim_decisions'}];
+for(const {p,key} of peer)for(const r of read(p)[key])if(consumed.has(r.id)){const x=add(r.id,p,'peer_authentic_whole_proof_current_item_guard');x.peer_review=true;x.peer_sealed_item_raw_sha256=r.current_raw_sha256;x.peer_item_guard_current=sha('items/'+r.id+'.md')===r.current_raw_sha256;}
+const old='research/frontier-44-special-representation-examples-28-owner-supervision-recovery-20261011/repair_klr_global_basis/stable-current-supplier-and-consumer-binding.json';
+for(const r of read(old).prior_integrated_39_same_owner_current_bindings)if(!subjects.has(r.id))add(r.id,old,'prior_consumed_clause_or_conditional_binding_not_whole',false);
+const ce='cex-specializing-v-to-one-forgets-graded-decomposition-information',cePath=own+'/last-ce-whole-proposed-approval-and-guards.json';
+if(existsSync(cePath)){const x=subjects.get(ce)??add(ce,cePath,'new_whole_proposed_not_integrated',false);x.proposed_whole_review={path:cePath,raw_sha256:sha(cePath),canonical_before_raw_sha256:read(cePath).accepted_proposals[0].canonical_before_raw_sha256,proposal_raw_sha256:read(cePath).accepted_proposals[0].proposal_raw_sha256};}
+const s=loadStep3(process.cwd(),run),rows=[],inputGuards=new Map(),receiptGuards=[];
+for(const r of subjects.values()){
+ r.current_item_raw_sha256=sha('items/'+r.id+'.md');r.frontier_item=s.items.has(r.id);
+ if(!r.frontier_item){r.disposition='outside_frontier_context_only';rows.push(r);continue;}
+ r.current_native_input_sha256=itemHash(s,r.id);r.current_native_decision=itemDecision(s,r.id);
+ r.receipts={};for(const owner of [true,false]){const p='research/'+run+'-step3b-'+(owner?'owner':'review')+'-'+r.id+'.json';if(existsSync(p)){r.receipts[owner?'owner':'review']={path:p,raw_sha256:sha(p),receipt:read(p)};receiptGuards.push({path:p,raw_sha256:sha(p)});}}
+ const raw=r.current_native_decision.decision;r.native_issue=r.current_native_decision.closed?'closed':raw&&raw.sha256!==r.current_native_input_sha256?'stale-input-signature':raw&&['hold','escalate'].includes(raw.decision)?'current-hold-or-escalation':raw?.decision==='reopen'?'authorized-reopen-awaiting-receipt':'missing-current-bookkeeping';
+ r.mathematical_evidence_eligibility=r.whole_closure_evidence.length&&r.peer_item_guard_current!==false?'whole_closure_evidence_available':r.proposed_whole_review?'proposed_whole_closure_awaiting_actual_integration':'only_context_or_unverified_whole_evidence';
+ r.root_native_refresh_eligible=!r.current_native_decision.closed&&r.mathematical_evidence_eligibility==='whole_closure_evidence_available';
+ r.owner_reason='The durable whole proof closure and its actual current supplier interfaces are sufficient and this refresh preserves the original review history';
+ for(const p of itemInputPaths(s,r.id))if(existsSync(p))inputGuards.set(p,sha(p));rows.push(r);
+}
+const inputDrift=[...inputGuards].filter(([p,h])=>sha(p)!==h).map(([path,before])=>({path,before,after:sha(path)})),receiptDrift=receiptGuards.filter(r=>sha(r.path)!==r.raw_sha256).map(r=>({path:r.path,before:r.raw_sha256,after:sha(r.path)}));
+const eligible=rows.filter(r=>r.root_native_refresh_eligible),work=rows.filter(r=>r.frontier_item&&!r.current_native_decision.closed);
+const packet={version:1,run,reviewer:'/root/repair_klr_global_basis',purpose:'One read-only exact-owned-plus-authentically-reviewed-consumed-supplier snapshot; no new math audit or native/canonical mutation',started_at:start,finished_at:new Date().toISOString(),original_assignment_records:38,expanded_original_census_subjects:50,unique_subject_count:rows.length,frontier_subject_count:rows.filter(r=>r.frontier_item).length,closed_count:rows.filter(r=>r.current_native_decision?.closed).length,work_count:work.length,eligible_current_refresh_count:eligible.length,eligible_current_refresh_ids:eligible.map(r=>r.id),rows,current_input_guards:[...inputGuards].map(([path,raw_sha256])=>({path,raw_sha256})),input_drift_during_snapshot:inputDrift,receipt_drift_during_snapshot:receiptDrift,native_writer_drained:false,boundary:'Root native bookkeeping may run concurrently; drift is explicitly reported and this measurement does not authorize a stale write or replace a whole proof with an incoming-clause verdict',counter_history_preserved:true,canonical_writes:false,native_writes:false,gates:false};
+const out=own+'/final-owned-native-mechanical-evidence-eligibility-snapshot.json';writeFileSync(out,JSON.stringify(packet,null,2)+'\n');console.log(JSON.stringify({path:out,raw_sha256:sha(out),subjects:rows.length,frontier:packet.frontier_subject_count,closed:packet.closed_count,work:work.length,eligible:eligible.length,issues:work.map(r=>({id:r.id,issue:r.native_issue,eligibility:r.mathematical_evidence_eligibility})),inputDrift:inputDrift.length,receiptDrift:receiptDrift.length},null,2));

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object.md

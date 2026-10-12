@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-loop-suspension-adjunction-on-based-homotopy-classes.md

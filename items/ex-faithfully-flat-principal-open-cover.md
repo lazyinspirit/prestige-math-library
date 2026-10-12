@@ -40,11 +40,8 @@ is faithfully flat.
 
 **Proof technique:** direct.
 
+ 1.1 Each factor $R_{f_i}$ is flat by [L1], so the product ring $\prod_i R_{f_i}$ is flat over $R$ because finite direct products are finite direct sums as modules. [L1, given, algebra]
 
-1.1 Each factor $R_{f_i}$ is flat by [L1], so the product ring $\prod_i R_{f_i}$ is flat over $R$ because finite direct products are finite direct sums as modules. [L1, given, algebra]
+ 1.2 Let $I\subsetneq R$ be proper. If $I\prod_i R_{f_i}=\prod_i R_{f_i}$, then for every $i$ some power of $f_i$ lies in $I$, because $1\in IR_{f_i}$ implies $f_i^{m_i}\in I$ for some $m_i$. Since the $f_i$ generate the unit ideal, so do the powers $f_i^{m_i}$, forcing $1\in I$, contradiction. Thus the extended ideal is proper. [L2, algebra]
 
-
-1.2 Let $I\subsetneq R$ be proper. If $I\prod_i R_{f_i}=\prod_i R_{f_i}$, then for every $i$ some power of $f_i$ lies in $I$, because $1\in IR_{f_i}$ implies $f_i^{m_i}\in I$ for some $m_i$. Since the $f_i$ generate the unit ideal, so do the powers $f_i^{m_i}$, forcing $1\in I$, contradiction. Thus the extended ideal is proper. [L2, algebra]
-
-
-2.1 By [L2], the product map is faithfully flat. [L2] ∎
+ 2.1 By [L2], the product map is faithfully flat. [L2] ∎ 

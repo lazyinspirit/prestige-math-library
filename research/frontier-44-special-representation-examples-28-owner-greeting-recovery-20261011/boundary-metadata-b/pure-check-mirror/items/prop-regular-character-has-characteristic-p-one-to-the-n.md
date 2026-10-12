@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-regular-character-has-characteristic-p-one-to-the-n.md

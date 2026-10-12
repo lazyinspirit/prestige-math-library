@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-derived-tensor-product-in-the-bounded-above-setting.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-grothendieck-group-universal-properties-and-functoriality.md

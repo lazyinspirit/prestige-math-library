@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-effective-cartier-divisor-exact-sequence.md

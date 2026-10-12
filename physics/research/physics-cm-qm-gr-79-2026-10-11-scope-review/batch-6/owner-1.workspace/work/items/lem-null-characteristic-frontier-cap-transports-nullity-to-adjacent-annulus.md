@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-null-characteristic-frontier-cap-transports-nullity-to-adjacent-annulus.md

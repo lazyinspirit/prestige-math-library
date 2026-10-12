@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/def-quadratic-energy-of-a-hermitian-positive-definite-linear-system.md

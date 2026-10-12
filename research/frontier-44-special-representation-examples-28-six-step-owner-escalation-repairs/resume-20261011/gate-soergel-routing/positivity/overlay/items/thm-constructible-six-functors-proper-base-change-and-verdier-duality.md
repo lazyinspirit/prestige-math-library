@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-constructible-six-functors-proper-base-change-and-verdier-duality.md

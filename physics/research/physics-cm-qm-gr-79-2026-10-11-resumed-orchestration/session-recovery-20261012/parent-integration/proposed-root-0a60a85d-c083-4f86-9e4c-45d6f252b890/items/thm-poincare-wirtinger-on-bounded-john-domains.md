@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poincare-wirtinger-on-bounded-john-domains.md

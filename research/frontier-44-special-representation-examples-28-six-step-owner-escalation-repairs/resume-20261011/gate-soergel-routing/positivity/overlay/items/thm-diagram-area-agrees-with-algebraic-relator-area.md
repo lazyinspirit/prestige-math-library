@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-diagram-area-agrees-with-algebraic-relator-area.md

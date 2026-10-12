@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-global-fiber-basis-trivializes-serre-monodromy.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction.md

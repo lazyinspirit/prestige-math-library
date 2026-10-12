@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-union-of-parts-is-a-module-exactly-when-the-index-set-is.md

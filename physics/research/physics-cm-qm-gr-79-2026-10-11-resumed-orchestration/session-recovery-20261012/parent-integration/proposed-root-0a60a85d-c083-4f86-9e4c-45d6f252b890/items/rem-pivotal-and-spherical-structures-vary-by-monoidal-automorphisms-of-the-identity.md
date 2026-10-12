@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-pivotal-and-spherical-structures-vary-by-monoidal-automorphisms-of-the-identity.md

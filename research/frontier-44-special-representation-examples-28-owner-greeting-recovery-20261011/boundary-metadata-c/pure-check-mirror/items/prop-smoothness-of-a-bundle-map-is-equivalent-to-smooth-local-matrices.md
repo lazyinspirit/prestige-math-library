@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices.md

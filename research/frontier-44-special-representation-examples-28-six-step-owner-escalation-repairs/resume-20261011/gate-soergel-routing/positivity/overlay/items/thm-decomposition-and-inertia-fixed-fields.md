@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-decomposition-and-inertia-fixed-fields.md

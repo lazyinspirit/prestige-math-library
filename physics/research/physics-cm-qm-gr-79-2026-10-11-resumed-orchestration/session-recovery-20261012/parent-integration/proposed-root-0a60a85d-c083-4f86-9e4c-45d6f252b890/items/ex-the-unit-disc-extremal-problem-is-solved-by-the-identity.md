@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-unit-disc-extremal-problem-is-solved-by-the-identity.md

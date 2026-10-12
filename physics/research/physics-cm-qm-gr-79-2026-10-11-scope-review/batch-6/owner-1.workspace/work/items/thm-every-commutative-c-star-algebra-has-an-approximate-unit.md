@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-commutative-c-star-algebra-has-an-approximate-unit.md

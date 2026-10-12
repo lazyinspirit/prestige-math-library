@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-state-geometry-zero-vector-is-not-a-preparation.md

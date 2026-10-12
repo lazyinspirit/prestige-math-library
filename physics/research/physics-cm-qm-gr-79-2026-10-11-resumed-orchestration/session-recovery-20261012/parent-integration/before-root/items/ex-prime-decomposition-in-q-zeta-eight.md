@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-prime-decomposition-in-q-zeta-eight.md

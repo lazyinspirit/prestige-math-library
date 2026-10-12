@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-differentiation-and-multiplication-identities-on-tempered-distributions.md

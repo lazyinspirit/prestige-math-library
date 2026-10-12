@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ordinal-ranking-characterizes-well-foundedness.md

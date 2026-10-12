@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/cor-short-five-lemma-for-quasi-isomorphisms.md

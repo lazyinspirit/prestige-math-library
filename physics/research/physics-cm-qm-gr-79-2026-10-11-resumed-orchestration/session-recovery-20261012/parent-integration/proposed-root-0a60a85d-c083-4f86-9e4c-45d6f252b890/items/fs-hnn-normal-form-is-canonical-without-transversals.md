@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-hnn-normal-form-is-canonical-without-transversals.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/prop-scalar-curvature-is-twice-the-sum-of-sectional-curvatures-of-coordinate-planes.md

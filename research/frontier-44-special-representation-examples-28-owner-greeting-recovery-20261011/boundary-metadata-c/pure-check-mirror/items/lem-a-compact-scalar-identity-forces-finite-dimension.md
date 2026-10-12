@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/lem-a-compact-scalar-identity-forces-finite-dimension.md

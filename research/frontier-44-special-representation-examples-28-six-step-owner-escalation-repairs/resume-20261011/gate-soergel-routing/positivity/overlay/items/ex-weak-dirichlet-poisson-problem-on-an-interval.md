@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/ex-weak-dirichlet-poisson-problem-on-an-interval.md

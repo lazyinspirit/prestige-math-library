@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-multiplicative-functions-determined-by-prime-powers.md

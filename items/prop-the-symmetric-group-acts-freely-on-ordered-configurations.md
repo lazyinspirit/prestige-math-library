@@ -63,9 +63,7 @@ vacuously.
 
 1.1 The formula is well defined: for $i\in\{1,\dots,n\}$ the index $\sigma^{-1}(i-1)$ lies in $n$, so $\sigma^{-1}(i-1)+1$ is a label of $\{1,\dots,n\}$, and the resulting tuple in $X^n$ has the coordinates of $x$ reindexed along the bijection $\sigma^{-1}\circ\kappa$: writing $y(k):=x_{k+1}$ for $k\in n$, its $i$-th coordinate is $y(\sigma^{-1}(\kappa(i)))$. A reindexing of pairwise distinct coordinates is again pairwise distinct, so $\sigma\cdot x\in F_n(X)$. [F1, L2, algebra]
 
-1.2 The assignment is a left action. The identity of $S_n$ gives $(\operatorname{id}\cdot x)_i=x_{i-1+1}=x_i$, so $\operatorname{id}\cdot x=x$; and for $\sigma,\tau\in S_n$ and every label $i$,
-$$((\sigma\tau)\cdot x)_i=x_{(\sigma\tau)^{-1}(i-1)+1}=x_{\tau^{-1}(\sigma^{-1}(i-1))+1}=(\tau\cdot x)_{\sigma^{-1}(i-1)+1}=(\sigma\cdot(\tau\cdot x))_i,$$
-using $(\sigma\tau)^{-1}=\tau^{-1}\sigma^{-1}$ and the composition convention $(\sigma\tau)(k)=\sigma(\tau(k))$. Since coordinates determine a tuple, $(\sigma\tau)\cdot x=\sigma\cdot(\tau\cdot x)$. [F1, L2, L3, algebra]
+1.2 The assignment is a left action. The identity of $S_n$ gives $(\operatorname{id}\cdot x)_i=x_{i-1+1}=x_i$, so $\operatorname{id}\cdot x=x$; and for $\sigma,\tau\in S_n$ and every label $i$, $$((\sigma\tau)\cdot x)_i=x_{(\sigma\tau)^{-1}(i-1)+1}=x_{\tau^{-1}(\sigma^{-1}(i-1))+1}=(\tau\cdot x)_{\sigma^{-1}(i-1)+1}=(\sigma\cdot(\tau\cdot x))_i,$$ using $(\sigma\tau)^{-1}=\tau^{-1}\sigma^{-1}$ and the composition convention $(\sigma\tau)(k)=\sigma(\tau(k))$. Since coordinates determine a tuple, $(\sigma\tau)\cdot x=\sigma\cdot(\tau\cdot x)$. [F1, L2, L3, algebra]
 
 1.3 Each slice map $x\mapsto\sigma\cdot x$ is continuous: its $i$-th component is the map $x\mapsto x_{\sigma^{-1}(i-1)+1}$, the composite of the coordinate projection $\pi_{\sigma^{-1}(i-1)}\colon X^n\to X$ with the inclusion $F_n(X)\hookrightarrow X^n$, and both are continuous; the characteristic property of the product therefore gives continuity of the slice map into $X^n$, and its values lie in $F_n(X)$, so it is continuous into $F_n(X)$. [F1, L4, L5]
 
@@ -73,4 +71,4 @@ using $(\sigma\tau)^{-1}=\tau^{-1}\sigma^{-1}$ and the composition convention $(
 
 2.1 The action map $S_n\times F_n(X)\to F_n(X)$ is continuous. Since $S_n$ is discrete, each $\{\sigma\}\times F_n(X)$ is open in the product and these sets cover it; the restriction of the action map to $\{\sigma\}\times F_n(X)$ is, after the evident identification with $F_n(X)$, the continuous slice map of step 1.3. Continuity is local on an open cover, so the action map is continuous. [step 1.3, L5, L6]
 
-3.1 Steps 1.2 and 2.1 give a continuous left action and step 1.4 gives freeness in the sense of the definition, which is the assertion. [step 1.2, step 2.1, step 1.4, L3] ∎
+3.1 Steps 1.2 and 2.1 give a continuous left action and step 1.4 gives freeness in the sense of the definition, which is the assertion. [step 1.2, step 2.1, step 1.4, L3] ∎ 

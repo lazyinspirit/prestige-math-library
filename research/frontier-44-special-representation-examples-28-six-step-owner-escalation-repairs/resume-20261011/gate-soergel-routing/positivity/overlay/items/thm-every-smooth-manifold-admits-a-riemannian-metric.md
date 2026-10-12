@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-every-smooth-manifold-admits-a-riemannian-metric.md

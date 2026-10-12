@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/items/thm-matrix-of-transpose-is-the-transposed-matrix.md

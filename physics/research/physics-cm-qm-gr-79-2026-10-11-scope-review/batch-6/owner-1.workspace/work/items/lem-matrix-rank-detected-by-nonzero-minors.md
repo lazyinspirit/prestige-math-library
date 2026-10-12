@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-matrix-rank-detected-by-nonzero-minors.md

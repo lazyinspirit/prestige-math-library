@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-arbitrary-transposition-and-n-cycle-generate-s-n.md

@@ -1,0 +1,1 @@
+/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-de-rham-cohomology-is-a-covariant-functor.md
