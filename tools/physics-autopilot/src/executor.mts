@@ -478,8 +478,11 @@ export class Executor {
     writes = new Set<Unit>(), cohortWrites = writes): {
       ready: Unit[]; problem: string | null; deferred?: boolean;
     } {
-    if (!stage.unitPrerequisites) return { ready: candidates, problem: null };
     try {
+      // Filter local holds before slicing dispatch slots. Held units stay in
+      // the owed graph so no dependent can mistake them for a completed input.
+      const eligible = candidates.filter(unit => stage.unitEligible?.(ctx, unit) !== false);
+      if (!stage.unitPrerequisites) return { ready: eligible, problem: null };
       const owed = (stage.units ? stage.units(ctx) : []).map(String);
       const owedSet = new Set(owed);
       const dependencies = new Map<string, string[]>();
@@ -531,7 +534,7 @@ export class Executor {
           return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
         });
       return {
-        ready: candidates.filter(unit => {
+        ready: eligible.filter(unit => {
           const candidate = String(unit);
           if (activeUnits.has(candidate)) return false;
           if ((stage.exclusiveCohort?.(ctx, candidate) ?? [])
@@ -1347,6 +1350,12 @@ export class Executor {
           this.reporter.notify('blocked', message, { stage: member.id });
         return 'blocked';
       }
+    }
+
+    // A stage may pause at its owner handoff before dispatch or gate execution.
+    if (this.state.paused) {
+      this.reporter.report(this.snapshot(), { force: true });
+      return 'working';
     }
 
     // ONE LANE CAP FOR THE WHOLE GROUP.

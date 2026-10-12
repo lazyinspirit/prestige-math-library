@@ -59,7 +59,7 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (typeof s.units !== 'function') P(s.id, 'needs a `units(ctx)` function; a stage that owes nothing can never be incomplete');
     if (typeof s.plan !== 'function') P(s.id, 'needs a `plan(ctx, pending)` function');
     for (const [name, value] of [['cohort', s.cohort], ['exclusiveCohort', s.exclusiveCohort],
-      ['unitPrerequisites', s.unitPrerequisites]] as const) {
+      ['unitPrerequisites', s.unitPrerequisites], ['unitEligible', s.unitEligible]] as const) {
       if (value !== undefined && typeof value !== 'function') {
         P(s.id, `\`${name}\` must be a function (ctx, unit) => units`);
       }

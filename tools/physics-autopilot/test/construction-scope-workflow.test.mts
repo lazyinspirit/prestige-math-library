@@ -45,6 +45,16 @@ function fixture(t:any){
   json(join(repo,'research/demo-alpha-groups.json'),[{label:'a',covers:['1','2']}]);
   return {ctx,repo,pages,writeItem};
 }
+function independentPair(f:any,batch='3') {
+  const pages=[
+    {id:`independent-${batch}`,kind:'A',category:'test',title:'Independent',companion:`independent-${batch}-examples`,order:5,requires:[],items:[{id:`lem-independent-${batch}`,kind:'lemma',deps:[],dependency_level:0}]},
+    {id:`independent-${batch}-examples`,kind:'B',category:'test',title:'Independent examples',order:6,requires:[`independent-${batch}`],items:[{id:`ex-independent-${batch}`,kind:'example',deps:[`lem-independent-${batch}`],dependency_level:1}]},
+  ];
+  for(const page of pages){writeFileSync(join(f.repo,'library/test',`${page.id}.md`),`# ${page.title}\n`);for(const item of page.items)f.writeItem(item.id,item.deps);}
+  json(join(f.repo,'research',`demo-batch-${batch}.pages.json`),pages);
+  json(join(f.repo,'research',`demo-batch-${batch}.coverage.json`),{pages:[]});
+  json(join(f.repo,'research',`demo-batch-${batch}.proof-contracts.json`),{contracts:[]});
+}
 function complete(f:any,batch:string,decision='accept',options:any={}){
   const p=batchPlan(f.ctx,batch);assert.ok(p);
   const state=loopState(f.repo,'demo',batch),input=state.prepared;
@@ -300,12 +310,111 @@ test('real executor serializes prerequisite batches and transitions from accepta
   const state=new State(statePath(stateDir));state.init('demo');
   const reporter=new Reporter({dir:stateDir,sink:()=>{}});
   const executor=new Executor({config,stages:[scopeStage],state,reporter,adapter:makeExecAdapter({argv:config.argv,cwd:f.repo})});
-  for(let i=0;i<40&&!state.data.finishedAt;i++){await executor.tick();await new Promise(r=>setTimeout(r,25));}
+  let ownerResumed=false;
+  for(let i=0;i<40&&!state.data.finishedAt;i++){
+    await executor.tick();
+    if(state.paused&&!ownerResumed){
+      assert.equal(state.data.stages['2-scope-review'].gatesPassedAt,null);
+      json(join(stateDir,'control.json'),{command:'resume'});ownerResumed=true;
+    }
+    await new Promise(r=>setTimeout(r,25));
+  }
   await Promise.all([...executor.inflight.values()].map(row=>row.promise));
   assert.equal(accepted(f.repo,'demo','1'),true);assert.equal(accepted(f.repo,'demo','2'),true);
   assert.deepEqual(readFileSync(join(f.repo,'dispatch/order.log'),'utf8').trim().split('\n'),['1','2']);
   const plan=JSON.parse(readFileSync(join(f.repo,'research/plan-spec.json'),'utf8'));
   assert.equal(plan.pages[0].items[0].id,'lem-a');assert.equal(plan.pages[2].items[0].id,'lem-b');
+  assert.equal(ownerResumed,true);
+});
+
+test('an owner-held supplier blocks its consumer while an independent ready pair dispatches',async t=>{
+  const f=fixture(t);independentPair(f);complete(f,'1','escalate');
+  const loop:any=stages.find(s=>s.id==='2-scope-review'),stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const state=new State(statePath(stateDir));state.init('demo');
+  const reporter=new Reporter({dir:stateDir,sink:()=>{}}),started:string[]=[];
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,
+    concurrency:1,globalConcurrency:1,dispatchStaggerMs:0,adoptCommand:false,ownerGateRecertification:false};
+  const gates=()=>[{id:'scope-acceptance',argv:[process.execPath,fileURLToPath(new URL('../../physics-support/batch-scope-review.mjs',import.meta.url)),'check','--run','demo']}];
+  const executor=new Executor({config,stages:[{...loop,gates}],state,reporter,
+    adapter:{invoke:async(vars:any)=>{started.push(...String(vars.covers).split(','));return {code:0,stdout:'',stderr:'',timedOut:false};}} as any});
+  const ready=executor.unitReadiness(loop,f.ctx,['1','2','3']);
+  assert.deepEqual(ready.ready,['3']);
+  await executor.tick();await Promise.all([...executor.inflight.values()].map(row=>row.promise));
+  assert.deepEqual(started,['3'],JSON.stringify({blockers:state.data.blockers,spec:executor.specProblems}));
+  assert.ok(state.data.blockers.some((b:any)=>b.key==='scope-owner:1'));
+  assert.equal(loopState(f.repo,'demo','1').phase,'held');
+  assert.equal(loop.unitEligible(f.ctx,'1'),false);
+  assert.equal(executor.stageStatus(loop,f.ctx).unitsDone,false);
+});
+
+test('a newly accepted prerequisite releases its consumer while an unrelated pair remains active',async t=>{
+  const f=fixture(t);independentPair(f);
+  const loop:any=stages.find(s=>s.id==='2-scope-review'),fake=join(f.repo,'worker.mjs');
+  writeFileSync(fake,`import {readFileSync,writeFileSync,appendFileSync,existsSync,unlinkSync} from 'node:fs';import {join} from 'node:path';
+    const [role,label,batch,artifact]=process.argv.slice(2),dir=join(process.cwd(),'research/demo-scope-review','batch-'+batch);
+    const state=JSON.parse(readFileSync(join(dir,'state.json'),'utf8')),p=state.prepared;
+    const wait=async(file)=>{const deadline=Date.now()+5000;while(!existsSync(file)){if(Date.now()>deadline)throw Error('Timed out waiting for '+file);await new Promise(r=>setTimeout(r,10));}};
+    appendFileSync('dispatch/order.log',batch+'\\n');
+    if(batch==='3'){writeFileSync('dispatch/independent-running','yes');await wait('dispatch/consumer-started');unlinkSync('dispatch/independent-running');}
+    if(batch==='1')await wait('dispatch/independent-running');
+    if(batch==='2'){if(!existsSync('dispatch/independent-running'))throw Error('Consumer waited for unrelated work');writeFileSync('dispatch/consumer-started','yes');}
+    writeFileSync(artifact,JSON.stringify({version:1,run:'demo',batch,round:p.round,input_sha256:p.input_sha256,
+      reviewed_items:p.inventory.items,reviewed_pages:p.inventory.pages,decision:'accept',reason:'All scope and prerequisites checked.',findings:[],consumer_checks:[]}));
+    writeFileSync(join('dispatch',role+'-'+label+'.result.json'),JSON.stringify({run:'demo',role,label,covers:[batch],ok:true}));`);
+  const stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,argv:[process.execPath,fake,'{role}','{label}','{covers}','{resultArtifact}'],
+    concurrency:30,globalConcurrency:30,dispatchStaggerMs:0,adoptCommand:false,ownerGateRecertification:false,maxAttempts:1};
+  const state=new State(statePath(stateDir));state.init('demo');const reporter=new Reporter({dir:stateDir,sink:()=>{}});
+  const gates=()=>[{id:'scope-acceptance',argv:[process.execPath,fileURLToPath(new URL('../../physics-support/batch-scope-review.mjs',import.meta.url)),'check','--run','demo']}];
+  const executor=new Executor({config,stages:[{...loop,gates}],state,reporter,adapter:makeExecAdapter({argv:config.argv,cwd:f.repo})});
+  for(let i=0;i<100&&!state.data.finishedAt;i++){await executor.tick();await new Promise(r=>setTimeout(r,20));}
+  await Promise.all([...executor.inflight.values()].map(row=>row.promise));
+  assert.ok(existsSync(join(f.repo,'dispatch/consumer-started')),JSON.stringify({blockers:state.data.blockers,spec:executor.specProblems}));
+  for(const batch of ['1','2','3'])assert.equal(accepted(f.repo,'demo',batch),true);
+});
+
+test('Step 2 pauses once before its battery and retains the owner handoff across restart',async t=>{
+  const f=fixture(t);complete(f,'1');complete(f,'2');
+  const loop:any=stages.find(s=>s.id==='2-scope-review'),stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,adoptCommand:false,ownerGateRecertification:false};
+  const state=new State(statePath(stateDir));state.init('demo');const reporter=new Reporter({dir:stateDir,sink:()=>{}});
+  const marker=join(f.repo,'dispatch/battery-ran');
+  const stage={...loop,gates:()=>[{id:'battery',argv:[process.execPath,'-e',`require('node:fs').writeFileSync(${JSON.stringify(marker)},'ran')`]}]};
+  const make=(state:any)=>new Executor({config,stages:[stage],state,reporter,adapter:makeExecAdapter({argv:[process.execPath],cwd:f.repo})});
+  const first=make(state);await first.tick();
+  assert.equal(state.paused,true);assert.equal(existsSync(marker),false);
+  assert.equal(state.data.stages[stage.id].gatesPassedAt,null);assert.equal(state.data.stages[stage.id].doneAt,null);
+  const receipt=JSON.parse(readFileSync(join(f.repo,'research/demo-step2-owner-pass.json'),'utf8'));
+  assert.deepEqual(receipt.dispositions.map((d:any)=>d.disposition),['accepted','accepted']);
+  const restartedState=new State(statePath(stateDir)),restarted=make(restartedState);await restarted.tick();
+  assert.equal(restartedState.paused,true);assert.equal(existsSync(marker),false);
+  json(join(stateDir,'control.json'),{command:'resume'});await restarted.tick();
+  assert.equal(existsSync(marker),true);assert.ok(restartedState.data.stages[stage.id].gatesPassedAt);
+  assert.equal(JSON.parse(readFileSync(join(f.repo,'research/demo-step2-owner-pass.json'),'utf8')).at,receipt.at);
+});
+
+test('Step 2 hands every pair to the owner while marking blocked unreviewed consumers explicitly',async t=>{
+  const f=fixture(t);independentPair(f);complete(f,'1','escalate');complete(f,'3');
+  const loop:any=stages.find(s=>s.id==='2-scope-review'),stateDir=join(f.repo,'state');mkdirSync(stateDir);
+  const state=new State(statePath(stateDir));state.init('demo');const reporter=new Reporter({dir:stateDir,sink:()=>{}});
+  const config:any={run:'demo',repo:f.repo,stateDir,dispatchDir:f.ctx.dispatchDir,adoptCommand:false,ownerGateRecertification:false};
+  const gates=()=>[{id:'scope-acceptance',argv:[process.execPath,fileURLToPath(new URL('../../physics-support/batch-scope-review.mjs',import.meta.url)),'check','--run','demo']}];
+  const executor=new Executor({config,stages:[{...loop,gates}],state,reporter,adapter:makeExecAdapter({argv:[process.execPath],cwd:f.repo})});
+  await executor.tick();
+  assert.equal(state.paused,true);assert.equal(state.data.stages[loop.id].gatesPassedAt,null);
+  const receipt=JSON.parse(readFileSync(join(f.repo,'research/demo-step2-owner-pass.json'),'utf8'));
+  assert.deepEqual(receipt.dispositions.map((d:any)=>[d.batch,d.disposition]),[['1','owner-escalation'],['2','prerequisite-blocked'],['3','accepted']]);
+  assert.equal(receipt.dispositions[1].reviewed,false);assert.deepEqual(receipt.dispositions[1].blocked_by,['1']);
+  assert.equal(loopState(f.repo,'demo','1').reviews.length,1);assert.equal(loopState(f.repo,'demo','1').repairs.length,0);
+  resolveOwner(f.repo,'demo','1',{decision:'continue',reviewer:'owner',reason:'Supplier escalation resolved; continue its native loop.'});
+  complete(f,'1');complete(f,'2');
+  json(join(stateDir,'control.json'),{command:'resume'});await executor.tick();
+  assert.equal(state.paused,true,'Finishing resumed native loops still requires the owner battery decision');
+  assert.equal(state.data.stages[loop.id].gatesPassedAt,null);
+  assert.ok(existsSync(join(f.repo,'research/demo-step2-owner-battery-ready.json')));
+  assert.equal(JSON.parse(readFileSync(join(f.repo,'research/demo-step2-owner-pass.json'),'utf8')).at,receipt.at);
+  json(join(stateDir,'control.json'),{command:'resume'});await executor.tick();
+  assert.ok(state.data.stages[loop.id].gatesPassedAt);
 });
 
 

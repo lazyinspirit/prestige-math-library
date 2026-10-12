@@ -1144,6 +1144,7 @@ export const stages = [
     modelProfile: MODEL_PROFILE_NAMES.lunaMax,
     units: batches,
     unitPrerequisites: (ctx: any, u: string) => prerequisiteBatches(ctx.repo, ctx.run, u),
+    unitEligible: (ctx: any, u: string) => loopState(ctx.repo, ctx.run, u).phase !== 'held',
     pattern: (ctx: any) => loopPattern(ctx, batches(ctx)),
     artifacts: (ctx: any, u: string) => accepted(ctx.repo, ctx.run, u)
       ? `research/${ctx.run}-scope-review/batch-${u}/state.json`
@@ -1164,15 +1165,51 @@ export const stages = [
           const path=join(ctx.dispatchDir, `tool-scope-accepted-${u}.result.json`);
           if (!existsSync(path)) writeFileSync(path,JSON.stringify({run:ctx.run,role:'tool',label:`scope-accepted-${u}`,covers:[u],ok:true}));
         }
-        if (state.phase === 'held') throw Error(`Batch ${u} owner escalation: ${state.reason}`);
+        const key = `scope-owner:${u}`;
+        if (state.phase === 'held') {
+          const message = `Batch ${u} owner escalation: ${state.reason}`;
+          if (executor.state.addBlocker(stage.id, message, key))
+            executor.reporter.notify('blocked', message, {stage:stage.id,unit:u});
+        } else if (executor.state?.data.blockers.some((b:any) => b.stage === stage.id && b.key === key)) {
+          executor.state.data.blockers = executor.state.data.blockers.filter((b:any) => b.stage !== stage.id || b.key !== key);
+          executor.state.save();
+        }
       }
+      if (active.size || !executor.state) return;
+      const stageState = executor.state.stage(stage.id);
+      const owed = batches(ctx);
+      const allAccepted = owed.length>0 && owed.every(u => loopState(ctx.repo,ctx.run,u).phase === 'accepted');
+      const firstPass = !stageState.ownerPassPausedAt;
+      if (!firstPass && (!allAccepted || stageState.ownerGatePausedAt)) return;
+      const pending = owed.filter(u => !['accepted','held'].includes(loopState(ctx.repo,ctx.run,u).phase));
+      const readiness = executor.unitReadiness(stage,ctx,pending);
+      if (readiness.problem || readiness.deferred || readiness.ready.length) return;
+      const at = new Date().toISOString();
+      const receipt = `research/${ctx.run}-step2-owner-${firstPass ? 'pass' : 'battery-ready'}.json`;
+      const dispositions = owed.map(batch => {
+        const state = loopState(ctx.repo,ctx.run,batch);
+        return {batch,disposition:state.phase === 'accepted' ? 'accepted' : state.phase === 'held' ? 'owner-escalation' : 'prerequisite-blocked',
+          reviewed:state.reviews.length>0,reviews:state.reviews.length,repairs:state.repairs.length,
+          ...(state.phase === 'held' ? {reason:state.reason} : {}),
+          ...(state.phase !== 'accepted' && state.phase !== 'held' ? {blocked_by:prerequisiteBatches(ctx.repo,ctx.run,batch).filter(b => !accepted(ctx.repo,ctx.run,b))} : {})};
+      });
+      writeFileSync(join(ctx.repo,receipt),JSON.stringify({version:1,run:ctx.run,at,dispositions,
+        battery_attempted:false,next:'Owner resolves escalations and resumes remaining native loops as needed; owner authorizes the full battery and progression to Step 3.'},null,2)+'\n');
+      if (firstPass) {
+        stageState.ownerPassPausedAt = at;
+        stageState.ownerPassReceipt = receipt;
+      }
+      if (allAccepted) stageState.ownerGatePausedAt = at;
+      executor.state.paused = true;
+      executor.reporter.notify('paused',`Step 2 frontier pass handed to owner: ${receipt}; resolve escalations, then explicitly resume and authorize the battery`,{stage:stage.id});
     },
     plan: (ctx: any, pending: string[]) => {
       if (ctx.doctor) return pending.map(u => ({role:'scope-reviewer',label:`scope-review-${u}-0`,job:'audit',covers:[u],
         brief:'briefs/scope-reviewer.md',task:'briefs/tasks/scope-review-batch.md',
         outputSchema:'briefs/schemas/batch-scope-review.json',resultArtifact:`research/${ctx.run}-scope-review/batch-${u}/review-0.json`}));
-      const repair = pending.find(u => loopState(ctx.repo, ctx.run, u).phase === 'repair');
-      return (repair ? [repair] : pending).map(u => batchPlan(ctx, u)).filter(Boolean);
+      const eligible = pending.filter(u => loopState(ctx.repo, ctx.run, u).phase !== 'held');
+      const repair = eligible.find(u => loopState(ctx.repo, ctx.run, u).phase === 'repair');
+      return (repair ? [repair] : eligible).map(u => batchPlan(ctx, u)).filter(Boolean);
     },
     gates: (ctx: any) => [scopeGate(ctx),
       gate('batch-scope-review', ['node', 'tools/physics-support/batch-scope-review.mjs', 'check', '--run', ctx.run]),

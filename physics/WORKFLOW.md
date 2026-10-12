@@ -76,6 +76,20 @@ The existing 30-agent global limit and 80-pair frontier limit remain.
 
 Use the actual logical supplier graph to finish prerequisite batches before
 consumer batches; within a batch follow the recorded item levels and pair order.
+Dispatch newly eligible pairs at the next available scheduling tick. A native
+owner hold blocks its own batch and its dependent batches; independent ready
+batches continue. Held batches remain owed and must be resolved before the
+stage's full gate battery. The existing repair write-wave isolation still applies.
+After the frontier pass reaches accepted, escalated, or explicitly prerequisite-
+blocked dispositions and all workers drain, the engine writes
+`research/RUN-step2-owner-pass.json` and pauses before attempting Step 2's
+battery. A blocked disposition records unreviewed work honestly. Native bounded
+review/repair loops and escalation histories remain intact. The owner resolves
+escalations, resumes affected remaining loops as needed, and chooses when to
+authorize the full battery through the existing owner recertification receipt.
+Owner resume and any armed post-Step-2 pause control progression to Step 3.
+If the owner resumes remaining native loops, their completion produces a fresh
+`RUN-step2-owner-battery-ready.json` handoff and pauses again before the battery.
 Scheduling reads current manifests and the relevant authored carriers. Canonical
 dependency IDs resolve directly; the corpus alias index is loaded only when a
 used dependency requires alias resolution. Empty pre-authoring inventories do

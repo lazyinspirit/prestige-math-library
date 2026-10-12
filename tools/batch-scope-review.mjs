@@ -290,7 +290,7 @@ export function batchPlan(ctx,batch) {
   const previous=state[phase==='review'?'reviews':'repairs'].at(-1);
   const priorReceipt=previous?join(ctx.dispatchDir,`${role}-${label(batch,phase,previous.round)}.result.json`):null;
   const session=priorReceipt&&existsSync(priorReceipt)?read(priorReceipt).session_id:null;
-  return {role,label:prepared.label,job:phase==='review'?'audit':'repair',covers:[String(batch)],
+  return {role,label:prepared.label,job:phase==='review'?'audit':'authoring',covers:[String(batch)],
     brief:`briefs/scope-${phase==='review'?'reviewer':'repairer'}.md`,task:relative(ctx.repo,task),
     outputSchema:'briefs/schemas/batch-scope-review.json', resultArtifact:relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,phase,round)),
     sessionHome:join(dir,`${role}-session`), ...(session?{resumeSession:session}:{}), timeout:14400};

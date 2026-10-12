@@ -171,6 +171,9 @@ export interface Stage {
   /** Direct prerequisites owed by this same stage. A unit cannot dispatch
    * until every transitive prerequisite is artifact-complete and stable. */
   unitPrerequisites?: (ctx: Ctx, u: Unit) => Unit[];
+  /** A temporary per-unit hold. The unit remains owed, and its consumers stay
+   * blocked, while other eligible units can use available dispatch slots. */
+  unitEligible?: (ctx: Ctx, u: Unit) => boolean;
   /** The units this stage owes. */
   units?: (ctx: Ctx) => Unit[];
   /** Which result files belong to this stage. Build it with `resultPattern`
@@ -318,6 +321,11 @@ export interface StageState {
   enteredAt: string;
   gatesPassedAt: string | null;
   doneAt: string | null;
+  /** First Step-2 frontier pass handed to the owner, before its battery. */
+  ownerPassPausedAt?: string;
+  ownerPassReceipt?: string;
+  /** Owner handoff after any resumed loops finish, before the battery. */
+  ownerGatePausedAt?: string;
   /** Repair-cycle identity. Bounded by maxFixRounds unless perItemFixBudget is set. */
   fixRounds: number;
   /** Set once the repair budget is spent, so the notice is given once. */
